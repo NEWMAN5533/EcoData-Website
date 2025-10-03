@@ -153,6 +153,12 @@ body {
   border-radius: 50%;
   cursor: pointer;
 }
+
+.menu-icon{
+  background: rgba(219, 214, 214, 0.37);
+  border-radius: 4px;
+  padding: .3px;
+}
 /**
 CARD CONTAINER
 **/
@@ -241,8 +247,6 @@ WELCOME CARD
   .welcome-top-right input{
     width: 150px;
     height: 2rem;
-    display: flex;
-    position: absolute;
     margin: 0 .5rem;
     color: var(--dark-cl);
     background-color: transparent;
@@ -251,7 +255,7 @@ WELCOME CARD
   }
 
   .welcome-top-right input:where(:hover :focus-within){
-    border: 2px solid var(--dark-cl);
+    border: .1px solid var(--dark-cl);
   }
 
   .welcome-top-right input::placeholder{
@@ -523,7 +527,7 @@ small{
   font-size: 1rem;
   font-weight: 500;
   font-family: Arial sans-serif;
-  color: #24463e;
+  color: #24463e;;
 }
 
 /*------REAL BUNDLE CARD--TELECEL-*/
@@ -844,8 +848,14 @@ footer {
   margin: 0;
   padding: 1rem 2rem;
   color: white;
-  background-color:  rgb(15, 17, 24) ;
+  background-color:  rgb(28, 28, 46) ;
   bottom: 0;
+  border-start-start-radius: 3rem;
+  border-start-end-radius: 3rem;
+}
+
+.about{
+  border-block-end: 1px solid var(--ascent-cl);
 }
 
 section footer .bar{
@@ -855,7 +865,7 @@ section footer .bar{
 .about h3{
   font-size: 2rem;
   margin-bottom: 1rem;
-  color: rgb(221, 16, 44);
+  color: var(--background-cl);
 }
 .about h4{
   color: rgb(45, 182, 148);
@@ -864,7 +874,7 @@ section footer .bar{
 }
 .about P{
   width: 90%;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 300;
   color: rgb(250,250,250);
   margin: 0 auto;
@@ -872,13 +882,10 @@ section footer .bar{
 }
 
 .about img{
-  vertical-align: middle;
-  margin-top: 1rem;
   border-radius: 4rem;
-  display: flex;
-width: 2rem;
-height: 2rem;
-animation: jump 1s infinite ease-in-out;
+width: 3.5rem;
+height: 3.5rem;
+margin: .5rem 0;
 }
 
 @keyframes jump {
@@ -898,9 +905,14 @@ footer a{
 }
 
 footer .copyright{
-  color:  rgb(221, 16, 44);
+  color:  rgb(206, 58, 78);
   font-size: 1.6rem;
-  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: max-content;
+  position: relative;
 }
 
 
