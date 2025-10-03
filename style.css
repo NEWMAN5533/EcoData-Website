@@ -418,7 +418,6 @@ AGENTS AND TOP CUSTOMER SECTION
   background: var(--bg-cl);
   border-radius: 1rem;
   margin-bottom: 4rem;
-  border: 0.1px solid var(--background-cl);
 }
 
 .top-customers-title {
@@ -460,7 +459,7 @@ AGENTS AND TOP CUSTOMER SECTION
 
 .agent-name{
   width: 80%;
-  height: 6rem;
+  height: 7rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -483,8 +482,8 @@ AGENTS AND TOP CUSTOMER SECTION
 
 
 .white-booklet{
-  width: 98%;
-  height: 5.5rem;
+  width: 97%;
+  height: 6.5rem;
   display: flex;
   flex-direction: column;
   background: white;
