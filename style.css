@@ -273,6 +273,33 @@ WELCOME CARD
     justify-content: flex-end;
     position: relative;
   }
+
+  .close-time {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: .1rem;
+    text-align: center;
+    flex-direction: column;
+  }
+
+  .close-time small{
+    font-size: 1.1rem;
+    color: var(--card-full-tele-bg-cl);
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  .close-time span{
+    color:  #00ffcc;
+    background: var(--dark-cl);
+    padding: .19rem;
+    border-radius: 4px;
+    border: 0.1px solid var(--background-cl);
+  }
+
+
 #clock {
       font-family: 'Digital-7', monospace;
       font-size: 2em;
@@ -478,6 +505,7 @@ margin: .2rem 0;
   margin: 0 .5rem;
   font-weight: 500;
   font-family: Arial;
+  color: var(--dark-cl);
 }
 
 
@@ -601,13 +629,13 @@ margin: .2rem 0;
   margin: 0 .5rem;
   font-weight: 500;
   font-family: Arial;
-  color: rgb(10, 10, 10);
+  color: var(--background-cl);
 }
 
 .top-bundle-telecel-card small {
   font-size: 1.1rem;
   font-family: Arial sans-serif;
-  color: var(--background-cl);
+  color: var(--dark-cl);
 }
 
 .bottom-bundle-telecel-card {
@@ -716,12 +744,13 @@ margin: .2rem 0;
   margin: 0 .5rem;
   font-weight: 500;
   font-family: Arial;
+  color: var(--background-cl);
 }
 
 .top-bundle-airteltigo-card small {
   font-size: 1.1rem;
   font-family: Arial sans-serif;
-  color: var(--background-cl);
+  color: var(--dark-cl);
 }
 
 .bottom-bundle-airteltigo-card {
