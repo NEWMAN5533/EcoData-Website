@@ -296,7 +296,7 @@ BUNDLE PROCESSING
 **/
 .bundle-processing-container {
   width: 94%;
-  height: 24rem;
+  height: 25rem;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -312,7 +312,7 @@ BUNDLE PROCESSING
 
 .bundle-processing-card-container {
   width: 88%;
-  height: 50%;
+  height: 54%;
   display: flex;
   flex-wrap: wrap;
   gap: .8rem;
@@ -339,8 +339,13 @@ BUNDLE PROCESSING
 }
 
 .processing-card-details img{
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.pro{
+  width: 2rem;
+  height: 2rem;
 }
 
 .processing-card-details small{
@@ -845,8 +850,7 @@ footer {
   height: max-content;
   max-width: 480px;
   text-align: center;
-  margin: 0;
-  padding: 1rem 2rem;
+  margin: .5rem 0;
   color: white;
   background-color:  rgb(28, 28, 46) ;
   bottom: 0;
@@ -882,10 +886,10 @@ section footer .bar{
 }
 
 .about img{
-  border-radius: 4rem;
-width: 3.5rem;
-height: 3.5rem;
-margin: .5rem 0;
+  border-radius: 2rem;
+width: 2.5rem;
+height: 2.5rem;
+margin: 0 .5rem;
 }
 
 @keyframes jump {
@@ -906,7 +910,7 @@ footer a{
 
 footer .copyright{
   color:  rgb(206, 58, 78);
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
