@@ -95,3 +95,16 @@ async function orderBundle(network, recipient, packageName, size, reference) {
     // update every second
     setInterval(updateClock, 1000);
     updateClock(); // run once on load
+
+    // SIDEBAR //
+    const toggler = document.getElementById("sidebarToggler");
+    const sidebar = document.querySelector(".sidebar");
+
+    // function // 
+    toggler.addEventListener("click", function() {
+      if (sidebar.style.left === "-500px"){
+        sidebar.style.left = "0px";
+      } else {
+        sidebar.style.left = "-500px";
+      }
+    })
