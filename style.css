@@ -1052,10 +1052,8 @@ footer {
   text-align: center;
   margin: .5rem 0;
   color: white;
-  background-color:  rgb(28, 28, 46) ;
+  background-color:  rgb(21, 21, 34) ;
   bottom: 0;
-  border-start-start-radius: 3rem;
-  border-start-end-radius: 3rem;
 }
 
 .about{
