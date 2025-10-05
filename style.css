@@ -911,7 +911,7 @@ margin: .2rem 0;
 }
 
 .top-bundle-airteltigo-card h1{
-  font-size: 1rem;
+  font-size: .9rem;
   margin: 0 .5rem;
   font-weight: 500;
   font-family: Arial;
@@ -921,7 +921,7 @@ margin: .2rem 0;
 .top-bundle-airteltigo-card small {
   font-size: 1.1rem;
   font-family: Arial sans-serif;
-  color: var(--dark-cl);
+  color: var(--bg-cl);
 }
 
 .bottom-bundle-airteltigo-card {
