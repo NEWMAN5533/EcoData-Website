@@ -46,7 +46,7 @@ async function orderBundle(network, recipient, packageName, size, reference) {
     "localhost"?
       "http://localhost:3000" :
       "https://ecodata-app.onrender.com/"; // Replace with your production URL
-    const response = await fetch("https://ecodata-app.onrender.com//api/buy-data", {
+    const response = await fetch("https://ecodata-app.onrender.com/api/buy-data", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
