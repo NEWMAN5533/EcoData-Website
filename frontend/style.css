@@ -153,6 +153,71 @@ body {
   border-radius: 50%;
   cursor: pointer;
 }
+
+.menu-icon{
+  background: rgba(219, 214, 214, 0.37);
+  border-radius: 4px;
+  padding: .3px;
+  margin-right: 1rem;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  width: 90%;
+  max-width: 350px;
+  margin: 120px auto;
+  text-align: center;
+}
+
+.modal input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.modal-buttons {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-buttons button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#cancelBtn {
+  background: #ccc;
+}
+
+#proceedBtn {
+  background: #007bff;
+  color: white;
+}
+
+
+
+
+
+
+
 /**
 CARD CONTAINER
 **/
@@ -241,8 +306,6 @@ WELCOME CARD
   .welcome-top-right input{
     width: 150px;
     height: 2rem;
-    display: flex;
-    position: absolute;
     margin: 0 .5rem;
     color: var(--dark-cl);
     background-color: transparent;
@@ -251,7 +314,7 @@ WELCOME CARD
   }
 
   .welcome-top-right input:where(:hover :focus-within){
-    border: 2px solid var(--dark-cl);
+    border: .1px solid var(--dark-cl);
   }
 
   .welcome-top-right input::placeholder{
@@ -269,6 +332,34 @@ WELCOME CARD
     justify-content: flex-end;
     position: relative;
   }
+
+  .close-time {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: .1rem;
+    text-align: center;
+    flex-direction: column;
+    margin-left: 1.2rem;
+  }
+
+  .close-time small{
+    font-size: 1.1rem;
+    color: var(--card-full-tele-bg-cl);
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  .close-time span{
+    color:  #00ffcc;
+    background: var(--dark-cl);
+    padding: .19rem;
+    border-radius: 4px;
+    border: 0.1px solid var(--background-cl);
+  }
+
+
 #clock {
       font-family: 'Digital-7', monospace;
       font-size: 2em;
@@ -277,13 +368,13 @@ WELCOME CARD
       padding: 15px 25px;
       border-radius: 4px;
       display: inline-block;
-      width: max-content;
-      height: 2.4rem;
+      width: 60%;
+      height: 2.8rem;
       align-items: center;
       display: flex;
       justify-content: center;
       font-size: 1.1rem;
-      margin-right: 1rem;
+      margin-right: .2rem;
     }
 
 
@@ -292,7 +383,7 @@ BUNDLE PROCESSING
 **/
 .bundle-processing-container {
   width: 94%;
-  height: 24rem;
+  height: 25rem;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -308,7 +399,7 @@ BUNDLE PROCESSING
 
 .bundle-processing-card-container {
   width: 88%;
-  height: 50%;
+  height: 54%;
   display: flex;
   flex-wrap: wrap;
   gap: .8rem;
@@ -335,8 +426,13 @@ BUNDLE PROCESSING
 }
 
 .processing-card-details img{
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.pro{
+  width: 2rem;
+  height: 2rem;
 }
 
 .processing-card-details small{
@@ -359,10 +455,121 @@ margin: .1rem 1rem;
 display: flex;
 align-items: center;
 justify-content: center;
-gap: 0.5rem;
+gap: .5rem;
 background: var(--bg-cl);
 border-radius: .8rem;
 border: 0.1px solid var(--background-cl);
+}
+
+
+/****
+AGENTS AND TOP CUSTOMER SECTION
+*****/
+.top-customers {
+  width: 100%;
+  max-width: 480px;
+  justify-self: center;
+  justify-content: center;
+  align-items: center;
+  height: 15rem;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  background: var(--bg-cl);
+  border-radius: 1rem;
+  margin-bottom: 4rem;
+}
+
+.top-customers-title {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 6rem;
+  padding: .1rem;
+  background: none;
+}
+
+.top-customers-title img{
+  width: 4rem;
+  height: 4rem;
+  margin-left: -2.4rem;
+  margin-bottom: 1rem;
+  rotate: 30deg;
+  animation: rotateX 2s ease infinite;
+}
+
+@keyframes rotateX {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100%{
+    transform: rotate(-50deg);
+  }
+}
+
+
+.top-customers-title h1{
+ font-size: 2.1rem;
+ color: var(--dark-cl);
+}
+
+
+.agent-name{
+  width: 80%;
+  height: 7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--card-full-bg-cl);
+  border-radius: 12px;
+  z-index: 3;
+}
+
+.yellow-thin{
+  width: 1.5%;
+  height: 50%;
+  display: flex;
+  margin-left: 3px;
+  border-start-end-radius: 10rem;
+  border-end-end-radius: 10rem;
+  background-color: var(--card-full-bg-cl);
+  z-index: 2;
+  overflow: hidden;
+}
+
+
+.white-booklet{
+  width: 97%;
+  height: 6.5rem;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-left: -5px;
+  z-index: -1;
+}
+
+.white-booklet small{
+  display: flex;
+  align-items: center;
+  margin-bottom: .9rem;
+  font-size: 1.1rem;
+  color: var(--dark-cl)
+}
+
+.white-booklet img{
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.white-booklet h2{
+  margin-right: 2.4rem;
 }
 
 /** INDIVIDUAL NETWORKS
@@ -469,6 +676,7 @@ margin: .2rem 0;
   margin: 0 .5rem;
   font-weight: 500;
   font-family: Arial;
+  color: var(--dark-cl);
 }
 
 
@@ -523,7 +731,7 @@ small{
   font-size: 1rem;
   font-weight: 500;
   font-family: Arial sans-serif;
-  color: #24463e;
+  color: #24463e;;
 }
 
 /*------REAL BUNDLE CARD--TELECEL-*/
@@ -592,13 +800,13 @@ margin: .2rem 0;
   margin: 0 .5rem;
   font-weight: 500;
   font-family: Arial;
-  color: rgb(10, 10, 10);
+  color: var(--background-cl);
 }
 
 .top-bundle-telecel-card small {
   font-size: 1.1rem;
   font-family: Arial sans-serif;
-  color: var(--background-cl);
+  color: var(--dark-cl);
 }
 
 .bottom-bundle-telecel-card {
@@ -703,16 +911,17 @@ margin: .2rem 0;
 }
 
 .top-bundle-airteltigo-card h1{
-  font-size: 1rem;
+  font-size: .9rem;
   margin: 0 .5rem;
   font-weight: 500;
   font-family: Arial;
+  color: var(--background-cl);
 }
 
 .top-bundle-airteltigo-card small {
   font-size: 1.1rem;
   font-family: Arial sans-serif;
-  color: var(--background-cl);
+  color: var(--bg-cl);
 }
 
 .bottom-bundle-airteltigo-card {
@@ -841,11 +1050,14 @@ footer {
   height: max-content;
   max-width: 480px;
   text-align: center;
-  margin: 0;
-  padding: 1rem 2rem;
+  margin: .5rem 0;
   color: white;
-  background-color:  rgb(15, 17, 24) ;
+  background-color:  rgb(21, 21, 34) ;
   bottom: 0;
+}
+
+.about{
+  border-block-end: 1px solid var(--ascent-cl);
 }
 
 section footer .bar{
@@ -855,7 +1067,7 @@ section footer .bar{
 .about h3{
   font-size: 2rem;
   margin-bottom: 1rem;
-  color: rgb(221, 16, 44);
+  color: var(--background-cl);
 }
 .about h4{
   color: rgb(45, 182, 148);
@@ -864,7 +1076,7 @@ section footer .bar{
 }
 .about P{
   width: 90%;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 300;
   color: rgb(250,250,250);
   margin: 0 auto;
@@ -872,13 +1084,10 @@ section footer .bar{
 }
 
 .about img{
-  vertical-align: middle;
-  margin-top: 1rem;
-  border-radius: 4rem;
-  display: flex;
-width: 2rem;
-height: 2rem;
-animation: jump 1s infinite ease-in-out;
+  border-radius: 2rem;
+width: 2.5rem;
+height: 2.5rem;
+margin: 0 .5rem;
 }
 
 @keyframes jump {
@@ -898,9 +1107,14 @@ footer a{
 }
 
 footer .copyright{
-  color:  rgb(221, 16, 44);
-  font-size: 1.6rem;
-  bottom: 0;
+  color:  rgb(206, 58, 78);
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: max-content;
+  position: relative;
 }
 
 

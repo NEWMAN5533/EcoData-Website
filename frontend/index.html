@@ -9,8 +9,10 @@
     <meta name="title" content="EcoData">
   <meta name="description" content="This is related to website developed by IlysCode">
 
-  <link rel="shortcut icon" href="./images/ecodata-bg1.png" type="image/jpg">
+  <link rel="shortcut icon" href="./css/images/ecodata-bg1.png" type="image/jpg">
   <link rel="stylesheet" href="style.css">
+
+
 </head>
 <body>
 <nav class="navbar">
@@ -21,9 +23,12 @@
   <div class="login">
    <a href="login.html"> <img src="./css/icons/icons8-user-46.png" alt="">  Login</a>
   </div>
-<img src="./css/icons/icons8-fries-menu-46.png" alt="image" loading="lazy">
+<img id="sidebarToggler" src="./css/icons/icons8-fries-menu-46.png" alt="image" class="menu-icon" loading="lazy">
 </div>
 </nav>
+
+
+
 
 
 <!------MAIN SECTION----->
@@ -39,6 +44,8 @@
     </div>
   </div>
   <div class="welcome-bottom">
+    <div class="close-time"><small>Closing Time:</small>
+    <span>9:00 PM</span></div>
     <div id="clock"></div>
   </div>
 </div>
@@ -47,21 +54,25 @@
 <div class="bundle-processing-container">
   <div class="bundle-processing-card-container">
     <div class="processing-card-details">
+      <img src="./css/icons/pending.png" alt="image" loading="lazy">
       <small>Pending</small>
       <span>0</span>
     </div>
 
      <div class="processing-card-details">
+      <img class="pro" src="./css/icons/processing.png" alt="image" loading="lazy">
       <small>processing</small>
       <span>0</span>
     </div>
 
      <div class="processing-card-details">
+      <img src="./css/icons/completed.png" alt="image" loading="lazy">
       <small>Completed</small>
       <span>0</span>
     </div>
 
      <div class="processing-card-details">
+      <img src="./css/icons/failed (1).png" alt="image" loading="lazy">
       <small>Failed</small>
       <span>0</span>
     </div>
@@ -71,20 +82,36 @@
     <div class="mtn-network-purchased">
        MTN
         <span>0</span>
-        <small>GH&#8373;: 0</small>
+        <small class="purc">GH&#8373;: 0</small>
     </div>
     <div class="telecel-network-purchased">
        Telecel
         <span>0</span>
-        <small>GH&#8373;: 0</small>
+        <small class="purc">GH&#8373;: 0</small>
     </div>
     <div class="airtelTigo-network-purchased">
        Airteltigo
         <span>0</span>
-        <small>GH&#8373;: 0</small>
+        <small class="purc">GH&#8373;: 0</small>
     </div>
   </div>
 </div>
+</section>
+
+<section>
+  <!----OUR-TOP-BUYERS-&-AGENT-RANKING-SECTION----->
+<div class="top-customers">
+<div class="top-customers-title">
+    <h1>Top Agent <img src="./css/icons/like.png" alt=""></h1>
+</div>
+  <div class="agent-name">
+    <div class="yellow-thin"></div>
+    <div class="white-booklet">
+          <h1 class="agent-timeline">Agent Navasco</h1>
+          <small><img src="./css/icons/location.png" alt="image" loading="lazy"> Tepa 0537428505</small>
+        </div>
+    </div>
+  </div>
 </section>
 
 <!--section-title-->
@@ -109,7 +136,7 @@
       </div>
         <button class="buy-btn" 
   data-network="mtn"
-  data-package="Express"
+   data-package= "express"
   data-size="1"
   data-price="6"
   onclick="payWithPaystack(this)">Buy</button>
@@ -128,7 +155,7 @@
       </div>
         <button class="buy-btn" 
   data-network="mtn"
-  data-package="Express"
+   data-package= "express"
   data-size="2"
   data-price="12"
   onclick="payWithPaystack(this)">Buy</button>
@@ -147,7 +174,7 @@
       </div>
         <button class="buy-btn" 
   data-network="mtn"
-  data-package="Express"
+   data-package= "express"
   data-size="3"
   data-price="18"
   onclick="payWithPaystack(this)">Buy</button>
@@ -166,7 +193,7 @@
       </div>
         <button class="buy-btn" 
   data-network="mtn"
-  data-package="Express"
+   data-package= "express"
   data-size="4"
   data-price="23"
   onclick="payWithPaystack(this)">Buy</button>
@@ -185,7 +212,7 @@
       </div>
         <button class="buy-btn" 
   data-network="mtn"
-  data-package="Express"
+   data-package= "express"
   data-size="5"
   data-price="27"
   onclick="payWithPaystack(this)">Buy</button>
@@ -204,7 +231,7 @@
       </div>
         <button class="buy-btn" 
   data-network="mtn"
-  data-package="Express"
+   data-package= "express"
   data-size="6"
   data-price="34"
   onclick="payWithPaystack(this)">Buy</button>
@@ -223,7 +250,7 @@
       </div>
         <button class="buy-btn" 
   data-network="mtn"
-  data-package="Express"
+   data-package= "express"
   data-size="7"
   data-price="38"
   onclick="payWithPaystack(this)">Buy</button>
@@ -242,7 +269,7 @@
       </div>
         <button class="buy-btn" 
   data-network="mtn"
-  data-package="Express"
+   data-package= "express"
   data-size="8"
   data-price="40"
   onclick="payWithPaystack(this)">Buy</button>
@@ -261,7 +288,7 @@
       </div>
         <button class="buy-btn" 
   data-network="mtn"
-  data-package="Express"
+   data-package= "express"
   data-size="10"
   data-price="48"
   onclick="payWithPaystack(this)">Buy</button>
@@ -280,7 +307,7 @@
       </div>
         <button class="buy-btn" 
   data-network="mtn"
-  data-package="Express"
+   data-package= "express"
   data-size="15"
   data-price="69"
   onclick="payWithPaystack(this)">Buy</button>
@@ -299,7 +326,7 @@
       </div>
         <button class="buy-btn" 
   data-network="mtn"
-  data-package="Express"
+   data-package= "express"
   data-size="20"
   data-price="92"
   onclick="payWithPaystack(this)">Buy</button>
@@ -318,7 +345,7 @@
       </div>
         <button class="buy-btn" 
   data-network="mtn"
-  data-package="Express"
+   data-package= "express"
   data-size="25"
   data-price="110"
   onclick="payWithPaystack(this)">Buy</button>
@@ -337,7 +364,7 @@
       </div>
         <button class="buy-btn" 
   data-network="mtn"
-  data-package="Express"
+  data-package= "express"
   data-size="30"
   data-price="130"
   onclick="payWithPaystack(this)">Buy</button>
@@ -356,7 +383,7 @@
       </div>
         <button class="buy-btn" 
   data-network="mtn"
-  data-package="Express"
+   data-package= "express"
   data-size="40"
   data-price="170"
   onclick="payWithPaystack(this)">Buy</button>
@@ -375,7 +402,7 @@
       </div>
         <button class="buy-btn" 
   data-network="mtn"
-  data-package="Express"
+   data-package= "express"
   data-size="50"
   data-price="220"
   onclick="payWithPaystack(this)">Buy</button>
@@ -394,7 +421,7 @@
       </div>
         <button class="buy-btn" 
   data-network="mtn"
-  data-package="Express"
+   data-package= "express"
   data-size="100"
   data-price="440"
   onclick="payWithPaystack(this)">Buy</button>
@@ -426,7 +453,7 @@
       </div>
         <button class="buy-btn" 
   data-network="telecel"
-  data-package="2Months Expiry"
+  data-package="2months"
   data-size="5"
   data-price="27"
   onclick="payWithPaystack(this)">Buy</button>
@@ -446,7 +473,7 @@
       </div>
         <button class="buy-btn" 
   data-network="telecel"
-  data-package="2Months Expiry"
+  data-package="2months"
   data-size="10"
   data-price="47"
   onclick="payWithPaystack(this)">Buy</button>
@@ -466,7 +493,7 @@
       </div>
         <button class="buy-btn" 
   data-network="telecel"
-  data-package="2Months Expiry"
+    data-package="2months"
   data-size="15"
   data-price="69"
   onclick="payWithPaystack(this)">Buy</button>
@@ -486,7 +513,7 @@
       </div>
         <button class="buy-btn" 
   data-network="telecel"
-  data-package="2Months Expiry"
+    data-package="2months"
   data-size="20"
   data-price="93"
   onclick="payWithPaystack(this)">Buy</button>
@@ -506,7 +533,7 @@
       </div>
         <button class="buy-btn" 
   data-network="telecel"
-  data-package="2Months Expiry"
+    data-package="2months"
   data-size="30"
   data-price="134"
   onclick="payWithPaystack(this)">Buy</button>
@@ -526,7 +553,7 @@
       </div>
         <button class="buy-btn" 
   data-network="telecel"
-  data-package="2Months Expiry"
+    data-package="2months"
   data-size="40"
   data-price="178"
   onclick="payWithPaystack(this)">Buy</button>
@@ -546,7 +573,7 @@
       </div>
         <button class="buy-btn" 
   data-network="telecel"
-  data-package="2Months Expiry"
+    data-package="2months"
   data-size="50"
   data-price="220"
   onclick="payWithPaystack(this)">Buy</button>
@@ -566,7 +593,7 @@
       </div>
         <button class="buy-btn" 
   data-network="telecel"
-  data-package="2Months Expiry"
+    data-package="2months"
   data-size="100"
   data-price="400"
   onclick="payWithPaystack(this)">Buy</button>
@@ -619,7 +646,7 @@
       </div>
         <button class="buy-btn" 
   data-network="at"
-  data-package="iShare"
+   data-package="iShare"
   data-size="2"
   data-price="12"
   onclick="payWithPaystack(this)">Buy</button>
@@ -639,7 +666,7 @@
       </div>
         <button class="buy-btn" 
   data-network="at"
-  data-package="iShare"
+   data-package="iShare"
   data-size="3"
   data-price="17"
   onclick="payWithPaystack(this)">Buy</button>
@@ -659,7 +686,7 @@
       </div>
         <button class="buy-btn" 
   data-network="at"
-  data-package="iShare"
+   data-package="iShare"
   data-size="4"
   data-price="23"
   onclick="payWithPaystack(this)">Buy</button>
@@ -679,7 +706,7 @@
       </div>
         <button class="buy-btn" 
   data-network="at"
-  data-package="iShare"
+   data-package="iShare"
   data-size="5"
   data-price="26"
   onclick="payWithPaystack(this)">Buy</button>
@@ -699,7 +726,7 @@
       </div>
         <button class="buy-btn" 
   data-network="at"
-  data-package="iShare"
+   data-package="iShare"
   data-size="6"
   data-price="30"
   onclick="payWithPaystack(this)">Buy</button>
@@ -719,7 +746,7 @@
       </div>
         <button class="buy-btn" 
   data-network="at"
-  data-package="iShare"
+   data-package="iShare"
   data-size="7"
   data-price="35"
   onclick="payWithPaystack(this)">Buy</button>
@@ -739,7 +766,7 @@
       </div>
         <button class="buy-btn" 
   data-network="at"
-  data-package="iShare"
+   data-package="iShare"
   data-size="8"
   data-price="40"
   onclick="payWithPaystack(this)">Buy</button>
@@ -759,7 +786,7 @@
       </div>
         <button class="buy-btn" 
   data-network="at"
-  data-package="iShare"
+   data-package="iShare"
   data-size="9"
   data-price="44"
   onclick="payWithPaystack(this)">Buy</button>
@@ -779,7 +806,7 @@
       </div>
         <button class="buy-btn" 
   data-network="at"
-  data-package="iShare"
+   data-package="iShare"
   data-size="10"
   data-price="47"
   onclick="payWithPaystack(this)">Buy</button>
@@ -813,6 +840,19 @@
 </div>
 
 
+<!-- Phone Number Modal -->
+<div id="numberModal" class="modal">
+  <div class="modal-content">
+    <h3>Enter Your Phone Number</h3>
+    <input type="tel" id="userPhone" placeholder="e.g. 0241234567">
+    <div class="modal-buttons">
+      <button id="cancelBtn">Cancel</button>
+      <button id="proceedBtn">Proceed</button>
+    </div>
+  </div>
+</div>
+
+
 
   <!-- ABOUT -->
   <section class="about">
@@ -820,13 +860,15 @@
     <p>Welcome to [ EcoData Bundles ] - we deal with all networks Data Bundle Airtel-Tigo, MTN and Telecel (All are none Expiry Data Bundles) at affordable prices.
       Contact us on WhatsApp to place your order. We deliver nationwide!</p>
     <h4>Fastest Delivery is our Priority</h4>
+
+      <!-- FOOTER -->
+  <footer>
+    <p>Join Us on WhatsApp by: <a href="https://chat.whatsapp.com/LwhZNOyUQsJIGTQRL9cIXT">Clicking here<img src="./css/icons/whats.jpg" alt="icons"></a></p>
+    <p class="copyright">&copy; 2025 EcoData All right reserved</p>
+  </footer>
   </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>Join Us on WhatsApp by: <a href="https://chat.whatsapp.com/LwhZNOyUQsJIGTQRL9cIXT">Clicking here<img src="./images/whats.png" alt="icons"></a></p>
-    <p class="copyright">&copy; 2025 EcoData</p>
-  </footer>
+
 
 
 
