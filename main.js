@@ -42,7 +42,11 @@ function payWithPaystack(network, recipient, packageName, size, price) {
 // ✅ Send order to backend API after Paystack payment verification
 async function orderBundle(network, recipient, packageName, size, reference) {
   try {
-    const response = await fetch("http://127.0.0.1:3000/api/buy-data", {
+    const API_BASE = window.location.hostname ===
+    "localhost"?
+      "http://localhost:3000" :
+      "https://eco-data.onrender.com"; // Replace with your production URL
+    const response = await fetch("http://localhost:3000/api/buy-data", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -92,10 +96,3 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// ✅ SIDEBAR TOGGLE
-const toggler = document.getElementById("sidebarToggler");
-const sidebar = document.querySelector(".sidebar");
-
-toggler.addEventListener("click", function() {
-  sidebar.style.left = sidebar.style.left === "-500px" ? "0px":"-500px";
-});

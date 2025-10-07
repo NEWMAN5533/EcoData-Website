@@ -4,6 +4,7 @@ import axios from "axios";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
+import { error } from "console";
 
 dotenv.config();
 
@@ -11,9 +12,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-app.use(cors());
+app.use(cors({origin: "*"}));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "frontend"))); // serve frontend
+
+// ✅ Start server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
 
 // ✅ BUY DATA API
 app.post("/api/buy-data", async (req, res) => {
@@ -22,6 +27,32 @@ app.post("/api/buy-data", async (req, res) => {
 
     if (!recipient || !network || !packageName || !size) {
       return res.status(400).json({ success: false, error: "Missing required fields" });
+    }
+
+    try {
+      console.log("Bundle Purchase Received:", req.body);
+
+      res.json({
+        success: true,
+        message: "✅ Bundle order placed successfully!",
+        order: {
+          id: Date.now(),
+          network,
+          recipient,
+          package: packageName,
+          size,
+          paymentReference,
+          status: "processing",
+        }
+      }
+      );
+    } catch(err){
+      console.error("❌ Error processing order:", err);
+      return res.status(500).json({ 
+        success: false,
+        error: "Error processing order",
+        message: err.message
+      });
     }
 
     // Verify Paystack payment
@@ -67,7 +98,3 @@ app.post("/api/buy-data", async (req, res) => {
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "frontend", "index.html"));
 });
-
-// ✅ Start server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
