@@ -20,6 +20,18 @@ app.use(express.static(path.join(__dirname, "frontend"))); // serve frontend
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
 
+app.use((err, req, res, next) => {
+  console.error(" Server Error:", err.stack);
+  if(res.headersSent){
+    return next(err);
+  }
+  res.status(500).json({
+    success: false,
+    message: "Internal Server Error",
+    error: err.message,
+  });
+});
+
 // ✅ BUY DATA API
 app.post("/api/buy-data", async (req, res) => {
   try {
@@ -42,7 +54,6 @@ app.post("/api/buy-data", async (req, res) => {
           package: packageName,
           size,
           paymentReference,
-          status: "processing",
         }
       }
       );

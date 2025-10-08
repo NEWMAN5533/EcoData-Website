@@ -42,7 +42,7 @@ export const buyDataBundle = async (req, res) => {
 
     // ✅ 3. Send order to SwiftData
     const swiftRes = await axios.post(
-      `${process.env.SWIFT_BASE_URL}/v1/order/${network}`,
+      `${process.env.SWIFT_BASE_URL}/order/${network}`,
       orderData,
       {
         headers: {
