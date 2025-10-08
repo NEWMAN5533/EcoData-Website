@@ -1,10 +1,10 @@
+// controllers/dataController.js
 import axios from "axios";
 
 export const buyDataBundle = async (req, res) => {
   try {
-    const { network, recipient, size, paymentReference } = req.body;
+    const { network, recipient, packageName, size, paymentReference } = req.body;
 
-    // ✅ 1. Validate required fields
     if (!network || !recipient || !size || !paymentReference) {
       return res.status(400).json({
         success: false,
@@ -12,7 +12,7 @@ export const buyDataBundle = async (req, res) => {
       });
     }
 
-    // ✅ 2. Verify Paystack Payment
+    // ✅ 1. Verify Paystack payment
     const verify = await axios.get(
       `https://api.paystack.co/transaction/verify/${paymentReference}`,
       {
@@ -29,18 +29,18 @@ export const buyDataBundle = async (req, res) => {
       });
     }
 
-    console.log("✅ Payment verified for:", recipient);
+    console.log("✅ Paystack verified:", verify.data.data.reference);
 
-    // ✅ 3. Build SwiftData Payload
+    // ✅ 2. Build SwiftData order payload
     const orderData = {
       type: "single",
       volume: parseInt(size),
       phone: recipient,
-      offerSlug: `${network}_data_bundle`, // matches SwiftData docs
+      offerSlug: packageName,
       webhookUrl: "https://swiftdata-link.com/api/webhooks/orders",
     };
 
-    // ✅ 4. Send Request to SwiftData API
+    // ✅ 3. Send order to SwiftData
     const swiftRes = await axios.post(
       `${process.env.SWIFT_BASE_URL}/v1/order/${network}`,
       orderData,
@@ -52,9 +52,9 @@ export const buyDataBundle = async (req, res) => {
       }
     );
 
-    console.log("📦 SwiftData Response:", swiftRes.data);
+    console.log("SwiftData Response:", swiftRes.data);
 
-    // ✅ 5. Handle SwiftData Response
+    // ✅ 4. Handle success
     if (swiftRes.data.success) {
       return res.json({
         success: true,
