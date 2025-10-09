@@ -42,14 +42,13 @@ body{
 .terms {
   display: flex;
   height: 14rem;
-
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
   text-align: center;
   line-height: 1.5rem;
-  background-color: rgba(43, 41, 41, 0.808);
+  background-color: rgba(43, 41, 41, 0.308);
   margin-top: 1rem;
   margin-bottom: 0.5rem;
   font-family: sans-serif;
@@ -57,7 +56,7 @@ body{
 }
 
 .terms a {
-  color: rgb(190, 11, 11);
+  color: var(--card-full-bg-cl);
   text-decoration: none;
 }
 
@@ -173,7 +172,7 @@ animation: scale-up 3s ease-in-out alternate infinite;
 **/
 .featured-words {
   text-align: center;
-  color: rgb(246, 247, 247);
+  color: rgb(34, 51, 51);
   font-size: 1.4rem;
   margin-block-start: 1rem;
   width: 300px;
@@ -200,7 +199,7 @@ animation: scale-up 3s ease-in-out alternate infinite;
 .btn-box {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 20px;
   margin-top: 20px;
 }
 
@@ -209,7 +208,7 @@ animation: scale-up 3s ease-in-out alternate infinite;
   padding: 5px 30px;
   border: none;
   border-radius: 30px;
-  background: rgba(255,255, 255,0.2);
+  background: rgba(255, 255, 255, 0.336);
   color: white;
   box-shadow: 0 5px 10px rgba(0,0,0,0.2);
   cursor: pointer;
@@ -274,8 +273,8 @@ position: absolute;
   justify-content: center;
   padding: .3rem;
   color: var(--bg-cl);
-  background: rgba(48, 46, 46, 0.144);
-  font-size: 24px;
+  background: none;
+  font-size: 28px;
   border-radius: .1rem;
 }
 
@@ -292,7 +291,9 @@ position: absolute;
   height: 55px;
   padding: 0 15px;
   margin: 25px 0;
-  color: white;
+  font-size: 16px;
+  font-family: Arial;
+  color: rgb(2, 2, 2);
   background: rgba(233, 230, 230, 0.4);
   border: 0.2px solid white;
   border-radius: 10px;
@@ -302,8 +303,8 @@ position: absolute;
 }
 
 ::placeholder{
-  color: white;
-  font-size: 15px;
+  color: black;
+  font-size: 18px;
 }
 
 .input-box .icon {
@@ -338,6 +339,7 @@ position: absolute;
   height: 55px;
   padding: 0 15px;
   margin: 10px 0;
+  font-size: 16px;
   border: none;
   background-color: #21264D;
   border-radius: 10px;
@@ -383,20 +385,6 @@ position: absolute;
 
   }
 
-
-
-
-
-body {
-  width: 100vw;
-  min-height: 100vh;
-  
-  overflow-y: auto;
-  overflow-x: hidden;
-  scrollbar-width: thin;
-  margin: 0;
-  padding: 0;
-}
 
 /**
 * NAVIGATION BAR
