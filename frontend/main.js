@@ -121,3 +121,7 @@ async function loadStatus() {
 loadStatus();
 
 setInterval(loadStatus, 3000);
+
+// SLIDING ON TOP AGENTS & TOP BUYERS //
+const slider = document.querySelector(".slider");
+const card = document.querySelectorAll("")

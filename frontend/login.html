@@ -22,50 +22,105 @@
 </div>
 </nav>
 
-<!------LOGIN & SIGN-UP---->
-<div class="container">
-  <form action="get">
-    <h1>Login To Your Account</h1>
-    <input type="text" placeholder="Enter your email">
-    <input type="text" placeholder="Enter your password">
-    <button type="submit" class="login-btn">Login</button>
-  </form>
 
 
 
-  <div class="signUp-container">
-  <form class="sighUp-form" action="get">
-    <h1>Create New Account</h1>
-    <input type="text" placeholder="Enter your email">
-    <input type="text" placeholder="Enter your password">
-    <button type="submit" class="login-btn">Sign UP</button>
-  </form>
-</div>
-</div>
 
 
 
-<!--------MENU-CARD----->
-<div class="menu-card" id="signUpTrigger">
-  Don't have account?
-  <div class="bottom-card">
-    <a href="#">Sign Up</a>
+
+
+ <div class="welcoming">
+  <h2>Welcome back, please let's start by getting you an account to stay tuned.</h2>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+<!--------LOGIN FORM WITH SIGN UP------->
+<div class="form-container">
+  <div class="col col-1">
+    <div class="image-layer">
+      <img src="./css/icons/icon-b.png" alt="image" class="form-image-main">
+    </div>
+    <p class="featured-words">
+    Let Start by getting You an Account <br> <span>EcoData</span>
+    </p>
+  </div>
+  <div class="col col-2">
+    <div class="btn-box">
+      <button class="btn btn-1" id="changeBackgroundColorLogin">Login</button>
+      <button class="btn btn-2" id="changeBackgroundColorRegister">Sign Up</button>
+    </div>
+
+    <!---LOGIN FORM CONTAINER-->
+    <div class="login-form">
+      <div class="form-title">
+        <span>Login</span>
+      </div>
+      <div class="form-inputs">
+        <div class="input-box">
+          <input type="text" id="loginEmail" class="input-field" placeholder="Email" required>
+          <!--add icon here-->
+        </div>
+        <div class="input-box">
+          <input type="password" id="loginPassword" class="input-field" placeholder="Enter Password" required>
+          <!--add icon here-->
+        </div>
+        <div class="forgot-password">
+          <a href="#">Forgot Password ?</a>
+        </div>
+        <div class="input-box">
+          <button class="input-submit" id="SubmitLoginBtn">
+            <span>Login</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+
+      <!---REGISTER FORM CONTAINER-->
+      <div class="register-form">
+      <div class="form-title">
+        <span>create New Account</span>
+      </div>
+      <div class="form-inputs">
+        <div class="input-box">
+          <input type="Email" id="registerEmail" class="input-field" placeholder="Username" required>
+          <!--add icon here-->
+        </div>
+        <div class="input-box">
+          <input type="password" id="registerPassword" class="input-field" placeholder="Enter Password" required>
+          <!--add icon here-->
+        </div>
+        <div class="forgot-password">
+        </div>
+        <div class="input-box">
+          <button class="input-submit" id="SubmitRegisterBtn">
+            <span>Create</span>
+          </button>
+        </div>
+      </div>
+      
+    </div>
+    
+
   </div>
 </div>
-<!-- ABOUT-->
-  <section class="about">
-    <h3>About Us:</h3>
-    <p>Welcome to [ EcoData Bundles ] - we deal with all networks Data Bundle Airtel-Tigo, MTN and Telecel (All are none Expiry Data Bundles) at affordable prices.
-      Contact us on WhatsApp to place your order. We deliver nationwide!</p>
-    <h4>Fastest Delivery is our Priority</h4>
 
-      <!-- FOOTER -->
-  <footer>
-    <p>Join Us on WhatsApp by: <a href="https://chat.whatsapp.com/LwhZNOyUQsJIGTQRL9cIXT">Clicking here<img src="./css/icons/whats.jpg" alt="icons"></a></p>
-    <p class="copyright">&copy; 2025 EcoData All right reserved</p>
-  </footer>
-  </section>
-
+<!------TERMS & CONDITIONS APPLY----->
+<section>
+<div class="terms"> <h5>By continuing you are agreeing to our <span><a href="privacyPolicy.html">Terms of Service Privacy </a></span> and acknowledging receipt of our <br> <a href="privacyPolicy.html">Privacy Policy</a></h5>
+</div>
+</section>
   <script src="loginSignUp.js"></script>
 </body>
 </html>
