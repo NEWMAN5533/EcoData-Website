@@ -1387,6 +1387,99 @@ input[readonly] {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 320px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.phone-box {
+  display: flex;
+  align-items: center;
+  background: #f4f4f4;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  padding: 10px 12px;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.phone-box span {
+  font-weight: 500;
+  color: #333;
+  margin-right: 6px;
+}
+
+.phone-box input {
+  border: none;
+  outline: none;
+  background: transparent;
+  flex: 1;
+  font-size: 15px;
+  color: #111;
+}
+
+.modal button {
+  margin: 0.5rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#confirmBuy {
+  background: #06b46b;
+  color: #fff;
+}
+
+#cancelBuy {
+  background: #ccc;
+}
+
+
+
+
+
 /* Responsive adjustments */
 @media (max-width: 1440px){
   .footer,.about{

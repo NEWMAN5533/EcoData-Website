@@ -1,4 +1,3 @@
-// main.js
 
 // Attach event listeners to all "Buy Now" buttons
 document.querySelectorAll(".buy-btn").forEach(button => {
@@ -19,6 +18,7 @@ document.querySelectorAll(".buy-btn").forEach(button => {
     payWithPaystack(network, recipient, packageName, size, price);
   });
 });
+
 
 // ✅ Paystack payment
 function payWithPaystack(network, recipient, packageName, size, price) {
@@ -58,6 +58,11 @@ async function orderBundle(network, recipient, packageName, size, reference) {
       })
     });
 
+// load immediately when page opens //
+loadStatus();
+
+setInterval(loadStatus, 3000);
+
     const result = await response.json();
 
     if (result.success) {
@@ -72,6 +77,72 @@ async function orderBundle(network, recipient, packageName, size, reference) {
     alert("⚠ Server error. Please try again later.");
   }
 }
+
+// 🛰 DATA PROCESSING //
+async function loadStatus() {
+  try {
+    const res = await fetch("https://ecodata-app.onrender.com/api/v1/orders/status");
+
+    // 🧠 Debug tip: log raw response text to inspect what your backend returns
+    const rawText = await res.text();
+    console.log("🧩 Raw status response:", rawText);
+
+    // Try to parse JSON safely
+    const data = JSON.parse(rawText);
+
+    if (data.success && data.data) {
+      document.getElementById("pendingCount").innerText = data.data.pending;
+      document.getElementById("processingCount").innerText = data.data.processing;
+      document.getElementById("completedCount").innerText = data.data.complete;
+      document.getElementById("failedCount").innerText = data.data.failed;
+    } else {
+      console.warn("⚠ Unexpected data format:", data);
+    }
+  } catch (err) {
+    console.error("Error fetching status:", err);
+  }
+}
+
+// 🚀 Load immediately when page opens
+loadStatus();
+
+// ♻ Refresh every 3 seconds
+setInterval(loadStatus,3000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // ✅ REAL TIME CLOCK
 function updateClock() {
@@ -96,32 +167,5 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// DATA PROCESSING //
-async function loadStatus() {
-  try{
-    const res = await fetch("https://ecodata-app.onrender.com/api/v1/orders/status");
 
-    const data = await res.json();
-    if(data.success && data.data){
-      document.getElementById("pendingCount").innerText = data.data.pending;
 
-      document.getElementById("processingCount").innerText = data.data.processing;
-
-      document.getElementById("completedCount").innerText = data.data.complete;
-
-      document.getElementById("failedCount").innerText = data.data.failed;
-    }
-  } catch (err) {
-    console.error("Error fetching status:",
-      err);
-  }
-}
-
-// load immediately when page opens //
-loadStatus();
-
-setInterval(loadStatus, 3000);
-
-// SLIDING ON TOP AGENTS & TOP BUYERS //
-const slider = document.querySelector(".slider");
-const card = document.querySelectorAll("")
