@@ -10,7 +10,7 @@ document.querySelectorAll(".buy-btn").forEach(button => {
     const recipient = prompt("📱 Enter your phone number (e.g. 233241234567):");
 
     if (!recipient) {
-      alert("❌ Phone number is required!");
+      showSnackbar(" Phone number is required!");
       return;
     }
 
@@ -32,7 +32,7 @@ function payWithPaystack(network, recipient, packageName, size, price) {
       orderBundle(network, recipient, packageName, size, response.reference);
     },
     onClose: function() {
-      alert("❌ Payment cancelled.");
+      showSnackbar(" Payment cancelled.");
     }
   });
 
@@ -66,15 +66,15 @@ setInterval(loadStatus, 3000);
     const result = await response.json();
 
     if (result.success) {
-      alert("✅ Data bundle purchased successfully!");
+      showSnackbar("✅ Data bundle purchased successfully!");
       console.log("📦 Order details:", result.order || result.swift);
     } else {
-      alert(`❌ Failed to purchase data: ${result.message || "Unknown error"}`);
-      console.error("❌ API Error:", result);
+      showSnackbar(` Failed to purchase data: ${result.message || "Unknown error"}`);
+      console.error(" API Error:", result);
     }
   } catch (err) {
     console.error("⚠ Server error:", err);
-    alert("⚠ Server error. Please try again later.");
+    showSnackbar("Server error. Please try again later.");
   }
 }
 
@@ -110,7 +110,16 @@ loadStatus();
 setInterval(loadStatus,3000);
 
 
+// SNACKBAR //
+function showSnackbar(message, type = "info") {
+  const snackbar = document.getElementById("snackbar");
+  snackbar.className = show `snack-${type}`;
+  snackbar.textContent = message;
 
+  setTimeout(() => {
+    snackbar.className = snackbar.className.replace("show", "");
+},4000);
+}
 
 
 

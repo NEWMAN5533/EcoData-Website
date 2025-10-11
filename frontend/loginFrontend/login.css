@@ -37,6 +37,68 @@ body{
   padding: 0 10px;
 }
 
+/***
+LOGOUT BTN
+****/
+.logout-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16rem;
+  color: white;
+  cursor: pointer;
+  background: rgb(196, 14, 14);
+  border: none;
+  border-radius: 6px;
+  width: 30%;
+  height: 2rem;
+}
+
+/* ===== Snackbar Styles ===== */
+#snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  max-width: 80%;
+  margin-left: -125px;
+  background-color: #222;
+  color: #fff;
+  text-align: center;
+  border-radius: 10px;
+  padding: 16px;
+  position: fixed;
+  z-index: 9999;
+  left: 50%;
+  bottom: 40px;
+  font-size: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.4s ease;
+}
+
+/* Show Snackbar */
+#snackbar.show {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Success & Error colors */
+.snack-success {
+  background-color: #22c55e; /* green */
+}
+
+.snack-error {
+  background-color: #ef4444; /* red */
+}
+
+.snack-info {
+  background-color: #3b82f6;/* blue */
+}
+/*** snackbar ends***/
+
+
+
 .terms {
   display: flex;
   height: 14rem;
@@ -234,8 +296,8 @@ background: #293488;
   align-items: center;
   width: 100%;
   max-width: 400px;
-  gap: 2.4rem;
-  padding: 0 4vw;
+  gap: 1rem;
+  padding: 0 4VW;
   transition: .3s;
 }
 
@@ -250,7 +312,7 @@ position: absolute;
   justify-self: center;
   flex-direction: column;
   background-color: transparent;
-  gap: 2.4rem;
+  gap: 1rem;
   align-items: center;
   width: 100%;
   max-width: 400px;
@@ -264,7 +326,7 @@ position: absolute;
 }
 
 .form-title {
-  margin: 40px 0;
+  margin: 15px 0;
   width: 80%;
   display: flex;
   align-items: center;

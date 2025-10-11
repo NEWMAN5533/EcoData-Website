@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ecodata</title>
+
+  
+    <meta name="title" content="EcoData">
+  <meta name="description" content="This is related to website developed by IlysCode">
+
+  <link rel="shortcut icon" href="./css/icons/icon-b.png" type="image/png">
+  <link rel="stylesheet" href="mat.css">
+
+
+<style>
+  
+/* ===== Snackbar Styles ===== */
+#snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  height: 2.2rem;
+  max-width: 80%;
+  margin-left: -125px;
+  background-color: #222;
+  color: #fff;
+  text-align: center;
+  border-radius: 10px;
+  padding: 16px;
+  position: absolute;
+  z-index: 9999;
+  left: 50%;
+  top: 0;
+  font-size: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.4s ease;
+}
+
+/* Show Snackbar */
+#snackbar.show {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Success & Error colors */
+.snack-success {
+  background-color: #22c55e; /* green */
+}
+
+.snack-error {
+  background-color: #ef4444; /* red */
+}
+
+.snack-info {
+  background-color: #3b82f6;/* blue */
+}
+/*** snackbar ends***/
+
+
+</style>
+</head>
+<body>
+<nav class="navbar">
+<div class="nav-left">
+<a href="index.html"><h2>EcoData</h2></a>
+</div>
+<div class="nav-right">
+<img id="sidebarToggler" src="./css/icons/icons8-fries-menu-46.png" alt="image" class="menu-icon" loading="lazy">
+</div>
+</nav>
+
+<!-------MAIN SECTION-->
+<section class="main-container">
+  <div class="sticky-sidebar">
+    <div class="user-pannel">
+      <div class="pic">U</div>
+      <h3>User Pannel</h3>
+    </div>
+
+     <!----ICONS-SECTION-->
+    <div class="shortcut-links">
+      <div class="link home">
+       <a href="index.html">
+        <img src="./css/icons/home.png" alt="image" loading="lazy">
+        <span>Home</span>
+       </a>
+      </div>
+
+       <div class="link">
+       <a href="mtn-page.html">
+        <img src="./css/icons/mtn-signal.png" alt="image" loading="lazy">
+        <span>MTN</span>
+       </a>
+      </div>
+
+       <div class="link">
+       <a href="telecel-page.html">
+        <img src="./css/icons/telecel-signal.png" alt="image" loading="lazy">
+        <span>Telecel</span>
+       </a>
+      </div>
+
+       <div class="link">
+       <a href="aiteltigo-page.html">
+        <img src="./css/icons/tigo-signal.png" alt="image" loading="lazy">
+        <span>Airteltigo</span>
+       </a>
+      </div>
+    </div>
+   <!---------Privacy-policy-->
+   <div class="privacy-container">
+    <div class="terms-container">
+      <div class="link">
+        <img src="./css/icons/like.png" alt="image" loading="lazy">
+        <a href="terms">Terms & Condition</a>
+      </div>
+
+      <div class="link">
+        <img src="./css/icons/whats.jpg" alt="image" loading="lazy">
+        <a href="terms"><small>File Complain</small></a>
+      </div>
+    </div>
+   </div>
+
+  </div>
+  <!-----TOP-PACKAGE-->
+  <div class="top-package-container">
+    <div class="top-title">
+      <h3>Top Packages</h3>
+    </div>
+    <div class="top-packages">
+      <div class="package-cards">
+
+        <div class="package-card">
+          <div class="top-div">
+            <div class="left-div">
+              <img src="./css/images/correct.png" alt="image" loading="lazy">
+            </div>
+          <div class="middle-div">
+            <span>Telecel </span>
+            <small>Bundle</small>
+          </div>
+          <div class="right-div">
+            <span>&#8373;27.00</span>
+            <small>5GB</small>
+          </div>
+          </div>
+        <div class="bottom-div">
+          <button class="buy-btn telecel-btn"  type="button">Add to Cart</button>
+        </div>
+        </div>
+
+        <div class="package-card">
+          <div class="top-div">
+            <div class="left-div">
+              <img src="./css/images/correct.png" alt="image" loading="lazy">
+            </div>
+          <div class="middle-div">
+            <span>Telecel </span>
+            <small>Bundle</small>
+          </div>
+          <div class="right-div">
+            <span>&#8373;69.00</span>
+            <small>15GB</small>
+          </div>
+          </div>
+        <div class="bottom-div">
+          <button class="buy-btn telecel-btn"  type="button">Add to Cart</button>
+        </div>
+        </div>
+
+        <div class="package-card">
+          <div class="top-div">
+            <div class="left-div">
+              <img src="./css/images/correct.png" alt="image" loading="lazy">
+            </div>
+          <div class="middle-div">
+            <span>Telecel </span>
+            <small>Bundle</small>
+          </div>
+          <div class="right-div">
+            <span>&#8373;27.00</span>
+            <small>5GB</small>
+          </div>
+          </div>
+        <div class="bottom-div">
+          <button class="buy-btn telecel-btn"  type="button">Add to Cart</button>
+        </div>
+        </div>
+
+        </div>
+
+        <div class="package-cards">
+          <div class="package-card">
+          <div class="top-div">
+            <div class="left-div">
+              <img src="./css/images/correct.png" alt="image" loading="lazy">
+            </div>
+          <div class="middle-div">
+            <span>Telecel </span>
+            <small>Bundle</small>
+          </div>
+          <div class="right-div">
+            <span>&#8373;47.60</span>
+            <small>10GB</small>
+          </div>
+          </div>
+        <div class="bottom-div">
+          <button class="buy-btn telecel-btn"  type="button">Add to Cart</button>
+        </div>
+        </div>
+
+        <div class="package-card">
+          <div class="top-div">
+            <div class="left-div">
+              <img src="./css/images/correct.png" alt="image" loading="lazy">
+            </div>
+          <div class="middle-div">
+            <span>MTN </span>
+            <small>Bundle</small>
+          </div>
+          <div class="right-div">
+            <span>&#8373;12.00</span>
+            <small>2GB</small>
+          </div>
+          </div>
+        <div class="bottom-div">
+          <button class="buy-btn mtn-btn"  type="button">Add to Cart</button>
+        </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

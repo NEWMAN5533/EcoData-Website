@@ -41,6 +41,9 @@
   --card-full-tele-bg-cl: rgb(221, 19, 19);
   --card-full-airtel-bg-cl:  rgb(6, 6, 231);
   --border-cl-2: rgba(66, 66, 26, 0.226);
+  --mtn-btn: rgb(193, 196, 19);
+  --telecel-btn: rgb(180, 57, 19);
+  --airteltigo-btn: rgb(28, 46, 119);
 }
 
 
@@ -1475,7 +1478,6 @@ input[readonly] {
 #cancelBuy {
   background: #ccc;
 }
-
 
 
 

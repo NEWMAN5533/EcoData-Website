@@ -13,6 +13,56 @@
   <link rel="stylesheet" href="style.css">
 
 
+<style>
+  
+/* ===== Snackbar Styles ===== */
+#snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  height: 2.2rem;
+  max-width: 80%;
+  background-color: #222;
+  color: #fff;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  border-radius: 10px;
+  padding: 16px;
+  position: relative;
+  z-index: 9999;
+  left: 50%;
+  top: 0;
+  font-size: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.4s ease;
+}
+
+/* Show Snackbar */
+#snackbar.show {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Success & Error colors */
+.snack-success {
+  background-color: #22c55e; /* green */
+}
+
+.snack-error {
+  background-color: #ef4444; /* red */
+}
+
+.snack-info {
+  background-color: #3b82f6;/* blue */
+}
+/*** snackbar ends***/
+
+
+</style>
+
 </head>
 <body>
 <nav class="navbar">
@@ -83,9 +133,9 @@
      <h5> Quick access (Pages)</h5>
     </div>
     <div class="purchase-container">
-      <a href="#"><div class="card-box mtn">MTN</div></a>
-      <a href="#"><div class="card-box telecel">TELECEL</div></a>
-      <a href="#"><div class="card-box at">AIRTELTIGO</div></a>
+      <a href="mtn-page.html"><div class="card-box mtn">MTN</div></a>
+      <a href="telecel-page.html"><div class="card-box telecel">TELECEL</div></a>
+      <a href="aiteltigo-page.html"><div class="card-box at">AIRTELTIGO</div></a>
     </div>
   </div>
 </div>
@@ -824,7 +874,8 @@
     <p class="copyright">&copy; 2025 EcoData All right reserved</p>
   </footer>
   </section>
-
+<!----SNACKBAR-SECTION----->
+<div id="snackbar"></div>
 
 
 
@@ -832,10 +883,26 @@
     <!-- Load Paystack library -->
   <script src="https://js.paystack.co/v1/inline.js"></script>
 
+
+
+
+
   <!-- Your frontend logic -->
   <script src="./main.js"></script>
 
+  <script>
+    
+// SNACKBAR //
+function showSnackbar(message, type = "info") {
+  const snackbar = document.getElementById("snackbar");
+  snackbar.className = show `snack-${type}`;
+  snackbar.textContent = message;
 
+  setTimeout(() => {
+    snackbar.className = snackbar.className.replace("show", "");
+},4000);
+}
+  </script>
 
 </body>
 </html>
