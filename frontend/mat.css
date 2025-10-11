@@ -127,7 +127,7 @@ body {
 /***----SIDEBAR-----***/
 .sticky-sidebar{
   width: 140px;
-  min-height: 90vh;
+  height: 100vh;
   display: flex;
   left: .6rem;
   top: 3.9rem;
@@ -174,7 +174,7 @@ body {
   height: 18rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 2.5rem;
   top: .1rem;
   justify-content: center;
   align-items: flex-start;
@@ -259,7 +259,7 @@ PRIVACY & POLICY CONTAINER
   flex-direction: column;
   gap: 1.3rem;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   text-align: center;
   position: relative;
 }
