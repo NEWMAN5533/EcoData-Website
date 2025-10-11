@@ -223,7 +223,7 @@ TOP PACKAGES SECTION
 .top-package-container{
   width: 100%;
   max-width: 310px;
-  height: 28rem;
+  height: 36rem;
   margin: 5rem 0;
   display: flex;
   flex-direction: column;
