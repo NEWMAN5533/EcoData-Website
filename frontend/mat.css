@@ -114,15 +114,170 @@ body {
   ***/
 .main-container {
   display: flex;
+  flex-direction: column;
   position: relative;
   width: 100%;
+  padding: .5rem 0;
   max-width: 480px;
-  height: 100vh;
+  height: max-content;
   justify-self: center;
   justify-content: space-between;
   overflow-x: hidden;
-
   max-width: 480px;
+}
+
+/****
+NETWORKS DASHBOARDS
+*****/
+.dashboard-container{
+  width: 100%;
+  max-width: 310px;
+  height: 21rem;
+  margin: 3.8rem 0;
+  margin-left: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  background: var(--bg-cl);
+  box-shadow: 0 2px 3px rgba(0,0,0,0.3);
+  border-radius: .4rem
+}
+
+.top-dash-div {
+  width: 96%;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: transparent;
+  margin: .5rem  0;
+}
+
+.left-dash-div {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.right-dash-div {
+width: 40%;
+height: 100%;
+display: flex;
+align-items: center;
+justify-content: flex-end;
+}
+
+
+.left-dash-div img{
+  width: 24px;
+  height: 24px;
+  margin: .5rem
+}
+
+.left-dash-div h4{
+  font-size: 1rem;
+}
+
+
+.newOrder {
+  width: max-content;
+  height: 1.8rem;
+  border: 0.1px solid var(--secondary-cl);
+  background: var(--secondary-cl);
+  color: var(--bg-cl);
+  border-radius: .4rem;
+  cursor: pointer;
+  margin-right: .5rem;
+  transition: .3s ease;
+}
+
+.newOrder:hover{
+  background: rgb(26, 26, 218);
+}
+
+.center-analytic-didv {
+  width: 100%;
+  height: max-content;
+  padding: .3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+
+.center-analytic-didv h4{
+  font-size: 1.2rem;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 500;
+}
+
+.dash-cards-div {
+  width: 100%;
+  height: 10rem;
+  display: flex;
+  background: transparent;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-container {
+  width: 96%;
+  height: 13rem;
+  display: flex;
+  gap: 1.5rem;
+  background: transparent;
+  position: relative;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-div {
+  width: 8rem;
+  height: 5rem;
+  display: flex;
+  flex-direction: column;
+  background: rgb(250, 250, 217);
+  border-radius: .6rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.card-top-section {
+  width: 100%;
+  height: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-top-section small{
+  font-size: .9rem;
+  font-weight: bold;
+  font-weight: 500;
+  margin: .3rem .3rem;
+}
+
+.card-top-section img{
+  width: 1.2rem;
+  height: 1.2rem;
+  margin: .3rem .3rem
+}
+
+.card-bottom-section{
+  width: 100%;
+  height: 70%;
+  display: flex;
+  align-items: end;
+  justify-content: start;
+}
+
+.card-bottom-section span{
+  margin: .5rem 1rem;
 }
 /***----SIDEBAR-----***/
 .sticky-sidebar{
@@ -224,7 +379,6 @@ TOP PACKAGES SECTION
   width: 100%;
   max-width: 310px;
   height: 36rem;
-  margin: 5rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -468,3 +622,5 @@ PACKAGES CARDS
 .bottom-div .airteltigo-btn:hover{
   background: rgb(14, 14, 184);
 }
+
+
