@@ -1,4 +1,9 @@
 
+
+
+
+
+
 // Attach event listeners to all "Buy Now" buttons
 document.querySelectorAll(".buy-btn").forEach(button => {
   button.addEventListener("click", () => {
@@ -175,6 +180,7 @@ function updateClock() {
 
 setInterval(updateClock, 1000);
 updateClock();
+
 
 
 

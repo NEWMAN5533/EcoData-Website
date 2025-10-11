@@ -334,7 +334,6 @@ WELCOME CARD
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    position: relative;
   }
 
   .close-time {
@@ -390,7 +389,6 @@ BUNDLE PROCESSING
   height: 25rem;
   display: flex;
   flex-direction: column;
-  position: relative;
   justify-content: center;
   align-items: center;
   background: var(--bg-cl);
@@ -570,7 +568,6 @@ BUNDLE PROCESSING
   width: 100%;
   max-width: 480px;
   height: max-content;
-  position: relative;
   align-self: center;
   justify-self: center;
   display: flex;
@@ -595,7 +592,6 @@ CARD CONTAINER
   gap: .8rem;
   align-items: center;
   justify-content: space-around;
-  position: relative;
   background-color: transparent;
   border-radius: .8rem;
 }
@@ -693,7 +689,6 @@ small{
   width: 100%;
   max-width: 480px;
   height: max-content;
-  position: relative;
   align-self: center;
   justify-self: center;
   display: flex;
@@ -718,7 +713,6 @@ CARD CONTAINER
   gap: .8rem;
   align-items: center;
   justify-content: space-around;
-  position: relative;
   background-color: transparent;
   border-radius: .8rem;
 }
@@ -1480,6 +1474,59 @@ input[readonly] {
 }
 
 
+/* ✅ Beautiful Snackbar Styles */
+#snackbar {
+  visibility: hidden;
+  min-width: 280px;
+  background: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 10px;
+  padding: 14px 18px;
+  position: fixed;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  font-size: 16px;
+  opacity: 0;
+  z-index: 999999;
+  transition: opacity 0.5s, bottom 0.5s;
+}
+
+#snackbar.show {
+  visibility: visible;
+  opacity: 1;
+  bottom: 50px;
+}
+
+/* 🎨 Snack colors */
+.snack-success { background: #28a745; }
+.snack-error { background: #dc3545; }
+.snack-warning { background: #ffc107; color: #000; }
+.snack-info { background: #17a2b8; }
+
+/* ✅ Paystack popup centering fix */
+iframe[src*="paystack"] {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: 999999 !important;
+  width: 100% !important;
+  height: 100vh !important;
+}
+
+/* ✅ Mobile fullscreen */
+@media (max-width: 600px) {
+  iframe[src*="paystack"] {
+    width: 100% !important;
+    height: 100vh !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+}
+}
+
 
 
 /* Responsive adjustments */
@@ -1502,6 +1549,16 @@ input[readonly] {
     .footer,.about{
     width: 100%;
   }
+}
+
+@media (max-width: 600px) {
+  iframe[src*="paystack"] {
+    width: 100% !important;
+    height: 100vh !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+}
 }
 
 @media (max-width: 480px) {
