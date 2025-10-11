@@ -127,15 +127,16 @@ body {
 /***----SIDEBAR-----***/
 .sticky-sidebar{
   width: 140px;
-  max-height: 90vh;
+  min-height: 90vh;
   display: flex;
   left: .6rem;
   top: 3.9rem;
   position: fixed;
-  overflow-y: auto;
   flex-direction: column;
   background: var(--bg-cl);
   box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  z-index: 10000;
+  overflow-y: auto;
 }
 
 .pic {
@@ -155,6 +156,7 @@ body {
 
 .user-pannel {
   display: flex;
+  flex-direction: column;
   align-items: center;
   width: 100%;
   height: 12rem;
