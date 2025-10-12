@@ -1,4 +1,19 @@
 // === MAIN.JS ===
+// === BUY BUTTON EVENT LISTENERS ===
+document.querySelectorAll(".buy-btn").forEach(button => {
+  button.addEventListener("click", () => {
+    const packageName = button.dataset.package;
+    const network = button.dataset.network;
+    const size = button.dataset.size;
+    const price = button.dataset.price;
+
+    // Show phone input modal first
+    createPhoneModal(recipient => {
+      payWithPaystack(network, recipient, packageName, size, price);
+    });
+  });
+});
+
 
 // Create phone input modal dynamically
 function createPhoneModal(callback) {
@@ -14,10 +29,12 @@ function createPhoneModal(callback) {
     top: 0; 
     width: 100%; 
     height: 100%;
-    display: flex; align-items: center; justify-content: center;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
     max-width: 480px;
     justify-self: center;
-    background: rgba(161, 154, 154, 0.27);
+    background: rgba(0,0,0,0.4);
     z-index: 9999;
   `;
 
@@ -28,25 +45,35 @@ function createPhoneModal(callback) {
     padding: 25px;
     border-radius: 15px;
     width: 90%;
-    max-width: 360px;
+    height: 24rem;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
     text-align: center;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
     animation: popUp 0.3s ease;
+    z-index: 9999;
+    position: relative;
   `;
   box.innerHTML = `
-    <h3 style="margin-bottom: 15px; color: #222;">Enter your phone number</h3>
+    <h3 style="margin-bottom: 15px; color: #000000ff;">Enter your phone number to receive the Bundle package</h3>
     <input type="tel" id="recipientInput" placeholder="e.g. 233241234567"
       style="width: 100%;
       padding: 12px; 
       border-radius: 10px; 
-      border: 1px solid #ccc; 
+      border: 1px solid #222; 
       font-size: 24px; 
       text-align: center; 
       margin-bottom: 15px;
-      color: white" />
-    <div style="display: flex; gap: 10px; justify-content: center;">
-      <button id="cancelBtn" style="background:#999; color:white; padding:10px 18px; border:none; border-radius:10px; cursor:pointer;">Cancel</button>
-      <button id="confirmBtn" style="background:#2196F3; color:white; padding:10px 18px; border:none; border-radius:10px; cursor:pointer;">Continue</button>
+      color: white" 
+      box-shadow: 0 2px 6px #ccc8c8ff;/>
+    <div style="display: flex;
+      gap: 40px; 
+    justify-content: center;">
+      <button id="cancelBtn" style="background:#999; color: white; padding:10px 18px; border:none; border-radius:10px;
+      width: 50%; cursor:pointer;">Cancel</button>
+      <button id="confirmBtn" style="background:#2196F3; color:white; width: 50%; padding:10px 18px; border:none; border-radius:10px; cursor:pointer;">Continue</button>
     </div>
   `;
 
@@ -63,25 +90,15 @@ function createPhoneModal(callback) {
       alert("Please enter your phone number");
       return;
     }
-    modal.remove();
-    callback(recipient);
+    modal.style.display = "none";
+    setTimeout(() => {
+      modal.remove();
+      callback(recipient);
+    } , 200);
   });
 }
 
-// === BUY BUTTON EVENT LISTENERS ===
-document.querySelectorAll(".buy-btn").forEach(button => {
-  button.addEventListener("click", () => {
-    const packageName = button.dataset.package;
-    const network = button.dataset.network;
-    const size = button.dataset.size;
-    const price = button.dataset.price;
 
-    // Show phone input modal first
-    createPhoneModal(recipient => {
-      payWithPaystack(network, recipient, packageName, size, price);
-    });
-  });
-});
 
 // === PAYSTACK PAYMENT ===
 function payWithPaystack(network, recipient, packageName, size, price) {
@@ -143,22 +160,4 @@ async function loadStatus() {
 }
 loadStatus();
 setInterval(loadStatus,3000);
-
-// === REAL TIME CLOCK ===
-function updateClock() {
-  const clock = document.getElementById("clock");
-  const now = new Date();
-  const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-  const dayName = days[now.getDay()];
-  let hours = now.getHours();
-  let minutes = now.getMinutes();
-  let seconds = now.getSeconds();
-  const ampm = hours >= 12 ? "PM" : "AM";
-  hours = hours % 12 || 12;
-  minutes = minutes < 10 ? "0" + minutes : minutes;
-  seconds = seconds < 10 ? "0" + seconds : seconds;
-  clock.innerHTML = `${dayName} ${hours}:${minutes}:${seconds} ${ampm}`;
-}
-setInterval(updateClock, 1000);
-updateClock();
 
