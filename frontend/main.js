@@ -118,7 +118,7 @@ setInterval(loadStatus,3000);
 // SNACKBAR //
 function showSnackbar(message, type = "info") {
   const snackbar = document.getElementById("snackbar");
-  snackbar.className = show `snack-${type}`;
+  snackbar.className = `show snack-${type}`;
   snackbar.textContent = message;
 
   setTimeout(() => {
