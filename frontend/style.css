@@ -70,6 +70,10 @@ body {
   padding: 0;
 }
 
+html, body{
+  overflow: visible !important;
+  position: relative !important;
+}
 
 /**
 * NAVIGATION BAR
