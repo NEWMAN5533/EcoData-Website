@@ -935,6 +935,8 @@ SECTION TITLE
 
 
 
+
+
 /* ABOUT & FOOTER */
 .about,
 footer {
@@ -948,7 +950,6 @@ footer {
   height: max-content;
   max-width: 480px;
   text-align: center;
-  margin: .5rem 0;
   color: white;
   background-color:  rgb(21, 21, 34) ;
   bottom: 0;
@@ -983,8 +984,8 @@ section footer .bar{
 
 .about img{
   border-radius: 2rem;
-width: 2.5rem;
-height: 2.5rem;
+width: 1.2rem;
+height: 1.2rem;
 margin: 0 .5rem;
 }
 
@@ -1328,47 +1329,22 @@ input[readonly] {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* ✅ Beautiful Snackbar Styles */
 #snackbar {
   visibility: hidden;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   min-width: 280px;
   background: #333;
   color: #fff;
   text-align: center;
   border-radius: 10px;
   padding: 14px 18px;
-  position: fixed;
+  position: relative;
   left: 50%;
-  bottom: 30px;
+  top: 10%;
   transform: translateX(-50%);
   font-size: 16px;
   opacity: 0;
@@ -1379,7 +1355,6 @@ input[readonly] {
 #snackbar.show {
   visibility: visible;
   opacity: 1;
-  bottom: 50px;
 }
 
 /* 🎨 Snack colors */
@@ -1422,13 +1397,7 @@ iframe[src*="paystack"] {
 
 
 @media (max-width: 768px) {
-  .inner-container {
-    width: 70%;
-    height: auto;
-  }
-  .label-container {
-    width: 90%;
-  }
+  
  
     .footer,.about{
     width: 100%;
