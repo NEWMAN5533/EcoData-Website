@@ -1087,7 +1087,91 @@ SNACKBAR SECTION
   background: var(--bg-cl);
 }
 
+/* === WhatsApp Floating Button === */
+#whatsappChat {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 99999;
+  font-family: "Poppins", sans-serif;
+}
 
+/* Floating button */
+#chatButton {
+  background-color: #25D366;
+  color: white;
+  font-size: 26px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+}
+
+#chatButton:hover {
+  transform: scale(1.1);
+  background-color: #20bd5a;
+}
+
+/* Message box */
+#chatBox {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  bottom: 75px;
+  right: 0;
+  background: #fff;
+  width: 280px;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease;
+}
+
+#chatBox.show {
+  display: flex;
+}
+
+#chatBox h4 {
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+#chatBox input {
+  width: 100%;
+  padding: 8px;
+  color: #292727;
+  background-color: #dddae7;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+#chatBox button {
+  background-color: #25D366;
+  color: white;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+#chatBox button:hover {
+  background-color: #1ebe5d;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); 
+  }
+  to { opacity: 1; transform: translateY(0);};
+}
 
 
 
