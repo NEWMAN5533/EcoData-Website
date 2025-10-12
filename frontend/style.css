@@ -66,10 +66,10 @@ body {
   background: transparent;
   overflow-y: auto;
   overflow-x: hidden;
-  scrollbar-width: thin;
   margin: 0;
   padding: 0;
 }
+
 
 /**
 * NAVIGATION BAR
@@ -1103,258 +1103,30 @@ border-radius: 4px;
 }
 
 
-/* Default hidden state */
-.template-container {
-  position: fixed;
-  height: auto;
-  padding: 2rem 1rem;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-  z-index: 9999;
-}
-
-.bg-wrapper{
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  border-radius: 2rem;
-  width: 36rem;
-  margin: 2rem;
-  gap: 0.1rem;
-  background-color:  #282631;;
-}
-
-
-
-
-
-
-
-
-
-/* When active (modal visible) */
-.template-container.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Inner content box */
-.inner-container {
-  width: 44rem;
-  max-width: 70%;
-  border-radius: 1rem;
-  height: auto;
-  max-height: 90%;
-  background: #4f32c5;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  position: relative;
-  overflow-y: auto;
-}
-
-/* Close button */
-
-/* Left notice */
-
-input[readonly] {
-  pointer-events: none;
-  background-color: #171325;
-}
-
-
-/* Heading */
-.cont-h2 {
-  width: 24rem;
-  height: 14rem;
-  background: #282631;
-  display: flex;
-  padding: 1rem;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: rgb(255, 255, 255);
-  flex-direction: column;
-  margin-top: 2rem;
-  
-}
-.cont-h2 p {
-  font-size: 1.3rem;
-  color: rgb(255, 255, 255);
-  margin-top: 0.1rem;
-  
-}
-.inner-container h3{
-  font-size: 1.2rem;
-  color:  rgb(252, 253, 255);
-  margin-bottom: 0rem;
-}
-.in-note{
-  display: flex;
-  width: 26rem;
-  height: 12rem;
-  align-items: center;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  background: none;
-  justify-content: center;
-  margin-top: 1.4rem;
-  gap: 5px;
-  border: 1px solid rgb(93, 93, 104);
-  border-radius: 1rem;
-  word-spacing: 2px;
-  padding: 4px;
-  color: rgb(255, 255, 255);
-
-}
-.in-note h3{
-  font-size: 1.6rem;
-  font-weight: bold;
-}
-
-.in-note h4{
-  width: 20px;
-  height: 20px;
-  margin-bottom: 8px;
-  border-radius: 50px;
-  color: rgb(235, 231, 17);
-  font-size: 2rem;
-}
-.in-note p{
-  color: rgb(235, 231, 17);
-  font-size: 1.4rem;
-}
-
-
-.cont-h2 img {
-  width: 5rem;
-  height: 5rem;
-  margin-top: 0.5rem;
- 
-}
-
-.cont-h2 h2 {
-  font-size: 2rem;
-
-}
-
-/* Label container */
-.label-container {
-  width: 26rem;
-  height: 48%;
-  overflow-y: auto;
-  background: #292631;
-  display: flex;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  flex-direction: column;
-  border-radius: 1.4rem;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgb(93, 93, 104);
-  
-}
-input[readonly] {
-  pointer-events: none;
-  width: 18rem;
-  background-color: #15151d;
-  font-size: 2.3rem;
-  border: 1px solid  rgb(93, 93, 104);
-  align-items: center;
-  color: white; /* Ensures no red underline */
-
-}
-
-.enter-number {
-  display: flex;
-  padding-top: 1rem;
-  margin-top: 2rem;
-  border: 1px solid  rgb(93, 93, 104);
-  flex-direction: column;
-  align-items: center;
-  width: 26rem;
-  border-radius: 1rem;
-  font-size: 2.3rem;
-}
-
-.enter-number input {
-  font-size: 2rem;
-  color: white;
-  width: 20rem;
-  border: 1px solid  rgb(93, 93, 104);
-  background-color:  #292631;
-}
-
-
-
-.enter-number input::placeholder{
-  color: white;
-  font-size: 2rem;
-  background-color:  transparent;
-  align-items: center;
-}
-
-
-/* Submit button */
-.btn-submit {
-  display: flex;
-  width: 13rem;
-  height: 5rem;
-  background-color: rgb(29, 201, 207);
-  border-radius: 0.5rem;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  font-family: Arial;
-  font-size: 2rem;
-  color: rgb(255, 255, 255);
-  border: none;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-
-}
-
-
-
 /* ✅ Beautiful Snackbar Styles */
 #snackbar {
-  visibility: hidden;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 280px;
-  background: #333;
-  color: #fff;
-  text-align: center;
-  border-radius: 10px;
-  padding: 14px 18px;
-  position: relative;
-  left: 50%;
-  top: 10%;
-  transform: translateX(-50%);
-  font-size: 16px;
-  opacity: 0;
-  z-index: 999999;
-  transition: opacity 0.5s, bottom 0.5s;
+ visibility: hidden;
+ min-width: 250px;
+ background: #323232;
+ color: #fff;
+ text-align: center;
+ border-radius: 4px;
+ padding: 14px;
+ position: fixed;
+ top: 80px;
+ left: 50%;
+ transform: translateX(-50%);
+ z-index: 10000;
+ font-weight: 500;
+ box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+ opacity: 0;
+ transition: opacity .5s, top .5s
 }
 
 #snackbar.show {
   visibility: visible;
   opacity: 1;
+  top: 100px,
 }
 
 /* 🎨 Snack colors */
@@ -1363,28 +1135,28 @@ input[readonly] {
 .snack-warning { background: #ffc107; color: #000; }
 .snack-info { background: #17a2b8; }
 
-/* ✅ Paystack popup centering fix */
+
+
+/* Fix Paystack modal misalignment */
+.paystack-checkout-modal,
 iframe[src*="paystack"] {
   position: fixed !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
-  z-index: 999999 !important;
-  width: 100% !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
   height: 100vh !important;
+  z-index: 999999 !important;
+  display: block !important;
+  transform: none !important;
+  margin: 0 !important;
+  padding:0!important;
 }
 
-/* ✅ Mobile fullscreen */
-@media (max-width: 600px) {
-  iframe[src*="paystack"] {
-    width: 100% !important;
-    height: 100vh !important;
-    top: 0 !important;
-    left: 0 !important;
-    transform: none !important;
-}
-}
 
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(10px);}
+  to {opacity: 1; transform: translateY(0);}
+}
 
 
 
@@ -1404,15 +1176,7 @@ iframe[src*="paystack"] {
   }
 }
 
-@media (max-width: 600px) {
-  iframe[src*="paystack"] {
-    width: 100% !important;
-    height: 100vh !important;
-    top: 0 !important;
-    left: 0 !important;
-    transform: none !important;
-}
-}
+
 
 @media (max-width: 480px) {
   .inner-container {
