@@ -87,7 +87,7 @@ function createPhoneModal(callback) {
   document.getElementById("confirmBtn").addEventListener("click", () => {
     const recipient = document.getElementById("recipientInput").value.trim();
     if (!recipient) {
-      alert("Please enter your phone number");
+      showSnackBar(" Please enter your phone number");
       return;
     }
     modal.style.display = "none";
@@ -111,7 +111,7 @@ function payWithPaystack(network, recipient, packageName, size, price) {
       orderBundle(network, recipient, packageName, size, response.reference);
     },
     onClose: function() {
-      alert(" Payment cancelled.");
+      showSnackBar(" Payment cancelled.");
     }
   });
   handler.openIframe();
@@ -132,14 +132,14 @@ async function orderBundle(network, recipient, packageName, size, reference) {
 
     const result = await response.json();
     if (result.success) {
-      alert("✅ Data bundle purchased successfully!");
+      showSnackBar("✅ Data bundle purchased successfully!");
       console.log("📦 Order details:", result.order || result.swift);
     } else {
-      alert(`Failed to purchase data: ${result.message || "Unknown error"}`);
+      showSnackBar(`Failed to purchase data: ${result.message || "Unknown error"}`);
     }
   } catch (err) {
     console.error("⚠ Server error:", err);
-    alert("⚠ Server error. Please try again later.");
+    showSnackBar("⚠ Server error. Please try again later.");
   }
 }
 
@@ -161,3 +161,39 @@ async function loadStatus() {
 loadStatus();
 setInterval(loadStatus,3000);
 
+
+
+// SNACKBAR SECTION //
+// ===== SNACKBAR FUNCTION ===== //
+function showSnackBar(message, type = "info") {
+  // Remove existing snackbar if visible
+  const existing = document.querySelector(".snackbar");
+  if (existing) existing.remove();
+
+  // Create snackbar element
+  const snackbar = document.createElement("div");
+  snackbar.className = "snackbar";
+
+  // Color scheme based on type
+  if (type === "success") snackbar.style.background = "#28a745";   // green
+  else if (type === "error") snackbar.style.background = "#dc3545"; // red
+  else if (type === "warning") snackbar.style.background = "#ffc107"; // yellow
+  else snackbar.style.background = "#fff"; // default dark
+
+  snackbar.textContent = message;
+
+  // Add snackbar to the body
+  document.body.appendChild(snackbar);
+
+  // Force reflow (to trigger CSS animation)
+  void snackbar.offsetWidth;
+
+  // Show snackbar
+  snackbar.classList.add("show");
+
+  // Hide snackbar after 3 seconds
+  setTimeout(() => {
+    snackbar.classList.remove("show");
+    setTimeout(() => snackbar.remove(), 500);
+},4000);
+}
