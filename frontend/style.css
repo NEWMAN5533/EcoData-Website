@@ -1049,12 +1049,12 @@ MENU-CARD SECTION
 ****/
 .menu-card-container {
   width: 100%;
-  max-width: 8rem;
-  height: 14rem;
+  max-width: 10rem;
+  height: 16rem;
   position: fixed;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
   right: -200px;
   top: 4rem;
@@ -1084,7 +1084,7 @@ MENU-CARD SECTION
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: .8rem;
+  gap: 1.4rem;
   width: 7.4rem;
   height: 100%;
   background: transparent;
@@ -1098,8 +1098,9 @@ CARD TOP
   height: 10rem;
   display: flex;
   flex-direction: column;
-  gap: .5rem;
+  gap: 1rem;
   top: .1rem;
+  margin: .4rem 0;
   justify-content: center;
   align-items: flex-start;
   position: relative;
@@ -1159,7 +1160,8 @@ CARD BOTTOM
   display: flex;
   box-shadow: 0 2px 6px rgba(207, 99, 80, 0.479);
   transition: 1s ease;
-  margin-bottom: .4rem;
+  margin: .3rem 0;
+  cursor: pointer;
 }
 
 .logout-btn:hover{
