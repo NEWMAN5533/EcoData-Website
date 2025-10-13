@@ -178,7 +178,7 @@ function showSnackBar(message, type = "info") {
   if (type === "success") snackbar.style.background = "#28a745";   // green
   else if (type === "error") snackbar.style.background = "#dc3545"; // red
   else if (type === "warning") snackbar.style.background = "#ffc107"; // yellow
-  else snackbar.style.background = "#fff"; // default dark
+  else snackbar.style.background = "#20bd5a"; // default dark
 
   snackbar.textContent = message;
 
@@ -195,5 +195,5 @@ function showSnackBar(message, type = "info") {
   setTimeout(() => {
     snackbar.classList.remove("show");
     setTimeout(() => snackbar.remove(), 500);
-},4000);
+},3000);
 }

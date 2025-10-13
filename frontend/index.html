@@ -74,7 +74,7 @@
   <div class="login">
    <a href="login.html"> <img src="./css/icons/icons8-user-46.png" alt="">  Login</a>
   </div>
-<img id="sidebarToggler" src="./css/icons/icons8-fries-menu-46.png" alt="image" class="menu-icon" loading="lazy">
+<img id="cardToggler" src="./css/icons/icons8-fries-menu-46.png" alt="image" class="menu-icon" loading="lazy">
 </div>
 </nav>
 
@@ -840,6 +840,54 @@
   <script src="./main.js"></script>
 
 
+<!------MENU-CARD----->
+<div class="menu-card-container" id="closeCard">
+ 
+  <div class="menu-card">
+    <div class="menu-card-top">
+          <!----ICONS-SECTION-->
+    <div class="shortcut-links">
+      <div class="link home">
+        <a href="index.html">
+        <img src="./css/icons/home.png" alt="image" loading="lazy">
+        <span>Home</span>
+        </a>
+      </div>
+
+      <div class="link">
+        <a href="dashboard.html">
+        <img src="./css/icons/dashboard.png" alt="image" loading="lazy">
+        <span>Dashboard</span>
+        </a>
+      </div>
+
+       <div class="link">
+       <a href="mtn-page.html">
+        <img src="./css/icons/mtn-signal.png" alt="image" loading="lazy">
+        <span>MTN</span>
+       </a>
+      </div>
+
+       <div class="link">
+       <a href="telecel-page.html">
+        <img src="./css/icons/telecel-signal.png" alt="image" loading="lazy">
+        <span>Telecel</span>
+       </a>
+      </div>
+
+       <div class="link">
+       <a href="aiteltigo-page.html">
+        <img src="./css/icons/tigo-signal.png" alt="image" loading="lazy">
+        <span>Airteltigo</span>
+       </a>
+      </div>
+    </div>
+    </div>
+    <div class="menu-card-bottom">
+        <button  id="logout-btn" class="logout-btn">Logout</button>
+    </div>
+  </div>
+</div>
 
   <!-- ✅ WhatsApp Floating Chat -->
 <div id="whatsappChat">
@@ -905,6 +953,38 @@ updateClock();
 
 
 
+</script>
+
+<!---MENU-CARD-JS-->
+<script>
+  const cardToggler = document.getElementById("cardToggler");
+  const cardCloser = document.getElementById("closeCard");
+
+  // querySelectors //
+  const card = document.querySelector(".menu-card-container");
+
+  // function //
+cardToggler.addEventListener("click", function(e){
+  if (card.style.right != "-200px"){
+    card.style.right = "14px";
+  } else card.style.right = "-200px";
+});
+
+cardCloser.addEventListener("click", function(e) {
+  if (card.style.right == "14px") {
+    card.style.right = "-200px";
+  } else {
+    card.style.right = "14px";
+  }
+});
+
+window.addEventListener("click", function(e) {
+  if(e.target != cardCloser && card.style.right == "14px") {
+    card.style.right = "-200px";
+  } else {
+    card.style.right = "14px";
+  }
+})
 </script>
 
 </body>

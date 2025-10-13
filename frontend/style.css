@@ -1010,7 +1010,6 @@ label, select, input {
   text-align: center;
   display: flex;
   gap: 1rem;
-  color: rgb(12, 10, 10);
   margin-top: 10px;
   width: 45%;
   padding: 8px;
@@ -1037,18 +1036,136 @@ border-radius: 4px;
 
 }
 
-
-
 .momo-number {
   color: rgb(15, 129, 59);
 }
-
 
 #status {
   color: green;
   font-weight:bold;
 }
+/****
+MENU-CARD SECTION
+****/
+.menu-card-container {
+  width: 100%;
+  max-width: 8rem;
+  height: 14rem;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  right: -200px;
+  top: 4rem;
+  background: black;;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: .2rem;
+  transition: .5s ease-in-out;
+}
+.close-card{
+  display: flex;
+  width: 100%;
+  height: max-content;
+  padding: .2rem;
+  align-items: end;
+  justify-content: end;
+}
 
+.close-card img{
+  width: 20px;
+  height: 20px;
+  margin: .1rem .5rem;
+  cursor: pointer;
+}
+
+.menu-card{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: .8rem;
+  width: 7.4rem;
+  height: 100%;
+  background: transparent;
+}
+
+/***
+CARD TOP
+***/
+.shortcut-links {
+  width: 100%;
+  height: 10rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  top: .1rem;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  background-color: transparent;
+}
+
+.link{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0 .5rem;
+  text-align: center;
+  width: 90%;
+  padding: .1rem .1rem;
+  transition: .2s ease;
+}
+
+.link img{
+  width: 1.2rem;
+  height: 1.2rem;
+  background-color: rgb(233, 227, 233);
+  padding: .14rem;
+  border-radius: .4rem;
+}
+
+.link a{
+  display: flex;
+  align-items: center;
+  text-align: center;
+  gap: .5rem;
+  color: rgb(165, 159, 159);
+}
+
+
+
+.link:hover{
+  background: var(--bg-cl);
+  box-shadow: 1px 1px 3px rgba(65, 63, 63, 0.9), -1px -1px 3px rgba(80, 78, 78, 0.9);
+  border-radius: .5rem;
+}
+
+
+/***
+CARD BOTTOM
+****/
+.logout-btn{
+  display: flex;
+  border: 0.2px solid var(--telecel-btn);
+  width: 7rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  background: var(--telecel-btn);
+  color: var(--bg-cl);
+  height: 1.8rem;
+  position: relative;
+  display: flex;
+  box-shadow: 0 2px 6px rgba(207, 99, 80, 0.479);
+  transition: 1s ease;
+  margin-bottom: .4rem;
+}
+
+.logout-btn:hover{
+  background: rgb(231, 19, 19);
+  box-shadow: 0 2px 6px rgba(207, 99, 80, 0.479);
+}
 /***
 SNACKBAR SECTION
 ****/
@@ -1057,21 +1174,21 @@ SNACKBAR SECTION
   top: 1rem;
   right: 50%;
   width: 100%;
-  height: 2rem;
-  max-width: 300px;
+  height: 3rem;
+  max-width: 340px;
   transform: translateX(50%);
-  background-color: var(--bg-cl);
-  color: rgb(15, 151, 49);
+  background-color:  #25D366;
+  color: rgb(8, 56, 20);
   text-align: center;
   display: flex;
   align-items: center;
   word-spacing: 1.7;
   justify-content: center;
-  font-size: 1.1rem;
+  font-size: 1.35rem;
   padding: 12px 20px;
   border-radius: 4px;
   font-weight: 500;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(98, 126, 118, 0.849), 0 -2px 6px  rgba(98, 126, 121, 0.849) ;
   z-index: 2000000; /* above input popup */
   opacity: 0;
   pointer-events: none;
@@ -1083,7 +1200,7 @@ SNACKBAR SECTION
   transform: translateX(50%) translateY(10px);
   pointer-events:all;
   width: 100%;
-  max-width: 300px;
+  max-width: 340px;
   background: var(--bg-cl);
 }
 
@@ -1108,7 +1225,7 @@ SNACKBAR SECTION
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
 }
 
