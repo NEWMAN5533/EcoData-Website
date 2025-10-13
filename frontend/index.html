@@ -970,21 +970,13 @@ cardToggler.addEventListener("click", function(e){
   } else card.style.right = "-200px";
 });
 
-cardCloser.addEventListener("click", function(e) {
-  if (card.style.right == "14px") {
+window.addEventListener("click", function(e){
+  if (e.target !== cardToggler && e.target !== card && !card.contains(e.target)){
     card.style.right = "-200px";
-  } else {
-    card.style.right = "14px";
   }
 });
 
-window.addEventListener("click", function(e) {
-  if(e.target != cardCloser && card.style.right == "14px") {
-    card.style.right = "-200px";
-  } else {
-    card.style.right = "14px";
-  }
-})
+
 </script>
 
 </body>
