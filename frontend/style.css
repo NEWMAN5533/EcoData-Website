@@ -85,13 +85,14 @@ body {
 **/
 .nav-right{
   display: flex;
-  width: 6rem;
+  width: 8rem;
   height: 100%;
   align-items: center;
-  justify-content: center;
+  justify-content: end;
   background: transparent;
   border-radius: 4px;
-  margin-right: 0.5rem;
+  margin-right: -.6rem;;
+  
   padding: 0 .2rem;
 }
 
@@ -133,7 +134,6 @@ body {
   background: rgba(219, 214, 214, 0.37);
   border-radius: 4px;
   padding: .3px;
-  margin-right: 1rem;
 }
 
 

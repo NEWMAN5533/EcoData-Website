@@ -71,9 +71,7 @@
  <h2>EcoData</h2>
 </div>
 <div class="nav-right">
-  <div class="login">
-   <a href="login.html"> <img src="./css/icons/icons8-user-46.png" alt="">  Login</a>
-  </div>
+ 
 <img id="cardToggler" src="./css/icons/icons8-fries-menu-46.png" alt="image" class="menu-icon" loading="lazy">
 </div>
 </nav>
@@ -87,6 +85,7 @@
 <div class="welcome-card">
   <div class="welcome-top">
     <div class="welcome-top-left">
+      <p id="usernameDisplay"></p>
       <div class="user-info">
         <span id="usernameDisplay"></span>
       </div>
@@ -885,7 +884,7 @@
     </div>
     </div>
     <div class="menu-card-bottom">
-        <button  id="logout-btn" class="logout-btn">Logout</button>
+      <a href="login.html">  <button  id="logout-btn" class="logout-btn">Login</button></a>
     </div>
   </div>
 </div>
@@ -902,6 +901,38 @@
     <button id="sendMsgBtn">Send</button>
   </div>
 </div>
+
+<!---usernameDisplay----->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    // TODO: replace these placeholder values with your Firebase project config
+  apiKey: "AIzaSyClNBlfigtQk8AZWdMZcU9sEtVcIrS0D1g",
+  authDomain: "ecodata-2bee6.firebaseapp.com",
+  projectId: "ecodata-2bee6",
+  storageBucket: "ecodata-2bee6.firebasestorage.app",
+  messagingSenderId: "544837123249",
+  appId: "1:544837123249:web:6c362350a00c6dab10b690"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  onAuthStateChanged(auth, async (user) => {
+    const usernameDisplay = document.getElementById("usernameDisplay");
+
+    if (user) {
+      const userSnap = await getDoc(doc(db, "users", user.uid));
+      usernameDisplay.textContent = `Welcome, ${userSnap.data().username}!`;
+    } else {
+      usernameDisplay.textContent = "Welcome, Guest!";
+    }
+});
+</script>
 <!-- End WhatsApp Floating Chat -->
 <script>
   // === CONFIG ===
