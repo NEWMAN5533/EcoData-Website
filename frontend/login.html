@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | EcoData</title>
+  <style>
+
+    *{
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      text-decoration: none;
+    }
+
+    
+
+:root {
+  --bg-cl: #FFF;
+  --primary-cl: #fff;
+  --secondary-cl: rgb(50, 50, 190);
+  --dark-cl: #0a0a0a;
+  --ascent-cl: rgb(158, 97, 209);
+  --background-cl: #e6e8ce;
+  --card-full-bg-cl: rgb(255, 217, 0);
+  --card-full-tele-bg-cl: rgb(221, 19, 19);
+  --card-full-airtel-bg-cl:  rgb(6, 6, 231);
+  --border-cl-2: rgba(66, 66, 26, 0.226);
+  --mtn-btn: rgb(193, 196, 19);
+  --telecel-btn: rgb(180, 57, 19);
+  --airteltigo-btn: rgb(28, 46, 119);
+}
+
+
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--bg-cl);
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    /**
+* NAVIGATION BAR
+**/
+.navbar {
+  display: flex;
+  width: 100%;
+  max-width: 480px;
+  justify-self: center;
+  height: 3.8rem;
+  position: fixed;
+  top: 0;
+  overflow: hidden;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-cl);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: .5rem 1.2rem;
+  z-index: 1000;
+}
+
+/**
+* NAV LEFT
+**/
+.navbar .nav-left{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-left h2{
+  font-size: 1.4;
+  font-family: Arial sans-serif;
+  color: white;
+  padding: .2rem;
+  border-radius: .2rem;
+  cursor: pointer;
+  background-color: var(--dark-cl);
+}
+
+/**
+* NAV-RIGHT
+**/
+.nav-right{
+  display: flex;
+  width: 6rem;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border-radius: 4px;
+  margin-right: 0.5rem;
+  padding: 0 .2rem;
+}
+
+.nav-right img{
+  width: 2.2rem;
+  height: 2.2rem;
+  cursor: pointer;
+}
+
+.login {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  justify-content: space-between;
+}
+
+.login a{
+  text-align: center;
+  text-decoration: none;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 .8rem;
+  color: var(--card-full-bg-cl);
+}
+
+
+.login img {
+  width: 1.4rem;
+  height: 1.4rem;
+  margin: 0 .5rem;
+  background: var(--background-cl);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.menu-icon{
+  background: rgba(219, 214, 214, 0.37);
+  border-radius: 4px;
+  padding: .3px;
+  margin-right: 1rem;
+}
+
+
+.eye-icon{
+  position: absolute;
+  right: 50px;
+  top: 55%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  user-select: none;
+  font-size: 18px;
+  color: #777;
+}
+
+
+
+
+    .container {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(88, 87, 87, 0.3);
+      width: 100%;
+      height: 25rem;
+      gap: 2rem;
+      max-width: 480px;
+      margin: 150px auto;
+      display: flex;
+      position: relative;
+      justify-self: center;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      max-width: 400px;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 30px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #2196f3;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-size: 16px;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #1976d2;
+    }
+    p {
+      text-align: center;
+      margin-top: 1rem;
+    }
+    a {
+      color: #2196f3;
+      text-decoration: none;
+    }
+
+    /**
+    * SNACKBAR
+    **/
+    /***
+SNACKBAR SECTION
+****/
+.snackbar {
+  position: fixed;
+  top: 1rem;
+  right: 50%;
+  width: 100%;
+  height: 3rem;
+  max-width: 420px;
+  transform: translateX(50%);
+  background-color:  #beddca;
+  color: rgb(41, 44, 42);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  word-spacing: 2.7;
+  justify-content: center;
+  font-size: 1.2rem;
+  padding: 12px 20px;
+  border-radius: 4px;
+  font-weight: 500;
+  font-family: 'Times New Roman', Times, serif;
+  box-shadow: 0 2px 6px rgba(98, 126, 118, 0.849), 0 -2px 6px  rgba(98, 126, 121, 0.849) ;
+  z-index: 2000000; /* above input popup */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.5s ease, transform 0.3s ease;
+}
+
+.snackbar.show {
+  opacity: 1;
+  transform: translateX(50%) translateY(10px);
+  pointer-events:all;
+  width: 100%;
+  max-width: 420px;
+  background: var(--bg-cl);
+}
+
+
+  </style>
+</head>
+<body>
+
+  <!-----NAVIGATION- BAR-->
+  
+<nav class="navbar">
+<div class="nav-left">
+ <h2>EcoData</h2>
+</div>
+
+</nav>
+
+  <div class="container">
+    <h2>Welcome Back</h2>
+    <form id="login-form">
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <span id="togglePassword" class="eye-icon">👁</span>
+      <button type="submit">Login</button>
+    </form>
+    <p>Don’t have an account? <a href="signup.html">Sign Up</a></p>
+  </div>
+
+  <!-- Firebase Core -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+  apiKey: "AIzaSyClNBlfigtQk8AZWdMZcU9sEtVcIrS0D1g",
+  authDomain: "ecodata-2bee6.firebaseapp.com",
+  projectId: "ecodata-2bee6",
+  storageBucket: "ecodata-2bee6.firebasestorage.app",
+  messagingSenderId: "544837123249",
+  appId: "1:544837123249:web:6c362350a00c6dab10b690"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const loginForm = document.getElementById("login-form");
+    loginForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+        if (userDoc.exists()) {
+          const username = userDoc.data().username;
+          localStorage.setItem("username", username);
+        }
+
+        alert("Login successful!");
+        window.location.href = "index.html";
+      } catch (error) {
+        alert(error.message);
+      }
+    });
+  </script>
+  <!----SNACKBAR-SECTION--->
+  <script>
+// SNACKBAR SECTION //
+// ===== SNACKBAR FUNCTION ===== //
+function showSnackBar(message, type = "info") {
+  // Remove existing snackbar if visible
+  const existing = document.querySelector(".snackbar");
+  if (existing) existing.remove();
+
+  // Create snackbar element
+  const snackbar = document.createElement("div");
+  snackbar.className = "snackbar";
+
+  // Color scheme based on type
+  if (type === "success") snackbar.style.background = "#28a745";   // green
+  else if (type === "error") snackbar.style.background = "#dc3545"; // red
+  else if (type === "warning") snackbar.style.background = "#ffc107"; // yellow
+  else snackbar.style.background = "#aaf1c6ff"; // default dark
+
+  snackbar.textContent = message;
+
+  // Add snackbar to the body
+  document.body.appendChild(snackbar);
+
+  // Force reflow (to trigger CSS animation)
+  void snackbar.offsetWidth;
+
+  // Show snackbar
+  snackbar.classList.add("show");
+
+  // Hide snackbar after 3 seconds
+  setTimeout(() => {
+    snackbar.classList.remove("show");
+    setTimeout(() => snackbar.remove(), 500);
+},3000);
+}
+  </script>
+
+
+    <!----TOGGLE EYE ICON--JS---->
+  <script>
+    const togglePassword = document.getElementById("togglePassword");
+const passwordField = document.getElementById("password");
+
+togglePassword.addEventListener("click", () => {
+  const type = passwordField.type === "password" ? "text" : "password";
+  passwordField.type = type;
+  togglePassword.textContent = type === "password" ? "👁":"🙈";
+});
+  </script>
+
+
+  <div id="snackbar"></div>
+</body>
+</html>
