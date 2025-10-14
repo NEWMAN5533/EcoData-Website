@@ -277,7 +277,7 @@ SNACKBAR SECTION
   <!-- Firebase Core -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
     import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
     const firebaseConfig = {
@@ -292,6 +292,18 @@ SNACKBAR SECTION
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
+
+onAuthStateChanged(auth, (user) => {
+  const usernameDisplay = document.getElementById("usernameDisplay");
+  if (!usernameDisplay) return;
+
+  if (user) {
+    const displayName = user.displayName || "User";
+    usernameDisplay.textContent = `Welcome, ${displayName}!`;
+  } else {
+    usernameDisplay.textContent = "Welcome, Guest!";
+  }
+});
 
     const loginForm = document.getElementById("login-form");
     loginForm.addEventListener("submit", async (e) => {
@@ -350,7 +362,7 @@ function showSnackBar(message, type = "info") {
   setTimeout(() => {
     snackbar.classList.remove("show");
     setTimeout(() => snackbar.remove(), 500);
-},3000);
+},2000);
 }
   </script>
 
