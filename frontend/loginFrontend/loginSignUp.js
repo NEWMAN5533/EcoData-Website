@@ -31,19 +31,19 @@
     const password = document.getElementById("signup-password").value;
 
     if (!email || !password) {
-      alert(" Please fill all fields!", "info");
+      showSnackbar(" Please fill all fields!", "info");
       return;
     }
 
     createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
-        alert("Account created successfully!", "success");
+        showSnackbar("Account created successfully!", "success");
       })
       // Redirect after a short delay
   
 
       .catch((error) => {
-        alert( error.message, "error");
+        showSnackbar( error.message, "error");
       });
   });
 
@@ -58,7 +58,7 @@ createAccountBtn.addEventListener("click", async (e) => {
   const password = document.getElementById("signup-password").value.trim();
 
   if (!name || !email || !password) {
-    alert("Please fill in all fields", "error");
+    showSnackbar("Please fill in all fields", "error");
     return;
   }
 
@@ -70,7 +70,7 @@ createAccountBtn.addEventListener("click", async (e) => {
     // ✅ Update display name
     await user.updateProfile({ displayName: name });
 
-    alert("Account created for", `${user.displayName}!`, "success");
+    showSnackBar("Account created for", `${user.displayName}!`, "success");
 
     // Redirect after short delay
     setTimeout(() => {
@@ -79,7 +79,7 @@ createAccountBtn.addEventListener("click", async (e) => {
 
   } catch (error) {
     console.error(" Signup Error:", error.message);
-    alert(error.message, "error");
+    showSnackBar(error.message, "error");
 }
 });
 
@@ -92,22 +92,46 @@ createAccountBtn.addEventListener("click", async (e) => {
   logoutBtn.addEventListener("click", () => {
     signOut(auth)
       .then(() => {
-        alert(" Logged out successfully!", "success");
+        showSnackbar(" Logged out successfully!", "success");
       })
       .catch((error) => {
-        alert(error.message, "error");
+        showSnackbar(error.message, "error");
       });
 });
 
 
 
-// SNACKBAR //
-function showSnackbar(message, type = "info") {
-  const snackbar = document.getElementById("snackbar");
-  snackbar.className = show `snack-${type}`;
+// SNACKBAR SECTION //
+// ===== SNACKBAR FUNCTION ===== //
+function showSnackBar(message, type = "info") {
+  // Remove existing snackbar if visible
+  const existing = document.querySelector(".snackbar");
+  if (existing) existing.remove();
+
+  // Create snackbar element
+  const snackbar = document.createElement("div");
+  snackbar.className = "snackbar";
+
+  // Color scheme based on type
+  if (type === "success") snackbar.style.background = "#28a745";   // green
+  else if (type === "error") snackbar.style.background = "#dc3545"; // red
+  else if (type === "warning") snackbar.style.background = "#ffc107"; // yellow
+  else snackbar.style.background = "#aaf1c6ff"; // default dark
+
   snackbar.textContent = message;
 
+  // Add snackbar to the body
+  document.body.appendChild(snackbar);
+
+  // Force reflow (to trigger CSS animation)
+  void snackbar.offsetWidth;
+
+  // Show snackbar
+  snackbar.classList.add("show");
+
+  // Hide snackbar after 3 seconds
   setTimeout(() => {
-    snackbar.className = snackbar.className.replace("show", "");
-},4000);
+    snackbar.classList.remove("show");
+    setTimeout(() => snackbar.remove(), 500);
+},3000);
 }
