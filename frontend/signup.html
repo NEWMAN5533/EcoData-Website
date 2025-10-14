@@ -313,10 +313,10 @@ SNACKBAR SECTION
           createdAt: serverTimestamp(),
         });
 
-        alert("Signup successful!");
+        showSnackBar("Signup successful!");
         window.location.href = "index.html";
       } catch (error) {
-        alert(error.message);
+        showSnackBar(error.message);
       }
     });
   </script>

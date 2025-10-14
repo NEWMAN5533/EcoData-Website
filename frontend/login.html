@@ -309,10 +309,10 @@ SNACKBAR SECTION
           localStorage.setItem("username", username);
         }
 
-        alert("Login successful!");
+        showSnackBar("Login successful!");
         window.location.href = "index.html";
       } catch (error) {
-        alert(error.message);
+        showSnackBar(error.message);
       }
     });
   </script>
