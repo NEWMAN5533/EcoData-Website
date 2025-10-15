@@ -103,18 +103,10 @@ function createPhoneModal(callback) {
 
 // === PAYSTACK PAYMENT ===
 async function payWithPaystack(network, recipient, packageName, size, price) {
-  const user = auth.currentUser; 
-  let userEmail =  "customer@gmail.com";
-
-  if(user){
-    const docRef = doc(db, "users", user.uid);
-    const docSnap = await getDoc(docRef);
-    if(docSnap.exists()) userEmail = docSnap.data().email;
-  }
 
   let handler = PaystackPop.setup({
     key: "pk_live_635856447ee14b583349141b7271f64c9b969749",
-    email: UserEmail,
+    email: "customer@gmail.com",
     amount: price * 100,
     currency: "GHS",
     callback: function(response) {
