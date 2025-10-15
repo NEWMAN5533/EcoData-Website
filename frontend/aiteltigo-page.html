@@ -69,7 +69,7 @@
 <a href="index.html"><h2>EcoData</h2></a>
 </div>
 <div class="nav-right">
-<img id="sidebarToggler" src="./css/icons/icons8-fries-menu-46.png" alt="image" class="menu-icon" loading="lazy">
+<img id="cardToggler" src="./css/icons/icons8-fries-menu-46.png" alt="image" class="menu-icon" loading="lazy">
 </div>
 </nav>
 <!-------MAIN SECTION-->
@@ -310,12 +310,82 @@
 
 
 
+<!------MENU-CARD----->
+<div class="menu-card-container" id="closeCard">
+ 
+  <div class="menu-card">
+    <div class="menu-card-top">
+          <!----ICONS-SECTION-->
+    <div class="shortcut-links">
+
+      <div class="link">
+        <a href="dashboard.html">
+        <img src="./css/icons/dashboard.png" alt="image" loading="lazy">
+        <span>Dashboard</span>
+        </a>
+      </div>
+
+       <div class="link">
+       <a href="mtn-page.html">
+        <img src="./css/icons/mtn-signal.png" alt="image" loading="lazy">
+        <span>MTN</span>
+       </a>
+      </div>
+
+       <div class="link">
+       <a href="telecel-page.html">
+        <img src="./css/icons/telecel-signal.png" alt="image" loading="lazy">
+        <span>Telecel</span>
+       </a>
+      </div>
+
+       <div class="link">
+       <a href="aiteltigo-page.html">
+        <img src="./css/icons/tigo-signal.png" alt="image" loading="lazy">
+        <span>Airteltigo</span>
+       </a>
+      </div>
+
+       <div class="link">
+       <a href="aiteltigo-page.html">
+        <img src="./css/icons/list.jpg" alt="image" loading="lazy">
+        <span>Bundles info</span>
+       </a>
+      </div>
+    </div>
+    </div>
+    <div class="menu-card-bottom">
+      <a href="login.html">  <button  id="logout-btn" class="logout-btn">Login</button></a>
+    </div>
+  </div>
+</div>
 
 
 
 
+<!---MENU-CARD-JS-->
+<script>
+  const cardToggler = document.getElementById("cardToggler");
+  const cardCloser = document.getElementById("closeCard");
+
+  // querySelectors //
+  const card = document.querySelector(".menu-card-container");
+
+  // function //
+cardToggler.addEventListener("click", function(e){
+  if (card.style.right != "-200px"){
+    card.style.right = "14px";
+  } else card.style.right = "-200px";
+});
+
+window.addEventListener("click", function(e){
+  if (e.target !== cardToggler && e.target !== card && !card.contains(e.target)){
+    card.style.right = "-200px";
+  }
+});
 
 
+</script>
 
 </body>
 </html>

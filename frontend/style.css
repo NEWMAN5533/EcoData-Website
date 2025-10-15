@@ -1109,13 +1109,13 @@ CARD TOP
 
 .link{
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
-  margin: 0 .5rem;
   text-align: center;
-  width: 90%;
+  width: 100%;
   padding: .1rem .1rem;
   transition: .2s ease;
+  margin-left: -1rem;
 }
 
 .link img{
@@ -1129,7 +1129,9 @@ CARD TOP
 .link a{
   display: flex;
   align-items: center;
+  justify-content: center;
   text-align: center;
+  text-decoration: none;
   gap: .5rem;
   color: rgb(165, 159, 159);
 }
@@ -1149,19 +1151,19 @@ CARD BOTTOM
 .logout-btn{
   display: flex;
   border: 0.2px solid var(--telecel-btn);
-  width: 7rem;
+  width: 9rem;
   justify-content: center;
   align-items: center;
   border-radius: 1rem;
   background: var(--telecel-btn);
   color: var(--bg-cl);
-  height: 1.8rem;
+  height: 1.6rem;
   position: relative;
   display: flex;
   box-shadow: 0 2px 6px rgba(207, 99, 80, 0.479);
   transition: 1s ease;
-  margin: .3rem 0;
   cursor: pointer;
+  margin-bottom: -1rem;
 }
 
 .logout-btn:hover{
