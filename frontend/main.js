@@ -137,8 +137,10 @@ async function orderBundle(network, recipient, packageName, size, reference) {
     const result = await response.json();
     if (result.success) {
       showSnackBar("✅ Data bundle purchased successfully!");
-      console.log("📦 Order details:", result.order || result.swift);
-      handleNewOrder(returnedOrder);
+      const returnedOrder = result.order?.order || result.order || result;
+      console.log("📦 Order details:", 
+        returnedOrder);
+        handleNewOrder(returnedOrder);
     } else {
       showSnackBar(`Failed to purchase data: ${result.message || "Unknown error"}`);
     }
@@ -253,14 +255,20 @@ function startAutoPolling(orderIdOrRef) {
   // initial immediate check
   (async () => {
     const order = await checkOrderStatusOnce(orderIdOrRef);
-    if (order) {
-      createOrUpdateStatusCard(order);
-      // stop if already terminal
-      if (isTerminalStatus(order.status)) {
-        stopStatusPolling();
-        return;
-      }
-    }
+  if (order) {
+  createOrUpdateStatusCard(order); // ✅ Update main color-coded card too
+  const status = (order.status || "pending").toLowerCase();
+  const desc = getStatusTextMapping(status);
+  statusResult.innerHTML = `
+    <div style="padding:12px;border-radius:8px;background:#fff">
+      <p><strong>Order ID:</strong> ${order.orderId || order.reference}</p>
+      <p><strong>Recipient:</strong> ${order.recipient}</p>
+      <p><strong>Volume:</strong> ${order.volume} GB</p>
+      <p><strong>Status:</strong> <span class="status-badge ${getStatusClass(status)}">${status}</span></p>
+      <p style="color:#444;margin-top:6px">${desc}</p>
+</div>
+`;
+}
   })();
 
   // schedule repeated checks
