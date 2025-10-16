@@ -65,7 +65,8 @@
 <body>
 <nav class="navbar">
 <div class="nav-left">
-<a href="index.html"><h2>EcoData</h2></a>
+ <a href="index.html">
+  <img src="./css/icons/icon-shortcut.png" alt="image" loading="lazy"></a>
 </div>
 <div class="nav-right">
 <img id="cardToggler" src="./css/icons/icons8-fries-menu-46.png" alt="image" class="menu-icon" loading="lazy">
@@ -352,7 +353,7 @@
       </div>
 
        <div class="link">
-       <a href="aiteltigo-page.html">
+       <a href="bundlesInfo.html">
         <img src="./css/icons/list.jpg" alt="image" loading="lazy">
         <span>Bundles info</span>
        </a>
@@ -388,6 +389,50 @@ window.addEventListener("click", function(e){
 });
 
 
+</script>
+
+
+  <!-- ✅ WhatsApp Floating Chat -->
+<div id="whatsappChat">
+  <div id="chatButton">
+    💬
+  </div>
+
+  <div id="chatBox">
+    <h4>Chat with us on WhatsApp</h4>
+    <input type="text" id="whatsappMessage" placeholder="Type your message..." />
+    <button id="sendMsgBtn">Send</button>
+  </div>
+</div>
+
+<!-- End WhatsApp Floating Chat -->
+<script>
+  // === CONFIG ===
+  const whatsappNumber = "233535565637";
+
+  // === ELEMENTS ===
+  const chatButton = document.getElementById("chatButton");
+  const chatBox = document.getElementById("chatBox");
+  const sendBtn = document.getElementById("sendMsgBtn");
+
+  // === TOGGLE CHAT BOX ===
+  chatButton.addEventListener("click", () => {
+    chatBox.classList.toggle("show");
+  });
+
+  // === SEND MESSAGE ===
+  sendBtn.addEventListener("click", () => {
+    const message = document.getElementById("whatsappMessage").value.trim();
+    if (!message) {
+      alert("Please type your message before sending.");
+      return;
+    }
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappURL =` https://wa.me/${233535565637}?text=${encodedMessage}`;
+    window.open(whatsappURL, "_blank");
+    document.getElementById("whatsappMessage").value = ""; // clear after sending
+});
 </script>
 </body>
 </html>

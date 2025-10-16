@@ -70,14 +70,13 @@ body {
   justify-content: center;
 }
 
-.nav-left h2{
-  font-size: 1.4;
-  font-family: Arial sans-serif;
-  color: white;
-  padding: .2rem;
-  border-radius: .2rem;
+
+.nav-left img{
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
   cursor: pointer;
-  background-color: var(--dark-cl);
 }
 
 /**
@@ -1044,6 +1043,7 @@ border-radius: 4px;
   color: green;
   font-weight:bold;
 }
+
 /****
 MENU-CARD SECTION
 ****/
@@ -1054,12 +1054,12 @@ MENU-CARD SECTION
   position: fixed;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   flex-direction: column;
   right: -200px;
   top: 4rem;
-  background: black;;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background: var(--bg-cl);
+  box-shadow: 0 4px 8px rgba(58, 57, 57, 0.4);
   border-radius: .2rem;
   transition: .5s ease-in-out;
 }
@@ -1085,9 +1085,9 @@ MENU-CARD SECTION
   justify-content: center;
   flex-direction: column;
   gap: 1.4rem;
-  width: 7.4rem;
-  height: 100%;
-  background: transparent;
+  width: 100%;
+  height: 90%;
+  background: white;
 }
 
 /***
@@ -1112,7 +1112,7 @@ CARD TOP
   align-items: flex-start;
   justify-content: flex-start;
   text-align: center;
-  width: 100%;
+  width: 8.2rem;
   padding: .1rem .1rem;
   transition: .2s ease;
   margin-left: -1rem;

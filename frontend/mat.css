@@ -78,6 +78,15 @@ body {
   background-color: var(--dark-cl);
 }
 
+
+.nav-left img{
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+}
+
 /**
 * NAV-RIGHT
 **/
@@ -670,6 +679,8 @@ PACKAGES CARDS
 MENU ICON
 ***/
 /****
+
+/****
 MENU-CARD SECTION
 ****/
 .menu-card-container {
@@ -679,12 +690,12 @@ MENU-CARD SECTION
   position: fixed;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   flex-direction: column;
   right: -200px;
   top: 4rem;
-  background: black;;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background: var(--bg-cl);
+  box-shadow: 0 4px 8px rgba(58, 57, 57, 0.4);
   border-radius: .2rem;
   transition: .5s ease-in-out;
 }
@@ -710,9 +721,9 @@ MENU-CARD SECTION
   justify-content: center;
   flex-direction: column;
   gap: 1.4rem;
-  width: 7.4rem;
-  height: 100%;
-  background: transparent;
+  width: 100%;
+  height: 90%;
+  background: white;
 }
 
 /***
@@ -737,7 +748,7 @@ CARD TOP
   align-items: flex-start;
   justify-content: flex-start;
   text-align: center;
-  width: 100%;
+  width: 8rem;
   padding: .1rem .1rem;
   transition: .2s ease;
   margin-left: -1rem;
@@ -768,6 +779,7 @@ CARD TOP
   box-shadow: 1px 1px 3px rgba(65, 63, 63, 0.9), -1px -1px 3px rgba(80, 78, 78, 0.9);
   border-radius: .5rem;
 }
+
 
 
 /***
@@ -805,4 +817,92 @@ CARD BOTTOM
   justify-content: center;
   font-size: 1.3rem;
   color: rgb(36, 33, 33);
+}
+
+
+
+/* === WhatsApp Floating Button === */
+#whatsappChat {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 99999;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Floating button */
+#chatButton {
+  background-color: #25D366;
+  color: white;
+  font-size: 26px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+#chatButton:hover {
+  transform: scale(1.1);
+  background-color: #20bd5a;
+}
+
+/* Message box */
+#chatBox {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  bottom: 75px;
+  right: 0;
+  background: #fff;
+  width: 280px;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease;
+}
+
+#chatBox.show {
+  display: flex;
+}
+
+#chatBox h4 {
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+#chatBox input {
+  width: 100%;
+  padding: 8px;
+  color: #292727;
+  background-color: #dddae7;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+#chatBox button {
+  background-color: #25D366;
+  color: white;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+#chatBox button:hover {
+  background-color: #1ebe5d;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); 
+  }
+  to { opacity: 1; transform: translateY(0);};
 }

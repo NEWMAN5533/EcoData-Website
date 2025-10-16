@@ -68,7 +68,9 @@
 
 <nav class="navbar">
 <div class="nav-left">
- <h2>EcoData</h2>
+<a href="index.html">
+  <img src="./css/icons/icon-shortcut.png" alt="image" loading="lazy">
+</a>
 </div>
 <div class="nav-right">
  
@@ -160,14 +162,14 @@
       <!----BOTTOM--->
       <div class="bottom-bundle-card">
       <div class="price-gb">
-        <small>GH&#8373;: 6.25</small>
+        <small>GH&#8373;: 6.19</small>
         <h2>1GB</h2>
       </div>
         <button class="buy-btn" 
   data-network="mtn"
    data-package= "mtn_data_bundle"
   data-size="1"
-  data-price="6.25">Buy</button>
+  data-price="6.19">Buy</button>
       </div>
     </div>
 
@@ -877,8 +879,8 @@
       </div>
 
        <div class="link">
-       <a href="aiteltigo-page.html">
-        <img src="./css/icons/tigo-signal.png" alt="image" loading="lazy">
+       <a href="bundlesInfo.html">
+        <img src="./css/icons/list.jpg" alt="image" loading="lazy">
         <span>Bundles info</span>
        </a>
       </div>
@@ -927,22 +929,13 @@
   onAuthStateChanged(auth, async (user) => {
     const usernameDisplay = document.getElementById("usernameDisplay");
 
-    
-// 🚨 Check if user is logged in
-onAuthStateChanged(auth, (user) => {
-  if (!user) {
-    // ❌ Not logged in → redirect to login page
-    window.location.href = "login.html";
-  } else {
-    console.log("✅ User logged in:", user.email);
-}
-});
+
 
     if (user) {
       const userSnap = await getDoc(doc(db, "users", user.uid));
       usernameDisplay.textContent = `Welcome, ${userSnap.data().username}!`;
     } else {
-      usernameDisplay.textContent = "Welcome, Guest!";
+      usernameDisplay.textContent = "Welcome, Dear!";
     }
 });
 </script>
