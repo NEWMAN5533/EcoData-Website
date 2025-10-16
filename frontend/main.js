@@ -1,6 +1,6 @@
 // btn events//
 document.addEventListener("DOMContentLoaded", () => {
-  
+
 document.querySelectorAll(".buy-btn").forEach(button => {
   button.addEventListener("click", () => {
     const packageName = button.dataset.package;
@@ -230,7 +230,9 @@ function isTerminalStatus(status) {
 // ---------- POLLING FUNCTION ----------
 async function checkOrderStatusOnce(orderIdOrRef) {
   try {
-    const res = await fetch(`${API_BASE}/api/v1/order/status/${encodeURIComponent(orderIdOrRef)}`);
+    // 🟩 Talk to your own backend now (not directly to SwiftData)
+    const res = await fetch(`/api/v1/order/status/${encodeURIComponent(orderIdOrRef)}`);
+
     if (!res.ok) {
       console.warn("Status endpoint returned non-200", res.status);
       return null;
@@ -241,7 +243,7 @@ async function checkOrderStatusOnce(orderIdOrRef) {
   } catch (err) {
     console.error("Error checking order status:", err);
     return null;
-  }
+}
 }
 
 function startAutoPolling(orderIdOrRef) {

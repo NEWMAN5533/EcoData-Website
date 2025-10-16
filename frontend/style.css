@@ -1362,6 +1362,85 @@ SNACKBAR SECTION
 
 
 
+/* === ORDER STATUS COLORS === */
+.status-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  text-transform: capitalize;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Color codes */
+.status-pending {
+  background: #ffe58a;
+  color: #795548;
+}
+
+.status-processing {
+  background: #bbdefb;
+  color: #0d47a1;
+}
+
+.status-delivered {
+  background: #a5d6a7;
+  color: #1b5e20;
+}
+
+.status-failed {
+  background: #ffcdd2;
+  color: #b71c1c;
+}
+
+.status-cancelled {
+  background: #e0e0e0;
+  color: #616161;
+}
+
+.status-refunded {
+  background: #ffecb3;
+  color: #ef6c00;
+}
+
+.status-resolved {
+  background: #b2dfdb;
+  color: #004d40;
+}
+
+/* === Card Animation === */
+#orderStatusCard {
+  border-radius: 12px;
+  background: #fff;
+  padding: 18px;
+  margin-top: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  animation: fadeInUp 0.4s ease;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* === Smooth status transition === */
+#orderStatusCardInner {
+  transition: all 0.4s ease-in-out;
+}
+
+
+.status-processing {
+  background: #bbdefb;
+  color: #0d47a1;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6;}
+}
+
+
 
 
 /* Responsive adjustments */
