@@ -313,9 +313,8 @@ function handleNewOrder(returnedOrder) {
   if (idToPoll) startAutoPolling(idToPoll);
 }
 
-// ---------- MANUAL CHECK UI binding (optional) ----------
+// ---------- MANUAL CHECK UI binding ----------
 document.addEventListener("DOMContentLoaded", () => {
-  // fill order input if last order exists
   const last = localStorage.getItem("lastOrderId");
   const orderInput = document.getElementById("orderInput");
   if (orderInput && last) orderInput.value = last;
@@ -327,20 +326,48 @@ document.addEventListener("DOMContentLoaded", () => {
     checkBtn.addEventListener("click", async () => {
       const id = orderInput.value.trim();
       if (!id) return alert("Please enter order ID or reference.");
-      statusResult.innerHTML = "Checking status...";
 
-      const order = await checkOrderStatusOnce(id);
-      if (order) {
-        // display nicely similar to card
-        const status = (order.status || "pending").toLowerCase();
-        const desc = getStatusTextMapping(status);
+      // Immediate feedback
+      statusResult.innerHTML = `
+        <div style="padding:10px; border-radius:8px; background:#f0f0f0; color:#333;">
+          <p>⏳ Checking status for <strong>${id}</strong>...</p>
+        </div>
+      `;
+
+      try {
+        const order = await checkOrderStatusOnce(id);
+
+        if (order) {
+          const status = (order.status || "pending").toLowerCase();
+          const desc = getStatusTextMapping(status);
+          const statusColor = {
+            pending: "#ffcc00",
+            processing: "#2196f3",
+            completed: "#4caf50",
+            failed: "#f44336",
+          }[status] || "#ccc";
+
+          statusResult.innerHTML = `
+            <div style="padding:15px; border-radius:10px; background:${statusColor}20; border:2px solid ${statusColor};">
+              <h3 style="color:${statusColor}; text-transform:capitalize;">${status}</h3>
+              <p><strong>Order ID:</strong> ${order.orderId || order.reference}</p>
+              <p><strong>Recipient:</strong> ${order.recipient}</p>
+              <p><strong>Volume:</strong> ${order.volume} GB</p>
+              <p style="margin-top:8px;">${desc}</p>
+            </div>
+          `;
+        } else {
+          statusResult.innerHTML = `
+            <div style="padding:10px; background:#ffdddd; border:1px solid #f44336; border-radius:8px;">
+              ⚠ Could not find order details for <strong>${id}</strong>.
+            </div>
+          `;
+        }
+      } catch (err) {
+        console.error("Error checking order status:", err);
         statusResult.innerHTML = `
-          <div style="padding:12px;border-radius:8px;background:#fff">
-            <p><strong>Order ID:</strong> ${order.orderId || order.reference}</p>
-            <p><strong>Recipient:</strong> ${order.recipient}</p>
-            <p><strong>Volume:</strong> ${order.volume} GB</p>
-            <p><strong>Status:</strong> <span class="status-badge ${getStatusClass(status)}">${status}</span></p>
-            <p style="color:#444;margin-top:6px">${desc}</p>
+          <div style="padding:10px; background:#ffdddd; border:1px solid #f44336; border-radius:8px;">
+            ❌ Error checking status. Please try again.
           </div>
         `;
       }
