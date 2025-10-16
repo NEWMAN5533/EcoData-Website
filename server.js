@@ -109,7 +109,7 @@ app.get("/api/v1/order/status/:orderIdOrRef", async (req, res) => {
 
   try {
     const base = process.env.SWIFT_BASE_URL || "https://swiftdata-link.com";
-    const swiftUrl = `${base}/api/v1/order/status/${orderIdOrRef}` || `https://swiftdata-link.com/api/v1/order/status/${orderIdOrRef}`;
+    const swiftUrl = `${base}/order/status/${orderIdOrRef}` || `https://swiftdata-link.com/api/v1/order/status/${orderIdOrRef}`;
     console.log("🔍 Checking SwiftData Order Status:", swiftUrl);
 
     const response = await axios.get(swiftUrl, {
