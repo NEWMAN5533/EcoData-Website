@@ -96,6 +96,49 @@ app.post("/api/buy-data", async (req, res) => {
   }
 });
 
+// ✅ GET order status from SwiftData
+app.get("/api/v1/order/status/:orderIdOrRef", async (req, res) => {
+  const { orderIdOrRef } = req.params;
+
+  if (!orderIdOrRef) {
+    return res.status(400).json({
+      success: false,
+      message: "Missing order ID or reference",
+    });
+  }
+
+  try {
+    const base = process.env.SWIFT_BASE_URL || "https://swiftdata-link.com";
+    const swiftUrl = `${base}/api/v1/order/status/${orderIdOrRef}` || `https://swiftdata-link.com/api/v1/order/status/${orderIdOrRef}`;
+    console.log("🔍 Checking SwiftData Order Status:", swiftUrl);
+
+    const response = await axios.get(swiftUrl, {
+      headers: {
+        "x-api-key": process.env.SWIFT_API_KEY, // ✅ Swift uses this key header
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.data && response.data.success) {
+      return res.json({
+        success: true,
+        order: response.data.order,
+      });
+    } else {
+      return res.status(400).json({
+        success: false,
+        message: response.data?.message || "Failed to fetch order status",
+      });
+    }
+  } catch (error) {
+    console.error("⚠ SwiftData Status Error:", error.response?.data || error.message);
+    return res.status(500).json({
+      success: false,
+      message: "Error fetching order status",
+      error: error.response?.data || error.message,
+});
+}
+});
 // ✅ Serve frontend
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "frontend", "index.html"));

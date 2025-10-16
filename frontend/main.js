@@ -233,7 +233,11 @@ function isTerminalStatus(status) {
 async function checkOrderStatusOnce(orderIdOrRef) {
   try {
     // 🟩 Talk to your own backend now (not directly to SwiftData)
-    const res = await fetch(`/api/v1/order/status/${encodeURIComponent(orderIdOrRef)}`);
+    const res = await fetch(`/api/v1/order/status/${encodeURIComponent(orderIdOrRef)}`,{
+      method: "GET",
+      headers: { "Content-Type": "application/json" }
+    });
+ 
 
     if (!res.ok) {
       console.warn("Status endpoint returned non-200", res.status);
@@ -330,7 +334,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Immediate feedback
       statusResult.innerHTML = `
         <div style="padding:10px; border-radius:8px; background:#f0f0f0; color:#333;">
-          <p>⏳ Checking status for <strong>${id}</strong>...</p>
+          <p>⏳ Checking your order status <strong>${id}</strong>...</p>
         </div>
       `;
 
