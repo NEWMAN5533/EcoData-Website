@@ -136,6 +136,7 @@ async function orderBundle(network, recipient, packageName, size, reference) {
     if (result.success) {
       showSnackBar("✅ Data bundle purchased successfully!");
       console.log("📦 Order details:", result.order || result.swift);
+      handleNewOrder(returned);
     } else {
       showSnackBar(`Failed to purchase data: ${result.message || "Unknown error"}`);
     }

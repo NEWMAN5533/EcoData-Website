@@ -61,6 +61,106 @@
 /*** snackbar ends***/
 
 
+
+/****
+ORDER STATUS
+***/
+
+.order-status-section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 1rem;
+  gap: 1.2rem;
+  text-align: center;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+  border: 0.1px solid rgb(221, 216, 216);
+}
+
+.order-status-section input {
+  height: 3rem;
+  width: 80%;
+  padding: 10px;
+  color: white;
+  font-size: 1rem;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.order-status-section button {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/**99
+order2 style
+***/
+/* Order status card */
+#orderStatusCard {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  width: 100%;
+  max-width: 320px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  padding: 14px;
+  z-index: 99999;
+  font-family: Arial, sans-serif;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+#orderStatusCard.hidden { 
+opacity: 0; 
+transform: translateY(8px);
+pointer-events: none; }
+
+#orderStatusCard h4 { margin: 0 0 8px 0; font-size: 1rem; }
+#orderStatusCard p { margin: 6px 0; font-size: 0.95rem; color: #333; }
+
+
+.status-badge {
+  display:inline-block;
+  width: 70%;
+  padding:6px 10px;
+  border-radius:999px;
+  color: #fff;
+  font-weight: 700;
+  text-transform: capitalize;
+  font-size: 0.85rem;
+}
+
+/* Status color classes */
+.status-pending { background: #f39c12; }      /* orange */
+.status-processing { background: #3498db; }   /* blue */
+.status-delivered { background: #2ecc71; }    /* green */
+.status-failed { background: #e74c3c; }       /* red */
+.status-cancelled { background: #9e9e9e; }    /* gray */
+.status-refunded { background: #795548; }     /* brown */
+.status-resolved { background: #27ae60; }     /* dark green */
+
+/* Manual check result box */
+#statusResult { 
+margin-top: 12px; 
+width: 60%;
+padding: 12px; 
+background:#f5f7fb;
+border-radius: 8px; 
+box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
 </style>
 
 </head>
@@ -102,6 +202,19 @@
     <div id="clock"></div>
   </div>
 </div>
+
+<!----CHECK ORDER STATUS---->
+<!-- Place somewhere (e.g. near header) -->
+<div id="orderStatusContainerRoot"></div>
+
+<!-- Optional: Check Order manually -->
+<section class="order-status-section">
+  <h2>Check Your Order Status</h2>
+  <input type="text" id="orderInput" placeholder="Enter Order ID or Reference">
+  <button id="checkBtn">Check Status</button>
+  <div id="statusResult"></div>
+</section>
+<!---ENDS-->
 
 <!-----BUNDLE PROCESSING--->
 <div class="bundle-processing-container">
@@ -1014,6 +1127,201 @@ window.addEventListener("click", function(e){
 });
 
 
+</script>
+
+<!-----ORDER STATUS JS---->
+<script>
+  // ---------- CONFIG ----------
+const API_BASE = (() => {
+  // use current host in prod or localhost for local dev
+  if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+    return "http://localhost:3000";
+  }
+  return "https://ecodata-app.onrender.com"; // your deployed backend
+})();
+
+const STATUS_POLL_INTERVAL = 5000; // ms
+let _statusPollTimer = null;
+
+// ---------- HELPERS ----------
+function getStatusTextMapping(status) {
+  const s = (status || "").toLowerCase();
+  return {
+    delivered: "Your bundle successfully delivered.",
+    pending: "Order awaiting processing.",
+    processing: "Order is processing. Please wait.",
+    failed: "Order failed. Contact support or try again.",
+    cancelled: "Order was cancelled.",
+    refunded: "Payment refunded.",
+    resolved: "Issue resolved. Order completed."
+  }[s] || "Status update in progress.";
+}
+
+function getStatusClass(status) {
+  return `status-${(status || "").toLowerCase()}`;
+}
+
+function createOrUpdateStatusCard(order) {
+  // order expected: { orderId, reference, status, recipient, volume, timestamp }
+  const root = document.getElementById("orderStatusContainerRoot");
+  if (!root) return;
+
+  const existing = document.getElementById("orderStatusCard");
+  const status = (order.status || "pending").toLowerCase();
+  const badgeClass = getStatusClass(status);
+  const desc = getStatusTextMapping(status);
+
+  const html = `
+    <div id="orderStatusCardInner">
+      <h4>Order Status</h4>
+      <p><strong>Order ID:</strong> ${order.orderId || order.reference || "N/A"}</p>
+      <p><strong>Recipient:</strong> ${order.recipient || "-"}</p>
+      <p><strong>Volume:</strong> ${order.volume ?? "-"} GB</p>
+      <p>
+        <strong>Status:</strong>
+        <span class="status-badge ${badgeClass}">${status}</span>
+      </p>
+      <p style="font-size:0.9rem;color:#555;margin-top:6px">${desc}</p>
+    </div>
+  `;
+
+  if (existing) {
+    existing.innerHTML = html;
+    existing.classList.remove("hidden");
+  } else {
+    const card = document.createElement("div");
+    card.id = "orderStatusCard";
+    card.innerHTML = html;
+    root.appendChild(card);
+  }
+}
+
+// stop polling
+function stopStatusPolling() {
+  if (_statusPollTimer) {
+    clearInterval(_statusPollTimer);
+    _statusPollTimer = null;
+  }
+}
+
+// checks if status is terminal
+function isTerminalStatus(status) {
+  const s = (status || "").toLowerCase();
+  return ["delivered","failed","cancelled","refunded","resolved"].includes(s);
+}
+
+// ---------- POLLING FUNCTION ----------
+async function checkOrderStatusOnce(orderIdOrRef) {
+  try {
+    const res = await fetch(`${API_BASE}/api/v1/order/status/${encodeURIComponent(orderIdOrRef)}`);
+    if (!res.ok) {
+      console.warn("Status endpoint returned non-200", res.status);
+      return null;
+    }
+    const data = await res.json();
+    if (data && data.success && data.order) return data.order;
+    return null;
+  } catch (err) {
+    console.error("Error checking order status:", err);
+    return null;
+  }
+}
+
+function startAutoPolling(orderIdOrRef) {
+  // clear existing poll
+  stopStatusPolling();
+
+  // initial immediate check
+  (async () => {
+    const order = await checkOrderStatusOnce(orderIdOrRef);
+    if (order) {
+      createOrUpdateStatusCard(order);
+      // stop if already terminal
+      if (isTerminalStatus(order.status)) {
+        stopStatusPolling();
+        return;
+      }
+    }
+  })();
+
+  // schedule repeated checks
+  _statusPollTimer = setInterval(async () => {
+    const order = await checkOrderStatusOnce(orderIdOrRef);
+    if (order) {
+      createOrUpdateStatusCard(order);
+      if (isTerminalStatus(order.status)) {
+        stopStatusPolling();
+      }
+    }
+  }, STATUS_POLL_INTERVAL);
+}
+
+// ---------- AFTER PURCHASE: show and poll ----------
+/**
+ * Call this after your backend returns an order reply.
+ * Example usage inside orderBundle function after successful response:
+ *    const returnedOrder = result.order || result.swift || result; 
+ *    handleNewOrder(returnedOrder);
+ */
+function handleNewOrder(returnedOrder) {
+  if (!returnedOrder) return;
+  // The Swift response may place order data at top-level or inside order object.
+  // Normalize fields:
+  const normalized = {
+    orderId: returnedOrder.orderId || returnedOrder.orderId || returnedOrder.reference || returnedOrder.reference,
+    reference: returnedOrder.reference || returnedOrder.reference,
+    status: returnedOrder.status || returnedOrder.status || "pending",
+    recipient: returnedOrder.items?.[0]?.recipient || returnedOrder.recipient || "-",
+    volume: returnedOrder.items?.[0]?.volume ?? returnedOrder.volume ?? "-"
+  };
+
+  // Save last order id/ref to localStorage for later check
+  if (normalized.orderId) localStorage.setItem("lastOrderId", normalized.orderId);
+
+  // show card immediately
+  createOrUpdateStatusCard(normalized);
+
+  // start polling by orderId or reference (prefer orderId)
+  const idToPoll = normalized.orderId || normalized.reference;
+  if (idToPoll) startAutoPolling(idToPoll);
+}
+
+// ---------- MANUAL CHECK UI binding (optional) ----------
+document.addEventListener("DOMContentLoaded", () => {
+  // fill order input if last order exists
+  const last = localStorage.getItem("lastOrderId");
+  const orderInput = document.getElementById("orderInput");
+  if (orderInput && last) orderInput.value = last;
+
+  const checkBtn = document.getElementById("checkBtn");
+  const statusResult = document.getElementById("statusResult");
+
+  if (checkBtn && orderInput && statusResult) {
+    checkBtn.addEventListener("click", async () => {
+      const id = orderInput.value.trim();
+      if (!id) return alert("Please enter order ID or reference.");
+      statusResult.innerHTML = "Checking status...";
+
+      const order = await checkOrderStatusOnce(id);
+      if (order) {
+        // display nicely similar to card
+        const status = (order.status || "pending").toLowerCase();
+        const desc = getStatusTextMapping(status);
+        statusResult.innerHTML = `
+          <div style="padding:12px;border-radius:8px;background:#fff">
+            <p><strong>Order ID:</strong> ${order.orderId || order.reference}</p>
+            <p><strong>Recipient:</strong> ${order.recipient}</p>
+            <p><strong>Volume:</strong> ${order.volume} GB</p>
+            <p><strong>Status:</strong> <span class="status-badge ${getStatusClass(status)}">${status}</span></p>
+            <p style="color:#444;margin-top:6px">${desc}</p>
+          </div>
+        `;
+      } else {
+        statusResult.innerHTML = <p style="color:red">Order not found or an error occurred.</p>;
+      }
+});
+}
+});
 </script>
 
 </body>
