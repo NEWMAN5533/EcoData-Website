@@ -1017,7 +1017,15 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   onAuthStateChanged(auth, async (user) => {
     const usernameDisplay = document.getElementById("usernameDisplay");
 
-
+    // 🚨 Check if user is logged in
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    // ❌ Not logged in → redirect to login page
+    window.location.href = "login.html";
+  } else {
+    console.log("✅ User logged in:", user.email);
+}
+});
 
     if (user) {
       const userSnap = await getDoc(doc(db, "users", user.uid));

@@ -329,7 +329,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (checkBtn && orderInput && statusResult) {
     checkBtn.addEventListener("click", async () => {
       const id = orderInput.value.trim();
-      if (!id) return alert("Please enter order ID or reference.");
+      if (!id) return showSnackBar("Please enter order ID or reference.");
 
       // Immediate feedback
       statusResult.innerHTML = `
