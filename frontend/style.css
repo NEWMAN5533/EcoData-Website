@@ -40,6 +40,10 @@ body {
 }
 
 
+/****
+WATCH VIDEO SECTION
+***/
+
 
 /**
 * NAVIGATION BAR
@@ -594,7 +598,7 @@ border-start-end-radius: 1rem;
 }
 
 .bottom-bundle-card h2{
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-family: Arial ;
   font-weight: 600;
   color: rgb(43, 42, 42);
@@ -611,7 +615,7 @@ border-start-end-radius: 1rem;
 }
 
 small{
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 500;
   font-family: Arial sans-serif;
   color: #24463e;;

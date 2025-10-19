@@ -159,6 +159,8 @@ const API_BASE = (() => {
   return "https://ecodata-app.onrender.com"; // your deployed backend
 })();
 
+// POLLING FUNCTION //
+
 const STATUS_POLL_INTERVAL = 5000; // ms
 let _statusPollTimer = null;
 
