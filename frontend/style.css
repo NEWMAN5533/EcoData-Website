@@ -56,6 +56,10 @@ WATCH VIDEO SECTION
   height: 3.8rem;
   position: fixed;
   top: 0;
+  margin: 0;
+  left: 0;
+  right: 0;
+  justify-self: center;
   overflow: hidden;
   align-items: center;
   justify-content: space-between;
@@ -1068,7 +1072,7 @@ MENU-CARD SECTION
 .menu-card-container {
   width: 100%;
   max-width: 10rem;
-  height: 16rem;
+  height: 14rem;
   position: fixed;
   display: flex;
   align-items: center;
@@ -1076,7 +1080,7 @@ MENU-CARD SECTION
   flex-direction: column;
   right: -200px;
   top: 4rem;
-  background: var(--bg-cl);
+  background: transparent;
   box-shadow: 0 4px 8px rgba(58, 57, 57, 0.4);
   border-radius: .2rem;
   transition: .5s ease-in-out;
@@ -1090,21 +1094,16 @@ MENU-CARD SECTION
   justify-content: end;
 }
 
-.close-card img{
-  width: 20px;
-  height: 20px;
-  margin: .1rem .5rem;
-  cursor: pointer;
-}
 
 .menu-card{
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  text-align: center;
   gap: 1.4rem;
   width: 100%;
-  height: 90%;
+  height: 15rem;
   background: white;
 }
 
@@ -1118,27 +1117,30 @@ CARD TOP
   flex-direction: column;
   gap: 1rem;
   top: .1rem;
+  text-align: center;
   margin: .4rem 0;
   justify-content: center;
+  text-align: center;
   align-items: flex-start;
   position: relative;
   background-color: transparent;
 }
 
 .link{
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
   text-align: center;
-  width: 8.2rem;
+  text-decoration: none;
   padding: .1rem .1rem;
   transition: .2s ease;
-  margin-left: -1rem;
 }
 
 .link img{
-  width: 1.2rem;
-  height: 1.2rem;
+  width: 1.3rem;
+  height: 1.3rem;
   background-color: rgb(233, 227, 233);
   padding: .14rem;
   border-radius: .4rem;
@@ -1157,9 +1159,10 @@ CARD TOP
 
 
 .link:hover{
-  background: var(--bg-cl);
-  box-shadow: 1px 1px 3px rgba(65, 63, 63, 0.9), -1px -1px 3px rgba(80, 78, 78, 0.9);
-  border-radius: .5rem;
+  background: black;
+  color: white;
+  width: 100%;
+  padding: .1rem;
 }
 
 
@@ -1181,7 +1184,7 @@ CARD BOTTOM
   box-shadow: 0 2px 6px rgba(207, 99, 80, 0.479);
   transition: 1s ease;
   cursor: pointer;
-  margin-bottom: -1rem;
+  margin-bottom: .5rem;
 }
 
 .logout-btn:hover{
