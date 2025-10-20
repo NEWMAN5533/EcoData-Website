@@ -241,9 +241,9 @@ border-radius: 12px;">
      <h5> Quick access (Pages)</h5>
     </div>
     <div class="purchase-container">
-      <a href="mtn-page.html"><div class="card-box mtn">MTN</div></a>
-      <a href="telecel-page.html"><div class="card-box telecel">TELECEL</div></a>
-      <a href="aiteltigo-page.html"><div class="card-box at">AIRTELTIGO</div></a>
+      <a href="#"><div class="card-box mtn">MTN</div></a>
+      <a href="#"><div class="card-box telecel">TELECEL</div></a>
+      <a href="#"><div class="card-box at">AIRTELTIGO</div></a>
     </div>
   </div>
 </section>
@@ -955,35 +955,36 @@ border-radius: 12px;">
     <div class="shortcut-links">
 
       <div class="link">
-        <a href="dashboard.html">
+        <a href="#">
+        <img src="./css/icons/home.png" alt="image" loading="lazy">
+        <span>Home</span>
+        </a>
+      </div>
+
+        <div class="link">
+        <a href="#">
         <img src="./css/icons/dashboard.png" alt="image" loading="lazy">
         <span>Dashboard</span>
         </a>
       </div>
 
        <div class="link">
-       <a href="mtn-page.html">
+       <a href="#">
         <img src="./css/icons/mtn-signal.png" alt="image" loading="lazy">
-        <span>MTN</span>
+        <span>Agent?</span>
        </a>
       </div>
 
        <div class="link">
-       <a href="telecel-page.html">
+       <a href="#">
         <img src="./css/icons/telecel-signal.png" alt="image" loading="lazy">
-        <span>Telecel</span>
+        <span>Terms of use</span>
        </a>
       </div>
 
-       <div class="link">
-       <a href="aiteltigo-page.html">
-        <img src="./css/icons/tigo-signal.png" alt="image" loading="lazy">
-        <span>Airteltigo</span>
-       </a>
-      </div>
 
        <div class="link">
-       <a href="bundlesInfo.html">
+       <a href="#">
         <img src="./css/icons/list.jpg" alt="image" loading="lazy">
         <span>Bundles info</span>
        </a>
@@ -1033,6 +1034,16 @@ border-radius: 12px;">
   onAuthStateChanged(auth, async (user) => {
     const usernameDisplay = document.getElementById("usernameDisplay");
 
+      
+// 🚨 Check if user is logged in
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    // ❌ Not logged in → redirect to login page
+    window.location.href = "login.html";
+  } else {
+    console.log("✅ User logged in:", user.email);
+}
+});
 
 
     if (user) {
