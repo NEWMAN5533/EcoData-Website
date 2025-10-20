@@ -616,10 +616,10 @@ CARD TOP
 }
 
 .link img{
-  width: 1.2rem;
-  height: 1.2rem;
+  width: 2rem;
+  height: 2rem;
   background-color: rgb(233, 227, 233);
-  padding: .14rem;
+  padding: .24rem;
   border-radius: .4rem;
 }
 

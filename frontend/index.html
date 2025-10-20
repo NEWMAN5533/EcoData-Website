@@ -720,6 +720,7 @@ border-radius: 12px;">
   <img src="./css/icons/img.png" alt="image" loading ="lazy">
  </div>
 </div>
+
 <!-----AIRTELTIGO SECTION---->
 <!-----NETWORK-BUNDLE-CARDS-TELECEL-CONTAINER---->
 <section class="bundle-cards-airteltigo-container">
@@ -1034,16 +1035,7 @@ border-radius: 12px;">
   onAuthStateChanged(auth, async (user) => {
     const usernameDisplay = document.getElementById("usernameDisplay");
 
-      
-// 🚨 Check if user is logged in
-onAuthStateChanged(auth, (user) => {
-  if (!user) {
-    // ❌ Not logged in → redirect to login page
-    window.location.href = "login.html";
-  } else {
-    console.log("✅ User logged in:", user.email);
-}
-});
+// FORCE TO LOGIN THE USER //
 
 
     if (user) {
