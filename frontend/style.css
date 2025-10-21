@@ -5083,7 +5083,7 @@ CARD CONTAINER
 SIDEBAR
 ***/
 .sidebar {
-  width: 290px;
+  width: 220px;
   height: 100vh;
   left: 0;
   position: fixed;
@@ -5126,7 +5126,7 @@ SIDEBAR
   width: 5rem;
   height: 5rem;
   display: flex;
-  background: url(./css/icons/agent.png);
+  background: url(./css/icons/whats\ admin.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 50%;
@@ -5257,11 +5257,12 @@ WELCOME CARD
 **/
 .welcome-card {
   width: 94%;
-  height: 12rem;
+  max-width: 1000px;
+  height: 10rem;
   gap: .5rem;
   border-radius: .6rem;
   margin-top: 5rem; 
-  margin-right: -3rem;
+  margin-right: -20rem;
 }
 
 .welcome-top {
@@ -5269,7 +5270,7 @@ WELCOME CARD
   justify-content: space-between;
   align-items: center;
   width: 99%;
-  height: 5.7rem;
+  height: 5rem;
 }
 
 /***
@@ -5303,7 +5304,7 @@ WELCOME TOP LEFT
   .welcome-top-right input{
     display: flex;
     align-items: center;
-    width: 450px;
+    width: 300px;
     height: 3rem;
     margin: 0 1rem;
   }
@@ -5451,9 +5452,9 @@ NETWORK TITLES
   align-items: start;
   justify-content: start;
   width: 100%;
-  max-width: 700px;
+  max-width: 450px;
   height: 10rem;
-  margin-right: 36rem;
+  margin-left: -12rem;
 }
 
 .purchase-title {
@@ -5492,15 +5493,15 @@ PURCHASE CONTAINER
 /*------REAL BUNDLE CARD-MTN--*/
 .bundle-cards-container {
   width: 100%;
-  max-width: 1380px;
+  max-width: 1020px;
   height: max-content;
   align-self: center;
   justify-self: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
-  margin-left: 19rem;
+  background: black;
+  margin-right: -40rem;
   margin-top: 1rem;
 }
 
@@ -5544,7 +5545,7 @@ CARD CONTAINER
 /*------REAL BUNDLE CARD--TELECEL-*/
 .bundle-cards-telecel-container {
   width: 100%;
-  max-width: 1380px;
+  max-width: 1020px;
   height: max-content;
   align-self: center;
   justify-self: center;
@@ -5552,7 +5553,7 @@ CARD CONTAINER
   align-items: center;
   justify-content: center;
   background: transparent;
-  margin-left: 19rem;
+  margin-left: 40rem;
   margin-top: 1rem;
 }
 
@@ -5627,8 +5628,8 @@ margin: .2rem 0;
 SECTION TITLE DISPLAY==NONE
 ***/
 .section-title{
-  margin-top: 3rem;
-  margin-right: 34rem;
+  margin-top: 1rem;
+  margin-right: -4rem;
 }
 
 
@@ -5641,7 +5642,7 @@ AIRTELTIGO
 /*------REAL BUNDLE CARD--TELECEL-*/
 .bundle-cards-airteltigo-container {
  width: 100%;
-  max-width: 1380px;
+  max-width: 1020px;
   height: max-content;
   align-self: center;
   justify-self: center;
@@ -5649,7 +5650,7 @@ AIRTELTIGO
   align-items: center;
   justify-content: center;
   background: transparent;
-  margin-left: 19rem;
+  margin-left: 40rem;
   margin-top: 1rem;
 }
 
