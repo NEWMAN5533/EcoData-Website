@@ -872,7 +872,7 @@ button {
 
 .bottom-bundle-telecel-card .buy-btn{
   width: 9rem;
-  height: 1.5rem;
+  height: 2rem;
   border: 0.1px  solid rgb(245, 241, 241);
   border-radius: .4rem;
   transition: .2s ease;
@@ -987,7 +987,7 @@ border-start-start-radius: 1rem;
 
 .bottom-bundle-airteltigo-card .buy-btn{
   width: 9rem;
-  height: 1.5rem;
+  height: 2rem;
   border: 0.1px  solid rgb(245, 241, 241);
   border-radius: .4rem;
   transition: .2s ease;
@@ -2670,7 +2670,7 @@ border-start-start-radius: 1rem;
 
 .bottom-bundle-airteltigo-card .buy-btn{
   width: 9rem;
-  height: 1.5rem;
+  height: 2rem;
   border: 0.1px  solid rgb(245, 241, 241);
   border-radius: .4rem;
   transition: .2s ease;
@@ -5630,6 +5630,13 @@ SECTION TITLE DISPLAY==NONE
 .section-title{
   margin-top: 1rem;
   margin-right: -4rem;
+}
+
+/***
+VIDEO SECTION
+***/
+.video-section {
+  display: none;
 }
 
 
