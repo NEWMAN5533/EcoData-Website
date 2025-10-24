@@ -828,6 +828,14 @@
           <!----ICONS-SECTION-->
     <div class="shortcut-links">
 
+      
+       <div class="link">
+       <a href="https://chat.whatsapp.com/CdemFa0YXXc8rgxQZKvSIq?mode=wwc">
+        <img src="./css/icons/agent.png" alt="image" loading="lazy">
+        <span>Terms of use</span>
+       </a>
+      </div>
+
        <div class="link">
        <a href="#">
         <img src="./css/icons/terms (1).png" alt="image" loading="lazy">
@@ -889,15 +897,6 @@
 
 // FORCE TO LOGIN THE USER //
   
-// 🚨 Check if user is logged in
-onAuthStateChanged(auth, (user) => {
-  if (!user) {
-    // ❌ Not logged in → redirect to login page
-    window.location.href = "login.html";
-  } else {
-    console.log("✅ User logged in:", user.email);
-}
-});
 
 
     if (user) {
