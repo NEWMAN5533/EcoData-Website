@@ -1085,7 +1085,7 @@ MENU-CARD SECTION
 ****/
 .menu-card-container {
   width: 100%;
-  max-width: 9rem;
+  max-width: 12rem;
   height: 12rem;
   position: fixed;
   display: flex;
