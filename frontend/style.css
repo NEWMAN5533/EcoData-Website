@@ -1086,7 +1086,7 @@ MENU-CARD SECTION
 .menu-card-container {
   width: 100%;
   max-width: 9rem;
-  height: 10.5rem;
+  height: 12rem;
   position: fixed;
   display: flex;
   align-items: center;
@@ -1188,11 +1188,18 @@ CARD TOP
 .link{
   display: flex;
   flex-direction: column;
-  height: 90%;
-  align-items: flex-start;
-  justify-content: flex-start;
+  width: 100%;
+  height: 2.2rem;;
+  align-items: center;
+  justify-content: center;
   gap: .5rem;
-  ;
+}
+
+.link:hover{
+  background: rgb(173, 169, 169);
+  color: white;
+  width: 100%;
+  padding: .6rem;
 }
 
 
@@ -1204,14 +1211,17 @@ CARD TOP
 }
 
 .link img{
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.8rem;
+  height: 1.8rem;
   margin-right: .4rem;
+  background: var(--background-cl);
+  padding: .2rem;
+  border-radius: 5px;
 
 }
 
 .sidebar-nav:hover{
-  background: black;
+  background: rgb(184, 177, 177);
   color: white;
   width: 100%;
   padding: .1rem;
