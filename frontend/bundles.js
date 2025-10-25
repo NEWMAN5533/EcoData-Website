@@ -4,7 +4,8 @@
       <ul>
         <li>MTN bundles are delivered instantly after payment.</li>
         <li>Ensure your number starts with <b>024, 054, 23355123..., 23359123..., or 23325123..</b>.</li>
-        <li>If delivery delays, contact <a href="ecodatabundless@gmail.com">support@ecodata.com</a>.</li>
+        <li>If delivery delays, contact 
+        <p><strong>WhatsAAp:</strong>+233535565637</p></li>
         <li>All transactions are secured via Paystack.</li>
       </ul>
       <p><b>Refunds:</b> If bundles fail, refunds are processed within 24 hours.</p>
