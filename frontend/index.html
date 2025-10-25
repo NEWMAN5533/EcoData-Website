@@ -853,7 +853,7 @@
     </div>
     </div>
     <div class="menu-card-bottom">
-      <a href="login.html">  <button  id="logout-btn" class="logout-btn">Login</button></a>
+      <a href="login.html">  <button  id="logout-btn" class="logout-btn">Login/Sign-Up</button></a>
     </div>
   </div>
 </div>
@@ -896,15 +896,7 @@
     const usernameDisplay = document.getElementById("usernameDisplay");
 
 // FORCE TO LOGIN THE USER //
-  // 🚨 Check if user is logged in
-onAuthStateChanged(auth, (user) => {
-  if (!user) {
-    // ❌ Not logged in → redirect to login page
-    window.location.href = "login.html";
-  } else {
-    console.log("✅ User logged in:", user.email);
-}
-});
+
 
 
     if (user) {

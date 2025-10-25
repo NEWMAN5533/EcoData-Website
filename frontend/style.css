@@ -196,7 +196,7 @@ WELCOME CARD
   border-start-end-radius: .4rem;
   border-end-end-radius: .4rem;
   border-end-start-radius: .4rem;
-  box-shadow: inset  1px 1px 3px rgb(151, 147, 147), inset -1px -1px 3px rgb(189, 184, 184);
+  box-shadow:   1px 1px 3px rgb(151, 147, 147),  -1px -1px 3px rgb(189, 184, 184);
 }
 
 .welcome-top-left{
@@ -862,7 +862,7 @@ margin: .2rem 0;
 .top-bundle-telecel-card small {
   font-size: 1.1rem;
   font-family: Arial sans-serif;
-  color: var(--dark-cl);
+  color: var(--bg-cl);
 }
 
 .bottom-bundle-telecel-card {
@@ -1035,7 +1035,7 @@ SECTION TITLE
   justify-content: flex-start;
   margin: 1rem  0;
   background: transparent;
-  box-shadow: inset 0 2px 6px rgba(77, 75, 75, 0.4);
+  box-shadow: inset  0 2px 6px rgba(124, 124, 124, 0.4);
   position: relative;
 }
 
@@ -1086,7 +1086,7 @@ MENU-CARD SECTION
 .menu-card-container {
   width: 100%;
   max-width: 12rem;
-  height: 12rem;
+  height: 18rem;
   position: fixed;
   display: flex;
   align-items: center;
@@ -1111,15 +1111,19 @@ MENU-CARD SECTION
 
 .menu-card{
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   flex-direction: column;
   text-align: center;
   gap: 1.4rem;
-  width: 100%;
-  height: 15rem;
-  background: white;
+  width: 90%;
+  height: 14.5rem;
+  margin: 0 .4rem;
+  padding: .4rem 0;
+  background: rgb(255, 255, 255);
   border-end-end-radius: 1rem;
+  border-start-start-radius: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 /***
@@ -1176,8 +1180,9 @@ CARD TOP
   width: 100%;
   background: transparent;
   height: max-content;
-  padding: .2rem;;
+  padding: .1rem;;
   flex-direction: column;
+  text-align: center;
   justify-content: flex-start;
   align-items: flex-start;
   gap: .5rem;
@@ -1189,30 +1194,44 @@ CARD TOP
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 2.2rem;;
+  height: 2.8rem;;
   align-items: center;
   justify-content: center;
+  text-align: center;
   gap: .5rem;
+  color: black;
+  margin: 0 .4rem;
+  transition: .1s ease-in-out;
 }
 
 .link:hover{
-  background: rgb(173, 169, 169);
-  color: white;
+  background: rgb(82, 79, 79);
+  color: rgb(247, 246, 246);
+  height: 3rem;
   width: 100%;
-  padding: .6rem;
+  border-end-end-radius: 1rem;
+  border-start-start-radius: 1rem;
 }
 
 
 .link a{
   display: flex;
   text-decoration: none;
-  color: rgb(88, 81, 81);
-  font-size: 1rem;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  text-align: center;
+  color: rgb(32, 29, 29);
+  font-size: 1.1rem;
+}
+
+.link a:hover{
+  color: var(--bg-cl);
 }
 
 .link img{
-  width: 1.8rem;
-  height: 1.8rem;
+  width: 2.1rem;
+  height: 2.1rem;
   margin-right: .4rem;
   background: var(--background-cl);
   padding: .2rem;
@@ -1221,7 +1240,7 @@ CARD TOP
 }
 
 .sidebar-nav:hover{
-  background: rgb(184, 177, 177);
+  background: rgb(192, 185, 185);
   color: white;
   width: 100%;
   padding: .1rem;
@@ -1233,25 +1252,26 @@ CARD BOTTOM
 ****/
 .logout-btn{
   display: flex;
-  border: 0.2px solid var(--telecel-btn);
-  width: 8rem;
+  border: 0.2px solid green;
+  width: 9rem;
   justify-content: center;
   align-items: center;
   border-radius: 5px;
-  background: var(--telecel-btn);
+  background: green;
   color: var(--bg-cl);
-  height: 1.6rem;
+  height: 1.7rem;
+  font-size: 1rem;
   position: relative;
   display: flex;
-  box-shadow: 0 2px 6px rgba(207, 99, 80, 0.479);
+  box-shadow: 0 2px 6px rgba(61, 37, 32, 0.479);
   transition: 1s ease;
   cursor: pointer;
-  margin-bottom: .5rem;
+  margin: .5rem 1rem;
 }
 
 .logout-btn:hover{
-  background: rgb(206, 18, 18);
-  box-shadow: 0 2px 6px rgba(207, 99, 80, 0.479);
+  background: rgb(52, 80, 11);
+  box-shadow: 0 2px 6px rgba(71, 46, 42, 0.479);
 }
 
 .user-info {

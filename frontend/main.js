@@ -37,7 +37,7 @@ function createPhoneModal(callback) {
     justify-content: center;
     max-width: 480px;
     justify-self: center;
-    background: rgba(0,0,0,0.4);
+    background: rgba(0,0,0,0.1);
     z-index: 9999;
   `;
 
