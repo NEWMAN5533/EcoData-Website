@@ -837,7 +837,7 @@
       </div>
 
        <div class="link">
-       <a href="#">
+       <a href="terms.html">
         <img src="./css/icons/terms (1).png" alt="image" loading="lazy">
         <span>Terms of use</span>
        </a>
@@ -845,7 +845,7 @@
 
 
        <div class="link">
-       <a href="#">
+       <a href="bundlesInfo.html">
         <img src="./css/icons/list.jpg" alt="image" loading="lazy">
         <span>Bundles info</span>
        </a>
@@ -970,14 +970,14 @@ updateClock();
 
   // function //
 cardToggler.addEventListener("click", function(e){
-  if (card.style.right != "-200px"){
+  if (card.style.right != "-240px"){
     card.style.right = "14px";
-  } else card.style.right = "-200px";
+  } else card.style.right = "-240px";
 });
 
 window.addEventListener("click", function(e){
   if (e.target !== cardToggler && e.target !== card && !card.contains(e.target)){
-    card.style.right = "-200px";
+    card.style.right = "-240px";
   }
 });
 

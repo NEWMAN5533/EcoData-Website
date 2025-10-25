@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ecodata | Terms of Use</title>
+  <link rel="stylesheet" href="terms.css">
   <style>
     body {
       font-family: "Poppins", sans-serif;
@@ -17,33 +18,85 @@
     h1, h2 {
       color: #0b8f5d;
     }
+    .free{
+      color: rgba(30, 35, 51, 0.705);
+      font-size: .9rem;
+    }
     h1 {
       text-align: center;
+      margin: 4.5rem 0;
       margin-bottom: 20px;
     }
     section {
       background: #fff;
       padding: 25px;
+      border: 0.1px solid #79ddba;
       border-radius: 10px;
       margin-bottom: 20px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-    ul { padding-left: 20px; }
+
+    .contact{
+      background: #fff;
+      padding: 25px;
+      border: 0.1px solid #79ddba;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      gap: .5rem;
+      flex-direction: column;
+    }
+
+    .contact ul li{
+      list-style: none;
+      display: flex;
+      gap: .6rem;
+    }
+
+    .contact ul img{
+      width: 2.2rem;
+      height: 2.2rem;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+    ul { padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+ }
+
+    
   </style>
 </head>
 <body>
+  
+<nav class="navbar">
+<div class="nav-left">
+<a href="index.html">
+  <img src="./css/icons/icon-shortcut.png" alt="image" loading="lazy">
+</a>
+</div>
+<div class="nav-right">
+ 
+<img id="cardToggler" src="./css/icons/icons8-fries-menu-46.png" alt="image" class="menu-icon" loading="lazy">
+</div>
+</nav>
+
+<!---MAIN-SECTION---->
   <h1>Terms of Use</h1>
   <p><strong>Last updated:</strong> October 2025</p>
 
   <section>
     <h2>1. Introduction</h2>
-    <p>Welcome to <strong>Ecodata</strong> — a Ghana-based platform for purchasing affordable mobile data bundles across all networks (MTN, Vodafone, and AirtelTigo). 
+    <p>Welcome to <strong>Ecodata</strong> — a Ghana-based platform for purchasing affordable mobile data bundles across all networks (MTN, Telecel, and AirtelTigo). 
     By accessing or using this website or mobile service, you agree to comply with these Terms of Use. Please read them carefully before using our services.</p>
   </section>
 
   <section>
     <h2>2. Eligibility</h2>
-    <p>You must be at least 18 years old or have consent from a parent or guardian to use our services. Ecodata is intended for Ghana residents or individuals with valid Ghanaian mobile numbers.</p>
+    <p>You must be at least 18 years old or have consent from a parent or guardian to use our services. <strong>Ecodata</strong> is intended for Ghana residents or individuals with valid Ghanaian mobile numbers.</p>
   </section>
 
   <section>
@@ -72,38 +125,38 @@
   <section>
     <h2>6. Data Bundle Delivery</h2>
     <ul>
-      <li>All bundle purchases are fulfilled automatically through <strong>SwiftData API</strong>.</li>
+      <li>All bundle purchases are fulfilled automatically through <strong> API</strong>.</li>
       <li>Delivery times may vary depending on network availability or third-party processing delays.</li>
       <li>If your bundle is not delivered within a reasonable period, contact our support immediately.</li>
     </ul>
   </section>
 
   <section>
-    <h2>7. Agent Membership</h2>
+    <h2>7. Agent Membership <span class="free">(Free for Now!)</span></h2>
     <ul>
       <li>Becoming an Ecodata Agent requires a one-time payment (via Paystack).</li>
       <li>Once payment is verified, the agent will receive a discounted price rate and access to the agent dashboard.</li>
       <li>Agent payments are non-refundable after successful activation.</li>
-      <li>Agents must not engage in false advertising or overpricing that misrepresents Ecodata.</li>
+      <li>Agents must not engage in false advertising or overpricing that misrepresents <strong>Ecodata</strong>.</li>
     </ul>
   </section>
 
   <section>
     <h2>8. Intellectual Property</h2>
-    <p>All logos, text, and content on this website belong to Ecodata. You may not reproduce, distribute, or use our materials without written permission.</p>
+    <p>All logos, text, and content on this website belong to <strong>Ecodata</strong>. You may not reproduce, distribute, or use our materials without written permission.</p>
   </section>
 
   <section>
     <h2>9. Limitation of Liability</h2>
     <ul>
-      <li>Ecodata is not liable for losses resulting from user errors such as incorrect phone numbers or payment mistakes.</li>
-      <li>We are not responsible for network downtime, technical glitches, or failures from third-party providers like SwiftData or Paystack.</li>
+      <li><strong>Ecodata</strong> is not liable for losses resulting from user errors such as incorrect phone numbers or payment mistakes.</li>
+      <li>We are not responsible for network downtime, technical glitches, or failures from third-party provider like Paystack.</li>
     </ul>
   </section>
 
   <section>
     <h2>10. Privacy Policy</h2>
-    <p>Your information is securely stored in Firebase. We do not sell or share your personal data with third parties except as required for payment verification or bundle delivery.</p>
+    <p> e do not sell or share your personal data with third parties except as required for payment verification or bundle delivery.</p>
   </section>
 
   <section>
@@ -111,16 +164,89 @@
     <p>We may update these Terms of Use from time to time. Continued use of our services after updates means you accept the revised terms.</p>
   </section>
 
-  <section>
+  <section class="contact">
     <h2>12. Contact Us</h2>
     <p>If you have any questions, complaints, or feedback, please reach us via:</p>
     <ul>
-      <li><strong>Email:</strong> support@ecodata.com</li>
-      <li><strong>WhatsApp:</strong> +233 0535565637</li>
-      <li><strong>Location:</strong> Sunyani, Ghana</li>
+      <li><img src="./css/icons/google.jpg" alt=""> ecodatabundless@gmail.com</li>
+      <li><img src="./css/icons/whats admin.jpg" alt="">+233 0535565637</li>
+      <li><img src="./css/icons/location.png" alt="">Sunyani, Ghana</li>
     </ul>
   </section>
 
+
+  <!------MENU-CARD----->
+<div class="menu-card-container" id="closeCard">
+ 
+  <div class="menu-card">
+    <div class="menu-card-top">
+          <!----ICONS-SECTION-->
+    <div class="shortcut-links">
+
+         <div class="link">
+       <a href="index.html">
+        <img src="./css/icons/home.png" alt="image" loading="lazy">
+        <span> Back to Home</span>
+       </a>
+      </div>
+
+      
+       <div class="link">
+       <a href="https://chat.whatsapp.com/CdemFa0YXXc8rgxQZKvSIq?mode=wwc">
+        <img src="./css/icons/agent.png" alt="image" loading="lazy">
+        <span>Be an Agent?</span>
+       </a>
+      </div>
+
+       <div class="link">
+       <a href="terms.html">
+        <img src="./css/icons/terms (1).png" alt="image" loading="lazy">
+        <span>Terms of use</span>
+       </a>
+      </div>
+
+
+       <div class="link">
+       <a href="bundlesInfo.html">
+        <img src="./css/icons/list.jpg" alt="image" loading="lazy">
+        <span>Bundles info</span>
+       </a>
+      </div>
+    </div>
+    </div>
+    <div class="menu-card-bottom">
+      <a href="login.html">  <button  id="logout-btn" class="logout-btn">Login/Sign-Up</button></a>
+    </div>
+  </div>
+</div>
+
+
+
   <p style="text-align:center;color:#888;font-size:14px;">© 2025 Ecodata. All rights reserved.</p>
+
+
+  <!---MENU-CARD-JS-->
+<script>
+  const cardToggler = document.getElementById("cardToggler");
+  const cardCloser = document.getElementById("closeCard");
+
+  // querySelectors //
+  const card = document.querySelector(".menu-card-container");
+
+  // function //
+cardToggler.addEventListener("click", function(e){
+  if (card.style.right != "-300px"){
+    card.style.right = "14px";
+  } else card.style.right = "-300px";
+});
+
+window.addEventListener("click", function(e){
+  if (e.target !== cardToggler && e.target !== card && !card.contains(e.target)){
+    card.style.right = "-300px";
+  }
+});
+</script>
+
+
 </body>
 </html>

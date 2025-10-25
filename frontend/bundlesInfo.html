@@ -1,20 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ecodata</title>
-
-  
-    <meta name="title" content="EcoData">
-  <meta name="description" content="This is related to website developed by IlysCode">
-
-  <link rel="shortcut icon" href="/frontend/css/icons/icon.bg.png" type="image/png">
-  <link rel="stylesheet" href="style.css">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ecodata | Bundles Info</title>
+  <link rel="stylesheet" href="bundles.css" />
+</head>
 
 <style>
-
   :root {
   --bg-cl: #FFF;
   --primary-cl: #fff;
@@ -47,13 +40,17 @@ html:focus-within{
 
 body {
   width: 100%;
-  height: 100vh;
-  background: whitesmoke;
+  height: 100%;
+  background: transparent;
   overflow-y: auto;
   margin: 0;
   padding: 0;
 }
 
+
+/****
+WATCH VIDEO SECTION
+***/
 
 
 /**
@@ -63,16 +60,21 @@ body {
   display: flex;
   width: 100%;
   max-width: 480px;
+  padding: .3rem 1rem;
   justify-self: center;
   height: 3.8rem;
   position: fixed;
   top: 0;
+  margin: 0;
+  left: 0;
+  right: 0;
+  justify-self: center;
   overflow: hidden;
   align-items: center;
   justify-content: space-between;
   background: var(--bg-cl);
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  padding: .5rem 1.2rem;
+  padding: 1rem 1rem;
   z-index: 1000;
 }
 
@@ -105,9 +107,7 @@ body {
   justify-content: end;
   background: transparent;
   border-radius: 4px;
-  margin-right: -.6rem;;
-  
-  padding: 0 .2rem;
+  margin-right: .6rem;;
 }
 
 .nav-right img{
@@ -152,262 +152,170 @@ body {
 
 
 
-/****
-MENU-CARD SECTION
-****/
-.menu-card-container {
-  width: 100%;
-  max-width: 10rem;
-  height: 16rem;
-  position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  right: -200px;
-  top: 4rem;
-  background: var(--bg-cl);
-  box-shadow: 0 4px 8px rgba(58, 57, 57, 0.4);
-  border-radius: .2rem;
-  transition: .5s ease-in-out;
-}
-.close-card{
-  display: flex;
-  width: 100%;
-  height: max-content;
-  padding: .2rem;
-  align-items: end;
-  justify-content: end;
-}
-
-.close-card img{
-  width: 20px;
-  height: 20px;
-  margin: .1rem .5rem;
-  cursor: pointer;
-}
-
-.menu-card{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 1.4rem;
-  width: 100%;
-  height: 90%;
-  background: white;
-}
-
-/***
-CARD TOP
-***/
-.shortcut-links {
-  width: 100%;
-  height: 10rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  top: .1rem;
-  margin: .4rem 0;
-  justify-content: center;
-  align-items: flex-start;
-  position: relative;
-  background-color: transparent;
-}
-
-.link{
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  text-align: center;
-  width: 8.2rem;
-  padding: .1rem .1rem;
-  transition: .2s ease;
-  margin-left: -1rem;
-}
-
-.link img{
-  width: 1.2rem;
-  height: 1.2rem;
-  background-color: rgb(233, 227, 233);
-  padding: .14rem;
-  border-radius: .4rem;
-}
-
-.link a{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  text-decoration: none;
-  gap: .5rem;
-  color: rgb(165, 159, 159);
-}
-
-
-
-.link:hover{
-  background: var(--bg-cl);
-  box-shadow: 1px 1px 3px rgba(65, 63, 63, 0.9), -1px -1px 3px rgba(80, 78, 78, 0.9);
-  border-radius: .5rem;
-}
-
-
-/***
-CARD BOTTOM
-****/
-.logout-btn{
-  display: flex;
-  border: 0.2px solid var(--telecel-btn);
-  width: 9rem;
-  justify-content: center;
-  align-items: center;
-  border-radius: 1rem;
-  background: var(--telecel-btn);
-  color: var(--bg-cl);
-  height: 1.6rem;
-  position: relative;
-  display: flex;
-  box-shadow: 0 2px 6px rgba(207, 99, 80, 0.479);
-  transition: 1s ease;
-  cursor: pointer;
-  margin-bottom: -1rem;
-}
-
-.logout-btn:hover{
-  background: rgb(231, 19, 19);
-  box-shadow: 0 2px 6px rgba(207, 99, 80, 0.479);
-}
-
-/**
-SECTION BUNDLE INFO
-***/
-.bundles-info {
-  display: flex;
-  width: 100%;
-  max-width: 480%;
-  height: 56rem;
-  margin: 11rem 0;
-  align-items: center;
-  justify-content: center;
-  justify-self: center;
-  text-align: center;
-  flex-direction: column;
-  background: transparent;
-}
-
-/***
-NETWORKS
-***/
-.network-section {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 98%;
-  flex-direction: column;
-}
-
-
-/***
-* GET BACK HOME BTN
-****/
-.get-back {
-  display: flex;
-  align-items: center;
-  width: 13rem;
-  margin: 2rem 0;
-  text-align: center;
-  justify-content: center;
-  height: 2.3rem;
-  border: none;
-  background: rgb(44, 42, 42);
-  color: white;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
 </style>
+<style>
+  .bundle-info {
+    text-align: center;
+    padding: 2rem;
+    max-width: 480px;
+    margin: auto;
+  }
+  .network-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .network-btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    width: 7rem;
+    color: #fff;
+    border-radius: 2px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: .4s;
+  }
+  .network-btn:hover {
+    background-color: #004aad;
+  }
+  .bundle-details {
+    background: #fffefe;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    text-align: left;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
 
-</head>
+.bundle-details p{
+  font-size: 1.1rem;
+}
+
+/***
+BUTTONS STYLES
+***/
+.mtn-btn{
+  background: linear-gradient(135deg, rgb(243, 243, 34), rgb(102, 102, 57));
+}
+
+.mtn-btn:hover{
+  background: rgb(212, 212, 35);
+}
+
+.telecel-btn{
+  background: linear-gradient(135deg, rgb(138, 65, 66), rgb(243,5,5));
+}
+.telecel-btn:hover{
+  background: rgb(223, 14, 14);
+}
+.airtel-btn{
+ background: linear-gradient(135deg, rgb(7,7,230), rgb(29, 29, 77));
+}
+
+.airtel-btn:hover{
+  background: rgb(7, 7, 230);
+}
+</style>
 <body>
-
-<nav class="navbar">
+<!-----NAVIGATION BAR-SECTION---->
+  <nav class="navbar">
 <div class="nav-left">
- <a href="index.html">
-  <img src="./css/icons/icon-shortcut.png" alt="image" loading="lazy"></a>
+<a href="index.html">
+  <img src="./css/icons/icon-shortcut.png" alt="image" loading="lazy">
+</a>
 </div>
 <div class="nav-right">
  
 <img id="cardToggler" src="./css/icons/icons8-fries-menu-46.png" alt="image" class="menu-icon" loading="lazy">
 </div>
 </nav>
+<!-----NAVIGATION BAR-SECTION---->
 
-
-<section class="bundles-info">
-  <h1>Our Bundle Packages</h1>
-  <p>Choose from data bundles across MTN, Telecel, AirtelTigo & more. Here’s what you should know before you buy.</p>
-
-  <div class="network-section mtn-network" id="mtn">
-    <h2>MTN Bundles</h2>
-    <div class="bundle-detail">
-      <h3>MTN Express</h3>
-      <p>High-speed data bundle with fast access. this package is a none expiry data bundle package sourced from our connected MTN GROUP Website.</p>
-      <ul>
-        <li>1GB – GH₵ 6.19</li>
-        <li>2GB – GH₵ 12</li>
-        <li>5GB – GH₵ 27</li>
-        <!-- etc. -->
-      </ul>
-      Note: All purchased bundle will be hook with an sms message when processed or delivered to a customer.
-    </div>
-  </div>
-
-  <div class="network-section" id="telecel">
-    <h2>Telecel Bundles (3-Month Expiry (90 days))</h2>
-    <div class="bundle-detail">
-      <h3>Telecel 5GB / 10GB / 20GB</h3>
-      <p>These bundles last for 90 days after activating. You must activate within that period.</p>
-      <ul>
-        <li>5GB – GH₵ 27</li>
-        <li>10GB – GH₵ 47</li>
-        <li>20GB – GH₵ 93</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="network-section" id="at">
-    <h2>AirtelTigo Bundles (iShare)</h2>
-    <div class="bundle-detail">
-      <h3>iShare Data Bundle</h3>
-      <p>Shareable data with friends/family. Valid for 60 days (2 months).</p>
-      <ul>
-        <li>1GB – GH₵ 6</li>
-        <li>2GB – GH₵ 12</li>
-        <li>5GB – GH₵ 26</li>
-        <!-- etc. -->
-      </ul>
-    </div>
-  </div>
-
-  <a href="index.html">
-    <button class="get-back">Back Home</button>
-  </a>
-</section>
-
-
-  <!-- ABOUT -->
-  <section class="about">
-
-      <!-- FOOTER -->
-  <footer>
-    <p class="copyright">&copy; 2025 EcoData All right reserved</p>
-  </footer>
+  <!-- 🌟 Hero Section -->
+  <section class="hero">
+    <h1>Fast. Reliable. Affordable Data Bundles.</h1>
+    <p>Stay connected with our trusted network bundles tailored for every need.</p>
   </section>
 
 
 
 
-<!------MENU-CARD----->
+  <section class="bundle-info">
+  <h2>How Our Data Bundles Work</h2>
+  <p>Select your network to learn more about the process.</p>
+
+  <div class="network-buttons">
+    <button class="network-btn mtn-btn" data-network="mtn">MTN</button>
+    <button class="network-btn telecel-btn" data-network="vodafone">Telecel</button>
+    <button class="network-btn airtel-btn" data-network="airteltigo">AirtelTigo</button>
+  </div>
+
+  <div id="bundle-details" class="bundle-details">
+    <p>Click on a any network button above to see how it works.</p>
+  </div>
+</section>
+
+
+
+  <!-- ⚙ How It Works -->
+  <section class="workflow">
+    <h2>How To Purchase or (Buy)</h2>
+    <div class="steps">
+      <div class="step">
+        <span>1</span>
+        <h3>Select Bundle</h3>
+        <p>Choose your preferred network and data volume (GB).</p>
+      </div>
+
+      <div class="step">
+        <span>2</span>
+        <h3>Phone Number Input</h3>
+        <p>Make sure you start every network number with <strong>233</strong> without plus(+) and the first zero of your number.</p>
+      </div>
+
+      <div class="step">
+        <span>3</span>
+        <h3>Pay Securely</h3>
+        <p>Make instant payment via Paystack with any Ghanaian wallet or card.</p>
+      </div>
+
+      <div class="step">
+        <span>3</span>
+        <h3>Delivery</h3>
+        <p>Your data is automatically sent to the recipient number when prompted as delivered at <strong>check your order status </strong> section at the Homepage.</p>
+      </div>
+      <div class="step">
+        <span>4</span>
+        <h3>Confirmation</h3>
+        <p>Receive transaction confirmation via SMS.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 💬 FAQ / Support -->
+  <section class="faq">
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>How long does it take to receive my bundle?</summary>
+      <p><strong>Ans:</strong> Usually within 30 seconds after successful payment.</p>
+    </details>
+    <details>
+      <summary>Can I buy data for someone else?</summary>
+      <p><strong>Ans:</strong> Yes! Enter the recipient’s number at checkout and we’ll deliver it to the person.</p>
+    </details>
+    <details>
+      <summary>Need help?</summary>
+      <p><strong>Ans:</strong>Contact us at <p >ecodatabundless@gmail.com</p>
+    </details>
+  </section>
+
+
+
+ 
+
+    <!---MENU-CARD-JS-->
+    <!------MENU-CARD----->
 <div class="menu-card-container" id="closeCard">
  
   <div class="menu-card">
@@ -415,109 +323,44 @@ NETWORKS
           <!----ICONS-SECTION-->
     <div class="shortcut-links">
 
-      <div class="link">
-        <a href="index.html">
+         <div class="link">
+       <a href="index.html">
         <img src="./css/icons/home.png" alt="image" loading="lazy">
-        <span>Home</span>
-        </a>
+        <span> Back to Home</span>
+       </a>
       </div>
 
+      
        <div class="link">
-       <a href="mtn-page.html">
-        <img src="./css/icons/mtn-signal.png" alt="image" loading="lazy">
-        <span>MTN</span>
+       <a href="https://chat.whatsapp.com/CdemFa0YXXc8rgxQZKvSIq?mode=wwc">
+        <img src="./css/icons/agent.png" alt="image" loading="lazy">
+        <span>Be an Agent?</span>
        </a>
       </div>
 
        <div class="link">
-       <a href="telecel-page.html">
-        <img src="./css/icons/telecel-signal.png" alt="image" loading="lazy">
-        <span>Telecel</span>
+       <a href="terms.html">
+        <img src="./css/icons/terms (1).png" alt="image" loading="lazy">
+        <span>Terms of use</span>
        </a>
       </div>
+
 
        <div class="link">
-       <a href="aiteltigo-page.html">
-        <img src="./css/icons/tigo-signal.png" alt="image" loading="lazy">
-        <span>Airteltigo</span>
+       <a href="#">
+        <img src="./css/icons/list.jpg" alt="image" loading="lazy">
+        <span>Bundles info</span>
        </a>
       </div>
-
     </div>
     </div>
     <div class="menu-card-bottom">
-      <a href="login.html">  <button  id="logout-btn" class="logout-btn">Login</button></a>
+      <a href="login.html">  <button  id="logout-btn" class="logout-btn">Login/Sign-Up</button></a>
     </div>
   </div>
 </div>
 
-  <!-- ✅ WhatsApp Floating Chat -->
-<div id="whatsappChat">
-  <div id="chatButton">
-    💬
-  </div>
 
-  <div id="chatBox">
-    <h4>Chat with us on WhatsApp</h4>
-    <input type="text" id="whatsappMessage" placeholder="Type your message..." />
-    <button id="sendMsgBtn">Send</button>
-  </div>
-</div>
-
-
-<!-- End WhatsApp Floating Chat -->
-<script>
-  // === CONFIG ===
-  const whatsappNumber = "233535565637";
-
-  // === ELEMENTS ===
-  const chatButton = document.getElementById("chatButton");
-  const chatBox = document.getElementById("chatBox");
-  const sendBtn = document.getElementById("sendMsgBtn");
-
-  // === TOGGLE CHAT BOX ===
-  chatButton.addEventListener("click", () => {
-    chatBox.classList.toggle("show");
-  });
-
-  // === SEND MESSAGE ===
-  sendBtn.addEventListener("click", () => {
-    const message = document.getElementById("whatsappMessage").value.trim();
-    if (!message) {
-      alert("Please type your message before sending.");
-      return;
-    }
-
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappURL =` https://wa.me/${233535565637}?text=${encodedMessage}`;
-    window.open(whatsappURL, "_blank");
-    document.getElementById("whatsappMessage").value = ""; // clear after sending
-});
-</script>
-
-
-<!---MENU-CARD-JS-->
-<script>
-  const cardToggler = document.getElementById("cardToggler");
-  const cardCloser = document.getElementById("closeCard");
-
-  // querySelectors //
-  const card = document.querySelector(".menu-card-container");
-
-  // function //
-cardToggler.addEventListener("click", function(e){
-  if (card.style.right != "-200px"){
-    card.style.right = "14px";
-  } else card.style.right = "-200px";
-});
-
-window.addEventListener("click", function(e){
-  if (e.target !== cardToggler && e.target !== card && !card.contains(e.target)){
-    card.style.right = "-200px";
-  }
-});
-
-
-</script>
+ <script src="bundles.js"></script>
 </body>
 </html>

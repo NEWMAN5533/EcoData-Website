@@ -1120,6 +1120,7 @@ MENU-CARD SECTION
   height: 14.5rem;
   margin: 0 .4rem;
   padding: .4rem 0;
+   border: 0.2px solid pink;
   background: rgb(255, 255, 255);
   border-end-end-radius: 1rem;
   border-start-start-radius: 1rem;
