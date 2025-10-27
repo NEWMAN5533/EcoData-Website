@@ -5,7 +5,7 @@
         <li>MTN Bundles are delivered within 2–30minutes after it is prompted as delivered at the section for checking order status.</li>
         <li>Ensure your number starts with <b> 23355123..., 23359123..., or 23325123..</b>.</li>
         <li>If delivery delays, contact 
-        <p><strong>WhatsAAp:</strong> 0535565637</p></li>
+        <p><strong>WhatsAp:</strong> 0535565637</p></li>
         <li>All transactions are secured via Paystack.</li>
       </ul>
       <p><b>Refunds:</b> If bundle purchase failed, refunds are processed within 24 hours.</p>
