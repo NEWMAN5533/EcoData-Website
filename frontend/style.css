@@ -556,7 +556,6 @@ BUNDLE PROCESSING
   height: 10rem;
   background: transparent;
   margin: .5rem 0;
-
   border-radius: .8rem;
   box-shadow: 0 2px 6px rgba(109, 106, 106, 0.2);
 }
@@ -564,6 +563,7 @@ BUNDLE PROCESSING
 .purchase-title {
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 98%;
   height: 20%;
   background-color: transparent;
@@ -1043,6 +1043,8 @@ SECTION TITLE
   background: transparent;
   box-shadow: inset  0 2px 6px rgba(124, 124, 124, 0.4);
   position: relative;
+  border-end-start-radius: 1.8rem;
+  border-start-end-radius: 1.8rem;
 }
 
 
@@ -2020,7 +2022,7 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 **/
 .section-title {
   width: 100%;
-  max-width: 300px;
+  max-width: 290px;
   height: 3rem;
   display: flex;
   padding: .4rem 0;
@@ -2416,7 +2418,12 @@ footer img{
  }
 
 /* 2. Small phones */
-@media (min-width: 360px) { 
+@media (max-width: 360px) { 
+
+  .navbar{
+    width: 100%;
+    max-width: 360px;
+  }
   /****
 ORDER STATUS
 ***/
@@ -2576,7 +2583,7 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 **/
 .section-title {
   width: 100%;
-  max-width: 340px;
+  max-width: 330px;
   height: 3rem;
   display: flex;
   padding: .4rem 0;
@@ -2971,6 +2978,10 @@ footer img{
 
 /* 3. Larger small phones */
 @media (max-width: 375px) {
+  .navbar{
+    width: 100%;
+    max-width: 375px;
+  }
   /****
 ORDER STATUS
 ***/
@@ -3131,7 +3142,7 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 **/
 .section-title {
   width: 100%;
-  max-width: 355px;
+  max-width: 345px;
   height: 3rem;
   display: flex;
   padding: .4rem 0;
@@ -3526,6 +3537,10 @@ footer img{
 
 /* 4. Standard mobile (e.g. iPhone X/12/13) */
 @media (max-width: 414px) {
+  .navbar{
+    width: 100%;
+    max-width: 414px;
+  }
   /****
 ORDER STATUS
 ***/
@@ -3682,11 +3697,13 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
 
+
+
 /**SECTION TITLE
 **/
 .section-title {
   width: 100%;
-  max-width: 390px;
+  max-width: 380px;
   height: 3rem;
   display: flex;
   padding: .4rem 0;
@@ -3694,7 +3711,7 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   justify-self: center;
   justify-content: flex-start;
   margin: 1rem  0;
-  background: transparent;
+  background: black;
   box-shadow: inset  0 2px 6px rgba(124, 124, 124, 0.4);
   position: relative;
 }
@@ -3706,7 +3723,7 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   align-items: center;
   justify-content: center;
   margin: 0 1.5rem;
-  background: none;
+  background: var(--card-full-bg-cl);
   width: 98%;
   text-align: center;
   height: 3rem;
@@ -3725,24 +3742,46 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
 .section-content .mtnt {
-  color: var(--card-full-bg-cl);
+  color: white;
   align-items: center;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
 }
 
+
+
 .section-content .telecelt{
-  color: var(--card-full-tele-bg-cl);
+  color: white;
   align-items: center;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
+}
+
+.tele{
+  background: var(--dark-cl);
+}
+
+.telec{
+  background-color: var(--card-full-tele-bg-cl);
 }
 
 .section-content .airtelt{
-  color: var(--card-full-airtel-bg-cl);
+  color: white;
   align-items: center;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
+}
+
+.airtel{
+  background: var(--dark-cl);
+}
+
+.airtelc{
+  background: var(--card-full-airtel-bg-cl);
 }
 
 /**--SECTION-TITLE-ENDS--**/
+
+
+
+
 
 /*------REAL BUNDLE CARD-MTN--*/
 .bundle-cards-container {
@@ -4081,6 +4120,10 @@ footer img{
 
 /* 5. Large phones / Tablets */
 @media (max-width: 480px) {
+  .navbar{
+    width: 100%;
+    max-width: 480px;
+  }
    /****
 ORDER STATUS
 ***/
@@ -4193,7 +4236,8 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 /**---NETWORKS-PURCHASED-DETAILS---**/
 .networks-purchased-container {
   width: 100%;
-  max-width: 460px;
+  max-width: 400px;
+  background: transparent;
   height: 8rem;
   margin: .5rem 0;
   gap: .4rem;
@@ -4212,7 +4256,7 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 .purchase-title h5{
   font-size: 1.2rem;
   text-align: center;
-  color: rgb(160, 160, 55);
+  color: rgb(51, 51, 34);
   font-family: 'Times New Roman', Times;
 }
 
@@ -4231,7 +4275,7 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
 .purchase-container a .card-box{
-  width:  5rem;
+  width:  6rem;
   height: 4rem;
   font-size: .7rem;
 }
@@ -4241,7 +4285,7 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 **/
 .section-title {
   width: 100%;
-  max-width: 460px;
+  max-width: 440px;
   height: 3rem;
   display: flex;
   padding: .4rem 0;
@@ -4249,7 +4293,7 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   justify-self: center;
   justify-content: flex-start;
   margin: 1rem  0;
-  background: transparent;
+  background: black;
   box-shadow: inset  0 2px 6px rgba(124, 124, 124, 0.4);
   position: relative;
 }
@@ -4261,7 +4305,7 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   align-items: center;
   justify-content: center;
   margin: 0 1.5rem;
-  background: none;
+  background: var(--card-full-bg-cl);
   width: 98%;
   text-align: center;
   height: 3rem;
@@ -4280,21 +4324,39 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
 .section-content .mtnt {
-  color: var(--card-full-bg-cl);
+  color: white;
   align-items: center;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
 }
 
+
+
 .section-content .telecelt{
-  color: var(--card-full-tele-bg-cl);
+  color: white;
   align-items: center;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
+}
+
+.tele{
+  background: var(--dark-cl);
+}
+
+.telec{
+  background-color: var(--card-full-tele-bg-cl);
 }
 
 .section-content .airtelt{
-  color: var(--card-full-airtel-bg-cl);
+  color: white;
   align-items: center;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
+}
+
+.airtel{
+  background: var(--dark-cl);
+}
+
+.airtelc{
+  background: var(--card-full-airtel-bg-cl);
 }
 
 /**--SECTION-TITLE-ENDS--**/
@@ -4367,8 +4429,8 @@ margin: .2rem .1rem;
 }
 
 .bottom-bundle-card .buy-btn{
-  width: 9.5rem;
-  max-height: 1.5rem;
+  width: 10rem;
+  max-height: 1.6rem;
 }
 
 
@@ -4461,7 +4523,7 @@ margin: .2rem .1rem;
 
 .bottom-bundle-telecel-card .buy-btn{
   width: 9.5rem;
-  max-height: 1.5rem;
+  max-height: 1.6rem;
 }
 
 
@@ -4536,7 +4598,7 @@ margin: .2rem .1rem;
 
 .bottom-bundle-airteltigo-card .buy-btn{
  width: 9.5rem;
-  max-height: 1.5rem;
+  max-height: 1.6rem;
 }
 
 
