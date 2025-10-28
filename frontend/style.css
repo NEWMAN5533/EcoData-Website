@@ -387,12 +387,12 @@ ORDER STATUS
 }
 
 .order-status-section input {
-  height: 2.6rem;
+  height: 2.8rem;
   width: 80%;
   padding: 10px;
   color: white;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   border: 1px solid #ebe5e5;
   border-radius: 8px;
   margin-bottom: 1rem;
@@ -1033,7 +1033,7 @@ SECTION TITLE
 .section-title {
   width: 100%;
   max-width: 420px;
-  height: 4.8rem;
+  height: 3rem;
   display: flex;
   padding: .4rem 0;
   align-items: center;
@@ -1085,6 +1085,80 @@ SECTION TITLE
   color: var(--card-full-airtel-bg-cl);
   align-items: center;
   font-size: 2rem;
+}
+
+
+
+.section-content {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: 0 1.5rem;
+  background: var(--card-full-bg-cl);
+  width: 98%;
+  text-align: center;
+  height: 3rem;
+  border: none;
+}
+
+.section-content h1{
+  font-size: 1.2rem;
+}
+
+
+.section-content img{
+  width: 2rem;
+  height: 1.8rem;
+  justify-self: center;
+}
+
+.section-content .mtnt {
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+
+
+.section-content .telecelt{
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.mtns{
+  background-color: var(--dark-cl);
+}
+
+.mtnc{
+  background: var(--card-full-bg-cl);
+}
+
+.tele{
+  background: var(--dark-cl);
+}
+
+.telec{
+  background-color: var(--card-full-tele-bg-cl);
+}
+
+.section-content .airtelt{
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.airtel{
+  background: var(--dark-cl);
+}
+
+.airtelc{
+  background: var(--card-full-airtel-bg-cl);
+}
+
+.airtelc h1{
+  color: rgb(4, 4, 8);
 }
 
 
@@ -2603,7 +2677,7 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   align-items: center;
   justify-content: center;
   margin: 0 1.5rem;
-  background: none;
+  background: var(--card-full-bg-cl);
   width: 98%;
   text-align: center;
   height: 3rem;
@@ -2622,21 +2696,39 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
 .section-content .mtnt {
-  color: var(--card-full-bg-cl);
+  color: white;
   align-items: center;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
 }
 
+
+
 .section-content .telecelt{
-  color: var(--card-full-tele-bg-cl);
+  color: white;
   align-items: center;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
+}
+
+.tele{
+  background: var(--dark-cl);
+}
+
+.telec{
+  background-color: var(--card-full-tele-bg-cl);
 }
 
 .section-content .airtelt{
-  color: var(--card-full-airtel-bg-cl);
+  color: white;
   align-items: center;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
+}
+
+.airtel{
+  background: var(--dark-cl);
+}
+
+.airtelc{
+  background: var(--card-full-airtel-bg-cl);
 }
 
 /**--SECTION-TITLE-ENDS--**/
@@ -3156,13 +3248,15 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
 
+
+
 .section-content {
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: center;
   margin: 0 1.5rem;
-  background: none;
+  background: var(--card-full-bg-cl);
   width: 98%;
   text-align: center;
   height: 3rem;
@@ -3181,22 +3275,43 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
 .section-content .mtnt {
-  color: var(--card-full-bg-cl);
+  color: white;
   align-items: center;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
 }
 
+
+
 .section-content .telecelt{
-  color: var(--card-full-tele-bg-cl);
+  color: white;
   align-items: center;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
+}
+
+.tele{
+  background: var(--dark-cl);
+}
+
+.telec{
+  background-color: var(--card-full-tele-bg-cl);
 }
 
 .section-content .airtelt{
-  color: var(--card-full-airtel-bg-cl);
+  color: white;
   align-items: center;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
 }
+
+.airtel{
+  background: var(--dark-cl);
+}
+
+.airtelc{
+  background: var(--card-full-airtel-bg-cl);
+}
+
+
+
 
 /**--SECTION-TITLE-ENDS--**/
 
@@ -4706,7 +4821,7 @@ footer img{
 @media (max-width: 768px) { }
 
 /* 9. Tablets landscape / small laptops */
-@media (max-width: 800px) { }
+@media (min-width: 800px) { }
 
 /* 10. Large tablets */
 @media (max-width: 900px) { }
