@@ -7987,7 +7987,6 @@ WELCOME CARD
     height: 7.8rem;
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 3.2rem;
   }
 
@@ -8711,7 +8710,7 @@ WELCOME CARD
     height: 7.8rem;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 3.2rem;
   }
 
