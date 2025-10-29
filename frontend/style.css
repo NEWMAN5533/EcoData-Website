@@ -51,7 +51,6 @@ WATCH VIDEO SECTION
 .navbar {
   display: flex;
   width: 100%;
-  max-width: 480px;
   justify-self: center;
   height: 3.8rem;
   position: fixed;
@@ -1795,7 +1794,6 @@ border-radius: 4px;
   /***--NAVBAR--**/
   .navbar{
     width: 100%;
-    max-width: 335px;
     height: 2.9rem;
     left: 0;
     position: fixed;
@@ -2499,7 +2497,6 @@ footer img{
 
   .navbar{
     width: 100%;
-    max-width: 360px;
   }
   /****
 ORDER STATUS
@@ -3075,7 +3072,6 @@ footer img{
 @media (max-width: 375px) {
   .navbar{
     width: 100%;
-    max-width: 375px;
   }
   /****
 ORDER STATUS
@@ -3657,7 +3653,7 @@ footer img{
 @media (max-width: 414px) {
   .navbar{
     width: 100%;
-    max-width: 414px;
+  
   }
   /****
 ORDER STATUS
@@ -4240,7 +4236,7 @@ footer img{
 @media (max-width: 480px) {
   .navbar{
     width: 100%;
-    max-width: 480px;
+  
   }
    /****
 ORDER STATUS
@@ -4818,7 +4814,7 @@ footer img{
 @media (min-width: 600px) { 
    .navbar{
     width: 100%;
-    max-width: 600px;
+ 
   }
 
 
@@ -5594,7 +5590,7 @@ footer img{
 @media (min-width: 640px) {
   .navbar{
     width: 100%;
-    max-width: 640px;
+   
   }
 
 
@@ -6370,7 +6366,7 @@ footer img{
 @media (min-width: 768px) {
   .navbar{
     width: 100%;
-    max-width: 768px;
+  
   }
 
 
@@ -7146,7 +7142,7 @@ footer img{
 @media (min-width: 800px) { 
   .navbar{
     width: 100%;
-    max-width: 800px;
+   
   }
 
 
@@ -7872,7 +7868,6 @@ footer img{
 @media (min-width: 900px) {
   .navbar{
     width: 100%;
-    max-width: 900px;
   }
 
 
@@ -8597,7 +8592,6 @@ footer img{
 @media (min-width: 1024px) { 
   .navbar{
     width: 100%;
-    max-width: 1020px;
   }
 
 
@@ -9323,7 +9317,6 @@ footer img{
 @media (min-width: 1200px) {
   .navbar{
     width: 100%;
-    max-width: 1225px;
     left: 0;
     margin: 0;
   }
@@ -10103,7 +10096,6 @@ footer img{
 @media (min-width: 1280px) {
    .navbar{
     width: 100%;
-    max-width: 1280px;
     left: 0;
     margin: 0;
   }
@@ -10885,7 +10877,6 @@ footer img{
 @media (min-width: 1440px) { 
    .navbar{
     width: 100%;
-    max-width: 1440px;
     left: 0;
     margin: 0;
   }
@@ -11664,7 +11655,6 @@ footer img{
 @media (min-width:1920px){
    .navbar{
     width: 100%;
-    max-width: 1920px;
     left: 0;
     margin: 0;
   }
