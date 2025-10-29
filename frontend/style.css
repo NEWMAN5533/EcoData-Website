@@ -148,7 +148,6 @@ WATCH VIDEO SECTION
 
 
 
-
 /**
 CARD CONTAINER
 **/
@@ -365,6 +364,10 @@ WELCOME CARD
 
 
 
+
+
+
+
 /****
 ORDER STATUS
 ***/
@@ -375,7 +378,7 @@ ORDER STATUS
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  max-width: 440px;
+  max-width: 400px;
   margin: 2rem auto;
   padding: 1rem;
   gap: 1.2rem;
@@ -4249,7 +4252,7 @@ ORDER STATUS
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  max-width: 470px;
+  max-width: 400px;
   margin: 2rem auto;
   padding: 1rem;
   gap: 1.2rem;
@@ -4812,34 +4815,7626 @@ footer img{
  }
 
 /* 6. Small tablets */
-@media (max-width: 600px) { }
+@media (min-width: 600px) { 
+   .navbar{
+    width: 100%;
+    max-width: 600px;
+  }
+
+
+/**
+CARD CONTAINER
+**/
+.card-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 590px;
+  justify-content:  center;
+  align-items: center;
+  justify-self: center;
+  margin: 0 1rem;
+  height: max-content;
+  background: transparent;
+}
+
+
+/**
+WELCOME CARD 
+**/
+.welcome-card {
+  width: 94%;
+  height: 10rem;
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  background: var(--bg-cl);
+  border-radius: .6rem;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.3), -1px -1px 2px rgba(0,0,0,0.3);
+  margin-top: 4.3rem; 
+}
+
+.welcome-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 99%;
+  height: 6rem;
+  margin: 0.2rem .2rem;
+  justify-self: center;
+  background: var(--bg-cl);
+  border-start-start-radius: .4rem;
+  border-start-end-radius: .4rem;
+  border-end-end-radius: .4rem;
+  border-end-start-radius: .4rem;
+  box-shadow:   1px 1px 3px rgb(151, 147, 147),  -1px -1px 3px rgb(189, 184, 184);
+}
+
+.welcome-top-left{
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 1.2rem;
+  justify-content: center;
+  font-size: 1.1rem;
+  gap: 0.4rem;
+  font-weight: 600;
+  color: rgb(24, 23, 23);
+  font-family: Arial sans-serif;
+}
+
+.welcome-top-left small{
+  width: 3rem;
+  color: rgb(95, 90, 90);
+  font-weight: 500;
+  font-family: Arial sans-serif;
+}
+
+/**
+ WELCOME TOP RIGHT
+ **/
+ .welcome-top-right {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+ }
+
+  .welcome-top-right input{
+    width: 260px;
+    height: 2rem;
+    margin: 0 2rem;
+    margin-right: 5rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    color: var(--dark-cl);
+    background-color: transparent;
+    border: 0.1px solid var(--background-cl);
+    border-radius: .8rem;
+  }
+
+  .welcome-top-right input:where(:hover :focus-within){
+    border: 1px solid rgb(156, 151, 151);
+
+  }
+
+  .welcome-top-right input::placeholder{
+    color: rgb(197, 190, 190);
+    position: absolute;
+    margin: 0 .5rem;
+  }
+
+  /*-----BOTTOM-----*/
+  .welcome-bottom {
+    width: 100%;
+    height: 7.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3.2rem;
+  }
+
+
+
+  .close-time {
+    width: 35;
+    height: 100%;
+    display: flex;
+    background: transparent;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .1rem;
+    text-align: center;
+    flex-direction: column;
+    margin-left: 1rem;
+    margin-bottom: .5rem;
+  }
+
+  .close-time small{
+    font-size: 1.2rem;
+    color: var(--card-full-tele-bg-cl);
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  .close-time span{
+    color: white;
+    padding: .3rem 1.5rem;
+    background: var(--dark-cl);
+    border-radius: 4px;
+    font-size: 1rem;
+    border: 0.1px solid var(--background-cl);
+  }
+
+
+#clock {
+      font-family: 'Digital-7', monospace;
+      font-size: 1rem;
+      color: #00ffcc;
+      background: var(--dark-cl);
+      padding: 15px 25px;
+      border-radius: 4px;
+      display: inline-block;
+      width: 50%;
+      height: 2.4rem;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-right: .7rem;
+      margin-top: 2.5rem;
+    }
+
+
+
+
+
+
+
+  .two-div-container{
+  display: flex;
+  max-width: 760px;
+  width: 100%;
+  gap: 1rem;
+  background-color: red;
+  height: max-content;
+  background: transparent;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+
+   /****
+ORDER STATUS
+***/
+
+.order-status-section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 240px;
+  margin: 2rem auto;
+  padding: 1rem;
+  gap: .2rem;
+ 
+}
+
+.order-status-section input {
+  height: 2.2rem;
+  width: 80%;
+  padding: 10px;
+  color: white;
+  font-size: .9rem;
+  font-weight: 600;
+  border: 1px solid #ebe5e5;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.order-status-section button {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: 2s ease;
+}
+
+
+
+/**99
+order2 style
+***/
+/* Order status card */
+#orderStatusCard {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  padding: 14px;
+  z-index: 99999;
+  font-family: Arial, sans-serif;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+#orderStatusCard.hidden { 
+opacity: 0; 
+transform: translateY(8px);
+pointer-events: none; }
+
+#orderStatusCard h4 {
+   margin: 0 0 8px 0;
+    font-size: .8rem; 
+  }
+#orderStatusCard p {
+   margin: 6px 0; 
+   font-size: 0.9rem;
+    color: #333; }
+
+
+.status-badge {
+  display:inline-block;
+  width: 70%;
+  padding:6px 10px;
+  border-radius:999px;
+  color: #fff;
+  font-weight: 700;
+  text-transform: capitalize;
+  font-size: 0.85rem;
+}
+
+/* Status color classes */
+.status-pending { background: #f39c12; }      /* orange */
+.status-processing { background: #3498db; }   /* blue */
+.status-delivered { background: #2ecc71; }    /* green */
+.status-failed { background: #e74c3c; }       /* red */
+.status-cancelled { background: #9e9e9e; }    /* gray */
+.status-refunded { background: #795548; }     /* brown */
+.status-resolved { background: #27ae60; }     /* dark green */
+
+/* Manual check result box */
+#statusResult { 
+margin-top: 12px; 
+width: 60%;
+padding: 12px; 
+background:#f5f7fb;
+border-radius: 8px; 
+box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/**--ORDER STAtUS ENDS--**/
+
+
+/**---NETWORKS-PURCHASED-DETAILS---**/
+.networks-purchased-container {
+  width: 100%;
+  max-width: 410px;
+  background: transparent;
+  height: 9rem;
+  margin-right: 2rem;
+  gap: .4rem;
+}
+
+.purchase-title {
+  display: flex;
+  align-items: center;
+  width: 98%;
+  height: 20%;
+  margin-bottom: .1rem;
+  padding: .3rem;
+  font-size: 1.2rem;
+}
+
+.purchase-title h5{
+  font-size: 1.2rem;
+  text-align: center;
+  color: rgb(51, 51, 34);
+  font-family: 'Times New Roman', Times;
+}
+
+.purchase-container{
+  width: 98%;
+  height: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+}
+
+.purchase-container a{
+  text-decoration: none;
+  color: var(--bg-cl);
+}
+
+.purchase-container a .card-box{
+  width:  5rem;
+  height: 4rem;
+  font-size: .7rem;
+}
+
+
+/**SECTION TITLE
+**/
+.section-title {
+  width: 100%;
+  max-width: 540px;
+  height: 3rem;
+  display: flex;
+  padding: .4rem 0;
+  align-items: center;
+  justify-self: center;
+  justify-content: flex-start;
+  margin: 1rem  0;
+  background: black;
+  box-shadow: inset  0 2px 6px rgba(124, 124, 124, 0.4);
+  position: relative;
+}
+
+
+.section-content {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: 0 1.5rem;
+  background: var(--card-full-bg-cl);
+  width: 98%;
+  text-align: center;
+  height: 3rem;
+  border: none;
+}
+
+.section-content h1{
+  font-size: 1.2rem;
+}
+
+
+.section-content img{
+  width: 2rem;
+  height: 1.8rem;
+  justify-self: center;
+}
+
+.section-content .mtnt {
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+
+
+.section-content .telecelt{
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.tele{
+  background: var(--dark-cl);
+}
+
+.telec{
+  background-color: var(--card-full-tele-bg-cl);
+}
+
+.section-content .airtelt{
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.airtel{
+  background: var(--dark-cl);
+}
+
+.airtelc{
+  background: var(--card-full-airtel-bg-cl);
+}
+
+/**--SECTION-TITLE-ENDS--**/
+
+/*------REAL BUNDLE CARD-MTN--*/
+.bundle-cards-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-container {
+  width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+/**
+BECAUSE OF PROMO
+****/
+
+
+.bundle-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 10.5rem;
+  height: 9rem;
+  gap: 0;
+  background: var(--card-full-bg-cl);
+  border-radius: .8rem;
+}
+
+
+.top-bundle-card {
+width: 98%;
+height: 38%;
+gap: 1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+
+.bottom-bundle-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+.old-price {
+  display: flex;
+  font-size: .9rem;
+  color: rgb(14, 138, 101);
+  text-decoration: line-through;
+}
+
+.bottom-bundle-card .buy-btn{
+  width: 9rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-card h2{
+  font-size: .9rem;
+  font-family: Arial ;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+
+.price-gb {
+  width: 100%;
+  height: 40%;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background-color: transparent;
+}
+
+.price-gb small{
+  width: 60%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: .9rem;
+  font-weight: 500;
+  font-family: Arial sans-serif;
+  color: #24463e;;
+}
+/**--MTN-CARD-ENDS--**/
+
+
+
+
+
+/*------REAL BUNDLE CARD--TELECEL-*/
+.bundle-cards-telecel-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+  background: transparent;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-telecel-container {
+   width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+.bundle-card-telecel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 10.5rem;
+  height: 9rem;
+  gap: 0;
+  background: var(--card-full-tele-bg-cl);
+  border-radius: .8rem;
+}
+
+.top-bundle-telecel-card {
+width: 98%;
+height: 38%;
+gap: .1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-telecel-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+.bottom-bundle-telecel-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+
+.bottom-bundle-telecel-card .buy-btn{
+  width: 9rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-telecel-card h2{
+  font-size: .9rem;
+  font-family: Arial;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+
+/**--TELECEL-CARD-ENDS--**/
+
+
+
+
+
+/* AIRTELTIGO SECTION
+*/
+/*------REAL BUNDLE CARD--TELECEL-*/
+.bundle-cards-airteltigo-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+  background: transparent;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-airteltigo-container {
+    width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+.bundle-card-airteltigo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 10.5rem;
+  height: 9rem;
+  gap: 0;
+  background: rgb(6, 6, 231);
+  border-radius: .8rem;
+}
+
+.top-bundle-airteltigo-card {
+width: 98%;
+height: 38%;
+gap: .1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-airteltigo-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+.bottom-bundle-airteltigo-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+.bottom-bundle-airteltigo-card .buy-btn{
+ width: 9rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-airteltigo-card h2{
+  font-size: .9rem;
+  font-family: Arial;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+/***--AIRTEL-CARD-ENDS--**/
+
+
+/**--MENU-CARD
+
+
+
+
+/**-------FOOTER SECTION----***/
+
+/* ABOUT & FOOTER */
+.about,
+footer {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-self: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: max-content;
+  max-width: 600px;
+  text-align: center;
+  padding: .2rem;
+  color: white;
+  background-color:  rgb(6, 6, 8) ;
+  bottom: 0;
+}
+
+.about{
+  border-block-end: 1px solid var(--ascent-cl);
+}
+
+section footer .bar{
+  margin: 0;
+  bottom: 0;
+}
+.about h3{
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: var(--background-cl);
+}
+.about h4{
+  color: rgb(45, 182, 148);
+  margin-top: 0.4rem;
+  font-size: 1.2rem;
+}
+
+.about P{
+  width: 90%;
+  font-size: .9rem;
+  font-weight: 300;
+  line-height: 1.6rem;
+}
+
+.about img{
+border-radius: 2rem;
+width: 1.6rem;
+height: 1.6rem;
+margin: 0 .5rem;
+}
+
+
+
+
+footer a{
+  font-weight: 500;
+  margin-left: 0.1rem;
+}
+
+footer .copyright{
+  font-size: .9rem;
+  width: 100%;
+  max-width: 320px;
+ 
+}
+
+
+
+footer img{
+  width: 2.6rem;
+  height: 2.6rem;
+  vertical-align: middle;
+  margin-left: 0.6rem;
+}
+}
 
 /* 7. Mid-size tablets */
-@media (max-width: 640px) { }
+@media (min-width: 640px) {
+  .navbar{
+    width: 100%;
+    max-width: 640px;
+  }
+
+
+/**
+CARD CONTAINER
+**/
+.card-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 760px;
+  justify-content:  center;
+  align-items: center;
+  justify-self: center;
+  margin: 0 1rem;
+  height: max-content;
+  background: transparent;
+}
+
+
+/**
+WELCOME CARD 
+**/
+.welcome-card {
+  width: 94%;
+  height: 10rem;
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  background: var(--bg-cl);
+  border-radius: .6rem;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.3), -1px -1px 2px rgba(0,0,0,0.3);
+  margin-top: 4.3rem; 
+}
+
+.welcome-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 99%;
+  height: 6rem;
+  margin: 0.2rem .2rem;
+  justify-self: center;
+  background: var(--bg-cl);
+  border-start-start-radius: .4rem;
+  border-start-end-radius: .4rem;
+  border-end-end-radius: .4rem;
+  border-end-start-radius: .4rem;
+  box-shadow:   1px 1px 3px rgb(151, 147, 147),  -1px -1px 3px rgb(189, 184, 184);
+}
+
+.welcome-top-left{
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 1.2rem;
+  justify-content: center;
+  font-size: 1.1rem;
+  gap: 0.4rem;
+  font-weight: 600;
+  color: rgb(24, 23, 23);
+  font-family: Arial sans-serif;
+}
+
+.welcome-top-left small{
+  width: 3rem;
+  color: rgb(95, 90, 90);
+  font-weight: 500;
+  font-family: Arial sans-serif;
+}
+
+/**
+ WELCOME TOP RIGHT
+ **/
+ .welcome-top-right {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+ }
+
+  .welcome-top-right input{
+    width: 100px;
+    height: 2rem;
+    margin: 0 2rem;
+    margin-right: -.1rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    color: var(--dark-cl);
+    background-color: transparent;
+    border: 0.1px solid var(--background-cl);
+    border-radius: .8rem;
+  }
+
+  .welcome-top-right input:where(:hover :focus-within){
+    border: 1px solid rgb(156, 151, 151);
+
+  }
+
+  .welcome-top-right input::placeholder{
+    color: rgb(197, 190, 190);
+    position: absolute;
+    margin: 0 .5rem;
+  }
+
+  /*-----BOTTOM-----*/
+  .welcome-bottom {
+    width: 100%;
+    height: 7.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3.2rem;
+  }
+
+
+
+  .close-time {
+    width: 35;
+    height: 100%;
+    display: flex;
+    background: transparent;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .1rem;
+    text-align: center;
+    flex-direction: column;
+    margin-left: 1rem;
+    margin-bottom: .5rem;
+  }
+
+  .close-time small{
+    font-size: 1.2rem;
+    color: var(--card-full-tele-bg-cl);
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  .close-time span{
+    color: white;
+    padding: .3rem 1.5rem;
+    background: var(--dark-cl);
+    border-radius: 4px;
+    font-size: 1rem;
+    border: 0.1px solid var(--background-cl);
+  }
+
+
+#clock {
+      font-family: 'Digital-7', monospace;
+      font-size: 1rem;
+      color: #00ffcc;
+      background: var(--dark-cl);
+      padding: 15px 25px;
+      border-radius: 4px;
+      display: inline-block;
+      width: 50%;
+      height: 2.4rem;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-right: .7rem;
+      margin-top: 2.5rem;
+    }
+
+
+
+
+
+
+
+  .two-div-container{
+  display: flex;
+  max-width: 760px;
+  width: 100%;
+  gap: 1rem;
+  background-color: red;
+  height: max-content;
+  background: transparent;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+
+   /****
+ORDER STATUS
+***/
+
+.order-status-section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 240px;
+  margin: 2rem auto;
+  padding: 1rem;
+  gap: .2rem;
+ 
+}
+
+.order-status-section input {
+  height: 2.2rem;
+  width: 80%;
+  padding: 10px;
+  color: white;
+  font-size: .9rem;
+  font-weight: 600;
+  border: 1px solid #ebe5e5;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.order-status-section button {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: 2s ease;
+}
+
+
+
+/**99
+order2 style
+***/
+/* Order status card */
+#orderStatusCard {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  padding: 14px;
+  z-index: 99999;
+  font-family: Arial, sans-serif;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+#orderStatusCard.hidden { 
+opacity: 0; 
+transform: translateY(8px);
+pointer-events: none; }
+
+#orderStatusCard h4 {
+   margin: 0 0 8px 0;
+    font-size: .8rem; 
+  }
+#orderStatusCard p {
+   margin: 6px 0; 
+   font-size: 0.9rem;
+    color: #333; }
+
+
+.status-badge {
+  display:inline-block;
+  width: 70%;
+  padding:6px 10px;
+  border-radius:999px;
+  color: #fff;
+  font-weight: 700;
+  text-transform: capitalize;
+  font-size: 0.85rem;
+}
+
+/* Status color classes */
+.status-pending { background: #f39c12; }      /* orange */
+.status-processing { background: #3498db; }   /* blue */
+.status-delivered { background: #2ecc71; }    /* green */
+.status-failed { background: #e74c3c; }       /* red */
+.status-cancelled { background: #9e9e9e; }    /* gray */
+.status-refunded { background: #795548; }     /* brown */
+.status-resolved { background: #27ae60; }     /* dark green */
+
+/* Manual check result box */
+#statusResult { 
+margin-top: 12px; 
+width: 60%;
+padding: 12px; 
+background:#f5f7fb;
+border-radius: 8px; 
+box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/**--ORDER STAtUS ENDS--**/
+
+
+/**---NETWORKS-PURCHASED-DETAILS---**/
+.networks-purchased-container {
+  width: 100%;
+  max-width: 400px;
+  background: transparent;
+  height: 9rem;
+  margin-right: 2rem;
+  gap: .4rem;
+}
+
+.purchase-title {
+  display: flex;
+  align-items: center;
+  width: 98%;
+  height: 20%;
+  margin-bottom: .1rem;
+  padding: .3rem;
+  font-size: 1.2rem;
+}
+
+.purchase-title h5{
+  font-size: 1.2rem;
+  text-align: center;
+  color: rgb(51, 51, 34);
+  font-family: 'Times New Roman', Times;
+}
+
+.purchase-container{
+  width: 98%;
+  height: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+}
+
+.purchase-container a{
+  text-decoration: none;
+  color: var(--bg-cl);
+}
+
+.purchase-container a .card-box{
+  width:  5.5rem;
+  height: 4rem;
+  font-size: .7rem;
+}
+
+
+/**SECTION TITLE
+**/
+.section-title {
+  width: 100%;
+  max-width: 580px;
+  height: 3rem;
+  display: flex;
+  padding: .4rem 0;
+  align-items: center;
+  justify-self: center;
+  justify-content: flex-start;
+  margin: 1rem  0;
+  background: black;
+  box-shadow: inset  0 2px 6px rgba(124, 124, 124, 0.4);
+  position: relative;
+}
+
+
+.section-content {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: 0 1.5rem;
+  background: var(--card-full-bg-cl);
+  width: 98%;
+  text-align: center;
+  height: 3rem;
+  border: none;
+}
+
+.section-content h1{
+  font-size: 1.2rem;
+}
+
+
+.section-content img{
+  width: 2rem;
+  height: 1.8rem;
+  justify-self: center;
+}
+
+.section-content .mtnt {
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+
+
+.section-content .telecelt{
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.tele{
+  background: var(--dark-cl);
+}
+
+.telec{
+  background-color: var(--card-full-tele-bg-cl);
+}
+
+.section-content .airtelt{
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.airtel{
+  background: var(--dark-cl);
+}
+
+.airtelc{
+  background: var(--card-full-airtel-bg-cl);
+}
+
+/**--SECTION-TITLE-ENDS--**/
+
+/*------REAL BUNDLE CARD-MTN--*/
+.bundle-cards-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-container {
+  width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+/**
+BECAUSE OF PROMO
+****/
+
+
+.bundle-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 10.5rem;
+  height: 9rem;
+  gap: 0;
+  background: var(--card-full-bg-cl);
+  border-radius: .8rem;
+}
+
+
+.top-bundle-card {
+width: 98%;
+height: 38%;
+gap: 1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+
+.bottom-bundle-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+.old-price {
+  display: flex;
+  font-size: .9rem;
+  color: rgb(14, 138, 101);
+  text-decoration: line-through;
+}
+
+.bottom-bundle-card .buy-btn{
+  width: 9rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-card h2{
+  font-size: .9rem;
+  font-family: Arial ;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+
+.price-gb {
+  width: 100%;
+  height: 40%;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background-color: transparent;
+}
+
+.price-gb small{
+  width: 60%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: .9rem;
+  font-weight: 500;
+  font-family: Arial sans-serif;
+  color: #24463e;;
+}
+/**--MTN-CARD-ENDS--**/
+
+
+
+
+
+/*------REAL BUNDLE CARD--TELECEL-*/
+.bundle-cards-telecel-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+  background: transparent;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-telecel-container {
+   width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+.bundle-card-telecel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 10.5rem;
+  height: 9rem;
+  gap: 0;
+  background: var(--card-full-tele-bg-cl);
+  border-radius: .8rem;
+}
+
+.top-bundle-telecel-card {
+width: 98%;
+height: 38%;
+gap: .1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-telecel-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+.bottom-bundle-telecel-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+
+.bottom-bundle-telecel-card .buy-btn{
+  width: 9rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-telecel-card h2{
+  font-size: .9rem;
+  font-family: Arial;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+
+/**--TELECEL-CARD-ENDS--**/
+
+
+
+
+
+/* AIRTELTIGO SECTION
+*/
+/*------REAL BUNDLE CARD--TELECEL-*/
+.bundle-cards-airteltigo-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+  background: transparent;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-airteltigo-container {
+    width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+.bundle-card-airteltigo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 10.5rem;
+  height: 9rem;
+  gap: 0;
+  background: rgb(6, 6, 231);
+  border-radius: .8rem;
+}
+
+.top-bundle-airteltigo-card {
+width: 98%;
+height: 38%;
+gap: .1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-airteltigo-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+.bottom-bundle-airteltigo-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+.bottom-bundle-airteltigo-card .buy-btn{
+ width: 9rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-airteltigo-card h2{
+  font-size: .9rem;
+  font-family: Arial;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+/***--AIRTEL-CARD-ENDS--**/
+
+
+/**--MENU-CARD
+
+
+
+
+/**-------FOOTER SECTION----***/
+
+/* ABOUT & FOOTER */
+.about,
+footer {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-self: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: max-content;
+  max-width: 640px;
+  text-align: center;
+  padding: .2rem;
+  color: white;
+  background-color:  rgb(6, 6, 8) ;
+  bottom: 0;
+}
+
+.about{
+  border-block-end: 1px solid var(--ascent-cl);
+}
+
+section footer .bar{
+  margin: 0;
+  bottom: 0;
+}
+.about h3{
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: var(--background-cl);
+}
+.about h4{
+  color: rgb(45, 182, 148);
+  margin-top: 0.4rem;
+  font-size: 1.2rem;
+}
+
+.about P{
+  width: 90%;
+  font-size: .9rem;
+  font-weight: 300;
+  line-height: 1.6rem;
+}
+
+.about img{
+border-radius: 2rem;
+width: 1.6rem;
+height: 1.6rem;
+margin: 0 .5rem;
+}
+
+
+
+
+footer a{
+  font-weight: 500;
+  margin-left: 0.1rem;
+}
+
+footer .copyright{
+  font-size: .9rem;
+  width: 100%;
+  max-width: 320px;
+ 
+}
+
+
+
+footer img{
+  width: 2.6rem;
+  height: 2.6rem;
+  vertical-align: middle;
+  margin-left: 0.6rem;
+}
+ }
 
 /* 8. Tablets portrait */
-@media (max-width: 768px) { }
+@media (min-width: 768px) {
+  .navbar{
+    width: 100%;
+    max-width: 768px;
+  }
+
+
+/**
+CARD CONTAINER
+**/
+.card-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 760px;
+  justify-content:  center;
+  align-items: center;
+  justify-self: center;
+  margin: 0 1rem;
+  height: max-content;
+  background: transparent;
+}
+
+
+/**
+WELCOME CARD 
+**/
+.welcome-card {
+  width: 94%;
+  height: 10rem;
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  background: var(--bg-cl);
+  border-radius: .6rem;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.3), -1px -1px 2px rgba(0,0,0,0.3);
+  margin-top: 4.3rem; 
+}
+
+.welcome-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 99%;
+  height: 5.5rem;
+  margin: 0.2rem .2rem;
+  justify-self: center;
+  background: var(--bg-cl);
+  border-start-start-radius: .4rem;
+  border-start-end-radius: .4rem;
+  border-end-end-radius: .4rem;
+  border-end-start-radius: .4rem;
+  box-shadow:   1px 1px 3px rgb(151, 147, 147),  -1px -1px 3px rgb(189, 184, 184);
+}
+
+.welcome-top-left{
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 1.2rem;
+  justify-content: center;
+  font-size: 1.1rem;
+  gap: 0.4rem;
+  font-weight: 600;
+  color: rgb(24, 23, 23);
+  font-family: Arial sans-serif;
+}
+
+.welcome-top-left small{
+  width: 3rem;
+  color: rgb(95, 90, 90);
+  font-weight: 600;
+  font-family: Arial sans-serif;
+}
+
+/**
+ WELCOME TOP RIGHT
+ **/
+ .welcome-top-right {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 2rem;
+ }
+
+  .welcome-top-right input{
+    width: 260px;
+    height: 2rem;
+    margin: 0 2rem;
+    margin-right: -.1rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    color: var(--dark-cl);
+    background-color: transparent;
+    border: 0.1px solid var(--background-cl);
+    border-radius: .8rem;
+  }
+
+  .welcome-top-right input:where(:hover :focus-within){
+    border: 1px solid rgb(156, 151, 151);
+
+  }
+
+  .welcome-top-right input::placeholder{
+    color: rgb(197, 190, 190);
+    position: absolute;
+    margin: 0 .5rem;
+  }
+
+  /*-----BOTTOM-----*/
+  .welcome-bottom {
+    width: 100%;
+    height: 7.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3.2rem;
+  }
+
+
+
+
+  .close-time {
+    width: 35;
+    height: 100%;
+    display: flex;
+    background: transparent;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .1rem;
+    text-align: center;
+    flex-direction: column;
+    margin-left: 1rem;
+    margin-bottom: .5rem;
+  }
+
+  .close-time small{
+    font-size: 1.2rem;
+    color: var(--card-full-tele-bg-cl);
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  .close-time span{
+    color: white;
+    padding: .3rem 1.5rem;
+    background: var(--dark-cl);
+    border-radius: 4px;
+    font-size: 1rem;
+    border: 0.1px solid var(--background-cl);
+  }
+
+
+#clock {
+      font-family: 'Digital-7', monospace;
+      font-size: 1rem;
+      color: #00ffcc;
+      background: var(--dark-cl);
+      padding: 15px 25px;
+      border-radius: 4px;
+      display: inline-block;
+      width: 50%;
+      height: 2.6rem;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-right: .7rem;
+      margin-top: 2.5rem;
+    }
+
+
+
+
+
+  .two-div-container{
+  display: flex;
+  max-width: 760px;
+  width: 100%;
+  gap: 1rem;
+  background-color: red;
+  height: max-content;
+  background: transparent;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+
+   /****
+ORDER STATUS
+***/
+
+.order-status-section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 340px;
+  margin: 2rem auto;
+  padding: 1rem;
+  gap: .2rem;
+ 
+}
+
+.order-status-section input {
+  height: 2.2rem;
+  width: 80%;
+  padding: 10px;
+  color: white;
+  font-size: .9rem;
+  font-weight: 600;
+  border: 1px solid #ebe5e5;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.order-status-section button {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: 2s ease;
+}
+
+
+
+/**99
+order2 style
+***/
+/* Order status card */
+#orderStatusCard {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  width: 100%;
+  max-width: 470px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  padding: 14px;
+  z-index: 99999;
+  font-family: Arial, sans-serif;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+#orderStatusCard.hidden { 
+opacity: 0; 
+transform: translateY(8px);
+pointer-events: none; }
+
+#orderStatusCard h4 {
+   margin: 0 0 8px 0;
+    font-size: .8rem; 
+  }
+#orderStatusCard p {
+   margin: 6px 0; 
+   font-size: 0.9rem;
+    color: #333; }
+
+
+.status-badge {
+  display:inline-block;
+  width: 70%;
+  padding:6px 10px;
+  border-radius:999px;
+  color: #fff;
+  font-weight: 700;
+  text-transform: capitalize;
+  font-size: 0.85rem;
+}
+
+/* Status color classes */
+.status-pending { background: #f39c12; }      /* orange */
+.status-processing { background: #3498db; }   /* blue */
+.status-delivered { background: #2ecc71; }    /* green */
+.status-failed { background: #e74c3c; }       /* red */
+.status-cancelled { background: #9e9e9e; }    /* gray */
+.status-refunded { background: #795548; }     /* brown */
+.status-resolved { background: #27ae60; }     /* dark green */
+
+/* Manual check result box */
+#statusResult { 
+margin-top: 12px; 
+width: 60%;
+padding: 12px; 
+background:#f5f7fb;
+border-radius: 8px; 
+box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/**--ORDER STAtUS ENDS--**/
+
+
+/**---NETWORKS-PURCHASED-DETAILS---**/
+.networks-purchased-container {
+  width: 100%;
+  max-width: 320px;
+  background: transparent;
+  height: 9rem;
+  margin-right: 2rem;
+  gap: .4rem;
+}
+
+.purchase-title {
+  display: flex;
+  align-items: center;
+  width: 98%;
+  height: 20%;
+  margin-bottom: .1rem;
+  padding: .3rem;
+  font-size: 1.2rem;
+}
+
+.purchase-title h5{
+  font-size: 1.2rem;
+  text-align: center;
+  color: rgb(51, 51, 34);
+  font-family: 'Times New Roman', Times;
+}
+
+.purchase-container{
+  width: 98%;
+  height: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+}
+
+.purchase-container a{
+  text-decoration: none;
+  color: var(--bg-cl);
+}
+
+.purchase-container a .card-box{
+  width:  5.5rem;
+  height: 4rem;
+  font-size: .7rem;
+}
+
+
+/**SECTION TITLE
+**/
+.section-title {
+  width: 100%;
+  max-width: 700px;
+  height: 3rem;
+  display: flex;
+  padding: .4rem 0;
+  align-items: center;
+  justify-self: center;
+  justify-content: flex-start;
+  margin: 1rem  0;
+  background: black;
+  box-shadow: inset  0 2px 6px rgba(124, 124, 124, 0.4);
+  position: relative;
+}
+
+
+.section-content {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: 0 1.5rem;
+  background: var(--card-full-bg-cl);
+  width: 98%;
+  text-align: center;
+  height: 3rem;
+  border: none;
+}
+
+.section-content h1{
+  font-size: 1.2rem;
+}
+
+
+.section-content img{
+  width: 2rem;
+  height: 1.8rem;
+  justify-self: center;
+}
+
+.section-content .mtnt {
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+
+
+.section-content .telecelt{
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.tele{
+  background: var(--dark-cl);
+}
+
+.telec{
+  background-color: var(--card-full-tele-bg-cl);
+}
+
+.section-content .airtelt{
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.airtel{
+  background: var(--dark-cl);
+}
+
+.airtelc{
+  background: var(--card-full-airtel-bg-cl);
+}
+
+/**--SECTION-TITLE-ENDS--**/
+
+/*------REAL BUNDLE CARD-MTN--*/
+.bundle-cards-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-container {
+  width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+/**
+BECAUSE OF PROMO
+****/
+
+
+.bundle-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 12.5rem;
+  height: 9rem;
+  gap: 0;
+  background: var(--card-full-bg-cl);
+  border-radius: .8rem;
+}
+
+
+.top-bundle-card {
+width: 98%;
+height: 38%;
+gap: 1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+
+.bottom-bundle-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+.old-price {
+  display: flex;
+  font-size: .9rem;
+  color: rgb(14, 138, 101);
+  text-decoration: line-through;
+}
+
+.bottom-bundle-card .buy-btn{
+  width: 11rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-card h2{
+  font-size: .9rem;
+  font-family: Arial ;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+
+.price-gb {
+  width: 100%;
+  height: 40%;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background-color: transparent;
+}
+
+.price-gb small{
+  width: 60%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: .9rem;
+  font-weight: 500;
+  font-family: Arial sans-serif;
+  color: #24463e;;
+}
+/**--MTN-CARD-ENDS--**/
+
+
+
+
+
+/*------REAL BUNDLE CARD--TELECEL-*/
+.bundle-cards-telecel-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+  background: transparent;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-telecel-container {
+   width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+.bundle-card-telecel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 12.5rem;
+  height: 9rem;
+  gap: 0;
+  background: var(--card-full-tele-bg-cl);
+  border-radius: .8rem;
+}
+
+.top-bundle-telecel-card {
+width: 98%;
+height: 38%;
+gap: .1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-telecel-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+.bottom-bundle-telecel-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+
+.bottom-bundle-telecel-card .buy-btn{
+  width: 11rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-telecel-card h2{
+  font-size: .9rem;
+  font-family: Arial;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+
+/**--TELECEL-CARD-ENDS--**/
+
+
+
+
+
+/* AIRTELTIGO SECTION
+*/
+/*------REAL BUNDLE CARD--TELECEL-*/
+.bundle-cards-airteltigo-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+  background: transparent;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-airteltigo-container {
+    width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+.bundle-card-airteltigo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 12.5rem;
+  height: 9rem;
+  gap: 0;
+  background: rgb(6, 6, 231);
+  border-radius: .8rem;
+}
+
+.top-bundle-airteltigo-card {
+width: 98%;
+height: 38%;
+gap: .1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-airteltigo-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+.bottom-bundle-airteltigo-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+.bottom-bundle-airteltigo-card .buy-btn{
+ width: 11rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-airteltigo-card h2{
+  font-size: .9rem;
+  font-family: Arial;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+/***--AIRTEL-CARD-ENDS--**/
+
+
+/**--MENU-CARD
+
+
+
+
+/**-------FOOTER SECTION----***/
+
+/* ABOUT & FOOTER */
+.about,
+footer {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-self: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: max-content;
+  max-width: 768px;
+  text-align: center;
+  padding: .2rem;
+  color: white;
+  background-color:  rgb(6, 6, 8) ;
+  bottom: 0;
+}
+
+.about{
+  border-block-end: 1px solid var(--ascent-cl);
+}
+
+section footer .bar{
+  margin: 0;
+  bottom: 0;
+}
+.about h3{
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: var(--background-cl);
+}
+.about h4{
+  color: rgb(45, 182, 148);
+  margin-top: 0.4rem;
+  font-size: 1.2rem;
+}
+
+.about P{
+  width: 90%;
+  font-size: .9rem;
+  font-weight: 300;
+  line-height: 1.6rem;
+}
+
+.about img{
+border-radius: 2rem;
+width: 1.6rem;
+height: 1.6rem;
+margin: 0 .5rem;
+}
+
+
+
+
+footer a{
+  font-weight: 500;
+  margin-left: 0.1rem;
+}
+
+footer .copyright{
+  font-size: .9rem;
+  width: 100%;
+  max-width: 320px;
+ 
+}
+
+
+
+footer img{
+  width: 2.6rem;
+  height: 2.6rem;
+  vertical-align: middle;
+  margin-left: 0.6rem;
+}
+
+ }
 
 /* 9. Tablets landscape / small laptops */
-@media (min-width: 800px) { }
+@media (min-width: 800px) { 
+  .navbar{
+    width: 100%;
+    max-width: 800px;
+  }
+
+
+/**
+CARD CONTAINER
+**/
+.card-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 798px;
+  justify-content:  center;
+  align-items: center;
+  justify-self: center;
+  margin: 0 1rem;
+  height: max-content;
+  background: transparent;
+}
+
+
+/**
+WELCOME CARD 
+**/
+.welcome-card {
+  width: 94%;
+  height: 10rem;
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  background: var(--bg-cl);
+  border-radius: .6rem;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.3), -1px -1px 2px rgba(0,0,0,0.3);
+  margin-top: 4.3rem; 
+}
+
+.welcome-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 99%;
+  height: 6rem;
+  margin: 0.2rem .2rem;
+  justify-self: center;
+  background: var(--bg-cl);
+  border-start-start-radius: .4rem;
+  border-start-end-radius: .4rem;
+  border-end-end-radius: .4rem;
+  border-end-start-radius: .4rem;
+  box-shadow:   1px 1px 3px rgb(151, 147, 147),  -1px -1px 3px rgb(189, 184, 184);
+}
+
+.welcome-top-left{
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 1.2rem;
+  justify-content: center;
+  font-size: 1.1rem;
+  gap: 0.4rem;
+  font-weight: 600;
+  color: rgb(24, 23, 23);
+  font-family: Arial sans-serif;
+}
+
+.welcome-top-left small{
+  width: 3rem;
+  color: rgb(95, 90, 90);
+  font-weight: 500;
+  font-family: Arial sans-serif;
+}
+
+/**
+ WELCOME TOP RIGHT
+ **/
+ .welcome-top-right {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+ }
+
+  .welcome-top-right input{
+    width: 100px;
+    height: 2rem;
+    margin: 0 2rem;
+    margin-right: -.1rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    color: var(--dark-cl);
+    background-color: transparent;
+    border: 0.1px solid var(--background-cl);
+    border-radius: .8rem;
+  }
+
+  .welcome-top-right input:where(:hover :focus-within){
+    border: 1px solid rgb(156, 151, 151);
+
+  }
+
+  .welcome-top-right input::placeholder{
+    color: rgb(197, 190, 190);
+    position: absolute;
+    margin: 0 .5rem;
+  }
+
+  /*-----BOTTOM-----*/
+  .welcome-bottom {
+    width: 100%;
+    height: 7.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3.2rem;
+  }
+
+
+
+
+
+
+
+  .two-div-container{
+  display: flex;
+  max-width: 790px;
+  width: 100%;
+  gap: 1rem;
+  background-color: red;
+  height: max-content;
+  background: transparent;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+
+   /****
+ORDER STATUS
+***/
+
+.order-status-section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 360px;
+  margin: 2rem auto;
+  padding: 1rem;
+  gap: .2rem;
+ 
+}
+
+.order-status-section input {
+  height: 2.2rem;
+  width: 80%;
+  padding: 10px;
+  color: white;
+  font-size: .9rem;
+  font-weight: 600;
+  border: 1px solid #ebe5e5;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.order-status-section button {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: 2s ease;
+}
+
+
+
+/**99
+order2 style
+***/
+/* Order status card */
+#orderStatusCard {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  width: 100%;
+  max-width: 470px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  padding: 14px;
+  z-index: 99999;
+  font-family: Arial, sans-serif;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+#orderStatusCard.hidden { 
+opacity: 0; 
+transform: translateY(8px);
+pointer-events: none; }
+
+#orderStatusCard h4 {
+   margin: 0 0 8px 0;
+    font-size: .8rem; 
+  }
+#orderStatusCard p {
+   margin: 6px 0; 
+   font-size: 0.9rem;
+    color: #333; }
+
+
+.status-badge {
+  display:inline-block;
+  width: 70%;
+  padding:6px 10px;
+  border-radius:999px;
+  color: #fff;
+  font-weight: 700;
+  text-transform: capitalize;
+  font-size: 0.85rem;
+}
+
+/* Status color classes */
+.status-pending { background: #f39c12; }      /* orange */
+.status-processing { background: #3498db; }   /* blue */
+.status-delivered { background: #2ecc71; }    /* green */
+.status-failed { background: #e74c3c; }       /* red */
+.status-cancelled { background: #9e9e9e; }    /* gray */
+.status-refunded { background: #795548; }     /* brown */
+.status-resolved { background: #27ae60; }     /* dark green */
+
+/* Manual check result box */
+#statusResult { 
+margin-top: 12px; 
+width: 60%;
+padding: 12px; 
+background:#f5f7fb;
+border-radius: 8px; 
+box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/**--ORDER STAtUS ENDS--**/
+
+
+/**---NETWORKS-PURCHASED-DETAILS---**/
+.networks-purchased-container {
+  width: 100%;
+  max-width: 300px;
+  background: transparent;
+  height: 9rem;
+  margin-right: 2rem;
+  gap: .4rem;
+}
+
+.purchase-title {
+  display: flex;
+  align-items: center;
+  width: 98%;
+  height: 20%;
+  margin-bottom: .1rem;
+  padding: .3rem;
+  font-size: 1.2rem;
+}
+
+.purchase-title h5{
+  font-size: 1.2rem;
+  text-align: center;
+  color: rgb(51, 51, 34);
+  font-family: 'Times New Roman', Times;
+}
+
+.purchase-container{
+  width: 98%;
+  height: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+}
+
+.purchase-container a{
+  text-decoration: none;
+  color: var(--bg-cl);
+}
+
+.purchase-container a .card-box{
+  width:  5.5rem;
+  height: 4rem;
+  font-size: .7rem;
+}
+
+
+/**SECTION TITLE
+**/
+.section-title {
+  width: 100%;
+  max-width: 700px;
+  height: 3rem;
+  display: flex;
+  padding: .4rem 0;
+  align-items: center;
+  justify-self: center;
+  justify-content: flex-start;
+  margin: 1rem  0;
+  background: black;
+  box-shadow: inset  0 2px 6px rgba(124, 124, 124, 0.4);
+  position: relative;
+}
+
+
+.section-content {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: 0 1.5rem;
+  background: var(--card-full-bg-cl);
+  width: 98%;
+  text-align: center;
+  height: 3rem;
+  border: none;
+}
+
+.section-content h1{
+  font-size: 1.2rem;
+}
+
+
+.section-content img{
+  width: 2rem;
+  height: 1.8rem;
+  justify-self: center;
+}
+
+.section-content .mtnt {
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+
+
+.section-content .telecelt{
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.tele{
+  background: var(--dark-cl);
+}
+
+.telec{
+  background-color: var(--card-full-tele-bg-cl);
+}
+
+.section-content .airtelt{
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.airtel{
+  background: var(--dark-cl);
+}
+
+.airtelc{
+  background: var(--card-full-airtel-bg-cl);
+}
+
+/**--SECTION-TITLE-ENDS--**/
+
+/*------REAL BUNDLE CARD-MTN--*/
+.bundle-cards-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-container {
+  width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+/**
+BECAUSE OF PROMO
+****/
+
+
+.bundle-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 13.5rem;
+  height: 9.5rem;
+  gap: 0;
+  background: var(--card-full-bg-cl);
+  border-radius: .8rem;
+}
+
+
+.top-bundle-card {
+width: 98%;
+height: 38%;
+gap: 1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+
+.bottom-bundle-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+.old-price {
+  display: flex;
+  font-size: .9rem;
+  color: rgb(14, 138, 101);
+  text-decoration: line-through;
+}
+
+.bottom-bundle-card .buy-btn{
+  width: 11rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-card h2{
+  font-size: .9rem;
+  font-family: Arial ;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+
+.price-gb {
+  width: 100%;
+  height: 40%;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background-color: transparent;
+}
+
+.price-gb small{
+  width: 60%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: .9rem;
+  font-weight: 500;
+  font-family: Arial sans-serif;
+  color: #24463e;;
+}
+/**--MTN-CARD-ENDS--**/
+
+
+
+
+
+/*------REAL BUNDLE CARD--TELECEL-*/
+.bundle-cards-telecel-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+  background: transparent;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-telecel-container {
+   width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+.bundle-card-telecel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 13.5rem;
+  height: 9.5rem;
+  gap: 0;
+  background: var(--card-full-tele-bg-cl);
+  border-radius: .8rem;
+}
+
+.top-bundle-telecel-card {
+width: 98%;
+height: 38%;
+gap: .1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-telecel-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+.bottom-bundle-telecel-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+
+.bottom-bundle-telecel-card .buy-btn{
+  width: 11rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-telecel-card h2{
+  font-size: .9rem;
+  font-family: Arial;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+
+/**--TELECEL-CARD-ENDS--**/
+
+
+
+
+
+/* AIRTELTIGO SECTION
+*/
+/*------REAL BUNDLE CARD--TELECEL-*/
+.bundle-cards-airteltigo-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+  background: transparent;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-airteltigo-container {
+    width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+.bundle-card-airteltigo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 13.5rem;
+  height: 9.5rem;
+  gap: 0;
+  background: rgb(6, 6, 231);
+  border-radius: .8rem;
+}
+
+.top-bundle-airteltigo-card {
+width: 98%;
+height: 38%;
+gap: .1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-airteltigo-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+.bottom-bundle-airteltigo-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+.bottom-bundle-airteltigo-card .buy-btn{
+ width: 11rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-airteltigo-card h2{
+  font-size: .9rem;
+  font-family: Arial;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+/***--AIRTEL-CARD-ENDS--**/
+
+
+/**--MENU-CARD
+
+
+
+
+/**-------FOOTER SECTION----***/
+
+/* ABOUT & FOOTER */
+.about,
+footer {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-self: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: max-content;
+  max-width: 800px;
+  text-align: center;
+  padding: .2rem;
+  color: white;
+  background-color:  rgb(6, 6, 8) ;
+  bottom: 0;
+}
+
+.about{
+  border-block-end: 1px solid var(--ascent-cl);
+}
+
+section footer .bar{
+  margin: 0;
+  bottom: 0;
+}
+.about h3{
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: var(--background-cl);
+}
+.about h4{
+  color: rgb(45, 182, 148);
+  margin-top: 0.4rem;
+  font-size: 1.2rem;
+}
+
+.about P{
+  width: 90%;
+  font-size: .9rem;
+  font-weight: 300;
+  line-height: 1.6rem;
+}
+
+.about img{
+border-radius: 2rem;
+width: 1.6rem;
+height: 1.6rem;
+margin: 0 .5rem;
+}
+
+
+
+
+footer a{
+  font-weight: 500;
+  margin-left: 0.1rem;
+}
+
+footer .copyright{
+  font-size: .9rem;
+  width: 100%;
+  max-width: 320px;
+ 
+}
+
+
+
+footer img{
+  width: 2.6rem;
+  height: 2.6rem;
+  vertical-align: middle;
+  margin-left: 0.6rem;
+}
+
+}
 
 /* 10. Large tablets */
-@media (max-width: 900px) { }
+@media (min-width: 900px) {
+  .navbar{
+    width: 100%;
+    max-width: 900px;
+  }
+
+
+/**
+CARD CONTAINER
+**/
+.card-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 900px;
+  justify-content:  center;
+  align-items: center;
+  justify-self: center;
+  margin: 0 1rem;
+  height: max-content;
+  background: transparent;
+}
+
+
+/**
+WELCOME CARD 
+**/
+.welcome-card {
+  width: 94%;
+  height: 10rem;
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  background: var(--bg-cl);
+  border-radius: .6rem;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.3), -1px -1px 2px rgba(0,0,0,0.3);
+  margin-top: 4.3rem; 
+}
+
+.welcome-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 99%;
+  height: 6rem;
+  margin: 0.2rem .2rem;
+  justify-self: center;
+  background: var(--bg-cl);
+  border-start-start-radius: .4rem;
+  border-start-end-radius: .4rem;
+  border-end-end-radius: .4rem;
+  border-end-start-radius: .4rem;
+  box-shadow:   1px 1px 3px rgb(151, 147, 147),  -1px -1px 3px rgb(189, 184, 184);
+}
+
+.welcome-top-left{
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 1.2rem;
+  justify-content: center;
+  font-size: 1.1rem;
+  gap: 0.4rem;
+  font-weight: 600;
+  color: rgb(24, 23, 23);
+  font-family: Arial sans-serif;
+}
+
+.welcome-top-left small{
+  width: 3rem;
+  color: rgb(95, 90, 90);
+  font-weight: 500;
+  font-family: Arial sans-serif;
+}
+
+/**
+ WELCOME TOP RIGHT
+ **/
+ .welcome-top-right {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+ }
+
+  .welcome-top-right input{
+    width: 100px;
+    height: 2rem;
+    margin: 0 2rem;
+    margin-right: -.1rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    color: var(--dark-cl);
+    background-color: transparent;
+    border: 0.1px solid var(--background-cl);
+    border-radius: .8rem;
+  }
+
+  .welcome-top-right input:where(:hover :focus-within){
+    border: 1px solid rgb(156, 151, 151);
+
+  }
+
+  .welcome-top-right input::placeholder{
+    color: rgb(197, 190, 190);
+    position: absolute;
+    margin: 0 .5rem;
+  }
+
+  /*-----BOTTOM-----*/
+  .welcome-bottom {
+    width: 100%;
+    height: 7.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3.2rem;
+  }
+
+
+
+
+
+
+
+  .two-div-container{
+  display: flex;
+  max-width: 760px;
+  width: 100%;
+  gap: 1rem;
+  background-color: red;
+  height: max-content;
+  background: transparent;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+
+   /****
+ORDER STATUS
+***/
+
+.order-status-section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 360px;
+  margin: 2rem auto;
+  padding: 1rem;
+  gap: .2rem;
+ 
+}
+
+.order-status-section input {
+  height: 2.2rem;
+  width: 80%;
+  padding: 10px;
+  color: white;
+  font-size: .9rem;
+  font-weight: 600;
+  border: 1px solid #ebe5e5;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.order-status-section button {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: 2s ease;
+}
+
+
+
+/**99
+order2 style
+***/
+/* Order status card */
+#orderStatusCard {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  width: 100%;
+  max-width: 470px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  padding: 14px;
+  z-index: 99999;
+  font-family: Arial, sans-serif;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+#orderStatusCard.hidden { 
+opacity: 0; 
+transform: translateY(8px);
+pointer-events: none; }
+
+#orderStatusCard h4 {
+   margin: 0 0 8px 0;
+    font-size: .8rem; 
+  }
+#orderStatusCard p {
+   margin: 6px 0; 
+   font-size: 0.9rem;
+    color: #333; }
+
+
+.status-badge {
+  display:inline-block;
+  width: 70%;
+  padding:6px 10px;
+  border-radius:999px;
+  color: #fff;
+  font-weight: 700;
+  text-transform: capitalize;
+  font-size: 0.85rem;
+}
+
+/* Status color classes */
+.status-pending { background: #f39c12; }      /* orange */
+.status-processing { background: #3498db; }   /* blue */
+.status-delivered { background: #2ecc71; }    /* green */
+.status-failed { background: #e74c3c; }       /* red */
+.status-cancelled { background: #9e9e9e; }    /* gray */
+.status-refunded { background: #795548; }     /* brown */
+.status-resolved { background: #27ae60; }     /* dark green */
+
+/* Manual check result box */
+#statusResult { 
+margin-top: 12px; 
+width: 60%;
+padding: 12px; 
+background:#f5f7fb;
+border-radius: 8px; 
+box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/**--ORDER STAtUS ENDS--**/
+
+
+/**---NETWORKS-PURCHASED-DETAILS---**/
+.networks-purchased-container {
+  width: 100%;
+  max-width: 400px;
+  background: transparent;
+  height: 9rem;
+  margin-right: 2rem;
+  gap: .4rem;
+}
+
+.purchase-title {
+  display: flex;
+  align-items: center;
+  width: 98%;
+  height: 20%;
+  margin-bottom: .1rem;
+  padding: .3rem;
+  font-size: 1.2rem;
+}
+
+.purchase-title h5{
+  font-size: 1.2rem;
+  text-align: center;
+  color: rgb(51, 51, 34);
+  font-family: 'Times New Roman', Times;
+}
+
+.purchase-container{
+  width: 98%;
+  height: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+}
+
+.purchase-container a{
+  text-decoration: none;
+  color: var(--bg-cl);
+}
+
+.purchase-container a .card-box{
+  width:  5.5rem;
+  height: 4rem;
+  font-size: .7rem;
+}
+
+
+/**SECTION TITLE
+**/
+.section-title {
+  width: 100%;
+  max-width: 700px;
+  height: 3rem;
+  display: flex;
+  padding: .4rem 0;
+  align-items: center;
+  justify-self: center;
+  justify-content: flex-start;
+  margin: 1rem  0;
+  background: black;
+  box-shadow: inset  0 2px 6px rgba(124, 124, 124, 0.4);
+  position: relative;
+}
+
+
+.section-content {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: 0 1.5rem;
+  background: var(--card-full-bg-cl);
+  width: 98%;
+  text-align: center;
+  height: 3rem;
+  border: none;
+}
+
+.section-content h1{
+  font-size: 1.2rem;
+}
+
+
+.section-content img{
+  width: 2rem;
+  height: 1.8rem;
+  justify-self: center;
+}
+
+.section-content .mtnt {
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+
+
+.section-content .telecelt{
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.tele{
+  background: var(--dark-cl);
+}
+
+.telec{
+  background-color: var(--card-full-tele-bg-cl);
+}
+
+.section-content .airtelt{
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.airtel{
+  background: var(--dark-cl);
+}
+
+.airtelc{
+  background: var(--card-full-airtel-bg-cl);
+}
+
+/**--SECTION-TITLE-ENDS--**/
+
+/*------REAL BUNDLE CARD-MTN--*/
+.bundle-cards-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-container {
+  width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+/**
+BECAUSE OF PROMO
+****/
+
+
+.bundle-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 16.5rem;
+  height: 10.5rem;
+  gap: 0;
+  background: var(--card-full-bg-cl);
+  border-radius: .8rem;
+}
+
+
+.top-bundle-card {
+width: 98%;
+height: 38%;
+gap: 1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+
+.bottom-bundle-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+.old-price {
+  display: flex;
+  font-size: .9rem;
+  color: rgb(14, 138, 101);
+  text-decoration: line-through;
+}
+
+.bottom-bundle-card .buy-btn{
+  width: 11rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-card h2{
+  font-size: .9rem;
+  font-family: Arial ;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+
+.price-gb {
+  width: 100%;
+  height: 40%;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background-color: transparent;
+}
+
+.price-gb small{
+  width: 60%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: .9rem;
+  font-weight: 500;
+  font-family: Arial sans-serif;
+  color: #24463e;;
+}
+/**--MTN-CARD-ENDS--**/
+
+
+
+
+
+/*------REAL BUNDLE CARD--TELECEL-*/
+.bundle-cards-telecel-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+  background: transparent;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-telecel-container {
+   width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+.bundle-card-telecel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 16.5rem;
+  height: 10.5rem;
+  gap: 0;
+  background: var(--card-full-tele-bg-cl);
+  border-radius: .8rem;
+}
+
+.top-bundle-telecel-card {
+width: 98%;
+height: 38%;
+gap: .1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-telecel-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+.bottom-bundle-telecel-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+
+.bottom-bundle-telecel-card .buy-btn{
+  width: 11rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-telecel-card h2{
+  font-size: .9rem;
+  font-family: Arial;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+
+/**--TELECEL-CARD-ENDS--**/
+
+
+
+
+
+/* AIRTELTIGO SECTION
+*/
+/*------REAL BUNDLE CARD--AIRTELTIGO-*/
+.bundle-cards-airteltigo-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+  background: transparent;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-airteltigo-container {
+    width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+.bundle-card-airteltigo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 16.5rem;
+  height: 10.5rem;
+  gap: 0;
+  background: rgb(6, 6, 231);
+  border-radius: .8rem;
+}
+
+.top-bundle-airteltigo-card {
+width: 98%;
+height: 38%;
+gap: .1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-airteltigo-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+.bottom-bundle-airteltigo-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+.bottom-bundle-airteltigo-card .buy-btn{
+ width: 11rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-airteltigo-card h2{
+  font-size: .9rem;
+  font-family: Arial;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+/***--AIRTEL-CARD-ENDS--**/
+
+
+/**--MENU-CARD
+
+
+
+
+/**-------FOOTER SECTION----***/
+
+/* ABOUT & FOOTER */
+.about,
+footer {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-self: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: max-content;
+  max-width: 1020px;
+  text-align: center;
+  padding: .2rem;
+  color: white;
+  background-color:  rgb(6, 6, 8) ;
+  bottom: 0;
+}
+
+.about{
+  border-block-end: 1px solid var(--ascent-cl);
+}
+
+section footer .bar{
+  margin: 0;
+  bottom: 0;
+}
+.about h3{
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: var(--background-cl);
+}
+.about h4{
+  color: rgb(45, 182, 148);
+  margin-top: 0.4rem;
+  font-size: 1.2rem;
+}
+
+.about P{
+  width: 90%;
+  font-size: .9rem;
+  font-weight: 300;
+  line-height: 1.6rem;
+}
+
+.about img{
+border-radius: 2rem;
+width: 1.6rem;
+height: 1.6rem;
+margin: 0 .5rem;
+}
+
+
+
+
+footer a{
+  font-weight: 500;
+  margin-left: 0.1rem;
+}
+
+footer .copyright{
+  font-size: .9rem;
+  width: 100%;
+  max-width: 320px;
+ 
+}
+
+
+
+footer img{
+  width: 2.6rem;
+  height: 2.6rem;
+  vertical-align: middle;
+  margin-left: 0.6rem;
+}
+ }
 
 /* 11. Small laptops */
-@media (max-width: 1024px) { }
+@media (min-width: 1024px) { 
+  .navbar{
+    width: 100%;
+    max-width: 1020px;
+  }
+
+
+/**
+CARD CONTAINER
+**/
+.card-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 760px;
+  justify-content:  center;
+  align-items: center;
+  justify-self: center;
+  margin: 0 1rem;
+  height: max-content;
+  background: transparent;
+}
+
+
+/**
+WELCOME CARD 
+**/
+.welcome-card {
+  width: 94%;
+  height: 10rem;
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  background: var(--bg-cl);
+  border-radius: .6rem;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.3), -1px -1px 2px rgba(0,0,0,0.3);
+  margin-top: 4.3rem; 
+}
+
+.welcome-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 99%;
+  height: 6rem;
+  margin: 0.2rem .2rem;
+  justify-self: center;
+  background: var(--bg-cl);
+  border-start-start-radius: .4rem;
+  border-start-end-radius: .4rem;
+  border-end-end-radius: .4rem;
+  border-end-start-radius: .4rem;
+  box-shadow:   1px 1px 3px rgb(151, 147, 147),  -1px -1px 3px rgb(189, 184, 184);
+}
+
+.welcome-top-left{
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 1.2rem;
+  justify-content: center;
+  font-size: 1.1rem;
+  gap: 0.4rem;
+  font-weight: 600;
+  color: rgb(24, 23, 23);
+  font-family: Arial sans-serif;
+}
+
+.welcome-top-left small{
+  width: 3rem;
+  color: rgb(95, 90, 90);
+  font-weight: 500;
+  font-family: Arial sans-serif;
+}
+
+/**
+ WELCOME TOP RIGHT
+ **/
+ .welcome-top-right {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+ }
+
+  .welcome-top-right input{
+    width: 100px;
+    height: 2rem;
+    margin: 0 2rem;
+    margin-right: -.1rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    color: var(--dark-cl);
+    background-color: transparent;
+    border: 0.1px solid var(--background-cl);
+    border-radius: .8rem;
+  }
+
+  .welcome-top-right input:where(:hover :focus-within){
+    border: 1px solid rgb(156, 151, 151);
+
+  }
+
+  .welcome-top-right input::placeholder{
+    color: rgb(197, 190, 190);
+    position: absolute;
+    margin: 0 .5rem;
+  }
+
+  /*-----BOTTOM-----*/
+  .welcome-bottom {
+    width: 100%;
+    height: 7.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3.2rem;
+  }
+
+
+
+
+
+
+
+  .two-div-container{
+  display: flex;
+  max-width: 760px;
+  width: 100%;
+  gap: 1rem;
+  background-color: red;
+  height: max-content;
+  background: transparent;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+
+   /****
+ORDER STATUS
+***/
+
+.order-status-section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 360px;
+  margin: 2rem auto;
+  padding: 1rem;
+  gap: .2rem;
+ 
+}
+
+.order-status-section input {
+  height: 2.2rem;
+  width: 80%;
+  padding: 10px;
+  color: white;
+  font-size: .9rem;
+  font-weight: 600;
+  border: 1px solid #ebe5e5;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.order-status-section button {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: 2s ease;
+}
+
+
+
+/**99
+order2 style
+***/
+/* Order status card */
+#orderStatusCard {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  width: 100%;
+  max-width: 470px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  padding: 14px;
+  z-index: 99999;
+  font-family: Arial, sans-serif;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+#orderStatusCard.hidden { 
+opacity: 0; 
+transform: translateY(8px);
+pointer-events: none; }
+
+#orderStatusCard h4 {
+   margin: 0 0 8px 0;
+    font-size: .8rem; 
+  }
+#orderStatusCard p {
+   margin: 6px 0; 
+   font-size: 0.9rem;
+    color: #333; }
+
+
+.status-badge {
+  display:inline-block;
+  width: 70%;
+  padding:6px 10px;
+  border-radius:999px;
+  color: #fff;
+  font-weight: 700;
+  text-transform: capitalize;
+  font-size: 0.85rem;
+}
+
+/* Status color classes */
+.status-pending { background: #f39c12; }      /* orange */
+.status-processing { background: #3498db; }   /* blue */
+.status-delivered { background: #2ecc71; }    /* green */
+.status-failed { background: #e74c3c; }       /* red */
+.status-cancelled { background: #9e9e9e; }    /* gray */
+.status-refunded { background: #795548; }     /* brown */
+.status-resolved { background: #27ae60; }     /* dark green */
+
+/* Manual check result box */
+#statusResult { 
+margin-top: 12px; 
+width: 60%;
+padding: 12px; 
+background:#f5f7fb;
+border-radius: 8px; 
+box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/**--ORDER STAtUS ENDS--**/
+
+
+/**---NETWORKS-PURCHASED-DETAILS---**/
+.networks-purchased-container {
+  width: 100%;
+  max-width: 300px;
+  background: transparent;
+  height: 9rem;
+  margin-right: 2rem;
+  gap: .4rem;
+}
+
+.purchase-title {
+  display: flex;
+  align-items: center;
+  width: 98%;
+  height: 20%;
+  margin-bottom: .1rem;
+  padding: .3rem;
+  font-size: 1.2rem;
+}
+
+.purchase-title h5{
+  font-size: 1.2rem;
+  text-align: center;
+  color: rgb(51, 51, 34);
+  font-family: 'Times New Roman', Times;
+}
+
+.purchase-container{
+  width: 98%;
+  height: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+}
+
+.purchase-container a{
+  text-decoration: none;
+  color: var(--bg-cl);
+}
+
+.purchase-container a .card-box{
+  width:  5.5rem;
+  height: 4rem;
+  font-size: .7rem;
+}
+
+
+/**SECTION TITLE
+**/
+.section-title {
+  width: 100%;
+  max-width: 700px;
+  height: 3rem;
+  display: flex;
+  padding: .4rem 0;
+  align-items: center;
+  justify-self: center;
+  justify-content: flex-start;
+  margin: 1rem  0;
+  background: black;
+  box-shadow: inset  0 2px 6px rgba(124, 124, 124, 0.4);
+  position: relative;
+}
+
+
+.section-content {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: 0 1.5rem;
+  background: var(--card-full-bg-cl);
+  width: 98%;
+  text-align: center;
+  height: 3rem;
+  border: none;
+}
+
+.section-content h1{
+  font-size: 1.2rem;
+}
+
+
+.section-content img{
+  width: 2rem;
+  height: 1.8rem;
+  justify-self: center;
+}
+
+.section-content .mtnt {
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+
+
+.section-content .telecelt{
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.tele{
+  background: var(--dark-cl);
+}
+
+.telec{
+  background-color: var(--card-full-tele-bg-cl);
+}
+
+.section-content .airtelt{
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.airtel{
+  background: var(--dark-cl);
+}
+
+.airtelc{
+  background: var(--card-full-airtel-bg-cl);
+}
+
+/**--SECTION-TITLE-ENDS--**/
+
+/*------REAL BUNDLE CARD-MTN--*/
+.bundle-cards-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-container {
+  width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+/**
+BECAUSE OF PROMO
+****/
+
+
+.bundle-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 16.5rem;
+  height: 10.5rem;
+  gap: 0;
+  background: var(--card-full-bg-cl);
+  border-radius: .8rem;
+}
+
+
+.top-bundle-card {
+width: 98%;
+height: 38%;
+gap: 1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+
+.bottom-bundle-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+.old-price {
+  display: flex;
+  font-size: .9rem;
+  color: rgb(14, 138, 101);
+  text-decoration: line-through;
+}
+
+.bottom-bundle-card .buy-btn{
+  width: 11rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-card h2{
+  font-size: .9rem;
+  font-family: Arial ;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+
+.price-gb {
+  width: 100%;
+  height: 40%;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background-color: transparent;
+}
+
+.price-gb small{
+  width: 60%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: .9rem;
+  font-weight: 500;
+  font-family: Arial sans-serif;
+  color: #24463e;;
+}
+/**--MTN-CARD-ENDS--**/
+
+
+
+
+
+/*------REAL BUNDLE CARD--TELECEL-*/
+.bundle-cards-telecel-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+  background: transparent;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-telecel-container {
+   width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+.bundle-card-telecel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 16.5rem;
+  height: 10.5rem;
+  gap: 0;
+  background: var(--card-full-tele-bg-cl);
+  border-radius: .8rem;
+}
+
+.top-bundle-telecel-card {
+width: 98%;
+height: 38%;
+gap: .1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-telecel-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+.bottom-bundle-telecel-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+
+.bottom-bundle-telecel-card .buy-btn{
+  width: 11rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-telecel-card h2{
+  font-size: .9rem;
+  font-family: Arial;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+
+/**--TELECEL-CARD-ENDS--**/
+
+
+
+
+
+/* AIRTELTIGO SECTION
+*/
+/*------REAL BUNDLE CARD--AIRTELTIGO-*/
+.bundle-cards-airteltigo-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+  background: transparent;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-airteltigo-container {
+    width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+.bundle-card-airteltigo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 16.5rem;
+  height: 10.5rem;
+  gap: 0;
+  background: rgb(6, 6, 231);
+  border-radius: .8rem;
+}
+
+.top-bundle-airteltigo-card {
+width: 98%;
+height: 38%;
+gap: .1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-airteltigo-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+.bottom-bundle-airteltigo-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+.bottom-bundle-airteltigo-card .buy-btn{
+ width: 11rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-airteltigo-card h2{
+  font-size: .9rem;
+  font-family: Arial;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+/***--AIRTEL-CARD-ENDS--**/
+
+
+/**--MENU-CARD
+
+
+
+
+/**-------FOOTER SECTION----***/
+
+/* ABOUT & FOOTER */
+.about,
+footer {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-self: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: max-content;
+  max-width: 1020px;
+  text-align: center;
+  padding: .2rem;
+  color: white;
+  background-color:  rgb(6, 6, 8) ;
+  bottom: 0;
+}
+
+.about{
+  border-block-end: 1px solid var(--ascent-cl);
+}
+
+section footer .bar{
+  margin: 0;
+  bottom: 0;
+}
+.about h3{
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: var(--background-cl);
+}
+.about h4{
+  color: rgb(45, 182, 148);
+  margin-top: 0.4rem;
+  font-size: 1.2rem;
+}
+
+.about P{
+  width: 90%;
+  font-size: .9rem;
+  font-weight: 300;
+  line-height: 1.6rem;
+}
+
+.about img{
+border-radius: 2rem;
+width: 1.6rem;
+height: 1.6rem;
+margin: 0 .5rem;
+}
+
+
+
+
+footer a{
+  font-weight: 500;
+  margin-left: 0.1rem;
+}
+
+footer .copyright{
+  font-size: .9rem;
+  width: 100%;
+  max-width: 320px;
+ 
+}
+
+
+
+footer img{
+  width: 2.6rem;
+  height: 2.6rem;
+  vertical-align: middle;
+  margin-left: 0.6rem;
+}
+
+}
 
 /* 12. Medium laptops / desktops */
-@media (max-width: 1200px) { }
+@media (min-width: 1200px) {
+  .navbar{
+    width: 100%;
+    max-width: 1225px;
+    left: 0;
+    margin: 0;
+  }
+
+
+/**
+CARD CONTAINER
+**/
+.card-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1200px;
+  justify-content:  space-between;
+  align-items: center;
+  justify-self: center;
+  margin: 0 1rem;
+  height: max-content;
+  background: transparent;
+}
+
+
+/**
+WELCOME CARD 
+**/
+.welcome-card {
+  width: 98%;
+  height: 14rem;
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  background: var(--bg-cl);
+  border-radius: .6rem;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.3), -1px -1px 2px rgba(0,0,0,0.3);
+  margin-top: 4.3rem ; 
+  margin-left: .7rem;
+
+}
+
+.welcome-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 99%;
+  height: 6rem;
+  margin: 0.2rem .2rem;
+  justify-self: center;
+  background: var(--bg-cl);
+  border-start-start-radius: .4rem;
+  border-start-end-radius: .4rem;
+  border-end-end-radius: .4rem;
+  border-end-start-radius: .4rem;
+  box-shadow:   1px 1px 3px rgb(151, 147, 147),  -1px -1px 3px rgb(189, 184, 184);
+}
+
+.welcome-top-left{
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 1.2rem;
+  justify-content: center;
+  font-size: 1.4rem;
+  gap: 0.4rem;
+  font-weight: 600;
+  color: rgb(24, 23, 23);
+  font-family: Arial sans-serif;
+}
+
+.welcome-top-left small{
+  width: 3rem;
+  color: rgb(95, 90, 90);
+  font-weight: 500;
+  font-family: Arial sans-serif;
+}
+
+/**
+ WELCOME TOP RIGHT
+ **/
+ .welcome-top-right {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+ }
+
+  .welcome-top-right input{
+    width: 300px;
+    height: 2.8rem;
+    margin: 0 2rem;
+    margin-right: -.1rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    color: var(--dark-cl);
+    background-color: transparent;
+    border: 0.1px solid var(--background-cl);
+    border-radius: .8rem;
+  }
+
+  .welcome-top-right input:where(:hover :focus-within){
+    border: 1px solid rgb(156, 151, 151);
+
+  }
+
+  .welcome-top-right input::placeholder{
+    color: rgb(197, 190, 190);
+    position: absolute;
+    margin: 0 .5rem;
+  }
+
+  /*-----BOTTOM-----*/
+  .welcome-bottom {
+    width: 100%;
+    height: 7.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3.2rem;
+  }
+
+
+
+  .close-time {
+    width: 35;
+    height: 100%;
+    display: flex;
+    background: transparent;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .1rem;
+    text-align: center;
+    flex-direction: column;
+    margin-left: 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .close-time small{
+    font-size: 1.6rem;
+    color: var(--card-full-tele-bg-cl);
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  .close-time span{
+    color: white;
+    padding: 1rem 1.5rem;
+    background: var(--dark-cl);
+    border-radius: 4px;
+    font-size: 1.5rem;
+    border: 0.1px solid var(--background-cl);
+  }
+
+
+#clock {
+      font-family: 'Digital-7', monospace;
+      font-size: 2em;
+      color: #00ffcc;
+      background: var(--dark-cl);
+      padding: 15px 25px;
+      border-radius: 4px;
+      display: inline-block;
+      width: 50%;
+      height: 3.2rem;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-right: .7rem;
+      margin-top: 3.5rem;
+    }
+
+
+
+
+
+
+  .two-div-container{
+  display: flex;
+  max-width: 1000px;
+  width: 100%;
+  gap: 2rem;
+  background-color: red;
+  height: max-content;
+  background: transparent;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+
+   /****
+ORDER STATUS
+***/
+
+.order-status-section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 1rem;
+  gap: .2rem;
+ 
+}
+
+.order-status-section input {
+  height: 2.2rem;
+  width: 80%;
+  padding: 10px;
+  color: white;
+  font-size: .9rem;
+  font-weight: 600;
+  border: 1px solid #ebe5e5;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.order-status-section button {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: 2s ease;
+}
+
+
+
+/**99
+order2 style
+***/
+/* Order status card */
+#orderStatusCard {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  width: 100%;
+  max-width: 470px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  padding: 14px;
+  z-index: 99999;
+  font-family: Arial, sans-serif;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+#orderStatusCard.hidden { 
+opacity: 0; 
+transform: translateY(8px);
+pointer-events: none; }
+
+#orderStatusCard h4 {
+   margin: 0 0 8px 0;
+    font-size: .8rem; 
+  }
+#orderStatusCard p {
+   margin: 6px 0; 
+   font-size: 0.9rem;
+    color: #333; }
+
+
+.status-badge {
+  display:inline-block;
+  width: 70%;
+  padding:6px 10px;
+  border-radius:999px;
+  color: #fff;
+  font-weight: 700;
+  text-transform: capitalize;
+  font-size: 0.85rem;
+}
+
+/* Status color classes */
+.status-pending { background: #f39c12; }      /* orange */
+.status-processing { background: #3498db; }   /* blue */
+.status-delivered { background: #2ecc71; }    /* green */
+.status-failed { background: #e74c3c; }       /* red */
+.status-cancelled { background: #9e9e9e; }    /* gray */
+.status-refunded { background: #795548; }     /* brown */
+.status-resolved { background: #27ae60; }     /* dark green */
+
+/* Manual check result box */
+#statusResult { 
+margin-top: 12px; 
+width: 60%;
+padding: 12px; 
+background:#f5f7fb;
+border-radius: 8px; 
+box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/**--ORDER STAtUS ENDS--**/
+
+
+/**---NETWORKS-PURCHASED-DETAILS---**/
+.networks-purchased-container {
+  width: 100%;
+  max-width: 600px;
+  background: transparent;
+  height: 11rem;
+  margin-right: 2rem;
+  gap: .4rem;
+}
+
+.purchase-title {
+  display: flex;
+  align-items: center;
+  width: 98%;
+  height: 20%;
+  margin-bottom: .1rem;
+  padding: .3rem;
+  font-size: 1.2rem;
+}
+
+.purchase-title h5{
+  font-size: 1.2rem;
+  text-align: center;
+  color: rgb(51, 51, 34);
+  font-family: 'Times New Roman', Times;
+}
+
+.purchase-container{
+  width: 98%;
+  height: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+}
+
+.purchase-container a{
+  text-decoration: none;
+  color: var(--bg-cl);
+}
+
+.purchase-container a .card-box{
+  width:  9.5rem;
+  height: 5rem;
+  font-size: 1.2rem;
+}
+
+
+/**SECTION TITLE
+**/
+.section-title {
+  width: 100%;
+  max-width: 700px;
+  height: 3rem;
+  display: flex;
+  padding: .4rem 0;
+  align-items: center;
+  justify-self: center;
+  justify-content: flex-start;
+  margin: 1rem  0;
+  background: black;
+  box-shadow: inset  0 2px 6px rgba(124, 124, 124, 0.4);
+  position: relative;
+}
+
+
+.section-content {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: 0 1.5rem;
+  background: var(--card-full-bg-cl);
+  width: 98%;
+  text-align: center;
+  height: 3rem;
+  border: none;
+}
+
+.section-content h1{
+  font-size: 1.2rem;
+}
+
+
+.section-content img{
+  width: 2rem;
+  height: 1.8rem;
+  justify-self: center;
+}
+
+.section-content .mtnt {
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+
+
+.section-content .telecelt{
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.tele{
+  background: var(--dark-cl);
+}
+
+.telec{
+  background-color: var(--card-full-tele-bg-cl);
+}
+
+.section-content .airtelt{
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.airtel{
+  background: var(--dark-cl);
+}
+
+.airtelc{
+  background: var(--card-full-airtel-bg-cl);
+}
+
+/**--SECTION-TITLE-ENDS--**/
+
+/*------REAL BUNDLE CARD-MTN--*/
+.bundle-cards-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-container {
+  width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+/**
+BECAUSE OF PROMO
+****/
+
+
+.bundle-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 12.5rem;
+  height: 9rem;
+  gap: 0;
+  background: var(--card-full-bg-cl);
+  border-radius: .8rem;
+}
+
+
+.top-bundle-card {
+width: 98%;
+height: 38%;
+gap: 1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+
+.bottom-bundle-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+.old-price {
+  display: flex;
+  font-size: .9rem;
+  color: rgb(14, 138, 101);
+  text-decoration: line-through;
+}
+
+.bottom-bundle-card .buy-btn{
+  width: 11rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-card h2{
+  font-size: .9rem;
+  font-family: Arial ;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+
+.price-gb {
+  width: 100%;
+  height: 40%;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background-color: transparent;
+}
+
+.price-gb small{
+  width: 60%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: .9rem;
+  font-weight: 500;
+  font-family: Arial sans-serif;
+  color: #24463e;;
+}
+/**--MTN-CARD-ENDS--**/
+
+
+
+
+
+/*------REAL BUNDLE CARD--TELECEL-*/
+.bundle-cards-telecel-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+  background: transparent;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-telecel-container {
+   width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+.bundle-card-telecel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 12.5rem;
+  height: 9rem;
+  gap: 0;
+  background: var(--card-full-tele-bg-cl);
+  border-radius: .8rem;
+}
+
+.top-bundle-telecel-card {
+width: 98%;
+height: 38%;
+gap: .1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-telecel-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+.bottom-bundle-telecel-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+
+.bottom-bundle-telecel-card .buy-btn{
+  width: 11rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-telecel-card h2{
+  font-size: .9rem;
+  font-family: Arial;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+
+/**--TELECEL-CARD-ENDS--**/
+
+
+
+
+
+/* AIRTELTIGO SECTION
+*/
+/*------REAL BUNDLE CARD--TELECEL-*/
+.bundle-cards-airteltigo-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+  background: transparent;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-airteltigo-container {
+    width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+.bundle-card-airteltigo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 12.5rem;
+  height: 9rem;
+  gap: 0;
+  background: rgb(6, 6, 231);
+  border-radius: .8rem;
+}
+
+.top-bundle-airteltigo-card {
+width: 98%;
+height: 38%;
+gap: .1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-airteltigo-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+.bottom-bundle-airteltigo-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+.bottom-bundle-airteltigo-card .buy-btn{
+ width: 11rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-airteltigo-card h2{
+  font-size: .9rem;
+  font-family: Arial;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+/***--AIRTEL-CARD-ENDS--**/
+
+
+/**--MENU-CARD
+
+
+
+
+/**-------FOOTER SECTION----***/
+
+/* ABOUT & FOOTER */
+.about,
+footer {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-self: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: max-content;
+  max-width: 1200px;
+  text-align: center;
+  padding: .2rem;
+  color: white;
+  background-color:  rgb(6, 6, 8) ;
+  bottom: 0;
+}
+
+.about{
+  border-block-end: 1px solid var(--ascent-cl);
+}
+
+section footer .bar{
+  margin: 0;
+  bottom: 0;
+}
+.about h3{
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: var(--background-cl);
+}
+.about h4{
+  color: rgb(45, 182, 148);
+  margin-top: 0.4rem;
+  font-size: 1.2rem;
+}
+
+.about P{
+  width: 90%;
+  font-size: .9rem;
+  font-weight: 300;
+  line-height: 1.6rem;
+}
+
+.about img{
+border-radius: 2rem;
+width: 1.6rem;
+height: 1.6rem;
+margin: 0 .5rem;
+}
+
+
+
+
+footer a{
+  font-weight: 500;
+  margin-left: 0.1rem;
+}
+
+footer .copyright{
+  font-size: .9rem;
+  width: 100%;
+  max-width: 320px;
+ 
+}
+
+
+
+footer img{
+  width: 2.6rem;
+  height: 2.6rem;
+  vertical-align: middle;
+  margin-left: 0.6rem;
+}
+
+ }
 
 /* 13. Large desktops */
-@media (max-width: 1280px) { }
+@media (min-width: 1280px) {
+   .navbar{
+    width: 100%;
+    max-width: 1280px;
+    left: 0;
+    margin: 0;
+  }
+
+
+/**
+CARD CONTAINER
+**/
+.card-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1400px;
+  justify-content:  space-between;
+  align-items: center;
+  justify-self: center;
+  margin: 0 1rem;
+  height: max-content;
+  background: transparent;
+}
+
+
+/**
+WELCOME CARD 
+**/
+.welcome-card {
+  width: 98%;
+  height: 14rem;
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  background: var(--bg-cl);
+  border-radius: .6rem;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.3), -1px -1px 2px rgba(0,0,0,0.3);
+  margin-top: 4.3rem ; 
+  margin-left: .7rem;
+
+}
+
+.welcome-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 99%;
+  height: 9rem;
+  margin: 0.2rem .2rem;
+  justify-self: center;
+  background: var(--bg-cl);
+  border-start-start-radius: .4rem;
+  border-start-end-radius: .4rem;
+  border-end-end-radius: .4rem;
+  border-end-start-radius: .4rem;
+  box-shadow:   1px 1px 3px rgb(151, 147, 147),  -1px -1px 3px rgb(189, 184, 184);
+}
+
+.welcome-top-left{
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 1.2rem;
+  justify-content: center;
+  font-size: 1.4rem;
+  gap: 0.4rem;
+  font-weight: 600;
+  color: rgb(24, 23, 23);
+  font-family: Arial sans-serif;
+}
+
+.welcome-top-left small{
+  width: 3rem;
+  color: rgb(95, 90, 90);
+  font-weight: 500;
+  font-family: Arial sans-serif;
+}
+
+/**
+ WELCOME TOP RIGHT
+ **/
+ .welcome-top-right {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+ }
+
+  .welcome-top-right input{
+    width: 500px;
+    height: 2.8rem;
+    margin: 0 2rem;
+    margin-right: -.1rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    color: var(--dark-cl);
+    background-color: transparent;
+    border: 0.1px solid var(--background-cl);
+    border-radius: .8rem;
+  }
+
+  .welcome-top-right input:where(:hover :focus-within){
+    border: 1px solid rgb(156, 151, 151);
+
+  }
+
+  .welcome-top-right input::placeholder{
+    color: rgb(197, 190, 190);
+    position: absolute;
+    margin: 0 .5rem;
+  }
+
+  /*-----BOTTOM-----*/
+  .welcome-bottom {
+    width: 100%;
+    height: 10.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3.2rem;
+  }
+
+
+
+  .close-time {
+    width: 35;
+    height: 100%;
+    display: flex;
+    background: transparent;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .1rem;
+    text-align: center;
+    flex-direction: column;
+    margin-left: 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .close-time small{
+    font-size: 1.6rem;
+    color: var(--card-full-tele-bg-cl);
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  .close-time span{
+    color: white;
+    padding: 1rem 1.5rem;
+    background: var(--dark-cl);
+    border-radius: 4px;
+    font-size: 1.5rem;
+    border: 0.1px solid var(--background-cl);
+  }
+
+
+#clock {
+      font-family: 'Digital-7', monospace;
+      font-size: 2em;
+      color: #00ffcc;
+      background: var(--dark-cl);
+      padding: 15px 25px;
+      border-radius: 4px;
+      display: inline-block;
+      width: 50%;
+      height: 3.2rem;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-right: .7rem;
+      margin-top: 3.5rem;
+    }
+
+
+
+
+
+
+  .two-div-container{
+  display: flex;
+  max-width: 1200px;
+  width: 100%;
+  gap: 2rem;
+  background-color: red;
+  height: max-content;
+  background: transparent;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+
+   /****
+ORDER STATUS
+***/
+
+.order-status-section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 470px;
+  margin: 2rem auto;
+  padding: 1rem;
+  gap: .2rem;
+ 
+}
+
+.order-status-section input {
+  height: 3.2rem;
+  width: 70%;
+  padding: 10px;
+  color: white;
+  font-size: .9rem;
+  font-weight: 600;
+  border: 1px solid #ebe5e5;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.order-status-section button {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: 2s ease;
+}
+
+
+
+/**99
+order2 style
+***/
+/* Order status card */
+#orderStatusCard {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  width: 100%;
+  max-width: 470px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  padding: 14px;
+  z-index: 99999;
+  font-family: Arial, sans-serif;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+#orderStatusCard.hidden { 
+opacity: 0; 
+transform: translateY(8px);
+pointer-events: none; }
+
+#orderStatusCard h4 {
+   margin: 0 0 8px 0;
+    font-size: .8rem; 
+  }
+#orderStatusCard p {
+   margin: 6px 0; 
+   font-size: 0.9rem;
+    color: #333; }
+
+
+.status-badge {
+  display:inline-block;
+  width: 70%;
+  padding:6px 10px;
+  border-radius:999px;
+  color: #fff;
+  font-weight: 700;
+  text-transform: capitalize;
+  font-size: 0.85rem;
+}
+
+/* Status color classes */
+.status-pending { background: #f39c12; }      /* orange */
+.status-processing { background: #3498db; }   /* blue */
+.status-delivered { background: #2ecc71; }    /* green */
+.status-failed { background: #e74c3c; }       /* red */
+.status-cancelled { background: #9e9e9e; }    /* gray */
+.status-refunded { background: #795548; }     /* brown */
+.status-resolved { background: #27ae60; }     /* dark green */
+
+/* Manual check result box */
+#statusResult { 
+margin-top: 12px; 
+width: 60%;
+padding: 12px; 
+background:#f5f7fb;
+border-radius: 8px; 
+box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/**--ORDER STAtUS ENDS--**/
+
+
+/**---NETWORKS-PURCHASED-DETAILS---**/
+.networks-purchased-container {
+  width: 100%;
+  max-width: 600px;
+  background: transparent;
+  height: 11rem;
+  margin-right: 2rem;
+  gap: .4rem;
+}
+
+.purchase-title {
+  display: flex;
+  align-items: center;
+  width: 98%;
+  height: 20%;
+  margin-bottom: .1rem;
+  padding: .3rem;
+  font-size: 1.2rem;
+}
+
+.purchase-title h5{
+  font-size: 1.2rem;
+  text-align: center;
+  color: rgb(51, 51, 34);
+  font-family: 'Times New Roman', Times;
+}
+
+.purchase-container{
+  width: 98%;
+  height: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+}
+
+.purchase-container a{
+  text-decoration: none;
+  color: var(--bg-cl);
+}
+
+.purchase-container a .card-box{
+  width:  9.5rem;
+  height: 5rem;
+  font-size: 1.2rem;
+}
+
+
+/**SECTION TITLE
+**/
+.section-title {
+  width: 100%;
+  max-width: 700px;
+  height: 3rem;
+  display: flex;
+  padding: .4rem 0;
+  align-items: center;
+  justify-self: center;
+  justify-content: flex-start;
+  margin: 1rem  0;
+  background: black;
+  box-shadow: inset  0 2px 6px rgba(124, 124, 124, 0.4);
+  position: relative;
+}
+
+
+.section-content {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: 0 1.5rem;
+  background: var(--card-full-bg-cl);
+  width: 98%;
+  text-align: center;
+  height: 3rem;
+  border: none;
+}
+
+.section-content h1{
+  font-size: 1.2rem;
+}
+
+
+.section-content img{
+  width: 2rem;
+  height: 1.8rem;
+  justify-self: center;
+}
+
+.section-content .mtnt {
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+
+
+.section-content .telecelt{
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.tele{
+  background: var(--dark-cl);
+}
+
+.telec{
+  background-color: var(--card-full-tele-bg-cl);
+}
+
+.section-content .airtelt{
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.airtel{
+  background: var(--dark-cl);
+}
+
+.airtelc{
+  background: var(--card-full-airtel-bg-cl);
+}
+
+/**--SECTION-TITLE-ENDS--**/
+
+/*------REAL BUNDLE CARD-MTN--*/
+.bundle-cards-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-container {
+  width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+/**
+BECAUSE OF PROMO
+****/
+
+
+.bundle-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 12.5rem;
+  height: 9rem;
+  gap: 0;
+  background: var(--card-full-bg-cl);
+  border-radius: .8rem;
+}
+
+
+.top-bundle-card {
+width: 98%;
+height: 38%;
+gap: 1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+
+.bottom-bundle-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+.old-price {
+  display: flex;
+  font-size: .9rem;
+  color: rgb(14, 138, 101);
+  text-decoration: line-through;
+}
+
+.bottom-bundle-card .buy-btn{
+  width: 11rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-card h2{
+  font-size: .9rem;
+  font-family: Arial ;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+
+.price-gb {
+  width: 100%;
+  height: 40%;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background-color: transparent;
+}
+
+.price-gb small{
+  width: 60%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: .9rem;
+  font-weight: 500;
+  font-family: Arial sans-serif;
+  color: #24463e;;
+}
+/**--MTN-CARD-ENDS--**/
+
+
+
+
+
+/*------REAL BUNDLE CARD--TELECEL-*/
+.bundle-cards-telecel-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+  background: transparent;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-telecel-container {
+   width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+.bundle-card-telecel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 12.5rem;
+  height: 9rem;
+  gap: 0;
+  background: var(--card-full-tele-bg-cl);
+  border-radius: .8rem;
+}
+
+.top-bundle-telecel-card {
+width: 98%;
+height: 38%;
+gap: .1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-telecel-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+.bottom-bundle-telecel-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+
+.bottom-bundle-telecel-card .buy-btn{
+  width: 11rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-telecel-card h2{
+  font-size: .9rem;
+  font-family: Arial;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+
+/**--TELECEL-CARD-ENDS--**/
+
+
+
+
+
+/* AIRTELTIGO SECTION
+*/
+/*------REAL BUNDLE CARD--TELECEL-*/
+.bundle-cards-airteltigo-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+  background: transparent;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-airteltigo-container {
+    width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+.bundle-card-airteltigo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 12.5rem;
+  height: 9rem;
+  gap: 0;
+  background: rgb(6, 6, 231);
+  border-radius: .8rem;
+}
+
+.top-bundle-airteltigo-card {
+width: 98%;
+height: 38%;
+gap: .1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-airteltigo-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+.bottom-bundle-airteltigo-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+.bottom-bundle-airteltigo-card .buy-btn{
+ width: 11rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-airteltigo-card h2{
+  font-size: .9rem;
+  font-family: Arial;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+/***--AIRTEL-CARD-ENDS--**/
+
+
+/**--MENU-CARD
+
+
+
+
+/**-------FOOTER SECTION----***/
+
+/* ABOUT & FOOTER */
+.about,
+footer {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-self: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: max-content;
+  max-width: 1280px;
+  text-align: center;
+  padding: .2rem;
+  color: white;
+  background-color:  rgb(6, 6, 8) ;
+  bottom: 0;
+}
+
+.about{
+  border-block-end: 1px solid var(--ascent-cl);
+}
+
+section footer .bar{
+  margin: 0;
+  bottom: 0;
+}
+.about h3{
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: var(--background-cl);
+}
+.about h4{
+  color: rgb(45, 182, 148);
+  margin-top: 0.4rem;
+  font-size: 1.2rem;
+}
+
+.about P{
+  width: 90%;
+  font-size: .9rem;
+  font-weight: 300;
+  line-height: 1.6rem;
+}
+
+.about img{
+border-radius: 2rem;
+width: 1.6rem;
+height: 1.6rem;
+margin: 0 .5rem;
+}
+
+
+
+
+footer a{
+  font-weight: 500;
+  margin-left: 0.1rem;
+}
+
+footer .copyright{
+  font-size: .9rem;
+  width: 100%;
+  max-width: 320px;
+ 
+}
+
+
+
+footer img{
+  width: 2.6rem;
+  height: 2.6rem;
+  vertical-align: middle;
+  margin-left: 0.6rem;
+}
+ }
 
 /* 14. XL desktops */
 @media (max-width: 1366px) { }
 
 /* 15. Very large screens */
-@media (max-width: 1440px) { }
+@media (min-width: 1440px) { 
+   .navbar{
+    width: 100%;
+    max-width: 1440px;
+    left: 0;
+    margin: 0;
+  }
+
+
+/**
+CARD CONTAINER
+**/
+.card-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1400px;
+  justify-content:  space-between;
+  align-items: center;
+  justify-self: center;
+  margin: 0 1rem;
+  height: max-content;
+  background: transparent;
+}
+
+
+/**
+WELCOME CARD 
+**/
+.welcome-card {
+  width: 98%;
+  height: 14rem;
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  background: var(--bg-cl);
+  border-radius: .6rem;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.3), -1px -1px 2px rgba(0,0,0,0.3);
+  margin-top: 4.3rem ; 
+  margin-left: .7rem;
+
+}
+
+.welcome-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 99%;
+  height: 9rem;
+  margin: 0.2rem .2rem;
+  justify-self: center;
+  background: var(--bg-cl);
+  border-start-start-radius: .4rem;
+  border-start-end-radius: .4rem;
+  border-end-end-radius: .4rem;
+  border-end-start-radius: .4rem;
+  box-shadow:   1px 1px 3px rgb(151, 147, 147),  -1px -1px 3px rgb(189, 184, 184);
+}
+
+.welcome-top-left{
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 1.2rem;
+  justify-content: center;
+  font-size: 1.4rem;
+  gap: 0.4rem;
+  font-weight: 600;
+  color: rgb(24, 23, 23);
+  font-family: Arial sans-serif;
+}
+
+.welcome-top-left small{
+  width: 3rem;
+  color: rgb(95, 90, 90);
+  font-weight: 500;
+  font-family: Arial sans-serif;
+}
+
+/**
+ WELCOME TOP RIGHT
+ **/
+ .welcome-top-right {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+ }
+
+  .welcome-top-right input{
+    width: 500px;
+    height: 2.8rem;
+    margin: 0 2rem;
+    margin-right: -.1rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    color: var(--dark-cl);
+    background-color: transparent;
+    border: 0.1px solid var(--background-cl);
+    border-radius: .8rem;
+  }
+
+  .welcome-top-right input:where(:hover :focus-within){
+    border: 1px solid rgb(156, 151, 151);
+
+  }
+
+  .welcome-top-right input::placeholder{
+    color: rgb(197, 190, 190);
+    position: absolute;
+    margin: 0 .5rem;
+  }
+
+  /*-----BOTTOM-----*/
+  .welcome-bottom {
+    width: 100%;
+    height: 10.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3.2rem;
+  }
+
+
+
+  .close-time {
+    width: 35;
+    height: 100%;
+    display: flex;
+    background: transparent;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .1rem;
+    text-align: center;
+    flex-direction: column;
+    margin-left: 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .close-time small{
+    font-size: 1.6rem;
+    color: var(--card-full-tele-bg-cl);
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  .close-time span{
+    color: white;
+    padding: 1rem 1.5rem;
+    background: var(--dark-cl);
+    border-radius: 4px;
+    font-size: 1.5rem;
+    border: 0.1px solid var(--background-cl);
+  }
+
+
+#clock {
+      font-family: 'Digital-7', monospace;
+      font-size: 2em;
+      color: #00ffcc;
+      background: var(--dark-cl);
+      padding: 15px 25px;
+      border-radius: 4px;
+      display: inline-block;
+      width: 50%;
+      height: 3.2rem;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-right: .7rem;
+      margin-top: 3.5rem;
+    }
+
+
+
+
+
+
+  .two-div-container{
+  display: flex;
+  max-width: 1200px;
+  width: 100%;
+  gap: 2rem;
+  background-color: red;
+  height: max-content;
+  background: transparent;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+
+   /****
+ORDER STATUS
+***/
+
+.order-status-section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 470px;
+  margin: 2rem auto;
+  padding: 1rem;
+  gap: .2rem;
+ 
+}
+
+.order-status-section input {
+  height: 3.2rem;
+  width: 70%;
+  padding: 10px;
+  color: white;
+  font-size: .9rem;
+  font-weight: 600;
+  border: 1px solid #ebe5e5;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.order-status-section button {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: 2s ease;
+}
+
+
+
+/**99
+order2 style
+***/
+/* Order status card */
+#orderStatusCard {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  width: 100%;
+  max-width: 470px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  padding: 14px;
+  z-index: 99999;
+  font-family: Arial, sans-serif;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+#orderStatusCard.hidden { 
+opacity: 0; 
+transform: translateY(8px);
+pointer-events: none; }
+
+#orderStatusCard h4 {
+   margin: 0 0 8px 0;
+    font-size: .8rem; 
+  }
+#orderStatusCard p {
+   margin: 6px 0; 
+   font-size: 0.9rem;
+    color: #333; }
+
+
+.status-badge {
+  display:inline-block;
+  width: 70%;
+  padding:6px 10px;
+  border-radius:999px;
+  color: #fff;
+  font-weight: 700;
+  text-transform: capitalize;
+  font-size: 0.85rem;
+}
+
+/* Status color classes */
+.status-pending { background: #f39c12; }      /* orange */
+.status-processing { background: #3498db; }   /* blue */
+.status-delivered { background: #2ecc71; }    /* green */
+.status-failed { background: #e74c3c; }       /* red */
+.status-cancelled { background: #9e9e9e; }    /* gray */
+.status-refunded { background: #795548; }     /* brown */
+.status-resolved { background: #27ae60; }     /* dark green */
+
+/* Manual check result box */
+#statusResult { 
+margin-top: 12px; 
+width: 60%;
+padding: 12px; 
+background:#f5f7fb;
+border-radius: 8px; 
+box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/**--ORDER STAtUS ENDS--**/
+
+
+/**---NETWORKS-PURCHASED-DETAILS---**/
+.networks-purchased-container {
+  width: 100%;
+  max-width: 600px;
+  background: transparent;
+  height: 11rem;
+  margin-right: 2rem;
+  gap: .4rem;
+}
+
+.purchase-title {
+  display: flex;
+  align-items: center;
+  width: 98%;
+  height: 20%;
+  margin-bottom: .1rem;
+  padding: .3rem;
+  font-size: 1.2rem;
+}
+
+.purchase-title h5{
+  font-size: 1.2rem;
+  text-align: center;
+  color: rgb(51, 51, 34);
+  font-family: 'Times New Roman', Times;
+}
+
+.purchase-container{
+  width: 98%;
+  height: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+}
+
+.purchase-container a{
+  text-decoration: none;
+  color: var(--bg-cl);
+}
+
+.purchase-container a .card-box{
+  width:  9.5rem;
+  height: 5rem;
+  font-size: 1.2rem;
+}
+
+
+/**SECTION TITLE
+**/
+.section-title {
+  width: 100%;
+  max-width: 700px;
+  height: 3rem;
+  display: flex;
+  padding: .4rem 0;
+  align-items: center;
+  justify-self: center;
+  justify-content: flex-start;
+  margin: 1rem  0;
+  background: black;
+  box-shadow: inset  0 2px 6px rgba(124, 124, 124, 0.4);
+  position: relative;
+}
+
+
+.section-content {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: 0 1.5rem;
+  background: var(--card-full-bg-cl);
+  width: 98%;
+  text-align: center;
+  height: 3rem;
+  border: none;
+}
+
+.section-content h1{
+  font-size: 1.2rem;
+}
+
+
+.section-content img{
+  width: 2rem;
+  height: 1.8rem;
+  justify-self: center;
+}
+
+.section-content .mtnt {
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+
+
+.section-content .telecelt{
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.tele{
+  background: var(--dark-cl);
+}
+
+.telec{
+  background-color: var(--card-full-tele-bg-cl);
+}
+
+.section-content .airtelt{
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.airtel{
+  background: var(--dark-cl);
+}
+
+.airtelc{
+  background: var(--card-full-airtel-bg-cl);
+}
+
+/**--SECTION-TITLE-ENDS--**/
+
+/*------REAL BUNDLE CARD-MTN--*/
+.bundle-cards-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-container {
+  width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+/**
+BECAUSE OF PROMO
+****/
+
+
+.bundle-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 12.5rem;
+  height: 9rem;
+  gap: 0;
+  background: var(--card-full-bg-cl);
+  border-radius: .8rem;
+}
+
+
+.top-bundle-card {
+width: 98%;
+height: 38%;
+gap: 1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+
+.bottom-bundle-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+.old-price {
+  display: flex;
+  font-size: .9rem;
+  color: rgb(14, 138, 101);
+  text-decoration: line-through;
+}
+
+.bottom-bundle-card .buy-btn{
+  width: 11rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-card h2{
+  font-size: .9rem;
+  font-family: Arial ;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+
+.price-gb {
+  width: 100%;
+  height: 40%;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background-color: transparent;
+}
+
+.price-gb small{
+  width: 60%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: .9rem;
+  font-weight: 500;
+  font-family: Arial sans-serif;
+  color: #24463e;;
+}
+/**--MTN-CARD-ENDS--**/
+
+
+
+
+
+/*------REAL BUNDLE CARD--TELECEL-*/
+.bundle-cards-telecel-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+  background: transparent;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-telecel-container {
+   width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+.bundle-card-telecel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 12.5rem;
+  height: 9rem;
+  gap: 0;
+  background: var(--card-full-tele-bg-cl);
+  border-radius: .8rem;
+}
+
+.top-bundle-telecel-card {
+width: 98%;
+height: 38%;
+gap: .1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-telecel-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+.bottom-bundle-telecel-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+
+.bottom-bundle-telecel-card .buy-btn{
+  width: 11rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-telecel-card h2{
+  font-size: .9rem;
+  font-family: Arial;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+
+/**--TELECEL-CARD-ENDS--**/
+
+
+
+
+
+/* AIRTELTIGO SECTION
+*/
+/*------REAL BUNDLE CARD--TELECEL-*/
+.bundle-cards-airteltigo-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+  background: transparent;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-airteltigo-container {
+    width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+.bundle-card-airteltigo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 12.5rem;
+  height: 9rem;
+  gap: 0;
+  background: rgb(6, 6, 231);
+  border-radius: .8rem;
+}
+
+.top-bundle-airteltigo-card {
+width: 98%;
+height: 38%;
+gap: .1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-airteltigo-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+.bottom-bundle-airteltigo-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+.bottom-bundle-airteltigo-card .buy-btn{
+ width: 11rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-airteltigo-card h2{
+  font-size: .9rem;
+  font-family: Arial;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+/***--AIRTEL-CARD-ENDS--**/
+
+
+/**--MENU-CARD
+
+
+
+
+/**-------FOOTER SECTION----***/
+
+/* ABOUT & FOOTER */
+.about,
+footer {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-self: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: max-content;
+  max-width: 1440px;
+  text-align: center;
+  padding: .2rem;
+  color: white;
+  background-color:  rgb(6, 6, 8) ;
+  bottom: 0;
+}
+
+.about{
+  border-block-end: 1px solid var(--ascent-cl);
+}
+
+section footer .bar{
+  margin: 0;
+  bottom: 0;
+}
+.about h3{
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: var(--background-cl);
+}
+.about h4{
+  color: rgb(45, 182, 148);
+  margin-top: 0.4rem;
+  font-size: 1.2rem;
+}
+
+.about P{
+  width: 90%;
+  font-size: .9rem;
+  font-weight: 300;
+  line-height: 1.6rem;
+}
+
+.about img{
+border-radius: 2rem;
+width: 1.6rem;
+height: 1.6rem;
+margin: 0 .5rem;
+}
+
+
+
+
+footer a{
+  font-weight: 500;
+  margin-left: 0.1rem;
+}
+
+footer .copyright{
+  font-size: .9rem;
+  width: 100%;
+  max-width: 320px;
+ 
+}
+
+
+
+footer img{
+  width: 2.6rem;
+  height: 2.6rem;
+  vertical-align: middle;
+  margin-left: 0.6rem;
+}
+}
 
 /* 16. Extra-wide monitors */
-@media (max-width:1920px){}
+@media (min-width:1920px){
+   .navbar{
+    width: 100%;
+    max-width: 1920px;
+    left: 0;
+    margin: 0;
+  }
+
+
+/**
+CARD CONTAINER
+**/
+.card-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1920px;
+  justify-content:  space-between;
+  align-items: center;
+  justify-self: center;
+  margin: 0 1rem;
+  height: max-content;
+  background: transparent;
+}
+
+
+/**
+WELCOME CARD 
+**/
+.welcome-card {
+  width: 98%;
+  height: 14rem;
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  background: var(--bg-cl);
+  border-radius: .6rem;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.3), -1px -1px 2px rgba(0,0,0,0.3);
+  margin-top: 4.3rem ; 
+  margin-left: .7rem;
+
+}
+
+.welcome-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 99%;
+  height: 6rem;
+  margin: 0.2rem .2rem;
+  justify-self: center;
+  background: var(--bg-cl);
+  border-start-start-radius: .4rem;
+  border-start-end-radius: .4rem;
+  border-end-end-radius: .4rem;
+  border-end-start-radius: .4rem;
+  box-shadow:   1px 1px 3px rgb(151, 147, 147),  -1px -1px 3px rgb(189, 184, 184);
+}
+
+.welcome-top-left{
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 1.2rem;
+  justify-content: center;
+  font-size: 1.4rem;
+  gap: 0.4rem;
+  font-weight: 600;
+  color: rgb(24, 23, 23);
+  font-family: Arial sans-serif;
+}
+
+.welcome-top-left small{
+  width: 3rem;
+  color: rgb(95, 90, 90);
+  font-weight: 500;
+  font-family: Arial sans-serif;
+}
+
+/**
+ WELCOME TOP RIGHT
+ **/
+ .welcome-top-right {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+ }
+
+  .welcome-top-right input{
+    width: 300px;
+    height: 2.8rem;
+    margin: 0 2rem;
+    margin-right: -.1rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    color: var(--dark-cl);
+    background-color: transparent;
+    border: 0.1px solid var(--background-cl);
+    border-radius: .8rem;
+  }
+
+  .welcome-top-right input:where(:hover :focus-within){
+    border: 1px solid rgb(156, 151, 151);
+
+  }
+
+  .welcome-top-right input::placeholder{
+    color: rgb(197, 190, 190);
+    position: absolute;
+    margin: 0 .5rem;
+  }
+
+  /*-----BOTTOM-----*/
+  .welcome-bottom {
+    width: 100%;
+    height: 7.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3.2rem;
+  }
+
+
+
+  .close-time {
+    width: 35;
+    height: 100%;
+    display: flex;
+    background: transparent;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .1rem;
+    text-align: center;
+    flex-direction: column;
+    margin-left: 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .close-time small{
+    font-size: 1.6rem;
+    color: var(--card-full-tele-bg-cl);
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  .close-time span{
+    color: white;
+    padding: 1rem 1.5rem;
+    background: var(--dark-cl);
+    border-radius: 4px;
+    font-size: 1.5rem;
+    border: 0.1px solid var(--background-cl);
+  }
+
+
+#clock {
+      font-family: 'Digital-7', monospace;
+      font-size: 2em;
+      color: #00ffcc;
+      background: var(--dark-cl);
+      padding: 15px 25px;
+      border-radius: 4px;
+      display: inline-block;
+      width: 40%;
+      height: 3.7rem;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: 600;
+      margin-right: .7rem;
+      margin-top: 3.5rem;
+    }
+
+
+
+
+
+
+  .two-div-container{
+  display: flex;
+  max-width: 1500px;
+  width: 100%;
+  gap: 8rem;
+  background-color: red;
+  height: max-content;
+  background: transparent;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+
+   /****
+ORDER STATUS
+***/
+
+.order-status-section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 570px;
+  margin: 2rem auto;
+  padding: 1rem;
+  gap: .2rem;
+ 
+}
+
+.order-status-section input {
+  height: 3.2rem;
+  width: 70%;
+  padding: 10px;
+  color: white;
+  font-size: .9rem;
+  font-weight: 600;
+  border: 1px solid #ebe5e5;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.order-status-section button {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: 2s ease;
+}
+
+
+
+/**99
+order2 style
+***/
+/* Order status card */
+#orderStatusCard {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  width: 100%;
+  max-width: 470px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  padding: 14px;
+  z-index: 99999;
+  font-family: Arial, sans-serif;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+#orderStatusCard.hidden { 
+opacity: 0; 
+transform: translateY(8px);
+pointer-events: none; }
+
+#orderStatusCard h4 {
+   margin: 0 0 8px 0;
+    font-size: .8rem; 
+  }
+#orderStatusCard p {
+   margin: 6px 0; 
+   font-size: 0.9rem;
+    color: #333; }
+
+
+.status-badge {
+  display:inline-block;
+  width: 70%;
+  padding:6px 10px;
+  border-radius:999px;
+  color: #fff;
+  font-weight: 700;
+  text-transform: capitalize;
+  font-size: 0.85rem;
+}
+
+/* Status color classes */
+.status-pending { background: #f39c12; }      /* orange */
+.status-processing { background: #3498db; }   /* blue */
+.status-delivered { background: #2ecc71; }    /* green */
+.status-failed { background: #e74c3c; }       /* red */
+.status-cancelled { background: #9e9e9e; }    /* gray */
+.status-refunded { background: #795548; }     /* brown */
+.status-resolved { background: #27ae60; }     /* dark green */
+
+/* Manual check result box */
+#statusResult { 
+margin-top: 12px; 
+width: 60%;
+padding: 12px; 
+background:#f5f7fb;
+border-radius: 8px; 
+box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/**--ORDER STAtUS ENDS--**/
+
+
+/**---NETWORKS-PURCHASED-DETAILS---**/
+.networks-purchased-container {
+  width: 100%;
+  max-width: 600px;
+  background: transparent;
+  height: 11rem;
+  margin-right: 2rem;
+  gap: .4rem;
+}
+
+.purchase-title {
+  display: flex;
+  align-items: center;
+  width: 98%;
+  height: 20%;
+  margin-bottom: .1rem;
+  padding: .3rem;
+  font-size: 1.2rem;
+}
+
+.purchase-title h5{
+  font-size: 1.2rem;
+  text-align: center;
+  color: rgb(51, 51, 34);
+  font-family: 'Times New Roman', Times;
+}
+
+.purchase-container{
+  width: 98%;
+  height: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+}
+
+.purchase-container a{
+  text-decoration: none;
+  color: var(--bg-cl);
+}
+
+.purchase-container a .card-box{
+  width:  9.5rem;
+  height: 5rem;
+  font-size: 1.2rem;
+}
+
+
+/**SECTION TITLE
+**/
+.section-title {
+  width: 100%;
+  max-width: 900px;
+  height: 3rem;
+  display: flex;
+  padding: .4rem 0;
+  align-items: center;
+  justify-self: center;
+  justify-content: flex-start;
+  margin: 1rem  0;
+  background: black;
+  box-shadow: inset  0 2px 6px rgba(124, 124, 124, 0.4);
+  position: relative;
+}
+
+
+.section-content {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: 0 1.5rem;
+  background: var(--card-full-bg-cl);
+  width: 98%;
+  text-align: center;
+  height: 3rem;
+  border: none;
+}
+
+.section-content h1{
+  font-size: 1.2rem;
+}
+
+
+.section-content img{
+  width: 2rem;
+  height: 1.8rem;
+  justify-self: center;
+}
+
+.section-content .mtnt {
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+
+
+.section-content .telecelt{
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.tele{
+  background: var(--dark-cl);
+}
+
+.telec{
+  background-color: var(--card-full-tele-bg-cl);
+}
+
+.section-content .airtelt{
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.airtel{
+  background: var(--dark-cl);
+}
+
+.airtelc{
+  background: var(--card-full-airtel-bg-cl);
+}
+
+/**--SECTION-TITLE-ENDS--**/
+
+/*------REAL BUNDLE CARD-MTN--*/
+.bundle-cards-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-container {
+  width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+/**
+BECAUSE OF PROMO
+****/
+
+
+.bundle-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 16.5rem;
+  height: 12rem;
+  gap: 0;
+  background: var(--card-full-bg-cl);
+  border-radius: .8rem;
+}
+
+
+.top-bundle-card {
+width: 98%;
+height: 38%;
+gap: 1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+
+.bottom-bundle-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+.old-price {
+  display: flex;
+  font-size: .9rem;
+  color: rgb(14, 138, 101);
+  text-decoration: line-through;
+}
+
+.bottom-bundle-card .buy-btn{
+  width: 11rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-card h2{
+  font-size: .9rem;
+  font-family: Arial ;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+
+.price-gb {
+  width: 100%;
+  height: 40%;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background-color: transparent;
+}
+
+.price-gb small{
+  width: 60%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: .9rem;
+  font-weight: 500;
+  font-family: Arial sans-serif;
+  color: #24463e;;
+}
+/**--MTN-CARD-ENDS--**/
+
+
+
+
+
+/*------REAL BUNDLE CARD--TELECEL-*/
+.bundle-cards-telecel-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+  background: transparent;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-telecel-container {
+   width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+.bundle-card-telecel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 16.5rem;
+  height: 12rem;
+  gap: 0;
+  background: var(--card-full-tele-bg-cl);
+  border-radius: .8rem;
+}
+
+.top-bundle-telecel-card {
+width: 98%;
+height: 38%;
+gap: .1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-telecel-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+.bottom-bundle-telecel-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+
+.bottom-bundle-telecel-card .buy-btn{
+  width: 11rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-telecel-card h2{
+  font-size: .9rem;
+  font-family: Arial;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+
+/**--TELECEL-CARD-ENDS--**/
+
+
+
+
+
+/* AIRTELTIGO SECTION
+*/
+/*------REAL BUNDLE CARD--TELECEL-*/
+.bundle-cards-airteltigo-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+  background: transparent;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-airteltigo-container {
+    width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+.bundle-card-airteltigo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 16.5rem;
+  height: 12rem;
+  gap: 0;
+  background: rgb(6, 6, 231);
+  border-radius: .8rem;
+}
+
+.top-bundle-airteltigo-card {
+width: 98%;
+height: 38%;
+gap: .1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-airteltigo-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+.bottom-bundle-airteltigo-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+.bottom-bundle-airteltigo-card .buy-btn{
+ width: 11rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-airteltigo-card h2{
+  font-size: .9rem;
+  font-family: Arial;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+/***--AIRTEL-CARD-ENDS--**/
+
+
+/**--MENU-CARD
+
+
+
+
+/**-------FOOTER SECTION----***/
+
+/* ABOUT & FOOTER */
+.about,
+footer {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-self: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: max-content;
+  max-width: 1920px;
+  text-align: center;
+  padding: .2rem;
+  color: white;
+  background-color:  rgb(6, 6, 8) ;
+  bottom: 0;
+}
+
+.about{
+  border-block-end: 1px solid var(--ascent-cl);
+}
+
+section footer .bar{
+  margin: 0;
+  bottom: 0;
+}
+.about h3{
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: var(--background-cl);
+}
+.about h4{
+  color: rgb(45, 182, 148);
+  margin-top: 0.4rem;
+  font-size: 1.2rem;
+}
+
+.about P{
+  width: 90%;
+  font-size: .9rem;
+  font-weight: 300;
+  line-height: 1.6rem;
+}
+
+.about img{
+border-radius: 2rem;
+width: 1.6rem;
+height: 1.6rem;
+margin: 0 .5rem;
+}
+
+
+
+
+footer a{
+  font-weight: 500;
+  margin-left: 0.1rem;
+}
+
+footer .copyright{
+  font-size: .9rem;
+  width: 100%;
+  max-width: 320px;
+ 
+}
+
+
+
+footer img{
+  width: 2.6rem;
+  height: 2.6rem;
+  vertical-align: middle;
+  margin-left: 0.6rem;
+}
+}
