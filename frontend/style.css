@@ -232,10 +232,10 @@ WELCOME CARD
  }
 
   .welcome-top-right input{
-    width: 100px;
+    width: 140px;
     height: 2rem;
     margin: 0 2rem;
-    margin-right: -.1rem;
+    margin-right: 2rem;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
@@ -276,7 +276,7 @@ WELCOME CARD
     gap: .1rem;
     text-align: center;
     flex-direction: column;
-    margin-left: .5rem;
+    margin-left: .1rem;
     margin-bottom: .4rem;
   }
 
@@ -300,17 +300,17 @@ WELCOME CARD
       font-size: 2em;
       color: #00ffcc;
       background: var(--dark-cl);
-      padding: 15px 25px;
+      padding:20px 25px;
       border-radius: 4px;
       display: inline-block;
       width: 60%;
-      height: 2.2rem;
+      height: 2.7rem;
       align-items: center;
       display: flex;
       justify-content: center;
       font-size: 1.1rem;
       font-weight: 600;
-      margin-right: 1rem;
+      margin-right: .5rem;
       margin-top: 2rem;
     }
 
@@ -1661,11 +1661,10 @@ footer {
   flex-direction: column;
   width: 100%;
   height: max-content;
-  max-width: 480px;
   text-align: center;
   padding: .3rem;
   color: white;
-  background-color:  rgb(6, 6, 8) ;
+  background-color:  rgb(29, 25, 25) ;
   bottom: 0;
 }
 
@@ -1947,7 +1946,7 @@ ORDER STATUS
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  max-width: 310px;
+  max-width: 280px;
   margin: 2rem auto;
   padding: 1rem;
   gap: 1.2rem;
@@ -1988,7 +1987,7 @@ order2 style
   right: 20px;
   display: flex;
   width: 100%;
-  max-width: 310px;
+  max-width: 190px;
   background: white;
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0,0,0,0.12);
@@ -2049,7 +2048,7 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 /**---NETWORKS-PURCHASED-DETAILS---**/
 .networks-purchased-container {
   width: 100%;
-  max-width: 300px;
+  max-width: 240px;
   height: 8rem;
   margin: .5rem 0;
   gap: .4rem;
@@ -2412,24 +2411,7 @@ margin: .2rem .1rem;
 
 /**-------FOOTER SECTION----***/
 
-/* ABOUT & FOOTER */
-.about,
-footer {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-self: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 100%;
-  height: max-content;
-  max-width: 320px;
-  text-align: center;
-  padding: .2rem;
-  color: white;
-  background-color:  rgb(6, 6, 8) ;
-  bottom: 0;
-}
+
 
 .about{
   border-block-end: 1px solid var(--ascent-cl);
@@ -2990,24 +2972,7 @@ margin: .2rem .1rem;
 
 /**-------FOOTER SECTION----***/
 
-/* ABOUT & FOOTER */
-.about,
-footer {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-self: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 100%;
-  height: max-content;
-  max-width: 360px;
-  text-align: center;
-  padding: .2rem;
-  color: white;
-  background-color:  rgb(6, 6, 8) ;
-  bottom: 0;
-}
+
 
 .about{
   border-block-end: 1px solid var(--ascent-cl);
@@ -3124,7 +3089,7 @@ order2 style
   right: 20px;
   display: flex;
   width: 100%;
-  max-width: 365px;
+  max-width: 190px;
   background: white;
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0,0,0,0.12);
@@ -3571,24 +3536,7 @@ margin: .2rem .1rem;
 
 /**-------FOOTER SECTION----***/
 
-/* ABOUT & FOOTER */
-.about,
-footer {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-self: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 100%;
-  height: max-content;
-  max-width: 375px;
-  text-align: center;
-  padding: .2rem;
-  color: white;
-  background-color:  rgb(6, 6, 8) ;
-  bottom: 0;
-}
+
 
 .about{
   border-block-end: 1px solid var(--ascent-cl);
@@ -3650,7 +3598,7 @@ footer img{
  }
 
 /* 4. Standard mobile (e.g. iPhone X/12/13) */
-@media (max-width: 414px) {
+@media (min-width: 414px) {
   .navbar{
     width: 100%;
   
@@ -3706,7 +3654,7 @@ order2 style
   right: 20px;
   display: flex;
   width: 100%;
-  max-width: 404px;
+  max-width: 220px;
   background: white;
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0,0,0,0.12);
@@ -4154,24 +4102,7 @@ margin: .2rem .1rem;
 
 /**-------FOOTER SECTION----***/
 
-/* ABOUT & FOOTER */
-.about,
-footer {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-self: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 100%;
-  height: max-content;
-  max-width: 414px;
-  text-align: center;
-  padding: .2rem;
-  color: white;
-  background-color:  rgb(6, 6, 8) ;
-  bottom: 0;
-}
+
 
 .about{
   border-block-end: 1px solid var(--ascent-cl);
@@ -4289,7 +4220,7 @@ order2 style
   right: 20px;
   display: flex;
   width: 100%;
-  max-width: 470px;
+  max-width: 200px;
   background: white;
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0,0,0,0.12);
@@ -4732,24 +4663,7 @@ margin: .2rem .1rem;
 
 /**-------FOOTER SECTION----***/
 
-/* ABOUT & FOOTER */
-.about,
-footer {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-self: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 100%;
-  height: max-content;
-  max-width: 480px;
-  text-align: center;
-  padding: .2rem;
-  color: white;
-  background-color:  rgb(6, 6, 8) ;
-  bottom: 0;
-}
+
 
 .about{
   border-block-end: 1px solid var(--ascent-cl);
@@ -5509,24 +5423,7 @@ margin: .2rem .1rem;
 
 /**-------FOOTER SECTION----***/
 
-/* ABOUT & FOOTER */
-.about,
-footer {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-self: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 100%;
-  height: max-content;
-  max-width: 600px;
-  text-align: center;
-  padding: .2rem;
-  color: white;
-  background-color:  rgb(6, 6, 8) ;
-  bottom: 0;
-}
+
 
 .about{
   border-block-end: 1px solid var(--ascent-cl);
@@ -6285,25 +6182,6 @@ margin: .2rem .1rem;
 
 /**-------FOOTER SECTION----***/
 
-/* ABOUT & FOOTER */
-.about,
-footer {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-self: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 100%;
-  height: max-content;
-  max-width: 640px;
-  text-align: center;
-  padding: .2rem;
-  color: white;
-  background-color:  rgb(6, 6, 8) ;
-  bottom: 0;
-}
-
 .about{
   border-block-end: 1px solid var(--ascent-cl);
 }
@@ -6611,7 +6489,7 @@ order2 style
   right: 20px;
   display: flex;
   width: 100%;
-  max-width: 470px;
+  max-width: 300px;
   background: white;
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0,0,0,0.12);
@@ -7060,24 +6938,7 @@ margin: .2rem .1rem;
 
 /**-------FOOTER SECTION----***/
 
-/* ABOUT & FOOTER */
-.about,
-footer {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-self: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 100%;
-  height: max-content;
-  max-width: 768px;
-  text-align: center;
-  padding: .2rem;
-  color: white;
-  background-color:  rgb(6, 6, 8) ;
-  bottom: 0;
-}
+
 
 .about{
   border-block-end: 1px solid var(--ascent-cl);
@@ -7337,7 +7198,7 @@ order2 style
   right: 20px;
   display: flex;
   width: 100%;
-  max-width: 470px;
+  max-width: 400px;
   background: white;
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0,0,0,0.12);
@@ -7787,23 +7648,7 @@ margin: .2rem .1rem;
 /**-------FOOTER SECTION----***/
 
 /* ABOUT & FOOTER */
-.about,
-footer {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-self: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 100%;
-  height: max-content;
-  max-width: 800px;
-  text-align: center;
-  padding: .2rem;
-  color: white;
-  background-color:  rgb(6, 6, 8) ;
-  bottom: 0;
-}
+
 
 .about{
   border-block-end: 1px solid var(--ascent-cl);
@@ -8061,7 +7906,7 @@ order2 style
   right: 20px;
   display: flex;
   width: 100%;
-  max-width: 470px;
+  max-width: 400px;
   background: white;
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0,0,0,0.12);
@@ -8510,24 +8355,7 @@ margin: .2rem .1rem;
 
 /**-------FOOTER SECTION----***/
 
-/* ABOUT & FOOTER */
-.about,
-footer {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-self: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 100%;
-  height: max-content;
-  max-width: 1020px;
-  text-align: center;
-  padding: .2rem;
-  color: white;
-  background-color:  rgb(6, 6, 8) ;
-  bottom: 0;
-}
+
 
 .about{
   border-block-end: 1px solid var(--ascent-cl);
@@ -8601,7 +8429,7 @@ CARD CONTAINER
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 760px;
+  max-width: 1160px;
   justify-content:  center;
   align-items: center;
   justify-self: center;
@@ -8633,7 +8461,7 @@ WELCOME CARD
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 99%;
+  width: 99.5%;
   height: 6rem;
   margin: 0.2rem .2rem;
   justify-self: center;
@@ -8642,7 +8470,7 @@ WELCOME CARD
   border-start-end-radius: .4rem;
   border-end-end-radius: .4rem;
   border-end-start-radius: .4rem;
-  box-shadow:   1px 1px 3px rgb(151, 147, 147),  -1px -1px 3px rgb(189, 184, 184);
+  box-shadow: inset  1px 1px 3px rgb(151, 147, 147),  -1px -1px 3px rgb(189, 184, 184);
 }
 
 .welcome-top-left{
@@ -8680,8 +8508,8 @@ WELCOME CARD
  }
 
   .welcome-top-right input{
-    width: 100px;
-    height: 2rem;
+    width: 260px;
+    height: 2.2rem;
     margin: 0 2rem;
     margin-right: -.1rem;
     display: flex;
@@ -8713,6 +8541,58 @@ WELCOME CARD
     justify-content: space-between;
     gap: 3.2rem;
   }
+
+
+  .close-time {
+    width: 35;
+    height: 100%;
+    display: flex;
+    background: transparent;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .1rem;
+    text-align: center;
+    flex-direction: column;
+    margin-left: 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .close-time small{
+    font-size: 1.4rem;
+    color: var(--card-full-tele-bg-cl);
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  .close-time span{
+    color: white;
+    padding: .4rem 1rem;
+    background: var(--dark-cl);
+    border-radius: 4px;
+    font-size: 1.2rem;
+    border: 0.1px solid var(--background-cl);
+  }
+
+
+#clock {
+      font-family: 'Digital-7', monospace;
+      font-size: 2em;
+      color: #00ffcc;
+      background: var(--dark-cl);
+      padding: 15px 25px;
+      border-radius: 4px;
+      display: inline-block;
+      width: max-content;
+      height: 2.5rem;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-right: .9rem;
+      margin-top: 1.3rem;
+    }
+
+
 
 
 
@@ -8785,7 +8665,7 @@ order2 style
   right: 20px;
   display: flex;
   width: 100%;
-  max-width: 470px;
+  max-width: 440px;
   background: white;
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0,0,0,0.12);
@@ -9235,23 +9115,7 @@ margin: .2rem .1rem;
 /**-------FOOTER SECTION----***/
 
 /* ABOUT & FOOTER */
-.about,
-footer {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-self: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 100%;
-  height: max-content;
-  max-width: 1020px;
-  text-align: center;
-  padding: .2rem;
-  color: white;
-  background-color:  rgb(6, 6, 8) ;
-  bottom: 0;
-}
+
 
 .about{
   border-block-end: 1px solid var(--ascent-cl);
@@ -9314,9 +9178,10 @@ footer img{
 
 /* 12. Medium laptops / desktops */
 @media (min-width: 1200px) {
-  .navbar{
+   .navbar{
     width: 100%;
     left: 0;
+    height: 3.5rem;
     margin: 0;
   }
 
@@ -9328,7 +9193,7 @@ CARD CONTAINER
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1300px;
   justify-content:  space-between;
   align-items: center;
   justify-self: center;
@@ -9343,7 +9208,7 @@ WELCOME CARD
 **/
 .welcome-card {
   width: 98%;
-  height: 14rem;
+  height: 10.6rem;
   display: flex;
   gap: .5rem;
   align-items: center;
@@ -9362,8 +9227,8 @@ WELCOME CARD
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 99%;
-  height: 6rem;
+  width: 99.5%;
+  height: 4.5rem;
   margin: 0.2rem .2rem;
   justify-self: center;
   background: var(--bg-cl);
@@ -9371,7 +9236,7 @@ WELCOME CARD
   border-start-end-radius: .4rem;
   border-end-end-radius: .4rem;
   border-end-start-radius: .4rem;
-  box-shadow:   1px 1px 3px rgb(151, 147, 147),  -1px -1px 3px rgb(189, 184, 184);
+  box-shadow: inset  1px 1px 3px rgb(151, 147, 147),  -1px -1px 3px rgb(189, 184, 184);
 }
 
 .welcome-top-left{
@@ -9382,7 +9247,7 @@ WELCOME CARD
   align-items: flex-start;
   margin-left: 1.2rem;
   justify-content: center;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   gap: 0.4rem;
   font-weight: 600;
   color: rgb(24, 23, 23);
@@ -9409,8 +9274,8 @@ WELCOME CARD
  }
 
   .welcome-top-right input{
-    width: 300px;
-    height: 2.8rem;
+    width: 500px;
+    height: 2.3rem;
     margin: 0 2rem;
     margin-right: -.1rem;
     display: flex;
@@ -9436,11 +9301,11 @@ WELCOME CARD
   /*-----BOTTOM-----*/
   .welcome-bottom {
     width: 100%;
-    height: 7.8rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 3.2rem;
+    background: transparent;
   }
 
 
@@ -9460,17 +9325,17 @@ WELCOME CARD
   }
 
   .close-time small{
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     color: var(--card-full-tele-bg-cl);
     font-family: 'Times New Roman', Times, serif;
   }
 
   .close-time span{
     color: white;
-    padding: 1rem 1.5rem;
+    padding: .4rem 1rem;
     background: var(--dark-cl);
     border-radius: 4px;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     border: 0.1px solid var(--background-cl);
   }
 
@@ -9483,15 +9348,15 @@ WELCOME CARD
       padding: 15px 25px;
       border-radius: 4px;
       display: inline-block;
-      width: 50%;
-      height: 3.2rem;
+      width: max-content;
+      height: 3rem;
       align-items: center;
       display: flex;
       justify-content: center;
-      font-size: 1.6rem;
+      font-size: 1.3rem;
       font-weight: 600;
-      margin-right: .7rem;
-      margin-top: 3.5rem;
+      margin-right: .9rem;
+      margin-top: 2rem;
     }
 
 
@@ -9501,13 +9366,14 @@ WELCOME CARD
 
   .two-div-container{
   display: flex;
-  max-width: 1000px;
-  width: 100%;
+  max-width: 1200px;
+  width: 100vw;
   gap: 2rem;
   background-color: red;
   height: max-content;
   background: transparent;
   justify-content: center;
+  justify-self: center;
   align-items: center;
   position: relative;
 }
@@ -9523,7 +9389,7 @@ ORDER STATUS
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  max-width: 400px;
+  max-width: 340px;
   margin: 2rem auto;
   padding: 1rem;
   gap: .2rem;
@@ -9531,8 +9397,8 @@ ORDER STATUS
 }
 
 .order-status-section input {
-  height: 2.2rem;
-  width: 80%;
+  height: 3.2rem;
+  width: 70%;
   padding: 10px;
   color: white;
   font-size: .9rem;
@@ -9564,7 +9430,7 @@ order2 style
   right: 20px;
   display: flex;
   width: 100%;
-  max-width: 470px;
+  max-width: 300px;
   background: white;
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0,0,0,0.12);
@@ -9665,7 +9531,7 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 
 .purchase-container a .card-box{
   width:  9.5rem;
-  height: 5rem;
+  height: 5.5rem;
   font-size: 1.2rem;
 }
 
@@ -9674,14 +9540,15 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 **/
 .section-title {
   width: 100%;
-  max-width: 700px;
+  max-width: 728px;
   height: 3rem;
   display: flex;
   padding: .4rem 0;
   align-items: center;
-  justify-self: center;
+  justify-self: end;
+  align-self: flex-end;
   justify-content: flex-start;
-  margin: 1rem  0;
+  margin: 1rem  3.5rem;
   background: black;
   box-shadow: inset  0 2px 6px rgba(124, 124, 124, 0.4);
   position: relative;
@@ -9764,7 +9631,7 @@ CARD CONTAINER
   width: 94%;
   height: auto;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   margin: 0.5rem 0;
   flex-wrap: wrap;
   gap: 2.5rem;
@@ -9782,7 +9649,7 @@ BECAUSE OF PROMO
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 12.5rem;
+  width: 14.5rem;
   height: 9rem;
   gap: 0;
   background: var(--card-full-bg-cl);
@@ -9872,7 +9739,7 @@ CARD CONTAINER
    width: 94%;
   height: auto;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   margin: 0.5rem 0;
   flex-wrap: wrap;
   gap: 2.5rem;
@@ -9885,7 +9752,7 @@ CARD CONTAINER
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 12.5rem;
+  width: 14.5rem;
   height: 9rem;
   gap: 0;
   background: var(--card-full-tele-bg-cl);
@@ -9950,7 +9817,7 @@ CARD CONTAINER
     width: 94%;
   height: auto;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   margin: 0.5rem 0;
   flex-wrap: wrap;
   gap: 2.5rem;
@@ -9963,7 +9830,7 @@ CARD CONTAINER
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 12.5rem;
+  width: 14.5rem;
   height: 9rem;
   gap: 0;
   background: rgb(6, 6, 231);
@@ -10014,23 +9881,7 @@ margin: .2rem .1rem;
 /**-------FOOTER SECTION----***/
 
 /* ABOUT & FOOTER */
-.about,
-footer {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-self: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 100%;
-  height: max-content;
-  max-width: 1200px;
-  text-align: center;
-  padding: .2rem;
-  color: white;
-  background-color:  rgb(6, 6, 8) ;
-  bottom: 0;
-}
+
 
 .about{
   border-block-end: 1px solid var(--ascent-cl);
@@ -10093,9 +9944,10 @@ footer img{
 
 /* 13. Large desktops */
 @media (min-width: 1280px) {
-   .navbar{
+    .navbar{
     width: 100%;
     left: 0;
+    height: 3.5rem;
     margin: 0;
   }
 
@@ -10107,11 +9959,11 @@ CARD CONTAINER
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 1400px;
+  max-width: 1300px;
   justify-content:  space-between;
   align-items: center;
   justify-self: center;
-  margin: 0 1rem;
+  justify-self: center;
   height: max-content;
   background: transparent;
 }
@@ -10122,7 +9974,7 @@ WELCOME CARD
 **/
 .welcome-card {
   width: 98%;
-  height: 14rem;
+  height: 10.6rem;
   display: flex;
   gap: .5rem;
   align-items: center;
@@ -10141,8 +9993,8 @@ WELCOME CARD
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 99%;
-  height: 9rem;
+  width: 99.5%;
+  height: 4.5rem;
   margin: 0.2rem .2rem;
   justify-self: center;
   background: var(--bg-cl);
@@ -10150,7 +10002,7 @@ WELCOME CARD
   border-start-end-radius: .4rem;
   border-end-end-radius: .4rem;
   border-end-start-radius: .4rem;
-  box-shadow:   1px 1px 3px rgb(151, 147, 147),  -1px -1px 3px rgb(189, 184, 184);
+  box-shadow: inset  1px 1px 3px rgb(151, 147, 147),  -1px -1px 3px rgb(189, 184, 184);
 }
 
 .welcome-top-left{
@@ -10161,7 +10013,7 @@ WELCOME CARD
   align-items: flex-start;
   margin-left: 1.2rem;
   justify-content: center;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   gap: 0.4rem;
   font-weight: 600;
   color: rgb(24, 23, 23);
@@ -10189,7 +10041,7 @@ WELCOME CARD
 
   .welcome-top-right input{
     width: 500px;
-    height: 2.8rem;
+    height: 2.3rem;
     margin: 0 2rem;
     margin-right: -.1rem;
     display: flex;
@@ -10215,11 +10067,11 @@ WELCOME CARD
   /*-----BOTTOM-----*/
   .welcome-bottom {
     width: 100%;
-    height: 10.8rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 3.2rem;
+    background: transparent;
   }
 
 
@@ -10239,17 +10091,17 @@ WELCOME CARD
   }
 
   .close-time small{
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     color: var(--card-full-tele-bg-cl);
     font-family: 'Times New Roman', Times, serif;
   }
 
   .close-time span{
     color: white;
-    padding: 1rem 1.5rem;
+    padding: .4rem 1rem;
     background: var(--dark-cl);
     border-radius: 4px;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     border: 0.1px solid var(--background-cl);
   }
 
@@ -10262,15 +10114,15 @@ WELCOME CARD
       padding: 15px 25px;
       border-radius: 4px;
       display: inline-block;
-      width: 50%;
-      height: 3.2rem;
+      width: max-content;
+      height: 3rem;
       align-items: center;
       display: flex;
       justify-content: center;
-      font-size: 1.6rem;
+      font-size: 1.3rem;
       font-weight: 600;
-      margin-right: .7rem;
-      margin-top: 3.5rem;
+      margin-right: .9rem;
+      margin-top: 2rem;
     }
 
 
@@ -10281,12 +10133,13 @@ WELCOME CARD
   .two-div-container{
   display: flex;
   max-width: 1200px;
-  width: 100%;
+  width: 100vw;
   gap: 2rem;
   background-color: red;
   height: max-content;
   background: transparent;
   justify-content: center;
+  justify-self: center;
   align-items: center;
   position: relative;
 }
@@ -10302,7 +10155,7 @@ ORDER STATUS
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  max-width: 470px;
+  max-width: 340px;
   margin: 2rem auto;
   padding: 1rem;
   gap: .2rem;
@@ -10343,7 +10196,7 @@ order2 style
   right: 20px;
   display: flex;
   width: 100%;
-  max-width: 470px;
+  max-width: 300px;
   background: white;
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0,0,0,0.12);
@@ -10444,7 +10297,7 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 
 .purchase-container a .card-box{
   width:  9.5rem;
-  height: 5rem;
+  height: 5.5rem;
   font-size: 1.2rem;
 }
 
@@ -10453,14 +10306,15 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 **/
 .section-title {
   width: 100%;
-  max-width: 700px;
+  max-width: 728px;
   height: 3rem;
   display: flex;
   padding: .4rem 0;
   align-items: center;
-  justify-self: center;
+  justify-self: end;
+  align-self: flex-end;
   justify-content: flex-start;
-  margin: 1rem  0;
+  margin: 1rem  3.5rem;
   background: black;
   box-shadow: inset  0 2px 6px rgba(124, 124, 124, 0.4);
   position: relative;
@@ -10561,7 +10415,7 @@ BECAUSE OF PROMO
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 12.5rem;
+  width: 13.5rem;
   height: 9rem;
   gap: 0;
   background: var(--card-full-bg-cl);
@@ -10664,7 +10518,7 @@ CARD CONTAINER
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 12.5rem;
+  width: 13.5rem;
   height: 9rem;
   gap: 0;
   background: var(--card-full-tele-bg-cl);
@@ -10742,7 +10596,7 @@ CARD CONTAINER
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 12.5rem;
+  width: 13.5rem;
   height: 9rem;
   gap: 0;
   background: rgb(6, 6, 231);
@@ -10793,23 +10647,7 @@ margin: .2rem .1rem;
 /**-------FOOTER SECTION----***/
 
 /* ABOUT & FOOTER */
-.about,
-footer {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-self: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 100%;
-  height: max-content;
-  max-width: 1280px;
-  text-align: center;
-  padding: .2rem;
-  color: white;
-  background-color:  rgb(6, 6, 8) ;
-  bottom: 0;
-}
+
 
 .about{
   border-block-end: 1px solid var(--ascent-cl);
@@ -10870,13 +10708,11 @@ footer img{
  }
 
 /* 14. XL desktops */
-@media (max-width: 1366px) { }
-
-/* 15. Very large screens */
-@media (min-width: 1440px) { 
+@media (min-width: 1366px) {
    .navbar{
     width: 100%;
     left: 0;
+    height: 3.5rem;
     margin: 0;
   }
 
@@ -10903,7 +10739,7 @@ WELCOME CARD
 **/
 .welcome-card {
   width: 98%;
-  height: 14rem;
+  height: 10.6rem;
   display: flex;
   gap: .5rem;
   align-items: center;
@@ -10922,8 +10758,8 @@ WELCOME CARD
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 99%;
-  height: 9rem;
+  width: 99.5%;
+  height: 4.5rem;
   margin: 0.2rem .2rem;
   justify-self: center;
   background: var(--bg-cl);
@@ -10931,7 +10767,7 @@ WELCOME CARD
   border-start-end-radius: .4rem;
   border-end-end-radius: .4rem;
   border-end-start-radius: .4rem;
-  box-shadow:   1px 1px 3px rgb(151, 147, 147),  -1px -1px 3px rgb(189, 184, 184);
+  box-shadow: inset  1px 1px 3px rgb(151, 147, 147),  -1px -1px 3px rgb(189, 184, 184);
 }
 
 .welcome-top-left{
@@ -10942,7 +10778,7 @@ WELCOME CARD
   align-items: flex-start;
   margin-left: 1.2rem;
   justify-content: center;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   gap: 0.4rem;
   font-weight: 600;
   color: rgb(24, 23, 23);
@@ -10970,7 +10806,7 @@ WELCOME CARD
 
   .welcome-top-right input{
     width: 500px;
-    height: 2.8rem;
+    height: 2.3rem;
     margin: 0 2rem;
     margin-right: -.1rem;
     display: flex;
@@ -10996,11 +10832,11 @@ WELCOME CARD
   /*-----BOTTOM-----*/
   .welcome-bottom {
     width: 100%;
-    height: 10.8rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 3.2rem;
+    background: transparent;
   }
 
 
@@ -11020,17 +10856,17 @@ WELCOME CARD
   }
 
   .close-time small{
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     color: var(--card-full-tele-bg-cl);
     font-family: 'Times New Roman', Times, serif;
   }
 
   .close-time span{
     color: white;
-    padding: 1rem 1.5rem;
+    padding: .4rem 1rem;
     background: var(--dark-cl);
     border-radius: 4px;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     border: 0.1px solid var(--background-cl);
   }
 
@@ -11043,15 +10879,15 @@ WELCOME CARD
       padding: 15px 25px;
       border-radius: 4px;
       display: inline-block;
-      width: 50%;
-      height: 3.2rem;
+      width: max-content;
+      height: 3rem;
       align-items: center;
       display: flex;
       justify-content: center;
-      font-size: 1.6rem;
+      font-size: 1.3rem;
       font-weight: 600;
-      margin-right: .7rem;
-      margin-top: 3.5rem;
+      margin-right: .9rem;
+      margin-top: 2rem;
     }
 
 
@@ -11062,12 +10898,13 @@ WELCOME CARD
   .two-div-container{
   display: flex;
   max-width: 1200px;
-  width: 100%;
+  width: 100vw;
   gap: 2rem;
   background-color: red;
   height: max-content;
   background: transparent;
   justify-content: center;
+  justify-self: center;
   align-items: center;
   position: relative;
 }
@@ -11083,7 +10920,7 @@ ORDER STATUS
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  max-width: 470px;
+  max-width: 340px;
   margin: 2rem auto;
   padding: 1rem;
   gap: .2rem;
@@ -11124,7 +10961,7 @@ order2 style
   right: 20px;
   display: flex;
   width: 100%;
-  max-width: 470px;
+  max-width: 300px;
   background: white;
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0,0,0,0.12);
@@ -11225,7 +11062,7 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 
 .purchase-container a .card-box{
   width:  9.5rem;
-  height: 5rem;
+  height: 5.5rem;
   font-size: 1.2rem;
 }
 
@@ -11234,14 +11071,15 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 **/
 .section-title {
   width: 100%;
-  max-width: 700px;
+  max-width: 728px;
   height: 3rem;
   display: flex;
   padding: .4rem 0;
   align-items: center;
-  justify-self: center;
+  justify-self: end;
+  align-self: flex-end;
   justify-content: flex-start;
-  margin: 1rem  0;
+  margin: 1rem  3.5rem;
   background: black;
   box-shadow: inset  0 2px 6px rgba(124, 124, 124, 0.4);
   position: relative;
@@ -11324,7 +11162,7 @@ CARD CONTAINER
   width: 94%;
   height: auto;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   margin: 0.5rem 0;
   flex-wrap: wrap;
   gap: 2.5rem;
@@ -11342,7 +11180,7 @@ BECAUSE OF PROMO
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 12.5rem;
+  width: 13.5rem;
   height: 9rem;
   gap: 0;
   background: var(--card-full-bg-cl);
@@ -11432,7 +11270,7 @@ CARD CONTAINER
    width: 94%;
   height: auto;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   margin: 0.5rem 0;
   flex-wrap: wrap;
   gap: 2.5rem;
@@ -11445,7 +11283,7 @@ CARD CONTAINER
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 12.5rem;
+  width: 13.5rem;
   height: 9rem;
   gap: 0;
   background: var(--card-full-tele-bg-cl);
@@ -11510,7 +11348,7 @@ CARD CONTAINER
     width: 94%;
   height: auto;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   margin: 0.5rem 0;
   flex-wrap: wrap;
   gap: 2.5rem;
@@ -11523,7 +11361,7 @@ CARD CONTAINER
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 12.5rem;
+  width: 13.5rem;
   height: 9rem;
   gap: 0;
   background: rgb(6, 6, 231);
@@ -11574,23 +11412,772 @@ margin: .2rem .1rem;
 /**-------FOOTER SECTION----***/
 
 /* ABOUT & FOOTER */
-.about,
-footer {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-self: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 100%;
-  height: max-content;
-  max-width: 1440px;
-  text-align: center;
-  padding: .2rem;
-  color: white;
-  background-color:  rgb(6, 6, 8) ;
+
+
+.about{
+  border-block-end: 1px solid var(--ascent-cl);
+}
+
+section footer .bar{
+  margin: 0;
   bottom: 0;
 }
+.about h3{
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: var(--background-cl);
+}
+.about h4{
+  color: rgb(45, 182, 148);
+  margin-top: 0.4rem;
+  font-size: 1.2rem;
+}
+
+.about P{
+  width: 90%;
+  font-size: .9rem;
+  font-weight: 300;
+  line-height: 1.6rem;
+}
+
+.about img{
+border-radius: 2rem;
+width: 1.6rem;
+height: 1.6rem;
+margin: 0 .5rem;
+}
+
+
+
+
+footer a{
+  font-weight: 500;
+  margin-left: 0.1rem;
+}
+
+footer .copyright{
+  font-size: .9rem;
+  width: 100%;
+  max-width: 320px;
+ 
+}
+
+
+
+footer img{
+  width: 2.6rem;
+  height: 2.6rem;
+  vertical-align: middle;
+  margin-left: 0.6rem;
+}
+ }
+
+/* 15. Very large screens */
+@media (min-width: 1440px) { 
+  .navbar{
+    width: 100%;
+    left: 0;
+    height: 3.5rem;
+    margin: 0;
+  }
+
+
+/**
+CARD CONTAINER
+**/
+.card-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1400px;
+  justify-content:  space-between;
+  align-items: center;
+  justify-self: center;
+  margin: 0 1rem;
+  height: max-content;
+  background: transparent;
+}
+
+
+/**
+WELCOME CARD 
+**/
+.welcome-card {
+  width: 98%;
+  height: 10.6rem;
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  background: var(--bg-cl);
+  border-radius: .6rem;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.3), -1px -1px 2px rgba(0,0,0,0.3);
+  margin-top: 4.3rem ; 
+  margin-left: .7rem;
+
+}
+
+.welcome-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 99.5%;
+  height: 4.5rem;
+  margin: 0.2rem .2rem;
+  justify-self: center;
+  background: var(--bg-cl);
+  border-start-start-radius: .4rem;
+  border-start-end-radius: .4rem;
+  border-end-end-radius: .4rem;
+  border-end-start-radius: .4rem;
+  box-shadow: inset  1px 1px 3px rgb(151, 147, 147),  -1px -1px 3px rgb(189, 184, 184);
+}
+
+.welcome-top-left{
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 1.2rem;
+  justify-content: center;
+  font-size: 1.6rem;
+  gap: 0.4rem;
+  font-weight: 600;
+  color: rgb(24, 23, 23);
+  font-family: Arial sans-serif;
+}
+
+.welcome-top-left small{
+  width: 3rem;
+  color: rgb(95, 90, 90);
+  font-weight: 500;
+  font-family: Arial sans-serif;
+}
+
+/**
+ WELCOME TOP RIGHT
+ **/
+ .welcome-top-right {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+ }
+
+  .welcome-top-right input{
+    width: 500px;
+    height: 2.3rem;
+    margin: 0 2rem;
+    margin-right: -.1rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    color: var(--dark-cl);
+    background-color: transparent;
+    border: 0.1px solid var(--background-cl);
+    border-radius: .8rem;
+  }
+
+  .welcome-top-right input:where(:hover :focus-within){
+    border: 1px solid rgb(156, 151, 151);
+
+  }
+
+  .welcome-top-right input::placeholder{
+    color: rgb(197, 190, 190);
+    position: absolute;
+    margin: 0 .5rem;
+  }
+
+  /*-----BOTTOM-----*/
+  .welcome-bottom {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3.2rem;
+    background: transparent;
+  }
+
+
+
+  .close-time {
+    width: 35;
+    height: 100%;
+    display: flex;
+    background: transparent;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .1rem;
+    text-align: center;
+    flex-direction: column;
+    margin-left: 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .close-time small{
+    font-size: 1.4rem;
+    color: var(--card-full-tele-bg-cl);
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  .close-time span{
+    color: white;
+    padding: .4rem 1rem;
+    background: var(--dark-cl);
+    border-radius: 4px;
+    font-size: 1.2rem;
+    border: 0.1px solid var(--background-cl);
+  }
+
+
+#clock {
+      font-family: 'Digital-7', monospace;
+      font-size: 2em;
+      color: #00ffcc;
+      background: var(--dark-cl);
+      padding: 15px 25px;
+      border-radius: 4px;
+      display: inline-block;
+      width: max-content;
+      height: 3rem;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-right: .9rem;
+      margin-top: 2rem;
+    }
+
+
+
+
+
+
+  .two-div-container{
+  display: flex;
+  max-width: 1200px;
+  width: 100vw;
+  gap: 2rem;
+  background-color: red;
+  height: max-content;
+  background: transparent;
+  justify-content: center;
+  justify-self: center;
+  align-items: center;
+  position: relative;
+}
+
+
+   /****
+ORDER STATUS
+***/
+
+.order-status-section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 340px;
+  margin: 2rem auto;
+  padding: 1rem;
+  gap: .2rem;
+ 
+}
+
+.order-status-section input {
+  height: 3.2rem;
+  width: 70%;
+  padding: 10px;
+  color: white;
+  font-size: .9rem;
+  font-weight: 600;
+  border: 1px solid #ebe5e5;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.order-status-section button {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: 2s ease;
+}
+
+
+
+/**99
+order2 style
+***/
+/* Order status card */
+#orderStatusCard {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  width: 100%;
+  max-width: 300px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  padding: 14px;
+  z-index: 99999;
+  font-family: Arial, sans-serif;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+#orderStatusCard.hidden { 
+opacity: 0; 
+transform: translateY(8px);
+pointer-events: none; }
+
+#orderStatusCard h4 {
+   margin: 0 0 8px 0;
+    font-size: .8rem; 
+  }
+#orderStatusCard p {
+   margin: 6px 0; 
+   font-size: 0.9rem;
+    color: #333; }
+
+
+.status-badge {
+  display:inline-block;
+  width: 70%;
+  padding:6px 10px;
+  border-radius:999px;
+  color: #fff;
+  font-weight: 700;
+  text-transform: capitalize;
+  font-size: 0.85rem;
+}
+
+/* Status color classes */
+.status-pending { background: #f39c12; }      /* orange */
+.status-processing { background: #3498db; }   /* blue */
+.status-delivered { background: #2ecc71; }    /* green */
+.status-failed { background: #e74c3c; }       /* red */
+.status-cancelled { background: #9e9e9e; }    /* gray */
+.status-refunded { background: #795548; }     /* brown */
+.status-resolved { background: #27ae60; }     /* dark green */
+
+/* Manual check result box */
+#statusResult { 
+margin-top: 12px; 
+width: 60%;
+padding: 12px; 
+background:#f5f7fb;
+border-radius: 8px; 
+box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/**--ORDER STAtUS ENDS--**/
+
+
+/**---NETWORKS-PURCHASED-DETAILS---**/
+.networks-purchased-container {
+  width: 100%;
+  max-width: 600px;
+  background: transparent;
+  height: 11rem;
+  margin-right: 2rem;
+  gap: .4rem;
+}
+
+.purchase-title {
+  display: flex;
+  align-items: center;
+  width: 98%;
+  height: 20%;
+  margin-bottom: .1rem;
+  padding: .3rem;
+  font-size: 1.2rem;
+}
+
+.purchase-title h5{
+  font-size: 1.2rem;
+  text-align: center;
+  color: rgb(51, 51, 34);
+  font-family: 'Times New Roman', Times;
+}
+
+.purchase-container{
+  width: 98%;
+  height: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+}
+
+.purchase-container a{
+  text-decoration: none;
+  color: var(--bg-cl);
+}
+
+.purchase-container a .card-box{
+  width:  9.5rem;
+  height: 5.5rem;
+  font-size: 1.2rem;
+}
+
+
+/**SECTION TITLE
+**/
+.section-title {
+  width: 100%;
+  max-width: 728px;
+  height: 3rem;
+  display: flex;
+  padding: .4rem 0;
+  align-items: center;
+  justify-self: end;
+  align-self: flex-end;
+  justify-content: flex-start;
+  margin: 1rem  3.5rem;
+  background: black;
+  box-shadow: inset  0 2px 6px rgba(124, 124, 124, 0.4);
+  position: relative;
+}
+
+
+.section-content {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: 0 1.5rem;
+  background: var(--card-full-bg-cl);
+  width: 98%;
+  text-align: center;
+  height: 3rem;
+  border: none;
+}
+
+.section-content h1{
+  font-size: 1.2rem;
+}
+
+
+.section-content img{
+  width: 2rem;
+  height: 1.8rem;
+  justify-self: center;
+}
+
+.section-content .mtnt {
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+
+
+.section-content .telecelt{
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.tele{
+  background: var(--dark-cl);
+}
+
+.telec{
+  background-color: var(--card-full-tele-bg-cl);
+}
+
+.section-content .airtelt{
+  color: white;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.airtel{
+  background: var(--dark-cl);
+}
+
+.airtelc{
+  background: var(--card-full-airtel-bg-cl);
+}
+
+/**--SECTION-TITLE-ENDS--**/
+
+/*------REAL BUNDLE CARD-MTN--*/
+.bundle-cards-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-container {
+  width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+/**
+BECAUSE OF PROMO
+****/
+
+
+.bundle-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 14.5rem;
+  height: 9rem;
+  gap: 0;
+  background: var(--card-full-bg-cl);
+  border-radius: .8rem;
+}
+
+
+.top-bundle-card {
+width: 98%;
+height: 38%;
+gap: 1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+
+.bottom-bundle-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+.old-price {
+  display: flex;
+  font-size: .9rem;
+  color: rgb(14, 138, 101);
+  text-decoration: line-through;
+}
+
+.bottom-bundle-card .buy-btn{
+  width: 11rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-card h2{
+  font-size: .9rem;
+  font-family: Arial ;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+
+.price-gb {
+  width: 100%;
+  height: 40%;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background-color: transparent;
+}
+
+.price-gb small{
+  width: 60%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: .9rem;
+  font-weight: 500;
+  font-family: Arial sans-serif;
+  color: #24463e;;
+}
+/**--MTN-CARD-ENDS--**/
+
+
+
+
+
+/*------REAL BUNDLE CARD--TELECEL-*/
+.bundle-cards-telecel-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+  background: transparent;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-telecel-container {
+   width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+.bundle-card-telecel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 14.5rem;
+  height: 9rem;
+  gap: 0;
+  background: var(--card-full-tele-bg-cl);
+  border-radius: .8rem;
+}
+
+.top-bundle-telecel-card {
+width: 98%;
+height: 38%;
+gap: .1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-telecel-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+.bottom-bundle-telecel-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+
+.bottom-bundle-telecel-card .buy-btn{
+  width: 11rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-telecel-card h2{
+  font-size: .9rem;
+  font-family: Arial;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+
+/**--TELECEL-CARD-ENDS--**/
+
+
+
+
+
+/* AIRTELTIGO SECTION
+*/
+/*------REAL BUNDLE CARD--TELECEL-*/
+.bundle-cards-airteltigo-container {
+  width: 100%;
+  max-width: 470px;
+  height: max-content;
+  background: transparent;
+}
+
+/**
+CARD CONTAINER
+**/
+.bundle-card-airteltigo-container {
+    width: 94%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  border-radius: .8rem;
+}
+
+.bundle-card-airteltigo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 14.5rem;
+  height: 9rem;
+  gap: 0;
+  background: rgb(6, 6, 231);
+  border-radius: .8rem;
+}
+
+.top-bundle-airteltigo-card {
+width: 98%;
+height: 38%;
+gap: .1rem;
+margin: .2rem 0;
+}
+
+.top-bundle-airteltigo-card h1{
+  font-size: .9rem;
+  margin: 0 .5rem;
+  font-weight: 500;
+}
+
+
+.bottom-bundle-airteltigo-card {
+width: 98%;
+height: 60%;
+gap: .5rem;
+margin: .2rem .1rem;
+}
+
+.bottom-bundle-airteltigo-card .buy-btn{
+ width: 11rem;
+  max-height: 1.6rem;
+}
+
+
+.bottom-bundle-airteltigo-card h2{
+  font-size: .9rem;
+  font-family: Arial;
+  font-weight: 600;
+  color: rgb(43, 42, 42);
+}
+/***--AIRTEL-CARD-ENDS--**/
+
+
+/**--MENU-CARD
+
+
+
+
+/**-------FOOTER SECTION----***/
+
+/* ABOUT & FOOTER */
+
 
 .about{
   border-block-end: 1px solid var(--ascent-cl);
@@ -11655,6 +12242,7 @@ footer img{
    .navbar{
     width: 100%;
     left: 0;
+    height: 3.5rem;
     margin: 0;
   }
 
@@ -11666,7 +12254,7 @@ CARD CONTAINER
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 1920px;
+  max-width: 1900px;
   justify-content:  space-between;
   align-items: center;
   justify-self: center;
@@ -11681,7 +12269,7 @@ WELCOME CARD
 **/
 .welcome-card {
   width: 98%;
-  height: 12rem;
+  height: 10.6rem;
   display: flex;
   gap: .5rem;
   align-items: center;
@@ -11700,8 +12288,8 @@ WELCOME CARD
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 99.8%;
-  height: 6rem;
+  width: 99.5%;
+  height: 4.5rem;
   margin: 0.2rem .2rem;
   justify-self: center;
   background: var(--bg-cl);
@@ -11709,7 +12297,7 @@ WELCOME CARD
   border-start-end-radius: .4rem;
   border-end-end-radius: .4rem;
   border-end-start-radius: .4rem;
-  box-shadow:   1px 1px 3px rgb(151, 147, 147),  -1px -1px 3px rgb(189, 184, 184);
+  box-shadow: inset  1px 1px 3px rgb(151, 147, 147),  -1px -1px 3px rgb(189, 184, 184);
 }
 
 .welcome-top-left{
@@ -11747,8 +12335,8 @@ WELCOME CARD
  }
 
   .welcome-top-right input{
-    width: 300px;
-    height: 2.8rem;
+    width: 500px;
+    height: 2.3rem;
     margin: 0 2rem;
     margin-right: -.1rem;
     display: flex;
@@ -11774,11 +12362,11 @@ WELCOME CARD
   /*-----BOTTOM-----*/
   .welcome-bottom {
     width: 100%;
-    height: 7.8rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 3.2rem;
+    background: transparent;
   }
 
 
@@ -11805,10 +12393,10 @@ WELCOME CARD
 
   .close-time span{
     color: white;
-    padding: .6rem 1.5rem;
+    padding: .4rem 1rem;
     background: var(--dark-cl);
     border-radius: 4px;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     border: 0.1px solid var(--background-cl);
   }
 
@@ -11822,14 +12410,14 @@ WELCOME CARD
       border-radius: 4px;
       display: inline-block;
       width: max-content;
-      height: 3.7rem;
+      height: 3rem;
       align-items: center;
       display: flex;
       justify-content: center;
-      font-size: 2rem;
+      font-size: 1.3rem;
       font-weight: 600;
-      margin-right: .7rem;
-      margin-top: 3.5rem;
+      margin-right: .9rem;
+      margin-top: 2rem;
     }
 
 
@@ -11839,13 +12427,14 @@ WELCOME CARD
 
   .two-div-container{
   display: flex;
-  max-width: 1500px;
-  width: 100%;
-  gap: 8rem;
+  max-width: 1200px;
+  width: 100vw;
+  gap: 2rem;
   background-color: red;
   height: max-content;
   background: transparent;
   justify-content: center;
+  justify-self: center;
   align-items: center;
   position: relative;
 }
@@ -11861,7 +12450,7 @@ ORDER STATUS
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  max-width: 570px;
+  max-width: 340px;
   margin: 2rem auto;
   padding: 1rem;
   gap: .2rem;
@@ -11902,7 +12491,7 @@ order2 style
   right: 20px;
   display: flex;
   width: 100%;
-  max-width: 470px;
+  max-width: 300px;
   background: white;
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0,0,0,0.12);
@@ -12003,7 +12592,7 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 
 .purchase-container a .card-box{
   width:  9.5rem;
-  height: 5rem;
+  height: 5.5rem;
   font-size: 1.2rem;
 }
 
@@ -12012,14 +12601,15 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 **/
 .section-title {
   width: 100%;
-  max-width: 900px;
+  max-width: 728px;
   height: 3rem;
   display: flex;
   padding: .4rem 0;
   align-items: center;
-  justify-self: center;
+  justify-self: end;
+  align-self: flex-end;
   justify-content: flex-start;
-  margin: 1rem  0;
+  margin: 1rem  3.5rem;
   background: black;
   box-shadow: inset  0 2px 6px rgba(124, 124, 124, 0.4);
   position: relative;
@@ -12102,7 +12692,7 @@ CARD CONTAINER
   width: 94%;
   height: auto;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(7, 1fr);
   margin: 0.5rem 0;
   flex-wrap: wrap;
   gap: 2.5rem;
@@ -12120,8 +12710,8 @@ BECAUSE OF PROMO
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 16.5rem;
-  height: 12rem;
+  width: 14.5rem;
+  height: 10.5rem;
   gap: 0;
   background: var(--card-full-bg-cl);
   border-radius: .8rem;
@@ -12210,7 +12800,7 @@ CARD CONTAINER
    width: 94%;
   height: auto;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(7, 1fr);
   margin: 0.5rem 0;
   flex-wrap: wrap;
   gap: 2.5rem;
@@ -12223,8 +12813,8 @@ CARD CONTAINER
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 16.5rem;
-  height: 12rem;
+  width: 14.5rem;
+  height: 10.5rem;
   gap: 0;
   background: var(--card-full-tele-bg-cl);
   border-radius: .8rem;
@@ -12288,7 +12878,7 @@ CARD CONTAINER
     width: 94%;
   height: auto;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(7, 1fr);
   margin: 0.5rem 0;
   flex-wrap: wrap;
   gap: 2.5rem;
@@ -12301,8 +12891,8 @@ CARD CONTAINER
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 16.5rem;
-  height: 12rem;
+  width: 14.5rem;
+  height: 10.5rem;
   gap: 0;
   background: rgb(6, 6, 231);
   border-radius: .8rem;
@@ -12352,23 +12942,7 @@ margin: .2rem .1rem;
 /**-------FOOTER SECTION----***/
 
 /* ABOUT & FOOTER */
-.about,
-footer {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-self: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 100%;
-  height: max-content;
-  max-width: 1920px;
-  text-align: center;
-  padding: .2rem;
-  color: white;
-  background-color:  rgb(6, 6, 8) ;
-  bottom: 0;
-}
+
 
 .about{
   border-block-end: 1px solid var(--ascent-cl);
