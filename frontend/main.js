@@ -16,110 +16,89 @@ document.querySelectorAll(".buy-btn").forEach(button => {
 });
 });
 
-
-
-// Create phone input modal dynamically
 function createPhoneModal(callback) {
-  // Remove existing modal if any
-  const existing = document.getElementById("phoneModal");
-  if (existing) existing.remove();
+  const modal = document.getElementById("phoneModal");
+  const confirmBtn = document.getElementById("confirmBtn");
+  const cancelBtn = document.getElementById("cancelBtn");
+  const input = document.getElementById("recipientInput");
 
-  // Modal container
-  const modal = document.createElement("div");
-  modal.id = "phoneModal";
-  modal.style = `
-    position: fixed;
-    top: 0; 
-    width: 100%; 
-    height: 100%;
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-    max-width: 480px;
-    justify-self: center;
-    background: rgba(0,0,0,0.1);
-    z-index: 9999;
-  `;
+  // Show modal
+  modal.classList.add("show");
 
-  // Modal content
-  const box = document.createElement("div");
-  box.style = `
-    background: #fff;
-    padding: 25px;
-    border-radius: 15px;
-    width: 90%;
-    height: 24rem;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    max-width: 400px;
-    text-align: center;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-    animation: popUp 0.3s ease;
-    z-index: 9999;
-    position: relative;
-  `;
-  box.innerHTML = `
-    <h3 style="margin-bottom: 15px; color: #000000ff;">Enter your phone number to receive the Bundle package</h3>
-    <input type="tel" id="recipientInput" placeholder="e.g. 233241234567"
-      style="width: 100%;
-      padding: 12px; 
-      border-radius: 10px; 
-      border: 1px solid #222; 
-      font-size: 24px; 
-      text-align: center; 
-      margin-bottom: 15px;
-      color: white" 
-      box-shadow: 0 2px 6px #ccc8c8ff;/>
-    <div style="display: flex;
-      gap: 40px; 
-    justify-content: center;">
-      <button id="cancelBtn" style="background:#999; color: white; padding:10px 18px; border:none; border-radius:10px;
-      width: 50%; cursor:pointer;">Cancel</button>
-      <button id="confirmBtn" style="background:#2196F3; color:white; width: 50%; padding:10px 18px; border:none; border-radius:10px; cursor:pointer;">Continue</button>
-    </div>
-  `;
+  cancelBtn.onclick = () => {
+    modal.classList.remove("show");
+  };
 
-  modal.appendChild(box);
-  document.body.appendChild(modal);
-
-  document.getElementById("cancelBtn").addEventListener("click", () => {
-    modal.remove();
-  });
-
-  document.getElementById("confirmBtn").addEventListener("click", () => {
-    const recipient = document.getElementById("recipientInput").value.trim();
+  confirmBtn.onclick = () => {
+    const recipient = input.value.trim();
     if (!recipient) {
-      showSnackBar(" Please enter your phone number");
+      showSnackBar("Please enter your phone number");
       return;
     }
-    modal.style.display = "none";
-    setTimeout(() => {
-      modal.remove();
-      callback(recipient);
-    } , 200);
-  });
+    modal.classList.remove("show");
+    callback(recipient);
+};
 }
 
 
-
-// === PAYSTACK PAYMENT ===
+// === PAYSTACK PAYMENT (Firebase version) ===
 async function payWithPaystack(network, recipient, packageName, size, price) {
+  // ✅ Get current user from Firebase Auth
+  let user = null;
+  try {
+    user = firebase.auth().currentUser;
+  } catch (err) {
+    console.warn("Firebase Auth not initialized:", err);
+  }
 
+  // ✅ Collect user details
+  const userEmail = user?.email || `${recipient}@ecodata.com`;
+  const userName = user?.displayName || "Guest User";
+  const userPhone = recipient;
+
+  // ✅ Initialize Paystack
   let handler = PaystackPop.setup({
     key: "pk_live_635856447ee14b583349141b7271f64c9b969749",
-    email: "customer@gmail.com",
+    email: userEmail,
     amount: price * 100,
     currency: "GHS",
-    callback: function(response) {
+    metadata: {
+      custom_fields: [
+        {
+          display_name: "Customer Name",
+          variable_name: "customer_name",
+          value: userName,
+        },
+        {
+          display_name: "Phone Number",
+          variable_name: "phone_number",
+          value: userPhone,
+        },
+        {
+          display_name: "Network",
+          variable_name: "network",
+          value: network,
+        },
+        {
+          display_name: "Package",
+          variable_name: "package_name",
+          value: packageName,
+        },
+      ],
+    },
+    callback: function (response) {
       orderBundle(network, recipient, packageName, size, response.reference);
     },
-    onClose: function() {
-      showSnackBar(" Payment cancelled.");
-    }
+    onClose: function () {
+      showSnackBar("Payment cancelled.");
+    },
   });
+
   handler.openIframe();
 }
+
+
+
 
 // === SEND ORDER TO BACKEND ===
 async function orderBundle(network, recipient, packageName, size, reference) {
@@ -142,7 +121,7 @@ async function orderBundle(network, recipient, packageName, size, reference) {
         returnedOrder);
         handleNewOrder(returnedOrder);
     } else {
-      showSnackBar(`Failed to purchase data: ${result.message || "Unknown error"}`);
+      showSnackBar(`Failed to purchase data, contact support (Admin): ${result.message || "Unknown error"}`);
     }
   } catch (err) {
     console.error("⚠ Server error:", err);
@@ -397,7 +376,7 @@ function showSnackBar(message, type = "info") {
   if (type === "success") snackbar.style.background = "#28a745";   // green
   else if (type === "error") snackbar.style.background = "#dc3545"; // red
   else if (type === "warning") snackbar.style.background = "#ffc107"; // yellow
-  else snackbar.style.background = "#aaf1c6ff"; // default dark
+  else snackbar.style.background = "#beddca"; // default dark
 
   snackbar.textContent = message;
 
