@@ -46,13 +46,13 @@
 
   // function //
 cardToggler.addEventListener("click", function(e){
-  if (card.style.right != "-300px"){
+  if (card.style.right != "-500px"){
     card.style.right = "14px";
-  } else card.style.right = "-300px";
+  } else card.style.right = "-500px";
 });
 
 window.addEventListener("click", function(e){
   if (e.target !== cardToggler && e.target !== card && !card.contains(e.target)){
-    card.style.right = "-300px";
+    card.style.right = "-500px";
   }
 });
