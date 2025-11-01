@@ -1281,8 +1281,8 @@ MENU-CARD SECTION
 ****/
 .menu-card-container {
   width: 100%;
-  max-width: 12.5rem;
-  height: 21rem;
+  max-width: 13rem;
+  height: 20rem;
   position: fixed;
   display: flex;
   align-items: center;
@@ -1312,7 +1312,7 @@ MENU-CARD SECTION
   flex-direction: column;
   text-align: center;
   gap: 1.4rem;
-  width: 90%;
+  width: 94%;
   height: 18rem;
   margin: 0 .4rem;
   padding: .4rem 0;
@@ -1450,7 +1450,7 @@ CARD BOTTOM
 .logout-btn{
   display: flex;
   border: 0.2px solid green;
-  width: 9rem;
+  width: 10rem;
   justify-content: center;
   align-items: center;
   border-radius: 5px;
