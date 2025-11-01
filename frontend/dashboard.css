@@ -450,29 +450,48 @@ DASHBOARD HERO SECTION
   display: flex;
   flex-direction: column;
   position: relative;
-  height: 12rem;
+  height: 10rem;
   justify-self: center;
-  background: var(--background-cl);
+  background: linear-gradient(135deg, rgb(177, 131, 131), rgb(52, 52, 228));
   margin-top: 4rem;
   align-items: center;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   border-radius: 1rem;
+  align-items: center;
+  justify-content: center;
 }
 
 .dashboard-title{
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 0;
   width: 98%;
-  height: 50%;
+  height: 100%;
   background: transparent;
   text-align: center;
 }
 
+.dash-quote{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 50%;
+  justify-content: center;
+  background-color: transparent;
+  ;
+}
+
 
 .dashboard-title img{
-  width: 2rem;
-  height: 2rem;
+  width: 4.7rem;
+  height: 4.7rem;
+  margin-top: -2rem;
+  background-color: #b9e4c2;
+  border-radius: 50%;
+  padding: .2rem;
+  box-shadow: 1px 2px 6px rgba(19, 60, 99, 0.2);
 }
 
 
@@ -497,9 +516,34 @@ DASHBOARD HERO SECTION
 .card {
   background: linear-gradient(135deg, #b9e4c2,  #61c0c0);
   border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  padding: 15px ;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   transition: 0.3s;
+  margin-top: 1rem;
+}
+
+.card-top-div{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 99.9%;
+  top: 0;
+  height: auto;
+  padding: .2rem 0;
+  margin-top: -1rem;
+}
+
+.card-top-div img{
+  background: var(--background-cl);
+  padding: .2rem;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  width: 1.3rem;
+  height: 1.3rem;
 }
 
 .card:hover {
@@ -507,15 +551,17 @@ DASHBOARD HERO SECTION
 }
 
 .card h3 {
-  font-size: 16px;
+  font-size: 18px;
   font-family: 'Times New Roman', Times, serif;
   color: #666;
 }
 
 .card p {
-  font-size: 18px;
-  color: #111;
+  font-size: 16px;
+  color: #221c1c;
   font-weight: bold;
+  margin-bottom: -1rem;
+  padding: 1rem 0;
 }
 
 .orders-section {
