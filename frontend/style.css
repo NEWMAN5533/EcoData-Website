@@ -1290,6 +1290,7 @@ MENU-CARD SECTION
   flex-direction: column;
   right: -500px;
   top: 4rem;
+  border: 0.1px solid var(--bg-cl);
   background: rgb(44, 37, 37);
   box-shadow: 0 4px 8px rgba(58, 57, 57, 0.4);
   border-radius: .2rem;

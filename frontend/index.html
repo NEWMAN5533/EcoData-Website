@@ -820,25 +820,6 @@
 
 
 
-    <!-- Load Paystack library -->
-  <script src="https://js.paystack.co/v1/inline.js"></script>
-
-
-  
-
-  <!-- Firebase Config must come first -->
-<script type="module" src="./firebase-config.js">
-</script>
-
-<!-- Then your main logic -->
-<script type="module" src="./main.js"></script>
-
-
-
-
-
-
-
 
 <!------MENU-CARD----->
 <div class="menu-card-container" id="closeCard">
@@ -897,6 +878,36 @@
     <button id="sendMsgBtn">Send</button>
   </div>
 </div>
+
+
+
+</body>
+
+
+
+
+    <!-- Load Paystack library -->
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+
+
+  
+
+<script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js"></script>
+
+
+<script type="module" src="main.js"></script>
+
+
+
+
+
+
+
+
+
+
 
 
 <!---usernameDisplay----->
@@ -1012,7 +1023,4 @@ window.addEventListener("click", function(e){
 </script>
 
 <!-----ORDER STATUS JS---->
-
-
-</body>
 </html>

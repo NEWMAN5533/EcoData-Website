@@ -1,44 +1,48 @@
-// btn events//
+/* ================================
+   main.js — EcoData Dashboard
+   ================================ */
+import "./firebase-config.js";
+
+// ========== BUY BUTTON SETUP ==========
 document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".buy-btn").forEach(button => {
+    button.addEventListener("click", () => {
+      const packageName = button.dataset.package;
+      const network = button.dataset.network;
+      const size = button.dataset.size;
+      const price = button.dataset.price;
 
-document.querySelectorAll(".buy-btn").forEach(button => {
-  button.addEventListener("click", () => {
-    const packageName = button.dataset.package;
-    const network = button.dataset.network;
-    const size = button.dataset.size;
-    const price = button.dataset.price;
-
-    // Show phone input modal first
-    createPhoneModal(recipient => {
-      payWithPaystack(network, recipient, packageName, size, price);
+      // Prompt for recipient phone number
+      createPhoneModal(recipient => {
+        payWithPaystack(network, recipient, packageName, size, price);
+      });
     });
   });
 });
-});
 
+// ========== PHONE MODAL ==========
 function createPhoneModal(callback) {
   const modal = document.getElementById("phoneModal");
   const confirmBtn = document.getElementById("confirmBtn");
   const cancelBtn = document.getElementById("cancelBtn");
   const input = document.getElementById("recipientInput");
 
-  // Show modal
   modal.classList.add("show");
 
-  cancelBtn.onclick = () => {
-    modal.classList.remove("show");
-  };
+  cancelBtn.onclick = () => modal.classList.remove("show");
 
   confirmBtn.onclick = () => {
     const recipient = input.value.trim();
     if (!recipient) {
-      showSnackBar("Please enter your phone number");
+      showSnackBar("Please enter your phone number", "warning");
       return;
     }
     modal.classList.remove("show");
     callback(recipient);
-};
+  };
 }
+
+
 
 
 // === PAYSTACK PAYMENT (Firebase version) ===
@@ -98,119 +102,67 @@ async function payWithPaystack(network, recipient, packageName, size, price) {
 }
 
 
-// ---------- FIRESTORE HELPER ----------
-async function saveOrderToFirestore(orderObj) {
+
+
+
+
+// ========== ORDER HANDLING ==========
+async function orderBundle(network, recipient, packageName, size, reference, price) {
   try {
-    const db = window._FIRESTORE_;
-    if (!db) {
-      console.warn("Firestore not initialized. Make sure firebase-config.js is loaded before main.js");
-      return null;
-    }
-
-    const { collection, addDoc, serverTimestamp } = await import(
-      "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"
-    );
-
-    const docData = {
-      orderId: orderObj.orderId || orderObj.reference || null,
-      reference: orderObj.reference || null,
-      status: (orderObj.status || "pending").toString(),
-      recipient: orderObj.recipient || (orderObj.items?.[0]?.recipient) || null,
-      volume: Number(orderObj.volume ?? orderObj.items?.[0]?.volume ?? 0),
-      amount: Number(orderObj.amount ?? orderObj.totalAmount ?? 0),
-      network: orderObj.network || null,
-      source: orderObj.source || "web",
-      createdAt: serverTimestamp(),
-      createdBy:
-        window._FIREBASE_AUTH_?.currentUser?.uid || "guest"
-    };
-
-    const ordersCol = collection(db, "orders");
-    const result = await addDoc(ordersCol, docData);
-    console.log("✅ Order saved to Firestore:", result.id);
-    return result.id;
-  } catch (err) {
-    console.error("❌ Error saving order to Firestore:", err);
-    return null;
-}
-}
-
-// === FIRESTORE ORDER FETCH ===
-async function getUserOrders(userId) {
-  try {
-    const db = window.FIRESTORE;
-    if (!db) {
-      console.warn("Firestore not initialized. Make sure firebase-config.js is loaded.");
-      return [];
-    }
-
-    const { collection, getDocs, query, where, orderBy } = await import(
-      "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"
-    );
-
-    const ordersRef = collection(db, "orders");
-    const q = query(
-      ordersRef,
-      where("createdBy", "==", userId || "guest"),
-      orderBy("createdAt", "desc")
-    );
-
-    const snap = await getDocs(q);
-    const orders = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    console.log("📦 Orders fetched:", orders);
-    return orders;
-  } catch (err) {
-    console.error("❌ Error fetching user orders:", err);
-    return[];
-}
-}
-
-
-// === SEND ORDER TO BACKEND ===
-async function orderBundle(network, recipient, packageName, size, reference) {
-  try {
-    const API_BASE = window.location.hostname === "localhost"
+    const API_BASE = window.location.hostname.includes("localhost")
       ? "http://localhost:3000"
-      : "https://ecodata-app.onrender.com/";
+      : "https://ecodata-app.onrender.com";
 
-    const response = await fetch(`${API_BASE}api/buy-data`, {
+    const res = await fetch(`${API_BASE}/api/buy-data`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ network, recipient, package: packageName, size: parseInt(size), paymentReference: reference })
+      body: JSON.stringify({
+        network,
+        recipient,
+        package: packageName,
+        size: parseInt(size),
+        paymentReference: reference
+      }),
     });
 
-    const result = await response.json();
-  if (result.success) {
-  showSnackBar("✅ Data bundle purchased successfully!");
-  const returnedOrder = result.order?.order || result.order || result;
-  console.log("📦 Order details:", returnedOrder);
+    const result = await res.json();
+    if (result.success) {
+      showSnackBar("✅ Data bundle purchased successfully!", "success");
+      const returnedOrder = result.order?.order || result.order || result;
 
-  // Save to Firestore (fire-and-forget)
-  saveOrderToFirestore(returnedOrder).then(fireId => {
-    if (fireId) {
-      console.log("Order persisted in Firestore:", fireId);
+      // Save to Firestore
+      saveOrderToFirestore({
+        ...returnedOrder,
+        network,
+        recipient,
+        size,
+        price,
+        createdAt: new Date(),
+      });
+
+      handleNewOrder(returnedOrder);
+    } else {
+      showSnackBar(`Failed to purchase data: ${result.message || "Unknown error"}`, "error");
     }
-  });
-
-  // Show status card + start polling
-  handleNewOrder(returnedOrder);
-} else {
-  showSnackBar(`Failed to purchase data: ${result.message || "Unknown error"}`);
-}
   } catch (err) {
     console.error("⚠ Server error:", err);
-    showSnackBar("⚠ Server error. Please try again later.");
+    showSnackBar("Server error. Please try again later.", "error");
   }
 }
 
-  // ---------- CONFIG ----------
-const API_BASE = (() => {
-  // use current host in prod or localhost for local dev
-  if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
-    return "http://localhost:3000";
+
+// ========== FIRESTORE SAVE ==========
+async function saveOrderToFirestore(orderData) {
+  try {
+    const { db, firestoreHelpers } = window;
+    const { collection, addDoc } = firestoreHelpers;
+    await addDoc(collection(db, "orders"), orderData);
+    console.log("✅ Order saved to Firestore");
+  } catch (err) {
+    console.error("❌ Error saving order:", err);
   }
-  return "https://ecodata-app.onrender.com"; // your deployed backend
-})();
+}
+
 
 // POLLING FUNCTION //
 
@@ -307,6 +259,8 @@ async function checkOrderStatusOnce(orderIdOrRef) {
 }
 }
 
+
+
 function startAutoPolling(orderIdOrRef) {
   // clear existing poll
   stopStatusPolling();
@@ -372,6 +326,10 @@ function handleNewOrder(returnedOrder) {
   if (idToPoll) startAutoPolling(idToPoll);
 }
 
+
+
+
+
 // ---------- MANUAL CHECK UI binding ----------
 document.addEventListener("DOMContentLoaded", () => {
   const last = localStorage.getItem("lastOrderId");
@@ -433,6 +391,46 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 }
 });
+
+
+// ========== DASHBOARD ORDERS TABLE ==========
+async function loadOrders() {
+  try {
+    const { db, firestoreHelpers } = window;
+    const { collection, getDocs, query, orderBy } = firestoreHelpers;
+
+    const q = query(collection(db, "orders"), orderBy("createdAt", "desc"));
+    const snapshot = await getDocs(q);
+
+    const tbody = document.getElementById("ordersTableBody");
+    tbody.innerHTML = "";
+
+    snapshot.forEach(doc => {
+      const o = doc.data();
+      const createdAt = o.createdAt?.toDate ? o.createdAt.toDate().toLocaleString() : "—";
+
+      const row = `
+        <tr>
+          <td>${o.orderId || "—"}</td>
+          <td>${o.size || "—"}</td>
+          <td>${o.recipient || "—"}</td>
+          <td>${o.network || "—"}</td>
+          <td>${o.status || "Pending"}</td>
+          <td>₵${o.price || "—"}</td>
+          <td>${createdAt}</td>
+        </tr>`;
+      tbody.insertAdjacentHTML("beforeend", row);
+    });
+
+    console.log("📋 Dashboard loaded successfully");
+  } catch (err) {
+    console.error("❌ Error loading dashboard:", err);
+  }
+}
+
+
+
+document.addEventListener("DOMContentLoaded", loadOrders);
 
 
 // === FETCH ORDERS FROM FIRESTORE AND UPDATE DASHBOARD ===
@@ -499,12 +497,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error("❌ Error loading dashboard:",err);
 }
 });
-
-
-
-
-
-
 
 
 
