@@ -881,33 +881,23 @@
 
 
 
-</body>
 
 
 
 
-    <!-- Load Paystack library -->
+
+
+
+ <!-- Load Paystack library -->
   <script src="https://js.paystack.co/v1/inline.js"></script>
 
 
   
 
-<script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"></script>
-<script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js"></script>
-
-
-<script type="module" src="main.js"></script>
 
 
 
-
-
-
-
-
-
-
+<script src="./main.js"></script>
 
 
 <!---usernameDisplay----->
@@ -934,6 +924,16 @@
     const usernameDisplay = document.getElementById("usernameDisplay");
 
 // FORCE TO LOGIN THE USER //
+  
+// 🚨 Check if user is logged in
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    // ❌ Not logged in → redirect to login page
+    window.location.href = "login.html";
+  } else {
+    console.log("✅ User logged in:", user.email);
+}
+});
 
 
 
@@ -1022,5 +1022,9 @@ window.addEventListener("click", function(e){
 
 </script>
 
+
+
+
+</body>
 <!-----ORDER STATUS JS---->
 </html>
