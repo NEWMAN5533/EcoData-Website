@@ -64,7 +64,7 @@
 <section class="order-status-section">
   <h2>Check Your Order <br> Status</h2>
   <span><img src="./css/icons/down-arrow.png" alt="image" loading="lazy"></span>
-  <input type="text" id="orderInput" placeholder="Enter Order ID or Reference">
+  <input type="text" id="orderInput" placeholder="Enter Order ID">
   <button id="checkBtn">Check Status</button>
   <div id="statusResult"></div>
 </section>
@@ -839,6 +839,13 @@
           <!----ICONS-SECTION-->
     <div class="shortcut-links">
 
+           <div class="link">
+       <a href="dashbord.html">
+        <img src="./css/icons/dashboard.png" alt="image" loading="lazy">
+        <span>My Dashboard</span>
+       </a>
+      </div>
+
       
        <div class="link">
        <a href="https://chat.whatsapp.com/CdemFa0YXXc8rgxQZKvSIq?mode=wwc">
@@ -981,14 +988,14 @@ updateClock();
 
   // function //
 cardToggler.addEventListener("click", function(e){
-  if (card.style.right != "-240px"){
+  if (card.style.right != "-500px"){
     card.style.right = "14px";
-  } else card.style.right = "-240px";
+  } else card.style.right = "-500px";
 });
 
 window.addEventListener("click", function(e){
   if (e.target !== cardToggler && e.target !== card && !card.contains(e.target)){
-    card.style.right = "-240px";
+    card.style.right = "-500px";
   }
 });
 

@@ -173,9 +173,9 @@ MENU-CARD SECTION
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  right: -200px;
+  right: -500px;
   top: 4rem;
-  background: white;
+  background: rgb(26, 24, 24);
   box-shadow: 0 4px 8px rgba(58, 57, 57, 0.4);
   border-radius: .2rem;
   transition: .5s ease-in-out;
@@ -198,7 +198,7 @@ MENU-CARD SECTION
   text-align: center;
   gap: 1.4rem;
   width: 90%;
-  height: 18.5rem;
+  height: 21rem;
   margin: 0 .4rem;
   border: 0.2px solid pink;
   padding: .4rem 0;
@@ -335,13 +335,13 @@ CARD BOTTOM
 .logout-btn{
   display: flex;
   border: 0.2px solid green;
-  width: 9rem;
+  width: 10rem;
   justify-content: center;
   align-items: center;
   border-radius: 5px;
   background: green;
   color: var(--bg-cl);
-  height: 1.7rem;
+  height: 2rem;
   font-size: 1rem;
   position: relative;
   display: flex;

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ecodata</title>
+
+  
+    <meta name="title" content="EcoData">
+  <meta name="description" content="This is related to website developed by IlysCode">
+
+  <link rel="shortcut icon" href="./css/icons/icon-shortcut.png" type="image/png">
+  <link rel="stylesheet" href="dashboard.css">
+
+
+</head>
+<body>
+
+<nav class="navbar">
+<div class="nav-left">
+<a href="index.html">
+  <img src="./css/icons/icon-shortcut.png" alt="image" loading="lazy">
+</a>
+</div>
+<div class="nav-right">
+ 
+<img id="cardToggler" src="./css/icons/icons8-fries-menu-46.png" alt="image" class="menu-icon" loading="lazy">
+</div>
+</nav>
+
+<!----DASHBOARD-HERO-SECTION---->
+<div class="dashboard-hero-container">
+  <div class="dashboard-title">
+    <h2>My Dealer dashboard <img src="./css/icons/greetings.png" alt="image" loading="lazy"></h2>
+    <p class="dash-quote"></p>
+  </div>
+</div>
+
+
+<!---DASHBOARD-SECTION------->
+<div class="dashboard-container">
+
+  <!--top-cards----->
+  <div class="cards-container">
+    <div class="card">
+      <h3>Total Spent</h3>
+      <p id="totalAmount">GH&#8373; 0.00</p>
+    </div>
+
+    <div class="card">
+      <h3>Total Orders</h3>
+      <p id="totalOrder">0</p>
+    </div>
+
+    <div class="card">
+      <h3>Total GB</h3>
+      <p id="totalGB">0 GB</p>
+    </div>
+
+    <div class="card">
+      <h3>Recent Order</h3>
+      <p id="recentOrder">--</p>
+    </div>
+  </div>
+
+  <!---ORDERS-TABLE=-->
+  <div class="orders-section">
+    <h2>Order History</h2>
+    <table class="orders-table">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Size</th>
+          <th>Recipient</th>
+          <th>Network</th>
+          <th>Status</th>
+          <th>Amount</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody id="ordersTableBody">
+        <!--order-area-->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="module" src="firebase-config.js"></script>
+
+
+
+<script src="dashboard.js"></script>
+
+<!------MENU-CARD----->
+<div class="menu-card-container" id="closeCard">
+ 
+  <div class="menu-card">
+    <div class="menu-card-top">
+          <!----ICONS-SECTION-->
+    <div class="shortcut-links">
+
+     <div class="link">
+       <a href="index.html">
+        <img src="./css/icons/home.png" alt="image" loading="lazy">
+        <span> Back to Home</span>
+       </a>
+      </div>
+      
+
+      
+       <div class="link">
+       <a href="https://chat.whatsapp.com/CdemFa0YXXc8rgxQZKvSIq?mode=wwc">
+        <img src="./css/icons/agent.png" alt="image" loading="lazy">
+        <span>Be an Agent?</span>
+       </a>
+      </div>
+
+       <div class="link">
+       <a href="terms.html">
+        <img src="./css/icons/terms (1).png" alt="image" loading="lazy">
+        <span>Terms of use</span>
+       </a>
+      </div>
+
+
+       <div class="link">
+       <a href="bundlesInfo.html">
+        <img src="./css/icons/list.jpg" alt="image" loading="lazy">
+        <span>Bundles info</span>
+       </a>
+      </div>
+    </div>
+    </div>
+    <div class="menu-card-bottom">
+      <a href="login.html">  <button  id="logout-btn" class="logout-btn">Login/Sign-Up</button></a>
+    </div>
+  </div>
+</div>
+
+  <!-- ✅ WhatsApp Floating Chat -->
+<div id="whatsappChat">
+  <div id="chatButton" class="message">
+    <img src="./css/icons/message.png" alt="image" loading="lazy">
+  </div>
+
+  <div id="chatBox">
+    <h4>Chat Ecodata Admin</h4>
+    <input type="text" id="whatsappMessage" placeholder="Type your message..." />
+    <button id="sendMsgBtn">Send</button>
+  </div>
+</div>
+
+<!----SEPARATE-SCRIPS---->
+<!-- End WhatsApp Floating Chat -->
+<script>
+  // === CONFIG ===
+  const whatsappNumber = "233535565637";
+
+  // === ELEMENTS ===
+  const chatButton = document.getElementById("chatButton");
+  const chatBox = document.getElementById("chatBox");
+  const sendBtn = document.getElementById("sendMsgBtn");
+
+  // === TOGGLE CHAT BOX ===
+  chatButton.addEventListener("click", () => {
+    chatBox.classList.toggle("show");
+  });
+
+  // === SEND MESSAGE ===
+  sendBtn.addEventListener("click", () => {
+    const message = document.getElementById("whatsappMessage").value.trim();
+    if (!message) {
+      alert("Please type your message before sending.");
+      return;
+    }
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappURL =` https://wa.me/${233535565637}?text=${encodedMessage}`;
+    window.open(whatsappURL, "_blank");
+    document.getElementById("whatsappMessage").value = ""; // clear after sending
+});
+</script>
+
+
+<!---MENU-CARD-JS-->
+<script>
+  const cardToggler = document.getElementById("cardToggler");
+  const cardCloser = document.getElementById("closeCard");
+
+  // querySelectors //
+  const card = document.querySelector(".menu-card-container");
+
+  // function //
+cardToggler.addEventListener("click", function(e){
+  if (card.style.right != "-540px"){
+    card.style.right = "14px";
+  } else card.style.right = "-540px";
+});
+
+window.addEventListener("click", function(e){
+  if (e.target !== cardToggler && e.target !== card && !card.contains(e.target)){
+    card.style.right = "-540px";
+  }
+});
+
+
+</script>
+
+</body>
+</html>

@@ -112,3 +112,16 @@ function createPhoneModal(callback) {
     } , 200);
   });
 }
+
+
+
+ if (result.success) {
+      showSnackBar("✅ Data bundle purchased successfully!");
+      const returnedOrder = result.order?.order || result.order || result;
+      console.log("📦 Order details:", 
+        returnedOrder);
+        handleNewOrder(returnedOrder);
+    } else {
+      showSnackBar(`Failed to purchase data, contact support (Admin): ${result.message || "Unknown error"}`);
+    }
+    

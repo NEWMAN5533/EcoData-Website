@@ -98,6 +98,43 @@ async function payWithPaystack(network, recipient, packageName, size, price) {
 }
 
 
+// ---------- FIRESTORE HELPER ----------
+async function saveOrderToFirestore(orderObj) {
+  try {
+    const db = window._FIRESTORE_;
+    if (!db) {
+      console.warn("Firestore not initialized. Make sure firebase-config.js is loaded before main.js");
+      return null;
+    }
+
+    const { collection, addDoc, serverTimestamp } = await import(
+      "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"
+    );
+
+    const docData = {
+      orderId: orderObj.orderId || orderObj.reference || null,
+      reference: orderObj.reference || null,
+      status: (orderObj.status || "pending").toString(),
+      recipient: orderObj.recipient || (orderObj.items?.[0]?.recipient) || null,
+      volume: Number(orderObj.volume ?? orderObj.items?.[0]?.volume ?? 0),
+      amount: Number(orderObj.amount ?? orderObj.totalAmount ?? 0),
+      network: orderObj.network || null,
+      source: orderObj.source || "web",
+      createdAt: serverTimestamp(),
+      createdBy:
+        window._FIREBASE_AUTH_?.currentUser?.uid || "guest"
+    };
+
+    const ordersCol = collection(db, "orders");
+    const result = await addDoc(ordersCol, docData);
+    console.log("✅ Order saved to Firestore:", result.id);
+    return result.id;
+  } catch (err) {
+    console.error("❌ Error saving order to Firestore:", err);
+    return null;
+}
+}
+
 
 
 // === SEND ORDER TO BACKEND ===
@@ -114,15 +151,23 @@ async function orderBundle(network, recipient, packageName, size, reference) {
     });
 
     const result = await response.json();
-    if (result.success) {
-      showSnackBar("✅ Data bundle purchased successfully!");
-      const returnedOrder = result.order?.order || result.order || result;
-      console.log("📦 Order details:", 
-        returnedOrder);
-        handleNewOrder(returnedOrder);
-    } else {
-      showSnackBar(`Failed to purchase data, contact support (Admin): ${result.message || "Unknown error"}`);
+  if (result.success) {
+  showSnackBar("✅ Data bundle purchased successfully!");
+  const returnedOrder = result.order?.order || result.order || result;
+  console.log("📦 Order details:", returnedOrder);
+
+  // Save to Firestore (fire-and-forget)
+  saveOrderToFirestore(returnedOrder).then(fireId => {
+    if (fireId) {
+      console.log("Order persisted in Firestore:", fireId);
     }
+  });
+
+  // Show status card + start polling
+  handleNewOrder(returnedOrder);
+} else {
+  showSnackBar(`Failed to purchase data: ${result.message || "Unknown error"}`);
+}
   } catch (err) {
     console.error("⚠ Server error:", err);
     showSnackBar("⚠ Server error. Please try again later.");
