@@ -135,44 +135,51 @@ async function saveOrderToFirestore(orderObj) {
 }
 }
 
-
-
 // === SEND ORDER TO BACKEND ===
 async function orderBundle(network, recipient, packageName, size, reference) {
   try {
     const API_BASE = window.location.hostname === "localhost"
       ? "http://localhost:3000"
-      : "https://ecodata-app.onrender.com/";
+      : "https://ecodata-app.onrender.com";
 
-    const response = await fetch(`${API_BASE}/api/buy-data`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ network, recipient, package: packageName, size: parseInt(size), paymentReference: reference })
+    // ✅ Build query string for GET request
+    const query = new URLSearchParams({
+      network,
+      recipient,
+      package: packageName,
+      size: size.toString(),
+      paymentReference: reference
+    });
+
+    const response = await fetch(`${API_BASE}/api/buy-data?${query.toString()}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" }
     });
 
     const result = await response.json();
-  if (result.success) {
-  showSnackBar("✅ Data bundle purchased successfully!");
-  const returnedOrder = result.order?.order || result.order || result;
-  console.log("📦 Order details:", returnedOrder);
 
-  // Save to Firestore (fire-and-forget)
-  saveOrderToFirestore(returnedOrder).then(fireId => {
-    if (fireId) {
-      console.log("Order persisted in Firestore:", fireId);
+    if (result.success) {
+      showSnackBar("✅ Data bundle purchased successfully!");
+      const returnedOrder = result.order?.order || result.order || result;
+      console.log("📦 Order details:", returnedOrder);
+
+      // Save to Firestore
+      saveOrderToFirestore(returnedOrder).then(fireId => {
+        if (fireId) console.log("Order persisted in Firestore:", fireId);
+      });
+
+      handleNewOrder(returnedOrder);
+    } else {
+      showSnackBar(`Failed to purchase data: ${result.message || "Unknown error"}`);
     }
-  });
-
-  // Show status card + start polling
-  handleNewOrder(returnedOrder);
-} else {
-  showSnackBar(`Failed to purchase data: ${result.message || "Unknown error"}`);
-}
   } catch (err) {
     console.error("⚠ Server error:", err);
     showSnackBar("⚠ Server error. Please try again later.");
-  }
 }
+}
+
+
+
 
   // ---------- CONFIG ----------
 const API_BASE = (() => {

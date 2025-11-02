@@ -29,7 +29,7 @@ export const buyDataBundle = async (req, res) => {
       });
     }
 
-    console.log("✅ Paystack verified:", verify.data.data.reference);
+    console.log(" Paystack verified:", verify.data.data.reference);
 
     // ✅ 2. Build SwiftData order payload
     const orderData = {
@@ -58,7 +58,7 @@ export const buyDataBundle = async (req, res) => {
     if (swiftRes.data.success) {
       return res.json({
         success: true,
-        message: "✅ Bundle order placed successfully!",
+        message: " Bundle order placed successfully!",
         order: swiftRes.data,
       });
     } else {
