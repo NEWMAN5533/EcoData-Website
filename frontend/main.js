@@ -150,9 +150,10 @@ async function saveOrderToFirestore(orderObj) {
 // === SEND ORDER TO BACKEND ===
 async function orderBundle(network, recipient, packageName, size, reference) {
   try {
-    const API_BASE = window.location.hostname === "localhost"
-      ? "http://localhost:3000"
-      : "https://ecodata-app.onrender.com";
+    const API_BASE =
+      window.location.hostname === "localhost"
+        ? "http://localhost:3000"
+        : "https://ecodata-app.onrender.com";
 
     // ✅ Build query string for GET request
     const query = new URLSearchParams({
@@ -160,26 +161,32 @@ async function orderBundle(network, recipient, packageName, size, reference) {
       recipient,
       package: packageName,
       size: size.toString(),
-      paymentReference: reference
+      paymentReference: reference,
     });
 
     const response = await fetch(`${API_BASE}/api/buy-data?${query.toString()}`, {
       method: "GET",
-      headers: { "Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json" },
     });
 
     const result = await response.json();
 
     if (result.success) {
       showSnackBar("✅ Data bundle purchased successfully!");
+
+      // The order object returned from server
       const returnedOrder = result.order?.order || result.order || result;
       console.log("📦 Order details:", returnedOrder);
 
-      // Save to Firestore
-      saveOrderToFirestore(returnedOrder).then(fireId => {
+      // ✅ Save to Firestore
+      saveOrderToFirestore(returnedOrder).then((fireId) => {
         if (fireId) console.log("Order persisted in Firestore:", fireId);
+
+        // ✅ Save locally for guests (important fix!)
+        saveGuestOrder(returnedOrder);
       });
 
+      // Update dashboard UI or order history
       handleNewOrder(returnedOrder);
     } else {
       showSnackBar(`Failed to purchase data: ${result.message || "Unknown error"}`);
@@ -187,11 +194,20 @@ async function orderBundle(network, recipient, packageName, size, reference) {
   } catch (err) {
     console.error("⚠ Server error:", err);
     showSnackBar("⚠ Server error. Please try again later.");
+  }
+}
+
+// ✅ Save Guest Orders to Local Storage
+function saveGuestOrder(orderData) {
+  try {
+    const existing = JSON.parse(localStorage.getItem("guestOrders") || "[]");
+    existing.push(orderData);
+    localStorage.setItem("guestOrders", JSON.stringify(existing));
+    console.log("💾 Guest order saved locally:", orderData);
+  } catch (e) {
+    console.error("Failed to save guest order:", e);
 }
 }
-
-
-
 
   // ---------- CONFIG ----------
 const API_BASE = (() => {

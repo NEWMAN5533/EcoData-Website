@@ -486,9 +486,9 @@ DASHBOARD HERO SECTION
 
 .dashboard-title small{
   color: var(--background-cl);
-  font-size: .95rem;
+  font-size: 1rem;
   font-weight: 500;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: Arial;
 }
 
 .dash-quote{
@@ -512,9 +512,6 @@ DASHBOARD HERO SECTION
 }
 
 
-
-
-
 .dashboard-container {
   width: 100%;
   max-width: 1200px;
@@ -522,6 +519,81 @@ DASHBOARD HERO SECTION
   margin-top: -3rem;
   overflow-y: auto;
 }
+
+
+/***
+GO-HOME
+***/
+.go-home-container{
+  width: 100%;
+  max-width: 460px;
+  height: 8rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  padding: 1rem;
+  justify-content: space-between;
+  background: rgb(255, 255, 255);
+  border: 0.1px solid var(--background-cl);
+  border-radius: 1rem;
+}
+
+.go-home{
+  width: 99.95%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  justify-content: space-between;
+  position: relative;
+}
+
+.go-left{
+  width: 70%;
+  height: max-content;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  line-height: 1.4;
+  background-color: rgb(248, 248, 248);
+  padding: .5rem;
+  border-radius: .6rem;
+}
+
+.go-left small {
+  font-size: .96rem;
+  color: rgb(97, 91, 91);
+}
+
+/***
+GO-RIGHT
+**/
+.go-right{
+  width: 30%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.go-right .home-btn{
+  width: 6rem;
+  height: 2rem;
+  border: none;
+  background: linear-gradient(135deg,rgb(11, 11, 245),rgb(5, 7, 117));
+  color: white;
+  transition: 1s ease;
+  box-shadow: 0 2px 6px rgba(20, 34, 39, 0.2);
+
+}
+
+
+
+
+
+
+
 
 .card-title{
   width: 100%;
@@ -600,22 +672,28 @@ DASHBOARD HERO SECTION
 }
 
 .orders-section {
-  background: rgb(248, 246, 246);
+  background: rgb(22, 16, 16);
   padding: 20px;
   display: flex;
   flex-direction: column;
   height: 30rem;
-  border-radius: 12px;
+  border-radius: 18px;
   margin: 1rem .8rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
 
+}
+
+.orders-section h2{
+  color: white;
+  font-size: 1.1rem;
+  opacity: .9;
 }
 
 
 .table-wrapper{
   display: flex;
   position: relative;
-  background: var(--bg-cl);
+  background: rgba(29, 23, 23, 0.034);
   width: 100%;
   height: 25rem;
   overflow-y: auto;
@@ -623,7 +701,7 @@ DASHBOARD HERO SECTION
   z-index: 999;
   border-radius: 1rem;
   border: 2px solid var(--background-cl);
-  box-shadow: inset 2px 2px 5px rgb(240, 236, 236), inset -2px -2px 5px rgb(240, 236, 236);
+  box-shadow:  2px 2px 5px rgba(29, 23, 23, 0.034), -2px -2px 5px rgba(29, 23, 23, 0.034);
 }
 
 .orders-table {
@@ -636,6 +714,7 @@ DASHBOARD HERO SECTION
   justify-content: flex-start;
   display: flex;
   position: absolute;
+  box-shadow: 2px 2px 5px rgb(34, 31, 31), -2px -2px 5px rgb(34, 31, 31);
   top: 0;
   z-index: 99;
 }
