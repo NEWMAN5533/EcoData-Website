@@ -70,7 +70,7 @@ function loadGuestDashboard() {
   let totalSpent = 0;
   let totalOrders = guestOrders.length;
   let totalGB = 0;
-  let recentOrder = guestOrders[guestOrders.length - 1]?.reference || "--";
+  let recentOrder = guestOrders[guestOrders.length - 1]?.totalOrders || "--";
 
   guestOrders.forEach(order => {
     totalSpent += order.amount || 0;
