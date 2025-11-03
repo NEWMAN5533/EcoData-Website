@@ -1,3 +1,15 @@
+// --- Firebase Imports ---
+import { db } from "./firebase-config.js";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  orderBy,
+  serverTimestamp,
+} from 
+"https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
 // btn events//
 document.addEventListener("DOMContentLoaded", () => {
 

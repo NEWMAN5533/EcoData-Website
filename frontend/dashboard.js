@@ -1,66 +1,91 @@
-// === REALTIME DASHBOARD LISTENER ===
-document.addEventListener("DOMContentLoaded", async () => {
-  try {
-    const db = window.FIRESTORE;
-    if (!db) {
-      console.warn("Firestore not initialized. Make sure firebase-config.js is loaded first.");
-      return;
-    }
+// --- Import Firebase & Firestore ---
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  query,
+  where,
+  orderBy
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
-    const { collection, onSnapshot, query, orderBy } = await import(
-      "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"
-    );
+import {
+  getAuth,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
-    const ordersCol = collection(db, "orders");
-    const q = query(ordersCol, orderBy("createdAt", "desc"));
-    const tableBody = document.getElementById("ordersTableBody");
+// --- Initialize Firebase ---
+const db = getFirestore(window.FIREBASE_APP);
+const auth = getAuth(window.FIREBASE_APP);
 
-    // Listen in real time 🔥
-    onSnapshot(q, (snapshot) => {
-      tableBody.innerHTML = "";
+// --- Load Dashboard Data (for specific user) ---
+async function loadDashboardData() {
+  const user = window.FIREBASE_AUTH?.currentUser;
+  if (!user) return;
+  const userEmail = user.email; // ✅ string value
 
-      let totalAmount = 0;
-      let totalGB = 0;
+  const q = query(collection(db, "orders"), where("createdBy", "==",userEmail));
+
+    try {
+      const snapshot = await getDocs(q);
+
+      let totalSpent = 0;
       let totalOrders = 0;
-      let recentOrder = null;
+      let totalGB = 0;
+      let recentOrder = "--";
 
-      snapshot.forEach((doc) => {
-        const order = doc.data();
-        const createdAt = order.createdAt?.toDate
-          ? order.createdAt.toDate().toLocaleString()
-          : "—";
+      const allOrders = [];
 
-        // Build row
-        const row = `
-          <tr>
-            <td>${order.orderId || "—"}</td>
-            <td>${order.volume || "—"} GB</td>
-            <td>${order.recipient || "—"}</td>
-            <td>${order.network || "—"}</td>
-            <td class="status-cell ${order.status?.toLowerCase() || "pending"}">
-              ${order.status || "Pending"}
-            </td>
-            <td>₵${Number(order.amount || 0).toFixed(2)}</td>
-            <td>${createdAt}</td>
-          </tr>
-        `;
-        tableBody.insertAdjacentHTML("beforeend", row);
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        allOrders.push(data);
 
-        // Update cards
         totalOrders++;
-        totalAmount += Number(order.amount || 0);
-        totalGB += Number(order.volume || 0);
-        if (!recentOrder) recentOrder = order;
+        totalSpent += data.amount || 0;
+        totalGB += data.volume || 0;
+
+        if (!recentOrder && data.reference) {
+          recentOrder = data.reference;
+        }
       });
 
       // Update cards
-      document.querySelector("#cardTotalSpent p").textContent = `₵${totalAmount.toFixed(2)}`;
-      document.querySelector("#cardTotalGB p").textContent = `${totalGB.toFixed(2)} GB`;
-      document.querySelector("#cardTotalOrders p").textContent = totalOrders;
-      document.querySelector("#cardRecentOrder p").textContent =
-        recentOrder ? `${recentOrder.network} (${recentOrder.status})` : "—";
-    });
-  } catch (err) {
-    console.error("❌ Error setting up real-time listener:",err);
+      document.getElementById("cardTotalSpent").textContent = `GH₵ ${totalSpent.toFixed(2)}`;
+      document.getElementById("cardTotalOrder").textContent = totalOrders;
+      document.getElementById("cardTotalGB").textContent = `${totalGB} GB`;
+      document.getElementById("cardRecentOrder").textContent = recentOrder;
+
+      // Update table
+      const tbody = document.getElementById("ordersTableBody");
+      tbody.innerHTML = allOrders
+        .map(order => `
+          <tr>
+            <td>${order.orderId || order.reference || "--"}</td>
+            <td>${order.volume || 0}MB</td>
+            <td>${order.recipient || "--"}</td>
+            <td>${order.network || "--"}</td>
+            <td>${order.status || "pending"}</td>
+            <td>GH₵ ${order.amount || 0}</td>
+            <td>${order.createdAt?.toDate ? order.createdAt.toDate().toLocaleString() : "--"}</td>
+          </tr>
+        `)
+        .join("");
+    } catch (err) {
+      console.error("❌ Error loading dashboard data:", err);
+    }
+  }
+
+// --- Auth State Listener ---
+onAuthStateChanged(auth, user => {
+  if (user) {
+    console.log("👤 Logged in user:", user.email);
+    loadDashboardData(user.uid);
+  } else {
+    console.warn("⚠ No user logged in. Showing guest message.");
+    document.querySelector(".dashboard-hero-container h2").textContent = "Guest Dashboard";
+    document.getElementById("ordersTableBody").innerHTML = `
+      <tr><td colspan="7">Please sign in to view your orders.</td></tr>`;
 }
 });
+
+// Run it on page load
+window.addEventListener("DOMContentLoaded", loadDashboardData);
