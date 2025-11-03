@@ -101,7 +101,6 @@ function updateOrdersTable(allOrders) {
         <td>${order.recipient || "--"}</td>
         <td>${order.network || "--"}</td>
         <td>${order.status || "pending"}</td>
-        <td>GH₵ ${order.amount || 0}</td>
         <td>${order.createdAt ? new Date(order.createdAt).toLocaleString() : "--"}</td>
       </tr>`)
     .join("");
