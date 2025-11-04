@@ -1282,7 +1282,7 @@ MENU-CARD SECTION
 .menu-card-container {
   width: 100%;
   max-width: 13rem;
-  height: 20rem;
+  height: 19rem;
   position: fixed;
   display: flex;
   align-items: center;
@@ -1314,7 +1314,7 @@ MENU-CARD SECTION
   text-align: center;
   gap: 1.4rem;
   width: 94%;
-  height: 18rem;
+  height: 16em;
   margin: 0 .4rem;
   padding: .4rem 0;
    border: 0.2px solid pink;
