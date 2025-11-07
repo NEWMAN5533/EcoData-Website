@@ -337,17 +337,7 @@ overflow-y: auto;
 New code
 ***/
 
-.two-div-container{
-  width: 100%;
-  height: max-content;
-  display: flex;
-  flex-direction: column;
-  max-width: 480px;
-  align-items: center;
-  justify-content: center;
-  justify-self: center;
-}
-  
+
 
     /* Horizontal scroll container */
     #liveOrders {
@@ -3936,6 +3926,7 @@ ORDER STATUS
 ***/
 
 
+
 /*****
 LIVE ORDER STATUS CHECK TABLE
 ******/
@@ -4510,6 +4501,8 @@ footer img{
    /****
 ORDER STATUS
 ***/
+
+
 
 
 .live-orders-section {
@@ -11061,6 +11054,12 @@ footer img{
     height: 3.5rem;
     margin: 0;
   }
+
+
+  /***
+  THE TWO DIV CONTAINER
+  ***/
+  
 
 
 /**
