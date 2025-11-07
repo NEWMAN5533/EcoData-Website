@@ -60,28 +60,30 @@
 <!-- Place somewhere (e.g. near header) -->
 <div id="orderStatusContainerRoot"></div>
 
+<!-- Optional: Check Order manually -->
+<section class="order-status-section">
+  <h2>Check Your Order <br> Status</h2>
+  <span><img src="./css/icons/down-arrow.png" alt="image" loading="lazy"></span>
+  <input type="text" id="orderInput" placeholder="Enter Order ID">
+  <button id="checkBtn">Check Status</button>
+  <div id="statusResult"></div>
+</section>
+<!---ENDS-->
+
 
 
 <section class="live-orders-section">
-  <h2>📡 Live Order Status</h2>
+  <h2>📡 Live Order Card Status</h2>
 
   <div class="table-wrapper">
-    <table id="ordersTable" class="live-orders-table">
-      <thead>
-        <tr>
-          <th>OrderID</th>
-          <th>Recipient</th>
-          <th>Network</th>
-          <th>Package</th>
-          <th>Status</th>
-          <th>CheckedAt</th>
-        </tr>
-      </thead>
-      <tbody id="liveOrdersTableBody">
-        <!-- Dynamic orders will load here -->
-      </tbody>
-    </table>
-    <h4>Ecodata Live Streaming <span> (Orders)</span></h4>
+    <div class="orderwrapper" id="liveOrders">
+    <div class="live-order-card placeholder">
+      <p>No live orders yet.</p>
+    </div>
+  </div>
+
+  
+    <h4>Ecodata Live Streaming <span> (Orders Card)</span></h4>
   </div>
 </section>
 

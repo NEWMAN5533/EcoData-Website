@@ -236,7 +236,7 @@ LIVE ORDER STATUS CHECK TABLE
 .live-orders-section {
   display: flex;
   width: 100%;
-  max-width:480px;
+  max-width: 470px;
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -261,13 +261,13 @@ LIVE ORDER STATUS CHECK TABLE
 .table-wrapper{
 display: flex;
 width: 100%;
-max-width: 400px;
-height: 10rem;
-align-items: flex-start;
-justify-content: space-between;
+max-width: 420px;
+height: 13rem;
+align-items: center;
+justify-content: space-around;
 flex-direction: column;
 overflow-y: auto;
-border: 2px solid rgb(136, 127, 127);
+border: .1px solid rgb(56, 52, 52);
 box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6), -2px -2px 5px rgba(0, 0, 0, 0.6);
 border-radius: 1rem;
 margin-bottom: .3rem;
@@ -331,6 +331,147 @@ overflow-y: auto;
   opacity: 1;
   transform: translateY(0);
 }
+
+
+/****
+New code
+***/
+
+.two-div-container{
+  width: 100%;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  max-width: 480px;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+}
+  
+
+    /* Horizontal scroll container */
+    #liveOrders {
+      display: flex;
+      gap: 12px;
+      scroll-behavior: smooth;
+      padding-bottom: 10px;
+    }
+
+    .orderwrapper{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: max-content;
+      overflow-x: auto;
+    }
+
+    /* Card Style */
+    .live-order-card {
+      background: white;
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 123, 255, 0.3);
+      border-radius: 16px;
+      padding: 14px;
+      min-width: 260px;
+      height: 7rem;
+      margin-top: 1rem;
+      color: #fff;
+      box-shadow: 0 0 12px rgba(0, 123, 255, 0.25);
+      transition: all 0.3s ease;
+      animation: fadeIn 0.4s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .live-order-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 18px rgba(0, 123, 255, 0.4);
+    }
+
+    .order-id {
+      font-weight: 600;
+      color: #00b7ff;
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    .order-status {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+
+
+    .checked-time {
+      font-size: 0.75rem;
+      color: #9aa6b8;
+      margin-top: 6px;
+      text-align: right;
+    }
+
+    /* Hidden details section */
+    .order-extra {
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      display: none;
+      animation: slideDown 0.4s ease forwards;
+    }
+
+    .order-extra p {
+      margin: 4px 0;
+      font-size: 0.85rem;
+      color: #d2dbe8;
+    }
+
+    /* Expanded card */
+    .live-order-card.expanded {
+      min-width: 270px;
+      transform: scale(1.03);
+      border-color: #00b7ff;
+      box-shadow: 0 0 18px rgba(0, 183, 255, 0.45);
+    }
+
+    .live-order-card.expanded .order-extra {
+      display: block;
+    }
+
+    /* Placeholder card */
+    .live-order-card.placeholder {
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.03);
+      text-align: center;
+      opacity: 0.7;
+    }
+
+    .live-order-card.placeholder p {
+      color: #b8c3d6;
+      font-size: 0.9rem;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3794,6 +3935,16 @@ footer img{
 ORDER STATUS
 ***/
 
+
+/*****
+LIVE ORDER STATUS CHECK TABLE
+******/
+.live-orders-section {
+  display: flex;
+  width: 100%;
+  max-width: 380px;
+}
+
 .order-status-section {
   width: 100%;
   display: flex;
@@ -4359,6 +4510,13 @@ footer img{
    /****
 ORDER STATUS
 ***/
+
+
+.live-orders-section {
+  display: flex;
+  width: 100%;
+  max-width: 420px;
+}
 
 .order-status-section {
   width: 100%;

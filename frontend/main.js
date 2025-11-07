@@ -381,74 +381,74 @@ function handleNewOrder(returnedOrder) {
 
 
 
-// --- POLLING FOR LIVE ORDER STATUS UPDATES ---
-async function pollLiveOrders() {
-  const storedOrders = JSON.parse(localStorage.getItem("guestOrders") || "[]");
 
-  if (storedOrders.length === 0) return;
+  const liveOrdersContainer = document.getElementById('liveOrders');
+    let lastOrders = [];
 
-  const API_BASE = window.location.hostname === "localhost"
-    ? "http://localhost:3000"
-    : "https://ecodata-app.onrender.com";
+    async function fetchOrders() {
+      try {
+        const response = await fetch("https://swiftdata-link.com/api/orders");
+        const orders = await response.json();
 
-  for (const order of storedOrders) {
-    try {
-      const res = await fetch(`${API_BASE}/api/check-status?orderId=${order.orderId}`);
-      const result = await res.json();
-
-      if (result.success && result.data) {
-        const status = result.data.status || "pending";
-        order.status = status;
-        order.checkedAt = new Date().toLocaleString();
+        if (JSON.stringify(orders) !== JSON.stringify(lastOrders)) {
+          lastOrders = orders;
+          updateLiveOrders(orders);
+        }
+      } catch (error) {
+        console.error("Error fetching live orders:", error);
       }
-    } catch (err) {
-      console.error("Polling error:", err);
     }
-  }
+
+    function updateLiveOrders(orders) {
+      liveOrdersContainer.innerHTML = "";
+
+      if (orders.length === 0) {
+        liveOrdersContainer.innerHTML = `
+          <div class="live-order-card placeholder">
+            <p>No live orders yet.</p>
+          </div>
+        `;
+        return;
+      }
+
+      // Show newest first
+      orders.reverse().forEach(order => {
+        const card = document.createElement("div");
+        card.classList.add("live-order-card");
+
+        card.innerHTML = `
+          <div class="order-id">Order ID: ${order.id}</div>
+          <div class="order-status status-${(order.status || 'pending').toLowerCase()}">
+            ${order.status || 'Pending'}
+          </div>
+          <div class="checked-time">
+            ${new Date(order.updatedAt).toLocaleTimeString()}
+          </div>
+          <div class="order-extra">
+            <p><strong>Network:</strong> ${order.network || '--'}</p>
+            <p><strong>Bundle:</strong> ${order.bundle || '--'}</p>
+            <p><strong>Amount:</strong> GHS ${order.amount || '--'}</p>
+            <p><strong>Date:</strong> ${new Date(order.createdAt).toLocaleString()}</p>
+            <p><strong>Recipient:</strong> ${order.recipient || '--'}</p>
+          </div>
+        `;
+
+        // Toggle expand/collapse
+        card.addEventListener("click", () => {
+          card.classList.toggle("expanded");
+        });
+
+        liveOrdersContainer.appendChild(card);
+      });
+    }
+
+    // Run every 5s
+    fetchOrders();
+    setInterval(fetchOrders, 5000);
 
 
 
-  // Update local storage and UI
-  localStorage.setItem("guestOrders", JSON.stringify(storedOrders));
-  renderLiveOrders(storedOrders);
-}
 
-// --- RENDER LIVE ORDERS TO TABLE ---
-function renderLiveOrders(orders) {
-  const tbody = document.getElementById("liveOrdersTableBody");
-  if (!tbody) return;
-
-  tbody.innerHTML = ""; // Clear first
-
-  orders.forEach(order => {
-    const row = document.createElement("tr");
-    row.classList.add("fade-row");
-
-    row.innerHTML = `
-      <td>${order.orderId || "--"}</td>
-      <td>${order.recipient || "--"}</td>
-      <td>${order.network || "--"}</td>
-      <td>${order.package || "--"}</td>
-      <td class="status-${(order.status || 'pending').toLowerCase()}">
-        ${order.status || "Pending"}
-      </td>
-      <td>${order.checkedAt || "--"}</td>
-    `;
-
-    tbody.appendChild(row);
-
-    // Trigger fade-in animation
-    setTimeout(() => row.classList.add("visible"), 100);
-  });
-}
-
-// --- Run periodically ---
-setInterval(pollLiveOrders, 10000); // every 10 seconds
-
-window.addEventListener("DOMContentLoaded", () => {
-  const saved = JSON.parse(localStorage.getItem("guestOrders") || "[]");
-  renderLiveOrders(saved);
-});
 
 
 
