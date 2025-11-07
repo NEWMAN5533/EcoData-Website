@@ -254,7 +254,8 @@ function createOrUpdateStatusCard(order) {
   const html = `
     <div id="orderStatusCardInner">
       <h4>Order Status</h4>
-      <p><strong>Order ID:</strong> ${order.orderId || order.reference || "N/A"}</p>
+      <p><strong>Order ID: 
+      </strong> ${order.orderId || order.reference || "N/A"}</p>
       <p><strong>Recipient:</strong> ${order.recipient || "-"}</p>
       <p><strong>Volume:</strong> ${order.volume ?? "-"} GB</p>
       <p>
@@ -378,6 +379,82 @@ function handleNewOrder(returnedOrder) {
   if (idToPoll) startAutoPolling(idToPoll);
 }
 
+
+
+// --- POLLING FOR LIVE ORDER STATUS UPDATES ---
+async function pollLiveOrders() {
+  const storedOrders = JSON.parse(localStorage.getItem("guestOrders") || "[]");
+
+  if (storedOrders.length === 0) return;
+
+  const API_BASE = window.location.hostname === "localhost"
+    ? "http://localhost:3000"
+    : "https://ecodata-app.onrender.com";
+
+  for (const order of storedOrders) {
+    try {
+      const res = await fetch(`${API_BASE}/api/check-status?orderId=${order.orderId}`);
+      const result = await res.json();
+
+      if (result.success && result.data) {
+        const status = result.data.status || "pending";
+        order.status = status;
+        order.checkedAt = new Date().toLocaleString();
+      }
+    } catch (err) {
+      console.error("Polling error:", err);
+    }
+  }
+
+
+
+  // Update local storage and UI
+  localStorage.setItem("guestOrders", JSON.stringify(storedOrders));
+  renderLiveOrders(storedOrders);
+}
+
+// --- RENDER LIVE ORDERS TO TABLE ---
+function renderLiveOrders(orders) {
+  const tbody = document.getElementById("liveOrdersTableBody");
+  if (!tbody) return;
+
+  tbody.innerHTML = ""; // Clear first
+
+  orders.forEach(order => {
+    const row = document.createElement("tr");
+    row.classList.add("fade-row");
+
+    row.innerHTML = `
+      <td>${order.orderId || "--"}</td>
+      <td>${order.recipient || "--"}</td>
+      <td>${order.network || "--"}</td>
+      <td>${order.package || "--"}</td>
+      <td class="status-${(order.status || 'pending').toLowerCase()}">
+        ${order.status || "Pending"}
+      </td>
+      <td>${order.checkedAt || "--"}</td>
+    `;
+
+    tbody.appendChild(row);
+
+    // Trigger fade-in animation
+    setTimeout(() => row.classList.add("visible"), 100);
+  });
+}
+
+// --- Run periodically ---
+setInterval(pollLiveOrders, 10000); // every 10 seconds
+
+window.addEventListener("DOMContentLoaded", () => {
+  const saved = JSON.parse(localStorage.getItem("guestOrders") || "[]");
+  renderLiveOrders(saved);
+});
+
+
+
+
+
+
 // ---------- MANUAL CHECK UI binding ----------
 document.addEventListener("DOMContentLoaded", () => {
   const last = localStorage.getItem("lastOrderId");
@@ -406,11 +483,11 @@ document.addEventListener("DOMContentLoaded", () => {
           const status = (order.status || "pending").toLowerCase();
           const desc = getStatusTextMapping(status);
           const statusColor = {
-            pending: "#ffcc00",
-            processing: "#2196f3",
+            pending: "#c1f436ff",
+            processing: "#ffcc00",
             completed: "#4caf50",
             failed: "#f44336",
-          }[status] || "#ccc";
+          }[status] || "#4caf50";
 
           statusResult.innerHTML = `
             <div style="padding:15px; border-radius:10px; background:${statusColor}20; border:2px solid ${statusColor};">
