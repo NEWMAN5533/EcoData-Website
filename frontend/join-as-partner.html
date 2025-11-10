@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join as Partner | EcoData</title>
+  <style>
+
+    
+
+:root {
+  --bg-cl: #FFF;
+  --primary-cl: #fff;
+  --secondary-cl: rgb(50, 50, 190);
+  --dark-cl: #0a0a0a;
+  --ascent-cl: rgb(158, 97, 209);
+  --background-cl: #e6e8ce;
+  --card-full-bg-cl: rgb(255, 217, 0);
+  --card-full-tele-bg-cl: rgb(221, 19, 19);
+  --card-full-airtel-bg-cl:  rgb(6, 6, 231);
+  --border-cl-2: rgba(66, 66, 26, 0.226);
+  --mtn-btn: rgb(193, 196, 19);
+  --telecel-btn: rgb(180, 57, 19);
+  --airteltigo-btn: rgb(28, 46, 119);
+}
+
+
+
+
+
+
+
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #263046;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+
+
+    
+/**
+* NAVIGATION BAR
+**/
+.navbar {
+  display: flex;
+  width: 100%;
+  justify-self: center;
+  height: 1.7rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  justify-self: center;
+  overflow: hidden;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-cl);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  padding: 1rem 1rem;
+  z-index: 1000;
+}
+
+/**
+* NAV LEFT
+**/
+.navbar .nav-left{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.nav-left img{
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+}
+
+/**
+* NAV-RIGHT
+**/
+.nav-right a{
+  display: flex;
+  width: 8rem;
+  height: 100%;
+  align-items: center;
+  justify-content: end;
+  background: transparent;
+  border-radius: 4px;
+  margin-right: 2rem;
+  text-decoration: none;
+  color: black;
+
+}
+
+.nav-right img{
+  width: 2.2rem;
+  height: 2.2rem;
+  cursor: pointer;
+}
+
+.login {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  justify-content: space-between;
+}
+
+.login a{
+  text-align: center;
+  text-decoration: none;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 .8rem;
+  color: var(--card-full-bg-cl);
+}
+
+
+.login img {
+  width: 1.4rem;
+  height: 1.4rem;
+  margin: 0 .5rem;
+  background: var(--background-cl);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.menu-icon{
+  background: rgba(219, 214, 214, 0.37);
+  border-radius: 4px;
+  padding: .3px;
+  margin-right: 1rem;
+}
+
+    .container {
+      background: #000000;
+      width: 100%;
+      justify-content: center;
+      justify-self: center;
+      max-width: 400px;
+      width: 90%;
+      margin-top: 6rem;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      text-align: center;
+      color: #1a73e8;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-weight: 500;
+      color: #333;
+    }
+
+    input, select, textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    button {
+      background: #1a73e8;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #0c58b4;
+    }
+
+    .message {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    /* Partner Grid */
+    .partners {
+      max-width: 1100px;
+      width: 90%;
+      margin: 50px auto;
+    }
+
+    .partners h3 {
+      text-align: center;
+      color: #1a73e8;
+      margin-bottom: 25px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+    }
+
+    .card h4 {
+      margin: 0;
+      color: #1a73e8;
+    }
+
+    .card p {
+      margin: 5px 0;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  
+<nav class="navbar">
+<div class="nav-left">
+<a href="index.html">
+  <img src="./css/icons/icon-shortcut.png" alt="image" loading="lazy">
+</a>
+</div>
+
+</nav>
+
+ <section class="container" id="join-partner">
+  <h2 style="color: #ffa500; font-size: 26px; font-weight: bold; margin-bottom: 10px;">🤝 Join as EcoData Partner</h2>
+  <p style="color: #ddd; font-size: 15px; margin-bottom: 25px;">
+    Partner with EcoData and grow your business visibility. Fill the form below to get started.
+  </p>
+
+  <form id="partnerForm" style="text-align: left; margin: 0 auto; max-width: 450px;">
+    <label>Full Name</label><br>
+    <input type="text" id="name" placeholder="Your Full Name" required style="width: 100%; padding: 12px; margin-bottom: 15px; border: none; border-radius: 8px; background: #1a1a1a; color: #fff;"><br>
+
+    <label>Business Name</label><br>
+    <input type="text" id="business" placeholder="Your Business Name" required style="width: 100%; padding: 12px; margin-bottom: 15px; border: none; border-radius: 8px; background: #1a1a1a; color: #fff;"><br>
+
+    <label>Business Category</label><br>
+    <input type="text" id="category" placeholder="Example: Electronics, Fashion, Food..." required style="width: 100%; padding: 12px; margin-bottom: 15px; border: none; border-radius: 8px; background: #1a1a1a; color: #fff;"><br>
+
+    <label>Phone Number</label><br>
+    <input type="tel" id="phone" placeholder="e.g. 0591125902" required style="width: 100%; padding: 12px; margin-bottom: 15px; border: none; border-radius: 8px; background: #1a1a1a; color: #fff;"><br>
+
+    <label>Email Address</label><br>
+    <input type="email" id="email" placeholder="example@gmail.com" required style="width: 100%; padding: 12px; margin-bottom: 15px; border: none; border-radius: 8px; background: #1a1a1a; color: #fff;"><br>
+
+    <label>Short Description</label><br>
+    <textarea id="description" placeholder="Describe your business in few words..." rows="3" required style="width: 100%; padding: 12px; margin-bottom: 20px; border: none; border-radius: 8px; background: #1a1a1a; color: #fff;"></textarea><br>
+
+    <button type="submit" style="width: 100%; padding: 14px; background: #ffa500; border: none; border-radius: 10px; color: #000; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s;">
+      Submit via WhatsApp
+    </button>
+  </form>
+</section>
+
+<script>
+  document.getElementById("partnerForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const business = document.getElementById("business").value;
+    const category = document.getElementById("category").value;
+    const phone = document.getElementById("phone").value;
+    const email = document.getElementById("email").value;
+    const description = document.getElementById("description").value;
+
+    const message = `*EcoData Partner Request*%0A
+Name: ${name}%0A
+Business: ${business}%0A
+Category: ${category}%0A
+Phone: ${phone}%0A
+Email: ${email}%0A
+Description: ${description}`;
+
+    const whatsappNumber = "233535565637"; // ✅ Replace with your WhatsApp number
+    const url = `https://wa.me/${whatsappNumber}?text=${message}`;
+    window.open(url, "_blank");
+});
+</script>
+</body>
+</html>

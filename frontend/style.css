@@ -1547,8 +1547,8 @@ MENU-CARD SECTION
   flex-direction: column;
   text-align: center;
   gap: 1.4rem;
-  width: 94%;
-  height: 16em;
+  width: 90%;
+  height: 17.5rem;
   margin: 0 .4rem;
   padding: .4rem 0;
    border: 0.2px solid pink;
@@ -1590,8 +1590,8 @@ CARD TOP
 }
 
 .sidebar-nav img{
-  width: 1.3rem;
-  height: 1.3rem;
+  width: 1.5rem;
+  height: 1.5rem;
   background-color: rgb(233, 227, 233);
   padding: .14rem;
   border-radius: .4rem;
@@ -1599,6 +1599,7 @@ CARD TOP
 
 .sidebar-nav a{
   display: flex;
+  width: 100%;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -1637,7 +1638,7 @@ CARD TOP
 }
 
 .link:hover{
-  background: rgb(82, 79, 79);
+  background: rgb(138, 132, 132);
   color: rgb(247, 246, 246);
   height: 3rem;
   width: 100%;
@@ -1959,6 +1960,148 @@ SNACKBAR SECTION
   0%, 100% { opacity: 1; }
   50% { opacity: 0.6;}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* === Partners Section === */
+.partners-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 90%;
+  justify-content: center;
+  align-items: center;
+  justify-self: center;
+  margin: .5rem 0;
+  background: #fefeff;
+  border: 0.1px solid var(--background-cl);
+  padding: 50px 20px;
+  text-align: center;
+  border-radius: 1.4rem;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+}
+
+.partners-header h2 {
+  color: #1a73e8;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.partners-header p {
+  color: #555;
+  font-size: 15px;
+  max-width: 500px;
+  margin: 0 auto 30px;
+}
+
+.partners-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 15px;
+  padding: 10px;
+  scroll-behavior: smooth;
+}
+
+.partners-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.partner-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  flex: 0 0 250px;
+  padding: 20px;
+  text-align: left;
+  transition: transform 0.2s;
+}
+
+.partner-card:hover {
+  transform: translateY(-3px);
+}
+
+.partner-card h4 {
+  margin: 0;
+  color: #1a73e8;
+  font-size: 18px;
+}
+
+.partner-card p {
+  margin: 5px 0;
+  color: #555;
+  font-size: 14px;
+}
+
+.see-more {
+  margin-top: 20px;
+}
+
+.see-more a {
+  text-decoration: none;
+  color : white;
+  font-weight: 500;
+  transition: color 0.3s;
+  background: rgb(16, 16, 27);
+  padding: .8rem 2rem;
+  border-radius: 4px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  text-align: center;;
+}
+
+.see-more a:hover {
+  color: #0c58b4;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

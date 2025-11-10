@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partner Details | EcoData</title>
+  <link rel="stylesheet" href="partner-details.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="details-header">
+    <img src="./css/icons/icon-shortcut.png" class="logo" alt="EcoData Logo">
+    <h1>EcoData Partner</h1>
+  </header>
+
+  <!-- Partner Info -->
+  <section class="partner-container">
+    <div class="partner-image">
+      <img  src="./css/images/women8.png" alt="Partner Image">
+    </div>
+
+    <div class="partner-info">
+      <h2 id="partnerName">Loading...</h2>
+      <p id="partnerCategory" class="tag"></p>
+      <p><strong>Location:</strong> <span id="partnerLocation"></span></p>
+      <p id="partnerDescription"></p>
+
+      <div class="contact-actions">
+        <a id="partnerPhone" href="#" class="btn call-btn">📞 Call Now</a>
+        <a onclick="openWhatsApp()" id="partnerWebsite" href="#" class="btn web-btn" target="_blank">WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-------PARTNERS-CONTENT-HERE------>
+
+
+
+
+
+
+
+
+
+  <!-------PARTNERS-CONTENT-HERE---ENDS----->
+
+  <!-- Back Button -->
+  <div class="back-btn-container">
+    <a href="business-partners.html" class="back-btn">Back to Partners</a>
+  </div>
+
+  <script src="partner-details.js"></script>
+
+
+ <script>
+  function openWhatsApp(){
+  const whatsappNumber = "233531834558";
+  const message = "Hello Smart Trends on EcoData,I am interested in your product:";
+  const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+  window.open(url, "_blank");
+  }
+</script>
+</body>
+</html>

@@ -551,4 +551,55 @@ function showSnackBar(message, type = "info") {
     snackbar.classList.remove("show");
     setTimeout(() => snackbar.remove(), 500);
 },3000);
-}
+};
+
+
+
+// OUR TRUSTED PARTNERS SECTION //
+  const partnersScroll = document.getElementById('partnersScroll');
+
+  // same Google Apps Script URL from join-as-partner.html
+  const scriptURL = "https://script.google.com/macros/s/PASTE_YOUR_SCRIPT_URL_HERE/exec";
+
+  async function loadPartners() {
+    try {
+      const res = await `fetch(${scriptURL}?action=getPartners)`;
+      const partners = await res.json();
+
+      if (!Array.isArray(partners) || partners.length === 0) {
+        partnersScroll.innerHTML = "<p>No partners yet.</p>";
+        return;
+      }
+
+      partnersScroll.innerHTML = partners.slice(0, 10).map(p => `
+        <div class="partner-card">
+          <h4>${p.businessName}</h4>
+          <p><strong>Type:</strong> ${p.type}</p>
+          <p><strong>Location:</strong> ${p.location}</p>
+          <p>${p.description?.slice(0, 60) || ''}...</p>
+        </div>
+      `).join('');
+    } catch (err) {
+      console.error("Error fetching partners:", err);
+      partnersScroll.innerHTML = "<p style='color:red;'>.</p>";
+    }
+  }
+
+  window.addEventListener("DOMContentLoaded", loadPartners);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
