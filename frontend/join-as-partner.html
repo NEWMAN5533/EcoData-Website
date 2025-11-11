@@ -33,7 +33,7 @@
 
     body {
       font-family: 'Poppins', sans-serif;
-      background: #263046;
+      background: #e6e8ec;
       margin: 0;
       padding: 0;
       display: flex;
@@ -243,6 +243,104 @@
       font-size: 14px;
       color: #555;
     }
+
+
+
+
+    
+
+
+
+
+/**-------FOOTER SECTION----***/
+
+/* ABOUT & FOOTER */
+.about,
+footer {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-self: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: max-content;
+  text-align: center;
+  padding: .3rem;
+  color: white;
+  background-color:  rgb(29, 25, 25) ;
+  bottom: 0;
+}
+
+.about{
+  border-block-end: 1px solid var(--ascent-cl);
+}
+
+section footer .bar{
+  margin: 0;
+  bottom: 0;
+}
+.about h3{
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--background-cl);
+}
+.about h4{
+  color: rgb(45, 182, 148);
+  margin-top: 0.4rem;
+  font-size: 1.8rem;
+}
+.about P{
+  width: 90%;
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: rgb(250,250,250);
+  margin: 0 auto;
+  line-height: 1.8rem;
+}
+
+.about img{
+  border-radius: 2rem;
+width: 2rem;
+height: 2rem;
+margin: 0 .5rem;
+}
+
+@keyframes jump {
+ 0% {
+  transform: rotateY('90deg 10%');
+ }
+}
+
+
+
+footer a{
+  color:  #199e48;
+  text-decoration: none;
+  align-items: center;
+  font-weight: 500;
+  margin-left: 0.1rem;
+}
+
+footer .copyright{
+  color:  rgb(206, 58, 78);
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: max-content;
+  position: relative;
+}
+
+
+
+footer img{
+  width: 2.6rem;
+  height: 2.6rem;
+  vertical-align: middle;
+  margin-left: 0.6rem;
+}
   </style>
 </head>
 <body>
@@ -277,16 +375,26 @@
     <input type="tel" id="phone" placeholder="e.g. 0591125902" required style="width: 100%; padding: 12px; margin-bottom: 15px; border: none; border-radius: 8px; background: #1a1a1a; color: #fff;"><br>
 
     <label>Email Address</label><br>
-    <input type="email" id="email" placeholder="example@gmail.com" required style="width: 100%; padding: 12px; margin-bottom: 15px; border: none; border-radius: 8px; background: #1a1a1a; color: #fff;"><br>
+    <input type="email" id="email" placeholder="example@gmail.com (optional)" required style="width: 100%; padding: 12px; margin-bottom: 15px; border: none; border-radius: 8px; background: #1a1a1a; color: #fff;"><br>
 
     <label>Short Description</label><br>
     <textarea id="description" placeholder="Describe your business in few words..." rows="3" required style="width: 100%; padding: 12px; margin-bottom: 20px; border: none; border-radius: 8px; background: #1a1a1a; color: #fff;"></textarea><br>
 
     <button type="submit" style="width: 100%; padding: 14px; background: #ffa500; border: none; border-radius: 10px; color: #000; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s;">
-      Submit via WhatsApp
+      Submit
     </button>
   </form>
 </section>
+
+<!------FOOTER SECTION---->
+<section class="about">
+
+      <!-- FOOTER -->
+  <footer>
+    <p>Join group by: <a href="https://chat.whatsapp.com/LwhZNOyUQsJIGTQRL9cIXT">Clicking here<img src="./css/icons/whats.jpg" alt="icons"></a></p>
+    <p class="copyright">&copy; 2025 EcoData All right reserved</p>
+  </footer>
+  </section>  <!-- ABOUT -->
 
 <script>
   document.getElementById("partnerForm").addEventListener("submit", function(e) {
