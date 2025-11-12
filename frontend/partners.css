@@ -225,13 +225,14 @@ body {
 
 .partner-page-btn{
   border: none;
-  width:6rem;
+  width: 13rem;
   padding: .4rem;
   background: linear-gradient(135deg, rgb(230, 98, 120), rgb(64, 64, 230));
   color: black;
   font-weight: 600;
   font-size: .9rem;
   font-family: serif;
+  border-radius: 1rem;
   cursor: pointer;
 }
 
