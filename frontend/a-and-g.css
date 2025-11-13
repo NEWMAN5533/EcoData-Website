@@ -126,7 +126,52 @@ body {
   border-end-end-radius: 3rem;
   border-end-start-radius: 3rem;
   border: 0.1px solid var(--background-cl);
+  margin-top: 3rem;
 }
+
+.nav-icons{
+  display:flex;
+  width: 100%;
+  justify-self: center;
+  height: 3.2rem;
+  top: 0;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-cl);
+  position: fixed;
+  overflow: hidden;
+  padding: 0.2rem 1rem;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.4);
+  z-index: 10000;
+}
+
+.nav-icons .nav-icon-left{
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.nav-icon-left img{
+  width: 2.8rem;
+  height: 2.8rem;
+  cursor: pointer;
+}
+
+.nav-icon-right{
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.nav-icon-right img{
+  width: 2.3rem;
+  height: 2.3rem;
+  background: rgb(236, 231, 231);
+  padding: .1rem;
+  border-radius: .3rem;
+  cursor: pointer;
+}
+
 
 .a-g{
   border-radius: 50%;

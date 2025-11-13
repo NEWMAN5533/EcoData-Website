@@ -27,37 +27,130 @@
   background-color: rgba(0, 0, 0, 0.6);
   justify-content: center;
   align-items: center;
+  justify-self: center;
   z-index: 9999;
+}
+
+.selected-div{
+  display: flex;
+  width: 100%;
+  height: 12rem;
+  max-width: 350px;
+  justify-self: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background: rgb(224, 116, 44);
+  border-radius: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.selected-div h4{
+  color: rgb(58, 53, 53);
+  font-size: 1.3rem;
+  font-weight: 600;
+  font-family: serif;
+  background: rgba(206, 180, 151, 0.164);
+  padding: .5rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 6px rgba(109, 105, 100, 0.3);
+
+}
+
+.placeholders-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  gap: 2.5rem;
+  padding: .5rem;;
+}
+
+.placeholdersbtn-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  height: 4rem;
+  flex-direction: column;
+}
+
+.placeholdersbtn-wrapper small{
+  font-size: 1rem;
+}
+
+.placeholders-left{
+  display: flex;
+  width: 100%;
+  height: 2rem;
+  font-size: 1rem;
+  font-family: serif;
+  font-weight: 600;
+  max-width: 140px;
+  align-items: center;
+  justify-content: center;
+  right: 1rem;
+  background: rgba(226, 221, 221, 0.507);
+  border: 0.1px solid rgb(230, 165, 105);
+  border-radius: 2rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2)
+}
+
+.placeholders-right{
+  display: flex;
+  width: 100%;
+  height: 2rem;
+  font-size: 1rem;
+  font-family: serif;
+  font-weight: 600;
+  max-width: 140px;
+  align-items: center;
+  justify-content: center;
+  left: 1rem;
+  background: rgba(226, 223, 223, 0.507);
+  border: 0.1px solid rgb(226, 167, 118);
+  border-radius: 2rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .modal.show {
   display: flex;
+  flex-direction: column;
+  overflow: hidden;
   animation: fadeIn 0.3s ease;
 }
 
 .modal-content {
-  background: #fff;
+  background: #0b0a0f;
   padding: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;  
   border-radius: 16px;
   width: 90%;
-  max-width: 350px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  height: 26rem;
+  max-width: 380px;
+  box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
   text-align: center;
   animation: popUp 0.3s ease;
+  border: 2px solid rgb(23, 129, 228);
 }
 
 .modal-content h3 {
   font-size: 1.1rem;
-  color: #111;
-  margin-bottom: 1.2rem;
+  color: #ffffff;
+  margin-bottom: 0;
   font-weight: 600;
 }
 
 .modal-content input {
   width: 100%;
-  padding: 12px;
+  max-width: 280px;
+  height: 4rem;
+  padding: 8px;
   color: white;
-  border: 2px solid #ccc;
+  border: 2px solid #703b4b;
   border-radius: 10px;
   font-size: 1.1rem;
   text-align: center;
@@ -72,27 +165,43 @@
 
 .modal-buttons {
   display: flex;
-  gap: 12px;
-  justify-content: center;
+  width: 100%;
+  max-width: 380px;
+  height: 5rem;
+  background-color: rgba(59, 56, 56, 0.253);
+  border-radius: 6px;
+  padding: .9rem 1.1rem;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  gap: 2rem;
 }
 
 .modal-buttons .btn {
   flex: 1;
   padding: 10px;
+  width: max-content;
   border: none;
-  border-radius: 8px;
+  border-radius: 4px;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 0.95rem;
 }
 
 .modal-buttons .cancel {
+  width: 30%;
+  height: 2.3rem;
   background: #888;
   color: #fff;
 }
 
 .modal-buttons .continue {
-  background: #2196f3;
+  width: 100%;
+  height: 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #257a30;
   color: #fff;
 }
 
@@ -1981,7 +2090,7 @@ SNACKBAR SECTION
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 90%;
+  max-width: 480px;
   justify-content: center;
   align-items: center;
   justify-self: center;
@@ -2068,6 +2177,148 @@ SNACKBAR SECTION
 }
 
 
+
+
+/* Partner Card */
+.partners-card {
+  display: flex;
+  align-items: center;
+  width: 450px;
+  height: 11rem;
+  background:whitesmoke;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(158, 156, 156, 0.5);
+  overflow: hidden;
+  transition: 0.3s;
+  border: 1px solid rgb(245, 206, 212);
+}
+
+
+.partner-card-left{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  background: rgb(2, 2, 2);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+.left-top{
+  display: flex;
+  width: 100%;
+  height: 40%;
+  align-items: center;
+  justify-content: center;
+}
+
+.left-top img{
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  margin-top: 2rem;
+}
+
+
+
+
+.left-bottom{
+  display: flex;
+  width: 100%;
+  height: 60%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.left-bottom h2{
+  font-size: 1.2rem;
+  font-family: serif;
+  color: white;
+}
+
+.partner-page-btn{
+  border: none;
+  width: 11rem;
+  padding: .4rem;
+  background: linear-gradient(135deg, rgb(230, 98, 120), rgb(64, 64, 230));
+  color: black;
+  font-weight: 600;
+  font-size: .9rem;
+  font-family: serif;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+
+.partner-card-right{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.partner-card-right video{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  object-fit: cover;
+  align-self: center;
+}
+
+
+
+
+
+
+
+
+
+
+.partners-card:hover {
+  transform: translateY(-5px);
+}
+
+.partner-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.partner-info {
+  padding: 15px;
+}
+
+.partner-info h3 {
+  margin: 0 0 5px;
+  font-size: 18px;
+  color: #3f51b5;
+}
+
+.partner-info p {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.partner-info button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  border: none;
+  background: #2196f3;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.partner-info button:hover {
+  background: #1976d2;
+}
 
 
 

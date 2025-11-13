@@ -112,7 +112,7 @@
       </div>
         <button class="buy-btn" 
   data-network="mtn"
-   data-package= "mtn_data_bundle"
+  data-package= "mtn_data_bundle"
   data-size="1"
   data-price="6">Buy</button>
       </div>
@@ -803,9 +803,26 @@
   </div>
 
   <!-- Partner cards scroll horizontally -->
-  <div class="partners-scroll" id="partnersScroll">
-    <p class="loading-text">Loading partners...</p>
-  </div>
+    <!-- 🧱 Partners Grid -->
+  <section class="partners-grid">
+    <div class="partners-card">
+      <div class="partner-card-left">
+        <div class="left-top">
+          <img src="./css/images/Apple_AirPods_Max_-_Starlight.jpg" alt="images" loading="lazy">
+        </div>
+        <div class="left-bottom">
+          <h2>A&G Accessories</h2>
+          <a href="partner-page.html">
+            <button class="partner-page-btn">Visit Page</button>
+          </a>
+        </div>
+      </div>
+      <div class="partner-card-right"><video autoplay muted loop playsinline>
+        <source src="./css/images/WhatsApp Video 2025-11-10 at 20.09.38_2a437152.mp4">
+      </video>
+      </div>
+    </div>
+  </section>
 
   <div class="see-more">
     <a href="join-as-partner.html">Become a Partner</a>
@@ -829,11 +846,28 @@
 <!-- Phone Input Modal -->
 <div id="phoneModal" class="modal">
   <div class="modal-content">
-    <h3>Enter your phone number to receive the Bundle package</h3>
-    <input type="tel" id="recipientInput" placeholder="e.g. 233241234567" />
+<!-----SELECTED-->
+      <div class="selected-div">
+    <h4>Selected Package Details</h4>
+    <div class="placeholders-wrapper">
+      <div class="placeholdersbtn-wrapper">
+              <small>Price</small>
+            <div class="placeholders-left"  id="priceTag">
+    </div>
+      </div>
+
+        <div class="placeholdersbtn-wrapper">
+          <small>Network/GB</small>
+            <div class="placeholders-right" id="networkTag">
+    </div>
+        </div>
+    </div>
+  </div>
+    <h3>Enter Bundle Recipient</h3>
+    <input type="tel" id="recipientInput" placeholder="e.g. 0241234567"/>
     <div class="modal-buttons">
       <button id="cancelBtn" class="btn cancel">Cancel</button>
-      <button id="confirmBtn" class="btn continue">Continue</button>
+      <button id="confirmBtn" class="btn continue">Proceed to Paystack</button>
     </div>
 </div>
 </div>
