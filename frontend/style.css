@@ -711,7 +711,7 @@ WELCOME CARD
 
   .close-time small{
     font-size: 1.1rem;
-    color: var(--card-full-tele-bg-cl);
+    color: rgb(7, 138, 138);
     font-family: 'Times New Roman', Times, serif;
   }
 
@@ -791,6 +791,51 @@ WELCOME CARD
 /*** snackbar ends***/
 
 
+/*******
+NOTICE BOARD SECTION
+*******/
+.notice-container{
+  width: 100%;
+  max-width: 480px;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1rem;
+  position: relative;
+  background: transparent;
+  margin-top: .8rem
+}
+
+.notice-board{
+  width: 100%;
+  max-width: max-content;
+  padding: .5rem .5rem;
+  height: max-content;
+  align-items: center;
+  justify-content: flex-start;
+  display: flex;
+  border: 0.1px solid var(--background-cl);
+   border-radius: .5rem;
+}
+
+.notice-board small{
+  font-size: .9rem;
+}
+
+.notice-board small span{
+  padding: .1rem .5rem;
+  background: rgba(15, 172, 146, 0.842);
+  color: white;
+  margin-right: .3rem;
+  border-radius: 50%;
+}
+
+
+
+
+
+
 
 
 
@@ -807,7 +852,7 @@ ORDER STATUS
   justify-content: center;
   flex-direction: column;
   max-width: 400px;
-  margin: 2rem auto;
+  margin: 1rem auto;
   padding: .5rem;
   gap: 1rem;
   text-align: center;

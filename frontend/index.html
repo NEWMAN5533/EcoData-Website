@@ -51,6 +51,12 @@
     <div id="clock"></div>
   </div>
 </div>
+<section class="notice-container">
+    <!----NOTICE-->
+    <div class="notice-board">
+      <small><span>!</span>Orders after 9pm will be delivered in the morning.</small>
+    </div>
+</section>
 
 <section class="two-div-container">
 
@@ -987,9 +993,9 @@
 
     if (user) {
       const userSnap = await getDoc(doc(db, "users", user.uid));
-      usernameDisplay.textContent = `Welcome, ${userSnap.data().username}!`;
+      usernameDisplay.textContent = `Welcome Back, ${userSnap.data().username}!`;
     } else {
-      usernameDisplay.textContent = "Welcome, Dear!";
+      usernameDisplay.textContent = "Welcome Back, Dear!";
     }
 });
 </script>

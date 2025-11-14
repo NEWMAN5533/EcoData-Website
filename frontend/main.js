@@ -25,8 +25,10 @@ document.querySelectorAll(".buy-btn").forEach(button => {
 
 
 
+
     // Show phone input modal first
     createPhoneModal(recipient => {
+
 
       payWithPaystack(network, recipient, packageName, size, price);
     });
@@ -35,11 +37,11 @@ document.querySelectorAll(".buy-btn").forEach(button => {
 });
 
 function createPhoneModal(callback) {
+
   const modal = document.getElementById("phoneModal");
   const confirmBtn = document.getElementById("confirmBtn");
   const cancelBtn = document.getElementById("cancelBtn");
   const input = document.getElementById("recipientInput");
-
 
 
   // Show modal
