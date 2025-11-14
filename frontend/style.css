@@ -4919,19 +4919,20 @@ ORDER STATUS
 }
 
 .order-status-section input {
-  height: 2.2rem;
-  width: 80%;
+  height: 2.6rem;
+  width: 60%;
   padding: 10px;
   color: white;
   font-size: .9rem;
   font-weight: 600;
-  border: 1px solid #ebe5e5;
+  border: 2px solid #497ddd;
   border-radius: 8px;
   margin-bottom: 1rem;
 }
 
 .order-status-section button {
   background-color: #2196F3;
+  width: 10rem;
   color: white;
   border: none;
   padding: 8px 16px;
@@ -5012,13 +5013,26 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 
 
 /**---NETWORKS-PURCHASED-DETAILS---**/
+
+.two-div-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+}
+
+
+
 .networks-purchased-container {
   width: 100%;
-  max-width: 400px;
+  max-width: 450px;
   background: transparent;
-  height: 8rem;
+  height: 9rem;
   margin: .5rem 0;
   gap: .4rem;
+  border: 1px solid rgb(226, 223, 221);
 }
 
 .purchase-title {
@@ -5034,7 +5048,7 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 .purchase-title h5{
   font-size: 1.2rem;
   text-align: center;
-  color: rgb(51, 51, 34);
+  color: rgb(0, 0, 0);
   font-family: 'Times New Roman', Times;
 }
 
@@ -5044,7 +5058,7 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: .5rem;
+  gap: .9rem;
 }
 
 .purchase-container a{
@@ -5053,9 +5067,9 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
 .purchase-container a .card-box{
-  width:  6rem;
+  width:  8rem;
   height: 4rem;
-  font-size: .7rem;
+  font-size: 1rem;
 }
 
 
