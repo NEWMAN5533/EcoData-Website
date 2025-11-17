@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Home -->
+  <url>
+    <loc>https://ecodata-app.onrender.com/</loc>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Main Pages -->
+  <url>
+    <loc>https://ecodata-app.onrender.com/index.html</loc>
+  </url>
+
+  <url>
+    <loc>https://ecodata-app.onrender.com/bundleInfo.html</loc>
+  </url>
+
+  <url>
+    <loc>https://ecodata-app.onrender.com/terms.html</loc>
+  </url>
+
+  <url>
+    <loc>https://ecodata-app.onrender.com/login.html</loc>
+  </url>
+
+  <url>
+    <loc>https://ecodata-app.onrender.com/signup.html</loc>
+  </url>
+
+  <!-- Partner Section -->
+  <url>
+    <loc>https://ecodata-app.onrender.com/business-partners.html</loc>
+  </url>
+
+  <url>
+    <loc>https://ecodata-app.onrender.com/join-as-partner.html</loc>
+  </url>
+
+  <url>
+    <loc>https://ecodata-app.onrender.com/partner-page.html</loc>
+  </url>
+
+  <url>
+    <loc>https://ecodata-app.onrender.com/partner-details.html</loc>
+  </url>
+
+  <!-- Dashboard (only if accessible) -->
+  <url>
+    <loc>https://ecodata-app.onrender.com/dashboard.html</loc>
+  </url>
+
+</urlset>
