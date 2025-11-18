@@ -4362,6 +4362,16 @@ ORDER STATUS
 ***/
 
 
+.two-div-container{
+  width: 100%;
+  max-width: 375px;
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  justify-content: center;
+}
+
+
 
 /*****
 LIVE ORDER STATUS CHECK TABLE
@@ -4607,22 +4617,30 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 /**--SECTION-TITLE-ENDS--**/
 
 
-
-
+.two-div-container{
+  width: 100%;
+  max-width: 414px;
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  justify-content: center;
+}
 
 /*------REAL BUNDLE CARD-MTN--*/
 .bundle-cards-container {
   width: 100%;
   max-width: 404px;
   height: max-content;
+  justify-self: center;
 }
 
 /**
 CARD CONTAINER
 **/
 .bundle-card-container {
-  width: 94%;
+  width: 100%;
   height: auto;
+  justify-self: center;
   display: flex;
   margin: 0.5rem 0;
   flex-wrap: wrap;
