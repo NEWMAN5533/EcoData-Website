@@ -1291,60 +1291,6 @@ window.addEventListener("click", function(e){
 
 
 <!-----orderStatusTracker-->
-<script>
-async function trackOrder(orderId) {
-  const msgBox = document.getElementById("live-status-message");
-
-  function activateStep(stepId) {
-    document.querySelectorAll(".step").forEach(s => {
-      s.classList.remove("active");
-      s.classList.remove("completed");
-    });
-
-    if (stepId === "pending") {
-      document.getElementById("step-pending").classList.add("active");
-      msgBox.textContent = "Your order is pending...";
-    }
-
-    if (stepId === "processing") {
-      document.getElementById("step-pending").classList.add("completed");
-      document.getElementById("step-processing").classList.add("active");
-      msgBox.textContent = "Your bundle is being processed...";
-    }
-
-    if (stepId === "completed") {
-      document.getElementById("step-pending").classList.add("completed");
-      document.getElementById("step-processing").classList.add("completed");
-      document.getElementById("step-delivered").classList.add("active");
-      msgBox.textContent = "Bundle delivered successfully!";
-    }
-  }
-
-  async function pollStatus() {
-    try {
-      const res = await fetch(`/api/v1/order/status/${orderId}`);
-      const data = await res.json();
-
-      if (!data.success) return;
-
-      const status = data.order.status.toLowerCase();
-
-      if (status.includes("pending")) activateStep("pending");
-      if (status.includes("processing") || status.includes("queued")) activateStep("processing");
-      if (status.includes("completed") || status.includes("success")) activateStep("completed");
-
-    } catch (err) {
-      console.log("Error updating tracker:", err);
-    }
-  }
-
-  // Poll every 4 seconds
-  setInterval(pollStatus, 4000);
-
-  // Initial call
-  pollStatus();
-}
-</script>
 
 
 

@@ -165,6 +165,16 @@ async function orderBundle(network, recipient, packageName, size, reference) {
         ? "http://localhost:3000"
         : "https://ecodata-app.onrender.com";
 
+
+const ORDER_STATUS = {
+  PENDING: "pending",
+  PROCESSING: "processing",
+  COMPLETED: "completed"
+};
+
+// Shared interval ID for clearing later
+let trackerInterval = null;
+
     // ✅ Build query string for GET request
     const query = new URLSearchParams({
       network,
@@ -198,6 +208,13 @@ async function orderBundle(network, recipient, packageName, size, reference) {
 
       // Update dashboard UI or order history
       handleNewOrder(returnedOrder);
+
+      // START REAL-TIME TRACKING
+      trackOrder(returnedOrder.orderId || returnedOrder.reference);
+
+
+
+
     } else {
       showSnackBar(`Failed to purchase data: ${result.message || "Unknown error"}`);
     }
@@ -206,6 +223,61 @@ async function orderBundle(network, recipient, packageName, size, reference) {
     showSnackBar("⚠ Server error. Please try again later.");
   }
 }
+
+// === TRACK ORDER STATUS ===
+async function trackOrder(orderId) {
+  const msgBox = document.getElementById("live-status-message");
+
+  function activateStep(stepId) {
+    document.querySelectorAll(".step").forEach(s => {
+      s.classList.remove("active", "completed");
+    });
+
+    if (stepId === ORDER_STATUS.PENDING) {
+      document.getElementById("step-pending").classList.add("active");
+      msgBox.textContent = "Your order is pending...";
+    } else if (stepId === ORDER_STATUS.PROCESSING) {
+      document.getElementById("step-pending").classList.add("completed");
+      document.getElementById("step-processing").classList.add("active");
+      msgBox.textContent = "Your bundle is being processed...";
+    } else if (stepId === ORDER_STATUS.COMPLETED) {
+      document.getElementById("step-pending").classList.add("completed");
+      document.getElementById("step-processing").classList.add("completed");
+      document.getElementById("step-delivered").classList.add("active");
+      msgBox.textContent = "Bundle delivered successfully!";
+    }
+  }
+
+  async function pollStatus() {
+    try {
+      const res = await fetch(`${API_BASE}/api/v1/order/status/${encodeURIComponent(orderId)}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" }
+      });
+
+      const data = await res.json();
+
+      if (!data.success) return;
+
+      const status = data.order.status.toLowerCase();
+
+      if (status.includes(ORDER_STATUS.PENDING)) activateStep(ORDER_STATUS.PENDING);
+      if (status.includes(ORDER_STATUS.PROCESSING)) activateStep(ORDER_STATUS.PROCESSING);
+      if (status.includes(ORDER_STATUS.COMPLETED)) {
+        activateStep(ORDER_STATUS.COMPLETED);
+        clearInterval(trackerInterval); // Stop polling
+      }
+    } catch (err) {
+      console.error("Error updating tracker:", err);
+    }
+  }
+
+  // Poll every 4 seconds
+   if (trackerInterval) clearInterval(trackerInterval); // safety clear
+  trackerInterval = setInterval(pollStatus, 4000);
+  pollStatus(); // initial call
+}
+
 
 // ✅ Save Guest Orders to Local Storage
 function saveGuestOrder(orderData) {
