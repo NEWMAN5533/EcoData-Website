@@ -166,14 +166,6 @@ async function orderBundle(network, recipient, packageName, size, reference) {
         : "https://ecodata-app.onrender.com";
 
 
-const ORDER_STATUS = {
-  PENDING: "pending",
-  PROCESSING: "processing",
-  COMPLETED: "completed"
-};
-
-// Shared interval ID for clearing later
-let trackerInterval = null;
 
     // ✅ Build query string for GET request
     const query = new URLSearchParams({
@@ -192,7 +184,7 @@ let trackerInterval = null;
     const result = await response.json();
 
     if (result.success) {
-      showSnackBar("✅ Data bundle purchased successfully!");
+      showSnackBar("✅ Order Placed successfully!");
 
       // The order object returned from server
       const returnedOrder = result.order?.order || result.order || result;
@@ -202,6 +194,13 @@ let trackerInterval = null;
       saveOrderToFirestore(returnedOrder).then((fireId) => {
         if (fireId) console.log("Order persisted in Firestore:", fireId);
 
+        const order = result.order;
+        if(!order.swiftOrderId) {
+          console.log("No Swiftdata OrderId returned!");
+          showSnackBar("Order Created but no tracking ID returned!")
+          return;
+        }
+
         // ✅ Save locally for guests (important fix!)
         saveGuestOrder(returnedOrder);
       });
@@ -210,10 +209,7 @@ let trackerInterval = null;
       handleNewOrder(returnedOrder);
 
       // START REAL-TIME TRACKING
-      trackOrder(returnedOrder.orderId || returnedOrder.reference);
-
-
-
+      trackOrder(order.swiftOrderId);
 
     } else {
       showSnackBar(`Failed to purchase data: ${result.message || "Unknown error"}`);
@@ -224,10 +220,19 @@ let trackerInterval = null;
   }
 }
 
-// === TRACK ORDER STATUS ===
+
+const ORDER_STATUS = {
+  PENDING: "pending",
+  PROCESSING: "processing",
+  COMPLETED: "completed",
+};
+
+let trackerInterval = null;
+
 async function trackOrder(orderId) {
   const msgBox = document.getElementById("live-status-message");
 
+  // ---- UI Step Handler ----
   function activateStep(stepId) {
     document.querySelectorAll(".step").forEach(s => {
       s.classList.remove("active", "completed");
@@ -235,48 +240,59 @@ async function trackOrder(orderId) {
 
     if (stepId === ORDER_STATUS.PENDING) {
       document.getElementById("step-pending").classList.add("active");
-      msgBox.textContent = "Your order is pending...";
-    } else if (stepId === ORDER_STATUS.PROCESSING) {
+      msgBox.textContent = "Order submitted...";
+    }
+
+    if (stepId === ORDER_STATUS.PROCESSING) {
       document.getElementById("step-pending").classList.add("completed");
       document.getElementById("step-processing").classList.add("active");
-      msgBox.textContent = "Your bundle is being processed...";
-    } else if (stepId === ORDER_STATUS.COMPLETED) {
+      msgBox.textContent = "Processing your bundle...";
+    }
+
+    if (stepId === ORDER_STATUS.COMPLETED) {
       document.getElementById("step-pending").classList.add("completed");
       document.getElementById("step-processing").classList.add("completed");
       document.getElementById("step-delivered").classList.add("active");
-      msgBox.textContent = "Bundle delivered successfully!";
+      msgBox.textContent = "Delivered successfully!";
     }
   }
 
+  // ---- POLLING FUNCTION ----
   async function pollStatus() {
     try {
-      const res = await fetch(`${API_BASE}/api/v1/order/status/${encodeURIComponent(orderId)}`, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" }
-      });
+      // FIXED ❗— this is your correct backend endpoint
+      const res = await fetch(`${API_BASE}/api/v1/order/status/${orderId}`);
 
       const data = await res.json();
+      console.log("📡 LIVE STATUS:", data);
 
       if (!data.success) return;
 
-      const status = data.order.status.toLowerCase();
+      // FIXED ❗ — SwiftData returns: data.order.status
+      const status = (data.order.status || "").toLowerCase();
 
-      if (status.includes(ORDER_STATUS.PENDING)) activateStep(ORDER_STATUS.PENDING);
-      if (status.includes(ORDER_STATUS.PROCESSING)) activateStep(ORDER_STATUS.PROCESSING);
-      if (status.includes(ORDER_STATUS.COMPLETED)) {
+      if (status.includes("pending")) activateStep(ORDER_STATUS.PENDING);
+
+      if (status.includes("processing")) activateStep(ORDER_STATUS.PROCESSING);
+
+      if (status.includes("completed")) {
         activateStep(ORDER_STATUS.COMPLETED);
-        clearInterval(trackerInterval); // Stop polling
+        clearInterval(trackerInterval); // STOP polling
       }
+
     } catch (err) {
-      console.error("Error updating tracker:", err);
+      console.error("Status fetch error:", err);
     }
   }
 
-  // Poll every 4 seconds
-   if (trackerInterval) clearInterval(trackerInterval); // safety clear
+  // Start polling
+  if (trackerInterval) clearInterval(trackerInterval);
+
   trackerInterval = setInterval(pollStatus, 4000);
-  pollStatus(); // initial call
+  pollStatus(); // run instantly
 }
+
+
 
 
 // ✅ Save Guest Orders to Local Storage

@@ -149,17 +149,23 @@ app.get("/api/buy-data", async (req, res) => {
   return res.status(result.status).json(result.body);
 });
 
-// Status route
+// Correct SwiftData Status Route
 app.get("/api/v1/order/status/:orderIdOrRef", async (req, res) => {
   const { orderIdOrRef } = req.params;
 
   if (!orderIdOrRef) {
-    return res.status(400).json({ success: false, message: "Missing order ID or reference" });
+    return res.status(400).json({
+      success: false,
+      message: "Missing order ID or reference",
+    });
   }
 
   try {
-    const base = (process.env.SWIFT_BASE_URL || "https://swiftdata-link.com").replace(/\/$/, "");
-    const swiftUrl = `${base}/order/status/${encodeURIComponent(orderIdOrRef)}`;
+    const swiftUrl = `https://swiftdata-link.com/api/v1/order/status/${encodeURIComponent(
+      orderIdOrRef
+    )}`;
+
+    console.log("🔍 SwiftData URL:", swiftUrl);
 
     const response = await axios.get(swiftUrl, {
       headers: {
@@ -169,22 +175,19 @@ app.get("/api/v1/order/status/:orderIdOrRef", async (req, res) => {
       timeout: 10000,
     });
 
-    if (response.data?.success) {
-      return res.json({ success: true, order: response.data.order });
-    } else {
-      return res.status(400).json({
-        success: false,
-        message: response.data?.message || "Failed to fetch order status",
-        details: response.data,
-      });
-    }
+    return res.json({
+      success: true,
+      order: response.data,
+    });
   } catch (error) {
+    console.error("⚠ SwiftData Status Error:", error.response?.data || error.message);
+
     return res.status(500).json({
       success: false,
       message: "Error fetching order status",
       error: error.response?.data || error.message,
-    });
-  }
+});
+}
 });
 
 // Frontend fallback

@@ -72,12 +72,16 @@
 }
 
 .step.active .dot {
-  background: #007bff;
+  background: #3498db;
   transform: scale(1.2);
+  box-shadow: 0 0 10px #3498db;
+  animation: ping 1.5s infinite ease-out;
 }
 
 .step.completed .dot {
-  background: #009e2a;
+  background: #2ecc71;
+  box-shadow:  0 0 10px #2ecc71;
+
 }
 
 .step.active p {
@@ -91,6 +95,17 @@
   color: #555;
   transition:0.4s ease;
 }
+
+@keyframes ping  {
+  0%{ 
+    transform: scale(.9); opacity: 1;
+  }
+  100%{
+    transform: scale(1.3); opacity: 0.3;
+  }
+}
+
+
 
 
 
