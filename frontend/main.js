@@ -157,6 +157,8 @@ async function saveOrderToFirestore(orderObj) {
 }
 }
 
+
+
 // === SEND ORDER TO BACKEND ===
 async function orderBundle(network, recipient, packageName, size, reference) {
   try {
@@ -187,29 +189,31 @@ async function orderBundle(network, recipient, packageName, size, reference) {
       showSnackBar("✅ Order Placed successfully!");
 
       // The order object returned from server
-      const returnedOrder = result.order?.order || result.order || result;
-      console.log("📦 Order details:", returnedOrder);
+      const swiftOrder = result.order;// direct swiftData result
+
+      console.log("📦 Order details:", swiftOrder);
 
       // ✅ Save to Firestore
-      saveOrderToFirestore(returnedOrder).then((fireId) => {
+      saveOrderToFirestore(swiftOrder).then((fireId) => {
         if (fireId) console.log("Order persisted in Firestore:", fireId);
 
-        const order = result.order;
-        if(!order.swiftOrderId) {
-          console.log("No Swiftdata OrderId returned!");
+        const swiftOrderId = swiftOrder.orderId || swiftOrder.data?.orderId || swiftOrder.id || swiftOrder.orderRef;
+
+        if(!swiftOrderId) {
+          console.warn("No Swiftdata OrderId returned!");
           showSnackBar("Order Created but no tracking ID returned!")
           return;
         }
 
         // ✅ Save locally for guests (important fix!)
-        saveGuestOrder(returnedOrder);
+        saveGuestOrder(swiftOrder);
       });
 
       // Update dashboard UI or order history
-      handleNewOrder(returnedOrder);
+      handleNewOrder(swiftOrder);
 
       // START REAL-TIME TRACKING
-      trackOrder(order.swiftOrderId);
+      trackOrder(swiftOrderId);
 
     } else {
       showSnackBar(`Failed to purchase data: ${result.message || "Unknown error"}`);
@@ -269,7 +273,7 @@ async function trackOrder(orderId) {
       if (!data.success) return;
 
       // FIXED ❗ — SwiftData returns: data.order.status
-      const status = (data.order.status || "").toLowerCase();
+      const status = data.order?.data?.status?.toLowerCase() || "";
 
       if (status.includes("pending")) activateStep(ORDER_STATUS.PENDING);
 
@@ -451,19 +455,19 @@ function startAutoPolling(orderIdOrRef) {
 /**
  * Call this after your backend returns an order reply.
  * Example usage inside orderBundle function after successful response:
- *    const returnedOrder = result.order || result.swift || result; 
- *    handleNewOrder(returnedOrder);
+ *    const swiftOrder = result.order || result.swift || result; 
+ *    handleNewOrder(swiftOrder);
  */
-function handleNewOrder(returnedOrder) {
-  if (!returnedOrder) return;
+function handleNewOrder(swiftOrder) {
+  if (!swiftOrder) return;
   // The Swift response may place order data at top-level or inside order object.
   // Normalize fields:
   const normalized = {
-    orderId: returnedOrder.orderId || returnedOrder.orderId || returnedOrder.reference || returnedOrder.reference,
-    reference: returnedOrder.reference || returnedOrder.reference,
-    status: returnedOrder.status || returnedOrder.status || "pending",
-    recipient: returnedOrder.items?.[0]?.recipient || returnedOrder.recipient || "-",
-    volume: returnedOrder.items?.[0]?.volume ?? returnedOrder.volume ?? "-"
+    orderId: swiftOrder.orderId || swiftOrder.orderId || swiftOrder.reference || swiftOrder.reference,
+    reference: swiftOrder.reference || swiftOrder.reference,
+    status: swiftOrder.status || swiftOrder.status || "pending",
+    recipient: swiftOrder.items?.[0]?.recipient || swiftOrder.recipient || "-",
+    volume: swiftOrder.items?.[0]?.volume ?? swiftOrder.volume ?? "-"
   };
 
   // Save last order id/ref to localStorage for later check
@@ -525,7 +529,6 @@ function handleNewOrder(returnedOrder) {
           <div class="order-extra">
             <p><strong>Network:</strong> ${order.network || '--'}</p>
             <p><strong>Bundle:</strong> ${order.bundle || '--'}</p>
-            <p><strong>Amount:</strong> GHS ${order.amount || '--'}</p>
             <p><strong>Date:</strong> ${new Date(order.createdAt).toLocaleString()}</p>
             <p><strong>Recipient:</strong> ${order.recipient || '--'}</p>
           </div>
