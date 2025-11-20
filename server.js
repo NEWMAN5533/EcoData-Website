@@ -7,14 +7,8 @@ import axios from "axios";
 
 dotenv.config();
 
-// ✅ Correct way for ES Modules:
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-
-
-
-
 
 const app = express();
 app.use(cors());
@@ -22,36 +16,65 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "frontend")));
 
+// 🚨 Prevent duplicate orders (Memory Cache)
+const processedOrders = new Map();
+
+/*
+  Structure:
+  processedOrders.set(paymentReference, {
+      status: "success" | "failed",
+      response: {...}   // SwiftData response
+  });
+*/
+
 // Helper: common logic for buy-data (POST or GET)
 async function handleBuyDataRequest({ network, recipient, pkg, size, paymentReference }) {
   if (!network || !recipient || !pkg || !paymentReference) {
     return { ok: false, status: 400, body: { success: false, message: "Missing required fields" } };
   }
 
-  // 1. Verify Paystack payment
-  try {
-    const verify = await axios.get(`https://api.paystack.co/transaction/verify/${paymentReference}`, {
-      headers: {
-        Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
-      },
-      timeout: 10000,
-    });
+  // 🚨 1. STOP DUPLICATE REQUESTS HERE
+  if (processedOrders.has(paymentReference)) {
+    return {
+      ok: true,
+      status: 200,
+      body: {
+        success: true,
+        message: "Order already processed (duplicate prevented)",
+        order: processedOrders.get(paymentReference).response
+      }
+    };
+  }
 
-    // paystack response structure check
-    if (!verify.data || !verify.data.data || verify.data.data.status !== "success") {
-      return { ok: false, status: 400, body: { success: false, message: "Payment not verified by Paystack" } };
+  // 2. Verify Paystack payment
+  try {
+    const verify = await axios.get(
+      `https://api.paystack.co/transaction/verify/${paymentReference}`,
+      {
+        headers: { Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}` },
+        timeout: 10000,
+      }
+    );
+
+    if (!verify.data?.data || verify.data.data.status !== "success") {
+      return {
+        ok: false,
+        status: 400,
+        body: { success: false, message: "Payment not verified by Paystack" }
+      };
     }
 
-    // 2. Build SwiftData order payload
+    // 3. Build SwiftData order payload
     const orderData = {
       type: "single",
       volume: parseInt(size, 10),
       phone: recipient,
       offerSlug: pkg,
-      webhookUrl: process.env.SWIFT_WEBHOOK_URL || "https://swiftdata-link.com/api/webhooks/orders",
+      webhookUrl:
+        process.env.SWIFT_WEBHOOK_URL || "https://swiftdata-link.com/api/webhooks/orders",
     };
 
-    // 3. Post to SwiftData
+    // 4. Post to SwiftData
     const swiftBase = (process.env.SWIFT_BASE_URL || "https://swiftdata-link.com").replace(/\/$/, "");
     const swiftUrl = `${swiftBase}/order/${network}`;
 
@@ -63,48 +86,80 @@ async function handleBuyDataRequest({ network, recipient, pkg, size, paymentRefe
       timeout: 15000,
     });
 
-    if (swiftRes.data && swiftRes.data.success) {
-      return { ok: true, status: 200, body: { success: true, message: "Bundle order placed", order: swiftRes.data } };
+    // ❇ SAVE RESULT TO PREVENT DUPLICATES
+    processedOrders.set(paymentReference, {
+      status: "success",
+      response: swiftRes.data,
+    });
+
+    if (swiftRes.data?.success) {
+      return {
+        ok: true,
+        status: 200,
+        body: {
+          success: true,
+          message: "Bundle order placed",
+          order: swiftRes.data,
+        },
+      };
     } else {
-      return { ok: false, status: 400, body: { success: false, message: "SwiftData request failed", details: swiftRes.data } };
+      return {
+        ok: false,
+        status: 400,
+        body: {
+          success: false,
+          message: "SwiftData request failed",
+          details: swiftRes.data,
+        },
+      };
     }
   } catch (err) {
-    // Provide useful logging info for debugging
     const errData = err.response?.data || err.message || err;
     console.error("🔥 handleBuyDataRequest error:", errData);
-    return { ok: false, status: 500, body: { success: false, message: "Failed to process data order", error: errData } };
+
+    // Save failure so duplicate network retry does not call Swift again
+    processedOrders.set(paymentReference, {
+      status: "failed",
+      response: errData,
+    });
+
+    return {
+      ok: false,
+      status: 500,
+      body: {
+        success: false,
+        message: "Failed to process data order",
+        error: errData,
+      },
+    };
   }
 }
 
-// POST route (original)
+// POST route
 app.post("/api/buy-data", async (req, res) => {
   const { network, recipient, package: pkg, size, paymentReference } = req.body;
   const result = await handleBuyDataRequest({ network, recipient, pkg, size, paymentReference });
   return res.status(result.status).json(result.body);
 });
 
-// GET route (for frontend that sends query params)
+// GET route
 app.get("/api/buy-data", async (req, res) => {
-  // req.query keys: network, recipient, package, size, paymentReference
   const { network, recipient, package: pkg, size, paymentReference } = req.query;
   const result = await handleBuyDataRequest({ network, recipient, pkg, size, paymentReference });
   return res.status(result.status).json(result.body);
 });
 
-// GET order status from SwiftData
+// Status route
 app.get("/api/v1/order/status/:orderIdOrRef", async (req, res) => {
   const { orderIdOrRef } = req.params;
+
   if (!orderIdOrRef) {
     return res.status(400).json({ success: false, message: "Missing order ID or reference" });
   }
 
   try {
     const base = (process.env.SWIFT_BASE_URL || "https://swiftdata-link.com").replace(/\/$/, "");
-    // NOTE: some Swift docs use /order/status/:id while other use /api/v1/order/status/:id — pick what your provider expects:
-    // I'm using /order/status/:id which you used earlier; change if your Swift uses /api/v1/order/status/:id
     const swiftUrl = `${base}/order/status/${encodeURIComponent(orderIdOrRef)}`;
-
-    console.log("🔍 Checking SwiftData Order Status:", swiftUrl);
 
     const response = await axios.get(swiftUrl, {
       headers: {
@@ -114,19 +169,25 @@ app.get("/api/v1/order/status/:orderIdOrRef", async (req, res) => {
       timeout: 10000,
     });
 
-    if (response.data && response.data.success) {
+    if (response.data?.success) {
       return res.json({ success: true, order: response.data.order });
     } else {
-      // If swift returns html or other content, dump for debugging
-      return res.status(400).json({ success: false, message: response.data?.message || "Failed to fetch order status", details: response.data });
+      return res.status(400).json({
+        success: false,
+        message: response.data?.message || "Failed to fetch order status",
+        details: response.data,
+      });
     }
   } catch (error) {
-    console.error("⚠ SwiftData Status Error:", error.response?.data || error.message);
-    return res.status(500).json({ success: false, message: "Error fetching order status", error: error.response?.data || error.message });
+    return res.status(500).json({
+      success: false,
+      message: "Error fetching order status",
+      error: error.response?.data || error.message,
+    });
   }
 });
 
-// Serve frontend (fallback)
+// Frontend fallback
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "frontend", "index.html"));
 });
@@ -134,27 +195,3 @@ app.get("*", (req, res) => {
 // Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

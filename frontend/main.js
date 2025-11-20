@@ -159,16 +159,6 @@ async function saveOrderToFirestore(orderObj) {
 }
 }
 
-  // ---------- CONFIG ----------
-const API_BASE = (() => {
-  // use current host in prod or localhost for local dev
-  if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
-    return "http://localhost:3000";
-  }
-  return "https://ecodata-app.onrender.com"; // your deployed backend
-})();
-
-
 // === SEND ORDER TO BACKEND ===
 async function orderBundle(network, recipient, packageName, size, reference) {
   try {
@@ -210,107 +200,41 @@ async function orderBundle(network, recipient, packageName, size, reference) {
 
       // Update dashboard UI or order history
       handleNewOrder(returnedOrder);
-
-      // pick an id to track (prefer order.orderId, then order.reference, then swift id field)
-
-      const toTrack = 
-      returnedOrder.orderId ||
-      returnedOrder.reference ||
-      returnedOrder.data?.orderId ||
-      returnedOrder.data?.reference || null;
-          if(toTrack) trackOrder(toTrack);
-          return returnedOrder;
-      }
-    } catch (err) {
-      console.error("⚠ Server error:", err);
-      showSnackBar("⚠ Server error. Please try again later.");
-      return null;
+    } else {
+      showSnackBar(`Failed to purchase data: ${result.message || "Unknown error"}`);
     }
+  } catch (err) {
+    console.error("⚠ Server error:", err);
+    showSnackBar("⚠ Server error. Please try again later.");
+  }
 }
 
-
-//----GUEST STORAGE---//
-function saveGuestOrder(orderData){
+// ✅ Save Guest Orders to Local Storage
+function saveGuestOrder(orderData) {
   try {
     const existing = JSON.parse(localStorage.getItem("guestOrders") || "[]");
     existing.push(orderData);
-    localStorage.setItem("guestOrders", JSON.stringify(existing)); 
-  } catch (e){
-    console.error("Error saving guest order:", e);
-  }
+    localStorage.setItem("guestOrders", JSON.stringify(existing));
+    console.log("💾 Guest order saved locally:", orderData);
+  } catch (e) {
+    console.error("Failed to save guest order:", e);
+}
 }
 
-// ---------- TRACK ORDER (poll) ----------
-const ORDER_STATUS = { PENDING: "pending", PROCESSING: "processing", COMPLETED: "completed" };
-let trackerInterval = null;
-
-async function trackOrder(orderId) {
-  const msgBox = document.getElementById("live-status-message");
-  if (!msgBox) console.warn("live-status-message element not found");
-
-  function activateStep(step) {
-    document.querySelectorAll(".step").forEach(s => s.classList.remove("active", "completed"));
-    if (step === ORDER_STATUS.PENDING) {
-      document.getElementById("step-pending")?.classList.add("active");
-      if (msgBox) msgBox.textContent = "Order submitted...";
-    }
-    if (step === ORDER_STATUS.PROCESSING) {
-      document.getElementById("step-pending")?.classList.add("completed");
-      document.getElementById("step-processing")?.classList.add("active");
-      if (msgBox) msgBox.textContent = "Processing your bundle...";
-    }
-    if (step === ORDER_STATUS.COMPLETED) {
-      document.getElementById("step-pending")?.classList.add("completed");
-      document.getElementById("step-processing")?.classList.add("completed");
-      document.getElementById("step-delivered")?.classList.add("active");
-      if (msgBox) msgBox.textContent = "Delivered successfully!";
-    }
+  // ---------- CONFIG ----------
+const API_BASE = (() => {
+  // use current host in prod or localhost for local dev
+  if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+    return "http://localhost:3000";
   }
-
-  async function poll() {
-    try {
-      const res = await fetch(`${API_BASE}/api/v1/order/status/${encodeURIComponent(orderId)}`);
-      if (!res.ok) return;
-      const data = await res.json();
-      if (!data.success) return;
-
-      // Swift proxied response is in data.order, but shape may vary
-      const swift = data.order || {};
-      // possible shapes: { order: { orderId, status, ... } } OR { orderId, status, ... } OR { data: { order: { ... } } }
-      const orderObj = swift.order || swift.data?.order || swift.data || swift;
-      const status = (orderObj.status || orderObj.data?.status || "").toString().toLowerCase();
-
-      if (!status) return;
-
-      if (status.includes("pending")) activateStep(ORDER_STATUS.PENDING);
-      if (status.includes("processing")) activateStep(ORDER_STATUS.PROCESSING);
-      if (status.includes("delivered") || status.includes("completed")) {
-        activateStep(ORDER_STATUS.COMPLETED);
-        if (trackerInterval) clearInterval(trackerInterval);
-      }
-    } catch (err) {
-      console.error("trackOrder poll error:", err);
-    }
-  }
-
-  if (trackerInterval) clearInterval(trackerInterval);
-  poll();
-  trackerInterval = setInterval(poll, 4000);
-}
-
-
-
-
-
-
-
+  return "https://ecodata-app.onrender.com"; // your deployed backend
+})();
 
 // POLLING FUNCTION //
 
-const STATUS_POLL_INTERVAL = 5000; // ms
-let _statusPollTimer = null;
+// STATUS_POLL_INTERVAL and _statusPollTimer are declared earlier; avoid redeclaration to prevent errors.
 
-// ---------- HELPERS ----------
+ // ---------- HELPERS ----------
 function getStatusTextMapping(status) {
   const s = (status || "").toLowerCase();
   return {
@@ -363,6 +287,7 @@ function createOrUpdateStatusCard(order) {
     root.appendChild(card);
   }
 }
+
 
 // stop polling
 function stopStatusPolling() {
