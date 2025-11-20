@@ -10,6 +10,8 @@ import {
 } from 
 "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
+
+
 // btn events//
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -157,6 +159,14 @@ async function saveOrderToFirestore(orderObj) {
 }
 }
 
+  // ---------- CONFIG ----------
+const API_BASE = (() => {
+  // use current host in prod or localhost for local dev
+  if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+    return "http://localhost:3000";
+  }
+  return "https://ecodata-app.onrender.com"; // your deployed backend
+})();
 
 
 // === SEND ORDER TO BACKEND ===
@@ -166,8 +176,6 @@ async function orderBundle(network, recipient, packageName, size, reference) {
       window.location.hostname === "localhost"
         ? "http://localhost:3000"
         : "https://ecodata-app.onrender.com";
-
-
 
     // ✅ Build query string for GET request
     const query = new URLSearchParams({
@@ -186,139 +194,116 @@ async function orderBundle(network, recipient, packageName, size, reference) {
     const result = await response.json();
 
     if (result.success) {
-      showSnackBar("✅ Order Placed successfully!");
+      showSnackBar("✅ Data bundle purchased successfully!");
 
       // The order object returned from server
-      const swiftOrder = result.order;// direct swiftData result
-
-      console.log("📦 Order details:", swiftOrder);
+      const returnedOrder = result.order?.order || result.order || result;
+      console.log("📦 Order details:", returnedOrder);
 
       // ✅ Save to Firestore
-      saveOrderToFirestore(swiftOrder).then((fireId) => {
+      saveOrderToFirestore(returnedOrder).then((fireId) => {
         if (fireId) console.log("Order persisted in Firestore:", fireId);
 
-        const swiftOrderId = swiftOrder.orderId || swiftOrder.data?.orderId || swiftOrder.id || swiftOrder.orderRef;
-
-        if(!swiftOrderId) {
-          console.warn("No Swiftdata OrderId returned!");
-          showSnackBar("Order Created but no tracking ID returned!")
-          return;
-        }
-
         // ✅ Save locally for guests (important fix!)
-        saveGuestOrder(swiftOrder);
+        saveGuestOrder(returnedOrder);
       });
 
       // Update dashboard UI or order history
-      handleNewOrder(swiftOrder);
+      handleNewOrder(returnedOrder);
 
-      // START REAL-TIME TRACKING
-      trackOrder(swiftOrderId);
+      // pick an id to track (prefer order.orderId, then order.reference, then swift id field)
 
-    } else {
-      showSnackBar(`Failed to purchase data: ${result.message || "Unknown error"}`);
+      const toTrack = 
+      returnedOrder.orderId ||
+      returnedOrder.reference ||
+      returnedOrder.data?.orderId ||
+      returnedOrder.data?.reference || null;
+          if(toTrack) trackOrder(toTrack);
+          return returnedOrder;
+      }
+    } catch (err) {
+      console.error("⚠ Server error:", err);
+      showSnackBar("⚠ Server error. Please try again later.");
+      return null;
     }
-  } catch (err) {
-    console.error("⚠ Server error:", err);
-    showSnackBar("⚠ Server error. Please try again later.");
-  }
 }
 
 
-const ORDER_STATUS = {
-  PENDING: "pending",
-  PROCESSING: "processing",
-  COMPLETED: "completed",
-};
+//----GUEST STORAGE---//
+function saveGuestOrder(orderData){
+  try {
+    const existing = JSON.parse(localStorage.getItem("guestOrders") || "[]");
+    existing.push(orderData);
+    localStorage.setItem("guestOrders", JSON.stringify(existing)); 
+  } catch (e){
+    console.error("Error saving guest order:", e);
+  }
+}
 
+// ---------- TRACK ORDER (poll) ----------
+const ORDER_STATUS = { PENDING: "pending", PROCESSING: "processing", COMPLETED: "completed" };
 let trackerInterval = null;
 
 async function trackOrder(orderId) {
   const msgBox = document.getElementById("live-status-message");
+  if (!msgBox) console.warn("live-status-message element not found");
 
-  // ---- UI Step Handler ----
-  function activateStep(stepId) {
-    document.querySelectorAll(".step").forEach(s => {
-      s.classList.remove("active", "completed");
-    });
-
-    if (stepId === ORDER_STATUS.PENDING) {
-      document.getElementById("step-pending").classList.add("active");
-      msgBox.textContent = "Order submitted...";
+  function activateStep(step) {
+    document.querySelectorAll(".step").forEach(s => s.classList.remove("active", "completed"));
+    if (step === ORDER_STATUS.PENDING) {
+      document.getElementById("step-pending")?.classList.add("active");
+      if (msgBox) msgBox.textContent = "Order submitted...";
     }
-
-    if (stepId === ORDER_STATUS.PROCESSING) {
-      document.getElementById("step-pending").classList.add("completed");
-      document.getElementById("step-processing").classList.add("active");
-      msgBox.textContent = "Processing your bundle...";
+    if (step === ORDER_STATUS.PROCESSING) {
+      document.getElementById("step-pending")?.classList.add("completed");
+      document.getElementById("step-processing")?.classList.add("active");
+      if (msgBox) msgBox.textContent = "Processing your bundle...";
     }
-
-    if (stepId === ORDER_STATUS.COMPLETED) {
-      document.getElementById("step-pending").classList.add("completed");
-      document.getElementById("step-processing").classList.add("completed");
-      document.getElementById("step-delivered").classList.add("active");
-      msgBox.textContent = "Delivered successfully!";
+    if (step === ORDER_STATUS.COMPLETED) {
+      document.getElementById("step-pending")?.classList.add("completed");
+      document.getElementById("step-processing")?.classList.add("completed");
+      document.getElementById("step-delivered")?.classList.add("active");
+      if (msgBox) msgBox.textContent = "Delivered successfully!";
     }
   }
 
-  // ---- POLLING FUNCTION ----
-  async function pollStatus() {
+  async function poll() {
     try {
-      // FIXED ❗— this is your correct backend endpoint
-      const res = await fetch(`${API_BASE}/api/v1/order/status/${orderId}`);
-
+      const res = await fetch(`${API_BASE}/api/v1/order/status/${encodeURIComponent(orderId)}`);
+      if (!res.ok) return;
       const data = await res.json();
-      console.log("📡 LIVE STATUS:", data);
-
       if (!data.success) return;
 
-      // FIXED ❗ — SwiftData returns: data.order.status
-      const status = data.order?.data?.status?.toLowerCase() || "";
+      // Swift proxied response is in data.order, but shape may vary
+      const swift = data.order || {};
+      // possible shapes: { order: { orderId, status, ... } } OR { orderId, status, ... } OR { data: { order: { ... } } }
+      const orderObj = swift.order || swift.data?.order || swift.data || swift;
+      const status = (orderObj.status || orderObj.data?.status || "").toString().toLowerCase();
+
+      if (!status) return;
 
       if (status.includes("pending")) activateStep(ORDER_STATUS.PENDING);
-
       if (status.includes("processing")) activateStep(ORDER_STATUS.PROCESSING);
-
-      if (status.includes("completed")) {
+      if (status.includes("delivered") || status.includes("completed")) {
         activateStep(ORDER_STATUS.COMPLETED);
-        clearInterval(trackerInterval); // STOP polling
+        if (trackerInterval) clearInterval(trackerInterval);
       }
-
     } catch (err) {
-      console.error("Status fetch error:", err);
+      console.error("trackOrder poll error:", err);
     }
   }
 
-  // Start polling
   if (trackerInterval) clearInterval(trackerInterval);
-
-  trackerInterval = setInterval(pollStatus, 4000);
-  pollStatus(); // run instantly
+  poll();
+  trackerInterval = setInterval(poll, 4000);
 }
 
 
 
 
-// ✅ Save Guest Orders to Local Storage
-function saveGuestOrder(orderData) {
-  try {
-    const existing = JSON.parse(localStorage.getItem("guestOrders") || "[]");
-    existing.push(orderData);
-    localStorage.setItem("guestOrders", JSON.stringify(existing));
-    console.log("💾 Guest order saved locally:", orderData);
-  } catch (e) {
-    console.error("Failed to save guest order:", e);
-}
-}
 
-  // ---------- CONFIG ----------
-const API_BASE = (() => {
-  // use current host in prod or localhost for local dev
-  if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
-    return "http://localhost:3000";
-  }
-  return "https://ecodata-app.onrender.com"; // your deployed backend
-})();
+
+
 
 // POLLING FUNCTION //
 
@@ -455,19 +440,19 @@ function startAutoPolling(orderIdOrRef) {
 /**
  * Call this after your backend returns an order reply.
  * Example usage inside orderBundle function after successful response:
- *    const swiftOrder = result.order || result.swift || result; 
- *    handleNewOrder(swiftOrder);
+ *    const returnedOrder = result.order || result.swift || result; 
+ *    handleNewOrder(returnedOrder);
  */
-function handleNewOrder(swiftOrder) {
-  if (!swiftOrder) return;
+function handleNewOrder(returnedOrder) {
+  if (!returnedOrder) return;
   // The Swift response may place order data at top-level or inside order object.
   // Normalize fields:
   const normalized = {
-    orderId: swiftOrder.orderId || swiftOrder.orderId || swiftOrder.reference || swiftOrder.reference,
-    reference: swiftOrder.reference || swiftOrder.reference,
-    status: swiftOrder.status || swiftOrder.status || "pending",
-    recipient: swiftOrder.items?.[0]?.recipient || swiftOrder.recipient || "-",
-    volume: swiftOrder.items?.[0]?.volume ?? swiftOrder.volume ?? "-"
+    orderId: returnedOrder.orderId || returnedOrder.orderId || returnedOrder.reference || returnedOrder.reference,
+    reference: returnedOrder.reference || returnedOrder.reference,
+    status: returnedOrder.status || returnedOrder.status || "pending",
+    recipient: returnedOrder.items?.[0]?.recipient || returnedOrder.recipient || "-",
+    volume: returnedOrder.items?.[0]?.volume ?? returnedOrder.volume ?? "-"
   };
 
   // Save last order id/ref to localStorage for later check
@@ -483,69 +468,87 @@ function handleNewOrder(swiftOrder) {
 
 
 
+// ---------- LIVE ORDERS STREAM (uses your backend /api/orders) ----------
+const liveOrdersContainer = document.getElementById("liveOrders");
+let lastOrdersJson = null;
 
-  const liveOrdersContainer = document.getElementById('liveOrders');
-    let lastOrders = [];
+async function fetchLiveOrders() {
+  try {
+    const res = await fetch(`${API_BASE}/api/orders`);
+    if (!res.ok) throw new Error("Failed");
+    const data = await res.json();
 
-    async function fetchOrders() {
-      try {
-        const response = await fetch("https://swiftdata-link.com/api/orders");
-        const orders = await response.json();
+    // data shape may be an object or array; normalize to array
+    const orders = Array.isArray(data) ? data : (data.orders || data.data || []).slice ? (data.orders || data.data || data) : [];
 
-        if (JSON.stringify(orders) !== JSON.stringify(lastOrders)) {
-          lastOrders = orders;
-          updateLiveOrders(orders);
-        }
-      } catch (error) {
-        console.error("Error fetching live orders:", error);
-      }
+    const json = JSON.stringify(orders);
+    if (json !== lastOrdersJson) {
+      lastOrdersJson = json;
+      updateLiveOrders(orders);
     }
+  } catch (err) {
+    console.error("Error fetching live orders:", err);
+  }
+}
 
-    function updateLiveOrders(orders) {
-      liveOrdersContainer.innerHTML = "";
 
-      if (orders.length === 0) {
-        liveOrdersContainer.innerHTML = `
-          <div class="live-order-card placeholder">
-            <p>No live orders yet.</p>
-          </div>
-        `;
-        return;
-      }
 
-      // Show newest first
-      orders.reverse().forEach(order => {
-        const card = document.createElement("div");
-        card.classList.add("live-order-card");
+ 
+function updateLiveOrders(orders) {
+  if (!liveOrdersContainer) return;
+  liveOrdersContainer.innerHTML = "";
+  if (!orders || orders.length === 0) {
+    liveOrdersContainer.innerHTML = '<div class="live-order-card placeholder">No live orders yet</div>';
+    return;
+  }
 
-        card.innerHTML = `
-          <div class="order-id">Order ID: ${order.id}</div>
-          <div class="order-status status-${(order.status || 'pending').toLowerCase()}">
-            ${order.status || 'Pending'}
-          </div>
-          <div class="checked-time">
-            ${new Date(order.updatedAt).toLocaleTimeString()}
-          </div>
-          <div class="order-extra">
-            <p><strong>Network:</strong> ${order.network || '--'}</p>
-            <p><strong>Bundle:</strong> ${order.bundle || '--'}</p>
-            <p><strong>Date:</strong> ${new Date(order.createdAt).toLocaleString()}</p>
-            <p><strong>Recipient:</strong> ${order.recipient || '--'}</p>
-          </div>
-        `;
+  // newest first
+  const cloned = [...orders].reverse();
+  cloned.forEach(o => {
+    // try multiple possible id/status fields
+    const id = o.orderId || o.reference || o.id || o._id || o.data?.orderId || "--";
+    const status = (o.status || o.data?.status || "pending").toLowerCase();
+    const network = o.network || o.provider || "--";
+    const bundle = o.bundle || o.offerSlug || o.data?.offerSlug || "--";
+    const amount = o.amount ?? o.data?.amount ?? "--";
+    const createdAt = o.createdAt || o.timestamp || o.data?.createdAt || o.createdAt || null;
 
-        // Toggle expand/collapse
-        card.addEventListener("click", () => {
-          card.classList.toggle("expanded");
-        });
+    const card = document.createElement("div");
+    card.className = "live-order-card";
+    card.innerHTML = `
+      <div class="live-top">
+        <div class="live-id">Order ID: ${id}</div>
+        <div class="live-status ${status}">${status}</div>
+      </div>
+      <div class="live-meta">
+        <small>${network} • ${bundle} • ${amount !== "--" ? 'GHS ' + amount : ""}</small>
+        ${createdAt ? '<div class="live-date">' + new Date(createdAt).toLocaleString() + '</div>' : ""}
+      </div>
+      <div class="live-extra" style="display:none;">
+        <p><strong>Recipient:</strong> ${o.recipient || "--"}</p>
+        <p><strong>Network:</strong> ${network}</p>
+        <p><strong>Bundle:</strong> ${bundle}</p>
+      </div>
+    `;
 
-        liveOrdersContainer.appendChild(card);
-      });
-    }
+    card.addEventListener("click", () => {
+      const extra = card.querySelector(".live-extra");
+      if (!extra) return;
+      const visible = extra.style.display === "block";
+      extra.style.display = visible ? "none" : "block";
+      // move to top when expanded
+      if (!visible) liveOrdersContainer.prepend(card);
+    });
 
-    // Run every 5s
-    fetchOrders();
-    setInterval(fetchOrders, 5000);
+    liveOrdersContainer.appendChild(card);
+  });
+}
+
+// start polling live orders
+fetchLiveOrders();
+setInterval(fetchLiveOrders, 5000);
+
+
 
 
 
