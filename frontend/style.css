@@ -136,6 +136,14 @@
 UPDATED UI STYLE
 *****/
 /*----mtn----*/
+.foot{
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
 
     .main-section-container{
       width: 100%;
