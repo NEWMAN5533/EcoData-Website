@@ -115,6 +115,7 @@
 
 
 
+
 :root {
   --bg-cl: #FFF;
   --primary-cl: #fff;
@@ -130,6 +131,1144 @@
   --telecel-btn: rgb(180, 57, 19);
   --airteltigo-btn: rgb(28, 46, 119);
 }
+
+/****
+UPDATED UI STYLE
+*****/
+/*----mtn----*/
+
+    .main-section-container{
+      width: 100%;
+      max-width: 480px;
+      align-items: start;
+      justify-self: center;
+      justify-content: start;
+      height: max-content;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      margin-top: 3.9rem;
+    }
+
+    /****
+    HERO-TEXT
+    *****/
+    .hero-text-container{
+      display: flex;
+      align-items: center;
+      justify-items: center;
+      flex-direction: column;
+      width: 100%;
+      max-width: 480px;
+      height: 10rem;
+      position: relative;
+      background: transparent;
+      margin: 1rem 0;
+      padding: .3rem;
+    }
+
+    /****
+    HERO TOP
+    ****/
+    .hero-top-content{
+      width: 100%;
+      height: 60%;
+      max-width: 450px;
+      display: flex;
+      align-items: center;
+      justify-items: center;
+      gap: .2rem;
+      background: transparent;
+    }
+
+
+    /**
+    LEFT CONTENT
+    **/
+    .top-left-content{
+      width: 20%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .top-left-content img{
+      width: 4rem;
+      height: 4rem;
+      border-radius: 50%;
+      padding: .35rem;
+      background: rgb(231, 222, 222);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+
+    .top-right-content{
+      width: 80%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      justify-content: start;
+      background:transparent;
+      position: relative;
+    }
+
+    .top-right-content h2{
+      font-size: 1.3rem;
+      font-family: serif;
+      font-weight: 600;
+    }
+
+    .top-right-content small{
+      font: 1.1rem;
+      font-weight: 500;
+      font-family: serif;
+      color: rgb(87, 81, 81);
+      margin-top: -.6rem;
+    }
+
+    /***
+    HERO BOTTOM
+    ***/
+    .hero-bottom-content{
+      width: 100%;
+      height: 40%;
+      max-width: 450px;
+      display: flex;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      background: transparent;
+    }
+
+    .btn-div{
+      width: 99%;
+      height: 64%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-top: 1rem;
+      background: linear-gradient(135deg, rgb(25, 233, 70), rgb(26, 156, 80));
+      border-radius: 2rem;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: white;
+      font-family: serif;
+    }
+
+    /***
+    SELECT
+    ****/
+
+    
+    .select-offer{
+      width: 100%;
+      height: max-content;
+      max-width: 450px;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      justify-items: start;
+      gap: 0;
+      padding: .2rem 1rem;
+      background: transparent;
+    }
+
+    .select-offer h2{
+      font-size: 1.3rem;
+      font-weight: 600;
+      font-family: serif;
+    }
+
+    .select-offer small{
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-top: -.6rem;
+    
+    }
+
+
+
+
+    /****8
+    CARDS GRID VIEW
+    *****/
+    .gridView-container{
+      width: 100%;
+      max-width: 480px;
+      height: max-content;
+      padding: .3rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      position: relative;
+      background: transparent;
+      margin: 1rem 0;
+    }
+
+    .gridView-top{
+      width: 100%;
+      max-width: 470px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 3rem;
+      background: transparent;
+      position: relative;
+    }
+
+    /****
+    LEFT
+    ***/
+    .grid-left-div{
+      width: 50%;
+      display:flex;
+      justify-content: start;
+      align-items: center;
+      gap: 1.2rem;
+      height: 100%;
+      background: transparent;
+      position: relative;
+      margin-left: 1rem;
+    }
+
+    .grid-left-div .normal{
+      width: max-content;
+      padding: .4rem .8rem;
+      border: none;
+      font-size: .9rem;
+      background: none;
+      border: 0.1px solid var(--background-cl);
+      border-radius: 6px;
+      color: rgb(44, 41, 41);
+      font-weight: 600;
+      font-family: serif;
+    }
+
+    .grid-left-div .grid.active{
+      background-color: rgb(233, 158, 19);
+      width: max-content;
+      padding: .4rem .8rem;
+      border: none;
+      font-size: .9rem;
+      border-radius: 6px;
+      color: var(--background-cl);
+      font-weight: 600;
+      font-family: serif;
+
+    }
+
+
+
+    /****
+    RIGHT
+    ****/
+    .grid-right-div{
+      width: 505;
+      align-items: end;
+      justify-content: end;
+      display: flex;
+      position: relative;
+      padding-right: .2rem;
+      margin-right: 1rem;
+    }
+
+    .grid-right-div small{
+      font-size: .9rem;
+      font-family: serif;
+      font-weight: 500;
+    }
+
+    /***8
+    GRID CARDS SECTION
+    ****/
+    .gridCards-container{
+      width: 100%;
+      height: max-content;
+      display: flex;
+      justify-self: center;
+      justify-content: center;
+      align-items: center;
+      background: white;
+      margin: 1rem 0;
+      position: relative;
+      padding: .3rem 0;
+    }
+
+    .gridCard-wrapper{
+      width: max-content;
+      height: max-content;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+      background: transparent;
+      align-items: center;
+      justify-content: center;
+      justify-self: center;
+      margin: .3rem 0;
+      padding: .2rem 0;
+    }
+
+    .gridCard{
+      width: 11rem;
+      height: 14rem;
+      display:flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 0 .2rem;
+      flex-direction: column;
+      background: rgba(230, 230, 174, 0.342);
+      border-radius: 1rem;
+      box-shadow: 0 4px 8px rgba(129, 127, 127, 0.6);
+    }
+
+    .gridCard-top{
+      width: 100%;
+      height: 2.3rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+    }
+
+    .gridCard-top small{
+      font-size: 1rem;
+      font-family: serif;
+      font-weight: 600;
+    }
+
+    .gridCard-top img{
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      padding: .2rem;
+      background: rgb(231, 222, 222);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+
+    .gridCard-middle{
+      width: 100%;
+      height: max-content;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      justify-content: start;
+      gap: 0;
+      background: transparent;
+      padding-left: 1rem;
+    }
+
+    .gridCard-middle h3{
+      font-size: 1.17rem;
+      font-weight: 600;
+      font-family: serif;
+      color: black;
+    }
+
+    .gridCard-middle small{
+      font-size: .95rem;
+      margin-top: -.6rem;
+      font-weight: 600;
+      ;
+    }
+    
+    .gridCard-bottom{
+      width: 100%;
+      height: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+    }
+
+    .gridCard-bottom .buy-btn{
+      width: 80%;
+      height: 1.9rem;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgb(227, 243, 5), rgb(236, 140, 13));
+      color: white;
+      font-size: 1rem;
+    }
+
+
+
+
+.foot{
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+/*----ends---*/
+
+/*----telecel----*/
+
+
+
+
+
+
+
+
+.foot{
+  width: 100%;
+  height: 3rem;
+  display: flex;
+    .main-section-container{
+      width: 100%;
+      max-width: 480px;
+      align-items: start;
+      justify-self: center;
+      justify-content: start;
+      height: max-content;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      margin-top: 3.9rem;
+    }
+
+    /****
+    HERO-TEXT
+    *****/
+    .hero-text-container{
+      display: flex;
+      align-items: center;
+      justify-items: center;
+      flex-direction: column;
+      width: 100%;
+      max-width: 480px;
+      height: 10rem;
+      position: relative;
+      background: transparent;
+      margin: 1rem 0;
+      padding: .3rem;
+    }
+
+    /****
+    HERO TOP
+    ****/
+    .hero-top-content{
+      width: 100%;
+      height: 60%;
+      max-width: 450px;
+      display: flex;
+      align-items: center;
+      justify-items: center;
+      gap: .2rem;
+      background: transparent;
+    }
+
+
+    /**
+    LEFT CONTENT
+    **/
+    .top-left-content{
+      width: 20%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .top-left-content img{
+      width: 4rem;
+      height: 4rem;
+      border-radius: 50%;
+      padding: .35rem;
+      background: rgb(231, 222, 222);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+
+    .top-right-content{
+      width: 80%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      justify-content: start;
+      background:transparent;
+      position: relative;
+    }
+
+    .top-right-content h2{
+      font-size: 1.3rem;
+      font-family: serif;
+      font-weight: 600;
+    }
+
+    .top-right-content small{
+      font: 1.1rem;
+      font-weight: 500;
+      font-family: serif;
+      color: rgb(87, 81, 81);
+      margin-top: -.6rem;
+    }
+
+    /***
+    HERO BOTTOM
+    ***/
+    .hero-bottom-content{
+      width: 100%;
+      height: 40%;
+      max-width: 450px;
+      display: flex;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      background: transparent;
+    }
+
+    .btn-div{
+      width: 99%;
+      height: 64%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-top: 1rem;
+      background: linear-gradient(135deg, rgb(241, 62, 122), rgb(192, 3, 82));
+      border-radius: 2rem;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: white;
+      font-family: serif;
+    }
+
+    /***
+    SELECT
+    ****/
+
+    
+    .select-offer{
+      width: 100%;
+      height: max-content;
+      max-width: 450px;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      justify-items: start;
+      gap: 0;
+      padding: .2rem 1rem;
+      background: transparent;
+    }
+
+    .select-offer h2{
+      font-size: 1.3rem;
+      font-weight: 600;
+      font-family: serif;
+    }
+
+    .select-offer small{
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-top: -.6rem;
+    
+    }
+
+
+
+
+    /****8
+    CARDS GRID VIEW
+    *****/
+    .gridView-container{
+      width: 100%;
+      max-width: 480px;
+      height: max-content;
+      padding: .3rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      position: relative;
+      background: transparent;
+      margin: 1rem 0;
+    }
+
+    .gridView-top{
+      width: 100%;
+      max-width: 470px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 3rem;
+      background: transparent;
+      position: relative;
+    }
+
+    /****
+    LEFT
+    ***/
+    .grid-left-div{
+      width: 50%;
+      display:flex;
+      justify-content: start;
+      align-items: center;
+      gap: 1.2rem;
+      height: 100%;
+      background: transparent;
+      position: relative;
+      margin-left: 1rem;
+    }
+
+    .grid-left-div .normal{
+      width: max-content;
+      padding: .4rem .8rem;
+      border: none;
+      font-size: .9rem;
+      background: none;
+      border: 0.1px solid var(--background-cl);
+      border-radius: 6px;
+      color: rgb(44, 41, 41);
+      font-weight: 600;
+      font-family: serif;
+    }
+
+    .grid-left-div .grid.active{
+      background-color: rgb(221, 11, 63);
+      width: max-content;
+      padding: .4rem .8rem;
+      border: none;
+      font-size: .9rem;
+      border-radius: 6px;
+      color: var(--background-cl);
+      font-weight: 600;
+      font-family: serif;
+
+    }
+
+
+
+    /****
+    RIGHT
+    ****/
+    .grid-right-div{
+      width: 505;
+      align-items: end;
+      justify-content: end;
+      display: flex;
+      position: relative;
+      padding-right: .2rem;
+      margin-right: 1rem;
+    }
+
+    .grid-right-div small{
+      font-size: .9rem;
+      font-family: serif;
+      font-weight: 500;
+    }
+
+    /***8
+    GRID CARDS SECTION
+    ****/
+    .gridCards-container{
+      width: 100%;
+      height: max-content;
+      display: flex;
+      justify-self: center;
+      justify-content: center;
+      align-items: center;
+      background: white;
+      margin: 1rem 0;
+      position: relative;
+      padding: .3rem 0;
+    }
+
+    .gridCard-wrapper{
+      width: max-content;
+      height: max-content;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+      background: transparent;
+      align-items: center;
+      justify-content: center;
+      justify-self: center;
+      margin: .3rem 0;
+      padding: .2rem 0;
+    }
+
+    .gridCard{
+      width: 11rem;
+      height: 14rem;
+      display:flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 0 .2rem;
+      flex-direction: column;
+      background: rgba(230, 174, 191, 0.185);
+      border-radius: 1rem;
+      box-shadow: 0 4px 8px rgba(129, 127, 127, 0.6);
+    }
+
+    .gridCard-top{
+      width: 100%;
+      height: 2.3rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+    }
+
+    .gridCard-top small{
+      font-size: 1rem;
+      font-family: serif;
+      font-weight: 600;
+    }
+
+    .gridCard-top img{
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      padding: .2rem;
+      background: rgb(231, 222, 222);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+
+    .gridCard-middle{
+      width: 100%;
+      height: max-content;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      justify-content: start;
+      gap: 0;
+      background: transparent;
+      padding-left: 1rem;
+    }
+
+    .gridCard-middle h3{
+      font-size: 1.17rem;
+      font-weight: 600;
+      font-family: serif;
+      color: black;
+    }
+
+    .gridCard-middle small{
+      font-size: .95rem;
+      margin-top: -.6rem;
+      font-weight: 600;
+      ;
+    }
+    
+    .gridCard-bottom{
+      width: 100%;
+      height: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+    }
+
+    .gridCard-bottom .buy-btn{
+      width: 80%;
+      height: 1.9rem;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgb(241, 62, 122), rgb(192, 3, 82));
+      color: white;
+      font-size: 1rem;
+    }
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+/*----ends---*/
+
+/*----tigo----*/
+
+
+    .main-section-container{
+      width: 100%;
+      max-width: 480px;
+      align-items: start;
+      justify-self: center;
+      justify-content: start;
+      height: max-content;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      margin-top: 3.9rem;
+    }
+
+    /****
+    HERO-TEXT
+    *****/
+    .hero-text-container{
+      display: flex;
+      align-items: center;
+      justify-items: center;
+      flex-direction: column;
+      width: 100%;
+      max-width: 480px;
+      height: 10rem;
+      position: relative;
+      background: transparent;
+      margin: 1rem 0;
+      padding: .3rem;
+    }
+
+    /****
+    HERO TOP
+    ****/
+    .hero-top-content{
+      width: 100%;
+      height: 60%;
+      max-width: 450px;
+      display: flex;
+      align-items: center;
+      justify-items: center;
+      gap: .2rem;
+      background: transparent;
+    }
+
+
+    /**
+    LEFT CONTENT
+    **/
+    .top-left-content{
+      width: 20%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .top-left-content img{
+      width: 4rem;
+      height: 4rem;
+      border-radius: 50%;
+      padding: .35rem;
+      background: rgb(231, 222, 222);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+
+    .top-right-content{
+      width: 80%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      justify-content: start;
+      background:transparent;
+      position: relative;
+    }
+
+    .top-right-content h2{
+      font-size: 1.3rem;
+      font-family: serif;
+      font-weight: 600;
+    }
+
+    .top-right-content small{
+      font: 1.1rem;
+      font-weight: 500;
+      font-family: serif;
+      color: rgb(87, 81, 81);
+      margin-top: -.6rem;
+    }
+
+    /***
+    HERO BOTTOM
+    ***/
+    .hero-bottom-content{
+      width: 100%;
+      height: 40%;
+      max-width: 450px;
+      display: flex;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      background: transparent;
+    }
+
+    .btn-div{
+      width: 99%;
+      height: 64%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-top: 1rem;
+      background: linear-gradient(135deg, rgb(75, 148, 233), rgb(4, 145, 170));
+      border-radius: 2rem;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: white;
+      font-family: serif;
+    }
+
+    /***
+    SELECT
+    ****/
+
+    
+    .select-offer{
+      width: 100%;
+      height: max-content;
+      max-width: 450px;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      justify-items: start;
+      gap: 0;
+      padding: .2rem 1rem;
+      background: transparent;
+    }
+
+    .select-offer h2{
+      font-size: 1.3rem;
+      font-weight: 600;
+      font-family: serif;
+    }
+
+    .select-offer small{
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-top: -.6rem;
+    
+    }
+
+
+
+
+    /****8
+    CARDS GRID VIEW
+    *****/
+    .gridView-container{
+      width: 100%;
+      max-width: 480px;
+      height: max-content;
+      padding: .3rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      position: relative;
+      background: transparent;
+      margin: 1rem 0;
+    }
+
+    .gridView-top{
+      width: 100%;
+      max-width: 470px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 3rem;
+      background: transparent;
+      position: relative;
+    }
+
+    /****
+    LEFT
+    ***/
+    .grid-left-div{
+      width: 50%;
+      display:flex;
+      justify-content: start;
+      align-items: center;
+      gap: 1.2rem;
+      height: 100%;
+      background: transparent;
+      position: relative;
+      margin-left: 1rem;
+    }
+
+    .grid-left-div .normal{
+      width: max-content;
+      padding: .4rem .8rem;
+      border: none;
+      font-size: .9rem;
+      background: none;
+      border: 0.1px solid var(--background-cl);
+      border-radius: 6px;
+      color: rgb(44, 41, 41);
+      font-weight: 600;
+      font-family: serif;
+    }
+
+    .grid-left-div .grid.active{
+      background-color: rgb(11, 120, 221);
+      width: max-content;
+      padding: .4rem .8rem;
+      border: none;
+      font-size: .9rem;
+      border-radius: 6px;
+      color: var(--background-cl);
+      font-weight: 600;
+      font-family: serif;
+
+    }
+
+
+
+    /****
+    RIGHT
+    ****/
+    .grid-right-div{
+      width: 505;
+      align-items: end;
+      justify-content: end;
+      display: flex;
+      position: relative;
+      padding-right: .2rem;
+      margin-right: 1rem;
+    }
+
+    .grid-right-div small{
+      font-size: .9rem;
+      font-family: serif;
+      font-weight: 500;
+    }
+
+    /***8
+    GRID CARDS SECTION
+    ****/
+    .gridCards-container{
+      width: 100%;
+      height: max-content;
+      display: flex;
+      justify-self: center;
+      justify-content: center;
+      align-items: center;
+      background: white;
+      margin: 1rem 0;
+      position: relative;
+      padding: .3rem 0;
+    }
+
+    .gridCard-wrapper{
+      width: max-content;
+      height: max-content;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+      background: transparent;
+      align-items: center;
+      justify-content: center;
+      justify-self: center;
+      margin: .3rem 0;
+      padding: .2rem 0;
+    }
+
+    .gridCard{
+      width: 11rem;
+      height: 14rem;
+      display:flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 0 .2rem;
+      flex-direction: column;
+      background: rgba(174, 222, 230, 0.185);
+      border-radius: 1rem;
+      box-shadow: 0 4px 8px rgba(129, 127, 127, 0.6);
+    }
+
+    .gridCard-top{
+      width: 100%;
+      height: 2.3rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+    }
+
+    .gridCard-top small{
+      font-size: 1rem;
+      font-family: serif;
+      width: 50%;
+      flex-wrap: wrap;
+      font-weight: 600;
+    }
+
+    .gridCard-top img{
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      padding: .2rem;
+      background: rgb(231, 222, 222);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+
+    .gridCard-middle{
+      width: 100%;
+      height: max-content;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      justify-content: start;
+      gap: 0;
+      background: transparent;
+      padding-left: 1rem;
+    }
+
+    .gridCard-middle h3{
+      font-size: 1.17rem;
+      font-weight: 600;
+      font-family: serif;
+      color: black;
+    }
+
+    .gridCard-middle small{
+      font-size: .95rem;
+      margin-top: -.6rem;
+      font-weight: 600;
+      ;
+    }
+    
+    .gridCard-bottom{
+      width: 100%;
+      height: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+    }
+
+    .gridCard-bottom .buy-btn{
+      width: 80%;
+      height: 1.9rem;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgb(75, 148, 233), rgb(4, 145, 170));
+      color: white;
+      font-size: 1rem;
+    }
+
+
+
+
+.foot{
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+/*----ends---*/
+
+/*****
+UPDATED UI STYLE ENDS
+****/
 
 /****-----PHONE INPUT MODAL-------------****/
 /* ===== MODAL STYLING ===== */
@@ -721,7 +1860,7 @@ WELCOME CARD
   position: relative;
   background: var(--bg-cl);
   border-radius: .6rem;
-  box-shadow: 1px 1px 2px rgba(0,0,0,0.3), -1px -1px 2px rgba(0,0,0,0.3);
+  box-shadow:   1px 1px 2px rgba(0,0,0,0.3),  -1px -1px 2px rgba(0,0,0,0.3);
   margin-top: 4.3rem; 
 }
 
@@ -844,18 +1983,18 @@ WELCOME CARD
       font-size: 2em;
       color: #00ffcc;
       background: var(--dark-cl);
-      padding:20px 25px;
+      padding: 15px 25px;
       border-radius: 4px;
       display: inline-block;
-      width: 60%;
-      height: 2.7rem;
+      width: max-content;
+      height: 2rem;
       align-items: center;
       display: flex;
       justify-content: center;
       font-size: 1.1rem;
       font-weight: 600;
       margin-right: .5rem;
-      margin-top: 2rem;
+      margin-top: 2.4rem;
     }
 
 
@@ -1223,19 +2362,19 @@ BUNDLE PROCESSING
 
 .purchase-container a .mtn{
   display: flex;
-  background-color: rgb(193, 196, 19);
+  background: linear-gradient(135deg, rgb(227, 243, 5), rgb(236, 140, 13));
 }
 
 
 .purchase-container a .telecel{
   display: flex;
-  background-color: rgb(180, 57, 19);
+  background: linear-gradient(135deg, rgb(241, 62, 122), rgb(192, 3, 82));
 }
 
 
 .purchase-container a .at{
   display: flex;
-  background-color: rgb(26, 48, 119);
+  background:  linear-gradient(135deg, rgb(75, 148, 233), rgb(4, 145, 170));
 }
 
 
@@ -5203,12 +6342,12 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 
 .networks-purchased-container {
   width: 100%;
-  max-width: 420px;
+  max-width: 440px;
   background: transparent;
   height: 9rem;
   margin: .5rem 0;
   gap: .4rem;
-  border: 1px solid rgb(226, 223, 221);
+  border: 1px solid rgb(196, 189, 185);
 }
 
 .purchase-title {

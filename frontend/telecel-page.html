@@ -5,313 +5,733 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ecodata</title>
 
+
+  <meta name="google-site-verification" content="uPuuYtdufpe-I9fBtT046jnMoZO7yvAEzEyCemHr1S0" />
+
   
     <meta name="title" content="EcoData">
-  <meta name="description" content="This is related to website developed by IlysCode">
+  <meta name="description" content="Buy Ghana data bundles for MTN, Telecel & AirtelTigo. Fast, and secure. Shop affordable data packages for browsing, streaming, and more on Ecodata">
 
-<link rel="shortcut icon" href="./css/icons/icon-shortcut.png" type="image/png">
-  <link rel="stylesheet" href="mat.css">
+  <link rel="shortcut icon" href="./css/icons/icon-shortcut.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
 
+  <!---STYLE-CSS-->
+  <style>
 
-<style>
-  
-/* ===== Snackbar Styles ===== */
-#snackbar {
-  visibility: hidden;
-  min-width: 250px;
-  height: 2.2rem;
-  max-width: 80%;
-  margin-left: -125px;
-  background-color: #222;
-  color: #fff;
-  text-align: center;
-  border-radius: 10px;
-  padding: 16px;
-  position: absolute;
-  z-index: 9999;
-  left: 50%;
-  top: 0;
-  font-size: 15px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.4s ease;
+    
+:root {
+  --bg-cl: #FFF;
+  --primary-cl: #fff;
+  --secondary-cl: rgb(50, 50, 190);
+  --dark-cl: #0a0a0a;
+  --ascent-cl: rgb(158, 97, 209);
+  --background-cl: #e6e8ce;
+  --card-full-bg-cl: rgb(255, 217, 0);
+  --card-full-tele-bg-cl: rgb(221, 19, 19);
+  --card-full-airtel-bg-cl:  rgb(6, 6, 231);
+  --border-cl-2: rgba(66, 66, 26, 0.226);
+  --mtn-btn: rgb(193, 196, 19);
+  --telecel-btn: rgb(180, 57, 19);
+  --airteltigo-btn: rgb(28, 46, 119);
 }
 
-/* Show Snackbar */
-#snackbar.show {
-  visibility: visible;
-  opacity: 1;
-  transform: translateY(0);
+
+
+
+
+
+
+
+.foot{
+  width: 100%;
+  height: 3rem;
+  display: flex;
+    .main-section-container{
+      width: 100%;
+      max-width: 480px;
+      align-items: start;
+      justify-self: center;
+      justify-content: start;
+      height: max-content;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      margin-top: 3.9rem;
+    }
+
+    /****
+    HERO-TEXT
+    *****/
+    .hero-text-container{
+      display: flex;
+      align-items: center;
+      justify-items: center;
+      flex-direction: column;
+      width: 100%;
+      max-width: 480px;
+      height: 10rem;
+      position: relative;
+      background: transparent;
+      margin: 1rem 0;
+      padding: .3rem;
+    }
+
+    /****
+    HERO TOP
+    ****/
+    .hero-top-content{
+      width: 100%;
+      height: 60%;
+      max-width: 450px;
+      display: flex;
+      align-items: center;
+      justify-items: center;
+      gap: .2rem;
+      background: transparent;
+    }
+
+
+    /**
+    LEFT CONTENT
+    **/
+    .top-left-content{
+      width: 20%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .top-left-content img{
+      width: 4rem;
+      height: 4rem;
+      border-radius: 50%;
+      padding: .35rem;
+      background: rgb(231, 222, 222);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+
+    .top-right-content{
+      width: 80%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      justify-content: start;
+      background:transparent;
+      position: relative;
+    }
+
+    .top-right-content h2{
+      font-size: 1.3rem;
+      font-family: serif;
+      font-weight: 600;
+    }
+
+    .top-right-content small{
+      font: 1.1rem;
+      font-weight: 500;
+      font-family: serif;
+      color: rgb(87, 81, 81);
+      margin-top: -.6rem;
+    }
+
+    /***
+    HERO BOTTOM
+    ***/
+    .hero-bottom-content{
+      width: 100%;
+      height: 40%;
+      max-width: 450px;
+      display: flex;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      background: transparent;
+    }
+
+    .btn-div{
+      width: 99%;
+      height: 64%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-top: 1rem;
+      background: linear-gradient(135deg, rgb(241, 62, 122), rgb(192, 3, 82));
+      border-radius: 2rem;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: white;
+      font-family: serif;
+    }
+
+    /***
+    SELECT
+    ****/
+
+    
+    .select-offer{
+      width: 100%;
+      height: max-content;
+      max-width: 450px;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      justify-items: start;
+      gap: 0;
+      padding: .2rem 1rem;
+      background: transparent;
+    }
+
+    .select-offer h2{
+      font-size: 1.3rem;
+      font-weight: 600;
+      font-family: serif;
+    }
+
+    .select-offer small{
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-top: -.6rem;
+    
+    }
+
+
+
+
+    /****8
+    CARDS GRID VIEW
+    *****/
+    .gridView-container{
+      width: 100%;
+      max-width: 480px;
+      height: max-content;
+      padding: .3rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      position: relative;
+      background: transparent;
+      margin: 1rem 0;
+    }
+
+    .gridView-top{
+      width: 100%;
+      max-width: 470px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 3rem;
+      background: transparent;
+      position: relative;
+    }
+
+    /****
+    LEFT
+    ***/
+    .grid-left-div{
+      width: 50%;
+      display:flex;
+      justify-content: start;
+      align-items: center;
+      gap: 1.2rem;
+      height: 100%;
+      background: transparent;
+      position: relative;
+      margin-left: 1rem;
+    }
+
+    .grid-left-div .normal{
+      width: max-content;
+      padding: .4rem .8rem;
+      border: none;
+      font-size: .9rem;
+      background: none;
+      border: 0.1px solid var(--background-cl);
+      border-radius: 6px;
+      color: rgb(44, 41, 41);
+      font-weight: 600;
+      font-family: serif;
+    }
+
+    .grid-left-div .grid.active{
+      background-color: rgb(221, 11, 63);
+      width: max-content;
+      padding: .4rem .8rem;
+      border: none;
+      font-size: .9rem;
+      border-radius: 6px;
+      color: var(--background-cl);
+      font-weight: 600;
+      font-family: serif;
+
+    }
+
+
+
+    /****
+    RIGHT
+    ****/
+    .grid-right-div{
+      width: 505;
+      align-items: end;
+      justify-content: end;
+      display: flex;
+      position: relative;
+      padding-right: .2rem;
+      margin-right: 1rem;
+    }
+
+    .grid-right-div small{
+      font-size: .9rem;
+      font-family: serif;
+      font-weight: 500;
+    }
+
+    /***8
+    GRID CARDS SECTION
+    ****/
+    .gridCards-container{
+      width: 100%;
+      height: max-content;
+      display: flex;
+      justify-self: center;
+      justify-content: center;
+      align-items: center;
+      background: white;
+      margin: 1rem 0;
+      position: relative;
+      padding: .3rem 0;
+    }
+
+    .gridCard-wrapper{
+      width: max-content;
+      height: max-content;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+      background: transparent;
+      align-items: center;
+      justify-content: center;
+      justify-self: center;
+      margin: .3rem 0;
+      padding: .2rem 0;
+    }
+
+    .gridCard{
+      width: 11rem;
+      height: 14rem;
+      display:flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 0 .2rem;
+      flex-direction: column;
+      background: rgba(230, 174, 191, 0.185);
+      border-radius: 1rem;
+      box-shadow: 0 4px 8px rgba(129, 127, 127, 0.6);
+    }
+
+    .gridCard-top{
+      width: 100%;
+      height: 2.3rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+    }
+
+    .gridCard-top small{
+      font-size: 1rem;
+      font-family: serif;
+      font-weight: 600;
+    }
+
+    .gridCard-top img{
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      padding: .2rem;
+      background: rgb(231, 222, 222);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+
+    .gridCard-middle{
+      width: 100%;
+      height: max-content;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      justify-content: start;
+      gap: 0;
+      background: transparent;
+      padding-left: 1rem;
+    }
+
+    .gridCard-middle h3{
+      font-size: 1.17rem;
+      font-weight: 600;
+      font-family: serif;
+      color: black;
+    }
+
+    .gridCard-middle small{
+      font-size: .95rem;
+      margin-top: -.6rem;
+      font-weight: 600;
+      ;
+    }
+    
+    .gridCard-bottom{
+      width: 100%;
+      height: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+    }
+
+    .gridCard-bottom .buy-btn{
+      width: 80%;
+      height: 1.9rem;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgb(241, 62, 122), rgb(192, 3, 82));
+      color: white;
+      font-size: 1rem;
+    }
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
-
-/* Success & Error colors */
-.snack-success {
-  background-color: #22c55e; /* green */
-}
-
-.snack-error {
-  background-color: #ef4444; /* red */
-}
-
-.snack-info {
-  background-color: #3b82f6;/* blue */
-}
-/*** snackbar ends***/
+  </style>
 
 
-</style>
+
+
+
+
+
+
 </head>
 <body>
+
 <nav class="navbar">
 <div class="nav-left">
- <a href="index.html">
-  <img src="./css/icons/icon-shortcut.png" alt="image" loading="lazy"></a>
+<a href="index.html">
+  <img src="./css/icons/icon-shortcut.png" alt="image" loading="lazy">
+</a>
 </div>
 <div class="nav-right">
+ 
 <img id="cardToggler" src="./css/icons/icons8-fries-menu-46.png" alt="image" class="menu-icon" loading="lazy">
 </div>
 </nav>
 
-<!-------MAIN SECTION-->
-<section class="main-container">
-  <div class="sticky-sidebar">
-    <div class="user-pannel">
-      <div class="pic">U</div>
-      <h3>User Pannel</h3>
-    </div>
-
-     <!----ICONS-SECTION-->
-    <div class="shortcut-links">
-      <div class="link home">
-       <a href="index.html">
-        <img src="./css/icons/home.png" alt="image" loading="lazy">
-        <span>Home</span>
-       </a>
+<!----MAIN-SECTION-->
+<div class="main-section-container">
+  <!--hero-text-->
+  <div class="hero-text-container">
+    <div class="hero-top-content">
+      <div class="top-left-content">
+        <img src="./css/images/telecel.jpg" alt="images" loading="lazy">
       </div>
-
-      <div class="link">
-       <a href="dashboard.html">
-        <img src="./css/icons/dashboard.png" alt="image" loading="lazy">
-        <span>Dashboard</span>
-       </a>
-      </div>
-
-       <div class="link">
-       <a href="mtn-page.html">
-        <img src="./css/icons/mtn-signal.png" alt="image" loading="lazy">
-        <span>MTN</span>
-       </a>
-      </div>
-
-       <div class="link">
-       <a href="telecel-page.html">
-        <img src="./css/icons/telecel-signal.png" alt="image" loading="lazy">
-        <span>Telecel</span>
-       </a>
-      </div>
-
-       <div class="link">
-       <a href="aiteltigo-page.html">
-        <img src="./css/icons/tigo-signal.png" alt="image" loading="lazy">
-        <span>Airteltigo</span>
-       </a>
+      <div class="top-right-content">
+        <h2>TELECEL Data Bundle</h2>
+        <small>Purchase Telecel data bundles for single or multiple recipients</small>
       </div>
     </div>
-   <!---------Privacy-policy-->
-   <div class="privacy-container">
-    <div class="terms-container">
-      <div class="link">
-        <img src="./css/icons/like.png" alt="image" loading="lazy">
-        <a href="terms">Terms & Condition</a>
+    <div class="hero-bottom-content">
+      <div class="btn-div">
+        9 Packages Available
+      </div>
+    </div>
+  </div>
+  <!----HERO ENDS-->
+
+  <section class="select-offer">
+    <h2>Select Telecel Offer</h2>
+    <small>Choose from Available Telecel data offers</small>
+  </section>
+
+  <section class="gridView-container">
+    <div class="gridView-top">
+      <div class="grid-left-div">
+        <button class="normal">Normal</button>
+        <button class="grid active">Grid</button>
+      </div>
+      <div class="grid-right-div">
+        <small>9 Package(s)</small>
+      </div>
+    </div>
+
+    <!---CARDS SECTION-->
+    <section class="gridCards-container">
+      <!---GRID CARDS WRAPPER-->
+      <div class="gridCard-wrapper">
+      <!----------CARD----------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>Telecel Bundle</small>
+          <img src="./css/images/telecel.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>5GB</h3>
+          <small>GHS 27</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="telecel"
+  data-package="telecel_expiry_bundle"
+  data-size="5"
+  data-price="27"
+          >Add to cart</button>
+        </div>
+      </div>
+ <!----------NEXT CARD----------->
+      <div class="gridCard">
+        <div class="gridCard-top">
+          <small>Telecel Bundle</small>
+          <img src="./css/images/telecel.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>10GB</h3>
+          <small>GHS 47</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="telecel"
+  data-package="telecel_expiry_bundle"
+  data-size="10"
+  data-price="47"
+          >Add to cart</button>
+        </div>
+      </div>
+ <!----------NEXT CARD----------->
+      <div class="gridCard">
+        <div class="gridCard-top">
+          <small>Telecel Bundle</small>
+          <img src="./css/images/telecel.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>15GB</h3>
+          <small>GHS 69</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="telecel"
+  data-package="telecel_expiry_bundle"
+  data-size="15"
+  data-price="69"
+          >Add to cart</button>
+        </div>
+      </div>
+      <!----------NEXT CARD----------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>Telecel Bundle</small>
+          <img src="./css/images/telecel.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>20GB</h3>
+          <small>GHS 93</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="telecel"
+  data-package="telecel_expiry_bundle"
+  data-size="20"
+  data-price="93"
+          >Add to cart</button>
+        </div>
+      </div>
+      <!----------NEXT CARD----------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>Telecel Bundle</small>
+          <img src="./css/images/telecel.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>25GB</h3>
+          <small>GHS 110</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="telecel"
+  data-package="telecel_expiry_bundle"
+  data-size="25"
+  data-price="110"
+          >Add to cart</button>
+        </div>
+      </div>
+       <!----------NEXT CARD----------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>Telecel Bundle</small>
+          <img src="./css/images/telecel.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>30GB</h3>
+          <small>GHS 134</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="telecel"
+  data-package="telecel_expiry_bundle"
+  data-size="30"
+  data-price="134"
+          >Add to cart</button>
+        </div>
+      </div>
+      <!----------NEXT CARD----------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>Telecel Bundle</small>
+          <img src="./css/images/telecel.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>40GB</h3>
+          <small>GHS 178</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="telecel"
+  data-package="telecel_expiry_bundle"
+  data-size="40"
+  data-price="178"
+          >Add to cart</button>
+        </div>
+      </div>
+       <!----------NEXT CARD----------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>Telecel Bundle</small>
+          <img src="./css/images/telecel.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>50GB</h3>
+          <small>GHS 220</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="telecel"
+  data-package="telecel_expiry_bundle"
+  data-size="50"
+  data-price="220"
+          >Add to cart</button>
+        </div>
       </div>
 
-      <div class="link">
-        <a href="https://chat.whatsapp.com/LwhZNOyUQsJIGTQRL9cIXT">Clicking here<img src="./css/icons/whats.jpg" alt="icons"></a>
-
+       <!----------NEXT CARD----------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>Telecel Bundle</small>
+          <img src="./css/images/telecel.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>100GB</h3>
+          <small>GHS 400</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="telecel"
+  data-package="telecel_expiry_bundle"
+  data-size="100"
+  data-price="400"
+          >Add to cart</button>
+        </div>
+      </div>
       
-        <a href="terms"><small>Join Group</small></a>
+        
+
       </div>
+    </section>
+
+
+
+
+  </section>
+  <section class="foot">
+    <p style="text-align:center;color:#888;font-size:14px;">© 2025 Ecodata. All rights reserved.</p>
+  </section>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ABOUT -->
+
+<!----SNACKBAR-SECTION----->
+
+<!-- Phone Input Modal -->
+<div id="phoneModal" class="modal">
+  <div class="modal-content">
+<!-----SELECTED-->
+      <div class="selected-div">
+    <h4>Selected Package Details</h4>
+    <div class="placeholders-wrapper">
+      <div class="placeholdersbtn-wrapper">
+              <small>Price</small>
+            <div class="placeholders-left"  id="priceTag">
     </div>
-   </div>
-
-  </div>
-
-   <div class="dashboard-container">
-    <div class="top-dash-div">
-      <div class="left-dash-div">
-        <img src="./css/icons/cart.png" alt="image" loading="lazy">
-        <h4>Telecel Orders</h4>
       </div>
-      <div class="right-dash-div">
-        <a href="index.html"><button class="newOrder">+ New Order</button></a>
-      </div>
+
+        <div class="placeholdersbtn-wrapper">
+          <small>Network/GB</small>
+            <div class="placeholders-right" id="networkTag">
     </div>
-
-    <div class="center-analytic-didv">
-      <h4>Analytics Overview</h4>
-    </div>
-
-    <div class="dash-cards-div">
-      <div class="card-container">
-        <div class="card-div">
-          <div class="card-top-section">
-            <small>Total Orders</small>
-            <img src="./css/icons/totalorder.png" alt="image" loading="lazy">
-          </div>
-          <div class="card-bottom-section">
-            <span>0</span>
-          </div>
         </div>
-
-        <div class="card-div">
-          <div class="card-top-section">
-            <small>Recent Orders</small>
-            <img src="./css/icons/recent.png" alt="image" loading="lazy">
-          </div>
-          <div class="card-bottom-section">
-            <span>0</span>
-          </div>
-        </div>
-
-        <div class="card-div">
-          <div class="card-top-section">
-            <small>Total Spent</small>
-            <img src="./css/icons/totalspent.png" alt="image" loading="lazy">
-          </div>
-          <div class="card-bottom-section">
-            <span>0</span>
-          </div>
-        </div>
-
-        <div class="card-div">
-          <div class="card-top-section">
-            <small>Total Data</small>
-            <img src="./css/icons/totalData.png" alt="image" loading="lazy">
-          </div>
-          <div class="card-bottom-section">
-            <span>0</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-----TOP-PACKAGE-->
-  <div class="top-package-container">
-    <div class="top-title telecel-title">
-      <h3>Top Packages</h3>
-    </div>
-    <div class="top-packages">
-      <div class="package-cards">
-
-        <div class="package-card">
-          <div class="top-div">
-            <div class="left-div">
-              <img src="./css/images/correct.png" alt="image" loading="lazy">
-            </div>
-          <div class="middle-div">
-            <span>Telecel </span>
-            <small>Bundle</small>
-          </div>
-          <div class="right-div">
-            <span>&#8373;27.00</span>
-            <small>5GB</small>
-          </div>
-          </div>
-        <div class="bottom-div">
-          <button class="buy-btn telecel-btn"  type="button">Add to Cart</button>
-        </div>
-        </div>
-
-        <div class="package-card">
-          <div class="top-div">
-            <div class="left-div">
-              <img src="./css/images/correct.png" alt="image" loading="lazy">
-            </div>
-          <div class="middle-div">
-            <span>Telecel </span>
-            <small>Bundle</small>
-          </div>
-          <div class="right-div">
-            <span>&#8373;69.00</span>
-            <small>15GB</small>
-          </div>
-          </div>
-        <div class="bottom-div">
-          <button class="buy-btn telecel-btn"  type="button">Add to Cart</button>
-        </div>
-        </div>
-
-        <div class="package-card">
-          <div class="top-div">
-            <div class="left-div">
-              <img src="./css/images/correct.png" alt="image" loading="lazy">
-            </div>
-          <div class="middle-div">
-            <span>Telecel </span>
-            <small>Bundle</small>
-          </div>
-          <div class="right-div">
-            <span>&#8373;27.00</span>
-            <small>5GB</small>
-          </div>
-          </div>
-        <div class="bottom-div">
-          <button class="buy-btn telecel-btn"  type="button">Add to Cart</button>
-        </div>
-        </div>
-
-        </div>
-
-        <div class="package-cards">
-          <div class="package-card">
-          <div class="top-div">
-            <div class="left-div">
-              <img src="./css/images/correct.png" alt="image" loading="lazy">
-            </div>
-          <div class="middle-div">
-            <span>Telecel </span>
-            <small>Bundle</small>
-          </div>
-          <div class="right-div">
-            <span>&#8373;47.60</span>
-            <small>10GB</small>
-          </div>
-          </div>
-        <div class="bottom-div">
-          <button class="buy-btn telecel-btn"  type="button">Add to Cart</button>
-        </div>
-        </div>
-
-        <div class="package-card">
-          <div class="top-div">
-            <div class="left-div">
-              <img src="./css/images/correct.png" alt="image" loading="lazy">
-            </div>
-          <div class="middle-div">
-            <span>MTN </span>
-            <small>Bundle</small>
-          </div>
-          <div class="right-div">
-            <span>&#8373;12.00</span>
-            <small>2GB</small>
-          </div>
-          </div>
-        <div class="bottom-div">
-          <button class="buy-btn mtn-btn"  type="button">Add to Cart</button>
-        </div>
-        </div>
-        </div>
-      </div>
     </div>
   </div>
-</section>
-
-
-
-
-
-
+    <h3>Enter Bundle Recipient</h3>
+    <input type="tel" id="recipientInput" placeholder="e.g. 0241234567"/>
+    <div class="modal-buttons">
+      <button id="cancelBtn" class="btn cancel">Cancel</button>
+      <button id="confirmBtn" class="btn continue">Proceed to Paystack</button>
+    </div>
+</div>
+</div>
 
 
 
@@ -324,33 +744,30 @@
           <!----ICONS-SECTION-->
     <div class="shortcut-links">
 
+
       <div class="link">
-        <a href="dashboard.html">
-        <img src="./css/icons/dashboard.png" alt="image" loading="lazy">
-        <span>Dashboard</span>
-        </a>
+       <a href="business-partners.html">
+        <img src="./css/icons/partners.jpg" alt="image" loading="lazy">
+        <span>Our Partners</span>
+       </a>
       </div>
 
+
+      
        <div class="link">
-       <a href="mtn-page.html">
-        <img src="./css/icons/mtn-signal.png" alt="image" loading="lazy">
-        <span>MTN</span>
+       <a href="https://chat.whatsapp.com/CdemFa0YXXc8rgxQZKvSIq?mode=wwc">
+        <img src="./css/icons/agent.png" alt="image" loading="lazy">
+        <span>Be an Agent?</span>
        </a>
       </div>
 
        <div class="link">
-       <a href="telecel-page.html">
-        <img src="./css/icons/telecel-signal.png" alt="image" loading="lazy">
-        <span>Telecel</span>
+       <a href="terms.html">
+        <img src="./css/icons/terms (1).png" alt="image" loading="lazy">
+        <span>Terms of use</span>
        </a>
       </div>
 
-       <div class="link">
-       <a href="aiteltigo-page.html">
-        <img src="./css/icons/tigo-signal.png" alt="image" loading="lazy">
-        <span>Airteltigo</span>
-       </a>
-      </div>
 
        <div class="link">
        <a href="bundlesInfo.html">
@@ -361,49 +778,93 @@
     </div>
     </div>
     <div class="menu-card-bottom">
-      <a href="login.html">  <button  id="logout-btn" class="logout-btn">Login</button></a>
+      <a href="login.html">  <button  id="logout-btn" class="logout-btn">Login/Sign-Up</button></a>
     </div>
   </div>
 </div>
 
-
-<!---MENU-CARD-JS-->
-<script>
-  const cardToggler = document.getElementById("cardToggler");
-  const cardCloser = document.getElementById("closeCard");
-
-  // querySelectors //
-  const card = document.querySelector(".menu-card-container");
-
-  // function //
-cardToggler.addEventListener("click", function(e){
-  if (card.style.right != "-200px"){
-    card.style.right = "14px";
-  } else card.style.right = "-200px";
-});
-
-window.addEventListener("click", function(e){
-  if (e.target !== cardToggler && e.target !== card && !card.contains(e.target)){
-    card.style.right = "-200px";
-  }
-});
-
-
-</script>
-
-
   <!-- ✅ WhatsApp Floating Chat -->
 <div id="whatsappChat">
-  <div id="chatButton">
-    💬
+  <div id="chatButton" class="message">
+    <img src="./css/icons/message.png" alt="image" loading="lazy">
   </div>
 
   <div id="chatBox">
-    <h4>Chat with us on WhatsApp</h4>
+    <h4>Chat Ecodata Admin</h4>
     <input type="text" id="whatsappMessage" placeholder="Type your message..." />
     <button id="sendMsgBtn">Send</button>
   </div>
 </div>
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+ <!-- Load Paystack library -->
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+
+
+  
+
+
+<script type="module" src="./firebase-config.js"></script>
+
+<script type="module" src="main.js"></script>
+
+
+<!---usernameDisplay----->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    // TODO: replace these placeholder values with your Firebase project config
+  apiKey: "AIzaSyClNBlfigtQk8AZWdMZcU9sEtVcIrS0D1g",
+  authDomain: "ecodata-2bee6.firebaseapp.com",
+  projectId: "ecodata-2bee6",
+  storageBucket: "ecodata-2bee6.firebasestorage.app",
+  messagingSenderId: "544837123249",
+  appId: "1:544837123249:web:6c362350a00c6dab10b690"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  onAuthStateChanged(auth, async (user) => {
+    const usernameDisplay = document.getElementById("usernameDisplay");
+
+// FORCE TO LOGIN THE USER //
+  
+
+
+
+
+    if (user) {
+      const userSnap = await getDoc(doc(db, "users", user.uid));
+      usernameDisplay.textContent = `Welcome Back, ${userSnap.data().username}!`;
+    } else {
+      usernameDisplay.textContent = "Welcome Back, Dear!";
+    }
+});
+</script>
+
+
 
 <!-- End WhatsApp Floating Chat -->
 <script>
@@ -434,5 +895,61 @@ window.addEventListener("click", function(e){
     document.getElementById("whatsappMessage").value = ""; // clear after sending
 });
 </script>
+
+<script>
+  // === REAL TIME CLOCK ===
+function updateClock() {
+  const clock = document.getElementById("clock");
+  const now = new Date();
+  const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  const dayName = days[now.getDay()];
+  let hours = now.getHours();
+  let minutes = now.getMinutes();
+  let seconds = now.getSeconds();
+  const ampm = hours >= 12 ? "PM" : "AM";
+  hours = hours % 12 || 12;
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+  seconds = seconds < 10 ? "0" + seconds : seconds;
+  clock.innerHTML = `${dayName} ${hours}:${minutes}:${seconds} ${ampm}`;
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+
+
+</script>
+
+<!---MENU-CARD-JS-->
+<script>
+  const cardToggler = document.getElementById("cardToggler");
+  const cardCloser = document.getElementById("closeCard");
+
+  // querySelectors //
+  const card = document.querySelector(".menu-card-container");
+
+  // function //
+cardToggler.addEventListener("click", function(e){
+  if (card.style.right != "-500px"){
+    card.style.right = "14px";
+  } else card.style.right = "-500px";
+});
+
+window.addEventListener("click", function(e){
+  if (e.target !== cardToggler && e.target !== card && !card.contains(e.target)){
+    card.style.right = "-500px";
+  }
+});
+
+
+</script>
+
+
+<!-----orderStatusTracker-->
+
+
+
+
 </body>
+<!-----ORDER STATUS JS---->
 </html>
+
