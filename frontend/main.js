@@ -10,6 +10,14 @@ import {
 } from 
 "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
+  // ---------- CONFIG ----------
+const API_BASE = (() => {
+  // use current host in prod or localhost for local dev
+  if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+    return "http://localhost:3000";
+  }
+  return "https://ecodata-app.onrender.com"; // your deployed backend
+})();
 
 
 // btn events//
@@ -184,7 +192,7 @@ async function orderBundle(network, recipient, packageName, size, reference) {
     const result = await response.json();
 
     if (result.success) {
-      showSnackBar("✅ Data bundle purchased successfully!");
+      showSnackBar("✅ Order Placed successfully!");
 
       // The order object returned from server
       const returnedOrder = result.order?.order || result.order || result;
@@ -221,14 +229,6 @@ function saveGuestOrder(orderData) {
 }
 }
 
-  // ---------- CONFIG ----------
-const API_BASE = (() => {
-  // use current host in prod or localhost for local dev
-  if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
-    return "http://localhost:3000";
-  }
-  return "https://ecodata-app.onrender.com"; // your deployed backend
-})();
 
 // POLLING FUNCTION //
 
@@ -393,97 +393,6 @@ function handleNewOrder(returnedOrder) {
 
 
 
-// ---------- LIVE ORDERS STREAM (uses your backend /api/orders) ----------
-const liveOrdersContainer = document.getElementById("liveOrders");
-let lastOrdersJson = null;
-
-async function fetchLiveOrders() {
-  try {
-    const res = await fetch(`${API_BASE}/api/orders`);
-    if (!res.ok) throw new Error("Failed");
-    const data = await res.json();
-
-    // data shape may be an object or array; normalize to array
-    const orders = Array.isArray(data) ? data : (data.orders || data.data || []).slice ? (data.orders || data.data || data) : [];
-
-    const json = JSON.stringify(orders);
-    if (json !== lastOrdersJson) {
-      lastOrdersJson = json;
-      updateLiveOrders(orders);
-    }
-  } catch (err) {
-    console.error("Error fetching live orders:", err);
-  }
-}
-
-
-
- 
-function updateLiveOrders(orders) {
-  if (!liveOrdersContainer) return;
-  liveOrdersContainer.innerHTML = "";
-  if (!orders || orders.length === 0) {
-    liveOrdersContainer.innerHTML = '<div class="live-order-card placeholder">No live orders yet</div>';
-    return;
-  }
-
-  // newest first
-  const cloned = [...orders].reverse();
-  cloned.forEach(o => {
-    // try multiple possible id/status fields
-    const id = o.orderId || o.reference || o.id || o._id || o.data?.orderId || "--";
-    const status = (o.status || o.data?.status || "pending").toLowerCase();
-    const network = o.network || o.provider || "--";
-    const bundle = o.bundle || o.offerSlug || o.data?.offerSlug || "--";
-    const amount = o.amount ?? o.data?.amount ?? "--";
-    const createdAt = o.createdAt || o.timestamp || o.data?.createdAt || o.createdAt || null;
-
-    const card = document.createElement("div");
-    card.className = "live-order-card";
-    card.innerHTML = `
-      <div class="live-top">
-        <div class="live-id">Order ID: ${id}</div>
-        <div class="live-status ${status}">${status}</div>
-      </div>
-      <div class="live-meta">
-        <small>${network} • ${bundle} • ${amount !== "--" ? 'GHS ' + amount : ""}</small>
-        ${createdAt ? '<div class="live-date">' + new Date(createdAt).toLocaleString() + '</div>' : ""}
-      </div>
-      <div class="live-extra" style="display:none;">
-        <p><strong>Recipient:</strong> ${o.recipient || "--"}</p>
-        <p><strong>Network:</strong> ${network}</p>
-        <p><strong>Bundle:</strong> ${bundle}</p>
-      </div>
-    `;
-
-    card.addEventListener("click", () => {
-      const extra = card.querySelector(".live-extra");
-      if (!extra) return;
-      const visible = extra.style.display === "block";
-      extra.style.display = visible ? "none" : "block";
-      // move to top when expanded
-      if (!visible) liveOrdersContainer.prepend(card);
-    });
-
-    liveOrdersContainer.appendChild(card);
-  });
-}
-
-// start polling live orders
-fetchLiveOrders();
-setInterval(fetchLiveOrders, 5000);
-
-
-
-
-
-
-
-
-
-
-
-
 // ---------- MANUAL CHECK UI binding ----------
 document.addEventListener("DOMContentLoaded", () => {
   const last = localStorage.getItem("lastOrderId");
@@ -512,9 +421,9 @@ document.addEventListener("DOMContentLoaded", () => {
           const status = (order.status || "pending").toLowerCase();
           const desc = getStatusTextMapping(status);
           const statusColor = {
-            pending: "#c1f436ff",
-            processing: "#ffcc00",
-            completed: "#4caf50",
+            pending: "#e98ea2ff",
+            processing: "#f09e23ff",
+            completed: "#76d8b2ff",
             failed: "#f44336",
           }[status] || "#4caf50";
 
@@ -559,7 +468,7 @@ function showSnackBar(message, type = "info") {
   snackbar.className = "snackbar";
 
   // Color scheme based on type
-  if (type === "success") snackbar.style.background = "#28a745";   // green
+  if (type === "success") snackbar.style.background = "#7adabaff";   // green
   else if (type === "error") snackbar.style.background = "#dc3545"; // red
   else if (type === "warning") snackbar.style.background = "#ffc107"; // yellow
   else snackbar.style.background = "#beddca"; // default dark
@@ -581,18 +490,3 @@ function showSnackBar(message, type = "info") {
     setTimeout(() => snackbar.remove(), 500);
 },3000);
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
