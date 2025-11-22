@@ -1278,7 +1278,7 @@ UPDATED UI STYLE ENDS
 .modal-buttons {
   display: flex;
   width: 100%;
-  max-width: 380px;
+  max-width: 410px;
   height: 5rem;
   background-color: rgba(59, 56, 56, 0.253);
   border-radius: 6px;
@@ -1303,7 +1303,7 @@ UPDATED UI STYLE ENDS
 
 .modal-buttons .cancel {
   width: 100%;
-  max-width: 90px;
+  max-width: 80px;
   height: 2.5rem;
   background: #726f6f;
   font-size: 1.08rem;
@@ -1312,8 +1312,8 @@ UPDATED UI STYLE ENDS
 }
 
 .modal-buttons .continue {
-  width: 100%;
-  max-width: 280px;
+  width: max-content;
+  padding: .2rem .3rem;
   height: 2.5rem;
   display: flex;
   align-items: center;
