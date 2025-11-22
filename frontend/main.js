@@ -20,8 +20,15 @@ const API_BASE = (() => {
 })();
 
 
+// ---------- GLOBAL VARIABLES ----------
+let STATUS_POLL_INTERVAL = 5000;
+let _statusPollTimer = null; // to hold the interval timer ID
+
+
 // btn events//
 document.addEventListener("DOMContentLoaded", () => {
+
+  
 
 document.querySelectorAll(".buy-btn").forEach(button => {
   button.addEventListener("click", () => {
