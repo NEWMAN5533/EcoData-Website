@@ -15,409 +15,6 @@
   <link rel="shortcut icon" href="./css/icons/icon-shortcut.png" type="image/png">
   <link rel="stylesheet" href="style.css">
 
-  <!---STYLE-CSS-->
-  <style>
-
-    
-:root {
-  --bg-cl: #FFF;
-  --primary-cl: #fff;
-  --secondary-cl: rgb(50, 50, 190);
-  --dark-cl: #0a0a0a;
-  --ascent-cl: rgb(158, 97, 209);
-  --background-cl: #e6e8ce;
-  --card-full-bg-cl: rgb(255, 217, 0);
-  --card-full-tele-bg-cl: rgb(221, 19, 19);
-  --card-full-airtel-bg-cl:  rgb(6, 6, 231);
-  --border-cl-2: rgba(66, 66, 26, 0.226);
-  --mtn-btn: rgb(193, 196, 19);
-  --telecel-btn: rgb(180, 57, 19);
-  --airteltigo-btn: rgb(28, 46, 119);
-}
-
-
-
-
-
-
-
-
-.foot{
-  width: 100%;
-  height: 3rem;
-  display: flex;
-    .main-section-container{
-      width: 100%;
-      max-width: 480px;
-      align-items: start;
-      justify-self: center;
-      justify-content: start;
-      height: max-content;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      margin-top: 3.9rem;
-    }
-
-    /****
-    HERO-TEXT
-    *****/
-    .hero-text-container{
-      display: flex;
-      align-items: center;
-      justify-items: center;
-      flex-direction: column;
-      width: 100%;
-      max-width: 480px;
-      height: 10rem;
-      position: relative;
-      background: transparent;
-      margin: 1rem 0;
-      padding: .3rem;
-    }
-
-    /****
-    HERO TOP
-    ****/
-    .hero-top-content{
-      width: 100%;
-      height: 60%;
-      max-width: 450px;
-      display: flex;
-      align-items: center;
-      justify-items: center;
-      gap: .2rem;
-      background: transparent;
-    }
-
-
-    /**
-    LEFT CONTENT
-    **/
-    .top-left-content{
-      width: 20%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .top-left-content img{
-      width: 4rem;
-      height: 4rem;
-      border-radius: 50%;
-      padding: .35rem;
-      background: rgb(231, 222, 222);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-    }
-
-    .top-right-content{
-      width: 80%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: start;
-      justify-content: start;
-      background:transparent;
-      position: relative;
-    }
-
-    .top-right-content h2{
-      font-size: 1.3rem;
-      font-family: serif;
-      font-weight: 600;
-    }
-
-    .top-right-content small{
-      font: 1.1rem;
-      font-weight: 500;
-      font-family: serif;
-      color: rgb(87, 81, 81);
-      margin-top: -.6rem;
-    }
-
-    /***
-    HERO BOTTOM
-    ***/
-    .hero-bottom-content{
-      width: 100%;
-      height: 40%;
-      max-width: 450px;
-      display: flex;
-      text-align: center;
-      align-items: center;
-      justify-content: center;
-      gap: .5rem;
-      background: transparent;
-    }
-
-    .btn-div{
-      width: 99%;
-      height: 64%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      margin-top: 1rem;
-      background: linear-gradient(135deg, rgb(241, 62, 122), rgb(192, 3, 82));
-      border-radius: 2rem;
-      font-size: 1.2rem;
-      font-weight: 500;
-      color: white;
-      font-family: serif;
-    }
-
-    /***
-    SELECT
-    ****/
-
-    
-    .select-offer{
-      width: 100%;
-      height: max-content;
-      max-width: 450px;
-      display: flex;
-      flex-direction: column;
-      align-items: start;
-      justify-items: start;
-      gap: 0;
-      padding: .2rem 1rem;
-      background: transparent;
-    }
-
-    .select-offer h2{
-      font-size: 1.3rem;
-      font-weight: 600;
-      font-family: serif;
-    }
-
-    .select-offer small{
-      font-size: 1.1rem;
-      font-weight: 500;
-      margin-top: -.6rem;
-    
-    }
-
-
-
-
-    /****8
-    CARDS GRID VIEW
-    *****/
-    .gridView-container{
-      width: 100%;
-      max-width: 480px;
-      height: max-content;
-      padding: .3rem 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      position: relative;
-      background: transparent;
-      margin: 1rem 0;
-    }
-
-    .gridView-top{
-      width: 100%;
-      max-width: 470px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 3rem;
-      background: transparent;
-      position: relative;
-    }
-
-    /****
-    LEFT
-    ***/
-    .grid-left-div{
-      width: 50%;
-      display:flex;
-      justify-content: start;
-      align-items: center;
-      gap: 1.2rem;
-      height: 100%;
-      background: transparent;
-      position: relative;
-      margin-left: 1rem;
-    }
-
-    .grid-left-div .normal{
-      width: max-content;
-      padding: .4rem .8rem;
-      border: none;
-      font-size: .9rem;
-      background: none;
-      border: 0.1px solid var(--background-cl);
-      border-radius: 6px;
-      color: rgb(44, 41, 41);
-      font-weight: 600;
-      font-family: serif;
-    }
-
-    .grid-left-div .grid.active{
-      background-color: rgb(221, 11, 63);
-      width: max-content;
-      padding: .4rem .8rem;
-      border: none;
-      font-size: .9rem;
-      border-radius: 6px;
-      color: var(--background-cl);
-      font-weight: 600;
-      font-family: serif;
-
-    }
-
-
-
-    /****
-    RIGHT
-    ****/
-    .grid-right-div{
-      width: 505;
-      align-items: end;
-      justify-content: end;
-      display: flex;
-      position: relative;
-      padding-right: .2rem;
-      margin-right: 1rem;
-    }
-
-    .grid-right-div small{
-      font-size: .9rem;
-      font-family: serif;
-      font-weight: 500;
-    }
-
-    /***8
-    GRID CARDS SECTION
-    ****/
-    .gridCards-container{
-      width: 100%;
-      height: max-content;
-      display: flex;
-      justify-self: center;
-      justify-content: center;
-      align-items: center;
-      background: white;
-      margin: 1rem 0;
-      position: relative;
-      padding: .3rem 0;
-    }
-
-    .gridCard-wrapper{
-      width: max-content;
-      height: max-content;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 3rem;
-      background: transparent;
-      align-items: center;
-      justify-content: center;
-      justify-self: center;
-      margin: .3rem 0;
-      padding: .2rem 0;
-    }
-
-    .gridCard{
-      width: 11rem;
-      height: 14rem;
-      display:flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1.5rem;
-      padding: 0 .2rem;
-      flex-direction: column;
-      background: rgba(230, 174, 191, 0.185);
-      border-radius: 1rem;
-      box-shadow: 0 4px 8px rgba(129, 127, 127, 0.6);
-    }
-
-    .gridCard-top{
-      width: 100%;
-      height: 2.3rem;
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-      justify-content: center;
-      background: transparent;
-    }
-
-    .gridCard-top small{
-      font-size: 1rem;
-      font-family: serif;
-      font-weight: 600;
-    }
-
-    .gridCard-top img{
-      width: 2rem;
-      height: 2rem;
-      border-radius: 50%;
-      padding: .2rem;
-      background: rgb(231, 222, 222);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-    }
-
-    .gridCard-middle{
-      width: 100%;
-      height: max-content;
-      display: flex;
-      flex-direction: column;
-      align-items: start;
-      justify-content: start;
-      gap: 0;
-      background: transparent;
-      padding-left: 1rem;
-    }
-
-    .gridCard-middle h3{
-      font-size: 1.17rem;
-      font-weight: 600;
-      font-family: serif;
-      color: black;
-    }
-
-    .gridCard-middle small{
-      font-size: .95rem;
-      margin-top: -.6rem;
-      font-weight: 600;
-      ;
-    }
-    
-    .gridCard-bottom{
-      width: 100%;
-      height: 3rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: transparent;
-    }
-
-    .gridCard-bottom .buy-btn{
-      width: 80%;
-      height: 1.9rem;
-      border: none;
-      border-radius: 8px;
-      background: linear-gradient(135deg, rgb(241, 62, 122), rgb(192, 3, 82));
-      color: white;
-      font-size: 1rem;
-    }
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-}
-  </style>
-
-
-
-
-
-
-
-
 </head>
 <body>
 
@@ -433,16 +30,101 @@
 </div>
 </nav>
 
-<!----MAIN-SECTION-->
-<div class="main-section-container">
-  <!--hero-text-->
-  <div class="hero-text-container">
+
+
+<!-------main-section-container-->
+
+
+
+  <!-----PRODUCT-WRAPPER-->
+  
+<!------MAIN SECTION----->
+<section class="card-container">
+<div class="welcome-card">
+  <div class="welcome-top">
+    <div class="welcome-top-left">
+      <p id="usernameDisplay"></p>
+      <div class="user-info">
+        <span id="usernameDisplay"></span>
+      </div>
+    </div>
+    <div class="welcome-top-right">
+      <input type="text" placeholder="Search...">
+    </div>
+  </div>
+  <div class="welcome-bottom">
+    <div class="close-time"><small>Closing Time:</small>
+    <span>9:00 PM</span></div>
+    <div id="clock"></div>
+  </div>
+</div>
+<section class="notice-container">
+    <!----NOTICE-->
+    <div class="notice-board">
+      <small><span>!</span>Orders after 9pm will be delivered in the morning.</small>
+    </div>
+</section>
+
+
+
+
+<section class="two-div-container">
+
+  <section class="order-status-section">
+  <h2>Check Your Order <br> Status</h2>
+  <span><img src="./css/icons/down-arrow.png" alt="image" loading="lazy"></span>
+  <input type="text" id="orderInput" placeholder="Enter Order ID">
+  <button id="checkBtn">Check Status</button>
+  <div id="statusResult"></div>
+</section>
+
+
+
+
+
+
+<!-- Optional: Check Order manually -->
+
+<!---ENDS-->
+
+
+
+  <!---------NETWORK PURCHASED-DETAILS----->
+  <div class="networks-purchased-container">
+    <div class="purchase-title">
+     <h5>Onclick any to (individual) Pages</h5>
+    </div>
+    <div class="purchase-container">
+      <a href="mtn-page.html"><div class="card-box mtn">MTN</div></a>
+      <a href="telecel-page.html"><div class="card-box telecel">TELECEL</div></a>
+      <a href="airtel-page.html"><div class="card-box at">AIRTELTIGO</div></a>
+    </div>
+  </div>
+</section>
+<!-----BUNDLE PROCESSING--->
+</section>
+
+
+
+
+
+
+
+
+
+
+
+<!--section-title-->
+ <!--hero-text-->
+  <div class="hero-text-container mtn">
     <div class="hero-top-content">
       <div class="top-left-content">
-        <img src="./css/images/telecel.jpg" alt="images" loading="lazy">
+       <a href="telecel-page.html">
+         <img src="./css/images/telecel.jpg" alt="images" loading="lazy">
+       </a>
       </div>
       <div class="top-right-content">
-        <h2>TELECEL Data Bundle</h2>
+        <h2>Telecel Data Bundle</h2>
         <small>Purchase Telecel data bundles for single or multiple recipients</small>
       </div>
     </div>
@@ -450,42 +132,56 @@
       <div class="btn-div">
         9 Packages Available
       </div>
+
+       <!----CARD-DIV---->
+      <div class="card-div">
+        <div class="network-card">
+          <div class="card-network-top">
+            <div class="left-card-content">
+              <img src="./css/images/telecel.jpg" alt="images" loading="lazy">
+            </div>
+            <div class="right-card-content">
+              <h2>Telecel Data Bundle</h2>
+            </div>
+          </div>
+          <div class="bottom-content">
+            <div class="details-network">
+              <span><small>.</small> 90 Days</span>
+              <span><small>.</small> Active</span>
+              <span><small>.</small> 18 Packages</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      
+      <!---SINGLE ORDER BTN-->
+          <div class="single-order-container">
+            <div class="modebtn">Mode</div>
+            <button class="modeN">Normal</button>
+            <button class="mode">Grid</button>
+          </div>
     </div>
   </div>
   <!----HERO ENDS-->
+<!-----NETWORK-BUNDLE-CARDS-TELECEL-CONTAINER---->
 
-  <section class="select-offer">
-    <h2>Select Telecel Offer</h2>
-    <small>Choose from Available Telecel data offers</small>
-  </section>
-
-  <section class="gridView-container">
-    <div class="gridView-top">
-      <div class="grid-left-div">
-        <button class="normal">Normal</button>
-        <button class="grid active">Grid</button>
-      </div>
-      <div class="grid-right-div">
-        <small>9 Package(s)</small>
-      </div>
-    </div>
-
-    <!---CARDS SECTION-->
+   <!---CARDS SECTION-->
     <section class="gridCards-container">
       <!---GRID CARDS WRAPPER-->
       <div class="gridCard-wrapper">
       <!----------CARD----------->
-        <div class="gridCard">
+        <div class="gridCardTele">
         <div class="gridCard-top">
           <small>Telecel Bundle</small>
-          <img src="./css/images/telecel.jpg" alt="">
+         <a href="airtel-page.html"> <img src="./css/images/telecel.jpg" alt="image" loading="lazy"></a>
         </div>
         <div class="gridCard-middle">
           <h3>5GB</h3>
           <small>GHS 27</small>
         </div>
         <div class="gridCard-bottom">
-          <button class="buy-btn "
+          <button class="buy-btn"
   data-network="telecel"
   data-package="telecel_expiry_bundle"
   data-size="5"
@@ -494,7 +190,7 @@
         </div>
       </div>
  <!----------NEXT CARD----------->
-      <div class="gridCard">
+      <div class="gridCardTele">
         <div class="gridCard-top">
           <small>Telecel Bundle</small>
           <img src="./css/images/telecel.jpg" alt="">
@@ -513,7 +209,7 @@
         </div>
       </div>
  <!----------NEXT CARD----------->
-      <div class="gridCard">
+      <div class="gridCardTele">
         <div class="gridCard-top">
           <small>Telecel Bundle</small>
           <img src="./css/images/telecel.jpg" alt="">
@@ -532,7 +228,7 @@
         </div>
       </div>
       <!----------NEXT CARD----------->
-        <div class="gridCard">
+        <div class="gridCardTele">
         <div class="gridCard-top">
           <small>Telecel Bundle</small>
           <img src="./css/images/telecel.jpg" alt="">
@@ -551,7 +247,7 @@
         </div>
       </div>
       <!----------NEXT CARD----------->
-        <div class="gridCard">
+        <div class="gridCardTele">
         <div class="gridCard-top">
           <small>Telecel Bundle</small>
           <img src="./css/images/telecel.jpg" alt="">
@@ -570,7 +266,7 @@
         </div>
       </div>
        <!----------NEXT CARD----------->
-        <div class="gridCard">
+        <div class="gridCardTele">
         <div class="gridCard-top">
           <small>Telecel Bundle</small>
           <img src="./css/images/telecel.jpg" alt="">
@@ -589,7 +285,7 @@
         </div>
       </div>
       <!----------NEXT CARD----------->
-        <div class="gridCard">
+        <div class="gridCardTele">
         <div class="gridCard-top">
           <small>Telecel Bundle</small>
           <img src="./css/images/telecel.jpg" alt="">
@@ -608,7 +304,7 @@
         </div>
       </div>
        <!----------NEXT CARD----------->
-        <div class="gridCard">
+        <div class="gridCardTele">
         <div class="gridCard-top">
           <small>Telecel Bundle</small>
           <img src="./css/images/telecel.jpg" alt="">
@@ -628,7 +324,7 @@
       </div>
 
        <!----------NEXT CARD----------->
-        <div class="gridCard">
+        <div class="gridCardTele">
         <div class="gridCard-top">
           <small>Telecel Bundle</small>
           <img src="./css/images/telecel.jpg" alt="">
@@ -655,52 +351,14 @@
 
 
 
-  </section>
-  <section class="foot">
+
+
+
+
+
+<section class="foot">
     <p style="text-align:center;color:#888;font-size:14px;">© 2025 Ecodata. All rights reserved.</p>
   </section>
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- ABOUT -->
 
 <!----SNACKBAR-SECTION----->
 
@@ -733,6 +391,77 @@
 </div>
 </div>
 
+<!----SIDEBAR @1366PX-DES-->
+<div class="sidebar-container">
+  <div class="top-user">
+    <div class="u-div">
+      U
+    </div>
+    <div class="u-text">User Panel</div>
+  </div>
+  <div class="middle-ranking-navs">
+
+      <div class="rank-link" id="mtnHideBtn">
+       <a href="mnt@1366.html">
+        <img src="./css/icons/mtn-signal.png" alt="image" loading="lazy">
+        <span>MTN</span>
+       </a>
+      </div>
+
+
+       <div class="rank-link" id="telecelHideBtn">
+       <a href="telecel@1366.htm">
+        <img src="./css/icons/telecel-signal.png" alt="image" loading="lazy">
+        <span>TELECEL</span>
+       </a>
+      </div>
+
+        <div class="rank-link" id="airtelHideBtn">
+       <a href="tigo@1366.html">
+        <img src="./css/icons/tigo-signal.png" alt="image" loading="lazy">
+        <span>AIRTELTIGO</span>
+       </a>
+      </div>
+
+        <div class="rank-link">
+       <a href="#">
+        <img src="./css/icons/list.jpg" alt="image" loading="lazy">
+        <span>Term of use</span>
+       </a>
+      </div>
+
+        <div class="rank-link">
+       <a href="#">
+        <img src="./css/icons/terms (1).png" alt="image" loading="lazy">
+        <span>Bundles info</span>
+       </a>
+      </div>
+
+        <div class="rank-link">
+       <a href="#">
+        <img src="./css/icons/agent.png" alt="image" loading="lazy">
+        <span>Be an Agent?</span>
+       </a>
+      </div>
+
+        <div class="rank-link">
+       <a href="#">
+        <img src="./css/icons/partners.jpg" alt="image" loading="lazy">
+        <span>Business Partners</span>
+       </a>
+      </div>
+  </div>
+  <div class="bottom-ranking-links">
+  
+      <!---BUTTON-->
+      <button class="login">Sign Up</button>
+
+      <button class="group">WhatsApp Group</button>
+
+      <button class="join">WhatsApp Channel</button>
+
+  </div>
+</div>
 
 
 
@@ -944,7 +673,10 @@ window.addEventListener("click", function(e){
 </script>
 
 
-<!-----orderStatusTracker-->
+<!---HIDE MULTIPLE DIV--->
+
+
+
 
 
 
@@ -952,4 +684,3 @@ window.addEventListener("click", function(e){
 </body>
 <!-----ORDER STATUS JS---->
 </html>
-
