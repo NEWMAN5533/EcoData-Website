@@ -245,7 +245,7 @@ function saveGuestOrder(orderData) {
 function getStatusTextMapping(status) {
   const s = (status || "").toLowerCase();
   return {
-    delivered: "Your bundle successfully delivered.",
+    delivered: "Your bundle is successfully delivered.",
     pending: "Order awaiting processing.",
     processing: "Order is processing. Please wait.",
     failed: "Order failed. Contact support or try again.",
@@ -412,11 +412,11 @@ document.addEventListener("DOMContentLoaded", () => {
   if (checkBtn && orderInput && statusResult) {
     checkBtn.addEventListener("click", async () => {
       const id = orderInput.value.trim();
-      if (!id) return showSnackBar("Please enter order ID or reference.");
+      if (!id) return showSnackBar("Please enter order ID.");
 
       // Immediate feedback
       statusResult.innerHTML = `
-        <div style="padding:10px; border-radius:8px; background:#f0f0f0; color:#333;">
+        <div style="padding:10px; border-radius:8px;  display: flex;   background:#f0f0f0; color:#333;">
           <p>⏳ Checking your order status <strong>${id}</strong>...</p>
         </div>
       `;
