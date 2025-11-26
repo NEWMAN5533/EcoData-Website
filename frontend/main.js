@@ -417,7 +417,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Immediate feedback
       statusResult.innerHTML = `
         <div style="padding:10px; border-radius:8px;  display: flex;   background:#f0f0f0; color:#333;">
-          <p>⏳ Checking your order status <strong>${id}</strong>...</p>
+          <p>🌀 Checking your order status <strong>${id}</strong>...</p>
         </div>
       `;
 
