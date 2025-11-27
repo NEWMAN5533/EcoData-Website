@@ -4272,11 +4272,11 @@ DISPLAY NONE DIVS
 
 .two-div-container{
   width: 100%;
-  max-width: 380px;
+  max-width: 390px;
   display: flex;
   overflow: hidden;
   margin: 1rem .8rem;
-  height: 25.4rem;
+  height: 22.4rem;
   gap: .1rem;
   justify-content: end;
   justify-self: center;
@@ -4294,7 +4294,7 @@ DISPLAY NONE DIVS
 
 .left-side{
   width: 100%;
-  max-width: 180px;
+  max-width: 195px;
   height: 100%;
   display:flex;
   position: relative;
@@ -4312,7 +4312,7 @@ DISPLAY NONE DIVS
 ***/
 .right-side{
   width: 100%;
-  max-width: 180px;
+  max-width: 195px;
   height: 100%;
   align-items: start;
   justify-content: center;
@@ -4382,13 +4382,12 @@ ORDER STATUS
 
 .order-status-section {
  position: relative;
-  max-width: 190px;
+  max-width: 180px;
   display: flex;
   height: 15rem;
   align-items: center;
   justify-content: center;
   gap: .3rem;
-  margin-right: 1.8rem;
   flex-direction: column;
   justify-self: center;
   background-color: var(--bg-cl);
@@ -4591,10 +4590,16 @@ GRID CARD
 ****/
 .gridCard-wrapper{
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2.8rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .9rem;
 }
 
+.gridCard,
+.gridCardTele,
+.gridCardAirteltigo{
+  width: 9rem;
+  height: 13rem;
+}
 
    /****
 DISPLAY NONE DIVS
@@ -4616,11 +4621,11 @@ DISPLAY NONE DIVS
 
 .two-div-container{
   width: 100%;
-  max-width: 420px;
+  max-width: 450px;
   display: flex;
   overflow: hidden;
   margin: 1rem .8rem;
-  height: 25.4rem;
+  height: 22rem;
   gap: .1rem;
   justify-content: end;
   justify-self: center;
@@ -4638,7 +4643,7 @@ DISPLAY NONE DIVS
 
 .left-side{
   width: 100%;
-  max-width: 210px;
+  max-width: 225px;
   height: 100%;
   display:flex;
   position: relative;
@@ -4656,9 +4661,9 @@ DISPLAY NONE DIVS
 ***/
 .right-side{
   width: 100%;
-  max-width: 210px;
+  max-width: 225px;
   height: 100%;
-  align-items: start;
+  align-items: center;
   justify-content: center;
   display: flex;
   flex-direction: column;
@@ -4706,7 +4711,7 @@ DISPLAY NONE DIVS
 
 .status-result{
   width: 100%;
-  max-width: 180px;
+  max-width: 200px;
   height: max-content;
   position: absolute;
   display: flex;
@@ -4726,12 +4731,13 @@ ORDER STATUS
 
 .order-status-section {
  position: relative;
-  max-width: 170px;
+  max-width: 215px;
   display: flex;
-  height: 17rem;
+  height: 16rem;
   align-items: center;
   justify-content: center;
   gap: .3rem;
+  margin-left: 1.2rem;
   flex-direction: column;
   justify-self: center;
   background-color: var(--bg-cl);
@@ -4952,6 +4958,7 @@ GRID CARD
 DISPLAY NONE DIVS
 ***/
 
+
 .sidebar-container,
 .card-div,
 .single-order-container{
@@ -4968,11 +4975,11 @@ DISPLAY NONE DIVS
 
 .two-div-container{
   width: 100%;
-  max-width: 520px;
+  max-width: 550px;
   display: flex;
   overflow: hidden;
   margin: 1rem .8rem;
-  height: 25.4rem;
+  height: 23.4rem;
   gap: .1rem;
   justify-content: end;
   justify-self: center;
@@ -4990,7 +4997,7 @@ DISPLAY NONE DIVS
 
 .left-side{
   width: 100%;
-  max-width: 260px;
+  max-width: 275px;
   height: 100%;
   display:flex;
   position: relative;
@@ -5008,7 +5015,7 @@ DISPLAY NONE DIVS
 ***/
 .right-side{
   width: 100%;
-  max-width: 260px;
+  max-width: 275px;
   height: 100%;
   align-items: start;
   justify-content: center;
@@ -5078,12 +5085,13 @@ ORDER STATUS
 
 .order-status-section {
  position: relative;
-  max-width: 200px;
+  max-width: 230px;
   display: flex;
   height: 17rem;
   align-items: center;
   justify-content: center;
   gap: .3rem;
+  margin-left: 1.5rem;
   flex-direction: column;
   justify-self: center;
   background-color: var(--bg-cl);
@@ -5219,11 +5227,11 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 
 .networks-purchased-container {
   width: 100%;
-  max-width: 450px;
+  max-width: 580px;
   background: transparent;
   height: 9rem;
   margin: .5rem 0;
-  gap: .4rem;
+  gap: .2rem;
   border: 1px solid rgb(196, 189, 185);
 }
 
@@ -5250,7 +5258,7 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: .9rem;
+  gap: 2rem;
 }
 
 .purchase-container a{
@@ -5259,7 +5267,7 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
 .purchase-container a .card-box{
-  width:  7rem;
+  width:  8rem;
   height: 4rem;
   font-size: 1rem;
 }
