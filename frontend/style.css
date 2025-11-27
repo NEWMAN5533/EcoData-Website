@@ -4731,13 +4731,12 @@ ORDER STATUS
 
 .order-status-section {
  position: relative;
-  max-width: 215px;
+  max-width: 200px;
   display: flex;
-  height: 16rem;
+  height: 17.5rem;
   align-items: center;
   justify-content: center;
   gap: .3rem;
-  margin-left: .9rem;
   flex-direction: column;
   justify-self: center;
   background-color: var(--bg-cl);
@@ -4904,7 +4903,7 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: .9rem;
+  gap: 1.3rem;
 }
 
 .purchase-container a{
