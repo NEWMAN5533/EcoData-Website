@@ -137,7 +137,7 @@
   ***/
   --btn-bg-cl: rgb(250, 126, 9);
   --user-panel-bg: rgba(42, 42, 194, 0.938);
-
+  --clock-bg-cl: rgb(2, 61, 52);
 }
 
 /****
@@ -1709,7 +1709,6 @@ CARD CONTAINER
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 480px;
   justify-content:  center;
   align-items: center;
   justify-self: center;
@@ -1722,7 +1721,8 @@ CARD CONTAINER
 WELCOME CARD 
 **/
 .welcome-card {
-  width: 94%;
+  width: 100%;
+  max-width: 97%;
   height: 10rem;
   display: flex;
   gap: .5rem;
@@ -1787,13 +1787,13 @@ WELCOME CARD
  }
 
   .welcome-top-right input{
-    width: 140px;
-    height: 2rem;
+    width: 120px;
+    height: 1.8rem;
     margin: 0 2rem;
-    margin-right: 2rem;
+    margin-right: 1.6rem;
     display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
+    align-items: center;
+    justify-content: start;
     color: var(--dark-cl);
     background-color: transparent;
     border: 0.1px solid var(--background-cl);
@@ -1807,8 +1807,6 @@ WELCOME CARD
 
   .welcome-top-right input::placeholder{
     color: rgb(197, 190, 190);
-    position: absolute;
-    margin: 0 .5rem;
   }
 
   /*-----BOTTOM-----*/
@@ -1837,14 +1835,14 @@ WELCOME CARD
 
   .close-time small{
     font-size: 1.1rem;
-    color: rgb(7, 138, 138);
+    color: rgb(7, 112, 112);
     font-family: 'Times New Roman', Times, serif;
   }
 
   .close-time span{
     color: white;
     padding: .2rem;
-    background: var(--dark-cl);
+    background: var(--clock-bg-cl);
     border-radius: 4px;
     border: 0.1px solid var(--background-cl);
   }
@@ -1854,7 +1852,7 @@ WELCOME CARD
       font-family: 'Digital-7', monospace;
       font-size: 2em;
       color: #00ffcc;
-      background: var(--dark-cl);
+      background: var(--clock-bg-cl);
       padding: 15px 25px;
       border-radius: 4px;
       display: inline-block;
@@ -3197,7 +3195,14 @@ GRID CARD
 .gridCard-wrapper{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
+  gap: 1.4rem;
+}
+
+.gridCard,
+.gridCardTele,
+.gridCardAirteltigo{
+  width: 10.5rem;
+  height: 14rem;
 }
 
 
@@ -3213,11 +3218,18 @@ DISPLAY NONE DIVS
 
 .card-container{
   display: flex;
-  max-width:99%;
+  width: 100%;
+  max-width: 100%;
   flex-direction: column;
   height: max-content;
   justify-self: center;
   justify-content: center;
+  align-items: center;
+}
+
+#clock{
+  height: 1.8;
+  width: max-content;
 }
 
 
@@ -3226,14 +3238,14 @@ DISPLAY NONE DIVS
   max-width: 390px;
   display: flex;
   overflow: hidden;
-  margin: 1rem .8rem;
+  margin: 1rem 0;
   height: 25.4rem;
   gap: .1rem;
   justify-content: end;
   justify-self: center;
   align-items: center;
   position: relative;
-  background: var(--bg-cl);
+  background: transparent;
   border: 0.1px solid var(--border-cl-2);
   border-radius: 1rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -3564,10 +3576,20 @@ DISPLAY NONE DIVS
 
 .card-container{
   display: flex;
-  max-width: 480px;
+  width: 100%;
+  max-width: 100%;
   flex-direction: column;
   height: max-content;
 }
+
+.welcome-card{
+  width: 100%;
+  max-width: 98%;
+}
+
+
+
+
 
 
 .two-div-container{
@@ -3917,9 +3939,15 @@ DISPLAY NONE DIVS
 
 .card-container{
   display: flex;
-  max-width: 600px;
+  width: 100%;
+  max-width: 100%;
   flex-direction: column;
   height: max-content;
+}
+
+.welcome-card{
+  width: 100%;
+  max-width: 98%;
 }
 
 
@@ -6799,11 +6827,13 @@ CARD CONTAINER
 }
 
 
+
+
 /**
 WELCOME CARD 
 **/
 .welcome-card {
-  width: 98%;
+  width: 99%;
   height: 10.6rem;
   display: flex;
   gap: .5rem;
@@ -6922,14 +6952,14 @@ WELCOME CARD
 
   .close-time small{
     font-size: 1rem;
-    color: var(--dark-cl);
+    color: var(--clock-bg-cl);
     font-family: 'Times New Roman', Times, serif;
   }
 
   .close-time span{
     color: white;
     padding: .1rem .6rem;
-    background: var(--dark-cl);
+    background: var(--clock-bg-cl);
     border-radius: 4px;
     font-size: 1.2rem;
     border: 0.1px solid var(--background-cl);
@@ -6940,7 +6970,7 @@ WELCOME CARD
       font-family: 'Digital-7', monospace;
       font-size: 2em;
       color: #00ffcc;
-      background: var(--dark-cl);
+      background: var(--clock-bg-cl);
       padding: 10px 25px;
       border-radius: 4px;
       display: inline-block;
@@ -7495,8 +7525,9 @@ join btn
 }
 
 .group:hover{
-  background: green;
-  color: white;
+ background: var(--clock-bg-cl);
+border: 2px solid green;
+color: white;
 }
 
 
@@ -7507,19 +7538,17 @@ join btn
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--user-panel-bg);
+  border: 1px solid var(--ascent-cl);
   border-radius: 1rem;
   cursor: pointer;
-  background: beige;
   transition: .1s ease;
-  background-color: var(--user-panel-bg);
-  color: white;
+  color: black;
 }
 
 .join:hover{
-  background: var(--background-cl);
-  border: 1px solid green;
-  color:var(--dark-cl);
+  background: var(--clock-bg-cl);
+  border: 2px solid green;
+  color: white;
 }
 
 
