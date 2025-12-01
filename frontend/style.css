@@ -492,7 +492,7 @@ UPDATED UI STYLE
       font-size: 1rem;
       font-family: serif;
       font-weight: 600;
-      color: rgb(34, 32, 32);
+      color: rgb(107, 42, 42);
     }
 
     .gridCard-top img{
@@ -524,10 +524,11 @@ UPDATED UI STYLE
     }
 
     .gridCard-middle small{
-      font-size: .95rem;
+      font-size: 1rem;
+      font-family: serif;
       margin-top: -.6rem;
       font-weight: 600;
-      color: rgb(53, 50, 50);
+      color: rgb(88, 24, 24);
     }
     
     .gridCard-bottom{
