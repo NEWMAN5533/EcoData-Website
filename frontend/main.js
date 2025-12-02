@@ -174,6 +174,7 @@ async function saveOrderToFirestore(orderObj) {
 }
 }
 
+//NEW UPDATED 2/12/2025 //
 // === SEND ORDER TO BACKEND ===
 async function orderBundle(network, recipient, packageName, size, reference) {
   try {
@@ -186,7 +187,7 @@ async function orderBundle(network, recipient, packageName, size, reference) {
     const query = new URLSearchParams({
       network,
       recipient,
-      package: packageName,
+      package: packageName, // backend maps this to pkg
       size: size.toString(),
       paymentReference: reference,
     });
@@ -196,33 +197,63 @@ async function orderBundle(network, recipient, packageName, size, reference) {
       headers: { "Content-Type": "application/json" },
     });
 
+    if (!response.ok) {
+      const txt = await response.text().catch(() => null);
+      console.error("Order request non-OK:", response.status, txt);
+      showSnackBar("Failed to place order (server error).");
+      return;
+    }
+
     const result = await response.json();
+    console.log("Backend order response:", result);
 
     if (result.success) {
       showSnackBar("✅ Order Placed successfully!");
 
-      // The order object returned from server
-      const returnedOrder = result.order?.order || result.order || result;
-      console.log("📦 Order details:", returnedOrder);
+      // Normalize returned order object (handles multiple nesting shapes)
+      let returnedOrder = null;
+      if (result.order) {
+        // sometimes backend returns { order: { ... } } or { order: { order: { ... } } }
+        returnedOrder = result.order.order || result.order || null;
+      } else if (result.data) {
+        returnedOrder = result.data.order || result.data;
+      } else {
+        returnedOrder = result;
+      }
 
-      // ✅ Save to Firestore
-      saveOrderToFirestore(returnedOrder).then((fireId) => {
-        if (fireId) console.log("Order persisted in Firestore:", fireId);
+      console.log("Normalized order:", returnedOrder);
 
-        // ✅ Save locally for guests (important fix!)
-        saveGuestOrder(returnedOrder);
-      });
+      // Save to Firestore (if available) and locally
+      if (returnedOrder) {
+        saveOrderToFirestore(returnedOrder).then((fireId) => {
+          if (fireId) console.log("Order persisted in Firestore:", fireId);
+          saveGuestOrder(returnedOrder);
+        });
 
-      // Update dashboard UI or order history
-      handleNewOrder(returnedOrder);
+        // Update dashboard UI or order history
+        handleNewOrder(returnedOrder);
+
+        // Save last orderId/ref for manual check convenience
+        const idToSave = returnedOrder.orderId || returnedOrder.reference || returnedOrder.id;
+        if (idToSave) localStorage.setItem("lastOrderId", idToSave);
+      } else {
+        // If no order data returned, still save reference to localStorage
+        saveGuestOrder({ reference });
+      }
+
     } else {
+      console.error("Order failed:", result);
       showSnackBar(`Failed to purchase data: ${result.message || "Unknown error"}`);
     }
   } catch (err) {
     console.error("⚠ Server error:", err);
-    showSnackBar("⚠ Server error. Please try again later.");
-  }
+    showSnackBar("⚠ Server error. Please try again later.");
 }
+}
+
+// ends//
+
+
 
 // ✅ Save Guest Orders to Local Storage
 function saveGuestOrder(orderData) {
