@@ -1,4 +1,5 @@
-// server.js
+
+// OLD SERVER 2/12/2025//
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -28,29 +29,11 @@ const processedOrders = new Map();
   });
 */
 
-async function fetchAvailableOffers() {
-  try {
-    const base = (process.env.SWIFT_BASE_URL || "https://swiftdata-link.com").replace(/\/$/, "");
-    const res = await axios.get(`${base}/api/v1/offers`, {
-      headers: { "x-api-key": process.env.SWIFT_API_KEY },
-      timeout: 10000,
-    });
-    if (res.data?.success && Array.isArray(res.data.offers)) return res.data.offers;
-    return [];
-  } catch (e) {
-    console.warn("Could not fetch offers from SwiftData:", e.message || e);
-    return [];
-  }
-}
-
 // Helper: common logic for buy-data (POST or GET)
-async function handleBuyDataRequest({ network, recipient, pkg, size, paymentReference }) {
-  if (!recipient || !pkg || !paymentReference) {
+async function handleBuyDataRequest({network, recipient, pkg, size, paymentReference }) {
+  if (!network || !recipient || !pkg || !paymentReference) {
     return { ok: false, status: 400, body: { success: false, message: "Missing required fields" } };
   }
-
-  // 0) Normalize size to int
-  const volume = parseInt(size, 10) || 0;
 
   // 🚨 1. STOP DUPLICATE REQUESTS HERE
   if (processedOrders.has(paymentReference)) {
@@ -65,26 +48,6 @@ async function handleBuyDataRequest({ network, recipient, pkg, size, paymentRefe
     };
   }
 
-  // Optional: verify offerSlug exists & volume supported (pre-check)
-  const offers = await fetchAvailableOffers();
-  if (offers.length) {
-    const found = offers.find(o => (o.offerSlug || "").toLowerCase() === (pkg || "").toLowerCase());
-    if (!found) {
-      return {
-        ok: false,
-        status: 400,
-        body: { success: false, message: `Offer "${pkg}" not found in SwiftData offers` }
-      };
-    }
-    // if volumes provided in offer, ensure requested volume is allowed
-    if (Array.isArray(found.volumes) && found.volumes.length && !found.volumes.includes(volume)) {
-      return {
-        ok: false,
-        status: 400,
-        body: { success: false, message: `Volume ${volume} not available for offer "${pkg}"` }
-      };
-    }
-  }
   // 2. Verify Paystack payment
   try {
     const verify = await axios.get(
@@ -103,19 +66,19 @@ async function handleBuyDataRequest({ network, recipient, pkg, size, paymentRefe
       };
     }
 
-    // 3. Build SwiftData order payload using API v1 (offerSlug-based)
+    // 3. Build SwiftData order payload
     const orderData = {
       type: "single",
-      volume: volume,
+      volume: parseInt(size, 10),
       phone: recipient,
       offerSlug: pkg,
-      // webhookUrl optional - include only if configured
-      ...(process.env.SWIFT_WEBHOOK_URL ? { webhookUrl: process.env.SWIFT_WEBHOOK_URL } : {})
+      webhookUrl:
+        process.env.SWIFT_WEBHOOK_URL || "https://swiftdata-link.com/api/webhooks/orders",
     };
 
-    // 4. Post to SwiftData (v1 endpoint)
+    // 4. Post to SwiftData
     const swiftBase = (process.env.SWIFT_BASE_URL || "https://swiftdata-link.com").replace(/\/$/, "");
-    const swiftUrl = `${swiftBase}/api/v1/order`;
+    const swiftUrl = `${swiftBase}api/v1/order`;
 
     const swiftRes = await axios.post(swiftUrl, orderData, {
       headers: {
@@ -127,7 +90,7 @@ async function handleBuyDataRequest({ network, recipient, pkg, size, paymentRefe
 
     // ❇ SAVE RESULT TO PREVENT DUPLICATES
     processedOrders.set(paymentReference, {
-      status: swiftRes.data?.success ? "success" : "failed",
+      status: "success",
       response: swiftRes.data,
     });
 
@@ -153,7 +116,7 @@ async function handleBuyDataRequest({ network, recipient, pkg, size, paymentRefe
       };
     }
   } catch (err) {
-    const errData = err.response?.data || err.message || String(err);
+    const errData = err.response?.data || err.message || err;
     console.error("🔥 handleBuyDataRequest error:", errData);
 
     // Save failure so duplicate network retry does not call Swift again
@@ -198,7 +161,7 @@ app.get("/api/v1/order/status/:orderIdOrRef", async (req, res) => {
 
   try {
     const base = (process.env.SWIFT_BASE_URL || "https://swiftdata-link.com").replace(/\/$/, "");
-    const swiftUrl = `${base}/api/v1/order/status/${encodeURIComponent(orderIdOrRef)}`;
+    const swiftUrl = `${base}/order/status/${encodeURIComponent(orderIdOrRef)}`;
 
     const response = await axios.get(swiftUrl, {
       headers: {
@@ -208,7 +171,6 @@ app.get("/api/v1/order/status/:orderIdOrRef", async (req, res) => {
       timeout: 10000,
     });
 
-    // Swift v1 returns { success: true, order: { ... } }
     if (response.data?.success) {
       return res.json({ success: true, order: response.data.order });
     } else {
@@ -219,28 +181,11 @@ app.get("/api/v1/order/status/:orderIdOrRef", async (req, res) => {
       });
     }
   } catch (error) {
-    console.error("⚠ SwiftData Status Error:", error.response?.data || error.message);
     return res.status(500).json({
       success: false,
       message: "Error fetching order status",
       error: error.response?.data || error.message,
     });
-  }
-});
-
-// optional: lightweight route to proxy offers (useful for building frontend UI)
-app.get("/api/v1/offers", async (req, res) => {
-  try {
-    const base = (process.env.SWIFT_BASE_URL || "https://swiftdata-link.com").replace(/\/$/, "");
-    const swiftUrl = `${base}/api/v1/offers`;
-    const response = await axios.get(swiftUrl, {
-      headers: { "x-api-key": process.env.SWIFT_API_KEY },
-      timeout: 10000,
-    });
-    return res.json(response.data);
-  } catch (err) {
-    console.error("Error fetching offers:", err.message || err);
-    return res.status(500).json({ success: false, message: "Failed to fetch offers" });
   }
 });
 
@@ -252,3 +197,5 @@ app.get("*", (req, res) => {
 // Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
+
+// ENDS//
