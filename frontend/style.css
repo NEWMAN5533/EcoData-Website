@@ -1404,6 +1404,7 @@ WATCH VIDEO SECTION
 
 
 .nav-left img{
+  margin-top: .3rem;
   width: 3.4rem;
   height: 3.4rem;
   border-radius: 50%;
@@ -1460,7 +1461,6 @@ WATCH VIDEO SECTION
 }
 
 .menu-icon{
-  background: rgba(219, 214, 214, 0.37);
   border-radius: 4px;
   padding: .3px;
 }
@@ -2244,18 +2244,21 @@ BUNDLE PROCESSING
 .purchase-container a .mtn{
   display: flex;
   background: linear-gradient(135deg, rgb(227, 243, 5), rgb(236, 140, 13));
+    box-shadow: 0 2px 6px rgba(121, 121, 81, 0.8);
 }
 
 
 .purchase-container a .telecel{
   display: flex;
   background: linear-gradient(135deg, rgb(241, 62, 122), rgb(192, 3, 82));
+  box-shadow: 0 2px 6px rgba(73, 53, 55, 0.8);
 }
 
 
 .purchase-container a .at{
   display: flex;
   background:  linear-gradient(135deg, rgb(75, 148, 233), rgb(4, 145, 170));
+  box-shadow: 0 2px 6px rgba(46, 61, 65, 0.8);
 }
 
 
@@ -2306,48 +2309,66 @@ MENU-CARD SECTION
 ****/
 .menu-card-container {
   width: 100%;
-  max-width: 13rem;
-  height: 19rem;
+  max-width: 15rem;
+  height: 23rem;
   position: fixed;
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: center;
   flex-direction: column;
+  gap: .5rem;
   right: -500px;
-  top: 4rem;
-  border: 0.1px solid var(--bg-cl);
+  top: 4.2rem;
+  border: 1px solid rgb(44, 23, 23);
   background: rgb(44, 37, 37);
-  box-shadow: 0 4px 8px rgba(58, 57, 57, 0.4);
-  border-radius: .2rem;
+  box-shadow: 0 2px 6px rgba(73, 72, 72, 0.5);
+  border-radius: 1rem;
   transition: .5s ease-in-out;
 }
-.close-card{
-  display: flex;
+
+.menu-ranking-links{
   width: 100%;
   height: max-content;
   padding: .2rem;
-  align-items: end;
-  justify-content: end;
-}
-
-
-.menu-card{
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
+  gap: .5rem;
   flex-direction: column;
-  text-align: center;
-  gap: 1.4rem;
-  width: 90%;
-  height: 17.5rem;
-  margin: 0 .4rem;
-  padding: .4rem 0;
-   border: 0.2px solid pink;
-  background: rgb(255, 255, 255);
-  border-end-end-radius: 1rem;
-  border-start-start-radius: 1rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  position: relative;
 }
+
+.join-btn{
+  width: 11.5rem;
+  height: 1.9rem;
+  margin-left: .6rem;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  text-align: center;
+  color: white;
+  background: var(--clock-bg-cl);
+  border: 2px solid green;
+  border-radius: 2rem;
+}
+
+.join-btn:hover{
+  cursor: pointer;
+  background: var(--btn-bg-cl);
+}
+
+.join-btn img{
+  width: 1.3rem;
+  height: 1.3rem;
+  margin-right: .2rem;
+}
+
+.grp{
+  width: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+
 
 /***
 CARD TOP
@@ -2419,22 +2440,19 @@ CARD TOP
   flex-direction: column;
   width: 100%;
   height: 2.8rem;;
-  align-items: center;
+  align-items: start;
   justify-content: center;
   text-align: center;
+  border-bottom: 0.01px solid rgb(73, 72, 72);
   gap: .5rem;
   color: black;
-  margin: 0 .4rem;
   transition: .1s ease-in-out;
 }
 
 .link:hover{
-  background: rgb(138, 132, 132);
-  color: rgb(247, 246, 246);
-  height: 3rem;
+  background: rgb(44, 37, 37);
   width: 100%;
-  border-end-end-radius: 1rem;
-  border-start-start-radius: 1rem;
+  cursor: pointer;
 }
 
 
@@ -2445,21 +2463,23 @@ CARD TOP
   justify-content: center;
   display: flex;
   text-align: center;
-  color: rgb(32, 29, 29);
+  color: rgb(253, 252, 252);
   font-size: 1.1rem;
 }
 
 .link a:hover{
-  color: var(--bg-cl);
+  color: var(--ascent-cl);
 }
 
 .link img{
   width: 2.1rem;
   height: 2.1rem;
-  margin-right: .4rem;
+  margin: 0 1rem;
   background: var(--background-cl);
   padding: .2rem;
   border-radius: 5px;
+  margin-bottom: .5rem;
+
 
 }
 
@@ -2474,28 +2494,31 @@ CARD TOP
 /***
 CARD BOTTOM
 ****/
+
+
 .logout-btn{
   display: flex;
-  border: 0.2px solid green;
-  width: 10rem;
+  border: 2px solid green;
+  width: 12.7rem;
   justify-content: center;
   align-items: center;
-  border-radius: 5px;
-  background: green;
+  border-radius: 2rem;
+  background: rgb(10, 29, 10);
   color: var(--bg-cl);
-  height: 2rem;
+  height: 2.4rem;
   font-size: 1rem;
   position: relative;
   display: flex;
   box-shadow: 0 2px 6px rgba(61, 37, 32, 0.479);
   transition: 1s ease;
   cursor: pointer;
-  margin: .5rem 1rem;
+  margin: 0 .6rem;
 }
 
 .logout-btn:hover{
   background: rgb(52, 80, 11);
   box-shadow: 0 2px 6px rgba(71, 46, 42, 0.479);
+  color: var(--background-cl);
 }
 
 .user-info {
