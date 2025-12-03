@@ -1,3 +1,282 @@
+/***
+dark mode styles
+****/
+.theme-switch {
+  position: relative;
+  margin-bottom: .4rem;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  width: 75px;
+  margin-right: 1rem;
+  height: 44px;
+}
+
+.theme-switch input {
+  display: none;
+}
+
+.slider {
+  position: relative;
+  background: #2c2a2a;
+  border-radius: 50px;
+  width: 100%;
+  height: 100%;
+  transition: background 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5px;
+}
+
+.slider span img{
+  width: 1.8rem;
+  height: 1.8rem;
+  rotate: -26deg;
+  margin-top: .2rem;
+}
+
+.slider .icon {
+  font-size: 14px;
+  opacity: 0.4;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  position: absolute;
+  ;
+}
+
+input:checked + .slider {
+  background: #222;
+}
+
+input:checked + .slider .sun {
+  opacity: 0;
+  transform: translateX(-16px);
+}
+
+input:checked + .slider .moon {
+  opacity: 1;
+  transform: translateX(25px);
+}
+
+.slider .moon {
+opacity:0;
+}
+
+/***
+dark css
+***/
+
+body.dark-mode {
+  background: var(--darkMode-bg-cl);
+}
+
+
+.dark-mode .navbar{
+  background: var(--darkMode-bg-cl);
+  border-bottom: 0.1px solid var(--thin-border);
+  box-shadow: 0 2px 6px rgba(60, 62, 63, 0.4);
+}
+
+.dark-mode .menu-icon{
+  background: #2f3131;
+  width: 2rem;
+  height: 1.9rem;
+  border-radius: .1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dark-mode .welcome-card{
+  background: var(--welcome-card-bg);
+  border: 2px solid rgba(98, 126, 121, 0.849);
+  color: var(--background-cl);
+  box-shadow: 0 2px 6px rgba(92, 91, 91, 0.2);
+}
+
+.dark-mode .welcome-top{
+  background: var(--welcome-card-bg);
+  box-shadow: inset 0 2px 6px rgba(92, 91, 91, 0.);
+  border: 2px solid var(--thin-border);
+  border-radius: .2rem;
+}
+.dark-mode .welcome-top p{
+  color: var(--text-cl);
+}
+
+.dark-mode .welcome-top-left p{
+  color: var(--text-cl-2);
+}
+
+/**
+RIGHT INPUT
+8**/
+.dark-mode .welcome-top-right input{
+  border: 0.5px solid var(--thin-border);
+  color: var(--text-cl);
+  border-radius: .2rem;
+  box-shadow: 0 2px 6px rgba(52, 53, 54, 0.25);
+}
+
+/**
+WELCOME BOTTOM
+***/
+.dark-mode #clock,
+.dark-mode .close-time span{
+  border: 0.2px solid var(--thin-border-1);
+  padding: 0 .2rem;
+}
+
+.dark-mode .close-time{
+  border: 1px solid var(--thin-border);
+  padding: .2rem .2rem;
+  border-start-end-radius: .4rem;
+  border-end-start-radius: .5rem;
+  margin-bottom: 0;
+  margin-left: 0;
+  box-shadow: 0 3px 7px solid rgba(0, 0, 0, 0.4);
+}
+
+/*--------NOTICE BOARD-----*/
+.dark-mode .notice-board{
+  color: var(--text-cl);
+  background: var(--welcome-card-bg);
+  border: 0.1px solid var(--thin-border);
+}
+
+.dark-mode .notice-board span{
+  background: var(--thin-border-3);
+}
+.dark-mode .notice-board strong{
+  color: var(--text-cl-2);
+}
+
+/****
+TWO DIV CONTAINER
+****/
+.dark-mode .two-div-container{
+  background: var(--welcome-card-bg);
+  border: 1px solid var(--thin-border);
+  box-shadow: 0 2px 6px 0 2px 6px rgba(105, 106, 107, 0.8);
+}
+
+.dark-mode .order-status-section input{
+  background: none;
+  border: 0.2px solid var(--thin-border);
+}
+
+.dark-mode .order-status-section{
+  background: var(--welcome-card-bg);
+  border: 1px solid var(--thin-border);
+  color: var(--text-cl);
+  box-shadow:0 2px 6px rgba(22, 36, 51, 0.8);
+}
+
+.dark-mode .checkBt{
+  background: var(--darkMode-bg-cl);
+  border: .001px solid rgb(11, 31, 27);
+  box-shadow: 0 2px 6px rgba(66, 66, 68, 0.9);
+}
+
+.dark-mode .status-result{
+  background: var(--darkMode-bg-cl);
+}
+
+/****
+NETWORK PURCHASE DIV
+***/
+.dark-mode .networks-purchased-container{
+  background: var(--darkMode-bg-cl);
+  border: 1px solid var(--thin-border-3);
+  box-shadow: 0 2px 6px rgba(15, 36, 58, 0.9);
+}
+
+.dark-mode .purchase-title h5{
+  color: var(--text-cl-2);
+}
+
+.dark-mode .card-box{
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+
+/****
+NETWORK TITLE SECTION
+****/
+
+.dark-mode .top-right-content  small{
+  color: var(--text-cl-3);
+}
+
+/***
+GRID CARD CONTAINER
+****/
+.dark-mode .gridCards-container{
+  background: var(--welcome-card-bg);
+  margin: 0;
+}
+
+.dark-mode .hero-text-container{
+  background: var(--welcome-card-bg);
+  margin: 0;
+  color: var(--text-cl-2);
+}
+
+/***
+INDIVIDUA CARDS
+***/
+.dark-mode .gridCard{
+  background: var(--card-mtn-bg);
+  box-shadow: 0 2px 6px rgba(13, 29, 46, 0.25);
+  border: 2px solid var(--thin-border-3);
+}
+
+
+.dark-mode .gridCardTele{
+  background: var(--card-tel-bg);
+  box-shadow: 0 2px 6px rgba(13, 29, 46, 0.25);
+  border: 2px solid var(--thin-border-3);
+}
+
+.dark-mode .gridCardAirteltigo{
+  background: var(--card-tigo-bg);
+  box-shadow: 0 2px 6px rgba(13, 29, 46, 0.25);
+  border: 2px solid var(--thin-border-3);
+}
+
+/***
+CARD INNER TEXT
+***/
+.dark-mode .gridCard-top small{
+  color: var(--thin-border);
+}
+
+.dark-mode .gridCard-middle small{
+  color: var(--thin-border);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.dark-mode .foot{
+  background: var(--welcome-card-bg);
+  border-top: 0.1px solid var(--thin-border);
+}
+
+
+
+/***
+ENDS
+***/
+
 .order-tracker {
   width: 100%;
   max-width: 460px;
@@ -138,7 +417,39 @@
   --btn-bg-cl: rgb(250, 126, 9);
   --user-panel-bg: rgba(42, 42, 194, 0.938);
   --clock-bg-cl: rgb(2, 61, 52);
+
+  /***
+  DARK MODE COLORS
+  ***/
+  --darkMode-bg-cl: rgb(17, 2, 31);
+  --welcome-card-bg: rgb(1, 11, 39);
+  --welcome-card-bg-2: rgb(24, 5, 5);
+  --welcome-card-border: rgb(74, 88, 94);
+  --thin-border: rgb(35, 48, 49);
+  --text-cl: rgb(145, 168, 164);
+  --text-cl-2: rgb(210, 216, 216);
+  --text-cl-3: rgb(139, 141, 141);
+
+  /**
+  BORDER SOLID COLORS
+  **/
+  --thin-border-1:  #0d6d5a;
+  --thin-border-2:  #830616;
+  --thin-border-3:  #b97207;
+  --thin-border-4:  #036aa7;
+  --thin-border-5:  #bba907;
+  --thin-border-6:   rgb(17, 2, 31);
+  --thin-border-7:  rgb(1, 11, 39);
+
+  /***
+  CARD BG
+  ***/
+  --card-mtn-bg:  #cc8f34;
+  --card-tel-bg:  #c02b51;
+  --card-tigo-bg:  #2f43b3e8;
 }
+
+
 
 /****
 UPDATED UI STYLE
@@ -1408,7 +1719,7 @@ WATCH VIDEO SECTION
   width: 3.4rem;
   height: 3.4rem;
   border-radius: 50%;
-  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 10px rgba(32, 26, 26, 0.3);
   cursor: pointer;
 }
 
