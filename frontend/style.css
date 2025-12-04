@@ -4387,6 +4387,8 @@ GRID CARD
 .tel{
   justify-self: start;
   margin-left: .4rem;
+  width: 100%;
+  max-width: 600px;
 }
 
    /****
@@ -4748,6 +4750,8 @@ GRID CARD
 .tel{
   justify-self: start;
   margin-left: .4rem;
+  width: 100%;
+  max-width: 640px
 }
 
    /****
@@ -5100,6 +5104,8 @@ GRID CARD
 .tel{
   justify-self: start;
   margin-left: .4rem;
+  width: 100%;
+  max-width: 768px;
 }
 
    /****
@@ -5451,6 +5457,8 @@ GRID CARD
 .tel{
   justify-self: start;
   margin-left: .4rem;
+  width: 100%;
+  max-width: 800px;
 }
 
    /****
@@ -5779,6 +5787,13 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 @media (min-width: 900px) {
    .navbar{
     width: 100%;
+  }
+
+  /***
+  DISPLAY NONE DIV
+  ***/
+  .theme-switch{
+    display: none;
   }
 
 /****
@@ -6131,7 +6146,12 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   .navbar{
     width: 100%;
   }
-
+ /***
+  DISPLAY NONE DIV
+  ***/
+  .theme-switch{
+    display: none;
+  }
 
      /****
 DISPLAY NONE DIVS
@@ -6508,6 +6528,12 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     margin: 0;
   }
 
+   /***
+  DISPLAY NONE DIV
+  ***/
+  .theme-switch{
+    display: none;
+  }
 
      /****
 DISPLAY NONE DIVS
@@ -6883,7 +6909,12 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     height: 3.5rem;
     margin: 0;
   }
-
+ /***
+  DISPLAY NONE DIV
+  ***/
+  .theme-switch{
+    display: none;
+  }
 
      /****
 DISPLAY NONE DIVS
@@ -8416,7 +8447,12 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     margin: 0;
   }
 
-
+ /***
+  DISPLAY NONE DIV
+  ***/
+  .theme-switch{
+    display: none;
+  }
      /****
 DISPLAY NONE DIVS
 ***/
