@@ -27,6 +27,7 @@ dark mode styles
   align-items: center;
   justify-content: space-between;
   padding: 0 5px;
+  border: 2px solid rgb(88, 39, 50);
 }
 
 .slider span img{
@@ -46,11 +47,13 @@ dark mode styles
 
 input:checked + .slider {
   background: #222;
+  border: 0.1px solid rgb(53, 49, 48);
 }
 
 input:checked + .slider .sun {
   opacity: 0;
   transform: translateX(-16px);
+
 }
 
 input:checked + .slider .moon {
@@ -78,7 +81,7 @@ body.dark-mode {
 }
 
 .dark-mode .menu-icon{
-  background: #2f3131;
+  background: #717272;
   width: 2rem;
   height: 1.9rem;
   border-radius: .1rem;
@@ -258,19 +261,27 @@ INDIVIDUA CARDS
   background: var(--card-mtn-bg);
   box-shadow: 0 2px 6px rgba(13, 29, 46, 0.25);
   border: 2px solid var(--thin-border-3);
+  border-radius: .5rem;
 }
 
 
 .dark-mode .gridCardTele{
   background: var(--card-tel-bg);
   box-shadow: 0 2px 6px rgba(13, 29, 46, 0.25);
-  border: 2px solid var(--thin-border-3);
+  border: 2px solid var(--thin-border-2);
+  border-radius: .5rem;
 }
 
 .dark-mode .gridCardAirteltigo{
   background: var(--card-tigo-bg);
   box-shadow: 0 2px 6px rgba(13, 29, 46, 0.25);
-  border: 2px solid var(--thin-border-3);
+  border: 2px solid var(--thin-border-4);
+  border-radius: .5rem;
+}
+
+.dark-mode .gridCard-bottom .buy-btn{
+  border-radius: 2rem;
+  width: 96%;
 }
 
 /***
@@ -474,8 +485,8 @@ ENDS
   CARD BG
   ***/
   --card-mtn-bg:  #cc8f34;
-  --card-tel-bg:  #c02b51;
-  --card-tigo-bg:  #2f43b3e8;
+  --card-tel-bg:  #df2b58;
+  --card-tigo-bg:  #3a52db;
 }
 
 
@@ -7207,7 +7218,13 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     box-shadow:none;
     border-bottom: 0.1px solid var(--background-cl);
   }
-
+/***
+display none div
+***/
+.theme-switch,
+.menu-icon{
+  display: none;
+}
 
   /***
   THE TWO DIV CONTAINER
