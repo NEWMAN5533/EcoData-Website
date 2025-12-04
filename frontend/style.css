@@ -1700,7 +1700,7 @@ UPDATED UI STYLE ENDS
   padding: 10px;
   width: max-content;
   border: none;
-  border-radius: .2rem;
+  border-radius: 4px;
   cursor: pointer;
   font-weight: 500;
   border: 0.1px solid rgb(14, 12, 12);
@@ -1715,13 +1715,12 @@ UPDATED UI STYLE ENDS
   font-size: 1.08rem;
   font-family: serif;
   color: var(--text-cl-2);
-  border: 2px solid var(--text-cl-3);
+  border: 1px solid var(--text-cl-3);
   box-shadow:  0 2px 6px rgba(66, 65, 65, 0.2);
 }
 
 .modal-buttons .continue {
   width: max-content;
-  padding: .2rem .3rem;
   height: 2.5rem;
   display: flex;
   align-items: center;
@@ -1730,7 +1729,7 @@ UPDATED UI STYLE ENDS
   font-size: 1.1rem;
   font-family: serif;
   color: var(--text-cl-2);
-  border: 2px solid var(--thin-border);
+  border: 1px solid var(--thin-border);
   box-shadow:  0 2px 6px rgba(70, 69, 69, 0.2);
 }
 
