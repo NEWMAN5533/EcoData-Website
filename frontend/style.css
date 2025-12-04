@@ -24,10 +24,7 @@ dark mode styles
   align-items: center;
 }
 
-.dark-mode .darkRemain img{
-  width: 3rem;
-  height: 3.5rem;
-}
+
 
 
 .slider {
@@ -104,6 +101,11 @@ body.dark-mode {
   justify-content: center;
 }
 
+.dark-mode .darkRemain img{
+  width: 3rem;
+  height: 3rem;
+}
+
 .darkRemain img{
   display: none;
   animation: 5s rotate infinite;
@@ -155,10 +157,10 @@ body.dark-mode {
 RIGHT INPUT
 8**/
 .dark-mode .welcome-top-right input{
-  border: 0.5px solid var(--thin-border);
+  border: 2px solid var(--thin-border);
   color: var(--text-cl);
   border-radius: .2rem;
-  box-shadow: 0 2px 6px rgba(52, 53, 54, 0.25);
+  box-shadow: 0 2px 6px rgba(52, 53, 54, 0.45);
 }
 
 /**
@@ -532,7 +534,7 @@ ENDS
   ***/
   --card-mtn-bg:  #faba5ad0;
   --card-tel-bg:  #fa537dd0;
-  --card-tigo-bg:  #5d75facb;
+  --card-tigo-bg:  #6cbff7cb;
 }
 
 
@@ -1704,7 +1706,7 @@ UPDATED UI STYLE ENDS
   cursor: pointer;
   font-weight: 500;
   border: 0.1px solid rgb(14, 12, 12);
-  font-size: 0.95rem;
+  font-size: 0.90rem;
 }
 
 .modal-buttons .cancel {
@@ -1720,16 +1722,18 @@ UPDATED UI STYLE ENDS
 }
 
 .modal-buttons .continue {
-  width: max-content;
+  width: 100%;
+  max-width: max-content;
+  padding: 0 .8rem;
   height: 2.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #06a568;
-  font-size: 1.1rem;
+  font-size: 1.07rem;
   font-family: serif;
   color: var(--text-cl-2);
-  border: 1px solid var(--thin-border);
+  border: 2px solid var(--thin-border);
   box-shadow:  0 2px 6px rgba(70, 69, 69, 0.2);
 }
 
@@ -1817,7 +1821,7 @@ WATCH VIDEO SECTION
 **/
 .nav-right{
   display: flex;
-  width: 13rem;
+  width: 22rem;
   height: 100%;
   gap: .3rem;
   align-items: center;
@@ -2353,8 +2357,8 @@ NOTICE BOARD SECTION
   justify-content: start;
   align-items: center;
   display: flex;
-  border-start-start-radius: 1rem;
-  border-start-end-radius: 1rem;
+  border-start-start-radius: .4rem;
+  border-start-end-radius: .4rem;
   border: 2px solid rgb(119, 113, 113);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
@@ -2751,7 +2755,7 @@ MENU-CARD SECTION
 .menu-card-container {
   width: 100%;
   max-width: 15rem;
-  height: 23rem;
+  height: 24rem;
   position: fixed;
   display: flex;
   align-items: start;
@@ -2803,7 +2807,15 @@ MENU-CARD SECTION
 }
 
 .grp{
-  width: 10rem;
+  width: 9rem;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+
+.tiktok{
+  width: 6rem;
   display: flex;
   align-items: center;
   justify-content: start;
@@ -2940,7 +2952,7 @@ CARD BOTTOM
 .logout-btn{
   display: flex;
   border: 2px solid green;
-  width: 12.7rem;
+  width: 13.7rem;
   justify-content: center;
   align-items: center;
   border-radius: 2rem;
