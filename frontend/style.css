@@ -128,7 +128,7 @@ WELCOME BOTTOM
 }
 
 .dark-mode .close-time{
-  border: 1px solid var(--thin-border);
+  border: 2px solid rgba(98, 126, 121, 0.849);
   padding: .2rem .2rem;
   border-start-end-radius: .4rem;
   border-end-start-radius: .5rem;
@@ -160,15 +160,44 @@ TWO DIV CONTAINER
   box-shadow: 0 2px 6px 0 2px 6px rgba(105, 106, 107, 0.8);
 }
 
+.dark-mode .right-side-top{
+  border-left: none;
+  border-bottom: 1px solid var(--thin-border);
+}
+
+.dark-mode .right-side-btm{
+  border-left: none;
+  color: var(--text-cl-2);
+}
+
+.dark-mode .right-side-btm small, strong{
+  color: var(--text-cl-3)
+}
+
+
+.dark-mode .right-side{
+  border: 0.1px solid var(--thin-border);
+}
+
+
+
+
+
 .dark-mode .order-status-section input{
-  background: none;
+  background: rgba(247, 244, 244, 0.589);
   border: 0.2px solid var(--thin-border);
+  color: rgb(26, 19, 19);
+}
+
+.dark-mode .order-status-section input::placeholder{
+  color: rgb(39, 39, 39);
+  font-family: serif;
 }
 
 .dark-mode .order-status-section{
   background: var(--welcome-card-bg);
   border: 1px solid var(--thin-border);
-  color: var(--text-cl);
+  color: var(--text-cl-2);
   box-shadow:0 2px 6px rgba(22, 36, 51, 0.8);
 }
 
@@ -1719,7 +1748,6 @@ WATCH VIDEO SECTION
   width: 3.4rem;
   height: 3.4rem;
   border-radius: 50%;
-  box-shadow: 0 4px 10px rgba(32, 26, 26, 0.3);
   cursor: pointer;
 }
 
