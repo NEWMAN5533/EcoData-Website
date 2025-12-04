@@ -1700,7 +1700,7 @@ UPDATED UI STYLE ENDS
   padding: 10px;
   width: max-content;
   border: none;
-  border-radius: 1.2rem;
+  border-radius: .2rem;
   cursor: pointer;
   font-weight: 500;
   border: 0.1px solid rgb(14, 12, 12);
