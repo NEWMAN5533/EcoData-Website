@@ -8,13 +8,22 @@ dark mode styles
   align-items: center;
   cursor: pointer;
   width: 75px;
-  margin-right: 1rem;
+  margin-right: .9rem;
   height: 44px;
 }
 
 .theme-switch input {
   display: none;
 }
+
+.tree{
+  display: flex;
+  width: max-content;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
 
 .slider {
   position: relative;
@@ -34,7 +43,7 @@ dark mode styles
   width: 1.8rem;
   height: 1.8rem;
   rotate: -26deg;
-  margin-top: .2rem;
+  margin-top: .32rem;
 }
 
 .slider .icon {
@@ -52,7 +61,7 @@ input:checked + .slider {
 
 input:checked + .slider .sun {
   opacity: 0;
-  transform: translateX(-16px);
+  transform: translateX(-25px);
 
 }
 
@@ -78,6 +87,32 @@ body.dark-mode {
   background: var(--darkMode-bg-cl);
   border-bottom: 0.1px solid var(--thin-border);
   box-shadow: 0 2px 6px rgba(60, 62, 63, 0.4);
+}
+
+.dark-mode .tree img{
+  display: none;
+}
+
+.darkRemain{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.darkRemain img{
+  display: none;
+  animation: 5s rotate infinite;
+}
+
+@keyframes rotate {
+  0%{
+    transform: translateX(15px);
+  }
+}
+
+.dark-mode .darkRemain img{
+  display: flex;
+  transform: rotate3d(360deg);
 }
 
 .dark-mode .menu-icon{
@@ -304,7 +339,13 @@ CARD INNER TEXT
 
 
 
-
+.dark-mode .menu-card-container{
+  background: var(--clock-bg-cl);
+  border: 2px solid var(--thin-border-1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: .4rem;
+  box-shadow: 2px 2px 4px rgb(0, 0, 0), -2px -2px 4px rgbrgb(2, 3, 3)
+}
 
 .dark-mode .foot{
   background: var(--welcome-card-bg);
@@ -484,9 +525,9 @@ ENDS
   /***
   CARD BG
   ***/
-  --card-mtn-bg:  #cc8f34;
-  --card-tel-bg:  #df2b58;
-  --card-tigo-bg:  #3a52db;
+  --card-mtn-bg:  #faba5ad0;
+  --card-tel-bg:  #fa537dd0;
+  --card-tigo-bg:  #5d75facb;
 }
 
 
@@ -1767,8 +1808,9 @@ WATCH VIDEO SECTION
 **/
 .nav-right{
   display: flex;
-  width: 8rem;
+  width: 13rem;
   height: 100%;
+  gap: .3rem;
   align-items: center;
   justify-content: end;
   background: transparent;
