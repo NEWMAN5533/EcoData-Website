@@ -292,12 +292,12 @@ GRID CARD CONTAINER
 
 .dark-mode .hero-text-container{
   background: var(--welcome-card-bg);
-  margin: 0;
   color: var(--text-cl-2);
+  margin: 0;
 }
 
 /***
-INDIVIDUA CARDS
+INDIVIDUAL CARDS
 ***/
 .dark-mode .gridCard{
   background: var(--card-mtn-bg);
@@ -5862,7 +5862,7 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   DISPLAY NONE DIV
   ***/
   .theme-switch{
-    display: none;
+    display: flex;
   }
 
 /****
@@ -5884,8 +5884,14 @@ GRID CARD
 .mtn,
 .tigo,
 .tel{
-  justify-self: start;
-  margin-left: .4rem;
+  width: 100%;
+  max-width: 900px;
+  align-items: start;
+  justify-content: start;
+}
+
+.btn-div{
+  margin-left: 1rem;
 }
 
    /****
@@ -7360,12 +7366,78 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     box-shadow:none;
     border-bottom: 0.1px solid var(--background-cl);
   }
+
+  /***
+  DARK MODE @1366PX
+  ****/
+  .dark-mode .network-card{
+    background: var(--thin-border-1);
+  }
+
+/***
+SIDEBAR
+****/
+.dark-mode .sidebar-container{
+  background: var(--dark-cl);
+}
+
+.dark-mode .u-text{
+  color: var(--text-cl-2);
+}
+
+.dark-mode .rank-link:hover{
+  background: var(--thin-border-1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  width: 80%;
+}
+
+.dark-mode .rank-link span{
+  color: var(--text-cl-2);
+}
+
+.dark-mode .rank-link a span:hover{
+  color: var(--dark-cl);
+}
+
+/***8
+BOTTOM RANK LINKS
+****/
+.dark-mode .bottom-ranking-links .login{
+  background: none;
+  color: var(--text-cl-2);
+  border: 2px solid var(--thin-border-4);
+}
+
+
+
+.dark-mode .bottom-ranking-links .group{
+  background: var(--clock-bg-cl);
+  color: var(--text-cl-2);
+  border: 2px solid var(--thin-border-1);
+}
+
+.dark-mode .bottom-ranking-links .join{
+  background: var(--clock-bg-cl);
+  color: var(--text-cl-2);
+  border: 2px solid var(--thin-border-1);
+}
+
+.dark-mode .network-card{
+  margin-left: 1rem;
+}
+
+
+
+
+
+
+
 /***
 display none div
 ***/
 .theme-switch,
 .menu-icon{
-  display: none;
+ display: flex;
 }
 
   /***
@@ -7478,8 +7550,8 @@ WELCOME CARD
     justify-content: flex-start;
     color: var(--dark-cl);
     background-color: transparent;
-    border: 0.1px solid var(--background-cl);
-    border-radius: .8rem;
+    border: 1px solid var(--background-cl);
+    border-radius: 2px;
   }
 
   .welcome-top-right input:where(:hover :focus-within){
@@ -7559,15 +7631,24 @@ WELCOME CARD
     CLOSE NOTICE
     **/
     .notice-container{
-      align-items: start;
+      align-items: end;
       justify-self: start;
       justify-content: end;
       width: 100%;
+      display: flex;
       height: max-content;
       max-width: 985px;
       background: transparent;
       border-radius: 6px;
       margin-right:  .7rem;
+    }
+
+
+    .notice-tag{
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: end;
     }
 
 .notice-board{
@@ -7600,24 +7681,32 @@ HERO TEXT CONTAINERS
 *****/
  .mtn{
   width: 100%;
-  max-width: 600px;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   background: transparent;
-  top: 21rem;
+  top: 30rem;
   height: max-content;
-  padding: .2rem .1rem;
   position: absolute;
+  padding: .2rem .1rem;
+  margin-bottom: 5rem;
   margin-right: 5rem;
   align-items: start;
   overflow: hidden;
 }
 
+.dark-mode .mtn{
+  margin-left: 21rem;
+  max-width: 400px;
+  top: 30rem;
+  background: none;
+}
+
 .tel,
 .tigo{
   width: 100%;
-  max-width: 600px;
+  max-width: 990px;
   display: flex;
   background: transparent;
   align-items: start;
@@ -7625,7 +7714,35 @@ HERO TEXT CONTAINERS
   height: max-content;
 }
 
+.dark-mode .tel{
+  margin-left: 20rem;
+  max-width: 1030px;
+}
 
+.dark-mode .tigo{
+  margin-left: 20rem;
+  max-width: 1030px;
+}
+
+.dark-mode .single-order-container .modebtn{
+  background: var(--thin-border);
+  padding: .3rem;
+  border: 1px solid var(--text-cl-3);
+  border-end-start-radius: 1rem;
+  border-start-end-radius: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  font-size: 1rem;
+}
+
+.dark-mode .single-order-container .modeN{
+  border: 1px solid var(--dark-cl);
+  background: var(--thin-border-1);
+}
+
+.dark-mode .single-order-container .mode{
+  background: var(--background-cl);
+  border: 2px solid var(--thin-border-7);
+}
 
 /****
 HERO TEXT CONTAINERS ENDS
@@ -7912,13 +8029,12 @@ SIDEBAR SECTION
 TOP
 ***/
 .top-user{
-  width: 90%;
+  width: 100%;
   height: 7rem;
   display: flex;
   gap: 1rem;
   align-items: center;
   justify-content: start;
-  margin-left: 1.5rem;
   border-bottom: 0.1px solid var(--background-cl);
 }
 
@@ -7933,6 +8049,7 @@ TOP
   border-radius: 50%;
   font-size: 1.6rem;
   font-weight: 800;
+  margin-left: 1.4rem;
   color: white;
 }
 
