@@ -7416,15 +7416,25 @@ BOTTOM RANK LINKS
   border: 2px solid var(--thin-border-1);
 }
 
+.dark-mode .bottom-ranking-links .group:hover{
+  background: var(--thin-border);
+}
 .dark-mode .bottom-ranking-links .join{
   background: var(--clock-bg-cl);
   color: var(--text-cl-2);
   border: 2px solid var(--thin-border-1);
 }
 
+.dark-mode .bottom-ranking-links .join:hover{
+  background: var(--thin-border);
+}
+
 .dark-mode .network-card{
   margin-left: 1rem;
 }
+
+
+
 
 
 
@@ -7588,7 +7598,7 @@ WELCOME CARD
     text-align: center;
     flex-direction: column;
     margin-left: .4rem;
-    margin-top: .5rem;
+    margin-top: .2rem;
   }
 
   .close-time small{
@@ -7623,7 +7633,7 @@ WELCOME CARD
       font-size: 1.3rem;
       font-weight: 500;
       margin-right: .9rem;
-      margin-top: 3.1rem;
+      margin-top: 2.9rem;
     }
 
 
