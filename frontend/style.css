@@ -7598,7 +7598,11 @@ WELCOME CARD
     text-align: center;
     flex-direction: column;
     margin-left: .4rem;
-    margin-top: .2rem;
+    margin-top: .5rem;
+  }
+
+  .dark-mode .close-time{
+    margin-bottom: .2rem;
   }
 
   .close-time small{
@@ -7634,6 +7638,10 @@ WELCOME CARD
       font-weight: 500;
       margin-right: .9rem;
       margin-top: 2.9rem;
+    }
+
+    .dark-mode #clock{
+      margin-top: 2.7rem;
     }
 
 
