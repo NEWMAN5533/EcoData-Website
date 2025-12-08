@@ -1,3 +1,95 @@
+/* =========================
+  LIVE ORDERS UI
+========================= */
+
+.live-orders {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.order-row {
+  display: grid;
+  grid-template-columns: 1.3fr 1.3fr 0.6fr 0.6fr 0.9fr;
+  gap: 10px;
+  padding: 12px;
+  background: var(--card-bg, #ffffff);
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+  font-size: 14px;
+  align-items: center;
+}
+
+.order-status {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+/* =========================
+  VISIBILITY STATES
+========================= */
+
+.hidden {
+  display: flex;
+}
+
+/* Shown but waiting for data */
+.waiting {
+  display: block;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Fully active */
+.visible {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.liveFinal {
+  width: 100%;
+  max-width: 90%;
+  height: max-content;
+  align-items: center;
+  justify-content: start;
+  flex-direction: column;
+  margin-top: 2px;
+  padding: 15px;
+  margin-bottom: 1rem;
+  border: 1px solid var(black);
+  border-radius: 8px;
+  background: var(--card-bg, #f0ebeb91);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .liveFinal{
+  background: var(--text-cl-3);
+  border: 1px solid var(--darkMode-bg-cl);
+}
+
+/* Optional loading indicator */
+.liveFinal.waiting::after {
+  content: "Waiting for order status...";
+  display: block;
+  margin-top: 8px;
+  font-size: 13px;
+color:#292626;
+}
+
+
+
+/* Status colors */
+.status-pending { color: #e98e00; }
+.status-processing { color: #1976d2; }
+.status-delivered { color: #2e7d32; }
+.status-failed { color: #d32f2f; }
+.status-cancelled { color:#757575;}
+
+/****
+ENDS
+***/
+
 /***
 dark mode styles
 ****/
