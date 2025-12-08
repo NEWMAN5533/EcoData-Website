@@ -64,9 +64,11 @@
 }
 
 .dark-mode .liveFinal{
-  background: var(--text-cl-3);
-  border: 1px solid var(--darkMode-bg-cl);
+  background: var(--welcome-card-bg);
+  border: 1px solid var(--thin-border);
 }
+
+.dart-mode
 
 /* Optional loading indicator */
 .liveFinal.waiting::after {
@@ -74,8 +76,10 @@
   display: block;
   margin-top: 8px;
   font-size: 13px;
-color:#292626;
+color: rgb(31, 29, 29);
 }
+
+
 
 
 
