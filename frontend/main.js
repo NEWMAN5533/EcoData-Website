@@ -23,13 +23,12 @@ const API_BASE = (() => {
 // ---------- GLOBAL VARIABLES ----------
 let STATUS_POLL_INTERVAL = 5000;
 let _statusPollTimer = null; // to hold the interval timer ID
-const LIVE_POLL_INTERVAL = 5000; // 5 seconds
+
 
 // btn events//
 document.addEventListener("DOMContentLoaded", () => {
 
   
-
 document.querySelectorAll(".buy-btn").forEach(button => {
   button.addEventListener("click", () => {
     const packageName = button.dataset.package;
@@ -218,8 +217,6 @@ async function orderBundle(network, recipient, packageName, size, reference) {
       // Update dashboard UI or order history
       handleNewOrder(returnedOrder);
 
-      // final touch for live order //
-      registerNewOrder(normalizedOrder);
 
     } else {
       showSnackBar(`Failed to purchase data: ${result.message || "Unknown error"}`);
@@ -232,28 +229,6 @@ async function orderBundle(network, recipient, packageName, size, reference) {
 
 //ends//
 
-
-/* =========================
-  ORDER REGISTRATION
-========================= */
-
-function registerNewOrder(order) {
-  if (!order || !order.orderId) return;
-
-  const orders = getLiveOrders();
-
-  orders.unshift({
-    orderId: order.orderId,
-    recipient: order.recipient,
-    volume: order.volume,
-    network: order.network || "-",
-    status: order.status || "pending",
-  });
-
-  saveLiveOrders(orders);
-  refreshLiveOrdersUI();
-}
-// ends//
 
 
 
@@ -495,109 +470,6 @@ document.addEventListener("DOMContentLoaded", () => {
 }
 });
 
-
-// FINAL TOUCH ON LIVE ORDERS //
-
-/* =========================
-  STORAGE HELPERS
-========================= */
-
-function getLiveOrders() {
-  return JSON.parse(localStorage.getItem("liveOrders") || "[]");
-}
-
-function saveLiveOrders(orders) {
-  localStorage.setItem("liveOrders", JSON.stringify(orders));
-}
-
-
-/* =========================
-  UI RENDERING
-========================= */
-
-function renderOrderRow(order) {
-  const row = document.createElement("div");
-  row.className = "order-row";
-  row.dataset.orderId = order.orderId;
-
-  const status = (order.status || "pending").toLowerCase();
-
-  row.innerHTML = `
-    <div>${order.orderId}</div>
-    <div>${order.recipient}</div>
-    <div>${order.volume}GB</div>
-    <div>${order.network}</div>
-    <div class="order-status status-${status}">${status}</div>
-  `;
-
-  return row;
-}
-
-function refreshLiveOrdersUI() {
-  const container = document.getElementById("liveOrders");
-  if (!container) return;
-
-  container.innerHTML = "";
-
-  const orders = getLiveOrders();
-  orders.forEach(order => {
-    container.appendChild(renderOrderRow(order));
-});
-}
-
-/* =========================
-  STATUS FETCH
-========================= */
-
-async function fetchOrderStatus(orderId) {
-  try {
-    const res = await fetch(`${API_BASE}/api/v1/order/status/${orderId}`);
-    if (!res.ok) return null;
-
-    const data = await res.json();
-    return data.success ? data.order : null;
-  } catch (err) {
-    console.error("Status fetch error:", err);
-    return null;
-}
-}
-
-
-/* =========================
-   LIVE POLLING
-========================= */
-
-async function pollOrdersStatus() {
-  const orders = getLiveOrders();
-  let updated = false;
-
-  for (const order of orders) {
-    if (["delivered", "failed", "cancelled"].includes(order.status)) continue;
-
-    const latest = await fetchOrderStatus(order.orderId);
-    if (!latest) continue;
-
-    if (latest.status !== order.status) {
-      order.status = latest.status;
-      updated = true;
-    }
-  }
-
-  if (updated) {
-    saveLiveOrders(orders);
-    refreshLiveOrdersUI();
-  }
-}
-
-// Start polling automatically
-setInterval(pollOrdersStatus, LIVE_POLL_INTERVAL);
-
-
-document.addEventListener("DOMContentLoaded", () => {
-  refreshLiveOrdersUI();
-});
-
-// FINAL ENDS //
 
 
 // SNACKBAR SECTION //
