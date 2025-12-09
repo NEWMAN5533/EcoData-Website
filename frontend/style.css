@@ -2656,7 +2656,7 @@ BUNDLE PROCESSING
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 98%;
+  width: 97%;
   height: 20%;
   background-color: transparent;
   padding: .3rem;
@@ -3687,6 +3687,159 @@ border-radius: 4px;
     width: 100%;
   }
 
+  /****
+  WELCOME CARD STYLE FOR 414PX
+  *****/
+  
+/**
+WELCOME CARD 
+**/
+.welcome-card {
+  width: 100%;
+  max-width: 97%;
+  height: 10rem;
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  background: var(--bg-cl);
+  border-radius: .6rem;
+  box-shadow:   1px 1px 2px rgba(0,0,0,0.3),  -1px -1px 2px rgba(0,0,0,0.3);
+  margin-top: 4.3rem; 
+}
+
+.welcome-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 99%;
+  height: 4rem;
+  margin: 0.2rem .2rem;
+  justify-self: center;
+  background: var(--bg-cl);
+  border-start-start-radius: .4rem;
+  border-start-end-radius: .4rem;
+  border-end-end-radius: .4rem;
+  border-end-start-radius: .4rem;
+  box-shadow:   1px 1px 3px rgb(151, 147, 147),  -1px -1px 3px rgb(189, 184, 184);
+}
+
+.welcome-top-left{
+ display: none;
+
+}
+
+
+.welcome-top-left small{
+  width: 3rem;
+  color: rgb(95, 90, 90);
+  font-weight: 500;
+  font-size: .9rem;
+  font-family: Arial sans-serif;
+}
+
+/**
+ WELCOME TOP RIGHT
+ **/
+ .welcome-top-right {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-right: -.7rem;
+ }
+
+  .welcome-top-right input{
+    width: 120px;
+    height: 1.8rem;
+    margin: 0 2rem;
+    margin-right: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    color: var(--dark-cl);
+    background-color: transparent;
+    border: 0.1px solid var(--background-cl);
+  }
+
+  .welcome-top-right input:where(:hover :focus-within){
+    border: 1px solid rgb(156, 151, 151);
+
+  }
+
+  .welcome-top-right input::placeholder{
+    color: rgb(197, 190, 190);
+  }
+
+  /*-----BOTTOM-----*/
+  .welcome-bottom {
+    width: 100%;
+    height: 5.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .close-time {
+    width: 35;
+    height: 100%;
+    display: flex;
+    background: transparent;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .1rem;
+    text-align: center;
+    flex-direction: column;
+    margin-left: .1rem;
+    margin-bottom: .4rem;
+  }
+
+  .close-time small{
+    font-size: .89rem;
+    color: rgb(7, 112, 112);
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  .dark-mode .close-time small{
+    color: var(--text-cl-3);
+  }
+
+  .close-time span{
+    color: white;
+    padding: .1rem .2rem;
+    font-size: .8rem;
+    font-weight: 300;;
+    background: var(--clock-bg-cl);
+    border-radius: 4px;
+    border: 1px solid #14bb99;
+  }
+
+
+#clock {
+      font-family: 'Digital-7', monospace;
+      font-size: 2em;
+      color: #00ffcc;
+      background: var(--clock-bg-cl);
+      border-radius: 4px;
+      display: inline-block;
+      width: max-content;
+      height: 2rem;
+      padding: .2rem .3rem;
+      border: 1px solid #14bb99;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      font-size: .97rem;
+      font-weight: 500;
+      margin-right: .5rem;
+      margin-top: 2.4rem;
+    }
+
+
+
 
 
   .notice-board{
@@ -3751,11 +3904,11 @@ DISPLAY NONE DIVS
 
 .two-div-container{
   width: 100%;
-  max-width: 390px;
+  max-width: 94%;
   display: flex;
   overflow: hidden;
   margin: 1rem 0;
-  height: 25.4rem;
+  height: 25rem;
   gap: .1rem;
   justify-content: end;
   justify-self: center;
@@ -3841,7 +3994,7 @@ DISPLAY NONE DIVS
 
 .status-result{
   width: 100%;
-  max-width: 160px;
+  max-width: 170px;
   height: max-content;
   position: absolute;
   display: flex;
@@ -3861,7 +4014,8 @@ ORDER STATUS
 
 .order-status-section {
  position: relative;
-  max-width: 180px;
+ width: 100%;
+ max-width: 90%;
   display: flex;
   height: 15rem;
   align-items: center;
@@ -3905,9 +4059,9 @@ ORDER STATUS
 
 .order-status-section button {
 width: 100%;
-max-width: 150px;
+max-width: 130px;
 cursor: pointer;
-height: 1.7rem;
+height: 2rem;
 display: flex;
 text-align: center;
 justify-content: center;
@@ -4007,18 +4161,23 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 
 .networks-purchased-container {
   width: 100%;
-  max-width: 400px;
+  max-width: 95%;
   background: transparent;
-  height: 9rem;
+  height: 7rem;
   margin: .5rem 0;
   gap: .4rem;
   border: 1px solid rgb(196, 189, 185);
 }
 
+.btn-div{
+  width: 100%;
+  max-width: 95%;
+}
+
 .purchase-title {
   display: flex;
   align-items: center;
-  width: 98%;
+  width: 94%;
   height: 20%;
   margin-bottom: .1rem;
   padding: .3rem;
@@ -4033,7 +4192,7 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
 .purchase-container{
-  width: 98%;
+  width: 94%;
   height: 60%;
   display: flex;
   align-items: center;
@@ -4047,9 +4206,10 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
 .purchase-container a .card-box{
-  width:  7rem;
-  height: 4rem;
-  font-size: 1rem;
+  width:  6rem;
+  height: 3rem;
+  font-size: .9rem;
+  font-weight: 500;
 }
 
 
@@ -4063,6 +4223,72 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   .navbar{
     width: 100%;
   }
+
+
+  
+  /*-----BOTTOM-----*/
+
+
+  .close-time {
+    width: 35;
+    height: 100%;
+    display: flex;
+    background: transparent;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .1rem;
+    text-align: center;
+    flex-direction: column;
+    margin-left: .1rem;
+    margin-bottom: .4rem;
+  }
+
+  .close-time small{
+    font-size: .89rem;
+    color: rgb(7, 112, 112);
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  .dark-mode .close-time small{
+    color: var(--text-cl-3);
+  }
+
+  .close-time span{
+    color: white;
+    padding: .1rem .2rem;
+    font-size: .8rem;
+    font-weight: 300;;
+    background: var(--clock-bg-cl);
+    border-radius: 4px;
+    border: 1px solid #14bb99;
+  }
+
+
+#clock {
+      font-family: 'Digital-7', monospace;
+      font-size: 2em;
+      color: #00ffcc;
+      background: var(--clock-bg-cl);
+      border-radius: 4px;
+      display: inline-block;
+      width: max-content;
+      height: 2rem;
+      padding: .2rem .3rem;
+      border: 1px solid #14bb99;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      font-size: .97rem;
+      font-weight: 500;
+      margin-right: .5rem;
+      margin-top: 2.5rem;
+    }
+
+
+
+
+
+
 
   .hero-text-container{
 
@@ -4389,7 +4615,7 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   width: 100%;
   max-width: 450px;
   background: transparent;
-  height: 9rem;
+  height: 8rem;
   margin: .5rem 0;
   gap: .4rem;
   border: 1px solid rgb(196, 189, 185);
