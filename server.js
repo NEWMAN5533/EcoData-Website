@@ -163,7 +163,7 @@ app.get("/api/v1/order/status/:orderIdOrRef", async (req, res) => {
 
   try {
     const base = (process.env.SWIFT_BASE_URL || "https://swiftdata-link.com").replace(/\/$/, "");
-    const swiftUrl = `${base}/api/v1/order/status/${encodeURIComponent(orderIdOrRef)}`;
+    const swiftUrl = `${base}api/v1/order/status/${encodeURIComponent(orderIdOrRef)}`;
 
     const response = await axios.get(swiftUrl, {
       headers: {
