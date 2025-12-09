@@ -190,7 +190,7 @@ app.get("/api/v1/order/status/:orderIdOrRef", async (req, res) => {
 });
 
 // Frontend fallback
-app.get("/*", (req, res) => {
+app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, "frontend", "index.html"));
 });
 

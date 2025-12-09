@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/package.json",
   "name": "ecodata-app",
   "version": "1.0.0",
   "description": "Backend API for EcoData app to verify Paystack payments and purchase bundles via Swift API",
