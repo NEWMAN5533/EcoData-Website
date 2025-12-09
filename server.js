@@ -9,6 +9,8 @@ import axios from "axios";
 
 dotenv.config();
 
+
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -161,7 +163,7 @@ app.get("/api/v1/order/status/:orderIdOrRef", async (req, res) => {
 
   try {
     const base = (process.env.SWIFT_BASE_URL || "https://swiftdata-link.com").replace(/\/$/, "");
-    const swiftUrl = `${base}api/v1/order/status/${encodeURIComponent(orderIdOrRef)}`;
+    const swiftUrl = `${base}/api/v1/order/status/${encodeURIComponent(orderIdOrRef)}`;
 
     const response = await axios.get(swiftUrl, {
       headers: {
@@ -190,7 +192,7 @@ app.get("/api/v1/order/status/:orderIdOrRef", async (req, res) => {
 });
 
 // Frontend fallback
-app.get('/*', (req, res) => {
+app.use((req, res) => {
   res.sendFile(path.join(__dirname, "frontend", "index.html"));
 });
 
