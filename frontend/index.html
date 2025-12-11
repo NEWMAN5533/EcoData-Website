@@ -49,6 +49,83 @@
   <!---css- link-->
   <link rel="stylesheet" href="style.css">
 
+
+  <style>
+    .ramadan-box-container{
+      width: 100%;
+      max-width: 480px;
+      padding: 1rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+      height: max-content;
+      position: relative;
+      margin-top: 0;
+      margin-bottom: -1.6rem;
+    }
+
+    .xmax-box{
+      width: 100%;
+      max-width: 120px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      gap: .8rem;
+      background: rgb(46, 44, 44);
+      margin-top: .5rem;
+      box-shadow: 0 2px 6px rgba(14, 13, 13, 0.9);
+      border: 3px solid rgb(33, 33, 46);
+      border-radius: 8px;
+      padding: .32rem;;
+      color: rgb(185, 179, 179);
+      font-weight: 600;
+      font-size: .9rem;
+    }
+
+    .xmax-box img{
+      width: 2rem;
+      height: 2rem;
+    }
+    .ramadan-box {
+  background: url(./css/images/hero-muslim-bg.jpg);
+  background-position: center;
+  background-size:cover;
+  margin-top: 1rem;
+  padding: 20px;
+  border-radius: 10px;
+  border: 4px solid rgb(47, 44, 66);
+  width: 100%;
+  height: max-content;
+  padding: .2rem 0;
+  align-items: center;
+  justify-content: end;
+  max-width: 360px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(31, 30, 30, 0.8);
+  font-family: 'Poppins', sans-serif;
+}
+
+.ramadan-box h2 {
+  margin-bottom: 10px;
+  font-weight: 600;
+  padding: .1rem .2rem;
+  font-size: 1.5rem;
+  color: rgb(6, 10, 7);
+  box-shadow: 2px 2px 6px rgba(14, 13, 13, 0.9), -2px -2px 6px rgba(0,0,0,0.9);
+}
+
+#ramadan-countdown {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  font-size: 24px;
+  font-weight: bold;
+  margin-top:10px;
+  color: rgba(219, 215, 215, 0.884);
+  background: rgba(0, 0, 0, 0.301);
+}
+  </style>
 </head>
 <body>
 
@@ -114,6 +191,30 @@
     <div id="clock"></div>
   </div>
 </div>
+<!--RAMADAN-COUNTER-TIME-->
+<div class="ramadan-box-container">
+  <div class="xmax-box">
+    <img src="./css/icons/father.png" alt="images" loading="lazy">
+    <div id="xmax-countdown">
+      <span id="dys">00</span>d :
+    <span id="hrs">00</span>h :
+    <span id="mints">00</span>m
+    </div>
+  </div>
+<div class="ramadan-box">
+  <h2>🌙 Ramadan Countdown</h2>
+  <div id="ramadan-countdown">
+    <span id="days">00</span>d :
+    <span id="hours">00</span>h :
+    <span id="minutes">00</span>m :
+    <span id="seconds">00</span>s
+</div>
+</div>
+</div>
+
+<!-----COUNTER-ENDS--->
+
+<!---NOTICE BOARD=-CONTAINER-->
 <section class="notice-container">
   <div class="notice-tag">
     <div class="notice-text">
@@ -1599,9 +1700,59 @@ window.addEventListener("click", function(e){
 });
 </script>
 
+<!----RAMADAN-JS-->
+<script>
+  // Set the Ramadan date (UPDATE this if official date changes)
+const ramadanDate = new Date("February 18, 2026 00:00:00").getTime();
+
+function ramadanTimer() {
+  const now = new Date().getTime();
+  const diff = ramadanDate - now;
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+  document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+  document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+  document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+  document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+
+  if (diff < 0) {
+    document.getElementById("ramadan-countdown").innerHTML = "Ramadan Has Begun! 🌙";
+  }
+}
+
+setInterval(ramadanTimer,1000);
+</script>
+
+<!---XMAX-JS-->
+<script>
+   // Set the Ramadan date (UPDATE this if official date changes)
+const xmaxDate = new Date("December 25 , 2025 00:00:00").getTime();
+
+function ramadanTimer() {
+  const now = new Date().getTime();
+  const diff = xmaxDate - now;
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
 
 
+  document.getElementById("dys").innerText = days < 10 ? "0" + days : days;
+  document.getElementById("hrs").innerText = hours < 10 ? "0" + hours : hours;
+  document.getElementById("mints").innerText = minutes < 10 ? "0" + minutes : minutes;
+ 
 
+  if (diff < 0) {
+    document.getElementById("xmax-countdown").innerHTML = "Xmax Has Begun! ";
+  }
+}
+
+setInterval(ramadanTimer,1000);
+</script>
 </body>
 <!-----ORDER STATUS JS---->
 </html>
