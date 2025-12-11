@@ -19,7 +19,7 @@ dark mode styles
 }
 
 .tree{
-  display: flex;
+  display: none;
   width: max-content;
   height: 100%;
   justify-content: center;
@@ -98,7 +98,7 @@ body.dark-mode {
 }
 
 .darkRemain{
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
 }

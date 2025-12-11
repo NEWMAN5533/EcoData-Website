@@ -504,5 +504,5 @@ function showSnackBar(message, type = "info") {
   setTimeout(() => {
     snackbar.classList.remove("show");
     setTimeout(() => snackbar.remove(), 500);
-},3000);
+},5000);
 };
