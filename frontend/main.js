@@ -70,7 +70,7 @@ function createPhoneModal(callback) {
   confirmBtn.onclick = () => {
     const recipient = input.value.trim();
     if (!recipient) {
-      showSnackBar("Please enter your phone number");
+      showSnackBar("📱 Please enter your phone number");
       return;
     }
     modal.classList.remove("show");
@@ -200,7 +200,7 @@ async function orderBundle(network, recipient, packageName, size, reference) {
     const result = await response.json();
 
     if (result.success) {
-      showSnackBar("✅ Order Placed successfully!");
+      showSnackBar("📱✅ Order Placed successfully!");
 
       // The order object returned from server
       const returnedOrder = result.order?.order || result.order || result;
@@ -503,6 +503,6 @@ function showSnackBar(message, type = "info") {
   // Hide snackbar after 3 seconds
   setTimeout(() => {
     snackbar.classList.remove("show");
-    setTimeout(() => snackbar.remove(), 500);
-},5000);
+    setTimeout(() => snackbar.remove(), 300);
+},4000);
 };
