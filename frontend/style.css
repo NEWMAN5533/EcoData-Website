@@ -4215,7 +4215,11 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 
 /**SECTION TITLE
 **/
-
+.modal-content{
+  width: 100%;
+  max-width: 370px;
+  
+}
  }
 
 /* 5. Large phones / Tablets */
