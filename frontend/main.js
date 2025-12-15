@@ -487,7 +487,7 @@ function showSnackBar(message, type = "info") {
   if (type === "success") snackbar.style.background = "#7adabaff";   // green
   else if (type === "error") snackbar.style.background = "#dc3545"; // red
   else if (type === "warning") snackbar.style.background = "#ffc107"; // yellow
-  else snackbar.style.background = "#beddca"; // default dark
+  else snackbar.style.background = "rgb(2, 61, 52)"; // default dark
 
   snackbar.textContent = message;
 
