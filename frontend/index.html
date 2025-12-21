@@ -131,8 +131,9 @@
 
 <nav class="navbar">
 <div class="nav-left">
+  <img class="cap" src="./css/icons/cap (2).png" alt="img" loading="lazy">
 <a href="index.html">
-  <img src="./css/icons/icon-shortcut.png" alt="image" loading="lazy">
+  <img class="log" src="./css/icons/icon-shortcut.png" alt="image" loading="lazy">
 </a>
 </div>
 <div class="nav-right">
@@ -1568,7 +1569,7 @@
 
     if (user) {
       const userSnap = await getDoc(doc(db, "users", user.uid));
-      usernameDisplay.textContent = `Welcome Back, ${userSnap.data().username}!`;
+      usernameDisplay.textContent = `Merry Christmas, ${userSnap.data().username}!`;
     } else {
       usernameDisplay.textContent = "Welcome Back, Dear ";
     }
