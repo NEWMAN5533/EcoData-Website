@@ -934,7 +934,7 @@ UPDATED UI STYLE
     
     .gridCard-bottom{
       width: 100%;
-      height: 3rem;
+      height: 3.4rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -943,12 +943,15 @@ UPDATED UI STYLE
 
     .gridCard-bottom .buy-btn{
       width: 80%;
-      height: 1.9rem;
+      height: 2rem;
       border: none;
       border-radius: 8px;
-      background: linear-gradient(135deg, rgb(227, 243, 5), rgb(236, 140, 13));
-      color: white;
-      font-size: 1rem;
+      background: linear-gradient(135deg, rgb(203, 218, 6), rgb(236, 140, 13));
+      color: rgb(247, 244, 244);
+      font-size: 1.2rem;
+      opacity: .9;
+      font-weight: 600;
+      margin-top: .3rem;
     }
 
 
@@ -7959,6 +7962,7 @@ WELCOME CARD
   gap: .7rem;
   width: 100%;
   max-width: 470px;
+  border-radius: 0;
 }
 
 
@@ -8251,7 +8255,7 @@ display: flex;
 .gridCards-container{
   width: 76.3%;
   justify-self: end;
-  border-bottom: 0.1px solid var(--background-cl);
+ border-bottom: 0.1px solid var(--thin-border);
   display:flex;
   justify-content: start;
   padding-left: 1.2rem;
@@ -8313,13 +8317,11 @@ SIDEBAR SECTION
     height: 100%;
     position: fixed;
     overflow-y: auto;
-    overflow-y: hidden;
     overflow-x: hidden;
     left: 0;
     top: 0;
     display: block;
     background: transparent;
-    border-right: 0.1px solid var(--background-cl);
   }
 
 
@@ -8333,7 +8335,7 @@ TOP
   gap: 1rem;
   align-items: center;
   justify-content: start;
-  border-bottom: 0.1px solid var(--background-cl);
+  border-bottom: 0.1px solid var(--thin-border);
 }
 
 .u-div{
@@ -8361,17 +8363,19 @@ TOP
 MIDDLE
 **/
 .middle-ranking-navs{
-  width: 100%;
+  width: 96%;
   height: 22rem;
   margin-bottom: .4rem;
   display: flex;
   overflow-y: auto;
   overflow: none;
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
   gap: .2rem;
   flex-direction: column;
   align-items: end;
   justify-content: start;
-  border-bottom: 0.1px solid var(--background-cl);
+  border-bottom: 0.1px solid var(--thin-border);
   color: white;
 }
 
