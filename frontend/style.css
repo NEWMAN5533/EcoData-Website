@@ -839,7 +839,7 @@ UPDATED UI STYLE
 
     .gridCard{
       width: 11rem;
-      height: 14rem;
+      height: 14.5rem;
       display:flex;
       align-items: center;
       justify-content: center;
@@ -910,26 +910,34 @@ UPDATED UI STYLE
       height: max-content;
       display: flex;
       flex-direction: column;
-      align-items: start;
-      justify-content: start;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
       gap: 0;
       background: transparent;
-      padding-left: 1rem;
     }
 
     .gridCard-middle h3{
       font-size: 1.17rem;
       font-weight: 600;
-      font-family: serif;
-      color: rgb(19, 18, 18);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      color: rgb(17, 15, 15);
+      align-self: center;
+      margin-left: -.7rem;
+      border: 1.5px solid var(--thin-border);
+      padding: .15rem;
+      border-radius: 8px;
+      background: rgb(214, 208, 208);;
     }
 
     .gridCard-middle small{
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-family: serif;
       margin-top: -.6rem;
       font-weight: 600;
+      margin-left: -.8rem;
       color: rgb(88, 24, 24);
+      align-self: center;;
     }
     
     .gridCard-bottom{
@@ -951,7 +959,7 @@ UPDATED UI STYLE
       font-size: 1.2rem;
       opacity: .9;
       font-weight: 600;
-      margin-top: .3rem;
+      margin-top: .1rem;
     }
 
 
