@@ -917,6 +917,8 @@ UPDATED UI STYLE
       background: transparent;
     }
 
+    
+
     .gridCard-middle h3{
       font-size: 1.17rem;
       font-weight: 600;
@@ -924,10 +926,11 @@ UPDATED UI STYLE
       color: rgb(17, 15, 15);
       align-self: center;
       margin-left: -.7rem;
-      border: 1.5px solid var(--thin-border);
+      border: 1.9px solid rgb(121, 109, 59);
       padding: .15rem;
       border-radius: 8px;
-      background: rgb(214, 208, 208);;
+      background:  linear-gradient(135deg, rgb(224, 228, 167), rgb(218, 129, 13));
+      box-shadow: 2px 2px 6px rgba(15, 15, 15, 0.3);
     }
 
     .gridCard-middle small{
