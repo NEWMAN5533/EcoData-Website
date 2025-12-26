@@ -935,36 +935,34 @@ PRICES SECTION
 ******/
 
 .gridCard-middle small{
-    font-size: .9rem;
+    font-size: 1.1rem;
       font-family: serif;
       margin-top: -.6rem;
       font-weight: 600;
       margin-left: -.8rem;
       align-self: center;
-      color: rgb(75, 54, 54) !important;
+      color: rgb(28, 88, 75) !important;
 }
 
 
     .gridCard-middle .old-price{
-      font-size: .9rem;
+      font-size: 1.2rem;
       font-family: serif;
       margin-top: -.6rem;
       font-weight: 600;
       margin-left: -.8rem;
       align-self: center;
-      color: rgb(75, 54, 54) !important;
+      color: rgb(31, 114, 79) !important;
     }
 
-    .gridCard-middle .old-price{
-      text-decoration: line-through;
-    }
+  
 
     .gridCard-middle  .new-price{
       font-size: 1.1rem;
       font-family: serif;
       margin-top: .2rem;
       font-weight: 600;
-      display: flex;
+      display: none;
       margin-left: -.8rem;
       align-self: center;
       color: rgb(31, 114, 79);
@@ -3855,7 +3853,7 @@ GRID CARD
 }
 
 .gridCard{
-  height: 15.7rem;
+  height: 13.5rem;
 }
 
 
@@ -4319,7 +4317,7 @@ GRID CARD
 }
 
 .gridCard{
-  height: 15.9rem;
+  height: 13.5rem;
 }
    /****
 DISPLAY NONE DIVS
