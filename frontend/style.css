@@ -935,7 +935,7 @@ PRICES SECTION
 ******/
 
 .gridCard-middle small{
-    font-size: 1.1rem;
+    font-size: 1rem;
       font-family: serif;
       margin-top: -.6rem;
       font-weight: 600;
@@ -946,7 +946,7 @@ PRICES SECTION
 
 
     .gridCard-middle .old-price{
-      font-size: 1.2rem;
+      font-size: 1rem;
       font-family: serif;
       margin-top: -.6rem;
       font-weight: 600;
@@ -958,7 +958,7 @@ PRICES SECTION
   
 
     .gridCard-middle  .new-price{
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-family: serif;
       margin-top: .2rem;
       font-weight: 600;
