@@ -3849,11 +3849,30 @@ GRID CARD
 .gridCardTele,
 .gridCardAirteltigo{
   width: 10.5rem;
-  height: 13.5rem;
+  height: 15.5rem;
+}
+
+
+.gridCardTele .buy-btn{
+  margin-bottom: -2rem;
+}
+
+
+.gridCardAirteltigo .buy-btn{
+  margin-bottom: -2rem;
+}
+
+
+.gridCard{
+  height: 15.5rem;
+}
+
+.gridCard .buy-btn{
+  margin-bottom: -2rem;
 }
 
 .gridCard{
-  height: 13.5rem;
+  height: 15.5rem;
 }
 
 
@@ -4313,11 +4332,25 @@ GRID CARD
 .gridCardTele,
 .gridCardAirteltigo{
   width: 9.4rem;
-  height: 13.5rem;
+  height: 15.5rem;
 }
 
+.gridCardTele .buy-btn{
+  margin-bottom: -2rem;
+}
+
+
+.gridCardAirteltigo .buy-btn{
+  margin-bottom: -2rem;
+}
+
+
 .gridCard{
-  height: 13.5rem;
+  height: 15.5rem;
+}
+
+.gridCard .buy-btn{
+  margin-bottom: -2rem;
 }
    /****
 DISPLAY NONE DIVS
