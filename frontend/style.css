@@ -3022,7 +3022,7 @@ SNACKBAR SECTION
 /* === WhatsApp Floating Button === */
 #whatsappChat {
   position: fixed;
-  bottom: 70px;
+  bottom: 60px;
   right: 10px;
   z-index: 99999;
   font-family: "Poppins", sans-serif;
@@ -3030,12 +3030,12 @@ SNACKBAR SECTION
 
 /* Floating button */
 #chatButton {
-  background-color: #25D366;
+  background-color: #2a5a70;
   color: white;
   font-size: 26px;
-  width: 58px;
+  width: 68px;
   height: 58px;
-  border-radius: 50%;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3050,13 +3050,13 @@ SNACKBAR SECTION
   justify-content: center;
 }
 .message img{
-  width: 2.6rem;
-  height: 2.5rem
+  width: 2.9rem;
+  height: 2.7rem
 }
 
 #chatButton:hover {
   transform: scale(1.1);
-  background-color: #20bd5a;
+  background-color: #2f6781;
 }
 
 /* Message box */
@@ -3070,7 +3070,7 @@ SNACKBAR SECTION
   width: 280px;
   padding: 15px;
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   animation: fadeIn 0.3s ease;
 }
 
@@ -3081,7 +3081,7 @@ SNACKBAR SECTION
 #chatBox h4 {
   margin-bottom: 10px;
   font-size: 16px;
-  color: #333;
+  color: #61b2c0;
 }
 
 #chatBox input {
@@ -3096,7 +3096,7 @@ SNACKBAR SECTION
 }
 
 #chatBox button {
-  background-color: #25D366;
+  background-color: #2a5a70;
   color: white;
   border: none;
   padding: 8px 10px;
@@ -3108,7 +3108,7 @@ SNACKBAR SECTION
 }
 
 #chatBox button:hover {
-  background-color: #1ebe5d;
+  background-color: #327c9e;
 }
 
 @keyframes fadeIn {
