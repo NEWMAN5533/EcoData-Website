@@ -1728,13 +1728,10 @@ WATCH VIDEO SECTION
 * NAV LEFT
 **/
 .navbar .nav-left{
-  width: 5rem;
   display: flex;
-  gap: 0;
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  overflow: hidden;
 }
 
 
@@ -2533,9 +2530,9 @@ order2 style
 }
 
 /* Status colors */
-.status-pending { background: #f39c12; }
-.status-processing { background: #3498db; }
-.status-delivered { background: #2ecc71; }
+.status-pending { background: #3498dbf6; }
+.status-processing { background:  #f39d12f5; }
+.status-delivered { background: #2ecca4; }
 .status-failed { background: #e74c3c; }
 .status-cancelled { background: #9e9e9e; }
 .status-refunded { background: #795548; }
@@ -3880,7 +3877,7 @@ GRID CARD
 }
 
 .gridCard-top{
-  margin-top: .7rem;
+  top: -.9rem;
 }
 
 .gridCard,
@@ -3888,25 +3885,32 @@ GRID CARD
 .gridCardAirteltigo{
   width: 10.5rem;
   height: 15.5rem;
+  justify-content: space-around;
+}
+
+.gridCard .gridCard-top{
+ top: -.9rem;
+}
+
+.gridCard .buy-btn{
+  margin-bottom: -.5rem;
+}
+ 
+.gridCardAirteltigo .gridCard-top{
+  top: -.9rem;
+}
+
+.gridCardAirteltigo .buy-btn{
+  margin-bottom: -.5rem;
+}
+
+.gridCardTele .gridCard-top{
+  top: -.9rem;
 }
 
 
 .gridCardTele .buy-btn{
-  margin-bottom: -2rem;
-}
-
-
-.gridCardAirteltigo .buy-btn{
-  margin-bottom: -2rem;
-}
-
-
-.gridCard{
-  height: 15.5rem;
-}
-
-.gridCard .buy-btn{
-  margin-bottom: -.6rem;
+  margin-bottom: -.5rem;
 }
 
 
@@ -4373,35 +4377,41 @@ GRID CARD
 .gridCardAirteltigo{
   width: 9.4rem;
   height: 15.5rem;
+  justify-content: space-around;
 }
 
+.gridCard .gridCard-top{
+ top: -.9rem;
+}
+
+.gridCard .buy-btn{
+  margin-bottom: -.5rem;
+}
  
 .gridCardAirteltigo .gridCard-top{
-  margin-top: -.9rem;
+  top: -.9rem;
+}
+
+.gridCardAirteltigo .buy-btn{
+  margin-bottom: -.5rem;
 }
 
 .gridCardTele .gridCard-top{
-  margin-top: -.9rem;
+  top: -.9rem;
 }
 
 
 .gridCardTele .buy-btn{
-  margin-bottom: -3.5rem;
+  margin-bottom: -.5rem;
 }
 
 
-.gridCardAirteltigo .buy-btn{
-  margin-bottom: -3rem;
-}
 
 
-.gridCard{
-  height: 15.5rem;
-}
 
-.gridCard .buy-btn{
-  margin-bottom: -3rem;
-}
+
+
+
    /****
 DISPLAY NONE DIVS
 ***/
@@ -8177,16 +8187,39 @@ CARDS
   width: 11.5rem;
   height: 15.7rem;
   transition: .1s ease-in-out;
+  justify-content: space-around;
 }
 
-.gridCard{
-  height: 15.5rem;
+.gridCard .gridCard-top{
+ top: -.9rem;
 }
-
 
 .gridCard .buy-btn{
-  margin-bottom: -3rem;
+  margin-bottom: -.5rem;
 }
+ 
+.gridCardAirteltigo .gridCard-top{
+  top: -.9rem;
+}
+
+.gridCardAirteltigo .buy-btn{
+  margin-bottom: -.5rem;
+}
+
+.gridCardTele .gridCard-top{
+  top: -.9rem;
+}
+
+
+.gridCardTele .buy-btn{
+  margin-bottom: -.5rem;
+}
+
+
+
+
+
+
 
 .gridCard-wrapper{
 display: grid;
