@@ -253,7 +253,7 @@ function saveGuestOrder(orderData) {
 function getStatusTextMapping(status) {
   const s = (status || "").toLowerCase();
   return {
-    delivered: "Your bundle is successfully delivered.",
+    delivered: "Your bundle is successfully delivered 📱✅.",
     pending: "Order awaiting processing.",
     processing: "Order is processing. Please wait.",
     failed: "Order failed. Contact support or try again.",
@@ -266,6 +266,10 @@ function getStatusTextMapping(status) {
 function getStatusClass(status) {
   return `status-${(status || "").toLowerCase()}`;
 }
+
+
+
+
 
 function createOrUpdateStatusCard(order) {
   // order expected: { orderId, reference, status, recipient, volume, timestamp }
@@ -315,7 +319,14 @@ function stopStatusPolling() {
 // checks if status is terminal
 function isTerminalStatus(status) {
   const s = (status || "").toLowerCase();
-  return ["delivered","failed","cancelled","refunded","resolved"].includes(s);
+  return [
+    "delivered",
+    "completed",
+    "success",
+    "failed",
+    "cancelled",
+    "refunded",
+    "resolved"].includes(s);
 }
 
 // ---------- POLLING FUNCTION ----------
@@ -383,28 +394,47 @@ function startAutoPolling(orderIdOrRef) {
  *    const returnedOrder = result.order || result.swift || result; 
  *    handleNewOrder(returnedOrder);
  */
+
 function handleNewOrder(returnedOrder) {
   if (!returnedOrder) return;
-  // The Swift response may place order data at top-level or inside order object.
-  // Normalize fields:
+
   const normalized = {
-    orderId: returnedOrder.orderId || returnedOrder.orderId || returnedOrder.reference || returnedOrder.reference,
-    reference: returnedOrder.reference || returnedOrder.reference,
-    status: returnedOrder.status || returnedOrder.status || "pending",
-    recipient: returnedOrder.items?.[0]?.recipient || returnedOrder.recipient || "-",
-    volume: returnedOrder.items?.[0]?.volume ?? returnedOrder.volume ?? "-"
+    orderId:
+      returnedOrder.orderId ||
+      returnedOrder.id ||
+      returnedOrder.order_id ||
+      returnedOrder.reference ||
+      null,
+
+    reference: returnedOrder.reference || null,
+
+    status: returnedOrder.status || returnedOrder.state || "pending",
+
+    recipient:
+      returnedOrder.items?.[0]?.recipient ||
+      returnedOrder.recipient ||
+      "-",
+
+    volume:
+      returnedOrder.items?.[0]?.volume ??
+      returnedOrder.volume ??
+      "-"
   };
 
-  // Save last order id/ref to localStorage for later check
-  if (normalized.orderId) localStorage.setItem("lastOrderId", normalized.orderId);
+  if (normalized.orderId) {
+    localStorage.setItem("lastOrderId", normalized.orderId);
+  }
 
-  // show card immediately
+  // ✅ THIS is what makes the bottom card appear
   createOrUpdateStatusCard(normalized);
 
-  // start polling by orderId or reference (prefer orderId)
+  // ✅ THIS is what keeps it updating live
   const idToPoll = normalized.orderId || normalized.reference;
   if (idToPoll) startAutoPolling(idToPoll);
 }
+
+// BOTTOM CARD PULLING ENDS
+
 
 
 
