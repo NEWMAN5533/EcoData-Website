@@ -3710,7 +3710,7 @@ TRUSTED BADGE SECTION
 .trusted-by {
   width: 100%;
   max-width: 97%;
-  height: 13.5rem;
+  height: 14.5rem;
   margin-top: 1rem;
   display: flex;
   align-items: center;
@@ -3766,6 +3766,32 @@ TRUSTED BADGE SECTION
   white-space: nowrap;
 }
 
+.wrapper-notice{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: .5rem;
+  width: 100%;
+  height: auto;
+}
+
+.wrapper-notice .left-tu{
+  display: flex;
+  background: linear-gradient(90deg, #5dad99, #228362 );;
+  color: #1b2725;
+  padding: .3rem;
+  width: 3.3rem;
+  font-size: .9rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: .9;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+  height: 2.5rem; 
+  justify-content: center;
+  align-items: center;
+  border: 0.1px solid #5dad99;
+  border-radius: 50%;
+}
+
 .trusted-text {
   font-size: 1.2rem;
   color: #f0eeef;
@@ -3797,7 +3823,7 @@ TRUSTED BADGE SECTION
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap: .3rem;
+  gap: .5rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   color: rgb(16, 17, 27);
   font-weight: 500;

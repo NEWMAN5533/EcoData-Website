@@ -217,7 +217,13 @@
 <!----TRUSTED-MESSAGE-->
 <section class="trusted-by">
   <div class="trusted-container">
-    <span class="trusted-badge">✔ Verified Platform</span>
+    <div class="wrapper-notice">
+      <div class="left-tu">
+        600+ <br> Users
+      </div>
+      <span class="trusted-badge">✔ Verified Platform</span>
+    </div>
+   
 
     <p class="trusted-text">
       Use daily by students, workers & businesses ✔
@@ -1632,7 +1638,7 @@
 
     if (user) {
       const userSnap = await getDoc(doc(db, "users", user.uid));
-      usernameDisplay.textContent = `Happy New Year, ${userSnap.data().username}!`;
+      usernameDisplay.textContent = `Welcome Back, ${userSnap.data().username}!`;
     } else {
       usernameDisplay.textContent = "Welcome Back, Dear ";
     }
