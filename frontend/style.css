@@ -3709,16 +3709,16 @@ TRUSTED BADGE SECTION
 /* ============================= */
 .trusted-by {
   width: 100%;
-  max-width: 98%;
-  height: 16rem;
+  max-width: 97%;
+  height: 13.5rem;
   margin-top: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: rem;
+  gap: 1rem;
   position: relative;
-  padding: 14px 10px;
-  border-radius: 1rem;
+  padding: 14px 8px;
+  border-radius: .3rem;
   background: linear-gradient(90deg, #185a49, #92c5b4 );
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
   
@@ -3732,7 +3732,7 @@ TRUSTED BADGE SECTION
   align-items: center;
   flex-direction: column;
   justify-content: space-between;
-  gap: 14px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
@@ -3747,6 +3747,8 @@ TRUSTED BADGE SECTION
   overflow: hidden;
 
 }
+
+
 
 .baw-right img{
  position: absolute;
@@ -3765,7 +3767,7 @@ TRUSTED BADGE SECTION
 }
 
 .trusted-text {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: #f0eeef;
   flex-wrap: wrap;
   text-align: center;
@@ -3777,22 +3779,36 @@ TRUSTED BADGE SECTION
 
 .trusted-logos {
   width: 98%;
-  justify-content: center;
+  justify-content: end;
   height: max-content;
-  padding: 0 1rem;
   display: flex;
   align-items: center;
   overflow: hidden;
-  color: rgb(41, 48, 46);
   font-size: .7rem;
   font-weight: 700;
-  gap: 5px;
-  z-index: 1000;
+  gap: .5rem;
 }
 
+.trust{
+  width: max-content;
+  padding: .3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: .3rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: rgb(16, 17, 27);
+  font-weight: 500;
+
+}
+
+
+
 .trusted-logos img {
-  height: 1.2rem;
-  width: 1.5rem;
+  height: 1.6rem;
+  width: 2rem;
   opacity: 0.9;
   border-radius: 4px;
   filter: grayscale(20%);
@@ -3800,8 +3816,8 @@ TRUSTED BADGE SECTION
 }
 
 .trusted-logos .icont-secure{
-  height: 1.8rem;
-  width: 1.5rem;
+  height: 2.4rem;
+  width: 2.2rem;
   box-shadow: none;
 }
 
