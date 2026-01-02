@@ -3709,9 +3709,13 @@ TRUSTED BADGE SECTION
 /* ============================= */
 .trusted-by {
   width: 100%;
-  max-width: 96%;
+  max-width: 98%;
+  height: 16rem;
   margin-top: 1rem;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: rem;
   position: relative;
   padding: 14px 10px;
   border-radius: 1rem;
@@ -3721,7 +3725,8 @@ TRUSTED BADGE SECTION
 }
 
 .trusted-container {
-  max-width: 100%;
+  width: 100%;
+  max-width: 75%;
   margin: auto;
   display: flex;
   align-items: center;
@@ -3729,6 +3734,24 @@ TRUSTED BADGE SECTION
   justify-content: space-between;
   gap: 14px;
   flex-wrap: wrap;
+}
+
+.trusted-by .baw-right{
+  width: 100%;
+  max-width: 25%;
+  height: 100%;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: end;
+  overflow: hidden;
+
+}
+
+.baw-right img{
+ position: absolute;
+ width: 150%;
+ height: 80%;
 }
 
 .trusted-badge {
@@ -3763,12 +3786,13 @@ TRUSTED BADGE SECTION
   color: rgb(41, 48, 46);
   font-size: .7rem;
   font-weight: 700;
-  gap: 12px;
+  gap: 5px;
+  z-index: 1000;
 }
 
 .trusted-logos img {
-  height: 1.8rem;
-  width: 2rem;
+  height: 1.2rem;
+  width: 1.5rem;
   opacity: 0.9;
   border-radius: 4px;
   filter: grayscale(20%);
@@ -3776,8 +3800,8 @@ TRUSTED BADGE SECTION
 }
 
 .trusted-logos .icont-secure{
-  height: 2rem;
-  width: 2rem;
+  height: 1.8rem;
+  width: 1.5rem;
   box-shadow: none;
 }
 
