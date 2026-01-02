@@ -3796,9 +3796,21 @@ TRUSTED BADGE SECTION
   font-size: 1.2rem;
   color: #f0eeef;
   flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .7rem;
   text-align: center;
   font-family: "poppins" sans-serif;
 }
+
+.trusted-text img{
+  width: 2rem;
+  height: 1.5rem;
+}
+
+
+
 .trusted-text strong{
   color: #e7f8f1;
 }
