@@ -3937,6 +3937,10 @@ height: 100%;
     width: 100%;
   }
 
+  .trusted-by{
+    height: 14.5rem !important;
+  }
+
   /****
   WELCOME CARD STYLE FOR 414PX
   *****/
@@ -4190,7 +4194,7 @@ DISPLAY NONE DIVS
   display: flex;
   overflow: hidden;
   margin: 1rem 0;
-  height: 26.5rem;
+  height: 26.5rem !important;
   gap: .1rem;
   justify-content: end;
   justify-self: center;
@@ -4303,7 +4307,7 @@ ORDER STATUS
  width: 100%;
  max-width: 90%;
   display: flex;
-  height: 17rem;
+  height: 17rem !important;
   align-items: center;
   justify-content: center;
   gap: .3rem;
