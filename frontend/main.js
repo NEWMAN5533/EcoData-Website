@@ -483,7 +483,7 @@ document.addEventListener("DOMContentLoaded", () => {
           `;
         } else {
           statusResult.innerHTML = `
-            <div style="padding:10px; background:#ffdddd; border:1px solid #f44336; border-radius:8px;">
+            <div style="padding:10px; background:#ffdddd; border:1px solid #f34e43f3; border-radius:8px;">
               ⚠ Could not find order details for <strong>${id}</strong>.
             </div>
           `;
@@ -491,7 +491,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } catch (err) {
         console.error("Error checking order status:", err);
         statusResult.innerHTML = `
-          <div style="padding:10px; background:#ffdddd; border:1px solid #f44336; border-radius:8px;">
+          <div style="padding:10px; background:#ffdddd; border:1px solid #f5392cff; border-radius:8px;">
             ❌ Error checking status. Please try again.
           </div>
         `;
@@ -499,6 +499,32 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 }
 });
+
+// ScrollBtn 
+ const scrollBtn =
+  document.querySelector(".floating-scroll");
+  const bundleSection = 
+  document.getElementById("bundles");
+
+ scrollBtn.addEventListener("click", () => {
+  if ( bundleSection) {
+    bundleSection.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  }
+ });
+
+ // Auto-hide after scroll
+ window.addEventListener("scroll", ()=> {
+  if (window.scrollY > 80) {
+    scrollBtn.style.opacity = "0";
+    scrollBtn.style.pointerEvents = 'none';
+  } else {
+    scrollBtn.style.opacity = "1";
+    scrollBtn.style.pointerEvents = "auto";
+  }
+ })
 
 
 

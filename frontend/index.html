@@ -392,7 +392,7 @@
 
 <!-----NETWORK-BUNDLE-CARDS-MTN-CONTAINER---->
   <!---CARDS SECTION-->
-    <section class="gridCards-container ">
+    <section class="gridCards-container " id="bundles">
       <!---GRID CARDS WRAPPER-->
       <div class="gridCard-wrapper">
       <!----------CARD----------->
@@ -1849,28 +1849,7 @@ if (o.status === "delivered") {
 }
 </script>
 
-<script>
-  const scrollBtn =
-  document.querySelector(".floating-scroll");
 
-  scrollBtn.addEventListener('click', () =>{
-    window.scrollBy({
-      top: window.innerHeight,
-      behavior: 'smooth'
-    });
-  });
-
-  // Hide after user scroll
-  window.addEventListener('scroll', () => {
-    if ( window.scrollY > 100 ) {
-      scrollBtn.style.opacity = '0';
-      scrollBtn.style.pointerEvents = 'none';
-    } else {
-      scrollBtn.style.opacity = '1';
-      scrollBtn.style.pointerEvents = 'auto';
-    }
-  });
-</script>
 
 
 <!---AUTO SCROLL-->
