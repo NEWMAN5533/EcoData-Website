@@ -333,8 +333,8 @@
       height: 2.3rem;
       display: flex;
       gap: 1rem;
-      align-items: center;
-      justify-content: center;
+      align-items: start;
+      justify-content: space-between;
       background: transparent;
     }
 
@@ -349,9 +349,9 @@
       height: 2rem;
       border-radius: 50%;
       padding: .2rem;
-      background: rgb(231, 222, 222);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-    }
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      justify-self: start;
+      }
 
     .gridCard-middle{
       width: 100%;
@@ -389,13 +389,14 @@
     }
 
     .gridCard-bottom .buy-btn{
-      width: 80%;
+      width: 90%;
       height: 1.9rem;
       border: none;
       border-radius: 8px;
       background: linear-gradient(135deg, rgb(227, 243, 5), rgb(236, 140, 13));
       color: white;
       font-size: 1rem;
+      margin-bottom: -2rem;
     }
 
 
@@ -428,7 +429,14 @@
 </a>
 </div>
 <div class="nav-right">
- 
+  <!---DARK MODE-->
+<label class="theme-switch">
+  <input type="checkbox" id="themeToggle">
+  <span class="slider">
+    <span class="icon sun"><img src="./css/icons/sun1.png" alt="images"></span>
+    <span class="icon moon"><img src="./css/icons/moon1.png" alt="images"></span>
+  </span>
+</label>
 <img id="cardToggler" src="./css/icons/menu-icon.png" alt="image" class="menu-icon" loading="lazy">
 </div>
 </nav>
@@ -454,21 +462,9 @@
   </div>
   <!----HERO ENDS-->
 
-  <section class="select-offer">
-    <h2>Select MTN Offer</h2>
-    <small>Choose from Available MTN data offers</small>
-  </section>
 
   <section class="gridView-container">
-    <div class="gridView-top">
-      <div class="grid-left-div">
-        <button class="normal">Normal</button>
-        <button class="grid active">Grid</button>
-      </div>
-      <div class="grid-right-div">
-        <small>18 Package(s)</small>
-      </div>
-    </div>
+   
 
     <!---CARDS SECTION-->
     <section class="gridCards-container">
@@ -477,8 +473,8 @@
       <!----------CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>MTN Bundle</small>
-          <img src="./css/images/mtn-badge2.jpg" alt="">
+          <small>MTN </small>
+        <img class="mtn-individual" src="./css/icons/mtn-signal.png" alt="mtn-icon">
         </div>
         <div class="gridCard-middle">
           <h3>1GB</h3>
@@ -496,8 +492,8 @@
  <!----------NEXT CARD----------->
       <div class="gridCard">
         <div class="gridCard-top">
-          <small>MTN Bundle</small>
-          <img src="./css/images/mtn-badge2.jpg" alt="">
+          <small>MTN </small>
+        <img class="mtn-individual" src="./css/icons/mtn-signal.png" alt="mtn-icon">
         </div>
         <div class="gridCard-middle">
           <h3>2GB</h3>
@@ -515,8 +511,8 @@
  <!----------NEXT CARD----------->
       <div class="gridCard">
         <div class="gridCard-top">
-          <small>MTN Bundle</small>
-          <img src="./css/images/mtn-badge2.jpg" alt="">
+          <small>MTN </small>
+        <img class="mtn-individual" src="./css/icons/mtn-signal.png" alt="mtn-icon">
         </div>
         <div class="gridCard-middle">
           <h3>3GB</h3>
@@ -534,8 +530,8 @@
       <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>MTN Bundle</small>
-          <img src="./css/images/mtn-badge2.jpg" alt="">
+          <small>MTN </small>
+        <img class="mtn-individual" src="./css/icons/mtn-signal.png" alt="mtn-icon">
         </div>
         <div class="gridCard-middle">
           <h3>4GB</h3>
@@ -553,8 +549,8 @@
       <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>MTN Bundle</small>
-          <img src="./css/images/mtn-badge2.jpg" alt="">
+          <small>MTN </small>
+        <img class="mtn-individual" src="./css/icons/mtn-signal.png" alt="mtn-icon">
         </div>
         <div class="gridCard-middle">
           <h3>5GB</h3>
@@ -572,8 +568,8 @@
        <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>MTN Bundle</small>
-          <img src="./css/images/mtn-badge2.jpg" alt="">
+          <small>MTN </small>
+        <img class="mtn-individual" src="./css/icons/mtn-signal.png" alt="mtn-icon">
         </div>
         <div class="gridCard-middle">
           <h3>6GB</h3>
@@ -591,8 +587,8 @@
       <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>MTN Bundle</small>
-          <img src="./css/images/mtn-badge2.jpg" alt="">
+          <small>MTN </small>
+        <img class="mtn-individual" src="./css/icons/mtn-signal.png" alt="mtn-icon">
         </div>
         <div class="gridCard-middle">
           <h3>7GB</h3>
@@ -610,8 +606,8 @@
        <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>MTN Bundle</small>
-          <img src="./css/images/mtn-badge2.jpg" alt="">
+          <small>MTN </small>
+        <img class="mtn-individual" src="./css/icons/mtn-signal.png" alt="mtn-icon">
         </div>
         <div class="gridCard-middle">
           <h3>8GB</h3>
@@ -630,8 +626,8 @@
        <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>MTN Bundle</small>
-          <img src="./css/images/mtn-badge2.jpg" alt="">
+          <small>MTN </small>
+        <img class="mtn-individual" src="./css/icons/mtn-signal.png" alt="mtn-icon">
         </div>
         <div class="gridCard-middle">
           <h3>9GB</h3>
@@ -649,8 +645,8 @@
        <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>MTN Bundle</small>
-          <img src="./css/images/mtn-badge2.jpg" alt="">
+          <small>MTN </small>
+        <img class="mtn-individual" src="./css/icons/mtn-signal.png" alt="mtn-icon">
         </div>
         <div class="gridCard-middle">
           <h3>10GB</h3>
@@ -668,8 +664,8 @@
        <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>MTN Bundle</small>
-          <img src="./css/images/mtn-badge2.jpg" alt="">
+          <small>MTN </small>
+        <img class="mtn-individual" src="./css/icons/mtn-signal.png" alt="mtn-icon">
         </div>
         <div class="gridCard-middle">
           <h3>12GB</h3>
@@ -687,8 +683,8 @@
        <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>MTN Bundle</small>
-          <img src="./css/images/mtn-badge2.jpg" alt="">
+          <small>MTN </small>
+        <img class="mtn-individual" src="./css/icons/mtn-signal.png" alt="mtn-icon">
         </div>
         <div class="gridCard-middle">
           <h3>15GB</h3>
@@ -706,8 +702,8 @@
        <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>MTN Bundle</small>
-          <img src="./css/images/mtn-badge2.jpg" alt="">
+          <small>MTN </small>
+        <img class="mtn-individual" src="./css/icons/mtn-signal.png" alt="mtn-icon">
         </div>
         <div class="gridCard-middle">
           <h3>20GB</h3>
@@ -725,8 +721,8 @@
        <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>MTN Bundle</small>
-          <img src="./css/images/mtn-badge2.jpg" alt="">
+          <small>MTN </small>
+        <img class="mtn-individual" src="./css/icons/mtn-signal.png" alt="mtn-icon">
         </div>
         <div class="gridCard-middle">
           <h3>25GB</h3>
@@ -744,8 +740,8 @@
        <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>MTN Bundle</small>
-          <img src="./css/images/mtn-badge2.jpg" alt="">
+          <small>MTN </small>
+        <img class="mtn-individual" src="./css/icons/mtn-signal.png" alt="mtn-icon">
         </div>
         <div class="gridCard-middle">
           <h3>30GB</h3>
@@ -763,8 +759,8 @@
       <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>MTN Bundle</small>
-          <img src="./css/images/mtn-badge2.jpg" alt="">
+          <small>MTN </small>
+        <img class="mtn-individual" src="./css/icons/mtn-signal.png" alt="mtn-icon">
         </div>
         <div class="gridCard-middle">
           <h3>40GB</h3>
@@ -782,8 +778,8 @@
        <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>MTN Bundle</small>
-          <img src="./css/images/mtn-badge2.jpg" alt="">
+          <small>MTN </small>
+        <img class="mtn-individual" src="./css/icons/mtn-signal.png" alt="mtn-icon">
         </div>
         <div class="gridCard-middle">
           <h3>50GB</h3>
@@ -801,8 +797,8 @@
       <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>MTN Bundle</small>
-          <img src="./css/images/mtn-badge2.jpg" alt="">
+          <small>MTN </small>
+        <img class="mtn-individual" src="./css/icons/mtn-signal.png" alt="mtn-icon">
         </div>
         <div class="gridCard-middle">
           <h3>100GB</h3>
@@ -1121,7 +1117,46 @@ window.addEventListener("click", function(e){
 <!-----orderStatusTracker-->
 
 
+<!-----DARK-MODE JS-->
+<script>
+  const toggle = document.getElementById("themeToggle");
+  const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
+  const savedTheme = localStorage.getItem("theme");
+
+  function applyTheme(theme) {
+    if (theme === "dark") {
+      document.body.classList.add("dark-mode");
+      toggle.checked = true;
+    } else {
+      document.body.classList.remove("dark-mode");
+      toggle.checked = false;
+    }
+  }
+
+  if (savedTheme) {
+    applyTheme(savedTheme);
+  } else {
+    applyTheme(systemPrefersDark ? "dark" : "light");
+  }
+
+  toggle.addEventListener("change", () => {
+    if (toggle.checked) {
+      localStorage.setItem("theme", "dark");
+      applyTheme("dark");
+    } else {
+      localStorage.setItem("theme", "light");
+      applyTheme("light");
+    }
+  });
+
+  // Auto-change if system theme changes and user has no preference
+  window.matchMedia("(prefers-color-scheme: dark)").addListener(e => {
+    if (!localStorage.getItem("theme")) {
+      applyTheme(e.matches ? "dark" : "light");
+    }
+});
+</script>
 
 </body>
 <!-----ORDER STATUS JS---->

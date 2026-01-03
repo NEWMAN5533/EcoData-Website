@@ -66,6 +66,46 @@
       background: transparent;
       margin: 1rem 0;
       padding: .3rem;
+
+
+
+      
+  /***
+  NEW ROOT
+  ***/
+  --btn-bg-cl: rgb(250, 126, 9);
+  --user-panel-bg: rgba(42, 42, 194, 0.938);
+  --clock-bg-cl: rgb(2, 61, 52);
+
+  /***
+  DARK MODE COLORS
+  ***/
+  --darkMode-bg-cl: rgb(17, 2, 31);
+  --welcome-card-bg: rgb(1, 11, 39);
+  --welcome-card-bg-2: rgb(24, 5, 5);
+  --welcome-card-border: rgb(74, 88, 94);
+  --thin-border: rgb(35, 48, 49);
+  --text-cl: rgb(145, 168, 164);
+  --text-cl-2: rgb(210, 216, 216);
+  --text-cl-3: rgb(139, 141, 141);
+
+  /**
+  BORDER SOLID COLORS
+  **/
+  --thin-border-1:  #0d6d5a;
+  --thin-border-2:  #830616;
+  --thin-border-3:  #b97207;
+  --thin-border-4:  #036aa7;
+  --thin-border-5:  #bba907;
+  --thin-border-6:   rgb(17, 2, 31);
+  --thin-border-7:  rgb(1, 11, 39);
+
+  /***
+  CARD BG
+  ***/
+  --card-mtn-bg:  #faba5ad0;
+  --card-tel-bg:  #fa537dd0;
+  --card-tigo-bg:  #6cbff7cb;
     }
 
     /****
@@ -300,6 +340,14 @@
       padding: .3rem 0;
     }
 
+        .dark-mode .gridCard{
+  background: var(--card-tigo-bg);
+  box-shadow: 0 2px 6px rgba(13, 29, 46, 0.25);
+  border: 2px solid var(--thin-border-1);
+  border-radius: .5rem;
+}
+
+
     .gridCard-wrapper{
       width: max-content;
       height: max-content;
@@ -329,12 +377,12 @@
     }
 
     .gridCard-top{
-      width: 100%;
+     width: 100%;
       height: 2.3rem;
       display: flex;
       gap: 1rem;
-      align-items: center;
-      justify-content: center;
+      align-items: start;
+      justify-content: space-between;
       background: transparent;
     }
 
@@ -350,8 +398,11 @@
       width: 2rem;
       height: 2rem;
       border-radius: 50%;
+      margin-top: -.5rem;
       padding: .2rem;
-      background: rgb(231, 222, 222);
+      background:  linear-gradient(135deg, rgba(172, 198, 226, 0.945), rgba(7, 73, 87, 0.664));
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  animation: pulse 1.5s infinite;
       box-shadow: 0 2px 6px rgba(0,0,0,0.4);
     }
 
@@ -391,13 +442,14 @@
     }
 
     .gridCard-bottom .buy-btn{
-      width: 80%;
+      width: 90%;
       height: 1.9rem;
       border: none;
       border-radius: 8px;
       background: linear-gradient(135deg, rgb(75, 148, 233), rgb(4, 145, 170));
       color: white;
       font-size: 1rem;
+      margin-bottom: -2rem;
     }
 
 
@@ -430,7 +482,13 @@
 </a>
 </div>
 <div class="nav-right">
- 
+ <label class="theme-switch">
+  <input type="checkbox" id="themeToggle">
+  <span class="slider">
+    <span class="icon sun"><img src="./css/icons/sun1.png" alt="images"></span>
+    <span class="icon moon"><img src="./css/icons/moon1.png" alt="images"></span>
+  </span>
+</label>
 <img id="cardToggler" src="./css/icons/menu-icon.png" alt="image" class="menu-icon" loading="lazy">
 </div>
 </nav>
@@ -456,21 +514,10 @@
   </div>
   <!----HERO ENDS-->
 
-  <section class="select-offer">
-    <h2>Select AirtelTigo Offer</h2>
-    <small>Choose from Available Telecel data offers</small>
-  </section>
+
 
   <section class="gridView-container">
-    <div class="gridView-top">
-      <div class="grid-left-div">
-        <button class="normal">Normal</button>
-        <button class="grid active">Grid</button>
-      </div>
-      <div class="grid-right-div">
-        <small>17 Package(s)</small>
-      </div>
-    </div>
+ 
 
     <!---CARDS SECTION-->
     <section class="gridCards-container">
@@ -479,8 +526,8 @@
       <!----------CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>AirtelTigo Bundle</small>
-          <img src="./css/images/tigo.jpg" alt="">
+          <small>AirtelTigo</small>
+            <img src="./css/icons/tigo-signal.png" alt="tigo-icon">
         </div>
         <div class="gridCard-middle">
           <h3>1GB</h3>
@@ -498,8 +545,8 @@
  <!----------NEXT CARD----------->
       <div class="gridCard">
         <div class="gridCard-top">
-          <small>AirtelTigo Bundle</small>
-          <img src="./css/images/tigo.jpg" alt="">
+          <small>AirtelTigo</small>
+            <img src="./css/icons/tigo-signal.png" alt="tigo-icon">
         </div>
         <div class="gridCard-middle">
           <h3>2GB</h3>
@@ -517,8 +564,8 @@
  <!----------NEXT CARD----------->
       <div class="gridCard">
         <div class="gridCard-top">
-          <small>AirtelTigo Bundle</small>
-          <img src="./css/images/tigo.jpg" alt="">
+          <small>AirtelTigo</small>
+            <img src="./css/icons/tigo-signal.png" alt="tigo-icon">
         </div>
         <div class="gridCard-middle">
           <h3>3GB</h3>
@@ -536,8 +583,8 @@
       <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>AirtelTigo Bundle</small>
-          <img src="./css/images/tigo.jpg" alt="">
+          <small>AirtelTigo</small>
+            <img src="./css/icons/tigo-signal.png" alt="tigo-icon">
         </div>
         <div class="gridCard-middle">
           <h3>4GB</h3>
@@ -555,8 +602,8 @@
       <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>AirtelTigo Bundle</small>
-          <img src="./css/images/tigo.jpg" alt="">
+          <small>AirtelTigo</small>
+            <img src="./css/icons/tigo-signal.png" alt="tigo-icon">
         </div>
         <div class="gridCard-middle">
           <h3>5GB</h3>
@@ -574,8 +621,8 @@
        <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>AirtelTigo Bundle</small>
-          <img src="./css/images/tigo.jpg" alt="">
+          <small>AirtelTigo</small>
+            <img src="./css/icons/tigo-signal.png" alt="tigo-icon">
         </div>
         <div class="gridCard-middle">
           <h3>6GB</h3>
@@ -593,8 +640,8 @@
       <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>AirtelTigo Bundle</small>
-          <img src="./css/images/tigo.jpg" alt="">
+          <small>AirtelTigo</small>
+            <img src="./css/icons/tigo-signal.png" alt="tigo-icon">
         </div>
         <div class="gridCard-middle">
           <h3>7GB</h3>
@@ -612,8 +659,8 @@
        <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>AirtelTigo Bundle</small>
-          <img src="./css/images/tigo.jpg" alt="">
+          <small>AirtelTigo</small>
+            <img src="./css/icons/tigo-signal.png" alt="tigo-icon">
         </div>
         <div class="gridCard-middle">
           <h3>8GB</h3>
@@ -632,8 +679,8 @@
        <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>AirtelTigo Bundle</small>
-          <img src="./css/images/tigo.jpg" alt="">
+          <small>AirtelTigo</small>
+            <img src="./css/icons/tigo-signal.png" alt="tigo-icon">
         </div>
         <div class="gridCard-middle">
           <h3>9GB</h3>
@@ -651,8 +698,8 @@
        <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>AirtelTigo Bundle</small>
-          <img src="./css/images/tigo.jpg" alt="">
+          <small>AirtelTigo</small>
+            <img src="./css/icons/tigo-signal.png" alt="tigo-icon">
         </div>
         <div class="gridCard-middle">
           <h3>10GB</h3>
@@ -670,8 +717,8 @@
        <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>AirtelTigo Bundle</small>
-          <img src="./css/images/tigo.jpg" alt="">
+          <small>AirtelTigo</small>
+            <img src="./css/icons/tigo-signal.png" alt="tigo-icon">
         </div>
         <div class="gridCard-middle">
           <h3>12GB</h3>
@@ -689,8 +736,8 @@
        <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>AirtelTigo Bundle</small>
-          <img src="./css/images/tigo.jpg" alt="">
+          <small>AirtelTigo</small>
+            <img src="./css/icons/tigo-signal.png" alt="tigo-icon">
         </div>
         <div class="gridCard-middle">
           <h3>15GB</h3>
@@ -708,8 +755,8 @@
        <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>AirtelTigo Bundle</small>
-          <img src="./css/images/tigo.jpg" alt="">
+          <small>AirtelTigo</small>
+            <img src="./css/icons/tigo-signal.png" alt="tigo-icon">
         </div>
         <div class="gridCard-middle">
           <h3>20GB</h3>
@@ -727,8 +774,8 @@
        <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>AirtelTigo Bundle</small>
-          <img src="./css/images/tigo.jpg" alt="">
+          <small>AirtelTigo</small>
+            <img src="./css/icons/tigo-signal.png" alt="tigo-icon">
         </div>
         <div class="gridCard-middle">
           <h3>25GB</h3>
@@ -746,8 +793,8 @@
        <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>AirtelTigo Bundle</small>
-          <img src="./css/images/tigo.jpg" alt="">
+          <small>AirtelTigo</small>
+            <img src="./css/icons/tigo-signal.png" alt="tigo-icon">
         </div>
         <div class="gridCard-middle">
           <h3>30GB</h3>
@@ -765,8 +812,8 @@
        <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>AirtelTigo Bundle</small>
-          <img src="./css/images/tigo.jpg" alt="">
+          <small>AirtelTigo</small>
+            <img src="./css/icons/tigo-signal.png" alt="tigo-icon">
         </div>
         <div class="gridCard-middle">
           <h3>40GB</h3>
@@ -784,8 +831,8 @@
        <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>AirtelTigo Bundle</small>
-          <img src="./css/images/tigo.jpg" alt="">
+          <small>AirtelTigo</small>
+            <img src="./css/icons/tigo-signal.png" alt="tigo-icon">
         </div>
         <div class="gridCard-middle">
           <h3>50GB</h3>
@@ -1099,6 +1146,49 @@ window.addEventListener("click", function(e){
 
 
 <!-----orderStatusTracker-->
+
+
+<!-----DARK-MODE JS-->
+<script>
+  const toggle = document.getElementById("themeToggle");
+  const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  const savedTheme = localStorage.getItem("theme");
+
+  function applyTheme(theme) {
+    if (theme === "dark") {
+      document.body.classList.add("dark-mode");
+      toggle.checked = true;
+    } else {
+      document.body.classList.remove("dark-mode");
+      toggle.checked = false;
+    }
+  }
+
+  if (savedTheme) {
+    applyTheme(savedTheme);
+  } else {
+    applyTheme(systemPrefersDark ? "dark" : "light");
+  }
+
+  toggle.addEventListener("change", () => {
+    if (toggle.checked) {
+      localStorage.setItem("theme", "dark");
+      applyTheme("dark");
+    } else {
+      localStorage.setItem("theme", "light");
+      applyTheme("light");
+    }
+  });
+
+  // Auto-change if system theme changes and user has no preference
+  window.matchMedia("(prefers-color-scheme: dark)").addListener(e => {
+    if (!localStorage.getItem("theme")) {
+      applyTheme(e.matches ? "dark" : "light");
+    }
+});
+</script>
+
 
 
 

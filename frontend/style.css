@@ -939,7 +939,17 @@ UPDATED UI STYLE
       border-radius: 12px;
       padding: .2rem;
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    
+    }
+
+    .mtn-individual{
+      width: 2rem;
+      height: 2rem;
+      border-radius: 12px;
+      padding: .2rem;
+      margin-top: -.6rem;
+      background: linear-gradient(135deg, rgb(219, 226, 87), rgba(207, 124, 16, 0.767));
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    animation: pulse 1.5s infinite;
     }
 
 
@@ -3784,6 +3794,7 @@ TRUSTED BADGE SECTION
   position: relative;
   align-items: center;
   justify-content: end;
+  padding-right: 1rem;
   overflow: hidden;
 
 }
@@ -3793,7 +3804,7 @@ TRUSTED BADGE SECTION
 .baw-right img{
  position: absolute;
  width: 150%;
- height: 80%;
+ height: 100%;
 }
 
 .trusted-badge {
@@ -8266,7 +8277,7 @@ margin-right: -8rem;
 
 .baw-right img{
   width: 110%;
-  height: 90%;
+  height: 100%;
 }
 
 

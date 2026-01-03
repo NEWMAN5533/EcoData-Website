@@ -33,6 +33,48 @@
   --mtn-btn: rgb(193, 196, 19);
   --telecel-btn: rgb(180, 57, 19);
   --airteltigo-btn: rgb(28, 46, 119);
+
+
+  /***
+  NEW ROOT
+  ***/
+  --btn-bg-cl: rgb(250, 126, 9);
+  --user-panel-bg: rgba(42, 42, 194, 0.938);
+  --clock-bg-cl: rgb(2, 61, 52);
+
+  /***
+  DARK MODE COLORS
+  ***/
+  --darkMode-bg-cl: rgb(17, 2, 31);
+  --welcome-card-bg: rgb(1, 11, 39);
+  --welcome-card-bg-2: rgb(24, 5, 5);
+  --welcome-card-border: rgb(74, 88, 94);
+  --thin-border: rgb(35, 48, 49);
+  --text-cl: rgb(145, 168, 164);
+  --text-cl-2: rgb(210, 216, 216);
+  --text-cl-3: rgb(139, 141, 141);
+
+  /**
+  BORDER SOLID COLORS
+  **/
+  --thin-border-1:  #0d6d5a;
+  --thin-border-2:  #830616;
+  --thin-border-3:  #b97207;
+  --thin-border-4:  #036aa7;
+  --thin-border-5:  #bba907;
+  --thin-border-6:   rgb(17, 2, 31);
+  --thin-border-7:  rgb(1, 11, 39);
+
+  /***
+  CARD BG
+  ***/
+  --card-mtn-bg:  #faba5ad0;
+  --card-tel-bg:  #fa537dd0;
+  --card-tigo-bg:  #6cbff7cb;
+
+
+
+
 }
 
 
@@ -41,23 +83,6 @@
 
 
 
-
-.foot{
-  width: 100%;
-  height: 3rem;
-  display: flex;
-    .main-section-container{
-      width: 100%;
-      max-width: 480px;
-      align-items: start;
-      justify-self: center;
-      justify-content: start;
-      height: max-content;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      margin-top: 3.9rem;
-    }
 
     /****
     HERO-TEXT
@@ -219,6 +244,14 @@
       margin: 1rem 0;
     }
 
+    .dark-mode .gridCard{
+  background: var(--card-tel-bg);
+  box-shadow: 0 2px 6px rgba(13, 29, 46, 0.25);
+  border: 2px solid var(--thin-border-2);
+  border-radius: .5rem;
+}
+
+
     .gridView-top{
       width: 100%;
       max-width: 470px;
@@ -228,6 +261,17 @@
       height: 3rem;
       background: transparent;
       position: relative;
+    }
+
+    .gridCard-top img{
+      width: 2rem;
+      height: 2rem;
+      border-radius: 12px;
+      padding: .2rem;
+      margin-top: -.6rem;
+      background: linear-gradient(135deg, rgba(247, 159, 159, 0.712), rgba(207, 20, 45, 0.911));
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    animation: pulse 1.5s infinite;
     }
 
     /****
@@ -342,7 +386,7 @@
       display: flex;
       gap: 1rem;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
       background: transparent;
     }
 
@@ -352,14 +396,7 @@
       font-weight: 600;
     }
 
-    .gridCard-top img{
-      width: 2rem;
-      height: 2rem;
-      border-radius: 50%;
-      padding: .2rem;
-      background: rgb(231, 222, 222);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-    }
+   
 
     .gridCard-middle{
       width: 100%;
@@ -396,19 +433,17 @@
       background: transparent;
     }
 
-    .gridCard-bottom .buy-btn{
-      width: 80%;
+    .gridCard-bottom .telBtn{
+      width: 90%;
       height: 1.9rem;
       border: none;
       border-radius: 8px;
-      background: linear-gradient(135deg, rgb(241, 62, 122), rgb(192, 3, 82));
       color: white;
       font-size: 1rem;
+      margin-bottom: -1rem;
     }
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-}
+
+
   </style>
 
 
@@ -428,7 +463,13 @@
 </a>
 </div>
 <div class="nav-right">
- 
+ <label class="theme-switch">
+  <input type="checkbox" id="themeToggle">
+  <span class="slider">
+    <span class="icon sun"><img src="./css/icons/sun1.png" alt="images"></span>
+    <span class="icon moon"><img src="./css/icons/moon1.png" alt="images"></span>
+  </span>
+</label>
 <img id="cardToggler" src="./css/icons/menu-icon.png" alt="image" class="menu-icon" loading="lazy">
 </div>
 </nav>
@@ -454,21 +495,8 @@
   </div>
   <!----HERO ENDS-->
 
-  <section class="select-offer">
-    <h2>Select Telecel Offer</h2>
-    <small>Choose from Available Telecel data offers</small>
-  </section>
-
   <section class="gridView-container">
-    <div class="gridView-top">
-      <div class="grid-left-div">
-        <button class="normal">Normal</button>
-        <button class="grid active">Grid</button>
-      </div>
-      <div class="grid-right-div">
-        <small>9 Package(s)</small>
-      </div>
-    </div>
+
 
     <!---CARDS SECTION-->
     <section class="gridCards-container">
@@ -477,8 +505,8 @@
       <!----------CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>Telecel Bundle</small>
-          <img src="./css/images/telecel.jpg" alt="">
+          <small>Telecel </small>
+           <img src="./css/icons/telecel-signal.png" alt="telcel-icon">
         </div>
         <div class="gridCard-middle">
           <h3>5GB</h3>
@@ -496,8 +524,8 @@
  <!----------NEXT CARD----------->
       <div class="gridCard">
         <div class="gridCard-top">
-          <small>Telecel Bundle</small>
-          <img src="./css/images/telecel.jpg" alt="">
+          <small>Telecel </small>
+          <img src="./css/icons/telecel-signal.png" alt="telcel-icon">
         </div>
         <div class="gridCard-middle">
           <h3>10GB</h3>
@@ -515,8 +543,8 @@
  <!----------NEXT CARD----------->
       <div class="gridCard">
         <div class="gridCard-top">
-          <small>Telecel Bundle</small>
-          <img src="./css/images/telecel.jpg" alt="">
+          <small>Telecel </small>
+           <img src="./css/icons/telecel-signal.png" alt="telcel-icon">
         </div>
         <div class="gridCard-middle">
           <h3>15GB</h3>
@@ -534,8 +562,8 @@
       <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>Telecel Bundle</small>
-          <img src="./css/images/telecel.jpg" alt="">
+          <small>Telecel </small>
+           <img src="./css/icons/telecel-signal.png" alt="telcel-icon">
         </div>
         <div class="gridCard-middle">
           <h3>20GB</h3>
@@ -553,8 +581,8 @@
       <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>Telecel Bundle</small>
-          <img src="./css/images/telecel.jpg" alt="">
+          <small>Telecel </small>
+           <img src="./css/icons/telecel-signal.png" alt="telcel-icon">
         </div>
         <div class="gridCard-middle">
           <h3>25GB</h3>
@@ -572,8 +600,8 @@
        <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>Telecel Bundle</small>
-          <img src="./css/images/telecel.jpg" alt="">
+          <small>Telecel </small>
+           <img src="./css/icons/telecel-signal.png" alt="telcel-icon">
         </div>
         <div class="gridCard-middle">
           <h3>30GB</h3>
@@ -591,8 +619,8 @@
       <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>Telecel Bundle</small>
-          <img src="./css/images/telecel.jpg" alt="">
+          <small>Telecel </small>
+           <img src="./css/icons/telecel-signal.png" alt="telcel-icon">
         </div>
         <div class="gridCard-middle">
           <h3>40GB</h3>
@@ -610,8 +638,8 @@
        <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>Telecel Bundle</small>
-          <img src="./css/images/telecel.jpg" alt="">
+          <small>Telecel </small>
+           <img src="./css/icons/telecel-signal.png" alt="telcel-icon">
         </div>
         <div class="gridCard-middle">
           <h3>50GB</h3>
@@ -630,8 +658,8 @@
        <!----------NEXT CARD----------->
         <div class="gridCard">
         <div class="gridCard-top">
-          <small>Telecel Bundle</small>
-          <img src="./css/images/telecel.jpg" alt="">
+          <small>Telecel </small>
+           <img src="./css/icons/telecel-signal.png" alt="telcel-icon">
         </div>
         <div class="gridCard-middle">
           <h3>100GB</h3>
@@ -947,6 +975,47 @@ window.addEventListener("click", function(e){
 <!-----orderStatusTracker-->
 
 
+
+<!-----DARK-MODE JS-->
+<script>
+  const toggle = document.getElementById("themeToggle");
+  const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  const savedTheme = localStorage.getItem("theme");
+
+  function applyTheme(theme) {
+    if (theme === "dark") {
+      document.body.classList.add("dark-mode");
+      toggle.checked = true;
+    } else {
+      document.body.classList.remove("dark-mode");
+      toggle.checked = false;
+    }
+  }
+
+  if (savedTheme) {
+    applyTheme(savedTheme);
+  } else {
+    applyTheme(systemPrefersDark ? "dark" : "light");
+  }
+
+  toggle.addEventListener("change", () => {
+    if (toggle.checked) {
+      localStorage.setItem("theme", "dark");
+      applyTheme("dark");
+    } else {
+      localStorage.setItem("theme", "light");
+      applyTheme("light");
+    }
+  });
+
+  // Auto-change if system theme changes and user has no preference
+  window.matchMedia("(prefers-color-scheme: dark)").addListener(e => {
+    if (!localStorage.getItem("theme")) {
+      applyTheme(e.matches ? "dark" : "light");
+    }
+});
+</script>
 
 
 </body>
