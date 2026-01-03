@@ -1849,11 +1849,37 @@ if (o.status === "delivered") {
 }
 </script>
 
+<script>
+  const scrollBtn =
+  document.querySelector(".floating-scroll");
 
-</body>
+  scrollBtn.addEventListener('click', () =>{
+    window.scrollBy({
+      top: window.innerHeight,
+      behavior: 'smooth'
+    });
+  });
+
+  // Hide after user scroll
+  window.addEventListener('scroll', () => {
+    if ( window.scrollY > 100 ) {
+      scrollBtn.style.opacity = '0';
+      scrollBtn.style.pointerEvents = 'none';
+    } else {
+      scrollBtn.style.opacity = '1';
+      scrollBtn.style.pointerEvents = 'auto';
+    }
+  });
+</script>
+
+
+<!---AUTO SCROLL-->
+<div class="floating-scroll">
+  <img src="./css/icons/down-arrow.png" alt="arrow-icon" loading="lazy">
+</div>
 
 
 <!----POPUP/HIDDEN CARD-->
 <div id="orderStatusContainerRoot"></div>
-
+</body>
 </html>
