@@ -3894,6 +3894,11 @@ AUTO SCROLLING STYLE
   border-radius: 50%;
   font-size: 22px;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
   z-index: 9999;
   animation: shakeDown 2s infinite;
   backdrop-filter: blur(6px);
@@ -3903,6 +3908,14 @@ AUTO SCROLLING STYLE
   font-size: .9rem;
   color: black;
   font-family: "inter"serif;
+}
+
+.dark-mode .floating-scroll{
+  background:  rgba(122, 218, 186, 0.74);
+}
+
+.dark-mode .floating-scroll small{
+  color: white;
 }
 
 .floating-scroll img{
