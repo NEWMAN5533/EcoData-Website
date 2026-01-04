@@ -6,7 +6,7 @@ Live order streaming
   width: 100%;
   max-width: 90%;
   position: relative;
-  height: 6rem;
+  height: max-content;
   display: flex;
   box-sizing: border-box;
   align-items: center;
