@@ -275,15 +275,15 @@ function updateLiveOrderCard(order) {
 
   card.innerHTML = `
     <div class="live-row">
-      <strong>Order:</strong> <span>${order.orderId}</span>
+      <strong>Order ID:</strong> <span>${order.orderId}</span>
     </div>
 
     <div class="live-row">
-      <strong>Recipient:</strong> <span>${order.recipient}</span>
+      <p><strong>Recipient:</strong> ${order.recipient || "-"}</p>
     </div>
 
     <div class="live-row">
-      <strong>Volume:</strong> <span>${order.volume} GB</span>
+      <p><strong>Volume:</strong> ${order.volume ?? "-"} GB</p>
     </div>
 
     <div class="live-row">
