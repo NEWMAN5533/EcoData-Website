@@ -6,7 +6,7 @@ Live order streaming
   width: 100%;
   max-width: 90%;
   position: relative;
-  height: max-content;
+  height: 8rem;
   display: flex;
   box-sizing: border-box;
   align-items: center;
@@ -17,7 +17,6 @@ Live order streaming
 
 #liveOrderSection {
   width: 100%;
-  height: 7rem;
 }
 
 .live-order-card {
