@@ -277,7 +277,7 @@ function updateLiveOrderCard(order) {
   container.innerHTML = `
     <h4>🟢 Live Order</h4>
     <div class="live-row">
-    <p><strong>${order.network || "Network"}</strong> • ${order.volume}GB</p>
+    <p><strong>${order.network || "Package"}</strong> • ${order.volume}GB</p>
     </div>
 
     <div class="live-row">
@@ -328,7 +328,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!order) return;
 
   // Rebuild UI
-  createOrUpdateStatusCard(order); // popup
   updateLiveOrderCard(order);      // persistent
 
   // Resume polling
