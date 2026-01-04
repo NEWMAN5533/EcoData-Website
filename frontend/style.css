@@ -3669,6 +3669,7 @@ TRUSTED BADGE SECTION
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  overflow: hidden;
   position: relative;
   padding: 14px 8px;
   border-radius: .3rem;
@@ -3731,6 +3732,7 @@ TRUSTED BADGE SECTION
 
 .wrapper-notice .left-tu{
   display: flex;
+  margin-left: -1.3rem;
   background: linear-gradient(90deg, #5dad99, #228362 );;
   color: #1b2725;
   padding: .3rem;
@@ -3771,14 +3773,15 @@ TRUSTED BADGE SECTION
 
 .trusted-logos {
   width: 98%;
-  justify-content: end;
+  justify-content: start;
   height: max-content;
   display: flex;
   align-items: center;
   overflow: hidden;
   font-size: .7rem;
   font-weight: 700;
-  gap: 1rem;
+  gap: .8rem;
+  padding-left: .1rem;
 }
 
 .trust{
