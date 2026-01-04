@@ -268,53 +268,72 @@ function getStatusClass(status) {
 }
 
 // LIVE ORDER 
-
 function updateLiveOrderCard(order) {
-  const card = document.getElementById("liveOrderCard");
-  if (!card) return;
+  const container = document.querySelector(".live-order-card");
+  if (!container || !order) return;
 
-  card.innerHTML = `
+  const status = (order.status || "pending").toLowerCase();
+
+  container.innerHTML = `
+    <h4>🟢 Live Order</h4>
     <div class="live-row">
-      <strong>Order ID:</strong> <span>${order.orderId}</span>
+    <p><strong>${order.network || "Network"}</strong> • ${order.volume}GB</p>
     </div>
 
     <div class="live-row">
-      <p><strong>Recipient:</strong> ${order.recipient || "-"}</p>
+    <p>📱 ${order.recipient}</p>
+    <p>
     </div>
 
     <div class="live-row">
-      <p><strong>Volume:</strong> ${order.volume ?? "-"} GB</p>
-    </div>
-
-    <div class="live-row">
-      <strong>Status:</strong>
-      <span class="status-pill ${order.status}">
-        ${order.status}
+    <span class="status-badge ${getStatusClass(status)}">
+        ${status}
       </span>
     </div>
+    </p>
   `;
 }
 
-// BOTTOM CARD PULLING ENDS
-document.addEventListener("DOMContentLoaded", () => {
-  const lastOrderId = localStorage.getItem("lastOrderId");
-  if (!lastOrderId) return;
+function updateStatusBadge(newStatus) {
+  const badge = document.querySelector("#liveStatusBadge");
+  if (!badge) return;
 
-  startLiveOrderTracking(lastOrderId);
-});
+  const currentStatus = badge.dataset.status;
+  if (currentStatus === newStatus) return; // no change
 
-function startLiveOrderTracking(orderId) {
-  updateLiveOrderCard({
-    orderId,
-    recipient: "Loading...",
-    volume: "-",
-    status: "processing"
-  });
+  // Remove old status classes
+  badge.className = "status-badge";
 
-  startStatusPolling(orderId);
+  // Add new status class
+  badge.classList.add(getStatusClass(newStatus));
+
+  // Update text
+  badge.textContent = newStatus;
+  badge.dataset.status = newStatus;
+
+  // Trigger animation
+  badge.classList.remove("status-animate");
+  void badge.offsetWidth; // reflow trick
+  badge.classList.add("status-animate");
 }
 
 
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const lastOrderId = localStorage.getItem("lastOrderId");
+  if (!lastOrderId) return;
+
+  // Try to fetch latest status
+  const order = await checkOrderStatusOnce(lastOrderId);
+  if (!order) return;
+
+  // Rebuild UI
+  createOrUpdateStatusCard(order); // popup
+  updateLiveOrderCard(order);      // persistent
+
+  // Resume polling
+  startAutoPolling(lastOrderId);
+});
 
 
 // lIVE ORDER ENDS
