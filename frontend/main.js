@@ -277,18 +277,18 @@ function updateLiveOrderCard(order) {
   container.innerHTML = `
     <h4>🟢 Live Order</h4>
     <div class="live-row">
-    <p><strong>${order.network || "Package"}</strong> • ${order.volume}GB</p>
+    <p><strong>${order.network || "Volume"}</strong>: ${order.volume}GB</p>
     </div>
 
     <div class="live-row">
-    <p>📱 ${order.recipient}</p>
+    <p>Recipient: ${order.recipient}</p>
     <p>
     </div>
 
     <div class="live-row">
-    <span class="status-badge ${getStatusClass(status)}">
+    <p><strong>Current Status:</strong> <span class="status-badge ${getStatusClass(status)}">
         ${status}
-      </span>
+      </span></p>
     </div>
     </p>
   `;
