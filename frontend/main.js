@@ -267,94 +267,62 @@ function getStatusClass(status) {
   return `status-${(status || "").toLowerCase()}`;
 }
 
-// live orderStatus Js
+// LIVE ORDER 
+
 function updateLiveOrderCard(order) {
-  const container = 
-  document.getElementById("liveOrderCard");
-  if (!container || !order) return;
+  const card = document.getElementById("liveOrderCard");
+  if (!card) return;
 
-  const status = (order.status || "pending").toLowerCase();
-
-container.innerHTML = `
-  <div class="live-header">
-    <span class="pulse-dot"></span>
-    <strong>Live Order Update</strong>
-  </div>
-
+  card.innerHTML = `
+    <div class="live-row">
+      <strong>Order:</strong> <span>${order.orderId}</span>
+    </div>
 
     <div class="live-row">
-    <span class="label">Order ID</span>
-    <span class="value">#${order.orderId.slice(-6)}</span>
-  </div>
-
-  <div class="live-footer">
-    <span id="liveStatusBadge" class="status-badge ${getStatusClass(status)}"
-    data-status="${status}">
-      ${status}
-    </span>
-
-    <span class="time">${timeAgo(order.createdAt)}</span>
-  </div>
+      <strong>Recipient:</strong> <span>${order.recipient}</span>
+    </div>
 
     <div class="live-row">
-    <span class="label">Data</span>
-    <span class="value">${order.volume}GB</span>
-  </div>
+      <strong>Volume:</strong> <span>${order.volume} GB</span>
+    </div>
 
     <div class="live-row">
-    <span class="label">Recipient</span>
-    <span class="value">${maskPhone(order.recipient)}</span>
-  </div>
-
-
-  <div class="live-row scrollable">
-    <span class="label">Network</span>
-    <span class="value">${order.network}</span>
-  </div>
-
-
-`;
+      <strong>Status:</strong>
+      <span class="status-pill ${order.status}">
+        ${order.status}
+      </span>
+    </div>
+  `;
 }
 
-// Trigger Animation on status change
+// BOTTOM CARD PULLING ENDS
+document.addEventListener("DOMContentLoaded", () => {
+  const lastOrderId = localStorage.getItem("lastOrderId");
+  if (!lastOrderId) return;
 
-function updateStatusBadge(newStatus) {
-  const badge = document.querySelector("#liveStatusBadge");
-  if (!badge) return;
+  startLiveOrderTracking(lastOrderId);
+});
 
-  const currentStatus = badge.dataset.status;
-  if (currentStatus === newStatus) return; // no change
+function startLiveOrderTracking(orderId) {
+  updateLiveOrderCard({
+    orderId,
+    recipient: "Loading...",
+    volume: "-",
+    status: "processing"
+  });
 
-  // Remove old status classes
-  badge.className = "status-badge";
-
-  // Add new status class
-  badge.classList.add(getStatusClass(newStatus));
-
-  // Update text
-  badge.textContent = newStatus;
-  badge.dataset.status = newStatus;
-
-  // Trigger animation
-  badge.classList.remove("status-animate");
-  void badge.offsetWidth; // reflow trick
-  badge.classList.add("status-animate");
+  startStatusPolling(orderId);
 }
 
-// Helper to mask phone number
-function maskPhone(phone) {
-  if (!phone) return "N/A";
-  return phone.slice(0, 3) + "****" + phone.slice(-2);
-}
 
-// Helper to format time ago
-function timeAgo(timestamp) {
-  if (!timestamp) return "";
-  const diff = Math.floor((Date.now() - new Date(timestamp)) / 1000);
-  if (diff < 60) return "Just now";
-  if (diff < 3600) return Math.floor(diff / 60) + "mins ago";
-  return Math.floor(diff / 3600) + "hr ago";
-}
+
+
+// lIVE ORDER ENDS
+
+
+
+
+
 
 // manual statusCard
 
@@ -530,10 +498,6 @@ function handleNewOrder(returnedOrder) {
   const idToPoll = normalized.orderId || normalized.reference;
   if (idToPoll) startAutoPolling(idToPoll);
 }
-
-// BOTTOM CARD PULLING ENDS
-
-
 
 
 // ---------- MANUAL CHECK UI binding ----------
