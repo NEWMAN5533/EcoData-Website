@@ -281,7 +281,7 @@ function updateLiveOrderCard(order) {
     </div>
 
     <div class="live-row">
-    <p>Recipient: ${order.recipient}</p>
+    <p><strong>Recipient</strong>: ${order.recipient}</p>
     <p>
     </div>
 
