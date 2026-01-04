@@ -22,10 +22,11 @@ Live order streaming
 
 .live-order-card {
   max-width: 460px;
+  max-height: 10rem;
   margin: 1rem auto;
   background: #faf8f8;
   border-radius: 4px;
-  padding: 16px;
+  padding: 8px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.3);
   border-bottom: 6px solid #2ecc9db7;
   font-family: Arial, sans-serif;
