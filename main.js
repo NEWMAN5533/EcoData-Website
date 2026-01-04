@@ -1,127 +1,645 @@
-// main.js
+// --- Firebase Imports ---
+import { db } from "./firebase-config.js";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  orderBy,
+  serverTimestamp,
+} from 
+"https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
-// Attach event listeners to all "Buy Now" buttons
+  // ---------- CONFIG ----------
+const API_BASE = (() => {
+  // use current host in prod or localhost for local dev
+  if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+    return "http://localhost:3000";
+  }
+  return "https://ecodata-app.onrender.com"; // your deployed backend
+})();
+
+
+// ---------- GLOBAL VARIABLES ----------
+let STATUS_POLL_INTERVAL = 5000;
+let _statusPollTimer = null; // to hold the interval timer ID
+
+
+// btn events//
+document.addEventListener("DOMContentLoaded", () => {
+
+  
 document.querySelectorAll(".buy-btn").forEach(button => {
   button.addEventListener("click", () => {
-    const packageName = button.dataset.package;   // bundle name or code
+    const packageName = button.dataset.package;
     const network = button.dataset.network;
-    const size = button.dataset.size;             // data volume (e.g. 2GB)
+    const size = button.dataset.size;
     const price = button.dataset.price;
 
-    const recipient = prompt("📱 Enter your phone number (e.g. 233241234567):");
+    document.getElementById("priceTag").textContent = `GHS ${button.dataset.price}`;
+    document.getElementById("networkTag").textContent = `${button.dataset.network.toUpperCase()} / ${button.dataset.size}GB`;
 
-    if (!recipient) {
-      alert("❌ Phone number is required!");
-      return;
-    }
 
-    // ✅ Call Paystack checkout
-    payWithPaystack(network, recipient, packageName, size, price);
+
+
+    // Show phone input modal first
+    createPhoneModal(recipient => {
+
+
+      payWithPaystack(network, recipient, packageName, size, price);
+    });
   });
 });
+});
 
-// ✅ Paystack payment
-function payWithPaystack(network, recipient, packageName, size, price) {
+function createPhoneModal(callback) {
+
+  const modal = document.getElementById("phoneModal");
+  const confirmBtn = document.getElementById("confirmBtn");
+  const cancelBtn = document.getElementById("cancelBtn");
+  const input = document.getElementById("recipientInput");
+
+
+  // Show modal
+  modal.classList.add("show");
+
+  cancelBtn.onclick = () => {
+    modal.classList.remove("show");
+  };
+
+  confirmBtn.onclick = () => {
+    const recipient = input.value.trim();
+    if (!recipient) {
+      showSnackBar("📱 Please enter your phone number");
+      return;
+    }
+    modal.classList.remove("show");
+    callback(recipient);
+};
+}
+
+
+// === PAYSTACK PAYMENT (Firebase version) ===
+async function payWithPaystack(network, recipient, packageName, size, price) {
+  // ✅ Get current user from Firebase Auth
+  let user = null;
+  try {
+    user = firebase.auth().currentUser;
+  } catch (err) {
+    console.warn("Firebase Auth not initialized:", err);
+  }
+
+  // ✅ Collect user details
+  const userEmail = user?.email || `${recipient}@ecodata.com`;
+  const userName = user?.displayName || "Guest User";
+  const userPhone = recipient;
+
+  // ✅ Initialize Paystack
   let handler = PaystackPop.setup({
-    key: "pk_live_635856447ee14b583349141b7271f64c9b969749", // 🔑 Your Paystack public key
-    email: "customer@email.com", // Replace with real customer email
-    amount: price * 100, // Paystack uses kobo/pesewas
+    key: "pk_live_635856447ee14b583349141b7271f64c9b969749",
+    email: userEmail,
+    amount: price * 100,
     currency: "GHS",
-    callback: function(response) {
-      // ✅ After payment success, place order
+    metadata: {
+      custom_fields: [
+        {
+          display_name: "Customer Name",
+          variable_name: "customer_name",
+          value: userName,
+        },
+        {
+          display_name: "Phone Number",
+          variable_name: "phone_number",
+          value: userPhone,
+        },
+        {
+          display_name: "Network",
+          variable_name: "network",
+          value: network,
+        },
+        {
+          display_name: "Package",
+          variable_name: "package_name",
+          value: packageName,
+        },
+      ],
+    },
+    callback: function (response) {
       orderBundle(network, recipient, packageName, size, response.reference);
     },
-    onClose: function() {
-      alert("❌ Payment cancelled.");
-    }
+    onClose: function () {
+      showSnackBar("Payment cancelled.");
+    },
   });
 
   handler.openIframe();
 }
 
-// ✅ Send order to backend API after Paystack payment verification
+
+// ---------- FIRESTORE HELPER ----------
+async function saveOrderToFirestore(orderObj) {
+  try {
+    const db = window.FIRESTORE;
+    if (!db) {
+      console.warn("Firestore not initialized. Make sure firebase-config.js is loaded before main.js");
+      return null;
+    }
+
+    const { collection, addDoc, serverTimestamp } = await import(
+      "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"
+    );
+
+    const docData = {
+      orderId: orderObj.orderId || orderObj.reference || null,
+      reference: orderObj.reference || null,
+      status: (orderObj.status || "pending").toString(),
+      recipient: orderObj.recipient || (orderObj.items?.[0]?.recipient) || null,
+      volume: Number(orderObj.volume ?? orderObj.items?.[0]?.volume ?? 0),
+      amount: Number(orderObj.amount ?? orderObj.totalAmount ?? 0),
+      network: orderObj.network || null,
+      source: orderObj.source || "web",
+      createdAt: serverTimestamp(),
+      createdBy:
+        window.FIREBASE_AUTH?.currentUser?.uid || "guest"
+    };
+
+    const ordersCol = collection(db, "orders");
+    const result = await addDoc(ordersCol, docData);
+    console.log("✅ Order saved to Firestore:", result.id);
+    return result.id;
+  } catch (err) {
+    console.error("❌ Error saving order to Firestore:", err);
+    return null;
+}
+}
+
+//NEW UPDATED 2/12/2025 //
+
+// === SEND ORDER TO BACKEND ===
 async function orderBundle(network, recipient, packageName, size, reference) {
   try {
-    const API_BASE = window.location.hostname ===
-    "localhost"?
-      "http://localhost:3000" :
-      "https://ecodata-app.onrender.com/"; // Replace with your production URL
-    const response = await fetch("https://ecodata-app.onrender.com/api/buy-data", {
-      method: "POST",
+    const API_BASE =
+      window.location.hostname === "localhost"
+        ? "http://localhost:3000"
+        : "https://ecodata-app.onrender.com";
+
+    // ✅ Build query string for GET request
+    const query = new URLSearchParams({
+      network,
+      recipient,
+      package: packageName,
+      size: size.toString(),
+      paymentReference: reference,
+    });
+
+    const response = await fetch(`${API_BASE}/api/buy-data?${query.toString()}`, {
+      method: "GET",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        network,
-        recipient,
-        package: packageName,
-        size: parseInt(size),
-        paymentReference: reference
-      })
     });
 
     const result = await response.json();
 
     if (result.success) {
-      alert("✅ Data bundle purchased successfully!");
-      console.log("📦 Order details:", result.order || result.swift);
+      showSnackBar("📱✅ Order Placed successfully!");
+
+      // The order object returned from server
+      const returnedOrder = result.order?.order || result.order || result;
+      console.log("📦 Order details:", returnedOrder);
+
+      // ✅ Save to Firestore
+      saveOrderToFirestore(returnedOrder).then((fireId) => {
+        if (fireId) console.log("Order persisted in Firestore:", fireId);
+
+        // ✅ Save locally for guests (important fix!)
+        saveGuestOrder(returnedOrder);
+      });
+
+      // Update dashboard UI or order history
+      handleNewOrder(returnedOrder);
+
+
     } else {
-      alert(`❌ Failed to purchase data: ${result.message || "Unknown error"}`);
-      console.error("❌ API Error:", result);
+      showSnackBar(`Failed to purchase data: ${result.message || "Unknown error"}`);
     }
   } catch (err) {
     console.error("⚠ Server error:", err);
-    alert("⚠ Server error. Please try again later.");
+    showSnackBar("⚠ Server error. Please try again later.");
   }
 }
 
-// ✅ REAL TIME CLOCK
-function updateClock() {
-  const clock = document.getElementById("clock");
-  const now = new Date();
+//ends//
 
-  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  const dayName = days[now.getDay()];
 
-  let hours = now.getHours();
-  let minutes = now.getMinutes();
-  let seconds = now.getSeconds();
-  const ampm = hours >= 12 ? "PM" : "AM";
 
-  hours = hours % 12 || 12; // convert to 12-hour format
-  minutes = minutes < 10 ? "0" + minutes : minutes;
-  seconds = seconds < 10 ? "0" + seconds : seconds;
 
-  clock.innerHTML = `${dayName} ${hours}:${minutes}:${seconds} ${ampm}`;
+// ✅ Save Guest Orders to Local Storage
+function saveGuestOrder(orderData) {
+  try {
+    const existing = JSON.parse(localStorage.getItem("guestOrders") || "[]");
+    existing.push(orderData);
+    localStorage.setItem("guestOrders", JSON.stringify(existing));
+    console.log("💾 Guest order saved locally:", orderData);
+  } catch (e) {
+    console.error("Failed to save guest order:", e);
+}
 }
 
-setInterval(updateClock, 1000);
-updateClock();
 
-// DATA PROCESSING //
-async function loadStatus() {
-  try{
-    const res = await fetch("https://ecodata-app.onrender.com/api/v1/orders/status");
+// POLLING FUNCTION //
 
-    const data = await res.json();
-    if(data.success && data.data){
-      document.getElementById("pendingCount").innerText = data.data.pending;
+// STATUS_POLL_INTERVAL and _statusPollTimer are declared earlier; avoid redeclaration to prevent errors.
 
-      document.getElementById("processingCount").innerText = data.data.processing;
+ // ---------- HELPERS ----------
+function getStatusTextMapping(status) {
+  const s = (status || "").toLowerCase();
+  return {
+    delivered: "Your bundle is successfully delivered ✅.",
+    pending: "Order awaiting processing.",
+    processing: "Order is processing. Please wait.",
+    failed: "Order failed. Contact support or try again.",
+    cancelled: "Order was cancelled.",
+    refunded: "Payment refunded.",
+    resolved: "Issue resolved. Order completed."
+  }[s] || "Status update in progress.";
+}
 
-      document.getElementById("completedCount").innerText = data.data.complete;
+function getStatusClass(status) {
+  return `status-${(status || "").toLowerCase()}`;
+}
 
-      document.getElementById("failedCount").innerText = data.data.failed;
+// LIVE ORDER 
+function updateLiveOrderCard(order) {
+  const container = document.querySelector(".live-order-card");
+  if (!container || !order) return;
+
+  const status = (order.status || "pending").toLowerCase();
+
+  container.innerHTML = `
+    <h4>🟢 Live Order</h4>
+    <div class="live-row">
+    <p><strong>${order.network || "Package"}</strong> • ${order.volume}GB</p>
+    </div>
+
+    <div class="live-row">
+    <p>📱 ${order.recipient}</p>
+    <p>
+    </div>
+
+    <div class="live-row">
+    <span class="status-badge ${getStatusClass(status)}">
+        ${status}
+      </span>
+    </div>
+    </p>
+  `;
+}
+
+function updateStatusBadge(newStatus) {
+  const badge = document.querySelector("#liveStatusBadge");
+  if (!badge) return;
+
+  const currentStatus = badge.dataset.status;
+  if (currentStatus === newStatus) return; // no change
+
+  // Remove old status classes
+  badge.className = "status-badge";
+
+  // Add new status class
+  badge.classList.add(getStatusClass(newStatus));
+
+  // Update text
+  badge.textContent = newStatus;
+  badge.dataset.status = newStatus;
+
+  // Trigger animation
+  badge.classList.remove("status-animate");
+  void badge.offsetWidth; // reflow trick
+  badge.classList.add("status-animate");
+}
+
+
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const lastOrderId = localStorage.getItem("lastOrderId");
+  if (!lastOrderId) return;
+
+  // Try to fetch latest status
+  const order = await checkOrderStatusOnce(lastOrderId);
+  if (!order) return;
+
+  // Rebuild UI
+  createOrUpdateStatusCard(order); // popup
+  updateLiveOrderCard(order);      // persistent
+
+  // Resume polling
+  startAutoPolling(lastOrderId);
+});
+
+
+// lIVE ORDER ENDS
+
+
+
+
+
+
+// manual statusCard
+
+function createOrUpdateStatusCard(order) {
+  // order expected: { orderId, reference, status, recipient, volume, timestamp }
+  const root = document.getElementById("orderStatusContainerRoot");
+  if (!root) return;
+
+  const existing = document.getElementById("orderStatusCard");
+  const status = (order.status || "pending").toLowerCase();
+  const badgeClass = getStatusClass(status);
+  const desc = getStatusTextMapping(status);
+
+  const html = `
+    <div id="orderStatusCardInner">
+      <h4>Order Status</h4>
+      <p><strong>Order ID: 
+      </strong> ${order.orderId || order.reference || "N/A"}</p>
+      <p><strong>Recipient:</strong> ${order.recipient || "-"}</p>
+      <p><strong>Volume:</strong> ${order.volume ?? "-"} GB</p>
+      <p>
+        <strong>Status:</strong>
+        <span class="status-badge ${badgeClass}">${status}</span>
+      </p>
+      <p style="font-size:0.9rem;color:#555;margin-top:6px">${desc}</p>
+    </div>
+  `;
+
+  if (existing) {
+    existing.innerHTML = html;
+    existing.classList.remove("hidden");
+  } else {
+    const card = document.createElement("div");
+    card.id = "orderStatusCard";
+    card.innerHTML = html;
+    root.appendChild(card);
+  }
+}
+
+
+// stop polling
+function stopStatusPolling() {
+  if (_statusPollTimer) {
+    clearInterval(_statusPollTimer);
+    _statusPollTimer = null;
+  }
+}
+
+// checks if status is terminal
+function isTerminalStatus(status) {
+  const s = (status || "").toLowerCase();
+  return [
+    "delivered",
+    "completed",
+    "success",
+    "failed",
+    "cancelled",
+    "refunded",
+    "resolved"].includes(s);
+}
+
+// ---------- POLLING FUNCTION ----------
+async function checkOrderStatusOnce(orderIdOrRef) {
+  try {
+    // 🟩 Talk to your own backend now (not directly to SwiftData)
+    const res = await fetch(`${API_BASE}/api/v1/order/status/${encodeURIComponent(orderIdOrRef)}`,{
+      method: "GET",
+      headers: { "Content-Type": "application/json" }
+    });
+
+
+    if (!res.ok) {
+      console.warn("Status endpoint returned non-200", res.status);
+      return null;
     }
+    const data = await res.json();
+    if (data && data.success && data.order) return data.order;
+    return null;
   } catch (err) {
-    console.error("Error fetching status:",
-      err);
-  }
+    console.error("Error checking order status:", err);
+    return null;
+}
 }
 
-// load immediately when page opens //
-loadStatus();
+function startAutoPolling(orderIdOrRef) {
+  // clear existing poll
+  stopStatusPolling();
 
-setInterval(loadStatus, 3000);
+  // initial immediate check
+  (async () => {
+    const order = await checkOrderStatusOnce(orderIdOrRef);
+  if (order) {
+  createOrUpdateStatusCard(order); // ✅ Update main color-coded card too
+  const status = (order.status || "pending").toLowerCase();
+  const desc = getStatusTextMapping(status);
+  statusResult.innerHTML = `
+    <div style="padding:12px;border-radius:8px;background:#fff">
+      <p><strong>Order ID:</strong> ${order.orderId || order.reference}</p>
+      <p><strong>Recipient:</strong> ${order.recipient}</p>
+      <p><strong>Volume:</strong> ${order.volume} GB</p>
+      <p><strong>Status:</strong> <span class="status-badge ${getStatusClass(status)}">${status}</span></p>
+      <p style="color:#444;margin-top:6px">${desc}</p>
+</div>
+`;
+}
+  })();
 
-// SLIDING ON TOP AGENTS & TOP BUYERS //
-const slider = document.querySelector(".slider");
-const card = document.querySelectorAll("")
+  // schedule repeated checks
+ _statusPollTimer = setInterval(async () => {
+  const order = await checkOrderStatusOnce(orderIdOrRef);
+
+  if (!order) return;
+
+  const latestStatus = (order.status || "pending").toLowerCase();
+
+  createOrUpdateStatusCard(order);   // popup card
+  updateLiveOrderCard(order);        // permanent card
+
+  updateStatusBadge(latestStatus);   // 🔥 animation happens here
+
+  if (isTerminalStatus(latestStatus)) {
+    stopStatusPolling();
+  }
+}, STATUS_POLL_INTERVAL);
+}
+
+// ---------- AFTER PURCHASE: show and poll ----------
+/**
+ * Call this after your backend returns an order reply.
+ * Example usage inside orderBundle function after successful response:
+ *    const returnedOrder = result.order || result.swift || result; 
+ *    handleNewOrder(returnedOrder);
+ */
+
+function handleNewOrder(returnedOrder) {
+  if (!returnedOrder) return;
+
+  const normalized = {
+    orderId:
+      returnedOrder.orderId ||
+      returnedOrder.id ||
+      returnedOrder.order_id ||
+      returnedOrder.reference ||
+      null,
+
+    reference: returnedOrder.reference || null,
+
+    status: returnedOrder.status || returnedOrder.state || "pending",
+
+    recipient:
+      returnedOrder.items?.[0]?.recipient ||
+      returnedOrder.recipient ||
+      "-",
+
+    volume:
+      returnedOrder.items?.[0]?.volume ??
+      returnedOrder.volume ??
+      "-"
+  };
+
+  if (normalized.orderId) {
+    localStorage.setItem("lastOrderId", normalized.orderId);
+  }
+
+  // ✅ THIS is what makes the bottom card appear
+  createOrUpdateStatusCard(normalized); // Popup
+
+
+
+  updateLiveOrderCard(normalized); // Live
+
+  // ✅ THIS is what keeps it updating live
+  const idToPoll = normalized.orderId || normalized.reference;
+  if (idToPoll) startAutoPolling(idToPoll);
+}
+
+
+// ---------- MANUAL CHECK UI binding ----------
+document.addEventListener("DOMContentLoaded", () => {
+  const last = localStorage.getItem("lastOrderId");
+  const orderInput = document.getElementById("orderInput");
+  if (orderInput && last) orderInput.value = last;
+
+  const checkBtn = document.getElementById("checkBtn");
+  const statusResult = document.getElementById("statusResult");
+
+  if (checkBtn && orderInput && statusResult) {
+    checkBtn.addEventListener("click", async () => {
+      const id = orderInput.value.trim();
+      if (!id) return showSnackBar("Please enter order ID.");
+
+      // Immediate feedback
+      statusResult.innerHTML = `
+        <div style="padding:10px; border-radius:8px;  display: flex;   background:#f0f0f0; color:#333;">
+          <p>🌀 Checking your order status <strong>${id}</strong>...</p>
+        </div>
+      `;
+
+      try {
+        const order = await checkOrderStatusOnce(id);
+
+        if (order) {
+          const status = (order.status || "pending").toLowerCase();
+          const desc = getStatusTextMapping(status);
+          const statusColor = {
+            pending: "#e98ea2ff",
+            processing: "#f09e23ff",
+            completed: "#76d8b2ff",
+            failed: "#f44336",
+          }[status] || "#4caf50";
+
+          statusResult.innerHTML = `
+            <div style="padding:15px; border-radius:10px; background:${statusColor}20; border:2px solid ${statusColor};">
+              <h3 style="color:${statusColor}; text-transform:capitalize;">${status}</h3>
+              <p><strong>Order ID:</strong> ${order.orderId || order.reference}</p>
+              <p><strong>Recipient:</strong> ${order.recipient}</p>
+              <p><strong>Volume:</strong> ${order.volume} GB</p>
+              <p style="margin-top:8px;">${desc}</p>
+            </div>
+          `;
+        } else {
+          statusResult.innerHTML = `
+            <div style="padding:10px; background:#ffdddd; border:1px solid #f34e43f3; border-radius:8px;">
+              ⚠ Could not find order details for <strong>${id}</strong>.
+            </div>
+          `;
+        }
+      } catch (err) {
+        console.error("Error checking order status:", err);
+        statusResult.innerHTML = `
+          <div style="padding:10px; background:#ffdddd; border:1px solid #f5392cff; border-radius:8px;">
+            ❌ Error checking status. Please try again.
+          </div>
+        `;
+      }
+});
+}
+});
+
+// ScrollBtn 
+ const scrollBtn =
+  document.querySelector(".floating-scroll");
+  const bundleSection = 
+  document.getElementById("bundles");
+
+ scrollBtn.addEventListener("click", () => {
+  if ( bundleSection) {
+    bundleSection.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  }
+ });
+
+ // Auto-hide after scroll
+ window.addEventListener("scroll", ()=> {
+  if (window.scrollY > 80) {
+    scrollBtn.style.opacity = "0";
+    scrollBtn.style.pointerEvents = 'none';
+  } else {
+    scrollBtn.style.opacity = "1";
+    scrollBtn.style.pointerEvents = "auto";
+  }
+ })
+
+
+
+// SNACKBAR SECTION //
+// ===== SNACKBAR FUNCTION ===== //
+function showSnackBar(message, type = "info") {
+  // Remove existing snackbar if visible
+  const existing = document.querySelector(".snackbar");
+  if (existing) existing.remove();
+
+  // Create snackbar element
+  const snackbar = document.createElement("div");
+  snackbar.className = "snackbar";
+
+  // Color scheme based on type
+  if (type === "success") snackbar.style.background = "#7adabaff";   // green
+  else if (type === "error") snackbar.style.background = "#dc3545"; // red
+  else if (type === "warning") snackbar.style.background = "#ffc107"; // yellow
+  else snackbar.style.background = "rgb(2, 61, 52)"; // default dark
+
+  snackbar.textContent = message;
+
+  // Add snackbar to the body
+  document.body.appendChild(snackbar);
+
+  // Force reflow (to trigger CSS animation)
+  void snackbar.offsetWidth;
+
+  // Show snackbar
+  snackbar.classList.add("show");
+
+  // Hide snackbar after 3 seconds
+  setTimeout(() => {
+    snackbar.classList.remove("show");
+    setTimeout(() => snackbar.remove(), 300);
+},4000);
+};
