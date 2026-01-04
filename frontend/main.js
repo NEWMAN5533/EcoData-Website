@@ -253,7 +253,7 @@ function saveGuestOrder(orderData) {
 function getStatusTextMapping(status) {
   const s = (status || "").toLowerCase();
   return {
-    delivered: "Your bundle is successfully delivered 📱✅.",
+    delivered: "Your bundle is successfully delivered ✅.",
     pending: "Order awaiting processing.",
     processing: "Order is processing. Please wait.",
     failed: "Order failed. Contact support or try again.",
@@ -267,9 +267,96 @@ function getStatusClass(status) {
   return `status-${(status || "").toLowerCase()}`;
 }
 
+// live orderStatus Js
+function updateLiveOrderCard(order) {
+  const container = 
+  document.getElementById("liveOrderCard");
+  if (!container || !order) return;
+
+  const status = (order.status || "pending").toLowerCase();
+
+container.innerHTML = `
+  <div class="live-header">
+    <span class="pulse-dot"></span>
+    <strong>Live Order Update</strong>
+  </div>
 
 
+    <div class="live-row">
+    <span class="label">Order ID</span>
+    <span class="value">#${order.orderId.slice(-6)}</span>
+  </div>
 
+  <div class="live-footer">
+    <span id="liveStatusBadge" class="status-badge ${getStatusClass(status)}"
+    data-status="${status}">
+      ${status}
+    </span>
+
+    <span class="time">${timeAgo(order.createdAt)}</span>
+  </div>
+
+    <div class="live-row">
+    <span class="label">Data</span>
+    <span class="value">${order.volume}GB</span>
+  </div>
+
+    <div class="live-row">
+    <span class="label">Recipient</span>
+    <span class="value">${maskPhone(order.recipient)}</span>
+  </div>
+
+
+  <div class="live-row scrollable">
+    <span class="label">Network</span>
+    <span class="value">${order.network}</span>
+  </div>
+
+
+`;
+}
+
+// Trigger Animation on status change
+
+function updateStatusBadge(newStatus) {
+  const badge = document.querySelector("#liveStatusBadge");
+  if (!badge) return;
+
+  const currentStatus = badge.dataset.status;
+  if (currentStatus === newStatus) return; // no change
+
+  // Remove old status classes
+  badge.className = "status-badge";
+
+  // Add new status class
+  badge.classList.add(getStatusClass(newStatus));
+
+  // Update text
+  badge.textContent = newStatus;
+  badge.dataset.status = newStatus;
+
+  // Trigger animation
+  badge.classList.remove("status-animate");
+  void badge.offsetWidth; // reflow trick
+  badge.classList.add("status-animate");
+}
+
+// Helper to mask phone number
+function maskPhone(phone) {
+  if (!phone) return "N/A";
+  return phone.slice(0, 3) + "****" + phone.slice(-2);
+}
+
+// Helper to format time ago
+function timeAgo(timestamp) {
+  if (!timestamp) return "";
+  const diff = Math.floor((Date.now() - new Date(timestamp)) / 1000);
+  if (diff < 60) return "Just now";
+  if (diff < 3600) return Math.floor(diff / 60) + "mins ago";
+  return Math.floor(diff / 3600) + "hr ago";
+}
+
+// manual statusCard
 
 function createOrUpdateStatusCard(order) {
   // order expected: { orderId, reference, status, recipient, volume, timestamp }
@@ -376,15 +463,22 @@ function startAutoPolling(orderIdOrRef) {
   })();
 
   // schedule repeated checks
-  _statusPollTimer = setInterval(async () => {
-    const order = await checkOrderStatusOnce(orderIdOrRef);
-    if (order) {
-      createOrUpdateStatusCard(order);
-      if (isTerminalStatus(order.status)) {
-        stopStatusPolling();
-      }
-    }
-  }, STATUS_POLL_INTERVAL);
+ _statusPollTimer = setInterval(async () => {
+  const order = await checkOrderStatusOnce(orderIdOrRef);
+
+  if (!order) return;
+
+  const latestStatus = (order.status || "pending").toLowerCase();
+
+  createOrUpdateStatusCard(order);   // popup card
+  updateLiveOrderCard(order);        // permanent card
+
+  updateStatusBadge(latestStatus);   // 🔥 animation happens here
+
+  if (isTerminalStatus(latestStatus)) {
+    stopStatusPolling();
+  }
+}, STATUS_POLL_INTERVAL);
 }
 
 // ---------- AFTER PURCHASE: show and poll ----------
@@ -426,7 +520,11 @@ function handleNewOrder(returnedOrder) {
   }
 
   // ✅ THIS is what makes the bottom card appear
-  createOrUpdateStatusCard(normalized);
+  createOrUpdateStatusCard(normalized); // Popup
+
+
+
+  updateLiveOrderCard(normalized); // Live
 
   // ✅ THIS is what keeps it updating live
   const idToPoll = normalized.orderId || normalized.reference;

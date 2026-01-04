@@ -1,3 +1,144 @@
+/****
+Live order streaming
+****/
+/* Permanent live order container */
+#liveOrderSection {
+  width: 100%;
+  margin: 24px auto;
+  padding: 0 16px;
+  box-shadow: 0 2px 6px solid rgb(185, 183, 183);
+}
+
+.live-order-card {
+  max-width: 97%;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  border-left: 6px solid #65d895;
+  font-family: Arial, sans-serif;
+}
+
+.dark-mode .live-order-card {
+  background: var
+}
+
+/* Header */
+.live-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.pulse-dot {
+  width: 10px;
+  height: 10px;
+  background: #2ecc8f;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.6); opacity: 0.4; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Rows */
+.live-row {
+  display: flex;
+  justify-content: space-between;
+ gap: 12px;
+ white-space: normal;
+ scrollbar-width: thin;
+ overflow-x: auto;
+}
+
+.scrollable {
+  overflow-x: auto;
+  white-space: normal;
+}
+
+.scrollable::after{
+  content: "";
+  margin-left: 6px;
+  font-size: .7rem;
+  color: #999;
+}
+
+/* chrome /Edge scroller */
+.live-row::-webkit-scrollbar {
+  height: 4px;
+}
+
+.live-row::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 10px;
+}
+
+.label {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.value {
+  font-weight: 600;
+}
+
+/* Footer */
+.live-footer {
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.empty-state {
+  text-align: center;
+  color: #999;
+}
+
+
+/****
+statusBadge update animation
+*****/
+/* Smooth status transition */
+.status-badge {
+  transition: background-color 0.35s ease, transform 0.25s ease;
+}
+
+/* Pulse animation */
+@keyframes statusPulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* Applied dynamically when status updates */
+.status-animate {
+  animation: statusPulse 0.6s ease;
+}
+
+.status-delivered {
+  background: #2ecc71;
+  box-shadow: 0 0 0 rgba(46, 204, 113, 0.6);
+}
+
+.status-delivered.status-animate {
+  box-shadow: 0 0 18px rgba(46, 204, 113, 0.8);
+}
+
+
+
+
+/***
+ENDS
+****/
+
+
+
 .happy{
   width: 100%;
   max-width: 480px;
