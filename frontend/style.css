@@ -8017,11 +8017,22 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   DISPLAY NONE DIV
   ***/
 
-  .floating-scroll{
-    display: none;
+  .floating-scroll,
+  .notice-container,
+  .two-div-container{
+    display: none !important;
   }
 
+   .topMtn{
+    margin-top: 15rem;
+  }
   
+  .dark-mode .topMtn{
+    margin-top: 15rem;
+  }
+  .gridCardTele{
+   margin: 0;
+  }
 
   /***
   DARK MODE @1366PX
@@ -8444,20 +8455,20 @@ HERO TEXT CONTAINERS
   flex-direction: column;
   gap: 1rem;
   background: transparent;
-  top: 42rem;
+  top: 30rem;
   height: max-content;
   position: absolute;
   padding: .2rem .1rem;
-  margin-bottom: 5rem;
+  margin-bottom: 1rem;
   margin-right: 5rem;
   align-items: start;
-  overflow: hidden;
+  overflow: hidden !important;
 }
 
 .dark-mode .mtn{
   margin-left: 21rem;
   max-width: 400px;
-  top: 42rem;
+  top: 30rem;
   background: none;
 }
 
@@ -8468,6 +8479,7 @@ HERO TEXT CONTAINERS
   display: flex;
   background: transparent;
   align-items: start;
+  top: 1rem;
   margin-right: 5rem;
   height: max-content;
 }
