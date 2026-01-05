@@ -275,7 +275,9 @@ function updateLiveOrderCard(order) {
   const status = (order.status || "pending").toLowerCase();
 
   container.innerHTML = `
-    <h4  style="color:rgba(19, 133, 85, 1);font-size:14px;>🟢 Live Order Streaming 📡</h4>
+
+    <h4 class="live-heading>
+    <span class="live-pulse"></span> Live Order Streaming 📡</h4>
 
     <div class ="live-row">
     <p><strong>Order ID:</strong> ${order.orderId}</p>
@@ -295,7 +297,6 @@ function updateLiveOrderCard(order) {
         ${status}
       </span></p>
     </div>
-    </p>
   `;
 }
 

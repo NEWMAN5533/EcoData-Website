@@ -5,7 +5,7 @@ Live order streaming
 .live-order-wrp{
   width: 100%;
   justify-self: center;
-  max-width: 96%;
+  max-width: 94%;
   position: relative;
   height: max-content;
   display: flex;
@@ -17,6 +17,16 @@ Live order streaming
   margin-bottom: 1rem;
 }
 
+.live-heading{
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(19,133,85,1);
+  display: flex;
+  margin-bottom: 10px;
+  align-items: center;
+  gap: 6px;
+}
+
 
 #liveOrderSection {
   width: 100%;
@@ -25,19 +35,18 @@ Live order streaming
 .live-order-card {
   max-width: 460px;
   height: max-content;
-  margin: 0 .4rem;
+  margin:  .4rem;
   background: #faf8f8;
-  border-radius: 4px;
+  border-radius: 8px;
   padding: 14px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-  border-bottom: 8px solid #2ecc9db7;
-  border-top: 8px solid #2ecc9db7;
-  border-radius: 1rem;
+  border-bottom: 8px solid #4c7468;
+  border-top: 6px solid rgb(177, 182, 182) !important;
   font-family: Arial, sans-serif;
 }
 
 .dark-mode .live-order-card{
-  background: rgb(230, 226, 226);
+  background: rgb(219, 215, 215);
 }
 
 /* Header */
@@ -49,7 +58,7 @@ Live order streaming
   font-size: .9rem;
 }
 
-.pulse-dot {
+.live-pulse {
   width: 8px;
   height: 8px;
   background: #2ecc71;
@@ -87,11 +96,11 @@ Live order streaming
 .live-row .label {
   font-size: 0.85rem;
   color: #777;
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 .live-row .value {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 /* Footer */
