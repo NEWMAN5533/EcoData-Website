@@ -8005,7 +8005,6 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   width: 100%;
   max-width: 510px;
   margin: .6rem 0;
-  max-height: 15rem;
   border: none;
 }
 
@@ -8024,7 +8023,7 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   }
 
    .topMtn{
-    margin-top: 12rem;
+    margin-top: 15rem !important;
   }
   
   .dark-mode .topMtn{
