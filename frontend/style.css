@@ -2322,14 +2322,14 @@ NOTICE BOARD SECTION
   width: 100%;
   gap: 1rem;
   max-width: max-content;
-  padding: .5rem .5rem;
-  height: max-content;
+  padding: 1rem .5rem;
   align-items: center;
   justify-content: start;
   display: flex;
-  border: 0.1px solid var(--background-cl);
-  border-end-end-radius: 2rem;
-  border-start-end-radius: 2rem;
+  border-bottom: 4px solid rgb(141, 238, 238);
+  border: 2px solid var(--background-cl);
+  border-end-end-radius: 4rem;
+  border-start-end-radius: 1rem;
   border-end-start-radius: 8px;
 }
 
@@ -4140,13 +4140,12 @@ WELCOME CARD
   .notice-board{
   display: flex;
   flex-direction: column;
-  height: max-content;
-  padding: .3rem;
+  padding: .4rem;
   justify-content: start;
   align-items: center;
-  gap: .7rem;
+  gap: 1rem;
   width: 100%;
-  max-width: 470px;
+  max-width: 400px;
 }
 
 .notice-board strong{
@@ -4732,15 +4731,13 @@ DISPLAY NONE DIVS
 .notice-board{
   display: flex;
   flex-direction: column;
-  height: max-content;
+  height: 7rem;
   padding: .3rem;
   justify-content: start;
   align-items: center;
   gap: .7rem;
   width: 100%;
   max-width: 470px;
-    border: 2px solid var(--clock-bg-cl);
-    box-shadow: 0 2px 6px rgba(63, 63, 63, 0.4);
 }
 
 
