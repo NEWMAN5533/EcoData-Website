@@ -277,7 +277,7 @@ function updateLiveOrderCard(order) {
   container.innerHTML = `
     <h2>My Last Purchased</h2>
     <p></p>
-    <h4>🟢 Live Order</h4>
+    <h4>🟢 Live Order Streaming 📡</h4>
     <div class="live-row">
     <p><strong>${order.network || "Volume"}</strong>: ${order.volume}GB</p>
     </div>
