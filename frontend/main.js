@@ -275,9 +275,12 @@ function updateLiveOrderCard(order) {
   const status = (order.status || "pending").toLowerCase();
 
   container.innerHTML = `
-    <h2 style="color:rgb(27, 26, 26);font-size:24px;>My Last Purchased</h2>
-    <p></p>
     <h4  style="color:rgba(19, 133, 85, 1);font-size:14px;>🟢 Live Order Streaming 📡</h4>
+
+    <div class ="live-row">
+    <p><strong>Order ID:</strong> ${order.orderId}</p>
+    </div>
+
     <div class="live-row">
     <p><strong>${order.network || "Volume"}</strong>: ${order.volume}GB</p>
     </div>
