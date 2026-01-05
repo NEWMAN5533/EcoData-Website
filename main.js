@@ -277,18 +277,18 @@ function updateLiveOrderCard(order) {
   container.innerHTML = `
     <h4>🟢 Live Order</h4>
     <div class="live-row">
-    <p><strong>${order.network || "Package"}</strong> • ${order.volume}GB</p>
+    <p><strong>${order.network || "Volume"}</strong>: ${order.volume}GB</p>
     </div>
 
     <div class="live-row">
-    <p>📱 ${order.recipient}</p>
+    <p><strong>Recipient</strong>: ${order.recipient}</p>
     <p>
     </div>
 
     <div class="live-row">
-    <span class="status-badge ${getStatusClass(status)}">
+    <p><strong>Current Status:</strong> <span class="status-badge ${getStatusClass(status)}">
         ${status}
-      </span>
+      </span></p>
     </div>
     </p>
   `;
@@ -328,7 +328,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!order) return;
 
   // Rebuild UI
-  createOrUpdateStatusCard(order); // popup
   updateLiveOrderCard(order);      // persistent
 
   // Resume polling
@@ -343,7 +342,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 
-// manual statusCard
+// popup statusCard
 
 function createOrUpdateStatusCard(order) {
   // order expected: { orderId, reference, status, recipient, volume, timestamp }
@@ -427,6 +426,12 @@ async function checkOrderStatusOnce(orderIdOrRef) {
 }
 
 function startAutoPolling(orderIdOrRef) {
+
+  const statusResult = 
+  document.getElementById("statusResult");
+  if (statusResult) (
+    statusResult.innerHTML = ""
+  );
   // clear existing poll
   stopStatusPolling();
 
@@ -437,15 +442,7 @@ function startAutoPolling(orderIdOrRef) {
   createOrUpdateStatusCard(order); // ✅ Update main color-coded card too
   const status = (order.status || "pending").toLowerCase();
   const desc = getStatusTextMapping(status);
-  statusResult.innerHTML = `
-    <div style="padding:12px;border-radius:8px;background:#fff">
-      <p><strong>Order ID:</strong> ${order.orderId || order.reference}</p>
-      <p><strong>Recipient:</strong> ${order.recipient}</p>
-      <p><strong>Volume:</strong> ${order.volume} GB</p>
-      <p><strong>Status:</strong> <span class="status-badge ${getStatusClass(status)}">${status}</span></p>
-      <p style="color:#444;margin-top:6px">${desc}</p>
-</div>
-`;
+
 }
   })();
 
@@ -518,67 +515,67 @@ function handleNewOrder(returnedOrder) {
   if (idToPoll) startAutoPolling(idToPoll);
 }
 
-
-// ---------- MANUAL CHECK UI binding ----------
 document.addEventListener("DOMContentLoaded", () => {
   const last = localStorage.getItem("lastOrderId");
   const orderInput = document.getElementById("orderInput");
-  if (orderInput && last) orderInput.value = last;
-
   const checkBtn = document.getElementById("checkBtn");
   const statusResult = document.getElementById("statusResult");
 
-  if (checkBtn && orderInput && statusResult) {
-    checkBtn.addEventListener("click", async () => {
-      const id = orderInput.value.trim();
-      if (!id) return showSnackBar("Please enter order ID.");
+  if (!orderInput || !checkBtn || !statusResult) return;
 
-      // Immediate feedback
-      statusResult.innerHTML = `
-        <div style="padding:10px; border-radius:8px;  display: flex;   background:#f0f0f0; color:#333;">
-          <p>🌀 Checking your order status <strong>${id}</strong>...</p>
-        </div>
-      `;
+  // Prefill input only
+  if (last) orderInput.value = last;
 
-      try {
-        const order = await checkOrderStatusOnce(id);
+  // 🔒 Manual checker must start empty
+  statusResult.innerHTML = "";
 
-        if (order) {
-          const status = (order.status || "pending").toLowerCase();
-          const desc = getStatusTextMapping(status);
-          const statusColor = {
-            pending: "#e98ea2ff",
-            processing: "#f09e23ff",
-            completed: "#76d8b2ff",
-            failed: "#f44336",
-          }[status] || "#4caf50";
+  let manualCheckTriggered = false;
 
-          statusResult.innerHTML = `
-            <div style="padding:15px; border-radius:10px; background:${statusColor}20; border:2px solid ${statusColor};">
-              <h3 style="color:${statusColor}; text-transform:capitalize;">${status}</h3>
-              <p><strong>Order ID:</strong> ${order.orderId || order.reference}</p>
-              <p><strong>Recipient:</strong> ${order.recipient}</p>
-              <p><strong>Volume:</strong> ${order.volume} GB</p>
-              <p style="margin-top:8px;">${desc}</p>
-            </div>
-          `;
-        } else {
-          statusResult.innerHTML = `
-            <div style="padding:10px; background:#ffdddd; border:1px solid #f34e43f3; border-radius:8px;">
-              ⚠ Could not find order details for <strong>${id}</strong>.
-            </div>
-          `;
-        }
-      } catch (err) {
-        console.error("Error checking order status:", err);
+  checkBtn.addEventListener("click", async () => {
+    const id = orderInput.value.trim();
+    if (!id) return showSnackBar("Please enter order ID.");
+
+    manualCheckTriggered = true;
+
+    statusResult.innerHTML = `
+      <div style="padding:10px;border-radius:8px;background:#f0f0f0;">
+        🌀 Checking order <strong>${id}</strong>...
+      </div>
+    `;
+
+    try {
+      const order = await checkOrderStatusOnce(id);
+      if (!manualCheckTriggered) return;
+
+      if (!order) {
         statusResult.innerHTML = `
-          <div style="padding:10px; background:#ffdddd; border:1px solid #f5392cff; border-radius:8px;">
-            ❌ Error checking status. Please try again.
+          <div style="padding:10px;background:#ffdddd;border-radius:8px;">
+            ⚠ Order not found
           </div>
         `;
+        return;
       }
-});
-}
+
+      const status = (order.status || "pending").toLowerCase();
+      const desc = getStatusTextMapping(status);
+
+      statusResult.innerHTML = `
+        <div style="padding:15px;border-radius:10px;border:2px solid #4caf50;">
+          <h3 style="text-transform:capitalize">${status}</h3>
+          <p><strong>Order ID:</strong> ${order.orderId || order.reference}</p>
+          <p><strong>Recipient:</strong> ${order.recipient}</p>
+          <p><strong>Volume:</strong> ${order.volume} GB</p>
+          <p>${desc}</p>
+        </div>
+      `;
+    } catch (err) {
+      statusResult.innerHTML = `
+        <div style="padding:10px;background:#ffdddd;border-radius:8px;">
+          ❌ Error checking status
+        </div>
+      `;
+    }
+  });
 });
 
 // ScrollBtn 
