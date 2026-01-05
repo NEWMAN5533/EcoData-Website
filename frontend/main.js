@@ -275,6 +275,8 @@ function updateLiveOrderCard(order) {
   const status = (order.status || "pending").toLowerCase();
 
   container.innerHTML = `
+    <h2>My Last Purchased</h2>
+    <p></p>
     <h4>🟢 Live Order</h4>
     <div class="live-row">
     <p><strong>${order.network || "Volume"}</strong>: ${order.volume}GB</p>
@@ -342,7 +344,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 
-// manual statusCard
+// popup statusCard
 
 function createOrUpdateStatusCard(order) {
   // order expected: { orderId, reference, status, recipient, volume, timestamp }
