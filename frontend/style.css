@@ -23,7 +23,7 @@ Live order streaming
 .live-order-card {
   max-width: 460px;
   height: max-content;
-  margin: 1rem auto;
+  margin: 0;
   background: #faf8f8;
   border-radius: 4px;
   padding: 12px;
