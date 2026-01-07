@@ -2,6 +2,74 @@
 Live order streaming
 ****/
 /* Permanent live order container */
+
+
+.social-follow{
+  display: flex;
+  width: 100%;
+  max-width: 74%;
+  justify-self: center;
+  height: 3.5rem;
+  background: rgba(59, 59, 68, 0.815);
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: .2rem 3rem;
+  margin-top: .5rem;
+  border: 4px solid rgba(10, 12, 11, 0.178);
+  border-radius: 4px;
+}
+
+ .follow-left{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: start;
+  color: rgb(218, 213, 213);
+}
+
+.follow-right {
+  width: 50%;
+  height: 100%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.follow-right a{
+text-decoration: none;
+}
+
+
+
+.social-follow img{
+  width: 2.9rem;
+  height: 2.9rem;
+  user-select: none;
+}
+
+.top-var{
+display: flex;
+width: 100%;
+height: max-content;
+padding: .3rem;
+justify-content: center;
+align-items: center;
+margin-bottom: -.5rem;
+}
+
+.top-var h4{
+  color: rgb(240, 234, 234);
+  font-size: 1.2rem;
+  background: linear-gradient(135deg, rgb(36, 36, 75),rgb(51, 112, 109));
+  padding: .5rem;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+}
+
 .live-order-wrp{
   width: 100%;
   justify-self: center;
@@ -9,11 +77,14 @@ Live order streaming
   position: relative;
   height: max-content;
   display: flex;
+  gap: 0;
+  
+  flex-direction: column;
   box-sizing: border-box;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  margin-top: 2rem;
+  margin-top: .4rem;
   margin-bottom: 1rem;
 }
 
@@ -3977,6 +4048,22 @@ AUTO SCROLLING STYLE
 @media (max-width: 414px) {
   .navbar{
     width: 100%;
+  }
+
+  /***
+  DISPLAY NONE DIV
+  ****/
+.social-follow .follow-right{
+  width: 100%;
+  max-width: 94%;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+
+  .social-follow .follow-left{
+    display: none;
   }
 
 
