@@ -2,7 +2,53 @@
 Live order streaming
 ****/
 /* Permanent live order container */
+.follow-share-container {
+  width: 100%;
+  justify-self: center;
+  max-width: 99%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  gap: .4rem;
+  height: 4rem;
+  padding: 0 1rem;
+  position: relative
+}
 
+.pls-share{
+  display: flex;
+  width: 100%;
+  height: 3.5rem;
+  margin-top: .5rem;
+  border-radius: 4px;
+  border: 2px solid rgba(10, 12, 11, 0.178);
+  max-width: 20%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: url(./css/icons/icon-shortcut.png);
+  background-position: center;
+  background-size: 70%;
+  overflow: hidden;
+}
+
+.dark-mode .pls-share{
+  border: 2px solid rgba(158, 167, 162, 0.377);
+  overflow: hidden;
+  background-size: 80%;
+}
+
+#shareBtn{
+  width: 94%;
+  height: 2rem;
+  background: linear-gradient(135deg, rgb(116, 230, 230),rgb(17, 74, 88));
+  border: none;
+  border-radius: 3px;
+  color: white;
+  font-size: 1.1rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  cursor: pointer;
+}
 
 .social-follow{
   display: flex;
@@ -28,6 +74,12 @@ Live order streaming
   align-items: center;
   justify-content: start;
   color: rgb(218, 213, 213);
+  
+}
+
+.social-follow .follow-left img{
+  width: 6.9rem;
+  height: 5.8rem;
 }
 
 .follow-right {
@@ -37,10 +89,16 @@ Live order streaming
   display: flex;
   align-items: center;
   gap: 1rem;
+  animation: pulse 1.2s infinite;
 }
 
 .follow-right a{
 text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
 }
 
 
@@ -48,7 +106,16 @@ text-decoration: none;
 .social-follow img{
   width: 2.9rem;
   height: 2.9rem;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
   user-select: none;
+}
+
+.social-follow .tikop{
+  width: 2.7rem;
+  height: 2.7rem;
 }
 
 .top-var{

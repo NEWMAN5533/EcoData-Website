@@ -608,7 +608,34 @@ document.addEventListener("DOMContentLoaded", () => {
     scrollBtn.style.opacity = "1";
     scrollBtn.style.pointerEvents = "auto";
   }
- })
+ });
+
+ // SHARE BTN
+ const shareBtn = document.getElementById("shareBtn");
+
+ shareBtn.addEventListener('click', async () =>
+{
+  const shareData = {
+    title: "Ecodata",
+    text: "Check out Ecodata - smart, trusted digital services you'll love. ",
+    url: window.location.href
+  };
+
+  // Native share
+  if (navigator.share) {
+    try {
+      await navigator.share(shareData);
+    } catch (err) {
+      console.log("Share Cancelled");
+    }
+  }
+  // FallBack (Desktop)
+  else {
+    navigator.clipboard.writeText(shareData.url).then(() => {
+      showSnackBar("Link copied! ");
+  });
+}
+});
 
 
 
