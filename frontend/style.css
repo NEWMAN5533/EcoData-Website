@@ -4202,7 +4202,7 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, O
  .welcome-bottom #clock{
     padding: .4rem;
     height: 1.2rem;
-    font-size: .9rem;
+    font-size: .8rem;
     margin-bottom: .9rem;
   }
 
@@ -4430,10 +4430,15 @@ font-size: .7rem;
 
 .hero-bottom-content .btn-div{
   height: 1.8rem;
-  width: 80%;
-  margin-top: 1rem;;
+  margin-top: 1rem;
+  font-size: .9rem;
 }
 
+
+/** gridcards **/
+.gridCards-container{
+  margin-top: -3rem;
+}
 
 
 
