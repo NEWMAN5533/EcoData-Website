@@ -4516,9 +4516,59 @@ font-size: .7rem;
 
 /**** phoneModal ***/
 .modal .modal-content {
-
+height: 22rem;
+max-width: 320px;
 }
 
+.modal-content h3{
+  font-size: .8rem;
+  margin-bottom: -1rem;
+}
+
+.modal-content input{
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  height: 2.3rem;
+  width: 86%;
+  border: 1px solid rgb(170, 166, 166);
+}
+
+.modal-content input::placeholder{
+  font-size: .9rem;
+  align-self: center;
+  margin-bottom: .2rem;
+}
+
+.modal-content .selected-div{
+  height: 8rem;
+}
+
+.selected-div h4{
+  padding: .3rem .5rem;
+  font-size: .8rem;
+}
+
+.placeholdersbtn-wrapper{
+  height: 2.2rem;
+  padding: .4rem .6rem;
+}
+
+.modal-buttons{
+  height: 3rem;
+  width: 103%;
+  justify-content: space-between;
+  padding: .1rem .3rem;
+  border: none;
+}
+
+.modal-buttons .btn{
+  height: 2rem;
+  font-size: .8rem;
+  width: max-content;
+  padding: 0;
+}
 
 
 
