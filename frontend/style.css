@@ -4118,9 +4118,89 @@ AUTO SCROLLING STYLE
 
 /* 4. Standard mobile (e.g. iPhone X/12/13) */
 @media (max-width: 414px) {
+  /**
+  NAVBAR SECTION
+  **/
+
   .navbar{
     width: 100%;
+    height: 3rem;
   }
+
+  .nav-left img{
+width: 2rem;
+height: 2rem;
+  }
+
+  /***
+  right navbar
+  ***/
+  .nav-right{
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-right .menu-icon{
+    width: 1.7rem;
+    height: 1.4rem;
+  }
+
+  .nav-right .theme-switch{
+    height: 2.4rem;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   /***
   DISPLAY NONE DIV
