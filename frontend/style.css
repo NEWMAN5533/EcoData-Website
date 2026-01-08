@@ -4288,7 +4288,7 @@ font-size: .8rem;
 
 /** board **/
 .notice-container .notice-board{
-  height: 9.5rem;
+  height: 10rem;
   overflow: hidden;
   position: relative;
   gap: 8px;
@@ -4296,7 +4296,7 @@ font-size: .8rem;
 }
 
 .notice-board .notice-top small{
-font-size: .7rem;
+font-size: .6rem;
 }
 
 /** follow us ***/
