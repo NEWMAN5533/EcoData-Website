@@ -4379,6 +4379,11 @@ height: 2.4rem;
   display: none !important;
 }
 
+.networks-purchased-container{
+  border: none !important;
+  box-shadow: none;
+}
+
 .networks-purchased-container .purchase-container{
   padding: .3rem;
   width: 100%;
@@ -4404,9 +4409,30 @@ height: 2.4rem;
 
 /*** hero text container ***/
 .hero-text-container .hero-top-content{
-
+  margin-bottom: -2rem;
 }
 
+
+.hero-top-content .top-left-content img{
+width: 3rem;
+height: 3rem;
+margin-bottom: 1.5rem;
+}
+
+.hero-top-content .top-right-content h2{
+font-size: .9rem;
+}
+
+.hero-top-content .top-right-content small{
+font-size: .7rem;
+}
+
+
+.hero-bottom-content .btn-div{
+  height: 1.8rem;
+  width: 80%;
+  margin-top: 1rem;;
+}
 
 
 
