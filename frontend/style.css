@@ -4440,6 +4440,75 @@ font-size: .7rem;
   margin-top: -3rem;
 }
 
+.gridCard-wrapper{
+  width: 100%;
+  max-width: 98%;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  gap: .2rem !important;
+  padding-left: .1rem;
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr) !important;
+}
+
+.gridCard,
+.gridCardAirteltigo,
+.gridCardTele{
+  width: 7.5rem !important;
+  height: 12rem !important;
+  margin-top: 1rem;
+  border-radius: 6px;
+}
+
+.gridCard-middle h3{
+  font-size: .8rem;
+}
+
+.gridCard-middle small{
+  font-size: .9rem;
+}
+
+.gridCard-top small{
+  font-size: .8rem;
+}
+
+.gridCard-top img{
+  width: 1.4rem;
+  height: 1.4em;
+}
+
+.gridCard .buy-btn{
+  margin-bottom: -.1rem !important;
+}
+
+
+.gridCardAirteltigo .buy-btn{
+  margin-bottom: .1rem !important;
+}
+
+
+.gridCardTele .buy-btn{
+  margin-bottom: -.1rem !important;
+}
+
+.gridCard-bottom .buy-btn{
+  height: 1.6rem;
+  font-size: .7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.gridCard-bottom .buy-btn img{
+  width: 1.3rem;
+  height: 1.1rem;
+}
+
+
+
 
 
 
