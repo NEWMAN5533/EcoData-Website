@@ -4467,12 +4467,18 @@ font-size: .7rem;
   border-radius: 6px;
 }
 
+.gridCard .gridCard-middle small{
+margin-top: .2rem;
+}
+
 .gridCard-middle h3{
   font-size: .7rem;
+  border-radius: 6px;
 }
 
 .gridCard-middle small{
-  font-size: .8rem;
+  font-size: .8rem !important;
+  margin-top: .2rem;
 }
 
 .gridCard-top small{
@@ -4545,15 +4551,29 @@ max-width: 320px;
   height: 8rem;
 }
 
+
+
 .selected-div h4{
   padding: .3rem .5rem;
   font-size: .8rem;
 }
 
 .placeholdersbtn-wrapper{
-  height: 2.2rem;
-  padding: .4rem .6rem;
+  padding: .4rem .4rem;
 }
+
+.placeholdersbtn-wrapper small{
+  font-size: .9rem;
+}
+
+.placeholdersbtn-wrapper .placeholders-left{
+  font-size: .85rem;
+}
+
+.placeholdersbtn-wrapper .placeholders-right{
+  font-size: .85rem;
+}
+
 
 .modal-buttons{
   height: 3rem;
