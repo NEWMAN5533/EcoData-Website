@@ -4440,6 +4440,11 @@ font-size: .7rem;
   margin-top: -3rem;
 }
 
+.dark-mode .gridCards-container{
+  margin-top: -3rem;
+  background: transparent;
+}
+
 .gridCard-wrapper{
   width: 100%;
   max-width: 98%;
@@ -4463,11 +4468,11 @@ font-size: .7rem;
 }
 
 .gridCard-middle h3{
-  font-size: .8rem;
+  font-size: .7rem;
 }
 
 .gridCard-middle small{
-  font-size: .9rem;
+  font-size: .8rem;
 }
 
 .gridCard-top small{
@@ -4509,7 +4514,10 @@ font-size: .7rem;
 
 
 
+/**** phoneModal ***/
+.modal .modal-content {
 
+}
 
 
 
