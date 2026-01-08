@@ -3296,9 +3296,10 @@ LIVE STATUS STREAMER
   text-align: center;
   width: 15rem;
   height: 2rem;
-  display: inline-block;
+  display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   font-size: 1.2rem;
   padding: 4px 16px;
   border-radius: 20px;
