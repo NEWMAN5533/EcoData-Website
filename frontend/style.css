@@ -4901,7 +4901,6 @@ DISPLAY NONE DIVS
 .notice-board{
   display: flex;
   flex-direction: column;
-  height: 7rem;
   padding: .3rem;
   justify-content: start;
   align-items: center;
