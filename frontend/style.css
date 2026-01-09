@@ -4128,8 +4128,8 @@ AUTO SCROLLING STYLE
   }
 
   .nav-left img{
-width: 2rem;
-height: 2rem;
+width: 2.4rem;
+height: 2.4rem;
   }
 
   /***
@@ -4219,6 +4219,10 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, O
     height: 10.5rem !important;
     max-width: 98%;
     box-shadow: 0 2px 6px rgba(187, 186, 186, 0.7);
+  }
+
+  .dark-mode .card-container .trusted-by{
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   }
 
   .trusted-by .trusted-container{
@@ -4361,7 +4365,7 @@ height: 2.4rem;
 
 .top-var h4{
   padding: .2rem .3rem;
-  font-size: .9rem;;
+  font-size: .8rem;;
 }
 
 #liveOrderSection{
@@ -4381,6 +4385,15 @@ height: 2.4rem;
   border-radius: 8px;
   height: max-content !important;
 }
+
+.dark-mode .networks-purchased-container{
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .purchase-container .card-box{
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
 .purchase-title{
   display: none !important;
 }
@@ -4532,7 +4545,7 @@ margin-top: .2rem;
 
 /**** phoneModal ***/
 .modal .modal-content {
-height: 22rem;
+height: 24rem;
 max-width: 320px;
 }
 
@@ -4546,9 +4559,10 @@ max-width: 320px;
   display: flex;
   justify-content: center;
   text-align: center;
-  height: 2.3rem;
+  height: 2.7rem;
   width: 86%;
   border: 1px solid rgb(170, 166, 166);
+  margin-top: .5rem;;
 }
 
 .modal-content input::placeholder{
@@ -4558,14 +4572,14 @@ max-width: 320px;
 }
 
 .modal-content .selected-div{
-  height: 8rem;
+  height: 10rem;
 }
 
 
 
 .selected-div h4{
-  padding: .3rem .5rem;
-  font-size: .8rem;
+  padding: .5rem .5rem;
+  font-size: .9rem;
 }
 
 .placeholdersbtn-wrapper{
@@ -4589,8 +4603,9 @@ max-width: 320px;
   height: 3rem;
   width: 103%;
   justify-content: space-between;
-  padding: .1rem .3rem;
+  padding: .4rem .3rem;
   border: none;
+  margin-top: .5rem;
 }
 
 .modal-buttons .btn{
@@ -4629,6 +4644,31 @@ max-width: 320px;
 }
 
 
+.menu-card-container{
+  height: 18rem;
+  width: 13rem;
+
+}
+
+.menu-card-container .link span{
+  font-size: .8rem;
+}
+
+.link img{
+  height: 1.9rem;
+}
+
+ .join-btn {
+height: 1.8rem;
+font-size: .8rem ;
+}
+
+.logout-btn{
+  width: 7rem;
+  height: 1.9rem;
+  font-size: .8rem;
+  margin-top: .3rem;
+}
 
 
 
