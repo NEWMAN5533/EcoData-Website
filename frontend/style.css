@@ -3648,14 +3648,14 @@ DASHBOARD TOTALS OVERVIEW
 width: 100%;
 max-width: 96%;
 margin: 18px 0;
-padding: .2rem;
+padding: .2rem 1rem;
 display: grid;
 grid-template-columns: repeat(3, 1fr); 
 height: max-content;
 justify-content: center;
 position: relative;
 align-items: center;
-gap: 1.3rem;
+gap: .8rem;
 }
 
 .total-card {
