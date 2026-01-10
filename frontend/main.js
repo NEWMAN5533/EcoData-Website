@@ -82,9 +82,6 @@ function createPhoneModal(callback) {
     modal.classList.remove("show");
     callback(recipient);
 };
-
-
-
 }
 
 
@@ -685,3 +682,46 @@ function showSnackBar(message, type = "info") {
     setTimeout(() => snackbar.remove(), 300);
 },4000);
 };
+
+
+// SCROLL TO SECTION BY CLICKING ON THE CARD-BOX
+const mtnScrollBtn = document.querySelector(".mtnBt");
+
+const mtnScrollSection = document.getElementById("mtnArea");
+
+mtnScrollBtn.addEventListener("click", () =>{
+  if (mtnScrollSection) {
+    mtnScrollSection.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  }
+});
+
+// do same for telecel
+const teleScrollBtn = document.querySelector(".telecel");
+
+const teleScrollSection = document.getElementById("teleArea");
+
+teleScrollBtn.addEventListener("click", () => {
+ if (teleScrollSection) {
+  teleScrollSection.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+ }
+});
+
+// same for AirtelTigo
+const airtelScrollBtn = document.querySelector(".at");
+
+const airtelScrollSection = document.getElementById("tigoArea");
+
+airtelScrollBtn.addEventListener("click", () => {
+  if (airtelScrollSection) {
+    airtelScrollSection.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  }
+});

@@ -2792,21 +2792,23 @@ BUNDLE PROCESSING
   background: transparent;
 }
 
-.purchase-container a{
+.purchase-container {
   text-decoration: none;
   color: var(--bg-cl);
 }
 
-.purchase-container a .card-box{
-  width:  8rem;
-  height: 7rem;
+.purchase-container  .card-box{
+  width:  6rem;
+  height: 3.5rem;
   display: flex;
+  font-size: .8rem;
   flex-direction: column;
-  gap:.3rem;
+  gap:.4rem;
+  cursor: pointer;
   align-items: center;
   justify-content: center;
   background: rgb(31, 31, 46);
-  border-radius: .7rem;
+  border-radius: 4px;
   -webkit-tap-highlight-color: transparent;
   -webkit-user-select: none;
   outline: none;
@@ -2814,11 +2816,11 @@ BUNDLE PROCESSING
   user-select: none;
 }
 
-.purchase-container a .card-box img{
-  width: 2.2rem;
-  height: 2.2rem;
+.purchase-container  .card-box img{
+  width: 2rem;
+  height: 1.7rem;
   background: rgba(0, 0, 0, 0.01);
-  border-radius: 8px;
+  border-radius: 2px;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
   animation: pulse 1.1s infinite;
 }
@@ -2839,21 +2841,21 @@ BUNDLE PROCESSING
 }
 
 
-.purchase-container a .mtn{
+.purchase-container  .mtn{
   display: flex;
   background: linear-gradient(135deg, rgb(227, 243, 5), rgb(236, 140, 13));
     box-shadow: 0 2px 6px rgba(121, 121, 81, 0.8);
 }
 
 
-.purchase-container a .telecel{
+.purchase-container  .telecel{
   display: flex;
   background: linear-gradient(135deg, rgb(241, 62, 122), rgb(192, 3, 82));
   box-shadow: 0 2px 6px rgba(73, 53, 55, 0.8);
 }
 
 
-.purchase-container a .at{
+.purchase-container  .at{
   display: flex;
   background:  linear-gradient(135deg, rgb(75, 148, 233), rgb(4, 145, 170));
   box-shadow: 0 2px 6px rgba(46, 61, 65, 0.8);
@@ -4341,7 +4343,7 @@ height: 2.4rem;
 
 
 .social-follow .follow-right img{
-  width: 1.8rem;
+  width: 2.2rem;
   height: 1.8rem;
 }
 
@@ -4365,11 +4367,12 @@ height: 2.4rem;
 
 .top-var h4{
   padding: .2rem .3rem;
-  font-size: .8rem;;
+  font-size: .8rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 #liveOrderSection{
-  margin-top: -1rem;
+  margin-top: -.8rem;
   height: max-content;
 }
 
@@ -4671,7 +4674,7 @@ font-size: .8rem ;
 }
 
 
-
+/**** New UI ends ****/
 
 
 
