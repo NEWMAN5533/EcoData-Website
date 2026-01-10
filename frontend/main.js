@@ -73,12 +73,18 @@ function createPhoneModal(callback) {
       showSnackBar("📱 Please enter your phone number");
       return;
     }
-    if (input.value.length !== 10) {
+
+    // digit only + exactly 10 numbers
+    if(!/^[0-9]{10}$/.test(recipient)) {
       showSnackBar("📱 Phone number must be exactly 10 digits");
+      return; // stop
     }
     modal.classList.remove("show");
     callback(recipient);
 };
+
+
+
 }
 
 
