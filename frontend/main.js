@@ -73,6 +73,9 @@ function createPhoneModal(callback) {
       showSnackBar("📱 Please enter your phone number");
       return;
     }
+    if (input.value.length !== 10) {
+      showSnackBar("📱 Phone number must be exactly 10 digits");
+    }
     modal.classList.remove("show");
     callback(recipient);
 };
@@ -584,6 +587,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+
+
 // ScrollBtn 
  const scrollBtn =
   document.querySelector(".floating-scroll");
@@ -617,7 +622,7 @@ document.addEventListener("DOMContentLoaded", () => {
 {
   const shareData = {
     title: "Ecodata",
-    text: "Check out Ecodata - smart, trusted digital services you'll love. ",
+    text: "Check out Ecodata Website, the smartest, digital and trusted data bundle purchase website y'll love to use.",
     url: window.location.href
   };
 
@@ -639,6 +644,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+
 // SNACKBAR SECTION //
 // ===== SNACKBAR FUNCTION ===== //
 function showSnackBar(message, type = "info") {
@@ -654,7 +660,7 @@ function showSnackBar(message, type = "info") {
   if (type === "success") snackbar.style.background = "#7adabaff";   // green
   else if (type === "error") snackbar.style.background = "#dc3545"; // red
   else if (type === "warning") snackbar.style.background = "#ffc107"; // yellow
-  else snackbar.style.background = "rgb(2, 61, 52)"; // default dark
+  else snackbar.style.background = "rgba(7, 29, 26, 0.86)"; // default dark
 
   snackbar.textContent = message;
 

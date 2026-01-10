@@ -1456,13 +1456,21 @@
     </div>
   </div>
     <h3>Enter Bundle Recipient</h3>
-    <input type="tel" id="recipientInput" placeholder="e.g. 0241234567"/>
+    <input 
+    type="tel"
+     id="recipientInput" 
+     placeholder="e.g. 0241234567"
+     maxlength="10"
+     inputmode="numeric"
+     required/>
     <div class="modal-buttons">
       <button id="cancelBtn" class="btn cancel">Cancel</button>
       <button id="confirmBtn" class="btn continue">Proceed to Paystack</button>
     </div>
 </div>
 </div>
+
+
 
 <!----SIDEBAR @1366PX-DES---------->
 <div class="sidebar-container">
@@ -1592,6 +1600,8 @@
     <img src="./css/icons/chatMe.png" alt="image" loading="lazy">
   </div>
 
+
+  <!---whatsapp chatBox-->
   <div id="chatBox">
     <h4>Chat Ecodata Admin</h4>
     <input type="text" id="whatsappMessage" placeholder="Type your message..." />
