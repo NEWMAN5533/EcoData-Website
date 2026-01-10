@@ -142,45 +142,11 @@ async function payWithPaystack(network, recipient, packageName, size, price) {
 }
 
 
-// ---------- FIRESTORE HELPER ----------
-async function saveOrderToFirestore(orderObj) {
-  try {
-    const db = window.FIRESTORE;
-    if (!db) {
-      console.warn("Firestore not initialized. Make sure firebase-config.js is loaded before main.js");
-      return null;
-    }
 
-    const { collection, addDoc, serverTimestamp } = await import(
-      "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"
-    );
-
-    const docData = {
-      orderId: orderObj.orderId || orderObj.reference || null,
-      reference: orderObj.reference || null,
-      status: (orderObj.status || "pending").toString(),
-      recipient: orderObj.recipient || (orderObj.items?.[0]?.recipient) || null,
-      volume: Number(orderObj.volume ?? orderObj.items?.[0]?.volume ?? 0),
-      amount: Number(orderObj.amount ?? orderObj.totalAmount ?? 0),
-      network: orderObj.network || null,
-      source: orderObj.source || "web",
-      createdAt: serverTimestamp(),
-      createdBy:
-        window.FIREBASE_AUTH?.currentUser?.uid || "guest"
-    };
-
-    const ordersCol = collection(db, "orders");
-    const result = await addDoc(ordersCol, docData);
-    console.log("✅ Order saved to Firestore:", result.id);
-    return result.id;
-  } catch (err) {
-    console.error("❌ Error saving order to Firestore:", err);
-    return null;
-}
-}
 
 //NEW UPDATED 2/12/2025 //
 
+// === SEND ORDER TO BACKEND ===
 // === SEND ORDER TO BACKEND ===
 async function orderBundle(network, recipient, packageName, size, reference) {
   try {
@@ -189,7 +155,6 @@ async function orderBundle(network, recipient, packageName, size, reference) {
         ? "http://localhost:3000"
         : "https://ecodata-app.onrender.com";
 
-    // ✅ Build query string for GET request
     const query = new URLSearchParams({
       network,
       recipient,
@@ -205,51 +170,91 @@ async function orderBundle(network, recipient, packageName, size, reference) {
 
     const result = await response.json();
 
-    if (result.success) {
-      showSnackBar("📱✅ Order Placed successfully!");
-
-      // The order object returned from server
-      const returnedOrder = result.order?.order || result.order || result;
-      console.log("📦 Order details:", returnedOrder);
-
-      // ✅ Save to Firestore
-      saveOrderToFirestore(returnedOrder).then((fireId) => {
-        if (fireId) console.log("Order persisted in Firestore:", fireId);
-
-        // ✅ Save locally for guests (important fix!)
-        saveGuestOrder(returnedOrder);
-      });
-
-      // Update dashboard UI or order history
-      handleNewOrder(returnedOrder);
-
-
-    } else {
-      showSnackBar(`Failed to purchase data: ${result.message || "Unknown error"}`);
+    if (!result.success) {
+      showSnackBar(`❌ Order failed: ${result.message || "Unknown error"}`);
+      return;
     }
+
+    showSnackBar("📱✅ Order Placed successfully!");
+
+    const returnedOrder = result.order?.order || result.order || result;
+    console.log("📦 Order details:", returnedOrder);
+
+    // ✅ EcoData-only order object
+    const orderData = {
+      orderId: returnedOrder.orderId || returnedOrder.reference,
+      reference: returnedOrder.reference || null,
+      status: (returnedOrder.status || "pending").toString(),
+      recipient: returnedOrder.recipient || returnedOrder.items?.[0]?.recipient || "-",
+      volume: Number(returnedOrder.volume ?? returnedOrder.items?.[0]?.volume ?? 0),
+      amount: Number(returnedOrder.amount ?? returnedOrder.totalAmount ?? 0),
+      network: returnedOrder.network || "-",
+      source: "web",
+      createdBy: window.FIREBASE_AUTH?.currentUser?.uid || "guest",
+    };
+
+    // ✅ Save records
+    saveOrderToFirestore(orderData);
+    saveGuestOrder(orderData);
+
+    // ✅ Update homepage totals (EcoData logic)
+    updateHomepageTotals(orderData);
+
+    // ✅ Live order UI
+    handleNewOrder(orderData);
+
   } catch (err) {
     console.error("⚠ Server error:", err);
     showSnackBar("⚠ Server error. Please try again later.");
   }
 }
-
 //ends//
 
+// UPDATE HOME TOTALS
+let ecoTotals = JSON.parse(localStorage.getItem("ecoTotals")) || {
+  orders: 0,
+  gb: 0,
+  spend: 0,
+};
+
+// we call after new order
+function updateHomepageTotals(order) {
+  ecoTotals.orders += 1;
+  ecoTotals.gb += Number(order.volume ?? 0);
+  ecoTotals.spend += Number(order.amount ?? 0);
 
 
-
-// ✅ Save Guest Orders to Local Storage
-function saveGuestOrder(orderData) {
-  try {
-    const existing = JSON.parse(localStorage.getItem("guestOrders") || "[]");
-    existing.push(orderData);
-    localStorage.setItem("guestOrders", JSON.stringify(existing));
-    console.log("💾 Guest order saved locally:", orderData);
-  } catch (e) {
-    console.error("Failed to save guest order:", e);
+  localStorage.setItem("ecoTotals", JSON.stringify(ecoTotals));
+  renderHomepageTotals();
 }
+
+
+// render function
+function renderHomepageTotals() {
+  const ordersEl = 
+  document.getElementById("totalOrders");
+
+  const gbEl = 
+  document.getElementById("totalGB");
+
+  const spendEl = 
+  document.getElementById("totalSpend");
+
+  if (!ordersEl || !gbEl || !spendEl) return;
+
+  ordersEl.textContent = ecoTotals.orders;
+  gbEl.textContent = ecoTotals.gb;
+  spendEl.textContent = ` ${ecoTotals.spend.toFixed(2)}`;
 }
 
+// load total on page refresh
+document.addEventListener("DOMContentLoaded", renderHomepageTotals);
+
+
+
+
+
+ 
 
 // POLLING FUNCTION //
 
