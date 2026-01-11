@@ -201,7 +201,6 @@ async function orderBundle(network, recipient, packageName, size, reference) {
       ),
       network: returnedOrder.network || network || "-",
       source: "web",
-      createdBy: window.FIREBASE_AUTH?.currentUser?.uid || "guest",
     };
 
     // ✅ Save records (safe)
@@ -508,48 +507,36 @@ function startAutoPolling(orderIdOrRef) {
  *    const returnedOrder = result.order || result.swift || result; 
  *    handleNewOrder(returnedOrder);
  */
+// ---------- LIVE ORDER CARD ----------
+function handleNewOrder(order) {
+  if (!order) return;
 
-function handleNewOrder(returnedOrder) {
-  if (!returnedOrder) return;
-
+  // Normalize fields
   const normalized = {
-    orderId:
-      returnedOrder.orderId ||
-      returnedOrder.id ||
-      returnedOrder.order_id ||
-      returnedOrder.reference ||
-      null,
-
-    reference: returnedOrder.reference || null,
-
-    status: returnedOrder.status || returnedOrder.state || "pending",
-
-    recipient:
-      returnedOrder.items?.[0]?.recipient ||
-      returnedOrder.recipient ||
-      "-",
-
-    volume:
-      returnedOrder.items?.[0]?.volume ??
-      returnedOrder.volume ??
-      "-"
+    orderId: order.orderId || order.reference || "-",
+    reference: order.reference || "-",
+    status: (order.status || "pending").toLowerCase(),
+    recipient: order.recipient || "-",
+    volume: Number(order.volume ?? 0),
+    network: order.network || "-",
+    createdAt: order.createdAt || new Date(),
   };
 
-  if (normalized.orderId) {
-    localStorage.setItem("lastOrderId", normalized.orderId);
-  }
+  // Save last orderId locally (manual check)
+  if (normalized.orderId) localStorage.setItem("lastOrderId", normalized.orderId);
 
-  // ✅ THIS is what makes the bottom card appear
-  createOrUpdateStatusCard(normalized); // Popup
+  // Show live order card (permanent div on page)
+  updateLiveOrderCard(normalized);
 
+  // Optionally, update the popup card (small floating one)
+  createOrUpdateStatusCard(normalized);
 
-
-  updateLiveOrderCard(normalized); // Live
-
-  // ✅ THIS is what keeps it updating live
+  // Start polling for status updates
   const idToPoll = normalized.orderId || normalized.reference;
   if (idToPoll) startAutoPolling(idToPoll);
 }
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const last = localStorage.getItem("lastOrderId");
@@ -641,6 +628,9 @@ document.addEventListener("DOMContentLoaded", () => {
     scrollBtn.style.pointerEvents = "auto";
   }
  });
+
+
+
 
  // SHARE BTN
  const shareBtn = document.getElementById("shareBtn");
