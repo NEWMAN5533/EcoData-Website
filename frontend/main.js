@@ -148,6 +148,7 @@ async function payWithPaystack(network, recipient, packageName, size, price) {
 
 // === SEND ORDER TO BACKEND ===
 // === SEND ORDER TO BACKEND ===
+// === SEND ORDER TO BACKEND ===
 async function orderBundle(network, recipient, packageName, size, reference) {
   try {
     const API_BASE =
@@ -159,53 +160,63 @@ async function orderBundle(network, recipient, packageName, size, reference) {
       network,
       recipient,
       package: packageName,
-      size: size.toString(),
+      size: String(size),
       paymentReference: reference,
     });
 
-    const response = await fetch(`${API_BASE}/api/buy-data?${query.toString()}`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    });
+    const response = await fetch(
+      `${API_BASE}/api/buy-data?${query.toString()}`,
+      { method: "GET" }
+    );
 
     const result = await response.json();
 
-    if (!result.success) {
-      showSnackBar(`❌ Order failed: ${result.message || "Unknown error"}`);
+    if (!result?.success) {
+      showSnackBar(`❌ Order failed: ${result?.message || "Unknown error"}`);
       return;
     }
 
     showSnackBar("📱✅ Order Placed successfully!");
 
-    const returnedOrder = result.order?.order || result.order || result;
-    console.log("📦 Order details:", returnedOrder);
+    // ✅ Normalize Swift response safely
+    const returnedOrder = result.order?.order || result.order || result || {};
 
-    // ✅ EcoData-only order object
     const orderData = {
-      orderId: returnedOrder.orderId || returnedOrder.reference,
+      orderId: returnedOrder.orderId || returnedOrder.reference || crypto.randomUUID(),
       reference: returnedOrder.reference || null,
-      status: (returnedOrder.status || "pending").toString(),
-      recipient: returnedOrder.recipient || returnedOrder.items?.[0]?.recipient || "-",
-      volume: Number(returnedOrder.volume ?? returnedOrder.items?.[0]?.volume ?? 0),
-      amount: Number(returnedOrder.amount ?? returnedOrder.totalAmount ?? 0),
-      network: returnedOrder.network || "-",
+      status: String(returnedOrder.status || "pending"),
+      recipient:
+        returnedOrder.recipient ||
+        returnedOrder.items?.[0]?.recipient ||
+        "-",
+      volume: Number(
+        returnedOrder.volume ??
+        returnedOrder.items?.[0]?.volume ??
+        0
+      ),
+      amount: Number(
+        returnedOrder.amount ??
+        returnedOrder.totalAmount ??
+        0
+      ),
+      network: returnedOrder.network || network || "-",
       source: "web",
       createdBy: window.FIREBASE_AUTH?.currentUser?.uid || "guest",
     };
 
-    // ✅ Save records
+    // ✅ Save records (safe)
     saveOrderToFirestore(orderData);
     saveGuestOrder(orderData);
 
-    // ✅ Update homepage totals (EcoData logic)
+    // ✅ Update EcoData-only totals
     updateHomepageTotals(orderData);
 
-    // ✅ Live order UI
+    // ✅ Live UI
     handleNewOrder(orderData);
 
   } catch (err) {
-    console.error("⚠ Server error:", err);
-    showSnackBar("⚠ Server error. Please try again later.");
+    console.error("Frontend runtime error:", err);
+    showSnackBar("⚠ Something went wrong. Please refresh and check order status.");
   }
 }
 //ends//
@@ -219,10 +230,18 @@ let ecoTotals = JSON.parse(localStorage.getItem("ecoTotals")) || {
 
 // we call after new order
 function updateHomepageTotals(order) {
+const seen = 
+JSON.parse(localStorage.getItem("ecoSeenOrders") || "[]");
+if (seen.includes(order.orderId) ) return;
+
+seen.push(order.orderId);
+localStorage.setItem("ecoSeenOrders",
+  JSON.stringify(seen)
+);
+
   ecoTotals.orders += 1;
   ecoTotals.gb += Number(order.volume ?? 0);
   ecoTotals.spend += Number(order.amount ?? 0);
-
 
   localStorage.setItem("ecoTotals", JSON.stringify(ecoTotals));
   renderHomepageTotals();
@@ -244,7 +263,7 @@ function renderHomepageTotals() {
 
   ordersEl.textContent = ecoTotals.orders;
   gbEl.textContent = ecoTotals.gb;
-  spendEl.textContent = ` ${ecoTotals.spend.toFixed(2)}`;
+  spendEl.textContent = `GHS ${ecoTotals.spend.toFixed(2)}`;
 }
 
 // load total on page refresh
