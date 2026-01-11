@@ -214,7 +214,7 @@ async function saveOrderToFirestore(returnedOrder) {
     const { collection, addDoc, serverTimestamp } = await import(
       "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"
     );
-
+// New Ecodata-only field to save to firestore
     const orderData = {
       orderId: returnedOrder.orderId || returnedOrder.reference || crypto.randomUUID(),
       reference: returnedOrder.reference || null,
