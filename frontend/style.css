@@ -4493,7 +4493,7 @@ height: 2.4rem;
 
 /*** two div container ***/
 .two-div-container{
-  display: flex;
+  display: none !important;
 }
 
 /*** network-processing **/
