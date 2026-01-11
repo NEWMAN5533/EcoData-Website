@@ -306,7 +306,7 @@ function renderHomepageTotals() {
 
   ordersEl.textContent = ecoTotals.orders;
   gbEl.textContent = ecoTotals.gb;
-  spendEl.textContent = `GHS ${ecoTotals.spend.toFixed(2)}`;
+  spendEl.textContent = ` ₵ ${ecoTotals.spend.toFixed(2)}`;
 }
 
 // load total on page refresh
