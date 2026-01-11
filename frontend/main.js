@@ -145,9 +145,6 @@ async function payWithPaystack(network, recipient, packageName, size, price) {
 
 
 //NEW UPDATED 2/12/2025 //
-
-// === SEND ORDER TO BACKEND ===
-// === SEND ORDER TO BACKEND ===
 // === SEND ORDER TO BACKEND ===
 async function orderBundle(network, recipient, packageName, size, reference) {
   try {
@@ -156,30 +153,67 @@ async function orderBundle(network, recipient, packageName, size, reference) {
         ? "http://localhost:3000"
         : "https://ecodata-app.onrender.com";
 
+    // ✅ Build query string for GET request
     const query = new URLSearchParams({
       network,
       recipient,
       package: packageName,
-      size: String(size),
+      size: size.toString(),
       paymentReference: reference,
     });
 
-    const response = await fetch(
-      `${API_BASE}/api/buy-data?${query.toString()}`,
-      { method: "GET" }
-    );
+    const response = await fetch(`${API_BASE}/api/buy-data?${query.toString()}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
 
     const result = await response.json();
 
-    if (!result?.success) {
-      showSnackBar(`❌ Order failed: ${result?.message || "Unknown error"}`);
-      return;
+    if (result.success) {
+      showSnackBar("📱✅ Order Placed successfully!");
+
+      // The order object returned from server
+      const returnedOrder = result.order?.order || result.order || result;
+      console.log("📦 Order details:", returnedOrder);
+
+      // ✅ Save to Firestore
+      saveOrderToFirestore(orderData).then((fireId) => {
+        if (fireId) console.log("Order persisted in Firestore:", fireId);
+
+        // ✅ Save locally for guests (important fix!)
+        saveGuestOrder(orderData);
+      });
+
+      updateHomepageTotals(orderData);
+
+      // Update dashboard UI or order history
+      handleNewOrder(returnedOrder);
+
+
+    } else {
+      showSnackBar(`Failed to purchase data: ${result.message || "Unknown error"}`);
+    }
+  } catch (err) {
+    console.error("⚠ Server error:", err);
+    showSnackBar("⚠ Server error. Please try again later.");
+  }
+}
+
+//ends//
+
+
+// ---------- FIRESTORE HELPER ----------
+async function saveOrderToFirestore(returnedOrder) {
+  try {
+    const db = window.FIRESTORE;
+    if (!db) {
+      console.warn("Firestore not initialized. Make sure firebase-config.js is loaded before main.js");
+      return null;
     }
 
-    showSnackBar("📱✅ Order Placed successfully!");
-
-    // ✅ Normalize Swift response safely
-    const returnedOrder = result.order?.order || result.order || result || {};
+    const { collection, addDoc, serverTimestamp } = await import(
+      "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"
+    );
 
     const orderData = {
       orderId: returnedOrder.orderId || returnedOrder.reference || crypto.randomUUID(),
@@ -201,24 +235,34 @@ async function orderBundle(network, recipient, packageName, size, reference) {
       ),
       network: returnedOrder.network || network || "-",
       source: "web",
+      createdAt: serverTimestamp(),
     };
 
-    // ✅ Save records (safe)
-    saveOrderToFirestore(orderData);
-    saveGuestOrder(orderData);
-
-    // ✅ Update EcoData-only totals
-    updateHomepageTotals(orderData);
-
-    // ✅ Live UI
-    handleNewOrder(orderData);
-
+    const ordersCol = collection(db, "orders");
+    const result = await addDoc(ordersCol, orderData);
+    console.log("✅ Order saved to Firestore:", result.id);
+    return result.id;
   } catch (err) {
-    console.error("Frontend runtime error:", err);
-    showSnackBar("⚠ Something went wrong. Please refresh and check order status.");
-  }
+    console.error("❌ Error saving order to Firestore:", err);
+    return null;
 }
-//ends//
+};
+
+
+// ✅ Save Guest Orders to Local Storage
+function saveGuestOrder(orderData) {
+  try {
+    const existing = JSON.parse(localStorage.getItem("guestOrders") || "[]");
+    existing.push(orderData);
+    localStorage.setItem("guestOrders", JSON.stringify(existing));
+    console.log("💾 Guest order saved locally:", orderData);
+  } catch (e) {
+    console.error("Failed to save guest order:", e);
+}
+}
+
+
+
 
 // UPDATE HOME TOTALS
 let ecoTotals = JSON.parse(localStorage.getItem("ecoTotals")) || {
@@ -508,30 +552,44 @@ function startAutoPolling(orderIdOrRef) {
  *    handleNewOrder(returnedOrder);
  */
 // ---------- LIVE ORDER CARD ----------
-function handleNewOrder(order) {
-  if (!order) return;
+function handleNewOrder(returnedOrder) {
+  if (!returnedOrder) return;
 
-  // Normalize fields
   const normalized = {
-    orderId: order.orderId || order.reference || "-",
-    reference: order.reference || "-",
-    status: (order.status || "pending").toLowerCase(),
-    recipient: order.recipient || "-",
-    volume: Number(order.volume ?? 0),
-    network: order.network || "-",
-    createdAt: order.createdAt || new Date(),
+    orderId:
+      returnedOrder.orderId ||
+      returnedOrder.id ||
+      returnedOrder.order_id ||
+      returnedOrder.reference ||
+      null,
+
+    reference: returnedOrder.reference || null,
+
+    status: returnedOrder.status || returnedOrder.state || "pending",
+
+    recipient:
+      returnedOrder.items?.[0]?.recipient ||
+      returnedOrder.recipient ||
+      "-",
+
+    volume:
+      returnedOrder.items?.[0]?.volume ??
+      returnedOrder.volume ??
+      "-"
   };
 
-  // Save last orderId locally (manual check)
-  if (normalized.orderId) localStorage.setItem("lastOrderId", normalized.orderId);
+  if (normalized.orderId) {
+    localStorage.setItem("lastOrderId", normalized.orderId);
+  }
 
-  // Show live order card (permanent div on page)
-  updateLiveOrderCard(normalized);
+  // ✅ THIS is what makes the bottom card appear
+  createOrUpdateStatusCard(normalized); // Popup
 
-  // Optionally, update the popup card (small floating one)
-  createOrUpdateStatusCard(normalized);
 
-  // Start polling for status updates
+
+  updateLiveOrderCard(normalized); // Live
+
+  // ✅ THIS is what keeps it updating live
   const idToPoll = normalized.orderId || normalized.reference;
   if (idToPoll) startAutoPolling(idToPoll);
 }
