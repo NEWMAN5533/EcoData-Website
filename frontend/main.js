@@ -146,19 +146,25 @@ async function payWithPaystack(network, recipient, packageName, size, price) {
 
 //NEW UPDATED 2/12/2025 //
 // === SEND ORDER TO BACKEND ===
-async function orderBundle(network, recipient, packageName, size, reference) {
+async function orderBundle(button, recipient, reference) {
   try {
+    // Pull EcoData values directly from the button
+    const network = button.dataset.network;
+    const packageName = button.dataset.package;
+    const volume = Number(button.dataset.size);
+    const amount = Number(button.dataset.price);
+
     const API_BASE =
       window.location.hostname === "localhost"
         ? "http://localhost:3000"
         : "https://ecodata-app.onrender.com";
 
-    // ✅ Build query string for GET request
+    // Build query string for Swift backend
     const query = new URLSearchParams({
       network,
       recipient,
       package: packageName,
-      size: size.toString(),
+      size: volume.toString(),
       paymentReference: reference,
     });
 
@@ -169,30 +175,45 @@ async function orderBundle(network, recipient, packageName, size, reference) {
 
     const result = await response.json();
 
-    if (result.success) {
-      showSnackBar("📱✅ Order Placed successfully!");
-
-      // The order object returned from server
-      const returnedOrder = result.order?.order || result.order || result;
-      console.log("📦 Order details:", returnedOrder);
-
-      // ✅ Save to Firestore
-      saveOrderToFirestore(orderData).then((fireId) => {
-        if (fireId) console.log("Order persisted in Firestore:", fireId);
-
-        // ✅ Save locally for guests (important fix!)
-        saveGuestOrder(orderData);
-      });
-
-      updateHomepageTotals(orderData);
-
-      // Update dashboard UI or order history
-      handleNewOrder(returnedOrder);
-
-
-    } else {
-      showSnackBar(`Failed to purchase data: ${result.message || "Unknown error"}`);
+    if (!result.success) {
+      showSnackBar(`❌ Order failed: ${result.message || "Unknown error"}`);
+      return;
     }
+
+    showSnackBar("📱✅ Order Placed successfully!");
+
+    // Swift returned data (for status/live only)
+    const returnedOrder = result.order?.order || result.order || result;
+    console.log("📦 Swift order:", returnedOrder);
+
+    // ✅ EcoData order object (totals from button, not Swift)
+    const orderData = {
+      orderId: returnedOrder.orderId || returnedOrder.reference || crypto.randomUUID(),
+      reference: returnedOrder.reference || reference || null,
+      status: "pending", // start as pending for EcoData
+      recipient: recipient,
+      volume: volume,
+      amount: amount,
+      network: network,
+      packageName: packageName,
+      source: "web",
+      createdBy: window.FIREBASE_AUTH?.currentUser?.uid || "guest",
+    };
+
+    // Save EcoData order to Firestore
+    saveOrderToFirestore(orderData).then((fireId) => {
+      if (fireId) console.log("✅ Order persisted in Firestore:", fireId);
+    });
+
+    // Save locally for guests
+    saveGuestOrder(orderData);
+
+    // Update totals immediately from EcoData
+    updateHomepageTotals(orderData);
+
+    // Update live order UI with Swift returned order
+    handleNewOrder(returnedOrder);
+
   } catch (err) {
     console.error("⚠ Server error:", err);
     showSnackBar("⚠ Server error. Please try again later.");
@@ -203,7 +224,8 @@ async function orderBundle(network, recipient, packageName, size, reference) {
 
 
 // ---------- FIRESTORE HELPER ----------
-async function saveOrderToFirestore(returnedOrder) {
+// ---------- FIRESTORE HELPER ----------
+async function saveOrderToFirestore(orderData) {
   try {
     const db = window.FIRESTORE;
     if (!db) {
@@ -214,105 +236,115 @@ async function saveOrderToFirestore(returnedOrder) {
     const { collection, addDoc, serverTimestamp } = await import(
       "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"
     );
-// New Ecodata-only field to save to firestore
-    const orderData = {
-      orderId: returnedOrder.orderId || returnedOrder.reference || crypto.randomUUID(),
-      reference: returnedOrder.reference || null,
-      status: String(returnedOrder.status || "pending"),
-      recipient:
-        returnedOrder.recipient ||
-        returnedOrder.items?.[0]?.recipient ||
-        "-",
-      volume: Number(
-        returnedOrder.volume ??
-        returnedOrder.items?.[0]?.volume ??
-        0
-      ),
-      amount: Number(
-        returnedOrder.amount ??
-        returnedOrder.totalAmount ??
-        0
-      ),
-      network: returnedOrder.network || network || "-",
-      source: "web",
+
+    // Prepare Firestore document
+    const docData = {
+      orderId: orderData.orderId || crypto.randomUUID(),
+      reference: orderData.reference || null,
+      status: String(orderData.status || "pending"),
+      recipient: orderData.recipient || "-",
+      volume: Number(orderData.volume ?? 0),
+      amount: Number(orderData.amount ?? 0),
+      network: orderData.network || "-",
+      packageName: orderData.packageName || "-",
+      source: orderData.source || "web",
+      createdBy: orderData.createdBy || "guest",
       createdAt: serverTimestamp(),
     };
 
     const ordersCol = collection(db, "orders");
-    const result = await addDoc(ordersCol, orderData);
+    const result = await addDoc(ordersCol, docData);
+
     console.log("✅ Order saved to Firestore:", result.id);
     return result.id;
+
   } catch (err) {
     console.error("❌ Error saving order to Firestore:", err);
     return null;
+  }
 }
-};
 
+
+
+
+// ---------- LOCAL STORAGE HELPER ----------
 
 // ✅ Save Guest Orders to Local Storage
 function saveGuestOrder(orderData) {
   try {
+    // Load existing guest orders or start fresh
     const existing = JSON.parse(localStorage.getItem("guestOrders") || "[]");
+
+    // Avoid saving duplicates
+    const isDuplicate = existing.some(o => o.orderId === orderData.orderId);
+    if (isDuplicate) return;
+
     existing.push(orderData);
+
     localStorage.setItem("guestOrders", JSON.stringify(existing));
     console.log("💾 Guest order saved locally:", orderData);
-  } catch (e) {
-    console.error("Failed to save guest order:", e);
+
+  } catch (err) {
+    console.error("❌ Failed to save guest order:", err);
+  }
 }
-}
 
 
 
+// ---------- UPDATE HOME TOTALS ----------
 
-// UPDATE HOME TOTALS
+// Load stored totals or initialize
 let ecoTotals = JSON.parse(localStorage.getItem("ecoTotals")) || {
   orders: 0,
   gb: 0,
   spend: 0,
 };
 
-// we call after new order
+// Called AFTER a successful order is confirmed
 function updateHomepageTotals(order) {
-const seen = 
-JSON.parse(localStorage.getItem("ecoSeenOrders") || "[]");
-if (seen.includes(order.orderId) ) return;
+  if (!order || !order.orderId) return;
 
-seen.push(order.orderId);
-localStorage.setItem("ecoSeenOrders",
-  JSON.stringify(seen)
-);
+  // Prevent duplicate counting
+  const seenOrders =
+    JSON.parse(localStorage.getItem("ecoSeenOrders") || "[]");
 
+  if (seenOrders.includes(order.orderId)) return;
+
+  // Mark order as counted
+  seenOrders.push(order.orderId);
+  localStorage.setItem("ecoSeenOrders", JSON.stringify(seenOrders));
+
+  // Update totals
   ecoTotals.orders += 1;
-  ecoTotals.gb += Number(order.volume ?? 0);
-  ecoTotals.spend += Number(order.amount ?? 0);
+  ecoTotals.gb += Number(order.volume || 0);
+  ecoTotals.spend += Number(order.amount || 0);
 
+  // Persist totals
   localStorage.setItem("ecoTotals", JSON.stringify(ecoTotals));
+
+  // Update UI
   renderHomepageTotals();
 }
 
-
-// render function
+// ---------- RENDER TOTALS ----------
 function renderHomepageTotals() {
-  const ordersEl = 
-  document.getElementById("totalOrders");
-
-  const gbEl = 
-  document.getElementById("totalGB");
-
-  const spendEl = 
-  document.getElementById("totalSpend");
+  const ordersEl = document.getElementById("totalOrders");
+  const gbEl = document.getElementById("totalGB");
+  const spendEl = document.getElementById("totalSpend");
 
   if (!ordersEl || !gbEl || !spendEl) return;
 
   ordersEl.textContent = ecoTotals.orders;
   gbEl.textContent = ecoTotals.gb;
-  spendEl.textContent = ` ₵ ${ecoTotals.spend.toFixed(2)}`;
+  spendEl.textContent = `₵ ${ecoTotals.spend.toFixed(2)}`;
 }
 
-// load total on page refresh
-document.addEventListener("DOMContentLoaded", renderHomepageTotals);
-
-
+// ---------- LOAD TOTALS ON PAGE REFRESH ----------
+document.addEventListener("DOMContentLoaded", () => {
+  ecoTotals =
+    JSON.parse(localStorage.getItem("ecoTotals")) || ecoTotals;
+  renderHomepageTotals();
+});
 
 
 
