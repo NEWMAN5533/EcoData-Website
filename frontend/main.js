@@ -144,17 +144,36 @@ async function payWithPaystack(network, recipient, packageName, size, price) {
 
 
 
+// SELECTED BUNDLE FOR UI UPDATE
+let selectedBundle = null;
+
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".buy-btn");
+  if (!btn) return;
+
+  selectedBundle = {
+    network: btn.dataset.network,
+    packageName: btn.dataset.package,
+    size: Number(btn.dataset.size),
+    price: Number(btn.dataset.price),
+  };
+})
+
+
 //NEW UPDATED 2/12/2025 //
-// === SEND ORDER TO BACKEND ===
 // === SEND ORDER TO BACKEND ===
 async function orderBundle(network, recipient, packageName, size, reference) {
   try {
+    if (!selectedBundle) {
+      showSnackBar(" Please select a bundle first");
+      return;
+    }
+
     const API_BASE =
       window.location.hostname === "localhost"
         ? "http://localhost:3000"
         : "https://ecodata-app.onrender.com";
 
-    // ✅ Build query string for GET request
     const query = new URLSearchParams({
       network,
       recipient,
@@ -163,59 +182,53 @@ async function orderBundle(network, recipient, packageName, size, reference) {
       paymentReference: reference,
     });
 
-    const response = await fetch(`${API_BASE}/api/buy-data?${query.toString()}`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    });
+    const response = await fetch(
+      `${API_BASE}/api/buy-data?${query.toString()}`,
+      { method: "GET" }
+    );
 
     const result = await response.json();
 
-    if (result.success) {
-      showSnackBar("📱✅ Order Placed successfully!");
-
-      // The order object returned from server
-      const returnedOrder = result.order?.order || result.order || result;
-      console.log("📦 Order details:", returnedOrder);
-
-      const orderData = {
-        orderId:
-          returnedOrder.orderId || returnedOrder.id || null,
-        reference: returnedOrder.reference || null,
-        status: returnedOrder.status || "pending",
-        recipient: returnedOrder.recipient || recipient || "-",
-        volume: returnedOrder.volume || size || 0,
-        amount: returnedOrder.amount || parseFloat(returnedOrder.price) || parseFloat(price) || 0,
-        network: returnedOrder.network || network || "-",
-        createdBy: user?.uid || "guest",
-      };
-
-      // ✅ Save to Firestore
-      saveOrderToFirestore(returnedOrder).then((fireId) => {
-        if (fireId) console.log("Order persisted in Firestore:", fireId);
-
-        // ✅ Save locally for guests (important fix!)
-        saveGuestOrder(returnedOrder);
-      });
-
-      updateHomepageTotals(orderData)
-
-      // Update dashboard UI or order history
-      handleNewOrder(returnedOrder);
-
-
-    } else {
-      showSnackBar(`Failed to purchase data: ${result.message || "Unknown error"}`);
+    if (!result.success) {
+      showSnackBar(`❌ Failed: ${result.message || "Unknown error"}`);
+      return;
     }
+
+    showSnackBar("📱✅ Order Placed successfully!");
+
+    // 🔴 Swift live order
+    const returnedOrder = result.order?.order || result.order || result;
+    console.log("📦 Swift order:", returnedOrder);
+
+    // 🟢 EcoData accounting (UI prices)
+    const orderData = {
+      orderId: returnedOrder.orderId || returnedOrder.reference,
+      reference: returnedOrder.reference,
+      network: selectedBundle.network,
+      volume: selectedBundle.size,
+      amount: selectedBundle.price,
+      source: "web",
+      createdAt: Date.now(),
+    };
+
+    // ✅ Live stream (Swift)
+    handleNewOrder(returnedOrder);
+
+    // ✅ Analytics (EcoData)
+    updateHomepageTotals(orderData);
+
+    // ✅ Persistence
+    saveOrderToFirestore(orderData);
+    saveGuestOrder(orderData);
+
   } catch (err) {
     console.error("⚠ Server error:", err);
     showSnackBar("⚠ Server error. Please try again later.");
   }
 }
-
 //ends//
 
 
-// ---------- FIRESTORE HELPER ----------
 // ---------- FIRESTORE HELPER ----------
 async function saveOrderToFirestore(orderData) {
   try {
