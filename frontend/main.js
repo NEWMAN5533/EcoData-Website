@@ -146,13 +146,15 @@ async function payWithPaystack(network, recipient, packageName, size, price) {
 
 //NEW UPDATED 2/12/2025 //
 // === SEND ORDER TO BACKEND ===
-async function orderBundle(network, recipient, packageName, size, price, reference) {
+// === SEND ORDER TO BACKEND ===
+async function orderBundle(network, recipient, packageName, size, reference) {
   try {
-    const API_BASE = window.location.hostname === "localhost"
-      ? "http://localhost:3000"
-      : "https://ecodata-app.onrender.com";
+    const API_BASE =
+      window.location.hostname === "localhost"
+        ? "http://localhost:3000"
+        : "https://ecodata-app.onrender.com";
 
-    // ✅ Build query string for backend Swift call
+    // ✅ Build query string for GET request
     const query = new URLSearchParams({
       network,
       recipient,
@@ -168,42 +170,42 @@ async function orderBundle(network, recipient, packageName, size, price, referen
 
     const result = await response.json();
 
-    if (!result.success) {
-      showSnackBar(`❌ Order failed: ${result.message || "Unknown error"}`);
-      return;
+    if (result.success) {
+      showSnackBar("📱✅ Order Placed successfully!");
+
+      // The order object returned from server
+      const returnedOrder = result.order?.order || result.order || result;
+      console.log("📦 Order details:", returnedOrder);
+
+      const orderData = {
+        orderId:
+          returnedOrder.orderId || returnedOrder.id || null,
+        reference: returnedOrder.reference || null,
+        status: returnedOrder.status || "pending",
+        recipient: returnedOrder.recipient || recipient || "-",
+        volume: returnedOrder.volume || size || 0,
+        amount: returnedOrder.amount || parseFloat(returnedOrder.price) || parseFloat(price) || 0,
+        network: returnedOrder.network || network || "-",
+        createdBy: user?.uid || "guest",
+      };
+
+      // ✅ Save to Firestore
+      saveOrderToFirestore(returnedOrder).then((fireId) => {
+        if (fireId) console.log("Order persisted in Firestore:", fireId);
+
+        // ✅ Save locally for guests (important fix!)
+        saveGuestOrder(returnedOrder);
+      });
+
+      updateHomepageTotals(orderData)
+
+      // Update dashboard UI or order history
+      handleNewOrder(returnedOrder);
+
+
+    } else {
+      showSnackBar(`Failed to purchase data: ${result.message || "Unknown error"}`);
     }
-
-    showSnackBar("📱✅ Order Placed successfully!");
-
-    // --- Swift returned order (for live tracking) ---
-    const returnedOrder = result.order?.order || result.order || result;
-    console.log("📦 Swift order:", returnedOrder);
-
-    // --- EcoData order (for totals, Firestore, guest) ---
-    const orderData = {
-      orderId: returnedOrder.orderId || returnedOrder.reference || crypto.randomUUID(),
-      reference: returnedOrder.reference || reference,
-      status: returnedOrder.status || "pending",
-      recipient,       // from modal input
-      volume: size,    // from button dataset
-      amount: price,   // from button dataset
-      network,         // from button dataset
-      source: "web",
-      createdBy: window.FIREBASE_AUTH?.currentUser?.uid || "guest",
-    };
-
-    // ✅ Save EcoData order to Firestore
-    await saveOrderToFirestore(orderData);
-
-    // ✅ Save locally for guest
-    saveGuestOrder(orderData);
-
-    // ✅ Update homepage totals using EcoData price
-    updateHomepageTotals(orderData);
-
-    // ✅ Live order card polls Swift status
-    handleNewOrder(returnedOrder);
-
   } catch (err) {
     console.error("⚠ Server error:", err);
     showSnackBar("⚠ Server error. Please try again later.");
