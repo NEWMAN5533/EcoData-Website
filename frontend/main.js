@@ -152,7 +152,7 @@ async function orderBundle(network, recipient, packageName, size, price, referen
       ? "http://localhost:3000"
       : "https://ecodata-app.onrender.com";
 
-    // Build query string for backend (Swift can ignore our EcoData price)
+    // ✅ Build query string for backend Swift call
     const query = new URLSearchParams({
       network,
       recipient,
@@ -175,34 +175,35 @@ async function orderBundle(network, recipient, packageName, size, price, referen
 
     showSnackBar("📱✅ Order Placed successfully!");
 
-    // Swift returned order
+    // --- Swift returned order (for live tracking) ---
     const returnedOrder = result.order?.order || result.order || result;
     console.log("📦 Swift order:", returnedOrder);
 
-    // Build EcoData order (your own price + volume)
+    // --- EcoData order (for totals, Firestore, guest) ---
     const orderData = {
       orderId: returnedOrder.orderId || returnedOrder.reference || crypto.randomUUID(),
       reference: returnedOrder.reference || reference,
       status: returnedOrder.status || "pending",
-      recipient,
-      volume: size,   // from button.dataset.size
-      amount: price,  // from button.dataset.price
-      network,
+      recipient,       // from modal input
+      volume: size,    // from button dataset
+      amount: price,   // from button dataset
+      network,         // from button dataset
       source: "web",
       createdBy: window.FIREBASE_AUTH?.currentUser?.uid || "guest",
     };
 
-    // Save to Firestore
+    // ✅ Save EcoData order to Firestore
     await saveOrderToFirestore(orderData);
 
-    // Save for guest
+    // ✅ Save locally for guest
     saveGuestOrder(orderData);
 
-    // Update totals UI (EcoData price)
+    // ✅ Update homepage totals using EcoData price
     updateHomepageTotals(orderData);
 
-    // Live order card
-    handleNewOrder(returnedOrder); // polling Swift status
+    // ✅ Live order card polls Swift status
+    handleNewOrder(returnedOrder);
+
   } catch (err) {
     console.error("⚠ Server error:", err);
     showSnackBar("⚠ Server error. Please try again later.");
@@ -218,7 +219,7 @@ async function saveOrderToFirestore(orderData) {
   try {
     const db = window.FIRESTORE;
     if (!db) {
-      console.warn("Firestore not initialized. Make sure firebase-config.js is loaded before main.js");
+      console.warn("Firestore not initialized.");
       return null;
     }
 
@@ -226,23 +227,21 @@ async function saveOrderToFirestore(orderData) {
       "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"
     );
 
-    // Prepare Firestore document
-    const docData = {
-      orderId: orderData.orderId || crypto.randomUUID(),
-      reference: orderData.reference || null,
+    const firestoreData = {
+      orderId: orderData.orderId,
+      reference: orderData.reference,
       status: String(orderData.status || "pending"),
       recipient: orderData.recipient || "-",
-      volume: Number(orderData.volume ?? 0),
-      amount: Number(orderData.amount ?? 0),
+      volume: Number(orderData.volume || 0),
+      amount: Number(orderData.amount || 0),
       network: orderData.network || "-",
-      packageName: orderData.packageName || "-",
-      source: orderData.source || "web",
-      createdBy: orderData.createdBy || "guest",
+      source: "web",
       createdAt: serverTimestamp(),
+      createdBy: orderData.createdBy || "guest",
     };
 
     const ordersCol = collection(db, "orders");
-    const result = await addDoc(ordersCol, docData);
+    const result = await addDoc(ordersCol, firestoreData);
 
     console.log("✅ Order saved to Firestore:", result.id);
     return result.id;
@@ -282,6 +281,10 @@ function saveGuestOrder(orderData) {
 
 // ---------- UPDATE HOME TOTALS ----------
 
+
+// Called AFTER a successful order is confirmed
+// ---------- UPDATE HOME TOTALS ----------
+
 // Load stored totals or initialize
 let ecoTotals = JSON.parse(localStorage.getItem("ecoTotals")) || {
   orders: 0,
@@ -289,31 +292,33 @@ let ecoTotals = JSON.parse(localStorage.getItem("ecoTotals")) || {
   spend: 0,
 };
 
-// Called AFTER a successful order is confirmed
-function updateHomepageTotals(order) {
-  if (!order || !order.orderId) return;
+// Called AFTER a successful EcoData order
+function updateHomepageTotals(orderData) {
+  if (!orderData || !orderData.orderId) return;
 
-  // Prevent duplicate counting
-  const seenOrders =
-    JSON.parse(localStorage.getItem("ecoSeenOrders") || "[]");
+  // Prevent double-counting the same order
+  const seenOrders = JSON.parse(localStorage.getItem("ecoSeenOrders") || "[]");
+  if (seenOrders.includes(orderData.orderId)) return;
 
-  if (seenOrders.includes(order.orderId)) return;
-
-  // Mark order as counted
-  seenOrders.push(order.orderId);
+  // Mark this order as counted
+  seenOrders.push(orderData.orderId);
   localStorage.setItem("ecoSeenOrders", JSON.stringify(seenOrders));
 
-  // Update totals
+  // Update totals using EcoData values (from button/data-price, NOT Swift)
   ecoTotals.orders += 1;
-  ecoTotals.gb += Number(order.volume || 0);
-  ecoTotals.spend += Number(order.amount || 0);
+  ecoTotals.gb += Number(orderData.volume || 0);
+  ecoTotals.spend += Number(orderData.amount || 0);
 
-  // Persist totals
+  // Persist totals to localStorage
   localStorage.setItem("ecoTotals", JSON.stringify(ecoTotals));
 
   // Update UI
   renderHomepageTotals();
 }
+
+
+
+
 
 // ---------- RENDER TOTALS ----------
 function renderHomepageTotals() {
@@ -327,6 +332,15 @@ function renderHomepageTotals() {
   gbEl.textContent = ecoTotals.gb;
   spendEl.textContent = `₵ ${ecoTotals.spend.toFixed(2)}`;
 }
+
+// Load totals on page refresh
+document.addEventListener("DOMContentLoaded", () => {
+  ecoTotals = JSON.parse(localStorage.getItem("ecoTotals")) || ecoTotals;
+  renderHomepageTotals();
+});
+
+
+
 
 // ---------- LOAD TOTALS ON PAGE REFRESH ----------
 document.addEventListener("DOMContentLoaded", () => {
