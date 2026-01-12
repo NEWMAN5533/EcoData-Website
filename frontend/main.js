@@ -146,25 +146,18 @@ async function payWithPaystack(network, recipient, packageName, size, price) {
 
 //NEW UPDATED 2/12/2025 //
 // === SEND ORDER TO BACKEND ===
-async function orderBundle(button, recipient, reference) {
+async function orderBundle(network, recipient, packageName, size, price, reference) {
   try {
-    // Pull EcoData values directly from the button
-    const network = button.dataset.network;
-    const packageName = button.dataset.package;
-    const volume = Number(button.dataset.size);
-    const amount = Number(button.dataset.price);
+    const API_BASE = window.location.hostname === "localhost"
+      ? "http://localhost:3000"
+      : "https://ecodata-app.onrender.com";
 
-    const API_BASE =
-      window.location.hostname === "localhost"
-        ? "http://localhost:3000"
-        : "https://ecodata-app.onrender.com";
-
-    // Build query string for Swift backend
+    // Build query string for backend (Swift can ignore our EcoData price)
     const query = new URLSearchParams({
       network,
       recipient,
       package: packageName,
-      size: volume.toString(),
+      size: size.toString(),
       paymentReference: reference,
     });
 
@@ -182,38 +175,34 @@ async function orderBundle(button, recipient, reference) {
 
     showSnackBar("📱✅ Order Placed successfully!");
 
-    // Swift returned data (for status/live only)
+    // Swift returned order
     const returnedOrder = result.order?.order || result.order || result;
     console.log("📦 Swift order:", returnedOrder);
 
-    // ✅ EcoData order object (totals from button, not Swift)
+    // Build EcoData order (your own price + volume)
     const orderData = {
       orderId: returnedOrder.orderId || returnedOrder.reference || crypto.randomUUID(),
-      reference: returnedOrder.reference || reference || null,
-      status: "pending", // start as pending for EcoData
-      recipient: recipient,
-      volume: volume,
-      amount: amount,
-      network: network,
-      packageName: packageName,
+      reference: returnedOrder.reference || reference,
+      status: returnedOrder.status || "pending",
+      recipient,
+      volume: size,   // from button.dataset.size
+      amount: price,  // from button.dataset.price
+      network,
       source: "web",
       createdBy: window.FIREBASE_AUTH?.currentUser?.uid || "guest",
     };
 
-    // Save EcoData order to Firestore
-    saveOrderToFirestore(orderData).then((fireId) => {
-      if (fireId) console.log("✅ Order persisted in Firestore:", fireId);
-    });
+    // Save to Firestore
+    await saveOrderToFirestore(orderData);
 
-    // Save locally for guests
+    // Save for guest
     saveGuestOrder(orderData);
 
-    // Update totals immediately from EcoData
+    // Update totals UI (EcoData price)
     updateHomepageTotals(orderData);
 
-    // Update live order UI with Swift returned order
-    handleNewOrder(returnedOrder);
-
+    // Live order card
+    handleNewOrder(returnedOrder); // polling Swift status
   } catch (err) {
     console.error("⚠ Server error:", err);
     showSnackBar("⚠ Server error. Please try again later.");
