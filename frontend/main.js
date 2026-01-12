@@ -157,7 +157,7 @@ document.addEventListener("click", (e) => {
     size: Number(btn.dataset.size),
     price: Number(btn.dataset.price),
   };
-})
+});
 
 
 //NEW UPDATED 2/12/2025 //
@@ -344,7 +344,7 @@ function renderHomepageTotals() {
   if (!ordersEl || !gbEl || !spendEl) return;
 
   ordersEl.textContent = ecoTotals.orders;
-  gbEl.textContent = ecoTotals.gb;
+  gbEl.textContent = `${ecoTotals.gb} GB`;
   spendEl.textContent = `₵ ${ecoTotals.spend.toFixed(2)}`;
 }
 
@@ -422,6 +422,8 @@ function updateLiveOrderCard(order) {
     </div>
   `;
 }
+
+/// live order card ends
 
 function updateStatusBadge(newStatus) {
   const badge = document.querySelector("#liveStatusBadge");
@@ -631,6 +633,10 @@ function handleNewOrder(returnedOrder) {
   if (normalized.orderId) {
     localStorage.setItem("lastOrderId", normalized.orderId);
   }
+
+  // NEW ORDERS TABLE LAYOUT
+  
+// END NEW ORDERS TABLE LAYOUT
 
   // ✅ THIS is what makes the bottom card appear
   createOrUpdateStatusCard(normalized); // Popup
