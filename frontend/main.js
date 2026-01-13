@@ -391,38 +391,29 @@ function getStatusClass(status) {
 }
 
 // LIVE ORDER 
+// LIVE ORDER (table-compatible)
 function updateLiveOrderCard(order) {
-  const container = document.querySelector(".live-order-card");
-  if (!container || !order) return;
+  if (!order || !order.orderId) return;
 
   const status = (order.status || "pending").toLowerCase();
 
-  container.innerHTML = `
+  // Find existing row by orderId
+  const row = document.querySelector(
+    `#liveOrderBody tr[data-id="${order.orderId}"]`
+  );
 
-    <h4 class="live-heading>
-    <span class="live-pulse"></span> Live Order Streaming 📡</h4>
+  if (!row) return; // row not yet rendered
 
-    <div class ="live-row">
-    <p><strong>Order ID:</strong> ${order.orderId}</p>
-    </div>
+  // Status cell = last column
+  const statusCell = row.children[3];
+  if (!statusCell) return;
 
-    <div class="live-row">
-    <p><strong>${order.network || "Volume"}</strong>: ${order.volume}GB</p>
-    </div>
-
-    <div class="live-row">
-    <p><strong>Recipient</strong>: ${order.recipient}</p>
-    <p>
-    </div>
-
-    <div class="live-row">
-    <p><strong>Current Status:</strong> <span class="status-badge ${getStatusClass(status)}">
-        ${status}
-      </span></p>
-    </div>
+  statusCell.innerHTML = `
+    <span class="status-badge ${getStatusClass(status)}">
+      ${status}
+    </span>
   `;
 }
-
 /// live order card ends
 
 function updateStatusBadge(newStatus) {
@@ -607,6 +598,7 @@ function startAutoPolling(orderIdOrRef) {
 function handleNewOrder(returnedOrder) {
   if (!returnedOrder) return;
 
+  // Normalize Swift order (DO NOT mix EcoData logic here)
   const normalized = {
     orderId:
       returnedOrder.orderId ||
@@ -630,25 +622,50 @@ function handleNewOrder(returnedOrder) {
       "-"
   };
 
-  if (normalized.orderId) {
-    localStorage.setItem("lastOrderId", normalized.orderId);
+  if (!normalized.orderId) return;
+
+  localStorage.setItem("lastOrderId", normalized.orderId);
+
+  // ===== LIVE TABLE UPDATE =====
+  const tbody = document.getElementById("liveOrderBody");
+  if (!tbody) return;
+
+  // Remove empty state row
+  const emptyRow = tbody.querySelector(".empty-state-row");
+  if (emptyRow) emptyRow.remove();
+
+  // Prevent duplicate rows
+  if (tbody.querySelector(`[data-id="${normalized.orderId}"]`)) return;
+
+  const tr = document.createElement("tr");
+  tr.classList.add("new-order");
+  tr.dataset.id = normalized.orderId;
+
+  tr.innerHTML = `
+    <td>${normalized.orderId}</td>
+    <td>${normalized.recipient}</td>
+    <td>${normalized.volume}GB</td>
+    <td>${normalized.status}</td>
+  `;
+
+  // Add new orders to the TOP
+  tbody.prepend(tr);
+
+  // Limit rows to last 20
+  while (tbody.children.length > 20) {
+    tbody.removeChild(tbody.lastChild);
   }
 
-  // NEW ORDERS TABLE LAYOUT
-  
-// END NEW ORDERS TABLE LAYOUT
+  // ===== KEEP EXISTING FEATURES =====
+  createOrUpdateStatusCard(normalized); // popup card
+  updateLiveOrderCard(normalized);      // legacy compatibility
 
-  // ✅ THIS is what makes the bottom card appear
-  createOrUpdateStatusCard(normalized); // Popup
-
-
-
-  updateLiveOrderCard(normalized); // Live
-
-  // ✅ THIS is what keeps it updating live
   const idToPoll = normalized.orderId || normalized.reference;
   if (idToPoll) startAutoPolling(idToPoll);
 }
+
+// handleNewOrder ends//
+
 
 
 
