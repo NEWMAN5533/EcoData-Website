@@ -5035,19 +5035,30 @@ WELCOME CARD
   box-shadow:   1px 1px 3px rgb(151, 147, 147),  -1px -1px 3px rgb(189, 184, 184);
 }
 
-.welcome-top-left{
- display: none !important;
+.dark-mode .welcome-top{
+  margin: .2rem;
+}
 
+.welcome-top-left{
+ display: flex;
 }
 
 
 .welcome-top-left p{
   width: max-content;
-  color: rgb(18, 22, 31);
-  font-weight: 600;
-  font-size: .9rem !important;
+  height: 100%;
+  color: var(--welcome-card-border);
+  font-weight: 900;
+  font-size: .7rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  transform: rotateY(10deg);
+}
+
+.dark-mode .welcome-top-left p{
+  width: 100%;
+  height: 100%;
+  color: var(--welcome-card-border);
+  font-weight: 900;
+  font-family: system-ui, -apple-system,
 }
 
 /**
@@ -5091,6 +5102,10 @@ WELCOME CARD
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+
+  .dark-mode .welcome-bottom{
+    padding-bottom: .6rem;
   }
 
   .close-time {
