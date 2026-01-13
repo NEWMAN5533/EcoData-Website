@@ -115,7 +115,23 @@
 
   
 </head>
-<body>
+<body class="loading">
+
+<!---SKELETON UI-->
+<div id="skeleton">
+  <div class="sk-card"></div>
+  <div class="sk-line"></div>
+  <div class="sk-line"></div>
+  <div class="sk-line short"></div>
+
+  <div class="sk-card"></div>
+  <div class="sk-line"></div>
+  <div class="sk-line short"></div>
+</div>
+
+
+<div id="app">
+
 
 <nav class="navbar">
 <div class="nav-left">
@@ -1673,6 +1689,20 @@
   </div>
 </div>
 
+<!---AUTO SCROLL-->
+<div class="floating-scroll">
+  <img src="./css/icons/more.png.png" alt="arrow-icon" loading="lazy">
+  <small>Scroll</small>
+</div>
+
+
+
+
+<!----skeleton ui end div-->
+</div>
+
+
+
 
 
 
@@ -1920,12 +1950,12 @@ if (o.status === "delivered") {
 
 
 
-
-<!---AUTO SCROLL-->
-<div class="floating-scroll">
-  <img src="./css/icons/more.png.png" alt="arrow-icon" loading="lazy">
-  <small>Scroll</small>
-</div>
+<!---skeleton js-->
+<script>
+  window.addEventListener("load", () => {
+    document.body.classList.remove("loading");
+  });
+</script>
 
 
 <!----POPUP/HIDDEN CARD-->
