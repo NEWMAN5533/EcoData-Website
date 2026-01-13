@@ -5053,7 +5053,7 @@ WELCOME CARD
 .dark-mode .welcome-top-left p{
   color: var(--welcome-card-border);
   font-weight: 900;
-  font-size: .6rem;
+  font-size: .65rem;
   font-family: system-ui, -apple-system,
 }
 
@@ -5106,9 +5106,6 @@ WELCOME CARD
     justify-content: space-between;
   }
 
-  .dark-mode .welcome-bottom{
-    padding-bottom: .6rem;
-  }
 
   .close-time {
     width: 35;
@@ -5162,7 +5159,7 @@ WELCOME CARD
       font-size: .97rem;
       font-weight: 500;
       margin-right: .5rem;
-      margin-top: 2.4rem;
+      margin-top: 2.2rem;
     }
 
 
