@@ -162,7 +162,7 @@ margin-bottom: .1rem;
   justify-content: center;
   z-index: 9999;
   overflow: hidden;
-  margin-top: .4rem;
+  margin-top: .8rem;
   background: rgb(238, 238, 240);
   margin-bottom: 1rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
@@ -220,7 +220,6 @@ margin-bottom: .1rem;
   overflow-y: auto;
   overflow-x: auto;
   scrollbar-width: thin;
-  scrollbar-base-color: rgb(212, 207, 207);
   max-height: 150px;
   margin-bottom: 1rem;
   position: relative;
@@ -5390,7 +5389,10 @@ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 
-
+.live-order-wrp{
+  width: 100%;
+  max-width: 97%;
+}
 
 
 
