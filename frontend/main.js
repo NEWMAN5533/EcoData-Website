@@ -393,21 +393,15 @@ function getStatusClass(status) {
 // LIVE ORDER 
 // LIVE ORDER (table-compatible)
 function updateLiveOrderCard(order) {
-  if (!order || !order.orderId) return;
+  if (!order?.orderId) return;
 
-  const status = (order.status || "pending").toLowerCase();
+  const row = document.querySelector(`.live-row[data-id="${order.orderId}"]`);
+  if (!row) return;
 
-  // Find existing row by orderId
-  const row = document.querySelector(
-    `#liveOrderBody tr[data-id="${order.orderId}"]`
-  );
-
-  if (!row) return; // row not yet rendered
-
-  // Status cell = last column
-  const statusCell = row.children[3];
+  const statusCell = row.querySelector(".status-cell");
   if (!statusCell) return;
 
+  const status = (order.status || "pending").toLowerCase();
   statusCell.innerHTML = `
     <span class="status-badge ${getStatusClass(status)}">
       ${status}
@@ -627,35 +621,35 @@ function handleNewOrder(returnedOrder) {
   localStorage.setItem("lastOrderId", normalized.orderId);
 
   // ===== LIVE TABLE UPDATE =====
-  const tbody = document.getElementById("liveOrderBody");
-  if (!tbody) return;
+// NEW ORDERS TABLE LAYOUT
+const tableBody = document.getElementById("liveOrderRows");
+if (!tableBody || !normalized.orderId) return;
 
-  // Remove empty state row
-  const emptyRow = tbody.querySelector(".empty-state-row");
-  if (emptyRow) emptyRow.remove();
+// Remove empty state once
+const emptyRow = tableBody.querySelector(".empty-state");
+if (emptyRow) emptyRow.remove();
 
-  // Prevent duplicate rows
-  if (tbody.querySelector(`[data-id="${normalized.orderId}"]`)) return;
+// Prevent duplicate rows
+if (tableBody.querySelector(`.live-row[data-id="${normalized.orderId}"]`)) return;
 
-  const tr = document.createElement("tr");
-  tr.classList.add("new-order");
-  tr.dataset.id = normalized.orderId;
+// Create a new row
+const row = document.createElement("div");
+row.className = "live-row";
+row.dataset.id = normalized.orderId;
 
-  tr.innerHTML = `
-    <td>${normalized.orderId}</td>
-    <td>${normalized.recipient}</td>
-    <td>${normalized.volume}GB</td>
-    <td>${normalized.status}</td>
-  `;
+row.innerHTML = `
+  <span class="order-id">${normalized.orderId}</span>
+  <span class="bundle">${normalized.volume}GB</span>
+  <span class="recipient">${normalized.recipient}</span>
+  <span class="status-cell">
+    <span class="status-badge ${getStatusClass(normalized.status)}">
+      ${normalized.status}
+    </span>
+  </span>
+`;
 
-  // Add new orders to the TOP
-  tbody.prepend(tr);
-
-  // Limit rows to last 20
-  while (tbody.children.length > 20) {
-    tbody.removeChild(tbody.lastChild);
-  }
-
+// Add newest orders on top
+tableBody.prepend(row);
   // ===== KEEP EXISTING FEATURES =====
   createOrUpdateStatusCard(normalized); // popup card
   updateLiveOrderCard(normalized);      // legacy compatibility
