@@ -220,17 +220,17 @@ margin-bottom: .1rem;
   overflow-y: auto;
   overflow-x: auto;
   scrollbar-width: thin;
-  max-height: 150px;
+  max-height: 140px;
   margin-bottom: 1rem;
   position: relative;
   z-index: 10;
 }
 
 .live-order-body {
-  height: 250px;
+  height: 160px;
   scroll-behavior: smooth;
-  background: rgb(212, 207, 207);
-  border: 1px solid white;;
+  background: rgba(212, 207, 207, 0.829);
+  border: 1px solid rgb(230, 225, 225);;
   margin-bottom: .3rem;
   z-index: -10;
 
@@ -5392,6 +5392,7 @@ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 .live-order-wrp{
   width: 100%;
   max-width: 97%;
+  box-shadow: 2px 2px 6px rgba(22, 22, 22, 0.3), -2px -2px 6px rgba(27, 27, 27, 0.3);
 }
 
 
