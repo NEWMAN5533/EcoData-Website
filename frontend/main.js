@@ -594,6 +594,10 @@ function startAutoPolling(orderIdOrRef) {
 function handleNewOrder(returnedOrder) {
   if (!returnedOrder) return;
 
+  // 🔑 Get EcoData bundle (from button.dataset storage)
+  const storedBundle =
+    JSON.parse(localStorage.getItem("pendingOrderBundle")) || {};
+
   // Normalize Swift response
   const normalized = {
     orderId:
@@ -610,15 +614,13 @@ function handleNewOrder(returnedOrder) {
       returnedOrder.recipient ||
       "-",
 
-    volume:
-      returnedOrder.items?.[0]?.volume ??
-      returnedOrder.volume ??
-      "-"
+    // ✅ FIX: Always from EcoData dataset
+    volume: storedBundle.size || "--",
   };
 
   if (!normalized.orderId) return;
 
-  // Persist last order
+  // Persist last order ID
   localStorage.setItem("lastOrderId", normalized.orderId);
 
   // ---------- LIVE ORDERS TABLE ----------
@@ -651,16 +653,52 @@ function handleNewOrder(returnedOrder) {
   // Add newest on top
   tableBody.prepend(row);
 
+  // save for refresh persistence
+  saveLiveOrder(normalized);
+
   // ---------- POPUP STATUS CARD ----------
   createOrUpdateStatusCard(normalized);
 
   // ---------- LIVE STATUS POLLING ----------
-  const idToPoll = normalized.orderId;
-  if (idToPoll) startAutoPolling(idToPoll);
+  startAutoPolling(normalized.orderId);
 }
-
 // handleNewOrder ends//
 
+
+// ---------- LIVE ORDERS PERSISTENCE ----------
+document.addEventListener("DOMContentLoaded", () => {
+  const tableBody = document.getElementById("liveOrderRows");
+  if (!tableBody) return;
+
+  const orders = loadLiveOrders();
+  tableBody.innerHTML = "";
+
+  if (!orders.length) {
+    tableBody.innerHTML = `<p class="empty-state">No recent orders yet</p>`;
+    return;
+  }
+
+  orders.forEach(order => {
+    const row = document.createElement("div");
+    row.className = "live-row";
+    row.dataset.id = order.orderId;
+
+    row.innerHTML = `
+      <span>${order.orderId}</span>
+      <span>${order.volume}GB</span>
+      <span>${order.recipient}</span>
+      <span class="status-cell">
+        <span class="status-badge ${getStatusClass(order.status)}">
+          ${order.status}
+        </span>
+      </span>
+    `;
+
+    tableBody.appendChild(row);
+  });
+});
+
+// handleNewOrders Dom ends//
 
 
 
