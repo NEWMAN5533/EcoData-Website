@@ -675,7 +675,7 @@ function handleNewOrder(returnedOrder) {
       "-",
 
     // ✅ FIX: Always from EcoData dataset
-    volume: `${ecoTotals.gb}`,
+    volume: selectedBundle?.size || returnedOrder.volume || 0,
   };
 
   if (!normalized.orderId) return;
