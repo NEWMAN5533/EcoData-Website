@@ -591,25 +591,6 @@ function startAutoPolling(orderIdOrRef) {
  * 
  * 
  */
-// -----LIVE ORDER STORAGE------
-const LIVE_ORDERS_KEY = "ecoLiveOrders";
-
-
-function saveLiveOrder(order) {
-  if (!order || !order.orderId) return;
-
-  const existing =
-    JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
-
-  // Remove old version if exists
-  const filtered = existing.filter(o => o.orderId !== order.orderId);
-
-  // Add newest on top
-  filtered.unshift(order);
-
-  localStorage.setItem(LIVE_ORDERS_KEY, JSON.stringify(filtered));
-}
-
 // Load live orders on page refresh
 
 function loadLiveOrders() {
@@ -631,6 +612,41 @@ function loadLiveOrders() {
     renderLiveOrderRow(order);
   });
 }
+
+
+
+// RENDER LIVE ORDER ROW
+
+function renderLiveOrderRow(order) {
+  const tableBody = document.getElementById("liveOrderRows");
+  if (!tableBody) return;
+
+  // Remove empty placeholder
+  const empty = tableBody.querySelector(".empty-state");
+  if (empty) empty.remove();
+
+  // If row exists → update only
+  let row = tableBody.querySelector(`[data-id="${order.orderId}"]`);
+
+  if (!row) {
+    row = document.createElement("div");
+    row.className = "live-row";
+    row.dataset.id = order.orderId;
+    tableBody.prepend(row);
+  }
+
+  row.innerHTML = `
+    <span>${order.orderId}</span>
+    <span>${order.volume}GB</span>
+    <span>${order.recipient}</span>
+    <span class="status-cell">
+      <span class="status-badge ${getStatusClass(order.status)}">
+        ${order.status}
+      </span>
+    </span>
+  `;
+}
+
 
 
 // ---------- LIVE ORDER CARD ---------
@@ -711,37 +727,25 @@ function handleNewOrder(returnedOrder) {
 // handleNewOrder ends//
 
 
-// RENDER LIVE ORDER ROW
+// -----LIVE ORDER STORAGE------
+const LIVE_ORDERS_KEY = "ecoLiveOrders";
 
-function renderLiveOrderRow(order) {
-  const tableBody = document.getElementById("liveOrderRows");
-  if (!tableBody) return;
 
-  // Remove empty placeholder
-  const empty = tableBody.querySelector(".empty-state");
-  if (empty) empty.remove();
+function saveLiveOrder(order) {
+  if (!order || !order.orderId) return;
 
-  // If row exists → update only
-  let row = tableBody.querySelector(`[data-id="${order.orderId}"]`);
+  const existing =
+    JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
 
-  if (!row) {
-    row = document.createElement("div");
-    row.className = "live-row";
-    row.dataset.id = order.orderId;
-    tableBody.prepend(row);
-  }
+  // Remove old version if exists
+  const filtered = existing.filter(o => o.orderId !== order.orderId);
 
-  row.innerHTML = `
-    <span>${order.orderId}</span>
-    <span>${order.volume}GB</span>
-    <span>${order.recipient}</span>
-    <span class="status-cell">
-      <span class="status-badge ${getStatusClass(order.status)}">
-        ${order.status}
-      </span>
-    </span>
-  `;
+  // Add newest on top
+  filtered.unshift(order);
+
+  localStorage.setItem(LIVE_ORDERS_KEY, JSON.stringify(filtered));
 }
+
 
 
 // ---------- LIVE ORDERS PERSISTENCE ----------
