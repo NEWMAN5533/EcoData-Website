@@ -329,6 +329,21 @@ margin-bottom: .1rem;
   padding: 12px 14px;
 }
 
+.live-order-row{
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1.4fr 1fr;
+  gap: 10px;
+  padding: 12px 14px;
+  font-size: .7rem;
+  color: #333;
+  border-bottom: 1px solid #dfdbdbde;
+  }
+
+  .live-order-row:hover{
+    background: #f7fafa;
+  }
+
+
 .live-order-header {
   background: #ffffffcc;
   font-size: 12px;
@@ -458,19 +473,6 @@ margin-bottom: .1rem;
   font-size: .85rem;
 }
 
-.live-order-row{
-  display: grid;
-  grid-template-columns: 1.4fr 1fr 1.6fr 1fr;
-  gap: 10px;
-  padding: 12px 16px;
-  font-size: .8rem;
-  color: #333;
-  border-bottom: 1px solid #eee;
-  }
-
-  .live-order-row:hover{
-    background: #f7fafa;
-  }
 
 
 
