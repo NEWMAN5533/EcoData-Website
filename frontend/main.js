@@ -594,21 +594,43 @@ function startAutoPolling(orderIdOrRef) {
 // -----LIVE ORDER STORAGE------
 const LIVE_ORDERS_KEY = "ecoLiveOrders";
 
+
 function saveLiveOrder(order) {
-  const existing = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
+  if (!order || !order.orderId) return;
 
-  // prevent duplicates
-  if (existing.some(o => o.orderId === order.orderId)) return;
+  const existing =
+    JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
 
-  existing.unshift(order); // newest first
-  localStorage.setItem(LIVE_ORDERS_KEY, JSON.stringify(existing.slice(0, 20)));
+  // Remove old version if exists
+  const filtered = existing.filter(o => o.orderId !== order.orderId);
+
+  // Add newest on top
+  filtered.unshift(order);
+
+  localStorage.setItem(LIVE_ORDERS_KEY, JSON.stringify(filtered));
 }
+
+// Load live orders on page refresh
 
 function loadLiveOrders() {
-  return
-  JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
-}
+  const tableBody = document.getElementById("liveOrderRows");
+  if (!tableBody) return;
 
+  const orders =
+    JSON.parse(localStorage.getItem("ecoLiveOrders")) || [];
+
+  tableBody.innerHTML = "";
+
+  if (!orders.length) {
+    tableBody.innerHTML =
+      `<p class="empty-state">No recent orders yet</p>`;
+    return;
+  }
+
+  orders.forEach(order => {
+    renderLiveOrderRow(order);
+  });
+}
 
 
 // ---------- LIVE ORDER CARD ---------
@@ -637,7 +659,7 @@ function handleNewOrder(returnedOrder) {
       "-",
 
     // ✅ FIX: Always from EcoData dataset
-    volume: Number(storedBundle.size || returnedOrder.volume || 0),
+    volume: `${ecoTotals.gb}`,
   };
 
   if (!normalized.orderId) return;
@@ -678,6 +700,8 @@ function handleNewOrder(returnedOrder) {
   // save for refresh persistence
   saveLiveOrder(normalized);
 
+  renderLiveOrderRow(normalized);
+
   // ---------- POPUP STATUS CARD ----------
   createOrUpdateStatusCard(normalized);
 
@@ -687,39 +711,62 @@ function handleNewOrder(returnedOrder) {
 // handleNewOrder ends//
 
 
-// ---------- LIVE ORDERS PERSISTENCE ----------
-document.addEventListener("DOMContentLoaded", () => {
+// RENDER LIVE ORDER ROW
+
+function renderLiveOrderRow(order) {
   const tableBody = document.getElementById("liveOrderRows");
   if (!tableBody) return;
 
-  const orders = loadLiveOrders();
+  // Remove empty placeholder
+  const empty = tableBody.querySelector(".empty-state");
+  if (empty) empty.remove();
+
+  // If row exists → update only
+  let row = tableBody.querySelector(`[data-id="${order.orderId}"]`);
+
+  if (!row) {
+    row = document.createElement("div");
+    row.className = "live-row";
+    row.dataset.id = order.orderId;
+    tableBody.prepend(row);
+  }
+
+  row.innerHTML = `
+    <span>${order.orderId}</span>
+    <span>${order.volume}GB</span>
+    <span>${order.recipient}</span>
+    <span class="status-cell">
+      <span class="status-badge ${getStatusClass(order.status)}">
+        ${order.status}
+      </span>
+    </span>
+  `;
+}
+
+
+// ---------- LIVE ORDERS PERSISTENCE ----------
+document.addEventListener("DOMContentLoaded", () => {
+
+  loadLiveOrders();
+
+  const tableBody = document.getElementById("liveOrderRows");
+  if (!tableBody) return;
+
+  const orders =
+    JSON.parse(localStorage.getItem("ecoLiveOrders")) || [];
+
   tableBody.innerHTML = "";
 
   if (!orders.length) {
-    tableBody.innerHTML = `<p class="empty-state">No recent orders yet</p>`;
+    tableBody.innerHTML =
+      `<p class="empty-state">No recent orders yet</p>`;
     return;
   }
 
   orders.forEach(order => {
-    const row = document.createElement("div");
-    row.className = "live-row";
-    row.dataset.id = order.orderId;
-
-    row.innerHTML = `
-      <span>${order.orderId}</span>
-      <span>${order.volume}GB</span>
-      <span>${order.recipient}</span>
-      <span class="status-cell">
-        <span class="status-badge ${getStatusClass(order.status)}">
-          ${order.status}
-        </span>
-      </span>
-    `;
-
-    tableBody.appendChild(row);
+    renderLiveOrderRow(order);
   });
 });
-
 // handleNewOrders Dom ends//
 
 
