@@ -336,6 +336,8 @@ margin-bottom: .1rem;
   padding: 12px 14px;
   font-size: .7rem;
   color: #333;
+  margin-top: .2rem;
+  margin-left: .3rem;
   border-bottom: 1px solid #dfdbdbde;
   }
 
@@ -5618,6 +5620,8 @@ pointer-events: none; }
   text-transform: capitalize;
   font-size: 0.75rem;
 }
+
+
 
 
 
