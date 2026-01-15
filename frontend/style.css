@@ -5638,7 +5638,7 @@ color: rgb(220, 244, 252);
 font-weight: 600 }      /* orange */
 .status-processing { background: #c08018d2;
   color: rgba(255, 251, 1, 0.863)smoke; }   /* blue */
-.status-delivered { background: rgba(35, 109, 66, 0.575);
+.status-delivered { background: rgba(21, 231, 108, 0.699);
 color: rgb(47, 255, 175); 
 font-weight: 600}    /* green */
 .status-failed { background: #e74c3c; }       /* red */
