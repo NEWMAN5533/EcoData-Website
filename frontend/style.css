@@ -5633,9 +5633,14 @@ pointer-events: none; }
 
 
 /* Status color classes */
-.status-pending { background: #35a8b8d2 ; }      /* orange */
-.status-processing { background: #d68d18d0;; }   /* blue */
-.status-delivered { background: #23c566ec; }    /* green */
+.status-pending { background: rgba(57, 121, 173, 0.644);
+color: rgb(220, 244, 252);
+font-weight: 600 }      /* orange */
+.status-processing { background: #c08018d2;
+  color: rgba(255, 251, 1, 0.863)smoke; }   /* blue */
+.status-delivered { background: rgba(35, 109, 66, 0.575);
+color: rgb(47, 255, 175); 
+font-weight: 600}    /* green */
 .status-failed { background: #e74c3c; }       /* red */
 .status-cancelled { background: #9e9e9e; }    /* gray */
 .status-refunded { background: #795548; }     /* brown */
