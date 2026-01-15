@@ -588,7 +588,29 @@ function startAutoPolling(orderIdOrRef) {
  * Example usage inside orderBundle function after successful response:
  *    const returnedOrder = result.order || result.swift || result; 
  *    handleNewOrder(returnedOrder);
+ * 
+ * 
  */
+// -----LIVE ORDER STORAGE------
+const LIVE_ORDERS_KEY = "ecoLiveOrders";
+
+function saveLiveOrder(order) {
+  const existing = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
+
+  // prevent duplicates
+  if (existing.some(o => o.orderId === order.orderId)) return;
+
+  existing.unshift(order); // newest first
+  localStorage.setItem(LIVE_ORDERS_KEY, JSON.stringify(existing.slice(0, 20)));
+}
+
+function loadLiveOrders() {
+  return
+  JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
+}
+
+
+
 // ---------- LIVE ORDER CARD ---------
 
 function handleNewOrder(returnedOrder) {
@@ -615,7 +637,7 @@ function handleNewOrder(returnedOrder) {
       "-",
 
     // ✅ FIX: Always from EcoData dataset
-    volume: storedBundle.size || "--",
+    volume: Number(storedBundle.size || returnedOrder.volume || 0),
   };
 
   if (!normalized.orderId) return;
@@ -699,6 +721,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // handleNewOrders Dom ends//
+
+
 
 
 
