@@ -5652,18 +5652,17 @@ pointer-events: none; }
 
 /* Status color classes */
 .status-pending { background: rgba(161, 207, 245, 0.548);
-color: rgb(59, 198, 216);
-font-weight: 500 }      /* orange */
-.status-processing { background: #eff161f1;
-  color: rgba(136, 97, 25, 0.863);
-font-weight: 500 }   /* blue */
-.status-delivered { background: rgba(171, 241, 212, 0.788);
-color: rgb(14, 99, 28); 
-font-weight: 500}    /* green */
+color: rgb(59, 198, 216);}      /* orange */
+.status-processing { background: #f9fd02f3;
+  color: rgba(112, 83, 28, 0.973); }   /* blue */
+.status-delivered { background: rgba(14, 206, 174, 0.753);
+color: rgb(25, 87, 48);}    /* green */
 .status-failed { background: #e74c3c; }       /* red */
 .status-cancelled { background: #9e9e9e; }    /* gray */
 .status-refunded { background: #795548; }     /* brown */
 .status-resolved { background: #27ae60; }     /* dark green */
+
+
 
 /* Manual check result box */
 #statusResult { 
