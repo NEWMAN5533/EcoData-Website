@@ -169,6 +169,9 @@ async function orderBundle(network, recipient, packageName, size, reference) {
       return;
     }
 
+    // show processing snackbar
+    showSnackBar("📱 Processing Order...", "info", 8000);
+
     const API_BASE =
       window.location.hostname === "localhost"
         ? "http://localhost:3000"
@@ -190,11 +193,11 @@ async function orderBundle(network, recipient, packageName, size, reference) {
     const result = await response.json();
 
     if (!result.success) {
-      showSnackBar(`❌ Failed: ${result.message || "Unknown error"}`);
+      showSnackBar(`❌ ${result.message || "Order failed"}`, "error", 5000);
       return;
     }
 
-    showSnackBar("📱✅ Order Placed successfully!");
+    showSnackBar("📱✅ Order Placed successfully!", "sucsess", 4000);
 
     // 🔴 Swift live order
     const returnedOrder = result.order?.order || result.order || result;
@@ -223,7 +226,7 @@ async function orderBundle(network, recipient, packageName, size, reference) {
 
   } catch (err) {
     console.error("⚠ Server error:", err);
-    showSnackBar("⚠ Server error. Please try again later.");
+    showSnackBar("⚠ Server error. Please try again.", "error", 5000);
   }
 }
 //ends//
@@ -903,38 +906,49 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // SNACKBAR SECTION //
 // ===== SNACKBAR FUNCTION ===== //
-function showSnackBar(message, type = "info") {
-  // Remove existing snackbar if visible
-  const existing = document.querySelector(".snackbar");
-  if (existing) existing.remove();
+let snackbarTimeout = null;
 
-  // Create snackbar element
-  const snackbar = document.createElement("div");
-  snackbar.className = "snackbar";
+function showSnackBar(message, type = "info", duration = 4000) {
+  let snackbar = document.querySelector(".snackbar");
 
-  // Color scheme based on type
-  if (type === "success") snackbar.style.background = "#7adabaff";   // green
-  else if (type === "error") snackbar.style.background = "#dc3545"; // red
-  else if (type === "warning") snackbar.style.background = "#ffc107"; // yellow
-  else snackbar.style.background = "rgba(7, 29, 26, 0.86)"; // default dark
+  // Create snackbar if it doesn't exist
+  if (!snackbar) {
+    snackbar = document.createElement("div");
+    snackbar.className = "snackbar";
 
-  snackbar.textContent = message;
+    snackbar.innerHTML = `
+      <span class="snackbar-text"></span>
+      <div class="snackbar-progress"></div>
+    `;
 
-  // Add snackbar to the body
-  document.body.appendChild(snackbar);
+    document.body.appendChild(snackbar);
+  }
 
-  // Force reflow (to trigger CSS animation)
-  void snackbar.offsetWidth;
+  // Update text
+  snackbar.querySelector(".snackbar-text").textContent = message;
 
-  // Show snackbar
+  // Color by type
+  if (type === "success") snackbar.style.background = "rgba(7, 29, 26, 0.95)";
+  else if (type === "error") snackbar.style.background = "#dc3545";
+  else if (type === "warning") snackbar.style.background = "#ffc107";
+  else snackbar.style.background = "rgba(7, 29, 26, 0.95)";
+
+  // Reset progress animation
+  const progress = snackbar.querySelector(".snackbar-progress");
+  progress.style.animation = "none";
+  void progress.offsetWidth;
+  progress.style.animation = `snackbar-progress ${duration}ms linear forwards`;
+
   snackbar.classList.add("show");
 
-  // Hide snackbar after 3 seconds
-  setTimeout(() => {
+  // Clear previous timeout
+  if (snackbarTimeout) clearTimeout(snackbarTimeout);
+
+  snackbarTimeout = setTimeout(() => {
     snackbar.classList.remove("show");
-    setTimeout(() => snackbar.remove(), 300);
-},4000);
-};
+  }, duration);
+}
+// snackbar ends
 
 
 // SCROLL TO SECTION BY CLICKING ON THE CARD-BOX
@@ -1008,4 +1022,5 @@ airtelScrollBtn.addEventListener("click", () => {
     window.open(whatsappURL, "_blank");
     document.getElementById("whatsappMessage").value = ""; // clear after sending
 });
+
 
