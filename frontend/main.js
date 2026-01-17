@@ -548,56 +548,41 @@ async function checkOrderStatusOnce(orderIdOrRef) {
 
 
 function startAutoPolling(orderIdOrRef) {
-
-  setInterval(() => {
-    const orders = getStoredOrders();
-    orders.forEach(order => {
-      if (
-        order.status !== "delivered" && order.status !== "failed"
-      ) {
-        pollOrderStatus(order.orderId);
-      }
-    });
-  } , STATUS_POLL_INTERVAL);
-
-  const statusResult = 
-  document.getElementById("statusResult");
-  if (statusResult) (
-    statusResult.innerHTML = ""
-  );
-  // clear existing poll
+  // Stop any existing polling first
   stopStatusPolling();
 
-  // initial immediate check
-  (async () => {
-    const order = await checkOrderStatusOnce(orderIdOrRef);
-  if (order) {
-  createOrUpdateStatusCard(order); // ✅ Update main color-coded card too
-  const status = (order.status || "pending").toLowerCase();
-  const desc = getStatusTextMapping(status);
+  const statusResult = document.getElementById("statusResult");
+  if (statusResult) statusResult.innerHTML = "";
 
-}
+  // Initial immediate check for this specific order
+  (async () => {
+    if (!orderIdOrRef) return;
+    const order = await checkOrderStatusOnce(orderIdOrRef);
+    if (order) {
+      createOrUpdateStatusCard(order); // popup card
+      updateLiveOrderCard(order);      // table row
+      updateStatusBadge(order.status || "pending");
+      saveLiveOrder(order);            // persist status
+    }
   })();
 
-  // schedule repeated checks
- _statusPollTimer = setInterval(async () => {
-  const order = await checkOrderStatusOnce(orderIdOrRef);
+  // Poll all stored orders for updates (except terminal)
+  _statusPollTimer = setInterval(async () => {
+    const orders = getStoredOrders();
+    for (let order of orders) {
+      if (isTerminalStatus(order.status)) continue; // skip delivered/failed
+      const latest = await checkOrderStatusOnce(order.orderId);
+      if (!latest) continue;
 
-  if (!order) return;
-
-  const latestStatus = (order.status || "pending").toLowerCase();
-
-  createOrUpdateStatusCard(order);   // popup card
-  updateLiveOrderCard(order);        // permanent card
-
-  updateStatusBadge(latestStatus);   // 🔥 animation happens here
-
-  if (isTerminalStatus(latestStatus)) {
-    stopStatusPolling();
-  }
-}, STATUS_POLL_INTERVAL);
+      saveLiveOrder(latest);           // merge status
+      renderLiveOrderRow(latest);      // update table
+      if (orderIdOrRef === latest.orderId) {
+        createOrUpdateStatusCard(latest);  // popup card only for this order
+        updateStatusBadge(latest.status || "pending");
+      }
+    }
+  }, STATUS_POLL_INTERVAL);
 }
-
 
 
 
@@ -618,22 +603,22 @@ function loadLiveOrders() {
   const tableBody = document.getElementById("liveOrderRows");
   if (!tableBody) return;
 
-  const orders =
-    JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
+  const orders = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
 
-  tableBody.innerHTML = "";
+  // Clear placeholder but do NOT remove rows with delivered orders
+  const empty = tableBody.querySelector(".empty-state");
+  if (empty) empty.remove();
 
-  if (!orders.length) {
-    tableBody.innerHTML =
-      `<p class="empty-state">No recent orders yet</p>`;
-    return;
-  }
-
+  // Sort by createdAt descending
   orders
-  .sort((a, b) => b.createdAt - a.createdAt)
-  .forEach(renderLiveOrderRow);
-  };
+    .sort((a, b) => b.createdAt - a.createdAt)
+    .forEach(renderLiveOrderRow);
 
+  // Show placeholder if table is empty
+  if (!orders.length) {
+    tableBody.innerHTML = `<p class="empty-state">No recent orders yet</p>`;
+  }
+}
 
 
 
@@ -646,7 +631,6 @@ function renderLiveOrderRow(order) {
   const empty = tableBody.querySelector(".empty-state");
   if (empty) empty.remove();
 
-  // If row exists → update only
   let row = tableBody.querySelector(`[data-id="${order.orderId}"]`);
 
   if (!row) {
@@ -674,10 +658,6 @@ function renderLiveOrderRow(order) {
 
 function handleNewOrder(returnedOrder) {
   if (!returnedOrder) return;
-
-  // 🔑 Get EcoData bundle (from button.dataset storage)
-  const storedBundle =
-    JSON.parse(localStorage.getItem("pendingOrderBundle")) || {};
 
   // Normalize Swift response
   const normalized = {
@@ -737,8 +717,6 @@ function handleNewOrder(returnedOrder) {
   // save for refresh persistence
   saveLiveOrder(normalized);
 
-  loadLiveOrders();
-
   renderLiveOrderRow(normalized);
 
   // ---------- POPUP STATUS CARD ----------
@@ -759,33 +737,41 @@ const MAX_LIVE_ORDERS = 20;
 function saveLiveOrder(order) {
   if (!order || !order.orderId) return;
 
-  const existing =
-    JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
+  const existing = 
+    JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY) || "[]");
 
   const index = existing.findIndex(o => o.orderId === order.orderId);
 
   if (index !== -1) {
-    // 🔁 Merge update (preserve old data)
+    // Merge without overwriting status if already delivered/failed
     existing[index] = {
       ...existing[index],
       ...order,
+      status: 
+      isTerminalStatus(existing[index].status)
+        ? existing[index].status
+        : order.status,
     };
   } else {
-    // ➕ New order on top
+    // New order on top
     existing.unshift({
       ...order,
       createdAt: order.createdAt || Date.now(),
     });
   }
 
-  // 🧹 Keep only latest N orders
+  // Keep latest N orders
   localStorage.setItem(
     LIVE_ORDERS_KEY,
-    JSON.stringify(existing.slice(0, MAX_LIVE_ORDERS))
+    JSON.stringify(existing.slice(0,
+  MAX_LIVE_ORDERS))
   );
 }
 
 // ends
+
+
+
 
 
 // STATUS PRIORITY LOADER
@@ -798,8 +784,7 @@ const STATUS_PRIORITY = {
 };
 
 function getStoredOrders() {
-  return
-  JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
+  return JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY) || "[]");
 }
 
 function updateLiveOrderStatus(orderId, newStatus) {
