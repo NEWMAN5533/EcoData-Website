@@ -619,7 +619,7 @@ function loadLiveOrders() {
   if (!tableBody) return;
 
   const orders =
-  getStoredOrders();
+    JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
 
   tableBody.innerHTML = "";
 
@@ -736,6 +736,8 @@ function handleNewOrder(returnedOrder) {
 
   // save for refresh persistence
   saveLiveOrder(normalized);
+
+  loadLiveOrders();
 
   renderLiveOrderRow(normalized);
 
