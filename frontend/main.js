@@ -545,7 +545,20 @@ async function checkOrderStatusOnce(orderIdOrRef) {
 }
 }
 
+
+
 function startAutoPolling(orderIdOrRef) {
+
+  setInterval(() => {
+    const orders = getStoredOrders();
+    orders.forEach(order => {
+      if (
+        order.status !== "delivered" && order.status !== "failed"
+      ) {
+        pollOrderStatus(order.orderId);
+      }
+    });
+  } , STATUS_POLL_INTERVAL);
 
   const statusResult = 
   document.getElementById("statusResult");
@@ -585,6 +598,11 @@ function startAutoPolling(orderIdOrRef) {
 }, STATUS_POLL_INTERVAL);
 }
 
+
+
+
+
+
 // ---------- AFTER PURCHASE: show and poll ----------
 /**
  * Call this after your backend returns an order reply.
@@ -601,7 +619,7 @@ function loadLiveOrders() {
   if (!tableBody) return;
 
   const orders =
-    JSON.parse(localStorage.getItem("ecoLiveOrders")) || [];
+  getStoredOrders();
 
   tableBody.innerHTML = "";
 
@@ -611,15 +629,15 @@ function loadLiveOrders() {
     return;
   }
 
-  orders.forEach(order => {
-    renderLiveOrderRow(order);
-  });
-}
+  orders
+  .sort((a, b) => b.createdAt - a.createdAt)
+  .forEach(renderLiveOrderRow);
+  };
+
 
 
 
 // RENDER LIVE ORDER ROW
-
 function renderLiveOrderRow(order) {
   const tableBody = document.getElementById("liveOrderRows");
   if (!tableBody) return;
@@ -730,9 +748,11 @@ function handleNewOrder(returnedOrder) {
 // handleNewOrder ends//
 
 
-// -----LIVE ORDER STORAGE------
-const LIVE_ORDERS_KEY = "ecoLiveOrders";
 
+// ---------- LIVE ORDERS PERSISTENCE ----------
+
+const LIVE_ORDERS_KEY = "ecoLiveOrders";
+const MAX_LIVE_ORDERS = 20;
 
 function saveLiveOrder(order) {
   if (!order || !order.orderId) return;
@@ -740,21 +760,86 @@ function saveLiveOrder(order) {
   const existing =
     JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
 
-  // Remove old version if exists
-  const filtered = existing.filter(o => o.orderId !== order.orderId);
+  const index = existing.findIndex(o => o.orderId === order.orderId);
 
-  // Add newest on top
-  filtered.unshift(order);
+  if (index !== -1) {
+    // 🔁 Merge update (preserve old data)
+    existing[index] = {
+      ...existing[index],
+      ...order,
+    };
+  } else {
+    // ➕ New order on top
+    existing.unshift({
+      ...order,
+      createdAt: order.createdAt || Date.now(),
+    });
+  }
 
-  localStorage.setItem(LIVE_ORDERS_KEY, JSON.stringify(filtered));
+  // 🧹 Keep only latest N orders
+  localStorage.setItem(
+    LIVE_ORDERS_KEY,
+    JSON.stringify(existing.slice(0, MAX_LIVE_ORDERS))
+  );
 }
 
+// ends
 
+
+// STATUS PRIORITY LOADER
+
+const STATUS_PRIORITY = {
+  pending: 1,
+  processing: 2,
+  delivered: 3,
+  failed: 4
+};
+
+function getStoredOrders() {
+  return
+  JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
+}
+
+function updateLiveOrderStatus(orderId, newStatus) {
+  if (!orderId || !newStatus) return;
+
+  const orders = getStoredOrders();
+  const index = orders.findIndex(o => o.orderId === orderId);
+  if (index === -1) return;
+
+  const currentStatus = orders[index].status || "pending";
+  
+  if(STATUS_PRIORITY[newStatus] < STATUS_PRIORITY[currentStatus]) {
+    console.warn(`Blocked downgrade : ${currentStatus} → ${newStatus}`);
+    return;
+}
+
+  orders[index] = {
+    ...orders[index],
+    status: newStatus,
+    updatedAt: Date.now(),
+  };
+
+  localStorage.setItem(LIVE_ORDERS_KEY, JSON.stringify(orders));
+}
+
+// ends
+
+function pollOrderStatus(orderId) {
+  fetch(`check-status/${orderId}`)
+  .then(res => res.json())
+  .then(data => {
+    if (data.status) {
+      updateLiveOrderStatus(orderId, data.status);
+      loadLiveOrders(); // refresh ui
+    }
+  })
+  .catch(err => console.error(err));
+}
+//ends
 
 // ---------- LIVE ORDERS PERSISTENCE ----------
 document.addEventListener("DOMContentLoaded", () => {
-
-  loadLiveOrders();
 
   const tableBody = document.getElementById("liveOrderRows");
   if (!tableBody) return;
@@ -773,6 +858,8 @@ document.addEventListener("DOMContentLoaded", () => {
   orders.forEach(order => {
     renderLiveOrderRow(order);
   });
+  loadLiveOrders();
+  startAutoPolling();
 });
 // handleNewOrders Dom ends//
 
