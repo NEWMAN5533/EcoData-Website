@@ -379,6 +379,12 @@ margin-bottom: .1rem;
   max-height: 200px;
   margin-bottom: 1rem;
   position: relative;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.live-order-card::-webkit-scrollbar{
+  display: none;
 }
 
 .dark-mode .live-order-card{
