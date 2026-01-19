@@ -24,6 +24,8 @@ const API_BASE = (() => {
 let STATUS_POLL_INTERVAL = 5000;
 let _statusPollTimer = null; // to hold the interval timer ID
 
+let selectedBundle = null;
+
 
 // btn events//
 document.addEventListener("DOMContentLoaded", () => {
@@ -83,6 +85,7 @@ function createPhoneModal(callback) {
     callback(recipient);
 };
 }
+
 
 
 // === PAYSTACK PAYMENT (Firebase version) ===
@@ -145,7 +148,6 @@ async function payWithPaystack(network, recipient, packageName, size, price) {
 
 
 // SELECTED BUNDLE FOR UI UPDATE
-let selectedBundle = null;
 
 document.addEventListener("click", (e) => {
   const btn = e.target.closest(".buy-btn");
@@ -1096,5 +1098,30 @@ airtelScrollBtn.addEventListener("click", () => {
     window.open(whatsappURL, "_blank");
     document.getElementById("whatsappMessage").value = ""; // clear after sending
 });
+
+
+// normal & grid js code
+const btn = document.getElementById('selectBtn');
+const dropdown = document.getElementById('dropdown');
+
+btn.onclick = () => {
+  dropdown.style.display =
+    dropdown.style.display === 'block' ? 'none' : 'block';
+};
+
+document.querySelectorAll('.option').forEach(opt => {
+  opt.onclick = () => {
+    btn.innerHTML = `
+      ${opt.dataset.gb}GB 
+      <span>GHS ${opt.dataset.price}</span>
+    `;
+    dropdown.style.display = 'none';
+  };
+});
+
+
+
+
+
 
 

@@ -2942,6 +2942,486 @@ order2 style
 
 
 
+/****
+NEW GRID & NORMAL UI UPDATE (20th/1/2026
+*****/
+.normalGrid-container{
+  width: 100%;
+  max-width: 99%;
+  display: flex;
+  position: relative;
+  justify-self: center;
+  background: transparent;
+  padding: .8rem;
+  height: max-content;
+  flex-direction: column;
+}
+
+
+.normalGrid-container .normalTitle{
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  text-align: start;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  gap: 0;
+  overflow: hidden;
+}
+
+.normalTitle h2{
+  font-size: 1rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: rgb(44, 46, 56);
+  margin-top: -.2rem;
+  opacity: .9;
+}
+
+.normalTitle small{
+  margin-top: -.4rem;
+  color: rgb(92, 98, 107);
+}
+
+/***
+OFFER SELECT
+****/
+/***
+how to style select dropdown
+***/
+.custom-select {
+  position: relative;
+  width: 100%;
+  display: flex;
+  height: 3rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.select-btn {
+  width: 100%;
+  max-width: 80%;
+  height: 2.2rem;
+  background: #ffffff;
+  border: 1px solid rgb(197, 191, 191);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  align-items: center;
+  text-align: center;
+  font-size: .9rem;
+  color: rgb(37, 39, 51);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  padding: 14px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.select-btn span img{
+  width: .9rem;
+  height: .9rem;
+}
+
+.select-dropdown {
+  position: absolute;
+  width: 100%;
+  max-width: 80%;
+  background: #ffffff;
+  border-radius: 14px;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 5rem;
+  gap: .2rem;
+  overflow-y: auto;
+  padding: .6rem;
+  scrollbar-width: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgb(209, 212, 214);
+}
+
+.option {
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  height: 1.8rem;
+  width: 100%;
+  max-width: 99%;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.option:hover{
+  background: rgb(246, 246, 248);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.option span{
+  color: rgb(59, 57, 57);
+  font-size: .7rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 600;
+}
+
+
+
+.option small {
+  background: #43658b;
+  color: #fcfcfc;
+  padding: 5px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  font-size: .65rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 500;
+}
+
+
+/***
+BOTH BTN SELECTOR 
+****/
+.normalOrgridBtn{
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-items: start;
+  margin-top: 1.2rem;
+}
+
+.normalOrgridBtn .normalBtn{
+  width: 5rem;
+  height: 1.9rem;
+  background: linear-gradient(135deg, rgb(236, 127, 25), rgb(253, 168, 10));
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  color: white;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: .9rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.normalOrgridBtn .gridBtn{
+  width: 5rem;
+  height: 1.9rem;
+  background: white;
+  border: 1px solid rgb(235, 229, 229);
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  color: rgb(42, 50, 54);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: .9rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+
+/***
+GRID VIEW
+****/
+
+.view.active{
+  display: block;
+  height: max-content;
+  width: 100%;
+  max-width: 99%;
+  margin-top: .4rem;
+  padding: 1rem 2rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: .4rem;
+  position: relative;
+}
+
+
+
+.selection-btn{
+  width: 100%;
+  max-width: 99%;
+  height: 2.2rem;
+  background: #ffffff;
+  border: 1px solid rgb(197, 191, 191);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  align-items: center;
+  text-align: center;
+  font-size: .9rem;
+  color: rgb(37, 39, 51);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  padding: 14px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.selection-btn span img{
+  width: .9rem;
+  height: .9rem;
+}
+
+
+.single-order{
+width: 100%;
+max-width: 99%;
+flex-wrap: nowrap;
+height: 23rem;
+display: flex;
+padding-top: .4rem;
+align-items: start;
+padding: 1rem;
+justify-content: start;
+gap: .3rem;
+flex-direction: column;
+background: rgb(255, 255, 255);
+border-end-end-radius: 1rem;
+border-end-start-radius: 1rem;
+box-shadow: 0 8px 14px  rgba(56, 55, 55, 0.2);
+}
+
+.single-order small{
+  font-size: .9rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: rgb(48, 52, 58);
+}
+
+.single-order .sel{
+  margin-top: 1rem;
+}
+
+.single-order .normalInput{
+  height: 2rem;
+  width: 100%;
+  background: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgb(218, 208, 208);
+  border-radius: 8px;
+  justify-content: start;
+  align-items: start;
+}
+
+
+/**8
+option
+****/
+.custom-option{
+  width: 100%;
+  height: 11rem;
+  background: transparent;
+}
+
+
+
+
+.custom-option .option-dropdown{
+  position: absolute;
+  width: 100%;
+  max-width: 70%;
+  background: #ffffff;
+  border-radius: 14px;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  justify-self: center;
+  align-items: center;
+  height: 24rem;
+  gap: .2rem;
+  overflow-y: auto;
+  top: -4.2rem;
+  z-index: 999;
+  padding: .4rem;
+  margin: .5rem 0;
+  scrollbar-width: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgb(209, 212, 214);
+}
+
+.optionSelect{
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  height: 2rem;
+  width: 100%;
+  max-width: 99%;
+  justify-content: start;
+  gap: 2rem;
+  margin-top: .4rem;
+  cursor: pointer;
+}
+
+.optionSelect:hover{
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgb(224, 217, 217);
+}
+
+
+.price-badge {
+  background-color: #5dade2; /* light blue */
+  color: #ffffff;
+  margin-right: 4rem;             /* white text */
+  padding: 2px 6px;           /* small padding */
+  border-radius: 8px;         /* rounded corners */
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+
+.optionSelect small{
+  background: #1b48798e;
+  color: #fcfcfc;
+  width: 4rem;
+  height: 1.3rem;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  font-size: .7rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 500;
+  cursor:pointer;
+}
+
+.optionSelect span{
+  color: rgb(70, 80, 85);
+  font-size: .9rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 600;
+}
+
+.selectedModal{
+  width: 100%;
+  max-width: 99%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 .4rem;
+  height: 6rem;
+  background-color: rgba(255, 231, 150, 0.911);
+  margin: 1rem 0;
+  border-radius: .8rem;
+}
+
+/***
+left section
+***/
+.selectedModal .selectedModal-left{
+  width: 100%;
+  max-width: 50%;
+  height: 2.8rem;
+  display: flex;
+  gap: 0;
+  align-items: center;
+  justify-content: start;
+  position:relative;
+  padding-right: 3rem;
+ 
+}
+
+.selectedModal-left-left{
+  width: 100%;
+  max-width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.selectedModal-left-left img{
+  width: 1.5rem;
+  height: 1.5rem;
+  display: none;
+}
+
+.selectedModal-left-right{
+  width: 100%;
+  max-width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  flex-direction: column;
+  font-size: .9rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 600;
+  color: rgb(52, 52, 73); 
+}
+
+.placeHolderPrice small{
+  font-size: .7rem;
+  color: rgb(48, 59, 66);
+}
+
+
+
+
+
+
+
+/***
+ends of left section
+*****/
+
+
+
+
+.selectedModal .selectedModal-right{
+  width: 100%;
+  max-width: 50%;
+  height: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position:relative;
+  padding: .6rem;
+  font-size: .99rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 600;
+  color: rgb(128, 84, 26);
+}
+
+
+.optionBtn-selected{
+  background: #5dade2;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 3px 8px;
+  font-weight: 500;
+}
+
+.single-order .buy-btn{
+  width: 100%;
+  max-width: 99%;
+  height: 2.2rem;
+  background: linear-gradient(135deg,rgb(255, 196, 0),rgb(233, 173, 8));
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  color: white;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: .99rem;
+  cursor: pointer;
+}
+
+
+/****
+NEW GRID & NORMAL UI UPDATE (20th/1/2026 ENDS
+*****/
+
+
 
 
 

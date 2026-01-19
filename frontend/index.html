@@ -400,7 +400,6 @@
   <div class="right-side-btm">
    <small> <strong>NB:</strong> Orders Results are 100% sourced</small>
   </div>
-  
 </div>
   <!----MIDDLE-BELT--->
   <div class="left-side">
@@ -416,9 +415,243 @@
 </section>
 
 
+<!---NEW UI UPDATE (20th-01-2026)--=[grid & normal ui-->
+<section class="normalGrid-container">
+  <!---title-->
+  <div class="normalTitle">
+    <h2>Select MTN Offer</h2>
+    <small>Choose from available MTN data offers</small>
+  </div>
+  <!---offer-select-options-->
+   <div class="custom-select">
+  <button class="select-btn" id="selectBtn">
+    Select Available MTN Offer
+    <span><img src="./css/icons/more.png.png" alt="dropdown"></span>
+  </button>
+
+  <div class="select-dropdown" id="dropdownOffer">
+    <div class="option" data-package="mtn_data_normal_delivery">
+      <span>MTN DATA NORMAL DELIVERY  </span>
+      <small>NON EXPIRY</small>
+    </div>
+  
+    <div class="option" data-package="mtn_data_express_delivery">
+      <span>MTN DATA EXPRESS DELIVERY</span>
+      <small>NON EXPIRY</small>
+    </div>
+  </div>
+</div>
+
+<!----choose grid 0r normal btn-->
+<div class="normalOrgridBtn">
+  <button class="normalBtn" id="normalModeBtn">Normal</button>
+  <button class="gridBtn" id="gridModeBtn">Grid</button>
+</div>
+</section>
+
+<!-----INDIVIDUAL SECTIONS-VIEW TOGGLE---->
+<!----NORMALVIEW-SECTION-->
+<section id="normalView" class="view active">
+  <div class="single-order">
+    <small>Recipient Phone Number</small>
+    <!---phone-input-here-->
+    <input class="normalInput" type="tel" placeholder="e.g 0241234567">
+    <small class="sel">Select Bundle</small>
+
+    <div class="custom-option">
+      <!---visible-btn-->
+      <button class="selection-btn" id="optionBtn">
+    Select package
+    <span><img src="./css/icons/more.png.png" alt="dropdown"></span>
+  </button>
+  <!----option-card-->
+  <div class="dropwrapper">
+    <div class="option-dropdown" id="moveDown">
+      <!---select-1-->
+    <div class="optionSelect" 
+  data-network="mtn"
+  data-package= "mtn_data_normal_delivery"
+  data-size="1"
+  data-price="6">
+      <span>1GB</span>
+      <small>GHS 6</small>
+    </div>
+    <!---select-2-->
+    <div class="optionSelect" 
+  data-network="mtn"
+  data-package= "mtn_data_normal_delivery"
+  data-size="2"
+  data-price="12">
+      <span>2GB</span>
+      <small>GHS 12</small>
+    </div>
+    <!---select-3-->
+    <div class="optionSelect" 
+  data-network="mtn"
+  data-package= "mtn_data_normal_delivery"
+  data-size="3"
+  data-price="17">
+      <span>3GB</span>
+      <small>GHS 17</small>
+    </div>
+    <!---select-4-->
+      <div class="optionSelect" 
+  data-network="mtn"
+  data-package= "mtn_data_normal_delivery"
+  data-size="4"
+  data-price="22">
+      <span>4GB</span>
+      <small>GHS 22</small>
+    </div>
+    <!---select-5-->
+    <div class="optionSelect"
+  data-network="mtn"
+  data-package= "mtn_data_normal_delivery"
+  data-size="5"
+  data-price="26.50">
+      <span>5GB</span>
+      <small>GHS 26.50</small>
+    </div>
+    <!---select-6-->
+    <div class="optionSelect" 
+  data-network="mtn"
+  data-package= "mtn_data_normal_delivery"
+  data-size="6"
+  data-price="32.50">
+      <span>6GB</span>
+      <small>GHS 32.50</small>
+    </div>
+    <!---select-7-->
+      <div class="optionSelect"
+  data-network="mtn"
+  data-package= "mtn_data_normal_delivery"
+  data-size="7"
+  data-price="37">
+      <span>7GB</span>
+      <small>GHS 37</small>
+    </div>
+    <!---select-8-->
+    <div class="optionSelect" 
+  data-network="mtn"
+  data-package= "mtn_data_normal_delivery"
+  data-size="8"
+  data-price="40">
+      <span>8GB</span>
+      <small>GHS 40</small>
+    </div>
+    <!---select-9-->
+    <div class="optionSelect" 
+  data-network="mtn"
+  data-package= "mtn_data_normal_delivery"
+  data-size="9"
+  data-price="44">
+      <span>9GB</span>
+      <small>GHS 44</small>
+    </div>
+    <!---select-10-->
+      <div class="optionSelect" 
+  data-network="mtn"
+  data-package= "mtn_data_normal_delivery"
+  data-size="10"
+  data-price="47">
+      <span>10GB</span>
+      <small>GHS 47</small>
+    </div>
+    <!---select-11-->
+    <div class="optionSelect" 
+  data-network="mtn"
+  data-package= "mtn_data_normal_delivery"
+  data-size="12"
+  data-price="60">
+      <span>12GB</span>
+      <small>GHS 60</small>
+    </div>
+    <!---select-12-->
+    <div class="optionSelect" 
+  data-network="mtn"
+  data-package= "mtn_data_normal_delivery"
+  data-size="15"
+  data-price="68">
+      <span>15GB</span>
+      <small>GHS 68</small>
+    </div>
+    <!---select-13-->
+    <div class="optionSelect" 
+  data-network="mtn"
+  data-package= "mtn_data_normal_delivery"
+  data-size="20"
+  data-price="91">
+      <span>20GB</span>
+      <small>GHS 91</small>
+    </div>
+    <!---select-14-->
+    <div class="optionSelect" 
+  data-network="mtn"
+  data-package= "mtn_data_normal_delivery"
+  data-size="25"
+  data-price="111">
+      <span>25GB</span>
+      <small>GHS 111</small>
+    </div>
+    <!---select-15-->
+    <div class="optionSelect" 
+  data-network="mtn"
+  data-package= "mtn_data_normal_delivery"
+  data-size="30"
+  data-price="130">
+      <span>30GB</span>
+      <small>GHS 130</small>
+    </div>
+    <!---select-16-->
+    <div class="optionSelect" 
+  data-network="mtn"
+  data-package= "mtn_data_normal_delivery"
+  data-size="40"
+  data-price="169">
+      <span>40GB</span>
+      <small>GHS 169</small>
+    </div>
+    <!---select-17-->
+    <div class="optionSelect"
+  data-network="mtn"
+  data-package= "mtn_data_normal_delivery"
+  data-size="50"
+  data-price="215">
+      <span>50GB</span>
+      <small>GHS 215</small>
+    </div>
+    <!---select-ends-->
+  </div>
+  </div>
+
+  <!---selected-bundle-modal-here--->
+  <div class="selectedModal">
+    <div class="selectedModal-left">
+      <div class="selectedModal-left-left">
+        <span><img src="./css/icons/completed.png" alt="selectedData"></span>
+      </div>
+      <div class="selectedModal-left-right">
+        <div class="placeHolderGB"></div>
+        <div class="placeHolderPrice"><small></small></div>
+      </div>
+    </div>
+    <div class="selectedModal-right">
+    </div>
+  </div>
 
 
+    </div>
 
+    <!---buy-btn-->
+    <button id="PlaceOrderBtn" class="buy-btn">Place Order</button>
+  </div>
+</section>
+<!----NORMALVIEW-SECTION-ENDS---->
+
+
+<!---GRIDvIEW-SECTION-->
+<section id="gridView" class="View " style="display: none;">
+  <!---all gridCards-here-->
 <!-----BUNDLE PROCESSING--->
  <!---------NETWORK PURCHASED-DETAILS----->
   <div class="networks-purchased-container">
@@ -437,13 +670,10 @@
         <div class="card-box at"><img src="./css/icons/tigo-signal.png" alt="img" loading="lazy"> AirtelTigo</div>
     </div>
   </div>
-</section>
 
 
 
-
-
-
+  
 
  <!--hero-text-->
   <div class="hero-text-container mtn" id="mtnArea">
@@ -1480,6 +1710,27 @@
 
 
 
+
+</section>
+<!---GRIDvIEW-SECTION-ENDS---->
+
+
+<!---NEW UI UPDATE (20th-01-2026)--=[grid & normal ui--ends---->
+
+
+
+
+<!---CARD-CONTAINER-ENDS-->
+</section>
+
+
+
+
+
+
+
+
+
 <section class="foot">
     <p style="text-align:center;color:#888;font-size:14px;">© 2026 Ecodata. All rights reserved.</p>
   </section>
@@ -1701,6 +1952,7 @@
 <script type="module" src="./firebase-config.js"></script>
 
 <script type="module" src="main.js"></script>
+<script src="./normalView.js"></script>
 
 
 <!---usernameDisplay----->
@@ -1835,88 +2087,9 @@ window.addEventListener("click", function(e){
 });
 </script>
 
-<!----RAMADAN-JS-->
-<script>
-  // Set the Ramadan date (UPDATE this if official date changes)
-const ramadanDate = new Date("February 18, 2026 00:00:00").getTime();
-
-function ramadanTimer() {
-  const now = new Date().getTime();
-  const diff = ramadanDate - now;
-
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-  document.getElementById("days").innerText = days < 10 ? "0" + days : days;
-  document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
-  document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
-  document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
-
-  if (diff < 0) {
-    document.getElementById("ramadan-countdown").innerHTML = "Ramadan Has Begun! 🌙";
-  }
-}
-
-setInterval(ramadanTimer,1000);
-</script>
-
-<!---XMAX-JS-->
-<script>
-   // Set the Ramadan date (UPDATE this if official date changes)
-const xmaxDate = new Date("December 25 , 2025 00:00:00").getTime();
-
-function ramadanTimer() {
-  const now = new Date().getTime();
-  const diff = xmaxDate - now;
-
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-
-
-  document.getElementById("dys").innerText = days < 10 ? "0" + days : days;
-  document.getElementById("hrs").innerText = hours < 10 ? "0" + hours : hours;
-  document.getElementById("mints").innerText = minutes < 10 ? "0" + minutes : minutes;
- 
-
-  if (diff < 0) {
-    document.getElementById("xmax-countdown").innerHTML = "Xmax Has Begun! ";
-  }
-}
-
-setInterval(ramadanTimer,1000);
-</script>
-
-<!---PERSISTENT-CARD-JS-->
-<script>
-  function updatePersistentCard(o) {
-  const card = document.getElementById("orderStatusCard");
-  if (!card) return;
-
-  document.getElementById("p-id").textContent = o.orderId;
-  document.getElementById("p-recipient").textContent = o.recipient;
-  document.getElementById("p-volume").textContent = o.volume;
-
-  const statusText = document.getElementById("p-status");
-  statusText.textContent = o.status;
-
-  // remove old status classes
-  card.className = "persistent-card";
-  card.classList.add(`status-${o.status}`);
-
-  // dot color
-  const dot = document.getElementById("pc-status-dot");
-  dot.style.background = getComputedStyle(card).borderLeftColor;
-}
 
 
 
-if (o.status === "delivered") {
-  document.getElementById("pc-status-dot").style.animation = "none";
-}
-</script>
 
 
 
