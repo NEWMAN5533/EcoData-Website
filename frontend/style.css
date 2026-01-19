@@ -2978,9 +2978,17 @@ NEW GRID & NORMAL UI UPDATE (20th/1/2026
   opacity: .9;
 }
 
+.dark-mode .normalTitle h2{
+  color: white;
+}
+
 .normalTitle small{
   margin-top: -.4rem;
   color: rgb(92, 98, 107);
+}
+
+.dark-mode .normalTitle small{
+  color: rgb(226, 222, 222);
 }
 
 /***
@@ -3016,9 +3024,12 @@ how to style select dropdown
   justify-content: space-between;
 }
 
-.dark-mode .select-btn{
-  color: white !important;
+.dark-mode .select-btn {
+  background: var(--welcome-card-bg);
+  color: white;
 }
+
+
 
 .select-btn span img{
   width: .9rem;
@@ -3133,6 +3144,10 @@ BOTH BTN SELECTOR
 }
 
 
+.dark-mode .gridBtn {
+  background: rgb(214, 211, 211);
+}
+
 /***
 GRID VIEW
 ****/
@@ -3176,6 +3191,11 @@ GRID VIEW
   height: .9rem;
 }
 
+.dark-mode .selection-btn{
+  background-color: rgb(184, 182, 182);
+
+}
+
 
 .single-order{
 width: 100%;
@@ -3195,10 +3215,19 @@ border-end-start-radius: 1rem;
 box-shadow: 0 8px 14px  rgba(56, 55, 55, 0.2);
 }
 
+.dark-mode .single-order  {
+  background: var(--welcome-card-bg);
+  border: 1px solid rgb(82, 78, 78);
+}
+
 .single-order small{
   font-size: .9rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   color: rgb(48, 52, 58);
+}
+
+.single-order small{
+  color: rgb(177, 173, 173);
 }
 
 .single-order .sel{
@@ -3217,6 +3246,10 @@ box-shadow: 0 8px 14px  rgba(56, 55, 55, 0.2);
 }
 
 
+.dark-mode .normalInput{
+  background: rgb(182, 178, 178);
+}
+
 /**8
 option
 ****/
@@ -3232,7 +3265,7 @@ option
 .custom-option .option-dropdown{
   position: absolute;
   width: 100%;
-  max-width: 70%;
+  max-width: 78%;
   background: #ffffff;
   border-radius: 14px;
   display: none;
@@ -3249,7 +3282,16 @@ option
   margin-top: -11rem;
   scrollbar-width: none;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgb(209, 212, 214);
+  border: 2px solid rgb(209, 212, 214);
+  border-bottom: 9px solid  rgba(77, 114, 134, 0.897);
+  border-top: 9px solid  rgba(77, 114, 134, 0.897);
+}
+
+.dark-mode .option-dropdown{
+  background: var(--welcome-card-bg);
+  border: 2px solid rgb(110, 107, 107);
+  border-bottom: 9px solid  rgb(110, 107, 107);
+  border-top: 9px solid  rgb(110, 107, 107);
 }
 
 .optionSelect{
@@ -3267,11 +3309,21 @@ option
   border: 1px solid rgb(224, 217, 217);
 }
 
+.dark-mode .optionSelect{
+  border: 1px solid rgb(77, 76, 76);
+  box-shadow: 0;
+  ;
+}
+
 .optionSelect:hover{
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   border: 1px solid rgb(224, 217, 217);
+}
+
+.dark-mode .optionSelect:hover{
+  background: rgb(167, 164, 164);
 }
 
 
@@ -3302,6 +3354,9 @@ option
   font-weight: 500;
   cursor:pointer;
 }
+
+
+
 
 .optionSelect span{
   color: rgb(70, 80, 85);
