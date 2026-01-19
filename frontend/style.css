@@ -3016,6 +3016,10 @@ how to style select dropdown
   justify-content: space-between;
 }
 
+.dark-mode .select-btn{
+  color: white !important;
+}
+
 .select-btn span img{
   width: .9rem;
   height: .9rem;
@@ -3242,7 +3246,7 @@ option
   top: -4.2rem;
   z-index: 999;
   padding: .4rem;
-  margin: .5rem 0;
+  margin-top: -11rem;
   scrollbar-width: none;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   border: 1px solid rgb(209, 212, 214);
@@ -3259,6 +3263,8 @@ option
   gap: 2rem;
   margin-top: .4rem;
   cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgb(224, 217, 217);
 }
 
 .optionSelect:hover{
@@ -3270,11 +3276,12 @@ option
 
 
 .price-badge {
-  background-color: #5dade2; /* light blue */
+  background-color: #1c72ac; /* light blue */
   color: #ffffff;
   margin-right: 4rem;             /* white text */
   padding: 2px 6px;           /* small padding */
-  border-radius: 8px;         /* rounded corners */
+  border-radius: 12px;  
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);       /* rounded corners */
   font-weight: 500;
   font-size: 0.9rem;
 }
@@ -3341,8 +3348,8 @@ left section
 }
 
 .selectedModal-left-left img{
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.8rem;
+  height: 1.8rem;
   display: none;
 }
 
