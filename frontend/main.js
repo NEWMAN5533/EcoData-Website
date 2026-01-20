@@ -24,35 +24,104 @@ const API_BASE = (() => {
 let STATUS_POLL_INTERVAL = 5000;
 let _statusPollTimer = null; // to hold the interval timer ID
 
-let selectedBundle = null;
 
-
-// btn events//
+// btn events
 document.addEventListener("DOMContentLoaded", () => {
 
-  
-document.querySelectorAll(".buy-btn").forEach(button => {
-  button.addEventListener("click", () => {
-    const packageName = button.dataset.package;
-    const network = button.dataset.network;
-    const size = button.dataset.size;
-    const price = button.dataset.price;
+  let selectedBundle = null;
 
+  // OPTION SELECT
+  document.querySelectorAll('.optionSelect').forEach(opt => {
+    opt.addEventListener('click', () => {
+      selectedBundle = {
+        network: opt.dataset.network,
+        packageName: opt.dataset.package,
+        size: Number(opt.dataset.size),
+        price: Number(opt.dataset.price),
+      };
+
+      // Update visible button
+      optionBtn.innerHTML = `
+        ${selectedBundle.size}GB  <span class="price-badge">GHS ${selectedBundle.price}</span>
+        <span><img src="./css/icons/more.png.png"></span>
+      `;
+
+      // Update modal placeholders
+      const img = document.querySelector(".selectedModal-left-left img");
+      if(img) img.style.display = "flex";
+
+      const gbHolder = document.querySelector(".placeHolderGB");
+      if(gbHolder) gbHolder.textContent = `${selectedBundle.size}GB`;
+
+      const priceHolder = document.querySelector(".placeHolderPrice small");
+      if(priceHolder) priceHolder.textContent = `GHS ${selectedBundle.price}`;
+
+      const networkHolder = document.querySelector(".selectedModal-right");
+      if(networkHolder) networkHolder.textContent = selectedBundle.network.toUpperCase();
+
+      // Close dropdown
+      if(moveDown) moveDown.style.display = 'none';
+    });
+  });
+
+document.querySelectorAll("#normalView .buy-btn, #gridView .buy-btn").forEach(button => {
+  button.addEventListener("click", () => {
+
+    let bundle = null;
+    let recipient = "";
+
+    if (button.closest("#normalView")) {
+      // NORMAL VIEW → get recipient from input
+      if (!selectedBundle) {
+        showSnackBar("⚠ Please select a bundle first");
+        return;
+      }
+
+      bundle = selectedBundle;
+
+      const input = document.querySelector("#normalView .normalInput");
+
+      if (!input || !input.value.trim()) {
+        showSnackBar("⚠ Please enter a phone number");
+        return;
+      }
+      recipient = input.value.trim();
+
+      if(!/^[0-9]{10}$/.test(recipient)) {
+        showSnackBar("📱 Phone number must be exactly 10 digits");
+        return;
+      }
+
+      // ✅ Direct payment for normal view
+      payWithPaystack(bundle, recipient);
+
+    } else {
+      // GRID VIEW → get bundle from button
+      bundle = {
+        network: button.dataset.network,
+        packageName: button.dataset.package,
+        size: Number(button.dataset.size),
+        price: Number(button.dataset.price),
+      };
+
+
+      
     document.getElementById("priceTag").textContent = `GHS ${button.dataset.price}`;
     document.getElementById("networkTag").textContent = `${button.dataset.network.toUpperCase()} / ${button.dataset.size}GB`;
 
+      // ✅ Show modal only for grid view
+      createPhoneModal(inputNumber => {
+        payWithPaystack(bundle, inputNumber);
+      });
+    }
 
-
-
-    // Show phone input modal first
-    createPhoneModal(recipient => {
-
-
-      payWithPaystack(network, recipient, packageName, size, price);
-    });
   });
 });
 });
+
+
+
+
 
 function createPhoneModal(callback) {
 
@@ -89,7 +158,10 @@ function createPhoneModal(callback) {
 
 
 // === PAYSTACK PAYMENT (Firebase version) ===
-async function payWithPaystack(network, recipient, packageName, size, price) {
+async function payWithPaystack(bundle, recipient) {
+  const { network, packageName, size, price } = bundle;
+
+
   // ✅ Get current user from Firebase Auth
   let user = null;
   try {
@@ -103,42 +175,31 @@ async function payWithPaystack(network, recipient, packageName, size, price) {
   const userName = user?.displayName || "Guest User";
   const userPhone = recipient;
 
-  // ✅ Initialize Paystack
-  let handler = PaystackPop.setup({
+
+  const handler = PaystackPop.setup({
     key: "pk_live_635856447ee14b583349141b7271f64c9b969749",
     email: userEmail,
     amount: price * 100,
     currency: "GHS",
+
     metadata: {
       custom_fields: [
-        {
-          display_name: "Customer Name",
-          variable_name: "customer_name",
-          value: userName,
-        },
-        {
-          display_name: "Phone Number",
-          variable_name: "phone_number",
-          value: userPhone,
-        },
-        {
-          display_name: "Network",
-          variable_name: "network",
-          value: network,
-        },
-        {
-          display_name: "Package",
-          variable_name: "package_name",
-          value: packageName,
-        },
+        { display_name: "userName", value: userName },
+        { display_name: "recipient", value: userPhone },
+        { display_name: "Network", value: network },
+        { display_name: "Size", value: `${size}GB` },
+        { display_name: "Package", value: packageName },
       ],
     },
+
     callback: function (response) {
+      // ✅ ONLY here we call Swift/EcoData
       orderBundle(network, recipient, packageName, size, response.reference);
     },
+
     onClose: function () {
-      showSnackBar("Payment cancelled.");
-    },
+      showSnackBar("Payment cancelled");
+    }
   });
 
   handler.openIframe();
@@ -147,19 +208,10 @@ async function payWithPaystack(network, recipient, packageName, size, price) {
 
 
 
+
+
+
 // SELECTED BUNDLE FOR UI UPDATE
-
-document.addEventListener("click", (e) => {
-  const btn = e.target.closest(".buy-btn");
-  if (!btn) return;
-
-  selectedBundle = {
-    network: btn.dataset.network,
-    packageName: btn.dataset.package,
-    size: Number(btn.dataset.size),
-    price: Number(btn.dataset.price),
-  };
-});
 
 
 //NEW UPDATED 2/12/2025 //
@@ -170,9 +222,6 @@ async function orderBundle(network, recipient, packageName, size, reference) {
       showSnackBar(" Please select a bundle first");
       return;
     }
-
-    // show processing snackbar
-    showSnackBar("📱 Processing Order...", "info", 8000);
 
     const API_BASE =
       window.location.hostname === "localhost"
@@ -1120,7 +1169,48 @@ document.querySelectorAll('.option').forEach(opt => {
 });
 
 
+// NORMAL MODE JS
+// ---------- PLACE ORDER BUTTON ----------
 
+// ---------- SELECT OPTION / DROPDOWN ----------
+const optionBtn = document.getElementById('optionBtn');
+const moveDown = document.getElementById('moveDown');
+
+optionBtn.addEventListener('click', () => {
+  moveDown.style.display = moveDown.style.display === 'block' ? 'none' : 'block';
+});
+
+
+// ---------- NORMAL & GRID MODE TOGGLE ----------
+const normalModeBtn = document.getElementById("normalModeBtn");
+const gridModeBtn = document.getElementById("gridModeBtn");
+const normalView = document.getElementById("normalView");
+const gridView = document.getElementById("gridView");
+
+normalModeBtn.addEventListener("click", () => {
+  normalView.style.display = "block";
+  gridView.style.display = "none";
+});
+
+gridModeBtn.addEventListener("click", () => {
+  gridView.style.display = "block";
+  normalView.style.display = "none";
+});
+
+
+
+
+
+// ---------- CLOSE DROPDOWN WHEN CLICKING OUTSIDE ----------
+window.addEventListener("click", (e) => {
+  const dropdown = moveDown; // your dropdown element
+  const button = optionBtn; // the button that opens it
+
+  // If the clicked element is NOT the button or inside the dropdown → close it
+  if (!dropdown.contains(e.target) && !button.contains(e.target)) {
+    dropdown.style.display = "none";
+  }
+});
 
 
 
