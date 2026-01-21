@@ -30,6 +30,7 @@ let _statusPollTimer = null; // to hold the interval timer ID
 let selectedBundle = null;      // used for UI selection (normal view)
 let lastPurchasedBundle = null; // used after payment (normal + grid)
 
+//NEW UPDATED 21/01/2026  (DOMCONTENTLOADER)//
 document.addEventListener("DOMContentLoaded", () => {
 
   // ---------- OPTION SELECT (NORMAL VIEW) ----------
@@ -81,13 +82,13 @@ document.addEventListener("DOMContentLoaded", () => {
         if (button.closest("#normalView")) {
 
           if (!selectedBundle) {
-            showSnackBar("⚠ Please select a bundle first");
+            showSnackBar("📱 Please select a bundle first");
             return;
           }
 
           const input = document.querySelector("#normalView .normalInput");
           if (!input || !input.value.trim()) {
-            showSnackBar("⚠ Please enter a phone number");
+            showSnackBar("📱 Please enter a phone number");
             return;
           }
 
@@ -132,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
+//NEW UPDATED 21/01/2026 //
 function createPhoneModal(callback) {
 
   const modal = document.getElementById("phoneModal");
@@ -166,7 +167,7 @@ function createPhoneModal(callback) {
 }
 
 
-
+//NEW UPDATED 21/01/2026 //
 // === PAYSTACK PAYMENT (Firebase version) ===
 async function payWithPaystack(bundle, recipient) {
   const { network, packageName, size, price } = bundle;
@@ -218,7 +219,7 @@ async function payWithPaystack(bundle, recipient) {
 // SELECTED BUNDLE FOR UI UPDATE
 
 
-//NEW UPDATED 2/12/2025 //
+//NEW UPDATED 21/01/2026 //
 // === SEND ORDER TO BACKEND ===
 async function orderBundle(network, recipient, packageName, size, reference) {
   try {
