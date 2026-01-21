@@ -1,3 +1,4 @@
+
 // --- Firebase Imports ---
 import { db } from "./firebase-config.js";
 import {
@@ -25,14 +26,16 @@ let STATUS_POLL_INTERVAL = 5000;
 let _statusPollTimer = null; // to hold the interval timer ID
 
 
-// btn events
+// ---------- GLOBAL STATE ----------
+let selectedBundle = null;      // used for UI selection (normal view)
+let lastPurchasedBundle = null; // used after payment (normal + grid)
+
 document.addEventListener("DOMContentLoaded", () => {
 
-  let selectedBundle = null;
-
-  // OPTION SELECT
+  // ---------- OPTION SELECT (NORMAL VIEW) ----------
   document.querySelectorAll('.optionSelect').forEach(opt => {
     opt.addEventListener('click', () => {
+
       selectedBundle = {
         network: opt.dataset.network,
         packageName: opt.dataset.package,
@@ -40,83 +43,90 @@ document.addEventListener("DOMContentLoaded", () => {
         price: Number(opt.dataset.price),
       };
 
-      // Update visible button
+      // Update button UI
       optionBtn.innerHTML = `
-        ${selectedBundle.size}GB  <span class="price-badge">GHS ${selectedBundle.price}</span>
+        ${selectedBundle.size}GB 
+        <span class="price-badge">GHS ${selectedBundle.price}</span>
         <span><img src="./css/icons/more.png.png"></span>
       `;
 
       // Update modal placeholders
       const img = document.querySelector(".selectedModal-left-left img");
-      if(img) img.style.display = "flex";
+      if (img) img.style.display = "flex";
 
       const gbHolder = document.querySelector(".placeHolderGB");
-      if(gbHolder) gbHolder.textContent = `${selectedBundle.size}GB`;
+      if (gbHolder) gbHolder.textContent = `${selectedBundle.size}GB`;
 
       const priceHolder = document.querySelector(".placeHolderPrice small");
-      if(priceHolder) priceHolder.textContent = `GHS ${selectedBundle.price}`;
+      if (priceHolder) priceHolder.textContent = `GHS ${selectedBundle.price}`;
 
       const networkHolder = document.querySelector(".selectedModal-right");
-      if(networkHolder) networkHolder.textContent = selectedBundle.network.toUpperCase();
+      if (networkHolder) networkHolder.textContent = selectedBundle.network.toUpperCase();
 
-      // Close dropdown
-      if(moveDown) moveDown.style.display = 'none';
+      if (moveDown) moveDown.style.display = "none";
     });
   });
 
-document.querySelectorAll("#normalView .buy-btn, #gridView .buy-btn").forEach(button => {
-  button.addEventListener("click", () => {
 
-    let bundle = null;
-    let recipient = "";
+  // ---------- BUY BUTTONS (NORMAL + GRID) ----------
+  document.querySelectorAll("#normalView .buy-btn, #gridView .buy-btn")
+    .forEach(button => {
 
-    if (button.closest("#normalView")) {
-      // NORMAL VIEW → get recipient from input
-      if (!selectedBundle) {
-        showSnackBar("⚠ Please select a bundle first");
-        return;
-      }
+      button.addEventListener("click", () => {
 
-      bundle = selectedBundle;
+        let bundle;
+        let recipient = "";
 
-      const input = document.querySelector("#normalView .normalInput");
+        // ================= NORMAL VIEW =================
+        if (button.closest("#normalView")) {
 
-      if (!input || !input.value.trim()) {
-        showSnackBar("⚠ Please enter a phone number");
-        return;
-      }
-      recipient = input.value.trim();
+          if (!selectedBundle) {
+            showSnackBar("⚠ Please select a bundle first");
+            return;
+          }
 
-      if(!/^[0-9]{10}$/.test(recipient)) {
-        showSnackBar("📱 Phone number must be exactly 10 digits");
-        return;
-      }
+          const input = document.querySelector("#normalView .normalInput");
+          if (!input || !input.value.trim()) {
+            showSnackBar("⚠ Please enter a phone number");
+            return;
+          }
 
-      // ✅ Direct payment for normal view
-      payWithPaystack(bundle, recipient);
+          recipient = input.value.trim();
 
-    } else {
-      // GRID VIEW → get bundle from button
-      bundle = {
-        network: button.dataset.network,
-        packageName: button.dataset.package,
-        size: Number(button.dataset.size),
-        price: Number(button.dataset.price),
-      };
+          if (!/^[0-9]{10}$/.test(recipient)) {
+            showSnackBar("📱 Phone number must be exactly 10 digits");
+            return;
+          }
 
+          bundle = selectedBundle;
+          lastPurchasedBundle = bundle; // 🔑 SAVE FOR POST-PAYMENT
 
-      
-    document.getElementById("priceTag").textContent = `GHS ${button.dataset.price}`;
-    document.getElementById("networkTag").textContent = `${button.dataset.network.toUpperCase()} / ${button.dataset.size}GB`;
+          payWithPaystack(bundle, recipient);
+        }
 
-      // ✅ Show modal only for grid view
-      createPhoneModal(inputNumber => {
-        payWithPaystack(bundle, inputNumber);
+        // ================= GRID VIEW =================
+        else {
+          bundle = {
+            network: button.dataset.network,
+            packageName: button.dataset.package,
+            size: Number(button.dataset.size),
+            price: Number(button.dataset.price),
+          };
+
+          lastPurchasedBundle = bundle; // 🔑 SAVE FOR POST-PAYMENT
+
+          // Update modal preview
+          document.getElementById("priceTag").textContent =
+            `GHS ${bundle.price}`;
+          document.getElementById("networkTag").textContent =
+            `${bundle.network.toUpperCase()} / ${bundle.size}GB`;
+
+          createPhoneModal(inputNumber => {
+            payWithPaystack(bundle, inputNumber);
+          });
+        }
       });
-    }
-
-  });
-});
+    });
 });
 
 
@@ -205,12 +215,6 @@ async function payWithPaystack(bundle, recipient) {
   handler.openIframe();
 }
 
-
-
-
-
-
-
 // SELECTED BUNDLE FOR UI UPDATE
 
 
@@ -218,8 +222,10 @@ async function payWithPaystack(bundle, recipient) {
 // === SEND ORDER TO BACKEND ===
 async function orderBundle(network, recipient, packageName, size, reference) {
   try {
-    if (!selectedBundle) {
-      showSnackBar(" Please select a bundle first");
+
+    const bundle = lastPurchasedBundle;
+    if (!bundle) {
+      showSnackBar("⚠ Order context missing");
       return;
     }
 
@@ -248,30 +254,22 @@ async function orderBundle(network, recipient, packageName, size, reference) {
       return;
     }
 
-    showSnackBar("📱✅ Order Placed successfully!", "sucsess", 4000);
+    showSnackBar("📱✅ Order Placed successfully!", "success", 4000);
 
-    // 🔴 Swift live order
     const returnedOrder = result.order?.order || result.order || result;
-    console.log("📦 Swift order:", returnedOrder);
 
-    // 🟢 EcoData accounting (UI prices)
     const orderData = {
       orderId: returnedOrder.orderId || returnedOrder.reference,
       reference: returnedOrder.reference,
-      network: selectedBundle.network,
-      volume: selectedBundle.size,
-      amount: selectedBundle.price,
+      network: bundle.network,
+      volume: bundle.size,
+      amount: bundle.price,
       source: "web",
       createdAt: Date.now(),
     };
 
-    // ✅ Live stream (Swift)
     handleNewOrder(returnedOrder);
-
-    // ✅ Analytics (EcoData)
     updateHomepageTotals(orderData);
-
-    // ✅ Persistence
     saveOrderToFirestore(orderData);
     saveGuestOrder(orderData);
 
