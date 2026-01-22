@@ -430,16 +430,17 @@
   </button>
 
   <div class="select-dropdown" id="dropdownOffer">
-    <div class="option" data-package="mtn_data_normal_delivery">
+    <div class="optionDelevery" data-mode="normal">
       <span>MTN DATA NORMAL DELIVERY  </span>
       <small>NON EXPIRY</small>
     </div>
   
-    <div class="option" data-package="mtn_data_express_delivery">
+    <div class="optionDelevery" data-mode="express">
       <span>MTN DATA EXPRESS DELIVERY</span>
       <small>NON EXPIRY</small>
     </div>
   </div>
+  <div id="offerDisplay"></div>
 </div>
 
 <!----choose grid 0r normal btn-->
@@ -470,7 +471,6 @@
       <!---select-1-->
     <div class="optionSelect" 
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="1"
   data-price="6">
       <span>1GB</span>
@@ -479,7 +479,6 @@
     <!---select-2-->
     <div class="optionSelect" 
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="2"
   data-price="12">
       <span>2GB</span>
@@ -488,7 +487,6 @@
     <!---select-3-->
     <div class="optionSelect" 
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="3"
   data-price="17">
       <span>3GB</span>
@@ -497,7 +495,6 @@
     <!---select-4-->
       <div class="optionSelect" 
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="4"
   data-price="22">
       <span>4GB</span>
@@ -506,7 +503,6 @@
     <!---select-5-->
     <div class="optionSelect"
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="5"
   data-price="26.50">
       <span>5GB</span>
@@ -515,7 +511,6 @@
     <!---select-6-->
     <div class="optionSelect" 
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="6"
   data-price="32.50">
       <span>6GB</span>
@@ -524,7 +519,6 @@
     <!---select-7-->
       <div class="optionSelect"
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="7"
   data-price="37">
       <span>7GB</span>
@@ -533,7 +527,6 @@
     <!---select-8-->
     <div class="optionSelect" 
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="8"
   data-price="40">
       <span>8GB</span>
@@ -542,7 +535,6 @@
     <!---select-9-->
     <div class="optionSelect" 
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="9"
   data-price="44">
       <span>9GB</span>
@@ -551,7 +543,6 @@
     <!---select-10-->
       <div class="optionSelect" 
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="10"
   data-price="47">
       <span>10GB</span>
@@ -560,7 +551,6 @@
     <!---select-11-->
     <div class="optionSelect" 
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="12"
   data-price="60">
       <span>12GB</span>
@@ -569,7 +559,6 @@
     <!---select-12-->
     <div class="optionSelect" 
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="15"
   data-price="68">
       <span>15GB</span>
@@ -578,7 +567,6 @@
     <!---select-13-->
     <div class="optionSelect" 
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="20"
   data-price="91">
       <span>20GB</span>
@@ -587,7 +575,6 @@
     <!---select-14-->
     <div class="optionSelect" 
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="25"
   data-price="111">
       <span>25GB</span>
@@ -596,7 +583,6 @@
     <!---select-15-->
     <div class="optionSelect" 
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="30"
   data-price="130">
       <span>30GB</span>
@@ -605,7 +591,6 @@
     <!---select-16-->
     <div class="optionSelect" 
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="40"
   data-price="169">
       <span>40GB</span>
@@ -614,7 +599,6 @@
     <!---select-17-->
     <div class="optionSelect"
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="50"
   data-price="215">
       <span>50GB</span>
@@ -746,7 +730,6 @@
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="1"
   data-price="6"
           > <img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
@@ -766,7 +749,6 @@
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="2"
   data-price="12"
           ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
@@ -786,7 +768,6 @@
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="3"
   data-price="17"
           ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
@@ -806,7 +787,6 @@
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="4"
   data-price="22"
           ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
@@ -826,7 +806,6 @@
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="5"
   data-price="26.50"
           ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
@@ -846,7 +825,6 @@
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="6"
   data-price="32.50"
           ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
@@ -866,7 +844,6 @@
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="7"
   data-price="37"
           ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
@@ -886,7 +863,6 @@
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="8"
   data-price="40"
           ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
@@ -907,7 +883,6 @@
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="9"
   data-price="44"
           ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
@@ -927,7 +902,6 @@
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="10"
   data-price="47"
           ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
@@ -947,7 +921,6 @@
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="12"
   data-price="60"
           ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
@@ -967,7 +940,6 @@
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="15"
   data-price="68"
           ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
@@ -987,7 +959,6 @@
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="20"
   data-price="91"
           ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
@@ -1007,7 +978,6 @@
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="25"
   data-price="111"
           ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
@@ -1027,7 +997,6 @@
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="30"
   data-price="130"
           ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
@@ -1047,7 +1016,6 @@
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="40"
   data-price="169"
           ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
@@ -1067,7 +1035,6 @@
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="50"
   data-price="215"
           ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
@@ -1087,7 +1054,6 @@
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
-  data-package= "mtn_data_normal_delivery"
   data-size="100"
   data-price="430"
           ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>

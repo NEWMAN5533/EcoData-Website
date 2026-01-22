@@ -30,8 +30,90 @@ let _statusPollTimer = null; // to hold the interval timer ID
 let selectedBundle = null;      // used for UI selection (normal view)
 let lastPurchasedBundle = null; // used after payment (normal + grid)
 
+// default selectedPackage
+let selectedPackageName = "mtn_data_normal_delivery";
+
+const PACKAGE_MAP = {
+  normal: "mtn_data_normal_delivery",
+  express: "mtn_data_express_delivery"
+};
+
+const STORAGE_KEY = "selected_mtn_package";
+
 //NEW UPDATED 21/01/2026  (DOMCONTENTLOADER)//
 document.addEventListener("DOMContentLoaded", () => {
+
+const selectBtn = document.getElementById("selectBtn");
+const dropdownOffer = document.getElementById("dropdownOffer");
+const deliveryOptions = document.querySelectorAll(".optionDelevery");
+
+const optionBtn = 
+document.getElementById("optionBtn");
+const moveDown = document.getElementById("moveDown");
+
+
+  const saveMode = 
+  localStorage.getItem(STORAGE_KEY) || "normal";
+
+  const activeOption = document.querySelector(`.optionDelevery[data-mode="${saveMode}"]`);
+
+  if(activeOption) {
+    selectedPackageName =
+    PACKAGE_MAP[saveMode];
+
+
+      // UI state
+    dropdownOffer.classList.remove("show");
+    deliveryOptions.forEach(o => o.classList.remove("active"));
+    activeOption.classList.add("active");
+
+    // update button tex
+    selectBtn.innerHTML = `${activeOption.querySelector("span").textContent} 
+    <span><img src="./css/icons/more.png.png"></span>`;
+
+  };
+
+
+// Toggle dropdown
+selectBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  dropdownOffer.classList.toggle("show");
+});
+
+// Select package
+deliveryOptions.forEach(option => {
+  option.addEventListener("click", (e) => {
+    e.stopPropagation();
+
+    const mode = option.dataset.mode;
+
+    // save to localStorage
+    localStorage.setItem(STORAGE_KEY, mode);
+
+    // ✅ SET GLOBAL PACKAGE NAME
+    selectedPackageName = PACKAGE_MAP[mode];
+
+    // Update button text
+    selectBtn.innerHTML = `
+      ${option.querySelector("span").textContent}
+      <span><img src="./css/icons/more.png.png"></span>
+    `;
+
+    dropdownOffer.classList.remove("show");
+    deliveryOptions.forEach(o => 
+      o.classList.remove("active"));
+      option.classList.add("active");
+
+    showSnackBar(" Offer Updated ", "info", 2000);
+  });
+});
+
+// Close when clicking outside
+document.addEventListener("click", () => {
+  dropdownOffer.classList.remove("show");
+});
+
+
 
   // ---------- OPTION SELECT (NORMAL VIEW) ----------
   document.querySelectorAll('.optionSelect').forEach(opt => {
@@ -39,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       selectedBundle = {
         network: opt.dataset.network,
-        packageName: opt.dataset.package,
+        packageName: selectedPackageName,
         size: Number(opt.dataset.size),
         price: Number(opt.dataset.price),
       };
@@ -109,7 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
         else {
           bundle = {
             network: button.dataset.network,
-            packageName: button.dataset.package,
+            packageName: selectedPackageName,
             size: Number(button.dataset.size),
             price: Number(button.dataset.price),
           };
@@ -1210,7 +1292,6 @@ window.addEventListener("click", (e) => {
     dropdown.style.display = "none";
   }
 });
-
 
 
 
