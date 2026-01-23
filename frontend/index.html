@@ -432,12 +432,12 @@
   <div class="select-dropdown" id="dropdownOffer">
     <div class="optionDelevery" data-mode="normal">
       <span>MTN DATA NORMAL DELIVERY ✔  </span>
-      <small>NON EXPIRY</small>
+      <small>NON-EXPIRY</small>
     </div>
   
     <div class="optionDelevery" data-mode="express">
       <span>MTN DATA EXPRESS DELIVERY ✔</span>
-      <small>NON EXPIRY</small>
+      <small>NON-EXPIRY</small>
     </div>
   </div>
   <div id="offerDisplay"></div>
@@ -448,12 +448,22 @@
   <button class="normalBtn" id="normalModeBtn">Normal</button>
   <button class="gridBtn" id="gridModeBtn">Grid</button>
 </div>
+<!----telecel & airtelTigo---->
+<div class="tel-tigo-ui-btn">
+  <div class="ui-title">
+    <small> Other Networks</small>
+  </div>
+  <div class="ui-toggle">
+    <button id="toggl-telecel" class="tobtn aitbtn">Telecel</button>
+    <button id="toggle-airtelTigo" class="tobtn aibtn">AirtelTigo</button>
+  </div>
+</div>
 </section>
 
 <!-----INDIVIDUAL SECTIONS-VIEW TOGGLE---->
 <!----NORMALVIEW-SECTION-->
 <section id="normalView" class="view active">
-  <div class="single-order">
+  <div id="mtnToggle" class="single-order">
     <small>Recipient Phone Number</small>
     <!---phone-input-here-->
     <input class="normalInput" type="tel" placeholder="e.g 0241234567">
@@ -627,7 +637,293 @@
     </div>
 
     <!---buy-btn-->
-    <button id="PlaceOrderBtn" class="buy-btn">Place Order</button>
+    <button id="PlaceOrderBtn" class="buy-btn place-telbtn">Place Order</button>
+  </div>
+
+
+  <!----airtelTigo-->
+    <div id="tigoToggle" class="single-order " style="display: none;">
+    <small>Recipient Phone Number</small>
+    <!---phone-input-here-->
+    <input class="normalInput" type="tel" placeholder="e.g 0571234567">
+    <small class="sel">Select Bundle</small>
+
+    <div class="custom-option">
+      <!---visible-btn-->
+      <button class="selection-btn" id="optionBtnAirtel">
+    Select package
+    <span><img src="./css/icons/more.png.png" alt="dropdown"></span>
+  </button>
+  <!----option-card-->
+  <div class="dropwrapper">
+    <div class="option-dropdownAirtel " id="moveDownAirtel">
+      
+      <!---select-1-->
+    <div class="optionSelectAirtel" 
+  data-network="at"
+  data-size="1"
+  data-price="6">
+      <span>1GB</span>
+      <small>GHS 6</small>
+    </div>
+    <!---select-2-->
+    <div class="optionSelectAirtel" 
+  data-network="at"
+  data-size="2"
+  data-price="12">
+      <span>2GB</span>
+      <small>GHS 12</small>
+    </div>
+    <!---select-3-->
+    <div class="optionSelectAirtel" 
+  data-network="at"
+  data-size="3"
+  data-price="17">
+      <span>3GB</span>
+      <small>GHS 17</small>
+    </div>
+    <!---select-4-->
+      <div class="optionSelectAirtel" 
+  data-network="at"
+  data-size="4"
+  data-price="22">
+      <span>4GB</span>
+      <small>GHS 22</small>
+    </div>
+    <!---select-5-->
+    <div class="optionSelectAirtel"
+  data-network="at"
+  data-size="5"
+  data-price="26">
+      <span>5GB</span>
+      <small>GHS 26</small>
+    </div>
+    <!---select-6-->
+    <div class="optionSelectAirtel" 
+  data-network="at"
+  data-size="6"
+  data-price="30">
+      <span>6GB</span>
+      <small>GHS 30</small>
+    </div>
+    <!---select-7-->
+      <div class="optionSelectAirtel"
+  data-network="at"
+  data-size="7"
+  data-price="35">
+      <span>7GB</span>
+      <small>GHS 35</small>
+    </div>
+    <!---select-8-->
+    <div class="optionSelectAirtel" 
+  data-network="at"
+  data-size="8"
+  data-price="39">
+      <span>8GB</span>
+      <small>GHS 39</small>
+    </div>
+    <!---select-9-->
+    <div class="optionSelectAirtel" 
+  data-network="at"
+  data-size="9"
+  data-price="44">
+      <span>9GB</span>
+      <small>GHS 44</small>
+    </div>
+    <!---select-10-->
+      <div class="optionSelectAirtel" 
+  data-network="at"
+  data-size="10"
+  data-price="47">
+      <span>10GB</span>
+      <small>GHS 47</small>
+    </div>
+    <!---select-11-->
+    <div class="optionSelectAirtel" 
+  data-network="at"
+  data-size="12"
+  data-price="56">
+      <span>12GB</span>
+      <small>GHS 56</small>
+    </div>
+    <!---select-12-->
+    <div class="optionSelectAirtel" 
+  data-network="at"
+  data-size="15"
+  data-price="63">
+      <span>15GB</span>
+      <small>GHS 63</small>
+    </div>
+    <!---select-13-->
+    <div class="optionSelectAirtel" 
+  data-network="at"
+  data-size="20"
+  data-price="89">
+      <span>20GB</span>
+      <small>GHS 89</small>
+    </div>
+    <!---select-14-->
+    <div class="optionSelectAirtel" 
+  data-network="at"
+  data-size="25"
+  data-price="110">
+      <span>25GB</span>
+      <small>GHS 110</small>
+    </div>
+    <!---select-15-->
+    <div class="optionSelectAirtel" 
+  data-network="at"
+  data-size="30"
+  data-price="132">
+      <span>30GB</span>
+      <small>GHS 132</small>
+    </div>
+    <!---select-16-->
+    <div class="optionSelectAirtel" 
+  data-network="at"
+  data-size="40"
+  data-price="170">
+      <span>40GB</span>
+      <small>GHS 170</small>
+    </div>
+    <!---select-17-->
+    <div class="optionSelectAirtel"
+  data-network="at"
+  data-size="50"
+  data-price="210">
+      <span>50GB</span>
+      <small>GHS 210</small>
+    </div>
+    <!---select-ends-->
+  </div>
+  </div>
+
+  <!---selected-bundle-modal-here--->
+  <div class="selectedModal airtelModal">
+    <div class="airtelModal-left">
+      <div class="airtelModal-left-left">
+        <span><img src="./css/icons/completed.png" alt="selectedData"></span>
+      </div>
+      <div class="airtelModal-left-right">
+        <div class="placeHolderGBAirtel"></div>
+        <div class="placeHolderPriceAirtel"><small></small></div>
+      </div>
+    </div>
+    <div class="airtelModal-right">
+    </div>
+  </div>
+
+
+    </div>
+
+    <!---buy-btn-->
+    <button id="PlaceOrderBtn" class="buy-btn aibtn">Place Order</button>
+  </div>
+
+  <!---tleCel-->
+  <div id="tleToggle" class="single-order" style="display: none;">
+    <small>Recipient Phone Number</small>
+    <!---phone-input-here-->
+    <input class="normalInput" type="tel" placeholder="e.g 0201234567">
+    <small class="sel">Select Bundle</small>
+
+    <div class="custom-option">
+      <!---visible-btn-->
+      <button class="selection-btn" id="optionBtnTele">
+    Select package
+    <span><img src="./css/icons/more.png.png" alt="dropdown"></span>
+  </button>
+  <!----option-card-->
+  <div class="dropwrapper">
+    <div class="option-dropdownTele" id="moveDownTele">
+      <!---select-1-->
+    <div class="optionSelectTele" 
+  data-network="telecel"
+  data-size="10"
+  data-price="47">
+      <span>10GB</span>
+      <small>GHS 47</small>
+    </div>
+    <!---select-2-->
+    <div class="optionSelectTele" 
+  data-network="telecel"
+  data-size="15"
+  data-price="69">
+      <span>15GB</span>
+      <small>GHS 69</small>
+    </div>
+    <!---select-3-->
+    <div class="optionSelectTele" 
+  data-network="telecel"
+  data-size="20"
+  data-price="93">
+      <span>20GB</span>
+      <small>GHS 93</small>
+    </div>
+    <!---select-4-->
+      <div class="optionSelectTele" 
+  data-network="telecel"
+  data-size="25"
+  data-price="110">
+      <span>25GB</span>
+      <small>GHS 110</small>
+    </div>
+    <!---select-5-->
+    <div class="optionSelectTele"
+  data-network="telecel"
+  data-size="30"
+  data-price="134">
+      <span>30GB</span>
+      <small>GHS 134</small>
+    </div>
+    <!---select-6-->
+    <div class="optionSelectTele" 
+  data-network="telecel"
+  data-size="40"
+  data-price="178">
+      <span>40GB</span>
+      <small>GHS 178</small>
+    </div>
+    <!---select-7-->
+      <div class="optionSelectTele"
+  data-network="telecel"
+  data-size="50"
+  data-price="220">
+      <span>50GB</span>
+      <small>GHS 220</small>
+    </div>
+    <!---select-8-->
+    <div class="optionSelectTele" 
+  data-network="telecel"
+  data-size="100"
+  data-price="400">
+      <span>100GB</span>
+      <small>GHS 400</small>
+    </div>
+    <!---select-ends-->
+  </div>
+  </div>
+
+  <!---selected-bundle-modal-here--->
+  <div class="selectedModal telModal">
+    <div class="telModal-left">
+      <div class="telModal-left-left">
+        <span><img src="./css/icons/completed.png" alt="selectedData"></span>
+      </div>
+      <div class="telModal-left-right">
+        <div class="placeHolderGBTele"></div>
+        <div class="placeHolderPriceTele"><small></small></div>
+      </div>
+    </div>
+    <div class="telModal-right">
+    </div>
+  </div>
+
+
+    </div>
+
+    <!---buy-btn-->
+    <button id="PlaceOrderBtn" class="buy-btn place-aibtn">Place Order</button>
   </div>
 </section>
 <!----NORMALVIEW-SECTION-ENDS---->

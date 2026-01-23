@@ -3494,9 +3494,88 @@ ends of left section
 }
 
 
+/***
+airtel & telecel ui styling
+***/
+
+.telModal{
+  background: linear-gradient(135deg,red)
+}
+
+.single-order .place-aibtn{
+  background: linear-gradient(135deg,rgb(240, 157, 119), rgb(233, 23, 23))
+}
+
+.single-order .aibtn{
+  background: linear-gradient(135deg,rgb(31, 233, 233), rgb(21, 84, 219))
+}
+
+
 /****
 NEW GRID & NORMAL UI UPDATE (20th/1/2026 ENDS
 *****/
+
+/****
+GRID TEL & AIRTEL UI
+*****/
+.tel-tigo-ui-btn{
+  width: 100%;
+  max-width: 99%;
+  padding: .2rem .5rem;
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+  align-items: end;
+  justify-content: center;
+  height: 5rem;
+  border: 1px solid rgb(211, 206, 206);
+}
+
+.tel-tigo-ui-btn .ui-title{
+  margin-right: 3rem;
+}
+
+.ui-title small{
+  font-size: .8rem;
+  color: rgb(46, 46, 58);
+  font-weight: 600;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.tel-tigo-ui-btn .ui-toggle{
+  gap: .8rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-right: .3rem;
+}
+
+.ui-toggle .tobtn{
+  border: none;
+  width: 5rem;
+  height: 1.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  background: white;
+  color: rgb(50, 55, 68);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.ui-toggle .aitbtn{
+  background: linear-gradient(135deg, rgb(238, 121, 113), rgb(155, 18, 18));
+  color: white;
+}
+
+.ui-toggle .aibtn{
+  background: linear-gradient(135deg, rgba(35, 155, 224, 0.89), rgb(33, 33, 141));
+  color: white;
+}
+
+
+
+/***
+AIRTEL & TELECEL UI ENDS
+****/
 
 
 

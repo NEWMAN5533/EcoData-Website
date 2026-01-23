@@ -62,10 +62,6 @@ const selectBtn = document.getElementById("selectBtn");
 const dropdownOffer = document.getElementById("dropdownOffer");
 const deliveryOptions = document.querySelectorAll(".optionDelevery");
 
-const optionBtn = 
-document.getElementById("optionBtn");
-const moveDown = document.getElementById("moveDown");
-
 
   const saveMode = 
   localStorage.getItem(STORAGE_KEY) || "normal";
@@ -130,7 +126,7 @@ document.addEventListener("click", () => {
 
 
 
-  // ---------- OPTION SELECT (NORMAL VIEW) ----------
+  // ---------- OPTION SELECT (NORMAL VIEW) ---(MTN)-------
   document.querySelectorAll('.optionSelect').forEach(opt => {
     opt.addEventListener('click', () => {
 
@@ -164,6 +160,79 @@ document.addEventListener("click", () => {
       if (moveDown) moveDown.style.display = "none";
     });
   });
+
+  // ------OPTION SELECT (NORMAL VIEW) --- (TELECEL)----
+  document.querySelectorAll('.optionSelectTele').forEach(optTele => {
+    optTele.addEventListener('click', () => {
+
+      selectedBundle = {
+        network: optTele.dataset.network,
+        packageName: resolvePackageName(optTele.dataset.network),
+        size: Number(optTele.dataset.size),
+        price: Number(optTele.dataset.price),
+      };
+
+      // Update button UI
+      optionBtnTele.innerHTML = `
+        ${selectedBundle.size}GB 
+        <span class="price-badge-tele">GHS ${selectedBundle.price}</span>
+        <span><img src="./css/icons/more.png.png"></span>
+      `;
+  // Update modal placeholders
+      const img = document.querySelector(".telModal-left-left img");
+      if (img) img.style.display = "flex";
+
+      const gbHolderTele = document.querySelector(".placeHolderGBTele");
+      if (gbHolderTele) gbHolderTele.textContent = `${selectedBundle.size}GB`;
+
+      const priceHolderTele = document.querySelector(".placeHolderPriceTele small");
+      if (priceHolderTele) priceHolderTele.textContent = `GHS ${selectedBundle.price}`;
+
+      const networkHolderTele = document.querySelector(".telModal-right");
+      if (networkHolderTele) networkHolderTele.textContent = selectedBundle.network.toUpperCase();
+
+      if (moveDownTele) moveDownTele.style.display = "none";
+    });
+  });
+  // end for normal telecel
+
+    // ------OPTION SELECT (NORMAL VIEW) --- (AIRTEL)----
+  document.querySelectorAll('.optionSelectAirtel').forEach(optAirtel => {
+    optAirtel.addEventListener('click', () => {
+
+      selectedBundle = {
+        network: optAirtel.dataset.network,
+        packageName: resolvePackageName(optAirtel.dataset.network),
+        size: Number(optAirtel.dataset.size),
+        price: Number(optAirtel.dataset.price),
+      };
+
+      // Update button UI
+      optionBtnAirtel.innerHTML = `
+        ${selectedBundle.size}GB 
+        <span class="price-badge-airtel">GHS ${selectedBundle.price}</span>
+        <span><img src="./css/icons/more.png.png"></span>
+      `;
+
+      // Update modal placeholders
+      const img = document.querySelector(".airtelModal-left-left span img");
+      if (img) img.style.display = "flex";
+
+      const gbHolderAirtel = document.querySelector(".placeHolderGBAirtel");
+      if (gbHolderAirtel) gbHolderAirtel.textContent = `${selectedBundle.size}GB`;
+
+      const priceHolderAirtel = document.querySelector(".placeHolderPriceAirtel small");
+      if (priceHolderAirtel) priceHolderAirtel.textContent = `GHS ${selectedBundle.price}`;
+
+      const networkHolderAirtel = document.querySelector(".airtelModal-right");
+      if (networkHolderAirtel) networkHolderAirtel.textContent = selectedBundle.network.toUpperCase();
+
+      if (moveDownAirtel) moveDownAirtel.style.display = "none";
+    });
+  });
+
+  // end for normal telecel
+
 
 
   // ---------- BUY BUTTONS (NORMAL + GRID) ----------
@@ -1272,9 +1341,28 @@ document.querySelectorAll('.option').forEach(opt => {
 const optionBtn = document.getElementById('optionBtn');
 const moveDown = document.getElementById('moveDown');
 
+// select Bundle const
+const optionBtnTele = document.getElementById("optionBtnTele");
+const moveDownTele = document.getElementById("moveDownTele");
+ // airtel
+ const optionBtnAirtel = document.getElementById("optionBtnAirtel");
+ const moveDownAirtel = document.getElementById("moveDownAirtel");
+
 optionBtn.addEventListener('click', () => {
   moveDown.style.display = moveDown.style.display === 'block' ? 'none' : 'block';
 });
+
+// tele
+optionBtnTele.addEventListener('click', () => {
+  moveDownTele.style.display = moveDownTele.style.display === 'block' ? 'none' : 'block';
+});
+
+// airtel
+optionBtnAirtel.addEventListener('click', () => {
+  moveDownAirtel.style.display = moveDownAirtel.style.display === 'block' ? 'none' : 'block';
+});
+
+
 
 
 // ---------- NORMAL & GRID MODE TOGGLE ----------
@@ -1283,15 +1371,51 @@ const gridModeBtn = document.getElementById("gridModeBtn");
 const normalView = document.getElementById("normalView");
 const gridView = document.getElementById("gridView");
 
+// other network div
+const otherNetworkContainer = document.querySelector(".tel-tigo-ui-btn");
+
 normalModeBtn.addEventListener("click", () => {
   normalView.style.display = "block";
+  mtnToggle.style.display = "flex";
   gridView.style.display = "none";
+  tigoToggle.style.display = "none";
+  tleToggle.style.display = "none";
+  otherNetworkContainer.style.display = "flex";
 });
 
 gridModeBtn.addEventListener("click", () => {
   gridView.style.display = "block";
   normalView.style.display = "none";
+  otherNetworkContainer.style.display = "none";
+
 });
+
+
+// OTHER NETWORKS TOGGLE
+const mtnToggle = document.getElementById("mtnToggle");
+const tleToggle = document.getElementById("tleToggle");
+const tigoToggle = document.getElementById("tigoToggle");
+
+const telBtnToggler = document.getElementById("toggl-telecel");
+
+telBtnToggler.addEventListener("click", () => {
+  mtnToggle.style.display = "none";
+  tigoToggle.style.display = "none";
+  tleToggle.style.display = "flex";
+});
+
+const airtleToggler = document.getElementById("toggle-airtelTigo");
+
+airtleToggler.addEventListener("click", () => {
+  tleToggle.style.display = "none";
+  mtnToggle.style.display = "none";
+  tigoToggle.style.display = "flex";
+  });
+
+
+// at click event
+
+
 
 
 
@@ -1300,11 +1424,27 @@ gridModeBtn.addEventListener("click", () => {
 // ---------- CLOSE DROPDOWN WHEN CLICKING OUTSIDE ----------
 window.addEventListener("click", (e) => {
   const dropdown = moveDown; // your dropdown element
+  const dropdownTele = moveDownTele; // your dropdown element
+  const dropdownAirtel = moveDownAirtel; // your dropdown element
+
   const button = optionBtn; // the button that opens it
+  const buttonTele = optionBtnTele; // the button that opens it
+  const buttonAirtel = optionBtnAirtel; // the button that opens it
 
   // If the clicked element is NOT the button or inside the dropdown → close it
   if (!dropdown.contains(e.target) && !button.contains(e.target)) {
     dropdown.style.display = "none";
+  }
+
+  // tele
+    if (!dropdownTele.contains(e.target) && !buttonTele.contains(e.target)) {
+    dropdownTele.style.display = "none";
+  }
+
+  // airtel
+   // tele
+    if (!dropdownAirtel.contains(e.target) && !buttonAirtel.contains(e.target)) {
+    dropdownAirtel.style.display = "none";
   }
 });
 
