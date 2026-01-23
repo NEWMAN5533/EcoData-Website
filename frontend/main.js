@@ -40,6 +40,21 @@ const PACKAGE_MAP = {
 
 const STORAGE_KEY = "selected_mtn_package";
 
+function resolvePackageName(network) {
+  if (network === "mtn") {
+    return selectedPackageName;
+  }
+
+  if (network === "at") {
+    return "ishare_data_bundle";
+  }
+
+  if (network === "telecel") {
+    return "telecel_expiry_bundle";
+  }
+}
+
+
 //NEW UPDATED 21/01/2026  (DOMCONTENTLOADER)//
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -121,7 +136,7 @@ document.addEventListener("click", () => {
 
       selectedBundle = {
         network: opt.dataset.network,
-        packageName: selectedPackageName,
+        packageName: resolvePackageName(opt.dataset.network),
         size: Number(opt.dataset.size),
         price: Number(opt.dataset.price),
       };
@@ -181,7 +196,7 @@ document.addEventListener("click", () => {
             return;
           }
 
-          bundle = selectedBundle;
+          bundle = {...selectedBundle};
           lastPurchasedBundle = bundle; // 🔑 SAVE FOR POST-PAYMENT
 
           payWithPaystack(bundle, recipient);
@@ -191,7 +206,7 @@ document.addEventListener("click", () => {
         else {
           bundle = {
             network: button.dataset.network,
-            packageName: selectedPackageName,
+            packageName: resolvePackageName(button.dataset.network),
             size: Number(button.dataset.size),
             price: Number(button.dataset.price),
           };
@@ -1292,6 +1307,5 @@ window.addEventListener("click", (e) => {
     dropdown.style.display = "none";
   }
 });
-
 
 
