@@ -1341,22 +1341,24 @@ document.querySelectorAll('.option').forEach(opt => {
 const optionBtn = document.getElementById('optionBtn');
 const moveDown = document.getElementById('moveDown');
 
-// select Bundle const
-const optionBtnTele = document.getElementById("optionBtnTele");
-const moveDownTele = document.getElementById("moveDownTele");
- // airtel
- const optionBtnAirtel = document.getElementById("optionBtnAirtel");
- const moveDownAirtel = document.getElementById("moveDownAirtel");
 
 optionBtn.addEventListener('click', () => {
   moveDown.style.display = moveDown.style.display === 'block' ? 'none' : 'block';
 });
+
+// select Bundle const
+const optionBtnTele = document.getElementById("optionBtnTele");
+const moveDownTele = document.getElementById("moveDownTele");
 
 // tele
 optionBtnTele.addEventListener('click', () => {
   moveDownTele.style.display = moveDownTele.style.display === 'block' ? 'none' : 'block';
 });
 
+
+ // airtel
+ const optionBtnAirtel = document.getElementById("optionBtnAirtel");
+ const moveDownAirtel = document.getElementById("moveDownAirtel");
 // airtel
 optionBtnAirtel.addEventListener('click', () => {
   moveDownAirtel.style.display = moveDownAirtel.style.display === 'block' ? 'none' : 'block';
