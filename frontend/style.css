@@ -3312,16 +3312,16 @@ option
   margin-top: -15rem;
   scrollbar-width: none;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  border: 2px solid rgb(124, 111, 71) !important;
-  border-bottom: 9px solid rgb(124, 111, 71) !important;
-  border-top: 9px solid  rgb(124, 111, 71) !important;
+  border: 2px solid rgb(124, 111, 70);
+  border-bottom: 9px solid rgb(124, 111, 70);
+  border-top: 9px solid  rgb(124, 111, 70);
 }
 
 .dark-mode .option-dropdown{
   background: var(--welcome-card-bg);
-  border: 2px solid rgb(124, 111, 71) !important;
-  border-bottom: 9px solid  rgb(124, 111, 71) !important;
-  border-top: 9px solid  rgb(124, 111, 71) !important;
+  border: 2px solid rgb(124, 111, 70);
+  border-bottom: 9px solid  rgb(124, 111, 70);
+  border-top: 9px solid  rgb(124, 111, 70);
 }
 
 
