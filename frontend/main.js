@@ -157,7 +157,7 @@ document.addEventListener("click", () => {
       const networkHolder = document.querySelector(".selectedModal-right");
       if (networkHolder) networkHolder.textContent = selectedBundle.network.toUpperCase();
 
-      if (moveDown) moveDown.style.display = "none";
+      closeAllDropdowns();
     });
   });
 
@@ -191,7 +191,7 @@ document.addEventListener("click", () => {
       const networkHolderTele = document.querySelector(".telModal-right");
       if (networkHolderTele) networkHolderTele.textContent = selectedBundle.network.toUpperCase();
 
-      if (moveDownTele) moveDownTele.style.display = "none";
+      closeAllDropdowns();
     });
   });
   // end for normal telecel
@@ -215,7 +215,7 @@ document.addEventListener("click", () => {
       `;
 
       // Update modal placeholders
-      const img = document.querySelector(".airtelModal-left-left span img");
+      const img = document.querySelector(".airtelModal-left-left img");
       if (img) img.style.display = "flex";
 
       const gbHolderAirtel = document.querySelector(".placeHolderGBAirtel");
@@ -227,7 +227,7 @@ document.addEventListener("click", () => {
       const networkHolderAirtel = document.querySelector(".airtelModal-right");
       if (networkHolderAirtel) networkHolderAirtel.textContent = selectedBundle.network.toUpperCase();
 
-      if (moveDownAirtel) moveDownAirtel.style.display = "none";
+      closeAllDropdowns();
     });
   });
 
