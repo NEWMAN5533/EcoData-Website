@@ -2066,6 +2066,22 @@ PRICES SECTION ENDS
 UPDATED UI STYLE ENDS
 ****/
 
+/*** 
+NEW MODAL STATE
+****/
+/* ===== Modal Backdrop ===== */
+
+/* Active state */
+
+
+/* ===== Modal Content ===== */
+
+
+/***
+NEW MODAL ENDS
+***/
+
+
 /****-----PHONE INPUT MODAL-------------****/
 /* ===== MODAL STYLING ===== */
 .modal {
@@ -2079,6 +2095,7 @@ UPDATED UI STYLE ENDS
   align-items: center;
   justify-self: center;
   z-index: 9999;
+
 }
 
 .selected-div{
@@ -2997,6 +3014,9 @@ OFFER SELECT
 /***
 how to style select dropdown
 ***/
+
+
+
 .custom-select {
   position: relative;
   width: 100%;
@@ -3213,7 +3233,6 @@ max-width: 99%;
 flex-wrap: nowrap;
 height: 23rem;
 display: flex;
-padding-top: .4rem;
 align-items: start;
 padding: 1rem;
 margin-bottom: 4rem;
@@ -3225,6 +3244,7 @@ border-end-end-radius: 1rem;
 border-end-start-radius: 1rem;
 box-shadow: 0 8px 14px  rgba(56, 55, 55, 0.2);
 }
+
 
 .dark-mode .single-order  {
   background: var(--welcome-card-bg);
@@ -3272,8 +3292,6 @@ option
 }
 
 
-
-
 .custom-option .option-dropdown{
   position: absolute;
   width: 100%;
@@ -3294,17 +3312,21 @@ option
   margin-top: -15rem;
   scrollbar-width: none;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  border: 2px solid rgb(209, 212, 214);
-  border-bottom: 9px solid  rgba(77, 114, 134, 0.897);
-  border-top: 9px solid  rgba(77, 114, 134, 0.897);
+  border: 2px solid rgb(124, 111, 71) !important;
+  border-bottom: 9px solid rgb(124, 111, 71) !important;
+  border-top: 9px solid  rgb(124, 111, 71) !important;
 }
 
 .dark-mode .option-dropdown{
   background: var(--welcome-card-bg);
-  border: 2px solid rgb(110, 107, 107);
-  border-bottom: 9px solid  rgb(110, 107, 107);
-  border-top: 9px solid  rgb(110, 107, 107);
+  border: 2px solid rgb(124, 111, 71) !important;
+  border-bottom: 9px solid  rgb(124, 111, 71) !important;
+  border-top: 9px solid  rgb(124, 111, 71) !important;
 }
+
+
+
+
 
 .optionSelect{
   padding: 8px;
@@ -3324,7 +3346,6 @@ option
 .dark-mode .optionSelect{
   border: 1px solid rgb(77, 76, 76);
   box-shadow: 0;
-  ;
 }
 
 .optionSelect:hover{
@@ -3339,8 +3360,9 @@ option
 }
 
 
+
 .price-badge {
-  background-color: #1c72ac; /* light blue */
+  background-color: #ac921cd7; /* light blue */
   color: #ffffff;
   margin-right: 4rem;             /* white text */
   padding: 2px 6px;           /* small padding */
@@ -3352,7 +3374,7 @@ option
 
 
 .optionSelect small{
-  background: #1b48798e;
+  background: #9b721ad7;
   color: #fcfcfc;
   width: 4rem;
   height: 1.3rem;
@@ -3385,7 +3407,7 @@ option
   justify-content: space-between;
   padding: 0 .4rem;
   height: 6rem;
-  background-color: rgba(255, 230, 150, 0.815);
+  background-color: rgba(201, 179, 108, 0.815) !important;
   margin: 1rem 0;
   border-radius: .8rem;
   box-shadow: 0 2px 6px rgba(187, 187, 187, 0.2);
@@ -3418,7 +3440,11 @@ left section
 .selectedModal-left-left img{
   width: 1.8rem;
   height: 1.8rem;
+  max-width: 1.8rem;
+  max-height: 1.8rem;
+  object-fit: contain;
   display: none;
+
 }
 
 .selectedModal-left-right{
@@ -3468,6 +3494,61 @@ ends of left section
 }
 
 
+
+
+/***
+left section
+***/
+.selectedModal .selectedModal-left{
+  width: 100%;
+  max-width: 50%;
+  height: 2.8rem;
+  display: flex;
+  gap: 0;
+  align-items: center;
+  justify-content: start;
+  position:relative;
+  padding-right: 3rem;
+ 
+}
+
+.selectedModal-left-left{
+  width: 100%;
+  max-width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.selectedModal-left-left img{
+  width: 1.8rem;
+  height: 1.8rem;
+  display: none;
+}
+
+.selectedModal-left-right{
+  width: 100%;
+  max-width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  flex-direction: column;
+  font-size: .9rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 600;
+  color: rgb(52, 52, 73); 
+}
+
+.placeHolderPrice small{
+  font-size: .7rem;
+  color: rgb(48, 59, 66);
+}
+
+/***
+ends of left section
+*****/
+
+
 .optionBtn-selected{
   background: #5dade2;
   color: #ffffff;
@@ -3492,93 +3573,6 @@ ends of left section
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
-
-
-/***
-airtel & telecel ui styling
-***/
-
-.telModal{
-  background: linear-gradient(135deg,red)
-}
-
-.single-order .place-aibtn{
-  background: linear-gradient(135deg,rgb(240, 157, 119), rgb(233, 23, 23))
-}
-
-.single-order .aibtn{
-  background: linear-gradient(135deg,rgb(31, 233, 233), rgb(21, 84, 219))
-}
-
-
-/****
-NEW GRID & NORMAL UI UPDATE (20th/1/2026 ENDS
-*****/
-
-/****
-GRID TEL & AIRTEL UI
-*****/
-.tel-tigo-ui-btn{
-  width: 100%;
-  max-width: 99%;
-  padding: .2rem .5rem;
-  display: flex;
-  flex-direction: column;
-  gap: .7rem;
-  align-items: end;
-  justify-content: center;
-  height: 5rem;
-  border: 1px solid rgb(211, 206, 206);
-}
-
-.tel-tigo-ui-btn .ui-title{
-  margin-right: 3rem;
-}
-
-.ui-title small{
-  font-size: .8rem;
-  color: rgb(46, 46, 58);
-  font-weight: 600;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-.tel-tigo-ui-btn .ui-toggle{
-  gap: .8rem;
-  display: flex;
-  align-items: center;
-  position: relative;
-  margin-right: .3rem;
-}
-
-.ui-toggle .tobtn{
-  border: none;
-  width: 5rem;
-  height: 1.8rem;
-  border-radius: 8px;
-  cursor: pointer;
-  background: white;
-  color: rgb(50, 55, 68);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-}
-
-.ui-toggle .aitbtn{
-  background: linear-gradient(135deg, rgb(238, 121, 113), rgb(155, 18, 18));
-  color: white;
-}
-
-.ui-toggle .aibtn{
-  background: linear-gradient(135deg, rgba(35, 155, 224, 0.89), rgb(33, 33, 141));
-  color: white;
-}
-
-
-
-/***
-AIRTEL & TELECEL UI ENDS
-****/
-
-
-
 
 
 
