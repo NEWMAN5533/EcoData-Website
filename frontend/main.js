@@ -17,7 +17,7 @@ const API_BASE = (() => {
   if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
     return "http://localhost:3000";
   }
-  return "https://ecodata-app.onrender.com"; // your deployed backend
+  return "https://ecodata-app.onrender.com"; // your deployed backend on render
 })();
 
 
