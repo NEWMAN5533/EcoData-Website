@@ -1,10 +1,14 @@
 .card-container .afaTrusted{
-  background: linear-gradient(145deg, rgb(224, 218, 129), rgb(243, 163, 14));
+  background: linear-gradient(135deg, rgb(84, 85, 85), rgb(0, 12, 17));
+}
+
+.dark-mode .card-container .afaTrusted{
+  border: 1px solid rgb(99, 91, 91);
 }
 
 .card-container .trusted-by .afaleft-tu{
-  background: linear-gradient(145deg, rgb(224, 218, 129), rgb(243, 163, 14));
-  border: 1px solid rgb(224, 218, 129);
+  background: linear-gradient(135deg, rgb(84, 85, 85), rgb(29, 30, 31));
+  border: 1px solid rgb(161, 161, 155)04);
 }
 
 /****
@@ -91,7 +95,7 @@ p TITLE ENDS
 .afa-container .afa-package-card{
   width: 100%;
   max-width: 97%;
-  height: 34rem;
+  height: 28rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -112,18 +116,18 @@ p TITLE ENDS
   justify-content: center;
   flex-direction: column;
   padding-left: 1rem;
-  background: linear-gradient(145deg, rgb(224, 218, 129), rgb(243, 163, 14));
+   background: linear-gradient(135deg, rgb(84, 85, 85), rgb(0, 12, 17));
   line-height: .7;
 }
 
 .package-card-top h3{
-  font-size: 1rem;
+  font-size: .9rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   color: rgb(253, 253, 253);
 }
 
 .package-card-top small{
-  font-size: .8rem;
+  font-size: .75rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   color: rgb(255, 245, 222);
 }
@@ -181,12 +185,13 @@ color: rgb(91, 98, 102);
 list-style: none;
 color: rgb(131, 116, 116);
 font-weight: 600;
+font-size: .82rem;
 }
 
  .ul-exclusive li span{
 background: var(--bg-cl);
 color: rgb(34, 29, 29);
-padding: 0 .7rem;
+padding: 0 .4rem;
 border-radius: 8px;
 box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 margin-right: .3rem;
@@ -196,7 +201,8 @@ margin-right: .3rem;
  .ul-div li span{
 background: var(--bg-cl);
 color: rgb(34, 29, 29);
-padding: 0 .7rem;
+padding: 0 .4rem;
+font-size: .9rem;
 border-radius: 8px;
 box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 margin-right: .3rem;
@@ -242,8 +248,9 @@ afa-package ends
 
 .how-top span{
   background: none;
-  border: 2px solid rgb(87, 94, 97);
-  padding: 0 .4rem;
+  border: 2px solid rgb(48, 83, 148);
+  padding: 0 .33rem;
+  color: blue;
   border-radius: 50%;
 }
 
@@ -267,7 +274,7 @@ afa-package ends
 
 
 .how-bottom li{
-  font-size: .9rem;
+  font-size: .8rem;
   font-weight: 700;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   color: rgb(113, 118, 122);
@@ -4741,8 +4748,8 @@ SNACKBAR SECTION
  cursor: pointer;
  width: 80px;
  height: 40px;
-bottom: 92px;
-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+bottom: 95px;
+box-shadow: 0 2px 6px rgba(129, 127, 127, 0.4);
 right: 2px;
 z-index: 99999;
 font-family: "Poppins", sans-serif;
