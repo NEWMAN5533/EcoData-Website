@@ -17,12 +17,13 @@
 }
 .page-underDev small{
   font-size: 1.5rem;
+  transition: 3s ease;
   animation: spin 3s linear infinite;
 }
 
 @keyframes spin {
   100% {
-    transform: translateX(27px)
+    transform: translateX(14px)
   }
 }
 
