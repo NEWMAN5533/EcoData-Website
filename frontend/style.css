@@ -8,20 +8,21 @@
   margin-top: 1rem;
   margin-bottom: 1rem;
   padding: 1rem;
-  background: blue;
+  background: rgb(145, 145, 153);
 }
 
 .page-underDev h1{
   margin: 0;
+  font-size: 1.5rem;
 }
 .page-underDev small{
   font-size: 1.5rem;
-  animation: spin 2s linear infinite;
+  animation: spin 3s linear infinite;
 }
 
 @keyframes spin {
   100% {
-    transform: translateX(17px)
+    transform: translateX(27px)
   }
 }
 
@@ -5342,6 +5343,7 @@ top section
   align-items: center;
   justify-content: center;
   background: var(--bg-cl);
+  border-right: 2px solid var(--text-cl);
 }
 
 .dark-mode .cop-right{
@@ -5356,15 +5358,16 @@ top section
   height: 100%;
   font-weight: 800;
   background: var(--bg-cl);
-  padding: .1rem .3rem;
+  padding-right: .3rem;
   color: rgb(53, 53, 104);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-left: 2px solid white;
   text-align: center;
 }
+
+
 
 .dark-mode .powered {
   background: var(--welcome-card-bg);
