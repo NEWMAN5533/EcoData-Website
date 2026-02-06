@@ -1,15 +1,47 @@
+.page-underDev{
+  width: 100%;
+  max-width: 97%;
+  height: max-content;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: blue;
+}
+
+.page-underDev h1{
+  margin: 0;
+}
+.page-underDev small{
+  font-size: 1.5rem;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: translateX(17px)
+  }
+}
+
 .card-container .afaTrusted{
   background: linear-gradient(135deg, rgb(84, 85, 85), rgb(0, 12, 17));
 }
 
 .dark-mode .card-container .afaTrusted{
-  border: 1px solid rgb(99, 91, 91);
+  border: 1px solid rgb(97, 93, 93);
 }
 
 .card-container .trusted-by .afaleft-tu{
   background: linear-gradient(135deg, rgb(84, 85, 85), rgb(29, 30, 31));
-  border: 1px solid rgb(161, 161, 155)04);
+  border: 1px solid rgb(161, 161, 155);
 }
+
+.trusted-container .afaLogos{
+  color: rgb(240, 235, 235);
+}
+
 
 /****
 AFA UI
@@ -105,6 +137,7 @@ p TITLE ENDS
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   border-radius: .8rem;
   overflow: hidden;
+   border: 1px solid rgb(161, 161, 155);
 }
 
 .afa-package-card .package-card-top{
@@ -185,7 +218,8 @@ color: rgb(91, 98, 102);
 list-style: none;
 color: rgb(131, 116, 116);
 font-weight: 600;
-font-size: .82rem;
+font-size: .72rem;
+line-height: 1.7;
 }
 
  .ul-exclusive li span{
@@ -234,6 +268,8 @@ afa-package ends
   background: var(--background-cl);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   border-radius: .8rem;
+  margin: 2rem 0;
+  border: 1px solid rgb(161, 161, 155);;
 }
 
 .how-to-activate .how-top{
@@ -5326,6 +5362,7 @@ top section
   display: flex;
   align-items: center;
   justify-content: center;
+  border-left: 2px solid white;
   text-align: center;
 }
 
