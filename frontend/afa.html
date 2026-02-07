@@ -308,146 +308,122 @@
           <p>Personal Information</p>
         </div>
         <!---form-->
-        <form id="afa-Form">
-          <!---Full Name-->
-          <div class="form-group">
-            <label class="afa-label">Full Name</label>
-          <input class="afaInput" name="name" placeholder="Full Name" required />
-          </div>
+        <!-- AFA FORM -->
+<form id="afa-Form">
 
-          <!---Phone Number-->
-          <div class="form-group">
-            <label class="afa-label">Phone Number</label>
-          <input class="afaInput" name="name" placeholder="phone Number" required />
-          </div>
+  <!-- Full Name -->
+  <div class="form-group">
+    <label class="afa-label">Full Name</label>
+    <input
+      class="afaInput"
+      name="fullName"
+      placeholder="Full Name"
+      required
+    />
+  </div>
 
-            <!---Ghana Card-->
-          <div class="form-group">
-            <label class="afa-label">Ghana Card</label>
-          <input class="afaInput" name="name" placeholder="GHA - 232XXXXXX - X " required />
-          </div>
+  <!-- Phone Number -->
+  <div class="form-group">
+    <label class="afa-label">Phone Number</label>
+    <input
+      class="afaInput"
+      name="phone"
+      placeholder="Phone Number"
+      type="tel"
+      required
+    />
+  </div>
 
-            <!---Occupation-->
-          <div class="form-group">
-            <label class="afa-label">Occupation</label>
-          <input class="afaInput" name="name" placeholder="Occupation" required />
-          </div>
+  <!-- Ghana Card -->
+  <div class="form-group">
+    <label class="afa-label">Ghana Card</label>
+    <input
+      class="afaInput"
+      name="ghanaCard"
+      placeholder="GHA-XXXXXXXXX-X"
+      required
+    />
+  </div>
 
-            <!---Phone Number-->
-          <div class="form-group">
-            <label class="afa-label">Location</label>
-          <input class="afaInput" name="name" placeholder="Location" required />
-          </div>
+  <!-- Occupation -->
+  <div class="form-group">
+    <label class="afa-label">Occupation</label>
+    <input
+      class="afaInput"
+      name="occupation"
+      placeholder="Occupation"
+      required
+    />
+  </div>
 
-            <!---Phone Number-->
-          <div class="form-group">
-            <div class="form-wrapperRegions">
-                <button id="regionSelector" class="afaInput region">Select Your Region
-              <img src="./css/icons/more.png.png" alt="">
-                </button>
-             <section class="regions-sheet" style="display: none;">
-               <div class="regions-sheet-left">
-                  <!----region-1-->
-                <div class="regionSelect" 
-                data-region="Greater Accra">
-                  Greater Accra
-                </div>
-                 <!----region-1-->
-                <div class="regionSelect" 
-                data-region="Ashanti">
-                  Ashanti
-                </div>
-                  <!----region-1-->
-                <div class="regionSelect" 
-                data-region="Central">
-                  Central Region
-                </div>
-                  <!----region-1-->
-                <div class="regionSelect" 
-                data-region="Eastern">
-                  Eastern Region
-                </div>
-                  <!----region-1-->
-                <div class="regionSelect" 
-                data-region="Western">
-                  Western Region
-                </div>
-                  <!----region-1-->
-                <div class="regionSelect" 
-                data-region="Ashanti">
-                  Ashanti
-                </div>
-                  <!----region-1-->
-                <div class="regionSelect" 
-                data-region="Northern">
-                  Northern Region
-                </div>
-                    <!----region-1-->
-                <div class="regionSelect" 
-                data-region="Ahafo">
-                  Ahafo Region
-                </div>
-                </div>
-                  <!----region-1-->
-                <div class="regions-sheet-right">
-                  <div class="regionSelect" 
-                data-region="North East">
-                  North East Region
-                </div>
-                <!----region-1-->
-                <div class="regionSelect" 
-                data-region="Upper East">
-                  Upper East Region
-                </div>
-                <!----region-1-->
-                <div class="regionSelect" 
-                data-region="Upper West">
-                  Upper West Region
-                </div>
-                  <!----region-1-->
-                <div class="regionSelect" 
-                data-region="Savannah">
-                  Savannah Region
-                </div>
-                  <!----region-1-->
-                <div class="regionSelect" 
-                data-region="Volta">
-                  Volta Region
-                </div>
-                  <!----region-1-->
-                <div class="regionSelect" 
-                data-region="Oti">
-                  Oti Region
-                </div>
+  <!-- Location -->
+  <div class="form-group">
+    <label class="afa-label">Location</label>
+    <input
+      class="afaInput"
+      name="location"
+      placeholder="Location"
+      required
+    />
+  </div>
 
-                  <!----region-1-->
-                <div class="regionSelect" 
-                data-region="Bono">
-                  Bono
-                </div>
-                  <!----region-1-->
-                <div class="regionSelect" 
-                data-region="Bono East">
-                  Bono East
-                </div>
+  <!-- Region Selector -->
+  <div class="form-group">
+    <div class="form-wrapperRegions">
+      <button id="regionSelector" class="afaInput region" type="button">
+        Select Your Region
+        <img src="./css/icons/more.png.png" alt="">
+      </button>
 
-              
-                </div>
-              </section>
-            </div>
-          </div>
+      <section class="regions-sheet" style="display: none;">
+        <div class="regions-sheet-left">
 
-            <!---Phone Number-->
-          <div class="form-group">
-            <label class="afa-label">Date of Birth</label>
-          <input type="date" id="afaDob" class="afaInput" required />
-          </div>
+          <div class="regionSelect" data-region="Greater Accra">Greater Accra</div>
+          <div class="regionSelect" data-region="Ashanti">Ashanti</div>
+          <div class="regionSelect" data-region="Central">Central Region</div>
+          <div class="regionSelect" data-region="Eastern">Eastern Region</div>
+          <div class="regionSelect" data-region="Western">Western Region</div>
+          <div class="regionSelect" data-region="Northern">Northern Region</div>
+          <div class="regionSelect" data-region="Ahafo">Ahafo Region</div>
 
-            <!---Phone Number-->
-          <div class="form-group btnSub">
-            <button type="submit" id="afaSubmit" class="btn-primary">Proceed with Registration</button>
-          </div>
-        </form>
+        </div>
+
+        <div class="regions-sheet-right">
+
+          <div class="regionSelect" data-region="North East">North East Region</div>
+          <div class="regionSelect" data-region="Upper East">Upper East Region</div>
+          <div class="regionSelect" data-region="Upper West">Upper West Region</div>
+          <div class="regionSelect" data-region="Savannah">Savannah Region</div>
+          <div class="regionSelect" data-region="Volta">Volta Region</div>
+          <div class="regionSelect" data-region="Oti">Oti Region</div>
+          <div class="regionSelect" data-region="Bono">Bono</div>
+          <div class="regionSelect" data-region="Bono East">Bono East</div>
+
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Date of Birth -->
+  <div class="form-group">
+    <label class="afa-label">Date of Birth</label>
+    <input
+      type="date"
+      id="afaDob"
+      name="dob"
+      class="afaInput"
+      required
+    />
+  </div>
+
+  <!-- Submit -->
+  <div class="form-group btnSub">
+    <button type="submit" id="afaSubmit" class="btn-primary">
+      Proceed with Registration
+    </button>
+  </div>
+
+</form>
       </div>
     </div>
   </div>
