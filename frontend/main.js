@@ -414,7 +414,7 @@ async function payWithPaystack(bundle, recipient) {
         showSnackBar("Payment cancelled");
       }
     });
-  }, 10120); // 👈 sweet spot (80–150ms)
+  }, 4120); // 👈 sweet spot (80–150ms)
 }
 // SELECTED BUNDLE FOR UI UPDATE
 
