@@ -1,5 +1,6 @@
 
 
+
 /***
 LOADING SPINNER
 ****/
@@ -3440,7 +3441,7 @@ WELCOME CARD
 }
 
 .snack-info {
-  background-color: #3b82f6;/* blue */
+  background-color: #3b82f6;/* blue */
 }
 /*** snackbar ends***/
 
@@ -4082,7 +4083,7 @@ option
   justify-content: center;
   justify-self: center;
   align-items: center;
-  height: max-content;
+  height: 28rem;
   gap: .2rem;
   overflow-y: auto;
   top: -4.2rem;

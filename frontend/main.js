@@ -92,6 +92,9 @@ const deliveryOptions = document.querySelectorAll(".optionDelevery");
 
 const targetDiv = document.getElementById("topOpt");
 const unTargetDiv = document.getElementById("bottomOpt");
+const gridTargetSection = document.querySelector(".topMtn");
+const networkBadge = document.getElementById("mtnArea");
+
 
 
 
@@ -110,11 +113,15 @@ deliveryOptions.forEach(option => {
     if (option.dataset.mode === "express") {
       targetDiv.style.display = "none";
       unTargetDiv.style.display = "block";
+      gridTargetSection.style.display = "none";
+      networkBadge.style.display = "none";
     }
 
     if(option.dataset.mode === "normal"){
       unTargetDiv.style.display = "none";
       targetDiv.style.display = "block";
+      gridTargetSection.style.display = "block";
+      networkBadge.style.display = "block";
     }
 
     // save to localStorage
@@ -1360,6 +1367,5 @@ airtelScrollBtn.addEventListener("click", () => {
     window.open(whatsappURL, "_blank");
     document.getElementById("whatsappMessage").value = ""; // clear after sending
 });
-
 
 
