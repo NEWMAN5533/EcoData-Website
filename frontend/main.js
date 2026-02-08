@@ -860,7 +860,8 @@ function loadLiveOrders() {
 
   // Sort by createdAt descending
   orders
-    .sort((a, b) => b.createdAt - a.createdAt)
+    .sort((a, b) => parseInt(b.createdAt) -
+     parseInt(a.createdAt)) // force number
     .forEach(renderLiveOrderRow);
 
   // Show placeholder if table is empty
