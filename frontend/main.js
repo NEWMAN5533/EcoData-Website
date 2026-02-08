@@ -68,12 +68,38 @@ const dropdownOffer = document.getElementById("dropdownOffer");
 const deliveryOptions = document.querySelectorAll(".optionDelevery");
 
 
+const targetDiv = document.getElementById("topOpt");
+const unTargetDiv = document.getElementById("bottomOpt");
+const gridTargetSection = document.querySelector(".topMtn");
+const networkBadge = document.getElementById("mtnArea");
+
+function applyPackageUI(mode) {
+  selectedPackageName = PACKAGE_MAP[mode];
+
+  if(mode === "express"){
+    targetDiv.style.display = "none";
+    gridTargetSection.style.display = "none";
+    networkBadge.style.display = "none";
+
+    unTargetDiv.style.display = "block";
+  } else{
+    unTargetDiv.style.display = "none";
+
+    targetDiv.style.display = "block";
+    gridTargetSection.style.display = "block";
+    networkBadge.style.display = "block";
+  }
+}
+
+
+
   const saveMode = 
   localStorage.getItem(STORAGE_KEY) || "normal";
 
   const activeOption = document.querySelector(`.optionDelevery[data-mode="${saveMode}"]`);
 
   if(activeOption) {
+    applyPackageUI(saveMode);
     selectedPackageName =
     PACKAGE_MAP[saveMode];
 
@@ -90,11 +116,6 @@ const deliveryOptions = document.querySelectorAll(".optionDelevery");
   };
 
 
-const targetDiv = document.getElementById("topOpt");
-const unTargetDiv = document.getElementById("bottomOpt");
-const gridTargetSection = document.querySelector(".topMtn");
-const networkBadge = document.getElementById("mtnArea");
-
 
 
 
@@ -110,22 +131,12 @@ deliveryOptions.forEach(option => {
     e.stopPropagation();
 
     const mode = option.dataset.mode;
-    if (option.dataset.mode === "express") {
-      targetDiv.style.display = "none";
-      unTargetDiv.style.display = "block";
-      gridTargetSection.style.display = "none";
-      networkBadge.style.display = "none";
-    }
+  
 
-    if(option.dataset.mode === "normal"){
-      unTargetDiv.style.display = "none";
-      targetDiv.style.display = "block";
-      gridTargetSection.style.display = "block";
-      networkBadge.style.display = "block";
-    }
 
     // save to localStorage
     localStorage.setItem(STORAGE_KEY, mode);
+    applyPackageUI(mode);
 
     // ✅ SET GLOBAL PACKAGE NAME
     selectedPackageName = PACKAGE_MAP[mode];
