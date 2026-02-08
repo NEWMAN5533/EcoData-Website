@@ -982,7 +982,7 @@ function handleNewOrder(returnedOrder) {
 // ---------- LIVE ORDERS PERSISTENCE ----------
 
 const LIVE_ORDERS_KEY = "ecoLiveOrders";
-const MAX_LIVE_ORDERS = 20;
+const MAX_LIVE_ORDERS = 200;
 
 function saveLiveOrder(order) {
   if (!order || !order.orderId) return;
