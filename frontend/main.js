@@ -91,6 +91,37 @@ function applyPackageUI(mode) {
   }
 }
 
+function resetSelectedBundle(reason = "") {
+  selectedBundle = null;
+
+  // reset button UI
+  optionBtn.innerHTML = `Select Package <span><img src="./css/icons/more.png.png"></span>`;
+
+  // clear placeholders
+  const gbHolder = document.querySelector(".placeHolderGB");
+  if (gbHolder) gbHolder.textContent = "";
+
+  const priceHolder = document.querySelector(".placeHolderPrice");
+  if(priceHolder) priceHolder.textContent = "";
+
+  const networkHolder = document.querySelector(".selectedModal-right");
+  if(networkHolder) networkHolder.textContent = "";
+
+
+  const img = document.querySelector(".selectedModal-left-left img");
+  if (img) img.style.display = "none";
+
+  // clears phone input (normal mode)
+
+  const input = document.querySelector("#normalView .normalInput");
+  if (input) input.value = "";
+
+  // feedback
+  if (reason) {
+    showSnackBar(reason, "info", 5000);
+  }
+}
+
 
 
   const saveMode = 
@@ -131,9 +162,9 @@ deliveryOptions.forEach(option => {
     e.stopPropagation();
 
     const mode = option.dataset.mode;
-  
 
-
+    // RESET BUNDLE WHEN MODE CHANGED
+    resetSelectedBundle("Offer changed please select bundle.");
     // save to localStorage
     localStorage.setItem(STORAGE_KEY, mode);
     applyPackageUI(mode);
@@ -316,6 +347,10 @@ const gridView = document.getElementById("gridView");
 normalModeBtn.addEventListener("click", (e) => {
   e.stopPropagation();
 
+  
+    // RESET BUNDLE WHEN MODE CHANGED
+  resetSelectedBundle();
+
   normalView.style.display = "block";
   gridView.style.display = "none";
 
@@ -324,6 +359,10 @@ normalModeBtn.addEventListener("click", (e) => {
 gridModeBtn.addEventListener("click", (e) => {
   e.stopPropagation();
 
+
+
+    // RESET BUNDLE WHEN MODE CHANGED
+  resetSelectedBundle();
   gridView.style.display = "block";
   normalView.style.display = "none";
 
@@ -487,7 +526,7 @@ async function orderBundle(network, recipient, packageName, size, reference) {
       return;
     }
 
-    showSnackBar("📱✅ Order Placed successfully!", "success", 4000);
+    showSnackBar("📱✅ Order Placed successfully!", "success", 8000);
 
     const returnedOrder = result.order?.order || result.order || result;
 
