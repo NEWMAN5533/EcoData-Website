@@ -4082,7 +4082,7 @@ option
   justify-content: center;
   justify-self: center;
   align-items: center;
-  height: 28rem;
+  height: max-content;
   gap: .2rem;
   overflow-y: auto;
   top: -4.2rem;

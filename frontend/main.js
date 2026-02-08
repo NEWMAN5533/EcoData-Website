@@ -90,6 +90,11 @@ const deliveryOptions = document.querySelectorAll(".optionDelevery");
   };
 
 
+const targetDiv = document.getElementById("topOpt");
+const unTargetDiv = document.getElementById("bottomOpt");
+
+
+
 // Toggle dropdown
 selectBtn.addEventListener("click", (e) => {
   e.stopPropagation();
@@ -102,6 +107,15 @@ deliveryOptions.forEach(option => {
     e.stopPropagation();
 
     const mode = option.dataset.mode;
+    if (option.dataset.mode === "express") {
+      targetDiv.style.display = "none";
+      unTargetDiv.style.display = "block";
+    }
+
+    if(option.dataset.mode === "normal"){
+      unTargetDiv.style.display = "none";
+      targetDiv.style.display = "block";
+    }
 
     // save to localStorage
     localStorage.setItem(STORAGE_KEY, mode);
