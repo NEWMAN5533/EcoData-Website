@@ -153,7 +153,7 @@
   </span>
 </label>
 
-<img id="cardToggler" src="./css/icons/menu-icon.png" alt="image" class="menu-icon" loading="lazy">
+
 </div>
 </nav>
 
@@ -239,6 +239,58 @@
   <h1>Page under Development</h1>
   <small>coming up soon!</small>
 </div>
+
+
+<!---AFA-SUCCESS RECEIPT-->
+<section id="afaReceipt" class="afa-receipt" hidden >
+  <div class="receipt-card">
+    <h3>AFA Registration Successful</h3>
+
+    <div class="receipt-row">
+      <span>Name</span>
+      <strong id="rName"></strong>
+    </div>
+
+    
+    <div class="receipt-row">
+      <span>Phone</span>
+      <strong id="rPhone"></strong>
+    </div>
+
+    
+    <div class="receipt-row">
+      <span>Ghana Card</span>
+      <strong id="rGhanaCard"></strong>
+    </div>
+
+    
+    <div class="receipt-row">
+      <span>Region</span>
+      <strong id="rRegion"></strong>
+    </div>
+
+    
+    <div class="receipt-row">
+      <span>Amount Paid</span>
+      <strong>GHS 20.00</strong>
+    </div>
+
+    
+    <div class="receipt-row">
+      <span>Payment Ref</span>
+      <strong id="rRef"></strong>
+    </div>
+
+    <div class="receipt-actions">
+      <button onclick="downloadReceipt()">
+        Download Receipt
+      </button>
+      <button onclick="closeReceipt()">Close</button>
+    </div>
+  </div>
+</section>
+<!---AFA-SUCCESS RECEIPT-ends--->
+
 <!---AFA-UI-SECTION-->
 <div class="afa-container">
   <div class="span">
@@ -282,11 +334,13 @@
       <h5>How to Activate</h5>
     </div>
     <div class="how-bottom">
-          <li><span>1</span> Dial *1848#</li>
+         <ul>
+           <li><span>1</span> Dial *1848#</li>
           <li><span>2</span> Select Buy AFA Bundle</li>
           <li><span>3</span> Choose your offer</li>
           <li><span>4</span> Confirm & enter MoMo PIN</li>
           <li><span>5</span> Get SMS confirmation</li>
+         </ul>
     </div>
   </div>
 
@@ -308,7 +362,7 @@
           <p>Personal Information</p>
         </div>
         <!---form-->
-        <!-- AFA FORM -->
+       <!-- AFA FORM -->
 <form id="afa-Form">
 
   <!-- Full Name -->
@@ -385,6 +439,7 @@
           <div class="regionSelect" data-region="Western">Western Region</div>
           <div class="regionSelect" data-region="Northern">Northern Region</div>
           <div class="regionSelect" data-region="Ahafo">Ahafo Region</div>
+          <div class="regionSelect" data-region="Bono East">Bono East</div>
 
         </div>
 
@@ -397,7 +452,6 @@
           <div class="regionSelect" data-region="Volta">Volta Region</div>
           <div class="regionSelect" data-region="Oti">Oti Region</div>
           <div class="regionSelect" data-region="Bono">Bono</div>
-          <div class="regionSelect" data-region="Bono East">Bono East</div>
 
         </div>
       </section>
@@ -452,11 +506,20 @@
     </small>
   
    </div>
+
   </section>
 
 
-
-
+<!---LOADING-SPINNER-->
+<div id="paystackLoader" class="paystack-loader hidden">
+  <div class="loader-card">
+    <div class="orbit-spinner">
+      <span class="orbit-dot"></span>
+    </div>
+    <p>Preparing secure payment</p>
+  </div>
+</div>
+<!----PAYSTACK-LOADER-->
 
  <!-- Load Paystack library -->
   <script src="https://js.paystack.co/v1/inline.js"></script>
@@ -468,6 +531,7 @@
 <script type="module" src="./firebase-config.js"></script>
 
 <script type="module" src="main.js"></script>
+<script src="afa.js"></script>
 
 
 <!---usernameDisplay----->
@@ -530,27 +594,7 @@ updateClock();
 
 </script>
 
-<!---MENU-CARD-JS-->
-<script>
-  const cardToggler = document.getElementById("cardToggler");
-  const cardCloser = document.getElementById("closeCard");
-
-  // querySelectors //
-  const card = document.querySelector(".menu-card-container");
-
-  // function //
-cardToggler.addEventListener("click", function(e){
-  if (card.style.right != "-500px"){
-    card.style.right = "14px";
-  } else card.style.right = "-500px";
-});
-
-window.addEventListener("click", function(e){
-  if (e.target !== cardToggler && e.target !== card && !card.contains(e.target)){
-    card.style.right = "-500px";
-  }
-});
-
+<script scr="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js">
 
 </script>
 
