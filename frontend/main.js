@@ -11,20 +11,23 @@ import {
 } from 
 "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
+
+
+
   // ---------- CONFIG ----------
 const API_BASE = (() => {
   // use current host in prod or localhost for local dev
   if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
     return "http://localhost:3000";
   }
-  return "https://ecodata-app.onrender.com"; // your deployed backend on render
+  return "https://ecodata-app.onrender.com"; // your deployed backend
 })();
+
 
 
 // ---------- GLOBAL VARIABLES ----------
 let STATUS_POLL_INTERVAL = 5000;
 let _statusPollTimer = null; // to hold the interval timer ID
-
 
 // ---------- GLOBAL STATE ----------
 let selectedBundle = null;      // used for UI selection (normal view)
@@ -53,6 +56,8 @@ function resolvePackageName(network) {
     return "telecel_expiry_bundle";
   }
 }
+
+
 
 
 //NEW UPDATED 21/01/2026  (DOMCONTENTLOADER)//
@@ -219,6 +224,7 @@ document.addEventListener("click", () => {
 
           createPhoneModal(inputNumber => {
             payWithPaystack(bundle, inputNumber);
+           
           });
         }
       });
@@ -341,56 +347,75 @@ function createPhoneModal(callback) {
 };
 }
 
+const loader = document.getElementById("paystackLoader");
+
+function showLoader() {
+  loader.style.display = "flex";
+  document.body.classList.add("no-scroll");
+}
+
+function hideLoader() {
+  loader.style.display = "none";
+  document.body.classList.remove("no-scroll");
+}
+
+
+
 
 //NEW UPDATED 21/01/2026 //
 // === PAYSTACK PAYMENT (Firebase version) ===
 async function payWithPaystack(bundle, recipient) {
   const { network, packageName, size, price } = bundle;
 
-
-  // ✅ Get current user from Firebase Auth
   let user = null;
   try {
     user = firebase.auth().currentUser;
-  } catch (err) {
-    console.warn("Firebase Auth not initialized:", err);
-  }
+  } catch (err) {}
 
-  // ✅ Collect user details
   const userEmail = user?.email || `${recipient}@ecodata.com`;
   const userName = user?.displayName || "Guest User";
-  const userPhone = recipient;
 
+  // 1️⃣ Show YOUR loader first
+  showLoader();
 
-  const handler = PaystackPop.setup({
-    key: "pk_live_635856447ee14b583349141b7271f64c9b969749",
-    email: userEmail,
-    amount: price * 100,
-    currency: "GHS",
+  // 2️⃣ Let browser paint it
+  setTimeout(() => {
+    const paystack = new PaystackPop();
 
-    metadata: {
-      custom_fields: [
-        { display_name: "userName", value: userName },
-        { display_name: "recipient", value: userPhone },
-        { display_name: "Network", value: network },
-        { display_name: "Size", value: `${size}GB` },
-        { display_name: "Package", value: packageName },
-      ],
-    },
+    paystack.newTransaction({
+      key: "pk_live_635856447ee14b583349141b7271f64c9b969749",
+      email: userEmail,
+      amount: price * 100,
+      currency: "GHS",
 
-    callback: function (response) {
-      // ✅ ONLY here we call Swift/EcoData
-      orderBundle(network, recipient, packageName, size, response.reference);
-    },
+      metadata: {
+        custom_fields: [
+          { display_name: "User Name", value: userName },
+          { display_name: "Recipient", value: recipient },
+          { display_name: "Network", value: network },
+          { display_name: "Size", value: `${size}GB` },
+          { display_name: "Package", value: packageName },
+        ],
+      },
 
-    onClose: function () {
-      showSnackBar("Payment cancelled");
-    }
-  });
+      onSuccess: (response) => {
+        hideLoader();
+        orderBundle(
+          network,
+          recipient,
+          packageName,
+          size,
+          response.reference
+        );
+      },
 
-  handler.openIframe();
+      onCancel: () => {
+        hideLoader();
+        showSnackBar("Payment cancelled");
+      }
+    });
+  }, 10120); // 👈 sweet spot (80–150ms)
 }
-
 // SELECTED BUNDLE FOR UI UPDATE
 
 
@@ -451,7 +476,7 @@ async function orderBundle(network, recipient, packageName, size, reference) {
 
   } catch (err) {
     console.error("⚠ Server error:", err);
-    showSnackBar("⚠ Server error. Please try again.", "error", 5000);
+    showSnackBar("⚠ Server error. Please try again.", "error", 15000);
   }
 }
 //ends//
@@ -519,7 +544,6 @@ function saveGuestOrder(orderData) {
     console.error("❌ Failed to save guest order:", err);
   }
 }
-
 
 
 // ---------- UPDATE HOME TOTALS ----------
@@ -1321,3 +1345,6 @@ airtelScrollBtn.addEventListener("click", () => {
     window.open(whatsappURL, "_blank");
     document.getElementById("whatsappMessage").value = ""; // clear after sending
 });
+
+
+
