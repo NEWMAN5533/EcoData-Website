@@ -4020,14 +4020,15 @@ GRID VIEW
 .selection-btn{
   width: 100%;
   max-width: 99%;
-  height: 2.2rem;
+  height: 2.4rem;
   background: #ffffff;
-  border: 1px solid rgb(197, 191, 191);
+  border: 1px solid rgb(216, 213, 213);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   align-items: center;
   text-align: center;
   font-size: .9rem;
-  color: rgb(37, 39, 51);
+  font-weight: 600;
+  color: rgb(98, 99, 104);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   padding: 14px;
   border-radius: 8px;
@@ -4054,7 +4055,7 @@ height: 23rem;
 display: flex;
 align-items: start;
 padding: 1rem;
-margin-bottom: 4rem;
+margin-bottom: 6rem;
 justify-content: start;
 gap: .3rem;
 flex-direction: column;
@@ -4094,6 +4095,10 @@ box-shadow: 0 8px 14px  rgba(56, 55, 55, 0.2);
   border-radius: 8px;
   justify-content: start;
   align-items: start;
+}
+
+.single-order .normalInput::placeholder{
+  opacity: .5;
 }
 
 
@@ -4984,19 +4989,25 @@ SNACKBAR SECTION
  display: flex;
  align-items: center;
  justify-content: center;
- background: rgb(66, 58, 58);
+ background: #305e74;
  color: white;
- font-size: .7rem;
+ font-size: .8rem;
  border: none;
- border-radius: 20px;
+ border-radius: 6px;
  cursor: pointer;
- width: 80px;
- height: 40px;
+ width: 54px;
+ height: 45px;
 bottom: 95px;
 box-shadow: 0 2px 6px rgba(129, 127, 127, 0.4);
-right: 2px;
+right: 9px;
 z-index: 99999;
 font-family: "Poppins", sans-serif;
+transition: .2s ease;
+}
+
+a .afa-btn:hover{
+  transform: scale(1.06);
+  background-color: #2f6781;
 }
 
 
@@ -5588,70 +5599,9 @@ top section
 
 
 
-section footer .bar{
-  margin: 0;
-  bottom: 0;
-}
-.about h3{
-  font-size: 2rem;
-  color: var(--background-cl);
-}
-.about h4{
-  color: rgb(45, 182, 148);
-  margin-top: 0.4rem;
-  font-size: 1.8rem;
-}
-.about P{
-  width: 90%;
-  font-size: 1.2rem;
-  font-weight: 300;
-  color: rgb(250,250,250);
-  margin: 0 auto;
-  line-height: 1.8rem;
-}
-
-.about img{
-  border-radius: 2rem;
-width: 2rem;
-height: 2rem;
-margin: 0 .5rem;
-}
-
-@keyframes jump {
- 0% {
-  transform: rotateY('90deg 10%');
- }
-}
 
 
 
-footer a{
-  color:  #199e48;
-  text-decoration: none;
-  align-items: center;
-  font-weight: 500;
-  margin-left: 0.1rem;
-}
-
-footer .copyright{
-  color:  rgb(206, 58, 78);
-  font-size: 1.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: max-content;
-  position: relative;
-}
-
-
-
-footer img{
-  width: 2.6rem;
-  height: 2.6rem;
-  vertical-align: middle;
-  margin-left: 0.6rem;
-}
 
 
 
@@ -6174,7 +6124,7 @@ justify-content: center;
   max-width: 99%;
   height: max-content;
   padding: .2rem;
-  background: transparent;
+  background: red;
   margin: .2rem 0;
   justify-self: center;
 }
@@ -6199,6 +6149,7 @@ font-size: .8rem;
 
 .notice-board .notice-top small{
 font-size: .6rem;
+color: var(--text-cl-3);
 }
 
 /** follow us ***/
