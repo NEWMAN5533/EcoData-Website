@@ -179,7 +179,10 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
 
-
+.nav-right .theme-switch {
+  display: flex;
+  margin-left: 1rem;
+}
   </style>
 
   
@@ -199,14 +202,7 @@
 </a>
 </div>
 <div class="nav-right">
-  <a href="notification.html">
-     <div class="notis">
-    <img class="notifity" src="./css/icons/notify (1).png" alt="" loading="lazy">
-    <span id="markSpan">2</span>
-  <img class="notifity" hidden
-   src="./css/icons/notify (2).png" alt="" loading="lazy">
-  </div>
-  </a>
+
  
  
  <!---DARK MODE-->
@@ -243,9 +239,6 @@
       Admin signed ✔
     </div>
     <div class="noti-bottomR">
-      <button class="mark">
-        Mark as read
-      </button>
     </div>
   </div>
 </div>
@@ -263,9 +256,7 @@
       Admin signed ✔
     </div>
     <div class="noti-bottomR">
-      <button class="mark">
-        Mark as read
-      </button>
+      
     </div>
   </div>
 </div>
@@ -393,26 +384,8 @@
 
 
 
-<script>
-  document.addEventListener("DOMContentLoaded" , () => {
-const markAsReadBtn = document.querySelectorAll(".mark");
-const spanCountNotify = document.getElementById("markSpan");
-const READ_KEY = "true"
 
-if(localStorage.getItem(READ_KEY) === "true") {
-  spanCountNotify.style.display = "none";
-}
 
-// mark as read 
-markAsReadBtn.forEach(mark => {
-  mark.addEventListener("click", () => {
-    spanCountNotify.style.display = "none";
-    localStorage.setItem(READ_KEY, "true")
-  })
-})
-  })
-
-</script>
 
 
 
