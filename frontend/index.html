@@ -2083,6 +2083,31 @@
     }
 });
 </script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    
+const notificationIcon = document.querySelectorAll(".notifity");
+const notifyCount = document.getElementById("notifyCount");
+const NOTIFY_KEY = "notifications_read";
+
+// on page load
+if (localStorage.getItem(NOTIFY_KEY) === "true") {
+  notifyCount.style.display = "none"
+}
+
+// click to mark as read 
+notificationIcon.addEventListener("click", () => {
+  notifyCount.style.display = "none";
+  localStorage.setItem(NOTIFY_KEY, "true");
+});
+  });
+</script>
+
+
+
+
 <script>
   // === REAL TIME CLOCK ===
 function updateClock() {
