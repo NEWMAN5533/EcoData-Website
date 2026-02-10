@@ -73,6 +73,27 @@ const unTargetDiv = document.getElementById("bottomOpt");
 const gridTargetSection = document.querySelector(".topMtn");
 const networkBadge = document.getElementById("mtnArea");
 
+const notificationIcon = document.querySelectorAll(".notifity");
+const notifyCount = document.getElementById("notifyCount");
+const NOTIFY_KEY = "notifications_read";
+
+// on page load
+if (localStorage.getItem(NOTIFY_KEY) === "true") {
+  notifyCount.style.display = "none"
+}
+
+// click to mark as read 
+notificationIcon.addEventListener("click", () => {
+  notifyCount.style.display = "none";
+  localStorage.setItem(NOTIFY_KEY, "true");
+
+  if (NOTIFY_KEY === "true"){
+    notificationIcon.style.marginRight = "1rem";
+  }
+});
+
+
+
 function applyPackageUI(mode) {
   selectedPackageName = PACKAGE_MAP[mode];
 

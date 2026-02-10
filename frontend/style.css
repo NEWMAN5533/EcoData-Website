@@ -1471,6 +1471,9 @@ align-items: center;
 width: .8rem;
 height: .8rem;
 border-radius: 50%;
+-webkit-user-select: none;
+outline: none;
+ms;
 }
 
 input:checked + .slider {
