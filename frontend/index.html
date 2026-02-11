@@ -2098,7 +2098,7 @@ if (localStorage.getItem(NOTIFY_KEY) === "true") {
 }
 
 // click to mark as read 
-notificationIcon.addEventListener("click", () => {
+notifyCount.addEventListener("click", () => {
   notifyCount.style.display = "none";
   localStorage.setItem(NOTIFY_KEY, "true");
 });
