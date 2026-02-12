@@ -38,9 +38,21 @@
 
   <style>
 
+    *{
+      box-sizing: border-box;
+    }
+
+    body{
+      width: 100%;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+
+    }
+
     .notification-container{
       width: 100%;
-      min-height: 100vh;
+      min-height: max-content;
       max-width: 400px;
       display: flex;
       align-items: center;
@@ -51,6 +63,7 @@
       justify-self: center;
       top: 3.1rem;
       position: relative;
+      margin-bottom: 4rem;
     }
 
     .notification-container .noti-wrap{
@@ -72,7 +85,7 @@
     .notification-container .notification-card{
       width: 100%;
       max-width: 98%;
-      height: 10rem;
+      height: max-content;
       justify-self: center;
       display: flex;
       gap: .7rem;
@@ -183,6 +196,18 @@
   display: flex;
   margin-left: 1rem;
 }
+
+/***
+Delete button
+****/
+.notification-card .deleteM {
+  border: none;
+  color: rgb(34, 41, 43);
+  background: rgb(190, 184, 184);
+  font-size: .7rem;
+  border-radius: 2px;
+  cursor: pointer;
+}
   </style>
 
   
@@ -226,22 +251,27 @@
   </div>
 
   <!--noti 1-->
+<!---noti 3-->
 <div class="notification-card">
   <div class="noti-top">
-    PAYSTACK PAYMENTS
+    Not Received Order Reporting
   </div>
   <div class="noti-middle">
-    Paystack is undergoing security maintenance and this will result a payment not to be processing during the maintenance time: <br>
-    Tue, 10 Feb | 11:30 am to 12:00 pm.
+    Please when your placed order is delivered and still not received or reflected, don't hesitate to chat Admin by using admin chatButton at homePage. Reporting should be within 24hrs with the following: <br>
+    1. Order ID <br>
+    2. Number <br>
+    3. GB
   </div>
   <div class="noti-bottom">
-     <div class="noti-bottoml">
+    <div class="noti-bottoml">
       Admin signed ✔
     </div>
     <div class="noti-bottomR">
+      
     </div>
   </div>
 </div>
+
 <!---noti 2-->
 <div class="notification-card">
   <div class="noti-top">
@@ -256,12 +286,19 @@
       Admin signed ✔
     </div>
     <div class="noti-bottomR">
-      
+       
     </div>
   </div>
 </div>
-  </div>
 
+
+  </div>
+</div>
+
+
+<!---wrapper-div-->
+  </div>
+  <!---main-container-->
 </div>
 
 
@@ -375,6 +412,7 @@
 <!----skeleton ui end div-->
 
 <script type="module" src="main.js"></script>
+<script src="notification.js"></script>
 
 
 
@@ -405,28 +443,9 @@
 
 
 
-<script>
-  // === REAL TIME CLOCK ===
-function updateClock() {
-  const clock = document.getElementById("clock");
-  const now = new Date();
-  const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-  const dayName = days[now.getDay()];
-  let hours = now.getHours();
-  let minutes = now.getMinutes();
-  let seconds = now.getSeconds();
-  const ampm = hours >= 12 ? "PM" : "AM";
-  hours = hours % 12 || 12;
-  minutes = minutes < 10 ? "0" + minutes : minutes;
-  seconds = seconds < 10 ? "0" + seconds : seconds;
-  clock.innerHTML = `${dayName} ${hours}:${minutes}:${seconds} ${ampm}`;
-}
-setInterval(updateClock, 1000);
-updateClock();
 
 
 
-</script>
 
 <!---MENU-CARD-JS-->
 <script>
