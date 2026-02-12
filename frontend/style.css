@@ -1424,10 +1424,10 @@ dark mode styles
   align-items: center;
   justify-content: center;
   padding: 0 5px;
- -webkit-user-select: none;
- outline: none;
+-webkit-user-select: none;
 -ms-user-select: none;
 -webkit-tap-highlight-color: transparent;
+ outline: none;
 user-select: none;
 }
 
@@ -1437,11 +1437,11 @@ user-select: none;
   rotate: 2deg;
   padding: .18rem;
   margin-top: -.1rem;
-  user-select: none;
 -webkit-user-select: none;
-outline: none;
 -ms-user-select: none;
 -webkit-tap-highlight-color: transparent;
+ outline: none;
+user-select: none;
 }
 
 .slider .icon {
@@ -1449,10 +1449,10 @@ outline: none;
   opacity: 0.4;
   transition: opacity 0.3s ease, transform 0.3s ease;
   position: absolute;
-  -webkit-user-select: none;
-outline: none;
+-webkit-user-select: none;
 -ms-user-select: none;
 -webkit-tap-highlight-color: transparent;
+ outline: none;
 user-select: none;
 }
 
@@ -1508,9 +1508,9 @@ input:checked + .slider .moon {
 .slider .moon {
 opacity:0;
 -webkit-user-select: none;
-outline: none;
 -ms-user-select: none;
 -webkit-tap-highlight-color: transparent;
+outline: none;
 user-select: none;
 }
 
