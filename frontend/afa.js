@@ -1,33 +1,30 @@
-
-
+// ==========================
 // AFA CONFIG
-const AFA_PRICE_GHS = 20;
-const PAYSTACK_PUBLIC_KEY = "pk_live_635856447ee14b583349141b7271f64c9b969749"
+// ==========================
+const AFA_PRICE_GHS = 20; // Make sure backend matches this
+const PAYSTACK_PUBLIC_KEY = "pk_live_635856447ee14b583349141b7271f64c9b969749";
 
-// ==================== REGION SELECTOR ====================
 let selectedRegion = "";
 
+// ==========================
+// REGION SELECTOR
+// ==========================
 const regionBtn = document.getElementById("regionSelector");
 const regionSheet = document.querySelector(".regions-sheet");
 const regionOptions = document.querySelectorAll(".regionSelect");
 
-// Toggle sheet
-regionBtn.addEventListener("click", (e) => {
+regionBtn?.addEventListener("click", (e) => {
   e.preventDefault();
   e.stopPropagation();
-
   regionSheet.style.display =
     regionSheet.style.display === "flex" ? "none" : "flex";
 });
 
-// Pick region
 regionOptions.forEach((option) => {
   option.addEventListener("click", (e) => {
     e.stopPropagation();
-
     selectedRegion = option.dataset.region;
 
-    // Preserve button icon
     regionBtn.innerHTML = `
       ${selectedRegion}
       <img src="./css/icons/more.png.png" alt="">
@@ -37,9 +34,9 @@ regionOptions.forEach((option) => {
   });
 });
 
-// Close when clicking outside
 window.addEventListener("click", (e) => {
   if (
+    regionSheet &&
     !regionBtn.contains(e.target) &&
     !regionSheet.contains(e.target)
   ) {
@@ -47,313 +44,286 @@ window.addEventListener("click", (e) => {
   }
 });
 
-
-
-
-// ====afa form=================
+// ==========================
+// FORM ELEMENTS
+// ==========================
+const afaForm = document.getElementById("afa-Form");
 const afaSubmitBtn = document.getElementById("afaSubmit");
-const afaform = document.getElementById("afa-Form");
 
-
+// ==========================
 // LOADING STATE
-function setAfaLoading(isLoading, text = "Processing") {
-  if (isLoading) {
-    afaSubmitBtn.classList.add("loading");
+// ==========================
+function setAfaLoading(state, text = "Processing...") {
+  if (!afaSubmitBtn) return;
+
+  if (state) {
+    afaSubmitBtn.disabled = true;
     afaSubmitBtn.dataset.originalText = afaSubmitBtn.textContent;
     afaSubmitBtn.textContent = text;
-    afaSubmitBtn.disabled = true;
+    afaSubmitBtn.classList.add("loading");
   } else {
-    afaSubmitBtn.classList.remove("loading");
-    afaSubmitBtn.textContent = 
-    afaSubmitBtn.dataset.originalText || 
-    "Proceed with Registration";
     afaSubmitBtn.disabled = false;
+    afaSubmitBtn.textContent =
+      afaSubmitBtn.dataset.originalText || "Proceed with Registration";
+    afaSubmitBtn.classList.remove("loading");
   }
 }
 
-// SUBMIT AFADATA
-afaform.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  if (!selectedRegion){
-    showSnackBar("please select your region");
-    return;
-  }
-
-  setAfaLoading(true, "Initializing Payment")
-
-  const formData = new FormData(afaform);
-
-  if(!isValidFullName(fullName)) {
-    showSnackBar("Please enter your full name (first & last name)");
-    return;
-  }
-
-  if(!isValidGhanaPhone(phone)) {
-    showSnackBar("Enter a Valid Ghana Number");
-    return;
-  }
-
-  if(!isValidGhanaCard(ghanaCard)){
-    showSnackBar("Invalid Ghana Card Format (GHA-XXXXXXXX-X");
-    return;
-  }
-
-  if (!occupation) {
-    showSnackBar("Please enter your occupation");
-    return;
-  }
-
-  if (!location) {
-    showSnackBar("Please enter your location");
-    return;
-  }
-
-  if (!selectedRegion) {
-    showSnackBar("Please select your region");
-    return;
-  }
-
-  if (!isValidDOB(dob)){
-    showSnackBar("You must be at least 18 years old");
-    return;
-  }
-
-  // ===PASSED===
-  setAfaLoading(true, "Initializing Payment");
-
-  const afaData = {
-    service: "afa",
-    fullName: formData.get("fullName"),
-    phone: formData.get("phone"),
-    ghanaCard: formData.get("ghanaCard"),
-    occupation: formData.get("occupation"),
-    location: formData.get("location"),
-    dob: formData.get("dob"),
-    region: selectedRegion
-  };
-
-  startAfaPayment(afaData);
-});
-
-
-// ================= VALIDATION HELPERS =================
-
-// Full name: at least 2 words
+// ==========================
+// VALIDATION
+// ==========================
 function isValidFullName(name) {
   return name && name.trim().split(" ").length >= 2;
 }
 
-// Ghana phone: 10 digits, starts with 02 / 05 / 03
 function isValidGhanaPhone(phone) {
   return /^(02|03|05)\d{8}$/.test(phone);
 }
 
-// Ghana Card: GHA-XXXXXXXXX-X or GHA-XXXXXXXX-X
 function isValidGhanaCard(card) {
   return /^GHA-\d{7,9}-\d$/.test(card.toUpperCase());
 }
 
-// DOB: must be at least 18 years old
 function isValidDOB(dob) {
   if (!dob) return false;
 
-  const birthDate = new Date(dob);
+  const birth = new Date(dob);
   const today = new Date();
 
-  let age = today.getFullYear() - birthDate.getFullYear();
-  const m = today.getMonth() - birthDate.getMonth();
+  let age = today.getFullYear() - birth.getFullYear();
+  const m = today.getMonth() - birth.getMonth();
 
-  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-    age--;
-  }
+  if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--;
 
   return age >= 18;
 }
 
-// AFA PAYSTACK HANDLER
-function startAfaPayment(afaData) {
-  const loader =
-  document.getElementById("paystackLoader");
-  loader.classList.remove("hidden");
+// ==========================
+// LOADER
+// ==========================
+function showLoader() {
+  document.getElementById("paystackLoader")?.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+}
 
-  const handler = PaystackPop.setup({
+function hideLoader() {
+  document.getElementById("paystackLoader")?.classList.add("hidden");
+  document.body.style.overflow = "";
+}
+
+// ==========================
+// FORM SUBMIT
+// ==========================
+afaForm?.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(afaForm);
+
+  const fullName = formData.get("fullName")?.trim();
+  const phone = formData.get("phone")?.trim();
+  const ghanaCard = formData.get("ghanaCard")?.trim();
+  const occupation = formData.get("occupation")?.trim();
+  const location = formData.get("location")?.trim();
+  const dob = formData.get("dob");
+
+  if (!selectedRegion) return showSnackBar("Select your region", "warning");
+  if (!isValidFullName(fullName))
+    return showSnackBar("Enter full name", "warning");
+  if (!isValidGhanaPhone(phone))
+    return showSnackBar("Invalid Ghana number", "warning");
+  if (!isValidGhanaCard(ghanaCard))
+    return showSnackBar("Invalid Ghana Card format", "warning");
+  if (!occupation) return showSnackBar("Enter occupation", "warning");
+  if (!location) return showSnackBar("Enter location", "warning");
+  if (!isValidDOB(dob))
+    return showSnackBar("Must be 18+ years", "warning");
+
+  const afaData = {
+    fullName,
+    phone,
+    ghanaCard,
+    occupation,
+    location,
+    dob,
+    region: selectedRegion,
+  };
+
+  setAfaLoading(true, "Initializing Payment...");
+  startAfaPayment(afaData);
+});
+
+// ==========================
+// PAYSTACK V2
+// ==========================
+function startAfaPayment(afaData) {
+  showLoader();
+
+  const paystack = new PaystackPop();
+
+  paystack.newTransaction({
     key: PAYSTACK_PUBLIC_KEY,
-    email: `${afaData.phone}@ecodata.africa`,
+    email: `${afaData.phone}@ecodata.afa-program.com`,
     amount: AFA_PRICE_GHS * 100,
     currency: "GHS",
     ref: "AFA_" + Date.now(),
 
-    callback: function (response) {
-      loader.classList.add("hidden");
-      setAfaLoading(true, "Submitting Registration");
+    metadata: {
+      custom_fields: [
+        { display_name: "Full Name", value: afaData.fullName },
+        { display_name: "Phone", value: afaData.phone },
+        { display_name: "GhanaCard", value: afaData.ghanaCard },
+        { display_name: "Occupation", value: afaData.occupation },
+        { display_name: "Location", value: afaData.location },
+        { display_name: "dateOfBirth", value: afaData.dob },
+        { display_name: "Region", value: afaData.region },
+      ],
+    },
+
+    onSuccess: (response) => {
+      hideLoader();
+      setAfaLoading(true, "Verifying Payment...");
 
       submitAfaRegistration({
         ...afaData,
-        paymentReference: response.reference
+        paymentReference: response.reference,
       });
     },
 
-    onclose: function () {
-      loader.classList.add("hidden");
-      showSnackBar("Payment cancelled");
-    }
+    onCancel: () => {
+      hideLoader();
+      setAfaLoading(false);
+      showSnackBar("Payment cancelled", "error");
+    },
   });
-
-  // small delay
-  setTimeout(() => {
-    handler.openIframe();
-  }, 300);
 }
 
-// submit to server
+// ==========================
+// SERVER SUBMIT
+// ==========================
 async function submitAfaRegistration(payload) {
   try {
+    const apiPayload = {
+      name: payload.fullName,
+      phoneNumber: payload.phone,
+      idNumber: payload.ghanaCard,
+      occupation: payload.occupation,
+      location: payload.location,
+      region: payload.region,
+      dateOfBirth: payload.dob,
+      paymentReference: payload.paymentReference,
+    };
+
     const res = await fetch("/api/afa/register", {
       method: "POST",
-      headers: {"content-type": "application/json"},
-      body: JSON.stringify(payload)
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(apiPayload),
     });
 
     const data = await res.json();
 
     if (!data.success) {
       setAfaLoading(false);
-      showSnackBar(data.message || "AFA registration failed");
-      return;
+      return showSnackBar(data.message || "Registration failed", "error");
     }
 
-    showAfaReceipt({...payload,
-      reference: payload.paymentReference
-    });
+    showAfaReceipt(apiPayload, data);
 
-    showSnackBar("AFA Registration Successful");
-    afaform.reset();
+    showSnackBar("AFA Registration Successful", "success");
+
+    afaForm.reset();
     selectedRegion = "";
-
-    document.getElementById("regionSelector").textContent = "Select your Region";
+    regionBtn.textContent = "Select your Region";
 
     setAfaLoading(false);
   } catch (err) {
     console.error(err);
     setAfaLoading(false);
-    showSnackBar("Network error. Please try again.");
+    showSnackBar("Network error. Try again.", "error");
   }
 }
 
-function showAfaReceipt(data) {
-  document.getElementById("rName").textContent = data.fullName;
-  document.getElementById("rPhone").textContent = data.phone;
-  document.getElementById("rGhanaCard").textContent = data.ghanaCard;
-  document.getElementById("rRegion").textContent = data.region;
-  document.getElementById("rRef").textContent = data.reference;
+// ==========================
+// RECEIPT
+// ==========================
+function showAfaReceipt(payload, serverData) {
+  document.getElementById("rName").textContent = serverData.name;
+  document.getElementById("rPhone").textContent = serverData.phoneNumber;
+  document.getElementById("rGhanaCard").textContent = serverData.idNumber;
+  document.getElementById("rRegion").textContent = serverData.region;
+  document.getElementById("rRef").textContent = payload.paymentReference;
+  document.getElementById("rRegId").textContent =
+    serverData.registrationId || "-";
+  document.getElementById("rStatus").textContent =
+    serverData.status || "Approved";
+  document.getElementById("rPrice").textContent =
+    "GHS " + (serverData.registrationPrice || AFA_PRICE_GHS);
+  document.getElementById("rDate").textContent = new Date(
+    serverData.submittedAt || Date.now()
+  ).toLocaleString();
 
   document.getElementById("afaReceipt").classList.remove("hidden");
 }
 
-function closeReceipt() {
-  document.getElementById("afaReceipt").classList.add("hidden");
-}
-
-function downloadReceipt() {
-  const receipt = document.querySelector(".receipt-card");
-
-  html2pdf()
-  .set({
-    margin: 10,
-    filename: "AFA-Receipt.pdf",
-    image: {tye: "jpeg", quality: 0.98},
-    html2canvas: { scale: 2},
-    jsPDF: {unit: "mm", format: "a4",
-    orientation: "portrait" }
-  })
-  .from(receipt)
-  .save();
-}
-// ==================== AFA CODE===ends=====
-
-
-
-
-// SNACKBAR SECTION //
-// ===== SNACKBAR FUNCTION ===== //
-let snackbarTimeout = null;
+// ==========================
+// SNACKBAR
+// ==========================
+let snackbarTimeout;
 
 function showSnackBar(message, type = "info", duration = 4000) {
   let snackbar = document.querySelector(".snackbar");
 
-  // Create snackbar if it doesn't exist
   if (!snackbar) {
     snackbar = document.createElement("div");
     snackbar.className = "snackbar";
-
     snackbar.innerHTML = `
       <span class="snackbar-text"></span>
       <div class="snackbar-progress"></div>
     `;
-
     document.body.appendChild(snackbar);
   }
 
-  // Update text
   snackbar.querySelector(".snackbar-text").textContent = message;
 
-  // Color by type
-  if (type === "success") snackbar.style.background = "rgba(7, 29, 26, 0.95)";
-  else if (type === "error") snackbar.style.background = "#dc3545";
-  else if (type === "warning") snackbar.style.background = "#ffc107";
-  else snackbar.style.background = "rgba(7, 29, 26, 0.95)";
+  const colors = {
+    success: "#071d1a",
+    error: "#071d1a",
+    warning: "#071d1a",
+    info: "#071d1a",
+  };
 
-  // Reset progress animation
-  const progress = snackbar.querySelector(".snackbar-progress");
-  progress.style.animation = "none";
-  void progress.offsetWidth;
-  progress.style.animation = `snackbar-progress ${duration}ms linear forwards`;
-
+  snackbar.style.background = colors[type] || colors.info;
   snackbar.classList.add("show");
 
-  // Clear previous timeout
-  if (snackbarTimeout) clearTimeout(snackbarTimeout);
-
+  clearTimeout(snackbarTimeout);
   snackbarTimeout = setTimeout(() => {
     snackbar.classList.remove("show");
   }, duration);
 }
-// snackbar ends
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-  // === REAL TIME CLOCK ===
+// ==================== REAL TIME CLOCK ====================
 function updateClock() {
   const clock = document.getElementById("clock");
+  if (!clock) return;
+
   const now = new Date();
   const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
   const dayName = days[now.getDay()];
+
   let hours = now.getHours();
   let minutes = now.getMinutes();
   let seconds = now.getSeconds();
   const ampm = hours >= 12 ? "PM" : "AM";
+
   hours = hours % 12 || 12;
   minutes = minutes < 10 ? "0" + minutes : minutes;
   seconds = seconds < 10 ? "0" + seconds : seconds;
+
   clock.innerHTML = `${dayName} ${hours}:${minutes}:${seconds} ${ampm}`;
 }
+
 setInterval(updateClock, 1000);
 updateClock();
-
-
-
-
