@@ -152,6 +152,24 @@
 </section>
 
 <!---ENDS-->
+<!---SCROLL THUMBNAIL--REUSABLE--CARD ADS-->
+<div class="google-thumbnails-wrapper">
+  <div class="google-thumbnails" id="thumbnailScroll">
+    <div class="google-thumbnail thumb1"><img class="folsg" src="./css/icons/sg (1).png" alt="" loading="lazy">
+      Search us on Google
+    </div>
+    <div class="google-thumbnail thumb2"><img class="fol" src="./css/icons/follow.png" alt="" loading="lazy">
+      Follow us on our various social media pages
+    </div>
+    <div class="google-thumbnail thumb1">
+      <img class="fol" src="./css/icons/like.png" alt="" loading="lazy"> Closing 10PM today 2/15/2026
+    </div>
+    <div class="google-thumbnail thumb2"><img src="./css/icons/chatMe.png" alt="" loading="lazy">
+          Report any not received order with: Order ID, Number, and GB via admin chatButton.
+    </div>
+  </div>
+</div>
+<!---SCROLL THUMBNAIL--REUSABLE--CARD ADS----ends---->
 
 
 <!---NOTICE BOARD=-CONTAINER-->
@@ -1692,23 +1710,6 @@
 
 
 
-
-<section class="foot">
-   <div class="foot-content">
-    <div class="cop-right">
-        <p style="text-align:center;color:#888;font-size:14px;">© 2026 Ecodata. All rights reserved.
-      </p>
-    </div>
-      <small class="powered">
-        
-      <strong>Powered by:</strong>   IA E-Business 
-    </small>
-  
-   </div>
-  </section>
-
-
-
 <!-- Phone Input Modal -->
 <div id="phoneModal" class="modal">
   <div class="modal-content">
@@ -1988,6 +1989,35 @@
       usernameDisplay.textContent = "Welcome Back, Dear ";
     }
 });
+</script>
+
+<script>
+  const scrollWrapper = 
+  document.querySelector(".google-thumbnails-wrapper");
+  const thumbnails = 
+  document.getElementById("thumbnailScroll");
+
+  // Duplicate all items for seamless scroll
+  thumbnails.innerHTML += thumbnails.innerHTML;
+
+  let scrollAmount = 0;
+  const speed = .5; // pixel per frame
+
+  function animateScroll() {
+    scrollAmount += speed;
+
+    // when  scrolled half of the content. reset to start
+    if( scrollAmount >= thumbnails.scrollWidth / 2) {
+      scrollAmount = 0;
+    }
+
+    thumbnails.style.transform = `translateX(-${scrollAmount}px)`;
+    requestAnimationFrame(animateScroll);
+  }
+
+  // start animation
+  animateScroll();
+
 </script>
 
 
