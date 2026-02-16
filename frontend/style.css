@@ -1057,7 +1057,7 @@ Live order streaming
 .social-follow{
   display: flex;
   width: 100%;
-  max-width: 74%;
+  max-width: 80%;
   justify-self: center;
   height: 3.5rem;
   background: rgba(59, 59, 68, 0.815);
