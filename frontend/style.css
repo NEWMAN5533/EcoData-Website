@@ -81,6 +81,11 @@ ADS THUMBNAIL
   width: 2.4rem;
 }
 
+.google-thumbnails .thumb2 .folMarket{
+  height: 2.8rem;
+  width: 2.8rem;
+}
+
 
 
 .google-thumbnail{
@@ -95,7 +100,7 @@ ADS THUMBNAIL
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 16px;
   color: #54565a;
-  font-weight: 800;
+  font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
   flex-shrink: 0;
