@@ -4819,7 +4819,7 @@ MENU-CARD SECTION
 .menu-card-container {
   width: 100%;
   max-width: 15rem;
-  height: 24rem;
+  height: 28rem;
   position: fixed;
   display: flex;
   align-items: start;
@@ -6136,13 +6136,14 @@ AUTO SCROLLING STYLE
 /* 2. Small phones */
 @media (max-width: 360px) { 
 
-  
-
 }
-
 /* 3. Larger small phones */
 @media (max-width: 375px) {
-  
+  .menu-card-container{
+  height: 25rem;
+  width: 13rem;
+
+}
 
  }
 
@@ -6684,7 +6685,7 @@ max-width: 320px;
 
 
 .menu-card-container{
-  height: 18rem;
+  height: 21rem !important;
   width: 13rem;
 
 }
