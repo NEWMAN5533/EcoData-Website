@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoData Store | Quality Products Online</title>
+  <meta name="description" content="Shop quality clothes, phones, laptops, home & kitchen products at EcoData Store. Fast nationwide delivery.">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+ 
+  <!---MAIN-CONTAINER--------->
+
+
+  <!-- 🔝 TOP INFO BAR -->
+
+
+  <!-- 🏬 MAIN HEADER -->
+  <header class="store-header">
+    <div class="store-header-top">
+
+        <!-- LOGO -->
+    <div class="logo">
+      <img src="./icons/logoImg.jpeg" alt="" loading="lazy">
+    </div>
+       <div class="header-actions">
+      <div class="cart-icon" onclick="window.location.href='cart.html'">
+        <img src="./icons/totalorder.png" alt=""> <span id="cartCount">0</span>
+      </div>
+    </div>
+    </div>
+    <div class="store-header-bottom">
+          <!-- NAVIGATION -->
+    <nav class="main-nav">
+      <a href="#">Home</a>
+      <a href="#">Shop</a>
+      <a href="#">Categories</a>
+      <a href="#">Contact</a>
+    </nav>
+
+    <!---menu-icon-->
+    <img src="./icons/menu-icon.png" alt="">
+    </div>
+
+ 
+
+
+
+    <!-- SEARCH + CART -->
+   
+
+  </header>
+  <section class="main-shop-container">
+     <!-- 🎯 HERO SECTION -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h2>Discover Quality Products</h2>
+      <p>Phones, Clothes, Laptops, Home & Kitchen & More</p>
+      <button onclick="scrollToProducts()">Shop Now</button>
+    </div>
+  </section>
+
+  <!-- 🏪 SHOP SECTION -->
+  <section class="shop-wrapper" id="products">
+
+
+
+    <!-- PRODUCTS AREA -->
+    <div class="products-area">
+
+      <div class="filter-bar">
+        <span id="resultsCount">Showing products</span>
+
+        <select id="sortSelect">
+          <option value="latest">Sort by latest</option>
+          <option value="low">Price: Low to High</option>
+          <option value="high">Price: High to Low</option>
+        </select>
+      </div>
+
+      <!-- PRODUCT GRID -->
+      <div class="product-grid-container">
+        <div class="product-card-div">
+          <div class="product-top">
+            <img src="./products/com.png" alt="">
+          </div>
+          <div class="product-bottom">
+            <div class="product-btom-top">
+              <small><img src="./icons/location.png" alt="" loading="lazy"> Accra</small>
+              <p>Rating: 4.5</p>
+            </div>
+            <div class="pdetail">
+              Quality tray 3 sets
+            </div>
+
+            <div class="price">
+                GHS 400
+            </div>
+            <div class="product-btom-bottom">
+              <button class="buy-btn">Checkout</button>
+            </div>
+          </div>
+        </div>
+        <!---product-2-->
+         <div class="product-card-div">
+          <div class="product-top">
+            <img src="./products/men2.png" alt=""  loading="lazy">
+          </div>
+          <div class="product-bottom">
+            <div class="product-btom-top">
+              <small><img src="./icons/location.png" alt="" loading="lazy"> Accra</small>
+              <p>Rating: 4.5</p>
+            </div>
+            <div class="pdetail">
+              Quality tray 3 sets
+            </div>
+
+            <div class="price">
+                GHS 400
+            </div>
+            <div class="product-btom-bottom">
+              <button class="buy-btn">Checkout</button>
+            </div>
+          </div>
+        </div>
+
+         <div class="product-card-div">
+          <div class="product-top">
+            <img src="./products/kitchen.png" alt="" loading="lazy">
+          </div>
+          <div class="product-bottom">
+            <div class="product-btom-top">
+              <small><img src="./icons/location.png" alt="" loading="lazy"> Accra</small>
+              <p>Rating: 4.5</p>
+            </div>
+            <div class="pdetail">
+              Quality tray 3 sets
+            </div>
+
+            <div class="price">
+                GHS 400
+            </div>
+            <div class="product-btom-bottom">
+              <button class="buy-btn">Checkout</button>
+            </div>
+          </div>
+        </div>
+
+         <div class="product-card-div">
+          <div class="product-top">
+            <img src="./products/men12.png" alt="">
+          </div>
+          <div class="product-bottom">
+            <div class="product-btom-top">
+              <small><img src="./icons/location.png" alt="" loading="lazy"> Accra</small>
+              <p>Rating: 4.5</p>
+            </div>
+            <div class="pdetail">
+              Quality tray 3 sets
+            </div>
+
+            <div class="price">
+                GHS 400
+            </div>
+            <div class="product-btom-bottom">
+              <button class="buy-btn">Checkout</button>
+            </div>
+          </div>
+        </div>
+        <section class="new">
+          <h2>Muslims section</h2>
+          <img src="./icons/calender.png" alt="" loading="lazy">
+          <small>Shop Halal from our trusted muslims sellers
+          </small>
+        </section>
+
+        
+         <div class="product-card-div">
+          <div class="product-top">
+            <img src="./muslims/product (1).jpeg" alt="">
+          </div>
+          <div class="product-bottom">
+            <div class="product-btom-top">
+              <small><img src="./icons/location.png" alt="" loading="lazy"> Accra</small>
+              <p>Rating: 4.5</p>
+            </div>
+            <div class="pdetail">
+              Quality tray 3 sets
+            </div>
+
+            <div class="price">
+                GHS 400
+            </div>
+            <div class="product-btom-bottom">
+              <button class="buy-btn">Checkout</button>
+            </div>
+          </div>
+        </div>
+
+        
+         <div class="product-card-div">
+          <div class="product-top">
+            <img src="./muslims/product (10).jpeg" alt="">
+          </div>
+          <div class="product-bottom">
+            <div class="product-btom-top">
+              <small><img src="./icons/location.png" alt="" loading="lazy"> Accra</small>
+              <p>Rating: 4.5</p>
+            </div>
+            <div class="pdetail">
+              Quality tray 3 sets
+            </div>
+
+            <div class="price">
+                GHS 400
+            </div>
+            <div class="product-btom-bottom">
+              <button class="buy-btn">Checkout</button>
+            </div>
+          </div>
+        </div>
+
+        
+         <div class="product-card-div">
+          <div class="product-top">
+            <img src="./products/muslim5.png" alt="">
+          </div>
+          <div class="product-bottom">
+            <div class="product-btom-top">
+              <small><img src="./icons/location.png" alt="" loading="lazy"> Accra</small>
+              <p>Rating: 4.5</p>
+            </div>
+            <div class="pdetail">
+              Quality tray 3 sets
+            </div>
+
+            <div class="price">
+                GHS 400
+            </div>
+            <div class="product-btom-bottom">
+              <button class="buy-btn">Checkout</button>
+            </div>
+          </div>
+        </div>
+
+         <div class="product-card-div">
+          <div class="product-top">
+            <img src="./muslims/product (12).jpeg" alt="">
+          </div>
+          <div class="product-bottom">
+            <div class="product-btom-top">
+              <small><img src="./icons/location.png" alt="" loading="lazy"> Accra</small>
+              <p>Rating: 4.5</p>
+            </div>
+            <div class="pdetail">
+              Quality tray 3 sets
+            </div>
+
+            <div class="price">
+                GHS 400
+            </div>
+            <div class="product-btom-bottom">
+              <button class="buy-btn">Checkout</button>
+            </div>
+          </div>
+        </div>
+
+         <div class="product-card-div">
+          <div class="product-top">
+            <img src="./muslims/product (13).jpeg" alt="">
+          </div>
+          <div class="product-bottom">
+            <div class="product-btom-top">
+              <small><img src="./icons/location.png" alt="" loading="lazy"> Accra</small>
+              <p>Rating: 4.5</p>
+            </div>
+            <div class="pdetail">
+              Quality tray 3 sets
+            </div>
+
+            <div class="price">
+                GHS 400
+            </div>
+            <div class="product-btom-bottom">
+              <button class="buy-btn">Checkout</button>
+            </div>
+          </div>
+        </div>
+
+         <div class="product-card-div">
+          <div class="product-top">
+            <img src="./muslims/product (2).jpeg" alt="">
+          </div>
+          <div class="product-bottom">
+            <div class="product-btom-top">
+              <small><img src="./icons/location.png" alt="" loading="lazy"> Accra</small>
+              <p>Rating: 4.5</p>
+            </div>
+            <div class="pdetail">
+              Quality tray 3 sets
+            </div>
+
+            <div class="price">
+                GHS 400
+            </div>
+            <div class="product-btom-bottom">
+              <button class="buy-btn">Checkout</button>
+            </div>
+          </div>
+        </div>
+
+         <div class="product-card-div">
+          <div class="product-top">
+            <img src="./muslims/product (17).jpeg" alt="">
+          </div>
+          <div class="product-bottom">
+            <div class="product-btom-top">
+              <small><img src="./icons/location.png" alt="" loading="lazy"> Accra</small>
+              <p>Rating: 4.5</p>
+            </div>
+            <div class="pdetail">
+              Quality tray 3 sets
+            </div>
+
+            <div class="price">
+                GHS 400
+            </div>
+            <div class="product-btom-bottom">
+              <button class="buy-btn">Checkout</button>
+            </div>
+          </div>
+        </div>
+
+         <div class="product-card-div">
+          <div class="product-top">
+            <img src="./muslims/product (18).jpeg" alt="">
+          </div>
+          <div class="product-bottom">
+            <div class="product-btom-top">
+              <small><img src="./icons/location.png" alt="" loading="lazy"> Accra</small>
+              <p>Rating: 4.5</p>
+            </div>
+            <div class="pdetail">
+              Quality tray 3 sets
+            </div>
+
+            <div class="price">
+                GHS 400
+            </div>
+            <div class="product-btom-bottom">
+              <button class="buy-btn">Checkout</button>
+            </div>
+          </div>
+        </div>
+
+
+         <div class="product-card-div">
+          <div class="product-top">
+            <img src="./muslims/product (15).jpeg" alt="">
+          </div>
+          <div class="product-bottom">
+            <div class="product-btom-top">
+              <small><img src="./icons/location.png" alt="" loading="lazy"> Accra</small>
+              <p>Rating: 4.5</p>
+            </div>
+            <div class="pdetail">
+              Quality tray 3 sets
+            </div>
+
+            <div class="price">
+                GHS 400
+            </div>
+            <div class="product-btom-bottom">
+              <button class="buy-btn">Checkout</button>
+            </div>
+          </div>
+        </div>
+        <!-- JS PRODUCTS LOAD HERE -->
+      </div>
+
+      <!-- PAGINATION -->
+      <div class="pagination">
+        <button>Previous</button>
+        <button class="active">1</button>
+        <button>2</button>
+        <button>Next</button>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- 📲 FLOATING WHATSAPP BUTTON -->
+  <a href="https://wa.me/233552944424" class="whatsapp-float" target="_blank">
+    <img src="./icons/chatMe.png" alt="">
+  </a>
+
+  <!-- FOOTER -->
+  <footer class="store-footer">
+    <div class="footer-content">
+      <div>
+        <h4>EcoData Store</h4>
+        <p>Your trusted online marketplace.</p>
+      </div>
+
+      <div>
+        <h4>Quick Links</h4>
+        <p>Shop</p>
+        <p>Cart</p>
+        <p>Contact</p>
+      </div>
+
+      <div>
+        <h4>Contact</h4>
+        <p> <img src="./icons/whats.png" alt="">WhatsApp: +233 552944424</p>
+      </div>
+    </div>
+  </section>
+  <!-- SIDEBAR -->
+    <aside class="sidebar" style="display: none;">
+      <h3>Categories</h3>
+      <ul>
+        <li data-category="all">All Products</li>
+        <li data-category="Clothes">Clothes</li>
+        <li data-category="Phones">Phones</li>
+        <li data-category="Laptops">Laptops</li>
+        <li data-category="Home">Home & Kitchen</li>
+        <li data-category="Shoes">Shoes</li>
+      </ul>
+
+      <h3>Filter</h3>
+      <label>Price Range</label>
+      <input type="range" min="50" max="10000">
+    </aside>
+
+    <div class="copyright">
+      © 2026 EcoData Store. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="shop.js"></script>
+
+  <script>
+    function scrollToProducts() {
+      document.getElementById("products").scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+  </script>
+
+</body>
+</html>
