@@ -21,6 +21,37 @@
     width: 110%;
     height: 90%
   }
+
+  /****
+  VIEW ALL
+  ****/
+   .all{
+    border: none;;
+    padding: .3rem;
+    border-radius: 4px;
+    background: rgb(212, 212, 219);
+    color: rgb(151, 106, 7);
+    cursor: pointer;
+    font-size: .7rem;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+  .resultCount{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: rgb(116, 123, 126);
+    background: rgb(233, 233, 236);
+    padding: .1rem .6rem;
+    border-radius: .2rem;
+    font-size: .8rem;
+  }
+
+  .resultCount .count{
+    background-color: white;;
+    padding: .1rem .4rem;
+    border-radius: 4px;
+    color: rgb(29, 25, 25);
+    border: 1px solid rgb(211, 205, 205);
+  }
 </style>
 <body>
  
@@ -62,10 +93,10 @@
      <!-- 🎯 HERO SECTION -->
   <section class="hero-section">
     <div class="hero-content">
-      <h2>Discover Quality Products <br> from our best sellers</h2>
+      <h2>Shop the best <br> from our trusted sellers</h2>
       <img src="./icons/market.png" alt="">
       <p>Phones, Clothes, Laptops, Home & Kitchen & More</p>
-      <button class="become" onclick="window.location.href = 'apply.html'">Become Seller</button>
+      <button class="become" onclick="window.location.href = 'sellerAgreement.html'">Become Seller</button>
     </div>
     <div class="hero-img">
       <img src="./products/men3.png" alt="" loading="lazy">
@@ -81,13 +112,21 @@
     <div class="products-area">
 
       <div class="filter-bar">
-        <span id="resultsCount">Showing products</span>
+      <span class="resultCount" id="resultsCount">Showing products <small class="count">10</small></span></span>
 
-        <select id="sortSelect">
-          <option value="latest">Sort by latest</option>
-          <option value="low">Price: Low to High</option>
-          <option value="high">Price: High to Low</option>
-        </select>
+      <section class="sortBy">
+        <button class="sort-option" id="sortBtn">
+        sort by
+      </button>
+      <div class="sort-selection" id="sortSelectorCard">
+        <div class="sort " data-sort="low Price">
+        Low Price
+      </div>
+      <div class="sort sor2" data-sort="high Price">
+        High Price
+      </div>
+      </div>
+      </section>
       </div>
       <!---TITLE-->
       <section class="section-title">
