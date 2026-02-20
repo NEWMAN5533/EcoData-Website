@@ -113,7 +113,6 @@ body {
 .store-header-bottom img{
   width: 1.6rem;
   height: 1.6rem;
-
   cursor: pointer;
 }
 
@@ -121,7 +120,7 @@ body {
  width: 3rem;
  height: 3rem;
  border-radius: 50%;
- ;
+ margin-top: .3rem;
 }
 
 .logo span {
@@ -134,19 +133,34 @@ body {
 /* NAVIGATION */
 .main-nav {
   display: flex;
-  gap: 25px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: max-content;
+  height: 2.2rem;
 }
 
 .main-nav a {
   text-decoration: none;
   color: #333;
-  font-size: 14px;
+  font-size: 12px;
+  display: flex;
+  text-align: center;
+  justify-items: center;
+  align-items: center;
+  gap: .2rem;
   font-weight: 500;
   transition: 0.3s;
 }
 
+.main-nav a img{
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
 .main-nav a:hover {
-  color: #28a745;
+  color: #2898a7;
 }
 
 /* HEADER ACTIONS */
@@ -439,6 +453,7 @@ SECTION TITLE
   position: relative;
   justify-content: center;
   align-items: center;
+  
 }
 
 .product-grid-container .new{
@@ -482,7 +497,6 @@ SECTION TITLE
   flex-direction: column;
   justify-self: center;
   gap: .5rem;
-  margin-top: 1.4rem;
   position: relative;
   border-radius: .5rem;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -704,26 +718,77 @@ SECTION TITLE
 
 
 
-/**-----NEXT-SECTION--Muslims--***/
-.new-section{
-  width: 100%;
-  height: 3rem;
-  margin-top: 4rem;
+/**-----NEXT-SECTION--info-cards--***/
+.info-wrapper{
+  position: relative;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(21, 170, 133, 0.952);
-  color: white;
-  font-weight: 700;
+  flex-direction: column;
+  width: 100%;
+  height: max-content;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  padding: 1rem;
+  margin-top: 1rem;
 }
 
-.new-section img{
-  width: 2.4rem;
-  height: 2.4rem;
-  margin-right: 1rem;
-  background: white;
-  border-radius: 50%;
+.border{
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  background: rgb(197, 197, 202);
+  justify-content: center;
+  color: rgb(105, 102, 102);
+  margin-top: 2rem;
 }
+.info-cards{
+  width: 100%;
+  height: 14rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: rgb(233, 229, 229);
+  margin-top: 2rem;
+  gap: .3rem;
+  padding: .4rem;
+  border-radius: .3rem;
+}
+
+.info-cards .info-card{
+  justify-self: center;
+  width: 9rem;
+  height: 6rem;
+  display: flex;
+  background: rgb(255, 255, 255);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  border-radius: .4rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
