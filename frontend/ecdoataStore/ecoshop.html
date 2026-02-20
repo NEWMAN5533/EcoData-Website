@@ -33,18 +33,15 @@
           <!-- NAVIGATION -->
     <nav class="main-nav">
       <a href="#">Home</a>
-      <a href="#">Shop</a>
-      <a href="#">Categories</a>
-      <a href="#">Contact</a>
     </nav>
 
     <!---menu-icon-->
-    <img src="./icons/menu-icon.png" alt="">
+    <img id="toggleSidebar" src="./icons/menu-icon.png" alt="">
     </div>
 
   </header>
 
-<div class="underdev">
+<div class="underdev" style="display: none;">
   <h1>This page is under development</h1>
   <small>coming up soon!</small>
 </div>
@@ -81,9 +78,15 @@
           <option value="high">Price: High to Low</option>
         </select>
       </div>
+      <!---TITLE-->
+      <section class="section-title">
+      <h1>  FEATURED PRODUCTS</h1>
+      </section>
 
       <!-- PRODUCT GRID -->
       <div class="product-grid-container">
+
+        <!---PRODUCT-1-->
         <div class="product-card-div">
           <div class="product-top">
             <img src="./products/com.png" alt="">
@@ -171,15 +174,20 @@
             </div>
           </div>
         </div>
-        <section class="new">
-          <h2>Muslims section</h2>
-          <img src="./icons/calender.png" alt="" loading="lazy">
-          <small>Shop Halal from our trusted muslims sellers
-          </small>
-        </section>
 
-        
-         <div class="product-card-div">
+        <!--FIRST SECTION ENDS-->
+      </div>
+     
+
+      <div class="section-title">
+        <h1>MUSLIMS FEATURED</h1>
+      </div>
+
+       <!-- PRODUCT GRID -->
+      <div class="product-grid-container">
+
+
+             <div class="product-card-div">
           <div class="product-top">
             <img src="./muslims/product (1).jpeg" alt="">
           </div>
@@ -224,8 +232,8 @@
           </div>
         </div>
 
-        
-         <div class="product-card-div">
+
+           <div class="product-card-div">
           <div class="product-top">
             <img src="./products/muslim5.png" alt="">
           </div>
@@ -356,31 +364,76 @@
             </div>
           </div>
         </div>
-
-
-         <div class="product-card-div">
-          <div class="product-top">
-            <img src="./muslims/product (15).jpeg" alt="">
-          </div>
-          <div class="product-bottom">
-            <div class="product-btom-top">
-              <small><img src="./icons/location.png" alt="" loading="lazy"> Accra</small>
-              <p>Rating: 4.5</p>
-            </div>
-            <div class="pdetail">
-              Quality tray 3 sets
-            </div>
-
-            <div class="price">
-                GHS 400
-            </div>
-            <div class="product-btom-bottom">
-              <button class="buy-btn">Checkout</button>
-            </div>
-          </div>
-        </div>
-        <!-- JS PRODUCTS LOAD HERE -->
       </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       <!-- PAGINATION -->
       <div class="pagination">
@@ -394,42 +447,16 @@
 
   </section>
 
-  <!-- 📲 FLOATING WHATSAPP BUTTON -->
+
+  <section class="whatsapp" style="display: none;">
+      <!-- 📲 FLOATING WHATSAPP BUTTON -->
   <a href="https://wa.me/233552944424" class="whatsapp-float" target="_blank">
-    <img src="./icons/chatMe.png" alt="">
+    <img src="./icons/whats admin.jpg" alt="" >
   </a>
-
-  <!-- FOOTER -->
-  <footer class="store-footer">
-    <div class="footer-content">
-      <div class="footer-content-top">
-        <h4>EcoData Store</h4>
-        <p>Your trusted online marketplace.</p>
-      </div>
-    
-         <div class="footer-content-bottom">
-           <div class="contact">
-        <h4>Contact</h4>
-        <p> <img src="./icons/whats.png" alt="">WhatsApp: +233 552944424</p>
-      </div>
-
-        <div class="quick-links">
-        <h4>Quick Links</h4>
-        <p>Shop</p>
-        <p>Cart</p>
-        <p>Contact</p>
-      </div>
-         </div>
-
-    
-
-     
-    </div>
+  </section>
 
 
-
-
-
+ 
 
 
 
@@ -437,7 +464,7 @@
 
   </section>
   <!-- SIDEBAR -->
-    <aside class="sidebar" style="display: none;">
+    <aside class="sidebar" id="sidebar">
       <h3>Categories</h3>
       <ul>
         <li data-category="all">All Products</li>
