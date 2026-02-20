@@ -4852,7 +4852,7 @@ MENU-CARD SECTION
 
 .join-btn{
   width: 11.5rem;
-  height: 1.9rem;
+  height: 2.1rem;
   margin-left: .6rem;
   display: flex;
   align-items: center;
@@ -4867,6 +4867,7 @@ MENU-CARD SECTION
 .join-btn:hover{
   cursor: pointer;
   background: var(--btn-bg-cl);
+  border: 2px solid rgb(252, 210, 172);
 }
 
 .join-btn img{
@@ -4940,6 +4941,9 @@ CARD TOP
   text-decoration: none;
   gap: .5rem;
   color: rgb(53, 49, 49);
+  outline: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .shortcut-links{
@@ -4992,6 +4996,9 @@ CARD TOP
   color: rgb(109, 129, 134);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 1.2rem !important;
+    outline: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 
@@ -5005,6 +5012,9 @@ CARD TOP
   border-radius: 5px;
   margin-bottom: .5rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  outline: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .sidebar-nav:hover{
@@ -5022,27 +5032,32 @@ CARD BOTTOM
 
 .logout-btn{
   display: flex;
-  border: 2px solid green;
+  border: 2px solid rgb(252, 210, 172);
   width: 13.7rem;
   justify-content: center;
   align-items: center;
   border-radius: 2rem;
-  background: rgb(10, 29, 10);
+  background: rgb(250, 143, 2);
   color: var(--bg-cl);
   height: 2.4rem;
   font-size: 1rem;
   position: relative;
   display: flex;
-  box-shadow: 0 2px 6px rgba(61, 37, 32, 0.479);
+  box-shadow: 0 2px 6px rgba(102, 99, 98, 0.479);
   transition: 1s ease;
   cursor: pointer;
   margin: 0 .6rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    outline: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .logout-btn:hover{
-  background: rgb(52, 80, 11);
-  box-shadow: 0 2px 6px rgba(71, 46, 42, 0.479);
+  background: rgb(212, 123, 21);
+  box-shadow: 0 2px 6px rgba(78, 77, 76, 0.479);
   color: var(--background-cl);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .user-info {
