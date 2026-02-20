@@ -2113,24 +2113,29 @@ updateClock();
 
 <!---MENU-CARD-JS-->
 <script>
-  const cardToggler = document.getElementById("cardToggler");
+document.addEventListener("DOMContentLoaded", ()=> {
+ const cardToggler = document.getElementById("cardToggler");
   const cardCloser = document.getElementById("closeCard");
 
-  // querySelectors //
-  const card = document.querySelector(".menu-card-container");
+  // toggle menucard
+  cardToggler.addEventListener("click", function(e) {
+    e.stopPropagation();
+    if(cardCloser.classList.contains("active")){
+      cardCloser.classList.remove("active");
+    } else{
+      cardCloser.classList.add("active");
+    }
+  });
 
-  // function //
-cardToggler.addEventListener("click", function(e){
-  if (card.style.right != "-500px"){
-    card.style.right = "14px";
-  } else card.style.right = "-500px";
-});
+  // when ever clicked outside?
+  window.addEventListener("click", function(e) {
+    if(!cardCloser.contains(e.target) && !cardToggler.contains(e.target)) {
+      cardCloser.classList.remove("active");
+    }
+  })
+})
 
-window.addEventListener("click", function(e){
-  if (e.target !== cardToggler && e.target !== card && !card.contains(e.target)){
-    card.style.right = "-500px";
-  }
-});
+ 
 
 
 </script>
