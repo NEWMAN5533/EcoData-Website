@@ -10,13 +10,13 @@
 
 <style>
   .all{
-    border: none;;
-    padding: .3rem;
+    padding: .2rem;
     border-radius: 4px;
-    background: rgb(212, 212, 219);
-    color: rgb(151, 106, 7);
+    background: rgb(236, 236, 238);
+    color: rgb(126, 68, 2);
     cursor: pointer;
-    font-size: .7rem;
+    font-size: .75rem;
+    border: 1px solid rgb(214, 214, 214);
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
 
@@ -73,7 +73,7 @@
     <small>coming up soon!</small>
   </div>
 
-  <section class="main-shop-container">
+  <section class="main-shop-container homeContainer">
      <!-- 🎯 HERO SECTION -->
   <section class="hero-section">
     <div class="hero-content">
@@ -479,12 +479,12 @@
     <aside class="sidebar" id="sidebar">
       <h3>Categories</h3>
       <ul>
-        <li data-category="all">All Products</li>
-        <li data-category="Clothes">Clothes</li>
-        <li data-category="Phones">Phones</li>
-        <li data-category="Laptops">Laptops</li>
-        <li data-category="Home">Home & Kitchen</li>
-        <li data-category="Shoes">Shoes</li>
+        <li data-category="all"> All Products</li>
+        <li data-category="Clothes"><img src="./products/men1.png" alt="" loading="lazy"> Clothes</li>
+        <li data-category="Phones" ><img src="./products/iphone.png" alt="" loading="lazy"> Phones</li>
+        <li data-category="Laptops"><img src="./products/com.png" alt="" loading="lazy"> Laptops</li>
+        <li data-category="Home"><img src="./products/kitchen.png" alt="" loading="lazy"> Home & Kitchen</li>
+        <li data-category="Shoes"><img src="./products/men11.png" alt="" loading="lazy"> Shoes</li>
       </ul>
 
      <div class="terms-requirements">
@@ -514,13 +514,6 @@
 
   <script src="shop.js"></script>
 
-  <script>
-    function scrollToProducts() {
-      document.getElementById("products").scrollIntoView({
-        behavior: "smooth"
-      });
-    }
-  </script>
 
 </body>
 </html>

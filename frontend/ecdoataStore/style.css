@@ -81,9 +81,12 @@ body {
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 3px 15px rgba(0,0,0,0.15);
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 1000;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  z-index: 99999;
 }
 
 .store-header .store-header-top{
@@ -183,20 +186,22 @@ body {
 
 /* CART */
 .cart-icon {
-  background: #111;
+    background: linear-gradient(135deg, #632907ea, #0f0b06e3);
   color: white;
   font-weight: 600;
   display: flex;
   justify-content: space-between;
   width: 4rem;
-  height: 2rem;
+  border: 1px solid rgb(46, 31, 31);
+  height: 1.8rem;
   align-items: center;
   gap: .2rem;
-  padding: 9px 13px;
+  padding: 7px 11px;
   border-radius: 25px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 15px;
   transition: 0.3s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 
 .cart-icon img{
@@ -209,7 +214,10 @@ body {
 }
 
 /* ================= HERO SECTION ================= */
-
+.homeContainer{
+  display: flex;
+  margin-top: 0 !important;
+}
 .main-shop-container{
   width: 100%;
   max-width: 390px;
@@ -220,6 +228,8 @@ body {
   align-items: center;
   justify-self: center;
   padding: 0 .3rem;
+  margin-top: 7rem;
+  overflow: hidden;
   margin-bottom: 2rem;
 }
 
@@ -237,8 +247,7 @@ body {
   padding: 1rem;
   background: rgb(223, 217, 217);
   position: relative;
-  margin-top: 1rem;
-  position: relative;
+  margin-top: 7.4rem;
 }
 
 .underdev h1{
@@ -418,7 +427,6 @@ SORT-OPTIONS
   padding: .2rem 0;
   gap: .2rem;
   text-align: start;
-  cursor: pointer;
   position: relative;
   border-radius: .3rem;
   border: 1px solid rgb(223, 218, 218);
@@ -441,6 +449,7 @@ SORT-OPTIONS
   width: 100%;
   height: 50%;
   padding-left: .3rem;
+  cursor: pointer;
   transition:  .2s ease;
 }
 
@@ -732,7 +741,6 @@ SECTION TITLE
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   border-radius: .8rem;
   border-bottom: 5px solid rgb(177, 103, 6);
-  cursor: pointer;
  text-align: center;
  overflow: hidden;
 }
@@ -846,17 +854,19 @@ SECTION TITLE
   border: none;
   background: #e0e0e0;
   cursor: pointer;
-  transition: 0.3s;
+  border: 1px solid rgb(204, 202, 202);
+  transition: 0.4s ease-in-out;
 }
 
 .pagination button:hover {
-  background: #111;
-  color: white;
+  background:  #9c3e07ea;
+  color: rgb(247, 244, 244);
 }
 
 .pagination .active {
-  background: #111;
-  color: white;
+  background:  #632907ea;
+  color: rgb(247, 244, 244);
+  border: 1px solid  #52270fea;
 }
 
 /* ================= WHATSAPP FLOAT ================= */
@@ -897,6 +907,8 @@ SECTION TITLE
   box-shadow: 0 1px 4px rgba(0,0,0,0.1);
   position: relative;
   padding: .3rem;
+  justify-self: center;
+  border-top: 1px solid rgb(235, 234, 234);
 }
 
 .foot .foot-content{
@@ -960,15 +972,16 @@ SECTION TITLE
 
 /* SIDEBAR */
 .sidebar {
-  width: 220px;
+  width: 200px;
   background: #fff;
   padding: 25px;
   border-radius: 5px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  box-shadow: 0 10px 25px rgba(99, 98, 98, 0.4);
   height: fit-content;
-  top: 7.3rem;
+  top: 7.1rem;
   left: -20rem;
   position: fixed;
+  border: 1px solid rgb(224, 224, 224);
   transition: left .3s ease;
   z-index: 1000;
 }
@@ -982,6 +995,7 @@ SECTION TITLE
   font-size: 12px;
   color: rgb(88, 88, 92);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  
 }
 
 .sidebar .terms-requirements{
@@ -1040,15 +1054,33 @@ SECTION TITLE
 
 .sidebar li {
   padding: 10px 0;
-  font-size: 14px;
+  font-size: .9rem;
   cursor: pointer;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   color: #555;
-  transition: 0.3s;
+  transition: 0.1s ease;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar li img{
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  margin-right: .5rem;
+  padding: .1rem;
+  background: rgb(245, 245, 247);
+  box-shadow:  0 2px 6px rgba(87, 85, 85, 0.28);
+  border: 1px solid rgb(226, 226, 226);
 }
 
 .sidebar li:hover {
-  color: #28a745;
-  padding-left: 6px;
+  color: #a75b28;
+  padding-left: 10px;
+  background: rgb(240, 237, 237);
+  border-radius: 1rem;
+  border-top: none;
+  font-size: .8rem;
 }
 
 .sidebar input[type="range"] {
