@@ -624,7 +624,7 @@ SECTION TITLE
   cursor: pointer;
   color: rgb(223, 167, 12);
   margin-left:  .5rem;
-  margin-top: .2rem;
+  margin-bottom: .1rem;
 }
 
 .rating .countSold{
