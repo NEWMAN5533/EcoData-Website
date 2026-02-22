@@ -617,23 +617,27 @@ SECTION TITLE
 }
 
 .rating i{
-  font-size: .8rem;
+  font-size: 1rem;
   display: flex;
+  align-items: center;
   margin-left: .2rem;
   cursor: pointer;
   color: rgb(223, 167, 12);
-  margin: 0 .3rem;
+  margin-left:  .5rem;
+  margin-top: .2rem;
 }
 
 .rating .countSold{
   font-size: .9rem;
   font-weight: 600;
+   margin-left:  .3rem;
 }
 
 .rating .countRating{
   font-size: .9rem;
   font-weight: 600;
   color: rgb(188, 188, 189);
+  margin-left:  .1rem;
 }
 
 .product-bottom .price{
@@ -641,6 +645,7 @@ SECTION TITLE
   height: max-content;
   padding: .4rem;
   display: flex;
+  align-items: center;
   font-weight: 500;
   font-size: .9rem;
   color: rgb(29, 28, 27);
