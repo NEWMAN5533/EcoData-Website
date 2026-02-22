@@ -1103,11 +1103,11 @@ SECTION TITLE
 
 .links a{
   text-decoration: none;
-  color: rgb(44, 41, 41);
+  color: #0796af;
 }
 
 .links a:hover{
-  color: #a75b28;
+  color: #3d352f;
 }
 
 .sidebar .links:hover {
