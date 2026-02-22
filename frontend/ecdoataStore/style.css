@@ -479,6 +479,10 @@ SECTION TITLE
   padding: .5rem;
 }
 
+.title-middle{
+  margin-top: -.5rem !important;
+}
+
 .section-title h1{
   color: rgb(108, 108, 110);
   font-size: 1.3rem;
@@ -1014,7 +1018,7 @@ SECTION TITLE
 .sidebar {
   width: 200px;
   background: #fff;
-  padding: 25px;
+  padding: 14px;
   border-radius: 5px;
   box-shadow: 0 10px 25px rgba(99, 98, 98, 0.4);
   height: fit-content;
@@ -1038,17 +1042,19 @@ SECTION TITLE
   
 }
 
-.sidebar .terms-requirements{
+ .terms-requirements{
   display: flex;
   flex-direction: column;
   width: 100%;
   background: rgb(255, 255, 255);
-  height: max-content;
-  gap: .4rem;
+  scrollbar-width: thin;
+  height: 8rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  gap: .1rem;
   position: relative;
   align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  justify-content: start !important;
   border-radius: .3rem;
   padding: .3rem;
 }
@@ -1056,8 +1062,6 @@ SECTION TITLE
 .terms-requirements ul{
   display: flex;
   flex-direction: column;
-  margin: 0;
-  line-height: .4;
 }
 
 .terms-requirements ul li{
@@ -1069,7 +1073,12 @@ SECTION TITLE
   color: rgb(117, 117, 124);
   font-weight: 600;
   transition: .3s ease;
-  padding: .2rem;
+  display: flex;
+  white-space: nowrap;
+  line-height: 1;
+  align-items: center;
+  justify-content: start;
+  font-size: .9rem;;
 }
 
 .terms-requirements a:hover{
@@ -1079,7 +1088,8 @@ SECTION TITLE
 
 .terms-requirements h3{
   margin: 0;
-  color: rgb(216, 172, 115)
+  color: rgb(63, 61, 60);
+  font-size: .85rem;;
 }
 
 .terms-requirements a{
@@ -1119,15 +1129,26 @@ SECTION TITLE
   border: 1px solid rgb(226, 226, 226);
 }
 
+.sidebar li a:hover {
+  color: #a75b28;
+  padding-left: 10px;
+  background: rgb(240, 237, 237);
+  border-radius: 1rem;
+  border-top: none;
+  font-size: .94rem;
+  font-weight: 600;
+}
+
 .sidebar li:hover {
   color: #a75b28;
   padding-left: 10px;
   background: rgb(240, 237, 237);
   border-radius: 1rem;
   border-top: none;
-  font-size: .7rem;
+  font-size: .74rem;
   font-weight: 600;
 }
+
 
 .sidebar input[type="range"] {
   width: 100%;
