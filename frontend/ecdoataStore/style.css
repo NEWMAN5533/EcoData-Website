@@ -570,7 +570,7 @@ SECTION TITLE
   align-items: center;
   justify-content: center;
   display: flex;
-  background: rgba(187, 187, 189, 0.815);
+  background: rgb(226, 226, 226);
   border-radius: .3rem;
 }
 
