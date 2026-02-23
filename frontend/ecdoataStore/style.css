@@ -74,7 +74,7 @@ body {
   max-width: 390px;
   height: 7rem;
   justify-self: center;;
-  background: #ffffff;
+  background: white;
   padding: 1px 40px;
   display: flex;
   flex-direction: column;
@@ -229,7 +229,7 @@ body {
   align-items: center;
   justify-self: center;
   padding: 0 .3rem;
-  margin-top: 7rem;
+  margin-top: 6.8rem;
   overflow: hidden;
   margin-bottom: 2rem;
 }
@@ -649,9 +649,10 @@ SECTION TITLE
   height: max-content;
   padding: .4rem;
   display: flex;
+  white-space: nowrap;
   align-items: center;
   font-weight: 500;
-  font-size: .9rem;
+  font-size: .87rem;
   color: rgb(29, 28, 27);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
   system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
