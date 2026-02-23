@@ -12,9 +12,14 @@
   
 <style>
   .material-icons{
-    font-size: .8rem;
-    margin-bottom: -.2rem;
-    ;
+    font-size: 1rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cart{
+    background: linear-gradient(135deg,rgb(247, 136, 33),rgb(97, 59, 9));
+    border: 1px solid rgb(179, 97, 3)
   }
 </style>
 </head>
@@ -28,7 +33,7 @@
       <img src="./icons/logoImg.jpeg" alt="" loading="lazy">
     </div>
        <div class="header-actions">
-      <div class="cart-icon" onclick="window.location.href='cart.html'">
+      <div class="cart-icon cart" onclick="window.location.href='cart.html'">
         <img src="./icons/totalorder.png" alt=""> <span id="cartCount">0</span>
       </div>
     </div>
@@ -58,7 +63,7 @@
        </p>
       </div>
       <div class="store-desc">
-      <p> by quality clothing store...( <i class="material-icons">star</i><span class="rat">4.5 </span>| 5 sold)</p>
+      <p> by quality clothing store...( <i class="material-icons">star</i><span class="rat">4.5 </span> | 5 sold)</p>
       </div>
       <div class="pdt-price">
         <h1>GHS 320</h1>
@@ -73,7 +78,6 @@
 
       <!-----btns-->
       <div class="pdt-btns">
-          <img src="./icons/shop.png" alt="" loading="lazy">
         <div class="btns-wrapper">
             <button class="addToCart">Add to Cart</button>
           <button class="buyNow">Buy Now</button>
