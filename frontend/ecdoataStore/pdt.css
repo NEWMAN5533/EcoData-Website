@@ -1,7 +1,22 @@
+   /***
+   DISPLAY NONE DIV
+   ***/
+   .store-header{
+    height: 4rem;
+    padding: 0 1rem; 
+   }
+   
+   .store-header .store-header-bottom{
+    display: none;
+   }
+
+   .main-shop-container{
+    margin-top: 4rem;
+   }
+   
    .product-detail-container{
     width: 100%;
     height: max-content;
-    margin-top: .1rem;
     position: relative;
     justify-content: space-between;
     display: flex;
