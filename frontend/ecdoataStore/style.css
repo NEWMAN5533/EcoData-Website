@@ -75,7 +75,7 @@ body {
   height: 7rem;
   justify-self: center;;
   background: white;
-  padding: 1px 40px;
+  padding: 1px 16px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
