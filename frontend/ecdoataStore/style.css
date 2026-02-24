@@ -186,13 +186,13 @@ body {
 
 /* CART */
 .cart-icon {
-    background: linear-gradient(135deg, #632907ea, #0f0b06e3);
+    background: linear-gradient(135deg,rgb(247, 136, 33),rgb(97, 59, 9));
+    border: 1px solid rgb(179, 97, 3);
   color: white;
   font-weight: 600;
   display: flex;
   justify-content: space-between;
   width: 4rem;
-  border: 1px solid rgb(46, 31, 31);
   height: 1.8rem;
   align-items: center;
   gap: .2rem;
@@ -210,7 +210,7 @@ body {
 }
 
 .cart-icon:hover {
-  background: #323332;
+  background: #b85e15;
 }
 
 /* ================= HERO SECTION ================= */
