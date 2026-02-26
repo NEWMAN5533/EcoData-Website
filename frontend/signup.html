@@ -145,16 +145,7 @@
 
 
 
-.eye-icon{
-  position: absolute;
-  right: 50px;
-  top: 64%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  user-select: none;
-  font-size: 18px;
-  color: #777;
-}
+
 
 
 
@@ -294,7 +285,6 @@
       <input type="text" id="username" placeholder="Username" required />
       <input type="email" id="email" placeholder="Email" required />
       <input type="password" id="password" placeholder="Password" required />
-      <span id="togglePassword" class="eye-icon">👁</span>
       <button type="submit">Sign Up</button>
     </form>
     <p>Already have an account? <a href="login.html">Login</a></p>
@@ -401,17 +391,7 @@ function showSnackBar(message, type = "info", duration = 4000) {
 
 
 
-  <!----TOGGLE EYE ICON--JS---->
-  <script>
-    const togglePassword = document.getElementById("togglePassword");
-const passwordField = document.getElementById("password");
-
-togglePassword.addEventListener("click", () => {
-  const type = passwordField.type === "password" ? "text" : "password";
-  passwordField.type = type;
-  togglePassword.textContent = type === "password" ? "👁":"🙈";
-});
-  </script>
+  
 
 </body>
 </html>
