@@ -55,7 +55,7 @@
   width: 100%;
   max-width: 480px;
   justify-self: center;
-  height: 3.8rem;
+  height: 3rem;
   position: fixed;
   top: 0;
   overflow: hidden;
@@ -78,8 +78,8 @@
 
 
 .nav-left img{
-  width: 3.4rem;
-  height: 3.4rem;
+  width: 2.3rem;
+  height: 2.3rem;
   background-color: none;
   border-radius: 50%;
   box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
@@ -147,8 +147,8 @@
 
 .eye-icon{
   position: absolute;
-  right: 80px;
-  top: 63%;
+  right: 50px;
+  top: 64%;
   transform: translateY(-50%);
   cursor: pointer;
   user-select: none;
@@ -176,7 +176,7 @@
       justify-self: center;
       margin: 150px auto;
       height: 37rem;
-      max-width: 400px;
+      max-width: 300px;
     }
 
       form{
@@ -190,21 +190,34 @@
     }
     h2 {
       text-align: center;
-      color: #ffffff;
+      color: #0a8a7f;
+      white-space: nowrap;
+      font-size: 1.2rem;
     }
     input{
-      width: 100%;
-      padding: 14px;
+      width: 15rem;
+      padding: 10px 10px;
       margin-top: 40px;
+      display: flex;
       border: 1px solid #fffdfd;
-      border-radius: 6px;
+      border-radius: 4px;
       background: rgba(255, 255, 255, 0.979);
       color: black;
-      font-size: 16px;
+      font-size: 12px;
+      text-align: start;
     }
+
+    input::placeholder{
+      opacity: .6;
+      text-align: start;
+    }
+
+
     button {
-      width: 100%;
-      padding: 10px;
+
+      padding: 8px 49px;
+      height: 2.5rem;
+      text-align: center;
       background: #4caf50;
       border: none;
       border-radius: 6px;
@@ -220,152 +233,21 @@
       text-align: center;
       margin-top: 1rem;
       background: rgba(0, 0, 0, 0.5);
-      padding: .3rem;
+      padding: 3px 12px;
+      white-space: nowrap;
       border-radius: 4px;
+      font-size: .8rem;
       color: white;
     }
     a {
       color: #09c4e6;
       text-decoration: none;
-      font-size: 1.1rem;
+      font-size: .9rem;
       padding: .2rem;
       margin: 0 -.1rem;
       border-radius: 4px;
     }
     
-    /**
-    * SNACKBAR
-    **/
-    /***
-SNACKBAR SECTION
-****/
-.snackbar {
-  position: fixed;
-  top: 1rem;
-  right: 50%;
-  width: 100%;
-  height: 3rem;
-  max-width: 420px;
-  transform: translateX(50%);
-  background-color:  #d8eee0;
-  color: rgb(41, 44, 42);
-  text-align: center;
-  display: flex;
-  align-items: center;
-  word-spacing: 2.7;
-  justify-content: center;
-  font-size: 1.2rem;
-  padding: 12px 20px;
-  border-radius: 4px;
-  font-weight: 500;
-  font-family: 'Times New Roman', Times, serif;
-  box-shadow: 0 2px 6px rgba(98, 126, 118, 0.849), 0 -2px 6px  rgba(98, 126, 121, 0.849) ;
-  z-index: 2000000; /* above input popup */
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 1.5s ease, transform 0.3s ease;
-}
-
-.snackbar.show {
-  opacity: 1;
-  transform: translateX(50%) translateY(10px);
-  pointer-events:all;
-  width: 100%;
-  max-width: 420px;
-  background: var(--bg-cl);
-}
-
-
-
-/* ABOUT & FOOTER */
-.about,
-footer {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-self: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 100%;
-  height: max-content;
-  max-width: 480px;
-  text-align: center;
-  color: white;
-  background-color:  rgb(0, 0, 0) ;
-  bottom: 0;
-}
-
-.about{
-  border-block-end: 1px solid var(--ascent-cl);
-}
-
-section footer .bar{
-  margin: 0;
-  bottom: 0;
-}
-.about h3{
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: var(--background-cl);
-}
-.about h4{
-  color: rgb(45, 182, 148);
-  margin-top: 0.4rem;
-  font-size: 1.8rem;
-}
-.about P{
-  width: 90%;
-  font-size: 1rem;
-  font-weight: 300;
-  color: rgb(250,250,250);
-  margin: 0 auto;
-  line-height: 1.8rem;
-}
-
-.about img{
-border-radius: 2rem;
-width: 1.1rem;
-height: 1.1rem;
-margin: 0 .5rem;
-align-self: center;
-margin-bottom: 3px;
-}
-
-@keyframes jump {
- 0% {
-  transform: rotateY('90deg 10%');
- }
-}
-
-
-
-footer a{
-  color:  #f5f5f5;
-  text-decoration: none;
-  align-items: center;
-  font-weight: 500;
-  margin-left: 0.1rem;
-}
-
-footer .copyright{
-  color:  rgb(206, 58, 78);
-  font-size: 1.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: max-content;
-  position: relative;
-}
-
-
-
-footer img{
-  width: 2.6rem;
-  height: 2.6rem;
-  vertical-align: middle;
-  margin-left: 0.6rem;
-}
 
 @media (min-width: 1440px) {
   .navbar{
@@ -411,7 +293,7 @@ footer img{
     <form id="signup-form">
       <input type="text" id="username" placeholder="Username" required />
       <input type="email" id="email" placeholder="Email" required />
-      <input type="password" id="password" placeholder="Set Your Password" required />
+      <input type="password" id="password" placeholder="Password" required />
       <span id="togglePassword" class="eye-icon">👁</span>
       <button type="submit">Sign Up</button>
     </form>
@@ -468,42 +350,55 @@ footer img{
   </script>
 
    <!----SNACKBAR-SECTION--->
+   <!----SNACKBAR-SECTION--->
   <script>
 // SNACKBAR SECTION //
 // ===== SNACKBAR FUNCTION ===== //
-function showSnackBar(message, type = "info") {
-  // Remove existing snackbar if visible
-  const existing = document.querySelector(".snackbar");
-  if (existing) existing.remove();
+let snackbarTimeout = null;
 
-  // Create snackbar element
-  const snackbar = document.createElement("div");
-  snackbar.className = "snackbar";
+function showSnackBar(message, type = "info", duration = 4000) {
+  let snackbar = document.querySelector(".snackbar");
 
-  // Color scheme based on type
-  if (type === "success") snackbar.style.background = "#28a745";   // green
-  else if (type === "error") snackbar.style.background = "#dc3545"; // red
-  else if (type === "warning") snackbar.style.background = "#ffc107"; // yellow
-  else snackbar.style.background = "#aaf1c6ff"; // default dark
+  // Create snackbar if it doesn't exist
+  if (!snackbar) {
+    snackbar = document.createElement("div");
+    snackbar.className = "snackbar";
 
-  snackbar.textContent = message;
+    snackbar.innerHTML = `
+      <span class="snackbar-text"></span>
+      <div class="snackbar-progress"></div>
+    `;
 
-  // Add snackbar to the body
-  document.body.appendChild(snackbar);
+    document.body.appendChild(snackbar);
+  }
 
-  // Force reflow (to trigger CSS animation)
-  void snackbar.offsetWidth;
+  // Update text
+  snackbar.querySelector(".snackbar-text").textContent = message;
 
-  // Show snackbar
+  // Color by type
+  if (type === "success") snackbar.style.background = "rgba(7, 29, 26, 0.95)";
+  else if (type === "error") snackbar.style.background = "#dc3545";
+  else if (type === "warning") snackbar.style.background = "#ffc107";
+  else snackbar.style.background = "rgba(7, 29, 26, 0.95)";
+
+  // Reset progress animation
+  const progress = snackbar.querySelector(".snackbar-progress");
+  progress.style.animation = "none";
+  void progress.offsetWidth;
+  progress.style.animation = `snackbar-progress ${duration}ms linear forwards`;
+
   snackbar.classList.add("show");
 
-  // Hide snackbar after 3 seconds
-  setTimeout(() => {
+  // Clear previous timeout
+  if (snackbarTimeout) clearTimeout(snackbarTimeout);
+
+  snackbarTimeout = setTimeout(() => {
     snackbar.classList.remove("show");
-    setTimeout(() => snackbar.remove(), 500);
-},4000);
+  }, duration);
 }
+// snackbar ends
   </script>
+
 
 
   <!----TOGGLE EYE ICON--JS---->
@@ -518,6 +413,5 @@ togglePassword.addEventListener("click", () => {
 });
   </script>
 
-  <div id="snackbar"></div>
 </body>
 </html>
