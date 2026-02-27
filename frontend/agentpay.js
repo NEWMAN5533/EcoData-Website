@@ -1,107 +1,146 @@
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
-
-    const firebaseConfig = {
+// =============================
+// FIREBASE CONFIG
+// =============================
+const firebaseConfig = {
   apiKey: "AIzaSyClNBlfigtQk8AZWdMZcU9sEtVcIrS0D1g",
   authDomain: "ecodata-2bee6.firebaseapp.com",
   projectId: "ecodata-2bee6",
   storageBucket: "ecodata-2bee6.firebasestorage.app",
   messagingSenderId: "544837123249",
   appId: "1:544837123249:web:6c362350a00c6dab10b690"
-    };
+};
 
-  //=================
-  // INITIALIZE FIREBASE 
-  //=================
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  
-  let currentUser = null;
+// =============================
+// INITIALIZE FIREBASE
+// =============================
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-  //================
-  // DETECT LOGIN STATE
-  //==================
+let currentUser = null;
 
-  onAuthStateChanged(auth, (user)=> {
-    if(user){
-      currentUser = user;
-      console.log("Logged in", user.email);
-    } else{
-      currentUser = null;
-      console.log("User not logged in");
+// =============================
+// CHECK LOGIN STATE
+// =============================
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    currentUser = user;
+    console.log("Logged in:", user.email);
+  } else {
+    currentUser = null;
+    console.log("User not logged in");
+  }
+});
+
+// =============================
+// PAYSTACK PAYMENT FUNCTION
+// =============================
+function payWithPaystack(user) {
+
+    // 1️⃣ Show YOUR loader first
+  showLoader();
+
+  // 2️⃣ Let browser paint it
+  setTimeout(() => {
+  const paystack = new PaystackPop();
+
+  paystack.newTransaction({
+    key: "pk_live_635856447ee14b583349141b7271f64c9b969749", // ⚠️ Use TEST key while testing
+    email: user.email,
+    amount: 90 * 100, // GHS 100 (kobo)
+    currency: "GHS",
+    metadata: {
+      uid: user.uid
+    },
+
+    onSuccess: function (transaction) {
+      hideLoader();
+
+      console.log("Transaction reference:", transaction.reference);
+
+      fetch("/verify-payment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          reference: transaction.reference,
+          uid: user.uid
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+
+        if (data.success) {
+          showSnackBar("Payment verified. You are now an Agent!");
+          window.location.href = "agentPage.html";
+        } else {
+          showSnackBar("Payment verification failed.");
+        }
+
+      })
+      .catch(error => {
+        console.error("Verification error:", error);
+        showSnackBar("Server error during verification.");
+      });
+    },
+
+    onCancel: function () {
+      hideLoader();
+      showSnackBar("Payment cancelled.");
     }
+
   });
+  }, 4120); // sweet spot (80–150ms)
+}
 
-  //=====================
-  // PAYSTACK PAYMENT FUNCTION
-  // =====================
-  function payWithPaystack(user){
+// =============================
+// BUTTON LISTENER
+// =============================
+window.addEventListener("DOMContentLoaded", () => {
 
-    const paystack = new Paystack({
-      key: "pk_live_635856447ee14b583349141b7271f64c9b969749",
-      email: user.email,
-      amount: 90 * 100,
-      currency: "GHS",
+  const payBtn = document.getElementById("payBtn");
 
-      metadata: {
-        uid: user.uid
-      },
-
-      onSuccess: (transaction) =>{
-        // send the reference to backend for verification
-        fetch("/verify-payment", {
-          method: "POST",
-          headers:
-          { "content-Type": "application/json" },
-          body: JSON.stringify({
-            reference: transaction.reference,
-            uid: user.uid
-          })
-        })
-        .then( res => res.json())
-        .then( data => {
-          if (data.success){
-            showSnackBar("Payment verified. You are now an Agent");
-            window.location.href = "agentPage.html";
-          } else {
-            showSnackBar("Payment verification failed");
-            window.location.href = "index.html";
-          }
-        })
-        .catch (err => {
-          console.error("Verification error:", err);
-          showSnackBar("Server error during verification.");
-        });
-      },
-      oncancel: () =>{
-        showSnackBar(" Payment cancelled. ");
-      }
-    });
-    paystack.open();
+  if (!payBtn) {
+    console.error("payBtn not found in HTML");
+    return;
   }
 
-  //====================
-  // PAYMENT BUTTON LISTENER
-  //======================
-  document.getElementById("payBtn").addEventListener("click", () => {
-    if(!currentUser) {
-      showSnackBar("Please Login first.");
+  payBtn.addEventListener("click", () => {
+
+    if (!currentUser) {
+      showSnackBar("Please login first.");
       return;
     }
 
     payWithPaystack(currentUser);
-  })
+
+  });
+
+});
 
 
 
+// ===================
+// LOADER SPINNER IFRAME
+//=====================
+const loader = document.getElementById("paystackLoader");
 
+function showLoader() {
+  loader.style.display = "flex";
+  document.body.classList.add("no-scroll");
+}
 
+function hideLoader() {
+  loader.style.display = "none";
+  document.body.classList.remove("no-scroll");
+}
 
-
-
-
+// ===================
+// LOADER SPINNER IFRAME
+//=====================
 
 
 

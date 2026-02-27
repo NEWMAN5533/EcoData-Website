@@ -354,6 +354,17 @@
 
 
 
+    <!---LOADING-SPINNER-->
+<div id="paystackLoader" class="paystack-loader hidden" >
+  <div class="loader-card">
+    <div class="orbit-spinner">
+      <span class="orbit-dot"></span>
+    </div>
+    <p>Payment Section Loading...</p>
+  </div>
+</div>
+<!----PAYSTACK-LOADER-->
+
 
 
 
@@ -362,226 +373,16 @@
 <!----MAIN REGISTER PAGE ENDS----->
 
 
+<!-- ✅ 1. Load Paystack FIRST -->
+<script src="https://js.paystack.co/v2/inline.js"></script>
 
- <!-- Load Paystack library -->
-  <script src="https://js.paystack.co/v2/inline.js"></script>
-
-
-  
-
+<!-- ✅ 2. Then load your payment JS -->
+<script type="module" src="agentpay.js"></script>
 
 <script type="module" src="./firebase-config.js"></script>
 
-<script type="module" src="main.js"></script>
-
-<script type="module" src="./agentpay.js">
-
-</script>
-
-
-
-
-<!---usernameDisplay----->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
-
-  const firebaseConfig = {
-    // TODO: replace these placeholder values with your Firebase project config
-  apiKey: "AIzaSyClNBlfigtQk8AZWdMZcU9sEtVcIrS0D1g",
-  authDomain: "ecodata-2bee6.firebaseapp.com",
-  projectId: "ecodata-2bee6",
-  storageBucket: "ecodata-2bee6.firebasestorage.app",
-  messagingSenderId: "544837123249",
-  appId: "1:544837123249:web:6c362350a00c6dab10b690"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-
-  onAuthStateChanged(auth, async (user) => {
-    const usernameDisplay = document.getElementById("usernameDisplay");
-
-// FORCE TO LOGIN THE USER //
-  
-
-
-
-
-    if (user) {
-      const userSnap = await getDoc(doc(db, "users", user.uid));
-      usernameDisplay.textContent = `Welcome Back, ${userSnap.data().username}!`;
-    } else {
-      usernameDisplay.textContent = "Welcome Back, Dear ";
-    }
-});
-</script>
-
-<script>
-  const scrollWrapper = 
-  document.querySelector(".google-thumbnails-wrapper");
-  const thumbnails = 
-  document.getElementById("thumbnailScroll");
-
-  // Duplicate all items for seamless scroll
-  thumbnails.innerHTML += thumbnails.innerHTML;
-
-  let scrollAmount = 0;
-  const speed = .5; // pixel per frame
-
-  function animateScroll() {
-    scrollAmount += speed;
-
-    // when  scrolled half of the content. reset to start
-    if( scrollAmount >= thumbnails.scrollWidth / 2) {
-      scrollAmount = 0;
-    }
-
-    thumbnails.style.transform = `translateX(-${scrollAmount}px)`;
-    requestAnimationFrame(animateScroll);
-  }
-
-  // start animation
-  animateScroll();
-
-</script>
-
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    
-const notificationIcon = document.querySelectorAll(".notifity");
-const notifyCount = document.getElementById("notifyCount");
-const NOTIFY_KEY = "notifications_read";
-
-// on page load
-if (localStorage.getItem(NOTIFY_KEY) === "true") {
-  notifyCount.style.display = "none"
-}
-
-// click to mark as read 
-notifyCount.addEventListener("click", () => {
-  notifyCount.style.display = "none";
-  localStorage.setItem(NOTIFY_KEY, "true");
-});
-  });
-</script>
-
-
-
-
-<script>
-  // === REAL TIME CLOCK ===
-function updateClock() {
-  const clock = document.getElementById("clock");
-  const now = new Date();
-  const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-  const dayName = days[now.getDay()];
-  let hours = now.getHours();
-  let minutes = now.getMinutes();
-  let seconds = now.getSeconds();
-  const ampm = hours >= 12 ? "PM" : "AM";
-  hours = hours % 12 || 12;
-  minutes = minutes < 10 ? "0" + minutes : minutes;
-  seconds = seconds < 10 ? "0" + seconds : seconds;
-  clock.innerHTML = `${dayName} ${hours}:${minutes}:${seconds} ${ampm}`;
-}
-setInterval(updateClock, 1000);
-updateClock();
-
-
-
-</script>
-
-<!---MENU-CARD-JS-->
-<script>
-document.addEventListener("DOMContentLoaded", ()=> {
- const cardToggler = document.getElementById("cardToggler");
-  const cardCloser = document.getElementById("closeCard");
-
-  // toggle menucard
-  cardToggler.addEventListener("click", function(e) {
-    e.stopPropagation();
-    if(cardCloser.classList.contains("active")){
-      cardCloser.classList.remove("active");
-    } else{
-      cardCloser.classList.add("active");
-    }
-  });
-
-  // when ever clicked outside?
-  window.addEventListener("click", function(e) {
-    if(!cardCloser.contains(e.target) && !cardToggler.contains(e.target)) {
-      cardCloser.classList.remove("active");
-    }
-  })
-})
-
- 
-
-
-</script>
-
-
-<!---HIDE MULTIPLE DIV--->
-
-<!-----DARK-MODE JS-->
-<script>
-  const toggle = document.getElementById("themeToggle");
-  const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-  const savedTheme = localStorage.getItem("theme");
-
-  function applyTheme(theme) {
-    if (theme === "dark") {
-      document.body.classList.add("dark-mode");
-      toggle.checked = true;
-    } else {
-      document.body.classList.remove("dark-mode");
-      toggle.checked = false;
-    }
-  }
-
-  if (savedTheme) {
-    applyTheme(savedTheme);
-  } else {
-    applyTheme(systemPrefersDark ? "dark" : "light");
-  }
-
-  toggle.addEventListener("change", () => {
-    if (toggle.checked) {
-      localStorage.setItem("theme", "dark");
-      applyTheme("dark");
-    } else {
-      localStorage.setItem("theme", "light");
-      applyTheme("light");
-    }
-  });
-
-  // Auto-change if system theme changes and user has no preference
-  window.matchMedia("(prefers-color-scheme: dark)").addListener(e => {
-    if (!localStorage.getItem("theme")) {
-      applyTheme(e.matches ? "dark" : "light");
-    }
-});
-</script>
-
-
-
-
-
-
-
-<!---skeleton js-->
-<script>
-  window.addEventListener("load", () => {
-    document.body.classList.remove("loading");
-  });
-</script>
-
-
-<!----POPUP/HIDDEN CARD-->
 </body>
 </html>
+
+
+
