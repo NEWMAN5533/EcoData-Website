@@ -98,18 +98,29 @@ function isValidDOB(dob) {
   return age >= 18;
 }
 
-// ==========================
-// LOADER
-// ==========================
+
+// ===================
+// LOADER SPINNER IFRAME
+//=====================
+const loader = document.getElementById("paystackLoader");
+
 function showLoader() {
-  document.getElementById("paystackLoader")?.classList.remove("hidden");
-  document.body.style.overflow = "hidden";
+  loader.style.display = "flex";
+  document.body.classList.add("no-scroll");
 }
 
 function hideLoader() {
-  document.getElementById("paystackLoader")?.classList.add("hidden");
-  document.body.style.overflow = "";
+  loader.style.display = "none";
+  document.body.classList.remove("no-scroll");
 }
+
+// ===================
+// LOADER SPINNER IFRAME
+//=====================
+
+
+
+
 
 // ==========================
 // FORM SUBMIT
@@ -156,8 +167,13 @@ afaForm?.addEventListener("submit", (e) => {
 // PAYSTACK V2
 // ==========================
 function startAfaPayment(afaData) {
+
+
+  // 1️⃣ Show YOUR loader first
   showLoader();
 
+  // 2️⃣ Let browser paint it
+  setTimeout(() => {
   const paystack = new PaystackPop();
 
   paystack.newTransaction({
@@ -195,6 +211,7 @@ function startAfaPayment(afaData) {
       showSnackBar("Payment cancelled", "error");
     },
   });
+}, 4120); // 👈 sweet spot (80–150ms)
 }
 
 // ==========================
