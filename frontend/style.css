@@ -4,13 +4,42 @@ AGENT PAGE CODE SECTION
 /****
 agent cta
 *****/
+.underdev{
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: .4rem;
+  flex-direction: column;
+  line-height: 1.1;
+  overflow: none;
+  background: rgb(109, 106, 106);
+  color: white;
+}
 
+.underdev h2{
+  margin: 0;
+  line-height: .7;
+  
+}
+
+.underdev p{
+  margin: 0;
+  line-height: .5;
+  margin-bottom: 1.4rem;
+  font-size: .9rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
 
 .agent-upgrade-wrapper{
 width: 100%;
 max-width: 340px;
 height: 30rem;
 display: flex;
+flex-direction: column;
+align-items: center;
+padding-top: 1rem;
 position: relative;
 margin-bottom: 3rem;
 border-top: 5px solid rgba(172, 133, 4, 0.801);
@@ -30,6 +59,11 @@ border-top: 5px solid rgba(172, 133, 4, 0.801);
   background: #ffffff;
   border-radius: 14px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+}
+
+.agent-upgrade strong{
+  color: rgb(51, 49, 49);
+  
 }
 
 .agent-upgrade img{
@@ -4066,7 +4100,7 @@ height: 23rem;
 display: flex;
 align-items: start;
 padding: 1rem;
-margin-bottom: 2rem;
+margin-bottom: 3rem;
 justify-content: start;
 gap: .3rem;
 flex-direction: column;
