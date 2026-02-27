@@ -36,7 +36,14 @@
   <link rel="stylesheet" href="style.css">
 
 
-
+<style>
+  
+  .loader-card img{
+    width: 2rem;
+    height: 2rem;
+    margin-bottom: -.9rem;
+  }
+</style>
 
   
 </head>
@@ -1927,12 +1934,13 @@
 
 
     <!---LOADING-SPINNER-->
-<div id="paystackLoader" class="paystack-loader hidden" >
+<div id="paystackLoader" class="paystack-loader hidden">
   <div class="loader-card">
     <div class="orbit-spinner">
       <span class="orbit-dot"></span>
     </div>
-    <p>Payment Section Loading...</p>
+    <img src="./css/icons/secure-payment.png" alt="" loading="lazy">
+    <p>Payment section Loading...</p>
   </div>
 </div>
 <!----PAYSTACK-LOADER-->

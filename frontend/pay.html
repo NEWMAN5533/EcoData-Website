@@ -205,6 +205,17 @@
 
 
 
+
+
+  .loader-card img{
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    margin-bottom: -.9rem;
+  }
+
+
+
   </style>
 </head>
 <body>
@@ -339,6 +350,116 @@
 </section>
 </section>
 
+
+<!----AGENT PRICE TABLE-->
+<section class="agent-price">
+  <div class="price-title">
+    <h2>Agent Price List</h2>
+  </div>
+  <div class="price-list">
+    <div class="both-tags">
+      <div class="title-tag-left">
+        Agent Normal Price <br>( MTN ) 
+      </div>
+      <div class="title-tag-right">
+        Agent Express Price <br>
+        ( MTN )
+      </div>
+    </div>
+    <div class="price-wrapper">
+        <div class="price-list-normal exclude">
+          <ul>
+            <li>1GB = 5.20</li>
+            <li>2GB = 10.80</li>
+            <li>3GB = 15.20</li>
+            <li>4GB = 19.30</li>
+            <li>5GB = 23.50</li>
+            <li>6GB = 28.60</li>
+            <li>8GB = 36.70</li>
+            <li>10GB = 44.30</li>
+            <li>15GB = 64.20</li>
+            <li>20GB = 85.10</li>
+            <li>25GB = 105.30</li>
+            <li>30GB = 125.40</li>
+            <li>40GB = 164</li>
+            <li>50GB = 198.20</li>
+          </ul>
+    </div>
+    <div class="price-list-express exclude">
+        <ul>
+            <li>1GB = 5.40</li>
+            <li>2GB = 10.80</li>
+            <li>3GB = 15.60</li>
+            <li>4GB = 19.90</li>
+            <li>5GB = 24.30</li>
+            <li>6GB = 29.40</li>
+            <li>8GB = 38.50</li>
+            <li>10GB = 45</li>
+            <li>15GB = 65</li>
+            <li>20GB = 85.70</li>
+            <li>25GB = 107.30</li>
+            <li>30GB = 126.20</li>
+            <li>40GB = 165.10</li>
+            <li>50GB = 203</li>
+          </ul>
+    </div>
+    
+    </div>
+  </div>
+</section>
+<!----AGENT PRICE TABLE-->
+<section class="agent-price">
+  <div class="price-title">
+    <h2>TELECEL & AIRTELTIGO </h2>
+  </div>
+  <div class="price-list">
+    <div class="both-tags">
+      <div class="title-tag-left">
+        TELECEL
+      </div>
+      <div class="title-tag-right">
+        AIRTELTIGO
+      </div>
+    </div>
+    <div class="price-wrapper">
+        <div class="price-list-normal include">
+          <ul>
+            <li>10GB = 45.10</li>
+            <li>15GB = 64.60</li>
+            <li>20GB = 87</li>
+            <li>25GB = 105</li>
+            <li>30GB = 134</li>
+            <li>40GB = 160</li>
+            <li>50GB = 199</li>
+            <li>100GB = 385</li>
+          </ul>
+    </div>
+    <div class="price-list-express include">
+        <ul>
+            <li>1GB = 5.50</li>
+            <li>2GB = 11</li>
+            <li>3GB = 14.90</li>
+            <li>4GB = 18</li>
+            <li>5GB = 23</li>
+            <li>6GB = 26.70</li>
+            <li>7GB = 30</li>
+            <li>8GB = 36</li>
+            <li>9GB = 40</li>
+            <li>10GB = 50</li>
+            <li>12GB = 52</li>
+            <li>15GB = 69</li>
+            <li>20GB = 89</li>
+            <li>25GB = 111</li>
+            <li>30GB = 129</li>
+            <li>40GB = 163</li>
+            <li>50GB = 110</li>
+          </ul>
+    </div>
+    
+    </div>
+  </div>
+</section>
+
 <div class="register-bnefits">
   <h2>Become an Agent - GHS 90</h2>
 <button id="payBtn" class="regis">Pay Now</button>
@@ -380,7 +501,8 @@
     <div class="orbit-spinner">
       <span class="orbit-dot"></span>
     </div>
-    <p>Agent Payment Loading...</p>
+    <img src="./css/icons/agent.png" alt="" loading="lazy">
+    <p>Agent payment Loading...</p>
   </div>
 </div>
 <!----PAYSTACK-LOADER-->
