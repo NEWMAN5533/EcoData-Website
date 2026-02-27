@@ -2023,50 +2023,65 @@
 
 
 
-
-
-
-
-
-
-
 <!---usernameDisplay----->
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
-  const firebaseConfig = {
-    // TODO: replace these placeholder values with your Firebase project config
+const firebaseConfig = {
   apiKey: "AIzaSyClNBlfigtQk8AZWdMZcU9sEtVcIrS0D1g",
   authDomain: "ecodata-2bee6.firebaseapp.com",
   projectId: "ecodata-2bee6",
   storageBucket: "ecodata-2bee6.firebasestorage.app",
   messagingSenderId: "544837123249",
   appId: "1:544837123249:web:6c362350a00c6dab10b690"
-  };
+};
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-  onAuthStateChanged(auth, async (user) => {
-    const usernameDisplay = document.getElementById("usernameDisplay");
+onAuthStateChanged(auth, async (user) => {
+  const usernameDisplay = document.getElementById("usernameDisplay");
 
-// FORCE TO LOGIN THE USER //
-  
+  if (!user) {
+    // User not logged in, redirect if needed
+    console.log("User not logged in");
+    return;
+  }
 
+  try {
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef);
 
+    if (!userSnap.exists()) return;
 
+    const userData = userSnap.data();
 
-    if (user) {
-      const userSnap = await getDoc(doc(db, "users", user.uid));
-      usernameDisplay.textContent = `Welcome Back, ${userSnap.data().username}!`;
-    } else {
-      usernameDisplay.textContent = "Welcome Back, Dear ";
+    // 🔥 Redirect immediately if agent
+    if (userData.isAgent === true) {
+      window.location.href = "agentPage.html";
+      return; // stop further execution
     }
+
+    // Display username if element exists
+    if (usernameDisplay) {
+      const name = userData.username || "Dear";
+      const suffix = userData.isAgent ? "Agent" : "";
+      usernameDisplay.textContent = `Welcome Back, ${name}${suffix}!`;
+    }
+
+  } catch (err) {
+    console.error("Error fetching user data:", err);
+  }
 });
 </script>
+
+
+<!-----VERIFY-IF-IS-AGENT?-->
+
+
 
 <script>
   const scrollWrapper = 
