@@ -129,7 +129,7 @@ function resetSelectedBundle(reason = "") {
 
 
   const saveMode = 
-  localStorage.getItem(STORAGE_KEY) || "normal";
+  localStorage.removeItem(STORAGE_KEY) || "express" ;
 
   const activeOption = document.querySelector(`.optionDelevery[data-mode="${saveMode}"]`);
 
