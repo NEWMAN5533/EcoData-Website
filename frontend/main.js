@@ -1,5 +1,5 @@
 
-// --- Firebase Imports --modules---//
+// --- Firebase Imports ---
 import { db } from "./firebase-config.js";
 import {
   collection,
@@ -14,7 +14,7 @@ import {
 
 
 
-  // ---------- CONFIG base ----------
+  // ---------- CONFIG ----------
 const API_BASE = (() => {
   // use current host in prod or localhost for local dev
   if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
@@ -34,7 +34,7 @@ let selectedBundle = null;      // used for UI selection (normal view)
 let lastPurchasedBundle = null; // used after payment (normal + grid)
 
 // default selectedPackage
-let selectedPackageName = "mtn_data_normal_delivery";
+let selectedPackageName = "mtn_data_express_delivery";
 
 const PACKAGE_MAP = {
   normal: "mtn_data_normal_delivery",
@@ -422,6 +422,10 @@ function createPhoneModal(callback) {
 };
 }
 
+
+// ===================
+// LOADER SPINNER IFRAME
+//=====================
 const loader = document.getElementById("paystackLoader");
 
 function showLoader() {
@@ -433,6 +437,10 @@ function hideLoader() {
   loader.style.display = "none";
   document.body.classList.remove("no-scroll");
 }
+
+// ===================
+// LOADER SPINNER IFRAME
+//=====================
 
 
 
