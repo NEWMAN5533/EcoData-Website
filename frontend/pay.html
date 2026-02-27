@@ -33,8 +33,8 @@
   <style>
 
     .card-container{
-      margin-top: 2.5rem;
-    
+      margin-top: .1rem;
+
     }
 
     .trusted-by{
@@ -244,6 +244,26 @@
 <!---MAIN-REGISTER PAGE----->
 
 <section class="card-container">
+<div class="welcome-card">
+  <div class="welcome-top">
+    <div class="welcome-top-left">
+      <p id="usernameDisplay"></p>
+      <div class="user-info">
+        <span id="usernameDisplay"></span>
+      </div>
+    </div>
+    <div class="welcome-top-right">
+      <input type="text" placeholder=" Ecodata ✔ ">
+    </div>
+  </div>
+  <div class="welcome-bottom">
+    <div class="close-time"><small>Closing Time:</small>
+    <span>9:00 PM</span></div>
+    <div id="clock"></div>
+  </div>
+</div>
+
+
    <section class="trusted-by">
   <div class="trusted-container">
     <div class="wrapper-notice">
@@ -380,6 +400,34 @@
 <script type="module" src="agentpay.js"></script>
 
 <script type="module" src="./firebase-config.js"></script>
+
+
+
+
+
+
+<script>
+  // === REAL TIME CLOCK ===
+function updateClock() {
+  const clock = document.getElementById("clock");
+  const now = new Date();
+  const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  const dayName = days[now.getDay()];
+  let hours = now.getHours();
+  let minutes = now.getMinutes();
+  let seconds = now.getSeconds();
+  const ampm = hours >= 12 ? "PM" : "AM";
+  hours = hours % 12 || 12;
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+  seconds = seconds < 10 ? "0" + seconds : seconds;
+  clock.innerHTML = `${dayName} ${hours}:${minutes}:${seconds} ${ampm}`;
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+
+
+</script>
 
 </body>
 </html>
