@@ -1930,9 +1930,10 @@
       </a>
       </div>
 
-       <a href="login.html">  <button  id="logout-btn" class="logout-btn">Sign-Up</button></a>   
-    </div>
+       <a href="login.html">  <button  id="logout-btn" class="logout-btn">Sign-Up</button></a>
 
+       <button id="logOutBtn" class="log-out">Logout</button>   
+    </div>
 
     <!---LOADING-SPINNER-->
 <div id="paystackLoader" class="paystack-loader hidden">
@@ -2037,6 +2038,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+import { signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyClNBlfigtQk8AZWdMZcU9sEtVcIrS0D1g",
@@ -2056,6 +2058,7 @@ onAuthStateChanged(auth, async (user) => {
 
   if (!user) {
     // User not logged in, redirect if needed
+   // window.location.href = "login.html"
     console.log("User not logged in");
     return;
   }
@@ -2085,7 +2088,74 @@ onAuthStateChanged(auth, async (user) => {
     console.error("Error fetching user data:", err);
   }
 });
+
+
+const logoutBtn = document.getElementById("logOutBtn");
+
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", async () => {
+    try {
+      await signOut(auth);
+      showSnackBar("Logged out successfully!");
+      //window.location.href = "login.html"; // change if needed
+    } catch (error) {
+      console.error("Logout error:", error);
+      showSnackBar("Error logging out.");
+    }
+  });
+}
+
+
+
+// SNACKBAR SECTION //
+// ===== SNACKBAR FUNCTION ===== //
+let snackbarTimeout = null;
+
+function showSnackBar(message, type = "info", duration = 4000) {
+  let snackbar = document.querySelector(".snackbar");
+
+  // Create snackbar if it doesn't exist
+  if (!snackbar) {
+    snackbar = document.createElement("div");
+    snackbar.className = "snackbar";
+
+    snackbar.innerHTML = `
+      <span class="snackbar-text"></span>
+      <div class="snackbar-progress"></div>
+    `;
+
+    document.body.appendChild(snackbar);
+  }
+
+  // Update text
+  snackbar.querySelector(".snackbar-text").textContent = message;
+
+  // Color by type
+  if (type === "success") snackbar.style.background = "rgba(7, 29, 26, 0.95)";
+  else if (type === "error") snackbar.style.background = "#dc3545";
+  else if (type === "warning") snackbar.style.background = "#ffc107";
+  else snackbar.style.background = "rgba(7, 29, 26, 0.95)";
+
+  // Reset progress animation
+  const progress = snackbar.querySelector(".snackbar-progress");
+  progress.style.animation = "none";
+  void progress.offsetWidth;
+  progress.style.animation = `snackbar-progress ${duration}ms linear forwards`;
+
+  snackbar.classList.add("show");
+
+  // Clear previous timeout
+  if (snackbarTimeout) clearTimeout(snackbarTimeout);
+
+  snackbarTimeout = setTimeout(() => {
+    snackbar.classList.remove("show");
+  }, duration);
+}
+// snackbar ends
+
 </script>
+
+
 
 
 <!-----VERIFY-IF-IS-AGENT?-->

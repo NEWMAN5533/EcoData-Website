@@ -464,6 +464,27 @@ WATCH VIDEO SECTION
   user-select: none;
 }
 
+.log-out{
+  padding: 8px 16px;
+  background: #e63946;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: .2s ease;
+  margin-left: 1rem;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
+      }
+
+      .log-out:hover{
+        background: #c1121f;
+      }
+
 /**
 * NAV-RIGHT
 **/
@@ -5715,7 +5736,7 @@ MENU-CARD SECTION
 .menu-card-container {
   width: 100%;
   max-width: 15rem;
-  height: 31rem;
+  height: 33rem;
   position: fixed;
   display: flex;
   align-items: start;
@@ -6858,10 +6879,12 @@ max-width: 320px;
 
 
 .menu-card-container{
-  height: 24rem !important;
+  height: 26.5rem !important;
   width: 13rem;
 
 }
+
+ 
 
 .menu-card-container .link span{
   font-size: .8rem;
