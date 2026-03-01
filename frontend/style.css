@@ -5588,9 +5588,93 @@ SNACKBAR SECTION
 
 
 /* === WhatsApp Floating Button === */
+
+ a .afa-btn{
+ position: fixed;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ background: #305e74;
+ color: white;
+ font-size: .8rem;
+ border: none;
+ border-radius: 6px;
+ cursor: pointer;
+ width: 42px;
+ height: 37px;
+bottom: 150px;
+border: 2px solid rgba(11, 131, 95, 0.315);
+box-shadow: 0 2px 6px rgba(129, 127, 127, 0.2);
+right: 16px;
+z-index: 99999;
+font-family: "Poppins", sans-serif;
+transition: .2s ease;
+}
+
+a .afa-btn:hover{
+  transform: scale(1.06);
+  background-color: #2f6781;
+}
+
+
+
+
+.what-group-btn{
+  position: fixed;
+  bottom: 50px;
+  right: 4px;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10px;
+  height: 120px;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+
+}
+
+.what-group-btn img{
+  width: 2.8rem;
+  height: 2.8rem;
+}
+
+.pulse-ring{
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  padding: .6rem;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+  rgba(37,211,102,0.7),
+  rgba(0, 255,150, 0.4),
+  rgba(0, 200, 255, 0.2),
+  transparent);
+  animation: pulse 2s infinite;
+  z-index: 1;
+}
+
+.pulse-ring-delay{
+  animation-delay: 1s;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+
+
 #whatsappChat {
   position: fixed;
-  bottom: 40px;
+  bottom: 30px;
   right: 10px;
   z-index: 99999;
   font-family: "Poppins", sans-serif;
@@ -5647,34 +5731,6 @@ SNACKBAR SECTION
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   animation: fadeIn 0.3s ease;
 }
-
- a .afa-btn{
- position: fixed;
- display: flex;
- align-items: center;
- justify-content: center;
- background: #305e74;
- color: white;
- font-size: .8rem;
- border: none;
- border-radius: 6px;
- cursor: pointer;
- width: 42px;
- height: 37px;
-bottom: 95px;
-border: 2px solid rgba(11, 131, 95, 0.315);
-box-shadow: 0 2px 6px rgba(129, 127, 127, 0.2);
-right: 16px;
-z-index: 99999;
-font-family: "Poppins", sans-serif;
-transition: .2s ease;
-}
-
-a .afa-btn:hover{
-  transform: scale(1.06);
-  background-color: #2f6781;
-}
-
 
 #chatBox.show {
   display: flex;
