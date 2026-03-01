@@ -14,6 +14,7 @@ import {
 
 
 
+
   // ---------- CONFIG ----------
 const API_BASE = (() => {
   // use current host in prod or localhost for local dev
@@ -129,7 +130,7 @@ function resetSelectedBundle(reason = "") {
 
 
   const saveMode = 
-  localStorage.removeItem(STORAGE_KEY) || "express" ;
+  localStorage.removeItem(STORAGE_KEY) || "express";
 
   const activeOption = document.querySelector(`.optionDelevery[data-mode="${saveMode}"]`);
 
