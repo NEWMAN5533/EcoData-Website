@@ -5637,15 +5637,18 @@ a .afa-btn:hover{
 
 .what-group-btn .informattion{
   background: red;
-  padding: 0 .4rem;
+  padding: .1rem .4rem;
   display: flex;
   align-items: center;
   color: white;
+  font-weight: 600;
   opacity: 0.5;
+  font-size: .7rem;
   position: absolute;
-  margin-bottom: 2.3rem;
+  margin-bottom: 2.9rem;
   margin-left: 2rem;
   border-radius: 50%;
+  z-index: 2;
 }
 
 .what-group-btn img{
