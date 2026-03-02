@@ -24,7 +24,7 @@ border-top: 5px solid rgba(172, 133, 4, 0.801);
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
-  height: 24rem;
+  height: 25rem;
   max-width: 300px;
   margin: 30px auto;
   padding: 30px;
@@ -32,16 +32,33 @@ border-top: 5px solid rgba(172, 133, 4, 0.801);
   background: #ffffff;
   border-radius: 14px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+  border-bottom: 4px solid rgb(177, 138, 79);
+}
+
+.dark-mode .agent-upgrade{
+  background: var(--welcome-card-bg);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  border: 2px solid var(--thin-border-5);
 }
 
 .agent-upgrade strong{
   color: rgb(51, 49, 49);
-  
+}
+
+.dark-mode .agent-upgrade p strong{
+  color: rgb(2, 255, 221);
 }
 
 .agent-upgrade img{
   width: 3rem;
   height: 3rem;
+}
+
+.dark-mode .agent-upgrade img{
+  background: white;
+  padding: 6px;
+  border-radius: 50%;
+  opacity: .8;
 }
 
 .agent-upgrade h2 {
@@ -50,12 +67,21 @@ border-top: 5px solid rgba(172, 133, 4, 0.801);
   color: #53595f;
 }
 
+.dark-mode .agent-upgrade h2{
+color: white;
+}
+
 .agent-upgrade p {
   font-size: 15px;
   color: #555;
   line-height: 1.6;
   margin-bottom: 25px;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.dark-mode .agent-upgrade p{
+  color: white;
+  opacity: .5;
 }
 
 .agent-upgrade button {
@@ -67,6 +93,11 @@ border-top: 5px solid rgba(172, 133, 4, 0.801);
   border-radius: 8px;
   cursor: pointer;
   transition: 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
 }
 
 .agent-upgrade button:hover {
@@ -5589,32 +5620,6 @@ SNACKBAR SECTION
 
 /* === WhatsApp Floating Button === */
 
- a .afa-btn{
- position: fixed;
- display: flex;
- align-items: center;
- justify-content: center;
- background: #305e74;
- color: white;
- font-size: .8rem;
- border: none;
- border-radius: 6px;
- cursor: pointer;
- width: 42px;
- height: 37px;
-bottom: 170px;
-border: 2px solid rgba(11, 131, 95, 0.315);
-box-shadow: 0 2px 6px rgba(129, 127, 127, 0.2);
-right: 16px;
-z-index: 99999;
-font-family: "Poppins", sans-serif;
-transition: .2s ease;
-}
-
-a .afa-btn:hover{
-  transform: scale(1.06);
-  background-color: #2f6781;
-}
 
 
 
@@ -5637,19 +5642,29 @@ a .afa-btn:hover{
 
 .what-group-btn .informattion{
   background: red;
-  padding: .1rem .4rem;
+  padding: .3rem;
+  width: 2rem;
+  height: 1rem;
+  align-items: center;
+  justify-content: center;
   display: flex;
   align-items: center;
   color: white;
   font-weight: 600;
   opacity: 0.5;
+  text-align: center;
   font-size: .7rem;
   position: absolute;
-  margin-bottom: 2.9rem;
-  margin-left: 2rem;
+  margin-bottom: 3rem;
+  margin-left: 1.2rem;
   border-radius: 50%;
   z-index: 2;
 }
+
+.dark-mode .informattion{
+  background: blue;
+}
+
 
 .what-group-btn img{
   width: 2.8rem;
@@ -5692,7 +5707,7 @@ a .afa-btn:hover{
 
 #whatsappChat {
   position: fixed;
-  bottom: 40px;
+  bottom: 33px;
   right: 10px;
   z-index: 99999;
   font-family: "Poppins", sans-serif;
