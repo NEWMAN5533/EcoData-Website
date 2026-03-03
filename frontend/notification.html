@@ -351,6 +351,8 @@ Delete button
   </section>
 
 
+
+
 <!------MENU-CARD----->
 <div class="menu-card-container" id="closeCard">
        <div class="link">
@@ -368,6 +370,28 @@ Delete button
        </a>
       </div>
 
+      
+       <div class="link">
+       <a href="./ecdoataStore/ecoshop.html">
+        <img src="./css/icons/logoImg.jpeg" alt="image" loading="lazy">
+        <span>EcoData Store</span>
+       </a>
+      </div>
+
+      <div class="link">
+       <a href="./afa.html">
+        <img src="./css/icons/personal.png" alt="image" loading="lazy">
+        <span>MTN AFA</span>
+       </a>
+      </div>
+
+        <div class="link">
+       <a href="./pay.html">
+        <img src="./css/icons/agent.png" alt="image" loading="lazy">
+        <span>Register as Agent</span>
+       </a>
+      </div>
+
 
 
       <div class="menu-ranking-links">
@@ -377,28 +401,42 @@ Delete button
       </a>
       <!--WHATSAPP GROUP-->
       <a href="https://chat.whatsapp.com/LwhZNOyUQsJIGTQRL9cIXT?mode=hqrt3">
-      <button class="join-btn grp"><img src="./css/icons/whats.png" alt=""> WhatsApp Group</button>
+      <button class="join-btn grp"><img src="./css/icons/whats.png" alt="" loading="lazy"> WhatsApp Group</button>
       </a>
       <!---WHATSAPP CHANNEL-->
       <a href="https://whatsapp.com/channel/0029VbBgYfqAzNbpoZDtnq3o">
-      <button class="join-btn"><img src="./css/icons/whats.png" alt="">Join WhatsApp Channel</button>
+      <button class="join-btn"><img src="./css/icons/whats.png" alt="" loading="lazy">Join WhatsApp Channel</button>
       </a>
       </div>
 
-       <a href="login.html">  <button  id="logout-btn" class="logout-btn">Sign-Up</button></a>   
+       <a href="login.html">  <button  id="logout-btn" class="logout-btn">Sign-Up</button></a>
+
+       <button id="logOutBtn" class="log-out">Logout</button>   
     </div>
 
+    
+<div class="what-group-btn">
+  <span class="informattion">Join</span>
 
-    <!---LOADING-SPINNER-->
-<div id="paystackLoader" class="paystack-loader hidden" >
-  <div class="loader-card">
-    <div class="orbit-spinner">
-      <span class="orbit-dot"></span>
-    </div>
-    <p>Payment Section Loading...</p>
+  <a href="https://chat.whatsapp.com/LwhZNOyUQsJIGTQRL9cIXT?mode=hqrt3">
+    <div class="pulse-ring"></div>
+    <div class="pulse-ring-delay"></div>
+  <img src="./css/icons/whats.png" alt="" loading="lazy">
+  </a>
+</div>
+
+  <!-- ✅ WhatsApp Floating Chat -->
+<div class="chatBox" id="whatsappChat">
+  <div id="chatButton" class="message">
+    <img src="./css/icons/chatMe.png" alt="image" loading="lazy">
+  </div>
+  <!---whatsapp chatBox-->
+  <div id="chatBox">
+    <h4>Chat Ecodata Admin</h4>
+    <input type="text" id="whatsappMessage" placeholder="Type your message..." />
+    <button id="sendMsgBtn">Send</button>
   </div>
 </div>
-<!----PAYSTACK-LOADER-->
 
 
 
@@ -449,30 +487,38 @@ Delete button
 
 <!---MENU-CARD-JS-->
 <script>
-  const cardToggler = document.getElementById("cardToggler");
+document.addEventListener("DOMContentLoaded", ()=> {
+ const cardToggler = document.getElementById("cardToggler");
   const cardCloser = document.getElementById("closeCard");
 
-  // querySelectors //
-  const card = document.querySelector(".menu-card-container");
+  // toggle menucard
+  cardToggler.addEventListener("click", function(e) {
+    e.stopPropagation();
+    if(cardCloser.classList.contains("active")){
+      cardCloser.classList.remove("active");
+    } else{
+      cardCloser.classList.add("active");
+    }
+  });
 
-  // function //
-cardToggler.addEventListener("click", function(e){
-  if (card.style.right != "-500px"){
-    card.style.right = "14px";
-  } else card.style.right = "-500px";
-});
+  // when ever clicked outside?
+  window.addEventListener("click", function(e) {
+    if(!cardCloser.contains(e.target) && !cardToggler.contains(e.target)) {
+      cardCloser.classList.remove("active");
+    }
+  })
+})
 
-window.addEventListener("click", function(e){
-  if (e.target !== cardToggler && e.target !== card && !card.contains(e.target)){
-    card.style.right = "-500px";
-  }
-});
+ 
 
 
 </script>
 
-
 <!---HIDE MULTIPLE DIV--->
+
+
+
+
 
 <!-----DARK-MODE JS-->
 <script>

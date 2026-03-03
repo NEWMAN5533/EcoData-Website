@@ -52,6 +52,36 @@
     opacity: .8;
   }
 
+
+    .register-bnefits .priceSub{
+    color: rgb(29, 136, 113);
+    font-weight: 600;
+    font-size: 1.3rem;
+  }
+
+  .dark-mode .register-bnefits .priceSub{
+    color: white;
+    font-weight: 00;
+    opacity: .9;
+    font-size: 1.3rem;
+    margin: .3rem;
+    padding: 1rem 0;
+    padding-bottom: 1rem;;
+  }
+
+  .register-bnefits .priceSub {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  position: relative;
+  justify-items: center;
+  text-align: center;
+  }
+
+  .dark-mode .register-bnefits .priceSub img{
+    border-radius: 50%;
+  }
+
 /***
 AGENT CODE ENDS
 ****/
@@ -622,36 +652,7 @@ AGENT PRICE
 </div>
 </section>
 
-<style>
-  .register-bnefits .priceSub{
-    color: rgb(29, 136, 113);
-    font-weight: 600;
-    font-size: 1.3rem;
-  }
 
-  .dark-mode .register-bnefits .priceSub{
-    color: white;
-    font-weight: 00;
-    opacity: .9;
-    font-size: 1.3rem;
-    margin: .3rem;
-    padding: 1rem 0;
-    padding-bottom: 1rem;;
-  }
-
-  .register-bnefits .priceSub {
-  display: flex;
-  align-items: center;
-  gap: .6rem;
-  position: relative;
-  justify-items: center;
-  text-align: center;
-  }
-
-  .dark-mode .register-bnefits .priceSub img{
-    border-radius: 50%;
-  }
-</style>
 
 
 
@@ -734,7 +735,29 @@ AGENT PRICE
        <button id="logOutBtn" class="log-out">Logout</button>   
     </div>
 
+    
+<div class="what-group-btn">
+  <span class="informattion">Join</span>
 
+  <a href="https://chat.whatsapp.com/LwhZNOyUQsJIGTQRL9cIXT?mode=hqrt3">
+    <div class="pulse-ring"></div>
+    <div class="pulse-ring-delay"></div>
+  <img src="./css/icons/whats.png" alt="" loading="lazy">
+  </a>
+</div>
+
+  <!-- ✅ WhatsApp Floating Chat -->
+<div class="chatBox" id="whatsappChat">
+  <div id="chatButton" class="message">
+    <img src="./css/icons/chatMe.png" alt="image" loading="lazy">
+  </div>
+  <!---whatsapp chatBox-->
+  <div id="chatBox">
+    <h4>Chat Ecodata Admin</h4>
+    <input type="text" id="whatsappMessage" placeholder="Type your message..." />
+    <button id="sendMsgBtn">Send</button>
+  </div>
+</div>
 
     <!---LOADING-SPINNER-->
 <div id="paystackLoader" class="paystack-loader hidden">
@@ -766,6 +789,133 @@ AGENT PRICE
 
 
 
+
+
+<!---usernameDisplay----->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+import { signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyClNBlfigtQk8AZWdMZcU9sEtVcIrS0D1g",
+  authDomain: "ecodata-2bee6.firebaseapp.com",
+  projectId: "ecodata-2bee6",
+  storageBucket: "ecodata-2bee6.firebasestorage.app",
+  messagingSenderId: "544837123249",
+  appId: "1:544837123249:web:6c362350a00c6dab10b690"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+onAuthStateChanged(auth, async (user) => {
+  const usernameDisplay = document.getElementById("usernameDisplay");
+
+  if (!user) {
+    // User not logged in, redirect if needed
+   // window.location.href = "login.html"
+    console.log("User not logged in");
+    return;
+  }
+
+  try {
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef);
+
+    if (!userSnap.exists()) return;
+
+    const userData = userSnap.data();
+
+    // 🔥 Redirect immediately if agent
+    if (userData.isAgent === true) {
+      window.location.href = "agentPage.html";
+      return; // stop further execution
+    }
+
+    // Display username if element exists
+    if (usernameDisplay) {
+      const name = userData.username || "Dear";
+      const suffix = userData.isAgent ? "Agent" : "";
+      usernameDisplay.textContent = `Welcome Back, ${name}${suffix}!`;
+    }
+
+  } catch (err) {
+    console.error("Error fetching user data:", err);
+  }
+});
+
+
+const logoutBtn = document.getElementById("logOutBtn");
+
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", async () => {
+
+    try {
+      await signOut(auth);
+      showSnackBar("Logged out successfully!");
+      //window.location.href = "login.html"; // change if needed
+    } catch (error) {
+      console.error("Logout error:", error);
+      showSnackBar("Error logging out.");
+    }
+  });
+
+}
+
+
+
+// SNACKBAR SECTION //
+// ===== SNACKBAR FUNCTION ===== //
+let snackbarTimeout = null;
+
+function showSnackBar(message, type = "info", duration = 4000) {
+  let snackbar = document.querySelector(".snackbar");
+
+  // Create snackbar if it doesn't exist
+  if (!snackbar) {
+    snackbar = document.createElement("div");
+    snackbar.className = "snackbar";
+
+    snackbar.innerHTML = `
+      <span class="snackbar-text"></span>
+      <div class="snackbar-progress"></div>
+    `;
+
+    document.body.appendChild(snackbar);
+  }
+
+  // Update text
+  snackbar.querySelector(".snackbar-text").textContent = message;
+
+  // Color by type
+  if (type === "success") snackbar.style.background = "rgba(7, 29, 26, 0.95)";
+  else if (type === "error") snackbar.style.background = "#dc3545";
+  else if (type === "warning") snackbar.style.background = "#ffc107";
+  else snackbar.style.background = "rgba(7, 29, 26, 0.95)";
+
+  // Reset progress animation
+  const progress = snackbar.querySelector(".snackbar-progress");
+  progress.style.animation = "none";
+  void progress.offsetWidth;
+  progress.style.animation = `snackbar-progress ${duration}ms linear forwards`;
+
+  snackbar.classList.add("show");
+
+  // Clear previous timeout
+  if (snackbarTimeout) clearTimeout(snackbarTimeout);
+
+  snackbarTimeout = setTimeout(() => {
+    snackbar.classList.remove("show");
+  }, duration);
+}
+// snackbar ends
+
+</script>
+
+<!---NOTIFICATION-DIV-->
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     
