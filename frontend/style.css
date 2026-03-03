@@ -3348,13 +3348,12 @@ WELCOME CARD
 
   .welcome-bottom .close-time span{
     color: white;
-    padding: .4rem;
+    padding: .2rem .4rem;
     display: flex;
     text-align: center;
     justify-content: center;
     background: var(--clock-bg-cl);
     border-radius: 4px;
-    border: 0.1px solid var(--background-cl);
   }
 
 
