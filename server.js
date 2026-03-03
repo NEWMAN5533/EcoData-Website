@@ -4,7 +4,6 @@ import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
 import bodyParser from "body-parser";
-import admin from "firebase-admin";
 import crypto from "crypto";
 
 dotenv.config();
@@ -22,15 +21,14 @@ app.use(bodyParser.json({
 }));
 
 // Initialize Firebase Admin
-import fs from "fs";
-import axios from "axios";
-import { Agent } from "http";
-const serviceAccount = JSON.parse(
-  fs.readFileSync("./serviceAccountKey.json", "utf8")
-);
+import admin from "firebase-admin";
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+  credential: admin.credential.cert({
+    projectId: process.env.FB_PROJECT_ID,
+    clientEmail: process.env.FB_CLIENT-EMAIL,
+    privateKey: process.env.FB_PRIVATE_KEY.replace(/\\n/g,'\n'),
+  }),
 });
 
 const db = admin.firestore();
