@@ -302,6 +302,14 @@
 <!----SNACKBAR-SECTION----->
   
 
+
+ 
+
+
+
+
+
+
   <!-- Firebase Core -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
@@ -339,21 +347,35 @@ onAuthStateChanged(auth, (user) => {
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value.trim();
 
-      try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
+  try {
+  const userCredential = await signInWithEmailAndPassword(auth, email, password);
+  const user = userCredential.user;
 
-        const userDoc = await getDoc(doc(db, "users", user.uid));
-        if (userDoc.exists()) {
-          const username = userDoc.data().username;
-          localStorage.setItem("username", username);
-        }
+  const userDoc = await getDoc(doc(db, "users", user.uid));
 
-        showSnackBar("Login successful!");
-        window.location.href = "index.html";
-      } catch (error) {
-        showSnackBar(error.message);
-      }
+  if (userDoc.exists()) {
+    const userData = userDoc.data();
+
+    // Save username
+    localStorage.setItem("username", userData.username || "User");
+
+    showSnackBar("Login successful!");
+
+    // 🔥 Agent Check
+    if (userData.isAgent === true) {
+      window.location.href = "agentPage.html";   // your agent page
+    } else {
+      window.location.href = "index.html";   // normal user
+    }
+
+  } else {
+    showSnackBar("User data not found.");
+  }
+
+} catch (error) {
+  showSnackBar(error.message);
+}
+
     });
   </script>
 
