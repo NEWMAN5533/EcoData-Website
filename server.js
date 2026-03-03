@@ -1,20 +1,40 @@
-
-// OLD SERVER 2/12/2025//
-import express from "express";
+import express, { response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
-import axios from "axios";
+import bodyParser from "body-parser";
+import admin from "firebase-admin";
+import crypto from "crypto";
 
 dotenv.config();
-
-
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+
+// Capture raw body for Paystack signature verification
+app.use(bodyParser.json({
+  verify: (req, res, buf) => {
+    req.rawBody = buf;
+  }
+}));
+
+// Initialize Firebase Admin
+import fs from "fs";
+import axios from "axios";
+import { Agent } from "http";
+const serviceAccount = JSON.parse(
+  fs.readFileSync("./serviceAccountKey.json", "utf8")
+);
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
+
+const db = admin.firestore();
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -190,6 +210,280 @@ app.get("/api/v1/order/status/:orderIdOrRef", async (req, res) => {
     });
   }
 });
+
+
+
+
+
+// =====================
+// AGENT ROUTE VERIFICATION
+// ====================
+app.post("/verify-payment", async (req, res) => {
+  try {
+    const { reference, uid } = req.body;
+
+    if (!reference || !uid) {
+      return res.status(400).json({ error: "Missing reference or uid" });
+    }
+
+    const response = await axios.get(
+      `https://api.paystack.co/transaction/verify/${reference}`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
+        },
+      }
+    );
+
+    const data = response.data.data;
+
+    const AGENT_PRICE = 100;
+    const expectedAmount = AGENT_PRICE * 100;
+
+    if (data.status !== "success") {
+      return res.status(400).json({ error: "Payment not successful" });
+    }
+
+    if (data.amount !== expectedAmount) {
+      return res.status(400).json({ error: "Incorrect amount" });
+    }
+
+    if (data.currency !== "GHS") {
+      return res.status(400).json({ error: "Invalid currency" });
+    }
+
+    if (data.metadata.uid !== uid) {
+      return res.status(400).json({ error: "UID mismatch" });
+    }
+
+    const userRef = db.collection("users").doc(uid);
+    const userDoc = await userRef.get();
+
+    if (!userDoc.exists) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    if (userDoc.data().paymentStatus === "verified") {
+      return res.status(400).json({ error: "Already verified" });
+    }
+
+    await userRef.update({
+      isAgent: true,
+      paymentStatus: "verified",
+      agentApproved: true,
+      amount: AGENT_PRICE,
+      paidAt: admin.firestore.FieldValue.serverTimestamp(),
+      paymentReference: reference,
+    });
+
+    return res.json({ success: true, message: "Agent upgraded successfully" });
+
+  } catch (error) {
+    console.error("Verification error:", error.response?.data || error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+// =====================
+// AGENT ROUTE VERIFICATION ENDS
+// ====================
+
+
+
+
+
+
+
+
+// ====================
+// MTN AFA HANDLER
+// ====================
+async function handleAFARequest({
+  fullName,
+  phone,
+  paymentReference,
+}) {
+  // ====================
+  // VALIDATION
+  // ====================
+  if (!fullName || !phone || !paymentReference) {
+    return {
+      ok: false,
+      status: 400,
+      body: {
+        success: false,
+        message: "Missing required fields",
+      },
+    };
+  }
+
+  // ====================
+  // DUPLICATION PROTECTION
+  // ====================
+  if (processedOrders.has(paymentReference)) {
+    return {
+      ok: true,
+      status: 200,
+      body: {
+        success: true,
+        message: "AFA already processed",
+        ...processedOrders.get(paymentReference).response,
+      },
+    };
+  }
+
+  try {
+    // ====================
+    // VERIFY PAYSTACK PAYMENT
+    // ====================
+    const verification = await verifyPaystack(paymentReference);
+
+    if (!verification.status || verification.data.status !== "success") {
+      throw new Error("Payment verification failed");
+    }
+
+    // Optional: validate amount
+    const paidAmount = verification.data.amount / 100;
+    if (paidAmount !== 20) {
+      throw new Error("Invalid payment amount");
+    }
+
+
+
+    // ====================
+    // SEND TO SWIFT AFA
+    // ====================
+    const base = (process.env.SWIFT_BASE_URL || "")
+      .replace(/\/$/, "");
+
+    const swiftUrl = `${base}/services/mtn-afa`;
+
+    const swiftRes = await axios.post(
+      swiftUrl,
+      { phone, fullName },
+      {
+        headers: {
+          "x-api-key": process.env.SWIFT_API_KEY,
+          "Content-Type": "application/json",
+        },
+        timeout: 15000,
+      }
+    );
+
+    const responseData = {
+      registrationId:
+        swiftRes.data?.registrationId ||
+        "AFA-" + Date.now(),
+      name: fullName,
+      phoneNumber: phone,
+      registrationPrice: paidAmount,
+      status: swiftRes.data?.status || "pending",
+      submittedAt: new Date().toISOString(),
+    };
+
+    // Store processed order
+    processedOrders.set(paymentReference, {
+      status: "success",
+      response: responseData,
+    });
+
+    return {
+      ok: true,
+      status: 200,
+      body: {
+        success: true,
+        message: "AFA registration successful",
+        ...responseData,
+      },
+    };
+  } catch (err) {
+    const errData = err.response?.data || err.message;
+
+    processedOrders.set(paymentReference, {
+      status: "failed",
+      response: { error: errData },
+    });
+
+    return {
+      ok: false,
+      status: 500,
+      body: {
+        success: false,
+        message: "AFA registration failed",
+        error: errData,
+      },
+    };
+  }
+}
+
+
+
+// =======================
+// MTN AFA ROUTE
+// =======================
+app.post("/api/afa/register", async (req, res) => {
+  const {phone,
+      fullName, 
+      paymentReference,
+    } = req.body;
+
+  const result = await handleAFARequest({
+    fullName: fullName,
+    phone: phone,
+    paymentReference: paymentReference,
+  });
+
+  res.status(result.status).json(result.body);
+});
+
+
+
+// =======================
+//  AFA ORDER STATUS
+// =======================
+
+
+// =======================
+//  AFA ORDER STATUS
+// =======================
+app.get("/api/v1/order/status/:orderIdOrRef", async (req, res) => {
+  const { orderIdOrRef } = req.params;
+
+  try {
+    const base = (process.env.SWIFT_BASE_URL || "")
+      .replace(/\/$/, "");
+
+    const swiftUrl = `${base}/order/status/${encodeURIComponent(
+      orderIdOrRef
+    )}`;
+
+    const response = await axios.get(swiftUrl, {
+      headers: {
+        "x-api-key": process.env.SWIFT_API_KEY,
+        "Content-Type": "application/json",
+      },
+      timeout: 10000,
+    });
+
+    res.json({
+      success: true,
+      order: response.data.order,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Error fetching order status",
+      error: error.response?.data || error.message,
+    });
+  }
+});
+
+
+
+
+// =======================
+// MTN AFA HANDLER ENDS
+// =======================
+
 
 // Frontend fallback
 app.use((req, res) => {
