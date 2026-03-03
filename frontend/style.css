@@ -43,6 +43,7 @@ border-top: 5px solid rgba(172, 133, 4, 0.801);
 
 .agent-upgrade strong{
   color: rgb(51, 49, 49);
+  font-size: .74rem;
 }
 
 .dark-mode .agent-upgrade p strong{
@@ -3338,16 +3339,19 @@ WELCOME CARD
   .close-time small{
     font-size: 1.1rem;
     color: rgb(7, 112, 112);
-    font-family: 'Times New Roman', Times, serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
 
   .dark-mode .close-time small{
     color: var(--text-cl-3);
   }
 
-  .close-time span{
+  .welcome-bottom .close-time span{
     color: white;
-    padding: .2rem;
+    padding: .4rem;
+    display: flex;
+    text-align: center;
+    justify-content: center;
     background: var(--clock-bg-cl);
     border-radius: 4px;
     border: 0.1px solid var(--background-cl);
@@ -6534,7 +6538,7 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, O
 
 
   .welcome-bottom .close-time span{
-    height: 1rem;
+    height: rem;
     padding: .1rem;
     font-size: .7rem;
   }
