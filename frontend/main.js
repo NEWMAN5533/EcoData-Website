@@ -1435,4 +1435,12 @@ airtelScrollBtn.addEventListener("click", () => {
     document.getElementById("whatsappMessage").value = ""; // clear after sending
 });
 
-
+// window click event (chatBox)
+window.addEventListener("click", function(e){
+  e.stopPropagation();
+  if(!chatBox.contains(e.target) && !chatButton.contains(e.target)){
+    chatBox.style.display = "none";
+  } else{
+    chatBox.style.display = "flex";
+  }
+});
