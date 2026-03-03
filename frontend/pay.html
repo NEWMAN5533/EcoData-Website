@@ -382,7 +382,7 @@ AGENT PRICE
   <img class="log" src="./css/icons/icon-shortcut.png" alt="image" loading="lazy">
 </a>
 </div>
-<div class="nav-right" style="display: none;">
+<div class="nav-right" >
 
   <a href="notification.html">
      <div class="notis">
@@ -616,12 +616,42 @@ AGENT PRICE
 
 <div class="register-bnefits">
   <small>Old price: GHS 150 </small>
-  <h2>Become an Agent - GHS 100</h2>
+    <p class="priceSub">GHS 100 <img src="./css/icons/eye (2).gif" alt=""></p>
+  <h2>Unlock Exclusive Access </h2>
 <button id="payBtn" class="regis">Pay Now</button>
 </div>
 </section>
 
+<style>
+  .register-bnefits .priceSub{
+    color: rgb(29, 136, 113);
+    font-weight: 600;
+    font-size: 1.3rem;
+  }
 
+  .dark-mode .register-bnefits .priceSub{
+    color: white;
+    font-weight: 00;
+    opacity: .9;
+    font-size: 1.3rem;
+    margin: .3rem;
+    padding: 1rem 0;
+    padding-bottom: 1rem;;
+  }
+
+  .register-bnefits .priceSub {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  position: relative;
+  justify-items: center;
+  text-align: center;
+  }
+
+  .dark-mode .register-bnefits .priceSub img{
+    border-radius: 50%;
+  }
+</style>
 
 
 
@@ -643,6 +673,66 @@ AGENT PRICE
 
 
 
+<!------MENU-CARD----->
+<div class="menu-card-container" id="closeCard">
+       <div class="link">
+       <a href="terms.html">
+        <img src="./css/icons/terms (1).png" alt="image" loading="lazy">
+        <span>Terms of use</span>
+       </a>
+      </div>
+
+
+       <div class="link">
+       <a href="bundlesInfo.html">
+        <img src="./css/icons/list.jpg" alt="image" loading="lazy">
+        <span>Bundles info</span>
+       </a>
+      </div>
+
+      
+       <div class="link">
+       <a href="./ecdoataStore/ecoshop.html">
+        <img src="./css/icons/logoImg.jpeg" alt="image" loading="lazy">
+        <span>EcoData Store</span>
+       </a>
+      </div>
+
+      <div class="link">
+       <a href="./afa.html">
+        <img src="./css/icons/personal.png" alt="image" loading="lazy">
+        <span>MTN AFA</span>
+       </a>
+      </div>
+
+        <div class="link">
+       <a href="./pay.html">
+        <img src="./css/icons/agent.png" alt="image" loading="lazy">
+        <span>Register as Agent</span>
+       </a>
+      </div>
+
+
+
+      <div class="menu-ranking-links">
+        <!--WHATSAPP GROUP-->
+      <a href="https://www.tiktok.com/@ecodata247?_r=1&_d=ei9853mf1g8eec&sec_uid=MS4wLjABAAAAiY9nBAfFbpbd7KRl0y4-JTcRL0WMtPt9Pr-FKt__N-hQvmFZLhhInTTpn7Y5oRos&share_author_id=7484812520763950088&sharer_language=en&source=h5_m&u_code=ejcbk20728bd87&utm_source=copy&utm_campaign=client_share&share_link_id=d9108b99-2843-43f1-8f6c-ed4b72ea3264&share_app_id=1340&ugbiz_name=Account&lang=en&user_id=7484812520763950088&sec_user_id=MS4wLjABAAAAiY9nBAfFbpbd7KRl0y4-JTcRL0WMtPt9Pr-FKt__N-hQvmFZLhhInTTpn7Y5oRos&enable_checksum=1">
+      <button class="join-btn tiktok"><img src="./css/icons/tiktok.png" alt="">Tiktok</button>
+      </a>
+      <!--WHATSAPP GROUP-->
+      <a href="https://chat.whatsapp.com/LwhZNOyUQsJIGTQRL9cIXT?mode=hqrt3">
+      <button class="join-btn grp"><img src="./css/icons/whats.png" alt="" loading="lazy"> WhatsApp Group</button>
+      </a>
+      <!---WHATSAPP CHANNEL-->
+      <a href="https://whatsapp.com/channel/0029VbBgYfqAzNbpoZDtnq3o">
+      <button class="join-btn"><img src="./css/icons/whats.png" alt="" loading="lazy">Join WhatsApp Channel</button>
+      </a>
+      </div>
+
+       <a href="login.html">  <button  id="logout-btn" class="logout-btn">Sign-Up</button></a>
+
+       <button id="logOutBtn" class="log-out">Logout</button>   
+    </div>
 
 
 
@@ -673,6 +763,58 @@ AGENT PRICE
 
 <script type="module" src="./firebase-config.js"></script>
 
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    
+const notificationIcon = document.querySelectorAll(".notifity");
+const notifyCount = document.getElementById("notifyCount");
+const NOTIFY_KEY = "notifications_read";
+
+// on page load
+if (localStorage.getItem(NOTIFY_KEY) === "true") {
+  notifyCount.style.display = "none"
+}
+
+// click to mark as read 
+notifyCount.addEventListener("click", () => {
+  notifyCount.style.display = "none";
+  localStorage.setItem(NOTIFY_KEY, "true");
+});
+  });
+</script>
+
+
+<!---MENU-CARD-JS-->
+<script>
+document.addEventListener("DOMContentLoaded", ()=> {
+ const cardToggler = document.getElementById("cardToggler");
+  const cardCloser = document.getElementById("closeCard");
+
+  // toggle menucard
+  cardToggler.addEventListener("click", function(e) {
+    e.stopPropagation();
+    if(cardCloser.classList.contains("active")){
+      cardCloser.classList.remove("active");
+    } else{
+      cardCloser.classList.add("active");
+    }
+  });
+
+  // when ever clicked outside?
+  window.addEventListener("click", function(e) {
+    if(!cardCloser.contains(e.target) && !cardToggler.contains(e.target)) {
+      cardCloser.classList.remove("active");
+    }
+  })
+})
+
+ 
+
+
+</script>
 
 
 
