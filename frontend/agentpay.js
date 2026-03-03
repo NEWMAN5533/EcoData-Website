@@ -20,6 +20,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 let currentUser = null;
+let isProcessing = false;
 
 // =============================
 // CHECK LOGIN STATE
@@ -57,8 +58,7 @@ function payWithPaystack(user) {
 
     onSuccess: function (transaction) {
       hideLoader();
-
-      console.log("Transaction reference:", transaction.reference);
+      isProcessing = false;
 
       fetch("/verify-payment", {
         method: "POST",
@@ -70,30 +70,34 @@ function payWithPaystack(user) {
           uid: user.uid
         })
       })
-      .then(res => res.json())
-      .then(data => {
+      .then(async res => {
+        const data =  await res.json();
+        if(!res.ok) throw new Error(data.error || "verification failed");
+        return data;
+      })
+      .then(() => {
+          showSnackBar("Payment verified. Welcome Agent!", "success");
 
-        if (data.success) {
-          showSnackBar("Payment verified. You are now an Agent!");
-          window.location.href = "agentPage.html";
-        } else {
-          showSnackBar("Payment verification failed.");
-        }
+          setTimeout(()=> {
+              window.location.href = "agentPage.html";
+          }, 1500)
+        
 
       })
       .catch(error => {
         console.error("Verification error:", error);
-        showSnackBar("Server error during verification.");
+        showSnackBar(error.message, "error");
       });
     },
 
     onCancel: function () {
       hideLoader();
+      isProcessing = false;
       showSnackBar("Payment cancelled.");
     }
 
   });
-  }, 4120); // sweet spot (80–150ms)
+  }, 3120); 
 }
 
 // =============================
@@ -114,7 +118,9 @@ window.addEventListener("DOMContentLoaded", () => {
       showSnackBar("Please login first.");
       return;
     }
+    if(isProcessing) return;
 
+    isProcessing = true;
     payWithPaystack(currentUser);
 
   });
@@ -126,14 +132,18 @@ window.addEventListener("DOMContentLoaded", () => {
 // ===================
 // LOADER SPINNER IFRAME
 //=====================
-const loader = document.getElementById("paystackLoader");
+
 
 function showLoader() {
+  const loader = document.getElementById("paystackLoader");
+  if(!loader) return;
   loader.style.display = "flex";
   document.body.classList.add("no-scroll");
 }
 
 function hideLoader() {
+  const loader = document.getElementById("paystackLoader");
+  if(!loader) return;
   loader.style.display = "none";
   document.body.classList.remove("no-scroll");
 }

@@ -427,14 +427,18 @@ function createPhoneModal(callback) {
 // ===================
 // LOADER SPINNER IFRAME
 //=====================
-const loader = document.getElementById("paystackLoader");
+
 
 function showLoader() {
+  const loader = document.getElementById("paystackLoader");
+  if(!loader) return;
   loader.style.display = "flex";
   document.body.classList.add("no-scroll");
 }
 
 function hideLoader() {
+  const loader = document.getElementById("paystackLoader");
+  if(!loader) return;
   loader.style.display = "none";
   document.body.classList.remove("no-scroll");
 }
@@ -498,7 +502,7 @@ async function payWithPaystack(bundle, recipient) {
         showSnackBar("Payment cancelled");
       }
     });
-  }, 4120); // 👈 sweet spot (80–150ms)
+  }, 3120); 
 }
 // SELECTED BUNDLE FOR UI UPDATE
 
