@@ -7240,13 +7240,10 @@ WELCOME CARD
     font-family: 'Times New Roman', Times, serif;
   }
 
-  .dark-mode .close-time small{
-    color: var !important;
-    opacity: .9;
-  }
+
 
   .close-time span{
-    color: var(--card-mtn-bg) !important;
+    color: var(--card-mtn-bg);
     padding: .2rem .4rem !important;
     font-size: .8rem;
     display: flex;
@@ -7255,23 +7252,23 @@ WELCOME CARD
     width: max-content;
     height: 1rem !important;
     font-weight: 300;;
-    background: var(--clock-bg-cl);
+    background: none !important;
     border-radius: 4px;
-    border: 1px solid var(--thin-border-3) !important;
+    border: none !important;
   }
 
 
 #clock {
       font-family: 'Digital-7', monospace;
       font-size: 2em;
-      color: var(--card-mtn-bg) !important;
-      background: var(--clock-bg-cl);
+      color: var(--card-mtn-bg);
+      background:none !important;
       border-radius: 4px;
       display: inline-block;
       width: max-content;
       height: 2rem;
       padding: .2rem .3rem;
-      border: 1px solid var(--thin-border-3) !important;
+      border: none !important;
       align-items: center;
       display: flex;
       justify-content: center;
@@ -15734,3 +15731,4 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 .airtelc{
   background: var(--card-full-airtel-bg-cl);
 }}
+
