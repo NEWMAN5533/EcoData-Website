@@ -127,7 +127,7 @@ html:focus-within{
     section {
       background: #fff;
       padding: 8px;
-      border: 0.1px solid #79ddba;
+      border: 0.1px solid #3b705d;
       border-radius: 10px;
       display: flex;
       flex-direction: column;
@@ -154,7 +154,7 @@ html:focus-within{
     .contact{
       background: #fff;
       padding: 25px;
-      border: 0.1px solid #79ddba;
+      border: 0.1px solid #395c4f;
       border-radius: 10px;
       margin-bottom: 20px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -176,20 +176,32 @@ html:focus-within{
       background-color: var(--welcome-card-bg);
     }
 
+    .dark-mode .contact h2{
+      color: white;
+      opacity: .9;
+    }
+
     .contact ul li{
       list-style: none;
       display: flex;
       gap: .6rem;
     }
 
+    .dark-mode .contact ul li img{
+      background: rgb(253, 251, 251);
+    }
+
      .dark-mode .contact ul li{
-      color: white;
+      color: rgb(122, 112, 112);
      }
 
     .contact ul img{
-      width: 2.2rem;
-      height: 2.2rem;
+      width: 2rem;
+      height: 2rem;
       box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      border-radius: .3rem;
+      margin-bottom: .3rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     }
     ul { padding-left: 20px;
     display: flex;
