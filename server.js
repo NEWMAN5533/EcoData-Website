@@ -1,6 +1,7 @@
 import express, { response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import axios from "axios";
 import path from "path";
 import { fileURLToPath } from "url";
 import bodyParser from "body-parser";
