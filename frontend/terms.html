@@ -5,70 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ecodata | Terms of Use</title>
   <link rel="stylesheet" href="terms.css">
-  <style>
-    body {
-      font-family: "Poppins", sans-serif;
-      line-height: 1.7;
-      background: #f9fafb;
-      color: #222;
-      padding: 30px;
-      max-width: 900px;
-      margin: auto;
-    }
-    h1, h2 {
-      color: #0b8f5d;
-    }
-    .free{
-      color: rgba(30, 35, 51, 0.705);
-      font-size: .9rem;
-    }
-    h1 {
-      text-align: center;
-      margin: 4.5rem 0;
-      margin-bottom: 20px;
-    }
-    section {
-      background: #fff;
-      padding: 25px;
-      border: 0.1px solid #79ddba;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
+  <link rel="stylesheet" href="style.css">
 
-    .contact{
-      background: #fff;
-      padding: 25px;
-      border: 0.1px solid #79ddba;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      align-items: center;
-      justify-content: center;
-      display: flex;
-      gap: .5rem;
-      flex-direction: column;
-    }
-
-    .contact ul li{
-      list-style: none;
-      display: flex;
-      gap: .6rem;
-    }
-
-    .contact ul img{
-      width: 2.2rem;
-      height: 2.2rem;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-    }
-    ul { padding-left: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
- }
-
-    
-  </style>
 </head>
 <body>
   
@@ -78,12 +16,33 @@
   <img src="./css/icons/icon-shortcut.png" alt="image" loading="lazy">
 </a>
 </div>
+<div class="nav-right">
+
+ 
+ 
+ <!---DARK MODE-->
+<label class="theme-switch">
+  <input type="checkbox" id="themeToggle">
+  <span class="slider">
+    <span class="icon sun"><img src="./css/icons/sun2 (1).png" alt="images" loading="lazy"></span>
+    <span class="icon moon"><img src="./css/icons/moon2.png" alt="images" loading="lazy"></span>
+  </span>
+</label>
+
+
+</div>
 
 </nav>
 
+<div class="main-terms-of-use-cont">
+
+
+
 <!---MAIN-SECTION---->
-  <h1>Terms of Use</h1>
+<div class="date">
+    <h1 class="termsOf">Terms of Use</h1>
   <p><strong>Last updated:</strong> October 2025</p>
+</div>
 
   <section>
     <h2>1. Introduction</h2>
@@ -129,9 +88,9 @@
   </section>
 
   <section>
-    <h2>7. Agent Membership <span class="free">(Free for Now!)</span></h2>
+    <h2>7. Agent Membership <span class="free" style="display: none;">(Free for Now!)</span></h2>
     <ul>
-      <li>Becoming an Ecodata Agent requires a one-time payment (via Paystack).</li>
+      <li>Becoming an Ecodata Exclusive Membership (Agent) requires a one-time payment (via Paystack).</li>
       <li>Once payment is verified, the agent will receive a discounted price rate and access to the agent dashboard.</li>
       <li>Agent payments are non-refundable after successful activation.</li>
       <li>Agents must not engage in false advertising or overpricing that misrepresents <strong>Ecodata</strong>.</li>
@@ -172,31 +131,69 @@
   </section>
 
 
+</div>
 
 
 
-  <p style="text-align:center;color:#888;font-size:14px;">© 2025 Ecodata. All rights reserved.</p>
 
 
-  <!---MENU-CARD-JS-->
+
+  <div class="foot">
+   <div class="foot-content">
+    <div class="cop-right">
+        <p style="text-align:center;color:#888;font-size:14px;">© 2026 Ecodata. All rights reserved.
+      </p>
+    </div>
+      <small class="powered">
+        
+      <strong>Powered by:</strong>   IA E-Business 
+    </small>
+  
+   </div>
+  </div>
+
+
+
+<!---HIDE MULTIPLE DIV--->
+
+<!-----DARK-MODE JS-->
 <script>
-  const cardToggler = document.getElementById("cardToggler");
-  const cardCloser = document.getElementById("closeCard");
+  const toggle = document.getElementById("themeToggle");
+  const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-  // querySelectors //
-  const card = document.querySelector(".menu-card-container");
+  const savedTheme = localStorage.getItem("theme");
 
-  // function //
-cardToggler.addEventListener("click", function(e){
-  if (card.style.right != "-500px"){
-    card.style.right = "14px";
-  } else card.style.right = "-500px";
-});
-
-window.addEventListener("click", function(e){
-  if (e.target !== cardToggler && e.target !== card && !card.contains(e.target)){
-    card.style.right = "-500px";
+  function applyTheme(theme) {
+    if (theme === "dark") {
+      document.body.classList.add("dark-mode");
+      toggle.checked = true;
+    } else {
+      document.body.classList.remove("dark-mode");
+      toggle.checked = false;
+    }
   }
+
+  if (savedTheme) {
+    applyTheme(savedTheme);
+  } else {
+    applyTheme(systemPrefersDark ? "dark" : "light");
+  }
+
+  toggle.addEventListener("change", () => {
+    if (toggle.checked) {
+      localStorage.setItem("theme", "dark");
+      applyTheme("dark");
+    } else {
+      localStorage.setItem("theme", "light");
+      applyTheme("light");
+    }
+  });
+
+  // Auto-change if system theme changes and user has no preference
+  window.matchMedia("(prefers-color-scheme: dark)").addListener(e => {
+    if (!localStorage.getItem("theme")) {
+      applyTheme(e.matches ? "dark" : "light");
+    }
 });
 </script>
 
