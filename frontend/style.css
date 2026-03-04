@@ -388,7 +388,8 @@ AGENT CODE ENDS
   ***/
   --btn-bg-cl: rgb(250, 126, 9);
   --user-panel-bg: rgba(42, 42, 194, 0.938);
-  --clock-bg-cl: rgb(2, 61, 52);
+  --clock-bg-cl: rgba(252, 175, 11, 0.199);
+  --clock-bg-cl-1: rgb(2, 61, 52);
 
   /***
   DARK MODE COLORS
@@ -6543,7 +6544,7 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, O
 
 
   .welcome-bottom .close-time span{
-    height: rem;
+    height: auto;
     padding: .1rem;
     font-size: .7rem;
   }
@@ -7193,11 +7194,16 @@ WELCOME CARD
     color: var(--dark-cl);
     background-color: transparent;
     border: 0.1px solid var(--background-cl);
+    font-weight: 600;
+  }
+
+  .dark-mode .welcome-top-right input::placeholder{
+    color: white;
+    opacity: .94;
   }
 
   .welcome-top-right input:where(:hover :focus-within){
     border: 1px solid rgb(156, 151, 151);
-
   }
 
   .welcome-top-right input::placeholder{
@@ -7215,7 +7221,7 @@ WELCOME CARD
 
 
   .close-time {
-    width: 35;
+    width: 20%;
     height: 100%;
     display: flex;
     background: transparent;
@@ -7235,31 +7241,37 @@ WELCOME CARD
   }
 
   .dark-mode .close-time small{
-    color: var(--text-cl-3);
+    color: var !important;
+    opacity: .9;
   }
 
   .close-time span{
-    color: white;
-    padding: .1rem .2rem;
+    color: var(--card-mtn-bg) !important;
+    padding: .2rem .4rem !important;
     font-size: .8rem;
+    display: flex;
+    text-align: center !important;
+    justify-content: center !;
+    width: max-content;
+    height: 1rem !important;
     font-weight: 300;;
     background: var(--clock-bg-cl);
     border-radius: 4px;
-    border: 1px solid #14bb99;
+    border: 1px solid var(--thin-border-3) !important;
   }
 
 
 #clock {
       font-family: 'Digital-7', monospace;
       font-size: 2em;
-      color: #00ffcc;
+      color: var(--card-mtn-bg) !important;
       background: var(--clock-bg-cl);
       border-radius: 4px;
       display: inline-block;
       width: max-content;
       height: 2rem;
       padding: .2rem .3rem;
-      border: 1px solid #14bb99;
+      border: 1px solid var(--thin-border-3) !important;
       align-items: center;
       display: flex;
       justify-content: center;
