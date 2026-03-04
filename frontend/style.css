@@ -7219,64 +7219,82 @@ WELCOME CARD
     justify-content: space-between;
   }
 
-
+  
   .close-time {
-    width: 20%;
+    width: 23%;
     height: 100%;
     display: flex;
-    background: transparent;
+    background: var(--welcome-card-bg-3) !important;
     align-items: center;
     justify-content: flex-end;
+    border-end-start-radius: .2rem !important;
     gap: .1rem;
     text-align: center;
     flex-direction: column;
     margin-left: .1rem;
-    margin-bottom: .4rem;
+    padding-bottom: 1rem !important;
+    box-shadow: inset 12px 12px 20px var(--darkMode-bg-cl), inset -12px -12px 20px var(--darkMode-bg-cl);
+    border: 2px solid var(--thin-border) !important;
   }
 
-  .close-time small{
-    font-size: .89rem;
-    color: rgb(7, 112, 112);
-    font-family: 'Times New Roman', Times, serif;
-  }
+ .close-time .dotter{
+  display: flex;
+  width: 6px;
+  height: 6px;
+  background: var(--card-mtn-bg);
+  border-radius: 50%;
+  animation: colorhange 2s infinite;
+ }
 
-  .dark-mode .close-time small{
-    color: var !important;
-    opacity: .9;
-  }
+ @keyframes colorhange {
+  0% { background: white;}
+  25% { background: blue;}
+  50% { background: green;}
+  75% { background: yellow;}
+  100% { background: white;}
+ }
+  
+ }
+
+
+
 
   .close-time span{
     color: var(--card-mtn-bg) !important;
-    padding: .2rem .4rem !important;
-    font-size: .8rem;
+    font-size: .7rem !important;
+    font-weight: 600 !important;
+    padding: 0  .3rem !important;
     display: flex;
+    align-items: center;
+    gap: .2rem;
     text-align: center !important;
-    justify-content: center !;
+    justify-content: center !important;
     width: max-content;
     height: 1rem !important;
-    font-weight: 300;;
-    background: var(--clock-bg-cl);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background: none !important;
     border-radius: 4px;
-    border: 1px solid var(--thin-border-3) !important;
+    border: none !important;
   }
 
 
 #clock {
-      font-family: 'Digital-7', monospace;
+       font-family: 'Digital-7', monospace;
       font-size: 2em;
-      color: var(--card-mtn-bg) !important;
-      background: var(--clock-bg-cl);
+      color: var(--card-mtn-bg);
+      background: none !important;
       border-radius: 4px;
       display: inline-block;
       width: max-content;
       height: 2rem;
       padding: .2rem .3rem;
-      border: 1px solid var(--thin-border-3) !important;
+      border: none !important;
       align-items: center;
       display: flex;
       justify-content: center;
       font-size: .97rem;
       font-weight: 500;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
       margin-right: .5rem;
       margin-top: 2.2rem;
     }
@@ -15734,3 +15752,4 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 .airtelc{
   background: var(--card-full-airtel-bg-cl);
 }}
+
