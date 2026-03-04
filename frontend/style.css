@@ -3320,7 +3320,6 @@ WELCOME CARD
   align-items: center;
   width: 99%;
   height: 6rem;
-  margin: 0.2rem .2rem;
   justify-self: center;
   background: var(--bg-cl);
   border-start-start-radius: .4rem;
@@ -3334,18 +3333,18 @@ WELCOME CARD
   width: 70%;
   height: 80%;
   border: 1px solid rgba(252, 251, 251, 0.18);
-  display: flex;
+  display: flex !important;
   align-items: center !important;
   text-align: start;
   margin-left: .5rem;
-  justify-content: flex start ;
+  justify-content: start ;
   justify-items: start;
   padding-left: .4rem;
   white-space: nowrap;
 }
 
 .welcome-top-left p{
-  font-size: 1rem !important;
+  font-size: .74rem !;
   color: white;
 }
 
