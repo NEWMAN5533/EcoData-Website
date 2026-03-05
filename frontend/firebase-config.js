@@ -1,5 +1,6 @@
 // === firebase-config.js ===
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
 // ✅ Your Firebase config
@@ -16,10 +17,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 // ✅ Initialize Firestore
-const db = getFirestore(app);
+export const auth = getAuth(app);
+export const db = getFirestore(app);
 
 // ✅ Expose to window so main.js can access it
 window.FIRESTORE = db;
 
 console.log("🔥 Firebase initialized and Firestore ready!");
-export {db};
