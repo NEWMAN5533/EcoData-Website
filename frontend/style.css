@@ -1302,16 +1302,16 @@ margin-bottom: .1rem;
   text-align: center;
   display: flex;
   justify-content: space-around;
-  color: #02352e;
+  color: #303837;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   border: 1px solid #d6d5d5;
 }
 
 .dark-mode .live-order-header{
-  background: #31423ecc;
-  color: rgb(233, 230, 230);
+  background: var(--thin-border);
+  color: rgb(204, 201, 201);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  border: 1px solid #2c463d;
+  border: 1px solid var(--thin-border);
 }
 
 .live-order-card{
