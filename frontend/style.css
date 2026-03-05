@@ -1290,8 +1290,8 @@ margin-bottom: .1rem;
 
 
 .live-order-header {
-  background: #ffffffcc;
-  font-size: 12px;
+  background: #e0e0e0cc;
+  font-size: 14px;
   font-weight: 600;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   border-start-end-radius: .6rem;
@@ -1302,16 +1302,16 @@ margin-bottom: .1rem;
   text-align: center;
   display: flex;
   justify-content: space-around;
-  color: #555;
+  color: #02352e;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  border-bottom: 1px solid #eaeaea;
+  border: 1px solid #d6d5d5;
 }
 
 .dark-mode .live-order-header{
-  background: var(--welcome-card-border);
+  background: #31423ecc;
   color: rgb(233, 230, 230);
-  border-bottom: 1px solid rgba(116, 114, 114, 0.349);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #2c463d;
 }
 
 .live-order-card{
@@ -1391,7 +1391,7 @@ margin-bottom: .1rem;
   margin-bottom: 6px;
   scrollbar-width: thin;
   white-space: nowrap;
-  border-bottom: 1px solid rgb(206, 201, 201);
+  border-bottom: 1px solid rgb(230, 230, 230);
   gap: 8px;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   overflow-x: auto;
