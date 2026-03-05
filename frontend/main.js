@@ -1,6 +1,7 @@
 
 // --- Firebase Imports ---
-import { db } from "./firebase-config.js";
+import { auth, db } from "./firebase-config.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 import {
   collection,
   addDoc,
@@ -455,11 +456,8 @@ function hideLoader() {
 async function payWithPaystack(bundle, recipient) {
   const { network, packageName, size, price } = bundle;
 
-  let user = null;
-  try {
-    user = firebase.auth().currentUser;
-  } catch (err) {}
-
+  
+  const user = auth.currentUser;
   const userEmail = user?.email || `${recipient}@ecodata.com`;
   const userName = user?.displayName || "Guest User";
 
