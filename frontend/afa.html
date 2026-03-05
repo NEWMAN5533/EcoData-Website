@@ -559,7 +559,7 @@ const greeting = updateClock();
       const userSnap = await getDoc(doc(db, "users", user.uid));
       usernameDisplay.textContent = `${greeting}, ${userSnap.data().username}!`;
     } else {
-      usernameDisplay.textContent = `${greeting}, "Dear"`;
+      usernameDisplay.textContent = `${greeting}, Dear `;
     }
 });
 
@@ -665,7 +665,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
  const cardToggler = document.getElementById("cardToggler");
   const cardCloser = document.getElementById("closeCard");
 
-  // toggle menucard
+  // toggle menu card
   cardToggler.addEventListener("click", function(e) {
     e.stopPropagation();
     if(cardCloser.classList.contains("active")){
