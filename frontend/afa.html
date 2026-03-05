@@ -553,42 +553,106 @@
   
 
 
-
+const greeting = updateClock();
 
     if (user) {
       const userSnap = await getDoc(doc(db, "users", user.uid));
-      usernameDisplay.textContent = `Welcome Back, ${userSnap.data().username}!`;
+      usernameDisplay.textContent = `${greeting}, ${userSnap.data().username}!`;
     } else {
-      usernameDisplay.textContent = "Welcome Back, Dear ";
+      usernameDisplay.textContent = `${greeting}, "Dear"`;
     }
 });
- </script>
 
 
-<script>
 
 
+
+  
   // === REAL TIME CLOCK ===
 function updateClock() {
   const clock = document.getElementById("clock");
   const now = new Date();
+
   const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
   const dayName = days[now.getDay()];
+
   let hours = now.getHours();
   let minutes = now.getMinutes();
   let seconds = now.getSeconds();
+
+  // Greeting logic
+  let greeting = "";
+  if (hours < 12) greeting = "Good Morning";
+  else if (hours < 18) greeting = "Good Afternoon";
+  else greeting = "Good Evening";
+
   const ampm = hours >= 12 ? "PM" : "AM";
+
   hours = hours % 12 || 12;
   minutes = minutes < 10 ? "0" + minutes : minutes;
   seconds = seconds < 10 ? "0" + seconds : seconds;
+
   clock.innerHTML = `${dayName} ${hours}:${minutes}:${seconds} ${ampm}`;
+
+  return greeting; // 🔥 important
 }
+
 setInterval(updateClock, 1000);
 updateClock();
 
 
 
-</script>
+
+// SNACKBAR SECTION //
+// ===== SNACKBAR FUNCTION ===== //
+let snackbarTimeout = null;
+
+function showSnackBar(message, type = "info", duration = 4000) {
+  let snackbar = document.querySelector(".snackbar");
+
+  // Create snackbar if it doesn't exist
+  if (!snackbar) {
+    snackbar = document.createElement("div");
+    snackbar.className = "snackbar";
+
+    snackbar.innerHTML = `
+      <span class="snackbar-text"></span>
+      <div class="snackbar-progress"></div>
+    `;
+
+    document.body.appendChild(snackbar);
+  }
+
+  // Update text
+  snackbar.querySelector(".snackbar-text").textContent = message;
+
+  // Color by type
+  if (type === "success") snackbar.style.background = "rgba(7, 29, 26, 0.95)";
+  else if (type === "error") snackbar.style.background = "#dc3545";
+  else if (type === "warning") snackbar.style.background = "#ffc107";
+  else snackbar.style.background = "rgba(7, 29, 26, 0.95)";
+
+  // Reset progress animation
+  const progress = snackbar.querySelector(".snackbar-progress");
+  progress.style.animation = "none";
+  void progress.offsetWidth;
+  progress.style.animation = `snackbar-progress ${duration}ms linear forwards`;
+
+  snackbar.classList.add("show");
+
+  // Clear previous timeout
+  if (snackbarTimeout) clearTimeout(snackbarTimeout);
+
+  snackbarTimeout = setTimeout(() => {
+    snackbar.classList.remove("show");
+  }, duration);
+}
+// snackbar ends
+
+ </script>
+
+
+
 
 <script scr="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js">
 
