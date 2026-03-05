@@ -1398,11 +1398,11 @@ margin-bottom: .1rem;
 }
 
 .dark-mode .live-row{
-  color: rgb(194, 193, 193);
+  color: rgb(42, 44, 44);
   font-weight: 600;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: .80rem;
-  border-bottom: 1px solid rgba(110, 110, 110, 0.945);
+  border-bottom: 1px solid rgba(97, 96, 96, 0.945);
 }
 
 .live-row::-webkit-scrollbar{
