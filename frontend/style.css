@@ -5043,11 +5043,11 @@ height: max-content;
 justify-content: center;
 position: relative;
 align-items: center;
-gap: 1rem;
+gap: .6rem;
 }
 
 .total-card {
-  width: 7.2rem;
+  width: 7.1rem;
   height: 4.7rem;
   display: flex;
   flex-direction: column;
