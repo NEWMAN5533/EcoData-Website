@@ -7,7 +7,7 @@
   display:flex;
   align-items:center;
   justify-content:center;
-  z-index:9999;
+  z-index:99999999999;
   opacity: 0;
   pointer-events:none;
   transition:0.4s;
@@ -104,6 +104,7 @@
   display:flex;
   justify-content:space-between;
   align-items:center;
+  flex-direction: col;
 }
 
 .signup-header h2 img{
@@ -160,7 +161,7 @@
 }
 
 .signup-text b{
-  color: rgb(61, 79, 80);
+  color: rgb(9, 145, 116);
 }
 
 .dark-mode .signup-text b{
