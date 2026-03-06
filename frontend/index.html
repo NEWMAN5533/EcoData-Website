@@ -166,17 +166,19 @@
 <div class="google-thumbnails-wrapper">
   <div class="google-thumbnails" id="thumbnailScroll">
 
-    <div class="google-thumbnail thumb1">
+  
+
+<div class="google-thumbnail thumb2"><img class="analy" src="./css/icons/like.png" alt="" loading="lazy">
+    MTN DATA NORMAL DELIVERY IS BACK! and THE DELIVERY NETWORK IS AVIATING, PLACE YOUR ORDER TO ENJOY  FAST DELIVERY!
+    </div>
+
+      <div class="google-thumbnail thumb1">
       Search Us on
       <img class="folsg" src="./css/icons/sg (1).png" alt="" loading="lazy">
     </div>
 
-<div class="google-thumbnail thumb2"><img class="analy" src="./css/icons/like.png" alt="" loading="lazy">
-    FAST DELIVERY IS ONGOING, PLACE YOUR ORDER NOW.
-    </div>
 
-
-      <div class="google-thumbnail thumb2"><img class="analy" src="./css/icons/mtn-signal.png" alt="" loading="lazy">
+      <div class="google-thumbnail thumb2" style="display: none;"><img class="analy" src="./css/icons/mtn-signal.png" alt="" loading="lazy">
       Promo! on 1GB, 2GB ON EXPRESS DATA, let enjoy this with EXPRESS till we CONNECT back to NORMAL DELIVERY. 
     </div>
 
@@ -392,7 +394,7 @@
   </button>
 
   <div class="select-dropdown" id="dropdownOffer">
-    <div class="optionDelevery" data-mode="normal" style="display: none;">
+    <div class="optionDelevery" data-mode="normal">
       <span >MTN DATA NORMAL DELIVERY ✔  </span>
       <small>NON-EXPIRY</small>
     </div>
@@ -570,17 +572,17 @@
     <div class="optionSelect" 
   data-network="mtn"
   data-size="1"
-  data-price="6">
+  data-price="6.50">
       <span>1GB</span>
-      <small>GHS 6</small>
+      <small>GHS 6.50</small>
     </div>
     <!---select-2-->
     <div class="optionSelect" 
   data-network="mtn"
   data-size="2"
-  data-price="12">
+  data-price="12.50">
       <span>2GB</span>
-      <small>GHS 12</small>
+      <small>GHS 12.50</small>
     </div>
     <!---select-3-->
     <div class="optionSelect" 
@@ -1916,6 +1918,34 @@
 
 
 <!----AFA-REGISTRATION-BUTTON----->
+<div id="signupModal" class="signup-modal">
+
+  <div class="signup-box">
+   <div class="signup-box-top">
+     <img src="./css/icons/icon.bg.png" alt="" loading="lazy">
+     <span id="closeSignup">&times;</span>
+   </div>
+ <div class="short-wrap">
+  
+    <div class="signup-header">
+      <h2>Welcome to EcoData</h2>
+      
+    </div>
+
+    <div class="signup-text">
+      Create an account to enjoy <b>exclusive bundle prices</b> and faster checkout.
+    </div>
+
+ </div>
+    <div class="signup-actions">
+      <button id="createAccountBtn">Create Account</button>
+      <button id="loginBtn">Login</button>
+    </div>
+
+  </div>
+
+</div>
+
 
 
 <div class="what-group-btn">
@@ -2079,6 +2109,49 @@ if (logoutBtn) {
 }
 
 
+// FORCE TO LOGIN POP UP
+
+onAuthStateChanged(auth, (user)=>{
+
+  const seen = localStorage.getItem("signupPromptSeen");
+
+  if(!user && !seen){
+    setTimeout(()=>{
+      showSignupModal();
+    },2000);
+  }
+
+});
+
+
+  const signupModal = document.getElementById("signupModal");
+const closeSignup = document.getElementById("closeSignup");
+
+function showSignupModal(){
+  signupModal.classList.add("active");
+}
+
+function hideSignupModal(){
+  signupModal.classList.remove("active");
+}
+
+closeSignup.addEventListener("click", ()=>{
+  hideSignupModal();
+  localStorage.setItem("signupPromptSeen","yes");
+});
+
+
+document.getElementById("createAccountBtn").onclick = ()=>{
+  window.location.href = "./signup.html";
+};
+
+document.getElementById("loginBtn").onclick = ()=>{
+  window.location.href = "./login.html";
+};
+
+// FORCE TO LOGIN END
+
+
 
   
   // === REAL TIME CLOCK ===
@@ -2167,6 +2240,13 @@ function showSnackBar(message, type = "info", duration = 4000) {
 // snackbar ends
 
 </script>
+
+
+
+
+
+
+
 
 <!---MODE BTNS-->
 <script>
