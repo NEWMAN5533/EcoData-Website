@@ -4243,12 +4243,12 @@ how to style select dropdown
   margin-bottom: 8rem;
   scrollbar-width: none;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgb(219, 219, 219);
+  border: 1px solid rgb(199, 198, 198);
 }
 
 .dark-mode .select-dropdown{
   background: var(--text-cl-3);
-  border: 1px solid rgb(143, 142, 142);
+  border: 1px solid var(--darkMode-bg-cl);
 }
 
 .select-dropdown.show{
@@ -4319,7 +4319,7 @@ BOTH BTN SELECTOR
   user-select: none;
 }
 
-.normalOrgridBtn .normalBtn{
+.normalOrgridBtn .mode-Btn.active{
   width: 5rem;
   height: 1.9rem;
   background: linear-gradient(135deg, rgb(236, 127, 25), rgb(253, 168, 10));
@@ -4341,7 +4341,7 @@ BOTH BTN SELECTOR
   user-select: none;
 }
 
-.normalOrgridBtn .gridBtn{
+.normalOrgridBtn .mode-Btn{
   width: 5rem;
   height: 1.9rem;
   background: white;

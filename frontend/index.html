@@ -407,10 +407,12 @@
 
 <!----choose grid 0r normal btn-->
 <div class="normalOrgridBtn">
-  <button class="normalBtn" id="normalModeBtn">Normal</button>
-  <button class="gridBtn" id="gridModeBtn">Grid</button>
+  <button class="mode-Btn active" id="normalModeBtn">Normal</button>
+  <button class="mode-Btn" id="gridModeBtn">Grid</button>
 </div>
 </section>
+
+
 
 <!-----INDIVIDUAL SECTIONS-VIEW TOGGLE---->
 <!----NORMALVIEW-SECTION-->
@@ -2166,8 +2168,19 @@ function showSnackBar(message, type = "info", duration = 4000) {
 
 </script>
 
+<!---MODE BTNS-->
+<script>
+  // add click event to gridBtn
+ const modeButtons = document.querySelectorAll(".mode-Btn");
 
-
+ modeButtons.forEach(btn => {
+  btn.addEventListener("click", () =>{
+    modeButtons.forEach(b => 
+    b.classList.remove("active"));
+    btn.classList.add("active"); 
+   })
+ })
+</script>
 
 
 <!----SCROLL-->
