@@ -2,7 +2,7 @@
 .signup-modal{
   position: fixed;
   inset:0;
-  background: rgba(0,0,0,0.);
+  background: rgba(0,0,0,0.1);
   backdrop-filter: blur(px);
   display:flex;
   align-items:center;
@@ -19,9 +19,9 @@
 }
 
 .signup-box{
-  background:rgb(255, 255, 255);
+  background:rgb(248, 248, 248);
   width:340px;
-  height: 410px;
+  height: 430px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,11 +30,16 @@
   padding:18px;
   border-radius:14px;
   text-align:center;
-  box-shadow:0 20px 40px rgba(75, 74, 74, 0.2);
+  box-shadow:0 12px 36px rgba(117, 117, 117, 0.7);
   transform:translateY(30px);
   transition:0.4s;
-  border: 2px solid rgb(108, 247, 240)
+  border: 2px solid rgb(255, 255, 255);
+}
 
+.dark-mode .signup-box{
+  background: var(--welcome-card-bg-1);
+  border: 2px solid var(--thin-border);
+ box-shadow:0 12px 36px rgba(80, 80, 80, 0.3);
 }
 
 .signup-box .signup-box-top{
@@ -66,6 +71,12 @@
   border-radius: 4px;
 }
 
+.dark-mode .signup-box-top img{
+  border: 1px solid var(--thin-border);
+  box-shadow: 0 2px 6px rgba(24, 24, 24, 0.18);
+
+}
+
 
 .short-wrap{
   width: 100%;
@@ -80,6 +91,11 @@
   border: 2px solid white;
 }
 
+.dark-mode .short-wrap{
+ box-shadow:  0 12px 16px var(--welcome-card-bg-1);
+  border: 2px solid var(--thin-border);
+}
+
 .signup-modal.active .signup-box{
   transform:translateY(0);
 }
@@ -90,10 +106,29 @@
   align-items:center;
 }
 
+.signup-header h2 img{
+  width: 1.8rem;
+  height: 1.8rem;
+  border: none;
+  box-shadow: none;
+}
+
+.dark-mode .signup-header h2 img{
+  width: 1.8rem;
+  height: 1.8rem;
+  border: none;
+  box-shadow: none;
+}
+
 .signup-header h2{
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
+  white-space: nowrap;
   background: #0066ff46;
-  padding: .3rem 1.5rem;
+  padding: .3rem 1rem;
   border-radius: 4px;
     box-shadow: 0 2px 6px rgba(66, 66, 66, 0.1);
 }
@@ -115,8 +150,18 @@
   box-shadow: 0 2px 6px rgba(66, 66, 66, 0.1);
 }
 
+.dark-mode .signup-text {
+  color: rgb(240, 238, 238);
+  background: rgba(17, 94, 77, 0.274);
+  border: 1px solid rgb(59, 71, 88);
+}
+
 .signup-text b{
   color: rgb(61, 79, 80);
+}
+
+.dark-mode .signup-text b{
+  color: rgb(91, 192, 196);
 }
 
 .signup-actions{
@@ -127,14 +172,18 @@
 }
 
 #createAccountBtn{
-  background:rgb(235, 159, 18);
+  background:rgb(223, 151, 17);
   color:white;
   border:none;
   padding:10px 21px;
   border-radius:4px;
   cursor:pointer;
-    box-shadow: 0 2px 6px rgba(66, 66, 66, 0.1);
+  box-shadow: 0 2px 6px rgba(66, 66, 66, 0.1);
+  transition: .2s ease;
+}
 
+#createAccountBtn:hover{
+background:rgb(243, 159, 4);
 }
 
 #loginBtn{
@@ -145,6 +194,11 @@
   border-radius:4px;
   cursor:pointer;
   box-shadow: 0 2px 6px rgba(66, 66, 66, 0.1);
+  transition: .2s ease;
+}
+
+#loginBtn:hover{
+  background:#0ebb90;
 }
 /****
 AGENT PAGE CODE SECTION

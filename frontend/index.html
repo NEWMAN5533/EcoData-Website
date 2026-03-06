@@ -1928,8 +1928,8 @@
  <div class="short-wrap">
   
     <div class="signup-header">
-      <h2>Welcome to EcoData</h2>
-      
+      <h2>Welcome to EcoData   <img src="./css/icons/greetings.png" alt="" loading="lazy"></h2>
+     
     </div>
 
     <div class="signup-text">
@@ -2113,7 +2113,7 @@ if (logoutBtn) {
 
 onAuthStateChanged(auth, (user)=>{
 
-  const seen = localStorage.getItem("signupPromptSeen");
+  const seen = localStorage.removeItem("signupPromptSeen");
 
   if(!user && !seen){
     setTimeout(()=>{
