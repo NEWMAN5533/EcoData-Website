@@ -4230,7 +4230,7 @@ how to style select dropdown
   position: absolute;
   width: 100%;
   max-width: 80%;
-  background: #ffffff;
+  background: #fff;
   border-radius: 14px;
   display: none;
   flex-direction: column;
@@ -4243,7 +4243,12 @@ how to style select dropdown
   margin-bottom: 8rem;
   scrollbar-width: none;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgb(209, 212, 214);
+  border: 1px solid rgb(219, 219, 219);
+}
+
+.dark-mode .select-dropdown{
+  background: var(--text-cl-3);
+  border: 1px solid rgb(143, 142, 142);
 }
 
 .select-dropdown.show{
