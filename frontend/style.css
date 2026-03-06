@@ -5043,12 +5043,12 @@ height: max-content;
 justify-content: center;
 position: relative;
 align-items: center;
-gap: .8rem;
+gap: .6rem;
 }
 
 .total-card {
-  width: 7rem;
-  height: 5rem;
+  width: 7.8rem;
+  height: 4.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -5056,7 +5056,7 @@ gap: .8rem;
   text-align: center;
   justify-self: center;
   background: rgb(19, 42, 56);
-  border-radius: 3px;
+  border-radius: .8rem;
   padding-top: .1rem;
   box-shadow: 0 2px 6px rgba(22, 22, 22, 0.6);
 }
@@ -5091,8 +5091,8 @@ top section
 }
 
 .total-card .total-card-top img{
-  width: 1.1rem;
-  height: 1.1rem;
+  width: 1rem;
+  height: 1rem;
   margin-top: -.1rem;
 }
 
@@ -6679,6 +6679,9 @@ AUTO SCROLLING STYLE
 
 /* 1. Extra small devices (phones, portrait) */
 @media (max-width: 320px) {
+    .notice-sidebar{
+    display: none;
+  }
 
 
 
@@ -6687,10 +6690,16 @@ AUTO SCROLLING STYLE
 
 /* 2. Small phones */
 @media (max-width: 360px) { 
+    .notice-sidebar{
+    display: none;
+  }
 
 }
 /* 3. Larger small phones */
 @media (max-width: 375px) {
+    .notice-sidebar{
+    display: none;
+  }
 
 
 
@@ -6699,6 +6708,23 @@ AUTO SCROLLING STYLE
 
 /* 4. Standard mobile (e.g. iPhone X/12/13) */
 @media (max-width: 414px) {
+  .total-card {
+  width: 7.8rem;
+  height: 4.7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  justify-self: center;
+  background: rgb(19, 42, 56);
+  border-radius: .8rem;
+  padding-top: .1rem;
+  box-shadow: 0 2px 6px rgba(22, 22, 22, 0.6);
+}
+  .notice-sidebar{
+    display: none;
+  }
   /*-----BOTTOM-----*/
   .welcome-bottom {
     width: 100%;
@@ -7916,8 +7942,24 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 
 
 @media (max-width: 430px) {
+   .total-card {
+  width: 7.8rem;
+  height: 4.7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  justify-self: center;
+  background: rgb(19, 42, 56);
+  border-radius: .8rem;
+  padding-top: .1rem;
+  box-shadow: 0 2px 6px rgba(22, 22, 22, 0.6);
+}
   
-
+  .notice-sidebar{
+    display: none;
+  }
   
   /**
   NAVBAR SECTION
@@ -9120,6 +9162,25 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 
 /* 5. Large phones / Tablets */
 @media (min-width: 480px) {
+   .total-card {
+  width: 7.8rem;
+  height: 4.7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  justify-self: center;
+  background: rgb(19, 42, 56);
+  border-radius: .8rem;
+  padding-top: .1rem;
+  box-shadow: 0 2px 6px rgba(22, 22, 22, 0.6);
+}
+
+
+    .notice-sidebar{
+    display: none;
+  }
 .two-div-container{
   display: none !important;
 }
@@ -9780,6 +9841,9 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 
 /* 6. Small tablets */
 @media (min-width: 600px) { 
+    .notice-sidebar{
+    display: none;
+  }
  .navbar{
     width: 100%;
   }
@@ -12707,11 +12771,103 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 /* 14. XL desktops */
 @media (min-width: 1366px) {
 
+  .notice-sidebar{
+    display: flex;
+    flex-direction: column;
+    left: 0;
+    position: fixed;
+    top: 3.2rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    width: 330px;
+    height: 90vh;
+    background: white;
+  }
+
+  .dark-mode .notice-sidebar{
+    background: var(--darkMode-bg-cl);
+  }
+
+
+
+  .notice-sidebar .topp{
+    width: 100%;
+    height: 15vh;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    display: flex;
+    background: white;
+    border-right: 1px solid var(--text-cl-2);
+    border-bottom: 1px solid var(--text-cl-2);
+  }
+
+  
+
+  .notice-sidebar .topp h2{
+    color: var(--thin-border-1);
+  }
+
+   .dark-mode .topp{
+    background: var(--darkMode-bg-cl);
+    border-bottom: 1px solid var(--thin-border);
+    border-right: 1px solid var(--thin-border);
+
+  }
+
+
+  .notice-sidebar .bot{
+    width: 100%;
+    max-width: 98%;
+    height: 15vh;
+    display: flex;
+    background: white;
+    border-right: 1px solid var(--text-cl-2);
+    border-top: 1px solid var(--text-cl-2);
+  }
+
+   .dark-mode .bot{
+    background: var(--darkMode-bg-cl);
+     border-right: 1px solid var(--thin-border);
+     border-top: 1px solid var(--thin-border);
+  }
+
+
+  .notice-sidebar .note-inner-container{
+    width: 100%;
+    max-width: 98%;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    overflow-y: auto;
+    position: relative;
+    scrollbar-width: thin;
+    top: 0;
+     border-right: 1px solid var(--text-cl-2);
+     border-top: 1px solid var(-text-cl-2);
+     border-bottom: 1px solid var(-text-cl-2);
+
+  }
+
+
+
+
+
+
+
+
+
+
+.agent-upgrade-wrapper{
+  display: none;
+}
 .card-container{
   display: flex;
   width: 100%;
-  max-width: 890px;
-  margin-right: 3rem;
+  max-width: 1000px;
   flex-direction: column;
   height: max-content;
   justify-self: end;
@@ -12927,7 +13083,7 @@ justify-content: center;
 /*** NOTICE CONTAINER ***/
 .card-container .notice-container{
   width: 100% !important;
-  display: flex;
+  display: none;
   align-items: center;
   justify-items: end  !important;
   max-width: 420px;
@@ -12946,40 +13102,41 @@ justify-content: center;
 }
 
 .notice-tag .notice-text{
-font-size: .8rem;
+font-size: .8rem !important;
 }
 
 /** board **/
 .notice-container .notice-board{
   height: 12rem;
   gap: 8px;
-  border-right: 5px solid rgb(228, 221, 221) !important;
+  border-right: none !important;
 }
 
 .notice-board .notice-top small{
 font-size: .8rem;
 color: white;
-opacity: .9;
+opacity: .8;
 font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 /** follow us ***/
 .follow-share-container{
   width: 100%;
-  max-width: 400px;
-  max-height: 3.2rem;
+  max-width: 440px;
+  height: 10rem;
   justify-content: space-between;
-  padding: .1rem;
-  margin: 0;
+  padding: 0 1rem;
   padding-right: .2rem;
   align-items: center;
-  padding-top: 1rem;
-  border: 1px solid white;
-  margin-left: 24rem;
-  margin-t: 10rem;
-  display: flex;
-  position: absolute;
-  ;
+  display: none;
+  position: static;
+  margin-left: 29rem;
+  margin-top: -12rem;
+  margin-bottom: 1rem;
+  padding-right: 1rem;
+  background: var(--welcome-card-bg-1);
+  border-radius: 1rem;
+  border: 1px solid var(--thin-border);
 }
 
 .follow-share-container .social-follow{
@@ -13346,6 +13503,130 @@ font-size: .8rem ;
 
 
 
+/****
+DASHBOARD TOTALS OVERVIEW
+***/
+
+.daily-analytics{
+  width: 100%;
+  max-width: 96%;
+  padding: .3rem 1rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 14px;
+}
+
+.daily-analytics h4{
+  color: rgb(18, 26, 31);
+  font-size: .9rem;
+  font-family: "inter" sans-serif;
+  font-weight: 600;
+}
+
+
+.dark-mode .daily-analytics h4{
+  color: rgb(211, 206, 206);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+
+
+.totals-container {
+width: 100%;
+max-width: 96%;
+margin: .1rem 0;
+padding: .2rem 1rem;
+display: grid;
+grid-template-columns: repeat(3, 1fr); 
+height: 12rem;
+justify-content: center;
+position: relative;
+align-items: center;
+gap: .8rem;
+}
+
+.total-card {
+  width: 17rem;
+  height: 8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  justify-self: center;
+  background: rgb(19, 42, 56);
+  border-radius: 1rem;
+  padding-top: .3 1rem;
+  box-shadow: 0 2px 6px rgba(22, 22, 22, 0.6);
+}
+
+/***
+top section
+***/
+.total-card .total-card-top{
+  display: flex;
+  align-items: start;
+  padding: .3rem;
+  width: 100%;
+  max-width: 98%;
+  justify-self: center;
+  text-align: center;
+  justify-content: space-between;
+  height: 3rem;
+  background: transparent;
+  top: 0;
+}
+
+.total-card-top small{
+  font-size: .9rem;
+  color: rgb(228, 226, 226);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.total-card-top .cedis{
+  font-size: .77rem;
+  color: rgb(30, 209, 149);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.total-card .total-card-top img{
+  width: 1.4rem;
+  height: 1.4rem;
+  margin: .3rem .8rem;
+}
+
+
+.total-card .total-card-bottom p{
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: rgb(228, 226, 226);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.total-card .total-card-bottom{
+  width: 100%;
+  max-width: 94%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  height: 3rem;
+  padding-left: .6rem;
+}
+
+.dark-mode .total-card{
+  background: var(--welcome-card-bg);
+  border: 2px solid var(--thin-border);
+}
+
+
+/****
+DASHBOARD SECTION ENDS
+****/
+
 
 
 
@@ -13455,6 +13736,8 @@ WELCOME CARD
   box-shadow:   1px 1px 3px rgb(151, 147, 147),  -1px -1px 3px rgb(189, 184, 184);
 }
 
+.welcome-bottom
+
 
 
 
@@ -13522,7 +13805,7 @@ WELCOME CARD
   }
 
   .notice-board{
-  display: flex;
+  display: none;
   flex-direction: column;
   padding: .4rem;
   justify-content: start;
@@ -13591,6 +13874,7 @@ DISPLAY NONE DIVS
 
 
 .card-div,
+.sidebar-container,
 .single-order-container{
   display: none;
 }
@@ -13966,10 +14250,8 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 
 .foot{
   width: 100%;
-  max-width: 975px;
+  max-width: 1020px;
   display: flex;
-  position: fixed;
-  bottom: 0;
   justify-self: end;
   z-index: 122;
   overflow: hidden;
