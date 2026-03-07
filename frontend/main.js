@@ -272,6 +272,7 @@ document.addEventListener("click", () => {
           lastPurchasedBundle = bundle; // 🔑 SAVE FOR POST-PAYMENT
 
           payWithPaystack(bundle, recipient);
+          resetSelectedBundle();
         }
 
         // ================= GRID VIEW =================
@@ -293,7 +294,7 @@ document.addEventListener("click", () => {
 
           createPhoneModal(inputNumber => {
             payWithPaystack(bundle, inputNumber);
-           
+            resetSelectedBundle();
           });
         }
       });
