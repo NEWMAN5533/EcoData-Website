@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sign Up | EcoData</title>
+
+
   <style>
 
 
@@ -187,7 +189,7 @@
     }
     input{
       width: 15rem;
-      padding: 10px 10px;
+      padding: 14px 10px;
       margin-top: 40px;
       display: flex;
       border: 1px solid #fffdfd;
@@ -199,13 +201,67 @@
     }
 
     input::placeholder{
-      opacity: .6;
+      opacity: .8;
       text-align: start;
+      font-size: .9rem;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
 
 
-    button {
+    
 
+
+  .btn-text{
+    font-size: .95rem;
+    font-weight: 600;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+
+  .spinner{
+    width: 19px;
+    height: 19px;
+    border: 3px solid white;
+    border-top: 3px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    display: none;
+  }
+
+  button.loading .spinner{
+    display: block;
+  }
+
+  button.loading .btn-text{
+    display: none;
+  }
+
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+    button {
+      position: relative;
+      display: flex;
+      white-space: nowrap;
+      align-items: center;
+      gap: .5rem;
+      justify-content: center;
       padding: 8px 49px;
       height: 2.5rem;
       text-align: center;
@@ -239,6 +295,19 @@
       border-radius: 4px;
     }
     
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @media (min-width: 1440px) {
   .navbar{
@@ -284,73 +353,127 @@
     <form id="signup-form">
       <input type="text" id="username" placeholder="Username" required />
       <input type="email" id="email" placeholder="Email" required />
-      <input type="password" id="password" placeholder="Password" required />
-      <button type="submit">Sign Up</button>
+      <input type="password" id="password" placeholder="Choose Password" required />
+      <button id="signBtn" type="submit">
+        <span class="spinner"></span>
+        <span class="btn-text">Sign Up</span>
+      </button>
     </form>
     <p>Already have an account? <a href="login.html">Login</a></p>
   </div>
 
 
 
-  <!-- Firebase Core -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-    import { getAuth } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-    import { getFirestore } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
-    import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-    import { doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
-    const firebaseConfig = {
+
+
+
+
+
+
+
+
+
+
+
+<!-- Firebase Core -->
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+
+// 🔹 Firebase config
+const firebaseConfig = {
   apiKey: "AIzaSyClNBlfigtQk8AZWdMZcU9sEtVcIrS0D1g",
   authDomain: "ecodata-2bee6.firebaseapp.com",
   projectId: "ecodata-2bee6",
   storageBucket: "ecodata-2bee6.firebasestorage.app",
   messagingSenderId: "544837123249",
   appId: "1:544837123249:web:6c362350a00c6dab10b690"
-    };
+};
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
 
-    const signupForm = document.getElementById("signup-form");
-    signupForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const username = document.getElementById("username").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value.trim();
+// 🔹 Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-      try {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
 
-        await setDoc(doc(db, "users", user.uid), {
-          uid: user.uid,
-          username,
-          email,
-          createdAt: serverTimestamp(),
-        });
+// 🔹 Signup form
+const signupForm = document.getElementById("signup-form");
+const sinBtn = document.getElementById("signBtn");
 
-        showSnackBar("Signup successful!");
-        window.location.href = "index.html";
-      } catch (error) {
-        showSnackBar(error.message);
-      }
+
+signupForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  sinBtn.classList.add("loading");
+
+  const username = document.getElementById("username").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+
+  if (!username || !email || !password) {
+    showSnackBar("Please fill all fields", "warning");
+    sinBtn.classList.remove("loading");
+    return;
+  }
+
+  try {
+
+    // 🔹 Create user
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+
+    // 🔹 Save user profile to Firestore
+    await setDoc(doc(db, "users", user.uid), {
+      uid: user.uid,
+      username: username,
+      email: email,
+      role: "user",          // later can become "agent"
+      balance: 0,
+      createdAt: serverTimestamp()
     });
-  </script>
 
-   <!----SNACKBAR-SECTION--->
-   <!----SNACKBAR-SECTION--->
-  <script>
-// SNACKBAR SECTION //
-// ===== SNACKBAR FUNCTION ===== //
+    showSnackBar("Signup successful!", "success");
+
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 3500);
+
+  } catch (error) {
+    showSnackBar(error.message, "error");
+  }
+
+  sinBtn.classList.remove("loading");
+
+});
+
+
+
+/* ============================= */
+/*        SNACKBAR SYSTEM        */
+/* ============================= */
+
 let snackbarTimeout = null;
 
 function showSnackBar(message, type = "info", duration = 4000) {
+
   let snackbar = document.querySelector(".snackbar");
 
-  // Create snackbar if it doesn't exist
   if (!snackbar) {
+
     snackbar = document.createElement("div");
     snackbar.className = "snackbar";
 
@@ -362,33 +485,34 @@ function showSnackBar(message, type = "info", duration = 4000) {
     document.body.appendChild(snackbar);
   }
 
-  // Update text
   snackbar.querySelector(".snackbar-text").textContent = message;
 
-  // Color by type
-  if (type === "success") snackbar.style.background = "rgba(7, 29, 26, 0.95)";
+  // color types
+  if (type === "success") snackbar.style.background = "rgba(7,29,26,0.95)";
   else if (type === "error") snackbar.style.background = "#dc3545";
   else if (type === "warning") snackbar.style.background = "#ffc107";
-  else snackbar.style.background = "rgba(7, 29, 26, 0.95)";
+  else snackbar.style.background = "rgba(7,29,26,0.95)";
 
-  // Reset progress animation
   const progress = snackbar.querySelector(".snackbar-progress");
+
   progress.style.animation = "none";
   void progress.offsetWidth;
+
   progress.style.animation = `snackbar-progress ${duration}ms linear forwards`;
 
   snackbar.classList.add("show");
 
-  // Clear previous timeout
   if (snackbarTimeout) clearTimeout(snackbarTimeout);
 
   snackbarTimeout = setTimeout(() => {
     snackbar.classList.remove("show");
   }, duration);
-}
-// snackbar ends
-  </script>
 
+}
+
+</script>
+
+  
 
 
   

@@ -195,7 +195,7 @@
     }
     input {
       width: 100%;
-      padding: 14px;
+      padding: 16px 18px;
       margin-top: 30px;
       border: 1px solid #ccc;
       border-radius: 6px;
@@ -209,8 +209,57 @@
       opacity: .5;
       font-size: .8rem;
     }
+
+
+
+  .btn-text{
+    font-size: .95rem;
+    font-weight: 600;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+
+  .spinner{
+    width: 19px;
+    height: 19px;
+    border: 3px solid white;
+    border-top: 3px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    display: none;
+  }
+
+  button.loading .spinner{
+    display: block;
+  }
+
+  button.loading .btn-text{
+    display: none;
+  }
+
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+
+
+
+
+
     button {
-      width: 100%;
+      position: relative;
+      display: flex;
+      white-space: nowrap;
+      align-items: center;
+      gap: .5rem;
+      justify-content: center;
+      width: 70%;
       padding: 10px;
       background: #2196f3;
       border: none;
@@ -220,9 +269,11 @@
       margin-top: 25px;
       cursor: pointer;
     }
+
     button:hover {
       background: #1976d2;
     }
+    
     p {
       text-align: center;
       margin-top: 1rem;
@@ -293,7 +344,10 @@
       <input type="email" id="email" placeholder="Email" required />
       <input type="password" id="password" placeholder="Password" required />
     
-      <button type="submit">Login</button>
+      <button id="logBtn" type="submit">
+        <span class="spinner"></span>
+        <span class="btn-text">Sign Up</span>
+      </button>
     </form>
     <p>Don’t have an account? <a href="signup.html">Sign Up</a></p>
   </div>
@@ -303,95 +357,137 @@
   
 
 
- 
 
 
 
 
 
 
-  <!-- Firebase Core -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+<script type="module">
 
-    const firebaseConfig = {
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+
+// 🔹 Firebase config
+const firebaseConfig = {
   apiKey: "AIzaSyClNBlfigtQk8AZWdMZcU9sEtVcIrS0D1g",
   authDomain: "ecodata-2bee6.firebaseapp.com",
   projectId: "ecodata-2bee6",
   storageBucket: "ecodata-2bee6.firebasestorage.app",
   messagingSenderId: "544837123249",
   appId: "1:544837123249:web:6c362350a00c6dab10b690"
-    };
+};
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
 
-onAuthStateChanged(auth, (user) => {
+// 🔹 Initialize
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+
+// 🔹 Display username when logged in
+onAuthStateChanged(auth, async (user) => {
+
   const usernameDisplay = document.getElementById("usernameDisplay");
   if (!usernameDisplay) return;
 
   if (user) {
-    const displayName = user.displayName || "User";
-    usernameDisplay.textContent = `Welcome, ${displayName}!`;
-  } else {
-    usernameDisplay.textContent = "Welcome, Guest!";
-  }
-});
 
-    const loginForm = document.getElementById("login-form");
-    loginForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value.trim();
+    const userDoc = await getDoc(doc(db, "users", user.uid));
 
-  try {
-  const userCredential = await signInWithEmailAndPassword(auth, email, password);
-  const user = userCredential.user;
-
-  const userDoc = await getDoc(doc(db, "users", user.uid));
-
-  if (userDoc.exists()) {
-    const userData = userDoc.data();
-
-    // Save username
-    localStorage.setItem("username", userData.username || "User");
-
-    showSnackBar("Login successful!");
-
-    // 🔥 Agent Check
-    if (userData.isAgent === true) {
-      window.location.href = "agentPage.html";   // your agent page
+    if (userDoc.exists()) {
+      const userData = userDoc.data();
+      usernameDisplay.textContent = `Welcome, ${userData.username}!`;
     } else {
-      window.location.href = "index.html";   // normal user
+      usernameDisplay.textContent = "Welcome!";
     }
 
   } else {
-    showSnackBar("User data not found.");
+    usernameDisplay.textContent = "Welcome, Guest!";
   }
 
-} catch (error) {
-  showSnackBar(error.message);
-}
-
-    });
-  </script>
+});
 
 
+// 🔹 Login
+const loginForm = document.getElementById("login-form");
+const logBtn = document.getElementById("logBtn");
 
-  <!----SNACKBAR-SECTION--->
-  <script>
-// SNACKBAR SECTION //
-// ===== SNACKBAR FUNCTION ===== //
+loginForm.addEventListener("submit", async (e) => {
+
+  e.preventDefault();
+  logBtn.classList.add("loading");
+
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+
+  try {
+
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+
+    const userDoc = await getDoc(doc(db, "users", user.uid));
+
+    if (!userDoc.exists()) {
+      showSnackBar("User profile not found.", "error");
+      logBtn.classList.remove("loading");
+      return;
+    }
+
+    const userData = userDoc.data();
+
+    // Save locally
+    localStorage.setItem("username", userData.username || "User");
+    localStorage.setItem("role", userData.role || "user");
+
+    showSnackBar("Login successful!", "success");
+
+    // 🔥 Redirect based on role
+    setTimeout(() => {
+
+      if (userData.role === "agent") {
+        window.location.href = "agentPage.html";
+      } else {
+        window.location.href = "index.html";
+      }
+
+    }, 3500);
+
+  } catch (error) {
+
+    showSnackBar(error.message, "error");
+
+  }
+
+  logBtn.classList.remove("loading");
+
+});
+
+
+
+/* ============================= */
+/*        SNACKBAR SYSTEM        */
+/* ============================= */
+
 let snackbarTimeout = null;
 
 function showSnackBar(message, type = "info", duration = 4000) {
+
   let snackbar = document.querySelector(".snackbar");
 
-  // Create snackbar if it doesn't exist
   if (!snackbar) {
+
     snackbar = document.createElement("div");
     snackbar.className = "snackbar";
 
@@ -401,34 +497,38 @@ function showSnackBar(message, type = "info", duration = 4000) {
     `;
 
     document.body.appendChild(snackbar);
+
   }
 
-  // Update text
   snackbar.querySelector(".snackbar-text").textContent = message;
 
-  // Color by type
-  if (type === "success") snackbar.style.background = "rgba(7, 29, 26, 0.95)";
+  if (type === "success") snackbar.style.background = "rgba(7,29,26,0.95)";
   else if (type === "error") snackbar.style.background = "#dc3545";
   else if (type === "warning") snackbar.style.background = "#ffc107";
-  else snackbar.style.background = "rgba(7, 29, 26, 0.95)";
+  else snackbar.style.background = "rgba(7,29,26,0.95)";
 
-  // Reset progress animation
   const progress = snackbar.querySelector(".snackbar-progress");
+
   progress.style.animation = "none";
   void progress.offsetWidth;
+
   progress.style.animation = `snackbar-progress ${duration}ms linear forwards`;
 
   snackbar.classList.add("show");
 
-  // Clear previous timeout
   if (snackbarTimeout) clearTimeout(snackbarTimeout);
 
   snackbarTimeout = setTimeout(() => {
     snackbar.classList.remove("show");
   }, duration);
+
 }
-// snackbar ends
-  </script>
+
+</script>
+
+
+
+
 
 
 </body>
