@@ -30,8 +30,7 @@ MAIN SECTION STYLE
   gap: 1rem;
   justify-self: center;
   position: relative;
-  border: 1px solid rgb(161, 154, 154);
-  margin-top: 4rem;
+  margin-top: 3rem;
 }
 
 
@@ -53,7 +52,6 @@ MAIN SECTION STYLE
   border-radius: 4px;
   flex-direction: column;
   box-shadow: 0 2px 6px rgb(0,0,0,0.2);
-
   justify-self: center;
 }
 
@@ -188,7 +186,8 @@ js card style
 
 .bundle-details p{
   color: rgb(8, 156, 149);
-  font-weight: 600;
+  font-weight: 500;
+  font-size: .8rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
@@ -215,8 +214,9 @@ js card style
   text-align: center;
   padding: .3rem;
   margin: 0;
+  font-size: .8rem;
   justify-items: center;
-  border: 1px solid rgb(190, 185, 185);
+  border: 1px solid rgb(238, 234, 234);
   justify-content: center;
   justify-self: center;
   position: relative;
@@ -225,10 +225,21 @@ js card style
 
 .uli strong{
   color: rgb(7, 134, 85);
+  font-size: .8rem;
 }
 
 .uli b{
   color: rgb(15, 114, 98);
+  font-size: .8rem;
+}
+
+.uli  p{
+  font-size: .7rem;;
+}
+
+.uli ul  p{
+  font-size: .8rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .uli ul{
@@ -376,7 +387,7 @@ padding: 2rem;
 
 .faq p{
   background-color: rgb(102, 99, 99);
-  font-size: .95rem;
+  font-size: 1rem;
   padding: .3rem;
   display: flex;
   height: max-content;
