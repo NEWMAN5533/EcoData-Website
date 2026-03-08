@@ -22,7 +22,7 @@ MAIN SECTION STYLE
 .card-container{
   width: 100%;
   max-width: 370px;
-  padding: 1rem;
+  padding: .3rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -139,6 +139,8 @@ BUNDLE INFO SECTION
 
 .info-title h2{
   color: rgb(97, 97, 112);
+  font-size: 1.1rem;
+  white-space: nowrap;
 }
 
 .info-title p{
