@@ -235,7 +235,13 @@ document.addEventListener("click", () => {
     });
   });
 
- 
+
+
+
+
+
+
+
 
 
   // ---------- BUY BUTTONS (NORMAL + GRID) ----------
@@ -243,20 +249,26 @@ document.addEventListener("click", () => {
     .forEach(button => {
 
       button.addEventListener("click", () => {
+       
 
         let bundle;
         let recipient = "";
 
+       
         // ================= NORMAL VIEW =================
         if (button.closest("#normalView")) {
 
+
+
           if (!selectedBundle) {
+           
             showSnackBar("📱 Please select a bundle first");
             return;
           }
 
           const input = document.querySelector("#normalView .normalInput");
           if (!input || !input.value.trim()) {
+           
             showSnackBar("📱 Please enter a phone number");
             return;
           }
@@ -264,6 +276,7 @@ document.addEventListener("click", () => {
           recipient = input.value.trim();
 
           if (!/^[0-9]{10}$/.test(recipient)) {
+  
             showSnackBar("📱 Phone number must be exactly 10 digits");
             return;
           }
@@ -427,9 +440,14 @@ function createPhoneModal(callback) {
 
 
 // ===================
-// LOADER SPINNER IFRAME
+// LOADER SPINNERS IFRAME
 //=====================
 
+
+ 
+
+
+// --------------------==========
 
 function showLoader() {
   const loader = document.getElementById("paystackLoader");
@@ -464,7 +482,7 @@ function playSuccessSound() {
     osc.type = "sine";
     osc.frequency.value = freq;
 
-    gain.gain.setValueAtTime(0.2,
+    gain.gain.setValueAtTime(0.7,
       audioCtx.currentTime + start);
       gain.gain.exponentialRampToValueAtTime(0.001,
         audioCtx.currentTime + start + duration);
