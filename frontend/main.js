@@ -449,6 +449,42 @@ function hideLoader() {
 // LOADER SPINNER IFRAME
 //=====================
 
+// =======================
+// PLAY SOUND WHEN ORDER IS SUCCESSFUL
+// ===========================
+function playSuccessSound() {
+
+  const audioCtx = new (window.AudioContext ||
+    window.webkitAudioContext)();
+
+  const playTone = (freq, start, duration) => {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+
+    osc.type = "sine";
+    osc.frequency.value = freq;
+
+    gain.gain.setValueAtTime(0.2,
+      audioCtx.currentTime + start);
+      gain.gain.exponentialRampToValueAtTime(0.001,
+        audioCtx.currentTime + start + duration);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start(audioCtx.currentTime + start);
+      osc.stop(audioCtx.currentTime + start + duration);
+  };
+
+  // Three-tone success chime
+  playTone(800, 0, 0.15);
+  playTone(1000, 0.15, 0.15);
+  playTone(1300, 0.30, 0.2);
+}
+
+// =======================
+// PLAY SOUND WHEN ORDER IS SUCCESSFUL ENDS
+// =======================
 
 
 
@@ -542,7 +578,11 @@ async function orderBundle(network, recipient, packageName, size, reference) {
       return;
     }
 
-    showSnackBar("📱✅ Order Placed successfully!", "success", 8000);
+    playSuccessSound();
+      showSnackBar("📱✅ Order Placed successfully!", "success", 6000);
+   
+
+   
 
     const returnedOrder = result.order?.order || result.order || result;
 
