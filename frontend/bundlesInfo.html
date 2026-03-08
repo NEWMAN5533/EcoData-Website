@@ -61,7 +61,7 @@ WATCH VIDEO SECTION
   width: 100%;
   padding: .3rem 1rem;
   justify-self: center;
-  height: 3.5rem;
+  height: 3rem;
   position: fixed;
   top: 0;
   margin: 0;
@@ -88,8 +88,8 @@ WATCH VIDEO SECTION
 
 
 .nav-left img{
-  width: 3rem;
-  height: 3rem;
+  width: 2.4rem;
+  height: 2.4rem;
   border-radius: 50%;
   box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
   cursor: pointer;
@@ -155,7 +155,7 @@ WATCH VIDEO SECTION
   .bundle-info {
     text-align: center;
     padding: 2rem;
-    max-width: 480px;
+   
     margin: auto;
   }
   .network-buttons {
@@ -165,7 +165,7 @@ WATCH VIDEO SECTION
     margin: 1.5rem 0;
   }
   .network-btn {
-    padding: 0.8rem 1.5rem;
+    padding: 0.8rem 1rem;
     border: none;
     width: 7rem;
     color: #fff;
@@ -195,26 +195,43 @@ BUTTONS STYLES
 ***/
 .mtn-btn{
   background: linear-gradient(135deg, rgb(243, 243, 34), rgb(102, 102, 57));
+  border-radius: .3rem;
+  height: 2.3rem;
+  font-size: .9rem;
 }
 
 .mtn-btn:hover{
   background: rgb(212, 212, 35);
+  
 }
 
 .telecel-btn{
   background: linear-gradient(135deg, rgb(138, 65, 66), rgb(243,5,5));
+    border-radius: .3rem;
+  height: 2.3rem;
+  font-size: .9rem;
 }
+
 .telecel-btn:hover{
   background: rgb(223, 14, 14);
 }
+
 .airtel-btn{
  background: linear-gradient(135deg, rgb(7,7,230), rgb(29, 29, 77));
+   border-radius: .3rem;
+  height: 2.3rem;
+  font-size: .9rem;
 }
 
 .airtel-btn:hover{
   background: rgb(7, 7, 230);
 }
+
+
 </style>
+
+   
+
 <body>
 <!-----NAVIGATION BAR-SECTION---->
   <nav class="navbar">
@@ -228,18 +245,32 @@ BUTTONS STYLES
 <!-----NAVIGATION BAR-SECTION---->
 
   <!-- 🌟 Hero Section -->
+   <section class="card-container">
+
+
+
   <section class="hero">
-    <div class="hero-title"><h1> Ecodata Greets You </h1><img src="./css/icons/greetings.png" alt="image" loading="lazy"></div>
-    <h1>Fast. Reliable. Affordable Data Bundles.</h1>
+    <div class="hero-title"><h1>Welcome to EcoData </h1><img src="./css/icons/greetings.png" alt="image" loading="lazy"></div>
+
+    <div class="hero-cta">
+<h1>Fast. Reliable. Affordable Data Bundles.</h1>
     <p>Stay connected with our trusted network bundles tailored for every need.</p>
+    </div>
+    
   </section>
 
 
 
 
   <section class="bundle-info">
-  <h2>How Our Data Bundles Work</h2>
-  <p>Select your network to learn more about the process.</p>
+    <div class="info-title">
+      <h2>How Our Data Bundles Work
+      </h2>
+      <p>Select your network to learn more about the process.
+
+      </p>
+    </div>
+  
 
   <div class="network-buttons">
     <button class="network-btn mtn-btn" data-network="mtn">MTN</button>
@@ -267,10 +298,10 @@ BUTTONS STYLES
       <div class="step">
         <span>2</span>
         <h3>Phone Number Input</h3>
-        <p>Make sure you enter the bundle recipient number like: <strong>0241234567 on all networks</strong> do not bring the country code (+233).</p>
+        <p>Make sure you start every network number with <strong>233</strong> without plus(+) and the first zero of your number.</p>
       </div>
 
-      <div class="step">
+      <div class="step three">
         <span>3</span>
         <h3>Pay Securely</h3>
         <p>Make instant payment via Paystack with any Ghanaian Momo wallet.
@@ -280,12 +311,12 @@ BUTTONS STYLES
       </div>
 
       <div class="step">
-        <span>4</span>
+        <span>3</span>
         <h3>Delivery</h3>
         <p>Your data is automatically sent to the recipient number when prompted as delivered at <strong>check your order status </strong> section at the Homepage.</p>
       </div>
       <div class="step">
-        <span>5</span>
+        <span>4</span>
         <h3>Confirmation</h3>
         <p>Receive transaction Receipt confirmation from Paystack via SMS & email.</p>
       </div>
@@ -309,7 +340,7 @@ BUTTONS STYLES
     </details>
   </section>
 
-
+   </section>
 
  
 
@@ -317,5 +348,50 @@ BUTTONS STYLES
 
 
  <script src="bundles.js"></script>
+
+
+
+
+ <!-----DARK-MODE JS-->
+<script>
+  const toggle = document.getElementById("themeToggle");
+  const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  const savedTheme = localStorage.getItem("theme");
+
+  function applyTheme(theme) {
+    if (theme === "dark") {
+      document.body.classList.add("dark-mode");
+      toggle.checked = true;
+    } else {
+      document.body.classList.remove("dark-mode");
+      toggle.checked = false;
+    }
+  }
+
+  if (savedTheme) {
+    applyTheme(savedTheme);
+  } else {
+    applyTheme(systemPrefersDark ? "dark" : "light");
+  }
+
+  toggle.addEventListener("change", () => {
+    if (toggle.checked) {
+      localStorage.setItem("theme", "dark");
+      applyTheme("dark");
+    } else {
+      localStorage.setItem("theme", "light");
+      applyTheme("light");
+    }
+  });
+
+  // Auto-change if system theme changes and user has no preference
+  window.matchMedia("(prefers-color-scheme: dark)").addListener(e => {
+    if (!localStorage.getItem("theme")) {
+      applyTheme(e.matches ? "dark" : "light");
+    }
+});
+</script>
+
 </body>
 </html>
