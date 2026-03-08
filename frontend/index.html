@@ -153,10 +153,10 @@ LOADING SPINNER
   inset:0;
   background: rgba(0,0,0,0.1);
   backdrop-filter: blur(px);
-  display:none;
+  display: flex;
   align-items:center;
   justify-content:center;
-  z-index:99999999999;
+  z-index:999999999;
   opacity: 0;
   pointer-events:none;
   transition:0.4s;
@@ -172,6 +172,7 @@ LOADING SPINNER
   width:340px;
   height: 430px;
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
@@ -257,17 +258,27 @@ LOADING SPINNER
 }
 
 .signup-header small{
-  font-size: 1.3rem;
-  font-weight: 800;
+  font-size: 1rem;
+  font-weight: 600;
   color: rgb(255, 136, 0);
 }
 
 
 .signup-header h2 img{
-  width: 1.7rem;
-  height: 1.7rem;
+  width: 1.5rem;
+  height: 1.5rem;
   border: none;
   box-shadow: none;
+  animation: waveMe 2s infinite;
+}
+
+@keyframes waveMe  {
+  from{
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(15deg);
+  }
 }
 
 .dark-mode .signup-header h2 img{
@@ -1041,8 +1052,11 @@ background:rgb(243, 159, 4);
     </div>
 
     <!---buy-btn-->
-    <button id="placeOrderBtn" class="buy-btn place-telbtn">Place Order</button>
+    <button id="placeOrderBtn" class="buy-btn place-telbtn">
+     Place Order
+    </button>
   </div>
+
 
 
 
@@ -2234,19 +2248,6 @@ background:rgb(243, 159, 4);
 <!----PAYSTACK-LOADER-->
 
 
-<style>
-
-
-
-
-
-
-
-
-
-
-</style>
-
 
 <!----AFA-REGISTRATION-BUTTON----->
 <div id="signupModal" class="signup-modal">
@@ -2261,7 +2262,9 @@ background:rgb(243, 159, 4);
     <div class="signup-header">
       <h2>Welcome to EcoData 
         <img src="./css/icons/greetings.png" alt="" loading="lazy"></h2>
-     <small>Please Sign-Up or Login</small>
+     <small>Create an Account or <br>
+      <p style="margin: 0;color: rgb(12, 107, 107);font-size: 1.2rem;font-weight: 600;" class="lo">Login</p>
+     </small>
     </div>
 
     <div class="signup-text">
@@ -2329,8 +2332,6 @@ background:rgb(243, 159, 4);
 
 
 
-<!----skeleton ui end div-->
-
 
 
 
@@ -2341,12 +2342,6 @@ background:rgb(243, 159, 4);
 
 
  
-
-
-
-
-
-
 
 
 
@@ -2734,6 +2729,6 @@ document.addEventListener("DOMContentLoaded", ()=> {
 </script>
 
 
-<!----POPUP/HIDDEN CARD-->
+
 </body>
 </html>
