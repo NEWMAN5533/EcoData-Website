@@ -3,8 +3,8 @@
       <h3 class="htu">MTN Bundle Process</h3>
       <div class="uli">
          <ul>
-        <li>MTN Bundles are delivered within 2–30minutes after it is prompted as delivered at the section for checking order status.</li>
-        <li class=li>Ensure your number starts with <b> 23355123..., 23359123..., or 23325123..</b>.</li >
+        <li>MTN Bundles are delivered within 2-30minutes after it is prompted as delivered at the section for checking order status.</li>
+        <li class=li>Ensure your number starts with <b> 055123..., 059123..., or 025123..</b>.</li >
         <li>If delivery delays, contact 
         <p><strong>WhatsAp:</strong> 0535565637</p></li>
         <li>All transactions are secured via Paystack.</li>
@@ -19,8 +19,8 @@
       <h3 class="hvu">Telecel Bundle Process</h3>
       <div class="uli">
       <ul>
-        <li>Bundles are delivered within 2–30minutes after successful payment.</li>
-        <li>Ensure your number starts with <b>2332012345... or 233501234...</b>.</li>
+        <li>Bundles are delivered within 10-minutes after successful payment.</li>
+        <li>Ensure your number starts with <b>02012345... or 0501234...</b>.</li>
         <li>For failed delivery, contact support immediately.</li>
       </ul>
 
@@ -34,7 +34,7 @@
      
       <ul>
         <li>Delivery is automatic once payment is verified.</li>
-        <li>Ensure your number starts with <b>23326..., 23356..., or 23327...</b>.</li>
+        <li>Ensure your number starts with <b>026..., 056..., or 027...</b>.</li>
         <li>Keep your account active to avoid delay.</li>
       </ul>
       <p><b>Refunds:</b> If unsuccessful, report within 24 hours for a quick refund.</p> </div>
