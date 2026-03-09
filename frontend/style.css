@@ -5831,7 +5831,7 @@ SNACKBAR SECTION
 
 .what-group-btn{
   position: fixed;
-  bottom: 8.4rem;
+  bottom: 9.4rem;
   right: .8rem;
   z-index: 99999;
   display: flex;
@@ -5860,7 +5860,7 @@ SNACKBAR SECTION
   text-align: center;
   font-size: .7rem;
   position: absolute;
-  margin-bottom: 3rem;
+  margin-bottom: 3.5rem;
   margin-left: 1.2rem;
   border-radius: 50%;
   z-index: 2;
@@ -5882,7 +5882,7 @@ SNACKBAR SECTION
   width: 35px;
   height: 35px;
   right: 1.2rem;
-  bottom: 8.8rem;
+  bottom: 9.8rem;
   border-radius: 50%;
   background: radial-gradient(circle,
   rgba(37,211,102,0.7),
@@ -5912,7 +5912,7 @@ SNACKBAR SECTION
 
 #whatsappChat {
   position: fixed;
-  bottom: 4.4rem;
+  bottom: 5.4rem;
   right: 10px;
   z-index: 99999;
   font-family: "Poppins", sans-serif;

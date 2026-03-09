@@ -386,8 +386,8 @@ background:rgb(243, 159, 4);
     }
     .bottom-navbar{
       width: 100%;
-      max-width: 414px;
-      height: 3.9rem;
+      max-width: 900px;
+      height: 4.3rem;
       position: fixed;
       bottom: 0;
       left: 0;
@@ -400,10 +400,14 @@ background:rgb(243, 159, 4);
       padding:.1rem .1rem;
       background: white;
       overflow-x: hidden;
+      border-top: 1px solid rgb(240, 238, 238);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
     .dark-mode .bottom-navbar{
       background: var(--darkMode-bg-cl);
+      border-top: 1px solid rgb(26, 24, 24);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
 
@@ -2414,7 +2418,7 @@ background:rgb(243, 159, 4);
   </section>
 
   <!-----BOTTOM-NAVBAR----->
-  <div class="bottom-navbar">
+  <div class="bottom-navbar" id="navIconDiv">
     <div class="btom-navIcon" onclick="window.location.href='index.html'">
       <div class="activeImg active" id="activeMtn">
         <img src="./css/icons/mtn-signal.png" alt="" loading="lazy">

@@ -245,11 +245,12 @@ document.addEventListener("click", () => {
 
 
   // ---------- BUY BUTTONS (NORMAL + GRID) ----------
+  const bottomNavDiv = document.getElementById("navIconDiv");
   document.querySelectorAll("#normalView .buy-btn, #gridView .buy-btn")
     .forEach(button => {
 
       button.addEventListener("click", () => {
-       
+      bottomNavDiv.style.display = "none";
 
         let bundle;
         let recipient = "";
