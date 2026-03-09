@@ -193,6 +193,11 @@ LOADING SPINNER
       gap: .3rem;
       height: 99%;
       cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
     }
 
     .btom-navIcon .activeImg{
@@ -202,6 +207,11 @@ LOADING SPINNER
       align-items: center;
       justify-content: center;
       border-radius: .9rem;
+      -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
     }
 
     .activeImg.active{
@@ -705,7 +715,7 @@ LOADING SPINNER
    <!-----BOTTOM-NAVBAR----->
   <div class="bottom-navbar" id="navIconDiv">
     <div class="btom-navIcon" onclick="window.location.href='index.html'">
-      <div class="activeImg active" id="activeMtn">
+      <div class="activeImg " id="activeMtn">
         <img src="./css/icons/mtn-signal.png" alt="" loading="lazy">
       </div>
       <small class="bottomIcon-textNav">MTN</small>
@@ -723,7 +733,7 @@ LOADING SPINNER
 
 
       <div class="btom-navIcon" >
-      <div class="activeImg" id="activeTel" onclick="window.location.href='afa.html'"> 
+      <div class="activeImg active" id="activeTel" onclick="window.location.href='afa.html'"> 
         <img class="pin" src="./css/icons/personal.png" alt="" loading="lazy">
       </div>
       <small class="bottomIcon-textNav">AFA</small>

@@ -278,6 +278,11 @@ BUTTONS STYLES
       gap: .3rem;
       height: 99%;
       cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
     }
 
     .btom-navIcon .activeImg{
@@ -287,6 +292,11 @@ BUTTONS STYLES
       align-items: center;
       justify-content: center;
       border-radius: .9rem;
+      -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
     }
 
     .activeImg.active{
@@ -441,7 +451,7 @@ BUTTONS STYLES
  <!-----BOTTOM-NAVBAR----->
   <div class="bottom-navbar" id="navIconDiv">
     <div class="btom-navIcon" onclick="window.location.href='index.html'">
-      <div class="activeImg active" id="activeMtn">
+      <div class="activeImg " id="activeMtn">
         <img src="./css/icons/mtn-signal.png" alt="" loading="lazy">
       </div>
       <small class="bottomIcon-textNav">MTN</small>
@@ -467,7 +477,7 @@ BUTTONS STYLES
 
 
      <div class="btom-navIcon" >
-      <div class="activeImg" id="activeAir" onclick="window.location.href='bundlesInfo.html'"> 
+      <div class="activeImg active" id="activeAir" onclick="window.location.href='bundlesInfo.html'"> 
         <img class="pin" src="./css/icons/terms (1).png" alt="" loading="lazy">
       </div>
       <small class="bottomIcon-textNav"> Info</small>
