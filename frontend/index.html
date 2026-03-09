@@ -491,12 +491,12 @@ background:rgb(243, 159, 4);
 
       .ecodataShopBtn{
         width: 100%;
-        height: 3.5rem;
+        height: 0;
         display: flex;
         align-items: center;
         justify-content: center;
         position: fixed;
-        background: transparent;
+        background: black;
         bottom: 4rem;
         z-index: 99999999;
         -webkit-tap-highlight-color: transparent;
@@ -2652,11 +2652,11 @@ const logoutBtn = document.getElementById("logOutBtn");
 
 if (logoutBtn) {
   logoutBtn.addEventListener("click", async () => {
-    hideSignupModal();
 
     try {
       await signOut(auth);
       showSnackBar("Logged out successfully!");
+      hideSignupModal();
       //window.location.href = "login.html"; // change if needed
     } catch (error) {
       console.error("Logout error:", error);
