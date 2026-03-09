@@ -390,6 +390,7 @@ background:rgb(243, 159, 4);
       width: 100%;
       max-width: 900px;
       height: 4.3rem;
+      justify-self: center;
       position: fixed;
       bottom: 0;
       left: 0;
@@ -484,6 +485,47 @@ background:rgb(243, 159, 4);
     margin-bottom: 3rem;
   }
   </style>
+
+  <!---ECOSHOP-FIXED-=BUTTON-->
+    <style>
+
+      .ecodataShopBtn{
+        width: 100%;
+        height: 3.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        background: transparent;
+        bottom: 4rem;
+        z-index: 99999999;;
+      }
+      .shop-fixedBtn{
+        width: 3.2rem;
+        height: 3.2rem;
+        position: fixed;
+        padding: .4rem;
+        bottom: 2.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;;
+        background: rgb(245, 223, 200);
+        border-radius: 50%;
+        z-index: 99999999999999;
+        cursor: pointer;
+        border: 1px solid  white;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      }
+
+      .shop-fixedBtn img{
+        width: 2.8rem;
+        height: 2.8rem;
+      }
+
+
+    </style>
 
 </head>
 <body>
@@ -2367,7 +2409,7 @@ background:rgb(243, 159, 4);
 
 
 <!-----SIGN UP CARD SECTION----->
-<div id="signupModal" class="signup-modal" style="display: none;">
+<div id="signupModal" class="signup-modal">
 
   <div class="signup-box">
    <div class="signup-box-top">
@@ -2429,7 +2471,13 @@ background:rgb(243, 159, 4);
   
    </div>
   </section>
+  
+  <!---shop-fixed-button-->
+     
+  
 
+  
+  
   <!-----BOTTOM-NAVBAR----->
   <div class="bottom-navbar" id="navIconDiv">
     <div class="btom-navIcon" onclick="window.location.href='index.html'">
@@ -2440,7 +2488,6 @@ background:rgb(243, 159, 4);
     </div>
 
     
-   
 
     <div class="btom-navIcon">
       <div class="activeImg" onclick="window.location.href ='pay.html'"> 
@@ -2449,6 +2496,14 @@ background:rgb(243, 159, 4);
       <small class="bottomIcon-textNav">Get Discounts</small>
     </div>
 
+   
+   <div class="ecodataShopBtn">
+       <div class="shop-fixedBtn" onclick="window.location.href='./ecdoataStore/ecoshop.html'">
+    <img class="pin" src="./css/icons/logoImg.png" alt="" loading="lazy">
+    </div>
+   
+   </div>
+   
 
       <div class="btom-navIcon" >
       <div class="activeImg" id="activeTel" onclick="window.location.href='afa.html'"> 

@@ -161,6 +161,7 @@ LOADING SPINNER
       height: 4.3rem;
       position: fixed;
       bottom: 0;
+      justify-self: center;
       left: 0;
       right: 0;
       gap: .3rem;
@@ -201,7 +202,7 @@ LOADING SPINNER
     }
 
     .btom-navIcon .activeImg{
-      padding: .19rem 1.16rem;
+    
       display: flex;
       position: relative;
       align-items: center;
@@ -214,7 +215,8 @@ LOADING SPINNER
   user-select: none;
     }
 
-    .activeImg.active{
+    .activeImg.activeMin{
+    padding: .19rem .3rem;
     background: rgb(212, 211, 211);
     }
 
@@ -253,6 +255,46 @@ LOADING SPINNER
     margin-bottom: 3rem;
   }
   </style>
+   <!---ECOSHOP-FIXED-=BUTTON-->
+    <style>
+
+      .ecodataShopBtn{
+        width: 100%;
+        height: 3.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        background: transparent;
+        bottom: 4rem;
+        z-index: 99999999;;
+      }
+      .shop-fixedBtn{
+        width: 3.2rem;
+        height: 3.2rem;
+        position: fixed;
+        padding: .4rem;
+        bottom: 2.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;;
+        background: rgb(245, 223, 200);
+        border-radius: 50%;
+        z-index: 99999999999999;
+        cursor: pointer;
+        border: 1px solid  white;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      }
+
+      .shop-fixedBtn img{
+        width: 2.8rem;
+        height: 2.8rem;
+      }
+
+
+    </style>
    
   
 </head>
@@ -731,9 +773,17 @@ LOADING SPINNER
       <small class="bottomIcon-textNav">Get Discounts</small>
     </div>
 
+     <div class="ecodataShopBtn">
+       <div class="shop-fixedBtn" onclick="window.location.href='./ecdoataStore/ecoshop.html'">
+    <img class="pin" src="./css/icons/logoImg.png" alt="" loading="lazy">
+    </div>
+   
+   </div>
+   
+
 
       <div class="btom-navIcon" >
-      <div class="activeImg active" id="activeTel" onclick="window.location.href='afa.html'"> 
+      <div class="activeImg activeMin" id="activeTel" onclick="window.location.href='afa.html'"> 
         <img class="pin" src="./css/icons/personal.png" alt="" loading="lazy">
       </div>
       <small class="bottomIcon-textNav">AFA</small>

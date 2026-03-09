@@ -250,6 +250,7 @@ BUTTONS STYLES
       max-width: 900px;
       height: 4.3rem;
       position: fixed;
+      justify-self: center;
       bottom: 0;
       left: 0;
       right: 0;
@@ -334,6 +335,47 @@ BUTTONS STYLES
   }
   </style>
 
+   <!---ECOSHOP-FIXED-=BUTTON-->
+    <style>
+
+      .ecodataShopBtn{
+        width: 100%;
+        height: 3.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        background: transparent;
+        bottom: 4rem;
+        z-index: 99999999;;
+      }
+      .shop-fixedBtn{
+        width: 3.2rem;
+        height: 3.2rem;
+        position: fixed;
+        padding: .4rem;
+        bottom: 2.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;;
+        background: rgb(245, 223, 200);
+        border-radius: 50%;
+        z-index: 99999999999999;
+        cursor: pointer;
+        border: 1px solid  white;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      }
+
+      .shop-fixedBtn img{
+        width: 2.8rem;
+        height: 2.8rem;
+      }
+
+
+    </style>
+
    
 
 <body>
@@ -415,12 +457,12 @@ BUTTONS STYLES
       </div>
 
       <div class="step">
-        <span>4</span>
+        <span>3</span>
         <h3>Delivery</h3>
         <p>Your data is automatically sent to the recipient number when prompted as delivered at <strong>check your order status </strong> section at the <strong>Orders Dashboard</strong>.</p>
       </div>
       <div class="step">
-        <span>5</span>
+        <span>4</span>
         <h3>Confirmation</h3>
         <p>A transaction Receipt confirmation from Paystack will be sent to you  via email, <strong>including normal SMS for MoMo Payments</strong>. </p>
       </div>
@@ -466,6 +508,14 @@ BUTTONS STYLES
       </div>
       <small class="bottomIcon-textNav">Get Discounts</small>
     </div>
+
+     <div class="ecodataShopBtn">
+       <div class="shop-fixedBtn" onclick="window.location.href='./ecdoataStore/ecoshop.html'">
+    <img class="pin" src="./css/icons/logoImg.png" alt="" loading="lazy">
+    </div>
+   
+   </div>
+   
 
 
       <div class="btom-navIcon" >

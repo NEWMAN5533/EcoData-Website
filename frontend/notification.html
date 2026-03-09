@@ -226,6 +226,7 @@ Delete button
       max-width: 900px;
       height: 4.3rem;
       position: fixed;
+      justify-self: center;
       bottom: 0;
       left: 0;
       right: 0;
@@ -319,6 +320,48 @@ Delete button
     margin-bottom: 3rem;
   }
   </style>
+ <!---ECOSHOP-FIXED-=BUTTON-->
+    <style>
+
+      .ecodataShopBtn{
+        width: 100%;
+        height: 3.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        background: transparent;
+        bottom: 4rem;
+        z-index: 99999999;;
+      }
+      .shop-fixedBtn{
+        width: 3.2rem;
+        height: 3.2rem;
+        position: fixed;
+        padding: .4rem;
+        bottom: 2.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;;
+        background: rgb(245, 223, 200);
+        border-radius: 50%;
+        z-index: 99999999999999;
+        cursor: pointer;
+        border: 1px solid  white;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      }
+
+      .shop-fixedBtn img{
+        width: 2.8rem;
+        height: 2.8rem;
+      }
+
+
+    </style>
+
+
 </head>
 <body>
 
@@ -553,7 +596,7 @@ Delete button
  <!-----BOTTOM-NAVBAR----->
   <div class="bottom-navbar" id="navIconDiv">
     <div class="btom-navIcon" onclick="window.location.href='index.html'">
-      <div class="activeImg active" id="activeMtn">
+      <div class="activeImg " id="activeMtn">
         <img src="./css/icons/mtn-signal.png" alt="" loading="lazy">
       </div>
       <small class="bottomIcon-textNav">MTN</small>
@@ -568,6 +611,15 @@ Delete button
       </div>
       <small class="bottomIcon-textNav">Get Discounts</small>
     </div>
+
+
+     <div class="ecodataShopBtn">
+       <div class="shop-fixedBtn" onclick="window.location.href='./ecdoataStore/ecoshop.html'">
+    <img class="pin" src="./css/icons/logoImg.png" alt="" loading="lazy">
+    </div>
+   
+   </div>
+   
 
 
       <div class="btom-navIcon" >

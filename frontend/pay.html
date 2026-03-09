@@ -525,6 +525,7 @@ AGENT PRICE
       max-width: 900px;
       height: 4.3rem;
       position: fixed;
+      justify-self: center;
       bottom: 0;
       left: 0;
       right: 0;
@@ -579,11 +580,11 @@ AGENT PRICE
   user-select: none;
     }
 
-    .activeImg.active{
+      .activeImg.activeMin{
+    padding: .19rem .3rem;
     background: rgb(212, 211, 211);
     }
-
-    .dark-mode .activeImg.active{
+    .dark-mode .activeImg.activeMin{
       background: rgba(143, 140, 140, 0.774);
     }
 
@@ -606,7 +607,7 @@ AGENT PRICE
       font-size: .76rem;
       font-weight: 700;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      color: rgb(116, 116, 117);
+      color: rgb(211, 211, 212);
     }
 
     .dark-mode .btom-navIcon .bottomIcon-textNav{
@@ -618,6 +619,47 @@ AGENT PRICE
     margin-bottom: 3rem;
   }
   </style>
+
+   <!---ECOSHOP-FIXED-=BUTTON-->
+    <style>
+
+      .ecodataShopBtn{
+        width: 100%;
+        height: 3.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        background: transparent;
+        bottom: 4rem;
+        z-index: 99999999;;
+      }
+      .shop-fixedBtn{
+        width: 3.2rem;
+        height: 3.2rem;
+        position: fixed;
+        padding: .4rem;
+        bottom: 2.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;;
+        background: rgb(245, 223, 200);
+        border-radius: 50%;
+        z-index: 99999999999999;
+        cursor: pointer;
+        border: 1px solid  white;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      }
+
+      .shop-fixedBtn img{
+        width: 2.8rem;
+        height: 2.8rem;
+      }
+
+
+    </style>
 
 </head>
 <body>
@@ -902,11 +944,20 @@ AGENT PRICE
    
 
     <div class="btom-navIcon">
-      <div class="activeImg active" onclick="window.location.href ='pay.html'"> 
+      <div class="activeImg activeMin" onclick="window.location.href ='pay.html'"> 
         <img class="pin" src="./css/icons/like.png" alt="" loading="lazy">
       </div>
       <small class="bottomIcon-textNav">Get Discounts</small>
     </div>
+
+
+     <div class="ecodataShopBtn">
+       <div class="shop-fixedBtn" onclick="window.location.href='./ecdoataStore/ecoshop.html'">
+    <img class="pin" src="./css/icons/logoImg.png" alt="" loading="lazy">
+    </div>
+   
+   </div>
+   
 
 
       <div class="btom-navIcon" >
