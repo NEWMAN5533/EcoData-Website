@@ -3556,7 +3556,25 @@ WELCOME CARD
   border-radius: .3rem;
   background: linear-gradient(90deg, #185a49, #92c5b4 );
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
-  
+  transition: 14s ease;
+  animation: backColorChanger 53s  infinite;
+}
+
+@keyframes backColorChanger {
+  0% {
+  background: linear-gradient(135deg, #1d6956, #7aa093)
+  }
+  25% {
+    background: linear-gradient(105deg, #175747, #7aa093);
+    transition: 13s ease-in ;
+  }
+  50% {
+    background: linear-gradient(120deg, #185a49, #92c5b4);
+  }
+  100%{
+    background: linear-gradient(90deg, #175545, #92c5b4);
+    transition:  12s ease-out;
+  }
 }
 
 .trusted-container {
