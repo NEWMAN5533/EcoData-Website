@@ -450,10 +450,16 @@ signupForm.addEventListener("submit", async (e) => {
 
     setTimeout(() => {
       window.location.href = "index.html";
-    }, 3500);
+    }, 4500);
 
   } catch (error) {
-    showSnackBar(error.message, "error");
+
+    if(error.code === "auth/email-already-in-use"){
+      showSnackBar("This email is already registered. Login instead", "error")
+    } else{
+      showSnackBar(error.message, "error");
+    }
+   
   }
 
   sinBtn.classList.remove("loading");
