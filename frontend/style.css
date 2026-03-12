@@ -4030,12 +4030,12 @@ NEW GRID & NORMAL UI UPDATE (20th/1/2026
 *****/
 .normalGrid-container{
   width: 100%;
-  max-width: 97%;
+  max-width: 99%;
   display: flex;
   position: relative;
   justify-self: center;  
   border-radius: .4rem;
-  padding: 1rem;
+  padding: .3rem;
   border: 1px solid rgb(236, 236, 234);
   height: max-content;
   margin-top: .55rem;
@@ -4044,7 +4044,7 @@ NEW GRID & NORMAL UI UPDATE (20th/1/2026
 }
 
 .dark-mode .normalGrid-container {
-  border: none;
+  border: 1px solid var(--thin-border);
 }
 
 .normalGrid-container .packages{
