@@ -32,7 +32,7 @@
   <!---css-link-->
   <link rel="stylesheet" href="style.css">
 
-  <!---PAYSTACK LOADER-->
+<!---LOADER CARD---->
 <style>
    .loader-card img{
     width: 2.5rem;
@@ -110,7 +110,6 @@ LOADING SPINNER
 ****/
 
 </style>
-
 <!----USERS ANIMATION---->
 <style>
       #usedBy{
@@ -658,7 +657,7 @@ background:rgb(243, 159, 4);
   
 
 <div class="google-thumbnail thumb2"><img class="analy" src="./css/icons/like.png" alt="" loading="lazy">
-   [ Thursday: 12 March ]/ BUY YOUR DATA NOW TO ENJOY FAST DELIVERY!
+   [ Wednesday: 11 March ]  PLACE YOUR ORDER TO ENJOY 15mins FAST DELIVERY!
     </div>
 
     <div class="google-thumbnail thumb1">
@@ -846,36 +845,17 @@ background:rgb(243, 159, 4);
 
 <!----ENDS-->
 
-<section class="two-div-container">
-  <div class="right-side">
-  <div class="right-side-top">
-    <div class="status-result" id="statusResult"></div>
-  </div>
-  <div class="right-side-btm">
-   <small> <strong>NB:</strong> Orders Results are 100% sourced</small>
-  </div>
-</div>
-  <!----MIDDLE-BELT--->
-  <div class="left-side">
-  <section class="order-status-section">
-  <h2>Check Status 
-  <br> by ID</h2>
-  <span><img src="./css/icons/down-arrow.png" alt="image" loading="lazy"></span>
-  <input type="text" id="orderInput" placeholder="Enter Order ID">
-  <button class="checkBt" id="checkBtn">Check Status</button>
-  
-</section>
-  </div>
-</section>
+
 
 
 <!---NEW UI UPDATE (20th-01-2026)--=[grid & normal ui-->
 <section class="normalGrid-container">
+
   <!---title-->
   <div class="normalTitle">
     <h2>Select MTN Offer</h2>
     <small>Choose from available MTN data offers.</small>
-    <p><span>Note:</span>Each offer carries it data prices.</p>
+    <p style="display: none;"><span>Note:</span>Each offer carries it data prices.</p>
   </div>
   <!---offer-select-options-->
    <div class="custom-select">
@@ -899,10 +879,18 @@ background:rgb(243, 159, 4);
 </div>
 
 <!----choose grid 0r normal btn-->
-<div class="normalOrgridBtn">
-  <button class="mode-Btn active" id="normalModeBtn">Normal</button>
+<div class="normalOrgridBtn-wrapping">
+  <div class="normalOrgridBtn">
+  <div class="mode-btn-wrapper">
+     <button class="mode-Btn active" id="normalModeBtn">Normal</button>
   <button class="mode-Btn" id="gridModeBtn">Grid</button>
+  </div>
+  </div>
+  <div class="packages">
+  Single Orders
+  </div>
 </div>
+
 </section>
 
 
@@ -911,15 +899,15 @@ background:rgb(243, 159, 4);
 <!----NORMALVIEW-SECTION-->
 <section id="normalView" class="view active" >
   <div class="single-order">
-    <small>Recipient Phone Number</small>
+    <small class="bundleRecipient">Bundle Recipient Number</small>
     <!---phone-input-here-->
-    <input class="normalInput" type="tel" placeholder="e.g 0241234567">
-    <small class="sel">Select Bundle</small>
+    <input class="normalInput" type="tel" placeholder=" 0241234567">
+    <small class="sel">Bundle</small>
 
     <div class="custom-option">
       <!---visible-btn-->
       <button class="selection-btn" id="optionBtn">
-    Select package
+    Select bundle
     <span><img src="./css/icons/more.png.png" alt="dropdown" loading="lazy"></span>
   </button>
   <!----option-card-->
@@ -1219,6 +1207,13 @@ background:rgb(243, 159, 4);
     </button>
   </div>
 
+
+
+
+
+
+
+
   <!---VIDEO-PLAY-SECTION----->
   <section class="playVideo" style="display: none;">
     <div class="play-title">
@@ -1255,11 +1250,6 @@ background:rgb(243, 159, 4);
       </div>
   </section>
  
-
-
-
-
-
 </section>
 <!----NORMALVIEW-SECTION-ENDS---->
 
@@ -2539,7 +2529,7 @@ background:rgb(243, 159, 4);
 
 
 <!-----SIGN UP CARD SECTION----->
-<div id="signupModal" class="signup-modal">
+<div id="signupModal" class="signup-modal" style="display: none;">
 
   <div class="signup-box">
    <div class="signup-box-top">
