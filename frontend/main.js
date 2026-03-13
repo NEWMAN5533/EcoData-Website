@@ -483,7 +483,7 @@ function playSuccessSound() {
     osc.type = "sine";
     osc.frequency.value = freq;
 
-    gain.gain.setValueAtTime(15,
+    gain.gain.setValueAtTime(2.5,
       audioCtx.currentTime + start);
       gain.gain.exponentialRampToValueAtTime(0.001,
         audioCtx.currentTime + start + duration);
