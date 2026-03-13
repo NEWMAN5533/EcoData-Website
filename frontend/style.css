@@ -4378,6 +4378,8 @@ border: 1px solid rgb(241, 239, 239);
   font-size: .9rem;
   text-align: center;
   display: flex;
+  gap: .14rem;
+  text-align: center;
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -4386,6 +4388,16 @@ border: 1px solid rgb(241, 239, 239);
   outline: none;
   -ms-user-select: none;;
   user-select: none;
+}
+
+.mode-Btn img{
+  width: .95rem;
+  height: .99rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: .2rem;
 }
 
 
