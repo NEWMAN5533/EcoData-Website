@@ -4401,13 +4401,12 @@ GRID VIEW
   width: 100%;
   max-width:96%;
   margin-bottom: 3rem;
-  box-shadow: 0 8px 16px rgba(59, 59, 59, 22);
-  border-end-end-radius: 1rem;
-  border-end-start-radius: 1rem;
+  box-shadow: 0 8px 14px  rgba(56, 55, 55, 0.2);
+  border-end-end-radius: 1.5rem;
+  border-end-start-radius: 1.5rem;
 }
 
 .dark-mode #normalView{
-
   box-shadow:  0 2px 6px rgba(0, 0, 0, 0.6);
 }
 
