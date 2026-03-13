@@ -362,13 +362,15 @@ const normalModeBtn = document.getElementById("normalModeBtn");
 const gridModeBtn = document.getElementById("gridModeBtn");
 const normalView = document.getElementById("normalView");
 const gridView = document.getElementById("gridView");
+// target bundleTitle section
+const bundleTitle = document.getElementById("bundleTitle");
 
 
 
 normalModeBtn.addEventListener("click", (e) => {
   e.stopPropagation();
 
-  
+  bundleTitle.textContent = "MTN Bundles"
     // RESET BUNDLE WHEN MODE CHANGED
   resetSelectedBundle();
 
@@ -379,9 +381,7 @@ normalModeBtn.addEventListener("click", (e) => {
 
 gridModeBtn.addEventListener("click", (e) => {
   e.stopPropagation();
-
-
-
+  bundleTitle.textContent = "Telecel & AT Bundles"
     // RESET BUNDLE WHEN MODE CHANGED
   resetSelectedBundle();
   gridView.style.display = "block";
