@@ -1,5 +1,5 @@
 
-//---Firebase Imports----
+// --- Firebase Imports ---
 import { auth, db } from "./firebase-config.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 import {
@@ -483,7 +483,7 @@ function playSuccessSound() {
     osc.type = "sine";
     osc.frequency.value = freq;
 
-    gain.gain.setValueAtTime(0.7,
+    gain.gain.setValueAtTime(15,
       audioCtx.currentTime + start);
       gain.gain.exponentialRampToValueAtTime(0.001,
         audioCtx.currentTime + start + duration);
