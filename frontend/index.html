@@ -34,6 +34,35 @@
 
 <!---LOADER CARD---->
 <style>
+  .packages small{
+    width: 10px;
+    height: 10px;
+    background: yellow;
+    margin-right: .3rem;
+    border-radius: 50%;
+    animation: changeSeen 2s infinite;
+  }
+
+  @keyframes changeSeen {
+    0%{
+      background: rgb(255, 145, 0);
+    }
+    25%{
+      background: rgb(255, 187, 0);
+    }
+    50%{
+      background: rgb(255, 102, 0);
+    }
+    75%{
+      background: yellow;
+    }
+    100%{
+      background: rgb(255, 81, 0);
+    }
+  }
+</style>
+
+<style>
    .loader-card img{
     width: 2.5rem;
     height: 1.9rem;
@@ -657,7 +686,7 @@ background:rgb(243, 159, 4);
   
 
 <div class="google-thumbnail thumb2"><img class="analy" src="./css/icons/like.png" alt="" loading="lazy">
-   [ Saturday: 14 March ]  PLACE YOUR ORDER TO ENJOY FAST DELIVERY!
+   [ Friday: 13 March ]  PLACE YOUR ORDER TO ENJOY FAST DELIVERY!
     </div>
 
     <div class="google-thumbnail thumb1">
@@ -893,34 +922,7 @@ background:rgb(243, 159, 4);
 </div>
 
 </section>
-<style>
-  .packages small{
-    width: 10px;
-    height: 10px;
-    background: yellow;
-    margin-right: .3rem;
-    border-radius: 50%;
-    animation: changeSeen 2s infinite;
-  }
 
-  @keyframes changeSeen {
-    0%{
-      background: rgb(255, 145, 0);
-    }
-    25%{
-      background: rgb(255, 187, 0);
-    }
-    50%{
-      background: rgb(255, 102, 0);
-    }
-    75%{
-      background: yellow;
-    }
-    100%{
-      background: rgb(255, 81, 0);
-    }
-  }
-</style>
 
 
 <!-----INDIVIDUAL SECTIONS-VIEW TOGGLE---->
@@ -1234,12 +1236,6 @@ background:rgb(243, 159, 4);
      Place Order
     </button>
   </div>
-
-
-
-
-
-
 
 
   <!---VIDEO-PLAY-SECTION----->
@@ -1810,7 +1806,7 @@ background:rgb(243, 159, 4);
     </div>
     <div class="hero-bottom-content">
       <div class="btn-div">
-        9 Packages Available
+        12 Packages Available
       </div>
        <!----CARD-DIV---->
       <div class="card-div">
@@ -1830,7 +1826,7 @@ background:rgb(243, 159, 4);
             <div class="details-network">
               <span><small>.</small> 60 Days</span>
               <span><small>.</small> Active</span>
-              <span><small>.</small> 9 Packages</span>
+              <span><small>.</small> 12 Packages</span>
             </div>
           </div>
           
@@ -1848,7 +1844,63 @@ background:rgb(243, 159, 4);
     <section class="gridCards-container">
       <!---GRID CARDS WRAPPER-->
       <div class="gridCard-wrapper">
- <!---------- CARD----------->
+         <!---------- CARD---1-------->
+      <div class="gridCardTele">
+        <div class="gridCard-top">
+          <small>Telecel</small>
+        <img class="lecel" src="./css/icons/telecel-signal.png" alt="tele-icon" loading="lazy">
+        </div>
+        <div class="gridCard-middle">
+          <h3>2GB</h3>
+          <small>GHS 13</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="telecel"
+  data-size="2"
+  data-price="13"
+          ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
+        </div>
+      </div>
+
+       <!---------- CARD--2--------->
+      <div class="gridCardTele">
+        <div class="gridCard-top">
+          <small>Telecel</small>
+        <img class="lecel" src="./css/icons/telecel-signal.png" alt="tele-icon" loading="lazy">
+        </div>
+        <div class="gridCard-middle">
+          <h3>3GB</h3>
+          <small>GHS 18.20</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="telecel"
+  data-size="3"
+  data-price="18.20"
+          ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
+        </div>
+      </div>
+
+      <!---------- CARD---3-------->
+      <div class="gridCardTele">
+        <div class="gridCard-top">
+          <small>Telecel</small>
+        <img class="lecel" src="./css/icons/telecel-signal.png" alt="tele-icon" loading="lazy">
+        </div>
+        <div class="gridCard-middle">
+          <h3>5GB</h3>
+          <small>GHS 27.40</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="telecel"
+  data-size="5"
+  data-price="27.40"
+          ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
+        </div>
+      </div> 
+ <!---------- CARD----4------->
       <div class="gridCardTele">
         <div class="gridCard-top">
           <small>Telecel</small>
@@ -1856,17 +1908,17 @@ background:rgb(243, 159, 4);
         </div>
         <div class="gridCard-middle">
           <h3>10GB</h3>
-          <small>GHS 47</small>
+          <small>GHS 46.20</small>
         </div>
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="telecel"
   data-size="10"
-  data-price="47"
+  data-price="46.20"
           ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
         </div>
       </div>
- <!----------NEXT CARD----------->
+ <!----------NEXT CARD--5--------->
       <div class="gridCardTele">
         <div class="gridCard-top">
           <small>Telecel</small>
@@ -1884,7 +1936,7 @@ background:rgb(243, 159, 4);
           ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
         </div>
       </div>
-      <!----------NEXT CARD----------->
+      <!----------NEXT CARD--6--------->
         <div class="gridCardTele">
         <div class="gridCard-top">
           <small>Telecel</small>
@@ -1892,17 +1944,17 @@ background:rgb(243, 159, 4);
         </div>
         <div class="gridCard-middle">
           <h3>20GB</h3>
-          <small>GHS 93</small>
+          <small>GHS 90</small>
         </div>
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="telecel"
   data-size="20"
-  data-price="93"
+  data-price="90"
           ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
         </div>
       </div>
-      <!----------NEXT CARD----------->
+      <!----------NEXT CARD----7------->
         <div class="gridCardTele">
         <div class="gridCard-top">
           <small>Telecel</small>
@@ -1920,7 +1972,7 @@ background:rgb(243, 159, 4);
           ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
         </div>
       </div>
-       <!----------NEXT CARD----------->
+       <!----------NEXT CARD---8-------->
         <div class="gridCardTele">
         <div class="gridCard-top">
           <small>Telecel</small>
@@ -1938,7 +1990,25 @@ background:rgb(243, 159, 4);
           ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
         </div>
       </div>
-      <!----------NEXT CARD----------->
+      <!----------NEXT CARD----9------->
+  <div class="gridCardTele">
+        <div class="gridCard-top">
+          <small>Telecel</small>
+        <img class="lecel" src="./css/icons/telecel-signal.png" alt="tele-icon" loading="lazy">
+        </div>
+        <div class="gridCard-middle">
+          <h3>35GB</h3>
+          <small>GHS 143</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="telecel"
+  data-size="35"
+  data-price="143"
+          ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
+        </div>
+      </div>
+      <!----------NEXT CARD-----10------>
         <div class="gridCardTele">
         <div class="gridCard-top">
           <small>Telecel</small>
@@ -1946,17 +2016,17 @@ background:rgb(243, 159, 4);
         </div>
         <div class="gridCard-middle">
           <h3>40GB</h3>
-          <small>GHS 178</small>
+          <small>GHS 175</small>
         </div>
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="telecel"
   data-size="40"
-  data-price="178"
+  data-price="175"
           ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
         </div>
       </div>
-       <!----------NEXT CARD----------->
+       <!----------NEXT CARD---11-------->
         <div class="gridCardTele">
         <div class="gridCard-top">
           <small>Telecel</small>
@@ -1964,18 +2034,18 @@ background:rgb(243, 159, 4);
         </div>
         <div class="gridCard-middle">
           <h3>50GB</h3>
-          <small>GHS 220</small>
+          <small>GHS 210</small>
         </div>
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="telecel"
   data-size="50"
-  data-price="220"
+  data-price="210"
           ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
         </div>
       </div>
 
-       <!----------NEXT CARD----------->
+       <!----------NEXT CARD---12-------->
         <div class="gridCardTele">
         <div class="gridCard-top">
           <small>Telecel</small>
@@ -1983,13 +2053,13 @@ background:rgb(243, 159, 4);
         </div>
         <div class="gridCard-middle">
           <h3>100GB</h3>
-          <small>GHS 400</small>
+          <small>GHS 397</small>
         </div>
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="telecel"
   data-size="100"
-  data-price="400"
+  data-price="397"
           ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
         </div>
       </div>
@@ -2060,13 +2130,13 @@ background:rgb(243, 159, 4);
         </div>
         <div class="gridCard-middle">
           <h3>1GB</h3>
-          <small>GHS 6</small>
+          <small>GHS 7</small>
         </div>
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="at"
   data-size="1"
-  data-price="6"
+  data-price="7"
           ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
         </div>
       </div>
@@ -2078,13 +2148,13 @@ background:rgb(243, 159, 4);
         </div>
         <div class="gridCard-middle">
           <h3>2GB</h3>
-          <small>GHS 12</small>
+          <small>GHS 14</small>
         </div>
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="at"
   data-size="2"
-  data-price="12"
+  data-price="14"
           ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
         </div>
       </div>
@@ -2096,13 +2166,13 @@ background:rgb(243, 159, 4);
         </div>
         <div class="gridCard-middle">
           <h3>3GB</h3>
-          <small>GHS 17</small>
+          <small>GHS 18</small>
         </div>
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="at"
   data-size="3"
-  data-price="17"
+  data-price="18"
           ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
         </div>
       </div>
@@ -2114,13 +2184,13 @@ background:rgb(243, 159, 4);
         </div>
         <div class="gridCard-middle">
           <h3>4GB</h3>
-          <small>GHS 22</small>
+          <small>GHS 23</small>
         </div>
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="at"
   data-size="4"
-  data-price="22"
+  data-price="23"
           ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
         </div>
       </div>
@@ -2132,13 +2202,13 @@ background:rgb(243, 159, 4);
         </div>
         <div class="gridCard-middle">
           <h3>5GB</h3>
-          <small>GHS 26</small>
+          <small>GHS 28</small>
         </div>
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="at"
   data-size="5"
-  data-price="26"
+  data-price="28"
           ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
         </div>
       </div>
@@ -2150,13 +2220,13 @@ background:rgb(243, 159, 4);
         </div>
         <div class="gridCard-middle">
           <h3>6GB</h3>
-          <small>GHS 30</small>
+          <small>GHS 31</small>
         </div>
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="at"
   data-size="6"
-  data-price="30"
+  data-price="31"
           ><img src="./css/icons/totalorder.png" alt="img" loading="lazy"> Buy Now</button>
         </div>
       </div>
