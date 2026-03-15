@@ -4409,12 +4409,59 @@ GRID VIEW
 #normalView{
   width: 100%;
   max-width:96%;
+  padding: 0;
   margin-bottom: 3rem;
   box-shadow: 0 8px 14px  rgba(56, 55, 55, 0.2);
   border-end-end-radius: 1.5rem;
   border-end-start-radius: 1.5rem;
   border-bottom: 9px solid wheat;
 }
+
+#normalView .top-dashboard{
+  width: 100%;
+  height: 5rem;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid rgb(243, 240, 240);
+  border-end-end-radius: 2.2rem;
+  border-end-start-radius: 2.2rem;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: rgb(255, 255, 255);
+  margin-bottom: 1rem;
+  padding-bottom: .4rem;
+  box-shadow:  0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+
+.top-dashboard h2{
+  color: rgb(61, 65, 70);
+  margin: .2rem;
+  font-size: .98rem;
+  font-weight: 400;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.top-dashboard .packs{
+  border: none;
+  padding: .4rem 3.5rem;
+  background: wheat;
+  color: rgb(153, 107, 69);
+  margin-top: .3rem;
+  border-radius: 1rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+  font-weight: 600;
+  font-size: .9rem;
+}
+/*****
+NETcARD VIEW
+*****/
+
+/*****
+NETcARD VIEW ENDS
+*****/
 
 .dark-mode #normalView{
   box-shadow:  0 2px 6px rgba(0, 0, 0, 0.6);
@@ -4474,7 +4521,8 @@ GRID VIEW
 
 .single-order{
 width: 100%;
-max-width: 99%;
+max-width: 80%;
+justify-self: center;
 flex-wrap: nowrap;
 height: 23rem;
 display: flex;
