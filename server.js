@@ -237,7 +237,7 @@ app.post("/verify-payment", async (req, res) => {
     const data = response.data.data;
 
     const AGENT_PRICE = 1;
-    const expectedAmount = AGENT_PRICE * 1;
+    const expectedAmount = AGENT_PRICE * 100;
 
     if (data.status !== "success") {
       return res.status(400).json({ error: "Payment not successful" });
