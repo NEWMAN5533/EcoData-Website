@@ -2254,7 +2254,7 @@
       // 🚨 2. Check Firestore agent status
       const userDoc = await getDoc(doc(db, "users", user.uid));
 
-      if (!userDoc.exists() || userDoc.data().agent !== true) {
+      if (!userDoc.exists() || userDoc.data().isAgent !== true) {
         window.location.href = "index.html";
         return;
       }
