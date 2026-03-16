@@ -549,9 +549,17 @@
 </div>
 
 <!----choose grid 0r normal btn-->
-<div class="normalOrgridBtn">
-  <button class="normalBtn" id="normalModeBtn">Normal</button>
-  <button class="gridBtn" id="gridModeBtn">Grid</button>
+<div class="normalOrgridBtn-wrapping">
+  <div class="normalOrgridBtn">
+  <div class="mode-btn-wrapper">
+     <button class="mode-Btn active" id="normalModeBtn"><img src="./css/icons/list (1).png" alt="" loading="lazy"> List</button>
+  <button class="mode-Btn" id="gridModeBtn"><img src="./css/icons/grid.png" alt="" loading="lazy"> Grid</button>
+  </div>
+  </div>
+  <div class="packages">
+    <small></small>
+  <p id="bundleTitle">MTN Bundle</p>
+  </div>
 </div>
 </section>
 
@@ -2238,7 +2246,8 @@
 
   onAuthStateChanged(auth, async (user) => {
 
-    const usernameDisplay = document.getElementById("usernameDisplay");
+    const usernameDisplay = document.getElementById("usernameDisplay");
+
 
     try {
 

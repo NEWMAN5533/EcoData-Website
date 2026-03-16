@@ -2629,7 +2629,7 @@ background:rgb(243, 159, 4);
 
 
 <!-----SIGN UP CARD SECTION----->
-<div id="signupModal" class="signup-modal">
+<div id="signupModal" class="signup-modal" style="display: none;">
 
   <div class="signup-box">
    <div class="signup-box-top">
@@ -2822,13 +2822,6 @@ const db = getFirestore(app);
 
 onAuthStateChanged(auth, async (user) => {
   const usernameDisplay = document.getElementById("usernameDisplay");
-
-  if (!user) {
-    // User not logged in, redirect if needed
-   // window.location.href = "login.html"
-    console.log("User not logged in");
-    return;
-  }
 
   try {
     const userRef = doc(db, "users", user.uid);
