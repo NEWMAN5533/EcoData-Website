@@ -648,11 +648,12 @@ LOADING SPINNER
 
 <!---NEW UI UPDATE (20th-01-2026)--=[grid & normal ui-->
 <section class="normalGrid-container">
+
   <!---title-->
   <div class="normalTitle">
     <h2>Select MTN Offer</h2>
     <small>Choose from available MTN data offers.</small>
-    <p><span>Note:</span>Each offer carries it data prices.</p>
+    <p ><span>Note:</span>Each offer carries it data prices.</p>
   </div>
   <!---offer-select-options-->
    <div class="custom-select">
@@ -663,7 +664,7 @@ LOADING SPINNER
 
   <div class="select-dropdown" id="dropdownOffer">
     <div class="optionDelevery" data-mode="normal">
-      <span>MTN DATA NORMAL DELIVERY ✔  </span>
+      <span >MTN DATA NORMAL DELIVERY ✔  </span>
       <small>NON-EXPIRY</small>
     </div>
   
@@ -689,6 +690,7 @@ LOADING SPINNER
   </div>
 </div>
 </section>
+
 
 <!-----INDIVIDUAL SECTIONS-VIEW TOGGLE---->
 <!----NORMALVIEW-SECTION-->
@@ -2436,11 +2438,8 @@ LOADING SPINNER
 
 
 
- <!-- Load Paystack library -->
-  <script src="https://js.paystack.co/v2/inline.js"></script>
-
-
-  
+  <!-- Load Paystack library -->
+<script src="https://js.paystack.co/v2/inline.js"></script>
 
 
 <script type="module" src="./firebase-config.js"></script>
@@ -2502,6 +2501,19 @@ LOADING SPINNER
 </script>
 
 
+<!---MODE BTNS-->
+<script>
+  // add click event to gridBtn
+ const modeButtons = document.querySelectorAll(".mode-Btn");
+
+ modeButtons.forEach(btn => {
+  btn.addEventListener("click", () =>{
+    modeButtons.forEach(b => 
+    b.classList.remove("active"));
+    btn.classList.add("active"); 
+   })
+ })
+</script>
 
 
 <script>
@@ -2659,12 +2671,6 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
 
 
-<!---skeleton js-->
-<script>
-  window.addEventListener("load", () => {
-    document.body.classList.remove("loading");
-  });
-</script>
 
 
 <!----POPUP/HIDDEN CARD-->
