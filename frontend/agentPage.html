@@ -2454,6 +2454,7 @@ LOADING SPINNER
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
   import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
   import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+  import { signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyClNBlfigtQk8AZWdMZcU9sEtVcIrS0D1g",
@@ -2492,6 +2493,27 @@ LOADING SPINNER
     }
 
   });
+
+
+// LOGOUT
+const logoutBtn = document.getElementById("logOutBtn");
+
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", async () => {
+
+    try {
+      await signOut(auth);
+      showSnackBar("Logged out successfully!");
+      hideSignupModal();
+      window.location.href = "index.html"; // change if needed
+    } catch (error) {
+      console.error("Logout error:", error);
+      showSnackBar("Error logging out.");
+    }
+  });
+
+}
+
 </script>
 
 
