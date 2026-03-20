@@ -4410,7 +4410,7 @@ GRID VIEW
   width: 100%;
   max-width:96%;
   padding: 0;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
   box-shadow: 0 8px 14px  rgba(56, 55, 55, 0.2);
   border-end-end-radius: 1.5rem;
   border-end-start-radius: 1.5rem;
@@ -4541,7 +4541,7 @@ height: 23rem;
 display: flex;
 align-items: start;
 padding: 1rem;
-margin-bottom: 6rem;
+margin-bottom: 3rem;
 justify-content: start;
 gap: .3rem;
 flex-direction: column;
