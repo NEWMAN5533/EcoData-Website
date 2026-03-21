@@ -236,7 +236,7 @@ app.post("/verify-payment", async (req, res) => {
 
     const data = response.data.data;
 
-    const AGENT_PRICE = 70;
+    const AGENT_PRICE = 100;
     const expectedAmount = AGENT_PRICE * 100;
 
     if (data.status !== "success") {
