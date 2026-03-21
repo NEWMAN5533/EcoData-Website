@@ -50,7 +50,7 @@ function payWithPaystack(user) {
   paystack.newTransaction({
     key: "pk_live_635856447ee14b583349141b7271f64c9b969749", // ⚠️ Use TEST key while testing
     email: user.email,
-    amount: 70 * 100, // GHS 100 (kobo)
+    amount: 100 * 100, // GHS 100 (kobo)
     currency: "GHS",
     metadata: {
       uid: user.uid
