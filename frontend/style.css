@@ -4030,7 +4030,7 @@ NEW GRID & NORMAL UI UPDATE (20th/1/2026
 *****/
 .normalGrid-container{
   width: 100%;
-  max-width: 97%;
+  max-width: 96%;
   display: flex;
   position: relative;
   justify-self: center;  
@@ -6618,7 +6618,7 @@ FOOTER SECTION
   align-items: center;
   justify-content: center;
   background: var(--bg-cl);
-  border-right: 2px solid var(--text-cl);
+ 
 }
 
 .dark-mode .cop-right{
