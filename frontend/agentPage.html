@@ -349,6 +349,69 @@ LOADING SPINNER
 
 
     </style>
+
+
+    <!---BUSINESS-INFO----->
+   <style>
+  .businessInfo{
+    width: 100%;
+    height: 3rem;
+    padding: 1rem;
+    display: flex;
+    gap: .3rem;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    position: relative;
+  }
+
+  .businessInfo span{
+    color: rgb(56, 56, 63);
+    font-size: 18px;
+  }
+
+  .dark-mode .businessInfo span{
+    color: rgb(115, 115, 122);
+  }
+
+  .businessInfo .businessInfo-right {
+display: flex;
+align-items: center;
+text-align: center;
+position: relative;
+width: 50%;
+  }
+
+  .businessInfo-right p{
+    font-size: .6rem !important;
+    white-space: nowrap;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+  .businessInfo .businessInfo-powered{
+display: flex;
+align-items: center;
+text-align: center;
+position: relative;
+width: 50%;
+   }
+   
+
+ .businessInfo-powered{
+  font-size: .6rem;
+  white-space: nowrap;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: rgb(82, 82, 87);
+ }
+
+ .dark-mode .businessInfo-powered {
+  color: white;
+ }
+
+ .businessInfo-powered strong{
+  margin-right: .4rem;
+ }
+</style>
   
 </head>
 <body>
@@ -1000,6 +1063,18 @@ LOADING SPINNER
 
 
 
+
+  <section class="businessInfo">
+     <div class="businessInfo-right">
+        <p style="text-align:center;color:#888;font-size:14px;">© 2026 Ecodata. All rights reserved.
+      </p>
+    </div>
+    <span>|</span>
+      <small class="businessInfo-powered">
+        
+      <strong>Powered by:</strong>   IA E-Business 
+  </small>
+  </section>
 
 </section>
 <!----NORMALVIEW-SECTION-ENDS---->
@@ -2357,7 +2432,7 @@ LOADING SPINNER
     </div>
 
      <div class="ecodataShopBtn">
-       <div class="shop-fixedBtn" onclick="window.location.href='./ecdoataStore/ecoshop.html'">
+       <div class="shop-fixedBtn" onclick="window.location.href='./ecdoataStore/createStore.html'">
     <img class="pin" src="./css/icons/logoImg.png" alt="" loading="lazy">
     </div>
    
