@@ -1,0 +1,367 @@
+
+:root {
+  --bg-cl: #FFF;
+  --primary-cl: #fff;
+  --secondary-cl: rgb(50, 50, 190);
+  --dark-cl: #0a0a0a;
+  --ascent-cl: rgb(158, 97, 209);
+  --background-cl: #e6e8ce;
+  --card-full-bg-cl: rgb(255, 217, 0);
+  --card-full-tele-bg-cl: rgb(221, 19, 19);
+  --card-full-airtel-bg-cl:  rgb(6, 6, 231);
+  --border-cl-2: rgba(66, 66, 26, 0.226);
+  --mtn-btn: rgb(193, 196, 19);
+  --telecel-btn: rgb(180, 57, 19);
+  --airteltigo-btn: rgb(28, 46, 119);
+
+
+  /***
+  NEW ROOT
+  ***/
+  --btn-bg-cl: rgb(250, 126, 9);
+  --user-panel-bg: rgba(42, 42, 194, 0.938);
+  --clock-bg-cl: rgb(2, 61, 52);
+
+  /***
+  DARK MODE COLORS
+  ***/
+  --darkMode-bg-cl: rgb(10, 1, 22);
+  --welcome-card-bg: rgb(2, 2, 39);
+  --welcome-card-bg-2: rgb(24, 5, 5);
+  --welcome-card-border: rgb(74, 88, 94);
+  --thin-border: rgb(35, 48, 49);
+  --text-cl: rgb(145, 168, 164);
+  --text-cl-2: rgb(210, 216, 216);
+  --text-cl-3: rgb(139, 141, 141);
+
+  /**
+  BORDER SOLID COLORS
+  **/
+  --thin-border-1:  #0d6d5a;
+  --thin-border-2:  #830616;
+  --thin-border-3:  #b97207;
+  --thin-border-4:  #036aa7;
+  --thin-border-5:  #bba907;
+  --thin-border-6:   rgb(17, 2, 31);
+  --thin-border-7:  rgb(1, 11, 39);
+
+  /***
+  CARD BG
+  ***/
+  --card-mtn-bg:  #faba5ad0;
+  --card-tel-bg:  #fa537dd0;
+  --card-tigo-bg:  #6cbff7cb;
+}
+/* RESET */
+/* ================= RESET ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #ffffff;
+  color: #222;
+  line-height: 1.6;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
+}
+
+
+/* ================= HEADER ================= */
+.store-header {
+  width: 100%;
+  max-width: 390px;
+  height: 3.9rem;
+  justify-self: center;;
+  background: white;
+  padding: 1px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+  border-bottom: 1px solid rgb(240, 235, 235);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  z-index: 99999;
+}
+
+.store-header .store-header-top{
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  padding-top: .2rem;
+}
+
+
+.logo img {
+ width: 2.8rem;
+ height: 3.2rem;
+ margin-top: .3rem;
+ -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
+}
+
+.logo span {
+  font-size: 14px;
+  margin: 0;
+  color: #28a745;
+  font-weight: 500;
+}
+
+
+/*==============MAIN=============*/
+
+    header{
+    background: #fff;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+    }
+
+    header h2{
+      color: #ff7a00;
+    }
+
+
+
+
+.underdev{
+  width: 100%;
+  max-width:  390px;
+  justify-self: center;
+  height: max-content;
+  padding: 1rem;
+  background: rgb(223, 217, 217);
+  position: relative;
+  margin-top: 4.3rem;
+}
+
+.underdev h1{
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: rgb(86, 86, 97);
+}
+
+.underdev small{
+  display: flex;
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgb(167, 86, 32);
+  animation: xl 5s ease infinite;
+}
+
+@keyframes  xl {
+  to {
+    transform: translateX(9px);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    .container{
+      padding: 20px;
+      margin-top: 1rem;
+      max-width: 900px;
+    }
+
+    .card{
+      background: #d6d4d4;
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+
+    .card h3{
+      margin-bottom: 10px;
+      color: rgb(128, 128, 128);
+      font-size: .99rem;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+
+    button{
+      background: #69390c;
+      color: #fff;
+      opacity: .8;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      padding: 7px;
+      border: none;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+
+    .product-list {
+      display: flex;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 15px;
+    }
+
+    .product{
+      background: #fff;
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+    }
+
+    .product img{
+      width: 100%;
+      height: 120%;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .product h4{
+      font-size: 14px;
+      margin: 5px 0;
+    }
+
+    .delete-btn{
+      background: red;
+      font-size: 12px;
+      padding: 5px;
+      margin-top: 5px;
+    }
+
+
+    .backUpLink{
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 4rem;
+      position: relative;
+      justify-content: center;
+      padding: .4rem;
+      margin-bottom: 1rem;
+      background: rgb(250, 250, 250);
+      border-radius: 8px;
+      border: 1px solid rgb(241, 238, 238);
+    }
+
+    .backUpLink h2{
+      color: rgb(99, 99, 105);;
+    }
+
+  
+/*==============MAIN====ENDS=====*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+.foot{
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center !important;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  position: relative;
+  padding: .3rem;
+  justify-self: center;
+  border-top: 1px solid rgb(235, 234, 234);
+}
+
+.foot .foot-content{
+  display: flex;
+  width: 100%;
+  height: 90%;
+  padding: .2rem .1rem;
+  justify-self: center;
+  position: relative;
+  align-items: center;;
+  justify-content: center;
+  gap: .5rem;
+}
+
+
+.cop-right {
+  width: 50%;
+  max-width: max-content;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-cl);
+  border-right: 2px solid var(--text-cl);
+}
+
+.dark-mode .cop-right{
+  background: var(--welcome-card-bg);
+}
+
+
+.foot-content .powered{
+  font-size: .8rem;
+  width: 50%;
+  max-width: max-content;
+  height: 100%;
+  font-weight: 800;
+  background: var(--bg-cl);
+  padding-right: .3rem;
+  color: rgb(53, 53, 104);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+
+
+.dark-mode .powered {
+  background: var(--welcome-card-bg);
+  color: rgb(187, 182, 182);
+}
+
+.foot-content .powered strong{
+  margin-right: .2rem;
+  font-weight: 500;
+}
+
+

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ECOSHOP || DASHBOARD</title>
+  <link 
+  href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./ownerDash.css">
+
+
+</head>
+<body>
+<!-- 🏬 MAIN HEADER -->
+  <header class="store-header">
+    <div class="store-header-top">
+
+        <!-- LOGO -->
+    <div class="logo">
+    
+      <img src="./icons/logoImg.png" alt="" loading="lazy">
+    </div>
+       <div class="header-actions">
+        <button onclick="logout()">Logout</button>
+    </div>
+    </div>
+    <div class="store-header-bottom" style="display: none;">
+          <!-- NAVIGATION -->
+    <nav class="main-nav">
+
+    <!---menu-icon-->
+    <img id="toggleSidebar" src="./icons/menu-icon.png" alt="">
+    </div>
+
+  </header>
+
+  
+   <div class="underdev">
+    <h1>This page is under development</h1>
+    <small>coming up soon!</small>
+  </div>
+
+  <!-----MAIN-CONTAINER--SECTION----->
+<div class="container">
+  <div class="backUpLink">
+    <h2>Dashboard</h2>
+  </div>
+
+  <!----upload product----->
+  <div class="card">
+    <h3>Add Product</h3>
+
+    <input type="text" id="productName" placeholder="Product Name">
+    <input type="number" id="productPrice" placeholder="Price (GHS)">
+    <input type="file" id="productImage">
+    <input type="text" placeholder="Store WhatsApp number" id="constWhatsAppNumber">
+    <textarea id="productDesc" placeholder="Description"></textarea>
+
+    <button onclick="uploadProduct()">Upload Product</button>
+  </div>
+
+  <!---product list-->
+  <div class="card">
+    <h3>Your Products</h3>
+    <div class="product-list" id="productList"></div>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <section class="foot">
+   <div class="foot-content">
+    <div class="cop-right">
+        <p style="text-align:center;color:#888;font-size:14px;">© 2026 Ecodata. All rights reserved.
+      </p>
+    </div>
+      <small class="powered">
+        
+      <strong>Powered by:</strong>   IA E-Business 
+    </small>
+  
+   </div>
+  </section>
+
+
+
+
+
+
+
+  <script type="module" src="./storeOwnerDashboard.js"></script>
+</body>
+</html>
