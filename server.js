@@ -1,3 +1,4 @@
+// src/server.js
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -5,23 +6,36 @@ import axios from "axios";
 import path from "path";
 import { fileURLToPath } from "url";
 import bodyParser from "body-parser";
+
+// Routes
 import storesRoutes from "./routes/storesRoute.js";
 import paystackWebhookRouter from "./routes/paystackWebhookRouter.js";
 import productRouter from "./routes/product.js";
 import subscriptionRouter from "./routes/subscriptionRouter.js";
-import admin from "firebase-admin";
-import serviceAccount from './serviceAccountKey.json' assert { type: 'json' };
+
+
+// Firebase Admin
+import { db } from "./firebaseAdmin.js";
 
 dotenv.config();
 
+
+// --dirname for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+
+// Initialize Express
 const app = express();
 
 // Middleware
 app.use(cors());
+
+// capture raw body
 app.use(bodyParser.json({ verify: (req, res, buf) => { req.rawBody = buf; } }));
+
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "frontend")));
@@ -31,22 +45,6 @@ app.use("/paystack/webhook", paystackWebhookRouter);
 app.use("/api", storesRoutes);
 app.use("/api", productRouter);
 app.use("/api", subscriptionRouter);
-
-// Firebase initialization
-const adminApp = admin.apps.length
-  ? admin.app() // reuse existing app
-  : admin.initializeApp({
-      credential: admin.credential.cert(serviceAccount),
-    });
-
-const db = adminApp.firestore();
-
-// Optional export if other modules need adminApp or db
-export { adminApp, db };
-
-
-
-
 
 
 
