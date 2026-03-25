@@ -395,11 +395,8 @@ AGENT CODE ENDS
   /***
   DARK MODE COLORS
   ***/
-  --darkMode-bg-cl: rgb(10, 10, 10);
-  --darkMode-bg-cl-2: rgb(10, 1, 22);
-  --welcome-card-bg: rgba(3, 3, 3, 0.918);
-  --welcome-card-bg-1: rgb(2, 2, 39);
-  --welcome-card-bg-2: rgb(24, 5, 5);
+  --darkMode-bg-cl: rgb(16, 20, 20) !important;
+  --welcome-card-bg: rgb(13, 15, 19) !important;
   --welcome-card-bg-3: rgba(77, 77, 77, 0.89);
   --welcome-card-border: rgb(74, 88, 94);
   --thin-border: rgb(35, 48, 49);
@@ -638,7 +635,7 @@ ADS THUMBNAIL
 
 
 .dark-mode .google-thumbnails-wrapper{
-  background: black;
+  background: var(--welcome-card-bg);
 }
 
 .google-thumbnails{
@@ -4321,7 +4318,7 @@ border: 1px solid rgb(241, 239, 239);
 
 
 .dark-mode .normalOrgridBtn{
-  background: var(--dark-cl);
+  background: var(--welcome-card-bg);
   border: 1px solid var(--thin-border);
   box-shadow: none;
 }
