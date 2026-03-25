@@ -9,7 +9,8 @@ import storesRoutes from "./routes/storesRoute.js";
 import paystackWebhookRouter from "./routes/paystackWebhookRouter.js";
 import productRouter from "./routes/product.js";
 import subscriptionRouter from "./routes/subscriptionRouter.js";
-
+import admin from "firebase-admin";
+import serviceAccount from './serviceAccountKey.json' assert { type: 'json' };
 
 dotenv.config();
 
@@ -18,45 +19,34 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
-
+// Middleware
 app.use(cors());
-
-
-
-// Capture raw body for Paystack signature verification
-app.use(bodyParser.json({
-  verify: (req, res, buf) => {
-    req.rawBody = buf;
-  }
-}));
-
-
+app.use(bodyParser.json({ verify: (req, res, buf) => { req.rawBody = buf; } }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "frontend")));
 
-
-
-// ROUTERS USED
+// ROUTES
 app.use("/paystack/webhook", paystackWebhookRouter);
 app.use("/api", storesRoutes);
 app.use("/api", productRouter);
 app.use("/api", subscriptionRouter);
 
+// Firebase initialization
+const adminApp = admin.apps.length
+  ? admin.app() // reuse existing app
+  : admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+    });
+
+const db = adminApp.firestore();
+
+// Optional export if other modules need adminApp or db
+export { adminApp, db };
 
 
-// Initialize Firebase Admin
-import admin from "firebase-admin";
 
-admin.initializeApp({
-  credential: admin.credential.cert({
-    projectId: process.env.FB_PROJECT_ID,
-    clientEmail: process.env.FB_CLIENT_EMAIL,
-    privateKey: process.env.FB_PRIVATE_KEY.replace(/\\n/g,'\n'),
-  }),
-});
 
-const db = admin.firestore();
 
 
 
