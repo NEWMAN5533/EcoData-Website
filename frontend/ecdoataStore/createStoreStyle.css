@@ -1,0 +1,581 @@
+
+:root {
+  --bg-cl: #FFF;
+  --primary-cl: #fff;
+  --secondary-cl: rgb(50, 50, 190);
+  --dark-cl: #0a0a0a;
+  --ascent-cl: rgb(158, 97, 209);
+  --background-cl: #e6e8ce;
+  --card-full-bg-cl: rgb(255, 217, 0);
+  --card-full-tele-bg-cl: rgb(221, 19, 19);
+  --card-full-airtel-bg-cl:  rgb(6, 6, 231);
+  --border-cl-2: rgba(66, 66, 26, 0.226);
+  --mtn-btn: rgb(193, 196, 19);
+  --telecel-btn: rgb(180, 57, 19);
+  --airteltigo-btn: rgb(28, 46, 119);
+
+
+  /***
+  NEW ROOT
+  ***/
+  --btn-bg-cl: rgb(250, 126, 9);
+  --user-panel-bg: rgba(42, 42, 194, 0.938);
+  --clock-bg-cl: rgb(2, 61, 52);
+
+  /***
+  DARK MODE COLORS
+  ***/
+  --darkMode-bg-cl: rgb(10, 1, 22);
+  --welcome-card-bg: rgb(2, 2, 39);
+  --welcome-card-bg-2: rgb(24, 5, 5);
+  --welcome-card-border: rgb(74, 88, 94);
+  --thin-border: rgb(35, 48, 49);
+  --text-cl: rgb(145, 168, 164);
+  --text-cl-2: rgb(210, 216, 216);
+  --text-cl-3: rgb(139, 141, 141);
+
+  /**
+  BORDER SOLID COLORS
+  **/
+  --thin-border-1:  #0d6d5a;
+  --thin-border-2:  #830616;
+  --thin-border-3:  #b97207;
+  --thin-border-4:  #036aa7;
+  --thin-border-5:  #bba907;
+  --thin-border-6:   rgb(17, 2, 31);
+  --thin-border-7:  rgb(1, 11, 39);
+
+  /***
+  CARD BG
+  ***/
+  --card-mtn-bg:  #faba5ad0;
+  --card-tel-bg:  #fa537dd0;
+  --card-tigo-bg:  #6cbff7cb;
+}
+/* RESET */
+/* ================= RESET ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #ffffff;
+  color: #222;
+  line-height: 1.6;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
+}
+
+
+/* ================= HEADER ================= */
+
+.store-header {
+  width: 100%;
+  max-width: 390px;
+  height: 11.9rem;
+  justify-self: center;;
+  background: #1e293b;
+  padding: 1px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+  border-end-end-radius: 2rem !important;
+  border-end-start-radius: 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden !important;
+  z-index: 99999 !important;
+}
+
+.whiteHouse{
+  display: flex;
+  position: fixed;
+  top: 9.2rem;
+  background: rgb(255, 255, 255);
+  width: 100%;
+  height: 3rem;
+  z-index: 1 !important;
+  margin-bottom: 1rem;;
+
+}
+
+
+.store-header .store-header-top{
+  width: 100%;
+  height: 7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  padding-top: .2rem;
+  border-bottom: 1px solid rgba(136, 134, 134, 0.295);;
+}
+
+
+/* TOP */
+.store-header-top .store-header-top-top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0;
+  position: relative;
+  height: 50%;
+}
+
+.store-header-top-top .logo img{
+  width: 3.5rem;
+  height: 3.4rem;
+  background: rgb(36, 43, 46);
+  border-radius: 50%;
+  padding: .2rem;
+}
+
+.store-header-top-top .header-actions img{
+  width: 1.90rem;
+  height: 1.7rem;
+  background: rgb(182, 187, 202);
+  padding: .2rem;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+
+
+
+
+
+.store-header-top .store-header-top-bottom{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0;
+  position: relative;
+  height: 50%;
+}
+
+.store-header-top-bottom .userName{
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  width: 80%;
+  position: relative;
+}
+
+.userName p{
+  white-space: nowrap;
+  font-size: .96rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 100 !important;
+  color: white;
+  opacity: .9;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.store-header .store-header-bottom{
+  width: 100%;
+  height: 4.9rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.store-header-bottom h2{
+  color: rgb(83, 130, 136);
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+
+
+
+
+
+
+.logo img {
+ margin-top: .3rem;
+ -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
+}
+
+.logo span {
+  font-size: 14px;
+  margin: 0;
+  color: #28a745;
+  font-weight: 500;
+}
+
+/* NAVIGATION */
+.main-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: max-content;
+  height: 2.2rem;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: #333;
+  font-size: 12px;
+  display: flex;
+  text-align: center;
+  justify-items: center;
+  align-items: center;
+  gap: .2rem;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.main-nav a img{
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.main-nav a:hover {
+  color: #2898a7;
+}
+
+/* HEADER ACTIONS */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-actions input {
+  padding: 9px 15px;
+  border-radius: 25px;
+  border: 1px solid #ddd;
+  width: 230px;
+  background: #f9f9f9;
+  outline: none;
+  transition: 0.3s;
+}
+
+.header-actions input:focus {
+  background: #fff;
+  border-color: #28a745;
+}
+
+
+/*================
+/ MAIN SECTION
+/*================
+
+
+
+/* ================= HEADER ================= */
+
+
+
+.storeCreationWrapper{
+  width: 100%;
+  max-width: 375px;
+  height: max-content;
+  padding: .5rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4rem;
+  margin-bottom: 5rem;
+}
+
+.storeCreationWrapper h2{
+  font-size: 1.2rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+}
+
+.storeCreationWrapper form{
+  width: 95%;
+}
+
+.storeCreationWrapper .formFillCard{
+  width: 100%;
+  height: 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: .1rem;
+  background: rgb(255, 255, 255);
+  position: relative;
+  margin-top: 1rem;
+  border-radius: .4rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.19);
+}
+
+.formFillCard .formFillCard-top{
+  width: 100%;
+  height: 40%;
+  padding: 0 .4rem;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  position: relative;
+}
+
+.formFillCard .formFillCard-bottom{
+  width: 100%;
+  height: 60%;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  position: relative;
+  background: #1e293b;
+  border-radius: .4rem;
+  padding: 0 .4rem;
+}
+
+
+
+.container{
+ width: 100%;
+    max-width: 90%;
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  height: max-content;
+  gap: 1.5rem;
+  margin-bottom: 6rem;
+  justify-self: center;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  margin-top: 6rem;
+}
+
+
+
+
+.header-actions {
+  display: flex;
+  position: relative;
+}
+
+.header-actions img{
+  width: 2rem;
+  height: 1.9rem;
+}
+
+/* hide result
+*/
+.result{
+  display: none;
+}
+
+.result{
+  display: none;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn{
+  from{
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.note-box{
+  width: 100%;
+  max-width: 96%;
+  justify-self: center;
+  background: #334155;
+  border: 1px solid #334155;
+  padding: 15px;
+  border-radius: 3px;
+  margin-top: 5rem;
+  margin-bottom: 10px;
+}
+
+.note-box h3{
+  color: #bb5317;
+  font-size: 1rem;
+  margin-bottom: 8px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.note-box p{
+  color: #cbd5f5;
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.note-box ul{
+  padding-left: 15px;
+}
+
+.note-box li{
+  color: #94a3b8;
+  font-size: 0.8rem;
+  margin-bottom: 4px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+   .ecoshop{
+      color: white;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-size: 1.1rem;
+      margin-left: .3rem;
+      background: rgb(76, 77, 138);
+      padding: .2rem .4rem;
+      font-weight: 400;
+    }
+
+
+
+
+
+
+
+
+
+
+/*===================
+/ MAIN SECTION ENDS
+/*=================== */
+
+
+.foot{
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center !important;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  position: relative;
+  padding: .1rem;
+  border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.foot .foot-content{
+  display: flex;
+  width: 100%;
+  max-width: 99%;
+  height: 90%;
+  padding: .2rem .1rem;
+  justify-self: center;
+  position: relative;
+  align-items: center;;
+  justify-content: center;
+  gap: .5rem;
+}
+
+
+.cop-right {
+  width: 50%;
+  max-width: max-content;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-cl);
+ font-size: .7rem;
+
+}
+
+.dark-mode .cop-right{
+  background: var(--welcome-card-bg);
+}
+
+
+.foot-content .powered{
+  font-size: .8rem;
+  width: 50%;
+  max-width: max-content;
+  height: 100%;
+  font-weight: 800;
+  background: var(--bg-cl);
+  padding-right: .3rem;
+  color: rgb(53, 53, 104);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: 500;
+}
+
+
+
+.dark-mode .powered {
+  background: var(--welcome-card-bg);
+  color: rgb(187, 182, 182);
+}
+
+.foot-content .powered strong{
+  margin-right: .2rem;
+  font-weight: 500;
+ font-size: .7rem;
+}
+
+
+/*******
+FOOTER SECTION ENDS
+****/
+
+
+
+
+
+
+
+
+
+

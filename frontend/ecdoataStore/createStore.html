@@ -5,8 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CREATE STORE || EcoShop
   </title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="createStoreStyle.css">
+
 </head>
+
+
 <style>
 
   .container h2{
@@ -15,13 +18,18 @@
   }
 
 #storeForm label{
+  font-size: .9rem;
   color: rgb(146, 145, 145);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
  
+.formInputCreate{
+  display: flex;
+  width: 90%;
+  height: 2.5rem;
+}
 
-
-  input, select{
+  .formInputCreate, select{
     width: 100%;
     padding: 12px;
     margin: 8px 0;
@@ -31,26 +39,42 @@
     font-size: 14px;
   }
 
-  input[type="file"]{
+  .formInputCreate[type="file"]{
     background: white;
     color: black;
   }
 
-  input::placeholder{
+.formInputCreate::placeholder{
     opacity: .6;
+  }
+
+  .submitter{
+    width: 100%;
+    height: 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    position: relative;
+    margin-top: 2rem;
+    background: rgb(238, 238, 238);
+    border: 1px solid white;
+    border-radius: 1rem;
   }
 
   button{
     width: 100%;
+    max-width: 90%;
+    justify-self: center;
     padding: 12px;
-    background: linear-gradient(45deg, orange, red);
+    background: linear-gradient(45deg, orange, rgb(255, 72, 0));
     border: none;
     border-radius: 10px;
     color: white;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 1.01rem;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 20px;
   }
 
   button:hover{
@@ -67,10 +91,11 @@
 
   .link-box{
     display: flex;
+    flex-direction: column;
     gap: 10px;
   }
 
-  .link-box input{
+  .formInputCreate{
     flex: 1;
     background: #334155;
     color: white;
@@ -88,144 +113,9 @@
 </style>
 
 
-<style>
-body{
-margin: 0;;
-}
-
-
-/* ================= HEADER ================= */
-.store-header {
-  width: 100%;
-  max-width: 390px;
-  height: 3.9rem;
-  justify-self: center;;
-  background: white;
-  padding: 1px 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 3px 15px rgba(0,0,0,0.05);
-  border-bottom: 1px solid rgb(240, 235, 235);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  overflow: hidden;
-  z-index: 99999;
-}
-
-.store-header .store-header-top{
-  width: 100%;
-  height: 4rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
-  padding-top: .2rem;
-}
-
-
-.logo img {
- width: 2.8rem;
- height: 3.2rem;
- margin-top: .3rem;
- -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;;
-  user-select: none;
-}
-
-.logo span {
-  font-size: 14px;
-  margin: 0;
-  color: #28a745;
-  font-weight: 500;
-}
 
 
 
-
-.underdev{
-  width: 100%;
-  max-width:  390px;
-  justify-self: center;
-  height: max-content;
-  padding: 1rem;
-  background: rgb(223, 217, 217);
-  position: relative;
-  margin-top: 4.3rem;
-}
-
-.underdev h1{
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: rgb(86, 86, 97);
-}
-
-.underdev small{
-  display: flex;
-  font-size: 1rem;
-  font-weight: 600;
-  color: rgb(167, 86, 32);
-  animation: xl 5s ease infinite;
-}
-
-@keyframes  xl {
-  to {
-    transform: translateX(9px);
-  }
-}
-
-
-
-.container{
- width: 100%;
-    max-width: 360px;
-    background: #1e293b;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
-  height: max-content;
-  gap: 1.5rem;
-  margin-bottom: 6rem;
-  justify-self: center;
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 1rem;
-  margin-top: 1rem;
-}
-
-
-
-
-.header-actions {
-  display: flex;
-  position: relative;
-}
-
-.header-actions img{
-  width: 2rem;
-  height: 1.9rem;
-}
-
-</style>
-
-<style>
-  .foot{
-    position: fixed;
-    bottom: 0;
-    z-index: 99999;
-    left: 0;
-    right: 0;
-    background-color: #fff !important;
-  }
-</style>
 <body>
 
 
@@ -233,26 +123,34 @@ margin: 0;;
     <!-- 🏬 MAIN HEADER -->
   <header class="store-header">
     <div class="store-header-top">
-
-        <!-- LOGO -->
-    <div class="logo">
-    
+      <div class="store-header-top-top">
+        <div class="logo">
       <img src="./icons/logoImg.png" alt="" loading="lazy">
     </div>
-       <div class="header-actions" style="display: none;">
+  <div class="header-actions" >
         <!---menu-icon-->
     <img id="toggleSidebar" src="./icons/menu-icon.png" alt="">
     </div>
-    </div>
-    <div class="store-header-bottom" style="display: none;">
-          <!-- NAVIGATION -->
-        
-    <nav class="main-nav">
+      </div>
+      <div class="store-header-top-bottom">
+        <div class="userName">
+          <p id="usernameDisplay">PAGE UNDER DEV!</p>
+        </div>
+        <div class="bottom-hidder" style="display: none;">
+          <img src="./icons/more.png.png" alt="" loading="lazy">
+        </div>
+      </div>
 
-  
+        <!-- LOGO -->
+
+    </div>
+    <div class="store-header-bottom">
+          <h2>Get Online Store</h2>
     </div>
 
   </header>
+   <div class="whiteHouse"></div>
+   <!-----WHITE-BORDER-ENDS-->
 
    <div class="underdev">
     <h1>This page is under development</h1>
@@ -260,27 +158,72 @@ margin: 0;;
   </div>
 
 
+
   <!---MAIN-CONTAINER-SECTION------>
- 
+ <div class="note-box">
+  <h3> Grow your Business with <strong class="ecoshop">EcoShop</strong></h3>
+  <p>
+    Create your own online store in seconds. Share your store link, receive orders via WhatsApp, 
+    and start selling instantly.
+  </p>
 
+  <ul>
+    <li> Reach more customers online</li>
+    <li> Easy product showcase</li>
+    <li> Direct WhatsApp orders</li>
+  </ul>
+</div>
 
-<div class="container">
-  <h2>Create Your Store</h2>
+<div class="storeCreationWrapper">
 
-  <form id="storeForm">
-    <label>Business Name</label>
-    <input type="text" name="businessName" placeholder="Business Name" required>
+    <h2>Create Your Store</h2>
+    <form id="storeForm">
+      
+<div class="formFillCard">
+  <div class="formFillCard-top">
+    <label>Store Name</label>
+  </div>
+  <div class="formFillCard-bottom">
+     <input class="formInputCreate
+    " type="text" name="businessName" placeholder="Business Name" required>
+  </div>
+</div>
 
+<div class="formFillCard">
+  <div class="formFillCard-top">
     <label>Active WhatsApp No.</label>
-    <input type="tel" name="whatsapp" placeholder="WhatsApp Number" required>
+  </div>
+  <div class="formFillCard-bottom">
+    <input class="formInputCreate
+    " type="tel" name="whatsapp" placeholder="WhatsApp Number" required>
+  </div>
+</div>
 
-    <label>Store Logo</label>
-    <input type="file" name="logo" accept="image/*" required>
+<div class="formFillCard">
+  <div class="formFillCard-top">
+    <label>Store logo</label>
+  </div>
+  <div class="formFillCard-bottom">
+    <input class="formInputCreate
+    " type="file" name="logo" accept="image/*" required>
+  </div>
+</div>
 
+<div class="formFillCard">
+  <div class="formFillCard-top">
     <label>Active Location</label>
-    <input type="text" name="location" placeholder="Location (e.g. Accra, Ghana)">
+  </div>
+  <div class="formFillCard-bottom">
+  <input class="formInputCreate
+    " type="text" name="location" placeholder="Location (e.g. Accra, Ghana)">
+  </div>
+</div>
 
+<div class="formFillCard">
+  <div class="formFillCard-top">
     <label>According to products</label>
+  </div>
+  <div class="formFillCard-bottom">
     <select name="storeType" required>
       <option value="">Select Store Type</option>
       <option value="fashion">Fashion</option>
@@ -288,149 +231,75 @@ margin: 0;;
       <option value="food">Food</option>
       <option value="general">General</option>
     </select>
-
-    <button type="submit">Create Store </button>
-
-  </form>
-
-
-    <div class="success" style="display: none;"> Store Created Successfully</div>
-
-    <div class="link-box">
-      <input type="text" id="storeLink" readonly>
-      <button type="button" class="copy-btn" onclick="copyLink()">Copy</button>
-    </div>
-
   </div>
+</div>
 
+<div class="submitter">
+<button type="submit">Create Store </button>
 </div>
 
 
 
 
 
-
- <script>
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-
-import {
-  getFirestore,
-  doc,
-  getDoc
-} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+   
 
 
-// 🔹 Firebase config
-const firebaseConfig = {
-  apiKey: "AIzaSyClNBlfigtQk8AZWdMZcU9sEtVcIrS0D1g",
-  authDomain: "ecodata-2bee6.firebaseapp.com",
-  projectId: "ecodata-2bee6",
-  storageBucket: "ecodata-2bee6.firebasestorage.app",
-  messagingSenderId: "544837123249",
-  appId: "1:544837123249:web:6c362350a00c6dab10b690"
-};
+    </form>
 
-
-// 🔹 Initialize
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-
-
-const form = document.getElementById("storeForm");
-const resultBox = document.getElementById("resultBox");
-const storeLinkInput = document.getElementById("storeLink");
-
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const formData = new FormData(form);
-
-  try {
-    const res = await fetch("/api/store/create-store", {
-      method: "POST",
-      body: formData
-    });
-
-    const data = await res.json();
-
-    if(data.storeId){
-      window.location.href = `/ecdoataStore/subscriptionPage.html?store=${data.storeId}`;
-    }
-
-  } catch(err){
-    console.error(err);
-    alert("Server error");
-  }
-});
-
-function copyLink(){
-  storeLinkInput.select();
-  document.execCommand("copy");
-  alert("Link copied!");
-}
-
-
-
-
-
-// POST TO ROUTER
-async function subscribe(plan){
-
-  const storeId = new URLSearchParams(window.location.search).get("store");
-
-  if(!storeId){
-    alert("Store not found");
-    return;
-  }
-
+  <!--storeLink-->
+<div class="result" id="resultBox">
   
-  const user = auth.currentUser;
-  const userEmail = user?.email || `${storeId}@ecodata.com`;
-  const userName = user?.displayName || "Guest User";
 
-  try {
-    const res = await fetch("/api/subscription/initiate-subscription", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        email: userEmail, // 🔥 later from Firebase
-        storeId,
-        plan
-      })
-    });
+    <div class="success"> Store Created Successfully</div>
 
-    const data = await res.json();
+    <div class="link-box">
+      <input class="formInputCreate
+      " type="text" id="storeLink" readonly>
+      <button type="button" class="copy-btn" onclick="copyLink()">Copy</button>
+    </div>
 
-    // ✅ FREE PLAN
-    if(data.free){
-      window.location.href = `/dashboard.html?store=${storeId}`;
-      return;
-    }
+</div>
+ 
+  
 
-    // 💰 PAID PLAN
-    if(data.paymentUrl){
-      window.location.href = data.paymentUrl;
-    }
+   
+    
 
-  } catch(err){
-    console.error(err);
-    alert("Something went wrong");
-  }
-}
+   
 
-</script>
+    
+
+
+
+  </div>
 
 
 
 
 
+<section class="foot">
+   <div class="foot-content">
+    <div class="cop-right">
+ © 2026 EcoShop. All rights reserved.
+      </p>
+    </div>
+    |
+      <small class="powered">
+        
+      <strong>Powered by:</strong>   IA E-Business 
+    </small>
+  
+   </div>
+
+  </section>
+
+
+
+
+
+
+
+<script type="module" src="createStore.js"></script>
 </body>
 </html>
