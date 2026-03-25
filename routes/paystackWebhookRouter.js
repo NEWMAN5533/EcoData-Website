@@ -4,7 +4,7 @@ import { admin, db } from "../firebaseAdmin.js";
 import { handleBuyDataRequest } from "../server.js"
 
 const paystackWebhookRouter = express.Router();
-const db = admin.firestore();
+
 
 paystackWebhookRouter.post("/paystack/webhook", async (req, res) => {
   try {
