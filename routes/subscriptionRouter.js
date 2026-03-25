@@ -1,6 +1,6 @@
 import express from "express";
 import fetch from "node-fetch";
-import { db } from "../firebaseAdmin.js";
+import { admin, db } from "../firebaseAdmin.js";
 
 const subscriptionRouter = express.Router();
 
