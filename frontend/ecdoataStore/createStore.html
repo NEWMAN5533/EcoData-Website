@@ -8,6 +8,87 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <style>
+
+  .container h2{
+    color: rgb(230, 227, 227);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+#storeForm label{
+  color: rgb(146, 145, 145);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+ 
+
+
+  input, select{
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+  }
+
+  input[type="file"]{
+    background: white;
+    color: black;
+  }
+
+  input::placeholder{
+    opacity: .6;
+  }
+
+  button{
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(45deg, orange, red);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1.01rem;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  button:hover{
+    opacity: 0.9;
+  }
+
+  .result{
+    margin-top: 20px;
+    display: none;
+    background: #020617;
+    padding: 15px;
+    border-radius: 10px;
+  }
+
+  .link-box{
+    display: flex;
+    gap: 10px;
+  }
+
+  .link-box input{
+    flex: 1;
+    background: #334155;
+    color: white;
+  }
+
+  .copy-btn{
+    background: green;
+  }
+
+  .success{
+    color: lightgreen;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+</style>
+
+
+<style>
 body{
 margin: 0;;
 }
@@ -101,8 +182,12 @@ margin: 0;;
 
 
 .container{
-  width: 100%;
-  max-width: 320px;
+ width: 100%;
+    max-width: 360px;
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
   height: max-content;
   gap: 1.5rem;
   margin-bottom: 6rem;
@@ -114,136 +199,9 @@ margin: 0;;
   justify-content: center;
   padding: 2rem 1rem;
   margin-top: 1rem;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-}
-
-.container .logo{
-  padding: .4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  text-align: center;
-  font-weight: 600;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: 1.1rem;
-  border-radius: .4rem;
-}
-
-.container h2{
-  color: rgb(112, 112, 119);
-  font-size: 1.1rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-.container p{
-  color:  rgb(112, 112, 119);
-  font-size: 1.1rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-.input-group{
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: .3rem;
-  padding: .5rem;
-  position: relative;
-}
-
-.input-group label{
-  color:  rgb(112, 112, 119);
-  font-weight: 600;
-}
-
-.input-group input{
-  padding: .3rem 2rem;
-  text-align: start;
-  justify-content: start;
-  display: flex;
-  position: relative;
-  align-items: start;
-  border: 1px solid rgb(228, 223, 223);
-  background:  rgb(245, 244, 244);
-  border-radius: 2px;
-}
-
-.input-group input::placeholder{
-opacity: .6;
-font-size: .7rem;
-font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-.container .btn{
-  border: none;
-  padding: .6rem 3rem;
-  border-radius: 4px;
-  background: linear-gradient(135deg, rgb(241, 182, 17),rgb(255, 145, 0));
-  color: white;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: .9rem;
-  cursor:pointer;
 }
 
 
-.link-box{
-  display: flex;
-  flex-direction: column;
-  gap: .3rem;
-  position: relative;
-}
-
-.link-box strong{
-  color: rgba(57, 57, 228, 0.678);
-  font-size: .8rem;
-  font-weight: 500;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-.link-box .copy-btn{
-  border: none;
-  padding: .3rem 5rem;
-  border-radius: .2rem;
-  color: rgb(148, 187, 238);
-}
-
-.login-link{
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  color: rgb(153, 150, 150);
-  font-size: .8rem;
-}
-
-.login-link .dashboardArena{
-  color: rgb(255, 255, 255);
-  font-weight: 400;
-  margin-left: .3rem;
-  font-size: .9rem;
-  text-decoration: underline;
-  cursor: pointer;
-  background: rgba(75, 76, 76, 0.74);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  position: relative;
-  padding:  0 .7rem;
-  box-shadow:  0 2px 6px rgba(231, 229, 229, 0.15);
-  border-radius: 4px;
-}
-
-a{
-  display: flex;
-  text-align: center;
-  position: relative;
-}
 
 
 .header-actions {
@@ -303,118 +261,176 @@ a{
 
 
   <!---MAIN-CONTAINER-SECTION------>
-  <div class="container">
-   
-    <h2>Create Your Store</h2>
-    <p>Start selling Online in a minutes</p>
+ 
 
-    <div class="input-group">
-      <label>Store Name</label>
-      <input type="text" id="storeName" placeholder="e.g Mimi's Shop">
+
+<div class="container">
+  <h2>Create Your Store</h2>
+
+  <form id="storeForm">
+    <label>Business Name</label>
+    <input type="text" name="businessName" placeholder="Business Name" required>
+
+    <label>Active WhatsApp No.</label>
+    <input type="tel" name="whatsapp" placeholder="WhatsApp Number" required>
+
+    <label>Store Logo</label>
+    <input type="file" name="logo" accept="image/*" required>
+
+    <label>Active Location</label>
+    <input type="text" name="location" placeholder="Location (e.g. Accra, Ghana)">
+
+    <label>According to products</label>
+    <select name="storeType" required>
+      <option value="">Select Store Type</option>
+      <option value="fashion">Fashion</option>
+      <option value="electronics">Electronics</option>
+      <option value="food">Food</option>
+      <option value="general">General</option>
+    </select>
+
+    <button type="submit">Create Store </button>
+
+  </form>
+
+
+    <div class="success" style="display: none;"> Store Created Successfully</div>
+
+    <div class="link-box">
+      <input type="text" id="storeLink" readonly>
+      <button type="button" class="copy-btn" onclick="copyLink()">Copy</button>
     </div>
 
-    <button class="btn" id="createStoreBtn">Create Store</button>
-
-
-    <!-----STORE LINK INPUT------>
-    <div class="link-box" id="storeLinkBox">
-      <strong>Your Store Link:</strong>
-      <div id="storeLinkText"></div>
-      <button class="copy-btn" id="copyBtn">Copy Link</button>
-    </div>  
-
-    <div class="login-link">
-      Already have account? 
-      <a href="./ownerDashboard.html">
-        <span class="dashboardArena" >Dashboard</span>
-      </a>
-    </div>
   </div>
 
+</div>
 
-    <section class="foot">
-   <div class="foot-content">
-    <div class="cop-right">
-        <p style="text-align:center;color:#888;font-size:14px;">© 2026 Ecodata. All rights reserved.
-      </p>
-    </div>
-      <small class="powered">
-        
-      <strong>Powered by:</strong>   IA E-Business 
-    </small>
+
+
+
+
+
+ <script>
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+
+// 🔹 Firebase config
+const firebaseConfig = {
+  apiKey: "AIzaSyClNBlfigtQk8AZWdMZcU9sEtVcIrS0D1g",
+  authDomain: "ecodata-2bee6.firebaseapp.com",
+  projectId: "ecodata-2bee6",
+  storageBucket: "ecodata-2bee6.firebasestorage.app",
+  messagingSenderId: "544837123249",
+  appId: "1:544837123249:web:6c362350a00c6dab10b690"
+};
+
+
+// 🔹 Initialize
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+
+const form = document.getElementById("storeForm");
+const resultBox = document.getElementById("resultBox");
+const storeLinkInput = document.getElementById("storeLink");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(form);
+
+  try {
+    const res = await fetch("/api/store/create-store", {
+      method: "POST",
+      body: formData
+    });
+
+    const data = await res.json();
+
+    if(data.storeId){
+      window.location.href = `/ecdoataStore/subscriptionPage.html?store=${data.storeId}`;
+    }
+
+  } catch(err){
+    console.error(err);
+    alert("Server error");
+  }
+});
+
+function copyLink(){
+  storeLinkInput.select();
+  document.execCommand("copy");
+  alert("Link copied!");
+}
+
+
+
+
+
+// POST TO ROUTER
+async function subscribe(plan){
+
+  const storeId = new URLSearchParams(window.location.search).get("store");
+
+  if(!storeId){
+    alert("Store not found");
+    return;
+  }
+
   
-   </div>
-  </section>
+  const user = auth.currentUser;
+  const userEmail = user?.email || `${storeId}@ecodata.com`;
+  const userName = user?.displayName || "Guest User";
 
-
-
-
-  <script type="module">
-    import { db } from ".firebase.config.js";
-
-    const ECODATA_API_BASE = "https//ecodata-app.onrender.com"
-
-    const API_BASE = `${ECODATA_API_BASE}/api/create-store`
-
-    const btn = document.getElementById("createStoreBtn");
-    const linkBox = document.getElementById("storeLinkBox");
-    const linkText = document.getElementById("storeLinkText");
-    const copyBtn = document.getElementById("copyBtn");
-
-
-    btn.addEventListener("click", async () => {
-      const storeName = document.getElementById("storeName").value.trim();
-
-      if(!storeName){
-        alert("Enter store name");
-        return;
-      }
-
-      const user = auth.currentUser;
-      if(!user){
-        alert("Please login first");
-        return;
-      }
-
-      try {
-        const res = await fetch(`${API_BASE}/api/create-store`, {
-          method: "POST",
-          headers: {
-            'content-type': "application/json",
-          },
-
-          body: JSON.stringify({
-            userId: user.uid,
-            storeName
-          }),
-        });
-
-        const data = await res.json();
-
-        if(!data.success){
-          alert(data.error);
-          return;
-        }
-
-        // show link
-        linkBox.style.display = "block";
-        linkText.textContent = data.storeLink;
-
-        // save storeId
-        localStorage.setItem("storeId", data.storeId);
-      } catch(err) {
-        console.error(err);
-        alert("Server error")
-      }
+  try {
+    const res = await fetch("/api/subscription/initiate-subscription", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email: userEmail, // 🔥 later from Firebase
+        storeId,
+        plan
+      })
     });
 
-    // copy link 
-    copyBtn.addEventListener("click", () => {
-      navigator.clipboard.writeText(linkText.textContent);
-      alert("Link copied");
-    });
+    const data = await res.json();
 
-   
-  </script>
+    // ✅ FREE PLAN
+    if(data.free){
+      window.location.href = `/dashboard.html?store=${storeId}`;
+      return;
+    }
+
+    // 💰 PAID PLAN
+    if(data.paymentUrl){
+      window.location.href = data.paymentUrl;
+    }
+
+  } catch(err){
+    console.error(err);
+    alert("Something went wrong");
+  }
+}
+
+</script>
+
+
+
+
+
 </body>
 </html>

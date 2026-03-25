@@ -1,0 +1,200 @@
+
+
+/* ================= HEADER ================= */
+.store-header {
+  width: 100%;
+  max-width: 390px;
+  height: 3.9rem;
+  justify-self: center;;
+  background: rgb(223, 176, 123);
+  padding: 1px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+  border-bottom: 1px solid rgb(243, 159, 159);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  z-index: 99999;
+}
+
+.store-header .store-header-top{
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  padding-top: .2rem;
+}
+
+
+.logo img {
+ width: 3.8rem;
+ height: 3.8rem;
+ margin-top: .3rem;
+ -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
+}
+
+.logo span {
+  font-size: 14px;
+  margin: 0;
+  color: #28a745;
+  font-weight: 500;
+}
+
+
+body{
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  overflow-x: hidden;
+}
+
+/* GLOW BACKGROUND */
+body::before {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: #ff7a00;
+  filter: blur(120px);
+  top: 10px;
+  left: 20%;
+  opacity: 0.4;
+}
+
+
+
+
+
+
+
+/* plans wrapper */
+.plans-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* slider */
+.plans-slider {
+  display: flex;
+  gap: 30px;
+  transition: transform 0.5s ease;
+}
+
+/* glass card */
+.plan-card{
+  min-width: 220px;
+  padding: 20px;
+  border-radius: 20px;
+  
+  background: rgba(90, 83, 83, 0.08);
+  backdrop-filter:  blur(20px);
+  border: 1px solid rgba(255,255,255,0.1);
+
+  color: #fff;
+  text-align: center;
+  
+  transform-style: preserve-3d;
+  transform:  scale(0.85);
+  opacity: 0.5;
+  transition: transform .2s ease, box-shadow .3s ease;
+}
+
+/* Active card */
+.plan-card.active{
+  transform: scale(1.05);
+  opacity: 1;
+  z-index: 2;
+
+  box-shadow:
+  0 0 30px rgba(255, 122, 0, 0.6),
+  0 0 60px rgba(255, 122, 0, 0.3);
+}
+
+/* text */
+.price {
+  font-size: 22px;
+  margin:  10px;
+  color: #ff7a00;
+}
+
+.plan-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.plan-card li {
+  margin: 6px 0;
+  font-size: 14px;
+}
+
+/* buttons */
+.plan-card button{
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #ff7a00;
+  color: #fff;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.plan-card button:hover{
+  background: #ff9500;
+}
+
+.badge{
+  position: absolute;
+  top: -10px;
+  right: 10px;
+  background: #ff7a00;
+  padding: 5px 8px;
+  font-size: 12px;
+  border-radius: 8px;
+}
+
+.ia-badge{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: linear-gradient(45deg, orange, red);
+  color: white;
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  animation: pul 1.5s infinite;
+}
+
+.plan-card.recommended{
+  border: 2px solid orange;
+  transform: scale(1.08);
+}
+
+@keyframes pul {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100%{
+    transform: scale(1);
+  }
+}
