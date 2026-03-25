@@ -1,11 +1,15 @@
-import express, { response } from "express";
+import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import axios from "axios";
 import path from "path";
 import { fileURLToPath } from "url";
 import bodyParser from "body-parser";
-import crypto from "crypto";
+import storesRoutes from "./routes/storesRoute.js";
+import paystackWebhookRouter from "./routes/paystackWebhookRouter.js";
+import productRouter from "./routes/product.js";
+import subscriptionRouter from "./routes/subscriptionRouter.js";
+
 
 dotenv.config();
 
@@ -14,12 +18,32 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
+
+app.use(cors());
+
+
+
 // Capture raw body for Paystack signature verification
 app.use(bodyParser.json({
   verify: (req, res, buf) => {
     req.rawBody = buf;
   }
 }));
+
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "frontend")));
+
+
+
+// ROUTERS USED
+app.use("/paystack/webhook", paystackWebhookRouter);
+app.use("/api", storesRoutes);
+app.use("/api", productRouter);
+app.use("/api", subscriptionRouter);
+
+
 
 // Initialize Firebase Admin
 import admin from "firebase-admin";
@@ -34,10 +58,7 @@ admin.initializeApp({
 
 const db = admin.firestore();
 
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "frontend")));
+
 
 // 🚨 Prevent duplicate orders (Memory Cache)
 const processedOrders = new Map();
@@ -51,7 +72,7 @@ const processedOrders = new Map();
 */
 
 // Helper: common logic for buy-data (POST or GET)
-async function handleBuyDataRequest({network, recipient, pkg, size, paymentReference }) {
+export async function handleBuyDataRequest({network, recipient, pkg, size, paymentReference }) {
   if (!network || !recipient || !pkg || !paymentReference) {
     return { ok: false, status: 400, body: { success: false, message: "Missing required fields" } };
   }
@@ -71,21 +92,7 @@ async function handleBuyDataRequest({network, recipient, pkg, size, paymentRefer
 
   // 2. Verify Paystack payment
   try {
-    const verify = await axios.get(
-      `https://api.paystack.co/transaction/verify/${paymentReference}`,
-      {
-        headers: { Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}` },
-        timeout: 10000,
-      }
-    );
-
-    if (!verify.data?.data || verify.data.data.status !== "success") {
-      return {
-        ok: false,
-        status: 400,
-        body: { success: false, message: "Payment not verified by Paystack" }
-      };
-    }
+   
 
     // 3. Build SwiftData order payload
     const orderData = {
@@ -156,7 +163,11 @@ async function handleBuyDataRequest({network, recipient, pkg, size, paymentRefer
       },
     };
   }
+
 }
+
+
+
 
 // POST route
 app.post("/api/buy-data", async (req, res) => {
@@ -211,7 +222,14 @@ app.get("/api/v1/order/status/:orderIdOrRef", async (req, res) => {
 });
 
 
+// ====================================
+// PRODUCTION STORE SERVER VERIFICATION
+// ====================================
 
+
+// ======================================
+// PRODUCTION STORE SERVER VERIFICATIOIN ENDS
+// =======================================
 
 
 // =====================
@@ -334,7 +352,14 @@ async function handleAFARequest({
     // ====================
     // VERIFY PAYSTACK PAYMENT
     // ====================
-    const verification = await verifyPaystack(paymentReference);
+    const verification = await axios.get(
+  `https://api.paystack.co/transaction/verify/${paymentReference}`,
+  {
+    headers: {
+      Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
+    },
+  }
+);
 
     if (!verification.status || verification.data.status !== "success") {
       throw new Error("Payment verification failed");
@@ -439,42 +464,6 @@ app.post("/api/afa/register", async (req, res) => {
 // =======================
 //  AFA ORDER STATUS
 // =======================
-
-
-// =======================
-//  AFA ORDER STATUS
-// =======================
-app.get("/api/v1/order/status/:orderIdOrRef", async (req, res) => {
-  const { orderIdOrRef } = req.params;
-
-  try {
-    const base = (process.env.SWIFT_BASE_URL || "")
-      .replace(/\/$/, "");
-
-    const swiftUrl = `${base}/order/status/${encodeURIComponent(
-      orderIdOrRef
-    )}`;
-
-    const response = await axios.get(swiftUrl, {
-      headers: {
-        "x-api-key": process.env.SWIFT_API_KEY,
-        "Content-Type": "application/json",
-      },
-      timeout: 10000,
-    });
-
-    res.json({
-      success: true,
-      order: response.data.order,
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Error fetching order status",
-      error: error.response?.data || error.message,
-    });
-  }
-});
 
 
 
