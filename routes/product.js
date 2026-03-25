@@ -1,7 +1,7 @@
 import { express } from "express";
 import { multer }  from "multer";
-import { db } from "../firebaseAdmin.js";
-import { storage } from "firebase-admin";
+import { db } from "../frontend/firebase-config.js";
+
 
 const productRouter = express.Router();
 
