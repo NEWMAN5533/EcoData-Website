@@ -373,21 +373,26 @@
   <div class="formFillCard-top">
     <label>According to products</label>
   </div>
-  <div class="formFillCard-bottom">
-    <select name="storeType" required>
-      <option value="">Select Store Type</option>
-      <option value="fashion">Fashion</option>
-      <option value="electronics">Electronics</option>
-      <option value="food">Food</option>
-      <option value="general">General</option>
-    </select>
+  <div class="formFillCard-bottom" id="typeSelectBtn">
+    <button class="formInputCreate cretbtn">Store Type (e.g. clothes, Fashion)</button>
+    <div id="inputSelect" class="typeSelectorDiv " style="display: none;">
+      <div class="tti">Choose correctly</div>
+      <div class="storeTypeSelect">Home & Kitchen</div>
+      <div class="storeTypeSelect">Home Services</div>
+      <div class="storeTypeSelect">Health & Beauty</div>
+      <div class="storeTypeSelect">Clothes</div>
+      <div class="storeTypeSelect">Accessories</div>
+      <div class="storeTypeSelect">Laptops</div>
+      <div class="storeTypeSelect">Phones</div>
+      <div class="storeTypeSelect">Television</div>
+      <div class="storeTypeSelect">General</div>
+    </div>
   </div>
 </div>
 
 <div class="submitter">
 <button type="submit">Create Store </button>
 </div>
-
 
 
 
@@ -415,11 +420,12 @@
 
    
     
-
-   
-
-    
-
+<div class="bottom-note">
+  <p>
+    Our goal is to empower small businesses to reach more customers online by providing an easy-to-use platform for creating and sharing their own digital store, helping them grow faster without technical barriers.
+  </p>
+</div>
+  
 
 
   </div>
@@ -468,6 +474,7 @@
       <ul>
          <li data-category="Clothes"><img src="./products/Health & Beauty.jpg" alt="" loading="lazy"> Health & Beauty</li>
           <li data-category="Home"><img src="./products/kitchen.png" alt="" loading="lazy"> Home & Kitchen</li>
+          <li data-category="Home"><img src="./products/kitchen.png" alt="" loading="lazy"> Home Services</li>
         <li data-category="Clothes"><img src="./products/men5.png" alt="" loading="lazy"> Clothes</li>
 
         <li data-category="Phones" ><img src="./products/iphone.png" alt="" loading="lazy"> Phones</li>
@@ -487,15 +494,15 @@
          <h3>Terms & Conditions</h3>
       </div>
 
-        <a href="disclaimer.html">
+        <a href="#">
         <div class="termsLink active"> Disclaimer</div>
       </a>
 
-        <a href="sellerAgreement.html">
+        <a href="#">
         <div class="termsLink">Seller Agreement</div>
       </a>
   
-     <a href="return-refund.html">
+     <a href="#">
       <div class="termsLink">
           Return & Refunds Policy 
       </div>
@@ -503,7 +510,7 @@
 
 
 
-        <a href="privacy.html">
+        <a href="#">
         <div class="termsLink"> Privacy Policy</div>
       </a>
 
@@ -546,7 +553,40 @@
     } else {
       sidebar.style.left = "0px";
     }
-  } ) 
+  });
+  
+
+
+</script>
+
+<script>
+    // Store type select toggle js
+  const selectorCard = document.getElementById("inputSelect");
+  const bottomNote = document.querySelector(".bottom-note");
+  const selectorCardToggler = document.getElementById("typeSelectBtn");
+
+// add click event
+selectorCardToggler.addEventListener("click", function(e){
+e.stopPropagation(e);
+
+if(selectorCardToggler) {
+  selectorCard.style.display = "flex";
+  bottomNote.style.display = "flex";
+} else{
+  selectorCard.style.display = "none";
+  bottomNote.style.display = "flex";
+};
+
+});
+
+window.addEventListener("click", function(e) {
+  e.stopPropagation();
+
+  if(!selectorCard.contains(e.target) && !selectorCardToggler.contains(e.target)){
+    selectorCard.style.display = "none";
+  }
+})
+
 </script>
 
 <script type="module" src="createStore.js"></script>
