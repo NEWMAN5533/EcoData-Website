@@ -492,7 +492,7 @@ body {
 /*================== */
   .createStoreSidebar{
     position: fixed;
-    left: 0px;
+    left: -500px;
     top: 0;
     display: block;
     background: rgb(248, 248, 248);
