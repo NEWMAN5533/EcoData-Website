@@ -1,7 +1,8 @@
 
 :root {
-  --bg-cl: #FFF;
-  --primary-cl: #fff;
+  --bg-cl: #1e293b;
+  --bg-cl-2: #334155;
+  --border-bg-cl: rgb(255, 255, 255);
   --secondary-cl: rgb(50, 50, 190);
   --dark-cl: #0a0a0a;
   --ascent-cl: rgb(158, 97, 209);
@@ -10,9 +11,6 @@
   --card-full-tele-bg-cl: rgb(221, 19, 19);
   --card-full-airtel-bg-cl:  rgb(6, 6, 231);
   --border-cl-2: rgba(66, 66, 26, 0.226);
-  --mtn-btn: rgb(193, 196, 19);
-  --telecel-btn: rgb(180, 57, 19);
-  --airteltigo-btn: rgb(28, 46, 119);
 
 
   /***
@@ -37,20 +35,13 @@
   /**
   BORDER SOLID COLORS
   **/
-  --thin-border-1:  #0d6d5a;
-  --thin-border-2:  #830616;
-  --thin-border-3:  #b97207;
-  --thin-border-4:  #036aa7;
-  --thin-border-5:  #bba907;
-  --thin-border-6:   rgb(17, 2, 31);
-  --thin-border-7:  rgb(1, 11, 39);
-
+  --thin-border-1:  #afb8b6;
+  --thin-border-2:  #a19375;
+  --thin-border-3:  #494845;
+  --thin-border-4: rgb(231, 227, 227);
   /***
   CARD BG
   ***/
-  --card-mtn-bg:  #faba5ad0;
-  --card-tel-bg:  #fa537dd0;
-  --card-tigo-bg:  #6cbff7cb;
 }
 /* RESET */
 /* ================= RESET ================= */
@@ -80,7 +71,7 @@ body {
   max-width: 390px;
   height: 11.9rem;
   justify-self: center;;
-  background: #1e293b;
+  background: var(--bg-cl);
   padding: 1px 16px;
   display: flex;
   flex-direction: column;
@@ -354,7 +345,7 @@ body {
   align-items: center;
   justify-items: center;
   position: relative;
-  background: #1e293b;
+  background: var(--bg-cl);
   border-radius: .4rem;
   padding: 0 .4rem;
 }
@@ -364,7 +355,7 @@ body {
 .container{
  width: 100%;
     max-width: 90%;
-    background: #1e293b;
+    background: var(--bg-cl);
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
@@ -434,8 +425,7 @@ body {
   width: 100%;
   max-width: 96%;
   justify-self: center;
-  background: #334155;
-  border: 1px solid #334155;
+  background: var(--bg-cl-2);
   padding: 15px;
   border-radius: 3px;
   margin-top: 5rem;
@@ -465,6 +455,18 @@ body {
   font-size: 0.8rem;
   margin-bottom: 4px;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  transition: .2s ease;
+}
+
+.note-box li:hover{
+  background: transparent;
+}
+
+.note-box li .num{
+  width: 7px;
+  height: 7px;
+  background: rgb(76, 77, 138);
+  margin-right: .5rem;
 }
 
    .ecoshop{
@@ -481,6 +483,261 @@ body {
 
 
 
+
+
+
+
+/* ================= */
+/* SIDEBAR SECTION    */
+/*================== */
+  .createStoreSidebar{
+    position: fixed;
+    left: -500px;
+    top: 0;
+    display: block;
+    background: rgb(248, 248, 248);
+    width: 200px;
+    height: 100vh;
+    z-index: 99999999;
+    transition: .5s ease;
+  }
+
+  .createStoreSidebar .sidebarSets-top{
+    width: 100%;
+    height: 20%;
+    position: relative;
+    border-bottom: 1px solid var(--thin-border-4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sidebarSets-top .avatarImg{
+    width: 45%;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+   .sidebarSets-top .avatarImg .dot{
+    width: 19px;
+    height: 19px;
+    right: -1px;
+    position: absolute;
+    background: rgb(236, 232, 8);
+    animation: rotate360deg 4s infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 50%;
+    border-top: 5px solid rgb(255, 51, 0);
+    border-bottom: 5px solid rgb(22, 185, 35);
+    z-index: 3;
+  }
+
+ 
+
+ @keyframes rotate360deg {
+  100% {
+    transform: rotate(360deg);
+  }
+ }
+
+  .avatarImg img{
+    width: 4.5rem;
+    height: 4.5rem;
+    padding: .2rem;
+    border-radius: 50%;
+    border: 1px solid rgb(244, 244, 247);
+    background: rgb(248, 230, 214);
+    animation: scaleWidth 5s infinite;
+  }
+
+  @keyframes scaleWidth {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.02);
+    }
+    75% {
+      transform: scale(1.08);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
+
+
+
+
+
+  .sidebarSets-top .avatarName{
+    width: 55%;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .avatarName .top{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding-bottom: .3rem;
+  }
+
+  .avatarName img{
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  .avatarName .top small{
+    font-weight: 600;
+    font-size: .8rem;
+    color: rgb(117, 117, 124);
+    white-space: nowrap;
+  }
+
+  .avatarName .btom{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    position: relative;
+  }
+
+  .avatarName .btom small{
+    font-weight: 400;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: .9rem;
+    color:  rgb(94, 122, 119);
+  }
+
+  .avatarName .btom img{
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+
+
+
+  .createStoreSidebar .sidebarSets-middle{
+    width: 100%;
+    height: 50%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .sidebarSets-middle h3{
+    font-size: .87rem;
+    color: var(--btn-bg-cl);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+  }
+
+.sidebarSets-middle ul li img{
+  border-radius: 0;
+  box-shadow: none;
+  border: 1px solid rgb(247, 244, 244);
+  background: white;
+}
+
+.sidebarSets-middle ul li:hover{
+  background: none;
+}
+
+
+
+
+  .createStoreSidebar .sidebarSets-bottom{
+    width: 100%;
+    height: 30%;
+    position: relative;
+    display: flex;
+    border-top: 1px solid var(--thin-border-4);
+    flex-direction: column;
+    padding:  .5rem 0;
+  }
+
+  .sidebarSets-bottom .terms-requirements{
+    width: 100%;
+    height: max-content;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    gap: .4rem;
+    align-items: center;
+    justify-content: start;
+    box-shadow: none;
+    margin: 0;
+    padding-left: 0;
+  }
+
+  .sidebarSets-bottom  .terms-requirements .termsLink-title{
+    display: flex;
+    width: 100%;
+    height: max-content;
+    padding: .2rem;
+    padding: 0 1rem;
+    position: relative;
+  }
+
+  .sidebarSets-bottom  .termsLink-title  h3{
+    color: var(--btn-bg-cl);
+    font-size: .9rem;
+    justify-self: start;
+  }
+
+  .sidebarSets-bottom .terms-requirements a{
+    display: flex;
+    text-decoration: none;
+    flex-direction: column;
+    margin-top: .2rem;
+  }
+
+  .sidebarSets-bottom .terms-requirements .termsLink{
+    display: flex;
+    width: 100%;
+    white-space: nowrap;
+    font-size: .7rem;
+    font-weight: 500;
+    color: var(--thin-border-1);
+    background: var(--bg-cl);
+    padding: .6rem;
+    height: 1.4rem;
+    opacity: .8;
+    align-items: center;
+    border-radius: 1rem;
+    transition: .1s ease;
+  }
+
+   .sidebarSets-bottom .terms-requirements  .termsLink:hover{
+    background: var(--thin-border-2);
+    color: white;
+  }
+
+
+
+
+
+/* ================= */
+/* SIDEBAR SECTION  ENDS   */
+/*================== */
 
 
 
@@ -524,14 +781,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--bg-cl);
+  background: transparent;
  font-size: .7rem;
 
 }
 
-.dark-mode .cop-right{
-  background: var(--welcome-card-bg);
-}
+
 
 
 .foot-content .powered{
@@ -540,7 +795,7 @@ body {
   max-width: max-content;
   height: 100%;
   font-weight: 800;
-  background: var(--bg-cl);
+  background: transparent;
   padding-right: .3rem;
   color: rgb(53, 53, 104);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -553,11 +808,6 @@ body {
 
 
 
-.dark-mode .powered {
-  background: var(--welcome-card-bg);
-  color: rgb(187, 182, 182);
-}
-
 .foot-content .powered strong{
   margin-right: .2rem;
   font-weight: 500;
@@ -568,13 +818,5 @@ body {
 /*******
 FOOTER SECTION ENDS
 ****/
-
-
-
-
-
-
-
-
 
 

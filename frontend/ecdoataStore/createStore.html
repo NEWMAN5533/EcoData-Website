@@ -318,9 +318,9 @@
   </p>
 
   <ul>
-    <li> Reach more customers online</li>
-    <li> Easy product showcase</li>
-    <li> Direct WhatsApp orders</li>
+    <li><span class="num"></span> Reach more customers online</li>
+    <li><span class="num"></span>  Easy product showcase</li>
+    <li><span class="num"></span>  Direct WhatsApp orders</li>
   </ul>
 </div>
 
@@ -453,14 +453,12 @@
 <div class="createStoreSidebar">
   <div class="sidebarSets-top">
     <div class="avatarImg">
+      <div class="dot"></div>
       <img src="./icons/logoImg.png" alt="" loading="lazy">
     </div>
     <div class="avatarName">
       <div class="top">
        <small>Online Store Creation</small>
-      </div>
-      <div class="btom">
-        <img style="display: none;" src="./icons/completed.png" alt="" loading="lazy">
       </div>
     </div>
   </div>
@@ -469,15 +467,12 @@
   <div class="sidebarSets-middle">
       <h3>Create store for</h3>
       <ul>
-        <li data-category="all"> </li>
          <li data-category="Clothes"><img src="./products/Health & Beauty.jpg" alt="" loading="lazy"> Beauty & Saloons</li>
         <li data-category="Clothes"><img src="./products/men1.png" alt="" loading="lazy"> Clothes</li>
         <li data-category="Phones" ><img src="./products/iphone.png" alt="" loading="lazy"> Phones</li>
         <li data-category="Laptops"><img src="./products/com.png" alt="" loading="lazy"> Laptops</li>
         <li data-category="Home"><img src="./products/kitchen.png" alt="" loading="lazy"> Home & Kitchen</li>
         <li data-category="Shoes"><img src="./products/men11.png" alt="" loading="lazy"> Shoes</li>
-
-        <li data-category="Shoes">and more</li>
       </ul>
   </div>
 
@@ -486,170 +481,34 @@
 
   <div class="sidebarSets-bottom">
      <div class="terms-requirements">
-       <h3>Terms & Con..</h3>
-     <ul>
-      <li> <a href="return-refund.html">Return & Refunds Policy </a></li>
-      <li> <a href="privacy.html">Privacy Policy</a></li>
-     </ul>
+      <div class="termsLink-title">
+         <h3>Terms & Con..</h3>
+      </div>
+
+        <a href="disclaimer.html">
+        <div class="termsLink"> Disclaimer</div>
+      </a>
+
+        <a href="sellerAgreement.html">
+        <div class="termsLink">Seller Agreement</div>
+      </a>
+  
+     <a href="return-refund.html">
+      <div class="termsLink">
+          Return & Refunds Policy 
+      </div>
+    </a>
+
+
+
+        <a href="privacy.html">
+        <div class="termsLink"> Privacy Policy</div>
+      </a>
      </div>
   </div>
 </div>
 
 
-<style>
-  .createStoreSidebar{
-    position: fixed;
-    left: -500px;
-    top: 0;
-    display: block;
-    background: rgb(248, 248, 248);
-    width: 200px;
-    height: 100vh;
-    z-index: 99999999;
-    transition: .5s ease;
-  }
-
-  .createStoreSidebar .sidebarSets-top{
-    width: 100%;
-    height: 20%;
-    position: relative;
-    border-bottom: 1px solid rgb(240, 238, 238);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: .1rem;
-    padding: 2rem .3rem;
-  }
-
-  .sidebarSets-top .avatarImg{
-    width: 45%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    position: relative;
-    padding-left: .4rem;
-  }
-
-  .avatarImg img{
-    width: 4rem;
-    height: 4rem;
-    border-radius: 50%;
-    border: 1px solid rgb(238, 238, 240);
-  }
-
-
-
-
-
-  .sidebarSets-top .avatarName{
-    width: 55%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    padding: 1.5rem .2rem;
-    position: relative;
-  }
-
-  .avatarName .top{
-    width: 100%;
-    height: 50%;
-    margin: 0;;
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    position: relative;
-  }
-
-  .avatarName .top small{
-    font-weight: 600;
-    font-size: 1rem;
-    color: rgb(117, 117, 124);
-    margin: 0;
-    line-height: 1.1;
-    margin-top: .2rem;
-  }
-
-  .avatarName .btom{
-    width: 100%;
-    height: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    position: relative;
-  }
-
-  .avatarName .btom small{
-    font-weight: 400;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: .9rem;
-    color:  rgb(94, 122, 119);
-  }
-
-  .avatarName .btom img{
-    width: 1.8rem;
-    height: 1.8rem;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  .createStoreSidebar .sidebarSets-middle{
-    width: 100%;
-    height: 50%;
-    position: relative;
-    border-bottom: 1px solid rgb(240, 238, 238);
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
-  }
-
-  .sidebarSets-middle h3{
-    font-size: .99rem;
-    color: rgb(155, 160, 161);
-  }
-
-  .createStoreSidebar .sidebarSets-bottom{
-    width: 100%;
-    height: 30%;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    padding: 0 1rem;;
-  }
-
-  .terms-requirements{
-    width: 100%;
-    position: relative;
-  }
-
-  .terms-requirements h3{
-    color: rgb(69, 74, 80);
-    font-size: .99rem;
-  }
-
-  .terms-requirements ul{
-    list-style-type: none;
-  }
-
-  .terms-requirements li a{
-    color: rgb(61, 59, 59);
-    font-size: .8rem;
-  }
-</style>
 
 
 <!---sidebar-toggle-js---->
