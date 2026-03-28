@@ -34,6 +34,7 @@
 
   <!---css-link-->
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styleGlobal.css">
 <!---LOADER CARD---->
 <style>
   .packages small{
@@ -432,10 +433,10 @@ width: 50%;
 
   <a href="notification.html">
      <div class="notis">
-    <img class="notifity" src="./css/icons/notify (1).png" alt="" loading="lazy">
+    <img class="notifity" src="./css/icons/notify (1).png" alt="" loading="lazy" style="display: none;">
     <span id="notifyCount">2</span>
   <img class="notifity" hidden
-   src="./css/icons/notify (2).png" alt="" loading="lazy">
+   src="./css/icons/notify (3).png" alt="" loading="lazy">
   </div>
   </a>
  
@@ -449,7 +450,9 @@ width: 50%;
   </span>
 </label>
 
-<img id="cardToggler" src="./css/icons/menu-icon.png" alt="image" class="menu-icon" loading="lazy">
+<img id="cardToggler" src="./css/icons/menu-icon.png" alt="image" class="menu-icon" loading="lazy" style="background: none ;">
+
+<img id="menuDarkMode" class="menu-icon" src="./css/icons/menu-white.png" alt="image" style="background: none;">
 </div>
 </nav>
 
@@ -2692,10 +2695,12 @@ updateClock();
 </script>
 
 <!---MENU-CARD-JS-->
+<!---MENU-CARD-JS-->
 <script>
 document.addEventListener("DOMContentLoaded", ()=> {
  const cardToggler = document.getElementById("cardToggler");
-  const cardCloser = document.getElementById("closeCard");
+ const secondToggler = document.getElementById("menuDarkMode");
+const cardCloser = document.getElementById("closeCard");
 
   // toggle menucard
   cardToggler.addEventListener("click", function(e) {
@@ -2706,6 +2711,17 @@ document.addEventListener("DOMContentLoaded", ()=> {
       cardCloser.classList.add("active");
     }
   });
+
+  // secondToggler
+  secondToggler.addEventListener("click", function(e) {
+    e.stopPropagation();
+
+    if(secondToggler) {
+      cardCloser.classList.add("active");
+    } else {
+      cardCloser.classList.remove("active");
+    }
+  })
 
   // when ever clicked outside?
   window.addEventListener("click", function(e) {

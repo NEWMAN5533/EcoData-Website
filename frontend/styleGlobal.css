@@ -1,0 +1,11 @@
+
+
+  .dark-mode #cardToggler{
+    display: none;
+  }
+  #menuDarkMode{
+    display: none;
+  }
+  .dark-mode #menuDarkMode{
+    display: flex;
+  }
