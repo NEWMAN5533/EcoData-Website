@@ -34,6 +34,7 @@
 
   <!---css-link-->
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styleGlobal.css">
 
 
   <style>
@@ -292,8 +293,8 @@ Delete button
 
 
     .activeImg img{
-      width: 1.6rem;
-      height: 1.4rem;
+      width: 1.3rem;
+      height: 1.3rem;
     }
 
   .activeImg .pin{
@@ -390,7 +391,9 @@ Delete button
   </span>
 </label>
 
-<img id="cardToggler" src="./css/icons/menu-icon.png" alt="image" class="menu-icon" loading="lazy">
+<img id="cardToggler" src="./css/icons/menu-icon.png" alt="image" class="menu-icon" loading="lazy" style="background: none ;">
+
+<img id="menuDarkMode" class="menu-icon" src="./css/icons/menu-white.png" alt="image" style="background: none;">
 </div>
 </nav>
 
@@ -597,9 +600,9 @@ Delete button
   <div class="bottom-navbar" id="navIconDiv">
     <div class="btom-navIcon" onclick="window.location.href='index.html'">
       <div class="activeImg " id="activeMtn">
-        <img src="./css/icons/mtn-signal.png" alt="" loading="lazy">
+        <img src="./css/icons/home.png" alt="" loading="lazy">
       </div>
-      <small class="bottomIcon-textNav">MTN</small>
+      <small class="bottomIcon-textNav">Home</small>
     </div>
 
     
@@ -614,7 +617,7 @@ Delete button
 
 
      <div class="ecodataShopBtn" id="shopBtnFixed">
-       <div class="shop-fixedBtn" onclick="window.location.href='./ecdoataStore/ecoshop.html'">
+       <div class="shop-fixedBtn" onclick="window.location.href='./ecdoataStore/createStore.html'">
     <img class="pin" src="./css/icons/logoImg.png" alt="" loading="lazy">
     </div>
    
@@ -685,10 +688,12 @@ Delete button
 
 
 <!---MENU-CARD-JS-->
+<!---MENU-CARD-JS-->
 <script>
 document.addEventListener("DOMContentLoaded", ()=> {
  const cardToggler = document.getElementById("cardToggler");
-  const cardCloser = document.getElementById("closeCard");
+ const secondToggler = document.getElementById("menuDarkMode");
+const cardCloser = document.getElementById("closeCard");
 
   // toggle menucard
   cardToggler.addEventListener("click", function(e) {
@@ -699,6 +704,17 @@ document.addEventListener("DOMContentLoaded", ()=> {
       cardCloser.classList.add("active");
     }
   });
+
+  // secondToggler
+  secondToggler.addEventListener("click", function(e) {
+    e.stopPropagation();
+
+    if(secondToggler) {
+      cardCloser.classList.add("active");
+    } else {
+      cardCloser.classList.remove("active");
+    }
+  })
 
   // when ever clicked outside?
   window.addEventListener("click", function(e) {
