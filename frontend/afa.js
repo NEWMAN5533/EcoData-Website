@@ -1,4 +1,4 @@
-// ==========================
+// ========================
 // AFA CONFIG
 // ==========================
 const AFA_PRICE_GHS = 20; // Make sure backend matches this
