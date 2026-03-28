@@ -1,7 +1,7 @@
 
 :root {
-  --bg-cl: #1e293b;
-  --bg-cl-2: #334155;
+  --bg-cl: #1b2057;
+  --bg-cl-2: #1f314b;
   --border-bg-cl: rgb(255, 255, 255);
   --secondary-cl: rgb(50, 50, 190);
   --dark-cl: #0a0a0a;
@@ -28,7 +28,10 @@
   --welcome-card-bg-2: rgb(24, 5, 5);
   --welcome-card-border: rgb(74, 88, 94);
   --thin-border: rgb(35, 48, 49);
-  --text-cl: rgb(145, 168, 164);
+
+
+  
+  --text-cl: rgb(248, 248, 248);
   --text-cl-2: rgb(210, 216, 216);
   --text-cl-3: rgb(139, 141, 141);
 
@@ -110,7 +113,7 @@ body {
   justify-content: space-between;
   position: relative;
   padding-top: .2rem;
-  border-bottom: 1px solid rgba(136, 134, 134, 0.295);;
+  border-bottom: 1px solid rgba(230, 227, 227, 0.295);;
 }
 
 
@@ -128,7 +131,7 @@ body {
 .store-header-top-top .logo img{
   width: 3.5rem;
   height: 3.4rem;
-  background: rgb(36, 43, 46);
+  background: rgba(43, 54, 71, 0.116);
   border-radius: 50%;
   padding: .2rem;
 }
@@ -169,8 +172,8 @@ body {
   font-size: .96rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 100 !important;
-  color: white;
-  opacity: .9;
+  color: var(--text-cl);
+  opacity: .99;
 }
 
 
@@ -195,7 +198,8 @@ body {
 }
 
 .store-header-bottom h2{
-  color: rgb(83, 130, 136);
+  color: var(--text-cl-2);
+  opacity: .8;
   margin-bottom: 1rem;
   font-size: 1rem;
   font-family: "Poppins", sans-serif;
@@ -216,45 +220,7 @@ body {
   user-select: none;
 }
 
-.logo span {
-  font-size: 14px;
-  margin: 0;
-  color: #28a745;
-  font-weight: 500;
-}
 
-/* NAVIGATION */
-.main-nav {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  width: max-content;
-  height: 2.2rem;
-}
-
-.main-nav a {
-  text-decoration: none;
-  color: #333;
-  font-size: 12px;
-  display: flex;
-  text-align: center;
-  justify-items: center;
-  align-items: center;
-  gap: .2rem;
-  font-weight: 500;
-  transition: 0.3s;
-}
-
-.main-nav a img{
-  width: 1.2rem;
-  height: 1.2rem;
-}
-
-.main-nav a:hover {
-  color: #2898a7;
-}
 
 /* HEADER ACTIONS */
 .header-actions {
@@ -263,29 +229,13 @@ body {
   gap: 20px;
 }
 
-.header-actions input {
-  padding: 9px 15px;
-  border-radius: 25px;
-  border: 1px solid #ddd;
-  width: 230px;
-  background: #f9f9f9;
-  outline: none;
-  transition: 0.3s;
-}
 
-.header-actions input:focus {
-  background: #fff;
-  border-color: #28a745;
-}
+
 
 
 /*================
 / MAIN SECTION
-/*================
-
-
-
-/* ================= HEADER ================= */
+/*================ */
 
 
 
@@ -320,12 +270,11 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0;
-  padding: .1rem;
-  background: rgb(255, 255, 255);
+  background: white;
   position: relative;
   margin-top: 1rem;
-  border-radius: .4rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.19);
+  border-radius: .5rem;
+  box-shadow: 0 2px 6px rgba(80, 78, 78, 0.39);
 }
 
 .formFillCard .formFillCard-top{
@@ -347,11 +296,131 @@ body {
   align-items: center;
   justify-items: center;
   position: relative;
-  background: var(--bg-cl);
-  border-radius: .4rem;
+  background: var(--bg-cl-2);
+  border-radius: .5rem;
   padding: 0 .4rem;
   cursor: pointer;
 }
+
+
+
+
+
+  .container h2{
+    color: rgb(230, 227, 227);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+#storeForm label{
+  font-size: .9rem;
+  color: rgb(146, 145, 145);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+ 
+.formInputCreate{
+  display: flex;
+  width: 90%;
+  height: 2.7rem;
+}
+
+.formFillCard-bottom .formInputCreate{
+  color: rgb(252, 249, 249);
+  font-weight: 500;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background: rgb(54, 63, 94);
+  border-radius: .3rem;
+
+}
+
+
+.formFillCard-bottom .formInputCreate::placeholder{
+  color: white;
+  opacity: .5;
+  font-weight: 300;
+}
+
+  .formInputCreate, select{
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+  }
+
+  .formInputCreate[type="file"]{
+    background: rgb(245, 243, 243);
+    color: black;
+  }
+
+.formInputCreate::placeholder{
+    opacity: .6;
+  }
+
+  .submitter{
+    width: 100%;
+    height: 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    position: relative;
+    margin-top: 2rem;
+    background: rgb(238, 238, 238);
+    border: 1px solid white;
+    border-radius: 1rem;
+  }
+
+  button{
+    width: 100%;
+    max-width: 90%;
+    justify-self: center;
+    padding: 12px;
+    background: linear-gradient(45deg, orange, rgb(255, 72, 0));
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1.01rem;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+
+  button:hover{
+    opacity: 0.9;
+  }
+
+  .result{
+    margin-top: 20px;
+    display: none;
+    background: #020617;
+    padding: 15px;
+    border-radius: 10px;
+  }
+
+  .link-box{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .formInputCreate{
+    flex: 1;
+    background: #334155;
+    color: white;
+  }
+
+  .copy-btn{
+    background: green;
+  }
+
+  .success{
+    color: lightgreen;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
 
 
 
