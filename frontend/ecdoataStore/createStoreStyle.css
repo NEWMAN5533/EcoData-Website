@@ -646,7 +646,6 @@ body {
   border-radius: 0;
   box-shadow: none;
   border: 1px solid rgb(247, 244, 244);
-  background: white;
   width: 2rem;
   height: 2rem;
 }
@@ -668,6 +667,8 @@ body {
     padding:  .5rem 0;
     overflow-y: auto;
   }
+
+  
 
   .sidebarSets-bottom .terms-requirements{
     width: 100%;
