@@ -6,6 +6,7 @@
   <title>Ecodata | Bundles Info</title>
   <link rel="stylesheet" href="bundles.css" />
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styleGlobal.css">
 </head>
 
 <style>
@@ -652,49 +653,6 @@ BUTTONS STYLES
 
  <script src="bundles.js"></script>
 
-
-
-
- <!-----DARK-MODE JS-->
-<script>
-  const toggle = document.getElementById("themeToggle");
-  const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-  const savedTheme = localStorage.getItem("theme");
-
-  function applyTheme(theme) {
-    if (theme === "dark") {
-      document.body.classList.add("dark-mode");
-      toggle.checked = true;
-    } else {
-      document.body.classList.remove("dark-mode");
-      toggle.checked = false;
-    }
-  }
-
-  if (savedTheme) {
-    applyTheme(savedTheme);
-  } else {
-    applyTheme(systemPrefersDark ? "dark" : "light");
-  }
-
-  toggle.addEventListener("change", () => {
-    if (toggle.checked) {
-      localStorage.setItem("theme", "dark");
-      applyTheme("dark");
-    } else {
-      localStorage.setItem("theme", "light");
-      applyTheme("light");
-    }
-  });
-
-  // Auto-change if system theme changes and user has no preference
-  window.matchMedia("(prefers-color-scheme: dark)").addListener(e => {
-    if (!localStorage.getItem("theme")) {
-      applyTheme(e.matches ? "dark" : "light");
-    }
-});
-</script>
 
 </body>
 </html>
