@@ -1,5 +1,5 @@
 
-
+/* MENU ICON DARK & WHITE MODE */
   .dark-mode #cardToggler{
     display: none;
   }
@@ -9,3 +9,20 @@
   .dark-mode #menuDarkMode{
     display: flex;
   }
+
+  img{
+    -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
+  }
+
+  button{
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
+  }
+
