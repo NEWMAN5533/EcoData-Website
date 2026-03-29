@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login | EcoData</title>
-  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="globalStyle.css">
   <link rel="stylesheet" href="signUpStyle.css">
 
@@ -56,7 +55,7 @@
 </div>
     
 <div class="already">
- <p>Already have an account? <button class="alloginBtn" onclick="window.location.href = 'signup.html'" >Sign Up</button></p>
+ <p>Already have an account? <button class="alloginBtn" onclick="window.location.href = 'signUp.html'" >Sign Up</button></p>
 </div>
    
 
@@ -192,9 +191,7 @@ loginForm.addEventListener("submit", async (e) => {
 
     // 🔥 Redirect based on role
     setTimeout(() => {
-
-
-
+      window.location.href = 'createStore.html';
     }, 3500);
 
   } catch (error) {
