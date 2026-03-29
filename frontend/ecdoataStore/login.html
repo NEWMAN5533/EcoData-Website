@@ -190,9 +190,12 @@ loginForm.addEventListener("submit", async (e) => {
     showSnackBar("Login successful!", "success");
 
     // 🔥 Redirect based on role
-    setTimeout(() => {
-      window.location.href = 'createStore.html';
-    }, 3500);
+     if (userData.role === "agent") {
+        window.location.href = "agentPage.html";
+      } else {
+        window.location.href = "createStore.html";
+      }
+
 
   } catch (error) {
 
