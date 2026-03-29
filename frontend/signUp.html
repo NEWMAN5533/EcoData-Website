@@ -3,23 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login | EcoData</title>
-  <link rel="stylesheet" href="globalStyle.css">
+  <title>Sign Up | EcoData</title>
   <link rel="stylesheet" href="signUpStyle.css">
+
 
 </head>
 <body>
 
-  <!-----NAVIGATION- BAR-->
+  <!-----NAVIGATION BAR----->
+
   
 <nav class="navbar">
 <div class="nav-left">
- <h3>Login</h3>
+  <h3>Register</h3>
 </div>
 
-
 </nav>
-
 
 <section class="top-bg">
   <div class="hero-logo">
@@ -27,25 +26,30 @@
   </div>
 </section>
 
+  <div class="container" >
+    <h2>Create New Account</h2>
+    <form id="signup-form">
 
-  <div class="container">
-    <h2>Welcome Back! <br> Please Login to Your Account</h2>
+      
+<div class="formFillCard">
+  <div class="formFillCard-top">
+    <label> User Name</label>
+  </div>
+  <div class="formFillCard-bottom">
+   <input class="formInputCreate" type="text" id="username" placeholder="Username" required />
+  </div>
+</div>
 
-
-
-    <form id="login-form">
-
-     <div class="formFillCard">
+<div class="formFillCard">
   <div class="formFillCard-top">
     <label> Email Address</label>
   </div>
   <div class="formFillCard-bottom">
    <input class="formInputCreate" type="email" id="email" placeholder="Email" required />
   </div>
-     </div>
+</div>
 
-
-  <div class="formFillCard">
+<div class="formFillCard">
   <div class="formFillCard-top">
     <label>Password</label>
   </div>
@@ -53,23 +57,21 @@
       <input class="formInputCreate" type="password" id="password" placeholder="Choose Password" required />
   </div>
 </div>
-    
+
 <div class="already">
- <p>Already have an account? <button class="alloginBtn" onclick="window.location.href = 'signUp.html'" >Sign Up</button></p>
+ <p>Already have an account? <button class="alloginBtn" onclick="window.location.href = 'login.html'" >Login</button></p>
 </div>
    
 
-      <button class="signUpBtn" id="logBtn" type="submit">
+
+  <button class="signUpBtn"  id="signBtn" type="submit">
         <span class="spinner"></span>
-        <span class="btn-text">Login</span>
-      </button>
+        <span class="btn-text">Sign Up</span>
+  </button>
 
 
     </form>
 
-
-
-   
   </div>
 
  <section class="foot">
@@ -89,8 +91,6 @@
 
   </section>
 
-<!----SNACKBAR-SECTION----->
-  
 
 
 
@@ -99,19 +99,24 @@
 
 
 
+
+
+
+
+<!-- Firebase Core -->
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import {
   getAuth,
-  signInWithEmailAndPassword,
-  onAuthStateChanged
+  createUserWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
 import {
   getFirestore,
   doc,
-  getDoc
+  setDoc,
+  serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
 
@@ -126,86 +131,68 @@ const firebaseConfig = {
 };
 
 
-// 🔹 Initialize
+// 🔹 Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
 
-// 🔹 Display username when logged in
-onAuthStateChanged(auth, async (user) => {
-
-  const usernameDisplay = document.getElementById("usernameDisplay");
-  if (!usernameDisplay) return;
-
-  if (user) {
-
-    const userDoc = await getDoc(doc(db, "users", user.uid));
-
-    if (userDoc.exists()) {
-      const userData = userDoc.data();
-      usernameDisplay.textContent = `Welcome, ${userData.username}!`;
-    } else {
-      usernameDisplay.textContent = "Welcome!";
-    }
-
-  } else {
-    usernameDisplay.textContent = "Welcome, Guest!";
-  }
-
-});
+// 🔹 Signup form
+const signupForm = document.getElementById("signup-form");
+const sinBtn = document.getElementById("signBtn");
 
 
-// 🔹 Login
-const loginForm = document.getElementById("login-form");
-const logBtn = document.getElementById("logBtn");
-
-loginForm.addEventListener("submit", async (e) => {
-
+signupForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-  logBtn.classList.add("loading");
 
+  sinBtn.classList.add("loading");
+
+  const username = document.getElementById("username").value.trim();
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
 
+  if (!username || !email || !password) {
+    showSnackBar("Please fill all fields", "warning");
+    sinBtn.classList.remove("loading");
+    return;
+  }
+
   try {
 
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    // 🔹 Create user
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
 
-    const userDoc = await getDoc(doc(db, "users", user.uid));
+    // 🔹 Save user profile to Firestore
+    await setDoc(doc(db, "users", user.uid), {
+      uid: user.uid,
+      username: username,
+      email: email,
+      role: "user",          // later can become "agent"
+      balance: 0,
+      createdAt: serverTimestamp()
+    });
 
-    if (!userDoc.exists()) {
-      showSnackBar("User profile not found.", "error");
-      logBtn.classList.remove("loading");
-      return;
-    }
+    showSnackBar("Signup successful!", "success");
 
-    const userData = userDoc.data();
-
-    // Save locally
-    localStorage.setItem("username", userData.username || "User");
-    localStorage.setItem("role", userData.role || "user");
-
-    showSnackBar("Login successful!", "success");
-
-    // 🔥 Redirect based on role
-     if (userData.role === "agent") {
-        window.location.href = "agentPage.html";
-      } else {
-        window.location.href = "createStore.html";
-      }
-
+    setTimeout(() => {
+      window.location.href = "createStore.html";
+    }, 3500);
 
   } catch (error) {
 
-    showSnackBar(error.message, "error");
-
+    if(error.code === "auth/email-already-in-use"){
+      showSnackBar("This email is already registered. Login instead", "error")
+    } else{
+      showSnackBar(error.message, "error");
+    }
+   
   }
 
-  logBtn.classList.remove("loading");
+  sinBtn.classList.remove("loading");
 
 });
+
 
 
 /* ============================= */
@@ -229,11 +216,11 @@ function showSnackBar(message, type = "info", duration = 4000) {
     `;
 
     document.body.appendChild(snackbar);
-
   }
 
   snackbar.querySelector(".snackbar-text").textContent = message;
 
+  // color types
   if (type === "success") snackbar.style.background = "rgba(7,29,26,0.95)";
   else if (type === "error") snackbar.style.background = "#dc3545";
   else if (type === "warning") snackbar.style.background = "#ffc107";
@@ -258,9 +245,10 @@ function showSnackBar(message, type = "info", duration = 4000) {
 
 </script>
 
+  
 
 
-
+  
 
 </body>
 </html>

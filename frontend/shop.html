@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoData Store | Quality Products Online</title>
+  <meta name="description" content="Shop quality clothes, phones, laptops, home & kitchen products at EcoData Store. Fast nationwide delivery.">
+  <link rel="stylesheet" href="./style.css">
+  <!---MATERIAL ICON-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<style>
+  .become{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: .9rem !important;
+    font-weight: 600;
+    opacity: .8;
+    -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
+  }
+
+  .hero-img img{
+    animation: none;
+    width: 110%;
+    height: 90%
+  }
+
+  /****
+  VIEW ALL
+  ****/
+ 
+
+  .resultCount{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: rgb(116, 123, 126);
+    background: rgb(233, 233, 236);
+    padding: .1rem .6rem;
+    border-radius: .2rem;
+    font-size: .8rem;
+  }
+
+  .resultCount .count{
+    background-color: white;;
+    padding: .1rem .4rem;
+    border-radius: 4px;
+    color: rgb(29, 25, 25);
+    border: 1px solid rgb(211, 205, 205);
+  }
+  
+
+
+
+
+</style>
+<body>
+ 
+  <!---MAIN-CONTAINER--------->
+
+
+  <!-- 🔝 TOP INFO BAR -->
+
+
+  <!-- 🏬 MAIN HEADER -->
+  <header class="store-header">
+    <div class="store-header-top">
+
+        <!-- LOGO -->
+    <div class="logo">
+     <a href="ecoshop.html">
+       <img src="./icons/logoImg.png" alt="" loading="lazy">
+     </a>
+    </div>
+       <div class="header-actions">
+      <div class="cart-icon" onclick="window.location.href='cart.html'">
+        <img src="./icons/totalorder.png" alt=""> <span id="cartCount">0</span>
+      </div>
+    </div>
+    </div>
+    <div class="store-header-bottom">
+          <!-- NAVIGATION -->
+    <nav class="main-nav">
+      
+      <a href="ecoshop.html"><img src="./icons/home.png" alt=""> Home</a>
+    </nav>
+
+    <!---menu-icon-->
+    <img id="toggleSidebar" src="./icons/menu-icon.png" alt="">
+    </div>
+
+  </header>
+
+
+  <section class="main-shop-container">
+     <!-- 🎯 HERO SECTION -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h2>Shop the best <br> from our trusted sellers</h2>
+      <img src="./icons/market.png" alt="">
+      <p>Phones, Clothes, Laptops, Home & Kitchen & More</p>
+      <button class="become" onclick="window.location.href = 'sellerAgreement.html'">Become Seller</button>
+    </div>
+    <div class="hero-img">
+      <img src="./products/men3.png" alt="" loading="lazy">
+    </div>
+  </section>
+
+  <!-- 🏪 SHOP SECTION -->
+  <section class="shop-wrapper" id="products">
+
+
+
+    <!-- PRODUCTS AREA -->
+    <div class="products-area">
+
+      <div class="filter-bar">
+      <span class="resultCount" id="resultsCount">Showing products <small class="count">10</small></span></span>
+
+      <section class="sortBy">
+        <button class="sort-option" id="sortBtn">
+        sort by
+      </button>
+      <div class="sort-selection" id="sortSelectorCard">
+        <div class="sort " data-sort="low Price">
+        Low Price
+      </div>
+      <div class="sort sor2" data-sort="high Price">
+        High Price
+      </div>
+      </div>
+      </section>
+      </div>
+      <!---TITLE-->
+      <section class="section-title">
+      <h1>New Arrivals</h1>
+      </section>
+
+      <!-- PRODUCT GRID -->
+      <div class="product-grid-container">
+
+        <!---PRODUCT-1-->
+        <div class="product-card-div">
+          <div class="product-top">
+            <img src="./products/Health & Beauty.jpg" alt="" loading="lazy">
+          </div>
+          <div class="product-bottom">
+          <div class="product-btom-top">
+                <div class="pdetail">
+              Makari Naturalle Caroto... 
+            </div>
+                  <div class="price">
+                GHS 150
+                 <div class="rating"> 
+                 <span class="countSold"> 4 sold</span>
+                <i class="material-icons">star</i> 
+               <small class="countRating">4.0</small>
+                </div>
+            </div>
+            </div>
+            
+          </div>
+        </div>
+        <!---product-2-->
+         <div class="product-card-div">
+          <div class="product-top">
+            <img src="./products/men2.png" alt=""  loading="lazy">
+          </div>
+          <div class="product-bottom">
+           <div class="product-btom-top">
+                <div class="pdetail">
+                Men's Linen Shirt Casual... 
+            </div>
+                  <div class="price">
+                GHS 90
+                 <div class="rating"> 
+                 <span class="countSold"> 5 sold</span>
+                <i class="material-icons">star</i> 
+               <small class="countRating">4.2</small>
+                </div>
+            </div>
+            </div>
+            
+          </div>
+        </div>
+
+         <div class="product-card-div">
+          <div class="product-top">
+            <img src="./products/men5.png" alt="" loading="lazy">
+          </div>
+          <div class="product-bottom">
+            <div class="product-btom-top">
+                <div class="pdetail">
+              3d Print Kids Shirt Sets... 
+            </div>
+                  <div class="price">
+                GHS 230
+                 <div class="rating"> 
+                 <span class="countSold"> 1 sold</span>
+                <i class="material-icons">star</i> 
+               <small class="countRating">4.0</small>
+                </div>
+            </div>
+            </div>
+            
+          </div>
+        </div>
+
+         <div class="product-card-div" onclick="window.location.href='product-detail.html'">
+          <div class="product-top">
+            <img src="./products/men6.png" alt="" loading="lazy">
+          </div>
+          <div class="product-bottom">
+         
+            
+               <div class="product-btom-top">
+                <div class="pdetail">
+              Men's top Shirt Floral to... 
+            </div>
+                  <div class="price">
+                GHS 320
+                 <div class="rating"> 
+                 <span class="countSold"> 5 sold</span>
+                <i class="material-icons">star</i> 
+               <small class="countRating">4.5</small>
+                </div>
+            </div>
+            </div>
+
+
+          </div>
+        </div>
+
+        <!--FIRST SECTION ENDS-->
+      </div>
+
+      <div class="section-title title-middle">
+        <h1><img src="./icons/calender.png" alt=""> shop Halal </h1>
+      </div>
+
+       <!-- PRODUCT GRID -->
+      <div class="product-grid-container">
+
+
+             <div class="product-card-div">
+          <div class="product-top">
+            <img src="./muslims/product (1).jpeg" alt="" loading="lazy">
+          </div>
+          <div class="product-bottom">
+             <div class="product-btom-top">
+                <div class="pdetail">
+              Prayer Mat, Jalabab, Qur... 
+            </div>
+                  <div class="price">
+                GHS 390
+                 <div class="rating"> 
+                 <span class="countSold"> 18 sold</span>
+                <i class="material-icons">star</i> 
+               <small class="countRating">4.0</small>
+                </div>
+            </div>
+            </div>
+          </div>
+        </div>
+
+        
+         <div class="product-card-div">
+          <div class="product-top">
+            <img src="./muslims/product (10).jpeg" alt="" loading="lazy">
+          </div>
+          <div class="product-bottom">
+              <div class="product-btom-top">
+                <div class="pdetail">
+              Long Sleeve Jalabab in ... 
+            </div>
+                  <div class="price">
+                GHS 230
+                 <div class="rating"> 
+                 <span class="countSold"> 6 sold</span>
+                <i class="material-icons">star</i> 
+               <small class="countRating">3.2</small>
+                </div>
+            </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="product-card-div">
+          <div class="product-top">
+            <img src="./products/muslim5.png" alt="" loading="lazy">
+          </div>
+          <div class="product-bottom">
+            <div class="product-btom-top">
+                <div class="pdetail">
+              Muslim Kaftan Dress... 
+            </div>
+                  <div class="price">
+                GHS 1,530
+                 <div class="rating"> 
+                 <span class="countSold"> 9 sold</span>
+                <i class="material-icons">star</i> 
+               <small class="countRating">4.4</small>
+                </div>
+            </div>
+            </div>
+          </div>
+        </div>
+
+         <div class="product-card-div">
+          <div class="product-top">
+            <img src="./muslims/product (12).jpeg" alt="" loading="lazy">
+          </div>
+          <div class="product-bottom">
+            <div class="product-btom-top">
+                <div class="pdetail">
+              Men's Full Length Islami... 
+            </div>
+                  <div class="price">
+                GHS 750
+                 <div class="rating"> 
+                 <span class="countSold"> 8 sold</span>
+                <i class="material-icons">star</i> 
+               <small class="countRating">3.0</small>
+                </div>
+            </div>
+            </div>
+          </div>
+        </div>
+
+         <div class="product-card-div">
+          <div class="product-top">
+            <img src="./muslims/product (13).jpeg" alt="" loading="lazy">
+          </div>
+          <div class="product-bottom">
+            <div class="product-btom-top">
+                <div class="pdetail">
+              Ramadan Modest Wom... 
+            </div>
+                  <div class="price">
+                GHS 520
+                 <div class="rating"> 
+                 <span class="countSold"> 11 sold</span>
+                <i class="material-icons">star</i> 
+               <small class="countRating">4.5</small>
+                </div>
+            </div>
+            </div>
+          </div>
+        </div>
+
+         <div class="product-card-div">
+          <div class="product-top">
+            <img src="./muslims/product (2).jpeg" alt="" loading="lazy">
+          </div>
+          <div class="product-bottom">
+            <div class="product-btom-top">
+                <div class="pdetail">
+              Ramadan Gift Package... 
+            </div>
+                  <div class="price">
+                GHS 360
+                 <div class="rating"> 
+                 <span class="countSold"> 3 sold</span>
+                <i class="material-icons">star</i> 
+               <small class="countRating">4.0</small>
+                </div>
+            </div>
+            </div>
+          </div>
+        </div>
+
+         <div class="product-card-div">
+          <div class="product-top">
+            <img src="./muslims/product (17).jpeg" alt="" loading="lazy">
+          </div>
+          <div class="product-bottom">
+            <div class="product-btom-top">
+                <div class="pdetail">
+              Personalised Mussallah... 
+            </div>
+                  <div class="price">
+                GHS 120
+                 <div class="rating"> 
+                 <span class="countSold"> 7 sold</span>
+                <i class="material-icons">star</i> 
+               <small class="countRating">3.4</small>
+                </div>
+            </div>
+            </div>
+          </div>
+        </div>
+
+         <div class="product-card-div">
+          <div class="product-top">
+            <img src="./muslims/product (18).jpeg" alt="" loading="lazy">
+          </div>
+          <div class="product-bottom">
+            <div class="product-btom-top">
+                <div class="pdetail">
+              Beautiful Square Padded... 
+            </div>
+                  <div class="price">
+                GHS 110
+                 <div class="rating"> 
+                 <span class="countSold"> 15 sold</span>
+                <i class="material-icons">star</i> 
+               <small class="countRating">4.0</small>
+                </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <!-- PAGINATION -->
+      <div class="pagination">
+        <button>Previous</button>
+        <button class="active">1</button>
+        <button>2</button>
+        <button>Next</button>
+      </div>
+
+
+
+    </div>
+
+  </section>
+
+
+  <section class="whatsapp" style="display: none;">
+      <!-- 📲 FLOATING WHATSAPP BUTTON -->
+  <a href="https://wa.me/233552944424" class="whatsapp-float" target="_blank">
+    <img src="./icons/whats admin.jpg" alt="" >
+  </a>
+
+  </section>
+
+
+ 
+
+
+
+
+
+  </section>
+  <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <h3>Categories</h3>
+      <ul>
+        <li data-category="all"> All Products</li>
+        <li data-category="Clothes"><img src="./products/men1.png" alt="" loading="lazy"> Clothes</li>
+        <li data-category="Phones" ><img src="./products/iphone.png" alt="" loading="lazy"> Phones</li>
+        <li data-category="Laptops"><img src="./products/com.png" alt="" loading="lazy"> Laptops</li>
+        <li data-category="Home"><img src="./products/kitchen.png" alt="" loading="lazy"> Home & Kitchen</li>
+        <li data-category="Shoes"><img src="./products/men11.png" alt="" loading="lazy"> Shoes</li>
+      </ul>
+
+     <div class="terms-requirements">
+       <h3>Terms & Conditions</h3>
+       <div class="overflow-x-div">
+         
+      <div class="links"><a href="disclaimer.html">Disclaimer</a></div>
+      <div class="links"><a href="info.html"> Services Info</a></div>
+      <div class="links"><a href="sellerAgreement.html">Seller Agreement</a></div>
+      <div class="links"><a href="return-refund.html">Return & Refund Policy</a></div>
+      <div class="links"><a href="privacy.html">Privacy Policy</a></div>
+  
+       </div>
+   
+     </div>
+    </aside>
+   
+ 
+
+   
+ <section class="foot">
+   <div class="foot-content">
+    <div class="cop-right">
+ © 2026 EcoShop. All rights reserved.
+     
+    </div>
+   <small class="bor
+   ">|</small>
+      <small class="powered">
+        
+      <strong>Powered by:</strong>   IA E-Business 
+    </small>
+  
+   </div>
+
+  </section>
+
+  <script src="shop.js"></script>
+
+  <script>
+    function scrollToProducts() {
+      document.getElementById("products").scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+  </script>
+
+</body>
+</html>
