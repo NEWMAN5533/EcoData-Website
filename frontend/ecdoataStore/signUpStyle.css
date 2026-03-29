@@ -65,11 +65,16 @@
   display: flex;
   align-items: center;
   justify-content: start;
-  margin-left: -.7rem !important;
+  margin-left: -.6rem !important;
 }
 
 .nav-left img{
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
 }
 
 .nav-right h3{
@@ -114,6 +119,7 @@
   background: var(--background-cl);
   border-radius: 50%;
   cursor: pointer;
+
 }
 
 .menu-icon{
