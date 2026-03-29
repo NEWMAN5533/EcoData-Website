@@ -15,7 +15,10 @@
   
 <nav class="navbar">
 <div class="nav-left">
-  <h3>Register</h3>
+ <img onclick="window.location.href = 'login.html'" src="./uiIcons/back.png" alt="" loading="lazy">
+</div>
+<div class="nav-right">
+ <h3>Register</h3>
 </div>
 
 </nav>
@@ -174,10 +177,8 @@ signupForm.addEventListener("submit", async (e) => {
     });
 
     showSnackBar("Signup successful!", "success");
-
-    setTimeout(() => {
       window.location.href = "createStore.html";
-    }, 3500);
+  
 
   } catch (error) {
 

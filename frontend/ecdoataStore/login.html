@@ -14,9 +14,11 @@
   
 <nav class="navbar">
 <div class="nav-left">
+<img onclick="window.location.href = 'createStore.html'" src="./uiIcons/back.png" alt="" loading="lazy">
+</div>
+<div class="nav-right">
  <h3>Login</h3>
 </div>
-
 
 </nav>
 
@@ -190,11 +192,7 @@ loginForm.addEventListener("submit", async (e) => {
     showSnackBar("Login successful!", "success");
 
     // 🔥 Redirect based on role
-     if (userData.role === "agent") {
-        window.location.href = "agentPage.html";
-      } else {
-        window.location.href = "createStore.html";
-      }
+    window.location.href = "createStore.html";
 
 
   } catch (error) {
