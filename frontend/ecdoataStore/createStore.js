@@ -29,9 +29,9 @@ const db = getFirestore(app);
 // =============
 onAuthStateChanged(auth, (user) => {
   if(!user) {
-    showSnackBar("Please login first")
+    showSnackBar("Please login first");
   }
-})
+});
 
 
 
@@ -164,3 +164,56 @@ window.subscribe = async function(plan) {
 
 
 
+
+
+/* ============================= */
+/*        SNACKBAR SYSTEM        */
+/* ============================= */
+
+let snackbarTimeout = null;
+
+function showSnackBar(message, type = "info", duration = 4000) {
+
+  let snackbar = document.querySelector(".snackbar");
+
+  if (!snackbar) {
+
+    snackbar = document.createElement("div");
+    snackbar.className = "snackbar";
+
+    snackbar.innerHTML = `
+      <span class="snackbar-text"></span>
+      <div class="snackbar-progress"></div>
+    `;
+
+    document.body.appendChild(snackbar);
+
+  }
+
+  snackbar.querySelector(".snackbar-text").textContent = message;
+
+  if (type === "success") snackbar.style.background = "rgba(7,29,26,0.95)";
+  else if (type === "error") snackbar.style.background = "#dc3545";
+  else if (type === "warning") snackbar.style.background = "#ffc107";
+  else snackbar.style.background = "rgba(7,29,26,0.95)";
+
+  const progress = snackbar.querySelector(".snackbar-progress");
+
+  progress.style.animation = "none";
+  void progress.offsetWidth;
+
+  progress.style.animation = `snackbar-progress ${duration}ms linear forwards`;
+
+  snackbar.classList.add("show");
+
+  if (snackbarTimeout) clearTimeout(snackbarTimeout);
+
+  snackbarTimeout = setTimeout(() => {
+    snackbar.classList.remove("show");
+  }, duration);
+
+}
+
+/* ============================= */
+/*        SNACKBAR SYSTEM ENDS   */
+/* ============================= */
