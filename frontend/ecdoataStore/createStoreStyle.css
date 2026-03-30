@@ -56,6 +56,7 @@ body {
   font-family: "Segoe UI", Arial, sans-serif;
   background: #ffffff;
   color: #222;
+  height: 100vh;
   line-height: 1.6;
   -webkit-tap-highlight-color: transparent;
   -webkit-user-select: none;
@@ -274,7 +275,7 @@ body {
   justify-content: center;
   align-items: center;
   margin-top: 4rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .storeCreationWrapper h2{
@@ -969,6 +970,7 @@ transition: .1s ease;
   .bottom-note{
     margin-top: 2rem;
     max-width: 360px;
+    height: 12rem;
     margin: 20px auto;
     padding: 12px;
     text-align: center;
@@ -997,14 +999,17 @@ transition: .1s ease;
 
 .foot{
   width: 100%;
-  height: 3rem;
+  height: 5rem;
   display: flex;
+  background: white;
   align-items: center;
   justify-content: center !important;
   box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-  position: relative;
+  position: fixed;
+  bottom: 0;
   padding: .1rem;
-  border-top: 1px solid rgba(0,0,0,0.1);
+  border-top: 1px solid rgba(0,0,0,0.0.8);
+  z-index: 99;
 }
 
 .foot .foot-content{
