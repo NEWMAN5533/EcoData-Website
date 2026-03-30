@@ -101,3 +101,9 @@ SNACKBAR SECTION
 
 
 
+
+  .google-thumbnail img{
+    width: 1.4rem !important;
+    height: 1.4rem !important;
+  }
+
