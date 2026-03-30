@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sign Up | EcoData</title>
+  <link rel="stylesheet" href="globalStyle.css">
   <link rel="stylesheet" href="signUpStyle.css">
 
 
@@ -38,26 +39,40 @@
   <div class="formFillCard-top">
     <label> User Name</label>
   </div>
+
   <div class="formFillCard-bottom">
-   <input class="formInputCreate" type="text" id="username" placeholder="Username" required />
+    <div class="formInputCreate">
+      <img src="./uiIcons/userName.png" alt="user" loading="lazy">
+        <input type="text" id="username" placeholder="Username" required />
+    </div>
+
   </div>
 </div>
 
-<div class="formFillCard">
+  <div class="formFillCard">
   <div class="formFillCard-top">
     <label> Email Address</label>
   </div>
   <div class="formFillCard-bottom">
-   <input class="formInputCreate" type="email" id="email" placeholder="Email" required />
+    <div class="formInputCreate">
+      <img class="curNone" src="./uiIcons/email.png" alt="email" loading="lazy">
+        <input type="email" id="email" placeholder="Email" required />
+    </div>
+ 
   </div>
-</div>
+     </div>
 
-<div class="formFillCard">
+  <div class="formFillCard">
   <div class="formFillCard-top">
     <label>Password</label>
   </div>
   <div class="formFillCard-bottom">
-      <input class="formInputCreate" type="password" id="password" placeholder="Choose Password" required />
+    <div class="formInputCreate">
+      <img class="curNone" src="./uiIcons/lock.png" alt="lock" loading="lazy">
+      <input  type="password" id="password" placeholder="Choose Password" required />
+      <img id="togglePassword" class="curYes" src="./uiIcons/eye.png" alt="toggle password">
+    </div>
+     
   </div>
 </div>
 
@@ -248,6 +263,26 @@ function showSnackBar(message, type = "info", duration = 4000) {
 
   
 
+<script>
+
+  document.addEventListener("DOMContentLoaded", () => {
+
+  const password = document.getElementById("password");
+  const togglePassword = document.getElementById("togglePassword");
+
+  togglePassword.addEventListener("click", () => {
+    const isPassword = password.type === "password";
+
+    // Toggle input type
+    password.type = isPassword ? "text" : "password";
+
+    // Toggle icon image
+    togglePassword.src = isPassword 
+      ? "./uiIcons/hide.png" 
+      : "./uiIcons/eye.png";
+  });
+  });
+</script>
 
   
 

@@ -42,9 +42,16 @@
     <label> Email Address</label>
   </div>
   <div class="formFillCard-bottom">
-   <input class="formInputCreate" type="email" id="email" placeholder="Email" required />
+    <div class="formInputCreate">
+      <img class="curNone" src="./uiIcons/email.png" alt="">
+        <input type="email" id="email" placeholder="Email" required />
+    </div>
+ 
   </div>
      </div>
+
+
+
 
 
   <div class="formFillCard">
@@ -52,7 +59,12 @@
     <label>Password</label>
   </div>
   <div class="formFillCard-bottom">
-      <input class="formInputCreate" type="password" id="password" placeholder="Choose Password" required />
+    <div class="formInputCreate">
+      <img class="curNone" src="./uiIcons/lock.png" alt="" loading="lazy">
+      <input  type="password" id="password" placeholder="Choose Password" required />
+      <img id="togglePassword" class="curYes" src="./uiIcons/eye.png" alt="toggle password">
+    </div>
+     
   </div>
 </div>
     
@@ -192,7 +204,6 @@ loginForm.addEventListener("submit", async (e) => {
     showSnackBar("Login successful!", "success");
 
     // 🔥 Redirect based on role
-    window.location.href = "createStore.html";
 
 
   } catch (error) {
@@ -257,6 +268,26 @@ function showSnackBar(message, type = "info", duration = 4000) {
 </script>
 
 
+<script>
+
+  document.addEventListener("DOMContentLoaded", () => {
+
+  const password = document.getElementById("password");
+  const togglePassword = document.getElementById("togglePassword");
+
+  togglePassword.addEventListener("click", () => {
+    const isPassword = password.type === "password";
+
+    // Toggle input type
+    password.type = isPassword ? "text" : "password";
+
+    // Toggle icon image
+    togglePassword.src = isPassword 
+      ? "./uiIcons/hide.png" 
+      : "./uiIcons/eye.png";
+  });
+  });
+</script>
 
 
 
