@@ -148,11 +148,11 @@ body {
 /* NAVIGATION */
 .main-nav {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
   text-align: center;
-  width: max-content;
+  justify-content: end;
+  width: 100%;
+  ;
   height: 2.2rem;
 }
 
@@ -1199,80 +1199,3 @@ SECTION TITLE
 
 
 
-
-.foot{
-  width: 100%;
-  background: var(--primary-cl);
-  height: 4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center !important;
-  position: relative;
-  padding: .1rem;
-  border-top: 1px solid rgb(233, 231, 231);
-}
-
-.foot .foot-content{
-  display: flex;
-  width: 100%;
-  max-width: 100%;
-  height: 90%;
-  padding: .2rem .1rem;
-  justify-self: center;
-  position: relative;
-  align-items: center;;
-  justify-content: center;
-  gap: .5rem;
-}
-
-
-.cop-right {
-  width: 50%;
-  max-width: max-content;
-  height: 100%;
-  display: flex;
-  padding-right: .1rem;
-  align-items: center;
-  justify-content: start;
-  background: transparent;
-  font-size: .70rem !important;
-
-}
-
-.bor{
-  color: rgb(180, 175, 175);
-  
-}
-
-
-
-
-.foot-content .powered{
-  font-size: .65rem;
-  width: 50%;
-  max-width: max-content;
-  height: 100%;
-  font-weight: 800;
-  background: transparent;
-  padding-right: .1rem;
-  color: rgb(53, 53, 104);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-weight: 500;
-}
-
-
-
-.foot-content .powered strong{
-  margin-right: .2rem;
-  font-weight: 500;
- font-size: .7rem;
-}
-
-
-/*******
-FOOTER SECTION ENDS
-****/
