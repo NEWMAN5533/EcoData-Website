@@ -1,6 +1,7 @@
 
 :root {
-  --bg-cl: #FFF;
+  --bg-cl: #171b4d;
+  --bg-cl-2: #1f314b;
   --primary-cl: #fff;
   --secondary-cl: rgb(50, 50, 190);
   --dark-cl: #0a0a0a;
@@ -62,7 +63,7 @@
 
 body {
   font-family: "Segoe UI", Arial, sans-serif;
-  background: #ffffff;
+  background: var(--primary-cl);
   color: #222;
   line-height: 1.6;
   -webkit-tap-highlight-color: transparent;
@@ -79,14 +80,14 @@ body {
   max-width: 390px;
   height: 7rem;
   justify-self: center;;
-  background: white;
+  background: var(--primary-cl);
   padding: 1px 16px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 3px 15px rgba(0,0,0,0.05);
-  border-bottom: 1px solid rgb(240, 235, 235);
+  border-bottom: 1px solid rgb(245, 243, 243);
   position: fixed;
   top: 0;
   left: 0;
@@ -103,7 +104,7 @@ body {
   justify-content: space-between;
   position: relative;
   padding-top: .2rem;
-  border-bottom: 1px solid rgb(175, 170, 170);;
+  border-bottom: 1px solid rgb(224, 222, 222);;
 }
 
 .store-header .store-header-bottom{
@@ -201,9 +202,8 @@ body {
 
 /* CART */
 .cart-icon {
-    background: linear-gradient(135deg,rgb(247, 136, 33),rgb(97, 59, 9));
-    border: 1px solid rgb(179, 97, 3);
-  color: white;
+background: linear-gradient(135deg, var(--bg-cl), var(--bg-cl-2));
+  color: var(--primary-cl);
   font-weight: 600;
   display: flex;
   justify-content: space-between;
@@ -234,9 +234,7 @@ body {
   user-select: none;
 }
 
-.cart-icon:hover {
-  background: #b85e15;
-}
+
 
 /* ================= HERO SECTION ================= */
 .homeContainer{
@@ -306,7 +304,7 @@ body {
 
 
 .hero-section {
-  background: linear-gradient(135deg, #0f0b06e3, #632907ea);
+  background: linear-gradient(135deg, var(--bg-cl-2),var(--bg-cl));
   color: white;
   display: flex;
   align-items: center;
@@ -389,8 +387,8 @@ body {
   width: 70%;
   border: none;
   border-radius: 30px;
-  background: #d4660d;
-  color: white;
+  background: var(--card-mtn-bg);
+  color: var(--primary-cl);
   font-size: 14px;
   cursor: pointer;
   transition: 0.3s;
@@ -402,7 +400,7 @@ body {
 }
 
 .hero-section button:hover {
-  background: #cf7e13;
+  background: #f0a139;
 }
 
 /* ================= SHOP LAYOUT ================= */
@@ -858,7 +856,7 @@ SECTION TITLE
   align-items: center;
   padding: .5rem 1rem .5rem 1rem;
   flex-direction: column;
-  background: rgb(255, 255, 255);
+  background: var(--primary-cl);
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   border-radius: .8rem;
   border-bottom: 5px solid rgb(177, 103, 6);
@@ -927,7 +925,7 @@ SECTION TITLE
   border-radius: 50%;
   padding: .3rem;
   border: 1px solid rgb(245, 240, 240);
-  background: white;
+  background: var(--primary-cl);
   box-shadow: 0 2px 6px rgba(172, 168, 168, 0.28);
 }
 
@@ -973,7 +971,8 @@ SECTION TITLE
   margin: 5px;
   border-radius: 8px;
   border: none;
-  background: #e0e0e0;
+  background: var(--bg-cl-2);
+  color: var(--primary-cl);
   cursor: pointer;
   border: 1px solid rgb(204, 202, 202);
   transition: 0.4s ease-in-out;
@@ -985,14 +984,14 @@ SECTION TITLE
 }
 
 .pagination button:hover {
-  background:  #9c3e07ea;
+  background:  var(--bg-cl);
   color: rgb(247, 244, 244);
 }
 
 .pagination .active {
-  background:  #632907ea;
+  background:  var(--bg-cl);
   color: rgb(247, 244, 244);
-  border: 1px solid  #52270fea;
+  border: 1px solid  var(--bg-cl-2);
 }
 
 /* ================= WHATSAPP FLOAT ================= */
@@ -1021,78 +1020,6 @@ SECTION TITLE
   position: relative;
 }
 
-
-
-
-.foot{
-  width: 100%;
-  height: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center !important;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-  position: relative;
-  padding: .3rem;
-  justify-self: center;
-  border-top: 1px solid rgb(235, 234, 234);
-}
-
-.foot .foot-content{
-  display: flex;
-  width: 100%;
-  height: 90%;
-  padding: .2rem .1rem;
-  justify-self: center;
-  position: relative;
-  align-items: center;;
-  justify-content: center;
-  gap: .5rem;
-}
-
-
-.cop-right {
-  width: 50%;
-  max-width: max-content;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--bg-cl);
-  border-right: 2px solid var(--text-cl);
-}
-
-.dark-mode .cop-right{
-  background: var(--welcome-card-bg);
-}
-
-
-.foot-content .powered{
-  font-size: .8rem;
-  width: 50%;
-  max-width: max-content;
-  height: 100%;
-  font-weight: 800;
-  background: var(--bg-cl);
-  padding-right: .3rem;
-  color: rgb(53, 53, 104);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-
-
-.dark-mode .powered {
-  background: var(--welcome-card-bg);
-  color: rgb(187, 182, 182);
-}
-
-.foot-content .powered strong{
-  margin-right: .2rem;
-  font-weight: 500;
-}
 
 
 
@@ -1268,3 +1195,84 @@ SECTION TITLE
 .sidebar input[type="range"] {
   width: 100%;
 }
+
+
+
+
+
+.foot{
+  width: 100%;
+  background: var(--primary-cl);
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center !important;
+  position: relative;
+  padding: .1rem;
+  border-top: 1px solid rgb(233, 231, 231);
+}
+
+.foot .foot-content{
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  height: 90%;
+  padding: .2rem .1rem;
+  justify-self: center;
+  position: relative;
+  align-items: center;;
+  justify-content: center;
+  gap: .5rem;
+}
+
+
+.cop-right {
+  width: 50%;
+  max-width: max-content;
+  height: 100%;
+  display: flex;
+  padding-right: .1rem;
+  align-items: center;
+  justify-content: start;
+  background: transparent;
+  font-size: .70rem !important;
+
+}
+
+.bor{
+  color: rgb(180, 175, 175);
+  
+}
+
+
+
+
+.foot-content .powered{
+  font-size: .65rem;
+  width: 50%;
+  max-width: max-content;
+  height: 100%;
+  font-weight: 800;
+  background: transparent;
+  padding-right: .1rem;
+  color: rgb(53, 53, 104);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: 500;
+}
+
+
+
+.foot-content .powered strong{
+  margin-right: .2rem;
+  font-weight: 500;
+ font-size: .7rem;
+}
+
+
+/*******
+FOOTER SECTION ENDS
+****/
