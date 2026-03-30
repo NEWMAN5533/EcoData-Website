@@ -272,6 +272,11 @@ border-radius: .2rem;
 background: rgb(44, 102, 102);
 color: white;
 cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
 }
 
 
@@ -382,6 +387,11 @@ cursor: pointer;
       margin-top: 25px;
       cursor: pointer;
       transition: .2s ease;
+        -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
     }
    .signUpBtn:hover {
       background: rgb(236, 100, 9);
@@ -561,6 +571,11 @@ FOOTER SECTION ENDS
     width: 1.2rem;
     height: 1.2rem;
     cursor: default;
+      -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
   }
 
   .formInputCreate .curYes{
@@ -570,6 +585,11 @@ FOOTER SECTION ENDS
 
   .curYes {
   cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
 }
 
 #togglePassword {
