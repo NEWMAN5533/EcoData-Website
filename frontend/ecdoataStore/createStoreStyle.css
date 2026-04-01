@@ -508,11 +508,15 @@ body {
 
 
 
-
-
-.note-box{
+.note-box-wrapper{
   width: 100%;
   max-width: 768px;
+  justify-self: center;
+  position: relative;
+}
+
+.note-box{
+  max-width: 97%;
   justify-self: center;
   background: var(--bg-cl-2);
   padding: 15px;
