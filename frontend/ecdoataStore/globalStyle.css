@@ -16,7 +16,19 @@ button{
 
 
 
+.whiteHouse{
+  display: flex;
+  position: fixed;
+  top: 0;
+  background: rgb(255, 255, 255);
+  width: 100%;
+  justify-self: center;
+  max-width: 768px;
+  height: 12.2rem;
+  z-index: 1 !important;
+  margin-bottom: 1rem;;
 
+}
 
 
     /**

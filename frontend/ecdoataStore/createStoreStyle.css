@@ -70,7 +70,7 @@ body {
 
 .store-header {
   width: 100%;
-  max-width: 390px;
+  max-width: 768px;
   height: 11.9rem;
   justify-self: center;;
   background: var(--bg-cl);
@@ -90,17 +90,7 @@ body {
   z-index: 99999 !important;
 }
 
-.whiteHouse{
-  display: flex;
-  position: fixed;
-  top: 9.2rem;
-  background: rgb(255, 255, 255);
-  width: 100%;
-  height: 3rem;
-  z-index: 1 !important;
-  margin-bottom: 1rem;;
 
-}
 
 
 .store-header .store-header-top{
@@ -453,8 +443,8 @@ body {
 
 .container{
  width: 100%;
-    max-width: 90%;
-    background: var(--bg-cl);
+    max-width: 768px;
+    background: white;
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
@@ -468,7 +458,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 2rem 1rem;
-  margin-top: 6rem;
+  margin-top: 13rem;
 }
 
 
@@ -522,12 +512,12 @@ body {
 
 .note-box{
   width: 100%;
-  max-width: 96%;
+  max-width: 768px;
   justify-self: center;
   background: var(--bg-cl-2);
   padding: 15px;
   border-radius: 3px;
-  margin-top: 5rem;
+  margin-top: 13rem;
   margin-bottom: 10px;
 }
 
