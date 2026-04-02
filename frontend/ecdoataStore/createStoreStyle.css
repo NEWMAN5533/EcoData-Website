@@ -414,6 +414,19 @@ body {
     background: #020617;
     padding: 15px;
     border-radius: 10px;
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn {
+    from{
+      transform: translateY(10px);
+      opacity: 0;
+    }
+    
+    to{
+      transform: translateY(0);
+      opacity: 1;
+    }
   }
 
   .link-box{
@@ -499,7 +512,21 @@ body {
 
 
 
+.storeTypeSelect {
+  padding: 8px;
+  cursor: pointer;
+  transition: .2s ease;
+}
 
+.storeTypeSelect:hover{
+  background: #f2f2f2;
+}
+
+.storeTypeSelect.active{
+  background: #0796af;
+  color: white;
+  border-radius: 5px;
+}
 
 
 

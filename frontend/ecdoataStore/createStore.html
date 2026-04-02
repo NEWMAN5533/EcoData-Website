@@ -208,8 +208,10 @@
 
 
   <!---MAIN-CONTAINER-SECTION------>
- <div class="note-box">
-  <h3> Grow your Business with <strong class="ecoshop">EcoShop</strong></h3>
+
+ <div class="note-box-wrapper">
+  <div class="note-box">
+    <h3> Grow your Business with <strong class="ecoshop">EcoShop</strong></h3>
   <p>
     Create your own online store in seconds. Share your store link, receive orders via WhatsApp, 
     and start selling instantly.
@@ -220,6 +222,7 @@
     <li><span class="num"></span>  Easy product showcase</li>
     <li><span class="num"></span>  Direct WhatsApp orders</li>
   </ul>
+  </div>
 </div>
 
 <div class="storeCreationWrapper">
@@ -227,6 +230,7 @@
     <h2>Create your Store</h2>
     <form id="storeForm">
       
+<input type="hidden" name="storeType" id="storeTypeInput">
 <div class="formFillCard">
   <div class="formFillCard-top">
     <label>Store Name</label>
@@ -271,8 +275,9 @@
   <div class="formFillCard-top">
     <label>According to products</label>
   </div>
+  
   <div class="formFillCard-bottom" id="typeSelectBtn">
-    <button class="formInputCreate cretbtn">Store Type (e.g. clothes, Fashion)</button>
+    <button type="button" class="formInputCreate cretbtn" id="storeTypeButton">Store Type (e.g. clothes, Fashion)</button>
     <div id="inputSelect" class="typeSelectorDiv " style="display: none;">
       <div class="tti">Choose correctly</div>
       <section class="storeTypeSelectorWrapper">
@@ -292,7 +297,7 @@
 </div>
 
 <div class="submitter">
-<button type="submit">Create Store </button>
+<button type="text">Create Store </button>
 </div>
 
 
@@ -426,37 +431,32 @@
 
 
 
-
-<!---sidebar-toggle-js---->
+<!----SIDEBAR-TOGGLE-->
 <script>
-    const sidebar = document.querySelector(".createStoreSidebar");
-  const sidebarToggler = document.getElementById("toggleSidebar");
+const sidebar = document.querySelector(".createStoreSidebar");
+const sidebarToggler = document.getElementById("toggleSidebar");
 
-  sidebarToggler.addEventListener("click", function(e) {
-    e.stopPropagation();
+let isOpen = false;
 
-    if(sidebarToggler) {
-      sidebar.style.left = "0px";
-      document.body.style.add("no-scroll");
-    } else {
-      sidebar.style.left = "-500px";
-    }
+sidebarToggler.addEventListener("click", (e) => {
+  e.stopPropagation();
+  isOpen = !isOpen;
+  sidebar.style.left = isOpen ? "0px" : "-500px";
+  document.body.classList.toggle("no-scroll");
+});
 
-  
-  });
-
-  window.addEventListener("click", function(e) {
-    e.stopPropagation();
-      if(!sidebarToggler.contains(e.target) && !sidebar.contains(e.target)) {
-      sidebar.style.left = "-500px";
-    } else {
-      sidebar.style.left = "0px";
-    }
-  });
-  
-
+window.addEventListener("click", (e) => {
+  if (!sidebar.contains(e.target) && !sidebarToggler.contains(e.target)) {
+    sidebar.style.left = "-500px";
+    isOpen = false;
+  }
+});
 
 </script>
+
+
+
+
 
 <script>
     // Store type select toggle js
