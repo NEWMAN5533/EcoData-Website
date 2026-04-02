@@ -1,6 +1,7 @@
 
 :root {
-  --bg-cl: #FFF;
+  --bg-cl: #171b4d;
+  --bg-cl-2: #1f314b;
   --primary-cl: #fff;
   --secondary-cl: rgb(50, 50, 190);
   --dark-cl: #0a0a0a;
@@ -73,42 +74,168 @@ body {
 }
 
 
+
+
 /* ================= HEADER ================= */
+
 .store-header {
   width: 100%;
   max-width: 390px;
-  height: 3.9rem;
+  height: 11.9rem;
   justify-self: center;;
-  background: white;
+  background: var(--bg-cl);
   padding: 1px 16px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 3px 15px rgba(0,0,0,0.05);
-  border-bottom: 1px solid rgb(240, 235, 235);
+  border-end-end-radius: 2rem !important;
+  border-end-start-radius: 2rem;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  overflow: hidden;
-  z-index: 99999;
+  overflow: hidden !important;
+  z-index: 99999 !important;
 }
+
+
 
 .store-header .store-header-top{
   width: 100%;
-  height: 4rem;
+  height: 7rem;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   position: relative;
   padding-top: .2rem;
+  border-bottom: 1px solid rgba(230, 227, 227, 0.295);;
 }
 
 
+/* TOP */
+.store-header-top .store-header-top-top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0;
+  position: relative;
+  height: 50%;
+}
+
+.store-header-top-top .logo img{
+  width: 3.5rem;
+  height: 3.4rem;
+  background: rgba(43, 54, 71, 0.116);
+  border-radius: 50%;
+  padding: .2rem;
+}
+
+.store-header-top-top .header-actions img{
+  width: 2rem;
+  height: 2rem;
+  padding: .2rem;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+
+
+
+
+
+.store-header-top .store-header-top-bottom{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0;
+  position: relative;
+  height: 50%;
+}
+
+.store-header-top-bottom .userName{
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  width: 80%;
+  position: relative;
+}
+
+.userName p{
+  white-space: nowrap;
+  font-size: .96rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 100 !important;
+  color: var(--text-cl);
+  opacity: .99;
+}
+
+.bottom-hidder{
+  display: flex;
+  align-items: center;
+  width: 20%;
+  justify-content: end;
+  padding-bottom: 1.5rem;
+  position: relative;
+}
+
+.bottom-hidder .signUpBtn{
+  height: 2.2rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .85rem;
+  white-space: nowrap;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  text-align: center;
+  border-radius: .3rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.store-header .store-header-bottom{
+  width: 100%;
+  height: 4.9rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+
+
+
+
+.store-header-bottom h2{
+  color: var(--text-cl-2);
+  opacity: .8;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+
+
+
+
+
+
 .logo img {
- width: 2.8rem;
- height: 3.2rem;
  margin-top: .3rem;
  -webkit-tap-highlight-color: transparent;
   -webkit-user-select: none;
@@ -117,12 +244,17 @@ body {
   user-select: none;
 }
 
-.logo span {
-  font-size: 14px;
-  margin: 0;
-  color: #28a745;
-  font-weight: 500;
+
+
+/* HEADER ACTIONS */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
+
+
+
 
 
 /*==============MAIN=============*/
@@ -143,61 +275,21 @@ body {
 
 
 
-.underdev{
-  width: 100%;
-  max-width:  390px;
-  justify-self: center;
-  height: max-content;
-  padding: 1rem;
-  background: rgb(223, 217, 217);
-  position: relative;
-  margin-top: 4.3rem;
-}
-
-.underdev h1{
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: rgb(86, 86, 97);
-}
-
-.underdev small{
-  display: flex;
-  font-size: 1rem;
-  font-weight: 600;
-  color: rgb(167, 86, 32);
-  animation: xl 5s ease infinite;
-}
-
-@keyframes  xl {
-  to {
-    transform: translateX(9px);
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     .container{
       padding: 20px;
-      margin-top: 1rem;
+      margin-top: 13rem;
       max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+
     }
 
     .card{
-      background: #d6d4d4;
+      background: var(--bg-cl-2);
       padding: 15px;
       border-radius: 12px;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     }
 
@@ -209,18 +301,24 @@ body {
       
     }
 
+     .card input[type=file]{
+      color: white;
+      opacity: .8;
+      cursor: pointer;
+    }
+
     input, textarea {
       width: 100%;
       padding: 10px;
-      margin-bottom: 10px;
+      margin-bottom: 18px;
       border-radius: 8px;
       border: 1px solid #ddd;
     }
 
     button{
-      background: #69390c;
+      background: #ff9900;
       color: #fff;
-      opacity: .8;
+      opacity: .94;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
       padding: 7px;
       border: none;
@@ -294,22 +392,52 @@ body {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .foot{
   width: 100%;
-  height: 3rem;
+  background: var(--primary-cl);
+  height: 4rem;
   display: flex;
   align-items: center;
   justify-content: center !important;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
   position: relative;
-  padding: .3rem;
-  justify-self: center;
-  border-top: 1px solid rgb(235, 234, 234);
+  padding: .1rem;
+  border-top: 1px solid rgb(233, 231, 231);
 }
 
 .foot .foot-content{
   display: flex;
   width: 100%;
+  max-width: 99%;
   height: 90%;
   padding: .2rem .1rem;
   justify-self: center;
@@ -325,43 +453,339 @@ body {
   max-width: max-content;
   height: 100%;
   display: flex;
+  padding-right: .1rem;
   align-items: center;
-  justify-content: center;
-  background: var(--bg-cl);
-  border-right: 2px solid var(--text-cl);
+  justify-content: start;
+  background: transparent;
+  font-size: .65rem;
+
 }
 
-.dark-mode .cop-right{
-  background: var(--welcome-card-bg);
+.bor{
+  color: rgb(180, 175, 175);
+  
 }
+
+
 
 
 .foot-content .powered{
-  font-size: .8rem;
+  font-size: .65rem;
   width: 50%;
   max-width: max-content;
   height: 100%;
   font-weight: 800;
-  background: var(--bg-cl);
-  padding-right: .3rem;
+  background: transparent;
+  padding-right: .1rem;
   color: rgb(53, 53, 104);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-}
-
-
-
-.dark-mode .powered {
-  background: var(--welcome-card-bg);
-  color: rgb(187, 182, 182);
-}
-
-.foot-content .powered strong{
-  margin-right: .2rem;
   font-weight: 500;
 }
 
 
+
+.foot-content .powered strong{
+  margin-right: .2rem;
+  font-weight: 500;
+ font-size: .7rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ================= */
+/* SIDEBAR SECTION    */
+/*================== */
+  .createStoreSidebar{
+    position: fixed;
+    left: -500px;
+    top: 0;
+    display: block;
+    background: rgb(248, 248, 248);
+    width: 230px;
+    height: 100vh;
+    z-index: 99999999;
+    transition: .5s ease;
+  }
+
+  .createStoreSidebar .sidebarSets-top{
+    width: 100%;
+    height: 18%;
+    position: relative;
+    border-bottom: 1px solid var(--thin-border-4);
+    display: flex;
+    padding: .7rem 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+
+  .sidebarSets-top .avatarImg{
+    width: 100%;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding-left: 1.2rem;
+    margin-bottom: .1rem;;
+    position: relative;
+  }
+
+ 
+
+  .avatarImg img{
+    width: 4rem;
+    height: 4rem;
+    padding: .2rem;
+    border-radius: 50%;
+    border: 1px solid rgb(244, 244, 247);
+    background: rgb(247, 240, 234);
+    animation: scaleWidth 5s infinite;
+  }
+
+  @keyframes scaleWidth {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.02);
+    }
+    75% {
+      transform: scale(1.03);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
+
+
+
+
+
+  .sidebarSets-top .avatarName{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    position: relative;
+  }
+
+  .avatarName .top{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding-left: 1.2rem;
+    position: relative;
+    padding-bottom: .3rem;
+  }
+
+  .avatarName img{
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  .avatarName .top small{
+    font-weight: 600;
+    font-size: .8rem;
+    color: rgb(117, 117, 124);
+    white-space: nowrap;
+  }
+
+  .avatarName .btom{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    position: relative;
+  }
+
+  .avatarName .btom small{
+    font-weight: 400;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: .9rem;
+    color:  rgb(94, 122, 119);
+  }
+
+  .avatarName .btom img{
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+
+
+
+  .createStoreSidebar .sidebarSets-middle{
+    width: 100%;
+    height: 52%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .sidebarSets-middle h3{
+    font-size: .87rem;
+    color: var(--btn-bg-cl);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+  }
+
+  .sidebarSets-middle li{
+    height: 2.8rem;
+    margin-top: .3rem;
+    display: flex;
+    padding-left: .4rem;;
+  }
+
+.sidebarSets-middle ul li img{
+  border-radius: 0;
+  box-shadow: none;
+  border: 1px solid rgb(247, 244, 244);
+  width: 2rem;
+  height: 2rem;
+}
+
+.sidebarSets-middle ul li:hover{
+  background: none;
+}
+
+
+
+
+  .createStoreSidebar .sidebarSets-bottom{
+    width: 100%;
+    height: 30%;
+    position: relative;
+    display: flex;
+    border-top: 1px solid var(--thin-border-4);
+    flex-direction: column;
+    padding:  .5rem 0;
+    overflow-y: auto;
+  }
+
+  
+
+  .sidebarSets-bottom .terms-requirements{
+    width: 100%;
+    height: max-content;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    gap: .4rem;
+    align-items: center;
+    justify-content: start;
+    box-shadow: none;
+    margin: 0;
+    padding-left: 0;
+  }
+.terms-requirements .btnWrapper{
+    position: relative;
+    display: flex;
+    text-align: start;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    height: max-content;
+    padding-left: 1.5rem;
+    background: rgb(248, 247, 247);
+    padding-bottom: .4rem;
+    margin-left: .2rem;
+    border-top: 1px solid white;
+  }
+ .terms-requirements .signUpBtn{
+  width: 6rem;
+  height: 1.7rem;
+  font-size: .8rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  margin-right: 1.2rem;
+  margin-top: -.1rem;
+  }
+
+  .sidebarSets-bottom  .terms-requirements .termsLink-title{
+    display: flex;
+    width: 100%;
+    height: max-content;
+    padding: .2rem;
+    padding: 0 1rem;
+    position: relative;
+  }
+
+  .sidebarSets-bottom  .termsLink-title  h3{
+    color: var(--btn-bg-cl);
+    font-size: .9rem;
+    justify-self: start;
+  }
+
+  .sidebarSets-bottom .terms-requirements a{
+    display: flex;
+    text-decoration: none;
+    flex-direction: column;
+    margin-top: .2rem;
+  }
+
+  .sidebarSets-bottom .terms-requirements .termsLink{
+    display: flex;
+    width: 100%;
+    white-space: nowrap;
+    font-size: .7rem;
+    font-weight: 500;
+    color: var(--thin-border-1);
+    background: var(--bg-cl);
+    padding: .8rem;
+    height: 1.4rem;
+    opacity: .8;
+    align-items: center;
+    border-radius: 1rem;
+    transition: .1s ease;
+  }
+
+    .terms-requirements .termsLink.active {
+      background: var(--thin-border-2);
+      color: white;
+    }
+
+   .sidebarSets-bottom .terms-requirements  .termsLink:hover{
+    background: var(--thin-border-2);
+    color: white;
+  }
+
+
+
+
+
+/* ================= */
+/* SIDEBAR SECTION  ENDS   */
+/*================== */
