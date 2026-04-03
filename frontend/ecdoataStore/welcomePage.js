@@ -29,16 +29,19 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 console.log("🔥 Firebase initialized and Firestore ready for login!");
-console.log ({email, password});
 
 
 // 🔹 Display username when logged in
 onAuthStateChanged(auth, async (user) => {
 
   const usernameDisplay = document.getElementById("usernameDisplay");
+  const loginBtn = document.getElementById("loginBtn");
+
   if (!usernameDisplay) return;
 
   if (user) {
+    // change login to signed!
+    loginBtn.textContent = `Signed!`;
 
     const userDoc = await getDoc(doc(db, "users", user.uid));
 

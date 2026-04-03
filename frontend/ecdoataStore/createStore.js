@@ -34,9 +34,14 @@ const db = getFirestore(app);
 onAuthStateChanged(auth, async (user) => {
 
   const usernameDisplay = document.getElementById("usernameDisplay");
+  const loginBtn = document.getElementById("loginBtn");
+
   if (!usernameDisplay) return;
 
   if (user) {
+
+    // hide login Btn when logged in already
+    loginBtn.textContent = `Signed!`
 
     const userDoc = await getDoc(doc(db, "users", user.uid));
 
