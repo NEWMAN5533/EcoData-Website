@@ -7,6 +7,51 @@
   <link rel="stylesheet" href="globalStyle.css">
   <link rel="stylesheet" href="signUpStyle.css">
 
+
+
+
+  <style>
+    
+
+
+  .btn-text{
+    font-size: .95rem;
+    font-weight: 600;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+
+  .spinner{
+    width: 19px;
+    height: 19px;
+    border: 3px solid white;
+    border-top: 3px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    display: none;
+  }
+
+  button.loading .spinner{
+    display: block;
+  }
+
+  button.loading .btn-text{
+    display: none;
+  }
+
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+
+
+  </style>
 </head>
 <body>
 
@@ -44,7 +89,7 @@
   <div class="formFillCard-bottom">
     <div class="formInputCreate">
       <img class="curNone" src="./uiIcons/email.png" alt="">
-        <input type="email" id="email" placeholder="Email" required />
+        <input type="email" id="email" placeholder="Email"  />
     </div>
  
   </div>
@@ -61,7 +106,7 @@
   <div class="formFillCard-bottom">
     <div class="formInputCreate">
       <img class="curNone" src="./uiIcons/lock.png" alt="" loading="lazy">
-      <input  type="password" id="password" placeholder="Choose Password" required />
+      <input  type="password" id="password" placeholder="Choose Password"  />
       <img id="togglePassword" class="curYes" src="./uiIcons/eye.png" alt="toggle password">
     </div>
      
@@ -69,7 +114,7 @@
 </div>
     
 <div class="already">
- <p> Don't have an account? <button class="alloginBtn" onclick="window.location.href = 'ecoSignUp.html'" >Sign Up</button></p>
+ <p> Don't have an account? <button type="button" class="alloginBtn" onclick="window.location.href = 'ecoSignUp.html'" >Sign Up</button></p>
 </div>
    
 
@@ -113,157 +158,7 @@
 
 
 
-<script type="module">
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-
-import {
-  getFirestore,
-  doc,
-  getDoc
-} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
-
-
-// 🔹 Firebase config
-const firebaseConfig = {
-  apiKey: "AIzaSyClNBlfigtQk8AZWdMZcU9sEtVcIrS0D1g",
-  authDomain: "ecodata-2bee6.firebaseapp.com",
-  projectId: "ecodata-2bee6",
-  storageBucket: "ecodata-2bee6.firebasestorage.app",
-  messagingSenderId: "544837123249",
-  appId: "1:544837123249:web:6c362350a00c6dab10b690"
-};
-
-
-// 🔹 Initialize
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-
-
-// 🔹 Display username when logged in
-onAuthStateChanged(auth, async (user) => {
-
-  const usernameDisplay = document.getElementById("usernameDisplay");
-  if (!usernameDisplay) return;
-
-  if (user) {
-
-    const userDoc = await getDoc(doc(db, "users", user.uid));
-
-    if (userDoc.exists()) {
-      const userData = userDoc.data();
-      usernameDisplay.textContent = `Welcome, ${userData.username}!`;
-    } else {
-      usernameDisplay.textContent = "Welcome!";
-    }
-
-  } else {
-    usernameDisplay.textContent = "Welcome, Guest!";
-  }
-
-});
-
-
-// 🔹 Login
-const loginForm = document.getElementById("login-form");
-const logBtn = document.getElementById("logBtn");
-
-loginForm.addEventListener("submit", async (e) => {
-
-  e.preventDefault();
-  logBtn.classList.add("loading");
-
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value.trim();
-
-  try {
-
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    const user = userCredential.user;
-
-    const userDoc = await getDoc(doc(db, "users", user.uid));
-
-    if (!userDoc.exists()) {
-      showSnackBar("User profile not found.", "error");
-      logBtn.classList.remove("loading");
-      return;
-    }
-
-    const userData = userDoc.data();
-
-    // Save locally
-    localStorage.setItem("username", userData.username || "User");
-    localStorage.setItem("role", userData.role || "user");
-
-    showSnackBar("Login successful!", "success");
-
-    // 🔥 Redirect based on role
-
-
-  } catch (error) {
-
-    showSnackBar(error.message, "error");
-
-  }
-
-  logBtn.classList.remove("loading");
-
-});
-
-
-/* ============================= */
-/*        SNACKBAR SYSTEM        */
-/* ============================= */
-
-let snackbarTimeout = null;
-
-function showSnackBar(message, type = "info", duration = 4000) {
-
-  let snackbar = document.querySelector(".snackbar");
-
-  if (!snackbar) {
-
-    snackbar = document.createElement("div");
-    snackbar.className = "snackbar";
-
-    snackbar.innerHTML = `
-      <span class="snackbar-text"></span>
-      <div class="snackbar-progress"></div>
-    `;
-
-    document.body.appendChild(snackbar);
-
-  }
-
-  snackbar.querySelector(".snackbar-text").textContent = message;
-
-  if (type === "success") snackbar.style.background = "rgba(7,29,26,0.95)";
-  else if (type === "error") snackbar.style.background = "#dc3545";
-  else if (type === "warning") snackbar.style.background = "#ffc107";
-  else snackbar.style.background = "rgba(7,29,26,0.95)";
-
-  const progress = snackbar.querySelector(".snackbar-progress");
-
-  progress.style.animation = "none";
-  void progress.offsetWidth;
-
-  progress.style.animation = `snackbar-progress ${duration}ms linear forwards`;
-
-  snackbar.classList.add("show");
-
-  if (snackbarTimeout) clearTimeout(snackbarTimeout);
-
-  snackbarTimeout = setTimeout(() => {
-    snackbar.classList.remove("show");
-  }, duration);
-
-}
+<script type="module" src="ecoLogin.js">
 
 </script>
 

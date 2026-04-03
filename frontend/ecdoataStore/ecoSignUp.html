@@ -7,6 +7,11 @@
   <link rel="stylesheet" href="globalStyle.css">
   <link rel="stylesheet" href="signUpStyle.css">
 
+  <style>
+    .container{
+      height: 49rem !important;
+    }
+  </style>
 
 </head>
 <body>
@@ -34,7 +39,6 @@
     <h2>Create New Account</h2>
     <form id="signup-form">
 
-      
 <div class="formFillCard">
   <div class="formFillCard-top">
     <label> User Name</label>
@@ -43,7 +47,7 @@
   <div class="formFillCard-bottom">
     <div class="formInputCreate">
       <img src="./uiIcons/userName.png" alt="user" loading="lazy">
-        <input type="text" id="username" placeholder="Username" required />
+        <input type="text" id="username" placeholder="Username"  />
     </div>
 
   </div>
@@ -56,7 +60,7 @@
   <div class="formFillCard-bottom">
     <div class="formInputCreate">
       <img class="curNone" src="./uiIcons/email.png" alt="email" loading="lazy">
-        <input type="email" id="email" placeholder="Email" required />
+        <input type="email" id="email" placeholder="Email" />
     </div>
  
   </div>
@@ -69,15 +73,36 @@
   <div class="formFillCard-bottom">
     <div class="formInputCreate">
       <img class="curNone" src="./uiIcons/lock.png" alt="lock" loading="lazy">
-      <input  type="password" id="password" placeholder="Choose Password" required />
+      <input  type="password" id="password" placeholder="Choose Password" />
       <img id="togglePassword" class="curYes" src="./uiIcons/eye.png" alt="toggle password">
     </div>
      
   </div>
+
+  <!---confirm password-->
+
+</div>
+
+  <div class="formFillCard">
+  <div class="formFillCard-top">
+    <label>Confirm password</label>
+  </div>
+
+  <div class="formFillCard-bottom">
+    <div class="formInputCreate">
+      <img class="curNone" src="./uiIcons/lock.png" alt="lock" loading="lazy">
+      <input  type="password" id="confirmPassword" placeholder="Confirm  Password" />
+      <img id="toggleConfirmPassword" class="curYes" src="./uiIcons/eye.png" alt="toggle password">
+    </div>
+  
+  </div>
+
+  <!---confirm password-->
+
 </div>
 
 <div class="already">
- <p>Already have an account? <button class="alloginBtn" onclick="window.location.href = 'ecoLogin.html'" >Login</button></p>
+ <p>Already have an account? <button type="button" class="alloginBtn" onclick="window.location.href = 'ecoLogin.html'" >Login</button></p>
 </div>
    
 
@@ -122,142 +147,7 @@
 
 
 <!-- Firebase Core -->
-<script type="module">
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-import {
-  getAuth,
-  createUserWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-
-import {
-  getFirestore,
-  doc,
-  setDoc,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
-
-
-// 🔹 Firebase config
-const firebaseConfig = {
-  apiKey: "AIzaSyClNBlfigtQk8AZWdMZcU9sEtVcIrS0D1g",
-  authDomain: "ecodata-2bee6.firebaseapp.com",
-  projectId: "ecodata-2bee6",
-  storageBucket: "ecodata-2bee6.firebasestorage.app",
-  messagingSenderId: "544837123249",
-  appId: "1:544837123249:web:6c362350a00c6dab10b690"
-};
-
-
-// 🔹 Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-
-
-// 🔹 Signup form
-const signupForm = document.getElementById("signup-form");
-const sinBtn = document.getElementById("signBtn");
-
-
-signupForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  sinBtn.classList.add("loading");
-
-  const username = document.getElementById("username").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value.trim();
-
-  if (!username || !email || !password) {
-    showSnackBar("Please fill all fields", "warning");
-    sinBtn.classList.remove("loading");
-    return;
-  }
-
-  try {
-
-    // 🔹 Create user
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    const user = userCredential.user;
-
-    // 🔹 Save user profile to Firestore
-    await setDoc(doc(db, "users", user.uid), {
-      uid: user.uid,
-      username: username,
-      email: email,
-      role: "user",          // later can become "agent"
-      balance: 0,
-      createdAt: serverTimestamp()
-    });
-
-    showSnackBar("Signup successful!", "success");
-      window.location.href = "createStore.html";
-  
-
-  } catch (error) {
-
-    if(error.code === "auth/email-already-in-use"){
-      showSnackBar("This email is already registered. Login instead", "error")
-    } else{
-      showSnackBar(error.message, "error");
-    }
-   
-  }
-
-  sinBtn.classList.remove("loading");
-
-});
-
-
-
-/* ============================= */
-/*        SNACKBAR SYSTEM        */
-/* ============================= */
-
-let snackbarTimeout = null;
-
-function showSnackBar(message, type = "info", duration = 4000) {
-
-  let snackbar = document.querySelector(".snackbar");
-
-  if (!snackbar) {
-
-    snackbar = document.createElement("div");
-    snackbar.className = "snackbar";
-
-    snackbar.innerHTML = `
-      <span class="snackbar-text"></span>
-      <div class="snackbar-progress"></div>
-    `;
-
-    document.body.appendChild(snackbar);
-  }
-
-  snackbar.querySelector(".snackbar-text").textContent = message;
-
-  // color types
-  if (type === "success") snackbar.style.background = "rgba(7,29,26,0.95)";
-  else if (type === "error") snackbar.style.background = "#dc3545";
-  else if (type === "warning") snackbar.style.background = "#ffc107";
-  else snackbar.style.background = "rgba(7,29,26,0.95)";
-
-  const progress = snackbar.querySelector(".snackbar-progress");
-
-  progress.style.animation = "none";
-  void progress.offsetWidth;
-
-  progress.style.animation = `snackbar-progress ${duration}ms linear forwards`;
-
-  snackbar.classList.add("show");
-
-  if (snackbarTimeout) clearTimeout(snackbarTimeout);
-
-  snackbarTimeout = setTimeout(() => {
-    snackbar.classList.remove("show");
-  }, duration);
-
-}
+<script type="module" src="ecoSignUp.js">
 
 </script>
 
@@ -270,6 +160,8 @@ function showSnackBar(message, type = "info", duration = 4000) {
   const password = document.getElementById("password");
   const togglePassword = document.getElementById("togglePassword");
 
+
+
   togglePassword.addEventListener("click", () => {
     const isPassword = password.type === "password";
 
@@ -281,7 +173,24 @@ function showSnackBar(message, type = "info", duration = 4000) {
       ? "./uiIcons/hide.png" 
       : "./uiIcons/eye.png";
   });
+  
   });
+
+
+  // toggle confirmPassword
+  const confirmPassword = document.getElementById("confirmPassword");
+  const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
+
+  toggleConfirmPassword.addEventListener("click", () => {
+    const isPassword = confirmPassword.type === "password";
+
+    // Toggle input type
+    confirmPassword.type = isPassword ? "text" : "password";
+
+    // Toggle icon
+    toggleConfirmPassword.src = isPassword ? "./uiIcons/hide.png" : "./uiIcons/eye.png";
+  });
+
 </script>
 
   
