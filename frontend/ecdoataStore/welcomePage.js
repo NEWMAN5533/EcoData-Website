@@ -1,12 +1,20 @@
 
-// === firebase-config.js ===
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+import {
+  getAuth,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
-// ✅ Your Firebase config
+import {
+  getFirestore,
+  doc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+
+// 🔹 Firebase config
 const firebaseConfig = {
- apiKey: "AIzaSyClNBlfigtQk8AZWdMZcU9sEtVcIrS0D1g",
+  apiKey: "AIzaSyClNBlfigtQk8AZWdMZcU9sEtVcIrS0D1g",
   authDomain: "ecodata-2bee6.firebaseapp.com",
   projectId: "ecodata-2bee6",
   storageBucket: "ecodata-2bee6.firebasestorage.app",
@@ -14,26 +22,53 @@ const firebaseConfig = {
   appId: "1:544837123249:web:6c362350a00c6dab10b690"
 };
 
-// ✅ Initialize Firebase app
+
+// 🔹 Initialize
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-// ✅ Initialize Firestore
-export const auth = getAuth(app);
+console.log("🔥 Firebase initialized and Firestore ready for login!");
+console.log ({email, password});
 
-// CREATE STORE FLOW
-window.goCreate = function() {
-  const user = auth.currentUser;
 
-  if(!user) {
-    window.location.href = '/ecoLogin.html';
+// 🔹 Display username when logged in
+onAuthStateChanged(auth, async (user) => {
+
+  const usernameDisplay = document.getElementById("usernameDisplay");
+  if (!usernameDisplay) return;
+
+  if (user) {
+
+    const userDoc = await getDoc(doc(db, "users", user.uid));
+
+    if (userDoc.exists()) {
+      const userData = userDoc.data();
+      usernameDisplay.textContent = `Welcome, ${userData.username}!`;
+    } else {
+      usernameDisplay.textContent = "Welcome, to EcoShop!";
+    }
 
   } else {
-    window.location.href = '/createStore.html';
+    usernameDisplay.textContent = "Welcome, to EcoShop!";
   }
-};
 
-// SHOPPING FLOW
-window.goShop = function() {
-  window.location.href = '/ecoshop.html';
-};
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
