@@ -1,4 +1,49 @@
 
+:root {
+  --bg-cl: #171b4d;
+  --bg-cl-2: #1f314b;
+  --border-bg-cl: rgb(255, 255, 255);
+  --secondary-cl: rgb(50, 50, 190);
+  --dark-cl: #0a0a0a;
+  --ascent-cl: rgb(158, 97, 209);
+  --background-cl: #e6e8ce;
+  --card-full-bg-cl: rgb(255, 145, 0);
+  
+
+
+  /***
+  NEW ROOT
+  ***/
+  --btn-bg-cl: rgb(250, 126, 9);
+  --user-panel-bg: rgba(42, 42, 194, 0.938);
+  --clock-bg-cl: rgb(2, 61, 52);
+
+  /***
+  DARK MODE COLORS
+  ***/
+  --darkMode-bg-cl: rgb(10, 1, 22);
+  --welcome-card-bg: rgb(2, 2, 39);
+  --welcome-card-bg-2: rgb(24, 5, 5);
+  --welcome-card-border: rgb(74, 88, 94);
+  --thin-border: rgb(35, 48, 49);
+
+
+  
+  --text-cl: rgb(248, 248, 248);
+  --text-cl-2: rgb(210, 216, 216);
+  --text-cl-3: rgb(139, 141, 141);
+
+  /**
+  BORDER SOLID COLORS
+  **/
+  --thin-border-1:  #afb8b6;
+  --thin-border-2:  #a19375;
+  --thin-border-3:  #494845;
+  --thin-border-4: rgb(231, 227, 227);
+  /***
+  CARD BG
+  ***/
+}
 
 /* ================= HEADER ================= */
 .store-header {
@@ -6,15 +51,14 @@
   max-width: 390px;
   height: 3.9rem;
   justify-self: center;;
-  background: rgb(223, 176, 123);
+  background: rgba(80, 51, 18, 0.205);
   padding: 1px 16px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 3px 15px rgba(0,0,0,0.05);
-  border-bottom: 1px solid rgb(243, 159, 159);
   position: fixed;
+  border-bottom: 1px solid rgba(245, 222, 179, 0.267);
   top: 0;
   left: 0;
   right: 0;
@@ -24,7 +68,7 @@
 
 .store-header .store-header-top{
   width: 100%;
-  height: 4rem;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -81,25 +125,31 @@ body::before {
 /* plans wrapper */
 .plans-wrapper{
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  width: 100%;
+  max-width: 460px;
+  justify-self: center;
   align-items: center;
-  height: 100vh;
-  overflow: hidden;
+  margin-top: 7rem;
+  height: 90vh;
 }
+
+
 
 /* slider */
 .plans-slider {
   display: flex;
-  gap: 30px;
+  gap: 40px;
   transition: transform 0.5s ease;
 }
 
 /* glass card */
 .plan-card{
-  min-width: 220px;
+  width: 100%;
+  min-width: 140px;
   padding: 20px;
-  border-radius: 20px;
-  
+  border-radius: 8px;
   background: rgba(90, 83, 83, 0.08);
   backdrop-filter:  blur(20px);
   border: 1px solid rgba(255,255,255,0.1);
@@ -112,6 +162,8 @@ body::before {
   opacity: 0.5;
   transition: transform .2s ease, box-shadow .3s ease;
 }
+
+
 
 /* Active card */
 .plan-card.active{
@@ -126,13 +178,15 @@ body::before {
 
 /* text */
 .price {
-  font-size: 22px;
+  font-size: 14px;
   margin:  10px;
   color: #ff7a00;
 }
 
 .plan-card ul {
   list-style: none;
+  display: flex;
+  flex-direction: column;
   padding: 0;
 }
 
@@ -144,9 +198,10 @@ body::before {
 /* buttons */
 .plan-card button{
   margin-top: 10px;
-  padding: 10px;
+  margin-bottom: 10px;
+  padding: 8px 30px;
   border: none;
-  border-radius: 10px;
+  border-radius: 4px;
   background: #ff7a00;
   color: #fff;
   cursor: pointer;
@@ -164,7 +219,7 @@ body::before {
   background: #ff7a00;
   padding: 5px 8px;
   font-size: 12px;
-  border-radius: 8px;
+  border-radius: 4px;
 }
 
 .ia-badge{
