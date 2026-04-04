@@ -28,7 +28,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-console.log("🔥 Firebase initialized and Firestore ready for login!");
+console.log("🔥 Firebase initialized and Firestore ready!");
 
 
 // 🔹 Display username when logged in
@@ -47,13 +47,13 @@ onAuthStateChanged(auth, async (user) => {
 
     if (userDoc.exists()) {
       const userData = userDoc.data();
-      usernameDisplay.textContent = `Welcome, ${userData.username}!`;
+      usernameDisplay.textContent = `Let get Started, ${userData.username}!`;
     } else {
-      usernameDisplay.textContent = "Welcome, to EcoShop!";
+      usernameDisplay.textContent = "Let get started!";
     }
 
   } else {
-    usernameDisplay.textContent = "Welcome, to EcoShop!";
+    usernameDisplay.textContent = "Let get started!";
   }
 
 });
