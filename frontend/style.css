@@ -480,9 +480,18 @@ WATCH VIDEO SECTION
   align-items: center;
   justify-content: space-between;
   background: var(--bg-cl);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   padding: 1rem .5rem;
   z-index: 1000;
+}
+
+
+.dark-mode .navbar{
+  border-bottom: 1px solid var(--thin-border) !important;
+}
+
+.dark-mode .bottom-navbar{
+  border-top: 1px solid var(--thin-border) !important;
 }
 
 /**
