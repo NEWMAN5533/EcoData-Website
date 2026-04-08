@@ -3454,7 +3454,7 @@ WELCOME CARD
       padding: .2rem .3rem;
       border: none ;
       align-items: center;
-      display: flex;
+      display: none !important;
       justify-content: center;
       font-size: .97rem;
       font-weight: 600;
@@ -3833,8 +3833,12 @@ NOTICE BOARD SECTION
   border-right: 6px solid rgb(217, 219, 219) !important;
   border: 2px solid var(--background-cl);
   border-end-end-radius: 8px;
-  border-start-end-radius: 2rem;
+  border-start-end-radius: 8px;
   border-end-start-radius: 8px;
+}
+
+.notice-board span{
+  opacity: .9;
 }
 
 .notice-top{
@@ -3847,17 +3851,17 @@ NOTICE BOARD SECTION
 }
 
 .dark-mode .notice-top strong{
-  color: var(--card-mtn-bg);
-}
+  color: var(--card-mtn-bg) !important;
+  opacity: .9;
+  font-family: "poppins" sans-serif;
+} 
 
 .notice-bottom{
   width: 100%;
   height: 50%;
 }
 
-.notice-bottom small strong{
-  color: rgba(12, 109, 93, 0.842);
-}
+
 
 .dark-mode .notice-bottom small strong{
   color: var(--card-mtn-bg);
