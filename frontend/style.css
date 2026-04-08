@@ -4388,8 +4388,8 @@ border: 1px solid rgb(241, 239, 239);
 }
 
 .dark-mode .mode-btn-wrapper{
-  background: wheat;
-  border: 1px solid wheat;
+  background: var(--thin-border);
+  border: 1px solid rgb(94, 93, 91);
 }
 
 .normalOrgridBtn .mode-Btn{
