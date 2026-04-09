@@ -157,6 +157,26 @@
 
 
 
+<script>
+
+  document.addEventListener("DOMContentLoaded", () => {
+
+  const password = document.getElementById("password");
+  const togglePassword = document.getElementById("togglePassword");
+
+  togglePassword.addEventListener("click", () => {
+    const isPassword = password.type === "password";
+
+    // Toggle input type
+    password.type = isPassword ? "text" : "password";
+
+    // Toggle icon image
+    togglePassword.src = isPassword 
+      ? "./css/uiIcons/hide.png" 
+      : "./css/uiIcons/eye.png";
+  });
+  });
+</script>
 
 
 
