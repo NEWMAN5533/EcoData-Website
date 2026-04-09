@@ -636,6 +636,7 @@ SOCIAL FOLLOW SECTION
   padding-top: .3rem;
   margin-top: .2rem;
   border-radius: 4px;
+  background: white !important;
 }
 
 
@@ -654,6 +655,7 @@ SOCIAL FOLLOW SECTION
   align-items: center;
   justify-content: start;
   color: rgb(105, 101, 101);
+  background: transparent;
 }
 
 .dark-mode .follow-left{
@@ -863,8 +865,9 @@ top section
   max-width: 94%;
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: start !important;
   height: 3rem;
+  padding: 0 !important;
 }
 
 .dark-mode .total-card{
