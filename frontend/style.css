@@ -4230,7 +4230,7 @@ how to style select dropdown
   width: 100%;
   max-width: 80%;
   background: #fff;
-  border-radius: 14px;
+  border-radius: 8px;
   display: none;
   flex-direction: column;
   justify-content: center;
@@ -4238,16 +4238,16 @@ how to style select dropdown
   height: 5rem;
   gap: .2rem;
   overflow-y: auto;
-  padding: .6rem;
+  padding: 0 .2rem;
   margin-bottom: 8rem;
   scrollbar-width: none;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
   border: 1px solid rgb(199, 198, 198);
 }
 
 .dark-mode .select-dropdown{
-  background: var(--text-cl-3);
-  border: 1px solid var(--darkMode-bg-cl);
+  background: var(--background-cl-1);
+  border: 1px solid var(--thin-border);
 }
 
 .select-dropdown.show{
@@ -4255,29 +4255,52 @@ how to style select dropdown
 }
 
 .optionDelevery {
-  padding: 8px;
+  padding: 4px;
   display: flex;
   align-items: center;
-  height: 1.8rem;
+  height: 2.2rem;
   width: 100%;
-  max-width: 99%;
+  margin-top: .2rem;
+  max-width: 100%;
   justify-content: space-between;
   cursor: pointer;
 }
 
 .optionDelevery.active {
-  background: rgba(170, 196, 218, 0.774);
+  background: rgb(204, 217, 224);
   border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+
+}
+
+.dark-mode .optionDelevery.active {
+  background: var(--thin-border);
+  border-radius: 4px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
+  border: 1px solid var(--thin-border);
 }
 
 .optionDelevery:hover{
   background: rgb(246, 246, 248);
-  border-radius: 8px;
+  border-radius: 4px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
+.dark-mode .optionDelevery:hover{
+  background: var(--background-cl-1);
+  border-radius: 4px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+}
+
 .optionDelevery span{
-  color: rgb(59, 57, 57);
+  color: rgb(56, 51, 51);
+  font-size: .7rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 600;
+}
+
+.dark-mode .optionDelevery span{
+  color: rgb(223, 215, 215);
   font-size: .7rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 600;
@@ -4286,15 +4309,17 @@ how to style select dropdown
 
 
 .optionDelevery small {
-  background: #43658b;
-  color: #f1efef;
-  padding: 5px;
+  background: var(--background-cl-1);
+  border: 1px solid var(--thin-border);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.28);
+  color: #087596;
+  padding: 6px;
   display: flex;
   text-align: center;
   justify-content: center;
   align-items: center;
-  border-radius: 20px;
-  font-size: .65rem;
+  border-radius: 5px;
+  font-size: .60rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 500;
 }
