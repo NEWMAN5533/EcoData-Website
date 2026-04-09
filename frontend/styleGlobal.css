@@ -483,25 +483,27 @@ NOTICE BOARD SECTION
 
 .notice-board{
   width: 100%;
-  height: max-content;
+  height: 13rem !important;
   gap: 1rem;
   max-width: 98% !important;
-  padding: .4rem .7rem !important;
+  padding: .9rem .4rem !important;
   align-items: center;
   justify-content: start;
   border-left: 5px solid rgb(226, 224, 224) !important;
   opacity: .7;
   margin: .3rem;
   display: flex;
-  border-radius: none !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
 }
+
+
+
+ 
 
 .dark-mode .notice-board {
   background: var(--background-cl-1) !important;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.32);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.542);
   border-left: 5px solid white !important;
-  border-radius: none;
 }
 
 .notice-board span{
@@ -713,11 +715,232 @@ DAILY ANALYTICS SECTION
 ****/
 
 
+/****
+DASHBOARD TOTALS OVERVIEW
+***/
+
+.daily-analytics{
+  width: 100%;
+  max-width: 94%;
+  padding: .3rem 1rem;
+  height: 2rem;
+  background: transparent !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 14px;
+}
+
+.daily-analytics h4{
+  color: rgb(18, 26, 31) !important;
+  font-size: .9rem;
+  font-family: "inter" sans-serif;
+  font-weight: 600;
+}
+
+
+.dark-mode .daily-analytics h4{
+  color: rgb(241, 239, 239) !important;
+  font-family: "inter" sans-serif;
+  font-weight: 600;
+  font-size: .9rem;
+}
+
+
+
+.totals-container {
+width: 100%;
+max-width: 99%;
+margin-bottom: 1.2rem;
+padding: .6rem;
+display: grid;
+grid-template-columns: repeat(1, 1fr); 
+height: max-content;
+justify-content: center;
+position: relative;
+align-items: center;
+gap: .6rem;
+}
+
+.total-card {
+  width: 100% !important;
+  height: 6.7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: .8rem;
+  border-radius: .8rem;
+  justify-content: center;
+  text-align: center;
+  justify-self: center;
+  background: var(--primary-cl) !important;
+  padding: .3rem;
+  box-shadow: 0 10px 20px rgba(22, 22, 22, 0.3);
+}
+
+
+.dark-mode .total-card {
+
+  background: var(--background-cl-2) !important;
+  padding: .3rem;
+  box-shadow: 0 10px 20px rgba(22, 22, 22, 0.9);
+}
+
+.dark-mode .total-card {
+  border-radius: .8rem;
+}
+
+/***
+top section
+***/
+.total-card .total-card-top{
+  display: flex;
+  align-items: start;
+  padding: .3rem;
+  width: 100%;
+  max-width: 98%;
+  justify-self: center;
+  text-align: center;
+  justify-content: space-between;
+  height: 3rem;
+  background: transparent;
+  top: 0;
+}
+
+.total-card-top small{
+  font-size: .8rem;
+  color: var(--thin-border);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.dark-mode .total-card-top small{
+  font-size: .8rem;
+  color: rgb(228, 226, 226);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+.dark-mode .total-card-top .cedis{
+  font-size: .87rem !important;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+.total-card-top .cedis{
+  font-size: .87rem !important;
+  color: rgb(30, 209, 149);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.total-card .total-card-top img{
+  width: 1.3rem;
+  height: 1.3rem;
+  margin-top: -.1rem;
+}
+
+.total-card .total-card-bottom p{
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--thin-border-1);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.dark-mode .total-card .total-card-bottom p{
+  font-size: .9rem;
+  font-weight: 600;
+  color: white;
+  opacity: .9;
+}
+
+.total-card .total-card-bottom{
+  width: 100%;
+  max-width: 94%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  height: 3rem;
+}
+
+.dark-mode .total-card{
+  background: var(--welcome-card-bg);
+  border: 2px solid var(--thin-border);
+}
+
+
+/****
+DASHBOARD SECTION ENDS
+****/
 
 
 
 
 
+/***
+BOTH BTN SELECTOR 
+****/
+.normalOrgridBtn-wrapping{
+position: relative;
+align-items: start;
+justify-content: start;
+width: 100%;
+max-width: 92%;
+margin-left: .5rem;
+height: 9rem;
+display: flex;
+flex-direction: column;
+padding:  .5rem;
+background: white;
+margin-top: 1.5rem;
+border-radius: 1rem;
+border: 1px solid rgb(223, 223, 223);
+box-shadow: 0 2px 6px rgba(0, 0, 0, 0.14);
+}
 
+.dark-mode .normalOrgridBtn-wrapping{
+  background: var(--darkMode-bg-cl);
+  border: 1px solid var(--thin-border);
+  box-shadow:  0 2p 6px rgba(0, 0, 0, 0.3);
+}
+
+.normalOrgridBtn-wrapping .normalOrgridBtn{
+  width: 12rem;
+  border-radius: 1rem;
+  padding: .7rem;
+  height: 5rem;
+  display: flex;
+  gap: 1rem;
+  box-shadow: 0 2px 2px rgba(151, 150, 150, 0.21);
+  background: rgb(250, 250, 250);
+  border: 1px solid rgb(247, 247, 247);
+  align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+
+.top-dashboard .packs{
+  border: none;
+  padding: .5rem 3.5rem;
+  background: rgb(241, 241, 240);
+  color: rgb(100, 91, 83);
+  margin-top: .3rem;
+  border-radius: 1rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.38);
+  font-weight: 600;
+  font-size: .9rem;
+  border: 1px solid rgb(255, 255, 255);
+}
+
+.dark-mode .packs{
+  background: var(--background-cl-1);
+   color: rgb(160, 146, 135);
+   border: 1px solid var(--thin-border);
+}
 
 
