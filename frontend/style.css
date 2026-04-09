@@ -4058,7 +4058,7 @@ NEW GRID & NORMAL UI UPDATE (20th/1/2026
 *****/
 .normalGrid-container{
   width: 100%;
-  max-width: 96%;
+  max-width: 94%;
   display: flex;
   position: relative;
   justify-self: center;  
@@ -4066,13 +4066,14 @@ NEW GRID & NORMAL UI UPDATE (20th/1/2026
   padding: 1rem .3rem;
   height: max-content;
   margin-top: .8rem;
-  margin-bottom: .8rem;
+  margin-bottom: 2rem;
   flex-direction: column;
 }
 
 .dark-mode .normalGrid-container {
-  border: none;
+  border: 1px solid var(--thin-border);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 22);
+
 }
 
 .normalGrid-container .packages{
@@ -4435,13 +4436,18 @@ GRID VIEW
 
 #normalView{
   width: 100%;
-  max-width:96%;
+  max-width:94%;
   padding: 0;
   margin-bottom: 4rem;
   box-shadow: 0 8px 14px  rgba(56, 55, 55, 0.2);
   border-end-end-radius: 1.5rem;
   border-end-start-radius: 1.5rem;
   border-bottom: 9px solid wheat;
+}
+
+.dark-mode #normalView{
+  border: 1px solid var(--thin-border);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 22);
 }
 
 #normalView .top-dashboard{
@@ -4808,8 +4814,7 @@ left section
 }
 
 .placeHolderPrice small{
-  font-size: .7rem;
-  color: rgb(48, 59, 66);
+  display: none;
 }
 
 
