@@ -642,7 +642,7 @@ SOCIAL FOLLOW SECTION
 
 
 .dark-mode .social-follow{
-  background: var(--background-cl-1);
+  background: var(--background-cl-1) !important;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
   border: 2px solid var(--thin-border);
 }
