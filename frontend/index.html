@@ -731,14 +731,16 @@ width: 50%;
 </div>
 <div class="nav-right">
 
-  <a href="notification.html">
+
      <div class="notis">
-    <img class="notifity" src="./css/icons/notify (1).png" alt="" loading="lazy" style="display: none;">
+
+  <img onclick="window.location.href='notification.html'" class="notifity" src="./css/icons/notify (1).png" alt="" loading="lazy" style="display: none;">
     <span id="notifyCount">2</span>
-  <img class="notifity" hidden
+
+  <img onclick="window.location.href='notification.html'" class="notifity" hidden
    src="./css/icons/notify (3).png" alt="" loading="lazy">
   </div>
-  </a>
+
  
  
  <!---DARK MODE-->
@@ -767,6 +769,14 @@ width: 50%;
   
 <!------MAIN SECTION----->
 <section class="card-container">
+
+
+
+
+
+
+
+
 <div class="welcome-card">
   <div class="welcome-top">
     <div class="welcome-top-leftside">
@@ -782,9 +792,11 @@ width: 50%;
     
     <span><small class="dotter"></small> Active 24/7</span>
   </div>
-    <div id="clock" style="display: none;"></div>
+    <div id="clock" style="display: flex !important;"></div>
   </div>
 </div>
+
+
 
 
 <!-----COUNTER-ENDS--->
@@ -835,7 +847,10 @@ width: 50%;
 <!---SCROLL THUMBNAIL--REUSABLE--CARD ADS-->
 <div class="google-thumbnails-wrapper">
   <div class="google-thumbnails" id="thumbnailScroll">
-
+<div class="google-thumbnail thumb2">
+  <img class="analy" src="./css/uiIcons/loudspeaker.png" alt="" loading="lazy">
+    We are Updating the UI <span style="color: #cfa20c; margin: .4rem;">feel free to place your order </span> It will not affect order placing.
+    </div>
 
 
 
@@ -938,7 +953,7 @@ width: 50%;
 
 <!----PERSISTENT-CARD-(ALWAYS-VISIBLE)--->
 <!-- LIVE ORDER CONTAINER -->
- <section class="follow-share-container">
+ <section class="follow-share-container" >
  <div class="social-follow">
   <div class="follow-left">
    <small>Click to Follow :</small>
