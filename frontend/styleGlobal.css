@@ -129,7 +129,7 @@ SNACKBAR SECTION
 .trusted-by {
   width: 100%;
   max-width: 96% !important;
-  height: 14rem;
+  height: rem !important;
   margin: 1rem;
   display: flex;
   align-items: center;
@@ -137,7 +137,7 @@ SNACKBAR SECTION
   gap: 1rem;
   overflow: hidden;
   position: relative;
-  padding: 14px 8px;
+  padding:  8px;
   border-radius: .3rem;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4) !important;
   transition: 14s ease;
@@ -231,7 +231,7 @@ SNACKBAR SECTION
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   line-height: .9;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
-  height: 2.5rem; 
+  height: 1.8rem; 
   justify-content: center;
   align-items: center;
   border: 0.1px solid #5dad99;
