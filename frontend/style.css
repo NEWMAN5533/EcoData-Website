@@ -912,13 +912,12 @@ SOCIAL FOLLOW SECTION
 .follow-share-container {
   width: 100%;
   justify-self: center;
-  max-width: 99%;
+  max-width: 95% !important;
   align-items: center;
   justify-content: center;
   display: flex;
   gap: .4rem;
   height: 4rem;
-  padding: 0 1rem;
   position: relative
 }
 
@@ -977,6 +976,14 @@ SOCIAL FOLLOW SECTION
   margin-top: .5rem;
   border: 4px solid rgba(10, 12, 11, 0.178);
   border-radius: 4px;
+}
+
+
+
+.dark-mode .social-follow{
+  background: var(--background-cl-1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+  border: 2px solid var(--thin-border);
 }
 
  .follow-left{
@@ -1069,379 +1076,6 @@ DAILY ANALYTICS SECTION
 
 
 
-
-
-
-
-
-
-/******
-DAILY ANALYTICS SECTION ENDS
-****/
-
-/***
-LIVE ORDER SECTION 
-***/
-
-.top-var{
-display: flex;
-flex-direction: column;
-width: 100%;
-height: 4.5rem;
-padding: .3rem;
-gap: 0;
-justify-content: start;
-align-items: start;
-margin-bottom: .1rem;
-}
-
-
-.dark-mode .top-var{
-display: flex;
-flex-direction: column;
-width: 100%;
-height: 4.8rem;
-padding: .3rem;
-gap: 0;
-justify-content: start;
-align-items: start;
-margin-bottom: .1rem;
-}
-
-
-
-.top-var h4{
- color: rgb(22, 22, 31);
-  font-size: 1.2rem;
-  padding: .5rem;
-  border-radius: 2px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-.top-var small{
-  color: rgb(136, 140, 145);
-  margin-top: -1.3rem;
-  font-size: .65rem;
-  margin-left: .5rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-.dark-mode .top-var small{
-  color: rgb(129, 129, 129);
-  margin-top: -1.5rem;
-  font-size: .6rem;
-  margin-left: .7rem;
-}
-
-.dark-mode .top-var h4{
-  padding: .5rem;
-  color: rgb(231, 228, 228);
-}
-
-.live-order-wrp{
-  width: 100%;
-  justify-self: center;
-  max-width: 90%;
-  height: max-content;
-  position: relative;
-  height: max-content;
-  display: flex;
-  gap: 0;
-  flex-direction: column;
-  box-sizing: border-box;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  margin-top: .8rem;
-  background: rgb(238, 238, 240);
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-  border-radius: .5rem;
-}
-
-.dark-mode .live-order-wrp{
-  background: var(--welcome-card-bg);
-  border: 1px solid var(--thin-border);
-  box-shadow: 0 2px  6px rgba(0,0,0,0.4);
-  padding: 0 .2rem;
-}
-
-.live-heading{
-  font-size: 14px;
-  font-weight: 600;
-  color: rgba(19,133,85,1);
-  display: flex;
-  margin-bottom: 10px;
-  align-items: center;
-  gap: 6px;
-}
-
-
-#liveOrderSection {
-  width: 100%;
-  max-height: max-content;
-  background: transparent;
-  border-start-start-radius: .7rem;
-  border-start-end-radius: .7rem;
-}
-
-
-
-
-
-
-/* Header row */
-.live-order-header,
-.live-order-row {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr 1.4fr 1fr;
-  gap: 10px;
-  align-items: center;
-  padding: 12px 14px;
-}
-
-.live-order-row{
-  display: grid;
-  grid-template-columns: 1.2fr 1fr 1.4fr 1fr;
-  gap: 10px;
-  padding: 12px 14px;
-  font-size: .7rem;
-  color: #333;
-  margin-top: .2rem;
-  margin-left: .3rem;
-  border-bottom: 1px solid #dfdbdbde;
-  }
-
-  .dark-mode .live-order-row{
-    color: white;
-    font-weight: 600;
-    opacity: .8;
-  }
-
-  .live-order-row:hover{
-    background: #f7fafa;
-  }
-
-
-.live-order-header {
-  background: #e0e0e0cc;
-  font-size: 14px;
-  font-weight: 600;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  border-start-end-radius: .6rem;
-  border-start-start-radius: .6rem;
-  height: 1rem;
-  padding-right: .6rem;
-  align-items: center;
-  text-align: center;
-  display: flex;
-  justify-content: space-around;
-  color: #303837;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  border: 1px solid #d6d5d5;
-}
-
-.dark-mode .live-order-header{
-  background: var(--thin-border);
-  color: rgb(204, 201, 201);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  border: 1px solid var(--thin-border);
-}
-
-.live-order-card{
-  max-width: 100%;
-  overflow-y: auto;
-  overflow-x: auto;
-  scrollbar-width: thin;
-  max-height: 300px;
-  margin-bottom: 1rem;
-  position: relative;
-  background: rgba(255,255,255,255);
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.live-order-card::-webkit-scrollbar{
-  display: none;
-}
-
-.dark-mode .live-order-card{
-  background: var(--welcome-card-border);
-  margin-bottom: .2rem;
-  border-end-end-radius: .4rem;
-  border-end-start-radius: .4rem;
-}
-
-.live-order-body {
-  height: 200px;
-  scroll-behavior: smooth;
-  background: none;
-  margin-bottom: .3rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  padding: .8rem .2rem;
-}
-
-.dark-mode .live-order-body{
-  background: none;
-  border: none;
-
-}
-
-
-
-
-
-/* Header */
-.live-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 10px;
-  font-size: .9rem;
-}
-
-.live-pulse {
-  width: 8px;
-  height: 8px;
-  background: #2ecc71;
-  border-radius: 50%;
-  animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.6); opacity: 0.4; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-/* Rows */
-.live-row {
-  display: flex;
-  justify-content: space-between;
-  font-size: .80rem;
-  font-weight: 600;
-  color: rgb(103, 105, 110);
-  text-align: center;
-  margin-bottom: 6px;
-  scrollbar-width: thin;
-  white-space: nowrap;
-  border-bottom: 1px solid rgb(230, 230, 230);
-  gap: 8px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  overflow-x: auto;
-}
-
-.dark-mode .live-row{
-  color: rgb(42, 44, 44);
-  font-weight: 600;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: .80rem;
-  border-bottom: 1px solid rgba(97, 96, 96, 0.945);
-}
-
-.live-row::-webkit-scrollbar{
-  height: 4px;
-}
-
-.live-row::-webkit-scrollbar-thumb{
-  background: #d1d5db;
-  border-radius: 10px;
-}
-
-.live-row .label {
-  font-size: 0.85rem;
-  color: #777;
-  opacity: 0.8;
-}
-
-.live-row .value {
-  font-weight: 600;
-}
-
-/* Footer */
-.live-footer {
-  margin-top: 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: .8rem;
-}
-
-.empty-state {
-  text-align: center;
-  color: #999;
-  padding: 16px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: .85rem;
-}
-
-.dark-mode .empty-state{
-  color: white;
-  opacity: .9;
-}
-
-
-
-
-.live-order-row:last-child {
-  border-bottom: none;
-}
-
-/* Status pills */
-.order-status {
-  padding: 4px 10px;
-  border-radius: 16px;
-  font-size: .75rem;
-  font-weight: 600;
-  text-align: center;
-  width: fit-content;
-}
-
-
-
-/**--ORDER STAtUS ENDS--**/
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Smooth status transition */
-.status-badge {
-  transition: background-color 0.35s ease, transform 0.25s ease;
-}
-
-/* Pulse animation */
-@keyframes statusPulse {
-  0%   { transform: scale(1); }
-  50%  { transform: scale(1.08); }
-  100% { transform: scale(1); }
-}
-
-/* Applied dynamically when status updates */
-.status-animate {
-  animation: statusPulse 0.6s ease;
-}
-
-
-.status-delivered {
-  background: #2ecc97;
-  box-shadow: 0 0 0 rgba(46, 204, 151, 0.6);
-}
-
-.status-delivered.status-animate {
-  box-shadow: 0 0 18px rgba(46, 204, 113, 0.8);
-}
-/***
-ENDS
-****/
 
 
 
@@ -3759,7 +3393,7 @@ NOTICE BOARD SECTION
   justify-content: flex-start;
   padding: 1rem;
   position: relative;
-  background: transparent !important;
+  background:red !important;
   margin-bottom: -.8rem;
 }
 
@@ -5219,15 +4853,15 @@ DASHBOARD TOTALS OVERVIEW
   max-width: 94%;
   padding: .3rem 1rem;
   height: 2rem;
+  background: transparent !important;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 14px;
-  background-color: red;
 }
 
 .daily-analytics h4{
-  color: rgb(18, 26, 31);
+  color: rgb(18, 26, 31) !important;
   font-size: .9rem;
   font-family: "inter" sans-serif;
   font-weight: 600;
@@ -5235,7 +4869,7 @@ DASHBOARD TOTALS OVERVIEW
 
 
 .dark-mode .daily-analytics h4{
-  color: rgb(241, 239, 239);
+  color: rgb(241, 239, 239) !important;
   font-family: "inter" sans-serif;
   font-weight: 600;
   font-size: .9rem;
@@ -5245,8 +4879,8 @@ DASHBOARD TOTALS OVERVIEW
 
 .totals-container {
 width: 100%;
-max-width: 96%;
-margin: 4px 0;
+max-width: 99%;
+margin-bottom: 1.2rem;
 padding: .6rem;
 display: grid;
 grid-template-columns: repeat(1, 1fr); 
@@ -5258,18 +4892,26 @@ gap: .6rem;
 }
 
 .total-card {
-  width: 98%;
+  width: 100% !important;
   height: 6.7rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: .6rem;
+  margin-top: .8rem;
   border-radius: .8rem;
   justify-content: center;
   text-align: center;
   justify-self: center;
+  background: var(--primary-cl) !important;
+  padding: .3rem;
+  box-shadow: 0 10px 20px rgba(22, 22, 22, 0.3);
+}
+
+
+.dark-mode .total-card {
+
   background: var(--background-cl-2) !important;
-  padding-top: 1rem;
+  padding: .3rem;
   box-shadow: 0 10px 20px rgba(22, 22, 22, 0.9);
 }
 
@@ -5295,28 +4937,48 @@ top section
 }
 
 .total-card-top small{
-  font-size: .7rem;
+  font-size: .8rem;
+  color: var(--thin-border);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.dark-mode .total-card-top small{
+  font-size: .8rem;
   color: rgb(228, 226, 226);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+
+.dark-mode .total-card-top .cedis{
+  font-size: .87rem !important;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
 .total-card-top .cedis{
-  font-size: .57rem;
+  font-size: .87rem !important;
   color: rgb(30, 209, 149);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .total-card .total-card-top img{
-  width: 1rem;
-  height: 1rem;
+  width: 1.3rem;
+  height: 1.3rem;
   margin-top: -.1rem;
 }
 
-
 .total-card .total-card-bottom p{
-  font-size: .8rem;
+  font-size: .9rem;
   font-weight: 600;
-  color: rgb(228, 226, 226);
+  color: var(--thin-border-1);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.dark-mode .total-card .total-card-bottom p{
+  font-size: .9rem;
+  font-weight: 600;
+  color: white;
+  opacity: .9;
 }
 
 .total-card .total-card-bottom{
@@ -5338,6 +5000,397 @@ top section
 /****
 DASHBOARD SECTION ENDS
 ****/
+
+
+
+
+
+/******
+DAILY ANALYTICS SECTION ENDS
+****/
+
+/***
+LIVE ORDER SECTION 
+***/
+
+.status-talble-container{
+  width: 100%;
+  max-width: 768px;
+  height: 20rem;
+  padding: .2rem;
+  background: transparent;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.top-var{
+display: flex;
+flex-direction: column;
+width: 100%;
+height: 4.5rem;
+padding: .3rem;
+gap: 0;
+justify-content: start;
+align-items: start;
+margin-bottom: .1rem;
+}
+
+
+.dark-mode .top-var{
+display: flex;
+flex-direction: column;
+width: 100%;
+height: 4.8rem;
+padding: .3rem;
+gap: 0;
+justify-content: start;
+align-items: start;
+margin-bottom: .1rem;
+}
+
+
+
+.top-var h4{
+ color: rgb(22, 22, 31);
+  font-size: 1.2rem;
+  padding: .5rem;
+  border-radius: 2px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.top-var small{
+  color: rgb(136, 140, 145);
+  margin-top: -1.3rem;
+  font-size: .65rem;
+  margin-left: .5rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.dark-mode .top-var small{
+  color: rgb(129, 129, 129);
+  margin-top: -1.5rem;
+  font-size: .6rem;
+  margin-left: .7rem;
+}
+
+.dark-mode .top-var h4{
+  padding: .5rem;
+  color: rgb(231, 228, 228);
+}
+
+
+
+
+
+.live-order-wrp{
+  width: 100%;
+  justify-self: center;
+  max-width: 94% !important;
+  position: relative;
+  height: max-content;
+  display: flex;
+  gap: 0;
+  flex-direction: column;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-top: .8rem;
+  background: rgb(238, 238, 240) ;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px  6px rgba(0,0,0,0.4);
+  border-radius: .5rem;
+}
+
+.dark-mode .live-order-wrp{
+  background:  rgba(31, 28, 18, 0.123) !important;
+  border: 1px solid var(--thin-border);
+
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5) !important;
+  padding: 0 .2rem;
+}
+
+.live-heading{
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(19,133,85,1);
+  display: flex;
+  margin-bottom: 10px;
+  align-items: center;
+  gap: 6px;
+}
+
+
+#liveOrderSection {
+  width: 100%;
+  max-height: max-content;
+  background: transparent;
+  border-start-start-radius: .7rem;
+  border-start-end-radius: .7rem;
+}
+
+
+
+
+
+
+/* Header row */
+.live-order-header,
+.live-order-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1.4fr 1fr;
+  gap: 10px;
+  align-items: center;
+  padding: 12px 14px;
+}
+
+.live-order-row{
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1.4fr 1fr;
+  gap: 10px;
+  padding: 12px 14px;
+  font-size: .7rem;
+  color: #333;
+  margin-top: .2rem;
+  margin-left: .3rem;
+  border-bottom: 1px solid #dfdbdbde;
+
+  }
+
+  .dark-mode .live-order-row{
+    color: white;
+    font-weight: 600;
+    opacity: .8;
+  }
+
+  .live-order-row:hover{
+    background: #f7fafa;
+  }
+
+
+.live-order-header {
+  background: #e0e0e0cc;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-start-end-radius: .6rem;
+  border-start-start-radius: .6rem;
+  height: 1rem;
+  padding-right: .6rem;
+  align-items: center;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  color: #303837;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  border: 1px solid #d6d5d5;
+}
+
+.dark-mode .live-order-header{
+  background: var(--thin-border);
+  color: rgb(204, 201, 201);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--thin-border);
+}
+
+.live-order-card{
+  max-width: 100%;
+  overflow-y: auto;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  max-height: 300px;
+  margin-bottom: 1rem;
+  position: relative;
+  background: rgba(255,255,255,255);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.live-order-card::-webkit-scrollbar{
+  display: none;
+}
+
+.dark-mode .live-order-card{
+  background: var(--welcome-card-border);
+  margin-bottom: .2rem;
+  border-end-end-radius: .4rem;
+  border-end-start-radius: .4rem;
+}
+
+.live-order-body {
+  height: 200px;
+  scroll-behavior: smooth;
+  background: none;
+  margin-bottom: .3rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  padding: .8rem .2rem;
+}
+
+.dark-mode .live-order-body{
+  background: none;
+  border: none;
+
+}
+
+
+
+
+
+/* Header */
+.live-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-size: .9rem;
+}
+
+.live-pulse {
+  width: 8px;
+  height: 8px;
+  background: #2ecc71;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.6); opacity: 0.4; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Rows */
+.live-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: .80rem;
+  font-weight: 600;
+  color: rgb(103, 105, 110);
+  text-align: center;
+  margin-bottom: 6px;
+  scrollbar-width: thin;
+  white-space: nowrap;
+  border-bottom: 1px solid rgb(230, 230, 230);
+  gap: 8px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  overflow-x: auto;
+}
+
+.dark-mode .live-row{
+  color: rgb(42, 44, 44);
+  font-weight: 600;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: .80rem;
+  border-bottom: 1px solid rgba(97, 96, 96, 0.945);
+}
+
+.live-row::-webkit-scrollbar{
+  height: 4px;
+}
+
+.live-row::-webkit-scrollbar-thumb{
+  background: #d1d5db;
+  border-radius: 10px;
+}
+
+.live-row .label {
+  font-size: 0.85rem;
+  color: #777;
+  opacity: 0.8;
+}
+
+.live-row .value {
+  font-weight: 600;
+}
+
+/* Footer */
+.live-footer {
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: .8rem;
+}
+
+.empty-state {
+  text-align: center;
+  color: #999;
+  padding: 16px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: .85rem;
+}
+
+.dark-mode .empty-state{
+  color: white;
+  opacity: .9;
+}
+
+
+
+
+.live-order-row:last-child {
+  border-bottom: none;
+}
+
+/* Status pills */
+.order-status {
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: .75rem;
+  font-weight: 600;
+  text-align: center;
+  width: fit-content;
+}
+
+
+
+/**--ORDER STAtUS ENDS--**/
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Smooth status transition */
+.status-badge {
+  transition: background-color 0.35s ease, transform 0.25s ease;
+}
+
+/* Pulse animation */
+@keyframes statusPulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* Applied dynamically when status updates */
+.status-animate {
+  animation: statusPulse 0.6s ease;
+}
+
+
+.status-delivered {
+  background: #2ecc97;
+  box-shadow: 0 0 0 rgba(46, 204, 151, 0.6);
+}
+
+.status-delivered.status-animate {
+  box-shadow: 0 0 18px rgba(46, 204, 113, 0.8);
+}
+/***
+ENDS
+****/
+
 
 /****
 LIVE ORDER COLOR
