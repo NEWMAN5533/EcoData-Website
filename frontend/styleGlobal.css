@@ -1,4 +1,72 @@
 
+:root {
+  --bg-cl: #FFF;
+  --primary-cl: #fff;
+  --secondary-cl: rgb(50, 50, 190);
+  --dark-cl: #0a0a0a;
+  --ascent-cl: rgb(158, 97, 209);
+  --background-cl: #e6e8ce;
+  --card-full-bg-cl: rgb(255, 217, 0);
+  --card-full-tele-bg-cl: rgb(221, 19, 19);
+  --card-full-airtel-bg-cl:  rgb(6, 6, 231);
+  --border-cl-2: rgba(66, 66, 26, 0.226);
+  --mtn-btn: rgb(193, 196, 19);
+  --telecel-btn: rgb(180, 57, 19);
+  --airteltigo-btn: rgb(28, 46, 119);
+
+  /*====NEW===ROOT====*/
+  /*====NEW===ROOT====*/
+  --darkMode-bg-cl: rgb(24, 29, 36) !important;
+  --background-cl-1: rgb(29, 36, 41);
+  --background-cl-2: rgb(29, 36, 41);
+  --background-cl-2: rgb(29, 36, 41);
+
+
+  /***
+  NEW ROOT
+  ***/
+  --btn-bg-cl: rgb(250, 126, 9);
+  --user-panel-bg: rgba(42, 42, 194, 0.938);
+  --clock-bg-cl: rgba(252, 175, 11, 0.199);
+  --clock-bg-cl-1: rgb(2, 61, 52);
+
+  /***
+  DARK MODE COLORS
+  ***/
+  --darkMode-bg-cl: rgb(24, 29, 36) !important;
+  --welcome-card-bg-2:  #141c27 !important;
+  --welcome-card-bg:  #0e141b !important;
+  --welcome-card-bg-3: rgba(77, 77, 77, 0.89);
+  --welcome-card-border: rgb(74, 88, 94);
+  --thin-border: rgb(35, 48, 49);
+  --text-cl: rgb(145, 168, 164);
+  --text-cl-2: rgb(210, 216, 216);
+  --text-cl-3: rgb(139, 141, 141);
+
+  /**
+  BORDER SOLID COLORS
+  **/
+  --thin-border-1:  #0d6d5a;
+  --thin-border-2:  #830616;
+  --thin-border-3:  #b97207;
+  --thin-border-4:  #036aa7;
+  --thin-border-5:  #bba907;
+  --thin-border-6:   rgb(17, 2, 31);
+  --thin-border-7:  rgb(1, 11, 39);
+
+  /***
+  CARD BG
+  ***/
+  --card-mtn-bg:  #faba5ad0;
+  --card-tel-bg:  #fa537dd0;
+  --card-tigo-bg:  #6cbff7cb;
+}
+
+
+
+
+
+
 /* MENU ICON DARK & WHITE MODE */
   .dark-mode #cardToggler{
     display: none;
@@ -128,8 +196,8 @@ SNACKBAR SECTION
 /* ============================= */
 .trusted-by {
   width: 100%;
-  max-width: 96% !important;
-  height: rem !important;
+  max-width: 98% !important;
+  height: 15rem !important;
   margin: 1rem;
   display: flex;
   align-items: center;
@@ -147,6 +215,7 @@ SNACKBAR SECTION
 .dark-mode .trusted-by{
   background: var(--background-cl-1) !important;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.9) !important;
+  border: 1px solid var(--thin-border);
 }
 
 @keyframes backColorChanger {
@@ -328,7 +397,7 @@ NOTICE BOARD SECTION
 *******/
 .notice-container{
   width: 100%;
-  max-width: 94% !important;
+  max-width: 98% !important;
   height: max-content;
   display: flex;
   flex-direction: column;
@@ -414,9 +483,10 @@ NOTICE BOARD SECTION
 
 .notice-board{
   width: 100%;
+  height: max-content;
   gap: 1rem;
   max-width: 98% !important;
-  padding: .5rem .7rem !important;
+  padding: .4rem .7rem !important;
   align-items: center;
   justify-content: start;
   border-left: 5px solid rgb(226, 224, 224) !important;
