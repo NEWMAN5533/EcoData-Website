@@ -1157,12 +1157,7 @@ onAuthStateChanged(auth, async (user) => {
     if (!userSnap.exists()) return;
 
     const userData = userSnap.data();
-
-    // 🔥 Redirect immediately if agent
-    if (userData.isAgent === true) {
-      window.location.href = "agentPage.html";
-      return; // stop further execution
-    }
+
 
     const greeting = updateClock();
     // Display username if element exists
