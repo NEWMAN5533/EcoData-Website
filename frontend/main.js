@@ -1,5 +1,5 @@
 
-//---Firebase Imports--------
+// --- Firebase Imports ---
 import { auth, db } from "./firebase-config.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 import {
@@ -169,6 +169,7 @@ deliveryOptions.forEach(option => {
 
     const mode = option.dataset.mode;
 
+
     // RESET BUNDLE WHEN MODE CHANGED
     resetSelectedBundle("Offer changed please select bundle.");
     // save to localStorage
@@ -321,10 +322,7 @@ document.addEventListener("click", () => {
 const btn = document.getElementById('selectBtn');
 const dropdown = document.getElementById('dropdown');
 
-btn.onclick = () => {
-  dropdown.style.display =
-    dropdown.style.display === 'block' ? 'none' : 'block';
-};
+
 
 document.querySelectorAll('.option').forEach(opt => {
   opt.onclick = () => {
@@ -1134,25 +1132,34 @@ function saveLiveOrder(order) {
   if (!order || !order.orderId) return;
 
   const existing = 
+
     JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY) || "[]");
 
   const index = existing.findIndex(o => o.orderId === order.orderId);
 
   if (index !== -1) {
+    const current = existing[index];
+
     // Merge without overwriting status if already delivered/failed
     existing[index] = {
-      ...existing[index],
+      ...current,
       ...order,
+
       status: 
-      isTerminalStatus(existing[index].status)
+      isTerminalStatus(current.status)
         ? existing[index].status
         : order.status,
+      timestamp: current.timestamp || Date.now(),
+      updatedAt: Date.now(),
     };
   } else {
     // New order on top
     existing.unshift({
       ...order,
-      createdAt: order.createdAt || Date.now(),
+      timestamp: Date.now(), // SINGLE SOURCE OF TRUTH
+
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
     });
   }
 
@@ -1180,8 +1187,12 @@ const STATUS_PRIORITY = {
 };
 
 function getStoredOrders() {
-  return JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY) || "[]");
+  const orders =
+    JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY) || "[]");
+
+  return orders .sort((a, b) => b.timestamp - a.timestamp);
 }
+
 
 function updateLiveOrderStatus(orderId, newStatus) {
   if (!orderId || !newStatus) return;
@@ -1229,6 +1240,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const orders =
     JSON.parse(localStorage.getItem("ecoLiveOrders")) || [];
+
+   
 
   tableBody.innerHTML = "";
 
