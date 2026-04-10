@@ -996,23 +996,23 @@ function loadLiveOrders() {
   const tableBody = document.getElementById("liveOrderRows");
   if (!tableBody) return;
 
-  const orders = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
+  const orders =
+    JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
 
-  // Clear placeholder but do NOT remove rows with delivered orders
   const empty = tableBody.querySelector(".empty-state");
   if (empty) empty.remove();
 
-  // Sort by createdAt descending
   orders
-    .sort((a, b) => parseInt(b.createdAt) -
-     parseInt(a.createdAt)) // force number
+    .sort((a, b) => {
+      return (b.timestamp || b.createdAt) - (a.timestamp || a.createdAt);
+    })
     .forEach(renderLiveOrderRow);
 
-  // Show placeholder if table is empty
   if (!orders.length) {
     tableBody.innerHTML = `<p class="empty-state">No recent orders yet</p>`;
   }
 }
+
 
 
 
@@ -1031,7 +1031,7 @@ function renderLiveOrderRow(order) {
     row = document.createElement("div");
     row.className = "live-row";
     row.dataset.id = order.orderId;
-    tableBody.prepend(row);
+    tableBody.appendChild(row);
   }
 
   row.innerHTML = `
@@ -1241,20 +1241,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const orders =
     JSON.parse(localStorage.getItem("ecoLiveOrders")) || [];
 
-   
-
-  tableBody.innerHTML = "";
-
-  if (!orders.length) {
-    tableBody.innerHTML =
-      `<p class="empty-state">No recent orders yet</p>`;
-    return;
-  }
-
-  orders.forEach(order => {
-    renderLiveOrderRow(order);
-  });
+  // single entry point for rendering
   loadLiveOrders();
+
+// background updates (if polling)
   startAutoPolling();
 });
 // handleNewOrders Dom ends//
