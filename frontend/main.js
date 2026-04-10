@@ -1177,7 +1177,7 @@ function getOrderStats() {
     pending: orders.filter(o => o.status === "pending").length,
 
    // completed
-    completed: orders.filter(o => o.status === "delivered").length,
+    completed: orders.filter(o => ["delivered", "completed", "success"].includes(o.status?.toLowerCase())).length,
   }
 
 }
@@ -1188,20 +1188,32 @@ function updatePendingCard() {
   // pending from storage
  const pendingEl = document.getElementById("pendingTotal");
   if(pendingEl) pendingEl.textContent = stats.pending;
-
-  // completed from DOM (row in table)
-  const tableBody = document.getElementById("liveOrderRows");
-
- const completedEl = document.getElementById("completedOrders");
  
- if(tableBody && completedEl) {
 
-  const rows = tableBody.querySelectorAll("live-row .status-badge.delivered");
-  completedEl.textContent = rows.length;
- }
+  // read from permanent storage
+  const completedEl = document.getElementById("completedOrders");
+
+  parseInt(localStorage.getItem("ecoCompletedTotal")) || 0;
+
+  if(completedEl) completedEl.textContent = completedTotal;
 }
 
+function initializeCompletedCount() {
+  const alreadyInitialized = localStorage.getItem("ecoCompletedInitialized");
 
+  if (alreadyInitialized) return; //  prevents running again
+
+  const orders = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
+
+  const deliveredCount = orders.filter(o =>
+    ["delivered", "completed", "success"].includes(
+      o.status?.toLowerCase()
+    )
+  ).length;
+
+  localStorage.setItem("ecoCompletedTotal", deliveredCount);
+  localStorage.setItem("ecoCompletedInitialized", "true");
+}
 
 // STATUS PRIORITY LOADER
 
@@ -1221,12 +1233,10 @@ function getStoredOrders() {
 
 
 function updateLiveOrderStatus(orderId, newStatus) {
-
-
-
   if (!orderId || !newStatus) return;
 
   const orders = getStoredOrders();
+
   const index = orders.findIndex(o => o.orderId === orderId);
   if (index === -1) return;
 
@@ -1237,6 +1247,10 @@ function updateLiveOrderStatus(orderId, newStatus) {
     return;
 }
 
+// Detect first-time delivery
+const wasDelivered = currentStatus === "delivered";
+const nowDelivered = newStatus === "delivered";
+
   orders[index] = {
     ...orders[index],
     status: newStatus,
@@ -1244,6 +1258,18 @@ function updateLiveOrderStatus(orderId, newStatus) {
   };
 
   localStorage.setItem(LIVE_ORDERS_KEY, JSON.stringify(orders));
+
+
+  // ONLY increment once when it becomes delivered
+  if(!wasDelivered && nowDelivered ) {
+    let completedTotal = 
+
+    parseInt(localStorage.getItem("ecoCompletedTotal")) || 0;
+
+    completedTotal++;
+
+    localStorage.setItem("ecoCompletedTotal", completedTotal);
+  }
 
   updatePendingCard();  // correct
 }
@@ -1271,7 +1297,8 @@ document.addEventListener("DOMContentLoaded", () => {
 // background updates (if polling)
   startAutoPolling();
 
-
+  // Read delivered orders from HISTORY
+  initializeCompletedCount();
 // updatePendingOrders
   updatePendingCard();
 });
@@ -1381,7 +1408,7 @@ document.addEventListener("DOMContentLoaded", () => {
  shareBtn.addEventListener('click', async () =>
 {
   const shareData = {
-    title: "Ecodata",
+    title: "EcoData",
     text: "Check out Ecodata Website, the smartest, digital and trusted data bundle purchase website y'll love to use.",
     url: window.location.href
   };
