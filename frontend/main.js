@@ -1,3 +1,5 @@
+// UPDATED AT 11/APRIL, 2026 [BACKUP MAIN.JS]
+
 
 // --- Firebase Imports ---
 import { auth, db } from "./firebase-config.js";
@@ -1128,6 +1130,9 @@ function handleNewOrder(returnedOrder) {
 const LIVE_ORDERS_KEY = "ecoLiveOrders";
 const MAX_LIVE_ORDERS = 200;
 
+
+
+
 function saveLiveOrder(order) {
   if (!order || !order.orderId) return;
 
@@ -1169,11 +1174,44 @@ function saveLiveOrder(order) {
     JSON.stringify(existing.slice(0,
   MAX_LIVE_ORDERS))
   );
+
+  updatePendingCard();
 }
 
 // ends
 
 
+function getOrderStats() {
+  const orders = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
+
+  return {
+   // pending
+    pending: orders.filter(o => o.status === "pending").length,
+
+   // completed
+    completed: orders.filter(o => o.status === "delivered").length,
+  }
+
+}
+
+function updatePendingCard() {
+  const stats = getOrderStats();
+
+  // pending from storage
+ const pendingEl = document.getElementById("pendingTotal");
+  if(pendingEl) pendingEl.textContent = stats.pending;
+
+  // completed from DOM (row in table)
+  const tableBody = document.getElementById("liveOrderRows");
+
+ const completedEl = document.getElementById("completedOrders");
+ 
+ if(tableBody && completedEl) {
+
+  const rows = tableBody.querySelectorAll("live-row .status-badge.delivered");
+  completedEl.textContent = rows.length;
+ }
+}
 
 
 
@@ -1195,6 +1233,9 @@ function getStoredOrders() {
 
 
 function updateLiveOrderStatus(orderId, newStatus) {
+
+
+
   if (!orderId || !newStatus) return;
 
   const orders = getStoredOrders();
@@ -1215,6 +1256,8 @@ function updateLiveOrderStatus(orderId, newStatus) {
   };
 
   localStorage.setItem(LIVE_ORDERS_KEY, JSON.stringify(orders));
+
+  updatePendingCard();  // correct
 }
 
 // ends
@@ -1234,18 +1277,15 @@ function pollOrderStatus(orderId) {
 
 // ---------- LIVE ORDERS PERSISTENCE ----------
 document.addEventListener("DOMContentLoaded", () => {
-
-  const tableBody = document.getElementById("liveOrderRows");
-  if (!tableBody) return;
-
-  const orders =
-    JSON.parse(localStorage.getItem("ecoLiveOrders")) || [];
-
   // single entry point for rendering
   loadLiveOrders();
 
 // background updates (if polling)
   startAutoPolling();
+
+
+// updatePendingOrders
+  updatePendingCard();
 });
 // handleNewOrders Dom ends//
 
