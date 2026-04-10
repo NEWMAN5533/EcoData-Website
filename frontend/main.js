@@ -702,7 +702,6 @@ function saveGuestOrder(orderData) {
 let ecoTotals = JSON.parse(localStorage.getItem("ecoTotals")) || {
   orders: 0,
   gb: 0,
-  spend: 0,
 };
 
 // Called AFTER a successful EcoData order
@@ -720,7 +719,6 @@ function updateHomepageTotals(orderData) {
   // Update totals using EcoData values (from button/data-price, NOT Swift)
   ecoTotals.orders += 1;
   ecoTotals.gb += Number(orderData.volume || 0);
-  ecoTotals.spend += Number(orderData.amount || 0);
 
   // Persist totals to localStorage
   localStorage.setItem("ecoTotals", JSON.stringify(ecoTotals));
@@ -737,13 +735,11 @@ function updateHomepageTotals(orderData) {
 function renderHomepageTotals() {
   const ordersEl = document.getElementById("totalOrders");
   const gbEl = document.getElementById("totalGB");
-  const spendEl = document.getElementById("totalSpend");
 
-  if (!ordersEl || !gbEl || !spendEl) return;
+  if (!ordersEl || !gbEl ) return;
 
   ordersEl.textContent = ecoTotals.orders;
   gbEl.textContent = `${ecoTotals.gb} GB`;
-  spendEl.textContent = `₵ ${ecoTotals.spend.toFixed(2)}`;
 }
 
 // Load totals on page refresh
