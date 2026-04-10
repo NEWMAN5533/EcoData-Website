@@ -755,14 +755,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-// ---------- LOAD TOTALS ON PAGE REFRESH ----------
-document.addEventListener("DOMContentLoaded", () => {
-  ecoTotals =
-    JSON.parse(localStorage.getItem("ecoTotals")) || ecoTotals;
-  renderHomepageTotals();
-});
-
-
 
  
 
