@@ -1164,7 +1164,7 @@ onAuthStateChanged(auth, async (user) => {
     if (usernameDisplay) {
       const name = userData.username || "Dear";
       const suffix = userData.isAgent ? "Agent" : "";
-      usernameDisplay.textContent = `${greeting}, ${name}${suffix}!`;
+      usernameDisplay.textContent = `${greeting} ${suffix}, ${name}!`;
     }
 
   } catch (err) {
