@@ -673,15 +673,16 @@ width: 50%;
  </section>
 
 
- <!---dashboard totals 0verview-->
+ <!---dashboard totals overview-->
  <div class="daily-analytics">
   <h4>Daily Analytics Overview</h4>
 
 
 
  </div>
-<div id="homepageTotals" class="totals-container">
-  <div class="total-card">
+
+<div id="homepageTotals" class="totals-container" style="background: transparent !important;">
+  <div class="total-card" style="background: #fff; box-shadow: 0 10px 20px rgba(22, 22, 22, 0.3);">
 
     <div class="total-card-top">
       <small>Total Orders</small>
@@ -701,13 +702,26 @@ width: 50%;
       <p id="totalGB">0</p>
     </div>
   </div>
-  <div class="total-card">
+
+    <div class="total-card">
     <div class="total-card-top">
-      <small>Spent <span class="cedis">( GHS )</span></small>
-      <img src="./css/icons/totalspent.png" alt="spent-icon" loading="lazy">
+      <small>Pending </small>
+      <img src="./css/icons/recent.png" alt="spent-icon" loading="lazy">
     </div>
     <div class="total-card-bottom">
-      <p id="totalSpend">0</p>
+      <p id="pendingTotal">0</p>
+    </div>
+  </div>
+
+
+
+  <div class="total-card">
+    <div class="total-card-top">
+      <small>Completed </small>
+      <img src="./css/uiIcons/approval.png" alt="spent-icon" loading="lazy">
+    </div>
+    <div class="total-card-bottom">
+      <p id="completedOrders">0</p>
     </div>
   </div>
 
