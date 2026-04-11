@@ -739,7 +739,7 @@ function renderHomepageTotals() {
   if (!ordersEl || !gbEl ) return;
 
   ordersEl.textContent = ecoTotals.orders;
-  gbEl.textContent = `${ecoTotals.gb} GB`;
+  gbEl.textContent = `${ecoTotals.gb}GB`;
 }
 
 // Load totals on page refresh
@@ -1116,7 +1116,7 @@ function handleNewOrder(returnedOrder) {
 // ---------- LIVE ORDERS PERSISTENCE ----------
 
 const LIVE_ORDERS_KEY = "ecoLiveOrders";
-const MAX_LIVE_ORDERS = 200;
+const MAX_LIVE_ORDERS = 1000;
 
 
 
