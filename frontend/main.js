@@ -1240,13 +1240,19 @@ function updatePendingCard() {
   if(pendingEl) pendingEl.textContent = stats.pending;
  
 
-  // read from permanent storage
+
   const completedEl = document.getElementById("completedOrders");
 
+    // read from permanent storage
+    const completedTotal =
   parseInt(localStorage.getItem("ecoCompletedTotal")) || 0;
 
   if(completedEl) completedEl.textContent = completedTotal;
 }
+
+
+
+
 
 function initializeCompletedCount() {
   const alreadyInitialized = localStorage.getItem("ecoCompletedInitialized");
@@ -1264,6 +1270,8 @@ function initializeCompletedCount() {
   localStorage.setItem("ecoCompletedTotal", deliveredCount);
   localStorage.setItem("ecoCompletedInitialized", "true");
 }
+
+console.log(localStorage.getItem("ecoCompletedTotal"));
 
 // STATUS PRIORITY LOADER
 
