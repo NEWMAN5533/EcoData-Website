@@ -1096,7 +1096,7 @@ function handleNewOrder(returnedOrder) {
   `;
 
   // Add newest on top
-  tableBody.prepend(row);
+  tableBody.appendChild(row);
 
   // save for refresh persistence
   saveLiveOrder(normalized);
