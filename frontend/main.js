@@ -1174,7 +1174,7 @@ function getOrderStats() {
 
   return {
    // pending
-    pending: orders.filter(o => !["delivered", "complete", "success"].includes(o.status?.toLowerCase())).length,
+    pending: orders.filter(o => o.status === "pending").length,
 
    // completed
     completed: orders.filter(o => ["delivered", "completed", "success"].includes(o.status?.toLowerCase())).length,
@@ -1201,6 +1201,10 @@ function updateLiveOrderStatus(orderId, newStatus) {
     return;
 }
 
+// Detect first-time delivery
+const wasDelivered = currentStatus === "delivered";
+const nowDelivered = newStatus === "delivered";
+
   orders[index] = {
     ...orders[index],
     status: newStatus,
@@ -1209,6 +1213,17 @@ function updateLiveOrderStatus(orderId, newStatus) {
 
   localStorage.setItem(LIVE_ORDERS_KEY, JSON.stringify(orders));
 
+
+  // ONLY increment once when it becomes delivered
+  if(!wasDelivered && nowDelivered ) {
+    let completedTotal = 
+
+    parseInt(localStorage.getItem("ecoCompletedTotal")) || 0;
+
+    completedTotal++;
+
+    localStorage.setItem("ecoCompletedTotal", completedTotal);
+  }
 
   updatePendingCard();  // correct
 }
@@ -1229,14 +1244,32 @@ function updatePendingCard() {
   const completedEl = document.getElementById("completedOrders");
 
     // read from permanent storage
+    const completedTotal =
+  parseInt(localStorage.getItem("ecoCompletedTotal")) || 0;
 
-  if(completedEl) completedEl.textContent = status.completed;
+  if(completedEl) completedEl.textContent = completedTotal;
 }
 
 
 
 
 
+function initializeCompletedCount() {
+  const alreadyInitialized = localStorage.getItem("ecoCompletedInitialized");
+
+  if (alreadyInitialized) return; //  prevents running again
+
+  const orders = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
+
+  const deliveredCount = orders.filter(o =>
+    ["delivered", "completed", "success"].includes(
+      o.status?.toLowerCase()
+    )
+  ).length;
+
+  localStorage.setItem("ecoCompletedTotal", deliveredCount);
+  localStorage.setItem("ecoCompletedInitialized", "true");
+}
 
 console.log(localStorage.getItem("ecoCompletedTotal"));
 
@@ -1281,6 +1314,8 @@ document.addEventListener("DOMContentLoaded", () => {
 // background updates (if polling)
   startAutoPolling();
 
+  // Read delivered orders from HISTORY
+  initializeCompletedCount();
 // updatePendingOrders
   updatePendingCard();
 });
@@ -1289,6 +1324,69 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+
+document.addEventListener("DOMContentLoaded", () => {
+  const last = localStorage.getItem("lastOrderId");
+  const orderInput = document.getElementById("orderInput");
+  const checkBtn = document.getElementById("checkBtn");
+  const statusResult = document.getElementById("statusResult");
+
+  if (!orderInput || !checkBtn || !statusResult) return;
+
+  // Prefill input only
+  if (last) orderInput.value = last;
+
+  // 🔒 Manual checker must start empty
+  statusResult.innerHTML = "";
+
+  let manualCheckTriggered = false;
+
+  checkBtn.addEventListener("click", async () => {
+    const id = orderInput.value.trim();
+    if (!id) return showSnackBar("Please enter order ID.");
+
+    manualCheckTriggered = true;
+
+    statusResult.innerHTML = `
+      <div style="padding:10px;border-radius:8px;background:#f0f0f0;">
+        🌀 Checking order <strong>${id}</strong>...
+      </div>
+    `;
+
+    try {
+      const order = await checkOrderStatusOnce(id);
+      if (!manualCheckTriggered) return;
+
+      if (!order) {
+        statusResult.innerHTML = `
+          <div style="padding:10px;background:#ffdddd;border-radius:8px;">
+            ⚠ Order not found
+          </div>
+        `;
+        return;
+      }
+
+      const status = (order.status || "pending").toLowerCase();
+      const desc = getStatusTextMapping(status);
+
+      statusResult.innerHTML = `
+        <div style="padding:15px;border-radius:10px;border:2px solid #4caf50;">
+          <h3 style="text-transform:capitalize">${status}</h3>
+          <p><strong>Order ID:</strong> ${order.orderId || order.reference}</p>
+          <p><strong>Recipient:</strong> ${order.recipient}</p>
+          <p><strong>Volume:</strong> ${order.volume} GB</p>
+          <p>${desc}</p>
+        </div>
+      `;
+    } catch (err) {
+      statusResult.innerHTML = `
+        <div style="padding:10px;background:#ffdddd;border-radius:8px;">
+          ❌ Error checking status
+        </div>
+      `;
+    }
+  });
+});
 
 
 
