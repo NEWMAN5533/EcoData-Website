@@ -1172,13 +1172,14 @@ function saveLiveOrder(order) {
 function getOrderStats() {
   const orders = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
 
-  return {
-   // pending
-    pending: orders.filter(o => o.status === "pending").length,
 
-   // completed
-    completed: orders.filter(o => ["delivered", "completed", "success"].includes(o.status?.toLowerCase())).length,
-  }
+  const completedStatuses = ["delivered", "completed", "success"];
+
+  return {
+    pending: orders.filter(o => !completedStatuses.includes(o.status?.toLowerCase())).length,
+
+    completed: orders.filter(o => completedStatuses.includes(o.status?.toLowerCase())).length
+  };
 
 }
 
@@ -1226,6 +1227,8 @@ const nowDelivered = newStatus === "delivered";
   }
 
   updatePendingCard();  // correct
+
+  syncCompletedIfMismatch(); // recovery
 }
 
 
@@ -1254,12 +1257,44 @@ function updatePendingCard() {
 
 
 
+
+// AUTO FIX WHEN MISMATCH
+function syncCompletedIfMismatch() {
+  const orders =
+    JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
+
+  const completedStatuses = ["delivered", "completed", "success"];
+
+  const realCompleted = orders.filter(o =>
+    completedStatuses.includes(o.status?.toLowerCase())
+  ).length;
+
+  let storedCompleted =
+    parseInt(localStorage.getItem("ecoCompletedTotal")) || 0;
+
+  // 🔥 FIX BOTH DIRECTIONS (not just <)
+  if (storedCompleted !== realCompleted) {
+    localStorage.setItem("ecoCompletedTotal", realCompleted);
+
+    console.warn(
+      `Completed count corrected: ${storedCompleted} → ${realCompleted}`
+    );
+  }
+}
+
+
+
+
+// INITIALIZE ON PAGE LOAD (ONCE)
 function initializeCompletedCount() {
-  const alreadyInitialized = localStorage.getItem("ecoCompletedInitialized");
+ const storedTotal = localStorage.getItem("ecoCompletedTotal");
 
-  if (alreadyInitialized) return; //  prevents running again
+ // IF ALREADY EXIST RETURN
+ if(storedTotal !== null) return;
 
-  const orders = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
+
+const orders = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
+
 
   const deliveredCount = orders.filter(o =>
     ["delivered", "completed", "success"].includes(
@@ -1267,10 +1302,18 @@ function initializeCompletedCount() {
     )
   ).length;
 
+  const alreadyInitialized = localStorage.getItem("ecoCompletedInitialized");
+
+  if (alreadyInitialized) return; //  prevents running again
+
+
+
   localStorage.setItem("ecoCompletedTotal", deliveredCount);
   localStorage.setItem("ecoCompletedInitialized", "true");
 }
 
+
+// DEBUG 
 console.log(localStorage.getItem("ecoCompletedTotal"));
 
 // STATUS PRIORITY LOADER
@@ -1316,6 +1359,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Read delivered orders from HISTORY
   initializeCompletedCount();
+
+  // Auto fix
+  syncCompletedIfMismatch();
+
 // updatePendingOrders
   updatePendingCard();
 });
