@@ -1175,8 +1175,10 @@ function getOrderStats() {
 
   const completedStatuses = ["delivered", "completed", "success"];
 
+
   return {
-    pending: orders.filter(o => !completedStatuses.includes(o.status?.toLowerCase())).length,
+    pending: orders.filter(o => (o.status || "").toLowerCase() === "pending").length,
+
 
     completed: orders.filter(o => completedStatuses.includes(o.status?.toLowerCase())).length
   };
@@ -1264,6 +1266,8 @@ function syncCompletedIfMismatch() {
     JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
 
   const completedStatuses = ["delivered", "completed", "success"];
+
+
 
   const realCompleted = orders.filter(o =>
     completedStatuses.includes(o.status?.toLowerCase())
