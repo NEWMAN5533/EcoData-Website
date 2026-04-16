@@ -62,6 +62,684 @@
   --card-tigo-bg:  #6cbff7cb;
 }
 
+/****
+MAIN CONTAINER
+****/
+.container{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background: transparent;
+}
+
+.container .navbar{
+  width: 100%;
+  height: 9vh !important;
+  position:relative;
+  display: flex;
+  box-shadow:  none !important;
+  border-bottom:  1px solid var(--text-cl-2);
+}
+
+.dark-mode .container .navbar {
+  box-shadow: none !important;
+}
+
+
+.container .main-grid-container{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  height: 91vh;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+}
+
+
+
+
+
+/****
+aside section
+****/
+.container .main-grid-container .grid-container-aside{
+  width: 20vw;
+  height: 91vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-right:  1px solid var(--text-cl-2);
+}
+
+.dark-mode .main-grid-container .grid-container-aside {
+  border-right:  1px solid var(--thin-border) ;
+}
+/*****
+GRID-CONTAINER SIDEBAR
+*****/
+.grid-container-aside .userProfile-container{
+  width: 100%;
+  height: 15vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-bottom: 1px solid var(--text-cl-2);
+  padding-left: 1.2rem;
+}
+
+.dark-mode .userProfile-container{
+  border-bottom: 1px solid var(--thin-border);
+}
+
+
+.userProfile-container .user{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: start;
+  position: relative;
+}
+
+.userProfile-container .user .us{
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 2.8rem;
+  height: 2.8rem;
+  background: linear-gradient( 135deg, rgb(77, 189, 209), rgb(35, 35, 105));
+  border-radius: 40%;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+  .us h1{
+  margin: 0;
+  padding: 0;
+  font-size: 1.3rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 600;
+  color: white;
+}
+
+.user h3{
+  color: rgb(87, 87, 94);
+}
+
+.dark-mode .userProfile-container .user h3{
+  color: var(--primary-cl);
+  opacity: .9;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.grid-container-aside .quick-links-section{
+  width: 100%;
+  height: 51vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  border-bottom: 1px solid var(--text-cl-2);
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+
+.dark-mode .quick-links-section{
+  border-bottom: 1px solid var(--thin-border);
+}
+
+.quick-links-section .link-section-wrapper{
+  width: 100%;
+  height: 87vh;
+  overflow-y: auto;
+  padding: 0 1rem ;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.quick-links-section .link-section-wrapper h4{
+  margin: 0;
+  line-height: .9;
+}
+
+.link-section-wrapper .quicker-nav{
+width: 100%;
+height: 2.5rem;;
+display: flex;
+gap: .6rem;
+align-items: center;
+justify-content: start;
+position: relative;
+margin-top: .5rem;
+transition: .1s ease;
+padding: .2rem 0;
+}
+
+
+
+.link-section-wrapper .quicker-nav img{
+  width: 2rem;
+  height: 2rem;
+  background: var(--background-cl);
+  border-radius: 8px;
+  padding: .2rem;
+  box-shadow: 0 2px 6px rgba(252, 175, 11, 0.199);
+}
+
+.dark-mode .link-section-wrapper .quicker-nav img{
+  background: white;
+  opacity: .8;
+}
+
+
+.link-section-wrapper .quicker-nav p{
+  font-size: .9rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 600;
+  color: var(--thin-border);
+  opacity: .7;
+
+}
+
+.dark-mode .link-section-wrapper .quicker-nav p{
+  color: rgba(248, 207, 152, 0.911);
+  opacity: .8;
+}
+
+
+
+.link-section-wrapper .quicker-nav.active {
+  background: rgb(189, 184, 116);
+  padding-left: .8rem;
+  border-radius: .4rem;
+}
+
+
+.dark-mode .link-section-wrapper .quicker-nav.active {
+  background: none;
+  padding-left: .8rem;
+  border-radius: .4rem;
+  border: 1px solid var(--thin-border);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.75);
+}
+
+
+
+.link-section-wrapper .quicker-nav:hover{
+background: rgb(247, 246, 246);
+padding-left: .8rem;
+border-radius: .4rem;
+box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+cursor: pointer;
+}
+
+.dark-mode .link-section-wrapper .quicker-nav:hover{
+  background: none;
+  border: 1px solid var(--thin-border);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.dark-mode .link-section-wrapper .quicker-nav:hover p{
+  color: white;
+}
+
+
+
+.link-section-wrapper .quicker-nav:hover img{
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+
+/****
+CREATE STORE LINK
+*****/
+.quick-links-section .storeBuild{
+  width: 100%;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  position: relative;
+  background: var(--background-cl);
+  border-radius: .4rem;
+  border: 1px solid var(--text-cl-2);
+}
+
+
+
+.dark-mode .storeBuild {
+  background: var(--thin-border);
+  border-radius: .4rem;
+  border: 1px solid var(--background-cl);
+  opacity: .7;
+}
+
+.storeBuild p{
+  color: rgb(94, 92, 90);
+  font-weight: 600;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.dark-mode .storeBuild p{
+  color: var(--primary-cl);
+
+}
+
+
+
+
+
+
+
+
+
+
+.grid-container-aside .bottom-nav{
+  width: 100%;
+  height: 25vh;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: .6rem;
+}
+
+
+
+.bottom-nav .sign-link{
+  width: 100%;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  background: transparent;
+  margin-top: .5rem;
+  padding-left: .8rem;
+}
+
+.sign-link .login{
+  border: none;
+  background-color: var(--background-cl);
+  color: var(--btn-bg-cl);
+  font-weight: 500;
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  width: 50%;
+  font-size: .8rem;
+  padding: .3rem;
+  border-radius: 3px;
+  transition: .1s ease;
+}
+
+.dark-mode .login{
+  color: rgb(48, 48, 54);
+}
+
+.login:hover{
+  cursor: pointer;
+  background: linear-gradient(135deg, rgb(8, 128, 102), rgb(0, 77, 128));
+  color: white;
+  font-size: .8rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.sign-link:nth-child(3) .login{
+  background: rgb(255, 115, 0);
+  color: white;
+  opacity: .8;
+}
+
+.sign-link:first-child .login 
+{
+  background: linear-gradient(135deg, rgb(8, 128, 102), rgb(0, 77, 128));
+  color: rgb(181, 238, 181);
+}
+
+.sign-link:nth-child(2) .login{
+  background: linear-gradient(135deg, rgb(8, 128, 102), rgb(0, 77, 128));
+  color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*****
+main section
+*****/
+/*******
+MAIN GRID CONTAINER SECTION
+*******/
+.container .main-grid-container .grid-container-main{
+  width: 45vw;
+  height: 91vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  flex-direction: column;
+  position: relative;
+  position: relative;
+  overflow-y: auto;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+  border-right: 1px solid var(--text-cl-2);
+}
+
+
+.main-grid-container .grid-container-main .foot{
+  display: none !important; 
+}
+
+.dark-mode .container .main-grid-container .grid-container-main {
+  border-right: 1px solid var(--thin-border);
+}
+
+ .main-grid-container .grid-container-main .welcome-card{
+  margin-top: .3rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ .ads-container-right{
+  width: 35vw;
+  height: 91vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  position: relative;
+  overflow-y: auto;
+}
+
+
+.ads-container-right .side-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  justify-content: center;
+  width: 100%;
+  max-width: 80%;
+  margin-bottom: -1rem;
+}
+
+.side-title .imgup{
+  width: 100%;
+  height: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+  background: url(./css/icons/market.png);
+  background-size: contain;
+  background-position: center;
+}
+
+.container .ads-container-right .side-title h2{
+  color: wheat;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+
+
+
+.dark-mode .container .ads-container-right  .side-title  h2{
+  color: wheat;
+  opacity: .9;
+}
+
+
+
+
+
+/****
+AGENT PAGE CODE SECTION
+*****/
+/****
+agent cta
+*****/
+
+.dark-mode #usernameDisplay{
+  color: white;
+}
+
+.agent-upgrade-wrapper{
+width: 100%;
+max-width: 340px;
+height: 30rem;
+display: flex;
+flex-direction: column;
+align-items: center;
+padding-top: 1rem;
+position: relative;
+margin-bottom: 3rem;
+}
+
+
+.agent-upgrade {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 25rem;
+  max-width: 300px;
+  margin: 20px auto;
+  padding: 30px;
+  text-align: center;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+  border-bottom: 4px solid rgb(177, 138, 79);
+}
+
+.dark-mode .agent-upgrade{
+  background: var(--welcome-card-bg);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  border: 2px solid var(--thin-border-5);
+}
+
+.agent-upgrade strong{
+  color: rgb(51, 49, 49);
+  font-size: .74rem;
+}
+
+.dark-mode .agent-upgrade p strong{
+  color: rgb(2, 255, 221);
+}
+
+.agent-upgrade img{
+  width: 3rem;
+  height: 3rem;
+}
+
+.dark-mode .agent-upgrade img{
+  background: white;
+  padding: 6px;
+  border-radius: 50%;
+  opacity: .8;
+}
+
+.agent-upgrade h2 {
+  font-size: 26px;
+  margin-bottom: 15px;
+  color: #53595f;
+}
+
+.dark-mode .agent-upgrade h2{
+color: white;
+}
+
+.agent-upgrade p {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.dark-mode .agent-upgrade p{
+  color: white;
+  opacity: .5;
+}
+
+.agent-upgrade button {
+  background: linear-gradient(134deg, rgb(241, 218, 8),rgb(180, 106, 8));
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  font-size: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
+}
+
+.agent-upgrade button:hover {
+  transform: translateY(-3px);
+}
+
+
+/****
+AGENT CTA ENDS
+****/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
   /*****
   PAYSTACK LOADER
@@ -148,3 +826,1757 @@ LOADING SPINNER
   /*****
   PAYSTACK LOADER ENDS=============================
   ******/
+
+
+    /****
+TRUSTED LOGOS ALIGN
+****/
+.trusted-container .trusted-logos{
+  justify-content: center !important;
+}
+
+
+
+    /*****
+    GRID CARDS RESIZING
+    ******/
+    #gridView{
+      width: 100%;
+      max-width: 94% !important;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem !important;
+      justify-content: center;
+      justify-self: center;
+      background: var(--primary-cl);
+      align-items: center;
+      position: relative;
+      margin-bottom: 3rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      border-top: 14px solid rgb(21, 129, 124);
+      border-end-end-radius: 2rem;
+      border-end-start-radius: 2rem;
+    }
+
+    .dark-mode #gridView{
+      background:  var(--background-cl-1);
+      border: 1px solid var(--thin-border);
+      border-end-end-radius: 0;
+      gap: 3rem !important;
+      border-end-start-radius: 0;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.35);
+    }
+
+
+
+
+    /*****
+    GRIDvIEW PURCHASE CONTAINER
+    ******/
+    #gridView .networks-purchased-container{
+      width: 100%;
+      margin: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: transparent;
+      box-shadow: none !important;
+    }
+
+    .networks-purchased-container .purchase-container{
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+    }
+
+
+    /***
+    hero text content
+    ****/
+    #gridView .hero-text-container{
+      width: 100%;
+      max-width: 94%;
+
+      display: flex;
+      position: relative;
+      background: var(--primary-cl);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      margin: 2rem !important;
+    }
+
+    .dark-mode #gridView .hero-text-container{
+      background: var(--thin-border);
+      border: 1px solid var(--background-cl-1);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.45);
+    }
+
+
+     .hero-text-container .hero-top-content .top-left-content img{
+      width: 3.6rem;
+      height: 3.6rem;
+      border-radius: 40%;
+      margin-top: 2rem;
+     }
+
+
+    .hero-text-container .hero-top-content .top-right-content h2{
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-cl-3);
+      padding-bottom: .3rem;
+    }
+
+    .dark-mode .hero-text-container .hero-top-content .top-right-content h2
+     {
+      color: white;
+      opacity: .9;
+     }
+
+
+  .hero-text-container .hero-top-content .top-right-content small{
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-size: .7rem;
+      font-weight: 500;
+      color: var(--text-cl-3);
+    }
+
+
+    .dark-mode   .hero-text-container .hero-top-content .top-right-content small
+    {
+      color: var(--primary-cl);
+      opacity: .9;
+    }
+
+
+
+    .hero-bottom-content .btn-div{
+      margin-top: 2.1rem;
+      color: white;
+      opacity: .8;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      height: 2.3rem;
+    }
+
+
+
+    /*****
+    GRID CARD CONTAINER
+    *****/
+  .gridCards-container {
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      width: 100%;
+      max-width: 98%;
+      justify-content: center ;
+      justify-self: center;
+    }
+
+
+.gridCards-container .gridCard-wrapper{
+  justify-self: center;
+  justify-content: center;
+  justify-items: center;
+  margin: 0 !important;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) !important;
+  width: 100%;
+  max-width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+  /******
+  MEDIA QUERIES
+  *******/
+
+@media (max-width: 320px) {
+/****
+DISPLAY NONE DIV
+*****/
+.grid-container-main .ads-container-right,
+.grid-container-aside,
+.floating-scroll
+{
+  display: none !important;
+}
+
+
+/****
+MAKE MAIN 100%
+****/
+.main-grid-container .grid-container-main
+{
+  width: 100vw !important;
+}
+
+
+
+/***
+GRID RESET
+***/
+ .container .main-grid-container{
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+ }
+
+
+ /***
+ CLOSE ALL BORDERS @ LAPTOP UI FOR PHONES
+ ***/
+  .main-grid-container .grid-container-main,
+  .container .main-grid-container .grid-container-aside,
+  .container .navbar
+ {
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom: none !important;
+ }
+
+
+
+
+ /***
+ welcome bottom
+ ****/
+ .welcome-bottom .close-time span{
+  width: 98%;
+  white-space: nowrap;
+  font-size: .52rem;
+ }
+
+ .follow-share-container .social-follow .follow-right {
+  gap: .4rem !important;
+  justify-content: end;
+  display: flex;
+ }
+
+ .custom-select .select-dropdown .optionDelevery span,
+ .custom-select .select-dropdown .optionDelevery small
+ {
+  font-size: .52rem !important;
+ }
+ 
+ .custom-select .select-btn {
+  font-size: .8rem !important;
+ }
+
+ #normalView{
+  margin-bottom: 7rem;
+ }
+
+
+
+
+ /*****
+ GRID PURCHASE TITLE
+ *****/
+  #gridView .hero-text-container
+  {
+    height: 8rem;
+  }
+ 
+    .networks-purchased-container .purchase-container{
+      display: flex;
+      align-items: center;
+      gap: 1.3rem;
+    }
+
+     .hero-text-container .hero-top-content .top-left-content img{
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 40%;
+     }
+
+
+    .hero-text-container .hero-top-content .top-right-content h2{
+
+      font-size: .9rem;
+      font-weight: 500;
+      color: var(--text-cl-3);
+      padding-bottom: .3rem;
+    }
+
+    .dark-mode .hero-text-container .hero-top-content .top-right-content h2
+     {
+      color: white;
+      opacity: .9;
+     }
+
+
+  .hero-text-container .hero-top-content .top-right-content small{
+      font-size: .6rem;
+      font-weight: 500;
+      color: var(--text-cl-3);
+    }
+
+
+   .hero-bottom-content .btn-div
+   {
+    height: 1.8rem;
+    font-size: .9rem;
+    margin-top: 3rem;
+   }
+
+
+
+ /****
+ push the #gridView container up
+ *****/
+#gridView 
+{
+  margin-bottom: 7rem;
+}
+
+
+.gridCards-container .gridCard-wrapper{
+ 
+  grid-template-columns: repeat(2, 1fr) !important;
+
+}
+
+
+}
+
+
+
+@media (max-width: 375px) {
+  /****
+DISPLAY NONE DIV
+*****/
+.grid-container-main .ads-container-right,
+.grid-container-aside
+{
+  display: none !important;
+}
+
+
+    .businessInfo .businessInfo-right
+{
+  justify-content: end;
+}
+
+.floating-scroll
+{
+  margin-bottom: 3rem;
+}
+
+
+
+
+ /***
+ welcome bottom
+ ****/
+ .welcome-bottom .close-time span{
+  width: 98%;
+  white-space: nowrap;
+  font-size: .56rem;
+ }
+
+ .follow-share-container .social-follow .follow-right {
+  gap: 1rem !important;
+  justify-content: center;
+  display: flex;
+ }
+
+ .custom-select .select-dropdown .optionDelevery span,
+ .custom-select .select-dropdown .optionDelevery small
+ {
+  font-size: .56rem !important;
+ }
+ 
+ .custom-select .select-btn {
+  font-size: .8rem !important;
+ }
+
+ #normalView{
+  margin-bottom: 7rem;
+ }
+
+
+
+
+/****
+MAKE MAIN 100%
+****/
+.main-grid-container .grid-container-main
+{
+  width: 100vw !important;
+}
+
+
+
+
+ .container .main-grid-container{
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+ }
+
+
+ 
+ /***
+ CLOSE ALL BORDERS @ LAPTOP UI FOR PHONES
+ ***/
+  .main-grid-container .grid-container-main,
+  .container .main-grid-container .grid-container-aside,
+  .container .navbar
+ {
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom: none !important;
+ }
+
+}
+
+
+
+@media (max-width: 414px) {
+  /****
+DISPLAY NONE DIV
+*****/
+.grid-container-main .ads-container-right,
+.grid-container-aside
+{
+  display: none !important;
+}
+
+    .businessInfo .businessInfo-right
+{
+  justify-content: end;
+}
+
+.floating-scroll
+{
+  margin-bottom: 3rem;
+}
+
+
+
+
+ /***
+ welcome bottom
+ ****/
+ .welcome-bottom .close-time span{
+  width: 98% !important;
+  white-space: nowrap;
+  font-size: .67rem;
+ }
+
+ .follow-share-container .social-follow .follow-right {
+  gap: 1.3rem !important;
+  justify-content: center;
+  display: flex;
+ }
+
+ .custom-select .select-dropdown .optionDelevery span,
+ .custom-select .select-dropdown .optionDelevery small
+ {
+  font-size: .72rem !important;
+ }
+ 
+ .custom-select .select-btn {
+  font-size: .88rem !important;
+ }
+
+ #normalView{
+  margin-bottom: 7rem;
+ }
+
+
+
+
+/****
+MAKE MAIN 100%
+****/
+.main-grid-container .grid-container-main
+{
+  width: 100vw !important;
+}
+
+
+
+
+ .container .main-grid-container{
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+ }
+
+
+
+ 
+ /***
+ CLOSE ALL BORDERS @ LAPTOP UI FOR PHONES
+ ***/
+  .main-grid-container .grid-container-main,
+  .container .main-grid-container .grid-container-aside,
+  .container .navbar
+ {
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom: none !important;
+ }
+}
+
+
+
+@media (max-width: 430px) {
+  /****
+DISPLAY NONE DIV
+*****/
+.grid-container-main .ads-container-right,
+.grid-container-aside
+{
+  display: none !important;
+}
+
+    .businessInfo .businessInfo-right
+{
+  justify-content: end;
+}
+
+.floating-scroll
+{
+  margin-bottom: 3rem;
+}
+
+
+
+
+ /***
+ welcome bottom
+ ****/
+ .welcome-bottom .close-time span{
+  width: 98%;
+  white-space: nowrap;
+  font-size: .67rem;
+ }
+
+ .follow-share-container .social-follow .follow-right {
+  gap: 1.3rem !important;
+  justify-content: center;
+  display: flex;
+ }
+
+ .custom-select .select-dropdown .optionDelevery span,
+ .custom-select .select-dropdown .optionDelevery small
+ {
+  font-size: .72rem !important;
+ }
+ 
+ .custom-select .select-btn {
+  font-size: .9rem !important;
+ }
+
+ #normalView{
+  margin-bottom: 7rem;
+ }
+
+
+
+
+
+/****
+MAKE MAIN 100%
+****/
+.main-grid-container .grid-container-main
+{
+  width: 100vw !important;
+}
+
+
+
+
+ .container .main-grid-container{
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+ }
+
+ 
+ /***
+ CLOSE ALL BORDERS @ LAPTOP UI FOR PHONES
+ ***/
+  .main-grid-container .grid-container-main,
+  .container .main-grid-container .grid-container-aside,
+  .container .navbar
+ {
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom: none !important;
+ }
+}
+
+
+
+
+@media (max-width: 440px) {
+  /****
+DISPLAY NONE DIV
+*****/
+.grid-container-main .ads-container-right,
+.grid-container-aside
+{
+  display: none !important;
+}
+
+
+    .businessInfo .businessInfo-right
+{
+  justify-content: end;
+}
+
+
+.floating-scroll
+{
+  margin-bottom: 3rem;
+}
+
+
+
+
+ /***
+ welcome bottom
+ ****/
+ .welcome-bottom .close-time span{
+  width: 98%;
+  white-space: nowrap;
+  font-size: .67rem;
+ }
+
+ .follow-share-container .social-follow .follow-right {
+  gap: 1.3rem !important;
+  justify-content: center;
+  display: flex;
+ }
+
+ .custom-select .select-dropdown .optionDelevery span,
+ .custom-select .select-dropdown .optionDelevery small
+ {
+  font-size: .72rem !important;
+ }
+ 
+ .custom-select .select-btn {
+  font-size: .9rem !important;
+ }
+
+ #normalView{
+  margin-bottom: 7rem;
+ }
+
+
+
+
+
+
+
+/****
+MAKE MAIN 100%
+****/
+.main-grid-container .grid-container-main
+{
+  width: 100vw !important;
+}
+
+
+
+
+ .container .main-grid-container{
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+ }
+
+ 
+ /***
+ CLOSE ALL BORDERS @ LAPTOP UI FOR PHONES
+ ***/
+  .main-grid-container .grid-container-main,
+  .container .main-grid-container .grid-container-aside,
+  .container .navbar
+ {
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom: none !important;
+ }
+}
+
+
+
+
+
+
+
+@media (max-width: 480px) {
+  /****
+DISPLAY NONE DIV
+*****/
+.grid-container-main .ads-container-right,
+.grid-container-aside
+{
+  display: none !important;
+}
+
+
+    .businessInfo .businessInfo-right
+{
+  justify-content: end;
+}
+
+
+
+.floating-scroll
+{
+  margin-bottom: 3rem;
+}
+
+
+
+
+ /***
+ welcome bottom
+ ****/
+ .welcome-bottom .close-time span{
+  width: 98%;
+  white-space: nowrap;
+  font-size: .67rem;
+ }
+
+ .follow-share-container .social-follow .follow-right {
+  gap: 1.3rem !important;
+  justify-content: center;
+  display: flex;
+ }
+
+ .custom-select .select-dropdown .optionDelevery span,
+ .custom-select .select-dropdown .optionDelevery small
+ {
+  font-size: .72rem !important;
+ }
+ 
+ .custom-select .select-btn {
+  font-size: .9rem !important;
+ }
+
+ #normalView{
+  margin-bottom: 7rem;
+ }
+
+
+
+
+
+
+
+/****
+MAKE MAIN 100%
+****/
+.main-grid-container .grid-container-main
+{
+  width: 100vw !important;
+}
+
+
+
+
+ .container .main-grid-container{
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+ }
+
+ 
+ /***
+ CLOSE ALL BORDERS @ LAPTOP UI FOR PHONES
+ ***/
+  .main-grid-container .grid-container-main,
+  .container .main-grid-container .grid-container-aside,
+  .container .navbar
+ {
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom: none !important;
+ }
+}
+
+
+
+@media (max-width: 600px) {
+  /****
+DISPLAY NONE DIV
+*****/
+.grid-container-main .ads-container-right,
+.grid-container-aside
+{
+  display: none !important;
+}
+
+
+
+    .businessInfo .businessInfo-right
+{
+  justify-content: end;
+}
+
+.floating-scroll
+{
+  margin-bottom: 3rem;
+}
+
+
+
+
+ /***
+ welcome bottom
+ ****/
+ .welcome-bottom .close-time span{
+  width: 78%;
+  white-space: nowrap;
+  font-size: .67rem;
+ }
+
+ .follow-share-container .social-follow .follow-right {
+  gap: 2.3rem !important;
+  justify-content: center;
+  display: flex;
+ }
+
+ .custom-select .select-dropdown .optionDelevery span,
+ .custom-select .select-dropdown .optionDelevery small
+ {
+  font-size: .72rem !important;
+ }
+ 
+ .custom-select .select-btn {
+  font-size: .9rem !important;
+ }
+
+ #normalView{
+  margin-bottom: 7rem;
+ }
+
+ #gridView
+ {
+  margin-bottom: 5rem;
+ }
+
+
+
+
+
+
+
+/****
+MAKE MAIN 100%
+****/
+.main-grid-container .grid-container-main
+{
+  width: 100vw !important;
+}
+
+
+
+
+ .container .main-grid-container{
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+ }
+
+ 
+ /***
+ CLOSE ALL BORDERS @ LAPTOP UI FOR PHONES
+ ***/
+  .main-grid-container .grid-container-main,
+  .container .main-grid-container .grid-container-aside,
+  .container .navbar
+ {
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom: none !important;
+ }
+}
+
+
+/****
+TABLET VIEW
+*****/
+
+@media (min-width: 768px) {
+ /****
+DISPLAY NONE DIV
+*****/
+.bottom-navbar,
+.grid-container-aside .quick-links-section .quicker-nav p,
+.user h3,
+.storeBuild,
+.menu-icon,
+.floating-scroll
+{
+  display: none !important;
+}
+
+
+#normalView,
+#gridView
+{
+  margin-bottom: 2rem;
+}
+
+.businessInfo .businessInfo-right
+{
+  justify-content: end;
+}
+
+
+/****
+REDUCE WIDTH OF LEFT SIDEBAR'S
+****/
+
+.main-grid-container .grid-container-aside
+{
+  width: 10vw !important;
+}
+
+.link-section-wrapper .quicker-nav
+{
+  justify-content: center ;
+  transition: 0s ease;
+}
+
+
+.link-section-wrapper .quicker-nav.active 
+{
+  background: none;
+  padding-left: 0;
+  border-radius: .4rem;
+  border: 1px solid var(--background-cl);
+  box-shadow: 0 2px 6px rgba(216, 216, 216, 0.35);
+}
+
+
+.dark-mode .link-section-wrapper .quicker-nav.active {
+  background: none;
+  padding-left: 0;
+  border-radius: .4rem;
+  border: 1px solid var(--thin-border);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.75);
+}
+
+.grid-container-aside .bottom-nav
+
+{
+  padding: .2rem;
+}
+.sign-link .login
+{
+  width: 94%;
+}
+
+
+.bottom-nav .sign-link:nth-child(2) .login{
+  font-size: .65rem !important;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+
+/****
+INCREASE WIDTH OF MAIN
+****/
+
+
+.main-grid-container .grid-container-main
+{
+  width: 60vw !important;
+}
+
+/****
+REDUCE WIDTH OF L RIGHT SIDEBAR'S
+****/
+
+.main-grid-container .ads-container-right
+{
+  width: 30vw !important;
+}
+
+
+.side-title h2
+{
+  font-size: 1.1rem;
+}
+
+.side-title .imgup
+{
+  background-repeat: no-repeat;
+}
+
+
+.ads-container-right .agent-upgrade-wrapper
+{
+  width: 90%;
+}
+
+ .agent-upgrade-wrapper .agent-upgrade
+ {
+  padding: .6rem .3rem;
+  height: max-content;
+
+ }
+
+ .agent-upgrade-wrapper .agent-upgrade h2
+ {
+  font-size: 1.1rem;
+ }
+
+  .agent-upgrade-wrapper .agent-upgrade p
+ {
+  font-size: .8rem;
+ }
+
+ .agent-upgrade-wrapper .agent-upgrade button
+ {
+  width: 80%;
+  height: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+ }
+
+
+
+
+
+
+
+  
+.gridCards-container .gridCard-wrapper{
+  justify-self: center;
+  justify-content: center;
+  justify-items: center;
+  margin: 0 !important;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) !important;
+  width: 100%;
+  max-width: 100%;
+}
+
+
+}
+
+
+
+
+
+/***
+LAPTOP START
+****/
+  @media (min-width: 1280px) {
+    /*****
+    DISPLAY NONE DIVS
+    ****/
+
+    .bottom-navbar,
+    .floating-scroll,
+    .foot,
+    #normalView .businessInfo,
+    .menu-icon{
+      display: none !important;
+    }
+
+
+
+
+    /****
+    DISPLAY FLEX
+    ****/
+
+.grid-container-aside .quick-links-section .quicker-nav p,
+.user h3,
+.storeBuild
+{
+  display: flex !important;
+}
+
+
+
+
+/****
+REDUCE WIDTH OF LEFT SIDEBAR'S
+****/
+
+.main-grid-container .grid-container-aside
+{
+  width: 25vw !important;
+}
+
+/****
+INCREASE WIDTH OF MAIN
+****/
+
+
+.main-grid-container .grid-container-main
+{
+  width: 45vw !important;
+}
+
+/****
+REDUCE WIDTH OF L RIGHT SIDEBAR'S
+****/
+
+.main-grid-container .ads-container-right
+{
+  width: 35vw !important;
+}
+
+.grid-container-aside .bottom-nav
+
+{
+  padding: auto;
+}
+.sign-link .login
+{
+  width: 50%;
+}
+
+.bottom-nav .sign-link:nth-child(2) .login{
+  font-size: .7rem !important;
+}
+
+
+
+
+
+
+
+
+
+.grid-container-aside,
+.quick-links-section,
+
+.bottom-nav
+{
+  padding-left: 1.5rem !important;
+}
+
+
+.link-section-wrapper .quicker-nav
+{
+  justify-content: start ;
+  transition: 0s ease;
+}
+
+.link-section-wrapper .quicker-nav.active 
+{
+  background: none;
+  padding-left: .8rem;
+  border-radius: .4rem;
+  border: 1px solid var(--background-cl);
+  box-shadow: 0 2px 6px rgba(216, 216, 216, 0.35);
+}
+
+.dark-mode .link-section-wrapper .quicker-nav.active 
+{
+  background: none;
+  padding-left: .8rem;
+  border-radius: .4rem;
+  border: 1px solid var(--thin-border);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.75);
+}
+
+
+ .card-container .hero
+    {
+      margin-top: -2rem;
+    }
+
+   .card-container .trusted-by{
+      height: 12rem !important;
+    }
+  /****
+TRUSTED LOGOS ALIGN
+****/
+.trusted-container .trusted-logos{
+  justify-content: center;
+  gap: 1.8rem;
+}
+
+
+.trusted-container .trusted-text{
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1rem !important;
+}
+/****
+TRUSTED LOGOS ALIGN
+****/
+
+
+/****
+TRUSTED LOGOS ALIGN
+****/
+.trusted-container .trusted-logos img
+{ 
+width: 2.8rem;
+height: 1.6rem;
+}
+
+ .trusted-logos .trust
+ {
+  font-size: .78rem;
+
+ }
+
+
+
+
+
+
+
+
+/****
+WHAT'APP CHAT BUTTON
+****/
+
+#whatsappChat{
+  bottom: 3.5rem !important;
+
+}
+
+
+
+
+
+
+
+
+
+    /*****
+    GRID CARDS RESIZING
+    ******/
+    #gridView{
+      width: 100%;
+      max-width: 94% !important;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem !important;
+      justify-content: center;
+      justify-self: center;
+      background: var(--primary-cl);
+      align-items: center;
+      position: relative;
+      margin-bottom: 1rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      border-top: 14px solid rgb(21, 129, 124);
+      border-end-end-radius: 2rem;
+      border-end-start-radius: 2rem;
+    }
+
+    .dark-mode #gridView{
+      background:  var(--background-cl-1);
+      border: 1px solid var(--thin-border);
+      border-end-end-radius: 0;
+      gap: 3rem !important;
+      border-end-start-radius: 0;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.35);
+    }
+
+    .businessInfo .businessInfo-right
+{
+  justify-content: end;
+}
+
+
+
+    /*****
+    GRIDvIEW PURCHASE CONTAINER
+    ******/
+    #gridView .networks-purchased-container{
+      width: 100%;
+      margin: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: transparent;
+      box-shadow: none !important;
+    }
+
+    .networks-purchased-container .purchase-container{
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+    }
+
+
+    /***
+    hero text content
+    ****/
+    #gridView .hero-text-container{
+      width: 100%;
+      max-width: 94%;
+
+      display: flex;
+      position: relative;
+      margin: 2rem !important;
+    }
+
+    .dark-mode #gridView .hero-text-container{
+      background: var(--thin-border);
+      border: 1px solid var(--background-cl-1);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.45);
+    }
+
+
+     .hero-text-container .hero-top-content .top-left-content img{
+      width: 3.6rem;
+      height: 3.6rem;
+      border-radius: 40%;
+     }
+
+
+    .hero-text-container .hero-top-content .top-right-content h2{
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-cl-3);
+      padding-bottom: .3rem;
+    }
+
+    .dark-mode .hero-text-container .hero-top-content .top-right-content h2
+     {
+      color: white;
+      opacity: .9;
+     }
+
+
+  .hero-text-container .hero-top-content .top-right-content small{
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-size: .7rem;
+      font-weight: 500;
+      color: var(--text-cl-3);
+    }
+
+
+    .dark-mode   .hero-text-container .hero-top-content .top-right-content small
+    {
+      color: var(--primary-cl);
+      opacity: .9;
+    }
+
+
+
+    .hero-bottom-content .btn-div{
+      margin-top: 2.1rem;
+      color: white;
+      opacity: .8;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      height: 2.3rem;
+    }
+
+
+
+    /*****
+    GRID CARD CONTAINER
+    *****/
+  .gridCards-container {
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      width: 100%;
+      max-width: 98%;
+      justify-content: center ;
+      justify-self: center;
+    }
+
+
+.gridCards-container .gridCard-wrapper{
+  justify-self: center;
+  justify-content: center;
+  justify-items: center;
+  margin: 0 !important;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) !important;
+  width: 100%;
+  max-width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+ 
+  }
+
+
+
+
+  @media (min-width: 1366px) {
+    /*****
+    DISPLAY NONE DIVS
+    ****/
+
+    .bottom-navbar,
+    .floating-scroll,
+    .foot,
+    #normalView .businessInfo,
+    .menu-icon{
+      display: none !important;
+    }
+
+
+/****
+TOTAL CARD BOX-SHADOW
+****/
+.totals-container .total-card{
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+    /****
+    DISPLAY FLEX
+    ****/
+
+.grid-container-aside .quick-links-section .quicker-nav p,
+.user h3,
+.storeBuild
+{
+  display: flex !important;
+}
+
+
+
+
+/****
+REDUCE WIDTH OF LEFT SIDEBAR'S
+****/
+
+.main-grid-container .grid-container-aside
+{
+  width: 25vw !important;
+}
+
+/****
+INCREASE WIDTH OF MAIN
+****/
+
+
+.main-grid-container .grid-container-main
+{
+  width: 45vw !important;
+}
+
+/****
+REDUCE WIDTH OF L RIGHT SIDEBAR'S
+****/
+
+.main-grid-container .ads-container-right
+{
+  width: 35vw !important;
+}
+
+.grid-container-aside .bottom-nav
+
+{
+  padding: auto;
+}
+.sign-link .login
+{
+  width: 50%;
+}
+
+.bottom-nav .sign-link:nth-child(2) .login{
+  font-size: .7rem !important;
+}
+
+
+
+
+
+
+
+
+
+.grid-container-aside,
+.quick-links-section,
+
+.bottom-nav
+{
+  padding-left: 1.5rem !important;
+}
+
+
+.link-section-wrapper .quicker-nav
+{
+  justify-content: start ;
+  transition: 0s ease;
+}
+
+.link-section-wrapper .quicker-nav.active 
+{
+  background: none;
+  padding-left: .8rem;
+  border-radius: .4rem;
+  border: 1px solid var(--background-cl);
+  box-shadow: 0 2px 6px rgba(216, 216, 216, 0.35);
+}
+
+.dark-mode .link-section-wrapper .quicker-nav.active 
+{
+  background: none;
+  padding-left: .8rem;
+  border-radius: .4rem;
+  border: 1px solid var(--thin-border);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.75);
+}
+
+
+ .card-container .hero
+    {
+      margin-top: -2rem;
+    }
+
+   .card-container .trusted-by{
+      height: 12rem !important;
+    }
+  /****
+TRUSTED LOGOS ALIGN
+****/
+.trusted-container .trusted-logos{
+  justify-content: center;
+  gap: 1.8rem;
+}
+
+
+.trusted-container .trusted-text{
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1rem !important;
+}
+/****
+TRUSTED LOGOS ALIGN
+****/
+
+
+/****
+TRUSTED LOGOS ALIGN
+****/
+.trusted-container .trusted-logos img
+{ 
+width: 2.8rem;
+height: 1.6rem;
+}
+
+ .trusted-logos .trust
+ {
+  font-size: .78rem;
+
+ }
+
+
+
+
+
+
+
+
+/****
+WHAT'APP CHAT BUTTON
+****/
+
+#whatsappChat{
+  bottom: 3.5rem !important;
+
+}
+
+
+
+
+
+
+
+
+
+    /*****
+    GRID CARDS RESIZING
+    ******/
+    #gridView{
+      width: 100%;
+      max-width: 94% !important;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem !important;
+      justify-content: center;
+      justify-self: center;
+      background: var(--primary-cl);
+      align-items: center;
+      position: relative;
+      margin-bottom: 1rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      border-top: 14px solid rgb(21, 129, 124);
+      border-end-end-radius: 2rem;
+      border-end-start-radius: 2rem;
+    }
+
+
+    .businessInfo .businessInfo-right
+{
+  justify-content: end;
+}
+
+    .dark-mode #gridView{
+      background:  var(--background-cl-1);
+      border: 1px solid var(--thin-border);
+      border-end-end-radius: 0;
+      gap: 3rem !important;
+      border-end-start-radius: 0;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.35);
+    }
+
+
+
+
+    /*****
+    GRIDvIEW PURCHASE CONTAINER
+    ******/
+    #gridView .networks-purchased-container{
+      width: 100%;
+      margin: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: transparent;
+      box-shadow: none !important;
+    }
+
+    .networks-purchased-container .purchase-container{
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+    }
+
+
+    /***
+    hero text content
+    ****/
+    #gridView .hero-text-container{
+      width: 100%;
+      max-width: 94%;
+      box-shadow: none ;
+      display: flex;
+      position: relative;
+      margin: 2rem !important;
+    }
+
+    .dark-mode #gridView .hero-text-container{
+      background: var(--thin-border);
+      border: 1px solid var(--background-cl-1);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.45);
+    }
+
+
+     .hero-text-container .hero-top-content .top-left-content img{
+      width: 3.6rem;
+      height: 3.6rem;
+      border-radius: 40%;
+     }
+
+
+    .hero-text-container .hero-top-content .top-right-content h2{
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-cl-3);
+      padding-bottom: .3rem;
+    }
+
+    .dark-mode .hero-text-container .hero-top-content .top-right-content h2
+     {
+      color: white;
+      opacity: .9;
+     }
+
+
+  .hero-text-container .hero-top-content .top-right-content small{
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-size: .7rem;
+      font-weight: 500;
+      color: var(--text-cl-3);
+    }
+
+
+    .dark-mode   .hero-text-container .hero-top-content .top-right-content small
+    {
+      color: var(--primary-cl);
+      opacity: .9;
+    }
+
+
+
+    .hero-bottom-content .btn-div{
+      margin-top: 2.1rem;
+      color: white;
+      opacity: .8;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      height: 2.3rem;
+    }
+
+
+
+    /*****
+    GRID CARD CONTAINER
+    *****/
+  .gridCards-container {
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      width: 100%;
+      max-width: 98%;
+      justify-content: center ;
+      justify-self: center;
+    }
+
+
+.gridCards-container .gridCard-wrapper{
+  justify-self: center;
+  justify-content: center;
+  justify-items: center;
+  margin: 0 !important;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) !important;
+  width: 100%;
+  max-width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+  }
