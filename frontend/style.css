@@ -353,7 +353,7 @@ WATCH VIDEO SECTION
   display: flex;
   width: 100%;
   justify-self: center;
-  height: 4rem;
+  height: 3.6rem !important;
   position: fixed;
   top: 0;
   left: 0;
