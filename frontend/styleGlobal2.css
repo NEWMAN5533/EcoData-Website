@@ -84,6 +84,7 @@ MAIN CONTAINER
 .dark-mode .container .navbar {
   border-top: 1px solid var(--thin-border) !important;
   border-bottom: 1px solid var(--thin-border) !important;
+  box-shadow: none !important;
 }
 
 
@@ -91,9 +92,9 @@ MAIN CONTAINER
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   height: 91vh;
+  margin-top: 4.1rem !important;
   position: relative;
   align-items: center;
-  margin-top: 4.3rem !important;
   justify-content: center;
   justify-self: center;
 }
@@ -1892,7 +1893,9 @@ LAPTOP START
     }
 
 
-
+  .dark-mode .container .navbar{
+      box-shadow: none !important;
+    }
 
     /****
     DISPLAY FLEX
@@ -2237,6 +2240,11 @@ WHAT'APP CHAT BUTTON
     #normalView .businessInfo,
     .menu-icon{
       display: none !important;
+    }
+
+
+    .dark-mode .container .navbar{
+      box-shadow: none !important;
     }
 
 
