@@ -1,120 +1,4 @@
 
-/****
-AGENT PAGE CODE SECTION
-*****/
-/****
-agent cta
-*****/
-
-.dark-mode #usernameDisplay{
-  color: white;
-}
-
-.agent-upgrade-wrapper{
-width: 100%;
-max-width: 340px;
-height: 30rem;
-display: flex;
-flex-direction: column;
-align-items: center;
-padding-top: 1rem;
-position: relative;
-margin-bottom: 3rem;
-border-top: 5px solid rgba(172, 133, 4, 0.801);
-}
-
-
-.agent-upgrade {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: column;
-  height: 25rem;
-  max-width: 300px;
-  margin: 30px auto;
-  padding: 30px;
-  text-align: center;
-  background: #ffffff;
-  border-radius: 14px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
-  border-bottom: 4px solid rgb(177, 138, 79);
-}
-
-.dark-mode .agent-upgrade{
-  background: var(--welcome-card-bg);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-  border: 2px solid var(--thin-border-5);
-}
-
-.agent-upgrade strong{
-  color: rgb(51, 49, 49);
-  font-size: .74rem;
-}
-
-.dark-mode .agent-upgrade p strong{
-  color: rgb(2, 255, 221);
-}
-
-.agent-upgrade img{
-  width: 3rem;
-  height: 3rem;
-}
-
-.dark-mode .agent-upgrade img{
-  background: white;
-  padding: 6px;
-  border-radius: 50%;
-  opacity: .8;
-}
-
-.agent-upgrade h2 {
-  font-size: 26px;
-  margin-bottom: 15px;
-  color: #53595f;
-}
-
-.dark-mode .agent-upgrade h2{
-color: white;
-}
-
-.agent-upgrade p {
-  font-size: 15px;
-  color: #555;
-  line-height: 1.6;
-  margin-bottom: 25px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-.dark-mode .agent-upgrade p{
-  color: white;
-  opacity: .5;
-}
-
-.agent-upgrade button {
-  background: linear-gradient(134deg, rgb(241, 218, 8),rgb(180, 106, 8));
-  color: white;
-  border: none;
-  padding: 14px 28px;
-  font-size: 15px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s ease;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;;
-  user-select: none;
-}
-
-.agent-upgrade button:hover {
-  transform: translateY(-3px);
-}
-
-
-/****
-AGENT CTA ENDS
-****/
-
 
 
 .main-agent{
@@ -465,7 +349,7 @@ WATCH VIDEO SECTION
 /**
 * NAVIGATION BAR
 **/
-.navbar {
+.container .navbar {
   display: flex;
   width: 100%;
   justify-self: center;
@@ -2229,7 +2113,7 @@ PRICES SECTION ENDS
     RIGHT
     ****/
     .grid-right-div{
-      width: 505;
+      width: 50%;
       align-items: end;
       justify-content: end;
       display: flex;
@@ -2607,20 +2491,6 @@ PRICES SECTION ENDS
 
 
 
-/**
-CARD CONTAINER
-**/
-.card-container{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  justify-content:  center;
-  align-items: center;
-  justify-self: center;
-  height: max-content;
-  position: relative;
-  background: transparent;
-}
 
 
 /**
@@ -4209,18 +4079,6 @@ DAILY ANALYTICS SECTION ENDS
 LIVE ORDER SECTION 
 ***/
 
-.status-talble-container{
-  width: 100%;
-  max-width: 768px;
-  height: 20rem;
-  padding: .2rem;
-  background: transparent;
-  justify-self: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
 
 .top-var{
 display: flex;
@@ -4414,21 +4272,6 @@ margin-bottom: .1rem;
   margin-bottom: .2rem;
   border-end-end-radius: .4rem;
   border-end-start-radius: .4rem;
-}
-
-.live-order-body {
-  height: 200px;
-  scroll-behavior: smooth;
-  background: none;
-  margin-bottom: .3rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  padding: .8rem .2rem;
-}
-
-.dark-mode .live-order-body{
-  background: none;
-  border: none;
-
 }
 
 
@@ -6176,9 +6019,13 @@ AUTO SCROLLING STYLE
 
 /* 1. Extra small devices (phones, portrait) */
 @media (max-width: 320px) {
+
     .notice-sidebar{
     display: none;
+
+
   }
+
 
 
 
@@ -6187,18 +6034,34 @@ AUTO SCROLLING STYLE
 
 /* 2. Small phones */
 @media (max-width: 360px) { 
+
+ 
+
+
     .notice-sidebar{
     display: none;
   }
 
 }
+
+
+
+
 /* 3. Larger small phones */
 @media (max-width: 375px) {
+
+
+
+
+
+
+
+
+
+
     .notice-sidebar{
     display: none;
   }
-
-
 
 
  }
@@ -6209,6 +6072,11 @@ AUTO SCROLLING STYLE
   .notice-sidebar{
     display: none;
   }
+
+
+
+
+
   /*-----BOTTOM-----*/
   .welcome-bottom {
     width: 100%;
@@ -7420,8 +7288,12 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 
 
 @media (max-width: 430px) {
+   
 
-  
+
+
+
+
   .notice-sidebar{
     display: none;
   }
@@ -8627,7 +8499,7 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 
 
 @media (max-width: 440px) {
-
+     .cont
   
   .notice-sidebar{
     display: none;
@@ -9836,7 +9708,8 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 
 /* 5. Large phones / Tablets */
 @media (min-width: 480px) {
-    
+     
+
   .notice-sidebar{
     display: none;
   }
@@ -11067,20 +10940,37 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   .welcome-card{
     display: none;
   }
+
+
 }
+
+
+
+
 
 /* 7. Mid-size tablets */
 @media (min-width: 640px){
     .welcome-card{
     display: none;
   }
+
+
+
 }
+
+
+
 
 /* 8. Tablets portrait */
 @media (min-width: 768px){
     .welcome-card{
     display: none;
   }
+
+
+
+
+
 }
 
 /* 9. Tablets landscape / small laptops */
@@ -11088,13 +10978,28 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     .welcome-card{
     display: none;
   }
+
+
+
+
+
+
 }
+
+
+
+
 
 /* 10. Large tablets */
 @media (min-width: 900px){
     .welcome-card{
     display: none;
   }
+
+
+
+
+
 }
 
 
@@ -11118,385 +11023,51 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     .welcome-card{
     display: none;
   }
+
+
+
+
+
 }
 
 /* 12. Medium laptops / desktops */
 @media (min-width: 1200px){
     .welcome-card{
     display: none;
+
   }
+
+
+
+
+
 }
 
 
 /* 13. Large desktops */
 @media (min-width: 1280px){
+
+
+
+
+
+
+
+
     .welcome-card{
     display: none;
   }
 }
 
-/* 14. XL desktops */
+
+
+
 @media (min-width: 1366px){
-/****
-DISPLAY NONE SECTION
-*****/
-    .welcome-card,
-    .trusted-by,
-    .notice-container,
-    .follow-share-container,
-    .bottom-navbar,
-    .menu-icon,
-    .networks-purchased-container{
-    display: none !important;
+
+    .welcome-card{
+    display: none;
   }
-
-
-
-  /*****
-  CARD CONTAINER
-  ****/
-  .card-container,
-  .foot,
-  .gridView-container{
-    margin-top: 3rem;
-    width: 100%;
-    max-width: 1000px;
-    justify-self: end !important;
-  }
-
-  .main-terms-of-use-cont,
-  .foot{
-    justify-content: end;
-    justify-self: end;
-  }
-
-  .main-terms-of-use-cont section{
-     width: 100%;
-     max-width: 1000px !important;
-     height: auto;
-  }
-
-
-
-  /*****
-  NORMAL VIEW
-  *****/
-  .normalGrid-container,
-  .normalView-container{
-    width: 100%;
-    max-width: 600px;
-    justify-self: end;
-  }
-
-
-
-  #normalView
-  {
-    width: 100%;
-    max-width: 60%;
-  }
-
-
-
-  /****
-  GRID VIEW
-  ****/
-
-  #gridView{
-    width: 100%;
-    max-width: 900px;
-    justify-content: center;
-    justify-self: center;
-  }
-
-
-  .gridCards-container{
-    width: 100%;
-    max-width: 900px;
-    justify-content: center ;
-  }
-
-  .gridCards-container .gridCard-wrapper{
-    width: 100%;
-    max-width: 98%;
-    justify-content: center ;
-    display: grid;
-    gap: 1rem !important;
-    grid-template-columns: repeat(5, 1fr) !important;
-  }
-
-.gridCard,
-.gridCardTele,
-.gridCardAirteltigo{
-  width: 11rem !important;
 }
-
-
-
-
-
-
-
-
-
-
-
-.networks-purchased-container .purchase-container {
-    width: 100%;
-    height: 7rem !important;
-    gap: 5rem !important;
-  }
-
- .purchase-container .card-box{
-    height: 5rem;
-    width: 8rem;
-  }
-
-
-#mtnArea,
-#teleArea,
-#tigoArea{
-  width:  100%;
-  height: 11rem;
-  padding:  1rem;
-  max-width: 500px;
-  justify-self: start;
-  display: flex;
-  justify-content: start !important;
-  align-items: center;
-}
-
-#mtnArea .hero-top-content{
-  gap: 1rem;
-}
-
-#mtnArea .hero-top-content .top-right-content h2{
-font-size: 1.06rem;
-font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-
-#mtnArea .hero-top-content .top-right-content small{
-font-size: .8rem;
-font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-
-#mtnArea .hero-bottom-content{
-  margin-top: 1rem;
-}
-
-#mtnArea .hero-bottom-content .btn-div{
-  margin-right: 1.8rem;
-  height: 2.4rem;
-  font-size: 1.2rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-/****
-telecel section
-*****/
-
-#teleArea .hero-top-content{
-  gap: 1rem;
-}
-
-
-#teleArea .hero-top-content .top-right-content h2{
-font-size: 1.06rem;
-font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-
-#teleArea .hero-top-content .top-right-content small{
-font-size: .8rem;
-font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-
-#teleArea .hero-bottom-content{
-  margin-top: 1rem;
-}
-
-#teleArea .hero-bottom-content .btn-div{
-  margin-right: 1.8rem;
-  height: 2.4rem;
-  font-size: 1.2rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-
-/****
-tel end
-*****/
-
-
-/****
-tigo section
-*****/
-
-#tigoArea .hero-top-content{
-  gap: 1rem;
-}
-
-
-#tigoArea .hero-top-content .top-right-content h2{
-font-size: 1.06rem;
-font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-
-#tigoArea .hero-top-content .top-right-content small{
-font-size: .8rem;
-font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-
-#tigoArea .hero-bottom-content{
-  margin-top: 1rem;
-}
-
-#tigoArea .hero-bottom-content .btn-div{
-  margin-right: 1.8rem;
-  height: 2.4rem;
-  font-size: 1.2rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-
-.dark-mode #mtnArea{
-  background: var(--darkMode-bg-cl);
-}
-
-.dark-mode #teleArea{
-  background: var(--darkMode-bg-cl);
-}
-
-
-.dark-mode #tigoArea{
-  background: var(--darkMode-bg-cl);
-}
-
-
-
-
-#mtnArea img{
-  border-radius: 8px;
-  width: 6rem;
-  height: 5rem;
-  padding: .4rem;
-}
-
-
-#teleArea img{
-  border-radius: 8px;
-  width: 6rem;
-  height: 5rem;
-}
-
-
-#tigoArea img{
-  border-radius: 8px;
-  width: 6rem;
-  height: 5rem;
-}
-
-
-
-
-
-  /****
-  TOTAL CARDS
-  *****/
-.daily-analytics h4{
-  font-size: 1.3rem;
-  font-weight: 600;
-}
-
-.dark-mode .daily-analytics h4{
-  font-size: 1.3rem;
-  font-weight: 600;
-}
-
-.totals-container{
-  width: 100%;
-  height: 12rem;
-  padding: 0;
-  position: relative;
-}
-
-
-
-.totals-container .total-card{
-  width: 100%;
-  max-width: 280px;
-  height: 130px;
-  border-radius: 1rem;
-  padding: 0;
-}
-
-.total-card .total-card-top{
-  padding: .3rem 1rem;
-
-}
-
-.total-card .total-card-top small{
-  font-size: 1.3rem;
-}
-
-.total-card .total-card-top img{
-  width: 1.4rem;
-  height: 1.4rem;
-}
-
-.total-card .total-card-bottom p{
-  font-size: 1.2rem;
-}
-
-
-/***8
-LIVE ORDER TABLE
-****/
-.live-order-wrp{
-  width: 100%;
-  max-width: 600px;
-}
-
-
-  /****
-  TOTAL CARDS
-  *****/
-
-  /*****
-  MENU CARD
-  ****/
-  .menu-card-container{
-    position: fixed;
-    top: 3.1rem;
-    left: 0;
-    display:flex;
-    height: 96vh;
-    width: 100%;
-    max-width: 350px;
-    border: none;
-    gap: 1.2rem;
-    background: white;
-  }
-
-
-.dark-mode .menu-card-container{
-  background: var(--darkMode-bg-cl);
-  border: none;
-  border-right: 1px solid var(--thin-border) !important;
-}
-
-
-
-}
- 
-
-
-
 
 
 

@@ -84,12 +84,12 @@ MAIN CONTAINER
   height: 9vh !important;
   position:relative;
   display: flex;
-  box-shadow:  none !important;
   border-bottom:  1px solid var(--text-cl-2);
 }
 
 .dark-mode .container .navbar {
-  box-shadow: none !important;
+  border-top: 1px solid var(--thin-border) !important;
+  border-bottom: 1px solid var(--thin-border) !important;
 }
 
 
@@ -1158,7 +1158,8 @@ GRID RESET
 DISPLAY NONE DIV
 *****/
 .grid-container-main .ads-container-right,
-.grid-container-aside
+.grid-container-aside,
+.floating-scroll
 {
   display: none !important;
 }
@@ -1248,7 +1249,8 @@ MAKE MAIN 100%
 DISPLAY NONE DIV
 *****/
 .grid-container-main .ads-container-right,
-.grid-container-aside
+.grid-container-aside,
+.floating-scroll
 {
   display: none !important;
 }
@@ -1258,10 +1260,6 @@ DISPLAY NONE DIV
   justify-content: end;
 }
 
-.floating-scroll
-{
-  margin-bottom: 3rem;
-}
 
 
 
@@ -1337,7 +1335,8 @@ MAKE MAIN 100%
 DISPLAY NONE DIV
 *****/
 .grid-container-main .ads-container-right,
-.grid-container-aside
+.grid-container-aside,
+.floating-scroll
 {
   display: none !important;
 }
@@ -1426,7 +1425,8 @@ MAKE MAIN 100%
 DISPLAY NONE DIV
 *****/
 .grid-container-main .ads-container-right,
-.grid-container-aside
+.grid-container-aside,
+.floating-scroll
 {
   display: none !important;
 }
@@ -1522,7 +1522,8 @@ MAKE MAIN 100%
 DISPLAY NONE DIV
 *****/
 .grid-container-main .ads-container-right,
-.grid-container-aside
+.grid-container-aside,
+.floating-scroll
 {
   display: none !important;
 }
@@ -1615,7 +1616,8 @@ MAKE MAIN 100%
 DISPLAY NONE DIV
 *****/
 .grid-container-main .ads-container-right,
-.grid-container-aside
+.grid-container-aside,
+.floating-scroll
 {
   display: none !important;
 }
