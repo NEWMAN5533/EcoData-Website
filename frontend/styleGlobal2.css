@@ -79,6 +79,10 @@ MAIN CONTAINER
   background: transparent;
 }
 
+.welcome-bottom #clock
+{
+display: none !important;
+}
 
 
 .dark-mode .container .navbar {
