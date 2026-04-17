@@ -5432,7 +5432,7 @@ MENU-CARD SECTION
   flex-direction: column;
   gap: .5rem;
   right: -500px;
-  top: 3.1rem;
+  top: 4.2rem;
   color: rgb(104, 98, 98);
   border: 1px solid var(--thin-border) !important;
   background: var(--background-cl-1);
