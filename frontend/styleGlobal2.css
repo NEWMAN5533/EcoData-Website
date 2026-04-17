@@ -79,10 +79,6 @@ MAIN CONTAINER
   background: transparent;
 }
 
-.welcome-bottom #clock
-{
-display: none !important;
-}
 
 
 .dark-mode .container .navbar {
@@ -96,7 +92,7 @@ display: none !important;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   height: 91vh;
-  margin-top: 3.8rem !important;
+  margin-top: 4.1rem !important;
   position: relative;
   align-items: center;
   justify-content: center;
@@ -854,8 +850,6 @@ TRUSTED LOGOS ALIGN
       margin-bottom: 3rem;
       box-shadow: 0 10px 20px rgba(0,0,0,0.2);
       border-top: 14px solid rgb(21, 129, 124);
-      border-end-end-radius: 2rem;
-      border-end-start-radius: 2rem;
     }
 
     .dark-mode #gridView{
@@ -901,7 +895,6 @@ TRUSTED LOGOS ALIGN
       display: flex;
       position: relative;
       background: var(--primary-cl);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
       margin: 2rem !important;
     }
 
@@ -1078,6 +1071,11 @@ GRID RESET
   margin-bottom: 7rem;
  }
 
+ #gridView
+{
+  width: 100%;
+  max-width: 98% !important;
+}
 
 
 
@@ -1207,6 +1205,12 @@ DISPLAY NONE DIV
   margin-bottom: 7rem;
  }
 
+  #gridView
+{
+  width: 100%;
+  max-width: 98% !important;
+}
+
 
 
 
@@ -1292,6 +1296,12 @@ DISPLAY NONE DIV
  #normalView{
   margin-bottom: 7rem;
  }
+
+  #gridView
+{
+  width: 100%;
+  max-width: 98% !important;
+}
 
 
 
@@ -1382,6 +1392,12 @@ DISPLAY NONE DIV
  #normalView{
   margin-bottom: 7rem;
  }
+
+  #gridView
+{
+  width: 100%;
+  max-width: 98% !important;
+}
 
 
 
@@ -1475,6 +1491,12 @@ DISPLAY NONE DIV
   margin-bottom: 7rem;
  }
 
+
+  #gridView
+{
+  width: 100%;
+  max-width: 98% !important;
+}
 
 
 
@@ -1573,6 +1595,12 @@ DISPLAY NONE DIV
   margin-bottom: 7rem;
  }
 
+  #gridView
+{
+  width: 100%;
+  max-width: 98% !important;
+}
+
 
 
 
@@ -1669,7 +1697,11 @@ DISPLAY NONE DIV
  #gridView
  {
   margin-bottom: 5rem;
+  width: 100%;
+  max-width: 98% !important;
  }
+
+
 
 
 
@@ -1732,6 +1764,11 @@ DISPLAY NONE DIV
 {
   margin-bottom: 2rem;
 }
+
+  #gridView{
+      width: 100%;
+      max-width: 98% !important;
+  }
 
 .businessInfo .businessInfo-right
 {
@@ -2069,7 +2106,7 @@ WHAT'APP CHAT BUTTON
     ******/
     #gridView{
       width: 100%;
-      max-width: 94% !important;
+      max-width: 96% !important;
       display: flex;
       flex-direction: column;
       gap: 3rem !important;
@@ -2427,7 +2464,7 @@ WHAT'APP CHAT BUTTON
     ******/
     #gridView{
       width: 100%;
-      max-width: 94% !important;
+      max-width: 96% !important;
       display: flex;
       flex-direction: column;
       gap: 3rem !important;
