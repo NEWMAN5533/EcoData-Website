@@ -367,6 +367,7 @@ WATCH VIDEO SECTION
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   padding: 1rem .5rem;
   z-index: 1000;
+  border-bottom:  1px solid var(--text-cl-2);
 }
 
 
@@ -5403,12 +5404,13 @@ MENU-CARD SECTION
   flex-direction: column;
   gap: .5rem;
   right: -500px;
-  top: 3.1rem;
+  top: 4.2rem;
   color: rgb(104, 98, 98);
   border: 3px solid var(--thin-border-1);
   background: rgb(239, 236, 236);
   box-shadow: 0 2px 6px rgba(73, 72, 72, 0.5);
   border-radius: .4rem;
+  z-index: 999999999999999;
   transition: .5s ease-in-out;
   -webkit-tap-highlight-color: transparent;
   -webkit-user-select: none;
