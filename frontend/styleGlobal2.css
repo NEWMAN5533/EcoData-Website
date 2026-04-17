@@ -93,6 +93,7 @@ MAIN CONTAINER
   height: 91vh;
   position: relative;
   align-items: center;
+  margin-top: 4.3rem !important;
   justify-content: center;
   justify-self: center;
 }
