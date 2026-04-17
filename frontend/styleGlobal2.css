@@ -92,7 +92,7 @@ MAIN CONTAINER
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   height: 91vh;
-  margin-top: 4.1rem !important;
+  margin-top: 4rem !important;
   position: relative;
   align-items: center;
   justify-content: center;
