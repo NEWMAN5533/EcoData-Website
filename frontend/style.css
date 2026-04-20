@@ -353,7 +353,7 @@ WATCH VIDEO SECTION
   display: flex;
   width: 100%;
   justify-self: center;
-  height: 3rem ;
+  height: 8vh;
   position: fixed;
   top: 0;
   left: 0;
@@ -366,7 +366,7 @@ WATCH VIDEO SECTION
   background: var(--bg-cl);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   padding: 1rem .5rem;
-  z-index: 1000;
+  z-index: 10000000;
   border-bottom:  1px solid var(--text-cl-2);
 }
 

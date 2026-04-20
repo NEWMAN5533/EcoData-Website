@@ -93,7 +93,7 @@ MAIN CONTAINER
 .container .main-grid-container{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  height: 91vh;
+  height: 92vh;
   margin-top: 4.1rem !important;
   position: relative;
   align-items: center;
@@ -103,7 +103,7 @@ MAIN CONTAINER
 
 .dark-mode .container .main-grid-container
 {
-  height: 95vh;
+  height: 92vh;
 }
 
 
