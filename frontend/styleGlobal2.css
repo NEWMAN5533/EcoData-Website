@@ -80,9 +80,7 @@ MAIN CONTAINER
 }
 
 
-.container .navbar {
-  height: 3.6rem !important;
-}
+
 
 
 .dark-mode .container .navbar {
@@ -101,6 +99,11 @@ MAIN CONTAINER
   align-items: center;
   justify-content: center;
   justify-self: center;
+}
+
+.dark-mode .container .main-grid-container
+{
+  height: 95vh;
 }
 
 
