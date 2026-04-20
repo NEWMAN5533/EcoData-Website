@@ -193,6 +193,9 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
   
+
+
+
     /**
     * SNACKBAR
     **/
@@ -201,28 +204,33 @@ SNACKBAR SECTION
 ****/
 .snackbar {
   position: fixed;
-  top: 1rem;
+  top: 2.2rem !important;
   right: 50%;
-  width: max-content;
+  width: 320px;
   height: 2.8rem;
   transform: translateX(50%);
   background-color:  #beddca;
-  color: #18d3b4;
+  color: #20d18d;
   text-align: start;
   display: flex;
   align-items: center;
   word-spacing: 2.7;
   justify-content: start;
-  font-size: .9rem;
+  font-size: .8rem;
   padding: .5rem;
-  border-radius: 8px;
+  border-radius: 4px !important;
   font-weight: 500;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  box-shadow: 0 2px 6px rgba(95, 107, 104, 0.363), 0 -2px 6px rgba(134, 148, 146, 0.151) ;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
   z-index: 2000000; /* above input popup */
   opacity: 0;
   pointer-events: none;
   transition: opacity .8s ease, transform 0.3s ease;
+}
+
+.dark-mode .snackbar {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.9);
+  border: 1px solid var(--thin-border);
 }
 
 .snackbar.show {
@@ -232,6 +240,7 @@ SNACKBAR SECTION
   width: 100%;
   padding: .5rem;
   max-width: 320px;
+  z-index: 2000000; /* above input popup */
 }
 
 
@@ -252,12 +261,8 @@ SNACKBAR SECTION
   to { width: 0%; }
 }
 
-.snackbar{
-  width: 100%;
-  max-width: 320px;
-  border: 1px solid rgb(31, 143, 119);
-  font-size: .8rem !important;
-}
+
+
 
 
 
@@ -718,8 +723,8 @@ WELCOME CARD
 
 .dark-mode .trusted-badge{
   background: var(--background-cl-1);
-  border: 1px solid var(--thin-border);
-  box-shadow: 0 2px 6px rgba();
+  border: 2px solid var(--thin-border);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 
