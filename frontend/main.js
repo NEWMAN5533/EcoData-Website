@@ -1,4 +1,4 @@
-// UPDATED AT 11/APRIL, 2026 [BACKUP MAIN.JS]
+// UPDATED AT 20/APRIL, 2026 [BACKUP MAIN.JS]
 
 
 // --- Firebase Imports ---
@@ -247,8 +247,11 @@ document.addEventListener("click", () => {
 
 
 
-  // ---------- BUY BUTTONS (NORMAL + GRID) ----------
+
+   // BOTTOM NAVIGATION BAR (DISPLAY = NONE if())
   const bottomNavDiv = document.getElementById("navIconDiv");
+
+  // ---------- BUY BUTTONS (NORMAL + GRID) ----------
   document.querySelectorAll("#normalView .buy-btn, #gridView .buy-btn")
     .forEach(button => {
 
@@ -261,18 +264,18 @@ document.addEventListener("click", () => {
        
         // ================= NORMAL VIEW =================
         if (button.closest("#normalView")) {
-
-
-
           if (!selectedBundle) {
-           
+            // if no selected bundle ( bottomNav = flex )
+          bottomNavDiv.style.display = "flex";
             showSnackBar("📱 Please select a bundle first");
             return;
           }
 
           const input = document.querySelector("#normalView .normalInput");
           if (!input || !input.value.trim()) {
-           
+            // if no input content keyed (bottomNav = flex)
+            bottomNavDiv.style.display = "flex";
+
             showSnackBar("📱 Please enter a phone number");
             return;
           }
@@ -1525,9 +1528,10 @@ function showSnackBar(message, type = "info", duration = 4000) {
 
   // Color by type
   if (type === "success") snackbar.style.background = "rgba(7, 29, 26, 0.95)";
-  else if (type === "error") snackbar.style.background = "#dc3545";
-  else if (type === "warning") snackbar.style.background = "#ffc107";
+  else if (type === "error") snackbar.style.background = "#88353f";
+  else if (type === "warning") snackbar.style.background = "#413b2a";
   else snackbar.style.background = "rgba(7, 29, 26, 0.95)";
+
 
   // Reset progress animation
   const progress = snackbar.querySelector(".snackbar-progress");
