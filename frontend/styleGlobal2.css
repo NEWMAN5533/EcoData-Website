@@ -103,7 +103,7 @@ MAIN CONTAINER
 
 .dark-mode .container .main-grid-container
 {
-  height: 92vh;
+  height: 92vh !important;
 }
 
 

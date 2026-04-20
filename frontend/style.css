@@ -346,6 +346,42 @@ WATCH VIDEO SECTION
 ***/
 
 
+/****
+MAIN CONTAINER
+****/
+.container{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background: transparent;
+}
+
+
+
+.container .main-grid-container{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  height: 92vh !important;
+  margin-top: 4.1rem !important;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+}
+
+.dark-mode .container .main-grid-container
+{
+  height: 92vh !important;
+}
+
+
 /**
 * NAVIGATION BAR
 **/
@@ -353,7 +389,7 @@ WATCH VIDEO SECTION
   display: flex;
   width: 100%;
   justify-self: center;
-  height: 8vh;
+  height: 8vh !important;
   position: fixed;
   top: 0;
   left: 0;
@@ -368,6 +404,11 @@ WATCH VIDEO SECTION
   padding: 1rem .5rem;
   z-index: 10000000;
   border-bottom:  1px solid var(--text-cl-2);
+}
+
+.dark-mode .container .navbar
+{
+  height: 8vh !important;
 }
 
 
