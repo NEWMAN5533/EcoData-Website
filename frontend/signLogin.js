@@ -64,11 +64,20 @@ const logBtn = document.getElementById("logBtn");
 loginForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  logBtn.classList.add("loading");
-  logBtn.disabled = true;
+
 
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
+
+  if(!email || !password) {
+    showSnackBar("Please fill in all fields", "warning");
+    loginBtn.classList.remove("loading");
+    logBtn.disabled = false;
+
+  } else {
+    logBtn.classList.add("loading");
+    logBtn.disabled = true;
+  }
 
 
    try {
@@ -112,15 +121,21 @@ loginForm.addEventListener("submit", async (e) => {
 
     if (error.code === "auth/invalid-credential") {
       message = "Invalid email or password";
+      showSnackBar("Invalid email or password");
+
     } else if (error.code === "auth/user-not-found") {
       message = "Account not found";
+      showSnackBar("Account not found");
+
     } else if (error.code === "auth/wrong-password") {
       message = "Incorrect password";
+      showSnackBar("Incorrect password");
+
     } else if (error.code === "auth/too-many-requests") {
       message = "Too many attempts. Try again later";
+      showSnackBar("Too many attempts. Tru again later");
     }
 
-    showSnackBar(message, "error");
 
   } finally {
     logBtn.classList.remove("loading");
@@ -155,10 +170,11 @@ function showSnackBar(message, type = "info", duration = 4000) {
   // Update text
   snackbar.querySelector(".snackbar-text").textContent = message;
 
+
   // Color by type
   if (type === "success") snackbar.style.background = "rgba(7, 29, 26, 0.95)";
-  else if (type === "error") snackbar.style.background = "#dc3545";
-  else if (type === "warning") snackbar.style.background = "#ffc107";
+  else if (type === "error") snackbar.style.background = "#88353f";
+  else if (type === "warning") snackbar.style.background = "#413b2a";
   else snackbar.style.background = "rgba(7, 29, 26, 0.95)";
 
   // Reset progress animation

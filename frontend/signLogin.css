@@ -581,3 +581,75 @@ FOOTER SECTION ENDS
   transform: scale(0.9);
 }
 
+
+
+
+
+
+
+
+/*******
+SNACKBAR STYLE
+*******/
+
+
+    /**
+    * SNACKBAR
+    **/
+    /***
+SNACKBAR SECTION
+****/
+.snackbar {
+  position: fixed;
+  top: 2.2rem;
+  right: 50%;
+  width: 320px;
+  height: 2.8rem;
+  transform: translateX(50%);
+  background-color:  #beddca;
+  color: #20d18d;
+  text-align: start;
+  display: flex;
+  align-items: center;
+  word-spacing: 2.7;
+  justify-content: start;
+  font-size: .9rem;
+  padding: .5rem;
+  border-radius: 4px;
+  font-weight: 500;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  z-index: 2000000; /* above input popup */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .8s ease, transform 0.3s ease;
+}
+
+.snackbar.show {
+  opacity: 1;
+  transform: translateX(50%) translateY(10px);
+  pointer-events:all;
+  width: 100%;
+  padding: .5rem;
+  max-width: 320px;
+  z-index: 2000000; /* above input popup */
+}
+
+
+/* Progress bar */
+.snackbar-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.7);
+  animation: snackbar-progress linear forwards;
+}
+
+/* Progress animation */
+@keyframes snackbar-progress {
+  from { width: 100%; }
+  to { width: 0%; }
+}
+

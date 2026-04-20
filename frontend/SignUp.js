@@ -54,8 +54,15 @@ signupForm.addEventListener("submit", async (e) => {
 
   if ( !username || !email || !password ) {
     showSnackBar("Please fill all fields", "warning");
+    sinBtn.classList.remove("loading");
+    sinBtn.disabled = false;
+
     resetBtn();
     return;
+
+  } else {
+    sinBtn.classList.add("loading");
+    sinBtn.disabled = true;
   }
 
 
@@ -148,8 +155,8 @@ function showSnackBar(message, type = "info", duration = 4000) {
 
   // Color by type
   if (type === "success") snackbar.style.background = "rgba(7, 29, 26, 0.95)";
-  else if (type === "error") snackbar.style.background = "#dc3545";
-  else if (type === "warning") snackbar.style.background = "#ffc107";
+  else if (type === "error") snackbar.style.background = "#88353f";
+  else if (type === "warning") snackbar.style.background = "#413b2a";
   else snackbar.style.background = "rgba(7, 29, 26, 0.95)";
 
   // Reset progress animation
