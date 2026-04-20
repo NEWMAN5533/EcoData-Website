@@ -376,10 +376,6 @@ MAIN CONTAINER
   justify-self: center;
 }
 
-.dark-mode .container .main-grid-container
-{
-  height: 92vh !important;
-}
 
 
 /**
@@ -406,10 +402,7 @@ MAIN CONTAINER
   border-bottom:  1px solid var(--text-cl-2);
 }
 
-.dark-mode .container .navbar
-{
-  height: 8vh !important;
-}
+
 
 
 
