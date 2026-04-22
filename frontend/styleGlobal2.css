@@ -82,31 +82,33 @@ MAIN CONTAINER
 
 
 
-.dark-mode .container .navigationBar {
+.dark-mode .container .navbar {
   border-top: 1px solid var(--thin-border) !important;
   border-bottom: 1px solid var(--thin-border) !important;
   box-shadow: none !important;
-background: var(--darkMode-bg-cl);
+  background: var(--darkMode-bg-cl);
 }
+
 
 
 .container .main-grid-container{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   height: 91vh;
+  margin-top: 3rem ;
   position: relative;
-  margin-top: 3rem;
   align-items: center;
   justify-content: center;
   justify-self: center;
 }
 
-
-.dark-mode .container .main-grid-container 
+.dark-mode .container .main-grid-container
 {
-margin-top: 3rem !important;
+  margin-top: 2.2rem;
+} 
 
-}
+
+
 
 
 /****
