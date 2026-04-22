@@ -100,7 +100,7 @@ background: #fff;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   height: 91vh !important;
-  margin-top: 3rem ;
+  margin-top: 8vh !important;
   position: relative;
   align-items: center;
   justify-content: center;
