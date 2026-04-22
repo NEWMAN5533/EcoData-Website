@@ -256,7 +256,7 @@ document.addEventListener("click", () => {
     .forEach(button => {
 
       button.addEventListener("click", () => {
-      bottomNavDiv.style.display = "none";
+      bottomNavDiv.style.display = "flex";
 
         let bundle;
         let recipient = "";
@@ -417,9 +417,13 @@ function createPhoneModal(callback) {
   const cancelBtn = document.getElementById("cancelBtn");
   const input = document.getElementById("recipientInput");
 
+  
+
 
   // Show modal
   modal.classList.add("show");
+
+
 
   cancelBtn.onclick = () => {
     modal.classList.remove("show");

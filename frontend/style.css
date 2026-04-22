@@ -2227,11 +2227,11 @@ PRICES SECTION ENDS
   top: 0; left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(41, 40, 40, 0.6);
   justify-content: center;
   align-items: center;
   justify-self: center;
-  z-index: 9999;
+  z-index: 9999999999;
 
 }
 
@@ -2244,22 +2244,19 @@ PRICES SECTION ENDS
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  background: rgb(26, 45, 85);
-  border: 2px solid var(--thin-border);
-  border-radius: 1rem;
-  box-shadow: 0 2px 6px rgba(34, 33, 33, 0.8);
+  background: var(--thin-border);
+  border: 1px solid rgb(112, 111, 111) !important;
+  border-radius: 5px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.94);
 }
 
 .selected-div h4{
-  color: rgb(201, 196, 196);
-  font-size: 1.3rem;
+  color: rgb(23, 121, 160);
+  font-size: 1rem !important;
   font-weight: 600;
   font-family: serif;
-  background: rgba(206, 180, 151, 0.164);
   padding: .5rem;
-  border-radius: 1rem;
-  box-shadow: 0 2px 6px rgba(44, 38, 31, 0.3);
-
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .placeholders-wrapper{
@@ -2283,42 +2280,43 @@ PRICES SECTION ENDS
 
 .placeholdersbtn-wrapper small{
   font-size: 1.1rem;
-  color: var(--text-cl-3);
+  color: var(--btn-bg-cl);
   margin-bottom: .2rem;
+  padding: .1rem .3rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .placeholders-left{
   display: flex;
   width: 100%;
   height: 2rem;
-  font-size: 1rem;
+  font-size: .9rem !important;
   font-family: serif;
-  font-weight: 600;
+  font-weight: 500 !important;
   max-width: 120px;
   align-items: center;
   justify-content: center;
   right: 1rem;
-  background: rgba(226, 221, 221, 0.507);
-  border: 0.1px solid rgb(177, 164, 153);
-  border-radius: 2rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2)
+  color: rgb(235, 234, 234);
+  background: var(--background-cl-1);
+  border-radius: 4px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .placeholders-right{
   display: flex;
   width: 100%;
   height: 2rem;
-  font-size: 1rem;
+  font-size: .9rem !important;
   font-family: serif;
-  font-weight: 600;
+  font-weight: 500 !important;
   max-width: 160px;
   align-items: center;
   justify-content: center;
   left: 1rem;
-  background: rgba(226, 223, 223, 0.507);
-  border: 0.1px solid rgb(177, 170, 165);
-  border-radius: 2rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  color: white;
+  border-radius: 4px;
+  background: var(--background-cl-1);
 }
 
 .modal.show {
@@ -2329,12 +2327,12 @@ PRICES SECTION ENDS
 }
 
 .modal-content {
-  background: #0b0a0f;
+  background: var(--background-cl-1);
   padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;  
-  border-radius: 12px;
+  border-radius: 6px;
   width: 100%;
   gap: 1rem;
   height: 29rem;
@@ -2342,7 +2340,7 @@ PRICES SECTION ENDS
   box-shadow: 0 10px 25px rgba(107, 105, 105, 0.3);
   text-align: center;
   animation: popUp 0.3s ease;
-  border: 2px solid rgba(134, 133, 131, 0.774);
+  border: 1px solid rgba(134, 133, 131, 0.774);
 }
 
 .modal-content h3 {
@@ -2359,12 +2357,14 @@ PRICES SECTION ENDS
   height: 3rem;
   padding: 8px;
   color: white;
-  border: 2px solid var(--text-cl-3);
+  background: var(--thin-border);
+  border: 1px solid rgb(112, 111, 111) !important;
   border-radius: 10px;
   font-size: 1.3rem;
   text-align: center;
   margin-bottom: 1.5rem;
   transition: border 0.3s ease;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.9);
 }
 
 .modal-content input:focus {
@@ -2377,13 +2377,13 @@ PRICES SECTION ENDS
   width: 100%;
   max-width: 420px;
   height: 5rem;
-  background-color: rgba(59, 56, 56, 0.253);
-  border-radius: 6px;
+  background-color: var(--background-cl-1);
+  border-radius: 4px;
   padding: .9rem 1.1rem;
   align-items: center;
-  border: 2px solid var(--thin-border);
+  border: 1px solid rgba(77, 77, 77, 0.541) !important;
   justify-content: space-between;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
   gap: 1.5rem;
 }
 
