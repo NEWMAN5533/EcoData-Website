@@ -86,6 +86,7 @@ MAIN CONTAINER
   border-top: 1px solid var(--thin-border) !important;
   border-bottom: 1px solid var(--thin-border) !important;
   box-shadow: none !important;
+background: var(--darkMode-bg-cl);
 }
 
 
@@ -94,6 +95,7 @@ MAIN CONTAINER
   grid-template-columns: repeat(3, 1fr);
   height: 91vh;
   position: relative;
+  margin-top: 3rem;
   align-items: center;
   justify-content: center;
   justify-self: center;
