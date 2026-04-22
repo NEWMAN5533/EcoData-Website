@@ -80,9 +80,9 @@ MAIN CONTAINER
 
 
 
-.container .navbar
+.container .navbar 
 {
-  background: #fff;
+background: #fff;
 }
 
 
@@ -99,8 +99,8 @@ MAIN CONTAINER
 .container .main-grid-container{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  height: 92vh !important;
-  margin-top: 4rem ;
+  height: 91vh !important;
+  margin-top: 3rem ;
   position: relative;
   align-items: center;
   justify-content: center;
@@ -118,7 +118,7 @@ aside section
 ****/
 .container .main-grid-container .grid-container-aside{
   width: 20vw;
-  height: 92vh;
+  height: 91vh;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -495,7 +495,7 @@ MAIN GRID CONTAINER SECTION
 *******/
 .container .main-grid-container .grid-container-main{
   width: 45vw;
-  height: 92vh !important;
+  height: 91vh !important;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -521,7 +521,7 @@ MAIN GRID CONTAINER SECTION
 }
 
 .grid-container-main .card-container .welcome-card{
-  margin-top: 0.2rem !important;
+  margin-top: 1rem !important;
 }
 
 
