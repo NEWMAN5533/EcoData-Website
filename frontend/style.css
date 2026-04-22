@@ -368,28 +368,19 @@ MAIN CONTAINER
 .container .main-grid-container{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  height: 91vh !important;
+  height: 92vh !important;
   position: relative;
   align-items: center;
   justify-content: center;
   justify-self: center;
 }
 
+.container .navbar
+{
+  background: #fff;
 
-.container .navbar{
-  width: 100%;
-  height: 9vh;
-  display: flex;
-  align-items: center;
-  align-content: center !important;
-  justify-content: space-between;
-  padding: 0 1rem;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10000000;
 }
+
 
 .dark-mode .container .navbar{
 background: var(--background-cl-1);
