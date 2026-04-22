@@ -1109,10 +1109,12 @@ TRUSTED LOGOS ALIGN
 /****
 DISPLAY NONE DIV
 *****/
-.grid-container-main .ads-container-right,
+.ads-container-right,
 .grid-container-aside,
 .floating-scroll,
-.side-title
+.side-title,
+.agent-upgrade,
+.agent-upgrade-wrapper
 {
   display: none !important;
 }
@@ -1265,10 +1267,12 @@ GRID RESET
   /****
 DISPLAY NONE DIV
 *****/
-.grid-container-main .ads-container-right,
+.ads-container-right,
 .grid-container-aside,
 .floating-scroll,
-.side-title
+.side-title,
+.agent-upgrade,
+.agent-upgrade-wrapper
 {
   display: none !important;
 }
@@ -1363,10 +1367,12 @@ MAKE MAIN 100%
   /****
 DISPLAY NONE DIV
 *****/
-.grid-container-main .ads-container-right,
+ .ads-container-right,
 .grid-container-aside,
 .floating-scroll,
-.side-title
+.side-title,
+.agent-upgrade,
+.agent-upgrade-wrapper
 {
   display: none !important;
 }
@@ -1456,10 +1462,12 @@ MAKE MAIN 100%
   /****
 DISPLAY NONE DIV
 *****/
-.grid-container-main .ads-container-right,
+ .ads-container-right,
 .grid-container-aside,
 .floating-scroll,
-.side-title
+.side-title,
+.agent-upgrade,
+.agent-upgrade-wrapper
 {
   display: none !important;
 }
@@ -1553,10 +1561,12 @@ MAKE MAIN 100%
   /****
 DISPLAY NONE DIV
 *****/
-.grid-container-main .ads-container-right,
+.ads-container-right,
 .grid-container-aside,
 .floating-scroll,
-.side-title
+.side-title,
+.agent-upgrade,
+.agent-upgrade-wrapper
 {
   display: none !important;
 }
@@ -1657,10 +1667,12 @@ MAKE MAIN 100%
   /****
 DISPLAY NONE DIV
 *****/
-.grid-container-main .ads-container-right,
+.ads-container-right,
 .grid-container-aside,
 .floating-scroll,
-.side-title
+.side-title,
+.agent-upgrade,
+.agent-upgrade-wrapper
 {
   display: none !important;
 }
@@ -1758,10 +1770,12 @@ MAKE MAIN 100%
   /****
 DISPLAY NONE DIV
 *****/
-.grid-container-main .ads-container-right,
+.ads-container-right,
 .grid-container-aside,
 .floating-scroll,
-.side-title
+.side-title,
+.agent-upgrade,
+.agent-upgrade-wrapper
 {
   display: none !important;
 }
