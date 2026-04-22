@@ -281,25 +281,6 @@ SNACKBAR SECTION
 
 
 
-/**
-WELCOME CARD 
-**/
-.welcome-card {
-  width: 100%;
-  max-width: 97%;
-  height: 10rem;
-  display: flex;
-  gap: .5rem;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  position: relative;
-  background: var(--bg-cl);
-  border-radius: .6rem;
-  box-shadow:  0 2px 6px rgba(0, 0, 0, 0.4) !important;
-  margin-top: 4.3rem; 
-  margin-bottom: .8rem;
-}
 
 .dark-mode .welcome-card{
   background: var(--background-cl-1);
