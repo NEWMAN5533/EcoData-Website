@@ -354,7 +354,7 @@ MAIN CONTAINER
   height: max-content;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: column;
   position: relative;
   padding: 0;

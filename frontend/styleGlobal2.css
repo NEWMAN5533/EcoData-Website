@@ -67,7 +67,7 @@ MAIN CONTAINER
 ****/
 .container{
   width: 100vw;
-  height: max-content;
+  height: max-content !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -76,6 +76,14 @@ MAIN CONTAINER
   padding: 0;
   margin: 0;
   background: transparent;
+}
+
+
+.container .bottom-navbar{
+  width: 100%;
+  height: 9vh !important;
+  position: fixed;
+  ;
 }
 
 
@@ -94,7 +102,7 @@ MAIN CONTAINER
 .container .main-grid-container{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  height: 91vh;
+  height: 91vh !important;
   margin-top: 3rem ;
   position: relative;
   align-items: center;
@@ -490,13 +498,12 @@ MAIN GRID CONTAINER SECTION
 *******/
 .container .main-grid-container .grid-container-main{
   width: 45vw;
-  height: 90vh;
+  height: 91vh !important;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0;
   flex-direction: column;
-  position: relative;
   position: relative;
   overflow-y: auto;
   scrollbar-width: none;
@@ -504,6 +511,8 @@ MAIN GRID CONTAINER SECTION
   margin-top: .2rem ;
   border-right: 1px solid var(--text-cl-2);
 }
+
+
 
 
 .main-grid-container .grid-container-main .foot{
@@ -514,8 +523,9 @@ MAIN GRID CONTAINER SECTION
   border-right: 1px solid var(--thin-border);
 }
 
- .main-grid-container .grid-container-main .welcome-card{
-  margin-top: .3rem;
+.grid-container-main .card-container .welcome-card{
+  margin-top: .6rem;
+  z-index: 1;
 }
 
 
@@ -1279,6 +1289,8 @@ DISPLAY NONE DIV
 {
   display: none !important;
 }
+
+
 
 
     .businessInfo .businessInfo-right
