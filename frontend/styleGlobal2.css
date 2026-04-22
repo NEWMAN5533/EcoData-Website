@@ -82,7 +82,7 @@ MAIN CONTAINER
 
 
 
-.dark-mode .container .navbar {
+.dark-mode .container .navigationBar {
   border-top: 1px solid var(--thin-border) !important;
   border-bottom: 1px solid var(--thin-border) !important;
   box-shadow: none !important;
@@ -92,7 +92,7 @@ MAIN CONTAINER
 .container .main-grid-container{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  height: 92vh;
+  height: 91vh;
   margin-top: 8.2vh !important;
   position: relative;
   align-items: center;
@@ -111,7 +111,7 @@ aside section
 ****/
 .container .main-grid-container .grid-container-aside{
   width: 20vw;
-  height: 92vh;
+  height: 91vh;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -488,7 +488,7 @@ MAIN GRID CONTAINER SECTION
 *******/
 .container .main-grid-container .grid-container-main{
   width: 45vw;
-  height: 92vh;
+  height: 90vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -499,6 +499,7 @@ MAIN GRID CONTAINER SECTION
   overflow-y: auto;
   scrollbar-width: none;
   scroll-behavior: smooth;
+  margin-top: .2rem ;
   border-right: 1px solid var(--text-cl-2);
 }
 
