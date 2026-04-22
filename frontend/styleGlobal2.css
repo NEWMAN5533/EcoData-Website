@@ -67,7 +67,7 @@ MAIN CONTAINER
 ****/
 .container{
   width: 100vw;
-  height: 100vh;
+  height: max-content;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -102,10 +102,7 @@ MAIN CONTAINER
   justify-self: center;
 }
 
-.dark-mode .container .main-grid-container
-{
-  margin-top: 2.2rem;
-} 
+
 
 
 
