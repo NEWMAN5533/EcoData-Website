@@ -1699,13 +1699,13 @@ UPDATED UI STYLE
       padding-top:  .7rem;
       flex-direction: column;
       background: rgba(230, 230, 174, 0.342);
-      border-radius: 2px;
-      box-shadow: 0 4px 8px rgba(129, 127, 127, 0.6);
+      border-radius: 2px !important;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.75);
     }
 
     .gridCardTele{
       width: 11rem;
-      height: 15rem;
+      height: 15rem; 
       display:flex;
       position: relative;
       align-items: center;
@@ -1714,8 +1714,8 @@ UPDATED UI STYLE
       padding-top: 0.7rem;
       flex-direction: column;
       background: rgba(230, 174, 191, 0.185);
-      border-radius: 2px;
-      box-shadow: 0 4px 8px rgba(129, 127, 127, 0.6);
+      border-radius: 2px !important;
+      box-shadow: 0 10px 20px rgba(0,0,0,75);
     }
 
     .gridCardAirteltigo{
@@ -1729,16 +1729,16 @@ UPDATED UI STYLE
       padding-top: 0.7rem;
       flex-direction: column;
       background: rgba(174, 222, 230, 0.185);
-      border-radius: 2px;
-      box-shadow: 0 4px 8px rgba(129, 127, 127, 0.6);
+      border-radius: 2px !important;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.75);
     }
 
-    .dark-mode .gridCardAirtelTigo {
+    .dark-mode .gridCardAirteltigo {
       box-shadow: 0 10px 20px rgba(0,0,0,0.95);
     }
 
     .dark-mode .gridCard {
-      box-shadow: 0 10px 2px rgba(0,0,0,0.95);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.95);
     }
 
     .dark-mode .gridCardTele {
@@ -1753,7 +1753,7 @@ UPDATED UI STYLE
 
      .gridCard .gridCard-top,
      .gridCardTele .gridCard-top,
-     .gridCardAirtelTigo .gridCard-top{
+     .gridCardAirteltigo .gridCard-top{
       width: 100%;
       height: 2.rem;
       display: flex;
@@ -1767,8 +1767,8 @@ UPDATED UI STYLE
 
      .gridCard .gridCard-top small,
      .gridCardTele .gridCard-top small,
-     .gridCardAirtelTigo .gridCard-top small{
-      font-size: 1.05rem;
+     .gridCardAirteltigo .gridCard-top small{
+      font-size: 0.9rem;
       font-family: serif;
       font-weight: 600;
       color: rgb(155, 92, 29);
@@ -1776,7 +1776,7 @@ UPDATED UI STYLE
 
     .gridCard .gridCard-top img,
     .gridCardTele .gridCard-top img,
-    .gridCardAirtelTigo .gridCard-top img{
+    .gridCardAirteltigo .gridCard-top img{
       width: 1.4rem;
       height: 1.4rem;
       border-radius: 2px;
