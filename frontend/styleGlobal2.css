@@ -964,7 +964,9 @@ TRUSTED LOGOS ALIGN
       background: var(--primary-cl);
       align-items: center;
       position: relative;
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
+      border-end-start-radius: 0 !important;
+      border-end-end-radius: 0 !important;
       box-shadow: 0 10px 20px rgba(0,0,0,0.2);
       border-top: 14px solid rgb(21, 129, 124);
     }
@@ -978,8 +980,18 @@ TRUSTED LOGOS ALIGN
       box-shadow: 0 10px 20px rgba(0,0,0,0.35);
     }
 
+.dark-mode .gridCard{
+  box-shadow: 0 10px 20px rgba(0,0,0,0.95);
+}
+
+.dark-mode .gridCardTele{
+  box-shadow: 0 10px 20px rgba(0,0,0,0.95);
+}
 
 
+.dark-mode .gridCardAirtelTigo{
+  box-shadow: 0 10px 20px rgba(0,0,0,0.95);
+}
 
     /*****
     GRIDvIEW PURCHASE CONTAINER
