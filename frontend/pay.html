@@ -31,6 +31,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="styleGlobal.css">
   <link rel="stylesheet" href="styleGlobal2.css">
+  <link rel="stylesheet" href="styleGlobal3.css">
   
 
 
@@ -669,7 +670,7 @@ AGENT PRICE
           <div class="storeBuild">
              <p>Create Store</p>
           </div>
-           <div class="quicker-nav" onclick="window.location.href='./ecdoataStore/welcomingPage.html'">
+           <div title="Coming Up Soon!" class="quicker-nav" >
               <img src="./css/uiIcons/store.png" alt="" loading="lazy">
               <p>Get Store</p>
           </div>
@@ -1159,7 +1160,7 @@ AGENT PRICE
   
   </p>
 
-  <button onclick="window.location.href='./ecdoataStore/welcomingPage.html'">Upgrade Now</button>
+  <button title="Coming Up Soon!">Get Store</button>
 </div>
 </div>
 
@@ -1250,7 +1251,10 @@ onAuthStateChanged(auth, async (user) => {
 
 
 const logoutBtn = document.getElementById("logOutBtn");
+const lapOutBtn = document.getElementById("lapOut");
 
+
+// Logout
 if (logoutBtn) {
   logoutBtn.addEventListener("click", async () => {
 
@@ -1266,6 +1270,18 @@ if (logoutBtn) {
 
 }
 
+// logout on laptop
+if(lapOutBtn){
+  lapOutBtn.addEventListener("click", async () => {
+    try {
+      await signOut(auth);
+      showSnackBar("Logged out successful");
+    } catch(err) {
+      console.error("Error Logging out: ", err);
+      showSnackBar("Error logging out");
+    }
+  });
+}
 
 
 
