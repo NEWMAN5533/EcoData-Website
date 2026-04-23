@@ -1699,7 +1699,7 @@ UPDATED UI STYLE
       padding-top:  .7rem;
       flex-direction: column;
       background: rgba(230, 230, 174, 0.342);
-      border-radius: 2px !important;
+      border-radius: 1px !important;
       box-shadow: 0 10px 20px rgba(0,0,0,0.75);
     }
 
@@ -1714,7 +1714,7 @@ UPDATED UI STYLE
       padding-top: 0.7rem;
       flex-direction: column;
       background: rgba(230, 174, 191, 0.185);
-      border-radius: 2px !important;
+      border-radius: 1px !important;
       box-shadow: 0 10px 20px rgba(0,0,0,75);
     }
 
@@ -1729,7 +1729,7 @@ UPDATED UI STYLE
       padding-top: 0.7rem;
       flex-direction: column;
       background: rgba(174, 222, 230, 0.185);
-      border-radius: 2px !important;
+      border-radius: 1px !important;
       box-shadow: 0 10px 20px rgba(0,0,0,0.75);
     }
 
@@ -1755,21 +1755,31 @@ UPDATED UI STYLE
      .gridCardTele .gridCard-top,
      .gridCardAirteltigo .gridCard-top{
       width: 100%;
-      height: 2.rem;
+      height: 2rem;
       display: flex;
-      gap: 1rem;
       align-items: center;
       justify-content: space-between;
-      padding:  .5rem;
+      padding:  0.5rem;
       position: relative;
     
     }
 
+     .gridCardAirteltigo .gridCard-top 
+      {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        align-items: center;
+        padding: .5rem;
+        width: 100%;
+        height: 2rem;
+      }
+
      .gridCard .gridCard-top small,
      .gridCardTele .gridCard-top small,
      .gridCardAirteltigo .gridCard-top small{
-      font-size: 0.9rem;
-      font-family: serif;
+      font-size: 0.9rem !important;
+      font-family: "poppins" serif;
       font-weight: 600;
       color: rgb(155, 92, 29);
     }
