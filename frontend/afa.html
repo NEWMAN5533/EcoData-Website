@@ -36,6 +36,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="styleGlobal.css">
   <link rel="stylesheet" href="styleGlobal2.css">
+  <link rel="stylesheet" href="styleGlobal3.css">
 
 
   <!----USERS ANIMATION---->
@@ -310,7 +311,7 @@
           <div class="storeBuild">
              <p>Create Store</p>
           </div>
-           <div class="quicker-nav" onclick="window.location.href='./ecdoataStore/welcomingPage.html'" >
+           <div title="Coming Up Soon!" class="quicker-nav" >
               <img src="./css/uiIcons/store.png" alt="" loading="lazy">
               <p>Get Store</p>
           </div>
@@ -321,7 +322,7 @@
          <!--bottom-->
         <div class="bottom-nav">
           <div class="sign-link">
-            <button onclick="window.location.href = 'login.html'" class="login">
+            <button onclick="window.location.href = 'login.html'" class="login" >
               Login
             </button>
            
@@ -878,7 +879,7 @@
   
   </p>
 
-  <button onclick="window.location.href='./ecdoataStore/welcomingPage.html'">Upgrade Now</button>
+  <button title="Coming Up Soon!" >Get store</button>
 </div>
 </div>
 
@@ -927,6 +928,8 @@
   import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
   import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
+  import { signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
   const firebaseConfig = {
     // TODO: replace these placeholder values with your Firebase project config
   apiKey: "AIzaSyClNBlfigtQk8AZWdMZcU9sEtVcIrS0D1g",
@@ -958,6 +961,36 @@ const greeting = updateClock();
     }
 });
 
+
+const logOutBtn = document.getElementById("logOuBtn");
+const lapOutBtn = document.getElementById("lapOut");
+
+// Logout
+if(logOutBtn) {
+  logOutBtn.addEventListener("click", async () => {
+    try{
+      await signOut(auth);
+      showSnackBar("Logged out successfully");
+
+    } catch (error){
+      console.error("Error logging in: ", error);
+    }
+  });
+};
+
+
+// LogOut on laptops
+if(lapOutBtn){
+  lapOutBtn.addEventListener("click", async () => {
+    try {
+      await signOut(auth);
+      showSnackBar("Logged out successfully");
+    } catch(err) {
+      console.error("Error Login in: ", err);
+      showSnackBar("Error logging out")
+    }
+  })
+}
 
 
 

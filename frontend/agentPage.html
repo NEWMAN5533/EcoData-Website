@@ -36,6 +36,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="styleGlobal.css">
   <link rel="stylesheet" href="styleGlobal2.css">
+  <link rel="stylesheet" href="styleGlobal3.css">
 <!---LOADER CARD---->
 <style>
   .packages small{
@@ -433,7 +434,7 @@ width: 50%;
           <div class="storeBuild">
              <p>Create Store</p>
           </div>
-           <div class="quicker-nav" onclick="window.location.href='./ecdoataStore/welcomingPage.html'">
+           <div title="Coming Up soon!" class="quicker-nav" onclick="window.location.href='./ecdoataStore/welcomingPage.html'">
               <img src="./css/uiIcons/store.png" alt="" loading="lazy">
               <p>Get Store</p>
           </div>
@@ -492,7 +493,7 @@ width: 50%;
     
     <span><small class="dotter"></small> Active 24/7</span>
   </div>
-    <div id="clock" style="display: flex !important;"></div>
+    <div id="clock"></div>
   </div>
 </div>
 
@@ -784,12 +785,12 @@ width: 50%;
 
   <div class="select-dropdown" id="dropdownOffer">
     <div class="optionDelevery" data-mode="normal">
-      <span >MTN DATA NORMAL DELIVERY ✔  </span>
+      <span >MTN DATA NORMAL DELIVERY   </span>
       <small>NON-EXPIRY</small>
     </div>
   
     <div class="optionDelevery" data-mode="express">
-      <span>MTN DATA EXPRESS DELIVERY ✔</span>
+      <span>MTN DATA EXPRESS DELIVERY </span>
       <small>NON-EXPIRY</small>
     </div>
   </div>
@@ -2624,7 +2625,7 @@ width: 50%;
   
   </p>
 
-  <button onclick="window.location.href='./ecdoataStore/welcomingPage.html'">Upgrade Now</button>
+  <button title="Coming Up Soon!" >Get Store</button>
 </div>
 </div>
 
@@ -2733,6 +2734,7 @@ width: 50%;
 
 // LOGOUT
 const logoutBtn = document.getElementById("logOutBtn");
+const lapOutBtn = document.getElementById("lapOut")
 
 if (logoutBtn) {
   logoutBtn.addEventListener("click", async () => {
@@ -2748,6 +2750,22 @@ if (logoutBtn) {
     }
   });
 
+}
+
+
+// logout on laptops
+if(lapOutBtn) {
+  lapOutBtn.addEventListener("click", async() => {
+
+    try {
+      await signOut(auth);
+      showSnackBar("Logged out successfully!");
+      hideSignupModal();
+    } catch (error) {
+      console.error("LogOut error:", error);
+      showSnackBar("Error logging out.");
+    }
+  });
 }
 
 </script>
