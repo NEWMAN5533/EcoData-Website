@@ -1,4 +1,4 @@
-// UPDATED AT 20/APRIL, 2026 [BACKUP MAIN.JS]
+// UPDATED AT 23/APRIL, 2026 [BACKUP MAIN.JS]
 
 
 // --- Firebase Imports ---
@@ -242,6 +242,33 @@ document.addEventListener("click", () => {
 
 
 
+// =================================================
+// CHECK IF THE RECIPIENT HAS ACTIVE ORDER (ALREADY)
+// =================================================
+const activeStatus = ["pending", "queued", "processing", "completed", "failed", "cancelled"];
+
+function normalizeNumber(num) {
+  return num.replace(/\D/g, "").slice(-9);
+}
+
+      // check function
+ function hasActiveOrder(recipient) {
+  const orders = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
+
+  const target = normalizeNumber(recipient);
+
+  return orders.some(o => {
+    const status = (o.status || "").toLowerCase();
+
+    return normalizeNumber(
+      o.recipient === target && activeStatus.includes(status) 
+    );
+  });
+ }
+// =================================================
+// CHECK IF THE RECIPIENT HAS ACTIVE ORDER (ALREADY) ENDS
+// =================================================
+
 
 
 
@@ -256,6 +283,15 @@ document.addEventListener("click", () => {
     .forEach(button => {
 
       button.addEventListener("click", () => {
+
+         // CHECK IF RECIPIENT HAS (ACTIVE-ORDER)
+   if(hasActiveOrder(phoneNumber)){
+    showLoader(
+      "Your already number has an Active Order. Please wait 'warning' "
+    );
+    return; // stop everything if not true
+   }
+
       bottomNavDiv.style.display = "flex";
 
         let bundle;
@@ -514,9 +550,11 @@ function playSuccessSound() {
 
 
 
+
 //NEW UPDATED 21/01/2026 //
 // === PAYSTACK PAYMENT (Firebase version) ===
 async function payWithPaystack(bundle, recipient) {
+
   const { network, packageName, size, price } = bundle;
 
   
@@ -571,6 +609,7 @@ async function payWithPaystack(bundle, recipient) {
 //NEW UPDATED 21/01/2026 //
 // === SEND ORDER TO BACKEND ===
 async function orderBundle(network, recipient, packageName, size, reference) {
+
   try {
 
     const bundle = lastPurchasedBundle;
