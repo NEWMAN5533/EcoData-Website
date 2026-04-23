@@ -1699,7 +1699,7 @@ UPDATED UI STYLE
       padding-top:  .7rem;
       flex-direction: column;
       background: rgba(230, 230, 174, 0.342);
-      border-radius: 1rem;
+      border-radius: 2px;
       box-shadow: 0 4px 8px rgba(129, 127, 127, 0.6);
     }
 
@@ -1709,12 +1709,12 @@ UPDATED UI STYLE
       display:flex;
       position: relative;
       align-items: center;
-      justify-content: center;
-      gap: 1.2rem;
-      padding: 0 .2rem;
+      justify-content: space around !important;
+      gap: 0;
+      padding-top: 0.7rem;
       flex-direction: column;
       background: rgba(230, 174, 191, 0.185);
-      border-radius: 1rem;
+      border-radius: 2px;
       box-shadow: 0 4px 8px rgba(129, 127, 127, 0.6);
     }
 
@@ -1723,14 +1723,26 @@ UPDATED UI STYLE
       height: 15rem;
       display:flex;
       align-items: center;
-      justify-content: center;
-      gap: 1.5rem;
+      justify-content: space around !important;
+      gap: 0;
       position: relative;
-      padding: 0 .2rem;
+      padding-top: 0.7rem;
       flex-direction: column;
       background: rgba(174, 222, 230, 0.185);
-      border-radius: 1rem;
+      border-radius: 2px;
       box-shadow: 0 4px 8px rgba(129, 127, 127, 0.6);
+    }
+
+    .dark-mode .gridCardAirtelTigo {
+      box-shadow: 0 10px 20px rgba(0,0,0,0.95);
+    }
+
+    .dark-mode .gridCard {
+      box-shadow: 0 10px 2px rgba(0,0,0,0.95);
+    }
+
+    .dark-mode .gridCardTele {
+      box-shadow: 0 10px 20px rgba(0,0,0,0.95);
     }
 
 
@@ -1739,7 +1751,9 @@ UPDATED UI STYLE
     *****/
 
 
-    .gridCard-top{
+     .gridCard .gridCard-top,
+     .gridCardTele .gridCard-top,
+     .gridCardAirtelTigo .gridCard-top{
       width: 100%;
       height: 2.rem;
       display: flex;
@@ -1751,17 +1765,21 @@ UPDATED UI STYLE
     
     }
 
-    .gridCard-top small{
+     .gridCard .gridCard-top small,
+     .gridCardTele .gridCard-top small,
+     .gridCardAirtelTigo .gridCard-top small{
       font-size: 1.05rem;
       font-family: serif;
       font-weight: 600;
       color: rgb(155, 92, 29);
     }
 
-    .gridCard-top img{
-      width: 2rem;
-      height: 2rem;
-      border-radius: 12px;
+    .gridCard .gridCard-top img,
+    .gridCardTele .gridCard-top img,
+    .gridCardAirtelTigo .gridCard-top img{
+      width: 1.4rem;
+      height: 1.4rem;
+      border-radius: 2px;
       padding: .2rem;
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
@@ -1837,7 +1855,7 @@ GRID CARD MIDDLE
       text-align: center;
       justify-content: center;
       gap: .3rem;
-      background: black !important;
+      background: transparent !important;
     }
 
     
@@ -1913,7 +1931,7 @@ PRICES SECTION ENDS
       display: flex;
       align-items: center;
       justify-content: center;
-      background: blue !important;
+      background: transparent !important;
     }
 
     .gridCard-bottom .buy-btn{
@@ -1922,7 +1940,7 @@ PRICES SECTION ENDS
       gap: .3rem;
       display: flex;
       border: none;
-      border-radius: 8px;
+      border-radius: 3px;
       background: linear-gradient(135deg, rgb(203, 218, 6), rgb(236, 140, 13));
       color: rgb(247, 244, 244);
       font-size: 1rem;
