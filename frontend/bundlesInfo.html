@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="styleGlobal.css">
   <link rel="stylesheet" href="styleGlobal2.css">
+  <link rel="stylesheet" href="styleGlobal3.css">
 </head>
 
 
@@ -57,67 +58,6 @@ WATCH VIDEO SECTION
 ***/
 
 
-/**
-* NAVIGATION BAR
-**/
-.navbar {
-  display: flex;
-  width: 100%;
-  padding: .3rem 1rem;
-  justify-self: center;
-  height: 3rem;
-  position: fixed;
-  top: 0;
-  margin: 0;
-  left: 0;
-  right: 0;
-  justify-self: center;
-  overflow: hidden;
-  align-items: center;
-  justify-content: space-between;
-  background: var(--bg-cl);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  padding: 1rem 1rem;
-  z-index: 1000;
-}
-
-/**
-* NAV LEFT
-**/
-.navbar .nav-left{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-
-.nav-left img{
-  width: 2.4rem;
-  height: 2.4rem;
-  border-radius: 50%;
-  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
-  cursor: pointer;
-}
-
-/**
-* NAV-RIGHT
-**/
-.nav-right{
-  display: flex;
-  width: 8rem;
-  height: 100%;
-  align-items: center;
-  justify-content: end;
-  background: transparent;
-  border-radius: 4px;
-  margin-right: .6rem;;
-}
-
-.nav-right img{
-  width: 2.2rem;
-  height: 2.2rem;
-  cursor: pointer;
-}
 
 .login {
   display: flex;
@@ -461,7 +401,7 @@ BUTTONS STYLES
           <div class="storeBuild">
              <p>Create Store</p>
           </div>
-           <div class="quicker-nav" onclick="window.location.href='./ecdoataStore/welcomingPage.html'">
+           <div title="Coming Up Soon!" class="quicker-nav">
               <img src="./css/uiIcons/store.png" alt="" loading="lazy">
               <p>Get Store</p>
           </div>
@@ -796,7 +736,7 @@ BUTTONS STYLES
   
   </p>
 
-  <button onclick="window.location.href='./ecdoataStore/welcomingPage.html'">Upgrade Now</button>
+  <button title="Coming Up Soon!">Get Store</button>
 </div>
 </div>
 
@@ -832,6 +772,112 @@ BUTTONS STYLES
 
  <script src="bundles.js"></script>
 
+<!----LOGOUT-JS------>
+ <script type="module">
+// LOGOUT JS
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+import { signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyClNBlfigtQk8AZWdMZcU9sEtVcIrS0D1g",
+  authDomain: "ecodata-2bee6.firebaseapp.com",
+  projectId: "ecodata-2bee6",
+  storageBucket: "ecodata-2bee6.firebasestorage.app",
+  messagingSenderId: "544837123249",
+  appId: "1:544837123249:web:6c362350a00c6dab10b690"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+
+
+// Logout
+const logOutBtn = document.getElementById("logOutBtn");
+const lapOutBtn = document.getElementById("lapOut");
+
+if(logOutBtn) {
+  logOutBtn.addEventListener("click", async () => {
+    try
+    {
+      await signOut(auth);
+      showSnackBar("Logged out successful");
+    } catch(err){
+      console.error("Error logging out: ", err);
+      showSnackBar("Error logging out");
+    }
+  });
+}
+
+// logout on laptops
+if(lapOutBtn) {
+  lapOutBtn.addEventListener("click", async() => {
+    try {
+      await signOut(auth);
+      showSnackBar("logged out successful");
+    } catch(err) {
+      console.error("Error Logging out: ", err);
+      showSnackBar("Error logging out");
+    }
+  });
+}
+
+
+
+
+
+// SNACKBAR SECTION //
+// ===== SNACKBAR FUNCTION ===== //
+let snackbarTimeout = null;
+
+function showSnackBar(message, type = "info", duration = 4000) {
+  let snackbar = document.querySelector(".snackbar");
+
+  // Create snackbar if it doesn't exist
+  if (!snackbar) {
+    snackbar = document.createElement("div");
+    snackbar.className = "snackbar";
+
+    snackbar.innerHTML = `
+      <span class="snackbar-text"></span>
+      <div class="snackbar-progress"></div>
+    `;
+
+    document.body.appendChild(snackbar);
+  }
+
+  // Update text
+  snackbar.querySelector(".snackbar-text").textContent = message;
+
+  // Color by type
+  if (type === "success") snackbar.style.background = "rgba(7, 29, 26, 0.95)";
+  else if (type === "error") snackbar.style.background = "#88353f";
+  else if (type === "warning") snackbar.style.background = "#413b2a";
+  else snackbar.style.background = "rgba(7, 29, 26, 0.95)";
+
+  // Reset progress animation
+  const progress = snackbar.querySelector(".snackbar-progress");
+  progress.style.animation = "none";
+  void progress.offsetWidth;
+  progress.style.animation = `snackbar-progress ${duration}ms linear forwards`;
+
+  snackbar.classList.add("show");
+
+  // Clear previous timeout
+  if (snackbarTimeout) clearTimeout(snackbarTimeout);
+
+  snackbarTimeout = setTimeout(() => {
+    snackbar.classList.remove("show");
+  }, duration);
+}
+// snackbar ends
+
+
+
+ </script>
 
 </body>
 </html>
