@@ -284,14 +284,6 @@ function normalizeNumber(num) {
 
       button.addEventListener("click", () => {
 
-         // CHECK IF RECIPIENT HAS (ACTIVE-ORDER)
-   if(hasActiveOrder(phoneNumber)){
-    showLoader(
-      "Your already number has an Active Order. Please wait 'warning' "
-    );
-    return; // stop everything if not true
-   }
-
       bottomNavDiv.style.display = "flex";
 
         let bundle;
