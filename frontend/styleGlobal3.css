@@ -258,8 +258,8 @@ MAIN CONTAINER
     }
 
      .gridCardTele .gridCard-top img{
-      width: 1.5rem;
-      height: 1.5rem;
+      width: 1.2rem;
+      height: 1.2rem;
       border-radius: 2px;
       padding: .2rem;
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
@@ -312,8 +312,8 @@ MAIN CONTAINER
     }
 
     .gridCardAirteltigo .gridCard-top img{
-      width: 1.5rem;
-      height: 1.5rem;
+      width: 1.2rem;
+      height: 1.2rem;
       border-radius: 2px;
       padding: .2rem;
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
@@ -343,8 +343,8 @@ MAIN CONTAINER
     }
 
    .gridCard .gridCard-top img{
-      width: 1.5rem;
-      height: 1.5rem;
+      width: 1.2rem;
+      height: 1.2rem;
       border-radius: 2px;
       padding: .2rem;
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
@@ -368,10 +368,10 @@ MAIN CONTAINER
     transform: scale(1);
   }
   30%{
-    transform: scale(1.3);
+    transform: scale(1.1);
   }
   60% {
-    transform: scale(1);
+    transform: scale(0.7);
   }
   100% {
     transform: scale(1);
@@ -421,6 +421,7 @@ GRID CARD MIDDLE
       text-align: center;
       justify-content: center;
       gap: .3rem;
+      background: transparent;
     }
 
     
@@ -495,6 +496,7 @@ PRICES SECTION ENDS
       height: 3.5rem;
       display: flex;
       align-items: center;
+      background: transparent;
       justify-content: center;
     }
 
