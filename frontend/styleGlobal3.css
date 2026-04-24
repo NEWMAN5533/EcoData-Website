@@ -64,6 +64,7 @@ MAIN CONTAINER
 
 .container .main-grid-container{
   height: calc(100vh - 3.4rem) !important;
+  scrollbar-width: none !important;
         /**** check back for margin-top ***/
 }
 
