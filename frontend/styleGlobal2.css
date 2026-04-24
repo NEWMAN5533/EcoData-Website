@@ -100,7 +100,7 @@ background: #fff;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   height: calc(100vh - 3.5rem) !important;
-  margin-top: 3.5rem !important;
+  margin-top: 3.4rem !important;
   position: relative;
   align-items: center;
   justify-content: center;
@@ -109,12 +109,12 @@ background: #fff;
 }
 
 .container .main-grid-container{
-  margin-top: 3.5rem !important;
+  margin-top: 3.4rem !important;
   overflow-y: hidden !important;
 }
 
 .dark-mode .main-grid-container{
-  margin-top: 3.5rem !important;
+  margin-top: 3.4rem !important;
   overflow-y: hidden !important;
 }
 
