@@ -99,7 +99,7 @@ background: #fff;
 .container .main-grid-container{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  height: 94vh !important;
+  height: calc(100vh - 3.5rem) !important;
   margin-top: 3.5rem !important;
   position: relative;
   align-items: center;
@@ -128,7 +128,7 @@ aside section
 ****/
 .container .main-grid-container .grid-container-aside{
   width: 20vw;
-  height: 94vh !important;
+  height: calc(100vh - 3.5rem) !important;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -507,7 +507,7 @@ MAIN GRID CONTAINER SECTION
 *******/
 .container .main-grid-container .grid-container-main{
   width: 45vw;
-  height: 94vh !important;
+  height: calc(100vh - 3.5rem) !important;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -555,7 +555,7 @@ MAIN GRID CONTAINER SECTION
 
  .ads-container-right{
   width: 35vw;
-  height: 94vh !important;
+  height: calc(100vh - 3.5rem) !important;
   display: flex;
   flex-direction: column;
   gap: 1rem;
