@@ -368,7 +368,7 @@ MAIN CONTAINER
 .container .main-grid-container{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  height: 94vh !important;
+  height: calc(100vh - 3.5rem) !important;
   position: relative;
   align-items: center;
   justify-content: center;
