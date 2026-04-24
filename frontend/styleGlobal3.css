@@ -63,7 +63,7 @@ MAIN CONTAINER
 
 
 .container .main-grid-container{
-  height: calc(100vh - 3.5rem) !important;
+  height: calc(100vh - 3.4rem) !important;
         /**** check back for margin-top ***/
 }
 
