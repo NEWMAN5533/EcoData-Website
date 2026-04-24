@@ -1,3 +1,13 @@
+html{
+  overflow-y: scroll;
+}
+.gridCard,
+.gridCardAirteltigo,
+.gridCardTele{
+  transform: translateZ(0);
+  will-change: transform;
+}
+
 /****
 MAIN CONTAINER
 ****/
