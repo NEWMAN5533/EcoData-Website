@@ -107,6 +107,9 @@ background: #fff;
   justify-self: center;
 }
 
+.container .main-grid-container{
+  margin-top: 3.5rem !important;
+}
 
 
 
