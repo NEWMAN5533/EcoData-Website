@@ -515,7 +515,6 @@ MAIN GRID CONTAINER SECTION
   position: relative;
   overflow-y: auto;
   scrollbar-width: none;
-  margin-top: .2rem ;    /*** check back for margin-top **/
   border-right: 1px solid var(--text-cl-2);
 }
 
@@ -561,6 +560,7 @@ MAIN GRID CONTAINER SECTION
   gap: 1rem;
   align-items: center;
   position: relative;
+  padding-top: 1rem;
   overflow-y: auto;
 }
 
