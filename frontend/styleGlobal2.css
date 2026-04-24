@@ -111,6 +111,10 @@ background: #fff;
   margin-top: 3.5rem !important;
 }
 
+.dark-mode .main-grid-container{
+  margin-top: 3.5rem !important;
+}
+
 
 
 
@@ -504,12 +508,10 @@ MAIN GRID CONTAINER SECTION
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0;
   flex-direction: column;
   position: relative;
   overflow-y: auto;
   scrollbar-width: none;
-  scroll-behavior: smooth;
   margin-top: .2rem ;    /*** check back for margin-top **/
   border-right: 1px solid var(--text-cl-2);
 }
