@@ -110,10 +110,12 @@ background: #fff;
 
 .container .main-grid-container{
   margin-top: 3.5rem !important;
+  overflow-y: hidden !important;
 }
 
 .dark-mode .main-grid-container{
   margin-top: 3.5rem !important;
+  overflow-y: hidden !important;
 }
 
 
@@ -2107,6 +2109,11 @@ LAPTOP START
       box-shadow: none !important;
     }
 
+    .container .main-grid-container{
+  overflow-y: hidden !important;
+}
+    
+
     /****
     DISPLAY FLEX
     ****/
@@ -2460,6 +2467,11 @@ WHAT'APP CHAT BUTTON
     .dark-mode .container .navbar{
       box-shadow: none !important;
     }
+
+
+    .container .main-grid-container{
+  overflow-y: hidden !important;
+}
 
 
 /****
