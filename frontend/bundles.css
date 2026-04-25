@@ -21,16 +21,16 @@ MAIN SECTION STYLE
 *******/
 .card-container{
   width: 100%;
-  max-width: 370px;
+  max-width: 96%;
   padding: .3rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
   justify-self: center;
   position: relative;
-  margin-top: 3rem;
+  margin-bottom: 4rem;
 }
 
 
@@ -42,7 +42,9 @@ MAIN SECTION STYLE
   text-align: center;
   padding: 1rem .1rem;
   width: 100%;
-  max-width: 370px;
+  justify-self: flex-start;
+  position: relative;
+  max-width: 99.8%;
   height: 16rem;
   gap: 1rem;
   display: flex;
@@ -133,7 +135,7 @@ BUNDLE INFO SECTION
   gap: 1rem;
   justify-content: space-between;
   background: var(--background-cl);
-  border-radius: .8rem;
+  border-radius: .1rem;
   border: 1px solid rgb(214, 211, 211);
 }
 
@@ -266,11 +268,11 @@ js card style
 
 .workflow {
   border: 1px solid rgb(234, 234, 235);
-  border-radius: .4rem;
+  border-radius: .1rem;
   padding: 3rem 1rem;
   text-align: center;
   width: 100%;
-  max-width: 370px;
+  max-width: 99.8;
   align-items: center;
   justify-content: center;
   justify-self: center;
@@ -309,7 +311,7 @@ js card style
   background: rgb(235, 230, 230);
   padding: 1rem;
   border: 0.1px solid white;
-  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(46, 46, 46, 0.5);
 
 }
 
@@ -320,7 +322,7 @@ js card style
 .workflow .three{
   display: flex;
   flex-direction: column;
-  gap: .2rem;;
+  gap: .2rem;
   height: 19rem;
 }
 
@@ -329,6 +331,10 @@ js card style
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 500;
   color: rgb(136, 132, 132);
+}
+
+.workflow .step p strong{
+  color: rgba(124, 105, 19, 0.678);
 }
 
 .workflow .step span{
@@ -361,7 +367,7 @@ padding: 2rem;
 
 
 .faq details {
-  margin-bottom: 20px;
+  margin-bottom: 10px !important;
   height: max-content;
   display: flex;
   align-items: flex-start;
@@ -372,6 +378,7 @@ padding: 2rem;
 .faq h2{
   font-size: 1.1rem;
   white-space: nowrap;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   color: rgb(24, 23, 23);
 }
 
@@ -381,225 +388,35 @@ padding: 2rem;
   background: linear-gradient(135deg, rgb(219, 207, 207), rgb(9, 150, 114));
   display: flex;
   height: 2.7rem;
+  font-size: .95rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   justify-content: start;
   align-items: center;
   padding: .3rem;
-  border-radius: 1rem;
+  border-radius: .2rem !important;
 }
 
 .faq p{
-  background-color: rgb(102, 99, 99);
-  font-size: 1rem;
+  background-color: rgb(102, 99, 99) !important;
+  font-size: .9rem !important;
   padding: .3rem;
+  color: rgb(237, 237, 241);
   display: flex;
   height: max-content;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  border-end-end-radius: 1rem;
-  border-start-start-radius: 1rem;
-  box-shadow: 0 0 8px rgb(100, 104, 95);
- 
-}
-
-
-
-
-/****
-MENU-CARD SECTION
-****/
-.menu-card-container {
-  width: 100%;
-  max-width: 13rem;
-  height: 19rem;
-  position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  right: -500px;
-  top: 4rem;
-  border: 0.1px solid var(--bg-cl);
-  background: rgb(26, 24, 24);
-  box-shadow: 0 4px 8px rgba(58, 57, 57, 0.4);
-  border-radius: .2rem;
-  transition: .5s ease-in-out;
-}
-.close-card{
-  display: flex;
-  width: 100%;
-  height: max-content;
-  padding: .2rem;
-  align-items: end;
-  justify-content: end;
-}
-
-
-.menu-card{
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-direction: column;
   text-align: center;
-  gap: 1.4rem;
-  width: 90%;
-  height: 18rem;
-  margin: 0 .4rem;
-  border: 0.2px solid pink;
-  padding: .4rem 0;
-  background: rgb(255, 255, 255);
-  border-end-end-radius: 1rem;
-  border-start-start-radius: 1rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 0 !important;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5) !important;
 }
 
-/***
-CARD TOP
-***/
-.shortcut-sidebar-nav {
-  width: 100%;
-  height: 10rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  top: .1rem;
-  text-align: center;
-  margin: .4rem 0;
-  justify-content: center;
-  text-align: center;
-  align-items: flex-start;
-  position: relative;
-  background-color: transparent;
-}
-
-.sidebar-nav{
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  text-align: center;
-  text-decoration: none;
-  padding: .1rem .1rem;
-  transition: .2s ease;
-}
-
-.sidebar-nav img{
-  width: 1.3rem;
-  height: 1.3rem;
-  background-color: rgb(233, 227, 233);
-  padding: .14rem;
-  border-radius: .4rem;
-}
-
-.sidebar-nav a{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  text-decoration: none;
-  gap: .5rem;
-  color: rgb(165, 159, 159);
-}
-
-.shortcut-links{
-  display: flex;
-  width: 100%;
-  background: transparent;
-  height: max-content;
-  padding: .1rem;;
-  flex-direction: column;
-  text-align: center;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: .5rem;
+.faq p strong{
+  color: rgb(95, 38, 38);
 }
 
 
-
-.link{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 2.8rem;;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  gap: .5rem;
-  color: black;
-  margin: 0 .4rem;
-  transition: .1s ease-in-out;
-}
-
-.link:hover{
-  background: rgb(82, 79, 79);
-  color: rgb(247, 246, 246);
-  height: 3rem;
-  width: 100%;
-  border-end-end-radius: 1rem;
-  border-start-start-radius: 1rem;
-}
-
-
-.link a{
-  display: flex;
-  text-decoration: none;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  text-align: center;
-  color: rgb(32, 29, 29);
-  font-size: 1.1rem;
-}
-
-.link a:hover{
-  color: var(--bg-cl);
-}
-
-.link img{
-  width: 2.1rem;
-  height: 2.1rem;
-  margin-right: .4rem;
-  background: var(--background-cl);
-  padding: .2rem;
-  border-radius: 5px;
-
-}
-
-.sidebar-nav:hover{
-  background: rgb(192, 185, 185);
-  color: white;
-  width: 100%;
-  padding: .1rem;
-}
-
-
-/***
-CARD BOTTOM
-****/
-.logout-btn{
-  display: flex;
-  border: 0.2px solid green;
-  width: 10rem;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px;
-  background: green;
-  color: var(--bg-cl);
-  height: 2rem;
-  font-size: 1rem;
-  position: relative;
-  display: flex;
-  box-shadow: 0 2px 6px rgba(61, 37, 32, 0.479);
-  transition: 1s ease;
-  cursor: pointer;
-  margin: .5rem 1rem;
-}
-
-.logout-btn:hover{
-  background: rgb(52, 80, 11);
-  box-shadow: 0 2px 6px rgba(71, 46, 42, 0.479);
-}
 
 
 
