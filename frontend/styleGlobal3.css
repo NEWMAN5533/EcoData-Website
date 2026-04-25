@@ -6,6 +6,14 @@
   will-change: transform;
 }
 
+.gridCardTele .gridCard-bottom .tbtn{
+  background: linear-gradient(135deg, rgba(247, 159, 159, 0.712), rgba(207, 20, 45, 0.911)) !important;
+}
+
+.gridCardAirteltigo .gridCard-bottom .abtn{
+  background:  linear-gradient(135deg, rgba(172, 198, 226, 0.945), rgba(7, 73, 87, 0.664)) !important;
+}
+
 /****
 MAIN CONTAINER
 ****/
