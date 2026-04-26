@@ -1,4 +1,4 @@
-// ========================
+// ==========================
 // AFA CONFIG
 // ==========================
 const AFA_PRICE_GHS = 20; // Make sure backend matches this
@@ -125,6 +125,7 @@ function hideLoader() {
 // ==========================
 // FORM SUBMIT
 // ==========================
+
 afaForm?.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -163,6 +164,10 @@ afaForm?.addEventListener("submit", (e) => {
   startAfaPayment(afaData);
 });
 
+
+
+
+
 // ==========================
 // PAYSTACK V2
 // ==========================
@@ -197,7 +202,7 @@ function startAfaPayment(afaData) {
 
     onSuccess: (response) => {
       hideLoader();
-      setAfaLoading(true, "Verifying Payment...");
+      setAfaLoading(true, "Finalizing...");
 
       submitAfaRegistration({
         ...afaData,
@@ -211,75 +216,137 @@ function startAfaPayment(afaData) {
       showSnackBar("Payment cancelled", "error");
     },
   });
-}, 4120); // 👈 sweet spot (80–150ms)
+}, 120); // 👈 sweet spot (80–150ms)
 }
+
+
+function saveAFARequest(data) {
+  const existing = 
+  JSON.parse(localStorage.getItem("afaRequests")) || [];
+
+  existing.unshift({
+    ...data,
+    status: "pending",
+    createdAt: Date.now(),
+  });
+  
+  localStorage.setItem("afaRequests", JSON.stringify(existing));
+}
+
 
 // ==========================
 // SERVER SUBMIT
 // ==========================
 async function submitAfaRegistration(payload) {
   try {
+    // ✅ ONLY send what backend expects
     const apiPayload = {
-      name: payload.fullName,
-      phoneNumber: payload.phone,
-      idNumber: payload.ghanaCard,
-      occupation: payload.occupation,
-      location: payload.location,
-      region: payload.region,
-      dateOfBirth: payload.dob,
+      fullName: payload.fullName,
+      phone: payload.phone,
       paymentReference: payload.paymentReference,
     };
 
     const res = await fetch("/api/afa/register", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(apiPayload),
     });
 
     const data = await res.json();
 
+    // ❌ HANDLE FAILURE
     if (!data.success) {
       setAfaLoading(false);
-      return showSnackBar(data.message || "Registration failed", "error");
+      return showSnackBar(
+        data.message || "Registration failed",
+        "error"
+      );
     }
 
-    showAfaReceipt(apiPayload, data);
+    // ✅ SUCCESS FLOW
+    showAfaReceipt(payload, data); // 🎉 main UI
 
-    showSnackBar("AFA Registration Successful", "success");
+    setTimeout(() => {
+      showSnackBar(
+      "Registration submitted successfully",
+      "success"
+    );
+    }, 300);
+   
 
+    // 💾 optional local save (for future admin view)
+    saveAFARequest({
+      ...payload,
+      registrationId: data.registrationId,
+      status: data.status,
+    });
+
+    // 🔄 reset form
     afaForm.reset();
     selectedRegion = "";
-    regionBtn.textContent = "Select your Region";
+    if (regionBtn) regionBtn.textContent = "Select your Region";
 
     setAfaLoading(false);
+
   } catch (err) {
-    console.error(err);
+    console.error("AFA ERROR:", err);
+
     setAfaLoading(false);
-    showSnackBar("Network error. Try again.", "error");
+
+    showSnackBar(
+      "Network error. Please try again.",
+      "error"
+    );
   }
 }
+
+
+
+
+
 
 // ==========================
 // RECEIPT
 // ==========================
 function showAfaReceipt(payload, serverData) {
-  document.getElementById("rName").textContent = serverData.name;
-  document.getElementById("rPhone").textContent = serverData.phoneNumber;
-  document.getElementById("rGhanaCard").textContent = serverData.idNumber;
-  document.getElementById("rRegion").textContent = serverData.region;
-  document.getElementById("rRef").textContent = payload.paymentReference;
+  document.getElementById("rName").textContent =
+    serverData.fullName || payload.fullName;
+
+  document.getElementById("rPhone").textContent =
+    serverData.phone || payload.phone;
+
+  document.getElementById("rGhanaCard").textContent =
+    payload.ghanaCard;
+
+  document.getElementById("rRegion").textContent =
+    payload.region;
+
+  document.getElementById("rRef").textContent =
+    payload.paymentReference;
+
   document.getElementById("rRegId").textContent =
     serverData.registrationId || "-";
+
   document.getElementById("rStatus").textContent =
-    serverData.status || "Approved";
+    serverData.status || "Pending";
+
   document.getElementById("rPrice").textContent =
     "GHS " + (serverData.registrationPrice || AFA_PRICE_GHS);
-  document.getElementById("rDate").textContent = new Date(
-    serverData.submittedAt || Date.now()
-  ).toLocaleString();
+
+  document.getElementById("rDate").textContent =
+    new Date(serverData.submittedAt || Date.now()).toLocaleString();
 
   document.getElementById("afaReceipt").classList.remove("hidden");
 }
+
+
+
+
+
+
+
 
 // ==========================
 // SNACKBAR
