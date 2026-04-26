@@ -180,6 +180,7 @@
     margin-bottom: 3rem;
   }
   </style>
+
    <!---ECOSHOP-FIXED-=BUTTON-->
     <style>
 
@@ -407,8 +408,9 @@
 
 
 <!---AFA-SUCCESS RECEIPT-->
+
 <section id="afaReceipt" class="afa-receipt" hidden >
-  <div class="receipt-card">
+  <div class="receipt-card" >
     <h3>AFA Registration Successful</h3>
 
     <div class="receipt-row">
@@ -454,10 +456,12 @@
     </div>
   </div>
 </section>
+
+
 <!---AFA-SUCCESS RECEIPT-ends--->
 
 <!---AFA-UI-SECTION-->
-<div class="afa-container">
+<div class="afa-container" style=" margin-bottom: 7rem !important;">
   <div class="span">
     <p> MTN AFA Program</p>
   </div>
@@ -1185,6 +1189,30 @@ const cardCloser = document.getElementById("closeCard");
     document.body.classList.remove("loading");
   });
 </script>
+
+
+
+<!---NOTIFICATION----->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    
+const notificationIcon = document.querySelectorAll(".notifity");
+const notifyCount = document.getElementById("notifyCount");
+const NOTIFY_KEY = "notifications_read";
+
+// on page load
+if (localStorage.getItem(NOTIFY_KEY) === "true") {
+  notifyCount.style.display = "none";
+}
+
+// click to mark as read 
+notificationIcon.addEventListener("click", () => {
+  notifyCount.style.display = "none";
+  localStorage.setItem(NOTIFY_KEY, "true");
+});
+  });
+</script>
+
 
 
 </body>
