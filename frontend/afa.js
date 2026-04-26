@@ -338,7 +338,7 @@ function showAfaReceipt(payload, serverData) {
   document.getElementById("rDate").textContent =
     new Date(serverData.submittedAt || Date.now()).toLocaleString();
 
-  document.getElementById("afaReceipt").classList.remove("hidden");
+  document.getElementById("afaReceipt").style.display = "block";
 }
 
 
