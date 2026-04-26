@@ -362,7 +362,7 @@
       <p id="usernameDisplay"></p>
     </div>
     <div class="welcome-top-right">
-      <input type="text" placeholder=" EcoData ✔ ">
+      <input type="text" placeholder=" EcoData  ">
     </div>
   </div>
 <div class="welcome-bottom">
@@ -409,7 +409,7 @@
 
 <!---AFA-SUCCESS RECEIPT-->
 
-<section id="afaReceipt" class="afa-receipt" hidden >
+<section id="afaReceipt" class="afa-receipt">
   <div class="receipt-card" >
     <h3>AFA Registration Successful</h3>
 
@@ -1086,10 +1086,42 @@ function showSnackBar(message, type = "info", duration = 4000) {
 
 
 
-<script scr="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
+<!---AFA DOWNLOAD-RECEIPT---->
+<script>
+function downloadReceipt() {
+  const receipt = document.getElementById("afaReceipt");
+
+  // Clone the receipt so we don't affect UI state
+  const clone = receipt.cloneNode(true);
+
+  // IMPORTANT: force it visible for PDF rendering
+  clone.hidden = false;
+  clone.style.display = "block";
+  clone.style.position = "absolute";
+  clone.style.left = "-9999px";
+  clone.style.top = "0";
+
+  document.body.appendChild(clone);
+
+  const options = {
+    margin: 0.5,
+    filename: "AFA_Receipt.pdf",
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: "in", format: "a4", orientation: "portrait" }
+  };
+
+  html2pdf()
+    .set(options)
+    .from(clone)
+    .save()
+    .then(() => {
+      document.body.removeChild(clone);
+    });
+}
 </script>
-
 
 <!---MENU-CARD-JS-->
 <!---MENU-CARD-JS-->
