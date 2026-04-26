@@ -293,15 +293,31 @@ app.post("/verify-payment", async (req, res) => {
 // ====================
 
 
+// ================= //
+// AFA HANDLER      //
+//================= //
+
+// =======================
+// MTN AFA ROUTE
+// =======================
+app.post("/api/afa/register", async (req, res) => {
+  const {phone,
+      fullName, 
+      paymentReference,
+    } = req.body;
+
+  const result = await handleAFARequest({
+    fullName: fullName,
+    phone: phone,
+    paymentReference: paymentReference,
+  });
+
+  res.status(result.status).json(result.body);
+});
 
 
 
 
-
-
-// ====================
-// MTN AFA HANDLER
-// ====================
 async function handleAFARequest({
   fullName,
   phone,
@@ -330,7 +346,7 @@ async function handleAFARequest({
       status: 200,
       body: {
         success: true,
-        message: "AFA already processed",
+        message: "AFA already submitted",
         ...processedOrders.get(paymentReference).response,
       },
     };
@@ -338,61 +354,44 @@ async function handleAFARequest({
 
   try {
     // ====================
-    // VERIFY PAYSTACK PAYMENT
+    // VERIFY PAYMENT
     // ====================
     const verification = await axios.get(
-  `https://api.paystack.co/transaction/verify/${paymentReference}`,
-  {
-    headers: {
-      Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
-    },
-  }
-);
+      `https://api.paystack.co/transaction/verify/${paymentReference}`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
+        },
+      }
+    );
 
-    if (!verification.status || verification.data.status !== "success") {
+    if (!verification.data.status) {
       throw new Error("Payment verification failed");
     }
 
-    // Optional: validate amount
-    const paidAmount = verification.data.amount / 100;
+    const paidAmount = verification.data.data.amount / 100;
+
     if (paidAmount !== 20) {
       throw new Error("Invalid payment amount");
     }
 
-
+    // ====================
+    // 🚫 REMOVE SWIFT CALL
+    // ====================
 
     // ====================
-    // SEND TO SWIFT AFA
+    // SAVE AFA REQUEST (YOU CONTROL THIS)
     // ====================
-    const base = (process.env.SWIFT_BASE_URL || "")
-      .replace(/\/$/, "");
-
-    const swiftUrl = `${base}/services/mtn-afa`;
-
-    const swiftRes = await axios.post(
-      swiftUrl,
-      { phone, fullName },
-      {
-        headers: {
-          "x-api-key": process.env.SWIFT_API_KEY,
-          "Content-Type": "application/json",
-        },
-        timeout: 15000,
-      }
-    );
-
     const responseData = {
-      registrationId:
-        swiftRes.data?.registrationId ||
-        "AFA-" + Date.now(),
+      registrationId: "AFA-" + Date.now(),
       name: fullName,
       phoneNumber: phone,
       registrationPrice: paidAmount,
-      status: swiftRes.data?.status || "pending",
+      status: "pending", // 🔥 always pending (admin approval)
       submittedAt: new Date().toISOString(),
     };
 
-    // Store processed order
+    // Store in memory (you can later move to DB)
     processedOrders.set(paymentReference, {
       status: "success",
       response: responseData,
@@ -403,7 +402,7 @@ async function handleAFARequest({
       status: 200,
       body: {
         success: true,
-        message: "AFA registration successful",
+        message: "Registration submitted successfully",
         ...responseData,
       },
     };
@@ -420,7 +419,7 @@ async function handleAFARequest({
       status: 500,
       body: {
         success: false,
-        message: "AFA registration failed",
+        message: "AFA submission failed",
         error: errData,
       },
     };
@@ -429,36 +428,9 @@ async function handleAFARequest({
 
 
 
-// =======================
-// MTN AFA ROUTE
-// =======================
-app.post("/api/afa/register", async (req, res) => {
-  const {phone,
-      fullName, 
-      paymentReference,
-    } = req.body;
-
-  const result = await handleAFARequest({
-    fullName: fullName,
-    phone: phone,
-    paymentReference: paymentReference,
-  });
-
-  res.status(result.status).json(result.body);
-});
 
 
 
-// =======================
-//  AFA ORDER STATUS
-// =======================
-
-
-
-
-// =======================
-// MTN AFA HANDLER ENDS
-// =======================
 
 
 // Frontend fallback
