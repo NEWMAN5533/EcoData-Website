@@ -1,0 +1,348 @@
+
+  .dark-mode .register-bnefits{
+    background: var(--welcome-card-bg);
+    border: 1px solid var(--thin-border-5);
+    margin-top: 2rem;
+  }
+
+  .dark-mode .register-bnefits small{
+    color: rgb(161, 159, 159);
+  }
+
+  .dark-mode .register-bnefits h2{
+    color: white;
+    opacity: .8;
+  }
+
+  .dark-mode .price-title h2{
+    color: white;
+    opacity: .8;
+  }
+
+
+    .register-bnefits .priceSub{
+    color: rgb(29, 136, 113);
+    font-weight: 600;
+    font-size: 1.3rem;
+  }
+
+  .dark-mode .register-bnefits .priceSub{
+    color: white;
+    font-weight: 00;
+    opacity: .9;
+    font-size: 1.3rem;
+    margin: .3rem;
+    padding: 1rem 0;
+    padding-bottom: 1rem;;
+  }
+
+  .register-bnefits .priceSub {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  position: relative;
+  justify-items: center;
+  text-align: center;
+  }
+
+  .dark-mode .register-bnefits .priceSub img{
+    border-radius: 50%;
+  }
+
+/***
+AGENT CODE ENDS
+****/
+
+:root {
+  --bg-cl: #FFF;
+  --primary-cl: #fff;
+  --secondary-cl: rgb(50, 50, 190);
+  --dark-cl: #0a0a0a;
+  --ascent-cl: rgb(158, 97, 209);
+  --background-cl: #e6e8ce;
+  --card-full-bg-cl: rgb(255, 217, 0);
+  --card-full-tele-bg-cl: rgb(221, 19, 19);
+  --card-full-airtel-bg-cl:  rgb(6, 6, 231);
+  --border-cl-2: rgba(66, 66, 26, 0.226);
+  --mtn-btn: rgb(193, 196, 19);
+  --telecel-btn: rgb(180, 57, 19);
+  --airteltigo-btn: rgb(28, 46, 119);
+
+
+  /***
+  NEW ROOT
+  ***/
+  --btn-bg-cl: rgb(250, 126, 9);
+  --user-panel-bg: rgba(42, 42, 194, 0.938);
+  --clock-bg-cl: rgb(2, 61, 52);
+
+  /***
+  DARK MODE COLORS
+  ***/
+  --darkMode-bg-cl: rgb(10, 10, 10);
+  --darkMode-bg-cl-2: rgb(10, 1, 22);
+  --welcome-card-bg: rgba(3, 3, 3, 0.918);
+  --welcome-card-bg-1: rgb(2, 2, 39);
+  --welcome-card-bg-2: rgb(24, 5, 5);
+  --thin-border: rgb(35, 48, 49);
+  --text-cl: rgb(145, 168, 164);
+  --text-cl-2: rgb(210, 216, 216);
+  --text-cl-3: rgb(139, 141, 141);
+
+  /**
+  BORDER SOLID COLORS
+  **/
+  --thin-border-1:  #1b8a747e;
+  --thin-border-2:  #830616;
+  --thin-border-3:  #b97207;
+  --thin-border-4:  #036aa7;
+  --thin-border-5:  #bba907;
+  --thin-border-6:   rgb(17, 2, 31);
+  --thin-border-7:  rgb(1, 11, 39);
+
+  /***
+  CARD BG
+  ***/
+  --card-mtn-bg:  #faba5ad0;
+  --card-tel-bg:  #fa537dd0;
+  --card-tigo-bg:  #6cbff7cb;
+}
+
+
+
+
+
+
+
+
+    .card-container{
+      margin-top: .1rem;
+      gap: 1rem;
+    }
+
+    .trusted-by{
+        background: linear-gradient(134deg, rgb(9, 148, 148),rgb(3, 73, 73));
+  text-align: center;
+    }
+
+    .trusted-logos P{
+      color: white;
+      font-size: 1rem;
+    }
+
+
+
+    .benefit-notes{
+      width: 100%;
+      height: max-content;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      max-width: 99%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .register-bnefits{
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 86%;
+      padding: 1rem;
+      gap: -.9rem;
+      line-height: 1;
+      justify-content: center;
+      height: 15rem;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      border-radius: 1rem;
+      margin-top: 4rem;
+      margin-bottom: 10rem !important;
+      background:var(--primary-cl);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
+    }
+
+    .dark-mode .register-bnefits {
+      border: 1px solid var(--thin-border);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
+    }
+
+    .register-bnefits small{
+      margin-bottom: -1rem;
+      margin-right: 1.5rem;
+      font-weight: 600;
+      font-size: 1rem;
+
+    }
+
+    .register-bnefits h2{
+      font-size: 1.2rem;
+      color: rgb(5, 49, 47);
+    }
+
+    .agent-benefits {
+  padding: 60px 20px;
+  width: 100%;
+  height: auto;
+  max-width: 99% !important;
+  background: transparent;
+  text-align: center;
+ 
+}
+
+.dark-mode .agent-benefits{
+
+}
+
+.agent-benefits h2 {
+  font-size: 18px;
+  margin-bottom: 40px;
+  color: #159b9b;
+}
+
+.dark-mode .agent-benefits h2{
+  color: var(--card-tigo-bg);
+}
+
+.benefits-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 45px;
+  max-width: 1100px;
+  margin: 0 auto;
+  background: transparent;
+}
+
+.benefit-card {
+  background: #ffffff;
+  padding: 25px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  transition: 0.3s ease;
+}
+
+.dark-mode .benefit-card{
+  background: var(--darkMode-bg-cl);
+  border: 1px solid var(--thin-border-1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
+}
+
+.benefit-card h3 {
+ display: flex;
+ align-items: center;
+ text-align: center;
+ justify-content: center;
+}
+
+.dark-mode .benefit-card h3{
+  color: var(--thin-border-4)
+}
+
+.benefit-card h3 img{
+  margin-right: .5rem;
+  border: 1px solid rgb(245, 243, 243);
+  width: 1.8rem;
+  height: 1.8rem;
+  padding: .1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+}
+
+.dark-mode .benefit-card h3 img{
+  border: none;
+  border-radius: 0 ;
+}
+
+.benefit-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+}
+
+.benefit-card h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #15355a;
+}
+
+.benefit-card p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.dark-mode .benefit-card p{
+  color: #b4b4b4;
+}
+
+
+  .register-bnefits{
+    margin-bottom: 6rem;
+  }
+
+  .register-bnefits small{
+    text-decoration: line-through;
+    font-size: 1.1rem;
+    color: rgb(128, 118, 118);
+  }
+
+
+
+/****
+AGENT PRICE
+****/
+.agent-price{
+  background-color: white;
+  margin-top: 2rem;
+  border-radius: 1rem;
+}
+
+.dark-mode .agent-price {
+  background: var(--welcome-card-bg);
+  border: 1px solid var(--thin-border-1)
+}
+
+.price-list{
+  padding: .2rem;
+  border-radius: .8rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.dark-mode .include
+{
+  background: var(--card-tigo-bg);
+  border: none;
+}
+
+
+.dark-mode .exclude
+{
+  background: var(--card-mtn-bg);
+  border: none;
+}
+
+    
+ .regis{
+  width: 100%;
+  max-width: 80%;
+  display: flex;
+  justify-content: center;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: rgb(238, 243, 242);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: .3rem 1rem;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  background: linear-gradient(134deg, rgb(9, 148, 148),rgb(3, 73, 73));
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+
+

@@ -32,372 +32,11 @@
   <link rel="stylesheet" href="styleGlobal.css">
   <link rel="stylesheet" href="styleGlobal2.css">
   <link rel="stylesheet" href="styleGlobal3.css">
+  <link rel="stylesheet" href="pay.css">
   
 
 
-  <style>
-  .dark-mode .register-bnefits{
-    background: var(--welcome-card-bg);
-    border: 1px solid var(--thin-border-5);
-    margin-top: 2rem;
-  }
-
-  .dark-mode .register-bnefits small{
-    color: rgb(161, 159, 159);
-  }
-
-  .dark-mode .register-bnefits h2{
-    color: white;
-    opacity: .8;
-  }
-
-  .dark-mode .price-title h2{
-    color: white;
-    opacity: .8;
-  }
-
-
-    .register-bnefits .priceSub{
-    color: rgb(29, 136, 113);
-    font-weight: 600;
-    font-size: 1.3rem;
-  }
-
-  .dark-mode .register-bnefits .priceSub{
-    color: white;
-    font-weight: 00;
-    opacity: .9;
-    font-size: 1.3rem;
-    margin: .3rem;
-    padding: 1rem 0;
-    padding-bottom: 1rem;;
-  }
-
-  .register-bnefits .priceSub {
-  display: flex;
-  align-items: center;
-  gap: .6rem;
-  position: relative;
-  justify-items: center;
-  text-align: center;
-  }
-
-  .dark-mode .register-bnefits .priceSub img{
-    border-radius: 50%;
-  }
-
-/***
-AGENT CODE ENDS
-****/
-
-:root {
-  --bg-cl: #FFF;
-  --primary-cl: #fff;
-  --secondary-cl: rgb(50, 50, 190);
-  --dark-cl: #0a0a0a;
-  --ascent-cl: rgb(158, 97, 209);
-  --background-cl: #e6e8ce;
-  --card-full-bg-cl: rgb(255, 217, 0);
-  --card-full-tele-bg-cl: rgb(221, 19, 19);
-  --card-full-airtel-bg-cl:  rgb(6, 6, 231);
-  --border-cl-2: rgba(66, 66, 26, 0.226);
-  --mtn-btn: rgb(193, 196, 19);
-  --telecel-btn: rgb(180, 57, 19);
-  --airteltigo-btn: rgb(28, 46, 119);
-
-
-  /***
-  NEW ROOT
-  ***/
-  --btn-bg-cl: rgb(250, 126, 9);
-  --user-panel-bg: rgba(42, 42, 194, 0.938);
-  --clock-bg-cl: rgb(2, 61, 52);
-
-  /***
-  DARK MODE COLORS
-  ***/
-  --darkMode-bg-cl: rgb(10, 10, 10);
-  --darkMode-bg-cl-2: rgb(10, 1, 22);
-  --welcome-card-bg: rgba(3, 3, 3, 0.918);
-  --welcome-card-bg-1: rgb(2, 2, 39);
-  --welcome-card-bg-2: rgb(24, 5, 5);
-  --thin-border: rgb(35, 48, 49);
-  --text-cl: rgb(145, 168, 164);
-  --text-cl-2: rgb(210, 216, 216);
-  --text-cl-3: rgb(139, 141, 141);
-
-  /**
-  BORDER SOLID COLORS
-  **/
-  --thin-border-1:  #1b8a747e;
-  --thin-border-2:  #830616;
-  --thin-border-3:  #b97207;
-  --thin-border-4:  #036aa7;
-  --thin-border-5:  #bba907;
-  --thin-border-6:   rgb(17, 2, 31);
-  --thin-border-7:  rgb(1, 11, 39);
-
-  /***
-  CARD BG
-  ***/
-  --card-mtn-bg:  #faba5ad0;
-  --card-tel-bg:  #fa537dd0;
-  --card-tigo-bg:  #6cbff7cb;
-}
-
-
-
-
-
-
-
-
-    .card-container{
-      margin-top: .1rem;
-    }
-
-    .trusted-by{
-        background: linear-gradient(134deg, rgb(9, 148, 148),rgb(3, 73, 73));
-  text-align: center;
-    }
-
-    .trusted-logos P{
-      color: white;
-      font-size: 1rem;
-    }
-
-
-
-    .benefit-notes{
-      width: 100%;
-      height: max-content;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-      border-bottom: 9px solid rgb(3, 73, 73);
-      max-width: 370px;
-      border-radius: 1rem;
-      margin-top: 1rem;
-    }
-
-    .register-bnefits{
-      margin-top: 1rem;
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      max-width: 94%;
-      padding: 1rem;
-      justify-content: center;
-      height: 15rem;
-      border: 1px solid rgb(228, 225, 225);
-      text-align: center;
-      display: flex;
-      align-items: center;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      border-radius: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .register-bnefits h2{
-      font-size: 1.2rem;
-      color: rgb(5, 49, 47);
-    }
-
-    .agent-benefits {
-  padding: 60px 20px;
-  background: #f5f7fa;
-  text-align: center;
-}
-
-.dark-mode .agent-benefits{
-  background: var(--welcome-card-bg)
-}
-
-.agent-benefits h2 {
-  font-size: 18px;
-  margin-bottom: 40px;
-  color: #159b9b;
-}
-
-.dark-mode .agent-benefits h2{
-  color: var(--card-tigo-bg);
-}
-
-.benefits-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 25px;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.benefit-card {
-  background: #ffffff;
-  padding: 25px;
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-  transition: 0.3s ease;
-}
-
-.dark-mode .benefit-card{
-  background: var(--darkMode-bg-cl);
-  border: 1px solid var(--thin-border-1);
-}
-
-.benefit-card h3 {
- display: flex;
- align-items: center;
- text-align: center;
- justify-content: center;
-}
-
-.dark-mode .benefit-card h3{
-  color: var(--thin-border-4)
-}
-
-.benefit-card h3 img{
-  margin-right: .5rem;
-  border: 1px solid rgb(245, 243, 243);
-  width: 1.8rem;
-  height: 1.8rem;
-  padding: .1rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 50%;
-}
-
-.dark-mode .benefit-card h3 img{
-  border: none;
-  border-radius: 0 ;
-}
-
-.benefit-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
-}
-
-.benefit-card h3 {
-  font-size: 18px;
-  margin-bottom: 15px;
-  color: #15355a;
-}
-
-.benefit-card p {
-  font-size: 16px;
-  color: #555;
-  line-height: 1.6;
-}
-
-.dark-mode .benefit-card p{
-  color: #b4b4b4;
-}
-
-
-  .register-bnefits{
-    margin-bottom: 6rem;
-  }
-
-  .register-bnefits small{
-    text-decoration: line-through;
-    font-size: 1.1rem;
-    color: rgb(128, 118, 118);
-  }
-
-
-
-/****
-AGENT PRICE
-****/
-.agent-price{
-  background-color: white;
-  margin-top: 2rem;
-  border-radius: 1rem;
-}
-
-.dark-mode .agent-price {
-  background: var(--welcome-card-bg);
-  border: 1px solid var(--thin-border-1)
-}
-
-.price-list{
-  padding: .2rem;
-  border-radius: .8rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-}
-
-.dark-mode .include
-{
-  background: var(--card-tigo-bg);
-  border: none;
-}
-
-
-.dark-mode .exclude
-{
-  background: var(--card-mtn-bg);
-  border: none;
-}
-
-    
- .regis{
-  width: 100%;
-  max-width: 80%;
-  display: flex;
-  justify-content: center;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  color: rgb(238, 243, 242);
-  font-size: 1rem;
-  font-weight: 600;
-  padding: .3rem 1rem;
-  border: none;
-  border-radius: 1rem;
-  cursor: pointer;
-  background: linear-gradient(134deg, rgb(9, 148, 148),rgb(3, 73, 73));
-  text-align: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-
-
-.underdev{
-  width: 100%;
-  max-width: 360px;
-  height: 4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: .4rem;
-  flex-direction: column;
-  line-height: 1.1;
-  overflow: none;
-  background: rgb(145, 144, 144);
-  color: white;
-  margin-top: 1rem;
-  border-radius: .8rem;
-  border-left: 6px solid rgb(110, 110, 116);
-  border-right: 6px solid rgb(110, 110, 116);
-}
-
-.underdev h2{
-  margin: 0;
-  line-height: .7;
-  
-}
-
-.underdev p{
-  margin: 0;
-  line-height: .5;
-  margin-bottom: 1.4rem;
-  font-size: .9rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-
-
-
-
-  </style>
+ 
 
         <!----USERS ANIMATION---->
 <style>
@@ -753,10 +392,7 @@ AGENT PRICE
 
 </section>
 
-  <div class="underdev" style="display: none;">
-    <h3> under development</h3>
-    <p>Stay tuned!</p>
-  </div>
+
 
 
 
@@ -764,7 +400,7 @@ AGENT PRICE
 
 
   <section class="agent-benefits">
-  <h2>Why Register as an Agent?</h2>
+  <h2>Why Register  Exclusive?</h2>
 
   <div class="benefits-container">
 
@@ -802,21 +438,25 @@ AGENT PRICE
 
   </div>
 </section>
+
+
+
+
 </section>
 
 
 <!----AGENT PRICE TABLE-->
-<section class="agent-price">
+<section class="agent-price" style="display: none;">
   <div class="price-title">
-    <h2>Agent Price List</h2>
+    <h2>Exclusive Price List</h2>
   </div>
   <div class="price-list">
     <div class="both-tags">
       <div class="title-tag-left">
-        Agent Normal Price <br>( MTN ) 
+        Exclusive Normal Price <br>( MTN ) 
       </div>
       <div class="title-tag-right">
-        Agent Express Price <br>
+        Exclusive Express Price <br>
         ( MTN )
       </div>
     </div>
@@ -862,7 +502,7 @@ AGENT PRICE
   </div>
 </section>
 <!----AGENT PRICE TABLE-->
-<section class="agent-price">
+<section class="agent-price" style="display: none;">
   <div class="price-title">
     <h2>TELECEL & AIRTELTIGO </h2>
   </div>
@@ -919,7 +559,7 @@ AGENT PRICE
 </section>
 
 <div class="register-bnefits">
-  <small>Old price: GHS 80 </small>
+  <small>GHS 80 </small>
     <p class="priceSub">GHS 50 <img src="./css/icons/eye (2).gif" alt=""></p>
   <h2>Unlock Exclusive Access </h2>
 <button id="payBtn" class="regis">Pay Now</button>
@@ -1139,7 +779,7 @@ AGENT PRICE
   <img src="./css/icons/agent.png" alt=""loading="lazy">
   <p>
     Unlock discounted prices for personal use or reselling.
-    Pay a one-time registration fee of <strong>GHS 50</strong>
+    Pay a one-time registration fee of <strong>GHS 100</strong>
     and start earning or saving more today.
   </p>
 
