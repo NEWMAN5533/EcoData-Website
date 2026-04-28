@@ -515,7 +515,6 @@ SNACKBAR SECTION
 
     .dark-mode #clock{
       color:rgb(182, 129, 15);
-      border-bottom:  3px solid var(--thin-border);
       border: 0;
     }
 
