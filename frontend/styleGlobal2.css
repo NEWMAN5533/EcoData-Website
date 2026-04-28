@@ -488,7 +488,7 @@ CREATE STORE LINK
 
 .card-container .welcome-card{
   margin-top: 1vh !important;
-  margin-bottom: .7rem;
+  margin-bottom: .5rem !important;
 }
 
 
