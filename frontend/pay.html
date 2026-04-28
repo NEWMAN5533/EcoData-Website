@@ -878,10 +878,11 @@ onAuthStateChanged(auth, async (user) => {
 
     const greeting = updateClock();
     // Display username if element exists
-    if (usernameDisplay) {
-      const name = userData.username || "Dear";
-      const suffix = userData.isAgent ? "Agent" : "";
-      usernameDisplay.textContent = `${greeting} ${suffix}, ${name}!`;
+     if (user) {
+      const userSnap = await getDoc(doc(db, "users", user.uid));
+      usernameDisplay.textContent = `${greeting}, ${userSnap.data().username}!`;
+    } else {
+      usernameDisplay.textContent = `${greeting}, Dear `;
     }
 
   } catch (err) {

@@ -369,7 +369,7 @@
     <div class="close-time">
     
     <span><small class="dotter"></small> Active 24/7</span></div>
-    <div id="clock"></div>
+    <div id="clock" style="display: flex !important;"></div>
   </div>
 </div>
 
@@ -1131,7 +1131,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
  const secondToggler = document.getElementById("menuDarkMode");
 const cardCloser = document.getElementById("closeCard");
 
-  // toggle menucard
+  // toggle menu card
   cardToggler.addEventListener("click", function(e) {
     e.stopPropagation();
     if(cardCloser.classList.contains("active")){
