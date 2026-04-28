@@ -3024,6 +3024,17 @@ const db = getFirestore(app);
 onAuthStateChanged(auth, async (user) => {
   const usernameDisplay = document.getElementById("usernameDisplay");
 
+
+  const greeting = updateClock();
+
+    if (user) {
+      const userSnap = await getDoc(doc(db, "users", user.uid));
+      usernameDisplay.textContent = `${greeting}, ${userSnap.data().username}!`;
+    } else {
+      usernameDisplay.textContent = `${greeting}, Dear `;
+    }
+
+  
   try {
     const userRef = doc(db, "users", user.uid);
     const userSnap = await getDoc(userRef);
@@ -3036,16 +3047,6 @@ onAuthStateChanged(auth, async (user) => {
     if (userData.isAgent === true) {
       window.location.href = "agentPage.html";
       return; // stop further execution
-    }
-
-  
-
-    const greeting = updateClock();
-     if (user) {
-      const userSnap = await getDoc(doc(db, "users", user.uid));
-      usernameDisplay.textContent = `${greeting}, ${userSnap.data().username}!`;
-    } else {
-      usernameDisplay.textContent = `${greeting}, Dear `;
     }
 
   } catch (err) {
