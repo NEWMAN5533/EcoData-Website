@@ -488,7 +488,7 @@ CREATE STORE LINK
 
 .card-container .welcome-card{
   margin-top: 1vh !important;
-  margin-bottom: 1rem !important;
+  margin-bottom: .7rem;
 }
 
 
@@ -616,7 +616,7 @@ agent cta
 *****/
 
 .dark-mode #usernameDisplay{
-  color: white;
+  color: rgb(233, 231, 231) !important;
 }
 
 .agent-upgrade-wrapper{
@@ -1028,7 +1028,7 @@ TRUSTED LOGOS ALIGN
     ****/
     #gridView .hero-text-container{
       width: 100%;
-      max-width: 94%;
+      max-width: 98%;
 
       display: flex;
       position: relative;
@@ -1037,9 +1037,8 @@ TRUSTED LOGOS ALIGN
     }
 
     .dark-mode #gridView .hero-text-container{
-      background: var(--thin-border);
+      background: transparent;
       border: 1px solid var(--background-cl-1);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.45);
     }
 
 
