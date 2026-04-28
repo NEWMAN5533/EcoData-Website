@@ -860,11 +860,14 @@ const db = getFirestore(app);
 onAuthStateChanged(auth, async (user) => {
   const usernameDisplay = document.getElementById("usernameDisplay");
 
-  if (!user) {
-    // User not logged in, redirect if needed
-   // window.location.href = "login.html"
-    console.log("User not logged in");
-    return;
+  const greeting = updateClock();
+
+    if (user) {
+      const userSnap = await getDoc(doc(db, "users", user.uid));
+      usernameDisplay.textContent = `${greeting}, ${userSnap.data().username}!`;
+    } else {
+      usernameDisplay.textContent = `${greeting}, Dear `;
+    }
   }
 
   try {
@@ -874,16 +877,6 @@ onAuthStateChanged(auth, async (user) => {
     if (!userSnap.exists()) return;
 
     const userData = userSnap.data();
-
-
-    const greeting = updateClock();
-    // Display username if element exists
-     if (user) {
-      const userSnap = await getDoc(doc(db, "users", user.uid));
-      usernameDisplay.textContent = `${greeting}, ${userSnap.data().username}!`;
-    } else {
-      usernameDisplay.textContent = `${greeting}, Dear `;
-    }
 
   } catch (err) {
     console.error("Error fetching user data:", err);
