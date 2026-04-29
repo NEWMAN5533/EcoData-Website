@@ -266,5 +266,65 @@ AFA RECEIPT ENDS
 
 
 
+/*****
+NEW CLOCK STYLE
+******/
+
+  .welcome-bottom .endRating{
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around !important;
+    align-items: center;
+    gap: 0;
+    padding: 0;
+    position: relative;
+  
+  }
+
+  .endRating .stran{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+    gap: .2rem;
+    justify-content: end;
+    padding-right: 2.2rem;
+    position: relative;
+  }
+
+  .endRating .stran img{
+    width: 1rem;
+    height: 1rem;
+    background: var(--background-cl);
+    padding: .1rem;
+    border-radius: 3px;
+  }
+
+
+  .dark-mode .endRating .stran img{
+    width: 1rem;
+    height: 1rem;
+    background: var(--thin-border);
+    padding: .1rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+
+
+  .endRating .clocker{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding-right: .3rem;
+    position: relative;
+
+  }
+
+  .clocker #clock{
+    margin: 0;
+  }
 
   
