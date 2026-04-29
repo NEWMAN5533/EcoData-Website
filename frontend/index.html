@@ -965,6 +965,40 @@ width: 50%;
     </div>
 </section>
 
+
+  
+
+<!----ADS--->
+<div class="gallery">
+  <div class="install-title">
+   <p>Install our app on android phones</p>
+
+  </div>
+
+  <div class="imgboxer">
+  <div class="img-box">
+    <img src="./css/images/1.jpeg" alt="" loading="lazy" 
+    onclick=openViewer(0)>
+  </div>
+
+  <div class="img-box">
+     <img src="./css/images/2.jpeg" alt="" loading="lazy" 
+    onclick=openViewer(1)>
+  </div>
+  <div class="img-box">
+     <img src="./css/images/3.jpeg" alt="" loading="lazy" 
+    onclick=openViewer(2)>
+  </div>
+  </div>
+
+</div>
+
+<div id="viewer">
+  <span title="Close" class="clos"onclick="closeViewer()">&times;</span>
+  <img id="fullImg" />
+</div>
+  
+
 <!----PERSISTENT-CARD-(ALWAYS-VISIBLE)--->
 <!-- LIVE ORDER CONTAINER -->
  <section class="follow-share-container" >
@@ -3199,6 +3233,94 @@ function showSnackBar(message, type = "info", duration = 4000) {
 
 </script>
 
+
+
+  
+<!---ads js-->
+<script>
+  const images = ["./css/images/1.jpeg", "./css/images/2.jpeg", "./css/images/3.jpeg"];
+
+  let currentIndex = 0;
+  let scale = 1;
+  let starX = 0;
+
+
+  // Open an image fullView
+  function openViewer (index){
+    currentIndex = index;
+    const viewer =
+    document.getElementById("viewer");
+    const fullImg = document.getElementById("fullImg");
+
+    fullImg.src = images[currentIndex];
+    viewer.style.display = "flex";
+    scale = 1;
+    fullImg.style.transform = `scale(${scale})`;
+  }
+
+  function closeViewer() {
+    document.getElementById("viewer").style.display = "none";
+  }
+
+  // ================
+  //= SWIPE (MOBILE)
+  //=================
+  const viewer = document.getElementById("viewer");
+
+  viewer.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+  });
+
+  viewer.addEventListener("touchend", (e) => {
+   let endX = e.changedTouches[0].clientX;
+
+   if(endX -startX > 50 ) {
+    prevImage();
+   } else if ( startX - endX > 50 ) {
+    nextImage();
+   }
+  });
+
+  function nextImage() {
+    currentIndex = (currentIndex - 1) % images.length;
+
+    document.getElementById("fullImg").src = images[currentIndex];
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    
+    document.getElementById("fullImg").src = images[currentIndex];
+  }
+
+  // ============
+  // ZOOM
+  //=============
+  const fullImg = document.getElementById("fullImg");
+
+  // Mouse scroll zoom (Desktop)
+  fullImg.addEventListener("wheel", (e) => {
+    e.preventDefault();
+
+    scale += e.deltaY * -0.001;
+    scale = Math.min(Math.max(1, scale), 3);
+    fullImg.style.transform = `scale(${scale})`;
+  });
+
+  // Double tap Zoom (mobile)
+  let lastTap = 0;
+
+  fullImg.addEventListener("touchend", function() {
+    let currentTime = new Date().getTime();
+    let tapLength = currentTime = lastTap;
+
+    if(tapLength < 300 && tapLength > 0) {
+      scale = scale === 1 ? 2: 1;
+      fullImg.style.transform = `scale(${scale})`;
+    }
+    lastTap = currentTime;
+  })
+</script>
 
 <!---clock-js-->
 <script>
