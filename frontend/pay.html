@@ -868,7 +868,7 @@ onAuthStateChanged(auth, async (user) => {
     } else {
       usernameDisplay.textContent = `${greeting}, Dear `;
     }
-  }
+
 
   try {
     const userRef = doc(db, "users", user.uid);
