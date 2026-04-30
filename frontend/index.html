@@ -776,6 +776,8 @@ width: 50%;
 
 <!----promo- ends--->
 <script>
+
+  document.addEventListener("DOMContentLoaded", () => {
   let promoWasInactive = true;
 
   function isPromoTime() {
@@ -867,6 +869,8 @@ width: 50%;
 
   setInterval(updateTimer, 1000);
   updateTimer();
+
+  });
 </script>
 
 </head>
