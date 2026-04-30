@@ -809,6 +809,8 @@ width: 50%;
 
     if(!isPromoTime()) {
       bar.classList.remove("show");
+      promoActiveDiv.classList.add("hidden");
+      promoEndedDiv.style.display = "flex";
       promoWasInactive = true;
       return;
     }
