@@ -640,6 +640,218 @@ width: 50%;
  }
 </style>
 
+
+
+
+
+<!--promo-->
+<style>
+.promo-bar{
+  position: relative;
+  top: 120px;
+  left: 0;
+  margin: 1rem;
+  width: 100%;
+  max-width: 98%;
+  background: var(primary-cl);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  box-shadow:  0  2px 6px rgba(0,0,0,0.4);
+  z-index: 10;
+  transition: top .6s ease;
+}
+
+.dark-mode .promo-bar{
+  background: var(--darkMode-bg-cl);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+  border: 2px solid var(--thin-border);
+}
+
+.promo-bar.show{
+  top: 0; /* slide show */
+
+}
+
+.timer{
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: rgb(14, 64, 73);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.dark-mode .timer{
+  color:  rgb(17, 112, 129);
+}
+
+.label{
+  font-size: .88rem;
+  color: #b30715cc;
+  font-weight: 600;
+  padding-top: .2rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.dark-mode .label {
+  color: rgba(241, 156, 156, 0.781);
+}
+
+
+/* CTA BUTTON */
+.cta-btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #ffcc00;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  animation: cta-pus 1.5s infinite;
+}
+
+@keyframes cta-pus  {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 #ffcc00aa;
+  }
+  70%{
+    transform:  scale(1.08);
+    box-shadow: 0 15px 10px transparent;
+  }
+
+  100%{
+    transform: scale(1);
+  }
+}
+
+/* LIVE BADGE */
+.live-badge{
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ff4444;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: .9rem;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10999999999999999999999999999999999999999999999999990000000000000000000999999999999;
+}
+
+.live-badge.show {
+  animation: popo 6s ease forwards;
+}
+
+@keyframes popo {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.5);}
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.2);}
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+.warning {
+  color: #ff4444;
+  animation: blinking 1s infinite;
+}
+
+@keyframes blinking {
+  50% { opacity: 0.4;}
+}
+
+.content {
+  text-align: center;
+  margin-top: 120px;
+}
+</style>
+
+<!----promo- ends--->
+<script>
+  let promoWasInactive = true;
+
+  function isPromoTime() {
+    const day = new Date().getDay();
+    return (day === 4 || day === 5);
+  }
+
+  function getPromoEndTime() {
+    const now = new Date();
+    const day = now.getDay();
+    let end = new Date(now);
+
+    if(day === 4 ) {
+      end.setDate(now.getDate() + 1);
+      end.setHours(23, 59, 59, 999);
+
+    } else if (day === 5) {
+      end.setHours(23, 59, 59, 999);
+    } else {
+      return null;
+    }
+    return end.getTime();
+  }
+
+
+  function updateTimer() {
+    const bar = document.getElementById("promoBar");
+    const badge = document.getElementById("liveBadge");
+    const timerEl = document.getElementById("timer");
+    const labelEl = document.getElementById("label");
+
+    if(!isPromoTime()) {
+      bar.classList.remove("show");
+      promoWasInactive = true;
+      return;
+    }
+
+    // First time appearing anytime
+    if(promoWasInactive) {
+      setTimeout(() => bar.classList.add("show"), 200 );
+      badge.classList.add("show");
+      promoWasInactive = false;
+    }
+
+    const endTime = getPromoEndTime();
+    const now = new Date().getTime();
+    const remaining = endTime - now;
+
+    if(remaining <= 0) {
+      timerEl.innerHTML = "00:00:00";
+      labelEl.innerHTML = "Promo ended";
+      return;
+    }
+
+    let hours = Math.floor(remaining / (1000 * 60 * 60));
+    let minutes = Math.floor((remaining %  (1000 * 60 * 60 )) / (1000 * 60));
+    let seconds = Math.floor((remaining % (1000 * 60 )) / 1000);
+
+    hours = hours < 10 ? "0" + hours : hours;
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    timerEl.innerHTML = `${hours}:${minutes}:${seconds}`;
+    labelEl.innerHTML = "Promo Ends In";
+
+    if(remaining < 6 * 60 * 60 * 1000) {
+      timerEl.classList.add("warning");
+    } else {
+      timerEl.classList.remove("warning");
+    }
+  }
+
+  setInterval(updateTimer, 1000);
+  updateTimer();
+</script>
+
 </head>
 
 <body>
@@ -813,6 +1025,7 @@ width: 50%;
 
 
 
+
 <!-----COUNTER-ENDS--->
 
 <!----TRUSTED-MESSAGE-->
@@ -927,6 +1140,22 @@ width: 50%;
 </div>
 <!---SCROLL THUMBNAIL--REUSABLE--CARD ADS----ends---->
 
+<!----promo---->
+<div class="promo-bar" id="promoBar">
+ <div>
+  <div class="timer" id="timer">--:--:--</div>
+
+  <div class="label" id="label">Loading...</div>
+ </div>
+ <button class="cta-btn">Buy Data Now</button>
+</div>
+
+<div class="live-badge" id="liveBadge">PROMO LIVE NOW!</div>
+
+
+
+
+
 
 <!---NOTICE BOARD=-CONTAINER-->
 <section class="notice-container"  style="background: transparent !important;">
@@ -966,8 +1195,6 @@ width: 50%;
 </section>
 
 
-  
-
 <!----ADS--->
 <div class="gallery">
   <div class="install-title">
@@ -981,14 +1208,21 @@ width: 50%;
     onclick=openViewer(0)>
   </div>
 
-  <div class="img-box">
+
+     <div class="img-box">
      <img src="./css/images/2.jpeg" alt="" loading="lazy" 
     onclick=openViewer(1)>
   </div>
-  <div class="img-box">
+
+ 
+
+
+    <div class="img-box">
      <img src="./css/images/3.jpeg" alt="" loading="lazy" 
     onclick=openViewer(2)>
-  </div>
+    </div>
+
+ 
   </div>
 
 </div>
@@ -997,7 +1231,9 @@ width: 50%;
   <span title="Close" class="clos"onclick="closeViewer()">&times;</span>
   <img id="fullImg" />
 </div>
-  
+
+
+
 
 <!----PERSISTENT-CARD-(ALWAYS-VISIBLE)--->
 <!-- LIVE ORDER CONTAINER -->
@@ -1195,70 +1431,70 @@ width: 50%;
   <!----option-card-->
   <div class="dropwrapper">
     <div class="option-dropdown" id="moveDown">
-      <div id="topOpt">
+     <div id="topOpt">
               <!---select-1-->
     <div class="optionSelect" 
   data-network="mtn"
   data-size="1"
-  data-price="6">
+  data-price="5.5">
       <span>1GB</span>
-      <small>GHS 6</small>
+      <small>GHS 5.5</small>
     </div>
     <!---select-2-->
     <div class="optionSelect" 
   data-network="mtn"
   data-size="2"
-  data-price="12">
+  data-price="11">
       <span>2GB</span>
-      <small>GHS 12</small>
+      <small>GHS 11</small>
     </div>
     <!---select-3-->
     <div class="optionSelect" 
   data-network="mtn"
   data-size="3"
-  data-price="17">
+  data-price="16.60">
       <span>3GB</span>
-      <small>GHS 17</small>
+      <small>GHS 16.60</small>
     </div>
     <!---select-4-->
       <div class="optionSelect" 
   data-network="mtn"
   data-size="4"
-  data-price="22">
+  data-price="21">
       <span>4GB</span>
-      <small>GHS 22</small>
+      <small>GHS 21</small>
     </div>
     <!---select-5-->
     <div class="optionSelect"
   data-network="mtn"
   data-size="5"
-  data-price="26.50">
+  data-price="25.50">
       <span>5GB</span>
-      <small>GHS 26.50</small>
+      <small>GHS 25.50</small>
     </div>
     <!---select-6-->
     <div class="optionSelect" 
   data-network="mtn"
   data-size="6"
-  data-price="32.50">
+  data-price="31">
       <span>6GB</span>
-      <small>GHS 32.50</small>
+      <small>GHS 31</small>
     </div>
     <!---select-7-->
       <div class="optionSelect"
   data-network="mtn"
   data-size="7"
-  data-price="37">
+  data-price="36">
       <span>7GB</span>
-      <small>GHS 37</small>
+      <small>GHS 36</small>
     </div>
     <!---select-8-->
     <div class="optionSelect" 
   data-network="mtn"
   data-size="8"
-  data-price="40">
+  data-price="39">
       <span>8GB</span>
-      <small>GHS 40</small>
+      <small>GHS 39</small>
     </div>
     <!---select-9-->
      <!---EMPTY-FOR-9GB-->
@@ -1266,41 +1502,41 @@ width: 50%;
       <div class="optionSelect" 
   data-network="mtn"
   data-size="10"
-  data-price="47">
+  data-price="45">
       <span>10GB</span>
-      <small>GHS 47</small>
+      <small>GHS 45</small>
     </div>
     <!---select-11-->
     <div class="optionSelect" 
   data-network="mtn"
   data-size="12"
-  data-price="60">
+  data-price="59">
       <span>12GB</span>
-      <small>GHS 60</small>
+      <small>GHS 59</small>
     </div>
     <!---select-12-->
     <div class="optionSelect" 
   data-network="mtn"
   data-size="15"
-  data-price="68">
+  data-price="67">
       <span>15GB</span>
-      <small>GHS 68</small>
+      <small>GHS 67</small>
     </div>
     <!---select-13-->
     <div class="optionSelect" 
   data-network="mtn"
   data-size="20"
-  data-price="91">
+  data-price="89.50">
       <span>20GB</span>
-      <small>GHS 91</small>
+      <small>GHS 89.50</small>
     </div>
     <!---select-14-->
     <div class="optionSelect" 
   data-network="mtn"
   data-size="25"
-  data-price="111">
+  data-price="109">
       <span>25GB</span>
-      <small>GHS 111</small>
+      <small>GHS 109</small>
     </div>
     <!---select-15-->
     <div class="optionSelect" 
@@ -1314,17 +1550,17 @@ width: 50%;
     <div class="optionSelect" 
   data-network="mtn"
   data-size="40"
-  data-price="169">
+  data-price="167">
       <span>40GB</span>
-      <small>GHS 169</small>
+      <small>GHS 167</small>
     </div>
     <!---select-17-->
     <div class="optionSelect"
   data-network="mtn"
   data-size="50"
-  data-price="215">
+  data-price="211">
       <span>50GB</span>
-      <small>GHS 215</small>
+      <small>GHS 211</small>
     </div>
     <!---select-ends-->
       </div>
@@ -3072,17 +3308,18 @@ const db = getFirestore(app);
 onAuthStateChanged(auth, async (user) => {
   const usernameDisplay = document.getElementById("usernameDisplay");
 
+      const greeting = updateClock();
 
-  const greeting = updateClock();
-
-    if (user) {
+      if (user) {
       const userSnap = await getDoc(doc(db, "users", user.uid));
       usernameDisplay.textContent = `${greeting}, ${userSnap.data().username}!`;
     } else {
       usernameDisplay.textContent = `${greeting}, Dear `;
     }
 
-  
+
+
+
   try {
     const userRef = doc(db, "users", user.uid);
     const userSnap = await getDoc(userRef);
@@ -3232,10 +3469,7 @@ function showSnackBar(message, type = "info", duration = 4000) {
 
 
 </script>
-
-
-
-  
+ 
 <!---ads js-->
 <script>
   const images = ["./css/images/1.jpeg", "./css/images/2.jpeg", "./css/images/3.jpeg"];
@@ -3321,6 +3555,7 @@ function showSnackBar(message, type = "info", duration = 4000) {
     lastTap = currentTime;
   })
 </script>
+
 
 <!---clock-js-->
 <script>
