@@ -824,10 +824,22 @@ width: 50%;
     const now = new Date().getTime();
     const remaining = endTime - now;
 
+   // PROMODIV TOGGLE
+    const promoActiveDiv = document.getElementById("promoActive");
+    const promoEndedDiv = document.getElementById("topOut");
+
     if(remaining <= 0) {
       timerEl.innerHTML = "00:00:00";
-      labelEl.innerHTML = "Promo ended";
+      labelEl.innerHTML = "Promo ended. Check back next week";
+
+      // Toggle visibility here for promo days
+      promoActiveDiv.classList.add("hidden");
+      promoEndedDiv.style.display = "flex";
       return;
+    } else {
+      // While promo is active 
+      promoActiveDiv.classList.remove("hidden");
+      promoEndedDiv.style.display = "none";
     }
 
     let hours = Math.floor(remaining / (1000 * 60 * 60));
@@ -1431,8 +1443,10 @@ width: 50%;
   <!----option-card-->
   <div class="dropwrapper">
     <div class="option-dropdown" id="moveDown">
-     <div id="topOpt">
-              <!---select-1-->
+      
+   <!----topOutPromodiv------>
+     <div id="promoActive" hidden>
+      <!---select-1-->
     <div class="optionSelect" 
   data-network="mtn"
   data-size="1"
@@ -1564,6 +1578,147 @@ width: 50%;
     </div>
     <!---select-ends-->
       </div>
+   <!----promodiv---ends------>
+
+
+
+      
+     <div id="topOpt">
+      <!---select-1-->
+    <div class="optionSelect" 
+  data-network="mtn"
+  data-size="1"
+  data-price="6">
+      <span>1GB</span>
+      <small>GHS 6</small>
+    </div>
+    <!---select-2-->
+    <div class="optionSelect" 
+  data-network="mtn"
+  data-size="2"
+  data-price="12">
+      <span>2GB</span>
+      <small>GHS 12</small>
+    </div>
+    <!---select-3-->
+    <div class="optionSelect" 
+  data-network="mtn"
+  data-size="3"
+  data-price="17">
+      <span>3GB</span>
+      <small>GHS 17</small>
+    </div>
+    <!---select-4-->
+      <div class="optionSelect" 
+  data-network="mtn"
+  data-size="4"
+  data-price="22">
+      <span>4GB</span>
+      <small>GHS 22</small>
+    </div>
+    <!---select-5-->
+    <div class="optionSelect"
+  data-network="mtn"
+  data-size="5"
+  data-price="26.50">
+      <span>5GB</span>
+      <small>GHS 26.50</small>
+    </div>
+    <!---select-6-->
+    <div class="optionSelect" 
+  data-network="mtn"
+  data-size="6"
+  data-price="32.50">
+      <span>6GB</span>
+      <small>GHS 32.50</small>
+    </div>
+    <!---select-7-->
+      <div class="optionSelect"
+  data-network="mtn"
+  data-size="7"
+  data-price="37">
+      <span>7GB</span>
+      <small>GHS 37</small>
+    </div>
+    <!---select-8-->
+    <div class="optionSelect" 
+  data-network="mtn"
+  data-size="8"
+  data-price="40">
+      <span>8GB</span>
+      <small>GHS 40</small>
+    </div>
+    <!---select-9-->
+     <!---EMPTY-FOR-9GB-->
+    <!---select-10-->
+      <div class="optionSelect" 
+  data-network="mtn"
+  data-size="10"
+  data-price="47">
+      <span>10GB</span>
+      <small>GHS 47</small>
+    </div>
+    <!---select-11-->
+    <div class="optionSelect" 
+  data-network="mtn"
+  data-size="12"
+  data-price="60">
+      <span>12GB</span>
+      <small>GHS 60</small>
+    </div>
+    <!---select-12-->
+    <div class="optionSelect" 
+  data-network="mtn"
+  data-size="15"
+  data-price="68">
+      <span>15GB</span>
+      <small>GHS 68</small>
+    </div>
+    <!---select-13-->
+    <div class="optionSelect" 
+  data-network="mtn"
+  data-size="20"
+  data-price="91">
+      <span>20GB</span>
+      <small>GHS 91</small>
+    </div>
+    <!---select-14-->
+    <div class="optionSelect" 
+  data-network="mtn"
+  data-size="25"
+  data-price="111">
+      <span>25GB</span>
+      <small>GHS 111</small>
+    </div>
+    <!---select-15-->
+    <div class="optionSelect" 
+  data-network="mtn"
+  data-size="30"
+  data-price="130">
+      <span>30GB</span>
+      <small>GHS 130</small>
+    </div>
+    <!---select-16-->
+    <div class="optionSelect" 
+  data-network="mtn"
+  data-size="40"
+  data-price="169">
+      <span>40GB</span>
+      <small>GHS 169</small>
+    </div>
+    <!---select-17-->
+    <div class="optionSelect"
+  data-network="mtn"
+  data-size="50"
+  data-price="215">
+      <span>50GB</span>
+      <small>GHS 215</small>
+    </div>
+    <!---select-ends-->
+      </div>
+
+
+      <!----EXPRESS-PRICES------>
       <div id="bottomOpt" style="display: none;">
               <!---select-1-->
     <div class="optionSelect" 
