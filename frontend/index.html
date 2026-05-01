@@ -682,6 +682,7 @@ width: 50%;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+
 .dark-mode .timer{
   color:  rgb(17, 112, 129);
 }
@@ -689,9 +690,20 @@ width: 50%;
 .label{
   font-size: .88rem;
   color: #b30715cc;
+  display: flex;
+  align-items: center;
+
+
   font-weight: 600;
   padding-top: .2rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.label img{
+  margin-left: .3rem;
+  margin-bottom: .2rem;
+  width: 1.3rem;
+  height: 1.3rem;
 }
 
 .dark-mode .label {
@@ -862,7 +874,7 @@ width: 50%;
     seconds = seconds < 10 ? "0" + seconds : seconds;
 
     timerEl.innerHTML = `${hours}:${minutes}:${seconds}`;
-    labelEl.innerHTML = "Promo Ends In";
+    labelEl.innerHTML = `Promo Ends In <img src="./css/icons/timer.png" >`;
 
     if(remaining < 6 * 60 * 60 * 1000) {
       timerEl.classList.add("warning");
