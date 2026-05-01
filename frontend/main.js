@@ -1,4 +1,4 @@
-// UPDATED AT 23/APRIL, 2026 [BACKUP MAIN.JS]
+// UPDATED AT 1st/MAY, 2026 [BACKUP MAIN.JS]
 
 
 // --- Firebase Imports ---
@@ -103,7 +103,7 @@ function resetSelectedBundle(reason = "") {
   selectedBundle = null;
 
   // reset button UI
-  optionBtn.innerHTML = `Select Package <span><img src="./css/icons/more.png.png"></span>`;
+  optionBtn.innerHTML = `Select bundle <span><img src="./css/icons/more.png.png"></span>`;
 
   // clear placeholders
   const gbHolder = document.querySelector(".placeHolderGB");
@@ -150,6 +150,8 @@ function resetSelectedBundle(reason = "") {
 
     // update button tex
     selectBtn.innerHTML = `${activeOption.querySelector("span").textContent} 
+    <p class='doneSelect'> <img src="./css/icons/done (2).png" ></p>
+    <p class='doneSelect darkM'> <img src="./css/icons/done (1).png" ></p>
     <span><img src="./css/icons/more.png.png"></span>`;
 
   };
@@ -184,7 +186,9 @@ deliveryOptions.forEach(option => {
     // Update button text
     selectBtn.innerHTML = `
       ${option.querySelector("span").textContent}
-      <span><img src="./css/icons/more.png.png"></span>
+      <p class='doneSelect'> <img src="./css/icons/done (2).png" ></p>
+      <p class='doneSelect darkM'> <img src="./css/icons/done (1).png" ></p>
+      <span>     <img src="./css/icons/more.png.png"></span>
     `;
 
     dropdownOffer.classList.remove("show");
@@ -283,6 +287,7 @@ function normalizeNumber(num) {
     .forEach(button => {
 
       button.addEventListener("click", () => {
+
 
       bottomNavDiv.style.display = "flex";
 
