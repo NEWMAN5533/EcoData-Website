@@ -152,28 +152,6 @@
   }
 </style>
 
-  <!---marked-->
-  <style>
-    .select-btn .doneSelect{
-      display: flex;
-      margin-left: .3rem;
-      width: 1.2rem;
-      height: 1rem;
-    }
-
-    .select-btn .darkM{
-      display: none !important;
-    }
-
-    .dark-mode .select-btn .doneSelect{
-      display: none !important;
-    }
-
-    .dark-mode .select-btn .darkM{
-      display: flex !important;
-    }
-  </style>
-
 
 <!----USERS ANIMATION---->
 <style>
@@ -667,7 +645,28 @@ width: 50%;
 
 
 
-
+
+<!---marked-->
+  <style>
+    .select-btn .doneSelect{
+      display: flex;
+      margin-left: .3rem;
+      width: 1.2rem;
+      height: 1rem;
+    }
+
+    .select-btn .darkM{
+      display: none !important;
+    }
+
+    .dark-mode .select-btn .doneSelect{
+      display: none !important;
+    }
+
+    .dark-mode .select-btn .darkM{
+      display: flex !important;
+    }
+  </style>
 
 </head>
 
@@ -761,9 +760,14 @@ width: 50%;
           </div>
          
 
-          <div class="storeBuild">
-             <p>Create Store</p>
-          </div>
+          
+
+          
+          <div class="quicker-nav " onclick="window.location.href='ebooks.html'">
+            <img src="./css/icons/ebook.png" alt="" loading="lazy">
+            <p>ebooks</p>
+          </div> 
+
            <div title="Coming Up Soon!" class="quicker-nav" >
               <img src="./css/uiIcons/store.png" alt="" loading="lazy">
               <p>Get Store</p>
@@ -956,8 +960,6 @@ width: 50%;
   </div>
 </div>
 <!---SCROLL THUMBNAIL--REUSABLE--CARD ADS----ends---->
-
-
 
 
 
@@ -1177,23 +1179,31 @@ width: 50%;
     <small>Choose from available MTN data offers.</small>
     <p ><span>Note:</span>Each offer carries it data prices.</p>
   </div>
+
+
   <!---offer-select-options-->
    <div class="custom-select">
   <button class="select-btn" id="selectBtn">
     Select Available MTN Offer
+  
     <span><img src="./css/icons/more.png.png" alt="dropdown" loading="lazy"></span>
   </button>
 
   <div class="select-dropdown" id="dropdownOffer">
     <div class="optionDelevery" data-mode="normal">
-      <span >MTN DATA NORMAL DELIVERY  </span>
+      <span >MTN DATA NORMAL DELIVERY 
+      
+      </span>
       <small>NON-EXPIRY</small>
     </div>
   
     <div class="optionDelevery" data-mode="express">
-      <span>MTN DATA EXPRESS DELIVERY </span>
+      <span>MTN DATA EXPRESS DELIVERY 
+      
+      </span>
       <small>NON-EXPIRY</small>
     </div>
+    
   </div>
   <div id="offerDisplay"></div>
 </div>
@@ -1237,146 +1247,7 @@ width: 50%;
   <!----option-card-->
   <div class="dropwrapper">
     <div class="option-dropdown" id="moveDown">
-      
-   <!----topOutPromodiv------>
-     <div id="promoActive" hidden >
-      <!---select-1-->
-    <div class="optionSelect" 
-  data-network="mtn"
-  data-size="1"
-  data-price="5.5">
-      <span>1GB</span>
-      <small>GHS 5.5</small>
-    </div>
-    <!---select-2-->
-    <div class="optionSelect" 
-  data-network="mtn"
-  data-size="2"
-  data-price="11">
-      <span>2GB</span>
-      <small>GHS 11</small>
-    </div>
-    <!---select-3-->
-    <div class="optionSelect" 
-  data-network="mtn"
-  data-size="3"
-  data-price="16.60">
-      <span>3GB</span>
-      <small>GHS 16.60</small>
-    </div>
-    <!---select-4-->
-      <div class="optionSelect" 
-  data-network="mtn"
-  data-size="4"
-  data-price="21">
-      <span>4GB</span>
-      <small>GHS 21</small>
-    </div>
-    <!---select-5-->
-    <div class="optionSelect"
-  data-network="mtn"
-  data-size="5"
-  data-price="25.50">
-      <span>5GB</span>
-      <small>GHS 25.50</small>
-    </div>
-    <!---select-6-->
-    <div class="optionSelect" 
-  data-network="mtn"
-  data-size="6"
-  data-price="31">
-      <span>6GB</span>
-      <small>GHS 31</small>
-    </div>
-    <!---select-7-->
-      <div class="optionSelect"
-  data-network="mtn"
-  data-size="7"
-  data-price="36">
-      <span>7GB</span>
-      <small>GHS 36</small>
-    </div>
-    <!---select-8-->
-    <div class="optionSelect" 
-  data-network="mtn"
-  data-size="8"
-  data-price="39">
-      <span>8GB</span>
-      <small>GHS 39</small>
-    </div>
-    <!---select-9-->
-     <!---EMPTY-FOR-9GB-->
-    <!---select-10-->
-      <div class="optionSelect" 
-  data-network="mtn"
-  data-size="10"
-  data-price="45">
-      <span>10GB</span>
-      <small>GHS 45</small>
-    </div>
-    <!---select-11-->
-    <div class="optionSelect" 
-  data-network="mtn"
-  data-size="12"
-  data-price="59">
-      <span>12GB</span>
-      <small>GHS 59</small>
-    </div>
-    <!---select-12-->
-    <div class="optionSelect" 
-  data-network="mtn"
-  data-size="15"
-  data-price="67">
-      <span>15GB</span>
-      <small>GHS 67</small>
-    </div>
-    <!---select-13-->
-    <div class="optionSelect" 
-  data-network="mtn"
-  data-size="20"
-  data-price="89.50">
-      <span>20GB</span>
-      <small>GHS 89.50</small>
-    </div>
-    <!---select-14-->
-    <div class="optionSelect" 
-  data-network="mtn"
-  data-size="25"
-  data-price="109">
-      <span>25GB</span>
-      <small>GHS 109</small>
-    </div>
-    <!---select-15-->
-    <div class="optionSelect" 
-  data-network="mtn"
-  data-size="30"
-  data-price="130">
-      <span>30GB</span>
-      <small>GHS 130</small>
-    </div>
-    <!---select-16-->
-    <div class="optionSelect" 
-  data-network="mtn"
-  data-size="40"
-  data-price="167">
-      <span>40GB</span>
-      <small>GHS 167</small>
-    </div>
-    <!---select-17-->
-    <div class="optionSelect"
-  data-network="mtn"
-  data-size="50"
-  data-price="211">
-      <span>50GB</span>
-      <small>GHS 211</small>
-    </div>
-    <!---select-ends-->
-      </div>
-   <!----promodiv---ends------>
-
-
-
-      
+ 
      <div id="topOpt">
       <!---select-1-->
     <div class="optionSelect" 
@@ -2876,17 +2747,25 @@ width: 50%;
        </a>
       </div>
 
+      
+       <div class="link">
+       <a href="#">
+        <img src="./css/icons/ebook.png" alt="image" loading="lazy">
+        <span>Ebooks Shop</span>
+       </a>
+      </div>
+
       <div class="link">
        <a href="./afa.html">
         <img src="./css/icons/personal.png" alt="image" loading="lazy">
-        <span>MTN AFA</span>
+        <span>AFA</span>
        </a>
       </div>
 
         <div class="link">
        <a href="./pay.html">
         <img src="./css/icons/agent.png" alt="image" loading="lazy">
-        <span>Register as Agent</span>
+        <span>Get discount</span>
        </a>
       </div>
 
@@ -2907,10 +2786,17 @@ width: 50%;
       </a>
       </div>
 
-       <a href="./login.html">  <button  id="logout-btn" class="logout-btn">Sign-Up</button></a>
+      <div class="button-wrapper">
+          <button onclick="window.location.href = 'signUp.html'" class="logout-btn">Sign-Up</button></a>
 
        <button id="logOutBtn" class="log-out ">Logout</button>   
+      </div>
+    
     </div>
+
+
+
+
 
 <!---LOADING-SPINNER-->
 <div id="paystackLoader" class="paystack-loader hidden" >
@@ -3144,6 +3030,11 @@ width: 50%;
     <!----REGISTRATION---->
 
 
+
+
+
+
+
     <!----REGISTRATION---->
 <div class="agent-upgrade-wrapper" >
 
@@ -3159,6 +3050,12 @@ width: 50%;
   <button onclick="goToPayment()">Upgrade Now</button>
 </div>
 </div>
+
+
+
+
+
+
 
 
     <!----REGISTRATION---->
