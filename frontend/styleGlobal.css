@@ -736,11 +736,11 @@ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5) !important;
 }
 
 .dark-mode .trusted-badge{
-  background: var(--background-cl-1);
+  
   border: 1px solid var(--thin-border);
   box-shadow: 0 2px 6px rgba(0,0,0,0.5);
   padding: 11px 20px !important;
-  color: rgba(7, 134, 113, 0.685);
+
 }
 
 
