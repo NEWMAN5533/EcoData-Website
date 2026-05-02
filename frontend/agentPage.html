@@ -71,7 +71,7 @@
   <style>
     .select-btn .doneSelect{
       display: flex;
-      margin-left: .3rem;
+      margin-right: 1rem;
       width: 1.2rem;
       height: 1rem;
     }
@@ -451,9 +451,13 @@ width: 50%;
           </div>
          
 
-          <div class="storeBuild">
-             <p>Create Store</p>
-          </div>
+         
+
+          <div class="quicker-nav " onclick="window.location.href='ebooks.html'">
+            <img src="./css/icons/ebook.png" alt="" loading="lazy">
+            <p>ebooks</p>
+          </div> 
+
            <div title="Coming Up soon!" class="quicker-nav" onclick="window.location.href='./ecdoataStore/welcomingPage.html'">
               <img src="./css/uiIcons/store.png" alt="" loading="lazy">
               <p>Get Store</p>
@@ -508,7 +512,7 @@ width: 50%;
       <input type="text" placeholder=" EcoData">
     </div>
   </div>
-<div class="welcome-bottom">
+  <div class="welcome-bottom">
     <div class="close-time">
     <span><small class="dotter"></small> Active 24/7</span>
     </div>
@@ -678,7 +682,7 @@ width: 50%;
 </section>
 
 
-  
+
 <!----ADS--->
 <div class="gallery">
   <div class="install-title">
@@ -2454,17 +2458,25 @@ width: 50%;
        </a>
       </div>
 
+      
+       <div class="link">
+       <a href="#">
+        <img src="./css/icons/ebook.png" alt="image" loading="lazy">
+        <span>Ebooks Shop</span>
+       </a>
+      </div>
+
       <div class="link">
        <a href="./afa.html">
         <img src="./css/icons/personal.png" alt="image" loading="lazy">
-        <span>MTN AFA</span>
+        <span>AFA</span>
        </a>
       </div>
 
         <div class="link">
        <a href="./pay.html">
         <img src="./css/icons/agent.png" alt="image" loading="lazy">
-        <span>Register as Agent</span>
+        <span>Get discount</span>
        </a>
       </div>
 
@@ -2485,9 +2497,11 @@ width: 50%;
       </a>
       </div>
 
-       <a href="login.html">  <button  id="logout-btn" class="logout-btn">Sign-Up</button></a>
+       <div class="button-wrapper">
+          <button onclick="window.location.href = 'signUp.html'" class="logout-btn">Sign-Up</button></a>
 
-       <button id="logOutBtn" class="log-out">Logout</button>   
+       <button id="logOutBtn" class="log-out ">Logout</button>   
+      </div> 
     </div>
 
 
@@ -2883,96 +2897,6 @@ if(lapOutBtn) {
 </script>
 
 
-
-  
-<!---ads js-->
-<script>
-  const images = ["./css/images/1.jpeg", "./css/images/2.jpeg", "./css/images/3.jpeg"];
-
-  let currentIndex = 0;
-  let scale = 1;
-  let starX = 0;
-
-
-  // Open an image fullView
-  function openViewer (index){
-    currentIndex = index;
-    const viewer =
-    document.getElementById("viewer");
-    const fullImg = document.getElementById("fullImg");
-
-    fullImg.src = images[currentIndex];
-    viewer.style.display = "flex";
-    scale = 1;
-    fullImg.style.transform = `scale(${scale})`;
-  }
-
-  function closeViewer() {
-    document.getElementById("viewer").style.display = "none";
-  }
-
-  // ================
-  //= SWIPE (MOBILE)
-  //=================
-  const viewer = document.getElementById("viewer");
-
-  viewer.addEventListener("touchstart", (e) => {
-    startX = e.touches[0].clientX;
-  });
-
-  viewer.addEventListener("touchend", (e) => {
-   let endX = e.changedTouches[0].clientX;
-
-   if(endX -startX > 50 ) {
-    prevImage();
-   } else if ( startX - endX > 50 ) {
-    nextImage();
-   }
-  });
-
-  function nextImage() {
-    currentIndex = (currentIndex - 1) % images.length;
-
-    document.getElementById("fullImg").src = images[currentIndex];
-  }
-
-  function prevImage() {
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
-    
-    document.getElementById("fullImg").src = images[currentIndex];
-  }
-
-  // ============
-  // ZOOM
-  //=============
-  const fullImg = document.getElementById("fullImg");
-
-  // Mouse scroll zoom (Desktop)
-  fullImg.addEventListener("wheel", (e) => {
-    e.preventDefault();
-
-    scale += e.deltaY * -0.001;
-    scale = Math.min(Math.max(1, scale), 3);
-    fullImg.style.transform = `scale(${scale})`;
-  });
-
-  // Double tap Zoom (mobile)
-  let lastTap = 0;
-
-  fullImg.addEventListener("touchend", function() {
-    let currentTime = new Date().getTime();
-    let tapLength = currentTime = lastTap;
-
-    if(tapLength < 300 && tapLength > 0) {
-      scale = scale === 1 ? 2: 1;
-      fullImg.style.transform = `scale(${scale})`;
-    }
-    lastTap = currentTime;
-  })
-</script>
-
-
-
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     
@@ -2986,7 +2910,7 @@ if (localStorage.getItem(NOTIFY_KEY) === "true") {
 }
 
 // click to mark as read 
-notificationIcon.addEventListener("click", () => {
+notifyCount.addEventListener("click", () => {
   notifyCount.style.display = "none";
   localStorage.setItem(NOTIFY_KEY, "true");
 });
@@ -3106,7 +3030,91 @@ const cardCloser = document.getElementById("closeCard");
 </script>
 
 
+<!---ads js-->
+<script>
+  const images = ["./css/images/1.jpeg", "./css/images/2.jpeg", "./css/images/3.jpeg"];
 
+  let currentIndex = 0;
+  let scale = 1;
+  let starX = 0;
+
+
+  // Open an image fullView
+  function openViewer (index){
+    currentIndex = index;
+    const viewer =
+    document.getElementById("viewer");
+    const fullImg = document.getElementById("fullImg");
+
+    fullImg.src = images[currentIndex];
+    viewer.style.display = "flex";
+    scale = 1;
+    fullImg.style.transform = `scale(${scale})`;
+  }
+
+  function closeViewer() {
+    document.getElementById("viewer").style.display = "none";
+  }
+
+  // ================
+  //= SWIPE (MOBILE)
+  //=================
+  const viewer = document.getElementById("viewer");
+
+  viewer.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+  });
+
+  viewer.addEventListener("touchend", (e) => {
+   let endX = e.changedTouches[0].clientX;
+
+   if(endX -startX > 50 ) {
+    prevImage();
+   } else if ( startX - endX > 50 ) {
+    nextImage();
+   }
+  });
+
+  function nextImage() {
+    currentIndex = (currentIndex - 1) % images.length;
+
+    document.getElementById("fullImg").src = images[currentIndex];
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    
+    document.getElementById("fullImg").src = images[currentIndex];
+  }
+
+  // ============
+  // ZOOM
+  //=============
+  const fullImg = document.getElementById("fullImg");
+
+  // Mouse scroll zoom (Desktop)
+  fullImg.addEventListener("wheel", (e) => {
+    e.preventDefault();
+
+    scale += e.deltaY * -0.001;
+    scale = Math.min(Math.max(1, scale), 3);
+    fullImg.style.transform = `scale(${scale})`;
+  });
+
+  // Double tap Zoom (mobile)
+  let lastTap = 0;
+
+  fullImg.addEventListener("touchend", function() {
+    let currentTime = new Date().getTime();
+    let tapLength = currentTime = lastTap;
+
+    if(tapLength < 300 && tapLength > 0) {
+      scale = scale === 1 ? 2: 1;
+      fullImg.style.transform = `scale(${scale})`;
+    }
+    lastTap = currentTime;
+  })
+</script>
 
 
 
