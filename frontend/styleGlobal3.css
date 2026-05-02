@@ -290,7 +290,7 @@ NEW CLOCK STYLE
     height: 50%;
     gap: .2rem;
     justify-content: end;
-    padding-right: 1.7rem;
+    padding-right: 1.6rem;
     position: relative;
   }
 
@@ -459,3 +459,20 @@ justify-content: center;
   width: 1.6rem;
   height: 1.6rem;
 }
+
+/***
+Menu card
+****/
+
+
+      .menu-card-container .button-wrapper{
+        display: flex;
+        gap: .3rem;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: max-content;
+        margin-bottom: .4rem;
+        padding-right: .3rem;
+      }
+  
