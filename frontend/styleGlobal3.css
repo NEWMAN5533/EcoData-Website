@@ -471,8 +471,13 @@ Menu card
         align-items: center;
         justify-content: space-between;
         width: 100%;
-        height: max-content;
+        height: 2.6rem;
         margin-bottom: .4rem;
-        padding-right: .3rem;
+        padding-right: .5rem;
+        border-top: 1px solid var(--text-cl-2);
       }
   
+ .dark-mode .menu-card-container .button-wrapper
+ {
+  border-top: 1px solid var(--thin-border);
+ }
