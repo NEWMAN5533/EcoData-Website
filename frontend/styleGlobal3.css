@@ -502,7 +502,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
     .bottom-navbar{
       width: 100%;
       max-width: 99.99%;
-      height: 4rem;
+      height: 4.3rem;
       justify-self: center;
       position: fixed;
       bottom: 0;
@@ -519,13 +519,13 @@ BOTTOM NAVIGATION BAR STYLE CSS
       border-start-end-radius: 1.7rem;
       border: 1px solid var(--primary-cl);
       overflow-x: hidden;
-      box-shadow: 0 20px 40px rgba(26, 25, 25, 0.99);
+      box-shadow: 0 10px 40px rgba(26, 25, 25, 0.99);
     }
 
     .dark-mode .bottom-navbar{
       background: var(--darkMode-bg-cl);
-      border: 1px solid var(--background-cl-1);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+      border: 1px solid var(--thin-border) !important;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.99);
     }
 
 
