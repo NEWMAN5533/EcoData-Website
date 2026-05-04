@@ -3076,7 +3076,7 @@ NEW GRID & NORMAL UI UPDATE (20th/1/2026
   margin-top: .8rem;
   margin-bottom: 2rem;
   flex-direction: column;
-  box-shadow: 0 2px 6px rgba(19, 19, 19, 0.8);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.7);
   border: 1px solid var(--primary-cl);
 }
 
@@ -3216,14 +3216,17 @@ NEW GRID & NORMAL UI UPDATE (20th/1/2026
   border-radius: .4rem;
   padding: .4rem 1rem;
   overflow: hidden;
-  opacity: .7;
-  border: none !important;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+  opacity: .55;
+  box-shadow: 0 !important;
 }
 
 .normalGrid-container .normalTitle {
-  border: 1px solid var(--thin-border);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+  border: 1px solid var(--text-cl-2);
+}
+
+.dark-mode .normalGrid-container .normalTitle {
+  border: 1px solid rgba(255, 255, 255, 0.247);
+
 }
 
 .normalTitle p{
