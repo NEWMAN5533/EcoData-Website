@@ -419,7 +419,7 @@ const normalTitleSection = document.getElementById("mtnBanner");
 normalModeBtn.addEventListener("click", (e) => {
   e.stopPropagation();
 
-  bundleTitle.style.display = "flex";
+  bundleTitle.textContent = "MTN Bundles";
   telecelAirtel.style.display = "none";
 
   // remove background to the div when active
@@ -437,7 +437,7 @@ normalModeBtn.addEventListener("click", (e) => {
 
 gridModeBtn.addEventListener("click", (e) => {
   e.stopPropagation();
- bundleTitle.style.display = "none";
+ bundleTitle.textContent = "MTN";
  telecelAirtel.style.display = "flex";
 
  //  change backgroundImage
