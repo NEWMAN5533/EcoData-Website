@@ -679,38 +679,49 @@ width: 50%;
 <!----ENDS-->
 
 
-
-<!---NEW UI UPDATE (20th-01-2026)--=[grid & normal ui-->
+<!---NEW UI UPDATE (5th-05-2026)--=[grid & normal ui-->
 <section class="normalGrid-container">
 
   <!---title-->
-  <div class="normalTitle">
-    <h2>Select MTN Offer</h2>
-    <small>Choose from available MTN data offers.</small>
-    <p ><span>Note:</span>Each offer carries it data prices.</p>
+  <div class="normalTitle" id="mtnBanner">
   </div>
+
+  <div class="titlen">
+     <h2>Select MTN Offer</h2>
+    <small>Choose from available MTN data offers.</small>
+  </div>
+
+
+
+
   <!---offer-select-options-->
    <div class="custom-select">
   <button class="select-btn" id="selectBtn">
     Select Available MTN Offer
+  
     <span><img src="./css/icons/more.png.png" alt="dropdown" loading="lazy"></span>
   </button>
 
   <div class="select-dropdown" id="dropdownOffer">
     <div class="optionDelevery" data-mode="normal">
-      <span >MTN DATA NORMAL DELIVERY   </span>
+      <span >MTN DATA NORMAL DELIVERY 
+      
+      </span>
       <small>NON-EXPIRY</small>
     </div>
   
     <div class="optionDelevery" data-mode="express">
-      <span>MTN DATA EXPRESS DELIVERY </span>
+      <span>MTN DATA EXPRESS DELIVERY 
+      
+      </span>
       <small>NON-EXPIRY</small>
     </div>
+    
   </div>
   <div id="offerDisplay"></div>
 </div>
 
-<!----choose grid 0r normal btn-->
+<!----choose grid 0r normal btns-->
 <div class="normalOrgridBtn-wrapping">
   <div class="normalOrgridBtn">
   <div class="mode-btn-wrapper">
@@ -718,10 +729,20 @@ width: 50%;
   <button class="mode-Btn" id="gridModeBtn"><img src="./css/icons/grid.png" alt="" loading="lazy"> Grid</button>
   </div>
   </div>
-  <div class="packages">
+
+  <div class="pack-wrapper">
+    <div class="packages active">
     <small></small>
-  <p id="bundleTitle">MTN Bundle</p>
+  <p id="bundleTitle">MTN Bundles</p>
   </div>
+
+   <div class=" packagesta">
+    <small></small>
+  <p  id="teleAirtel">Telecel & AirtelTigo</p>
+  </div>
+  </div>
+ 
+
 </div>
 </section>
 
