@@ -1,4 +1,4 @@
-// UPDATED AT 1st/MAY, 2026 [BACKUP MAIN.JS]
+// UPDATED AT 5th/MAY, 2026 [BACKUP MAIN.JS]
 
 
 // --- Firebase Imports ---
@@ -173,7 +173,13 @@ deliveryOptions.forEach(option => {
 
     const mode = option.dataset.mode;
 
+  if(option.dataset.mode === "express"){
+       // un-change background imag
+    normalTitleSection.style.backgroundImage = "url(./css/images/mtn.jpg)"
+  }
 
+  
+  
     // RESET BUNDLE WHEN MODE CHANGED
     resetSelectedBundle("Offer changed please select bundle.");
     // save to localStorage
@@ -400,13 +406,27 @@ const normalView = document.getElementById("normalView");
 const gridView = document.getElementById("gridView");
 // target bundleTitle section
 const bundleTitle = document.getElementById("bundleTitle");
+const telecelAirtel = document.getElementById("teleAirtel");
 
+//package divs
+const mtnPackageDiv = document.querySelector(".packages");
+const telecelPackageDiv = document.querySelector(".packagesta");
+
+// change background image of(normalTitle);
+const normalTitleSection = document.getElementById("mtnBanner");
 
 
 normalModeBtn.addEventListener("click", (e) => {
   e.stopPropagation();
 
-  bundleTitle.textContent = "MTN Bundles"
+  bundleTitle.style.display = "flex";
+  telecelAirtel.style.display = "none";
+
+  // remove background to the div when active
+ telecelPackageDiv.style.background = "linear-gradient(135deg, red, blue";
+
+ // un-change background imag
+ normalTitleSection.style.backgroundImage = "url(./css/images/mtn.jpg)"
     // RESET BUNDLE WHEN MODE CHANGED
   resetSelectedBundle();
 
@@ -417,7 +437,14 @@ normalModeBtn.addEventListener("click", (e) => {
 
 gridModeBtn.addEventListener("click", (e) => {
   e.stopPropagation();
-  bundleTitle.textContent = "Telecel & AT Bundles"
+ bundleTitle.style.display = "none";
+ telecelAirtel.style.display = "flex";
+
+ //  change backgroundImage
+ normalTitleSection.style.backgroundImage = "url(./css/images/tigo.jpg)"
+ // pass background to the div when active
+ telecelPackageDiv.style.background = "linear-gradient(135deg, red, blue";
+
     // RESET BUNDLE WHEN MODE CHANGED
   resetSelectedBundle();
   gridView.style.display = "block";
