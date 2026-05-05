@@ -1409,7 +1409,6 @@ align-items: start;
 justify-content: start;
 width: 100%;
 max-width: 92%;
-margin-left: .5rem;
 height: 10rem;
 gap: .7rem;
 display: flex;
@@ -1436,7 +1435,6 @@ border: 1px solid rgb(223, 223, 223);
 .dark-mode .normalOrgridBtn-wrapping{
   background: var(--darkMode-bg-cl);
   border: 1px solid var(--thin-border);
-  box-shadow:  0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .normalOrgridBtn-wrapping .normalOrgridBtn{
