@@ -423,7 +423,10 @@ normalModeBtn.addEventListener("click", (e) => {
   telecelAirtel.style.display = "none";
 
   // remove background to the div when active
- telecelPackageDiv.style.background = "linear-gradient(135deg, red, blue";
+ telecelPackageDiv.style.background = "white";
+
+ 
+ mtnPackageDiv.style.background = " background: linear-gradient(134deg, rgb(241, 218, 8),rgb(180, 106, 8));"
 
  // un-change background imag
  normalTitleSection.style.backgroundImage = "url(./css/images/mtn.jpg)"
@@ -443,7 +446,9 @@ gridModeBtn.addEventListener("click", (e) => {
  //  change backgroundImage
  normalTitleSection.style.backgroundImage = "url(./css/images/tigo.jpg)"
  // pass background to the div when active
- telecelPackageDiv.style.background = "linear-gradient(135deg, red, blue";
+ telecelPackageDiv.style.background = "linear-gradient(135deg, red, blue)";
+
+ mtnPackageDiv.style.background = "white";
 
     // RESET BUNDLE WHEN MODE CHANGED
   resetSelectedBundle();
