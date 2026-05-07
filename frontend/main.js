@@ -41,7 +41,7 @@ let lastPurchasedBundle = null; // used after payment (normal + grid)
 let selectedPackageName = "mtn_data_express_delivery";
 
 const PACKAGE_MAP = {
-  normal: "mtn_data_normal_delivery",
+  normal: "mtn_data_express_delivery",
   express: "mtn_data_express_delivery"
 };
 
