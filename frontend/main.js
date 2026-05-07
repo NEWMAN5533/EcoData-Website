@@ -38,7 +38,7 @@ let selectedBundle = null;      // used for UI selection (normal view)
 let lastPurchasedBundle = null; // used after payment (normal + grid)
 
 // default selectedPackage
-let selectedPackageName = "mtn_data_normal_delivery";
+let selectedPackageName = "mtn_data_express_delivery";
 
 const PACKAGE_MAP = {
   normal: "mtn_data_normal_delivery",
