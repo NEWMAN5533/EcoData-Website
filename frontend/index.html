@@ -513,9 +513,77 @@ width: 50%;
 
 </head>
 
-
 <!--promo-->
 <style>
+:root {
+  --bg-cl: #FFF;
+  --primary-cl: #fff;
+  --secondary-cl: rgb(50, 50, 190);
+  --dark-cl: #0a0a0a;
+  --ascent-cl: rgb(158, 97, 209);
+  --background-cl: #e6e8ce;
+  --card-full-bg-cl: rgb(255, 217, 0);
+  --card-full-tele-bg-cl: rgb(221, 19, 19);
+  --card-full-airtel-bg-cl:  rgb(6, 6, 231);
+  --border-cl-2: rgba(66, 66, 26, 0.226);
+  --mtn-btn: rgb(193, 196, 19);
+  --telecel-btn: rgb(180, 57, 19);
+  --airteltigo-btn: rgb(28, 46, 119);
+
+  /*====NEW===ROOT====*/
+  /*====NEW===ROOT====*/
+  --darkMode-bg-cl: rgb(24, 29, 36) !important;
+  --background-cl-1: rgb(29, 36, 41);
+  --background-cl-2: rgb(29, 36, 41);
+  --background-cl-2: rgb(29, 36, 41);
+
+
+  /***
+  NEW ROOT
+  ***/
+  --btn-bg-cl: rgb(250, 126, 9);
+  --user-panel-bg: rgba(42, 42, 194, 0.938);
+  --clock-bg-cl: rgba(252, 175, 11, 0.199);
+  --clock-bg-cl-1: rgb(2, 61, 52);
+
+  /***
+  DARK MODE COLORS
+  ***/
+  --darkMode-bg-cl: rgb(24, 29, 36) !important;
+  --welcome-card-bg-2:  #141c27 !important;
+  --welcome-card-bg:  #0e141b !important;
+  --welcome-card-bg-3: rgba(77, 77, 77, 0.89);
+  --welcome-card-border: rgb(74, 88, 94);
+  --thin-border: rgb(35, 48, 49);
+  --text-cl: rgb(145, 168, 164);
+  --text-cl-2: rgb(210, 216, 216);
+  --text-cl-3: rgb(139, 141, 141);
+
+  /**
+  BORDER SOLID COLORS
+  **/
+  --thin-border-1:  #0d6d5a;
+  --thin-border-2:  #830616;
+  --thin-border-3:  #b97207;
+  --thin-border-4:  #036aa7;
+  --thin-border-5:  #bba907;
+  --thin-border-6:   rgb(17, 2, 31);
+  --thin-border-7:  rgb(1, 11, 39);
+
+  /***
+  CARD BG
+  ***/
+  --card-mtn-bg:  #faba5ad0;
+  --card-tel-bg:  #fa537dd0;
+  --card-tigo-bg:  #6cbff7cb;
+}
+
+
+
+
+
+
+
 .promo-bar{
   position: relative;
   top: 120px;
@@ -531,6 +599,7 @@ width: 50%;
   box-shadow:  0  2px 6px rgba(0,0,0,0.4);
   z-index: 10;
   transition: top .6s ease;
+  border: 2px solid rgba(163, 163, 163, 0.788);
 }
 
 .dark-mode .promo-bar{
@@ -546,22 +615,25 @@ width: 50%;
 
 .timer{
   font-size: 1.6rem;
+  width: 8rem !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: 600;
   letter-spacing: 2px;
   color: rgb(14, 64, 73);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-background: linear-gradient (135deg, white, rgba(0,132,255,0.699) );
-border: 1px solid rgba(213,213,221, 0.699);
-border-radius: 0.2rem;
-box-shadow: 0 2px 6px rgba (0,0,0,0.3);
+  background: linear-gradient(135deg, white, rgba(0, 132, 255, 0.699));
+  border: 1px solid rgba(213, 213, 221, 0.699);
+  border-radius: .2rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
 
 
 .dark-mode .timer{
   color:  rgb(8, 59, 68);
   border: 1px solid var(--thin-border);
-box-shadow: linear-gradient(135deg, rgba(255,255,255, 0.932), rgba(0,132,255,0.699));
-  
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.932), rgba(0, 132, 255, 0.699));
 }
 
 .label{
@@ -569,9 +641,7 @@ box-shadow: linear-gradient(135deg, rgba(255,255,255, 0.932), rgba(0,132,255,0.6
   color: #b30715cc;
   display: flex;
   align-items: center;
-  margin-left: 0.3rem !important;
-
-
+  margin-left: .3rem !important;
   font-weight: 600;
   padding-top: .2rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -667,7 +737,6 @@ box-shadow: linear-gradient(135deg, rgba(255,255,255, 0.932), rgba(0,132,255,0.6
   margin-top: 120px;
 }
 </style>
-
 <!----promo- ends--->
 <script>
 
@@ -730,7 +799,8 @@ box-shadow: linear-gradient(135deg, rgba(255,255,255, 0.932), rgba(0,132,255,0.6
       promoActiveDiv.style.display = "block";
       promoEndedDiv.style.display = "none";
       untargetExpressDiv.style.display = "none";
-
+
+
     }
 
 
