@@ -1,4 +1,83 @@
 
+
+    :root {
+    --ink: #0f0e0c;
+    --paper: #f5f0e8;
+    --cream: #ede8dc;
+    --rust: #c4522a;
+    --sage: #7a8c6e;
+    --gold: #c9a84c;
+    --dust: #b8b0a0;
+    --white: #faf8f4;
+    --shadow: rgba(15,14,12,0.12);
+  }
+
+  
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  
+  /* Custom cursor */
+  #cursor {
+    position: fixed;
+    width: 10px; 
+    height: 10px;
+    background: var(--rust);
+    border-radius: 50%;
+    pointer-events: none;
+    cursor: pointer;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease, background 0.3s ease;
+    mix-blend-mode: multiply;
+    z-index: 9999999999999999999999999999999999999999999;
+  }
+
+  .dark-mode #cursor{
+    background: var(--dust) !important;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 36px; 
+    height: 36px;
+
+    border: 1.5px solid var(--rust);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+    opacity: 0.5;
+    z-index: 99999999999999999999999999999999999999999999;
+  }
+
+  .dark-mode .cursor-ring {
+    border: 1.5px solid var(--gold);
+  }
+
+  .cursor-ring.hovered { 
+    width: 56px; 
+    height: 56px; 
+    opacity: 0.2; 
+  }
+
+  .cursor.hovered { 
+    width: 16px; 
+    height: 16px; 
+    background: var(--dust);
+   }
+
+
+
+
+
+
+
+
+
+
+
 .gridCard,
 .gridCardAirteltigo,
 .gridCardTele{
