@@ -513,7 +513,10 @@ width: 50%;
 
 </head>
 
+
 <!--promo-->
+
+
 <style>
 :root {
   --bg-cl: #FFF;
@@ -578,7 +581,6 @@ width: 50%;
   --card-tigo-bg:  #6cbff7cb;
 }
 
-
 .optionSelect:hover .promoTag{
   color: rgb(43, 42, 42);
 }
@@ -600,12 +602,11 @@ width: 50%;
 
 
 
-
 .promo-bar{
   position: relative;
-  top: 0;
+  top: 0px;
   left: 0;
-  margin: 1rem;
+  margin: .7rem;
   width: 100%;
   max-width: 98%;
   background: var(primary-cl);
@@ -754,7 +755,11 @@ width: 50%;
   margin-top: 120px;
 }
 </style>
+
 <!----promo- ends--->
+
+
+<!-----PROMO-SCRIPT------>
 <script>
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -802,7 +807,6 @@ width: 50%;
       timerEl.innerHTML = "00:00:00";
       labelEl.innerHTML = `Promo timer. <img src="./css/icons/timer.png" >`;
 
-
       ctaBtn.innerHTML = "Promo Ended!"
       promoActiveDiv.style.display = "none";
       promoWasInactive = true;
@@ -812,12 +816,11 @@ width: 50%;
       promoActiveDiv.style.display = "block";
     }
 
+    // IsPromoTime() function
     if(isPromoTime()){
       promoActiveDiv.style.display = "block";
       promoEndedDiv.style.display = "none";
       untargetExpressDiv.style.display = "none";
-
-
     }
 
 
@@ -857,9 +860,7 @@ width: 50%;
       timerEl.classList.remove("warning");
     }
 
-    if( remaining <= 0) {
-      ctaBtn.innerHTML = "Promo Closed";
-    }
+ 
 
   }
 
@@ -868,16 +869,25 @@ width: 50%;
 
   });
 </script>
+<!---PROMO-SCRIPT-ENDS----->
+
+
+
 
 
 
 
 <body>
 
+    
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
 
 
   <div class="container">
+
+
 
     <!----NAVIGATION-BAR-SECTION------->
  <nav class="navbar">
@@ -1092,15 +1102,13 @@ width: 50%;
 </section>
 
 <!---ENDS-->
-
-
-  <!---SCROLL THUMBNAIL--REUSABLE--CARD ADS-->
+<!---SCROLL THUMBNAIL--REUSABLE--CARD ADS-->
 <div class="google-thumbnails-wrapper">
   <div class="google-thumbnails" id="thumbnailScroll">
 
     <div class="google-thumbnail thumb2" >
       <img class="analy" src="./css/uiIcons/approval.png" alt="" loading="lazy">
-     NORMAL DELIVERY IS BACK IN ACTION,<span style="color: rgb(235, 193, 7); margin: .4rem;">YOU CAN CHOOSE FROM ANY DELIVERY OFFER NOW </span> EITHER EXPRESS<span style="color: rgb(47, 151, 15); margin: .4rem;">OR</span > NORMAL DELIVERY.
+      ALL ORDERS ARE AUTOMATICALLY GOING THROUGH <span style="color: rgb(235, 193, 7); margin: .4rem;">EXPRESS DELIVERY</span>  FROM NOW  <span style="color: rgb(47, 151, 15); margin: .4rem;">UNTIL</span> FURTHER NOTICE.
       <span style="color: rgb(7, 235, 140); margin: .4rem;"> DELIVERY is ONGOING SMOOTHLY, PLACE YOUR ORDER</span>
     </div>
 
@@ -1481,8 +1489,6 @@ width: 50%;
     <div class="option-dropdown" id="moveDown">
 
 
-
-   
 <!----PROMO-DIV-START----->
 <div id="promoActive">
               <!---select-1-->
@@ -1652,9 +1658,11 @@ width: 50%;
     <!---select-ends-->
 </div>
 <!---PROMO-DIV-ENDS-->
+ 
 
 
 
+<!-----NORMAL-DELIVERY-PRICE-DIV------>
      <div id="topOpt">
       <!---select-1-->
     <div class="optionSelect" 
@@ -1788,9 +1796,10 @@ width: 50%;
     </div>
     <!---select-ends-->
       </div>
+<!---NORMAL--DELIVERY-PRICE-DIV-ENDS--->
 
 
-      <!----EXPRESS-PRICES------>
+      <!----EXPRESS-DELIVERY-PRICE-DIV----->
       <div id="bottomOpt" style="display: none;">
               <!---select-1-->
     <div class="optionSelect" 
@@ -1924,8 +1933,9 @@ width: 50%;
     </div>
     <!---select-ends-->
       </div>
-  </div>
+      <!----EXPRESS-DELIVERY-PRICE-DIV------>
 
+  </div>
   </div>
 
   <!---selected-bundle-modal-here--->
@@ -3534,6 +3544,7 @@ width: 50%;
 <script type="module" src="./firebase-config.js"></script>
 
 <script type="module" src="main.js"></script>
+<script src="global.js"></script>
 
 
 
@@ -3846,6 +3857,8 @@ setInterval(updateClock, 1000);
 updateClock();
 
 </script>
+
+
 
 <script>
   function goToPayment() {
