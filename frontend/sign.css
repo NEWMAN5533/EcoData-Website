@@ -212,6 +212,10 @@ MEDIA QUERIES
       grid-template-columns: repeat(1, 1fr);
       }
 
+.already{
+  padding-right: .4rem;
+}
+
 
       
    .signUp-container .grid-container .sidebar{
@@ -239,10 +243,26 @@ height: max-content !important;
       grid-template-columns: repeat(1, 1fr);
       }
 
+      .already{
+  padding-right: .4rem;
+}
+
+
+
+      .signUp-container .grid-container .main-main .container{
+        box-shadow: none !important;
+        padding: 0 !important;
+        max-width: 98% !important;
+      }
+
+      .signUp-container .grid-container .main-main{
+  padding: 0 !important;
+}
+
 
       
-   .signUp-container .grid-container .sidebar{
-     display: none !important;
+  .signUp-container .grid-container .sidebar{
+    display: none !important;
 }
 
 
@@ -251,10 +271,11 @@ height: max-content !important;
 }
 
 .signUp-container .grid-container .main-main .container{
-width: 94% !important;
+width: 100% !important;
 padding-bottom: 1rem !important;
 border-radius: .5rem !important;
 height: max-content !important;
+border: none !important;
 }
 }
 
@@ -265,6 +286,9 @@ height: max-content !important;
       grid-template-columns: repeat(1, 1fr);
       }
 
+.already{
+  padding-right: .4rem;
+}
 
       
    .signUp-container .grid-container .sidebar{
@@ -300,9 +324,6 @@ height: max-content !important;
 }
 
 
-.signUp-container .grid-container .main-main{
-  padding: 1rem 0 !important;
-}
 
 .signUp-container .grid-container .main-main .container{
 width: 82% !important;
