@@ -35,149 +35,14 @@
 
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      background: var(--background-cl-1);
-      width: 100%;
+      width: 100vw;
       margin: 0;
       padding: 0;
       height: 100vh;
+      overflow-x: hidden;
     }
 
 
-        /**
-* NAVIGATION BAR
-**/
-.navbar {
-  display: flex;
-  width: 100%;
-  max-width: 768px;
-  justify-self: center;
-  height: 3.8rem;
-  position: fixed;
-  top: 0;
-  overflow: hidden;
-  align-items: center;
-  justify-content: space-between;
-  background: var(--background-cl-1);
-  box-shadow: 0 2px 6px rgba(34, 65, 75, 0.1);
-  padding: .5rem 1rem;
-  z-index: 1000;
-  border-bottom: 1px solid var(--border-cl);
-}
-
-/**
-* NAV LEFT
-**/
-.navbar .nav-left{
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  margin-left: -.6rem !important;
-}
-
-.nav-left img{
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;;
-  user-select: none;
-}
-
-.nav-right h3{
-  color: var(--primary-cl);
-  font-weight: 700;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: 1.1rem;
-}
-
-
-
-
-
-/**
-* NAV-RIGHT
-**/
-
-
-.login {
-  display: flex;
-  align-items: center;
-  width: max-content;
-  justify-content: space-between;
-}
-
-.login a{
-  text-align: center;
-  text-decoration: none;
-  list-style: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 .8rem;
-  color: var(--card-full-bg-cl);
-}
-
-
-.login img {
-  width: 1.4rem;
-  height: 1.4rem;
-  margin: 0 .5rem;
-  background: var(--background-cl);
-  border-radius: 50%;
-  cursor: pointer;
-
-}
-
-.menu-icon{
-  background: rgba(219, 214, 214, 0.37);
-  border-radius: 4px;
-  padding: .3px;
-  margin-right: 1rem;
-}
-
-
-
-
-/**8
-TOP BG
-****/
-.top-bg{
-  width: 100%;
-  max-width: 768px;
-  justify-self: center;
-  height: 17rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: url(./css/images/bg.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  padding: .2rem 1rem;
-  margin-top: 3.8rem;
-  position: relative;
-}
-
-.top-bg .hero-logo{
-  width: 100%;
-  max-width: 80%;
-  height: max-content;
-  padding: 1rem;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  gap: 1rem;
-  border-radius: 1rem;
-  overflow: hidden;
-}
-
-.top-bg .hero-logo img{
-  width: 11.6rem;
-  height: 9.7rem;
-  backdrop-filter: blur(12px);
-  border-radius: 1rem;
-  border: 1px solid rgb(83, 112, 129);
-}
 
 
 
@@ -190,25 +55,40 @@ TOP BG
 
 
 
-    .container {
-      background: var(--primary-cl);
-      padding: 1rem;
-      padding-bottom: 4rem;
-      border-start-start-radius: 2rem;
-      border-start-end-radius: 2rem;
-      box-shadow: 0 2px 6px rgba(33, 42, 58, 0.6);
+
+
+
+
+
+
+
+
+
+
+
+
+
+    .main-main .container {
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.9);
       width: 100%;
-      max-width: 768px;
+      overflow-y: auto;
       display: flex;
       position: relative;
-      margin-top: -2rem;
-      gap: -1rem;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      width: 80%;
       justify-self: center;
-      height: 40rem;
+      padding: 1rem;
+      margin-bottom: .3rem;
+      height: max-content;
+      border-radius: 1rem;
+      border: 1px solid rgba(116, 150, 158, 0.63);
+      overflow-y: auto;
     }
+
+
+
 
       form{
       display: flex;
@@ -222,7 +102,7 @@ TOP BG
     }
     h2 {
       text-align: center;
-      color: #0a8a7f;
+      color: #edf7f6;
       white-space: nowrap;
       font-size: 1.2rem;
     }
@@ -235,12 +115,13 @@ TOP BG
   height: 6rem;
   display: flex;
   flex-direction: column;
-  gap: 0;
-  background: var(--border-cl);
+  background: var(--bg-cl-2);
+  backdrop-filter: blur(10px);
   position: relative;
   margin-top: 1rem;
-  border-radius: .2rem;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(116, 150, 158, 0.63);
+  border-radius: .4rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
 }
 
 .formFillCard .formFillCard-top{
@@ -272,7 +153,7 @@ TOP BG
 
 .formFillCard-top label{
   font-size: .9rem;
-  color: rgb(129, 133, 133) !important;
+  color: rgb(197, 197, 197) !important;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
  
@@ -286,9 +167,10 @@ TOP BG
   color: rgb(53, 50, 50);
   font-weight: 500;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background: rgb(235, 236, 238);
+  background: rgba(255, 255, 255, 0);
+  backdrop-filter: blur(13px);
   border-radius: .3rem;
-  border: 1px solid rgb(121, 125, 126);
+  border: 1px solid rgba(116, 150, 158, 0.63);
   padding: 0 .4rem;
 }
 
@@ -296,10 +178,10 @@ input{
   padding-left: .4rem;
   background: none;
   outline: none;
-  color: rgb(39, 39, 39) !important;
+  color: rgb(245, 243, 243) !important;
 }
 ::placeholder{
-  color: rgb(95, 95, 95);
+  color: rgb(172, 170, 170);
   font-weight: 300;
   font-size: .9rem;
 }
@@ -310,12 +192,10 @@ ALREADY
 .already{
   width: 100%;
   height: 2rem;
-  margin-top: -.5rem;
   padding-right: .4rem;
   display: flex;
   align-items: center;
   justify-content: end;
-  background: white;
 }
 
 .already p{
@@ -331,8 +211,8 @@ margin-left: .4rem;
 width: 4rem;
 padding: .3rem;
 border-radius: .2rem;
-background: rgb(44, 102, 102);
-color: white;
+background: rgb(44, 102, 89);
+color: rgb(238, 237, 237);
 cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   -webkit-user-select: none;
@@ -353,14 +233,14 @@ cursor: pointer;
       padding: 8px 49px;
       height: 2.9rem;
       text-align: center;
-      background: var(--bg-cl);
+      background: rgb(236, 234, 234);
       border: none;
       border-radius: 6px;
-      color: white;
-      font-size: 16px;
+      color: rgb(22, 20, 20);
+      font-size: 22px;
       margin-top: 25px;
       cursor: pointer;
-      box-shadow: 0 10px 20px rgba(61, 61, 61, 0.5);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
       transition: .2s ease;
       -webkit-tap-highlight-color: transparent;
       -webkit-user-select: none;
@@ -371,7 +251,7 @@ cursor: pointer;
 
 
     .signUpBtn:hover {
-      background: rgb(11, 42, 82);
+      background: rgb(224, 226, 228);
     }
 
 
