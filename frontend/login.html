@@ -6,6 +6,7 @@
   <title>Login | EcoData</title>
   <link rel="stylesheet" href="globalStyle.css">
   <link rel="stylesheet" href="signLogin.css">
+  <link rel="stylesheet" href="sign.css">
 
 
 
@@ -53,29 +54,54 @@
 
   </style>
 </head>
+
+
+
+<script src="global.js"></script>
 <body>
 
-  <!-----NAVIGATION- BAR-->
-  
-<nav class="navbar">
-<div class="nav-left">
-<img onclick="window.location.href = 'index.html'" src="./css/uiIcons/back.png" alt="" loading="lazy">
-</div>
-<div class="nav-right">
- <h3>Login</h3>
-</div>
 
-</nav>
+   <div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
+<!----LAPTOP & PHONE UI-UPDATE (9TH-MAY)---->
 
-<section class="top-bg">
-  <div class="hero-logo">
-    <img src="./css/icons/icon.bg.png" alt="" loading="lazy">
+<div class="signUp-container">
+  <!----navbar--->
+  <div class="navigation">
+    <div class="navigation-left">
+      <img src="./css/icons/icon-shortcut.png" alt="" loading="lazy">
+    </div>
+    <div class="navigaition-right"></div>
   </div>
-</section>
+    <div class="grid-container">
 
 
-  <div class="container">
+
+      <!--SIDEBAR-->
+      <div class="sidebar">
+       <div class="signup-card">
+        <div class="logoImg">
+          <img src="./css/icons/icon-shortcut.png" alt="" loading="lazy">
+          <h1>EcoData</h1>
+        </div>
+        
+        <div class="sign-note">
+          Yeah! already have account: 
+          <p class="notes">
+         Login to your account for faster checkOut. 
+          </p>
+        </div>
+       </div>
+      </div>
+
+
+<!----main-man-->
+      <div class="main-main">
+
+
+
+        <div class="container">
     <h2>Welcome Back! <br> Please Login to Your Account</h2>
 
 
@@ -101,12 +127,12 @@
 
   <div class="formFillCard">
   <div class="formFillCard-top">
-    <label>Your Password</label>
+    <label>Password</label>
   </div>
   <div class="formFillCard-bottom">
     <div class="formInputCreate">
       <img class="curNone" src="./css/uiIcons/lock.png" alt="" loading="lazy">
-      <input  type="password" id="password" placeholder="Password"  />
+      <input  type="password" id="password" placeholder="Choose Password"  />
       <img id="togglePassword" class="curYes" src="./css/uiIcons/eye.png" alt="toggle password">
     </div>
      
@@ -130,23 +156,20 @@
 
    
   </div>
+      </div>
+</div>
 
-   <section class="foot">
-   <div class="foot-content">
-    <div class="cop-right">
- © 2026 EcoShop. All rights reserved.
-     
-    </div>
-   <small class="bor
-   ">|</small>
-      <small class="powered">
-        
-      <strong>Powered by:</strong>   IA E-Business 
-    </small>
+
+
+
+
   
-   </div>
 
-  </section>
+  
+  <!-----NAVIGATION- BAR-->
+
+
+
 
 
 
