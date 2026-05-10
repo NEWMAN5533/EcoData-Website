@@ -3121,8 +3121,8 @@ NEW GRID & NORMAL UI UPDATE (20th/1/2026
   font-size: .9rem;
   font-weight: 600;
   display: none;
-  
 }
+
 
 .packagesta small{
   animation: sha .2s infinite;
@@ -3523,6 +3523,17 @@ how to style select dropdown
   user-select: none;
 }
 
+.dark-mode .normalOrgridBtn .mode-Btn{
+background: transparent;
+color: rgb(177, 172, 172);
+
+}
+
+.dark-mode .normalOrgridBtn .mode-Btn.active{
+background: linear-gradient(135deg, rgb(236, 127, 25), rgb(253, 168, 10));
+color: white;
+}
+
 .mode-Btn img{
   width: 1rem;
   height: 1rem;
@@ -3534,7 +3545,7 @@ how to style select dropdown
 
 
 .dark-mode .gridBtn {
-  background: rgb(214, 211, 211);
+  background: rgb(214, 211, 211) ;
 }
 
 /***
