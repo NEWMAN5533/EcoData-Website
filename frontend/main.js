@@ -77,11 +77,14 @@ const unTargetDiv = document.getElementById("bottomOpt");
 const gridTargetSection = document.querySelector(".topMtn");
 const networkBadge = document.getElementById("mtnArea");
 
+// Override promo when express active
 
 
 
 
-function applyPackageUI(mode) {
+
+
+  function applyPackageUI(mode) {
   selectedPackageName = PACKAGE_MAP[mode];
 
   if(mode === "express"){
@@ -89,8 +92,10 @@ function applyPackageUI(mode) {
     gridTargetSection.style.display = "none";
     networkBadge.style.display = "none";
 
+
     unTargetDiv.style.display = "block";
   } else{
+   
     unTargetDiv.style.display = "none";
 
     targetDiv.style.display = "block";
@@ -446,7 +451,7 @@ gridModeBtn.addEventListener("click", (e) => {
  //  change backgroundImage
  normalTitleSection.style.backgroundImage = "url(./css/images/tigo.jpg)"
  // pass background to the div when active
- telecelPackageDiv.style.background = "linear-gradient(135deg, red, blue)";
+
 
  mtnPackageDiv.style.background = "white";
 
