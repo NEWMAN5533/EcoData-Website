@@ -1150,7 +1150,9 @@ DISPLAY NONE DIV
 .floating-scroll,
 .side-title,
 .agent-upgrade,
-.agent-upgrade-wrapper
+.agent-upgrade-wrapper,
+.cursor,
+.cursor-ring
 {
   display: none !important;
 }
@@ -1333,7 +1335,9 @@ DISPLAY NONE DIV
 .floating-scroll,
 .side-title,
 .agent-upgrade,
-.agent-upgrade-wrapper
+.agent-upgrade-wrapper,
+.cursor,
+.cursor-ring
 {
   display: none !important;
 }
@@ -1458,7 +1462,9 @@ DISPLAY NONE DIV
 .floating-scroll,
 .side-title,
 .agent-upgrade,
-.agent-upgrade-wrapper
+.agent-upgrade-wrapper,
+.cursor,
+.cursor-ring
 {
   display: none !important;
 }
@@ -1577,7 +1583,9 @@ DISPLAY NONE DIV
 .floating-scroll,
 .side-title,
 .agent-upgrade,
-.agent-upgrade-wrapper
+.agent-upgrade-wrapper,
+.cursor,
+.cursor-ring
 {
   display: none !important;
 }
@@ -1676,7 +1684,9 @@ DISPLAY NONE DIV
 .floating-scroll,
 .side-title,
 .agent-upgrade,
-.agent-upgrade-wrapper
+.agent-upgrade-wrapper,
+.cursor,
+.cursor-ring
 {
   display: none !important;
 }
@@ -1782,7 +1792,9 @@ DISPLAY NONE DIV
 .floating-scroll,
 .side-title,
 .agent-upgrade,
-.agent-upgrade-wrapper
+.agent-upgrade-wrapper,
+.cursor,
+.cursor-ring
 {
   display: none !important;
 }
@@ -1885,7 +1897,9 @@ DISPLAY NONE DIV
 .floating-scroll,
 .side-title,
 .agent-upgrade,
-.agent-upgrade-wrapper
+.agent-upgrade-wrapper,
+.cursor,
+.cursor-ring
 {
   display: none !important;
 }
