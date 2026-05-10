@@ -3113,13 +3113,11 @@ NEW GRID & NORMAL UI UPDATE (20th/1/2026
   justify-content: space-between;
   margin-top: .6rem;
   border-radius: .3rem;
-  color: rgb(78, 74, 74);
   opacity: .7;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 .packagesta p {
-  color: rgb(241, 240, 240);
+  color: rgba(206, 60, 60, 0.808);
   font-size: .9rem;
   font-weight: 600;
   display: none;
@@ -3163,7 +3161,7 @@ NEW GRID & NORMAL UI UPDATE (20th/1/2026
 
 .dark-mode .packagesta{
   color: rgb(233, 231, 231);
-  background: var(--thin-border);
+  background: none !important;
 }
 
 
@@ -3181,7 +3179,6 @@ NEW GRID & NORMAL UI UPDATE (20th/1/2026
   border-radius: .3rem;
   color: rgb(78, 74, 74);
   opacity: .7;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 .normalGrid-container .packages.active {
@@ -3193,7 +3190,7 @@ NEW GRID & NORMAL UI UPDATE (20th/1/2026
 
 .dark-mode .packages{
   color: rgb(233, 231, 231);
-  background: var(--thin-border);
+  background: none !important;
 }
 
 
