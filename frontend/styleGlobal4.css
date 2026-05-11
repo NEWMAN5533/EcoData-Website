@@ -454,7 +454,7 @@ CREATE STORE LINK
     display: flex;
     flex-direction: column;
     position: absolute;
-    left: 0px;
+    left: -500px;
     top: 0;
     overflow-y: hidden;
     overflow-x: hidden;
