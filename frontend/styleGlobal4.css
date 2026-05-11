@@ -851,8 +851,13 @@ HOW TO ENDS
   justify-content: start;
   position: relative;
   background: linear-gradient(135deg, rgba(0, 0, 0, 0.808), rgba(0, 0, 0, 0.705));
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+
   margin-bottom: 5rem;
+}
+
+.dark-mode .afa-container .registration-form{
+  background: var(--darkMode-bg-cl) !important;
+  box-shadow: none !important;
 }
 
 .registration-form .reg-top{
@@ -974,6 +979,10 @@ HOW TO ENDS
   gap: .5rem;
   position: relative;
   padding: 1rem 0;
+}
+
+.dark-mode #afa-Form{
+  box-shadow: 0 !important;
 }
 
 form p{
