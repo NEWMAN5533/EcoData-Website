@@ -932,6 +932,7 @@ HOW TO ENDS
   gap: 1rem;
   margin: 0;
   padding: 1rem;
+  box-shadow: none !important;
 }
 
 .reg-bottom .reg-form-container{
@@ -1075,41 +1076,42 @@ form p{
 
 
 .regions-sheet{
-  width: 87%;
+  width: 94%;
   height: 19rem;
   justify-content: center;
   gap: 1rem;
   justify-self: center;
   display: flex;
-  background: rgb(48, 52, 53);
+  background: rgb(4, 49, 59);
   z-index: 99;
-  margin-top: .4rem;
+  margin-top: -21.7rem !important;
   position: absolute;
-  border-radius: 12px;
+  border-radius: 2px;
   overflow: auto;
-  border: 2px solid rgb(146, 160, 159);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgb(50, 54, 54);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
 }
 
 .regions-sheet .regionSelect{
   width: 100%;
   height: 2.02rem;
   margin-top: .3rem;
-  border: 1px solid rgb(109, 104, 104);
+  border: 1px solid rgba(82, 95, 95, 0.685);
   display: flex;
   align-items: center;
   justify-content: start;
   padding-left: .2rem;
-  font-size: .7rem;
+  font-size: .76rem;
+  font-weight: 700;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   padding: 0 .2rem;
   transition: .2s ease;
-  color: white;
+  color: rgb(219, 218, 216);
   cursor: pointer;
 }
 
 .regionSelect:hover{
-  background: rgb(83, 89, 90);
+  background: rgb(48, 85, 92);
   border: none;
   border-radius: 4px;
   color: white;
