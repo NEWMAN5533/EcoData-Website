@@ -108,8 +108,8 @@ GRID-CONTAINER SIDEBAR
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 2.8rem;
-  height: 2.8rem;
+  width: 2.2rem;
+  height: 2.2rem;
   background: linear-gradient( 135deg, rgb(77, 189, 209), rgb(35, 35, 105));
   border-radius: 40%;
   text-align: center;
@@ -449,7 +449,7 @@ CREATE STORE LINK
 
   .ecodata-sidebar{
     width: 100%;
-    max-width: 240px;
+    max-width: 260px;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -478,7 +478,6 @@ CREATE STORE LINK
   ********/
   .ecodata-sidebar .ecodata-sidebar-top{
   width: 100%;
-  max-width: 240px;
   height: 15%;
   display: flex;
   position: relative;
@@ -498,7 +497,6 @@ CREATE STORE LINK
   *******/
    .ecodata-sidebar .ecodata-sidebar-middle{
     width: 100%;
-    max-width: 240px;
     height: 60%;
     overflow-y: auto;
     align-items: center;
