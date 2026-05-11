@@ -247,7 +247,10 @@ padding: .2rem 0;
   box-shadow: 0 2px 6px rgba(0,0,0,0.75);
 }
 
-.ecodata-sidebar .ecodata-sidebar-middle .link-section-wrapper .quicker-nav.active p{
+ .ecodata-sidebar .ecodata-sidebar-middle .link-section-wrapper .quicker-nav.active p{
+  color: rgb(33, 128, 128);
+}
+.dark-mode .ecodata-sidebar .ecodata-sidebar-middle .link-section-wrapper .quicker-nav.active p{
   color: white;
 }
 
