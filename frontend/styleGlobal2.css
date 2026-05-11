@@ -62,6 +62,43 @@
   --card-tigo-bg:  #6cbff7cb;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /****
 MAIN CONTAINER
 ****/
@@ -138,6 +175,8 @@ aside section
 .dark-mode .main-grid-container .grid-container-aside {
   border-right:  1px solid var(--thin-border) ;
 }
+
+
 /*****
 GRID-CONTAINER SIDEBAR
 *****/
@@ -2005,6 +2044,11 @@ TABLET VIEW
 *****/
 
 @media (min-width: 768px) {
+      .trusted-by .trusted-container .trusted-logos{
+      margin: 7rem !important;
+      justify-content: center !important;
+      gap: .4rem !important;
+    }
  /****
 DISPLAY NONE DIV
 *****/
@@ -2188,6 +2232,11 @@ REDUCE WIDTH OF L RIGHT SIDEBAR'S
 LAPTOP START
 ****/
   @media (min-width: 1280px) {
+        .trusted-by .trusted-container .trusted-logos{
+      margin: 1rem !important;
+      justify-content: center !important;
+      gap: 1.1rem !important;
+    }
     /*****
     DISPLAY NONE DIVS
     ****/
@@ -2549,6 +2598,11 @@ WHAT'APP CHAT BUTTON
 
 
   @media (min-width: 1366px) {
+    .trusted-by .trusted-container .trusted-logos{
+      margin: 1rem !important;
+      justify-content: center !important;
+      gap: 1.1rem !important;
+    }
     /*****
     DISPLAY NONE DIVS
     ****/
