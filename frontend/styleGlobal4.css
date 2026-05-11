@@ -1,0 +1,521 @@
+
+:root {
+  --border-cl: rgba(230, 227, 227, 0.849);
+  --bg-cl: #FFF;
+  --primary-cl: #fff;
+  --secondary-cl: rgb(50, 50, 190);
+  --dark-cl: #0a0a0a;
+  --ascent-cl: rgb(158, 97, 209);
+  --background-cl: #e6e8ce;
+  --card-full-bg-cl: rgb(255, 217, 0);
+  --card-full-tele-bg-cl: rgb(221, 19, 19);
+  --card-full-airtel-bg-cl:  rgb(6, 6, 231);
+  --border-cl-2: rgba(66, 66, 26, 0.226);
+  --mtn-btn: rgb(193, 196, 19);
+  --telecel-btn: rgb(180, 57, 19);
+  --airteltigo-btn: rgb(28, 46, 119);
+
+  /*====NEW===ROOT====*/
+  /*====NEW===ROOT====*/
+  --darkMode-bg-cl: rgb(24, 29, 36) !important;
+  --background-cl-1: rgb(29, 36, 41);
+  --background-cl-2: rgb(29, 36, 41);
+  --background-cl-2: rgb(29, 36, 41);
+
+
+  /***
+  NEW ROOT
+  ***/
+  --btn-bg-cl: rgb(250, 126, 9);
+  --user-panel-bg: rgba(42, 42, 194, 0.938);
+  --clock-bg-cl: rgba(252, 175, 11, 0.199);
+  --clock-bg-cl-1: rgb(2, 61, 52);
+
+  /***
+  DARK MODE COLORS
+  ***/
+  --darkMode-bg-cl: rgb(24, 29, 36) !important;
+  --welcome-card-bg-2:  #141c27 !important;
+  --welcome-card-bg:  #0e141b !important;
+  --welcome-card-bg-3: rgba(77, 77, 77, 0.89);
+  --welcome-card-border: rgb(74, 88, 94);
+  --thin-border: rgb(35, 48, 49);
+  --text-cl: rgb(145, 168, 164);
+  --text-cl-2: rgb(210, 216, 216);
+  --text-cl-3: rgb(139, 141, 141);
+
+  /**
+  BORDER SOLID COLORS
+  **/
+  --thin-border-1:  #0d6d5a;
+  --thin-border-2:  #830616;
+  --thin-border-3:  #b97207;
+  --thin-border-4:  #036aa7;
+  --thin-border-5:  #bba907;
+  --thin-border-6:   rgb(17, 2, 31);
+  --thin-border-7:  rgb(1, 11, 39);
+
+  /***
+  CARD BG
+  ***/
+  --card-mtn-bg:  #faba5ad0;
+  --card-tel-bg:  #fa537dd0;
+  --card-tigo-bg:  #6cbff7cb;
+}
+
+
+
+
+
+
+
+
+  
+
+/****
+aside section
+****/
+
+
+
+/*****
+GRID-CONTAINER SIDEBAR
+*****/
+.ecodata-sidebar .ecodata-sidebar-top .userProfile-container{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+
+.ecodata-sidebar .ecodata-sidebar-top .userProfile-container .user{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: start;
+  position: relative;
+}
+
+.ecodata-sidebar .ecodata-sidebar-top .userProfile-container .user .us{
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 2.8rem;
+  height: 2.8rem;
+  background: linear-gradient( 135deg, rgb(77, 189, 209), rgb(35, 35, 105));
+  border-radius: 40%;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+  .us h1{
+  margin: 0;
+  padding: 0;
+  font-size: 1.3rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 600;
+  color: white;
+}
+
+.user h3{
+  color: rgb(87, 87, 94);
+}
+
+.dark-mode .ecodata-sidebar .ecodata-sidebar-top .userProfile-container .user h3{
+  color: var(--primary-cl);
+  opacity: .9;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.ecodata-sidebar .ecodata-sidebar-middle .quick-links-section{
+  width: 100%;
+  height: 51vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+
+
+.ecodata-sidebar .ecodata-sidebar-middle .quick-links-section .link-section-wrapper{
+  width: 100%;
+  height: 100%; 
+  display: flex;
+  margin: 0 !important;
+  padding-left: 0 !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  position: relative;
+}
+
+ .ecodata-sidebar-middle .quick-links-section .link-section-wrapper h4{
+  margin: 0;
+  line-height: .9;
+}
+
+.dark-mode  .ecodata-sidebar-middle .quick-links-section{
+  border-bottom: none !important;
+}
+
+
+.ecodata-sidebar-middle .link-section-wrapper .quicker-nav{
+width: 100%;
+height: 2.1rem;;
+display: flex;
+gap: .8rem !important;
+align-items: center;
+justify-content: start;
+position: relative;
+margin-top: .5rem;
+transition: .1s ease;
+padding: .2rem 0;
+}
+
+
+
+.ecodata-sidebar-middle .link-section-wrapper .quicker-nav img{
+  width: 1.6rem;
+  height: 1.6rem;
+  background: var(--background-cl);
+  border-radius: 8px;
+  padding: .2rem;
+  box-shadow: 0 2px 6px rgba(252, 175, 11, 0.199);
+}
+
+.dark-mode .ecodata-sidebar-middle .link-section-wrapper .quicker-nav img{
+  background: white;
+  opacity: .8;
+}
+
+
+.ecodata-sidebar-middle .link-section-wrapper .quicker-nav p{
+  font-size: .9rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 600;
+  color: var(--thin-border);
+  opacity: .7;
+
+}
+
+.dark-mode .link-section-wrapper .quicker-nav p{
+  color: rgba(248, 207, 152, 0.911);
+  opacity: .8;
+}
+
+
+
+.link-section-wrapper .quicker-nav.active {
+  background: white;
+  padding-left: .8rem;
+  border-radius: .4rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+
+.dark-mode .link-section-wrapper .quicker-nav.active {
+  background: none;
+  padding-left: .8rem;
+  border-radius: .4rem;
+  border: 1px solid var(--thin-border);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.75);
+}
+
+.ecodata-sidebar .ecodata-sidebar-middle .link-section-wrapper .quicker-nav.active p{
+  color: white;
+}
+
+
+
+.link-section-wrapper .quicker-nav:hover{
+background: rgb(247, 246, 246);
+padding-left: .8rem;
+border-radius: .4rem;
+box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+cursor: pointer;
+}
+
+.dark-mode .link-section-wrapper .quicker-nav:hover{
+  background: none;
+  border: 1px solid var(--thin-border);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.dark-mode .link-section-wrapper .quicker-nav:hover p{
+  color: white;
+}
+
+
+
+.link-section-wrapper .quicker-nav:hover img{
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+
+/****
+CREATE STORE LINK
+*****/
+.quick-links-section .storeBuild{
+  width: 100%;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  position: relative;
+  background: var(--background-cl);
+  border-radius: .4rem;
+  border: 1px solid var(--text-cl-2);
+}
+
+
+
+.dark-mode .storeBuild {
+  background: var(--thin-border);
+  border-radius: .4rem;
+  border: 1px solid var(--background-cl);
+  opacity: .7;
+}
+
+.storeBuild p{
+  color: rgb(94, 92, 90);
+  font-weight: 600;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.dark-mode .storeBuild p{
+  color: var(--primary-cl);
+
+}
+
+
+
+
+
+
+
+
+
+
+.ecodata-sidebar .ecodata-sidebar-bottom .bottom-nav{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  align-items: start;
+  justify-content: start;
+  position: relative;
+ 
+}
+
+
+
+.ecodata-sidebar .ecodata-sidebar-bottom .bottom-nav .sign-link{
+  width: 100%;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  background: transparent;
+  margin-top: .5rem;
+  padding-left: .8rem;
+}
+
+.ecodata-sidebar .ecodata-sidebar-bottom  .sign-link .login{
+  border: none;
+  background-color: var(--background-cl);
+  color: white;
+  font-weight: 500;
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  width: 80%;
+  height: 2rem;
+  font-size: .8rem;
+  padding: .3rem;
+  border-radius: 3px;
+  transition: .1s ease;
+}
+
+.sign-link .login img{
+    width: 1.1rem;
+    height: 1.3rem;
+    margin-right: .5rem;;
+    border-radius: 0;
+  }
+
+
+
+.dark-mode .login{
+  color: rgb(48, 48, 54);
+}
+
+.login:hover{
+  cursor: pointer;
+  background: linear-gradient(135deg, rgb(8, 128, 102), rgb(0, 77, 128));
+  color: rgb(231, 250, 248);
+  font-size: .8rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.sign-link:nth-child(3) .login{
+  background: rgb(255, 115, 0);
+  color: rgb(196, 83, 18) !important;
+  opacity: .8;
+}
+
+.sign-link:first-child .login 
+{
+  background: linear-gradient(135deg, rgb(8, 128, 102), rgb(0, 77, 128));
+  color: rgb(181, 238, 181);
+}
+
+.sign-link:nth-child(2) .login{
+  background: linear-gradient(135deg, rgb(8, 128, 102), rgb(0, 77, 128));
+  color: rgb(255, 255, 255);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  .ecodata-sidebar{
+    width: 100%;
+    max-width: 240px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: -500px;
+    top: 0;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    background: rgb(247, 247, 247);
+    z-index: 9999999999999999999999999999999999999999999999999999999999999999999;
+    transition: .4s ease;
+  }
+
+  .ecodata-sidebar.active{
+    left: 0;
+  }
+
+  .dark-mode .ecodata-sidebar{
+    background: var(--darkMode-bg-cl);
+  }
+
+
+
+  /*******
+  TOP OF THE SIDEBAR 
+  ********/
+  .ecodata-sidebar .ecodata-sidebar-top{
+  width: 100%;
+  max-width: 240px;
+  height: 15%;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: start;
+  border-bottom: 1px solid var(--border-cl);
+  padding-left: 1rem;
+  }
+
+  .dark-mode .ecodata-sidebar .ecodata-sidebar-top{
+    border-bottom: 1px solid rgba(66, 66, 66, 0.267);
+  }
+
+
+  /*****8
+  MIDDLE OF THE SIDEBAR
+  *******/
+   .ecodata-sidebar .ecodata-sidebar-middle{
+    width: 100%;
+    max-width: 240px;
+    height: 60%;
+    overflow-y: auto;
+    align-items: center;
+    justify-content: start;
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+    padding-left: 1rem;
+    position: relative;
+    border-bottom: 1px solid var(--border-cl);
+   }
+
+
+   .dark-mode .ecodata-sidebar .ecodata-sidebar-middle{
+    border-bottom: 1px solid rgba(66, 66, 66, 0.267);
+   }
+
+
+   /******
+   BOTTOM OF THE SIDEBAR
+   ******/
+   .ecodata-sidebar .ecodata-sidebar-bottom{
+   width: 100%;
+   max-width:  240px;
+   align-items: center;
+   justify-content: start;
+   padding-left: 1rem;
+   display: flex;
+   flex-direction: column;
+   gap: .4rem;
+   position: relative;
+   height: 25%;
+
+   }
+
+
