@@ -2013,7 +2013,8 @@ DISPLAY NONE DIV
 .user h3,
 .storeBuild,
 .menu-icon,
-.floating-scroll
+.floating-scroll,
+.ecodata-sidebar
 {
   display: none !important;
 }
@@ -2196,7 +2197,8 @@ LAPTOP START
     .foot,
     #normalView .businessInfo,
     .menu-icon,
-    .custom-select .doneSelect{
+    .custom-select .doneSelect,
+    .ecodata-sidebar{
       display: none !important;
     }
 
@@ -2556,7 +2558,8 @@ WHAT'APP CHAT BUTTON
     .foot,
     #normalView .businessInfo,
     .menu-icon,
-    .custom-select .doneSelect{
+    .custom-select .doneSelect,
+    .ecodata-sidebar{
       display: none !important;
     }
 
