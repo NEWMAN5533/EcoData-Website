@@ -32,6 +32,7 @@
   <link rel="stylesheet" href="styleGlobal.css">
   <link rel="stylesheet" href="styleGlobal2.css">
   <link rel="stylesheet" href="styleGlobal3.css">
+  <link rel="stylesheet" href="styleGlobal4.css">
   <link rel="stylesheet" href="pay.css">
   
 
@@ -77,6 +78,94 @@
 <script src="global.js"></script>
 </head>
 <body>
+
+
+
+  <!--sidebar----->
+<div class="ecodata-sidebar" id="ecoDataSidebar">
+  <div class="ecodata-sidebar-top">
+      <div class="userProfile-container">
+          <div class="user" id="userPro">
+            <span class="us"><h1>U</h1>
+            </span>
+            <h3>User Panel</h3>
+          </div>
+      </div>
+  </div>
+
+  <div class="ecodata-sidebar-middle">
+      <!---middle-->
+        <div class="quick-links-section">
+          <div class="link-section-wrapper">
+          <!---network-nav-ends---->
+          
+           <div class="quicker-nav " onclick="window.location.href='./index.html'">
+            <img src="./css/icons/home.png" alt="" loading="lazy">
+            <p>Home</p>
+          </div> 
+          
+
+
+           <div class="quicker-nav active" onclick="window.location.href='./pay.html'">
+            <img src="./css/icons/like.png" alt="" loading="lazy">
+            <p>Get Discount</p>
+          </div> 
+
+          <div class="quicker-nav" onclick="window.location.href='./afa.html'">
+            <img src="./css/icons/personal.png" alt="" loading="lazy">
+            <p>AFA Registration</p>
+          </div>
+        
+          <!----terms & cons--->
+
+        
+            <div class="quicker-nav" onclick="window.location.href='./bundlesInfo.html'">
+              <img src="./css/icons/terms (1).png" alt="" loading="lazy">
+              <p>Info</p>
+          </div>
+         
+
+          
+
+          
+          <div title="Coming up soon!" class="quicker-nav " onclick="window.location.href='ebooks.html'">
+            <img src="./css/icons/ebook.png" alt="" loading="lazy">
+            <p>ebooks</p>
+          </div> 
+
+           <div title="Coming Up Soon!" class="quicker-nav" >
+              <img src="./css/uiIcons/store.png" alt="" loading="lazy">
+              <p>Get Store</p>
+          </div>
+
+          </div>
+        </div>
+  </div>
+  <div class="ecodata-sidebar-bottom">
+      <!--bottom-->
+        <div class="bottom-nav">
+          <div class="sign-link">
+            <button onclick="window.location.href = 'login.html'" class="login">
+              Login
+            </button>
+           
+          </div>
+        
+          <div class="sign-link">
+              <button class="login" onclick="window.location.href='terms.html'">
+          Terms & Condition
+        </button>
+          </div>
+
+            <div class="sign-link">
+              <button class="login " id="lapOut">
+             <img src="./css/icons/logout.png" alt="" loading="lazy"> Logout
+            </button>
+          </div>
+        </div>
+  </div>
+</div>
+
 
    <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
@@ -434,8 +523,15 @@
 </section>
 
 <div class="register-bnefits">
-    <p class="priceSub">GHS 50 <img src="./css/icons/eye (2).gif" alt=""></p>
-  <h2 style="padding-bottom: .3rem;">Unlock Exclusive Access </h2>
+ <div class="old-price">
+    <p class="priceSub">GHS 50 </p>
+ </div>
+ 
+ <div class="priceTagger">
+   <img src="./css/icons/eye (2).gif" alt="">
+ 
+  <h2>Unlock Exclusive Access </h2>
+ </div>
 <button id="payBtn" class="regis">Get Access</button>
 </div>
 </section>
@@ -502,7 +598,7 @@
 
 
 <!------MENU-CARD----->
-<div class="menu-card-container" id="closeCard">
+<div class="menu-card-container" id="closeCard" style="display: none">
        <div class="link">
        <a href="terms.html">
         <img src="./css/icons/list.jpg" alt="image" loading="lazy">
@@ -919,9 +1015,9 @@ notifyCount.addEventListener("click", () => {
 document.addEventListener("DOMContentLoaded", ()=> {
  const cardToggler = document.getElementById("cardToggler");
  const secondToggler = document.getElementById("menuDarkMode");
-const cardCloser = document.getElementById("closeCard");
+const cardCloser = document.getElementById("ecoDataSidebar");
 
-  // toggle menucard
+  // toggle menu card
   cardToggler.addEventListener("click", function(e) {
     e.stopPropagation();
     if(cardCloser.classList.contains("active")){
