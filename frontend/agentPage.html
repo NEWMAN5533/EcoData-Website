@@ -240,7 +240,7 @@ width: 50%;
           
            <div class="quicker-nav active" >
             <div class="naver" onclick="window.location.href='./index.html'">
-               <img src="./css/icons/home.png" alt="" loading="lazy">
+                <img src="./css/icons/like.png" alt="" loading="lazy">
             <p>Agent Page</p>
             </div>
             <div class="tag">
@@ -251,14 +251,6 @@ width: 50%;
 
       
          
-
-           <div class="quicker-nav">
-            <div class="naver"  onclick="window.location.href='./pay.html'">
-               <img src="./css/icons/like.png" alt="" loading="lazy">
-            <p>Get discounts</p>
-            </div>
-           
-          </div> 
 
           <div class="quicker-nav">
             <div class="naver"  onclick="window.location.href='./afa.html'">
@@ -2717,7 +2709,7 @@ width: 50%;
   <img src="./css/icons/agent.png" alt=""loading="lazy">
   <p>
     Unlock discounted prices for personal use or reselling.
-    Pay a one-time registration fee of <strong>GHS 100</strong>
+    Pay a one-time registration fee of <strong>GHS 50</strong>
     and start earning or saving more today.
   </p>
 
@@ -2846,8 +2838,8 @@ width: 50%;
 
 
 // LOGOUT
-const logoutBtn = document.getElementById("logOutBtn");
-const lapOutBtn = document.getElementById("lapOut")
+const lapOutBtn = document.getElementById("lapOut");
+
 
 if (logoutBtn) {
   logoutBtn.addEventListener("click", async () => {
@@ -2873,7 +2865,7 @@ if(lapOutBtn) {
     try {
       await signOut(auth);
       showSnackBar("Logged out successfully!");
-      hideSignupModal();
+
     } catch (error) {
       console.error("LogOut error:", error);
       showSnackBar("Error logging out.");
