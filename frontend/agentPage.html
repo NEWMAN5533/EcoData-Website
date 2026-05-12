@@ -27,7 +27,6 @@
 
 
 <!----GOOGLE-SITE-SEARCH-ENDS-->
-<!----GOOGLE-SITE-SEARCH-ENDS-->
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
 
@@ -206,7 +205,12 @@ width: 50%;
 
 
   
-  <!--sidebar----->
+
+
+ <div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!--sidebar----->
 <div class="ecodata-sidebar" id="ecoDataSidebar">
   <div class="ecodata-sidebar-top">
       <div class="userProfile-container">
@@ -224,46 +228,54 @@ width: 50%;
           <div class="link-section-wrapper">
           <!---network-nav-ends---->
           
-           <div class="quicker-nav ">
-            <div class="naver"  onclick="window.location.href='./index.html'">
+           <div class="quicker-nav " >
+            <div class="naver" onclick="window.location.href='./index.html'">
                <img src="./css/icons/home.png" alt="" loading="lazy">
             <p>Home</p>
             </div>
-           
             
           </div> 
 
-           <div class="quicker-nav active"  >
-            <div class="naver" onclick="window.location.href='./pay.html'">
-               <img src="./css/icons/like.png" alt="" loading="lazy">
-            <p>Premium Page</p>
+
+          
+           <div class="quicker-nav active" >
+            <div class="naver" onclick="window.location.href='./index.html'">
+               <img src="./css/icons/home.png" alt="" loading="lazy">
+            <p>Agent Page</p>
             </div>
-           
-             <div class="tag">
-              <img src="./css/icons/completed.png" alt="" loading="lazy">
+            <div class="tag">
+                <img src="./css/icons/completed.png" alt="" loading="lazy">
             </div>
           </div> 
           
+
+      
+         
+
+           <div class="quicker-nav">
+            <div class="naver"  onclick="window.location.href='./pay.html'">
+               <img src="./css/icons/like.png" alt="" loading="lazy">
+            <p>Get discounts</p>
+            </div>
            
           </div> 
 
-          <div class="quicker-nav" onclick="window.location.href='./afa.html'">
-            <div class="naver">
+          <div class="quicker-nav">
+            <div class="naver"  onclick="window.location.href='./afa.html'">
               <img src="./css/icons/personal.png" alt="" loading="lazy">
             <p>AFA Registration</p>
             </div>
-            
+           
           </div>
         
           <!----terms & cons--->
 
         
-            <div class="quicker-nav">
-              <div class="naver"  onclick="window.location.href='./bundlesInfo.html'">
-                 <img src="./css/icons/terms (1).png" alt="" loading="lazy">
+            <div class="quicker-nav" >
+              <div class="naver" onclick="window.location.href='./bundlesInfo.html'">
+                  <img src="./css/icons/terms (1).png" alt="" loading="lazy">
               <p>Info</p>
               </div>
-             
           </div>
          
 
@@ -271,28 +283,32 @@ width: 50%;
 
           
           <div title="Coming up soon!" class="quicker-nav " >
-            <div class="naver" onclick="window.location.href='#'">
-                <img src="./css/icons/ebook.png" alt="" loading="lazy">
+            <div class="naver" onclick="window.location.href='ebooks.html'">
+              <img src="./css/icons/ebook.png" alt="" loading="lazy">
             <p>ebooks</p>
             </div>
-           <div class="tag">
+
+            <div class="tag">
               <small>New</small>
             </div>
+            
           </div> 
+
+         
 
            <div title="Coming Up Soon!" class="quicker-nav" >
             <div class="naver">
-               <img src="./css/uiIcons/store.png" alt="" loading="lazy">
+              <img src="./css/uiIcons/store.png" alt="" loading="lazy">
               <p>Get Store</p>
             </div>
-              <div class="tag">
+             <div class="tag">
               <small>Coming up!</small>
             </div>
           </div>
 
           </div>
         </div>
-
+  </div>
   <div class="ecodata-sidebar-bottom">
       <!--bottom-->
         <div class="bottom-nav">
@@ -318,8 +334,7 @@ width: 50%;
   </div>
 </div>
 
- <div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+
 
   <div class="container">
     <!---navbar-here-->
