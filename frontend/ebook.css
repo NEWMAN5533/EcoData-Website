@@ -974,88 +974,659 @@ DISPLAY NONE DIVS
   display: none !important;
 }
 
-.main-grid-ecard-container2{
-  width: 100vw !important;
-  display: flex;
-  flex-direction: column;
-  justify-self: center;
-  margin: 0;
-  padding: 0;
-  height: 100vh !important;
-}
-
 /****
-DISPLAY FLEX DIVS
+MAIN GRID CONTAINER
 *****/
-.main-grid-e-container .main-main .short-notes{
-  display: flex !important;
-}
-
-.main-main .short-notes 
-{
+.container .main-grid-e-container{
+  width: 100%;
+  height: calc(100vh - 3.5rem) !important;
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
-}
-
-.short-notes .flexWrapper2{
-  background: rgb(64, 242, 248) !important;
-  justify-self: center;
-  margin-left: .4rem;
-  border-radius: .4rem;
-  margin-bottom: -.4rem;
-  border-bottom: 2px solid rgb(139, 136, 136);
-}
-
-.short-notes .flexWrapper2  .h2-title{
-  border-bottom: 4px solid white !important;
-}
-
-.short-notes .flexWrapper2 .h2-title h2 {
-  color: rgb(121, 93, 3) !important;
+  grid-template-columns: repeat(1, 1fr) !important;
+  
 }
 
 
 
-  .container .main-grid-e-container{
-    display: grid;
-    grid-template-columns: repeat(1, 1fr) !important;
-  }
-
-  .main-grid-e-container .main-grid-ecard-container{
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-  }
-
-  .main-grid-ecard-container .ebook-cover-card{
+    /* Hero */
+  .main-grid-ecard-container2 .hero {
+    height: 2rem !important;
+    display: flex !important;
+    gap: .1rem !important;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
-    max-width: 90%;
-    box-shadow: none !important;
-    border: none !important;
+    margin-bottom: 1rem;
+    padding: 10px 0 !important;
   }
 
 
 
-  .showing-ebooks .search {
+   .book-showcase {
+    width: 87% !important;
+    height: 86% !important;
+   }
+
+
+   @keyframes float {
+     0%, 100% { transform: translateY(0px) rotate(-2deg); 
+    }
+    50% { transform: translateY(-8px) rotate(-1deg) !important; 
+    }
+   }
+
+  .hero .hero-left{
+    padding: 0 20px !important;
+    width: 50% !important;
+    height: 100% !important;
+    max-height: 20rem !important;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+
+
+  .hero-title{
+    margin-bottom: 10px !important;
+  }
+
+   .hero-left .hero-cta{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+   }
+
+   .hero-desc{
+    font-size: .6rem !important;
+    line-height: 1.2;
+   }
+
+
+  .hero-left .hero-cta .btn-primary{
+    width: 77% !important;
+    justify-self: center;
+    align-items: center;
+    justify-content: center;
+    ;
+    font-size: .6rem !important;
+    white-space: nowrap;
+    display: flex !important;
+    height: 2.5rem !important;
+  }
+
+  .hero .hero-left .hero-title{
+    font-size: clamp(20px, 3vw, 19px);
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+  }
+  
+
+.hero .hero-right{
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 100%;
+  padding: 0 ;
+  z-index: 999;
+}
+
+/******
+BOOK CARD GRID
+******/
+
+.section-header{
+  margin-bottom: 20px !important;
+}
+.section-header  .section-tag{
+display: none;
+}
+
+.section-title{
+  font-size: clamp(22px , 2vw, 26px) !important;
+}
+
+.section-header .view-all{
+  font-size: .5rem;
+  color: rgb(124, 69, 69);
+  margin-right: .4rem;
+}
+
+/*****
+grid card 
+****/
+.books-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 20px !important;
+  margin-right: 0 !important;
+}
+
+
+  .book-card 
+  { 
+    cursor: none; 
+    margin-top: 1.4rem;
+    width: 10rem !important;
+  }
+
+   .book-card-bottom .card-genre
+
+  {
+    font-size: .87rem !important;
+  }
+
+  
+   .book-card-bottom .card-title
+
+  {
+    font-size: .8rem !important;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+   .book-card-bottom .card-price
+
+  {
+    font-size: .8rem !important;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: rgb(73, 73, 80);
+  }
+
+
+  .book-card-bottom .card-genre,
+  .card-title,
+  .card-footer,
+  .card-price
+  {
+    font-size: .67rem !important;
+  }
+
+
+  /*****
+  BOOK OF THE MONTH
+  ******/
+  .featured-section{
+    display: grid;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 60px !important;
+    padding: 50px !important;
+    overflow-x: auto !important;
+  }
+
+
+
+ .featured-title{
+  font-size: clamp(24px, 2vw, 28px) !important;
+ }
+
+ .featured-desc{
+  font-size: .8rem !important;
+ }
+
+  .featured-price{
+  font-size: 1.7rem !important;
+ }
+
+ /****
+ BTN SECTION AT FEATURED LEFT
+ ****/
+ .featured-meta{
+  white-space: nowrap !important;
+ }
+ .featured-actions{
+  gap: 14px !important;
+  gap: 16px !important;
+ }
+
+ .featured-actions .btn-gold{
+ width: max-content;
+ height: 2.5rem;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ position: relative;
+ white-space: nowrap;
+ }
+
+ .featured-actions .btn-outline{
+ width: max-content;
+ height: 2.5rem;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ position: relative;
+ white-space: nowrap;
+ }
+
+
+
+ /*****
+ SEARCH BY CATEGORY
+ *******/
+  .categories-section {
+    overflow-x: auto !important;
+    margin: 0 !important;
+    padding: 1rem .4rem !important;
+  }
+
+ 
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr) !important;
+    gap: 8px !important;
+
+  }
+
+
+
+ .category-card{
+  height: 9rem !important;
+  width: 7rem !important;
+  padding: 8px !important;
+ }
+
+
+
+   /******
+  BEST SELLERS
+  ******/
+.scroll-card{
+  width: 7rem !important;
+  height: 16rem !important;
+}
+
+.scroll-card-cover{
+  height: 16rem !important;
+}
+
+
+/*****
+MEMBERSHIP SECTION
+*****/
+ .newsletter-section {
+    background: var(--sage);
+    color: white;
+    text-align: center;
+    padding: 60px 18px !important;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+   .newsletter-section .newsletter-form {
+    display: flex;
+    width: 100%;
+    max-width:  100% !important;
+    padding: 0 !important;
+    margin: 0  !important;
+    position: relative;
+    justify-content: center !important;
+    align-items: center;
+    justify-self: center;
+  }
+
+  .newsletter-form .newsletter-submit{
+    font-size: .7rem !important;
+  }
+
+  .newsletter-form .newsletter-input{
     width: 100% !important;
-  }
-
-  .short-ebooks .search .ebookSearch {
-    width: 80% !important;
-    border-radius: none !important;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
 
 
-  .short-ebooks .search .enterBtn {
-    width: 20% !important;
+  /****
+  FOOTER SECTION
+  *****/
+    
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr !important;
+    gap: 30px !important;
+    margin-bottom: 60px;
   }
 
-  .showing-ebooks .search .enterBtn .enter{
-    font-size: .8rem;
-  }
+
 }
 
 @media (max-width: 360px) {
+  /*****
+DISPLAY NONE DIVS
+*****/
+.container .main-grid-e-container .main-sidebar,
+.flexWrapper
+
+{
+  display: none !important;
+}
+
+/****
+MAIN GRID CONTAINER
+*****/
+.container .main-grid-e-container{
+  width: 100%;
+  height: calc(100vh - 3.5rem) !important;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr) !important;
   
+}
+
+
+
+    /* Hero */
+  .main-grid-ecard-container2 .hero {
+    height: 2rem !important;
+    display: flex !important;
+    gap: .1rem !important;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 10px 0 !important;
+  }
+
+
+
+   .book-showcase {
+    width: 87% !important;
+    height: 86% !important;
+   }
+
+
+   @keyframes float {
+     0%, 100% { transform: translateY(0px) rotate(-2deg); 
+    }
+    50% { transform: translateY(-8px) rotate(-1deg) !important; 
+    }
+   }
+
+  .hero .hero-left{
+    padding: 0 20px !important;
+    width: 50% !important;
+    height: 100% !important;
+    max-height: 20rem !important;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+
+
+  .hero-title{
+    margin-bottom: 10px !important;
+  }
+
+   .hero-left .hero-cta{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+   }
+
+   .hero-desc{
+    font-size: .6rem !important;
+    line-height: 1.2;
+   }
+
+
+  .hero-left .hero-cta .btn-primary{
+    width: 77% !important;
+    justify-self: center;
+    align-items: center;
+    justify-content: center;
+    ;
+    font-size: .6rem !important;
+    white-space: nowrap;
+    display: flex !important;
+    height: 2.5rem !important;
+  }
+
+  .hero .hero-left .hero-title{
+    font-size: clamp(20px, 3vw, 19px);
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+  }
+  
+
+.hero .hero-right{
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 100%;
+  padding: 0 ;
+  z-index: 999;
+}
+
+/******
+BOOK CARD GRID
+******/
+
+.section-header{
+  margin-bottom: 20px !important;
+}
+.section-header  .section-tag{
+display: none;
+}
+
+.section-title{
+  font-size: clamp(22px , 2vw, 26px) !important;
+}
+
+.section-header .view-all{
+  font-size: .5rem;
+  color: rgb(124, 69, 69);
+  margin-right: .4rem;
+}
+
+/*****
+grid card 
+****/
+.books-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 20px !important;
+  margin-right: 0 !important;
+}
+
+
+  .book-card 
+  { 
+    cursor: none; 
+    margin-top: 1.4rem;
+    width: 10rem !important;
+  }
+
+   .book-card-bottom .card-genre
+
+  {
+    font-size: .87rem !important;
+  }
+
+  
+   .book-card-bottom .card-title
+
+  {
+    font-size: .8rem !important;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+   .book-card-bottom .card-price
+
+  {
+    font-size: .8rem !important;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: rgb(73, 73, 80);
+  }
+
+
+  .book-card-bottom .card-genre,
+  .card-title,
+  .card-footer,
+  .card-price
+  {
+    font-size: .67rem !important;
+  }
+
+
+  /*****
+  BOOK OF THE MONTH
+  ******/
+  .featured-section{
+    display: grid;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 60px !important;
+    padding: 50px !important;
+    overflow-x: auto !important;
+  }
+
+
+
+ .featured-title{
+  font-size: clamp(24px, 2vw, 28px) !important;
+ }
+
+ .featured-desc{
+  font-size: .8rem !important;
+ }
+
+  .featured-price{
+  font-size: 1.7rem !important;
+ }
+
+ /****
+ BTN SECTION AT FEATURED LEFT
+ ****/
+ .featured-meta{
+  white-space: nowrap !important;
+ }
+ .featured-actions{
+  gap: 14px !important;
+  gap: 16px !important;
+ }
+
+ .featured-actions .btn-gold{
+ width: max-content;
+ height: 2.5rem;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ position: relative;
+ white-space: nowrap;
+ }
+
+ .featured-actions .btn-outline{
+ width: max-content;
+ height: 2.5rem;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ position: relative;
+ white-space: nowrap;
+ }
+
+
+
+ /*****
+ SEARCH BY CATEGORY
+ *******/
+  .categories-section {
+    overflow-x: auto !important;
+    margin: 0 !important;
+    padding: 1rem .4rem !important;
+  }
+
+ 
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr) !important;
+    gap: 8px !important;
+
+  }
+
+
+
+ .category-card{
+  height: 9rem !important;
+  width: 7rem !important;
+  padding: 8px !important;
+ }
+
+
+
+   /******
+  BEST SELLERS
+  ******/
+.scroll-card{
+  width: 7rem !important;
+  height: 16rem !important;
+}
+
+.scroll-card-cover{
+  height: 16rem !important;
+}
+
+
+/*****
+MEMBERSHIP SECTION
+*****/
+ .newsletter-section {
+    background: var(--sage);
+    color: white;
+    text-align: center;
+    padding: 60px 18px !important;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+   .newsletter-section .newsletter-form {
+    display: flex;
+    width: 100%;
+    max-width:  100% !important;
+    padding: 0 !important;
+    margin: 0  !important;
+    position: relative;
+    justify-content: center !important;
+    align-items: center;
+    justify-self: center;
+  }
+
+  .newsletter-form .newsletter-submit{
+    font-size: .7rem !important;
+  }
+
+  .newsletter-form .newsletter-input{
+    width: 100% !important;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+
+  /****
+  FOOTER SECTION
+  *****/
+    
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr !important;
+    gap: 30px !important;
+    margin-bottom: 60px;
+  }
+
+
 }
 
 @media (max-width: 375px) {
@@ -1389,8 +1960,338 @@ MEMBERSHIP SECTION
   }
 
 }
+
+
 @media (max-width: 414px) {
+  /*****
+DISPLAY NONE DIVS
+*****/
+.container .main-grid-e-container .main-sidebar,
+.flexWrapper
+
+{
+  display: none !important;
+}
+
+/****
+MAIN GRID CONTAINER
+*****/
+.container .main-grid-e-container{
+  width: 100%;
+  height: calc(100vh - 3.5rem) !important;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr) !important;
   
+}
+
+
+
+    /* Hero */
+  .main-grid-ecard-container2 .hero {
+    height: 2rem !important;
+    display: flex !important;
+    gap: .1rem !important;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 10px 0 !important;
+  }
+
+
+
+   .book-showcase {
+    width: 87% !important;
+    height: 86% !important;
+   }
+
+
+   @keyframes float {
+     0%, 100% { transform: translateY(0px) rotate(-2deg); 
+    }
+    50% { transform: translateY(-8px) rotate(-1deg) !important; 
+    }
+   }
+
+  .hero .hero-left{
+    padding: 0 20px !important;
+    width: 50% !important;
+    height: 100% !important;
+    max-height: 20rem !important;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+
+
+  .hero-title{
+    margin-bottom: 10px !important;
+  }
+
+   .hero-left .hero-cta{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+   }
+
+   .hero-desc{
+    font-size: .6rem !important;
+    line-height: 1.2;
+   }
+
+
+  .hero-left .hero-cta .btn-primary{
+    width: 77% !important;
+    justify-self: center;
+    align-items: center;
+    justify-content: center;
+    ;
+    font-size: .6rem !important;
+    white-space: nowrap;
+    display: flex !important;
+    height: 2.5rem !important;
+  }
+
+  .hero .hero-left .hero-title{
+    font-size: clamp(20px, 3vw, 19px);
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+  }
+  
+
+.hero .hero-right{
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 100%;
+  padding: 0 ;
+  z-index: 999;
+}
+
+/******
+BOOK CARD GRID
+******/
+
+.section-header{
+  margin-bottom: 20px !important;
+}
+.section-header  .section-tag{
+display: none;
+}
+
+.section-title{
+  font-size: clamp(22px , 2vw, 26px) !important;
+}
+
+.section-header .view-all{
+  font-size: .5rem;
+  color: rgb(124, 69, 69);
+  margin-right: .4rem;
+}
+
+/*****
+grid card 
+****/
+.books-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 20px !important;
+  margin-right: 0 !important;
+}
+
+
+  .book-card 
+  { 
+    cursor: none; 
+    margin-top: 1.4rem;
+    width: 10rem !important;
+  }
+
+   .book-card-bottom .card-genre
+
+  {
+    font-size: .87rem !important;
+  }
+
+  
+   .book-card-bottom .card-title
+
+  {
+    font-size: .8rem !important;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+   .book-card-bottom .card-price
+
+  {
+    font-size: .8rem !important;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: rgb(73, 73, 80);
+  }
+
+
+  .book-card-bottom .card-genre,
+  .card-title,
+  .card-footer,
+  .card-price
+  {
+    font-size: .67rem !important;
+  }
+
+
+  /*****
+  BOOK OF THE MONTH
+  ******/
+  .featured-section{
+    display: grid;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 60px !important;
+    padding: 50px !important;
+    overflow-x: auto !important;
+  }
+
+
+
+ .featured-title{
+  font-size: clamp(24px, 2vw, 28px) !important;
+ }
+
+ .featured-desc{
+  font-size: .8rem !important;
+ }
+
+  .featured-price{
+  font-size: 1.7rem !important;
+ }
+
+ /****
+ BTN SECTION AT FEATURED LEFT
+ ****/
+ .featured-meta{
+  white-space: nowrap !important;
+ }
+ .featured-actions{
+  gap: 14px !important;
+  gap: 16px !important;
+ }
+
+ .featured-actions .btn-gold{
+ width: max-content;
+ height: 2.5rem;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ position: relative;
+ white-space: nowrap;
+ }
+
+ .featured-actions .btn-outline{
+ width: max-content;
+ height: 2.5rem;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ position: relative;
+ white-space: nowrap;
+ }
+
+
+
+ /*****
+ SEARCH BY CATEGORY
+ *******/
+  .categories-section {
+    overflow-x: auto !important;
+    margin: 0 !important;
+    padding: 1rem .4rem !important;
+  }
+
+ 
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr) !important;
+    gap: 8px !important;
+
+  }
+
+
+
+ .category-card{
+  height: 9rem !important;
+  width: 7rem !important;
+  padding: 8px !important;
+ }
+
+
+
+   /******
+  BEST SELLERS
+  ******/
+.scroll-card{
+  width: 7rem !important;
+  height: 16rem !important;
+}
+
+.scroll-card-cover{
+  height: 16rem !important;
+}
+
+
+/*****
+MEMBERSHIP SECTION
+*****/
+ .newsletter-section {
+    background: var(--sage);
+    color: white;
+    text-align: center;
+    padding: 60px 18px !important;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+   .newsletter-section .newsletter-form {
+    display: flex;
+    width: 100%;
+    max-width:  100% !important;
+    padding: 0 !important;
+    margin: 0  !important;
+    position: relative;
+    justify-content: center !important;
+    align-items: center;
+    justify-self: center;
+  }
+
+  .newsletter-form .newsletter-submit{
+    font-size: .7rem !important;
+  }
+
+  .newsletter-form .newsletter-input{
+    width: 100% !important;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+
+  /****
+  FOOTER SECTION
+  *****/
+    
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr !important;
+    gap: 30px !important;
+    margin-bottom: 60px;
+  }
+
 }
 
 
