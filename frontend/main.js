@@ -1,4 +1,4 @@
-// UPDATED AT 5th/MAY, 2026 [BACKUP MAIN.JS]
+// UPDATED AT 13th/MAY, 2026 [BACKUP MAIN.JS]
 
 
 // --- Firebase Imports ---
@@ -67,6 +67,7 @@ function resolvePackageName(network) {
 //NEW UPDATED 21/01/2026  (DOMCONTENTLOADER)//
 document.addEventListener("DOMContentLoaded", () => {
 
+
 const selectBtn = document.getElementById("selectBtn");
 const dropdownOffer = document.getElementById("dropdownOffer");
 const deliveryOptions = document.querySelectorAll(".optionDelevery");
@@ -74,10 +75,11 @@ const deliveryOptions = document.querySelectorAll(".optionDelevery");
 
 const targetDiv = document.getElementById("topOpt");
 const unTargetDiv = document.getElementById("bottomOpt");
-const gridTargetSection = document.querySelector(".topMtn");
-const networkBadge = document.getElementById("mtnArea");
+const gridExpressDiv = document.getElementById("gridExpressDiv");
+const gridNormalDiv = document.getElementById("gridNormalDiv");
 
 // Override promo when express active
+
 
 
 
@@ -89,20 +91,35 @@ const networkBadge = document.getElementById("mtnArea");
 
   if(mode === "express"){
     targetDiv.style.display = "none";
-    gridTargetSection.style.display = "none";
-    networkBadge.style.display = "none";
+    gridExpressDiv.classList.remove("active");
+    gridNormalDiv.style.display = "none";
 
 
     unTargetDiv.style.display = "block";
   } else{
-   
+    gridExpressDiv.classList.add("active");
     unTargetDiv.style.display = "none";
 
     targetDiv.style.display = "block";
-    gridTargetSection.style.display = "block";
-    networkBadge.style.display = "block";
+   
+
+    gridNormalDiv.style.display = "block";
   }
+
+  if(mode === "normal") {
+
+    gridExpressDiv.classList.add("active");
+  } else{
+    gridExpressDiv.classList.remove("active");
+  }
+  
 }
+
+
+
+
+
+
 
 function resetSelectedBundle(reason = "") {
   selectedBundle = null;
@@ -419,6 +436,7 @@ const telecelPackageDiv = document.querySelector(".packagesta");
 
 // change background image of(normalTitle);
 const normalTitleSection = document.getElementById("mtnBanner");
+
 
 
 normalModeBtn.addEventListener("click", (e) => {
