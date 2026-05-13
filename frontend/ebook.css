@@ -14,7 +14,7 @@
   --telecel-btn: rgb(180, 57, 19);
   --airteltigo-btn: rgb(28, 46, 119);
 
-  /*====NEW===ROOT====*/
+
   /*====NEW===ROOT====*/
   --darkMode-bg-cl: rgb(24, 29, 36) !important;
   --background-cl-1: rgb(29, 36, 41);
@@ -90,11 +90,9 @@ MAIN CONTAINER
   text-decoration: none;
   list-style: none;
   outline: none;
-  ;
 }
 
 body{
-
   width: 100vw;
   height: 100vh;
   overflow-y: hidden;
@@ -161,7 +159,7 @@ right e-navbar
   grid-template-columns: 18rem auto;
   background: transparent;
   position: relative;
-  top: 2rem;
+  top: 3.5rem;
   overflow-x: hidden;
   overflow-y: hidden;
 }
@@ -1634,9 +1632,7 @@ MEMBERSHIP SECTION
 DISPLAY NONE DIVS
 *****/
 .container .main-grid-e-container .main-sidebar,
-.flexWrapper,
-.cursor,
-.cursor-ring
+.flexWrapper
 
 {
   display: none !important;
@@ -1971,9 +1967,8 @@ MEMBERSHIP SECTION
 DISPLAY NONE DIVS
 *****/
 .container .main-grid-e-container .main-sidebar,
-.flexWrapper,
-.cursor,
-.cursor-ring
+.flexWrapper
+
 
 {
   display: none !important;
@@ -2052,7 +2047,7 @@ MAIN GRID CONTAINER
     height: max-content;
     margin: .3rem;
     font-size: 1rem !important;
-    line-height: 1.2 !important;
+    line-height: 1.5 !important;
    }
 
 
@@ -2246,13 +2241,19 @@ grid card
   BEST SELLERS
   ******/
 .scroll-card{
-  width: 7rem !important;
-  height: 16rem !important;
+  flex: 0 0 190px !important;
+  height: 300px !important;
 }
 
 .scroll-card-cover{
-  height: 16rem !important;
+  height: 14rem !important;
 }
+
+  .scroll-track {
+    height: 360px !important;
+  }
+
+
 
 
 /*****
@@ -2346,16 +2347,51 @@ DISPLAY NONE DIVS
 
 
 @media (min-width: 900px) {
-  
+   /* Hero */
+  .main-grid-ecard-container2 .hero {
+    margin-top: -3.5rem !important;
+  }
+
+  .scroll-track {
+    height: 420px !important;
+  }
+
+  .scroll-card-cover {
+    height: 280px !important;
+}
 }
 
 
 @media (min-width: 1024px) {
-  
+   /* Hero */
+  .main-grid-ecard-container2 .hero {
+    margin-top: -3.5rem !important;
+  }
+
+    .scroll-track {
+    height: 420px !important;
+  }
+
+    .scroll-card-cover {
+    height: 280px !important;
+}
 }
 
 
 
 @media (min-width: 1366px) {
-  
+  /* Hero */
+  .main-grid-ecard-container2 .hero {
+    margin-top: -3.5rem !important;
+  }
+
+
+
+  .scroll-track {
+    height: 420px !important;
+  }
+
+   .scroll-card-cover {
+    height: 280px !important;
+}
 }
