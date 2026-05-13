@@ -3757,7 +3757,7 @@ onAuthStateChanged(auth, async (user) => {
 
     // 🔥 Redirect immediately if agent
     if (userData.isAgent === true) {
-      set
+      showSnackBar("oh!, you have subscribed!");
       window.location.href = "agentPage.html";
       return; // stop further execution
     }
