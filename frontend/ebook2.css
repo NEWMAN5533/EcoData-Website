@@ -97,9 +97,10 @@
   .main-grid-ecard-container2 .hero {
     height: max-content !important;
     width: 100%;
+    margin-top: -.4rem;
     align-items: center;
     justify-content: center;
-    padding-top: 2px;
+    padding-top: 40px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     position: relative;
@@ -107,7 +108,7 @@
   }
 
   .hero .hero-left {
-    padding: 40px;
+    padding: 60px 40px;
     display: flex; 
     flex-direction: column; 
     justify-content: center;
@@ -121,8 +122,9 @@
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--rust);
-    margin-bottom: 24px;
+    margin-bottom: 4px;
     display: flex; 
+    background: red;
     align-items: center; 
     gap: 12px;
   }
@@ -222,6 +224,9 @@
     align-items: center; 
     justify-content: center;
     overflow: hidden;
+    height: 100%;
+    padding: .5rem;
+
   }
 
   .hero-right::before {
@@ -247,7 +252,7 @@
 
   @keyframes float {
     0%, 100% { transform: translateY(0px) rotate(-2deg); }
-    50% { transform: translateY(-16px) rotate(-1deg); }
+    50% { transform: translateY(-9px) rotate(-1deg); }
   }
 
   .book-cover {
