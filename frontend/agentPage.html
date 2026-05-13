@@ -133,6 +133,45 @@
   }
 </style>
 
+ <style>
+        .gridCards-container .offer-title{
+          width: 100%;
+          display: flex;
+          height: 3rem;
+          align-items: center;
+          justify-content: center;
+          padding: .4rem;
+        }
+
+        .gridCards-container .offer-title h2{
+          color: rgb(57, 57, 65);
+        }
+
+        .gridCards-container #gridNormalDiv{
+          width: 100%;
+          max-width: max-content;
+          position: relative;
+        }
+
+
+        .gridCards-container #gridNormalDiv .gridCard-wrapper{
+          gap: 8px !important;
+        }
+
+        .gridCards-container #gridExpressDiv .gridCard-wrapper{
+          gap: 8px !important;
+        }
+
+        .gridCards-container .grader.active{
+          display: none;
+        }
+
+
+
+
+</style>
+
+
 
 
 
@@ -1062,6 +1101,9 @@ width: 50%;
     </div>
     <!---select-ends-->
       </div>
+
+
+      <!---AGENT EXPRESS SECTION----->
       <div id="bottomOpt" style="display: none;">
               <!---select-1-->
     <div class="optionSelect" 
@@ -1322,9 +1364,6 @@ width: 50%;
   <!---CARDS SECTION-->
     <section class="gridCards-container topMtn " id="bundles">
       <!---GRID CARDS WRAPPER-->
-
-
-
 
       <!------GRID-NORMAL SECTION------------>
       <div id="gridNormalDiv"  style="width: 100%;  max-width: 99.99%;">
@@ -1689,14 +1728,14 @@ width: 50%;
         </div>
         <div class="gridCard-middle">
           <h3><span>1</span>GB</h3>
-          <small class="old-price">GHS 5.20</small>
+          <small class="old-price">GHS 5.40</small>
           <p class="new-price">GHS 5.50</p>
         </div>
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
   data-size="1"
-  data-price="5.20"
+  data-price="5.40"
           > <img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy </button>
         </div>
       </div>
@@ -1708,14 +1747,14 @@ width: 50%;
         </div>
         <div class="gridCard-middle">
            <h3><span>2</span>GB</h3>
-            <small class="old-price">GHS 10.80</small>
+            <small class="old-price">GHS 10.90</small>
           <p class="new-price">GHS 11</p>
         </div>
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
   data-size="2"
-  data-price="10.80"
+  data-price="10.90"
           ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy </button>
         </div>
       </div>
@@ -1727,14 +1766,14 @@ width: 50%;
         </div>
         <div class="gridCard-middle">
           <h3><span>3</span>GB</h3>
-            <small class="old-price">GHS 15.20</small>
+            <small class="old-price">GHS 15.60</small>
           <p class="new-price">GHS 16</p>
         </div>
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
   data-size="3"
-  data-price="15.20"
+  data-price="15.60"
           ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy </button>
         </div>
       </div>
@@ -1746,14 +1785,14 @@ width: 50%;
         </div>
         <div class="gridCard-middle">
           <h3><span>4</span>GB</h3>
-            <small class="old-price">GHS 19.30</small>
+            <small class="old-price">GHS 19.90</small>
           <p class="new-price">GHS 21</p>
         </div>
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
   data-size="4"
-  data-price="19.30"
+  data-price="19.90"
           ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy </button>
         </div>
       </div>
@@ -1765,14 +1804,14 @@ width: 50%;
         </div>
         <div class="gridCard-middle">
           <h3><span>5</span>GB</h3>
-            <small class="old-price">GHS 23.50</small>
+            <small class="old-price">GHS 24.30</small>
           <p class="new-price">GHS 25</p>
         </div>
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
   data-size="5"
-  data-price="23.50"
+  data-price="24.30"
           ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy </button>
         </div>
       </div>
@@ -1784,14 +1823,14 @@ width: 50%;
         </div>
         <div class="gridCard-middle">
           <h3><span>6</span>GB</h3>
-            <small class="old-price">GHS 28.60</small>
+            <small class="old-price">GHS 29.40</small>
           <p class="new-price">GHS 31</p>
         </div>
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
   data-size="6"
-  data-price="28.60"
+  data-price="29.40"
           ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy </button>
         </div>
       </div>
@@ -1822,14 +1861,14 @@ width: 50%;
         </div>
         <div class="gridCard-middle">
           <h3><span>8</span>GB</h3>
-           <small class="old-price">GHS 37.80</small>
+           <small class="old-price">GHS 38.50</small>
           <p class="new-price">GHS 39</p>
         </div>
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
   data-size="8"
-  data-price="37.80"
+  data-price="38.50"
           ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy </button>
         </div>
       </div>
@@ -1844,14 +1883,14 @@ width: 50%;
         </div>
         <div class="gridCard-middle">
           <h3><span>10</span>GB</h3>
-            <small class="old-price">GHS 47</small>
+            <small class="old-price">GHS 45</small>
           <p class="new-price">GHS 44.30</p>
         </div>
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
   data-size="10"
-  data-price="44.30"
+  data-price="45"
           ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy </button>
         </div>
       </div>
@@ -1882,14 +1921,14 @@ width: 50%;
         </div>
         <div class="gridCard-middle">
            <h3><span>15</span>GB</h3>
-            <small class="old-price">GHS 64.20</small>
+            <small class="old-price">GHS 65</small>
           <p class="new-price">GHS 66</p>
         </div>
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
   data-size="15"
-  data-price="64.20"
+  data-price="65"
           ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy </button>
         </div>
       </div>
@@ -1901,14 +1940,14 @@ width: 50%;
         </div>
         <div class="gridCard-middle">
           <h3><span>20</span>GB</h3>
-            <small class="old-price">GHS 85.10</small>
+            <small class="old-price">GHS 85.70</small>
           <p class="new-price">GHS 89</p>
         </div>
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
   data-size="20"
-  data-price="85.10"
+  data-price="85.70"
           ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy </button>
         </div>
       </div>
@@ -1920,14 +1959,14 @@ width: 50%;
         </div>
         <div class="gridCard-middle">
           <h3><span>25</span>GB</h3>
-            <small class="old-price">GHS 105.30</small>
+            <small class="old-price">GHS 107.30</small>
           <p class="new-price">GHS 109</p>
         </div>
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
   data-size="25"
-  data-price="105.30"
+  data-price="107.30"
           ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy </button>
         </div>
       </div>
@@ -1939,14 +1978,14 @@ width: 50%;
         </div>
         <div class="gridCard-middle">
           <h3><span>30</span>GB</h3>
-            <small class="old-price">GHS 125.40</small>
+            <small class="old-price">GHS 126.20</small>
           <p class="new-price">GHS 128</p>
         </div>
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
   data-size="30"
-  data-price="125.40"
+  data-price="126.20"
           ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy </button>
         </div>
       </div>
@@ -1958,14 +1997,14 @@ width: 50%;
         </div>
         <div class="gridCard-middle">
           <h3><span>40</span>GB</h3>
-            <small class="old-price">GHS 164</small>
+            <small class="old-price">GHS 165.10</small>
           <p class="new-price">GHS 167</p>
         </div>
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
   data-size="40"
-  data-price="164"
+  data-price="165.10"
           ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy </button>
         </div>
       </div>
@@ -1977,14 +2016,14 @@ width: 50%;
         </div>
         <div class="gridCard-middle">
            <h3><span>50</span>GB</h3>
-            <small class="old-price">GHS 198.20</small>
+            <small class="old-price">GHS 203</small>
           <p class="new-price">GHS 213</p>
         </div>
         <div class="gridCard-bottom">
           <button class="buy-btn"
   data-network="mtn"
   data-size="50"
-  data-price="198.20"
+  data-price="203"
           ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy </button>
         </div>
       </div>
