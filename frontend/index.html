@@ -1038,6 +1038,8 @@ width: 50%;
 
 <img id="menuDarkMode" class="menu-icon" src="./css/icons/menu-white.png" alt="image" style="background: none;">
 </div>
+
+
  </nav>
 
 <!---MAIN-GRID-CONTAINER---->
@@ -1184,16 +1186,16 @@ width: 50%;
 
 <!-----COUNTER-ENDS--->
 
-<!----TRUSTED-MESSAGE-->
+<!----TRUSTED-MESSAGE------>
 <section class="trusted-by">
 
-  <!-- Animated background particles -->
+  <!-- Animated background particles----->
   <div class="particles">
     <span></span><span></span><span></span><span></span>
     <span></span><span></span><span></span><span></span>
   </div>
 
-  <!-- Decorative grid overlay -->
+  <!-- Decorative grid overlay------>
   <div class="grid-overlay"></div>
 
   <div class="trusted-container">
@@ -1264,17 +1266,25 @@ width: 50%;
       <span style="color: rgb(7, 235, 140); margin: .4rem;"> DELIVERY is ONGOING SMOOTHLY, PLACE YOUR ORDER</span>
     </div>
 
-   <div class="google-thumbnail thumb2" >
+  <div class="google-thumbnail thumb1" >
+      <img class="fol" src="./css/uiIcons/star.png" alt="" loading="lazy"> WELCOME TO EcoData. <span style="color: #cf8d11; margin-left: 0.4rem;
+      ">We're</span>  glad to have you here. <span style="color: #cf8d11; margin-left: 0.4rem;
+      ">Discover</span> fast, reliable, and affordable services designed just for you.  <span style="color: #cf8d11; margin-left: 0.4rem; ">Whether</span> you're here to purchase data bundle, explore our offers, or manage your account - we've made everything simple and seamless. <img class="fol" src="./css/uiIcons/gurantee.png" alt="" loading="lazy"> 
+      <span style="color: #cf8d11; margin-left: 0.4rem;">Get started</span> and enjoy a better digital experience.
+
+      <span style="color: #cf8d11; margin-left: 0.4rem;">For any 
+      </span>
+      <span style="color: #cf8d11; margin-left: 0.4rem;">question
+      </span>
+      , chat our Admin through the chatButton 
+        <img class="fol" src="./css/icons/chatMe.png" alt="" loading="lazy">
+  </div>
+
+
+    <div class="google-thumbnail thumb2" >
       <img class="analy" src="./css/icons/market.png" alt="" loading="lazy">
       WE ARE RUNNING PROMO! EVERY <span style="color: wheat; margin: .0.4rem">THURSDAY AND FRIDAY'S</span> on MTN DATA, buy at lower cost at these promo days. [1GB = 5.50], [2GB = 11], [3GB = 16.60],...[10GB = 45],...[20GB = 89],...[25 = 109]. Check back every <span style="color: wheat; margin: .0.4rem">THURSDAY AND FRIDAY'S</span>
     </div>
-
-
-  <div class="google-thumbnail thumb1" style="display: none;">
-      <img class="fol" src="./css/uiIcons/star.png" alt="" loading="lazy"> WELCOME TO OUR PLATFORM <img class="fol" src="./css/uiIcons/star.png" alt="" loading="lazy"> We're glad to have you here!<img class="fol" src="./css/uiIcons/approval.png" alt="" loading="lazy"> <span style="color: #cf8d11; margin-left: 0.4rem;
-      ">Discover</span> fast,reliable, and affordable services designed just for you <img class="fol" src="./css/uiIcons/approval.png" alt="" loading="lazy"> <span style="color: #cf8d11; margin-left: 0.4rem; ">Whether</span> you're here to purchase data bundle, explore our offers, or manage your account - we've made everything simple and seamless <img class="fol" src="./css/uiIcons/gurantee.png" alt="" loading="lazy"> 
-      <span style="color: #cf8d11; margin-left: 0.4rem;">Get started</span> and enjoy a better digital experience.
-  </div>
 
 
    
@@ -3755,32 +3765,16 @@ onAuthStateChanged(auth, async (user) => {
 });
 
 
-const logoutBtn = document.getElementById("logOutBtn");
 const lapOutBtn = document.getElementById("lapOut");
 
-if (logoutBtn) {
-  logoutBtn.addEventListener("click", async () => {
-
-    try {
-      await signOut(auth);
-      showSnackBar("Logged out successfully!");
-      hideSignupModal();
-      //window.location.href = "login.html"; // change if needed
-    } catch (error) {
-      console.error("Logout error:", error);
-      showSnackBar("Error logging out.");
-    }
-  });
-
-}
-
 if(lapOutBtn) {
+ 
   lapOutBtn.addEventListener("click", async() => {
 
     try {
       await signOut(auth);
       showSnackBar("Logged out successfully!");
-      hideSignupModal();
+    
     } catch (error) {
       console.error("LogOut error:", error);
       showSnackBar("Error logging out.");
@@ -3793,7 +3787,7 @@ if(lapOutBtn) {
 
 onAuthStateChanged(auth, (user)=>{
 
-  const seen = localStorage.removeItem("signupPromptSeen");
+  const seen = localStorage.getItem("signupPromptSeen");
 
   if(!user && !seen){
     setTimeout(()=>{
