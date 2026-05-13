@@ -70,60 +70,6 @@
   }
 </style>
 
-   <style>
-        .gridCards-container .offer-title{
-          width: 100%;
-          display: flex;
-          height: 3rem;
-          align-items: center;
-          justify-content: center;
-          padding: .4rem;
-        }
-
-        .gridCards-container .offer-title h2{
-          color: rgb(57, 57, 65);
-        }
-
-        .gridCards-container #gridNormalDiv{
-          width: 100%;
-          max-width: max-content;
-          position: relative;
-        }
-
-
-        .gridCards-container #gridNormalDiv .gridCard-wrapper{
-          gap: 8px !important;
-        }
-
-        .gridCards-container #gridExpressDiv .gridCard-wrapper{
-          gap: 8px !important;
-        }
-
-        .gridCards-container .grader.active{
-          display: none;
-        }
-
-
-  .gridCard .gridCard-middle .oldTag{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    text-align: center;
-    width: 100%;
-    height: max-content;
-    padding: .1rem;
-    background: none;
-  }
-
-  .gridCard .gridCard-middle .oldTag small{
-    color: rgb(238, 82, 82) !important;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-weight: 600;
-  }
-
-</style>
-
 <!---marked-->
   <style>
     .select-btn .doneSelect{
@@ -1381,8 +1327,11 @@ width: 50%;
 
 
       <!------GRID-NORMAL SECTION------------>
-      <div id="gridNormalDiv">
-        <div class="offer-title" > <h2>MTN NORMAL DELIVERY</h2></div>
+      <div id="gridNormalDiv"  style="width: 100%;  max-width: 99.99%;">
+
+        <div class="offer-title" > 
+          <h2>MTN NORMAL DELIVERY</h2>
+        </div>
 
           <div class="gridCard-wrapper">
       <!----------CARD--1--------->
@@ -1724,8 +1673,12 @@ width: 50%;
 
 
        <!---GRID EXPRESS SECTION----->
-       <div id="gridExpressDiv">
-        <div class="offer-title" > <h2>MTN EXPRESS DELIVERY</h2></div>
+       <div id="gridExpressDiv" class=" grader active" style="width: 100%; max-width: 99.99%;">
+
+
+        <div class="offer-title" >
+           <h2>MTN EXPRESS DELIVERY</h2>
+        </div>
 
           <div class="gridCard-wrapper">
       <!----------CARD--1--------->
@@ -1811,7 +1764,7 @@ width: 50%;
                   <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
         </div>
         <div class="gridCard-middle">
-          <h3><span>5</span>GB</h3>>
+          <h3><span>5</span>GB</h3>
             <small class="old-price">GHS 23.50</small>
           <p class="new-price">GHS 25</p>
         </div>
