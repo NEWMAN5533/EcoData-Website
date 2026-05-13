@@ -1793,7 +1793,7 @@ GRID CARD MIDDLE
     
 
     .gridCard-middle h3{
-      font-size: 1.02rem;
+      font-size: 1.05rem;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -1811,7 +1811,7 @@ GRID CARD MIDDLE
 
     .gridCard-middle h3 span{
       font-size: 1.6rem;
-      margin-bottom: .7rem;
+      margin-bottom: .6rem;
     }
 
 
@@ -1819,10 +1819,12 @@ GRID CARD MIDDLE
 PRICES SECTION
 ******/
 
-.gridCard-middle small{
-    font-size: 1rem !important;
+.gridCard .gridCard-middle small,
+.gridCardTele .gridCard-middle small,
+.gridCardAirteltigo .gridCard-middle small {
+    font-size: .85rem !important;
       font-family: serif;
-      margin-top: -.6rem;
+      margin-top: -.3rem;
       font-weight: 600;
       margin-left: -.8rem;
       align-self: center;
@@ -1830,10 +1832,13 @@ PRICES SECTION
 }
 
 
-    .gridCard-middle .old-price{
-      font-size: 1rem;
+    .gridCard .gridCard-middle .old-price ,
+    .gridCardTele .gridCard-middle .old-price,
+    .gridCardAirteltigo .gridCard-middle .old-price
+    {
+      font-size: .85rem;
       font-family: serif;
-      margin-top: -.6rem;
+      margin-top: -.3rem;
       font-weight: 600;
       margin-left: -.8rem;
       align-self: center;
@@ -1842,8 +1847,11 @@ PRICES SECTION
 
   
 
-    .gridCard-middle  .new-price{
-      font-size: 1rem;
+   .gridCard .gridCard-middle  .new-price,
+   .gridCardTele .gridCard-middle .new-price,
+   .gridCardAirteltigo .gridCard-middle .new-price
+   {
+      font-size: .85rem !important;
       font-family: serif;
       margin-top: .2rem;
       font-weight: 600;
