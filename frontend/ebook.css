@@ -1634,7 +1634,9 @@ MEMBERSHIP SECTION
 DISPLAY NONE DIVS
 *****/
 .container .main-grid-e-container .main-sidebar,
-.flexWrapper
+.flexWrapper,
+.cursor,
+.cursor-ring
 
 {
   display: none !important;
@@ -1969,7 +1971,9 @@ MEMBERSHIP SECTION
 DISPLAY NONE DIVS
 *****/
 .container .main-grid-e-container .main-sidebar,
-.flexWrapper
+.flexWrapper,
+.cursor,
+.cursor-ring
 
 {
   display: none !important;
@@ -2019,11 +2023,12 @@ MAIN GRID CONTAINER
     padding:  40px !important;
     width: 50% !important;
     height: 100% !important;
-    max-height: 20rem !important;
+    max-height: max-content !important;
     display: flex !important;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between !important;
+    gap: 2rem ;
     position: relative;
   }
 
@@ -2041,17 +2046,21 @@ MAIN GRID CONTAINER
    }
 
    .hero-desc{
-    font-size: .6rem !important;
-    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    justify-content: start !important;
+    height: max-content;
+    margin: .3rem;
+    font-size: 1rem !important;
+    line-height: 1.2 !important;
    }
 
 
   .hero-left .hero-cta .btn-primary{
-    width: 77% !important;
+    width: 86% !important;
     justify-self: center;
     align-items: center;
     justify-content: center;
-    ;
     font-size: .6rem !important;
     white-space: nowrap;
     display: flex !important;
