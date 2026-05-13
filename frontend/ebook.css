@@ -130,7 +130,7 @@ body{
 .e-navbar-left img{
   width: 
   2.5rem;
-  height: 2.8rem;
+  height: 2.5rem;
 }
 
 .e-navbar-left img:hover{
@@ -161,7 +161,7 @@ right e-navbar
   grid-template-columns: 18rem auto;
   background: transparent;
   position: relative;
-  top: 8vh;
+  top: 2rem;
   overflow-x: hidden;
   overflow-y: hidden;
 }
@@ -1655,33 +1655,33 @@ MAIN GRID CONTAINER
 
     /* Hero */
   .main-grid-ecard-container2 .hero {
-    height: 2rem !important;
+    height: 20rem !important;
     display: flex !important;
     gap: .1rem !important;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     width: 100%;
     margin-bottom: 1rem;
-    padding: 10px 0 !important;
+    padding:  0 !important;
   }
 
 
 
-   .book-showcase {
-    width: 87% !important;
-    height: 86% !important;
+   .hero-right .book-showcase {
+    width: 9rem !important;
+    height: 13rem !important;
    }
 
 
    @keyframes float {
      0%, 100% { transform: translateY(0px) rotate(-2deg); 
     }
-    50% { transform: translateY(-8px) rotate(-1deg) !important; 
+    50% { transform: translateY(-4px) rotate(-1deg) !important; 
     }
    }
 
   .hero .hero-left{
-    padding: 0 20px !important;
+    padding:  40px !important;
     width: 50% !important;
     height: 100% !important;
     max-height: 20rem !important;
@@ -1724,8 +1724,9 @@ MAIN GRID CONTAINER
   }
 
   .hero .hero-left .hero-title{
-    font-size: clamp(20px, 3vw, 19px);
+    font-size: clamp(22px, 1vw, 30px) !important;
     margin-bottom: 10px;
+    margin-top: .6rem !important;
     letter-spacing: 2px;
   }
   
@@ -1736,8 +1737,8 @@ MAIN GRID CONTAINER
   align-items: center;
   justify-content: center;
   position: relative;
-  height: 100%;
-  padding: 0 ;
+  height: 100% !important;
+  padding: 10px !important ;
   z-index: 999;
 }
 
