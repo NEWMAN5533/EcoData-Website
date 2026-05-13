@@ -67,7 +67,59 @@
   }
 </style>
 
+ <style>
+        .gridCards-container .offer-title{
+          width: 100%;
+          display: flex;
+          height: 3rem;
+          align-items: center;
+          justify-content: center;
+          padding: .4rem;
+        }
 
+        .gridCards-container .offer-title h2{
+          color: rgb(57, 57, 65);
+        }
+
+        .gridCards-container #gridNormalDiv{
+          width: 100%;
+          max-width: max-content;
+          position: relative;
+        }
+
+
+        .gridCards-container #gridNormalDiv .gridCard-wrapper{
+          gap: 8px !important;
+        }
+
+        .gridCards-container #gridExpressDiv .gridCard-wrapper{
+          gap: 8px !important;
+        }
+
+        .gridCards-container .grader.active{
+          display: none;
+        }
+
+
+  .gridCard .gridCard-middle .oldTag{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+    width: 100%;
+    height: max-content;
+    padding: .1rem;
+    background: none;
+  }
+
+  .gridCard .gridCard-middle .oldTag small{
+    color: rgb(238, 82, 82) !important;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 600;
+  }
+
+</style>
 
 <style>
   .playVideo{
@@ -803,6 +855,10 @@ width: 50%;
   const promoEndedDiv = document.getElementById("topOpt");
   const untargetExpressDiv = document.getElementById("bottomOpt");
 
+  const gridPromoActiveDiv = document.getElementById("gridPromoActive");
+  const gridNormalSection = document.getElementById("gridNormalDiv");
+  const gridExpressSection = document.getElementById("gridExpressDiv");
+
  
 
     if(!isPromoTime()) {
@@ -811,11 +867,13 @@ width: 50%;
 
       ctaBtn.innerHTML = "Coming Up!"
       promoActiveDiv.style.display = "none";
+      gridPromoActiveDiv.style.display = "none";
       promoWasInactive = true;
       return;
     } else{
       // While promo is active 
       promoActiveDiv.style.display = "block";
+      gridPromoActiveDiv.style.display = "block";
     }
 
     // IsPromoTime() function
@@ -823,6 +881,10 @@ width: 50%;
       promoActiveDiv.style.display = "block";
       promoEndedDiv.style.display = "none";
       untargetExpressDiv.style.display = "none";
+
+      // grid section mtn toggle off
+      gridNormalSection.style.display = "none";
+      gridExpressSection.style.display = "none";
     }
 
 
@@ -1654,7 +1716,7 @@ width: 50%;
 
 <!----PROMO-DIV-START----->
 <div id="promoActive">
-              <!---select-1-->
+    <!---select-1-->
     <div class="optionSelect" 
   data-network="mtn"
   data-size="1"
@@ -2243,32 +2305,16 @@ width: 50%;
   </div>
   
   <!----HERO ENDS-->
-  <style>
-        .gridCards-container .offer-title{
-          width: 100%;
-          display: flex;
-          height: 3rem;
-          align-items: center;
-          justify-content: center;
-          padding: .4rem;
-        }
-
-        .gridCards-container .offer-title h2{
-          color: rgb(57, 57, 65);
-        }
-
-        .gridCards-container .grader.active{
-          display: none;
-        }
-      </style>
+ 
 <!-----NETWORK-BUNDLE-CARDS-MTN-CONTAINER---->
   <!---CARDS SECTION-->
     <section class="gridCards-container topMtn " id="bundles">
       <!---GRID CARDS WRAPPER-->
 
-    
-     <div id="gridNormalDiv">
-      <div class="offer-title" > <h2>MTN NORMAL</h2></div>
+
+      <!------GRID PROMO SECTION--(off until isPromoTime)------>
+      <div id="gridPromoActive" style="width: 100%;  max-width: 99.99%;">
+      <div class="offer-title" > <h2>PROMO!</h2></div>
 
 
       <div class="gridCard-wrapper" >
@@ -2277,6 +2323,399 @@ width: 50%;
         <div class="gridCard-top">
           <small>MTN </small>
                   <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
+        </div>
+        <div class="gridCard-middle">
+          <div class="oldTag">
+            <small>8.3% OFF</small>
+          </div>
+
+          <h3><span>1</span>GB</h3>
+          <small class="old-price">GHS 5.50</small>
+          <p class="new-price">GHS 5.50</p>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-size="1"
+  data-price="5.50"
+          > <img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
+        </div>
+      </div>
+ <!----------NEXT CARD------2----->
+      <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN </small>
+                  <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
+        </div>
+        <div class="gridCard-middle">
+          <div class="oldTag">
+            <small>8.3% OFF</small>
+          </div>
+          <h3><span>2</span>GB</h3>
+            <small class="old-price">GHS 11</small>
+          <p class="new-price">GHS 11</p>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-size="2"
+  data-price="11"
+          ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
+        </div>
+      </div>
+ <!----------NEXT CARD-------3---->
+      <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN </small>
+                  <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
+        </div>
+        <div class="gridCard-middle">
+          <div class="oldTag">
+            <small>2.4% OFF</small>
+          </div>
+          <h3><span>3</span>GB</h3>
+            <small class="old-price">GHS 16.60</small>
+          <p class="new-price">GHS 16.60</p>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-size="3"
+  data-price="16.60"
+          ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
+        </div>
+      </div>
+      <!----------NEXT CARD----4------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN </small>
+                  <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
+        </div>
+        <div class="gridCard-middle">
+          <div class="oldTag">
+            <small>8.3% OFF</small>
+          </div>
+          <h3><span>4</span>GB</h3>
+            <small class="old-price">GHS 21</small>
+          <p class="new-price">GHS 21</p>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-size="4"
+  data-price="21"
+          ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
+        </div>
+      </div>
+      <!----------NEXT CARD----5------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN </small>
+                  <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
+        </div>
+        <div class="gridCard-middle">
+          <div class="oldTag">
+            <small>8.3% OFF</small>
+          </div>
+          <h3><span>5</span>GB</h3>
+            <small class="old-price">GHS 25.50</small>
+          <p class="new-price">GHS 25.50</p>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-size="5"
+  data-price="25.50"
+          ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
+        </div>
+      </div>
+       <!----------NEXT CARD---6-------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN </small>
+                  <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
+        </div>
+        <div class="gridCard-middle">
+          <div class="oldTag">
+            <small>5.4% OFF</small>
+          </div>
+          <h3><span>6</span>GB</h3>
+            <small class="old-price">GHS 31</small>
+          <p class="new-price">GHS 31</p>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-size="6"
+  data-price="31"
+          ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
+        </div>
+      </div>
+      <!----------NEXT CARD---7-------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN </small>
+                  <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
+        </div>
+        <div class="gridCard-middle">
+          <div class="oldTag">
+            <small>8.3% OFF</small>
+          </div>
+          <h3><span>7</span>GB</h3>
+            <small class="old-price">GHS 36</small>
+          <p class="new-price">GHS 36</p>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-size="7"
+  data-price="36"
+          ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
+        </div>
+      </div>
+       <!----------NEXT CARD-----8------>
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN </small>
+                  <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
+        </div>
+        <div class="gridCard-middle">
+          <div class="oldTag">
+            <small>8.3% OFF</small>
+          </div>
+          <h3><span>8</span>GB</h3>
+          <small class="old-price">GHS 39</small>
+          <p class="new-price">GHS 39</p>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-size="8"
+  data-price="39"
+          ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
+        </div>
+      </div>
+
+       <!----------NEXT CARD----------->
+      <!---EMPTY-9GB-->
+       <!----------NEXT CARD---9-------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN </small>
+                  <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
+        </div>
+        <div class="gridCard-middle">
+          <div class="oldTag">
+            <small>4.3% OFF</small>
+          </div>
+          <h3><span>10</span>GB</h3>
+            <small class="old-price">GHS 45</small>
+          <p class="new-price">GHS 45</p>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-size="10"
+  data-price="45"
+          ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
+        </div>
+      </div>
+       <!----------NEXT CARD---10-------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN </small>
+                  <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
+        </div>
+        <div class="gridCard-middle">
+          <div class="oldTag">
+            <small>8.3% OFF</small>
+          </div>
+          <h3><span>12</span>GB</h3>
+            <small class="old-price">GHS 59</small>
+          <p class="new-price">GHS 59</p>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-size="12"
+  data-price="59"
+          ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
+        </div>
+      </div>
+       <!----------NEXT CARD-----11------>
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN </small>
+                  <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
+        </div>
+        <div class="gridCard-middle">
+          <div class="oldTag">
+            <small>8.3% OFF</small>
+          </div>
+          <h3><span>15</span>GB</h3>
+            <small class="old-price">GHS 67</small>
+          <p class="new-price">GHS 67</p>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-size="15"
+  data-price="67"
+          ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
+        </div>
+      </div>
+       <!----------NEXT CARD----12------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN </small>
+                  <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
+        </div>
+        <div class="gridCard-middle">
+          <div class="oldTag">
+            <small>2.2% OFF</small>
+          </div>
+          <h3><span>20</span>GB</h3>
+            <small class="old-price">GHS 89</small>
+          <p class="new-price">GHS 89</p>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-size="20"
+  data-price="89"
+          ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
+        </div>
+      </div>
+       <!----------NEXT CARD----13------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN </small>
+                  <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
+        </div>
+        <div class="gridCard-middle">
+          <div class="oldTag">
+            <small>2% OFF</small>
+          </div>
+          <h3><span>25</span>GB</h3>
+            <small class="old-price">GHS 109</small>
+          <p class="new-price">GHS 109</p>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-size="25"
+  data-price="109"
+          ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
+        </div>
+      </div>
+       <!----------NEXT CARD---14------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN </small>
+                  <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
+        </div>
+        <div class="gridCard-middle">
+          <div class="oldTag">
+            <small>2% OFF</small>
+          </div>
+          <h3><span>30</span>GB</h3>
+            <small class="old-price">GHS 128</small>
+          <p class="new-price">GHS 128</p>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-size="30"
+  data-price="128"
+          ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
+        </div>
+      </div>
+      <!----------NEXT CARD----15------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN </small>
+                  <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
+        </div>
+        <div class="gridCard-middle">
+          <div class="oldTag">
+            <small>1.2% OFF</small>
+          </div>
+          <h3><span>40</span>GB</h3>
+            <small class="old-price">GHS 167</small>
+          <p class="new-price">GHS 167</p>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-size="40"
+  data-price="167"
+          ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
+        </div>
+      </div>
+       <!----------NEXT CARD---16-------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN </small>
+                  <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
+        </div>
+        <div class="gridCard-middle">
+          <div class="oldTag">
+            <small>1.4% OFF</small>
+          </div>
+          <h3><span>50</span>GB</h3>
+            <small class="old-price">GHS 211</small>
+          <p class="new-price">GHS 211</p>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-size="50"
+  data-price="211"
+          ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
+        </div>
+      </div>
+      <!----------NEXT CARD---17-------->
+        <div class="gridCard" style="display: none;">
+        <div class="gridCard-top">
+          <small>MTN </small>
+                  <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
+        </div>
+        <div class="gridCard-middle">
+          <h3>100GB</h3>
+            <small class="old-price">GHS 429.98</small>
+          <p class="new-price">GHS 420</p>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-size="100"
+  data-price="429.99"
+          ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
+        </div>
+      </div>
+
+
+
+
+
+
+      </div>
+      </div>
+      <!------GRID PROMO SECTION--ENDS------>
+
+
+
+      <!------GRID NORMAL SECTION---( active-unless isPromoTime)---->
+      <div id="gridNormalDiv" style="width: 100%;  max-width: 99.99%;">
+      <div class="offer-title" > <h2>MTN NORMAL</h2></div>
+
+
+      <div class="gridCard-wrapper" >
+      <!----------CARD----1------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN </small>
+          <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
         </div>
         <div class="gridCard-middle">
           <h3><span>1</span>GB</h3>
@@ -2605,12 +3044,13 @@ width: 50%;
 
 
       </div>
-     </div>
+      </div>
+      <!------GRID NORMAL SECTION--ENDS------>
 
-      <!------GRID EXPRESS SECTION-------->
 
 
-     <div id="gridExpressDiv" class=" grader active">
+      <!------GRID EXPRESS SECTION--( active-unless isPromoTime)------>
+      <div id="gridExpressDiv" class=" grader active" style="width: 100%; max-width: 99.99%;">
 
         <div class="offer-title" style="margin-top: 1.2rem;"> <h2>MTN EXPRESS</h2>
       </div>
@@ -2949,7 +3389,8 @@ width: 50%;
 
 
       </div>
-     </div>
+      </div>
+      <!------EXPRESS GRID SECTION ENDS-------->
     
 
     </section>
