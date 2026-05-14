@@ -851,22 +851,10 @@ const db = getFirestore(app);
 
 
 
-// Logout
-const logOutBtn = document.getElementById("logOutBtn");
+// LapOut only ( remembar no menu icon on phone UI)
+   
 const lapOutBtn = document.getElementById("lapOut");
 
-if(logOutBtn) {
-  logOutBtn.addEventListener("click", async () => {
-    try
-    {
-      await signOut(auth);
-      showSnackBar("Logged out successful");
-    } catch(err){
-      console.error("Error logging out: ", err);
-      showSnackBar("Error logging out");
-    }
-  });
-}
 
 // logout on laptops
 if(lapOutBtn) {
