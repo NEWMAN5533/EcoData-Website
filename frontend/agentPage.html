@@ -357,7 +357,7 @@ width: 50%;
           </div>
 
             <div class="sign-link">
-              <button class="login " id="lapOut">
+              <button class="login " id="logOut">
              <img src="./css/icons/logout.png" alt="" loading="lazy"> Logout
             </button>
           </div>
@@ -3244,6 +3244,19 @@ width: 50%;
   });
 
 const lapOutBtn = document.getElementById("lapOut");
+const logOutBtn = document.getElementById("logOut");
+
+if(logOutBtn){
+  logOutBtn.addEventListener("click", async() => {
+    try{
+      await signOut(auth);
+      showSnackBar("Logged out successfully!");
+    } catch(err){
+      console.error("Error logging out", err);
+      showSnackBar("Error logging out", 'error');
+  }
+} );
+   }                         
 
 if(lapOutBtn) {
  
