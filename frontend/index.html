@@ -1054,7 +1054,7 @@ width: 50%;
           </div>
 
             <div class="sign-link">
-              <button class="login " id="lapOut">
+              <button class="login " id="logOut">
              <img src="./css/icons/logout.png" alt="" loading="lazy"> Logout
             </button>
           </div>
@@ -4594,7 +4594,20 @@ onAuthStateChanged(auth, async (user) => {
 
 
 const lapOutBtn = document.getElementById("lapOut");
+const logOutBtn = document.getElementById("logOut");
 
+  if(logOutBtn){
+  logOutBtn.addEentListener("click", async() => {
+   try{
+      await signOut(auth);
+     showSnackBar("Logged out successfully!");
+    } catch(err){
+     console.error("Error logging out: ", err);
+     showSnackBar("Error try again", "error" );
+       }
+  });
+  }
+  
 if(lapOutBtn) {
  
   lapOutBtn.addEventListener("click", async() => {
@@ -4605,7 +4618,7 @@ if(lapOutBtn) {
     
     } catch (error) {
       console.error("LogOut error:", error);
-      showSnackBar("Error logging out.");
+      showSnackBar("Error logging out.", 'error');
     }
   });
 }
