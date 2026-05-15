@@ -7,14 +7,21 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/fi
 import {
   collection,
   addDoc,
-  getDocs,
+  getDoc,
   query,
+  doc,
   orderBy,
   serverTimestamp,
 } from 
 "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
-
+// FETCH USER NAME FROM DOC IN DB
+onAuthStateChanged(auth, async(user) => {
+  if(user){
+    const userFetch = await getDoc(doc(db, "users" user.uid));
+    onUserName = userFetch.data().username;
+  }
+} );
 
 
 
@@ -612,7 +619,7 @@ async function payWithPaystack(bundle, recipient) {
   
   const user = auth.currentUser;
   const userEmail = user?.email || `${recipient}@ecodata.com`;
-  const userName = user?.displayName || "Guest User";
+  const userName = onUserName || "Guest User";
 
   // 1️⃣ Show YOUR loader first
   showLoader();
@@ -696,7 +703,7 @@ async function orderBundle(network, recipient, packageName, size, reference) {
     }
 
     playSuccessSound();
-      showSnackBar("📱✅ Order Placed successfully!", "success", 6000);
+      showSnackBar(`✅ ${size}GB Order Placed successful for ${recipient}`, "success", 6000);
    
 
    
