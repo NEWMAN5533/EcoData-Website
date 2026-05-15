@@ -1151,7 +1151,7 @@ function handleNewOrder(returnedOrder) {
       returnedOrder.reference ||
       null,
 
-    network: returnedOrder?.network || selectedBundle.network || MTN,
+    network: returnedOrder.network || selectedBundle?.network || MTN,
 
     status: returnedOrder.status || returnedOrder.state || "pending",
 
