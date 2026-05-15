@@ -1124,6 +1124,7 @@ function renderLiveOrderRow(order) {
 
   row.innerHTML = `
     <span>${order.orderId}</span>
+    <span>${order.network}</span>
     <span>${order.volume}GB</span>
     <span>${order.recipient}</span>
     <span class="status-cell">
@@ -1149,6 +1150,8 @@ function handleNewOrder(returnedOrder) {
       returnedOrder.order_id ||
       returnedOrder.reference ||
       null,
+
+    network: returnedOrder.network || selectedBundle.network || MTN,
 
     status: returnedOrder.status || returnedOrder.state || "pending",
 
@@ -1184,6 +1187,7 @@ function handleNewOrder(returnedOrder) {
 
   row.innerHTML = `
     <span>${normalized.orderId}</span>
+    <span>${normalized.network}</span>
     <span>${normalized.volume}GB</span>
     <span>${normalized.recipient}</span>
     <span class="status-cell">
