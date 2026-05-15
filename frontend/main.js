@@ -1124,7 +1124,7 @@ function renderLiveOrderRow(order) {
 
   row.innerHTML = `
     <span>${order.orderId}</span>
-    <span>${order.network}</span>
+    <span>${orderData.network}</span>
     <span>${order.volume}GB</span>
     <span>${order.recipient}</span>
     <span class="status-cell">
