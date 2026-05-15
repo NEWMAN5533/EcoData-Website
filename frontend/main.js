@@ -15,13 +15,7 @@ import {
 } from 
 "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
-// FETCH USER NAME FROM DOC IN DB
-onAuthStateChanged(auth, async(user) => {
-  if(user){
-    const userFetch = await getDoc(doc(db, "users" user.uid));
-    onUserName = userFetch.data().username;
-  }
-} );
+
 
 
 
@@ -619,7 +613,7 @@ async function payWithPaystack(bundle, recipient) {
   
   const user = auth.currentUser;
   const userEmail = user?.email || `${recipient}@ecodata.com`;
-  const userName = onUserName || "Guest User";
+  const userName = user?.username || "Guest User";
 
   // 1️⃣ Show YOUR loader first
   showLoader();
