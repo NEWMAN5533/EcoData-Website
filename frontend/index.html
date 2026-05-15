@@ -848,6 +848,7 @@ width: 50%;
     const timerEl = document.getElementById("timer");
     const labelEl = document.getElementById("label");
     const ctaBtn = document.getElementById("ctaBtn");
+    const promoThumbnail = document.getElementById("promThumbnail");
 
 
     // const of promoDiv toggle
@@ -868,17 +869,20 @@ width: 50%;
       ctaBtn.innerHTML = "Coming Up!"
       promoActiveDiv.style.display = "none";
       gridPromoActiveDiv.style.display = "none";
+      promoThumbnail.style.display = "none";
       promoWasInactive = true;
       return;
     } else{
       // While promo is active 
       promoActiveDiv.style.display = "block";
       gridPromoActiveDiv.style.display = "block";
+      promoThumbnail.style.display = "flex";
     }
 
     // IsPromoTime() function
     if(isPromoTime()){
       promoActiveDiv.style.display = "block";
+      promoThumbnail.style.display = "flex";
       promoEndedDiv.style.display = "none";
       untargetExpressDiv.style.display = "none";
 
@@ -1054,8 +1058,8 @@ width: 50%;
           </div>
 
             <div class="sign-link">
-              <button class="login " id="logOut">
-             <img src="./css/icons/logout.png" alt="" loading="lazy"> Logout
+              <button class="login " id="logOut" >
+              <img src="./css/icons/logout.png" alt="" loading="lazy"> Logout
             </button>
           </div>
         </div>
@@ -1193,7 +1197,7 @@ width: 50%;
 
             <div class="sign-link ">
               <button class="login " id="lapOut">
-             <img src="./css/icons/logout.png" alt="" loading="lazy"> Logout
+              <img src="./css/icons/logout.png" alt="" loading="lazy"> Logout
             </button>
           </div>
         </div>
@@ -1324,7 +1328,7 @@ width: 50%;
 <div class="google-thumbnails-wrapper">
   <div class="google-thumbnails" id="thumbnailScroll">
 
-    <div class="google-thumbnail thumb2" >
+    <div class="google-thumbnail thumb2" id="promThumbnail">
       <img class="analy" src="./css/uiIcons/loudspeaker.png" alt="" loading="lazy">
       PROMO IS <span style="color: rgb(235, 193, 7); margin: .4rem;">ACTIVE</span> NOW  <span style="color: rgb(47, 151, 15); margin: .4rem;">ENJOY</span> DISCOUNTED
       <span style="color: rgb(7, 235, 140); margin: .4rem;"> DATA BUNDLES UNTIL </span>
@@ -1606,6 +1610,7 @@ width: 50%;
     <!-- TABLE HEADER (FIXED) -->
     <div class="live-order-header">
       <span>Order ID</span>
+      <span>Network</span>
       <span>Bundle</span>
       <span>Recipient</span>
       <span>Status</span>
@@ -2210,7 +2215,7 @@ width: 50%;
 
 
 
-     <!----SINGLE CARD FOOTER---->
+    <!----SINGLE CARD FOOTER---->
 
   <section class="businessInfo">
     <div class="businessInfo-right">
@@ -4593,21 +4598,24 @@ onAuthStateChanged(auth, async (user) => {
 });
 
 
-const lapOutBtn = document.getElementById("lapOut");
-const logOutBtn = document.getElementById("logOut");
 
-  if(logOutBtn){
-  logOutBtn.addEentListener("click", async() => {
-   try{
+const lapOutBtn = document.getElementById("logOut");
+const logOutBtn = document.getElementById("lapOut");
+
+if(logOutBtn){
+  logOutBtn.addEventListener("click", async() => {
+    try {
       await signOut(auth);
-     showSnackBar("Logged out successfully!");
+      showSnackBar("Logged out successfully!");
     } catch(err){
-     console.error("Error logging out: ", err);
-     showSnackBar("Error try again", "error" );
-       }
-  });
-  }
-  
+      console.error("LogOut error;", err);
+      showSnackBar("Error logging out.", "warning");
+    }
+  })
+}
+
+
+// laptop logout
 if(lapOutBtn) {
  
   lapOutBtn.addEventListener("click", async() => {
@@ -4615,13 +4623,14 @@ if(lapOutBtn) {
     try {
       await signOut(auth);
       showSnackBar("Logged out successfully!");
-    
     } catch (error) {
       console.error("LogOut error:", error);
-      showSnackBar("Error logging out.", 'error');
+      showSnackBar("Error logging out.");
     }
   });
 }
+
+
 
 
 // SIGN OR LOGIN POP UP
