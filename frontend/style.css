@@ -3085,8 +3085,7 @@ NEW GRID & NORMAL UI UPDATE (20th/1/2026
   background: rgb(245, 245, 245);
   padding: 1rem .3rem;
   height: max-content;
-  margin-top: .8rem;
-  margin-bottom: 2rem;
+  margin: 2rem;
   flex-direction: column;
   box-shadow: 0 2px 6px rgba(0,0,0,0.7);
   border: 1px solid var(--primary-cl);
@@ -3206,61 +3205,6 @@ NEW GRID & NORMAL UI UPDATE (20th/1/2026
 }
 
 
-.normalGrid-container .normalTitle{
-  width: 100%;
-  max-width: 90%;
-  margin-bottom: .8rem;
-  height: 8rem;
-  display: flex;
-  text-align: start;
-  flex-direction: column;
-  align-items:start;
-  justify-content: center;
-  gap: 0;
-  background: url(./css/images/mtn.jpg);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: .4rem;
-  padding: .4rem 1rem;
-  overflow: hidden;
-  opacity: .55;
-  box-shadow: 0 !important;
-}
-
-.normalGrid-container .normalTitle {
-  border: 1px solid var(--text-cl-2);
-}
-
-.dark-mode .normalGrid-container .normalTitle {
-  border: 1px solid rgba(255, 255, 255, 0.247);
-
-}
-
-.normalTitle p{
-  margin: 0;
-  padding: .5rem;
-  font-weight: 700;
-  color: rgb(70, 70, 75);
-  font-size: 1rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-.dark-mode .normalTitle p{
-  color: white;
-  opacity: .8;
-}
-
-.normalTitle p span{
-  margin-right: .6rem;
-  border: 1px solid rgb(214, 209, 209);
-  background: rgb(201, 201, 207);
-  padding: .3rem .4rem;
-  border-radius: 50%;
-  color: rgb(41, 35, 35);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: .7rem;
-}
 
 .dark-mode .normalTitle p span {
   background: var(--welcome-card-bg);
@@ -3271,16 +3215,18 @@ NEW GRID & NORMAL UI UPDATE (20th/1/2026
 }
 
 .normalGrid-container .titlen h2{
-  font-size: 1rem;
+  font-size: .93rem !important;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  color: rgb(44, 46, 56);
-  margin-top: -.2rem;
+  color: rgb(71, 72, 77);
+  margin-top: -.4rem;
+  font-weight: 500;
   opacity: .9;
 }
 
 
 .dark-mode .normalGrid-container .titlen h2{
-  color: white;
+  color: rgba(102, 104, 105, 0.801);
+  font-weight: 500 !important;
 }
 
 .normalGrid-container .titlen small{
@@ -3318,8 +3264,7 @@ how to style select dropdown
   max-width: 80%;
   height: 2.5rem;
   background: #ffffff;
-  border: 1px solid rgb(197, 191, 191);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgb(224, 224, 224) !important;
   align-items: center;
   text-align: center;
   font-size: .9rem;
@@ -3338,9 +3283,9 @@ how to style select dropdown
 }
 
 .dark-mode .select-btn {
-  background: var(--welcome-card-bg);
+  background: var(--darkMode-bg-cl);
   color: white;
-  border: 1px solid rgb(74, 78, 80);
+  border: 1px solid var(--thin-border) !important;
 }
 
 
@@ -3354,7 +3299,7 @@ how to style select dropdown
   position: absolute;
   width: 100%;
   max-width: 80%;
-  background: #fff;
+  background: #ffffff !important;
   border-radius: 8px;
   display: none;
   flex-direction: column;
@@ -3366,7 +3311,7 @@ how to style select dropdown
   padding: 0 .2rem;
   margin-bottom: 8rem;
   scrollbar-width: none;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   border: 1px solid rgb(199, 198, 198);
 }
 
@@ -3573,6 +3518,10 @@ GRID VIEW
   border-end-end-radius: 1.5rem;
   border-end-start-radius: 1.5rem;
   border-bottom: 9px solid wheat;
+  display:  flex;
+  justify-content: center !important;
+  align-items: center;
+  position: relative;
 }
 
 .dark-mode #normalView{
@@ -3592,7 +3541,7 @@ GRID VIEW
   background: rgb(255, 255, 255);
   margin-bottom: 2rem;
   padding-bottom: .4rem;
-  box-shadow:  0 10px 20px rgba(0, 0, 0, 0.22);
+  box-shadow:  0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .dark-mode #normalView .top-dashboard{
@@ -3677,12 +3626,11 @@ NETcARD VIEW ENDS
 
 }
 
-
 .single-order{
 width: 100%;
 max-width: 80%;
-justify-self: center;
-flex-wrap: nowrap;
+justify-self: center !important;
+position: relative;
 height: 23rem;
 display: flex;
 align-items: start;
@@ -3691,7 +3639,6 @@ margin-bottom: 3rem;
 justify-content: start;
 gap: .3rem;
 flex-direction: column;
-background: rgb(255, 255, 255);
 border-end-end-radius: 1rem;
 border-end-start-radius: 1rem;
 box-shadow: 0 8px 14px  rgba(56, 55, 55, 0.2);
@@ -3701,7 +3648,7 @@ box-shadow: 0 8px 14px  rgba(56, 55, 55, 0.2);
 .dark-mode .single-order  {
   background: rgb(29, 36, 41);
   border: 1px solid var(--thin-border);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8) !important;
 }
 
 .single-order small{
@@ -3723,10 +3670,10 @@ box-shadow: 0 8px 14px  rgba(56, 55, 55, 0.2);
 }
 
 .single-order .normalInput{
-  height: 2.5rem;
-  width: 100%;
+  height: 2.3rem;
+  width: 98%;
   font-size: 1.1rem;
-  background: rgb(255, 252, 252);
+  background: rgb(255, 255, 255);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   border: 1px solid rgb(223, 223, 223);
   border-radius: 8px;
@@ -3741,7 +3688,7 @@ box-shadow: 0 8px 14px  rgba(56, 55, 55, 0.2);
 
 
 .dark-mode .normalInput{
-  background: rgb(182, 178, 178);
+  background: rgb(184, 184, 184);
 }
 
 /**8
@@ -3884,7 +3831,7 @@ left section
 .selectedModal .selectedModal-left{
   width: 100%;
   max-width: 50%;
-  height: 2.8rem;
+  height: 90% !important;
   display: flex;
   gap: 0;
   align-items: center;
@@ -3894,9 +3841,11 @@ left section
  
 }
 
-.selectedModal-left-left{
+.selectedModal-left .selectedModal-left-left{
   width: 100%;
-  max-width: 50%;
+  max-width: 50% !important;
+  height: 100%;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: end;
@@ -3909,7 +3858,6 @@ left section
   max-height: 1.8rem;
   object-fit: contain;
   display: none;
-
 }
 
 .selectedModal-left-right{
@@ -3945,7 +3893,7 @@ ends of left section
 .selectedModal .selectedModal-right{
   width: 100%;
   max-width: 50%;
-  height: 1.8rem;
+  height: 90%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8009,6 +7957,8 @@ background:#f5f7fb;
 border-radius: 8px; 
 box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
+
+
 
 
 
