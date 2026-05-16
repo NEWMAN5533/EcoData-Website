@@ -612,7 +612,7 @@ async function payWithPaystack(bundle, recipient) {
   
   const user = auth.currentUser;
   const userEmail = user?.email || `${recipient}@ecodata.com`;
-  const userName = userNameDisplay || "Guest User";
+  const userName = user?.nameDisplay || "Guest User";
 
   // 1️⃣ Show YOUR loader first
   showLoader();
@@ -696,7 +696,7 @@ async function orderBundle(network, recipient, packageName, size, reference) {
     }
 
     playSuccessSound();
-      showSnackBar(`<span class='dataSize'>📱${size}GB</span> Order Placed successfully!`, "success", 6000);
+      showSnackBar(`📱${size}GB Order Placed successfully!`, "success", 6000);
    
 
    
