@@ -1,3 +1,8 @@
+.dataSize{
+  font-size: 1.1rem !important;
+  color: white;
+  font-weight: 600;
+}
 
 :root {
   --border-cl: rgba(230, 227, 227, 0.849);
