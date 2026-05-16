@@ -1,4 +1,4 @@
-// UPDATED AT 13th/MAY, 2026 [BACKUP MAIN.JS]
+// UPDATED AT 16th/MAY, 2026 [BACKUP MAIN.JS]
 
 
 // --- Firebase Imports ---
@@ -7,9 +7,11 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/fi
 import {
   collection,
   addDoc,
-  getDoc,
-  query,
   doc,
+  getDoc,
+  getFirestore,
+  getDocs,
+  query,
   orderBy,
   serverTimestamp,
 } from 
@@ -196,12 +198,6 @@ deliveryOptions.forEach(option => {
 
     const mode = option.dataset.mode;
 
-  if(option.dataset.mode === "express"){
-       // un-change background imag
-    normalTitleSection.style.backgroundImage = "url(./css/images/mtn.jpg)"
-  }
-
-  
   
     // RESET BUNDLE WHEN MODE CHANGED
     resetSelectedBundle("Offer changed please select bundle.");
@@ -435,8 +431,7 @@ const telecelAirtel = document.getElementById("teleAirtel");
 const mtnPackageDiv = document.querySelector(".packages");
 const telecelPackageDiv = document.querySelector(".packagesta");
 
-// change background image of(normalTitle);
-const normalTitleSection = document.getElementById("mtnBanner");
+
 
 
 
@@ -452,8 +447,7 @@ normalModeBtn.addEventListener("click", (e) => {
  
  mtnPackageDiv.style.background = " background: linear-gradient(134deg, rgb(241, 218, 8),rgb(180, 106, 8));"
 
- // un-change background imag
- normalTitleSection.style.backgroundImage = "url(./css/images/mtn.jpg)"
+
     // RESET BUNDLE WHEN MODE CHANGED
   resetSelectedBundle();
 
@@ -467,9 +461,7 @@ gridModeBtn.addEventListener("click", (e) => {
  bundleTitle.textContent = "MTN";
  telecelAirtel.style.display = "flex";
 
- //  change backgroundImage
- normalTitleSection.style.backgroundImage = "url(./css/images/tigo.jpg)"
- // pass background to the div when active
+
 
 
  mtnPackageDiv.style.background = "white";
@@ -601,19 +593,26 @@ function playSuccessSound() {
 // PLAY SOUND WHEN ORDER IS SUCCESSFUL ENDS
 // =======================
 
+onAuthStateChanged(auth, async(user) => {
 
+  if(user){
+    const userSnap = await getDoc(doc(db, "users", user.uid));
+    userNameDisplay = userSnap.data().username;
+  }
+})
 
 
 //NEW UPDATED 21/01/2026 //
 // === PAYSTACK PAYMENT (Firebase version) ===
 async function payWithPaystack(bundle, recipient) {
+  
 
   const { network, packageName, size, price } = bundle;
 
   
   const user = auth.currentUser;
   const userEmail = user?.email || `${recipient}@ecodata.com`;
-  const userName = user?.username || "Guest User";
+  const userName = userNameDisplay || "Guest User";
 
   // 1️⃣ Show YOUR loader first
   showLoader();
@@ -697,7 +696,7 @@ async function orderBundle(network, recipient, packageName, size, reference) {
     }
 
     playSuccessSound();
-      showSnackBar(`✅ ${size}GB Order Placed successfully!`, "success", 6000);
+      showSnackBar(`<span class='dataSize'>📱${size}GB</span> Order Placed successfully!`, "success", 6000);
    
 
    
@@ -1160,6 +1159,7 @@ function handleNewOrder(returnedOrder) {
 
     // ✅ FIX: Always from EcoData dataset
     volume: selectedBundle?.size || returnedOrder.volume || 0,
+
   };
 
   if (!normalized.orderId) return;
