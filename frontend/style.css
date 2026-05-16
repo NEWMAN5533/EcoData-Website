@@ -3311,14 +3311,14 @@ how to style select dropdown
   padding: 0 .2rem;
   margin-bottom: 8rem;
   scrollbar-width: none;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 20px rgba(85, 84, 84, 0.9);
   border: 1px solid rgb(199, 198, 198);
 }
 
 .dark-mode .select-dropdown{
-  background: var(--background-cl-1);
-  border: 1px solid var(--thin-border-4);
-
+  background: var(--background-cl-1) !important;
+  border: 1px solid var(--thin-border);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.9) ;
 }
 
 
@@ -3347,7 +3347,7 @@ how to style select dropdown
 .dark-mode .optionDelevery.active {
   background: var(--thin-border);
   border-radius: 4px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
   border: 1px solid var(--thin-border-3);
 }
 
@@ -3396,8 +3396,8 @@ how to style select dropdown
 .dark-mode .optionDelevery small {
   background: var(--background-cl-1);
   border: 1px solid var(--thin-border);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.28);
   color: #087596;
+  box-shadow: none !important;
   padding: 6px;
   display: flex;
   text-align: center;
