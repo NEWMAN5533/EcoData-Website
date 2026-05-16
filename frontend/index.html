@@ -870,6 +870,7 @@ width: 50%;
       promoActiveDiv.style.display = "none";
       gridPromoActiveDiv.style.display = "none";
       promoThumbnail.style.display = "none";
+      bar.style.display = "none";
       promoWasInactive = true;
       return;
     } else{
@@ -877,12 +878,14 @@ width: 50%;
       promoActiveDiv.style.display = "block";
       gridPromoActiveDiv.style.display = "block";
       promoThumbnail.style.display = "flex";
+      bar.style.display = "flex";
     }
 
     // IsPromoTime() function
     if(isPromoTime()){
       promoActiveDiv.style.display = "block";
       promoThumbnail.style.display = "flex";
+      bar.style.display = "flex";
       promoEndedDiv.style.display = "none";
       untargetExpressDiv.style.display = "none";
 
@@ -1609,7 +1612,7 @@ width: 50%;
   <section id="liveOrderSection">
     <!-- TABLE HEADER (FIXED) -->
     <div class="live-order-header">
-      <span>Order ID</span>
+      <span>Order ID</span>
       <span>Bundle</span>
       <span>Recipient</span>
       <span>Status</span>
@@ -1641,12 +1644,9 @@ width: 50%;
 <!---NEW UI UPDATE (5th-05-2026)--=[grid & normal ui-->
 <section class="normalGrid-container">
 
-  <!---title-->
-  <div class="normalTitle" id="mtnBanner">
-  </div>
 
   <div class="titlen" style="text-align: center;">
-    <h2 style="font-size: 1.1rem;">Select MTN Data Delivery <br> Offer.</h2>
+    <h2 style="font-size: 1.1rem;">Select MTN Delivery  Offer.</h2>
    
   </div>
 
@@ -1654,7 +1654,7 @@ width: 50%;
 
 
   <!---offer-select-options-->
-   <div class="custom-select">
+  <div class="custom-select">
   <button class="select-btn" id="selectBtn">
     Select Available MTN Offer
   
