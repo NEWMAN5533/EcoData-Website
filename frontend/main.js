@@ -1,4 +1,4 @@
-// UPDATED AT 16th/MAY, 2026 [BACKUP MAIN.JS]
+// UPDATED AT 17th/MAY, 2026 [BACKUP MAIN.JS]
 
 
 // --- Firebase Imports ---
@@ -556,50 +556,108 @@ function hideLoader() {
 // LOADER SPINNER IFRAME
 //=====================
 
+
+
+
 // =======================
 // PLAY SOUND WHEN ORDER IS SUCCESSFUL
-// ===========================
+// =======================
 function playSuccessSound() {
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-  const audioCtx = new (window.AudioContext ||
-    window.webkitAudioContext)();
+  if(audioCtx.state === "suspended") {
+    audioCtx.resume();
+  }
 
-  const playTone = (freq, start, duration) => {
+  const now = audioCtx.currentTime;
+
+  const masterGain = audioCtx.createGain();
+  masterGain.gain.value = 2.4; // increase overall volume;
+
+  masterGain.connect(audioCtx.destination);
+
+  // --- Utility: create a shaped tone with optional detune ---
+  const playTone = (freq, start, duration, gainPeak = 0.18, type = "sine", detune = 0) => {
     const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
 
-    osc.type = "sine";
+    osc.type = type;
     osc.frequency.value = freq;
+    osc.detune.value = detune;
 
-    gain.gain.setValueAtTime(2.5,
-      audioCtx.currentTime + start);
-      gain.gain.exponentialRampToValueAtTime(0.001,
-        audioCtx.currentTime + start + duration);
+    // Soft attack → smooth exponential decay (no harsh click)
+    gain.gain.setValueAtTime(0.0001, now + start);
+    gain.gain.linearRampToValueAtTime(gainPeak, now + start + 0.018);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + start + duration);
 
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
+    osc.connect(gain);
+    gain.connect(masterGain);
 
-      osc.start(audioCtx.currentTime + start);
-      osc.stop(audioCtx.currentTime + start + duration);
+    osc.start(now + start);
+    osc.stop(now + start + duration + 0.05);
   };
 
-  // Three-tone success chime
-  playTone(800, 0, 0.15);
-  playTone(1000, 0.15, 0.15);
-  playTone(1300, 0.30, 0.2);
-}
+  // --- Utility: soft noise burst (adds texture/air on hit) ---
+  const playNoiseBurst = (start, duration, gainPeak = 0.04) => {
+    const bufferSize = audioCtx.sampleRate * duration;
+    const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
 
+    const source = audioCtx.createBufferSource();
+    source.buffer = buffer;
+
+    // High-pass filter so it feels airy, not muddy
+    const filter = audioCtx.createBiquadFilter();
+    filter.type = "highpass";
+    filter.frequency.value = 2800;
+
+    const gain = audioCtx.createGain();
+    gain.gain.setValueAtTime(0.0001, now + start);
+    gain.gain.linearRampToValueAtTime(gainPeak, now + start + 0.01);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + start + duration);
+
+    source.connect(filter);
+    filter.connect(gain);
+    gain.connect(masterGain);
+
+    source.start(now + start);
+    source.stop(now + start + duration + 0.05);
+  };
+
+  // ── Layer 1: Warm low-mid foundation (subtle, felt more than heard) ──
+  playTone(220, 0.0, 0.28, 0.10, "sine");
+
+  // ── Layer 2: Main melodic chime — clean ascending trio ──
+  // Note 1 — C5 (soft click-in)
+  playTone(523.25, 0.0,  0.30, 0.22, "sine");
+  playTone(523.25, 0.0,  0.20, 0.04, "triangle", +7); // subtle shimmer
+
+  // Note 2 — E5
+  playTone(659.25, 0.13, 0.30, 0.22, "sine");
+  playTone(659.25, 0.13, 0.20, 0.04, "triangle", -5);
+
+  // Note 3 — G5 (resolution note)
+  playTone(783.99, 0.26, 0.45, 0.20, "sine");
+  playTone(783.99, 0.26, 0.35, 0.05, "triangle", +5);
+
+  // ── Layer 3: Sparkle overtones (one octave up, very quiet) ──
+  playTone(1046.5, 0.0,  0.18, 0.20, "sine");
+  playTone(1318.5, 0.13, 0.18, 0.20, "sine");
+  playTone(1567.98,0.26, 0.30, 0.26, "sine");
+
+  // ── Layer 4: Airy noise transients on each note hit ──
+  playNoiseBurst(0.0,  0.06, 0.035);
+  playNoiseBurst(0.13, 0.06, 0.030);
+  playNoiseBurst(0.26, 0.08, 0.040);
+}
 // =======================
 // PLAY SOUND WHEN ORDER IS SUCCESSFUL ENDS
 // =======================
 
-onAuthStateChanged(auth, async(user) => {
 
-  if(user){
-    const userSnap = await getDoc(doc(db, "users", user.uid));
-    userNameDisplay = userSnap.data().username;
-  }
-})
+
+
 
 
 //NEW UPDATED 21/01/2026 //
