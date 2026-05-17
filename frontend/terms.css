@@ -252,6 +252,7 @@ html:focus-within{
 
     .dark-mode .contact{
       background-color: var(--welcome-card-bg);
+      
     }
 
     .dark-mode .contact h2{
@@ -259,10 +260,14 @@ html:focus-within{
       opacity: .9;
     }
 
+
+
     .contact ul li{
       list-style: none;
       display: flex;
+      font-size: .84rem !important;
       gap: .6rem;
+      white-space: nowrap;
     }
 
     .dark-mode .contact ul li img{
