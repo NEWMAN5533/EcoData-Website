@@ -82,11 +82,19 @@ html:focus-within{
       margin: auto;
     }
 
+    .grid-container-main .card-container{
+
+    }
+
+    .card-container .main-terms-of-use-cont{
+      margin-top: -3.5rem;
+    }
+
 
     .main-terms-of-use-cont{
       position: relative;
       width: 100%;
-      max-width: 360px;
+      max-width: 94%;
       justify-self: center;;
       height: max-content;
       margin-bottom: 2rem;
@@ -97,18 +105,77 @@ html:focus-within{
       padding: .6rem;
     }
 
-.dark-mode{
-      background: var(--darkMode-bg-cl);
+    .main-terms-of-use-cont section{
+      max-width: 98%;
+      justify-self: center;
+      text-align: center;
+      padding: 1rem 1.2rem;
     }
 
+    .main-terms-of-use-cont section p{
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-size: .98rem;
+      font-weight: 300;
+      color: rgb(70, 73, 78);
+    }
+
+    .main-terms-of-use-cont section ul li{
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-size: .98rem;
+      font-weight: 300;
+      color: rgb(70, 73, 78);
+    }
+
+    .dark-mode .main-terms-of-use-cont section ul li{
+      color: rgb(31, 31, 34);
+      font-weight: 400;
+    }
+    .dark-mode .main-terms-of-use-cont section p{
+      color: rgb(31, 31, 34);
+      font-weight: 400;
+    }
+
+    .main-terms-of-use-cont section h2{
+      font-size: 1.1rem;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-weight: 500;
+    }
+
+    .dark-mode .main-terms-of-use-cont section strong{
+      color: rgba(7, 56, 102, 0.918) !important;
+      opacity: 1;
+
+    }
+
+    .main-terms-of-use-cont .date{
+      width: 100%;
+      height: max-content;
+      display: flex;
+      position: relative;
+      margin-top: 0;
+      align-items: center;
+      justify-content: flex-start ;
+      margin-bottom: 1rem;
+      flex-direction: column;
+    }
+
+.dark-mode{
+      background: var(--darkMode-bg-cl);
+    
+   }
+
     .dark-mode .date h1, p{
-      color: white;
+      color: rgb(255, 255, 255);
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
       opacity: .7;
+      font-size: 1rem;
     }
+
+   
 
     h1, h2 {
       color: #0b8f5d;
+      font-size: 1.3rem;
     }
 
     .dark-mode h1,h2{
@@ -165,12 +232,16 @@ html:focus-within{
       flex-direction: column;
     }
 
-     .dark-mode .contact p{
-      color: white;
+     .dark-mode .main-terms-of-use-cont .contact p{
+      color: white !important;
       opacity: .7;
      }
 
-   
+
+      .dark-mode .main-terms-of-use-cont .contact ul li{
+      color: rgba(21, 158, 90, 0.938) !important;
+      opacity: .7;
+     }
 
     .dark-mode .contact{
       background-color: var(--welcome-card-bg);
