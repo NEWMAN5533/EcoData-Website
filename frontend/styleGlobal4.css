@@ -1185,3 +1185,19 @@ NEW BADGE
 /***********
 NEW BADGE ENDS
 ************/   
+  
+  /***********
+    GOOGLE MATERIAL ICON
+************/   
+    .material-icons{
+      color: rgb(131, 127, 127);
+      font-size: 1.4rem;
+    }
+
+
+    .dark-mode .material-icons{
+      color: rgb(251, 255, 224);
+    }
+     /***********
+    GOOGLE MATERIAL  ICON ENDS
+************/   
