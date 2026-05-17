@@ -270,40 +270,6 @@ document.addEventListener("click", () => {
 
 
 
-
-// =================================================
-// CHECK IF THE RECIPIENT HAS ACTIVE ORDER (ALREADY)
-// =================================================
-const activeStatus = ["pending", "queued", "processing", "completed", "failed", "cancelled"];
-
-function normalizeNumber(num) {
-  return num.replace(/\D/g, "").slice(-9);
-}
-
-      // check function
- function hasActiveOrder(recipient) {
-  const orders = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
-
-  const target = normalizeNumber(recipient);
-
-  return orders.some(o => {
-    const status = (o.status || "").toLowerCase();
-
-    return normalizeNumber(
-      o.recipient === target && activeStatus.includes(status) 
-    );
-  });
- }
-// =================================================
-// CHECK IF THE RECIPIENT HAS ACTIVE ORDER (ALREADY) ENDS
-// =================================================
-
-
-
-
-
-
-
    // BOTTOM NAVIGATION BAR (DISPLAY = NONE if())
   const bottomNavDiv = document.getElementById("navIconDiv");
 
@@ -657,13 +623,50 @@ function playSuccessSound() {
 
 
 
+// =================================================
+// CHECK IF THE RECIPIENT HAS ACTIVE ORDER (ALREADY)
+// =================================================
+const activeStatus = ["pending", "queued", "processing"];
+
+function normalizeNumber(num = "") {
+  return String(num).replace(/\D/g, "").slice(-9);
+}
+
+      // checker function
+ function hasActiveOrder(recipient) {
+  const orders =
+  JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
+
+  const target = normalizeNumber(recipient);
+
+  return orders.some(o => {
+    const status = (o.status || "").toLowerCase();
+
+    return normalizeNumber(
+      o.recipient === target && activeStatus.includes(status) 
+    );
+  });
+ }
+// =================================================
+// CHECK IF THE RECIPIENT HAS ACTIVE ORDER (ALREADY) ENDS
+// =================================================
+
+
+
 
 
 
 //NEW UPDATED 21/01/2026 //
 // === PAYSTACK PAYMENT (Firebase version) ===
 async function payWithPaystack(bundle, recipient) {
-  
+
+  // CHECK IF RECIPIENT HAS ACTIVE ORDER ALREADY
+  hasActiveOrder();
+if(hasActiveOrder(recipient)){
+  showSnackBar(" Number already has an active order", "warning");
+  return;
+};
+
 
   const { network, packageName, size, price } = bundle;
 
