@@ -159,9 +159,12 @@ html:focus-within{
       flex-direction: column;
     }
 
+    .main-terms-of-use-cont .date p{
+      color: black;
+    }
+
 .dark-mode{
-      background: var(--darkMode-bg-cl);
-    
+  background: var(--darkMode-bg-cl);
    }
 
     .dark-mode .date h1, p{
@@ -296,7 +299,7 @@ WATCH VIDEO SECTION
   width: 100vw;
   padding: .3rem 1rem;
   justify-self: center;
-  height: 3rem;
+  height: 3.7rem !important;
   position: fixed;
   top: 0;
   margin: 0;
