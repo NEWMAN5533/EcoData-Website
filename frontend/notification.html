@@ -38,6 +38,7 @@
   <link rel="stylesheet" href="styleGlobal.css">
   <link rel="stylesheet" href="styleGlobal2.css">
   <link rel="stylesheet" href="styleGlobal3.css">
+  <link rel="stylesheet" href="styleGlobal4.css">
 
 
   <style>
@@ -227,6 +228,122 @@ Delete button
  <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
+
+
+  <!--sidebar----->
+<div class="ecodata-sidebar" id="ecoDataSidebar">
+  <div class="ecodata-sidebar-top">
+      <div class="userProfile-container">
+          <div class="user" id="userPro">
+            <span class="us"><h1>U</h1>
+            </span>
+            <h3>User Panel</h3>
+          </div>
+      </div>
+  </div>
+
+  <div class="ecodata-sidebar-middle">
+      <!---middle-->
+        <div class="quick-links-section">
+          <div class="link-section-wrapper">
+          <!---network-nav-ends---->
+          
+          
+          
+           <div class="quicker-nav " >
+            <div class="naver" onclick="window.location.href='./index.html'">
+             <span class="material-icons">home</span>
+            <p>Home</p>
+            </div>
+          </div> 
+
+           <div class="quicker-nav active " >
+            <div class="naver" onclick="window.location.href='./index.html'">
+             <span class="material-icons">notifications</span>
+            <p>Notifications</p>
+            </div>
+
+             <div class="tag">
+                <img src="./css/icons/completed.png" alt="" loading="lazy">
+            </div>
+          </div> 
+
+          
+
+
+           <div class="quicker-nav " >
+            <div class="naver" onclick="window.location.href='./pay.html'">
+               <span class="material-icons">local_offer</span>
+            <p> Discount</p>
+            </div>
+          </div> 
+
+          <div class="quicker-nav" >
+            <div class="naver" onclick="window.location.href='./afa.html'">
+              <span class="material-icons">how_to_reg</span>
+            <p>AFA Registration</p>
+            </div>
+          </div>
+        
+          <!----terms & cons--->
+
+        
+            <div class="quicker-nav" onclick="window.location.href='./bundlesInfo.html'">
+              <span class="material-icons">info</span>
+              <p>Info</p>
+            </div>
+         
+
+          
+
+          
+          <div title="Coming up soon!" class="quicker-nav " >
+            <div class="naver" onclick="window.location.href='ebooks.html'">
+               <span class="material-icons">menu_book</span>
+            <p>ebooks</p>
+            </div>
+            <div class="tag">
+              <small>New</small>
+            </div>
+          </div> 
+
+           <div title="Coming Up Soon!" class="quicker-nav" >
+            <div class="naver">
+              <span class="material-icons">store</span>
+              <p>Get Store</p>
+            </div>
+              <div class="tag">
+              <small>Coming up!</small>
+            </div>
+          </div>
+
+          </div>
+        </div>
+  </div>
+  <div class="ecodata-sidebar-bottom">
+      <!--bottom-->
+        <div class="bottom-nav">
+          <div class="sign-link">
+            <button onclick="window.location.href = 'login.html'" class="login">
+              Login
+            </button>
+           
+          </div>
+        
+          <div class="sign-link">
+              <button class="login" onclick="window.location.href='terms.html'">
+          Terms & Condition
+        </button>
+          </div>
+
+            <div class="sign-link">
+              <button class="login " id="logOut">
+             <img src="./css/icons/logout.png" alt="" loading="lazy"> Logout
+            </button>
+          </div>
+        </div>
+  </div>
+</div>
 
 
     <div class="container">
@@ -461,7 +578,7 @@ Delete button
 
 
 <!------MENU-CARD----->
-<div class="menu-card-container" id="closeCard">
+<div class="menu-card-container" id="closeCard" style="display: none;">
        <div class="link">
        <a href="terms.html">
         <img src="./css/icons/list.jpg" alt="image" loading="lazy">
@@ -574,7 +691,7 @@ Delete button
       <div class="activeImg" onclick="window.location.href ='pay.html'"> 
         <span class="material-icons">local_offer</span>
       </div>
-      <small class="bottomIcon-textNav">Get Discounts</small>
+      <small class="bottomIcon-textNav"> Discounts</small>
     </div>
 
 
@@ -589,7 +706,7 @@ Delete button
 
       <div class="btom-navIcon" >
       <div class="activeImg" id="activeTel" onclick="window.location.href='afa.html'"> 
-        <img class="pin" src="./css/icons/personal.png" alt="" loading="lazy">
+        <span class="material-icons">how_to_reg</span>
       </div>
       <small class="bottomIcon-textNav">AFA</small>
     </div>
@@ -682,6 +799,47 @@ Delete button
 
 
 
+<!---MENU-CARD-JS-->
+<!---MENU-CARD-JS-->
+<script>
+document.addEventListener("DOMContentLoaded", ()=> {
+ const cardToggler = document.getElementById("cardToggler");
+ const secondToggler = document.getElementById("menuDarkMode");
+const cardCloser = document.getElementById("ecoDataSidebar");
+
+  // toggle menu card
+  cardToggler.addEventListener("click", function(e) {
+    e.stopPropagation();
+    if(cardCloser.classList.contains("active")){
+      cardCloser.classList.remove("active");
+    } else{
+      cardCloser.classList.add("active");
+    }
+  });
+
+  // secondToggler
+  secondToggler.addEventListener("click", function(e) {
+    e.stopPropagation();
+
+    if(secondToggler) {
+      cardCloser.classList.add("active");
+    } else {
+      cardCloser.classList.remove("active");
+    }
+  })
+
+  // when ever clicked outside?
+  window.addEventListener("click", function(e) {
+    if(!cardCloser.contains(e.target) && !cardToggler.contains(e.target)) {
+      cardCloser.classList.remove("active");
+    }
+  })
+})
+
+ 
+
+
+</script>
 
 
 
@@ -846,49 +1004,8 @@ function showSnackBar(message, type = "info", duration = 4000) {
 
 
 
-<!---MENU-CARD-JS-->
-<!---MENU-CARD-JS-->
-<script>
-document.addEventListener("DOMContentLoaded", ()=> {
- const cardToggler = document.getElementById("cardToggler");
- const secondToggler = document.getElementById("menuDarkMode");
-const cardCloser = document.getElementById("closeCard");
-
-  // toggle menucard
-  cardToggler.addEventListener("click", function(e) {
-    e.stopPropagation();
-    if(cardCloser.classList.contains("active")){
-      cardCloser.classList.remove("active");
-    } else{
-      cardCloser.classList.add("active");
-    }
-  });
-
-  // secondToggler
-  secondToggler.addEventListener("click", function(e) {
-    e.stopPropagation();
-
-    if(secondToggler) {
-      cardCloser.classList.add("active");
-    } else {
-      cardCloser.classList.remove("active");
-    }
-  })
-
-  // when ever clicked outside?
-  window.addEventListener("click", function(e) {
-    if(!cardCloser.contains(e.target) && !cardToggler.contains(e.target)) {
-      cardCloser.classList.remove("active");
-    }
-  })
-})
-
- 
 
 
-</script>
-
-<!---HIDE MULTIPLE DIV--->
 
 
 
