@@ -31,7 +31,8 @@
 
 
 
-
+<!---GOOGLE MATERIAL ICON--LINK---->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 
   <!---css-link-->
@@ -421,17 +422,17 @@ width: 50%;
         <div class="quick-links-section">
           <div class="link-section-wrapper">
           <!---network-nav-ends---->
-             <div class="quicker-nav" onclick="window.location.href='./index.html'">
+             <div class="quicker-nav " onclick="window.location.href='./agentPage.html'">
             <img src="./css/icons/home.png" alt="" loading="lazy">
             <p>Home</p>
           </div> 
 
-              <div class="quicker-nav active" onclick="window.location.href='#'">
+
+
+           <div class="quicker-nav active" onclick="window.location.href='#'">
             <img src="./css/icons/like.png" alt="" loading="lazy">
-            <p>Agent Page</p>
+            <p>Agent page</p>
           </div> 
-
-
 
           <div class="quicker-nav" onclick="window.location.href='./afa.html'">
             <img src="./css/icons/personal.png" alt="" loading="lazy">
@@ -488,7 +489,7 @@ width: 50%;
              <button class="login " id="lapOut">
              <img src="./css/icons/logout.png" alt="" loading="lazy"> Logout
             </button>
-          </div>
+            </div>
         </div>
       </div>
 
@@ -3009,7 +3010,7 @@ width: 50%;
   <div class="bottom-navbar" id="navIconDiv">
     <div class="btom-navIcon" onclick="window.location.href='index.html'">
       <div class="activeImg active" id="activeMtn">
-        <img src="./css/icons/home.png" alt="" loading="lazy">
+       <span class="material-icons">home</span>
       </div>
       <small class="bottomIcon-textNav">Home</small>
     </div>
@@ -3019,13 +3020,13 @@ width: 50%;
 
     <div class="btom-navIcon">
       <div class="activeImg" onclick="window.location.href ='pay.html'"> 
-        <img class="pin" src="./css/icons/like.png" alt="" loading="lazy">
+        <span class="material-icons">local_offer</span>
       </div>
-      <small class="bottomIcon-textNav">Get Discounts</small>
+      <small class="bottomIcon-textNav"> Discounts</small>
     </div>
 
      <div class="ecodataShopBtn">
-       <div class="shop-fixedBtn" >
+       <div class="shop-fixedBtn" id="shoppingBtn">
     <img class="pin" src="./css/icons/logoImg.png" alt="" loading="lazy">
     </div>
    
@@ -3043,7 +3044,7 @@ width: 50%;
 
      <div class="btom-navIcon" >
       <div class="activeImg" id="activeAir" onclick="window.location.href='bundlesInfo.html'"> 
-        <img class="pin" src="./css/icons/terms (1).png" alt="" loading="lazy">
+       <span class="material-icons">info</span>
       </div>
       <small class="bottomIcon-textNav"> Info</small>
     </div>
@@ -3184,22 +3185,6 @@ width: 50%;
   <!-- Load Paystack library -->
 <script src="https://js.paystack.co/v2/inline.js"></script>
 
-
-<script type="module" src="./firebase-config.js"></script>
-
-<script type="module" src="main.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-<!---AGENT RESTRICTION--SCRIPT----->
 <!---usernameDisplay----->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
@@ -3232,6 +3217,7 @@ width: 50%;
 
       if (!userDoc.exists() || userDoc.data().isAgent !== true) {
         showSnackBar("Not a Subscriber yet");
+        window.location.href = "index.html";
         return;
       }
 
@@ -3245,21 +3231,23 @@ width: 50%;
 
   });
 
-const lapOutBtn = document.getElementById("lapOut");
-const logOutBtn = document.getElementById("logOut");
+const lapOutBtn = document.getElementById("logOut");
+const logOutBtn = document.getElementById("lapOut");
 
 if(logOutBtn){
   logOutBtn.addEventListener("click", async() => {
-    try{
+    try {
       await signOut(auth);
-      showSnackBar("Logged out successfully!");
+      showSnackBar("Logged out successfully!")
     } catch(err){
-      console.error("Error logging out", err);
-      showSnackBar("Error logging out", 'error');
-  }
-} );
-   }                         
+      console.error("LogOut error;", err);
+      showSnackBar("Error logging out.", "warning");
+    }
+  })
+}
 
+
+// laptop logout
 if(lapOutBtn) {
  
   lapOutBtn.addEventListener("click", async() => {
@@ -3329,6 +3317,22 @@ function showSnackBar(message, type = "info", duration = 4000) {
 
 
 </script>
+
+<script type="module" src="./firebase-config.js"></script>
+
+<script type="module" src="main.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <!---MODE BTNS-->
