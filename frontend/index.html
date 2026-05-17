@@ -1255,6 +1255,32 @@ width: 50%;
 
 
 
+<!---MANUAL ORDER CHECKER---->
+  <!----right-div-->
+<div class="manual-container" style="display: none !important;">
+  
+<div class="manual-right">
+  <div class="manual-left-top">
+    <div class="status-result" id="statusResult"></div>
+  </div>
+</div>
+
+<div class="manual-right">
+   <section class="order-status-section">
+  <h2>Check Order</h2>
+  <span><img src="./icons/icons8-wifi.gif" alt="image" loading="lazy"></span>
+  <input type="text" id="orderInput" placeholder="Enter Order ID">
+  <button class="checkBt" id="checkBtn">Check Status</button>
+  
+</section>
+  </div>
+
+
+</div>
+
+
+
+
 <!-----COUNTER-ENDS--->
 
 <!----TRUSTED-MESSAGE------>
@@ -1361,6 +1387,13 @@ width: 50%;
       <img class="analy" src="./css/icons/market.png" alt="" loading="lazy">
       WE ARE RUNNING PROMO! EVERY <span style="color: wheat; margin: .0.4rem">THURSDAY AND FRIDAY'S</span> on MTN DATA, buy at lower cost at these promo days. [1GB = 5.50], [2GB = 11], [3GB = 16.60],...[10GB = 45],...[20GB = 89],...[25 = 109]. Check back every <span style="color: wheat; margin: .0.4rem">THURSDAY AND FRIDAY'S</span>
     </div>
+
+
+    <div class="google-thumbnail thumb2" style="display: none;">
+  <img class="analy" src="./css/uiIcons/loudspeaker.png" alt="" loading="lazy">
+   w
+    </div>
+
 
 
 
@@ -1628,7 +1661,6 @@ width: 50%;
 </div>
 
 
-
 <!-- ends -->
 
 <!----dashboard-overview-->
@@ -1645,9 +1677,12 @@ width: 50%;
 <section class="normalGrid-container">
 
 
-  <div class="titlen" style="text-align: center;">
-    <h2 style="font-size: 1.1rem;">Select MTN Delivery  Offer.</h2>
-   
+  <div class="titlen">
+    <div class="mtn-offers-title"><h2 >Select MTN Offer</h2>
+    </div>
+   <div class="choose-offer"> 
+    <small>Choose from available MTN data offers</small>
+  </div>
   </div>
 
 
@@ -4305,8 +4340,8 @@ width: 50%;
     </div>
 
    
-   <div class="ecodataShopBtn">
-       <div class="shop-fixedBtn">
+   <div class="ecodataShopBtn" >
+       <div class="shop-fixedBtn" id="shoppingBtn">
     <img class="pin" src="./css/icons/logoImg.png" alt="" loading="lazy">
     </div>
    
@@ -4676,6 +4711,7 @@ document.getElementById("loginBtn").onclick = ()=>{
 
 
 
+
   
   
 
@@ -4727,6 +4763,9 @@ function showSnackBar(message, type = "info", duration = 4000) {
 
 
 </script>
+
+
+
  
 <!---ads js-->
 <script>
