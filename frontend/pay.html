@@ -82,7 +82,20 @@
 </style>
 
 
+<style>
+  .priceTagger .tagNote{
+    margin-bottom: .8rem;
+  }
 
+  .priceTagger .material-icons{
+    padding: .5rem;
+    font-size: 1.6rem;
+  }
+
+  .dark-mode .priceTagger .material-icons{
+    padding-bottom: .5rem;
+  }
+</style>
 
   
 
@@ -610,9 +623,10 @@
  </div>
  
  <div class="priceTagger">
-   <img src="./css/icons/eye (2).gif" alt="">
- 
-  <h2>Unlock Exclusive Access </h2>
+  <span class="material-icons">local_offer</span>
+ <div class="tagNote">
+   <h2>Unlock Exclusive Access </h2>
+ </div>
  </div>
 <button id="payBtn" class="regis">Get Access</button>
 </div>
@@ -663,17 +677,12 @@
     </div>
 
 
-     <div class="btom-navIcon" >
+    <div class="btom-navIcon" >
       <div class="activeImg" id="activeAir" onclick="window.location.href='bundlesInfo.html'"> 
         <span class="material-icons">info</span>
       </div>
       <small class="bottomIcon-textNav"> Info</small>
     </div>
-
-
-   
-
-
   </div>
 
 
@@ -749,7 +758,7 @@
       </div> 
     </div>
 
-    
+
 
 
 
@@ -1089,7 +1098,6 @@ notifyCount.addEventListener("click", () => {
 </script>
 
 
-<!---MENU-CARD-JS-->
 <!---MENU-CARD-JS-->
 <script>
 document.addEventListener("DOMContentLoaded", ()=> {
