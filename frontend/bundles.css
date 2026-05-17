@@ -370,9 +370,15 @@ padding: 2rem;
   margin-bottom: 10px !important;
   height: max-content;
   display: flex;
+  gap: .8rem !important;
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
+  padding: .5rem;
+}
+
+.faq details p{
+  margin-top: .5rem !important;
   padding: .5rem;
 }
 .faq h2{
