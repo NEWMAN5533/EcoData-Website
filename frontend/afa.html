@@ -30,7 +30,8 @@
 <!----GOOGLE-SITE-SEARCH-ENDS-->
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
-
+<!---GOOGLE MATERIAL ICON--LINK---->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 
 
@@ -813,7 +814,7 @@
   <div class="bottom-navbar" id="navIconDiv">
     <div class="btom-navIcon" onclick="window.location.href='index.html'">
       <div class="activeImg " id="activeMtn">
-        <img src="./css/icons/home.png" alt="" loading="lazy">
+        <span class="material-icons">home</span>
       </div>
       <small class="bottomIcon-textNav">Home</small>
     </div>
@@ -823,13 +824,13 @@
 
     <div class="btom-navIcon">
       <div class="activeImg" onclick="window.location.href ='pay.html'"> 
-        <img class="pin" src="./css/icons/like.png" alt="" loading="lazy">
+        <span class="material-icons">local_offer</span>
       </div>
-      <small class="bottomIcon-textNav">Get Discounts</small>
+      <small class="bottomIcon-textNav">Discounts</small>
     </div>
 
      <div class="ecodataShopBtn">
-       <div class="shop-fixedBtn" >
+       <div class="shop-fixedBtn" id="shoppingBtn">
     <img class="pin" src="./css/icons/logoImg.png" alt="" loading="lazy">
     </div>
    
@@ -847,7 +848,7 @@
 
      <div class="btom-navIcon" >
       <div class="activeImg" id="activeAir" onclick="window.location.href='bundlesInfo.html'"> 
-        <img class="pin" src="./css/icons/terms (1).png" alt="" loading="lazy">
+        <span class="material-icons">info</span>
       </div>
       <small class="bottomIcon-textNav"> Info</small>
     </div>
@@ -1024,8 +1025,8 @@ const greeting = updateClock();
 });
 
 
-const logOutBtn = document.getElementById("logOuBtn");
 const lapOutBtn = document.getElementById("lapOut");
+const logOutBtn = document.getElementById("logOut");
 
 // Logout
 if(logOutBtn) {
