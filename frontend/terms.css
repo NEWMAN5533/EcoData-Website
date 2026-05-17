@@ -162,6 +162,10 @@ html:focus-within{
     .main-terms-of-use-cont .date p{
       color: black;
     }
+    .dark-mode .main-terms-of-use-cont .date p{
+      color: white;
+      opacity: .8;
+    }
 
 .dark-mode{
   background: var(--darkMode-bg-cl);
