@@ -270,7 +270,7 @@ width: 50%;
           
            <div class="quicker-nav " >
             <div class="naver" onclick="window.location.href='./index.html'">
-               <img src="./css/icons/home.png" alt="" loading="lazy">
+               <span class="material-icons">home</span>
             <p>Home</p>
             </div>
             
@@ -280,7 +280,7 @@ width: 50%;
           
            <div class="quicker-nav active" >
             <div class="naver" onclick="window.location.href='./index.html'">
-                <img src="./css/icons/like.png" alt="" loading="lazy">
+               <span class="material-icons">local_offer</span>
             <p>Agent Page</p>
             </div>
             <div class="tag">
@@ -305,7 +305,7 @@ width: 50%;
         
             <div class="quicker-nav" >
               <div class="naver" onclick="window.location.href='./bundlesInfo.html'">
-                  <img src="./css/icons/terms (1).png" alt="" loading="lazy">
+                <span class="material-icons">info</span>
               <p>Info</p>
               </div>
           </div>
@@ -316,7 +316,7 @@ width: 50%;
           
           <div title="Coming up soon!" class="quicker-nav " >
             <div class="naver" onclick="window.location.href='ebooks.html'">
-              <img src="./css/icons/ebook.png" alt="" loading="lazy">
+              <span class="material-icons">menu_book</span>
             <p>ebooks</p>
             </div>
 
@@ -330,7 +330,7 @@ width: 50%;
 
            <div title="Coming Up Soon!" class="quicker-nav" >
             <div class="naver">
-              <img src="./css/uiIcons/store.png" alt="" loading="lazy">
+             <span class="material-icons">store</span>
               <p>Get Store</p>
             </div>
              <div class="tag">
@@ -882,20 +882,20 @@ width: 50%;
 <!---NEW UI UPDATE (5th-05-2026)--=[grid & normal ui-->
 <section class="normalGrid-container">
 
-  <!---title-->
-  <div class="normalTitle" id="mtnBanner">
-  </div>
 
-  <div class="titlen" style="text-align: center;">
-    <h2 style="font-size: 1.1rem;">Select MTN Data Delivery <br> Offer.</h2>
-   
+  <div class="titlen">
+    <div class="mtn-offers-title"><h2 >Select MTN Offer</h2>
+    </div>
+   <div class="choose-offer"> 
+    <small>Choose from available MTN data offers</small>
+  </div>
   </div>
 
 
 
 
   <!---offer-select-options-->
-   <div class="custom-select">
+  <div class="custom-select">
   <button class="select-btn" id="selectBtn">
     Select Available MTN Offer
   
@@ -945,6 +945,7 @@ width: 50%;
 
 </div>
 </section>
+
 
 
 <!-----INDIVIDUAL SECTIONS-VIEW TOGGLE---->
