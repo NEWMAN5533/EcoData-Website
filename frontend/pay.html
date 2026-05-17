@@ -32,7 +32,8 @@
 
 
 
-
+<!---GOOGGLE MATERIAL ICON--LINK---->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 
 
@@ -320,7 +321,7 @@
           </div>
 
             <div class="sign-link">
-             <button id="lapOut" class="login">
+              <button  class="login " id="lapOut">
               <img src="./css/icons/logout.png" alt="" loading="lazy"> Logout
             </button>
           </div>
@@ -629,7 +630,7 @@
   <div class="bottom-navbar" id="navIconDiv">
     <div class="btom-navIcon" onclick="window.location.href='index.html'">
       <div class="activeImg" id="activeMtn">
-        <img src="./css/icons/home.png" alt="" loading="lazy">
+        <span class="material-icons ">home</span>
       </div>
       <small class="bottomIcon-textNav">Home</small>
     </div>
@@ -639,14 +640,14 @@
 
     <div class="btom-navIcon">
       <div class="activeImg activeMin" onclick="window.location.href ='pay.html'"> 
-        <img class="pin" src="./css/icons/like.png" alt="" loading="lazy">
+       <span class="material-icons">local_offer</span>
       </div>
-      <small class="bottomIcon-textNav">Get Discounts</small>
+      <small class="bottomIcon-textNav"> Discounts</small>
     </div>
 
 
      <div class="ecodataShopBtn">
-       <div class="shop-fixedBtn">
+       <div class="shop-fixedBtn" id="shoppingBtn">
     <img class="pin" src="./css/icons/logoImg.png" alt="" loading="lazy">
     </div>
    
@@ -664,7 +665,7 @@
 
      <div class="btom-navIcon" >
       <div class="activeImg" id="activeAir" onclick="window.location.href='bundlesInfo.html'"> 
-        <img class="pin" src="./css/icons/terms (1).png" alt="" loading="lazy">
+        <span class="material-icons">info</span>
       </div>
       <small class="bottomIcon-textNav"> Info</small>
     </div>
@@ -949,25 +950,23 @@ onAuthStateChanged(auth, async (user) => {
 });
 
 
-const logoutBtn = document.getElementById("logOutBtn");
+
 const lapOutBtn = document.getElementById("lapOut");
+const logOutBtn = document.getElementById("logOut");
 
 
-// Logout
-if (logoutBtn) {
-  logoutBtn.addEventListener("click", async () => {
-
-    try {
+if(logOutBtn){
+  logOutBtn.addEventListener("click", async() => {
+    try{
       await signOut(auth);
       showSnackBar("Logged out successfully!");
-      //window.location.href = "login.html"; // change if needed
-    } catch (error) {
-      console.error("Logout error:", error);
-      showSnackBar("Error logging out.");
+    } catch(err){
+      console.error("Error logging out", err);
+      showSnackBar("Error logging out", "error");
     }
   });
-
 }
+
 
 // logout on laptop
 if(lapOutBtn){
