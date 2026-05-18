@@ -41,6 +41,7 @@
   <link rel="stylesheet" href="styleGlobal2.css">
   <link rel="stylesheet" href="styleGlobal3.css">
   <link rel="stylesheet" href="styleGlobal4.css">
+  <link rel="stylesheet" href="styleSkeletonUi.css">
 <!---LOADER CARD---->
 <style>
   .packages small{
@@ -125,6 +126,61 @@
 </style>
 
 
+ <style>
+        .gridCards-container .offer-title{
+          width: 100%;
+          display: flex;
+          height: 3rem;
+          align-items: center;
+          justify-content: center;
+          padding: .4rem;
+        }
+
+        .gridCards-container .offer-title h2{
+          color: rgb(57, 57, 65);
+        }
+
+        .gridCards-container #gridNormalDiv{
+          width: 100%;
+          max-width: max-content;
+          position: relative;
+        }
+
+
+        .gridCards-container #gridNormalDiv .gridCard-wrapper{
+          gap: 8px !important;
+        }
+
+        .gridCards-container #gridExpressDiv .gridCard-wrapper{
+          gap: 8px !important;
+        }
+
+        .gridCards-container .grader.active{
+          display: none;
+        }
+
+
+  .gridCard .gridCard-middle .oldTag{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+    width: 100%;
+    height: max-content;
+    padding: .1rem;
+    background: none;
+  }
+
+  .gridCard .gridCard-middle .oldTag small{
+    color: rgb(238, 82, 82) !important;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 600;
+  }
+
+</style>
+
+
 
 <!---google thumbnails images-->
 <style>
@@ -171,6 +227,7 @@
 
 
 </style>
+
 
 
 
@@ -241,10 +298,203 @@ width: 50%;
 </head>
 
 <script src="global.js"></script>
+<script src="styleSkeloton.js"></script>
 <body>
 
 
   
+    <!-- SKELETON OVERLAY — removed once app loads -->  
+<div id="skeletonOverlay">  
+  
+  <!-- Welcome Card Skeleton -->  
+  <div class="sk-welcome" style="display: none;">  
+    <div class="sk-welcome-top">  
+      <span class="sk" style="width:3rem;height:3rem;
+      border-radius: 50%;">
+    </span>  
+      
+      <span class="sk" style="width:130px;height:32px;border-radius:8px;"></span>  
+    </div>  
+   
+  </div> 
+
+  <!---welcome=card---->
+  <div class="sk-welcome-card">
+    <div class="sk-welcome-card-top">
+       <span class="sk" style="width:140px; height: 28px;">
+
+       </span>  
+          <span class="sk" style="width:90px;height:17px;"></span>  
+    </div>
+
+    <div class="sk-welcome-card-bottom">
+       <span class="sk" style="width: 100%;height:90%;"></span>  
+      
+    </div>
+  </div>
+
+   <div style="display:none;justify-content:space-between;align-items:center;">  
+      <span class="sk" style="width:80px;height:13px;"></span>  
+      <div style="display:flex;gap:8px;align-items:center;">  
+        <div style="display:flex;gap:4px;">  
+         
+          <span class="sk" style="width:14px;height:14px;border-radius:50%;"></span>  
+          <span class="sk" style="width:14px;height:14px;border-radius:50%;"></span>  
+          <span class="sk" style="width:14px;height:14px;border-radius:50%;"></span>  
+        </div>  
+       
+      </div>  
+    </div>  
+  
+  <!-- Trusted By Skeleton -->  
+  <div class="sk-trusted">  
+    <div class="sk-trust-left">
+      <div class="sk-section-title">  
+      <span class="sk" style="width:160px;height:18px;margin-bottom:8px;display:block;"></span>  
+      <span class="sk" style="width:200px;height:14px;display:block;"></span>  
+    </div>  
+    <div class="sk-logos">  
+      <div class="sk-logo-item">  
+        <span class="sk" style="width:44px;height:44px;border-radius:50%;"></span>  
+        <span class="sk" style="width:40px;height:11px;"></span>  
+      </div>  
+      <div class="sk-logo-item">  
+        <span class="sk" style="width:44px;height:44px;border-radius:50%;"></span>  
+        <span class="sk" style="width:50px;height:11px;"></span>  
+      </div>  
+      <div class="sk-logo-item">  
+        <span class="sk" style="width:44px;height:44px;border-radius:50%;"></span>  
+        <span class="sk" style="width:60px;height:11px;"></span>  
+      </div>  
+      <div class="sk-logo-item">  
+        <span class="sk" style="width:44px;height:44px;border-radius:50%;"></span>  
+        <span class="sk" style="width:55px;height:11px;"></span>  
+      </div>  
+    </div> 
+    </div>
+    <div class="sk-imageContainer">
+       <span class="sk" style="min-width:69px;height:42px;border-radius:10px;flex-shrink:0;"></span> 
+    </div> 
+  </div>  
+  
+  <!-- Scrolling Thumbnails Skeleton -->  
+  <div class="sk-thumbnails">  
+    <span class="sk" style="min-width:200px;height:40px;border-radius:10px;flex-shrink:0;"></span>  
+    <span class="sk" style="min-width:200px;height:40px;border-radius:10px;flex-shrink:0;"></span>  
+    <span class="sk" style="min-width:180px;height:40px;border-radius:10px;flex-shrink:0;"></span>  
+  </div>  
+  
+  <!-- Promo Bar Skeleton -->  
+  <div class="sk-promo-bar">  
+    <div>  
+      <span class="sk" style="width:90px;height:22px;display:block;margin-bottom:6px;border-radius:4px;"></span>  
+      <span class="sk" style="width:120px;height:13px;display:block;"></span>  
+    </div>  
+    <span class="sk" style="width:100px;height:36px;border-radius:8px;"></span>  
+  </div>  
+  
+  <!-- Notice Board Skeleton -->  
+  <div class="sk-notice">  
+    <span class="sk" style="width:140px;height:16px;margin-bottom:12px;display:block;"></span>  
+    <div style="display:flex;flex-direction:column;gap:10px;">  
+      <span class="sk" style="width:100%;height:13px;"></span>  
+      <span class="sk" style="width:90%;height:13px;"></span>  
+      <span class="sk" style="width:75%;height:13px;"></span>  
+      <span class="sk" style="width:85%;height:13px;"></span>  
+    </div>  
+  </div>  
+  
+  <!-- Analytics Cards Skeleton -->  
+  <span class="sk" style="width:160px;height:16px;display:block;margin-bottom:10px;"></span>  
+  <div class="sk-analytics">  
+    <div class="sk-analytics-card">  
+      <span class="sk" style="width:80px;height:12px;display:block;margin-bottom:10px;"></span>  
+      <span class="sk" style="width:50px;height:28px;display:block;border-radius:4px;"></span>  
+    </div>  
+    <div class="sk-analytics-card">  
+      <span class="sk" style="width:80px;height:12px;display:block;margin-bottom:10px;"></span>  
+      <span class="sk" style="width:50px;height:28px;display:block;border-radius:4px;"></span>  
+    </div>  
+    <div class="sk-analytics-card">  
+      <span class="sk" style="width:80px;height:12px;display:block;margin-bottom:10px;"></span>  
+      <span class="sk" style="width:50px;height:28px;display:block;border-radius:4px;"></span>  
+    </div>  
+    <div class="sk-analytics-card">  
+      <span class="sk" style="width:80px;height:12px;display:block;margin-bottom:10px;"></span>  
+      <span class="sk" style="width:50px;height:28px;display:block;border-radius:4px;"></span>  
+    </div>  
+  </div>  
+  
+  <!-- Orders Table Skeleton -->  
+  <div class="sk-table">  
+    <span class="sk" style="width:130px;height:15px;display:block;margin-bottom:12px;"></span>  
+    <div class="sk-table-row">  
+      <span class="sk" style="flex:1;height:12px;"></span>  
+      <span class="sk" style="flex:1;height:12px;"></span>  
+      <span class="sk" style="flex:1;height:12px;"></span>  
+      <span class="sk" style="flex:1;height:12px;"></span>  
+    </div>  
+    <div class="sk-table-row">  
+      <span class="sk" style="flex:1;height:12px;"></span>  
+      <span class="sk" style="flex:1;height:12px;"></span>  
+      <span class="sk" style="flex:1;height:12px;"></span>  
+      <span class="sk" style="flex:1;height:12px;"></span>  
+    </div>  
+    <div class="sk-table-row">  
+      <span class="sk" style="flex:1;height:12px;"></span>  
+      <span class="sk" style="flex:1;height:12px;"></span>  
+      <span class="sk" style="flex:1;height:12px;"></span>  
+      <span class="sk" style="flex:1;height:12px;"></span>  
+    </div>  
+  </div>  
+  
+  <!-- Bundle Selector Skeleton -->  
+  <span class="sk" style="width:180px;height:16px;display:block;margin-bottom:10px;"></span>  
+  <span class="sk" style="width:100%;height:44px;border-radius:10px;display:block;margin-bottom:14px;"></span>  
+  
+  <!-- Bundle Grid Cards Skeleton -->  
+  <div class="sk-bundle-grid">  
+    <div class="sk-bundle-card">  
+      <span class="sk" style="width:40px;height:11px;"></span>  
+      <span class="sk" style="width:50px;height:24px;border-radius:4px;"></span>  
+      <span class="sk" style="width:60px;height:13px;"></span>  
+      <span class="sk" style="width:100%;height:30px;border-radius:8px;margin-top:4px;"></span>  
+    </div>  
+    <div class="sk-bundle-card">  
+      <span class="sk" style="width:40px;height:11px;"></span>  
+      <span class="sk" style="width:50px;height:24px;border-radius:4px;"></span>  
+      <span class="sk" style="width:60px;height:13px;"></span>  
+      <span class="sk" style="width:100%;height:30px;border-radius:8px;margin-top:4px;"></span>  
+    </div>  
+    <div class="sk-bundle-card">  
+      <span class="sk" style="width:40px;height:11px;"></span>  
+      <span class="sk" style="width:50px;height:24px;border-radius:4px;"></span>  
+      <span class="sk" style="width:60px;height:13px;"></span>  
+      <span class="sk" style="width:100%;height:30px;border-radius:8px;margin-top:4px;"></span>  
+    </div>  
+    <div class="sk-bundle-card">  
+      <span class="sk" style="width:40px;height:11px;"></span>  
+      <span class="sk" style="width:50px;height:24px;border-radius:4px;"></span>  
+      <span class="sk" style="width:60px;height:13px;"></span>  
+      <span class="sk" style="width:100%;height:30px;border-radius:8px;margin-top:4px;"></span>  
+    </div>  
+    <div class="sk-bundle-card">  
+      <span class="sk" style="width:40px;height:11px;"></span>  
+      <span class="sk" style="width:50px;height:24px;border-radius:4px;"></span>  
+      <span class="sk" style="width:60px;height:13px;"></span>  
+      <span class="sk" style="width:100%;height:30px;border-radius:8px;margin-top:4px;"></span>  
+    </div>  
+    <div class="sk-bundle-card">  
+      <span class="sk" style="width:40px;height:11px;"></span>  
+      <span class="sk" style="width:50px;height:24px;border-radius:4px;"></span>  
+      <span class="sk" style="width:60px;height:13px;"></span>  
+      <span class="sk" style="width:100%;height:30px;border-radius:8px;margin-top:4px;"></span>  
+    </div>  
+  </div>  
+  
+</div>  
+<!-- END SKELETON OVERLAY -->
+
 
 
  <div class="cursor" id="cursor"></div>
