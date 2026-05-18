@@ -1,38 +1,149 @@
-document.addEventListener("DOMContentLoaded", ()=> {
+document.addEventListener("DOMContentLoaded", () => {
 
+  const overlay =
+    document.getElementById('skeletonOverlay');
 
+  if (!overlay) return;
 
+  // Prevent scrolling during loading
+  document.body.classList.add('sk-loading');
 
-  requestAnimationFrame(() =>{
-    overlay.innerHTML = skeletonTemplate;
+  // =========================
+  // REVEAL SINGLE SECTION
+  // =========================
+  function revealSection(realId, skeletonId, delay = 0) {
+
+    const realSection =
+      document.getElementById(realId);
+
+    const skeleton =
+      document.getElementById(skeletonId);
+
+    // Stop if missing
+    if (!realSection || !skeleton) return;
+
+    setTimeout(() => {
+
+      skeleton.classList.add('fade-out');
+
+      setTimeout(() => {
+
+        skeleton.remove();
+
+        cleanupOverlay();
+
+      }, 450);
+
+    }, delay);
+
+  }
+
+  // =========================
+  // REMOVE OVERLAY WHEN EMPTY
+  // =========================
+  function cleanupOverlay() {
+
+    // Find all remaining skeleton sections
+    const remaining =
+      overlay.querySelectorAll('[id^="sk-"]');
+
+    // If none left → remove overlay
+    if (remaining.length === 0) {
+
+      overlay.classList.add('fade-out');
+
+      setTimeout(() => {
+
+        overlay.remove();
+
+        document.body.classList.remove('sk-loading');
+
+      }, 500);
+
+    }
+
+  }
+
+  // =========================
+  // START REVEAL SEQUENCE
+  // =========================
+  window.addEventListener('load', () => {
+
+    revealSection(
+      'NavBar',
+      'sk-NavBar',
+      100
+    );
+
+    revealSection(
+      'Welcome',
+      'sk-Welcome',
+      250
+    );
+
+    revealSection(
+      'Trusted',
+      'sk-Trusted',
+      400
+    );
+
+    revealSection(
+      'Thumbnail',
+      'sk-Thumbnail',
+      550
+    );
+
+    revealSection(
+      'Promo',
+      'sk-Promo',
+      700
+    );
+
+    revealSection(
+      'Notice',
+      'sk-Notice',
+      850
+    );
+
+    revealSection(
+      'analytics',
+      'sk-analytics',
+      1000
+    );
+
+    revealSection(
+      'OrderTable',
+      'sk-OrderTable',
+      1150
+    );
+
+    revealSection(
+      'cardsBundle',
+      'sk-cardsBundle',
+      1300
+    );
+
   });
 
+  // =========================
+  // SAFETY NET
+  // =========================
+  setTimeout(() => {
 
-  (function () {
-    
+    if (document.body.contains(overlay)) {
 
-  const overlay = document.getElementById('skeletonOverlay');  
-  if (!overlay) return;  
-  
-  function removeSkeleton() {  
+      overlay.classList.add('fade-out');
 
-    overlay.classList.add('fade-out');  
-    setTimeout(() => overlay.remove(), 520);  
-  }  
-  
-  // Strategy 1: hide when page is fully loaded (images, scripts, etc.)  
-  if (document.readyState === 'complete') {  
-    // Already loaded — small delay so content paints first  
-    setTimeout(removeSkeleton, 6000);  
-  } else {  
-    window.addEventListener('load', function () {  
-      setTimeout(removeSkeleton, 6000);  
-    });  
-  }  
-  
-  // Strategy 2: safety net — never show skeleton longer than 6 seconds  
-  setTimeout(removeSkeleton, 6000);  
-})();
+      setTimeout(() => {
 
+        overlay.remove();
+
+        document.body.classList.remove('sk-loading');
+
+      }, 500);
+
+    }
+
+  }, 10000);
 
 });
