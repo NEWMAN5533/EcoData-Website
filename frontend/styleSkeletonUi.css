@@ -30,8 +30,7 @@
   inset: 0;  
   backdrop-filter: blur(6px);
   background: #0d0f14;  
-  z-index: 999999; 
-  margin-top: 3rem; 
+  z-index: 999999999999999999999999; 
   overflow-y: auto;
   scrollbar-width: none;
   padding: 16px;  
