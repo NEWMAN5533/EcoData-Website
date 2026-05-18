@@ -143,6 +143,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-  }, 1500);
+  }, 3500);
 
 });
