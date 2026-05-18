@@ -1,0 +1,222 @@
+/* ── Skeleton Base ── */  
+
+
+
+.sk {  
+  background: linear-gradient(100deg, #1e2330 40%, #2a3045 55%, #1e2330 70%);  
+  background-size: 250% 100%;  
+  animation: sk-shimmer 1.6s infinite linear;  
+  border-radius: 6px;  
+  display: block;  
+  will-change: background-position;
+}
+
+@media(prefers-reduced-motion: reduce){
+  .sk{
+    animation: none;
+  }
+}
+
+
+
+@keyframes sk-shimmer {  
+  0%   { background-position: 200% center; }  
+  100% { background-position: -50% center; }  
+}  
+  
+/* ── Skeleton Overlay ── */  
+#skeletonOverlay {  
+  position: fixed;  
+  inset: 0;  
+  backdrop-filter: blur(6px);
+  background: #0d0f14;  
+  z-index: 999999; 
+  margin-top: 3rem; 
+  overflow-y: auto;
+  scrollbar-width: none;
+  padding: 16px;  
+  transition: opacity 0.45s ease, transform .45s ease;  
+} 
+
+
+#skeletonOverlay.fade-out {  
+  opacity: 0;  
+  transform: translateY(8px);
+  pointer-events: none;  
+}  
+  
+/* ── Skeleton Sections ── */  
+.sk-welcome {  
+  border-radius: 12px;  
+  background: #161a22;  
+  padding: 16px;  
+  height: 4rem;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center !important;
+  justify-content: space-between;
+}  
+.sk-welcome .sk-welcome-top {  
+  display: flex; 
+  height: 3rem !important;
+  width: 100%;
+  justify-content: space-between;  
+  align-items: center;  
+}  
+
+/****
+WELCOME SK 
+****/
+.sk-welcome-card{
+  border-radius: 12px;  
+  background: #161a22;  
+  padding: 16px;  
+  height: 8rem;
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center !important;
+  justify-content: space-between;
+}
+
+.sk-welcome-card .sk-welcome-card-top{
+  width: 100%;
+  height: 3.5rem;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sk-welcome-card .sk-welcome-card-bottom{
+  width: 100%;
+  height: 4.5rem;
+  display: flex;
+
+  justify-content: space-between;
+  align-items: flex-end;
+
+}
+
+
+/****
+WELCOME SK ENDS
+****/
+
+
+.sk-trusted {  
+  border-radius: 12px;  
+  background: #161a22;  
+  padding: 18px;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  justify-content: space-between;
+  margin-bottom: 14px;  
+} 
+
+.sk-trusted .sk-trust-left{
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+
+
+
+.sk-logos {  
+  display: flex;  
+  gap: 12px;  
+  margin-top: 12px;  
+}  
+.sk-logo-item {  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  gap: 6px;  
+}  
+
+.sk-trusted .sk-imageContainer{
+  width: max-content;
+  height: 100%;
+  display: flex;
+  position:relative;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+.sk-thumbnails {  
+  display: flex;  
+  gap: 10px;
+  align-items: center;
+  height: 3rem;
+  margin-bottom: 14px;  
+  overflow: hidden;  
+}  
+.sk-promo-bar {  
+  border-radius: 10px;  
+  background: #161a22;  
+  padding: 14px 16px;  
+  display: flex;  
+  justify-content: space-between;  
+  align-items: center;  
+  margin-bottom: 14px;  
+}  
+.sk-notice {  
+  border-radius: 12px;  
+  background: #161a22;  
+  padding: 16px;  
+  margin-bottom: 14px;  
+}  
+.sk-analytics {  
+  display: grid;  
+  grid-template-columns: repeat(2, 1fr);  
+  gap: 10px;  
+  margin-bottom: 14px;  
+}  
+.sk-analytics-card {  
+  background: #161a22;  
+  border-radius: 10px;  
+  padding: 14px;  
+}  
+.sk-table {  
+  background: #161a22;  
+  border-radius: 12px;  
+  padding: 14px;  
+  margin-bottom: 14px;  
+}  
+.sk-table-row {  
+  display: flex;  
+  gap: 10px;  
+  margin-bottom: 10px;  
+}  
+.sk-bundle-grid {  
+  display: grid;  
+  grid-template-columns: repeat(3, 1fr);  
+  gap: 10px;  
+  margin-bottom: 14px;  
+}  
+.sk-bundle-card {  
+  background: #161a22;  
+  border-radius: 10px;  
+  padding: 12px;  
+  display: flex;  
+  flex-direction: column;  
+  gap: 8px;  
+}  
+.sk-section-title {  
+  margin-bottom: 12px;  
+}
