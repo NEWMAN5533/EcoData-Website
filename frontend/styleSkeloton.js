@@ -32,8 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         cleanupOverlay();
 
-      }, 450);
-
+      }, 150);
     }, delay);
 
   }
@@ -58,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         document.body.classList.remove('sk-loading');
 
-      }, 500);
+      }, 100);
 
     }
 
@@ -144,6 +143,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-  }, 10000);
+  }, 1500);
 
 });
