@@ -37,6 +37,22 @@
   transition: opacity 0.45s ease, transform .45s ease;  
 } 
 
+#skeletonOverlay::-webkit-scrollbar {
+  display: none;
+}
+
+#skeletonOverlay,
+.sk,
+.fade-out{
+  transform: translateZ(0);
+}
+
+#skeletonOverlay > * {
+  transition:
+  opacity .45s ease,
+  transform .45s ease;
+}
+
 
 #skeletonOverlay.fade-out {  
   opacity: 0;  
@@ -52,12 +68,12 @@
   height: 4rem;
   margin-bottom: 14px;
   display: flex;
-  align-items: center !important;
+  align-items: center ;
   justify-content: space-between;
 }  
 .sk-welcome .sk-welcome-top {  
   display: flex; 
-  height: 3rem !important;
+  height: 3rem ;
   width: 100%;
   justify-content: space-between;  
   align-items: center;  
@@ -204,7 +220,7 @@ WELCOME SK ENDS
 }  
 .sk-bundle-grid {  
   display: grid;  
-  grid-template-columns: repeat(3, 1fr);  
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));  
   gap: 10px;  
   margin-bottom: 14px;  
 }  
@@ -218,4 +234,27 @@ WELCOME SK ENDS
 }  
 .sk-section-title {  
   margin-bottom: 12px;  
+}
+
+
+.sk-loading {
+  overflow: hidden;
+  min-height: 100dvh;
+}
+
+.fade-out {
+  opacity: 0 !important;
+  transform: translateY(10px);
+}
+
+.sk-welcome,
+.sk-welcome-card,
+.sk-trusted,
+.sk-thumbnails,
+.sk-promo-bar,
+.sk-notice,
+.sk-analytics,
+.sk-table,
+.sk-bundle-grid{
+  will-change: opacity, transform;
 }
