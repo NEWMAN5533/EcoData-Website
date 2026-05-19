@@ -2,7 +2,7 @@
 
 
 
-.sk {  
+ .sk {  
   background: linear-gradient(100deg, #1e2330 40%, #2a3045 55%, #1e2330 70%);  
   background-size: 250% 100%;  
   animation: sk-shimmer 1.6s infinite linear;  
@@ -27,28 +27,15 @@
 /* ── Skeleton Overlay ── */  
 
 
-#skeletonOverlay::-webkit-scrollbar {
-  display: none;
-}
 
-#skeletonOverlay,
+
 .sk,
 .fade-out{
   transform: translateZ(0);
 }
 
-#skeletonOverlay > * {
-  transition:
-  opacity .45s ease,
-  transform .45s ease;
-}
 
 
-#skeletonOverlay.fade-out {  
-  opacity: 0;  
-  transform: translateY(8px);
-  pointer-events: none;  
-}  
   
 /* ── Skeleton Sections ── */
 .sk-welcome { 
@@ -362,10 +349,21 @@ INSTALL APP SECTION
   will-change: opacity, transform;
 }
 
-#sk-Navbar,
+ #sk-Navbar,
 #sk-Welcome,
-#sk-Notice,
-#sk-Trusted{
+ #sk-Notice,
+ #sk-Trusted{
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity .45s ease,
+  transform .45s ease;
+  will-change: opacity , transform;
+}
+
+ .dark-mode #sk-Navbar,
+ .dark-mode #sk-Welcome,
+  .dark-mode #sk-Notice,
+  .dark-mode #sk-Trusted{
   opacity: 1;
   transform: translateY(0);
   transition: opacity .45s ease,
