@@ -151,90 +151,7 @@
 
 </style>
 
-<style>
-  .playVideo{
-    width: 100%;
-    max-width: 370px;
-    height: 9.4rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 2px solid;
-    padding-top: 1rem;
-    margin-bottom: 7rem;
-    position: relative;
-  }
 
-  .playVideo .play-title{
-    width: 100%;
-    height: 2rem;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    position: relative;
-    justify-content: center;
-  }
-
-  .play-title h2{
-    color: rgb(55, 55, 61);
-    font-size: .9rem;
-    font-weight: 500;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
-
-  .playVideo .video-div{
-    width: 100%;
-    max-width: 370px;
-    height: max-content;
-    padding: .4rem;
-    display: flex;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .video-div{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    position: relative;
-    gap: 1rem;
-  }
-
-  .video{
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    height: 90%;
-  }
-
-  .video-box{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    gap: .2rem;
-    border-radius: 4px;
-    border: 1px solid rgb(219, 213, 213);
-    position: relative;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-  }
-
-  .video-box .viTitle{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    margin-top: .2rem;
-    height: 2rem;
-    justify-content: center;
-    text-align: center;
-  }
-</style>
 
 
 <!----USERS ANIMATION---->
@@ -1150,8 +1067,8 @@ width: 50%;
  
  
  <!---DARK MODE-->
-<label class="theme-switch">
-  <input type="checkbox" id="themeToggle">
+<label class="theme-switch" >
+  <input  type="checkbox" id="themeToggle">
   <span class="slider">
     <span class="icon sun">
     <span class="material-icons">light_mode</span>
@@ -1267,13 +1184,12 @@ width: 50%;
 
 
 
-
+ 
         <!---MAIN-->
 <div class="grid-container-main">
         
 <!---CARD CONTAINER------>
 <section class="card-container">
-
 
 <div class="welcome-card">
    <!---welcome=card---->
@@ -1333,6 +1249,12 @@ width: 50%;
 
 
 
+
+
+
+
+
+
 <!---MANUAL ORDER CHECKER---->
   <!----right-div-->
 <div class="manual-container" style="display: none !important;">
@@ -1358,7 +1280,7 @@ width: 50%;
 
 
 
- 
+
 
 <!-----COUNTER-ENDS--->
 
@@ -1465,6 +1387,7 @@ width: 50%;
 <!---ENDS-->
 <!---SCROLL THUMBNAIL--REUSABLE--CARD ADS-->
 <div class="google-thumbnails-wrapper">
+  
 
 
   
@@ -1584,12 +1507,13 @@ width: 50%;
 
 <!---NOTICE BOARD=-CONTAINER-->
 <section class="notice-container"  style="background: transparent !important;">
- <!-- Animated background particles----->
+   <!-- Animated background particles----->
   <div class="particles">
     <span></span><span></span><span></span><span></span>
     <span></span><span></span><span></span><span></span>
   </div>
     <div class="grid-overlay"></div>
+
   
   <!-- Notice Board Skeleton -->  
   <div id="sk-Notice" class="sk-notice">  
@@ -1617,6 +1541,7 @@ width: 50%;
 
     <!----NOTICE-->
     <div class="notice-board" style="border-radius: 0 !important;">
+      
       <div class="notice-top">
         <small><span>1</span>Your Can Now Buy Data at <strong>AnyTime!</strong> No Closing Time.</small>
       </div>
@@ -1640,12 +1565,24 @@ width: 50%;
 
 <!----ADS--->
 <div class="gallery">
+
   <div class="install-title">
+   <div class="particles">
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+  </div>
+   
    <p>Install our app on android phones</p>
 
   </div>
 
   <div class="imgboxer">
+     <!-- Animated background particles----->
+  <div class="particles">
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+  </div>
+    <div class="grid-overlay"></div>
   <div class="img-box">
     <img src="./css/images/1.jpeg" alt="" loading="lazy" 
     onclick=openViewer(0)>
@@ -1674,7 +1611,6 @@ width: 50%;
   <span title="Close" class="clos"onclick="closeViewer()">&times;</span>
   <img id="fullImg" />
 </div>
-
 
 
 
