@@ -30,7 +30,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
 
-<!---GOOGGLE MATERIAL ICON--LINK---->
+<!---GOOGLE MATERIAL ICON--LINK---->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 
@@ -42,7 +42,29 @@
   <link rel="stylesheet" href="styleGlobal4.css">
   <link rel="stylesheet" href="styleSkeletonUi.css">
 
+  <!--updated dark mode-->
+<script>
+(function () {
 
+  const savedTheme =
+    localStorage.getItem("theme");
+
+  const systemPrefersDark =
+    window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  const theme =
+    savedTheme ||
+    (systemPrefersDark ? "dark" : "light");
+
+  if (theme === "dark") {
+    setInterval(() =>{
+    document.body.classList.add("dark-mode");
+    }, 0);
+  
+  }
+
+})();
+</script>
 
 
 <!---LOADER CARD---->
@@ -1098,11 +1120,11 @@ width: 50%;
  <nav class="navbar">
     <div id="sk-NavBar" class="sk-welcome" >  
     <div class="sk-welcome-top">  
-      <span class="sk" style="width:3rem;height:3rem;
+      <span class="sk" style="width:2.5rem;height:2.5rem;
       border-radius: 50%;">
     </span>  
       
-      <span class="sk" style="width:130px;height:32px;border-radius:8px;"></span>  
+      <span class="sk" style="width:120px;height:26px;border-radius:8px;"></span>  
     </div>  
    
   </div> 
@@ -1131,7 +1153,9 @@ width: 50%;
 <label class="theme-switch">
   <input type="checkbox" id="themeToggle">
   <span class="slider">
-    <span class="icon sun"><img src="./css/icons/sun2 (1).png" alt="images" loading="lazy"></span>
+    <span class="icon sun">
+    <span class="material-icons">light_mode</span>
+    </span>
     <span class="icon moon"><img src="./css/icons/moon2.png" alt="images" loading="lazy"></span>
   </span>
 </label>
@@ -5131,46 +5155,100 @@ const cardCloser = document.getElementById("ecoDataSidebar");
 
 </script>
 
-
-<!-----DARK-MODE JS-->
+<!--DARK MODE-->
 <script>
-  const toggle = document.getElementById("themeToggle");
-  const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-  const savedTheme = localStorage.getItem("theme");
+const toggle =
+  document.getElementById("themeToggle");
 
-  function applyTheme(theme) {
-    if (theme === "dark") {
-      document.body.classList.add("dark-mode");
-      toggle.checked = true;
-    } else {
-      document.body.classList.remove("dark-mode");
-      toggle.checked = false;
-    }
-  }
+function applyTheme(theme){
 
-  if (savedTheme) {
-    applyTheme(savedTheme);
+  document.body.classList.add(
+    "theme-switching"
+  );
+
+  if(theme === "dark"){
+
+    document.body.classList.add("dark-mode");
+
+    toggle.checked = true;
+
   } else {
-    applyTheme(systemPrefersDark ? "dark" : "light");
+
+    document.body.classList.remove("dark-mode");
+
+    toggle.checked = false;
+
   }
 
-  toggle.addEventListener("change", () => {
-    if (toggle.checked) {
-      localStorage.setItem("theme", "dark");
-      applyTheme("dark");
-    } else {
-      localStorage.setItem("theme", "light");
-      applyTheme("light");
-    }
+  requestAnimationFrame(() => {
+
+    document.body.classList.remove(
+      "theme-switching"
+    );
+
   });
 
-  // Auto-change if system theme changes and user has no preference
-  window.matchMedia("(prefers-color-scheme: dark)").addListener(e => {
-    if (!localStorage.getItem("theme")) {
-      applyTheme(e.matches ? "dark" : "light");
-    }
+}
+
+// ======================
+// INITIAL LOAD
+// ======================
+
+const savedTheme =
+  localStorage.getItem("theme");
+
+applyTheme(
+  savedTheme ||
+  (
+    window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches
+      ? "dark"
+      : "light"
+  )
+);
+
+// ======================
+// TOGGLE CHANGE
+// ======================
+
+toggle.addEventListener("change", () => {
+
+  const theme =
+    toggle.checked
+      ? "dark"
+      : "light";
+
+  localStorage.setItem(
+    "theme",
+    theme
+  );
+
+  applyTheme(theme);
+
 });
+
+// ======================
+// SYSTEM THEME SYNC
+// ======================
+
+window
+  .matchMedia("(prefers-color-scheme: dark)")
+  .addEventListener("change", e => {
+
+    if(!localStorage.getItem("theme")){
+
+      applyTheme(
+        e.matches
+          ? "dark"
+          : "light"
+      );
+
+    }
+
+  });
+
 </script>
 
 
