@@ -57,9 +57,9 @@
     (systemPrefersDark ? "dark" : "light");
 
   if (theme === "dark") {
-    setInterval(() =>{
+   
     document.body.classList.add("dark-mode");
-    }, 0);
+   
   
   }
 
@@ -5155,100 +5155,45 @@ const cardCloser = document.getElementById("ecoDataSidebar");
 
 </script>
 
-<!--DARK MODE-->
+<!-----DARK-MODE JS-->
 <script>
+  const toggle = document.getElementById("themeToggle");
+  const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-const toggle =
-  document.getElementById("themeToggle");
+  const savedTheme = localStorage.getItem("theme");
 
-function applyTheme(theme){
-
-  document.body.classList.add(
-    "theme-switching"
-  );
-
-  if(theme === "dark"){
-
-    document.body.classList.add("dark-mode");
-
-    toggle.checked = true;
-
-  } else {
-
-    document.body.classList.remove("dark-mode");
-
-    toggle.checked = false;
-
+  function applyTheme(theme) {
+    if (theme === "dark") {
+      document.body.classList.add("dark-mode");
+      toggle.checked = true;
+    } else {
+      document.body.classList.remove("dark-mode");
+      toggle.checked = false;
+    }
   }
 
-  requestAnimationFrame(() => {
+  if (savedTheme) {
+    applyTheme(savedTheme);
+  } else {
+    applyTheme(systemPrefersDark ? "dark" : "light");
+  }
 
-    document.body.classList.remove(
-      "theme-switching"
-    );
-
-  });
-
-}
-
-// ======================
-// INITIAL LOAD
-// ======================
-
-const savedTheme =
-  localStorage.getItem("theme");
-
-applyTheme(
-  savedTheme ||
-  (
-    window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches
-      ? "dark"
-      : "light"
-  )
-);
-
-// ======================
-// TOGGLE CHANGE
-// ======================
-
-toggle.addEventListener("change", () => {
-
-  const theme =
-    toggle.checked
-      ? "dark"
-      : "light";
-
-  localStorage.setItem(
-    "theme",
-    theme
-  );
-
-  applyTheme(theme);
-
-});
-
-// ======================
-// SYSTEM THEME SYNC
-// ======================
-
-window
-  .matchMedia("(prefers-color-scheme: dark)")
-  .addEventListener("change", e => {
-
-    if(!localStorage.getItem("theme")){
-
-      applyTheme(
-        e.matches
-          ? "dark"
-          : "light"
-      );
-
+  toggle.addEventListener("change", () => {
+    if (toggle.checked) {
+      localStorage.setItem("theme", "dark");
+      applyTheme("dark");
+    } else {
+      localStorage.setItem("theme", "light");
+      applyTheme("light");
     }
-
   });
 
+  // Auto-change if system theme changes and user has no preference
+  window.matchMedia("(prefers-color-scheme: dark)").addListener(e => {
+    if (!localStorage.getItem("theme")) {
+      applyTheme(e.matches ? "dark" : "light");
+    }
+});
 </script>
 
 
