@@ -2,8 +2,8 @@
 
 :root{
   --sk-darkMode:  linear-gradient(100deg, #454550 40%, #595a61c9 55%, #898a8d7a 70%);
-  --sk-lightMode:  linear-gradient(100deg, #54555ecb 40%, #54545fa4 55%, #505257de 70%);
-  --sk-backgroundWhiteMode: rgb(168, 167, 167);
+  --sk-lightMode:  linear-gradient(100deg, #b3b3b3cb 40%, #cccccca4 55%, #9fa1a5de 70%);
+  --sk-backgroundWhiteMode: rgb(252, 252, 252);
   --sk-backgroundDarkMode:  #161a22;
 }
 
@@ -282,8 +282,8 @@ WELCOME SK ENDS
     width: 100%;
     height: 100%;
     padding-right: 1.6rem;
-    border-radius: .2rem;
     z-index: 99;
+    border-radius: 0;
     margin: 0;
   }
 
@@ -300,7 +300,7 @@ WELCOME SK ENDS
     justify-self: center;
     display: flex;
     padding-right: 1.6rem;
-    border-radius: .3rem;
+    border-radius: 0;
     z-index: 99;
     margin: 0 !important;
   }
