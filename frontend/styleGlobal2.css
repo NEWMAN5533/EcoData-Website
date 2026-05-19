@@ -1944,8 +1944,7 @@ DISPLAY NONE DIV
 .agent-upgrade,
 .agent-upgrade-wrapper,
 .cursor,
-.cursor-ring,
-#skeletonOverlay
+.cursor-ring
 {
   display: none !important;
 }
@@ -2060,7 +2059,8 @@ DISPLAY NONE DIV
 .menu-icon,
 .floating-scroll,
 .ecodata-sidebar,
-#skeletonOverlay
+#skeletonOverlay,
+#sk-NavBar
 {
   display: none !important;
 }
@@ -2250,7 +2250,8 @@ LAPTOP START
     .menu-icon,
     .custom-select .doneSelect,
     .ecodata-sidebar,
-    #skeletonOverlay{
+    #skeletonOverlay,
+    #sk-NavBar{
       display: none !important;
     }
 
@@ -2617,7 +2618,8 @@ WHAT'APP CHAT BUTTON
     .menu-icon,
     .custom-select .doneSelect,
     .ecodata-sidebar,
-    #skeletonOverlay{
+    #skeletonOverlay,
+    #sk-NavBar{
       display: none !important;
     }
 
