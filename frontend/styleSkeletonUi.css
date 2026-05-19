@@ -1,15 +1,30 @@
 /* ── Skeleton Base ── */  
 
-
+:root{
+  --sk-darkMode:  linear-gradient(100deg, #454550 40%, #595a61c9 55%, #898a8d7a 70%);
+  --sk-lightMode:  linear-gradient(100deg, #54555ecb 40%, #54545fa4 55%, #505257de 70%);
+  --sk-backgroundWhiteMode: rgb(168, 167, 167);
+  --sk-backgroundDarkMode:  #161a22;
+}
 
  .sk {  
-  background: linear-gradient(100deg, #1e2330 40%, #2a3045 55%, #1e2330 70%);  
+  background: var(--sk-lightMode); 
   background-size: 250% 100%;  
-  animation: sk-shimmer 1.6s infinite linear;  
+  animation: sk-shimmer 2.6s infinite linear;  
   border-radius: 6px;  
   display: block;  
   will-change: background-position;
 }
+
+.dark-mode .sk {
+    background: var(--sk-darkMode); 
+  background-size: 250% 100%;  
+  animation: sk-shimmer 2.6s infinite linear;  
+  border-radius: 6px;  
+  display: block;  
+  will-change: background-position;
+}
+
 
 @media(prefers-reduced-motion: reduce){
   .sk{
@@ -40,7 +55,8 @@
 /* ── Skeleton Sections ── */
 .sk-welcome { 
   border-radius: 12px;  
-  background: #161a22;  
+  background: var(--sk-backgroundWhiteMode);
+  backdrop-filter: blur(12px);
   padding: 16px;  
   height: 4rem;
   margin-bottom: 14px;
@@ -49,6 +65,12 @@
   justify-content: space-between;
   width: 100%;
   z-index: 99;
+}
+
+.dark-mode .sk-welcome-card,
+.dark-mode .sk-trusted,
+.dark-mode .sk-notice{
+  background: var(--sk-backgroundDarkMode);
 }
 
 
@@ -65,7 +87,8 @@ WELCOME SK
 ****/
 .sk-welcome-card{
   border-radius: 12px;  
-  background: #161a22;  
+  background: var(--sk-backgroundWhiteMode);  
+  backdrop-filter: blur(12px);
   padding: 16px;  
   height: 8rem;
   margin-bottom: 14px;
@@ -101,7 +124,7 @@ WELCOME SK ENDS
 
 .sk-trusted {  
   border-radius: 12px;  
-  background: #161a22;  
+  background: var(--sk-backgroundWhiteMode);  
   padding: 18px;
   display: flex;
   position: relative;
@@ -173,7 +196,7 @@ WELCOME SK ENDS
 }  
 .sk-notice {  
   border-radius: 12px;  
-  background: #161a22;  
+  background: var(--sk-backgroundWhiteMode);  
   padding: 16px;  
   margin-bottom: 14px;  
 }  
@@ -265,6 +288,8 @@ WELCOME SK ENDS
   }
 
 
+
+
   /***
   TRUSTED SECTION
   ****/
@@ -349,16 +374,17 @@ INSTALL APP SECTION
   will-change: opacity, transform;
 }
 
- #sk-Navbar,
-#sk-Welcome,
- #sk-Notice,
- #sk-Trusted{
+.dark-mode #sk-Navbar,
+.dark-mode #sk-Welcome,
+.dark-mode #sk-Notice,
+.dark-mode #sk-Trusted{
   opacity: 1;
   transform: translateY(0);
   transition: opacity .45s ease,
   transform .45s ease;
   will-change: opacity , transform;
 }
+
 
  .dark-mode #sk-Navbar,
  .dark-mode #sk-Welcome,
