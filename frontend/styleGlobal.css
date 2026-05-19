@@ -283,7 +283,7 @@ SNACKBAR SECTION
 
 .dark-mode .welcome-card{
   background: var(--background-cl-1);
-  box-shadow:  0 10px 20px rgba(0, 0, 0, 0.6) !important;
+  box-shadow:  0 2px 6px rgba(0, 0, 0, 0.2) !important;
   border: 2px solid var(--thin-border);
   margin-bottom: .6rem;
 }
@@ -336,7 +336,7 @@ SNACKBAR SECTION
 .welcome-card{
 border-radius: .1rem !important;
 height: 7.8rem !important;
-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5) !important;
+box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3) !important;
 }
 
 .dark-mode .welcome-card {
@@ -597,8 +597,6 @@ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5) !important;
 
 
 
-
-
 /* ============================= */
 /*  HERO SECTION — MODERN UPGRADE */
 /* ============================= */
@@ -636,7 +634,7 @@ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5) !important;
 
 .dark-mode .trusted-by {
   background: var(--background-cl-1) !important;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.7) !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2) !important;
   border: 1px solid var(--thin-border);
 }
 
