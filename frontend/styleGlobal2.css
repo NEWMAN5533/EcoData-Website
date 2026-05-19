@@ -1944,7 +1944,8 @@ DISPLAY NONE DIV
 .agent-upgrade,
 .agent-upgrade-wrapper,
 .cursor,
-.cursor-ring
+.cursor-ring,
+#skeletonOverlay
 {
   display: none !important;
 }
@@ -2058,7 +2059,8 @@ DISPLAY NONE DIV
 .storeBuild,
 .menu-icon,
 .floating-scroll,
-.ecodata-sidebar
+.ecodata-sidebar,
+#skeletonOverlay
 {
   display: none !important;
 }
@@ -2247,7 +2249,8 @@ LAPTOP START
     #normalView .businessInfo,
     .menu-icon,
     .custom-select .doneSelect,
-    .ecodata-sidebar{
+    .ecodata-sidebar,
+    #skeletonOverlay{
       display: none !important;
     }
 
@@ -2613,7 +2616,8 @@ WHAT'APP CHAT BUTTON
     #normalView .businessInfo,
     .menu-icon,
     .custom-select .doneSelect,
-    .ecodata-sidebar{
+    .ecodata-sidebar,
+    #skeletonOverlay{
       display: none !important;
     }
 
