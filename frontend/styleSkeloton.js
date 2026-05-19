@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
       setTimeout(()=> {
         skeleton.remove();
-      }, 450);
+      },0);
     }, delay);
    }
 
