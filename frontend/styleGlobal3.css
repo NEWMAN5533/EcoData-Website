@@ -486,8 +486,8 @@ justify-content: center;
 }
 
 .dark-mode .img-box {
-  border: 2px solid var(--thin-border);
-  box-shadow: 0 10px 20px rgba(26, 36, 32, 0.8);
+  border: 1px solid var(--thin-border);
+  box-shadow: 0 10px 20px rgba(23, 24, 24, 0.2);
 }
 
 
