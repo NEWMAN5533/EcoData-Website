@@ -604,21 +604,21 @@ width: 50%;
   margin: .7rem;
   width: 100%;
   max-width: 98%;
-  background: var(primary-cl);
+  height: 4rem;
+  background: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
-  box-shadow:  0  2px 6px rgba(0,0,0,0.4);
+  padding: .3rem .7rem;
+ 
   z-index: 10;
   transition: top .6s ease;
-  border: 2px solid rgba(163, 163, 163, 0.788);
+
 }
 
 .dark-mode .promo-bar{
-  background: var(--darkMode-bg-cl);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-  border: 2px solid var(--thin-border);
+  background: none;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.0);
 }
 
 .promo-bar.show{
@@ -627,8 +627,9 @@ width: 50%;
 }
 
 .timer{
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   width: 8rem !important;
+  height: 2.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -656,7 +657,7 @@ width: 50%;
   align-items: center;
   margin-left: .3rem !important;
   font-weight: 600;
-  padding-top: .2rem;
+  padding-top: .4rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
@@ -770,7 +771,11 @@ width: 50%;
 
   function isPromoTime() {
     const day = new Date().getDay();
+
+
+
     return (day === 4 || day === 5);
+    
   }
 
   function getPromoEndTime() {
@@ -789,6 +794,8 @@ width: 50%;
     }
     return end.getTime();
   }
+
+ 
 
 
   function updateTimer() {
@@ -815,11 +822,11 @@ width: 50%;
       timerEl.innerHTML = "00:00:00";
       labelEl.innerHTML = `Promo timer. <img src="./css/icons/timer.png" >`;
 
-      ctaBtn.innerHTML = "Promo Ended!"
+      ctaBtn.innerHTML = "Coming up!"
       promoActiveDiv.style.display = "none";
       gridPromoActiveDiv.style.display = "none";
       promoThumbnail.style.display = "none";
-      bar.style.display = "none";
+     
       promoWasInactive = true;
       return;
     } else{
@@ -827,14 +834,16 @@ width: 50%;
       promoActiveDiv.style.display = "block";
       gridPromoActiveDiv.style.display = "block";
       promoThumbnail.style.display = "flex";
-      bar.style.display = "flex";
+     
     }
+
+  
 
     // IsPromoTime() function
     if(isPromoTime()){
       promoActiveDiv.style.display = "block";
       promoThumbnail.style.display = "flex";
-      bar.style.display = "flex";
+     
       promoEndedDiv.style.display = "none";
       untargetExpressDiv.style.display = "none";
 
@@ -857,7 +866,6 @@ width: 50%;
     const now = new Date().getTime();
     const remaining = endTime - now;
 
-  
 
     
 
