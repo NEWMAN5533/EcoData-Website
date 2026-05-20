@@ -2067,7 +2067,9 @@ DISPLAY NONE DIV
 .floating-scroll,
 .ecodata-sidebar,
 #skeletonOverlay,
-#sk-NavBar
+#sk-NavBar,
+#sk-notice,
+#sk-Welcome-card
 {
   display: none !important;
 }
@@ -2241,6 +2243,10 @@ REDUCE WIDTH OF L RIGHT SIDEBAR'S
 LAPTOP START
 ****/
   @media (min-width: 1280px) {
+    .whb-left .time-close{
+      margin-right: 5rem !important;;
+       justify-content: start !important;
+     }
         .trusted-by .trusted-container .trusted-logos{
       margin: 1rem !important;
       justify-content: center !important;
@@ -2258,7 +2264,9 @@ LAPTOP START
     .custom-select .doneSelect,
     .ecodata-sidebar,
     #skeletonOverlay,
-    #sk-NavBar{
+    #sk-NavBar,
+    #sk-notice,
+    #sk-Welcome-card{
       display: none !important;
     }
 
@@ -2609,6 +2617,12 @@ WHAT'APP CHAT BUTTON
 
 
   @media (min-width: 1366px) {
+
+        .whb-left .time-close{
+      margin-right: 5rem !important;;
+       justify-content: start !important;
+     }
+      /****bottom right*****/
     .trusted-by .trusted-container .trusted-logos{
       margin: 1rem !important;
       justify-content: center !important;
@@ -2626,7 +2640,9 @@ WHAT'APP CHAT BUTTON
     .custom-select .doneSelect,
     .ecodata-sidebar,
     #skeletonOverlay,
-    #sk-NavBar{
+    #sk-NavBar,
+    #sk-notice,
+    #sk-Welcome-card{
       display: none !important;
     }
 
