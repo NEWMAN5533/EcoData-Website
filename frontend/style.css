@@ -335,14 +335,14 @@ html:focus-within{
 body {
   width: 100%;
   height: 100%;
-  background: transparent;
   overflow-y: auto;
+  transition: background 0s ease !important;
   margin: 0;
   padding: 0;
 }
 
 body.dark-mode{
-  transition: background 0s, opacity 0s   !important;
+  transition: background 0s  !important;
 }
 
 
@@ -2551,278 +2551,6 @@ PRICES SECTION ENDS
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
-WELCOME CARD 
-**/
-.card-container .welcome-card {
-  width: 100%;
-  max-width: 97%;
-  height: 10rem;
-  display: flex;
-  gap: .5rem;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  position: relative;
-  background: var(--bg-cl);
-  border-radius: .6rem;
-  box-shadow:   1px 1px 2px rgba(0,0,0,0.3),  -1px -1px 2px rgba(0,0,0,0.3);
-  margin-top: 1vh !important; 
-}
-
-
-
-  .welcome-top .welcome-top-leftside{
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    width: 70%;
-    height: 100%  !important;
-    position: relative;
-    margin: 0;
-    white-space: nowrap;
-    padding: .4rem;
-  }
-
-   .welcome-top .welcome-top-leftside #usernameDisplay{
-    font-size: .85rem;
-    font-weight: 700;
-    color: rgb(114, 114, 121);
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
-
-  .dark-mode .welcome-top .welcome-top-leftside #usernameDisplay{
-    font-size: .85rem;
-    font-weight: 700;
-    color: rgb(232, 232, 233);
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.welcome-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 99%;
-  padding: .2rem;
-  height: 2.5rem !important;
-  margin-bottom: .4rem !important;
-  position: relative;
-  justify-self: center;
-  background: var(--bg-cl);
-  border-start-start-radius: .4rem;
-  border-start-end-radius: .4rem;
-  border-end-end-radius: .4rem;
-  border-end-start-radius: .4rem;
-  box-shadow:   1px 1px 3px rgb(151, 147, 147),  -1px -1px 3px rgb(189, 184, 184);
-}
-
-
-
-
-/**
- WELCOME TOP RIGHT
- **/
- .welcome-top-right {
-  width: 30%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 1rem;
- }
-
-  .welcome-top-right input{
-    width: 120px;
-    height: 1.8rem;
-    margin: 0 2rem;
-    margin-right: 1.6rem;
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    color: var(--dark-cl);
-    background-color: transparent;
-    border: 0.1px solid var(--background-cl);
-  }
-
-  .welcome-top-right input:where(:hover :focus-within){
-    border: 1px solid rgb(156, 151, 151);
-
-  }
-
-  .welcome-top-right input::placeholder{
-    color: rgb(197, 190, 190);
-  }
-
-  /*-----BOTTOM-----*/
-  .welcome-bottom {
-    width: 100%;
-    height: 7.8rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 3.2rem;
-  }
-
-
-  .welcome-bottom .close-time {
-    width: 23%;
-    height: 93% !important;
-    display: flex;
-    background: white;
-    align-items: center;
-    justify-content: flex-end;
-    border-end-start-radius: .5rem;
-    border-start-end-radius: .5rem;
-    gap: .1rem;
-    text-align: center;
-    flex-direction: column;
-    padding-bottom: 1rem;
-    box-shadow: inset 12px 12px 20px white, inset -12px -12px 20px white;
-    border: 1px solid  #e2e2e2  !important;
-  }
-
-
-  .close-time span{
-  color: rgb(115, 204, 14) !important;
-  border: 1px solid  #e2e2e2  !important;
- }
-
- .dark-mode .close-time span{
-  border: 1px solid rgb(73, 114, 104) !important;
- }
-
-
-  .dark-mode .welcome-bottom .close-time {
-    width: 23%;
-    height: 93%;
-    display: flex;
-    background: var(--welcome-card-bg-3) !important;
-    align-items: center;
-    justify-content: flex-end;
-    border-end-start-radius: .2rem ;
-    gap: .1rem;
-    text-align: center;
-    flex-direction: column;
-    padding-bottom: 1rem ;
-    box-shadow: inset 12px 12px 20px var(--darkMode-bg-cl), inset -12px -12px 20px var(--darkMode-bg-cl);
-    border: 1px solid var(--thin-border) !important;
-  }
-
-.welcome-bottom .close-time .dotter{
-  display: flex;
-  width: 6px;
-  height: 6px;
-  color: var(--thin-border-1) !important;
-  border-radius: 50%;
-  animation: colorhange 2s infinite;
- }
-
- .dark-mode .close-time span{
-  color: rgb(115, 204, 14) !important;
- }
-
- @keyframes colorhange {
-  0% { background: white;}
-  25% { background: blue;}
-  50% { background: green;}
-  75% { background: yellow;}
-  100% { background: white;}
- }
-
-
-
-
-
-
-
-  .close-time span{
-    color: var(--card-mtn-bg) ;
-    font-size: .7rem;
-    font-weight: 600 ;
-    padding: 0  .3rem ;
-    display: flex;
-    align-items: center;
-    gap: .2rem;
-    text-align: center ;
-    justify-content: center;
-    width: max-content;
-    height: 1rem;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    background: none;
-    border-radius: 4px;
-    border: none ;
-  }
-
-
-#clock {
-      font-family: 'Digital-7', monospace;
-      font-size: 2em;
-      color: rgb(15, 182, 140);
-      background: none;
-      border-radius: 4px;
-      display: inline-block;
-      width: max-content;
-      height: 2rem;
-      padding: .2rem .3rem;
-      border: none ;
-      align-items: center;
-      display: none !important;
-      justify-content: center;
-      font-size: .97rem;
-      font-weight: 600;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;
-      margin-right: .5rem;
-      margin-top: 2.2rem;
-    }
-
-
-
-    .dark-mode #clock{
-      color:rgb(15, 182, 140);
-    }
 
 
 
@@ -6301,110 +6029,10 @@ font-size: .8rem ;
     height: 14.5rem !important;
   }
 
-  /****
-  WELCOME CARD STYLE FOR 414PX
-  *****/
-  
-/**
-WELCOME CARD 
-**/
-.welcome-card {
-  width: 100%;
-  max-width: 97%;
-  height: 10rem;
-  display: flex;
-  gap: .5rem;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  position: relative;
-  background: var(--bg-cl);
-  border-radius: .6rem;
-  box-shadow:   1px 1px 2px rgba(0,0,0,0.3),  -1px -1px 2px rgba(0,0,0,0.3);
-  margin-top: 4.3rem; 
-}
-
-.welcome-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 99%;
-  height: 4rem;
-  margin: 0.2rem .2rem;
-  justify-self: center;
-  background: var(--bg-cl);
-  border-start-start-radius: .4rem;
-  border-start-end-radius: .4rem;
-  border-end-end-radius: .4rem;
-  border-end-start-radius: .4rem;
-  box-shadow:   1px 1px 3px rgb(151, 147, 147),  -1px -1px 3px rgb(189, 184, 184);
-}
 
 
 
 
-
-
-.welcome-top-left p{
-  width: max-content;
-  height: 100%;
-  color: var(--welcome-card-border);
-  font-weight: 900;
-  font-size: .74rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-.dark-mode .welcome-top-left p{
-  color: white;
-  font-weight: 900;
-  font-size: .74rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-/**
- WELCOME TOP RIGHT
- **/
- .welcome-top-right {
-  width: 30%;
-  height: 100%;
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  margin-right: -.1rem;
- }
-
- .dark-mode .welcome-top-left{
-  width: 68%;
-  margin-left: .1rem;
-  padding-left: .6rem;
- }
-
-  .welcome-top-right input{
-    width: 120px;
-    height: 1.8rem;
-    margin: 0 2rem;
-    margin-right: .7rem;
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    color: var(--dark-cl);
-    background-color: transparent;
-    border: 0.1px solid var(--background-cl);
-    font-weight: 600;
-  }
-
-  .dark-mode .welcome-top-right input::placeholder{
-    color: white;
-    opacity: .94;
-  }
-
-  .welcome-top-right input:where(:hover :focus-within){
-    border: 1px solid rgb(156, 151, 151);
-  }
-
-  .welcome-top-right input::placeholder{
-    color: rgb(197, 190, 190);
-  }
 
   .notice-board{
   width: 100%;
@@ -9329,16 +8957,6 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 
 
 
-  /*-----BOTTOM-----*/
-  .welcome-bottom {
-    width: 100%;
-    height: 5.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-
   
   /**
   NAVBAR SECTION
@@ -9371,20 +8989,10 @@ height: 2.4rem;
     overflow: hidden;
   }
 
-  /*-----WELCOME CARD----*/
-  .card-container .welcome-card{
-    margin-top: 3.3rem;
-    max-width: 98%;
-    height: 6.6rem;
-    border-radius: 8px;
-  }
-
+ 
   
 
-  .card-container .welcome-top{
-    height: 4rem;
-    border-radius: 4px;
-  }
+ 
 
 
 
@@ -9400,9 +9008,7 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, O
 
   /*** bottom ***/
 
-    .card-container .welcome-bottom{
-    height: 3rem;
-  }
+  
 
    .welcome-bottom .close-time small{
     font-size: .7rem;
