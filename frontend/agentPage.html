@@ -579,15 +579,10 @@ width: 50%;
   
 <!------MAIN SECTION----->
 <section class="card-container">
-<div class="welcome-card">
- <!-- Animated background particles----->
-  <div class="particles">
-    <span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span>
-  </div>
-    <div class="grid-overlay"></div>
+<!----WELCOME HERO---->
+<section class="welcome-hero">
 
-    <!---welcome=card---->
+     <!---welcome=card---->
   <div id="sk-Welcome" class="sk-welcome-card">
     <div class="sk-welcome-card-top">
        <span class="sk" style="width:140px; height: 28px;">
@@ -601,22 +596,52 @@ width: 50%;
       
     </div>
   </div>
-  <div class="welcome-top">
-    <div class="welcome-top-leftside">
+    <!-- Animated background particles----->
+  <div class="particles">
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+  </div>
+    <div class="grid-overlay"></div>
+ 
+  <div class="welcome-hero-top">
+     <div class="grid-overlay"></div>
+
+    <div class="wht-left"> 
       <p id="usernameDisplay"></p>
-      
     </div>
-    <div class="welcome-top-right">
-      <input type="text" placeholder=" EcoData">
+    <div class="wht-right">
+    <button class="ecb" >EcoData</button>
     </div>
   </div>
-  <div class="welcome-bottom">
-    <div class="close-time">
-    <span><small class="dotter"></small> Active 24/7</span>
+  <div class="welcome-hero-bottom">
+    <div class="whb-left">
+      <div class="time-close">
+    <span>Active 24/7 <span class="pulse-dot">
+      <img src="./css/icons/timer.png" alt="" loading="lazy"> 
+    </span> </span>
     </div>
 
-    <div class="endRating">
-      <div class="stran">
+    </div>
+    <div class="whb-right">
+      <div class="whb-right-top">
+        <div class="ratingContainer">
+  <div class="stat-card float">
+      <div class="stat-num">1.3K+</div>
+      <div class="stat-label">Happy Users</div>
+    </div>
+    <div class="stat-card float" style="animation-delay:0.5s">
+      <div class="stat-num">&lt;30m</div>
+      <div class="stat-label">Avg. Delivery</div>
+    </div>
+    <div class="stat-card float" style="animation-delay:1s">
+      <div class="stat-num">4.5★</div>
+      <div class="stat-label">Customer Rating</div>
+    </div>
+</div>
+      </div>
+      <div class="whb-right-bottom">
+          <div class="endR" >
+      <div class="endS" style="display: none;">
         <img src="./css/uiIcons/star.png" alt="" loading>
         <img src="./css/uiIcons/star.png" alt="" loading>
         <img src="./css/uiIcons/star.png" alt="" loading>
@@ -624,14 +649,18 @@ width: 50%;
         <img src="./css/uiIcons/star.png" alt="" loading>
       </div>
 
+      
 
-      <div class="clocker">
+
+      <div class="clockr">
           <div  id="clock"></div>
       </div>
     
     </div>
+      </div>
+    </div>
   </div>
-</div>
+</section>
 
 
 <!-----COUNTER-ENDS--->
@@ -862,7 +891,6 @@ width: 50%;
       </div>
     </div>
 </section>
-
 
 
 
