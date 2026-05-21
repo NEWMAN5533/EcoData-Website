@@ -423,7 +423,7 @@ background:rgb(243, 159, 4);
 
 
 
-    <style>
+<style>
   .businessInfo{
     width: 100%;
     height: 3rem;
@@ -491,7 +491,7 @@ width: 50%;
 
 
 <!---marked-->
-  <style>
+<style>
     .select-btn .doneSelect{
       display: flex;
       margin-left: .3rem;
@@ -510,7 +510,7 @@ width: 50%;
     .dark-mode .select-btn .darkM{
       display: flex !important;
     }
-  </style>
+</style>
 
   <style>
 :root {
@@ -700,8 +700,6 @@ width: 50%;
   }
 }
 
-
-    
 /* LIVE BADGE */
 .live-badge{
   position: absolute;
@@ -717,7 +715,6 @@ width: 50%;
   pointer-events: none;
   z-index:99;
 }
-
 
 .live-badge.show {
   animation: popo 6s ease forwards;
@@ -754,14 +751,6 @@ width: 50%;
   margin-top: 120px;
 }
 </style>
-
-</head>
-
-
-<!--promo-->
-
-
-
 
 <!----promo- ends--->
 
@@ -903,46 +892,41 @@ width: 50%;
 <!---PROMO-SCRIPT-ENDS----->
 
 <script src="styleSkeloton.js"></script>
-
-
-
-
+</head>
 <body>
 
 
  
-
-
-
-
-
-
-    
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+<div class="container">
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
 
 <!--sidebar----->
-<div class="ecodata-sidebar" id="ecoDataSidebar">
+  <div class="ecodata-sidebar" id="ecoDataSidebar">
   <div class="ecodata-sidebar-top">
       <div class="userProfile-container">
           <div class="user" id="userPro">
-            <span class="us"><h1>U</h1>
+            <span class="us"><
+              h1>U</>
             </span>
             <h3>User Panel</h3>
           </div>
       </div>
   </div>
-
+    <!---sidebar-middle-->
   <div class="ecodata-sidebar-middle">
       <!---middle-->
-        <div class="quick-links-section">
-          <div class="link-section-wrapper">
-          <!---network-nav-ends---->
-          
-           <div class="quicker-nav active" >
-            <div class="naver" onclick="window.location.href='./index.html'">
-              <span class="material-icons">home</span>
-            <p>Home</p>
+  <div class="quick-links-section">
+    <div class="link-section-wrapper">
+      <!---network-nav-ends---->
+        <div class="quicker-nav active" >
+          <div class="naver" onclick="window.location.href='./index.html'">
+            <span class="material-icons">
+                home
+            </span>
+            <p>
+             Home
+            </p>
             </div>
             <div class="tag">
                 <img src="./css/icons/completed.png" alt="" loading="lazy">
@@ -952,9 +936,7 @@ width: 50%;
         
           
 
-      
-         
-
+    
            <div class="quicker-nav">
             <div class="naver"  onclick="window.location.href='./pay.html'">
                <span class="material-icons">local_offer</span>
@@ -974,12 +956,12 @@ width: 50%;
           <!----terms & cons--->
 
         
-            <div class="quicker-nav" >
-              <div class="naver" onclick="window.location.href='./bundlesInfo.html'">
-                  <span class="material-icons">info</span>
-              <p>Info</p>
-              </div>
-          </div>
+    <div class="quicker-nav" >
+      <div class="naver" onclick="window.location.href='./bundlesInfo.html'">
+        <span class="material-icons">info</span>
+        <p>Info</p>
+      </div>
+    </div>
          
 
           
@@ -1009,9 +991,9 @@ width: 50%;
             </div>
           </div>
 
-          </div>
-        </div>
+    </div>
   </div>
+</div>
   <div class="ecodata-sidebar-bottom">
       <!--bottom-->
         <div class="bottom-nav">
@@ -1036,11 +1018,6 @@ width: 50%;
         </div>
   </div>
 </div>
-
-
-
-  <div class="container">
-
 
 
     <!----NAVIGATION-BAR-SECTION------->
@@ -1226,6 +1203,8 @@ width: 50%;
   </div>
     <div class="grid-overlay"></div>
  
+
+   
   <div class="welcome-hero-top">
      <div class="grid-overlay"></div>
 
@@ -1233,17 +1212,26 @@ width: 50%;
       <p id="usernameDisplay"></p>
     </div>
     <div class="wht-right">
-    <button class="ecb" >EcoData</button>
+    <button class="ecb" ></button>
     </div>
   </div>
+  <!---bottom-->
   <div class="welcome-hero-bottom">
     <div class="whb-left">
+      <!--title-tag-->
+      <div class="title-ecodata">
+        <h5>
+         EcoData.<br>
+         <span class="accent">Cheap</span> Prices.<br>
+        <span class="stroke">No Stress.</span>
+     </h5>
+      </div>
+      <!---close-time-btom--->
       <div class="time-close">
-    <span>Active 24/7 <span class="pulse-dot">
-      <img src="./css/icons/timer.png" alt="" loading="lazy"> 
-    </span> </span>
-    </div>
-
+        <span>Active 24/7 <span class="pulse-dot">
+        <img src="./css/icons/timer.png" alt="" loading="lazy"> 
+        </span> </span>
+      </div>
     </div>
     <div class="whb-right">
       <div class="whb-right-top">
