@@ -1003,16 +1003,18 @@ clock section
   display: flex;
   align-items: center;
   text-align: center;
-  font-size: .68rem;
+  font-size: .65rem;
   font-weight: 600;
   margin-top: .6rem;
   margin-left: 1rem;
+  padding-left: .2rem !important;
   gap: .1rem;
   background: none;
   white-space: nowrap;
   font-family: 'DM Sans', sans-serif;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  z-index: 10;
 }
 
 .divider-dot {
@@ -1096,7 +1098,6 @@ clock section
 }
 
 .trusted-logos .pay {
-  margin-right: .6rem;
   margin-top: -0.9rem !important;
 }
 
