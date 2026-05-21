@@ -269,7 +269,7 @@ SNACKBAR SECTION
  .card-container .welcome-hero{
   width: 100%;
   max-width: 98%;
-  height: 9rem;
+  height: 8.9rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -364,7 +364,6 @@ SNACKBAR SECTION
     border: none;
     color:  rgba(254, 255, 224, 0.219);
     background: var(--darkMode-bg-cl);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
    }
 
 
