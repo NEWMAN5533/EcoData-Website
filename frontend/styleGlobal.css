@@ -876,11 +876,12 @@ clock section
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: .6rem;
+  gap: .2rem;
+  margin-right: 1.3rem;
   width: 90%;
-  height: 2rem !important;
+  height: 2.3rem !important;
   background: transparent !important;
-  padding: .4rem !important;
+  padding: 0 .6rem !important;
 }
 
 .dark-mode .wrapper-notice {
@@ -910,21 +911,21 @@ clock section
 
 /* ---- Badge ---- */
 
-.trusted-badge {
+.wrapper-notice .trusted-badge {
   background: linear-gradient(135deg, rgba(243,235,202,0.95) 0%, rgba(230,218,175,0.9) 100%);
   color: #023b46;
-  font-size: 0.57rem;
-  font-weight: 800;
+  font-size: 0.67rem !important;
+  font-weight: 700;
   font-family: 'Syne', sans-serif;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  padding: 9px 18px !important;
+  padding: 10px  !important;
   border-radius: 100px;
   display: flex;
   align-items: center;
-  margin-bottom: .4rem;
-  justify-content: start;
   text-align: center;
+  width: max-content;
+  justify-content: center;
   white-space: nowrap;
   box-shadow:
     0 2px 8px rgba(0,0,0,0.35),
