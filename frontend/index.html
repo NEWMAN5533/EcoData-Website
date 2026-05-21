@@ -700,21 +700,24 @@ width: 50%;
   }
 }
 
+
+    
 /* LIVE BADGE */
 .live-badge{
   position: absolute;
   top: 1rem;
   left: 50%;
   transform: translateX(-50%);
-  background: #ff4444;
+  background: linear-gradient(135deg,rgba(0, 0, 255, 0.904), rgb(8, 134, 8));
   color: white;
   padding: 8px 16px;
-  border-radius: 20px;
+  border-radius: 6px;
   font-size: .9rem;
   opacity: 0;
   pointer-events: none;
-  z-index: 10999999999999999999999999999999999999999999999999990000000000000000000999999999999;
+  z-index:99;
 }
+
 
 .live-badge.show {
   animation: popo 6s ease forwards;
