@@ -3640,7 +3640,7 @@ const cardCloser = document.getElementById("ecoDataSidebar");
   // toggle menu card
   cardToggler.addEventListener("click", function(e) {
     e.stopPropagation();
-    if(cardCloser.classList.contains("active")){
+    if(cardCloser){
       cardCloser.classList.remove("active");
     } else{
       cardCloser.classList.add("active");
