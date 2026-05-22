@@ -3640,10 +3640,10 @@ const cardCloser = document.getElementById("ecoDataSidebar");
   // toggle menu card
   cardToggler.addEventListener("click", function(e) {
     e.stopPropagation();
-    if(cardCloser){
-      cardCloser.classList.remove("active");
-    } else{
+    if(cardToggler){
       cardCloser.classList.add("active");
+    } else{
+      cardCloser.classList.remove("active");
     }
   });
 
