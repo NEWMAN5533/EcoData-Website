@@ -69,7 +69,7 @@
       promoActiveDiv.style.display = "block";
       gridPromoActiveDiv.style.display = "block";
       promoThumbnail.style.display = "flex";
-      bar.style.display = "flex ":
+      
      
     }
 
