@@ -764,18 +764,35 @@ async function saveOrderToFirestore(orderData) {
       "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"
     );
 
-    const firestoreData = {
-      orderId: orderData.orderId,
-      reference: orderData.reference,
-      status: String(orderData.status || "pending"),
-      recipient: orderData.recipient || "-",
-      volume: Number(orderData.volume || 0),
-      amount: Number(orderData.amount || 0),
-      network: orderData.network || "-",
-      source: "web",
-      createdAt: serverTimestamp(),
-      createdBy: orderData.createdBy || "guest",
-    };
+ const firestoreData = {
+
+  orderId: orderData.orderId,
+
+  reference: orderData.reference,
+
+  status: String(orderData.status || "pending"),
+
+  recipient: orderData.recipient || "-",
+
+  volume: Number(orderData.volume || 0),
+
+  amount: Number(orderData.amount || 0),
+
+  // ECODATA COST
+  costPrice: Number(orderData.costPrice || 0),
+
+  // REAL PROFIT
+  profit: Number(orderData.profit || 0),
+
+  network: orderData.network || "-",
+
+  source: "web",
+
+  createdAt: serverTimestamp(),
+
+  createdBy: orderData.createdBy || "guest",
+
+};
 
     const ordersCol = collection(db, "orders");
     const result = await addDoc(ordersCol, firestoreData);
@@ -1167,25 +1184,59 @@ function handleNewOrder(returnedOrder) {
   if (!returnedOrder) return;
 
   // Normalize Swift response
-  const normalized = {
-    orderId:
-      returnedOrder.orderId ||
-      returnedOrder.id ||
-      returnedOrder.order_id ||
-      returnedOrder.reference ||
-      null,
+const normalized = {
 
-    status: returnedOrder.status || returnedOrder.state || "pending",
+  orderId:
+    returnedOrder.orderId ||
+    returnedOrder.id ||
+    returnedOrder.order_id ||
+    returnedOrder.reference ||
+    null,
 
-    recipient:
-      returnedOrder.items?.[0]?.recipient ||
-      returnedOrder.recipient ||
-      "-",
+  reference:
+    returnedOrder.reference ||
+    returnedOrder.orderId ||
+    null,
 
-    // ✅ FIX: Always from EcoData dataset
-    volume: selectedBundle?.size || returnedOrder.volume || 0,
+  status:
+    returnedOrder.status ||
+    returnedOrder.state ||
+    "processing",
 
-  };
+  recipient:
+    returnedOrder.items?.[0]?.recipient ||
+    returnedOrder.recipient ||
+    "-",
+
+  // CUSTOMER PRICE
+  amount:
+    Number(selectedBundle?.price || 0),
+
+  // ECODATA COST PRICE
+  costPrice:
+    Number(returnedOrder.price || 0),
+
+  // PROFIT
+  profit:
+    Number(selectedBundle?.price || 0)
+    -
+    Number(returnedOrder.price || 0),
+
+  // NETWORK
+  network:
+    selectedBundle?.network || "-",
+
+  // DATA SIZE
+  volume:
+    selectedBundle?.size ||
+    returnedOrder.volume ||
+    0,
+
+  source: "web",
+
+  createdAt: Date.now(),
+
+};
 
   if (!normalized.orderId) return;
 
