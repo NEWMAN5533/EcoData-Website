@@ -110,7 +110,7 @@ export async function handleBuyDataRequest({
       recipient,
       size: parseInt(size, 10),
       amount: 0,
-      status: "pendting",
+      status: "pending",
       source: "backend",
       createdAt: admin.firestore.FieldValue.serverTimestamp(),
     });
