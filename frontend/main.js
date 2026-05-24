@@ -586,8 +586,17 @@ function normalizeNumber(num = "") {
     return normalizeNumber(
       o.recipient === target && activeStatus.includes(status) 
     );
+// CHECK IF RECIPIENT HAS ACTIVE ORDER ALREADY
+
+if(hasActiveOrder(recipient)){
+  showSnackBar(" Number already has an active order", "warning");
+  return;
+};
+
   });
  }
+
+hasActiveOrder();
 // =================================================
 // CHECK IF THE RECIPIENT HAS ACTIVE ORDER (ALREADY) ENDS
 // =================================================
@@ -599,15 +608,7 @@ function normalizeNumber(num = "") {
 
 //NEW UPDATED 21/01/2026 //
 // === PAYSTACK PAYMENT (Firebase version) ===
-async function payWithPaystack(bundle, recipient) {
-
-  // CHECK IF RECIPIENT HAS ACTIVE ORDER ALREADY
-  hasActiveOrder();
-if(hasActiveOrder(recipient)){
-  showSnackBar(" Number already has an active order", "warning");
-  return;
-};
-
+async function payWithPaystack(bundle, recipient) {
 
   const { network, packageName, size, price } = bundle;
 
