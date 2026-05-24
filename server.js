@@ -17,8 +17,7 @@ import adminRoute from "./routes/adminOrderUpdate.js";
 
 
 // Firebase Admin
-import { db } from "./firebaseAdmin.js";
-import  { FieldValue } from "firebase-admin";
+import { admin, db } from "./firebaseAdmin.js";
 
 dotenv.config();
 
@@ -206,7 +205,7 @@ export async function handleBuyDataRequest({
       reference: paymentReference,
       status: "failed",
       error: errData,
-      updatedAt: FieldValue.serverTimestamp(),
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
     }, { merge: true });
 
     processedOrders.set(paymentReference, {
