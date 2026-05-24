@@ -709,6 +709,7 @@ async function orderBundle(network, recipient, packageName, size, reference) {
    
 
     const returnedOrder = result.order?.order || result.order || result;
+
 const orderData = {
   orderId:
     returnedOrder.orderId ||
@@ -731,6 +732,10 @@ const orderData = {
   status: "pending",
 
   source: "web",
+
+  isGuest: true,
+
+  createdBy: null,
 
   createdAt: Date.now(),
 };
@@ -830,6 +835,9 @@ function saveGuestOrder(orderData) {
     console.error("❌ Failed to save guest order:", err);
   }
 }
+
+
+
 
 
 // ---------- UPDATE HOME TOTALS ----------
