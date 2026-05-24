@@ -1,4 +1,4 @@
-// UPDATED AT 24th/MAY, 2026 [BACKUP MAIN.JS]
+// UPDATED AT 18th/MAY, 2026 [BACKUP MAIN.JS]
 
 
 // --- Firebase Imports ---
@@ -568,6 +568,7 @@ function playSuccessSound() {
 // CHECK IF THE RECIPIENT HAS ACTIVE ORDER (ALREADY)
 // =================================================
 
+
 const activeStatus = ["pending", "queued", "processing"];
 
 function normalizeNumber(num = "") {
@@ -589,7 +590,6 @@ function hasActiveOrder(recipient) {
     );
   });
 }
- 
 // =================================================
 // CHECK IF THE RECIPIENT HAS ACTIVE ORDER (ALREADY) ENDS
 // =================================================
@@ -601,9 +601,11 @@ function hasActiveOrder(recipient) {
 
 //NEW UPDATED 21/01/2026 //
 // === PAYSTACK PAYMENT (Firebase version) ===
+
+
+
 async function payWithPaystack(bundle, recipient) {
 
-  // CHECKER FUNCTION
   if(hasActiveOrder(recipient)){
     showSnackBar("Number already has an active order", "warning"
 
@@ -612,6 +614,7 @@ async function payWithPaystack(bundle, recipient) {
     }
 
   const { network, packageName, size, price } = bundle;
+  
 
   
   const user = auth.currentUser;
@@ -706,21 +709,39 @@ async function orderBundle(network, recipient, packageName, size, reference) {
    
 
     const returnedOrder = result.order?.order || result.order || result;
+const orderData = {
+  orderId:
+    returnedOrder.orderId ||
+    returnedOrder.reference,
 
-    const orderData = {
-      orderId: returnedOrder.orderId || returnedOrder.reference,
-      reference: returnedOrder.reference,
-      network: bundle.network,
-      volume: bundle.size,
-      amount: bundle.price,
-      source: "web",
-      createdAt: Date.now(),
-    };
+  reference:
+    returnedOrder.reference,
 
-    handleNewOrder(returnedOrder);
-    updateHomepageTotals(orderData);
-    saveOrderToFirestore(orderData);
-    saveGuestOrder(orderData);
+  recipient,
+
+  network:
+    bundle.network,
+
+  volume:
+    Number(bundle.size || size || 0),
+
+  amount:
+    Number(bundle.price || 0),
+
+  status: "pending",
+
+  source: "web",
+
+  createdAt: Date.now(),
+};
+
+handleNewOrder(returnedOrder);
+
+updateHomepageTotals(orderData);
+
+await saveOrderToFirestore(orderData);
+
+saveGuestOrder(orderData);
 
   } catch (err) {
     console.error("⚠ Server error:", err);
