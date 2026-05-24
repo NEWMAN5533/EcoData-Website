@@ -60,4 +60,4 @@ adminRoute.post("/update-order-status", async (req, res) => {
 
 });
 
-export default router;
+export default adminRoute;
