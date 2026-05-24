@@ -1,4 +1,4 @@
-// UPDATED AT 18th/MAY, 2026 [BACKUP MAIN.JS]
+// UPDATED AT 24th/MAY, 2026 [BACKUP MAIN.JS]
 
 
 // --- Firebase Imports ---
@@ -568,6 +568,27 @@ function playSuccessSound() {
 // CHECK IF THE RECIPIENT HAS ACTIVE ORDER (ALREADY)
 // =================================================
 
+const activeStatus = ["pending", "queued", "processing"];
+
+function normalizeNumber(num = "") {
+  return String(num).replace(/\D/g, "").slice(-9);
+}
+
+function hasActiveOrder(recipient) {
+  const orders =
+    JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
+
+  const target = normalizeNumber(recipient);
+
+  return orders.some(o => {
+    const status = (o.status || "").toLowerCase();
+
+    return (
+      normalizeNumber(o.recipient) === target &&
+      activeStatus.includes(status)
+    );
+  });
+}
  
 // =================================================
 // CHECK IF THE RECIPIENT HAS ACTIVE ORDER (ALREADY) ENDS
@@ -580,7 +601,15 @@ function playSuccessSound() {
 
 //NEW UPDATED 21/01/2026 //
 // === PAYSTACK PAYMENT (Firebase version) ===
-async function payWithPaystack(bundle, recipient) {
+async function payWithPaystack(bundle, recipient) {
+
+  // CHECKER FUNCTION
+  if(hasActiveOrder(recipient)){
+    showSnackBar("Number already has an active order", "warning"
+
+    );
+    return; // STOP PAYMENT
+    }
 
   const { network, packageName, size, price } = bundle;
 
