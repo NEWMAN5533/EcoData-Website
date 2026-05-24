@@ -19,6 +19,7 @@ import adminRoute from "./routes/adminOrderUpdate.js";
 // Firebase Admin
 import { admin, db } from "./firebaseAdmin.js";
 
+
 dotenv.config();
 
 
@@ -109,9 +110,9 @@ export async function handleBuyDataRequest({
       recipient,
       size: parseInt(size, 10),
       amount: 0,
-      status: "processing",
+      status: "pendting",
       source: "backend",
-      createdAt: FieldValue.serverTimestamp(),
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
     });
 
     // =========================
@@ -143,38 +144,56 @@ export async function handleBuyDataRequest({
     // =========================
     // 3. SUCCESS RESPONSE
     // =========================
-    if (swiftRes.data?.success) {
 
-      await orderRef.update({
-        status: "processing", // or "delivered" if your API confirms instant success
-        amount: swiftRes.data?.amount || 0,
-        swiftResponse: swiftRes.data,
-        updatedAt: FieldValue.serverTimestamp(),
-      });
+if (swiftRes.data?.success) {
 
-      processedOrders.set(paymentReference, {
-        status: "success",
-        response: swiftRes.data,
-      });
+  // KEEP ORDER IN PROCESSING
+  // Swift/webhook/server polling will update later
+  await orderRef.update({
 
-      return {
-        ok: true,
-        status: 200,
-        body: {
-          success: true,
-          message: "Bundle order placed",
-          order: swiftRes.data,
-        },
-      };
-    }
+    status: "processing",
 
+    amount:
+      Number(swiftRes.data?.amount || 0),
+
+    swiftOrderId:
+      swiftRes.data?.order?.id ||
+      swiftRes.data?.id ||
+      null,
+
+    swiftReference:
+      swiftRes.data?.reference ||
+      paymentReference,
+
+    swiftResponse: swiftRes.data,
+
+    updatedAt:
+      admin.firestore.FieldValue.serverTimestamp(),
+
+  });
+
+  processedOrders.set(paymentReference, {
+    status: "processing",
+    response: swiftRes.data,
+  });
+
+  return {
+    ok: true,
+    status: 200,
+    body: {
+      success: true,
+      message: "Bundle order placed",
+      order: swiftRes.data,
+    },
+  };
+}
     // =========================
     // 4. FAILED RESPONSE
     // =========================
     await orderRef.update({
       status: "failed",
       swiftResponse: swiftRes.data,
-      updatedAt: FieldValue.serverTimestamp(),
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
     });
 
     processedOrders.set(paymentReference, {
