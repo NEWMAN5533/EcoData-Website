@@ -8,14 +8,17 @@ import { fileURLToPath } from "url";
 import bodyParser from "body-parser";
 
 // Routes
-import storesRoutes from "./routes/storesRoute.js";
+import storeRouter from "./routes/storesRoute.js";
 import paystackWebhookRouter from "./routes/paystackWebhookRouter.js";
 import productRouter from "./routes/product.js";
 import subscriptionRouter from "./routes/subscriptionRouter.js";
+import adminRoute from "./routes/adminOrderUpdate.js";
+
 
 
 // Firebase Admin
 import { db } from "./firebaseAdmin.js";
+import  { FieldValue } from "firebase-admin";
 
 dotenv.config();
 
@@ -42,9 +45,10 @@ app.use(express.static(path.join(__dirname, "frontend")));
 
 // ROUTES
 app.use("/paystack/webhook", paystackWebhookRouter);
-app.use("/api", storesRoutes);
+app.use("/api/store", storeRouter);
 app.use("/api", productRouter);
 app.use("/api", subscriptionRouter);
+app.use("/api/admin", adminRoute);
 
 
 
@@ -60,40 +64,73 @@ const processedOrders = new Map();
 */
 
 // Helper: common logic for buy-data (POST or GET)
-export async function handleBuyDataRequest({network, recipient, pkg, size, paymentReference }) {
+// ================================
+// HANDLE BUY DATA REQUEST (FIXED)
+// ================================
+export async function handleBuyDataRequest({
+  network,
+  recipient,
+  pkg,
+  size,
+  paymentReference
+}) {
   if (!network || !recipient || !pkg || !paymentReference) {
-    return { ok: false, status: 400, body: { success: false, message: "Missing required fields" } };
+    return {
+      ok: false,
+      status: 400,
+      body: { success: false, message: "Missing required fields" }
+    };
   }
 
-  // 🚨 1. STOP DUPLICATE REQUESTS HERE
+  // =========================
+  // DUPLICATE PREVENTION
+  // =========================
   if (processedOrders.has(paymentReference)) {
     return {
       ok: true,
       status: 200,
       body: {
         success: true,
-        message: "Order already processed (duplicate prevented)",
+        message: "Order already processed",
         order: processedOrders.get(paymentReference).response
       }
     };
   }
 
-  // 2. Verify Paystack payment
   try {
-   
+    const orderRef = db.collection("orders").doc(paymentReference);
 
-    // 3. Build SwiftData order payload
+    // =========================
+    // 1. CREATE INITIAL ORDER
+    // =========================
+    await orderRef.set({
+      orderId: paymentReference,
+      reference: paymentReference,
+      network,
+      recipient,
+      size: parseInt(size, 10),
+      amount: 0,
+      status: "processing",
+      source: "backend",
+      createdAt: FieldValue.serverTimestamp(),
+    });
+
+    // =========================
+    // 2. BUILD SWIFT REQUEST
+    // =========================
     const orderData = {
       type: "single",
       volume: parseInt(size, 10),
       phone: recipient,
       offerSlug: pkg,
       webhookUrl:
-        process.env.SWIFT_WEBHOOK_URL || "https://swiftdata-link.com/api/webhooks/orders",
+        process.env.SWIFT_WEBHOOK_URL ||
+        "https://swiftdata-link.com/api/webhooks/orders",
     };
 
-    // 4. Post to SwiftData
-    const swiftBase = (process.env.SWIFT_BASE_URL || "https://swiftdata-link.com").replace(/\/$/, "");
+    const swiftBase =
+      (process.env.SWIFT_BASE_URL || "https://swiftdata-link.com").replace(/\/$/, "");
+
     const swiftUrl = `${swiftBase}/order/${network}`;
 
     const swiftRes = await axios.post(swiftUrl, orderData, {
@@ -104,13 +141,23 @@ export async function handleBuyDataRequest({network, recipient, pkg, size, payme
       timeout: 15000,
     });
 
-    // ❇ SAVE RESULT TO PREVENT DUPLICATES
-    processedOrders.set(paymentReference, {
-      status: "success",
-      response: swiftRes.data,
-    });
-
+    // =========================
+    // 3. SUCCESS RESPONSE
+    // =========================
     if (swiftRes.data?.success) {
+
+      await orderRef.update({
+        status: "processing", // or "delivered" if your API confirms instant success
+        amount: swiftRes.data?.amount || 0,
+        swiftResponse: swiftRes.data,
+        updatedAt: FieldValue.serverTimestamp(),
+      });
+
+      processedOrders.set(paymentReference, {
+        status: "success",
+        response: swiftRes.data,
+      });
+
       return {
         ok: true,
         status: 200,
@@ -120,22 +167,48 @@ export async function handleBuyDataRequest({network, recipient, pkg, size, payme
           order: swiftRes.data,
         },
       };
-    } else {
-      return {
-        ok: false,
-        status: 400,
-        body: {
-          success: false,
-          message: "SwiftData request failed",
-          details: swiftRes.data,
-        },
-      };
     }
+
+    // =========================
+    // 4. FAILED RESPONSE
+    // =========================
+    await orderRef.update({
+      status: "failed",
+      swiftResponse: swiftRes.data,
+      updatedAt: FieldValue.serverTimestamp(),
+    });
+
+    processedOrders.set(paymentReference, {
+      status: "failed",
+      response: swiftRes.data,
+    });
+
+    return {
+      ok: false,
+      status: 400,
+      body: {
+        success: false,
+        message: "SwiftData request failed",
+        details: swiftRes.data,
+      },
+    };
+
   } catch (err) {
-    const errData = err.response?.data || err.message || err;
+    const errData = err.response?.data || err.message;
+
     console.error("🔥 handleBuyDataRequest error:", errData);
 
-    // Save failure so duplicate network retry does not call Swift again
+    // =========================
+    // 5. ERROR STATE UPDATE
+    // =========================
+    await db.collection("orders").doc(paymentReference).set({
+      orderId: paymentReference,
+      reference: paymentReference,
+      status: "failed",
+      error: errData,
+      updatedAt: FieldValue.serverTimestamp(),
+    }, { merge: true });
+
     processedOrders.set(paymentReference, {
       status: "failed",
       response: errData,
@@ -151,9 +224,7 @@ export async function handleBuyDataRequest({network, recipient, pkg, size, payme
       },
     };
   }
-
 }
-
 
 
 
@@ -293,9 +364,6 @@ app.post("/verify-payment", async (req, res) => {
 // ====================
 
 
-// ================= //
-// AFA HANDLER      //
-//================= //
 
 // =======================
 // MTN AFA ROUTE
@@ -425,11 +493,6 @@ async function handleAFARequest({
     };
   }
 }
-
-
-
-
-
 
 
 
