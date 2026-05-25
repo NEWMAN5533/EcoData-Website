@@ -13,7 +13,7 @@ import paystackWebhookRouter from "./routes/paystackWebhookRouter.js";
 import productRouter from "./routes/product.js";
 import subscriptionRouter from "./routes/subscriptionRouter.js";
 import adminRoute from "./routes/adminOrderUpdate.js";
-import syncOrderStatus from "./routes/syncOrderStatus.js";
+import syncOrderRoute from "./routes/syncOrderStatus.js";
 
 
 
