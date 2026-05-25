@@ -95,46 +95,7 @@ loginForm.addEventListener("submit", async (e) => {
 
     const userData = userDoc.data();
 
-    // =========================
-// CHECK ADMIN ACCESS
-// =========================
-const adminRef =
-  doc(db, "admins", user.email);
-
-const adminSnap =
-  await getDoc(adminRef);
-
-if (adminSnap.exists()) {
-
-  const adminData =
-    adminSnap.data();
-
-  if (
-    adminData.role === "admin" &&
-    adminData.active === true
-  ) {
-
-    // SAVE ADMIN STATE
-    localStorage.setItem(
-      "isAdmin",
-      "true"
-    );
-
-    showSnackBar(
-      "Admin login successful!",
-      "success"
-    );
-
-    setTimeout(() => {
-
-      window.location.href =
-        "adminDashboard.html";
-
-    }, 2000);
-
-    return;
-  }
-}
+    
 
     // Save locally
     localStorage.setItem("username", userData.username || "User");
