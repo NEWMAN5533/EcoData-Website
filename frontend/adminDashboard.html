@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="admin-dashboard.css">
+
+  <!---GOOGLE MATERIAL ICON--LINK---->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+  <!----container-->
+  <div class="container">
+    <!--navar section-->
+    <div class="adminNavbar">
+      <div class="left-sideNavbar">
+        <img src="./css/icons/icon-shortcut.png" alt="" loading="lazy">
+      </div>
+      <div class="right-sideNavbar">
+        <img id="menu" src="./css/icons/menu-white.png" alt="" loading="lazy">
+      </div>
+    </div>
+    <!--navar section-->
+    <div class="main-grid-container">
+      <div class="main-container-aside">
+        <aside class="sidebar">
+          <div class="sidebar-top">
+            <h1>Admin <span>Panel</span></h1>
+          </div>
+          <div class="sidebar-middle">
+            <a href="#">
+            <div class="dashNav">
+               <span class="material-icons">
+                  dashboard
+              </span>
+            </div>
+              Dashboard</a>
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                  shopping_cart
+              </span>
+            </div>
+             Orders</a>
+            <a href="#">
+            <div class="dashNav">
+               <span class="material-icons">
+                  group
+              </span>
+            </div>
+              Users</a>
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                  trending_up
+              </span>
+            </div>
+            Profit
+            </a>
+            <a href="#">
+            <div class="dashNav">
+               <span class="material-icons">
+                  settings
+              </span>
+            </div>
+              Settings</a>
+
+          </div>
+          <div class="sidebar-bottom"></div>
+        </aside>
+      </div>
+
+     <div class="main-container">
+       <!---main-container-->
+       <section class="first-container">
+        
+        <div class="welcome-title">
+          <h1>Admin <span>Dashboard</span></h1>
+        </div>
+        <!---daily totals card-(grid)----->
+       <div class="total-title"> <p>Daily analytics</p></div>
+        <section class="daily-total-section">
+          <div class="total-section">
+            <!--total orders-->
+            <div class="total-section-card">
+              <div class="section-card-top">
+                <div class="card-top-left">
+                  <p>Total Orders</p>
+                </div>
+                <div class="card-top-right">
+                  <img src="./css/icons/totalorder.png" alt="" loading="lazy">
+                </div>
+              </div>
+              <div class="section-card-bottom">
+                <div class="card-bottom-left"><h1 id="totalOrder">0</h1></div>
+                <div class="card-bottom-right"></div>
+              </div>
+            </div>
+            <!---pending-orders---->
+            <div class="total-section-card">
+                <div class="section-card-top">
+                <div class="card-top-left">
+                  <p>Pending </p>
+                </div>
+                <div class="card-top-right">
+                  <img src="./css/icons/recent.png" alt="" loading="lazy">
+                </div>
+              </div>
+              <div class="section-card-bottom">
+                <div class="card-bottom-left"><h1 id="pendingOrder">0</h1></div>
+                <div class="card-bottom-right"></div>
+              </div>
+            </div>
+            <!--processing orders---->
+            <div class="total-section-card">
+                <div class="section-card-top">
+                <div class="card-top-left">
+                  <p>Processing</p>
+                </div>
+                <div class="card-top-right">
+                  <img src="./css/uiIcons/gurantee.png" alt="" loading="lazy">
+                </div>
+              </div>
+              <div class="section-card-bottom">
+                <div class="card-bottom-left"><h1 id="processingOrder ">0</h1></div>
+                <div class="card-bottom-right"></div>
+              </div>
+            </div>
+            <!---delivered orders---->
+            <div class="total-section-card">
+                <div class="section-card-top">
+                <div class="card-top-left">
+                  <p>Delivered</p>
+                </div>
+                <div class="card-top-right">
+                  <img src="./css/uiIcons/approval.png" alt="" loading="lazy">
+                </div>
+              </div>
+              <div class="section-card-bottom">
+                <div class="card-bottom-left"><h1 id="deliveredOrder">0</h1></div>
+                <div class="card-bottom-right"></div>
+              </div>
+            </div>
+            <!---failed-orders---->
+            <div class="total-section-card">
+                <div class="section-card-top">
+                <div class="card-top-left">
+                  <p>Failed</p>
+                </div>
+                <div class="card-top-right">
+                  <img src="./css/icons/timer.png" alt="" loading="lazy">
+                </div>
+              </div>
+              <div class="section-card-bottom">
+                <div class="card-bottom-left"><h1 id="failedOrder">0</h1></div>
+                <div class="card-bottom-right"></div>
+              </div>
+            </div>
+            <!---Today orders-->
+            <div class="total-section-card">
+                <div class="section-card-top">
+                <div class="card-top-left">
+                  <p class="mapping">Today</p>
+                </div>
+                <div class="card-top-right">
+                  <span class="material-icons">today</span>
+                </div>
+              </div>
+              <div class="section-card-bottom">
+                <div class="card-bottom-left"><h1 id="totayOrder">0</h1></div>
+                <div class="card-bottom-right"></div>
+              </div>
+            </div>
+            <!---weekly--orders---->
+            <div class="total-section-card">
+                <div class="section-card-top">
+                <div class="card-top-left">
+                  <p class="mapping">Weekly</p>
+                </div>
+                <div class="card-top-right">
+                 <span class="material-icons">view_week</span>
+                </div>
+              </div>
+              <div class="section-card-bottom">
+                <div class="card-bottom-left"><h1 id="weeklyOrder">0</h1></div>
+                <div class="card-bottom-right"></div>
+              </div>
+            </div>
+            <!---monthly orders---->
+            <div class="total-section-card">
+                <div class="section-card-top">
+                <div class="card-top-left">
+                  <p class="mapping">Monthly</p>
+                </div>
+                <div class="card-top-right">
+                  <span class="material-icons">calendar_month</span>
+                </div>
+              </div>
+              <div class="section-card-bottom">
+                <div class="card-bottom-left"><h1  id="monthlyOrder"> 0</h1></div>
+                <div class="card-bottom-right"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!--table-section--->
+        <div class="total-title"> <p>Orders Table</p></div>
+        <section class="table-section">
+          <div class="content-wrapper">
+            
+      <!---live order body---->
+      <div class="table-live-order-body">
+         <!-- TABLE HEADER (FIXED) -->
+      <div class="table-header">
+        <span>Order ID</span>
+        <span>Network</span>
+        <span>Size</span>
+        <span>Price</span>
+        <span>Recipient</span>
+        <span >paid?</span>
+        <span>Date submitted</span>
+        <span>Status</span>
+        <span>Action</span>
+      </div>
+        <P id="empty-body" hidden>Orders not loaded yet</P>
+
+        <div class="row-wrapper" id="rowWrapper">
+          <!--dynamic (live-body-row)----->
+        </div>
+      </div>
+          </div>
+        </section>
+
+
+          <!--table-section--->
+        <div class="total-title" style="margin-top: 2rem;"> 
+          <div class="user-title">
+            <p>Users</p>
+          </div>
+          <div class="profit-title">
+            <p>Profit</p>
+          </div>
+        </div>
+        <section class="wrapper">
+          <!---users--->
+        <section class="users-board">
+          <!-- TABLE HEADER (FIXED) -->
+      <div class="table-header">
+        <span>Email</span>
+        <span>Regular?</span>
+        <span>Premium?</span>
+        <span>Total Order</span>
+        <span>Date joined</span>
+      </div>
+      <!--user live body---->
+      <div class="user-live-body">
+        <div class="user-live">
+          <p id="userEmpty">No users yet</p>
+        </div>
+      </div>
+        </section>
+        <!---profit-->
+        <section class="profit-board">
+          <div class="profit-box">
+            <div class="profit-box-top">
+              <P>Today  <span class="material-icons">today</span></P>
+            </div>
+            <div class="profit-box-bottom">
+              <h2 id="todayProfit">0</h2> 
+            </div>
+          </div>
+          <div class="profit-box">
+              <div class="profit-box-top">
+              <P>Weekly  <span class="material-icons">view_week</span></P>
+            </div>
+            <div class="profit-box-bottom">
+              <h2 id="weeklyProfit">0</h2> 
+            </div>
+          </div>
+          <div class="profit-box">
+              <div class="profit-box-top">
+              <P>Monthly  <span class="material-icons">calendar_month</span></P>
+            </div>
+            <div class="profit-box-bottom">
+              <h2 id="monthlyProfit">0</h2> 
+            </div>
+          </div>
+          <div class="profit-box">
+              <div class="profit-box-top">
+              <P>All  <span class="material-icons">dashboard</span></P>
+            </div>
+            <div class="profit-box-bottom">
+              <h2 id="allProfit">0</h2> 
+            </div>
+          </div>
+        </section>
+        </section>
+
+       </section>
+    
+      </div>
+      <!---main container ends---->
+
+   </div>
+   
+  
+
+
+
+
+
+<div class="sidebar-phone">
+          <div class="sidebar-top">
+            <h1><span>Admin</span>Page</h1>
+          </div>
+          <div class="sidebar-middle">
+            <a href="#">
+            <div class="dashNav">
+               <span class="material-icons">
+                  dashboard
+              </span>
+            </div>
+              Dashboard</a>
+            <a href="#">
+            <div class="dashNav">
+               <span class="material-icons">
+                  shopping_cart
+              </span>
+            </div>
+             Orders</a>
+            <a href="#">
+            <div class="dashNav">
+               <span class="material-icons">
+                  group
+              </span>
+            </div>
+              Users</a>
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                  trending_up
+                </span>
+            </div>
+            Profit
+            </a>
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                  settings
+              </span>
+            </div>
+              Settings</a>
+
+          </div>
+          <div class="sidebar-bottom"></div>
+</div>
+<!--container closing---->
+</div>
+<script type="module" src="adminDashboard.js"></script>
+</body>
+</html>

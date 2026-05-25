@@ -1,0 +1,678 @@
+// === firebase-config.js ===
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+// ✅ Your Firebase config
+const firebaseConfig = {
+ apiKey: "AIzaSyClNBlfigtQk8AZWdMZcU9sEtVcIrS0D1g",
+  authDomain: "ecodata-2bee6.firebaseapp.com",
+  projectId: "ecodata-2bee6",
+  storageBucket: "ecodata-2bee6.firebasestorage.app",
+  messagingSenderId: "544837123249",
+  appId: "1:544837123249:web:6c362350a00c6dab10b690"
+};
+
+// ✅ Initialize Firebase app
+const app = initializeApp(firebaseConfig);
+
+// ✅ Initialize Firestore
+export const auth = getAuth(app);
+export const db = getFirestore(app);
+
+// ✅ Expose to window so main.js can access it
+window.FIRESTORE = db;
+
+console.log("🔥 Firebase initialized and Firestore ready!");
+
+
+
+// UPDATED ADMIN DASHBOARD JS
+
+// =========================
+// FIREBASE IMPORTS
+// =========================
+import {
+  collection,
+  onSnapshot,
+  updateDoc,
+  query as firestoreQuery,
+  doc,
+  orderBy,
+} from
+"https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+// =========================
+// DOM READY
+// =========================
+document.addEventListener("DOMContentLoaded", () => {
+
+  loadOrderRealTime();
+
+});
+
+
+
+// =========================
+// LOAD ORDERS REALTIME
+// =========================
+async function loadOrderRealTime() {
+
+  try {
+
+    const db = window.FIRESTORE;
+
+    if (!db) {
+      console.error("Firestore not initialized");
+      return;
+    }
+
+    const orderRef =
+      collection(db, "orders");
+
+    const q =
+      firestoreQuery(
+        orderRef,
+        orderBy("createdAt", "desc")
+      );
+
+    onSnapshot(q, (snapshot) => {
+
+      const orders = [];
+
+      snapshot.forEach(docSnap => {
+
+        orders.push({
+          firestoreId: docSnap.id,
+          ...docSnap.data()
+        });
+
+      });
+
+      renderOrders(orders);
+
+      updateCards(orders);
+
+      updateProfitCards(orders);
+
+    });
+
+  } catch (err) {
+
+    console.error(err);
+
+  }
+
+}
+
+
+
+// =========================
+// RENDER ORDERS TABLE
+// =========================
+function renderOrders(orders) {
+
+  const rowWrapper =
+    document.getElementById("rowWrapper");
+
+  const emptyBody =
+    document.getElementById("empty-body");
+
+  rowWrapper.innerHTML = "";
+
+  if (!orders.length) {
+
+    emptyBody.hidden = false;
+
+    return;
+
+  }
+
+  emptyBody.hidden = true;
+
+  orders.forEach(order => {
+
+    const row =
+      document.createElement("div");
+
+    row.className = "live-body-row";
+
+    const date =
+      order.createdAt?.toDate
+        ? order.createdAt.toDate().toLocaleString()
+        : "N/A";
+
+    row.innerHTML = `
+
+      <small>${order.orderId || "-"}</small>
+
+      <small>${order.network.toUpperCase() || "-"}</small>
+
+      <small>${order.volume || "-"}GB</small>
+
+     <small>₵ ${(Number(order.amount) || 0).toFixed(2)}</small>
+
+      <small>${order.recipient || "-"}</small>
+
+      <small>Yes</small>
+
+      <small>${date}</small>
+
+      <small>
+        <span class="${order.status || "pending"}">
+          ${order.status || "pending"}
+        </span>
+      </small>
+
+      <small>
+
+        <select
+          onchange="changeOrderStatus(
+            '${order.firestoreId}',
+            this.value
+          )"
+        >
+
+          <option value="">
+            Action
+          </option>
+
+          <option value="pending">
+            Pending
+          </option>
+
+          <option value="processing">
+            Processing
+          </option>
+
+          <option value="delivered">
+            Delivered
+          </option>
+
+          <option value="failed">
+            Failed
+          </option>
+
+        </select>
+
+      </small>
+
+    `;
+
+    rowWrapper.appendChild(row);
+
+  });
+
+}
+
+
+
+
+// =========================
+// CHANGE ORDER STATUS
+// =========================
+window.changeOrderStatus =
+async function (firestoreId, status) {
+
+  try {
+
+    if (!status) return;
+
+    const API_BASE =
+      window.location.hostname === "localhost"
+        ? "http://localhost:3000"
+        : "https://ecodata-app.onrender.com";
+
+    const response = await fetch(
+      `${API_BASE}/api/admin/update-order-status`,
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+          orderId: firestoreId,
+          status
+        })
+      }
+    );
+
+    const result = await response.json();
+
+    if (!result.success) {
+
+      console.error(result.message);
+
+      return;
+
+    }
+
+    console.log("✅ Status updated");
+
+  } catch (err) {
+
+    console.error("❌ Status update failed:", err);
+
+  }
+
+};
+
+// =========================
+// UPDATE ANALYTICS CARDS
+// =========================
+function updateCards(orders) {
+
+  // =========================
+  // BASIC TOTALS
+  // =========================
+  const totalOrders =
+    orders.length;
+
+  const pendingOrders =
+    orders.filter(order =>
+      order.status === "pending"
+    ).length;
+
+  const processingOrders =
+    orders.filter(order =>
+      order.status === "processing"
+    ).length;
+
+  const deliveredOrders =
+    orders.filter(order =>
+      order.status === "delivered"
+    ).length;
+
+  const failedOrders =
+    orders.filter(order =>
+      order.status === "failed"
+    ).length;
+
+
+
+  // =========================
+  // DATE CALCULATIONS
+  // =========================
+  const now =
+    new Date();
+
+  const today =
+    new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate()
+    );
+
+  const weekAgo =
+    new Date();
+
+  weekAgo.setDate(
+    weekAgo.getDate() - 7
+  );
+
+  const monthAgo =
+    new Date();
+
+  monthAgo.setMonth(
+    monthAgo.getMonth() - 1
+  );
+
+
+
+  // =========================
+  // TODAY ORDERS
+  // =========================
+  const todayOrders =
+    orders.filter(order => {
+
+      if (!order.createdAt?.toDate) return false;
+
+      const orderDate =
+        order.createdAt.toDate();
+
+      return orderDate >= today;
+
+    }).length;
+
+
+
+  // =========================
+  // WEEKLY ORDERS
+  // =========================
+  const weeklyOrders =
+    orders.filter(order => {
+
+      if (!order.createdAt?.toDate) return false;
+
+      const orderDate =
+        order.createdAt.toDate();
+
+      return orderDate >= weekAgo;
+
+    }).length;
+
+
+
+  // =========================
+  // MONTHLY ORDERS
+  // =========================
+  const monthlyOrders =
+    orders.filter(order => {
+
+      if (!order.createdAt?.toDate) return false;
+
+      const orderDate =
+        order.createdAt.toDate();
+
+      return orderDate >= monthAgo;
+
+    }).length;
+
+
+
+  // =========================
+  // TOTAL REVENUE
+  // =========================
+  let totalRevenue = 0;
+
+  let todayRevenue = 0;
+
+  orders.forEach(order => {
+
+    if (order.status === "delivered") {
+
+      const amount =
+        Number(order.amount || 0);
+
+      totalRevenue += amount;
+
+      if (order.createdAt?.toDate) {
+
+        const orderDate =
+          order.createdAt.toDate();
+
+        if (orderDate >= today) {
+
+          todayRevenue += amount;
+
+        }
+
+      }
+
+    }
+
+  });
+
+
+
+  // =========================
+  // UPDATE DOM
+  // =========================
+
+  // TOTALS
+  document.getElementById("totalOrder").textContent =
+    totalOrders;
+
+  document.getElementById("pendingOrder").textContent =
+    pendingOrders;
+
+  document.getElementById("processingOrder").textContent =
+    processingOrders;
+
+  document.getElementById("deliveredOrder").textContent =
+    deliveredOrders;
+
+  document.getElementById("failedOrder").textContent =
+    failedOrders;
+
+
+
+  // TIME-BASED
+  document.getElementById("todayOrder").textContent =
+    todayOrders;
+
+  document.getElementById("weeklyOrder").textContent =
+    weeklyOrders;
+
+  document.getElementById("monthlyOrder").textContent =
+    monthlyOrders;
+
+
+
+  // MONEY
+  document.getElementById("totalRevenue").textContent =
+    `₵ ${totalRevenue.toFixed(2)}`;
+
+  document.getElementById("todayRevenue").textContent =
+    `₵ ${todayRevenue.toFixed(2)}`;
+
+}
+
+
+
+//==================================
+// LOCALSTORAGE TO LISTEN TO ADMIN
+//===================================
+function listenToOrderStatus(orderId) {
+
+  try {
+
+    const db = window.FIRESTORE;
+
+    if (!db || !orderId) return;
+
+    const orderRef =
+      doc(db, "orders", orderId);
+
+    onSnapshot(orderRef, (snapshot) => {
+
+      if (!snapshot.exists()) return;
+
+      const data = snapshot.data();
+
+      // =========================
+      // UPDATE LOCAL STORAGE
+      // =========================
+      const existing =
+        JSON.parse(
+          localStorage.getItem(LIVE_ORDERS_KEY) || "[]"
+        );
+
+      const updated =
+        existing.map(order => {
+
+          if (order.orderId === orderId) {
+
+            return {
+              ...order,
+              status: data.status
+            };
+
+          }
+
+          return order;
+
+        });
+
+      localStorage.setItem(
+        LIVE_ORDERS_KEY,
+        JSON.stringify(updated)
+      );
+
+      // =========================
+      // UPDATE UI
+      // =========================
+      updateLiveOrderUI({
+        orderId,
+        status: data.status
+      });
+
+      console.log(
+        "🔥 Live status updated:",
+        data.status
+      );
+
+    });
+
+  } catch (err) {
+
+    console.error(err);
+
+  }
+
+}
+
+// =========================
+// UPDATE PROFIT CARDS
+// =========================
+function updateProfitCards(orders) {
+
+  let todayProfit = 0;
+
+  let weeklyProfit = 0;
+
+  let monthlyProfit = 0;
+
+  let allProfit = 0;
+
+
+
+  // =========================
+  // DATES
+  // =========================
+  const now =
+    new Date();
+
+  const today =
+    new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate()
+    );
+
+  const weekAgo =
+    new Date();
+
+  weekAgo.setDate(
+    weekAgo.getDate() - 7
+  );
+
+  const monthAgo =
+    new Date();
+
+  monthAgo.setMonth(
+    monthAgo.getMonth() - 1
+  );
+
+
+
+  // =========================
+  // LOOP ORDERS
+  // =========================
+  orders.forEach(order => {
+
+    const profit =
+      Number(order.profit || 0);
+
+    allProfit += profit;
+
+    // Skip invalid dates
+    if (!order.createdAt?.toDate) return;
+
+    const orderDate =
+      order.createdAt.toDate();
+
+
+
+    // TODAY
+    if (orderDate >= today) {
+
+      todayProfit += profit;
+
+    }
+
+
+
+    // WEEKLY
+    if (orderDate >= weekAgo) {
+
+      weeklyProfit += profit;
+
+    }
+
+
+
+    // MONTHLY
+    if (orderDate >= monthAgo) {
+
+      monthlyProfit += profit;
+
+    }
+
+  });
+
+
+
+  // =========================
+  // UPDATE UI
+  // =========================
+  document.getElementById(
+    "todayProfit"
+  ).textContent =
+    `₵ ${todayProfit.toFixed(2)}`;
+
+  document.getElementById(
+    "weeklyProfit"
+  ).textContent =
+    `₵ ${weeklyProfit.toFixed(2)}`;
+
+  document.getElementById(
+    "monthlyProfit"
+  ).textContent =
+    `₵ ${monthlyProfit.toFixed(2)}`;
+
+  document.getElementById(
+    "allProfit"
+  ).textContent =
+    `₵ ${allProfit.toFixed(2)}`;
+
+}
+
+
+
+// =========================
+// PHONE SIDEBAR TOGGLE
+// =========================
+const phoneSidebar =
+  document.querySelector(".sidebar-phone");
+
+const toggler =
+  document.getElementById("menu");
+
+toggler.addEventListener("click", function (e) {
+
+  e.stopPropagation();
+
+  phoneSidebar.classList.toggle("active");
+
+});
+
+
+
+// =========================
+// CLOSE SIDEBAR OUTSIDE CLICK
+// =========================
+window.addEventListener("click", function (e) {
+
+  if (
+    !phoneSidebar.contains(e.target) &&
+    !toggler.contains(e.target)
+  ) {
+
+    phoneSidebar.classList.remove("active");
+
+  }
+
+});
