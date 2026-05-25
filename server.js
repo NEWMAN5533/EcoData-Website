@@ -13,6 +13,7 @@ import paystackWebhookRouter from "./routes/paystackWebhookRouter.js";
 import productRouter from "./routes/product.js";
 import subscriptionRouter from "./routes/subscriptionRouter.js";
 import adminRoute from "./routes/adminOrderUpdate.js";
+import syncOrderStatus from "./routes/syncOrderStatus.js";
 
 
 
@@ -49,6 +50,7 @@ app.use("/api/store", storeRouter);
 app.use("/api", productRouter);
 app.use("/api", subscriptionRouter);
 app.use("/api/admin", adminRoute);
+app.use("/api/sync-order-status", syncOrderRoute);
 
 
 
