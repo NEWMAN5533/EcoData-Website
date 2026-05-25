@@ -1047,7 +1047,65 @@ justify-content: end;
 
 }
 
+@media (max-width: 414px) {
+  .container .main-grid-container{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
 
+  /***display none div******/
+  .container .sidebar{
+    display: none !important;
+  }
+
+  .welcome-title h1{
+    font-size: 1.2rem !important;
+  }
+
+  .daily-total-section {
+    width: 100%;
+    max-width: 96% !important;
+    overflow: hidden;
+  }
+
+  .total-section .total-section-card{
+  width: 9.5rem;
+  height: 5rem;
+  }
+
+  .section-card-top .card-top-left p{
+    font-size: .78rem !important;
+  }
+
+    .section-card-top .card-top-right img{
+      width: .9rem !important;
+      height: .9rem !important;
+    } 
+
+
+.daily-total-section .total-section{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr) !important;
+}
+
+.main-container .wrapper{
+  display: grid !important;
+  gap: 2rem;
+  grid-template-columns: repeat(1, 1fr) !important;
+  width: 100%;
+  max-width: 96% !important;
+  margin: 0 !important;
+}
+
+
+
+.profit-board .profit-box{
+  width: 9.5rem;
+  height: 7rem;
+}
+
+
+}
 
 
 
