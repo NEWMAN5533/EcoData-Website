@@ -67,70 +67,43 @@ const processedOrders = new Map();
 // ================================
 // HANDLE BUY DATA REQUEST (FIXED)
 // ================================
-export async function handleBuyDataRequest({
-  network,
-  recipient,
-  pkg,
-  size,
-  paymentReference
-}) {
+// Helper: common logic for buy-data (POST or GET)
+export async function handleBuyDataRequest({network, recipient, pkg, size, paymentReference }) {
   if (!network || !recipient || !pkg || !paymentReference) {
-    return {
-      ok: false,
-      status: 400,
-      body: { success: false, message: "Missing required fields" }
-    };
+    return { ok: false, status: 400, body: { success: false, message: "Missing required fields" } };
   }
 
-  // =========================
-  // DUPLICATE PREVENTION
-  // =========================
+  // 🚨 1. STOP DUPLICATE REQUESTS HERE
   if (processedOrders.has(paymentReference)) {
     return {
       ok: true,
       status: 200,
       body: {
         success: true,
-        message: "Order already processed",
+        message: "Order already processed (duplicate prevented)",
         order: processedOrders.get(paymentReference).response
       }
     };
   }
 
+  
+
+  // 2. Verify Paystack payment
   try {
-    const orderRef = db.collection("orders").doc(paymentReference);
+   
 
-    // =========================
-    // 1. CREATE INITIAL ORDER
-    // =========================
-    await orderRef.set({
-      orderId: paymentReference,
-      reference: paymentReference,
-      network,
-      recipient,
-      size: parseInt(size, 10),
-      amount: 0,
-      status: "pending",
-      source: "backend",
-      createdAt: admin.firestore.FieldValue.serverTimestamp(),
-    });
-
-    // =========================
-    // 2. BUILD SWIFT REQUEST
-    // =========================
+    // 3. Build SwiftData order payload
     const orderData = {
       type: "single",
       volume: parseInt(size, 10),
       phone: recipient,
       offerSlug: pkg,
       webhookUrl:
-        process.env.SWIFT_WEBHOOK_URL ||
-        "https://swiftdata-link.com/api/webhooks/orders",
+        process.env.SWIFT_WEBHOOK_URL || "https://swiftdata-link.com/api/webhooks/orders",
     };
 
-    const swiftBase =
-      (process.env.SWIFT_BASE_URL || "https://swiftdata-link.com").replace(/\/$/, "");
-
+    // 4. Post to SwiftData
+    const swiftBase = (process.env.SWIFT_BASE_URL || "https://swiftdata-link.com").replace(/\/$/, "");
     const swiftUrl = `${swiftBase}/order/${network}`;
 
     const swiftRes = await axios.post(swiftUrl, orderData, {
@@ -141,92 +114,44 @@ export async function handleBuyDataRequest({
       timeout: 15000,
     });
 
-    // =========================
-    // 3. SUCCESS RESPONSE
-    // =========================
-
-if (swiftRes.data?.success) {
-
-  // KEEP ORDER IN PROCESSING
-  // Swift/webhook/server polling will update later
-  await orderRef.update({
-
-    status: "processing",
-
-    amount:
-      Number(swiftRes.data?.amount || 0),
-
-    swiftOrderId:
-      swiftRes.data?.order?.id ||
-      swiftRes.data?.id ||
-      null,
-
-    swiftReference:
-      swiftRes.data?.reference ||
-      paymentReference,
-
-    swiftResponse: swiftRes.data,
-
-    updatedAt:
-      admin.firestore.FieldValue.serverTimestamp(),
-
-  });
-
-  processedOrders.set(paymentReference, {
-    status: "processing",
-    response: swiftRes.data,
-  });
-
-  return {
-    ok: true,
-    status: 200,
-    body: {
-      success: true,
-      message: "Bundle order placed",
-      order: swiftRes.data,
-    },
-  };
-}
-    // =========================
-    // 4. FAILED RESPONSE
-    // =========================
-    await orderRef.update({
-      status: "failed",
-      swiftResponse: swiftRes.data,
-      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-    });
 
     processedOrders.set(paymentReference, {
-      status: "failed",
-      response: swiftRes.data,
+      status: "processing",
+      response: {
+        reference:
+          swiftRes.data?.reference || null,
+
+        orderId:
+          swiftRes.data?.orderId || null,
+      },
     });
 
-    return {
-      ok: false,
-      status: 400,
-      body: {
-        success: false,
-        message: "SwiftData request failed",
-        details: swiftRes.data,
-      },
-    };
-
+    if (swiftRes.data?.success) {
+      return {
+        ok: true,
+        status: 200,
+        body: {
+          success: true,
+          message: "Bundle order placed",
+          order: swiftRes.data,
+        },
+      };
+    } else {
+      return {
+        ok: false,
+        status: 400,
+        body: {
+          success: false,
+          message: "SwiftData request failed",
+          details: swiftRes.data,
+        },
+      };
+    }
   } catch (err) {
-    const errData = err.response?.data || err.message;
-
+    const errData = err.response?.data || err.message || err;
     console.error("🔥 handleBuyDataRequest error:", errData);
 
-    // =========================
-    // 5. ERROR STATE UPDATE
-    // =========================
-    await db.collection("orders").doc(paymentReference).set({
-      orderId: paymentReference,
-      reference: paymentReference,
-      status: "failed",
-      error: errData,
-      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-    }, { merge: true });
-
+    // Save failure so duplicate network retry does not call Swift again
     processedOrders.set(paymentReference, {
       status: "failed",
       response: errData,
@@ -242,8 +167,8 @@ if (swiftRes.data?.success) {
       },
     };
   }
-}
 
+}
 
 
 // POST route
