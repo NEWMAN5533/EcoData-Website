@@ -1,4 +1,4 @@
-// UPDATED AT 18th/MAY, 2026 [BACKUP MAIN.JS]
+// UPDATED AT 26th/MAY, 2026 [BACKUP MAIN.JS]
 
 
 // --- Firebase Imports ---
@@ -728,6 +728,9 @@ const orderData = {
 
   amount:
     Number(bundle.price || 0),
+
+  vendorPrice: 
+    Number(returnedOrder.price || 0),  
 
   status: "pending",
 
