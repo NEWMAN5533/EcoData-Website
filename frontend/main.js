@@ -1,4 +1,4 @@
-// UPDATED AT 26th/MAY, 2026 [BACKUP MAIN.JS]
+// UPDATED AT 18th/MAY, 2026 [BACKUP MAIN.JS]
 
 
 // --- Firebase Imports ---
@@ -786,8 +786,9 @@ async function saveOrderToFirestore(orderData) {
 
   amount: Number(orderData.amount || 0),
 
-  // ECODATA COST
-  costPrice: Number(orderData.costPrice || 0),
+  vendorPrice:
+    Number(orderData.vendorPrice || 0),
+
 
   // REAL PROFIT
   profit: Number(orderData.profit || 0),
