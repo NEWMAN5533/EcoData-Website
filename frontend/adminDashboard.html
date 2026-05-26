@@ -77,7 +77,8 @@
        <section class="first-container">
         
         <div class="welcome-title">
-          <h1>Admin <span>Dashboard</span></h1>
+          <h2>Dashboard </h2>
+          <img src="./css/icons/dashboard.png" alt="" loading="lazy">
         </div>
         <!---daily totals card-(grid)----->
        <div class="total-title"> <p>Daily analytics</p></div>
@@ -162,7 +163,7 @@
             <div class="total-section-card">
                 <div class="section-card-top">
                 <div class="card-top-left">
-                  <p class="mapping">Today</p>
+                  <p class="mapping">Today Orders</p>
                 </div>
                 <div class="card-top-right">
                   <span class="material-icons">today</span>
@@ -177,7 +178,7 @@
             <div class="total-section-card">
                 <div class="section-card-top">
                 <div class="card-top-left">
-                  <p class="mapping">Weekly</p>
+                  <p class="mapping">Weekly Orders</p>
                 </div>
                 <div class="card-top-right">
                  <span class="material-icons">view_week</span>
@@ -192,7 +193,7 @@
             <div class="total-section-card">
                 <div class="section-card-top">
                 <div class="card-top-left">
-                  <p class="mapping">Monthly</p>
+                  <p class="mapping">Monthly Orders</p>
                 </div>
                 <div class="card-top-right">
                   <span class="material-icons">calendar_month</span>
@@ -227,7 +228,7 @@
                   <p class="mapping">Total Revenue</p>
                 </div>
                 <div class="card-top-right">
-                  <span class="material-icons">today</span>
+                  <span class="material-icons">summarize</span>
                 </div>
               </div>
               <div class="section-card-bottom">
@@ -235,26 +236,91 @@
                 <div class="card-bottom-right"></div>
               </div>
             </div>
+
+                <!---Today profit-->
+            <div class="total-section-card">
+                <div class="section-card-top">
+                <div class="card-top-left">
+                  <p class="mapping">Today Profit</p>
+                </div>
+                <div class="card-top-right">
+                  <span class="material-icons">today</span>
+                </div>
+              </div>
+              <div class="section-card-bottom">
+                <div class="card-bottom-left"><h1 id="todayProfit">0</h1></div>
+                <div class="card-bottom-right"></div>
+              </div>
+            </div>
+
+                <!---weekly profit-->
+            <div class="total-section-card">
+                <div class="section-card-top">
+                <div class="card-top-left">
+                  <p class="mapping">Weekly profit</p>
+                </div>
+                <div class="card-top-right">
+                  <span class="material-icons">view_week</span>
+                </div>
+              </div>
+              <div class="section-card-bottom">
+                <div class="card-bottom-left"><h1 id="weeklyProfit">0</h1></div>
+                <div class="card-bottom-right"></div>
+              </div>
+            </div>
+
+                <!---monthly profit---->
+            <div class="total-section-card">
+                <div class="section-card-top">
+                <div class="card-top-left">
+                  <p class="mapping">Monthly Profit</p>
+                </div>
+                <div class="card-top-right">
+                  <span class="material-icons">calendar_month</span>
+                </div>
+              </div>
+              <div class="section-card-bottom">
+                <div class="card-bottom-left"><h1 id="monthlyProfit">0</h1></div>
+                <div class="card-bottom-right"></div>
+              </div>
+            </div>
+
+
+                <!---all profit---->
+            <div class="total-section-card">
+                <div class="section-card-top">
+                <div class="card-top-left">
+                  <p class="mapping">Total Profit</p>
+                </div>
+                <div class="card-top-right">
+                  <span class="material-icons">summarize</span>
+                </div>
+              </div>
+              <div class="section-card-bottom">
+                <div class="card-bottom-left"><h1 id="allProfit">0</h1></div>
+                <div class="card-bottom-right"></div>
+              </div>
+            </div>
           </div>
         </section>
 
 
+        <div class="total-title"> <p>Analytics Graph</p></div>
+    <div class="chart-wrapper">
 
-        <div class="chart-wrapper">
+      <div class="saas-header">
+        <h3>Profit Analytics</h3>
 
-  <div class="saas-header">
-    <h3>Profit Analytics</h3>
+        <div class="chart-toggle">
+          <button onclick="setChartMode('daily')">Daily</button>
+          <button onclick="setChartMode('weekly')">Weekly</button>
+          <button onclick="setChartMode('monthly')">Monthly</button>
+        </div>
+      </div>
 
-    <div class="chart-toggle">
-      <button onclick="setChartMode('daily')">Daily</button>
-      <button onclick="setChartMode('weekly')">Weekly</button>
-      <button onclick="setChartMode('monthly')">Monthly</button>
+      <canvas id="profitChart"></canvas>
+
     </div>
-  </div>
-
-  <canvas id="profitChart"></canvas>
-
-</div>
 
 
         <!--table-section--->
@@ -286,70 +352,6 @@
         </section>
 
 
-          <!--table-section--->
-        <div class="total-title" style="margin-top: 2rem;"> 
-          <div class="user-title">
-            <p>Users</p>
-          </div>
-          <div class="profit-title">
-            <p>Profit</p>
-          </div>
-        </div>
-        <section class="wrapper">
-          <!---users--->
-        <section class="users-board">
-
-        <div class="table-header">
-          <span>Email</span>
-          <span>Regular?</span>
-          <span>Premium?</span>
-          <span>Total Order</span>
-          <span>Date joined</span>
-        </div>
-
-        <div class="user-live-body">
-          <div id="userWrapper"></div>
-
-          <p id="userEmpty">No users yet</p>
-        </div>
-
-      </section>
-        <!---profit-->
-        <section class="profit-board">
-          <div class="profit-box">
-            <div class="profit-box-top">
-              <P>Today  <span class="material-icons">today</span></P>
-            </div>
-            <div class="profit-box-bottom">
-              <h2 id="todayProfit">0</h2> 
-            </div>
-          </div>
-          <div class="profit-box">
-              <div class="profit-box-top">
-              <P>Weekly  <span class="material-icons">view_week</span></P>
-            </div>
-            <div class="profit-box-bottom">
-              <h2 id="weeklyProfit">0</h2> 
-            </div>
-          </div>
-          <div class="profit-box">
-              <div class="profit-box-top">
-              <P>Monthly  <span class="material-icons">calendar_month</span></P>
-            </div>
-            <div class="profit-box-bottom">
-              <h2 id="monthlyProfit">0</h2> 
-            </div>
-          </div>
-          <div class="profit-box">
-              <div class="profit-box-top">
-              <P>All  <span class="material-icons">dashboard</span></P>
-            </div>
-            <div class="profit-box-bottom">
-              <h2 id="allProfit">0</h2> 
-            </div>
-          </div>
-        </section>
-        </section>
 
        </section>
     
