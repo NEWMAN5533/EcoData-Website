@@ -124,7 +124,7 @@
                 </div>
               </div>
               <div class="section-card-bottom">
-                <div class="card-bottom-left"><h1 id="processingOrder ">0</h1></div>
+                <div class="card-bottom-left"><h1 id="processingOrder">0</h1></div>
                 <div class="card-bottom-right"></div>
               </div>
             </div>
@@ -169,7 +169,7 @@
                 </div>
               </div>
               <div class="section-card-bottom">
-                <div class="card-bottom-left"><h1 id="totayOrder">0</h1></div>
+                <div class="card-bottom-left"><h1 id="todayOrder">0</h1></div>
                 <div class="card-bottom-right"></div>
               </div>
             </div>
@@ -203,8 +203,58 @@
                 <div class="card-bottom-right"></div>
               </div>
             </div>
+
+              <!---Today orders-->
+            <div class="total-section-card">
+                <div class="section-card-top">
+                <div class="card-top-left">
+                  <p class="mapping">Today Revenue</p>
+                </div>
+                <div class="card-top-right">
+                  <span class="material-icons">today</span>
+                </div>
+              </div>
+              <div class="section-card-bottom">
+                <div class="card-bottom-left"><h1 id="todayRevenue">0</h1></div>
+                <div class="card-bottom-right"></div>
+              </div>
+            </div>
+            
+                <!---Today orders-->
+            <div class="total-section-card">
+                <div class="section-card-top">
+                <div class="card-top-left">
+                  <p class="mapping">Total Revenue</p>
+                </div>
+                <div class="card-top-right">
+                  <span class="material-icons">today</span>
+                </div>
+              </div>
+              <div class="section-card-bottom">
+                <div class="card-bottom-left"><h1 id="totalRevenue">0</h1></div>
+                <div class="card-bottom-right"></div>
+              </div>
+            </div>
           </div>
         </section>
+
+
+
+        <div class="chart-wrapper">
+
+  <div class="saas-header">
+    <h3>Profit Analytics</h3>
+
+    <div class="chart-toggle">
+      <button onclick="setChartMode('daily')">Daily</button>
+      <button onclick="setChartMode('weekly')">Weekly</button>
+      <button onclick="setChartMode('monthly')">Monthly</button>
+    </div>
+  </div>
+
+  <canvas id="profitChart"></canvas>
+
+</div>
 
 
         <!--table-section--->
@@ -248,21 +298,22 @@
         <section class="wrapper">
           <!---users--->
         <section class="users-board">
-          <!-- TABLE HEADER (FIXED) -->
-      <div class="table-header">
-        <span>Email</span>
-        <span>Regular?</span>
-        <span>Premium?</span>
-        <span>Total Order</span>
-        <span>Date joined</span>
-      </div>
-      <!--user live body---->
-      <div class="user-live-body">
-        <div class="user-live">
+
+        <div class="table-header">
+          <span>Email</span>
+          <span>Regular?</span>
+          <span>Premium?</span>
+          <span>Total Order</span>
+          <span>Date joined</span>
+        </div>
+
+        <div class="user-live-body">
+          <div id="userWrapper"></div>
+
           <p id="userEmpty">No users yet</p>
         </div>
-      </div>
-        </section>
+
+      </section>
         <!---profit-->
         <section class="profit-board">
           <div class="profit-box">
@@ -360,6 +411,8 @@
 </div>
 <!--container closing---->
 </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script type="module" src="adminDashboard.js"></script>
 </body>
 </html>

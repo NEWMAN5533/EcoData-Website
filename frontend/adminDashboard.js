@@ -95,6 +95,8 @@ async function loadOrderRealTime() {
 
       updateProfitCards(orders);
 
+      buildProfitChart(orders);
+
     });
 
   } catch (err) {
@@ -141,28 +143,31 @@ function renderOrders(orders) {
       order.createdAt?.toDate
         ? order.createdAt.toDate().toLocaleString()
         : "N/A";
+           
 
-    row.innerHTML = `
+        row.innerHTML = `
 
-      <small>${order.orderId || "-"}</small>
+  <small>${order.orderId || "-"}</small>
 
-      <small>${order.network.toUpperCase() || "-"}</small>
+  <small>${order.network ? order.network.toUpperCase() : "-"}</small>
 
-      <small>${order.volume || "-"}GB</small>
+  <small>${order.volume || "-"}GB</small>
 
-     <small>₵ ${(Number(order.amount) || 0).toFixed(2)}</small>
+  <small>₵ ${(Number(order.amount) || 0).toFixed(2)}</small>
 
-      <small>${order.recipient || "-"}</small>
+  <small>${order.recipient || "-"}</small>
 
-      <small>Yes</small>
+  <small>Yes</small>
 
-      <small>${date}</small>
+  <small>${date}</small>
 
-      <small>
-        <span class="${order.status || "pending"}">
-          ${order.status || "pending"}
-        </span>
-      </small>
+  <small>
+    <span class="${order.status || "pending"}">
+      ${order.status || "pending"}
+    </span>
+  </small>
+
+
 
       <small>
 
@@ -262,7 +267,10 @@ async function (firestoreId, status) {
 // =========================
 // UPDATE ANALYTICS CARDS
 // =========================
+
 function updateCards(orders) {
+
+
 
   // =========================
   // BASIC TOTALS
@@ -291,86 +299,61 @@ function updateCards(orders) {
     ).length;
 
 
+// =========================
+// DATE CALCULATIONS
+// =========================
+const now = new Date();
 
-  // =========================
-  // DATE CALCULATIONS
-  // =========================
-  const now =
-    new Date();
+const todayStart = new Date();
+todayStart.setHours(0, 0, 0, 0);
 
-  const today =
-    new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate()
-    );
+const weekStart = new Date();
+weekStart.setDate(now.getDate() - 7);
 
-  const weekAgo =
-    new Date();
+const monthStart = new Date();
+monthStart.setMonth(now.getMonth() - 1);
 
-  weekAgo.setDate(
-    weekAgo.getDate() - 7
-  );
+// =========================
+// TODAY ORDERS
+// =========================
+const todayOrders = orders.filter(order => {
 
-  const monthAgo =
-    new Date();
+  if (!order.createdAt?.toDate) return false;
 
-  monthAgo.setMonth(
-    monthAgo.getMonth() - 1
-  );
+  const orderDate =
+    order.createdAt.toDate();
 
+  return orderDate >= todayStart;
 
+}).length;
 
-  // =========================
-  // TODAY ORDERS
-  // =========================
-  const todayOrders =
-    orders.filter(order => {
+// =========================
+// WEEKLY ORDERS
+// =========================
+const weeklyOrders = orders.filter(order => {
 
-      if (!order.createdAt?.toDate) return false;
+  if (!order.createdAt?.toDate) return false;
 
-      const orderDate =
-        order.createdAt.toDate();
+  const orderDate =
+    order.createdAt.toDate();
 
-      return orderDate >= today;
+  return orderDate >= weekStart;
 
-    }).length;
+}).length;
 
+// =========================
+// MONTHLY ORDERS
+// =========================
+const monthlyOrders = orders.filter(order => {
 
+  if (!order.createdAt?.toDate) return false;
 
-  // =========================
-  // WEEKLY ORDERS
-  // =========================
-  const weeklyOrders =
-    orders.filter(order => {
+  const orderDate =
+    order.createdAt.toDate();
 
-      if (!order.createdAt?.toDate) return false;
+  return orderDate >= monthStart;
 
-      const orderDate =
-        order.createdAt.toDate();
-
-      return orderDate >= weekAgo;
-
-    }).length;
-
-
-
-  // =========================
-  // MONTHLY ORDERS
-  // =========================
-  const monthlyOrders =
-    orders.filter(order => {
-
-      if (!order.createdAt?.toDate) return false;
-
-      const orderDate =
-        order.createdAt.toDate();
-
-      return orderDate >= monthAgo;
-
-    }).length;
-
-
+}).length;
 
   // =========================
   // TOTAL REVENUE
@@ -393,7 +376,7 @@ function updateCards(orders) {
         const orderDate =
           order.createdAt.toDate();
 
-        if (orderDate >= today) {
+        if (orderDate >= todayStart) {
 
           todayRevenue += amount;
 
@@ -405,6 +388,11 @@ function updateCards(orders) {
 
   });
 
+    console.log({
+  todayOrders,
+  weeklyOrders,
+  monthlyOrders
+});
 
 
   // =========================
@@ -530,115 +518,272 @@ function listenToOrderStatus(orderId) {
 function updateProfitCards(orders) {
 
   let todayProfit = 0;
-
   let weeklyProfit = 0;
-
   let monthlyProfit = 0;
-
   let allProfit = 0;
 
+  const now = new Date();
 
-
-  // =========================
-  // DATES
-  // =========================
-  const now =
-    new Date();
-
-  const today =
-    new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate()
-    );
-
-  const weekAgo =
-    new Date();
-
-  weekAgo.setDate(
-    weekAgo.getDate() - 7
+  const today = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate()
   );
 
-  const monthAgo =
-    new Date();
+  const weekAgo = new Date();
+  weekAgo.setDate(weekAgo.getDate() - 7);
 
-  monthAgo.setMonth(
-    monthAgo.getMonth() - 1
-  );
+  const monthAgo = new Date();
+  monthAgo.setMonth(monthAgo.getMonth() - 1);
 
-
-
-  // =========================
-  // LOOP ORDERS
-  // =========================
   orders.forEach(order => {
 
-    const profit =
-      Number(order.profit || 0);
+    const amount = Number(order.amount || 0);
+    const vendorPrice = Number(order.vendorPrice || 0);
+
+    const orderDate = order.createdAt?.toDate
+      ? order.createdAt.toDate()
+      : null;
+
+    if (!orderDate) return;
+
+    // Paystack fee
+    const paystackFee = amount * 0.0195;
+
+    let profit = 0;
+
+    // =========================
+    // HYBRID LOGIC
+    // =========================
+
+    if (vendorPrice && orderDate >= today) {
+      // NEW SYSTEM (TODAY onwards)
+      profit = (amount - paystackFee) - vendorPrice;
+    } else {
+      // OLD SYSTEM fallback
+      profit = amount - paystackFee;
+    }
 
     allProfit += profit;
 
-    // Skip invalid dates
-    if (!order.createdAt?.toDate) return;
-
-    const orderDate =
-      order.createdAt.toDate();
-
-
-
-    // TODAY
     if (orderDate >= today) {
-
       todayProfit += profit;
-
     }
 
-
-
-    // WEEKLY
     if (orderDate >= weekAgo) {
-
       weeklyProfit += profit;
-
     }
 
-
-
-    // MONTHLY
     if (orderDate >= monthAgo) {
-
       monthlyProfit += profit;
-
     }
 
   });
 
-
-
-  // =========================
-  // UPDATE UI
-  // =========================
-  document.getElementById(
-    "todayProfit"
-  ).textContent =
+  document.getElementById("todayProfit").textContent =
     `₵ ${todayProfit.toFixed(2)}`;
 
-  document.getElementById(
-    "weeklyProfit"
-  ).textContent =
+  document.getElementById("weeklyProfit").textContent =
     `₵ ${weeklyProfit.toFixed(2)}`;
 
-  document.getElementById(
-    "monthlyProfit"
-  ).textContent =
+  document.getElementById("monthlyProfit").textContent =
     `₵ ${monthlyProfit.toFixed(2)}`;
 
-  document.getElementById(
-    "allProfit"
-  ).textContent =
+  document.getElementById("allProfit").textContent =
     `₵ ${allProfit.toFixed(2)}`;
-
 }
+
+
+
+
+
+
+
+
+let profitChartInstance = null;
+let currentMode = "daily";
+
+
+function setChartMode(mode) {
+  currentMode = mode;
+
+  document.querySelectorAll(".chart-toggle button")
+    .forEach(btn => btn.classList.remove("active"));
+
+  event.target.classList.add("active");
+
+  buildProfitChart(window.ALL_ORDERS || []);
+}
+
+
+
+
+function getWeekNumber(date) {
+  const firstDay = new Date(date.getFullYear(), 0, 1);
+  const pastDays = (date - firstDay) / 86400000;
+  return Math.ceil((pastDays + firstDay.getDay() + 1) / 7);
+}
+
+
+
+function buildProfitChart(orders) {
+
+  window.ALL_ORDERS = orders; // store globally
+
+  const grouped = {};
+
+  const now = new Date();
+
+  const weekAgo = new Date();
+  weekAgo.setDate(now.getDate() - 7);
+
+  const monthAgo = new Date();
+  monthAgo.setMonth(now.getMonth() - 1);
+
+  orders.forEach(order => {
+
+    const amount = Number(order.amount || 0);
+    const vendorPrice = Number(order.vendorPrice || 0);
+
+    const date = order.createdAt?.toDate?.();
+    if (!date) return;
+
+    const paystackFee = amount * 0.0195;
+    const profit = (amount - paystackFee) - vendorPrice;
+
+    let key;
+
+    // =========================
+    // GROUPING LOGIC
+    // =========================
+
+    if (currentMode === "daily") {
+      key = date.toISOString().split("T")[0];
+    }
+
+    if (currentMode === "weekly") {
+      const week = getWeekNumber(date);
+      key = `Week ${week}`;
+    }
+
+    if (currentMode === "monthly") {
+      key = `${date.getFullYear()}-${date.getMonth() + 1}`;
+    }
+
+    grouped[key] = (grouped[key] || 0) + profit;
+  });
+
+  const labels = Object.keys(grouped);
+  const data = Object.values(grouped);
+
+  const ctx = document.getElementById("profitChart");
+
+  if (!ctx) return;
+
+  if (profitChartInstance) {
+    profitChartInstance.destroy();
+  }
+
+  profitChartInstance = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels,
+      datasets: [{
+        label: `Profit (${currentMode})`,
+        data,
+        borderWidth: 2,
+        tension: 0.3
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: { beginAtZero: true }
+      }
+    }
+  });
+}
+
+
+
+
+
+profitChartInstance = new Chart(ctx, {
+  type: "line",
+  data: {
+    labels,
+    datasets: [{
+      label: `Profit (${currentMode})`,
+      data,
+
+      borderColor: "#2563eb",
+      backgroundColor: "rgba(37,99,235,0.08)",
+
+      fill: true,
+      tension: 0.4,
+      borderWidth: 3,
+      pointRadius: 3,
+      pointHoverRadius: 6,
+      pointBackgroundColor: "#2563eb",
+      pointBorderWidth: 0,
+    }]
+  },
+
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+
+    plugins: {
+      legend: {
+        display: false
+      },
+      tooltip: {
+        mode: "index",
+        intersect: false,
+        backgroundColor: "#111827",
+        titleColor: "#fff",
+        bodyColor: "#d1d5db",
+        padding: 10
+      }
+    },
+
+    interaction: {
+      mode: "index",
+      intersect: false
+    },
+
+    scales: {
+      x: {
+        grid: {
+          display: false
+        },
+        ticks: {
+          color: "#6b7280"
+        }
+      },
+
+      y: {
+        grid: {
+          color: "rgba(0,0,0,0.05)"
+        },
+        ticks: {
+          color: "#6b7280"
+        }
+      }
+    }
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
 
 
 
