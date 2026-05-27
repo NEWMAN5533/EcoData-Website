@@ -278,4 +278,15 @@ body{
    }
 
 
+ 
+  .offer-title h2{
+    font-size: 1.1rem !important;
+  }
+
+  .dark-mode .offer-title h2{
+    color: white;
+    opacity: .8;
+  }
+
+
 
