@@ -1,0 +1,267 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  outline: none;
+}
+
+
+
+
+
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f0e8;
+    --gold: #f5c842;
+    --gold-dark: #c9a020;
+    --red: #e63946;
+    --green: #2dc653;
+    --green-light: #39d664;
+    --gray: #1e1e1e;
+    --gray-mid: #2e2e2e;
+    --gray-light: #555;
+    --mtn-yellow: #ffcb05;
+    --vodafone-red: #e60000;
+    --airteltigo-blue: #002D6B;
+    --telecel-teal: #00b0af;
+  }
+
+
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+
+
+
+body{
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  background: rgb(255, 255, 255);
+}
+
+
+.newCardContainer{
+  width: 100%;
+  max-width: 96%;
+  justify-self: center;
+  align-items: center;
+  justify-items: center;
+  position: relative;
+}
+
+
+
+
+  /* BUNDLES */
+  .bundles-header {
+    display: flex;
+    align-items: flex-end; justify-content: space-between;
+    margin-bottom: 56px; 
+    flex-wrap: wrap; 
+    gap: 24px;
+  }
+
+
+
+  .network-tabs {
+    display: flex;
+    gap: 8px; 
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+
+
+  .tab {
+    padding: 10px 22px;
+    border-radius: 100px;
+    border: 1.5px solid rgba(255,255,255,0.12);
+    background: transparent;
+    color: rgba(245,240,232,0.6);
+    font-family: 'Cabinet Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+
+  .tab:hover
+  { border-color: rgba(245,200,66,0.5); 
+    color: var(--white); 
+  }
+
+
+
+  .tab.active 
+  { 
+    background: var(--gold); border-color: var(--gold); color: var(--black); 
+  }
+
+
+
+
+
+  .bundle-grid 
+  {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    
+  }
+
+
+
+  .mntCardStyle
+  {
+    display: flex;
+    flex-direction: column;
+    width: 10.5rem;
+    height: 11rem;
+    background: var(--gray);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 20px;
+    padding: 12px;
+    position: relative;
+    margin-top: .8rem;
+    overflow: hidden;
+    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    cursor: pointer;
+  }
+
+
+
+
+  .mntCardStyle:hover 
+  { 
+    transform: translateY(-4px); border-color: rgba(245,200,66,0.35); box-shadow: 0 12px 40px rgba(0,0,0,0.4); 
+  }
+
+
+
+  .mntCardStyle:hover::before
+  { 
+    opacity: 1;
+  }
+
+
+
+
+  .mntCardStyle.featured {
+    border-color: rgba(245,200,66,0.4);
+    background: linear-gradient(145deg, #1e1e1e, #1a1808);
+  }
+
+
+  
+
+  .popular-badge {
+    position: absolute; 
+    top: 20px; 
+    right: 6px;
+    background: var(--gold);
+    color: var(--black);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 5px;
+    border-radius: 100px;
+  }
+
+
+
+  .network-label 
+  {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: flex; 
+    align-items: center; 
+    gap: 6px;
+  }
+
+  .bundle-data 
+  {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 4px;
+    color: rgb(253, 253, 227);
+  }
+
+
+  .bundle-data .unit 
+  {
+  font-size: 1.4rem;
+  }
+
+  .bundle-validity {
+    display: none;
+    font-size: 0.82rem;
+    color: rgba(245,240,232,0.45);
+    margin-bottom: 20px;
+  }
+
+  .bundle-price {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding-top: 20px;
+    margin-top: auto;
+    gap: .3rem;
+  }
+
+
+
+  .price-amt
+   {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--gold);
+  }
+
+
+
+  .price-cedi { font-size: 1rem; }
+
+
+
+  .buy-btn 
+  {
+    background: rgba(245,200,66,0.12);
+    border: 1.5px solid rgba(245,200,66,0.3);
+    color: var(--gold);
+    padding: 6px 10px ;
+    width: 4rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: 1rem;
+    font-family: 'Cabinet Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 0.68rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+
+  .buy-btn:hover 
+  { background: var(--gold); color: var(--black);
+   }
+
+
+
