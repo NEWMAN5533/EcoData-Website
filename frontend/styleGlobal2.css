@@ -1166,7 +1166,7 @@ TRUSTED LOGOS ALIGN
   margin: 0 !important;
   position: relative;
   display: grid;
-  grid-template-columns: repeat(3, 1fr) !important;
+  grid-template-columns: repeat(2, 1fr) !important;
   width: 100%;
   max-width: 100%;
 }
@@ -2595,7 +2595,7 @@ WHAT'APP CHAT BUTTON
   margin: 0 !important;
   position: relative;
   display: grid;
-  grid-template-columns: repeat(4, 1fr) !important;
+  grid-template-columns: repeat(3, 1fr) !important;
   width: 100%;
   max-width: 100%;
 }
@@ -2903,11 +2903,7 @@ WHAT'APP CHAT BUTTON
       margin: 2rem !important;
     }
 
-    .dark-mode #gridView .hero-text-container{
-      background: var(--thin-border);
-      border: 1px solid var(--background-cl-1);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.45);
-    }
+ 
 
 
      .hero-text-container .hero-top-content .top-left-content img{
@@ -2981,7 +2977,7 @@ WHAT'APP CHAT BUTTON
   margin: 0 !important;
   position: relative;
   display: grid;
-  grid-template-columns: repeat(4, 1fr) !important;
+  grid-template-columns: repeat(3, 1fr) !important;
   width: 100%;
   max-width: 100%;
 }
