@@ -131,6 +131,11 @@ body{
     overflow: hidden;
     transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
     cursor: pointer;
+     -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
   }
 
 
@@ -256,6 +261,11 @@ body{
     font-size: 0.68rem;
     cursor: pointer;
     transition: all 0.2s;
+    -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
   }
 
 
