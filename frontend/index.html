@@ -43,6 +43,9 @@
   <link rel="stylesheet" href="styleSkeletonUi.css">
   <link rel="stylesheet" href="homePage.css">
 
+  <!---new bundle card style----->
+  <link rel="stylesheet" href="newCardStyle.css">
+
   <!--updated dark mode-->
 <script>
 (function () {
@@ -630,7 +633,7 @@
     </div>
 
 
-      <div class="google-thumbnail thumb2" >
+      <div class="google-thumbnail thumb2" style="display: none;">
         <img class="analy" src="./css/icons/market.png" alt="" loading="lazy">
         WE ARE RUNNING PROMO! EVERY <span style="color: wheat; margin: .0.4rem">THURSDAY AND FRIDAY'S</span> on MTN DATA, buy at lower cost at these promo days. [1GB = 5.50], [2GB = 11], [3GB = 16.60],...[10GB = 45],...[20GB = 89],...[25 = 109]. Check back every <span style="color: wheat; margin: .0.4rem">THURSDAY AND FRIDAY'S</span>
       </div>
@@ -1676,379 +1679,299 @@
 
         <div class="gridCard-wrapper" >
         <!----------CARD----1------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <div class="oldTag">
-              <small>8.3% OFF</small>
-            </div>
-
-            <h3><span>1</span>GB</h3>
-            <small class="old-price">GHS 5.50</small>
-            <p class="new-price">GHS 5.50</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="1"
-    data-price="5.50"
-            > <img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+         <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">1<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>5.50</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="1"
+          data-price="5.50"
+        >Buy Now</button>
+      </div>
         </div>
+      
   <!----------NEXT CARD------2----->
-        <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <div class="oldTag">
-              <small>8.3% OFF</small>
-            </div>
-            <h3><span>2</span>GB</h3>
-              <small class="old-price">GHS 11</small>
-            <p class="new-price">GHS 11</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="2"
-    data-price="11"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+         <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">2<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>11</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="2"
+          data-price="11"
+        >Buy Now</button>
+      </div>
         </div>
   <!----------NEXT CARD-------3---->
-        <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <div class="oldTag">
-              <small>2.4% OFF</small>
-            </div>
-            <h3><span>3</span>GB</h3>
-              <small class="old-price">GHS 16.60</small>
-            <p class="new-price">GHS 16.60</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="3"
-    data-price="16.60"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+        <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">3<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>16.60</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="3"
+          data-price="16.60"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD----4------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <div class="oldTag">
-              <small>8.3% OFF</small>
-            </div>
-            <h3><span>4</span>GB</h3>
-              <small class="old-price">GHS 21</small>
-            <p class="new-price">GHS 21</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="4"
-    data-price="21"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">4<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>21</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="4"
+          data-price="21"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD----5------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <div class="oldTag">
-              <small>8.3% OFF</small>
-            </div>
-            <h3><span>5</span>GB</h3>
-              <small class="old-price">GHS 25.50</small>
-            <p class="new-price">GHS 25.50</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="5"
-    data-price="25.50"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">5<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>25.50</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="5"
+          data-price="25.50"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD---6-------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <div class="oldTag">
-              <small>5.4% OFF</small>
-            </div>
-            <h3><span>6</span>GB</h3>
-              <small class="old-price">GHS 31</small>
-            <p class="new-price">GHS 31</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="6"
-    data-price="31"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">6<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>31</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="6"
+          data-price="31"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD---7-------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <div class="oldTag">
-              <small>8.3% OFF</small>
-            </div>
-            <h3><span>7</span>GB</h3>
-              <small class="old-price">GHS 36</small>
-            <p class="new-price">GHS 36</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="7"
-    data-price="36"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">7<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>36</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="7"
+          data-price="36"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD-----8------>
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <div class="oldTag">
-              <small>8.3% OFF</small>
-            </div>
-            <h3><span>8</span>GB</h3>
-            <small class="old-price">GHS 39</small>
-            <p class="new-price">GHS 39</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="8"
-    data-price="39"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">8<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>39</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="8"
+          data-price="39"
+        >Buy Now</button>
+      </div>
         </div>
 
         <!----------NEXT CARD----------->
         <!---EMPTY-9GB-->
         <!----------NEXT CARD---9-------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <div class="oldTag">
-              <small>4.3% OFF</small>
-            </div>
-            <h3><span>10</span>GB</h3>
-              <small class="old-price">GHS 45</small>
-            <p class="new-price">GHS 45</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="10"
-    data-price="45"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">10<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>45</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="10"
+          data-price="45"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD---10-------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <div class="oldTag">
-              <small>8.3% OFF</small>
-            </div>
-            <h3><span>12</span>GB</h3>
-              <small class="old-price">GHS 59</small>
-            <p class="new-price">GHS 59</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="12"
-    data-price="59"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+         
+         <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">12<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>59</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="12"
+          data-price="59"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD-----11------>
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <div class="oldTag">
-              <small>8.3% OFF</small>
-            </div>
-            <h3><span>15</span>GB</h3>
-              <small class="old-price">GHS 67</small>
-            <p class="new-price">GHS 67</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="15"
-    data-price="67"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">15<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>67</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="15"
+          data-price="67"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD----12------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <div class="oldTag">
-              <small>2.2% OFF</small>
-            </div>
-            <h3><span>20</span>GB</h3>
-              <small class="old-price">GHS 89</small>
-            <p class="new-price">GHS 89</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="20"
-    data-price="89"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">20<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>89</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="20"
+          data-price="89"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD----13------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <div class="oldTag">
-              <small>2% OFF</small>
-            </div>
-            <h3><span>25</span>GB</h3>
-              <small class="old-price">GHS 109</small>
-            <p class="new-price">GHS 109</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="25"
-    data-price="109"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">25<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>109</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="25"
+          data-price="109"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD---14------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <div class="oldTag">
-              <small>2% OFF</small>
-            </div>
-            <h3><span>30</span>GB</h3>
-              <small class="old-price">GHS 128</small>
-            <p class="new-price">GHS 128</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="30"
-    data-price="128"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">30<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>128</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="30"
+          data-price="128"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD----15------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <div class="oldTag">
-              <small>1.2% OFF</small>
-            </div>
-            <h3><span>40</span>GB</h3>
-              <small class="old-price">GHS 167</small>
-            <p class="new-price">GHS 167</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="40"
-    data-price="167"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">40<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>167</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="40"
+          data-price="167"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD---16-------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <div class="oldTag">
-              <small>1.4% OFF</small>
-            </div>
-            <h3><span>50</span>GB</h3>
-              <small class="old-price">GHS 211</small>
-            <p class="new-price">GHS 211</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="50"
-    data-price="211"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">50<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>211</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="50"
+          data-price="211"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD---17-------->
-          <div class="gridCard" style="display: none;">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3>100GB</h3>
-              <small class="old-price">GHS 429.98</small>
-            <p class="new-price">GHS 420</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="100"
-    data-price="429.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+        
+         <!-- MTN Bundles -->
+        <div class="mntCardStyle" style="display: none;">
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">100<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>5.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="1"
+          data-price="5.99"
+        >Buy Now</button>
+      </div>
         </div>
 
 
@@ -2067,314 +1990,281 @@
         <div class="offer-title" > <h2 style="font-size: .9rem !important;">MTN NORMAL DELIVERY</h2>
         </div>
 
+        <div class="gridCard-wrapper " >
 
-        <div class="gridCard-wrapper" >
         <!----------CARD----1------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-            <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>1</span>GB</h3>
-            <small class="old-price">GHS 5.99</small>
-            <p class="new-price">GHS 5.50</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="1"
-    data-price="5.99"
-            > <img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">1<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>5.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="1"
+          data-price="5.99"
+        >Buy Now</button>
+      </div>
         </div>
   <!----------NEXT CARD------2----->
-        <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>2</span>GB</h3>
-              <small class="old-price">GHS 11.99</small>
-            <p class="new-price">GHS 11</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="2"
-    data-price="11.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+     <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">2<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>11.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="2"
+          data-price="11.99"
+        >Buy Now</button>
+      </div>
         </div>
+  
   <!----------NEXT CARD-------3---->
-        <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>3</span>GB</h3>
-              <small class="old-price">GHS 16.99</small>
-            <p class="new-price">GHS 16</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="3"
-    data-price="16.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">3<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>16.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="3"
+          data-price="16.99"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD----4------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>4</span>GB</h3>
-              <small class="old-price">GHS 21.99</small>
-            <p class="new-price">GHS 21</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="4"
-    data-price="21.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+            <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+            <div class="popular-badge">⭐ Best Value</div>
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">4<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>21.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="4"
+          data-price="21.99"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD----5------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>5</span>GB</h3>
-              <small class="old-price">GHS 26.50</small>
-            <p class="new-price">GHS 25</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="5"
-    data-price="26.50"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">5<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>26.50</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="5"
+          data-price="26.50"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD---6-------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>6</span>GB</h3>
-              <small class="old-price">GHS 32.50</small>
-            <p class="new-price">GHS 31</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="6"
-    data-price="32.50"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">6<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>32.50</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="6"
+          data-price="32.50"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD---7-------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>7</span>GB</h3>
-              <small class="old-price">GHS 36.99</small>
-            <p class="new-price">GHS 36</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="7"
-    data-price="36.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
-        </div>
-        <!----------NEXT CARD-----8------>
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>8</span>GB</h3>
-            <small class="old-price">GHS 39.99</small>
-            <p class="new-price">GHS 39</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="8"
-    data-price="39.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+            <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">1<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>5.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="7"
+          data-price="36.99"
+        >Buy Now</button>
+      </div>
         </div>
 
-        <!----------NEXT CARD----------->
-        <!---EMPTY-9GB-->
-        <!----------NEXT CARD---9-------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>10</span>GB</h3>
-              <small class="old-price">GHS 46.99</small>
-            <p class="new-price">GHS 45</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="10"
-    data-price="46.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">8<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>39.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="8"
+          data-price="39.99"
+        >Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD---10gb-------->
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">10<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>46.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="10"
+          data-price="46.99"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD---10-------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>12</span>GB</h3>
-              <small class="old-price">GHS 59.99</small>
-            <p class="new-price">GHS 59</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="12"
-    data-price="59.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">12<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>59.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="12"
+          data-price="59.99"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD-----11------>
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>15</span>GB</h3>
-              <small class="old-price">GHS 67.99</small>
-            <p class="new-price">GHS 66</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="15"
-    data-price="67.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+             <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">15<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>67.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="15"
+          data-price="67.99"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD----12------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>20</span>GB</h3>
-              <small class="old-price">GHS 90.99</small>
-            <p class="new-price">GHS 89</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="20"
-    data-price="90.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">20<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>90.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="20"
+          data-price="90.99"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD----13------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>25</span>GB</h3>
-              <small class="old-price">GHS 110.90</small>
-            <p class="new-price">GHS 109</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="25"
-    data-price="110.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+             <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">25<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>110.90</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="25"
+          data-price="110.90"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD---14------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>30</span>GB</h3>
-              <small class="old-price">GHS 129.98</small>
-            <p class="new-price">GHS 128</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="30"
-    data-price="129.98"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+            <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">30<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>129.98</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="30"
+          data-price="129.98"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD----15------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>40</span>GB</h3>
-              <small class="old-price">GHS 168.99</small>
-            <p class="new-price">GHS 167</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="40"
-    data-price="168.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+            <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">40<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>168.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="40"
+          data-price="168.99"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD---16-------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>50</span>GB</h3>
-              <small class="old-price">GHS 214.99</small>
-            <p class="new-price">GHS 213</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="50"
-    data-price="214.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">50<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>214.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="50"
+          data-price="214.99"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD---17-------->
           <div class="gridCard" style="display: none;">
@@ -2415,332 +2305,298 @@
 
         <div class="gridCard-wrapper">
         <!----------CARD----1------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>1</span>GB</h3>
-            <small class="old-price">GHS 6.50</small>
-            <p class="new-price">GHS 5.50</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="1"
-    data-price="6.50"
-            > <img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">1<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>6.50</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="1"
+          data-price="6.50"
+        >Buy Now</button>
+      </div>
         </div>
   <!----------NEXT CARD------2----->
-        <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>2</span>GB</h3>
-              <small class="old-price">GHS 12.50</small>
-            <p class="new-price">GHS 11</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="2"
-    data-price="12.50"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+        <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="popular-badge">💎 Popular</div>
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">2<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>12.50</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="2"
+          data-price="12.50"
+        >Buy Now</button>
+      </div>
         </div>
   <!----------NEXT CARD-------3---->
-        <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>3</span>GB</h3>
-              <small class="old-price">GHS 17.99</small>
-            <p class="new-price">GHS 16</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="3"
-    data-price="17.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+        <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">3<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>17.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="3"
+          data-price="17.99"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD----4------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>4</span>GB</h3>
-              <small class="old-price">GHS 22.99</small>
-            <p class="new-price">GHS 21</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="4"
-    data-price="22.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+    <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">4<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>22.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="4"
+          data-price="22.99"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD----5------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>5</span>GB</h3>
-              <small class="old-price">GHS 26.99</small>
-            <p class="new-price">GHS 25</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="5"
-    data-price="26.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+         <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">5<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>26.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="5"
+          data-price="26.99"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD---6-------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>6</span>GB</h3>
-              <small class="old-price">GHS 32.99</small>
-            <p class="new-price">GHS 31</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="6"
-    data-price="32.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">6<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>32.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="6"
+          data-price="32.99"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD---7-------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>7</span>GB</h3>
-              <small class="old-price">GHS 37.97</small>
-            <p class="new-price">GHS 36</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="7"
-    data-price="37.97"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">7<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>37.97</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="7"
+          data-price="37.97"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD-----8------>
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>8</span>GB</h3>
-            <small class="old-price">GHS 40.99</small>
-            <p class="new-price">GHS 39</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="8"
-    data-price="40.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">8<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>40.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="8"
+          data-price="40.99"
+        >Buy Now</button>
+      </div>
         </div>
 
         <!----------NEXT CARD----------->
         <!---EMPTY-9GB-->
         <!----------NEXT CARD---9-------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>10</span>GB</h3>
-              <small class="old-price">GHS 47.99</small>
-            <p class="new-price">GHS 45</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="10"
-    data-price="47.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">10<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>47.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="10"
+          data-price="47.99"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD---10-------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>12</span>GB</h3>
-              <small class="old-price">GHS 61.99</small>
-            <p class="new-price">GHS 59</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="12"
-    data-price="61.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+         <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">12<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>61.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="12"
+          data-price="61.99"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD-----11------>
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>15</span>GB</h3>
-              <small class="old-price">GHS 69.97</small>
-            <p class="new-price">GHS 66</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="15"
-    data-price="69.97"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+         <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">15<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>69.97</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="15"
+          data-price="69.97"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD----12------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>20</span>GB</h3>
-              <small class="old-price">GHS 92.98</small>
-            <p class="new-price">GHS 89</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="20"
-    data-price="92.98"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">20<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>92.98</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="20"
+          data-price="92.98"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD----13------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>25</span>GB</h3>
-              <small class="old-price">GHS 112.99</small>
-            <p class="new-price">GHS 109</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="25"
-    data-price="112.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">25<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>112.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="25"
+          data-price="112.99"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD---14------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>30</span>GB</h3>
-              <small class="old-price">GHS 132.97</small>
-            <p class="new-price">GHS 128</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="30"
-    data-price="132.97"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">30<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>132.97</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="30"
+          data-price="132.97"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD----15------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>40</span>GB</h3>
-              <small class="old-price">GHS 171.98</small>
-            <p class="new-price">GHS 167</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="40"
-    data-price="171.98"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">40<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>171.98</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="40"
+          data-price="171.98"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD---16-------->
-          <div class="gridCard">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>50</span>GB</h3>
-              <small class="old-price">GHS 218.98</small>
-            <p class="new-price">GHS 213</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="50"
-    data-price="218.98"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">50<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>218.98</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="50"
+          data-price="218.98"
+        >Buy Now</button>
+      </div>
         </div>
         <!----------NEXT CARD---17-------->
-          <div class="gridCard" style="display: none;">
-          <div class="gridCard-top">
-            <small>MTN </small>
-                    <img class="mt" src="./css/icons/mtn-signal.png" alt="mtn.icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3>100GB</h3>
-              <small class="old-price">GHS 431.98</small>
-            <p class="new-price">GHS 420</p>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn"
-    data-network="mtn"
-    data-size="100"
-    data-price="431.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" style="display: none;">
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">1<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>5.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="1"
+          data-price="5.99"
+        >Buy Now</button>
+      </div>
         </div>
-
 
 
 
@@ -2851,187 +2707,199 @@
         </div>
 
         <!---------- CARD---3-------->
-        <div class="gridCardTele">
-          <div class="gridCard-top">
-            <small>Telecel</small>
-          <img class="lecel" src="./css/icons/telecel-signal.png" alt="tele-icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>5</span>GB</h3>
-            <small>GHS 27.49</small>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn tbtn"
-    data-network="telecel"
-    data-size="5"
-    data-price="27.49"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy </button>
-          </div>
-        </div> 
-  <!---------- CARD----4------->
-        <div class="gridCardTele">
-          <div class="gridCard-top">
-            <small>Telecel</small>
-          <img class="lecel" src="./css/icons/telecel-signal.png" alt="tele-icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>10</span>GB</h3>
-            <small>GHS 45.99</small>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn tbtn"
-    data-network="telecel"
-    data-size="10"
-    data-price="45.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
-        </div>
-  <!----------NEXT CARD--5--------->
-        <div class="gridCardTele">
-          <div class="gridCard-top">
-            <small>Telecel</small>
-          <img class="lecel" src="./css/icons/telecel-signal.png" alt="tele-icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>15</span>GB</h3>
-            <small>GHS 67.99</small>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn tbtn"
-    data-network="telecel"
-    data-size="15"
-    data-price="67.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
-        </div>
-        <!----------NEXT CARD--6--------->
-          <div class="gridCardTele">
-          <div class="gridCard-top">
-            <small>Telecel</small>
-          <img class="lecel" src="./css/icons/telecel-signal.png" alt="tele-icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>20</span>GB</h3>
-            <small>GHS 89.99</small>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn tbtn"
-    data-network="telecel"
-    data-size="20"
-    data-price="89.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
-        </div>
-        <!----------NEXT CARD----7------->
-          <div class="gridCardTele">
-          <div class="gridCard-top">
-            <small>Telecel</small>
-          <img class="lecel" src="./css/icons/telecel-signal.png" alt="tele-icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>25</span>GB</h3>
-            <small>GHS 109.99</small>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn tbtn"
-    data-network="telecel"
-    data-size="25"
-    data-price="109.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
-        </div>
-        <!----------NEXT CARD---8-------->
-          <div class="gridCardTele">
-          <div class="gridCard-top">
-            <small>Telecel</small>
-          <img class="lecel" src="./css/icons/telecel-signal.png" alt="tele-icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>30</span>GB</h3>
-            <small>GHS 133.96</small>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn tbtn"
-    data-network="telecel"
-    data-size="30"
-    data-price="133.96"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
-        </div>
-        <!----------NEXT CARD----9------->
-    <div class="gridCardTele">
-          <div class="gridCard-top">
-            <small>Telecel</small>
-          <img class="lecel" src="./css/icons/telecel-signal.png" alt="tele-icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>35</span>GB</h3>
-            <small>GHS 142.98</small>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn tbtn"
-    data-network="telecel"
-    data-size="35"
-    data-price="142.98"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
-        </div>
-        <!----------NEXT CARD-----10------>
-          <div class="gridCardTele">
-          <div class="gridCard-top">
-            <small>Telecel</small>
-          <img class="lecel" src="./css/icons/telecel-signal.png" alt="tele-icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>40</span>GB</h3>
-            <small>GHS 174.99</small>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn tbtn"
-    data-network="telecel"
-    data-size="40"
-    data-price="174.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
-        </div>
-        <!----------NEXT CARD---11-------->
-          <div class="gridCardTele">
-          <div class="gridCard-top">
-            <small>Telecel</small>
-          <img class="lecel" src="./css/icons/telecel-signal.png" alt="tele-icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>50</span>GB</h3>
-            <small>GHS 209.97</small>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn tbtn"
-    data-network="telecel"
-    data-size="50"
-    data-price="209.97"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+
+         <div class="mntCardStyle" >
+          <div class="network-label" style="color:#e60000">
+        <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
+        Telecel
+      </div>
+      <div class="bundle-data">5<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>27.59</div>
+        <button class="buy-btn"
+          data-network="telecel"
+          data-size="5"
+          data-price="27.59"
+        >Buy Now</button>
+      </div>
         </div>
 
-        <!----------NEXT CARD---12-------->
-          <div class="gridCardTele">
-          <div class="gridCard-top">
-            <small>Telecel</small>
-          <img class="lecel" src="./css/icons/telecel-signal.png" alt="tele-icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>100</span>GB</h3>
-            <small>GHS 396.99</small>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn tbtn"
-    data-network="telecel"
-    data-size="100"
-    data-price="396.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
-        </div>
+
+
+
+
+
+
+
+
+
         
+  <!---------- CARD----4------->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#e60000">
+        <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
+        Telecel
+      </div>
+      <div class="bundle-data">10<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>45.99</div>
+        <button class="buy-btn"
+          data-network="telecel"
+          data-size="10"
+          data-price="45.99"
+        >Buy Now</button>
+      </div>
+        </div>
+
+  <!----------NEXT CARD--5--------->
+      <div class="mntCardStyle" >
+          <div class="network-label" style="color:#e60000">
+        <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
+        Telecel
+      </div>
+      <div class="bundle-data">15<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>67.99</div>
+        <button class="buy-btn"
+          data-network="telecel"
+          data-size="17"
+          data-price="67.99"
+        >Buy Now</button>
+      </div>
+        </div>
+
+        <!----------NEXT CARD--6--------->
+         <div class="mntCardStyle" >
+          <div class="network-label" style="color:#e60000">
+        <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
+        Telecel
+      </div>
+      <div class="bundle-data">20<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>89.99</div>
+        <button class="buy-btn"
+          data-network="telecel"
+          data-size="20"
+          data-price="89.99"
+        >Buy Now</button>
+      </div>
+        </div>
+
+        <!----------NEXT CARD----7------->
+         <div class="mntCardStyle" >
+          <div class="network-label" style="color:#e60000">
+        <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
+        Telecel
+      </div>
+      <div class="bundle-data">25<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>109.99</div>
+        <button class="buy-btn"
+          data-network="telecel"
+          data-size="25"
+          data-price="109.99"
+        >Buy Now</button>
+      </div>
+        </div>
+
+        <!----------NEXT CARD---8-------->
+          <div class="mntCardStyle" >
+          <div class="network-label" style="color:#e60000">
+        <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
+        Telecel
+      </div>
+      <div class="bundle-data">30<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>133.96</div>
+        <button class="buy-btn"
+          data-network="telecel"
+          data-size="30"
+          data-price="133.96"
+        >Buy Now</button>
+      </div>
+        </div>
+
+
+         <div class="mntCardStyle" >
+          <div class="network-label" style="color:#e60000">
+        <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
+        Telecel
+      </div>
+      <div class="bundle-data">35<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>142.99</div>
+        <button class="buy-btn"
+          data-network="telecel"
+          data-size="35"
+          data-price="142.99"
+        >Buy Now</button>
+      </div>
+        </div>
+
+
+        <!----------NEXT CARD----9------->
+    <div class="mntCardStyle" >
+          <div class="network-label" style="color:#e60000">
+        <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
+        Telecel
+      </div>
+      <div class="bundle-data">40<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>174.98</div>
+        <button class="buy-btn"
+          data-network="telecel"
+          data-size="40"
+          data-price="174.98"
+        >Buy Now</button>
+      </div>
+        </div>
+
+        <!----------NEXT CARD-----10------>
+         <div class="mntCardStyle" >
+          <div class="network-label" style="color:#e60000">
+        <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
+        Telecel
+      </div>
+      <div class="bundle-data">50<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>209.99</div>
+        <button class="buy-btn"
+          data-network="telecel"
+          data-size="50"
+          data-price="209.99"
+        >Buy Now</button>
+      </div>
+        </div>
+
+        <!----------NEXT CARD---11-------->
+         
+        <!----------NEXT CARD---12-------->
+         <div class="mntCardStyle" >
+          <div class="network-label" style="color:#e60000">
+        <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
+        Telecel
+      </div>
+      <div class="bundle-data">100<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>396.99</div>
+        <button class="buy-btn"
+          data-network="telecel"
+          data-size="100"
+          data-price="396.99"
+        >Buy Now</button>
+      </div>
+        </div>
+
           
 
         </div>
@@ -3090,313 +2958,297 @@
       <section class="gridCards-container ">
         <!---GRID CARDS WRAPPER-->
         <div class="gridCard-wrapper">
+
         <!----------CARD----------->
-          <div class="gridCardAirteltigo">
-          <div class="gridCard-top">
-            <small>Airtel</small>
-          <img class="airt" src="./css/icons/tigo-signal.png" alt="tigo-icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>1</span>GB</h3>
-            <small>GHS 6.98</small>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn abtn"
-    data-network="at"
-    data-size="1"
-    data-price="6.98"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+        <div class="mntCardStyle" >
+           <div class="network-label" style="color:#4a90d9">
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">1<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>6.98</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-size="1"
+          data-price="6.98"
+        >Buy Now</button>
+      </div>
         </div>
+
   <!----------NEXT CARD----------->
-        <div class="gridCardAirteltigo">
-          <div class="gridCard-top">
-            <small>Airtel</small>
-          <img class="airt" src="./css/icons/tigo-signal.png" alt="tigo-icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>2</span>GB</h3>
-            <small>GHS 12.95</small>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn abtn"
-    data-network="at"
-    data-size="2"
-    data-price="12.95"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+         <div class="mntCardStyle" >
+           <div class="network-label" style="color:#4a90d9">
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">2<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>12.95</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-size="2"
+          data-price="12.95"
+        >Buy Now</button>
+      </div>
         </div>
+
   <!----------NEXT CARD----------->
-        <div class="gridCardAirteltigo">
-          <div class="gridCard-top">
-            <small>Airtel</small>
-          <img class="airt" src="./css/icons/tigo-signal.png" alt="tigo-icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>3</span>GB</h3>
-            <small>GHS 16.99</small>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn abtn"
-    data-network="at"
-    data-size="3"
-    data-price="16.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
-        </div>
-        <!----------NEXT CARD----------->
-          <div class="gridCardAirteltigo">
-          <div class="gridCard-top">
-            <small>Airtel</small>
-          <img class="airt" src="./css/icons/tigo-signal.png" alt="tigo-icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>4</span>GB</h3>
-            <small>GHS 22.98</small>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn abtn"
-    data-network="at"
-    data-size="4"
-    data-price="22.98"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
-        </div>
-        <!----------NEXT CARD----------->
-          <div class="gridCardAirteltigo">
-          <div class="gridCard-top">
-            <small>Airtel</small>
-          <img class="airt" src="./css/icons/tigo-signal.png" alt="tigo-icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>5</span>GB</h3>
-            <small>GHS 26.99</small>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn abtn"
-    data-network="at"
-    data-size="5"
-    data-price="26.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
-        </div>
-        <!----------NEXT CARD----------->
-          <div class="gridCardAirteltigo">
-          <div class="gridCard-top">
-            <small>Airtel</small>
-          <img class="airt" src="./css/icons/tigo-signal.png" alt="tigo-icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>6</span>GB</h3>
-            <small>GHS 30.99</small>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn abtn"
-    data-network="at"
-    data-size="6"
-    data-price="30.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
-        </div>
-        <!----------NEXT CARD----------->
-          <div class="gridCardAirteltigo">
-          <div class="gridCard-top">
-            <small>Airtel</small>
-          <img class="airt" src="./css/icons/tigo-signal.png" alt="tigo-icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>7</span>GB</h3>
-            <small>GHS 34.99</small>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn abtn"
-    data-network="at"
-    data-size="7"
-    data-price="34.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
-        </div>
-        <!----------NEXT CARD----------->
-          <div class="gridCardAirteltigo">
-          <div class="gridCard-top">
-            <small>Airtel</small>
-          <img class="airt" src="./css/icons/tigo-signal.png" alt="tigo-icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>8</span>GB</h3>
-            <small>GHS 38.99</small>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn abtn"
-    data-network="at"
-    data-size="8"
-    data-price="38.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+            <div class="mntCardStyle" >
+           <div class="network-label" style="color:#4a90d9">
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">3<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>16.98</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-size="3"
+          data-price="16.98"
+        >Buy Now</button>
+      </div>
         </div>
 
         <!----------NEXT CARD----------->
-          <div class="gridCardAirteltigo">
-          <div class="gridCard-top">
-            <small>Airtel</small>
-          <img class="airt" src="./css/icons/tigo-signal.png" alt="tigo-icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>9</span>GB</h3>
-            <small>GHS 43.97</small>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn abtn"
-    data-network="at"
-    data-size="9"
-    data-price="43.97"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+             <div class="mntCardStyle" >
+           <div class="network-label" style="color:#4a90d9">
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">4<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>22.98</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-size="4"
+          data-price="22.98"
+        >Buy Now</button>
+      </div>
         </div>
+
         <!----------NEXT CARD----------->
-          <div class="gridCardAirteltigo">
-          <div class="gridCard-top">
-            <small>Airtel</small>
-          <img class="airt" src="./css/icons/tigo-signal.png" alt="tigo-icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>10</span>GB</h3>
-            <small>GHS 46.99</small>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn abtn"
-    data-network="at"
-    data-size="10"
-    data-price="46.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+              <div class="mntCardStyle" >
+           <div class="network-label" style="color:#4a90d9">
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">5<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>26.98</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-size="5"
+          data-price="26.98"
+        >Buy Now</button>
+      </div>
         </div>
+
         <!----------NEXT CARD----------->
-          <div class="gridCardAirteltigo">
-          <div class="gridCard-top">
-            <small>Airtel</small>
-          <img class="airt" src="./css/icons/tigo-signal.png" alt="tigo-icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>12</span>GB</h3>
-            <small>GHS 55.98</small>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn abtn"
-    data-network="at"
-    data-size="12"
-    data-price="55.98"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+              <div class="mntCardStyle" >
+           <div class="network-label" style="color:#4a90d9">
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">6<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>30.98</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-size="6"
+          data-price="30.98"
+        >Buy Now</button>
+      </div>
         </div>
+
         <!----------NEXT CARD----------->
-          <div class="gridCardAirteltigo">
-          <div class="gridCard-top">
-            <small>Airtel</small>
-          <img class="airt" src="./css/icons/tigo-signal.png" alt="tigo-icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>15</span>GB</h3>
-            <small>GHS 68.99</small>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn abtn"
-    data-network="at"
-    data-size="15"
-    data-price="68.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+            <div class="mntCardStyle" >
+           <div class="network-label" style="color:#4a90d9">
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">7<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>34.98</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-size="7"
+          data-price="34.98"
+        >Buy Now</button>
+      </div>
         </div>
+
         <!----------NEXT CARD----------->
-          <div class="gridCardAirteltigo">
-          <div class="gridCard-top">
-            <small>Airtel</small>
-          <img class="airt" src="./css/icons/tigo-signal.png" alt="tigo-icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>20</span>GB</h3>
-            <small>GHS 88.99</small>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn abtn"
-    data-network="at"
-    data-size="20"
-    data-price="88.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+              <div class="mntCardStyle" >
+           <div class="network-label" style="color:#4a90d9">
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">8<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>38.98</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-size="8"
+          data-price="38.98"
+        >Buy Now</button>
+      </div>
         </div>
+
+
         <!----------NEXT CARD----------->
-          <div class="gridCardAirteltigo">
-          <div class="gridCard-top">
-            <small>Airtel</small>
-          <img class="airt" src="./css/icons/tigo-signal.png" alt="tigo-icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>25</span>GB</h3>
-            <small>GHS 109.98</small>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn abtn"
-    data-network="at"
-    data-size="25"
-    data-price="109.98"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+              <div class="mntCardStyle" >
+           <div class="network-label" style="color:#4a90d9">
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">9<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>43.99</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-size="9"
+          data-price="43.99"
+        >Buy Now</button>
+      </div>
         </div>
+
         <!----------NEXT CARD----------->
-          <div class="gridCardAirteltigo">
-          <div class="gridCard-top">
-            <small>Airtel</small>
-          <img class="airt" src="./css/icons/tigo-signal.png" alt="tigo-icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>30</span>GB</h3>
-            <small>GHS 131.99</small>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn abtn"
-    data-network="at"
-    data-size="30"
-    data-price="131.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+              <div class="mntCardStyle" >
+           <div class="network-label" style="color:#4a90d9">
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">10<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>46.98</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-size="10"
+          data-price="46.98"
+        >Buy Now</button>
+      </div>
         </div>
+
         <!----------NEXT CARD----------->
-          <div class="gridCardAirteltigo">
-          <div class="gridCard-top">
-            <small>Airtel</small>
-          <img class="airt" src="./css/icons/tigo-signal.png" alt="tigo-icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>40</span>GB</h3>
-            <small>GHS 169.97</small>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn abtn"
-    data-network="at"
-    data-size="40"
-    data-price="169.97"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+               <div class="mntCardStyle" >
+           <div class="network-label" style="color:#4a90d9">
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">12<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>55.98</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-size="12"
+          data-price="55.98"
+        >Buy Now</button>
+      </div>
         </div>
+
         <!----------NEXT CARD----------->
-          <div class="gridCardAirteltigo">
-          <div class="gridCard-top">
-            <small>Airtel</small>
-          <img class="airt" src="./css/icons/tigo-signal.png" alt="tigo-icon" loading="lazy">
-          </div>
-          <div class="gridCard-middle">
-            <h3><span>50</span>GB</h3>
-            <small>GHS 209.99</small>
-          </div>
-          <div class="gridCard-bottom">
-            <button class="buy-btn abtn"
-    data-network="at"
-    data-size="50"
-    data-price="209.99"
-            ><img src="./css/uiIcons/mobile.png" alt="img" loading="lazy"> Buy</button>
-          </div>
+              <div class="mntCardStyle" >
+           <div class="network-label" style="color:#4a90d9">
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">15<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>68.98</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-size="15"
+          data-price="68.98"
+        >Buy Now</button>
+      </div>
         </div>
+
+        <!----------NEXT CARD----------->
+             <div class="mntCardStyle" >
+           <div class="network-label" style="color:#4a90d9">
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">20<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>88.99</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-size="20"
+          data-price="88.99"
+        >Buy Now</button>
+      </div>
+        </div>
+
+        <!----------NEXT CARD----------->
+              <div class="mntCardStyle" >
+           <div class="network-label" style="color:#4a90d9">
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">25<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>109.98</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-size="25"
+          data-price="109.98"
+        >Buy Now</button>
+      </div>
+        </div>
+
+        <!----------NEXT CARD----------->
+             <div class="mntCardStyle" >
+           <div class="network-label" style="color:#4a90d9">
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">30<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>131.99</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-size="30"
+          data-price="131.99"
+        >Buy Now</button>
+      </div>
+        </div>
+
+        <!----------NEXT CARD----------->
+          <div class="mntCardStyle" >
+           <div class="network-label" style="color:#4a90d9">
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">40<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>169.98</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-size="40"
+          data-price="169.98"
+        >Buy Now</button>
+      </div>
+        </div>
+
+        <!----------NEXT CARD----------->
+              <div class="mntCardStyle" >
+           <div class="network-label" style="color:#4a90d9">
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">50<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>209.99</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-size="50"
+          data-price="209.99"
+        >Buy Now</button>
+      </div>
+        </div>
+
 
         </div>
       </section>
