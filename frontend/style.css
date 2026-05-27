@@ -1582,18 +1582,18 @@ UPDATED UI STYLE
       justify-self: center;
       justify-content: center;
       align-items: center;
-      background: white;
+      background: rgb(228, 55, 55);
       margin: 1rem 0;
       position: relative;
       padding: .3rem 0;
     }
 
-    .gridCard-wrapper{
+    .gridCards-container .gridCard-wrapper{
       width: max-content;
       height: max-content;
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 3rem;
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: .8rem;
       background: transparent;
       align-items: center;
       justify-content: center;
@@ -5750,7 +5750,7 @@ font-size: .7rem;
   padding-left: .1rem;
   display: grid;
 
-  grid-template-columns: repeat(3, 1fr) !important;
+  grid-template-columns: repeat(2, 1fr) !important;
 }
 
 .gridCard,
@@ -6877,7 +6877,7 @@ font-size: .7rem;
   padding-left: .1rem;
   display: grid;
 
-  grid-template-columns: repeat(3, 1fr) !important;
+  grid-template-columns: repeat(2, 1fr) !important;
 }
 
 .gridCard,
@@ -8110,7 +8110,7 @@ font-size: .7rem;
   padding-left: .1rem;
   display: grid;
 
-  grid-template-columns: repeat(3, 1fr) !important;
+  grid-template-columns: repeat(2, 1fr) !important;
 }
 
 .gridCard,
@@ -9301,7 +9301,7 @@ font-size: .7rem;
   padding-left: .1rem;
   display: grid;
 
-  grid-template-columns: repeat(3, 1fr) !important;
+  grid-template-columns: repeat(2, 1fr) !important;
 }
 
 .gridCard,
@@ -13885,13 +13885,3 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     display: none;
   }
 }
-
-
-
-
-
-
-
-
-
-
