@@ -325,31 +325,35 @@
 
         <!--table-section--->
         <div class="total-title"> <p>Orders Table</p></div>
-        <section class="table-section">
-          <div class="content-wrapper">
-            
-      <!---live order body---->
-      <div class="table-live-order-body">
-         <!-- TABLE HEADER (FIXED) -->
+<section class="table-section">
+  <div class="table-title">
+    <p>Track all Orders</p>
+  </div>
+  <div class="content-wrapper">
+    <div class="table-scroll-area">
+      <!-- TABLE HEADER -->
       <div class="table-header">
         <span>Order ID</span>
         <span>Network</span>
         <span>Size</span>
         <span>Price</span>
         <span>Recipient</span>
-        <span >paid?</span>
+        <span>Paid?</span>
         <span>Date submitted</span>
         <span>Status</span>
         <span>Action</span>
       </div>
-        <P id="empty-body" hidden>Orders not loaded yet</P>
 
+      <div class="main-row-content">
+        <p id="empty-body" hidden>Orders not loaded yet</p>
         <div class="row-wrapper" id="rowWrapper">
-          <!--dynamic (live-body-row)----->
+          <!-- dynamic rows -->
         </div>
       </div>
-          </div>
-        </section>
+    </div>
+  </div>
+</section>
+
 
 
 
