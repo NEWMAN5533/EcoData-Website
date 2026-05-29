@@ -1,4 +1,6 @@
-
+    .dark-mode  .ecodata-sidebar-top{
+    border-bottom: 1px solid var(--thin-border) !important;
+  }
 
 :root {
   --border-cl: rgba(230, 227, 227, 0.849);
