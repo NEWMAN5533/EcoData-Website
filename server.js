@@ -50,7 +50,7 @@ app.use("/api/store", storeRouter);
 app.use("/api", productRouter);
 app.use("/api", subscriptionRouter);
 app.use("/api/admin", adminRoute);
-app.use("/api/sync-order-status", syncOrderRoute);
+app.use("/api/admin", syncOrderRoute);
 
 
 
