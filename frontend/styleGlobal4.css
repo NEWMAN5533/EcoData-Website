@@ -1,8 +1,4 @@
-.dataSize{
-  font-size: 1.1rem !important;
-  color: white;
-  font-weight: 600;
-}
+
 
 :root {
   --border-cl: rgba(230, 227, 227, 0.849);
@@ -481,9 +477,10 @@ CREATE STORE LINK
     top: 0;
     overflow-y: hidden;
     overflow-x: hidden;
-    background: rgb(247, 247, 247);
-    z-index: 9999999999999999999999999999999999999999999999999999999999999999999;
+    background: rgb(214, 212, 212);
+    z-index: 99999999999999999;
     transition: .4s ease;
+    border-right: 1px solid var(--text-cl-2);
   }
 
   .ecodata-sidebar.active{
@@ -491,7 +488,9 @@ CREATE STORE LINK
   }
 
   .dark-mode .ecodata-sidebar{
-    background: var(--darkMode-bg-cl);
+    background: rgb(50, 50, 61);
+    backdrop-filter: blur(14px);
+    border-right: 1px solid var(--thin-border) !important;
   }
 
 
@@ -506,13 +505,11 @@ CREATE STORE LINK
   position: relative;
   align-items: center;
   justify-content: start;
-  border-bottom: 1px solid var(--border-cl);
-
+  border-bottom: 1px solid rgb(228, 227, 227) !important;
   }
+  
 
-  .dark-mode .ecodata-sidebar .ecodata-sidebar-top{
-    border-bottom: 1px solid rgba(66, 66, 66, 0.267);
-  }
+
 
 
   /*****8
@@ -542,7 +539,7 @@ CREATE STORE LINK
    ******/
    .ecodata-sidebar .ecodata-sidebar-bottom{
    width: 100%;
-   max-width:  240px;
+   max-width:  95%;
    align-items: center;
    justify-content: start;
    display: flex;
@@ -552,6 +549,9 @@ CREATE STORE LINK
    height: 25%;
    padding: .5rem 0;
    }
+
+
+
 
 
 
