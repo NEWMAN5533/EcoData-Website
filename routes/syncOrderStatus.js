@@ -1,110 +1,140 @@
 import express from "express";
 import axios from "axios";
-import { admin, db } from "../firebaseAdmin.js";
+import { db } from "../firebaseAdmin.js";
 
 const syncOrderRoute = express.Router();
 
-// ================================
+// ======================================
 // SYNC SWIFT STATUS TO FIRESTORE
-// ================================
-syncOrderRoute.get("/:reference", async (req, res) => {
+// ======================================
+syncOrderRoute.get("/sync-order/:orderIdOrRef", async (req, res) => {
+
+  const { orderIdOrRef } = req.params;
+
+  if (!orderIdOrRef) {
+
+    return res.status(400).json({
+      success: false,
+      message: "Missing order ID"
+    });
+
+  }
 
   try {
 
-    const { reference } = req.params;
-
-    if (!reference) {
-
-      return res.status(400).json({
-        success: false,
-        message: "Missing reference"
-      });
-
-    }
-
-    // ========================
-    // SWIFT STATUS REQUEST
-    // ========================
-    const swiftBase =
+    // ======================================
+    // FETCH STATUS FROM SWIFT
+    // ======================================
+    const base =
       (process.env.SWIFT_BASE_URL ||
       "https://swiftdata-link.com")
       .replace(/\/$/, "");
 
     const swiftUrl =
-      `${swiftBase}/order/status/${reference}`;
+      `${base}/order/status/${encodeURIComponent(orderIdOrRef)}`;
 
-    const response = await axios.get(
-      swiftUrl,
-      {
-        headers: {
-          "x-api-key":
-            process.env.SWIFT_API_KEY,
+    const response = await axios.get(swiftUrl, {
 
-          "Content-Type":
-            "application/json",
-        },
+      headers: {
+        "x-api-key": process.env.SWIFT_API_KEY,
+        "Content-Type": "application/json",
+      },
 
-        timeout: 10000,
-      }
-    );
+      timeout: 10000,
 
-    const order =
-      response.data?.order;
+    });
 
-    if (!order) {
+    if (!response.data?.success) {
 
-      return res.status(404).json({
+      return res.status(400).json({
         success: false,
-        message: "Order not found from Swift"
+        message: "Swift fetch failed"
       });
 
     }
 
-    // ========================
-    // NORMALIZE STATUS
-    // ========================
-    const status =
+    // ======================================
+    // SWIFT ORDER DATA
+    // ======================================
+    const swiftOrder =
+      response.data.order;
+
+    const newStatus =
       String(
-        order.status || "pending"
+        swiftOrder.status || "pending"
       ).toLowerCase();
 
-    // ========================
+    // ======================================
+    // FIND ORDER IN FIRESTORE
+    // ======================================
+    const snapshot =
+      await db
+        .collection("orders")
+        .where("orderId", "==", orderIdOrRef)
+        .limit(1)
+        .get();
+
+    if (snapshot.empty) {
+
+      return res.status(404).json({
+        success: false,
+        message: "Order not found"
+      });
+
+    }
+
+    // ======================================
     // UPDATE FIRESTORE
-    // ========================
-    await db.collection("orders")
-      .doc(reference)
-      .set({
+    // ======================================
+    const firestoreDocId =
+      snapshot.docs[0].id;
 
-        status,
+    await db
+      .collection("orders")
+      .doc(firestoreDocId)
+      .update({
 
-        swiftOrderId:
-          order.orderId || null,
+        status: newStatus,
 
-        swiftReference:
-          order.reference || reference,
+        swiftResponse: swiftOrder,
 
-        updatedAt:
-          admin.firestore.FieldValue.serverTimestamp(),
+        updatedAt: new Date(),
 
-      }, { merge: true });
+      });
 
+    // ======================================
+    // SUCCESS RESPONSE
+    // ======================================
     return res.json({
+
       success: true,
-      reference,
-      status,
+
+      message:
+        "Order synced successfully",
+
+      status: newStatus,
+
+      order: swiftOrder,
+
     });
 
-  } catch (err) {
+  } catch (error) {
 
     console.error(
-      "🔥 Sync status error:",
-      err.response?.data || err.message
+      "🔥 Sync Error:",
+      error.response?.data || error.message
     );
 
     return res.status(500).json({
+
       success: false,
+
+      message: "Sync failed",
+
       error:
-        err.response?.data || err.message,
+        error.response?.data ||
+        error.message,
+
     });
 
   }
