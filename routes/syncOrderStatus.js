@@ -9,9 +9,9 @@ const syncOrderRoute = express.Router();
 // ======================================
 syncOrderRoute.get("/sync-order/:orderIdOrRef", async (req, res) => {
 
-  const { orderIdOrRef } = req.params;
+  const { orderId } = req.params;
 
-  if (!orderIdOrRef) {
+  if (!orderId) {
 
     return res.status(400).json({
       success: false,
