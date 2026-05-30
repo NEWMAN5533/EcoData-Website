@@ -1,6 +1,6 @@
 import express from "express";
 import axios from "axios";
-import { db } from "../firebaseAdmin.js";
+import { admin, db } from "../firebaseAdmin.js";
 
 const syncOrderRoute = express.Router();
 
