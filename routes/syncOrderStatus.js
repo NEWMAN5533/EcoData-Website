@@ -31,7 +31,7 @@ syncOrderRoute.get("/sync-order/:orderIdOrRef", async (req, res) => {
       .replace(/\/$/, "");
 
     const swiftUrl =
-      `${base}/order/status/${encodeURIComponent(orderIdOrRef)}`;
+      `${base}/order/status/${encodeURIComponent(orderId)}`;
 
     const response = await axios.get(swiftUrl, {
 
