@@ -70,7 +70,7 @@ syncOrderRoute.get("/sync-order/:orderIdOrRef", async (req, res) => {
     const snapshot =
       await db
         .collection("orders")
-        .where("orderId", "==", orderIdOrRef)
+        .where("orderId", "==", orderId)
         .limit(1)
         .get();
 
