@@ -120,7 +120,7 @@
             </div> 
 
            <div id="adminAccessLink3" class="quicker-nav" style="display: none;">
-              <div class="naver"  onclick="window.location.href='#'">
+              <div class="naver"  onclick="window.location.href='adminDashboard.html'">
                 <span class="material-icons">dashboard</span>
               <p>Admin Dashboard</p>
               </div>
@@ -128,7 +128,7 @@
             </div> 
 
              <div id="adminAccessLink4" class="quicker-nav" style="display: none;">
-              <div class="naver"  onclick="window.location.href='#'">
+              <div class="naver"  onclick="window.location.href='agentPage.html'">
                 <span class="material-icons">local_offer</span>
               <p>Agent page</p>
               </div>
@@ -299,12 +299,12 @@
               <p>Home</p>
             </div> 
 
-             <div id="adminAccessLink1" class="quicker-nav" onclick="window.location.href='#'" style="display: none;">
+             <div id="adminAccessLink1" class="quicker-nav" onclick="window.location.href='adminDashboard.html'" style="display: none;">
               <img src="./css/icons/dashboard.png" alt="" loading="lazy">
               <p>Admin Dashboard</p>
             </div>
 
-             <div id="adminAccessLink2" class="quicker-nav" onclick="window.location.href='#'" style="display: none;">
+             <div id="adminAccessLink2" class="quicker-nav" onclick="window.location.href='agentPage.html'" style="display: none;">
               <img src="./css/icons/agent.png" alt="" loading="lazy">
               <p>Agent Page</p>
             </div> 
@@ -3777,12 +3777,22 @@ onAuthStateChanged(auth, async (user) => {
 
     const userData = userSnap.data();
 
-    // 🔥 Redirect immediately if agent
+    if(userData.isAgent === true){
+      window.location.href = 'agentPage.html';
+    }
+
+   
+     const adminLink1 = document.getElementById("adminAccessLink1");
+     const adminLink2 = document.getElementById("adminAccessLink2");
+     const adminLink3 = document.getElementById("adminAccessLink3");
+     const adminLink4 = document.getElementById("adminAccessLink4");
+
+      // 🔥 Redirect immediately if agent
     if (userData.isAdmin === true) {
-      document.getElementById("adminAccessLink1").hidden = false;
-      document.getElementById("adminAccessLink2").hidden = false;
-      document.getElementById("adminAccessLink3").hidden = false;
-      document.getElementById("adminAccessLink4").hidden = false;
+      adminLink1.style.display = flex;
+      adminLink2.style.display = flex;
+      adminLink3.style.display = flex;
+      adminLink4.style.display = flex;
     }
 
   } catch (err) {
