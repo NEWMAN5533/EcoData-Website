@@ -5,9 +5,9 @@ import { db } from "../firebaseAdmin.js";
 export function startOrderSyncJob() {
 
   // Every 5 minutes
-  cron.schedule("*/5 * * * *", async () => {
+  cron.schedule("* * * * *", async () => {
 
-    console.log("🔄 Running Swift sync job...");
+    console.log("🔄 Running Swift sync job:", new Date());
 
     try {
 
