@@ -75,6 +75,8 @@
 </script>
 
 
+
+
 </head>
 
 <!---body section---->
@@ -1674,7 +1676,7 @@
 
         <!------GRID PROMO SECTION--(off until isPromoTime)------>
         <div id="gridPromoActive" style="width: 100%;  max-width: 99.99%;">
-        <div class="offer-title" ><h2> PROMO!</h2></div>
+        <div class="offer-title" > >PROMO!</h2></div>
 
 
         <div class="gridCard-wrapper" >
@@ -3742,6 +3744,8 @@ onAuthStateChanged(auth, async (user) => {
 
 
   try {
+
+    if(!user) return;
     const userRef = doc(db, "users", user.uid);
     const userSnap = await getDoc(userRef);
 
@@ -3750,8 +3754,8 @@ onAuthStateChanged(auth, async (user) => {
     const userData = userSnap.data();
 
     // 🔥 Redirect immediately if agent
-    if (userData.isAgent === true) {
-      window.location.href = "agentPage.html";
+    if (userData.isAdmin === true) {
+      window.location.href = "adminDashboard.html";
       return; // stop further execution
     }
 
