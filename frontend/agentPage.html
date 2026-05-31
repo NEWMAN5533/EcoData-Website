@@ -1735,17 +1735,17 @@ width: 50%;
       <!---EMPTY-9GB-->
        <!----------NEXT CARD----9------->
       <!-- MTN Bundles -->
-        <div class="mntCardStyle" style="display: none;" >
+        <div class="mntCardStyle">
           <div class="network-label" style="color:#ffcb05">
         <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
       </div>
-      <div class="bundle-data">9<span class="unit">GB</span></div>
+      <div class="bundle-data">10<span class="unit">GB</span></div>
       <div class="bundle-validity">Valid 90 Days</div>
       <div class="bundle-price">
         <div class="price-amt"><span class="price-cedi">₵</span>44.60</div>
         <button class="buy-btn"
           data-network="mtn"
-          data-size="9"
+          data-size="10"
           data-price="44.60"
         >Buy Now</button>
       </div>
@@ -2794,7 +2794,7 @@ width: 50%;
       </div>
         </div>
        <!----------NEXT CARD----------->
-        <div class="mntCardStyle" >
+        <div class="mntCardStyle">
           <div class="network-label" style="color:#4a90d9">
         <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
       </div>
@@ -3308,11 +3308,19 @@ width: 50%;
       // 🚨 2. Check Firestore agent status
       const userDoc = await getDoc(doc(db, "users", user.uid));
 
-      if (!userDoc.exists() || userDoc.data().isAgent !== true) {
-        showSnackBar("Not a Subscriber yet");
-        window.location.href = "index.html";
-        return;
-      }
+    const userData = userDoc.data();
+
+    const hasAccess =
+      userData.isAgent === true ||
+      userData.isAdmin === true;
+
+    if (!hasAccess) {
+
+      showSnackBar("Access denied");
+      window.location.href = "index.html";
+      return;
+
+    }
 
       // ✅ 3. If agent → Show welcome message
       usernameDisplay.textContent = `Welcome Agent, ${userDoc.data().username}!`;
