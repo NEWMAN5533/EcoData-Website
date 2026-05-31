@@ -19,10 +19,12 @@ import syncOrderRoute from "./routes/syncOrderStatus.js";
 
 // Firebase Admin
 import { admin, db } from "./firebaseAdmin.js";
+import { startOrderSyncJob } from "./cron/syncOrders.js";
 
 
 dotenv.config();
 
+startOrderSyncJob();
 
 // --dirname for ES modules
 const __filename = fileURLToPath(import.meta.url);
