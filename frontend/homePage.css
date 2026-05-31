@@ -62,6 +62,16 @@
   --card-tigo-bg:  #6cbff7cb;
 }
 
+
+#adminAccessLink1,
+#adminAccessLink2,
+#adminAccessLink3,
+#adminAccessLink1 {
+  display: none;
+}
+
+
+
   .packages small{
     width: 10px;
     height: 10px;
