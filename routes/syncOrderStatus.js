@@ -7,7 +7,7 @@ const syncOrderRoute = express.Router();
 // ======================================
 // SYNC SWIFT STATUS TO FIRESTORE
 // ======================================
-syncOrderRoute.get("/sync-order/:orderIdOrRef", async (req, res) => {
+syncOrderRoute.get("/sync-order/:orderId", async (req, res) => {
 
   const { orderId } = req.params;
 
