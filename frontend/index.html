@@ -3770,9 +3770,13 @@ onAuthStateChanged(auth, async (user) => {
 
     const userData = userSnap.data();
 
-    if(userData.isAgent === true){
-      window.location.href = 'agentPage.html';
-    }
+   if (
+  userData.isAgent === true &&
+  userData.isAdmin !== true
+){
+  window.location.href = "agentPage.html";
+  return;
+}
 
    
      const adminLink1 = document.getElementById("adminAccessLink1");
@@ -3781,12 +3785,20 @@ onAuthStateChanged(auth, async (user) => {
      const adminLink4 = document.getElementById("adminAccessLink4");
 
       // 🔥 Redirect immediately if agent
-    if (userData.isAdmin === true) {
-      adminLink1.style.display = flex;
-      adminLink2.style.display = flex;
-      adminLink3.style.display = flex;
-      adminLink4.style.display = flex;
-    }
+   const adminLinks = [
+  adminLink1,
+  adminLink2,
+  adminLink3,
+  adminLink4
+];
+
+if (userData.isAdmin === true) {
+
+  adminLinks.forEach(link => {
+    link.style.display = "flex";
+  });
+
+}
 
   } catch (err) {
     console.error("Error fetching user data:", err);
