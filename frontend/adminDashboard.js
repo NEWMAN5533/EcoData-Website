@@ -144,6 +144,8 @@ function renderOrders(orders) {
         ? order.createdAt.toDate().toLocaleString()
         : "N/A";
            
+        const statusUpdatedAt = 
+        order.updatedAt?.toDate ? order.updatedAt.toDate().toLocaleTimeString() : "-";
 
         row.innerHTML = `
 
@@ -166,6 +168,8 @@ function renderOrders(orders) {
       ${order.status || "pending"}
     </span>
   </small>
+
+    <small>${statusUpdatedAt}</small>
 
 
 
@@ -723,42 +727,6 @@ function buildProfitChart(orders) {
 
 
 
-
-
-// =========================
-// PHONE SIDEBAR TOGGLE
-// =========================
-const phoneSidebar =
-  document.querySelector(".sidebar-phone");
-
-const toggler =
-  document.getElementById("menu");
-
-toggler.addEventListener("click", function (e) {
-
-  e.stopPropagation();
-
-  phoneSidebar.classList.toggle("active");
-
-});
-
-
-
-// =========================
-// CLOSE SIDEBAR OUTSIDE CLICK
-// =========================
-window.addEventListener("click", function (e) {
-
-  if (
-    !phoneSidebar.contains(e.target) &&
-    !toggler.contains(e.target)
-  ) {
-
-    phoneSidebar.classList.remove("active");
-
-  }
-
-});
 
 
 

@@ -30,13 +30,25 @@
             <h1>Admin <span>Panel</span></h1>
           </div>
           <div class="sidebar-middle">
-            <a href="#">
-            <div class="dashNav">
+            <a class="active" href="#">
+            <div class="dashNav " >
                <span class="material-icons">
                   dashboard
               </span>
             </div>
-              Dashboard</a>
+              Dashboard
+              
+            </a>
+
+                 <a href="index.html">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+             Home</a>
+
+
             <a href="#">
             <div class="dashNav">
                 <span class="material-icons">
@@ -72,6 +84,12 @@
         </aside>
       </div>
 
+
+
+
+
+
+      <!---main section----->
      <div class="main-container">
        <!---main-container-->
        <section class="first-container">
@@ -312,7 +330,7 @@
         <h3>Profit Analytics</h3>
 
         <div class="chart-toggle">
-          <button onclick="setChartMode('daily', this)">Daily</button>
+          <button class="active" onclick="setChartMode('daily', this)">Daily</button>
           <button onclick="setChartMode('weekly', this)">Weekly</button>
           <button onclick="setChartMode('monthly', this)">Monthly</button>
         </div>
@@ -341,6 +359,7 @@
         <span>Paid?</span>
         <span>Date submitted</span>
         <span>Status</span>
+        <span>UpdatedAt</span>
         <span>Action</span>
       </div>
 
@@ -372,7 +391,7 @@
 
 <div class="sidebar-phone">
           <div class="sidebar-top">
-            <h1><span>Admin</span>Page</h1>
+            <h1><span>Admin</span></h1>
           </div>
           <div class="sidebar-middle">
             <a href="#">
@@ -381,7 +400,16 @@
                   dashboard
               </span>
             </div>
-              Dashboard</a>
+              Dashboard
+            </a>
+             <a href="index.html">
+            <div class="dashNav">
+               <span class="material-icons">
+                  home
+              </span>
+            </div>
+              Dashboard
+            </a>
             <a href="#">
             <div class="dashNav">
                <span class="material-icons">
@@ -420,5 +448,42 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script type="module" src="adminDashboard.js"></script>
+
+<script>
+  
+
+// =========================
+// PHONE SIDEBAR TOGGLE
+// =========================
+const phoneSidebar =
+  document.querySelector(".sidebar-phone");
+
+const toggler =
+  document.getElementById("menu");
+
+toggler.addEventListener("click", function (e) {
+
+  e.stopPropagation();
+
+  phoneSidebar.classList.toggle("active");
+
+});
+
+
+
+// =========================
+// CLOSE SIDEBAR OUTSIDE CLICK
+// =========================
+window.addEventListener("click", function (e) {
+
+  if (!phoneSidebar.contains(e.target) && !toggler.contains(e.target)) {
+
+    phoneSidebar.classList.remove("active");
+
+  }
+
+});
+
+</script>
 </body>
 </html>

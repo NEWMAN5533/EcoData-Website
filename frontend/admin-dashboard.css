@@ -1,22 +1,81 @@
-/*********STATUS COLORS************/
 .processing{
   background: orange;
-  color:  rgb(243, 234, 183);
-  padding: .2rem .5rem;
+  color: rgb(243, 234, 183);
+
+  padding: .3rem;
   border-radius: 1rem;
-  display: flex;
+
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   text-align: center;
+
   font-size: .8rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: system-ui, sans-serif;
   font-weight: 500;
+
+  position: relative; /* IMPORTANT */
+  overflow: hidden;
+  animation: processingPulse 2s infinite;
 }
+
+
+/** processingPulse **/
+
+@keyframes processingPulse {
+  0%,100% {
+    box-shadow: 0 0 0 rgba(255,165,0,0);
+  }
+
+  50% {
+    box-shadow: 0 0 12px rgba(255,165,0,.5);
+  }
+}
+
+
+
+/* Shimmer */
+.processing::after {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: -100%;
+
+  width: 40%;
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.4),
+    transparent
+  );
+
+  animation: shimmer 1.8s infinite;
+}
+
+
+
+
+
+@keyframes shimmer {
+  from {
+    left: -100%;
+  }
+
+  to {
+    left: 150%;
+  }
+}
+
+
+
 
 .delivered{
   background: rgb(0, 128, 90);
   color:  rgb(243, 234, 183);
-  padding: .2rem .5rem;
+  padding: .2rem .3rem;
   border-radius: 1rem;
    display: flex;
   align-items: center;
@@ -30,7 +89,7 @@
 .failed{
   background: red;
   color:  rgb(243, 234, 183);
-  padding: .2rem .5rem;
+  padding: .2rem .3rem;
   border-radius: 1rem;
   display: flex;
   align-items: center;
@@ -42,10 +101,8 @@
 }
 
 .pending{
-  width: 6rem;
-  height: 1.8rem;
   background: rgba(71, 202, 253, 0.685);
-  padding: .2rem .5rem;
+  padding: .2rem .3rem;
   color: rgb(243, 234, 183);
   border-radius: 1rem;
   display: flex;
@@ -319,6 +376,10 @@ justify-content: end;
   font-weight: 500;
   border-radius: .4rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.sidebar-middle a.active{
+  background: rgb(30, 58, 56) !important;
 }
 
 .sidebar-middle .dashNav a:hover{
@@ -616,7 +677,7 @@ justify-content: end;
   align-items: center;
   justify-items: center;
   grid-template-columns: 
-    110px 120px 100px 100px 120px 100px 160px 100px 120px;
+    110px 80px 90px 100px 100px 100px 110px 150px 70px 120px;
 
   /* sticky top so it stays visible while scrolling vertically */
   position: sticky;
@@ -640,9 +701,24 @@ justify-content: end;
   padding: 0 .5rem;
   align-items: start;
   grid-template-columns: 
-    110px 120px 100px 100px 120px 100px 160px 100px 120px;
+   110px 80px 90px 100px 100px 100px 110px 150px 70px 120px;
   position: relative;
   min-width: max-content; /* ensures rows stretch with header */
+}
+
+
+
+.main-row-content #empty-body{
+  position: absolute;
+  color: rgb(240, 236, 236);
+  transform: translateX(-50%) !important;
+  top: 50%;
+  left: 50%;
+  margin-top: 15%;
+  font-size: 1.1rem;
+  font-weight: 600;
+  display: flex;
+
 }
 
 
@@ -661,7 +737,7 @@ justify-content: end;
  width: 100%;
  height: 2.2rem;
  border-bottom: 1px solid rgb(80, 79, 79);
- grid-template-columns:  110px 120px 100px 100px 120px 100px 160px 100px 120px;
+ grid-template-columns:   110px 80px 90px 100px 100px 100px 110px 150px 80px 120px;
  display: grid;
 }
 
