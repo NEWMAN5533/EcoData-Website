@@ -347,11 +347,81 @@ justify-content: end;
   border-bottom: 1px solid var(--thin-border);
 }
 
-.sidebar .sidebar-middle a{
-  width: 99%;
-  height: 2.4rem;
+
+
+
+/*****
+BUNDLE SECTION
+********/
+.sidebar-middle .bundle-sector{
+  width: 100%;
+  max-width: 87%;
+  height: max-content;
   display: flex;
-  gap: .8rem;
+  flex-direction: column;
+  align-items: center;
+  align-content: end;
+  justify-self: center;
+  justify-content: space-between;
+  position: relative;
+
+}
+
+.sidebar-middle .bundle-sector a{
+  justify-self: end;
+  display: flex;
+  margin-top: .32rem;
+  align-items: center;
+  justify-self: end;
+  margin-left: 2rem;
+  transition: .2s ease;
+  gap: .3rem; 
+}
+
+.sidebar-middle .bundle-sector p{
+  color: rgb(221, 115, 16);
+  font-size: .9rem;
+  display: flex;
+  width: 100%;
+  margin-left: .3rem;
+  height: max-content;
+  align-self: start;
+  justify-self: start;
+  align-items: center;
+  justify-content: start;
+  gap: .3rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.sidebar-middle .bundle-sector a:hover{
+  background: rgba(109, 106, 106, 0.849);
+}
+
+.checkbox{
+  color: rgb(255, 102, 0);
+  width: 16px;
+  height: 16px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.sidebar .sidebar-middle  a{
+  width: 99%;
+  height: 2rem;
+  display: flex;
+  gap: .2rem;
   padding: .8rem;
   align-items: center;
   justify-content: start;
@@ -372,8 +442,9 @@ justify-content: end;
   height: 100%;
   text-decoration: none;
   color: white;
-  font-size: .9rem;
+  font-size: .8rem;
   font-weight: 500;
+  white-space: nowrap;
   border-radius: .4rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
@@ -972,7 +1043,7 @@ justify-content: end;
 .sidebar-top h1{
   color: var(--primary-cl);
   opacity: .9;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 
@@ -993,9 +1064,9 @@ justify-content: end;
 
 .sidebar-phone .sidebar-middle a{
   width: 99%;
-  height: 2.4rem;
+  height: 2rem;
   display: flex;
-  gap: .8rem;
+  gap: .2rem;
   padding: .8rem;
   align-items: center;
   justify-content: start;
@@ -1016,7 +1087,7 @@ justify-content: end;
   height: 100%;
   text-decoration: none;
   color: white;
-  font-size: .9rem;
+  font-size: .76rem;
   font-weight: 500;
   border-radius: .4rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
