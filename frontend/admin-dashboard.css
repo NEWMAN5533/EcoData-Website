@@ -688,7 +688,7 @@ BUNDLE SECTION
 .table-section{
   width: 100%;
   max-width: 96%;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem !important;
   height: 30rem;
   display: flex;
   flex-direction: column;
