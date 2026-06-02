@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="admin-dashboard.css">
+  <link rel="stylesheet" href="admin-dashboard2.css">
+
+  <!---GOOGLE MATERIAL ICON--LINK---->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+  <!----container-->
+  <div class="container">
+    <!--navar section-->
+    <div class="adminNavbar">
+      <div class="left-sideNavbar">
+        <img src="./css/icons/icon-shortcut.png" alt="" loading="lazy">
+      </div>
+      <div class="right-sideNavbar">
+        <img id="menu" src="./css/icons/menu-white.png" alt="" loading="lazy">
+      </div>
+    </div>
+    <!--navar section-->
+    <div class="main-grid-container">
+      <div class="main-container-aside">
+        <aside class="sidebar">
+          <div class="sidebar-top">
+            <h1>Admin <span>Panel</span></h1>
+          </div>
+          <div class="sidebar-middle">
+            
+            <a class="active" href="#">
+            <div class="dashNav " >
+               <span class="material-icons">
+                  dashboard
+              </span>
+            </div>
+              Dashboard
+            </a>
+
+            <!---BUNDLE-SECTION---->
+            <div class="bundle-sector">
+              <p>
+                <input onclick="window.location.href= 'adminDashboard.html'" class="checkbox" type="checkbox">
+                Data Bundles</p>
+
+                  <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+             Daily Analytics</a>
+
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+             Analytic Graph</a>
+
+
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                  shopping_cart
+              </span>
+            </div>
+             Orders Table</a>
+            </div>
+
+              <!---EBOOKS-SECTION---->
+            <div class="bundle-sector">
+              <p>
+                <input onclick="window.location.href= 'adminEbookDash.html'" class="checkbox " type="checkbox">
+                Ebooks</p>
+
+                  <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+             All Ebooks</a>
+
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+             Pending Approval</a>
+
+
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                  shopping_cart
+              </span>
+            </div>
+             Approved</a>
+            </div>
+
+             <!---E-ORDERS-SECTION---->
+            <div class="bundle-sector">
+              <p>
+                <input onclick="window.location.href= 'adminE-OrdersTable.html'" class="checkbox" type="checkbox">
+                E-Orders</p>
+
+                  <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+             All Orders</a>
+
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+             Successful</a>
+
+
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                  shopping_cart
+              </span>
+            </div>
+             Failed</a>
+
+
+                 <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                  shopping_cart
+              </span>
+            </div>
+             Refunded</a>
+            </div>
+
+          
+          
+
+            
+
+              <!---USERS-SECTION---->
+            <div class="bundle-sector">
+              <p>
+                <input onclick="window.location.href= 'adminUsersDash.html'" class="checkbox" type="checkbox">
+                Users</p>
+
+                  <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+             Customers</a>
+
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+             Sellers</a>
+
+
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                  shopping_cart
+              </span>
+            </div>
+             Admins</a>
+            </div>
+
+
+
+              <!---WITHDRAWALS-SECTION---->
+            <div class="bundle-sector">
+              <p>
+                <input onclick="window.location.href= 'adminWithdrawDash.html'" class="checkbox" type="checkbox">
+                Withdrawals</p>
+
+                  <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+             Pending</a>
+
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+             Approved</a>
+
+
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                  shopping_cart
+              </span>
+            </div>
+             Completed</a>
+            </div>
+
+              <!---REPORTS-SECTION---->
+            <div class="bundle-sector">
+              <p>
+                <input onclick="window.location.href ='adminReportsDash.html'" class="checkbox" type="checkbox">
+                Reports</p>
+
+                  <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+             Daily Sales</a>
+
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+             Weekly Sales</a>
+
+
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                  shopping_cart
+              </span>
+            </div>
+              Monthly Sales</a>
+            </div>
+
+
+              <!---NOTIFICATION-SECTION---->
+            <div class="bundle-sector">
+              <p>
+                <input onclick="window.location.href= 'adminNotification.html'" class="checkbox" type="checkbox">
+                Notifications</p>
+
+                  <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+            Bundle Notification</a>
+
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+             Ebooks Notification</a>
+            </div>
+
+
+
+              <!--SETTINGS-SECTION---->
+            <div class="bundle-sector">
+              <p>
+                <input onclick="window.location.href= 'adminSettingsDash.html'" class="checkbox active" type="checkbox">
+                Settings</p>
+
+                  <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+             Platform</a>
+
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+             Commission</a>
+
+
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                  shopping_cart
+              </span>
+            </div>
+             Payments</a>
+
+              <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                  shopping_cart
+              </span>
+            </div>
+             Maintenance</a>
+            </div>
+
+          <!---middle-section-ends-->
+          </div>
+          <div class="sidebar-bottom"></div>
+        </aside>
+      </div>
+
+
+
+
+
+
+      <!---main section----->
+     <div class="main-container">
+       <!---main-container-->
+       <!--BUNDLE SECTION CONTAINER---->
+       <section class="first-container">
+        
+        <div class="welcome-title">
+          <h2>Settings Dashboard 
+            <img src="./css/icons/dashboard.png" alt="" loading="lazy">
+          </h2>
+        </div>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!---EBOOKS SECTION-CONTAINER----->
+       <section class="second-container">
+          <!---daily totals card-(grid)----->
+       <div class="total-title"> 
+        <p>Ebooks analytics</p>
+        <div class="ebookImg">
+          <img src="./css/icons/ebook.png" alt="" loading="lazy">
+        </div>
+      </div>
+       <section class="daily-total-section">
+          <div class="total-section">
+            <!--total Ebooks-->
+            <div class="total-section-card">
+              <div class="section-card-top">
+                <div class="card-top-left">
+                  <p>Total Ebooks</p>
+                </div>
+                <div class="card-top-right">
+                  <img src="./css/icons/totalorder.png" alt="" loading="lazy">
+                </div>
+              </div>
+              <div class="section-card-bottom">
+                <div class="card-bottom-left"><h1 id="totalEbooks">0</h1></div>
+                <div class="card-bottom-right"></div>
+              </div>
+            </div>
+            <!---Total Sellers---->
+            <div class="total-section-card">
+                <div class="section-card-top">
+                <div class="card-top-left">
+                  <p>Total Sellers</p>
+                </div>
+                <div class="card-top-right">
+                  <img src="./css/icons/recent.png" alt="" loading="lazy">
+                </div>
+              </div>
+              <div class="section-card-bottom">
+                <div class="card-bottom-left"><h1 id="totalSellers">0</h1></div>
+                <div class="card-bottom-right"></div>
+              </div>
+            </div>
+            <!--E-Orders Today---->
+            <div class="total-section-card">
+                <div class="section-card-top">
+                <div class="card-top-left">
+                  <p>E-Orders Today</p>
+                </div>
+                <div class="card-top-right">
+                  <img src="./css/uiIcons/gurantee.png" alt="" loading="lazy">
+                </div>
+              </div>
+              <div class="section-card-bottom">
+                <div class="card-bottom-left"><h1 id="eOrdersToday">0</h1></div>
+                <div class="card-bottom-right"></div>
+              </div>
+            </div>
+            <!---Revenue Today---->
+            <div class="total-section-card">
+                <div class="section-card-top">
+                <div class="card-top-left">
+                  <p>Revenue Today</p>
+                </div>
+                <div class="card-top-right">
+                  <img src="./css/uiIcons/approval.png" alt="" loading="lazy">
+                </div>
+              </div>
+              <div class="section-card-bottom">
+                <div class="card-bottom-left"><h1 id="EtodayRevenue">0</h1></div>
+                <div class="card-bottom-right"></div>
+              </div>
+            </div>
+            <!---Pending Reviews---->
+            <div class="total-section-card">
+                <div class="section-card-top">
+                <div class="card-top-left">
+                  <p>Pending Reviews</p>
+                </div>
+                <div class="card-top-right">
+                  <img src="./css/icons/timer.png" alt="" loading="lazy">
+                </div>
+              </div>
+              <div class="section-card-bottom">
+                <div class="card-bottom-left"><h1 id="pendingReview">0</h1></div>
+                <div class="card-bottom-right"></div>
+              </div>
+            </div>
+            <!---Pending Payouts-->
+            <div class="total-section-card">
+                <div class="section-card-top">
+                <div class="card-top-left">
+                  <p class="mapping">Pending Payouts</p>
+                </div>
+                <div class="card-top-right">
+                  <span class="material-icons">today</span>
+                </div>
+              </div>
+              <div class="section-card-bottom">
+                <div class="card-bottom-left"><h1 id="pendingPayouts">0</h1></div>
+                <div class="card-bottom-right"></div>
+              </div>
+            </div>
+            <!---Total Customers---->
+            <div class="total-section-card">
+                <div class="section-card-top">
+                <div class="card-top-left">
+                  <p class="mapping">Total Customers</p>
+                </div>
+                <div class="card-top-right">
+                 <span class="material-icons">view_week</span>
+                </div>
+              </div>
+              <div class="section-card-bottom">
+                <div class="card-bottom-left"><h1 id="totalCustomers">0</h1></div>
+                <div class="card-bottom-right"></div>
+              </div>
+            </div>
+            <!---Monthly Revenue---->
+            <div class="total-section-card">
+                <div class="section-card-top">
+                <div class="card-top-left">
+                  <p class="mapping">Monthly Revenue</p>
+                </div>
+                <div class="card-top-right">
+                  <span class="material-icons">calendar_month</span>
+                </div>
+              </div>
+              <div class="section-card-bottom">
+                <div class="card-bottom-left"><h1  id="monthlyErev"> 0</h1></div>
+                <div class="card-bottom-right"></div>
+              </div>
+            </div>
+
+
+          </div>
+        </section>
+
+
+      <!--table-section-(RECENT ORDERS)---->
+        <div class="total-title etitle"> <p>E-Orders Table</p></div>
+
+      <section class="table-section">
+        <div class="table-title">
+          <p>Recent E-Orders Table</p>
+        </div>
+        <div class="content-wrapper">
+          <div class="table-scroll-area">
+            <!-- TABLE HEADER -->
+            <div class="table-header">
+              <span>Order ID</span>
+              <span>Ebook</span>
+              <span>Buyer</span>
+              <span>Seller</span>
+              <span>Amount</span>
+              <span>Status</span>
+              <span>SubmittedAt</span>
+              <span>Action</span>
+            </div>
+
+            <div class="main-row-content">
+              <p id="Eempty-body" hidden>E-Orders not loaded yet</p>
+              <div class="row-wrapper" id="ErowWrapper">
+                <!-- dynamic rows -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+   <!--table-section-(RECENT ORDERS)-ENDS--->
+
+   
+      <!--table-section-(PENDING EBOOKS REVIEW)---->
+        <div class="total-title etitle"> <p>Pending Ebook Review</p></div>
+
+      <section class="table-section pdt">
+        <div class="table-title">
+          <p>Pending Ebooks</p>
+        </div>
+        <div class="content-wrapper">
+          <div class="table-scroll-area">
+            <!-- TABLE HEADER -->
+            <div class="table-header pde">
+              <span>CoverImg</span>
+              <span>Item Title</span>
+              <span>Seller Information</span>
+              <span>Category</span>
+              <span> Price Tag</span>
+              <span>SubmittedAt</span>
+              <span>Action</span>
+            </div>
+
+            <div class="main-row-content">
+              <p id="pdempty-body" hidden>E-Orders not loaded yet</p>
+              <div class="row-wrapper" id="pdrowWrapper">
+                <!-- dynamic rows -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+   <!--table-section-(PENDING EBOOKS REVIEWS)-ENDS--->
+
+     <!--table-section-(WITHDRAWAL REQUEST)---->
+        <div class="total-title etitle"> <p>Withdrawal Requests</p></div>
+
+      <section class="table-section pdt">
+        <div class="table-title">
+          <p>Requests</p>
+        </div>
+        <div class="content-wrapper">
+          <div class="table-scroll-area">
+            <!-- TABLE HEADER -->
+            <div class="table-header pde">
+              <span>Seller</span>
+              <span>Amount</span>
+              <span>Network</span>
+              <span>Number</span>
+              <span>Status</span>
+              <span>SubmittedAt</span>
+              <span>Action</span>
+            </div>
+
+            <div class="main-row-content">
+              <p id="wRempty-body" hidden>No Withdrawal Request yet</p>
+              <div class="row-wrapper" id="wRrowWrapper">
+                <!-- dynamic rows -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+   <!--table-section-(WITHDRAWAL REQUEST)-ENDS--->
+      <!--second-container-closing---->
+       </section>
+
+       <!--first-container-closing---->
+       </section>
+
+    
+      </div>
+      <!---main container ends---->
+
+   </div>
+   
+
+
+
+
+
+
+   <!----PHONE SIDEBAR----->
+<div class="sidebar-phone">
+          <div class="sidebar-top">
+            <h1><span>Admin</span>Panel</h1>
+          </div>
+
+            <div class="sidebar-middle">
+            
+            <a class="active" href="#">
+            <div class="dashNav " >
+               <span class="material-icons">
+                  dashboard
+              </span>
+            </div>
+              Dashboard
+            </a>
+
+          
+            <!---BUNDLE-SECTION---->
+            <div class="bundle-sector">
+              <p>
+                <input onclick="window.location.href= 'adminDashboard.html'" class="checkbox " type="checkbox">
+                Data Bundles</p>
+
+                  <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+             Daily Analytics</a>
+
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+             Analytic Graph</a>
+
+
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                  shopping_cart
+              </span>
+            </div>
+             Orders Table</a>
+            </div>
+
+              <!---EBOOKS-SECTION---->
+            <div class="bundle-sector">
+              <p>
+                <input onclick="window.location.href= 'adminEbookDash.html'" class="checkbox" type="checkbox">
+                Ebooks</p>
+
+                  <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+             All Ebooks</a>
+
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+             Pending Approval</a>
+
+
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                  shopping_cart
+              </span>
+            </div>
+             Approved</a>
+            </div>
+
+             <!---E-ORDERS-SECTION---->
+            <div class="bundle-sector">
+              <p>
+                <input onclick="window.location.href= 'adminE-OrdersTable.html'" class="checkbox" type="checkbox">
+                E-Orders</p>
+
+                  <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+             All Orders</a>
+
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+             Successful</a>
+
+
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                  shopping_cart
+              </span>
+            </div>
+             Failed</a>
+
+
+                 <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                  shopping_cart
+              </span>
+            </div>
+             Refunded</a>
+            </div>
+
+          
+          
+
+            
+
+              <!---USERS-SECTION---->
+            <div class="bundle-sector">
+              <p>
+                <input onclick="window.location.href= 'adminUsersDash.html'" class="checkbox" type="checkbox">
+                Users</p>
+
+                  <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+             Customers</a>
+
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+             Sellers</a>
+
+
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                  shopping_cart
+              </span>
+            </div>
+             Admins</a>
+            </div>
+
+
+
+              <!---WITHDRAWALS-SECTION---->
+            <div class="bundle-sector">
+              <p>
+                <input onclick="window.location.href= 'adminWithdrawDash.html'" class="checkbox" type="checkbox">
+                Withdrawals</p>
+
+                  <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+             Pending</a>
+
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+             Approved</a>
+
+
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                  shopping_cart
+              </span>
+            </div>
+             Completed</a>
+            </div>
+
+              <!---REPORTS-SECTION---->
+            <div class="bundle-sector">
+              <p>
+                <input onclick="window.location.href ='adminReportsDash.html'" class="checkbox" type="checkbox">
+                Reports</p>
+
+                  <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+             Daily Sales</a>
+
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+             Weekly Sales</a>
+
+
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                  shopping_cart
+              </span>
+            </div>
+              Monthly Sales</a>
+            </div>
+
+
+              <!---NOTIFICATION-SECTION---->
+            <div class="bundle-sector">
+              <p>
+                <input onclick="window.location.href= 'adminNotification.html'" class="checkbox " type="checkbox">
+                Notifications</p>
+
+                  <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+            Bundle Notification</a>
+
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+             Ebooks Notification</a>
+            </div>
+
+
+
+              <!--SETTINGS-SECTION---->
+            <div class="bundle-sector">
+              <p>
+                <input onclick="window.location.href= 'adminSettingsDash.html'" class="checkbox active" type="checkbox">
+                Settings</p>
+
+                  <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+             Platform</a>
+
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                 home
+              </span>
+            </div>
+             Commission</a>
+
+
+            <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                  shopping_cart
+              </span>
+            </div>
+             Payments</a>
+
+              <a href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                  shopping_cart
+              </span>
+            </div>
+             Maintenance</a>
+            </div>
+
+
+          <!---middle-section-ends-->
+          </div>
+
+          <div class="sidebar-bottom"></div>
+</div>
+<!--container closing---->
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script type="module" src="adminDashboard.js"></script>
+
+<script>
+  
+
+// =========================
+// PHONE SIDEBAR TOGGLE
+// =========================
+const phoneSidebar =
+  document.querySelector(".sidebar-phone");
+
+const toggler =
+  document.getElementById("menu");
+
+toggler.addEventListener("click", function (e) {
+
+  e.stopPropagation();
+
+  phoneSidebar.classList.toggle("active");
+
+});
+
+
+
+// =========================
+// CLOSE SIDEBAR OUTSIDE CLICK
+// =========================
+window.addEventListener("click", function (e) {
+
+  if (!phoneSidebar.contains(e.target) && !toggler.contains(e.target)) {
+
+    phoneSidebar.classList.remove("active");
+
+  }
+
+});
+
+</script>
+</body>
+</html>
