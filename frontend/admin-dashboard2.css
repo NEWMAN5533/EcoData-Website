@@ -198,7 +198,7 @@ CHECKBOX STYLE
 
   width: 20px;
   height: 20px;
-  border: 2px solid #ccc;
+  border: 1px solid #ccc;
   border-radius: 4px;
   background: #f5f5f5;
 
@@ -209,6 +209,28 @@ CHECKBOX STYLE
 .bundle-sector p .active{
   background: var(--card-mtn-bg);
   border-color: var(--thin-border-3);
+  animation: blinkTwice 3s infinite;
+}
+
+@keyframes blinkTwice {
+  0%{
+    background: var(--card-mtn-bg) ;
+    scale: 1.01;
+  }
+
+   50%{
+    background: var(--background-cl) ;
+    scale: .7;
+  }
+   75%{
+    background: var(--card-tel-bg) ;
+    scale: 1;
+  }
+
+    100%{
+    background: var(--background-cl);
+    scale: .5;
+  }
 }
 
 .checkbox:checked{
