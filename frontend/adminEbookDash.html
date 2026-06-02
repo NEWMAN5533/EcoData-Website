@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Dashboard</title>
   <link rel="stylesheet" href="admin-dashboard.css">
+  <link rel="stylesheet" href="admin-dashboard2.css">
 
   <!---GOOGLE MATERIAL ICON--LINK---->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -40,7 +41,6 @@
               Dashboard
             </a>
 
-            
             <!---BUNDLE-SECTION---->
             <div class="bundle-sector">
               <p>
@@ -315,7 +315,6 @@
              Maintenance</a>
             </div>
 
-
           <!---middle-section-ends-->
           </div>
           <div class="sidebar-bottom"></div>
@@ -334,300 +333,261 @@
        <section class="first-container">
         
         <div class="welcome-title">
-          <h2>Bundles Dashboard </h2>
+          <h2>Ebooks Dashboard </h2>
           <img src="./css/icons/dashboard.png" alt="" loading="lazy">
         </div>
-        <!---daily totals card-(grid)----->
-       <div class="total-title"> <p>Daily analytics</p></div>
-        <section class="daily-total-section">
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!---EBOOKS SECTION-CONTAINER----->
+       <section class="second-container">
+          <!---daily totals card-(grid)----->
+       <div class="total-title"> 
+        <p>Ebooks analytics</p>
+        <div class="ebookImg">
+          <img src="./css/icons/ebook.png" alt="" loading="lazy">
+        </div>
+      </div>
+       <section class="daily-total-section">
           <div class="total-section">
-            <!--total orders-->
+            <!--total Ebooks-->
             <div class="total-section-card">
               <div class="section-card-top">
                 <div class="card-top-left">
-                  <p>Total Orders</p>
+                  <p>Total Ebooks</p>
                 </div>
                 <div class="card-top-right">
                   <img src="./css/icons/totalorder.png" alt="" loading="lazy">
                 </div>
               </div>
               <div class="section-card-bottom">
-                <div class="card-bottom-left"><h1 id="totalOrder">0</h1></div>
+                <div class="card-bottom-left"><h1 id="totalEbooks">0</h1></div>
                 <div class="card-bottom-right"></div>
               </div>
             </div>
-            <!---pending-orders---->
+            <!---Total Sellers---->
             <div class="total-section-card">
                 <div class="section-card-top">
                 <div class="card-top-left">
-                  <p>Pending </p>
+                  <p>Total Sellers</p>
                 </div>
                 <div class="card-top-right">
                   <img src="./css/icons/recent.png" alt="" loading="lazy">
                 </div>
               </div>
               <div class="section-card-bottom">
-                <div class="card-bottom-left"><h1 id="pendingOrder">0</h1></div>
+                <div class="card-bottom-left"><h1 id="totalSellers">0</h1></div>
                 <div class="card-bottom-right"></div>
               </div>
             </div>
-            <!--processing orders---->
+            <!--E-Orders Today---->
             <div class="total-section-card">
                 <div class="section-card-top">
                 <div class="card-top-left">
-                  <p>Processing</p>
+                  <p>E-Orders Today</p>
                 </div>
                 <div class="card-top-right">
                   <img src="./css/uiIcons/gurantee.png" alt="" loading="lazy">
                 </div>
               </div>
               <div class="section-card-bottom">
-                <div class="card-bottom-left"><h1 id="processingOrder">0</h1></div>
+                <div class="card-bottom-left"><h1 id="eOrdersToday">0</h1></div>
                 <div class="card-bottom-right"></div>
               </div>
             </div>
-            <!---delivered orders---->
+            <!---Revenue Today---->
             <div class="total-section-card">
                 <div class="section-card-top">
                 <div class="card-top-left">
-                  <p>Delivered</p>
+                  <p>Revenue Today</p>
                 </div>
                 <div class="card-top-right">
                   <img src="./css/uiIcons/approval.png" alt="" loading="lazy">
                 </div>
               </div>
               <div class="section-card-bottom">
-                <div class="card-bottom-left"><h1 id="deliveredOrder">0</h1></div>
+                <div class="card-bottom-left"><h1 id="EtodayRevenue">0</h1></div>
                 <div class="card-bottom-right"></div>
               </div>
             </div>
-            <!---failed-orders---->
+            <!---Pending Reviews---->
             <div class="total-section-card">
                 <div class="section-card-top">
                 <div class="card-top-left">
-                  <p>Failed</p>
+                  <p>Pending Reviews</p>
                 </div>
                 <div class="card-top-right">
                   <img src="./css/icons/timer.png" alt="" loading="lazy">
                 </div>
               </div>
               <div class="section-card-bottom">
-                <div class="card-bottom-left"><h1 id="failedOrder">0</h1></div>
+                <div class="card-bottom-left"><h1 id="pendingReview">0</h1></div>
                 <div class="card-bottom-right"></div>
               </div>
             </div>
-            <!---Today orders-->
+            <!---Pending Payouts-->
             <div class="total-section-card">
                 <div class="section-card-top">
                 <div class="card-top-left">
-                  <p class="mapping">Today Orders</p>
+                  <p class="mapping">Pending Payouts</p>
                 </div>
                 <div class="card-top-right">
                   <span class="material-icons">today</span>
                 </div>
               </div>
               <div class="section-card-bottom">
-                <div class="card-bottom-left"><h1 id="todayOrder">0</h1></div>
+                <div class="card-bottom-left"><h1 id="pendingPayouts">0</h1></div>
                 <div class="card-bottom-right"></div>
               </div>
             </div>
-            <!---weekly--orders---->
+            <!---Total Customers---->
             <div class="total-section-card">
                 <div class="section-card-top">
                 <div class="card-top-left">
-                  <p class="mapping">Weekly Orders</p>
+                  <p class="mapping">Total Customers</p>
                 </div>
                 <div class="card-top-right">
                  <span class="material-icons">view_week</span>
                 </div>
               </div>
               <div class="section-card-bottom">
-                <div class="card-bottom-left"><h1 id="weeklyOrder">0</h1></div>
+                <div class="card-bottom-left"><h1 id="totalCustomers">0</h1></div>
                 <div class="card-bottom-right"></div>
               </div>
             </div>
-            <!---monthly orders---->
+            <!---Monthly Revenue---->
             <div class="total-section-card">
                 <div class="section-card-top">
                 <div class="card-top-left">
-                  <p class="mapping">Monthly Orders</p>
+                  <p class="mapping">Monthly Revenue</p>
                 </div>
                 <div class="card-top-right">
                   <span class="material-icons">calendar_month</span>
                 </div>
               </div>
               <div class="section-card-bottom">
-                <div class="card-bottom-left"><h1  id="monthlyOrder"> 0</h1></div>
-                <div class="card-bottom-right"></div>
-              </div>
-            </div>
-
-              <!---Today orders-->
-            <div class="total-section-card">
-                <div class="section-card-top">
-                <div class="card-top-left">
-                  <p class="mapping">Today Revenue</p>
-                </div>
-                <div class="card-top-right">
-                  <span class="material-icons">today</span>
-                </div>
-              </div>
-              <div class="section-card-bottom">
-                <div class="card-bottom-left"><h1 id="todayRevenue">0</h1></div>
-                <div class="card-bottom-right"></div>
-              </div>
-            </div>
-            
-                <!---Today orders-->
-            <div class="total-section-card">
-                <div class="section-card-top">
-                <div class="card-top-left">
-                  <p class="mapping">Total Revenue</p>
-                </div>
-                <div class="card-top-right">
-                  <span class="material-icons">summarize</span>
-                </div>
-              </div>
-              <div class="section-card-bottom">
-                <div class="card-bottom-left"><h1 id="totalRevenue">0</h1></div>
-                <div class="card-bottom-right"></div>
-              </div>
-            </div>
-
-                <!---Today profit-->
-            <div class="total-section-card">
-                <div class="section-card-top">
-                <div class="card-top-left">
-                  <p class="mapping">Today Profit</p>
-                </div>
-                <div class="card-top-right">
-                  <span class="material-icons">today</span>
-                </div>
-              </div>
-              <div class="section-card-bottom">
-                <div class="card-bottom-left"><h1 id="todayProfit">0</h1></div>
-                <div class="card-bottom-right"></div>
-              </div>
-            </div>
-
-                <!---weekly profit-->
-            <div class="total-section-card">
-                <div class="section-card-top">
-                <div class="card-top-left">
-                  <p class="mapping">Weekly profit</p>
-                </div>
-                <div class="card-top-right">
-                  <span class="material-icons">view_week</span>
-                </div>
-              </div>
-              <div class="section-card-bottom">
-                <div class="card-bottom-left"><h1 id="weeklyProfit">0</h1></div>
-                <div class="card-bottom-right"></div>
-              </div>
-            </div>
-
-                <!---monthly profit---->
-            <div class="total-section-card">
-                <div class="section-card-top">
-                <div class="card-top-left">
-                  <p class="mapping">Monthly Profit</p>
-                </div>
-                <div class="card-top-right">
-                  <span class="material-icons">calendar_month</span>
-                </div>
-              </div>
-              <div class="section-card-bottom">
-                <div class="card-bottom-left"><h1 id="monthlyProfit">0</h1></div>
+                <div class="card-bottom-left"><h1  id="monthlyErev"> 0</h1></div>
                 <div class="card-bottom-right"></div>
               </div>
             </div>
 
 
-                <!---all profit---->
-            <div class="total-section-card">
-                <div class="section-card-top">
-                <div class="card-top-left">
-                  <p class="mapping">Total Profit</p>
-                </div>
-                <div class="card-top-right">
-                  <span class="material-icons">summarize</span>
-                </div>
-              </div>
-              <div class="section-card-bottom">
-                <div class="card-bottom-left"><h1 id="allProfit">0</h1></div>
-                <div class="card-bottom-right"></div>
-              </div>
-            </div>
           </div>
         </section>
 
 
-        <div class="total-title"> <p>Analytics Graph</p></div>
-    <div class="chart-wrapper">
+      <!--table-section-(RECENT ORDERS)---->
+        <div class="total-title etitle"> <p>E-Orders Table</p></div>
 
-      <div class="saas-header">
-        <h3>Profit Analytics</h3>
-
-        <div class="chart-toggle">
-          <button class="active" onclick="setChartMode('daily', this)">Daily</button>
-          <button onclick="setChartMode('weekly', this)">Weekly</button>
-          <button onclick="setChartMode('monthly', this)">Monthly</button>
+      <section class="table-section">
+        <div class="table-title">
+          <p>Recent E-Orders Table</p>
         </div>
-      </div>
+        <div class="content-wrapper">
+          <div class="table-scroll-area">
+            <!-- TABLE HEADER -->
+            <div class="table-header">
+              <span>Order ID</span>
+              <span>Ebook</span>
+              <span>Buyer</span>
+              <span>Seller</span>
+              <span>Amount</span>
+              <span>Status</span>
+              <span>SubmittedAt</span>
+              <span>Action</span>
+            </div>
 
-      <canvas id="profitChart"></canvas>
-
-    </div>
-
-
-        <!--table-section--->
-        <div class="total-title"> <p>Orders Table</p></div>
-<section class="table-section">
-  <div class="table-title">
-    <p>Track all Orders</p>
-  </div>
-  <div class="content-wrapper">
-    <div class="table-scroll-area">
-      <!-- TABLE HEADER -->
-      <div class="table-header">
-        <span>Order ID</span>
-        <span>Network</span>
-        <span>Size</span>
-        <span>Price</span>
-        <span>Recipient</span>
-        <span>Paid?</span>
-        <span>Date submitted</span>
-        <span>Status</span>
-        <span>UpdatedAt</span>
-        <span>Action</span>
-      </div>
-
-      <div class="main-row-content">
-        <p id="empty-body" hidden>Orders not loaded yet</p>
-        <div class="row-wrapper" id="rowWrapper">
-          <!-- dynamic rows -->
+            <div class="main-row-content">
+              <p id="Eempty-body" hidden>E-Orders not loaded yet</p>
+              <div class="row-wrapper" id="ErowWrapper">
+                <!-- dynamic rows -->
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
+   <!--table-section-(RECENT ORDERS)-ENDS--->
 
+   
+      <!--table-section-(PENDING EBOOKS REVIEW)---->
+        <div class="total-title etitle"> <p>Pending Ebook Review</p></div>
 
+      <section class="table-section pdt">
+        <div class="table-title">
+          <p>Pending Ebooks</p>
+        </div>
+        <div class="content-wrapper">
+          <div class="table-scroll-area">
+            <!-- TABLE HEADER -->
+            <div class="table-header pde">
+              <span>CoverImg</span>
+              <span>Item Title</span>
+              <span>Seller Information</span>
+              <span>Category</span>
+              <span> Price Tag</span>
+              <span>SubmittedAt</span>
+              <span>Action</span>
+            </div>
 
+            <div class="main-row-content">
+              <p id="pdempty-body" hidden>E-Orders not loaded yet</p>
+              <div class="row-wrapper" id="pdrowWrapper">
+                <!-- dynamic rows -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+   <!--table-section-(PENDING EBOOKS REVIEWS)-ENDS--->
 
+     <!--table-section-(WITHDRAWAL REQUEST)---->
+        <div class="total-title etitle"> <p>Withdrawal Requests</p></div>
 
+      <section class="table-section pdt">
+        <div class="table-title">
+          <p>Requests</p>
+        </div>
+        <div class="content-wrapper">
+          <div class="table-scroll-area">
+            <!-- TABLE HEADER -->
+            <div class="table-header pde">
+              <span>Seller</span>
+              <span>Amount</span>
+              <span>Network</span>
+              <span>Number</span>
+              <span>Status</span>
+              <span>SubmittedAt</span>
+              <span>Action</span>
+            </div>
 
-
-
-
-
-
-
-
-
-
-
-
+            <div class="main-row-content">
+              <p id="wRempty-body" hidden>No Withdrawal Request yet</p>
+              <div class="row-wrapper" id="wRrowWrapper">
+                <!-- dynamic rows -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+   <!--table-section-(WITHDRAWAL REQUEST)-ENDS--->
+      <!--second-container-closing---->
+       </section>
 
        <!--first-container-closing---->
        </section>
@@ -638,7 +598,8 @@
 
    </div>
    
- 
+
+
 
 
 
@@ -660,7 +621,7 @@
               Dashboard
             </a>
 
-            
+          
             <!---BUNDLE-SECTION---->
             <div class="bundle-sector">
               <p>
@@ -934,6 +895,7 @@
             </div>
              Maintenance</a>
             </div>
+
 
           <!---middle-section-ends-->
           </div>
