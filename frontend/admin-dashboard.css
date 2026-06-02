@@ -1462,6 +1462,10 @@ BUNDLE SECTION
   height: 7rem;
 }
 
+.table-section{
+  margin-bottom: 3rem !important;
+}
+
 
 }
 
