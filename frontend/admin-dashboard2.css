@@ -1,0 +1,120 @@
+
+  .main-container .second-container{
+  width: 100%;
+  max-width: 96%;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  position: relative;
+  justify-content: center;
+  justify-self: center;
+  justify-items: center;
+  align-items: center;
+  margin-bottom: 3rem;
+    }
+
+    .second-container .total-title{
+  width: 99%;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem;
+  margin-top: .7rem ;
+  margin-bottom: .7rem;
+  border-radius: .8rem;
+}
+
+  .second-container .etitle {
+    background: none !important;
+    padding: 1.1rem !important;
+    margin-bottom: 0 !important;
+  }
+
+ .second-container .total-title .ebookImg{
+  width: max-content;
+  height: max-content;
+  padding: .3rem;
+ }
+
+ .second-container .total-title .ebookImg img{
+  width: 2.2rem;
+  height: 2.2rem;
+  animation: book 2s infinite;
+ }
+
+ @keyframes book {
+  0%{
+    transform: scale(1);
+  }
+
+  50%{
+    transform: scale(1.03);
+  }
+
+  75%{
+    transform: scale(1.05);
+  }
+
+  100%{
+    transform: scale(1);
+  }
+ }
+
+.second-container .total-title p{
+  color: var(--text-cl-2);
+  font-size: 1.5rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 600;
+}
+
+/***
+second container css little changes
+****/
+.main-container .second-container .daily-total-section{
+  width: 100%;
+  background: var(--thin-border-1);
+}
+
+
+.second-container .section-card-top .card-top-left p{
+  color: rgba(130, 236, 231, 0.925);
+  font-size: .9rem;
+  margin-top: -.5rem;
+  font-weight: 500;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.second-container .table-section{
+  width: 100%;
+  max-width: 100% !important;
+}
+
+.second-container .pdt{
+  width: 100%;
+  max-width: 96% !important; 
+}
+
+.second-container 
+.content-wrapper .table-header {
+  /* Fixed column widths — same as before */
+  display: grid;
+  width: 100%;
+  max-width: 100% !important;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  align-content: center;
+  grid-template-columns: 
+    130px 160px 130px 130px 130px 130px 110px 130px !important;
+
+}
+
+.second-container .content-wrapper .pde {
+  width: 100%;
+  max-width: 100% !important;
+   grid-template-columns: 
+    140px 150px 140px 160px 140px 160px 140px 150px !important;
+}
+
