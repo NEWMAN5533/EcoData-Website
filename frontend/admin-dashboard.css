@@ -539,7 +539,7 @@ BUNDLE SECTION
 
 .welcome-title h2{
   color: var(--white-text-cl);
-  font-size: 2rem !important;
+  font-size: 2rem ;
   font-weight: 600;
 }
 
@@ -1307,8 +1307,12 @@ BUNDLE SECTION
     display: none !important;
   }
 
+    .welcome-title{
+    padding: .2rem !important;
+  }
+
   .welcome-title h1{
-    font-size: 1.2rem !important;
+    font-size: 1rem !important;
   }
 
   .daily-total-section {
@@ -1376,24 +1380,6 @@ BUNDLE SECTION
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @media (max-width: 414px) {
   .container .main-grid-container{
     display: grid;
@@ -1406,9 +1392,15 @@ BUNDLE SECTION
     display: none !important;
   }
 
-  .welcome-title h1{
-    font-size: 1.2rem !important;
+  .welcome-title{
+    padding: .2rem !important;
   }
+
+ .welcome-title h2{
+  color: var(--white-text-cl);
+  font-size: 1.2rem !important;
+  font-weight: 600;
+}
 
   .daily-total-section {
     width: 100%;
@@ -1457,6 +1449,32 @@ BUNDLE SECTION
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @media (min-width: 1024px) {
   /***display none div****/
   .sidebar-phone,
@@ -1473,4 +1491,6 @@ BUNDLE SECTION
   .right-sideNavbar img{
     display: none !important;
   }
+
+  
 }
