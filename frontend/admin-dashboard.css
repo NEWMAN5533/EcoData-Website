@@ -347,6 +347,13 @@ justify-content: end;
   border-bottom: 1px solid var(--thin-border);
 }
 
+ .sidebar .sidebar-middle::-webkit-scrollbar-track{
+    background: #555;
+  }
+
+  .sidebar .sidebar-middle::-webkit-scrollbar-thumb{
+    background: #b4b2b2;
+  }
 
 
 
