@@ -341,7 +341,7 @@ justify-content: end;
   justify-content:  start;
   display: flex;
   padding: .5rem;
-  gap: .6rem;
+  gap: 1rem;
   flex-direction: column;
   overflow-y: auto ;
   border-bottom: 1px solid var(--thin-border);
@@ -1065,7 +1065,7 @@ BUNDLE SECTION
   justify-content:  start;
   display: flex;
   padding: .5rem;
-  gap: .6rem;
+  gap: 1rem;
   flex-direction: column;
   overflow-y: auto !important;
   border-bottom: 1px solid var(--thin-border);
