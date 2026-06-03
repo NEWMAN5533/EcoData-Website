@@ -272,7 +272,7 @@ justify-content: end;
   width: 100%;
   height: calc(100vh - 3.5rem);
   display:  grid;
-  grid-template-columns: 15rem auto;
+  grid-template-columns: 16rem auto;
   background: transparent;
   position: relative;
   top: 3.5rem;
@@ -280,6 +280,9 @@ justify-content: end;
   overflow-y: hidden;
   background: rgba(53, 49, 49, 0.438) !important;
 }
+
+
+
 
 /***aside container***/
 .main-grid-container .main-container-aside
@@ -385,12 +388,17 @@ BUNDLE SECTION
   gap: .3rem; 
 }
 
+.sidebar-middle .dashNav.active{
+  background:  rgba(109, 106, 106, 0.849);
+}
+
 .sidebar-middle .bundle-sector p{
-  color: rgb(221, 115, 16);
-  font-size: .9rem;
+  color: rgba(243, 168, 97, 0.671);
+  font-size: .95rem;
+  font-weight: 600;
   display: flex;
   width: 100%;
-  margin-left: .3rem;
+  margin-left: .2rem;
   height: max-content;
   align-self: start;
   justify-self: start;
@@ -456,9 +464,6 @@ BUNDLE SECTION
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.sidebar-middle a.active{
-  background: rgb(30, 58, 56) !important;
-}
 
 .sidebar-middle .dashNav a:hover{
   background: var(--background-cl);
@@ -1424,7 +1429,10 @@ BUNDLE SECTION
     width: 100%;
     max-width: 96% !important;
     overflow: hidden;
-  }
+    background: none !important;
+    border: none !important;
+}
+ 
 
   .total-section .total-section-card{
   width: 9.5rem;
@@ -1445,6 +1453,7 @@ BUNDLE SECTION
   display: grid;
   grid-template-columns: repeat(2, 1fr) !important;
 }
+
 
 .main-container .wrapper{
   display: grid !important;
