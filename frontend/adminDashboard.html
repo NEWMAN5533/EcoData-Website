@@ -48,7 +48,7 @@
                 <input onclick="window.location.href= 'adminDashboard.html'" class="checkbox active" type="checkbox">
                 Data Bundles</p>
 
-                  <a href="#">
+                  <a id="dailyAnalyticsIntoView" href="#">
             <div class="dashNav">
                 <span class="material-icons">
                  home
@@ -56,7 +56,7 @@
             </div>
              Daily Analytics</a>
 
-            <a href="#">
+            <a id="AnalyticGraphIntoView" href="#">
             <div class="dashNav">
                 <span class="material-icons">
                  home
@@ -65,7 +65,7 @@
              Analytic Graph</a>
 
 
-            <a href="#">
+            <a id="OrderTableIntoView" href="#">
             <div class="dashNav">
                 <span class="material-icons">
                   shopping_cart
@@ -148,8 +148,7 @@
             </div>
 
           
-          
-
+      
             
 
               <!---USERS-SECTION---->
@@ -562,7 +561,7 @@
         </section>
 
 
-        <div class="total-title"> <p>Analytics Graph</p></div>
+        <div class="total-title chartSection"> <p>Analytics Graph</p></div>
     <div class="chart-wrapper">
 
       <div class="saas-header">
@@ -581,7 +580,7 @@
 
 
         <!--table-section--->
-        <div class="total-title"> <p>Orders Table</p></div>
+        <div class="total-title tableIntoView"> <p>Orders Table</p></div>
 <section class="table-section">
   <div class="table-title">
     <p>Track all Orders</p>
@@ -982,5 +981,54 @@ window.addEventListener("click", function (e) {
 });
 
 </script>
+
+    <script>
+            document.addEventListener("DOMContentLoaded", () => {
+
+              //Total section intoView
+              const totalSectionIntoView = document.querySelector(".welcome-title");
+
+              const totalSectionBtn = document.getElementById("dailyAnalyticsIntoView");
+
+              totalSectionBtn.addEventListener("click", () => {
+                if(totalSectionBtn) {
+                  totalSectionIntoView.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }
+              });
+
+
+              //Graph intoView
+               const analyticContainer = document.querySelector(".chartSection");
+            const intoViewBtn = document.getElementById("AnalyticGraphIntoView");
+
+            intoViewBtn.addEventListener('click', () =>{
+              if(intoViewBtn){
+                analyticContainer.scrollIntoView({
+                  behavior: 'smooth',
+                  block: 'start',
+                });
+              }
+            });
+            });
+
+            //Table section intoView
+            const tableContainer = document.querySelector(".tableIntoView");
+
+            const intoViewTableSectionBtn = document.getElementById("OrderTableIntoView");
+
+            intoViewTableSectionBtn.addEventListener("click", () => {
+              if( intoViewTableSectionBtn){
+                tableContainer.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                });
+              }
+            });
+           
+    </script>
+
 </body>
 </html>

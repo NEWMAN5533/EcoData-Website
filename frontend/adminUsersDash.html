@@ -47,7 +47,7 @@
                 <input onclick="window.location.href= 'adminUsersDash.html'" class="checkbox active" type="checkbox">
                 Users</p>
 
-                  <a href="#">
+                  <a id="customersBtn" href="#">
             <div class="dashNav">
                 <span class="material-icons">
                  home
@@ -55,22 +55,13 @@
             </div>
              Customers</a>
 
-            <a href="#">
+            <a id="sellersBtn" href="#">
             <div class="dashNav">
                 <span class="material-icons">
                  home
               </span>
             </div>
              Sellers</a>
-
-
-            <a href="#">
-            <div class="dashNav">
-                <span class="material-icons">
-                  shopping_cart
-              </span>
-            </div>
-             Admins</a>
             </div>
 
 
@@ -877,6 +868,35 @@ window.addEventListener("click", function (e) {
 
 });
 
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", ()=>{
+    const customersBtn = document.getElementById("customersBtn");
+    const customersSection = document.querySelector(".first-container");
+
+    customersBtn.addEventListener("click", ()=>{
+      if(customersBtn){
+        customersSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        })
+      }
+    });
+
+    // user Table section
+    const usersBtn = document.getElementById("sellersBtn");
+    const sellersSection = document.querySelector(".etitle");
+
+    usersBtn.addEventListener("click", ()=> {
+      if(usersBtn) {
+        sellersSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        })
+      }
+    });
+  })
 </script>
 </body>
 </html>

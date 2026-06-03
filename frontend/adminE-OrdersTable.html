@@ -47,7 +47,7 @@
                 <input onclick="window.location.href= 'adminE-OrdersTable.html'" class="checkbox active" type="checkbox">
                 E-Orders</p>
 
-                  <a href="#">
+                  <a id="allOrders" href="#">
             <div class="dashNav">
                 <span class="material-icons">
                  home
@@ -55,7 +55,7 @@
             </div>
              All Orders</a>
 
-            <a href="#">
+            <a id="successfulTable" href="#">
             <div class="dashNav">
                 <span class="material-icons">
                  home
@@ -64,22 +64,6 @@
              Successful</a>
 
 
-            <a href="#">
-            <div class="dashNav">
-                <span class="material-icons">
-                  shopping_cart
-              </span>
-            </div>
-             Failed</a>
-
-
-                 <a href="#">
-            <div class="dashNav">
-                <span class="material-icons">
-                  shopping_cart
-              </span>
-            </div>
-             Refunded</a>
             </div>
 
 
@@ -318,6 +302,8 @@
           <div class="sidebar-bottom"></div>
         </aside>
       </div>
+
+
 
 
 
@@ -882,5 +868,39 @@ window.addEventListener("click", function (e) {
 });
 
 </script>
+
+
+      <script>
+        document.addEventListener("DOMContentLoaded", ()=>{
+          const allOrdersSection = document.querySelector(".first-container");
+
+          const allOrdersSectionBtn = document.getElementById("allOrders")
+
+          allOrdersSectionBtn.addEventListener("click", ()=> {
+              if(allOrdersSectionBtn) {
+            allOrdersSection.scrollIntoView({
+              behavior: "smooth",
+              block: "start"
+            });
+          }
+          });
+
+          // all E-Orders Table
+          const allTableFor = document.querySelector(".etitle");
+
+          const allTableForBtn = document.getElementById("successfulTable");
+
+          allTableForBtn.addEventListener("click", ()=> {
+            if(allTableForBtn){
+              allTableFor.scrollIntoView({
+              behavior: "smooth",
+              block: "start"
+            });
+            }
+          });
+
+
+        });
+      </script>
 </body>
 </html>

@@ -47,7 +47,7 @@
                 <input onclick="window.location.href= 'adminEbookDash.html'" class="checkbox active" type="checkbox">
                 Ebooks</p>
 
-                  <a href="#">
+                  <a id="allEbooks" href="#">
             <div class="dashNav">
                 <span class="material-icons">
                  home
@@ -55,22 +55,30 @@
             </div>
              All Ebooks</a>
 
-            <a href="#">
+            <a id="recentTable" href="#">
             <div class="dashNav">
                 <span class="material-icons">
                  home
               </span>
             </div>
-             Pending Approval</a>
+             Recent E-Orders</a>
 
 
-            <a href="#">
+            <a id="pendingSection" href="#">
             <div class="dashNav">
                 <span class="material-icons">
                   shopping_cart
               </span>
             </div>
-             Approved</a>
+             Pending Review</a>
+
+             <a id="pendingWithdrawal" href="#">
+            <div class="dashNav">
+                <span class="material-icons">
+                  shopping_cart
+              </span>
+            </div>
+             Recent Withdrawals</a>
             </div>
 
             <!---BUNDLE-SECTION---->
@@ -148,7 +156,7 @@
              Refunded</a>
             </div>
 
-          
+       
           
 
             
@@ -494,7 +502,7 @@
 
 
       <!--table-section-(RECENT ORDERS)---->
-        <div class="total-title etitle"> <p>Recent E-Orders</p></div>
+        <div class="total-title etitle eOrders"> <p>Recent E-Orders</p></div>
 
       <section class="table-section">
         <div class="table-title">
@@ -527,7 +535,7 @@
 
    
       <!--table-section-(PENDING EBOOKS REVIEW)---->
-        <div class="total-title etitle"> <p>Pending Ebook Review</p></div>
+        <div class="total-title etitle pendingOrd"> <p>Pending Ebook Review</p></div>
 
       <section class="table-section pdt">
         <div class="table-title">
@@ -558,7 +566,7 @@
    <!--table-section-(PENDING EBOOKS REVIEWS)-ENDS--->
 
      <!--table-section-(WITHDRAWAL REQUEST)---->
-        <div class="total-title etitle"> <p>Withdrawal Requests</p></div>
+        <div class="total-title etitle withdraw" > <p>Withdrawal Requests</p></div>
 
       <section class="table-section pdt">
         <div class="table-title">
@@ -947,5 +955,68 @@ window.addEventListener("click", function (e) {
 });
 
 </script>
+
+
+   <script>
+            document.addEventListener("DOMContentLoaded", () =>{
+
+              const ebookSection = document.querySelector(".first-container");
+
+              const ebookSectionIntoViewBtn = document.getElementById("allEbooks");
+
+              ebookSectionIntoViewBtn.addEventListener('click', () => {
+                if(ebookSectionIntoViewBtn) {
+                  ebookSection.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }
+              });
+
+              // Recent E-Orders
+              const recentOrders = document.querySelector(".eOrders");
+
+              const recentTableBtn = document.getElementById("recentTable");
+
+              recentTableBtn.addEventListener("click", () => {
+                if( recentTableBtn ) {
+
+                  recentOrders.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }
+              });
+
+              // pendingSection
+              const pendingSection = document.querySelector(".pendingOrd");
+
+              const pendingSectionBtn = document.getElementById("pendingSection");
+
+              pendingSectionBtn.addEventListener("click", () => {
+                if(pendingSectionBtn){
+                  pendingSection.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }
+              });
+
+              // withdrawal section
+              const withdrawalSection = document.querySelector(".withdraw");
+
+              const withdrawalSectionBtn = document.getElementById("pendingWithdrawal");
+
+              withdrawalSectionBtn.addEventListener("click", () => {
+                if(withdrawalSectionBtn) {
+                  withdrawalSection.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }
+              });
+
+            })
+   </script>
 </body>
 </html>
