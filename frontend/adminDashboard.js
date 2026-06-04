@@ -2,6 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+import { signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
 // ✅ Your Firebase config
 const firebaseConfig = {
@@ -25,6 +26,35 @@ window.FIRESTORE = db;
 
 console.log("🔥 Firebase initialized and Firestore ready!");
 
+const lapOutBtn = document.getElementById("lapOut");
+const logOutBtn = document.getElementById("logOut");
+
+lapOutBtn.addEventListener("click", async()=> {
+ if(lapOutBtn){
+  try{
+    await signOut(auth);
+    showSnackBar("Logout successful!");
+  } catch(err){
+    console.error("Error logging out:", err);
+    showSnackBar("Error logging out", "warning");
+  }
+ }
+  }
+)
+
+// phone-sidebar logout
+logOutBtn.addEventListener("click", async() => {
+  if(logOutBtn){
+    try{
+      await signOut(auth);
+      showSnackBar("Success Logged Out", "success");
+    } catch(err){
+      console.error("Error Logging Out", err);
+      showSnackBar("Error, try again");
+    }
+  }
+})
+
 
 
 // UPDATED ADMIN DASHBOARD JS
@@ -41,6 +71,8 @@ import {
   orderBy,
 } from
 "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+
 
 // =========================
 // DOM READY
