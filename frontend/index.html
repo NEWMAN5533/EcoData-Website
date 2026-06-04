@@ -3777,6 +3777,23 @@ We sincerely apologize for any inconvenience caused and appreciate your patience
 </script>
 
 
+  <script>
+ document.addEventListener("DOMContentLoaded", ()=>{
+   const buyDataIntoViewBtn = document.getElementById("ctaBtn");
+  const dataSection = document.getElementById("normalView");
+  
+   buyDataIntoViewBtn.addEventListener("click", ()=> {
+    if(buyDataIntoViewBtn){
+      dataSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+   });
+ })
+</script>
+
+
 
 
 <!---full-script---->
