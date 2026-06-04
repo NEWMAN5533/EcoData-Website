@@ -812,6 +812,8 @@
   </section>
 
 
+
+    
   <!----ADS--->
   <div class="gallery">
 
@@ -821,7 +823,7 @@
       <span></span><span></span><span></span><span></span>
     </div>
     
-    <p>Install our app on android phones</p>
+    <p>Install EcoData app on android phones</p>
 
     </div>
 
@@ -832,7 +834,9 @@
       <span></span><span></span><span></span><span></span>
     </div>
       <div class="grid-overlay"></div>
-    <div class="img-box">
+
+            <div class="img-box-flex">
+               <div class="img-box">
       <img src="./css/images/1.jpeg" alt="" loading="lazy" 
       onclick=openViewer(0)>
     </div>
@@ -850,6 +854,14 @@
       <img src="./css/images/3.jpeg" alt="" loading="lazy" 
       onclick=openViewer(2)>
       </div>
+            </div>
+
+            <div class="img-box-flex-numbering">
+              <button  class="numberContent"  onclick=openViewer(0)>Step 1</button>
+              <button class="numberContent"  onclick=openViewer(1)>Step 2</button>
+              <button class="numberContent"  onclick=openViewer(2)>Step 3</button>
+            </div>
+   
 
   
     </div>
@@ -860,8 +872,6 @@
     <span title="Close" class="clos"onclick="closeViewer()">&times;</span>
     <img id="fullImg" />
   </div>
-
-
 
   <!----PERSISTENT-CARD-(ALWAYS-VISIBLE)--->
   <!-- LIVE ORDER CONTAINER -->
