@@ -4025,6 +4025,7 @@ const cardCloser = document.getElementById("ecoDataSidebar");
     e.stopPropagation();
     if(cardToggler){
       cardCloser.classList.add("active");
+       document.body.classList.add("no-scroll");
     } else{
       cardCloser.classList.remove("active");
     }
@@ -4036,6 +4037,7 @@ const cardCloser = document.getElementById("ecoDataSidebar");
 
     if(secondToggler) {
       cardCloser.classList.add("active");
+      document.body.classList.add("no-scroll");
     } else {
       cardCloser.classList.remove("active");
     }
