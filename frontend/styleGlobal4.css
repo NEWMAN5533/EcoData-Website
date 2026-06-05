@@ -487,6 +487,11 @@ CREATE STORE LINK
     left: 0;
   }
 
+  .no-scroll{
+    overflow: hidden;
+    height: 100vh;
+  }
+
   .dark-mode .ecodata-sidebar{
     background: rgb(50, 50, 61);
     backdrop-filter: blur(14px);
