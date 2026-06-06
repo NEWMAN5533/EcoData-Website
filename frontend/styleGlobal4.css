@@ -5,14 +5,22 @@
   width: 100%;
   height: 1.95rem;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   font-size: .80rem;
   font-weight: 600;
   color: rgb(150, 152, 155);
   white-space: nowrap;
-  border-bottom: 1px solid rgba(212, 211, 211, 0.658);
+  border-bottom: 1px solid rgba(233, 233, 233, 0.952);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
+
+  .dark-mode   .live-order-card #liveOrderRows .live-row{
+  color: rgb(31, 32, 32);
+  font-weight: 600;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: .80rem;
+  border-bottom: 1px solid rgba(95, 93, 93, 0.87);
+}
 
 
 :root {
