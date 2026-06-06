@@ -3,9 +3,9 @@
   .live-order-card #liveOrderRows .live-row{
   display: flex;
   width: 100%;
-  height: 1.7rem;
+  height: 1.95rem;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   font-size: .80rem;
   font-weight: 600;
   color: rgb(150, 152, 155);
