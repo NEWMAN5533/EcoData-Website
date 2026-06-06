@@ -130,7 +130,7 @@
               <div id="adminAccessLink4" class="quicker-nav">
               <div class="naver"  onclick="window.location.href = 'agentPage.html'">
                 <span class="material-icons">support_agent</span>
-              <p>Agent Page</p>
+              <p>Exclusive Page</p>
               </div>
             
             </div> 
@@ -307,8 +307,8 @@
 
              <div id="adminAccessLink2" class="quicker-nav" onclick="window.location.href='agentPage.html'" >
               <img src="./css/icons/agent.png" alt="" loading="lazy">
-              <p>Agent Page</p>
-            </div> 
+              <p>Exclusive Page</p>
+            </div>
             
 
 
@@ -627,51 +627,16 @@
     
 
 
+    
 
 
     <div class="google-thumbnails" id="thumbnailScroll">
 
-
-
-
-
-
-      <div class ="google-thumbnail thumb1">
-
-<img class="analy" src="./css/uiIcons/loudspeaker.png" alt="" loading="lazy">
-
-AVIATOR DELIVERY ONGOING,
-
-
-THE LORD HAS BEEN GOOD!!!!!!!!!!!
-
-
-NOW YOU CAN REPORT ALL NOT RECEIVED FROM 4TH JUNE .. THURSDAY TILL NOW 
-
-
-REPORT WITH 
-NUMBER, 
-GIG,
-TIME,
-DATE
-
-
-INSTANT DELIVERY ONGOING. 
-        
-</div>
-
-
-      
-
-
-
-
-        <div class="google-thumbnail thumb1">
-
-        INSTALL THE APP ON YOUR ANDROID PHONE FOR QUICK ACCESS.
+       <div class="google-thumbnail thumb1">
+       <span style="color: rgb(235, 193, 7); margin: .4rem;">[ 6/6/2026 ]</span> FASTEST DELIVERY ONGOING RIGHT NOW, PLACE YOUR ORDER NOW. 
       </div>
 
-
+     
     
 
       <div class="google-thumbnail thumb2" id="promThumbnail">
@@ -844,8 +809,6 @@ INSTANT DELIVERY ONGOING.
   </section>
 
 
-
-    
   <!----ADS--->
   <div class="gallery">
 
@@ -904,6 +867,8 @@ INSTANT DELIVERY ONGOING.
     <span title="Close" class="clos"onclick="closeViewer()">&times;</span>
     <img id="fullImg" />
   </div>
+
+
 
   <!----PERSISTENT-CARD-(ALWAYS-VISIBLE)--->
   <!-- LIVE ORDER CONTAINER -->
@@ -1043,6 +1008,9 @@ INSTANT DELIVERY ONGOING.
       </div>
     </section>
   </div>
+
+
+
 
 
   <!-- ends -->
@@ -1751,7 +1719,7 @@ INSTANT DELIVERY ONGOING.
 
         <!------GRID PROMO SECTION--(off until isPromoTime)------>
         <div id="gridPromoActive" style="width: 100%;  max-width: 99.99%;">
-        <div class="offer-title"><h2>PROMO!</h2></div>
+        <div class="offer-title" ><h2></h2>PROMO!</h2></div>
 
 
         <div class="gridCard-wrapper" >
@@ -3800,8 +3768,7 @@ INSTANT DELIVERY ONGOING.
  })
 </script>
 
-
-  <script>
+<script>
  document.addEventListener("DOMContentLoaded", ()=>{
    const buyDataIntoViewBtn = document.getElementById("ctaBtn");
   const dataSection = document.getElementById("normalView");
@@ -4026,14 +3993,16 @@ document.addEventListener("DOMContentLoaded", ()=> {
  const secondToggler = document.getElementById("menuDarkMode");
 const cardCloser = document.getElementById("ecoDataSidebar");
 
+
   // toggle menu card
   cardToggler.addEventListener("click", function(e) {
     e.stopPropagation();
     if(cardToggler){
-      cardCloser.classList.add("active");
-       document.body.classList.add("no-scroll");
+      cardCloser.classList.add("active" );
+      document.body.classList.add("no-scroll");
     } else{
       cardCloser.classList.remove("active");
+      document.body.classList.remove("no-scroll");
     }
   });
 
@@ -4046,6 +4015,7 @@ const cardCloser = document.getElementById("ecoDataSidebar");
       document.body.classList.add("no-scroll");
     } else {
       cardCloser.classList.remove("active");
+      document.body.classList.remove("no-scroll");
     }
   })
 
