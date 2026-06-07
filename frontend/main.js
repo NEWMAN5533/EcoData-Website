@@ -1309,7 +1309,9 @@ function loadActiveBadge(){
   const orders = 
   JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
 
-  const activeOrderCount = orders.filter(ord => ord.status === "pending" || "processing");
+  const activeOrderCount = orders.filter(ord => 
+    ord.status === "pending" || 
+    ord.status === "processing");
 
     const activeBag = document.getElementById("activeBadge");
 
@@ -1318,6 +1320,7 @@ function loadActiveBadge(){
     return;
   }
 
+ 
   activeBag.style.display = "flex";
 
   activeBag.textContent = activeOrderCount.length;
