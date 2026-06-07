@@ -1084,7 +1084,7 @@
 
     <div class=" packagesta">
       <small></small>
-    <p  id="teleAirtel">Telecel & AirtelTigo</p>
+    <p  id="teleAirtel">Telecel & <span class="tigoo">AirtelTigo</span></p>
     </div>
     </div>
   
@@ -3526,12 +3526,15 @@
     <div class="bottom-navbar" id="navIconDiv">
       <div class="btom-navIcon" onclick="window.location.href='index.html'">
         <div class="activeImg active" id="activeMtn">
+          <small id="activeBadge" class="nav-badge">0</small>
         <span class="material-icons ">home</span>
 
         </div>
         <small class="bottomIcon-textNav">Home</small>
+      
       </div>
 
+    
       
 
       <div class="btom-navIcon">
@@ -4002,7 +4005,6 @@ const cardCloser = document.getElementById("ecoDataSidebar");
       document.body.classList.add("no-scroll");
     } else{
       cardCloser.classList.remove("active");
-      document.body.classList.remove("no-scroll");
     }
   });
 
@@ -4015,7 +4017,6 @@ const cardCloser = document.getElementById("ecoDataSidebar");
       document.body.classList.add("no-scroll");
     } else {
       cardCloser.classList.remove("active");
-      document.body.classList.remove("no-scroll");
     }
   })
 
