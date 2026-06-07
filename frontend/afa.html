@@ -790,7 +790,7 @@
       </div>
 
       <div class="main-row-content">
-        <p id="afaEmpty-body" hidden>AfA Orders not loaded yet</p>
+        <p id="afaEmpty-body" hidden>No registered data yet</p>
         <div class="row-wrapper" id="afaRowWrapper">
           <!-- dynamic rows -->
         </div>
@@ -1296,10 +1296,10 @@ const cardCloser = document.getElementById("ecoDataSidebar");
   cardToggler.addEventListener("click", function(e) {
     e.stopPropagation();
     if(cardToggler){
-      cardCloser.classList.remove("active");
+      cardCloser.classList.add("active");
       document.body.classList.add("no-scroll");
     } else{
-      cardCloser.classList.add("active");
+      cardCloser.classList.remove("active");
     }
   });
 
