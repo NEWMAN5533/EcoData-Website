@@ -1,4 +1,4 @@
-// UPDATED AT 18th/MAY, 2026 [BACKUP MAIN.JS]
+// UPDATED AT 7th/JUNE, 2026 [BACKUP MAIN.JS]
 
 
 // --- Firebase Imports ---
@@ -273,8 +273,11 @@ document.addEventListener("click", () => {
    // BOTTOM NAVIGATION BAR (DISPLAY = NONE if())
   const bottomNavDiv = document.getElementById("navIconDiv");
 
+
+
+
   // ---------- BUY BUTTONS (NORMAL + GRID) ----------
-  document.querySelectorAll("#normalView .buy-btn, #gridView .buy-btn")
+  document.querySelectorAll("#normalView .buy-btn,  #gridView .buy-btn")
     .forEach(button => {
 
       button.addEventListener("click", () => {
@@ -1298,6 +1301,33 @@ const normalized = {
 }
 // handleNewOrder ends//
 
+// ===========================
+// FUNCTION LOAD ACTIVE BADGE
+// ==========================
+
+function loadActiveBadge(){
+  const orders = 
+  JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
+
+  const activeOrderCount = orders.filter(ord => ord.status === "pending" || "processing");
+
+    const activeBag = document.getElementById("activeBadge");
+
+  if(activeOrderCount.length === 0){
+    activeBag.style.display = "none";
+    return;
+  }
+
+  activeBag.style.display = "flex";
+
+  activeBag.textContent = activeOrderCount.length;
+}
+
+
+// ================================
+// FUNCTION LOAD ACTIVE BADGE ENDS
+// ================================
+
 
 
 // ---------- LIVE ORDERS PERSISTENCE ----------
@@ -1556,6 +1586,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // updatePendingOrders
   updatePendingCard();
+
+  // load nav badge
+  loadActiveBadge();
 });
 // handleNewOrders Dom ends//
 
