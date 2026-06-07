@@ -709,7 +709,7 @@ async function orderBundle(network, recipient, packageName, size, reference) {
       showSnackBar(`📱${size}GB Order Placed successfully!`, "success", 6000);
 
     
-    loadActiveBadge();
+    
    
 
     const returnedOrder = result.order?.order || result.order || result;
@@ -1385,6 +1385,7 @@ function saveLiveOrder(order) {
   );
 
   updatePendingCard();
+   loadActiveBadge();
 }
 
 // ends
