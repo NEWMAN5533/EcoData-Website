@@ -311,7 +311,7 @@ function updateCards(orders) {
   // =========================
   // BASIC TOTALS
   // =========================
-  const totalOrders = 894 +
+  const totalOrders = 896 +
     orders.length;
 
   const pendingOrders =
@@ -324,7 +324,7 @@ function updateCards(orders) {
       order.status === "processing"
     ).length;
 
-  const deliveredOrders = 894 +
+  const deliveredOrders = 896 +
     orders.filter(order =>
       order.status === "delivered"
     ).length;
