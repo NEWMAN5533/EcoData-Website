@@ -1280,6 +1280,10 @@ NEW BADGE ENDS
     color: rgb(3, 126, 134) !important;
   }
 
+  #gridView{
+    margin-top: 1.2rem !important;
+  }
+
   .dark-mode #gridView{
     border-top: 12px solid var(--thin-border) !important;
     margin-top: 1.2rem !important;
