@@ -42,6 +42,7 @@
   <link rel="stylesheet" href="styleGlobal2.css">
   <link rel="stylesheet" href="styleGlobal3.css">
   <link rel="stylesheet" href="styleGlobal4.css">
+  <link rel="stylesheet" href="afa.css">
 
 
 
@@ -767,7 +768,42 @@
   </div>
 </div>
 <!--AFA-UI-ENDS-->
+
+
+<section class="afaTable-container" id="afaHistoryTrack">
+ <section class="table-section">
+  <div class="table-title">
+    <p>AFA REGISTERED HISTORY</p>
+  </div>
+  <div class="content-wrapper">
+    <div class="table-scroll-area">
+      <!-- TABLE HEADER -->
+      <div class="table-header">
+        <span>Name</span>
+        <span>Phone</span>
+        <span>GhanaCard</span>
+        <span>Region</span>
+        <span>Amount</span>
+        <span>PaymentRef</span>        
+        <span>Date submitted</span>
+        <span>Status</span>
+      </div>
+
+      <div class="main-row-content">
+        <p id="afaEmpty-body" hidden>AfA Orders not loaded yet</p>
+        <div class="row-wrapper" id="afaRowWrapper">
+          <!-- dynamic rows -->
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
+ 
+
+</section>
+</section>
+
+
 
 
 
@@ -1260,9 +1296,10 @@ const cardCloser = document.getElementById("ecoDataSidebar");
   cardToggler.addEventListener("click", function(e) {
     e.stopPropagation();
     if(cardToggler){
-      cardCloser.classList.add("active");
-    } else{
       cardCloser.classList.remove("active");
+      document.body.classList.add("no-scroll");
+    } else{
+      cardCloser.classList.add("active");
     }
   });
 
@@ -1272,6 +1309,7 @@ const cardCloser = document.getElementById("ecoDataSidebar");
 
     if(secondToggler) {
       cardCloser.classList.add("active");
+      document.body.classList.add("no-scroll");
     } else {
       cardCloser.classList.remove("active");
     }
