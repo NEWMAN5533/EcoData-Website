@@ -1,6 +1,14 @@
+document.addEventListener("DOMContentLoaded", ()=>{
+const afaOrders = JSON.parse(localStorage.getItem("afaRequests")) || [];
+
+  // load table on page load
+  fillAfaTable(afaOrders);
+})
+
 // ==========================
 // AFA CONFIG
 // ==========================
+
 const AFA_PRICE_GHS = 20; // Make sure backend matches this
 const PAYSTACK_PUBLIC_KEY = "pk_live_635856447ee14b583349141b7271f64c9b969749";
 
@@ -204,7 +212,7 @@ function startAfaPayment(afaData) {
       hideLoader();
       setAfaLoading(true, "Finalizing...");
 
-      submitAfaRegistration({
+      submitpayloadistration({
         ...afaData,
         paymentReference: response.reference,
       });
@@ -221,23 +229,33 @@ function startAfaPayment(afaData) {
 
 
 function saveAFARequest(data) {
+
   const existing = 
   JSON.parse(localStorage.getItem("afaRequests")) || [];
 
+  
   existing.unshift({
     ...data,
-    status: "pending",
+    registrationId: data.registrationId,
+    status: "success",
+    amount: AFA_PRICE_GHS,
     createdAt: Date.now(),
   });
+
+  if(existing.length > 50){
+    existing.length = 50;
+  }
   
   localStorage.setItem("afaRequests", JSON.stringify(existing));
+
+  fillAfaTable(existing);
 }
 
 
 // ==========================
 // SERVER SUBMIT
 // ==========================
-async function submitAfaRegistration(payload) {
+async function submitpayloadistration(payload) {
   try {
     // ✅ ONLY send what backend expects
     const apiPayload = {
@@ -342,6 +360,72 @@ function showAfaReceipt(payload, serverData) {
 }
 
 
+
+
+// =============================
+// LOAD DETAIL TO AFA TABLE
+// =============================
+
+
+   function fillAfaTable(payload){
+
+  // parse registered orders 
+   const afaOrders = JSON.parse(localStorage.getItem("afaRequests")) || [];
+  
+     payload = payload || afaOrders;
+
+
+   const afaRowWrap = document.getElementById("afaRowWrapper");
+   const afaTableContainer = document.getElementById("afaHistoryTrack");
+   const afaEmptyReg = document.getElementById('afaEmpty-body');
+
+  afaRowWrap.innerHTML = "";
+
+   if(!payload || payload.length === 0 ){
+    afaEmptyReg.hidden = false;
+    afaTableContainer.hidden = true;
+
+    return;
+   }
+
+   afaEmptyReg.hidden = true;
+   afaTableContainer.hidden = false;
+
+   // create dynamic row
+
+   payload.forEach(reg => {
+
+    const afaRow = document.createElement("div");
+
+    afaRow.className = "afaRow-reg";
+
+    const date = reg.createdAt
+    ? new Date(reg.createdAt).toLocaleString() : "N/A";
+
+    afaRow.innerHTML = `
+    <small>${reg.fullName || "-"}</small>
+    <small>${reg.phone || "-"}</small>
+    <small>${reg.ghanaCard || "-"}</small>
+    <small>${reg.region || "-"}</small>
+    <small>${reg.amount || "GH₵ 20.00"} </small>
+     <small>${reg.paymentReference}</small>
+     <small>${date}</small>
+
+   <small class='status-success'>
+   ${reg.status || "success"}
+   </small>
+   `
+
+    afaRowWrap.appendChild(afaRow);
+   })
+   }
+   
+
+
+
+// =============================
+// LOAD DETAIL TO AFA TABLE ENDS
+// // ==========================
 
 
 
