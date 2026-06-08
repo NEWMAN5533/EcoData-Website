@@ -179,8 +179,10 @@
 }
 
 .dark-mode .content-wrapper .table-header {
+  background: var(--darkMode-bg-cl);
   color: var(--text-cl-2);
   border-bottom: 1px solid rgba(95, 94, 94, 0.411);
+  z-index: 2;
 }
 
 .content-wrapper .main-row-content {
@@ -231,6 +233,16 @@
 
 .dark-mode #liveOrderRows .live-row{
   border-bottom: 1px solid rgb(78, 78, 78);
+}
+
+ .main-row-content #liveOrderRows .live-row span{
+font-size: .83rem;
+color: rgb(150, 152, 155);
+}
+
+.dark-mode .main-row-content #liveOrderRows .live-row span{
+font-size: .83rem;
+color: rgb(58, 59, 59);
 }
 
 
