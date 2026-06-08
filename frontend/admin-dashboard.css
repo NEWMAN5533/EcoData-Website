@@ -548,7 +548,7 @@ BUNDLE SECTION
   justify-content: center;
   justify-items: center;
   align-items: center;
-  margin-bottom: 5rem;
+  margin-bottom: 1rem;
 }
 
 
@@ -1567,6 +1567,10 @@ BUNDLE SECTION
   margin: 0 !important;
 }
 
+.main-container .first-container{
+  margin-bottom: 5rem !important;
+}
+
 
 
 .profit-board .profit-box{
@@ -1615,6 +1619,7 @@ BUNDLE SECTION
 @media (min-width: 1024px) {
   /***display none div****/
   .sidebar-phone,
+  .bottom-navbar,
   .right-sideNavbar img{
     display: none !important;
 
@@ -1625,6 +1630,7 @@ BUNDLE SECTION
 @media (min-width: 1366px) {
   /***display none div****/
   .sidebar-phone,
+  .bottom-navbar,
   .right-sideNavbar img{
     display: none !important;
   }
