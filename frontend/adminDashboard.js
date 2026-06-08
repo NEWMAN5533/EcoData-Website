@@ -26,6 +26,27 @@ window.FIRESTORE = db;
 
 console.log("🔥 Firebase initialized and Firestore ready!");
 
+
+// UPDATED ADMIN DASHBOARD JS
+
+// =========================
+// FIREBASE IMPORTS
+// =========================
+import {
+  collection,
+  onSnapshot,
+  updateDoc,
+  query as firestoreQuery,
+  doc,
+  orderBy,
+} from
+"https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+
+
+
+
+
 const lapOutBtn = document.getElementById("lapOut");
 const logOutBtn = document.getElementById("logOut");
 
@@ -54,23 +75,6 @@ logOutBtn.addEventListener("click", async() => {
     }
   }
 })
-
-
-
-// UPDATED ADMIN DASHBOARD JS
-
-// =========================
-// FIREBASE IMPORTS
-// =========================
-import {
-  collection,
-  onSnapshot,
-  updateDoc,
-  query as firestoreQuery,
-  doc,
-  orderBy,
-} from
-"https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
 
 
@@ -156,13 +160,13 @@ function renderOrders(orders) {
 
   if (!orders.length) {
 
-    emptyBody.hidden = false;
+    emptyBody.style.display = "flex";
 
     return;
 
   }
 
-  emptyBody.hidden = true;
+  emptyBody.style.display = "none";
 
   orders.forEach(order => {
 
@@ -311,7 +315,7 @@ function updateCards(orders) {
   // =========================
   // BASIC TOTALS
   // =========================
-  const totalOrders = 897 +
+  const totalOrders = 894 +
     orders.length;
 
   const pendingOrders =
@@ -324,7 +328,7 @@ function updateCards(orders) {
       order.status === "processing"
     ).length;
 
-  const deliveredOrders = 897 +
+  const deliveredOrders = 894 +
     orders.filter(order =>
       order.status === "delivered"
     ).length;
