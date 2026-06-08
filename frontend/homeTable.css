@@ -235,15 +235,7 @@
   border-bottom: 1px solid rgb(78, 78, 78);
 }
 
- .main-row-content #liveOrderRows .live-row span{
-font-size: .83rem;
-color: rgb(150, 152, 155);
-}
 
-.dark-mode .main-row-content #liveOrderRows .live-row span{
-font-size: .83rem;
-color: rgb(58, 59, 59);
-}
 
 
 
