@@ -163,7 +163,7 @@
   /* sticky top so it stays visible while scrolling vertically */
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 9;
 
   /* Remove position: absolute — it was breaking x-axis sync */
   color: rgb(54, 66, 65);
@@ -182,7 +182,7 @@
   background: var(--darkMode-bg-cl);
   color: var(--text-cl-2);
   border-bottom: 1px solid rgba(95, 94, 94, 0.411);
-  z-index: 2;
+
 }
 
 .content-wrapper .main-row-content {
