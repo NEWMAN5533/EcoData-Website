@@ -382,13 +382,13 @@ function showAfaReceipt(payload, serverData) {
   afaRowWrap.innerHTML = "";
 
    if(!payload || payload.length === 0 ){
-    afaEmptyReg.hidden = false;
+    afaEmptyReg.style.display = "none";
     afaTableContainer.hidden = true;
 
     return;
    }
 
-   afaEmptyReg.hidden = true;
+   afaEmptyReg.style.display = "flex";
    afaTableContainer.hidden = false;
 
    // create dynamic row
