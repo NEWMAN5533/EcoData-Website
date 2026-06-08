@@ -1412,6 +1412,10 @@ BUNDLE SECTION
   .card-bottom-left h1{
   font-size: .8rem !important;
 }
+
+.main-container .first-container{
+  margin-bottom: 65rem !important;
+}
 }
 
 
@@ -1472,6 +1476,10 @@ BUNDLE SECTION
   grid-template-columns: repeat(1, 1fr) !important;
   width: 100%;
   max-width: 96% !important;
+}
+
+.main-container .first-container{
+  margin-bottom: 65rem !important;
 }
 
 
@@ -1568,7 +1576,7 @@ BUNDLE SECTION
 }
 
 .main-container .first-container{
-  margin-bottom: 5rem !important;
+  margin-bottom: 65rem !important;
 }
 
 
