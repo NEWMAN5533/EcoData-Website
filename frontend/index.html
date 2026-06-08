@@ -42,6 +42,7 @@
   <link rel="stylesheet" href="styleGlobal4.css">
   <link rel="stylesheet" href="styleSkeletonUi.css">
   <link rel="stylesheet" href="homePage.css">
+  <link rel="stylesheet" href="homeTable.css">
 
   <!---new bundle card style----->
   <link rel="stylesheet" href="newCardStyle.css">
@@ -957,9 +958,67 @@
   <!---ends-->
 
 
+
+
+ <section class="table-section">
+   <!-- Orders Table Skeleton -->  
+    <div id="sk-OrderTable" class="sk-table" style="display: none;">  
+    
+      <div class="sk-table-row">  
+        <span class="sk" style="flex:1;height:12px;"></span>  
+        <span class="sk" style="flex:1;height:12px;"></span>  
+        <span class="sk" style="flex:1;height:12px;"></span>  
+        <span class="sk" style="flex:1;height:12px;"></span>  
+      </div>  
+      <div class="sk-table-row">  
+        <span class="sk" style="width: 94%;height:12px;"></span>  
+        <span class="sk" style="flex:1;height:12px;"></span>  
+        <span class="sk" style="width: 94%;height:12px;"></span>  
+        <span class="sk" style="width: 94%;height:12px;"></span>  
+      </div>  
+      <div class="sk-table-row">  
+        <span class="sk" style="flex:1;height:12px;"></span>  
+        <span class="sk" style="flex:1;height:12px;"></span>  
+        <span class="sk" style="flex:1;height:12px;"></span>  
+        <span class="sk" style="flex:1;height:12px;"></span>  
+      </div>  
+    </div>  
+
+
+
+  <div class="table-title">
+    <p>Orders History</p>
+  </div>
+  <div class="content-wrapper">
+    <div class="table-scroll-area">
+      <!-- TABLE HEADER -->
+      <div class="table-header">
+        <span>Order ID</span>
+        <span>Size</span>
+        <span>Recipient</span>
+        <span>Status</span>
+        <span>Date Submitted</span>
+        <span>Paid?</span>
+    
+      </div>
+
+      <div class="main-row-content">
+        <div class="row-wrapper" id="liveOrderRows">
+          <p id="empty-body" hidden>No recent orders yet</p>
+          <!-- dynamic rows -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
   <!---LIVE ORDERS TABLE-->
 
-  <div class="live-order-wrp">
+  <div class="live-order-wrp" style="display: none !important;">
       <!-- Orders Table Skeleton -->  
     <div id="sk-OrderTable" class="sk-table" style="display: none;">  
     
@@ -995,9 +1054,11 @@
       <!-- TABLE HEADER (FIXED) -->
       <div class="live-order-header">
         <span>Order ID</span>
-        <span>Bundle</span>
+        <span>Size</span>
         <span>Recipient</span>
         <span>Status</span>
+        <span>Paid?</span>
+        <span>Date Submitted</span>
       </div>
 
       <div id="liveOrderCard" class="live-order-card">
