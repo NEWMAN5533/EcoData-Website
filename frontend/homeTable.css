@@ -154,6 +154,7 @@
 .content-wrapper .table-header {
   /* Fixed column widths — same as before */
   display: grid;
+  background: var(--primary-cl);
   align-items: center;
   justify-items: center;
   align-self: center;
@@ -179,7 +180,7 @@
 }
 
 .dark-mode .content-wrapper .table-header {
-  background: var(--darkMode-bg-cl);
+  background: var(--darkMode-bg-cl) !important;
   color: var(--text-cl-2);
   border-bottom: 1px solid rgba(95, 94, 94, 0.411);
 
