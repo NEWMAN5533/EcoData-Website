@@ -42,6 +42,7 @@
   <link rel="stylesheet" href="styleGlobal3.css">
   <link rel="stylesheet" href="styleGlobal4.css">
   <link rel="stylesheet" href="styleSkeletonUi.css">
+  <link rel="stylesheet" href="homeTable.css">
 
   <!-----NEW UPDATE ON GRID CARDS---->
   <link rel="stylesheet" href="newCardStyle.css">
@@ -1037,11 +1038,66 @@ width: 50%;
 
 
 
+ <section class="table-section">
+   <!-- Orders Table Skeleton -->  
+    <div id="sk-OrderTable" class="sk-table" style="display: none;">  
+    
+      <div class="sk-table-row">  
+        <span class="sk" style="flex:1;height:12px;"></span>  
+        <span class="sk" style="flex:1;height:12px;"></span>  
+        <span class="sk" style="flex:1;height:12px;"></span>  
+        <span class="sk" style="flex:1;height:12px;"></span>  
+      </div>  
+      <div class="sk-table-row">  
+        <span class="sk" style="width: 94%;height:12px;"></span>  
+        <span class="sk" style="flex:1;height:12px;"></span>  
+        <span class="sk" style="width: 94%;height:12px;"></span>  
+        <span class="sk" style="width: 94%;height:12px;"></span>  
+      </div>  
+      <div class="sk-table-row">  
+        <span class="sk" style="flex:1;height:12px;"></span>  
+        <span class="sk" style="flex:1;height:12px;"></span>  
+        <span class="sk" style="flex:1;height:12px;"></span>  
+        <span class="sk" style="flex:1;height:12px;"></span>  
+      </div>  
+    </div>  
+
+
+
+  <div class="table-title">
+    <p>Orders History</p>
+  </div>
+  <div class="content-wrapper">
+    <div class="table-scroll-area">
+      <!-- TABLE HEADER -->
+      <div class="table-header">
+        <span>Order ID</span>
+        <span>Size</span>
+        <span>Recipient</span>
+        <span>Status</span>
+        <span>Date Submitted</span>
+        <span>Paid?</span>
+    
+      </div>
+
+      <div class="main-row-content">
+        <div class="row-wrapper" id="liveOrderRows">
+          <p id="empty-body" hidden>No recent orders yet</p>
+          <!-- dynamic rows -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
 
 
 <!-- live order section -->
 
-<div class="live-order-wrp">
+<div class="live-order-wrp" style="display: none !important">
   <div class="top-var">
     <h4>Orders History</h4>
     
