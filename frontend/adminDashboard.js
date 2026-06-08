@@ -150,6 +150,8 @@ async function loadOrderRealTime() {
 // =========================
 function renderOrders(orders) {
 
+ 
+
   const rowWrapper =
     document.getElementById("rowWrapper");
 
@@ -248,7 +250,11 @@ function renderOrders(orders) {
 
   });
 
+
+
 }
+
+
 
 
 
@@ -366,6 +372,10 @@ const todayOrders = orders.filter(order => {
   return orderDate >= todayStart;
 
 }).length;
+
+
+// Update bundles badge
+const activeBadgeCount = document.getElementById("activeBadge").textContent = todayOrders;
 
 // =========================
 // WEEKLY ORDERS

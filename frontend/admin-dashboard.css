@@ -548,7 +548,7 @@ BUNDLE SECTION
   justify-content: center;
   justify-items: center;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 5rem;
 }
 
 
@@ -1221,6 +1221,7 @@ BUNDLE SECTION
   justify-content: space-between;
   border-right: 1px solid var(--thin-border);
   transition: .5s ease;
+  z-index: 999999999;
 }
 
 .sidebar-phone.active{
