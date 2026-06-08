@@ -1,4 +1,4 @@
-// UPDATED AT 7th/JUNE, 2026 [BACKUP MAIN.JS]
+// UPDATED AT 8th/JUNE, 2026 [BACKUP MAIN.JS]
 
 
 // --- Firebase Imports ---
@@ -707,10 +707,9 @@ async function orderBundle(network, recipient, packageName, size, reference) {
 
     playSuccessSound();
       showSnackBar(`📱${size}GB Order Placed successfully!`, "success", 6000);
-
-    
-    
    
+
+ 
 
     const returnedOrder = result.order?.order || result.order || result;
 
@@ -1171,6 +1170,13 @@ function renderLiveOrderRow(order) {
   const empty = tableBody.querySelector(".empty-state");
   if (empty) empty.remove();
 
+   const date =
+      order.createdAt
+        ? new Date(order.createdAt).toLocaleString()
+        : "N/A";
+
+
+
   let row = tableBody.querySelector(`[data-id="${order.orderId}"]`);
 
   if (!row) {
@@ -1189,6 +1195,9 @@ function renderLiveOrderRow(order) {
         ${order.status}
       </span>
     </span>
+    <span>${date}</span>
+    <span>Yes</span>
+    
   `;
 }
 
@@ -1385,7 +1394,7 @@ function saveLiveOrder(order) {
   );
 
   updatePendingCard();
-   loadActiveBadge();
+  loadActiveBadge();
 }
 
 // ends
