@@ -1,0 +1,244 @@
+
+:root {
+  --bg-cl: #FFF;
+  --primary-cl: #fff;
+  --secondary-cl: rgb(50, 50, 190);
+  --dark-cl: #0a0a0a;
+  --ascent-cl: rgb(158, 97, 209);
+  --background-cl: #e6e8ce;
+  --card-full-bg-cl: rgb(255, 217, 0);
+  --card-full-tele-bg-cl: rgb(221, 19, 19);
+  --card-full-airtel-bg-cl:  rgb(6, 6, 231);
+  --border-cl-2: rgba(66, 66, 26, 0.226);
+  --mtn-btn: rgb(193, 196, 19);
+  --telecel-btn: rgb(180, 57, 19);
+  --airteltigo-btn: rgb(28, 46, 119);
+
+  /*====NEW===ROOT====*/
+  /*====NEW===ROOT====*/
+  --darkMode-bg-cl: rgb(24, 29, 36) !important;
+  --background-cl-1: rgb(29, 36, 41);
+  --background-cl-2: rgb(29, 36, 41);
+  --background-cl-2: rgb(29, 36, 41);
+
+
+  /***
+  NEW ROOT
+  ***/
+  --btn-bg-cl: rgb(250, 126, 9);
+  --user-panel-bg: rgba(42, 42, 194, 0.938);
+  --clock-bg-cl: rgba(252, 175, 11, 0.199);
+  --clock-bg-cl-1: rgb(2, 61, 52);
+
+  /***
+  DARK MODE COLORS
+  ***/
+  --darkMode-bg-cl: rgb(24, 29, 36) !important;
+  --welcome-card-bg-2:  #141c27 !important;
+  --welcome-card-bg:  #0e141b !important;
+  --welcome-card-bg-3: rgba(77, 77, 77, 0.89);
+  --welcome-card-border: rgb(74, 88, 94);
+  --thin-border: rgb(35, 48, 49);
+  --text-cl: rgb(145, 168, 164);
+  --text-cl-2: rgb(210, 216, 216);
+  --text-cl-3: rgb(139, 141, 141);
+
+  /**
+  BORDER SOLID COLORS
+  **/
+  --thin-border-1:  #0d6d5a;
+  --thin-border-2:  #830616;
+  --thin-border-3:  #b97207;
+  --thin-border-4:  #036aa7;
+  --thin-border-5:  #bba907;
+  --thin-border-6:   rgb(17, 2, 31);
+  --thin-border-7:  rgb(1, 11, 39);
+
+  /***
+  CARD BG
+  ***/
+  --card-mtn-bg:  #faba5ad0;
+  --card-tel-bg:  #fa537dd0;
+  --card-tigo-bg:  #6cbff7cb;
+}
+
+
+
+.table-section{
+  width: 100%;
+  max-width: 94%;
+  padding: .2rem;
+  margin-top: 1.2rem;
+  margin-bottom: 1rem !important;
+  height: 30rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  gap: .2rem;
+  background:  white;
+  backdrop-filter: blur(18px);
+  border-end-end-radius: .5rem;
+  border-end-start-radius: .5rem;
+  border-start-start-radius: .5rem;
+  border-start-end-radius: .5rem;
+  border: 1px solid rgb(219, 219, 219);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  overflow: hidden;
+}
+
+.dark-mode .table-section{
+  background: var(--darkMode-cl) !important;
+  border: 1px solid var(--thin-border);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+}
+
+.table-section .table-title{
+  width: 100%;
+  height: 10%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.89), rgba(241, 241, 241, 0.89)) ;
+  backdrop-filter: blur(18px);
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  position: relative;
+  padding: 1rem;
+  border: 1px solid  rgb(209, 209, 209);
+  box-shadow: 0 2px 6px  rgba(0,0,0,0.1);
+  border-radius: .2rem;
+}
+
+.dark-mode .table-section .table-title{
+  background: var(--darkMode-bg-cl);
+  border: 1px solid var(--thin-border) !important;
+}
+
+.table-title p{
+  font-size: .85rem;
+  font-family: system ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: rgb(77, 74, 73);
+  font-weight: 600;
+}
+
+.dark-mode .table-title p{
+  color: rgba(252, 239, 216, 0.747);
+}
+
+.table-section .content-wrapper {
+  width: 100%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border: 1px solid rgb(209, 209, 209);
+  border-radius: .2rem;
+  /* Remove overflow from here — move it to table-scroll-area */
+  overflow: hidden;
+}
+
+.dark-mode .table-section .content-wrapper{
+  border: 1px solid var(--thin-border);
+}
+
+/* NEW: this single div handles ALL scrolling in both axes */
+.content-wrapper .table-scroll-area {
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;   /* horizontal scroll */
+  overflow-y: auto;   /* vertical scroll */
+  white-space: nowrap;
+}
+
+.content-wrapper .table-header {
+  /* Fixed column widths — same as before */
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  align-self: center;
+  grid-template-columns: 
+    70px 110px 90px 120px 120px 120px ;
+
+  /* sticky top so it stays visible while scrolling vertically */
+  position: sticky;
+  top: 0;
+  z-index: 1;
+
+  /* Remove position: absolute — it was breaking x-axis sync */
+  color: rgb(54, 66, 65);
+  font-size: .8rem;
+  font-weight: 600;
+  border-bottom: 1px solid rgb(204, 202, 202);/* needs a background when sticky */
+  font-family: system-ui, sans-serif;
+  padding: .5rem 0;
+  margin-left: .1rem;
+  width: 100%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  min-width: max-content; /* prevents collapsing on narrow viewports */
+}
+
+.dark-mode .content-wrapper .table-header {
+  color: var(--text-cl-2);
+  border-bottom: 1px solid rgba(95, 94, 94, 0.411);
+}
+
+.content-wrapper .main-row-content {
+  width: 100%;
+  display: grid;
+  justify-items: center;
+  padding: 0 .5rem;
+  align-items: start;
+  grid-template-columns: 
+    70px 110px 90px 110px  120px 120px ;
+  position: relative;
+  min-width: max-content; /* ensures rows stretch with header */
+}
+
+
+
+ .row-wrapper .empty-state{
+  position: fixed;
+  color: rgb(145, 141, 141);
+  transform: translateX(-50%) !important;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) !important;
+  font-size: .73rem;
+  font-weight: 600;
+}
+
+
+#liveOrderRows {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  /* Remove position: absolute — it was collapsing the height */
+}
+
+#liveOrderRows .live-row{
+ justify-items: center;
+ align-items: center;
+ min-width: max-content;
+ width: 100%;
+ height: 2.2rem;
+ border-bottom: 1px solid rgb(100, 99, 99);
+ grid-template-columns: 70px 110px 90px 120px 120px 120px ;
+ display: grid;
+}
+
+.dark-mode #liveOrderRows .live-row{
+  border-bottom:  var(--thin-border);
+}
+
+.live-row small{
+  font-size: .81rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 600;
+  color: rgb(173, 173, 173);
+}
+
+
+
