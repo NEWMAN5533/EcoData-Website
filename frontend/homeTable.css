@@ -92,7 +92,7 @@
 .dark-mode .table-section{
   background: var(--darkMode-cl) !important;
   border: 1px solid var(--thin-border);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.6);
 }
 
 .table-section .table-title{
@@ -111,7 +111,7 @@
 }
 
 .dark-mode .table-section .table-title{
-  background: var(--darkMode-bg-cl);
+  background: var(--background-cl-2);
   border: 1px solid var(--thin-border) !important;
 }
 
