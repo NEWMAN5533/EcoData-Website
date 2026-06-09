@@ -182,7 +182,7 @@ function renderOrders(orders) {
     const date =
       order.createdAt?.toDate
         ? (() =>{
-          const d = new Date(order.createdAt?.toDate);
+          const d = order.createdAt.toDate();
           const datePart =
           d.toLocaleDateString("en-US", {
             month: "short",
