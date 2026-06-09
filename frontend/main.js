@@ -1170,11 +1170,31 @@ function renderLiveOrderRow(order) {
   const empty = tableBody.querySelector(".empty-state");
   if (empty) empty.remove();
 
-   const date =
-      order.createdAt
-        ? new Date(order.createdAt).toLocaleString()
-        : "N/A";
 
+  //structure status updatedDated
+    const date =
+      order.createdAt
+        ? (() =>{
+          const d = new Date(order.createdAt);
+          const datePart =
+          d.toLocaleDateString("en-US", {
+            month: "short",
+            day: "2-digit",
+            year: "numeric"
+          });
+
+          const timePart =
+          d.toLocaleTimeString("en-US", {
+            hour: "numeric",
+            minute: "2-digit",
+            hour12: true
+          }).toUpperCase();
+
+          return `${datePart} ${timePart}`;
+        })() : "N/A";
+
+
+    // structure status updatedTime
     const update = 
     order.updatedAt 
         ? new Date(order.updatedAt).toLocaleTimeString([],{
