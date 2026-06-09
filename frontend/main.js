@@ -1,4 +1,4 @@
-// UPDATED AT 8th/JUNE, 2026 [BACKUP MAIN.JS]
+// UPDATED AT 9th/JUNE, 2026 [BACKUP MAIN.JS]
 
 
 // --- Firebase Imports ---
@@ -1182,6 +1182,7 @@ function renderLiveOrderRow(order) {
           minute: "2-digit",
           hour12: true,
         })
+        .toUpperCase()
         : "N/A";
 
 
