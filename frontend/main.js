@@ -1175,6 +1175,11 @@ function renderLiveOrderRow(order) {
         ? new Date(order.createdAt).toLocaleString()
         : "N/A";
 
+    const update = 
+    order.updatedAt 
+        ? new Date(order.updatedAt).toLocaleString()
+        : "N/A";
+
 
 
   let row = tableBody.querySelector(`[data-id="${order.orderId}"]`);
@@ -1196,8 +1201,8 @@ function renderLiveOrderRow(order) {
       </span>
     </span>
     <span>${date}</span>
+    <span>${update}</span>
     <span>Yes</span>
-    
   `;
 }
 
