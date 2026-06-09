@@ -1232,10 +1232,8 @@ function renderLiveOrderRow(order) {
       </span>
     </span>
     <span>${date}</span>
-    <span>${update}</span>
     <span>Yes</span>
-   
-
+    <span>${update}</span>
   `;
 }
 
