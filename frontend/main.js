@@ -1177,7 +1177,10 @@ function renderLiveOrderRow(order) {
 
     const update = 
     order.updatedAt 
-        ? new Date(order.updatedAt).toLocaleString()
+        ? new Date(order.updatedAt).toLocaleTimeString([],{
+          hour: "2-digit",
+          minute: "2-digit"
+        })
         : "N/A";
 
 
