@@ -177,13 +177,44 @@ function renderOrders(orders) {
 
     row.className = "live-body-row";
 
+
+    // FETCH ORDER SUBMITTED DATE
     const date =
       order.createdAt?.toDate
-        ? order.createdAt.toDate().toLocaleString()
-        : "N/A";
-           
+        ? (() =>{
+          const d = new Date(order.createdAt?.toDate);
+          const datePart =
+          d.toLocaleDateString("en-US", {
+            month: "short",
+            day: "2-digit",
+            year: "numeric"
+          });
+
+          const timePart =
+          d.toLocaleTimeString("en-US", {
+            hour: "numeric",
+            minute: "2-digit",
+            hour12: true
+          }).toUpperCase();
+
+          return `${datePart} ${timePart}`;
+        })() : "N/A";
+
+
+      // FETCH ORDER STATUS UPDATED TIME
         const statusUpdatedAt = 
-        order.updatedAt?.toDate ? order.updatedAt.toDate().toLocaleTimeString() : "-";
+        order.updatedAt?.toDate 
+        ? order.updatedAt
+        .toDate()
+        .toLocaleTimeString("en-US",
+          {
+            hour: "numeric",
+            minute: "2-digit",
+            hour12: true
+          })
+          .toUpperCase() 
+        : "N/A";
+
 
         row.innerHTML = `
 
