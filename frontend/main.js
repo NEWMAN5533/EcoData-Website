@@ -1158,39 +1158,6 @@ function loadLiveOrders() {
   }
 
   
-  //structure status updatedDated
-    const date =
-      order.createdAt
-        ? (() =>{
-          const d = new Date(order.createdAt);
-          const datePart =
-          d.toLocaleDateString("en-US", {
-            month: "short",
-            day: "2-digit",
-            year: "numeric"
-          });
-
-          const timePart =
-          d.toLocaleTimeString("en-US", {
-            hour: "numeric",
-            minute: "2-digit",
-            hour12: true
-          }).toUpperCase();
-
-          return `${datePart} ${timePart}`;
-        })() : "N/A";
-
-
-    // structure status updatedTime
-    const update = 
-    order.updatedAt 
-        ? new Date(order.updatedAt).toLocaleTimeString([],{
-          hour: "numeric",
-          minute: "2-digit",
-          hour12: true,
-        })
-        .toUpperCase()
-        : "N/A";
 
 
 }
@@ -1242,6 +1209,9 @@ function renderLiveOrderRow(order) {
         .toUpperCase()
         : "N/A";
 
+ const orderPrice = JSON.parse(localStorage.getItem('guestOrders')) || [];
+ const price = orderPrice.amount || 0;
+
 
 
   let row = tableBody.querySelector(`[data-id="${order.orderId}"]`);
@@ -1265,9 +1235,10 @@ function renderLiveOrderRow(order) {
     <span>${date}</span>
     <span>${update}</span>
     <span>Yes</span>
+    <span>${(Number(price) || 0).toFixed(2)}</span>
+
   `;
 }
-
 
 
 // ---------- LIVE ORDER CARD ---------
@@ -1670,6 +1641,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // load nav badge
   loadActiveBadge();
+
+
 });
 // handleNewOrders Dom ends//
 
