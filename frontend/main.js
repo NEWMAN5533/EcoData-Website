@@ -1209,8 +1209,7 @@ function renderLiveOrderRow(order) {
         .toUpperCase()
         : "N/A";
 
- const orderPrice = JSON.parse(localStorage.getItem('guestOrders')) || [];
- const price = orderPrice.amount || 0;
+
 
 
 
@@ -1235,7 +1234,7 @@ function renderLiveOrderRow(order) {
     <span>${date}</span>
     <span>${update}</span>
     <span>Yes</span>
-    <span>${(Number(price) || 0).toFixed(2)}</span>
+   
 
   `;
 }
