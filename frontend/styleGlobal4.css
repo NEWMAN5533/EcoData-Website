@@ -1266,7 +1266,7 @@ NEW BADGE ENDS
           display: flex;
           justify-content: center;
           align-items: center;
-          background: rgb(7, 184, 125);
+          background: rgb(7, 184, 140);
           text-align: center;
           border-radius: 50%;
           color: rgb(44, 44, 44);
@@ -1276,7 +1276,7 @@ NEW BADGE ENDS
         }
 
         .dark-mode  .btom-navIcon .nav-badge{
-          background:  rgb(7, 184, 31) !important;
+          background:  rgba(7, 184, 146, 0.911) !important;
           color: rgb(44, 44, 44);
         }
    
