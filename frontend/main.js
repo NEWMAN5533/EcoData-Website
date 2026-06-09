@@ -1156,6 +1156,43 @@ function loadLiveOrders() {
   if (!orders.length) {
     tableBody.innerHTML = `<p class="empty-state">No recent orders yet</p>`;
   }
+
+  
+  //structure status updatedDated
+    const date =
+      order.createdAt
+        ? (() =>{
+          const d = new Date(order.createdAt);
+          const datePart =
+          d.toLocaleDateString("en-US", {
+            month: "short",
+            day: "2-digit",
+            year: "numeric"
+          });
+
+          const timePart =
+          d.toLocaleTimeString("en-US", {
+            hour: "numeric",
+            minute: "2-digit",
+            hour12: true
+          }).toUpperCase();
+
+          return `${datePart} ${timePart}`;
+        })() : "N/A";
+
+
+    // structure status updatedTime
+    const update = 
+    order.updatedAt 
+        ? new Date(order.updatedAt).toLocaleTimeString([],{
+          hour: "numeric",
+          minute: "2-digit",
+          hour12: true,
+        })
+        .toUpperCase()
+        : "N/A";
+
+
 }
 
 
