@@ -231,93 +231,6 @@ MAIN CONTAINER
 
 
 
-/****
-AFA REGISTRATION
-*****/
-.afa-receipt {
-  position: fixed;
-  inset: 0;
-  background: none;
-  align-items: center;
-  justify-content: center;
-  top: calc(100vh - 80vh) !important;
-  left: calc(100vw - 90vw) !important;
-  z-index: 999;
-}
-
-.afa-receipt {
-  display:  none ;
-}
-
-.receipt-card {
-  background: #fff;
-  width: 90%;
-  max-width: 420px;
-  border-radius: 14px;
-  padding: 20px;
-  animation: slideUp .35s ease;
-  border: 2px solid rgb(6, 24, 29);
-}
-
-.receipt-card h3{
-  text-align: center;
-  margin-bottom: 15px;
-}
-
-.receipt-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 0;
-  border-bottom: 1px dashed #ddd;
-  font-size: 14px;
-}
-
-.receipt-actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 15px;
-}
-
-.receipt-actions button {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;;
-  user-select: none;
-}
-
-.receipt-actions button:first-child {
-  background: #111;
-  color: #fff;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-
-.receipt-actions button:last-child{
-  background: #eee;
-}
-
-
-@keyframes slideUp {
-  from {
-    transform: translateY(40px); opacity: 0;
-  }
-  to {
-    transform: translateY(0); opacity: 1;
-  }
-}
-/****
-AFA RECEIPT ENDS
-****/
-
-      
-
 
 
 
@@ -567,19 +480,21 @@ BOTTOM NAVIGATION BAR STYLE CSS
       gap: .3rem;
       z-index: 999999;
       display: flex;
+      backdrop-filter: blur(18px);
       align-items: center;
       justify-content: space-between;
       padding: .1rem;
-      background: rgb(241, 241, 241);
+      background: rgba(156, 155, 155, 0.075) !important;
+      backdrop-filter: blur(18px);
       border-start-start-radius: 1.7rem;
       border-start-end-radius: 1.7rem;
       border: 1px solid var(--primary-cl);
-      overflow-x: hidden;
       box-shadow: 0 10px 40px rgba(26, 25, 25, 0.99);
     }
 
     .dark-mode .bottom-navbar{
-      background: var(--darkMode-bg-cl);
+      background:   rgba(88, 88, 88, 0.075) !important;
+      backdrop-filter: blur(18px);
       border: 1px solid var(--thin-border) !important;
       box-shadow: 0 10px 40px rgba(0,0,0,0.99);
     }
@@ -618,15 +533,15 @@ BOTTOM NAVIGATION BAR STYLE CSS
     }
 
     .activeImg.active{
-    background: rgb(240, 240, 240);
+    background: rgba(240, 240, 240, 0.363);
     box-shadow: 0 2px 6px rgba(68, 68, 68, 0.3);
-    border: 1px solid var(--primary-cl);
+    border: 1px solid  rgba(240, 240, 240, 0.363);
     }
 
     .dark-mode .activeImg.active{
-      background: rgba(46, 87, 61, 0.747);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      border: 1px solid var(--thin-border);
+      background: rgba(63, 65, 64, 0.747);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      border: 1px solid rgba(62, 63, 63, 0.747);
     }
 
     /***
@@ -634,15 +549,15 @@ BOTTOM NAVIGATION BAR STYLE CSS
     ***/
       .activeImg.activeMin{
     padding: .19rem .3rem;
-     background: rgb(240, 240, 240);
+    background: rgba(240, 240, 240, 0.363);
     box-shadow: 0 2px 6px rgba(68, 68, 68, 0.3);
-    border: 1px solid var(--primary-cl);
+    border: 1px solid  rgba(240, 240, 240, 0.363);
     }
 
     .dark-mode .activeImg.activeImg.activeMin{
-      background: rgba(46, 87, 61, 0.747);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      border: 1px solid var(--thin-border);
+       background: rgba(63, 65, 64, 0.747);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      border: 1px solid rgba(62, 63, 63, 0.747);
     }
 
  /***
@@ -655,14 +570,14 @@ BOTTOM NAVIGATION BAR STYLE CSS
     ***/
     .activeImg.activeMin{
     padding: .19rem .3rem;
-    background: rgb(240, 240, 240);
+    background: rgba(240, 240, 240, 0.363);
     box-shadow: 0 2px 6px rgba(68, 68, 68, 0.3);
-    border: 1px solid var(--primary-cl);
+    border: 1px solid  rgba(240, 240, 240, 0.363);
     }
     .dark-mode .activeImg.activeMin{
-      background: rgba(46, 87, 61, 0.747);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      border: 1px solid var(--thin-border);
+       background: rgba(63, 65, 64, 0.747);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      border: 1px solid rgba(62, 63, 63, 0.747);
     }
 
       /***
@@ -721,16 +636,17 @@ BOTTOM NAVIGATION BAR STYLE CSS
         display: flex;
         align-items: center;
         justify-content: center;
+        background: red;
         position: fixed;
-        background: black;
-        bottom: 4rem;
-        z-index: 99999999;
+        z-index: 99999999999999;
         -webkit-tap-highlight-color: transparent;
         -webkit-user-select: none;
         outline: none;
         -ms-user-select: none;;
         user-select: none;
       }
+
+
       .shop-fixedBtn{
         width: 3.4rem;
         height: 3.4rem;
@@ -744,6 +660,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
         justify-content: center;;
         background: rgb(245, 223, 200);
         border-radius: 50%;
+        overflow: hidden !important;
         z-index: 99999999999999;
         box-shadow: 0 2px 6px rgba(182, 181, 181, 0.6) !important;
         cursor: pointer;
