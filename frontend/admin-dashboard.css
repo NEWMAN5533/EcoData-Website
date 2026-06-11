@@ -1388,7 +1388,8 @@ BUNDLE SECTION
   }
 
   /***display none div******/
-  .container .sidebar{
+  .container .sidebar,
+  .welcome-title{
     display: none !important;
   }
 
@@ -1405,7 +1406,8 @@ BUNDLE SECTION
   }
 
   /***display none div******/
-  .container .sidebar{
+  .container .sidebar,
+  .welcome-title{
     display: none !important;
   }
 
@@ -1428,7 +1430,8 @@ BUNDLE SECTION
   }
 
   /***display none div******/
-  .container .sidebar{
+  .container .sidebar,
+  .welcome-title{
     display: none !important;
   }
 
@@ -1436,15 +1439,43 @@ BUNDLE SECTION
     padding: .2rem !important;
   }
 
-  .welcome-title h1{
+  .welcome-title h2{
     font-size: 1rem !important;
   }
 
+  
+.first-container{
+  margin-top: -1rem !important;
+}
+
+.first-container .pw{
+  margin-left: .4rem;
+  margin-bottom: -.8rem;
+  z-index: 1;
+}
+
+.first-container .total-title{
+  margin-left: .4rem;
+  margin-bottom: -.3rem;
+  z-index: 1;
+}
+
+.total-title p{
+  font-size: .99rem !important;
+}
+
   .daily-total-section {
     width: 100%;
-    max-width: 96% !important;
+    max-width: 94% !important;
+    border: none !important;
+    padding: .3rem !important;
+    margin-top: .8rem;
     overflow: hidden;
-  }
+}
+
+
+
+ 
 
   .total-section .total-section-card{
   width: 9.5rem;
@@ -1520,7 +1551,8 @@ BUNDLE SECTION
   }
 
   /***display none div******/
-  .container .sidebar
+  .container .sidebar,
+  .welcome-title
 {
     display: none !important;
   }
@@ -1536,14 +1568,37 @@ BUNDLE SECTION
   font-weight: 600;
 }
 
+.first-container{
+  margin-top: -1rem !important;
+}
+
+.first-container .pw{
+  margin-left: .4rem;
+  margin-bottom: -.8rem;
+  z-index: 1;
+}
+
+.first-container .total-title{
+  margin-left: .4rem;
+  margin-bottom: -.3rem;
+  z-index: 1;
+}
+
+.total-title p{
+  font-size: .99rem !important;
+}
+
+
+
   .daily-total-section {
     width: 100%;
     max-width: 94% !important;
-    overflow: hidden;
-    background: none !important;
     border: none !important;
+    padding: .3rem !important;
+    margin-top: .8rem;
 }
- 
+
+
 
   .total-section .total-section-card{
   width: 9.5rem;
@@ -1553,6 +1608,8 @@ BUNDLE SECTION
   .section-card-top .card-top-left p{
     font-size: .78rem !important;
   }
+
+
 
     .section-card-top .card-top-right img{
       width: .9rem !important;
