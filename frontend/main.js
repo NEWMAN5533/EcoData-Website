@@ -1,4 +1,4 @@
-// UPDATED AT 9th/JUNE, 2026 [BACKUP MAIN.JS]
+// UPDATED AT 11th/JUNE, 2026 [BACKUP MAIN.JS]
 
 
 // --- Firebase Imports ---
@@ -752,6 +752,10 @@ updateHomepageTotals(orderData);
 
 await saveOrderToFirestore(orderData);
 
+saveLiveOrder(OrderData);
+
+loadLiveOrders();
+
 saveGuestOrder(orderData);
 
   } catch (err) {
@@ -1210,7 +1214,11 @@ function renderLiveOrderRow(order) {
         : "N/A";
 
 
-
+console.log("Order",order);
+console.log(
+  "createdAt", order.createdAt
+);
+console.log("UpdatedAt", order.updatedAt);
 
 
   let row = tableBody.querySelector(`[data-id="${order.orderId}"]`);
@@ -1236,6 +1244,8 @@ function renderLiveOrderRow(order) {
     <span>${update}</span>
   `;
 }
+
+
 
 
 // ---------- LIVE ORDER CARD ---------
