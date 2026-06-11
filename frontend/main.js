@@ -752,10 +752,6 @@ updateHomepageTotals(orderData);
 
 await saveOrderToFirestore(orderData);
 
-saveLiveOrder(OrderData);
-
-loadLiveOrders();
-
 saveGuestOrder(orderData);
 
   } catch (err) {
