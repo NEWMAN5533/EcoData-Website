@@ -611,8 +611,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
     }
 
     .dark-mode .btom-navIcon .bottomIcon-textNav{
-      color: white;
-      opacity: .7;
+      color: rgb(219, 219, 219) !important;
     }
 
   .gridCard-wrapper{
