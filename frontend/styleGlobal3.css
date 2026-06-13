@@ -493,7 +493,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
     }
 
     .dark-mode .bottom-navbar{
-      background:   rgba(88, 88, 88, 0.075) !important;
+      background:   var(--darkMode-bg-cl) !important;
       backdrop-filter: blur(18px);
       border: 1px solid var(--thin-border) !important;
       box-shadow: 0 10px 40px rgba(0,0,0,0.99);
