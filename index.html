@@ -32,6 +32,8 @@
 
 <!---GOOGLE MATERIAL ICON--LINK---->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!--remix icons-->
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
 
 
   <!---css-link-->
@@ -42,6 +44,7 @@
   <link rel="stylesheet" href="styleGlobal4.css">
   <link rel="stylesheet" href="styleSkeletonUi.css">
   <link rel="stylesheet" href="homePage.css">
+  <link rel="stylesheet" href="homeTable.css">
 
   <!---new bundle card style----->
   <link rel="stylesheet" href="newCardStyle.css">
@@ -127,6 +130,14 @@
             
             </div> 
 
+              <div id="adminAccessLink4" class="quicker-nav">
+              <div class="naver"  onclick="window.location.href = 'agentPage.html'">
+                <span class="material-icons">support_agent</span>
+              <p>Exclusive Page</p>
+              </div>
+            
+            </div> 
+
             
 
       
@@ -167,7 +178,7 @@
               </div>
 
               <div class="tag">
-                <small>New</small>
+                <small>Coming Up!</small>
               </div>
               
             </div> 
@@ -299,8 +310,8 @@
 
              <div id="adminAccessLink2" class="quicker-nav" onclick="window.location.href='agentPage.html'" >
               <img src="./css/icons/agent.png" alt="" loading="lazy">
-              <p>Agent Page</p>
-            </div> 
+              <p>Exclusive Page</p>
+            </div>
             
 
 
@@ -331,7 +342,7 @@
               <p>ebooks</p>
 
               <div class="tag">
-                <small>New</small>
+                <small>Coming Up!</small>
               </div>
             </div> 
 
@@ -515,7 +526,7 @@
   <!-----COUNTER-ENDS--->
 
   <!----TRUSTED-MESSAGE------>
-  <section class="trusted-by">
+  <section class="trusted-by ">
 
     <!-- Trusted By Skeleton -->
     <div id="sk-Trusted" class="sk-trusted">  
@@ -624,7 +635,12 @@
 
     <div class="google-thumbnails" id="thumbnailScroll">
 
+       <div class="google-thumbnail thumb1">
+       <span style="color: rgb(235, 193, 7); margin: .4rem;">[ THURSDAY 11TH/6/2026 ]</span> PLACE YOUR ORDER NOW TO ENJOY INSTANT DELIVERY. 
+      </div>
 
+     
+    
 
       <div class="google-thumbnail thumb2" id="promThumbnail">
         <img class="analy" src="./css/uiIcons/loudspeaker.png" alt="" loading="lazy">
@@ -652,7 +668,7 @@
     </div>
 
 
-      <div class="google-thumbnail thumb2" style="display: none;">
+      <div class="google-thumbnail thumb2" >
         <img class="analy" src="./css/icons/market.png" alt="" loading="lazy">
         WE ARE RUNNING PROMO! EVERY <span style="color: wheat; margin: .0.4rem">THURSDAY AND FRIDAY'S</span> on MTN DATA, buy at lower cost at these promo days. [1GB = 5.50], [2GB = 11], [3GB = 16.60],...[10GB = 45],...[20GB = 89],...[25 = 109]. Check back every <span style="color: wheat; margin: .0.4rem">THURSDAY AND FRIDAY'S</span>
       </div>
@@ -694,7 +710,7 @@
 
   <div class="google-thumbnail thumb2">
     <img class="analy" src="./css/uiIcons/loudspeaker.png" alt="" loading="lazy">
-      Unlock Premium price Page by paying a one-time payment of 100 cedis!, and pay less than regular...
+      Unlock Premium price Page by paying a one-time payment of 50 cedis!, and pay less than regular...
       </div>
 
 
@@ -776,7 +792,7 @@
       <div class="notice-board" style="border-radius: 0 !important;">
         
         <div class="notice-top">
-          <small><span>1</span>Your Can Now Buy Data at <strong>AnyTime!</strong> No Closing Time.</small>
+          <small><span>1</span>You Can Now Buy Data at <strong>AnyTime!</strong> No Closing Time.</small>
         </div>
 
         <div class="notice-top">
@@ -805,7 +821,7 @@
       <span></span><span></span><span></span><span></span>
     </div>
     
-    <p>Install our app on android phones</p>
+    <p>Install EcoData app on android phones</p>
 
     </div>
 
@@ -816,7 +832,9 @@
       <span></span><span></span><span></span><span></span>
     </div>
       <div class="grid-overlay"></div>
-    <div class="img-box">
+
+            <div class="img-box-flex">
+               <div class="img-box">
       <img src="./css/images/1.jpeg" alt="" loading="lazy" 
       onclick=openViewer(0)>
     </div>
@@ -834,6 +852,14 @@
       <img src="./css/images/3.jpeg" alt="" loading="lazy" 
       onclick=openViewer(2)>
       </div>
+            </div>
+
+            <div class="img-box-flex-numbering">
+              <button  class="numberContent"  onclick=openViewer(0)>Step 1</button>
+              <button class="numberContent"  onclick=openViewer(1)>Step 2</button>
+              <button class="numberContent"  onclick=openViewer(2)>Step 3</button>
+            </div>
+   
 
   
     </div>
@@ -934,10 +960,10 @@
   <!---ends-->
 
 
-  <!---LIVE ORDERS TABLE-->
 
-  <div class="live-order-wrp">
-      <!-- Orders Table Skeleton -->  
+
+ <section class="table-section">
+   <!-- Orders Table Skeleton -->  
     <div id="sk-OrderTable" class="sk-table" style="display: none;">  
     
       <div class="sk-table-row">  
@@ -959,47 +985,43 @@
         <span class="sk" style="flex:1;height:12px;"></span>  
       </div>  
     </div>  
-    
 
 
 
-
-    <div class="top-var">
-      <h4>Orders History</h4>
-    </div>
-
-    <section id="liveOrderSection">
-      <!-- TABLE HEADER (FIXED) -->
-      <div class="live-order-header">
+  <div class="table-title">
+    <p>Orders History</p>
+  </div>
+  <div class="content-wrapper">
+    <div class="table-scroll-area">
+      <!-- TABLE HEADER -->
+      <div class="table-header">
         <span>Order ID</span>
-        <span>Bundle</span>
+        <span>Size</span>
         <span>Recipient</span>
         <span>Status</span>
+        <span>Date Submitted</span>
+        <span>Paid?</span>
+        <span>DeliveredAt</span>
       </div>
 
-      <div id="liveOrderCard" class="live-order-card">
-        <!-- SCROLLABLE BODY -->
-        <div id="liveOrderRows" class="live-order-body">
-          <p class="empty-state">No recent orders yet</p>
+      <div class="main-row-content">
+        <div class="row-wrapper" id="liveOrderRows">
+          <p id="empty-body" hidden>No recent orders yet</p>
+          <!-- dynamic rows -->
         </div>
       </div>
-    </section>
+    </div>
   </div>
-
-
+</section>
   <!-- ends -->
 
   <!----dashboard-overview-->
-
-
-
-
   <!----ENDS-->
 
 
 
 
-  <!---NEW UI UPDATE (5th-05-2026)--=[grid & normal ui-->
+   <!----NORMALVIEW-SECTION-->
   <section class="normalGrid-container">
 
 
@@ -1023,20 +1045,26 @@
     </button>
 
     <div class="select-dropdown" id="dropdownOffer">
+      <!--normal---->
       <div class="optionDelevery" data-mode="normal">
         <span >MTN DATA NORMAL DELIVERY 
         
         </span>
         <small>NON-EXPIRY</small>
       </div>
-    
+      <!---express-->
       <div class="optionDelevery" data-mode="express">
         <span>MTN DATA EXPRESS DELIVERY 
         
         </span>
         <small>NON-EXPIRY</small>
       </div>
-      
+      <!---Special-Mashup-->
+        <div class="optionDelevery" data-mode="mashup">
+        <span>SPECIAL MASHUP-BUNDLE 
+        </span>
+        <small>VOICE-MINS</small>
+      </div>
     </div>
     <div id="offerDisplay"></div>
   </div>
@@ -1058,25 +1086,24 @@
 
     <div class=" packagesta">
       <small></small>
-    <p  id="teleAirtel">Telecel & AirtelTigo</p>
+    <p  id="teleAirtel">Telecel & <span class="tigoo">AirtelTigo</span></p>
     </div>
     </div>
   
 
   </div>
   </section>
-
-
-
   <!-----INDIVIDUAL SECTIONS-VIEW TOGGLE---->
-  <!----NORMALVIEW-SECTION-->
-  <section id="normalView" class="view active" >
+ 
+
+  <section id="normalView" class="view active"  >
 
     <div class="top-dashboard">
       <h2>MTN DATA BUNDLE</h2>
-      <button class="packs">16 Packages Available</button>
+      <button class="packs">17 Packages Available</button>
     </div>
     <div class="single-order">
+
       <small class="bundleRecipient">Bundle Recipient Number</small>
       <!---phone-input-here-->
       <input class="normalInput" type="tel" placeholder=" 0241234567">
@@ -1096,7 +1123,7 @@
   <!----PROMO-DIV-START----->
   <div id="promoActive">
       <!---select-1-->
-      <div class="optionSelect" 
+      <div class="optionSelect active" 
     data-network="mtn"
     data-size="1"
     data-price="5.5">
@@ -1178,7 +1205,15 @@
 
     
       <!---select-9-->
-      <!---EMPTY-FOR-9GB-->
+        <div class="optionSelect" 
+    data-network="mtn"
+    data-size="9"
+    data-price="42">
+        <span>9GB</span>
+        <small>GHS 42</small>
+
+        <small class="promoTag">4.3% OFF</small>
+      </div>
       <!---select-10-->
         <div class="optionSelect" 
     data-network="mtn"
@@ -1269,7 +1304,7 @@
   <!-----NORMAL-DELIVERY-PRICE-DIV------>
       <div id="topOpt">
         <!---select-1-->
-      <div class="optionSelect" 
+      <div class="optionSelect active" 
     data-network="mtn"
     data-size="1"
     data-price="5.99">
@@ -1333,7 +1368,13 @@
         <small>GHS 39.99</small>
       </div>
       <!---select-9-->
-      <!---EMPTY-FOR-9GB-->
+       <div class="optionSelect" 
+    data-network="mtn"
+    data-size="9"
+    data-price="43.99">
+        <span>9GB</span>
+        <small>GHS 43.99</small>
+      </div>
       <!---select-10-->
         <div class="optionSelect" 
     data-network="mtn"
@@ -1406,7 +1447,7 @@
         <!----EXPRESS-DELIVERY-PRICE-DIV----->
         <div id="bottomOpt" style="display: none;">
                 <!---select-1-->
-      <div class="optionSelect" 
+      <div class="optionSelect active" 
     data-network="mtn"
     data-size="1"
     data-price="6.5">
@@ -1470,7 +1511,13 @@
         <small>GHS 40.99</small>
       </div>
       <!---select-9-->
-      <!---empty-for-9GB-->
+       <div class="optionSelect" 
+    data-network="mtn"
+    data-size="9"
+    data-price="44.99">
+        <span>9GB</span>
+        <small>GHS 44.99</small>
+      </div>
       <!---select-10-->
         <div class="optionSelect" 
     data-network="mtn"
@@ -1539,6 +1586,49 @@
         </div>
         <!----EXPRESS-DELIVERY-PRICE-DIV------>
 
+        
+        <!----MASHUP-DIV----->
+        <div id="mash" >
+                      <!---select-1-->
+          <div class="optionSelect active" 
+          data-network="mtn"
+          data-size="217"
+          data-price="365">
+              <span>217GB</span>
+              <small>GHS365</small>
+            </div>
+ 
+            <!---select-2-->
+            <div class="optionSelect" 
+          data-network="mtn"
+
+          data-size="371"
+          data-price="12.99">
+              <span>371Minutes</span>
+              <small>GHS 12.99</small>
+            </div>
+            <!---select-3-->
+            <div class="optionSelect" 
+          data-network="mtn"
+          data-size="740"
+          data-price="40.99">
+              <span>740Minutes</span>
+              <small>GHS 40.99</small>
+            </div>
+            <!---select-4-->
+              <div class="optionSelect" 
+          data-network="mtn"
+          data-size="1100"
+          data-price="68.99">
+              <span>1100Minutes</span>
+              <small>GHS 68.99</small>
+            </div>
+          
+
+            <!---select-ends-->
+        </div>
+        <!---MASHUP--DIV------>
+
     </div>
     </div>
 
@@ -1566,9 +1656,6 @@
       </button>
 
 
-        
-
-
       <!---SINGLE ORDER ENDS-->
     </div>
 
@@ -1584,7 +1671,6 @@
       </div>
       <span>|</span>
         <small class="businessInfo-powered" style="font-size: 9px !important; font-weight: 800 !important;">
-          
         <strong style="font-weight: 800;">Powered by:</strong >   IA-TECH E-Business 
       </small>
     </section>
@@ -1592,12 +1678,6 @@
 
     <!---GRID NORMALVIEW-ENDS---->
   </section>
-
-
-    
-
-
-
   <!----NORMALVIEW-SECTION-ENDS---->
 
 
@@ -1609,8 +1689,6 @@
 
   <!---GRIDvIEW-SECTION-->
   <section id="gridView" class="View " style="display: none;">
-    <!---all gridCards-here-->
-  <!-----BUNDLE PROCESSING--->
   <!---------NETWORK PURCHASED-DETAILS----->
     <div class="networks-purchased-container">
       <div class="purchase-title">
@@ -1648,7 +1726,7 @@
       </div>
       <div class="hero-bottom-content">
         <div class="btn-div ">
-          16 Packages Available
+          17 Packages Available
         </div>
         <!----CARD-DIV---->
         <div class="card-div">
@@ -1690,10 +1768,13 @@
       <section class="gridCards-container topMtn " id="bundles">
         <!---GRID CARDS WRAPPER-->
 
+        <!--GRID MASHUP-DIV----->
+
+
 
         <!------GRID PROMO SECTION--(off until isPromoTime)------>
         <div id="gridPromoActive" style="width: 100%;  max-width: 99.99%;">
-        <div class="offer-title" > >PROMO!</h2></div>
+        <div class="offer-title" ><h2></h2>PROMO!</h2></div>
 
 
         <div class="gridCard-wrapper" >
@@ -1835,9 +1916,23 @@
       </div>
         </div>
 
-        <!----------NEXT CARD----------->
-        <!---EMPTY-9GB-->
-        <!----------NEXT CARD---9-------->
+        <!----------NEXT CARD--9--------->
+       <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">9<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>42</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="9"
+          data-price="42"
+        >Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD---10-------->
            <!-- MTN Bundles -->
         <div class="mntCardStyle" >
           <div class="network-label" style="color:#ffcb05">
@@ -1854,7 +1949,7 @@
         >Buy Now</button>
       </div>
         </div>
-        <!----------NEXT CARD---10-------->
+        <!----------NEXT CARD---11------->
          
          <!-- MTN Bundles -->
         <div class="mntCardStyle" >
@@ -1872,7 +1967,7 @@
         >Buy Now</button>
       </div>
         </div>
-        <!----------NEXT CARD-----11------>
+        <!----------NEXT CARD-----12------>
           <!-- MTN Bundles -->
         <div class="mntCardStyle" >
           <div class="network-label" style="color:#ffcb05">
@@ -1889,7 +1984,7 @@
         >Buy Now</button>
       </div>
         </div>
-        <!----------NEXT CARD----12------->
+        <!----------NEXT CARD----13------->
            <!-- MTN Bundles -->
         <div class="mntCardStyle" >
           <div class="network-label" style="color:#ffcb05">
@@ -1906,7 +2001,7 @@
         >Buy Now</button>
       </div>
         </div>
-        <!----------NEXT CARD----13------->
+        <!----------NEXT CARD----14------>
           <!-- MTN Bundles -->
         <div class="mntCardStyle" >
           <div class="network-label" style="color:#ffcb05">
@@ -1923,7 +2018,7 @@
         >Buy Now</button>
       </div>
         </div>
-        <!----------NEXT CARD---14------->
+        <!----------NEXT CARD---15------->
           <!-- MTN Bundles -->
         <div class="mntCardStyle" >
           <div class="network-label" style="color:#ffcb05">
@@ -1940,7 +2035,7 @@
         >Buy Now</button>
       </div>
         </div>
-        <!----------NEXT CARD----15------->
+        <!----------NEXT CARD----16------->
           <!-- MTN Bundles -->
         <div class="mntCardStyle" >
           <div class="network-label" style="color:#ffcb05">
@@ -1957,7 +2052,7 @@
         >Buy Now</button>
       </div>
         </div>
-        <!----------NEXT CARD---16-------->
+        <!----------NEXT CARD---17-------->
           <!-- MTN Bundles -->
         <div class="mntCardStyle" >
           <div class="network-label" style="color:#ffcb05">
@@ -1974,7 +2069,7 @@
         >Buy Now</button>
       </div>
         </div>
-        <!----------NEXT CARD---17-------->
+        <!----------NEXT CARD---18-------->
         
          <!-- MTN Bundles -->
         <div class="mntCardStyle" style="display: none;">
@@ -2146,6 +2241,24 @@
           data-network="mtn"
           data-size="8"
           data-price="39.99"
+        >Buy Now</button>
+      </div>
+        </div>
+
+          <!----------NEXT CARD---9gb-------->
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">9<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>43.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="9"
+          data-price="43.99"
         >Buy Now</button>
       </div>
         </div>
@@ -2462,7 +2575,23 @@
         </div>
 
         <!----------NEXT CARD----------->
-        <!---EMPTY-9GB-->
+          <!----------NEXT CARD---10gb-------->
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">9<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>44.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="9"
+          data-price="44.99"
+        >Buy Now</button>
+      </div>
+        </div>
         <!----------NEXT CARD---9-------->
           <!-- MTN Bundles -->
         <div class="mntCardStyle" >
@@ -2624,6 +2753,110 @@
         </div>
         </div>
         <!------EXPRESS GRID SECTION ENDS-------->
+
+
+<style>
+  #mashGridDiv .gridCard-wrapper .mntCardStyle .unit{
+    font-size: .9rem !important;
+  }
+
+  #mashGridDiv .gridCard-wrapper .mntCardStyle .bundle-data{
+      font-size: .96rem !important;
+      margin-top: .8rem !important;
+  }
+
+ #mashGridDiv .gridCard-wrapper .mntCardStyle .network-label{
+  font-size: .8rem;
+  white-space: nowrap;
+  }
+</style>
+            
+        <!------GRID NORMAL SECTION---( active-unless isPromoTime)---->
+        <div id="mashGridDiv" style="width: 100%;  max-width: 98.99%; display: none;">
+        <div class="offer-title" > <h2 >SPECIAL MASHUP BUNDLE</h2>
+        </div>
+
+        <div class="gridCard-wrapper " >
+
+        <!----------CARD----1------->
+        <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> BIG DATA
+      </div>
+      <div class="bundle-data">217<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>365.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="217"
+          data-price="365.99"
+        >Buy Now</button>
+      </div>
+        </div>
+  <!----------NEXT CARD------2----->
+     <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MASHUP
+      </div>
+      <div class="bundle-data">371<span class="unit">MINS</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>22.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="371"
+          data-price="22.99"
+        >Buy Now</button>
+      </div>
+        </div>
+  
+  <!----------NEXT CARD-------3---->
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MASHUP
+      </div>
+      <div class="bundle-data">740<span class="unit">MINS</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>40.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="740"
+          data-price="40.99"
+        >Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD----4------->
+            <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+            <div class="popular-badge" style="margin-top: 0.4rem;">⭐ Best Value</div>
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MASHUP
+      </div>
+      <div class="bundle-data">1100<span class="unit">MINS</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>68.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-size="1100"
+          data-price="68.99"
+        >Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD----5------->
+        
+
+
+
+
+        </div>
+        </div>
+        <!------GRID NORMAL SECTION--ENDS------>
       
 
       </section>
@@ -2649,7 +2882,7 @@
       </div>
       <div class="hero-bottom-content">
         <div class="btn-div">
-          12 Packages Available
+          10 Packages Available
         </div>
         <!----CARD-DIV---->
         <div class="card-div">
@@ -3281,8 +3514,10 @@
 
 
   </section>
-
   <!---GRIDvIEW-SECTION-ENDS---->
+
+
+
 
 
   <!---NEW UI UPDATE (20th-01-2026)--=[grid & normal ui--ends---->
@@ -3292,8 +3527,6 @@
 
 
   <!---CARD-CONTAINER-ENDS-->
-
-
   <!----CARD-CONTAINER-ENDS-->
   </section>
 
@@ -3500,12 +3733,15 @@
     <div class="bottom-navbar" id="navIconDiv">
       <div class="btom-navIcon" onclick="window.location.href='index.html'">
         <div class="activeImg active" id="activeMtn">
-        <span class="material-icons ">home</span>
+          <small id="activeBadge" class="nav-badge">0</small>
+          <span class="material-icons">inventory_2</span>
 
         </div>
-        <small class="bottomIcon-textNav">Home</small>
+        <small class="bottomIcon-textNav">Bundles</small>
+      
       </div>
 
+    
       
 
       <div class="btom-navIcon">
@@ -3742,6 +3978,22 @@
  })
 </script>
 
+<script>
+ document.addEventListener("DOMContentLoaded", ()=>{
+   const buyDataIntoViewBtn = document.getElementById("ctaBtn");
+  const dataSection = document.getElementById("normalView");
+  
+   buyDataIntoViewBtn.addEventListener("click", ()=> {
+    if(buyDataIntoViewBtn){
+      dataSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+   });
+ })
+</script>
+
 
 
 
@@ -3951,11 +4203,13 @@ document.addEventListener("DOMContentLoaded", ()=> {
  const secondToggler = document.getElementById("menuDarkMode");
 const cardCloser = document.getElementById("ecoDataSidebar");
 
+
   // toggle menu card
   cardToggler.addEventListener("click", function(e) {
     e.stopPropagation();
     if(cardToggler){
-      cardCloser.classList.add("active");
+      cardCloser.classList.add("active" );
+      document.body.classList.add("no-scroll");
     } else{
       cardCloser.classList.remove("active");
     }
@@ -3967,6 +4221,7 @@ const cardCloser = document.getElementById("ecoDataSidebar");
 
     if(secondToggler) {
       cardCloser.classList.add("active");
+      document.body.classList.add("no-scroll");
     } else {
       cardCloser.classList.remove("active");
     }
