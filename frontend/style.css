@@ -336,7 +336,6 @@ body {
   width: 100%;
   height: 100%;
   overflow-y: auto;
-  transition: background 0s ease !important;
   margin: 0;
   padding: 0;
 }
@@ -394,6 +393,7 @@ MAIN CONTAINER
   top: 0;
   left: 0;
   right: 0;
+  margin: 0;
   z-index: 10000000;
 }
 
@@ -1479,435 +1479,6 @@ UPDATED UI STYLE
     
     }
 
-
-
-
-    /****8
-    CARDS GRID VIEW
-    *****/
-    .gridView-container{
-      width: 100%;
-      max-width: 480px;
-      height: max-content;
-      padding: .3rem 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      position: relative;
-      background: transparent;
-      margin: 1rem 0;
-    }
-
-    .gridView-top{
-      width: 100%;
-      max-width: 470px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 3rem;
-      background: transparent;
-      position: relative;
-    }
-
-    /****
-    LEFT
-    ***/
-    .grid-left-div{
-      width: 50%;
-      display:flex;
-      justify-content: start;
-      align-items: center;
-      gap: 1.2rem;
-      height: 100%;
-      background: transparent;
-      position: relative;
-      margin-left: 1rem;
-    }
-
-    .grid-left-div .normal{
-      width: max-content;
-      padding: .4rem .8rem;
-      border: none;
-      font-size: .9rem;
-      background: none;
-      border: 0.1px solid var(--background-cl);
-      border-radius: 6px;
-      color: rgb(44, 41, 41);
-      font-weight: 600;
-      font-family: serif;
-    }
-
-    .grid-left-div .grid.active{
-      background-color: rgb(233, 158, 19);
-      width: max-content;
-      padding: .4rem .8rem;
-      border: none;
-      font-size: .9rem;
-      border-radius: 6px;
-      color: var(--background-cl);
-      font-weight: 600;
-      font-family: serif;
-
-    }
-
-
-
-    /****
-    RIGHT
-    ****/
-    .grid-right-div{
-      width: 505;
-      align-items: end;
-      justify-content: end;
-      display: flex;
-      position: relative;
-      padding-right: .2rem;
-      margin-right: 1rem;
-    }
-
-    .grid-right-div small{
-      font-size: .9rem;
-      font-family: serif;
-      font-weight: 500;
-    }
-
-    /***8
-    GRID CARDS SECTION
-    ****/
-    .gridCards-container{
-      width: 100%;
-      height: max-content;
-      display: flex;
-      justify-self: center;
-      justify-content: center;
-      align-items: center;
-      background: rgb(228, 55, 55);
-      margin: 1rem 0;
-      position: relative;
-      padding: .3rem 0;
-    }
-
-    .gridCards-container .gridCard-wrapper{
-      width: max-content;
-      height: max-content;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr) !important;
-      gap: .8rem;
-      background: transparent;
-      align-items: center;
-      justify-content: center;
-      justify-self: center;
-      margin: .3rem 0;
-      padding: .2rem 0;
-    }
-
-    .gridCard{
-      width: 11rem;
-      height: 15rem;
-      display:flex;
-      align-items: center;
-      justify-content: space-around !important;
-      gap: 0;
-      position: relative;
-      padding-top:  .7rem;
-      flex-direction: column;
-      background: rgba(230, 230, 174, 0.342);
-      border-radius: 1px !important;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.75);
-    }
-
-    .gridCardTele{
-      width: 11rem;
-      height: 15rem; 
-      display:flex;
-      position: relative;
-      align-items: center;
-      justify-content: space around !important;
-      gap: 0;
-      padding-top: 0.7rem;
-      flex-direction: column;
-      background: rgba(230, 174, 191, 0.185);
-      border-radius: 1px !important;
-      box-shadow: 0 10px 20px rgba(0,0,0,75);
-    }
-
-    .gridCardAirteltigo{
-      width: 11rem;
-      height: 15rem;
-      display:flex;
-      align-items: center;
-      justify-content: space around !important;
-      gap: 0;
-      position: relative;
-      padding-top: 0.7rem;
-      flex-direction: column;
-      background: rgba(174, 222, 230, 0.185);
-      border-radius: 1px !important;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.75);
-    }
-
-    .dark-mode .gridCardAirteltigo {
-      box-shadow: 0 10px 20px rgba(0,0,0,0.95);
-    }
-
-    .dark-mode .gridCard {
-      box-shadow: 0 10px 20px rgba(0,0,0,0.95);
-    }
-
-    .dark-mode .gridCardTele {
-      box-shadow: 0 10px 20px rgba(0,0,0,0.95);
-    }
-
-
-    /*****
-    GRID CARD TOP
-    *****/
-
-
-     .gridCard .gridCard-top,
-     .gridCardTele .gridCard-top,
-     .gridCardAirteltigo .gridCard-top{
-      width: 100%;
-      height: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding:  0.5rem;
-      position: relative;
-    
-    }
-
-     .gridCardAirteltigo .gridCard-top 
-      {
-        display: flex;
-        justify-content: space-between;
-        position: relative;
-        align-items: center;
-        padding: .5rem;
-        width: 100%;
-        height: 2rem;
-      }
-
-     .gridCard .gridCard-top small,
-     .gridCardTele .gridCard-top small,
-     .gridCardAirteltigo .gridCard-top small{
-      font-size: 0.9rem !important;
-      font-family: "poppins" serif;
-      font-weight: 600;
-      color: rgb(155, 92, 29);
-    }
-
-    .gridCard .gridCard-top img,
-    .gridCardTele .gridCard-top img,
-    .gridCardAirteltigo .gridCard-top img{
-      width: 1.4rem;
-      height: 1.4rem;
-      border-radius: 2px;
-      padding: .2rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    }
-
-    .mtn-individual{
-      width: 2rem;
-      height: 2rem;
-      border-radius: 12px;
-      padding: .2rem;
-      margin-top: -.6rem;
-      background: linear-gradient(135deg, rgb(219, 226, 87), rgba(207, 124, 16, 0.767));
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-    animation: pulse 1.5s infinite;
-    }
-
-
-    
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  30%{
-    transform: scale(1.3);
-  }
-  60% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-
-.gridCard-top .mt{
-  display: flex;
-  background: linear-gradient(135deg, rgb(219, 226, 87), rgba(207, 124, 16, 0.767));
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-    animation: pulse 1.5s infinite;
-}
-
-
-.gridCard-top .lecel{
-  display: flex;
-  background: linear-gradient(135deg, rgba(247, 159, 159, 0.712), rgba(207, 20, 45, 0.911));
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  animation: pulse 1.5s infinite;
-}
-
-
-.gridCard-top .airt{
-  display: flex;
-  background:  linear-gradient(135deg, rgba(172, 198, 226, 0.945), rgba(7, 73, 87, 0.664));
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  animation: pulse 1.5s infinite;
-}
-
-
-
-
-
-
-
-/*******
-GRID CARD MIDDLE
-*******/
-
-    .gridCard-middle{
-      width: 100%;
-      height: 8rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      justify-content: center;
-      gap: .3rem;
-      background: transparent !important;
-    }
-
-    
-
-    .gridCard-middle h3{
-      font-size: 1.05rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      align-self: center;
-      text-align: center;
-      font-weight: 600;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      color: rgb(49, 45, 45);
-      margin-left: -.7rem;
-      border: none;
-      padding: 0 .15rem;
-      border-radius: 8px;
-      background: none;
-    }
-
-    .gridCard-middle h3 span{
-      font-size: 1.6rem;
-      margin-bottom: .6rem;
-    }
-
-
-/******
-PRICES SECTION
-******/
-
-.gridCard .gridCard-middle small,
-.gridCardTele .gridCard-middle small,
-.gridCardAirteltigo .gridCard-middle small {
-    font-size: .85rem !important;
-      font-family: serif;
-      margin-top: -.3rem;
-      font-weight: 600;
-      margin-left: -.8rem;
-      align-self: center;
-      color: rgb(28, 88, 75) !important;
-}
-
-
-    .gridCard .gridCard-middle .old-price ,
-    .gridCardTele .gridCard-middle .old-price,
-    .gridCardAirteltigo .gridCard-middle .old-price
-    {
-      font-size: .85rem;
-      font-family: serif;
-      margin-top: -.3rem;
-      font-weight: 600;
-      margin-left: -.8rem;
-      align-self: center;
-      color: rgb(31, 114, 79) !important;
-    }
-
-  
-
-   .gridCard .gridCard-middle  .new-price,
-   .gridCardTele .gridCard-middle .new-price,
-   .gridCardAirteltigo .gridCard-middle .new-price
-   {
-      font-size: .85rem !important;
-      font-family: serif;
-      margin-top: .2rem;
-      font-weight: 600;
-      display: none;
-      margin-left: -.8rem;
-      align-self: center;
-      color: rgb(31, 114, 79);
-    }
-
-/******
-PRICES SECTION ENDS
-******/
-
-
-
-
-
-    .gridCard-bottom{
-      width: 100%;
-      height: 3.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: transparent !important;
-    }
-
-    .gridCard-bottom .buy-btn{
-      width: 94%;
-      height: 1.9rem;
-      gap: .3rem;
-      display: flex;
-      border: none;
-      border-radius: 3px;
-      background: linear-gradient(135deg, rgb(203, 218, 6), rgb(236, 140, 13));
-      color: rgb(247, 244, 244);
-      font-size: 1rem;
-      align-items: center;
-      opacity: .9;
-      font-weight: 600;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-      cursor: pointer;
-      margin-top: .7rem;
-    -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;;
-  user-select: none;
-    }
-
-   
-    .gridCard-bottom .buy-btn img{
-      width: 1.6rem;
-      height: 1.4rem;
-      animation: bounce1s 3s linear infinite;
-    }
-
-    @keyframes bounce1s {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(-20deg);
-      }
-    }
 
 
 
@@ -3012,14 +2583,14 @@ how to style select dropdown
   position: relative;
   width: 100%;
   display: flex;
-  height: 3rem;
+  height: 5rem;
   align-items: center;
   justify-content: center;
 }
 
 .select-btn {
   width: 100%;
-  max-width: 80%;
+  max-width: 81%;
   height: 2.5rem;
   background: #ffffff;
   border: 1px solid rgb(224, 224, 224) !important;
@@ -3053,27 +2624,32 @@ how to style select dropdown
   height: .9rem;
 }
 
+#dropdownOffer{
+  height: 7.5rem !important;
+}
+
 .select-dropdown {
   position: absolute;
   width: 100%;
-  max-width: 80%;
+  max-width: 81%;
   background: #ffffff !important;
   border-radius: 8px;
   display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 5rem;
+  height: 7.5rem !important;
   gap: .2rem;
   overflow-y: auto;
   padding: 0 .2rem;
-  margin-bottom: 8rem;
+  margin-bottom: 10rem;
   scrollbar-width: none;
   box-shadow: 0 10px 20px rgba(85, 84, 84, 0.9);
   border: 1px solid rgb(199, 198, 198);
 }
 
 .dark-mode .select-dropdown{
+  height: 5rem !important;
   background: var(--background-cl-1) !important;
   border: 1px solid var(--thin-border);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.9) ;
@@ -3464,7 +3040,7 @@ option
   width: 100%;
   max-width: 88%;
   background: #ffffff;
-  border-radius: 14px;
+  border-radius: 12px;
   display: none;
   flex-direction: column;
   justify-content: center;
@@ -3478,17 +3054,20 @@ option
   padding: .4rem;
   margin-top: -15rem;
   scrollbar-width: none;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  border: 2px solid rgb(124, 111, 70);
-  border-bottom: 9px solid rgb(124, 111, 70);
-  border-top: 9px solid  rgb(124, 111, 70);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+  border-top: 10px solid var(--text-cl-2) !important;
+  border-bottom: 10px solid var(--text-cl-2) !important;
+  border-right: 2px solid var(--text-cl-2) !important;
+  border-left: 2px solid var(--text-cl-2) !important;
 }
 
 .dark-mode .option-dropdown{
-  background: var(--welcome-card-bg);
-  border: 2px solid rgb(124, 111, 70);
-  border-bottom: 9px solid  rgb(124, 111, 70);
-  border-top: 9px solid  rgb(124, 111, 70);
+  background: rgb(37, 40, 43) !important;
+  border-top: 3px solid var(--text-cl) !important;
+  border-bottom: 3px solid var(--text-cl) !important;
+  border-right: 1px solid var(--text-cl) !important;
+  border-left: 1px solid var(--text-cl) !important;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7) !important;
 }
 
 
@@ -3496,22 +3075,23 @@ option
 
 
 .optionSelect{
-  padding: 8px;
+  padding: 9px;
   display: flex;
   align-items: center;
   height: 2rem;
   width: 100%;
-  max-width: 99%;
+  max-width: 100%;
   justify-content: start;
   gap: 2rem;
   margin-top: .4rem;
+  border-radius: 8px;
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgb(224, 217, 217);
+  border: 1px solid rgb(231, 228, 228);
 }
 
 .dark-mode .optionSelect{
-  border: 1px solid rgb(77, 76, 76);
+  border: 1px solid rgb(61, 60, 60);
   box-shadow: 0;
 }
 
@@ -3520,6 +3100,25 @@ option
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   border: 1px solid rgb(224, 217, 217);
+}
+
+#mash .active,
+#promoActive .active,
+#topOpt .active,
+#bottomOpt .active{
+  background: rgb(204, 201, 191) !important;
+  border-radius: 8px ;
+  border: 1px solid rgb(224, 217, 217) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) ;
+}
+
+.dark-mode #mash .active,
+.dark-mode #promoActive .active,
+.dark-moe #topOpt .active,
+.dark-mode #bottomOpt .active{
+  background: rgba(167, 164, 164, 0.89) !important;
+  border: 1px solid rgba(224, 217, 217, 0.87) !important;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2) !important;
 }
 
 .dark-mode .optionSelect:hover{
@@ -3531,7 +3130,8 @@ option
 .price-badge {
   background-color: #ac921cd7; /* light blue */
   color: #ffffff;
-  margin-right: 4rem;             /* white text */
+  white-space: nowrap;
+  margin-right: 1rem !important;             /* white text */
   padding: 2px 6px;           /* small padding */
   border-radius: 12px;  
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);       /* rounded corners */
@@ -3576,7 +3176,7 @@ option
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 .4rem;
+  padding: 1rem !important;
   height: 6rem;
   background-color: rgba(201, 179, 108, 0.815) !important;
   margin: 1rem 0;
@@ -3588,25 +3188,25 @@ left section
 ***/
 .selectedModal .selectedModal-left{
   width: 100%;
-  max-width: 50%;
+  max-width: 70% !important;
   height: 90% !important;
   display: flex;
   gap: 0;
   align-items: center;
-  justify-content: start;
+  justify-content: center;
   position:relative;
-  padding-right: 3rem;
  
 }
 
+
 .selectedModal-left .selectedModal-left-left{
   width: 100%;
-  max-width: 50% !important;
-  height: 100%;
+  max-width: 30% !important;
+  height: max-content;
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: end !important;
 }
 
 .selectedModal-left-left img{
@@ -3618,19 +3218,31 @@ left section
   display: none;
 }
 
-.selectedModal-left-right{
+.selectedModal .selectedModal-left .selectedModal-left-right{
   width: 100%;
-  max-width: 50%;
+  max-width: 70% !important;
+  height: max-content;
   display: flex;
   align-items: center;
-  justify-content: end;
-  flex-direction: column;
+  justify-content: start ;
+  padding-right: 1rem !important;
+  padding-left: 0 !important;
   font-size: .9rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 600;
   color: rgb(52, 52, 73); 
 }
 
+
+
+.placeHolderGB{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  justify-self: start !important;
+  text-align: start;
+}
 .placeHolderPrice small{
   display: none;
 }
@@ -3650,13 +3262,14 @@ ends of left section
 
 .selectedModal .selectedModal-right{
   width: 100%;
-  max-width: 50%;
+  max-width: 30%;
   height: 90%;
   display: flex;
   align-items: center;
   justify-content: center;
   position:relative;
   padding: .6rem;
+  margin-right: .7rem;
   font-size: .99rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 600;
@@ -4197,7 +3810,7 @@ margin-bottom: .1rem;
 .live-header {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 1px;
   margin-bottom: 10px;
   font-size: .9rem;
 }
@@ -4218,13 +3831,24 @@ margin-bottom: .1rem;
 
 
 
-.dark-mode .live-row{
-  color: rgb(42, 44, 44);
-  font-weight: 600;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  .live-order-card #liveOrderRows .live-row{
+  display: flex;
+  width: 100%;
+  height: 1.7rem;
+  align-items: center !important;
+  justify-content: space-around;
   font-size: .80rem;
-  border-bottom: 1px solid rgba(97, 96, 96, 0.945);
-}
+  font-weight: 600;
+  color: rgb(103, 105, 110);
+  white-space: nowrap;
+  border-bottom: 1px solid rgb(240, 240, 240);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+
+
+
+
 
 .live-row::-webkit-scrollbar{
   height: 4px;
@@ -4339,16 +3963,18 @@ LIVE ORDER COLOR
 LIVE STATUS STREAMER
 ****/
 
+
+
 .status-badge {
   text-align: center;
-  width: 15rem;
+  width: max-content;
   height: 1.8rem;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   font-size: 1.2rem;
-  padding: 4px 16px;
+  padding: 4px 8px;
   border-radius: 20px;
   color: #fff;
   font-weight: bold;
@@ -4367,37 +3993,33 @@ LIVE STATUS STREAMER
 
 /* Color codes */
 .status-pending {
-  background: #ffe58a;
   color: #795548;
 }
 
 .status-processing {
-  background: #bbdefb;
   color: #0d47a1;
 }
 
 .status-delivered {
-  background: linear-gradient(135deg, #a2eca4,#336369);
   color: #31c090;
 }
 
 .status-failed {
-  background: #ffcdd2;
+
   color: #b71c1c;
 }
 
 .status-cancelled {
-  background: #e0e0e0;
+
   color: #616161;
 }
 
 .status-refunded {
-  background: #ffecb3;
+
   color: #ef6c00;
 }
 
 .status-resolved {
-  background: #b2dfdb;
   color: #004d40;
 }
 
