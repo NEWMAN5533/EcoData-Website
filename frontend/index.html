@@ -49,33 +49,7 @@
   <!---new bundle card style----->
   <link rel="stylesheet" href="newCardStyle.css">
 
-  <!--updated dark mode-->
-<script>
-(function () {
 
-  const savedTheme =
-    localStorage.getItem("theme");
-
-  const systemPrefersDark =
-    window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-  const theme =
-    savedTheme ||
-    (systemPrefersDark ? "dark" : "light");
-
-  if (theme === "dark") {
-   
-    document.body.classList.add("dark-mode");
-   
-  
-  }
-
-})();
-
-
-
-
-</script>
 
 
 
@@ -1687,7 +1661,7 @@
               <small>GHS42</small>
             </div>
                           <!---select-1-->
-          <div class="optionSelect active" 
+          <div class="optionSelect " 
           data-network="mtn"
           data-value="20GB"
           data-size="20"
@@ -1696,7 +1670,7 @@
               <small>GHS82</small>
             </div>
                           <!---select-1-->
-          <div class="optionSelect active" 
+          <div class="optionSelect " 
           data-network="mtn"
           data-value="50GB"
           data-size="50"
@@ -1708,7 +1682,7 @@
                    
         
                       <!---select-1-->
-          <div class="optionSelect active" 
+          <div class="optionSelect " 
           data-network="mtn"
           data-value="217GB"
           data-size="217"
@@ -1752,6 +1726,10 @@
 
     </div>
     </div>
+
+
+
+
 
     <!---selected-bundle-modal-here--->
     <div class="selectedModal">
@@ -1889,7 +1867,6 @@
       <section class="gridCards-container topMtn " id="bundles">
         <!---GRID CARDS WRAPPER-->
 
-        <!--GRID MASHUP-DIV----->
 
 
 
@@ -2931,23 +2908,7 @@
         <!------EXPRESS GRID SECTION ENDS-------->
 
 
-<style>
-  #mashGridDiv .gridCard-wrapper .mntCardStyle .unit{
-    font-size: .9rem !important;
-  }
 
-  #mashGridDiv .gridCard-wrapper .mntCardStyle .bundle-data{
-      font-size: .96rem !important;
-      margin-top: .8rem !important;
-  }
-
-  
-
- #mashGridDiv .gridCard-wrapper .mntCardStyle .network-label{
-  font-size: .8rem;
-  white-space: nowrap;
-  }
-</style>
             
         <!------GRID NORMAL SECTION---( active-unless isPromoTime)---->
         <div id="mashGridDiv" style="width: 100%;  max-width: 98.99%; display: none;">
@@ -4439,24 +4400,7 @@ updateClock();
 
 
 
-  // notification script
-  document.addEventListener("DOMContentLoaded", () => {
-    
-const notificationIcon = document.querySelectorAll(".notifity");
-const notifyCount = document.getElementById("notifyCount");
-const NOTIFY_KEY = "notifications_read";
-
-// on page load
-if (localStorage.getItem(NOTIFY_KEY) === "true") {
-  notifyCount.style.display = "none"
-}
-
-// click to mark as read 
-notificationIcon.addEventListener("click", () => {
-  notifyCount.style.display = "none";
-  localStorage.setItem(NOTIFY_KEY, "true");
-});
-  });
+ 
 
 
 
