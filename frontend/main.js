@@ -858,7 +858,7 @@ async function orderBundle(network, recipient, packageName, size, reference) {
     }
 
     playSuccessSound();
-      showSnackBar(`📱${size}GB Order Placed successfully!`, "success", 6000);
+      showSnackBar(`📱 Order Placed successfully!`, "success", 6000);
    
 
  
