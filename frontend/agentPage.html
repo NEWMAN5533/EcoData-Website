@@ -1137,23 +1137,23 @@ width: 50%;
 <!----ENDS-->
 
 
-<!---NEW UI UPDATE (5th-05-2026)--=[grid & normal ui-->
-<section class="normalGrid-container">
+
+   <!----NORMALVIEW-SECTION-->
+  <section class="normalGrid-container">
 
 
-  <div class="titlen">
-    <div class="mtn-offers-title"><h2 >Select MTN Offer</h2>
+    <div class="titlen">
+      <div class="mtn-offers-title"><h2 >Select MTN Offer</h2>
+      </div>
+    <div class="choose-offer"> 
+      <small>Choose from available MTN data offers</small>
     </div>
-   <div class="choose-offer"> 
-    <small>Choose from available MTN data offers</small>
-  </div>
-  </div>
+    </div>
 
 
 
 
- 
-   <!---offer-select-options-->
+    <!---offer-select-options-->
     <div class="custom-select">
     <button class="select-btn" id="selectBtn">
       Select Available MTN Offer
@@ -1186,35 +1186,33 @@ width: 50%;
     <div id="offerDisplay"></div>
   </div>
 
+  <!----choose grid 0r normal btns-->
+  <div class="normalOrgridBtn-wrapping">
+    <div class="normalOrgridBtn">
+    <div class="mode-btn-wrapper">
+      <button class="mode-Btn active" id="normalModeBtn"><img src="./css/icons/list (1).png" alt="" loading="lazy"> List</button>
+    <button class="mode-Btn" id="gridModeBtn"><img src="./css/icons/grid.png" alt="" loading="lazy"> Grid</button>
+    </div>
+    </div>
 
-<!----choose grid 0r normal btns-->
-<div class="normalOrgridBtn-wrapping">
-  <div class="normalOrgridBtn">
-  <div class="mode-btn-wrapper">
-     <button class="mode-Btn active" id="normalModeBtn"><img src="./css/icons/list (1).png" alt="" loading="lazy"> List</button>
-  <button class="mode-Btn" id="gridModeBtn"><img src="./css/icons/grid.png" alt="" loading="lazy"> Grid</button>
+    <div class="pack-wrapper">
+      <div class="packages active">
+      <small></small>
+    <p id="bundleTitle">MTN Bundles</p>
+    </div>
+
+    <div class=" packagesta">
+      <small></small>
+    <p  id="teleAirtel">Telecel & <span class="tigoo">AirtelTigo</span></p>
+    </div>
+    </div>
+  
+
   </div>
-  </div>
-
-  <div class="pack-wrapper">
-    <div class="packages active">
-    <small></small>
-  <p id="bundleTitle">MTN Bundles</p>
-  </div>
-
-   <div class=" packagesta">
-    <small></small>
-  <p  id="teleAirtel">Telecel & <span class="tigoo">AirtelTigo</span>
-  </div>
-  </div>
- 
-
-</div>
-</section>
+  </section>
+  <!-----INDIVIDUAL SECTIONS-VIEW TOGGLE---->
 
 
-
-<!-----INDIVIDUAL SECTIONS-VIEW TOGGLE---->
 <!----NORMALVIEW-SECTION-->
 <section id="normalView" class="view active">
   <div class="top-dashboard">
@@ -1633,6 +1631,9 @@ width: 50%;
 
   </div>
   </div>
+
+
+
 
   <!---selected-bundle-modal-here--->
   <div class="selectedModal">
@@ -2099,149 +2100,15 @@ width: 50%;
         </div>
 
 
+          </div>
 
-<!------GRID NORMAL SECTION---( active-unless isPromoTime)---->
-        <div id="mashGridDiv" style="width: 100%;  max-width: 98.99%; display: none;">
-        <div class="offer-title" > <h2 >SPECIAL MASHUP BUNDLES</h2>
-        </div>
-
-        <div class="gridCard-wrapper " >
-
-        <!----------CARD----1------->
-            <!-- MTN Bundles -->
-        <div class="mntCardStyle" >
-          <div class="network-label" style="color:#ffcb05">
-        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MASH DATA
-      </div>
-      <div class="bundle-data">10<span class="unit">GB</span></div>
-      <div class="bundle-validity">Valid 90 Days</div>
-      <div class="bundle-price">
-        <div class="price-amt"><span class="price-cedi">₵</span>41</div>
-        <button class="buy-btn"
-          data-network="mtn"
-          data-value="10GB"
-          data-size="10"
-          data-price="41"
-        >Buy Now</button>
-      </div>
-        </div>
-
-            <!-- MTN Bundles -->
-        <div class="mntCardStyle" >
-          <div class="network-label" style="color:#ffcb05">
-        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MASH DATA
-      </div>
-      <div class="bundle-data">20<span class="unit">GB</span></div>
-      <div class="bundle-validity">Valid 90 Days</div>
-      <div class="bundle-price">
-        <div class="price-amt"><span class="price-cedi">₵</span>81</div>
-        <button class="buy-btn"
-          data-network="mtn"
-          data-value="20GB"
-          data-size="20"
-          data-price="81"
-        >Buy Now</button>
-      </div>
-        </div>
-
-            <!-- MTN Bundles -->
-        <div class="mntCardStyle" >
-          <div class="network-label" style="color:#ffcb05">
-        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MASH DATA
-      </div>
-      <div class="bundle-data">50<span class="unit">GB</span></div>
-      <div class="bundle-validity">Valid 90 Days</div>
-      <div class="bundle-price">
-        <div class="price-amt"><span class="price-cedi">₵</span>149</div>
-        <button class="buy-btn"
-          data-network="mtn"
-          data-value="50GB"
-          data-size="50"
-          data-price="149"
-        >Buy Now</button>
-      </div>
-        </div>
-        <!-- MTN Bundles -->
-        <div class="mntCardStyle" >
-          <div class="network-label" style="color:#ffcb05">
-        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MASH DATA
-      </div>
-      <div class="bundle-data">217<span class="unit">GB</span></div>
-      <div class="bundle-validity">Valid 90 Days</div>
-      <div class="bundle-price">
-        <div class="price-amt"><span class="price-cedi">₵</span>363</div>
-        <button class="buy-btn"
-          data-network="mtn"
-          data-value="217GB"
-          data-size="217"
-          data-price="363"
-        >Buy Now</button>
-      </div>
-        </div>
-
-        
-  <!----------NEXT CARD------2----->
-     <!-- MTN Bundles -->
-        <div class="mntCardStyle" >
-          <div class="network-label" style="color:#ffcb05">
-        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MASHUP
-      </div>
-      <div class="bundle-data">371<span class="unit">MINS</span></div>
-      <div class="bundle-validity">Valid 90 Days</div>
-      <div class="bundle-price">
-        <div class="price-amt"><span class="price-cedi">₵</span>16.99</div>
-        <button class="buy-btn"
-          data-network="mtn"
-          data-value="217MINS"
-          data-size="371"
-          data-price="16.99"
-        >Buy Now</button>
-      </div>
-        </div>
-  
-  <!----------NEXT CARD-------3---->
-           <!-- MTN Bundles -->
-        <div class="mntCardStyle" >
-          <div class="network-label" style="color:#ffcb05">
-        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MASHUP
-      </div>
-      <div class="bundle-data">740<span class="unit">MINS</span></div>
-      <div class="bundle-validity">Valid 90 Days</div>
-      <div class="bundle-price">
-        <div class="price-amt"><span class="price-cedi">₵</span>38.85</div>
-        <button class="buy-btn"
-          data-network="mtn"
-          data-value="740MINS"
-          data-size="740"
-          data-price="38.85"
-        >Buy Now</button>
-      </div>
-        </div>
-        <!----------NEXT CARD----4------->
-            <!-- MTN Bundles -->
-        <div class="mntCardStyle" >
-            <div class="popular-badge" style="margin-top: 0.4rem;">⭐ Best Value</div>
-          <div class="network-label" style="color:#ffcb05">
-        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MASHUP
-      </div>
-      <div class="bundle-data">1100<span class="unit">MINS</span></div>
-      <div class="bundle-validity">Valid 90 Days</div>
-      <div class="bundle-price">
-        <div class="price-amt"><span class="price-cedi">₵</span>55.97</div>
-        <button class="buy-btn"
-          data-network="mtn"
-          data-value="1100MINS"
-          data-size="1100"
-          data-price="55.97"
-        >Buy Now</button>
-      </div>
-        </div>
-        <!----------NEXT CARD----5------->
+          </div>
 
 
-      </div>
-      </div>
-       <!------GRID-NORMAL SECTION--ENDS------->
+
+
+
+
 
 
 
@@ -2572,6 +2439,149 @@ width: 50%;
        <!---GRID EXPRESS SECTION--ENDS---->
     
 
+
+       <!------GRID NORMAL SECTION---( active-unless isPromoTime)---->
+        <div id="mashGridDiv" style="width: 100%;  max-width: 98.99%; display: none;">
+        <div class="offer-title" > <h2 >SPECIAL MASHUP BUNDLES</h2>
+        </div>
+
+        <div class="gridCard-wrapper " >
+
+        <!----------CARD----1------->
+            <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MASH DATA
+      </div>
+      <div class="bundle-data">10<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>41</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="10GB"
+          data-size="10"
+          data-price="41"
+        >Buy Now</button>
+      </div>
+        </div>
+
+            <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MASH DATA
+      </div>
+      <div class="bundle-data">20<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>81</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="20GB"
+          data-size="20"
+          data-price="81"
+        >Buy Now</button>
+      </div>
+        </div>
+
+            <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MASH DATA
+      </div>
+      <div class="bundle-data">50<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>149</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="50GB"
+          data-size="50"
+          data-price="149"
+        >Buy Now</button>
+      </div>
+        </div>
+        <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MASH DATA
+      </div>
+      <div class="bundle-data">217<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>363</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="217GB"
+          data-size="217"
+          data-price="363"
+        >Buy Now</button>
+      </div>
+        </div>
+
+        
+  <!----------NEXT CARD------2----->
+     <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MASHUP
+      </div>
+      <div class="bundle-data">371<span class="unit">MINS</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>16.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="217MINS"
+          data-size="371"
+          data-price="16.99"
+        >Buy Now</button>
+      </div>
+        </div>
+  
+  <!----------NEXT CARD-------3---->
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MASHUP
+      </div>
+      <div class="bundle-data">740<span class="unit">MINS</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>38.85</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="740MINS"
+          data-size="740"
+          data-price="38.85"
+        >Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD----4------->
+            <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+            <div class="popular-badge" style="margin-top: 0.4rem;">⭐ Best Value</div>
+          <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MASHUP
+      </div>
+      <div class="bundle-data">1100<span class="unit">MINS</span></div>
+      <div class="bundle-validity">Valid 90 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>55.97</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="1100MINS"
+          data-size="1100"
+          data-price="55.97"
+        >Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD----5------->
+
+
+      </div>
+      </div>
+       <!------GRID-NORMAL SECTION--ENDS------->
 
 
 
