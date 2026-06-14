@@ -3102,24 +3102,7 @@ option
   border: 1px solid rgb(224, 217, 217);
 }
 
-#mash .active,
-#promoActive .active,
-#topOpt .active,
-#bottomOpt .active{
-  background: rgb(204, 201, 191) !important;
-  border-radius: 8px ;
-  border: 1px solid rgb(224, 217, 217) !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) ;
-}
 
-.dark-mode #mash .active,
-.dark-mode #promoActive .active,
-.dark-moe #topOpt .active,
-.dark-mode #bottomOpt .active{
-  background: rgba(167, 164, 164, 0.89) !important;
-  border: 1px solid rgba(224, 217, 217, 0.87) !important;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2) !important;
-}
 
 .dark-mode .optionSelect:hover{
   background: rgb(167, 164, 164);
