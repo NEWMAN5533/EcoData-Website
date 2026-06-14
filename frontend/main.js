@@ -1052,7 +1052,7 @@ function renderHomepageTotals() {
   if (!ordersEl || !gbEl ) return;
 
   ordersEl.textContent = ecoTotals.orders;
-  gbEl.textContent = `${ecoTotals.gb}GB`;
+  gbEl.textContent = `${ecoTotals.gb}GB/MINS`;
  
 }
 
