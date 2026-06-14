@@ -21,31 +21,25 @@
   }
   animateRing();
 
- 
- });
-// CUSTOM CURSOR JS ENDS
 
 
-  
-   const shoppingBtn = document.querySelector(".shop-fixedBtn");
+    
+   const shoppingBtn = document.getElementById("shoppingBtn");
 
 shoppingBtn.addEventListener("click", (e) =>{
   e.stopPropagation();
 if(shoppingBtn){
-  showSnack("Coming up soon!", "error");
+  showSnackBar("Coming up soon!", "error");
 }
 });
 
 
-
-
-
-
+    
 // SNACKBAR SECTION //
 // ===== SNACKBAR FUNCTION ===== //
 let snackTimeout = null;
 
-function showSnack(message, type = "info", duration = 4000) {
+function showSnackBar(message, type = "info", duration = 4000) {
   let snackbar = document.querySelector(".snackbar");
 
   // Create snackbar if it doesn't exist
@@ -86,4 +80,15 @@ function showSnack(message, type = "info", duration = 4000) {
   }, duration);
 }
 // snackbar ends
+
+ 
+ });
+// CUSTOM CURSOR JS ENDS
+
+
+  
+
+
+
+
 
