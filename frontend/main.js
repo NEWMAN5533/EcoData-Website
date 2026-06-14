@@ -210,20 +210,20 @@ const mtnAreaDiv = document.getElementById("bundles");
   mashTopRightContainerh2.textContent = "Special Mashup Bundle";
   mashTopRightContainerSmall.textContent = "Purchase MASHUP bundle for single  or multiple recipients";
 
-  mashTopRightContainerBtn.textContent = "4 Packages Available";
+  mashTopRightContainerBtn.textContent = "7 Packages Available";
      
 
     mashupNormal.style.display = "block";
 
     // resize the dropdown container
-    flexingContainer.style.height = "12rem";
+    flexingContainer.style.height = "18.5rem";
     flexingContainer.style.margin = "1rem";
 
     // title to
     mashTitle.textContent = "SPECIAL MASHUP BUNDLE";
 
     // packs to
-    mashPacks.textContent = "4 Packages Available";
+    mashPacks.textContent = "7 Packages Available";
    
     // change labelRecipient to
     mashRecipient.textContent = "Mashup Recipient Number";
@@ -241,9 +241,9 @@ const mtnAreaDiv = document.getElementById("bundles");
 
        // Update modal preview
 
-    gridMashupDiv.style.display = "none";
-    mtnArea.style.display = "none";
-    mtnAreaDiv.style.display = "none";
+    gridMashupDiv.style.display = "block";
+    mtnArea.style.display = "block";
+    mtnAreaDiv.style.display = "block";
   } else{
     mashupNormal.style.display = "none";
 
@@ -380,6 +380,7 @@ document.addEventListener("click", () => {
 
       selectedBundle = {
         network: opt.dataset.network,
+        dataValue: opt.dataset.value,
         packageName: resolvePackageName(opt.dataset.network),
         size: Number(opt.dataset.size),
         price: Number(opt.dataset.price),
@@ -474,6 +475,7 @@ document.addEventListener("click", () => {
         else {
           bundle = {
             network: button.dataset.network,
+            dataValue: button.dataset.value,
             packageName: resolvePackageName(button.dataset.network),
             size: Number(button.dataset.size),
             price: Number(button.dataset.price),
@@ -487,7 +489,7 @@ document.addEventListener("click", () => {
           document.getElementById("priceTag").textContent =
             `GHS ${bundle.price}`;
           document.getElementById("networkTag").textContent =
-            `${bundle.network.toUpperCase()} / ${bundle.size}GB`;
+            `${bundle.network.toUpperCase()} / ${bundle.dataValue}`;
 
           createPhoneModal(inputNumber => {
             payWithPaystack(bundle, inputNumber);
@@ -881,12 +883,12 @@ const orderData = {
   volume:
     Number(bundle.size || size || 0),
 
+  dataValue: `${(bundle.dataValue || selectedBundle.dataValue || 0)}`,
+
   amount:
     Number(bundle.price || 0),
 
-  vendorPrice: 
-    Number(returnedOrder.price || 0),  
-
+  
   status: "pending",
 
   source: "web",
@@ -943,6 +945,8 @@ async function saveOrderToFirestore(orderData) {
 
   vendorPrice:
     Number(orderData.vendorPrice || 0),
+
+    dataValue: `${(orderData.dataValue  || 0)}`,
 
 
   // REAL PROFIT
@@ -1026,6 +1030,7 @@ function updateHomepageTotals(orderData) {
   // Update totals using EcoData values (from button/data-price, NOT Swift)
   ecoTotals.orders += 1;
   ecoTotals.gb += Number(orderData.volume || 0);
+ 
 
   // Persist totals to localStorage
   localStorage.setItem("ecoTotals", JSON.stringify(ecoTotals));
@@ -1043,10 +1048,12 @@ function renderHomepageTotals() {
   const ordersEl = document.getElementById("totalOrders");
   const gbEl = document.getElementById("totalGB");
 
+
   if (!ordersEl || !gbEl ) return;
 
   ordersEl.textContent = ecoTotals.orders;
   gbEl.textContent = `${ecoTotals.gb}GB`;
+ 
 }
 
 // Load totals on page refresh
@@ -1380,7 +1387,7 @@ console.log("UpdatedAt", order.updatedAt);
 
   row.innerHTML = `
     <span>${order.orderId}</span>
-    <span>${order.volume}GB</span>
+    <span>${order.volume}GB/MINS</span>
     <span>${order.recipient}</span>
     <span class="status-cell">
       <span class="status-badge ${getStatusClass(order.status)}">
