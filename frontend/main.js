@@ -217,7 +217,7 @@ const mtnAreaDiv = document.getElementById("bundles");
 
     // resize the dropdown container
     flexingContainer.style.height = "18.5rem";
-    flexingContainer.style.margin = "1rem";
+    flexingContainer.style.margin = "-2.5rem";
 
     // title to
     mashTitle.textContent = "SPECIAL MASHUP BUNDLE";
