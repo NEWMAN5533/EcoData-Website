@@ -45,6 +45,8 @@
   const promoActiveDiv = document.getElementById("promoActive");
   const promoEndedDiv = document.getElementById("topOpt");
   const untargetExpressDiv = document.getElementById("bottomOpt");
+  const mashupDiv = document.getElementById("mash");
+  const gridMashup = document.getElementById("mashGridDiv");
 
   const gridPromoActiveDiv = document.getElementById("gridPromoActive");
   const gridNormalSection = document.getElementById("gridNormalDiv");
@@ -56,11 +58,11 @@
       timerEl.innerHTML = "00:00:00";
       labelEl.innerHTML = `Promo timer. <img src="./css/icons/timer.png" >`;
 
-      ctaBtn.innerHTML = "Coming up!"
+      ctaBtn.innerHTML = "promo ended!"
       promoActiveDiv.style.display = "none";
       gridPromoActiveDiv.style.display = "none";
       promoThumbnail.style.display = "none";
-      bar.style.display = "none ";
+      bar.style.display = "none";
      
       promoWasInactive = true;
       return;
@@ -69,7 +71,6 @@
       promoActiveDiv.style.display = "block";
       gridPromoActiveDiv.style.display = "block";
       promoThumbnail.style.display = "flex";
-      
      
     }
 
@@ -82,10 +83,12 @@
      
       promoEndedDiv.style.display = "none";
       untargetExpressDiv.style.display = "none";
+      mashupDiv.style.display = "none";
 
       // grid section mtn toggle off
       gridNormalSection.style.display = "none";
       gridExpressSection.style.display = "none";
+      gridMashup.style.display = "none";
     }
 
 
