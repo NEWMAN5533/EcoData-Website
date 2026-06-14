@@ -1,4 +1,4 @@
-// UPDATED AT 11th/JUNE, 2026 [BACKUP MAIN.JS]
+// UPDATED AT 14th/JUNE, 2026 [BACKUP MAIN.JS]
 
 
 // --- Firebase Imports ---
@@ -45,7 +45,8 @@ let selectedPackageName = "mtn_data_normal_delivery";
 
 const PACKAGE_MAP = {
   normal: "mtn_data_normal_delivery",
-  express: "mtn_data_express_delivery"
+  express: "mtn_data_express_delivery",
+  mashup: "special_mashup_bundle"
 };
 
 const STORAGE_KEY = "selected_mtn_package";
@@ -62,6 +63,8 @@ function resolvePackageName(network) {
   if (network === "telecel") {
     return "telecel_expiry_bundle";
   }
+
+ 
 }
 
 
@@ -78,10 +81,28 @@ const deliveryOptions = document.querySelectorAll(".optionDelevery");
 
 const targetDiv = document.getElementById("topOpt");
 const unTargetDiv = document.getElementById("bottomOpt");
+
 const gridExpressDiv = document.getElementById("gridExpressDiv");
 const gridNormalDiv = document.getElementById("gridNormalDiv");
+const gridMashupDiv = document.getElementById("mashGridDiv");
 
-// Override promo when express active
+// MASHUP TOGGLE
+const mashupNormal = document.getElementById("mash");
+const flexingContainer = document.getElementById("moveDown");
+const mashOptTextCont = document.getElementById("optionBtn");
+const mashLabel = document.querySelector(".sel");
+const mashRecipient = document.querySelector(".bundleRecipient");
+const mashPacks = document.querySelector(".packs");
+const mashTitle = document.querySelector(".top-dashboard h2");
+const mashTopRightContainerh2= document.querySelector(".top-right-content h2");
+const mashTopRightContainerSmall= document.querySelector(".top-right-content small");
+const mashTopRightContainerBtn= document.querySelector(".btn-div");
+
+ // Update modal placeholders
+
+const mtnArea = document.getElementById("mtnArea");
+const mtnAreaDiv = document.getElementById("bundles");
+
 
 
 
@@ -93,14 +114,47 @@ const gridNormalDiv = document.getElementById("gridNormalDiv");
   selectedPackageName = PACKAGE_MAP[mode];
 
   if(mode === "express"){
+
+
+  mashTopRightContainerh2.textContent = "MTN Data Bundle";
+  mashTopRightContainerSmall.textContent = "Purchase MTN data bundles for single or multiple recipients";
+  mashTopRightContainerBtn.textContent = "17 Packages Available";
+
+      // resize the dropdown container
+    flexingContainer.style.height = "28rem";
+    flexingContainer.style.margin = "-12rem";
+
+    // title to
+    mashTitle.textContent = "MTN DATA BUNDLE";
+
+    // packs to
+    mashPacks.textContent = "17 Packages Available";
+   
+    // change labelRecipient to
+    mashRecipient.textContent = "Bundle Recipient Number";
+    // change label to
+    mashLabel.textContent = "Bundle";
+    
+     // change text to
+    mashOptTextCont.textContent = "Select Bundle";
+
+
+
+
+
+
     targetDiv.style.display = "none";
-    gridExpressDiv.classList.remove("active");
+    gridExpressDiv.style.display = "block";
     gridNormalDiv.style.display = "none";
 
 
     unTargetDiv.style.display = "block";
+    gridMashupDiv.style.display = "none";
+
+    mtnArea.style.display = "block";
+    mtnAreaDiv.style.display = "block";
   } else{
-    gridExpressDiv.classList.add("active");
+    gridExpressDiv.style.display = "none";
     unTargetDiv.style.display = "none";
 
     targetDiv.style.display = "block";
@@ -109,12 +163,101 @@ const gridNormalDiv = document.getElementById("gridNormalDiv");
     gridNormalDiv.style.display = "block";
   }
 
+
+
+  // IF NORMAL
   if(mode === "normal") {
 
+     mashTopRightContainerh2.textContent = "MTN Data Bundle";
+  mashTopRightContainerSmall.textContent = "Purchase MTN data bundles for single or multiple recipients";
+
+  mashTopRightContainerBtn.textContent = "17 Packages Available";
+
+      // resize the dropdown container
+    flexingContainer.style.height = "28rem";
+    flexingContainer.style.margin = "-12rem";
+
+
+  // title to
+    mashTitle.textContent = "MTN DATA BUNDLE";
+
+    // packs to
+    mashPacks.textContent = "17 Packages Available";
+   
+    // change labelRecipient to
+    mashRecipient.textContent = "Bundle Recipient Number";
+    // change label to
+    mashLabel.textContent = "Bundle";
+    
+     // change text to
+    mashOptTextCont.textContent = "Select Bundle";
+
+
+
     gridExpressDiv.classList.add("active");
+    gridMashupDiv.style.display = "none";
+
+    mtnArea.style.display = "block";
+    mtnAreaDiv.style.display = "block";
   } else{
     gridExpressDiv.classList.remove("active");
   }
+
+
+  // MASHUP
+  if(mode === "mashup"){
+
+  mashTopRightContainerh2.textContent = "Special Mashup Bundle";
+  mashTopRightContainerSmall.textContent = "Purchase MASHUP bundle for single  or multiple recipients";
+
+  mashTopRightContainerBtn.textContent = "4 Packages Available";
+     
+
+    mashupNormal.style.display = "block";
+
+    // resize the dropdown container
+    flexingContainer.style.height = "12rem";
+    flexingContainer.style.margin = "1rem";
+
+    // title to
+    mashTitle.textContent = "SPECIAL MASHUP BUNDLE";
+
+    // packs to
+    mashPacks.textContent = "4 Packages Available";
+   
+    // change labelRecipient to
+    mashRecipient.textContent = "Mashup Recipient Number";
+    // change label to
+    mashLabel.textContent = "Mashup";
+    
+     // change text to
+    mashOptTextCont.textContent = "Select Mashup Bundle";
+
+
+    targetDiv.style.display = "none";
+    unTargetDiv.style.display = "none";
+    gridNormalDiv.style.display = "none";
+    gridExpressDiv.style.display = "none";
+
+       // Update modal preview
+
+    gridMashupDiv.style.display = "none";
+    mtnArea.style.display = "none";
+    mtnAreaDiv.style.display = "none";
+  } else{
+    mashupNormal.style.display = "none";
+
+   
+
+
+
+
+
+
+
+
+  }
+
   
 }
 
@@ -231,7 +374,6 @@ document.addEventListener("click", () => {
 });
 
 
-
   // ---------- OPTION SELECT (NORMAL VIEW) ---(MTN)-------
   document.querySelectorAll('.optionSelect').forEach(opt => {
     opt.addEventListener('click', () => {
@@ -243,19 +385,25 @@ document.addEventListener("click", () => {
         price: Number(opt.dataset.price),
       };
 
+  
+
+
       // Update button UI
       optionBtn.innerHTML = `
-        ${selectedBundle.size}GB 
+     
+        ${opt.querySelector("span").textContent}
         <span class="price-badge">GHS ${selectedBundle.price}</span>
         <span><img src="./css/icons/more.png.png"></span>
       `;
+
+     
 
       // Update modal placeholders
       const img = document.querySelector(".selectedModal-left-left img");
       if (img) img.style.display = "flex";
 
       const gbHolder = document.querySelector(".placeHolderGB");
-      if (gbHolder) gbHolder.textContent = `${selectedBundle.size}GB`;
+      if (gbHolder) gbHolder.textContent = `${opt.querySelector("span").textContent}`;
 
       const priceHolder = document.querySelector(".placeHolderPrice small");
       if (priceHolder) priceHolder.textContent = `GHS ${selectedBundle.price}`;
@@ -333,6 +481,8 @@ document.addEventListener("click", () => {
 
           lastPurchasedBundle = bundle; // 🔑 SAVE FOR POST-PAYMENT
 
+          
+
           // Update modal preview
           document.getElementById("priceTag").textContent =
             `GHS ${bundle.price}`;
@@ -403,7 +553,7 @@ const telecelPackageDiv = document.querySelector(".packagesta");
 
 
 
-
+// NORMAL MODE BTN
 normalModeBtn.addEventListener("click", (e) => {
   e.stopPropagation();
 
@@ -420,11 +570,13 @@ normalModeBtn.addEventListener("click", (e) => {
     // RESET BUNDLE WHEN MODE CHANGED
   resetSelectedBundle();
 
+  // TOGGLE CONTAINERS
   normalView.style.display = "block";
   gridView.style.display = "none";
 
 });
 
+// GRID MODE BTN
 gridModeBtn.addEventListener("click", (e) => {
   e.stopPropagation();
  bundleTitle.textContent = "MTN";
