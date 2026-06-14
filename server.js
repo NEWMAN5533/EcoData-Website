@@ -17,6 +17,7 @@ import syncOrderRoute from "./routes/syncOrderStatus.js";
 
 
 
+
 // Firebase Admin
 import { admin, db } from "./firebaseAdmin.js";
 import { startOrderSyncJob } from "./cron/syncOrders.js";
@@ -108,6 +109,15 @@ export async function handleBuyDataRequest({network, recipient, pkg, size, payme
 
     // 4. Post to SwiftData
     const swiftBase = (process.env.SWIFT_BASE_URL || "https://swiftdata-link.com").replace(/\/$/, "");
+
+    console.log(" Sending to swiftData:", {
+      network,
+      recipient,
+      pkg,
+      size,
+      paymentReference
+    });
+
     const swiftUrl = `${swiftBase}/order/${network}`;
 
     const swiftRes = await axios.post(swiftUrl, orderData, {
@@ -129,6 +139,8 @@ export async function handleBuyDataRequest({network, recipient, pkg, size, payme
           swiftRes.data?.orderId || null,
       },
     });
+
+    console.log("🔥 swiftData response:", swiftRes.data);
 
     if (swiftRes.data?.success) {
       return {
@@ -179,6 +191,9 @@ export async function handleBuyDataRequest({network, recipient, pkg, size, payme
 app.post("/api/buy-data", async (req, res) => {
   const { network, recipient, package: pkg, size, paymentReference } = req.body;
   const result = await handleBuyDataRequest({ network, recipient, pkg, size, paymentReference });
+
+  console.log("🔥 handleBuyDataRequest result:", result);
+
   return res.status(result.status).json(result.body);
 });
 
