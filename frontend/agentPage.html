@@ -1215,12 +1215,13 @@ width: 50%;
 
 <!----NORMALVIEW-SECTION-->
 <section id="normalView" class="view active">
+
   <div class="top-dashboard">
     <h2>MTN DATA BUNDLE</h2>
     <button class="packs">17 Packages Available</button>
   </div>
   <div class="single-order">
-    <small>Recipient Phone Number</small>
+    <small class="bundleRecipient">Recipient Phone Number</small>
     <!---phone-input-here-->
     <input class="normalInput" type="tel" placeholder="e.g 0241234567">
     <small class="sel">Select Bundle</small>
@@ -1231,7 +1232,11 @@ width: 50%;
     Select package
     <span><img src="./css/icons/more.png.png" alt="dropdown" loading="lazy"></span>
   </button>
+
+
   <!----option-card-->
+
+
   <div class="dropwrapper">
     <div class="option-dropdown" id="moveDown">
       
@@ -1556,7 +1561,7 @@ width: 50%;
  <!----MASHUP-DIV----->
         <div id="mash" >
                         <!---select-1-->
-          <div class="optionSelect active" 
+          <div class="optionSelect " 
           data-network="mtn"
           data-value="10GB"
           data-size="10"
@@ -1565,7 +1570,7 @@ width: 50%;
               <small>GHS41</small>
             </div>
                           <!---select-1-->
-          <div class="optionSelect active" 
+          <div class="optionSelect " 
           data-network="mtn"
           data-value="20GB"
           data-size="20"
@@ -1574,7 +1579,7 @@ width: 50%;
               <small>GHS81</small>
             </div>
                           <!---select-1-->
-          <div class="optionSelect active" 
+          <div class="optionSelect " 
           data-network="mtn"
           data-value="50GB"
           data-size="50"
@@ -1586,7 +1591,7 @@ width: 50%;
                    
         
                       <!---select-1-->
-          <div class="optionSelect active" 
+          <div class="optionSelect " 
           data-network="mtn"
           data-value="217GB"
           data-size="217"
@@ -1654,7 +1659,9 @@ width: 50%;
     </div>
 
     <!---buy-btn-->
-    <button id="placeOrderBtn" class="buy-btn place-telbtn">Place Order</button>
+    <button id="placeOrderBtn" class="buy-btn place-telbtn">Place Order
+
+    </button>
   </div>
 
 
