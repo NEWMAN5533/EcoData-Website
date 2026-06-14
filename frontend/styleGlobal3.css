@@ -484,8 +484,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
       align-items: center;
       justify-content: space-between;
       padding: .1rem;
-      background: rgba(156, 155, 155, 0.075) !important;
-      backdrop-filter: blur(18px);
+      background: rgba(230, 230, 230, 0.877) !important;
       border-start-start-radius: 1.7rem;
       border-start-end-radius: 1.7rem;
       border: 1px solid var(--primary-cl);
