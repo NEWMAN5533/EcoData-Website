@@ -791,8 +791,15 @@ async function payWithPaystack(bundle, recipient) {
       amount: price * 100,
       currency: "GHS",
 
+
       metadata: {
-        custom_fields: [
+  type: "bundle",
+  recipient,
+  network,
+  pkg: packageName,
+  size,
+
+  custom_fields: [
           { display_name: "User Name", value: userName },
           { display_name: "Recipient", value: recipient },
           { display_name: "Network", value: network },
@@ -800,6 +807,8 @@ async function payWithPaystack(bundle, recipient) {
           { display_name: "Package", value: packageName },
         ],
       },
+
+    
 
       onSuccess: (response) => {
         hideLoader();
@@ -839,18 +848,24 @@ async function orderBundle(network, recipient, packageName, size, reference) {
         ? "http://localhost:3000"
         : "https://ecodata-app.onrender.com";
 
-    const query = new URLSearchParams({
+    
+
+  const response = await fetch(
+  `${API_BASE}/api/buy-data`,
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
       network,
       recipient,
       package: packageName,
-      size: size.toString(),
+      size,
       paymentReference: reference,
-    });
-
-    const response = await fetch(
-      `${API_BASE}/api/buy-data?${query.toString()}`,
-      { method: "GET" }
-    );
+    }),
+  }
+);
 
     const result = await response.json();
 
