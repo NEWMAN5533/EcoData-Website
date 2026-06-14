@@ -220,7 +220,7 @@ const mtnAreaDiv = document.getElementById("bundles");
     flexingContainer.style.margin = "-2.5rem";
 
     // title to
-    mashTitle.textContent = "SPECIAL MASHUP BUNDLE";
+    mashTitle.textContent = "SPECIAL MASHUP BUNDLES";
 
     // packs to
     mashPacks.textContent = "7 Packages Available";
