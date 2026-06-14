@@ -1,6 +1,6 @@
 
   .main-row-content #liveOrderRows .live-row{
-  grid-template-columns:   80px 130px 90px 120px 140px 90px 140px ;
+  grid-template-columns:   80px 130px 90px 120px 140px 90px 140px  ;
  display: grid;
   width: 100%;
   align-items: center;
@@ -25,6 +25,24 @@
   margin: 0 !important;
 }
 
+
+
+  #mashGridDiv .gridCard-wrapper .mntCardStyle .unit{
+    font-size: .9rem !important;
+  }
+
+  #mashGridDiv .gridCard-wrapper .mntCardStyle .bundle-data{
+      font-size: .96rem !important;
+      margin-top: .8rem !important;
+  }
+
+  
+
+ #mashGridDiv .gridCard-wrapper .mntCardStyle .network-label{
+  font-size: .8rem;
+  white-space: nowrap;
+
+ }
 
 
 
