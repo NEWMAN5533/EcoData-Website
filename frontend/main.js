@@ -1067,7 +1067,7 @@ function renderHomepageTotals() {
   if (!ordersEl || !gbEl ) return;
 
   ordersEl.textContent = ecoTotals.orders;
-  gbEl.textContent = `${ecoTotals.gb}GB/MINS`;
+  gbEl.textContent = `${ecoTotals.gb}GB`;
  
 }
 
@@ -1402,7 +1402,7 @@ console.log("UpdatedAt", order.updatedAt);
 
   row.innerHTML = `
     <span>${order.orderId}</span>
-    <span>${order.volume}GB/MINS</span>
+    <span>${order.volume}GB</span>
     <span>${order.recipient}</span>
     <span class="status-cell">
       <span class="status-badge ${getStatusClass(order.status)}">
