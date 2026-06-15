@@ -1,4 +1,4 @@
-// UPDATED AT 14th/JUNE, 2026 [BACKUP MAIN.JS]
+// UPDATED AT 15th/JUNE, 2026 [BACKUP MAIN.JS]
 
 
 // --- Firebase Imports ---
@@ -875,7 +875,7 @@ async function orderBundle(network, recipient, packageName, size, reference) {
     }
 
     playSuccessSound();
-      showSnackBar(`📱 Order Placed successfully!`, "success", 6000);
+      showSnackBar(`📱${size} Order Placed successfully!`, "success", 6000);
    
 
  
