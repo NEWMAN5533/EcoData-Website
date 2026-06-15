@@ -230,14 +230,6 @@
 </div>
 <div class="nav-right" >
 
-  <a href="notification.html">
-     <div class="notis">
-    <img class="notifity" src="./css/icons/notify (1).png" alt="" loading="lazy" style="display: none;">
-    <span id="notifyCount">2</span>
-  <img class="notifity" hidden
-   src="./css/icons/notify (3).png" alt="" loading="lazy">
-  </div>
-  </a>
  
  
  <!---DARK MODE-->
@@ -1176,6 +1168,7 @@ const cardCloser = document.getElementById("ecoDataSidebar");
     e.stopPropagation();
     if(cardToggler){
       cardCloser.classList.add("active");
+      document.body.classList.add("no-scroll");
     } else{
       cardCloser.classList.remove("active");
     }
@@ -1187,6 +1180,7 @@ const cardCloser = document.getElementById("ecoDataSidebar");
 
     if(secondToggler) {
       cardCloser.classList.add("active");
+      document.body.classList.add("no-scroll");
     } else {
       cardCloser.classList.remove("active");
     }
