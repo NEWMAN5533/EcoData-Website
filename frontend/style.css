@@ -2625,7 +2625,8 @@ how to style select dropdown
 }
 
 #dropdownOffer{
-  height: 7.5rem !important;
+  height: max-content !important;
+  padding: .2rem .1rem !important;
 }
 
 .select-dropdown {
@@ -2638,7 +2639,6 @@ how to style select dropdown
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 7.5rem !important;
   gap: .2rem;
   overflow-y: auto;
   padding: 0 .2rem;
@@ -2649,7 +2649,6 @@ how to style select dropdown
 }
 
 .dark-mode .select-dropdown{
-  height: 5rem !important;
   background: var(--background-cl-1) !important;
   border: 1px solid var(--thin-border);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.9) ;
