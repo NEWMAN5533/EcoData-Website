@@ -31,7 +31,12 @@ paystackWebhookRouter.post("/paystack/webhook", async (req, res) => {
       const reference = data.reference;
       const metadata = data.metadata || {};
 
-      console.log("💰 Payment success:", reference);
+      console.log(" WEBHOOK RECEIVED:",
+        {
+          reference: event.data.reference,
+          amount: event.data.amount,
+          status: event.data.status,
+        });
 
       // =========================
       // 🟣 1. SUBSCRIPTION PAYMENT
@@ -67,14 +72,15 @@ paystackWebhookRouter.post("/paystack/webhook", async (req, res) => {
     paymentReference: reference
   });
 
-  console.log("📦 Bundle processed instantly (no API call)");
+  console.log(" WEBHOOK ORDER CREATED:",
+   reference);
 }
     }
 
     res.sendStatus(200);
 
   } catch (err) {
-    console.error("🔥 Webhook error:", err);
+    console.error(" WEBHOOK ERROR:", err);
     res.sendStatus(500);
   }
 });
