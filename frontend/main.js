@@ -46,7 +46,7 @@ let selectedPackageName = "mtn_data_normal_delivery";
 const PACKAGE_MAP = {
   normal: "mtn_data_normal_delivery",
   express: "mtn_data_express_delivery",
-  mashup: "special_mashup_bundle"
+  mashup: "special_mashup_bundle_packages"
 };
 
 const STORAGE_KEY = "selected_mtn_package";
