@@ -210,20 +210,20 @@ const mtnAreaDiv = document.getElementById("bundles");
   mashTopRightContainerh2.textContent = "Special Mashup Bundle";
   mashTopRightContainerSmall.textContent = "Purchase MASHUP bundle for single  or multiple recipients";
 
-  mashTopRightContainerBtn.textContent = "7 Packages Available";
+  mashTopRightContainerBtn.textContent = "13 Packages Available";
      
 
     mashupNormal.style.display = "block";
 
     // resize the dropdown container
-    flexingContainer.style.height = "18.5rem";
-    flexingContainer.style.margin = "-2.5rem";
+    flexingContainer.style.height = "32.5rem";
+    flexingContainer.style.margin = "-20rem";
 
     // title to
     mashTitle.textContent = "SPECIAL MASHUP BUNDLES";
 
     // packs to
-    mashPacks.textContent = "7 Packages Available";
+    mashPacks.textContent = "13 Packages Available";
    
     // change labelRecipient to
     mashRecipient.textContent = "Mashup Recipient Number";
