@@ -68,6 +68,45 @@ const processedOrders = new Map();
   });
 */
 
+async function verifyPaystack(paymentReference, retries = 3) {
+
+  for (let attempt = 1; attempt <= retries; attempt++) {
+
+    try {
+
+      const verification = await axios.get(
+        `https://api.paystack.co/transaction/verify/${paymentReference}`,
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
+          },
+          timeout: 15000,
+        }
+      );
+
+      console.log(
+        `✅ Paystack verified on attempt ${attempt}`
+      );
+
+      return verification;
+
+    } catch (err) {
+
+      console.log(
+        `⚠️ Paystack verify attempt ${attempt}/${retries} failed`
+      );
+
+      if (attempt === retries) {
+        throw err;
+      }
+
+      await new Promise(resolve =>
+        setTimeout(resolve, 2000)
+      );
+    }
+  }
+}
+
 // Helper: common logic for buy-data (POST or GET)
 // ================================
 // HANDLE BUY DATA REQUEST (FIXED)
@@ -95,8 +134,22 @@ export async function handleBuyDataRequest({network, recipient, pkg, size, payme
 
   // 2. Verify Paystack payment
   try {
-   
 
+    const verification = await verifyPaystack(paymentReference);
+    
+    if(verification.data.data.status !== "success"){
+      return {
+        ok: false,
+        status: 400,
+        body: {
+          success: false,
+          message: "Payment verification failed",
+        },
+      };
+    }
+
+    console.log("Payment verified successfully for reference:", paymentReference);
+  
     // 3. Build SwiftData order payload
     const orderData = {
       type: "single",
