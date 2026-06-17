@@ -63,12 +63,15 @@
 }
 
 
+
 #adminAccessLink1,
 #adminAccessLink2,
 #adminAccessLink3,
 #adminAccessLink4 {
   display: none;
 }
+
+
 
 
 
@@ -556,7 +559,7 @@ width: 50%;
 
 .timer{
   font-size: 1.28rem;
-  width: 6.8rem !important;
+  width: 10.2rem !important;
   height: 1.8rem;
   display: flex;
   align-items: center;
@@ -580,12 +583,12 @@ width: 50%;
 
 .label{
   font-size: .75rem;
-  color: #b30715cc;
+  color: #056e88cc;
   display: flex;
   margin-left: .1rem;
   align-items: center;
   font-weight: 600;
-  padding-top: .4rem;
+  padding-top: .6rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
