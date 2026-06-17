@@ -925,7 +925,7 @@ saveGuestOrder(orderData);
 
   } catch (err) {
     console.error("⚠ Server error:", err);
-    showSnackBar("⚠ Server error. Please try again.", "error", 15000);
+    showSnackBar("Network problem, contact admin now.", "warning", 20000);
   }
 }
 //ends//
