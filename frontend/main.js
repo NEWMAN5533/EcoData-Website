@@ -1,4 +1,4 @@
-// UPDATED AT 15th/JUNE, 2026 [BACKUP MAIN.JS]
+// UPDATED AT 17th/JUNE, 2026 [BACKUP MAIN.JS]
 
 
 // --- Firebase Imports ---
@@ -830,6 +830,38 @@ async function payWithPaystack(bundle, recipient) {
 }
 // SELECTED BUNDLE FOR UI UPDATE
 
+async function fetchWithRetry(url, options, retries = 3) {
+
+  for (let attempt = 1; attempt <= retries; attempt++) {
+
+    try {
+
+      const response = await fetch(url, options);
+
+      if (!response.ok) {
+        throw new Error(
+          `HTTP ${response.status}`
+        );
+      }
+
+      return response;
+
+    } catch (err) {
+
+      console.log(
+        `⚠️ Order attempt ${attempt}/${retries} failed`
+      );
+
+      if (attempt === retries) {
+        throw err;
+      }
+
+      await new Promise(resolve =>
+        setTimeout(resolve, attempt * 1000)
+      );
+    }
+  }
+}
 
 //NEW UPDATED 21/01/2026 //
 // === SEND ORDER TO BACKEND ===
@@ -850,7 +882,7 @@ async function orderBundle(network, recipient, packageName, size, reference) {
 
     
 
-  const response = await fetch(
+const response = await fetchWithRetry(
   `${API_BASE}/api/buy-data`,
   {
     method: "POST",
@@ -864,7 +896,12 @@ async function orderBundle(network, recipient, packageName, size, reference) {
       size,
       paymentReference: reference,
     }),
-  }
+  },
+  3
+);
+
+console.log(
+  `🔄 Retrying order... (${attempt}/${retries})`
 );
 
     const result = await response.json();
