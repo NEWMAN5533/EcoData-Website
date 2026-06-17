@@ -55,6 +55,10 @@
   const gridNormalSection = document.getElementById("gridNormalDiv");
   const gridExpressSection = document.getElementById("gridExpressDiv");
 
+  // ISPROMO? OFF DIV
+
+  const isPromoOffDivs = document.querySelectorAll(".promThumbnailOff");
+
  
 
     if(!isPromoTime()) {
@@ -66,6 +70,9 @@
       gridPromoActiveDiv.style.display = "none";
       promoThumbnail.style.display = "none";
       bar.style.display = "none";
+
+      // toggle on when !ispromoTime
+      isPromoOffDivs.style.display = "flex";
      
       promoWasInactive = true;
       return;
@@ -92,6 +99,9 @@
       gridNormalSection.style.display = "none";
       gridExpressSection.style.display = "none";
       gridMashup.style.display = "none";
+
+      // thumbnail off
+      isPromoOffDivs.style.display = "none";
     }
 
 
