@@ -1404,7 +1404,7 @@ console.log("UpdatedAt", order.updatedAt);
 
   row.innerHTML = `
     <span>${order.orderId}</span>
-    <span>${order.volume}GB/Mins</span>
+    <span>${order.volume}GB</span>
     <span>${order.recipient}</span>
     <span class="status-cell">
       <span class="status-badge ${getStatusClass(order.status)}">

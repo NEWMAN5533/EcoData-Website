@@ -55,7 +55,7 @@
   const gridNormalSection = document.getElementById("gridNormalDiv");
   const gridExpressSection = document.getElementById("gridExpressDiv");
 
-  
+
 
  
 
@@ -69,7 +69,7 @@
       promoThumbnail.style.display = "none";
       bar.style.display = "none";
 
-     
+    
      
       promoWasInactive = true;
       return;
@@ -97,7 +97,6 @@
       gridExpressSection.style.display = "none";
       gridMashup.style.display = "none";
 
-      
     }
 
 
