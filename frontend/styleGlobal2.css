@@ -531,10 +531,11 @@ CREATE STORE LINK
 
 
 
-
 .card-container .welcome-card{
   margin-top: 1vh !important;
   margin-bottom: .7rem;
+  
+
 }
 
 
@@ -2055,6 +2056,20 @@ TABLET VIEW
       margin: 7rem !important;
       justify-content: center !important;
       gap: .4rem !important;
+    }
+
+    .modal{
+      overflow: hidden !important;
+    }
+
+    .modal-content{
+      width: 100%;
+      max-width: 500px !important;
+      position: absolute !important;
+      justify-self: center;
+      top: 15%;
+      border-radius: 1.1rem !important;
+      overflow: hidden;
     }
  /****
 DISPLAY NONE DIV

@@ -1118,6 +1118,7 @@ width: 50%;
       <!-- TABLE HEADER -->
       <div class="table-header">
         <span>Order ID</span>
+        <span>Network</span>
         <span>Size</span>
         <span>Recipient</span>
         <span>Status</span>
@@ -3280,40 +3281,82 @@ width: 50%;
 
 
 <!-- Phone Input Modal -->
-<div id="phoneModal" class="modal">
-  <div class="modal-content">
-<!-----SELECTED-->
-      <div class="selected-div">
-    <h4>Selected Package Details</h4>
-    <div class="placeholders-wrapper">
-      <div class="placeholdersbtn-wrapper">
-              <small>Price</small>
-            <div class="placeholders-left"  id="priceTag">
-    </div>
+  <div id="phoneModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-content-top">
+        <div class="left-top-content">
+          <div class="left-Img">
+           <img src="./css/icons/totalorder.png" alt="">
+          </div>
+          <div class="right-title">
+            <div class="top-title">
+              <p>Buy Data Bundle</p>
+            </div>
+            <div class="bottom-title">Guest Purchase</div>
+          </div>
+        </div>
+        <div id="cancelBtn" class="right-top-content">
+          <p>&times</p>
+        </div>
       </div>
+  <!-----SELECTED-->
+  <section class="selected_info_wrapper">
+
+     <div class="selected-div">
+      <div class="placeholders-wrapper">
 
         <div class="placeholdersbtn-wrapper">
-          <small>Network/GB</small>
-            <div class="placeholders-right" id="networkTag">
-    </div>
+              <div class="place-lefter">
+                 <div class="placeholders-right" id="networkTag">
+              </div>
+              <div id="sizeTag" class="sizeTaged"></div>
+              </div>
+             
+
+              <div class="place-righter">
+                 <div class="select-pkg">
+                <small class="sma">Selected</small>
+                 </div>
+              </div>
+             
+          </div>
+          
+        <div class="placeholdersbtn-wrapper2">
+                <small>Price</small>
+              <div class="placeholders-left"  id="priceTag">
+      </div>
         </div>
+
+          
+      </div>
+    </div>
+
+    <div class="selected-div2">
+         <small class="recip">Recipient Phone Number</small>
+      <input 
+      type="tel"
+      id="recipientInput" 
+      placeholder="Enter phone number. e.g 0241234567"
+      maxlength="10"
+      inputmode="numeric"
+      required/>
+    </div>
+    <div class="selected-div3">
+      <p><span class="info">i</span> Guest purchase</p>
+      <small>No account needed. The data bundle will be  sent after successful payment.</small>
+    </div>
+  </section>
+   
+    <div class="selected-div4">
+      <div class="modal-buttons">
+        <button id="confirmBtn" class="btn continue">
+          <img src="./css/icons/totalorder.png" alt="">
+          Proceed to Paystack</button>
+      </div>
+    </div>
+    
     </div>
   </div>
-    <h3>Enter Bundle Recipient</h3>
-    <input 
-    type="tel"
-     id="recipientInput" 
-     placeholder="e.g. 0241234567"
-     maxlength="10"
-     inputmode="numeric"
-     required/>
-    <div class="modal-buttons">
-      <button id="cancelBtn" class="btn cancel">Cancel</button>
-      <button id="confirmBtn" class="btn continue">Proceed to Paystack</button>
-    </div>
-</div>
-</div>
-
 
 
 <!----SIDEBAR @1366PX-DES---------->

@@ -489,7 +489,9 @@ document.addEventListener("click", () => {
           document.getElementById("priceTag").textContent =
             `GHS ${bundle.price}`;
           document.getElementById("networkTag").textContent =
-            `${bundle.network.toUpperCase()} / ${bundle.dataValue}`;
+            `${bundle.network.toUpperCase()} `;
+          document.getElementById("sizeTag").textContent =
+          `${bundle.dataValue}`;
 
           createPhoneModal(inputNumber => {
             payWithPaystack(bundle, inputNumber);
@@ -1404,6 +1406,7 @@ console.log("UpdatedAt", order.updatedAt);
 
   row.innerHTML = `
     <span>${order.orderId}</span>
+    <span>${order.network.toUpperCase()}</span>
     <span>${order.volume}GB</span>
     <span>${order.recipient}</span>
     <span class="status-cell">
