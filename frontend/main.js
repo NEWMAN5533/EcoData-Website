@@ -1406,7 +1406,6 @@ console.log("UpdatedAt", order.updatedAt);
 
   row.innerHTML = `
     <span>${order.orderId}</span>
-    <span>${order.network.toUpperCase()}</span>
     <span>${order.volume}GB</span>
     <span>${order.recipient}</span>
     <span class="status-cell">
