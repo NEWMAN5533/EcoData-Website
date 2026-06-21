@@ -1,4 +1,4 @@
-// UPDATED AT 17th/JUNE, 2026 [BACKUP MAIN.JS]
+// UPDATED AT 21st/JUNE, 2026 [BACKUP MAIN.JS]
 
 
 // --- Firebase Imports ---
@@ -134,7 +134,7 @@ const mtnAreaDiv = document.getElementById("bundles");
     mashTitle.textContent = "MTN DATA BUNDLE";
 
     // packs to
-    mashPacks.textContent = "17 Packages Available";
+    mashPacks.textContent = "16 Packages Available";
    
     // change labelRecipient to
     mashRecipient.textContent = "Bundle Recipient Number";
@@ -487,6 +487,8 @@ document.addEventListener("click", () => {
           };
 
           lastPurchasedBundle = bundle; // 🔑 SAVE FOR POST-PAYMENT
+
+          // MTN NETWORK BG
             if(button.dataset.network === "mtn"){
                document.querySelector(".modal-content-top").style.backgroundColor = 
               "rgba(245, 179, 57, 0.932)";
