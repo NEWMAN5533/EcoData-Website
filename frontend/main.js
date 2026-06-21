@@ -487,11 +487,18 @@ document.addEventListener("click", () => {
 
           // Update modal preview
           document.getElementById("priceTag").textContent =
-            `GHS ${bundle.price}`;
+            `GHS₵ ${bundle.price}`;
           document.getElementById("networkTag").textContent =
             `${bundle.network.toUpperCase()} `;
           document.getElementById("sizeTag").textContent =
           `${bundle.dataValue}`;
+          document.getElementById("netWorth").textContent = 
+          `${bundle.network.toUpperCase()}`;
+          document.getElementById("gbSize").textContent =
+          `${bundle.dataValue.toUpperCase()}`;
+          document.getElementById("amount").textContent = 
+          `GHS₵ ${bundle.price}`;
+
 
           createPhoneModal(inputNumber => {
             payWithPaystack(bundle, inputNumber);
