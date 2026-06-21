@@ -1871,6 +1871,169 @@ UPDATED UI STYLE
 }
 
 
+
+
+
+.modal.show {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal .modal-content {
+  background: var(--primary-cl);
+  display: flex;
+  flex-direction: column;
+  gap: 0 !important;
+  align-items: center; 
+  justify-content: space-between; 
+  border-start-start-radius: 1.1rem;
+  border-start-end-radius: 1.1rem;
+  border-end-end-radius: 0 !important;
+  border-end-start-radius: 0 !important;
+  width: 100%;
+  max-width: 100% !important;
+  position: fixed;
+  bottom: 0 !important;
+  height: 65% !important;
+  box-shadow: 10px 40px 0 rgba(107, 105, 105, 0.3);
+  text-align: center;
+  animation: popUp 0.3s ease;
+  border: none !important;
+}
+
+
+
+   .left-Img .icon1{
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .continue .icon{
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+
+
+.dark-mode .modal-content{
+  background: var(--thin-border) !important;
+}
+
+/***info wrapper****/
+.modal-content .selected_info_wrapper{
+  width: 100%;
+  max-width: 100%;
+  height: 75%;
+  padding: 10px;
+  position: relative;
+  display: flex;
+  gap: .3rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent ;
+}
+
+/*****TOP CONTENT*****/
+.modal-content .modal-content-top{
+  width: 100%;
+  max-width: 100%;
+  height: 15%;
+  position: relative;
+  align-items: center;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  background: rgb(255, 208, 0);
+  border-start-start-radius: .9rem;
+  border-start-end-radius: .9rem;
+}
+
+.dark-mode .modal-content .modal-content-top{
+  background: rgba(185, 167, 132, 0.945) !important;
+  border: none !important;
+}
+
+.modal-content-top .left-top-content{
+  width: 100%;
+  max-width: 70%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: start;
+  gap: .6rem;
+}
+
+
+/****TOP LEFT SIDE******/
+.left-top-content .left-Img{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.left-Img{
+  font-size: .9rem;
+  font-weight: bold;
+}
+
+/*****TOP LEFT RIGTH SIDE*****/
+
+
+.right-title .top-title p{
+  font-weight: 600;
+  font-size: 1rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: black;
+}
+
+.right-title .bottom-title{
+  font-size: .8rem;
+  font-weight: 400;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: rgb(42, 42, 44);
+  align-items: start;
+  text-align: start;
+}
+
+
+/*******TOP CONTENT RIGHT*********/
+.modal-content-top .right-top-content{
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  position: absolute;
+  right: 14px;
+  top: 12px;
+  align-items: center;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  background: rgba(243, 163, 98, 0.479);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: .2s ease;
+}
+
+.right-top-content p{
+  font-size: 1.4rem;
+  font-weight: 300;
+  font-family: Arial, san-serif;
+}
+
+.right-top-content:hover{
+  cursor: pointer;
+}
+
+
+
+
+
+
 /*******SELECTED DIV**********/
 .selected-div{
   display: flex;
@@ -2388,165 +2551,6 @@ font-size: .87rem;
   font-weight: 600;
 }
 
-
-
-
-
-
-.modal.show {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  animation: fadeIn 0.3s ease;
-}
-
-.modal .modal-content {
-  background: var(--primary-cl);
-  display: flex;
-  flex-direction: column;
-  gap: 0 !important;
-  align-items: center; 
-  justify-content: space-between; 
-  border-start-start-radius: 1.1rem;
-  border-start-end-radius: 1.1rem;
-  border-end-end-radius: 0 !important;
-  border-end-start-radius: 0 !important;
-  width: 100%;
-  max-width: 100% !important;
-  position: fixed;
-  bottom: 0 !important;
-  height: 67% !important;
-  box-shadow: 10px 40px 0 rgba(107, 105, 105, 0.3);
-  text-align: center;
-  animation: popUp 0.3s ease;
-  border: none !important;
-}
-
-
-
-   .left-Img .icon1{
-    font-size: 18px;
-    font-weight: 500;
-  }
-  .continue .icon{
-    font-size: 16px;
-    font-weight: 500;
-  }
-
-
-
-.dark-mode .modal-content{
-  background: var(--thin-border) !important;
-}
-
-/***info wrapper****/
-.modal-content .selected_info_wrapper{
-  width: 100%;
-  max-width: 100%;
-  height: 75%;
-  padding: 10px;
-  position: relative;
-  display: flex;
-  gap: .3rem;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  background: transparent ;
-}
-
-/*****TOP CONTENT*****/
-.modal-content .modal-content-top{
-  width: 100%;
-  max-width: 100%;
-  height: 15%;
-  position: relative;
-  align-items: center;
-  padding: 12px;
-  display: flex;
-  justify-content: space-between;
-  background: rgb(255, 208, 0);
-  border-start-start-radius: .9rem;
-  border-start-end-radius: .9rem;
-}
-
-.dark-mode .modal-content .modal-content-top{
-  background: rgba(185, 167, 132, 0.945) !important;
-  border: none !important;
-}
-
-.modal-content-top .left-top-content{
-  width: 100%;
-  max-width: 70%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  position: relative;
-  justify-content: start;
-  gap: .6rem;
-}
-
-
-/****TOP LEFT SIDE******/
-.left-top-content .left-Img{
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-.left-Img{
-  font-size: .9rem;
-  font-weight: bold;
-}
-
-/*****TOP LEFT RIGTH SIDE*****/
-
-
-.right-title .top-title p{
-  font-weight: 600;
-  font-size: 1rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  color: black;
-}
-
-.right-title .bottom-title{
-  font-size: .8rem;
-  font-weight: 400;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  color: rgb(42, 42, 44);
-  align-items: start;
-  text-align: start;
-}
-
-
-/*******TOP CONTENT RIGHT*********/
-.modal-content-top .right-top-content{
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
-  position: absolute;
-  right: 14px;
-  top: 12px;
-  align-items: center;
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  background: rgba(243, 163, 98, 0.479);
-  backdrop-filter: blur(8px);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  transition: .2s ease;
-}
-
-.right-top-content p{
-  font-size: 1.4rem;
-  font-weight: 300;
-  font-family: Arial, san-serif;
-}
-
-.right-top-content:hover{
-  cursor: pointer;
-}
 
 
 
@@ -3429,10 +3433,12 @@ NETcARD VIEW ENDS
   font-size: .88rem !important;
 }
 
-#selectBtn span img{
-  width: 1rem !important;
-  height: 1rem !important;
+#optionBtn span img{
+  width: .98rem;
+  height: .98rem;
 }
+
+
 
 .dark-mode .selection-btn{
   background-color: rgb(184, 182, 182);
@@ -3803,6 +3809,8 @@ ends of left section
   padding: 3px 8px;
   font-weight: 500;
 }
+
+
 
 .single-order .buy-btn{
   width: 100%;
