@@ -2101,8 +2101,8 @@ UPDATED UI STYLE
  
 }
 
- #networkTag{
-    background: rgba(245, 179, 57, 0.932) !important;
+ .placeholdersbtn-wrapper .place-lefter #networkTag{
+    background-color: rgba(245, 179, 57, 0.932) !important;
     border-radius: 4px;
     width: max-content;
     padding: .2rem;
