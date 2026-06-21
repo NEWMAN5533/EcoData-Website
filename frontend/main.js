@@ -487,7 +487,17 @@ document.addEventListener("click", () => {
           };
 
           lastPurchasedBundle = bundle; // 🔑 SAVE FOR POST-PAYMENT
+            if(button.dataset.network === "mtn"){
+               document.querySelector(".modal-content-top").style.backgroundColor = 
+              "rgba(245, 179, 57, 0.932)";
 
+              document.querySelector(".continue").style.backgroundColor = 
+              "rgba(245, 179, 57, 0.932)";
+
+
+              document.getElementById("networkTag").style.backgroundColor =
+              "rgba(245, 179, 57, 0.932)";
+            }
         
             // TELECEL NETWORK BG
             if(button.dataset.network === "telecel"){
