@@ -34,6 +34,9 @@
 <!---GOOGLE MATERIAL ICON--LINK---->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+<!--remix icons-->
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
+
 
   <!---css-link-->
   <link rel="stylesheet" href="style.css">
@@ -3281,12 +3284,13 @@ width: 50%;
 
 
 <!-- Phone Input Modal -->
+ <!-- Phone Input Modal -->
   <div id="phoneModal" class="modal">
     <div class="modal-content">
       <div class="modal-content-top">
         <div class="left-top-content">
           <div class="left-Img">
-           <img src="./css/icons/totalorder.png" alt="">
+          <i class="ri-shopping-cart-line icon1"></i>
           </div>
           <div class="right-title">
             <div class="top-title">
@@ -3341,6 +3345,30 @@ width: 50%;
       inputmode="numeric"
       required/>
     </div>
+    <div class="selected-div5">
+      <div class="selected-div5-packs">
+        <div class="pa-left">
+            <div class="le-pa-top-ri">
+             <small>Network:</small>
+            </div>
+          <div class="le-pa-btom-ri">
+           <small> Package:</small>
+          </div>
+        </div>
+        <div class="pa-right">
+          <div class="pa-top-ri">
+            <small id="netWorth"></small>
+          </div>
+          <div class="pa-btom-ri">
+          <small id="gbSize"></small>
+          </div>
+        </div>
+      </div>
+      <div class="selected-div5-amount">
+        <small class="toAmount">Total Amount</small>
+        <p id="amount"></p>
+      </div>
+    </div>
     <div class="selected-div3">
       <p><span class="info">i</span> Guest purchase</p>
       <small>No account needed. The data bundle will be  sent after successful payment.</small>
@@ -3350,8 +3378,8 @@ width: 50%;
     <div class="selected-div4">
       <div class="modal-buttons">
         <button id="confirmBtn" class="btn continue">
-          <img src="./css/icons/totalorder.png" alt="">
-          Proceed to Paystack</button>
+         <i class="ri-shopping-cart-line icon"></i>
+        Proceed to Paystack</button>
       </div>
     </div>
     
