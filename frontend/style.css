@@ -1863,6 +1863,7 @@ UPDATED UI STYLE
   align-items: center;
   justify-self: center;
   z-index: 9999999999;
+  overflow: hidden;
 }
 
 .dark-mode .modal{
@@ -1887,6 +1888,7 @@ UPDATED UI STYLE
 
 .dark-mode .selected-div,
 .dark-mode .selected-div3,
+.dark-mode .selected-div5,
 .dark-mode .selected-div2 #recipientInput{
  border: 1px solid rgb(59, 59, 59) !important;
 }
@@ -2055,7 +2057,7 @@ UPDATED UI STYLE
   width: 100%;
   margin: 0 !important;
   height: 6rem !important;
-  max-width: 99% !important;
+  max-width: 100% !important;
   justify-self: center;
   align-items: start;
   padding: 8px 0;
@@ -2080,7 +2082,7 @@ UPDATED UI STYLE
 
 .modal-content .selected-div2 input {
   width: 100%;
-  height: 2.5rem;
+  height: 2.7rem;
   padding: 8px;
   color: rgb(46, 44, 44);
   background: transparent;
@@ -2145,6 +2147,7 @@ UPDATED UI STYLE
   text-align: center;
   justify-content: center;
   display: flex;
+  align-items: center;
   border: 1px solid rgb(72, 72, 134);
   border-radius: 50%;
   font-size: .55rem;
@@ -2173,32 +2176,219 @@ UPDATED UI STYLE
 
 
 /*******SELECTED-DIV-4******/
-.selected-div4{
+.modal-content .selected-div4{
   display: flex;
   width: 100%;
-  margin: 0 !important;
-  height: 4 !important;
-  max-width: 99% !important;
+  height: 4rem !important;
   justify-self: center;
-  align-items: center;
+  align-items: start;
   padding: 8px;
-  justify-content: space-between !important;
+  justify-content: center !important;
   box-shadow: 0 !important;
 }
 
-.selected-div5{
+
+
+.modal-buttons {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  background-color: transparent;
+  border-radius: 4px;
+  align-items: center;
+  justify-content: center !important;
+}
+
+.modal-buttons .btn {
+  flex: 1;
+  padding: 10px;
+  width: max-content;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  border: 0.1px solid rgb(14, 12, 12);
+  font-size: 0.90rem;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
+}
+
+.modal-buttons .continue {
+  width: 100%;
+  max-width: 100%;
+  padding: 0 .8rem;
+  height: 2.45rem !important;
+  display: flex;
+  margin-bottom: 1.5rem;
+  gap: .4rem;
+  border: none !important;
+  align-items: center;
+  justify-content: center;
+  background: rgb(255, 208, 0);
+  font-size: 1.07rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 600;
+  color: black;
+  box-shadow:  0 2px 6px rgba(70, 69, 69, 0.4) !important;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
+}
+
+.dark-mode .modal-content .continue{
+  background: rgba(185, 167, 132, 0.945) !important;
+}
+.modal-buttons .continue img{
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popUp {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1);opacity:1;}
+}
+/****-----PHONE INPUT MODAL--ENDS--****/
+
+
+
+/**********SELECTED 5*******/
+.modal-content .selected-div5{
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin: 0 !important;
-  height: 8 !important;
-  max-width: 99% !important;
+  height: 6rem !important;
+  max-width: 100% !important;
   justify-self: center;
   align-items: center;
-  padding: 8px;
+  margin-bottom: .4rem !important;
+  padding: 3px;
   justify-content: space-between !important;
   box-shadow: 0 !important;
+  border: 1px solid rgb(202, 226, 241);
+  border-radius: 10px;
 }
+
+.selected-div5 .selected-div5-packs{
+  width: 100%;
+  height: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  position: relative;
+  padding: .3rem;
+}
+
+.selected-div5  .selected-div5-packs .pa-left{
+  width: 100%;
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  gap: .3rem;
+  position: relative;
+}
+
+.pa-left .le-pa-top-ri small{
+ font-size: .77rem;
+ font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ color: rgba(116, 116, 116, 0.89);
+}
+
+.pa-left .le-pa-btom-ri small{
+ font-size: .77rem;
+ font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ color: rgba(116, 116, 116, 0.89);
+}
+
+.dark-mode .pa-left .le-pa-btom-ri small,
+.dark-mode .pa-left .le-pa-top-ri small,
+.dark-mode .selected-div5-amount .toAmount,
+.dark-mode .selected-div .sma,
+.dark-mode .selected-div2 .recip,
+.dark-mode .placeholdersbtn-wrapper2 small
+{
+  color: rgba(160, 160, 160, 0.89) !important;
+}
+
+.dark-mode .selected-div3 small{
+  color: rgba(116, 116, 116, 0.89) !important;
+}
+
+
+/*****RIGHT SIDE**********/
+
+.selected-div5  .selected-div5-packs .pa-right{
+  width: 100%;
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: end;
+  gap: .3rem;
+  position: relative;
+  padding: .3rem;
+}
+
+
+.pa-right .pa-top-ri small{
+ font-size: .77rem;
+ font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ color: rgba(15, 15, 15, 0.89);
+}
+
+.dark-mode .pa-right .pa-top-ri small{
+  color: rgb(235, 235, 235);
+}
+
+.pa-right .pa-btom-ri small{
+ font-size: .77rem;
+ font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ color: rgba(15, 15, 15, 0.89);
+ font-weight: 600;
+}
+
+.dark-mode .pa-right .pa-btom-ri small{
+  color: rgb(235, 235, 235);
+}
+
+
+/*********SELECTED DIV5 BOTTOM*****/
+.selected-div5 .selected-div5-amount{
+  width: 100%;
+  height: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .3rem;
+  position: relative;
+}
+
+.selected-div5-amount .toAmount{
+font-size: .87rem;
+ font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ color: rgba(116, 116, 116, 0.89);
+}
+
+.selected-div5-amount #amount{
+  color: rgba(245, 179, 57, 0.932) ;
+  font-size: 1.02rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  padding-right: 5px;
+  font-weight: 600;
+}
+
+
 
 
 
@@ -2225,12 +2415,25 @@ UPDATED UI STYLE
   max-width: 100% !important;
   position: fixed;
   bottom: 0;
-  height: 60% !important;
+  height: 82% !important;
   box-shadow: 10px 40px 0 rgba(107, 105, 105, 0.3);
   text-align: center;
   animation: popUp 0.3s ease;
   border: none !important;
 }
+
+
+
+   .left-Img .icon1{
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .continue .icon{
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+
 
 .dark-mode .modal-content{
   background: var(--thin-border) !important;
@@ -2354,77 +2557,6 @@ UPDATED UI STYLE
 
 
 
-
-
-.modal-buttons {
-  display: flex;
-  width: 100%;
-  max-width: 100%;
-  height: 10%;
-  background-color: transparent;
-  border-radius: 4px;
-  align-items: center;
-  justify-content: center !important;
-}
-
-.modal-buttons .btn {
-  flex: 1;
-  padding: 10px;
-  width: max-content;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 500;
-  border: 0.1px solid rgb(14, 12, 12);
-  font-size: 0.90rem;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;;
-  user-select: none;
-}
-
-.modal-buttons .continue {
-  width: 100%;
-  max-width: 100%;
-  padding: 0 .8rem;
-  height: 2.45rem !important;
-  display: flex;
-  gap: .4rem;
-  border: none !important;
-  align-items: center;
-  justify-content: center;
-  background: rgb(255, 208, 0);
-  font-size: 1.07rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-weight: 600;
-  color: black;
-  box-shadow:  0 2px 6px rgba(70, 69, 69, 0.4) !important;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;;
-  user-select: none;
-}
-
-.dark-mode .modal-content .continue{
-  background: rgba(185, 167, 132, 0.945) !important;
-}
-.modal-buttons .continue img{
-  width: 1.4rem;
-  height: 1.4rem;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes popUp {
-  from { transform: scale(0.9); opacity: 0; }
-  to { transform: scale(1);opacity:1;}
-}
-/****-----PHONE INPUT MODAL--ENDS--****/
 
 
 
