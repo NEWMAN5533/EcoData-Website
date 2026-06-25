@@ -124,7 +124,7 @@ const mtnAreaDiv = document.getElementById("bundles");
 
   mashTopRightContainerh2.textContent = "MTN Data Bundle";
   mashTopRightContainerSmall.textContent = "Purchase MTN data bundles for single or multiple recipients";
-  mashTopRightContainerBtn.textContent = "17 Packages Available";
+  mashTopRightContainerBtn.textContent = "16 Packages Available";
 
       // resize the dropdown container
     flexingContainer.style.height = "28rem";
@@ -134,7 +134,7 @@ const mtnAreaDiv = document.getElementById("bundles");
     mashTitle.textContent = "MTN DATA BUNDLE";
 
     // packs to
-    mashPacks.textContent = "16 Packages Available";
+    mashPacks.textContent = "13 Packages Available";
    
     // change labelRecipient to
     mashRecipient.textContent = "Bundle Recipient Number";
@@ -499,7 +499,7 @@ document.addEventListener("click", () => {
 
               document.getElementById("networkTag").style.backgroundColor =
               "rgba(245, 179, 57, 0.932)";
-            }
+             }
         
             // TELECEL NETWORK BG
             if(button.dataset.network === "telecel"){
@@ -512,6 +512,8 @@ document.addEventListener("click", () => {
 
               document.getElementById("networkTag").style.background =
               "linear-gradient(to right, rgb(241, 62, 122), rgb(192, 3, 82))";
+
+              
             }
 
             // AT NETWORK BG
@@ -524,6 +526,8 @@ document.addEventListener("click", () => {
 
               document.getElementById("networkTag").style.background =
               "linear-gradient(to right, rgb(75, 148, 233), rgb(4, 145, 170))";
+
+               
             }
 
           // Update modal preview
@@ -812,6 +816,11 @@ function hasActiveOrder(recipient) {
 
 
 async function payWithPaystack(bundle, recipient) {
+
+  if(bundle.network?.toLowerCase() === "mtn") {
+    showSnackBar("MTN purchase are temporarily unavailable due to system upgrade. Please try again later.", "warning", 10000);
+    return;
+  }
 
   if(hasActiveOrder(recipient)){
     showSnackBar("Number already has an active order", "warning"
