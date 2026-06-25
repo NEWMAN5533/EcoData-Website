@@ -86,11 +86,13 @@
     // IsPromoTime() function
     if(isPromoTime()){
       promoActiveDiv.style.display = "block";
-      promoThumbnail.style.display = "flex";
+      promoThumbnail.style.display = "none";
      
       promoEndedDiv.style.display = "none";
       untargetExpressDiv.style.display = "none";
       mashupDiv.style.display = "none";
+      bar.style.display = "none";
+      badge.style.display = "none";
 
       // grid section mtn toggle off
       gridNormalSection.style.display = "none";
