@@ -818,7 +818,7 @@ function hasActiveOrder(recipient) {
 async function payWithPaystack(bundle, recipient) {
 
   if(bundle.network?.toLowerCase() === "mtn") {
-    showSnackBar("MTN purchase are temporarily unavailable due to system upgrade. Please try again later.", "warning", 10000);
+    showSnackBar("MTN Data purchases are temporarily unavailable due to system upgrade. Please try again later.", "warning", 10000);
     return;
   }
 
