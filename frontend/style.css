@@ -3560,13 +3560,15 @@ option
 
 .optionSelect{
   padding: 9px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 80px 100px;
   align-items: center;
+  align-content: center;
   height: 2rem;
   width: 100%;
   max-width: 100%;
   justify-content: start;
-  gap: 2rem;
+  justify-items: space-around;
   margin-top: .4rem;
   border-radius: 8px;
   cursor: pointer;

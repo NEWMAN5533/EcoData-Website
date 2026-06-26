@@ -25,7 +25,9 @@
   margin: 0 !important;
 }
 
-
+.dark-mode .offer-title{
+  color: var(--background-cl);
+}
 
   #mashGridDiv .gridCard-wrapper .mntCardStyle .unit{
     font-size: .9rem !important;
