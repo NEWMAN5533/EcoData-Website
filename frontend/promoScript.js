@@ -55,7 +55,10 @@
   const gridNormalSection = document.getElementById("gridNormalDiv");
   const gridExpressSection = document.getElementById("gridExpressDiv");
 
-
+  // TIMER SPAN DIVS
+  const hrs = document.getElementById("hrs");
+  const mts = document.getElementById("mts");
+  const sec = document.getElementById("sec");
 
  
 
@@ -91,7 +94,7 @@
       promoEndedDiv.style.display = "none";
       untargetExpressDiv.style.display = "none";
       mashupDiv.style.display = "none";
-      bar.style.display = "none";
+
       badge.style.display = "none";
 
       // grid section mtn toggle off
@@ -126,8 +129,12 @@
     minutes = minutes < 10 ? "0" + minutes : minutes;
     seconds = seconds < 10 ? "0" + seconds : seconds;
 
-    timerEl.innerHTML = `${hours}:${minutes}:${seconds}`;
-    labelEl.innerHTML = `Promo Ends In <img src="./css/icons/timer.png" >`;
+    // timerEl.innerHTML = `${hours}:${minutes}:${seconds}`;
+
+    hrs.innerHTML = `${hours}`
+    mts.innerHTML = `${minutes}`
+    sec.innerHTML = `${seconds}`
+    labelEl.innerHTML = `Promo Ends In `;
 
     if(remaining < 6 * 60 * 60 * 1000) {
       ctaBtn.innerHTML = "Ending soon!";

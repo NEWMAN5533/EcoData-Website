@@ -797,13 +797,38 @@
 
   <!----promo---->
   <div class="promo-bar" id="promoBar">
-  <div>
-    <div class="timer" id="timer">--:--:--</div>
+    <div class="promo-bar-top">
+      <i class="ri-timer-flash-line"></i>
+      LIMITED TIME OFFER</div>
+  <div class="promo-content">
+    <div class="left-promo-content">
+      <small>4% OFF</small>
+      <p>Save some coins <i class="ri-money-dollar-circle-line coin"></i>
+      </p>
+       <button class="cta-btn" id="ctaBtn">Buy Data Now</button>
+    </div>
+ 
 
-    <div class="label" id="label">Loading...</div>
+    <div class="right-promo-content">
+       <div class="label" id="label"></div>
+     <div class="timer" id="timer">
+      <div class="timer-top">
+      <span id="hrs"></span>
+      <span id="mts"></span>
+      <span id="sec"></span>
+      </div>
+      <div class="timer-bottom">
+        <span>HRS</span>
+        <span>MINS</span>
+        <span>SEC</span>
+      </div>
+      </div>
+     </div>
+    </div>
+   
   </div>
-  <button class="cta-btn" id="ctaBtn">Buy Data Now</button>
-  </div>
+  
+
 
   <div class="live-badge" id="liveBadge">PROMO ACTIVE NOW!</div>
 
@@ -2375,7 +2400,7 @@
         <!----------NEXT CARD---18-------->
         
          <!-- MTN Bundles -->
-        <div class="mntCardStyle" >
+        <div class="mntCardStyle" style="display: none;">
         <div class="mtnCardStyleTop">
           <div class="network-label" >
         <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
