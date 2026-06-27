@@ -3342,6 +3342,7 @@ GRID VIEW
   border: 1px solid var(--thin-border);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 22);
   background: var(--darkMode-bg-cl);
+  border-bottom: 12px solid var(--card-mtn-bg) !important;
 }
 
 #normalView .top-dashboard{
@@ -3826,7 +3827,7 @@ ends of left section
   border: none;
   border-radius: 8px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
-  color: rgb(248, 243, 243);
+  color: var(--primary-cl);
   font-weight: 500;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 1rem;
@@ -3837,6 +3838,10 @@ ends of left section
   outline: none;
   -ms-user-select: none;;
   user-select: none;
+}
+
+.dark-mode .single-order .buy-btn{
+  color: rgb(32, 32, 32);
 }
 
 
@@ -3957,8 +3962,8 @@ BUNDLE PROCESSING
 }
 
 .purchase-container{
-  width: 98%;
-  height: 82%;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3971,17 +3976,17 @@ BUNDLE PROCESSING
   color: var(--bg-cl);
 }
 
-.purchase-container  .card-box{
-  width:  6rem;
-  height: 3.5rem;
+.networks-purchased-container .purchase-container  .card-box{
+  width:  8rem !important;
+  height: 3.8rem;
   display: flex;
   font-size: .8rem;
   flex-direction: column;
   gap:.4rem;
   cursor: pointer;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   align-items: center;
   justify-content: center;
-  background: rgb(31, 31, 46);
   border-radius: 4px;
   -webkit-tap-highlight-color: transparent;
   -webkit-user-select: none;
@@ -3995,7 +4000,7 @@ BUNDLE PROCESSING
   height: 1.7rem;
   background: rgba(0, 0, 0, 0.01);
   border-radius: 2px;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+  box-shadow: var(--card-box-shadow);
   animation: pulse 1.1s infinite;
 }
 
