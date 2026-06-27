@@ -233,6 +233,7 @@ body{
     letter-spacing: 0.1em;
     text-transform: uppercase;
     font-weight: 700;
+    padding-left: .2rem;
     display: flex; 
     justify-content: start;
     align-items: start; 

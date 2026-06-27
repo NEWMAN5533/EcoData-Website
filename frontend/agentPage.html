@@ -945,6 +945,7 @@ width: 50%;
 
 
   <!----ADS--->
+ <!----ADS--->
   <div class="gallery">
 
     <div class="install-title">
@@ -953,7 +954,7 @@ width: 50%;
       <span></span><span></span><span></span><span></span>
     </div>
     
-    <p>Install EcoData app on android phones</p>
+    <p>Click each Step to Install The App </p>
 
     </div>
 
@@ -966,13 +967,21 @@ width: 50%;
       <div class="grid-overlay"></div>
 
             <div class="img-box-flex">
-               <div class="img-box">
+            <div class="img-box">
+              <div class="coverPlate"  onclick=openViewer(0)>
+              <i class="ri-menu-2-line"></i>
+              Click Menu
+              </div>
       <img src="./css/images/1.jpeg" alt="" loading="lazy" 
       onclick=openViewer(0)>
     </div>
 
 
       <div class="img-box">
+        <div class="coverPlate"  onclick=openViewer(1)>
+            <i class="ri-home-smile-line"></i> 
+            Add to Home
+        </div>
       <img src="./css/images/2.jpeg" alt="" loading="lazy" 
       onclick=openViewer(1)>
     </div>
@@ -981,6 +990,10 @@ width: 50%;
 
 
       <div class="img-box">
+        <div class="coverPlate"  onclick=openViewer(2)> 
+          <i class="ri-download-2-line"></i> 
+          Install App
+        </div>
       <img src="./css/images/3.jpeg" alt="" loading="lazy" 
       onclick=openViewer(2)>
       </div>
@@ -998,6 +1011,7 @@ width: 50%;
 
   </div>
 
+
   <div id="viewer">
     <span title="Close" class="clos"onclick="closeViewer()">&times;</span>
     <img id="fullImg" />
@@ -1006,30 +1020,33 @@ width: 50%;
 
 <!----PERSISTENT-CARD-(ALWAYS-VISIBLE)--->
 <!-- LIVE ORDER CONTAINER -->
- <section class="follow-share-container">
- <div class="social-follow">
-  <div class="follow-left">
-   <small>Click to Follow :</small>
+<section class="follow-share-container" >
+  <div class="social-follow">
+    <div class="follow-left">
+    <small>Click to Follow :</small>
+    </div>
+
+    <div id="rightBarFollow"  >
+
+      <a href="https://chat.whatsapp.com/LwhZNOyUQsJIGTQRL9cIXT?mode=hqrt3" > <img src="./css/icons/whats.png" alt="facebook-logo" loading="lazy"></a>
+
+  <a href="https://m.me/cm/AbZ-WlUIuuVhFZKK/?send_source=cm%3Acopy_invite_link" style="display: none;"> <img class="meg" src="./css/icons/messenger.png" alt="facebook-logo" loading="lazy"></a>
+
+    <a class="fab" href="http://www.facebook.com/share/1NTDoNJtGW/"> <img src="./css/icons/faceb.png" alt="facebook-logo" loading="lazy"></a>
+
+      <a href="https://www.tiktok.com/@ecodata247?_r=1&_d=ei9853mf1g8eec&sec_uid=MS4wLjABAAAAiY9nBAfFbpbd7KRl0y4-JTcRL0WMtPt9Pr-FKt__N-hQvmFZLhhInTTpn7Y5oRos&share_author_id=7484812520763950088&sharer_language=en&source=h5_m&u_code=ejcbk20728bd87&utm_source=copy&utm_campaign=client_share&share_link_id=d9108b99-2843-43f1-8f6c-ed4b72ea3264&share_app_id=1340&ugbiz_name=Account&lang=en&user_id=7484812520763950088&sec_user_id=MS4wLjABAAAAiY9nBAfFbpbd7KRl0y4-JTcRL0WMtPt9Pr-FKt__N-hQvmFZLhhInTTpn7Y5oRos&enable_checksum=1"><img class="tikop" src="./css/icons/tiktok.png" alt="facebook-logo"></a>
+
+
+    </div>
   </div>
 
-  <div class="follow-right" style="gap: 1.5rem !important;">
-
-     <a href="https://chat.whatsapp.com/LwhZNOyUQsJIGTQRL9cIXT?mode=hqrt3" > <img src="./css/icons/whats.png" alt="facebook-logo" loading="lazy"></a>
-
-
-  <a href="http://www.facebook.com/share/1NTDoNJtGW/"> <img src="./css/icons/faceb.png" alt="facebook-logo" loading="lazy"></a>
-
-    <a href="https://www.tiktok.com/@ecodata247?_r=1&_d=ei9853mf1g8eec&sec_uid=MS4wLjABAAAAiY9nBAfFbpbd7KRl0y4-JTcRL0WMtPt9Pr-FKt__N-hQvmFZLhhInTTpn7Y5oRos&share_author_id=7484812520763950088&sharer_language=en&source=h5_m&u_code=ejcbk20728bd87&utm_source=copy&utm_campaign=client_share&share_link_id=d9108b99-2843-43f1-8f6c-ed4b72ea3264&share_app_id=1340&ugbiz_name=Account&lang=en&user_id=7484812520763950088&sec_user_id=MS4wLjABAAAAiY9nBAfFbpbd7KRl0y4-JTcRL0WMtPt9Pr-FKt__N-hQvmFZLhhInTTpn7Y5oRos&enable_checksum=1"><img class="tikop" src="./css/icons/tiktok.png" alt="facebook-logo"></a>
-
-
+  <!----SHARE-BTN-->
+  <div class="pls-share">
+  <button id="shareBtn" title="Share EcoData">
+    <i class="ri-share-forward-line"></i>
+  </button>
   </div>
- </div>
-
- <!----SHARE-BTN-->
- <div class="pls-share">
-<button id="shareBtn" title="Share EcoData">Share</button>
- </div>
- </section>
+  </section>
 
 
  <!---dashboard totals overview-->
@@ -1674,8 +1691,9 @@ width: 50%;
     </div>
 
     <!---buy-btn-->
-    <button id="placeOrderBtn" class="buy-btn place-telbtn">Place Order
-
+    <button id="placeOrderBtn" class="buy-btn place-telbtn">
+      <i class="ri-shopping-cart-line buyCart"></i>
+      Place Order
     </button>
   </div>
 
@@ -2814,7 +2832,7 @@ width: 50%;
     </div>
     <div class="hero-bottom-content">
       <div class="btn-div">
-        9 Packages Available
+        8 Packages Available
       </div>
        <!----CARD-DIV---->
       <div class="card-div">
@@ -2852,16 +2870,16 @@ width: 50%;
       <!---GRID CARDS WRAPPER-->
       <div class="gridCard-wrapper">
        <!---------- CARD----------->
-       <div class="mntCardStyle" >
-        <div class="mtnCardStyleTop">
+       <div class="mntCardStyle" style="display: none;">
+        <div class="mtnCardStyleTop tl">
           <div class="network-label" >
         <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
         Telecel
       </div>
       <div class="bundle-data">5<span class="unit">GB</span></div>
-       <div class="bundle-validity">NON-EXPIRY</div>
+       <div class="bundle-validity expire-tl"> 60-DAYS-EXPIRY</div>
         </div>
-      <div class="bundle-price">
+        <div class= "bundle-price">
         <div class="price-amt"><span class="price-cedi">GHS₵</span>23.59</div>
         <button class="buy-btn"
           data-network="telecel"
@@ -2876,14 +2894,14 @@ width: 50%;
 
        <!---------- CARD----------->
        <div class="mntCardStyle" >
-         <div class="mtnCardStyleTop">
+         <div class="mtnCardStyleTop tl">
           <div class="network-label" >
         <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
         Telecel
       </div>
       <div class="bundle-data">10<span class="unit">GB</span></div>
-       <div class="bundle-validity">NON-EXPIRY</div>
-      </div>
+       <div class="bundle-validity expire-tl">60-DAYS-EXPIRY </div>
+         </div>
       <div class="bundle-price">
         <div class="price-amt"><span class="price-cedi">GHS₵</span>45.59</div>
         <button class="buy-btn"
@@ -2899,15 +2917,15 @@ width: 50%;
 
  <!----------NEXT CARD----------->
        <div class="mntCardStyle" >
-         <div class="mtnCardStyleTop">
+         <div class="mtnCardStyleTop tl">
           <div class="network-label" >
         <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
         Telecel
       </div>
       <div class="bundle-data">15<span class="unit">GB</span></div>
-       <div class="bundle-validity">NON-EXPIRY</div>
+       <div class="bundle-validity expire-tl">60-DAYS-EXPIRY </div>
          </div>
-      <div class="bundle-price">
+         <div class="bundle-price">
         <div class="price-amt"><span class="price-cedi">GHS₵</span>64.59</div>
         <button class="buy-btn"
           data-network="telecel"
@@ -2922,15 +2940,13 @@ width: 50%;
 
       <!----------NEXT CARD----------->
         <div class="mntCardStyle" >
-           <div class="mtnCardStyleTop">
+           <div class="mtnCardStyleTop tl">
           <div class="network-label" >
         <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
         Telecel
       </div>
       <div class="bundle-data">25<span class="unit">GB</span>
-        </div>
-
-       <div class="bundle-validity">NON-EXPIRY</div>
+       <div class="bundle-validity expire-tl">60-DAYS-EXPIRY </div>
       </div>
       <div class="bundle-price">
         <div class="price-amt"><span class="price-cedi">GHS₵</span>87.59</div>
@@ -2947,14 +2963,14 @@ width: 50%;
 
       <!----------NEXT CARD----------->
         <div class="mntCardStyle" >
-           <div class="mtnCardStyleTop">
+           <div class="mtnCardStyleTop tl">
           <div class="network-label" >
         <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
         Telecel
       </div>
       <div class="bundle-data">25<span class="unit">GB</span>
         </div>
-       <div class="bundle-validity">NON-EXPIRY</div>
+       <div class="bundle-validity expire-tl">60-DAYS-EXPIRY</div>
         </div>
       <div class="bundle-price">
         <div class="price-amt"><span class="price-cedi">GHS₵</span>105.59</div>
@@ -2971,14 +2987,14 @@ width: 50%;
 
        <!----------NEXT CARD----------->
         <div class="mntCardStyle" >
-           <div class="mtnCardStyleTop">
+           <div class="mtnCardStyleTop tl">
           <div class="network-label" >
         <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
         Telecel
       </div>
       <div class="bundle-data">30<span class="unit">GB</span>
         </div>
-       <div class="bundle-validity">NON-EXPIRY</div>
+       <div class="bundle-validity expire-tl">60-DAYS-EXPIRY</div>
         </div>
       <div class="bundle-price">
         <div class="price-amt"><span class="price-cedi">GHS₵</span>124</div>
@@ -2995,14 +3011,14 @@ width: 50%;
 
        <!---------- CARD----------->
        <div class="mntCardStyle" >
-         <div class="mtnCardStyleTop">
+         <div class="mtnCardStyleTop tl">
           <div class="network-label" >
         <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
         Telecel
       </div>
       <div class="bundle-data">35<span class="unit
         </div>">GB</span></div>
-       <div class="bundle-validity">NON-EXPIRY</div>
+       <div class="bundle-validity expire-tl">60-DAYS-EXPIRY</div>
          </div>
       <div class="bundle-price">
         <div class="price-amt"><span class="price-cedi">GHS₵</span>138</div>
@@ -3019,14 +3035,14 @@ width: 50%;
 
       <!----------NEXT CARD----------->
       <div class="mntCardStyle" >
-         <div class="mtnCardStyleTop">
+         <div class="mtnCardStyleTop tl">
           <div class="network-label" >
         <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
         Telecel
       </div>
       <div class="bundle-data">40<span class="unit
         </div>">GB</span></div>
-       <div class="bundle-validity">NON-EXPIRY</div>
+       <div class="bundle-validity expire-tl">60-DAYS-EXPIRY</div>
       </div>
       <div class="bundle-price">
         <div class="price-amt"><span class="price-cedi">GHS₵</span>160</div>
@@ -3043,15 +3059,15 @@ width: 50%;
 
        <!----------NEXT CARD----------->
        <div class="mntCardStyle" >
-         <div class="mtnCardStyleTop">
+         <div class="mtnCardStyleTop tl">
           <div class="network-label" >
         <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
         Telecel
       </div>
       <div class="bundle-data">50<span class="unit">GB</span></div>
-       <div class="bundle-validity">NON-EXPIRY</div>
-      </div>
-      <div class="bundle-price">
+        <div class="bundle-validity expire-tl">60-DAYS-EXPIRY</div>
+         </div>
+       <div class="bundle-price ">
         <div class="price-amt"><span class="price-cedi">GHS₵</span>199</div>
         <button class="buy-btn"
           data-network="telecel"
@@ -3067,14 +3083,14 @@ width: 50%;
 
        <!----------NEXT CARD----------->
         <div class="mntCardStyle" >
-           <div class="mtnCardStyleTop">
+           <div class="mtnCardStyleTop tl" >
           <div class="network-label" >
         <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
         Telecel
       </div>
       <div class="bundle-data">100<span class="unit">GB</span>
         </div>
-       <div class="bundle-validity">NON-EXPIRY</div>
+       <div class="bundle-validity expire-tl">60-DAYS-EXPIRY</div>
         </div>
       <div class="bundle-price">
         <div class="price-amt"><span class="price-cedi">GHS₵</span>385</div>
@@ -3151,12 +3167,12 @@ width: 50%;
       <div class="gridCard-wrapper">
       <!----------CARD----------->
       <div class="mntCardStyle" >
-        <div class="mtnCardStyleTop">
+        <div class="mtnCardStyleTop tc">
           <div class="network-label">
         <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
       </div>
       <div class="bundle-data">1<span class="unit">GB</span></div>
-        <div class="bundle-validity">NON-EXPIRY</div>
+        <div class= "bundle-validity expire">60-DAYS-EXPIRY</div>
         </div>
       <div class="bundle-price">
         <div class="price-amt"><span class="price-cedi">GHS₵</span>6.50</div>
@@ -3172,12 +3188,12 @@ width: 50%;
         </div>
  <!----------NEXT CARD----------->
     <div class="mntCardStyle" >
-       <div class="mtnCardStyleTop">
+       <div class="mtnCardStyleTop tc">
            <div class="network-label">
         <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
       </div>
       <div class="bundle-data">2<span class="unit">GB</span></div>
-       <div class="bundle-validity">NON-EXPIRY</div>
+       <div class=" bundle-validity expire">60-DAYS-EXPIRY</div>
         </div>
       <div class="bundle-price">
         <div class="price-amt"><span class="price-cedi">GHS₵</span>12</div>
@@ -3193,12 +3209,12 @@ width: 50%;
         </div>
  <!----------NEXT CARD----------->
     <div class="mntCardStyle" >
-       <div class="mtnCardStyleTop">
+       <div class="mtnCardStyleTop tc">
            <div class="network-label">
         <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
       </div>
       <div class="bundle-data">3<span class="unit">GB</span></div>
-       <div class="bundle-validity">NON-EXPIRY</div>
+       <div class=" bundle-validity expire"  >60-DAYS-EXPIRY</div>
         </div>
       <div class="bundle-price">
         <div class="price-amt"><span class="price-cedi">GHS₵</span>15.90</div>
@@ -3214,12 +3230,12 @@ width: 50%;
         </div>
       <!----------NEXT CARD----------->
        <div class="mntCardStyle" >
-         <div class="mtnCardStyleTop">
+         <div class="mtnCardStyleTop tc">
            <div class="network-label">
         <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
       </div>
       <div class="bundle-data">4<span class="unit">GB</span></div>
-       <div class="bundle-validity">NON-EXPIRY</div>
+       <div class=" bundle-validity expire"  >60-DAYS-EXPIRY</div>
         </div>
       <div class="bundle-price">
         <div class="price-amt"><span class="price-cedi">GHS₵</span>21</div>
@@ -3235,12 +3251,12 @@ width: 50%;
         </div>
       <!----------NEXT CARD----------->
       <div class="mntCardStyle" >
-         <div class="mtnCardStyleTop">
+         <div class="mtnCardStyleTop tc">
            <div class="network-label">
         <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
       </div>
       <div class="bundle-data">5<span class="unit">GB</span></div>
-       <div class="bundle-validity">NON-EXPIRY</div>
+       <div class=" bundle-validity expire"  >60-DAYS-EXPIRY</div>
         </div>
       <div class="bundle-price">
         <div class="price-amt"><span class="price-cedi">GHS₵</span>26</div>
@@ -3256,12 +3272,12 @@ width: 50%;
         </div>
        <!----------NEXT CARD----------->
       <div class="mntCardStyle" >
-         <div class="mtnCardStyleTop">
+         <div class="mtnCardStyleTop tc">
            <div class="network-label">
         <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
       </div>
       <div class="bundle-data">6<span class="unit">GB</span></div>
-       <div class="bundle-validity">NON-EXPIRY</div>
+       <div class=" bundle-validity expire"  >60-DAYS-EXPIRY</div>
         </div>
       <div class="bundle-price">
         <div class="price-amt"><span class="price-cedi">GHS₵</span>28.98</div>
@@ -3277,12 +3293,12 @@ width: 50%;
         </div>
       <!----------NEXT CARD----------->
     <div class="mntCardStyle" >
-       <div class="mtnCardStyleTop">
+       <div class="mtnCardStyleTop tc">
            <div class="network-label">
         <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
       </div>
       <div class="bundle-data">7<span class="unit">GB</span></div>
-       <div class="bundle-validity">NON-EXPIRY</div>
+       <div class=" bundle-validity expire"  >60-DAYS-EXPIRY</div>
         </div>
       <div class="bundle-price">
         <div class="price-amt"><span class="price-cedi">GHS₵</span>31</div>
@@ -3298,12 +3314,12 @@ width: 50%;
         </div>
        <!----------NEXT CARD----------->
         <div class="mntCardStyle" >
-           <div class="mtnCardStyleTop">
+           <div class="mtnCardStyleTop tc">
            <div class="network-label">
         <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
       </div>
       <div class="bundle-data">8<span class="unit">GB</span></div>
-       <div class="bundle-validity">NON-EXPIRY</div>
+       <div class=" bundle-validity expire"  >60-DAYS-EXPIRY</div>
        </div>
       <div class="bundle-price">
         <div class="price-amt"><span class="price-cedi">GHS₵</span>37</div>
@@ -3320,12 +3336,12 @@ width: 50%;
 
        <!----------NEXT CARD----------->
       <div class="mntCardStyle" >
-         <div class="mtnCardStyleTop">
+         <div class="mtnCardStyleTo tc">
            <div class="network-label">
         <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
       </div>
       <div class="bundle-data">9<span class="unit">GB</span></div>
-       <div class="bundle-validity">NON-EXPIRY</div>
+       <div class=" bundle-validity expire"  >60-DAYS-EXPIRY</div>
         </div>
       <div class="bundle-price">
         <div class="price-amt"><span class="price-cedi">GHS₵</span>41</div>
@@ -3341,12 +3357,12 @@ width: 50%;
         </div>
        <!----------NEXT CARD----------->
       <div class="mntCardStyle" >
-         <div class="mtnCardStyleTop">
+         <div class="mtnCardStyleTo tc">
            <div class="network-label">
         <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
       </div>
       <div class="bundle-data">10<span class="unit">GB</span></div>
-       <div class="bundle-validity">NON-EXPIRY</div>
+       <div class=" bundle-validity expire"  >60-DAYS-EXPIRY</div>
         </div>
       <div class="bundle-price">
         <div class="price-amt"><span class="price-cedi">GHS₵</span>48</div>
@@ -3362,12 +3378,12 @@ width: 50%;
         </div>
        <!----------NEXT CARD----------->
      <div class="mntCardStyle" >
-       <div class="mtnCardStyleTop">
+       <div class="mtnCardStyleTop tc">
            <div class="network-label">
         <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
       </div>
       <div class="bundle-data">12<span class="unit">GB</span></div>
-       <div class="bundle-validity">NON-EXPIRY</div>
+       <div class=" bundle-validity expire"  >60-DAYS-EXPIRY</div>
         </div>
       <div class="bundle-price">
         <div class="price-amt"><span class="price-cedi">GHS₵</span>52</div>
@@ -3383,12 +3399,12 @@ width: 50%;
         </div>
        <!----------NEXT CARD----------->
       <div class="mntCardStyle" >
-         <div class="mtnCardStyleTop">
+         <div class="mtnCardStyleTo tc">
            <div class="network-label">
         <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
       </div>
       <div class="bundle-data">15<span class="unit">GB</span></div>
-       <div class="bundle-validity">NON-EXPIRY</div>
+       <div class=" bundle-validity expire"  >60-DAYS-EXPIRY</div>
         </div>
       <div class="bundle-price">
         <div class="price-amt"><span class="price-cedi">GHS₵</span>69.98</div>
@@ -3404,12 +3420,12 @@ width: 50%;
         </div>
        <!----------NEXT CARD----------->
        <div class="mntCardStyle" >
-         <div class="mtnCardStyleTop">
+         <div class="mtnCardStyleTo tc">
            <div class="network-label">
         <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
       </div>
       <div class="bundle-data">20<span class="unit">GB</span></div>
-       <div class="bundle-validity">NON-EXPIRY</div>
+       <div class=" bundle-validity expire"  >60-DAYS-EXPIRY</div>
         </div>
       <div class="bundle-price">
         <div class="price-amt"><span class="price-cedi">GHS₵</span>89</div>
@@ -3425,12 +3441,12 @@ width: 50%;
         </div>
        <!----------NEXT CARD----------->
      <div class="mntCardStyle" >
-       <div class="mtnCardStyleTop">
+       <div class="mtnCardStyleTop tc" >
            <div class="network-label">
         <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
       </div>
       <div class="bundle-data">25<span class="unit">GB</span></div>
-       <div class="bundle-validity">NON-EXPIRY</div>
+       <div class=" bundle-validity expire"  >60-DAYS-EXPIRY</div>
         </div>
       <div class="bundle-price">
         <div class="price-amt"><span class="price-cedi">GHS₵</span>111</div>
@@ -3446,12 +3462,12 @@ width: 50%;
         </div>
        <!----------NEXT CARD----------->
      <div class="mntCardStyle" >
-       <div class="mtnCardStyleTop">
+       <div class="mtnCardStyleTop tc">
            <div class="network-label">
         <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
       </div>
       <div class="bundle-data">30<span class="unit">GB</span></div>
-       <div class="bundle-validity">NON-EXPIRY</div>
+       <div class=" bundle-validity expire"  >60-DAYS-EXPIRY</div>
         </div>
       <div class="bundle-price">
         <div class="price-amt"><span class="price-cedi">GHS₵</span>129</div>
@@ -3467,15 +3483,15 @@ width: 50%;
         </div>
        <!----------NEXT CARD----------->
        <div class="mntCardStyle" >
-         <div class="mtnCardStyleTop">
+         <div class="mtnCardStyleTo tc">
            <div class="network-label">
         <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
       </div>
       <div class="bundle-data">40<span class="unit">GB</span></div>
-       <div class="bundle-validity">NON-EXPIRY</div>
+       <div class=" bundle-validity expire"  >60-DAYS-EXPIRY</div>
        </div>
       <div class="bundle-price">
-        <div class="price-amt"><span class="price-cedi">GHS₵</span>16</div>
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>165</div>
         <button class="buy-btn"
           data-network="at"
           data-value="40GB"
@@ -3489,12 +3505,12 @@ width: 50%;
        <!----------NEXT CARD----------->
         <div class="mntCardStyle">
 
- <div class="mtnCardStyleTop">          
+ <div class="mtnCardStyleTop tc">         
   <div class="network-label">
         <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
       </div>
       <div class="bundle-data">50<span class="unit">GB</span></div>
-       <div class="bundle-validity">NON-EXPIRY</div>
+       <div class=" bundle-validity expire"  >60-DAYS-EXPIRY</div>
         </div>
       <div class="bundle-price">
         <div class="price-amt"><span class="price-cedi">GHS₵</span>205</div>
