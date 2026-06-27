@@ -29,17 +29,7 @@
 
     const userData = userDoc.data();
 
-    const hasAccess =
-      userData.isAgent === true ||
-      userData.isAdmin === true;
-
-    if (!hasAccess) {
-
-      showSnackBar("Access denied");
-      window.location.href = "index.html";
-      return;
-
-    }
+  
 
       // ✅ 3. If agent → Show welcome message
       usernameDisplay.textContent = `Welcome Agent, ${userDoc.data().username}!`;
