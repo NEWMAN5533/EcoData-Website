@@ -1269,12 +1269,14 @@ NEW BADGE ENDS
 ************/   
     .material-icons{
       color: rgb(131, 127, 127);
-      font-size: 1.4rem;
+      font-size: 1.2rem;
+      font-weight: 300 !important;
     }
 
 
     .dark-mode .material-icons{
-      color: rgb(251, 255, 224);
+      color: rgb(226, 226, 226);
+      
     }
      /***********
     GOOGLE MATERIAL  ICON ENDS
