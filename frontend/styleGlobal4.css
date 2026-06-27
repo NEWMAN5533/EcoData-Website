@@ -148,6 +148,7 @@ GRID-CONTAINER SIDEBAR
   align-items: center;
   justify-content: center;
   position: relative;
+  border-bottom: none !important;
 }
 
 
@@ -242,6 +243,7 @@ GRID-CONTAINER SIDEBAR
 
 .dark-mode  .ecodata-sidebar-middle .quick-links-section{
   border-bottom: none !important;
+  border-top: none !important;
 }
 
 
@@ -545,7 +547,7 @@ CREATE STORE LINK
     top: 0;
     overflow-y: hidden;
     overflow-x: hidden;
-    background: rgb(214, 212, 212);
+    background: rgb(255, 255, 255);
     z-index: 99999999999999999;
     transition: .4s ease;
     border-right: 1px solid var(--text-cl-2);
@@ -561,8 +563,8 @@ CREATE STORE LINK
   }
 
   .dark-mode .ecodata-sidebar{
-    background: rgb(50, 50, 61);
-    backdrop-filter: blur(14px);
+    background: var(--darkMode-bg-cl);
+
     border-right: 1px solid var(--thin-border) !important;
   }
 
@@ -579,6 +581,9 @@ CREATE STORE LINK
   align-items: center;
   justify-content: start;
   border-bottom: 1px solid rgb(228, 227, 227) !important;
+  }
+  .dark-mode .ecodata-sidebar .ecodata-sidebar-top{
+    border-bottom: 1px solid var(--background-cl-1) !important;
   }
   
 
