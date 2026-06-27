@@ -2,6 +2,7 @@
 
 
 
+
 .main-agent{
   width: 100%;
   max-width: 380px;
@@ -343,7 +344,7 @@ body {
   padding: 0;
 }
 
-body.dark-mode{
+body .dark-mode{
   transition: background 0s  !important;
 }
 
@@ -432,27 +433,17 @@ border-bottom: 1px solid var(--thin-border);
   user-select: none;
 }
 
-.log-out{
-  padding: 8px 16px;
-  background: #e63946;
-  color: white;
-  border: none;
-  border-radius: 6px;
+.notifity{
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--text-cl);
+  margin-top: .4rem !important;
   cursor: pointer;
-  font-weight: 500;
-  transition: .2s ease;
-  margin-left: 1rem;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;;
-  user-select: none;
-      }
+}
 
-      .log-out:hover{
-        background: #c1121f;
-      }
-
+.dark-mode .notifity{
+  color: rgb(226, 226, 226);
+}
 
 
 /***
@@ -1954,7 +1945,7 @@ UPDATED UI STYLE
 }
 
 .dark-mode .modal-content .modal-content-top{
-  background: rgba(185, 167, 132, 0.945) !important;
+  background: rgba(238, 199, 70, 0.959)!important;
   border: none !important;
 }
 
@@ -2406,7 +2397,7 @@ UPDATED UI STYLE
 }
 
 .dark-mode .modal-content .continue{
-  background: rgba(185, 167, 132, 0.945) !important;
+  background: rgba(238, 199, 70, 0.959) !important;
 }
 .modal-buttons .continue img{
   width: 1.4rem;
@@ -3841,7 +3832,7 @@ ends of left section
 }
 
 .dark-mode .single-order .buy-btn{
-  color: rgb(32, 32, 32);
+  color: rgb(19, 18, 18);
 }
 
 

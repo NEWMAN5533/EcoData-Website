@@ -224,10 +224,9 @@
     <div class="notis">
 
     <img onclick="window.location.href='notification.html'" class="notifity" src="./css/icons/notify (1).png" alt="" loading="lazy" style="display: none;">
-      <span id="notifyCount">3</span>
+      <!--<span id="notifyCount"></span>-->
 
-    <img onclick="window.location.href='notification.html'" class="notifity" hidden
-    src="./css/icons/notify (3).png" alt="" loading="lazy">
+    <i class="ri-notification-3-line notifity" onclick="window.location.href='notification.html'"></i> 
     </div>
 
   
@@ -237,15 +236,15 @@
     <input  type="checkbox" id="themeToggle">
     <span class="slider">
       <span class="icon sun">
-      <span class="material-icons">light_mode</span>
+      <i class="ri-sun-line sun-icon"></i>
       </span>
-      <span class="icon moon"><img src="./css/icons/moon2.png" alt="images" loading="lazy"></span>
+      <span class="icon moon">
+        <i class="ri-moon-foggy-line moon"></i>
+      </span>
     </span>
   </label>
 
-  <img id="cardToggler" src="./css/icons/menu-icon.png" alt="image" class="menu-icon" loading="lazy" style="background: none ;">
-
-  <img id="menuDarkMode" class="menu-icon" src="./css/icons/menu-white.png" alt="image" style="background: none;">
+ <i class="ri-menu-2-line menu" id="sidebarViewer"></i>
   </div>
 
 
@@ -971,13 +970,13 @@
     <small>Click to Follow :</small>
     </div>
 
-    <div class="follow-right" style="gap: 2.2rem;">
+    <div id="rightBarFollow"  >
 
       <a href="https://chat.whatsapp.com/LwhZNOyUQsJIGTQRL9cIXT?mode=hqrt3" > <img src="./css/icons/whats.png" alt="facebook-logo" loading="lazy"></a>
 
   <a href="https://m.me/cm/AbZ-WlUIuuVhFZKK/?send_source=cm%3Acopy_invite_link" style="display: none;"> <img class="meg" src="./css/icons/messenger.png" alt="facebook-logo" loading="lazy"></a>
 
-    <a href="http://www.facebook.com/share/1NTDoNJtGW/"> <img src="./css/icons/faceb.png" alt="facebook-logo" loading="lazy"></a>
+    <a class="fab" href="http://www.facebook.com/share/1NTDoNJtGW/"> <img src="./css/icons/faceb.png" alt="facebook-logo" loading="lazy"></a>
 
       <a href="https://www.tiktok.com/@ecodata247?_r=1&_d=ei9853mf1g8eec&sec_uid=MS4wLjABAAAAiY9nBAfFbpbd7KRl0y4-JTcRL0WMtPt9Pr-FKt__N-hQvmFZLhhInTTpn7Y5oRos&share_author_id=7484812520763950088&sharer_language=en&source=h5_m&u_code=ejcbk20728bd87&utm_source=copy&utm_campaign=client_share&share_link_id=d9108b99-2843-43f1-8f6c-ed4b72ea3264&share_app_id=1340&ugbiz_name=Account&lang=en&user_id=7484812520763950088&sec_user_id=MS4wLjABAAAAiY9nBAfFbpbd7KRl0y4-JTcRL0WMtPt9Pr-FKt__N-hQvmFZLhhInTTpn7Y5oRos&enable_checksum=1"><img class="tikop" src="./css/icons/tiktok.png" alt="facebook-logo"></a>
 
@@ -987,7 +986,9 @@
 
   <!----SHARE-BTN-->
   <div class="pls-share">
-  <button id="shareBtn" title="Share EcoData">Share</button>
+  <button id="shareBtn" title="Share EcoData">
+    <i class="ri-share-forward-line"></i>
+  </button>
   </div>
   </section>
 
@@ -3067,7 +3068,7 @@
           <!-- MTN Bundles -->
         <div class="mntCardStyle" >
           <div class="mtnCardStyleTop">
-            <div class="popular-badge">⭐ Best Value</div>
+            <div class="popular-badge">⭐ popular</div>
           <div class="network-label" >
         <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
       </div>
@@ -3252,7 +3253,7 @@
 
         <!----------NEXT CARD---17-------->
         <!-- MTN Bundles -->
-        <div class="mntCardStyle" >
+        <div class="mntCardStyle" style="display: none;">
         <div class="mtnCardStyleTop">
           <div class="network-label" >
         <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
@@ -5044,8 +5045,7 @@ updateClock();
 
 // sidebar toggle script
 document.addEventListener("DOMContentLoaded", ()=> {
- const cardToggler = document.getElementById("cardToggler");
- const secondToggler = document.getElementById("menuDarkMode");
+ const cardToggler = document.getElementById("sidebarViewer");
 const cardCloser = document.getElementById("ecoDataSidebar");
 
 
@@ -5060,17 +5060,7 @@ const cardCloser = document.getElementById("ecoDataSidebar");
     }
   });
 
-  // secondToggler
-  secondToggler.addEventListener("click", function(e) {
-    e.stopPropagation();
-
-    if(secondToggler) {
-      cardCloser.classList.add("active");
-      document.body.classList.add("no-scroll");
-    } else {
-      cardCloser.classList.remove("active");
-    }
-  })
+ 
 
   // when ever clicked outside?
   window.addEventListener("click", function(e) {

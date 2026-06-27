@@ -70,11 +70,15 @@
   display: flex;
   width: max-content;
   height: auto;
-  gap: 1.1rem;
+  gap: .8rem;
   align-items: center !important;
   justify-content: end;
-  border-radius: 4px;
-  margin-right: .6rem;
+  margin-right: .2rem;
+}
+
+.nav-right .sun-icon{
+  color: var(--text-cl);
+  font-size: 1.1rem;
 }
 
 .nav-right img{
@@ -139,8 +143,28 @@
   user-select: none;
 }
 
+.menu{
+  font-size: 1.3rem;
+  margin-top: .4rem;
+  color: var(--text-cl);
+  cursor: pointer;
+}
+
+.moon{
+  font-size: 1.3rem;
+  color: var(--text-cl);
+  color: white !important;
+  margin-bottom: .2rem;
+}
+
+.dark-mode .menu,
+.dark-mode .moon{
+  color: rgb(226, 226, 226) !important;
+}
+
 .menu-icon {
   border-radius: 4px;
+  height: 1.06rem !important;
   padding: .3px;
   -webkit-tap-highlight-color: transparent;
   -webkit-user-select: none;
@@ -1480,15 +1504,24 @@ SOCIAL FOLLOW SECTION
   color: white;
 }
 
-.follow-right {
+#rightBarFollow{
   width: 75%;
   height: 100%;
-  justify-content: center;
+  justify-content: center !important;
   display: flex;
   align-items: center;
-  gap: .1rem;
+  gap: 1.8rem !important;
   animation: pulse 1.2s infinite;
 }
+
+
+
+#rightBarFollow img{
+width: 2rem;
+height: 2rem;
+}
+
+
 
 .follow-right a{
 text-decoration: none;
