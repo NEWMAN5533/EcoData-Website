@@ -335,17 +335,20 @@ position: relative;
 .img-box-flex-numbering .numberContent{
   width: 28%;
   height: 1.5rem;
-  background: none;
-  border: 1px solid rgb(235, 235, 235);
+  border: 1px solid rgb(224, 224, 224);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   border-radius: .4rem;
+  background-color: white;
   cursor: pointer;
-  transition: 0s ease;
+  color: var(--text-cl);
+  transition: background-color 0s ease;
 }
 
 .dark-mode .numberContent{
-  border: 1px solid var(--thin-border);
+  border: 2px solid var(--thin-border);
   background: var(--darkMode-bg-cl) !important;
-  color: rgba(119, 238, 228, 0.849);
+  color: rgba(119, 238, 228, 0.733);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
 .dark-mode .numberContent:hover{
@@ -354,10 +357,7 @@ position: relative;
 
 
 
-.numberContent:hover{
-  background: rgb(54, 52, 52);
-  color: white;
-}
+
 
 
 
@@ -368,9 +368,38 @@ position: relative;
   max-width: 30.3%;
   height: 100px;
   overflow: hidden;
-  padding: 2px ;
   border-radius: 8px;
   border: 1px solid var(--text-cl-2);
+}
+
+.img-box .coverPlate{
+  position: sticky;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  top: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text-cl);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: .8rem;
+  background-color: rgb(255, 255, 255);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 2px 6px hsla(230, 0%, 0%, .2);
+}
+
+
+
+.dark-mode .coverPlate{
+  background-color: var(--darkMode-bg-cl) !important;
+}
+
+.dark-mode .coverPlate i{
+  color: var(--gold);
 }
 
 .dark-mode .img-box {
