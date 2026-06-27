@@ -125,7 +125,6 @@ background: #fff;
 
 
 .dark-mode .container .navbar {
-  border-top: 1px solid var(--thin-border) !important;
   border-bottom: 1px solid var(--thin-border) !important;
   box-shadow: none !important;
   background: var(--darkMode-bg-cl);
