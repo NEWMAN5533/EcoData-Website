@@ -3387,14 +3387,28 @@ NETcARD VIEW ENDS
   display: block;
   height: max-content;
   width: 100%;
-  max-width: 99%;
-  margin-top: .4rem;
-  padding: 1rem 2rem;
+  max-width: 98% !important;
+  margin-top: 1.2rem !important;
+  padding: 2rem;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   gap: .4rem;
   position: relative;
+  border-top: 14px solid var(--thin-border-1);
+  box-shadow:  0 2px 6px rgba(0, 0, 0, 0.5) !important;
+}
+
+.dark-mode .view.active #mtnArea{
+  background: var(--background-cl-1) !important;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 !important;
+  border-bottom: 1px solid var(--thin-border);
+  border-top: 12px solid var(--thin-border);
+}
+
+.dark-mode .view.active #mtnArea .btn-div{
+  margin-top: 2.8rem !important;
 }
 
 
