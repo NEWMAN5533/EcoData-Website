@@ -548,6 +548,11 @@ width: 50%;
 
 }
 
+.dark-mode .promo-bar{
+  border: 2px solid var(--thin-border);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important;
+}
+
 .promo-bar .promo-bar-top{
   width: 100%;
   height: 1.4rem;
@@ -559,7 +564,14 @@ width: 50%;
   color: var(--background-cl);
   font-size: .65rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  border-start-start-radius: 4px;
+  border-start-end-radius: 4px;
   background: var(--thin-border-1);
+}
+
+.dark-mode .promo-bar .promo-bar-top{
+  background: var(--background-cl-1) !important;
+  border-bottom: 1px solid var(--thin-border);
 }
 
 .promo-bar-top i{
@@ -575,6 +587,8 @@ width: 50%;
   align-items: center;
   padding: .6rem;
 }
+
+
 
 .left-promo-content{
 width: 45%;
@@ -618,6 +632,11 @@ border-radius: 6px;
 border: 1px solid rgb(235, 235, 235);
 }
 
+.dark-mode  .right-promo-content {
+  background: var(--darkMode-bg-cl) !important;
+  border: 1px solid var(--thin-border);
+}
+
 .dark-mode .promo-bar{
   background: none;
   box-shadow: 0 10px 20px rgba(0,0,0,0.0);
@@ -651,6 +670,8 @@ border: 1px solid rgb(235, 235, 235);
   border-radius: .2rem;
 }
 
+
+
 .timer .timer-top{
   display: flex;
   align-items: center;
@@ -676,6 +697,14 @@ border: 1px solid rgb(235, 235, 235);
   font-weight: 600;
 }
 
+.dark-mode 
+.timer #hrs,
+.timer #mts,
+.timer #sec{
+  background: rgb(167, 167, 167);
+  border: 1px solid var(--text-cl);
+}
+
 .timer .timer-bottom{
   display: flex;
   align-items: center;
@@ -694,17 +723,16 @@ border: 1px solid rgb(235, 235, 235);
 
 .dark-mode .timer{
   color:  rgb(8, 59, 68);
-  border: 1px solid var(--thin-border);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.932), rgba(0, 132, 255, 0.699));
 }
 
 .label{
-  font-size: .75rem;
+  font-size: .6rem !important;
   color: #056e88cc;
   display: flex;
   margin-left: .1rem;
   align-items: center;
   font-weight: 600;
+  text-transform: uppercase;
   padding-top: .6rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
@@ -717,7 +745,7 @@ border: 1px solid rgb(235, 235, 235);
 }
 
 .dark-mode .label {
-  color: rgba(241, 156, 156, 0.781);
+  color: var(--card-mtn-bg);
 }
 
 
@@ -735,6 +763,10 @@ border: 1px solid rgb(235, 235, 235);
   animation: cta-pus 1.5s infinite;
 }
 
+.dark-mode .cta-btn{
+  background: var(--background-cl-1);
+  border: 1px solid var(--thin-border);
+}
 @keyframes cta-pus  {
   0% {
     transform: scale(1);
