@@ -4607,7 +4607,7 @@
       <div class="btom-navIcon" onclick="window.location.href='index.html'">
         <div class="activeImg active" id="activeMtn">
           <small id="activeBadge" class="nav-badge">0</small>
-          <span class="material-icons">inventory_2</span>
+          <i class="ri-router-line material-icons"></i>
 
         </div>
         <small class="bottomIcon-textNav">Bundles</small>
@@ -4619,7 +4619,7 @@
 
       <div class="btom-navIcon">
         <div class="activeImg" onclick="window.location.href ='pay.html'"> 
-          <span class="material-icons">local_offer</span>
+          <i class="ri-price-tag-3-line material-icons"></i>
         </div>
         <small class="bottomIcon-textNav"> Discounts</small>
       </div>
@@ -4635,7 +4635,7 @@
 
         <div class="btom-navIcon" >
         <div class="activeImg" id="activeTel" onclick="window.location.href='afa.html'"> 
-          <span class="material-icons">how_to_reg</span>
+          <i class="ri-user-follow-line material-icons"></i>
         </div>
         <small class="bottomIcon-textNav">AFA</small>
       </div>
@@ -4643,7 +4643,7 @@
 
       <div class="btom-navIcon" >
         <div class="activeImg" id="activeAir" onclick="window.location.href='bundlesInfo.html'"> 
-          <span class="material-icons">info</span>
+          <i class="ri-information-line material-icons"></i>
         </div>
         <small class="bottomIcon-textNav"> Info</small>
       </div>
@@ -5041,48 +5041,6 @@ updateClock();
 
   // start animation
   animateScroll();
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-// sidebar toggle script
-document.addEventListener("DOMContentLoaded", ()=> {
- const cardToggler = document.getElementById("sidebarViewer");
-const cardCloser = document.getElementById("ecoDataSidebar");
-
-
-  // toggle menu card
-  cardToggler.addEventListener("click", function(e) {
-    e.stopPropagation();
-    if(cardToggler){
-      cardCloser.classList.add("active" );
-      document.body.classList.add("no-scroll");
-    } else{
-      cardCloser.classList.remove("active");
-    }
-  });
-
- 
-
-  // when ever clicked outside?
-  window.addEventListener("click", function(e) {
-    if(!cardCloser.contains(e.target) && !cardToggler.contains(e.target)) {
-      cardCloser.classList.remove("active");
-    }
-  })
-
-  
-})
 
  
 

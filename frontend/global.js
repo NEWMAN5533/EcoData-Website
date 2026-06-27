@@ -22,9 +22,8 @@
   animateRing();
 
 
-
     
-   const shoppingBtn = document.getElementById("shoppingBtn");
+  const shoppingBtn = document.getElementById("shoppingBtn");
 
 shoppingBtn.addEventListener("click", (e) =>{
   e.stopPropagation();
@@ -34,7 +33,10 @@ if(shoppingBtn){
 });
 
 
-    
+
+
+
+
 // SNACKBAR SECTION //
 // ===== SNACKBAR FUNCTION ===== //
 let snackTimeout = null;
@@ -81,12 +83,44 @@ function showSnackBar(message, type = "info", duration = 4000) {
 }
 // snackbar ends
 
+
  
  });
 // CUSTOM CURSOR JS ENDS
 
 
+// SIDEBAR TOGGLE
+
+// sidebar toggle script
+document.addEventListener("DOMContentLoaded", ()=> {
+ const cardToggler = document.getElementById("sidebarViewer");
+const cardCloser = document.getElementById("ecoDataSidebar");
+
+
+  // toggle menu card
+  cardToggler.addEventListener("click", function(e) {
+    e.stopPropagation();
+    if(cardToggler){
+      cardCloser.classList.add("active" );
+      document.body.classList.add("no-scroll");
+    } else{
+      cardCloser.classList.remove("active");
+    }
+  });
+
+ 
+
+  // when ever clicked outside?
+  window.addEventListener("click", function(e) {
+    if(!cardCloser.contains(e.target) && !cardToggler.contains(e.target)) {
+      cardCloser.classList.remove("active");
+    }
+  })
+
   
+})
+
+
 
 
 
