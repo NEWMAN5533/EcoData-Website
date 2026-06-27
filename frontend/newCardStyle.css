@@ -214,7 +214,7 @@ body{
     position: absolute; 
     top: 20px; 
     right: 6px;
-    background: var(--gold);
+    background: var(--gold-dark);
     color: var(--black);
     font-size: 0.68rem;
     font-weight: 700;
