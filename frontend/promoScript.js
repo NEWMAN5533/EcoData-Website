@@ -63,14 +63,18 @@
  
 
     if(!isPromoTime()) {
-      timerEl.innerHTML = "00:00:00";
-      labelEl.innerHTML = `Promo timer. <img src="./css/icons/timer.png" >`;
+      //timerEl.innerHTML = "00:00:00";
+
+    hrs.innerHTML = "00";
+    mts.innerHTML = "00";
+    sec.innerHTML = "00";
+    labelEl.innerHTML = `Promo ended. <img src="./css/icons/timer.png" >`;
 
       ctaBtn.innerHTML = "promo ended!"
       promoActiveDiv.style.display = "none";
       gridPromoActiveDiv.style.display = "none";
       promoThumbnail.style.display = "none";
-      bar.style.display = "none";
+     
 
     
      
