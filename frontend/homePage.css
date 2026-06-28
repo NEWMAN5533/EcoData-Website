@@ -759,7 +759,8 @@ border: 1px solid rgb(235, 235, 235);
   font-weight: bold;
   cursor: pointer;
   margin-top: .2rem;
-  font-size: .8rem;
+  font-size: .6rem;
+  text-transform: uppercase;
   animation: cta-pus 1.5s infinite;
 }
 
