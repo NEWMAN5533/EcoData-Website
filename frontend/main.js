@@ -1398,18 +1398,23 @@ function loadLiveOrders() {
 // FUNCTION GET NETWORK PREFIX
 function getNetwork(order){
 
-  if(order.network){
-    return order.network.toUpperCase();
-  }
+  console.log("Recipient received:", order.recipient);
 
-  let phone = String(order.recipient || "").replace(/\D/g, "");
+
+  let phone = String(order.recipient ?? "").trim();
+  console.log("Raw phone:", phone);
+
+  phone = phone.replace(/\D/g, "");
 
   // Convert code local numbers
   if(phone.startsWith("233")){
     phone = "0" + phone.slice(3);
   }
 
-  const prefix = phone.substring(0, 3);
+  console.log("Normalized:", phone);
+
+  const prefix = phone.slice(0, 3);
+  console.log("Prefix:", prefix);
 
   // MTN
   if(["024", "025", "053", "054", "055", "059"].includes(prefix)){
@@ -1420,9 +1425,14 @@ function getNetwork(order){
   if(["020", "050"].includes(prefix)){
     return "TELECEL";
   }
-
+  // AIRTELTIGO
   if(["026", "027", "056", "057"].includes(prefix)){
     return "AIRTELTIGO";
+  }
+
+
+  if(order.network){
+    return order.network.toUpperCase();
   }
 
   return "UNKNOWN";
