@@ -609,6 +609,8 @@ const telecelPackageDiv = document.querySelector(".packagesta");
 
 
 
+
+
 // NORMAL MODE BTN
 normalModeBtn.addEventListener("click", (e) => {
   e.stopPropagation();
@@ -1624,9 +1626,6 @@ function loadActiveBadge(){
 const LIVE_ORDERS_KEY = "ecoLiveOrders";
 const MAX_LIVE_ORDERS = 1000;
 
-
-
-
 function saveLiveOrder(order) {
   if (!order || !order.orderId) return;
 
@@ -1644,12 +1643,22 @@ function saveLiveOrder(order) {
       ...current,
       ...order,
 
+    // preserve the origin submitted time
+    createdAt: current.createdAt ||
+    order.createdAt || Date.now(),
+
+    // Don't allow terminal status to be overwritten
       status: 
       isTerminalStatus(current.status)
         ? existing[index].status
         : order.status,
+
+    // keep the original timestamp
       timestamp: current.timestamp || Date.now(),
-      updatedAt: Date.now(),
+
+    // Preserve DeliveredAt; only update it in updatedLiveOrderStatus()
+      updatedAt: current.updatedAt || 
+      current.createdAt || Date.now(),
     };
   } else {
     // New order on top
@@ -1657,8 +1666,10 @@ function saveLiveOrder(order) {
       ...order,
       timestamp: Date.now(), // SINGLE SOURCE OF TRUTH
 
-      createdAt: Date.now(),
-      updatedAt: Date.now(),
+    // Submitted time (set once)
+      createdAt: order.createdAt || Date.now(),
+    // Initial update time (Same as creation)
+      updatedAt: order.updatedAt || Date.now(),
     });
   }
 
