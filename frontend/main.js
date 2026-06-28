@@ -1378,8 +1378,10 @@ function loadLiveOrders() {
   const tableBody = document.getElementById("liveOrderRows");
   if (!tableBody) return;
 
+
   const orders =
     JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
+
 
   const empty = tableBody.querySelector(".empty-state");
   if (empty) empty.remove();
@@ -1396,47 +1398,74 @@ function loadLiveOrders() {
 }
 
 // FUNCTION GET NETWORK PREFIX
-function getNetwork(order){
+// FUNCTION GET NETWORK PREFIX
+function getNetwork(order) {
 
-  console.log("Recipient received:", order.recipient);
+  console.log("======== GET NETWORK ========");
+  console.log("Order:", order);
 
-
-  let phone = String(order.recipient ?? "").trim();
-  console.log("Raw phone:", phone);
-
-  phone = phone.replace(/\D/g, "");
-
-  // Convert code local numbers
-  if(phone.startsWith("233")){
-    phone = "0" + phone.slice(3);
-  }
-
-  console.log("Normalized:", phone);
-
-  const prefix = phone.slice(0, 3);
-  console.log("Prefix:", prefix);
-
-  // MTN
-  if(["024", "025", "053", "054", "055", "059"].includes(prefix)){
-    return "MTN";
-  }
-
-  // TELECEL
-  if(["020", "050"].includes(prefix)){
-    return "TELECEL";
-  }
-  // AIRTELTIGO
-  if(["026", "027", "056", "057"].includes(prefix)){
-    return "AIRTELTIGO";
-  }
-
-
-  if(order.network){
+  // Already saved?
+  if (
+    order.network &&
+    order.network !== "-" &&
+    order.network !== "UNKNOWN"
+  ) {
+    console.log("✅ Using saved network:", order.network);
     return order.network.toUpperCase();
   }
 
-  return "UNKNOWN";
+  let phone = String(order.recipient ?? "").trim();
+  console.log("📞 Raw phone:", phone);
+
+  phone = phone.replace(/\D/g, "");
+
+  // Convert 233xxxxxxxxx -> 0xxxxxxxxx
+  if (phone.startsWith("233")) {
+    phone = "0" + phone.slice(3);
+  }
+
+  console.log("📱 Normalized phone:", phone);
+
+  const prefix = phone.slice(0, 3);
+  console.log("🔎 Prefix:", prefix);
+
+  let detected = "UNKNOWN";
+
+  // MTN
+  if (["024", "025", "053", "054", "055", "059"].includes(prefix)) {
+    detected = "MTN";
+  }
+
+  // TELECEL
+  else if (["020", "050"].includes(prefix)) {
+    detected = "TELECEL";
+  }
+
+  // AIRTELTIGO
+  else if (["026", "027", "056", "057"].includes(prefix)) {
+    detected = "AIRTELTIGO";
+  }
+
+  console.log("🌐 Detected network:", detected);
+
+  // Save detected network
+  if (detected !== "UNKNOWN" && !order.network) {
+    console.log("💾 Saving detected network:", detected);
+
+    order.network = detected.toLowerCase();
+
+    saveLiveOrder(order);
+
+    console.log("✅ Saved to localStorage");
+  }
+
+  console.log("Returning:", detected);
+  console.log("============================");
+
+  return detected;
 }
+
+
 
 
 // RENDER LIVE ORDER ROW
