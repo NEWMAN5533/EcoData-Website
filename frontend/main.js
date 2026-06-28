@@ -1402,7 +1402,13 @@ function getNetwork(order){
     return order.network.toUpperCase();
   }
 
-  const phone = (order.recipient || "").replace(/\D/g, "");
+  let phone = String(order.recipient || "").replace(/\D/g, "");
+
+  // Convert code local numbers
+  if(phone.startsWith("233")){
+    phone = "0" + phone.slice(3);
+  }
+
   const prefix = phone.substring(0, 3);
 
   // MTN
