@@ -11,7 +11,7 @@
 
 
 
-    return (day === 4 || day === 5);
+    return (day === 4 );
     
   }
 
@@ -21,11 +21,9 @@
     let end = new Date(now);
 
     if(day === 4 ) {
-      end.setDate(now.getDate() + 1);
+      end.setDate(now.getDate());
       end.setHours(23, 59, 59, 999);
 
-    } else if (day === 5) {
-      end.setHours(23, 59, 59, 999);
     } else {
       return null;
     }
@@ -68,7 +66,7 @@
     hrs.innerHTML = "00";
     mts.innerHTML = "00";
     sec.innerHTML = "00";
-    labelEl.innerHTML = `Promo ended. <img src="./css/icons/timer.png" >`;
+    labelEl.innerHTML = `OFFER ENDED. <img src="./css/icons/timer.png" >`;
 
       ctaBtn.innerHTML = "promo ended!"
       promoActiveDiv.style.display = "none";
@@ -138,7 +136,7 @@
     hrs.innerHTML = `${hours}`
     mts.innerHTML = `${minutes}`
     sec.innerHTML = `${seconds}`
-    labelEl.innerHTML = `Promo Ends In `;
+    labelEl.innerHTML =  `Offer End In <img src='./css/icons/timer.png'.>`;
 
     if(remaining < 6 * 60 * 60 * 1000) {
       ctaBtn.innerHTML = "Ending soon!";
