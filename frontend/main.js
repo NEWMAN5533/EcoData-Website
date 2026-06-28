@@ -1393,13 +1393,34 @@ function loadLiveOrders() {
   if (!orders.length) {
     tableBody.innerHTML = `<p class="empty-state">No recent orders yet</p>`;
   }
-
-  
-
-
 }
 
+// FUNCTION GET NETWORK PREFIX
+function getNetwork(order){
 
+  if(order.network){
+    return order.network.toUpperCase();
+  }
+
+  const phone = (order.recipient || "").replace(/\D/g, "");
+  const prefix = phone.substring(0, 3);
+
+  // MTN
+  if(["024", "025", "053", "054", "055", "059"].includes(prefix)){
+    return "MTN";
+  }
+
+  // TELECEL
+  if(["020", "050"].includes(prefix)){
+    return "TELECEL";
+  }
+
+  if(["026", "027", "056", "057"].includes(prefix)){
+    return "AIRTELTIGO";
+  }
+
+  return "UNKNOWN";
+}
 
 
 // RENDER LIVE ORDER ROW
@@ -1465,6 +1486,7 @@ console.log("UpdatedAt", order.updatedAt);
 
   row.innerHTML = `
     <span>${order.orderId}</span>
+    <span>${getNetwork(order)}</span>
     <span>${order.volume}GB</span>
     <span>${order.recipient}</span>
     <span class="status-cell">
@@ -1479,6 +1501,7 @@ console.log("UpdatedAt", order.updatedAt);
 }
 
 
+console.log(JSON.parse(localStorage.getItem("ecoLiveOrders")));
 
 
 // ---------- LIVE ORDER CARD ---------
