@@ -17,7 +17,7 @@
 }
 
 .dark-mode .sk {
-    background: var(--sk-darkMode); 
+  background: var(--sk-darkMode); 
   background-size: 250% 100%;  
   animation: sk-shimmer 2.6s infinite linear;  
   border-radius: 6px;  
@@ -127,9 +127,11 @@ WELCOME SK ENDS
   background: var(--sk-backgroundWhiteMode);  
   padding: 18px;
   display: flex;
+  width: 100%;
+  height: 100%;
   position: relative;
   overflow: hidden;
-  justify-content: space-between;
+  justify-content: space-between !important;
   margin-bottom: 14px;  
 } 
 
@@ -139,6 +141,7 @@ WELCOME SK ENDS
   flex-direction: column;
   justify-content: center;
   height: 100%;
+  width: 70%;
 }
 
 
@@ -157,43 +160,20 @@ WELCOME SK ENDS
 }  
 
 .sk-trusted .sk-imageContainer{
-  width: max-content;
+  width: 30%;
   height: 100%;
   display: flex;
   position:relative;
   justify-content: center;
   align-items: center;
-  margin-right: 1rem;
 
 }
 
 
+/**** PROMO SK *****/
 
 
 
-
-
-
-
-
-
-.sk-thumbnails {  
-  display: flex;  
-  gap: 10px;
-  align-items: center;
-  height: 3rem;
-  margin-bottom: 14px;  
-  overflow: hidden;  
-}  
-.sk-promo-bar {  
-  border-radius: 10px;  
-  background: #161a22;  
-  padding: 14px 16px;  
-  display: flex;  
-  justify-content: space-between;  
-  align-items: center;  
-  margin-bottom: 14px;  
-}  
 .sk-notice {  
   border-radius: 12px;  
   background: var(--sk-backgroundWhiteMode);  
@@ -309,17 +289,100 @@ WELCOME SK ENDS
   THUMBNAIL 
   *****/
 
-  .google-thumbnails-wrapper .sk-thumbnails{
+  .google-thumbnails-wrapper {
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+
+  .google-thumbnails-wrapper .sk-info-container{
     position: absolute;
     width: 100%;
-    height: 100% !important;
+    height: 100% ;
     justify-self: center;
+    align-items: center;
+    justify-content: center !important;
+    background: var(--sk-backgroundWhiteMode);
     display: flex;
-    padding-right: 1.6rem;
+    padding: 0 1rem;
+    gap: .7rem;
     border-radius: 0;
     z-index: 99;
-    margin: 0 !important;
   }
+
+  .sk-info-container .sk-info-left,
+  .sk-info-container .sk-info-right{
+    display: flex;
+    width: 47%;
+    height: 100%;
+    align-items: center;
+    justify-content: center !important;
+    justify-items: center;
+  }
+
+  .dark-mode .google-thumbnails-wrapper .sk-info-container{
+  background: var(--sk-backgroundDarkMode);
+  }
+
+/****
+ OFFER CONTAINER
+*****/
+.promo-bar{
+  box-shadow: 0 2px 6px rgba(0,0,0,0.19) !important;
+}
+.promo-bar .sk-offer-container{
+  position: absolute;
+  width: 101%;
+  height: 9rem;
+  margin-top: -.5rem;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--sk-backgroundWhiteMode);
+  z-index: 99;
+  padding: .5rem;
+}
+
+.dark-mode .promo-bar .sk-offer-container{
+  background: var(--sk-backgroundDarkMode);
+}
+
+.sk-offer-container .sk-offer-top{
+  width: 100%;
+  height: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} 
+
+.sk-offer-container .sk-bottom-wrapping{
+  width: 100%;
+  height: 85%;
+  padding: .8rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sk-bottom-wrapping .sk-bottom-w-left{
+  width: 45%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  align-items: start;
+  justify-content: start;
+  padding-left: .5rem;
+}
+
+.sk-bottom-wrapping .sk-bottom-w-right{
+  width: 45%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  padding-right: .6rem;
+}
 
 /****
 NOTICE CONTAINER
@@ -336,6 +399,333 @@ NOTICE CONTAINER
     border-radius: 0;
     z-index: 99;
     margin: 0 !important; 
+}
+
+/****
+SK GALLERY CONTAINER
+*****/
+.gallery .sk-gallery-container{
+  position: absolute;
+  width: 98%;
+  height: 13rem;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--sk-backgroundWhiteMode);
+  z-index: 99;
+}
+
+.dark-mode .gallery .sk-gallery-container{
+  background: var(--sk-backgroundDarkMode);
+}
+
+.sk-gallery-container .sk-gallery-top{
+  width: 100%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+.sk-gallery-container .sk-gallery-bottom{
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: .6rem 1.2rem;
+}
+
+.sk-gallery-bottom .sk-gallery-btom-top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 85%;
+}
+
+.sk-gallery-bottom .sk-gallery-btom-btom{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 15%;
+}
+
+
+/****
+FOLLOW SHARE CONTAINER
+****/
+.follow-share-container .sk-follow-share-container{
+  position: absolute;
+  width: 101%;
+  height: 3.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--sk-backgroundWhiteMode);
+  border-radius: 3px;
+  z-index: 99;
+}
+
+.dark-mode .follow-share-container .sk-follow-share-container {
+background: var(--sk-backgroundDarkMode);
+}
+
+.sk-follow-share-container .sk-fsc-left{
+  width: 70%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sk-fsc-left .sk-fsc-left-left{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sk-fsc-left .sk-fsc-left-right{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sk-follow-share-container .sk-fsc-right{
+  width: 30%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/****
+DAILY ANALYTICS
+****/
+.daily-analytics .sk-daily-analytics{
+  position: absolute;
+  width: 98%;
+  height: 2rem;
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  justify-content: center;
+  background: var(--sk-backgroundWhiteMode);
+  z-index: 99;
+}
+
+.dark-mode .daily-analytics .sk-daily-analytics{
+  background: var(--sk-backgroundDarkMode);
+}
+
+
+/****
+TOTALS CONTAINER
+***/
+.totals-container .sk-totals-container{
+  position: absolute;
+  width: 99%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 0;
+  background: var(--sk-backgroundWhiteMode);
+  z-index: 99;
+}
+
+.dark-mode .totals-container .sk-totals-container {
+  background: var(--sk-backgroundDarkMode);
+}
+
+/***
+SK TABLE SECTION
+***/
+.table-section .sk-table-container{
+position: absolute;
+width: 100%;
+height: 33rem;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-around;
+background: var(--sk-backgroundWhiteMode);
+z-index: 99;
+}
+
+.dark-mode .table-section .sk-table-container{
+  background: var(--sk-backgroundDarkMode);
+}
+
+.table-section .sk-table-container .sk-table-top{
+  width: 100%;
+  height: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-self: center;
+
+  justify-content: center;
+}
+
+.sk-table-container .sk-table-top .sk-tt-top{
+  width: 100%;
+  height: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  margin-top: 1.7rem;
+  padding: 1rem;
+}
+
+.sk-table-container .sk-table-top .sk-tt-btom{
+  width: 100%;
+  height: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: .5rem;
+}
+
+
+.table-section .sk-table-container .sk-table-body{
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  gap: .9rem;
+  padding: 1rem 0;
+}
+
+
+/***
+SK MODE BTN CONTAINER
+****/
+.normalGrid-container .sk-mode-btn-container{
+  position: absolute;
+  width: 101%;
+  height: 23rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--sk-backgroundWhiteMode);
+  border-radius: 4px;
+  z-index: 99;
+}
+
+.dark-mode .normalGrid-container .sk-mode-btn-container{
+  background: var(--sk-backgroundDarkMode);
+}
+
+.sk-mode-btn-container .sk-mode-top{
+  width: 100%;
+  height: 20%;
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+  align-items: center;
+  justify-content: center;
+  padding-top: 1rem;
+  padding-left: 1.2rem;
+}
+
+.sk-mode-btn-container .sk-mode-bottom{
+width: 100%;
+height: 80%;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-between;
+}
+
+.sk-mode-btn-container .sk-mode-bottom .sk-mode-btom-top{
+  width: 100%;
+  height: 35%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sk-mode-btn-container .sk-mode-bottom .sk-mode-btom-bottom{
+  width: 100%;
+  height: 65%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/******
+SK NORMAL VIEW
+****/
+.view .sk-normalView-container{
+  width: 100%;
+  height: 44rem;
+  position: absolute;
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  background:var(--sk-backgroundWhiteMode);
+  border-end-end-radius: .8rem;
+  border-end-start-radius: .8rem;
+  padding: 0 .1rem;
+  z-index: 99;
+}
+
+
+.dark-mode .view .sk-normalView-container {
+  background: var(--sk-backgroundDarkMode);
+}
+.sk-normalView-container .sk-normal-tp-wrapper{
+  width: 100%;
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.sk-normal-tp-wrapper .sk-normal-top{
+  width: 100%;
+  height: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding: 1.2rem;
+}
+
+.sk-normal-tp-wrapper .sk-normal-bottom{
+  width: 100%;
+  height: 40%;
+  align-items: start;
+  justify-content: center;
+  display: flex;
+  padding-bottom: 1rem;
+}
+
+.sk-normalView-container .sk-normal-bottom-btom{
+  width: 100%;
+  height: 70%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 
