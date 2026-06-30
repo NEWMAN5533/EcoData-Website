@@ -35,6 +35,58 @@
 <!--remix icons-->
 <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
 
+<!--=== DARK MODE SCRIPT ========-->
+<script>
+
+document.addEventListener("DOMContentLoaded", ()=> {
+
+
+ 
+// theme script (dark & light mode)
+  const toggle = document.getElementById("themeToggle");
+  const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  const savedTheme = localStorage.getItem("theme");
+
+  function applyTheme(theme) {
+    if (theme === "dark") {
+      document.body.classList.add("dark-mode");
+      toggle.checked = true;
+    } else {
+      document.body.classList.remove("dark-mode");
+      toggle.checked = false;
+    }
+  }
+
+  if (savedTheme) {
+    applyTheme(savedTheme);
+  } else {
+    applyTheme(systemPrefersDark ? "dark" : "light");
+  }
+
+  toggle.addEventListener("change", () => {
+    if (toggle.checked) {
+      localStorage.setItem("theme", "dark");
+      applyTheme("dark");
+    } else {
+      localStorage.setItem("theme", "light");
+      applyTheme("light");
+    }
+  });
+
+  // Auto-change if system theme changes and user has no preference
+  window.matchMedia("(prefers-color-scheme: dark)").addListener(e => {
+    if (!localStorage.getItem("theme")) {
+      applyTheme(e.matches ? "dark" : "light");
+    }
+});
+
+
+});
+
+
+</script>
+<!--=== DARK MODE SCRIPT ENDS ===-->
 
   <!---css-link-->
   <link rel="stylesheet" href="style.css">
@@ -618,11 +670,13 @@
 
 
       <div class="google-thumbnail thumb1 promThumbnailOff" >
-      <span style="color: rgb(235, 193, 7); margin: .4rem;">[   <span style="color: red; margin: .2rem;">Notice!</span> SYSTEM UPGRADE ON MTN PORTAL ]</span> 
+      <span style="color: rgb(235, 193, 7); margin: .4rem;">[   <span style="color: red; margin: .2rem;">Update!</span> MTN DATA DELIVERY UPDATE ]</span> 
 
-<span style="color: rgb(255, 255, 255); margin: .1rem;"> MTN PURCHASES ARE TEMPORARILY UNAVAILABLE DUE TO MTN SYSTEM UPGRADE. </span> 
+<span style="color: rgb(255, 255, 255); margin: .1rem;">
+  KINDLY BE INFORMED THAT THE ONGOING MAINTENANCE BY MTN HAS BEEN SCHEDULED TO END ON <span style="color: rgb(235, 193, 7); margin: .2rem;">30TH OF JUNE </span> AND OPERATIONS RESUMING ON
+  <span style="color: rgb(108, 108, 236);">[ 1st July ]</span> </span> 
 
-   <span style="color: rgb(235, 193, 7); margin: .2rem;"> ALL ORDERS PLACED WILL BE DELIVERED WHEN SYSTEM RESTORED.  <span style="color:rgb(7, 235, 197); margin-left: .2rem; "> <span style="color: rgb(245, 53, 53);">TELECEL</span> & <span style="color: rgb(108, 108, 236);">AIRTELTIGO</span> ARE ACTIVE. </span>  <span style="color:rgb(235, 193, 7); margin-left: .4rem; "> WE WILL NOTIFY YOU WHEN SYSTEM UPGRADE IS DONE.  <span style="color:rgb(7, 235, 197); margin-left: .2rem; "> THANK YOU. </span> </span></span> 
+   <span style="color: rgb(235, 193, 7); margin: .2rem;"> ALL PROCESSING ORDERS WILL BE SERVED FIRST WHEN SYSTEM RESTORED. ONE MORE THING, WE ARE YET TO SEE THE NEW UPDATE FROM MTN, AND IF DATA PRICES GOES UP OR STAY THE SAME WE WILL LET YOU ALL KNOW. <span style="color:rgb(7, 235, 197); margin-left: .2rem; "> <span style="color: rgb(245, 53, 53);">TELECEL</span> & <span style="color: rgb(108, 108, 236);">AIRTELTIGO</span> ARE ACTIVE AT THE MOMENT, MTN IS STILL UNDER AWAITING UPDATE TO AVOID ANY LOSSES FROM THE UP COMING UPDATE. </span>  <span style="color:rgb(235, 193, 7); margin-left: .4rem; "> WE WILL NOTIFY YOU on (1st July...).  <span style="color:rgb(7, 235, 197); margin-left: .2rem; "> THANK YOU. </span> </span></span> 
 
       </div>
 
@@ -5215,49 +5269,6 @@ updateClock();
   animateScroll();
 
  
-
-
-
-// theme script (dark & light mode)
-  const toggle = document.getElementById("themeToggle");
-  const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-  const savedTheme = localStorage.getItem("theme");
-
-  function applyTheme(theme) {
-    if (theme === "dark") {
-      document.body.classList.add("dark-mode");
-      toggle.checked = true;
-    } else {
-      document.body.classList.remove("dark-mode");
-      toggle.checked = false;
-    }
-  }
-
-  if (savedTheme) {
-    applyTheme(savedTheme);
-  } else {
-    applyTheme(systemPrefersDark ? "dark" : "light");
-  }
-
-  toggle.addEventListener("change", () => {
-    if (toggle.checked) {
-      localStorage.setItem("theme", "dark");
-      applyTheme("dark");
-    } else {
-      localStorage.setItem("theme", "light");
-      applyTheme("light");
-    }
-  });
-
-  // Auto-change if system theme changes and user has no preference
-  window.matchMedia("(prefers-color-scheme: dark)").addListener(e => {
-    if (!localStorage.getItem("theme")) {
-      applyTheme(e.matches ? "dark" : "light");
-    }
-});
-
-
 
 
 
