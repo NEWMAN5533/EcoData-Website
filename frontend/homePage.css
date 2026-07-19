@@ -1020,7 +1020,7 @@ border: 1px solid rgb(235, 235, 235);
     background:#ffb300;
     box-shadow:0 0 10px #ffb300;
 }
-.delivery-bubble.normal::after{
+.delivery-bubble2.normal::after{
     border:2px solid #ffb300;
 }
 
