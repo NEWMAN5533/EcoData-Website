@@ -1,10 +1,10 @@
+// controllers/dataController.js
 import axios from "axios";
 
 export const buyDataBundle = async (req, res) => {
   try {
-    const { network, recipient, size, paymentReference } = req.body;
+    const { network, recipient, packageName, size, paymentReference } = req.body;
 
-    // ✅ Validate required fields
     if (!network || !recipient || !size || !paymentReference) {
       return res.status(400).json({
         success: false,
@@ -12,7 +12,7 @@ export const buyDataBundle = async (req, res) => {
       });
     }
 
-    // ⿡ Verify Paystack Payment
+    // ✅ 1. Verify Paystack payment
     const verify = await axios.get(
       `https://api.paystack.co/transaction/verify/${paymentReference}`,
       {
@@ -29,16 +29,18 @@ export const buyDataBundle = async (req, res) => {
       });
     }
 
-    // ⿢ Build SwiftData Payload
+    console.log(" Paystack verified:", verify.data.data.reference);
+
+    // ✅ 2. Build SwiftData order payload
     const orderData = {
       type: "single",
       volume: parseInt(size),
       phone: recipient,
-      offerSlug: `${network}_data_bundle`,
+      offerSlug: packageName,
       webhookUrl: "https://swiftdata-link.com/api/webhooks/orders",
     };
 
-    // ⿣ Send Request to SwiftData API
+    // ✅ 3. Send order to SwiftData
     const swiftRes = await axios.post(
       `${process.env.SWIFT_BASE_URL}/order/${network}`,
       orderData,
@@ -49,13 +51,14 @@ export const buyDataBundle = async (req, res) => {
         },
       }
     );
+
     console.log("SwiftData Response:", swiftRes.data);
 
-    // ⿤ Handle SwiftData Response
+    // ✅ 4. Handle success
     if (swiftRes.data.success) {
       return res.json({
         success: true,
-        message: "✅ Bundle order placed successfully!",
+        message: " Bundle order placed successfully!",
         order: swiftRes.data,
       });
     } else {
@@ -71,5 +74,6 @@ export const buyDataBundle = async (req, res) => {
       success: false,
       message: "Failed to process data order",
       error: error.response?.data || error.message,
-});}
+});
+}
 };

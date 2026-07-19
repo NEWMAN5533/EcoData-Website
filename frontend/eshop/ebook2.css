@@ -1,0 +1,196 @@
+
+
+/*======== VARIABLES CSS ============*/
+:root{
+  --header-height: 3.2rem;
+
+  /*======== COLORS ============*/
+  --first-color: hsl(230, 62%, 56%);
+  --title-color: hsl(230, 70%, 16%);
+  --text-color: hsl(230, 16%, 45%);
+  --border-color: hsl(230, 50%, 90%);
+  --white-color: hsl(0, 0%, 100%);
+  --body-color: hsl(230, 100%, 96%);
+  --container-color: hsl(230, 100%, 97%);
+
+  /*======== FONT & TYPOGRAPHY ============*/
+  --body-font: "Montserrat", sans-serif;
+  --second-font: "Montserrat", sans-serif;
+  --biggest-font-size: "Montserrat", sans-serif;
+  --h1-font-size: 1.5rem;
+  --h2-font-size:  1.25rem;
+  --h3-font-size: 1rem;
+
+  --normal-font-size: .938rem;
+  --small-font-size:  .813rem;
+  --smaller-font-size: .75rem;
+
+  /*======== FONT WEIGHT ============*/
+  --font-regular: 400;
+  --font-medium: 400;
+  --font-semi-bold: 400;
+
+  /*======== Z INDEX ============*/
+  --z-tooltip: 10;
+  --z-fixed: 100;
+
+  /*======== RESPONSIVE TYPOGRAPHY ============*/
+  @media screen and (min-width: 1150px) {
+    :root {
+      --biggest-font-size: 3.5rem;
+      --h1-font-size: 2.25rem;
+      --h2-font-size:  1.5rem;
+      --h3-font-size: 1.25rem;
+
+      --normal-font-size: 1rem;
+      --small-font-size:  .875rem;
+      --smaller-font-size: .813rem;
+    }
+  }
+
+}
+
+
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    .app-shell {
+      display: grid;
+      height: 100vh;
+      grid-template-columns: 18rem auto;
+      grid-template-rows: auto 1fr auto;
+      grid-template-areas:
+        "sidebar  header"
+        "sidebar  main"
+        "sidebar  footer";
+    }
+
+
+    .main {
+      grid-area: main;
+      overflow-y: auto;
+    }
+
+
+    .card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.75rem;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .card h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-size: 0.875rem;
+      color: #6b7280;
+      line-height: 1.6;
+    }
+
+
+
+
+ .sidebar {
+      grid-area: sidebar;
+      display: flex;
+      height: 100vh;
+      flex-direction: column;
+      justify-content: space-between;
+      position: fixed;
+      top: 0;
+      left: 0;
+      border-right: 1px solid var(--border-color);
+      width: 100%;
+      max-width: 18rem;
+      background: var(--container-color);
+      color: #f9fafb;
+      padding: 1.5rem 0;
+      overflow-y: auto;
+    }
+
+    .sidebar .sidebar-top{
+      height: 12%;
+      border-bottom: 1px solid var(--border-color);
+      justify-content: start !important;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      position: relative;
+      padding-left: 1.25rem;
+      padding-bottom: 1rem;
+    }
+
+
+    .sidebar .sidebar-middle{
+      height: 68% !important;
+
+    }
+
+    .sidebar .sidebar-bottom{
+    height: 20%;
+    padding-top: 1.55rem ;
+    padding-left: .75rem;
+    border-bottom: none !important;
+    justify-content: center;
+    align-items: center ;
+    }
+
+
+
+
+
+
+
+   
+
+    @media (max-width: 768px) {
+      .app-shell {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "header"
+          "main"
+          "footer";
+      }
+      .sidebar
+      { display: none !important; }
+    }
+
+    @media (min-width: 430px) {
+
+      .header{
+        padding: 0 1.5rem;
+      }
+      .nav-menu{
+        display: none;
+      }
+
+      .footer{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+
+     
+      .footer-data,
+      .footer-container{
+        display: flex !important;
+        gap: 2rem !important;
+      }
+
+      #sidebarOpenButton{
+        display: none;
+      }
+    }

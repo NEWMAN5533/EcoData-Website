@@ -1,0 +1,953 @@
+:root {
+  --bg-cl: #FFF;
+  --primary-cl: #fff;
+
+  --secondary-cl: rgb(50, 50, 190);
+  --dark-cl: #0a0a0a;
+  --ascent-cl: rgb(158, 97, 209);
+  --background-cl: #e6e8ce;
+  --card-full-bg-cl: rgb(255, 217, 0);
+  --card-full-tele-bg-cl: rgb(221, 19, 19);
+  --card-full-airtel-bg-cl:  rgb(6, 6, 231);
+  --border-cl-2: rgba(66, 66, 26, 0.226);
+  --mtn-btn: rgb(193, 196, 19);
+  --telecel-btn: rgb(180, 57, 19);
+  --airteltigo-btn: rgb(28, 46, 119);
+
+  /*====NEW===ROOT====*/
+  /*====NEW===ROOT====*/
+  --darkMode-bg-cl: rgb(24, 29, 36) !important;
+  --background-cl-1: rgb(29, 36, 41);
+  --background-cl-2: rgb(29, 36, 41);
+  --background-cl-2: rgb(29, 36, 41);
+  --live-body: rgba(136, 136, 136, 0.192);
+
+
+  /***
+  NEW ROOT
+  ***/
+  --btn-bg-cl: rgb(250, 126, 9);
+  --user-panel-bg: rgba(42, 42, 194, 0.938);
+  --clock-bg-cl: rgba(252, 175, 11, 0.199);
+  --clock-bg-cl-1: rgb(2, 61, 52);
+
+  /***
+  DARK MODE COLORS
+  ***/
+  --darkMode-bg-cl: rgb(24, 29, 36) !important;
+  --welcome-card-bg-2:  #141c27 !important;
+  --welcome-card-bg:  #0e141b !important;
+  --welcome-card-bg-3: rgba(77, 77, 77, 0.89);
+  --welcome-card-border: rgb(74, 88, 94);
+  --thin-border: rgb(35, 48, 49);
+  --text-cl: rgb(145, 168, 164);
+  --text-cl-2: rgb(210, 216, 216);
+  --text-cl-3: rgb(139, 141, 141);
+  --text-cl-4: rgb(255, 153, 0);
+  --white-text-cl: rgb(248, 247, 247);
+
+
+  /**
+  BORDER SOLID COLORS
+  **/
+  --thin-border-1:  #0d6d5a;
+  --thin-border-2:  #830616;
+  --thin-border-3:  #b97207;
+  --thin-border-4:  #036aa7;
+  --thin-border-5:  #bba907;
+  --thin-border-6:   rgb(17, 2, 31);
+  --thin-border-7:  rgb(1, 11, 39);
+
+  /***
+  CARD BG
+  ***/
+  --card-mtn-bg:  #faba5ad0;
+  --card-tel-bg:  #fa537dd0;
+  --card-tigo-bg:  #1b252b;
+}
+
+
+
+  .main-container .second-container{
+  width: 100%;
+  max-width: 96%;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  position: relative;
+  justify-content: center;
+  justify-self: center;
+  justify-items: center;
+  align-items: center;
+  margin-bottom: 3rem;
+    }
+
+    .second-container .total-title{
+  width: 100%;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .1rem;
+  margin-top: 1.4rem ;
+  margin-bottom: .2rem;
+  border-radius: .8rem;
+}
+
+  .second-container .etitle {
+    background: none !important;
+    padding: 1.1rem !important;
+    margin-bottom: 0 !important;
+  }
+
+ .second-container .total-title .ebookImg{
+  width: max-content;
+  height: max-content;
+  padding: .3rem;
+ }
+
+ .second-container .total-title .ebookImg img{
+  width: 2.2rem;
+  height: 2.2rem;
+  animation: book 2s infinite;
+ }
+
+ @keyframes book {
+  0%{
+    transform: scale(1);
+  }
+
+  50%{
+    transform: scale(1.03);
+  }
+
+  75%{
+    transform: scale(1.05);
+  }
+
+  100%{
+    transform: scale(1);
+  }
+ }
+
+.second-container .total-title p{
+  color: var(--text-cl-2);
+  font-size: 1.5rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 600;
+}
+
+/***
+second container css little changes
+****/
+.main-container .second-container .daily-total-section{
+  width: 100%;
+  background: var(--thin-border-1);
+}
+
+
+.second-container .section-card-top .card-top-left p{
+  color: rgba(130, 236, 231, 0.925);
+  font-size: .9rem;
+  margin-top: -.5rem;
+  font-weight: 500;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.second-container .table-section{
+  width: 100%;
+  max-width: 100% !important;
+}
+
+.second-container .pdt{
+  width: 100%;
+  max-width: 96% !important; 
+}
+
+.second-container 
+.content-wrapper .table-header {
+  /* Fixed column widths — same as before */
+  display: grid;
+  width: 100%;
+  max-width: 100% !important;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  align-content: center;
+  grid-template-columns: 
+    130px 160px 130px 130px 130px 130px 110px 130px !important;
+
+}
+
+.second-container .content-wrapper .pde {
+  width: 100%;
+  max-width: 100% !important;
+   grid-template-columns: 
+    140px 150px 140px 160px 140px 160px 140px 150px !important;
+}
+
+
+
+/***
+CHECKBOX STYLE
+****/
+.checkbox {
+  -webkit-appearance: none;
+  appearance: none;
+
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #f5f5f5;
+
+  cursor: pointer;
+  transition: .3s ease;
+}
+
+.bundle-sector p .active{
+  background: var(--card-mtn-bg);
+  border-color: var(--thin-border-3);
+  animation: blinkTwice 3s infinite;
+}
+
+@keyframes blinkTwice {
+  0%{
+    background: var(--card-mtn-bg) ;
+    scale: 1.01;
+  }
+
+   50%{
+    background: var(--background-cl) ;
+    scale: .7;
+  }
+   75%{
+    background: var(--card-tel-bg) ;
+    scale: 1;
+  }
+
+    100%{
+    background: var(--background-cl);
+    scale: .5;
+  }
+}
+
+.checkbox:checked{
+  background: var(--card-mtn-bg);
+  border-color: var(--thin-border-3);
+}
+
+
+
+
+/*****
+BOTTOM NAVIGATION BAR STYLE CSS
+******/
+ 
+
+    :root{
+  --darkMode-bg-cl: rgb(10, 10, 10);
+  --darkMode-bg-cl-2: rgb(10, 1, 22);
+  --welcome-card-bg: rgba(37, 36, 36, 0.918);
+  --welcome-card-bg-1: rgb(2, 2, 39);
+    }
+    .bottom-navbar{
+      width: 100%;
+      max-width: 99.99%;
+      height: 4.3rem;
+      justify-self: center;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      gap: .3rem;
+      z-index: 999999;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .1rem;
+      background: linear-gradient(135deg, rgba(58, 57, 57, 0.11), rgb(34, 31, 31));
+      backdrop-filter: blur(16px);
+      border-start-start-radius: 1.7rem;
+      border-start-end-radius: 1.7rem;
+      border: 1px solid rgb(59, 59, 59);
+      box-shadow: 0 10px 40px rgba(26, 25, 25, 0.99);
+    }
+
+    .dark-mode .bottom-navbar{
+      background: var(--darkMode-bg-cl);
+      border: 1px solid var(--thin-border) !important;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.99);
+    }
+
+
+
+    .bottom-navbar .btom-navIcon{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      width: 25%;
+      gap: .3rem;
+      height: 99%;
+      cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
+    }
+
+    .btom-navIcon .activeImg{
+      padding: .2rem 1.16rem;
+      display: flex;
+      position: relative;
+      align-items: center;
+      justify-content: center;
+      border-radius: .9rem;
+    -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
+    }
+
+    .activeImg.active{
+    background: rgb(56, 56, 56);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .dark-mode .activeImg.active{
+      background: rgba(46, 87, 61, 0.747);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3) !important;
+      border: 1px solid var(--thin-border);
+    }
+
+    /***
+    AFA ACTIVE
+    ***/
+      .activeImg.activeMin{
+    padding: .19rem .3rem;
+     background: rgb(53, 50, 50);
+    box-shadow: 0 2px 6px rgba(68, 68, 68, 0.3);
+    border: 1px solid var(--primary-cl);
+    }
+
+    .dark-mode .activeImg.activeImg.activeMin{
+      background: rgba(46, 87, 61, 0.747);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      border: 1px solid var(--thin-border);
+    }
+
+ /***
+    AFA ACTIVE ENDS
+    ***/
+
+
+     /***
+    PAY ACTIVE
+    ***/
+    .activeImg.activeMin{
+    padding: .19rem .3rem;
+    background: rgb(39, 37, 37);
+    box-shadow: 0 2px 6px rgba(68, 68, 68, 0.3);
+    border: 1px solid var(--primary-cl);
+    }
+    .dark-mode .activeImg.activeMin{
+      background: rgba(46, 87, 61, 0.747);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      border: 1px solid var(--thin-border);
+    }
+
+      /***
+    PAY ACTIVE ENDS
+    ***/
+
+
+
+      /***
+    INFO ACTIVE ENDS
+    ***/
+
+    .activeImg img{
+      width: 1.3rem;
+      height: 1.3rem;
+    }
+
+  .activeImg .pin{
+    width: 2rem;
+    height: 1.8rem;
+    margin-bottom: -.3rem;
+  }
+
+  .material-icons{
+    color: rgb(248, 245, 218);
+  }
+
+
+
+    .btom-navIcon .bottomIcon-textNav{
+      font-size: .76rem;
+      font-weight: 700;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      color: rgb(243, 243, 243) !important;
+    }
+
+    .dark-mode .btom-navIcon .bottomIcon-textNav{
+      color: white;
+      opacity: .7;
+    }
+
+  .gridCard-wrapper{
+    margin-bottom: 3rem;
+  }
+
+
+
+
+
+
+
+ /****
+ ecoshop-fixedBtn
+ *****/
+   
+
+      .ecodataShopBtn{
+        width: 100%;
+        height: 0;
+        background: red;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        margin-bottom: 4rem;
+        z-index: 99999999999999999;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-user-select: none;
+        outline: none;
+        -ms-user-select: none;;
+        user-select: none;
+      }
+      .shop-fixedBtn{
+        width: 3.4rem;
+        height: 3.4rem;
+        position: fixed;
+        padding: .4rem;
+        bottom: 2.5rem;
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;;
+        background: rgb(245, 223, 200);
+        border-radius: 50%;
+
+        z-index: 999 !important;
+        box-shadow: 0 10px 20px rgba(32, 32, 32, 0.6) !important;
+        cursor: pointer;
+        border: 1px solid var(--thin-border-cl);
+        -webkit-tap-highlight-color: transparent;
+        -webkit-user-select: none;
+        outline: none;
+        -ms-user-select: none;;
+        user-select: none;
+      }
+
+      .dark-mode .shop-fixedBtn{
+        box-shadow: 0 10px 20px rgba(34, 34, 34, 0.73) !important;
+      }
+
+      .shop-fixedBtn img{
+        width: 3.2rem;
+        height: 3.2rem;
+      }
+
+
+
+ 
+/*********************
+/ ACTIVE COUNT ORDERS
+*********************/
+        .btom-navIcon .nav-badge{
+          position: absolute;
+          top: 1px;
+          right: 9px;
+          width:  19px;
+          height:  14px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: rgb(7, 184, 125);
+          text-align: center;
+          border-radius: 50%;
+          color: rgb(44, 44, 44);
+          font-size: .55rem;
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        .dark-mode  .btom-navIcon .nav-badge{
+          background:  rgb(7, 184, 31) !important;
+          color: rgb(44, 44, 44);
+        }
+   
+/****************************
+/ ACTIVE COUNT ORDERS ENDS
+*****************************/
+
+
+
+
+
+  
+/*** my ebooks TABLE*****/
+  .content-wrapper .mb-header{
+   /* Fixed column widths — same as before */
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-template-columns: 
+    100px 140px 120px 80px 120px 120px;
+  margin-left: .5rem;
+
+  /* sticky top so it stays visible while scrolling vertically */
+  position: sticky;
+  top: 0;
+  z-index: 1;
+
+  /* Remove position: absolute — it was breaking x-axis sync */
+  color: white;
+  font-weight: 600;
+  font-size: .89rem;
+  background: rgb(41, 40, 40); /* needs a background when sticky */
+  font-family: system-ui, sans-serif;
+  padding: .5rem 0;
+  width: 100%;
+  border-bottom: 1px solid rgb(59, 59, 59);
+  min-width: max-content; /* prevents collapsing on narrow viewports */
+  }
+
+/****** main body***********/
+  .content-wrapper .mb-content{
+  width: 100%;
+  display: grid;
+  justify-items: center;
+  padding: 0 .5rem;
+  align-items: start;
+  grid-template-columns: 
+    110px 80px 150px 80px 120px 120px;
+  position: relative;
+  min-width: max-content; /* ensures rows stretch with header */
+
+  }
+
+
+  /*---- dynamic row ****/
+  .mbRowWrapper .live-body-row{
+justify-items: center;
+ align-items: center;
+ min-width: max-content;
+ width: 100%;
+ height: 2.2rem;
+ border-bottom: 1px solid rgb(80, 79, 79);
+ grid-template-columns:   110px 80px 150px 80px 120px;
+ display: grid;
+  }
+
+
+
+
+
+
+/*** SALES TABLE*****/
+  .content-wrapper .sl-header{
+   /* Fixed column widths — same as before */
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-template-columns: 
+    100px 140px 120px 80px 120px;
+  margin-left: .5rem;
+
+  /* sticky top so it stays visible while scrolling vertically */
+  position: sticky;
+  top: 0;
+  z-index: 1;
+
+  /* Remove position: absolute — it was breaking x-axis sync */
+  color: white;
+  font-weight: 600;
+  font-size: .89rem;
+  background: rgb(41, 40, 40); /* needs a background when sticky */
+  font-family: system-ui, sans-serif;
+  padding: .5rem 0;
+  width: 100%;
+  border-bottom: 1px solid rgb(59, 59, 59);
+  min-width: max-content; /* prevents collapsing on narrow viewports */
+  }
+
+/****** main body***********/
+  .content-wrapper .sl-content{
+  width: 100%;
+  display: grid;
+  justify-items: center;
+  padding: 0 .5rem;
+  align-items: start;
+  grid-template-columns: 
+    110px 80px 150px 80px 120px;
+  position: relative;
+  min-width: max-content; /* ensures rows stretch with header */
+
+  }
+
+
+  /*---- dynamic row ****/
+  .withRowWrapper .live-body-row{
+justify-items: center;
+ align-items: center;
+ min-width: max-content;
+ width: 100%;
+ height: 2.2rem;
+ border-bottom: 1px solid rgb(80, 79, 79);
+ grid-template-columns:   110px 80px 150px 80px 120px;
+ display: grid;
+  }
+
+
+
+
+  /**** withdrawal *****/
+  .table-section .withdraw{
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    position: relative;
+  }
+
+  .withdraw .withdrawBtn{
+    border: none;
+    padding: 0.08rem .6rem;
+    background: rgb(102, 102, 126);
+    color: white;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: .8rem;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  
+/*** my ebooks TABLE*****/
+  .content-wrapper .wd-header{
+   /* Fixed column widths — same as before */
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-template-columns: 
+    100px 140px 120px 80px ;
+  margin-left: .5rem;
+
+  /* sticky top so it stays visible while scrolling vertically */
+  position: sticky;
+  top: 0;
+  z-index: 1;
+
+  /* Remove position: absolute — it was breaking x-axis sync */
+  color: white;
+  font-weight: 600;
+  font-size: .89rem;
+  background: rgb(41, 40, 40); /* needs a background when sticky */
+  font-family: system-ui, sans-serif;
+  padding: .5rem 0;
+  width: 100%;
+  border-bottom: 1px solid rgb(59, 59, 59);
+  min-width: max-content; /* prevents collapsing on narrow viewports */
+  }
+
+/****** main body***********/
+  .content-wrapper .wd-content{
+  width: 100%;
+  display: grid;
+  justify-items: center;
+  padding: 0 .5rem;
+  align-items: start;
+  grid-template-columns: 
+    110px 80px 150px 80px ;
+  position: relative;
+  min-width: max-content; /* ensures rows stretch with header */
+
+  }
+
+
+  /*---- dynamic row ****/
+  .withRowWrapper .live-body-row{
+justify-items: center;
+ align-items: center;
+ min-width: max-content;
+ width: 100%;
+ height: 2.2rem;
+ border-bottom: 1px solid rgb(80, 79, 79);
+ grid-template-columns:   110px 80px 150px 80px ;
+ display: grid;
+  }
+
+
+
+  /*** Restructure wd-history" ****/
+.ts-esb-container-wrapper{
+  width: 100%;
+  max-width: 94%;
+  margin-top: 3rem;
+  height: max-content;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: space-between;
+  gap: .3rem;
+ 
+  padding: .2rem;
+}
+
+
+/*******TABLE SECTION**********/
+.wd-history{
+  width: 100%;
+  max-width: 47%;
+  margin-bottom: 0 !important;
+  height: 30rem !important;
+  overflow-y: auto;
+  display: flex;
+  padding: .2rem;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  gap: .13rem;
+  background: rgba(39, 39, 39, 0.89);
+  backdrop-filter: blur(18px);
+  border-end-end-radius: .2rem;
+  border-end-start-radius: .2rem;
+  border-start-start-radius: .2rem;
+  border-start-end-radius: .2rem;
+  border: 1px solid rgba(87, 86, 86, 0.89);
+  overflow: hidden;
+}
+
+.wd-history .tie{
+  width: 100%;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: .4rem;
+  justify-content: space-between !important;
+}
+
+.wd-history .table-title{
+  width: 100%;
+  height: 10%;
+  background: linear-gradient(135deg, rgba(56, 55, 55, 0.89), rgba(87, 86, 86, 0.89));
+  backdrop-filter: blur(18px);
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  position: relative;
+  padding: 1rem;
+  border: 1px solid rgba(87, 86, 86, 0.89);
+}
+
+
+.wd-history .content-wrapper{
+  width: 100%;
+  height: 90%;
+  position: relative;
+}
+
+/*****
+SUBMIT WRAPPER
+*****/
+
+
+.submit-ebook{
+  width: 100%;
+  max-width: 50%;
+  height: 30rem;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  justify-content: center;
+}
+
+.ebook-submit{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  overflow: hidden;
+  position: relative;
+  gap: .2rem;
+  padding: .3rem;
+}
+
+.ebook-submit .form-group{
+ display: grid;
+ grid-template-columns: 100px 110px;
+ width: 90%;
+ height: 3.5rem;
+ gap: .6rem;
+ margin-top: .4rem;
+ border-radius: 6px;
+ justify-items: start !important;
+ justify-self: center;
+ align-items: center;
+ position: relative;
+ padding-left:  .3rem;
+ border: 1px solid rgba(87, 86, 86, 0.89);
+} 
+
+/*****
+form input
+****/
+.form-group input{
+  width: 18.4rem;
+  height: 2.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding: .3rem;
+  background: none;
+  border: 1px solid rgba(133, 133, 133, 0.623);
+  border-radius: 4px;
+  color: white;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: .92rem;
+}
+
+.form-group input::placeholder{
+  color: rgb(143, 141, 141);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: .78rem;
+  
+}
+.form-group label{
+  text-align: start;
+  display: flex;
+  height: 2.3rem;
+  border-radius: 4px;
+  border-left: 1px solid rgba(133, 133, 133, 0.623);
+  justify-content: start;
+  position: relative;
+  color: white;
+  width: max-content;
+  white-space: nowrap;
+  align-items: center;
+  justify-content: start;
+  padding-left: .4rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 600;
+}
+
+ .uploadBtn-div{
+  margin-top: 1rem;
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+}
+
+.uploadBtn-div .upload{
+  width: 90%;
+  height: 2.4rem;
+  background: rgba(238, 223, 155, 0.747);
+  color: white;
+  font-size: .1.02rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  border: none;
+  border-radius: .4rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: .2s ease;
+}
+
+.upload:hover{
+  background: rgb(192, 186, 157);
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+@media (max-width: 414px){
+  .ts-esb-container-wrapper{
+    flex-direction: column !important;
+    gap: 2rem !important;
+    border: none;
+    height: max-content !important;
+    justify-content: space-between !important;
+    width: 94% !important;
+    ;
+  }
+
+  .wd-history{
+    width: 100%;
+    height: 30rem !important;
+    gap: 0;
+    max-width: 100% !important;
+  }
+
+  .ebook-submit .form-group {
+    
+    justify-self: center !important;
+    width: 100%;
+  }
+
+  .form-group input{
+    max-width: 12rem !important;
+  }
+}
+
+
+
+@media (min-width: 1366px){
+.content-wrapper .mb-header{
+ grid-template-columns:    150px 170px 180px 160px 170px 160px !important;
+}
+
+.content-wrapper .mb-content{
+ grid-template-columns:    150px 170px 180px 160px 170px 160px !important;
+}
+
+ .mbRowWrapper .live-body-row{
+ grid-template-columns:    150px 170px 180px 160px 170px 160px !important;
+}
+
+
+/***** Sales ******/
+ .content-wrapper .sl-header{
+ grid-template-columns:    200px 190px 240px 190px 170px !important;
+}
+
+ .content-wrapper .sl-content{
+ grid-template-columns:    200px 190px 240px 190px 170px !important;
+}
+
+ .withRowWrapper .live-body-row{
+ grid-template-columns:    200px 190px 240px 190px 170px !important;
+}
+
+}

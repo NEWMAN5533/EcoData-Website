@@ -1,0 +1,387 @@
+:root {
+  --bg-cl: #FFF;
+  --primary-cl: #fff;
+
+  --secondary-cl: rgb(50, 50, 190);
+  --dark-cl: #0a0a0a;
+  --ascent-cl: rgb(158, 97, 209);
+  --background-cl: #e6e8ce;
+  --card-full-bg-cl: rgb(255, 217, 0);
+  --card-full-tele-bg-cl: rgb(221, 19, 19);
+  --card-full-airtel-bg-cl:  rgb(6, 6, 231);
+  --border-cl-2: rgba(66, 66, 26, 0.226);
+  --mtn-btn: rgb(193, 196, 19);
+  --telecel-btn: rgb(180, 57, 19);
+  --airteltigo-btn: rgb(28, 46, 119);
+
+  /*====NEW===ROOT====*/
+  /*====NEW===ROOT====*/
+  --darkMode-bg-cl: rgb(24, 29, 36) !important;
+  --background-cl-1: rgb(29, 36, 41);
+  --background-cl-2: rgb(29, 36, 41);
+  --background-cl-2: rgb(29, 36, 41);
+  --live-body: rgba(136, 136, 136, 0.192);
+
+
+  /***
+  NEW ROOT
+  ***/
+  --btn-bg-cl: rgb(250, 126, 9);
+  --user-panel-bg: rgba(42, 42, 194, 0.938);
+  --clock-bg-cl: rgba(252, 175, 11, 0.199);
+  --clock-bg-cl-1: rgb(2, 61, 52);
+
+  /***
+  DARK MODE COLORS
+  ***/
+  --darkMode-bg-cl: rgb(24, 29, 36) !important;
+  --welcome-card-bg-2:  #141c27 !important;
+  --welcome-card-bg:  #0e141b !important;
+  --welcome-card-bg-3: rgba(77, 77, 77, 0.89);
+  --welcome-card-border: rgb(74, 88, 94);
+  --thin-border: rgb(35, 48, 49);
+  --text-cl: rgb(145, 168, 164);
+  --text-cl-2: rgb(210, 216, 216);
+  --text-cl-3: rgb(139, 141, 141);
+  --text-cl-4: rgb(255, 153, 0);
+  --white-text-cl: rgb(248, 247, 247);
+
+
+  /**
+  BORDER SOLID COLORS
+  **/
+  --thin-border-1:  #0d6d5a;
+  --thin-border-2:  #830616;
+  --thin-border-3:  #b97207;
+  --thin-border-4:  #036aa7;
+  --thin-border-5:  #bba907;
+  --thin-border-6:   rgb(17, 2, 31);
+  --thin-border-7:  rgb(1, 11, 39);
+
+  /***
+  CARD BG
+  ***/
+  --card-mtn-bg:  #faba5ad0;
+  --card-tel-bg:  #fa537dd0;
+  --card-tigo-bg:  #1b252b;
+}
+
+
+
+/****
+AFA REGISTRATION
+*****/
+.afa-receipt {
+  position: fixed;
+  inset: 0;
+  background: none;
+  align-items: center;
+  justify-content: center;
+  top: calc(100vh - 80vh) !important;
+  left: calc(100vw - 90vw) !important;
+  z-index: 999;
+}
+
+.afa-receipt {
+  display:   none;
+}
+
+.receipt-card {
+  background: #fff;
+  width: 90%;
+  max-width: 420px;
+  border-radius: 14px;
+  padding: 20px;
+  animation: slideUp .35s ease;
+  border: 2px solid rgb(6, 24, 29);
+}
+
+.receipt-card h3{
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.receipt-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px dashed #ddd;
+  font-size: 14px;
+}
+
+.receipt-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.receipt-actions button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
+}
+
+.receipt-actions button:first-child {
+  background: #111;
+  color: #fff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+.receipt-actions button:last-child{
+  background: #eee;
+}
+
+
+@keyframes slideUp {
+  from {
+    transform: translateY(40px); opacity: 0;
+  }
+  to {
+    transform: translateY(0); opacity: 1;
+  }
+}
+/****
+AFA RECEIPT ENDS
+****/
+
+      
+
+.securance{
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 1rem;
+  border: 1px solid rgb(105, 105, 105);
+  border-radius: 10px;
+  text-align: center;
+  margin: .8rem 0;
+  transition: 0s ;
+}
+
+.dark-mode .securance{
+  border: 1px solid var(--thin-border);
+
+}
+
+.dark-mode .securance small{
+  color: var(--thin-border-3) !important;
+}
+
+.securance small{
+  color: var(--background-cl);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: .78rem;
+  font-weight: 400;
+}
+
+
+
+
+
+
+  .status-success{
+    color: #22c55e;
+    font-weight: 600;
+    padding: .2rem;
+    border-radius: .8rem;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .status-pending{
+    color: #f59e0b;
+    font-weight: 600;
+  }
+
+  .status-failed{
+    color: #ef4444;
+    font-weight: 600;
+  }
+
+
+  .card-container .afaTable-container{
+    width: 100%;
+    max-width: 96%;
+    justify-self: center;
+    height: max-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-direction: column;
+    margin-bottom: 7rem;
+  }
+
+/*******TABLE SECTION**********/
+.afaTable-container .table-section{
+  width: 100%;
+  max-width: 98%;
+  padding: .2rem;
+  margin-bottom: 1rem !important;
+  height: 30rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  gap: .1rem;
+  background:  rgba(39, 39, 39, 0.89);
+  backdrop-filter: blur(18px);
+  border-end-end-radius: .2rem;
+  border-end-start-radius: .2rem;
+  border-start-start-radius: .2rem;
+  border-start-end-radius: .2rem;
+  border: 1px solid rgb(80, 78, 78);
+  overflow: hidden;
+}
+
+.dark-mode .afaTable-container .table-section{
+  background: var(--darkMode-cl);
+  border: 1px solid var(--thin-border);
+}
+
+.table-section .table-title{
+  width: 100%;
+  height: 10%;
+  background: linear-gradient(135deg, rgba(39, 39, 39, 0.89), rgba(117, 117, 117, 0.89)) ;
+  backdrop-filter: blur(18px);
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  position: relative;
+  padding: 1rem;
+  border: 1px solid  rgb(121, 121, 121);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  border-radius: .2rem;
+}
+
+.table-title p{
+  font-size: .85rem;
+  font-family: system ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: rgb(221, 96, 23);
+  font-weight: 600;
+}
+
+.table-section .content-wrapper {
+  width: 100%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border: 1px solid rgb(128, 134, 134);
+  border-radius: .2rem;
+  /* Remove overflow from here — move it to table-scroll-area */
+  overflow: hidden;
+}
+
+/* NEW: this single div handles ALL scrolling in both axes */
+.content-wrapper .table-scroll-area {
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;   /* horizontal scroll */
+  overflow-y: auto;   /* vertical scroll */
+  white-space: nowrap;
+}
+
+.content-wrapper .table-header {
+  /* Fixed column widths — same as before */
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  align-self: center;
+  grid-template-columns: 
+    70px 110px 90px 110px 100px 120px 120px 120px ;
+
+  /* sticky top so it stays visible while scrolling vertically */
+  position: sticky;
+  top: 0;
+  z-index: 1;
+
+  /* Remove position: absolute — it was breaking x-axis sync */
+  color: white;
+  font-weight: 600;
+  border-bottom: 1px solid rgb(94, 93, 93);/* needs a background when sticky */
+  font-family: system-ui, sans-serif;
+  padding: .5rem 0;
+  margin-left: .5rem;
+  width: 100%;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  min-width: max-content; /* prevents collapsing on narrow viewports */
+}
+
+.content-wrapper .main-row-content {
+  width: 100%;
+  display: grid;
+  justify-items: center;
+  padding: 0 .5rem;
+  align-items: start;
+  grid-template-columns: 
+    70px 110px 90px 110px 100px 120px 120px 120px ;
+  position: relative;
+  min-width: max-content; /* ensures rows stretch with header */
+}
+
+
+
+.table-scroll-area .main-row-content #afaEmpty-body{
+  position: fixed;
+  color: rgb(231, 229, 229);
+  transform: translateX(-50%) !important;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) !important;
+  font-size: .73rem;
+  font-weight: 600;
+  display: flex;
+
+}
+
+
+#afaRowWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  /* Remove position: absolute — it was collapsing the height */
+}
+
+#afaRowWrapper .afaRow-reg{
+ justify-items: center;
+ align-items: center;
+ min-width: max-content;
+ width: 100%;
+ height: 2.2rem;
+ border-bottom: 1px solid rgb(100, 99, 99);
+ grid-template-columns:   110px 80px 90px 100px 100px 100px 110px 150px 80px 120px;
+ display: grid;
+}
+
+.dark-mode #afaRowWrapper .afaRow-reg{
+  border-bottom: var(--thin-border);
+}
+
+.afaRow-reg small{
+  font-size: .81rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 600;
+  color: rgb(173, 173, 173);
+}
+
+
+

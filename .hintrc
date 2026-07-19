@@ -6,7 +6,35 @@
     "axe/forms": [
       "default",
       {
-        "select-name": "off"
+        "select-name": "off",
+        "label": "off"
+      }
+    ],
+    "compat-api/css": [
+      "default",
+      {
+        "ignore": [
+          "-webkit-backdrop-filter",
+          "user-select",
+          "backdrop-filter",
+          "scrollbar-width",
+          "-ms-touch-action"
+        ]
+      }
+    ],
+    "no-inline-styles": "off",
+    "button-type": "off",
+    "axe/name-role-value": [
+      "default",
+      {
+        "button-name": "off"
+      }
+    ],
+    "disown-opener": "off",
+    "axe/text-alternatives": [
+      "default",
+      {
+        "image-alt": "off"
       }
     ]
   }

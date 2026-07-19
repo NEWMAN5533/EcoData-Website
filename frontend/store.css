@@ -1,0 +1,283 @@
+:root{
+  --brand-color: #fda80a;
+}
+
+body{
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background: linear-gradient(135deg, #fdfdfd, #fdfdfd);
+  color: #fff;
+}
+
+/*****
+STORE HEADER
+*****/
+.store-header{
+text-align: center;
+padding: 20px;
+}
+
+.store-header h2{
+  font-size: 22px;
+  margin: 0;
+}
+
+.store-tag{
+  font-size: 12px;
+  opacity: .7;
+}
+
+/****
+STORE LOGO
+****/
+.store-logo{
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  border: 2px solid var(--brand-color);
+}
+
+
+
+/****
+GRID 
+****/
+.bundle-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 15px;
+  padding: 15px;
+}
+
+/***
+CARD
+***/
+.bundle-card{
+  background-color: rgba(255, 255, 255, 0.103);
+  backdrop-filter: blur(10px);
+  border-radius: 4px;
+  padding: 8px;
+  width: 9.9rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  height: 13rem;
+  text-align: center;
+  transition: .3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.bundle-card .card-innerWrapper{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 10.5rem;
+  background: rgba(255, 255, 255, 0.055);
+  justify-content: center;
+  align-items: center;
+  gap: .2rem;
+  padding: .5rem 0;
+}
+
+.bundle-card:hover{
+  transform: translateY(-6px) scale(1.02);
+}
+
+/***
+GLOW EFFECT
+****/
+.bundle-card::before{
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(253,168,10,0.15), transparent);
+  top: -20px;
+  left: -20px;
+  opacity: 0;
+  transition: .3s;
+}
+
+.bundle-card:hover::before{
+  opacity: 1;
+}
+
+/****
+TEXT
+****/
+.bundle-title{
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.bundle-sub{
+  font-size: 11px;
+  opacity: 0.6;
+  margin: 6px 0;
+}
+
+.bundle-price{
+  font-size: 20px;
+  margin: 10px 0;
+  color: var(--brand-color);
+  font-weight: bold;
+}
+
+/****
+BUTTON
+****/
+.buy-btn{
+  background: var(--brand-color);
+  color: #000;
+  border: none;
+  padding: 6px;
+  border-radius: 5px;
+  width: 100%;
+  cursor: pointer;
+  transition: .2s;
+}
+
+/***
+btn:hover
+****/
+.buy-btn:hover{
+  transform: scale(1.05);
+}
+
+.buy-btn.loading{
+  opacity: .7;
+  pointer-events: none;
+}
+
+/****
+BADGE
+****/
+.badge{
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--brand-color);
+  color: #000;
+  font-size: 10px;
+  padding: 3px 6px;
+  border-radius: 6px;
+}
+
+
+
+
+
+
+
+/* ===== CONTAINER ===== */
+.store-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 19px;
+  padding: 15px;
+}
+
+/* ===== CARD ===== */
+
+
+.bundle-card:hover {
+  transform: translateY(-5px);
+}
+
+/* ===== NETWORK TAG ===== */
+.network-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  color: white;
+}
+
+/* NETWORK COLORS */
+.mtn {
+  background: #ffcc00;
+  color: black;
+}
+
+.vodafone {
+  background: #e60000;
+}
+
+/* ===== TEXT ===== */
+.bundle-card h3 {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.validity {
+  font-size: 13px;
+  color: #777;
+  margin: 5px 0;
+}
+
+/* ===== PRICE ===== */
+
+.network-tag {
+  padding: 1px 6px;
+  border-radius: 1px;
+  font-size: 12px;
+  display: inline-block;
+  margin-bottom: 2px;
+}
+
+.network-tag:contains("MTN") {
+  background: #facc159f;
+  color: black;
+}
+
+.network-tag.telecel {
+  background: rgba(182, 27, 27, 0.589);
+  color: white;
+}
+
+.network-tag.airteltigo {
+  background: rgba(128, 0, 128, 0.349);
+  color: white
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.store-footer {
+  margin-top: 50px;
+  padding: 10px;
+  text-align: center;
+  background: #ececee0e;
+  border-top: 1px solid #1e293b;
+}
+
+.store-footer p {
+  color: #94a3b8;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.store-footer h3 {
+  color: #facc15;
+  font-size: 18px;
+  font-weight: 600;
+}

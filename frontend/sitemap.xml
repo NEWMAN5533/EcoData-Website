@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Home -->
+  <url>
+    <loc>https://ecodata-app.onrender.com/</loc>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Main Pages -->
+  <url>
+    <loc>https://ecodata-app.onrender.com/index.html</loc>
+  </url>
+
+  <url>
+    <loc>https://ecodata-app.onrender.com/bundleInfo.html</loc>
+  </url>
+
+  <url>
+    <loc>https://ecodata-app.onrender.com/terms.html</loc>
+  </url>
+
+  <url>
+    <loc>https://ecodata-app.onrender.com/login.html</loc>
+  </url>
+
+  <url>
+    <loc>https://ecodata-app.onrender.com/signup.html</loc>
+  </url>
+
+  <!-- Partner Section -->
+  <url>
+    <loc>https://ecodata-app.onrender.com/pay.html</loc>
+  </url>
+
+  <url>
+    <loc>https://ecodata-app.onrender.com/afa.html</loc>
+  </url>
+
+  <url>
+    <loc>https://ecodata-app.onrender.com/agenPage.html</loc>
+  </url>
+
+ 
+
+  
+
+</urlset>

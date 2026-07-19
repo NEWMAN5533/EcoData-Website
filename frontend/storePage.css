@@ -1,0 +1,131 @@
+
+:root {
+  --bg-cl: #FFF;
+  --primary-cl: #fff;
+  --secondary-cl: rgb(50, 50, 190);
+  --dark-cl: #0a0a0a;
+  --ascent-cl: rgb(158, 97, 209);
+  --background-cl: #e6e8ce;
+  --card-full-bg-cl: rgb(255, 217, 0);
+  --card-full-tele-bg-cl: rgb(221, 19, 19);
+  --card-full-airtel-bg-cl:  rgb(6, 6, 231);
+  --border-cl-2: rgba(66, 66, 26, 0.226);
+  --mtn-btn: rgb(193, 196, 19);
+  --telecel-btn: rgb(180, 57, 19);
+  --airteltigo-btn: rgb(28, 46, 119);
+
+
+  /***
+  NEW ROOT
+  ***/
+  --btn-bg-cl: rgb(250, 126, 9);
+  --user-panel-bg: rgba(42, 42, 194, 0.938);
+  --clock-bg-cl: rgb(2, 61, 52);
+
+  /***
+  DARK MODE COLORS
+  ***/
+  --darkMode-bg-cl: rgb(10, 1, 22);
+  --welcome-card-bg: rgb(2, 2, 39);
+  --welcome-card-bg-2: rgb(24, 5, 5);
+  --welcome-card-border: rgb(74, 88, 94);
+  --thin-border: rgb(35, 48, 49);
+  --text-cl: rgb(145, 168, 164);
+  --text-cl-2: rgb(210, 216, 216);
+  --text-cl-3: rgb(139, 141, 141);
+
+  /**
+  BORDER SOLID COLORS
+  **/
+  --thin-border-1:  #0d6d5a;
+  --thin-border-2:  #830616;
+  --thin-border-3:  #b97207;
+  --thin-border-4:  #036aa7;
+  --thin-border-5:  #bba907;
+  --thin-border-6:   rgb(17, 2, 31);
+  --thin-border-7:  rgb(1, 11, 39);
+
+  /***
+  CARD BG
+  ***/
+  --card-mtn-bg:  #faba5ad0;
+  --card-tel-bg:  #fa537dd0;
+  --card-tigo-bg:  #6cbff7cb;
+}
+/* RESET */
+/* ================= RESET ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #ffffff;
+  color: #222;
+  line-height: 1.6;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
+}
+
+
+/* ================= HEADER ================= */
+.store-header {
+  width: 100%;
+  max-width: 390px;
+  height: 3.9rem;
+  justify-self: center;;
+  background: white;
+  padding: 1px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+  border-bottom: 1px solid rgb(240, 235, 235);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  z-index: 99999;
+}
+
+.store-header .store-header-top{
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  padding-top: .2rem;
+}
+
+
+.logo img {
+ width: 2.8rem;
+ height: 3.2rem;
+ margin-top: .3rem;
+ -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
+}
+
+.logo span {
+  font-size: 14px;
+  margin: 0;
+  color: #28a745;
+  font-weight: 500;
+}
+
+
+/*==============MAIN=============*/
+
+
+/*==============MAIN====ENDS=====*/

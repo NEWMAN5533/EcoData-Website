@@ -1,0 +1,869 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DataFlow GH — Ghana's Fastest Data Bundles</title>
+<link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;700;800;900&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="fastData.css">
+
+
+
+</head>
+<body>
+
+
+
+
+
+<!-- Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/233535565637" class="wa-float" title="Chat on WhatsApp">💬</a>
+
+
+
+<div class="container">
+  <div class="aside-container"></div>
+
+
+
+  <div class="main-container">
+<!-- Nav -->
+   <!----NAVIGATION-BAR-SECTION------->
+ <nav class="navbar">
+<div class="nav-left">
+<a href="index.html">
+  <img class="log" src="./css/icons/icon-shortcut.png" alt="image" loading="lazy">
+</a>
+</div>
+<div class="nav-right">
+
+
+
+  <ul class="nav-links">
+    <li><a href="#bundles">Bundles</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+  </ul>
+</div>
+ </nav>
+
+<!---navbar ends-->
+
+
+<!-- Ticker -->
+<div class="ticker" style="margin-top:68px; display: none;" >
+  <div class="ticker-track" id="ticker">
+    <div class="ticker-item">⚡ Instant Delivery <span class="ticker-sep">·</span></div>
+    <div class="ticker-item">MTN · Vodafone · AirtelTigo · Telecel <span class="ticker-sep">·</span></div>
+    <div class="ticker-item">No Hidden Charges <span class="ticker-sep">·</span></div>
+    <div class="ticker-item">24/7 Customer Support <span class="ticker-sep">·</span></div>
+    <div class="ticker-item">Over 50,000 Customers Served <span class="ticker-sep">·</span></div>
+    <div class="ticker-item">⚡ Instant Delivery <span class="ticker-sep">·</span></div>
+    <div class="ticker-item">MTN · Vodafone · AirtelTigo · Telecel <span class="ticker-sep">·</span></div>
+    <div class="ticker-item">No Hidden Charges <span class="ticker-sep">·</span></div>
+    <div class="ticker-item">24/7 Customer Support <span class="ticker-sep">·</span></div>
+    <div class="ticker-item">Over 50,000 Customers Served <span class="ticker-sep">·</span></div>
+  </div>
+</div>
+<!----ticker ends-->
+
+
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><div class="badge-dot"></div> Ghana's #1 Data Reseller</div>
+    <h1>
+      EcoData.<br>
+      <span class="accent">Cheap</span> Prices.<br>
+      <span class="stroke">No Stress.</span>
+    </h1>
+    <p class="hero-sub">Buy affordable data bundles for MTN, Vodafone, AirtelTigo & Telecel.
+
+    </p>
+
+    <div class="hero-actions">
+      <a href="#bundles" class="btn-primary">Shop Bundles ↓</a>
+      <a href="https://wa.me/233XXXXXXXXX" class="btn-ghost">📱 WhatsApp Order</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-card float">
+      <div class="stat-num">50K+</div>
+      <div class="stat-label">Happy Customers</div>
+    </div>
+    <div class="stat-card float" style="animation-delay:0.5s">
+      <div class="stat-num">&lt;30s</div>
+      <div class="stat-label">Avg. Delivery</div>
+    </div>
+    <div class="stat-card float" style="animation-delay:1s">
+      <div class="stat-num">4.9★</div>
+      <div class="stat-label">Customer Rating</div>
+    </div>
+  </div>
+</section>
+<!---hero ends-->
+
+
+
+<!-- Networks -->
+<div class="networks">
+  <div class="networks-label">
+    Supported Networks
+  </div>
+
+  <div style="overflow:hidden; flex:1">
+    <div class="networks-scroll" id="netScroll">
+      <div class="network-pill mtn"><div class="network-dot"></div> MTN Ghana</div>
+      <div class="network-pill vodafone"><div class="network-dot"></div>Telecel GH</div>
+      <div class="network-pill airteltigo"><div class="network-dot"></div> AirtelTigo GH</div>
+      
+      <div class="network-pill telecel"><div class="network-dot"></div>Check Back on every Thursday & Friday's for promo!</div>
+    </div>
+  </div>
+</div>
+<!---networks ends-->
+
+
+
+<!-- Bundles -->
+<section class="section" id="bundles">
+  <div class="bundles-header">
+    <div>
+      <div class="section-tag">Data Bundles</div>
+      <h2 class="section-title">Choose Your Network<br>& Get Connected</h2>
+    </div>
+    <p class="section-sub">Prices cheaper than walking to the nearest shop. Delivered in seconds.</p>
+  </div>
+
+  <div class="network-tabs">
+    <button class="tab active" onclick="filterBundles('all', this)">All Networks</button>
+    <button class="tab" onclick="filterBundles('mtn', this)">MTN</button>
+    <button class="tab" onclick="filterBundles('vodafone', this)">Telecel</button>
+    <button class="tab" onclick="filterBundles('airteltigo', this)">AirtelTigo</button>
+   
+  </div>
+
+  <div class="bundleTitle">
+    <h1>Popular <span class="accent">Deal 🔥</span></h1>
+  </div>
+
+
+
+
+
+  <!----BUNDLE GRID POPULAR----->
+  <div class="bundle-grid" id="bundleGrid">
+
+    <!-- MTN Bundles -->
+    <div class="bundle-card" data-net="mtn">
+      <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">1<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 1 Day</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>2.00</div>
+        <button class="buy-btn" onclick="orderBundle('1GB MTN', '₵2.00')">Buy Now</button>
+      </div>
+    </div>
+
+    <div class="bundle-card" data-net="mtn">
+      <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">2<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 2 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>3.50</div>
+        <button class="buy-btn" onclick="orderBundle('2GB MTN', '₵3.50')">Buy Now</button>
+      </div>
+    </div>
+
+    <div class="bundle-card featured" data-net="mtn">
+      <div class="popular-badge">🔥 Popular</div>
+      <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">5<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 7 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>8.00</div>
+        <button class="buy-btn" onclick="orderBundle('5GB MTN', '₵8.00')">Buy Now</button>
+      </div>
+    </div>
+
+    <div class="bundle-card" data-net="mtn">
+      <div class="network-label" style="color:#ffcb05">
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">10<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 30 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>15.00</div>
+        <button class="buy-btn" onclick="orderBundle('10GB MTN', '₵15.00')">Buy Now</button>
+      </div>
+    </div>
+
+    <!-- Vodafone Bundles -->
+    <div class="bundle-card" data-net="vodafone">
+      <div class="network-label" style="color:#e60000">
+        <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
+        Telecel
+      </div>
+      <div class="bundle-data">1<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 1 Day</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>2.00</div>
+        <button class="buy-btn" onclick="orderBundle('1GB Vodafone', '₵2.00')">Buy Now</button>
+      </div>
+    </div>
+
+    <div class="bundle-card featured" data-net="vodafone">
+      <div class="popular-badge">⭐ Best Value</div>
+      <div class="network-label" style="color:#e60000">
+        <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
+        Telecel
+      </div>
+      <div class="bundle-data">5<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 7 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>7.50</div>
+        <button class="buy-btn" onclick="orderBundle('5GB Vodafone', '₵7.50')">Buy Now</button>
+      </div>
+    </div>
+
+
+
+    <div class="bundle-card" data-net="vodafone">
+      <div class="network-label" style="color:#e60000">
+        <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
+        Telecel
+      </div>
+      <div class="bundle-data">20<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 30 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>28.00</div>
+        <button class="buy-btn" onclick="orderBundle('20GB Vodafone', '₵28.00')">Buy Now</button>
+      </div>
+    </div>
+
+
+
+
+    <!-- AirtelTigo Bundles -->
+    <div class="bundle-card" data-net="airteltigo">
+      <div class="network-label" style="color:#4a90d9">
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">2<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 3 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>3.00</div>
+        <button class="buy-btn" onclick="orderBundle('2GB AirtelTigo', '₵3.00')">Buy Now</button>
+      </div>
+    </div>
+
+
+
+
+    <div class="bundle-card featured" data-net="airteltigo">
+      <div class="popular-badge">💎 Premium</div>
+      <div class="network-label" style="color:#4a90d9">
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">10<span class="unit">GB</span></div>
+      <div class="bundle-validity">Valid 30 Days</div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">₵</span>14.00</div>
+        <button class="buy-btn" onclick="orderBundle('10GB AirtelTigo', '₵14.00')">Buy Now</button>
+      </div>
+    </div>
+
+
+
+    
+    
+
+   
+
+  </div>
+<!----BUNDLE GRID POPULAR--ENDS--->
+
+</section>
+<!---bundles ends-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="dailyAnalytics">
+
+
+  <div class="daily-analytic-container">
+   
+    <!---dashboard totals overview-->
+ <div class="daily-analytics">
+  <h2>Daily Analytics Overview</h2>
+ </div>
+
+ <!----TOTAL -CONTAINER-CARD-->
+<div id="homepageTotals" class="totals-container" >
+
+  <div class="total-card" >
+    <div class="total-card-top">
+      <small>Total Orders</small>
+      <img src="./css/icons/totalorder.png" alt="total-icon" loading="lazy">
+    </div>
+    <div class="total-card-bottom">
+      <p id="totalOrders">0</p>
+    </div>
+  </div>
+
+  <!---next-->
+  <div class="total-card">
+    <div class="total-card-top">
+      <small>Total Data</small>
+      <img src="./css/icons/totalData.png" alt="totalGB" loading="lazy">
+    </div>
+    <div class="total-card-bottom">
+      <p id="totalGB">0</p>
+    </div>
+  </div>
+
+    <div class="total-card">
+    <div class="total-card-top">
+      <small>Pending Orders </small>
+      <img src="./css/icons/recent.png" alt="spent-icon" loading="lazy">
+    </div>
+    <div class="total-card-bottom">
+      <p id="pendingTotal">0</p>
+    </div>
+  </div>
+
+
+
+  <div class="total-card">
+    <div class="total-card-top">
+      <small>Completed Orders </small>
+      <img src="./css/uiIcons/approval.png" alt="spent-icon" loading="lazy">
+    </div>
+    <div class="total-card-bottom">
+      <p id="completedOrders">0</p>
+    </div>
+  </div>
+
+
+</div>
+<!---ends-->
+
+
+<!---LIVE ORDERS TABLE-->
+
+<div class="live-order-wrp">
+  <div class="top-var">
+    <h4>Orders History</h4>
+    <small>Track all Orders</small>
+  </div>
+
+  <section id="liveOrderSection">
+    <!-- TABLE HEADER (FIXED) -->
+    <div class="live-order-header">
+      <span>Order ID</span>
+      <span>Size</span>
+      <span>Network</span>
+      <span>Recipient</span>
+      <span>Status</span>
+      <span>Date</span>
+    </div>
+
+    <div id="liveOrderCard" class="live-order-card">
+      <!-- SCROLLABLE BODY -->
+      <div id="liveOrderRows" class="live-order-body">
+        <p class="empty-state">No recent orders yet</p>
+      </div>
+    </div>
+  </section>
+
+
+ 
+</div>
+
+
+
+<!-- ends -->
+ 
+<!----dashboard-overview-->
+
+  </div>
+ 
+
+<!---add another-card-->
+  <div class="noteCard">
+    
+  </div>
+
+<!----ENDS-->
+</section>
+
+
+<section class="normalGridView">
+  <div class="normalGridView-left">
+
+
+    <!---NEW UI UPDATE (5th-05-2026)--=[grid & normal ui-->
+<section class="normalGrid-container">
+  <div class="titlen" style="text-align: center;">
+    <h2 style="font-size: 1.1rem;">Select MTN Data Delivery Offer.</h2>
+    <small >Choose from available <br> MTN data offers.</small>
+  </div>
+
+
+
+
+  <!---offer-select-options-->
+   <div class="custom-select">
+  <button class="select-btn" id="selectBtn">
+    Select Available MTN Offer
+  
+    <span><img src="./css/icons/more.png.png" alt="dropdown" loading="lazy"></span>
+  </button>
+
+  <div class="select-dropdown" id="dropdownOffer">
+    <div class="optionDelevery" data-mode="normal">
+      <span >MTN DATA NORMAL DELIVERY 
+      
+      </span>
+      <small>NON-EXPIRY</small>
+    </div>
+  
+    <div class="optionDelevery" data-mode="express">
+      <span>MTN DATA EXPRESS DELIVERY 
+      
+      </span>
+      <small>NON-EXPIRY</small>
+    </div>
+    
+  </div>
+  <div id="offerDisplay"></div>
+</div>
+
+<!----choose grid 0r normal btns-->
+<div class="normalOrgridBtn-wrapping">
+  <div class="normalOrgridBtn">
+  <div class="mode-btn-wrapper">
+     <button class="mode-Btn active" id="normalModeBtn"><img src="./css/icons/list (1).png" alt="" loading="lazy"> List</button>
+  <button class="mode-Btn" id="gridModeBtn"><img src="./css/icons/grid.png" alt="" loading="lazy"> Grid</button>
+  </div>
+  </div>
+
+  <div class="pack-wrapper">
+    <div class="packages active">
+    <small></small>
+  <p id="bundleTitle">MTN Bundles</p>
+  </div>
+
+   <div class=" packagesta">
+    <small></small>
+  <p  id="teleAirtel">Telecel & AirtelTigo</p>
+  </div>
+  </div>
+ 
+
+</div>
+</section>
+  </div>
+
+
+
+  
+  <div class="GridView-right"></div>
+</section>
+
+
+
+
+
+
+
+
+<!-- How It Works -->
+<section class="section how-section" id="how">
+  <div class="section-tag">Simple Process</div>
+  <h2 class="section-title">Get Data in 3 Easy Steps</h2>
+  <p class="section-sub">No accounts. No passwords. Just fast, reliable data — straight to your phone.</p>
+
+  <div class="steps-grid reveal">
+    <div class="step-card">
+      <div class="step-num">01</div>
+      <div class="step-icon">
+        <img src="./css/icons/totalorder.png" alt="">
+      </div>
+      <h3>Pick Your Bundle</h3>
+      <p>Choose from our wide selection of affordable bundles across all major networks in Ghana.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">02</div>
+      <div class="step-icon">
+        <img src="./css/icons/secure-payment.png" alt="">
+      </div>
+      <h3>Pay via Mobile Money</h3>
+      <p>Securely pay with MTN MoMo, Vodafone Cash, AirtelTigo Money, or Telecel Cash. Instant & safe.</p>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">03</div>
+      <div class="step-icon">⚡</div>
+      <h3>Receive Instantly</h3>
+      <p>Your data bundle lands on your number in under 30 seconds. Start browsing right away!</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">04</div>
+      <div class="step-icon">
+        <img src="./css/icons/whats_admin.png" alt=""loading="lazy">
+      </div>
+      <h3>Share the Love</h3>
+      <p>Enjoy your data and refer friends to earn cashback rewards. Everyone wins! 🇬🇭</p>
+    </div>
+  </div>
+</section>
+<!---how it works ends-->
+
+
+
+
+<!-- Why Us -->
+<section class="section" id="why">
+  <div class="section-tag">Why DataFlow GH</div>
+  <h2 class="section-title">Built for Ghanaians,<br>by Ghanaians 🇬🇭</h2>
+
+  <div class="features-grid reveal">
+    <div class="feature-card" style="display: none;">
+      <div class="feature-icon">⚡</div>
+      <h3>Instant Delivery</h3>
+      <p>Automated system delivers data to your phone within seconds of payment confirmation. No waiting, no stress.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💰</div>
+      <h3>Cheapest Prices</h3>
+      <p>We buy in bulk and pass the savings to you. Get more data for less money — always below market rate.</p>
+    </div>
+    <div class="feature-card wide">
+      <div>
+        <div class="feature-icon">🔒</div>
+        <h3>100% Secure Payments</h3>
+        <p>All transactions are processed through Ghana's trusted mobile money platforms. Your money is safe with us, protected by Telco-grade encryption and transaction verification.</p>
+      </div>
+      <div style="flex:1; text-align:center">
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+          <div style="background:rgba(255,203,5,0.1);border:1px solid rgba(255,203,5,0.3);border-radius:12px;padding:16px 24px;font-weight:700;color:#ffcb05;font-size:0.9rem">MTN MoMo ✓</div>
+          <div style="background:rgba(230,0,0,0.1);border:1px solid rgba(230,0,0,0.3);border-radius:12px;padding:16px 24px;font-weight:700;color:#ff4444;font-size:0.9rem">Telecel Cash ✓</div>
+          <div style="background:rgba(74,144,217,0.1);border:1px solid rgba(74,144,217,0.3);border-radius:12px;padding:16px 24px;font-weight:700;color:#4a90d9;font-size:0.9rem">AT Money ✓</div>
+        </div>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🕐</div>
+      <h3>24/7 Support</h3>
+      <p>Our Ghana-based support team is always online via WhatsApp, ready to assist you anytime, any day.</p>
+    </div>
+    <div class="feature-card" style="display:none;">
+      <div class="feature-icon">🎁</div>
+      <h3>Referral Rewards</h3>
+      <p>Invite friends and earn free data credits for every successful purchase they make. More referrals = more data!</p>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<!-- Testimonials -->
+<section class="section" id="reviews" style="padding-top:0">
+  <div class="section-tag">Customer Love</div>
+  <h2 class="section-title">Ghanaians Love DataFlow</h2>
+
+  <div class="testimonials-grid reveal">
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"I've been buying data here for 6 months. Always instant, always cheaper. This is the best data shop in Ghana! 🔥"</p>
+      <div class="testi-author">
+        <div class="avatar" style="background:rgba(255,203,5,0.2);color:#ffcb05">KA</div>
+        <div>
+          <div class="testi-name">Kofi Acheampong</div>
+          <div class="testi-loc">Kumasi, Ashanti</div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"The speed is amazing. I paid and by the time I refreshed my phone the data was already there. Legit and trusted! 💯"</p>
+      <div class="testi-author">
+        <div class="avatar" style="background:rgba(230,0,0,0.2);color:#ff4444">AB</div>
+        <div>
+          <div class="testi-name">Abena Boateng</div>
+          <div class="testi-loc">Accra, Greater Accra</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"I resell data too and DataFlow is my main supplier. The prices are unbeatable and they deliver very fast. 5 stars all the way!"</p>
+      <div class="testi-author">
+        <div class="avatar" style="background:rgba(0,176,175,0.2);color:#00b0af">KM</div>
+        <div>
+          <div class="testi-name">Kwame Mensah</div>
+          <div class="testi-loc">Takoradi, Western</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+<!-- CTA -->
+<div class="cta-section">
+  <h2>Ready to Save on Data? 🇬🇭</h2>
+  <p>Join 50,000+ Ghanaians getting cheap data delivered instantly. Start today — no sign-up needed.</p>
+  <div class="cta-actions">
+    <a href="#bundles" class="btn-primary">Browse Bundles →</a>
+    <a href="https://wa.me/233XXXXXXXXX" class="btn-ghost">📱 Order on WhatsApp</a>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- Footer -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="nav-logo">Data<span style="color:var(--gold)">Flow</span> GH</div>
+      <p>Ghana's most trusted data bundle reseller. Cheap prices, instant delivery, zero stress. 🇬🇭</p>
+    </div>
+    <div class="footer-col">
+      <h4>Bundles</h4>
+      <ul>
+        <li><a href="#">MTN Data</a></li>
+        <li><a href="#">Vodafone Data</a></li>
+        <li><a href="#">AirtelTigo Data</a></li>
+        <li><a href="#">Telecel Data</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Reseller Program</a></li>
+        <li><a href="#">Referral Rewards</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="#">WhatsApp</a></li>
+        <li><a href="#">FAQs</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 DataFlow GH. Made with ❤️ in Ghana 🇬🇭</p>
+    <p style="color:rgba(245,240,232,0.25);font-size:0.78rem">Not affiliated with any telecom network.</p>
+  </div>
+</footer>
+
+
+
+
+<!-- Order Modal -->
+<div id="modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:500;align-items:center;justify-content:center;backdrop-filter:blur(8px)">
+  <div style="background:#1e1e1e;border:1px solid rgba(245,200,66,0.3);border-radius:24px;padding:40px;max-width:420px;width:90%;position:relative">
+    <button onclick="closeModal()" style="position:absolute;top:16px;right:16px;background:none;border:none;color:rgba(245,240,232,0.4);font-size:1.4rem;cursor:pointer">✕</button>
+    <div style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:8px" id="modalTitle">Order Bundle</div>
+    <div style="color:var(--gold);font-size:2rem;font-weight:800;margin-bottom:24px" id="modalPrice"></div>
+    <div style="margin-bottom:16px">
+      <label style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.08em;color:rgba(245,240,232,0.5);display:block;margin-bottom:8px">Phone Number</label>
+      <input type="tel" id="phoneInput" placeholder="e.g. 0244 000 000" style="width:100%;background:#2e2e2e;border:1.5px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px 16px;color:var(--white);font-family:'Cabinet Grotesk',sans-serif;font-size:1rem;outline:none">
+    </div>
+    <div style="margin-bottom:24px">
+      <label style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.08em;color:rgba(245,240,232,0.5);display:block;margin-bottom:8px">Payment Method</label>
+      <select id="payMethod" style="width:100%;background:#2e2e2e;border:1.5px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px 16px;color:var(--white);font-family:'Cabinet Grotesk',sans-serif;font-size:1rem;outline:none">
+        <option>MTN Mobile Money</option>
+        <option>Vodafone Cash</option>
+        <option>AirtelTigo Money</option>
+        <option>Telecel Cash</option>
+      </select>
+    </div>
+    <button onclick="confirmOrder()" style="width:100%;background:var(--gold);color:var(--black);border:none;border-radius:100px;padding:16px;font-family:'Cabinet Grotesk',sans-serif;font-weight:800;font-size:1rem;cursor:pointer">Confirm Order →</button>
+  </div>
+</div>
+
+
+
+
+
+<!-- Success Toast -->
+<div id="successToast" style="display:none;position:fixed;bottom:32px;left:50%;transform:translateX(-50%);background:#2dc653;color:#fff;padding:16px 28px;border-radius:100px;font-weight:700;z-index:600;white-space:nowrap;box-shadow:0 8px 32px rgba(45,198,83,0.4)">
+  ✅ Order placed! Delivering shortly...
+</div>
+
+
+
+
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx - 6 + 'px';
+    cursor.style.top = my - 6 + 'px';
+  });
+
+  function animRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx - 18 + 'px';
+    ring.style.top = ry - 18 + 'px';
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+
+  document.querySelectorAll('button, a, .bundle-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'scale(2)';
+      ring.style.transform = 'scale(1.5)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'scale(1)';
+      ring.style.transform = 'scale(1)';
+    });
+  });
+
+  // Filter bundles by network
+  function filterBundles(net, btn) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.bundle-card').forEach(card => {
+      card.style.display = (net === 'all' || card.dataset.net === net) ? '' : 'none';
+    });
+  }
+
+  // Order modal
+  function orderBundle(name, price) {
+    document.getElementById('modalTitle').textContent = '📦 ' + name;
+    document.getElementById('modalPrice').textContent = price;
+    document.getElementById('modal').style.display = 'flex';
+  }
+
+  function closeModal() {
+    document.getElementById('modal').style.display = 'none';
+  }
+
+  function confirmOrder() {
+    const ph = document.getElementById('phoneInput').value.trim();
+    if (!ph) { alert('Please enter your phone number'); return; }
+    closeModal();
+    const toast = document.getElementById('successToast');
+    toast.style.display = 'block';
+    setTimeout(() => toast.style.display = 'none', 3500);
+  }
+
+  document.getElementById('modal').addEventListener('click', e => {
+    if (e.target === document.getElementById('modal')) closeModal();
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Duplicate ticker for seamless loop
+  const ticker = document.getElementById('ticker');
+  ticker.innerHTML += ticker.innerHTML;
+</script>
+
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+

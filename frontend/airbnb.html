@@ -1,0 +1,1231 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StayVibe — Find Your Perfect Place</title>
+<link href="https://fonts.googleapis.com/css2?family=Canela:wght@300;400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF7F2;
+    --sand: #E8E0D5;
+    --warm-brown: #5C4A3A;
+    --terracotta: #C4694F;
+    --sage: #7A9E8E;
+    --charcoal: #1E1E1E;
+    --white: #FFFFFF;
+    --soft-grey: #F0ECE7;
+    --muted: #9A8F84;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 48px;
+    background: rgba(250,247,242,0.88);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(92,74,58,0.08);
+    transition: all 0.3s ease;
+  }
+
+  .logo {
+    font-family: 'Canela', Georgia, serif;
+    font-size: 26px;
+    font-weight: 300;
+    color: var(--terracotta);
+    letter-spacing: -0.5px;
+  }
+  .logo span { color: var(--warm-brown); }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--warm-brown);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    position: relative;
+    transition: color 0.2s;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; left: 0;
+    width: 0; height: 1.5px;
+    background: var(--terracotta);
+    transition: width 0.3s ease;
+  }
+  .nav-links a:hover { color: var(--terracotta); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .btn-ghost {
+    background: none;
+    border: 1.5px solid var(--warm-brown);
+    color: var(--warm-brown);
+    padding: 10px 22px;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-ghost:hover { background: var(--warm-brown); color: var(--white); }
+
+  .btn-solid {
+    background: var(--terracotta);
+    border: 1.5px solid var(--terracotta);
+    color: var(--white);
+    padding: 10px 22px;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .btn-solid:hover { background: #b5573e; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(196,105,79,0.35); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 64px 80px 64px;
+    animation: fadeUp 0.9s ease both;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(122,158,142,0.15);
+    color: var(--sage);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 7px 16px;
+    border-radius: 50px;
+    margin-bottom: 28px;
+    width: fit-content;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--sage);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  .hero-title {
+    font-family: 'Canela', Georgia, serif;
+    font-size: clamp(52px, 5.5vw, 78px);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--charcoal);
+    margin-bottom: 24px;
+    letter-spacing: -1.5px;
+  }
+  .hero-title em {
+    font-style: normal;
+    color: var(--terracotta);
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 400px;
+    margin-bottom: 48px;
+  }
+
+  /* ── SEARCH BAR ── */
+  .search-bar {
+    background: var(--white);
+    border-radius: 20px;
+    box-shadow: 0 8px 40px rgba(92,74,58,0.12);
+    padding: 6px 6px 6px 28px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    max-width: 520px;
+    border: 1px solid rgba(92,74,58,0.06);
+  }
+  .search-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 16px 10px 0;
+    border-right: 1px solid var(--sand);
+    cursor: pointer;
+  }
+  .search-group:last-of-type { border-right: none; }
+  .search-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2px;
+  }
+  .search-input {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--charcoal);
+    background: none;
+    border: none;
+    outline: none;
+    width: 100%;
+  }
+  .search-input::placeholder { color: var(--muted); font-weight: 400; }
+  .search-btn {
+    background: var(--terracotta);
+    border: none;
+    border-radius: 14px;
+    width: 52px; height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    margin-left: 8px;
+  }
+  .search-btn:hover { background: #b5573e; transform: scale(1.05); }
+  .search-btn svg { width: 20px; height: 20px; stroke: white; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 48px;
+  }
+  .stat { display: flex; flex-direction: column; gap: 4px; }
+  .stat-num {
+    font-family: 'Canela', Georgia, serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--charcoal);
+    letter-spacing: -1px;
+  }
+  .stat-label { font-size: 12px; color: var(--muted); font-weight: 500; }
+
+  /* ── HERO RIGHT ── */
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 1.2s ease both 0.3s;
+  }
+  .hero-mosaic {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 8px;
+    padding: 96px 48px 48px 24px;
+  }
+  .mosaic-img {
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+  }
+  .mosaic-img:first-child { grid-row: span 2; border-radius: 24px; }
+  .mosaic-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+  .mosaic-img:hover img { transform: scale(1.04); }
+
+  .floating-card {
+    position: absolute;
+    background: white;
+    border-radius: 16px;
+    padding: 14px 18px;
+    box-shadow: 0 12px 40px rgba(30,30,30,0.14);
+    animation: float 4s ease-in-out infinite;
+  }
+  .card-tl {
+    top: 130px; right: 60px;
+    animation-delay: -2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card-tl .avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--sage), var(--terracotta));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: white;
+    font-weight: 600;
+  }
+  .card-tl-text { font-size: 12px; line-height: 1.5; }
+  .card-tl-text strong { display: block; font-size: 13px; color: var(--charcoal); }
+  .card-tl-text span { color: var(--muted); }
+
+  .card-br {
+    bottom: 80px; left: 40px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .price-badge {
+    background: var(--terracotta);
+    color: white;
+    border-radius: 10px;
+    padding: 8px 12px;
+    text-align: center;
+  }
+  .price-badge span { display: block; font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; opacity: 0.85; }
+  .price-badge strong { font-size: 20px; font-family: 'Canela', Georgia, serif; font-weight: 300; }
+  .card-br-text { font-size: 12px; color: var(--muted); }
+  .card-br-text strong { display: block; color: var(--charcoal); font-size: 13px; }
+  .stars { color: #F4A820; font-size: 11px; letter-spacing: 1px; }
+
+  /* ── CATEGORIES ── */
+  .categories {
+    padding: 80px 64px;
+    background: var(--white);
+  }
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 48px;
+  }
+  .section-tag {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--terracotta);
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-family: 'Canela', Georgia, serif;
+    font-size: 40px;
+    font-weight: 300;
+    color: var(--charcoal);
+    letter-spacing: -1px;
+    line-height: 1.1;
+  }
+  .see-all {
+    font-size: 13px;
+    color: var(--terracotta);
+    font-weight: 500;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    transition: gap 0.2s;
+  }
+  .see-all:hover { gap: 10px; }
+  .see-all::after { content: '→'; }
+
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+  .cat-card {
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 3/4;
+    cursor: pointer;
+  }
+  .cat-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .cat-card:hover img { transform: scale(1.06); }
+  .cat-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(30,30,30,0.65) 0%, transparent 50%);
+    transition: opacity 0.3s;
+  }
+  .cat-card:hover::after { opacity: 0.8; }
+  .cat-label {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    z-index: 2;
+    padding: 20px 18px;
+    color: white;
+  }
+  .cat-label strong { display: block; font-size: 16px; font-weight: 600; margin-bottom: 2px; }
+  .cat-label span { font-size: 12px; opacity: 0.8; }
+
+  /* ── LISTINGS ── */
+  .listings { padding: 80px 64px; }
+  .filter-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+  .filter-pill {
+    padding: 9px 20px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1.5px solid var(--sand);
+    background: var(--white);
+    color: var(--warm-brown);
+  }
+  .filter-pill:hover, .filter-pill.active {
+    background: var(--charcoal);
+    border-color: var(--charcoal);
+    color: var(--white);
+  }
+
+  .listings-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+
+  .listing-card { cursor: pointer; }
+  .listing-img-wrap {
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    position: relative;
+    margin-bottom: 14px;
+  }
+  .listing-img-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .listing-card:hover .listing-img-wrap img { transform: scale(1.04); }
+
+  .listing-badge {
+    position: absolute;
+    top: 14px; left: 14px;
+    z-index: 2;
+    background: var(--white);
+    color: var(--charcoal);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    padding: 5px 12px;
+    border-radius: 50px;
+  }
+  .listing-badge.featured { background: var(--terracotta); color: white; }
+
+  .wishlist-btn {
+    position: absolute;
+    top: 14px; right: 14px;
+    z-index: 2;
+    background: rgba(255,255,255,0.9);
+    border: none;
+    border-radius: 50%;
+    width: 36px; height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    backdrop-filter: blur(4px);
+  }
+  .wishlist-btn:hover { background: white; transform: scale(1.1); }
+  .wishlist-btn svg { width: 16px; height: 16px; stroke: var(--charcoal); fill: none; stroke-width: 2; }
+  .wishlist-btn.active svg { fill: var(--terracotta); stroke: var(--terracotta); }
+
+  .listing-info { padding: 0 2px; }
+  .listing-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 4px;
+  }
+  .listing-location { font-size: 14px; font-weight: 600; color: var(--charcoal); }
+  .listing-rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--charcoal);
+  }
+  .listing-rating::before { content: '★'; color: var(--terracotta); }
+  .listing-type { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+  .listing-price { font-size: 14px; color: var(--charcoal); font-weight: 600; }
+  .listing-price span { font-weight: 400; color: var(--muted); font-size: 13px; }
+
+  /* ── EXPERIENCES ── */
+  .experiences {
+    padding: 80px 64px;
+    background: var(--charcoal);
+    position: relative;
+    overflow: hidden;
+  }
+  .experiences::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -80px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(196,105,79,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .experiences .section-title { color: var(--cream); }
+  .experiences .section-tag { color: var(--terracotta); }
+  .experiences .see-all { color: rgba(250,247,242,0.6); }
+
+  .exp-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 16px;
+    margin-top: 40px;
+  }
+  .exp-card {
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+  .exp-card:first-child { aspect-ratio: 1; }
+  .exp-card:not(:first-child) { aspect-ratio: 3/4; }
+  .exp-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    filter: brightness(0.85);
+  }
+  .exp-card:hover img { transform: scale(1.05); filter: brightness(0.75); }
+  .exp-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(30,30,30,0.8) 0%, transparent 60%);
+  }
+  .exp-info {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 24px;
+    color: white;
+    z-index: 2;
+  }
+  .exp-info .exp-cat {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 6px;
+  }
+  .exp-info .exp-title {
+    font-family: 'Canela', Georgia, serif;
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .exp-card:first-child .exp-info .exp-title { font-size: 32px; }
+  .exp-info .exp-price { font-size: 13px; font-weight: 500; opacity: 0.85; }
+
+  /* ── HOST BANNER ── */
+  .host-banner {
+    padding: 80px 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+    background: var(--soft-grey);
+  }
+  .host-visual {
+    border-radius: 24px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    position: relative;
+  }
+  .host-visual img { width: 100%; height: 100%; object-fit: cover; }
+  .host-stat-pill {
+    position: absolute;
+    bottom: 28px; left: 28px;
+    background: white;
+    border-radius: 14px;
+    padding: 16px 20px;
+    box-shadow: 0 8px 30px rgba(30,30,30,0.12);
+  }
+  .host-stat-pill strong {
+    display: block;
+    font-family: 'Canela', Georgia, serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--terracotta);
+    letter-spacing: -1px;
+  }
+  .host-stat-pill span { font-size: 12px; color: var(--muted); font-weight: 500; }
+
+  .host-text .section-tag { margin-bottom: 12px; }
+  .host-text .section-title { margin-bottom: 20px; }
+  .host-desc { font-size: 16px; color: var(--muted); line-height: 1.7; margin-bottom: 36px; }
+  .host-perks {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+  .host-perks li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 14px;
+    color: var(--warm-brown);
+    font-weight: 500;
+  }
+  .perk-icon {
+    width: 36px; height: 36px;
+    background: rgba(196,105,79,0.12);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .btn-large {
+    background: var(--terracotta);
+    color: white;
+    border: none;
+    padding: 16px 36px;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s;
+    letter-spacing: 0.3px;
+  }
+  .btn-large:hover { background: #b5573e; transform: translateY(-2px); box-shadow: 0 10px 30px rgba(196,105,79,0.35); }
+
+  /* ── REVIEWS ── */
+  .reviews { padding: 80px 64px; background: var(--white); }
+  .reviews-marquee-wrap { overflow: hidden; margin-top: 48px; }
+  .reviews-marquee {
+    display: flex;
+    gap: 24px;
+    animation: marquee 30s linear infinite;
+    width: max-content;
+  }
+  .reviews-marquee:hover { animation-play-state: paused; }
+  .review-card {
+    background: var(--soft-grey);
+    border-radius: 20px;
+    padding: 28px;
+    width: 320px;
+    flex-shrink: 0;
+  }
+  .review-stars { color: var(--terracotta); font-size: 14px; letter-spacing: 2px; margin-bottom: 14px; }
+  .review-text { font-size: 14px; line-height: 1.7; color: var(--warm-brown); margin-bottom: 20px; font-style: italic; }
+  .review-author { display: flex; align-items: center; gap: 12px; }
+  .author-avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+  .author-name { font-size: 13px; font-weight: 600; color: var(--charcoal); }
+  .author-loc { font-size: 12px; color: var(--muted); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--charcoal);
+    color: rgba(250,247,242,0.7);
+    padding: 64px 64px 40px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 56px;
+  }
+  .footer-brand .logo { color: var(--terracotta); margin-bottom: 16px; display: block; }
+  .footer-brand p { font-size: 14px; line-height: 1.7; max-width: 280px; }
+  .footer-col h4 {
+    color: var(--cream);
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col a { color: rgba(250,247,242,0.55); font-size: 14px; text-decoration: none; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--cream); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+  }
+  .social-links { display: flex; gap: 16px; }
+  .social-btn {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(250,247,242,0.6);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .social-btn:hover { background: rgba(255,255,255,0.1); color: var(--cream); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Stay<span>Vibe</span></div>
+  <ul class="nav-links">
+    <li><a href="#">Stays</a></li>
+    <li><a href="#">Experiences</a></li>
+    <li><a href="#">Online events</a></li>
+    <li><a href="#">Adventures</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-ghost">Become a Host</button>
+    <button class="btn-solid">Sign In</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">✦ Discover the world differently</div>
+    <h1 class="hero-title">
+      Find your<br>perfect <em>escape</em><br>anywhere
+    </h1>
+    <p class="hero-sub">Unique stays, local experiences, and curated adventures waiting for you. From mountain retreats to oceanfront villas.</p>
+    <div class="search-bar">
+      <div class="search-group">
+        <span class="search-label">Where</span>
+        <input type="text" class="search-input" placeholder="Destination...">
+      </div>
+      <div class="search-group" style="padding-left:16px">
+        <span class="search-label">Check in</span>
+        <input type="text" class="search-input" placeholder="Add dates">
+      </div>
+      <div class="search-group" style="padding-left:16px">
+        <span class="search-label">Guests</span>
+        <input type="text" class="search-input" placeholder="Who's coming?">
+      </div>
+      <button class="search-btn">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">4M+</span><span class="stat-label">Unique listings</span></div>
+      <div class="stat"><span class="stat-num">220</span><span class="stat-label">Countries & regions</span></div>
+      <div class="stat"><span class="stat-num">98%</span><span class="stat-label">Guest satisfaction</span></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-mosaic">
+      <div class="mosaic-img">
+        <img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=600&q=80" alt="Beach villa">
+      </div>
+      <div class="mosaic-img">
+        <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=400&q=80" alt="Mountain cabin">
+      </div>
+      <div class="mosaic-img">
+        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400&q=80" alt="Pool villa">
+      </div>
+    </div>
+    <div class="floating-card card-tl">
+      <div class="avatar">J</div>
+      <div class="card-tl-text">
+        <strong>Julia booked</strong>
+        <span>Santorini Cave Suite</span>
+      </div>
+    </div>
+    <div class="floating-card card-br">
+      <div class="price-badge">
+        <span>from</span>
+        <strong>$189</strong>
+      </div>
+      <div class="card-br-text">
+        <strong>Bali Treehouse</strong>
+        <div class="stars">★★★★★</div>
+        <div>4.98 · 142 reviews</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="categories">
+  <div class="section-header">
+    <div>
+      <div class="section-tag">Explore by type</div>
+      <h2 class="section-title">Where do you<br>want to stay?</h2>
+    </div>
+    <a href="#" class="see-all">View all categories</a>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-card">
+      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80" alt="Mountains">
+      <div class="cat-label"><strong>Mountain</strong><span>2,842 places</span></div>
+    </div>
+    <div class="cat-card">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&q=80" alt="Beachfront">
+      <div class="cat-label"><strong>Beachfront</strong><span>5,190 places</span></div>
+    </div>
+    <div class="cat-card">
+      <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=400&q=80" alt="Forest">
+      <div class="cat-label"><strong>Forest</strong><span>1,654 places</span></div>
+    </div>
+    <div class="cat-card">
+      <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=400&q=80" alt="City">
+      <div class="cat-label"><strong>City</strong><span>8,321 places</span></div>
+    </div>
+    <div class="cat-card">
+      <img src="https://images.unsplash.com/photo-1433838552652-f9a46b332c40?w=400&q=80" alt="Island">
+      <div class="cat-label"><strong>Island</strong><span>974 places</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- LISTINGS -->
+<section class="listings">
+  <div class="section-header">
+    <div>
+      <div class="section-tag">Hand-picked for you</div>
+      <h2 class="section-title">Top stays this season</h2>
+    </div>
+    <a href="#" class="see-all">See all stays</a>
+  </div>
+  <div class="filter-bar">
+    <button class="filter-pill active">All</button>
+    <button class="filter-pill">🌊 Beachfront</button>
+    <button class="filter-pill">🏔️ Mountain</button>
+    <button class="filter-pill">🌳 Forest</button>
+    <button class="filter-pill">🏙️ City</button>
+    <button class="filter-pill">🏝️ Island</button>
+    <button class="filter-pill">🏕️ Camping</button>
+  </div>
+  <div class="listings-grid">
+    <div class="listing-card">
+      <div class="listing-img-wrap">
+        <span class="listing-badge featured">Guest favourite</span>
+        <button class="wishlist-btn" onclick="this.classList.toggle('active')">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+        <img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=500&q=80" alt="Beach villa">
+      </div>
+      <div class="listing-info">
+        <div class="listing-top"><span class="listing-location">Malibu, California</span><span class="listing-rating">4.97</span></div>
+        <div class="listing-type">Entire villa · 4 beds</div>
+        <div class="listing-price">$320 <span>/ night</span></div>
+      </div>
+    </div>
+    <div class="listing-card">
+      <div class="listing-img-wrap">
+        <button class="wishlist-btn" onclick="this.classList.toggle('active')">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+        <img src="https://images.unsplash.com/photo-1439130490301-25e322d88054?w=500&q=80" alt="Mountain chalet">
+      </div>
+      <div class="listing-info">
+        <div class="listing-top"><span class="listing-location">Chamonix, France</span><span class="listing-rating">4.95</span></div>
+        <div class="listing-type">Entire chalet · 3 beds</div>
+        <div class="listing-price">$240 <span>/ night</span></div>
+      </div>
+    </div>
+    <div class="listing-card">
+      <div class="listing-img-wrap">
+        <span class="listing-badge">New</span>
+        <button class="wishlist-btn" onclick="this.classList.toggle('active')">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=500&q=80" alt="Modern villa">
+      </div>
+      <div class="listing-info">
+        <div class="listing-top"><span class="listing-location">Santorini, Greece</span><span class="listing-rating">5.0</span></div>
+        <div class="listing-type">Cave suite · 2 beds</div>
+        <div class="listing-price">$450 <span>/ night</span></div>
+      </div>
+    </div>
+    <div class="listing-card">
+      <div class="listing-img-wrap">
+        <button class="wishlist-btn" onclick="this.classList.toggle('active')">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=500&q=80" alt="Pool villa Bali">
+      </div>
+      <div class="listing-info">
+        <div class="listing-top"><span class="listing-location">Ubud, Bali</span><span class="listing-rating">4.92</span></div>
+        <div class="listing-type">Private villa · 2 beds</div>
+        <div class="listing-price">$189 <span>/ night</span></div>
+      </div>
+    </div>
+    <div class="listing-card">
+      <div class="listing-img-wrap">
+        <span class="listing-badge featured">Guest favourite</span>
+        <button class="wishlist-btn" onclick="this.classList.toggle('active')">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+        <img src="https://images.unsplash.com/photo-1563911302283-d2bc129e7570?w=500&q=80" alt="Cozy cabin">
+      </div>
+      <div class="listing-info">
+        <div class="listing-top"><span class="listing-location">Aspen, Colorado</span><span class="listing-rating">4.98</span></div>
+        <div class="listing-type">Entire cabin · 5 beds</div>
+        <div class="listing-price">$380 <span>/ night</span></div>
+      </div>
+    </div>
+    <div class="listing-card">
+      <div class="listing-img-wrap">
+        <button class="wishlist-btn" onclick="this.classList.toggle('active')">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+        <img src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=500&q=80" alt="City apartment">
+      </div>
+      <div class="listing-info">
+        <div class="listing-top"><span class="listing-location">Paris, France</span><span class="listing-rating">4.90</span></div>
+        <div class="listing-type">Entire apartment · 2 beds</div>
+        <div class="listing-price">$210 <span>/ night</span></div>
+      </div>
+    </div>
+    <div class="listing-card">
+      <div class="listing-img-wrap">
+        <span class="listing-badge">Hot</span>
+        <button class="wishlist-btn" onclick="this.classList.toggle('active')">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+        <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=500&q=80" alt="Tropical bungalow">
+      </div>
+      <div class="listing-info">
+        <div class="listing-top"><span class="listing-location">Maldives</span><span class="listing-rating">5.0</span></div>
+        <div class="listing-type">Water bungalow · 1 bed</div>
+        <div class="listing-price">$890 <span>/ night</span></div>
+      </div>
+    </div>
+    <div class="listing-card">
+      <div class="listing-img-wrap">
+        <button class="wishlist-btn" onclick="this.classList.toggle('active')">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+        <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=500&q=80" alt="Forest treehouse">
+      </div>
+      <div class="listing-info">
+        <div class="listing-top"><span class="listing-location">Black Forest, Germany</span><span class="listing-rating">4.94</span></div>
+        <div class="listing-type">Treehouse · 1 bed</div>
+        <div class="listing-price">$155 <span>/ night</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCES -->
+<section class="experiences">
+  <div class="section-header">
+    <div>
+      <div class="section-tag">More than a stay</div>
+      <h2 class="section-title">Experiences<br>worth collecting</h2>
+    </div>
+    <a href="#" class="see-all" style="color:rgba(250,247,242,0.55)">Explore all</a>
+  </div>
+  <div class="exp-grid">
+    <div class="exp-card">
+      <img src="https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?w=700&q=80" alt="Cooking class">
+      <div class="exp-overlay"></div>
+      <div class="exp-info">
+        <div class="exp-cat">🍝 Food & Drink</div>
+        <div class="exp-title">Private Pasta<br>Making in Rome</div>
+        <div class="exp-price">From $75 per person</div>
+      </div>
+    </div>
+    <div class="exp-card">
+      <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=500&q=80" alt="Hiking">
+      <div class="exp-overlay"></div>
+      <div class="exp-info">
+        <div class="exp-cat">🥾 Adventure</div>
+        <div class="exp-title">Sunrise Hike to Hidden Peaks</div>
+        <div class="exp-price">From $45 per person</div>
+      </div>
+    </div>
+    <div class="exp-card">
+      <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500&q=80" alt="Surf">
+      <div class="exp-overlay"></div>
+      <div class="exp-info">
+        <div class="exp-cat">🏄 Water Sports</div>
+        <div class="exp-title">Learn to Surf at Sunrise</div>
+        <div class="exp-price">From $60 per person</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOST BANNER -->
+<section class="host-banner">
+  <div class="host-visual">
+    <img src="https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=700&q=80" alt="Host">
+    <div class="host-stat-pill">
+      <strong>$2,400</strong>
+      <span>avg monthly earnings</span>
+    </div>
+  </div>
+  <div class="host-text">
+    <div class="section-tag">Earn with StayVibe</div>
+    <h2 class="section-title">Turn your space<br>into income</h2>
+    <p class="host-desc">Join millions of hosts around the world. Whether it's a spare room or a full property, we help you earn effortlessly.</p>
+    <ul class="host-perks">
+      <li><div class="perk-icon">🔒</div> $1M host protection insurance</li>
+      <li><div class="perk-icon">💸</div> Set your own price, any time</li>
+      <li><div class="perk-icon">⭐</div> Access to Superhost program</li>
+      <li><div class="perk-icon">📊</div> Real-time analytics dashboard</li>
+    </ul>
+    <button class="btn-large">Start hosting today</button>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews">
+  <div class="section-header">
+    <div>
+      <div class="section-tag">What guests say</div>
+      <h2 class="section-title">Stories from<br>real travellers</h2>
+    </div>
+  </div>
+  <div class="reviews-marquee-wrap">
+    <div class="reviews-marquee">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"The villa was absolutely breathtaking. Woke up to the sound of waves every morning. Can't imagine a more perfect week."</p>
+        <div class="review-author">
+          <img class="author-avatar" src="https://randomuser.me/api/portraits/women/1.jpg" alt="">
+          <div><div class="author-name">Sarah M.</div><div class="author-loc">Malibu, CA</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"The host was incredibly thoughtful — fresh flowers, local wine, handwritten notes. It felt like a private hotel but warmer."</p>
+        <div class="review-author">
+          <img class="author-avatar" src="https://randomuser.me/api/portraits/men/3.jpg" alt="">
+          <div><div class="author-name">Luca B.</div><div class="author-loc">Milan, Italy</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Booked the treehouse on a whim and it ended up being the most magical stay of my life. The forest at dawn is indescribable."</p>
+        <div class="review-author">
+          <img class="author-avatar" src="https://randomuser.me/api/portraits/women/12.jpg" alt="">
+          <div><div class="author-name">Anya K.</div><div class="author-loc">Berlin, Germany</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Our Santorini cave suite had the most stunning sunset views. We barely left. StayVibe found us something we couldn't find elsewhere."</p>
+        <div class="review-author">
+          <img class="author-avatar" src="https://randomuser.me/api/portraits/men/22.jpg" alt="">
+          <div><div class="author-name">James R.</div><div class="author-loc">London, UK</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Five stays, five perfect experiences. The curated selection is unmatched. Already planning my sixth trip."</p>
+        <div class="review-author">
+          <img class="author-avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="">
+          <div><div class="author-name">Mei L.</div><div class="author-loc">Tokyo, Japan</div></div>
+        </div>
+      </div>
+      <!-- Duplicate for seamless scroll loop -->
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"The villa was absolutely breathtaking. Woke up to the sound of waves every morning. Can't imagine a more perfect week."</p>
+        <div class="review-author">
+          <img class="author-avatar" src="https://randomuser.me/api/portraits/women/1.jpg" alt="">
+          <div><div class="author-name">Sarah M.</div><div class="author-loc">Malibu, CA</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"The host was incredibly thoughtful — fresh flowers, local wine, handwritten notes. It felt like a private hotel but warmer."</p>
+        <div class="review-author">
+          <img class="author-avatar" src="https://randomuser.me/api/portraits/men/3.jpg" alt="">
+          <div><div class="author-name">Luca B.</div><div class="author-loc">Milan, Italy</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Booked the treehouse on a whim and it ended up being the most magical stay of my life. The forest at dawn is indescribable."</p>
+        <div class="review-author">
+          <img class="author-avatar" src="https://randomuser.me/api/portraits/women/12.jpg" alt="">
+          <div><div class="author-name">Anya K.</div><div class="author-loc">Berlin, Germany</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Our Santorini cave suite had the most stunning sunset views. We barely left. StayVibe found us something we couldn't find elsewhere."</p>
+        <div class="review-author">
+          <img class="author-avatar" src="https://randomuser.me/api/portraits/men/22.jpg" alt="">
+          <div><div class="author-name">James R.</div><div class="author-loc">London, UK</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Five stays, five perfect experiences. The curated selection is unmatched. Already planning my sixth trip."</p>
+        <div class="review-author">
+          <img class="author-avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="">
+          <div><div class="author-name">Mei L.</div><div class="author-loc">Tokyo, Japan</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">Stay<span>Vibe</span></span>
+      <p>Connecting travellers with extraordinary spaces and experiences around the globe since 2018.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="#">Help Center</a></li>
+        <li><a href="#">Safety info</a></li>
+        <li><a href="#">Cancellation</a></li>
+        <li><a href="#">Report issue</a></li>
+        <li><a href="#">Accessibility</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Hosting</h4>
+      <ul>
+        <li><a href="#">Try hosting</a></li>
+        <li><a href="#">Protection</a></li>
+        <li><a href="#">Resources</a></li>
+        <li><a href="#">Community</a></li>
+        <li><a href="#">Superhost</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About us</a></li>
+        <li><a href="#">Newsroom</a></li>
+        <li><a href="#">Investors</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Gift cards</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 StayVibe, Inc. · Privacy · Terms · Sitemap</span>
+    <div class="social-links">
+      <a href="#" class="social-btn">𝕏</a>
+      <a href="#" class="social-btn">f</a>
+      <a href="#" class="social-btn">in</a>
+      <a href="#" class="social-btn">▶</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Filter pills toggle
+  document.querySelectorAll('.filter-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+    });
+  });
+
+  // Scroll nav shadow effect
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    nav.style.boxShadow = window.scrollY > 60
+      ? '0 4px 30px rgba(92,74,58,0.1)'
+      : 'none';
+  });
+
+  // Intersection Observer — fade-in listing cards on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.listing-card').forEach((card, i) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    card.style.transition = `opacity 0.5s ease ${i * 0.07}s, transform 0.5s ease ${i * 0.07}s`;
+    observer.observe(card);
+  });
+</script>
+</body>
+</html>

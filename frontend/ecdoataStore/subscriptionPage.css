@@ -1,0 +1,388 @@
+
+:root {
+  --bg-cl: #171b4d;
+  --bg-cl-2: #1f314b;
+  --border-bg-cl: rgb(255, 255, 255);
+  --secondary-cl: rgb(50, 50, 190);
+  --dark-cl: #0a0a0a;
+  --ascent-cl: rgb(158, 97, 209);
+  --background-cl: #e6e8ce;
+  --card-full-bg-cl: rgb(255, 145, 0);
+  
+
+
+  /***
+  NEW ROOT
+  ***/
+  --btn-bg-cl: rgb(250, 126, 9);
+  --user-panel-bg: rgba(42, 42, 194, 0.938);
+  --clock-bg-cl: rgb(2, 61, 52);
+
+  /***
+  DARK MODE COLORS
+  ***/
+  --darkMode-bg-cl: rgb(10, 1, 22);
+  --welcome-card-bg: rgb(2, 2, 39);
+  --welcome-card-bg-2: rgb(24, 5, 5);
+  --welcome-card-border: rgb(74, 88, 94);
+  --thin-border: rgb(35, 48, 49);
+
+
+  
+  --text-cl: rgb(248, 248, 248);
+  --text-cl-2: rgb(210, 216, 216);
+  --text-cl-3: rgb(139, 141, 141);
+
+  /**
+  BORDER SOLID COLORS
+  **/
+  --thin-border-1:  #afb8b6;
+  --thin-border-2:  #a19375;
+  --thin-border-3:  #494845;
+  --thin-border-4: rgb(231, 227, 227);
+  /***
+  CARD BG
+  ***/
+}
+
+
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  list-style: none;
+}
+
+
+
+body{
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  overflow-x: hidden;
+}
+
+/* GLOW BACKGROUND */
+body::before {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: #ff7a00;
+  filter: blur(120px);
+  top: 40px;
+  left: 40%;
+  opacity: 0.4;
+}
+
+
+
+
+/***
+MAIN CONTAINER
+****/
+.ecoshop-main-container{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+  overflow: hidden;
+}
+
+
+
+
+/* ================= HEADER ================= */
+.ecoshop-main-container .store-header {
+  width: 100%;
+  height: 3.9rem;
+  justify-self: center;;
+  background: rgba(80, 51, 18, 0.205);
+  padding: 1px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  border-bottom: 1px solid rgba(245, 222, 179, 0.267);
+  top: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  z-index: 99999;
+}
+
+.store-header .store-header-top{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  padding-top: .2rem;
+}
+
+
+.logo img {
+ width: 3.8rem;
+ height: 3.8rem;
+ margin-top: .3rem;
+ -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
+}
+
+.logo span {
+  font-size: 14px;
+  margin: 0;
+  color: #28a745;
+  font-weight: 500;
+}
+
+
+
+
+
+
+
+
+
+.ecoshop-main-container .full-grid-container{
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 16rem auto;
+  position: relative;
+  overflow: hidden;
+}
+
+
+.full-grid-container .ecoshop-aside-section{
+  width: 100%;
+  max-width: 16rem;
+  height: 100%;
+  position: relative;
+  left: 0;
+  top: 3.8rem;
+  border-right: 1px solid var(--thin-border-2);
+  background: var(--thin-border-2);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***
+MAIN CONTENT SECTION
+****/
+.full-grid-container .ecoshop-main-section{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-top: 3.8rem;
+}
+
+
+.ecoshop-main-section .plans-wrapper{
+  margin: 0;
+  padding-left: 16rem !important;
+  border: 1px solid var(--thin-border-1);
+  border-radius: 1rem;
+  width: 100% !important;
+  max-width: 1050px !important;
+  height: 500px;
+  margin-bottom: 4rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* plans wrapper */
+.plans-wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 460px;
+  justify-self: center;
+  align-items: center;
+  margin-top: 7rem;
+  height: 90vh;
+}
+
+
+
+/* slider */
+.plans-slider {
+  display: flex;
+  gap: 40px;
+  transition: transform 0.5s ease;
+}
+
+/* glass card */
+.plan-card{
+  width: 100%;
+  min-width: 140px;
+  padding: 20px;
+  border-radius: 8px;
+  background: rgba(90, 83, 83, 0.08);
+  backdrop-filter:  blur(20px);
+  border: 1px solid rgba(255,255,255,0.1);
+
+  color: #fff;
+  text-align: center;
+  
+  transform-style: preserve-3d;
+  transform:  scale(0.85);
+  opacity: 0.5;
+  transition: transform .2s ease, box-shadow .3s ease;
+}
+
+
+
+/* Active card */
+.plan-card.active{
+  transform: scale(1.05);
+  opacity: 1;
+  z-index: 2;
+
+  box-shadow:
+  0 0 30px rgba(255, 122, 0, 0.6),
+  0 0 60px rgba(255, 122, 0, 0.3);
+}
+
+/* text */
+.price {
+  font-size: 14px;
+  margin:  10px;
+  color: #ff7a00;
+}
+
+.plan-card ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.plan-card li {
+  margin: 6px 0;
+  font-size: 14px;
+}
+
+/* buttons */
+.plan-card button{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 8px 30px;
+  border: none;
+  border-radius: 4px;
+  background: #ff7a00;
+  color: #fff;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.plan-card button:hover{
+  background: #ff9500;
+}
+
+.badge{
+  position: absolute;
+  top: -10px;
+  right: 10px;
+  background: #ff7a00;
+  padding: 5px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+}
+
+.ia-badge{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: linear-gradient(45deg, orange, red);
+  color: white;
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  animation: pul 1.5s infinite;
+}
+
+.plan-card.recommended{
+  border: 2px solid orange;
+  transform: scale(1.08);
+}
+
+@keyframes pul {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100%{
+    transform: scale(1);
+  }
+}

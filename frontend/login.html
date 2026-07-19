@@ -1,71 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ecodata</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | EcoData</title>
+  <link rel="stylesheet" href="globalStyle.css">
+  <link rel="stylesheet" href="signLogin.css">
+  <link rel="stylesheet" href="sign.css">
 
-  
-    <meta name="title" content="EcoData">
-  <meta name="description" content="This is related to website developed by IlysCode">
 
-  <link rel="shortcut icon" href="./images/ecodata-bg1.png" type="image/jpg">
-  <link rel="stylesheet" href="./login.css">
+
+
+  <style>
+    
+
+
+  .btn-text{
+    font-size: .95rem;
+    font-weight: 600;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+
+  .spinner{
+    width: 19px;
+    height: 19px;
+    border: 3px solid white;
+    border-top: 3px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    display: none;
+  }
+
+  button.loading .spinner{
+    display: block;
+  }
+
+  button.loading .btn-text{
+    display: none;
+  }
+
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+
+
+  </style>
 </head>
+
+
+
+<script src="global.js"></script>
 <body>
-<nav class="navbar">
-<div class="nav-left">
- <a href="index.html"><h2>EcoData</h2></a>
-</div>
-<div class="nav-right">
-<img src="./css/icons/icons8-fries-menu-46.png" alt="image" loading="lazy">
-</div>
-</nav>
-
-<!------LOGIN & SIGN-UP---->
-<div class="container">
-  <form action="get">
-    <h1>Login To Your Account</h1>
-    <input type="text" placeholder="Enter your email">
-    <input type="text" placeholder="Enter your password">
-    <button type="submit" class="login-btn">Login</button>
-  </form>
 
 
+   <div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
-  <div class="signUp-container">
-  <form class="sighUp-form" action="get">
-    <h1>Create New Account</h1>
-    <input type="text" placeholder="Enter your email">
-    <input type="text" placeholder="Enter your password">
-    <button type="submit" class="login-btn">Sign UP</button>
-  </form>
-</div>
-</div>
+<!----LAPTOP & PHONE UI-UPDATE (9TH-MAY)---->
+
+<div class="signUp-container">
+  <!----navbar--->
+  <div class="navigation">
+    <div class="navigation-left">
+      <img src="./css/icons/icon-shortcut.png" alt="" loading="lazy">
+    </div>
+    <div class="navigaition-right"></div>
+  </div>
+    <div class="grid-container">
 
 
 
-<!--------MENU-CARD----->
-<div class="menu-card" id="signUpTrigger">
-  Don't have account?
-  <div class="bottom-card">
-    <a href="#">Sign Up</a>
+      <!--SIDEBAR-->
+      <div class="sidebar">
+       <div class="signup-card">
+        <div class="logoImg">
+          <img src="./css/icons/icon-shortcut.png" alt="" loading="lazy">
+          <h1>EcoData</h1>
+        </div>
+        
+        <div class="sign-note">
+          Yeah! already have account: 
+          <p class="notes">
+         Login to your account for faster checkOut. 
+          </p>
+        </div>
+       </div>
+      </div>
+
+
+<!----main-man-->
+      <div class="main-main">
+
+
+
+        <div class="container">
+    <h2>Welcome Back! <br> Please Login to Your Account</h2>
+
+
+
+    <form id="login-form">
+
+     <div class="formFillCard">
+  <div class="formFillCard-top">
+    <label> Email Address</label>
+  </div>
+  <div class="formFillCard-bottom">
+    <div class="formInputCreate">
+      <img class="curNone" src="./css/uiIcons/email.png" alt="">
+        <input type="email" id="email" placeholder="Email"  />
+    </div>
+ 
+  </div>
+     </div>
+
+
+
+
+
+  <div class="formFillCard">
+  <div class="formFillCard-top">
+    <label>Password</label>
+  </div>
+  <div class="formFillCard-bottom">
+    <div class="formInputCreate">
+      <img class="curNone" src="./css/uiIcons/lock.png" alt="" loading="lazy">
+      <input  type="password" id="password" placeholder="Choose Password"  />
+      <img id="togglePassword" class="curYes" src="./css/uiIcons/eye.png" alt="toggle password">
+    </div>
+     
   </div>
 </div>
-<!-- ABOUT-->
-  <section class="about">
-    <h3>About Us:</h3>
-    <p>Welcome to [ EcoData Bundles ] - we deal with all networks Data Bundle Airtel-Tigo, MTN and Telecel (All are none Expiry Data Bundles) at affordable prices.
-      Contact us on WhatsApp to place your order. We deliver nationwide!</p>
-    <h4>Fastest Delivery is our Priority</h4>
+    
+<div class="already">
+ <p> Don't have an account? <button type="button" class="alloginBtn" onclick="window.location.href = 'signUp.html'" >Sign Up</button></p>
+</div>
+   
 
-      <!-- FOOTER -->
-  <footer>
-    <p>Join Us on WhatsApp by: <a href="https://chat.whatsapp.com/LwhZNOyUQsJIGTQRL9cIXT">Clicking here<img src="./css/icons/whats.jpg" alt="icons"></a></p>
-    <p class="copyright">&copy; 2025 EcoData All right reserved</p>
-  </footer>
-  </section>
+      <button class="signUpBtn" id="logBtn" type="submit">
+        <span class="spinner"></span>
+        <span class="btn-text">Login</span>
+      </button>
 
-  <script src="loginSignUp.js"></script>
+
+    </form>
+
+
+
+   
+  </div>
+      </div>
+</div>
+
+
+
+
+
+  
+
+  
+  <!-----NAVIGATION- BAR-->
+
+
+
+
+
+
+
+<script type="module" src="signLogin.js">
+
+</script>
+
+
+
+<script>
+
+  document.addEventListener("DOMContentLoaded", () => {
+
+  const password = document.getElementById("password");
+  const togglePassword = document.getElementById("togglePassword");
+
+  togglePassword.addEventListener("click", () => {
+    const isPassword = password.type === "password";
+
+    // Toggle input type
+    password.type = isPassword ? "text" : "password";
+
+    // Toggle icon image
+    togglePassword.src = isPassword 
+      ? "./css/uiIcons/hide.png" 
+      : "./css/uiIcons/eye.png";
+  });
+  });
+</script>
+
+
+
 </body>
 </html>

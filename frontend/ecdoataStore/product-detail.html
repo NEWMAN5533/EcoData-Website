@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> PRODUCTS || DETAIL </title>
+  <!--<link rel="stylesheet" href="pdt.css">--->
+  <link rel="stylesheet" href="shoppy.css">
+  <link rel="stylesheet" href="shoppy2.css">
+  <link rel="stylesheet" href="product-detail.css">
+
+
+
+      <!--remix icons-->
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
+
+</head>
+<body>
+  <div class="container">
+  
+<!---SIDEBAR-SECTION----->
+<section class="left-sidebar">
+
+  <div class="left-sidebar-top">
+    <div class="userProfile">
+      <div class="pro-wrap">
+        <p id="usernameDisplay1">
+          <img src="../ecdoataStore/icons/profile.jpg" alt="">
+        </p>
+      </div>
+    </div>
+
+    <div class="user-credentials">
+      <div class="user-greeting">Hello,</div>
+      <div class="user-name">
+        <p id="usernameDisplayfull">Il-yas Ahmed</p>
+      </div>
+      <div class="user-id">
+        <small id="userId">ID: 783830200</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar-middle">
+
+    <!--=== SELLER SIDEBAR CONTENT ========-->
+    <div class="seller-content" id="sellerAuth" style="display: none;">
+
+      <span class="aside-section-label">Selling</span>
+
+      <div class="aside-nav active-aside">
+        <a href="#"><i class="ri-book-line"></i> Dashboard</a>
+      </div>
+      <div class="aside-nav">
+        <a href="#"><i class="ri-store-3-line"></i> Products</a>
+      </div>
+      <div class="aside-nav">
+        <a href="#"><i class="ri-add-box-line"></i> Add Products</a>
+      </div>
+      <div class="aside-nav">
+        <a href="#"><i class="ri-file-list-3-line"></i> Orders</a>
+      </div>
+
+      <span class="aside-section-label">Finance</span>
+
+      <div class="aside-nav">
+        <a href="#"><i class="ri-money-dollar-circle-line"></i> Earnings</a>
+      </div>
+      <div class="aside-nav">
+        <a href="#"><i class="ri-hand-coin-line"></i> Withdrawals</a>
+      </div>
+      <div class="aside-nav">
+        <a href="#"><i class="ri-bar-chart-2-line"></i> Daily Analytics</a>
+      </div>
+
+      <span class="aside-section-label">Engagement</span>
+
+      <div class="aside-nav">
+        <a href="#"><i class="ri-megaphone-line"></i> Promotions</a>
+      </div>
+      <div class="aside-nav">
+        <a href="#"><i class="ri-message-3-line"></i> Messages</a>
+      </div>
+      <div class="aside-nav">
+        <a href="#"><i class="ri-notification-3-line"></i> Notifications</a>
+      </div>
+
+    </div>
+
+    <!--=== CUSTOMER SIDEBAR CONTENT ========-->
+    <div class="customer-content" id="customerAuth">
+
+      <span class="aside-section-label">Shop</span>
+
+      <div class="aside-nav ">
+        <a onclick="window.location.href='shop.html' "><i class="ri-home-5-line"></i> Home</a>
+      </div>
+      <div class="aside-nav active-aside">
+        <a href="#"><i class="ri-compass-3-line"></i> Browse Products</a>
+      </div>
+      <div class="aside-nav">
+        <a href="#"><i class="ri-heart-line"></i> Wishlist</a>
+      </div>
+
+      <span class="aside-section-label">Orders</span>
+
+      <div class="aside-nav">
+        <a href="#"><i class="ri-file-list-3-line"></i> My Orders</a>
+      </div>
+      <div class="aside-nav">
+        <a href="#"><i class="ri-download-cloud-line"></i> My Downloads (Digital)</a>
+      </div>
+      <div class="aside-nav">
+        <a href="#"><i class="ri-mail-send-line"></i> Services (Requests)</a>
+      </div>
+      <div class="aside-nav">
+        <a href="#"><i class="ri-map-pin-2-line"></i> Addresses (Physical)</a>
+      </div>
+
+      <span class="aside-section-label">Updates</span>
+
+      <div class="aside-nav">
+        <a href="#"><i class="ri-message-3-line"></i> Messages</a>
+      </div>
+      <div class="aside-nav">
+        <a href="#"><i class="ri-notification-3-line"></i> Notifications</a>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="left-sidebar-bottom">
+    <div class="aside-nav">
+      <a href="#"><i class="ri-settings-3-line"></i> Settings</a>
+    </div>
+    <div class="aside-nav">
+      <a href="#"><i class="ri-user-3-line"></i> Profile</a>
+    </div>
+    <div class="aside-nav aside-nav-danger">
+      <a href="#"><i class="ri-logout-box-line"></i> Logout</a>
+    </div>
+  </div>
+
+</section>
+<!---=== LEFT SIDEBAR ENDS ====-->
+
+
+<!--== MOBILE SIDEBAR ===-->
+<section class="mobile-sidebar" id="mobileSidebar">
+
+  <div class="sidebar-top">
+    <div class="profile-img">
+      <div class="profile">
+        <div class="pro-wrapper">
+          <span class="pro">
+            <img src="../ecdoataStore/icons/profile.jpg" alt="">
+          </span>
+        </div>
+      </div>
+
+      <div class="right-side">
+        <div class="user-greeting">Hello,</div>
+        <div class="user-data">Il-yas Ahmed</div>
+        <div class="user-id">ID: 23494939</div>
+      </div>
+    </div>
+
+    <button class="mobile-sidebar-close" id="mobileSidebarClose" aria-label="Close menu">
+      <i class="ri-close-line"></i>
+    </button>
+  </div>
+
+  <div class="sidebar-middle">
+
+    <!--=== SELLER SIDEBAR CONTENT ========-->
+    <div class="seller-content" id="sellerAuth" style="display: none;">
+
+      <span class="aside-section-label">Selling</span>
+
+      <div class="aside-nav active-aside">
+        <a href="#"><i class="ri-book-line"></i> Dashboard</a>
+      </div>
+      <div class="aside-nav">
+        <a href="#"><i class="ri-store-3-line"></i> Products</a>
+      </div>
+      <div class="aside-nav">
+        <a href="#"><i class="ri-add-box-line"></i> Add Products</a>
+      </div>
+      <div class="aside-nav">
+        <a href="#"><i class="ri-file-list-3-line"></i> Orders</a>
+      </div>
+
+      <span class="aside-section-label">Finance</span>
+
+      <div class="aside-nav">
+        <a href="#"><i class="ri-money-dollar-circle-line"></i> Earnings</a>
+      </div>
+      <div class="aside-nav">
+        <a href="#"><i class="ri-hand-coin-line"></i> Withdrawals</a>
+      </div>
+      <div class="aside-nav">
+        <a href="#"><i class="ri-bar-chart-2-line"></i> Daily Analytics</a>
+      </div>
+
+      <span class="aside-section-label">Engagement</span>
+
+      <div class="aside-nav">
+        <a href="#"><i class="ri-megaphone-line"></i> Promotions</a>
+      </div>
+      <div class="aside-nav">
+        <a href="#"><i class="ri-message-3-line"></i> Messages</a>
+      </div>
+      <div class="aside-nav">
+        <a href="#"><i class="ri-notification-3-line"></i> Notifications</a>
+      </div>
+
+    </div>
+
+    <!--=== CUSTOMER SIDEBAR CONTENT ========-->
+    <div class="customer-content" id="customerAuth">
+
+      <span class="aside-section-label">Shop</span>
+
+      <div class="aside-nav ">
+        <a onclick="window.location.href='shop.html'" href="#"><i class="ri-home-5-line" ></i> Home</a>
+      </div>
+      <div class="aside-nav active-aside">
+        <a href="#"><i class="ri-compass-3-line"></i> Browse Products</a>
+      </div>
+      <div class="aside-nav">
+        <a href="#"><i class="ri-heart-line"></i> Wishlist</a>
+      </div>
+
+      <span class="aside-section-label">Orders</span>
+
+      <div class="aside-nav">
+        <a href="#"><i class="ri-file-list-3-line"></i> My Orders</a>
+      </div>
+      <div class="aside-nav">
+        <a href="#"><i class="ri-download-cloud-line"></i> My Downloads (Digital)</a>
+      </div>
+      <div class="aside-nav">
+        <a href="#"><i class="ri-mail-send-line"></i> Services (Requests)</a>
+      </div>
+      <div class="aside-nav">
+        <a href="#"><i class="ri-map-pin-2-line"></i> Addresses (Physical)</a>
+      </div>
+
+      <span class="aside-section-label">Updates</span>
+
+      <div class="aside-nav">
+        <a href="#"><i class="ri-message-3-line"></i> Messages</a>
+      </div>
+      <div class="aside-nav">
+        <a href="#"><i class="ri-notification-3-line"></i> Notifications</a>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="sidebar-bottom">
+    <div class="aside-nav">
+      <a href="#"><i class="ri-settings-3-line"></i> Settings</a>
+    </div>
+    <div class="aside-nav">
+      <a href="#"><i class="ri-user-3-line"></i> Profile</a>
+    </div>
+    <div class="aside-nav aside-nav-danger">
+      <a href="#"><i class="ri-logout-box-line"></i> Logout</a>
+    </div>
+  </div>
+
+</section>
+<!--== MOBILE SIDEBAR ENDS ===-->
+
+ <!--==  NAVBAR ====-->
+  <nav class="navbar">
+    <div class="left-side">
+     <i class="ri-shopping-bag-3-fill"></i>
+     EcoData<span class="hero-headline">Store</span>
+    </div>
+
+    
+      <div class="nav-menu" style="display: none;">
+          <ul class="nav-list">
+          <li class="nav-item">
+            <a href="#home" class="nav-link active-link">
+              <i class="ri-home-line"></i>
+              <span>Home</span>
+            </a>
+          </li>
+
+           <li class="nav-item">
+            <a href="#featured" class="nav-link">
+              <i class="ri-book-3-line"></i>
+              <span>Featured</span>
+            </a>
+          </li>
+
+            <li class="nav-item">
+            <a href="#discount" class="nav-link">
+                <i class="ri-price-tag-3-line"></i> 
+              <span>Discount</span>
+            </a>
+          </li>
+
+            <li class="nav-item">
+            <a href="#new" class="nav-link">
+                <i class="ri-bookmark-line"></i> 
+              <span>New Books</span>
+            </a>
+          </li>
+
+            <li class="nav-item">
+            <a href="#testimonial" class="nav-link">
+                <i class="ri-message-3-line"></i> 
+              <span>Testimonial</span>
+            </a>
+          </li>
+        </ul>
+     </div>
+
+      <div class="nav-actions">
+        <!--- SEARCH BTN--->
+        <i class="ri-search-line search-button searchLap" id="search-button" style="display: none;"></i>
+
+        <!---login button-->
+        <i class="ri-user-line login-button" id="login-button" style="display: none;"></i>
+
+
+
+        <!--shopping cart-->
+        <i class="ri-message-2-line material-icons cart3">
+            <span  class="cart-count2">1</span>
+          </i>
+
+        <!---theme button -->
+        <i class="ri-moon-line change-theme" id="theme-button"></i>
+
+        
+          
+
+        <!---menu button-->
+        <i class="ri-menu-2-line" id="menuIcon"></i>
+      </div>
+  </nav>
+  <!--== NAVBAR ENDS ====-->
+
+    <main class="main-container">
+
+         <!----middle-container-->
+    <section class="middle-container">
+      <div class="pd-container">
+        <div class="pd-container-top">
+          <div class="pd-container-top-nav">
+            <h1>Product Details</h1>
+          </div>
+        </div>
+
+        <div class="pd-container-bottom">
+          <div class="pd-bottom-left">
+            <div class="pd-bottom-left-title">
+              <p>Nike Air Max 270 to Chuck Taylors </p>
+
+            </div>
+
+            <div class="pd-bottom-left-middle">
+              <small>
+                Nike's Air Force 1s were among the most popular sneakers this year.
+              </small>
+            </div>
+
+            <div class="pd-bottom-left-bottom">
+              <div class="img">
+                <img src="./products/men6.png" alt="" loading="lazy">
+              </div>
+              <div class="img">
+                  <img src="./products/men6.png" alt="" loading="lazy">
+              </div>
+              <div class="img">
+                  <img src="./products/men6.png" alt="" loading="lazy">
+              </div>
+            </div>
+          </div>
+
+          <div class="pd-bottom-middle">
+            <div class="product-circle-div-1">
+              <div class="product-circle-div">
+                <img src="./products/men6.png" alt="" loading="lazy">
+                <p class="price">GHS240.99</p>
+            </div>
+            </div>
+          </div>
+
+          <div class="pd-bottom-right">
+            <!--here-->
+            <div class="order-details">
+             <p>
+               Available in stock, delivery is processed to customer location once payment is confirmed.
+
+              Order the item via WhatsApp one on one chat with the seller.
+             </p>
+            </div>
+            <div class="whatsAppBtn">
+              <button class="chat">
+               <i class="ri-shopping-cart-2-line"></i>
+                Order on WhatsApp Now
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!--====== PRODUCT  INFO @(mobile) =======-->
+
+      <!--====== SELLER INFO =======-->
+        <!---seller-info-->
+   <section class="delivery-info">
+      <div class="seller-details">
+        <div class="pd-loc">
+          <small>Greater Accra, Mamobi, 21 hours ago</small>
+        </div>
+        <div class="pd-dec">
+          Fresh And Roasted Groundnut (100kg)
+        </div>
+        <div class="pd-pri">GHS 1,800 <small>Negotiable</small></div>
+        <div class="pd-buttons">
+          <button class="make-offer">
+            Request call back
+          </button>
+          <button class="show-contact">
+            Show contact
+          </button>
+        </div>
+      </div>
+
+      <div class="seller-details chatSeller">
+        <div class="title-chat">
+          <small>Chat with the seller</small>
+        </div>
+        <label for="chat">Send a message</label>
+        <input type="text" id="chatWithSeller" placeholder="Type a message">
+        <div class="start-chat">
+          <button class="start-chat-btn">Start chat</button>
+        </div>
+      </div>
+      <div class="product-desc first-desc">
+       <div class="seller-location">
+         <!--store address-title-->
+        <i class="ri-store-2-line"></i>
+        <small>Store address</small>
+       </div>
+
+        <div class="store-location">
+         <div class="local">
+          
+           <small> <i class="ri-map-2-line"></i> Greater Accra <span></span> Osu</small>
+          <p>Osu castle</p>
+          <small class="nearest">
+            <i class="ri-navigation-line"></i>
+            Close to the Asomdwee Park-Osu
+          </small>
+         </div>
+       
+        <div class="store-hours">
+          <i class="ri-timer-line"></i>
+          <small>Open <span></span> Monday - Sun, 08:00-18:00</small>
+        </div>
+
+         <div class="local">
+          <small>  <i class="ri-map-2-line"></i> Greater Accra <span></span> Osu</small>
+          <p>Accra Lapaz</p>
+          <small class="nearest">
+            <i class="ri-navigation-line"></i>
+            Close to the Lapaz
+          </small>
+         </div>
+       
+        <div class="store-hours">
+          <i class="ri-timer-line"></i>
+          <small>Open <span></span> Monday - Sun, 08:00-18:00</small>
+        </div>
+         </div>
+        <div class="end-dropdown">
+          <div class="end-content">
+            <small>Hide</small>
+          <i class="ri-arrow-down-s-line"></i>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="product-desc">
+
+        <div class="desc-title">
+          <h4>Product Description</h4>
+        </div>
+
+        <div class="desc-content">
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odit accusantium laudantium quasi distinctio repudiandae rem!</p>
+        <p>Autem facere a cumque praesentium. Fuga amet veritatis molestiae at asperiores a quibusdam voluptates temporibus.</p>
+        <p>Cumque totam architecto optio molestias, veniam vero nam fuga. Dolorem, nihil! Eaque numquam soluta aut.</p>
+        </div>
+
+        <div class="end-dropdown">
+          <div class="end-content">
+            <small>Hide</small>
+          <i class="ri-arrow-down-s-line"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--info-buttons-->
+    <section class="info-buttons">
+      <div class="info-btn-wrapper">
+        <div class="btn-wrp-left">
+          <button class="make-offer">
+            Make an offer
+          </button>
+        </div>
+        <div class="btn-wrp-right">
+          <button class="show-contact">
+            Show contact
+          </button>
+        </div>
+      </div>
+    </section>
+
+
+
+      <!--====== SELLER INFO =======-->
+
+
+
+
+        <!---========== RELATED PRODUCTS ==========-->
+<section class="recent-uploads">
+
+    <div class="recent-header">
+        <div>
+            <span class="section-badge">
+                <i class="ri-sparkling-2-fill"></i>
+                Related Search
+            </span>
+            <h2>Related <span class="text-gradient">Products</span></h2>
+            <p>Related products and services just added by our sellers</p>
+        </div>
+
+        <a href="products.html?sort=newest" class="btn-link" style="display: none;">
+            View All New
+            <i class="ri-arrow-right-line"></i>
+        </a>
+    </div>
+
+    <div class="recent-grid">
+
+        <article class="product-card">
+            <div class="product-thumb">
+                <img src="../ecdoataStore/products/men6.png" alt="Instagram Growth Guide">
+                <span class="product-new-badge">
+                    <i class="ri-flashlight-fill"></i> New
+                </span>
+                <button class="product-wishlist" aria-label="Add to wishlist">
+                    <i class="ri-heart-line"></i>
+                </button>
+            </div>
+            <div class="product-info">
+                <span class="product-category">Ebook / Course</span>
+                <h4>Instagram Growth Guide 2026</h4>
+                <div class="product-meta-row">
+                    <span class="product-seller">
+                        <img src="../ecdoataStore/products/men2.png" alt="">
+                        Kwame's Digital Hub
+                    </span>
+                    <span class="product-time">2h ago</span>
+                </div>
+                <div class="product-price-row">
+                    <span class="product-price">₵30.00</span>
+                    <button class="product-add-btn" aria-label="Add to cart">
+                        <i class="ri-add-line"></i>
+                    </button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card">
+            <div class="product-thumb">
+                <img src="../ecdoataStore/products/men3.png" alt="Handmade Beaded Bracelet">
+                <span class="product-new-badge">
+                    <i class="ri-flashlight-fill"></i> New
+                </span>
+                <button class="product-wishlist" aria-label="Add to wishlist">
+                    <i class="ri-heart-line"></i>
+                </button>
+            </div>
+            <div class="product-info">
+                <span class="product-category">Fashion</span>
+                <h4>Handmade Beaded Bracelet Set</h4>
+                <div class="product-meta-row">
+                    <span class="product-seller">
+                        <img src="assets/images/seller-avatar-5.jpg" alt="">
+                        Nana's Fashion House
+                    </span>
+                    <span class="product-time">5h ago</span>
+                </div>
+                <div class="product-price-row">
+                    <span class="product-price">₵25.00</span>
+                    <button class="product-add-btn" aria-label="Add to cart">
+                        <i class="ri-add-line"></i>
+                    </button>
+                </div>
+            </div>
+        </article>
+
+        
+        <article class="product-card">
+            <div class="product-thumb">
+                <img src="../ecdoataStore/products/men11.png" alt="Bluetooth Speaker Mini">
+                <span class="product-new-badge">
+                    <i class="ri-flashlight-fill"></i> New
+                </span>
+                <button class="product-wishlist" aria-label="Add to wishlist">
+                    <i class="ri-heart-line"></i>
+                </button>
+            </div>
+            <div class="product-info">
+                <span class="product-category">Electronics</span>
+                <h4>Bluetooth Speaker Mini</h4>
+                <div class="product-meta-row">
+                    <span class="product-seller">
+                        <img src="assets/images/seller-avatar-3.jpg" alt="">
+                        TechGear GH
+                    </span>
+                    <span class="product-time">1d ago</span>
+                </div>
+                <div class="product-price-row">
+                    <span class="product-price">₵150.00</span>
+                    <button class="product-add-btn" aria-label="Add to cart">
+                        <i class="ri-add-line"></i>
+                    </button>
+                </div>
+            </div>
+        </article>
+
+          <article class="product-card">
+            <div class="product-thumb">
+                <img src="../ecdoataStore/products/men11.png" alt="Bluetooth Speaker Mini">
+                <span class="product-new-badge">
+                    <i class="ri-flashlight-fill"></i> New
+                </span>
+                <button class="product-wishlist" aria-label="Add to wishlist">
+                    <i class="ri-heart-line"></i>
+                </button>
+            </div>
+            <div class="product-info">
+                <span class="product-category">Electronics</span>
+                <h4>Bluetooth Speaker Mini</h4>
+                <div class="product-meta-row">
+                    <span class="product-seller">
+                        <img src="assets/images/seller-avatar-3.jpg" alt="">
+                        TechGear GH
+                    </span>
+                    <span class="product-time">1d ago</span>
+                </div>
+                <div class="product-price-row">
+                    <span class="product-price">₵150.00</span>
+                    <button class="product-add-btn" aria-label="Add to cart">
+                        <i class="ri-add-line"></i>
+                    </button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card">
+            <div class="product-thumb">
+                <img src="../ecdoataStore/products/men6.png" alt="Logo Design Starter Pack">
+                <span class="product-new-badge">
+                    <i class="ri-flashlight-fill"></i> New
+                </span>
+                <button class="product-wishlist" aria-label="Add to wishlist">
+                    <i class="ri-heart-line"></i>
+                </button>
+            </div>
+            <div class="product-info">
+                <span class="product-category">Service</span>
+                <h4>Logo Design Starter Pack</h4>
+                <div class="product-meta-row">
+                    <span class="product-seller">
+                        <img src="assets/images/seller-avatar-2.jpg" alt="">
+                        Ama's Print Studio
+                    </span>
+                    <span class="product-time">1d ago</span>
+                </div>
+                <div class="product-price-row">
+                    <span class="product-price">₵80.00</span>
+                    <button class="product-add-btn" aria-label="Add to cart">
+                        <i class="ri-add-line"></i>
+                    </button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card">
+            <div class="product-thumb">
+                <img src="../ecdoataStore/products/men1.png" alt="Bluetooth Speaker Mini">
+                <span class="product-new-badge">
+                    <i class="ri-flashlight-fill"></i> New
+                </span>
+                <button class="product-wishlist" aria-label="Add to wishlist">
+                    <i class="ri-heart-line"></i>
+                </button>
+            </div>
+            <div class="product-info">
+                <span class="product-category">Electronics</span>
+                <h4>Bluetooth Speaker Mini</h4>
+                <div class="product-meta-row">
+                    <span class="product-seller">
+                        <img src="assets/images/seller-avatar-3.jpg" alt="">
+                        TechGear GH
+                    </span>
+                    <span class="product-time">1d ago</span>
+                </div>
+                <div class="product-price-row">
+                    <span class="product-price">₵150.00</span>
+                    <button class="product-add-btn" aria-label="Add to cart">
+                        <i class="ri-add-line"></i>
+                    </button>
+                </div>
+            </div>
+        </article>
+
+           <article class="product-card">
+            <div class="product-thumb">
+                <img src="../ecdoataStore/products/men12.png" alt="Logo Design Starter Pack">
+                <span class="product-new-badge">
+                    <i class="ri-flashlight-fill"></i> New
+                </span>
+                <button class="product-wishlist" aria-label="Add to wishlist">
+                    <i class="ri-heart-line"></i>
+                </button>
+            </div>
+            <div class="product-info">
+                <span class="product-category">Service</span>
+                <h4>Logo Design Starter Pack</h4>
+                <div class="product-meta-row">
+                    <span class="product-seller">
+                        <img src="assets/images/seller-avatar-2.jpg" alt="">
+                        Ama's Print Studio
+                    </span>
+                    <span class="product-time">1d ago</span>
+                </div>
+                <div class="product-price-row">
+                    <span class="product-price">₵80.00</span>
+                    <button class="product-add-btn" aria-label="Add to cart">
+                        <i class="ri-add-line"></i>
+                    </button>
+                </div>
+            </div>
+        </article>
+
+         <article class="product-card">
+            <div class="product-thumb">
+                <img src="../ecdoataStore/products/men4.png" alt="Logo Design Starter Pack">
+                <span class="product-new-badge">
+                    <i class="ri-flashlight-fill"></i> New
+                </span>
+                <button class="product-wishlist" aria-label="Add to wishlist">
+                    <i class="ri-heart-line"></i>
+                </button>
+            </div>
+            <div class="product-info">
+                <span class="product-category">Service</span>
+                <h4>Logo Design Starter Pack</h4>
+                <div class="product-meta-row">
+                    <span class="product-seller">
+                        <img src="assets/images/seller-avatar-2.jpg" alt="">
+                        Ama's Print Studio
+                    </span>
+                    <span class="product-time">1d ago</span>
+                </div>
+                <div class="product-price-row">
+                    <span class="product-price">₵80.00</span>
+                    <button class="product-add-btn" aria-label="Add to cart">
+                        <i class="ri-add-line"></i>
+                    </button>
+                </div>
+            </div>
+        </article>
+
+    </div>
+
+</section>
+
+
+
+        <!-----BOTTOM-NAVBAR----->
+    <div class="bottom-navbar" id="navIconDiv">
+      <div class="btom-navIcon" onclick="window.location.href='#'">
+        <div class="activeImg " id="activeMtn">
+          <i class="ri-home-smile-line sellerAuth material-icons"></i>
+      
+
+        </div>
+        <small class="bottomIcon-textNav">Home</small>
+      
+      </div>
+
+    
+      
+
+      <div class="btom-navIcon">
+        <div class="activeImg" onclick="window.location.href ='#'"> 
+          <i class="ri-grid-fill material-icons"></i>
+          <i class="ri-price-tag-3-line sellerAuth" style="display: none;"></i>
+        </div>
+        <small class="bottomIcon-textNav">Saved</small>
+      </div>
+
+
+          
+
+      <div class="btom-navIcon">
+        <div class="activeImg" onclick="window.location.href ='#'"> 
+          <i class="ri-price-tag-2-line material-icons" style="border: 1px solid rgba(222,222,222,222); padding: 0 .4rem; border-radius: 5px;  "></i>
+          <i class="ri-price-tag-3-line sellerAuth" style="display: none;"></i>
+        </div>
+        <small class="bottomIcon-textNav">Sell</small>
+      </div>
+
+
+    
+  
+    
+
+        <div class="btom-navIcon " >
+        <div class="activeImg " id="activeTel" onclick="window.location.href='#'"> 
+          <i class="ri-message-3-line material-icons "></i>
+
+          <i class="ri-dashboard-3-line sellerAuth material-icons" style="display: none;"></i>
+        </div>
+        <small class="bottomIcon-textNav">Messages</small>
+      </div>
+
+
+      <div class="btom-navIcon" >
+        <div class="activeImg" id="activeAir" onclick="window.location.href='#'"> 
+          <i class="ri-user-3-line material-icons"></i>
+        </div>
+        <small class="bottomIcon-textNav">Profile</small>
+      </div>
+
+
+
+
+    </div>
+
+</section>
+    </main>
+
+
+    
+<footer class="footer">
+
+    <div class="footer-glow"></div>
+
+    <div class="footer-newsletter">
+        <div class="newsletter-content">
+            <div>
+                <h3>Stay in the loop</h3>
+                <p>Get updates on new sellers, deals, and product drops</p>
+            </div>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit">
+                    Subscribe
+                    <i class="ri-arrow-right-line"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="footer-main">
+
+        <div class="footer-col footer-brand-col">
+            <div class="footer-logo">
+                <img src="assets/images/logo.svg" alt="EcoData">
+                <span>EcoData Store</span>
+            </div>
+            <p>
+                Ghana's growing marketplace for digital products,
+                physical goods, and professional services.
+            </p>
+            <div class="footer-socials">
+                <a href="#" aria-label="Facebook"><i class="ri-facebook-fill"></i></a>
+                <a href="#" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+                <a href="#" aria-label="Twitter/X"><i class="ri-twitter-x-fill"></i></a>
+                <a href="#" aria-label="TikTok"><i class="ri-tiktok-fill"></i></a>
+                <a href="#" aria-label="WhatsApp"><i class="ri-whatsapp-fill"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h4>Marketplace</h4>
+            <a href="products.html">All Products</a>
+            <a href="categories.html">Categories</a>
+            <a href="sellers.html">Featured Sellers</a>
+            <a href="products.html?sort=newest">New Arrivals</a>
+            <a href="deals.html">Deals &amp; Offers</a>
+        </div>
+
+        <div class="footer-col">
+            <h4>Sell on EcoData</h4>
+            <a href="seller/register.html">Become a Seller</a>
+            <a href="seller/dashboard.html">Seller Dashboard</a>
+            <a href="seller/pricing.html">Pricing &amp; Fees</a>
+            <a href="seller/resources.html">Seller Resources</a>
+        </div>
+
+        <div class="footer-col">
+            <h4>Support</h4>
+            <a href="help.html">Help Center</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="track-order.html">Track Order</a>
+            <a href="returns.html">Returns &amp; Refunds</a>
+            <a href="faq.html">FAQs</a>
+        </div>
+
+        <div class="footer-col">
+            <h4>Company</h4>
+            <a href="about.html">About Us</a>
+            <a href="terms.html">Terms of Service</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="careers.html">Careers</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; <span id="footerYear"></span> EcoData Store. All rights reserved.</p>
+
+        <div class="footer-payments">
+            <span>We accept:</span>
+            <i class="ri-smartphone-line" title="Mobile Money"></i>
+            <i class="ri-bank-card-2-line" title="Debit/Credit Card"></i>
+            <i class="ri-secure-payment-line" title="Secure Checkout"></i>
+        </div>
+
+        <span class="footer-location">
+            <i class="ri-map-pin-2-fill"></i> Made in Ghana 🇬🇭
+        </span>
+    </div>
+
+</footer>
+
+<script>
+  document.getElementById('footerYear').textContent = new Date().getFullYear();
+</script>
+
+  </div>
+
+
+  <script src="scrollreveal.min.js"></script>
+
+<!---=========== SWIPER JS===========-->
+<script src="swiper-bundle.min.js"></script>
+
+  <script src="shop.js"></script>
+
+</body>
+</html>

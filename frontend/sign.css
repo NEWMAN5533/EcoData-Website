@@ -1,0 +1,392 @@
+
+    :root {
+  --bg-cl: #181c47f8;
+  --bg-cl-2: #1f314b;
+  --dark-cl: #0a0a0a;
+  --card-full-bg-cl: rgb(255, 145, 0);
+  --primary-cl: #fff;
+  --secondary-cl: rgb(50, 50, 190);
+  --dark-cl: #0a0a0a;
+
+ /*====NEW===ROOT====*/
+  /*====NEW===ROOT====*/
+  --darkMode-bg-cl: rgb(24, 29, 36) !important;
+  --welcome-card-bg:  #0e141b !important;
+  --background-cl-1: rgb(29, 36, 41);
+  --background-cl-2: rgb(29, 36, 41);
+  --background-cl-2: rgb(29, 36, 41);
+  /***
+  NEW ROOT
+  ***/
+  --btn-bg-cl: rgb(250, 126, 9);
+  --border-cl: rgba(243, 237, 237, 0.301);
+}
+
+
+    *{
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      text-decoration: none;
+    }
+
+
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      width: 100vw;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      overflow-x: hidden;
+    }
+
+
+    .signUp-container
+    {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      padding: 0;
+      overflow-y: hidden;
+      background: var(--bg-cl-2);
+    }
+
+    .signUp-container .navigation{
+      width: 100%;
+      height: 3.5rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      overflow: hidden;
+      padding: 0 1.2rem;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-cl);
+      border-bottom:  1px solid rgb(79, 101, 114);
+      z-index: 999999;
+    }
+
+    .navigation .navigation-left{
+      display: flex;
+      width: 50%;
+      height: 100%;
+      align-items: center;
+      justify-content: start;
+      position: relative;
+    }
+
+    .navigation-left img{
+      width: 3.4rem;
+      height: 3.4rem;
+    }
+
+    .signUp-container .grid-container{
+      width: 100%;
+      height: 100vh;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      position: relative;
+      justify-content: center;
+      align-items: center;
+      margin-top: 3.5rem;
+    }
+
+    .grid-container .sidebar{
+      width: 100%;
+      max-width: 40vw;
+      display: flex;
+      height: 100%;
+      position: sticky;
+      align-items: center;
+      justify-content: center;
+      justify-items: center;
+      border-right: 1px solid  rgb(79, 101, 114);
+      background: url(./css/images/bg.jpg);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+.sidebar .signup-card{
+  width: 80%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  position: relative;
+  border: 3px solid   rgb(225, 229, 231);
+  border-radius: .8rem;
+  backdrop-filter: blur(23px);
+  background: rgba(245, 243, 243, 0.171);
+}
+
+.signup-card .logoImg{
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 90%;
+  height: 60%;
+  margin-bottom: .5rem;
+}
+
+.logoImg h1{
+  margin: 0;
+  color: rgb(42, 64, 66);
+
+}
+
+.signup-card .logoImg img{
+  width: 83%;
+  height: 90%;
+}
+
+.signup-card .sign-note{
+  width: 90%;
+  height: 40%;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  padding: .2rem;
+  border: 2px solid rgb(226, 222, 222);
+  display: flex;
+  flex-direction: column;
+  border-radius: 1rem;
+  box-shadow: 0 10px 20px rgba(243, 237, 237, 0.301);
+  font-size: 1.1rem;
+  color: rgba(20, 20, 22, 0.712);
+  font-weight: 800;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.sign-note .notes{
+  width: 1005;
+  max-width: 90%;
+  white-space: wrap;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: none;
+  color: rgb(65, 43, 2);
+  font-size: 1.3rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 500;
+}
+
+
+/*****
+MAIN MAIN
+****/
+.signUp-container .grid-container .main-main{
+  width: 100%;
+  height: 90vh;
+  position: relative;
+  align-items: center;
+  padding: 2rem;
+  justify-content: center;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+
+
+/****
+MEDIA QUERIES
+***/
+@media (max-width: 320px) {
+      .signUp-container .grid-container{
+     
+      grid-template-columns: repeat(1, 1fr);
+      }
+
+.already{
+  padding-right: .4rem;
+}
+
+
+      
+   .signUp-container .grid-container .sidebar{
+     display: none !important;
+}
+
+
+.signUp-container .grid-container .main-main{
+  padding: 1rem 0 !important;
+}
+
+.signUp-container .grid-container .main-main .container{
+width: 94% !important;
+padding-bottom: 1rem !important;
+border-radius: .5rem !important;
+height: max-content !important;
+}
+
+
+}
+
+@media (max-width: 375px) {
+        .signUp-container .grid-container{
+     
+      grid-template-columns: repeat(1, 1fr);
+      }
+
+      .already{
+  padding-right: .4rem;
+}
+
+
+
+      .signUp-container .grid-container .main-main .container{
+        box-shadow: none !important;
+        padding: 0 !important;
+        max-width: 98% !important;
+      }
+
+      .signUp-container .grid-container .main-main{
+  padding: 0 !important;
+}
+
+
+      
+  .signUp-container .grid-container .sidebar{
+    display: none !important;
+}
+
+
+.signUp-container .grid-container .main-main{
+  padding: 1rem 0 !important;
+}
+
+.signUp-container .grid-container .main-main .container{
+width: 100% !important;
+padding-bottom: 1rem !important;
+border-radius: .5rem !important;
+height: max-content !important;
+border: none !important;
+}
+}
+
+
+@media (max-width: 414px) {
+        .signUp-container .grid-container{
+     
+      grid-template-columns: repeat(1, 1fr);
+      }
+
+.already{
+  padding-right: .4rem;
+}
+
+      
+   .signUp-container .grid-container .sidebar{
+     display: none !important;
+}
+
+
+.signUp-container .grid-container .main-main{
+  padding: 1rem 0 !important;
+}
+
+.signUp-container .grid-container .main-main .container{
+width: 86% !important;
+padding-bottom: 1rem !important;
+border-radius: .5rem !important;
+height: max-content !important;
+}
+}
+
+
+
+
+@media (max-width: 430px) {
+          .signUp-container .grid-container{
+     
+      grid-template-columns: repeat(1, 1fr);
+      }
+
+
+      
+   .signUp-container .grid-container .sidebar{
+     display: none !important;
+}
+
+
+
+.signUp-container .grid-container .main-main .container{
+width: 82% !important;
+padding-bottom: 1rem !important;
+border-radius: .5rem !important;
+height: max-content !important;
+}
+}
+
+
+
+
+@media (max-width: 480px) {
+          .signUp-container .grid-container{
+     
+      grid-template-columns: repeat(1, 1fr);
+      }
+
+
+      
+   .signUp-container .grid-container .sidebar{
+     display: none !important;
+}
+
+
+.signUp-container .grid-container .main-main{
+  padding: 1rem 0 !important;
+}
+
+.signUp-container .grid-container .main-main .container{
+width: 82% !important;
+padding-bottom: 1rem !important;
+border-radius: .5rem !important;
+height: max-content !important;
+}
+}
+
+
+@media (max-width: 600px) {
+  
+}
+
+
+@media (min-width: 768px) {
+  
+}
+
+
+
+
+@media (min-width: 1024px) {
+      .signUp-container .grid-container{
+     
+      grid-template-columns: repeat(2, 1fr);
+      }
+}
+
+
+
+
+@media (min-width: 1366px) {
+      .signUp-container .grid-container{
+     
+      grid-template-columns: repeat(2, 1fr);
+      }
+}

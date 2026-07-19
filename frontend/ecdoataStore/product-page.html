@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> ECODATASTORE || PRODUCTS</title>
+
+      <!--remix icons-->
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
+
+
+  <!---=== css file ===-->
+  <link rel="stylesheet" href="./swiper-bundle.min.css">
+
+  <!--== cdn link ==-->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css" />
+
+
+ <!--== style.css files ===-->
+ <link rel="stylesheet" href="global-container.css">
+ <link rel="stylesheet" href="shoppy.css">
+ <link rel="stylesheet" href="shoppy2.css">
+ <link rel="stylesheet" href="product-page.css">
+</head>
+<body>
+
+  <section class="container">
+
+<!---SIDEBAR-SECTION----->
+<section class="left-sidebar">
+    <!--=== FILTER SIDEBAR ===-->
+        <aside class="filters-sidebar" >
+          <div class="filters-header">
+            <h3>Filters</h3>
+            <button class="filters-clear" id="clearFilters">Clear all</button>
+          </div>
+
+          <!--== Category filter ==-->
+          <div class="filter-group">
+            <h4>Category</h4>
+            <label for="category" class="filter-checkbox">
+              <input type="checkbox" name="category" value="digital">
+              <span>Digital Products</span>
+              <span class="filter-count">(120)</span>
+            </label>
+            <label for="category" class="filter-checkbox">
+              <input type="checkbox" name="category" value="physical">
+              <span>Physical Goods</span>
+              <span class="filter-count">(80)</span>
+            </label>
+            <label for="category" class="filter-checkbox">
+              <input type="checkbox" name="category" value="services">
+              <span>Services</span>
+              <span class="filter-count">(53)</span>
+            </label>
+            <label for="category" class="filter-checkbox">
+              <input type="checkbox" name="category" value="ebooks">
+              <span>Ebooks &amp; Course</span>
+              <span class="filter-count">(38)</span>
+            </label>
+            <label for="category" class="filter-checkbox">
+              <input type="checkbox" name="category" value="dataBundles">
+              <span>Data Bundles</span>
+              <span class="filter-count">(16)</span>
+            </label>
+          </div>
+
+          <!--price range -->
+          <div class="filter-group">
+            <h4>Price Range</h4>
+            <div class="price-range-inputs">
+              <div class="price-input-wrap">
+                <span>₵</span>
+                <input type="number" placeholder="Min" id="PriceMin">
+              </div>
+              <span class="price-range-dash">-</span>
+              <div class="price-input-wrap">
+                <span>₵</span>
+                <input type="number" placeholder="Max" id="PriceMax">
+              </div>
+            </div>
+            <input type="range" id="priceSlider" min="0" max="1000" value="1000" class="price-slider">
+          </div>
+
+          <!--rating filter-->
+          <div class="filter-group">
+            <h4>Rating</h4>
+            <label for="filtering" class="filter-checkbox filter-rating">
+              <input type="checkbox" name="rating" value="4">
+              <span class="rating-stars">
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-fill"></i>
+              </span>
+              <span>&amp; up</span>
+            </label>
+            <label for="filtering" class="filter-checkbox filter-rating">
+              <input type="checkbox" name="rating" value="3">
+              <span class="rating-stars">
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-fill"></i>
+              </span>
+              <span>&amp; up</span>
+            </label>
+          </div>
+
+          <!--seller type filter -->
+          <div class="filter-group">
+            <h4>Seller</h4>
+            <label for="sellerFilter" class="filter-checkbox">
+              <input type="checkbox" name="seller" value="verified">
+              <span>Verified Sellers Only</span>
+            </label>
+            <label for="sellerFilter" class="filter-checkbox">
+              <input type="checkbox" name="seller" value="topRated">
+              <span>Top Rated Sellers</span>
+            </label>
+          </div>
+
+          <!--availability filter-->
+          <div class="filter-group">
+            <h4>Availability</h4>
+            <label for="availability" class="filter-checkbox">
+              <input type="checkbox" name='availability' value="inStock">
+              <span>In Stock</span>
+            </label>
+            <label for="availability" class="filter-checkbox">
+              <input type="checkbox" name='availability' value="onSale">
+              <span>On Sale</span>
+            </label>
+          </div>
+          <button class="btn btn-primary filters-apply">Apply Filters</button>
+        </aside>
+</section>
+<!---=== LEFT SIDEBAR ENDS ====-->
+
+
+<!--== MOBILE SIDEBAR ===-->
+<section class="mobile-sidebar"  id="mobileSidebar">
+  <!--=== FILTER SIDEBAR ===-->
+        <aside class="filters-sidebar">
+          <div class="filters-header">
+            <h3>Filters</h3>
+            <button class="filters-clear" id="clearFilters">Clear all</button>
+          </div>
+
+          <!--== Category filter ==-->
+          <div class="filter-group">
+            <h4>Category</h4>
+            <label for="category" class="filter-checkbox">
+              <input type="checkbox" name="category" value="digital">
+              <span>Digital Products</span>
+              <span class="filter-count">(120)</span>
+            </label>
+            <label for="category" class="filter-checkbox">
+              <input type="checkbox" name="category" value="physical">
+              <span>Physical Goods</span>
+              <span class="filter-count">(80)</span>
+            </label>
+            <label for="category" class="filter-checkbox">
+              <input type="checkbox" name="category" value="services">
+              <span>Services</span>
+              <span class="filter-count">(53)</span>
+            </label>
+            <label for="category" class="filter-checkbox">
+              <input type="checkbox" name="category" value="ebooks">
+              <span>Ebooks &amp; Course</span>
+              <span class="filter-count">(38)</span>
+            </label>
+            <label for="category" class="filter-checkbox">
+              <input type="checkbox" name="category" value="dataBundles">
+              <span>Data Bundles</span>
+              <span class="filter-count">(16)</span>
+            </label>
+          </div>
+
+          <!--price range -->
+          <div class="filter-group">
+            <h4>Price Range</h4>
+            <div class="price-range-inputs">
+              <div class="price-input-wrap">
+                <span>₵</span>
+                <input type="number" placeholder="Min" id="PriceMin">
+              </div>
+              <span class="price-range-dash">-</span>
+              <div class="price-input-wrap">
+                <span>₵</span>
+                <input type="number" placeholder="Max" id="PriceMax">
+              </div>
+            </div>
+            <input type="range" id="priceSlider" min="0" max="1000" value="1000" class="price-slider">
+          </div>
+
+          <!--rating filter-->
+          <div class="filter-group">
+            <h4>Rating</h4>
+            <label for="filtering" class="filter-checkbox filter-rating">
+              <input type="checkbox" name="rating" value="4">
+              <span class="rating-stars">
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-fill"></i>
+              </span>
+              <span>&amp; up</span>
+            </label>
+            <label for="filtering" class="filter-checkbox filter-rating">
+              <input type="checkbox" name="rating" value="3">
+              <span class="rating-stars">
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-fill"></i>
+              </span>
+              <span>&amp; up</span>
+            </label>
+          </div>
+
+          <!--seller type filter -->
+          <div class="filter-group">
+            <h4>Seller</h4>
+            <label for="sellerFilter" class="filter-checkbox">
+              <input type="checkbox" name="seller" value="verified">
+              <span>Verified Sellers Only</span>
+            </label>
+            <label for="sellerFilter" class="filter-checkbox">
+              <input type="checkbox" name="seller" value="topRated">
+              <span>Top Rated Sellers</span>
+            </label>
+          </div>
+
+          <!--availability filter-->
+          <div class="filter-group">
+            <h4>Availability</h4>
+            <label for="availability" class="filter-checkbox">
+              <input type="checkbox" name='availability' value="inStock">
+              <span>In Stock</span>
+            </label>
+            <label for="availability" class="filter-checkbox">
+              <input type="checkbox" name='availability' value="onSale">
+              <span>On Sale</span>
+            </label>
+          </div>
+          <button class="btn btn-primary filters-apply">Apply Filters</button>
+        </aside>
+</section>
+<!--== MOBILE SIDEBAR ENDS ===-->
+
+
+ <!--==  NAVBAR ====-->
+  <nav class="navbar">
+    <div class="left-side">
+     <i class="ri-shopping-bag-3-fill"></i>
+     EcoData<span class="hero-headline">Store</span>
+    </div>
+
+    
+      <div class="nav-menu" style="display: none;">
+          <ul class="nav-list">
+          <li class="nav-item">
+            <a href="#home" class="nav-link active-link">
+              <i class="ri-home-line"></i>
+              <span>Home</span>
+            </a>
+          </li>
+
+           <li class="nav-item">
+            <a href="#featured" class="nav-link">
+              <i class="ri-book-3-line"></i>
+              <span>Featured</span>
+            </a>
+          </li>
+
+            <li class="nav-item">
+            <a href="#discount" class="nav-link">
+                <i class="ri-price-tag-3-line"></i> 
+              <span>Discount</span>
+            </a>
+          </li>
+
+            <li class="nav-item">
+            <a href="#new" class="nav-link">
+                <i class="ri-bookmark-line"></i> 
+              <span>New Books</span>
+            </a>
+          </li>
+
+            <li class="nav-item">
+            <a href="#testimonial" class="nav-link">
+                <i class="ri-message-3-line"></i> 
+              <span>Testimonial</span>
+            </a>
+          </li>
+        </ul>
+     </div>
+
+      <div class="nav-actions">
+        <!--- SEARCH BTN--->
+        <i class="ri-search-line search-button searchLap" id="search-button"></i>
+
+        <!---login button-->
+        <i class="ri-user-line login-button" id="login-button"></i>
+
+
+
+        <!--shopping cart-->
+        <i class="ri-shopping-cart-2-line material-icons cart3">
+            <span  class="cart-count2">1</span>
+          </i>
+
+        <!---theme button -->
+        <i class="ri-moon-line change-theme" id="theme-button"></i>
+
+        
+          
+
+        <!---menu button-->
+        <i class="ri-menu-2-line" id="menuIcon"></i>
+      </div>
+  </nav>
+  <!--== NAVBAR ENDS ====-->
+
+  <!--=== MAIN CONTAINER =====-->
+  <div class="main-container">
+
+
+    <!----middle-container-->
+    <section class="middle-container">
+      <section class=" products-filters-container">
+      
+
+      <section class="seller-status-bar">
+
+          <div class="swiper status-swiper">
+            <h1>Sellers Status</h1>
+              <div class="swiper-wrapper">
+
+                  <!-- "All Sellers" item -->
+                  <div class="swiper-slide status-card status-card-add">
+                      <div class="status-card-bg status-card-bg-muted">
+                          <i class="ri-store-2-line status-add-icon"></i>
+                           <i class="ri-add-line add-status"></i>
+                      </div>
+                      <span class="status-card-name">All Sellers</span>
+                  </div>
+
+                  
+                  <div class="swiper-slide status-card">
+                      <div class="status-card-bg">
+                          <img src="../ecdoataStore/products/men2.png" alt="Ama's Print Studio update">
+                      </div>
+                      <div class="status-card-avatar status-card-avatar-active">
+                          <img src="../ecdoataStore/products/Health & Beauty.jpg" alt="Ama's Print Studio">
+                      </div>
+                      <span class="status-card-name">Ama's Studio</span>
+                  </div>
+
+                  <div class="swiper-slide status-card">
+                      <div class="status-card-bg">
+                          <img src="../ecdoataStore/products/iphone.png" alt="Kwame's Digital Hub update">
+                      </div>
+                      <div class="status-card-avatar status-card-avatar-active">
+                          <img src="../ecdoataStore/products/men1.png" alt="Kwame's Digital Hub">
+                      </div>
+                      <span class="status-card-name">Kwame's Hub</span>
+                  </div>
+
+                  <div class="swiper-slide status-card">
+                      <div class="status-card-bg">
+                          <img src="../ecdoataStore/products/men2.png" alt="Ama's Print Studio update">
+                      </div>
+                      <div class="status-card-avatar status-card-avatar-active">
+                          <img src="../ecdoataStore/products/Health & Beauty.jpg" alt="Ama's Print Studio">
+                      </div>
+                      <span class="status-card-name">Ama's Studio</span>
+                  </div>
+
+                  <div class="swiper-slide status-card">
+                      <div class="status-card-bg">
+                          <img src="../ecdoataStore/products/men3.png" alt="Efua's Bookstore update">
+                      </div>
+                      <div class="status-card-avatar status-card-avatar-viewed">
+                          <img src="../ecdoataStore/hero/hero-flag.png" alt="Efua's Bookstore">
+                      </div>
+                      <span class="status-card-name">Efua's Books</span>
+                  </div>
+
+                  <div class="swiper-slide status-card">
+                      <div class="status-card-bg">
+                          <img src="../ecdoataStore/products/men5.png" alt="TechGear GH update">
+                      </div>
+                      <div class="status-card-avatar status-card-avatar-active">
+                          <img src="../ecdoataStore/products/muslim5.png" alt="TechGear GH">
+                      </div>
+                      <span class="status-card-name">TechGear GH</span>
+                  </div>
+                  
+                  <div class="swiper-slide status-card">
+                      <div class="status-card-bg">
+                          <img src="../ecdoataStore/products/iphone.png" alt="Kwame's Digital Hub update">
+                      </div>
+                      <div class="status-card-avatar status-card-avatar-active">
+                          <img src="../ecdoataStore/products/men1.png" alt="Kwame's Digital Hub">
+                      </div>
+                      <span class="status-card-name">Kwame's Hub</span>
+                  </div>
+
+                  <div class="swiper-slide status-card">
+                      <div class="status-card-bg">
+                          <img src="../ecdoataStore/products/men3.png" alt="Efua's Bookstore update">
+                      </div>
+                      <div class="status-card-avatar status-card-avatar-viewed">
+                          <img src="../ecdoataStore/hero/hero-flag.png" alt="Efua's Bookstore">
+                      </div>
+                      <span class="status-card-name">Efua's Books</span>
+                  </div>
+
+                  <div class="swiper-slide status-card">
+                      <div class="status-card-bg">
+                          <img src="../ecdoataStore/products/men4.png" alt="Nana's Fashion House update">
+                      </div>
+                      <div class="status-card-avatar status-card-avatar-active">
+                          <img src="../ecdoataStore/products/com.png" alt="Nana's Fashion House">
+                      </div>
+                      <span class="status-card-name">Nana's Fashion</span>
+                  </div>
+
+                  <div class="swiper-slide status-card">
+                      <div class="status-card-bg">
+                          <img src="../ecdoataStore/products/men6.png" alt="Kofi's Gadgets update">
+                      </div>
+                      <div class="status-card-avatar status-card-avatar-viewed">
+                          <img src="../ecdoataStore/products/kitchen.png" alt="Kofi's Gadgets">
+                      </div>
+                      <span class="status-card-name">Kofi's Gadgets</span>
+                  </div>
+
+                    <div class="swiper-slide status-card">
+                      <div class="status-card-bg">
+                          <img src="../ecdoataStore/products/men4.png" alt="Nana's Fashion House update">
+                      </div>
+                      <div class="status-card-avatar status-card-avatar-active">
+                          <img src="../ecdoataStore/products/com.png" alt="Nana's Fashion House">
+                      </div>
+                      <span class="status-card-name">Nana's Fashion</span>
+                  </div>
+
+                    <div class="swiper-slide status-card">
+                      <div class="status-card-bg">
+                          <img src="../ecdoataStore/products/men3.png" alt="Efua's Bookstore update">
+                      </div>
+                      <div class="status-card-avatar status-card-avatar-viewed">
+                          <img src="../ecdoataStore/hero/hero-flag.png" alt="Efua's Bookstore">
+                      </div>
+                      <span class="status-card-name">Efua's Books</span>
+                  </div>
+
+              </div>
+          </div>
+
+      </section>
+
+
+
+
+
+        <div class="filter-bg-container">
+          <!---MOBILE FILTER TOGGLE -->
+        <button class="mobile-filter-toggle" id="mobileFilterToggle">
+          <i class="ri-filter-3-line"></i>
+          Filters
+        </button>
+
+      <!--Active filter pills ---->
+          <div class="active-filters" id="activeFilters">
+            <span class="filter-pill">
+              Digital Products
+              <i class="ri-close-line"></i>
+            </span>
+            <span class="filter-pill">
+              4<i class="ri-star-fill"></i> &amp; up
+              <i class="ri close-line"></i>
+            </span>
+          </div>
+
+
+       
+        </div>
+
+        
+    
+      </section>
+      <section class="filter-container">
+                  <!--Page header-->
+      <div class="products-page-header">
+        <div class="allProducts">
+          <span class="products-breadcrumb">Home / Products</span>
+          <h1>All Products</h1>
+          <p><span id="resultCount">248</span> result found</p>
+        </div>
+
+                      <!----============ SEARCH ===============-->
+    <div class="search2" id="search-content2">
+      <form action="" class="search-form2">
+        <i class="ri-search-line search-icon2"></i>
+        <input type="search" placeholder="What are you looking for?" class="search-input2">
+      </form>
+
+      <i class="ri-close-line search-close" id="search-close"></i>
+    </div>
+
+        <div class="products-sort">
+          <label for="sortSelect">Sort by:</label>
+          <select name="sorting" id="sortSelect" class="sort-select">
+            <option value="relevance">Relevance</option>
+            <option value="newest">Newest First</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: Hight to Low</option>
+            <option value="rating">Highest Rated</option>
+            <option value="popular">Most Popular</option>
+          </select>
+        </div>
+      </div>
+      </section>
+     
+
+
+
+        
+
+        
+<section class="products-main-container">
+
+<div class="all-products-wrapper">
+
+
+  <!---========== RECENTLY UPLOADED ==========-->
+<section class="recent-uploads">
+
+    <div class="recent-header">
+        <div>
+            <span class="section-badge">
+                <i class="ri-sparkling-2-fill"></i>
+                Fresh Arrivals
+            </span>
+            <h2>Recently <span class="text-gradient">Uploaded</span></h2>
+            <p>New products and services just added by our sellers</p>
+        </div>
+
+        <a href="products.html?sort=newest" class="btn-link">
+            View All New
+            <i class="ri-arrow-right-line"></i>
+        </a>
+    </div>
+
+    <div class="recent-grid">
+
+        <article class="product-card">
+            <div class="product-thumb">
+                <img src="../ecdoataStore/products/men6.png" alt="Instagram Growth Guide">
+                <span class="product-new-badge">
+                    <i class="ri-flashlight-fill"></i> New
+                </span>
+                <button class="product-wishlist" aria-label="Add to wishlist">
+                    <i class="ri-heart-line"></i>
+                </button>
+            </div>
+            <div class="product-info">
+                <span class="product-category">Ebook / Course</span>
+                <h4>Instagram Growth Guide 2026</h4>
+                <div class="product-meta-row">
+                    <span class="product-seller">
+                        <img src="../ecdoataStore/products/men2.png" alt="">
+                        Kwame's Digital Hub
+                    </span>
+                    <span class="product-time">2h ago</span>
+                </div>
+                <div class="product-price-row">
+                    <span class="product-price">₵30.00</span>
+                    <button class="product-add-btn" aria-label="Add to cart">
+                        <i class="ri-add-line"></i>
+                    </button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card">
+            <div class="product-thumb">
+                <img src="../ecdoataStore/products/men3.png" alt="Handmade Beaded Bracelet">
+                <span class="product-new-badge">
+                    <i class="ri-flashlight-fill"></i> New
+                </span>
+                <button class="product-wishlist" aria-label="Add to wishlist">
+                    <i class="ri-heart-line"></i>
+                </button>
+            </div>
+            <div class="product-info">
+                <span class="product-category">Fashion</span>
+                <h4>Handmade Beaded Bracelet Set</h4>
+                <div class="product-meta-row">
+                    <span class="product-seller">
+                        <img src="assets/images/seller-avatar-5.jpg" alt="">
+                        Nana's Fashion House
+                    </span>
+                    <span class="product-time">5h ago</span>
+                </div>
+                <div class="product-price-row">
+                    <span class="product-price">₵25.00</span>
+                    <button class="product-add-btn" aria-label="Add to cart">
+                        <i class="ri-add-line"></i>
+                    </button>
+                </div>
+            </div>
+        </article>
+
+        
+        <article class="product-card">
+            <div class="product-thumb">
+                <img src="../ecdoataStore/products/men11.png" alt="Bluetooth Speaker Mini">
+                <span class="product-new-badge">
+                    <i class="ri-flashlight-fill"></i> New
+                </span>
+                <button class="product-wishlist" aria-label="Add to wishlist">
+                    <i class="ri-heart-line"></i>
+                </button>
+            </div>
+            <div class="product-info">
+                <span class="product-category">Electronics</span>
+                <h4>Bluetooth Speaker Mini</h4>
+                <div class="product-meta-row">
+                    <span class="product-seller">
+                        <img src="assets/images/seller-avatar-3.jpg" alt="">
+                        TechGear GH
+                    </span>
+                    <span class="product-time">1d ago</span>
+                </div>
+                <div class="product-price-row">
+                    <span class="product-price">₵150.00</span>
+                    <button class="product-add-btn" aria-label="Add to cart">
+                        <i class="ri-add-line"></i>
+                    </button>
+                </div>
+            </div>
+        </article>
+
+          <article class="product-card">
+            <div class="product-thumb">
+                <img src="../ecdoataStore/products/men11.png" alt="Bluetooth Speaker Mini">
+                <span class="product-new-badge">
+                    <i class="ri-flashlight-fill"></i> New
+                </span>
+                <button class="product-wishlist" aria-label="Add to wishlist">
+                    <i class="ri-heart-line"></i>
+                </button>
+            </div>
+            <div class="product-info">
+                <span class="product-category">Electronics</span>
+                <h4>Bluetooth Speaker Mini</h4>
+                <div class="product-meta-row">
+                    <span class="product-seller">
+                        <img src="assets/images/seller-avatar-3.jpg" alt="">
+                        TechGear GH
+                    </span>
+                    <span class="product-time">1d ago</span>
+                </div>
+                <div class="product-price-row">
+                    <span class="product-price">₵150.00</span>
+                    <button class="product-add-btn" aria-label="Add to cart">
+                        <i class="ri-add-line"></i>
+                    </button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card">
+            <div class="product-thumb">
+                <img src="../ecdoataStore/products/men6.png" alt="Logo Design Starter Pack">
+                <span class="product-new-badge">
+                    <i class="ri-flashlight-fill"></i> New
+                </span>
+                <button class="product-wishlist" aria-label="Add to wishlist">
+                    <i class="ri-heart-line"></i>
+                </button>
+            </div>
+            <div class="product-info">
+                <span class="product-category">Service</span>
+                <h4>Logo Design Starter Pack</h4>
+                <div class="product-meta-row">
+                    <span class="product-seller">
+                        <img src="assets/images/seller-avatar-2.jpg" alt="">
+                        Ama's Print Studio
+                    </span>
+                    <span class="product-time">1d ago</span>
+                </div>
+                <div class="product-price-row">
+                    <span class="product-price">₵80.00</span>
+                    <button class="product-add-btn" aria-label="Add to cart">
+                        <i class="ri-add-line"></i>
+                    </button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card">
+            <div class="product-thumb">
+                <img src="../ecdoataStore/products/men1.png" alt="Bluetooth Speaker Mini">
+                <span class="product-new-badge">
+                    <i class="ri-flashlight-fill"></i> New
+                </span>
+                <button class="product-wishlist" aria-label="Add to wishlist">
+                    <i class="ri-heart-line"></i>
+                </button>
+            </div>
+            <div class="product-info">
+                <span class="product-category">Electronics</span>
+                <h4>Bluetooth Speaker Mini</h4>
+                <div class="product-meta-row">
+                    <span class="product-seller">
+                        <img src="assets/images/seller-avatar-3.jpg" alt="">
+                        TechGear GH
+                    </span>
+                    <span class="product-time">1d ago</span>
+                </div>
+                <div class="product-price-row">
+                    <span class="product-price">₵150.00</span>
+                    <button class="product-add-btn" aria-label="Add to cart">
+                        <i class="ri-add-line"></i>
+                    </button>
+                </div>
+            </div>
+        </article>
+
+           <article class="product-card">
+            <div class="product-thumb">
+                <img src="../ecdoataStore/products/men12.png" alt="Logo Design Starter Pack">
+                <span class="product-new-badge">
+                    <i class="ri-flashlight-fill"></i> New
+                </span>
+                <button class="product-wishlist" aria-label="Add to wishlist">
+                    <i class="ri-heart-line"></i>
+                </button>
+            </div>
+            <div class="product-info">
+                <span class="product-category">Service</span>
+                <h4>Logo Design Starter Pack</h4>
+                <div class="product-meta-row">
+                    <span class="product-seller">
+                        <img src="assets/images/seller-avatar-2.jpg" alt="">
+                        Ama's Print Studio
+                    </span>
+                    <span class="product-time">1d ago</span>
+                </div>
+                <div class="product-price-row">
+                    <span class="product-price">₵80.00</span>
+                    <button class="product-add-btn" aria-label="Add to cart">
+                        <i class="ri-add-line"></i>
+                    </button>
+                </div>
+            </div>
+        </article>
+
+         <article class="product-card">
+            <div class="product-thumb">
+                <img src="../ecdoataStore/products/men4.png" alt="Logo Design Starter Pack">
+                <span class="product-new-badge">
+                    <i class="ri-flashlight-fill"></i> New
+                </span>
+                <button class="product-wishlist" aria-label="Add to wishlist">
+                    <i class="ri-heart-line"></i>
+                </button>
+            </div>
+            <div class="product-info">
+                <span class="product-category">Service</span>
+                <h4>Logo Design Starter Pack</h4>
+                <div class="product-meta-row">
+                    <span class="product-seller">
+                        <img src="assets/images/seller-avatar-2.jpg" alt="">
+                        Ama's Print Studio
+                    </span>
+                    <span class="product-time">1d ago</span>
+                </div>
+                <div class="product-price-row">
+                    <span class="product-price">₵80.00</span>
+                    <button class="product-add-btn" aria-label="Add to cart">
+                        <i class="ri-add-line"></i>
+                    </button>
+                </div>
+            </div>
+        </article>
+
+    </div>
+
+</section>
+
+
+
+
+  <!--========= MOST VIEWED / MOST PURCHASED ======-->
+  <section class="trending-products">
+
+    <div class="trending-header">
+        <div>
+            <span class="section-badge">
+                <i class="ri-fire-fill"></i>
+                Trending Now
+            </span>
+            <h2>What Everyone's <span class="text-gradient">Loving</span></h2>
+            <p>See what's catching attention across EcoData Store</p>
+        </div>
+
+        <div class="trending-tabs">
+            <button class="trending-tab active" data-tab="viewed">
+                <i class="ri-eye-line"></i>
+                Most Viewed
+            </button>
+            <button class="trending-tab" data-tab="purchased">
+                <i class="ri-shopping-bag-line"></i>
+                Most Purchased
+            </button>
+        </div>
+    </div>
+
+  <!---=== SWIPER ROW PRODUCTS =======-->
+<section class="product2-grid-container" style='display:none;'>
+              <div class="section-title">
+                <h2>Trending Products</h2>
+              </div>
+              <div class="products-2-cards-wrapper top-sell swiper">
+                <div class="swiper-wrapper">
+
+                <div class="product-2 swiper-slide">
+                    <img src="./products/men12.png" alt="" loading="lazy">
+                    <div class="overlay">
+                      <h2>Zenbook Collection</h2>
+                      <p>Shop Now</p>
+                    </div>
+                </div>
+
+                <div class="product-2 swiper-slide">
+           
+                    <img src="./products/com.png" alt="" loading="lazy">
+                    <div class="overlay">
+                      <h2>Zenbook Collection</h2>
+                      <p>Shop Now</p>
+                    </div>
+                </div>
+
+                 <div class="product-2 swiper-slide">
+           
+                    <img src="./products/men3.png" alt="" loading="lazy">
+                    <div class="overlay">
+                      <h2>Zenbook Collection</h2>
+                      <p>Shop Now</p>
+                    </div>
+                </div>
+              </div>
+              </div>
+</section>
+
+
+
+    <!-- Most Viewed Panel -->
+    <div class="trending-grid" id="panel-viewed">
+
+        <article class="product-card">
+            <div class="product-thumb">
+                <img src="../css/marketsImages/watch2.jpg" alt="Canva Pro Template Pack">
+                <span class="product-metric">
+                    <i class="ri-eye-fill"></i> 12.4k
+                </span>
+                <button class="product-wishlist" aria-label="Add to wishlist">
+                    <i class="ri-heart-line"></i>
+                </button>
+            </div>
+            <div class="product-info">
+                <span class="product-category">Digital Product</span>
+                <h4>Canva Pro Template Pack</h4>
+                <div class="product-rating">
+                    <i class="ri-star-fill"></i> 4.8
+                    <span class="product-rating-count">(320)</span>
+                </div>
+                <div class="product-price-row">
+                    <span class="product-price">₵45.00</span>
+                    <button class="product-add-btn" aria-label="Add to cart">
+                        <i class="ri-add-line"></i>
+                    </button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card">
+            <div class="product-thumb">
+                <img src="../css/marketsImages/thinkbook-back.jpg" alt="Wireless Earbuds Pro">
+                <span class="product-metric">
+                    <i class="ri-eye-fill"></i> 9.8k
+                </span>
+                <button class="product-wishlist" aria-label="Add to wishlist">
+                    <i class="ri-heart-line"></i>
+                </button>
+            </div>
+            <div class="product-info">
+                <span class="product-category">Electronics</span>
+                <h4>Wireless Earbuds Pro</h4>
+                <div class="product-rating">
+                    <i class="ri-star-fill"></i> 4.6
+                    <span class="product-rating-count">(210)</span>
+                </div>
+                <div class="product-price-row">
+                    <span class="product-price">₵180.00</span>
+                    <button class="product-add-btn" aria-label="Add to cart">
+                        <i class="ri-add-line"></i>
+                    </button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card">
+            <div class="product-thumb">
+                <img src="../ecdoataStore/products/men12.png" alt="Complete Web Dev Course">
+                <span class="product-metric">
+                    <i class="ri-eye-fill"></i> 8.1k
+                </span>
+                <button class="product-wishlist" aria-label="Add to wishlist">
+                    <i class="ri-heart-line"></i>
+                </button>
+            </div>
+            <div class="product-info">
+                <span class="product-category">Ebook / Course</span>
+                <h4>Complete Web Dev Course</h4>
+                <div class="product-rating">
+                    <i class="ri-star-fill"></i> 4.9
+                    <span class="product-rating-count">(540)</span>
+                </div>
+                <div class="product-price-row">
+                    <span class="product-price">₵95.00</span>
+                    <button class="product-add-btn" aria-label="Add to cart">
+                        <i class="ri-add-line"></i>
+                    </button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card">
+            <div class="product-thumb">
+                <img src="../ecdoataStore/products/iphone.png" alt="Logo Design Service">
+                <span class="product-metric">
+                    <i class="ri-eye-fill"></i> 7.3k
+                </span>
+                <button class="product-wishlist" aria-label="Add to wishlist">
+                    <i class="ri-heart-line"></i>
+                </button>
+            </div>
+            <div class="product-info">
+                <span class="product-category">Service</span>
+                <h4>Logo Design Service</h4>
+                <div class="product-rating">
+                    <i class="ri-star-fill"></i> 4.7
+                    <span class="product-rating-count">(180)</span>
+                </div>
+                <div class="product-price-row">
+                    <span class="product-price">₵120.00</span>
+                    <button class="product-add-btn" aria-label="Add to cart">
+                        <i class="ri-add-line"></i>
+                    </button>
+                </div>
+            </div>
+        </article>
+
+    </div>
+
+    <!-- Most Purchased Panel -->
+    <div class="trending-grid" id="panel-purchased" hidden>
+
+        <article class="product-card">
+            <div class="product-thumb">
+                <img src="../css/marketsImages/kitchen.png" alt="10GB Data Bundle">
+                <span class="product-metric product-metric-purchased">
+                    <i class="ri-shopping-bag-fill"></i> 3.2k sold
+                </span>
+                <button class="product-wishlist" aria-label="Add to wishlist">
+                    <i class="ri-heart-line"></i>
+                </button>
+            </div>
+            <div class="product-info">
+                <span class="product-category">Data Bundle</span>
+                <h4>10GB Monthly Data Bundle</h4>
+                <div class="product-rating">
+                    <i class="ri-star-fill"></i> 4.9
+                    <span class="product-rating-count">(1.1k)</span>
+                </div>
+                <div class="product-price-row">
+                    <span class="product-price">₵55.00</span>
+                    <button class="product-add-btn" aria-label="Add to cart">
+                        <i class="ri-add-line"></i>
+                    </button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card">
+            <div class="product-thumb">
+                <img src="../ecdoataStore/products/men6.png" alt="Business Plan Template">
+                <span class="product-metric product-metric-purchased">
+                    <i class="ri-shopping-bag-fill"></i> 2.6k sold
+                </span>
+                <button class="product-wishlist" aria-label="Add to wishlist">
+                    <i class="ri-heart-line"></i>
+                </button>
+            </div>
+            <div class="product-info">
+                <span class="product-category">Digital Product</span>
+                <h4>Business Plan Template</h4>
+                <div class="product-rating">
+                    <i class="ri-star-fill"></i> 4.8
+                    <span class="product-rating-count">(760)</span>
+                </div>
+                <div class="product-price-row">
+                    <span class="product-price">₵35.00</span>
+                    <button class="product-add-btn" aria-label="Add to cart">
+                        <i class="ri-add-line"></i>
+                    </button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card">
+            <div class="product-thumb">
+                <img src="../ecdoataStore/products/men3.png" alt="Phone Case Bundle">
+                <span class="product-metric product-metric-purchased">
+                    <i class="ri-shopping-bag-fill"></i> 1.9k sold
+                </span>
+                <button class="product-wishlist" aria-label="Add to wishlist">
+                    <i class="ri-heart-line"></i>
+                </button>
+            </div>
+            <div class="product-info">
+                <span class="product-category">Accessories</span>
+                <h4>Phone Case Bundle (3-Pack)</h4>
+                <div class="product-rating">
+                    <i class="ri-star-fill"></i> 4.5
+                    <span class="product-rating-count">(430)</span>
+                </div>
+                <div class="product-price-row">
+                    <span class="product-price">₵60.00</span>
+                    <button class="product-add-btn" aria-label="Add to cart">
+                        <i class="ri-add-line"></i>
+                    </button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card">
+            <div class="product-thumb">
+                <img src="../ecdoataStore/products/product1 (2).jpg" alt="CV Writing Service">
+                <span class="product-metric product-metric-purchased">
+                    <i class="ri-shopping-bag-fill"></i> 1.4k sold
+                </span>
+                <button class="product-wishlist" aria-label="Add to wishlist">
+                    <i class="ri-heart-line"></i>
+                </button>
+            </div>
+            <div class="product-info">
+                <span class="product-category">Service</span>
+                <h4>Professional CV Writing</h4>
+                <div class="product-rating">
+                    <i class="ri-star-fill"></i> 4.9
+                    <span class="product-rating-count">(390)</span>
+                </div>
+                <div class="product-price-row">
+                    <span class="product-price">₵40.00</span>
+                    <button class="product-add-btn" aria-label="Add to cart">
+                        <i class="ri-add-line"></i>
+                    </button>
+                </div>
+            </div>
+        </article>
+
+    </div>
+
+</section>
+
+
+
+            <!---===CONTAINER==ENR 2DS=====-->
+</div>
+
+
+  <!--pagination-->
+          <div class="products-pagination">
+            <button class="page-nav" disabled>
+              <i class="ri-arrow-left-line"></i>
+            </button>
+            <button class="page-num active">1</button>
+            <button class="page-num ">2</button>
+            <button class="page-num ">3</button>
+            <button class="page-ellipsis ">...</button>
+            <button class="page-num ">12</button>
+            <button class="page-nav" disabled>
+              <i class="ri-arrow-right-line"></i>
+            </button>
+          </div>
+</section>
+
+</section>
+   
+    
+
+         
+
+
+
+
+    <!---MAIN CONTAINER-CLOSER-->
+  </div>
+
+ 
+
+
+
+  
+<footer class="footer">
+
+    <div class="footer-glow"></div>
+
+    <div class="footer-newsletter">
+        <div class="newsletter-content">
+            <div>
+                <h3>Stay in the loop</h3>
+                <p>Get updates on new sellers, deals, and product drops</p>
+            </div>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit">
+                    Subscribe
+                    <i class="ri-arrow-right-line"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="footer-main">
+
+        <div class="footer-col footer-brand-col">
+            <div class="footer-logo">
+                <img src="assets/images/logo.svg" alt="EcoData">
+                <span>EcoData Store</span>
+            </div>
+            <p>
+                Ghana's growing marketplace for digital products,
+                physical goods, and professional services.
+            </p>
+            <div class="footer-socials">
+                <a href="#" aria-label="Facebook"><i class="ri-facebook-fill"></i></a>
+                <a href="#" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+                <a href="#" aria-label="Twitter/X"><i class="ri-twitter-x-fill"></i></a>
+                <a href="#" aria-label="TikTok"><i class="ri-tiktok-fill"></i></a>
+                <a href="#" aria-label="WhatsApp"><i class="ri-whatsapp-fill"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h4>Marketplace</h4>
+            <a href="products.html">All Products</a>
+            <a href="categories.html">Categories</a>
+            <a href="sellers.html">Featured Sellers</a>
+            <a href="products.html?sort=newest">New Arrivals</a>
+            <a href="deals.html">Deals &amp; Offers</a>
+        </div>
+
+        <div class="footer-col">
+            <h4>Sell on EcoData</h4>
+            <a href="seller/register.html">Become a Seller</a>
+            <a href="seller/dashboard.html">Seller Dashboard</a>
+            <a href="seller/pricing.html">Pricing &amp; Fees</a>
+            <a href="seller/resources.html">Seller Resources</a>
+        </div>
+
+        <div class="footer-col">
+            <h4>Support</h4>
+            <a href="help.html">Help Center</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="track-order.html">Track Order</a>
+            <a href="returns.html">Returns &amp; Refunds</a>
+            <a href="faq.html">FAQs</a>
+        </div>
+
+        <div class="footer-col">
+            <h4>Company</h4>
+            <a href="about.html">About Us</a>
+            <a href="terms.html">Terms of Service</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="careers.html">Careers</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; <span id="footerYear"></span> EcoData Store. All rights reserved.</p>
+
+        <div class="footer-payments">
+            <span>We accept:</span>
+            <i class="ri-smartphone-line" title="Mobile Money"></i>
+            <i class="ri-bank-card-2-line" title="Debit/Credit Card"></i>
+            <i class="ri-secure-payment-line" title="Secure Checkout"></i>
+        </div>
+
+        <span class="footer-location">
+            <i class="ri-map-pin-2-fill"></i> Made in Ghana 🇬🇭
+        </span>
+    </div>
+
+</footer>
+
+<script>
+  document.getElementById('footerYear').textContent = new Date().getFullYear();
+</script>
+
+  </section>
+<!--FILTERS JS-->
+<script>
+  
+
+
+  document.getElementById('clearFilters').addEventListener('click', ()=> {
+    document.querySelectorAll('filter-checkbox input').forEach(cb => cb.checked = false);
+    document.getElementById('priceMin').value = '';
+    document.getElementById('priceMax').value = '';
+  });
+
+  document.querySelectorAll('page-nub').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.page-num').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  
+</script>
+
+<script src="scrollreveal.min.js"></script>
+
+<!---=========== SWIPER JS===========-->
+<script src="swiper-bundle.min.js"></script>
+
+<script src="products js"></script>
+
+
+ <script src="https://cdnjs.coudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script> 
+
+</body>
+</html>

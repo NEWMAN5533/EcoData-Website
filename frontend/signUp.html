@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up | EcoData</title>
+  <link rel="stylesheet" href="globalStyle.css">
+  <link rel="stylesheet" href="signLogin.css">
+  <link rel="stylesheet" href="sign.css">
+
+
+
+
+
+</head>
+<body>
+
+
+<div class="signUp-container">
+  <!----navbar--->
+  <div class="navigation">
+    <div class="navigation-left">
+      <img src="./css/icons/icon-shortcut.png" alt="" loading="lazy">
+    </div>
+    <div class="navigaition-right"></div>
+  </div>
+    <div class="grid-container">
+
+
+
+      <!--SIDEBAR-->
+      <div class="sidebar">
+       <div class="signup-card">
+        <div class="logoImg">
+          <img src="./css/icons/icon-shortcut.png" alt="" loading="lazy">
+          <h1>EcoData</h1>
+        </div>
+        
+        <div class="sign-note">
+          Get started by: 
+          <p class="notes">
+         Creating an account for faster checkOut. 
+          </p>
+        </div>
+       </div>
+      </div>
+
+
+
+      <div class="main-main">
+
+  <div class="container" >
+    <h2>Create New Account</h2>
+    <form id="signup-form">
+
+<div class="formFillCard">
+  <div class="formFillCard-top">
+    <label> User Name</label>
+  </div>
+
+  <div class="formFillCard-bottom">
+    <div class="formInputCreate">
+      <img src="./css/uiIcons/userName.png" alt="user" loading="lazy">
+        <input type="text" id="username" placeholder="Username"  />
+    </div>
+
+  </div>
+</div>
+
+  <div class="formFillCard">
+  <div class="formFillCard-top">
+    <label> Email Address</label>
+  </div>
+  <div class="formFillCard-bottom">
+    <div class="formInputCreate">
+      <img class="curNone" src="./css/uiIcons/email.png" alt="email" loading="lazy">
+        <input type="email" id="email" placeholder="Email" />
+    </div>
+ 
+  </div>
+     </div>
+
+  <div class="formFillCard">
+  <div class="formFillCard-top">
+    <label>Choose Password</label>
+  </div>
+  <div class="formFillCard-bottom">
+    <div class="formInputCreate">
+      <img class="curNone" src="./css/uiIcons/lock.png" alt="lock" loading="lazy">
+      <input  type="password" id="password" placeholder=" Password" />
+      <img id="togglePassword" class="curYes" src="./css/uiIcons/eye.png" alt="toggle password">
+    </div>
+     
+  </div>
+
+  <!---confirm password-->
+
+</div>
+
+  <div class="formFillCard">
+  <div class="formFillCard-top">
+    <label>Confirm password</label>
+  </div>
+
+  <div class="formFillCard-bottom">
+    <div class="formInputCreate">
+      <img class="curNone" src="./css/uiIcons/lock.png" alt="lock" loading="lazy">
+      <input  type="password" id="confirmPassword" placeholder="Password" />
+      <img id="toggleConfirmPassword" class="curYes" src="./css/uiIcons/eye.png" alt="toggle password">
+    </div>
+  
+  </div>
+
+  <!---confirm password-->
+
+</div>
+
+<div class="already">
+ <p>Already have an account? <button type="button" class="alloginBtn" onclick="window.location.href = 'login.html'" >Login</button></p>
+</div>
+   
+
+
+  <button class="signUpBtn"  id="signBtn" type="submit">
+        <span class="spinner"></span>
+        <span class="btn-text">Sign Up</span>
+  </button>
+
+
+    </form>
+
+  </div>
+
+      </div>
+</div>
+
+
+
+
+
+
+
+
+<!-- Firebase Core -->
+<script type="module" src="SignUp.js">
+
+</script>
+
+  
+
+<script>
+
+  document.addEventListener("DOMContentLoaded", () => {
+
+  const password = document.getElementById("password");
+  const togglePassword = document.getElementById("togglePassword");
+
+
+
+  togglePassword.addEventListener("click", () => {
+    const isPassword = password.type === "password";
+
+    // Toggle input type
+    password.type = isPassword ? "text" : "password";
+
+    // Toggle icon image
+    togglePassword.src = isPassword 
+      ? "./css/uiIcons/hide.png" 
+      : "./css/uiIcons/eye.png";
+  });
+  
+  });
+
+
+  // toggle confirmPassword
+  const confirmPassword = document.getElementById("confirmPassword");
+  const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
+
+  toggleConfirmPassword.addEventListener("click", () => {
+    const isPassword = confirmPassword.type === "password";
+
+    // Toggle input type
+    confirmPassword.type = isPassword ? "text" : "password";
+
+    // Toggle icon
+    toggleConfirmPassword.src = isPassword ? "./css/uiIcons/hide.png" : "./css/uiIcons/eye.png";
+  });
+
+</script>
+
+  
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <div id="agentDashboard">
+  <h2>Welcome, <span id="agentName"></span></h2>
+  <p>Balance: GHS <span id="agentBalance">0</span></p>
+
+
+    <!-- PRICING SECTION -->
+  <div class="card">
+    <h3>Set Your Prices</h3>
+    <table id="pricingTable">
+      <thead>
+        <tr>
+          <th>Network</th>
+          <th>Bundle</th>
+          <th>Base Price</th>
+          <th>Your Price</th>
+          <th>Profit</th>
+          <th>Save</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <h3>Request Withdrawal</h3>
+  <form id="withdrawForm">
+    <input type="number" id="withdrawAmount" placeholder="Amount (GHS)" required />
+    <input type="text" id="momoNumber" placeholder="Mobile Money Number" required />
+    <button type="submit">Request Withdrawal</button>
+  </form>
+
+  <h3>Withdrawal History</h3>
+  <table id="withdrawHistory">
+    <thead>
+      <tr>
+        <th>Amount</th>
+        <th>MoMo Number</th>
+        <th>Status</th>
+        <th>Requested At</th>
+        <th>Approved At</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+  <script type="module" src="agentDashboard.js"></script>
+</body>
+</html>
