@@ -1,0 +1,5418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <meta name="google-site-verification" content="uPuuYtdufpe-I9fBtT046jnMoZO7yvAEzEyCemHr1S0" />
+
+  <meta name="title" content="EcoData">
+  <meta name="description" content=" Buy affordable data bundles for MTN, Telecel & AirtelTigo with Fast delivery, Secure Payment, and the best discount in Ghana. Shop affordable data packages for browsing, streaming, and more on Ecodata">
+  <title>EcoData</title>
+
+
+  <!---shortcut-icon-->
+  <link rel="shortcut icon" href="./css/icons/icon-shortcut.png" type="image/png">
+
+  <!---ICO-->
+  <link rel="shortcut icon" href="./css/icons/favicon-ico.png" type="image/png">
+
+<!---FULL-OPEN-GRAPH-->
+<meta property="og:title" content="Buy Cheap Data Bundles in Ghana on Ecodata Website">
+<meta property="og:description" content="Affordable MTN, Telecel & AirtelTigo data bundles. Reliable, Fastest-delivery, and secure paystack payment.">
+<meta property="og:url" content="https://ecodata-app.onrender.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EcoData">
+
+
+<!----GOOGLE-SITE-SEARCH-ENDS-->
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+
+<!---GOOGLE MATERIAL ICON--LINK---->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!--remix icons-->
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
+
+<!--=== DARK MODE SCRIPT ========-->
+<script>
+
+document.addEventListener("DOMContentLoaded", ()=> {
+
+
+ 
+// theme script (dark & light mode)
+  const toggle = document.getElementById("themeToggle");
+  const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  const savedTheme = localStorage.getItem("theme");
+
+  function applyTheme(theme) {
+    if (theme === "dark") {
+      document.body.classList.add("dark-mode");
+      toggle.checked = true;
+    } else {
+      document.body.classList.remove("dark-mode");
+      toggle.checked = false;
+    }
+  }
+
+  if (savedTheme) {
+    applyTheme(savedTheme);
+  } else {
+    applyTheme(systemPrefersDark ? "dark" : "light");
+  }
+
+  toggle.addEventListener("change", () => {
+    if (toggle.checked) {
+      localStorage.setItem("theme", "dark");
+      applyTheme("dark");
+    } else {
+      localStorage.setItem("theme", "light");
+      applyTheme("light");
+    }
+  });
+
+  // Auto-change if system theme changes and user has no preference
+  window.matchMedia("(prefers-color-scheme: dark)").addListener(e => {
+    if (!localStorage.getItem("theme")) {
+      applyTheme(e.matches ? "dark" : "light");
+    }
+});
+
+
+});
+
+
+</script>
+<!--=== DARK MODE SCRIPT ENDS ===-->
+
+  <!---css-link-->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styleGlobal.css">
+  <link rel="stylesheet" href="styleGlobal2.css">
+  <link rel="stylesheet" href="styleGlobal3.css">
+  <link rel="stylesheet" href="styleGlobal4.css">
+  <link rel="stylesheet" href="styleSkeletonUi.css">
+  <link rel="stylesheet" href="homePage.css">
+  <link rel="stylesheet" href="homeTable.css">
+
+  <!---new bundle card style----->
+  <link rel="stylesheet" href="newCardStyle.css">
+
+
+
+
+
+
+</head>
+
+<!---body section---->
+<body>
+    <!--100vw & 100vh container---->
+  <div class="container">
+
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+  <!--sidebar----->
+    <div class="ecodata-sidebar" id="ecoDataSidebar">
+    <div class="ecodata-sidebar-top">
+        <div class="userProfile-container">
+            <div class="user" id="userPro">
+              <span class="us">
+                <h1>U</h1>
+              </span>
+              <h3>User Panel</h3>
+            </div>
+        </div>
+    </div>
+      <!---sidebar-middle-->
+    <div class="ecodata-sidebar-middle">
+        <!---middle-->
+    <div class="quick-links-section">
+      <div class="link-section-wrapper">
+        <!---network-nav-ends---->
+          <div class="quicker-nav active" >
+            <div class="naver" onclick="window.location.href='./index.html'">
+              <span class="material-icons">
+                  home
+              </span>
+              <p>
+              Home
+              </p>
+              </div>
+              <div class="tag">
+                  <img src="./css/icons/completed.png" alt="" loading="lazy">
+              </div>
+            </div> 
+
+           <div id="adminAccessLink3" class="quicker-nav">
+              <div class="naver"  onclick="window.location.href='adminDashboard.html'">
+                <span class="material-icons">dashboard</span>
+              <p>Admin Dashboard</p>
+              </div>
+            
+            </div> 
+
+              <div id="adminAccessLink4" class="quicker-nav">
+              <div class="naver"  onclick="window.location.href = 'agentPage.html'">
+                <span class="material-icons">support_agent</span>
+              <p>Exclusive Page</p>
+              </div>
+            
+            </div> 
+
+            
+
+      
+            <div class="quicker-nav">
+              <div class="naver"  onclick="window.location.href='./pay.html'">
+                <span class="material-icons">local_offer</span>
+              <p> Discounts</p>
+              </div>
+            
+            </div> 
+
+            <div class="quicker-nav">
+              <div class="naver"  onclick="window.location.href='./afa.html'">
+                <span class="material-icons">how_to_reg</span>
+              <p>AFA Registration</p>
+              </div>
+            
+            </div>
+          
+            <!----terms & cons--->
+
+          
+      <div class="quicker-nav" >
+        <div class="naver" onclick="window.location.href='./bundlesInfo.html'">
+          <span class="material-icons">info</span>
+          <p>Info</p>
+        </div>
+      </div>
+          
+
+            
+
+            
+            <div title="Coming up soon!" class="quicker-nav " >
+              <div class="naver" onclick="window.location.href='#'">
+              <span class="material-icons">menu_book</span>
+              <p>ebooks</p>
+              </div>
+
+              <div class="tag">
+                <small>Coming Up!</small>
+              </div>
+              
+            </div> 
+
+          
+
+            <div title="Coming Up Soon!" class="quicker-nav" >
+              <div class="naver" onclick="window.location.href='ecdoataStore/shop.html'">
+              <span class="material-icons">store</span>
+                <p>Get Store</p>
+              </div>
+              <div class="tag">
+                <small>Coming up!</small>
+              </div>
+            </div>
+
+      </div>
+    </div>
+  </div>
+    <div class="ecodata-sidebar-bottom">
+        <!--bottom-->
+          <div class="bottom-nav">
+            <div class="sign-link">
+              <button onclick="window.location.href = 'login.html'" class="login">
+                Login
+              </button>
+            
+            </div>
+          
+            <div class="sign-link">
+                <button class="login" onclick="window.location.href='terms.html'">
+            Terms & Condition
+          </button>
+            </div>
+
+              <div class="sign-link">
+                <button class="login " id="logOut" >
+                <img src="./css/icons/logout.png" alt="" loading="lazy"> Logout
+              </button>
+            </div>
+          </div>
+    </div>
+  </div>
+
+
+      <!----NAVIGATION-BAR-SECTION------->
+  
+  <nav class="navbar">
+      <div id="sk-NavBar" class="sk-welcome" >  
+      <div class="sk-welcome-top">  
+        <span class="sk" style="width:2.5rem;height:2.5rem;
+        border-radius: 50%;">
+      </span>  
+        
+        <span class="sk" style="width:120px;height:26px;border-radius:8px;"></span>  
+      </div>  
+    
+    </div> 
+  
+
+  <div class="nav-left">
+  <a href="index.html">
+    <img class="log" src="./css/icons/icon-shortcut.png" alt="image" loading="lazy">
+  </a>
+  </div>
+  <div class="nav-right">
+
+
+    <div class="notis">
+
+    <img onclick="window.location.href='notification.html'" class="notifity" src="./css/icons/notify (1).png" alt="" loading="lazy" style="display: none;">
+      <!--<span id="notifyCount"></span>-->
+
+    <i class="ri-notification-3-line notifity" onclick="window.location.href='notification.html'"></i> 
+    </div>
+
+  
+  
+  <!---DARK MODE-->
+  <label class="theme-switch" >
+    <input  type="checkbox" id="themeToggle">
+    <span class="slider">
+      <span class="icon sun">
+      <i class="ri-sun-line sun-icon"></i>
+      </span>
+      <span class="icon moon">
+        <i class="ri-moon-foggy-line moon"></i>
+      </span>
+    </span>
+  </label>
+
+ <i class="ri-menu-2-line menu" id="sidebarViewer"></i>
+  </div>
+
+
+  </nav>
+
+  <!---MAIN-GRID-CONTAINER---->
+      <div class="main-grid-container" >
+
+
+
+
+        <!--SIDEBAR-->
+        <div class="grid-container-aside">
+          <div class="userProfile-container">
+            <div class="user" id="userPro">
+              <span class="us"><h1>U</h1>
+              </span>
+              <h3>User Panel</h3>
+            </div>
+          </div>
+          
+          <!---middle-->
+          <div class="quick-links-section">
+            <div class="link-section-wrapper">
+            <!---network-nav-ends---->
+            
+            <div class="quicker-nav active" onclick="window.location.href='./index.html'">
+              <img src="./css/icons/home.png" alt="" loading="lazy">
+              <p>Home</p>
+            </div> 
+
+             <div id="adminAccessLink1" class="quicker-nav" onclick="window.location.href='adminDashboard.html'" >
+              <img src="./css/icons/dashboard.png" alt="" loading="lazy">
+              <p>Admin Dashboard</p>
+            </div>
+
+             <div id="adminAccessLink2" class="quicker-nav" onclick="window.location.href='agentPage.html'" >
+              <img src="./css/icons/agent.png" alt="" loading="lazy">
+              <p>Exclusive Page</p>
+            </div>
+            
+
+
+            <div class="quicker-nav" onclick="window.location.href='./pay.html'">
+              <img src="./css/icons/like.png" alt="" loading="lazy">
+              <p>Get discounts</p>
+            </div> 
+
+            <div class="quicker-nav" onclick="window.location.href='./afa.html'">
+              <img src="./css/icons/personal.png" alt="" loading="lazy">
+              <p>AFA Registration</p>
+            </div>
+          
+            <!----terms & cons--->
+
+          
+              <div class="quicker-nav" onclick="window.location.href='./bundlesInfo.html'">
+                <img src="./css/icons/terms (1).png" alt="" loading="lazy">
+                <p>Info</p>
+            </div>
+          
+
+            
+
+            
+            <div title="Coming up soon!" class="quicker-nav " onclick="window.location.href='#'">
+              <img src="./css/icons/ebook.png" alt="" loading="lazy">
+              <p>ebooks</p>
+
+              <div class="tag">
+                <small>Coming Up!</small>
+              </div>
+            </div> 
+
+            <div title="Coming Up Soon!" class="quicker-nav" >
+                <img src="./css/uiIcons/store.png" alt="" loading="lazy">
+                <p>Get Store</p>
+
+                <div class="tag">
+                <small>Coming up!</small>
+              </div>
+            </div>
+
+            </div>
+          </div>
+          <!--bottom-->
+          <div class="bottom-nav">
+            <div class="sign-link">
+              <button onclick="window.location.href = 'login.html'" class="login">
+                Login
+              </button>
+            
+            </div>
+          
+            <div class="sign-link">
+                <button class="login" onclick="window.location.href='terms.html'">
+            Terms & Condition
+          </button>
+            </div>
+
+              <div class="sign-link ">
+                <button class="login " id="lapOut">
+                <img src="./css/icons/logout.png" alt="" loading="lazy"> Logout
+              </button>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+  
+          <!---MAIN-->
+  <div class="grid-container-main">
+          
+  <!---CARD CONTAINER------>
+  <section class="card-container">
+
+  <!----WELCOME HERO---->
+  <section class="welcome-hero">
+
+      <!---welcome=card---->
+    <div id="sk-Welcome" class="sk-welcome-card">
+      <div class="sk-welcome-card-top">
+        <span class="sk" style="width:140px; height: 28px;">
+
+        </span>  
+            <span class="sk" style="width:90px;height:17px;"></span>  
+      </div>
+
+      <div class="sk-welcome-card-bottom">
+        <span class="sk" style="width: 100%;height:90%;"></span>  
+        
+      </div>
+    </div>
+      <!-- Animated background particles----->
+    <div class="particles">
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+    </div>
+      
+  
+
+    
+    <div class="welcome-hero-top">
+
+      <div class="wht-left"> 
+        <p id="usernameDisplay"></p>
+      </div>
+      <div class="wht-right">
+      <button class="ecb" ></button>
+      </div>
+    </div>
+    <!---bottom-->
+    <div class="welcome-hero-bottom">
+      <div class="grid-overlay"></div>
+      <div class="whb-left">
+        <!--title-tag-->
+        <div class="title-ecodata">
+          <h5>
+          EcoData.<br>
+          <span class="accent">Cheap</span> Prices.<br>
+          <span class="stroke">No Stress.</span>
+          </h5>
+        </div>
+        <!---close-time-btom--->
+        <div class="time-close">
+          <span>Active 24/7 <span class="pulse-dot">
+          <img src="./css/icons/timer.png" alt="" loading="lazy"> 
+          </span> </span>
+        </div>
+      </div>
+      <div class="whb-right">
+        <div class="whb-right-top">
+          <div class="ratingContainer">
+    <div class="stat-card float">
+        <div class="stat-num">1.3K+</div>
+        <div class="stat-label">Happy Users</div>
+      </div>
+      <div class="stat-card float" style="animation-delay:0.5s">
+        <div class="stat-num">&lt;30m</div>
+        <div class="stat-label">Avg. Delivery</div>
+      </div>
+      <div class="stat-card float" style="animation-delay:1s">
+        <div class="stat-num">4.5★</div>
+        <div class="stat-label">Customer Rating</div>
+      </div>
+  </div>
+        </div>
+        <div class="whb-right-bottom">
+            <div class="endR" >
+        <div class="endS" style="display: none;">
+          <img src="./css/uiIcons/star.png" alt="" loading>
+          <img src="./css/uiIcons/star.png" alt="" loading>
+          <img src="./css/uiIcons/star.png" alt="" loading>
+          <img src="./css/uiIcons/star.png" alt="" loading>
+          <img src="./css/uiIcons/star.png" alt="" loading>
+        </div>
+
+        
+
+
+        <div class="clockr">
+            <div  id="clock"></div>
+        </div>
+      
+      </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+
+
+  <!---MANUAL ORDER CHECKER---->
+    <!----right-div-->
+  <div class="manual-container" style="display: none !important;">
+    
+  <div class="manual-right">
+    <div class="manual-left-top">
+      <div class="status-result" id="statusResult"></div>
+    </div>
+  </div>
+
+  <div class="manual-right">
+    <section class="order-status-section">
+    <h2>Check Order</h2>
+    <span><img src="./icons/icons8-wifi.gif" alt="image" loading="lazy"></span>
+    <input type="text" id="orderInput" placeholder="Enter Order ID">
+    <button class="checkBt" id="checkBtn">Check Status</button>
+    
+  </section>
+    </div>
+
+
+  </div>
+
+
+
+
+
+  <!-----COUNTER-ENDS--->
+
+  <!----TRUSTED-MESSAGE------>
+  <section class="trusted-by ">
+
+    <!-- Trusted By Skeleton -->
+    <div id="sk-Trusted" class="sk-trusted">  
+      <div class="sk-trust-left">
+        <div class="sk-section-title">  
+        <span class="sk" style="width:160px;height:18px;margin-bottom:8px;display:block;"></span>  
+        <span class="sk" style="width:200px;height:14px;display:block;"></span>  
+      </div>  
+      <div class="sk-logos">  
+        <div class="sk-logo-item">  
+          <span class="sk" style="width:44px;height:44px;border-radius:50%;"></span>  
+          <span class="sk" style="width:40px;height:11px;"></span>  
+        </div>  
+        <div class="sk-logo-item">  
+          <span class="sk" style="width:44px;height:44px;border-radius:50%;"></span>  
+          <span class="sk" style="width:50px;height:11px;"></span>  
+        </div>  
+        <div class="sk-logo-item">  
+          <span class="sk" style="width:44px;height:44px;border-radius:50%;"></span>  
+          <span class="sk" style="width:60px;height:11px;"></span>  
+        </div>  
+        <div class="sk-logo-item">  
+          <span class="sk" style="width:44px;height:44px;border-radius:50%;"></span>  
+          <span class="sk" style="width:55px;height:11px;"></span>  
+        </div>  
+      </div> 
+      </div>
+      <div class="sk-imageContainer" >
+        <span class="sk" style="width:68px;height:126px;margin-left: 2rem; border-radius:10px;flex-shrink:0;"></span> 
+      </div> 
+    </div>
+
+
+    <!-- Animated background particles----->
+    <div class="particles">
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+    </div>
+
+    <!-- Decorative grid overlay------>
+    <div class="grid-overlay"></div>
+
+    <div class="trusted-container">
+
+      <div class="wrapper-notice">
+        <span class="pulse-dot"></span>
+        <span class="trusted-badge">✦ Trusted Digital Plug</span>
+      </div>
+
+      <p class="trusted-text" style="white-space: nowrap;">
+        Digital Services In Ghana
+        <img src="./css/icons/flag3.jpg" alt="flag" loading="lazy">
+      </p>
+
+      <div class="trusted-logos">
+        <div class="trust">
+          <div class="logo-wrap">
+            <img src="./css/images/mtn-badge2.jpg" alt="MTN" loading="lazy">
+          </div>
+          MTN
+        </div>
+        <div class="divider-dot"></div>
+        <div class="trust">
+          <div class="logo-wrap">
+            <img src="./css/images/telecel.jpg" alt="Vodafone" loading="lazy">
+          </div>
+          Telecel
+        </div>
+        <div class="divider-dot"></div>
+        <div class="trust">
+          <div class="logo-wrap">
+            <img src="./css/images/tigo.jpg" alt="AirtelTigo" loading="lazy">
+          </div>
+          AirtelTigo
+        </div>
+        <div class="divider-dot"></div>
+        <div class="trust pay">
+          <div class="logo-wrap secure-wrap">
+            <img class="icont-secure" src="./css/icons/icons-secure.png" alt="Secure-icon" loading="lazy">
+          </div>
+          Secured Payment
+        </div>
+      </div>
+    </div>
+
+    <div class="baw-right">
+      <img src="./css/images/baw.png" alt="" loading="lazy">
+      <div class="baw-glow"></div>
+    </div>
+
+  </section>
+  <!----TRUSTED-MESSAGE---ends---->
+
+
+
+
+
+  <!---ENDS-->
+  <!---SCROLL THUMBNAIL--REUSABLE--CARD ADS-->
+  <div class="google-thumbnails-wrapper">
+    <div id="sk-info" class="sk-info-container">
+      <div class="sk-info-left">
+        <span class="sk" style="width:100%;height:18px;"></span>  
+         
+      </div>
+      <div class="sk-info-right">
+        <span class="sk" style="width:90%;height:18px;"></span>
+      </div>
+    </div>
+
+
+    
+
+
+    <div class="google-thumbnails" id="thumbnailScroll">
+
+
+      <div class="google-thumbnail thumb2" >
+    <img class="analy" src="./css/uiIcons/loudspeaker.png" alt="" loading="lazy">
+      WELCOME TO EcoData! LOOKING FOR AFFORDABLE DATA BUNDLES? YOU'RE IN THE RIGHT PLACE. EXPLORE OUR LATEST OFFERS, ENJOY SECURE PAYMENTS WITH DEDICATED SUPPORT.
+      PLACE YOUR ORDER TODAY AND EXPERIENCE THE EcoData DIFFERENCE!
+
+      <span style='color: rgb(6, 182, 158); margin: .3rem;'>IF YOUR ARE NEW HERE, SELECT <span style='color: rgb(182, 126, 6);'>[ ALL NEW NUMBERS PORTAL ] </span> OFFER AND PLACE YOUR ORDER SAFELY TO AVOID REJECTION OR CANCELLATION ON YOUR NEW NUMBER, AND IF YOUR ORDER HAS EVER CANCELLED BEFORE, KINDLY USE THAT PORT TO PLACE YOUR ORDER. THANK YOU</span>
+      </div>
+
+
+        <div class="google-thumbnail thumb2" >
+    <img class="analy" src="./css/uiIcons/loudspeaker.png" alt="" loading="lazy">
+      MTN, AIRTEL-TIGO, AND TELECEL DATA DELIVERY IS ONGOING SMOOTHLY,
+      PLACE YOUR ORDER CONFIDENTLY. EVERYONE WILL RECEIVE HIS OR HER DATA PURCHASE. 
+
+      <span style='color: rgb(182, 126, 6); margin: .4rem;'>ALL SUBMITTED AFA REGISTRATIONS ARE UNDER PROCESSING.</span>
+      </div>
+
+  
+      <div class="google-thumbnail thumb1 " style="display: none;">
+      <span style="color: rgb(235, 193, 7); margin: .4rem;">[ MASHUP IS OFF ON THE PORTAL! ]</span> THE SPECIAL MASHUP BUNDLE IS OFF ON THE PORTAL AGAIN, WE WILL RESTORE AS SOON AS IT COMES BACK.  <span style="color: rgb(7, 235, 148); margin: .2rem;">[ TAKE ADVANTAGE WHEN IT COMES BACK ]</span>
+
+      
+
+       </div>
+       
+       
+
+  <div class="google-thumbnail thumb1" style="display: none;">
+     <img class="analy" src="./css/uiIcons/loudspeaker.png" alt="" loading="lazy">
+        NEW SERVICE  ALERT! <span style="color: rgb(235, 193, 7); margin: .4rem;">[ SPECIAL MASHUP BUNDLES & MASH-DATA ]</span> Enjoy more value for less with our  Special Mashup packages, giving you more minutes and special data-bundles at a lower cost than regular MTN Mashup!
+
+         <span style="color: rgb(235, 193, 7); margin: .4rem;">[ 3GB MASH-DATA @ 13gh ]</span>
+
+          <span style="color: rgb(7, 235, 178); margin: .4rem;">[ 5GB MASH-DATA @ 19gh ]</span>
+
+          <span style="color: rgb(235, 193, 7); margin: .4rem;">[ 10GB MASH-DATA @ 42gh ]</span>
+
+          <span style="color: rgb(7, 235, 178); margin: .4rem;">[ 20GB MASH-DATA @ 75gh ]</span>
+
+           <span style="color: rgb(235, 193, 7); margin: .4rem;">[ 30GB MASH-DATA @ 88gh ]</span>
+
+           <span style="color: rgb(7, 235, 178); margin: .4rem;">[ 40GB MASH-DATA @ 100gh ]</span>
+
+            <span style="color: rgb(235, 193, 7); margin: .4rem;">[ 50GB MASH-DATA @ 140gh ]</span>
+
+             <span style="color: rgb(7, 235, 178); margin: .4rem;">[ 60GB MASH-DATA @ 170gh ]</span>
+
+             <span style="color: rgb(235, 193, 7); margin: .4rem;">[ 100GB MASH-DATA @ 262gh ]</span>
+
+
+           <span style="color: rgb(7, 235, 178); margin: .4rem;">[ 217GB MASH-DATA @ 365gh ]</span>
+
+             <span style="color: rgb(7, 235, 178); margin: .4rem;">[ ALL MASH-DATA ARE NONE-EXPIRY ]</span>
+
+
+            
+        <span style="color: rgb(235, 193, 7); margin: .4rem;">[ 372-MINS + 903MB for 17.99gh ]</span>
+
+         <span style="color: rgb(7, 235, 178); margin: .4rem;">[ 744-MINS + 1.8GB for 39.85gh ]</span>
+
+         <span style="color: rgb(235, 193, 7); margin: .4rem;">[ 1116-MINS + 2.7GB for 56.97gh ]</span>
+
+         
+           <span style="color: rgb(7, 216, 164); margin: .4rem;">[ 
+             YOU CAN USE IT TO CALL ALL NETWORKS WITH NO WORRIES ]</span>
+
+        STAY CONNECTED LONGER WITH FRIENDS,FAMILY, AND LOVED ONES WITHOUT BREAKING THE BANK.
+            <span style="color: rgb(235, 193, 7); margin: .4rem;"> 
+              Order now and enjoy unbreakable value!
+
+            </span>
+      </div>
+      
+     
+    
+
+      <div class="google-thumbnail thumb2" id="promThumbnail" style='display: none;'>
+        <img class="analy" src="./css/uiIcons/loudspeaker.png" alt="" loading="lazy">
+        PROMO IS <span style="color: rgb(235, 193, 7); margin: .4rem;">ACTIVE</span> NOW  <span style="color: rgb(7, 235, 178); margin: .4rem;">BUY @</span> DISCOUNTED
+        on MTN DATA
+        <span style="color: rgb(235, 193, 7); margin: .4rem;">[1GB = 4.7]</span>
+        <span style="color: rgb(7, 235, 178); margin: .4rem;">[2GB = 9.8]</span>
+        <span style="color: rgb(235, 193, 7); margin: .4rem;">[3GB = 14.60]</span>
+        <span style="color: rgb(7, 235, 178); margin: .4rem;">[4GB = 19.30]</span>
+        <span style="color: rgb(235, 193, 7); margin: .4rem;">[5GB = 23.5]</span>
+        <span style="color: rgb(7, 235, 178); margin: .4rem;">[10GB = 43.20]</span>
+        <span style="color: rgb(235, 193, 7); margin: .4rem;">[20GB = 85]</span>
+        <span style="color: rgb(7, 235, 178); margin: .4rem;">[25GB = 105]</span>
+          CHECK BACK EVERY  <span style="color: wheat; margin: .0.4rem">[ THURSDAY AND FRIDAY'S ]</span>
+        
+      </div>
+
+
+
+    <div class="google-thumbnail thumb1" style='display: none;'>
+        <img class="fol" src="./css/uiIcons/star.png" alt="" loading="lazy"> WELCOME TO EcoData. <span style="color: #cf8d11; margin-left: 0.4rem;
+        ">We're</span>  glad to have you here. <span style="color: #cf8d11; margin-left: 0.4rem;
+        ">Discover</span> fast, reliable, and affordable services designed just for you.  <span style="color: #cf8d11; margin-left: 0.4rem; ">Whether</span> you're here to purchase data bundle, explore our offers, or manage your account - we've made everything simple and seamless. <img class="fol" src="./css/uiIcons/gurantee.png" alt="" loading="lazy"> 
+        <span style="color: #cf8d11; margin-left: 0.4rem;">Get started</span> and enjoy a better digital experience.
+
+        <span style="color: #cf8d11; margin-left: 0.4rem;">For any 
+        </span>
+        <span style="color: #18b60a; margin-left: 0.1rem;">question
+        </span>
+        , chat our Admin on whatsApp through the chatButton 
+          <img class="fol" src="./css/icons/chatMe.png" alt="" loading="lazy">
+    </div>
+
+    
+
+
+      <div class="google-thumbnail thumb2 promThumbnailOff" style="display: none;">
+        <img class="analy" src="./css/icons/market.png" alt="" loading="lazy">
+        WE ARE RUNNING PROMO! EVERY<span style="color: wheat; margin: .0.4rem">THURSDAY AND FRIDAY'S</span> on MTN DATA, buy at lower cost at these promo days. 
+        <span style="color: rgb(235, 193, 7); margin: .4rem;">[1GB = 4.7]</span>
+        <span style="color: rgb(7, 235, 178); margin: .4rem;">[2GB = 9.8]</span>
+        <span style="color: rgb(235, 193, 7); margin: .4rem;">[3GB = 14.60]</span>
+        <span style="color: rgb(7, 235, 178); margin: .4rem;">[4GB = 19.30]</span>
+        <span style="color: rgb(235, 193, 7); margin: .4rem;">[5GB = 23.50]</span>
+        <span style="color: rgb(7, 235, 178); margin: .4rem;">[10GB = 43.20]</span>
+        <span style="color: rgb(235, 193, 7); margin: .4rem;">[20GB = 85]</span>
+        <span style="color: rgb(7, 235, 178); margin: .4rem;">[25GB = 105]</span>
+          CHECK BACK EVERY  <span style="color: wheat; margin: .0.4rem">[ THURSDAY AND FRIDAY'S ]</span>
+      </div>
+
+
+
+
+
+
+    <div class="google-thumbnail thumb2" style='color: white; '>
+        <img src="./css/uiIcons/loudspeaker.png" alt="" loading="lazy" style="text-transform: uppercase;">
+            ARE YOU SOMEONE WHO IS PAYING MORE ON MTN MASHUP DAILY?  <span style="color: rgba(7, 235, 140, 0.932); margin: .4rem;"> MTN AFA BUNDLE IS RECOMMENDED FOR YOU, </span> 
+            <span style="color: rgba(255, 255, 255, 0.911); margin: .4rem;">DIAL *1848# to BUY AFA BUNDLE FOR LONG CALLS. </span>
+            IF YOU ARE NOT AFA MEMBER YET, YOU CAN  <span style="color: rgba(7, 235, 140, 0.904); margin: .4rem;"> REGISTER TO BECOME AN AFA MEMBER AT OUR AFA PAGE. </span>
+
+          With 10cedis, AFA GIVES YOU 258mins (onnet calls) , 500mins CUG for AFA to AFA MEMBER CALL, 30mins other networks (offnet calls).
+    </div>
+    
+
+      
+
+    
+      <div class="google-thumbnail thumb2" style=" text-transform: uppercase; color: white;">
+        <img src="./css/icons/chatMe.png" alt="" loading="lazy">
+            Report any order with status updated as DELIVERED but still not  received with: Order ID, Number, and GB via admin chatButton within 30mins.
+      </div>
+
+  
+
+      <div class="google-thumbnail thumb2" style="display: none;">
+        <img style="height: 2.2rem !important; width: 2.2rem !important;" class="analy" src="./css/icons/logoImg.png" alt="" loading="lazy">
+        <span style="color: rgb(255, 136, 0); margin-right: .4rem;">ECOSHOP</span> is UNDER DEVELOPMENT, OUR Team is WORKING ON IT. <span style="color: #0ebb90; margin-left: .4rem;"> FEEL FREE TO BUY YOUR DATA BUNDLE ANYTIME.</span>
+      </div>
+
+
+
+
+
+
+  <div class="google-thumbnail thumb2" style="display: none;">
+    <img class="analy" src="./css/uiIcons/loudspeaker.png" alt="" loading="lazy">
+      Unlock Premium price Page by paying a one-time payment of 50 cedis!, and pay less than regular...
+      </div>
+
+
+      
+    
+
+
+
+
+
+      
+
+
+          <div class="google-thumbnail thumb1 " style="display: none;" ><img  class="folshare" src="./css/icons/whats_admin.png" alt="" loading="lazy">
+        YOU CAN SHARE THE WEBSITE LINK BY CLICKING THE BLUE SHARE BUTTON
+      </div>
+
+    </div>
+  </div>
+  <!---SCROLL THUMBNAIL--REUSABLE--CARD ADS----ends---->
+
+
+  <!--DELIVERY INDICATOR-->
+  <section id='deliveryTracker1' class="delivery-indicator" >
+   <div id="sk-deliverTracker1" class="sk-delivery-indicator-container">
+    <div class="sk-indicator-left">
+      <span class="sk" style="width: 30px; height: 30px;
+      border-radius: 50%; margin-top: 1rem;"></span>  
+    </div>
+    <div class="sk-indicator-right">
+      <div class="sk-indicator-right-top">
+        <span class="sk" style="width:96%; height:38px;margin-right: 7px;"></span>  
+      </div>
+      <div class="sk-indicator-right-bottom">
+        <span class="sk" style="width:96%; height:38px;margin-right: 7px;"></span> 
+      </div>
+    </div>
+   </div>
+
+
+    <div class="left-side-indicator">
+      <div class="delivery-status">
+  <span id="deliveryBubble1" class="delivery-bubble fast">
+  </span>
+    </div>
+    </div>
+    <div class="indicator-top">
+      <p id="deliveryMessage">
+        MTN is delivering slightly slow right now.
+        Your order will still be delivered.
+        <i class="ri-checkbox-line"></i>
+      </p>
+      
+      <h3>Last (batch) delivered in: <small id="deliveryTime"> </small></h3>
+
+      <small>
+        <i class="ri-timer-line"></i>
+        Last order delivered In: 
+        <span id='actualDateWithTime'></span>
+      </small>
+    </div>
+  </section>
+  
+  <!--bottom-->
+  <section id="deliveryTracker2" class='indicator-bottom' gi>
+
+     <div id="sk-deliverTracker2" class="sk-delivery-indicator-container2">
+    <div class="sk-indicator-left">
+      <span class="sk" style="width: 30px; height: 30px;
+      border-radius: 50%; margin-top: 1rem;"></span>  
+    </div>
+    <div class="sk-indicator-right">
+      <div class="sk-indicator-right-top">
+        <span class="sk" style="width:96%; height:38px;margin-right: 7px;"></span>  
+      </div>
+      <div class="sk-indicator-right-bottom">
+        <span class="sk" style="width:96%; height:38px;margin-right: 7px;"></span> 
+      </div>
+    </div>
+   </div>
+
+   <div class="turnAround">
+
+      <div class="turnAround-top">
+
+    <div class="left-side-indicator">
+      <div class="delivery-status">
+      <span id="deliveryBubble2" class="delivery-bubble fast">
+      </span>
+    </div>
+    </div>
+     <div class="right-side-ttop">
+         <div class="side-ttop-wraper">
+          
+          <div class="ttop-wrap-top">
+               <div class="flexi" style='display: flex; width: 100%; height: max-content; align-items: center; gap: .3rem; padding-top: .1rem;'>
+                 <i style="font-weight: 300;" class="ri-timer-line"></i>
+              Current OrderTurnAround (last batch): about 
+               </div>
+              <p id="turnAroundTime"></p>
+          </div>
+
+          <div class="ttop-wrap-btom">
+            Last order estimatedDeliveryTime: 
+             <div class="estimata">
+              placedAt: 
+            <p id='placedAtTime'></p> 
+             </div>
+            <div class="estimator">
+              delivered In: <p id="deliveredAtTime"></p> 
+            </div>
+          </div>
+          </div>
+     </div>
+   
+      </div>
+      
+
+      <div class="turnAround-bottom">
+        <div class="around-wrapper">
+          Last delivered 
+         <p id='lastDelivered'>
+          Loading...</p>
+          <i class="ri-checkbox-line"></i>
+        </div>
+      </div>
+      </div>
+
+ 
+   
+  </section>
+  <!--DELIVERY INDICATOR-->
+
+
+
+
+
+
+  <!----promo---->
+  <div style="display: none;" class="promo-bar" id="promoBar">
+    <div id="offer-sk" class="sk-offer-container">
+      <div class="sk-offer-top">
+        <span class="sk" style="width:93%;height:18px;margin-right: 7px;"></span>  
+      </div>
+      <div class="sk-bottom-wrapping">
+        <div class="sk-bottom-w-left">
+          <span class="sk" style="width:56%;height:18px;margin-right: 7px;"></span>  
+          <span class="sk" style="width:70%;height:18px;margin-right: 7px;"></span>  
+          <span class="sk" style="width:77%;height:18px;margin-right: 7px;"></span>  
+          <span class="sk" style="width:87%;height:18px;margin-right: 7px;"></span>  
+        </div>
+        <div class="sk-bottom-w-right">
+          <span class="sk" style="width:92%;height:84px;margin-right: 7px;"></span>
+        </div>
+      </div>
+    </div>
+    <div class="promo-bar-top">
+      <i class="ri-timer-flash-line coin1"></i>
+      LIMITED THURSDAYS OFFER</div>
+  <div class="promo-content">
+    <div class="left-promo-content">
+      <small>4% OFF </small>
+      <p>Save some coins <i class="ri-money-dollar-circle-line coin"></i>
+      </p>
+       <button class="cta-btn" id="ctaBtn">Buy Data Now</button>
+    </div>
+ 
+
+    <div class="right-promo-content">
+       <div class="label" id="label"></div>
+     <div class="timer" id="timer">
+      <div class="timer-top">
+      <span id="hrs"></span>
+      <span id="mts"></span>
+      <span id="sec"></span>
+      </div>
+      <div class="timer-bottom">
+        <span>Hrs</span>
+        <span>Mins</span>
+        <span>Secs</span>
+      </div>
+      </div>
+     </div>
+    </div>
+   
+  </div>
+  <div class="live-badge" id="liveBadge">PROMO ACTIVE NOW!</div>
+
+
+
+  <!---NOTICE BOARD=-CONTAINER-->
+  <section class="notice-container"  style="background: transparent !important;">
+    <!-- Animated background particles----->
+    <div class="particles">
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+    </div>
+      <div class="grid-overlay" style="display: none;"></div>
+
+    
+    <!-- Notice Board Skeleton -->  
+    <div id="sk-Notice" class="sk-notice">  
+      <span class="sk" style="width:140px;height:16px;"></span>  
+        <span class="sk" style="width:100%;height:13px;"></span>  
+        <span class="sk" style="width:100%;height:13px;"></span>  
+        <span class="sk" style="width:100%;height:13px;"></span>  
+        <span class="sk" style="width:100%;height:13px;"></span>  
+        <span class="sk" style="width:100%;height:13px;"></span>  
+        <span class="sk" style="width:100%;height:13px;"></span>  
+    </div>  
+
+
+
+
+
+
+    <div class="notice-tag">
+      <div class="notice-text">
+        <h4>Important Notes</h4>
+      
+      </div>
+    </div>
+
+      <!----NOTICE-->
+      <div class="notice-board" style="border-radius: 0 !important;">
+        
+        <div class="notice-top" style="display: none;">
+          <small><span>1</span>You Can buy Special Mashup at lower cost <strong>AnyTime!</strong>
+          The first <small> 10 packages are Mash-Data packages.</small>
+          The dashboard will read both bundle and mashup orders attached with <strong>( GB or MINS ) </strong>, note that its just a tag.
+          </small>
+        </div>
+
+         <div class="notice-top" >
+          <small><span>1</span>You Can buy Data  <strong>AnyTime!</strong>
+         no closing. <strong>We are Active 24/7 </strong>
+          </small>
+        </div>
+
+         <div class="notice-top" >
+          <small><span>2</span>Bundle finalPrice is calculated with <strong> ( 1.95% ) </strong> of <strong>Paystack Fee.</strong>
+          </small>
+        </div>
+
+        <div class="notice-top">
+          <small><span>3</span>Our services are running on <span>Render</span> <strong>that ensures security, and</strong> if you encounter <strong> Application Loading,</strong> please exercise patience.</small>
+        </div>
+      
+      
+
+          <div class="notice-top lapNone">
+          <small><span>4</span><strong>Follow The Steps to Install the App</strong> by adding to home screen.</small>
+        </div>
+
+        <div class="notice-top lapNone">
+          <small><span>5</span>Don't forget to click, <strong>"I have completed the payment"</strong> after successful <strong>Momo payment. </strong>That is <strong>(Very important).</strong></small>
+        </div>
+      </div>
+  </section>
+
+
+  <!----ADS--->
+  <div class="gallery">
+    <div id="sk-gallery" class="sk-gallery-container">
+      <div class="sk-gallery-top">
+          <span class="sk" style="width:75%;height:32px;margin-right: 7px; border-radius: 20px;"></span>  
+      </div>
+      <div class="sk-gallery-bottom">
+        <div class="sk-gallery-btom-top">
+            <span class="sk" style="width:56%;height:100px;margin-right: 7px;"></span>  
+              <span class="sk" style="width:56%;height:100px;margin-right: 7px;"></span>  
+                <span class="sk" style="width:56%;height:100px;margin-right: 7px;"></span>  
+        </div>
+        <div class="sk-gallery-btom-btom">
+            <span class="sk" style="width:56%;height:32px;margin-right: 7px;"></span>  
+              <span class="sk" style="width:56%;height:32px;margin-right: 7px;"></span>  
+                <span class="sk" style="width:56%;height:32px;margin-right: 7px;"></span>  
+        </div>
+      </div>
+    </div>
+
+    <div class="install-title">
+    <div class="particles">
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+    </div>
+    
+    <p>Click each Step to Install The App </p>
+
+    </div>
+
+    <div class="imgboxer">
+      <!-- Animated background particles----->
+    <div class="particles">
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+    </div>
+      <div class="grid-overlay" style="display: none;"></div>
+
+            <div class="img-box-flex">
+            <div class="img-box">
+              <div class="coverPlate"  onclick=openViewer(0)>
+              <i class="ri-more-2-fill"></i>
+              Click Menu
+              </div>
+      <img src="./css/images/1.jpeg" alt="" loading="lazy" 
+      onclick=openViewer(0)>
+    </div>
+
+
+      <div class="img-box">
+        <div class="coverPlate"  onclick=openViewer(1)>
+            <i class="ri-home-smile-line"></i> 
+            Add to Home
+        </div>
+      <img src="./css/images/2.jpeg" alt="" loading="lazy" 
+      onclick=openViewer(1)>
+    </div>
+
+  
+
+
+      <div class="img-box">
+        <div class="coverPlate"  onclick=openViewer(2)> 
+          <i class="ri-download-2-line"></i> 
+          Install App
+        </div>
+      <img src="./css/images/3.jpeg" alt="" loading="lazy" 
+      onclick=openViewer(2)>
+      </div>
+            </div>
+
+            <div class="img-box-flex-numbering">
+              <button  class="numberContent"  onclick=openViewer(0)>Step 1</button>
+              <button class="numberContent"  onclick=openViewer(1)>Step 2</button>
+              <button class="numberContent"  onclick=openViewer(2)>Step 3</button>
+            </div>
+   
+
+  
+    </div>
+
+  </div>
+
+  <div id="viewer">
+    <span title="Close" class="clos"onclick="closeViewer()">&times;</span>
+    <img id="fullImg" />
+  </div>
+
+
+
+  <!----PERSISTENT-CARD-(ALWAYS-VISIBLE)--->
+  <!-- LIVE ORDER CONTAINER -->
+  <section class="follow-share-container" >
+    <div id="sk-follow-share" class="sk-follow-share-container">
+      <div class="sk-fsc-left">
+        <div class="sk-fsc-left-left">
+            <span class="sk" style="width:56%;height:32px; margin-right: 16px;"></span>  
+        </div>
+        <div class="sk-fsc-left-right">
+          <span class="sk" style="width:26%;height:32px;"></span>
+          <span class="sk" style="width:26%;height:32px;"></span>
+          <span class="sk" style="width:26%;height:32px;"></span>
+        </div>
+      </div>
+      <div class="sk-fsc-right">
+        <span class="sk" style="width:54%;height:32px;"></span>
+      </div>
+    </div>
+  <div class="social-follow">
+    <div class="follow-left">
+    <small>Click to Follow :</small>
+    </div>
+
+    <div id="rightBarFollow"  >
+
+      <a href="https://chat.whatsapp.com/LwhZNOyUQsJIGTQRL9cIXT?mode=hqrt3" > <img src="./css/icons/whats.png" alt="facebook-logo" loading="lazy"></a>
+
+  <a href="https://m.me/cm/AbZ-WlUIuuVhFZKK/?send_source=cm%3Acopy_invite_link" style="display: none;"> <img class="meg" src="./css/icons/messenger.png" alt="facebook-logo" loading="lazy"></a>
+
+    <a class="fab" href="http://www.facebook.com/share/1NTDoNJtGW/"> <img src="./css/icons/faceb.png" alt="facebook-logo" loading="lazy"></a>
+
+      <a href="https://www.tiktok.com/@ecodata247?_r=1&_d=ei9853mf1g8eec&sec_uid=MS4wLjABAAAAiY9nBAfFbpbd7KRl0y4-JTcRL0WMtPt9Pr-FKt__N-hQvmFZLhhInTTpn7Y5oRos&share_author_id=7484812520763950088&sharer_language=en&source=h5_m&u_code=ejcbk20728bd87&utm_source=copy&utm_campaign=client_share&share_link_id=d9108b99-2843-43f1-8f6c-ed4b72ea3264&share_app_id=1340&ugbiz_name=Account&lang=en&user_id=7484812520763950088&sec_user_id=MS4wLjABAAAAiY9nBAfFbpbd7KRl0y4-JTcRL0WMtPt9Pr-FKt__N-hQvmFZLhhInTTpn7Y5oRos&enable_checksum=1"><img class="tikop" src="./css/icons/tiktok.png" alt="facebook-logo"></a>
+
+
+    </div>
+  </div>
+
+  <!----SHARE-BTN-->
+  <div class="pls-share">
+  <button id="shareBtn" title="Share EcoData">
+    <i class="ri-share-forward-line"></i>
+  </button>
+  </div>
+  </section>
+
+
+  
+  <!---dashboard totals 0ver view-->
+  <div class="daily-analytics">
+    <div id="sk-daily" class="sk-daily-analytics">
+      <span class="sk" style="width:56%;height:20px; "></span>  
+    </div>
+    <h4>Daily Analytics Overview</h4>
+  </div>
+
+  <!----TOTAL -CONTAINER-CARD-->
+  <div id="homepageTotals" class="totals-container" style="background: transparent !important;">
+
+    <div id="sk-totals" class="sk-totals-container">
+      <span class="sk" style="width:88%;height:5rem; margin-right:3px; "></span>  
+
+      <span class="sk" style="width:88%;height:5rem; margin-right:3px;"></span>  
+
+      <span class="sk" style="width:88%;height:5rem; margin-right:3px; "></span>  
+
+      <span class="sk" style="width:88%;height:5rem; margin-right:3px; "></span>  
+    </div>
+
+    <div class="total-card" style="background: #fff;">
+
+      <div class="total-card-top">
+        <small>Total Orders</small>
+        <img src="./css/icons/totalorder.png" alt="total-icon" loading="lazy">
+      </div>
+      <div class="total-card-bottom">
+        <p id="totalOrders">0</p>
+      </div>
+    </div>
+
+    <!---next-->
+    <div class="total-card">
+      <div class="total-card-top">
+        <small>Total Data</small>
+        <img src="./css/icons/totalData.png" alt="totalGB" loading="lazy">
+      </div>
+      <div class="total-card-bottom">
+        <p id="totalGB">0</p>
+      </div>
+    </div>
+
+      <div class="total-card">
+      <div class="total-card-top">
+        <small>Pending Orders </small>
+        <img src="./css/icons/recent.png" alt="spent-icon" loading="lazy">
+      </div>
+      <div class="total-card-bottom">
+        <p id="pendingTotal">0</p>
+      </div>
+    </div>
+
+
+
+    <div class="total-card">
+      <div class="total-card-top">
+        <small>Completed Orders </small>
+        <img src="./css/uiIcons/approval.png" alt="spent-icon" loading="lazy">
+      </div>
+      <div class="total-card-bottom">
+        <p id="completedOrders">0</p>
+      </div>
+    </div>
+
+
+  </div>
+  <!---ends-->
+
+
+
+
+ <section class="table-section">
+  <div id="sk-table" class="sk-table-container">
+    <div class="sk-table-top">
+      <div class="sk-tt-top">
+         <span class="sk" style="width:56%;height:20px; "></span>  
+      </div>
+      <div class="sk-tt-btom">
+         <span class="sk" style="width:20%;height:16px; border-radius: 3px; "></span> 
+         <span class="sk" style="width:20%;height:16px; border-radius: 3px;  "></span> 
+         <span class="sk" style="width:20%;height:16px; border-radius: 3px;  "></span> 
+         <span class="sk" style="width:20%;height:16px; border-radius: 3px;  "></span> 
+      </div>
+    </div>
+    <div class="sk-table-body">
+       <span class="sk" style="width:91%;height:20px; border-radius: 5px;  "></span> 
+       <span class="sk" style="width:91%;height:20px; border-radius: 5px;  "></span> 
+
+       <span class="sk" style="width:91%;height:20px; border-radius: 5px;  "></span> 
+
+       <span class="sk" style="width:91%;height:20px; border-radius: 5px;  "></span> 
+       <span class="sk" style="width:91%;height:20px; border-radius: 5px;  "></span> 
+
+       <span class="sk" style="width:91%;height:20px; border-radius: 5px;  "></span> 
+
+       <span class="sk" style="width:91%;height:20px; border-radius: 5px;  "></span> 
+
+       <span class="sk" style="width:91%;height:20px; border-radius: 5px;  "></span> 
+
+       <span class="sk" style="width:91%;height:20px; border-radius: 5px;  "></span> 
+
+       <span class="sk" style="width:91%;height:20px; border-radius: 5px;  "></span> 
+
+       <span class="sk" style="width:91%;height:20px; border-radius: 5px;  "></span> 
+      
+    </div>
+  </div>
+   <!-- Orders Table Skeleton -->  
+
+  <div class="table-title">
+    <p>Orders History</p>
+  </div>
+  <div class="content-wrapper">
+    <div class="table-scroll-area">
+      <!-- TABLE HEADER -->
+      <div class="table-header">
+        <span>Order-ID</span>
+        <span>Network</span>
+        <span>Size</span>
+        <span>Recipient</span>
+        <span>Status</span>
+        <span>Date-Submitted</span>
+        <span>Paid?</span>
+        <span>Delivered-At</span>
+      </div>
+
+      <div class="main-row-content">
+        <div class="row-wrapper" id="liveOrderRows">
+          <p id="empty-body" hidden>No recent orders yet</p>
+          <!-- dynamic rows -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  <!-- ends -->
+
+  <!----dashboard-overview-->
+  <!----ENDS-->
+
+
+
+
+   <!----NORMALVIEW-SECTION-->
+  <section class="normalGrid-container">
+    <div id="sk-mode-btn" class="sk-mode-btn-container">
+      <div class="sk-mode-top">
+         <span class="sk" style="width:60%;height:46px; border-radius: 3px; margin-right: 13px;"></span>
+          <span class="sk" style="width:94%;height:26px; margin-right: 13px; border-radius: 3px; "></span>
+      </div>
+      <div class="sk-mode-bottom">
+        <div class="sk-mode-btom-top">
+           <span class="sk" style="width:80%;height:46px; border-radius: 10px;margin-top: .5rem;"></span>
+        </div>
+        <div class="sk-mode-btom-bottom">
+           <span class="sk" style="width:80%;height:136px; border-radius: 1rem;margin-top: .5rem;"></span>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="titlen">
+      <div class="mtn-offers-title"><h2 >Select MTN Offer</h2>
+      </div>
+    <div class="choose-offer"> 
+      <small>Choose from available MTN data offers</small>
+    </div>
+    </div>
+
+
+
+
+    <!---offer-select-options-->
+    <div class="custom-select">
+    <button class="select-btn" id="selectBtn">
+      Select Available MTN Offer
+    
+      <span><img src="./css/icons/more.png.png" alt="dropdown" loading="lazy"></span>
+    </button>
+
+    <div class="select-dropdown" id="dropdownOffer">
+      <!--normal---->
+      <div class="optionDelevery" data-mode="normal" style='display: none;'>
+        <span >MTN DATA NORMAL DELIVERY 
+        
+        </span>
+        <small>NON-EXPIRY</small>
+      </div>
+      <!---express-->
+      <div class="optionDelevery" data-mode="express" >
+        <span>MTN DATA EXPRESS DELIVERY 
+        
+        </span>
+        <small>NON-EXPIRY</small>
+      </div>
+
+        <!---express-->
+      <div class="optionDelevery" data-mode="numbers" >
+        <span>ALL NEW NUMBERS PORTAL
+        
+        </span>
+        <small>NON-EXPIRY</small>
+      </div>
+      <!---Special-Mashup-->
+        <div class="optionDelevery" data-mode="mashup" style="display: none">
+        <span>SPECIAL MASHUP-BUNDLE 
+        </span>
+        <small>VOICE-MINS</small>
+      </div>
+    </div>
+    <div id="offerDisplay"></div>
+  </div>
+
+  <!----choose grid 0r normal btns-->
+  <div class="normalOrgridBtn-wrapping">
+    <div class="normalOrgridBtn">
+    <div class="mode-btn-wrapper">
+      
+      <button class="mode-Btn active " id="normalModeBtn"><img src="./css/icons/list (1).png" alt="" loading="lazy"> List</button>
+       <button class="mode-Btn " id="gridModeBtn"><img src="./css/icons/grid.png" alt="" loading="lazy"> Grid</button>
+   
+    </div>
+    </div>
+
+    <div class="pack-wrapper">
+      <div class="packages active">
+      <small></small>
+    <p id="bundleTitle">MTN Bundles</p>
+    </div>
+
+    <div class=" packagesta">
+      <small></small>
+    <p  id="teleAirtel">Telecel & <span class="tigoo">AirtelTigo</span></p>
+    </div>
+    </div>
+  
+
+  </div>
+  </section>
+  <!-----INDIVIDUAL SECTIONS-VIEW TOGGLE---->
+ 
+
+  <section id="normalView" class="view active" >
+  <div id="sk-normalView" class="sk-normalView-container">
+    <div class="sk-normal-tp-wrapper">
+       <div class="sk-normal-top">
+          <span class="sk" style="width:70px;height:70px; border-radius: 40%; "></span>
+           <span class="sk" style="width:80%;height:33px; border-radius: 6px; margin-left: .8rem; "></span>
+       </div>
+       <div class="sk-normal-bottom">
+         <span class="sk" style="width:90%;height:43px; border-radius: .8rem; "></span>
+       </div>
+    </div>
+   
+    <div class="sk-normal-bottom-btom">
+        <span class="sk" style="width:80%;height:23rem;
+        margin-top: .5rem; border-start-start-radius: 2px; border-start-end-radius: 2px;  border-end-end-radius: .8rem; border-end-start-radius: .8rem;"></span>
+
+            <span class="sk" style="width:88%;height:23px; border-radius: .8rem; "></span>
+    </div>
+  </div>
+
+
+
+    
+
+  <!--hero-text-->
+    <div class="hero-text-container mtn" id="mtnArea">
+      <div class="hero-top-content">
+        <div class="top-left-content">
+        <a href="#">
+          <img src="./css/images/mtn-badge2.jpg" alt="images" loading="lazy">
+        </a>
+        </div>
+        <div class="top-right-content">
+          <h2>MTN Data Bundle</h2>
+          <small>Purchase MTN data bundles for single <br> or multiple recipients</small>
+        </div>
+      </div>
+      <div class="hero-bottom-content">
+        <div class="btn-div ">
+          16 Packages Available
+        </div>
+        <!----CARD-DIV---->
+        <div class="card-div">
+          <div class="network-card">
+            <div class="card-network-top">
+              <div class="left-card-content">
+                <img src="./css/images/mtn-badge2.jpg" alt="images" loading="lazy">
+              </div>
+              <div class="right-card-content">
+                <h2>MTN Data Bundle</h2>
+                <p class="bundle-info">
+                  (Data). MTN Express data bundle
+                </p>
+              </div>
+            </div>
+            <div class="bottom-content">
+              <div class="details-network">
+                <span><small>.</small> 90 Days</span>
+                <span><small>.</small> Active</span>
+                <span><small>.</small> 18 Packages</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!---SINGLE ORDER BTN-->
+            <div class="single-order-container">
+              <div class="modebtn">Mode</div>
+              <button class="modeN">Normal</button>
+              <button class="mode">Grid</button>
+            </div>
+      </div>
+    </div>
+    
+    <!----HERO ENDS-->
+
+
+
+
+
+
+
+
+    <div class="top-dashboard" style='display: none;'>
+      <h2>MTN DATA BUNDLE</h2>
+      <button class="packs">17 Packages Available</button>
+    </div>
+    <div class="single-order">
+
+      <small class="bundleRecipient">Bundle Recipient Number</small>
+      <!---phone-input-here-->
+      <input class="normalInput" type="tel" placeholder=" 0241234567">
+      <small class="sel">Bundle</small>
+
+      <div class="custom-option">
+        <!---visible-btn-->
+        <button class="selection-btn" id="optionBtn">
+      Select bundle
+       <span>
+        <img src="./css/icons/more.png.png" alt="dropdown" loading="lazy">
+       </span>
+    </button>
+    <!----option-card-->
+    <div class="dropwrapper">
+      <div class="option-dropdown" id="moveDown">
+
+   
+
+  <!----PROMO-DIV-START----->
+  <div id="promoActive">
+      <!---select-1-->
+      <div class="optionSelect active" 
+    data-network="mtn"
+    data-value="1GB"
+    data-size="1"
+    data-price="5.5">
+        <span>1GB</span>
+        <small>GHS 5.5</small>
+
+      
+      </div>
+      <!---select-2-->
+      <div class="optionSelect" 
+    data-network="mtn"
+    data-value="2GB"
+    data-size="2"
+    data-price="11">
+        <span>2GB</span>
+        <small>GHS 11</small>
+
+      
+      </div>
+      <!---select-3-->
+      <div class="optionSelect" 
+    data-network="mtn"
+    data-value="3GB"
+    data-size="3"
+    data-price="16.7">
+        <span>3GB</span>
+        <small>GHS 16.7</small>
+
+      
+      </div>
+      <!---select-4-->
+        <div class="optionSelect" 
+    data-network="mtn"
+    data-value="4GB"
+    data-size="4"
+    data-price="21.6">
+        <span>4GB</span>
+        <small>GHS 21.6</small>
+
+            </div>
+      <!---select-5-->
+      <div class="optionSelect"
+    data-network="mtn"
+    data-value="5GB"
+    data-size="5"
+    data-price="25.50">
+        <span>5GB</span>
+        <small>GHS 25.50</small>
+
+            </div>
+      <!---select-6-->
+      <div class="optionSelect" 
+    data-network="mtn"
+    data-value="6GB"
+    data-size="6"
+    data-price="28.90">
+        <span>6GB</span>
+        <small>GHS 28.90</small>
+
+            </div>
+      <!---select-7-->
+        <div class="optionSelect"
+    data-network="mtn"
+    data-value="7GB"
+    data-size="7"
+    data-price="35.70">
+        <span>7GB</span>
+        <small>GHS 35.70</small>
+
+      
+      </div>
+      <!---select-8-->
+      <div class="optionSelect" 
+    data-network="mtn"
+    data-value="8GB"
+    data-size="8"
+    data-price="39">
+        <span>8GB</span>
+        <small>GHS 39</small>
+
+      
+      </div>
+
+    
+      <!---select-9-->
+        <div class="optionSelect" 
+    data-network="mtn"
+    data-value="9GB"
+    data-size="9"
+    data-price="42" style="display: none;">
+        <span>9GB</span>
+        <small>GHS 42</small>
+
+            </div>
+      <!---select-10-->
+        <div class="optionSelect" 
+    data-network="mtn"
+    data-value="10GB"
+    data-size="10"
+    data-price="46.20">
+        <span>10GB</span>
+        <small>GHS 46.20</small>
+
+            </div>
+      <!---select-11-->
+      <div class="optionSelect" 
+    data-network="mtn"
+    data-value="12GB"
+    data-size="12"
+    data-price="57">
+        <span>12GB</span>
+        <small>GHS 57</small>
+
+      
+      </div>
+      <!---select-12-->
+      <div class="optionSelect" 
+    data-network="mtn"
+    data-value="15GB"
+    data-size="15"
+    data-price="67">
+        <span>15GB</span>
+        <small>GHS 67</small>
+
+      
+      </div>
+      <!---select-13-->
+      <div class="optionSelect" 
+    data-network="mtn"
+    data-value="20GB"
+    data-size="20"
+    data-price="88">
+        <span>20GB</span>
+        <small>GHS 88</small>
+
+            </div>
+      <!---select-14-->
+      <div class="optionSelect" 
+    data-network="mtn"
+    data-value="25GB"
+    data-size="25"
+    data-price="109">
+        <span>25GB</span>
+        <small>GHS 109</small>
+
+            </div>
+      <!---select-15-->
+      <div class="optionSelect" 
+    data-network="mtn"
+    data-value="30GB"
+    data-size="30"
+    data-price="129">
+        <span>30GB</span>
+        <small>GHS 129</small>
+
+            </div>
+      <!---select-16-->
+      <div class="optionSelect" 
+    data-network="mtn"
+    data-value="40GB"
+    data-size="40"
+    data-price="168">
+        <span>40GB</span>
+        <small>GHS 168</small>
+
+          </div>
+      <!---select-17-->
+      <div class="optionSelect"
+    data-network="mtn"
+    data-value="50GB"
+    data-size="50"
+    data-price="209">
+        <span>50GB</span>
+        <small>GHS 209</small>
+
+            </div>
+      <!---select-ends-->
+  </div>
+  <!---PROMO-DIV-ENDS-->
+  
+
+
+
+  <!-----NORMAL-DELIVERY-PRICE-DIV------>
+      <div id="topOpt">
+        <!---select-1-->
+      <div class="optionSelect active" 
+    data-network="mtn"
+    data-value="1GB"
+    data-size="1"
+    data-price="5.99">
+        <span>1GB</span>
+        <small>GHS 5.99</small>
+      </div>
+      <!---select-2-->
+      <div class="optionSelect" 
+    data-network="mtn"
+    data-value="2GB"
+    data-size="2"
+    data-price="11.99">
+        <span>2GB</span>
+        <small>GHS 11.99</small>
+      </div>
+      <!---select-3-->
+      <div class="optionSelect" 
+    data-network="mtn"
+    data-value="3GB"
+    data-size="3"
+    data-price="16.99">
+        <span>3GB</span>
+        <small>GHS 16.99</small>
+      </div>
+      <!---select-4-->
+        <div class="optionSelect" 
+    data-network="mtn"
+    data-value="4GB"
+    data-size="4"
+    data-price="21.99">
+        <span>4GB</span>
+        <small>GHS 21.99</small>
+      </div>
+      <!---select-5-->
+      <div class="optionSelect"
+    data-network="mtn"
+    data-value="5GB"
+    data-size="5"
+    data-price="26.50">
+        <span>5GB</span>
+        <small>GHS 26.50</small>
+      </div>
+      <!---select-6-->
+      <div class="optionSelect" 
+    data-network="mtn"
+    data-value="6GB"
+    data-size="6"
+    data-price="32.50">
+        <span>6GB</span>
+        <small>GHS 32.50</small>
+      </div>
+      <!---select-7-->
+        <div class="optionSelect"
+    data-network="mtn"
+    data-value="7GB"
+    data-size="7"
+    data-price="36.96">
+        <span>7GB</span>
+        <small>GHS 36.96</small>
+      </div>
+      <!---select-8-->
+      <div class="optionSelect" 
+    data-network="mtn"
+    data-value="8GB"
+    data-size="8"
+    data-price="39.99">
+        <span>8GB</span>
+        <small>GHS 39.99</small>
+      </div>
+      <!---select-9-->
+       <div class="optionSelect" 
+    data-network="mtn"
+    data-value="9GB"
+    data-size="9"
+    data-price="43.99" style="display: none;">
+        <span>9GB</span>
+        <small>GHS 43.99</small>
+      </div>
+      <!---select-10-->
+        <div class="optionSelect" 
+    data-network="mtn"
+    data-value="10GB"
+    data-size="10"
+    data-price="46.99">
+        <span>10GB</span>
+        <small>GHS 46.99</small>
+      </div>
+      <!---select-11-->
+      <div class="optionSelect" 
+    data-network="mtn"
+    data-value="12GB"
+    data-size="12"
+    data-price="59.99">
+        <span>12GB</span>
+        <small>GHS 59.99</small>
+      </div>
+      <!---select-12-->
+      <div class="optionSelect" 
+    data-network="mtn"
+    data-value="15GB"
+    data-size="15"
+    data-price="67.99">
+        <span>15GB</span>
+        <small>GHS 67.99</small>
+      </div>
+      <!---select-13-->
+      <div class="optionSelect" 
+    data-network="mtn"
+    data-value="20GB"
+    data-size="20"
+    data-price="90.97">
+        <span>20GB</span>
+        <small>GHS 90.97</small>
+      </div>
+      <!---select-14-->
+      <div class="optionSelect" 
+    data-network="mtn"
+    data-value="25GB"
+    data-size="25"
+    data-price="110.99">
+        <span>25GB</span>
+        <small>GHS 110.99</small>
+      </div>
+      <!---select-15-->
+      <div class="optionSelect" 
+    data-network="mtn"
+    data-value="30GB"
+    data-size="30"
+    data-price="129.99">
+        <span>30GB</span>
+        <small>GHS 129.99</small>
+      </div>
+      <!---select-16-->
+      <div class="optionSelect" 
+    data-network="mtn"
+    data-value="40GB"
+    data-size="40"
+    data-price="168.99">
+        <span>40GB</span>
+        <small>GHS 168.99</small>
+      </div>
+      <!---select-17-->
+      <div class="optionSelect"
+    data-network="mtn"
+    data-value="50GB"
+    data-size="50"
+    data-price="214.98">
+        <span>50GB</span>
+        <small>GHS 214.98</small>
+      </div>
+      <!---select-ends-->
+      </div>
+  <!---NORMAL--DELIVERY-PRICE-DIV-ENDS--->
+
+
+        <!----EXPRESS-DELIVERY-PRICE-DIV----->
+        <div id="bottomOpt" style="display: none;">
+                <!---select-1-->
+      <div class="optionSelect active" 
+    data-network="mtn"
+    data-value="1GB"
+    data-size="1"
+    data-price="5.85">
+        <span>1GB</span>
+        <small>GHS 5.85</small>
+      </div>
+      <!---select-2-->
+      <div class="optionSelect" 
+    data-network="mtn"
+    data-value="2GB"
+    data-size="2"
+    data-price="11.50">
+        <span>2GB</span>
+        <small>GHS 11.50</small>
+      </div>
+      <!---select-3-->
+      <div class="optionSelect" 
+    data-network="mtn"
+    data-value="3B"
+    data-size="3"
+    data-price="17.20">
+        <span>3GB</span>
+        <small>GHS 17.20</small>
+      </div>
+      <!---select-4-->
+        <div class="optionSelect" 
+    data-network="mtn"
+    data-value="4GB"
+    data-size="4"
+    data-price="22.50">
+        <span>4GB</span>
+        <small>GHS 22.50</small>
+      </div>
+      <!---select-5-->
+      <div class="optionSelect"
+    data-network="mtn"
+    data-value="5GB"
+    data-size="5"
+    data-price="26.99">
+        <span>5GB</span>
+        <small>GHS 26.99</small>
+      </div>
+      <!---select-6-->
+      <div class="optionSelect" 
+    data-network="mtn"
+    data-value="6GB"
+    data-size="6"
+    data-price="32.99">
+        <span>6GB</span>
+        <small>GHS 32.99</small>
+      </div>
+      <!---select-7-->
+        <div class="optionSelect"
+    data-network="mtn"
+    data-value="7GB"
+    data-size="7"
+    data-price="37.97">
+        <span>7GB</span>
+        <small>GHS 37.97</small>
+      </div>
+      <!---select-8-->
+      <div class="optionSelect" 
+    data-network="mtn"
+    data-value="8GB"
+    data-size="8"
+    data-price="40.99">
+        <span>8GB</span>
+        <small>GHS 40.99</small>
+      </div>
+      <!---select-9-->
+       <div class="optionSelect" 
+    data-network="mtn"
+    data-value="9GB"
+    data-size="9"
+    data-price="44.99" style="display: none;">
+        <span>9GB</span>
+        <small>GHS 44.99</small>
+      </div>
+      <!---select-10-->
+        <div class="optionSelect" 
+    data-network="mtn"
+    data-value="10GB"
+    data-size="10"
+    data-price="47.99">
+        <span>10GB</span>
+        <small>GHS 47.99</small>
+      </div>
+      <!---select-11-->
+      <div class="optionSelect" 
+    data-network="mtn"
+    data-value="12GB"
+    data-size="12"
+    data-price="61.99">
+        <span>12GB</span>
+        <small>GHS 61.99</small>
+      </div>
+      <!---select-12-->
+      <div class="optionSelect" 
+    data-network="mtn"
+    data-value="15GB"
+    data-size="15"
+    data-price="69.97">
+        <span>15GB</span>
+        <small>GHS 69.97</small>
+      </div>
+      <!---select-13-->
+      <div class="optionSelect" 
+    data-network="mtn"
+    data-value="20GB"
+    data-size="20"
+    data-price="92.98">
+        <span>20GB</span>
+        <small>GHS 92.98</small>
+      </div>
+      <!---select-14-->
+      <div class="optionSelect" 
+    data-network="mtn"
+    data-value="25GB"
+    data-size="25"
+    data-price="112.99">
+        <span>25GB</span>
+        <small>GHS 112.99</small>
+      </div>
+      <!---select-15-->
+      <div class="optionSelect" 
+    data-network="mtn"
+    data-value="30GB"
+    data-size="30"
+    data-price="132.97">
+        <span>30GB</span>
+        <small>GHS 132.97</small>
+      </div>
+      <!---select-16-->
+      <div class="optionSelect" 
+    data-network="mtn"
+    data-value="40GB"
+    data-size="40"
+    data-price="171.99">
+        <span>40GB</span>
+        <small>GHS 171.99</small>
+      </div>
+      <!---select-17-->
+      <div class="optionSelect"
+    data-network="mtn"
+    data-value="50GB"
+    data-size="50"
+    data-price="218.98">
+        <span>50GB</span>
+        <small>GHS 218.98</small>
+      </div>
+      <!---select-ends-->
+        </div>
+        <!----EXPRESS-DELIVERY-PRICE-DIV------>
+
+        
+        <!----MASHUP-DIV----->
+        <div id="mash" >
+           <!---select-1-->
+          <div class="optionSelect active"
+          data-network="mtn"
+          data-value="3GB"
+          data-size="3"
+          data-price="13" >
+              <span>3GB</span>
+              <small>GHS13</small>
+            </div>
+               <!---select-1-->
+          <div class="optionSelect active"
+          data-network="mtn"
+          data-value="5GB"
+          data-size="5"
+          data-price="19" >
+              <span>5GB</span>
+              <small>GHS19</small>
+            </div>
+            
+          <!---select-1-->
+          <div class="optionSelect active"
+          data-network="mtn"
+          data-value="10GB"
+          data-size="10"
+          data-price="42" >
+              <span>10GB</span>
+              <small>GHS42</small>
+            </div>
+            <!---select-1-->
+          <div class="optionSelect " 
+          data-network="mtn"
+          data-value="20GB"
+          data-size="20"
+          data-price="75">
+              <span>20GB</span>
+              <small>GHS75</small>
+            </div>
+               <!---select-1-->
+          <div class="optionSelect active"
+          data-network="mtn"
+          data-value="30GB"
+          data-size="30"
+          data-price="88" >
+              <span>30GB</span>
+              <small>GHS88</small>
+            </div>
+               <!---select-1-->
+          <div class="optionSelect active"
+          data-network="mtn"
+          data-value="40GB"
+          data-size="40"
+          data-price="100" >
+              <span>40GB</span>
+              <small>GHS100</small>
+            </div>
+                          <!---select-1-->
+          <div class="optionSelect " 
+          data-network="mtn"
+          data-value="50GB"
+          data-size="50"
+          data-price="140" >
+              <span>50GB</span>
+              <small>GHS140</small>
+            </div>
+              <!---select-1-->
+          <div class="optionSelect active"
+          data-network="mtn"
+          data-value="60GB"
+          data-size="60"
+          data-price="170" >
+              <span>60GB</span>
+              <small>GHS170</small>
+            </div>
+
+               <!---select-1-->
+          <div class="optionSelect active"
+          data-network="mtn"
+          data-value="100GB"
+          data-size="100"
+          data-price="262" >
+              <span>100GB</span>
+              <small>GHS262</small>
+            </div>
+
+            
+              <!---select-1-->
+          <div class="optionSelect " 
+          data-network="mtn"
+          data-value="217GB"
+          data-size="217"
+          data-price="365" >
+              <span>217GB</span>
+              <small>GHS365</small>
+            </div>
+ 
+            <!---select-2-->
+            <div class="optionSelect" 
+          data-network="mtn"
+          data-value="372MINS"
+          data-size="372"
+          data-price="17.99">
+              <span>372MINS + 903MB</span>
+              <small>GHS 17.99</small>
+            </div>
+            <!---select-3-->
+            <div class="optionSelect" 
+          data-network="mtn"
+          data-value="744MINS"
+          data-size="744"
+          data-price="39.85">
+              <span>744MINS + 1.8GB</span>
+              <small>GHS 39.85</small>
+            </div>
+            <!---select-4-->
+              <div class="optionSelect" 
+          data-network="mtn"
+          data-value="1100MINS"
+          data-size="1116"
+          data-price="56.97">
+              <span>1116MINS + 2.7GB</span>
+              <small>GHS 56.97</small>
+            </div>
+          
+
+            <!---select-ends-->
+        </div>
+        <!---MASHUP--DIV------>
+
+    </div>
+    </div>
+
+
+    <!---selected-bundle-modal-here--->
+    <div class="selectedModal">
+      <div class="selectedModal-top">
+        <div class="selectedModal-top-left-content">
+          <div class='spanImgContent'>
+            <img src="./css/icons/completed.png" alt="selectedData" loading="lazy"></div>
+          <div class="gb-contentText"><small id="placeHolderGB"></small></div>
+        </div>
+        <div class="selectedModal-top-right-content">
+          <small id='networkTextContent'></small>
+        </div>
+      </div>
+
+
+
+      <div class="selectedModal-bottom">
+        <div class="selectedModal-bottom-leftTotal">
+          <small id="totalAmountText"></small>
+        </div>
+        <div class="selectedModal-bottom-leftTotalAmout">
+          <small id="placeHolderPriceTotal"></small>
+        </div>
+      </div>
+
+      </div>
+
+    </div>
+
+    <!---buy-btn-->
+      <button id="placeOrderBtn" class="buy-btn place-telbtn">
+        <i class="ri-shopping-cart-line buyCart"></i>
+      Place Order
+      </button>
+      </div>
+
+    
+
+
+      <!----SINGLE CARD FOOTER---->
+
+   
+    
+     <section class="businessInfo">
+      <div class="businessInfo-right">
+          <p style="text-align:center;color:#888;font-size:10px ;">© 2026 Ecodata. All rights reserved.
+        </p>
+      </div>
+      <span>|</span>
+        <small class="businessInfo-powered" style="font-size: 9px !important; font-weight: 800 !important;">
+        <strong style="font-weight: 800;">Powered by:</strong >   IA-TECH E-Business 
+      </small>
+    </section>
+      <!---SINGLE ORDER ENDS-->
+ 
+
+
+
+
+    <!---GRID NORMALVIEW-ENDS---->
+  </section>
+    
+  <!----NORMALVIEW-SECTION-ENDS---->
+
+
+
+
+
+
+
+
+  <!---GRIDvIEW-SECTION-->
+  <section id="gridView" class="View "style="display: none;" >
+  <!---------NETWORK PURCHASED-DETAILS----->
+    <div class="networks-purchased-container">
+      <div class="purchase-title">
+      <h5>All Networks Packages</h5>
+      </div>
+      
+      <div class="purchase-container">
+    
+          <div class="card-box mtn mtnBt"><img src="./css/icons/mtn-signal.png" alt="img" loading="lazy"> MTN</div>
+      
+      
+          <div class="card-box telecel"><img src="./css/icons/telecel-signal.png" alt="img" loading="lazy"> Telecel</div>
+        
+      
+          <div class="card-box at"><img src="./css/icons/tigo-signal.png" alt="img" loading="lazy"> AirtelTigo</div>
+      </div>
+    </div>
+
+
+
+    
+
+  <!--hero-text-->
+    <div class="hero-text-container mtn" id="mtnArea">
+      <div class="hero-top-content">
+        <div class="top-left-content">
+        <a href="#">
+          <img src="./css/images/mtn-badge2.jpg" alt="images" loading="lazy">
+        </a>
+        </div>
+        <div class="top-right-content">
+          <h2>MTN Data Bundle</h2>
+          <small>Purchase MTN data bundles for single <br> or multiple recipients</small>
+        </div>
+      </div>
+      <div class="hero-bottom-content">
+        <div class="btn-div ">
+          16 Packages Available
+        </div>
+        <!----CARD-DIV---->
+        <div class="card-div">
+          <div class="network-card">
+            <div class="card-network-top">
+              <div class="left-card-content">
+                <img src="./css/images/mtn-badge2.jpg" alt="images" loading="lazy">
+              </div>
+              <div class="right-card-content">
+                <h2>MTN Data Bundle</h2>
+                <p class="bundle-info">
+                  (Data). MTN Express data bundle
+                </p>
+              </div>
+            </div>
+            <div class="bottom-content">
+              <div class="details-network">
+                <span><small>.</small> 90 Days</span>
+                <span><small>.</small> Active</span>
+                <span><small>.</small> 18 Packages</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!---SINGLE ORDER BTN-->
+            <div class="single-order-container">
+              <div class="modebtn">Mode</div>
+              <button class="modeN">Normal</button>
+              <button class="mode">Grid</button>
+            </div>
+      </div>
+    </div>
+    
+    <!----HERO ENDS-->
+  
+  <!-----NETWORK-BUNDLE-CARDS-MTN-CONTAINER---->
+    <!---CARDS SECTION-->
+      <section class="gridCards-container topMtn " id="bundles">
+        <!---GRID CARDS WRAPPER-->
+
+
+
+
+        <!------GRID PROMO SECTION--(off until isPromoTime)------>
+        <div id="gridPromoActive" style="width: 100%;  max-width: 99.99%;">
+       
+
+
+        <div class="gridCard-wrapper" >
+        <!----------CARD----1------->
+        <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+
+              <div class="network-label" >
+            <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+          </div>
+          <div class="bundle-data">1<span class="unit">GB</span></div>
+          <div class="bundle-validity">NON-EXPIRY</div>
+          </div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>5.5</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="1GB"
+          data-size="1"
+          data-price="5.5"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+      
+  <!----------NEXT CARD------2----->
+         <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+        <div class="bundle-data">2<span class="unit">GB</span></div>
+        <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>11</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="2GB"
+          data-size="2"
+          data-price="11"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+  <!----------NEXT CARD-------3---->
+        <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">3<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>16.7</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="3GB"
+          data-size="3"
+          data-price="16.70"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD----4------->
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">4<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>21.6</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="4GB"
+          data-size="4"
+          data-price="21.6"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD----5------->
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">5<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>25.50</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="5GB"
+          data-size="5"
+          data-price="25.50"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD---6-------->
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">6<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>28.9</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="6GB"
+          data-size="6"
+          data-price="28.9"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD---7-------->
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">7<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>35.70</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="7GB"
+          data-size="7"
+          data-price="35.70"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD-----8------>
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">8<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>39</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="8GB"
+          data-size="8"
+          data-price="39"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+        <!----------NEXT CARD--9--------->
+       <div class="mntCardStyle" style="display: none;">
+       <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">9<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>42</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="9GB"
+          data-size="9"
+          data-price="42"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD---10-------->
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">10<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>46.20</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="10GB"
+          data-size="10"
+          data-price="46.2"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD---11------->
+         
+         <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">12<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>57</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="12GB"
+          data-size="12"
+          data-price="57"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD-----12------>
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">15<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>67</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="15GB"
+          data-size="15"
+          data-price="67"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD----13------->
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">20<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>88</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="20GB"
+          data-size="20"
+          data-price="88"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD----14------>
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">25<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>109</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="25GB"
+          data-size="25"
+          data-price="109"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD---15------->
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">30<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>129</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="30GB"
+          data-size="30"
+          data-price="1229"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD----16------->
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">40<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>168</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="40GB"
+          data-size="40"
+          data-price="168"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD---17-------->
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">50<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>209</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="50GB"
+          data-size="50"
+          data-price="209"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD---18-------->
+        
+         <!-- MTN Bundles -->
+        <div class="mntCardStyle" style="display: none;">
+        <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">100<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>400.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="100GB"
+          data-size="100"
+          data-price="400.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+
+
+
+
+
+        </div>
+        </div>
+        <!------GRID PROMO SECTION--ENDS------>
+
+
+
+        <!------GRID NORMAL SECTION---( active-unless isPromoTime)---->
+        <div id="gridNormalDiv" style="width: 100%;  max-width: 98.99%;">
+        <div class="offer-title" > <h2 >MTN NORMAL DELIVERY</h2>
+        </div>
+
+        <div class="gridCard-wrapper " >
+
+        <!----------CARD----1------->
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">1<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>5.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="1GB"
+          data-size="1"
+          data-price="5.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+  <!----------NEXT CARD------2----->
+     <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+            <div class="popular-badge">⭐ Best Value</div>
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">2<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>11.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="2GB"
+          data-size="2"
+          data-price="11.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+  
+  <!----------NEXT CARD-------3---->
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">3<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>16.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="3GB"
+          data-size="3"
+          data-price="16.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD----4------->
+            <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+            <div class="popular-badge">⭐ Best Value</div>
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">4<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>21.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="4GB"
+          data-size="4"
+          data-price="21.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD----5------->
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+            <div class="popular-badge">⭐ Popular</div>
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">5<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>26.50</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="5GB"
+          data-size="5"
+          data-price="26.50"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD---6-------->
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">6<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>32.50</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="6GB"
+          data-size="6"
+          data-price="32.50"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD---7-------->
+            <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">7<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>36.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="7GB"
+          data-size="7"
+          data-price="36.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">8<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>39.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="8GB"
+          data-size="8"
+          data-price="39.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+          <!----------NEXT CARD---9gb-------->
+      <!-- MTN Bundles -->
+        <div class="mntCardStyle" style="display: none;">
+        <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">9<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>43.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="9GB"
+          data-size="9"
+          data-price="43.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD---10gb-------->
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+            <div class="popular-badge">⭐ Popular</div>
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">10<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>46.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="10GB"
+          data-size="10"
+          data-price="46.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD---10-------->
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">12<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>59.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="12GB"
+          data-size="12"
+          data-price="59.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD-----11------>
+             <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">15<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>67.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="15GB"
+          data-size="15"
+          data-price="67.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD----12------->
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+            <div class="popular-badge">⭐ Popular</div>
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">20<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>90.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="20GB"
+          data-size="20"
+          data-price="90.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD----13------->
+             <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">25<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>110.90</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="25GB"
+          data-size="25"
+          data-price="110.90"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD---14------->
+            <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">30<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>129.98</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="30GB"
+          data-size="30"
+          data-price="129.98"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD----15------->
+            <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">40<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>168.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="40GB"
+          data-size="40"
+          data-price="168.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD---16-------->
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">50<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>214.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="50GB"
+          data-size="50"
+          data-price="214.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD---17-------->
+  
+        </div>
+        </div>
+        <!------GRID NORMAL SECTION--ENDS------>
+
+
+
+        <!------GRID EXPRESS SECTION--( active-unless isPromoTime)------>
+        <div id="gridExpressDiv" class=" grader active" style="width: 100%; max-width: 99.99%;">
+
+          <div class="offer-title" style="margin-top: 1.2rem;"> <h2 >MTN EXPRESS DELIVERY</h2>
+        </div>
+
+        <div class="gridCard-wrapper">
+        <!----------CARD----1------->
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+            <div class="popular-badge">⭐ Popular</div>
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">1<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>5.85</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="1GB"
+          data-size="1"
+          data-price="5.85"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+  <!----------NEXT CARD------2----->
+        <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">2<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>11.50</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="2GB"
+          data-size="2"
+          data-price="11.50"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+  <!----------NEXT CARD-------3---->
+        <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">3<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>17.20</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="3GB"
+          data-size="3"
+          data-price="17.20"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD----4------->
+    <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">4<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>22.5</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="4GB"
+          data-size="4"
+          data-price="22.5"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD----5------->
+         <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">5<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>26.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="5GB"
+          data-size="5"
+          data-price="26.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD---6-------->
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">6<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>32.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="6GB"
+          data-size="6"
+          data-price="32.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD---7-------->
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">7<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>37.97</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="7GB"
+          data-size="7"
+          data-price="37.97"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD-----8------>
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">8<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>40.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="8GB"
+          data-size="8"
+          data-price="40.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+        <!----------NEXT CARD----------->
+          <!----------NEXT CARD---10gb-------->
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" style="display: none;">
+        <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">9<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>44.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="9GB"
+          data-size="9"
+          data-price="44.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD---9-------->
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+            <div class="popular-badge">⭐ popular</div>
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">10<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>47.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="10GB"
+          data-size="10"
+          data-price="47.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD---10-------->
+         <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">12<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>61.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="12GB"
+          data-size="12"
+          data-price="61.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD-----11------>
+        <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+            <div class="popular-badge">⭐ Popular</div>
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">15<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>69.97</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="15GB"
+          data-size="15"
+          data-price="69.97"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD----12------->
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">20<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>92.98</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="20GB"
+          data-size="20"
+          data-price="92.98"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD----13------->
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">25<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>112.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="25GB"
+          data-size="25"
+          data-price="112.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD---14------->
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">30<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>132.97</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="30GB"
+          data-size="30"
+          data-price="132.97"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD----15------->
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">40<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>171.98</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="40GB"
+          data-size="40"
+          data-price="171.98"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD---16-------->
+          <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">50<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>218.98</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="50GB"
+          data-size="50"
+          data-price="218.98"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+        <!----------NEXT CARD---17-------->
+        <!-- MTN Bundles -->
+        <div class="mntCardStyle" style="display: none;">
+        <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MTN
+      </div>
+      <div class="bundle-data">100<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>402.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="100GB"
+          data-size="100"
+          data-price="5.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+
+
+
+
+        </div>
+        </div>
+        <!------EXPRESS GRID SECTION ENDS-------->
+
+
+
+            
+        <!------GRID NORMAL SECTION---( active-unless isPromoTime)---->
+        <div id="mashGridDiv" style="width: 100%;  max-width: 98.99%; display: none;">
+        <div class="offer-title" > <h2 >SPECIAL MASHUP BUNDLES</h2>
+        </div>
+
+        <div class="gridCard-wrapper " >
+
+        <!----------CARD----1------->
+            <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MASH DATA
+      </div>
+      <div class="bundle-data">3<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>13</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="3GB"
+          data-size="3"
+          data-price="13"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+         <!----------CARD----1------->
+            <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MASH DATA
+      </div>
+      <div class="bundle-data">5<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>19</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="5GB"
+          data-size="5"
+          data-price="19"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+         <!----------CARD----1------->
+            <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MASH DATA
+      </div>
+      <div class="bundle-data">10<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>42</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="10GB"
+          data-size="10"
+          data-price="42"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+         <!----------CARD----1------->
+            <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MASH DATA
+      </div>
+      <div class="bundle-data">20<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>75</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="20GB"
+          data-size="20"
+          data-price="75"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+         <!----------CARD----1------->
+            <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MASH DATA
+      </div>
+      <div class="bundle-data">30<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>88</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="30GB"
+          data-size="30"
+          data-price="88"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+         <!----------CARD----1------->
+            <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MASH DATA
+      </div>
+      <div class="bundle-data">40<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>100</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="40GB"
+          data-size="40"
+          data-price="100"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+            <!-- MTN Bundles -->
+        <div class="mntCardStyle">
+           <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MASH DATA
+      </div>
+      <div class="bundle-data">50<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      </div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>140</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="50GB"
+          data-size="50"
+          data-price="140"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+            <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MASH DATA
+      </div>
+      <div class="bundle-data">60<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+    </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>170</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="60GB"
+          data-size="60"
+          data-price="170"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+         <!----------CARD----1------->
+            <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MASH DATA
+      </div>
+      <div class="bundle-data">100<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+    </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>262</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="100GB"
+          data-size="100"
+          data-price="262"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+        <!-- MTN Bundles -->
+        <div class="mntCardStyle">
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MASH DATA
+      </div>
+      <div class="bundle-data">217<span class="unit">GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+          </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>365</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="217GB"
+          data-size="217"
+          data-price="365"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+        
+  <!----------NEXT CARD------2----->
+     <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MASHUP
+      </div>
+      <div class="bundle-data">372<span class="unit">MINS + <br> 903MB</span></div>
+          
+
+      <div class="bundle-validity">NON-EXPIRY</div>
+    </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>17.99</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="372MINS"
+          data-size="372"
+          data-price="17.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+  
+  <!----------NEXT CARD-------3---->
+           <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MASHUP
+      </div>
+      <div class="bundle-data">744<span class="unit">MINS + <br> 1.8GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+      <div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>39.85</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="744MINS"
+          data-size="744"
+          data-price="39.85"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD----4------->
+            <!-- MTN Bundles -->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop">
+            <div class="popular-badge" style="margin-top: 0.4rem;">⭐ Best Value</div>
+          <div class="network-label" >
+        <div class="network-dot" style="background:#ffcb05;width:8px;height:8px;border-radius:50%"></div> MASHUP
+      </div>
+      <div class="bundle-data">1116<span class="unit">MINS + <br> 2.7GB</span></div>
+      <div class="bundle-validity">NON-EXPIRY</div>
+          </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>56.97</div>
+        <button class="buy-btn"
+          data-network="mtn"
+          data-value="1116MINS"
+          data-size="1116"
+          data-price="56.97"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+        <!----------NEXT CARD----5------->
+        
+
+
+
+
+        </div>
+        </div>
+        <!------GRID NORMAL SECTION--ENDS------>
+      
+
+      </section>
+
+
+
+
+
+
+  <!--section-title-->
+  <!--hero-text-->
+    <div class="hero-text-container tel" id="teleArea">
+      <div class="hero-top-content">
+        <div class="top-left-content">
+        <a href="#">
+          <img src="./css/images/telecel.jpg" alt="images" loading="lazy">
+        </a>
+        </div>
+        <div class="top-right-content">
+          <h2>Telecel Data Bundle</h2>
+          <small>Purchase Telecel data bundles for single <br> or multiple recipients</small>
+        </div>
+      </div>
+      <div class="hero-bottom-content">
+        <div class="btn-div">
+          8 Packages Available
+        </div>
+        <!----CARD-DIV---->
+        <div class="card-div">
+          <div class="network-card">
+            <div class="card-network-top">
+              <div class="left-card-content">
+                <img src="./css/images/telecel.jpg" alt="images" loading="lazy">
+              </div>
+              <div class="right-card-content">
+                <h2>Telecel Data Bundle</h2>
+                <p class="bundle-info">
+                  (Data). The 2Months Expiry bundle from Telecel
+                </p>
+              </div>
+            </div>
+            <div class="bottom-content">
+              <div class="details-network">
+                <span><small>.</small> 60 Days</span>
+                <span><small>.</small> Active</span>
+                <span><small>.</small> 12 Packages</span>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+
+          </div>
+        </div>
+    
+    <!----HERO ENDS-->
+  <!-----NETWORK-BUNDLE-CARDS-TELECEL-CONTAINER---->
+
+    <!---CARDS SECTION-->
+      <section class="gridCards-container">
+        <!---------- CARD---3-------->
+         <!---GRID CARDS WRAPPER-->
+        <div class="gridCard-wrapper">
+        
+
+         <div class="mntCardStyle" style="display: none;">
+         <div class="mtnCardStyleTop tl">
+          <div class="network-label">
+        <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
+        Telecel
+      </div>
+      <div class="bundle-data">5<span class="unit">GB</span></div>
+      <div class="bundle-validity  expire-tl">60-DAYS-EXPIRY</div>
+    </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>27.59</div>
+        <button class="buy-btn"
+          data-network="telecel"
+          data-value="5GB"
+          data-size="5"
+          data-price="27.59"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+
+  <!---------- CARD----4------->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop tl">
+          <div class="network-label">
+        <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
+        Telecel
+      </div>
+      <div class="bundle-data">10<span class="unit">GB</span></div>
+      <div class="bundle-validity  expire-tl">60-DAYS-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>46.99</div>
+        <button class="buy-btn"
+          data-network="telecel"
+          data-value="10GB"
+          data-size="10"
+          data-price="46.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+  <!----------NEXT CARD--5--------->
+      <div class="mntCardStyle" >
+        <div class="mtnCardStyleTop tl">
+          <div class="network-label">
+        <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
+        Telecel
+      </div>
+      <div class="bundle-data">15<span class="unit">GB</span></div>
+      <div class="bundle-validity  expire-tl">60-DAYS-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>67.99</div>
+        <button class="buy-btn"
+          data-network="telecel"
+          data-value="15GB"
+          data-size="15"
+          data-price="67.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+        <!----------NEXT CARD--6--------->
+         <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop tl">
+          <div class="network-label">
+        <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
+        Telecel
+      </div>
+      <div class="bundle-data">20<span class="unit">GB</span></div>
+      <div class="bundle-validity  expire-tl">60-DAYS-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>89.99</div>
+        <button class="buy-btn"
+          data-network="telecel"
+          data-value="20GB"
+          data-size="20"
+          data-price="89.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+        <!----------NEXT CARD----7------->
+         <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop tl">
+          <div class="network-label">
+        <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
+        Telecel
+      </div>
+      <div class="bundle-data">25<span class="unit">GB</span></div>
+      <div class="bundle-validity  expire-tl">60-DAYS-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>109.99</div>
+        <button class="buy-btn"
+          data-network="telecel"
+          data-value="25GB"
+          data-size="25"
+          data-price="109.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+        <!----------NEXT CARD---8-------->
+          <div class="mntCardStyle" >
+            <div class="mtnCardStyleTop tl">
+          <div class="network-label">
+        <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
+        Telecel
+      </div>
+      <div class="bundle-data">30<span class="unit">GB</span></div>
+      <div class="bundle-validity expire-tl">60-DAYS-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>133.96</div>
+        <button class="buy-btn"
+          data-network="telecel"
+          data-value="30GB"
+          data-size="30"
+          data-price="133.96"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+
+         <div class="mntCardStyle" >
+         <div class="mtnCardStyleTop tl">
+          <div class="network-label">
+        <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
+        Telecel
+      </div>
+      <div class="bundle-data">35<span class="unit">GB</span></div>
+      <div class="bundle-validity  expire-tl">60-DAYS-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>142.99</div>
+        <button class="buy-btn"
+          data-network="telecel"
+          data-value="35GB"
+          data-size="35"
+          data-price="142.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+
+        <!----------NEXT CARD----9------->
+    <div class="mntCardStyle" >
+      <div class="mtnCardStyleTop tl">
+          <div class="network-label">
+        <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
+        Telecel
+      </div>
+      <div class="bundle-data">40<span class="unit">GB</span></div>
+      <div class="bundle-validity expire-tl">60-DAYS-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>174.98</div>
+        <button class="buy-btn"
+          data-network="telecel"
+          data-value="40GB"
+          data-size="40"
+          data-price="174.98"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+        <!----------NEXT CARD-----10------>
+         <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop tl">
+          <div class="network-label">
+        <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
+        Telecel
+      </div>
+      <div class="bundle-data">50<span class="unit">GB</span></div>
+      <div class="bundle-validity expire-tl">60-DAYS-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>209.99</div>
+        <button class="buy-btn"
+          data-network="telecel"
+          data-value="50GB"
+          data-size="50"
+          data-price="209.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+        <!----------NEXT CARD---11-------->
+         
+        <!----------NEXT CARD---12-------->
+         <div class="mntCardStyle" style="display: none;">
+          <div class="mtnCardStyleTop tl">
+          <div class="network-label">
+        <div class="network-dot" style="background:#e60000;width:8px;height:8px;border-radius:50%"></div> 
+        Telecel
+      </div>
+      <div class="bundle-data">100<span class="unit">GB</span></div>
+      <div class="bundle-validity expire-tl">60-DAYS-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>396.99</div>
+        <button class="buy-btn"
+          data-network="telecel"
+          data-value="100GB"
+          data-size="100"
+          data-price="396.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+          
+
+        </div>
+      </section>
+
+
+
+
+
+  <!--section-title-->
+  <!--hero-text-->
+    <div class="hero-text-container tigo" id="tigoArea" >
+      <div class="hero-top-content">
+        <div class="top-left-content">
+          <img src="./css/images/tigo.jpg" alt="images" loading="lazy">
+        </div>
+        <div class="top-right-content">
+          <h2>AirtelTigo Data Bundle</h2>
+          <small>Purchase AirtelTigo data bundles for single <br> or multiple recipients</small>
+        </div>
+      </div>
+      <div class="hero-bottom-content">
+        <div class="btn-div">
+          17 Packages Available
+        </div>
+          <!----CARD-DIV---->
+        <div class="card-div">
+          <div class="network-card">
+            <div class="card-network-top">
+              <div class="left-card-content">
+                <img src="./css/images/tigo.jpg" alt="images" loading="lazy">
+              </div>
+              <div class="right-card-content">
+                <h2>AirtelTigo Data Bundle</h2>
+                <p class="bundle-info">
+                  (Data). The instant data bundle from AT
+                </p>
+              </div>
+            </div>
+            <div class="bottom-content">
+              <div class="details-network">
+                <span><small>.</small> 60 Days</span>
+                <span><small>.</small> Active</span>
+                <span><small>.</small> 17 Packages</span>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+      </div>
+    </div>
+  <!-----AIRTELTIGO SECTION---->
+  <!-----NETWORK-BUNDLE-CARDS-TELECEL-CONTAINER---->
+    <!---CARDS SECTION-->
+      <section class="gridCards-container ">
+        <!---GRID CARDS WRAPPER-->
+        <div class="gridCard-wrapper">
+
+        <!----------CARD----------->
+        <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop tc">
+           <div class="network-label" >
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">1<span class="unit">GB</span></div>
+      <div class="bundle-validity expire">60-DAYS-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>6.98</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-value="1GB"
+          data-size="1"
+          data-price="6.98"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+  <!----------NEXT CARD----------->
+         <div class="mntCardStyle" >
+          <div class="mtnCardStyleTop tc">
+           <div class="network-label" >
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">2<span class="unit">GB</span></div>
+      <div class="bundle-validity expire">60-DAYS-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>12.90</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-value="2GB"
+          data-size="2"
+          data-price="12.90"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+  <!----------NEXT CARD----------->
+            <div class="mntCardStyle" >
+              <div class="mtnCardStyleTop tc">
+           <div class="network-label" >
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">3<span class="unit">GB</span></div>
+      <div class="bundle-validity expire">60-DAYS-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>16.98</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-value="3GB"
+          data-size="3"
+          data-price="16.98"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+        <!----------NEXT CARD----------->
+             <div class="mntCardStyle" >
+              <div class="mtnCardStyleTop tc">
+           <div class="network-label" >
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">4<span class="unit">GB</span></div>
+      <div class="bundle-validity expire">60-DAYS-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>22.98</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-value="4GB"
+          data-size="4"
+          data-price="22.98"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+        <!----------NEXT CARD----------->
+              <div class="mntCardStyle" >
+                <div class="mtnCardStyleTop tc">
+           <div class="network-label" >
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">5<span class="unit">GB</span></div>
+      <div class="bundle-validity expire">60-DAYS-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>26.98</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-value="5GB"
+          data-size="5"
+          data-price="26.98"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+        <!----------NEXT CARD----------->
+              <div class="mntCardStyle" >
+                <div class="mtnCardStyleTop tc">
+           <div class="network-label" >
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">6<span class="unit">GB</span></div>
+      <div class="bundle-validity expire">60-DAYS-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>30.98</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-value="6GB"
+          data-size="6"
+          data-price="30.98"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+        <!----------NEXT CARD----------->
+            <div class="mntCardStyle" >
+              <div class="mtnCardStyleTop tc">
+           <div class="network-label" >
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">7<span class="unit">GB</span></div>
+      <div class="bundle-validity expire">N60-DAYS-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>34.98</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-value="7GB"
+          data-size="7"
+          data-price="34.98"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+        <!----------NEXT CARD----------->
+              <div class="mntCardStyle" >
+                <div class="mtnCardStyleTop tc">
+           <div class="network-label" >
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">8<span class="unit">GB</span></div>
+      <div class="bundle-validity expire">60-DAYS-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>38.98</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-value="8GB"
+          data-size="8"
+          data-price="38.98"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+
+        <!----------NEXT CARD----------->
+              <div class="mntCardStyle" >
+                <div class="mtnCardStyleTop tc">
+           <div class="network-label" >
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">9<span class="unit">GB</span></div>
+      <div class="bundle-validity expire">60-DAYS-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>43.99</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-value="9GB"
+          data-size="9"
+          data-price="43.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+        <!----------NEXT CARD----------->
+              <div class="mntCardStyle" >
+                <div class="mtnCardStyleTop tc">
+           <div class="network-label" >
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">10<span class="unit">GB</span></div>
+      <div class="bundle-validity expire">60-DAYS-EXPIRY</div>
+
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>46.98</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-value="10GB"
+          data-size="10"
+          data-price="46.98"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+        <!----------NEXT CARD----------->
+               <div class="mntCardStyle" >
+                <div class="mtnCardStyleTop tc">
+           <div class="network-label" >
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">12<span class="unit">GB</span></div>
+      <div class="bundle-validity expire">60-DAYS-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>55.98</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-value="12GB"
+          data-size="12"
+          data-price="55.98"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+        <!----------NEXT CARD----------->
+              <div class="mntCardStyle" >
+                <div class="mtnCardStyleTop tc">
+           <div class="network-label" >
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">15<span class="unit">GB</span></div>
+      <div class="bundle-validity expire">60-DAYS-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>68.98</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-value="15GB"
+          data-size="15"
+          data-price="68.98"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+        <!----------NEXT CARD----------->
+             <div class="mntCardStyle" >
+              <div class="mtnCardStyleTop tc">
+           <div class="network-label" >
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">20<span class="unit">GB</span></div>
+      <div class="bundle-validity expire">60-DAYS-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>88.99</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-value="20GB"
+          data-size="20"
+          data-price="88.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+        <!----------NEXT CARD----------->
+              <div class="mntCardStyle" >
+                <div class="mtnCardStyleTop tc">
+           <div class="network-label" >
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">25<span class="unit">GB</span></div>
+      <div class="bundle-validity expire">60-DAYS-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>109.98</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-value="25GB"
+          data-size="25"
+          data-price="109.98"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+        <!----------NEXT CARD----------->
+             <div class="mntCardStyle" >
+              <div class="mtnCardStyleTop tc">
+           <div class="network-label" >
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">30<span class="unit">GB</span></div>
+      <div class="bundle-validity expire">60-DAYS-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>131.99</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-value="30GB"
+          data-size="30"
+          data-price="131.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+        <!----------NEXT CARD----------->
+          <div class="mntCardStyle" >
+            <div class="mtnCardStyleTop tc">
+           <div class="network-label" >
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">40<span class="unit">GB</span></div>
+      <div class="bundle-validity expire">60-DAYS-EXPIRY</div>
+      </div>
+
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>169.98</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-value="40GB"
+          data-size="40"
+          data-price="169.98"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+        <!----------NEXT CARD----------->
+              <div class="mntCardStyle" >
+                <div class="mtnCardStyleTop tc">
+           <div class="network-label" >
+        <div class="network-dot" style="background:#4a90d9;width:8px;height:8px;border-radius:50%"></div> AirtelTigo
+      </div>
+      <div class="bundle-data">50<span class="unit">GB</span></div>
+      <div class="bundle-validity expire">60-DAYS-EXPIRY</div>
+      </div>
+      <div class="bundle-price">
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>209.99</div>
+        <button class="buy-btn"
+          data-network="at"
+          data-value="50GB"
+          data-size="50"
+          data-price="209.99"
+        >
+        <i class="ri-shopping-cart-line buyCart"></i>
+        Buy Now</button>
+      </div>
+        </div>
+
+
+        </div>
+      </section>
+
+
+
+
+
+
+
+
+
+  </section>
+  <!---GRIDvIEW-SECTION-ENDS---->
+
+
+
+
+
+  <!---NEW UI UPDATE (20th-01-2026)--=[grid & normal ui--ends---->
+
+
+
+
+
+  <!---CARD-CONTAINER-ENDS-->
+  <!----CARD-CONTAINER-ENDS-->
+  </section>
+
+
+
+
+
+  <!-- Phone Input Modal -->
+  <div id="phoneModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-content-top">
+        <div class="left-top-content">
+          <div class="left-Img">
+          <i class="ri-shopping-cart-line icon1"></i>
+          </div>
+          <div class="right-title">
+            <div class="top-title">
+              <p>Buy Data Bundle</p>
+            </div>
+            <div class="bottom-title" id="ifUserName">Guest Purchase</div>
+          </div>
+        </div>
+        <div id="cancelBtn" class="right-top-content">
+          <p>&times</p>
+        </div>
+      </div>
+  <!-----SELECTED-->
+  <section class="selected_info_wrapper">
+
+     <div class="selected-div">
+      <div class="placeholders-wrapper">
+
+        <div class="placeholdersbtn-wrapper">
+              <div class="place-lefter">
+                <div class="placeholders-right">
+                  <small id="networkTag"></small>
+              </div>
+              <div id="sizeTag" class="sizeTaged"></div>
+              </div>
+             
+
+              <div class="place-righter">
+                 <div class="select-pkg">
+                <small class="sma">Selected</small>
+                 </div>
+              </div>
+             
+          </div>
+          
+        <div class="placeholdersbtn-wrapper2">
+                <small>Price</small>
+              <div class="placeholders-left"  id="priceTag">
+      </div>
+        </div>
+
+          
+      </div>
+    </div>
+
+    <div class="selected-div2">
+         <small class="recip">Recipient Phone Number</small>
+      <input 
+      type="tel"
+      id="recipientInput" 
+      placeholder="Enter phone number. e.g 0241234567"
+      maxlength="10"
+      inputmode="numeric"
+      required/>
+    </div>
+    <div class="selected-div5">
+      <div class="selected-div5-packs">
+        <div class="pa-left">
+            <div class="le-pa-top-ri">
+             <small>Network:</small>
+            </div>
+          <div class="le-pa-btom-ri">
+           <small> Package:</small>
+          </div>
+          <div class="le-pa-btom-ri">
+           <small> Fee:</small>
+          </div>
+        </div>
+        <div class="pa-right">
+          <div class="pa-top-ri">
+            <small id="netWorth"></small>
+          </div>
+          <div class="pa-btom-ri">
+          <small id="gbSize"></small>
+          </div>
+          <div class="pa-btom-ri">
+          <small id="priceWithFee"></small>
+          </div>
+        </div>
+      </div>
+      <div class="selected-div5-amount">
+        <small class="toAmount">Total Amount</small>
+        <p id="amount"></p>
+      </div>
+    </div>
+    <div class="selected-div3">
+      <p id="helloName"><span class="info">i</span> Guest purchase</p>
+      <small id="helloContent">No account needed. The data bundle will be  sent after successful payment. <br>
+      Make sure you click "I Have Completed the payment" for verification.</small>
+    </div>
+  </section>
+   
+    <div class="selected-div4">
+      <div class="modal-buttons">
+        <button id="confirmBtn" class="btn continue">
+         <i class="ri-shopping-cart-line icon"></i>
+        Proceed to Paystack</button>
+      </div>
+    </div>
+    
+    </div>
+  </div>
+
+
+
+
+
+  <!---LOADING-SPINNER-->
+  <div id="paystackLoader" class="paystack-loader hidden" >
+    <div class="loader-navbar">
+      <div class="loader-navbar-left">
+        <img src="./css/icons/icon-shortcut.png" alt="" loading="lazy">
+      </div>
+    </div>
+
+
+    <div class="loader-card">
+      <div class="orbit-spinner">
+        <span class="spinner"></span>
+      </div>
+      <p>Loading please wait</p>
+      <div class="loading-dots">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!----PAYSTACK-LOADER-->
+
+
+
+  <!-----SIGN UP CARD SECTION----->
+  <div id="signupModal" class="signup-modal">
+
+    <div class="signup-box">
+    <div class="signup-box-top">
+      <img src="./css/icons/icon.bg.png" alt="" loading="lazy">
+      <span id="closeSignup">&times;</span>
+    </div>
+  <div class="short-wrap">
+    
+      <div class="signup-header">
+        <h2>Welcome to EcoData 
+          <img src="./css/icons/greetings.png" alt="" loading="lazy"></h2>
+      <small>Create an Account or <br>
+        <p style="margin: 0;color: rgb(12, 107, 107);font-size: 1.2rem;font-weight: 600;" class="lo">Login</p>
+      </small>
+      </div>
+
+      <div class="signup-text">
+        Create an account to enjoy <b>exclusive bundle prices</b> and faster checkout.
+      </div>
+
+  </div>
+      <div class="signup-actions">
+        <button id="createAccountBtn">Create Account</button>
+        <button id="loginBtn">Login</button>
+      </div>
+
+    </div>
+
+  </div>
+  <!-----SIGN UP CARD SECTION--ENDS--->
+
+
+  <!----WHATSAPP-GROUP--FIXED-BUTTON----->
+  <div class="what-group-btn">
+    <span class="informattion">Join</span>
+
+    <a href="https://chat.whatsapp.com/LwhZNOyUQsJIGTQRL9cIXT?mode=hqrt3">
+      <div class="pulse-ring"></div>
+      <div class="pulse-ring-delay"></div>
+    <img src="./css/icons/whats.png" alt="" loading="lazy">
+    </a>
+  </div>
+
+
+
+
+    <!-----BOTTOM-NAVBAR----->
+    <div class="bottom-navbar" id="navIconDiv">
+      <div class="btom-navIcon" onclick="window.location.href='index.html'">
+        <div class="activeImg active" id="activeMtn">
+          <small id="activeBadge" class="nav-badge">0</small>
+          <i class="ri-router-line material-icons"></i>
+
+        </div>
+        <small class="bottomIcon-textNav">Bundles</small>
+      
+      </div>
+
+    
+      
+
+      <div class="btom-navIcon">
+        <div class="activeImg" onclick="window.location.href ='pay.html'"> 
+          <i class="ri-price-tag-3-line material-icons"></i>
+        </div>
+        <small class="bottomIcon-textNav"> Discounts</small>
+      </div>
+
+    
+    <div class="ecodataShopBtn" >
+        <div class="shop-fixedBtn" id="shoppingBtn" >
+       <i class="ri-shopping-bag-3-fill"></i>
+        <i class="ri-store-2-line sellerAuth material-icons" style="display: none;"></i>
+       <small class="hero-headline shop">
+        Shop
+       </small>
+      </div>
+    
+    </div>
+    
+
+        <div class="btom-navIcon" >
+        <div class="activeImg" id="activeTel" onclick="window.location.href='afa.html'"> 
+          <i class="ri-user-follow-line material-icons"></i>
+        </div>
+        <small class="bottomIcon-textNav">AFA</small>
+      </div>
+
+
+      <div class="btom-navIcon" >
+        <div class="activeImg" id="activeAir" onclick="window.location.href='bundlesInfo.html'"> 
+          <i class="ri-information-line material-icons"></i>
+        </div>
+        <small class="bottomIcon-textNav"> Info</small>
+      </div>
+
+
+
+
+    </div>
+
+
+
+    
+    
+
+      
+    
+
+
+
+  
+
+    
+
+    <!-- ✅ WhatsApp Floating Chat -->
+  <div class="chatBox" id="whatsappChat">
+    <div id="chatButton" class="message">
+      <img src="./css/icons/chatMe.png" alt="image" loading="lazy">
+    </div>
+    <!---whatsapp chatBox-->
+    <div id="chatBox">
+      <h4>Chat Ecodata Admin</h4>
+      <input type="text" id="whatsappMessage" placeholder="Type your message..." />
+      <button id="sendMsgBtn">Send</button>
+    </div>
+  </div>
+
+  <!---AUTO SCROLL-->
+  <div class="floating-scroll">
+    <img src="./css/icons/more.png.png" alt="arrow-icon" loading="lazy">
+    <small>Scroll</small>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--MAIN-CONTAINER-ENDS-->
+        </div>
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+  <!----MAIN-RIGHT--------->
+    <div class="ads-container-right">
+    
+      <div class="side-title">
+        <h2>Premium Offers</h2>
+        <div class="imgup"></div>
+      </div>
+
+
+
+
+
+
+
+
+      <!----REGISTRATION---->
+
+
+
+
+
+
+
+      <!----REGISTRATION---->
+  <div class="agent-upgrade-wrapper" >
+
+  <div class="agent-upgrade">
+    <h2>Join for Exclusive Benefits</h2>
+    <img src="./css/icons/agent.png" alt=""loading="lazy">
+    <p>
+      Unlock discounted prices for personal use or reselling.
+      Pay a one-time registration fee of <strong>GHS 50</strong>
+      and start earning or saving more today.
+    </p>
+
+    <button onclick="goToPayment()">Upgrade Now</button>
+  </div>
+  </div>
+
+
+
+
+
+
+
+
+      <!----REGISTRATION---->
+  <div class="agent-upgrade-wrapper" >
+
+  <div class="agent-upgrade">
+    <h2>Get online Store</h2>
+    <img src="./css/uiIcons/store.png" alt=""loading="lazy">
+    <p>
+    Create Online store to increase your sales.
+    Receive Orders via WhatsApp daily. 
+    
+    </p>
+
+    <button title="Coming Up soon!">Get store</button>
+  </div>
+  </div>
+
+
+
+
+
+
+  <!---right-ends-->
+    </div>
+
+
+
+
+      <!--MAIN-GRID-CONTAINER-ENDS-->  
+    </div>
+
+
+      <!--CONTAINER-ENDS-->
+  </div>
+
+
+
+ <!-- Load Paystack library -->
+  <script src="https://js.paystack.co/v2/inline.js"></script>
+
+<script type="module" src="./firebase-config.js"></script>
+
+<script type="module" src="main.js"></script>
+
+<!--GREETINGS WITH-usernameDisplay----->
+<script type="module" src="userRestriction.js"></script>
+<script type="module" src="deliveryIndicator.js"></script>
+
+<script src="styleSkeloton.js"></script>
+<script src="promoScript.js"></script>
+<script src="global.js"></script>
+
+
+
+<!---MODE BTN-SCRIPT---->
+<script>
+    // add click event to gridBtn
+ const modeButtons = document.querySelectorAll(".mode-Btn");
+
+ modeButtons.forEach(btn => {
+  btn.addEventListener("click", () =>{
+    modeButtons.forEach(b => 
+    b.classList.remove("active"));
+    btn.classList.add("active"); 
+   })
+ })
+</script>
+
+
+
+
+
+<!---full-script---->
+<script>
+  
+// install app script (guide images)
+  const images = ["./css/images/1.jpeg", "./css/images/2.jpeg", "./css/images/3.jpeg"];
+
+  let currentIndex = 0;
+  let scale = 1;
+  let starX = 0;
+
+
+  // Open an image fullView
+  function openViewer (index){
+    currentIndex = index;
+    const viewer =
+    document.getElementById("viewer");
+    const fullImg = document.getElementById("fullImg");
+
+    fullImg.src = images[currentIndex];
+    viewer.style.display = "flex";
+    scale = 1;
+    fullImg.style.transform = `scale(${scale})`;
+  }
+
+  function closeViewer() {
+    document.getElementById("viewer").style.display = "none";
+  }
+
+  // ================
+  //= SWIPE (MOBILE)
+  //=================
+  const viewer = document.getElementById("viewer");
+
+  viewer.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+  });
+
+  viewer.addEventListener("touchend", (e) => {
+   let endX = e.changedTouches[0].clientX;
+
+   if(endX -startX > 50 ) {
+    prevImage();
+   } else if ( startX - endX > 50 ) {
+    nextImage();
+   }
+  });
+
+  function nextImage() {
+    currentIndex = (currentIndex - 1) % images.length;
+
+    document.getElementById("fullImg").src = images[currentIndex];
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    
+    document.getElementById("fullImg").src = images[currentIndex];
+  }
+
+  // ============
+  // ZOOM
+  //=============
+  const fullImg = document.getElementById("fullImg");
+
+  // Mouse scroll zoom (Desktop)
+  fullImg.addEventListener("wheel", (e) => {
+    e.preventDefault();
+
+    scale += e.deltaY * -0.001;
+    scale = Math.min(Math.max(1, scale), 3);
+    fullImg.style.transform = `scale(${scale})`;
+  });
+
+  // Double tap Zoom (mobile)
+  let lastTap = 0;
+
+  fullImg.addEventListener("touchend", function() {
+    let currentTime = new Date().getTime();
+    let tapLength = currentTime = lastTap;
+
+    if(tapLength < 300 && tapLength > 0) {
+      scale = scale === 1 ? 2: 1;
+      fullImg.style.transform = `scale(${scale})`;
+    }
+    lastTap = currentTime;
+  })
+
+
+
+
+
+// clock script
+function updateClock() {
+  const clock = document.getElementById("clock");
+  const now = new Date();
+
+  const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  const dayName = days[now.getDay()];
+
+  let hours = now.getHours();
+  let minutes = now.getMinutes();
+  let seconds = now.getSeconds();
+
+  // Greeting logic
+  let greeting = "";
+  if (hours < 12) greeting = "Good Morning";
+  else if (hours < 18) greeting = "Good Afternoon";
+  else greeting = "Good Evening";
+
+  const ampm = hours >= 12 ? "PM" : "AM";
+
+  hours = hours % 12 || 12;
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+  seconds = seconds < 10 ? "0" + seconds : seconds;
+
+  clock.innerHTML = `${dayName} ${hours}:${minutes}:${seconds} ${ampm}`;
+
+  return greeting; // 🔥 important
+}
+
+setInterval(updateClock, 1000);
+updateClock();
+
+
+
+
+  function goToPayment() {
+    window.location.href = "pay.html";
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// thumbnails script
+  const scrollWrapper = 
+  document.querySelector(".google-thumbnails-wrapper");
+  const thumbnails = 
+  document.querySelector(".google-thumbnails");
+
+  // Duplicate all items for seamless scroll
+  thumbnails.innerHTML += thumbnails.innerHTML;
+
+  let scrollAmount = 0;
+  const speed = .9; // pixel per frame
+
+  function animateScroll() {
+    scrollAmount += speed;
+
+    // when  scrolled half of the content. reset to start
+    if( scrollAmount >= thumbnails.scrollWidth / 2) {
+      scrollAmount = 0;
+    }
+
+    thumbnails.style.transform = `translateX(-${scrollAmount}px)`;
+    requestAnimationFrame(animateScroll);
+  }
+
+  // start animation
+  animateScroll();
+
+ 
+
+
+
+
+</script>
+
+
+
+</body>
+</html>
