@@ -1257,7 +1257,7 @@ function saveLiveOrder(order) {
 
 
      // preserve the origin submitted time
-    createdAt: order.createdAt || Date.now(),    
+    createdAt: current.createdAt || Date.now(),    
 
     // keep the original timestamp
       timestamp: current.timestamp || Date.now(),
@@ -1893,33 +1893,6 @@ const nowDelivered = newStatus === "delivered";
 
 
 
-function updateOrderTimestamp(orderId, newStatus) {
-
-  const orders = getStoredOrders();
-
-  const index = orders.findIndex(
-    o => o.orderId === orderId
-  );
-
-  if (index === -1) return;
-
-  // Set CreatedAt only once
-  if (!orders[index].createdAt) {
-    orders[index].createdAt = Date.now();
-  }
-
-  // Update UpdatedAt only if status changed
-  if (orders[index].status !== newStatus) {
-    orders[index].updatedAt = Date.now();
-    orders[index].status = newStatus;
-  }
-
-  localStorage.setItem(
-    LIVE_ORDERS_KEY,
-    JSON.stringify(orders)
-  );
-
-}
 
 
 
