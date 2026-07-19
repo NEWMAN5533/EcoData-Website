@@ -1175,9 +1175,6 @@ const normalized = {
 
   source: "web",
 
-  createdAt: Date.now(),
-  updatedAt: Date.now(),
-
 };
 
   if (!normalized.orderId) return;
@@ -1250,14 +1247,17 @@ function saveLiveOrder(order) {
       ...current,
       ...order,
 
-    // preserve the origin submitted time
-    createdAt: order.createdAt || Date.now(),
+   
 
     // Don't allow terminal status to be overwritten
       status: 
       isTerminalStatus(current.status)
         ? existing[index].status
         : order.status,
+
+
+     // preserve the origin submitted time
+    createdAt: order.createdAt || Date.now(),    
 
     // keep the original timestamp
       timestamp: current.timestamp || Date.now(),
@@ -1272,6 +1272,7 @@ function saveLiveOrder(order) {
       timestamp: Date.now(), // SINGLE SOURCE OF TRUTH
     // Submitted time (set once)
       createdAt: order.createdAt || Date.now(),
+
     // Initial update time (Same as creation)
       updatedAt: order.updatedAt || Date.now(),
 
