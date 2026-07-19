@@ -5,39 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ecodata</title>
 
+
+  <meta name="google-site-verification" content="uPuuYtdufpe-I9fBtT046jnMoZO7yvAEzEyCemHr1S0" />
+
   
     <meta name="title" content="EcoData">
-  <meta name="description" content="This is related to website developed by IlysCode">
+  <meta name="description" content="Buy Ghana data bundles for MTN, Telecel & AirtelTigo. Fast, and secure. Shop affordable data packages for browsing, streaming, and more on Ecodata">
 
-  <link rel="shortcut icon" href="./css/images/ecodata-bg1.png" type="image/jpg">
+  <link rel="shortcut icon" href="./css/icons/icon-shortcut.png" type="image/png">
   <link rel="stylesheet" href="style.css">
-
 
 </head>
 <body>
+
 <nav class="navbar">
 <div class="nav-left">
- <h2>EcoData</h2>
+<a href="index.html">
+  <img src="./css/icons/icon-shortcut.png" alt="image" loading="lazy">
+</a>
 </div>
 <div class="nav-right">
-  <div class="login">
-   <a href="login.html"> <img src="./css/icons/icons8-user-46.png" alt="">  Login</a>
-  </div>
-<img id="sidebarToggler" src="./css/icons/icons8-fries-menu-46.png" alt="image" class="menu-icon" loading="lazy">
+ 
+<img id="cardToggler" src="./css/icons/icons8-fries-menu-46.png" alt="image" class="menu-icon" loading="lazy">
 </div>
 </nav>
 
 
 
+<!-------main-section-container-->
 
 
+
+  <!-----PRODUCT-WRAPPER-->
+  
 <!------MAIN SECTION----->
 <section class="card-container">
 <div class="welcome-card">
   <div class="welcome-top">
     <div class="welcome-top-left">
-      <small>Welcome</small>
-        Dear Customer
+      <p id="usernameDisplay"></p>
+      <div class="user-info">
+        <span id="usernameDisplay"></span>
+      </div>
     </div>
     <div class="welcome-top-right">
       <input type="text" placeholder="Search...">
@@ -49,834 +58,1429 @@
     <div id="clock"></div>
   </div>
 </div>
-
-<!-----BUNDLE PROCESSING--->
-<div class="bundle-processing-container">
-  <div class="bundle-processing-card-container">
-    <div class="processing-card-details">
-      <img src="./css/icons/pending.png" alt="image" loading="lazy">
-      <small>Pending</small>
-      <span>0</span>
+<section class="notice-container">
+    <!----NOTICE-->
+    <div class="notice-board">
+      <small><span>!</span>Orders after <strong>9PM</strong> will be delivered in the morning.</small>
     </div>
-
-     <div class="processing-card-details">
-      <img class="pro" src="./css/icons/processing.png" alt="image" loading="lazy">
-      <small>processing</small>
-      <span>0</span>
-    </div>
-
-     <div class="processing-card-details">
-      <img src="./css/icons/completed.png" alt="image" loading="lazy">
-      <small>Completed</small>
-      <span>0</span>
-    </div>
-
-     <div class="processing-card-details">
-      <img src="./css/icons/failed (1).png" alt="image" loading="lazy">
-      <small>Failed</small>
-      <span>0</span>
-    </div>
-  </div>
-  <!---------NETWORK PURCHASED-DETAILS----->
-  <div class="networks-purchased-container">
-    <div class="mtn-network-purchased">
-       MTN
-        <span>0</span>
-        <small class="purc">GH&#8373;: 0</small>
-    </div>
-    <div class="telecel-network-purchased">
-       Telecel
-        <span>0</span>
-        <small class="purc">GH&#8373;: 0</small>
-    </div>
-    <div class="airtelTigo-network-purchased">
-       Airteltigo
-        <span>0</span>
-        <small class="purc">GH&#8373;: 0</small>
-    </div>
-  </div>
-</div>
 </section>
 
-<section>
-  <!----OUR-TOP-BUYERS-&-AGENT-RANKING-SECTION----->
-<div class="top-customers">
-<div class="top-customers-title">
-    <h1>Top Agent <img src="./css/icons/like.png" alt=""></h1>
+
+
+<section class="two-div-container">
+
+  <div class="left-side">
+   <section class="order-status-section">
+  <h2>Check Order <br> Status</h2>
+  <span><img src="./css/icons/down-arrow.png" alt="image" loading="lazy"></span>
+  <input type="text" id="orderInput" placeholder="Enter Order ID">
+  <button id="checkBtn">Check Status</button>
+  
+</section>
+  </div>
+<div class="right-side">
+  <div class="right-side-top">
+    <div class="status-result" id="statusResult"></div>
+  </div>
+  <div class="right-side-btm">
+   <small> <strong>NB:</strong> Orders Results are 100% sourced</small>
+  </div>
+  
 </div>
-  <div class="agent-name">
-    <div class="yellow-thin"></div>
-    <div class="white-booklet">
-          <h1 class="agent-timeline">Agent Navasco</h1>
-          <small><img src="./css/icons/location.png" alt="image" loading="lazy"> Tepa 0537428505</small>
+
+
+
+
+</section>
+<!-----BUNDLE PROCESSING--->
+ <!---------NETWORK PURCHASED-DETAILS----->
+  <div class="networks-purchased-container">
+    <div class="purchase-title">
+     <h5>Onclick any to (individual) Pages</h5>
+    </div>
+    <div class="purchase-container">
+      <a href="mtn-page.html"><div class="card-box mtn">MTN</div></a>
+      <a href="telecel-page.html"><div class="card-box telecel">TELECEL</div></a>
+      <a href="airtel-page.html"><div class="card-box at">AIRTELTIGO</div></a>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+ <!--hero-text-->
+  <div class="hero-text-container mtn">
+    <div class="hero-top-content">
+      <div class="top-left-content">
+       <a href="mtn-page.html">
+         <img src="./css/images/mtn-badge2.jpg" alt="images" loading="lazy">
+       </a>
+      </div>
+      <div class="top-right-content">
+        <h2>MTN Data Bundle</h2>
+        <small>Purchase MTN data bundles for single or multiple recipients</small>
+      </div>
+    </div>
+    <div class="hero-bottom-content">
+      <div class="btn-div">
+        18 Packages Available
+      </div>
+      <!----CARD-DIV---->
+      <div class="card-div">
+        <div class="network-card">
+          <div class="card-network-top">
+            <div class="left-card-content">
+              <img src="./css/images/mtn-badge2.jpg" alt="images" loading="lazy">
+            </div>
+            <div class="right-card-content">
+              <h2>MTN Data Bundle</h2>
+              <p class="bundle-info">
+                Data. MTN Express data bundle
+              </p>
+            </div>
+          </div>
+          <div class="bottom-content">
+            <div class="details-network">
+              <span><small>.</small> 90 Days</span>
+              <span><small>.</small> Active</span>
+              <span><small>.</small> 18 Packages</span>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+      <!---SINGLE ORDER BTN-->
+          <div class="single-order-container">
+            <div class="modebtn">Mode</div>
+            <button class="modeN">Normal</button>
+            <button class="mode">Grid</button>
+          </div>
+    </div>
+  </div>
+  <!----HERO ENDS-->
+
+<!-----NETWORK-BUNDLE-CARDS-MTN-CONTAINER---->
+  <!---CARDS SECTION-->
+    <section class="gridCards-container ">
+      <!---GRID CARDS WRAPPER-->
+      <div class="gridCard-wrapper">
+      <!----------CARD----------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN Bundle</small>
+          <img src="./css/images/mtn-badge2.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>1GB</h3>
+          <small>GHS 6</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-package= "mtn_data_bundle"
+  data-size="1"
+  data-price="6"
+          >Add to cart</button>
+        </div>
+      </div>
+ <!----------NEXT CARD----------->
+      <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN Bundle</small>
+          <img src="./css/images/mtn-badge2.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>2GB</h3>
+          <small>GHS 11.90</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-package= "mtn_data_bundle"
+  data-size="2"
+  data-price="11.90"
+          >Add to cart</button>
+        </div>
+      </div>
+ <!----------NEXT CARD----------->
+      <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN Bundle</small>
+          <img src="./css/images/mtn-badge2.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>3GB</h3>
+          <small>GHS 17</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-package= "mtn_data_bundle"
+  data-size="3"
+  data-price="17"
+          >Add to cart</button>
+        </div>
+      </div>
+      <!----------NEXT CARD----------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN Bundle</small>
+          <img src="./css/images/mtn-badge2.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>4GB</h3>
+          <small>GHS 22</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-package= "mtn_data_bundle"
+  data-size="4"
+  data-price="22"
+          >Add to cart</button>
+        </div>
+      </div>
+      <!----------NEXT CARD----------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN Bundle</small>
+          <img src="./css/images/mtn-badge2.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>5GB</h3>
+          <small>GHS 26.50</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-package= "mtn_data_bundle"
+  data-size="5"
+  data-price="26.50"
+          >Add to cart</button>
+        </div>
+      </div>
+       <!----------NEXT CARD----------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN Bundle</small>
+          <img src="./css/images/mtn-badge2.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>6GB</h3>
+          <small>GHS 32.50</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-package= "mtn_data_bundle"
+  data-size="6"
+  data-price="32.50"
+          >Add to cart</button>
+        </div>
+      </div>
+      <!----------NEXT CARD----------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN Bundle</small>
+          <img src="./css/images/mtn-badge2.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>7GB</h3>
+          <small>GHS 37</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-package= "mtn_data_bundle"
+  data-size="7"
+  data-price="37"
+          >Add to cart</button>
+        </div>
+      </div>
+       <!----------NEXT CARD----------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN Bundle</small>
+          <img src="./css/images/mtn-badge2.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>8GB</h3>
+          <small>GHS 40</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-package= "mtn_data_bundle"
+  data-size="8"
+  data-price="40"
+          >Add to cart</button>
+        </div>
+      </div>
+
+       <!----------NEXT CARD----------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN Bundle</small>
+          <img src="./css/images/mtn-badge2.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>9GB</h3>
+          <small>GHS 44</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-package= "mtn_data_bundle"
+  data-size="9"
+  data-price="44"
+          >Add to cart</button>
+        </div>
+      </div>
+       <!----------NEXT CARD----------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN Bundle</small>
+          <img src="./css/images/mtn-badge2.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>10GB</h3>
+          <small>GHS 47</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-package= "mtn_data_bundle"
+  data-size="10"
+  data-price="47"
+          >Add to cart</button>
+        </div>
+      </div>
+       <!----------NEXT CARD----------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN Bundle</small>
+          <img src="./css/images/mtn-badge2.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>12GB</h3>
+          <small>GHS 60</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-package= "mtn_data_bundle"
+  data-size="12"
+  data-price="60"
+          >Add to cart</button>
+        </div>
+      </div>
+       <!----------NEXT CARD----------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN Bundle</small>
+          <img src="./css/images/mtn-badge2.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>15GB</h3>
+          <small>GHS 68</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-package= "mtn_data_bundle"
+  data-size="15"
+  data-price="68"
+          >Add to cart</button>
+        </div>
+      </div>
+       <!----------NEXT CARD----------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN Bundle</small>
+          <img src="./css/images/mtn-badge2.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>20GB</h3>
+          <small>GHS 91</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-package= "mtn_data_bundle"
+  data-size="20"
+  data-price="91"
+          >Add to cart</button>
+        </div>
+      </div>
+       <!----------NEXT CARD----------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN Bundle</small>
+          <img src="./css/images/mtn-badge2.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>25GB</h3>
+          <small>GHS 111</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-package= "mtn_data_bundle"
+  data-size="25"
+  data-price="111"
+          >Add to cart</button>
+        </div>
+      </div>
+       <!----------NEXT CARD----------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN Bundle</small>
+          <img src="./css/images/mtn-badge2.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>30GB</h3>
+          <small>GHS 130</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-package= "mtn_data_bundle"
+  data-size="30"
+  data-price="130"
+          >Add to cart</button>
+        </div>
+      </div>
+      <!----------NEXT CARD----------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN Bundle</small>
+          <img src="./css/images/mtn-badge2.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>40GB</h3>
+          <small>GHS 169</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-package= "mtn_data_bundle"
+  data-size="40"
+  data-price="169"
+          >Add to cart</button>
+        </div>
+      </div>
+       <!----------NEXT CARD----------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN Bundle</small>
+          <img src="./css/images/mtn-badge2.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>50GB</h3>
+          <small>GHS 215</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-package= "mtn_data_bundle"
+  data-size="50"
+  data-price="215"
+          >Add to cart</button>
+        </div>
+      </div>
+      <!----------NEXT CARD----------->
+        <div class="gridCard">
+        <div class="gridCard-top">
+          <small>MTN Bundle</small>
+          <img src="./css/images/mtn-badge2.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>100GB</h3>
+          <small>GHS 430</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="mtn"
+  data-package= "mtn_data_bundle"
+  data-size="100"
+  data-price="430"
+          >Add to cart</button>
+        </div>
+      </div>
+
+
+
+
+
+
+      </div>
+    </section>
+
+
+
+
+
+
+<!--section-title-->
+ <!--hero-text-->
+  <div class="hero-text-container tel">
+    <div class="hero-top-content">
+      <div class="top-left-content">
+       <a href="telecel-page.html">
+         <img src="./css/images/telecel.jpg" alt="images" loading="lazy">
+       </a>
+      </div>
+      <div class="top-right-content">
+        <h2>Telecel Data Bundle</h2>
+        <small>Purchase Telecel data bundles for single or multiple recipients</small>
+      </div>
+    </div>
+    <div class="hero-bottom-content">
+      <div class="btn-div">
+        9 Packages Available
+      </div>
+       <!----CARD-DIV---->
+      <div class="card-div">
+        <div class="network-card">
+          <div class="card-network-top">
+            <div class="left-card-content">
+              <img src="./css/images/telecel.jpg" alt="images" loading="lazy">
+            </div>
+            <div class="right-card-content">
+              <h2>Telecel Data Bundle</h2>
+              <p class="bundle-info">
+                Data · The 2Months Expiry bundle from Telecel
+              </p>
+            </div>
+          </div>
+          <div class="bottom-content">
+            <div class="details-network">
+              <span><small>.</small> 60 Days</span>
+              <span><small>.</small> Active</span>
+              <span><small>.</small> 9 Packages</span>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!----HERO ENDS-->
+<!-----NETWORK-BUNDLE-CARDS-TELECEL-CONTAINER---->
+
+   <!---CARDS SECTION-->
+    <section class="gridCards-container">
+      <!---GRID CARDS WRAPPER-->
+      <div class="gridCard-wrapper">
+      <!----------CARD----------->
+        <div class="gridCardTele">
+        <div class="gridCard-top">
+          <small>Telecel Bundle</small>
+         <a href="airtel-page.html"> <img src="./css/images/telecel.jpg" alt="image" loading="lazy"></a>
+        </div>
+        <div class="gridCard-middle">
+          <h3>5GB</h3>
+          <small>GHS 27</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="telecel"
+  data-package="telecel_expiry_bundle"
+  data-size="5"
+  data-price="27"
+          >Add to cart</button>
+        </div>
+      </div>
+ <!----------NEXT CARD----------->
+      <div class="gridCardTele">
+        <div class="gridCard-top">
+          <small>Telecel Bundle</small>
+          <img src="./css/images/telecel.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>10GB</h3>
+          <small>GHS 47</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="telecel"
+  data-package="telecel_expiry_bundle"
+  data-size="10"
+  data-price="47"
+          >Add to cart</button>
+        </div>
+      </div>
+ <!----------NEXT CARD----------->
+      <div class="gridCardTele">
+        <div class="gridCard-top">
+          <small>Telecel Bundle</small>
+          <img src="./css/images/telecel.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>15GB</h3>
+          <small>GHS 69</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="telecel"
+  data-package="telecel_expiry_bundle"
+  data-size="15"
+  data-price="69"
+          >Add to cart</button>
+        </div>
+      </div>
+      <!----------NEXT CARD----------->
+        <div class="gridCardTele">
+        <div class="gridCard-top">
+          <small>Telecel Bundle</small>
+          <img src="./css/images/telecel.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>20GB</h3>
+          <small>GHS 93</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="telecel"
+  data-package="telecel_expiry_bundle"
+  data-size="20"
+  data-price="93"
+          >Add to cart</button>
+        </div>
+      </div>
+      <!----------NEXT CARD----------->
+        <div class="gridCardTele">
+        <div class="gridCard-top">
+          <small>Telecel Bundle</small>
+          <img src="./css/images/telecel.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>25GB</h3>
+          <small>GHS 110</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="telecel"
+  data-package="telecel_expiry_bundle"
+  data-size="25"
+  data-price="110"
+          >Add to cart</button>
+        </div>
+      </div>
+       <!----------NEXT CARD----------->
+        <div class="gridCardTele">
+        <div class="gridCard-top">
+          <small>Telecel Bundle</small>
+          <img src="./css/images/telecel.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>30GB</h3>
+          <small>GHS 134</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="telecel"
+  data-package="telecel_expiry_bundle"
+  data-size="30"
+  data-price="134"
+          >Add to cart</button>
+        </div>
+      </div>
+      <!----------NEXT CARD----------->
+        <div class="gridCardTele">
+        <div class="gridCard-top">
+          <small>Telecel Bundle</small>
+          <img src="./css/images/telecel.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>40GB</h3>
+          <small>GHS 178</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="telecel"
+  data-package="telecel_expiry_bundle"
+  data-size="40"
+  data-price="178"
+          >Add to cart</button>
+        </div>
+      </div>
+       <!----------NEXT CARD----------->
+        <div class="gridCardTele">
+        <div class="gridCard-top">
+          <small>Telecel Bundle</small>
+          <img src="./css/images/telecel.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>50GB</h3>
+          <small>GHS 220</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="telecel"
+  data-package="telecel_expiry_bundle"
+  data-size="50"
+  data-price="220"
+          >Add to cart</button>
+        </div>
+      </div>
+
+       <!----------NEXT CARD----------->
+        <div class="gridCardTele">
+        <div class="gridCard-top">
+          <small>Telecel Bundle</small>
+          <img src="./css/images/telecel.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>100GB</h3>
+          <small>GHS 400</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="telecel"
+  data-package="telecel_expiry_bundle"
+  data-size="100"
+  data-price="400"
+          >Add to cart</button>
+        </div>
+      </div>
+      
+        
+
+      </div>
+    </section>
+
+
+
+
+
+<!--section-title-->
+<!--hero-text-->
+  <div class="hero-text-container tigo">
+    <div class="hero-top-content">
+      <div class="top-left-content">
+        <img src="./css/images/tigo.jpg" alt="images" loading="lazy">
+      </div>
+      <div class="top-right-content">
+        <h2>AirtelTigo Data Bundle</h2>
+        <small>Purchase AirtelTigo data bundles for single or multiple recipients</small>
+      </div>
+    </div>
+    <div class="hero-bottom-content">
+      <div class="btn-div">
+        17 Packages Available
+      </div>
+       <!----CARD-DIV---->
+      <div class="card-div">
+        <div class="network-card">
+          <div class="card-network-top">
+            <div class="left-card-content">
+              <img src="./css/images/tigo.jpg" alt="images" loading="lazy">
+            </div>
+            <div class="right-card-content">
+              <h2>AirtelTigo Data Bundle</h2>
+              <p class="bundle-info">
+                Data · The instant data bundle from AT
+              </p>
+            </div>
+          </div>
+          <div class="bottom-content">
+            <div class="details-network">
+              <span><small>.</small> 60 Days</span>
+              <span><small>.</small> Active</span>
+              <span><small>.</small> 17 Packages</span>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+    </div>
+  </div>
+<!-----AIRTELTIGO SECTION---->
+<!-----NETWORK-BUNDLE-CARDS-TELECEL-CONTAINER---->
+  <!---CARDS SECTION-->
+    <section class="gridCards-container ">
+      <!---GRID CARDS WRAPPER-->
+      <div class="gridCard-wrapper">
+      <!----------CARD----------->
+        <div class="gridCardAirteltigo">
+        <div class="gridCard-top">
+          <small>AirtelTigo Bundle</small>
+          <img src="./css/images/tigo.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>1GB</h3>
+          <small>GHS 6</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="at"
+  data-package="iShare_"
+  data-size="1"
+  data-price="6"
+          >Add to cart</button>
+        </div>
+      </div>
+ <!----------NEXT CARD----------->
+      <div class="gridCardAirteltigo">
+        <div class="gridCard-top">
+          <small>AirtelTigo Bundle</small>
+          <img src="./css/images/tigo.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>2GB</h3>
+          <small>GHS 12</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="at"
+  data-package="iShare_"
+  data-size="2"
+  data-price="12"
+          >Add to cart</button>
+        </div>
+      </div>
+ <!----------NEXT CARD----------->
+      <div class="gridCardAirteltigo">
+        <div class="gridCard-top">
+          <small>AirtelTigo Bundle</small>
+          <img src="./css/images/tigo.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>3GB</h3>
+          <small>GHS 17</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="at"
+  data-package="iShare_"
+  data-size="3"
+  data-price="17"
+          >Add to cart</button>
+        </div>
+      </div>
+      <!----------NEXT CARD----------->
+        <div class="gridCardAirteltigo">
+        <div class="gridCard-top">
+          <small>AirtelTigo Bundle</small>
+          <img src="./css/images/tigo.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>4GB</h3>
+          <small>GHS 22</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="at"
+  data-package="iShare_"
+  data-size="4"
+  data-price="22"
+          >Add to cart</button>
+        </div>
+      </div>
+      <!----------NEXT CARD----------->
+        <div class="gridCardAirteltigo">
+        <div class="gridCard-top">
+          <small>AirtelTigo Bundle</small>
+          <img src="./css/images/tigo.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>5GB</h3>
+          <small>GHS 26</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="at"
+  data-package="iShare_"
+  data-size="5"
+  data-price="26"
+          >Add to cart</button>
+        </div>
+      </div>
+       <!----------NEXT CARD----------->
+        <div class="gridCardAirteltigo">
+        <div class="gridCard-top">
+          <small>AirtelTigo Bundle</small>
+          <img src="./css/images/tigo.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>6GB</h3>
+          <small>GHS 30</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="at"
+  data-package="iShare_"
+  data-size="6"
+  data-price="30"
+          >Add to cart</button>
+        </div>
+      </div>
+      <!----------NEXT CARD----------->
+        <div class="gridCardAirteltigo">
+        <div class="gridCard-top">
+          <small>AirtelTigo Bundle</small>
+          <img src="./css/images/tigo.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>7GB</h3>
+          <small>GHS 35</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="at"
+  data-package="iShare_"
+  data-size="7"
+  data-price="35"
+          >Add to cart</button>
+        </div>
+      </div>
+       <!----------NEXT CARD----------->
+        <div class="gridCardAirteltigo">
+        <div class="gridCard-top">
+          <small>AirtelTigo Bundle</small>
+          <img src="./css/images/tigo.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>8GB</h3>
+          <small>GHS 39</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="at"
+  data-package="iShare_"
+  data-size="8"
+  data-price="39"
+          >Add to cart</button>
+        </div>
+      </div>
+
+       <!----------NEXT CARD----------->
+        <div class="gridCardAirteltigo">
+        <div class="gridCard-top">
+          <small>AirtelTigo Bundle</small>
+          <img src="./css/images/tigo.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>9GB</h3>
+          <small>GHS 44</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="at"
+  data-package="iShare_"
+  data-size="9"
+  data-price="44"
+          >Add to cart</button>
+        </div>
+      </div>
+       <!----------NEXT CARD----------->
+        <div class="gridCardAirteltigo">
+        <div class="gridCard-top">
+          <small>AirtelTigo Bundle</small>
+          <img src="./css/images/tigo.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>10GB</h3>
+          <small>GHS 47</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="at"
+  data-package="iShare_"
+  data-size="10"
+  data-price="47"
+          >Add to cart</button>
+        </div>
+      </div>
+       <!----------NEXT CARD----------->
+        <div class="gridCardAirteltigo">
+        <div class="gridCard-top">
+          <small>AirtelTigo Bundle</small>
+          <img src="./css/images/tigo.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>12GB</h3>
+          <small>GHS 56</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="at"
+  data-package="iShare_"
+  data-size="12"
+  data-price="56"
+          >Add to cart</button>
+        </div>
+      </div>
+       <!----------NEXT CARD----------->
+        <div class="gridCardAirteltigo">
+        <div class="gridCard-top">
+          <small>AirtelTigo Bundle</small>
+          <img src="./css/images/tigo.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>15GB</h3>
+          <small>GHS 63</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="at"
+  data-package="iShare_"
+  data-size="15"
+  data-price="63"
+          >Add to cart</button>
+        </div>
+      </div>
+       <!----------NEXT CARD----------->
+        <div class="gridCardAirteltigo">
+        <div class="gridCard-top">
+          <small>AirtelTigo Bundle</small>
+          <img src="./css/images/tigo.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>20GB</h3>
+          <small>GHS 89</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="at"
+  data-package="iShare_"
+  data-size="20"
+  data-price="89"
+          >Add to cart</button>
+        </div>
+      </div>
+       <!----------NEXT CARD----------->
+        <div class="gridCardAirteltigo">
+        <div class="gridCard-top">
+          <small>AirtelTigo Bundle</small>
+          <img src="./css/images/tigo.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>25GB</h3>
+          <small>GHS 110</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="at"
+  data-package="iShare_"
+  data-size="25"
+  data-price="110"
+          >Add to cart</button>
+        </div>
+      </div>
+       <!----------NEXT CARD----------->
+        <div class="gridCardAirteltigo">
+        <div class="gridCard-top">
+          <small>AirtelTigo Bundle</small>
+          <img src="./css/images/tigo.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>30GB</h3>
+          <small>GHS 132</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="at"
+  data-package="iShare_"
+  data-size="30"
+  data-price="132"
+          >Add to cart</button>
+        </div>
+      </div>
+       <!----------NEXT CARD----------->
+        <div class="gridCardAirteltigo">
+        <div class="gridCard-top">
+          <small>AirtelTigo Bundle</small>
+          <img src="./css/images/tigo.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>40GB</h3>
+          <small>GHS 170</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="at"
+  data-package="iShare_"
+  data-size="40"
+  data-price="170"
+          >Add to cart</button>
+        </div>
+      </div>
+       <!----------NEXT CARD----------->
+        <div class="gridCardAirteltigo">
+        <div class="gridCard-top">
+          <small>AirtelTigo Bundle</small>
+          <img src="./css/images/tigo.jpg" alt="">
+        </div>
+        <div class="gridCard-middle">
+          <h3>50GB</h3>
+          <small>GHS 210</small>
+        </div>
+        <div class="gridCard-bottom">
+          <button class="buy-btn"
+  data-network="at"
+  data-package="iShare_"
+  data-size="50"
+  data-price="210"
+          >Add to cart</button>
+        </div>
+      </div>
+      
+        
+
+      </div>
+    </section>
+
+
+
+
+
+
+
+
+<section class="foot">
+    <p style="text-align:center;color:#888;font-size:14px;">© 2025 Ecodata. All rights reserved.</p>
+  </section>
+
+<!----SNACKBAR-SECTION----->
+
+<!-- Phone Input Modal -->
+<div id="phoneModal" class="modal">
+  <div class="modal-content">
+<!-----SELECTED-->
+      <div class="selected-div">
+    <h4>Selected Package Details</h4>
+    <div class="placeholders-wrapper">
+      <div class="placeholdersbtn-wrapper">
+              <small>Price</small>
+            <div class="placeholders-left"  id="priceTag">
+    </div>
+      </div>
+
+        <div class="placeholdersbtn-wrapper">
+          <small>Network/GB</small>
+            <div class="placeholders-right" id="networkTag">
+    </div>
         </div>
     </div>
   </div>
-</section>
-
-<!--section-title-->
-<div class="section-title">
-  <div class="section-content">
-    <h1><span class="mtnt">MTN</span> Packages</h1>
-    <img src="./css/icons/img.png" alt="image" loading ="lazy">
-  </div>
-</div>
-<!-----NETWORK-BUNDLE-CARDS-MTN-CONTAINER---->
-<section class="bundle-cards-container">
-  <div class="bundle-card-container">
-    <div class="bundle-card">
-      <div class="top-bundle-card">
-        <h1>MTN Express</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 6</small>
-        <h2>1GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="mtn"
-   data-package= "express"
-  data-size="1"
-  data-price="6"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-    <div class="bundle-card">
-      <div class="top-bundle-card">
-        <h1>MTN Express</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 12</small>
-        <h2>2GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="mtn"
-   data-package= "express"
-  data-size="2"
-  data-price="12"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-    <div class="bundle-card">
-      <div class="top-bundle-card">
-        <h1>MTN Express</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 18</small>
-        <h2>3GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="mtn"
-   data-package= "express"
-  data-size="3"
-  data-price="18"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-      <div class="bundle-card">
-      <div class="top-bundle-card">
-        <h1>MTN Express</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 23</small>
-        <h2>4GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="mtn"
-   data-package= "express"
-  data-size="4"
-  data-price="23"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-       <div class="bundle-card">
-      <div class="top-bundle-card">
-        <h1>MTN Express</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 27</small>
-        <h2>5GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="mtn"
-   data-package= "express"
-  data-size="5"
-  data-price="27"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-       <div class="bundle-card">
-      <div class="top-bundle-card">
-        <h1>MTN Express</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 34</small>
-        <h2>6GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="mtn"
-   data-package= "express"
-  data-size="6"
-  data-price="34"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-       <div class="bundle-card">
-      <div class="top-bundle-card">
-        <h1>MTN Express</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 38</small>
-        <h2>7GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="mtn"
-   data-package= "express"
-  data-size="7"
-  data-price="38"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-       <div class="bundle-card">
-      <div class="top-bundle-card">
-        <h1>MTN Express</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 40</small>
-        <h2>8GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="mtn"
-   data-package= "express"
-  data-size="8"
-  data-price="40"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-      <div class="bundle-card">
-      <div class="top-bundle-card">
-        <h1>MTN Express</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 48</small>
-        <h2>10GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="mtn"
-   data-package= "express"
-  data-size="10"
-  data-price="48"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-      <div class="bundle-card">
-      <div class="top-bundle-card">
-        <h1>MTN Express</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 69</small>
-        <h2>15GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="mtn"
-   data-package= "express"
-  data-size="15"
-  data-price="69"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-       <div class="bundle-card">
-      <div class="top-bundle-card">
-        <h1>MTN Express</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 92</small>
-        <h2>20GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="mtn"
-   data-package= "express"
-  data-size="20"
-  data-price="92"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-       <div class="bundle-card">
-      <div class="top-bundle-card">
-        <h1>MTN Express</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 110</small>
-        <h2>25GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="mtn"
-   data-package= "express"
-  data-size="25"
-  data-price="110"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-      <div class="bundle-card">
-      <div class="top-bundle-card">
-        <h1>MTN Express</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 130</small>
-        <h2>30GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="mtn"
-  data-package= "express"
-  data-size="30"
-  data-price="130"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-       <div class="bundle-card">
-      <div class="top-bundle-card">
-        <h1>MTN Express</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 170</small>
-        <h2>40GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="mtn"
-   data-package= "express"
-  data-size="40"
-  data-price="170"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-       <div class="bundle-card">
-      <div class="top-bundle-card">
-        <h1>MTN Express</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 220</small>
-        <h2>50GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="mtn"
-   data-package= "express"
-  data-size="50"
-  data-price="220"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-      <div class="bundle-card">
-      <div class="top-bundle-card">
-        <h1>MTN Express</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 440</small>
-        <h2>100GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="mtn"
-   data-package= "express"
-  data-size="100"
-  data-price="440"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!--section-title-->
-<div class="section-title">
- <div class="section-content">
-    <h1><span class="telecelt">Telecel</span> Packages</h1>
-    <img src="./css/icons/img.png" alt="image" loading ="lazy">
- </div>
-</div>
-<!-----NETWORK-BUNDLE-CARDS-TELECEL-CONTAINER---->
-<section class="bundle-cards-telecel-container">
-  <div class="bundle-card-telecel-container">
-    <div class="bundle-card-telecel">
-      <div class="top-bundle-telecel-card">
-        <small>Telecel</small>
-        <h1>2Months Expiry</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-telecel-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 27</small>
-        <h2>5GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="telecel"
-  data-package="2months"
-  data-size="5"
-  data-price="27"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-    <div class="bundle-card-telecel">
-      <div class="top-bundle-telecel-card">
-        <small>Telecel</small>
-        <h1>2Months Expiry</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-telecel-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 47</small>
-        <h2>10GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="telecel"
-  data-package="2months"
-  data-size="10"
-  data-price="47"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-    <div class="bundle-card-telecel">
-      <div class="top-bundle-telecel-card">
-        <small>Telecel</small>
-        <h1>2Months Expiry</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-telecel-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 69</small>
-        <h2>15GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="telecel"
-    data-package="2months"
-  data-size="15"
-  data-price="69"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-     <div class="bundle-card-telecel">
-      <div class="top-bundle-telecel-card">
-        <small>Telecel</small>
-        <h1>2Months Expiry</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-telecel-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 93</small>
-        <h2>20GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="telecel"
-    data-package="2months"
-  data-size="20"
-  data-price="93"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-     <div class="bundle-card-telecel">
-      <div class="top-bundle-telecel-card">
-        <small>Telecel</small>
-        <h1>2Months Expiry</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-telecel-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 134</small>
-        <h2>30GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="telecel"
-    data-package="2months"
-  data-size="30"
-  data-price="134"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-     <div class="bundle-card-telecel">
-      <div class="top-bundle-telecel-card">
-        <small>Telecel</small>
-        <h1>2Months Expiry</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-telecel-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 178</small>
-        <h2>40GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="telecel"
-    data-package="2months"
-  data-size="40"
-  data-price="178"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-     <div class="bundle-card-telecel">
-      <div class="top-bundle-telecel-card">
-        <small>Telecel</small>
-        <h1>2Months Expiry</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-telecel-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 220</small>
-        <h2>50GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="telecel"
-    data-package="2months"
-  data-size="50"
-  data-price="220"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-     <div class="bundle-card-telecel">
-      <div class="top-bundle-telecel-card">
-        <small>Telecel</small>
-        <h1>2Months Expiry</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-telecel-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 400</small>
-        <h2>100GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="telecel"
-    data-package="2months"
-  data-size="100"
-  data-price="400"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!--section-title-->
-<div class="section-title">
- <div class="section-content">
-  <h1><span class="airtelt">Airtel</span> Packages</h1>
-  <img src="./css/icons/img.png" alt="image" loading ="lazy">
- </div>
-</div>
-<!-----AIRTELTIGO SECTION---->
-<!-----NETWORK-BUNDLE-CARDS-TELECEL-CONTAINER---->
-<section class="bundle-cards-airteltigo-container">
-  <div class="bundle-card-airteltigo-container">
-    <div class="bundle-card-airteltigo">
-      <div class="top-bundle-airteltigo-card">
-        <small>Airteltigo</small>
-        <h1>iShare</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-airteltigo-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 27</small>
-        <h2>5GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="at"
-  data-package="iShare"
-  data-size="1"
-  data-price="6"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-     <div class="bundle-card-airteltigo">
-      <div class="top-bundle-airteltigo-card">
-        <small>Airteltigo</small>
-        <h1>iShare</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-airteltigo-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 12</small>
-        <h2>2GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="at"
-   data-package="iShare"
-  data-size="2"
-  data-price="12"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-     <div class="bundle-card-airteltigo">
-      <div class="top-bundle-airteltigo-card">
-        <small>Airteltigo</small>
-        <h1>iShare</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-airteltigo-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 17</small>
-        <h2>3GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="at"
-   data-package="iShare"
-  data-size="3"
-  data-price="17"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-     <div class="bundle-card-airteltigo">
-      <div class="top-bundle-airteltigo-card">
-        <small>Airteltigo</small>
-        <h1>iShare</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-airteltigo-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 23</small>
-        <h2>4GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="at"
-   data-package="iShare"
-  data-size="4"
-  data-price="23"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-     <div class="bundle-card-airteltigo">
-      <div class="top-bundle-airteltigo-card">
-        <small>Airteltigo</small>
-        <h1>iShare</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-airteltigo-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 26</small>
-        <h2>5GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="at"
-   data-package="iShare"
-  data-size="5"
-  data-price="26"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-     <div class="bundle-card-airteltigo">
-      <div class="top-bundle-airteltigo-card">
-        <small>Airteltigo</small>
-        <h1>iShare</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-airteltigo-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 30</small>
-        <h2>6GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="at"
-   data-package="iShare"
-  data-size="6"
-  data-price="30"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-     <div class="bundle-card-airteltigo">
-      <div class="top-bundle-airteltigo-card">
-        <small>Airteltigo</small>
-        <h1>iShare</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-airteltigo-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 35</small>
-        <h2>7GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="at"
-   data-package="iShare"
-  data-size="7"
-  data-price="35"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-     <div class="bundle-card-airteltigo">
-      <div class="top-bundle-airteltigo-card">
-        <small>Airteltigo</small>
-        <h1>iShare</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-airteltigo-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 40</small>
-        <h2>8GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="at"
-   data-package="iShare"
-  data-size="8"
-  data-price="40"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-     <div class="bundle-card-airteltigo">
-      <div class="top-bundle-airteltigo-card">
-        <small>Airteltigo</small>
-        <h1>iShare</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-airteltigo-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 44</small>
-        <h2>9GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="at"
-   data-package="iShare"
-  data-size="9"
-  data-price="44"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-     <div class="bundle-card-airteltigo">
-      <div class="top-bundle-airteltigo-card">
-        <small>Airteltigo</small>
-        <h1>iShare</h1>
-      </div>
-      <!----BOTTOM--->
-      <div class="bottom-bundle-airteltigo-card">
-      <div class="price-gb">
-        <small>GH&#8373;: 47</small>
-        <h2>10GB</h2>
-      </div>
-        <button class="buy-btn" 
-  data-network="at"
-   data-package="iShare"
-  data-size="10"
-  data-price="47"
-  onclick="payWithPaystack(this)">Buy</button>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-
-<!-- Popup for Phone Number -->
-<div id="numberPopup" style="
-  display:none; 
-  position: fixed; 
-  top: 0; left: 0; 
-  width: 100%; 
-  height: 100%;
-  background: rgba(0,0,0,0.5); 
-  justify-content: center; 
-  align-items: center;
-  color: black;
-">
-  <div style="background: white; padding: 20px; border-radius: 10px; width: 300px; text-align: center;">
-    <h3>Enter Your Number</h3>
-    <input type="text" id="phoneInput" placeholder="e.g. 0241234567" style="width: 100%;
-    color: white; font-size: 1.5rem; padding: 8px; margin: 10px 0;">
-    <button id="submitNumber" style="padding: 8px 12px; background: green; color: white;">Proceed</button>
-    <button id="closePopup" style="padding: 8px 12px; margin-left: 5px; background: red; color: white;">Cancel</button>
-  </div>
-</div>
-
-
-<!-- Phone Number Modal -->
-<div id="numberModal" class="modal">
-  <div class="modal-content">
-    <h3>Enter Your Phone Number</h3>
-    <input type="tel" id="userPhone" placeholder="e.g. 0241234567">
+    <h3>Enter Bundle Recipient</h3>
+    <input type="tel" id="recipientInput" placeholder="e.g. 0241234567"/>
     <div class="modal-buttons">
-      <button id="cancelBtn">Cancel</button>
-      <button id="proceedBtn">Proceed</button>
+      <button id="cancelBtn" class="btn cancel">Cancel</button>
+      <button id="confirmBtn" class="btn continue">Proceed to Paystack</button>
     </div>
+</div>
+</div>
+
+<!----SIDEBAR @1366PX-DES-->
+<div class="sidebar-container">
+  <div class="top-user">
+    <div class="u-div">
+      U
+    </div>
+    <div class="u-text">User Panel</div>
+  </div>
+  <div class="middle-ranking-navs">
+
+      <div class="rank-link" id="mtnHideBtn">
+       <a href="mnt@1366.html">
+        <img src="./css/icons/mtn-signal.png" alt="image" loading="lazy">
+        <span>MTN</span>
+       </a>
+      </div>
+
+
+       <div class="rank-link" id="telecelHideBtn">
+       <a href="telecel@1366.html">
+        <img src="./css/icons/telecel-signal.png" alt="image" loading="lazy">
+        <span>TELECEL</span>
+       </a>
+      </div>
+
+        <div class="rank-link" id="airtelHideBtn">
+       <a href="tigo@1366.html">
+        <img src="./css/icons/tigo-signal.png" alt="image" loading="lazy">
+        <span>AIRTELTIGO</span>
+       </a>
+      </div>
+
+        <div class="rank-link">
+       <a href="terms.html">
+        <img src="./css/icons/list.jpg" alt="image" loading="lazy">
+        <span>Term of use</span>
+       </a>
+      </div>
+
+        <div class="rank-link">
+       <a href="bundlesInfo.html">
+        <img src="./css/icons/terms (1).png" alt="image" loading="lazy">
+        <span>Bundles info</span>
+       </a>
+      </div>
+
+        <div class="rank-link">
+       <a href="https://chat.whatsapp.com/CdemFa0YXXc8rgxQZKvSIq?mode=wwc">
+        <img src="./css/icons/agent.png" alt="image" loading="lazy">
+        <span>Be an Agent?</span>
+       </a>
+      </div>
+
+        <div class="rank-link">
+       <a href="#">
+        <img src="./css/icons/partners.jpg" alt="image" loading="lazy">
+        <span>Business Partners</span>
+       </a>
+      </div>
+  </div>
+  <div class="bottom-ranking-links">
+  
+      <!---BUTTON-->
+     <a href="signup.html">
+       <button class="login">Sign Up</button>
+     </a>
+     <!--WHATSAPP GROUP-->
+      <a href="https://chat.whatsapp.com/LwhZNOyUQsJIGTQRL9cIXT?mode=hqrt3">
+      <button class="group">Join WhatsApp Group</button>
+      </a>
+      <!---WHATSAPP CHANNEL-->
+      <a href="https://whatsapp.com/channel/0029VbBgYfqAzNbpoZDtnq3o">
+      <button class="join">Join WhatsApp Channel</button>
+      </a>
+    
+
   </div>
 </div>
 
 
 
-  <!-- ABOUT -->
-  <section class="about">
-    <h3>About Us:</h3>
-    <p>Welcome to [ EcoData Bundles ] - we deal with all networks Data Bundle Airtel-Tigo, MTN and Telecel (All are none Expiry Data Bundles) at affordable prices.
-      Contact us on WhatsApp to place your order. We deliver nationwide!</p>
-    <h4>Fastest Delivery is our Priority</h4>
-
-      <!-- FOOTER -->
-  <footer>
-    <p>Join Us on WhatsApp by: <a href="https://chat.whatsapp.com/LwhZNOyUQsJIGTQRL9cIXT">Clicking here<img src="./css/icons/whats.jpg" alt="icons"></a></p>
-    <p class="copyright">&copy; 2025 EcoData All right reserved</p>
-  </footer>
-  </section>
+<!------MENU-CARD----->
+<div class="menu-card-container" id="closeCard">
+ 
+  <div class="menu-card">
+    <div class="menu-card-top">
+          <!----ICONS-SECTION-->
+    <div class="shortcut-links">
 
 
+      <div class="link">
+       <a href="business-partners.html">
+        <img src="./css/icons/partners.jpg" alt="image" loading="lazy">
+        <span>Our Partners</span>
+       </a>
+      </div>
+
+
+      
+       <div class="link">
+       <a href="https://chat.whatsapp.com/CdemFa0YXXc8rgxQZKvSIq?mode=wwc">
+        <img src="./css/icons/agent.png" alt="image" loading="lazy">
+        <span>Be an Agent?</span>
+       </a>
+      </div>
+
+       <div class="link">
+       <a href="terms.html">
+        <img src="./css/icons/terms (1).png" alt="image" loading="lazy">
+        <span>Terms of use</span>
+       </a>
+      </div>
+
+
+       <div class="link">
+       <a href="bundlesInfo.html">
+        <img src="./css/icons/list.jpg" alt="image" loading="lazy">
+        <span>Bundles info</span>
+       </a>
+      </div>
+    </div>
+    </div>
+    <div class="menu-card-bottom">
+      <a href="login.html">  <button  id="logout-btn" class="logout-btn">Login/Sign-Up</button></a>
+    </div>
+  </div>
+</div>
+
+  <!-- ✅ WhatsApp Floating Chat -->
+<div id="whatsappChat">
+  <div id="chatButton" class="message">
+    <img src="./css/icons/message.png" alt="image" loading="lazy">
+  </div>
+
+  <div id="chatBox">
+    <h4>Chat Ecodata Admin</h4>
+    <input type="text" id="whatsappMessage" placeholder="Type your message..." />
+    <button id="sendMsgBtn">Send</button>
+  </div>
+</div>
 
 
 
-    <!-- Load Paystack library -->
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+ <!-- Load Paystack library -->
   <script src="https://js.paystack.co/v1/inline.js"></script>
 
-  <!-- Your frontend logic -->
-  <script src="./main.js"></script>
+
+  
+
+
+<script type="module" src="./firebase-config.js"></script>
+
+<script type="module" src="main.js"></script>
+
+
+<!---usernameDisplay----->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    // TODO: replace these placeholder values with your Firebase project config
+  apiKey: "AIzaSyClNBlfigtQk8AZWdMZcU9sEtVcIrS0D1g",
+  authDomain: "ecodata-2bee6.firebaseapp.com",
+  projectId: "ecodata-2bee6",
+  storageBucket: "ecodata-2bee6.firebasestorage.app",
+  messagingSenderId: "544837123249",
+  appId: "1:544837123249:web:6c362350a00c6dab10b690"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  onAuthStateChanged(auth, async (user) => {
+    const usernameDisplay = document.getElementById("usernameDisplay");
+
+// FORCE TO LOGIN THE USER //
+  
+
+
+
+
+    if (user) {
+      const userSnap = await getDoc(doc(db, "users", user.uid));
+      usernameDisplay.textContent = `Welcome Back, ${userSnap.data().username}!`;
+    } else {
+      usernameDisplay.textContent = "Welcome Back, Dear!";
+    }
+});
+</script>
+
+
+
+<!-- End WhatsApp Floating Chat -->
+<script>
+  // === CONFIG ===
+  const whatsappNumber = "233535565637";
+
+  // === ELEMENTS ===
+  const chatButton = document.getElementById("chatButton");
+  const chatBox = document.getElementById("chatBox");
+  const sendBtn = document.getElementById("sendMsgBtn");
+
+  // === TOGGLE CHAT BOX ===
+  chatButton.addEventListener("click", () => {
+    chatBox.classList.toggle("show");
+  });
+
+  // === SEND MESSAGE ===
+  sendBtn.addEventListener("click", () => {
+    const message = document.getElementById("whatsappMessage").value.trim();
+    if (!message) {
+      alert("Please type your message before sending.");
+      return;
+    }
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappURL =` https://wa.me/${233535565637}?text=${encodedMessage}`;
+    window.open(whatsappURL, "_blank");
+    document.getElementById("whatsappMessage").value = ""; // clear after sending
+});
+</script>
+
+<script>
+  // === REAL TIME CLOCK ===
+function updateClock() {
+  const clock = document.getElementById("clock");
+  const now = new Date();
+  const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  const dayName = days[now.getDay()];
+  let hours = now.getHours();
+  let minutes = now.getMinutes();
+  let seconds = now.getSeconds();
+  const ampm = hours >= 12 ? "PM" : "AM";
+  hours = hours % 12 || 12;
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+  seconds = seconds < 10 ? "0" + seconds : seconds;
+  clock.innerHTML = `${dayName} ${hours}:${minutes}:${seconds} ${ampm}`;
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+
+
+</script>
+
+<!---MENU-CARD-JS-->
+<script>
+  const cardToggler = document.getElementById("cardToggler");
+  const cardCloser = document.getElementById("closeCard");
+
+  // querySelectors //
+  const card = document.querySelector(".menu-card-container");
+
+  // function //
+cardToggler.addEventListener("click", function(e){
+  if (card.style.right != "-500px"){
+    card.style.right = "14px";
+  } else card.style.right = "-500px";
+});
+
+window.addEventListener("click", function(e){
+  if (e.target !== cardToggler && e.target !== card && !card.contains(e.target)){
+    card.style.right = "-500px";
+  }
+});
+
+
+</script>
+
+
+<!---HIDE MULTIPLE DIV--->
+
+
+
+
+
+
 
 </body>
+<!-----ORDER STATUS JS---->
 </html>

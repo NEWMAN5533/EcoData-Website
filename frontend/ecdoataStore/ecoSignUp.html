@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up | EcoData</title>
+  <link rel="stylesheet" href="globalStyle.css">
+  <link rel="stylesheet" href="signUpStyle.css">
+
+  <style>
+    .container{
+      height: 49rem !important;
+    }
+  </style>
+
+</head>
+<body>
+  
+
+
+<!----later-laptop-ui-->
+    <div class="container" style="display:none;">
+    <!---navbar-here-->
+    <div class="main-grid-container">
+      <div class="grid-container-aside"></div>
+      <div class="grid-container-main"></div>
+      <div class="ads-container-right"></div>
+    </div>
+  </div>
+
+
+
+
+
+
+  
+  <!-----NAVIGATION BAR----->
+
+  
+<nav class="navbar">
+<div class="nav-left">
+ <img onclick="window.location.href = 'ecoLogin.html'" src="./uiIcons/back.png" alt="" loading="lazy">
+</div>
+<div class="nav-right">
+ <h3>Register</h3>
+</div>
+
+</nav>
+
+<section class="top-bg">
+  <div class="hero-logo">
+    <img src="./icons/logoImg.png" alt="" loading="lazy">
+  </div>
+</section>
+
+  <div class="container" >
+    <h2>Create New Account</h2>
+    <form id="signup-form">
+
+<div class="formFillCard">
+  <div class="formFillCard-top">
+    <label> User Name</label>
+  </div>
+
+  <div class="formFillCard-bottom">
+    <div class="formInputCreate">
+      <img src="./uiIcons/userName.png" alt="user" loading="lazy">
+        <input type="text" id="username" placeholder="Username"  />
+    </div>
+
+  </div>
+</div>
+
+  <div class="formFillCard">
+  <div class="formFillCard-top">
+    <label> Email Address</label>
+  </div>
+  <div class="formFillCard-bottom">
+    <div class="formInputCreate">
+      <img class="curNone" src="./uiIcons/email.png" alt="email" loading="lazy">
+        <input type="email" id="email" placeholder="Email" />
+    </div>
+ 
+  </div>
+     </div>
+
+  <div class="formFillCard">
+  <div class="formFillCard-top">
+    <label>Password</label>
+  </div>
+  <div class="formFillCard-bottom">
+    <div class="formInputCreate">
+      <img class="curNone" src="./uiIcons/lock.png" alt="lock" loading="lazy">
+      <input  type="password" id="password" placeholder="Choose Password" />
+      <img id="togglePassword" class="curYes" src="./uiIcons/eye.png" alt="toggle password">
+    </div>
+     
+  </div>
+
+  <!---confirm password-->
+
+</div>
+
+  <div class="formFillCard">
+  <div class="formFillCard-top">
+    <label>Confirm password</label>
+  </div>
+
+  <div class="formFillCard-bottom">
+    <div class="formInputCreate">
+      <img class="curNone" src="./uiIcons/lock.png" alt="lock" loading="lazy">
+      <input  type="password" id="confirmPassword" placeholder="Confirm  Password" />
+      <img id="toggleConfirmPassword" class="curYes" src="./uiIcons/eye.png" alt="toggle password">
+    </div>
+  
+  </div>
+
+  <!---confirm password-->
+
+</div>
+
+<div class="already">
+ <p>Already have an account? <button type="button" class="alloginBtn" onclick="window.location.href = 'ecoLogin.html'" >Login</button></p>
+</div>
+   
+
+
+  <button class="signUpBtn"  id="signBtn" type="submit">
+        <span class="spinner"></span>
+        <span class="btn-text">Sign Up</span>
+  </button>
+
+
+    </form>
+
+  </div>
+
+ <section class="foot">
+   <div class="foot-content">
+    <div class="cop-right">
+ © 2026 EcoShop. All rights reserved.
+     
+    </div>
+   <small class="bor
+   ">|</small>
+      <small class="powered">
+        
+      <strong>Powered by:</strong>   IA E-Business 
+    </small>
+  
+   </div>
+
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Firebase Core -->
+<script type="module" src="ecoSignUp.js">
+
+</script>
+
+  
+
+<script>
+
+  document.addEventListener("DOMContentLoaded", () => {
+
+  const password = document.getElementById("password");
+  const togglePassword = document.getElementById("togglePassword");
+
+
+
+  togglePassword.addEventListener("click", () => {
+    const isPassword = password.type === "password";
+
+    // Toggle input type
+    password.type = isPassword ? "text" : "password";
+
+    // Toggle icon image
+    togglePassword.src = isPassword 
+      ? "./uiIcons/hide.png" 
+      : "./uiIcons/eye.png";
+  });
+  
+  });
+
+
+  // toggle confirmPassword
+  const confirmPassword = document.getElementById("confirmPassword");
+  const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
+
+  toggleConfirmPassword.addEventListener("click", () => {
+    const isPassword = confirmPassword.type === "password";
+
+    // Toggle input type
+    confirmPassword.type = isPassword ? "text" : "password";
+
+    // Toggle icon
+    toggleConfirmPassword.src = isPassword ? "./uiIcons/hide.png" : "./uiIcons/eye.png";
+  });
+
+</script>
+
+  
+
+</body>
+</html>
