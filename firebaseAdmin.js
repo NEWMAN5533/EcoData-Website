@@ -1,8 +1,9 @@
-import * as admin from "firebase-admin";
+import { initializeApp, cert, apps } from "firebase-admin/app";
+import { getFirestore } from "firebase-admin/firestore";
 
-if (!admin.apps.length) {
-  admin.initializeApp({
-    credential: admin.credential.cert({
+if (!apps.length) {
+  initializeApp({
+    credential: cert({
       projectId: process.env.FB_PROJECT_ID,
       clientEmail: process.env.FB_CLIENT_EMAIL,
       privateKey: process.env.FB_PRIVATE_KEY.replace(/\\n/g, "\n"),
@@ -10,6 +11,6 @@ if (!admin.apps.length) {
   });
 }
 
-const db = admin.firestore();
+const db = getFirestore();
 
-export { admin, db };
+export { db };
