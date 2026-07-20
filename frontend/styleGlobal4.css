@@ -1761,3 +1761,143 @@ height: 2rem;
 .baw-glow-discounts {
   background: radial-gradient(circle, rgba(255, 181, 71, 0.2), transparent 70%);
 }
+
+
+
+
+
+
+
+
+
+/* ============ SLIDE: Shop Coming Soon ============ */
+.coming-soon-progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  width: 100%;
+  max-width: 320px;
+}
+
+.coming-soon-progress-bar {
+  flex: 1;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+.coming-soon-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #00d49a, #00f5b8);
+  position: relative;
+  animation: progress-shimmer 2s ease-in-out infinite;
+}
+
+@keyframes progress-shimmer {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.75; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coming-soon-progress-fill {
+    animation: none;
+  }
+}
+
+.coming-soon-progress-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #00d49a;
+  white-space: nowrap;
+}
+
+.coming-soon-cta {
+  margin-top: 1.25rem;
+}
+
+.baw-glow-comingsoon {
+  background: radial-gradient(circle, rgba(0, 212, 154, 0.15), transparent 70%);
+}
+
+
+
+
+
+
+
+
+
+
+
+.trusted-by-comingsoon .trusted-container{
+  height: 100%;
+  width: 100%;
+  justify-content: space-around;
+  position: relative;
+  padding: .5rem;
+}
+
+.shoe-card-wrap {
+  position: absolute;
+  top: 3.5rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: -1;
+   /* room for the shoe to peek out on the left */
+}
+
+
+
+.shoe-card {
+  position: inherit;
+  width: 7rem;
+  height: 8rem;
+  margin-top: 2rem;
+  margin-left: 2rem;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: .4rem;
+  z-index: -1;
+}
+
+.shoe-card-image {
+  width: 8rem;
+  height: auto;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.1));
+}
+
+.shoe-card-category {
+  font-size: 0.7rem;
+  color: #00d49a;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.shoe-card h4 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  color: #fff;
+  margin: 0.4rem 0 0.75rem;
+}
+
+.shoe-card-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.shoe-card-price {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+}
