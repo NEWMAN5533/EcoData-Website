@@ -1342,3 +1342,422 @@ NEW BADGE ENDS
   /*********************************
 / ACTIVE package background default ends
 ***********************************/
+
+
+/************************/
+/* TRUST SWIPER           */
+/************************/
+
+.trust-swiper-container{
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: max-content;
+  justify-self: center !important;
+}
+
+.trust-swiper{
+  width: 100%;
+}
+
+.status-swiper .swiper-wrapper{
+  justify-content: center;
+}
+
+.trust-swiper .swiper-slide{
+  width: 100%;
+  margin: 0 auto;
+}
+
+.trust-swiper .swiper-slide .trusted-by{
+  width: 100% !important;
+  justify-self: center;
+
+}
+
+/**** pagination ****/
+.trust-swiper .swiper-pagination {
+  position: relative;
+  bottom: 0.5rem !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin: .5rem 0;
+}
+
+.trust-swiper .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.25);
+  opacity: 1;
+  margin: 0 !important;
+  transition: background 0.3s ease, width 0.3s ease, transform 0.15s ease;
+  cursor: pointer;
+}
+
+.trust-swiper .swiper-pagination-bullet:hover {
+  background: rgba(61, 35, 13, 0.5);
+  transform: scale(1.15);
+}
+
+.dark-mode .trust-swiper .swiper-pagination-bullet:hover {
+  background: linear-gradient(135deg, #92570b, #ac6a15);
+  transform: scale(1.15);
+}
+
+.trust-swiper .swiper-pagination-bullet-active {
+  background: linear-gradient(135deg, #814e0b, #915910);
+  width: 26px;
+  box-shadow: 0 0 10px rgba(202, 141, 49, 0.5);
+}
+
+.dark-mode .trust-swiper .swiper-pagination-bullet-active {
+   box-shadow: 0 0 10px rgba(202, 141, 49, 0.144);
+}
+
+
+
+
+
+/* ============ SLIDE: Payment & Security ============ */
+.trusted-container-split {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  width: 100%;
+  height: 100%;
+}
+
+.trust-split-left {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-self: center;
+  justify-content: space-between;
+  align-items: center;
+  padding: .4rem;
+  gap: 0.75rem;
+}
+
+.trust-highlight {
+  color: #00d49a;
+}
+
+.payment-methods-row {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.payment-method-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+  padding: 0.45rem 0.4rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.payment-method-chip span{
+  font-size: .7rem;
+}
+
+.payment-method-chip i {
+  color: #00d49a;
+  font-size: .88rem;
+}
+
+.security-badge-card {
+  display: flex;
+  flex-direction: column;
+  width: 6rem;
+  height: 7rem;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+  right: 1.8rem;
+  top: 1rem;
+  gap: 0.4rem;
+  padding: .5rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 212, 154, 0.25);
+  backdrop-filter: blur(10px);
+  z-index: -1;
+}
+
+.security-badge-icon {
+  width: 1.8em;
+  height: 1.8rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00d49a, #00b386);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #04140f;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.security-badge-text {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+}
+
+.security-badge-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.security-badge-sub {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.baw-glow-payment {
+  background: radial-gradient(circle, rgba(0, 212, 154, 0.2), transparent 70%);
+}
+
+
+
+
+/* ============ SLIDE: Delivery & Support ============ */
+.delivery-stat-track {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.delivery-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.delivery-stat-ring {
+  width: 4.2rem;
+  height: 4.2rem;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 212, 154, 0.4);
+  background: rgba(0, 212, 154, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delivery-stat-ring span {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #00d49a;
+}
+
+.delivery-stat-label {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.55);
+  white-space: nowrap;
+}
+
+.delivery-stat-line {
+  width: 2.5rem;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+  margin-top: -1.5rem;
+}
+
+@media (max-width: 640px) {
+  .delivery-stat-line {
+    display: none;
+  }
+}
+
+.baw-glow-delivery {
+  background: radial-gradient(circle, rgba(255, 181, 71, 0.15), transparent 70%);
+}
+
+
+/* ============ SLIDE: AFA Registration ============ */
+.afa-badge-icon {
+  background: linear-gradient(135deg, #7c9eff, #5b7cff);
+  color: #04140f;
+width: 2rem;
+height: 2rem;
+}
+
+.baw-glow-afa {
+  background: radial-gradient(circle, rgba(124, 158, 255, 0.18), transparent 70%);
+}
+
+/* ============ SLIDE: Delivery Tracker ============ */
+.tracker-progress-row {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  margin-top: 0.75rem;
+  white-space: nowrap;
+}
+
+.tracker-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tracker-step-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 1.2rem;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.tracker-step-done .tracker-step-icon {
+  background: linear-gradient(135deg, #00d49a, #00b386);
+  border-color: transparent;
+  color: #04140f;
+}
+
+.tracker-step-active .tracker-step-icon {
+  border-color: #00d49a;
+  color: #00d49a;
+  background: rgba(0, 212, 154, 0.1);
+  box-shadow: 0 0 0 4px rgba(0, 212, 154, 0.12);
+}
+
+.tracker-step-label {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.55);
+  white-space: nowrap;
+  text-align: center;
+}
+
+.tracker-step-done .tracker-step-label,
+.tracker-step-active .tracker-step-label {
+  color: #fff;
+  font-weight: 600;
+}
+
+.tracker-progress-line {
+  width: 2.5rem;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.15);
+  margin-top: 1.35rem;
+  flex-shrink: 0;
+}
+
+.tracker-progress-line-done {
+  background: #00d49a;
+}
+
+@media (max-width: 640px) {
+  .tracker-progress-line {
+    display: none;
+  }
+}
+
+.tracker-cta {
+  margin-top: 1.25rem;
+}
+
+.baw-glow-tracker {
+  background: radial-gradient(circle, rgba(0, 212, 154, 0.18), transparent 70%);
+}
+
+.whb-cta-btn{
+  padding: .1rem .3rem;
+  text-decoration: none;
+  display: flex;
+  gap: .4rem;
+  align-items: center;
+  justify-content: center;
+   color: rgb(72, 72, 138) ;
+  font-size: .8rem;
+  margin-bottom: .5rem;
+}
+
+.dark-mode .whb-cta-btn{
+  color: rgb(54, 54, 117) !important;
+  font-size: .8rem;
+}
+
+
+.whb-cta-btn i{
+  color: white;
+  font-size: .92rem;
+}
+
+/* ============ SLIDE: Exclusive Page Discounts ============ */
+.discount-spotlight-card {
+  position: relative;
+  width: 5rem;
+  height: 7rem;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(255, 181, 71, 0.15), rgba(255, 143, 46, 0.05));
+  border: 1px solid rgba(255, 181, 71, 0.3);
+  backdrop-filter: blur(10px);
+  display: flex;
+  top: .8rem; 
+  right: 1.8rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  z-index: -1;
+}
+
+.discount-spotlight-percent {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #ffb547;
+  line-height: 1;
+}
+
+.discount-spotlight-percent small {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.discount-spotlight-label {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 600;
+}
+
+.discount-spotlight-ribbon {
+  position: absolute;
+  top: -0.3rem;
+  right: -0.6rem;
+  background: linear-gradient(135deg, #ff5c5ce3, #ff3b3be7);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  box-shadow: 0 4px 10px rgba(255, 92, 92, 0.4);
+}
+
+.baw-glow-discounts {
+  background: radial-gradient(circle, rgba(255, 181, 71, 0.2), transparent 70%);
+}

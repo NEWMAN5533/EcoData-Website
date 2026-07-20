@@ -39,9 +39,6 @@
 <script>
 
 document.addEventListener("DOMContentLoaded", ()=> {
-
-
- 
 // theme script (dark & light mode)
   const toggle = document.getElementById("themeToggle");
   const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -102,8 +99,14 @@ document.addEventListener("DOMContentLoaded", ()=> {
   <link rel="stylesheet" href="newCardStyle.css">
 
 
+  <!---swiper css-->
+<link rel="stylesheet" href="swiper-bundle.min.css">
 
+<!-- Swiper CSS — in <head> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css" />
 
+<!-- Swiper JS — before closing </body> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
 
 
 </head>
@@ -549,12 +552,17 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
 
   <!-----COUNTER-ENDS--->
+<section class="trust-swiper-container">
+  <div class="swiper trust-swiper">
+    <div class="swiper-wrapper">
 
-  <!----TRUSTED-MESSAGE------>
-  <section class="trusted-by ">
+      <!---swiper slide-->
+      <div class="swiper-slide">
+          <!----TRUSTED-MESSAGE--1---->
+       <section class="trusted-by " >
 
     <!-- Trusted By Skeleton -->
-    <div id="sk-Trusted" class="sk-trusted">  
+    <div id="sk-Trusted" class="sk-trusted" style="display: none;">  
       <div class="sk-trust-left">
         <div class="sk-section-title">  
         <span class="sk" style="width:160px;height:18px;margin-bottom:8px;display:block;"></span>  
@@ -642,8 +650,203 @@ document.addEventListener("DOMContentLoaded", ()=> {
       <div class="baw-glow"></div>
     </div>
 
-  </section>
-  <!----TRUSTED-MESSAGE---ends---->
+       </section>
+      </div>
+
+
+         
+    
+              <!-- ===== SLIDE 5: AFA Registration ===== -->
+      <div class="swiper-slide">
+        <section class="trusted-by trusted-by-afa">
+
+          <div class="particles">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div class="grid-overlay"></div>
+
+          <div class="trusted-container trusted-container-split">
+
+            <div class="trust-split-left">
+              <div class="wrapper-notice">
+                <span class="pulse-dot"></span>
+                <span class="trusted-badge">✦ Quick Setup</span>
+              </div>
+
+              <p class="trusted-text">
+                Register Your <span class="trust-highlight">AFA Number</span>
+              </p>
+
+              <div class="payment-methods-row">
+                <div class="payment-method-chip">
+                  <i class="ri-timer-flash-line"></i>
+                  <span>Under 5 mins</span>
+                </div>
+                <div class="payment-method-chip">
+                  <i class="ri-shield-check-line"></i>
+                  <span>Verified</span>
+                </div>
+              </div>
+
+              <a href="afa.html" class="whb-cta-btn">
+                Register Now
+                <i class="ri-arrow-right-line"></i>
+              </a>
+            </div>
+
+            <div class="trust-split-right">
+              <div class="security-badge-card">
+                <div class="security-badge-icon afa-badge-icon">
+                  <i class="ri-user-add-fill"></i>
+                </div>
+                <div class="security-badge-text">
+                  <span class="security-badge-title">One-Time Setup</span>
+                  <span class="security-badge-sub">Unlock </span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="baw-right">
+            <img src="./css/images/baw.png" alt="" loading="lazy">
+            <div class="baw-glow baw-glow-afa"></div>
+          </div>
+
+        </section>
+      </div>
+
+      <!-- ===== SLIDE 6: Delivery Tracker ===== -->
+      <div class="swiper-slide">
+        <section class="trusted-by trusted-by-tracker">
+
+          <div class="particles">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div class="grid-overlay"></div>
+
+          <div class="trusted-container">
+
+            <div class="wrapper-notice">
+              <span class="pulse-dot"></span>
+              <span class="trusted-badge">✦ Know Where It Is</span>
+            </div>
+
+            <p class="trusted-text">
+              Track Your Order <span class="trust-highlight">Live</span>
+            </p>
+
+            <div class="tracker-progress-row">
+
+              <div class="tracker-step tracker-step-done">
+                <div class="tracker-step-icon">
+                  <i class="ri-check-line"></i>
+                </div>
+                <span class="tracker-step-label">Order Placed</span>
+              </div>
+
+              <div class="tracker-progress-line tracker-progress-line-done"></div>
+
+              <div class="tracker-step tracker-step-active">
+                <div class="tracker-step-icon">
+                  <i class="ri-truck-line"></i>
+                </div>
+                <span class="tracker-step-label">On the Way</span>
+              </div>
+
+              <div class="tracker-progress-line"></div>
+
+              <div class="tracker-step">
+                <div class="tracker-step-icon">
+                  <i class="ri-home-smile-line"></i>
+                </div>
+                <span class="tracker-step-label">Delivered</span>
+              </div>
+
+            </div>
+
+            <a href="track-order.html" class="whb-cta-btn tracker-cta">
+              Track My Order
+              <i class="ri-arrow-right-line"></i>
+            </a>
+
+          </div>
+
+          <div class="baw-right">
+            <img src="./css/images/baw.png" alt="" loading="lazy">
+            <div class="baw-glow baw-glow-tracker"></div>
+          </div>
+
+        </section>
+      </div>
+
+
+            <!-- ===== SLIDE 7: Exclusive Page Discounts ===== -->
+      <div class="swiper-slide">
+        <section class="trusted-by trusted-by-discounts">
+
+          <div class="particles">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div class="grid-overlay"></div>
+
+          <div class="trusted-container trusted-container-split">
+
+            <div class="trust-split-left">
+              <div class="wrapper-notice">
+                <span class="pulse-dot"></span>
+                <span class="trusted-badge">✦ Members Only</span>
+              </div>
+
+              <p class="trusted-text">
+                Unlock <span class="trust-highlight">Exclusive Discounts</span>
+              </p>
+
+              <div class="payment-methods-row">
+                <div class="payment-method-chip">
+                  <i class="ri-price-tag-3-fill"></i>
+                  <span>Up to 20% Off</span>
+                </div>
+                <div class="payment-method-chip">
+                  <i class="ri-refresh-line"></i>
+                  <span>Updated Daily</span>
+                </div>
+              </div>
+
+              <a href="pay.html" class="whb-cta-btn">
+                Unlock Now
+                <i class="ri-arrow-right-line"></i>
+              </a>
+            </div>
+
+            <div class="trust-split-right">
+              <div class="discount-spotlight-card">
+                <span class="discount-spotlight-percent">20<small>%</small></span>
+                <span class="discount-spotlight-label">Max Savings</span>
+                <div class="discount-spotlight-ribbon">Today Only</div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="baw-right">
+            <img src="./css/images/baw.png" alt="" loading="lazy">
+            <div class="baw-glow baw-glow-discounts"></div>
+          </div>
+
+        </section>
+      </div>
+
+      
+    </div>
+    <!--PAGINATION-->
+    <div class="swiper-pagination"></div>
+  </div>
+</section>
+
 
 
 
@@ -5206,6 +5409,8 @@ document.addEventListener("DOMContentLoaded", ()=> {
 <script type="module" src="./firebase-config.js"></script>
 
 <script type="module" src="main.js"></script>
+<script src='scrollreveal.min.js'></script>
+<script src='swiper-bundle.min.js'></script>
 
 <!--GREETINGS WITH-usernameDisplay----->
 <script type="module" src="userRestriction.js"></script>
@@ -5232,6 +5437,24 @@ document.addEventListener("DOMContentLoaded", ()=> {
 </script>
 
 
+<!---SWIPER SCRIPT-->
+<script>
+  const trustSwiper = new Swiper('.trust-swiper',{
+    slidesPerView: 1,
+    spaceBetween: 0,
+    loop: true,
+    speed: 700,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    }
+  })
+</script>
 
 
 
