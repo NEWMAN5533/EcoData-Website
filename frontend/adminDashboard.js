@@ -979,6 +979,8 @@ const placedAtFormatted =
 
   // change text colors when there's slow, fast or normal deliveryTime
 
+ // change text colors when there's slow, fast or normal deliveryTime
+
 
 const bubble = document.getElementById("deliveryBubble1");
 
@@ -1021,7 +1023,6 @@ if(elapsedMinutes <= 30 ){
   bubble2.classList.add("slow");
 
 }
-
 
 
 
