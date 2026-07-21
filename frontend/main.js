@@ -543,8 +543,8 @@ document.addEventListener("click", () => {
           if(bundle.network === "mtn"){
 
             const validation = await
-            validateRecipient("233"  + recipient.substring(1),
-          "mtn_data_bundle"
+            validateRecipient("233" + recipient.substring(1),
+            selectedBundle.packageName
         );
 
         if(!validation.success || !validation.eligible) {
@@ -654,7 +654,7 @@ document.addEventListener("click", () => {
 
               const validation = await validateRecipient(
                 formattedPhone,
-                "mtn_data_bundle"
+                bundle.packageName
               );
 
               if(!validation.success || !validation.eligible){
