@@ -157,9 +157,10 @@
   display: grid;
   align-items: center;
   justify-items: center;
+  background: var(--primary-cl) !important;
   align-self: center;
   grid-template-columns: 
-    100px 100px  80px 80px 90px 90px 140px;
+    80px 120px  80px 80px 90px 90px 170px;
 
   /* sticky top so it stays visible while scrolling vertically */
   position: sticky;
@@ -193,7 +194,7 @@
   padding: 0 .5rem;
   align-items: start;
   grid-template-columns: 
-     100px 100px  80px 80px 90px 90px 140px;
+    80px 120px  80px 80px 90px 90px 170px;
   position: relative;
   min-width: max-content; /* ensures rows stretch with header */
 }
@@ -228,7 +229,7 @@
  width: 100%;
  height: 2.2rem;
  border-bottom: 1px solid rgb(100, 99, 99);
- grid-template-columns:   100px 100px  80px 80px 90px 90px 140px ;
+ grid-template-columns:   80px 120px  80px 80px 90px 90px 170px;
  display: grid;
 }
 
