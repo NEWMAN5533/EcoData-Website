@@ -40,6 +40,7 @@ validateRecipientRoute.post("/", async (req, res) => {
     );
 
     const data = await response.json();
+    console.log("Swift validation response", data);
 
     res.json(data);
   } catch (error) {
