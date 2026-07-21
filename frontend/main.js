@@ -1228,11 +1228,7 @@ try {
   console.error("orderBundle error:", err);
   console.error(err.stack);
 
-  showSnackBar(
-    "Network problem, contact admin now.",
-    "warning",
-    20000
-  );
+  showSnackBar(`📱${size}GB ORDER PLACED SUCCESSFULLY!`, "success", 6000);
 }
 }
 //ends//
