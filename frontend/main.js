@@ -474,7 +474,7 @@ document.addEventListener("click", () => {
   document.querySelectorAll("#normalView .buy-btn,  #gridView .buy-btn")
     .forEach(button => {
 
-      button.addEventListener("click", () => {
+      button.addEventListener("click", async () => {
 
 
       bottomNavDiv.style.display = "flex";
@@ -549,7 +549,6 @@ document.addEventListener("click", () => {
             price: Number(button.dataset.price),
           };
 
-          lastPurchasedBundle = bundle; // 🔑 SAVE FOR POST-PAYMENT
 
           // MTN NETWORK BG
             if(button.dataset.network === "mtn"){
@@ -622,7 +621,7 @@ document.addEventListener("click", () => {
             let formattedPhone = inputNumber.trim();
             // convert Ghana format (024xxxxxxxx) to 23324xxxxxxxxx
             if(formattedPhone.startsWith("0")){
-              formattedPhone = "233" + formattedPhone.subString(1);
+              formattedPhone = "233" + formattedPhone.substring(1);
             }
 
             // Validate routing (number)
@@ -633,7 +632,7 @@ document.addEventListener("click", () => {
                 "mtn_data_bundle"
               );
 
-              if(!validate.success || !validation.eligible){
+              if(!validation.success || !validation.eligible){
                 showSnackBar(validation.message || "Recipient is not eligible", "error"
                 );
                 return;
