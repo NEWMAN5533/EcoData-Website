@@ -164,6 +164,8 @@ export async function handleBuyDataRequest({network, recipient, pkg, size, payme
         process.env.SWIFT_WEBHOOK_URL || "https://swiftdata-link.com/api/webhooks/orders",
     };
 
+    console.log("Full SwiftData order payload:", orderData);
+
     // 4. Post to SwiftData
     const swiftBase = (process.env.SWIFT_BASE_URL || "https://swiftdata-link.com").replace(/\/$/, "");
 
@@ -176,6 +178,8 @@ export async function handleBuyDataRequest({network, recipient, pkg, size, payme
     });
 
     const swiftUrl = `${swiftBase}/order/${network}`;
+
+    console.log("SwiftData URL:", swiftUrl);
 
     const swiftRes = await axios.post(swiftUrl, orderData, {
       headers: {
@@ -221,7 +225,12 @@ export async function handleBuyDataRequest({network, recipient, pkg, size, payme
       };
     }
   } catch (err) {
-    const errData = err.response?.data || err.message || err;
+    const errData = {
+      status: err.response?.status,
+      data: err.response?.data,
+      message: err.message
+    };
+
     console.error("🔥 handleBuyDataRequest error:", errData);
 
     // Save failure so duplicate network retry does not call Swift again
