@@ -550,19 +550,45 @@ document.addEventListener("click", () => {
             selectedBundle.packageName
         );
 
-        if(!validation.success || !validation.eligible) {
-          showSnackBar(
-            validation.message || "Recipient is not eligible", "error", 4000
-          );
-          return;
-        }
-        lastValidation = validation;
+
+        if (!validation.success) {
+        showSnackBar(
+          validation.message || "Validation failed",
+          "error",
+          4000
+        );
+        return;
+      }
+
+      if (!validation.eligible) {
+        showSnackBar(
+          validation.message || "Recipient is not eligible",
+          "error",
+          4000
+        );
+        return;
+      }
+
+      if (validation.retryAllowed === false) {
+        showSnackBar(
+          "This number cannot receive this bundle at the moment. Please try another number.",
+          "warning",
+          5000
+        );
+        return;
+      }
+
+lastValidation = validation;
+
+      
         }
 
           //==========================
           // VALIDATE ROUTING (NUMBER)
           //==========================
 
+
+          
 
 
 
@@ -666,12 +692,34 @@ document.addEventListener("click", () => {
                 bundle.packageName
               );
 
-              if(!validation.success || !validation.eligible){
-                showSnackBar(validation.message || "Recipient is not eligible", "error"
-                );
-                return;
-              }
-              lastValidation = validation;
+            if (!validation.success) {
+          showSnackBar(
+            validation.message || "Validation failed",
+            "error",
+            4000
+          );
+          return;
+        }
+
+        if (!validation.eligible) {
+          showSnackBar(
+            validation.message || "Recipient is not eligible",
+            "error",
+            4000
+          );
+          return;
+        }
+
+        if (validation.retryAllowed === false) {
+          showSnackBar(
+            "This number cannot receive this bundle at the moment. Please try another number.",
+            "warning",
+            5000
+          );
+          return;
+        }
+
+        lastValidation = validation;
             }
 
             // save bundle 
@@ -1082,7 +1130,7 @@ async function orderBundle(network, recipient, packageName, size, reference) {
         ? "http://localhost:3000"
         : "https://ecodata-app.onrender.com";
 
-
+    
   const formattedRecipient = recipient;
 
   if(formattedRecipient.startsWith("0")) {
@@ -1158,16 +1206,34 @@ handleNewOrder(returnedOrder);
 
 updateHomepageTotals(orderData);
 
-await saveOrderToFirestore(orderData);
+try {
+  await saveOrderToFirestore(orderData);
+} catch (e) {
+  console.error("saveOrderToFirestore failed:", e);
+}
 
-saveGuestOrder(orderData);
+try {
+  saveGuestOrder(orderData);
+} catch (e) {
+  console.error("saveGuestOrder failed:", e);
+}
 
-activateTrackers();
+try {
+  activateTrackers();
+} catch (e) {
+  console.error("activateTrackers failed:", e);
+}
 
   } catch (err) {
-    console.error("⚠ Server error:", err);
-    showSnackBar("Network problem, contact admin now.", "warning", 20000);
-  }
+  console.error("orderBundle error:", err);
+  console.error(err.stack);
+
+  showSnackBar(
+    "Network problem, contact admin now.",
+    "warning",
+    20000
+  );
+}
 }
 //ends//
 //ends//
