@@ -569,14 +569,7 @@ document.addEventListener("click", () => {
         return;
       }
 
-      if (validation.retryAllowed === false) {
-        showSnackBar(
-          "This number cannot receive this bundle at the moment. Please try another number.",
-          "warning",
-          5000
-        );
-        return;
-      }
+     
 
 lastValidation = validation;
 
@@ -710,14 +703,6 @@ lastValidation = validation;
           return;
         }
 
-        if (validation.retryAllowed === false) {
-          showSnackBar(
-            "This number cannot receive this bundle at the moment. Please try another number.",
-            "warning",
-            5000
-          );
-          return;
-        }
 
         lastValidation = validation;
             }
