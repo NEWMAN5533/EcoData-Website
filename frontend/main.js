@@ -46,7 +46,7 @@ let selectedPackageName = "mtn_data_normal_delivery";
 const PACKAGE_MAP = {
   normal: "mtn_data_express_delivery",
   express: "mtn_data_express_delivery",
-  numbers: "when_order_fails_or_cancel_try_here",
+  numbers: "mtn_verified_numbers",
   mashup: "special_mashup_bundle_packages"
 };
 
@@ -859,10 +859,10 @@ function unActivateTrackers(){
 
 async function payWithPaystack(bundle, recipient) {
 
-  if(bundle.network?.toLowerCase() === "mtn") {
-   showSnackBar("📱 MTN ORDER PAUSED, WE ARE IMPLEMENTING A PREMIUM SYSTEM TO IMPROVE DELIVERY, GIVE UP TO 8AM. THANK YOU",   "success", 10000);
-  return;
- }
+ // if(bundle.network?.toLowerCase() === "mtn") {
+ //  showSnackBar("📱 MTN ORDER PAUSED, WE ARE IMPLEMENTING  PREMIUM SYSTEM TO IMPROVE DELIVERY, GIVE UP TO 8AM. THANK YOU",   "success", 10000);
+ // return;
+// }
 
   if(hasActiveOrder(recipient)){
     showSnackBar("❌ Number already has an active order", "warning", 4000
@@ -977,7 +977,7 @@ async function orderBundle(network, recipient, packageName, size, reference) {
     }
 
     playSuccessSound();
-      showSnackBar(`📱${size}GB Order Placed successfully!`, "success", 6000);
+      showSnackBar(`📱${size}GB ORDER PLACED SUCCESSFULLY!`, "success", 6000);
    
 
  
