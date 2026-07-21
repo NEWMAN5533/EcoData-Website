@@ -112,7 +112,36 @@ const mtnAreaDiv = document.getElementById("bundles");
 
 
 
+//=================================
+//  VALIDATE RECIPIENT 
+//=================================
+   async function validateRecipient(phone, offerSlug) {
+    try {
+      const response = await fetch("/api/validate-recipient", {
+        method: "POST",
+        headers: {
+          "content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          phone,
+          offerSlug
+        })
+      });
 
+      return await response.json();
+
+    }  catch(error){
+      console.log("Validation Error", error);
+
+      return {
+        success: false,
+        message: "Unable to verify recipient"
+      }
+   }
+  }
+//=================================
+// VALIDATE RECIPIENT ENDS
+//=================================
 
 
 
@@ -483,6 +512,29 @@ document.addEventListener("click", () => {
           bundle = {...selectedBundle};
           lastPurchasedBundle = bundle; // 🔑 SAVE FOR POST-PAYMENT
 
+          //====================
+          // VALIDATE ROUTING 
+          //====================
+          if(bundle.network === "mtn"){
+
+            const validation = await
+            validateRecipient("233"  + recipient.substring(1),
+          "mtn_data_bundle"
+        );
+
+        if(!validation.success || !validation.eligible) {
+          showSnackBar(
+            validation.message || "Recipient is not eligible", "error", 4000
+          );
+          return;
+        }
+          }
+
+          //==========================
+          // VALIDATE ROUTING (NUMBER)
+          //==========================
+
+          // if(validate.success){proceed to payment}
           payWithPaystack(bundle, recipient);
           resetSelectedBundle();
         }
@@ -563,7 +615,34 @@ document.addEventListener("click", () => {
           document.getElementById("priceWithFee").textContent = `GHS₵ ${priceFee}`;
 
 
-          createPhoneModal(inputNumber => {
+
+          // if(validate.success){proceed to payment}
+          createPhoneModal(async inputNumber => {
+
+            let formattedPhone = inputNumber.trim();
+            // convert Ghana format (024xxxxxxxx) to 23324xxxxxxxxx
+            if(formattedPhone.startsWith("0")){
+              formattedPhone = "233" + formattedPhone.subString(1);
+            }
+
+            // Validate routing (number)
+            if(bundle.network === "mtn") {
+
+              const validation = await validateRecipient(
+                formattedPhone,
+                "mtn_data_bundle"
+              );
+
+              if(!validate.success || !validation.eligible){
+                showSnackBar(validation.message || "Recipient is not eligible", "error"
+                );
+                return;
+              }
+            }
+
+            // save bundle 
+            lastPurchasedBundle = bundle;
+
             payWithPaystack(bundle, inputNumber);
             resetSelectedBundle();
           });
@@ -849,6 +928,16 @@ function unActivateTrackers(){
 //=================================
 // ACTIVATE DELIVERY TRACKER ENDS
 //=================================
+
+
+
+
+
+
+
+
+
+
 
 
 
