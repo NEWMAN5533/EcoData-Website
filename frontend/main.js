@@ -40,6 +40,9 @@ let _statusPollTimer = null; // to hold the interval timer ID
 let selectedBundle = null;      // used for UI selection (normal view)
 let lastPurchasedBundle = null; // used after payment (normal + grid)
 
+// protect payment (save successful)
+let lastValidation = null;
+
 // default selectedPackage
 let selectedPackageName = "mtn_data_normal_delivery";
 
@@ -553,11 +556,17 @@ document.addEventListener("click", () => {
           );
           return;
         }
-          }
+        lastValidation = validation;
+        }
 
           //==========================
           // VALIDATE ROUTING (NUMBER)
           //==========================
+
+
+
+
+
 
           // if(validate.success){proceed to payment}
           payWithPaystack(bundle, recipient);
@@ -662,6 +671,7 @@ document.addEventListener("click", () => {
                 );
                 return;
               }
+              lastValidation = validation;
             }
 
             // save bundle 
@@ -976,6 +986,15 @@ async function payWithPaystack(bundle, recipient) {
 //   showSnackBar("📱 MTN ORDER PAUSED, WE ARE IMPLEMENTING  PREMIUM SYSTEM TO IMPROVE DELIVERY. THANK YOU",   "success", 10000);
 //  return;
 // }
+
+
+
+//  =======================
+// PROTECT PAYMENT if(not verified user)
+if(!lastValidation?.eligible){
+  showSnackBar("Recipient verification require before payment", "warning", 3000);
+  return;
+}
 
   if(hasActiveOrder(recipient)){
     showSnackBar("❌ Number already has an active order", "warning", 4000
