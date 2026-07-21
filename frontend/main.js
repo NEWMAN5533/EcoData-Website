@@ -111,6 +111,26 @@ const mtnArea = document.getElementById("mtnArea");
 const mtnAreaDiv = document.getElementById("bundles");
 
 
+//=================================
+//  CHECK RESTRICTIONS
+//=================================
+
+async function checkRestrictions(){
+  try {
+    const response = await fetch("/api/restrictions");
+
+    return await response.json();
+  } catch(error) {
+    console.error("Restrictions check failed", error);
+    return {
+      success: false
+    };
+  }
+}
+
+//=================================
+//  CHECK RESTRICTIONS ENDS
+//=================================
 
 //=================================
 //  VALIDATE RECIPIENT 
