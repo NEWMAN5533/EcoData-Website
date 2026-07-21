@@ -1390,7 +1390,7 @@ SOCIAL FOLLOW SECTION
   max-width: 98% !important;
   align-items: center;
   justify-content: center;
-  display: none;
+  display: flex;
   gap: .4rem;
   margin-top: .4rem !important;
   padding: .2rem .4rem !important;
@@ -1512,20 +1512,35 @@ SOCIAL FOLLOW SECTION
   display: flex;
   align-items: center;
   gap: 1.8rem !important;
-  animation: pulse 1.2s infinite;
+  position: relative;
+}
+
+#rightBarFollow .channel-link-tag{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  text-decoration: none;
+  height: 100%;
+  width: 100%;
+  position: relative;
 }
 
 
-
-#rightBarFollow img{
-width: 2rem;
-height: 2rem;
-}
-
-
-
-.follow-right a{
-text-decoration: none;
+.whatsapp-channel{
+  width: 97%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90deg, #0abb68dc, #06db71e1);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: .9rem;
+  color: var(--background-cl);
+  border: none;
+  border-radius: 1rem;
+ 
+  text-decoration: none;
   -webkit-tap-highlight-color: transparent;
   -webkit-user-select: none;
   outline: none;
@@ -1533,28 +1548,25 @@ text-decoration: none;
   user-select: none;
 }
 
-
-
-.social-follow img{
-  width: 2.5rem;
-  height: 2.5rem;
-  margin-top: .2rem;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;;
-  user-select: none;
+.dark-mode .whatsapp-channel {
+  background: #0c9e5adc !important;
 }
 
-.social-follow .follow-right .meg{
-  height: 1.7rem;
-  width: 1.7rem;
+.whatsapp-channel:hover{
+  cursor: pointer;
 }
 
-.social-follow .tikop{
-  width: 2.7rem;
-  height: 2.7rem;
+.whatsapp-channel img{
+  width: 1.6rem;
+  height: 1.6rem
 }
+
+
+
+
+
+
+
 
 
 /****
