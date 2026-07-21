@@ -15,6 +15,7 @@ import subscriptionRouter from "./routes/subscriptionRouter.js";
 import adminRoute from "./routes/adminOrderUpdate.js";
 import syncOrderRoute from "./routes/syncOrderStatus.js";
 import validateRecipientRoute from "./routes/validateRecipient.js";
+import restrictionsRoute from "./routes/restrictions.js";
 
 
 
@@ -49,7 +50,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "frontend")));
 
 // ROUTES
-app.use("/api/validate-recipient", validateRecipientRoute)
+app.use("/api/validate-recipient", validateRecipientRoute);
+app.use("/api/restrictions", restrictionsRoute);
 app.use("/paystack/webhook", paystackWebhookRouter);
 app.use("/api/store", storeRouter);
 app.use("/api", productRouter);
