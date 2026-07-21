@@ -989,7 +989,7 @@ function activateTrackers() {
 function unActivateTrackers(){
    const firstTracker = document.getElementById("deliveryTracker1").style.display = "flex";
 
- const secondTracker = document.getElementById("deliveryTracker2").style.display = 'flex;
+ const secondTracker = document.getElementById("deliveryTracker2").style.display = 'flex';
 }
 
 //=================================
