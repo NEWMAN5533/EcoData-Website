@@ -14,6 +14,7 @@ import productRouter from "./routes/product.js";
 import subscriptionRouter from "./routes/subscriptionRouter.js";
 import adminRoute from "./routes/adminOrderUpdate.js";
 import syncOrderRoute from "./routes/syncOrderStatus.js";
+import validateRecipientRoute from "./routes/validateRecipient.js";
 
 
 
@@ -48,6 +49,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "frontend")));
 
 // ROUTES
+app.use("/api/validate-recipient", validateRecipientRoute)
 app.use("/paystack/webhook", paystackWebhookRouter);
 app.use("/api/store", storeRouter);
 app.use("/api", productRouter);
@@ -249,6 +251,8 @@ app.post("/api/buy-data", async (req, res) => {
 
   return res.status(result.status).json(result.body);
 });
+
+
 
 // GET route
 app.get("/api/buy-data", async (req, res) => {
