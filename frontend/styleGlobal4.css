@@ -1,6 +1,6 @@
 
   .main-row-content #liveOrderRows .live-row{
-  grid-template-columns:   80px 90px  80px 80px 90px 100px 90px ;
+  grid-template-columns:   100px 100px  80px 80px 90px 90px 140px;
  display: grid;
   width: 100%;
   align-items: center;
