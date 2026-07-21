@@ -1367,19 +1367,16 @@ console.log("timeStamp", order.timestamp);
 
   row.innerHTML = `
     <span>${order.orderId}</span>
-    <span>${getNetwork(order)}</span>
-    <span>${order.volume}GB</span>
     <span>${order.recipient}</span>
+    <span>${order.volume}GB</span>
     <span class="status-cell">
       <span class="status-badge ${getStatusClass(order.status)}">
         ${order.status}
       </span>
     </span>
-
-     <span>Yes</span>
+    <span>${getNetwork(order)}</span>
+    <span>Yes</span>
     <span>${date}</span>
-   
-  
   `;
 }
 
