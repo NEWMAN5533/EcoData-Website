@@ -44,11 +44,11 @@ let lastPurchasedBundle = null; // used after payment (normal + grid)
 let lastValidation = null;
 
 // default selectedPackage
-let selectedPackageName = "mtn_data_bundle";
+let selectedPackageName = "mtn_data_express_delivery";
 
 const PACKAGE_MAP = {
   normal: "mtn_data_normal_delivery",
-  express: "mtn_data_bundle",
+  express: "mtn_data_express_delivery",
   numbers: "mtn_verified_numbers",
   mashup: "special_mashup_bundle_packages"
 };
@@ -1082,7 +1082,12 @@ async function orderBundle(network, recipient, packageName, size, reference) {
         ? "http://localhost:3000"
         : "https://ecodata-app.onrender.com";
 
-    
+
+  const formattedRecipient = recipient;
+
+  if(formattedRecipient.startsWith("0")) {
+    formattedRecipient === "233" + formattedRecipient.substring(1);
+  }
 
   const response = await fetch(
   `${API_BASE}/api/buy-data`,
@@ -1093,7 +1098,7 @@ async function orderBundle(network, recipient, packageName, size, reference) {
     },
     body: JSON.stringify({
       network,
-      recipient,
+      recipient: formattedRecipient,
       package: packageName,
       size,
       paymentReference: reference,
