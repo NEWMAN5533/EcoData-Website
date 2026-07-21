@@ -136,6 +136,11 @@ async function checkRestrictions(){
 //  VALIDATE RECIPIENT 
 //=================================
    async function validateRecipient(phone, offerSlug) {
+    console.log("Sending validation:", {
+      phone,
+      offerSlug
+    });
+
     try {
       const response = await fetch("/api/validate-recipient", {
         method: "POST",
@@ -967,10 +972,10 @@ function unActivateTrackers(){
 
 async function payWithPaystack(bundle, recipient) {
 
-  if(bundle.network?.toLowerCase() === "mtn") {
-   showSnackBar("📱 MTN ORDER PAUSED, WE ARE IMPLEMENTING  PREMIUM SYSTEM TO IMPROVE DELIVERY. THANK YOU",   "success", 10000);
-  return;
- }
+//  if(bundle.network?.toLowerCase() === "mtn") {
+//   showSnackBar("📱 MTN ORDER PAUSED, WE ARE IMPLEMENTING  PREMIUM SYSTEM TO IMPROVE DELIVERY. THANK YOU",   "success", 10000);
+//  return;
+// }
 
   if(hasActiveOrder(recipient)){
     showSnackBar("❌ Number already has an active order", "warning", 4000
