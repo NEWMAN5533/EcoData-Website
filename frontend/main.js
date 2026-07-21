@@ -859,10 +859,10 @@ function unActivateTrackers(){
 
 async function payWithPaystack(bundle, recipient) {
 
-//  if(bundle.network?.toLowerCase() === "mtn") {
-//    showSnackBar("📱 MTN ORDER LOCKED DUE TO MUCH ORDERS PROCESSING. Please try again later.",   "success", 10000);
-//  return;
-//  }
+  if(bundle.network?.toLowerCase() === "mtn") {
+   showSnackBar("📱 MTN ORDER PAUSED, WE ARE IMPLEMENTING A PREMIUM SYSTEM TO IMPROVE DELIVERY, GIVE UP TO 8AM. THANK YOU",   "success", 10000);
+  return;
+ }
 
   if(hasActiveOrder(recipient)){
     showSnackBar("❌ Number already has an active order", "warning", 4000
@@ -1375,9 +1375,11 @@ console.log("timeStamp", order.timestamp);
         ${order.status}
       </span>
     </span>
+
+     <span>Yes</span>
     <span>${date}</span>
-    <span>Yes</span>
-    <span>${update}</span>
+   
+  
   `;
 }
 
