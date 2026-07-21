@@ -5,15 +5,23 @@ import axios from 'axios';
 const validateRecipientRoute = express.Router();
 
 validateRecipientRoute.post("/", async (req, res) => {
+    console.log("Received body:", req.body);
+
   try {
+
     const { phone, offerSlug } = req.body;
 
-    if (!phone || offerSlug) {
+    if (!phone || !offerSlug) {
       return res.status(400).json({
         success: false,
         message: "Phone number and offerSlug are required."
       });
     }
+   console.log("Sending to validation to swift:", {
+    phone,
+    offerSlug
+   }
+   );
 
     const response = await fetch("https://swiftdata-link.com/api/v1/orders/validate-recipient",
       {
