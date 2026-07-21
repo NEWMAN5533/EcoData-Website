@@ -44,11 +44,11 @@ let lastPurchasedBundle = null; // used after payment (normal + grid)
 let lastValidation = null;
 
 // default selectedPackage
-let selectedPackageName = "mtn_data_normal_delivery";
+let selectedPackageName = "mtn_data_bundle";
 
 const PACKAGE_MAP = {
-  normal: "mtn_data_express_delivery",
-  express: "mtn_data_express_delivery",
+  normal: "mtn_data_normal_delivery",
+  express: "mtn_data_bundle",
   numbers: "mtn_verified_numbers",
   mashup: "special_mashup_bundle_packages"
 };
