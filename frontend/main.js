@@ -569,14 +569,7 @@ document.addEventListener("click", () => {
         return;
       }
 
-      if (validation.retryAllowed === false) {
-        showSnackBar(
-          "This number cannot receive this bundle at the moment. Please try another number.",
-          "warning",
-          5000
-        );
-        return;
-      }
+   
 
 lastValidation = validation;
 
@@ -706,15 +699,6 @@ lastValidation = validation;
             validation.message || "Recipient is not eligible",
             "error",
             4000
-          );
-          return;
-        }
-
-        if (validation.retryAllowed === false) {
-          showSnackBar(
-            "This number cannot receive this bundle at the moment. Please try another number.",
-            "warning",
-            5000
           );
           return;
         }
@@ -1002,9 +986,9 @@ function activateTrackers() {
 
 // un activate trackers when no orders 
 function unActivateTrackers(){
-   const firstTracker = document.getElementById("deliveryTracker1").style.display = "none";
+   const firstTracker = document.getElementById("deliveryTracker1").style.display = "flex";
 
- const secondTracker = document.getElementById("deliveryTracker2").style.display = 'none';
+ const secondTracker = document.getElementById("deliveryTracker2").style.display = 'flex';
 }
 
 //=================================
