@@ -1629,8 +1629,19 @@ height: 2rem;
   white-space: nowrap;
 }
 
+
+.trusted-by .baw5-tc{
+  max-width: 65% !important;
+}
+
+.trusted-by .baw5-tr{
+  max-width: 35% !important;
+}
+
 .baw5{
-  margin-right: -1.5rem;
+  margin-right: -2.2rem;
+  width: 94%;
+  height: auto;
 }
 
 .tracker-step {
