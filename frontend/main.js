@@ -235,7 +235,7 @@ async function checkRestrictions(){
      mashTopRightContainerh2.textContent = "MTN Data Bundle";
   mashTopRightContainerSmall.textContent = "Purchase MTN data bundles for single or multiple recipients";
 
-  mashTopRightContainerBtn.textContent = "16 Packages Available";
+  mashTopRightContainerBtn.textContent = "14 Packages Available";
 
       // resize the dropdown container
     flexingContainer.style.height = "28rem";
@@ -246,7 +246,7 @@ async function checkRestrictions(){
     mashTitle.textContent = "MTN DATA BUNDLE";
 
     // packs to
-    mashPacks.textContent = "16 Packages Available";
+    mashPacks.textContent = "14 Packages Available";
    
     // change labelRecipient to
     mashRecipient.textContent = "Bundle Recipient Number";
