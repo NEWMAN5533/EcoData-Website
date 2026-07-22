@@ -1616,7 +1616,7 @@ height: 2rem;
 }
 
 .trusted-by .baw-right .baw4{
-  margin-right: -2.3rem;
+  margin-right: -3rem !important;
   height: 100% !important;
   width: 150%;
 }
