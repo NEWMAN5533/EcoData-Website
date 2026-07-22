@@ -1624,8 +1624,9 @@ height: 2rem;
 .tracker-progress-row {
   display: flex;
   align-items: center;
-  gap: 1.4rem;
+  gap: 1.3rem;
   margin-top: 0.75rem;
+  padding-left: .3rem !important;
   white-space: nowrap;
 }
 
