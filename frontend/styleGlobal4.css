@@ -1610,8 +1610,13 @@ height: 2rem;
   z-index: 9 !important;
 }
 
+.trusted-by .baw4-tr{
+  max-width: 40% !important;
+  z-index: 9999 !important;
+}
+
 .trusted-by .baw-right .baw4{
-  margin-right: -1.8rem;
+  margin-right: -2.8rem;
   height: 100% !important;
   width: 150%;
   object-fit: cover;
@@ -1637,11 +1642,12 @@ height: 2rem;
   max-width: 65% !important;
 }
 
-.trusted-by .baw5-tr,
-.trusted-by .baw4-tr{
+.trusted-by .baw5-tr{
   max-width: 35% !important;
   z-index: 9999 !important;
 }
+
+
 
 .baw5{
   margin-right: -3.1rem !important;
@@ -1649,11 +1655,6 @@ height: 2rem;
   height: auto;
 }
 
-.baw4{
-  margin-right: -3rem !important;
-  width: 94%;
-  height: auto;
-}
 
 .tracker-step {
   display: flex;
