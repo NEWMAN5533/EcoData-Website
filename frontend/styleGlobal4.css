@@ -1641,9 +1641,14 @@ height: 2rem;
   max-width: 35% !important;
 }
 
-.baw5,
-.baw4{
+.baw5{
   margin-right: -3.1rem !important;
+  width: 94%;
+  height: auto;
+}
+
+.baw4{
+  margin-right: -2.1rem !important;
   width: 94%;
   height: auto;
 }
