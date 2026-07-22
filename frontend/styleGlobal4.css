@@ -1601,6 +1601,21 @@ width: 2rem;
 height: 2rem;
 }
 
+
+
+.afa-split{
+  position: relative;
+  right:  -.8rem !important;
+  margin-bottom: 1.4rem !important;
+}
+
+.trusted-by .baw-right .baw4{
+  margin-right: -1.8rem;
+  height: 100% !important;
+  width: 150%;
+  object-fit: cover;
+}
+
 .baw-glow-afa {
   background: radial-gradient(circle, rgba(124, 158, 255, 0.18), transparent 70%);
 }
@@ -1613,6 +1628,8 @@ height: 2rem;
   margin-top: 0.75rem;
   white-space: nowrap;
 }
+
+
 
 .tracker-step {
   display: flex;
@@ -1872,7 +1889,7 @@ height: 2rem;
 
 .shoe-card-image
  {
-  width: 5.3rem;
+  width: 5rem;
   height: auto;
   filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.1));
 }
