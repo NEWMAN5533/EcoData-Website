@@ -1605,7 +1605,7 @@ height: 2rem;
 
 .afa-split{
   position: relative;
-  right:  -1rem !important;
+  right:  -1.1rem !important;
   margin-bottom: 1.4rem !important;
   z-index: 9 !important;
 }
