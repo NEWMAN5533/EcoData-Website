@@ -1631,15 +1631,18 @@ height: 2rem;
 }
 
 
-.trusted-by .baw5-tc{
+.trusted-by .baw5-tc,
+.trusted-by .baw4-tc{
   max-width: 65% !important;
 }
 
-.trusted-by .baw5-tr{
+.trusted-by .baw5-tr,
+.trusted-by .baw4-tr{
   max-width: 35% !important;
 }
 
-.baw5{
+.baw5,
+.baw4{
   margin-right: -3.1rem !important;
   width: 94%;
   height: auto;
