@@ -101,6 +101,7 @@
   // TERIF GET BUTTON 
   const terifModal = document.getElementById("terifModal");
   const getBundleBtn = document.getElementById("getBundle");
+  const terifContent = document.getElementById("terifContent");
 
  
 
@@ -150,7 +151,9 @@
 
 
     // ADD SCROLL AND CLICK EVEN TO GET BUNDLE
-     getBundleBtn.addEventListener("click", function() {
+     getBundleBtn.addEventListener("click", function(e) {
+      e.stopPropagation();
+
       if(getBundleBtn){
         terifModal.style.display = 'none';
 
@@ -172,6 +175,12 @@
       }
     });
 
+
+    window.addEventListener("click", function(e) {
+      if(!terifContent.contains(e.target) && !getBundle.contains(e.target)){
+        terifModal.style.display = 'none';
+      }
+    })
 
 
     } else{
