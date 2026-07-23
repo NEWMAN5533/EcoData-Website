@@ -176,18 +176,24 @@
     });
 
 
-    window.addEventListener("click", function(e) {
+
+
+    terifModal.addEventListener("click", function(e) {
+      e.stopPropagation();
+
+
+      terifModal.style.display = 'none';
+
       if(!terifContent.contains(e.target) && !getBundle.contains(e.target)){
         terifModal.style.display = 'none';
       }
     })
 
 
+
     } else{
       terifModal.style.display = 'none';
     }
-
-
 
    
     // First time appearing anytime
