@@ -1488,7 +1488,7 @@ border: 1px solid rgb(235, 235, 235);
   .content-group{
     width: 100%;
     height: auto;
-    max-width: 80%;
+    max-width: 84%;
     padding: 1rem 0;
     display: flex;
     align-items: center;
@@ -1540,7 +1540,7 @@ border: 1px solid rgb(235, 235, 235);
       height: 10% !important;
       font-family: var(--font-family);
       font-weight: 500;
-      font-size: .94rem;
+      font-size: 1.1rem;
       border: none !important;
       padding: 0 .6rem;
     }
@@ -1582,8 +1582,8 @@ border: 1px solid rgb(235, 235, 235);
       justify-content: center;
       border: 2px solid var(--gp-border);
       color: white;
+      padding: .3rem 0;
       position: relative;
-      padding: .4rem;
       font-family: var(--font-family);
       border-end-end-radius: .6rem;
       border-end-start-radius: .6rem;
@@ -1594,14 +1594,14 @@ border: 1px solid rgb(235, 235, 235);
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       width: 100%;
-      max-width: 97%;
+      max-width: 100%;
       align-items: start;
       justify-content: center;
       justify-items: center;
       height: 70%;
       position: relative;
       overflow: hidden;
-      padding: .3rem;
+      padding: .1rem;
     }
 
     /** gp cards **/
