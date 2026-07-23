@@ -93,6 +93,15 @@
   const mts = document.getElementById("mts");
   const sec = document.getElementById("sec");
 
+  // TERIF MODAL DIVS
+  const gp3Time1 = document.getElementById("hrs-gp3");
+  const gp3Time2 = document.getElementById("mins-gp3");
+  const gp3Time3 = document.getElementById("secs-gp3");
+
+  // TERIF GET BUTTON 
+  const terifModal = document.getElementById("terifModal");
+  const getBundleBtn = document.getElementById("getBundle");
+
  
 
     if(!isPromoTime()) {
@@ -137,6 +146,21 @@
       gridExpressSection.style.display = "none";
       gridMashup.style.display = "none";
 
+      terifModal.classList.add('show');
+
+
+    // ADD SCROLL AND CLICK EVEN TO GET BUNDLE
+     getBundleBtn.addEventListener("click", function() {
+      if(getBundleBtn){
+        terifModal.style.display = 'none';
+
+        dataSection.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+        });
+      }
+     })
+
 
     // ADD SCROLL INTO VIEW WHEN ITS PROMO
     ctaBtn.addEventListener("click", function(){
@@ -150,6 +174,8 @@
 
 
 
+    } else{
+      terifModal.style.display = 'none';
     }
 
 
@@ -158,7 +184,7 @@
     // First time appearing anytime
     if(promoWasInactive) {
       setTimeout(() => bar.classList.add("show"), 200 );
-      badge.classList.add("show");
+      badge.classList.remove("show");
       promoWasInactive = false;
     }
 
@@ -182,6 +208,9 @@
     hrs.innerHTML = `${hours}`
     mts.innerHTML = `${minutes}`
     sec.innerHTML = `${seconds}`
+    gp3Time1.innerHTML = `${hours}`
+    gp3Time2.innerHTML = `${minutes}`
+    gp3Time3.innerHTML = `${seconds}`
     labelEl.innerHTML =  `Offer End In <img src='./css/icons/timer.png'.>`;
 
     if(remaining < 6 * 60 * 60 * 1000) {

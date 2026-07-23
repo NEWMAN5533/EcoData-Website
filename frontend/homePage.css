@@ -1420,3 +1420,323 @@ border: 1px solid rgb(235, 235, 235);
 
 
 /*  DELIVERY TIME TRACKER  ENDS */
+
+
+  :root{
+    --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    --content-bg: rgb(54, 53, 53);
+    --gp-bg-cl: rgb(228, 188, 10);
+    --gp-border: rgb(228, 188, 10);
+    --card-gp3-br: rgb(71, 70, 70);
+  }
+
+
+  .terif-thursModal{
+   position: fixed;
+   width: 100%;
+   height: 100%;
+   display: none;
+   align-items: center;
+   justify-self: center;
+   justify-content: center;
+   background: rgba(0,0,0,0.37);
+   top: 0;
+   left: 0;
+   z-index: 99999999999;
+   overflow: hidden;
+  }
+
+  #terifModal.show {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  animation: fadeIn 0.7s ease;
+}
+
+
+  .terif-content{
+    width: 100%;
+     height: 100%;
+     max-height: 90%;
+     display: flex;
+     position: fixed;
+     bottom: 0;
+     gap:  .5rem;
+     align-items: center;
+     justify-content: space-around;
+     background: var(--content-bg);
+     border-start-start-radius: 1.2rem;
+     border-start-end-radius: 1.2rem;
+     flex-direction: column;
+     box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+  }
+
+  @media screen and (min-width: 600px){
+    .terif-content{
+      width: 100%;
+      max-width: 480px;
+      height: max-content;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%);
+      justify-self: center;
+    }
+  }
+
+  .content-group{
+    width: 100%;
+    height: auto;
+    max-width: 80%;
+    padding: 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border: 1px solid rgba(168, 164, 164, 0.08);
+    border-radius: .8rem;
+  }
+
+     /*** INDIVIDUAL CONTENTS ****/
+    .tip{
+      position: absolute;
+      top: .6rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgb(211, 210, 210);
+      width: 42px;
+      height: 4px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+
+    .group1{
+      margin-top: 2rem;
+      height: 28% !important;
+      display: flex;
+      align-items:  center;
+      justify-content: center;
+      border: 1px solid rgba(0,0,0,0.04);
+      box-shadow: 0 2px rgba(0,0,0,0.04);
+      overflow: hidden;
+    }
+
+    .group1 img{
+      width: 100%;
+      height: fit-content;
+      border-radius: .8rem;
+    }
+
+    .group2{
+      display: flex;
+      align-items: center;
+      position: relative;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      height: 10% !important;
+      font-family: var(--font-family);
+      font-weight: 500;
+      font-size: .84rem;
+      border: none !important;
+      padding: 0 .6rem;
+    }
+
+    .group3{
+      height: 30%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      text-align: center;
+      padding: 0 !important;
+      overflow: hidden;
+      border: none !important;
+      border-radius: 0 !important;
+    }
+
+      .group3 .group3-top{
+      width: 100%;
+      height: 15% !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgb(228, 188, 10);
+      color: white;
+      font-family: var(--font-family);
+      border-start-start-radius: .6rem;
+      border-start-end-radius: .6rem;
+    }
+
+     .group3 .group3-bottom{
+      width: 100%;
+      height: 85% !important;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--gp-border);
+      color: white;
+      position: relative;
+      padding: .4rem;
+      font-family: var(--font-family);
+      border-end-end-radius: .6rem;
+      border-end-start-radius: .6rem;
+    }
+
+
+    .gp3-card-wrapper{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      width: 100%;
+      max-width: 97%;
+      align-items: start;
+      justify-content: center;
+      justify-items: center;
+      height: 70%;
+      position: relative;
+      overflow: hidden;
+      padding: .3rem;
+    }
+
+    /** gp cards **/
+    .gp3-card-wrapper .gp3-card{
+      width: 4rem;
+      height: 4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: 1px solid var(--card-gp3-br);
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .top-gp3-card{
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      font-family: var(--font-family);
+      display:flex;
+      align-items: center;
+      justify-content: start;
+      width: 100%;
+      height: 50%;
+      padding: 0 .4rem;
+    }
+
+
+    .bottom-gp3-card
+    {
+     width: 100%;
+     height: 50%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     position: relative;
+     font-size: .75rem;
+     color: white;
+     border-top: 1px solid var(--card-gp3-br);
+     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+
+
+    /*** TERIF- TIMER ***/
+    .terif-timer{
+      width: 97%;
+      height: 30%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      padding: 0 1rem;
+    }
+
+    .terif-timer-wrap1{
+      width: 50%;
+      height: 90%;
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      gap: .3rem;
+    }
+
+      .terif-timer-wrap2{
+      width: 50%;
+      height: 90%;
+      display: flex;
+      align-items: center;
+      justify-content: end;
+      gap: .3rem;
+    }
+#hr-gp3,
+#mi-gp3{
+  background: rgba(34, 36, 36, 0.89)!important;
+}
+
+#hr-gp3 i{
+  font-size: .97rem;
+  font-weight: 500;
+}
+
+
+
+    .terif-timer small{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 90%;
+      border: 1px solid var(--card-gp3-br);
+      border-radius: .4rem;
+      font-family: var(--font-family);
+      font-size: .88rem;
+    }
+
+    .terif-timer #hrs-gp3{
+      color: white;
+    }
+
+    .terif-timer #mins-gp3{
+      color: rgb(67, 121, 121);
+    }
+
+
+    .terif-timer #secs-gp3{
+      color: white;
+    }
+
+
+
+    /*** GROUP 4 *****/
+    .group4 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      height: max-content;
+      border: none !important;
+    }
+
+    .group4 .get-bundle{
+      width: 100%;
+      height: 2.4rem;
+      color: white;
+      font-weight: 600;
+      border-radius: .5rem;
+      align-items: center;
+      background: var(--gp-border);
+      border: none;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      opacity: .9;
+      transition:  background .2s ease;
+    }
+
+    .get-bundle:hover{
+      opacity: 1;
+      cursor: pointer;
+    }
