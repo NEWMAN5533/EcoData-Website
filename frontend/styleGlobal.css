@@ -809,7 +809,7 @@ clock section
   gap: 1rem;
   overflow: hidden;
   position: relative;
-  border-radius: .2rem !important;
+  border-radius: .8rem !important;
   box-shadow:
     0 2px 0 rgba(255,255,255,0.08) inset,
     0 20px 60px rgba(0,0,0,0.35),
@@ -1151,8 +1151,7 @@ clock section
   align-items: center;
   justify-content: end;
   padding-right: 1rem;
-  overflow: hidden;
-  z-index: 1;
+  z-index: 99999 !important;
   animation: slideInRight 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s both;
 }
 
@@ -1161,7 +1160,7 @@ clock section
   to   { opacity: 1; transform: translateX(0); }
 }
 
-.baw-right img {
+.trusted-by .baw-right img {
   position: absolute;
   width: 150%;
   height: 100%;
