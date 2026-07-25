@@ -36,7 +36,6 @@ onAuthStateChanged(auth, async (user) => {
 if (user) {
       const userSnap = await getDoc(doc(db, "users", user.uid));
       const userRef = doc(db, "users", user.uid);
-      const userSnap = await getDoc(userRef);
       const userData = userSnap.data();
       if(!user) return;
 
