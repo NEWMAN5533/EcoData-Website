@@ -33,25 +33,69 @@ console.log("🔥 Firebase initialized and Firestore ready for login!");
 console.log ({email, password});
 
 
-// 🔹 Display username when logged in
+
+
+
+// AUTHENTICATE THE USER
 onAuthStateChanged(auth, async (user) => {
 
   const usernameDisplay = document.getElementById("usernameDisplay");
-  if (!usernameDisplay) return;
 
-  if (user) {
+  if (!user) {
 
-    const userDoc = await getDoc(doc(db, "users", user.uid));
-
-    if (userDoc.exists()) {
-      const userData = userDoc.data();
-      usernameDisplay.textContent = `Welcome, ${userData.username}!`;
-    } else {
-      usernameDisplay.textContent = "Welcome!";
+    if (usernameDisplay) {
+      usernameDisplay.textContent = "Welcome, Guest!";
     }
 
-  } else {
-    usernameDisplay.textContent = "Welcome, Guest!";
+    return;
+  }
+
+  // Get user document
+  const userDoc = await getDoc(doc(db, "users", user.uid));
+
+  if (!userDoc.exists()) {
+    console.error("User profile not found.");
+    return;
+  }
+
+  const userData = userDoc.data();
+
+  // Display username
+  if (usernameDisplay) {
+    usernameDisplay.textContent = `Welcome, ${userData.username}!`;
+  }
+
+  // Redirect only if on login page
+  if (
+    window.location.pathname.includes("login.html") ||
+    window.location.pathname.endsWith("/login")
+  ) {
+
+    // Check admin
+    const adminRef = doc(db, "admins", user.email);
+    const adminSnap = await getDoc(adminRef);
+
+    if (
+      adminSnap.exists() &&
+      adminSnap.data().role === "admin" &&
+      adminSnap.data().active === true
+    ) {
+
+      localStorage.setItem("isAdmin", "true");
+      window.location.replace("adminDashboard.html");
+      return;
+    }
+
+    // Save user info
+    localStorage.setItem("username", userData.username || "User");
+    localStorage.setItem("role", userData.role || "user");
+
+    // Redirect
+    if (userData.role === "agent") {
+      window.location.replace("agentPage.html");
+    } else {
+      window.location.replace("index.html");
+    }
   }
 
 });
@@ -71,7 +115,7 @@ loginForm.addEventListener("submit", async (e) => {
 
   if(!email || !password) {
     showSnackBar("Please fill in all fields", "warning");
-    loginBtn.classList.remove("loading");
+    logBtn.classList.remove("loading");
     logBtn.disabled = false;
 
   } else {
@@ -137,21 +181,23 @@ if (adminSnap.exists()) {
 }
 
     // Save locally
-    localStorage.setItem("username", userData.username || "User");
-    localStorage.setItem("role", userData.role || "user");
+    localStorage.setItem("username",
+    userData.username || "User");
+    localStorage.setItem("role",
+    userData.role || "user");
 
-    showSnackBar("Login successful!", "success");
+    showSnackBar("Login successful!", "success", 1500);
 
     // 🔥 Redirect based on role
     setTimeout(() => {
 
       if (userData.role === "agent") {
-        window.location.href = "agentPage.html";
+        window.location.replace('agentPage.html');
       } else {
-        window.location.href = "index.html";
+        window.location.replace('index.html');
       }
 
-    }, 3500);
+    }, 1500);
 
   } catch (error) {
 
