@@ -30,7 +30,7 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 console.log("🔥 Firebase initialized and Firestore ready for login!");
-console.log ({email, password});
+
 
 
 
@@ -105,10 +105,10 @@ onAuthStateChanged(auth, async (user) => {
 const loginForm = document.getElementById("login-form");
 const logBtn = document.getElementById("logBtn");
 
+
+if(loginForm) {
 loginForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-
-
 
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
@@ -139,7 +139,7 @@ loginForm.addEventListener("submit", async (e) => {
 
     const userData = userDoc.data();
 
-    // =========================
+// =========================
 // CHECK ADMIN ACCESS
 // =========================
 const adminRef =
@@ -166,15 +166,8 @@ if (adminSnap.exists()) {
 
     showSnackBar(
       "Admin login successful!",
-      "success"
+      "success", 1500
     );
-
-    setTimeout(() => {
-
-      window.location.href =
-        "./adminDashboard.html";
-
-    }, 2000);
 
     return;
   }
@@ -188,20 +181,7 @@ if (adminSnap.exists()) {
 
     showSnackBar("Login successful!", "success", 1500);
 
-    // 🔥 Redirect based on role
-    setTimeout(() => {
-
-      if (userData.role === "agent") {
-        window.location.replace('agentPage.html');
-      } else {
-        window.location.replace('index.html');
-      }
-
-    }, 1500);
-
   } catch (error) {
-
-
 
     // ✅ Clean error messages
     let message = "Login failed";
@@ -230,7 +210,7 @@ if (adminSnap.exists()) {
   }
 });
 
-
+}
 
 
 
