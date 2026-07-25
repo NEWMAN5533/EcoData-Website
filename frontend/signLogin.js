@@ -32,11 +32,30 @@ const db = getFirestore(app);
 console.log("🔥 Firebase initialized and Firestore ready for login!");
 
 
+// 🔹 Login
+const loginForm = document.getElementById("login-form");
+const logBtn = document.getElementById("logBtn");
 
 
+if(loginForm) {
+loginForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+
+  if(!email || !password) {
+    showSnackBar("Please fill in all fields", "warning");
+    logBtn.classList.remove("loading");
+    logBtn.disabled = false;
+
+  } else {
+    logBtn.classList.add("loading");
+    logBtn.disabled = true;
+  }
 
 
-// AUTHENTICATE THE USER
+  // AUTHENTICATE THE USER
 onAuthStateChanged(auth, async (user) => {
 
   const usernameDisplay = document.getElementById("usernameDisplay");
@@ -68,63 +87,42 @@ onAuthStateChanged(auth, async (user) => {
   // Redirect only if on login page
   if (
     window.location.pathname.includes("login.html") ||
-    window.location.pathname.endsWith("/login")
-  ) {
-
-    // Check admin
-    const adminRef = doc(db, "admins", user.email);
-    const adminSnap = await getDoc(adminRef);
-
-    if (
-      adminSnap.exists() &&
-      adminSnap.data().role === "admin" &&
-      adminSnap.data().active === true
-    ) {
-
-      localStorage.setItem("isAdmin", "true");
-      window.location.replace("adminDashboard.html");
-      return;
-    }
+    window.location.pathname.endsWith("/login")) {
 
     // Save user info
-    localStorage.setItem("username", userData.username || "User");
-    localStorage.setItem("role", userData.role || "user");
+    localStorage.setItem("username",
+    userData.username || "User");
+    localStorage.setItem("role",
+    userData.role || "user");
 
-    // Redirect
-    if (userData.role === "agent") {
+    // Admin
+    if(userData.isAdmin === true &&
+      userData.active === true) {
+        localStorage.setItem("isAdmin", "true");
+
+        window.location.replace("adminDashboard.html");
+        return;
+      }
+
+    // Agent
+    if (userData.isAgent === true &&
+      userData.agentApproved === true &&
+      userData.active === true
+    ) {
       window.location.replace("agentPage.html");
-    } else {
-      window.location.replace("index.html");
+      return;
+
     }
+
+    // Normal user
+    window.location.replace("index.html");
   }
 
 });
 
 
-// 🔹 Login
-const loginForm = document.getElementById("login-form");
-const logBtn = document.getElementById("logBtn");
 
-
-if(loginForm) {
-loginForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value.trim();
-
-  if(!email || !password) {
-    showSnackBar("Please fill in all fields", "warning");
-    logBtn.classList.remove("loading");
-    logBtn.disabled = false;
-
-  } else {
-    logBtn.classList.add("loading");
-    logBtn.disabled = true;
-  }
-
-
-   try {
+try {
 
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
@@ -136,42 +134,6 @@ loginForm.addEventListener("submit", async (e) => {
       logBtn.classList.remove("loading");
       return;
     }
-
-    const userData = userDoc.data();
-
-// =========================
-// CHECK ADMIN ACCESS
-// =========================
-const adminRef =
-  doc(db, "admins", user.email);
-
-const adminSnap =
-  await getDoc(adminRef);
-
-if (adminSnap.exists()) {
-
-  const adminData =
-    adminSnap.data();
-
-  if (
-    adminData.role === "admin" &&
-    adminData.active === true
-  ) {
-
-    // SAVE ADMIN STATE
-    localStorage.setItem(
-      "isAdmin",
-      "true"
-    );
-
-    showSnackBar(
-      "Admin login successful!",
-      "success", 1500
-    );
-
-    return;
-  }
-}
 
     // Save locally
     localStorage.setItem("username",
