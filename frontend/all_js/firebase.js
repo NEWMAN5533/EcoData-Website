@@ -11,7 +11,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebas
 
 
 //  Firebase config
-const firebaseConfig = {
+export const firebaseConfig = {
  apiKey: "AIzaSyClNBlfigtQk8AZWdMZcU9sEtVcIrS0D1g",
   authDomain: "ecodata-2bee6.firebaseapp.com",
   projectId: "ecodata-2bee6",
