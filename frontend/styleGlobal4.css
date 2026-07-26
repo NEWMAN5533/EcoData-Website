@@ -1615,6 +1615,58 @@ height: 2rem;
   z-index: 9999 !important;
 }
 
+@media screen and (min-width: 900px) {
+  .trusted-by .baw4-tr{
+
+  }
+
+  .trusted-by-afa  .trusted-container,
+  .trusted-by-discounts  .trusted-container{
+    max-width: 80% !important;
+    justify-content: space-around !important;
+  }
+
+  .trusted-by-afa .trust-split-left,
+  .trusted-by-discounts .trust-split-left{
+    align-items: center !important;
+  }
+
+  .trusted-by-afa  .baw-right,
+  .trusted-by-discounts  .baw-right {
+    max-width: 20% !important;
+  }
+
+   .trusted-by-afa .security-badge-card{
+    margin-right: -11rem !important;
+    margin-bottom: 2rem;
+    width: 9rem !important;
+    height: 9rem !important;
+   }
+
+ 
+  .trusted-by-discounts .discount-spotlight-card{
+    margin-right: -8rem !important;
+  }
+
+   .trusted-by-discounts .discount-spotlight-card{
+    margin-bottom: 2.3rem;
+    width: 8rem !important;
+    height: 8rem !important;
+   }
+
+  .trust-split-left{
+    padding: 1.4rem 0 !important;
+  }
+
+  .payment-method-chip{
+    padding: .3rem 1.99rem !important;
+  }
+
+  .whb-cta-btn{
+    display: none !important;
+  }
+}
+
 .trusted-by .baw-right .baw4{
   margin-right: -3rem !important;
   height: 100% !important;
