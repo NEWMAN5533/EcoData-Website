@@ -50,7 +50,7 @@
   /***
   DARK MODE COLORS
   ***/
-  --darkMode-bg-cl: rgb(10, 1, 22);
+  --darkMode-bg-cl: #0b141a;
   --welcome-card-bg: rgb(2, 2, 39);
   --welcome-card-bg-2: rgb(24, 5, 5);
   --welcome-card-border: rgb(74, 88, 94);
@@ -237,17 +237,6 @@ MAIN CONTAINER
   background: var(--darkMode-bg-cl) !important;
   overflow: hidden;
 }
-
-
-
-
-
-.container .main-grid-container{
-  height: calc(100vh - 3.4rem) !important;
-  scrollbar-width: none !important;
-        /**** check back for margin-top ***/
-}
-
 
 
 

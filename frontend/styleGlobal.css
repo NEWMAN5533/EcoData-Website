@@ -16,10 +16,6 @@
 
   /*====NEW===ROOT====*/
   /*====NEW===ROOT====*/
-  --darkMode-bg-cl: #111b21 !important;
-  --background-cl-1: rgb(29, 36, 41);
-  --background-cl-2: rgb(29, 36, 41);
-  --background-cl-2: rgb(29, 36, 41);
 
 
   /***
@@ -33,9 +29,9 @@
   /***
   DARK MODE COLORS
   ***/
-  --darkMode-bg-cl: rgb(24, 29, 36) !important;
-  --welcome-card-bg-2:  #141c27 !important;
-  --welcome-card-bg:  #0e141b !important;
+  --darkMode-bg-cl: #0b141a;
+  --welcome-card-bg-2:  #141c27;
+  --welcome-card-bg:  #0e141b ;
   --welcome-card-bg-3: rgba(77, 77, 77, 0.89);
   --welcome-card-border: rgb(74, 88, 94);
   --thin-border: rgb(35, 48, 49);

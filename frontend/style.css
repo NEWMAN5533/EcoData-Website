@@ -255,6 +255,7 @@ AGENT CODE ENDS
 ****/
 
 :root {
+  
   --bg-cl: #FFF;
   --primary-cl: #fff;
   --secondary-cl: rgb(50, 50, 190);
@@ -270,8 +271,7 @@ AGENT CODE ENDS
   --airteltigo-btn: rgb(28, 46, 119);
 
   /*====NEW===ROOT====*/
-  /*====NEW===ROOT====*/
-  --darkMode-bg-cl: #111b21 !important;
+
   --background-cl-1: rgb(29, 36, 41);
 
 
@@ -289,9 +289,9 @@ AGENT CODE ENDS
   /***
   DARK MODE COLORS
   ***/
-  --darkMode-bg-cl: #111b21 !important;
-  --welcome-card-bg-2:  #141c27 !important;
-  --welcome-card-bg:  #0e141b !important;
+  --darkMode-bg-cl: #0b141a !important;
+  --welcome-card-bg-2:  #141c27;
+  --welcome-card-bg:  #0e141b;
   --welcome-card-bg-3: rgba(77, 77, 77, 0.89);
   --welcome-card-border: rgb(74, 88, 94);
   --thin-border: rgb(35, 48, 49);
