@@ -16,6 +16,8 @@ import adminRoute from "./routes/adminOrderUpdate.js";
 import syncOrderRoute from "./routes/syncOrderStatus.js";
 import validateRecipientRoute from "./routes/validateRecipient.js";
 import restrictionsRoute from "./routes/restrictions.js";
+import exclusiveAgentRoute from "./routes/exclusivePage.js";
+import afaRegisterRouter from "./routes/afaRegisterRoute.js";
 
 
 
@@ -52,12 +54,15 @@ app.use(express.static(path.join(__dirname, "frontend")));
 // ROUTES
 app.use("/api/validate-recipient", validateRecipientRoute);
 app.use("/api/restrictions", restrictionsRoute);
-app.use("/paystack/webhook", paystackWebhookRouter);
-app.use("/api/store", storeRouter);
-app.use("/api", productRouter);
-app.use("/api", subscriptionRouter);
+app.use("/api/paystack/webhook", paystackWebhookRouter);
+app.use("/api/create-store", storeRouter);
+app.use("/api/upload-product", productRouter);
+app.use("/api/initiate-subscription", subscriptionRouter);
 app.use("/api/admin", adminRoute);
 app.use("/api/admin", syncOrderRoute);
+app.use("/api/verify-payment", exclusiveAgentRoute);
+app.use("/api/afa-register", afaRegisterRouter);
+
 
 
 
@@ -310,219 +315,6 @@ app.get("/api/v1/order/status/:orderIdOrRef", async (req, res) => {
   }
 });
 
-
-// ====================================
-// PRODUCTION STORE SERVER VERIFICATION
-// ====================================
-
-
-// ======================================
-// PRODUCTION STORE SERVER VERIFICATION ENDS
-// =======================================
-
-
-// =====================
-// AGENT ROUTE VERIFICATION
-// ====================
-app.post("/verify-payment", async (req, res) => {
-  try {
-    const { reference, uid } = req.body;
-
-    if (!reference || !uid) {
-      return res.status(400).json({ error: "Missing reference or uid" });
-    }
-
-    const response = await axios.get(
-      `https://api.paystack.co/transaction/verify/${reference}`,
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
-        },
-      }
-    );
-
-    const data = response.data.data;
-
-    const AGENT_PRICE = 50;
-    const expectedAmount = AGENT_PRICE * 100;
-
-    if (data.status !== "success") {
-      return res.status(400).json({ error: "Payment not successful" });
-    }
-
-    if (data.amount !== expectedAmount) {
-      return res.status(400).json({ error: "Incorrect amount" });
-    }
-
-    if (data.currency !== "GHS") {
-      return res.status(400).json({ error: "Invalid currency" });
-    }
-
-    if (data.metadata.uid !== uid) {
-      return res.status(400).json({ error: "UID mismatch" });
-    }
-
-    const userRef = db.collection("users").doc(uid);
-    const userDoc = await userRef.get();
-
-    if (!userDoc.exists) {
-      return res.status(404).json({ error: "User not found" });
-    }
-
-    if (userDoc.data().paymentStatus === "verified") {
-      return res.status(400).json({ error: "Already verified" });
-    }
-
-    await userRef.update({
-      isAgent: true,
-      paymentStatus: "verified",
-      agentApproved: true,
-      amount: AGENT_PRICE,
-      paidAt: admin.firestore.FieldValue.serverTimestamp(),
-      paymentReference: reference,
-    });
-
-    return res.json({ success: true, message: "Agent upgraded successfully" });
-
-  } catch (error) {
-    console.error("Verification error:", error.response?.data || error);
-    res.status(500).json({ error: "Server error" });
-  }
-});
-// =====================
-// AGENT ROUTE VERIFICATION ENDS
-// ====================
-
-
-
-// =======================
-// MTN AFA ROUTE
-// =======================
-app.post("/api/afa/register", async (req, res) => {
-  const {phone,
-      fullName, 
-      paymentReference,
-    } = req.body;
-
-  const result = await handleAFARequest({
-    fullName: fullName,
-    phone: phone,
-    paymentReference: paymentReference,
-  });
-
-  res.status(result.status).json(result.body);
-});
-
-
-
-
-async function handleAFARequest({
-  fullName,
-  phone,
-  paymentReference,
-}) {
-  // ====================
-  // VALIDATION
-  // ====================
-  if (!fullName || !phone || !paymentReference) {
-    return {
-      ok: false,
-      status: 400,
-      body: {
-        success: false,
-        message: "Missing required fields",
-      },
-    };
-  }
-
-  // ====================
-  // DUPLICATION PROTECTION
-  // ====================
-  if (processedOrders.has(paymentReference)) {
-    return {
-      ok: true,
-      status: 200,
-      body: {
-        success: true,
-        message: "AFA already submitted",
-        ...processedOrders.get(paymentReference).response,
-      },
-    };
-  }
-
-  try {
-    // ====================
-    // VERIFY PAYMENT
-    // ====================
-    const verification = await axios.get(
-      `https://api.paystack.co/transaction/verify/${paymentReference}`,
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
-        },
-      }
-    );
-
-    if (!verification.data.status) {
-      throw new Error("Payment verification failed");
-    }
-
-    const paidAmount = verification.data.data.amount / 100;
-
-    if (paidAmount !== 20) {
-      throw new Error("Invalid payment amount");
-    }
-
-    // ====================
-    // 🚫 REMOVE SWIFT CALL
-    // ====================
-
-    // ====================
-    // SAVE AFA REQUEST (YOU CONTROL THIS)
-    // ====================
-    const responseData = {
-      registrationId: "AFA-" + Date.now(),
-      name: fullName,
-      phoneNumber: phone,
-      registrationPrice: paidAmount,
-      status: "pending", // 🔥 always pending (admin approval)
-      submittedAt: new Date().toISOString(),
-    };
-
-    // Store in memory (you can later move to DB)
-    processedOrders.set(paymentReference, {
-      status: "success",
-      response: responseData,
-    });
-
-    return {
-      ok: true,
-      status: 200,
-      body: {
-        success: true,
-        message: "Registration submitted successfully",
-        ...responseData,
-      },
-    };
-  } catch (err) {
-    const errData = err.response?.data || err.message;
-
-    processedOrders.set(paymentReference, {
-      status: "failed",
-      response: { error: errData },
-    });
-
-    return {
-      ok: false,
-      status: 500,
-      body: {
-        success: false,
-        message: "AFA submission failed",
-        error: errData,
-      },
-    };
-  }
-}
 
 
 
