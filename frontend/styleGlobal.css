@@ -29,12 +29,12 @@
   /***
   DARK MODE COLORS
   ***/
-  --darkMode-bg-cl: rgb(19, 23, 29) !important;
+  --darkMode-bg-cl: rgb(24, 29, 35) !important;
   --welcome-card-bg-2:  #141c27;
   --welcome-card-bg:  #0e141b ;
   --welcome-card-bg-3: rgba(77, 77, 77, 0.89);
   --welcome-card-border: rgb(74, 88, 94);
-  --thin-border: rgb(27, 36, 36);
+  --thin-border: rgb(38, 49, 49);
   --thin-border2:rgb(44, 61, 61);
   --text-cl: rgb(145, 168, 164);
   --text-cl-2: rgb(210, 216, 216);
