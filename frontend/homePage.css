@@ -15,11 +15,7 @@
   --airteltigo-btn: rgb(28, 46, 119);
 
   /*====NEW===ROOT====*/
-  /*====NEW===ROOT====*/
-  --darkMode-bg-cl: rgb(24, 29, 36) !important;
-  --background-cl-1: rgb(29, 36, 41);
-  --background-cl-2: rgb(29, 36, 41);
-  --background-cl-2: rgb(29, 36, 41);
+
 
 
   /***
@@ -33,12 +29,12 @@
   /***
   DARK MODE COLORS
   ***/
-  --darkMode-bg-cl: rgb(24, 29, 36) !important;
-  --welcome-card-bg-2:  #141c27 !important;
-  --welcome-card-bg:  #0e141b !important;
+  --darkMode-bg-cl: rgb(19, 23, 29) !important;
+  --welcome-card-bg-2:  #141c27;
+  --welcome-card-bg:  #0e141b;
   --welcome-card-bg-3: rgba(77, 77, 77, 0.89);
   --welcome-card-border: rgb(74, 88, 94);
-  --thin-border: rgb(35, 48, 49);
+
   --text-cl: rgb(145, 168, 164);
   --text-cl-2: rgb(210, 216, 216);
   --text-cl-3: rgb(139, 141, 141);
@@ -46,7 +42,6 @@
   /**
   BORDER SOLID COLORS
   **/
-  --thin-border-1:  #0d6d5a;
   --thin-border-2:  #830616;
   --thin-border-3:  #b97207;
   --thin-border-4:  #036aa7;
@@ -198,36 +193,35 @@ text-transform: uppercase !important;
  
 
 
-.signup-modal{
+.signupModal-modal{
   position: fixed;
-  inset:0;
   background: rgba(0,0,0,0.1);
   backdrop-filter: blur(px);
-  display: flex;
-  align-items:center;
+  display: none;
+  align-items: center;
   justify-content:center;
-  z-index:999999999;
-  opacity: 0;
-  pointer-events:none;
-  transition:0.4s;
+  z-index: 99999999999999999999999999999 !important;
+  transition: background 0s ease, color 0s ease;
 }
 
-.signup-modal.active{
-  opacity:1;
-  pointer-events:auto;
-}
+
+
+
 
 .signup-box{
   background:rgb(248, 248, 248);
-  width:340px;
-  height: 430px;
+  width: 88%;
+  height: 450px;
   display: flex;
-  position: relative;
+  position: auto;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding:18px;
+  padding: 18px;
   border-radius:14px;
   text-align:center;
   box-shadow:0 12px 36px rgba(117, 117, 117, 0.7);
@@ -259,7 +253,7 @@ text-transform: uppercase !important;
   font-size: 1.1rem;
   color: white;
   border-radius: 3px;
-  cursor: pointer;
+  cursor: pointer !important;
   box-shadow: 0 2px 6px rgba(0,0,0,0.13);
 }
 
