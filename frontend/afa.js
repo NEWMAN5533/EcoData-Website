@@ -264,7 +264,7 @@ async function submitpayloadistration(payload) {
       paymentReference: payload.paymentReference,
     };
 
-    const res = await fetch("/api/afa/register", {
+    const res = await fetch("/api/afa-register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
