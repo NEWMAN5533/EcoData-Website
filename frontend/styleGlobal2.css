@@ -29,12 +29,12 @@
   /***
   DARK MODE COLORS
   ***/
-  --darkMode-bg-cl: #0b141a;
+  --darkMode-bg-cl: rgb(19, 23, 29)  !important;
   --welcome-card-bg-2:  #141c27 ;
   --welcome-card-bg:  #0e141b ;
   --welcome-card-bg-3: rgba(77, 77, 77, 0.89);
   --welcome-card-border: rgb(74, 88, 94);
-  --thin-border: rgb(35, 48, 49);
+
   --text-cl: rgb(145, 168, 164);
   --text-cl-2: rgb(210, 216, 216);
   --text-cl-3: rgb(139, 141, 141);
@@ -42,7 +42,6 @@
   /**
   BORDER SOLID COLORS
   **/
-  --thin-border-1:  #0d6d5a;
   --thin-border-2:  #830616;
   --thin-border-3:  #b97207;
   --thin-border-4:  #036aa7;

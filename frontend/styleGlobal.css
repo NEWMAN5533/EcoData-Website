@@ -29,12 +29,13 @@
   /***
   DARK MODE COLORS
   ***/
-  --darkMode-bg-cl: #0b141a;
+  --darkMode-bg-cl: rgb(19, 23, 29) !important;
   --welcome-card-bg-2:  #141c27;
   --welcome-card-bg:  #0e141b ;
   --welcome-card-bg-3: rgba(77, 77, 77, 0.89);
   --welcome-card-border: rgb(74, 88, 94);
-  --thin-border: rgb(35, 48, 49);
+  --thin-border: rgb(27, 36, 36);
+  --thin-border2:rgb(44, 61, 61);
   --text-cl: rgb(145, 168, 164);
   --text-cl-2: rgb(210, 216, 216);
   --text-cl-3: rgb(139, 141, 141);
@@ -1637,7 +1638,7 @@ gap: .6rem;
   justify-self: center;
   background: var(--primary-cl) !important;
   padding: .3rem;
-  box-shadow: 0 10px 20px rgba(22, 22, 22, 0.3);
+  box-shadow: 0 10px 20px rgba(10, 10, 10, 0.3);
 }
 
 

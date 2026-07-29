@@ -50,11 +50,11 @@
   /***
   DARK MODE COLORS
   ***/
-  --darkMode-bg-cl: #0b141a;
+  --darkMode-bg-cl:rgb(19, 23, 29) !important;
   --welcome-card-bg: rgb(2, 2, 39);
   --welcome-card-bg-2: rgb(24, 5, 5);
   --welcome-card-border: rgb(74, 88, 94);
-  --thin-border: rgb(35, 48, 49);
+ 
   --text-cl: rgb(145, 168, 164);
   --text-cl-2: rgb(210, 216, 216);
 
@@ -74,7 +74,6 @@
   /**
   BORDER SOLID COLORS
   **/
-  --thin-border-1:  rgb(141, 141, 141);
   --thin-border-2:  #830616;
   --thin-border-3:  #b97207;
   --thin-border-4:  #036aa7;
