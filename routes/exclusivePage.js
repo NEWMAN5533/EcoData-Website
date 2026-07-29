@@ -1,6 +1,6 @@
 import express from "express";
 import axios from "axios";
-import { admin } from "../firebaseAdmin";
+import { admin } from "../firebaseAdmin.js";
 
 const exclusiveAgentRoute = express.Router();
 
