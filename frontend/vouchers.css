@@ -741,7 +741,7 @@ scrollbar-width: none;
 
 .v2-group1{
   width: 100%;
-  height: 3rem;
+  height: max-content;
   border-radius: .6rem;
 }
 
@@ -749,30 +749,34 @@ scrollbar-width: none;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: .4rem;
-  justify-content: space-between;
+  gap: .1rem;
+  justify-content: center;
   position: relative;
   width: 100%;
-  height: 3rem;
+  height: max-content;
   
 }
 
-.quantity .quant-label{
+.qty{
+  justify-content: space-between !important;
+}
+
+.quant-label{
   width: 100%;
-  height: 18%;
+  height: 8%;
   font-size: .78rem;
   font-family: var(--font-fam);
   font-weight: 600;
-  padding-bottom: 1rem;
+  padding-bottom: 1.3rem;
   color: var(--times-bg);
 }
 
 .quantity .v2-wrapper{
   width: 100%;
-  height: 82%;
+  height: 2.5rem;
   display: flex;
   align-items: center;
-  justify-content: space-between  ;
+  justify-content: center  ;
 }
 
 
@@ -839,9 +843,9 @@ scrollbar-width: none;
 
 /* counter ends */
 
-.v2-total{
+.quantity .v2-total{
   width: 100%;
-  height: 10rem !important;
+  height: 4rem !important;
   display: flex;
   background: var(--thin-border2);
   border-radius: .6rem;
