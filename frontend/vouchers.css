@@ -71,7 +71,7 @@
 /*** VOUCHERS CONTAINER ****/
 .vouchers-container{
   width: 100%;
-  max-width: 88%;
+  max-width: 90%;
   height: max-content;
   display: flex;
   align-items: center;
