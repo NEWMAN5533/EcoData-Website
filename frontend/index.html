@@ -139,9 +139,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
         <!---network-nav-ends---->
           <div class="quicker-nav active" >
             <div class="naver" onclick="window.location.href='./index.html'">
-              <span class="material-icons">
-                  home
-              </span>
+             <i class="ri-home-4-line material-icons"></i>
               <p>
               Home
               </p>
@@ -153,7 +151,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
            <div id="adminAccessLink3" class="quicker-nav">
               <div class="naver"  onclick="window.location.href='adminDashboard.html'">
-                <span class="material-icons">dashboard</span>
+                <i class="ri-dashboard-3-line material-icons"></i>
               <p>Admin Dashboard</p>
               </div>
             
@@ -161,7 +159,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
               <div id="adminAccessLink4" class="quicker-nav">
               <div class="naver"  onclick="window.location.href = 'agentPage.html'">
-                <span class="material-icons">support_agent</span>
+                <i class="ri-vip-crown-line material-icons"></i>
               <p>Exclusive Page</p>
               </div>
             
@@ -172,7 +170,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
       
             <div class="quicker-nav">
               <div class="naver"  onclick="window.location.href='./pay.html'">
-                <span class="material-icons">local_offer</span>
+               <i class="ri-price-tag-3-line material-icons"></i>
               <p> Discounts</p>
               </div>
             
@@ -180,7 +178,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
             <div class="quicker-nav">
               <div class="naver"  onclick="window.location.href='./afa.html'">
-                <span class="material-icons">how_to_reg</span>
+                <i class="ri-user-follow-line material-icons"></i>
               <p>AFA Registration</p>
               </div>
             
@@ -191,19 +189,29 @@ document.addEventListener("DOMContentLoaded", ()=> {
           
       <div class="quicker-nav" >
         <div class="naver" onclick="window.location.href='./bundlesInfo.html'">
-          <span class="material-icons">info</span>
+          <i class="ri-information-line material-icons"></i>
           <p>Info</p>
         </div>
       </div>
           
 
-            
+              <div title="Coming up soon!" class="quicker-nav " >
+              <div class="naver" onclick="window.location.href='./vouchers.html'">
+             <i class="ri-ticket-2-line material-icons"></i>
+              <p>Vouchers Shop</p>
+              </div>
+
+              <div class="tag">
+                <small>New</small>
+              </div>
+              
+            </div> 
 
             
-            <div title="Coming up soon!" class="quicker-nav " >
+            <div title="Coming up soon!" class="quicker-nav "style="display: none;">
               <div class="naver" onclick="window.location.href='#'">
-              <span class="material-icons">menu_book</span>
-              <p>ebooks</p>
+             <i class="ri-book-2-line material-icons"></i>
+              <p>Ebooks</p>
               </div>
 
               <div class="tag">
@@ -216,7 +224,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
             <div title="Coming Up Soon!" class="quicker-nav" >
               <div class="naver" onclick="window.location.href='ecdoataStore/shop.html'">
-              <span class="material-icons">store</span>
+              <i class="ri-store-2-line material-icons"></i>
                 <p>Get Store</p>
               </div>
               <div class="tag">
@@ -416,7 +424,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
   
           <!---MAIN-->
-  <div class="grid-container-main">
+         <div class="grid-container-main">
           
   <!---CARD CONTAINER------>
   <section class="card-container">
@@ -5269,9 +5277,9 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
 
   <!-----SIGN UP CARD SECTION----->
-  <div id="signupModal" class="signup-modal" style='display: none;'>
+  <div id="signupModal" class="signupModal-modal">
 
-    <div class="signup-box">
+    <div class="signup-box" id="'signupContent">
     <div class="signup-box-top">
       <img src="./css/icons/icon.bg.png" alt="" loading="lazy">
       <span id="closeSignup">&times;</span>
@@ -5293,7 +5301,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
   </div>
       <div class="signup-actions">
         <button id="createAccountBtn">Create Account</button>
-        <button id="loginBtn">Login</button>
+        <button id="loginBtn" >Login</button>
       </div>
 
     </div>
