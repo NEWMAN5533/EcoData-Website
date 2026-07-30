@@ -64,10 +64,14 @@
 }
 
 
+.follow-share-container{
+  margin-top: 1.4rem !important;
+}
+
 /*** VOUCHERS CONTAINER ****/
 .vouchers-container{
   width: 100%;
-  max-width: 96%;
+  max-width: 88%;
   height: max-content;
   display: flex;
   align-items: center;
@@ -77,14 +81,17 @@
   position: relative;
   background: var(--background-cl);
   border-radius: 10px;
-  margin-top: 2rem;
+  margin-top: 2.7rem;
   margin-bottom: 7rem;
   padding: .5rem 1.2rem;
   border: 1px solid var(--bg-cl);
+  box-shadow: var(--box-dark);
+
 }
 
 .dark-mode .vouchers-container{
   background: var(--thin-border) !important;
+  box-shadow: var(--box-dark);
 }
 
 .dark-mode .vouchers-container{
@@ -117,14 +124,20 @@
  position: relative;
  width: 5.8rem;
  height: 3.7rem;
- background: var(--thin-border2);
+ background: var(--background-cl-1);
  border-radius: .8rem;
  box-shadow: var(--box-sd);
+ opacity: .5;
+}
+
+.dark-mode 
+.leftI-wrapper{
+  background: var(--thin-border2) !important;
 }
 
 .leftI-wrapper .icn{
-  color: var(--background-cl);
-  font-size: 1.6rem;
+  color: var(--thin-border-1);
+  font-size: 1.4rem;
   font-weight: 200 !important;
   rotate: -90deg;
 }

@@ -38,6 +38,38 @@ if(shoppingBtn){
 
 
 
+
+
+ // SHARE BTN
+ const shareBtn = document.getElementById("shareBtn");
+
+ shareBtn.addEventListener('click', async () =>
+{
+  const shareData = {
+    title: "EcoData",
+    text: "Check out Ecodata Website, the smartest, digital and trusted data bundle purchase website y'll love to use.",
+    url: window.location.href
+  };
+
+  // Native share
+  if (navigator.share) {
+    try {
+      await navigator.share(shareData);
+    } catch (err) {
+      console.log("Share Cancelled");
+    }
+  }
+ 
+  // FallBack (Desktop)
+  else {
+    navigator.clipboard.writeText(shareData.url).then(() => {
+      showSnackBar("Link copied! ");
+  });
+}
+});
+
+
+
 // SNACKBAR SECTION //
 // ===== SNACKBAR FUNCTION ===== //
 let snackTimeout = null;
