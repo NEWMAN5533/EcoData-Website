@@ -567,3 +567,337 @@
   font-family: var(--font-fam);
   font-size: .6rem;
 }
+
+
+
+
+/*** VOUCHER PURCHASE MODAL ****/
+:root{
+  --V-group-br: rgb(19, 48, 54);
+  --V-modal-content-bg: rgb(17, 30, 48);
+  --times-bg: rgb(121, 174, 184);
+  --v2-bg: rgb(59, 91, 97);
+}
+.voucher-purchase-modal{
+   position: fixed;
+   width: 100%;
+   height: 100%;
+   display: flex;
+   align-items: center;
+   justify-self: center;
+   justify-content: center;
+   background: rgba(0,0,0,0.37);
+   top: 0;
+   left: 0;
+   z-index: 99999999999;
+   overflow: hidden;
+}
+
+  #voucherModal.show {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  animation: fadeIn 0.7s ease;
+}
+
+.voucher-modal-content{
+   width: 100%;
+     height: 100%;
+     max-height: 88%;
+     display: flex;
+     position: fixed;
+     bottom: 0;
+     gap:  .5rem;
+     padding: 1rem 0;
+     align-items: center;
+     justify-content: space-between;
+     background: var(--V-modal-content-bg);
+     border-start-start-radius: 1.2rem;
+     border-start-end-radius: 1.2rem;
+     flex-direction: column;
+     box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+}
+
+/** voucher groups **/
+.voucher-group {
+  width: 100%;
+  height: auto;
+  position: relative;
+  align-items: center;
+  padding: .4rem .8rem;
+  justify-content: space-between;
+}
+
+
+
+/** FIRST V-GROUP ENDS **/
+.V-group1{
+width: 100%;
+height: 10%;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: .2rem 1.3rem;
+border-bottom: 1px solid var(--V-group-br);
+}
+
+.v-group1-left{
+  width: 70%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: .2rem;
+}
+
+/** shopping cart ***/
+.Vg-left-left{
+  width: 15%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.Vg-left-left .icon{
+  background: linear-gradient(135deg, rgba(13, 211, 13, 0.795), rgb(82, 223, 82));
+ width: 2rem;
+ height: 2rem;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ border-radius: .6rem;
+ opacity: .8;
+ padding: .2rem;
+}
+
+
+
+/** left right ***/
+.Vg-left-right{
+  width: 85%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  align-content: center;
+  justify-content: center;
+  white-space: nowrap;
+  line-height: 1.1;
+}
+
+.vg-ri-top{
+  width: 100%;
+  height: auto;
+}
+
+.vg-ri-top p{
+  color: var(--primary-cl);
+  font-family: var(--font-fam);
+  font-weight: 600;
+  font-size: .9rem;
+  opacity: .9;
+}
+
+
+/* bottom */
+.vg-ri-btom{
+  width: 100%;
+  height: auto;
+}
+
+.vg-ri-btom small{
+  color: var(--text-cl);
+  font-family: var(--font-fam);
+  font-weight: 400;
+  font-size: .62rem;
+}
+
+/** right close modal ( &times ) **/
+.right-top-content{
+  background: var(--V-group-br);
+  padding: .2rem .6rem;
+  border-radius: 50%;
+  box-shadow: var(--box-sd);
+  color: var(--times-bg);
+  opacity: .9;
+}
+
+/** FIRST V-GROUP ENDS **/
+.V-group2{
+width: 100%;
+height: 74%;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-items: center;
+justify-content: space-between;
+padding: .2rem 1.3rem !important;
+overflow-y: auto;
+scrollbar-width: none;
+}
+
+.v2-group1{
+  width: 100%;
+  height: 3rem;
+  border-radius: .6rem;
+}
+
+.quantity{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .4rem;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+  height: 3rem;
+  
+}
+
+.quantity .quant-label{
+  width: 100%;
+  height: 18%;
+  font-size: .78rem;
+  font-family: var(--font-fam);
+  font-weight: 600;
+  padding-bottom: 1rem;
+  color: var(--times-bg);
+}
+
+.quantity .v2-wrapper{
+  width: 100%;
+  height: 82%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between  ;
+}
+
+
+
+.quantity .decrease{
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--thin-border2);
+  border-radius: .6rem;
+  box-shadow: var(--box-sd);
+  font-size: .95rem;
+  color: var(--primary-cl);
+  font-family: var(--font-fam);
+  cursor: pointer;
+}
+
+.quantity .quantityCounter{
+  width: 65%;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--V-group-br);
+  border-radius: .6rem;
+  box-shadow: var(--box-sd);
+  font-size: .98rem;
+  color: var(--primary-cl);
+  font-family: var(--font-fam);
+}
+
+
+.quantity .increase{
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--thin-border2);
+  border-radius: .6rem;
+  box-shadow: var(--box-sd);
+  font-size: .95rem;
+  color: var(--primary-cl);
+  font-family: var(--font-fam);
+  cursor: pointer;
+}
+
+/* counter ends */
+
+.v2-total{
+  width: 100%;
+  height: 10rem !important;
+  display: flex;
+  background: var(--thin-border2);
+  border-radius: .6rem;
+}
+
+.v2-input{
+  width: 100%;
+  height: 2.5rem;
+  background: rgb(19, 48, 54);
+  border-radius: .6rem;
+  display: flex;
+  justify-content: start;
+  align-items:center;
+  text-align: start;
+  padding: 0 .6rem;
+  border: none;
+  box-shadow: var(--box-sd);
+  color: var(--primary-cl);
+  font-size: .8rem;
+  font-family: var(--font-fam);
+}
+
+.checkbox{
+  width: .8rem;
+  height: .8rem;
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateX(-50%);
+}
+
+.v2-input::placeholder{
+  font-size: .79rem;
+}
+
+.la{
+  margin-bottom: .5rem;
+}
+
+.check{
+  display: flex !important;
+  justify-content: space-between;
+}
+
+/** FIRST V-GROUP2 ENDS **/
+
+
+
+.V-group3{
+width: 100%;
+height: 12%;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: .2rem 1.3rem;
+margin-top: .5rem;
+}
+
+.voucher-modal-content .V-group3 .vtn{
+  width: 100% !important;
+  justify-content: center;
+  border-radius: .6rem !important;
+  height: 2.3rem;
+  font-family: var(--font-fam);
+  font-weight: 500;
+  font-size: .9rem;
+}
+
+.voucher-modal-content .V-group3 .vtn .icon{
+  font-weight: 500 !important;
+}
+
+
+/** FIRST V-GROUP3 ENDS **/
