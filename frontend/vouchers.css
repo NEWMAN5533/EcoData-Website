@@ -133,6 +133,7 @@
 .dark-mode 
 .leftI-wrapper{
   background: var(--thin-border2) !important;
+  opacity: 0.9 !important;
 }
 
 .leftI-wrapper .icn{
@@ -542,7 +543,12 @@
 }
 
 .dark-mode .short-note{
-   border: 1px solid var(--thin-border2) !important;
+  border: 1px solid var(--thin-border2) !important;
+}
+
+.dark-mode .short-note i{
+  color: var(--background-cl) !important;
+  opacity: .7;
 }
 
 .short-note h2{
