@@ -3,7 +3,7 @@
   --bg-cl: #FFF;
   --primary-cl: #fff;
   --secondary-cl: rgb(50, 50, 190);
-  --dark-cl: #0a0a0a;
+  --dark-cl: #414649;
   --ascent-cl: rgb(158, 97, 209);
   --background-cl: #e6e8ce;
   --card-full-bg-cl: rgb(255, 217, 0);
@@ -75,11 +75,16 @@
   flex-direction: column;
   gap: .8rem;
   position: relative;
-  background: var(--thin-border);
+  background: var(--background-cl);
   border-radius: 10px;
   margin-top: 2rem;
   margin-bottom: 7rem;
   padding: .5rem 1.2rem;
+  border: 1px solid var(--bg-cl);
+}
+
+.dark-mode .vouchers-container{
+  background: var(--thin-border) !important;
 }
 
 .dark-mode .vouchers-container{
@@ -94,7 +99,6 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  border-bottom: 1px solid var(--thin-border);
 }
 
 .leftOf-voucher{
@@ -119,10 +123,14 @@
 }
 
 .leftI-wrapper .icn{
-  color: var(--primary-cl);
+  color: var(--background-cl);
   font-size: 1.6rem;
   font-weight: 200 !important;
   rotate: -90deg;
+}
+
+.dark-mode .leftI-wrapper .icn {
+  color: var(--primary-cl) !important;
 }
 
 
@@ -148,10 +156,14 @@
 }
 
 .rightTopOf-voucher h2{
-  color: var(--primary-cl);
+  color: var(--dark-cl);
   font-family: var(--font-fam);
   font-size: 1.2rem;
   font-weight: 500;
+}
+
+.dark-mode .rightTopOf-voucher h2{
+  color: var(--primary-cl) !important;
 }
 
 
@@ -165,13 +177,16 @@
 }
 
 .rightBottomOf-voucher small{
-  color: var(--text-cl);
+  color: var(--darkMode-bg-cl);
   font-family: var(--font-fam);
   font-size: .78rem;
   font-weight: 300;
   flex-wrap: wrap;
 }
 
+.dark-mode .rightBottomOf-voucher small{
+  color: var(--text-cl);
+}
 /*** VOUCHER PRICE */
 .voucher-price{
   width: 100%;
@@ -194,6 +209,11 @@
   box-shadow: var(--box-sd);
 }
 
+.dark-mode .leftOpPrice{
+  border-radius: 8px;
+  background: rgba(0, 0,0,0.2) !important;
+}
+
 /** refresher **/
 .rightOpRefresh{
   border-radius: 8px;
@@ -205,6 +225,11 @@
   cursor: pointer;
   border: 1px solid rgba(15, 48, 97, 0.2);
   box-shadow: var(--box-sd);
+}
+
+.dark-mode .rightOpRefresh{
+  background: rgba(15, 48, 97, 0.541) !important;
+  color: white !important;
 }
 
 
@@ -277,7 +302,11 @@
   align-items: start;
   position: relative;
   border-radius: 1rem;
-  border: 1px solid var(--thin-border2);
+  border: 1px solid var(--text-cl);
+}
+
+.dark-mode .grid-voucher-container{
+  border: 1px solid var(--thin-border2) !important;
 }
 
 .grid-voucher-card {
@@ -336,6 +365,11 @@
   background: rgba(15, 97, 59, 0.233);
   padding: .2rem;
   border-radius: .2rem;
+}
+
+.dark-mode .img .material-icons{
+  color: rgb(13, 211, 13);
+  background: rgba(44, 56, 51, 0.233) !important;
 }
 
 .vouchrer{
@@ -407,10 +441,14 @@
 }
 
 .bece-left-top small{
-  color: rgb(161, 160, 160);
+  color: rgb(197, 197, 197);
   font-family: var(--font-fam);
   font-weight: 500;
   font-size: .72rem;
+}
+
+.dark-mode .bece-left-top small{
+  color: rgb(161, 160, 160);
 }
 
 
@@ -424,10 +462,14 @@
 }
 
 .bece-left-btom p{
-  color: rgb(42, 218, 109);
+  color: rgb(65, 92, 75);
   font-family: var(--font-fam);
   font-weight: 700;
   font-size: 1.05rem;
+}
+
+.dark-mode .bece-left-btom p{
+  color: rgb(42, 218, 109);
 }
 
 
@@ -480,10 +522,14 @@
   flex-direction: column;
   gap: 1rem;
   padding: 1rem;
-  border: 1px solid var(--thin-border2);
+  border: 1px solid var(--text-cl);
   border-radius: .8rem;
   margin-top: 1.4rem;
   text-align: center;
+}
+
+.dark-mode .short-note{
+   border: 1px solid var(--thin-border2) !important;
 }
 
 .short-note h2{
@@ -494,6 +540,8 @@
   text-shadow: var(--box-sd);
   text-align: center;
 }
+
+
 
 .short-note small{
   color: rgb(49, 117, 114);
