@@ -19,6 +19,7 @@ import restrictionsRoute from "./routes/restrictions.js";
 import exclusiveAgentRoute from "./routes/exclusivePage.js";
 import afaRegisterRouter from "./routes/afaRegisterRoute.js";
 import getVoucherRouter from "./routes/getVouchersRoute.js";
+import postVoucherRouter from "./routes/postVoucherRouter.js";
 
 
 
@@ -64,6 +65,8 @@ app.use("/api/admin", syncOrderRoute);
 app.use("/api/verify-payment", exclusiveAgentRoute);
 app.use("/api/afa-register", afaRegisterRouter);
 app.use("/api/vouchers", getVoucherRouter);
+app.use("/api/order-voucher", postVoucherRouter);
+
 
 
 
