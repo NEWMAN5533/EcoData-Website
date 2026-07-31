@@ -69,11 +69,16 @@
 }
 
 /*** VOUCHERS CONTAINER ****/
+
+
+
+
+
 .vouchers-container{
   width: 100%;
   max-width: 90%;
   height: max-content;
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
@@ -583,7 +588,7 @@
    position: fixed;
    width: 100%;
    height: 100%;
-   display: flex;
+   display: none;
    align-items: center;
    justify-self: center;
    justify-content: center;
@@ -874,11 +879,11 @@ scrollbar-width: none;
   align-items: center;
   justify-content: start;
   text-align: start;
-    color: var(--primary-cl);
+  color: var(--primary-cl);
   font-family: var(--font-fam);
   font-weight: 600;
   font-size: .72rem;
-  opacity: .7
+  opacity: .7;
 }
 
 .v2-total-top-right{
