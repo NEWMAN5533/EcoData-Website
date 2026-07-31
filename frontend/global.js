@@ -129,7 +129,14 @@ refreshBtn.addEventListener("click", () => {
     // Show all cards
     voucherCards.forEach(card => {
         card.style.display = "";
+
+        card.classList.remove("refreshing");
+        setTimeout(()=> {
+          card.classList.add("refreshing");
+        }, 10);
     });
+
+    
 
     // Remove animation class when finished
     refreshIcon.addEventListener("animationend", () => {

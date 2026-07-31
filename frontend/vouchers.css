@@ -260,6 +260,23 @@
     transition: background .25s ease;
 }
 
+.grid-voucher-card.refreshing{
+  animation: cardRefresh 1.55s ease;
+}
+
+@keyframes cardRefresh {
+  0%{
+    opacity: .4;
+    transform: scale(.95);
+  }
+
+
+  100%{
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .rightOpRefresh:hover{
     background: rgba(0,0,0,.06);
 }
