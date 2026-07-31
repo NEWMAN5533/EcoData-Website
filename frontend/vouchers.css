@@ -76,7 +76,7 @@
 
 .vouchers-container{
   width: 100%;
-  max-width: 90%;
+  max-width: 94%;
   height: max-content;
   display: flex;
   align-items: center;
@@ -651,15 +651,10 @@
    left: 0;
    z-index: 99999999999;
    overflow: hidden;
+   
 }
 
-  #voucherModal.show {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
-  animation: fadeIn 0.7s ease;
-}
+
 
 .voucher-modal-content{
    width: 100%;
@@ -677,6 +672,8 @@
      border-start-end-radius: 1.2rem;
      flex-direction: column;
      box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+    animation: fadeIn 0.7s ease;
+
 }
 
 /** voucher groups **/
