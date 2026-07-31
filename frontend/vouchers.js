@@ -363,18 +363,15 @@ async function payWithPaystack(voucherData) {
             onSuccess: async (response) => {
 
                 hideLoader();
-                const orderData = {
+                await orderVoucher({
                   voucherSlug: voucherData.slug,
                   quantity: voucherData.quantity,
                   phone: voucherData.phone,
                   email: voucherData.email,
                   sendViaWhatsApp: voucherData.sendViaWhatsApp,
                   paymentReference: response.reference
-                }
-
-                await orderVoucher(voucherData);
-
-            },
+                });
+                },
 
             onCancel: () => {
 
@@ -420,42 +417,15 @@ async function orderVoucher(voucherData) {
 
                 },
 
-                body: JSON.stringify({
-
-                    voucherSlug:
-                        voucherData.voucherSlug,
-
-                    quantity:
-                        voucherData.quantity,
-
-                    phone:
-                        voucherData.phone,
-
-                    email:
-                        voucherData.email,
-
-                    sendViaWhatsApp:
-                        voucherData.sendViaWhatsApp,
-
-                    paymentReference: voucherData.paymentReference
-
-                })
-
-            }
-
-        );
+                body: JSON.stringify(voucherData)
+              });
 
         const data =
             await response.json();
 
         if (!data.success) {
 
-            throw new Error(
-
-                data.message ||
-                "Voucher purchase failed."
-
-            );
+            throw new Error(data.message || "Voucher purchase failed.");
 
         }
 
@@ -492,9 +462,7 @@ async function orderVoucher(voucherData) {
 
         showSnackBar(
 
-            error.message,
-
-            "error"
+            error.message || "Voucher purchase failed.", "error"
 
         );
 
