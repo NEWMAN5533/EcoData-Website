@@ -18,6 +18,7 @@ import validateRecipientRoute from "./routes/validateRecipient.js";
 import restrictionsRoute from "./routes/restrictions.js";
 import exclusiveAgentRoute from "./routes/exclusivePage.js";
 import afaRegisterRouter from "./routes/afaRegisterRoute.js";
+import getVoucherRouter from "./routes/getVouchersRoute.js";
 
 
 
@@ -62,6 +63,7 @@ app.use("/api/admin", adminRoute);
 app.use("/api/admin", syncOrderRoute);
 app.use("/api/verify-payment", exclusiveAgentRoute);
 app.use("/api/afa-register", afaRegisterRouter);
+app.use("/api/vouchers", getVoucherRouter);
 
 
 
