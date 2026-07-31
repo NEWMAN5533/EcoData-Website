@@ -8,7 +8,7 @@ getVoucherRouter.get("/", async (req, res) => {
     const response = await axios.get(`${process.env.SWIFT_BASE_URL}/vouchers`,
       {
         headers: {
-          "x-api":
+          "x-api-key":
           process.env.SWIFT_API_KEY
         }
       }
