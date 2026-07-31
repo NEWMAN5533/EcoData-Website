@@ -73,7 +73,7 @@
   width: 100%;
   max-width: 90%;
   height: max-content;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
