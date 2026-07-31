@@ -1101,6 +1101,113 @@ document.addEventListener("DOMContentLoaded", ()=> {
           </div>
           </section>
 
+
+
+          <!---dashboard totals 0ver view-->
+  <div class="daily-analytics" style='margin-top: 2rem !important;'>
+    <h4>Vouchers Analytics Overview</h4>
+  </div>
+
+  <!----TOTAL -CONTAINER-CARD-->
+  <div id="homepageTotals" class="totals-container" style="background: transparent !important;">
+
+    <div id="sk-totals" class="sk-totals-container" style='display: none;'>
+      <span class="sk" style="width:88%;height:5rem; margin-right:3px; "></span>  
+
+      <span class="sk" style="width:88%;height:5rem; margin-right:3px;"></span>  
+
+      <span class="sk" style="width:88%;height:5rem; margin-right:3px; "></span>  
+
+      <span class="sk" style="width:88%;height:5rem; margin-right:3px; "></span>  
+    </div>
+
+    <div class="total-card" style="background: #fff;">
+
+      <div class="total-card-top">
+        <small>Total Vouchers</small>
+        <img src="./css/icons/totalorder.png" alt="total-icon" loading="lazy">
+      </div>
+      <div class="total-card-bottom">
+        <p id="totalOrders">0</p>
+      </div>
+    </div>
+
+    <!---next-->
+    <div class="total-card">
+      <div class="total-card-top">
+        <small>Quantity Ordered</small>
+        <img src="./css/icons/totalData.png" alt="totalGB" loading="lazy">
+      </div>
+      <div class="total-card-bottom">
+        <p id="totalGB">0</p>
+      </div>
+    </div>
+
+      <div class="total-card">
+      <div class="total-card-top">
+        <small>Total Amount </small>
+        <img src="./css/icons/recent.png" alt="spent-icon" loading="lazy">
+      </div>
+      <div class="total-card-bottom">
+        <p id="pendingTotal">0</p>
+      </div>
+    </div>
+
+
+
+    <div class="total-card">
+      <div class="total-card-top">
+        <small>Completed Vouchers </small>
+        <img src="./css/uiIcons/approval.png" alt="spent-icon" loading="lazy">
+      </div>
+      <div class="total-card-bottom">
+        <p id="completedOrders">0</p>
+      </div>
+    </div>
+
+
+  </div>
+  <!---ends-->
+
+
+
+
+ <section class="table-section">
+ 
+   <!-- Orders Table Skeleton -->  
+
+  <div class="table-title">
+    <p>Vouchers History</p>
+  </div>
+  <div class="content-wrapper">
+    <div class="table-scroll-area">
+      <!-- TABLE HEADER -->
+      <div class="table-header">
+        <span>Voucher</span>
+        <span>Quantity</span>
+        <span>Phone</span>
+        <span>Status</span>
+        <span>Email</span>
+         <span>Amount</span>
+        <span>Date-Submitted</span>
+      </div>
+
+      <div class="main-row-content">
+        <div class="row-wrapper" id="liveOrderRows">
+          <p id="empty-body" hidden>No recent orders yet</p>
+          <!-- dynamic rows -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  <!-- ends -->
+
+
+
+
+
+
           <section class="vouchers-container">
             <div class="topOf-voucher">
               <div class="leftOf-voucher">
@@ -1149,8 +1256,8 @@ document.addEventListener("DOMContentLoaded", ()=> {
                   <div class="bece-btom">
                     <div class="bece-btom-left">
                       <div class="bece-left-top">
-                        <h2>BECE Vouchers</h2>
-                        <small>BECE RESULT CHECKER</small>
+                        <h2 id="voucherName1">BECE Vouchers</h2>
+                        <small id="voucherDesc1">BECE RESULT CHECKER</small>
                       </div>
                       <div class="bece-left-btom">
                         <p>GHS N/A</p>
@@ -1171,22 +1278,22 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
                 <div class="grid-voucher-card wassce">
                   <div class="wassce-top">
-                      <div class="voucher-badge">
-                     <p> examination</p>
+                    <div class="voucher-badge">
+                      <p> examination</p>
                     </div>
                     <div class="img">
                       <i class="ri-layout-line material-icons"></i>
                     </div>
 
-                    <div class="vouchrer " id="stock">
+                    <div class="vouchrer " id="stock2">
                       <small class="outStock">Out of <span>Stock</span></small>
                     </div>
                   </div>
                   <div class="wassce-btom">
                     <div class="bece-btom-left">
                       <div class="bece-left-top">
-                        <h2>WASSCE Checker</h2>
-                        <small>WASSCE RESULT CHECKER</small>
+                        <h2 id='voucherName2'>WASSCE Checker</h2>
+                        <small id="voucherDesc2">WASSCE RESULT CHECKER</small>
                       </div>
                       <div class="bece-left-btom">
                         <p>GHS N/A</p>
@@ -1530,6 +1637,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
 <!--GREETINGS WITH-usernameDisplay----->
 <script type="module" src="userRestriction.js"></script>
+<script type="module" src="vouchers.js"></script>
 
   <script src='scrollreveal.min.js'></script>
   <script src='swiper-bundle.min.js'></script>
