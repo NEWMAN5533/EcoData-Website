@@ -483,7 +483,7 @@
 }
 
 .dark-mode .bece-left-btom p{
-  color: rgb(42, 218, 109);
+  color: var(--color-p);
 }
 
 
@@ -577,12 +577,13 @@
   --V-modal-content-bg: rgb(17, 30, 48);
   --times-bg: rgb(121, 174, 184);
   --v2-bg: rgb(59, 91, 97);
+  --color-p: rgb(42, 218, 109);
 }
 .voucher-purchase-modal{
    position: fixed;
    width: 100%;
    height: 100%;
-   display: none;
+   display: flex;
    align-items: center;
    justify-self: center;
    justify-content: center;
@@ -847,9 +848,97 @@ scrollbar-width: none;
   width: 100%;
   height: 4rem !important;
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
   background: var(--thin-border2);
   border-radius: .6rem;
+  padding: .6rem;
 }
+
+/*** placeholders ***/
+.v2-total-top{
+  display: flex;
+  width: 100%;
+  height: 50%;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.v2-total-top-left{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  text-align: start;
+    color: var(--primary-cl);
+  font-family: var(--font-fam);
+  font-weight: 600;
+  font-size: .72rem;
+  opacity: .7
+}
+
+.v2-total-top-right{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  text-align: end;
+  color: var(--color-p);
+  font-family: var(--font-fam);
+  font-weight: 600;
+  font-size: .92rem;
+}
+
+
+/* bottom section */
+.v2-total-btom{
+  display: flex;
+  width: 100%;
+  height: 50%;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.v2-total-btom-left{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  text-align: start;
+  color: var(--times-bg);
+  font-family: var(--font-fam);
+  font-weight: 600;
+  font-size: .72rem;
+  opacity: .7;
+}
+
+.v2-total-btom-right{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  text-align: end;
+  color: var(--color-p);
+  font-family: var(--font-fam);
+  font-weight: 600;
+  font-size: .72rem;
+}
+
+
+
+
+
+
+
+
 
 .v2-input{
   width: 100%;
