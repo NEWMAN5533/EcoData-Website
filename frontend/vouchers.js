@@ -1,0 +1,640 @@
+// --- Firebase Imports ---
+import { auth, db } from "./firebase-config.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+import {
+  collection,
+  addDoc,
+  doc,
+  getDoc,
+  getFirestore,
+  getDocs,
+  query,
+  orderBy,
+  serverTimestamp,
+} from 
+"https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+
+
+// ---------- CONFIG ----------
+const API_BASE = (() => {
+  if (
+    window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1"
+  ) {
+    return "http://localhost:3000";
+  }
+
+  return "https://ecodata-app.onrender.com";
+})();
+
+let selectedVoucher = {};
+let selectedQty = 1;
+
+const STORAGE_VOUCHER_KEY = "selected_voucher_slug";
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const voucherContainer = document.getElementById("voucherContainer");
+  const closeVoucherModal = document.getElementById("closeVoucher");
+
+  const voucherTitle1 = document.getElementById("voucherName1");
+
+
+  const decreaseBtn = document.getElementById("decreaseBtn");
+  const increaseBtn = document.getElementById("increaseBtn");
+  const qtyCounter = document.getElementById("count");
+
+  const phoneInput = document.getElementById("voucherPhone");
+  const emailInput = document.getElementById("voucherEmail");
+  const whatsappInput = document.getElementById("sendWhatsapp");
+  const purchaseBtn = document.getElementById("buy-vtn");
+
+  qtyCounter.textContent = selectedQty;
+
+  // ==========================
+  // OPEN MODAL
+  // ==========================
+
+  document.querySelectorAll(".grid-voucher-card").forEach(card => {
+
+    card.addEventListener("click", () => {
+
+      selectedVoucher = {
+        slug: card.dataset.slug,
+        name: card.dataset.name,
+        price: Number(card.dataset.price)
+      };
+
+      localStorage.setItem(
+        STORAGE_VOUCHER_KEY,
+        selectedVoucher.slug
+      );
+
+      voucherTitle1.textContent = selectedVoucher.name;
+     
+
+      selectedQty = 1;
+      qtyCounter.textContent = selectedQty;
+
+      voucherContainer.style.display = "flex";
+
+    });
+
+  });
+
+  // ==========================
+  // CLOSE MODAL
+  // ==========================
+
+  function closeModal() {
+    voucherContainer.style.display = "none";
+  }
+
+  closeVoucherModal.addEventListener("click", closeModal);
+
+  voucherContainer.addEventListener("click", e => {
+
+    if (e.target === voucherContainer) {
+
+      closeModal();
+
+    }
+
+  });
+
+  // ==========================
+  // QUANTITY
+  // ==========================
+
+  decreaseBtn.addEventListener("click", () => {
+
+    if (selectedQty > 1) {
+
+      selectedQty--;
+      qtyCounter.textContent = selectedQty;
+
+    }
+
+  });
+
+  increaseBtn.addEventListener("click", () => {
+
+    selectedQty++;
+    qtyCounter.textContent = selectedQty;
+
+  });
+
+  // ==========================
+  // BUY BUTTON
+  // ==========================
+
+    purchaseBtn.addEventListener("click", ()=> {
+      console.log("BUY CLICKED");
+
+      const phone = phoneInput.value.trim();
+      const email = emailInput.value.trim();
+      const sendViaWhatsApp = whatsappInput.checked;
+
+     // Phone validation
+if (!phone) {
+  showSnackBar("Please enter the recipient phone number.", "warning");
+  return;
+}
+
+// Accepts:
+// 0551234567
+// +233551234567
+// 233551234567
+const phonePattern = /^(0\d{9}|\+233\d{9}|233\d{9})$/;
+
+if (!phonePattern.test(phone)) {
+  showSnackBar(
+    "Enter a valid Ghana phone number.",
+    "warning",
+    4000
+  );
+  return;
+}
+
+     // Email validation
+if (!email) {
+  showSnackBar("Please enter your email address.", "warning", 3000);
+  return;
+}
+
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+if (!emailPattern.test(email)) {
+  showSnackBar(
+    "Please enter a valid email address (e.g. name@example.com).",
+    "warning",
+    4000
+  );
+  return;
+}
+
+      payWithPaystack({
+
+        slug: selectedVoucher.slug,
+        name: selectedVoucher.name,
+        price: selectedVoucher.price,
+
+        quantity: selectedQty,
+
+        phone,
+        email,
+        sendViaWhatsApp
+
+      });
+
+
+      console.log(phoneInput);
+      console.log(emailInput);
+      console.log(purchaseBtn);
+
+
+    });
+
+      });
+
+
+
+
+
+
+
+// =====================
+// PLAY SOUND
+//======================
+
+function showLoader() {
+  const loader = document.getElementById("paystackLoader");
+  if(!loader) return;
+  loader.style.display = "flex";
+  document.body.classList.add("no-scroll");
+}
+
+function hideLoader() {
+  const loader = document.getElementById("paystackLoader");
+  if(!loader) return;
+  loader.style.display = "none";
+  document.body.classList.remove("no-scroll");
+}
+
+// ===================
+// LOADER SPINNER IFRAME
+//=====================
+
+
+
+
+// ===================================
+// PLAY SOUND WHEN ORDER IS SUCCESSFUL
+// ====================================
+function playSuccessSound() {
+
+  const audioCtx = new (window.AudioContext ||
+    window.webkitAudioContext)();
+
+  const playTone = (freq, start, duration) => {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+
+    osc.type = "sine";
+    osc.frequency.value = freq;
+
+    gain.gain.setValueAtTime(2.5,
+      audioCtx.currentTime + start);
+      gain.gain.exponentialRampToValueAtTime(0.001,
+        audioCtx.currentTime + start + duration);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start(audioCtx.currentTime + start);
+      osc.stop(audioCtx.currentTime + start + duration);
+  };
+
+  // Three-tone success chime
+  playTone(800, 0, 0.15);
+  playTone(1000, 0.15, 0.15);
+  playTone(1300, 0.30, 0.2);
+}
+
+// =========================================
+// PLAY SOUND WHEN ORDER IS SUCCESSFUL ENDS
+// ==========================================
+
+//==================
+// PAYMENT
+//==================
+
+async function payWithPaystack(voucherData) {
+
+    const user = auth.currentUser;
+
+    const userEmail =
+        user?.email || voucherData.email || `${voucherData.phone}@ecodata.com`;
+
+    const userName =
+        user?.displayName || "Guest User";
+
+    // Total price
+    const amount =
+        voucherData.price * voucherData.quantity;
+
+    showLoader();
+
+    setTimeout(() => {
+
+        const paystack =
+            new PaystackPop();
+
+        paystack.newTransaction({
+
+            key: "pk_live_635856447ee14b583349141b7271f64c9b969749",
+
+            email: userEmail,
+
+            amount: amount * 100,
+
+            currency: "GHS",
+
+            metadata: {
+
+                type: "Voucher",
+
+                voucherSlug:
+                    voucherData.slug,
+
+                quantity:
+                    voucherData.quantity,
+
+                phone:
+                    voucherData.phone,
+
+                email:
+                    voucherData.email,
+
+                sendViaWhatsApp:
+                    voucherData.sendViaWhatsApp,
+
+                custom_fields: [
+
+                    {
+                        display_name:
+                            "Voucher",
+
+                        value:
+                            voucherData.name
+                    },
+
+                    {
+                        display_name:
+                            "Phone",
+
+                        value:
+                            voucherData.phone
+                    },
+
+                    {
+                        display_name:
+                            "Quantity",
+
+                        value:
+                            voucherData.quantity
+                    },
+
+                    {
+                        display_name:
+                            "Customer",
+
+                        value:
+                            userName
+                    }
+
+                ]
+
+            },
+
+            onSuccess: async (response) => {
+
+                hideLoader();
+                const orderData = {
+                  voucherSlug: voucherData.slug,
+                  quantity: voucherData.quantity,
+                  phone: voucherData.phone,
+                  email: voucherData.email,
+                  sendViaWhatsApp: voucherData.sendViaWhatsApp,
+                  paymentReference: response.reference
+                }
+
+                await orderVoucher(voucherData);
+
+            },
+
+            onCancel: () => {
+
+                hideLoader();
+
+                showSnackBar(
+                    "❌ Payment cancelled"
+                );
+
+            }
+
+        });
+
+    }, 500);
+
+}
+
+
+
+
+
+
+//==================
+// ORDER VOUCHER
+//==================
+
+async function orderVoucher(voucherData) {
+   
+    try {
+
+        const response = await fetch(
+
+            `${API_BASE}/api/order-voucher`,
+
+            {
+
+                method: "POST",
+
+                headers: {
+
+                    "Content-Type":
+                        "application/json"
+
+                },
+
+                body: JSON.stringify({
+
+                    voucherSlug:
+                        voucherData.voucherSlug,
+
+                    quantity:
+                        voucherData.quantity,
+
+                    phone:
+                        voucherData.phone,
+
+                    email:
+                        voucherData.email,
+
+                    sendViaWhatsApp:
+                        voucherData.sendViaWhatsApp,
+
+                    paymentReference: voucherData.paymentReference
+
+                })
+
+            }
+
+        );
+
+        const data =
+            await response.json();
+
+        if (!data.success) {
+
+            throw new Error(
+
+                data.message ||
+                "Voucher purchase failed."
+
+            );
+
+        }
+
+        playSuccessSound();
+
+        showSnackBar(
+
+            `${voucherData.quantity} ${voucherData.name} purchased successfully!`,
+
+            "success",
+
+            6000
+
+        );
+
+        // Close modal
+        document
+            .getElementById("voucherContainer")
+            .style.display = "none";
+
+        // Clear inputs
+
+        document.getElementById("voucherPhone").value = "";
+
+        document.getElementById("voucherEmail").value = "";
+
+        document.getElementById("sendWhatsapp").checked = true;
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        showSnackBar(
+
+            error.message,
+
+            "error"
+
+        );
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+// ==============================
+// VOUCHER SEARCH
+// ==============================
+
+const voucherSearch = document.querySelector(".voucherSearch");
+const voucherCards = document.querySelectorAll(".grid-voucher-card");
+
+if (voucherSearch && voucherCards.length) {
+  voucherSearch.addEventListener("input", () => {
+    const searchValue = voucherSearch.value.trim().toLowerCase();
+
+    voucherCards.forEach((card) => {
+      const voucherName =
+        card.querySelector("h2")?.textContent.toLowerCase() || "";
+
+      const voucherDesc =
+        card.querySelector("small")?.textContent.toLowerCase() || "";
+
+      const category =
+        card.querySelector(".voucher-badge p")?.textContent.toLowerCase() || "";
+
+      // Show all cards if the input is empty
+      if (searchValue === "") {
+        card.style.display = "";
+        return;
+      }
+
+      const matches =
+        voucherName.includes(searchValue) ||
+        voucherDesc.includes(searchValue) ||
+        category.includes(searchValue);
+
+      card.style.display = matches ? "" : "none";
+    });
+  });
+}
+
+
+// ==============================
+// REFRESH VOUCHER CARDS
+// ==============================
+
+const refreshBtn = document.querySelector(".rightOpRefresh");
+const refreshIcon = refreshBtn.querySelector("i");
+
+refreshBtn.addEventListener("click", () => {
+
+    // Prevent multiple clicks while animating
+    if (refreshIcon.classList.contains("spinning")) return;
+
+    // Start animation
+    refreshIcon.classList.add("spinning");
+
+    // Clear search
+    voucherSearch.value = "";
+
+    // Show all cards
+    voucherCards.forEach(card => {
+        card.style.display = "";
+
+        card.classList.remove("refreshing");
+        setTimeout(()=> {
+          card.classList.add("refreshing");
+        }, 10);
+    });
+
+    
+
+    // Remove animation class when finished
+    refreshIcon.addEventListener("animationend", () => {
+        refreshIcon.classList.remove("spinning");
+    }, { once: true });
+
+});
+// ==============================
+// VOUCHER SEARCH ENDS
+// ==============================
+
+
+
+
+
+
+// SNACKBAR SECTION //
+// ===== SNACKBAR FUNCTION ===== //
+let snackbarTimeout = null;
+
+function showSnackBar(message, type = "info", duration = 4000) {
+  let snackbar = document.querySelector(".snackbar");
+
+  // Create snackbar if it doesn't exist
+  if (!snackbar) {
+    snackbar = document.createElement("div");
+    snackbar.className = "snackbar";
+
+    snackbar.innerHTML = `
+      <span class="snackbar-text"></span>
+      <div class="snackbar-progress"></div>
+    `;
+
+    document.body.appendChild(snackbar);
+  }
+
+  // Update text
+  snackbar.querySelector(".snackbar-text").textContent = message;
+
+  // Color by type
+  if (type === "success") snackbar.style.background = "rgba(7, 29, 26, 0.95)";
+  else if (type === "error") snackbar.style.background = "#88353f";
+  else if (type === "warning") snackbar.style.background = "#413b2a";
+  else snackbar.style.background = "rgba(7, 29, 26, 0.95)";
+
+
+  // Reset progress animation
+  const progress = snackbar.querySelector(".snackbar-progress");
+  progress.style.animation = "none";
+  void progress.offsetWidth;
+  progress.style.animation = `snackbar-progress ${duration}ms linear forwards`;
+
+  snackbar.classList.add("show");
+
+  // Clear previous timeout
+  if (snackbarTimeout) clearTimeout(snackbarTimeout);
+
+  snackbarTimeout = setTimeout(() => {
+    snackbar.classList.remove("show");
+  }, duration);
+}
+// snackbar ends

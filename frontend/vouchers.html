@@ -1187,14 +1187,14 @@ document.addEventListener("DOMContentLoaded", ()=> {
         <span>Quantity</span>
         <span>Phone</span>
         <span>Status</span>
+        <span>Amount</span>
+        <span>Date</span>
         <span>Email</span>
-         <span>Amount</span>
-        <span>Date-Submitted</span>
       </div>
 
       <div class="main-row-content">
         <div class="row-wrapper" id="liveOrderRows">
-          <p id="empty-body" hidden>No recent orders yet</p>
+          <p id="empty-body" hidden>No recent vouchers yet</p>
           <!-- dynamic rows -->
         </div>
       </div>
@@ -1240,10 +1240,16 @@ document.addEventListener("DOMContentLoaded", ()=> {
             </div>
             <div class="bottomOf-voucher">
               <div class="grid-voucher-container">
-                <div class="grid-voucher-card bece">
+
+
+                <!---bece voucher-->
+                <div class="grid-voucher-card bece"
+                  data-slug="bece_checker"
+                  data-name="BECE Checker"
+                  data-price="20.50">
                   <div class="bece-top">
                     <div class="voucher-badge">
-                     <p> examination</p>
+                      <p> examination</p>
                     </div>
                     <div class="img">
                       <i class="ri-layout-line material-icons"></i>
@@ -1256,8 +1262,8 @@ document.addEventListener("DOMContentLoaded", ()=> {
                   <div class="bece-btom">
                     <div class="bece-btom-left">
                       <div class="bece-left-top">
-                        <h2 id="voucherName1">BECE Vouchers</h2>
-                        <small id="voucherDesc1">BECE RESULT CHECKER</small>
+                        <h2 >BECE Vouchers</h2>
+                        <small >BECE RESULT CHECKER</small>
                       </div>
                       <div class="bece-left-btom">
                         <p>GHS N/A</p>
@@ -1276,7 +1282,11 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
 
 
-                <div class="grid-voucher-card wassce">
+                <div class="grid-voucher-card wassce"
+                data-slug="wassce_checker"
+                data-name="WASSCE Checker"
+                data-price="20"
+                >
                   <div class="wassce-top">
                     <div class="voucher-badge">
                       <p> examination</p>
@@ -1292,8 +1302,8 @@ document.addEventListener("DOMContentLoaded", ()=> {
                   <div class="wassce-btom">
                     <div class="bece-btom-left">
                       <div class="bece-left-top">
-                        <h2 id='voucherName2'>WASSCE Checker</h2>
-                        <small id="voucherDesc2">WASSCE RESULT CHECKER</small>
+                        <h2 >WASSCE Checker</h2>
+                        <small >WASSCE RESULT CHECKER</small>
                       </div>
                       <div class="bece-left-btom">
                         <p>GHS N/A</p>
@@ -1339,7 +1349,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
 
     <!--VOUCHER MODAL---->
-    <div class="voucher-purchase-modal" id="voucherModal">
+    <div class="voucher-purchase-modal" id="voucherContainer">
       <div class="voucher-modal-content">
         <div class="tip"></div>
         <div class="voucher-group V-group1">
@@ -1352,11 +1362,11 @@ document.addEventListener("DOMContentLoaded", ()=> {
                 <p> BECE Voucher</p>
               </div>
               <div class="vg-ri-btom">
-                <small>18 available . GHS N/A each</small>
+                <small> N/A . GHS N/A each</small>
               </div>
             </div>
           </div>
-          <div id="cancelBtn" class="right-top-content">
+          <div id="closeVoucher" class="right-top-content">
           <p>&times</p>
         </div>
         </div>
@@ -1364,9 +1374,9 @@ document.addEventListener("DOMContentLoaded", ()=> {
           <div class="v2-group1 quantity ">
             <div class="quant-label">Quantity</div>
             <div class="v2-wrapper qty">
-              <span class="decrease">-</span>
-              <div class="quantityCounter">0</div>
-              <span class="increase">+</span>
+              <span class="decrease" id="decreaseBtn">-</span>
+              <div class="quantityCounter" id="count">1</div>
+              <span class="increase" id="increaseBtn">+</span>
             </div>
           </div>
           <div class="v2-group1 quantity">
@@ -1381,9 +1391,9 @@ document.addEventListener("DOMContentLoaded", ()=> {
               </div>
               <div class='v2-total-btom'>
                 <div class='v2-total-btom-left'>
-                  Total Vouchers
+                  Voucher
                 </div>
-                <div class='v2-total-btom-right'>
+                <div id="voucherName1" class='v2-total-btom-right'>
                   N/A
                 </div>
               </div>
@@ -1392,7 +1402,9 @@ document.addEventListener("DOMContentLoaded", ()=> {
           <div class="v2-group1 quantity">
             <div class="quant-label">Phone Number *</div>
             <div class="v2-wrapper">
-              <input class="v2-input" 
+              <input 
+              id="voucherPhone"
+              class="v2-input" 
               type="tel"
               maxlength="10"
               inputmode="numeric"
@@ -1402,13 +1414,29 @@ document.addEventListener("DOMContentLoaded", ()=> {
           <div class="v2-group1 quantity">
             <div class="quant-label">Email (optional)</div>
             <div class="v2-wrapper">
-              <input class="v2-input" type="text" placeholder="your@email.com">
+              <input
+              id="voucherEmail"
+               class="v2-input" 
+               type="text" 
+               placeholder="your@email.com">
             </div>
           </div>
           <div class="v2-group1 quantity la">
-            <div class="quant-label">WhatsApp us</div>
+            <div class="quant-label ">WhatsApp</div>
             <div class="v2-wrapper check">
-              <input class="v2-input" type="text" placeholder="Message 'hi' to 233535565637">
+              <div class="wrapIn">
+                <div class="inpu-wrap">
+                  <input 
+              class="v2-inp" 
+              type="checkbox" 
+              id="sendWhatsapp" 
+              checked >
+               
+                </div>
+                <div class="v2-input-div">
+                  Send Via WhatsApp?
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1417,7 +1445,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
         <!---buy-vtn-->
         <div class="voucher-group V-group3">
-          <button class="buy-vtn vtn">
+          <button class="buy-vtn vtn" id="buy-vtn">
             <i class="ri-shopping-cart-line icon"></i>
             Pay GHS N/A</button>
         </div>
@@ -1511,6 +1539,39 @@ document.addEventListener("DOMContentLoaded", ()=> {
     </div>
   </div>
   <!----PAYSTACK-LOADER-->
+
+    <!-----SIGN UP CARD SECTION----->
+  <div id="signupModal" class="signupModal-modal">
+
+    <div class="signup-box" id="'signupContent">
+    <div class="signup-box-top">
+      <img src="./css/icons/icon.bg.png" alt="" loading="lazy">
+      <span id="closeSignup">&times;</span>
+    </div>
+  <div class="short-wrap">
+    
+      <div class="signup-header">
+        <h2>Welcome to EcoData 
+          <img src="./css/icons/greetings.png" alt="" loading="lazy"></h2>
+      <small>Create an Account or <br>
+        <p style="margin: 0;color: rgb(12, 107, 107);font-size: 1.2rem;font-weight: 600;" class="lo">Login</p>
+      </small>
+      </div>
+
+      <div class="signup-text">
+        Create an account to enjoy <b>exclusive bundle prices</b> and faster checkout.
+      </div>
+
+  </div>
+      <div class="signup-actions">
+        <button id="createAccountBtn">Create Account</button>
+        <button id="loginBtn" >Login</button>
+      </div>
+
+    </div>
+
+  </div>
+  <!-----SIGN UP CARD SECTION--ENDS--->
 
     <!----WHATSAPP-GROUP--FIXED-BUTTON----->
   <div class="what-group-btn">
@@ -1636,7 +1697,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
 
 <!--GREETINGS WITH-usernameDisplay----->
-<script type="module" src="userRestriction.js"></script>
+<!--- <script type="module" src="userRestriction.js"></script>-->
 <script type="module" src="vouchers.js"></script>
 
   <script src='scrollreveal.min.js'></script>
