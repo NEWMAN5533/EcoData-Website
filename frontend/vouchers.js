@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeVoucherModal = document.getElementById("closeVoucher");
 
   const voucherTitle1 = document.getElementById("voucherName1");
+  const voucherTitle2 = document.getElementById("voucherName2");
 
 
   const decreaseBtn = document.getElementById("decreaseBtn");
@@ -72,6 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
       );
 
       voucherTitle1.textContent = selectedVoucher.name;
+      voucherTitle2.textContent = selectedVoucher.name;
      
 
       selectedQty = 1;
