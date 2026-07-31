@@ -236,19 +236,20 @@
 /** refresher **/
 .rightOpRefresh{
   border-radius: 8px;
-  background: rgba(15, 48, 97, 0.2);
+ 
   box-sizing: var(--box-sd);
   padding: .4rem .5rem;
   color: var(--thin-border-1);
   font-weight: 500;
   cursor: pointer;
-  border: 1px solid rgba(15, 48, 97, 0.2);
-  box-shadow: var(--box-sd);
+  border: 1px solid rgba(157, 159, 160, 0.349);
+ 
 }
 
 .dark-mode .rightOpRefresh{
-  background: rgba(15, 48, 97, 0.541) !important;
+  background: none !important;
   color: white !important;
+  border: 1px solid rgba(58, 61, 65, 0.39) !important;
 }
 
 /* ==========================
