@@ -106,9 +106,42 @@ if (voucherSearch && voucherCards.length) {
     });
   });
 }
+
+
+// ==============================
+// REFRESH VOUCHER CARDS
+// ==============================
+
+const refreshBtn = document.querySelector(".rightOpRefresh");
+const refreshIcon = refreshBtn.querySelector("i");
+
+refreshBtn.addEventListener("click", () => {
+
+    // Prevent multiple clicks while animating
+    if (refreshIcon.classList.contains("spinning")) return;
+
+    // Start animation
+    refreshIcon.classList.add("spinning");
+
+    // Clear search
+    voucherSearch.value = "";
+
+    // Show all cards
+    voucherCards.forEach(card => {
+        card.style.display = "";
+    });
+
+    // Remove animation class when finished
+    refreshIcon.addEventListener("animationend", () => {
+        refreshIcon.classList.remove("spinning");
+    }, { once: true });
+
+});
 // ==============================
 // VOUCHER SEARCH ENDS
 // ==============================
+
+
 
 
 

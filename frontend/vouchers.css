@@ -251,6 +251,42 @@
   color: white !important;
 }
 
+/* ==========================
+   REFRESH BUTTON
+========================== */
+
+.rightOpRefresh{
+
+    transition: background .25s ease;
+}
+
+.rightOpRefresh:hover{
+    background: rgba(0,0,0,.06);
+}
+
+.rightOpRefresh i{
+   
+    transition: color .25s ease;
+}
+
+.rightOpRefresh i.spinning{
+    animation: refreshSpin 1.2s cubic-bezier(.4,0,.2,1);
+}
+
+@keyframes refreshSpin{
+    0%{
+        transform: rotate(0deg) scale(1);
+    }
+
+    50%{
+        transform: rotate(360deg) scale(1.12);
+    }
+
+    100%{
+        transform: rotate(720deg) scale(1);
+    }
+}
+
 
 /** search **/
 .search-voucher{
@@ -742,7 +778,6 @@ justify-items: center;
 justify-content: space-between;
 padding: .2rem 1.3rem !important;
 overflow-y: auto;
-scrollbar-width: none;
 }
 
 .v2-group1{
