@@ -16,7 +16,6 @@ import {
 "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
 
-
 // ---------- CONFIG ----------
 const API_BASE = (() => {
   if (
@@ -42,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // RUN IMMEDIATELY
   displayVoucherPrice();
   activateVoucherStock();
+  refreshVoucherUi();
 
   const voucherContainer = document.getElementById("voucherContainer");
   const closeVoucherModal = document.getElementById("closeVoucher");
@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
        activeCardPriceEl.textContent = `
        GHS ${price.toFixed(2)}`;
       
-          // insert the stockPrice at to desc
+          // insert the stockPrice at top desc
         topDescStocked.textContent = `
         ${cardStocked1} left . GHS ${price.toFixed(2)} each`;
       }
@@ -129,7 +129,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function activateVoucherStock(){
     document.querySelectorAll(".grid-voucher-card").forEach(card => {
 
-      const activeCardPriceEl = document.getElementById("activePrice");
 
       const available =
       card.dataset.stock === "true";
@@ -173,6 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
         card.querySelector(".bece-btom-right button").innerHTML =
         "Sold Out";
         card.querySelector(".bece-btom-right").style.opacity = "0.4";
+
       }
 
 
@@ -199,6 +199,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==========================
   // OPEN MODAL
   // ==========================
+
+ 
 
   document.querySelectorAll(".grid-voucher-card").forEach(card => {
 
@@ -610,6 +612,54 @@ async function orderVoucher(voucherData) {
 
         );
 
+
+        // save to database
+        await saveVoucherOrder({
+                  voucherSlug: voucherData.slug,
+                  voucherName: voucherData.name,
+                  quantity: voucherData.quantity,
+                  phone: voucherData.phone,
+                  amount:  voucherData.price * voucherData.quantity,
+                  email: voucherData.email,
+                  unitPrice: voucherData.price,
+                  deliveryStatus: "Sent",
+                  completed: false,
+                  sendViaWhatsApp: voucherData.sendViaWhatsApp,
+                  paymentReference: voucherData.reference,
+                  createdAt: serverTimestamp()
+        });
+
+
+        // save to localStorage
+        const order = {
+            voucherSlug: voucherData.slug,
+                  voucherName: voucherData.name,
+                  quantity: voucherData.quantity,
+                  phone: voucherData.phone,
+                  amount:  voucherData.price * voucherData.quantity,
+                  email: voucherData.email,
+                  unitPrice: voucherData.price,
+                  deliveryStatus: "Sent",
+                  completed: false,
+                  sendViaWhatsApp: voucherData.sendViaWhatsApp,
+                  paymentReference: voucherData.reference,
+                  createdAt: new Date().toISOString(),
+        }
+
+
+        const orders = 
+        JSON.parse(localStorage.getItem("voucherOrders")) || [];
+
+        orders.unshift(order);
+
+        localStorage.setItem("voucherOrders",
+          JSON.stringify(orders)
+        );
+
+
+        // refresh both cards totals & table
+        refreshVoucherUi();
+
         // Close modal
         document
             .getElementById("voucherContainer")
@@ -643,10 +693,29 @@ async function orderVoucher(voucherData) {
 
 
 
+//=======================
+// SAVE VOUCHER ORDER
+//=======================
+async function saveVoucherOrder(order) {
+  try{
+    const docRef = await addDoc(collection(db, "voucherOrders"),
+    {
+      ...order,
+    }
+  );
+  return {
+    success: true,
+    id: docRef.id
+  };
 
-
-
-
+  } catch(error){
+    console.error("Firestore Error:", error);
+    return{
+      success: false,
+      error
+    };
+  }
+}
 
 // ==============================
 // VOUCHER SEARCH
@@ -729,8 +798,93 @@ refreshBtn.addEventListener("click", () => {
 // ==============================
 
 
+//===============================
+// VOUCHER TOTAL ANALYTICS
+//===============================
+function updateVoucherDashboardCards(){
+const orders = JSON.parse(localStorage.getItem("voucherOrders")) || [];
+
+const totalOrders =
+document.getElementById("totalVouchers");
+
+const totalQty = 
+document.getElementById("totalVoc");
+
+const totalAmount =
+document.getElementById("totalVocAmount");
+
+const vocCompleted =
+document.getElementById("vocCompletedOrders");
+
+totalOrders.textContent =
+orders.length;
+
+let qty = 0;
+let amount = 0;
+let completedCount = 0;
+
+orders.forEach(order => {
+  qty += Number(order.quantity);
+
+  amount += Number(order.totalAmount);
+
+  const completedStatus = ["Sent", "Delivered"];
+
+  if( completedStatus.includes(order.deliveryStatus) ){
+    completedCount++;
+  }
+});
+
+totalQty.textContent = qty;
+
+totalAmount.textContent =`GHS ${amount.toFixed(2)}`;
+
+vocCompleted.textContent = completedCount;
+}
 
 
+
+
+//===============================
+// THE VOUCHER TABLE
+//===============================
+ function renderVoucherHistory(){
+  const wrapper = document.getElementById("liveOrderRows");
+
+  const empty = 
+  document.getElementById("empty-body");
+
+  const orders = JSON.parse(localStorage.getItem("voucherOrders")) || [];
+
+  wrapper.innerHTML = "";
+  if(!orders.length){
+    empty.hidden = false;
+    return;
+  }
+
+  empty.hidden = true;
+
+  orders.forEach(order => {
+    wrapper.innerHTML+= `
+    <div class="table-row">
+    <span>${order.voucherName}</span>
+    <span>${order.phone}</span>
+    <span>${order.quantity}</span>
+    <span>${order.deliveryStatus}</span>
+    <span>${Number(order.amount).toFixed(2)}</span>
+    <span>${new Date(order.createdAt).toLocaleDateString()}</span>
+    <span>${order.email}</span>
+    </div>
+    `;
+  });
+  
+ }
+
+
+ function refreshVoucherUi(){
+  updateVoucherDashboardCards();
+  renderVoucherHistory();
+ }
 
 
 // SNACKBAR SECTION //
