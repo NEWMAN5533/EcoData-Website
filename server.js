@@ -65,7 +65,7 @@ app.use("/api/admin", syncOrderRoute);
 app.use("/api/verify-payment", exclusiveAgentRoute);
 app.use("/api/afa-register", afaRegisterRouter);
 app.use("/api/vouchers", getVoucherRouter);
-app.use("/api/order-voucher", postVoucherRouter);
+app.use("/api/vouchers", postVoucherRouter);
 
 
 
