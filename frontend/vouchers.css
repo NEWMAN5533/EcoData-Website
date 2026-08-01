@@ -1028,6 +1028,11 @@ overflow-y: auto;
   position: relative;
 }
 
+.wa{
+  margin-right: .3rem;
+  font-size: .84rem;
+}
+
 .v2-input-div{
   width: 80%;
   height: 100%;
@@ -1063,8 +1068,8 @@ overflow-y: auto;
   height: 1rem;
   justify-self: start;
   align-self: center;
-  margin-bottom: .5rem;
-  margin-left: 1.2rem;
+  margin-bottom: .6rem;
+  margin-left: 1.4rem;
   display: flex;
 }
 
