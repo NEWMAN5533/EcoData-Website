@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // buy-btn opacity (1)
         card.querySelector(".bece-btom-right button").innerHTML =
         "Buy Now";
-        card.querySelector(".bece-btom-right").style.opacity = "1";
+        card.querySelector(".bece-btom-right button").style.opacity = "1";
 
         
       }

@@ -572,17 +572,17 @@
 }
 
 .sold-out{
-  opacity: .4;
-  font-size: .64rem;
-  cursor: default;
+  font-size: .67rem;
 }
 
 /* if (sold out ) */
- .vouchrer .outStock{
+ .vouchrer .outStock {
   background: rgb(77, 44, 44);
   color: rgb(139, 112, 112);
   font-family: var(--font-fam);
 }
+
+
 
 
 /*** SHORT NOTES **/
@@ -674,6 +674,18 @@
      box-shadow: 0 2px 6px rgba(0,0,0,0.6);
     animation: fadeIn 0.7s ease;
 
+}
+
+@media screen and (min-width: 600px){
+  .voucher-modal-content{
+    max-width: 500px !important;
+    height: 90% !important;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-end-end-radius: 1.1rem !important;
+    border-end-start-radius: 1.1rem !important;
+  }
 }
 
 /** voucher groups **/
