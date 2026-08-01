@@ -1228,7 +1228,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
             </div>
             <div class="voucher-price">
               <div class="leftOpPrice">
-                <h3>GHS N/A</h3>
+                <h3 id="activePrice">GHS N/A</h3>
               </div>
               <div class="rightOpRefresh">
                 <i class="ri-refresh-line material-icons"></i>
@@ -1246,7 +1246,9 @@ document.addEventListener("DOMContentLoaded", ()=> {
                 <div class="grid-voucher-card bece"
                   data-slug="bece_checker"
                   data-name="BECE Checker"
-                  data-price="20.50">
+                  data-stock="true"
+                  data-stocked="13"
+                  data-price="21">
                   <div class="bece-top">
                     <div class="voucher-badge">
                       <p> examination</p>
@@ -1255,8 +1257,9 @@ document.addEventListener("DOMContentLoaded", ()=> {
                       <i class="ri-layout-line material-icons"></i>
                     </div>
 
-                    <div class="vouchrer" id="stock">
-                    <small class="outStock">Out of <span>Stock</span></small>
+                    <div class="vouchrer">
+                    <small class="outStock" >Out of <span>Stock</span></small>
+                    <small class="stock" style="display: flex;">12 <span>left</span></small>
                     </div>
                   </div>
                   <div class="bece-btom">
@@ -1270,7 +1273,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
                       </div>
                     </div>
                     <div class="bece-btom-right">
-                      <button class="buy-vtn sold-out">Sold Out</button>
+                      <button class="buy-vtn sold-out"></button>
                     </div>
                   </div>
                 </div>
@@ -1285,7 +1288,9 @@ document.addEventListener("DOMContentLoaded", ()=> {
                 <div class="grid-voucher-card wassce"
                 data-slug="wassce_checker"
                 data-name="WASSCE Checker"
-                data-price="20"
+                data-stock="false"
+                data-stocked="10"
+                data-price="22"
                 >
                   <div class="wassce-top">
                     <div class="voucher-badge">
@@ -1295,8 +1300,9 @@ document.addEventListener("DOMContentLoaded", ()=> {
                       <i class="ri-layout-line material-icons"></i>
                     </div>
 
-                    <div class="vouchrer " id="stock2">
-                      <small class="outStock">Out of <span>Stock</span></small>
+                    <div class="vouchrer " >
+                    <small class="outStock" >Out of <span>Stock</span></small>
+                    <small class="stock" style="display: flex;">12 <span>left</span></small>
                     </div>
                   </div>
                   <div class="wassce-btom">
@@ -1310,7 +1316,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
                       </div>
                     </div>
                     <div class="bece-btom-right">
-                      <button class="buy-vtn sold-out">Sold Out</button>
+                      <button class="buy-vtn sold-out"></button>
                     </div>
                   </div>
                 </div>
@@ -1362,7 +1368,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
                 <p id="voucherName2"> BECE Voucher</p>
               </div>
               <div class="vg-ri-btom">
-                <small> N/A . GHS N/A each</small>
+                <small id="topDecsStock"> N/A . GHS N/A each</small>
               </div>
             </div>
           </div>
@@ -1385,7 +1391,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
                 <div class='v2-total-top-left'>
                   Total
                 </div>
-                <div class='v2-total-top-right'>
+                <div id="totalPrice" class='v2-total-top-right'>
                   GHS N/A
                 </div>
               </div>

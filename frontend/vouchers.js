@@ -1,3 +1,4 @@
+
 // --- Firebase Imports ---
 import { auth, db } from "./firebase-config.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
@@ -30,10 +31,16 @@ const API_BASE = (() => {
 
 let selectedVoucher = {};
 let selectedQty = 1;
+let totalPrice = 0;
 
 const STORAGE_VOUCHER_KEY = "selected_voucher_slug";
 
+
 document.addEventListener("DOMContentLoaded", () => {
+
+  // RUN IMMEDIATELY
+  displayVoucherPrice();
+  activateVoucherStock();
 
   const voucherContainer = document.getElementById("voucherContainer");
   const closeVoucherModal = document.getElementById("closeVoucher");
@@ -51,13 +58,150 @@ document.addEventListener("DOMContentLoaded", () => {
   const whatsappInput = document.getElementById("sendWhatsapp");
   const purchaseBtn = document.getElementById("buy-vtn");
 
+  const totalAmount = document.getElementById("totalPrice");
+  const activePriceCard = document.getElementById("activePrice");
+
+
   qtyCounter.textContent = selectedQty;
+
+
+
+  //======================
+  // DISPLAY VOUCHER PRICE
+  //======================
+  function displayVoucherPrice(){
+    document.querySelectorAll(".grid-voucher-card").forEach(card => {
+      const activeCardPriceEl = document.getElementById("activePrice");
+      const topDescStocked = document.getElementById("topDecsStock");
+
+      const price = 
+      Number(card.dataset.price);
+      const priceEl = 
+      card.querySelector(".bece-left-btom p");
+  
+    
+
+        // check out of stock
+        const priceAvailable =
+      card.dataset.stock === "true";
+
+      const priceUnAvailable = 
+      card.dataset.stock === "false";
+
+      const cardStocked1 = 
+      card.dataset.stocked;
+
+    
+
+
+      if(priceEl){
+        priceEl.textContent =`
+        GHS ${price.toFixed(2)}`;
+      }
+
+     
+        
+
+      if(priceAvailable){
+        priceEl.textContent = `
+        GHS ${price.toFixed(2)}`;
+
+       activeCardPriceEl.textContent = `
+       GHS ${price.toFixed(2)}`;
+      
+          // insert the stockPrice at to desc
+        topDescStocked.textContent = `
+        ${cardStocked1} . GHS ${price.toFixed(2)} each`;
+      }
+
+      if(priceUnAvailable){
+        priceEl.textContent =
+        "GHS N/A";
+      }
+
+    });
+  }
+
+  //=======================
+  // ACTIVATE STOCK VOUCHER
+  //========================
+  function activateVoucherStock(){
+    document.querySelectorAll(".grid-voucher-card").forEach(card => {
+
+      const activeCardPriceEl = document.getElementById("activePrice");
+
+      const available =
+      card.dataset.stock === "true";
+
+      const unAvailable = 
+      card.dataset.stock === "false";
+
+      const cardStocked = 
+      card.dataset.stocked;
+
+     
+
+      if(available){
+        card.querySelector(".outStock").style.display = "none";
+        card.querySelector(".stock").style.display = "flex";
+
+  
+
+        // means there is a stocked
+        card.querySelector(".stock").textContent = `
+        ${cardStocked} left`;
+
+        // buy-btn opacity (1)
+        card.querySelector(".bece-btom-right button").innerHTML =
+        "Buy Now";
+        card.querySelector(".bece-btom-right").style.opacity = "1";
+
+        
+      }
+
+      if(unAvailable){
+         // prevent clicking
+        card.style.pointerEvents = "none";
+
+
+
+        card.querySelector(".stock").style.display = "none";
+        card.querySelector(".outStock").style.display = "flex";
+
+        // buy-btn opacity (.4)
+        card.querySelector(".bece-btom-right button").innerHTML =
+        "Sold Out";
+        card.querySelector(".bece-btom-right").style.opacity = "0.4";
+      }
+
+
+    })
+  }
+
+   //================================
+  // FUNCTION UPDATE VOUCHER TOTAL
+  //================================
+  function updateVoucherTotal(){
+    totalPrice = selectedVoucher.price * selectedQty;
+
+    totalAmount.textContent =
+    `GHS ${totalPrice.toFixed(2)}`;
+
+    purchaseBtn.innerHTML =`
+    <i class="ri-shopping-cart-line icon"></i>
+    Pay GHS ${totalPrice.toFixed(2)}
+    `;
+  }
+
+
 
   // ==========================
   // OPEN MODAL
   // ==========================
 
   document.querySelectorAll(".grid-voucher-card").forEach(card => {
+
+   
 
     card.addEventListener("click", () => {
 
@@ -74,7 +218,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       voucherTitle1.textContent = selectedVoucher.name;
       voucherTitle2.textContent = selectedVoucher.name;
-     
+      
+    
+
+      updateVoucherTotal();
 
       selectedQty = 1;
       qtyCounter.textContent = selectedQty;
@@ -84,6 +231,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
   });
+
+
 
   // ==========================
   // CLOSE MODAL
@@ -105,6 +254,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   });
 
+ 
+
   // ==========================
   // QUANTITY
   // ==========================
@@ -115,6 +266,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       selectedQty--;
       qtyCounter.textContent = selectedQty;
+      updateVoucherTotal();
 
     }
 
@@ -124,6 +276,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     selectedQty++;
     qtyCounter.textContent = selectedQty;
+    updateVoucherTotal();
 
   });
 
@@ -488,6 +641,7 @@ const voucherCards = document.querySelectorAll(".grid-voucher-card");
 
 if (voucherSearch && voucherCards.length) {
   voucherSearch.addEventListener("input", () => {
+    const activeCardPriceEl = document.getElementById("activePrice");
     const searchValue = voucherSearch.value.trim().toLowerCase();
 
     voucherCards.forEach((card) => {
@@ -512,6 +666,7 @@ if (voucherSearch && voucherCards.length) {
         category.includes(searchValue);
 
       card.style.display = matches ? "" : "none";
+      activeCardPriceEl.textContent = "GHS N/A";
     });
   });
 }
