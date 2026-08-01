@@ -573,7 +573,7 @@ async function orderVoucher(voucherData) {
 
         const response = await fetch(
 
-            `${API_BASE}/api/order-voucher`,
+            `${API_BASE}/api/voucher/purchase`,
 
             {
 
