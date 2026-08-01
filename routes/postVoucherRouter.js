@@ -3,7 +3,27 @@ import axios from 'axios';
 
 const postVoucherRouter = express.Router();
 
-postVoucherRouter.post("/", async (req, res) =>{
+
+
+//========================
+// VERIFY PAYMENT 
+//========================
+async function verifyPayment(reference){
+  const response = await axios.get(`https://api.paystack.co/transaction/verify/${reference}`,
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`
+      }
+    }
+  );
+  return response.data.data;
+}
+
+
+//=====================
+// ORDER VOUCHER ROUTE
+//=====================
+postVoucherRouter.post("/purchase", async (req, res) =>{
   try{
     const {
       voucherSlug,
@@ -14,7 +34,13 @@ postVoucherRouter.post("/", async (req, res) =>{
       paymentReference
     } = req.body;
 
+    //==================
+    // VERIFY PAYMENT
+    //==================
+    const payment = await
+    verifyPayment(paymentReference);
 
+  
     //================
     // VALIDATION
     //================
@@ -34,7 +60,7 @@ postVoucherRouter.post("/", async (req, res) =>{
     // SUBMIT VOUCHER ORDER
     //======================
     const swiftResponse = await axios.post(
-      `${process.env.SWIFT_BASE_URL}/api/order-voucher`,
+      `${process.env.SWIFT_BASE_URL}/vouchers/purchase`,
       {
         voucherSlug,
         quantity,
