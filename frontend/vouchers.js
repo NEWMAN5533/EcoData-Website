@@ -31,6 +31,7 @@ const API_BASE = (() => {
 
 let selectedVoucher = {};
 let selectedQty = 1;
+let availableStock = 0;
 let totalPrice = 0;
 
 const STORAGE_VOUCHER_KEY = "selected_voucher_slug";
@@ -111,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
       
           // insert the stockPrice at to desc
         topDescStocked.textContent = `
-        ${cardStocked1} . GHS ${price.toFixed(2)} each`;
+        ${cardStocked1} left . GHS ${price.toFixed(2)} each`;
       }
 
       if(priceUnAvailable){
@@ -201,7 +202,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelectorAll(".grid-voucher-card").forEach(card => {
 
-   
+    const cardStocked = 
+      card.dataset.stocked;
 
     card.addEventListener("click", () => {
 
@@ -210,6 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
         name: card.dataset.name,
         price: Number(card.dataset.price)
       };
+
 
       localStorage.setItem(
         STORAGE_VOUCHER_KEY,
@@ -222,6 +225,8 @@ document.addEventListener("DOMContentLoaded", () => {
     
 
       updateVoucherTotal();
+
+      availableStock = Number(cardStocked);
 
       selectedQty = 1;
       qtyCounter.textContent = selectedQty;
@@ -262,20 +267,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
   decreaseBtn.addEventListener("click", () => {
 
-    if (selectedQty > 1) {
+  
+
+    if (selectedQty <= 1) return;
 
       selectedQty--;
       qtyCounter.textContent = selectedQty;
       updateVoucherTotal();
 
-    }
+   
+
 
   });
 
   increaseBtn.addEventListener("click", () => {
 
+      if(selectedQty >= availableStock){
+      showSnackBar(`Only ${availableStock} voucher(s) available.`, "warning", 2500
+
+      );
+      return;
+    }
+
     selectedQty++;
     qtyCounter.textContent = selectedQty;
+
     updateVoucherTotal();
 
   });
