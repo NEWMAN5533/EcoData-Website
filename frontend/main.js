@@ -1556,7 +1556,7 @@ console.log("timeStamp", order.timestamp);
     <span class="status-cell">
     <span class="status-badge $     {getStatusClass(order.status)}">
     <i class="${getStatusIcon(order.status)}"></i>
-    <span>${order.status}</span>
+     ${order.status}
     </span>
     </span>
     <span>${getNetwork(order)}</span>
