@@ -977,9 +977,9 @@ function hasActiveOrder(recipient) {
 
 
 function activateTrackers() {
- const firstTracker = document.getElementById("deliveryTracker1").style.display = "flex";
+ const firstTracker = document.getElementById("deliveryTracker1").style.display = "none";
 
- const secondTracker = document.getElementById("deliveryTracker2").style.display = 'flex';
+ const secondTracker = document.getElementById("deliveryTracker2").style.display = 'none';
 };
 
 
@@ -988,7 +988,7 @@ function activateTrackers() {
 function unActivateTrackers(){
  const firstTracker = document.getElementById("deliveryTracker1").style.display = "none";
 
- const secondTracker = document.getElementById("deliveryTracker2").style.display = "none";
+ const secondTracker = document.getElementById("deliveryTracker2").style.display = 'none';
 }
 
 //=================================
@@ -1249,7 +1249,7 @@ async function saveOrderToFirestore(orderData) {
   vendorPrice:
     Number(orderData.vendorPrice || 0),
 
-    dataValue: `${(orderData.dataValue  || 0)}`,
+  dataValue: `${(orderData.dataValue  || 0)}`,
 
 
 
@@ -1964,7 +1964,7 @@ function getNetwork(order) {
 // FUNCTION LOAD ACTIVE BADGE
 // ==========================
 
-function loadActiveBadge(){
+export function loadActiveBadge(){
   const orders = 
   JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
 
@@ -2314,32 +2314,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
- // SHARE BTN
- const shareBtn = document.getElementById("shareBtn");
-
- shareBtn.addEventListener('click', async () =>
-{
-  const shareData = {
-    title: "EcoData",
-    text: "Check out Ecodata Website, the smartest, digital and trusted data bundle purchase website y'll love to use.",
-    url: window.location.href
-  };
-
-  // Native share
-  if (navigator.share) {
-    try {
-      await navigator.share(shareData);
-    } catch (err) {
-      console.log("Share Cancelled");
-    }
-  }
-  // FallBack (Desktop)
-  else {
-    navigator.clipboard.writeText(shareData.url).then(() => {
-      showSnackBar("Link copied! ");
-  });
-}
-});
 
 
 
@@ -2435,41 +2409,3 @@ airtelScrollBtn.addEventListener("click", () => {
 });
 
 
-
-// whatsApp sending message btn
- // === CONFIG ===
-  const whatsappNumber = "233535565637";
-
-  // === ELEMENTS ===
-  const chatButton = document.getElementById("chatButton");
-  const chatBox = document.getElementById("chatBox");
-  const sendBtn = document.getElementById("sendMsgBtn");
-
-  // === TOGGLE CHAT BOX ===
-  chatButton.addEventListener("click", () => {
-    chatBox.classList.toggle("show");
-  });
-
-  // === SEND MESSAGE ===
-  sendBtn.addEventListener("click", () => {
-    const message = document.getElementById("whatsappMessage").value.trim();
-    if (!message) {
-      showSnackBar("Please type your message before sending.");
-      return;
-    }
-
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappURL =` https://wa.me/${233535565637}?text=${encodedMessage}`;
-    window.open(whatsappURL, "_blank");
-    document.getElementById("whatsappMessage").value = ""; // clear after sending
-});
-
-// window click event (chatBox)
-window.addEventListener("click", function(e){
-  e.stopPropagation();
-  if(!chatBox.contains(e.target) && !chatButton.contains(e.target)){
-    chatBox.style.display = "none";
-  } else{
-    chatBox.style.display = "flex";
-  }
-});
