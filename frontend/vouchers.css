@@ -135,6 +135,8 @@
  opacity: .5;
 }
 
+
+
 .dark-mode 
 .leftI-wrapper{
   background: var(--thin-border2) !important;
@@ -143,9 +145,8 @@
 
 .leftI-wrapper .icn{
   color: var(--thin-border-1);
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   font-weight: 200 !important;
-  rotate: -90deg;
 }
 
 .dark-mode .leftI-wrapper .icn {
@@ -639,6 +640,20 @@
   --v2-bg: rgb(59, 91, 97);
   --color-p: rgb(42, 218, 109);
 }
+
+
+  .row-wrapper p{
+    position: fixed;
+    display: flex;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--times-bg);
+    font-size: .72rem;
+    font-family: var(--font-fam);
+    font-weight: 500;
+  }
+
 .voucher-purchase-modal{
    position: fixed;
    width: 100%;

@@ -43,6 +43,8 @@ document.addEventListener("DOMContentLoaded", () => {
   activateVoucherStock();
   refreshVoucherUi();
 
+
+
   const voucherContainer = document.getElementById("voucherContainer");
   const closeVoucherModal = document.getElementById("closeVoucher");
 
@@ -199,9 +201,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==========================
   // OPEN MODAL
   // ==========================
-
- 
-
   document.querySelectorAll(".grid-voucher-card").forEach(card => {
 
     const cardStocked = 
@@ -352,9 +351,7 @@ if (!emailPattern.test(email)) {
         slug: selectedVoucher.slug,
         name: selectedVoucher.name,
         price: selectedVoucher.price,
-
         quantity: selectedQty,
-
         phone,
         email,
         sendViaWhatsApp
@@ -840,47 +837,51 @@ totalQty.textContent = qty;
 totalAmount.textContent =`GHS ${amount.toFixed(2)}`;
 
 vocCompleted.textContent = completedCount;
-}
 
+}
 
 
 
 //===============================
 // THE VOUCHER TABLE
 //===============================
- function renderVoucherHistory(){
-  const wrapper = document.getElementById("liveOrderRows");
 
-  const empty = 
-  document.getElementById("empty-body");
+function renderVoucherHistory(){
 
-  const orders = JSON.parse(localStorage.getItem("voucherOrders")) || [];
+ const wrapper = document.getElementById("liveOrderRows");
+ const empty = document.getElementById("empty-body");
+ const orders = JSON.parse(localStorage.getItem("voucherOrders")) || [];
 
+ // clear old rows
   wrapper.innerHTML = "";
-  if(!orders.length){
-    empty.hidden = false;
-    return;
+  if(orders.length === 0){
+    empty.style.display = "flex";
+    empty.textContent = "No voucher purchase yet.";
   }
-
-  empty.hidden = true;
+ 
+  empty.style.display = "none";
 
   orders.forEach(order => {
     wrapper.innerHTML+= `
-    <div class="table-row">
+    <div class="live-row">
     <span>${order.voucherName}</span>
     <span>${order.phone}</span>
     <span>${order.quantity}</span>
-    <span>${order.deliveryStatus}</span>
+    <span class="status-badge ${order.deliveryStatus}</span>
     <span>${Number(order.amount).toFixed(2)}</span>
     <span>${new Date(order.createdAt).toLocaleDateString()}</span>
     <span>${order.email}</span>
     </div>
     `;
   });
-  
- }
 
 
+ 
+
+};
+
+
+// both function together
  function refreshVoucherUi(){
   updateVoucherDashboardCards();
   renderVoucherHistory();
