@@ -847,42 +847,49 @@ vocCompleted.textContent = completedCount;
 // THE VOUCHER TABLE
 //===============================
 
-function renderVoucherHistory(){
+function renderVoucherHistory() {
 
-    // ---------- LIVE ORDERS TABLE ----------
-const tableBody = document.getElementById("liveOrderRows");
-  if (!tableBody) return;
+    const tableBody = document.getElementById("liveOrderRows");
+    if (!tableBody) return;
 
-  // Remove empty placeholder
-  const empty = tableBody.querySelector(".empty-state");
-  if (orders.length === 0){
-  empty.add();
-  } else{
-    empty.remove();
-  }
+    const orders =
+        JSON.parse(localStorage.getItem("voucherOrders")) || [];
 
- const orders = JSON.parse(localStorage.getItem("voucherOrders")) || [];
+    // Clear old rows
+    tableBody.innerHTML = "";
 
- 
+    // Empty state
+    if (orders.length === 0) {
+        tableBody.innerHTML = `
+            <div class="empty-state">
+                No voucher purchase yet
+            </div>
+        `;
+        return;
+    }
 
-  orders.forEach(order => {
-    tableBody.innerHTML+= `
-    <div class="live-row">
-    <span>${order.voucherName}</span>
-    <span>${order.phone}</span>
-    <span>${order.quantity}</span>
-    <span class="status-badge ${order.deliveryStatus}</span>
-    <span>${Number(order.amount).toFixed(2)}</span>
-    <span>${new Date(order.createdAt).toLocaleDateString()}</span>
-    <span>${order.email}</span>
-    </div>
-    `;
-  });
+    orders.forEach(order => {
 
+        const date = order.createdAt
+            ? new Date(order.createdAt).toLocaleDateString()
+            : "-";
 
- 
+        tableBody.innerHTML += `
+            <div class="live-row">
+                <span>${order.voucherName}</span>
+                <span>${order.phone}</span>
+                <span>${order.quantity</span>
+                <span class="status-badge ${order.deliveryStatus.toLowerCase()}">
+                    ${order.deliveryStatus}
+                </span>
+                <span>GHS ${Number(order.amount).toFixed(2)}</span>
+                <span>${date}</span>
+                <span>${order.email}</span>
+            </div>
+        `;
+    });
 
-};
+}
 
 
 // both function together
