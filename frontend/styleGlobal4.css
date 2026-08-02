@@ -148,6 +148,51 @@ GRID-CONTAINER SIDEBAR
   border-bottom: none !important;
 }
 
+/*** add a visual background to icons***/
+.naver .material-icons{
+  padding: .2rem .3rem;
+  border-radius: .6rem;
+  font-size: 1.05rem;
+  color: var(--primary-cl) !important;
+  opacity: .8;
+}
+
+.naver .c1{
+   background: linear-gradient(135deg, rgb(187, 178, 54),rgb(148, 85, 148));
+}
+
+.naver  .c2{
+   background: linear-gradient(135deg, rgb(24, 116, 238),rgb(148, 85, 148));
+}
+
+.naver  .c3{
+   background: linear-gradient(135deg, rgb(24, 116, 238),rgb(148, 85, 148));
+}
+
+.naver  .c4{
+   background: linear-gradient(135deg, rgb(24, 116, 238),rgb(148, 85, 148));
+}
+
+.naver  .c5{
+   background: linear-gradient(135deg, rgb(142, 24, 238),rgb(148, 85, 129));
+}
+
+.naver  .c6{
+   background: linear-gradient(135deg, rgb(24, 116, 238),rgb(148, 85, 148));
+}
+
+.naver  .c7{
+   background: linear-gradient(135deg, rgb(24, 238, 209),rgb(142, 148, 85));
+}
+
+.naver  .c8{
+   background: linear-gradient(135deg, rgb(24, 116, 238),rgb(148, 85, 148));
+}
+
+.naver  .c9{
+   background: linear-gradient(135deg, rgb(74, 85, 99),rgb(85, 138, 148));
+}
+/*** icons background color end **/
 
 .ecodata-sidebar .ecodata-sidebar-top .userProfile-container .user{
   width: 100%;
