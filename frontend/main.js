@@ -1968,29 +1968,22 @@ function getNetwork(order) {
 // GET STATUS ICON 
 //====================
 function getStatusIcon(status) {
-
-  const current = (status || "").toLowerCase();
-
-  switch (current) {
-
+  switch ((status || "").toLowerCase()) {
     case "pending":
-      return "ri-time-line";
+      return `<i class="ri-time-line status-icon"></i>`;
 
     case "processing":
-      return "ri-loader-4-line";
+      return `<i class="ri-loader-4-line status-icon spinning"></i>`;
 
-    case "sent":
     case "delivered":
-      return "ri-check-line";
+    case "sent":
+      return `<i class="ri-check-line status-icon"></i>`;
 
     case "cancelled":
-      return "ri-forbid-2-line";
-
-    case "failed":
-      return "ri-close-circle-line";
+      return `<i class="ri-close-circle-line status-icon"></i>`;
 
     default:
-      return "ri-question-line";
+      return `<i class="ri-information-line status-icon"></i>`;
   }
 }
 
