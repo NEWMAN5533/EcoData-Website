@@ -78,21 +78,58 @@ text-transform: uppercase !important;
 
 
 
+.status-badge{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
 
+    padding:6px 12px;
+    border-radius:30px;
 
-
-
-
-
-
+    font-size:13px;
+    font-weight:600;
+    white-space:nowrap;
+}
 
 .status-badge i{
-    font-size:16px;
+    font-size:12px;
     flex-shrink:0;
 }
 
+/* Pending */
+.status-pending{
+    background:#eef2ff;
+    color:#5a6fd8;
+}
+
+/* Processing */
+.status-processing{
+    background:#fff4d6;
+    color:#c08a00;
+}
+
 .status-processing i{
-    animation:spinStatus .8s linear infinite !important;
+    animation:spinStatus .8s linear infinite;
+}
+
+/* Delivered & Sent */
+.status-delivered,
+.status-sent{
+    background:#dff7e6;
+    color:#1b8b3b;
+}
+
+/* Failed */
+.status-failed{
+    background:#fde2e2;
+    color:#d62828;
+}
+
+/* Cancelled */
+.status-cancelled{
+    background:#ececec;
+    color:#6b7280;
 }
 
 @keyframes spinStatus{
@@ -103,6 +140,12 @@ text-transform: uppercase !important;
         transform:rotate(360deg);
     }
 }
+
+
+
+
+
+
 
 
 
