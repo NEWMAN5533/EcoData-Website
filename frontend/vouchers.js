@@ -14,7 +14,7 @@ import {
   serverTimestamp,
 } from 
 "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
-import { loadActiveBadge } from "./main.js";
+
 
 
 // ---------- CONFIG ----------

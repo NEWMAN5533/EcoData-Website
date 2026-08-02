@@ -1964,7 +1964,7 @@ function getNetwork(order) {
 // FUNCTION LOAD ACTIVE BADGE
 // ==========================
 
-export function loadActiveBadge(){
+ function loadActiveBadge(){
   const orders = 
   JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
 
