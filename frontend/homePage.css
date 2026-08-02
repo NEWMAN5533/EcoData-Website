@@ -83,7 +83,7 @@ text-transform: uppercase !important;
 .status-badge i{
     font-size:12px;
     flex-shrink:0;
-    margin-right: 6px;
+    margin-right: 3px;
 }
 
 
