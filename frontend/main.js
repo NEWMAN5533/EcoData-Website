@@ -1963,6 +1963,36 @@ function getNetwork(order) {
   return detected;
 }
 
+//====================
+// GET STATUS ICON 
+//====================
+function getStatusIcon(status) {
+
+  const current = (status || "").toLowerCase();
+
+  switch (current) {
+
+    case "pending":
+      return "ri-time-line";
+
+    case "processing":
+      return "ri-loader-4-line";
+
+    case "sent":
+    case "delivered":
+      return "ri-check-line";
+
+    case "cancelled":
+      return "ri-forbid-2-line";
+
+    case "failed":
+      return "ri-close-circle-line";
+
+    default:
+      return "ri-question-line";
+  }
+}
+
 
 // ===========================
 // FUNCTION LOAD ACTIVE BADGE
