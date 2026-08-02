@@ -1705,16 +1705,19 @@ function renderHomepageTotals() {
   const ordersEl = document.getElementById("totalOrders");
   const gbEl = document.getElementById("totalGB");
 
+  const orders = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
+
 
   if (!ordersEl || !gbEl ) return;
 
-  ordersEl.textContent = ecoTotals.orders;
+  ordersEl.textContent = orders.length;
   gbEl.textContent = `${ecoTotals.gb}GB`;
  
 }
 
 // Load totals on page refresh
 document.addEventListener("DOMContentLoaded", () => {
+  
   ecoTotals = JSON.parse(localStorage.getItem("ecoTotals")) || ecoTotals;
   renderHomepageTotals();
 });
@@ -2004,7 +2007,7 @@ function getOrderStats() {
   const orders = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
 
 
-  const completedStatuses = ["delivered", "completed", "success"];
+  const completedStatuses = ["delivered", "completed", "success","cancelled", "failed"];
 
 
   return {
