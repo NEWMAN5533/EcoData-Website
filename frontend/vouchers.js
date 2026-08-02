@@ -848,21 +848,24 @@ vocCompleted.textContent = completedCount;
 
 function renderVoucherHistory(){
 
- const wrapper = document.getElementById("liveOrderRows");
- const empty = document.getElementById("empty-body");
+    // ---------- LIVE ORDERS TABLE ----------
+const tableBody = document.getElementById("liveOrderRows");
+  if (!tableBody) return;
+
+  // Remove empty placeholder
+  const empty = tableBody.querySelector(".empty-state");
+  if (orders.length === 0){
+  empty.add();
+  } else{
+    empty.remove();
+  }
+
  const orders = JSON.parse(localStorage.getItem("voucherOrders")) || [];
 
- // clear old rows
-  wrapper.innerHTML = "";
-  if(orders.length === 0){
-    empty.style.display = "flex";
-    empty.textContent = "No voucher purchase yet.";
-  }
  
-  empty.style.display = "none";
 
   orders.forEach(order => {
-    wrapper.innerHTML+= `
+    tableBody.innerHTML+= `
     <div class="live-row">
     <span>${order.voucherName}</span>
     <span>${order.phone}</span>
