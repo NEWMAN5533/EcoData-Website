@@ -1114,12 +1114,7 @@ async function orderBundle(network, recipient, packageName, size, reference) {
         ? "http://localhost:3000"
         : "https://ecodata-app.onrender.com";
 
-    
-  const formattedRecipient = recipient;
 
-  if(formattedRecipient.startsWith("0")) {
-    formattedRecipient === "233" + formattedRecipient.substring(1);
-  }
 
   const response = await fetch(
   `${API_BASE}/api/buy-data`,
@@ -1130,7 +1125,7 @@ async function orderBundle(network, recipient, packageName, size, reference) {
     },
     body: JSON.stringify({
       network,
-      recipient: formattedRecipient,
+      recipient,
       package: packageName,
       size,
       paymentReference: reference,
@@ -1158,23 +1153,18 @@ const orderData = {
     returnedOrder.orderId ||
     returnedOrder.reference,
 
-  reference:
-    returnedOrder.reference,
+  reference: returnedOrder.reference,
 
   recipient,
 
-  network:
-    bundle.network,
+  network: bundle.network,
 
-  volume:
-    Number(bundle.size || size || 0),
+  volume: Number(bundle.size || size || 0),
 
   dataValue: `${(bundle.dataValue || selectedBundle.dataValue || 0)}`,
 
-  amount:
-    Number(bundle.price || 0),
+  amount: Number(bundle.price || 0),
 
-  
   status: "pending",
 
   source: "web",
@@ -1190,10 +1180,15 @@ handleNewOrder(returnedOrder);
 
 updateHomepageTotals(orderData);
 
+ console.log("Calling saveOrderToFirestore...");
+ console.log(orderData);
+
 try {
+  const firestoreId =
   await saveOrderToFirestore(orderData);
+  console.log("Returned Firestore ID:", firestoreId);
 } catch (e) {
-  console.error("saveOrderToFirestore failed:", e);
+console.error("SaveOrderToFireStore failed:", e)
 }
 
 try {
@@ -1221,10 +1216,13 @@ try {
 
 // ---------- FIRESTORE HELPER ----------
 async function saveOrderToFirestore(orderData) {
+  console.log("Entered saveOrderToFirestore()");
+  console.log(orderData);
   try {
     const db = window.FIRESTORE;
+
     if (!db) {
-      console.warn("Firestore not initialized.");
+      console.warn("Window.FIRESTORE is undefined");
       return null;
     }
 
@@ -1264,9 +1262,12 @@ async function saveOrderToFirestore(orderData) {
 
 };
 
+
+console.log("Saving document...");
+console.log(firestoreData);
     const ordersCol = collection(db, "orders");
     const result = await addDoc(ordersCol, firestoreData);
-
+    
     console.log("✅ Order saved to Firestore:", result.id);
     return result.id;
 
