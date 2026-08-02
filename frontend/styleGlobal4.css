@@ -150,11 +150,15 @@ GRID-CONTAINER SIDEBAR
 
 /*** add a visual background to icons***/
 .naver .material-icons{
-  padding: .2rem .3rem;
+  padding: .4rem;
   border-radius: .6rem;
   font-size: 1.05rem;
   color: var(--primary-cl) !important;
   opacity: .8;
+}
+
+.pact{
+  font-size: .98rem;
 }
 
 .naver .c1{
