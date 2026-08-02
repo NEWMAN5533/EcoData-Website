@@ -1635,7 +1635,7 @@ function isTerminalStatus(status) {
 // ---------- POLLING FUNCTION ----------
 async function checkOrderStatusOnce(orderIdOrRef) {
   try {
-    // 🟩 Talk to your own backend now (not directly to SwiftData)
+    // Talk to backend (not directly )
     const res = await fetch(`${API_BASE}/api/v1/order/status/${encodeURIComponent(orderIdOrRef)}`,{
       method: "GET",
       headers: { "Content-Type": "application/json" }
