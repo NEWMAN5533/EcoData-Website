@@ -80,6 +80,32 @@ text-transform: uppercase !important;
 
 
 
+
+
+
+
+
+
+.status-badge i{
+    font-size:16px;
+    flex-shrink:0;
+}
+
+.status-processing i{
+    animation:spinStatus .8s linear infinite !important;
+}
+
+@keyframes spinStatus{
+    from{
+        transform:rotate(0deg);
+    }
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+
+
   .packages small{
     width: 10px;
     height: 10px;
