@@ -623,7 +623,7 @@ async function orderVoucher(voucherData) {
                   deliveryStatus: "Sent",
                   completed: false,
                   sendViaWhatsApp: voucherData.sendViaWhatsApp,
-                  paymentReference: voucherData.reference,
+                  paymentReference: voucherData.paymentReference,
                   createdAt: serverTimestamp()
         });
 
@@ -640,7 +640,7 @@ async function orderVoucher(voucherData) {
                   deliveryStatus: "Sent",
                   completed: false,
                   sendViaWhatsApp: voucherData.sendViaWhatsApp,
-                  paymentReference: voucherData.reference,
+                  paymentReference: voucherData.paymentReference,
                   createdAt: new Date().toISOString(),
         }
 
@@ -846,7 +846,6 @@ vocCompleted.textContent = completedCount;
 //===============================
 // THE VOUCHER TABLE
 //===============================
-
 function renderVoucherHistory() {
 
     const tableBody = document.getElementById("liveOrderRows");
@@ -877,8 +876,8 @@ function renderVoucherHistory() {
         tableBody.innerHTML += `
             <div class="live-row">
                 <span>${order.voucherName}</span>
+                <span>${order.quantity}</span>
                 <span>${order.phone}</span>
-                <span>${order.quantity</span>
                 <span class="status-badge ${order.deliveryStatus.toLowerCase()}">
                     ${order.deliveryStatus}
                 </span>
@@ -890,7 +889,6 @@ function renderVoucherHistory() {
     });
 
 }
-
 
 // both function together
  function refreshVoucherUi(){
