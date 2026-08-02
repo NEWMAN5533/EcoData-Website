@@ -2038,8 +2038,8 @@ function updateLiveOrderStatus(orderId, newStatus) {
 }
 
 // Detect first-time delivery
-const wasDelivered = currentStatus === "delivered";
-const nowDelivered = newStatus === "delivered";
+const wasDelivered = currentStatus === ["delivered","cancelled", "failed"];
+const nowDelivered = newStatus ===  ["delivered","cancelled", "failed"];
 
   orders[index] = {
     ...orders[index],
@@ -2107,7 +2107,7 @@ function syncCompletedIfMismatch() {
   const orders =
     JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
 
-  const completedStatuses = ["delivered", "completed", "success"];
+  const completedStatuses = ["delivered", "completed", "success", "cancelled", "failed"];
 
 
 
@@ -2143,7 +2143,7 @@ const orders = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
 
 
   const deliveredCount = orders.filter(o =>
-    ["delivered", "completed", "success"].includes(
+    ["delivered", "completed", "success", "cancelled", "failed"].includes(
       o.status?.toLowerCase()
     )
   ).length;
