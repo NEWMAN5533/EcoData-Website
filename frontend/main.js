@@ -1554,11 +1554,11 @@ console.log("timeStamp", order.timestamp);
     <span>${order.recipient}</span>
     <span>${order.volume}GB</span>
     <span class="status-cell">
-    <span class="status-badge $     {getStatusClass(order.status)}">
-    <i class="${getStatusIcon(order.status)}"></i>
-     ${order.status}
-    </span>
-    </span>
+  <span class="status-badge ${getStatusClass(order.status)}">
+    ${getStatusIcon(order.status)}
+    <span>${order.status}</span>
+  </span>
+</span>
     <span>${getNetwork(order)}</span>
     <span>Yes</span>
     <span>${date}</span>
