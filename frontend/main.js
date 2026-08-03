@@ -1,5 +1,10 @@
-// UPDATED AT 18th/July, 2026 [BACKUP MAIN.JS]
-
+// UPDATED AT 2nd/Aug, 2026 [BACKUP MAIN.JS]
+import { 
+  VENDOR_BUNDLES,
+  getPaystackFee,
+  calculateProfit,
+  getVendorPrice
+} from "./vendorPrice.js";
 
 // --- Firebase Imports ---
 import { auth, db } from "./firebase-config.js";
@@ -977,18 +982,18 @@ function hasActiveOrder(recipient) {
 
 
 function activateTrackers() {
- const firstTracker = document.getElementById("deliveryTracker1").style.display = "flex";
+ const firstTracker = document.getElementById("deliveryTracker1").style.display = "none";
 
- const secondTracker = document.getElementById("deliveryTracker2").style.display = 'flex';
+ const secondTracker = document.getElementById("deliveryTracker2").style.display = 'none';
 };
 
 
 
 // un activate trackers when no orders 
 function unActivateTrackers(){
- const firstTracker = document.getElementById("deliveryTracker1").style.display = "flex";
+ const firstTracker = document.getElementById("deliveryTracker1").style.display = "none";
 
- const secondTracker = document.getElementById("deliveryTracker2").style.display = 'flex';
+ const secondTracker = document.getElementById("deliveryTracker2").style.display = 'none';
 }
 
 //=================================
@@ -1034,8 +1039,10 @@ if(!lastValidation?.eligible){
     return; // STOP PAYMENT
     }
 
+
   const { network, packageName, size, price } = bundle;
   const payWithFee = Number((bundle.price * 1.0195).toFixed(2));
+
 
 
   const user = auth.currentUser;
@@ -1144,9 +1151,14 @@ async function orderBundle(network, recipient, packageName, size, reference) {
       showSnackBar(`📱${size}GB ORDER PLACED SUCCESSFULLY!`, "success", 6000);
    
 
- 
+const analytics = calculateProfit(
+  orderData.volume,
+  orderData.amount
+);
 
-    const returnedOrder = result.order?.order || result.order || result;
+console.log(analytics);
+
+const returnedOrder = result.order?.order || result.order || result;
 
 const orderData = {
   orderId:
@@ -1185,7 +1197,13 @@ updateHomepageTotals(orderData);
 
 try {
   const firestoreId =
-  await saveOrderToFirestore(orderData);
+  await saveOrderToFirestore({
+    ...orderData,
+    vendorPrice: analytics.vendorPrice,
+    paystackFee: analytics.paystackFee,
+    grossProfit: analytics.grossProfit,
+    netProfit: analytics.netProfit
+  });
   console.log("Returned Firestore ID:", firestoreId);
 } catch (e) {
 console.error("SaveOrderToFireStore failed:", e)
