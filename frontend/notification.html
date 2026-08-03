@@ -30,7 +30,8 @@
 
 <!---GOOGGLE MATERIAL ICON--LINK---->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+<!--remix icons-->
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
 
 
   <!---css-link-->
@@ -245,150 +246,187 @@ Delete button
 
 
 
-  <!--sidebar----->
-<div class="ecodata-sidebar" id="ecoDataSidebar">
-  <div class="ecodata-sidebar-top">
-      <div class="userProfile-container">
-          <div class="user" id="userPro">
-            <span class="us"><h1>U</h1>
-            </span>
-            <h3>User Panel</h3>
-          </div>
-      </div>
-  </div>
-
-  <div class="ecodata-sidebar-middle">
-      <!---middle-->
-        <div class="quick-links-section">
-          <div class="link-section-wrapper">
-          <!---network-nav-ends---->
-          
-          
-          
-           <div class="quicker-nav " >
-            <div class="naver" onclick="window.location.href='./index.html'">
-             <span class="material-icons">home</span>
-            <p>Home</p>
+ <!--sidebar----->
+    <div class="ecodata-sidebar" id="ecoDataSidebar">
+    <div class="ecodata-sidebar-top">
+        <div class="userProfile-container">
+            <div class="user" id="userPro">
+              <span class="us">
+                <h1>U</h1>
+              </span>
+              <h3>User Panel</h3>
             </div>
-          </div> 
-
-           <div class="quicker-nav active " >
-            <div class="naver" onclick="window.location.href='./index.html'">
-             <span class="material-icons">notifications</span>
-            <p>Notifications</p>
-            </div>
-
-             <div class="tag">
-                <img src="./css/icons/completed.png" alt="" loading="lazy">
-            </div>
-          </div> 
-
-          
-
-
-           <div class="quicker-nav " >
-            <div class="naver" onclick="window.location.href='./pay.html'">
-               <span class="material-icons">local_offer</span>
-            <p> Discount</p>
-            </div>
-          </div> 
-
+        </div>
+    </div>
+      <!---sidebar-middle-->
+    <div class="ecodata-sidebar-middle">
+        <!---middle-->
+    <div class="quick-links-section">
+      <div class="link-section-wrapper">
+        <!---network-nav-ends---->
           <div class="quicker-nav" >
-            <div class="naver" onclick="window.location.href='./afa.html'">
-              <span class="material-icons">how_to_reg</span>
-            <p>AFA Registration</p>
-            </div>
-          </div>
-        
-          <!----terms & cons--->
-
-        
-            <div class="quicker-nav" onclick="window.location.href='./bundlesInfo.html'">
-              <span class="material-icons">info</span>
-              <p>Info</p>
-            </div>
-         
-
-          
-
-          
-          <div title="Coming up soon!" class="quicker-nav " >
-            <div class="naver" onclick="window.location.href='ebooks.html'">
-               <span class="material-icons">menu_book</span>
-            <p>ebooks</p>
-            </div>
-            <div class="tag">
-              <small>New</small>
-            </div>
-          </div> 
-
-           <div title="Coming Up Soon!" class="quicker-nav" >
-            <div class="naver">
-              <span class="material-icons">store</span>
-              <p>Get Store</p>
-            </div>
+            <div class="naver" onclick="window.location.href='./index.html'">
+             <i class="ri-home-4-line material-icons c1"></i>
+              <p>
+              Home
+              </p>
+              </div>
               <div class="tag">
-              <small>Coming up!</small>
+               
+              </div>
+            </div> 
+
+
+          
+
+            
+
+      
+            <div class="quicker-nav">
+              <div class="naver"  onclick="window.location.href='./pay.html'">
+               <i class="ri-price-tag-3-line material-icons c4"></i>
+              <p> Discounts</p>
+              </div>
+            
+            </div> 
+
+            <div class="quicker-nav">
+              <div class="naver"  onclick="window.location.href='./afa.html'">
+                <i class="ri-user-follow-line material-icons c5"></i>
+              <p>AFA Registration</p>
+              </div>
+            
+            </div>
+          
+            <!----terms & cons--->
+
+          
+      <div class="quicker-nav" >
+        <div class="naver" onclick="window.location.href='./bundlesInfo.html'">
+          <i class="ri-information-line material-icons c6"></i>
+          <p>Info</p>
+        </div>
+      </div>
+          
+
+              <div title="Coming up soon!" class="quicker-nav " >
+              <div class="naver" onclick="window.location.href='./vouchers.html'">
+             <i class="ri-ticket-2-line material-icons c7"></i>
+              <p>Vouchers Shop</p>
+              </div>
+
+              <div class="tag">
+                <small>New</small>
+              </div>
+              
+            </div> 
+
+            
+            <div title="Coming up soon!" class="quicker-nav " >
+              <div class="naver" onclick="window.location.href='#'">
+             <i class="ri-book-2-line material-icons c8"></i>
+              <p>Ebooks</p>
+              </div>
+
+              <div class="tag">
+                <small>Coming Up!</small>
+              </div>
+              
+            </div> 
+
+          
+
+            <div title="Coming Up Soon!" class="quicker-nav" >
+              <div class="naver" onclick="window.location.href='ecdoataStore/shop.html'">
+              <i class="ri-store-2-line material-icons c9"></i>
+                <p>Get Store</p>
+              </div>
+              <div class="tag">
+                <small>Coming up!</small>
+              </div>
+            </div>
+
+      </div>
+    </div>
+  </div>
+    <div class="ecodata-sidebar-bottom">
+        <!--bottom-->
+          <div class="bottom-nav">
+            <div class="sign-link">
+              <button onclick="window.location.href = 'login.html'" class="login">
+                Login
+              </button>
+            
+            </div>
+          
+            <div class="sign-link">
+                <button class="login" onclick="window.location.href='terms.html'">
+            Terms & Condition
+          </button>
+            </div>
+
+              <div class="sign-link">
+                <button class="login " id="logOut" >
+                <img src="./css/icons/logout.png" alt="" loading="lazy"> Logout
+              </button>
             </div>
           </div>
-
-          </div>
-        </div>
+    </div>
   </div>
-  <div class="ecodata-sidebar-bottom">
-      <!--bottom-->
-        <div class="bottom-nav">
-          <div class="sign-link">
-            <button onclick="window.location.href = 'login.html'" class="login">
-              Login
-            </button>
-           
-          </div>
-        
-          <div class="sign-link">
-              <button class="login" onclick="window.location.href='terms.html'">
-          Terms & Condition
-        </button>
-          </div>
-
-            <div class="sign-link">
-              <button class="login " id="logOut">
-             <img src="./css/icons/logout.png" alt="" loading="lazy"> Logout
-            </button>
-          </div>
-        </div>
-  </div>
-</div>
 
 
     <div class="container">
     <!---navbar-here-->
     
-<nav class="navbar">
-<div class="nav-left">
-<a href="index.html">
-  <img class="log" src="./css/icons/icon-shortcut.png" alt="image" loading="lazy">
-</a>
-</div>
-<div class="nav-right">
+  <nav class="navbar">
+      <div id="sk-NavBar" class="sk-welcome" >  
+      <div class="sk-welcome-top">  
+        <span class="sk" style="width:2.5rem;height:2.5rem;
+        border-radius: 50%;">
+      </span>  
+        
+        <span class="sk" style="width:120px;height:26px;border-radius:8px;"></span>  
+      </div>  
+    
+    </div> 
+  
 
- 
- 
- <!---DARK MODE-->
-<label class="theme-switch">
-  <input type="checkbox" id="themeToggle">
-  <span class="slider">
-    <span class="icon sun"><img src="./css/icons/sun2 (1).png" alt="images"></span>
-    <span class="icon moon"><img src="./css/icons/moon2.png" alt="images"></span>
-  </span>
-</label>
+  <div class="nav-left">
+  <a href="index.html">
+    <img class="log" src="./css/icons/icon-shortcut.png" alt="image" loading="lazy">
+  </a>
+  </div>
+  <div class="nav-right">
 
-<img id="cardToggler" src="./css/icons/menu-icon.png" alt="image" class="menu-icon" loading="lazy" style="background: none ;">
 
-<img id="menuDarkMode" class="menu-icon" src="./css/icons/menu-white.png" alt="image" style="background: none;">
-</div>
-</nav>
+    <div class="notis">
 
+    <img onclick="window.location.href='notification.html'" class="notifity" src="./css/icons/notify (1).png" alt="" loading="lazy" style="display: none;">
+      <!--<span id="notifyCount"></span>-->
+
+    <i class="ri-notification-3-line notifity" onclick="window.location.href='notification.html'"></i> 
+    </div>
+
+  
+  
+  <!---DARK MODE-->
+  <label class="theme-switch" >
+    <input  type="checkbox" id="themeToggle">
+    <span class="slider">
+      <span class="icon sun">
+      <i class="ri-sun-line sun-icon"></i>
+      </span>
+      <span class="icon moon">
+        <i class="ri-moon-foggy-line moon"></i>
+      </span>
+    </span>
+  </label>
+
+ <i class="ri-menu-2-line menu" id="sidebarViewer"></i>
+  </div>
+
+
+  </nav>
     <div class="main-grid-container">
 
 
@@ -690,77 +728,61 @@ Available now on EcoData.
 
 
 
-<!------MENU-CARD----->
-<div class="menu-card-container" id="closeCard" style="display: none;">
-       <div class="link">
-       <a href="terms.html">
-        <img src="./css/icons/list.jpg" alt="image" loading="lazy">
-        <span>Terms of use</span>
-       </a>
-      </div>
+        <!-----BOTTOM-NAVBAR----->
+    <div class="bottom-navbar" id="navIconDiv">
+      <div class="btom-navIcon" onclick="window.location.href='index.html'">
+        <div class="activeImg active" id="activeMtn">
+         
+          <i class="ri-router-line material-icons"></i>
 
-
-       <div class="link">
-       <a href="bundlesInfo.html">
-        <img src="./css/icons/terms (1).png" alt="image" loading="lazy">
-        <span>Bundles info</span>
-       </a>
-      </div>
-
+        </div>
+        <small class="bottomIcon-textNav">Bundles</small>
       
-       <div class="link">
-       <a href="./ecdoataStore/ecoshop.html">
-        <img src="./css/icons/logoImg.jpeg" alt="image" loading="lazy">
-        <span>EcoData Store</span>
-       </a>
       </div>
-
-      <div class="link">
-       <a href="#">
-        <img src="./css/icons/ebook.png" alt="image" loading="lazy">
-        <span>Ebooks Shop</span>
-       </a>
-      </div>
-
-      <div class="link">
-       <a href="./afa.html">
-        <img src="./css/icons/personal.png" alt="image" loading="lazy">
-        <span> AFA</span>
-       </a>
-      </div>
-
-        <div class="link">
-       <a href="./pay.html">
-        <img src="./css/icons/agent.png" alt="image" loading="lazy">
-        <span>Get discount</span>
-       </a>
-      </div>
-
-
-
-      <div class="menu-ranking-links">
-        <!--WHATSAPP GROUP-->
-      <a href="https://www.tiktok.com/@ecodata247?_r=1&_d=ei9853mf1g8eec&sec_uid=MS4wLjABAAAAiY9nBAfFbpbd7KRl0y4-JTcRL0WMtPt9Pr-FKt__N-hQvmFZLhhInTTpn7Y5oRos&share_author_id=7484812520763950088&sharer_language=en&source=h5_m&u_code=ejcbk20728bd87&utm_source=copy&utm_campaign=client_share&share_link_id=d9108b99-2843-43f1-8f6c-ed4b72ea3264&share_app_id=1340&ugbiz_name=Account&lang=en&user_id=7484812520763950088&sec_user_id=MS4wLjABAAAAiY9nBAfFbpbd7KRl0y4-JTcRL0WMtPt9Pr-FKt__N-hQvmFZLhhInTTpn7Y5oRos&enable_checksum=1">
-      <button class="join-btn tiktok"><img src="./css/icons/tiktok.png" alt="">Tiktok</button>
-      </a>
-      <!--WHATSAPP GROUP-->
-      <a href="https://chat.whatsapp.com/LwhZNOyUQsJIGTQRL9cIXT?mode=hqrt3">
-      <button class="join-btn grp"><img src="./css/icons/whats.png" alt="" loading="lazy"> WhatsApp Group</button>
-      </a>
-      <!---WHATSAPP CHANNEL-->
-      <a href="https://whatsapp.com/channel/0029VbBgYfqAzNbpoZDtnq3o">
-      <button class="join-btn"><img src="./css/icons/whats.png" alt="" loading="lazy">Join WhatsApp Channel</button>
-      </a>
-      </div>
-
-      <div class="button-wrapper">
-          <button onclick="window.location.href = 'signUp.html'" class="logout-btn">Sign-Up</button></a>
-
-       <button id="logOutBtn" class="log-out "><img src="./css/icons/logout.png" alt="" loading="lazy"> Logout</button>   
-      </div> 
-    </div>
 
     
+      
+
+      <div class="btom-navIcon">
+        <div class="activeImg" onclick="window.location.href ='pay.html'"> 
+          <i class="ri-price-tag-3-line material-icons"></i>
+        </div>
+        <small class="bottomIcon-textNav"> Discounts</small>
+      </div>
+
+    
+    <div class="ecodataShopBtn" >
+        <div class="shop-fixedBtn" id="shoppingBtn" >
+       <i class="ri-shopping-bag-3-fill"></i>
+        <i class="ri-store-2-line sellerAuth material-icons" style="display: none;"></i>
+       <small class="hero-headline shop">
+        Shop
+       </small>
+      </div>
+    
+    </div>
+    
+
+        <div class="btom-navIcon" >
+        <div class="activeImg" id="activeTel" onclick="window.location.href='afa.html'"> 
+          <i class="ri-user-follow-line material-icons"></i>
+        </div>
+        <small class="bottomIcon-textNav">AFA</small>
+      </div>
+
+
+      <div class="btom-navIcon" >
+        <div class="activeImg" id="activeAir" onclick="window.location.href='vouchers.html'"> 
+           <i class="ri-ticket-2-line material-icons"></i>
+        </div>
+        <small class="bottomIcon-textNav"> Vouchers</small>
+      </div>
+
+
+
+
+    </div>
+
 <div class="what-group-btn">
   <span class="informattion">Join</span>
 
@@ -789,54 +811,7 @@ Available now on EcoData.
 
 
  <!-----BOTTOM-NAVBAR----->
-  <div class="bottom-navbar" id="navIconDiv">
-    <div class="btom-navIcon" onclick="window.location.href='index.html'">
-      <div class="activeImg " id="activeMtn">
-        <span class="material-icons">home</span>
-      </div>
-      <small class="bottomIcon-textNav">Home</small>
-    </div>
-
-    
-   
-
-    <div class="btom-navIcon">
-      <div class="activeImg" onclick="window.location.href ='pay.html'"> 
-        <span class="material-icons">local_offer</span>
-      </div>
-      <small class="bottomIcon-textNav"> Discounts</small>
-    </div>
-
-
-     <div class="ecodataShopBtn" >
-       <div class="shop-fixedBtn" id="shoppingBtn">
-    <img class="pin" src="./css/icons/logoImg.png" alt="" loading="lazy">
-    </div>
-   
-   </div>
-   
-
-
-      <div class="btom-navIcon" >
-      <div class="activeImg" id="activeTel" onclick="window.location.href='afa.html'"> 
-        <span class="material-icons">how_to_reg</span>
-      </div>
-      <small class="bottomIcon-textNav">AFA</small>
-    </div>
-
-
-     <div class="btom-navIcon" >
-      <div class="activeImg" id="activeAir" onclick="window.location.href='bundlesInfo.html'"> 
-        <span class="material-icons">info</span>
-      </div>
-      <small class="bottomIcon-textNav"> Info</small>
-    </div>
-
-
-   
-
-
-  </div>
+ 
 
 
       </div>
@@ -912,7 +887,7 @@ Available now on EcoData.
 
 
 
-<!---MENU-CARD-JS-->
+
 <!---MENU-CARD-JS-->
 <script>
 document.addEventListener("DOMContentLoaded", ()=> {
@@ -961,166 +936,8 @@ const cardCloser = document.getElementById("ecoDataSidebar");
 
 <script src="notification.js"></script>
 
-
-  <!---usernameDisplay----->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
-
-  import { signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-
-  const firebaseConfig = {
-    // TODO: replace these placeholder values with your Firebase project config
-  apiKey: "AIzaSyClNBlfigtQk8AZWdMZcU9sEtVcIrS0D1g",
-  authDomain: "ecodata-2bee6.firebaseapp.com",
-  projectId: "ecodata-2bee6",
-  storageBucket: "ecodata-2bee6.firebasestorage.app",
-  messagingSenderId: "544837123249",
-  appId: "1:544837123249:web:6c362350a00c6dab10b690"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-
-const lapOutBtn = document.getElementById("lapOut");
-
-// LogOut on laptops
-if(lapOutBtn){
-  lapOutBtn.addEventListener("click", async () => {
-    try {
-      await signOut(auth);
-      showSnackBar("Logged out successfully");
-    } catch(err) {
-      console.error("Error Login in: ", err);
-      showSnackBar("Error logging out")
-    }
-  })
-}
-
-
-
-
-  
-  // === REAL TIME CLOCK ===
-function updateClock() {
-  const clock = document.getElementById("clock");
-  const now = new Date();
-
-  const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-  const dayName = days[now.getDay()];
-
-  let hours = now.getHours();
-  let minutes = now.getMinutes();
-  let seconds = now.getSeconds();
-
-  // Greeting logic
-  let greeting = "";
-  if (hours < 12) greeting = "Good Morning";
-  else if (hours < 18) greeting = "Good Afternoon";
-  else greeting = "Good Evening";
-
-  const ampm = hours >= 12 ? "PM" : "AM";
-
-  hours = hours % 12 || 12;
-  minutes = minutes < 10 ? "0" + minutes : minutes;
-  seconds = seconds < 10 ? "0" + seconds : seconds;
-
-  clock.innerHTML = `${dayName} ${hours}:${minutes}:${seconds} ${ampm}`;
-
-  return greeting; // 🔥 important
-}
-
-setInterval(updateClock, 1000);
-updateClock();
-
-
-
-
-// SNACKBAR SECTION //
-// ===== SNACKBAR FUNCTION ===== //
-let snackbarTimeout = null;
-
-function showSnackBar(message, type = "info", duration = 4000) {
-  let snackbar = document.querySelector(".snackbar");
-
-  // Create snackbar if it doesn't exist
-  if (!snackbar) {
-    snackbar = document.createElement("div");
-    snackbar.className = "snackbar";
-
-    snackbar.innerHTML = `
-      <span class="snackbar-text"></span>
-      <div class="snackbar-progress"></div>
-    `;
-
-    document.body.appendChild(snackbar);
-  }
-
-  // Update text
-  snackbar.querySelector(".snackbar-text").textContent = message;
-
-  // Color by type
-  if (type === "success") snackbar.style.background = "rgba(7, 29, 26, 0.95)";
-  else if (type === "error") snackbar.style.background = "#dc3545";
-  else if (type === "warning") snackbar.style.background = "#ffc107";
-  else snackbar.style.background = "rgba(7, 29, 26, 0.95)";
-
-  // Reset progress animation
-  const progress = snackbar.querySelector(".snackbar-progress");
-  progress.style.animation = "none";
-  void progress.offsetWidth;
-  progress.style.animation = `snackbar-progress ${duration}ms linear forwards`;
-
-  snackbar.classList.add("show");
-
-  // Clear previous timeout
-  if (snackbarTimeout) clearTimeout(snackbarTimeout);
-
-  snackbarTimeout = setTimeout(() => {
-    snackbar.classList.remove("show");
-  }, duration);
-}
-// snackbar ends
-
- </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<script src="userRestriction.js"></script>
+<script src="global.js"></script>
 
 
 
