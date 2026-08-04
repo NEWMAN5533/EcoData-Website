@@ -328,8 +328,8 @@ async function updateCustomerStats(order){
       vendorPrice,
       netProfit
     } = calculateProfit(
-      Number(order.amount),
-      Number(order.volume)
+      Number(order.volume),
+      Number(order.amount)
     );
 
     if(snapshot.exists()){
@@ -355,7 +355,7 @@ async function updateCustomerStats(order){
         totalSpent: Number(order.amount || 0),
 
         totalProfit: netProfit,
-        vendorCost: vendorPrice,
+        vendorCost: (data.vendorCost || 0) + vendorPrice,
         lastOrder: new Date(),
         month: new Date().getMonth(),
         year: new Date().getFullYear()
@@ -375,10 +375,6 @@ function buildCustomerLeaderboard(orders){
   const customers = {};
 
   orders.forEach(order => {
-
-  // only delivered orders
-  if((order.status || "").toLowerCase() !== "delivered")
-    return;
 
   const phone = order.recipient;
   if(!phone) return;
@@ -407,41 +403,54 @@ function buildCustomerLeaderboard(orders){
 
   return Object.values(customers)
   .sort((a, b) => b.points - a.points);
+
+ const leaderboard = Object.values(customers)
+ .sort((a,b)=>b.points-a.points);
+
+ console.table(leaderboard.slice(0,5));
+
+ return leaderboard;
 }
 
 //===========================
 // SAVE MONTHLY LEADERBOARD
 //===========================
-async function 
-saveLeaderboard(leaderboard){
+async function saveLeaderboard(leaderboard) {
 
-  const db = Window.FIRESTORE;
-  if(!db) return;
+  const db = window.FIRESTORE;
+  if (!db) return;
 
-  try{
+  try {
 
-    const top10 = leaderboard.slice(0, 10);
+    const top5 = leaderboard.slice(0, 5);
 
-    for (let i = 0; i < top10.length; i++){
-      const customer = top10[i];
+    console.table(top5);
 
-      await setDoc(doc(db, "leaderboard", customer.phone), {
-        rank: i + 1,
-        phone: customer.phone,
-        totalGB: customer.totalGB,
-        points: customer.points,
-        totalOrders: customer.todayOrders,
-        totalSpent: Number(customer.totalSpent.toFixed(2)),
-        updatedAt: new Date(),
-        month: `${new Date().getFullYear()}-${new Date().getMonth + 1}`
-      });
+    for (const [index, customer] of top5.entries()) {
+
+      if (!customer.phone) continue;
+
+      await setDoc(
+        doc(db, "leaderboard", customer.phone),
+        {
+          rank: index + 1,
+          phone: customer.phone,
+          totalGB: customer.totalGB,
+          points: customer.points,
+          totalOrders: customer.totalOrders,
+          totalSpent: Number(customer.totalSpent.toFixed(2)),
+          updatedAt: new Date(),
+          month: `${new Date().getFullYear()}-${new Date().getMonth() + 1}`
+        }
+      );
     }
-    console.log("Leaderboard updated");
-  } catch(err){
-    console.error(err);
+
+    console.log("🏆 Top 5 leaderboard updated.");
+
+  } catch (err) {
+    console.error("Leaderboard error:", err);
   }
 }
-
 
 
 
