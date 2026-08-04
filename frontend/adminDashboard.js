@@ -701,39 +701,39 @@ function updateProfitCards(orders) {
 
 
   document.getElementById("totalSales").textContent =
-  `₵ ${totalSales.toFixed(2)}`;
+  `₵ ${totalSales}`;
 
 
   document.getElementById("grossProfit").textContent =
-  `₵ ${grossProfit.toFixed(2)}`;
+  `₵ ${grossProfit}`;
 
 
   document.getElementById("netProfit").textContent =
-  `₵ ${netProfit.toFixed(2)}`;
+  `₵ ${netProfit}`;
 
 
   document.getElementById("vendorCost").textContent =
-  `₵ ${totalVendorCost.toFixed(2)}`;
+  `₵ ${totalVendorCost}`;
 
 
   document.getElementById("paystackFees").textContent =
-  `₵ ${totalPaystackFee.toFixed(2)}`;
+  `₵ ${totalPaystackFee}`;
 
 
   document.getElementById("todayProfit").textContent =
-  `₵ ${todayProfit.toFixed(2)}`;
+  `₵ ${todayProfit}`;
 
 
   document.getElementById("weeklyProfit").textContent =
-  `₵ ${weeklyProfit.toFixed(2)}`;
+  `₵ ${weeklyProfit}`;
 
 
   document.getElementById("monthlyProfit").textContent =
-  `₵ ${monthlyProfit.toFixed(2)}`;
+  `₵ ${monthlyProfit}`;
 
 
   document.getElementById("allProfit").textContent =
-  `₵ ${allProfit.toFixed(2)}`;
+  `₵ ${allProfit}`;
 
 }
 
