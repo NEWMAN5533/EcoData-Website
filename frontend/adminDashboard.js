@@ -1,9 +1,36 @@
+
 // === firebase-config.js ===
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 import { signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+
+
+// UPDATED ADMIN DASHBOARD JS
+
+// =========================
+// FIREBASE IMPORTS
+// =========================
+import {
+  collection,
+  onSnapshot,
+  updateDoc,
+  query as firestoreQuery,
+  query,
+  doc,
+  setDoc,
+  orderBy,
+  where,
+  limit,
+  getDocs,
+} from
+"https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+import { getVendorPrice, VENDOR_BUNDLES, getPaystackFee, calculateProfit } from "./vendorPrice.js";
+
+
 
 // ✅ Your Firebase config
 const firebaseConfig = {
@@ -27,39 +54,11 @@ window.FIRESTORE = db;
 
 console.log("🔥 Firebase initialized and Firestore ready!");
 
-
-// UPDATED ADMIN DASHBOARD JS
-
-// =========================
-// FIREBASE IMPORTS
-// =========================
-import {
-  collection,
-  onSnapshot,
-  updateDoc,
-  query as firestoreQuery,
-  query,
-  doc,
-  setDoc,
-  orderBy,
-  where,
-  limit,
-  getDocs,
-} from
-"https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
-
-
 // =========================
 // LOCAL STORAGE KEYS
 // =========================
 const DELIVERY_TIME_KEY = "ecoLastDeliveryTime";
 const LAST_ORDER_KEY = "ecoLastDeliveredOrderId";
-
-
-
-
-
-
 
 
 
@@ -250,8 +249,8 @@ function renderOrders(orders) {
   <small>${date}</small>
 
   <small>
-    <span class="${order.status || "pending"}">
-      ${order.status || "pending"}
+    <span class="${(order.status)}">
+     <span>${(order.status)}</span>
     </span>
   </small>
 
@@ -301,7 +300,6 @@ function renderOrders(orders) {
 
 
 }
-
 
 
 
@@ -359,6 +357,9 @@ async function (firestoreId, status) {
 
 };
 
+
+
+
 // =========================
 // UPDATE ANALYTICS CARDS
 // =========================
@@ -392,6 +393,10 @@ function updateCards(orders) {
     orders.filter(order =>
       order.status === "failed"
     ).length;
+//====================
+// GET STATUS ICON 
+//====================
+
 
 
 
@@ -617,7 +622,14 @@ function listenToOrderStatus(orderId) {
 // =========================
 // UPDATE PROFIT CARDS
 // =========================
+
 function updateProfitCards(orders) {
+
+  let totalVendorCost = 0;
+  let totalPaystackFee = 0;
+  let totalSales = 0;
+  let grossProfit = 0;
+  let netProfit = 0;
 
   let todayProfit = 0;
   let weeklyProfit = 0;
@@ -633,66 +645,93 @@ function updateProfitCards(orders) {
   );
 
   const weekAgo = new Date();
-  weekAgo.setDate(weekAgo.getDate() - 7);
+  weekAgo.setDate(now.getDate() - 7);
 
   const monthAgo = new Date();
-  monthAgo.setMonth(monthAgo.getMonth() - 1);
+  monthAgo.setMonth(now.getMonth() - 1);
+
 
   orders.forEach(order => {
 
     const amount = Number(order.amount || 0);
-    const vendorPrice = Number(order.vendorPrice || 0);
 
-    const orderDate = order.createdAt?.toDate
-      ? order.createdAt.toDate()
-      : null;
+    const {
+      vendorPrice,
+      paystackFee,
+      netProfit: orderNetProfit,
+      grossProfit: orderGrossProfit
 
-    if (!orderDate) return;
+    } = calculateProfit(order.volume, amount);
 
-    // Paystack fee
-    const paystackFee = amount * 0.0195;
 
-    let profit = 0;
+    totalSales += amount;
+    totalPaystackFee += paystackFee;
+    totalVendorCost += vendorPrice;
 
-    // =========================
-    // HYBRID LOGIC
-    // =========================
+    grossProfit += orderGrossProfit;
+    netProfit += orderNetProfit;
 
-    if (vendorPrice && orderDate >= today) {
-      // NEW SYSTEM (TODAY onwards)
-      profit = (amount - paystackFee) - vendorPrice;
-    } else {
-      // OLD SYSTEM fallback
-      profit = amount - paystackFee;
-    }
+
+    const profit = orderNetProfit;
 
     allProfit += profit;
 
-    if (orderDate >= today) {
+
+    const orderDate = new Date(order.createdAt);
+
+
+    if(orderDate >= today){
       todayProfit += profit;
     }
 
-    if (orderDate >= weekAgo) {
+
+    if(orderDate >= weekAgo){
       weeklyProfit += profit;
     }
 
-    if (orderDate >= monthAgo) {
+
+    if(orderDate >= monthAgo){
       monthlyProfit += profit;
     }
 
   });
 
+
+  document.getElementById("totalSales").textContent =
+  `₵ ${totalSales.toFixed(2)}`;
+
+
+  document.getElementById("grossProfit").textContent =
+  `₵ ${grossProfit.toFixed(2)}`;
+
+
+  document.getElementById("netProfit").textContent =
+  `₵ ${netProfit.toFixed(2)}`;
+
+
+  document.getElementById("vendorCost").textContent =
+  `₵ ${totalVendorCost.toFixed(2)}`;
+
+
+  document.getElementById("paystackFees").textContent =
+  `₵ ${totalPaystackFee.toFixed(2)}`;
+
+
   document.getElementById("todayProfit").textContent =
-    `₵ ${todayProfit.toFixed(2)}`;
+  `₵ ${todayProfit.toFixed(2)}`;
+
 
   document.getElementById("weeklyProfit").textContent =
-    `₵ ${weeklyProfit.toFixed(2)}`;
+  `₵ ${weeklyProfit.toFixed(2)}`;
+
 
   document.getElementById("monthlyProfit").textContent =
-    `₵ ${monthlyProfit.toFixed(2)}`;
+  `₵ ${monthlyProfit.toFixed(2)}`;
+
 
   document.getElementById("allProfit").textContent =
-    `₵ ${allProfit.toFixed(2)}`;
+  `₵ ${allProfit.toFixed(2)}`;
+
 }
 
 
