@@ -1,7 +1,20 @@
 // CUSTOM CURSOR JS
   document.addEventListener("DOMContentLoaded", () => {
 
-      // Custom cursor
+  
+const shoppingBtn = document.getElementById("shoppingBtn");
+
+shoppingBtn.addEventListener("click", (e) =>{
+  e.stopPropagation();
+if(shoppingBtn){
+  window.location.href = '#';
+  showSnackBar(" ✅ Coming up soon for sellers and buyers. You can Buy Data bundle, and register AFA. Thank You", "success", 5000);
+}
+});
+
+
+
+    // Custom cursor
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
   let cx = 0, cy = 0, rx = 0, ry = 0;
@@ -20,23 +33,6 @@
     requestAnimationFrame(animateRing);
   }
   animateRing();
-
-
-    
-  const shoppingBtn = document.getElementById("shoppingBtn");
-
-shoppingBtn.addEventListener("click", (e) =>{
-  e.stopPropagation();
-if(shoppingBtn){
-  window.location.href = '#';
-  showSnackBar(" ✅ Coming up soon for sellers and buyers. You can Buy Data bundle, and register AFA. Thank You", "success", 9000);
-}
-});
-
-
-
-
-
 
 
 
@@ -67,87 +63,6 @@ if(shoppingBtn){
   });
 }
 });
-
-
-
-// ==============================
-// VOUCHER SEARCH
-// ==============================
-
-const voucherSearch = document.querySelector(".voucherSearch");
-const voucherCards = document.querySelectorAll(".grid-voucher-card");
-
-if (voucherSearch && voucherCards.length) {
-  voucherSearch.addEventListener("input", () => {
-    const searchValue = voucherSearch.value.trim().toLowerCase();
-
-    voucherCards.forEach((card) => {
-      const voucherName =
-        card.querySelector("h2")?.textContent.toLowerCase() || "";
-
-      const voucherDesc =
-        card.querySelector("small")?.textContent.toLowerCase() || "";
-
-      const category =
-        card.querySelector(".voucher-badge p")?.textContent.toLowerCase() || "";
-
-      // Show all cards if the input is empty
-      if (searchValue === "") {
-        card.style.display = "";
-        return;
-      }
-
-      const matches =
-        voucherName.includes(searchValue) ||
-        voucherDesc.includes(searchValue) ||
-        category.includes(searchValue);
-
-      card.style.display = matches ? "" : "none";
-    });
-  });
-}
-
-
-// ==============================
-// REFRESH VOUCHER CARDS
-// ==============================
-
-const refreshBtn = document.querySelector(".rightOpRefresh");
-const refreshIcon = refreshBtn.querySelector("i");
-
-refreshBtn.addEventListener("click", () => {
-
-    // Prevent multiple clicks while animating
-    if (refreshIcon.classList.contains("spinning")) return;
-
-    // Start animation
-    refreshIcon.classList.add("spinning");
-
-    // Clear search
-    voucherSearch.value = "";
-
-    // Show all cards
-    voucherCards.forEach(card => {
-        card.style.display = "";
-
-        card.classList.remove("refreshing");
-        setTimeout(()=> {
-          card.classList.add("refreshing");
-        }, 10);
-    });
-
-    
-
-    // Remove animation class when finished
-    refreshIcon.addEventListener("animationend", () => {
-        refreshIcon.classList.remove("spinning");
-    }, { once: true });
-
-});
-// ==============================
-// VOUCHER SEARCH ENDS
-// ==============================
-
 
 
 
@@ -275,6 +190,7 @@ window.addEventListener("click", function(e){
     chatBox.style.display = "flex";
   }
 });
+
 
 
 
