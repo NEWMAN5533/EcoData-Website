@@ -25,6 +25,8 @@ import {
   where,
   limit,
   getDocs,
+  increment,
+  serverTimestamp
 } from
 "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
@@ -146,6 +148,12 @@ async function loadOrderRealTime() {
       updateCards(orders);
 
       updateProfitCards(orders);
+
+      const leaderboard =
+      buildCustomerLeaderboard(orders);
+      console.log(leaderboard);
+
+       saveLeaderboard(orders);
 
       buildProfitChart(orders);
 
@@ -301,6 +309,141 @@ function renderOrders(orders) {
 
 }
 
+//=========================
+// UPDATE CUSTOMER STATS
+//=========================
+async function updateCustomerStats(order){
+  try{
+    const phone = order.recipient;
+
+    if(!phone ) return;
+
+    const statsRef = 
+    doc(window.FIRESTORE, "customerStats", phone);
+
+    const snapshot = await
+    getDoc(statsRef);
+
+    const {
+      vendorPrice,
+      netProfit
+    } = calculateProfit(
+      Number(order.amount),
+      Number(order.volume)
+    );
+
+    if(snapshot.exists()){
+      const data = snapshot.data();
+
+      await updateDoc(statsRef, {
+        totalOrders: (data.totalOrders ||
+          0) + 1,
+          totalGB: (data.totalGB || 0 ) + Number(order.volume || 0),
+          totalSpent: (data.totalSpent || 0) + Number(order.amount || 0),
+          totalProfit: (data.totalProfit || 0) + netProfit,
+          lastOrder: new Date(),
+          month: new Date().getMonth() + 1,
+          year: new Date().getFullYear()
+        });
+
+
+    } else{
+      await setDoc(statsRef, {
+        phone,
+        totalOrders: 1,
+        totalGB: Number(order.volume || 0),
+        totalSpent: Number(order.amount || 0),
+
+        totalProfit: netProfit,
+        vendorCost: vendorPrice,
+        lastOrder: new Date(),
+        month: new Date().getMonth(),
+        year: new Date().getFullYear()
+      });
+    }
+    console.log("Customer stats updated.");
+
+  } catch(err){
+    console.error("Customer stats error:", err);
+  }
+}
+
+//=============================
+// BUILD CUSTOMER LEADERBOARD
+//=============================
+function buildCustomerLeaderboard(orders){
+  const customers = {};
+
+  orders.forEach(order => {
+
+  // only delivered orders
+  if((order.status || "").toLowerCase() !== "delivered")
+    return;
+
+  const phone = order.recipient;
+  if(!phone) return;
+
+  if(!customers[phone]){
+    customers[phone] = {
+      phone,
+      totalGB: 0,
+      totalOrders: 0,
+      totalSpent: 0,
+      points: 0
+    };
+  }
+
+  customers[phone].totalGB +=
+  Number(order.volume || 0);
+  customers[phone].totalOrders++;
+  customers[phone].totalSpent +=
+  Number(order.amount || 0);
+
+  // 1GB = 1 point
+  customers[phone].points +=
+  Number(order.volume || 0);
+
+  });
+
+  return Object.values(customers)
+  .sort((a, b) => b.points - a.points);
+}
+
+//===========================
+// SAVE MONTHLY LEADERBOARD
+//===========================
+async function 
+saveLeaderboard(leaderboard){
+
+  const db = Window.FIRESTORE;
+  if(!db) return;
+
+  try{
+
+    const top10 = leaderboard.slice(0, 10);
+
+    for (let i = 0; i < top10.length; i++){
+      const customer = top10[i];
+
+      await setDoc(doc(db, "leaderboard", customer.phone), {
+        rank: i + 1,
+        phone: customer.phone,
+        totalGB: customer.totalGB,
+        points: customer.points,
+        totalOrders: customer.todayOrders,
+        totalSpent: Number(customer.totalSpent.toFixed(2)),
+        updatedAt: new Date(),
+        month: `${new Date().getFullYear()}-${new Date().getMonth + 1}`
+      });
+    }
+    console.log("Leaderboard updated");
+  } catch(err){
+    console.error(err);
+  }
+}
+
+
+
 
 
 
@@ -371,7 +514,7 @@ function updateCards(orders) {
   // =========================
   // BASIC TOTALS
   // =========================
-  const totalOrders = 939 +
+  const totalOrders = 940 +
     orders.length;
 
   const pendingOrders =
@@ -384,7 +527,7 @@ function updateCards(orders) {
       order.status === "processing"
     ).length;
 
-  const deliveredOrders = 939 +
+  const deliveredOrders = 940 +
     orders.filter(order =>
       order.status === "delivered"
     ).length;
@@ -670,7 +813,7 @@ function updateProfitCards(orders) {
     totalVendorCost += (vendorPrice);
 
     grossProfit += (orderGrossProfit);
-    netProfit += (orderNetProfit);
+    netProfit += (orderNetProfit) ;
 
 
     const profit = (orderNetProfit);
