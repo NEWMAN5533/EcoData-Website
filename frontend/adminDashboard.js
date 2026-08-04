@@ -677,10 +677,13 @@ function updateProfitCards(orders) {
     allProfit += profit;
 
 
-    const orderDate = new Date(order.createdAt);
+    const orderDate = order.createdAt?.toDate
+    ? order.createdAt.toDate()
+    : new Date(order.createdAt);
 
 
-    if(orderDate >= today){
+    if(orderDate.toDateString() ===
+      today.toDateString()){
       todayProfit += profit;
     }
 
