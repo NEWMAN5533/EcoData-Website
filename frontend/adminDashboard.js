@@ -713,15 +713,15 @@ function updateProfitCards(orders) {
 
 
   document.getElementById("vendorCost").textContent =
-  `₵ ${Number(totalVendorCost).toFixed(2)}`;
+  `₵ ${totalVendorCost.toFixed(2)}`;
 
 
   document.getElementById("paystackFees").textContent =
-  `₵ ${Number(totalPaystackFee).toFixed(2)}`;
+  `₵ ${totalPaystackFee.toFixed(2)}`;
 
 
   document.getElementById("todayProfit").textContent =
-  `₵ ${Number(todayProfit).toFixed(2)}`;
+  `₵ ${todayProfit.toFixed(2)}`;
 
 
   document.getElementById("weeklyProfit").textContent =
