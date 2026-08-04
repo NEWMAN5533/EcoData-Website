@@ -664,15 +664,15 @@ function updateProfitCards(orders) {
     } = calculateProfit(order.volume, amount);
 
 
-    totalSales += Number(amount);
-    totalPaystackFee += Number(paystackFee);
-    totalVendorCost += Number(vendorPrice);
+    totalSales += (amount);
+    totalPaystackFee += (paystackFee);
+    totalVendorCost += (vendorPrice);
 
-    grossProfit += Number(orderGrossProfit);
-    netProfit += Number(orderNetProfit);
+    grossProfit += (orderGrossProfit);
+    netProfit += (orderNetProfit);
 
 
-    const profit = Number(orderNetProfit);
+    const profit = (orderNetProfit);
 
     allProfit += profit;
 
@@ -713,15 +713,15 @@ function updateProfitCards(orders) {
 
 
   document.getElementById("vendorCost").textContent =
-  `₵ ${totalVendorCost.toFixed(2)}`;
+  `₵ ${Number(totalVendorCost).toFixed(2)}`;
 
 
   document.getElementById("paystackFees").textContent =
-  `₵ ${totalPaystackFee.toFixed(2)}`;
+  `₵ ${Number(totalPaystackFee).toFixed(2)}`;
 
 
   document.getElementById("todayProfit").textContent =
-  `₵ ${todayProfit.toFixed(2)}`;
+  `₵ ${Number(todayProfit).toFixed(2)}`;
 
 
   document.getElementById("weeklyProfit").textContent =
