@@ -1,10 +1,4 @@
 // UPDATED AT 2nd/Aug, 2026 [BACKUP MAIN.JS]
-import { 
-  VENDOR_BUNDLES,
-  getPaystackFee,
-  calculateProfit,
-  getVendorPrice
-} from "./vendorPrice.js";
 
 // --- Firebase Imports ---
 import { auth, db } from "./firebase-config.js";
@@ -1151,12 +1145,6 @@ async function orderBundle(network, recipient, packageName, size, reference) {
       showSnackBar(`📱${size}GB ORDER PLACED SUCCESSFULLY!`, "success", 6000);
    
 
-const analytics = calculateProfit(
-  orderData.volume,
-  orderData.amount
-);
-
-console.log(analytics);
 
 const returnedOrder = result.order?.order || result.order || result;
 
@@ -1197,13 +1185,7 @@ updateHomepageTotals(orderData);
 
 try {
   const firestoreId =
-  await saveOrderToFirestore({
-    ...orderData,
-    vendorPrice: analytics.vendorPrice,
-    paystackFee: analytics.paystackFee,
-    grossProfit: analytics.grossProfit,
-    netProfit: analytics.netProfit
-  });
+  await saveOrderToFirestore(orderData);
   console.log("Returned Firestore ID:", firestoreId);
 } catch (e) {
 console.error("SaveOrderToFireStore failed:", e)
@@ -1286,7 +1268,7 @@ console.log(firestoreData);
     const ordersCol = collection(db, "orders");
     const result = await addDoc(ordersCol, firestoreData);
     
-    console.log("✅ Order saved to Firestore:", result.id);
+    console.log(" Order saved to Firestore:", result.id);
     return result.id;
 
   } catch (err) {
@@ -1300,7 +1282,7 @@ console.log(firestoreData);
 
 // ---------- LOCAL STORAGE HELPER ----------
 
-// ✅ Save Guest Orders to Local Storage
+// Save Guest Orders to Local Storage
 function saveGuestOrder(orderData) {
   try {
     // Load existing guest orders or start fresh
