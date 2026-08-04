@@ -664,15 +664,15 @@ function updateProfitCards(orders) {
     } = calculateProfit(order.volume, amount);
 
 
-    totalSales += amount;
-    totalPaystackFee += paystackFee;
-    totalVendorCost += vendorPrice;
+    totalSales += Number(amount);
+    totalPaystackFee += Number(paystackFee);
+    totalVendorCost += Number(vendorPrice);
 
-    grossProfit += orderGrossProfit;
-    netProfit += orderNetProfit;
+    grossProfit += Number(orderGrossProfit);
+    netProfit += Number(orderNetProfit);
 
 
-    const profit = orderNetProfit;
+    const profit = Number(orderNetProfit);
 
     allProfit += profit;
 
