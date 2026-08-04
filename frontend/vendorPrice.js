@@ -17,46 +17,54 @@ export const VENDOR_BUNDLES = [
   { volume: 50, vendorPrice: 203.00 }
 ];
 
+//==================
+// GET VENDOR PRICE
+//==================
+export function getVendorPrice(volume) {
 
-//==================
-// GET VEN PRICE
-//==================
-export function getVendorPrice(volume){
-  return(
-    VENDOR_BUNDLES.find(
-      bundle => bundle.volume === Number(volume)
-    ) || null
+  const bundle = VENDOR_BUNDLES.find(
+    item => item.volume === Number(volume)
   );
-}
 
+  return Number(bundle?.vendorPrice ?? 0);
+
+}
 
 //===================
 // PAYSTACK FEE
 //===================
-export function getPaystackFee(amount){
-  return Number((amount * 0.0195).toFixed(2));
+export function getPaystackFee(amount) {
+
+  const totalAmount = Number(amount) || 0;
+
+  return Number((totalAmount * 0.0195).toFixed(2));
+
 }
 
 //===================
 // CALCULATE PROFIT
 //===================
-export function calculateProfit(volume, ecoPrice){
-  const vendorPrice =
-  getVendorPrice(volume);
+export function calculateProfit(volume, ecoPrice) {
 
-  const paystackFee = 
-  getPaystackFee(ecoPrice);
+  const amount = Number(ecoPrice) || 0;
 
-  const grossProfit = 
-  ecoPrice - vendorPrice;
+  const vendorPrice = getVendorPrice(volume);
 
-  const netProfit =
-  grossProfit - paystackFee;
+  const paystackFee = getPaystackFee(amount);
 
-  return{
+  const grossProfit = Number(
+    (amount - vendorPrice).toFixed(2)
+  );
+
+  const netProfit = Number(
+    (grossProfit - paystackFee).toFixed(2)
+  );
+
+  return {
     vendorPrice,
     paystackFee,
     grossProfit,
     netProfit
   };
+
 }

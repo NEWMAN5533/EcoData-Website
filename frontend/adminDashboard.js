@@ -654,6 +654,7 @@ function updateProfitCards(orders) {
   orders.forEach(order => {
 
     const amount = Number(order.amount || 0);
+    const volume = Number(order.volume || 0);
 
     const {
       vendorPrice,
@@ -676,10 +677,20 @@ function updateProfitCards(orders) {
 
     allProfit += profit;
 
+  let orderDate = null;
 
-    const orderDate = order.createdAt?.toDate
-    ? order.createdAt.toDate()
-    : new Date(order.createdAt);
+  if(order.createdAt?.toDate){
+    orderDate = order.createdAt.toDate();
+  } else{
+    if(order.createdAt){
+      orderDate = new Date(order.createdAt);
+    }
+
+  }
+
+  if(!orderDate || isNaN(orderDate.getTime())){
+    return; // skip
+  }
 
 
     if(orderDate.toDateString() ===
@@ -701,39 +712,38 @@ function updateProfitCards(orders) {
 
 
   document.getElementById("totalSales").textContent =
-  `₵ ${totalSales}`;
+  `₵ ${totalSales.toFixed(2)}`;
 
 
   document.getElementById("grossProfit").textContent =
-  `₵ ${grossProfit}`;
+  `₵ ${grossProfit.toFixed(2)}`;
 
 
   document.getElementById("netProfit").textContent =
-  `₵ ${netProfit}`;
+  `₵ ${netProfit.toFixed(2)}`;
 
 
   document.getElementById("vendorCost").textContent =
-  `₵ ${totalVendorCost}`;
-
+  `₵ ${totalVendorCost.toFixed(2)}`;
 
   document.getElementById("paystackFees").textContent =
-  `₵ ${totalPaystackFee}`;
+  `₵ ${totalPaystackFee.toFixed(2)}`;
 
 
   document.getElementById("todayProfit").textContent =
-  `₵ ${todayProfit}`;
+  `₵ ${todayProfit.toFixed(2)}`;
 
 
   document.getElementById("weeklyProfit").textContent =
-  `₵ ${weeklyProfit}`;
+  `₵ ${weeklyProfit.toFixed(2)}`;
 
 
   document.getElementById("monthlyProfit").textContent =
-  `₵ ${monthlyProfit}`;
+  `₵ ${monthlyProfit.toFixed(2)}`;
 
 
   document.getElementById("allProfit").textContent =
-  `₵ ${allProfit}`;
+  `₵ ${allProfit.toFixed(2)}`;
 
 }
 
