@@ -72,11 +72,14 @@
 }
 
 .leaderboard-start{
-  color: var(--primary-cl);
+  color: var(--text-cl-2);
   font-family: var(--font-family);
   font-weight: 500;
   font-size: .88rem;
   white-space: nowrap;
+}
+.dark-mode .leaderboard-start{
+   color: var(--pramary-cl) !important;
 }
     .leaderWrapper{
       width: 100%;
