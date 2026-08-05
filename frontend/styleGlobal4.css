@@ -584,7 +584,7 @@ CREATE STORE LINK
 
   .ecodata-sidebar{
     width: 100%;
-    max-width: 280px;
+    max-width: 230px;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -597,6 +597,9 @@ CREATE STORE LINK
     z-index: 99999999999999999;
     transition: .4s ease;
     border-right: 1px solid var(--text-cl-2);
+    border-start-end-radius: 1.4rem;
+    border-end-end-radius: 1.4rem;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.13);
   }
 
   .ecodata-sidebar.active{
