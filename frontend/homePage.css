@@ -155,6 +155,10 @@
       animation: spinAt 4s linear infinite;
     }
 
+    .baw6{
+      animation: spinAt 4s linear infinite;
+    }
+
    @keyframes spinAt {
     0%{
       transform:rotateY(0deg);

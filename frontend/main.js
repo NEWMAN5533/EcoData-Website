@@ -2004,7 +2004,7 @@ function getStatusIcon(status) {
 
     case "delivered":
     case "sent":
-      return `<i class="ri-check-line status-icon"></i>`;
+      return `<i class="ri-check-double-line status-icon"></i>`;
 
     case "cancelled":
       return `<i class="ri-close-circle-line status-icon"></i>`;
