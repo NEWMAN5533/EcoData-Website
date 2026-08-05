@@ -79,7 +79,7 @@
   white-space: nowrap;
 }
 .dark-mode .leaderboard-start{
-   color: var(--pramary-cl) !important;
+   color: var(--primary-cl) !important;
 }
     .leaderWrapper{
       width: 100%;
