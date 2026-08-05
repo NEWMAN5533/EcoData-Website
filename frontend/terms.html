@@ -10,11 +10,14 @@
   <link rel="stylesheet" href="styleGlobal2.css">
   <link rel="stylesheet" href="styleGlobal3.css">
   <link rel ="stylesheet" href="styleGlobal4.css">
+  <link rel="stylesheet" href="homePage.css">
+  <link rel="stylesheet" href="homeTable.css">
 
 <!---GOOGLE MATERIAL ICON--LINK---->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-
+<!--remix icons-->
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
 
  <script src="global.js"></script>
 
@@ -336,54 +339,59 @@
   </div>
 
    <!-----BOTTOM-NAVBAR----->
-  <div class="bottom-navbar" id="navIconDiv">
-    <div class="btom-navIcon" onclick="window.location.href='index.html'">
-      <div class="activeImg" id="activeMtn">
-        <span class="material-icons">home</span>
+    <div class="bottom-navbar" id="navIconDiv">
+      <div class="btom-navIcon" onclick="window.location.href='index.html'">
+        <div class="activeImg active" id="activeMtn">
+         
+          <i class="ri-router-line material-icons"></i>
+
+        </div>
+        <small class="bottomIcon-textNav">Bundles</small>
+      
       </div>
-      <small class="bottomIcon-textNav">Home</small>
-    </div>
 
     
-   
+      
 
-    <div class="btom-navIcon">
-      <div class="activeImg" onclick="window.location.href ='pay.html'"> 
-        <span class="material-icons">local_offer</span>
+      <div class="btom-navIcon">
+        <div class="activeImg" onclick="window.location.href ='pay.html'"> 
+          <i class="ri-price-tag-3-line material-icons"></i>
+        </div>
+        <small class="bottomIcon-textNav"> Discounts</small>
       </div>
-      <small class="bottomIcon-textNav"> Discounts</small>
-    </div>
 
-
-     <div class="ecoDataShopBtn">
-       <div class="shop-fixedBtn" >
-    <img class="pin" src="./css/icons/logoImg.png" alt="" loading="lazy">
+    
+    <div class="ecodataShopBtn" >
+        <div class="shop-fixedBtn" id="shoppingBtn" >
+       <i class="ri-shopping-bag-3-fill"></i>
+        <i class="ri-store-2-line sellerAuth material-icons" style="display: none;"></i>
+       <small class="hero-headline shop">
+        Shop
+       </small>
+      </div>
+    
     </div>
-   
-   </div>
-   
+    
+
+        <div class="btom-navIcon" >
+        <div class="activeImg" id="activeTel" onclick="window.location.href='afa.html'"> 
+          <i class="ri-user-follow-line material-icons"></i>
+        </div>
+        <small class="bottomIcon-textNav">AFA</small>
+      </div>
 
 
       <div class="btom-navIcon" >
-      <div class="activeImg" id="activeTel" onclick="window.location.href='afa.html'"> 
-         <span class="material-icons">how_to_reg</span>
+        <div class="activeImg" id="activeAir" onclick="window.location.href='vouchers.html'"> 
+           <i class="ri-ticket-2-line material-icons"></i>
+        </div>
+        <small class="bottomIcon-textNav"> Vouchers</small>
       </div>
-      <small class="bottomIcon-textNav">AFA</small>
+
+
+
+
     </div>
-
-
-     <div class="btom-navIcon" >
-      <div class="activeImg" id="activeAir" onclick="window.location.href='bundlesInfo.html'"> 
-        <span class="material-icons">info</span>
-      </div>
-      <small class="bottomIcon-textNav"> Info</small>
-    </div>
-
-
-   
-
-
-  </div>
   </div>
 
 
