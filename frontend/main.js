@@ -2522,8 +2522,8 @@ function loadLeaderboard(){
       customers[phone].totalGB += gb;
       customers[phone].totalOrders++;
 
-      // 1GB = 2 Points
-      customers[phone].points += gb * 2;
+      // 1GB = 6 Points
+      customers[phone].points += gb * 6;
 
     });
 
