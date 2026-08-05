@@ -6,6 +6,8 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/fi
 import {
   collection,
   addDoc,
+  onSnapshot,
+  limit,
   doc,
   getDoc,
   getFirestore,
@@ -30,6 +32,28 @@ const API_BASE = (() => {
 })();
 
 
+//=========================
+// LEADERBOARD START DATE
+//=========================
+const LEADERBOARD_START = new Date("2026-08-01");
+const LEADERBOARD_ENDS = new Date("2026-08-31 23:59:59");
+
+const leaderboardStartText = LEADERBOARD_START.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric"
+});
+
+const endTimeText = LEADERBOARD_ENDS.toLocaleDateString("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric"
+});
+
+
+
+//=========================
+// LEADERBOARD START DATE
+//=========================
 
 // ---------- GLOBAL VARIABLES ----------
 let STATUS_POLL_INTERVAL = 5000;
@@ -82,6 +106,8 @@ function resolvePackageName(network) {
 //NEW UPDATED 21/01/2026  (DOMCONTENTLOADER)//
 document.addEventListener("DOMContentLoaded", () => {
 
+
+  
 
 const selectBtn = document.getElementById("selectBtn");
 const dropdownOffer = document.getElementById("dropdownOffer");
@@ -900,6 +926,7 @@ function hideLoader() {
 
 
 
+
 // =======================
 // PLAY SOUND WHEN ORDER IS SUCCESSFUL
 // ===========================
@@ -1163,7 +1190,7 @@ const orderData = {
 
   dataValue: `${(bundle.dataValue || selectedBundle.dataValue || 0)}`,
 
-  amount: Number(bundle.price || 0),
+  amount: Number(bundle.price * 1.0195 || 0),
 
   status: "pending",
 
@@ -2437,3 +2464,135 @@ airtelScrollBtn.addEventListener("click", () => {
 });
 
 
+
+
+
+
+//===================
+// MONTHLY LEADERBOARD
+//====================
+function loadLeaderboard(){
+
+  const db = window.FIRESTORE;
+  if(!db) return;
+
+  const q = query(collection(db, "orders"));
+
+  onSnapshot(q, (snapshot)=>{
+
+    const customers = {};
+
+    snapshot.forEach(doc=>{
+
+      const order = doc.data();
+
+      // Ignore failed/cancelled
+      const status = (order.status || "").toLowerCase();
+
+      if(status === "failed" || status === "cancelled"){
+        return;
+      }
+
+      // Competition start date
+      const orderDate = order.createdAt?.toDate
+        ? order.createdAt.toDate()
+        : new Date(order.createdAt);
+
+      if(orderDate < LEADERBOARD_START ||
+          orderDate > LEADERBOARD_ENDS
+      ){
+        return;
+      }
+
+      const phone = order.recipient;
+
+      if(!phone) return;
+
+      if(!customers[phone]){
+        customers[phone] = {
+          phone,
+          totalGB: 0,
+          totalOrders: 0,
+          points: 0
+        };
+      }
+
+      const gb = Number(order.volume || 0);
+
+      customers[phone].totalGB += gb;
+      customers[phone].totalOrders++;
+
+      // 1GB = 2 Points
+      customers[phone].points += gb * 2;
+
+    });
+
+    const leaders = Object.values(customers)
+      .sort((a,b)=> b.points - a.points)
+      .slice(0,5);
+
+    console.log("🏆 Competition Leaders", leaders);
+
+    renderLeaderboard(leaders);
+
+  });
+
+}
+
+
+
+//===========================
+// RENDER LEADERS
+//===========================
+function renderLeaderboard(leaders){
+
+    leaders.forEach((leader,index)=>{
+
+        const i=index+1;
+
+        document.getElementById(`leaderPhone${i}`).textContent =
+            maskPhone(leader.phone);
+
+        document.getElementById(`leaderPoints${i}`).textContent =
+            leader.points + " points";
+
+        document.getElementById(`leaderStars${i}`).innerHTML =
+            getStars(i);
+
+    });
+
+}
+
+//=================
+// HIDE PHONE
+//=================
+function maskPhone(phone){
+
+    if(!phone) return "Unknown";
+
+    return phone.substring(0,5) + "***" + phone.substring(8);
+
+}
+
+
+//==============
+// GET STARS
+//==============
+function getStars(rank){
+
+    let stars="";
+
+    for(let i=0;i<6-rank;i++){
+
+        stars += `<i class="ri-star-fill"></i>`;
+
+    }
+
+    return stars;
+
+}
+
+loadLeaderboard();
+//TIME
+document.getElementById("leaderboardStartText").textContent =
+`Free GB GIVEAWAY: ${leaderboardStartText} - ${endTimeText}`;
