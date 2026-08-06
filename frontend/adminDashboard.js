@@ -359,24 +359,35 @@ if (addLeaderBtn) {
         try{
           const db = window.FIRESTORE;
 
-          const q = query(
-            collection(db, "orders"),
-            where("recipient", "==", phone),
-            orderBy("createdAb", "desc"),
-            limit(1)
-          );
+          const q = query(collection(db, "orders"));
 
-          const snapshot = await getDocs(q);
+const snapshot = await getDocs(q);
 
-          if(snapshot.empty){
-            showSnackBar("Customer no found.", "warning"
+let orderRef = null;
+let latestTime = 0;
 
-            );
-            return;
-          }
-          const orderRef =
-          snapshot.docs[0].ref;
+snapshot.forEach(doc => {
 
+  const order = doc.data();
+
+  // Skip other customers
+  if (order.recipient !== phone) return;
+
+  const time = order.createdAt?.toMillis
+    ? order.createdAt.toMillis()
+    : new Date(order.createdAt).getTime();
+
+  if (time > latestTime) {
+    latestTime = time;
+    orderRef = doc.ref;
+  }
+
+});
+
+if (!orderRef) {
+  showSnackBar("Customer not found.", "warning");
+  return;
+}
           await updateDoc(orderRef, {
             manualPoints: points,
             manualGB: gb,
