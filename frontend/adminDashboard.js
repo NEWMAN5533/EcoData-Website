@@ -61,6 +61,10 @@ console.log("🔥 Firebase initialized and Firestore ready!");
 // =========================
 const DELIVERY_TIME_KEY = "ecoLastDeliveryTime";
 const LAST_ORDER_KEY = "ecoLastDeliveredOrderId";
+//=====================
+// GLOBAL LEADERBOARD
+//=====================
+let leaderboardCustomers = [];
 
 
 
@@ -153,7 +157,7 @@ async function loadOrderRealTime() {
       buildCustomerLeaderboard(orders);
       console.log(leaderboard);
 
-       saveLeaderboard(orders);
+
 
       buildProfitChart(orders);
 
@@ -309,65 +313,169 @@ function renderOrders(orders) {
 
 }
 
-//=========================
-// UPDATE CUSTOMER STATS
-//=========================
-async function updateCustomerStats(order){
-  try{
-    const phone = order.recipient;
-
-    if(!phone ) return;
-
-    const statsRef = 
-    doc(window.FIRESTORE, "customerStats", phone);
-
-    const snapshot = await
-    getDoc(statsRef);
-
-    const {
-      vendorPrice,
-      netProfit
-    } = calculateProfit(
-      Number(order.volume),
-      Number(order.amount)
-    );
-
-    if(snapshot.exists()){
-      const data = snapshot.data();
-
-      await updateDoc(statsRef, {
-        totalOrders: (data.totalOrders ||
-          0) + 1,
-          totalGB: (data.totalGB || 0 ) + Number(order.volume || 0),
-          totalSpent: (data.totalSpent || 0) + Number(order.amount || 0),
-          totalProfit: (data.totalProfit || 0) + netProfit,
-          lastOrder: new Date(),
-          month: new Date().getMonth() + 1,
-          year: new Date().getFullYear()
-        });
 
 
-    } else{
-      await setDoc(statsRef, {
-        phone,
-        totalOrders: 1,
-        totalGB: Number(order.volume || 0),
-        totalSpent: Number(order.amount || 0),
 
-        totalProfit: netProfit,
-        vendorCost: (data.vendorCost || 0) + vendorPrice,
-        lastOrder: new Date(),
-        month: new Date().getMonth(),
-        year: new Date().getFullYear()
-      });
+
+
+//======================
+// LEADERBOARD MANAGER
+//======================
+//======================
+// LEADERBOARD MANAGER
+//======================
+const addLeaderBtn =
+document.getElementById("addLeaderPoints");
+
+if (addLeaderBtn) {
+
+  addLeaderBtn.addEventListener("click", async () => {
+
+    const phone =
+      document.getElementById("phone").value.trim();
+
+    const manualPoints =
+      Number(document.getElementById("manualPoints").value);
+
+    const gb =
+      Number(document.getElementById("leaderGB").value);
+
+    if (!phone) {
+      showSnackBar("Enter customer phone.", "warning");
+      return;
     }
-    console.log("Customer stats updated.");
 
-  } catch(err){
-    console.error("Customer stats error:", err);
-  }
+    if (!gb || gb <= 0) {
+      showSnackBar("Enter valid GB.", "warning");
+      return;
+    }
+
+    // Manual points overrides GB calculation
+    const points =
+      manualPoints > 0
+        ? manualPoints
+        : gb * 6;
+
+        try{
+          const db = window.FIRESTORE;
+
+          const q = query(
+            collection(db, "orders"),
+            where("recipient", "==", phone),
+            orderBy("createdAb", "desc"),
+            limit(1)
+          );
+
+          const snapshot = await getDocs(q);
+
+          if(snapshot.empty){
+            showSnackBar("Customer no found.", "warning"
+
+            );
+            return;
+          }
+          const orderRef =
+          snapshot.docs[0].ref;
+
+          await updateDoc(orderRef, {
+            manualPoints: points,
+            manualGB: gb,
+            manualUpdatedAt: new Date()
+          });
+
+          showSnackBar(`${phone} updated to ${points} points.`, "success");
+        } catch(err){
+          console.error(err);
+          showSnackBar("Unable to update points.", "error");
+        }
+
+  });
+
 }
 
+
+
+//======================
+// ADD / UPDATE POINTS
+//======================
+function addPoints(phone, points, gb) {
+
+  let customer =
+    leaderboardCustomers.find(
+      c => c.phone === phone
+    );
+
+  if (customer) {
+
+    customer.points = points;
+    customer.totalGB = gb;
+
+  } else {
+
+    leaderboardCustomers.push({
+
+      phone,
+      points,
+      totalGB: gb,
+      totalOrders: 1,
+      totalSpent: 0
+
+    });
+
+  }
+
+  leaderboardCustomers.sort(
+    (a, b) => b.points - a.points
+  );
+
+  renderLeaderboard(
+    leaderboardCustomers.slice(0, 5)
+  );
+
+}
+
+//=========================
+// SAVE MANUAL POINTS
+//=========================
+async function saveManualPoints(phone, points, gb) {
+
+  const db = window.FIRESTORE;
+  if (!db) return;
+
+  try {
+
+    const q = query(
+      collection(db, "orders"),
+      where("recipient", "==", phone),
+      orderBy("createdAt", "desc"),
+      limit(1)
+    );
+
+    const snapshot = await getDocs(q);
+
+    if (snapshot.empty) {
+      showSnackBar("Customer not found.", "warning");
+      return;
+    }
+
+    const orderRef = snapshot.docs[0].ref;
+
+    await updateDoc(orderRef, {
+      manualPoints: points,
+      manualGB: gb,
+      manualUpdatedAt: new Date()
+    });
+
+    showSnackBar("Leaderboard updated successfully.", "success");
+
+  } catch (err) {
+
+    console.error(err);
+    showSnackBar("Unable to update leaderboard.", "error");
+
+  }
+
+}
 //=============================
 // BUILD CUSTOMER LEADERBOARD
 //=============================
@@ -395,64 +503,34 @@ function buildCustomerLeaderboard(orders){
   customers[phone].totalSpent +=
   Number(order.amount || 0);
 
-  // 1GB = 1 point
+
+  if(order.manualPoints !== undefined && order.manualPoints !== null){
+    // Admin override
+    customers[phone].points =
+    Number(order.manualPoints);
+  } else{
+    // Default calculation
+     // 1GB = 1 point
   customers[phone].points +=
   Number(order.volume || 0);
+  }
+ 
 
   });
 
-  return Object.values(customers)
+  // save every customer globally
+
+ leaderboardCustomers = Object.values(customers)
   .sort((a, b) => b.points - a.points);
 
  const leaderboard = Object.values(customers)
  .sort((a,b)=>b.points-a.points);
 
- console.table(leaderboard.slice(0,5));
+ console.table(leaderboardCustomers.slice(0,5));
 
- return leaderboard;
+
+ return leaderboardCustomers.slice(0,5);
 }
-
-//===========================
-// SAVE MONTHLY LEADERBOARD
-//===========================
-async function saveLeaderboard(leaderboard) {
-
-  const db = window.FIRESTORE;
-  if (!db) return;
-
-  try {
-
-    const top5 = leaderboard.slice(0, 5);
-
-    console.table(top5);
-
-    for (const [index, customer] of top5.entries()) {
-
-      if (!customer.phone) continue;
-
-      await setDoc(
-        doc(db, "leaderboard", customer.phone),
-        {
-          rank: index + 1,
-          phone: customer.phone,
-          totalGB: customer.totalGB,
-          points: customer.points,
-          totalOrders: customer.totalOrders,
-          totalSpent: Number(customer.totalSpent.toFixed(2)),
-          updatedAt: new Date(),
-          month: `${new Date().getFullYear()}-${new Date().getMonth() + 1}`
-        }
-      );
-    }
-
-    console.log("🏆 Top 5 leaderboard updated.");
-
-  } catch (err) {
-    console.error("Leaderboard error:", err);
-  }
-}
-
-
 
 
 
@@ -1352,9 +1430,6 @@ if (lastDeliveredEl) {
 }
 
 }, 5000);
-
-
-
 
 
 

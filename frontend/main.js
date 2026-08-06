@@ -2522,8 +2522,17 @@ function loadLeaderboard(){
       customers[phone].totalGB += gb;
       customers[phone].totalOrders++;
 
-      // 1GB = 6 Points
+      if(order.manualPoints !== undefined && 
+        order.manualPoints !== null
+      ) {
+        // Admin override wins
+        customers[phone].points =
+        Number(order.manualPoints);
+      } else{
+          // Default 1GB = 6 Points
       customers[phone].points += gb * 6;
+      }
+    
 
     });
 
