@@ -385,10 +385,31 @@ snapshot.forEach(doc => {
 });
 
 if (!orderRef) {
-  showSnackBar("Customer not found.", "warning");
-  return;
+
+    await addDoc(collection(db, "orders"), {
+
+        recipient: phone,
+        manualPoints: points,
+        manualGB: gb,
+        volume: gb,
+        amount: 0,
+        status: "leaderboard",
+        source: "admin",
+        createdAt: new Date(),
+        updatedAt: new Date()
+
+    });
+
+    showSnackBar(
+        "New leaderboard member created.",
+        "success"
+    );
+
+    return;
+
 }
-          await updateDoc(orderRef, {
+
+      await updateDoc(orderRef, {
             manualPoints: points,
             manualGB: gb,
             manualUpdatedAt: new Date()
