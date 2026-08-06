@@ -734,16 +734,18 @@
 </section>
 
 <!---setting-->
-<section class="delivery-control">
-  <h3>Delivery Indicator</h3>
-  <input type="text" id="manualDeliveryTime" placeholder="e.g 3 min, 1h 20m">
+<section class="leaderboard-manager">
+  <h3>Leaderboard Manager</h3>
+  <input type="text" id="phone" placeholder="Customer Phone">
 
   <label class="manual-toggle">
-    <input type="checkbox" id="userManualDeliveryTime">
-    Use Manual Delivery Time
+    <input type="number" id="leaderGB" placeholder="GB Purchased" min="1">
   </label>
+  <input type="number" id="manualPoints" placeholder="Override points">
 
-  <button id="saveDeliveryTime">Save</button>
+  <button id="addLeaderPoints">
+    <i class="ri-add-circle-line"></i>
+    Add Points</button>
 </section>
 
 

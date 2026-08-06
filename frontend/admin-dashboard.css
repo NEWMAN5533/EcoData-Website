@@ -87,6 +87,33 @@
   font-weight: 500;
 }
 
+
+   
+
+
+
+.status-processing i,
+.status-pending i,
+.status-failed i,
+.status-delivered i,
+.status-cancelled i{
+    animation:spinStatus .8s linear infinite;
+    font-size:12px;
+    flex-shrink:0;
+    margin-right: 3px;
+}
+
+
+@keyframes spinStatus{
+    from{
+        transform:rotate(0deg);
+    }
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+
 .failed{
   background: red;
   color:  rgb(243, 234, 183);

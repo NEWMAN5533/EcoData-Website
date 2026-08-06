@@ -65,7 +65,79 @@
   --card-tel-bg:  #fa537dd0;
   --card-tigo-bg:  #1b252b;
 }
+/**========================
+LEADERBOARD MANGER
+=========================**/
+.leaderboard-manager{
+  width: 94%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  border-radius: 14px;
+  background: #101826;
+  border: 1px solid rgba(255,255,255, 0.08);
+}
+.leaderboard-manager h3{
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  margin:0;
+}
 
+.leaderboard-manager input,
+.leaderboard-manager #leaderGB{
+  width: 100%;
+  height: 48px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  padding: 0 15px;
+  font-size: 14px;
+  color: #fff;
+  background: #182334;
+  border: 1px solid rgba(255,255,255,  0.08);
+  transition: .25s ease;
+}
+
+.leaderboard-manager input::placeholder{
+  color: #9aa7b7;
+}
+
+.leaderboard-manager input:focus{
+  border-color: #16c47f;
+  box-shadow: 0 0 0 3px rgba(22, 196, 127, .15);
+}
+
+.leaderboard-manager button{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 10px;
+  background: #16c47f;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  transition: .25s ease;
+}
+
+.leaderboard-manager button i{
+  font-size: 18px;
+}
+
+.leaderboard-manager button:hover{
+  background: #12ae70;
+}
+
+.leaderboard-manager button:active{
+  transform: scale(.98);
+}
 
 
   .main-container .second-container{
@@ -498,3 +570,69 @@ BOTTOM NAVIGATION BAR STYLE CSS
 /****************************
 / ACTIVE COUNT ORDERS ENDS
 *****************************/
+
+    /**
+    * SNACKBAR
+    **/
+    /***
+SNACKBAR SECTION
+****/
+.snackbar {
+  position: fixed;
+  top: 2.2rem !important;
+  right: 50%;
+  width: 320px;
+  height: 3.2rem;
+  transform: translateX(50%);
+  background-color:  #beddca;
+  color: #ebfaf3;
+  text-align: start;
+  display: flex;
+  align-items: center;
+  word-spacing: 2.7;
+  justify-content: start;
+  font-size: .82rem;
+  padding: .5rem;
+  border-radius: 4px !important;
+  font-weight: 600;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  z-index: 200000000000000000000; /* above input popup */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .8s ease, transform 0.3s ease;
+}
+
+.dark-mode .snackbar {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.9);
+  border: 1px solid var(--thin-border);
+}
+
+.snackbar.show {
+  opacity: 1;
+  transform: translateX(50%) translateY(10px);
+  pointer-events:all;
+  width: 100%;
+  padding: .5rem;
+  max-width: 320px;
+  z-index: 20000000000000000000000000; /* above input popup */
+}
+
+
+/* Progress bar */
+.snackbar-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.7);
+  animation: snackbar-progress linear forwards;
+}
+
+/* Progress animation */
+@keyframes snackbar-progress {
+  from { width: 100%; }
+  to { width: 0%; }
+}
+
