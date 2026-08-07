@@ -1240,6 +1240,74 @@ try {
 //ends//
 //ends//
 
+//====================
+// SAVE WITH RETRY
+//====================
+async function saveWithRetry(collectionRef, orderData) {
+
+  let attempt = 1;
+
+  while (true) {
+
+    try {
+
+      const docRef = await addDoc(
+        collectionRef,
+        orderData
+      );
+
+      console.log(
+        `✅ Order saved on attempt ${attempt}`,
+        docRef.id
+      );
+
+      return docRef;
+
+    } catch (error) {
+
+      console.warn(
+        `❌ Save failed (Attempt ${attempt})`,
+        error
+      );
+
+      //==========================
+      // STOP RETRYING
+      //==========================
+      if (
+        error.code === "permission-denied" ||
+        error.code === "failed-precondition" ||
+        error.code === "resource-exhausted" || // quota exceeded
+        error.code === "unauthenticated" ||
+        error.code === "invalid-argument"
+      ) {
+
+        console.error(
+          "⛔ Permanent Firestore error. Retry stopped.",
+          error
+        );
+
+        throw error;
+
+      }
+
+      //==========================
+      // RETRY FOREVER
+      //==========================
+      console.log(
+        `🔄 Retrying in 2 seconds...`
+      );
+
+      await new Promise(resolve =>
+        setTimeout(resolve, 2000)
+      );
+
+      attempt++;
+
+    }
+
+  }
+
+}
 
 // ---------- FIRESTORE HELPER ----------
 async function saveOrderToFirestore(orderData) {
@@ -1253,9 +1321,6 @@ async function saveOrderToFirestore(orderData) {
       return null;
     }
 
-    const { collection, addDoc, serverTimestamp } = await import(
-      "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"
-    );
 
  const firestoreData = {
 
@@ -1270,9 +1335,6 @@ async function saveOrderToFirestore(orderData) {
   volume: Number(orderData.volume || 0),
 
   amount: Number(orderData.amount || 0),
-
-  vendorPrice:
-    Number(orderData.vendorPrice || 0),
 
   dataValue: `${(orderData.dataValue  || 0)}`,
 
@@ -1293,7 +1355,7 @@ async function saveOrderToFirestore(orderData) {
 console.log("Saving document...");
 console.log(firestoreData);
     const ordersCol = collection(db, "orders");
-    const result = await addDoc(ordersCol, firestoreData);
+    const result = await saveWithRetry(ordersCol, firestoreData);
     
     console.log(" Order saved to Firestore:", result.id);
     return result.id;
