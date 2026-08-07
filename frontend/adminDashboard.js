@@ -897,6 +897,7 @@ function updateProfitCards(orders) {
   let weeklyProfit = 0;
   let monthlyProfit = 0;
   let allProfit = 0;
+ 
 
   const now = new Date();
 
@@ -912,11 +913,13 @@ function updateProfitCards(orders) {
   const monthAgo = new Date();
   monthAgo.setMonth(now.getMonth() - 1);
 
+   
 
   orders.forEach(order => {
 
     const amount = Number(order.amount || 0);
     const volume = Number(order.volume || 0);
+    
 
     const {
       vendorPrice,
@@ -968,10 +971,13 @@ function updateProfitCards(orders) {
 
     if(orderDate >= monthAgo){
       monthlyProfit += profit;
+     
     }
-
+  
   });
 
+  // Give away fund (zaka);
+  const giveawayFund = Number((monthlyProfit * 0.025).toFixed(2));
 
   document.getElementById("totalSales").textContent =
   `₵ ${totalSales.toFixed(2)}`;
@@ -1002,6 +1008,9 @@ function updateProfitCards(orders) {
 
   document.getElementById("monthlyProfit").textContent =
   `₵ ${monthlyProfit.toFixed(2)}`;
+
+  document.getElementById("giveawayFund").textContent =
+  `₵ ${giveawayFund.toFixed(2)}`;
 
 
   document.getElementById("allProfit").textContent =
