@@ -2522,23 +2522,40 @@ function loadLeaderboard(){
       customers[phone].totalGB += gb;
       customers[phone].totalOrders++;
 
+      //====================
+      // POINTS CALCULATION
+      //====================
+
+      // if admin has manually assigned points,
+      // aways use those points.
       if(order.manualPoints !== undefined && 
         order.manualPoints !== null
       ) {
         // Admin override wins
         customers[phone].points =
         Number(order.manualPoints);
+        // Prevent previous orders from adding points
+        customers[phone].manualOverride =
+        true
       } else{
-          // Default 1GB = 6 Points
-      customers[phone].points += gb * 6;
+          // Only calculate automatically if there is 
+          // no manual override.
+          if(!customers[phone].manualOverride){
+            customers[phone].points += gb * 6;
+          }
       }
     
 
     });
 
     const leaders = Object.values(customers)
-      .sort((a,b)=> b.points - a.points)
-      .slice(0,5);
+      .sort((a,b) => {
+        if( b.points !== a.points) {
+          return b.points - a.points;
+        }
+        // The breaker
+        return b.totalGB - a.totalGB;
+      }).slice(0,5);
 
     console.log("🏆 Competition Leaders", leaders);
 
