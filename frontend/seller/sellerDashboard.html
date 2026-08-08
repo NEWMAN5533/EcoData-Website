@@ -3,12 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard</title>
+  <title>Seller Dashboard</title>
   <link rel="stylesheet" href="seller-dashboard.css">
   <link rel="stylesheet" href="seller-dashboard2.css">
 
   <!---GOOGLE MATERIAL ICON--LINK---->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!--remix icons-->
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
+
 </head>
 <body>
 
@@ -20,7 +24,7 @@
         <img src="../css/icons/icon-shortcut.png" alt="" loading="lazy">
       </div>
       <div class="right-sideNavbar">
-        <img id="menu" src="../css/icons/menu-white.png" alt="" loading="lazy">
+        <i class="ri-menu-2-line material-icons menu" id="menu"></i>
       </div>
     </div>
     <!--navar section-->
@@ -319,6 +323,41 @@
               </div>
             </div>
 
+             <!---Conversion rate---->
+            <div class="total-section-card">
+                <div class="section-card-top">
+                <div class="card-top-left">
+                  <p>Conversion Rate</p>
+                </div>
+                <div class="card-top-right">
+                  <span class="material-icons">
+                    account_balance_wallet
+                  </span>
+                </div>
+              </div>
+              <div class="section-card-bottom">
+                <div class="card-bottom-left"><h1 id="failedOrder">0</h1></div>
+                <div class="card-bottom-right"></div>
+              </div>
+            </div>
+             <!---Available Balance---->
+            <div class="total-section-card">
+                <div class="section-card-top">
+                <div class="card-top-left">
+                  <p>Views</p>
+                </div>
+                <div class="card-top-right">
+                  <span class="material-icons">
+                    account_balance_wallet
+                  </span>
+                </div>
+              </div>
+              <div class="section-card-bottom">
+                <div class="card-bottom-left"><h1 id="failedOrder">0</h1></div>
+                <div class="card-bottom-right"></div>
+              </div>
+            </div>
+
          
           </div>
         </section>
@@ -331,7 +370,7 @@
 
 
         <!--table-section--->
-        <div class="total-title tableIntoView"> <p>My Ebooks</p></div>
+        <div class="total-title tableIntoView"> <p>Product Table</p></div>
 <section class="table-section">
   <div class="table-title">
     <p>All Ebooks</p>
@@ -340,12 +379,15 @@
     <div class="table-scroll-area">
       <!-- TABLE HEADER -->
       <div class="table-header mb-header">
-        <span>Cover</span>
         <span>Title</span>
+        <span>Thumbnail</span>
+        <span>Type</span>
         <span>Price</span>
         <span>Status</span>
+        <span>Views</span>
         <span>Sales</span>
-        <span>Action</span>
+        <span>Revenue</span>
+        <span>Edit</span>
       </div>
 
       <div class="main-row-content mb-content">
@@ -372,9 +414,11 @@
       <!-- TABLE HEADER -->
       <div class="table-header sl-header">
         <span>Order ID</span>
-        <span>Ebook</span>
+        <span>Product</span>
         <span>Buyer</span>
         <span>Amount</span>
+        <span>platform Fee</span>
+        <span>Creator Share</span>
         <span>Date</span>
       </div>
 
@@ -406,9 +450,10 @@
       <!-- TABLE HEADER -->
       <div class="table-header wd-header">
         <span>Amount</span>
-        <span>Status</span>
-        <span>Date</span>
-        <span>Status</span>
+        <span>Requested</span>
+        <span>Approved</span>
+        <span>Paid</span>
+        <span>Reference</span>
       </div>
 
       <div class="main-row-content wd-content">
@@ -441,14 +486,29 @@
         <input type="text" placeholder="Enter title">
       </div>
 
-       <div class="form-group">
-        <label>Description:</label>
-        <input type="text" placeholder="Description">
+      <div class="form-group">
+        <label>Type:</label>
+        <input type="text" placeholder="Enter product type">
+      </div>
+
+         <div class="form-group">
+        <label>Category:</label>
+        <button type="text" class="cateBtn">Product Category</button>
+        
+      <section class="cate-sheet" >
+          <div class="cateSelect" data-region="Ashanti">Ebook</div>
+          <div class="cateSelect" data-region="Central">Notes</div>
+          <div class="cateSelect" data-region="Eastern">Educational Video</div>
+          <div class="cateSelect" data-region="Western">Templates</div>
+          <div class="cateSelect" data-region="Northern">ZIP</div>
+          <div class="cateSelect" data-region="Ahafo">Affiliate Product</div>
+          <div class="cateSelect" data-region="Bono East">Services</div>
+      </section>
       </div>
 
        <div class="form-group">
-        <label>Category:</label>
-        <input type="text" placeholder="Category">
+        <label>Description:</label>
+        <textarea class="text-area" type="text" placeholder="Describe the product"></textarea>
       </div>
 
        <div class="form-group">
@@ -457,14 +517,10 @@
       </div>
 
        <div class="form-group">
-        <label>Cover Image:</label>
-        <input type="text" placeholder="Upload cover Image">
+        <label>Thumbnail:</label>
+        <input type="file" placeholder="Upload Thumbnail">
       </div>
 
-       <div class="form-group">
-        <label>PDF File:</label>
-        <input type="text" placeholder="PDF">
-      </div>
 
       <div class="uploadBtn-div">
         <button type="submit" id="upload-ebook" class="upload">
@@ -515,41 +571,41 @@
   <div class="bottom-navbar" id="navIconDiv">
     <div class="btom-navIcon" onclick="window.location.href='./index.html'">
       <div class="activeImg active" id="activeMtn">
-        <small id="activeBadge" class="nav-badge">0</small>
-        <span class="material-icons">inventory_2</span>
+        <i class="ri-dashboard-line material-icons"></i>
       </div>
-      <small class="bottomIcon-textNav">Bundles</small>
+      <small class="bottomIcon-textNav">Dashboard</small>
     </div>
 
     <div class="btom-navIcon">
       <div class="activeImg" > 
-        <span class="material-icons">menu_book</span>
+        <i class="ri-book-open-line material-icons"></i>
       </div>
-      <small class="bottomIcon-textNav">Ebooks</small>
+      <small class="bottomIcon-textNav">Products</small>
     </div>
 
-    <div class="ecodataShopBtn">
-  <div class="shop-fixedBtn" id="shoppingBtn">
-  <img class="pin" src="../css/icons/logoImg.png" alt="" loading="lazy">
-    </div>
-  
-  </div>
+
    
 
 
-      <div class="btom-navIcon" >
+      <div class="btom-navIcon addBar" >
       <div class="activeImg" id="activeTel" > 
-        <span class="material-icons">money_off</span>
+       <i class="ri-add-circle-line material-icons addBtn"></i>
       </div>
-      <small class="bottomIcon-textNav">Withdrawals</small>
+      <small class="bottomIcon-textNav">Upload</small>
     </div>
 
 
      <div class="btom-navIcon" >
       <div class="activeImg" id="activeAir" > 
-       <span class="material-icons">settings</span>
+      <i class="ri-shopping-bag-3-line material-icons"></i>
       </div>
-      <small class="bottomIcon-textNav"> Settings</small>
+      <small class="bottomIcon-textNav"> Sales</small>
+    </div>
+       <div class="btom-navIcon" >
+      <div class="activeImg" id="activeAir" > 
+      <i class="ri-user-settings-line material-icons"></i>
+      </div>
+      <small class="bottomIcon-textNav">Profile</small>
     </div>
 
 
@@ -558,7 +614,7 @@
 
   </div>
     
-      </div>
+  </div>
       <!---main container ends---->
 
    </div>

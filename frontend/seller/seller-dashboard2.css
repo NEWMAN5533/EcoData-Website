@@ -34,7 +34,7 @@
   /***
   DARK MODE COLORS
   ***/
-  --darkMode-bg-cl: rgb(24, 29, 36) !important;
+  --darkMode-bg-cl: rgb(24, 29, 35) !important;
   --welcome-card-bg-2:  #141c27 !important;
   --welcome-card-bg:  #0e141b !important;
   --welcome-card-bg-3: rgba(77, 77, 77, 0.89);
@@ -255,7 +255,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
     .bottom-navbar{
       width: 100%;
       max-width: 99.99%;
-      height: 4.3rem;
+      height: 4rem;
       justify-self: center;
       position: fixed;
       bottom: 0;
@@ -267,11 +267,10 @@ BOTTOM NAVIGATION BAR STYLE CSS
       align-items: center;
       justify-content: space-between;
       padding: .1rem;
-      background: linear-gradient(135deg, rgba(58, 57, 57, 0.11), rgb(34, 31, 31));
-      backdrop-filter: blur(16px);
-      border-start-start-radius: 1.7rem;
-      border-start-end-radius: 1.7rem;
-      border: 1px solid rgb(59, 59, 59);
+      background: linear-gradient(135deg, var(--darkMode-bg-cl), var(--darkMode-bg-cl));
+    
+
+      border-top: 1px solid var(--thin-border);
       box-shadow: 0 10px 40px rgba(26, 25, 25, 0.99);
     }
 
@@ -315,7 +314,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
     }
 
     .activeImg.active{
-    background: rgb(56, 56, 56);
+    background: rgba(56, 56, 56, 0.863);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     }
 
@@ -330,7 +329,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
     ***/
       .activeImg.activeMin{
     padding: .19rem .3rem;
-     background: rgb(53, 50, 50);
+     background: rgba(53, 50, 50, 0.849);
     box-shadow: 0 2px 6px rgba(68, 68, 68, 0.3);
     border: 1px solid var(--primary-cl);
     }
@@ -383,16 +382,23 @@ BOTTOM NAVIGATION BAR STYLE CSS
   }
 
   .material-icons{
-    color: rgb(248, 245, 218);
+    color: rgba(248, 245, 218, 0.89);
+    font-size: 1rem !important;
+    font-weight: 300 !important;
   }
 
+
+  .menu{
+    font-size: 1.2rem !important;
+    cursor: pointer;
+  }
 
 
     .btom-navIcon .bottomIcon-textNav{
       font-size: .76rem;
       font-weight: 700;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      color: rgb(243, 243, 243) !important;
+      color: rgb(223, 223, 223) !important;
     }
 
     .dark-mode .btom-navIcon .bottomIcon-textNav{
@@ -494,6 +500,18 @@ BOTTOM NAVIGATION BAR STYLE CSS
           background:  rgb(7, 184, 31) !important;
           color: rgb(44, 44, 44);
         }
+
+        .addBar{
+          margin-bottom: .3rem;
+          line-height: .9;
+          padding-bottom: .3rem;
+        }
+
+        .addBtn{
+          border: 1px solid rgb(151, 149, 149);
+          border-radius: .4rem;
+          padding:.2rem .4rem;
+        }
    
 /****************************
 / ACTIVE COUNT ORDERS ENDS
@@ -511,7 +529,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
   align-items: center;
   justify-items: center;
   grid-template-columns: 
-    100px 140px 120px 80px 120px 120px;
+    100px 140px 120px 80px 100px 110px 100px 120px 120px;
   margin-left: .5rem;
 
   /* sticky top so it stays visible while scrolling vertically */
@@ -523,11 +541,11 @@ BOTTOM NAVIGATION BAR STYLE CSS
   color: white;
   font-weight: 600;
   font-size: .89rem;
-  background: rgb(41, 40, 40); /* needs a background when sticky */
+  background: var(--darkMode-bg-cl); /* needs a background when sticky */
   font-family: system-ui, sans-serif;
   padding: .5rem 0;
   width: 100%;
-  border-bottom: 1px solid rgb(59, 59, 59);
+  border-bottom: 1px solid rgb(31, 32, 39);
   min-width: max-content; /* prevents collapsing on narrow viewports */
   }
 
@@ -539,7 +557,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
   padding: 0 .5rem;
   align-items: start;
   grid-template-columns: 
-    110px 80px 150px 80px 120px 120px;
+    100px 140px 120px 80px 100px 110px 100px 120px 120px;
   position: relative;
   min-width: max-content; /* ensures rows stretch with header */
 
@@ -553,8 +571,8 @@ justify-items: center;
  min-width: max-content;
  width: 100%;
  height: 2.2rem;
- border-bottom: 1px solid rgb(80, 79, 79);
- grid-template-columns:   110px 80px 150px 80px 120px;
+ border-bottom: 1px solid rgb(36, 37, 44);
+ grid-template-columns:    100px 140px 120px 80px 100px 110px 100px 120px 120px;
  display: grid;
   }
 
@@ -570,7 +588,7 @@ justify-items: center;
   align-items: center;
   justify-items: center;
   grid-template-columns: 
-    100px 140px 120px 80px 120px;
+    100px 140px 120px 80px 110px 120px 120px;
   margin-left: .5rem;
 
   /* sticky top so it stays visible while scrolling vertically */
@@ -582,13 +600,15 @@ justify-items: center;
   color: white;
   font-weight: 600;
   font-size: .89rem;
-  background: rgb(41, 40, 40); /* needs a background when sticky */
+  background: var(--darkMode-bg-cl); /* needs a background when sticky */
   font-family: system-ui, sans-serif;
   padding: .5rem 0;
   width: 100%;
-  border-bottom: 1px solid rgb(59, 59, 59);
+  border-bottom: 1px solid rgb(31, 32, 39);
   min-width: max-content; /* prevents collapsing on narrow viewports */
   }
+
+
 
 /****** main body***********/
   .content-wrapper .sl-content{
@@ -598,7 +618,7 @@ justify-items: center;
   padding: 0 .5rem;
   align-items: start;
   grid-template-columns: 
-    110px 80px 150px 80px 120px;
+   100px 140px 120px 80px 110px 120px 120px;
   position: relative;
   min-width: max-content; /* ensures rows stretch with header */
 
@@ -612,8 +632,8 @@ justify-items: center;
  min-width: max-content;
  width: 100%;
  height: 2.2rem;
- border-bottom: 1px solid rgb(80, 79, 79);
- grid-template-columns:   110px 80px 150px 80px 120px;
+ border-bottom: 1px solid rgb(35, 35, 43);
+ grid-template-columns:    100px 140px 120px 80px 110px 120px 120px;
  display: grid;
   }
 
@@ -631,7 +651,7 @@ justify-items: center;
   .withdraw .withdrawBtn{
     border: none;
     padding: 0.08rem .6rem;
-    background: rgb(102, 102, 126);
+    background: rgb(51, 51, 58);
     color: white;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: .8rem;
@@ -647,7 +667,7 @@ justify-items: center;
   align-items: center;
   justify-items: center;
   grid-template-columns: 
-    100px 140px 120px 80px ;
+    100px 140px 120px 80px 90px;
   margin-left: .5rem;
 
   /* sticky top so it stays visible while scrolling vertically */
@@ -656,14 +676,14 @@ justify-items: center;
   z-index: 1;
 
   /* Remove position: absolute — it was breaking x-axis sync */
-  color: white;
+  color: var(--text-cl-2);
   font-weight: 600;
-  font-size: .89rem;
-  background: rgb(41, 40, 40); /* needs a background when sticky */
+  font-size: .8rem;
+  background: var(--darkMode-bg-cl); /* needs a background when sticky */
   font-family: system-ui, sans-serif;
   padding: .5rem 0;
   width: 100%;
-  border-bottom: 1px solid rgb(59, 59, 59);
+  border-bottom: 1px solid rgb(31, 32, 39);
   min-width: max-content; /* prevents collapsing on narrow viewports */
   }
 
@@ -675,7 +695,7 @@ justify-items: center;
   padding: 0 .5rem;
   align-items: start;
   grid-template-columns: 
-    110px 80px 150px 80px ;
+    100px 140px 120px 80px 90px;
   position: relative;
   min-width: max-content; /* ensures rows stretch with header */
 
@@ -689,8 +709,8 @@ justify-items: center;
  min-width: max-content;
  width: 100%;
  height: 2.2rem;
- border-bottom: 1px solid rgb(80, 79, 79);
- grid-template-columns:   110px 80px 150px 80px ;
+ border-bottom: 1px solid rgb(34, 35, 43);
+ grid-template-columns:   100px 140px 120px 80px 90px;
  display: grid;
   }
 
@@ -728,13 +748,13 @@ justify-items: center;
   justify-items: center;
   align-items: center;
   gap: .13rem;
-  background: rgba(39, 39, 39, 0.89);
+  background: var(--darkMode-bg-cl);
   backdrop-filter: blur(18px);
   border-end-end-radius: .2rem;
   border-end-start-radius: .2rem;
   border-start-start-radius: .2rem;
   border-start-end-radius: .2rem;
-  border: 1px solid rgba(87, 86, 86, 0.89);
+  border: 1px solid var(--thin-border);
   overflow: hidden;
 }
 
@@ -751,14 +771,14 @@ justify-items: center;
 .wd-history .table-title{
   width: 100%;
   height: 10%;
-  background: linear-gradient(135deg, rgba(56, 55, 55, 0.89), rgba(87, 86, 86, 0.89));
+  background: linear-gradient(135deg, var(--darkMode-bg-cl), var(--background-cl-1));
   backdrop-filter: blur(18px);
   display: flex;
   align-items: center;
   justify-content: start;
   position: relative;
   padding: 1rem;
-  border: 1px solid rgba(87, 86, 86, 0.89);
+  border: 1px solid none;
 }
 
 
@@ -812,7 +832,7 @@ SUBMIT WRAPPER
  align-items: center;
  position: relative;
  padding-left:  .3rem;
- border: 1px solid rgba(87, 86, 86, 0.89);
+ border: 1px solid var(--thin-border);
 } 
 
 /*****
@@ -826,11 +846,38 @@ form input
   justify-content: start;
   padding: .3rem;
   background: none;
-  border: 1px solid rgba(133, 133, 133, 0.623);
+  border: 1px solid var(--thin-border);
   border-radius: 4px;
   color: white;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: .92rem;
+}
+
+.text-area{
+  width: 12rem;
+  height: 94%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  background: transparent;
+  color: white;
+  border-color: var(--thin-border);;
+  padding: .2rem;
+}
+.cateBtn{
+  width: 12rem;
+  height: 2.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding: .3rem;
+  background: none;
+  border: 1px solid var(--thin-border);
+  border-radius: 4px;
+  color: rgb(133, 130, 130);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: .82rem;
+  cursor: pointer;
 }
 
 .form-group input::placeholder{
@@ -844,17 +891,18 @@ form input
   display: flex;
   height: 2.3rem;
   border-radius: 4px;
-  border-left: 1px solid rgba(133, 133, 133, 0.623);
+  border-left: 1px solid var(--thin-border);
   justify-content: start;
   position: relative;
-  color: white;
-  width: max-content;
+  color: rgba(226,226,226,226);
+  width: max-content;;
+  font-size: .84rem;
   white-space: nowrap;
   align-items: center;
   justify-content: start;
   padding-left: .4rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-weight: 600;
+  font-weight: 500;
 }
 
  .uploadBtn-div{
@@ -871,7 +919,7 @@ form input
 .uploadBtn-div .upload{
   width: 90%;
   height: 2.4rem;
-  background: rgba(238, 223, 155, 0.747);
+  background: rgb(36, 52, 68);
   color: white;
   font-size: .1.02rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -882,7 +930,7 @@ form input
 }
 
 .upload:hover{
-  background: rgb(192, 186, 157);
+  background: rgb(40, 60, 80);
   cursor: pointer;
 }
 
@@ -900,7 +948,6 @@ form input
     height: max-content !important;
     justify-content: space-between !important;
     width: 94% !important;
-    ;
   }
 
   .wd-history{
@@ -921,33 +968,91 @@ form input
   }
 }
 
+/***  SELLER DASHBOARD ****/
+.form-group .cate-sheet{
+  width: 13rem;
+  height: 14rem;
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  background: rgb(28, 40, 53);
+  position: fixed;
+  top: 14rem;
+  right: .5rem;
+  border-radius: .3rem;
+  z-index: 99999;
+  padding: 1rem;
+  overflow-y: auto;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
 
 
-@media (min-width: 1366px){
+
+
+.cateSelect{
+  width: 100%;
+  height: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding: .2rem .4rem;
+  border-radius: .3rem;
+  border-bottom: 1px solid black;
+  color: rgb(206, 203, 203);
+  border-color:  rgb(44, 51, 59);
+  cursor: pointer;
+  transition: background .2s ease;
+  white-space: nowrap;
+  font-size: .82rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.cateSelect:hover{
+  background: var(--background-cl-1);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (min-width: 900px){
 .content-wrapper .mb-header{
- grid-template-columns:    150px 170px 180px 160px 170px 160px !important;
+ grid-template-columns:    100px 140px 120px 80px 100px 110px 100px 120px 120px !important;
 }
 
 .content-wrapper .mb-content{
- grid-template-columns:    150px 170px 180px 160px 170px 160px !important;
+ grid-template-columns:    100px 140px 120px 80px 100px 110px 100px 120px 120px !important;
 }
 
  .mbRowWrapper .live-body-row{
- grid-template-columns:    150px 170px 180px 160px 170px 160px !important;
+ grid-template-columns:    100px 140px 120px 80px 100px 110px 100px 120px 120px !important;
 }
 
 
 /***** Sales ******/
  .content-wrapper .sl-header{
- grid-template-columns:    200px 190px 240px 190px 170px !important;
+ grid-template-columns:    140px 160px 210px 190px 140px 150px 170px !important;
 }
 
  .content-wrapper .sl-content{
- grid-template-columns:    200px 190px 240px 190px 170px !important;
+ grid-template-columns:    140px 160px 210px 190px 140px 150px 170px !important;
 }
 
  .withRowWrapper .live-body-row{
- grid-template-columns:    200px 190px 240px 190px 170px !important;
+ grid-template-columns:    140px 160px 210px 190px 140px 150px 170px!important;
 }
 
 }

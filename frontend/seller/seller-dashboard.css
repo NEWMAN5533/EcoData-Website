@@ -133,7 +133,7 @@
 
   /*====NEW===ROOT====*/
   /*====NEW===ROOT====*/
-  --darkMode-bg-cl: rgb(24, 29, 36) !important;
+  --darkMode-bg-cl: rgb(24, 29, 35) !important;
   --background-cl-1: rgb(29, 36, 41);
   --background-cl-2: rgb(29, 36, 41);
   --background-cl-2: rgb(29, 36, 41);
@@ -151,7 +151,7 @@
   /***
   DARK MODE COLORS
   ***/
-  --darkMode-bg-cl: rgb(24, 29, 36) !important;
+  --darkMode-bg-cl: rgb(24, 29, 35) !important;
   --welcome-card-bg-2:  #141c27 !important;
   --welcome-card-bg:  #0e141b !important;
   --welcome-card-bg-3: rgba(77, 77, 77, 0.89);
@@ -183,6 +183,19 @@
   --card-tigo-bg:  #1b252b;
 }
 
+
+::-webkit-scrollbar{
+  background-color: hsl(230, 16%, 15%) !important;
+}
+
+::-webkit-scrollbar-thumb{
+  background-color: hsl(228, 16%, 18%) !important;
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background-color: hsl(231, 16%, 23%) !important;
+}
+
 *{
   box-sizing: border-box;
   margin: 0;
@@ -197,7 +210,7 @@ body{
   width: 100vw;
   height: 100vh;
   overflow-y: hidden;
-  background: var(--dark-cl);
+  background: var(--darkMode-bg-cl);
 }
 
 /***container***/
@@ -221,9 +234,9 @@ body{
   top: 0;
   left: 0;
   right: 0;
-  background: var(--dark-cl);
+  background: var(--darkMode-bg-cl);
   border-bottom: 1px solid var(--thin-border);
-  padding: .3rem 1.5rem;
+  padding: .3rem .8rem;
   z-index: 9999999;
   overflow: hidden;
 }
@@ -237,8 +250,8 @@ body{
 }
 
 .adminNavbar .left-sideNavbar img{
-width: 3.2rem;
-height: 3.2rem;
+width: 2.8rem;
+height: 2.8rem;
 }
 
 .adminNavbar .left-sideNavbar h1{
@@ -278,7 +291,6 @@ justify-content: end;
   top: 3.5rem;
   overflow-x: hidden;
   overflow-y: hidden;
-  background: rgba(53, 49, 49, 0.438) !important;
 }
 
 
@@ -312,7 +324,7 @@ justify-content: end;
   align-items: center;
   overflow-y: hidden;
   border-right: 1px solid var(--thin-border);
-  background: var(--dark-cl);
+  background: var(--darkMode-bg-cl);
   z-index: 1;
 }
 
@@ -549,6 +561,7 @@ BUNDLE SECTION
   justify-items: center;
   align-items: center;
   margin-bottom: 1rem;
+ 
 }
 
 
@@ -760,27 +773,27 @@ BUNDLE SECTION
   justify-items: center;
   align-items: center;
   gap: .13rem;
-  background: rgba(39, 39, 39, 0.89);
+  background: var(--darkMode-bg-cl);
   backdrop-filter: blur(18px);
   border-end-end-radius: .2rem;
   border-end-start-radius: .2rem;
   border-start-start-radius: .2rem;
   border-start-end-radius: .2rem;
-  border: 1px solid rgb(80, 78, 78);
+  border: 1px solid var(--thin-border);
   overflow: hidden;
 }
 
 .table-section .table-title{
   width: 100%;
   height: 10%;
-  background: linear-gradient(135deg, rgba(56, 55, 55, 0.89), rgba(87, 86, 86, 0.89));
+  background: linear-gradient(135deg, var(--darkMode-bg-cl), var(--background-cl-1));
   backdrop-filter: blur(18px);
   display: flex;
   align-items: center;
   justify-content: start;
   position: relative;
   padding: 1rem;
-  border: 1px solid rgba(87, 86, 86, 0.89);
+  border: 1px solid var(--thin-border);
 }
 
 .table-title p{
@@ -796,7 +809,7 @@ BUNDLE SECTION
   display: flex;
   flex-direction: column;
   position: relative;
-  border: 1px solid rgb(128, 134, 134);
+  border: 1px solid var(--thin-border);
   border-radius: .2rem;
   /* Remove overflow from here — move it to table-scroll-area */
   overflow: hidden;
@@ -829,7 +842,7 @@ BUNDLE SECTION
   color: white;
   font-weight: 600;
   font-size: .89rem;
-  background: rgb(41, 40, 40); /* needs a background when sticky */
+  background: var(--darkMode-bg-cl); /* needs a background when sticky */
   font-family: system-ui, sans-serif;
   padding: .5rem 0;
   width: 100%;
@@ -1092,7 +1105,7 @@ BUNDLE SECTION
   align-items: start;
   justify-content: center;
   position: relative;
-  background-color: rgba(3, 170, 156, 0.158);
+  background-color: var(--darkMode-bg-cl);
 
 }
 
@@ -1130,7 +1143,7 @@ BUNDLE SECTION
   grid-template-columns: repeat(2, 1fr);
   border: 1px solid var(--thin-border-1);
   border-radius: .5rem;
-  background: rgba(3, 170, 156, 0.158);
+  background: var(--darkMode-bg-cl);
   backdrop-filter: blur(14px);
   justify-items: center;
   align-items: center;
@@ -1142,7 +1155,7 @@ BUNDLE SECTION
   display: flex;
   flex-direction: column;
   align-items: start;
- background: rgba(155, 247, 247, 0.089);
+ background: var(--darkMode-bg-cl);
  border-radius: .8rem;
  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
  border: 1px solid var(--card-mtn-bg);
@@ -1217,7 +1230,7 @@ BUNDLE SECTION
   left: -500px;
   width: 280px;
   height: 100%;
-  background: var(--dark-cl);
+  background: var(--darkMode-bg-cl);
   justify-content: space-between;
   border-right: 1px solid var(--thin-border);
   transition: .5s ease;
