@@ -25,7 +25,7 @@
         <img src="./css/icons/icon-shortcut.png" alt="" loading="lazy">
       </div>
       <div class="right-sideNavbar">
-        <img id="menu" src="./css/icons/menu-white.png" alt="" loading="lazy">
+        <i class="ri-menu-2-line material-icons menu" id="menu"></i>
       </div>
     </div>
     <!--navar section-->
@@ -609,8 +609,9 @@
 
 
 
-
-  <!--DELIVERY INDICATOR-->
+  <section class="flex-container-wrapper">
+    <div class="del-wrap">
+       <!--DELIVERY INDICATOR-->
   <section class="delivery-indicator" >
     <div class="left-side-indicator">
       <div class="delivery-status">
@@ -689,8 +690,27 @@
    
   </section>
   <!--DELIVERY INDICATOR-->
+    </div>
 
+    <div class="del-wrap2">
 
+    </div>
+    <!---setting-->
+<section class="leaderboard-manager">
+  <h3>Leaderboard Manager</h3>
+  <input type="text" id="phone" placeholder="Customer Phone">
+
+  <label class="manual-toggle">
+    <input type="number" id="leaderGB" placeholder="GB Purchased" min="1">
+  </label>
+  <input type="number" id="manualPoints" placeholder="Override points">
+
+  <button id="addLeaderPoints">
+    <i class="ri-add-circle-line"></i>
+    Add Points</button>
+</section>
+  </section>
+ 
 
 
 
@@ -726,16 +746,16 @@
     <div class="table-scroll-area">
       <!-- TABLE HEADER -->
       <div class="table-header">
-        <span>Order ID</span>
-        <span>Network</span>
-        <span>Size</span>
-        <span>Price</span>
-        <span>Recipient</span>
-        <span>Paid?</span>
-        <span>Date submitted</span>
-        <span>Status</span>
-        <span>UpdatedAt</span>
-        <span>Action</span>
+        <span>ORDER ID</span>
+        <span>NETWORK</span>
+        <span>SIZE</span>
+        <span>PRICE</span>
+        <span>RECIPIENT</span>
+        <span>PAID?</span>
+        <span>DATE SUBMITTED</span>
+        <span>STATUS</span>
+        <span>UPDATED-AT</span>
+        <span>EDIT</span>
       </div>
 
       <div class="main-row-content">
@@ -748,103 +768,12 @@
   </div>
 </section>
 
-<!---setting-->
-<section class="leaderboard-manager">
-  <h3>Leaderboard Manager</h3>
-  <input type="text" id="phone" placeholder="Customer Phone">
-
-  <label class="manual-toggle">
-    <input type="number" id="leaderGB" placeholder="GB Purchased" min="1">
-  </label>
-  <input type="number" id="manualPoints" placeholder="Override points">
-
-  <button id="addLeaderPoints">
-    <i class="ri-add-circle-line"></i>
-    Add Points</button>
-</section>
 
 
 
 
 
-<style>
-  .delivery-control{
-  width:100%;
-  max-width: 96%;
-  background:#141414;
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:18px;
-  padding:20px;
-  display:flex;
-  flex-direction:column;
-  gap:16px;
-}
 
-.delivery-control h3{
-  margin:0;
-  font-size:1rem;
-  color:#fff;
-  font-weight:600;
-}
-
-.delivery-control input[type="text"]{
-  width:100%;
-  padding:14px;
-  border:none;
-  outline:none;
-  border-radius:12px;
-  background:#1f1f1f;
-  color:#fff;
-  font-size:.95rem;
-  transition:.25s;
-}
-
-.delivery-control input[type="text"]:focus{
-  border:1px solid #0ea85f;
-  box-shadow:0 0 0 3px rgba(14,168,95,.15);
-}
-
-.delivery-control input[type="text"]::placeholder{
-  color:#8d8d8d;
-}
-
-.manual-toggle{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  color:#ddd;
-  font-size:.92rem;
-  cursor:pointer;
-}
-
-.manual-toggle input{
-  width:18px;
-  height:18px;
-  accent-color:#0ea85f;
-  cursor:pointer;
-}
-
-#saveDeliveryTime{
-  width:100%;
-  padding:14px;
-  border:none;
-  border-radius:12px;
-  background:#0ea85f;
-  color:#fff;
-  font-size:.95rem;
-  font-weight:600;
-  cursor:pointer;
-  transition:.25s;
-}
-
-#saveDeliveryTime:hover{
-  background:#0c9655;
-}
-
-#saveDeliveryTime:active{
-  transform:scale(.98);
-}
-</style>
 
 
 
@@ -861,52 +790,60 @@
       </section>
 
 
-  <!-----BOTTOM-NAVBAR----->
-  <div class="bottom-navbar" id="navIconDiv">
-    <div class="btom-navIcon" onclick="window.location.href='./index.html'">
-      <div class="activeImg active" id="activeMtn">
-        <small id="activeBadge" class="nav-badge">0</small>
-        <span class="material-icons">inventory_2</span>
-      </div>
-      <small class="bottomIcon-textNav">Bundles</small>
-    </div>
+     <!-----BOTTOM-NAVBAR----->
+    <div class="bottom-navbar" id="navIconDiv">
+      <div class="btom-navIcon" onclick="window.location.href='index.html'">
+        <div class="activeImg active" id="activeMtn">
+          <small id="activeBadge" class="nav-badge">0</small>
+          <i class="ri-router-line material-icons"></i>
 
-    <div class="btom-navIcon">
-      <div class="activeImg" > 
-        <span class="material-icons">menu_book</span>
+        </div>
+        <small class="bottomIcon-textNav">Bundles</small>
+      
       </div>
-      <small class="bottomIcon-textNav">Ebooks</small>
-    </div>
 
-    <div class="ecodataShopBtn">
-  <div class="shop-fixedBtn" id="shoppingBtn">
-  <img class="pin" src="./css/icons/logoImg.png" alt="" loading="lazy">
+    
+      
+
+      <div class="btom-navIcon">
+        <div class="activeImg" onclick="window.location.href ='pay.html'"> 
+          <i class="ri-price-tag-3-line material-icons"></i>
+        </div>
+        <small class="bottomIcon-textNav"> Discounts</small>
+      </div>
+
+    
+    <div class="ecodataShopBtn" >
+        <div class="shop-fixedBtn" id="shoppingBtn" >
+       <i class="ri-shopping-bag-3-fill"></i>
+        <i class="ri-store-2-line sellerAuth material-icons" style="display: none;"></i>
+       <small class="hero-headline shop">
+        Shop
+       </small>
+      </div>
+    
     </div>
-  
-  </div>
-   
+    
+
+        <div class="btom-navIcon" >
+        <div class="activeImg" id="activeTel" onclick="window.location.href='afa.html'"> 
+          <i class="ri-user-follow-line material-icons"></i>
+        </div>
+        <small class="bottomIcon-textNav">AFA</small>
+      </div>
 
 
       <div class="btom-navIcon" >
-      <div class="activeImg" id="activeTel" > 
-        <span class="material-icons">money_off</span>
+        <div class="activeImg" id="activeAir" onclick="window.location.href='vouchers.html'"> 
+           <i class="ri-ticket-2-line material-icons"></i>
+        </div>
+        <small class="bottomIcon-textNav"> Vouchers</small>
       </div>
-      <small class="bottomIcon-textNav">Withdrawals</small>
+
+
+
+
     </div>
-
-
-     <div class="btom-navIcon" >
-      <div class="activeImg" id="activeAir" > 
-       <span class="material-icons">settings</span>
-      </div>
-      <small class="bottomIcon-textNav"> Settings</small>
-    </div>
-
-
-   
-
-
-  </div>
     
       </div>
       <!---main container ends---->

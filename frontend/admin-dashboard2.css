@@ -34,7 +34,7 @@
   /***
   DARK MODE COLORS
   ***/
-  --darkMode-bg-cl: rgb(24, 29, 36) !important;
+  --darkMode-bg-cl: rgb(24, 29, 35) !important;
   --welcome-card-bg-2:  #141c27 !important;
   --welcome-card-bg:  #0e141b !important;
   --welcome-card-bg-3: rgba(77, 77, 77, 0.89);
@@ -65,6 +65,22 @@
   --card-tel-bg:  #fa537dd0;
   --card-tigo-bg:  #1b252b;
 }
+
+
+
+::-webkit-scrollbar{
+  background-color: hsl(230, 16%, 15%) !important;
+}
+
+::-webkit-scrollbar-thumb{
+  background-color: hsl(228, 16%, 18%) !important;
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background-color: hsl(231, 16%, 23%) !important;
+}
+
+
 /**========================
 LEADERBOARD MANGER
 =========================**/
@@ -74,15 +90,17 @@ LEADERBOARD MANGER
   flex-direction: column;
   gap: 14px;
   padding: 18px;
-  border-radius: 14px;
-  background: #101826;
-  border: 1px solid rgba(255,255,255, 0.08);
+  border-radius: .6rem;
+  background: var(--darkMode-bg-cl);
+  border: 1px solid var(--thin-border);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.36);
 }
 .leaderboard-manager h3{
   font-size: 16px;
   font-weight: 600;
-  color: #fff;
+  color: var(--text-cl-2);
   margin:0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .leaderboard-manager input,
@@ -95,7 +113,8 @@ LEADERBOARD MANGER
   padding: 0 15px;
   font-size: 14px;
   color: #fff;
-  background: #182334;
+  background: var(--thin-border);
+  opacity: .8;
   border: 1px solid rgba(255,255,255,  0.08);
   transition: .25s ease;
 }
@@ -105,7 +124,7 @@ LEADERBOARD MANGER
 }
 
 .leaderboard-manager input:focus{
-  border-color: #16c47f;
+  border-color: #223341;
   box-shadow: 0 0 0 3px rgba(22, 196, 127, .15);
 }
 
@@ -120,11 +139,12 @@ LEADERBOARD MANGER
   outline: none;
   cursor: pointer;
   border-radius: 10px;
-  background: #16c47f;
+  background: #2a3846;
   color: #fff;
-  font-size: 15px;
-  font-weight: 600;
-  transition: .25s ease;
+  font-size: .82rem;
+  font-weight: 500;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  transition: background .25s ease;
 }
 
 .leaderboard-manager button i{
@@ -132,7 +152,7 @@ LEADERBOARD MANGER
 }
 
 .leaderboard-manager button:hover{
-  background: #12ae70;
+  background: #353f4d;
 }
 
 .leaderboard-manager button:active{
@@ -327,7 +347,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
     .bottom-navbar{
       width: 100%;
       max-width: 99.99%;
-      height: 4.3rem;
+      height: 4rem;
       justify-self: center;
       position: fixed;
       bottom: 0;
@@ -339,11 +359,8 @@ BOTTOM NAVIGATION BAR STYLE CSS
       align-items: center;
       justify-content: space-between;
       padding: .1rem;
-      background: linear-gradient(135deg, rgba(58, 57, 57, 0.11), rgb(34, 31, 31));
-      backdrop-filter: blur(16px);
-      border-start-start-radius: 1.7rem;
-      border-start-end-radius: 1.7rem;
-      border: 1px solid rgb(59, 59, 59);
+      background: linear-gradient(135deg, var(--darkMode-bg-cl), var(--darkMode-bg-cl));
+      border-top: 1px solid var(--thin-border);
       box-shadow: 0 10px 40px rgba(26, 25, 25, 0.99);
     }
 
@@ -454,8 +471,13 @@ BOTTOM NAVIGATION BAR STYLE CSS
     margin-bottom: -.3rem;
   }
 
-  .material-icons{
+  .material-icons {
+    color: white;
+  }
+
+  .btom-navIcon .material-icons{
     color: rgb(248, 245, 218);
+    font-size: .99rem !important;
   }
 
 
@@ -509,13 +531,13 @@ BOTTOM NAVIGATION BAR STYLE CSS
         position: fixed;
         padding: .4rem;
         bottom: 2.5rem;
-        position: fixed;
         left: 50%;
         transform: translateX(-50%);
-        display: flex;
+        display: none;
+        flex-direction: column;
         align-items: center;
         justify-content: center;;
-        background: rgb(245, 223, 200);
+      
         border-radius: 50%;
 
         z-index: 999 !important;
@@ -635,4 +657,150 @@ SNACKBAR SECTION
   from { width: 100%; }
   to { width: 0%; }
 }
+
+
+
+
+/********* DELIVERY CONTROLLERS **********/
+  .delivery-control{
+  width:100%;
+  max-width: 96%;
+  background:#141414;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.delivery-control h3{
+  margin:0;
+  font-size:1rem;
+  color:#fff;
+  font-weight:600;
+}
+
+.delivery-control input[type="text"]{
+  width:100%;
+  padding:14px;
+  border:none;
+  outline:none;
+  border-radius:12px;
+  background:#1f1f1f;
+  color:#fff;
+  font-size:.95rem;
+  transition:.25s;
+}
+
+.delivery-control input[type="text"]:focus{
+  border:1px solid #0ea85f;
+  box-shadow:0 0 0 3px rgba(14,168,95,.15);
+}
+
+.delivery-control input[type="text"]::placeholder{
+  color:#8d8d8d;
+}
+
+.manual-toggle{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#ddd;
+  font-size:.92rem;
+  cursor:pointer;
+}
+
+.manual-toggle input{
+  width:18px;
+  height:18px;
+  accent-color:#0ea85f;
+  cursor:pointer;
+}
+
+#saveDeliveryTime{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  background:#0ea85f;
+  color:#fff;
+  font-size:.95rem;
+  font-weight:600;
+  cursor:pointer;
+  transition:.25s;
+}
+
+#saveDeliveryTime:hover{
+  background:#0c9655;
+}
+
+#saveDeliveryTime:active{
+  transform:scale(.98);
+}
+/********* DELIVERY CONTROLLERS ENDS **********/
+
+
+  .flex-container-wrapper{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    align-items: center;
+    justify-content: space-between;
+    width: 97%;
+    gap: 1.2rem;
+    height: max-content;
+    justify-items: center;
+    padding: .5rem 0;
+    position: relative;
+  }
+
+  @media screen and (min-width: 768px) {
+    .flex-container-wrapper{
+     display: flex;
+     justify-content: space-between;
+     padding-right: 1rem;
+    }
+
+    .flex-container-wrapper .leaderboard-manager{
+      width: 40%;
+      margin-top: 2.2rem;
+    }
+  }
+
+  .del-wrap{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+  }
+
+
+  @media screen and(min-width: 678px) {
+    .del-wrap{
+      width: 50%;
+      height: max-content;
+      display: grid;
+      grid-template-columns: repeat(2,1fr) !important;
+      justify-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .del-wrap2{
+      width: 50%;
+      height: max-content;
+      display: grid;
+      grid-template-columns: repeat(1,1fr) !important;
+      justify-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+      .leaderboard-manager{
+      width: 50%;
+      max-width: 60% !important;
+      margin-top: 1rem !important;
+    }
+  }
 
