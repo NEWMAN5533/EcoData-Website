@@ -746,7 +746,7 @@ SNACKBAR SECTION
     grid-template-columns: repeat(1, 1fr);
     align-items: center;
     justify-content: space-between;
-    width: 97%;
+    width: 100%;
     gap: 1.2rem;
     height: max-content;
     justify-items: center;
