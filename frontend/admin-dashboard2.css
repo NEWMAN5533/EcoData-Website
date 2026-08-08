@@ -757,6 +757,7 @@ SNACKBAR SECTION
   @media screen and (min-width: 768px) {
     .flex-container-wrapper{
      display: flex;
+     max-width: 97% !important;
      justify-content: space-between;
      padding-right: 1rem;
     }
