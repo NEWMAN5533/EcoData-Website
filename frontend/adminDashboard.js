@@ -1028,7 +1028,7 @@ function updateProfitCards(orders) {
 //======================
 
 let profitChartInstance = null;
-let currentMode = "daily";
+let currentMode = "weekly";
 
 window.setChartMode =
 function(mode, btn) {
