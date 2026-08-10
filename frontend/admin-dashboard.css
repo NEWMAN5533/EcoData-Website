@@ -650,10 +650,14 @@ BUNDLE SECTION
 }
 
 .first-container .total-title p{
-  color: var(--text-cl-2);
+  color: var(--text-cl-3);
   font-size: 1.5rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 600;
+}
+
+.dark-mode .first-container .total-title p{
+  color: var(--background-cl);
 }
 
 
@@ -711,7 +715,7 @@ BUNDLE SECTION
   background: var(--primary-cl);
   backdrop-filter: blur(24px);
   border-radius: .2rem;
-  border: 1px solid var(--text-cl-2);
+  border: 1px solid var(--text-cl-3);
 }
 
 
@@ -745,7 +749,7 @@ BUNDLE SECTION
   position: relative;
   border: 1px solid var(--text-cl-2);
   border-radius: .3rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.13);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
 
 .dark-mode .total-section .total-section-card{
@@ -783,7 +787,12 @@ BUNDLE SECTION
 }
 
 .section-card-top .card-top-left .mapping{
-  color: var(--text-cl-2);
+  color: var(--text-cl-3);
+  opacity: .6;
+}
+
+.dark-mode .section-card-top .card-top-left .mapping{
+  color: var(--background-cl);
 }
 
 
@@ -833,11 +842,10 @@ BUNDLE SECTION
 }
 
 .card-bottom-left h1{
-  color: var(--white-text-cl);
   margin: 0;
   font-size: 1.1rem;
   font-weight: 600;
-  color: wheat;
+  color: rgb(238, 198, 124);
 }
 
 
@@ -973,7 +981,7 @@ BUNDLE SECTION
 
 .main-row-content #empty-body{
   position: fixed;
-  color: var(--thin-border);
+  color: var(--text-cl-2);
   transform: translateX(-50%) !important;
   top: 50%;
   left: 50%;
@@ -981,6 +989,11 @@ BUNDLE SECTION
   font-weight: 500;
   display: flex;
 
+}
+
+.dark-mode .main-row-content #empty-body{
+  color: var(--background-cl);
+  opacity: .5;
 }
 
 
@@ -1007,8 +1020,12 @@ BUNDLE SECTION
   font-size: .9rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 600;
-  color: rgba(226, 226, 226, 226);
-  opacity: .7;
+  color: var(--text-cl-3);
+  opacity: .8;
+}
+
+.dark-mode .live-body-row small{
+  color: var(--text-cl-3) !important;
 }
 
 
@@ -1032,10 +1049,11 @@ BUNDLE SECTION
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  background: var(--thin-border) !important;
+  background: var(--primary-cl) !important;
   color: #333;
   font-weight: 500;
-  transition: 0.2s;
+  transition: background 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.13);
 }
 
 .chart-toggle button:hover {
@@ -1124,16 +1142,24 @@ BUNDLE SECTION
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+.dark-mode .chart-wrapper .saas-header h3{
+  color: var(--background-cl);
+}
+
 /* ===================== */
 /* TOGGLE PILLS (SAAS STYLE)
 /* ===================== */
 .chart-wrapper .chart-toggle {
   display: flex;
   gap: 8px;
-  background: var(--thin-border);
+  background: var(--background-cl);
   padding: 6px;
-  border-radius: .3rem;
+  border-radius: .6rem;
   margin-top: 1rem;
+}
+
+.dark-mode .chart-wrapper .chart-toggle {
+  background: var(--thin-border);
 }
 
 .chart-wrapper .chart-toggle button {
@@ -1148,15 +1174,23 @@ BUNDLE SECTION
   transition: background 0.25s ease;
 }
 
+.dark-mode .chart-wrapper .chart-toggle button{
+  background: var(--text-cl-2) !important;
+}
+
 .chart-wrapper .chart-toggle button:hover {
   background: var(--darkMode-bg-cl);
   color: #d3d3d3;
 }
 
 .chart-toggle button.active {
-  background: var(--darkMode-bg-cl) !important;
-  color: white;
+  background: #2a3846 !important;
+  color: var(--background-cl) ;
   box-shadow: 0 6px 14px rgba(14, 15, 17, 0.25);
+}
+
+.dark-mode .chart-toggle button.active{
+  background: #14191f !important;
 }
 
 
@@ -2334,6 +2368,11 @@ BUNDLE SECTION
 
 .flexi{
   font-size: .7rem !important;
+  color: var(--text-cl-3);
+}
+
+.dark-mode .flexi {
+  color: var(--background-cl);
 }
 
 #deliveryMessage{
