@@ -66,17 +66,47 @@
   --card-tigo-bg:  #1b252b;
 }
 
+/*======== THEME  ============*/
+.nav-actions{
+  display: flex;
+  gap: 1rem;
+  padding-right: .5rem;;
+}
+
+.nav-actions .material-icons{
+  font-size: 1.1rem;
+  color: var(--text-cl-2);
+}
+
+.change-theme{
+  cursor: pointer;
+}
+
+.dark-mode .nav-actions .material-icons{
+  color: rgb(204, 203, 203);
+}
+
+/*======== VARIABLE DARK THEME ============*/
+body.dark-mode{
+  --darkMode-bg-cl: rgb(24, 29, 35) !important;
+  --text-color: hsl(230, 16%, 70%);
+  --border-color: hsl(230, 12%, 18%);
+  --body-color: hsl(230, 12%, 8%);
+  --container-color: hsl(230, 12%, 12%);
+}
 
 
-::-webkit-scrollbar{
+
+
+.dark-mode ::-webkit-scrollbar{
   background-color: hsl(230, 16%, 15%) !important;
 }
 
-::-webkit-scrollbar-thumb{
+.dark-mode ::-webkit-scrollbar-thumb{
   background-color: hsl(228, 16%, 18%) !important;
 }
 
-::-webkit-scrollbar-thumb:hover{
+.dark-mode ::-webkit-scrollbar-thumb:hover{
   background-color: hsl(231, 16%, 23%) !important;
 }
 
@@ -91,9 +121,16 @@ LEADERBOARD MANGER
   gap: 14px;
   padding: 18px;
   border-radius: .6rem;
-  background: var(--darkMode-bg-cl);
+  background: var(--primary-cl);
+  border: 1px solid var(--border-cl-2);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .leaderboard-manager {
+background: var(--darkMode-bg-cl);
   border: 1px solid var(--thin-border);
   box-shadow: 0 10px 20px rgba(0,0,0,0.36);
+
 }
 .leaderboard-manager h3{
   font-size: 16px;
@@ -359,14 +396,15 @@ BOTTOM NAVIGATION BAR STYLE CSS
       align-items: center;
       justify-content: space-between;
       padding: .1rem;
-      background: linear-gradient(135deg, var(--darkMode-bg-cl), var(--darkMode-bg-cl));
-      border-top: 1px solid var(--thin-border);
-      box-shadow: 0 10px 40px rgba(26, 25, 25, 0.99);
+      background: #fff;
+      backdrop-filter: blur(30px);
+      border-top: 1px solid var(--text-cl-2);
+      box-shadow: 0 2px 6px rgba(26, 25, 25, 0.99);
     }
 
     .dark-mode .bottom-navbar{
       background: var(--darkMode-bg-cl);
-      border: 1px solid var(--thin-border) !important;
+      border-top: 1px solid var(--thin-border) !important;
       box-shadow: 0 10px 40px rgba(0,0,0,0.99);
     }
 
@@ -404,14 +442,14 @@ BOTTOM NAVIGATION BAR STYLE CSS
     }
 
     .activeImg.active{
-    background: rgb(56, 56, 56);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     }
 
     .dark-mode .activeImg.active{
-      background: rgba(46, 87, 61, 0.747);
+      background: rgb(61, 58, 58);
       box-shadow: 0 2px 6px rgba(0,0,0,0.3) !important;
-      border: 1px solid var(--thin-border);
+      padding: .35rem 1.3rem
     }
 
     /***
@@ -419,13 +457,13 @@ BOTTOM NAVIGATION BAR STYLE CSS
     ***/
       .activeImg.activeMin{
     padding: .19rem .3rem;
-     background: rgb(53, 50, 50);
+    background: rgb(53, 50, 50);
     box-shadow: 0 2px 6px rgba(68, 68, 68, 0.3);
     border: 1px solid var(--primary-cl);
     }
 
     .dark-mode .activeImg.activeImg.activeMin{
-      background: rgba(46, 87, 61, 0.747);
+      background: rgba(48, 46, 44, 0.747) !important;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       border: 1px solid var(--thin-border);
     }
@@ -438,14 +476,14 @@ BOTTOM NAVIGATION BAR STYLE CSS
      /***
     PAY ACTIVE
     ***/
-    .activeImg.activeMin{
+    .activeImg .activeMin{
     padding: .19rem .3rem;
     background: rgb(39, 37, 37);
     box-shadow: 0 2px 6px rgba(68, 68, 68, 0.3);
     border: 1px solid var(--primary-cl);
     }
-    .dark-mode .activeImg.activeMin{
-      background: rgba(46, 87, 61, 0.747);
+    .dark-mode .activeImg .activeMin{
+      background: rgb(39, 37, 37) !important;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       border: 1px solid var(--thin-border);
     }
@@ -471,12 +509,13 @@ BOTTOM NAVIGATION BAR STYLE CSS
     margin-bottom: -.3rem;
   }
 
-  .material-icons {
-    color: white;
+  .btom-navIcon .material-icons {
+    color: rgb(133, 130, 130) !important;
+    font-size: 1.2rem;
   }
 
-  .btom-navIcon .material-icons{
-    color: rgb(248, 245, 218);
+  .dark-mode .btom-navIcon .material-icons{
+    color: rgb(248, 245, 218) !important;
     font-size: .99rem !important;
   }
 
@@ -486,11 +525,11 @@ BOTTOM NAVIGATION BAR STYLE CSS
       font-size: .76rem;
       font-weight: 700;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      color: rgb(243, 243, 243) !important;
+      color: rgb(133, 131, 131);
     }
 
     .dark-mode .btom-navIcon .bottomIcon-textNav{
-      color: white;
+      color: white !important;
       opacity: .7;
     }
 
@@ -585,7 +624,6 @@ BOTTOM NAVIGATION BAR STYLE CSS
         }
 
         .dark-mode  .btom-navIcon .nav-badge{
-          background:  rgb(7, 184, 31) !important;
           color: rgb(44, 44, 44);
         }
    
