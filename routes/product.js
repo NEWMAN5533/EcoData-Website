@@ -1,7 +1,8 @@
 import express from "express";
-import upload from "../middleware/upload.js";
+import upload from "../middlewares/upload.js";
 import { 
-  createProduct
+  createProduct,
+  getCreatorProducts
 } from "../controllers/creatorProductController.js";
 
 const createProductRouter = express.Router();
@@ -12,4 +13,11 @@ createProductRouter.post("/", upload.fields([
 ]),
 createProduct
 );
+
+//===================
+// GET CREATOR PRODUCTS
+//======================
+createProductRouter.get("/",getCreatorProducts);
+
+
 export default createProductRouter;
