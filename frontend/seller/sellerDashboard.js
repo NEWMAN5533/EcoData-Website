@@ -265,7 +265,10 @@ if(uploadForm){
     document.getElementById("productFile")?.files[0];
 
     const youtube =
-    document.getElementById("affiliateUrl")?.value.trim();
+    document.getElementById("youtubeUrl")?.value.trim();
+
+    const affiliate =
+    document.getElementById("affiliateUrl")?.trim();
 
 
     //=======================
