@@ -480,57 +480,399 @@
    <!----main form---->
    <div class="content-wrapper submitForm">
 
-    <form class="ebook-submit">
+    <form class="ebook-submit" id="uploadProductForm">
+
       <div class="form-group">
         <label>Title:</label>
-        <input type="text" placeholder="Enter title">
+        <input
+        type="text"
+        id="productTitle"
+        placeholder="Enter title"
+        >
       </div>
 
+      <!---=================--
+        PRODUCT TYPE
+      ======================-->
       <div class="form-group">
         <label>Type:</label>
-        <input type="text" placeholder="Enter product type">
+        <button type="button" id="productTypeButton" class="cateBtn2">product type</button>
+            
+      <section class="cate-sheet2" id="productTypeSheet" style="display: none;">
+          <div class="cateSelect2" data-type="ebook">Ebook</div>
+          <div class="cateSelect2" data-type="notes">Notes</div>
+          <div class="cateSelect2" data-type="video">Video</div>
+          <div class="cateSelect2" data-type="templates">Templates</div>
+          <div class="cateSelect2" data-type="zip">ZIP</div>
+          <div class="cateSelect2" data-type="affiliate">Affiliate</div>
+          <div class="cateSelect2" data-type="service">Service</div>
+      </section>
+      <input 
+      type="hidden"
+      id="productType"
+      name="type"
+      value=""
+      >
       </div>
 
-         <div class="form-group">
+      <!-----======================
+      PRODUCT FILE
+      =========================----->
+      <div class="form-group" id="productFileGroup">
+        <label>Product File:</label>
+        <input
+        id="productFile"
+        type="file"
+        >
+      </div>
+
+      <!--============
+      SPECIAL TYPES
+      ===========---->
+      <div class="form-group" id="youtubeGroup" style="display: none;">
+        <label>YouTube Video</label>
+
+        <input 
+        type="url"
+        id="youtubeUrl"
+        placeholder="Paste YouTube video link"
+        >
+      </div>
+
+      <div class="form-group" id="affiliateGroup" style="display: none;">
+        <label>Affiliate Link:</label>
+        <input
+        id="affiliateUrl"
+        placeholder="Past affiliate product link"
+        type="url"
+        >
+      </div>
+
+      <!---=================--
+        PRODUCT CATEGORY
+      ======================-->
+      <div class="form-group">
         <label>Category:</label>
-        <button type="text" class="cateBtn">Product Category</button>
+        <button type="button" id="productCategoryButton" class="cateBtn">Product Category</button>
         
-      <section class="cate-sheet" >
-          <div class="cateSelect" data-region="Ashanti">Ebook</div>
-          <div class="cateSelect" data-region="Central">Notes</div>
-          <div class="cateSelect" data-region="Eastern">Educational Video</div>
-          <div class="cateSelect" data-region="Western">Templates</div>
-          <div class="cateSelect" data-region="Northern">ZIP</div>
-          <div class="cateSelect" data-region="Ahafo">Affiliate Product</div>
-          <div class="cateSelect" data-region="Bono East">Services</div>
+      <section class="cate-sheet" id="productCategorySheet" style="display: none;">
+          <div class="cateSelect" data-category="education">Education</div>
+          <div class="cateSelect" data-category="technology">Technology</div>
+          <div class="cateSelect" data-category="programming">Programming</div>
+          <div class="cateSelect" data-category="engineering">Engineering</div>
+          <div class="cateSelect" data-category="other">Other</div>
+          <div class="cateSelect" data-category="services">Services</div>
       </section>
+      <input 
+      type="hidden"
+      id="productCategory"
+      name="category"
+      value=""
+      >
       </div>
 
        <div class="form-group">
         <label>Description:</label>
-        <textarea class="text-area" type="text" placeholder="Describe the product"></textarea>
+        <textarea
+        id="productDescription"
+        class="text-area" 
+        placeholder="Describe the product"></textarea>
       </div>
 
        <div class="form-group">
         <label>Price:</label>
-        <input type="text" placeholder="Price">
+        <input
+        id="productPrice"
+        type="number"
+        placeholder="Price">
       </div>
 
        <div class="form-group">
         <label>Thumbnail:</label>
-        <input type="file" placeholder="Upload Thumbnail">
+        <input
+        id="coverImage"
+        type="file" 
+        placeholder="Upload cover Image">
       </div>
 
 
       <div class="uploadBtn-div">
-        <button type="submit" id="upload-ebook" class="upload">
-          Upload Book
+        <button type="submit" id="uploadProduct" class="upload">
+          Upload Product
         </button>
       </div>
       
     </form>
 
    </div>
+
+   <!---- MAIN FORM ---->
+<div class="content-wrapper submitForm" style="display: none;">
+
+  <form class="ebook-submit" id="uploadProductForm">
+
+    <!-- TITLE -->
+    <div class="form-group">
+      <label>Title:</label>
+
+      <input
+        type="text"
+        id="productTitle"
+        placeholder="Enter title"
+        required
+      >
+    </div>
+
+
+    <!-- PRODUCT TYPE -->
+    <div class="form-group" >
+
+      <label>Product Type:</label>
+
+      <div class="productTypeGrid">
+
+        <div
+          class="productTypeCard active"
+          data-type="ebook"
+        >
+          <i class="ri-book-open-line"></i>
+          <span>Ebook</span>
+        </div>
+
+        <div
+          class="productTypeCard"
+          data-type="notes"
+        >
+          <i class="ri-file-paper-2-line"></i>
+          <span>Notes</span>
+        </div>
+
+        <div
+          class="productTypeCard"
+          data-type="video"
+        >
+          <i class="ri-video-line"></i>
+          <span>Educational Video</span>
+        </div>
+
+        <div
+          class="productTypeCard"
+          data-type="template"
+        >
+          <i class="ri-layout-grid-line"></i>
+          <span>Templates</span>
+        </div>
+
+        <div
+          class="productTypeCard"
+          data-type="zip"
+        >
+          <i class="ri-folder-zip-line"></i>
+          <span>ZIP</span>
+        </div>
+
+        <div
+          class="productTypeCard"
+          data-type="affiliate"
+        >
+          <i class="ri-links-line"></i>
+          <span>Affiliate Product</span>
+        </div>
+
+      </div>
+
+      <input
+        type="hidden"
+        id="productType"
+        value="ebook"
+      >
+
+    </div>
+
+
+    <!-- CATEGORY -->
+    <div class="form-group">
+
+      <label>Category:</label>
+
+      <button
+        type="button"
+        class="cateBtn"
+        id="categoryButton"
+      >
+        Product Category
+      </button>
+
+      <section class="cate-sheet">
+
+        <div
+          class="cateSelect"
+          data-category="Education"
+        >
+          Education
+        </div>
+
+        <div
+          class="cateSelect"
+          data-category="Technology"
+        >
+          Technology
+        </div>
+
+        <div
+          class="cateSelect"
+          data-category="Business"
+        >
+          Business
+        </div>
+
+        <div
+          class="cateSelect"
+          data-category="Programming"
+        >
+          Programming
+        </div>
+
+        <div
+          class="cateSelect"
+          data-category="Engineering"
+        >
+          Engineering
+        </div>
+
+        <div
+          class="cateSelect"
+          data-category="Other"
+        >
+          Other
+        </div>
+
+      </section>
+
+      <input
+        type="hidden"
+        id="productCategory"
+        value=""
+      >
+
+    </div>
+
+
+    <!-- DESCRIPTION -->
+    <div class="form-group">
+
+      <label>Description:</label>
+
+      <textarea
+        class="text-area"
+        id="productDescription"
+        placeholder="Describe the product"
+        required
+      ></textarea>
+
+    </div>
+
+
+    <!-- PRICE -->
+    <div class="form-group">
+
+      <label>Price:</label>
+
+      <input
+        type="number"
+        id="productPrice"
+        placeholder="Price"
+        min="0"
+        step="0.01"
+        required
+      >
+
+    </div>
+
+
+    <!-- THUMBNAIL -->
+    <div class="form-group">
+
+      <label>Thumbnail:</label>
+
+      <input
+        type="file"
+        id="coverImage"
+        accept="image/*"
+        required
+      >
+
+    </div>
+
+
+    <!-- PRODUCT FILE -->
+    <div
+      class="form-group"
+      id="productFileGroup"
+    >
+
+      <label>Product File:</label>
+
+      <input
+        type="file"
+        id="pdfFile"
+      >
+
+    </div>
+
+
+    <!-- YOUTUBE -->
+    <div
+      class="form-group"
+      id="youtubeGroup"
+      style="display:none;"
+    >
+
+      <label>YouTube Lesson Link:</label>
+
+      <input
+        type="url"
+        id="youtubeUrl"
+        placeholder="Paste YouTube video link"
+      >
+
+    </div>
+
+
+    <!-- AFFILIATE -->
+    <div
+      class="form-group"
+      id="affiliateGroup"
+      style="display:none;"
+    >
+
+      <label>Affiliate Link:</label>
+
+      <input
+        type="url"
+        id="affiliateUrl"
+        placeholder="Paste affiliate product link"
+      >
+
+    </div>
+
+
+    <!-- SUBMIT -->
+    <div class="uploadBtn-div">
+
+      <button
+        type="submit"
+        id="upload-ebook"
+        class="upload"
+      >
+        Upload Product
+      </button>
+
+    </div>
+
+  </form>
+
+</div>
 
 
 </section>
@@ -813,6 +1155,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script type="module" src="adminDashboard.js"></script>
+<script src="sellerDashboard.js"></script>
 
 <script>
   
