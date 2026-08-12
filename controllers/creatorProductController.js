@@ -86,20 +86,28 @@ export async function createProduct(req, res){
   );
   }
 
-  if(file && type !== "video"){
-    fileUpload = await uploadToCloudinary(file.buffer,{
+  //===========================
+  // DIGITAL FILE UPLOAD
+  //===========================
+  if(
+    file && (type === "ebook" || type === "notes" || type === "template" || type === "zip")
+  ) {
+    fileUpload = await uploadToCloudinary(file.buffer, {
       resourceType: "raw",
       folder: `ecodata/products/${type}`
-    }
-  );
+    });
   }
 
-  if(file && type === "video"){
-    fileUpload = await uploadToCloudinary(file.buffer, {
-      resourceType: "video",
-      folder: "ecodata/products/videos"
+  //=====================
+  // EDUCATIONAL VIDEOS
+  //=====================
+  if(type === "video"){
+    if(!youtubeUrl?.trim()){
+      return res.status(400).json({
+        success: false,
+        message: "YouTube video link is required."
+      });
     }
-  );
   }
 
   if(
