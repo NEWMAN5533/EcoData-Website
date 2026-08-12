@@ -189,3 +189,55 @@ export async function createProduct(req, res){
     });
   }
 }
+
+//==============================
+// GET CREATOR PRODUCTS
+//==============================
+export async function getCreatorProducts(req,res){
+  try{
+    const { sellerId } = req.query;
+
+    if(!sellerId?.trim()){
+      return res.status(400).json({
+        success: false,
+        message: "SellerId is not found."
+      });
+    }
+
+    const snapshot = await db
+    .collection("products")
+    .where("sellerId", "==", sellerId.trim())
+    .get();
+
+    const products =
+    snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }))
+    .sort((a,b) => {
+      const dateA = a.createdAt?.toDate
+      ? a.createdAt.toDate()
+      : new Date(a.createdAt || 0);
+
+      const dateB = b.createdAt?.toDate
+      ? b.createdAt.toDate()
+      : new Date(b.createdAt || 0);
+
+      return dateB - dateA;
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: products.length, products
+    });
+
+  } catch(error){
+    console.error("Get creator products error:", error
+
+    );
+    res.status(500).json({
+      success: false,
+      message: "Unable to load creator products."
+    });
+  }
+}
