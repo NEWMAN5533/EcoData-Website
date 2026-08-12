@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard</title>
-  <link rel="stylesheet" href="admin-dashboard.css">
-  <link rel="stylesheet" href="admin-dashboard2.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard</title>
+<link rel="stylesheet" href="admin-dashboard.css">
+<link rel="stylesheet" href="admin-dashboard2.css">
 
-  <!---GOOGLE MATERIAL ICON--LINK---->
+<!---GOOGLE MATERIAL ICON--LINK---->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <!--remix icons-->
 <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
-
-
 
 <!--=== DARK MODE SCRIPT ========-->
 <script>
@@ -56,12 +54,10 @@ themeButton.addEventListener("click", ()=> {
 
 </script>
 <!--=== DARK MODE SCRIPT ENDS ===-->
-
-
 </head>
 <body>
 
-  <!----container-->
+<!----container-->
   <div class="container">
     <!--navar section-->
     <div class="adminNavbar">
@@ -74,7 +70,7 @@ themeButton.addEventListener("click", ()=> {
         <i class="ri-search-line search-button material-icons" id="search-button"></i>
 
         <!---login button-->
-        <i class="ri-user-line login-button material-icons" id="login-button"></i>
+        <i onclick="window.location.href='../frontend/seller/sellerDashboard.html'" class="ri-user-line login-button material-icons" id="login-button"></i>
 
         <!---theme button -->
         <i class="ri-moon-foggy-line change-theme material-icons" id="theme-button"></i>
@@ -775,7 +771,7 @@ themeButton.addEventListener("click", ()=> {
   <div class="chart-wrapper">
 
       <div class="saas-header">
-        <h3>Profit Analytics</h3>
+        <h3 style="display:none;">Profit Analytics</h3>
 
         <div class="chart-toggle">
           <button onclick="setChartMode('daily', this)">Daily</button>
