@@ -1,5 +1,4 @@
-import { memoryStorage } from "multer";
-import cloudinary from "../config/cloudinary.js";
+
 import { getFirestore, FieldValue } from "firebase-admin/firestore";
 import {
   uploadToCloudinary
