@@ -268,7 +268,7 @@ if(uploadForm){
     document.getElementById("youtubeUrl")?.value.trim();
 
     const affiliate =
-    document.getElementById("affiliateUrl")?.trim();
+    document.getElementById("affiliateUrl")?.value.trim();
 
 
     //=======================
