@@ -6,7 +6,7 @@ import {
 
 const createProductRouter = express.Router();
 
-createProductRouter.post("/", upload.field([
+createProductRouter.post("/", upload.fields([
   {name: "cover", maxCount: 1},
   {name: "file", maxCount: 1}
 ]),
