@@ -10,7 +10,7 @@ import bodyParser from "body-parser";
 // Routes
 import storeRouter from "./routes/storesRoute.js";
 import paystackWebhookRouter from "./routes/paystackWebhookRouter.js";
-import productRouter from "./routes/product.js";
+
 import subscriptionRouter from "./routes/subscriptionRouter.js";
 import adminRoute from "./routes/adminOrderUpdate.js";
 import syncOrderRoute from "./routes/syncOrderStatus.js";
@@ -21,7 +21,8 @@ import afaRegisterRouter from "./routes/afaRegisterRoute.js";
 import getVoucherRouter from "./routes/getVouchersRoute.js";
 import postVoucherRouter from "./routes/postVoucherRouter.js";
 
-
+// ecodata store routes
+import createProductRouter from "./routes/product.js";
 
 
 // Firebase Admin
@@ -57,8 +58,7 @@ app.use(express.static(path.join(__dirname, "frontend")));
 app.use("/api/validate-recipient", validateRecipientRoute);
 app.use("/api/restrictions", restrictionsRoute);
 app.use("/api/paystack/webhook", paystackWebhookRouter);
-app.use("/api/create-store", storeRouter);
-app.use("/api/upload-product", productRouter);
+
 app.use("/api/initiate-subscription", subscriptionRouter);
 app.use("/api/admin", adminRoute);
 app.use("/api/admin", syncOrderRoute);
@@ -67,7 +67,9 @@ app.use("/api/afa-register", afaRegisterRouter);
 app.use("/api/vouchers", getVoucherRouter);
 app.use("/api/vouchers", postVoucherRouter);
 
-
+// ecodata store upp.use()
+app.use("/api/create-store", storeRouter);
+app.use("/api/creator/products", createProductRouter);
 
 
 
