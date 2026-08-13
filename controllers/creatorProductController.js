@@ -193,51 +193,74 @@ export async function createProduct(req, res){
 //==============================
 // GET CREATOR PRODUCTS
 //==============================
-export async function getCreatorProducts(req,res){
+export async function getCreatorProducts(req, res){
   try{
-    const { sellerId } = req.query;
 
-    if(!sellerId?.trim()){
-      return res.status(400).json({
-        success: false,
-        message: "SellerId is not found."
-      });
-    }
+  const { sellerId } = String(req.query.sellerId || "").trim();
 
-    const snapshot = await db
-    .collection("products")
-    .where("sellerId", "==", sellerId.trim())
-    .get();
-
-    const products =
-    snapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data()
-    }))
-    .sort((a,b) => {
-      const dateA = a.createdAt?.toDate
-      ? a.createdAt.toDate()
-      : new Date(a.createdAt || 0);
-
-      const dateB = b.createdAt?.toDate
-      ? b.createdAt.toDate()
-      : new Date(b.createdAt || 0);
-
-      return dateB - dateA;
-    });
-
-    return res.status(200).json({
-      success: true,
-      message: products.length, products
-    });
-
-  } catch(error){
-    console.error("Get creator products error:", error
-
-    );
-    res.status(500).json({
+  if(!sellerId){
+    return res.status(400).json({
       success: false,
-      message: "Unable to load creator products."
+      message: "SellerId is not found."
     });
   }
+  console.log("Loading product for seller:", sellerId);
+
+  //Simple firestore query.
+  //No orderBy = No composite index
+  const snapshot = await db 
+  .collection("products")
+  .where("sellerId", "==", sellerId)
+  .get();
+
+  console.log("Products found:", snapshot.size
+  );
+
+  const products = snapshot.docs.map(doc => {
+    const data = doc.data();
+    return{
+      id: doc.id,
+      ...data
+    };
+  }).sort((a,b) => {
+    const getTime = value =>{
+      if(!value) return 0;
+
+      // timestamp
+      if(typeof value.toMillis === "function"){
+        return value.toMillis();
+      }
+
+      //timestamp with seconds
+      if(typeof value.seconds === "number"){
+        return value.seconds * 1000;
+      }
+
+      // js Date/String
+      const time = new Date(value).getTime();
+      return Number.isNaN(time)
+      ? 0
+      : time;
+    };
+    return(
+      getTime(b.createdAt) -
+      getTime(a.createdAt)
+    );
+  });
+  return res.status(200).json({
+    success: true,
+    count: products.length, 
+    products
+  });
+} catch(error){
+  console.error(
+    "Get creator products error:", error
+  );
+
+  return res.status(500).json({
+    success: false,
+    message: "Unable to load creator products.", 
+    error: error.message
+  });
 }
+} 
