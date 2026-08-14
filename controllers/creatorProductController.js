@@ -196,7 +196,7 @@ export async function createProduct(req, res){
 export async function getCreatorProducts(req, res){
   try{
 
-  const { sellerId } = String(req.query.sellerId || "").trim();
+  const sellerId = String(req.query.sellerId || "").trim();
 
   if(!sellerId){
     return res.status(400).json({
