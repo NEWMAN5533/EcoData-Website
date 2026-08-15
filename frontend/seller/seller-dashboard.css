@@ -236,7 +236,7 @@ body{
   right: 0;
   background: var(--darkMode-bg-cl);
   border-bottom: 1px solid var(--thin-border);
-  padding: .3rem .8rem;
+  padding: .3rem .4rem;
   z-index: 9999999;
   overflow: hidden;
 }
@@ -249,10 +249,39 @@ body{
   position: relative;
 }
 
-.adminNavbar .left-sideNavbar img{
-width: 2.8rem;
-height: 2.8rem;
+ .newLogo{
+  margin-top: .7rem;
+  width: 6rem !important;
+  height: 5.6rem !important;
+  margin-left: -1rem;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;
+  user-select: none;
 }
+
+
+/*======== THEME  ============*/
+.nav-actions{
+  display: flex;
+  gap: 1rem;
+  padding-right: .5rem;;
+}
+
+.nav-actions .material-icons{
+  font-size: 1.1rem;
+  color: var(--text-cl-2);
+  cursor: pointer;
+}
+
+
+
+.dark-mode .nav-actions .material-icons{
+  color: rgb(204, 203, 203);
+}
+
 
 .adminNavbar .left-sideNavbar h1{
   color: rgb(226, 223, 223);

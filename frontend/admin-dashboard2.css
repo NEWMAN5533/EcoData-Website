@@ -66,6 +66,21 @@
   --card-tigo-bg:  #1b252b;
 }
 
+
+ .newLogo{
+  margin-top: .7rem;
+  width: 6rem !important;
+  height: 5.6rem !important;
+  margin-left: -1rem;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
 /*======== THEME  ============*/
 .nav-actions{
   display: flex;
@@ -76,11 +91,9 @@
 .nav-actions .material-icons{
   font-size: 1.1rem;
   color: var(--text-cl-2);
-}
-
-.change-theme{
   cursor: pointer;
 }
+
 
 .dark-mode .nav-actions .material-icons{
   color: rgb(204, 203, 203);
