@@ -1,3 +1,9 @@
+//======================
+// SELLER CONFIG
+//======================
+const SELLER_ID = "TES_SELLER";
+const CREATOR_PRODUCTS_API = "https://ecodata-app.onrender.com/api/creator/products";
+
 //==================================
 // PRODUCT TYPE + CATEGORY SELECTOR
 //==================================
@@ -420,10 +426,247 @@ if(uploadForm){
 );
 }
 
+//===============================
+// LOAD CREATOR PRODUCTS
+//===============================
+async function loadCreatorProducts(){
+  try{
+    const url = `${CREATOR_PRODUCTS_API}?sellerId=${encodeURIComponent(SELLER_ID)}`;
+
+    console.log("Loading creator products...");
+
+    const response = await fetch(url);
+
+    const result = await response.json();
+
+    console.log("Creator products response:", result);
+    if(!response.ok || !result.success){
+      throw new Error(
+        result.message || "Unable to load products."
+      );
+    }
+
+    const products = result.products || [];
+
+    // Save globally
+    updateSellerAnalytics(products);
+    // Render products table
+    renderCreatorProducts(products);
+
+  } catch(error){
+    console.error("Creator products loading error", error);
+  }
+}
+
+//====================================
+// UPDATE THE SELLER ANALYTICS CARDS
+//====================================
+function updateSellerAnalytics(products){
+  const totalEbook =
+  products.length;
+
+  const published = 
+  products.filter(product =>
+    String(product.status).toLowerCase() ===
+    "published"
+  ).length;
+
+  const pending =
+  products.filter(product => 
+    String(product.status).toLowerCase() === 
+    "pending"
+  ).length;
+
+  const totalSales =
+  products.reduce(
+    (total, product) =>
+      total + Number(product.sales || 0 ),
+    0
+  );
+  /** Current earning will be calculated from* successful sales later.
+   * *
+   * For now, use sales * price * 70%.
+   */
+  const totalEarnings  = 
+  products.reduce(
+    (total, product) => {
+
+      const sales = 
+      Number(products.sales || 0);
+
+      const price =
+      Number(product.price || 0);
+
+      const creatorShare = 
+      Number(
+        product.creatorSharePercent ?? 70
+      );
+
+      return total +
+      (sales * price * 
+        (creatorShare / 100 ))
+    },
+    0
+  );
+
+  /*
+  * Available balance will eventually come
+  * from the seller wallet/earnings collection.
+  **
+  For now, use total earnings.
+   */
+  const availableBalance =
+  totalEarnings;
+
+  //=========================
+  // UPDATE HTML
+  //=========================
+  setText(
+    "totalEbook",
+    totalEbooks
+  );
+
+  setText(
+    "pendingEbooks",
+    pending
+  );
+
+  setText(
+    "totalSales",
+    totalSales
+  );
+
+  setMoney(
+    "availableBalance",
+    availableBalance
+  );
+  console.log(
+    "Seller analytics:",
+    {
+      totalEbooks,
+      published,
+      pending,
+      totalSales,
+      totalEarnings,
+      availableBalance
+    }
+  );
+}
+
+//==========================
+// SET TEXT
+//==========================
+function setText(id, value){
+
+  const element =
+  document.getElementById(id);
+
+  if(element){
+    element.textContent = value;
+  }
+}
+
+//=========================
+// SET MONEY
+//=========================
+function setMoney(id, value){
+  const element =
+  document.getElementById(id);
+
+  if(element){
+    element.textContent =
+    `GHS ${Number(value || 0).toFixed(2)}`;
+  }
+}
+
+//=========================
+// RENDER CREATOR PRODUCTS
+//=========================
+function renderCreatorProducts(products){
+  const tableBody =
+  document.getElementById("creatorProductsBody");
+
+  if(!tableBody){
+    console.warn("Creator tsBody not found.");
+    return;
+  }
+
+  tableBody.innerHTML = "";
+  if(!products.length){
+    tableBody.innerHTML = `
+    <small class="myEmpty-body">
+    No products uploaded yet.
+    </small>
+    `;
+    return;
+  }
+
+  products.forEach(product => {
+
+    const row =
+    document.createElement("div");
+
+    const status =
+    String(product.status || "pending").toLowerCase();
+
+    const price = 
+    Number(product.price || 0).toFixed(2);
+
+    const sales = 
+    Number(product.sales || 0);
+
+    row.innerHTML = `
+    <span>
+    <img src=${escapeHTML(
+      product.coverUrl || ""
+    )}"
+    alt="cover"
+    class="product-cover"
+    >
+    </span>
+    <span>${escapeHTML(
+      product.price || "Untitled"
+    )}</span>
+    <span>
+    GHS ${price}
+    </span>
+    <span class="product-status" status-${escapeHTML(status)}
+    ">
+    ${escapeHTML(status)}
+    </span>
+    <span>
+    ${sales}
+    </span>
+    <button class="product-action"
+    data-product-id="${escapeHTML(product.productId)}"
+    >
+    View
+    </button>
+    `;
+    tableBody.appendChild(row);
+  });
+}
+
+//=======================
+// ESCAPE HTML
+//=======================
+function escapeHTML(value){
+
+  return String(value ?? "")
+  .replace(/&/g, "&amp;")
+  .replace(/</g, "&lt;")
+  .replace(/>/g, "&gt;")
+  .replace(/"/g, "&quot;")
+  .replace(/'/g, "&#039;");
+}
 
 
-
-
+//=============================
+// INITIALIZE SELLER DASHBOARD
+//=============================
+document.addEventListener("DOMContentLoaded", ()=> {
+  loadCreatorProducts();
+});
 
 
 
