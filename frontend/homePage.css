@@ -221,7 +221,7 @@
   font-weight: 600;
   border-radius: .3rem;
   position: relative;
-  border: 1px solid var(--text-cl-3);
+  border: 1px solid rgb(117, 117, 117);
   box-shadow: 0 2px 6px rgba(0,0,0,0.13);
  }
 
@@ -294,7 +294,7 @@
   font-family: var(--font-family);
   font-size: .88rem;
   font-weight: 600;
-  border: 1px solid var(--text-cl-3);
+  border: 1px solid rgb(117, 117, 117);
   box-shadow: 0 2px 6px rgba(0,0,0,0.13);
  }
 
@@ -303,7 +303,9 @@
   border: 1px solid var(--background-cl-1);
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
  }
- .dark-mode .rk1{
+
+ 
+ .rk1{
   background: rgba(104, 75, 24, 0.281) !important;
  }
 
@@ -311,14 +313,17 @@
   width: 1.7rem !important;
   height: 1.7rem !important;
  }
-.dark-mode .rk2{
+
+
+.rk2{
   background: rgba(124, 114, 95, 0.349) !important;
  }
   .rk2 img{
   width: 1.3rem !important;
   height: 1.3rem !important;
  }
- .dark-mode .rk3{
+
+.rk3{
   background: rgba(61, 45, 51, 0.411) !important;
  }
 
