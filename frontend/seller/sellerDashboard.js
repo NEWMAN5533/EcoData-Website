@@ -381,14 +381,14 @@ if(uploadForm){
     //=====================
     formData.append(
       "sellerId",
-      "TES_SELLER"
+      SELLER_ID
     );
 
     //==================
     // SEND
     //==================
     try{
-      const response = await fetch("/api/creator/products", {
+      const response = await fetch(CREATOR_PRODUCTS_API, {
         method: "POST",
         body: formData
       }
@@ -408,6 +408,7 @@ if(uploadForm){
     showSnackBar("Product submitted for approval.");
     uploadForm.reset();
 
+
     //====================
     // RESTORE DEFAULT VALUE
     //====================
@@ -418,6 +419,10 @@ if(uploadForm){
     document.getElementById("productTypeButton").textContent = "Product Type";
 
     document.getElementById("productCategoryButton").textContent = "Product Category";
+
+    // Refresh dashboard
+    loadCreatorProducts();
+
     } catch(error){
     console.error("Upload error", error);
     showSnackBar(error.message || "Unable to upload product.");
@@ -462,18 +467,18 @@ async function loadCreatorProducts(){
 // UPDATE THE SELLER ANALYTICS CARDS
 //====================================
 function updateSellerAnalytics(products){
-  const totalEbook =
+  const totalEbooks =
   products.length;
 
   const published = 
   products.filter(product =>
-    String(product.status).toLowerCase() ===
+    String(product.status || "").toLowerCase() ===
     "published"
   ).length;
 
   const pending =
   products.filter(product => 
-    String(product.status).toLowerCase() === 
+    String(product.status || "").toLowerCase() === 
     "pending"
   ).length;
 
@@ -492,7 +497,7 @@ function updateSellerAnalytics(products){
     (total, product) => {
 
       const sales = 
-      Number(products.sales || 0);
+      Number(product.sales || 0);
 
       const price =
       Number(product.price || 0);
@@ -503,7 +508,8 @@ function updateSellerAnalytics(products){
       );
 
       return total +
-      (sales * price * 
+      (sales * 
+       price * 
         (creatorShare / 100 ))
     },
     0
@@ -522,7 +528,7 @@ function updateSellerAnalytics(products){
   // UPDATE HTML
   //=========================
   setText(
-    "totalEbook",
+    "totalEbooks",
     totalEbooks
   );
 
@@ -534,6 +540,11 @@ function updateSellerAnalytics(products){
   setText(
     "totalSales",
     totalSales
+  );
+
+  setMoney(
+    "totalEarnings",
+    totalEarnings
   );
 
   setMoney(
@@ -592,11 +603,13 @@ function renderCreatorProducts(products){
   }
 
   tableBody.innerHTML = "";
+
   if(!products.length){
+
     tableBody.innerHTML = `
-    <small class="myEmpty-body">
+    <div class="myEmpty-body">
     No products uploaded yet.
-    </small>
+    </div>
     `;
     return;
   }
@@ -615,29 +628,40 @@ function renderCreatorProducts(products){
     const sales = 
     Number(product.sales || 0);
 
+    row.className =
+    "creator-product-row";
+
     row.innerHTML = `
-    <span>
+    <span class="product-cover-cell">
+
     <img src=${escapeHTML(
       product.coverUrl || ""
     )}"
-    alt="cover"
-    class="product-cover"
-    >
+    alt="${escapeHTML(product.title || "product")}"
+    class="product-cover">
+
     </span>
-    <span>${escapeHTML(
-      product.price || "Untitled"
-    )}</span>
+
+    <span class="product-title-cell">
+    ${escapeHTML(
+      product.title || "Untitled"
+    )}
+    </span>
+
     <span>
     GHS ${price}
     </span>
-    <span class="product-status" status-${escapeHTML(status)}
-    ">
+
+    <span class="product-status status-${escapeHTML(status)}">
     ${escapeHTML(status)}
     </span>
+
     <span>
     ${sales}
     </span>
-    <button class="product-action"
+
+
+    <button type="button" class="product-action"
     data-product-id="${escapeHTML(product.productId)}"
     >
     View
