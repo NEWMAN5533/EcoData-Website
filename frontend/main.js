@@ -1477,12 +1477,22 @@ const normalized = {
   row.dataset.id = normalized.orderId;
 
   row.innerHTML = `
-    <span>${normalized.orderId}</span>
-    <span>${normalized.volume}GB</span>
-    <span>${normalized.recipient}</span>
+    <span>
+      ${normalized.orderId}
+    </span>
+
+    <span>
+      ${normalized.volume}GB
+    </span>
+
+    <span>
+      ${normalized.recipient}
+    </span>
+
     <span class="status-cell">
       <span class="status-badge ${getStatusClass(normalized.status)}">
-        ${normalized.status}
+        ${getStatusIcon(order.status)}
+        <span>${normalized.status}</span>
       </span>
     </span>
   `;
@@ -1644,18 +1654,36 @@ console.log("timeStamp", order.timestamp);
   }
 
   row.innerHTML = `
-    <span>${order.orderId}</span>
-    <span>${order.recipient}</span>
-    <span>${order.volume}GB</span>
+    <span>
+      ${order.orderId}
+    </span>
+
+    <span>
+      ${order.recipient}
+    </span>
+
+    <span>
+      ${order.volume}GB
+    </span>
+
     <span class="status-cell">
-  <span class="status-badge ${getStatusClass(order.status)}">
-    ${getStatusIcon(order.status)}
-    <span>${order.status}</span>
-  </span>
-</span>
-    <span>${getNetwork(order)}</span>
-    <span>Yes</span>
-    <span>${date}</span>
+      <span class="status-badge ${getStatusClass(order.status)}">
+      ${getStatusIcon(order.status)}
+      <span>${order.status}</span>
+      </span>
+    </span>
+
+    <span>
+      ${getNetwork(order)}
+    </span>
+
+    <span>
+      Yes
+    </span>
+
+    <span>
+      ${date}
+    </span>
   `;
 }
 
@@ -2067,7 +2095,7 @@ function getStatusIcon(status) {
       return `<i class="ri-time-line status-icon"></i>`;
 
     case "processing":
-      return `<i class="ri-loader-4-line status-icon spinning"></i>`;
+      return `<i class="ri-refresh-line status-icon spinning"></i>`;
 
     case "delivered":
     case "sent":
