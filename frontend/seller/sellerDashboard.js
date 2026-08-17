@@ -629,10 +629,10 @@ function renderCreatorProducts(products){
     Number(product.sales || 0);
 
     row.className =
-    "creator-product-row";
+    "live-body-rowT";
 
     row.innerHTML = `
-    <span class="product-cover-cell">
+    <small class="product-cover-cell">
 
     <img src=${escapeHTML(
       product.coverUrl || ""
@@ -640,25 +640,25 @@ function renderCreatorProducts(products){
     alt="${escapeHTML(product.title || "product")}"
     class="product-cover">
 
-    </span>
+    </small>
 
-    <span class="product-title-cell">
+    <small class="product-title-cell">
     ${escapeHTML(
       product.title || "Untitled"
     )}
-    </span>
+    </small>
 
-    <span>
+    <small>
     GHS ${price}
-    </span>
+    </small>
 
-    <span class="product-status status-${escapeHTML(status)}">
+    <small class="product-status status-${escapeHTML(status)}">
     ${escapeHTML(status)}
-    </span>
+    </small>
 
-    <span>
+    <small>
     ${sales}
-    </span>
+    </small>
 
 
     <button type="button" class="product-action"

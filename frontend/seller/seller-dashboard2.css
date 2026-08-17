@@ -519,18 +519,95 @@ BOTTOM NAVIGATION BAR STYLE CSS
 
 
 
+/*******TABLE SECTION**********/
+.table-section{
+  width: 100%;
+  max-width: 94%;
+  margin-bottom: 1rem !important;
+  height: 30rem;
+  display: flex;
+  padding: .2rem;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  gap: .13rem;
+  background: var(--primary-cl);
+  backdrop-filter: blur(18px);
+  border-end-end-radius: .2rem;
+  border-end-start-radius: .2rem;
+  border-start-start-radius: .2rem;
+  border-start-end-radius: .2rem;
+  border: 1px solid var(--text-cl-2);
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.13);
+}
 
+.dark-mode .table-section{
+  background: var(--darkMode-bg-cl);
+  box-shadow: 0 10px  20px rgba(0,0,0,0.36);
+  border: 1px solid var(--thin-border);
+}
 
-  
-/*** my ebooks TABLE*****/
-  .content-wrapper .mb-header{
-   /* Fixed column widths — same as before */
+.table-section .table-title{
+  width: 100%;
+  height: 10%;
+  background: linear-gradient(135deg, var(--primary-cl), var(--background-cl));
+  backdrop-filter: blur(18px);
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  position: relative;
+  padding: 1rem;
+  border: 1px solid var(--text-cl-2);
+}
+
+.dark-mode .table-section .table-title{
+   background: linear-gradient(135deg, var(--darkMode-bg-cl), var(--background-cl-1));
+   border: 1px solid var(--thin-border);
+}
+
+.table-title p{
+  font-size: .85rem;
+  font-family: system ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: rgb(221, 96, 23);
+  font-weight: 600;
+}
+
+.table-section .content-wrapper {
+  width: 100%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border: 1px solid var(--text-cl-2);
+  border-radius: .2rem;
+  /* Remove overflow from here — move it to table-scroll-area */
+  overflow: hidden;
+}
+
+.dark-mode .table-section .content-wrapper{
+  border: 1px solid var(--thin-border);
+}
+
+/* NEW: this single div handles ALL scrolling in both axes */
+.content-wrapper .table-scroll-area {
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;   /* horizontal scroll */
+  overflow-y: auto;   /* vertical scroll */
+  white-space: nowrap;
+}
+
+.content-wrapper .table-header {
+  /* Fixed column widths — same as before */
   display: grid;
   align-items: center;
   justify-items: center;
   grid-template-columns: 
-    100px 140px 120px 80px 100px 110px 100px 120px 120px;
-  margin-left: .5rem;
+   110px 80px 90px 100px 100px 100px 110px 150px 120px;
+    margin-left: .5rem;
 
   /* sticky top so it stays visible while scrolling vertically */
   position: sticky;
@@ -538,58 +615,125 @@ BOTTOM NAVIGATION BAR STYLE CSS
   z-index: 1;
 
   /* Remove position: absolute — it was breaking x-axis sync */
-  color: white;
-  font-weight: 600;
-  font-size: .89rem;
-  background: var(--darkMode-bg-cl); /* needs a background when sticky */
+  color: var(--text-cl-4);
+  font-weight: 500;
+  font-size: .84rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background: var(--primary-cl); /* needs a background when sticky */
   font-family: system-ui, sans-serif;
   padding: .5rem 0;
   width: 100%;
-  border-bottom: 1px solid rgb(31, 32, 39);
+  border-bottom: 1px solid var(--text-cl-2);
   min-width: max-content; /* prevents collapsing on narrow viewports */
-  }
+}
 
-/****** main body***********/
-  .content-wrapper .mb-content{
+.dark-mode .content-wrapper .table-header{
+  background: var(--darkMode-bg-cl);
+  border-bottom: 1px solid var(--thin-border);
+  color:var(--primary-cl);
+}
+
+
+.dark-mode .content-wrapper .table-header,
+.dark-mode .content-wrapper .sl-header{
+  background: var(--darkMode-bg-cl);
+  border-bottom: 1px solid var(--thin-border);
+  color:var(--primary-cl);
+}
+
+
+.content-wrapper .main-row-content {
   width: 100%;
   display: grid;
   justify-items: center;
   padding: 0 .5rem;
   align-items: start;
   grid-template-columns: 
-    100px 140px 120px 80px 100px 110px 100px 120px 120px;
+110px 80px 90px 100px 100px 100px 110px 150px 120px;
   position: relative;
   min-width: max-content; /* ensures rows stretch with header */
+}
 
-  }
 
 
-  /*---- dynamic row ****/
-  .mbRowWrapper .live-body-row{
-justify-items: center;
+.main-row-content #empty-body{
+  position: fixed;
+  color: var(--text-cl-2);
+  transform: translateX(-50%) !important;
+  top: 50%;
+  left: 50%;
+  font-size: .88rem;
+  font-weight: 500;
+  display: flex;
+
+}
+
+.dark-mode .main-row-content #empty-body{
+  color: var(--background-cl);
+  opacity: .5;
+}
+
+
+#creatorProductsBody,
+#withRowWrapper,
+#wd-RowWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  /* Remove position: absolute — it was collapsing the height */
+}
+
+#creatorProductsBody .live-body-rowT{
+ justify-items: center;
  align-items: center;
  min-width: max-content;
  width: 100%;
  height: 2.2rem;
- border-bottom: 1px solid rgb(36, 37, 44);
- grid-template-columns:    100px 140px 120px 80px 100px 110px 100px 120px 120px;
+ border-bottom: 1px solid rgba(80, 79, 79, 0.308);
+ grid-template-columns:   110px 80px 90px 100px 100px 100px 110px 150px 120px;
  display: grid;
-  }
+}
+
+.live-body-rowT small,
+.live-body-rowS small,
+.live-body-rowW small{
+  font-size: .9rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 600;
+  color: var(--text-cl-3);
+  opacity: .8;
+}
+
+.dark-mode .live-body-rowT small,
+.dark-mode .live-body-rowS small,
+.dark-mode .live-body-rowS small{
+  color: var(--text-cl-3) !important;
+}
+
+
+
+
+
+  
 
 
 
 
 
 
-/*** SALES TABLE*****/
-  .content-wrapper .sl-header{
-   /* Fixed column widths — same as before */
+
+
+
+/**** sales header ***/
+.content-wrapper .sl-header{
+  /* Fixed column widths — same as before */
   display: grid;
   align-items: center;
   justify-items: center;
   grid-template-columns: 
-    100px 140px 120px 80px 110px 120px 120px;
-  margin-left: .5rem;
+  110px 80px 90px 100px 120px 150px 120px;
+    margin-left: .5rem;
 
   /* sticky top so it stays visible while scrolling vertically */
   position: sticky;
@@ -597,17 +741,17 @@ justify-items: center;
   z-index: 1;
 
   /* Remove position: absolute — it was breaking x-axis sync */
-  color: white;
-  font-weight: 600;
-  font-size: .89rem;
-  background: var(--darkMode-bg-cl); /* needs a background when sticky */
+  color: var(--text-cl-4) !important;
+  font-weight: 500;
+  font-size: .84rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background: var(--primary-cl) !important; /* needs a background when sticky */
   font-family: system-ui, sans-serif;
   padding: .5rem 0;
   width: 100%;
-  border-bottom: 1px solid rgb(31, 32, 39);
+  border-bottom: 1px solid var(--text-cl-2) !important;
   min-width: max-content; /* prevents collapsing on narrow viewports */
-  }
-
+}
 
 
 /****** main body***********/
@@ -618,24 +762,21 @@ justify-items: center;
   padding: 0 .5rem;
   align-items: start;
   grid-template-columns: 
-   100px 140px 120px 80px 110px 120px 120px;
+  110px 80px 90px 100px 120px 150px 120px;
   position: relative;
   min-width: max-content; /* ensures rows stretch with header */
-
   }
 
-
-  /*---- dynamic row ****/
-  .withRowWrapper .live-body-row{
-justify-items: center;
+#withRowWrapper .live-body-rowS{
+ justify-items: center;
  align-items: center;
  min-width: max-content;
  width: 100%;
  height: 2.2rem;
- border-bottom: 1px solid rgb(35, 35, 43);
- grid-template-columns:    100px 140px 120px 80px 110px 120px 120px;
+ border-bottom: 1px solid rgba(80, 79, 79, 0.308);
+ grid-template-columns:   110px 80px 90px 100px 120px 150px 120px;
  display: grid;
-  }
+}
 
 
 
@@ -667,7 +808,7 @@ justify-items: center;
   align-items: center;
   justify-items: center;
   grid-template-columns: 
-    100px 140px 120px 80px 90px;
+    80px 120px 110px 110px 150px;
   margin-left: .5rem;
 
   /* sticky top so it stays visible while scrolling vertically */
@@ -683,7 +824,8 @@ justify-items: center;
   font-family: system-ui, sans-serif;
   padding: .5rem 0;
   width: 100%;
-  border-bottom: 1px solid rgb(31, 32, 39);
+  border-bottom: 1px solid var(--text-cl-2) !important;
+  opacity: .8;
   min-width: max-content; /* prevents collapsing on narrow viewports */
   }
 
@@ -695,7 +837,7 @@ justify-items: center;
   padding: 0 .5rem;
   align-items: start;
   grid-template-columns: 
-    100px 140px 120px 80px 90px;
+    80px 120px 110px 110px 150px !important;
   position: relative;
   min-width: max-content; /* ensures rows stretch with header */
 
@@ -703,14 +845,14 @@ justify-items: center;
 
 
   /*---- dynamic row ****/
-  .withRowWrapper .live-body-row{
+ .wd-content .live-body-rowW{
 justify-items: center;
  align-items: center;
  min-width: max-content;
  width: 100%;
  height: 2.2rem;
- border-bottom: 1px solid rgb(34, 35, 43);
- grid-template-columns:   100px 140px 120px 80px 90px;
+ border-bottom: 1px solid var(--text-cl-2) !important;
+ grid-template-columns:    80px 120px 110px 110px 150px !important;
  display: grid;
   }
 
@@ -748,7 +890,7 @@ justify-items: center;
   justify-items: center;
   align-items: center;
   gap: .13rem;
-  background: var(--darkMode-bg-cl);
+  background: var(--primary-cl);
   backdrop-filter: blur(18px);
   border-end-end-radius: .2rem;
   border-end-start-radius: .2rem;
@@ -756,6 +898,10 @@ justify-items: center;
   border-start-end-radius: .2rem;
   border: 1px solid var(--thin-border);
   overflow: hidden;
+}
+
+.dark-mode .wd-history{
+  background: var(--darkMode-bg-cl) !important;
 }
 
 .wd-history .tie{
@@ -771,7 +917,7 @@ justify-items: center;
 .wd-history .table-title{
   width: 100%;
   height: 10%;
-  background: linear-gradient(135deg, var(--darkMode-bg-cl), var(--background-cl-1));
+  background: linear-gradient(135deg, var(--primary-cl), var(--background-cl));
   backdrop-filter: blur(18px);
   display: flex;
   align-items: center;
@@ -780,6 +926,14 @@ justify-items: center;
   padding: 1rem;
   border: 1px solid none;
 }
+
+.wd-history .wd-header{
+  background: var(--primary-cl);
+  border-bottom: 1px solid var(--text-cl-2);
+  color: var(--text-cl-4);
+  text-transform: uppercase;
+}
+
 
 
 .wd-history .content-wrapper{
@@ -1096,30 +1250,41 @@ form input
 
 
 @media (min-width: 900px){
-.content-wrapper .mb-header{
- grid-template-columns:    100px 140px 120px 80px 100px 110px 100px 120px 120px !important;
+.content-wrapper .table-header{
+ grid-template-columns:    80px 140px 130px 80px 90px 90px 130px 140px 130px !important;
 }
 
 .content-wrapper .mb-content{
- grid-template-columns:    100px 140px 120px 80px 100px 110px 100px 120px 120px !important;
+ grid-template-columns: 80px 140px 130px 80px 90px 90px 130px 140px 130px  !important;
 }
 
- .mbRowWrapper .live-body-row{
- grid-template-columns:    100px 140px 120px 80px 100px 110px 100px 120px 120px !important;
+ #creatorProductsBody .live-body-rowT{
+ grid-template-columns: 80px 140px 130px 80px 90px 90px 130px 140px 130px  !important;
 }
 
 
 /***** Sales ******/
  .content-wrapper .sl-header{
- grid-template-columns:    140px 160px 210px 190px 140px 150px 170px !important;
+ grid-template-columns:   120px 140px 120px 130px 200px 140px 160px  !important;
 }
 
  .content-wrapper .sl-content{
- grid-template-columns:    140px 160px 210px 190px 140px 150px 170px !important;
+ grid-template-columns:     120px 140px 120px 130px 200px 140px 160px !important;
 }
 
- .withRowWrapper .live-body-row{
- grid-template-columns:    140px 160px 210px 190px 140px 150px 170px!important;
+ .sl-content #withRowWrapper .live-body-rowS{
+ grid-template-columns:   120px 140px 120px 130px 200px 140px 160px !important;
 }
 
+/*** wd section ***/
+.content-wrapper .wd-header {
+  grid-template-columns:  80px 100px 90px 90px 120px !important;
+}
+.content-wrapper .wd-content {
+  grid-template-columns:  80px 100px 90px 90px 120px !important;
+}
+
+.wd-content .live-body-rowW{
+  grid-template-columns:  80px 100px 90px 90px 120px!important;
+} 
 }

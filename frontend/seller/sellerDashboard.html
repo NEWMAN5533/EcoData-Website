@@ -420,37 +420,65 @@ themeButton.addEventListener("click", ()=> {
 
 
     
-
-
-        <!--table-section--->
-        <div class="total-title tableIntoView"> <p>Product Table</p></div>
+<!--table-section--->
+<div class="total-title tableIntoView"> <p>Products Table</p></div>
 <section class="table-section">
   <div class="table-title">
-    <p>All Ebooks</p>
+    <p>Track all products</p>
   </div>
   <div class="content-wrapper">
     <div class="table-scroll-area">
       <!-- TABLE HEADER -->
-      <div class="table-header mb-header">
-        <span>Cover</span>
-        <span>Title</span>
-        <span>Type</span>
-        <span>Price</span>
-        <span>Status</span>
-        <span>Sales</span>
-        <span>Views</span>
-        <span>Revenue</span>
-        <span>View</span>
+      <div class="table-header">
+        <span>COVER</span>
+        <span>TITLE</span>
+        <span>TYPE</span>
+        <span>PRICE</span>
+        <span>STATUS</span>
+        <span>SALES</span>
+        <span>UPDATED-AT</span>
+        <span>DATE-SUBMITTED</span>
+        <span>ACTION</span>
       </div>
 
-      <div class="main-row-content mb-content">
+      <div class="main-row-content">
+        <p id="empty-body" hidden>products not loaded yet</p>
         <div class="row-wrapper" id="creatorProductsBody">
           <!-- dynamic rows -->
+          <div class="live-body-rowT" style="display: none;">
+            <small>10</small>
+            <small>10</small>
+            <small>10</small>
+            <small>10</small>
+            <small>10</small>
+            <small>10</small>
+            <small>10</small>
+            <small>10</small>
+            <small>10</small>
+          </div>
+          <div class="live-body-rowT" style="display: none;">
+            <small>ORD-23422</small>
+            <small>THE MAN</small>
+            <small>STORY</small>
+            <small>100.94</small>
+            <small>Pending</small>
+            <small>3</small>
+            <small>10/07/2026</small>
+            <small>1/06/2026</small>
+            <small>click</small>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+
+
+
+
+
+
 
       <!--Sales-section--->
         <div class="total-title tableIntoView"> <p>Sales</p></div>
@@ -464,20 +492,29 @@ themeButton.addEventListener("click", ()=> {
   <div class="content-wrapper">
     <div class="table-scroll-area">
       <!-- TABLE HEADER -->
-      <div class="table-header sl-header">
-        <span>Order ID</span>
-        <span>Product</span>
-        <span>Buyer</span>
-        <span>Amount</span>
-        <span>platform Fee</span>
-        <span>Creator Share</span>
-        <span>Date</span>
+      <div class="sl-header">
+        <span>PROD-ID</span>
+        <span>PROD-NAME</span>
+        <span>BUYER</span>
+        <span>AMOUNT</span>
+        <span>PLATFORM FEE</span>
+        <span>CREATOR SHARE</span>
+        <span>DATE</span>
       </div>
 
-      <div class="main-row-content sl-content">
+      <div class="sl-content">
         <p id="withEmpty-body" hidden>No sales yet</p>
         <div class="row-wrapper" id="withRowWrapper">
           <!-- dynamic rows -->
+          <div class="live-body-rowS" style="display: none;">
+            <small>10</small>
+            <small>10</small>
+            <small>10</small>
+            <small>10</small>
+            <small>10</small>
+            <small>10</small>
+            <small>10</small>
+          </div>
         </div>
       </div>
     </div>
@@ -500,18 +537,25 @@ themeButton.addEventListener("click", ()=> {
   <div class="content-wrapper ">
     <div class="table-scroll-area">
       <!-- TABLE HEADER -->
-      <div class="table-header wd-header">
+      <div class="wd-header">
         <span>Amount</span>
         <span>Requested</span>
-        <span>Approved</span>
-        <span>Paid</span>
+        <span>Approved?</span>
+        <span>Paid?</span>
         <span>Reference</span>
       </div>
 
-      <div class="main-row-content wd-content">
+      <div class="wd-content">
         <p id="empty-body" hidden>No withdrawals yet</p>
-        <div class="row-wrapper" id="withRowWrapper">
+        <div class="row-wrapper" id="wd-RowWrapper">
           <!-- dynamic rows -->
+          <div class="live-body-rowW" style="display: none;">
+            <small>10</small>
+            <small>10</small>
+            <small>10</small>
+            <small>10</small>
+            <small>10</small>
+          </div>
         </div>
       </div>
     </div>
