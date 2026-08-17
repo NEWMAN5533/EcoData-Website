@@ -1,4 +1,4 @@
-// UPDATED AT 2nd/Aug, 2026 [BACKUP MAIN.JS]
+// UPDATED AT 17th/Aug, 2026 [BACKUP MAIN.JS]
 
 // --- Firebase Imports ---
 import { auth, db } from "./firebase-config.js";
@@ -1016,9 +1016,9 @@ function activateTrackers() {
 
 // un activate trackers when no orders
 function unActivateTrackers(){
- const firstTracker = document.getElementById("deliveryTracker1").style.display = "none";
+ const firstTracker = document.getElementById("deliveryTracker1").style.display = "flex";
 
- const secondTracker = document.getElementById("deliveryTracker2").style.display = 'none';
+ const secondTracker = document.getElementById("deliveryTracker2").style.display = 'flex';
 }
 
 //=================================
