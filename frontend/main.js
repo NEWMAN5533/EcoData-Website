@@ -1490,9 +1490,8 @@ const normalized = {
     </span>
 
     <span class="status-cell">
-      <span class="status-badge ${getStatusClass(normalized.status)}">
-        ${getStatusIcon(order.status)}
-        <span>${normalized.status}</span>
+      <sp class="status-badge ${getStatusClass(normalized.status)}">
+        ${normalized.status}
       </span>
     </span>
   `;
