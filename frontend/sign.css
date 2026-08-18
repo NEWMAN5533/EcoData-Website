@@ -74,7 +74,7 @@
 
     .navigation .navigation-left{
       display: flex;
-      width: 50%;
+      width: max-content;
       height: 100%;
       align-items: center;
       justify-content: start;
@@ -82,9 +82,19 @@
     }
 
     .navigation-left img{
-      width: 3.4rem;
-      height: 3.4rem;
-    }
+  width: 6rem !important;
+  height: 5.6rem !important;
+  margin-left: -1rem;
+  margin-top: .7rem;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+  
+
 
     .signUp-container .grid-container{
       width: 100%;
