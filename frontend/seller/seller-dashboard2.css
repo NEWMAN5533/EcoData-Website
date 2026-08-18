@@ -267,8 +267,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
       align-items: center;
       justify-content: space-between;
       padding: .1rem;
-      background: linear-gradient(135deg, var(--darkMode-bg-cl), var(--darkMode-bg-cl));
-    
+      background: var(--welcome-card-bg-2);
 
       border-top: 1px solid var(--thin-border);
       box-shadow: 0 10px 40px rgba(26, 25, 25, 0.99);
@@ -533,7 +532,6 @@ BOTTOM NAVIGATION BAR STYLE CSS
   justify-items: center;
   align-items: center;
   gap: .13rem;
-  background: var(--primary-cl);
   backdrop-filter: blur(18px);
   border-end-end-radius: .2rem;
   border-end-start-radius: .2rem;
@@ -544,10 +542,19 @@ BOTTOM NAVIGATION BAR STYLE CSS
   box-shadow: 0 2px 6px rgba(0,0,0,0.13);
 }
 
+
+
 .dark-mode .table-section{
-  background: var(--darkMode-bg-cl);
+  background: var(--darkMode-bg-cl) !important;
   box-shadow: 0 10px  20px rgba(0,0,0,0.36);
   border: 1px solid var(--thin-border);
+}
+
+@media screen and (min-width: 768px) {
+  .table-section,
+  .table-section .table-title{
+    background: var(--welcome-card-bg-2);
+  }
 }
 
 .table-section .table-title{
@@ -566,6 +573,11 @@ BOTTOM NAVIGATION BAR STYLE CSS
 .dark-mode .table-section .table-title{
    background: linear-gradient(135deg, var(--darkMode-bg-cl), var(--background-cl-1));
    border: 1px solid var(--thin-border);
+}
+
+.dark-mode .table-title{
+  background: var(--darkMode-bg-cl) !important;
+  border: 1px solid var(--thin-border);
 }
 
 .table-title p{
@@ -619,18 +631,23 @@ BOTTOM NAVIGATION BAR STYLE CSS
   font-weight: 500;
   font-size: .84rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background: var(--primary-cl); /* needs a background when sticky */
   font-family: system-ui, sans-serif;
   padding: .5rem 0;
   width: 100%;
-  border-bottom: 1px solid var(--text-cl-2);
   min-width: max-content; /* prevents collapsing on narrow viewports */
 }
 
 .dark-mode .content-wrapper .table-header{
   background: var(--darkMode-bg-cl);
-  border-bottom: 1px solid var(--thin-border);
+  border-bottom: none !important;
   color:var(--primary-cl);
+}
+
+@media screen and (min-width: 768px) {
+  .content-wrapper .table-header{
+    background: var(--welcome-card-bg-2);
+    border-bottom: 1px solid var(--thin-border);
+  }
 }
 
 
@@ -690,9 +707,25 @@ BOTTOM NAVIGATION BAR STYLE CSS
  min-width: max-content;
  width: 100%;
  height: 2.2rem;
- border-bottom: 1px solid rgba(80, 79, 79, 0.308);
- grid-template-columns:   110px 80px 90px 100px 100px 100px 110px 150px 120px;
+ border-bottom: 1px solid var(--thin-border);
+ grid-template-columns:   110px 80px 90px 100px 100px 100px 110px 150px 120px !important;
  display: grid;
+}
+
+
+/*** DARK MODE LIVE ROW BORDER-BOTTOM ***/
+.dark-mode #creatorProductsBody .live-body-rowT,
+.dark-mode .live-body-rowS,
+.dark-mode #wd-RowWrapper .live-body-rowW{
+  border-bottom: 1px solid var(--thin-border) !important;
+}
+
+@media screen and (min-width: 768px) {
+#creatorProductsBody .live-body-rowT,
+.live-body-rowS,
+#wd-RowWrapper .live-body-rowW{
+  border-bottom: 1px solid var(--thin-border) !important;
+}
 }
 
 .live-body-rowT small,
@@ -745,12 +778,20 @@ BOTTOM NAVIGATION BAR STYLE CSS
   font-weight: 500;
   font-size: .84rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background: var(--primary-cl) !important; /* needs a background when sticky */
+  background: var(--welcome-card-bg-2) !important; /* needs a background when sticky */
   font-family: system-ui, sans-serif;
   padding: .5rem 0;
   width: 100%;
-  border-bottom: 1px solid var(--text-cl-2) !important;
+  border-bottom: none !important;
   min-width: max-content; /* prevents collapsing on narrow viewports */
+}
+
+
+@media screen and (min-width: 768px) {
+  .content-wrapper .sl-header{
+    background: var(--welcome-card-bg-2) !important;
+    border-bottom: 1px solid var(--thin-border) !important;
+  }
 }
 
 
@@ -820,13 +861,20 @@ BOTTOM NAVIGATION BAR STYLE CSS
   color: var(--text-cl-2);
   font-weight: 600;
   font-size: .8rem;
-  background: var(--darkMode-bg-cl); /* needs a background when sticky */
+  background: var(--welcome-card-bg-2) !important; /* needs a background when sticky */
   font-family: system-ui, sans-serif;
   padding: .5rem 0;
   width: 100%;
-  border-bottom: 1px solid var(--text-cl-2) !important;
+  border-bottom: none !important;
   opacity: .8;
   min-width: max-content; /* prevents collapsing on narrow viewports */
+  }
+
+  .dark-mode .wd-header,
+  .dark-mode .sl-header{
+    background: var(--darkMode-bg-cl) !important;
+    border-bottom: none !important;
+    color: var(--primary-cl) !important;
   }
 
 /****** main body***********/
@@ -851,7 +899,7 @@ justify-items: center;
  min-width: max-content;
  width: 100%;
  height: 2.2rem;
- border-bottom: 1px solid var(--text-cl-2) !important;
+ border-bottom: 1px solid var(--thin-border) !important;
  grid-template-columns:    80px 120px 110px 110px 150px !important;
  display: grid;
   }
@@ -890,7 +938,7 @@ justify-items: center;
   justify-items: center;
   align-items: center;
   gap: .13rem;
-  background: var(--primary-cl);
+  background: var(--welcome-card-bg-2);
   backdrop-filter: blur(18px);
   border-end-end-radius: .2rem;
   border-end-start-radius: .2rem;
@@ -898,10 +946,18 @@ justify-items: center;
   border-start-end-radius: .2rem;
   border: 1px solid var(--thin-border);
   overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.13);
 }
 
 .dark-mode .wd-history{
   background: var(--darkMode-bg-cl) !important;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.36) !important;
+}
+
+@media screen and (min-width: 768px) {
+  .wd-history{
+    background: var(--welcome-card-bg-2);
+  }
 }
 
 .wd-history .tie{
@@ -934,6 +990,13 @@ justify-items: center;
   text-transform: uppercase;
 }
 
+
+@media screen and (min-width: 768px) {
+  .wd-history .wd-header{
+    background: var(--welcome-card-bg-2);
+    border-bottom: 1px solid var(--thin-border) !important;
+  }
+}
 
 
 .wd-history .content-wrapper{
