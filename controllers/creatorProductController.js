@@ -465,7 +465,7 @@ export async function deleteCreatorProduct(req, res) {
       String(req.params.productId || "").trim();
 
     const sellerId =
-      String(req.body.sellerId || "").trim();
+      String(req.query.sellerId || "").trim();
 
     if (!productId) {
       return res.status(400).json({
@@ -515,20 +515,56 @@ export async function deleteCreatorProduct(req, res) {
     //================================
     // PREVENT DELETING SOLD PRODUCTS
     //================================
+    const sales =
+    Number(product.sales || 0);
 
-    if (Number(product.sales || 0) > 0) {
+    if(sales > 0){
       return res.status(400).json({
         success: false,
-        message:
-          "Products with sales cannot be deleted."
+        message: "This product cannot be deleted because it has sales."
       });
     }
 
+    //===============================
+    // DELETE FILES FROM CLOUDINARY
+    //===============================
+    if(product.coverPublicId){
+      try{
+        await cloudinary.uploader.destroy(product.coverPublicId, {
+          resource_type: "image"
+        }
+      );
+
+      } catch(error){
+        console.error("Cover deletion failed:", error);
+      }
+    }
+
+    //==========================
+    // DELETE PRODUCT FILE
+    //==========================
+    if(product.filePublicId){
+      try{
+        await cloudinary.destroy(
+          product.filePublicId,
+          {
+            resource_type: "raw"
+          }
+        );
+      } catch(error){
+        console.error("Product file deletion failed:", error);
+      }
+    }
+
     //================================
-    // DELETE
+    // DELETE FIRESTORE PRODUCT
     //================================
 
     await productRef.delete();
+
+    console.log(
+      "Product deleted successfully:", productId
+    );
 
     return res.status(200).json({
       success: true,
