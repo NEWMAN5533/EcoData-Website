@@ -259,9 +259,299 @@ export async function getCreatorProducts(req, res){
 } 
 
 
-//========================
-// GET CREATOR DASHBOARD
-//========================
+//====================================
+// UPDATE CREATOR PRODUCT
+//====================================
+export async function updateCreatorProduct(req, res) {
+  try {
+
+    const productId =
+      String(req.params.productId || "").trim();
+
+    const sellerId =
+      String(req.body.sellerId || "").trim();
+
+    if (!productId) {
+      return res.status(400).json({
+        success: false,
+        message: "Product ID is required."
+      });
+    }
+
+    if (!sellerId) {
+      return res.status(400).json({
+        success: false,
+        message: "Seller ID is required."
+      });
+    }
+
+    //================================
+    // FIND PRODUCT
+    //================================
+
+    const productRef =
+      db.collection("products").doc(productId);
+
+    const productSnap =
+      await productRef.get();
+
+    if (!productSnap.exists) {
+      return res.status(404).json({
+        success: false,
+        message: "Product not found."
+      });
+    }
+
+    const product =
+      productSnap.data();
+
+    //================================
+    // OWNERSHIP CHECK
+    //================================
+
+    if (product.sellerId !== sellerId) {
+      return res.status(403).json({
+        success: false,
+        message: "You are not allowed to edit this product."
+      });
+    }
+
+    //================================
+    // GET UPDATE VALUES
+    //================================
+
+    const {
+      title,
+      description,
+      category,
+      price,
+      type,
+      youtubeUrl,
+      affiliateUrl
+    } = req.body;
+
+    const updates = {};
+
+    if (title !== undefined) {
+
+      if (!String(title).trim()) {
+        return res.status(400).json({
+          success: false,
+          message: "Product title cannot be empty."
+        });
+      }
+
+      updates.title =
+        String(title).trim();
+    }
+
+    if (description !== undefined) {
+
+      if (!String(description).trim()) {
+        return res.status(400).json({
+          success: false,
+          message: "Product description cannot be empty."
+        });
+      }
+
+      updates.description =
+        String(description).trim();
+    }
+
+    if (category !== undefined) {
+      updates.category =
+        String(category).trim() || "Other";
+    }
+
+    if (price !== undefined) {
+
+      const productPrice =
+        Number(price);
+
+      if (
+        !Number.isFinite(productPrice) ||
+        productPrice < 0
+      ) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid product price."
+        });
+      }
+
+      updates.price =
+        productPrice;
+    }
+
+    //================================
+    // TYPE
+    //================================
+
+    if (type !== undefined) {
+
+      const validTypes = [
+        "ebook",
+        "notes",
+        "video",
+        "template",
+        "zip",
+        "affiliate"
+      ];
+
+      if (!validTypes.includes(type)) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid product type."
+        });
+      }
+
+      updates.type = type;
+    }
+
+    //================================
+    // TYPE-SPECIFIC URLS
+    //================================
+
+    if (youtubeUrl !== undefined) {
+      updates.youtubeUrl =
+        String(youtubeUrl).trim() || null;
+    }
+
+    if (affiliateUrl !== undefined) {
+      updates.affiliateUrl =
+        String(affiliateUrl).trim() || null;
+    }
+
+    //================================
+    // UPDATED TIME
+    //================================
+
+    updates.updatedAt =
+      FieldValue.serverTimestamp();
+
+    //================================
+    // SAVE
+    //================================
+
+    await productRef.update(updates);
+
+    return res.status(200).json({
+      success: true,
+      message: "Product updated successfully.",
+      productId
+    });
+
+  } catch (error) {
+
+    console.error(
+      "Update creator product error:",
+      error
+    );
+
+    return res.status(500).json({
+      success: false,
+      message: "Unable to update product."
+    });
+  }
+}
+
+
+//====================================
+// DELETE CREATOR PRODUCT
+//====================================
+export async function deleteCreatorProduct(req, res) {
+  try {
+
+    const productId =
+      String(req.params.productId || "").trim();
+
+    const sellerId =
+      String(req.body.sellerId || "").trim();
+
+    if (!productId) {
+      return res.status(400).json({
+        success: false,
+        message: "Product ID is required."
+      });
+    }
+
+    if (!sellerId) {
+      return res.status(400).json({
+        success: false,
+        message: "Seller ID is required."
+      });
+    }
+
+    //================================
+    // FIND PRODUCT
+    //================================
+
+    const productRef =
+      db.collection("products").doc(productId);
+
+    const productSnap =
+      await productRef.get();
+
+    if (!productSnap.exists) {
+      return res.status(404).json({
+        success: false,
+        message: "Product not found."
+      });
+    }
+
+    const product =
+      productSnap.data();
+
+    //================================
+    // OWNERSHIP CHECK
+    //================================
+
+    if (product.sellerId !== sellerId) {
+      return res.status(403).json({
+        success: false,
+        message: "You are not allowed to delete this product."
+      });
+    }
+
+    //================================
+    // PREVENT DELETING SOLD PRODUCTS
+    //================================
+
+    if (Number(product.sales || 0) > 0) {
+      return res.status(400).json({
+        success: false,
+        message:
+          "Products with sales cannot be deleted."
+      });
+    }
+
+    //================================
+    // DELETE
+    //================================
+
+    await productRef.delete();
+
+    return res.status(200).json({
+      success: true,
+      message: "Product deleted successfully.",
+      productId
+    });
+
+  } catch (error) {
+
+    console.error(
+      "Delete creator product error:",
+      error
+    );
+
+    return res.status(500).json({
+      success: false,
+      message: "Unable to delete product."
+    });
+  }
+}
+
+
+
 // ==========================================
 // GET CREATOR DASHBOARD
 // ==========================================
