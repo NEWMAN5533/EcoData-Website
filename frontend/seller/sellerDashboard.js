@@ -2,7 +2,14 @@
 // SELLER CONFIG
 //======================
 const SELLER_ID = "TES_SELLER";
-const CREATOR_PRODUCTS_API = "https://ecodata-app.onrender.com/api/creator/products";
+
+const API_BASE = "https://ecodata-app.onrender.com"
+const CREATOR_PRODUCTS_API =
+`${API_BASE}/api/creator/products`;
+
+document.addEventListener("DOMContentLoaded",()=>{
+  loadCreatorProducts(sellerId); //later user.uid
+})
 
 //==================================
 // PRODUCT TYPE + CATEGORY SELECTOR
@@ -39,11 +46,18 @@ if(typeButton && typeSheet){
 }
 
 // Outside click closes sheet
-window.addEventListener("click", function(e){
-  if(!typeButton.contains(e.target) && !typeSheet.contains(e.target)){
+window.addEventListener("click", function(e) {
+
+  if (
+    typeButton &&
+    typeSheet &&
+    !typeButton.contains(e.target) &&
+    !typeSheet.contains(e.target)
+  ) {
     typeSheet.style.display = "none";
   }
-})
+
+});
 
 
 //=========================
@@ -89,10 +103,17 @@ if(categoryButton && categorySheet ){
 }
 
 // Outside click closes the sheet
-window.addEventListener("click", function(e){
-  if(!categoryButton.contains(e.target) && !categorySheet.contains(e.target)){
+window.addEventListener("click", function(e) {
+
+  if (
+    categoryButton &&
+    categorySheet &&
+    !categoryButton.contains(e.target) &&
+    !categorySheet.contains(e.target)
+  ) {
     categorySheet.style.display = "none";
   }
+
 });
 
 //======================
@@ -362,7 +383,7 @@ if(uploadForm){
     if(youtube){
       formData.append(
         "youtubeUrl",
-        youtubeUrl
+        youtube
       );
     }
 
@@ -372,7 +393,7 @@ if(uploadForm){
     if(affiliate){
       formData.append(
         "affiliateUrl",
-        affiliateUrl
+        affiliate
       );
     }
 
@@ -387,80 +408,511 @@ if(uploadForm){
     //==================
     // SEND
     //==================
-    try{
-      const response = await fetch(CREATOR_PRODUCTS_API, {
-        method: "POST",
-        body: formData
-      }
+   try {
+
+  const response = await fetch(
+    CREATOR_PRODUCTS_API,
+    {
+      method: "POST",
+      body: formData
+    }
+  );
+
+  const result = await response.json();
+
+  console.log("Upload response:", result);
+
+  if (!response.ok || !result.success) {
+    throw new Error(
+      result.message ||
+      "Product upload failed."
     );
+  }
 
-    const result =
-    await response.json();
+  showSnackBar(
+    "Product submitted for approval.",
+    "success"
+  );
 
-    console.log("Upload response:", result);
+  uploadForm.reset();
 
-    if(!response.ok){
-      throw new Error(
-        result.message ||
-        "product upload failed."
-      );
-    }
-    showSnackBar("Product submitted for approval.");
-    uploadForm.reset();
+  // reset selectors
+  document.getElementById("productType").value = "";
+  document.getElementById("productCategory").value = "";
 
+  document.getElementById(
+    "productTypeButton"
+  ).textContent = "Product Type";
 
-    //====================
-    // RESTORE DEFAULT VALUE
-    //====================
-    document.getElementById("productType").value = "";
+  document.getElementById(
+    "productCategoryButton"
+  ).textContent = "Product Category";
 
-    document.getElementById("productCategory").value = "";
+  // Refresh
+  loadCreatorProducts(SELLER_ID);
 
-    document.getElementById("productTypeButton").textContent = "Product Type";
+} catch (error) {
 
-    document.getElementById("productCategoryButton").textContent = "Product Category";
+  console.error("Upload error:", error);
 
-    // Refresh dashboard
-    loadCreatorProducts();
+  showSnackBar(
+    error.message ||
+    "Unable to upload product.",
+    "error"
+  );
 
-    } catch(error){
-    console.error("Upload error", error);
-    showSnackBar(error.message || "Unable to upload product.");
-    }
+}
   } 
 );
 }
 
-//===============================
+
+
+// ==========================================
+// ESCAPE HTML
+// ==========================================
+
+function escapeHtml(value = "") {
+
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+
+
+// ==========================================
+// FORMAT PRODUCT TYPE
+// ==========================================
+
+function formatProductType(type) {
+
+  const types = {
+    ebook: "E-Book",
+    notes: "Notes",
+    video: "Video",
+    template: "Template",
+    zip: "ZIP",
+    affiliate: "Affiliate"
+  };
+
+  return types[type] || type || "-";
+
+}
+
+
+// ==========================================
+// FORMAT STATUS
+// ==========================================
+
+function formatStatus(status) {
+
+  const value =
+    String(status || "pending").toLowerCase();
+
+  const statuses = {
+    pending: "Pending",
+    published: "Published",
+    rejected: "Rejected",
+    suspended: "Suspended",
+    draft: "Draft"
+  };
+
+  return statuses[value] || value;
+
+}
+
+
+// ==========================================
 // LOAD CREATOR PRODUCTS
-//===============================
-async function loadCreatorProducts(){
-  try{
-    const url = `${CREATOR_PRODUCTS_API}?sellerId=${encodeURIComponent(SELLER_ID)}`;
+// ==========================================
 
-    console.log("Loading creator products...");
+async function loadCreatorProducts(sellerId) {
 
-    const response = await fetch(url);
+  const productsBody =
+    document.getElementById("creatorProductsBody");
 
-    const result = await response.json();
+  const emptyBody =
+    document.getElementById("empty-body");
 
-    console.log("Creator products response:", result);
-    if(!response.ok || !result.success){
-      throw new Error(
-        result.message || "Unable to load products."
-      );
+  if (!productsBody) return;
+
+
+  try {
+
+    // =====================================
+    // LOADING STATE
+    // =====================================
+
+    productsBody.innerHTML = `
+      <div class="live-body-rowT loading-row">
+        <small>Loading products...</small>
+      </div>
+    `;
+
+    if (emptyBody) {
+      emptyBody.hidden = true;
     }
 
-    const products = result.products || [];
 
-    // Save globally
+    // =====================================
+    // VALIDATE SELLER ID
+    // =====================================
+
+    if (!sellerId) {
+
+      throw new Error(
+        "Seller account could not be identified."
+      );
+
+    }
+
+
+    // =====================================
+    // FETCH PRODUCTS
+    // =====================================
+
+    const response = await fetch(
+      `${API_BASE}/api/creator/products?sellerId=${encodeURIComponent(sellerId)}`
+    );
+
+    const data =
+      await response.json();
+
+
+    if (!response.ok || !data.success) {
+
+      throw new Error(
+        data.message ||
+        "Unable to load products."
+      );
+
+    }
+
+
+    const products =
+      data.products || [];
+
+    // call
     updateSellerAnalytics(products);
-    // Render products table
-    renderCreatorProducts(products);
 
-  } catch(error){
-    console.error("Creator products loading error", error);
+
+    // =====================================
+    // NO PRODUCTS
+    // =====================================
+
+    if (products.length === 0) {
+
+      productsBody.innerHTML = "";
+
+      if (emptyBody) {
+
+        emptyBody.hidden = false;
+
+        emptyBody.textContent =
+          "No products submitted yet.";
+
+      }
+
+      return;
+
+    }
+
+
+    // =====================================
+    // RENDER PRODUCTS
+    // =====================================
+
+    productsBody.innerHTML = "";
+
+
+    products.forEach(product => {
+
+      const row =
+        document.createElement("div");
+
+      row.className =
+        "live-body-rowT product-row";
+
+
+      // ===================================
+      // COVER
+      // ===================================
+
+      const cover =
+        document.createElement("small");
+
+      if (product.coverUrl) {
+
+        const img =
+          document.createElement("img");
+
+        img.src =
+          product.coverUrl;
+
+        img.alt =
+          product.title || "Product";
+
+        img.className =
+          "product-cover";
+
+        img.loading =
+          "lazy";
+
+        cover.appendChild(img);
+
+      } else {
+
+        cover.innerHTML = `
+          <div class="no-cover">
+            <i class="ri-image-line"></i>
+          </div>
+        `;
+
+      }
+
+
+      // ===================================
+      // TITLE
+      // ===================================
+
+      const title =
+        document.createElement("small");
+
+      title.textContent =
+        product.title || "Untitled";
+
+
+      // ===================================
+      // TYPE
+      // ===================================
+
+      const type =
+        document.createElement("small");
+
+      type.textContent =
+        formatProductType(
+          product.type ||
+          product.productType ||
+          product.product_type);
+
+          console.log("PRODUCT TYPE:",{
+            id: product.id,
+            type: product.type,
+            productTyp: product.productType
+          });
+
+
+      // ===================================
+      // PRICE
+      // ===================================
+
+      const price =
+        document.createElement("small");
+
+      price.textContent =
+        `GHS ${Number(product.price || 0).toFixed(2)}`;
+
+
+      // ===================================
+      // STATUS
+      // ===================================
+
+      const status =
+        document.createElement("small");
+
+      const statusValue =
+        String(
+          product.status || "pending"
+        ).toLowerCase();
+
+      status.textContent =
+        formatStatus(statusValue);
+
+      status.className =
+        `status-${statusValue}`;
+
+
+      // ===================================
+      // SALES
+      // ===================================
+
+      const sales =
+        document.createElement("small");
+
+      sales.textContent =
+        Number(product.sales || 0);
+
+
+      // ===================================
+      // UPDATED AT
+      // ===================================
+
+      const updatedAt =
+        document.createElement("small");
+
+      updatedAt.textContent =
+        formatDate(product.updatedAt);
+
+
+      // ===================================
+      // DATE SUBMITTED
+      // ===================================
+
+      const createdAt =
+        document.createElement("small");
+
+      createdAt.textContent =
+        formatDate(product.createdAt);
+
+
+      // ===================================
+      // ACTION
+      // ===================================
+
+      const action =
+        document.createElement("small");
+
+      const button =
+        document.createElement("button");
+
+      button.className =
+        "product-action-btn";
+
+      button.dataset.productId =
+        product.id || product.productId || "";
+
+      button.innerHTML =
+        `<i class="ri-more-2-fill"></i>`;
+
+      action.appendChild(button);
+
+
+      // ===================================
+      // ADD CELLS
+      // ===================================
+
+      row.appendChild(cover);
+      row.appendChild(title);
+      row.appendChild(type);
+      row.appendChild(price);
+      row.appendChild(status);
+      row.appendChild(sales);
+      row.appendChild(updatedAt);
+      row.appendChild(createdAt);
+      row.appendChild(action);
+
+
+      productsBody.appendChild(row);
+
+    });
+
+
+    // =====================================
+    // PRODUCT ACTIONS
+    // =====================================
+
+    setupProductActions();
+
+
+  } catch (error) {
+
+    console.error(
+      "Load creator products error:",
+      error
+    );
+
+    productsBody.innerHTML = "";
+
+    if (emptyBody) {
+
+      emptyBody.hidden = false;
+
+      emptyBody.textContent =
+        error.message ||
+        "Unable to load products.";
+
+    }
+
   }
+
+}
+
+
+//=======================
+// FUNCTION DATE FORMATTER
+//=======================
+function formatDate(timestamp) {
+
+  if (!timestamp) {
+    return "-";
+  }
+
+  let date;
+
+  // Firestore Timestamp
+  if (
+    typeof timestamp === "object" &&
+    typeof timestamp.seconds === "number"
+  ) {
+
+    date = new Date(
+      timestamp.seconds * 1000
+    );
+
+  } else {
+
+    date = new Date(timestamp);
+
+  }
+
+  // Invalid date
+  if (isNaN(date.getTime())) {
+    return "-";
+  }
+
+  return date.toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric"
+  });
+}
+//===================
+// SETUP ACTION BTN
+//===================
+
+function setupProductActions() {
+
+  document
+    .querySelectorAll(".product-action-btn")
+    .forEach(button => {
+
+      button.addEventListener("click", () => {
+
+        const productId =
+          button.dataset.productId;
+
+        if (!productId) return;
+
+        console.log(
+          "Selected product:",
+          productId
+        );
+
+        // We'll add:
+        // View product
+        // Edit product
+        // Delete product
+        // View sales
+        // etc.
+
+      });
+
+    });
+
 }
 
 //====================================
@@ -590,106 +1042,144 @@ function setMoney(id, value){
   }
 }
 
-//=========================
-// RENDER CREATOR PRODUCTS
-//=========================
-function renderCreatorProducts(products){
-  const tableBody =
-  document.getElementById("creatorProductsBody");
 
-  if(!tableBody){
-    console.warn("Creator tsBody not found.");
+
+
+
+//=============================
+// RENDER SALES
+//=============================
+function renderSales(sales){
+  const wrapper =
+  document.getElementById("withRowWrapper");
+
+  const emptyBody = 
+  document.getElementById("withEmpty-body");
+
+  if(!wrapper) return;
+
+  wrapper.innerHTML = "";
+
+  if(!sales || sales.length === 0){
+    emptyBody.hidden = false;
     return;
   }
 
-  tableBody.innerHTML = "";
+    emptyBody.hidden = true;
 
-  if(!products.length){
+    sales.forEach(sale => {
+      const amount = Number(sale.amount || 0);
+      const platformFee = 
+      Number(sale.platformFee || 0);
+      const creatorShare = 
+      Number(sale.creatorShare ?? amount - platformFee);
 
-    tableBody.innerHTML = `
-    <div class="myEmpty-body">
-    No products uploaded yet.
-    </div>
-    `;
+      const row =
+      document.createElement("div");
+
+      row.className = "live-body-rowS";
+
+      row.innerHTML = `
+      <small>
+      ${sale.productId || "-"}
+      </small>
+
+      <small>
+        ${sale.productName || "-"}
+      </small>
+
+      <small>
+      ${sale.buyer || "-"}
+      </small>
+
+      <small>
+      GHS ${amount.toFixed(2)}
+      </small>
+
+      <small>
+      GHS ${platformFee.toFixed(2)}
+      </small>
+
+      <small>
+      GHS ${creatorShare.toFixed(2)}
+      </small>
+
+      <small>
+      ${formatDate(sale.createdAt)}
+      </small>
+      `;
+
+      wrapper.appendChild(row);
+    });
+}
+
+
+//=======================
+// WITHDRAWAL FUNCTION
+//=======================
+function renderWithdrawals(withdrawals){
+  const wrapper = 
+  document.getElementById("wd-RowWrapper");
+
+  if(!wrapper) return;
+
+  wrapper.innerHTML = "";
+
+  const emptyBody = wrapper.closest(".wd-content")
+  ?.querySelector("#empty-body");
+
+  if(!withdrawals || withdrawals.length === 0){
+    if(emptyBody){
+      emptyBody.hidden = false;
+    }
     return;
   }
 
-  products.forEach(product => {
+  if(emptyBody){
+    emptyBody.hidden = true;
+  }
 
+  withdrawals.forEach(withdrawal => {
     const row =
     document.createElement("div");
 
-    const status =
-    String(product.status || "pending").toLowerCase();
-
-    const price = 
-    Number(product.price || 0).toFixed(2);
-
-    const sales = 
-    Number(product.sales || 0);
-
-    row.className =
-    "live-body-rowT";
+    row.className = "live-body-rowW";
 
     row.innerHTML = `
-    <small class="product-cover-cell">
-
-    <img src=${escapeHTML(
-      product.coverUrl || ""
-    )}"
-    alt="${escapeHTML(product.title || "product")}"
-    class="product-cover">
-
-    </small>
-
-    <small class="product-title-cell">
-    ${escapeHTML(
-      product.title || "Untitled"
-    )}
+    <small>
+    GHS ${Number(withdrawal.amount || 0).toFixed(2)}
     </small>
 
     <small>
-    GHS ${price}
-    </small>
-
-    <small class="product-status status-${escapeHTML(status)}">
-    ${escapeHTML(status)}
+    ${formatDate(withdrawal.requestedAt)}
     </small>
 
     <small>
-    ${sales}
+    ${withdrawal.approved === true ? "Yes" : "No"}
     </small>
 
+    <small>
+    ${withdrawal.paid === true? "Yes" : "No"}
+    </small>
 
-    <button type="button" class="product-action"
-    data-product-id="${escapeHTML(product.productId)}"
-    >
-    View
-    </button>
+    <small>
+    ${withdrawal.reference || "pending"}
+    </small>
     `;
-    tableBody.appendChild(row);
+
+    wrapper.appendChild(row);
   });
 }
 
-//=======================
-// ESCAPE HTML
-//=======================
-function escapeHTML(value){
-
-  return String(value ?? "")
-  .replace(/&/g, "&amp;")
-  .replace(/</g, "&lt;")
-  .replace(/>/g, "&gt;")
-  .replace(/"/g, "&quot;")
-  .replace(/'/g, "&#039;");
-}
-
+//================================
+// LOAD THE SELLER DASHBOARD
+//================================
 
 //=============================
 // INITIALIZE SELLER DASHBOARD
 //=============================
 document.addEventListener("DOMContentLoaded", ()=> {
-  loadCreatorProducts();
+  
 });
 
 
