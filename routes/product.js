@@ -2,7 +2,10 @@ import express from "express";
 import upload from "../middleware/upload.js";
 import { 
   createProduct,
-  getCreatorProducts
+  getCreatorProducts,
+  getCreatorSales,
+  getCreatorWithdrawals,
+  getCreatorDashboard
 } from "../controllers/creatorProductController.js";
 
 const createProductRouter = express.Router();
@@ -18,6 +21,15 @@ createProduct
 // GET CREATOR PRODUCTS
 //======================
 createProductRouter.get("/",getCreatorProducts);
+
+
+createProductRouter.get("/dashboard",getCreatorDashboard);
+
+
+createProductRouter.get("/sales",getCreatorSales);
+
+
+createProductRouter.get("/withdrawals",getCreatorWithdrawals);
 
 
 export default createProductRouter;
