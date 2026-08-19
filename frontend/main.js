@@ -31,12 +31,11 @@ const API_BASE = (() => {
   return "https://ecodata-app.onrender.com"; // your deployed backend
 })();
 
-
 //=========================
 // LEADERBOARD START DATE
 //=========================
 const LEADERBOARD_START = new Date("2026-08-01");
-const LEADERBOARD_ENDS = new Date("2026-08-31 23:59:59");
+const LEADERBOARD_ENDS = new Date("2026-08-31T23:59:59");
 
 const leaderboardStartText = LEADERBOARD_START.toLocaleDateString("en-US", {
     month: "short",
@@ -44,16 +43,16 @@ const leaderboardStartText = LEADERBOARD_START.toLocaleDateString("en-US", {
 });
 
 const endTimeText = LEADERBOARD_ENDS.toLocaleDateString("en-US", {
-  month: "short",
-  day: "numeric",
-  year: "numeric"
+    month: "short",
+    day: "numeric",
+    year: "numeric"
 });
-
-
 
 //=========================
 // LEADERBOARD START DATE
 //=========================
+
+
 
 // ---------- GLOBAL VARIABLES ----------
 let STATUS_POLL_INTERVAL = 5000;
