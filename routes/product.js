@@ -5,7 +5,9 @@ import {
   getCreatorProducts,
   getCreatorSales,
   getCreatorWithdrawals,
-  getCreatorDashboard
+  getCreatorDashboard,
+  updateCreatorProduct,
+  deleteCreatorProduct
 } from "../controllers/creatorProductController.js";
 
 const createProductRouter = express.Router();
@@ -30,6 +32,11 @@ createProductRouter.get("/sales",getCreatorSales);
 
 
 createProductRouter.get("/withdrawals",getCreatorWithdrawals);
+
+
+creatorProductRouter.put("/:productId", updateCreatorProduct);
+
+creatorProductRouter.delete("/:productId", deleteCreatorProduct);
 
 
 export default createProductRouter;
