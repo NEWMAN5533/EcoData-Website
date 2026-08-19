@@ -547,9 +547,10 @@ async function loadCreatorProducts(sellerId) {
     // LOADING STATE
     // =====================================
 
-    productsBody.innerHTML = `
-      <div class="live-body-rowT loading-row">
-        <small>Loading products...</small>
+        productsBody.innerHTML = `
+      <div class="loading-products">
+        <div class="loading-spinner"></div>
+        <span>Loading products...</span>
       </div>
     `;
 
@@ -1240,5 +1241,4 @@ function showSnackBar(message, type = "info", duration = 4000) {
   }, duration);
 }
 // snackbar ends
-
 
