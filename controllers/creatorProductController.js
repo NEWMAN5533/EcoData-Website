@@ -124,14 +124,7 @@ export async function createProduct(req, res){
     }
   }
 
-  if(type === "video"){
-    if(!youtubeUrl && !file){
-      return res.status(400).json({
-        success: false,
-        message: "Provide a YouTube link or upload a video."
-      });
-    }
-  }
+
 
   if(type === "affiliate"){
     if(!affiliateUrl?.trim()){
@@ -264,3 +257,506 @@ export async function getCreatorProducts(req, res){
   });
 }
 } 
+
+
+//========================
+// GET CREATOR DASHBOARD
+//========================
+// ==========================================
+// GET CREATOR DASHBOARD
+// ==========================================
+export async function getCreatorDashboard(req, res) {
+  try {
+
+    const sellerId =
+      String(req.query.sellerId || "").trim();
+
+    if (!sellerId) {
+      return res.status(400).json({
+        success: false,
+        message: "SellerId is required."
+      });
+    }
+
+    console.log(
+      "Loading dashboard for seller:",
+      sellerId
+    );
+
+    // ======================================
+    // LOAD EVERYTHING IN PARALLEL
+    // ======================================
+
+    const [
+      productsSnapshot,
+      salesSnapshot,
+      withdrawalsSnapshot
+    ] = await Promise.all([
+
+      db
+        .collection("products")
+        .where("sellerId", "==", sellerId)
+        .get(),
+
+      db
+        .collection("sales")
+        .where("sellerId", "==", sellerId)
+        .get(),
+
+      db
+        .collection("withdrawals")
+        .where("sellerId", "==", sellerId)
+        .get()
+
+    ]);
+
+
+    // ======================================
+    // PRODUCTS
+    // ======================================
+
+    const products =
+      productsSnapshot.docs
+        .map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }))
+        .sort((a, b) => {
+
+          const getTime = value => {
+
+            if (!value) return 0;
+
+            if (
+              typeof value.toMillis === "function"
+            ) {
+              return value.toMillis();
+            }
+
+            if (
+              typeof value.seconds === "number"
+            ) {
+              return value.seconds * 1000;
+            }
+
+            const time =
+              new Date(value).getTime();
+
+            return Number.isNaN(time)
+              ? 0
+              : time;
+          };
+
+          return (
+            getTime(b.createdAt) -
+            getTime(a.createdAt)
+          );
+
+        });
+
+
+    const totalProducts =
+      products.length;
+
+
+    const publishedProducts =
+      products.filter(
+        product =>
+          String(product.status || "")
+            .toLowerCase() === "published"
+      ).length;
+
+
+    const pendingProducts =
+      products.filter(
+        product =>
+          String(product.status || "")
+            .toLowerCase() === "pending"
+      ).length;
+
+
+    // ======================================
+    // SALES
+    // ======================================
+
+    const sales =
+      salesSnapshot.docs
+        .map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }))
+        .sort((a, b) => {
+
+          const getTime = value => {
+
+            if (!value) return 0;
+
+            if (
+              typeof value.toMillis === "function"
+            ) {
+              return value.toMillis();
+            }
+
+            if (
+              typeof value.seconds === "number"
+            ) {
+              return value.seconds * 1000;
+            }
+
+            const time =
+              new Date(value).getTime();
+
+            return Number.isNaN(time)
+              ? 0
+              : time;
+          };
+
+          return (
+            getTime(b.createdAt) -
+            getTime(a.createdAt)
+          );
+
+        });
+
+
+    const totalSales =
+      sales.length;
+
+
+    // ======================================
+    // TOTAL EARNINGS
+    // ======================================
+
+    let totalEarnings = 0;
+
+    sales.forEach(sale => {
+
+      const creatorShare =
+        Number(sale.creatorShare || 0);
+
+      if (Number.isFinite(creatorShare)) {
+        totalEarnings += creatorShare;
+      }
+
+    });
+
+
+    // ======================================
+    // TOTAL VIEWS
+    // ======================================
+
+    let totalViews = 0;
+
+    products.forEach(product => {
+
+      const views =
+        Number(product.views || 0);
+
+      if (Number.isFinite(views)) {
+        totalViews += views;
+      }
+
+    });
+
+
+    // ======================================
+    // CONVERSION RATE
+    // ======================================
+
+    const conversionRate =
+      totalViews > 0
+        ? (totalSales / totalViews) * 100
+        : 0;
+
+
+    // ======================================
+    // WITHDRAWALS
+    // ======================================
+
+    const withdrawals =
+      withdrawalsSnapshot.docs
+        .map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }))
+        .sort((a, b) => {
+
+          const getTime = value => {
+
+            if (!value) return 0;
+
+            if (
+              typeof value.toMillis === "function"
+            ) {
+              return value.toMillis();
+            }
+
+            if (
+              typeof value.seconds === "number"
+            ) {
+              return value.seconds * 1000;
+            }
+
+            const time =
+              new Date(value).getTime();
+
+            return Number.isNaN(time)
+              ? 0
+              : time;
+          };
+
+          return (
+            getTime(b.requestedAt) -
+            getTime(a.requestedAt)
+          );
+
+        });
+
+
+    // ======================================
+    // PAID WITHDRAWALS
+    // ======================================
+
+    let withdrawalAmount = 0;
+
+    withdrawals.forEach(withdrawal => {
+
+      if (withdrawal.paid === true) {
+
+        const amount =
+          Number(withdrawal.amount || 0);
+
+        if (Number.isFinite(amount)) {
+          withdrawalAmount += amount;
+        }
+
+      }
+
+    });
+
+
+    // ======================================
+    // AVAILABLE BALANCE
+    // ======================================
+
+    const availableBalance =
+      Math.max(
+        0,
+        totalEarnings - withdrawalAmount
+      );
+
+
+    // ======================================
+    // RESPONSE
+    // ======================================
+
+    return res.status(200).json({
+
+      success: true,
+
+      dashboard: {
+
+        totalProducts,
+
+        publishedProducts,
+
+        pendingProducts,
+
+        totalSales,
+
+        totalEarnings:
+          Number(
+            totalEarnings.toFixed(2)
+          ),
+
+        availableBalance:
+          Number(
+            availableBalance.toFixed(2)
+          ),
+
+        conversionRate:
+          Number(
+            conversionRate.toFixed(2)
+          ),
+
+        views:
+          totalViews,
+
+        withdrawalAmount:
+          Number(
+            withdrawalAmount.toFixed(2)
+          )
+
+      },
+
+      products,
+
+      sales,
+
+      withdrawals
+
+    });
+
+
+  } catch (error) {
+
+    console.error(
+      "Get creator dashboard failed:",
+      error
+    );
+
+    return res.status(500).json({
+
+      success: false,
+
+      message:
+        "Unable to load dashboard."
+
+    });
+
+  }
+}
+//=======================
+// GET CREATOR SALES
+//=======================
+export async function getCreatorSales(req, res){
+
+  try{
+
+    const sellerId = String(req.query.sellerId || "").trim();
+
+    if(!sellerId) {
+      return res.status(400).json({
+        success: false,
+        message: "SellerId is required."
+      });
+    }
+    console.log("Loading sales for seller:", sellerId
+    );
+
+    const snapshot = await db
+    .collection("sales")
+    .where("sellerId", "==", sellerId)
+    .get();
+
+    const sales = snapshot.docs
+    .map(doc => {
+      const data = doc.data();
+
+      return{
+        id: doc.id,
+        ...data
+      };
+    }).sort((a,b) => {
+      const getTime = value => {
+        if(!value) return 0;
+
+        if(typeof value.toMillis === "function"){
+          return value.toMillis();
+        }
+
+        if(typeof value.seconds === "number"){
+          return value.seconds * 1000;
+        }
+
+        const time =
+        new Date(value).getTime();
+
+        return Number.isNaN(time)
+        ? 0
+        : time;
+      };
+
+      return (
+        getTime(b.createdAt) -
+        getTime(a.createdAt)
+      );
+    });
+
+    return res.status(200).json({
+      success: true,
+      count: sales.length,
+      sales
+    });
+    // Error block
+  } catch(error){
+    console.error(
+      "Get creator sales error:", error
+    );
+    
+    return res.status(500).json({
+      success: false,
+      message: "Unable to load creator sales."
+    });
+  }
+}
+
+//=======================
+// GET CREATOR WITHDRAWALS
+//==========================
+export async function getCreatorWithdrawals(req, res){
+  try{
+    const sellerId = String(req.query.sellerId || "").trim();
+
+    if(!sellerId){
+      return res.status(400).json({
+        success: false,
+        message: "SellerId is required."
+      });
+    }
+
+    const snapshot = await db
+    .collection("withdrawals")
+    .where("sellerId", "==", sellerId)
+    .get();
+
+    const withdrawals = snapshot.docs.map(doc => {
+      const data = doc.data();
+
+      return {
+        id: doc.id,
+        ...data
+      };
+    }).sort((a,b) => {
+
+      const getTime = value => {
+        if(!value) return 0;
+
+        if(typeof value.toMillis === "function"){
+          return value.toMillis();
+        }
+
+        if(typeof value.seconds === "number"){
+          return value.seconds * 1000;
+        }
+
+        const time =
+        new Date(value).getTime();
+
+        return Number.isNaN(time)
+        ? 0
+        : time;
+      };
+
+      return (
+        getTime(b.requestedAt) -
+        getTime(a.requestedAt)
+      );
+    });
+
+    return res.status(200).json({
+      success: true,
+      count: withdrawals.length,
+      withdrawals
+    });
+
+    // error block
+  } catch(error){
+    console.error("Get creator withdrawals error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Unable to load withdrawals."
+    });
+  }
+}
