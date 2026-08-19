@@ -683,14 +683,17 @@ async function loadCreatorProducts(sellerId) {
       // ===================================
       // TITLE
       // ===================================
-      function collapseTitle(title = "",
+      function collapseTitle(title,
         maxWords = 2){
+
+          if(!title) return "Untitled";
+
           const words = String(title).trim().split(/\s+/);
 
           if(words.length <= maxWords){
-            return title;
+            return words.join(" ");
           }
-          return words.slice(0, maxWords).join("") + "...";
+          return words.slice(0, maxWords).join(" ") + "...";
         }
       
        const title =
@@ -1061,6 +1064,9 @@ function formatDate(timestamp) {
 }
 
 
+//========================
+// SETUP ACTION BUTTON
+//========================
 function setupProductActions() {
 
   const buttons =
