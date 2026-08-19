@@ -34,9 +34,9 @@ createProductRouter.get("/sales",getCreatorSales);
 createProductRouter.get("/withdrawals",getCreatorWithdrawals);
 
 
-creatorProductRouter.put("/:productId", updateCreatorProduct);
+createProductRouter.put("/:productId", updateCreatorProduct);
 
-creatorProductRouter.delete("/:productId", deleteCreatorProduct);
+createProductRouter.delete("/:productId", deleteCreatorProduct);
 
 
 export default createProductRouter;
