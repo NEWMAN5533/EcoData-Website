@@ -7,6 +7,8 @@ const API_BASE = "https://ecodata-app.onrender.com"
 const CREATOR_PRODUCTS_API =
 `${API_BASE}/api/creator/products`;
 
+let creatorProducts = [];
+
 document.addEventListener("DOMContentLoaded",()=>{
   loadCreatorProducts(SELLER_ID); //later user.uid
 })
@@ -597,6 +599,8 @@ async function loadCreatorProducts(sellerId) {
     const products =
       data.products || [];
 
+    creatorProducts = products;
+
     // call
     updateSellerAnalytics(products);
 
@@ -807,27 +811,157 @@ title.appendChild(titleWrapper);
         formatDate(product.createdAt);
 
 
-      // ===================================
-      // ACTION
-      // ===================================
+  // ===================================
+// ACTION MENU
+// ===================================
 
-      const action =
-        document.createElement("small");
+const action =
+  document.createElement("small");
 
-      const button =
-        document.createElement("button");
+action.className =
+  "product-action-cell";
 
-      button.className =
-        "product-action-btn";
+const actionWrapper =
+  document.createElement("div");
 
-      button.dataset.productId =
-        product.id || product.productId || "";
+actionWrapper.className =
+  "product-action-wrapper";
 
-      button.innerHTML =
-        `<i class="ri-more-2-fill"></i>`;
 
-      action.appendChild(button);
+// ================================
+// THREE-DOT BUTTON
+// ================================
 
+const button =
+  document.createElement("button");
+
+button.className =
+  "product-action-btn";
+
+button.type =
+  "button";
+
+button.dataset.productId =
+  product.id || product.productId || "";
+
+button.innerHTML =
+  `<i class="ri-more-2-fill"></i>`;
+
+
+// ================================
+// ACTION MENU
+// ================================
+
+const menu =
+  document.createElement("div");
+
+menu.className =
+  "product-action-menu";
+
+
+// Edit
+const editButton =
+  document.createElement("button");
+
+editButton.className =
+  "product-menu-item";
+
+editButton.dataset.action =
+  "edit";
+
+editButton.innerHTML = `
+  <i class="ri-edit-line"></i>
+  <span>Edit Product</span>
+`;
+
+
+// View
+const viewButton =
+  document.createElement("button");
+
+viewButton.className =
+  "product-menu-item";
+
+viewButton.dataset.action =
+  "view";
+
+viewButton.innerHTML = `
+  <i class="ri-eye-line"></i>
+  <span>View Product</span>
+`;
+
+
+// Sales
+const salesButton =
+  document.createElement("button");
+
+salesButton.className =
+  "product-menu-item";
+
+salesButton.dataset.action =
+  "sales";
+
+salesButton.innerHTML = `
+  <i class="ri-bar-chart-line"></i>
+  <span>View Sales</span>
+`;
+
+
+// Duplicate
+const duplicateButton =
+  document.createElement("button");
+
+duplicateButton.className =
+  "product-menu-item";
+
+duplicateButton.dataset.action =
+  "duplicate";
+
+duplicateButton.innerHTML = `
+  <i class="ri-file-copy-line"></i>
+  <span>Duplicate</span>
+`;
+
+
+// Divider
+const divider =
+  document.createElement("div");
+
+divider.className =
+  "product-menu-divider";
+
+
+// Delete
+const deleteButton =
+  document.createElement("button");
+
+deleteButton.className =
+  "product-menu-item delete-action";
+
+deleteButton.dataset.action =
+  "delete";
+
+deleteButton.innerHTML = `
+  <i class="ri-delete-bin-line"></i>
+  <span>Delete Product</span>
+`;
+
+
+// ================================
+// BUILD MENU
+// ================================
+
+menu.appendChild(editButton);
+menu.appendChild(viewButton);
+menu.appendChild(salesButton);
+menu.appendChild(duplicateButton);
+menu.appendChild(divider);
+menu.appendChild(deleteButton);
+
+actionWrapper.appendChild(button);
+actionWrapper.appendChild(menu);
+
+action.appendChild(actionWrapper);
 
       // ===================================
       // ADD CELLS
@@ -927,41 +1061,759 @@ function formatDate(timestamp) {
 }
 
 
-
-//===================
-// SETUP ACTION BTN
-//===================
-
 function setupProductActions() {
 
-  document
-    .querySelectorAll(".product-action-btn")
-    .forEach(button => {
+  const buttons =
+    document.querySelectorAll(
+      ".product-action-btn"
+    );
 
-      button.addEventListener("click", () => {
 
-        const productId =
-          button.dataset.productId;
+  buttons.forEach(button => {
 
-        if (!productId) return;
+    button.addEventListener(
+      "click",
+      event => {
 
-        console.log(
-          "Selected product:",
-          productId
+        event.stopPropagation();
+
+        const wrapper =
+          button.closest(
+            ".product-action-wrapper"
+          );
+
+        if (!wrapper) return;
+
+
+        // Close other menus
+        document
+          .querySelectorAll(
+            ".product-action-wrapper.menu-open"
+          )
+          .forEach(other => {
+
+            if (other !== wrapper) {
+              other.classList.remove(
+                "menu-open"
+              );
+            }
+
+          });
+
+
+        wrapper.classList.toggle(
+          "menu-open"
         );
 
-        // We'll add:
-        // View product
-        // Edit product
-        // Delete product
-        // View sales
-        // etc.
+      }
+    );
 
-      });
+  });
+
+
+  // ================================
+  // MENU ACTIONS
+  // ================================
+
+  document
+    .querySelectorAll(
+      ".product-menu-item"
+    )
+    .forEach(item => {
+
+      item.addEventListener(
+        "click",
+        event => {
+
+          event.stopPropagation();
+
+
+          const action =
+            item.dataset.action;
+
+
+          const wrapper =
+            item.closest(
+              ".product-action-wrapper"
+            );
+
+
+          const button =
+            wrapper?.querySelector(
+              ".product-action-btn"
+            );
+
+
+          const productId =
+            button?.dataset.productId;
+
+
+          if (!productId) return;
+
+
+          // Close menu
+          wrapper.classList.remove(
+            "menu-open"
+          );
+
+
+          // =========================
+          // EDIT
+          // =========================
+
+          if(action === "edit") {
+            openEditProductModal(productId);
+            // We'll connect this
+            // to the edit modal.
+          }
+
+
+          // =========================
+          // VIEW
+          // =========================
+
+          if(action === "view") {
+
+            console.log(
+              "View product:",
+              productId
+            );
+
+          }
+
+
+          // =========================
+          // SALES
+          // =========================
+
+          if(action === "sales") {
+
+            console.log(
+              "View sales:",
+              productId
+            );
+
+          }
+
+
+          // =========================
+          // DUPLICATE
+          // =========================
+
+          if(action === "duplicate") {
+
+            console.log(
+              "Duplicate product:",
+              productId
+            );
+
+          }
+
+
+          // =========================
+          // DELETE
+          // =========================
+
+          if(action === "delete") {
+
+            console.log(
+              "Delete product:",
+              productId
+            );
+
+          }
+
+        }
+      );
 
     });
 
+
+  // ================================
+  // CLOSE WHEN CLICKING OUTSIDE
+  // ================================
+
+  document.addEventListener(
+    "click",
+    () => {
+
+      document
+        .querySelectorAll(
+          ".product-action-wrapper.menu-open"
+        )
+        .forEach(wrapper => {
+
+          wrapper.classList.remove(
+            "menu-open"
+          );
+
+        });
+
+    }
+  );
+
 }
+
+
+//====================================
+// OPEN EDIT PRODUCT MODAL
+//====================================
+function openEditProductModal(productId) {
+
+  const product =
+    creatorProducts.find(
+      item =>
+        item.id === productId ||
+        item.productId === productId
+    );
+
+  if (!product) {
+
+    showSnackBar(
+      "Product information could not be found.",
+      "error"
+    );
+
+    return;
+  }
+
+  // Remove existing modal
+  document
+    .querySelector(".edit-product-overlay")
+    ?.remove();
+
+
+  //================================
+  // CREATE OVERLAY
+  //================================
+
+  const overlay =
+    document.createElement("div");
+
+  overlay.className =
+    "edit-product-overlay";
+
+
+  //================================
+  // MODAL
+  //================================
+
+  const modal =
+    document.createElement("div");
+
+  modal.className =
+    "edit-product-modal";
+
+
+  modal.innerHTML = `
+
+    <div class="edit-product-header">
+
+      <div>
+        <h3>Edit Product</h3>
+
+        <p>
+          Update your product information
+        </p>
+      </div>
+
+      <button
+        type="button"
+        class="edit-product-close"
+      >
+        <i class="ri-close-line"></i>
+      </button>
+
+    </div>
+
+
+    <form
+      class="edit-product-form"
+      id="editProductForm"
+    >
+
+      <div class="edit-product-field">
+
+        <label>
+          Product Title
+        </label>
+
+        <input
+          type="text"
+          id="editProductTitle"
+          value="${escapeHtml(product.title || "")}"
+          required
+        >
+
+      </div>
+
+
+      <div class="edit-product-field">
+
+        <label>
+          Description
+        </label>
+
+        <textarea
+          id="editProductDescription"
+          required
+        >${escapeHtml(product.description || "")}</textarea>
+
+      </div>
+
+
+      <div class="edit-product-grid">
+
+        <div class="edit-product-field">
+
+          <label>
+            Category
+          </label>
+
+          <input
+            type="text"
+            id="editProductCategory"
+            value="${escapeHtml(product.category || "")}"
+          >
+
+        </div>
+
+
+        <div class="edit-product-field">
+
+          <label>
+            Price (GHS)
+          </label>
+
+          <input
+            type="number"
+            id="editProductPrice"
+            min="0"
+            step="0.01"
+            value="${Number(product.price || 0).toFixed(2)}"
+            required
+          >
+
+        </div>
+
+      </div>
+
+
+      <div class="edit-product-field">
+
+        <label>
+          Product Type
+        </label>
+
+        <select
+          id="editProductType"
+        >
+
+          <option value="ebook">
+            E-Book
+          </option>
+
+          <option value="notes">
+            Notes
+          </option>
+
+          <option value="video">
+            Video
+          </option>
+
+          <option value="template">
+            Template
+          </option>
+
+          <option value="zip">
+            ZIP
+          </option>
+
+          <option value="affiliate">
+            Affiliate
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div
+        class="edit-product-field"
+        id="editYoutubeField"
+      >
+
+        <label>
+          YouTube URL
+        </label>
+
+        <input
+          type="url"
+          id="editYoutubeUrl"
+          placeholder="https://youtube.com/..."
+        >
+
+      </div>
+
+
+      <div
+        class="edit-product-field"
+        id="editAffiliateField"
+      >
+
+        <label>
+          Affiliate URL
+        </label>
+
+        <input
+          type="url"
+          id="editAffiliateUrl"
+          placeholder="https://..."
+        >
+
+      </div>
+
+
+      <div class="edit-product-actions">
+
+        <button
+          type="button"
+          class="edit-cancel-btn"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="edit-save-btn"
+        >
+          <i class="ri-save-line"></i>
+          Save Changes
+        </button>
+
+      </div>
+
+    </form>
+  `;
+
+
+  // Set current values that need JS assignment
+  modal.querySelector("#editProductType").value =
+    product.type || "ebook";
+
+  modal.querySelector("#editYoutubeUrl").value =
+    product.youtubeUrl || "";
+
+  modal.querySelector("#editAffiliateUrl").value =
+    product.affiliateUrl || "";
+
+
+  overlay.appendChild(modal);
+
+  document.body.appendChild(overlay);
+
+
+  //================================
+  // TYPE FIELD VISIBILITY
+  //================================
+
+  const typeSelect =
+    modal.querySelector("#editProductType");
+
+  const youtubeField =
+    modal.querySelector("#editYoutubeField");
+
+  const affiliateField =
+    modal.querySelector("#editAffiliateField");
+
+
+  function updateEditTypeFields() {
+
+    const type =
+      typeSelect.value;
+
+    youtubeField.style.display =
+      type === "video"
+        ? "flex"
+        : "none";
+
+    affiliateField.style.display =
+      type === "affiliate"
+        ? "flex"
+        : "none";
+  }
+
+
+  typeSelect.addEventListener(
+    "change",
+    updateEditTypeFields
+  );
+
+  updateEditTypeFields();
+
+
+  //================================
+  // CLOSE MODAL
+  //================================
+
+  function closeModal() {
+
+    overlay.classList.remove(
+      "show"
+    );
+
+    setTimeout(() => {
+      overlay.remove();
+    }, 180);
+
+  }
+
+
+  modal
+    .querySelector(".edit-product-close")
+    .addEventListener(
+      "click",
+      closeModal
+    );
+
+
+  modal
+    .querySelector(".edit-cancel-btn")
+    .addEventListener(
+      "click",
+      closeModal
+    );
+
+
+  overlay.addEventListener(
+    "click",
+    event => {
+
+      if(event.target === overlay) {
+        closeModal();
+      }
+
+    }
+  );
+
+
+  //================================
+  // SUBMIT EDIT
+  //================================
+
+  modal
+    .querySelector("#editProductForm")
+    .addEventListener(
+      "submit",
+      async event => {
+
+        event.preventDefault();
+
+
+        const title =
+          modal
+            .querySelector("#editProductTitle")
+            .value
+            .trim();
+
+
+        const description =
+          modal
+            .querySelector("#editProductDescription")
+            .value
+            .trim();
+
+
+        const category =
+          modal
+            .querySelector("#editProductCategory")
+            .value
+            .trim();
+
+
+        const price =
+          modal
+            .querySelector("#editProductPrice")
+            .value;
+
+
+        const type =
+          modal
+            .querySelector("#editProductType")
+            .value;
+
+
+        const youtubeUrl =
+          modal
+            .querySelector("#editYoutubeUrl")
+            .value
+            .trim();
+
+
+        const affiliateUrl =
+          modal
+            .querySelector("#editAffiliateUrl")
+            .value
+            .trim();
+
+
+        //========================
+        // VALIDATION
+        //========================
+
+        if(!title) {
+
+          showSnackBar(
+            "Product title is required.",
+            "warning"
+          );
+
+          return;
+        }
+
+
+        if(!description) {
+
+          showSnackBar(
+            "Product description is required.",
+            "warning"
+          );
+
+          return;
+        }
+
+
+        if(!Number.isFinite(Number(price))
+          || Number(price) < 0) {
+
+          showSnackBar(
+            "Enter a valid price.",
+            "warning"
+          );
+
+          return;
+        }
+
+
+        //========================
+        // SAVE BUTTON
+        //========================
+
+        const saveButton =
+          modal.querySelector(
+            ".edit-save-btn"
+          );
+
+        saveButton.disabled =
+          true;
+
+        saveButton.innerHTML = `
+          <i class="ri-loader-4-line"></i>
+          Saving...
+        `;
+
+
+        try {
+
+          const response =
+            await fetch(
+              `${API_BASE}/api/creator/products/${encodeURIComponent(productId)}`,
+              {
+                method: "PUT",
+
+                headers: {
+                  "Content-Type":
+                    "application/json"
+                },
+
+                body: JSON.stringify({
+
+                  sellerId:
+                    SELLER_ID,
+
+                  title,
+                  description,
+                  category,
+                  price,
+                  type,
+                  youtubeUrl,
+                  affiliateUrl
+
+                })
+              }
+            );
+
+
+          const result =
+            await response.json();
+
+
+          if(
+            !response.ok ||
+            !result.success
+          ) {
+
+            throw new Error(
+              result.message ||
+              "Unable to update product."
+            );
+
+          }
+
+
+          showSnackBar(
+            "Product updated successfully.",
+            "success"
+          );
+
+
+          closeModal();
+
+
+          // Refresh products
+          await loadCreatorProducts(
+            SELLER_ID
+          );
+
+        } catch(error) {
+
+          console.error(
+            "Update product error:",
+            error
+          );
+
+          showSnackBar(
+            error.message ||
+            "Unable to update product.",
+            "error"
+          );
+
+
+          saveButton.disabled =
+            false;
+
+          saveButton.innerHTML = `
+            <i class="ri-save-line"></i>
+            Save Changes
+          `;
+
+        }
+
+      }
+    );
+
+
+  // Small delay for opening animation
+  requestAnimationFrame(() => {
+
+    overlay.classList.add(
+      "show"
+    );
+
+  });
+
+}
+
 
 //====================================
 // UPDATE THE SELLER ANALYTICS CARDS
