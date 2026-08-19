@@ -8,7 +8,7 @@ const CREATOR_PRODUCTS_API =
 `${API_BASE}/api/creator/products`;
 
 document.addEventListener("DOMContentLoaded",()=>{
-  loadCreatorProducts(sellerId); //later user.uid
+  loadCreatorProducts(SELLER_ID); //later user.uid
 })
 
 //==================================
