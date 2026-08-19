@@ -524,7 +524,8 @@
   .edit-product-modal {
     padding: 18px;
 
-    max-height: 94vh;
+    max-height: 88vh;
+    max-width: 94%;
   }
 
   .edit-product-grid {
