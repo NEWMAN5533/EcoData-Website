@@ -679,12 +679,49 @@ async function loadCreatorProducts(sellerId) {
       // ===================================
       // TITLE
       // ===================================
+      function collapseTitle(title = "",
+        maxWords = 2){
+          const words = String(title).trim().split(/\s+/);
 
-      const title =
-        document.createElement("small");
+          if(words.length <= maxWords){
+            return title;
+          }
+          return words.slice(0, maxWords).join("") + "...";
+        }
+      
+       const title =
+  document.createElement("small");
 
-      title.textContent =
-        product.title || "Untitled";
+const titleWrapper =
+  document.createElement("div");
+
+titleWrapper.className =
+  "product-title-wrapper";
+
+const shortTitle =
+  document.createElement("span");
+
+shortTitle.className =
+  "product-title-short";
+
+shortTitle.textContent =
+  collapseTitle(
+    product.title || "Untitled"
+  );
+
+const fullTitle =
+  document.createElement("div");
+
+fullTitle.className =
+  "product-title-tooltip";
+
+fullTitle.textContent =
+  product.title || "Untitled";
+
+titleWrapper.appendChild(shortTitle);
+titleWrapper.appendChild(fullTitle);
+
+title.appendChild(titleWrapper);
 
 
       // ===================================
