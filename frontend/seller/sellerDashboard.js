@@ -847,23 +847,30 @@ async function loadCreatorProducts(sellerId) {
 //=======================
 function formatDate(timestamp) {
 
-  if (!timestamp) {
-    return "-";
-  }
+  if (!timestamp) return "-";
 
   let date;
 
   // Firestore Timestamp
-  if (
-    typeof timestamp === "object" &&
-    typeof timestamp.seconds === "number"
-  ) {
+  if (typeof timestamp.seconds === "number") {
 
     date = new Date(
       timestamp.seconds * 1000
     );
 
-  } else {
+  }
+
+  // Firestore Timestamp serialized by Firebase Admin
+  else if (typeof timestamp._seconds === "number") {
+
+    date = new Date(
+      timestamp._seconds * 1000
+    );
+
+  }
+
+  // JavaScript Date / ISO string
+  else {
 
     date = new Date(timestamp);
 
@@ -880,6 +887,9 @@ function formatDate(timestamp) {
     year: "numeric"
   });
 }
+
+
+
 //===================
 // SETUP ACTION BTN
 //===================
@@ -1230,4 +1240,5 @@ function showSnackBar(message, type = "info", duration = 4000) {
   }, duration);
 }
 // snackbar ends
+
 
