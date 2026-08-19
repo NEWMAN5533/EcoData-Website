@@ -694,7 +694,8 @@ BOTTOM NAVIGATION BAR STYLE CSS
    PRODUCTS TABLE LOADING
 ========================================== */
 
-.loading-products {
+.loading-products,
+.dark-mode.loading-products {
   width: 100%;
   min-height: 180px;
 
@@ -717,7 +718,8 @@ BOTTOM NAVIGATION BAR STYLE CSS
 }
 
 /* Circular spinner */
-.loading-spinner {
+.loading-spinner,
+.dark-mode .loading-spinner {
   width: 32px;
   height: 32px;
 
