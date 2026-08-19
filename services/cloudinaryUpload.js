@@ -5,9 +5,9 @@ export function uploadToCloudinary(buffer, options = {}){
   return new Promise((resolve, reject ) => {
     const uploadStream =
     cloudinary.uploader.upload_stream({
-      resource_type: options.resourceType || "auto",
+      resource_type: options.resource_Type || "auto",
       folder: options.folder || "ecodata/products", 
-      public_id: options.publicId,
+      public_id: options.public_Id,
       type: options.type || "upload"
     },
     (error, result) => {
