@@ -467,6 +467,11 @@ export async function deleteCreatorProduct(req, res) {
     const sellerId =
       String(req.query.sellerId || "").trim();
 
+
+    //================================
+    // VALIDATION
+    //================================
+
     if (!productId) {
       return res.status(400).json({
         success: false,
@@ -481,6 +486,7 @@ export async function deleteCreatorProduct(req, res) {
       });
     }
 
+
     //================================
     // FIND PRODUCT
     //================================
@@ -491,6 +497,7 @@ export async function deleteCreatorProduct(req, res) {
     const productSnap =
       await productRef.get();
 
+
     if (!productSnap.exists) {
       return res.status(404).json({
         success: false,
@@ -498,63 +505,98 @@ export async function deleteCreatorProduct(req, res) {
       });
     }
 
+
     const product =
       productSnap.data();
+
 
     //================================
     // OWNERSHIP CHECK
     //================================
 
     if (product.sellerId !== sellerId) {
+
       return res.status(403).json({
         success: false,
-        message: "You are not allowed to delete this product."
+        message:
+          "You are not allowed to delete this product."
       });
+
     }
+
 
     //================================
     // PREVENT DELETING SOLD PRODUCTS
     //================================
-    const sales =
-    Number(product.sales || 0);
 
-    if(sales > 0){
+    const sales =
+      Number(product.sales || 0);
+
+
+    if (sales > 0) {
+
       return res.status(400).json({
         success: false,
-        message: "This product cannot be deleted because it has sales."
+        message:
+          "This product cannot be deleted because it has sales."
       });
+
     }
 
-    //===============================
-    // DELETE FILES FROM CLOUDINARY
-    //===============================
-    if(product.coverPublicId){
-      try{
-        await cloudinary.uploader.destroy(product.coverPublicId, {
-          resource_type: "image"
-        }
-      );
 
-      } catch(error){
-        console.error("Cover deletion failed:", error);
+    //================================
+    // DELETE COVER FROM CLOUDINARY
+    //================================
+
+    if (product.coverPublicId) {
+
+      try {
+
+        await cloudinary.uploader.destroy(
+          product.coverPublicId,
+          {
+            resource_type: "image"
+          }
+        );
+
+      } catch (error) {
+
+        console.error(
+          "Cover deletion failed:",
+          error
+        );
+
       }
+
     }
 
-    //==========================
+
+    //================================
     // DELETE PRODUCT FILE
-    //==========================
-    if(product.filePublicId){
-      try{
-        await cloudinary.destroy(
+    //================================
+
+    if (product.filePublicId) {
+
+      try {
+
+        await cloudinary.uploader.destroy(
           product.filePublicId,
           {
             resource_type: "raw"
           }
         );
-      } catch(error){
-        console.error("Product file deletion failed:", error);
+
+      } catch (error) {
+
+        console.error(
+          "Product file deletion failed:",
+          error
+        );
+
       }
+
     }
+
 
     //================================
     // DELETE FIRESTORE PRODUCT
@@ -562,15 +604,24 @@ export async function deleteCreatorProduct(req, res) {
 
     await productRef.delete();
 
+
     console.log(
-      "Product deleted successfully:", productId
+      "Product deleted successfully:",
+      productId
     );
 
+
     return res.status(200).json({
+
       success: true,
-      message: "Product deleted successfully.",
+
+      message:
+        "Product deleted successfully.",
+
       productId
+
     });
+
 
   } catch (error) {
 
@@ -579,10 +630,16 @@ export async function deleteCreatorProduct(req, res) {
       error
     );
 
+
     return res.status(500).json({
+
       success: false,
-      message: "Unable to delete product."
+
+      message:
+        "Unable to delete product."
+
     });
+
   }
 }
 
