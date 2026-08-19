@@ -80,7 +80,7 @@ export async function createProduct(req, res){
 
   if(cover) {
     coverUpload = await uploadToCloudinary(cover.buffer, {
-      resourceType: "image",
+      resource_type: "image",
       folder: "ecodata/products/covers"
     }
   );
