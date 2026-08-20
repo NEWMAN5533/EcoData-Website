@@ -1079,7 +1079,7 @@ function setupProductActions() {
 
     button.addEventListener(
       "click",
-      event => {
+     async event => {
 
         event.stopPropagation();
 
