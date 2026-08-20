@@ -1217,17 +1217,66 @@ function setupProductActions() {
 
 
           // =========================
-          // DELETE
-          // =========================
+// DELETE
+// =========================
+if (action === "delete") {
 
-          if(action === "delete") {
+  const confirmed = confirm(
+    "Are you sure you want to delete this product?"
+  );
 
-            console.log(
-              "Delete product:",
-              productId
-            );
+  if (!confirmed) {
+    return;
+  }
 
-          }
+  try {
+
+    item.disabled = true;
+
+    const response = await fetch(
+      `${API_BASE}/api/creator/products/${encodeURIComponent(productId)}?sellerId=${encodeURIComponent(SELLER_ID)}`,
+      {
+        method: "DELETE"
+      }
+    );
+
+    const result = await response.json();
+
+    if (!response.ok || !result.success) {
+      throw new Error(
+        result.message ||
+        "Unable to delete product."
+      );
+    }
+
+    showSnackBar(
+      "Product deleted successfully.",
+      "success",
+      4000
+    );
+
+    // Reload products table
+    await loadCreatorProducts(SELLER_ID);
+
+  } catch (error) {
+
+    console.error(
+      "Delete product error:",
+      error
+    );
+
+    showSnackBar(
+      error.message ||
+      "Unable to delete product.",
+      "error",
+      3000
+    );
+
+    item.disabled = false;
+  }
+
+  return;
+}
 
         }
       );
