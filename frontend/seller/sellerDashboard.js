@@ -1069,17 +1069,15 @@ function formatDate(timestamp) {
 //========================
 function setupProductActions() {
 
-  const buttons =
-    document.querySelectorAll(
-      ".product-action-btn"
-    );
+  // ================================
+  // ACTION BUTTON
+  // ================================
 
+  document
+    .querySelectorAll(".product-action-btn")
+    .forEach(button => {
 
-  buttons.forEach(button => {
-
-    button.addEventListener(
-      "click",
-     async event => {
+      button.addEventListener("click", event => {
 
         event.stopPropagation();
 
@@ -1099,22 +1097,24 @@ function setupProductActions() {
           .forEach(other => {
 
             if (other !== wrapper) {
+
               other.classList.remove(
                 "menu-open"
               );
+
             }
 
           });
 
 
+        // Toggle current menu
         wrapper.classList.toggle(
           "menu-open"
         );
 
-      }
-    );
+      });
 
-  });
+    });
 
 
   // ================================
@@ -1122,14 +1122,12 @@ function setupProductActions() {
   // ================================
 
   document
-    .querySelectorAll(
-      ".product-menu-item"
-    )
+    .querySelectorAll(".product-menu-item")
     .forEach(item => {
 
       item.addEventListener(
-        "click",async 
-       (event) => {
+        "click",
+        async event => {
 
           event.stopPropagation();
 
@@ -1167,10 +1165,13 @@ function setupProductActions() {
           // EDIT
           // =========================
 
-          if(action === "edit") {
-            openEditProductModal(productId);
-            // We'll connect this
-            // to the edit modal.
+          if (action === "edit") {
+
+            openEditProductModal(
+              productId
+            );
+
+            return;
           }
 
 
@@ -1178,13 +1179,14 @@ function setupProductActions() {
           // VIEW
           // =========================
 
-          if(action === "view") {
+          if (action === "view") {
 
             console.log(
               "View product:",
               productId
             );
 
+            return;
           }
 
 
@@ -1192,13 +1194,14 @@ function setupProductActions() {
           // SALES
           // =========================
 
-          if(action === "sales") {
+          if (action === "sales") {
 
             console.log(
               "View sales:",
               productId
             );
 
+            return;
           }
 
 
@@ -1206,77 +1209,99 @@ function setupProductActions() {
           // DUPLICATE
           // =========================
 
-          if(action === "duplicate") {
+          if (action === "duplicate") {
 
             console.log(
               "Duplicate product:",
               productId
             );
 
+            return;
           }
 
 
           // =========================
-// DELETE
-// =========================
-if (action === "delete") {
+          // DELETE
+          // =========================
 
-  const confirmed = confirm(
-    "Are you sure you want to delete this product?"
-  );
+          if (action === "delete") {
 
-  if (!confirmed) {
-    return;
-  }
+            const confirmed =
+              confirm(
+                "Are you sure you want to delete this product?"
+              );
 
-  try {
 
-    item.disabled = true;
+            if (!confirmed) {
+              return;
+            }
 
-    const response = await fetch(
-      `${API_BASE}/api/creator/products/${encodeURIComponent(productId)}?sellerId=${encodeURIComponent(SELLER_ID)}`,
-      {
-        method: "DELETE"
-      }
-    );
 
-    const result = await response.json();
+            try {
 
-    if (!response.ok || !result.success) {
-      throw new Error(
-        result.message ||
-        "Unable to delete product."
-      );
-    }
+              item.disabled = true;
 
-    showSnackBar(
-      "Product deleted successfully.",
-      "success",
-      4000
-    );
 
-    // Reload products table
-    await loadCreatorProducts(SELLER_ID);
+              const response =
+                await fetch(
+                  `${API_BASE}/api/creator/products/${encodeURIComponent(productId)}?sellerId=${encodeURIComponent(SELLER_ID)}`,
+                  {
+                    method: "DELETE"
+                  }
+                );
 
-  } catch (error) {
 
-    console.error(
-      "Delete product error:",
-      error
-    );
+              const result =
+                await response.json();
 
-    showSnackBar(
-      error.message ||
-      "Unable to delete product.",
-      "error",
-      3000
-    );
 
-    item.disabled = false;
-  }
+              if (
+                !response.ok ||
+                !result.success
+              ) {
 
-  return;
-}
+                throw new Error(
+                  result.message ||
+                  "Unable to delete product."
+                );
+
+              }
+
+
+              showSnackBar(
+                "Product deleted successfully.",
+                "success",
+                4000
+              );
+
+
+              // Reload products
+              await loadCreatorProducts(
+                SELLER_ID
+              );
+
+
+            } catch (error) {
+
+              console.error(
+                "Delete product error:",
+                error
+              );
+
+
+              showSnackBar(
+                error.message ||
+                "Unable to delete product.",
+                "error",
+                3000
+              );
+
+
+              item.disabled = false;
+
+            }
+
+          }
 
         }
       );
@@ -1308,7 +1333,6 @@ if (action === "delete") {
   );
 
 }
-
 
 //====================================
 // OPEN EDIT PRODUCT MODAL
