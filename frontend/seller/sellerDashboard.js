@@ -1125,13 +1125,7 @@ function setupProductActions() {
     .querySelectorAll(".product-menu-item")
     .forEach(item => {
 
-      item.addEventListener(
-        "click",
-        async event => {
-
-          event.stopPropagation();
-
-
+      item.addEventListener("click", async () => {
           const action =
             item.dataset.action;
 
