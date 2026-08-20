@@ -1128,8 +1128,8 @@ function setupProductActions() {
     .forEach(item => {
 
       item.addEventListener(
-        "click",
-        event => {
+        "click",async 
+       (event) => {
 
           event.stopPropagation();
 
