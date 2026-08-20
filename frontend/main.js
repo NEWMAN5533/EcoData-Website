@@ -22,7 +22,7 @@ import {
 
 
 
-  // ---------- CONFIG ----------
+  // ---------- CONFIG ---------
 const API_BASE = (() => {
   // use current host in prod or localhost for local dev
   if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
