@@ -2164,7 +2164,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
 
 
-/===============================
+//===============================
 // DELETE CONFIRMATION FUNCTION
 //==============================
 function showDeleteConfirmation(productId) {
