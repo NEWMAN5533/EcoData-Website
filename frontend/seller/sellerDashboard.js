@@ -2210,7 +2210,7 @@ function showDeleteConfirmation(productId) {
     
     `;
 
-    document.body.appenChild(
+    document.body.appendChild(
       confirmation
     );
 
