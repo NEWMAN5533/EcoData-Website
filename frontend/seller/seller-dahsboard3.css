@@ -658,3 +658,339 @@ ACTIONS
 .delete-confirm-btn:hover{
   background: #d13d50;
 }
+
+
+/* ==========================================
+   SALES OVERVIEW
+========================================== */
+
+.salesOverview {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.salesOverviewHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.salesOverviewHeader h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+}
+
+.salesOverviewHeader p {
+  margin: 6px 0 0;
+  font-size: 13px;
+  opacity: 0.65;
+}
+
+
+/* ==========================================
+   PERIOD FILTER
+========================================== */
+
+.salesPeriod {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px;
+  border: 1px solid rgba(128, 128, 128, 0.15);
+  border-radius: 10px;
+}
+
+.salesPeriodBtn {
+  border: 0;
+  background: transparent;
+  padding: 8px 12px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  color: inherit;
+  transition: all 0.2s ease;
+}
+
+.salesPeriodBtn:hover {
+  background: rgba(128, 128, 128, 0.08);
+}
+
+.salesPeriodBtn.active {
+  background: #111;
+  color: #fff;
+}
+
+
+/* ==========================================
+   STAT CARDS
+========================================== */
+
+.salesStats {
+  display: grid;
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.salesStatCard {
+  padding: 18px;
+  border: 1px solid rgba(128, 128, 128, 0.15);
+  border-radius: 16px;
+  background: rgba(128, 128, 128, 0.025);
+}
+
+.salesStatTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.salesStatTop span {
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.65;
+}
+
+.salesStatTop i {
+  font-size: 18px;
+  opacity: 0.65;
+}
+
+.salesStatCard strong {
+  display: block;
+  font-size: 22px;
+  font-weight: 750;
+  letter-spacing: -0.5px;
+}
+
+.salesStatCard small {
+  display: block;
+  margin-top: 5px;
+  font-size: 11px;
+  opacity: 0.5;
+}
+
+
+/* ==========================================
+   CHART CARD
+========================================== */
+
+.salesChartCard {
+  border: 1px solid rgba(128, 128, 128, 0.15);
+  border-radius: 18px;
+  background: rgba(128, 128, 128, 0.025);
+  overflow: hidden;
+}
+
+.salesChartHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 20px 20px 0;
+}
+
+.salesChartHeader h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.salesChartHeader span {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  opacity: 0.55;
+}
+
+
+/* ==========================================
+   METRIC SWITCHER
+========================================== */
+
+.salesMetricSwitcher {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 9px;
+  background: rgba(128, 128, 128, 0.08);
+}
+
+.salesMetricBtn {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding: 7px 11px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.salesMetricBtn:hover {
+  background: rgba(128, 128, 128, 0.08);
+}
+
+.salesMetricBtn.active {
+  background: #111;
+  color: #fff;
+}
+
+
+/* ==========================================
+   CHART
+========================================== */
+
+.salesChartWrapper {
+  position: relative;
+  min-height: 350px;
+  padding: 10px 10px 15px;
+}
+
+#creatorSalesChart {
+  width: 100%;
+  min-height: 320px;
+}
+
+
+/* ==========================================
+   EMPTY STATE
+========================================== */
+
+.salesChartEmpty {
+  position: absolute;
+  inset: 0;
+
+  display: none;
+
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  text-align: center;
+  padding: 40px;
+}
+
+.salesEmptyIcon {
+  width: 52px;
+  height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background: rgba(128, 128, 128, 0.08);
+
+  margin-bottom: 12px;
+}
+
+.salesEmptyIcon i {
+  font-size: 24px;
+  opacity: 0.55;
+}
+
+.salesChartEmpty h4 {
+  margin: 0;
+  font-size: 15px;
+}
+
+.salesChartEmpty p {
+  max-width: 320px;
+  margin: 7px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  opacity: 0.55;
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 900px) {
+
+  .salesStats {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+@media (max-width: 650px) {
+
+  .salesOverviewHeader {
+    flex-direction: column;
+  }
+
+  .salesPeriod {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .salesPeriodBtn {
+    flex: 1;
+    white-space: nowrap;
+  }
+
+  .salesChartHeader {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .salesMetricSwitcher {
+    width: 100%;
+  }
+
+  .salesMetricBtn {
+    flex: 1;
+  }
+
+}
+
+
+@media (max-width: 450px) {
+
+  .salesStats {
+    grid-template-columns:
+      1fr 1fr;
+
+    gap: 9px;
+  }
+
+  .salesStatCard {
+    padding: 14px;
+    border-radius: 13px;
+  }
+
+  .salesStatCard strong {
+    font-size: 18px;
+  }
+
+  .salesChartWrapper {
+    min-height: 300px;
+  }
+
+  #creatorSalesChart {
+    min-height: 280px;
+  }
+
+}
