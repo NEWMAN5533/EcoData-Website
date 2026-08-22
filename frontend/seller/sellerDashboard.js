@@ -2163,79 +2163,120 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
 
 
-
-//===============================
-// DELETE CONFIRMATION FUNCTION
-//==============================
+//====================================
+// DELETE CONFIRMATION
+//====================================
 function showDeleteConfirmation(productId) {
 
   return new Promise(resolve => {
 
     // Remove existing confirmation
-    document.querySelector(".delete-confirmation")?.remove();
+    document
+      .querySelector(".delete-confirmation")
+      ?.remove();
 
-    const confirmation = 
+
+    const confirmation =
       document.createElement("div");
 
-    confirmation.className = "delete-confirmation";
+    confirmation.className =
+      "delete-confirmation";
+
 
     confirmation.innerHTML = `
-    // Delete confirmation content wrapper
-    
-    <div class="delete-confirmation-content">
+      <div class="delete-confirmation-content">
 
-    <div class="delete-confirmation-icon">
-    <i class="ri-delete-bin-line"></i>
-    </div>
+        <div class="delete-confirmation-icon">
+          <i class="ri-delete-bin-line"></i>
+        </div>
 
-    <div class="delete-confirmation-text">
-    <strong>Delete Product?</strong>
-    <span>
-    This action cannot be undone.
-    </span>
-    </div>
+        <div class="delete-confirmation-text">
 
-    <div class="delete-confirmation-actions">
-     <button type="button" class="delete-cancel-btn">
-     Cancel
-     </button>
+          <strong>Delete product?</strong>
 
-     <button type="button" class="delete-confirm-btn">
-     Delete
-     </button>
-     
-     </div>
+          <span>
+            This action cannot be undone.
+          </span>
 
-     </div>
-    
+        </div>
+
+        <div class="delete-confirmation-actions">
+
+          <button
+            type="button"
+            class="delete-cancel-btn"
+          >
+            Cancel
+          </button>
+
+          <button
+            type="button"
+            class="delete-confirm-btn"
+          >
+            Delete
+          </button>
+
+        </div>
+
+      </div>
     `;
+
 
     document.body.appendChild(
       confirmation
     );
 
+
     // Show
     requestAnimationFrame(() => {
-      confirmation.classList.add("show");
+
+      confirmation.classList.add(
+        "show"
+      );
+
     });
 
+
     const close = value => {
-      confirmation.classList.remove("show");
+
+      confirmation.classList.remove(
+        "show"
+      );
+
 
       setTimeout(() => {
+
         confirmation.remove();
+
         resolve(value);
-      }, 200 );
+
+      }, 200);
+
     };
 
-    confirmation.querySelector(".delete-cancel-btn"
-    ).addEventListener("click", () => close(false));
 
-    confirmation.querySelector(".delete-confirm-btn"
-    ).addEventListener("click", () => close(true));
+    confirmation
+      .querySelector(
+        ".delete-cancel-btn"
+      )
+      .addEventListener(
+        "click",
+        () => close(false)
+      );
+
+
+    confirmation
+      .querySelector(
+        ".delete-confirm-btn"
+      )
+      .addEventListener(
+        "click",
+        () => close(true)
+      );
+
   });
-}
 
+}
 
 
 
