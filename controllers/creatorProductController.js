@@ -645,6 +645,8 @@ export async function deleteCreatorProduct(req, res) {
 
 
 
+
+
 // ==========================================
 // GET CREATOR DASHBOARD
 // ==========================================
@@ -665,6 +667,7 @@ export async function getCreatorDashboard(req, res) {
       "Loading dashboard for seller:",
       sellerId
     );
+
 
     // ======================================
     // LOAD EVERYTHING IN PARALLEL
@@ -695,6 +698,35 @@ export async function getCreatorDashboard(req, res) {
 
 
     // ======================================
+    // HELPER — FIRESTORE DATE → TIMESTAMP
+    // ======================================
+
+    const getTime = value => {
+
+      if (!value) return 0;
+
+      if (
+        typeof value.toMillis === "function"
+      ) {
+        return value.toMillis();
+      }
+
+      if (
+        typeof value.seconds === "number"
+      ) {
+        return value.seconds * 1000;
+      }
+
+      const time =
+        new Date(value).getTime();
+
+      return Number.isNaN(time)
+        ? 0
+        : time;
+    };
+
+
+    // ======================================
     // PRODUCTS
     // ======================================
 
@@ -704,38 +736,10 @@ export async function getCreatorDashboard(req, res) {
           id: doc.id,
           ...doc.data()
         }))
-        .sort((a, b) => {
-
-          const getTime = value => {
-
-            if (!value) return 0;
-
-            if (
-              typeof value.toMillis === "function"
-            ) {
-              return value.toMillis();
-            }
-
-            if (
-              typeof value.seconds === "number"
-            ) {
-              return value.seconds * 1000;
-            }
-
-            const time =
-              new Date(value).getTime();
-
-            return Number.isNaN(time)
-              ? 0
-              : time;
-          };
-
-          return (
-            getTime(b.createdAt) -
-            getTime(a.createdAt)
-          );
-
-        });
+        .sort((a, b) =>
+          getTime(b.createdAt) -
+          getTime(a.createdAt)
+        );
 
 
     const totalProducts =
@@ -768,38 +772,10 @@ export async function getCreatorDashboard(req, res) {
           id: doc.id,
           ...doc.data()
         }))
-        .sort((a, b) => {
-
-          const getTime = value => {
-
-            if (!value) return 0;
-
-            if (
-              typeof value.toMillis === "function"
-            ) {
-              return value.toMillis();
-            }
-
-            if (
-              typeof value.seconds === "number"
-            ) {
-              return value.seconds * 1000;
-            }
-
-            const time =
-              new Date(value).getTime();
-
-            return Number.isNaN(time)
-              ? 0
-              : time;
-          };
-
-          return (
-            getTime(b.createdAt) -
-            getTime(a.createdAt)
-          );
-
-        });
+        .sort((a, b) =>
+          getTime(b.createdAt) -
+          getTime(a.createdAt)
+        );
 
 
     const totalSales =
@@ -807,19 +783,56 @@ export async function getCreatorDashboard(req, res) {
 
 
     // ======================================
-    // TOTAL EARNINGS
+    // SALES STATISTICS
     // ======================================
 
+    let totalRevenue = 0;
+
     let totalEarnings = 0;
+
+    let platformFees = 0;
+
 
     sales.forEach(sale => {
 
       const creatorShare =
         Number(sale.creatorShare || 0);
 
-      if (Number.isFinite(creatorShare)) {
-        totalEarnings += creatorShare;
+
+      if (
+        !Number.isFinite(creatorShare) ||
+        creatorShare <= 0
+      ) {
+        return;
       }
+
+
+      // ====================================
+      // CREATOR = 70%
+      // ====================================
+
+      const saleRevenue =
+        creatorShare / 0.70;
+
+
+      // ====================================
+      // PLATFORM = 30%
+      // ====================================
+
+      const platformFee =
+        saleRevenue * 0.30;
+
+
+      totalEarnings +=
+        creatorShare;
+
+
+      totalRevenue +=
+        saleRevenue;
+
+
+      platformFees +=
+        platformFee;
 
     });
 
@@ -830,13 +843,17 @@ export async function getCreatorDashboard(req, res) {
 
     let totalViews = 0;
 
+
     products.forEach(product => {
 
       const views =
         Number(product.views || 0);
 
+
       if (Number.isFinite(views)) {
+
         totalViews += views;
+
       }
 
     });
@@ -862,38 +879,10 @@ export async function getCreatorDashboard(req, res) {
           id: doc.id,
           ...doc.data()
         }))
-        .sort((a, b) => {
-
-          const getTime = value => {
-
-            if (!value) return 0;
-
-            if (
-              typeof value.toMillis === "function"
-            ) {
-              return value.toMillis();
-            }
-
-            if (
-              typeof value.seconds === "number"
-            ) {
-              return value.seconds * 1000;
-            }
-
-            const time =
-              new Date(value).getTime();
-
-            return Number.isNaN(time)
-              ? 0
-              : time;
-          };
-
-          return (
-            getTime(b.requestedAt) -
-            getTime(a.requestedAt)
-          );
-
-        });
+        .sort((a, b) =>
+          getTime(b.requestedAt) -
+          getTime(a.requestedAt)
+        );
 
 
     // ======================================
@@ -902,6 +891,7 @@ export async function getCreatorDashboard(req, res) {
 
     let withdrawalAmount = 0;
 
+
     withdrawals.forEach(withdrawal => {
 
       if (withdrawal.paid === true) {
@@ -909,8 +899,12 @@ export async function getCreatorDashboard(req, res) {
         const amount =
           Number(withdrawal.amount || 0);
 
+
         if (Number.isFinite(amount)) {
-          withdrawalAmount += amount;
+
+          withdrawalAmount +=
+            amount;
+
         }
 
       }
@@ -925,7 +919,185 @@ export async function getCreatorDashboard(req, res) {
     const availableBalance =
       Math.max(
         0,
-        totalEarnings - withdrawalAmount
+        totalEarnings -
+        withdrawalAmount
+      );
+
+
+    // ======================================
+    // SALES CHART
+    // ======================================
+
+    const chartMap =
+      new Map();
+
+
+    sales.forEach(sale => {
+
+      const timestamp =
+        getTime(sale.createdAt);
+
+
+      if (!timestamp) return;
+
+
+      const date =
+        new Date(timestamp);
+
+
+      // YYYY-MM-DD
+      const dateKey =
+        date.toISOString().slice(0, 10);
+
+
+      // ====================================
+      // CREATE DAY
+      // ====================================
+
+      if (!chartMap.has(dateKey)) {
+
+        chartMap.set(dateKey, {
+
+          date: dateKey,
+
+          sales: 0,
+
+          revenue: 0,
+
+          earnings: 0,
+
+          platformFees: 0
+
+        });
+
+      }
+
+
+      const day =
+        chartMap.get(dateKey);
+
+
+      // ====================================
+      // SALE COUNT
+      // ====================================
+
+      day.sales += 1;
+
+
+      // ====================================
+      // CREATOR SHARE
+      // ====================================
+
+      const creatorShare =
+        Number(sale.creatorShare || 0);
+
+
+      if (
+        !Number.isFinite(creatorShare) ||
+        creatorShare <= 0
+      ) {
+        return;
+      }
+
+
+      // ====================================
+      // REVENUE
+      // ====================================
+
+      const saleRevenue =
+        creatorShare / 0.70;
+
+
+      // ====================================
+      // PLATFORM FEE
+      // ====================================
+
+      const platformFee =
+        saleRevenue * 0.30;
+
+
+      day.revenue +=
+        saleRevenue;
+
+
+      day.earnings +=
+        creatorShare;
+
+
+      day.platformFees +=
+        platformFee;
+
+    });
+
+
+    // ======================================
+    // SORT CHART DATA
+    // ======================================
+
+    const chartData =
+      Array.from(
+        chartMap.values()
+      )
+      .sort((a, b) =>
+        a.date.localeCompare(b.date)
+      )
+      .map(day => ({
+
+        date:
+          day.date,
+
+        sales:
+          day.sales,
+
+        revenue:
+          Number(
+            day.revenue.toFixed(2)
+          ),
+
+        earnings:
+          Number(
+            day.earnings.toFixed(2)
+          ),
+
+        platformFees:
+          Number(
+            day.platformFees.toFixed(2)
+          )
+
+      }));
+
+
+    // ======================================
+    // CHART ARRAYS
+    // ======================================
+
+    const chartLabels =
+      chartData.map(
+        day => day.date
+      );
+
+
+    const chartSales =
+      chartData.map(
+        day => day.sales
+      );
+
+
+    const chartRevenue =
+      chartData.map(
+        day => day.revenue
+      );
+
+
+    const chartEarnings =
+      chartData.map(
+        day => day.earnings
+      );
+
+
+    const chartPlatformFees =
+      chartData.map(
+        day => day.platformFees
       );
 
 
@@ -937,6 +1109,11 @@ export async function getCreatorDashboard(req, res) {
 
       success: true,
 
+
+      // ====================================
+      // DASHBOARD
+      // ====================================
+
       dashboard: {
 
         totalProducts,
@@ -947,9 +1124,19 @@ export async function getCreatorDashboard(req, res) {
 
         totalSales,
 
+        totalRevenue:
+          Number(
+            totalRevenue.toFixed(2)
+          ),
+
         totalEarnings:
           Number(
             totalEarnings.toFixed(2)
+          ),
+
+        platformFees:
+          Number(
+            platformFees.toFixed(2)
           ),
 
         availableBalance:
@@ -972,6 +1159,38 @@ export async function getCreatorDashboard(req, res) {
 
       },
 
+
+      // ====================================
+      // SALES CHART
+      // ====================================
+
+      chart: {
+
+        labels:
+          chartLabels,
+
+        sales:
+          chartSales,
+
+        revenue:
+          chartRevenue,
+
+        earnings:
+          chartEarnings,
+
+        platformFees:
+          chartPlatformFees,
+
+        data:
+          chartData
+
+      },
+
+
+      // ====================================
+      // EXISTING DATA
+      // ====================================
+
       products,
 
       sales,
@@ -988,6 +1207,7 @@ export async function getCreatorDashboard(req, res) {
       error
     );
 
+
     return res.status(500).json({
 
       success: false,
@@ -999,6 +1219,10 @@ export async function getCreatorDashboard(req, res) {
 
   }
 }
+
+
+
+
 //=======================
 // GET CREATOR SALES
 //=======================
