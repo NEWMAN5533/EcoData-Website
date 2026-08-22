@@ -3028,28 +3028,6 @@ function updateCreatorDashboardStats(
 }
 
 
-//==========================================
-// FORMAT SALES CURRENCY
-//==========================================
-
-function formatSalesCurrency(
-  value
-) {
-
-  const amount =
-    Number(value || 0);
-
-
-  return `GHS ${amount.toLocaleString(
-    "en-GH",
-    {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }
-  )}`;
-
-}
-
 
 
  
