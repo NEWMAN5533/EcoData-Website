@@ -382,6 +382,224 @@ themeButton.addEventListener("click", ()=> {
 
 
 
+
+
+<!-- ==========================================
+     SALES OVERVIEW
+========================================== -->
+<section class="salesOverview">
+
+  <div class="salesOverviewHeader">
+
+    <div>
+      <h2>Sales Overview</h2>
+      <p>Track your sales performance over time.</p>
+    </div>
+
+    <div class="salesPeriod">
+
+      <button
+        class="salesPeriodBtn active"
+        data-period="7">
+        7 Days
+      </button>
+
+      <button
+        class="salesPeriodBtn"
+        data-period="30">
+        30 Days
+      </button>
+
+      <button
+        class="salesPeriodBtn"
+        data-period="90">
+        3 Months
+      </button>
+
+      <button
+        class="salesPeriodBtn"
+        data-period="all">
+        All
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================================
+       STAT CARDS
+  ========================================= -->
+
+  <div class="salesStats">
+
+    <div class="salesStatCard">
+
+      <div class="salesStatTop">
+        <span>Total Sales</span>
+
+        <i class="ri-shopping-bag-3-line"></i>
+      </div>
+
+      <strong id="salesOverviewTotalSales">
+        0
+      </strong>
+
+      <small>
+        Completed sales
+      </small>
+
+    </div>
+
+
+    <div class="salesStatCard">
+
+      <div class="salesStatTop">
+        <span>Total Revenue</span>
+
+        <i class="ri-money-dollar-circle-line"></i>
+      </div>
+
+      <strong id="salesOverviewRevenue">
+        GHS 0.00
+      </strong>
+
+      <small>
+        Gross product revenue
+      </small>
+
+    </div>
+
+
+    <div class="salesStatCard">
+
+      <div class="salesStatTop">
+        <span>Creator Earnings</span>
+
+        <i class="ri-wallet-3-line"></i>
+      </div>
+
+      <strong id="salesOverviewEarnings">
+        GHS 0.00
+      </strong>
+
+      <small>
+        Your 70% share
+      </small>
+
+    </div>
+
+
+    <div class="salesStatCard">
+
+      <div class="salesStatTop">
+        <span>Available Balance</span>
+
+        <i class="ri-bank-card-line"></i>
+      </div>
+
+      <strong id="salesOverviewBalance">
+        GHS 0.00
+      </strong>
+
+      <small>
+        Available for withdrawal
+      </small>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================================
+       CHART
+  ========================================= -->
+
+  <div class="salesChartCard">
+
+    <div class="salesChartHeader">
+
+      <div>
+
+        <h3 id="salesChartTitle">
+          Revenue
+        </h3>
+
+        <span id="salesChartSubtitle">
+          Daily revenue
+        </span>
+
+      </div>
+
+
+      <div class="salesMetricSwitcher">
+
+        <button
+          class="salesMetricBtn active"
+          data-metric="revenue">
+
+          Revenue
+
+        </button>
+
+        <button
+          class="salesMetricBtn"
+          data-metric="sales">
+
+          Sales
+
+        </button>
+
+        <button
+          class="salesMetricBtn"
+          data-metric="earnings">
+
+          Earnings
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="salesChartWrapper">
+
+      <div id="creatorSalesChart"></div>
+
+
+      <!-- EMPTY STATE -->
+
+      <div
+        id="salesChartEmpty"
+        class="salesChartEmpty">
+
+        <div class="salesEmptyIcon">
+
+          <i class="ri-bar-chart-grouped-line"></i>
+
+        </div>
+
+        <h4>No sales yet</h4>
+
+        <p>
+          Your sales activity will appear here
+          once customers purchase your products.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+
+
+
     
 <!--table-section--->
 <div class="total-title tableIntoView"> <p>Products Table</p></div>
