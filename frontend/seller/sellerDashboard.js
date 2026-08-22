@@ -2785,12 +2785,274 @@ function renderWithdrawals(withdrawals){
 // LOAD THE SELLER DASHBOARD
 //================================
 
-//=============================
+
+//==========================================
 // INITIALIZE SELLER DASHBOARD
-//=============================
-document.addEventListener("DOMContentLoaded", ()=> {
-  
-});
+//==========================================
+
+document.addEventListener(
+  "DOMContentLoaded",
+  async () => {
+
+    try {
+
+      // ======================================
+      // SELLER ID
+      // ======================================
+
+      const sellerId =
+        "TES_SELLER";
+
+
+      // ======================================
+      // LOAD DASHBOARD
+      // ======================================
+
+      await loadCreatorDashboard(
+        sellerId
+      );
+
+
+    } catch (error) {
+
+      console.error(
+        "Seller dashboard initialization error:",
+        error
+      );
+
+    }
+
+  }
+);
+
+
+
+//==========================================
+// LOAD CREATOR DASHBOARD
+//==========================================
+
+async function loadCreatorDashboard(
+  sellerId
+) {
+
+  try {
+
+    console.log(
+      "Loading creator dashboard:",
+      sellerId
+    );
+
+
+    // ======================================
+    // API REQUEST
+    // ======================================
+
+    const response =
+      await fetch(
+        `https://ecodata-app.onrender.com/api/creator/products/dashboard?sellerId=${encodeURIComponent(
+          sellerId
+        )}`
+      );
+
+
+    // ======================================
+    // CHECK RESPONSE
+    // ======================================
+
+    if (!response.ok) {
+
+      throw new Error(
+        `Dashboard request failed: ${response.status}`
+      );
+
+    }
+
+
+    // ======================================
+    // PARSE JSON
+    // ======================================
+
+    const data =
+      await response.json();
+
+
+    console.log(
+      "Creator dashboard response:",
+      data
+    );
+
+
+    // ======================================
+    // CHECK API SUCCESS
+    // ======================================
+
+    if (!data.success) {
+
+      throw new Error(
+        data.message ||
+        "Unable to load creator dashboard."
+      );
+
+    }
+
+
+    // ======================================
+    // UPDATE DASHBOARD STATISTICS
+    // ======================================
+
+    updateCreatorDashboardStats(
+      data.dashboard
+    );
+
+
+    // ======================================
+    // LOAD SALES CHART
+    // ======================================
+
+    setCreatorSalesChartData(
+      data.chart?.data || []
+    );
+
+
+    return data;
+
+
+  } catch (error) {
+
+    console.error(
+      "Load creator dashboard error:",
+      error
+    );
+
+    throw error;
+
+  }
+
+}
+
+
+
+
+//==========================================
+// UPDATE CREATOR DASHBOARD STATISTICS
+//==========================================
+
+function updateCreatorDashboardStats(
+  dashboard
+) {
+
+  if (!dashboard) {
+    return;
+  }
+
+
+  // ======================================
+  // TOTAL SALES
+  // ======================================
+
+  const totalSalesElement =
+    document.querySelector(
+      "#salesOverviewTotalSales"
+    );
+
+
+  if (totalSalesElement) {
+
+    totalSalesElement.textContent =
+      Number(
+        dashboard.totalSales || 0
+      ).toLocaleString();
+
+  }
+
+
+  // ======================================
+  // TOTAL REVENUE
+  // ======================================
+
+  const revenueElement =
+    document.querySelector(
+      "#salesOverviewRevenue"
+    );
+
+
+  if (revenueElement) {
+
+    revenueElement.textContent =
+      formatSalesCurrency(
+        dashboard.totalRevenue
+      );
+
+  }
+
+
+  // ======================================
+  // CREATOR EARNINGS
+  // ======================================
+
+  const earningsElement =
+    document.querySelector(
+      "#salesOverviewEarnings"
+    );
+
+
+  if (earningsElement) {
+
+    earningsElement.textContent =
+      formatSalesCurrency(
+        dashboard.totalEarnings
+      );
+
+  }
+
+
+  // ======================================
+  // AVAILABLE BALANCE
+  // ======================================
+
+  const balanceElement =
+    document.querySelector(
+      "#salesOverviewBalance"
+    );
+
+
+  if (balanceElement) {
+
+    balanceElement.textContent =
+      formatSalesCurrency(
+        dashboard.availableBalance
+      );
+
+  }
+
+}
+
+
+//==========================================
+// FORMAT SALES CURRENCY
+//==========================================
+
+function formatSalesCurrency(
+  value
+) {
+
+  const amount =
+    Number(value || 0);
+
+
+  return `GHS ${amount.toLocaleString(
+    "en-GH",
+    {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }
+  )}`;
+
+}
+
+
+
+ 
 
 
 
