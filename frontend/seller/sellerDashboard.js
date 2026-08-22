@@ -528,6 +528,644 @@ function formatStatus(status) {
 }
 
 
+
+// ==========================================
+// CREATOR SALES CHART
+// ==========================================
+
+let creatorSalesChart = null;
+
+let creatorSalesChartData = [];
+
+let creatorSalesMetric = "revenue";
+
+let creatorSalesPeriod = 7;
+
+
+// ==========================================
+// FORMAT CURRENCY
+// ==========================================
+
+function formatSalesCurrency(value) {
+
+  const amount =
+    Number(value || 0);
+
+  return `GHS ${amount.toLocaleString(
+    "en-GH",
+    {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }
+  )}`;
+
+}
+
+
+// ==========================================
+// FILTER CHART DATA
+// ==========================================
+
+function getFilteredSalesChartData() {
+
+  if (
+    creatorSalesPeriod === "all"
+  ) {
+
+    return [
+      ...creatorSalesChartData
+    ];
+
+  }
+
+
+  const days =
+    Number(creatorSalesPeriod);
+
+
+  const cutoff =
+    new Date();
+
+  cutoff.setHours(
+    0,
+    0,
+    0,
+    0
+  );
+
+  cutoff.setDate(
+    cutoff.getDate() - (days - 1)
+  );
+
+
+  return creatorSalesChartData
+    .filter(item => {
+
+      const date =
+        new Date(
+          `${item.date}T00:00:00`
+        );
+
+      return date >= cutoff;
+
+    });
+
+}
+
+
+// ==========================================
+// CREATE / UPDATE CHART
+// ==========================================
+
+function renderCreatorSalesChart() {
+
+  const chartElement =
+    document.querySelector(
+      "#creatorSalesChart"
+    );
+
+  const emptyElement =
+    document.querySelector(
+      "#salesChartEmpty"
+    );
+
+
+  if (
+    !chartElement ||
+    !emptyElement
+  ) {
+    return;
+  }
+
+
+  const filteredData =
+    getFilteredSalesChartData();
+
+
+  // ========================================
+  // EMPTY STATE
+  // ========================================
+
+  if (!filteredData.length) {
+
+    chartElement.style.display =
+      "none";
+
+    emptyElement.style.display =
+      "flex";
+
+
+    if (creatorSalesChart) {
+
+      creatorSalesChart.destroy();
+
+      creatorSalesChart = null;
+
+    }
+
+    return;
+
+  }
+
+
+  chartElement.style.display =
+    "block";
+
+  emptyElement.style.display =
+    "none";
+
+
+  // ========================================
+  // CHART DATA
+  // ========================================
+
+  const categories =
+    filteredData.map(
+      item => {
+
+        const date =
+          new Date(
+            `${item.date}T00:00:00`
+          );
+
+        return date.toLocaleDateString(
+          "en-US",
+          {
+            month: "short",
+            day: "numeric"
+          }
+        );
+
+      }
+    );
+
+
+  const values =
+    filteredData.map(
+      item =>
+        Number(
+          item[creatorSalesMetric] || 0
+        )
+    );
+
+
+  // ========================================
+  // METRIC SETTINGS
+  // ========================================
+
+  let chartTitle =
+    "Revenue";
+
+  let chartSubtitle =
+    "Daily revenue";
+
+  let tooltipFormatter =
+    value => formatSalesCurrency(value);
+
+
+  if (
+    creatorSalesMetric === "sales"
+  ) {
+
+    chartTitle =
+      "Sales";
+
+    chartSubtitle =
+      "Daily completed sales";
+
+    tooltipFormatter =
+      value =>
+        `${Number(value).toLocaleString()} sales`;
+
+  }
+
+
+  if (
+    creatorSalesMetric === "earnings"
+  ) {
+
+    chartTitle =
+      "Creator Earnings";
+
+    chartSubtitle =
+      "Daily creator earnings";
+
+    tooltipFormatter =
+      value =>
+        formatSalesCurrency(value);
+
+  }
+
+
+  const titleElement =
+    document.querySelector(
+      "#salesChartTitle"
+    );
+
+  const subtitleElement =
+    document.querySelector(
+      "#salesChartSubtitle"
+    );
+
+
+  if (titleElement) {
+
+    titleElement.textContent =
+      chartTitle;
+
+  }
+
+
+  if (subtitleElement) {
+
+    subtitleElement.textContent =
+      chartSubtitle;
+
+  }
+
+
+  // ========================================
+  // APEX OPTIONS
+  // ========================================
+
+  const options = {
+
+    chart: {
+
+      type: "bar",
+
+      height: 320,
+
+      toolbar: {
+        show: false
+      },
+
+      animations: {
+
+        enabled: true,
+
+        easing: "easeinout",
+
+        speed: 500
+
+      },
+
+      fontFamily:
+        "inherit"
+
+    },
+
+
+    series: [
+
+      {
+
+        name:
+          chartTitle,
+
+        data:
+          values
+
+      }
+
+    ],
+
+
+    xaxis: {
+
+      categories,
+
+      axisBorder: {
+        show: false
+      },
+
+      axisTicks: {
+        show: false
+      },
+
+      labels: {
+
+        style: {
+
+          fontSize:
+            "11px"
+
+        }
+
+      }
+
+    },
+
+
+    yaxis: {
+
+      labels: {
+
+        formatter: value => {
+
+          if (
+            creatorSalesMetric ===
+            "sales"
+          ) {
+
+            return Math.round(
+              value
+            );
+
+          }
+
+          return `GHS ${Number(
+            value
+          ).toLocaleString(
+            "en-GH",
+            {
+              maximumFractionDigits: 0
+            }
+          )}`;
+
+        }
+
+      }
+
+    },
+
+
+    plotOptions: {
+
+      bar: {
+
+        borderRadius: 7,
+
+        borderRadiusApplication:
+          "end",
+
+        columnWidth:
+          "42%",
+
+        distributed:
+          false
+
+      }
+
+    },
+
+
+    dataLabels: {
+
+      enabled: false
+
+    },
+
+
+    grid: {
+
+      borderColor:
+        "rgba(128,128,128,0.12)",
+
+      strokeDashArray:
+        4,
+
+      xaxis: {
+
+        lines: {
+          show: false
+        }
+
+      },
+
+      yaxis: {
+
+        lines: {
+          show: true
+        }
+
+      }
+
+    },
+
+
+    tooltip: {
+
+      theme:
+        document.documentElement
+          .classList
+          .contains("dark")
+          ? "dark"
+          : "light",
+
+      y: {
+
+        formatter:
+          tooltipFormatter
+
+      }
+
+    },
+
+
+    states: {
+
+      hover: {
+
+        filter: {
+
+          type:
+            "lighten",
+
+          value:
+            0.08
+
+        }
+
+      }
+
+    },
+
+
+    legend: {
+
+      show: false
+
+    },
+
+
+    responsive: [
+
+      {
+
+        breakpoint: 600,
+
+        options: {
+
+          chart: {
+
+            height: 280
+
+          },
+
+          plotOptions: {
+
+            bar: {
+
+              columnWidth:
+                "52%"
+
+            }
+
+          }
+
+        }
+
+      }
+
+    ]
+
+  };
+
+
+  // ========================================
+  // DESTROY OLD CHART
+  // ========================================
+
+  if (creatorSalesChart) {
+
+    creatorSalesChart.destroy();
+
+  }
+
+
+  // ========================================
+  // CREATE CHART
+  // ========================================
+
+  creatorSalesChart =
+    new ApexCharts(
+      chartElement,
+      options
+    );
+
+
+  creatorSalesChart.render();
+
+}
+
+
+// ==========================================
+// SET DASHBOARD SALES DATA
+// ==========================================
+
+function setCreatorSalesChartData(
+  chartData
+) {
+
+  creatorSalesChartData =
+    Array.isArray(chartData)
+      ? chartData
+      : [];
+
+
+  renderCreatorSalesChart();
+
+}
+
+
+// ==========================================
+// PERIOD BUTTONS
+// ==========================================
+
+document.addEventListener(
+  "click",
+  event => {
+
+    const button =
+      event.target.closest(
+        ".salesPeriodBtn"
+      );
+
+
+    if (!button) return;
+
+
+    document
+      .querySelectorAll(
+        ".salesPeriodBtn"
+      )
+      .forEach(btn =>
+        btn.classList.remove(
+          "active"
+        )
+      );
+
+
+    button.classList.add(
+      "active"
+    );
+
+
+    const period =
+      button.dataset.period;
+
+
+    creatorSalesPeriod =
+      period === "all"
+        ? "all"
+        : Number(period);
+
+
+    renderCreatorSalesChart();
+
+  }
+);
+
+
+// ==========================================
+// METRIC BUTTONS
+// ==========================================
+
+document.addEventListener(
+  "click",
+  event => {
+
+    const button =
+      event.target.closest(
+        ".salesMetricBtn"
+      );
+
+
+    if (!button) return;
+
+
+    document
+      .querySelectorAll(
+        ".salesMetricBtn"
+      )
+      .forEach(btn =>
+        btn.classList.remove(
+          "active"
+        )
+      );
+
+
+    button.classList.add(
+      "active"
+    );
+
+
+    creatorSalesMetric =
+      button.dataset.metric;
+
+
+    renderCreatorSalesChart();
+
+  }
+);
+
+
+
+
+
+
+
 // ==========================================
 // LOAD CREATOR PRODUCTS
 // ==========================================
