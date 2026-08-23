@@ -316,16 +316,11 @@ function renderOrders(orders) {
 
 
 
-
-
-//======================
-// LEADERBOARD MANAGER
-//======================
 //======================
 // LEADERBOARD MANAGER
 //======================
 const addLeaderBtn =
-document.getElementById("addLeaderPoints");
+  document.getElementById("addLeaderPoints");
 
 if (addLeaderBtn) {
 
@@ -350,80 +345,219 @@ if (addLeaderBtn) {
       return;
     }
 
-    // Manual points overrides GB calculation
+    //=========================
+    // CALCULATE POINTS
+    //=========================
     const points =
       manualPoints > 0
         ? manualPoints
         : gb * 6;
 
-        try{
-          const db = window.FIRESTORE;
+    try {
 
-          const q = query(collection(db, "orders"));
+      const db = window.FIRESTORE;
 
-const snapshot = await getDocs(q);
+      if (!db) {
+        showSnackBar("Firestore is not available.", "error");
+        return;
+      }
 
-let orderRef = null;
-let latestTime = 0;
+      //========================================
+      // GET ALL ORDERS
+      // NO FIRESTORE ORDERBY / INDEX NEEDED
+      //========================================
+      const q =
+        query(collection(db, "orders"));
 
-snapshot.forEach(doc => {
+      const snapshot =
+        await getDocs(q);
 
-  const order = doc.data();
+      let matchingOrders = [];
 
-  // Skip other customers
-  if (order.recipient !== phone) return;
+      snapshot.forEach(doc => {
 
-  const time = order.createdAt?.toMillis
-    ? order.createdAt.toMillis()
-    : new Date(order.createdAt).getTime();
+        const order = doc.data();
 
-  if (time > latestTime) {
-    latestTime = time;
-    orderRef = doc.ref;
-  }
+        const orderPhone =
+          String(order.recipient || "").trim();
 
-});
+        if (orderPhone !== phone) return;
 
-if (!orderRef) {
+        matchingOrders.push({
+          id: doc.id,
+          ref: doc.ref,
+          data: order
+        });
 
-    await addDoc(collection(db, "orders"), {
+      });
 
-        recipient: phone,
-        manualPoints: points,
-        manualGB: gb,
-        volume: gb,
-        amount: 0,
-        status: "leaderboard",
-        source: "admin",
-        createdAt: new Date(),
-        updatedAt: new Date()
 
-    });
+      //========================================
+      // FIND EXISTING MANUAL LEADERBOARD RECORD
+      //========================================
+      let manualRecord = null;
 
-    showSnackBar(
-        "New leaderboard member created.",
-        "success"
-    );
+      matchingOrders.forEach(item => {
 
-    return;
+        const order = item.data;
 
-}
+        // Prefer records created by the admin
+        // specifically for leaderboard management.
+        if (
+          order.source === "admin" &&
+          order.status === "leaderboard"
+        ) {
 
-      await updateDoc(orderRef, {
-            manualPoints: points,
-            manualGB: gb,
-            manualUpdatedAt: new Date()
-          });
+          const updatedTime =
+            order.manualUpdatedAt?.toMillis
+              ? order.manualUpdatedAt.toMillis()
+              : new Date(
+                  order.manualUpdatedAt || 0
+                ).getTime();
 
-          showSnackBar(`${phone} updated to ${points} points.`, "success");
-        } catch(err){
-          console.error(err);
-          showSnackBar("Unable to update points.", "error");
+          if (
+            !manualRecord ||
+            updatedTime >
+            manualRecord.updatedTime
+          ) {
+
+            manualRecord = {
+              ...item,
+              updatedTime
+            };
+
+          }
+
         }
+
+      });
+
+
+      //========================================
+      // IF NO DEDICATED MANUAL RECORD EXISTS
+      // FIND THE MOST RECENT ORDER
+      //========================================
+      if (!manualRecord && matchingOrders.length) {
+
+        let latestOrder = null;
+        let latestTime = 0;
+
+        matchingOrders.forEach(item => {
+
+          const order = item.data;
+
+          const time =
+            order.createdAt?.toMillis
+              ? order.createdAt.toMillis()
+              : new Date(
+                  order.createdAt || 0
+                ).getTime();
+
+          if (time > latestTime) {
+
+            latestTime = time;
+            latestOrder = item;
+
+          }
+
+        });
+
+        manualRecord = latestOrder;
+
+      }
+
+
+      //========================================
+      // CREATE NEW LEADERBOARD RECORD
+      //========================================
+      if (!manualRecord) {
+
+        await addDoc(
+          collection(db, "orders"),
+          {
+
+            recipient: phone,
+
+            manualPoints: points,
+
+            manualGB: gb,
+
+            volume: gb,
+
+            amount: 0,
+
+            status: "leaderboard",
+
+            source: "admin",
+
+            createdAt: new Date(),
+
+            updatedAt: new Date(),
+
+            manualUpdatedAt: new Date()
+
+          }
+        );
+
+        showSnackBar(
+          "New leaderboard member created.",
+          "success"
+        );
+
+        return;
+      }
+
+
+      //========================================
+      // UPDATE EXISTING RECORD
+      //========================================
+      await updateDoc(
+        manualRecord.ref,
+        {
+
+          manualPoints: points,
+
+          manualGB: gb,
+
+          manualUpdatedAt: new Date(),
+
+          updatedAt: new Date(),
+
+          // Make sure it remains identifiable
+          // as the leaderboard record.
+          source: "admin",
+
+          status: "leaderboard"
+
+        }
+      );
+
+
+      showSnackBar(
+        `${phone} updated to ${points} points.`,
+        "success"
+      );
+
+
+    } catch (err) {
+
+      console.error(
+        "Leaderboard update error:",
+        err
+      );
+
+      showSnackBar(
+        "Unable to update points.",
+        "error"
+      );
+
+    }
 
   });
 
 }
+
+
 
 
 
@@ -466,48 +600,190 @@ function addPoints(phone, points, gb) {
 
 }
 
+
+
 //=========================
 // SAVE MANUAL POINTS
 //=========================
-async function saveManualPoints(phone, points, gb) {
+async function saveManualPoints(
+  phone,
+  points,
+  gb
+) {
 
   const db = window.FIRESTORE;
+
   if (!db) return;
 
   try {
 
-    const q = query(
-      collection(db, "orders"),
-      where("recipient", "==", phone),
-      orderBy("createdAt", "desc"),
-      limit(1)
-    );
+    //========================================
+    // GET ALL ORDERS FOR CUSTOMER
+    // NO ORDERBY / INDEX REQUIRED
+    //========================================
+    const q =
+      query(
+        collection(db, "orders"),
+        where("recipient", "==", phone)
+      );
 
-    const snapshot = await getDocs(q);
+    const snapshot =
+      await getDocs(q);
+
 
     if (snapshot.empty) {
-      showSnackBar("Customer not found.", "warning");
+
+      showSnackBar(
+        "Customer not found.",
+        "warning"
+      );
+
       return;
     }
 
-    const orderRef = snapshot.docs[0].ref;
 
-    await updateDoc(orderRef, {
-      manualPoints: points,
-      manualGB: gb,
-      manualUpdatedAt: new Date()
+    //========================================
+    // FIND EXISTING ADMIN LEADERBOARD RECORD
+    //========================================
+    let leaderboardDoc = null;
+
+    let latestManualUpdate = 0;
+
+
+    snapshot.forEach(doc => {
+
+      const order = doc.data();
+
+      if (
+        order.source !== "admin" ||
+        order.status !== "leaderboard"
+      ) {
+        return;
+      }
+
+
+      const updatedTime =
+        order.manualUpdatedAt?.toMillis
+          ? order.manualUpdatedAt.toMillis()
+          : new Date(
+              order.manualUpdatedAt || 0
+            ).getTime();
+
+
+      if (
+        !leaderboardDoc ||
+        updatedTime > latestManualUpdate
+      ) {
+
+        leaderboardDoc = doc;
+
+        latestManualUpdate =
+          updatedTime;
+
+      }
+
     });
 
-    showSnackBar("Leaderboard updated successfully.", "success");
+
+    //========================================
+    // IF NO ADMIN RECORD EXISTS
+    // USE LATEST ORDER
+    //========================================
+    if (!leaderboardDoc) {
+
+      let latestDoc = null;
+
+      let latestTime = 0;
+
+
+      snapshot.forEach(doc => {
+
+        const order = doc.data();
+
+        const time =
+          order.createdAt?.toMillis
+            ? order.createdAt.toMillis()
+            : new Date(
+                order.createdAt || 0
+              ).getTime();
+
+
+        if (time > latestTime) {
+
+          latestTime = time;
+
+          latestDoc = doc;
+
+        }
+
+      });
+
+
+      leaderboardDoc = latestDoc;
+
+    }
+
+
+    if (!leaderboardDoc) {
+
+      showSnackBar(
+        "Customer record not found.",
+        "warning"
+      );
+
+      return;
+
+    }
+
+
+    //========================================
+    // UPDATE MANUAL POINTS
+    //========================================
+    await updateDoc(
+      leaderboardDoc.ref,
+      {
+
+        manualPoints: Number(points),
+
+        manualGB: Number(gb),
+
+        manualUpdatedAt: new Date(),
+
+        updatedAt: new Date(),
+
+        source: "admin",
+
+        status: "leaderboard"
+
+      }
+    );
+
+
+    showSnackBar(
+      "Leaderboard updated successfully.",
+      "success"
+    );
+
 
   } catch (err) {
 
-    console.error(err);
-    showSnackBar("Unable to update leaderboard.", "error");
+    console.error(
+      "Save manual points error:",
+      err
+    );
+
+    showSnackBar(
+      "Unable to update leaderboard.",
+      "error"
+    );
 
   }
 
 }
+
+
+
+
 //=============================
 // BUILD CUSTOMER LEADERBOARD
 //=============================
