@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Products</title>
+  <title>Earnings</title>
   <link rel="stylesheet" href="sellerProfile.css">
-  <link rel="stylesheet" href="sellerProductsPage.css">
+  <link rel="stylesheet" href="sellerEarnings.css">
 
+  
    <!--remix icons-->
 <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
 
@@ -119,12 +120,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </script>
 <!--=== DARK MODE SCRIPT ENDS ===-->
-
-
-
 </head>
 <body>
-   <!--============ NAV ============-->
+     <!--============ NAV ============-->
   <nav class="nav-container nav-bar">
     <div class="nav-bar-left">
       <img src="../css/icons/newLogo.png" alt="newLogo">
@@ -162,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <h5>Dashboard</h5>
     </a>
 
-     <a href="sellerProfile.html" class="active">
+     <a href="sellerProfile.html" >
       <i class="ri-box-3-line"></i>
       <h5>Products</h5>
     </a>
@@ -177,7 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <h5>Sales</h5>
     </a>
 
-     <a href="sellerEarningsPage.html">
+     <a href="sellerEarningsPage.html" >
       <i class="ri-money-dollar-circle-line"></i>
       <h5>Earnings</h5>
     </a>
@@ -234,7 +232,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <h5>Dashboard</h5>
     </a>
 
-     <a href="sellerProductsPage.html" class="active">
+     <a href="sellerProductsPage.html">
       <i class="ri-box-3-line"></i>
       <h5>Products</h5>
     </a>
@@ -249,7 +247,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <h5>Sales</h5>
     </a>
 
-     <a href="sellerEarningsPage.html">
+     <a href="sellerEarningsPage.html" class="active">
       <i class="ri-money-dollar-circle-line"></i>
       <h5>Earnings</h5>
     </a>
@@ -294,363 +292,409 @@ document.addEventListener("DOMContentLoaded", () => {
   
   <!---========= MAIN ==============-->
   <main class="main-container">
-    <!-- ==========================================
-     SELLER PRODUCTS PAGE
-========================================== -->
-
-<section class="sellerProductsPage">
-
+    <section class="sellerEarningsPage">
 
   <!-- ========================================
        PAGE HEADER
   ========================================= -->
 
-  <header class="sellerProductsPageHeader">
+  <header class="sellerEarningsHeader">
 
-    <div class="sellerProductsPageTitle">
+    <div class="sellerEarningsTitle">
 
-      <div class="sellerProductsPageIcon">
-        <i class="ri-box-3-line"></i>
+      <div class="sellerEarningsTitleIcon">
+        <i class="ri-money-dollar-circle-line"></i>
       </div>
 
       <div>
-
-        <h1>Products</h1>
+        <h1>Earnings</h1>
 
         <p>
-          Manage your digital products and listings.
+          Track your creator earnings and available balance.
         </p>
-
       </div>
 
     </div>
-
-
-    <a
-      href="upload-product.html"
-      class="sellerAddProductBtn"
-    >
-
-      <i class="ri-add-line"></i>
-
-      <span>Add Product</span>
-
-    </a>
 
   </header>
 
 
   <!-- ========================================
-       PRODUCT STATISTICS
+       EARNINGS OVERVIEW
   ========================================= -->
 
-  <section class="sellerProductStats">
+  <section class="earningsOverview">
 
 
-    <div class="sellerProductStatCard">
+    <!-- AVAILABLE BALANCE -->
 
-      <div class="sellerProductStatTop">
+    <div class="earningsBalanceCard">
 
-        <span>Total Products</span>
+      <div class="earningsBalanceTop">
 
-        <div class="sellerProductStatIcon">
-          <i class="ri-stack-line"></i>
+        <div>
+
+          <span>Available Balance</span>
+
+          <strong id="availableBalance">
+            GHS 0.00
+          </strong>
+
+        </div>
+
+        <div class="earningsBalanceIcon">
+          <i class="ri-wallet-3-line"></i>
         </div>
 
       </div>
 
-      <strong id="productsTotal">
-        0
-      </strong>
+      <p>
+        Earnings available for withdrawal.
+      </p>
 
-      <small>
-        All products
-      </small>
+      <button
+        type="button"
+        class="sellerEarningsWithdrawButton"
+        id="earningsWithdrawButton"
+      >
+        <i class="ri-bank-card-line"></i>
+        Withdraw
+      </button>
 
     </div>
 
 
-    <div class="sellerProductStatCard">
+    <!-- TOTAL EARNINGS -->
 
-      <div class="sellerProductStatTop">
+    <div class="earningsSummaryCard">
 
-        <span>Published</span>
-
-        <div class="sellerProductStatIcon">
-          <i class="ri-checkbox-circle-line"></i>
-        </div>
-
+      <div class="earningsSummaryIcon">
+        <i class="ri-money-dollar-box-line"></i>
       </div>
-
-      <strong id="productsPublished">
-        0
-      </strong>
-
-      <small>
-        Live products
-      </small>
-
-    </div>
-
-
-    <div class="sellerProductStatCard">
-
-      <div class="sellerProductStatTop">
-
-        <span>Pending</span>
-
-        <div class="sellerProductStatIcon">
-          <i class="ri-time-line"></i>
-        </div>
-
-      </div>
-
-      <strong id="productsPending">
-        0
-      </strong>
-
-      <small>
-        Awaiting review
-      </small>
-
-    </div>
-
-
-    <div class="sellerProductStatCard">
-
-      <div class="sellerProductStatTop">
-
-        <span>Total Views</span>
-
-        <div class="sellerProductStatIcon">
-          <i class="ri-eye-line"></i>
-        </div>
-
-      </div>
-
-      <strong id="productsViews">
-        0
-      </strong>
-
-      <small>
-        Product views
-      </small>
-
-    </div>
-
-  </section>
-
-
-  <!-- ========================================
-       PRODUCT TOOLBAR
-  ========================================= -->
-
-  <section class="sellerProductsToolbar">
-
-    <!-- SEARCH -->
-
-    <div class="sellerProductSearch">
-
-      <i class="ri-search-line"></i>
-
-      <input
-        type="search"
-        id="productSearch"
-        placeholder="Search products..."
-      >
-
-    </div>
-
-
-    <!-- FILTER -->
-
-    <div class="sellerProductFilters">
-
-      <button
-        class="sellerProductFilter active"
-        data-filter="all"
-      >
-        All
-      </button>
-
-      <button
-        class="sellerProductFilter"
-        data-filter="published"
-      >
-        Published
-      </button>
-
-      <button
-        class="sellerProductFilter"
-        data-filter="pending"
-      >
-        Pending
-      </button>
-
-      <button
-        class="sellerProductFilter"
-        data-filter="rejected"
-      >
-        Rejected
-      </button>
-
-    </div>
-
-  </section>
-
-
-  <!-- ========================================
-       PRODUCTS
-  ========================================= -->
-
-  <section class="sellerProductListSection">
-
-
-    <div class="sellerProductListHeader">
 
       <div>
 
-        <h2>Your Products</h2>
+        <span>Total Earnings</span>
 
-        <p>
-          Manage your uploaded products.
-        </p>
+        <strong id="totalEarnings">
+          GHS 0.00
+        </strong>
+
+        <small>
+          Lifetime creator earnings
+        </small>
 
       </div>
 
     </div>
 
 
-    <!-- ======================================
-         PRODUCT GRID
-    ======================================= -->
+    <!-- THIS MONTH -->
 
-    <div
-      class="sellerProductGrid"
-      id="sellerProductGrid"
-    >
+    <div class="earningsSummaryCard">
 
+      <div class="earningsSummaryIcon">
+        <i class="ri-calendar-line"></i>
+      </div>
 
-      <!-- ====================================
-           PRODUCT CARD EXAMPLE
-      ==================================== -->
+      <div>
 
-      <article
-        class="sellerProductCard"
-        style="display:none;"
-      >
+        <span>This Month</span>
 
-        <div class="sellerProductCover">
+        <strong id="monthlyEarnings">
+          GHS 0.00
+        </strong>
 
-          <img
-            src=""
-            alt="Product cover"
-          >
+        <small>
+          Earnings this month
+        </small>
+
+      </div>
+
+    </div>
 
 
-          <span class="sellerProductStatus">
-            Pending
-          </span>
+    <!-- PENDING -->
 
-        </div>
+    <div class="earningsSummaryCard">
 
+      <div class="earningsSummaryIcon">
+        <i class="ri-time-line"></i>
+      </div>
 
-        <div class="sellerProductCardBody">
+      <div>
 
-          <div class="sellerProductType">
-            Notes
-          </div>
+        <span>Pending Earnings</span>
 
-          <h3>
-            Product Title
-          </h3>
+        <strong id="pendingEarnings">
+          GHS 0.00
+        </strong>
 
-          <p>
-            Product description goes here.
-          </p>
-
-
-          <div class="sellerProductMeta">
-
-            <span>
-              <i class="ri-shopping-bag-line"></i>
-              0 sales
-            </span>
-
-            <span>
-              <i class="ri-eye-line"></i>
-              0 views
-            </span>
-
-          </div>
-
-
-          <div class="sellerProductCardBottom">
-
-            <strong>
-              GHS 0.00
-            </strong>
-
-            <button
-              type="button"
-              class="sellerProductMenu"
-            >
-              <i class="ri-more-2-fill"></i>
-            </button>
-
-          </div>
-
-        </div>
-
-      </article>
-
-
-      <!-- ====================================
-           EMPTY STATE
-      ==================================== -->
-
-      <div
-        class="sellerProductsEmpty"
-        id="sellerProductsEmpty"
-        style="display:none;"
-      >
-
-        <div class="sellerProductsEmptyIcon">
-
-          <i class="ri-box-3-line"></i>
-
-        </div>
-
-        <h3>
-          No products yet
-        </h3>
-
-        <p>
-          Upload your first product and start
-          building your creator store.
-        </p>
-
-        <a
-          href="upload-product.html"
-          class="sellerAddProductEmptyBtn"
-        >
-          <i class="ri-add-line"></i>
-          Add Product
-        </a>
+        <small>
+          Awaiting availability
+        </small>
 
       </div>
 
     </div>
 
   </section>
+
+
+  <!-- ========================================
+       EARNINGS CHART
+  ========================================= -->
+
+  <section class="earningsChartSection">
+
+    <div class="earningsChartHeader">
+
+      <div class="earningsChartTitle">
+
+        <div class="earningsChartIcon">
+          <i class="ri-line-chart-line"></i>
+        </div>
+
+        <div>
+
+          <h2>Earnings Overview</h2>
+
+          <p>
+            Track your earnings over time.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- PERIOD FILTER -->
+
+      <div class="earningsPeriodFilters">
+
+        <button
+          class="earningsPeriodBtn active"
+          data-period="7"
+        >
+          7 Days
+        </button>
+
+        <button
+          class="earningsPeriodBtn"
+          data-period="30"
+        >
+          30 Days
+        </button>
+
+        <button
+          class="earningsPeriodBtn"
+          data-period="90"
+        >
+          3 Months
+        </button>
+
+        <button
+          class="earningsPeriodBtn"
+          data-period="all"
+        >
+          All
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="earningsChartContainer">
+
+      <div id="earningsChart"></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ========================================
+       RECENT EARNINGS
+  ========================================= -->
+
+  <section class="earningsHistorySection">
+
+    <div class="earningsHistoryHeader">
+
+      <div class="earningsHistoryTitle">
+
+        <div class="earningsHistoryIcon">
+          <i class="ri-file-list-3-line"></i>
+        </div>
+
+        <div>
+
+          <h2>Recent Earnings</h2>
+
+          <p>
+            Earnings generated from your product sales.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- TABLE -->
+
+    <div class="earningsTableCard">
+
+      <div class="earningsTableScroll">
+
+
+        <!-- TABLE HEADER -->
+
+        <div class="earningsTableHeader">
+
+          <span>PRODUCT</span>
+
+          <span>SALE</span>
+
+          <span>YOUR EARNINGS</span>
+
+          <span>PLATFORM FEE</span>
+
+          <span>DATE</span>
+
+          <span>STATUS</span>
+
+        </div>
+
+
+        <!-- TABLE BODY -->
+
+        <div
+          class="earningsTableBody"
+          id="earningsTableBody"
+        >
+
+
+          <!-- ==================================
+               EXAMPLE ROW
+          ================================== -->
+
+          <div
+            class="earningsTableRow"
+            style="display:none;"
+          >
+
+            <div class="earningsProduct">
+
+              <strong>
+                Product Title
+              </strong>
+
+              <small>
+                Digital Product
+              </small>
+
+            </div>
+
+
+            <small>
+              GHS 50.00
+            </small>
+
+
+            <strong class="earningsCreatorAmount">
+              GHS 35.00
+            </strong>
+
+
+            <small>
+              GHS 15.00
+            </small>
+
+
+            <small>
+              Aug 24, 2026
+            </small>
+
+
+            <span class="earningsStatus completed">
+              Completed
+            </span>
+
+          </div>
+
+
+          <!-- ==================================
+               EMPTY STATE
+          ================================== -->
+
+          <div
+            class="earningsEmpty"
+            id="earningsEmpty"
+            style="display:none;"
+          >
+
+            <div class="earningsEmptyIcon">
+
+              <i class="ri-money-dollar-circle-line"></i>
+
+            </div>
+
+            <h3>
+              No earnings yet
+            </h3>
+
+            <p>
+              Your product sales and creator earnings
+              will appear here once you make a sale.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ========================================
+       WITHDRAWAL LINK
+  ========================================= -->
+
+  <div class="earningsWithdrawalLink">
+
+    <i class="ri-bank-card-line"></i>
+
+    <div>
+
+      <strong>
+        Need to manage your withdrawals?
+      </strong>
+
+      <p>
+        View your withdrawal history and payment details.
+      </p>
+
+    </div>
+
+    <a href="seller-withdrawal.html">
+      View Withdrawals
+      <i class="ri-arrow-right-line"></i>
+    </a>
+
+  </div>
 
 </section>
 
 
 
 
-
-     <!-----BOTTOM-NAVBAR----->
+   <!-----BOTTOM-NAVBAR----->
   <div class="bottom-navbar" id="navIconDiv">
     <div class="btom-navIcon" onclick="window.location.href='./index.html'">
       <div class="activeImg active" id="activeMtn">
@@ -698,6 +742,6 @@ document.addEventListener("DOMContentLoaded", () => {
   </div>
   </main>
 
-  <script type="module" src="sellerProducts.js"></script>
+  <script type="module" src="sellerEarnings.js"></script>
 </body>
 </html>

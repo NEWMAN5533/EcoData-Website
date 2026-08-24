@@ -1,0 +1,1224 @@
+:root {
+  --color-white: #fff;
+  --color-light: #f5f4f7;
+  --color-gray-light: #86848c;
+  --color-gray-dark: #56555e;
+  --color-dark: #27282f;
+  --color-primary: rgb(71, 7, 234);
+  --color-success: rgb(34, 202, 75);
+  --color-danger: rgb(255, 67, 54);
+  --color-warning:  rgb(234, 181, 7);
+  --color-purple: rgb(160, 99, 245);
+  --color-primary-light: rgba(71, 7, 234, 0.2);
+  --color-success-light: rgba(34, 202, 75, 0.2);
+  --color-danger-light: rgba(255, 67, 54, 0.2);
+  --color-purple-light: rgba(160, 99, 245, 0.2);
+
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  --card-padding: 1.6rem;
+  --border-cl: rgb(226, 226, 226);
+
+  --radius-1: 0.5rem;
+  --radius-2: 1rem;
+  --radius-3: 1.6rem;
+
+  --transition: all 300ms ease;
+}
+
+
+
+
+
+/* ==========================================
+   SELLER PROFILE + FIXED SIDEBAR
+   DESKTOP: 768px AND ABOVE
+========================================== */
+
+@media (min-width: 768px) {
+
+  /* ------------------------------------------
+     FIXED SIDEBAR
+  ------------------------------------------ */
+
+  .sidebar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 17rem;
+    height: 100vh;
+
+    z-index: 1000;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+
+  /* ------------------------------------------
+     PROFILE CONTENT
+     Leave space for sidebar
+  ------------------------------------------ */
+
+  .sellerEarningsPage {
+
+    width: auto;
+
+    min-width: calc(100vw - 272px);
+
+    margin-left: 238px !important;
+
+    padding: 30px;
+
+  }
+
+}
+
+
+/* ==========================================
+   LARGE DESKTOP
+========================================== */
+
+@media (min-width: 1200px) {
+
+  .sellerEarningsPage {
+
+    margin-left: 250px !important;
+
+    min-width: calc(100vw - 272px) !important;
+
+    padding-left: 35px;
+    padding-right: 35px;
+
+    overflow-x: hidden !important;
+
+  }
+
+  .sidebar{
+    width: 242px !important;
+  }
+
+}
+
+
+/* ==========================================
+   TABLET / MOBILE
+   SIDEBAR IS NOT FIXED
+========================================== */
+
+@media (max-width: 767px) {
+
+.sellerEarningsPage{
+  margin-bottom: 6dvh !important;
+}
+
+  .sellerEarningsPage{
+    margin-bottom: 6rem !important;
+  }
+
+  .sidebar {
+
+    display: none;
+
+  }
+
+
+  .sellerEarningsPage {
+
+    width: 100%;
+
+    margin-left: 0;
+
+    padding: 15px;
+
+  }
+}
+
+
+
+/* ==========================================
+   SELLER EARNINGS PAGE
+========================================== */
+
+.sellerEarningsPage {
+  width: 100%;
+  max-width: 1180px;
+
+  margin: 0 auto;
+  padding: 24px;
+
+  box-sizing: border-box;
+}
+
+
+/* ==========================================
+   PAGE HEADER
+========================================== */
+
+.sellerEarningsHeader {
+  margin-bottom: 20px;
+}
+
+
+.sellerEarningsTitle {
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+}
+
+
+.sellerEarningsTitleIcon {
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 12px;
+
+  background:
+    rgba(128, 128, 128, 0.09);
+
+  font-size: 20px;
+}
+
+
+.sellerEarningsTitle h1 {
+  margin: 0;
+
+  font-size: 25px;
+  font-weight: 750;
+
+  letter-spacing: -0.6px;
+}
+
+
+.sellerEarningsTitle p {
+  margin: 4px 0 0;
+
+  font-size: 12px;
+
+  opacity: 0.5;
+}
+
+
+/* ==========================================
+   EARNINGS OVERVIEW
+========================================== */
+
+.earningsOverview {
+  display: grid;
+
+  grid-template-columns:
+    1.4fr
+    1fr
+    1fr
+    1fr;
+
+  gap: 12px;
+
+  margin-bottom: 20px;
+}
+
+
+/* ==========================================
+   BALANCE CARD
+========================================== */
+
+.earningsBalanceCard {
+  padding: 20px;
+
+  border: 1px solid
+    rgba(128, 128, 128, 0.15);
+
+  border-radius: 18px;
+
+  background:
+    rgba(128, 128, 128, 0.035);
+}
+
+
+.earningsBalanceTop {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 15px;
+}
+
+
+.earningsBalanceTop span {
+  display: block;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  opacity: 0.5;
+}
+
+
+.earningsBalanceTop strong {
+  display: block;
+
+  margin-top: 8px;
+
+  font-size: 26px;
+
+  font-weight: 750;
+
+  letter-spacing: -0.7px;
+}
+
+
+.earningsBalanceCard > p {
+  margin: 8px 0 14px;
+
+  font-size: 10px;
+
+  opacity: 0.4;
+}
+
+
+.earningsBalanceIcon {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 11px;
+
+  background:
+    rgba(128, 128, 128, 0.09);
+
+  font-size: 18px;
+}
+
+
+/* ==========================================
+   WITHDRAW BUTTON
+========================================== */
+
+.sellerEarningsWithdrawButton {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 9px 13px;
+
+  border: 0;
+
+  border-radius: 9px;
+
+  background: #111;
+
+  color: #fff;
+
+  font-family: inherit;
+
+  font-size: 10px;
+
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+
+.sellerEarningsWithdrawButton:hover {
+  opacity: 0.88;
+
+  transform: translateY(-1px);
+}
+
+
+.sellerEarningsWithdrawButton i {
+  font-size: 13px;
+}
+
+
+/* ==========================================
+   SUMMARY CARDS
+========================================== */
+
+.earningsSummaryCard {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  min-width: 0;
+
+  padding: 18px;
+
+  border: 1px solid
+    rgba(128, 128, 128, 0.15);
+
+  border-radius: 16px;
+
+  background:
+    rgba(128, 128, 128, 0.025);
+}
+
+
+.earningsSummaryIcon {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 10px;
+
+  background:
+    rgba(128, 128, 128, 0.08);
+
+  font-size: 17px;
+}
+
+
+.earningsSummaryCard span {
+  display: block;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  opacity: 0.5;
+}
+
+
+.earningsSummaryCard strong {
+  display: block;
+
+  margin-top: 5px;
+
+  font-size: 18px;
+
+  font-weight: 750;
+
+  letter-spacing: -0.3px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+
+.earningsSummaryCard small {
+  display: block;
+
+  margin-top: 3px;
+
+  font-size: 9px;
+
+  opacity: 0.4;
+}
+
+
+/* ==========================================
+   CHART SECTION
+========================================== */
+
+.earningsChartSection {
+  width: 100%;
+
+  margin-bottom: 20px;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+
+  border: 1px solid
+    rgba(128, 128, 128, 0.15);
+
+  border-radius: 18px;
+
+  background:
+    rgba(128, 128, 128, 0.025);
+}
+
+
+.earningsChartHeader {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 15px;
+}
+
+
+.earningsChartTitle {
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+}
+
+
+.earningsChartIcon {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 11px;
+
+  background:
+    rgba(128, 128, 128, 0.08);
+
+  font-size: 17px;
+}
+
+
+.earningsChartTitle h2 {
+  margin: 0;
+
+  font-size: 15px;
+
+  font-weight: 700;
+}
+
+
+.earningsChartTitle p {
+  margin: 3px 0 0;
+
+  font-size: 10px;
+
+  opacity: 0.45;
+}
+
+
+/* ==========================================
+   PERIOD FILTERS
+========================================== */
+
+.earningsPeriodFilters {
+  display: flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  overflow-x: auto;
+
+  scrollbar-width: none;
+}
+
+
+.earningsPeriodFilters::-webkit-scrollbar {
+  display: none;
+}
+
+
+.earningsPeriodBtn {
+  height: 29px;
+
+  padding: 0 10px;
+
+  flex-shrink: 0;
+
+  border: 1px solid
+    rgba(128, 128, 128, 0.15);
+
+  border-radius: 8px;
+
+  background: transparent;
+
+  color: inherit;
+
+  font-family: inherit;
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  opacity: 0.55;
+
+  transition:
+    background 0.2s ease,
+    opacity 0.2s ease,
+    border-color 0.2s ease;
+}
+
+
+.earningsPeriodBtn:hover {
+  opacity: 0.8;
+}
+
+
+.earningsPeriodBtn.active {
+  background:
+    rgba(128, 128, 128, 0.09);
+
+  border-color:
+    rgba(128, 128, 128, 0.25);
+
+  opacity: 1;
+}
+
+
+/* ==========================================
+   CHART CONTAINER
+========================================== */
+
+.earningsChartContainer {
+  width: 100%;
+
+  min-height: 280px;
+}
+
+
+#earningsChart {
+  width: 100%;
+}
+
+
+/* ==========================================
+   HISTORY SECTION
+========================================== */
+
+.earningsHistorySection {
+  width: 100%;
+
+  margin-bottom: 20px;
+}
+
+
+.earningsHistoryHeader {
+  margin-bottom: 12px;
+}
+
+
+.earningsHistoryTitle {
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+}
+
+
+.earningsHistoryIcon {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 11px;
+
+  background:
+    rgba(128, 128, 128, 0.08);
+
+  font-size: 17px;
+}
+
+
+.earningsHistoryTitle h2 {
+  margin: 0;
+
+  font-size: 15px;
+
+  font-weight: 700;
+}
+
+
+.earningsHistoryTitle p {
+  margin: 3px 0 0;
+
+  font-size: 11px;
+
+  opacity: 0.5;
+}
+
+
+/* ==========================================
+   TABLE CARD
+========================================== */
+
+.earningsTableCard {
+  width: 100%;
+
+  border: 1px solid
+    rgba(128, 128, 128, 0.15);
+
+  border-radius: 18px;
+
+  background:
+    rgba(128, 128, 128, 0.025);
+
+  overflow: hidden;
+}
+
+
+/* ==========================================
+   TABLE SCROLL
+========================================== */
+
+.earningsTableScroll {
+  width: 100%;
+
+  overflow-x: auto;
+
+  scrollbar-width: thin;
+}
+
+
+.earningsTableScroll::-webkit-scrollbar {
+  height: 5px;
+}
+
+
+.earningsTableScroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+.earningsTableScroll::-webkit-scrollbar-thumb {
+  background:
+    rgba(128, 128, 128, 0.25);
+
+  border-radius: 10px;
+}
+
+
+/* ==========================================
+   TABLE HEADER
+========================================== */
+
+.earningsTableHeader {
+
+  min-width: 850px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(200px, 1.5fr)
+    110px
+    130px
+    130px
+    130px
+    110px;
+
+  align-items: center;
+
+  padding: 13px 15px;
+
+  border-bottom: 1px solid
+    rgba(128, 128, 128, 0.12);
+
+  background:
+    rgba(128, 128, 128, 0.035);
+}
+
+
+.earningsTableHeader span {
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.4px;
+
+  opacity: 0.42;
+}
+
+
+/* ==========================================
+   TABLE BODY
+========================================== */
+
+.earningsTableBody {
+  width: 100%;
+
+  min-width: 850px;
+}
+
+
+/* ==========================================
+   TABLE ROW
+========================================== */
+
+.earningsTableRow {
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(200px, 1.5fr)
+    110px
+    130px
+    130px
+    130px
+    110px;
+
+  align-items: center;
+
+  min-height: 62px;
+
+  padding: 8px 15px;
+
+  border-bottom: 1px solid
+    rgba(128, 128, 128, 0.08);
+}
+
+
+.earningsTableRow:last-child {
+  border-bottom: 0;
+}
+
+
+.earningsTableRow small {
+  font-size: 10px;
+
+  opacity: 0.65;
+}
+
+
+/* ==========================================
+   PRODUCT
+========================================== */
+
+.earningsProduct {
+  min-width: 0;
+}
+
+
+.earningsProduct strong {
+  display: block;
+
+  max-width: 220px;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+
+  font-size: 10px;
+
+  font-weight: 650;
+}
+
+
+.earningsProduct small {
+  display: block;
+
+  margin-top: 3px;
+
+  font-size: 9px;
+
+  opacity: 0.4;
+}
+
+
+/* ==========================================
+   CREATOR EARNINGS
+========================================== */
+
+.earningsCreatorAmount {
+  font-size: 10px;
+
+  font-weight: 700;
+}
+
+
+/* ==========================================
+   STATUS
+========================================== */
+
+.earningsStatus {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: fit-content;
+
+  padding: 5px 8px;
+
+  border-radius: 7px;
+
+  font-size: 8px;
+
+  font-weight: 650;
+}
+
+
+.earningsStatus.completed {
+  background:
+    rgba(0, 150, 80, 0.08);
+}
+
+
+.earningsStatus.pending {
+  background:
+    rgba(128, 128, 128, 0.09);
+}
+
+
+.earningsStatus.failed {
+  background:
+    rgba(200, 50, 50, 0.08);
+}
+
+
+/* ==========================================
+   EMPTY STATE
+========================================== */
+
+.earningsEmpty {
+
+  min-height: 220px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 30px;
+
+  text-align: center;
+}
+
+
+.earningsEmptyIcon {
+
+  width: 54px;
+  height: 54px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 11px;
+
+  border-radius: 15px;
+
+  background:
+    rgba(128, 128, 128, 0.08);
+
+  font-size: 23px;
+
+  opacity: 0.65;
+}
+
+
+.earningsEmpty h3 {
+  margin: 0;
+
+  font-size: 13px;
+
+  font-weight: 700;
+}
+
+
+.earningsEmpty p {
+
+  max-width: 300px;
+
+  margin: 6px 0 0;
+
+  font-size: 10px;
+
+  line-height: 1.6;
+
+  opacity: 0.45;
+}
+
+
+/* ==========================================
+   WITHDRAWAL LINK
+========================================== */
+
+.earningsWithdrawalLink {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  padding: 16px 18px;
+
+  border: 1px solid
+    rgba(128, 128, 128, 0.15);
+
+  border-radius: 16px;
+
+  background:
+    rgba(128, 128, 128, 0.025);
+}
+
+
+.earningsWithdrawalLink > i {
+  font-size: 21px;
+
+  opacity: 0.65;
+}
+
+
+.earningsWithdrawalLink > div {
+  flex: 1;
+
+  min-width: 0;
+}
+
+
+.earningsWithdrawalLink strong {
+  display: block;
+
+  font-size: 11px;
+
+  font-weight: 650;
+}
+
+
+.earningsWithdrawalLink p {
+  margin: 3px 0 0;
+
+  font-size: 9px;
+
+  opacity: 0.45;
+}
+
+
+.earningsWithdrawalLink a {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  flex-shrink: 0;
+
+  color: inherit;
+
+  text-decoration: none;
+
+  font-size: 10px;
+
+  font-weight: 650;
+
+  opacity: 0.7;
+}
+
+
+.earningsWithdrawalLink a:hover {
+  opacity: 1;
+}
+
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 1050px) {
+
+  .earningsOverview {
+
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+
+  .earningsBalanceCard {
+
+    grid-column: 1 / -1;
+  }
+
+}
+
+
+/* ==========================================
+   SMALL TABLET
+========================================== */
+
+@media (max-width: 750px) {
+
+  .sellerEarningsPage {
+    padding: 18px;
+  }
+
+
+  .earningsChartHeader {
+
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+
+  .earningsPeriodFilters {
+    width: 100%;
+  }
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 600px) {
+
+  .sellerEarningsPage {
+    padding: 14px;
+  }
+
+
+  .earningsOverview {
+
+    grid-template-columns: 1fr;
+  }
+
+
+  .earningsBalanceCard {
+
+    grid-column: auto;
+  }
+
+
+  .earningsChartSection {
+    padding: 16px;
+  }
+
+
+  .earningsChartContainer {
+    min-height: 240px;
+  }
+
+
+  .earningsWithdrawalLink {
+
+    align-items: flex-start;
+
+    flex-wrap: wrap;
+  }
+
+
+  .earningsWithdrawalLink a {
+
+    width: 100%;
+
+    justify-content: center;
+
+    padding-top: 8px;
+  }
+
+}
+
+
+/* ==========================================
+   SMALL MOBILE
+========================================== */
+
+@media (max-width: 450px) {
+
+  .sellerEarningsPage {
+    padding: 11px;
+  }
+
+
+  .sellerEarningsTitleIcon {
+
+    width: 40px;
+    height: 40px;
+
+    font-size: 18px;
+  }
+
+
+  .sellerEarningsTitle h1 {
+    font-size: 21px;
+  }
+
+
+  .sellerEarningsTitle p {
+    font-size: 10px;
+  }
+
+
+  .earningsBalanceCard {
+    padding: 16px;
+  }
+
+
+  .earningsBalanceTop strong {
+    font-size: 22px;
+  }
+
+
+  .earningsSummaryCard {
+    padding: 15px;
+  }
+
+
+  .earningsChartTitle h2 {
+    font-size: 14px;
+  }
+
+
+  .earningsHistoryTitle h2 {
+    font-size: 14px;
+  }
+
+
+  .earningsHistoryTitle p {
+    display: none;
+  }
+
+
+  .earningsWithdrawalLink {
+    padding: 15px;
+  }
+
+}
