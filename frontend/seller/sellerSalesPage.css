@@ -1,0 +1,1044 @@
+:root {
+  --color-white: #fff;
+  --color-light: #f5f4f7;
+  --color-gray-light: #86848c;
+  --color-gray-dark: #56555e;
+  --color-dark: #27282f;
+  --color-primary: rgb(71, 7, 234);
+  --color-success: rgb(34, 202, 75);
+  --color-danger: rgb(255, 67, 54);
+  --color-warning:  rgb(234, 181, 7);
+  --color-purple: rgb(160, 99, 245);
+  --color-primary-light: rgba(71, 7, 234, 0.2);
+  --color-success-light: rgba(34, 202, 75, 0.2);
+  --color-danger-light: rgba(255, 67, 54, 0.2);
+  --color-purple-light: rgba(160, 99, 245, 0.2);
+
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  --card-padding: 1.6rem;
+  --border-cl: rgb(226, 226, 226);
+
+  --radius-1: 0.5rem;
+  --radius-2: 1rem;
+  --radius-3: 1.6rem;
+
+  --transition: all 300ms ease;
+}
+/* ==========================================
+   SELLER PROFILE + FIXED SIDEBAR
+   DESKTOP: 768px AND ABOVE
+========================================== */
+
+@media (min-width: 768px) {
+
+  /* ------------------------------------------
+     FIXED SIDEBAR
+  ------------------------------------------ */
+
+  .sidebar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 17rem;
+    height: 100vh;
+
+    z-index: 1000;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+
+  /* ------------------------------------------
+     PROFILE CONTENT
+     Leave space for sidebar
+  ------------------------------------------ */
+
+  .sellerSalesPage{
+
+    width: auto;
+
+    min-width: calc(100vw - 272px);
+
+    margin-left: 238px !important;
+
+    padding: 30px;
+
+  }
+
+}
+
+
+/* ==========================================
+   LARGE DESKTOP
+========================================== */
+
+@media (min-width: 1200px) {
+
+  .sellerSalesPage {
+
+    margin-left: 250px !important;
+
+    min-width: calc(100vw - 272px) !important;
+
+    padding-left: 35px;
+    padding-right: 35px;
+
+    overflow-x: hidden !important;
+
+  }
+
+  .sidebar{
+    width: 242px !important;
+  }
+
+}
+
+
+/* ==========================================
+   TABLET / MOBILE
+   SIDEBAR IS NOT FIXED
+========================================== */
+
+@media (max-width: 767px) {
+  .main-container{
+    width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .sidebar {
+
+    display: none;
+
+  }
+
+
+  .sellerSalesPage {
+
+    width: 100%;
+
+    margin-left: 0;
+
+    padding: 15px;
+
+    margin-bottom: 5.5rem  !important;
+
+  }
+}
+
+
+
+
+/* ==========================================
+   SELLER SALES PAGE
+========================================== */
+
+.sellerSalesPage {
+
+  width: 100%;
+
+  max-width: 1180px;
+
+  padding: 24px;
+
+  box-sizing: border-box;
+}
+
+
+/* ==========================================
+   FIXED SIDEBAR OFFSET
+========================================== */
+
+@media (min-width: 768px) {
+
+  .sellerSalesPage {
+
+    margin-left: 250px;
+
+    width: calc(100% - 250px);
+
+    max-width: none;
+
+    padding: 24px 28px;
+  }
+
+}
+
+
+/* ==========================================
+   PAGE HEADER
+========================================== */
+
+.sellerSalesHeader {
+
+  margin-bottom: 20px;
+}
+
+
+.sellerSalesTitleRow {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+}
+
+
+.sellerSalesTitleIcon {
+
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 12px;
+
+  background:
+    rgba(128, 128, 128, 0.09);
+
+  font-size: 20px;
+}
+
+
+.sellerSalesHeader h1 {
+
+  margin: 0;
+
+  font-size: 25px;
+
+  font-weight: 750;
+
+  letter-spacing: -0.6px;
+}
+
+
+.sellerSalesHeader p {
+
+  margin: 4px 0 0;
+
+  font-size: 12px;
+
+  opacity: 0.55;
+}
+
+
+/* ==========================================
+   SALES SUMMARY
+========================================== */
+
+.sellerSalesSummary {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 12px;
+
+  margin-bottom: 22px;
+}
+
+
+/* ==========================================
+   SALES CARD
+========================================== */
+
+.sellerSalesCard {
+
+  min-width: 0;
+
+  padding: 17px;
+
+  border: 1px solid
+    rgba(128, 128, 128, 0.15);
+
+  border-radius: 16px;
+
+  background:
+    rgba(128, 128, 128, 0.025);
+
+  box-sizing: border-box;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+
+.sellerSalesCard:hover {
+
+  transform: translateY(-2px);
+
+  border-color:
+    rgba(128, 128, 128, 0.22);
+
+  background:
+    rgba(128, 128, 128, 0.045);
+}
+
+
+/* ==========================================
+   CARD TOP
+========================================== */
+
+.sellerSalesCardTop {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 10px;
+}
+
+
+.sellerSalesCardTop > span {
+
+  min-width: 0;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  opacity: 0.55;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+
+.sellerSalesCardIcon {
+
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 9px;
+
+  background:
+    rgba(128, 128, 128, 0.09);
+
+  font-size: 15px;
+}
+
+
+/* ==========================================
+   CARD VALUE
+========================================== */
+
+.sellerSalesCard > strong {
+
+  display: block;
+
+  margin-top: 14px;
+
+  font-size: 22px;
+
+  font-weight: 750;
+
+  letter-spacing: -0.5px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+
+.sellerSalesCard > small {
+
+  display: block;
+
+  margin-top: 5px;
+
+  font-size: 9px;
+
+  opacity: 0.42;
+}
+
+
+/* ==========================================
+   SALES SECTION
+========================================== */
+
+.sellerSalesSection {
+
+  width: 100%;
+
+  max-width: 100%;
+}
+
+
+/* ==========================================
+   SECTION HEADER
+========================================== */
+
+.sellerSalesSectionHeader {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 12px;
+}
+
+
+.sellerSalesSectionTitle {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+
+  min-width: 0;
+}
+
+
+.sellerSalesSectionIcon {
+
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 11px;
+
+  background:
+    rgba(128, 128, 128, 0.08);
+
+  font-size: 17px;
+}
+
+
+.sellerSalesSectionHeader h2 {
+
+  margin: 0;
+
+  font-size: 15px;
+
+  font-weight: 700;
+}
+
+
+.sellerSalesSectionHeader p {
+
+  margin: 3px 0 0;
+
+  font-size: 11px;
+
+  opacity: 0.5;
+}
+
+
+/* ==========================================
+   WITHDRAW BUTTON
+========================================== */
+
+.sellerSalesWithdrawBtn {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 9px 13px;
+
+  border: 1px solid
+    rgba(128, 128, 128, 0.14);
+
+  border-radius: 9px;
+
+  background:
+    rgba(128, 128, 128, 0.035);
+
+  color: inherit;
+
+  font-family: inherit;
+
+  font-size: 10px;
+
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.sellerSalesWithdrawBtn:hover {
+
+  background:
+    rgba(128, 128, 128, 0.08);
+
+  transform: translateY(-1px);
+}
+
+
+.sellerSalesWithdrawBtn i {
+
+  font-size: 14px;
+}
+
+
+/* ==========================================
+   TABLE CARD
+========================================== */
+
+.sellerSalesTableCard {
+
+  width: 100%;
+
+  max-width: 100%;
+
+  border: 1px solid
+    rgba(128, 128, 128, 0.15);
+
+  border-radius: 18px;
+
+  background:
+    rgba(128, 128, 128, 0.025);
+
+  overflow: hidden;
+
+  box-sizing: border-box;
+}
+
+
+/* ==========================================
+   TABLE SCROLL
+========================================== */
+
+.sellerSalesTableCard .table-scroll-area {
+
+  width: 100%;
+
+  max-width: 100%;
+
+  overflow-x: auto;
+
+  overflow-y: hidden;
+
+  -webkit-overflow-scrolling: touch;
+
+  scrollbar-width: thin;
+}
+
+
+/* ==========================================
+   TABLE HEADER
+========================================== */
+
+.sellerSalesTableHeader {
+
+  min-width: 900px;
+
+  width: 900px;
+
+  display: grid;
+
+  grid-template-columns:
+
+    minmax(180px, 1.5fr)
+
+    minmax(130px, 1fr)
+
+    110px
+
+    120px
+
+    130px
+
+    130px;
+
+  align-items: center;
+
+  padding: 13px 16px;
+
+  border-bottom: 1px solid
+    rgba(128, 128, 128, 0.12);
+
+  background:
+    rgba(128, 128, 128, 0.035);
+
+  box-sizing: border-box;
+}
+
+
+.sellerSalesTableHeader span {
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.4px;
+
+  opacity: 0.42;
+}
+
+
+/* ==========================================
+   TABLE CONTENT
+========================================== */
+
+.sellerSalesTableContent {
+
+  width: 100%;
+
+  min-width: 900px;
+}
+
+
+/* ==========================================
+   ROW WRAPPER
+========================================== */
+
+.sellerSalesTableContent .row-wrapper {
+
+  width: 100%;
+
+  min-width: 900px;
+}
+
+
+/* ==========================================
+   SALES ROW
+========================================== */
+
+.sellerSalesTableContent .live-body-rowS {
+
+  min-width: 900px;
+
+  display: grid;
+
+  grid-template-columns:
+
+    minmax(180px, 1.5fr)
+
+    minmax(130px, 1fr)
+
+    110px
+
+    120px
+
+    130px
+
+    130px;
+
+  align-items: center;
+
+  padding: 15px 16px;
+
+  border-bottom: 1px solid
+    rgba(128, 128, 128, 0.08);
+
+  box-sizing: border-box;
+}
+
+
+.sellerSalesTableContent .live-body-rowS:last-child {
+
+  border-bottom: 0;
+}
+
+
+.sellerSalesTableContent .live-body-rowS small {
+
+  min-width: 0;
+
+  font-size: 10px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+
+/* ==========================================
+   EMPTY STATE
+========================================== */
+
+.sellerSalesEmpty {
+
+  min-height: 220px;
+
+  padding: 30px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  box-sizing: border-box;
+}
+
+
+.sellerSalesEmptyIcon {
+
+  width: 54px;
+
+  height: 54px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-bottom: 12px;
+
+  border-radius: 15px;
+
+  background:
+    rgba(128, 128, 128, 0.08);
+
+  font-size: 24px;
+
+  opacity: 0.7;
+}
+
+
+.sellerSalesEmpty h3 {
+
+  margin: 0;
+
+  font-size: 13px;
+
+  font-weight: 700;
+}
+
+
+.sellerSalesEmpty p {
+
+  max-width: 320px;
+
+  margin: 6px 0 0;
+
+  font-size: 10px;
+
+  line-height: 1.6;
+
+  opacity: 0.45;
+}
+
+
+/* ==========================================
+   SCROLLBAR
+========================================== */
+
+.sellerSalesTableCard
+.table-scroll-area::-webkit-scrollbar {
+
+  height: 5px;
+}
+
+
+.sellerSalesTableCard
+.table-scroll-area::-webkit-scrollbar-track {
+
+  background: transparent;
+}
+
+
+.sellerSalesTableCard
+.table-scroll-area::-webkit-scrollbar-thumb {
+
+  background:
+    rgba(128, 128, 128, 0.25);
+
+  border-radius: 10px;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) and (min-width: 768px) {
+
+  .sellerSalesSummary {
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 767px) {
+
+  .sellerSalesPage {
+
+    width: 100%;
+
+    max-width: 100%;
+
+    margin: 0;
+
+    padding: 15px;
+
+    box-sizing: border-box;
+
+    overflow-x: hidden;
+  }
+
+
+  .sellerSalesHeader h1 {
+
+    font-size: 21px;
+  }
+
+
+  .sellerSalesHeader p {
+
+    font-size: 11px;
+  }
+
+
+  .sellerSalesSummary {
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 9px;
+  }
+
+
+  .sellerSalesCard {
+
+    padding: 14px;
+
+    border-radius: 14px;
+  }
+
+
+  .sellerSalesCardTop > span {
+
+    font-size: 9px;
+  }
+
+
+  .sellerSalesCardIcon {
+
+    width: 30px;
+    height: 30px;
+
+    font-size: 13px;
+  }
+
+
+  .sellerSalesCard > strong {
+
+    margin-top: 11px;
+
+    font-size: 18px;
+  }
+
+
+  .sellerSalesCard > small {
+
+    font-size: 8px;
+  }
+
+
+  /* SECTION */
+
+  .sellerSalesSectionHeader {
+
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 10px;
+  }
+
+
+  .sellerSalesSectionHeader h2 {
+
+    font-size: 14px;
+  }
+
+
+  .sellerSalesSectionHeader p {
+
+    font-size: 10px;
+  }
+
+
+  .sellerSalesWithdraw {
+
+    width: 100%;
+  }
+
+
+  .sellerSalesWithdrawBtn {
+
+    width: 100%;
+  }
+
+
+  /* TABLE */
+
+  .sellerSalesTableCard {
+
+    border-radius: 14px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+  .sellerSalesPage {
+
+    padding: 11px;
+  }
+
+
+  .sellerSalesSummary {
+
+    gap: 7px;
+  }
+
+
+  .sellerSalesCard {
+
+    padding: 12px;
+
+    border-radius: 12px;
+  }
+
+
+  .sellerSalesCardTop > span {
+
+    font-size: 8px;
+  }
+
+
+  .sellerSalesCardIcon {
+
+    width: 27px;
+    height: 27px;
+
+    font-size: 12px;
+  }
+
+
+  .sellerSalesCard > strong {
+
+    font-size: 16px;
+  }
+
+
+  .sellerSalesCard > small {
+
+    font-size: 7px;
+  }
+
+
+  .sellerSalesSectionIcon {
+
+    width: 36px;
+    height: 36px;
+
+    font-size: 15px;
+  }
+
+
+  .sellerSalesSectionHeader h2 {
+
+    font-size: 13px;
+  }
+
+
+  .sellerSalesSectionHeader p {
+
+    display: none;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 360px) {
+
+  .sellerSalesPage {
+
+    padding: 8px;
+  }
+
+
+  .sellerSalesSummary {
+
+    gap: 6px;
+  }
+
+
+  .sellerSalesCard {
+
+    padding: 10px;
+  }
+
+
+  .sellerSalesCard > strong {
+
+    font-size: 14px;
+  }
+
+}

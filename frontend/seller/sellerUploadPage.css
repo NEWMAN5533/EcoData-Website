@@ -1,0 +1,1268 @@
+:root {
+  --color-white: #fff;
+  --color-light: #f5f4f7;
+  --color-gray-light: #86848c;
+  --color-gray-dark: #56555e;
+  --color-dark: #27282f;
+  --color-primary: rgb(71, 7, 234);
+  --color-success: rgb(34, 202, 75);
+  --color-danger: rgb(255, 67, 54);
+  --color-warning:  rgb(234, 181, 7);
+  --color-purple: rgb(160, 99, 245);
+  --color-primary-light: rgba(71, 7, 234, 0.2);
+  --color-success-light: rgba(34, 202, 75, 0.2);
+  --color-danger-light: rgba(255, 67, 54, 0.2);
+  --color-purple-light: rgba(160, 99, 245, 0.2);
+
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  --card-padding: 1.6rem;
+  --border-cl: rgb(226, 226, 226);
+
+  --radius-1: 0.5rem;
+  --radius-2: 1rem;
+  --radius-3: 1.6rem;
+
+  --transition: all 300ms ease;
+}
+/* ==========================================
+   SELLER PROFILE + FIXED SIDEBAR
+   DESKTOP: 768px AND ABOVE
+========================================== */
+
+@media (min-width: 768px) {
+
+  /* ------------------------------------------
+     FIXED SIDEBAR
+  ------------------------------------------ */
+
+  .sidebar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 17rem;
+    height: 100vh;
+
+    z-index: 1000;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+
+  /* ------------------------------------------
+     PROFILE CONTENT
+     Leave space for sidebar
+  ------------------------------------------ */
+
+  .sellerUploadPage {
+
+    width: auto;
+
+    min-width: calc(100vw - 272px);
+
+    margin-left: 238px !important;
+
+    padding: 30px;
+
+  }
+
+}
+
+
+/* ==========================================
+   LARGE DESKTOP
+========================================== */
+
+@media (min-width: 1200px) {
+
+  .sellerUploadPage {
+
+    margin-left: 250px !important;
+
+    min-width: calc(100vw - 272px) !important;
+
+    padding-left: 35px;
+    padding-right: 35px;
+
+    overflow-x: hidden !important;
+
+  }
+
+  .sidebar{
+    width: 242px !important;
+  }
+
+}
+
+
+/* ==========================================
+   TABLET / MOBILE
+   SIDEBAR IS NOT FIXED
+========================================== */
+
+@media (max-width: 767px) {
+
+  .sidebar {
+
+    display: none;
+
+  }
+
+
+  .sellerUploadPage {
+
+    width: 100%;
+
+    margin-left: 0;
+
+    padding: 15px;
+
+  }
+}
+
+
+
+/* ==========================================
+   SELLER UPLOAD PRODUCT PAGE
+========================================== */
+
+.sellerUploadPage {
+  width: 100%;
+  max-width: 1100px;
+  margin-bottom: 4.5rem;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+
+/* ==========================================
+   PAGE HEADER
+========================================== */
+
+.sellerUploadHeader {
+  margin-bottom: 18px;
+}
+
+
+.sellerUploadTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+
+.sellerUploadTitleIcon {
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 12px;
+
+  background: rgba(128, 128, 128, 0.09);
+
+  font-size: 20px;
+}
+
+
+.sellerUploadHeader h1 {
+  margin: 0;
+
+  font-size: 25px;
+  font-weight: 750;
+
+  letter-spacing: -0.6px;
+}
+
+
+.sellerUploadHeader p {
+  margin: 4px 0 0;
+
+  font-size: 12px;
+
+  opacity: 0.55;
+}
+
+
+/* ==========================================
+   MAIN CARD
+========================================== */
+
+.sellerUploadCard {
+  width: 100%;
+
+  border: 1px solid rgba(128, 128, 128, 0.15);
+  border-radius: 20px;
+
+  background: rgba(128, 128, 128, 0.025);
+
+  overflow: hidden;
+}
+
+
+/* ==========================================
+   FORM
+========================================== */
+
+.sellerUploadForm {
+  width: 100%;
+}
+
+
+.sellerUploadSection {
+  padding: 26px;
+
+  border-bottom: 1px solid
+    rgba(128, 128, 128, 0.12);
+}
+
+
+/* ==========================================
+   SECTION HEADER
+========================================== */
+
+.sellerUploadSectionHeader {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  margin-bottom: 25px;
+}
+
+
+.sellerUploadSectionIcon {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 11px;
+
+  background: rgba(128, 128, 128, 0.08);
+
+  font-size: 17px;
+}
+
+
+.sellerUploadSectionHeader h2 {
+  margin: 0;
+
+  font-size: 15px;
+  font-weight: 700;
+}
+
+
+.sellerUploadSectionHeader p {
+  margin: 3px 0 0;
+
+  font-size: 11px;
+
+  opacity: 0.5;
+}
+
+
+/* ==========================================
+   FORM GROUP
+========================================== */
+
+.sellerUploadForm .form-group {
+  margin-bottom: 22px;
+}
+
+
+.sellerUploadForm .form-group:last-child {
+  margin-bottom: 0;
+}
+
+
+.sellerUploadForm label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-size: 12px;
+  font-weight: 650;
+}
+
+
+/* ==========================================
+   INPUTS
+========================================== */
+
+.sellerUploadForm input[type="text"],
+.sellerUploadForm input[type="number"],
+.sellerUploadForm input[type="url"],
+.sellerUploadForm textarea {
+
+  width: 100%;
+
+  box-sizing: border-box;
+
+  border: 1px solid
+    rgba(128, 128, 128, 0.18);
+
+  border-radius: 11px;
+
+  background: rgba(128, 128, 128, 0.045);
+
+  color: inherit;
+
+  outline: none;
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.sellerUploadForm input[type="text"],
+.sellerUploadForm input[type="number"],
+.sellerUploadForm input[type="url"] {
+
+  height: 46px;
+
+  padding: 0 13px;
+}
+
+
+.sellerUploadForm textarea {
+
+  min-height: 125px;
+
+  padding: 13px;
+
+  resize: vertical;
+
+  line-height: 1.6;
+}
+
+
+.sellerUploadForm input:focus,
+.sellerUploadForm textarea:focus {
+
+  border-color: rgba(128, 128, 128, 0.45);
+
+  background: rgba(128, 128, 128, 0.07);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(128, 128, 128, 0.07);
+}
+
+
+.sellerUploadForm input::placeholder,
+.sellerUploadForm textarea::placeholder {
+  opacity: 0.42;
+}
+
+
+.sellerUploadForm small {
+
+  display: block;
+
+  margin-top: 6px;
+
+  font-size: 10px;
+
+  line-height: 1.5;
+
+  opacity: 0.45;
+}
+
+
+/* ==========================================
+   PRODUCT TYPE GRID
+========================================== */
+
+.productTypeGrid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 10px;
+}
+
+
+/* ==========================================
+   PRODUCT TYPE CARD
+========================================== */
+
+.productTypeCard {
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+
+  width: 100%;
+
+  min-height: 68px;
+
+  padding: 12px;
+
+  box-sizing: border-box;
+
+  border: 1px solid
+    rgba(128, 128, 128, 0.15);
+
+  border-radius: 13px;
+
+  background: rgba(128, 128, 128, 0.025);
+
+  color: inherit;
+
+  text-align: left;
+
+  font-family: inherit;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.productTypeCard:hover {
+
+  background: rgba(128, 128, 128, 0.07);
+
+  transform: translateY(-1px);
+}
+
+
+/* ACTIVE */
+
+.productTypeCard.active {
+
+  border-color: currentColor;
+
+  background: rgba(128, 128, 128, 0.09);
+}
+
+
+.productTypeIcon {
+
+  width: 37px;
+  height: 37px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 10px;
+
+  background: rgba(128, 128, 128, 0.09);
+
+  font-size: 17px;
+}
+
+
+.productTypeContent {
+
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+
+.productTypeContent strong {
+
+  font-size: 11px;
+
+  font-weight: 700;
+}
+
+
+.productTypeContent small {
+
+  margin: 0;
+
+  font-size: 9px;
+
+  opacity: 0.45;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+
+/* ==========================================
+   CATEGORY BUTTON
+========================================== */
+
+.cateBtn {
+
+  width: 100%;
+
+  min-height: 46px;
+
+  padding: 0 13px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  border: 1px solid
+    rgba(128, 128, 128, 0.18);
+
+  border-radius: 11px;
+
+  background: rgba(128, 128, 128, 0.045);
+
+  color: inherit;
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  cursor: pointer;
+
+  text-align: left;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+
+.cateBtn:hover {
+
+  background: rgba(128, 128, 128, 0.075);
+
+  border-color:
+    rgba(128, 128, 128, 0.28);
+}
+
+
+.cateBtn > span:first-child {
+
+  width: 29px;
+  height: 29px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  background: rgba(128, 128, 128, 0.08);
+
+  font-size: 14px;
+}
+
+
+.cateBtn > span:nth-child(2) {
+
+  flex: 1;
+
+  opacity: 0.65;
+}
+
+
+.cateBtn > i:last-child {
+
+  opacity: 0.5;
+
+  font-size: 16px;
+}
+
+
+/* ==========================================
+   CATEGORY SHEET
+========================================== */
+
+.cate-sheet {
+
+  margin-top: 8px;
+
+  padding: 6px;
+
+  border: 1px solid
+    rgba(128, 128, 128, 0.15);
+
+  border-radius: 13px;
+
+  background: var(--body-bg, #fff);
+
+  box-shadow:
+    0 12px 30px
+    rgba(0, 0, 0, 0.08);
+}
+
+
+.cateSelect {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 11px;
+
+  border-radius: 9px;
+
+  font-size: 11px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease;
+}
+
+
+.cateSelect i {
+
+  width: 28px;
+  height: 28px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  background: rgba(128, 128, 128, 0.08);
+
+  font-size: 14px;
+}
+
+
+.cateSelect:hover {
+
+  background: rgba(128, 128, 128, 0.08);
+}
+
+
+/* ==========================================
+   PRICE
+========================================== */
+
+.priceInputWrapper {
+
+  position: relative;
+}
+
+
+.priceCurrency {
+
+  position: absolute;
+
+  left: 13px;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  opacity: 0.55;
+
+  pointer-events: none;
+}
+
+
+.priceInputWrapper input {
+
+  padding-left: 48px !important;
+}
+
+
+/* ==========================================
+   FILE UPLOAD BOX
+========================================== */
+
+.sellerFileBox {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  min-height: 72px;
+
+  padding: 12px;
+
+  box-sizing: border-box;
+
+  border: 1px dashed
+    rgba(128, 128, 128, 0.25);
+
+  border-radius: 13px;
+
+  background: rgba(128, 128, 128, 0.025);
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+
+.sellerFileBox:hover {
+
+  background: rgba(128, 128, 128, 0.055);
+
+  border-color:
+    rgba(128, 128, 128, 0.4);
+}
+
+
+.sellerFileIcon {
+
+  width: 40px;
+  height: 40px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: rgba(128, 128, 128, 0.09);
+
+  font-size: 18px;
+}
+
+
+.sellerFileInfo {
+
+  flex: 1;
+
+  min-width: 0;
+}
+
+
+.sellerFileInfo strong {
+
+  display: block;
+
+  font-size: 11px;
+
+  font-weight: 650;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+
+.sellerFileInfo small {
+
+  margin-top: 3px;
+
+  font-size: 9px;
+
+  opacity: 0.45;
+}
+
+
+.sellerFileButton {
+
+  display: inline-flex !important;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 65px;
+
+  height: 34px;
+
+  padding: 0 12px;
+
+  margin: 0 !important;
+
+  border-radius: 8px;
+
+  background: rgba(128, 128, 128, 0.1);
+
+  font-size: 10px !important;
+
+  font-weight: 650 !important;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.sellerFileButton:hover {
+
+  background: rgba(128, 128, 128, 0.17);
+
+  transform: translateY(-1px);
+}
+
+
+/* ==========================================
+   SPECIAL URL INPUTS
+========================================== */
+
+.sellerInputIconWrapper {
+
+  position: relative;
+}
+
+
+.sellerInputIconWrapper > i {
+
+  position: absolute;
+
+  left: 13px;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  font-size: 17px;
+
+  opacity: 0.45;
+
+  pointer-events: none;
+}
+
+
+.sellerInputIconWrapper input {
+
+  padding-left: 42px !important;
+}
+
+
+/* ==========================================
+   CREATOR REVENUE INFO
+========================================== */
+
+.sellerUploadInfoBox {
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 13px;
+
+  margin: 20px 26px;
+
+  padding: 15px;
+
+  border: 1px solid
+    rgba(128, 128, 128, 0.14);
+
+  border-radius: 13px;
+
+  background: rgba(128, 128, 128, 0.045);
+}
+
+
+.sellerUploadInfoIcon {
+
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 10px;
+
+  background: rgba(128, 128, 128, 0.09);
+
+  font-size: 17px;
+}
+
+
+.sellerUploadInfoBox strong {
+
+  display: block;
+
+  margin-bottom: 4px;
+
+  font-size: 11px;
+
+  font-weight: 700;
+}
+
+
+.sellerUploadInfoBox p {
+
+  margin: 0;
+
+  font-size: 10px;
+
+  line-height: 1.6;
+
+  opacity: 0.55;
+}
+
+
+.sellerUploadInfoBox b {
+
+  opacity: 1;
+}
+
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+.sellerUploadFooter {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 20px 26px;
+
+  border-top: 1px solid
+    rgba(128, 128, 128, 0.12);
+
+  background: rgba(128, 128, 128, 0.018);
+}
+
+
+.sellerUploadSecurity {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  font-size: 10px;
+
+  opacity: 0.5;
+}
+
+
+.sellerUploadSecurity i {
+
+  font-size: 15px;
+}
+
+
+/* ==========================================
+   UPLOAD BUTTON
+========================================== */
+
+.sellerUploadFooter .upload {
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  min-width: 150px;
+
+  height: 43px;
+
+  padding: 0 17px;
+
+  border: 0;
+
+  border-radius: 10px;
+
+  background: #111;
+
+  color: #fff;
+
+  font-family: inherit;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.sellerUploadFooter .upload:hover {
+
+  opacity: 0.88;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 7px 18px
+    rgba(0, 0, 0, 0.12);
+}
+
+
+.sellerUploadFooter .upload:active {
+
+  transform: translateY(0);
+}
+
+
+.sellerUploadFooter .upload i {
+
+  font-size: 15px;
+}
+
+
+/* ==========================================
+   DISABLED BUTTON
+========================================== */
+
+.sellerUploadFooter .upload:disabled {
+
+  cursor: not-allowed;
+
+  opacity: 0.5;
+
+  transform: none;
+
+  box-shadow: none;
+}
+
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 850px) {
+
+  .sellerUploadPage {
+
+    padding: 20px;
+  }
+
+
+  .productTypeGrid {
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+
+  .sellerUploadSection {
+
+    padding: 22px;
+  }
+
+
+  .sellerUploadInfoBox {
+
+    margin-left: 22px;
+    margin-right: 22px;
+  }
+
+
+  .sellerUploadFooter {
+
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 600px) {
+
+  .sellerUploadPage {
+
+    padding: 14px;
+  }
+
+
+  .sellerUploadHeader h1 {
+
+    font-size: 21px;
+  }
+
+
+  .sellerUploadTitleIcon {
+
+    width: 40px;
+    height: 40px;
+
+    font-size: 18px;
+  }
+
+
+  .sellerUploadSection {
+
+    padding: 18px;
+  }
+
+
+  .sellerUploadSectionHeader {
+
+    margin-bottom: 20px;
+  }
+
+
+  .productTypeGrid {
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 8px;
+  }
+
+
+  .productTypeCard {
+
+    min-height: 62px;
+
+    padding: 9px;
+  }
+
+
+  .productTypeIcon {
+
+    width: 33px;
+    height: 33px;
+
+    font-size: 15px;
+  }
+
+
+  .productTypeContent strong {
+
+    font-size: 10px;
+  }
+
+
+  .productTypeContent small {
+
+    font-size: 8px;
+  }
+
+
+  .sellerFileBox {
+
+    min-height: 68px;
+  }
+
+
+  .sellerUploadInfoBox {
+
+    margin: 18px;
+
+  }
+
+
+  .sellerUploadFooter {
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+    padding: 18px;
+  }
+
+
+  .sellerUploadSecurity {
+
+    justify-content: center;
+
+    text-align: center;
+
+  }
+
+
+  .sellerUploadFooter .upload {
+
+    width: 100%;
+  }
+
+}
+
+
+/* ==========================================
+   SMALL MOBILE
+========================================== */
+
+@media (max-width: 400px) {
+
+  .sellerUploadPage {
+
+    padding: 10px;
+  }
+
+
+  .productTypeGrid {
+
+    grid-template-columns: 1fr;
+  }
+
+
+  .sellerUploadSection {
+
+    padding: 15px;
+  }
+
+
+  .sellerUploadInfoBox {
+
+    margin: 15px;
+  }
+
+
+  .sellerFileInfo small {
+
+    display: none;
+  }
+
+}

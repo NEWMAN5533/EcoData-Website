@@ -1,0 +1,935 @@
+:root {
+  --color-white: #fff;
+  --color-light: #f5f4f7;
+  --color-gray-light: #86848c;
+  --color-gray-dark: #56555e;
+  --color-dark: #27282f;
+  --color-primary: rgb(71, 7, 234);
+  --color-success: rgb(34, 202, 75);
+  --color-danger: rgb(255, 67, 54);
+  --color-warning:  rgb(234, 181, 7);
+  --color-purple: rgb(160, 99, 245);
+  --color-primary-light: rgba(71, 7, 234, 0.2);
+  --color-success-light: rgba(34, 202, 75, 0.2);
+  --color-danger-light: rgba(255, 67, 54, 0.2);
+  --color-purple-light: rgba(160, 99, 245, 0.2);
+
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  --card-padding: 1.6rem;
+  --border-cl: rgb(226, 226, 226);
+
+  --radius-1: 0.5rem;
+  --radius-2: 1rem;
+  --radius-3: 1.6rem;
+
+  --transition: all 300ms ease;
+}
+
+
+
+/* ==========================================
+   SELLER PROFILE + FIXED SIDEBAR
+   DESKTOP: 768px AND ABOVE
+========================================== */
+
+@media (min-width: 768px) {
+
+  /* ------------------------------------------
+     FIXED SIDEBAR
+  ------------------------------------------ */
+
+  .sidebar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 17rem;
+    height: 100vh;
+
+    z-index: 1000;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+
+  /* ------------------------------------------
+     PROFILE CONTENT
+     Leave space for sidebar
+  ------------------------------------------ */
+
+  .sellerNotificationsPage {
+
+    width: auto;
+
+    min-width: calc(100vw - 272px);
+
+    margin-left: 238px !important;
+
+    padding: 30px;
+
+  }
+
+}
+
+
+/* ==========================================
+   LARGE DESKTOP
+========================================== */
+
+@media (min-width: 1200px) {
+
+  .sellerNotificationsPage {
+
+    margin-left: 250px !important;
+
+    min-width: calc(100vw - 272px) !important;
+
+    padding-left: 35px;
+    padding-right: 35px;
+
+    overflow-x: hidden !important;
+
+  }
+
+  .sidebar{
+    width: 242px !important;
+  }
+
+}
+
+
+/* ==========================================
+   TABLET / MOBILE
+   SIDEBAR IS NOT FIXED
+========================================== */
+
+@media (max-width: 767px) {
+
+  .sidebar {
+
+    display: none;
+
+  }
+
+
+  .sellerNotificationsPage {
+
+    width: 100%;
+
+    margin-left: 0;
+
+    padding: 15px;
+
+  }
+
+}
+
+
+
+/* ==========================================
+   SELLER NOTIFICATIONS PAGE
+========================================== */
+
+.sellerNotificationsPage {
+
+  width: 100%;
+
+  max-width: 1050px;
+
+  margin-bottom: 4.5rem;
+
+  padding: 24px;
+
+}
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.sellerNotificationsHeader {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 20px;
+
+}
+
+
+.sellerNotificationsTitleRow {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+}
+
+
+.sellerNotificationsTitleIcon {
+
+  width: 45px;
+
+  height: 45px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background:
+    rgba(128, 128, 128, 0.08);
+
+  font-size: 20px;
+
+}
+
+
+.sellerNotificationsTitleRow h1 {
+
+  margin: 0;
+
+  font-size: 25px;
+
+  font-weight: 750;
+
+  letter-spacing: -0.5px;
+
+}
+
+
+.sellerNotificationsTitleRow p {
+
+  margin: 4px 0 0;
+
+  font-size: 12px;
+
+  opacity: 0.5;
+
+}
+
+
+/* ==========================================
+   MARK ALL
+========================================== */
+
+.markAllNotificationsBtn {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 10px 13px;
+
+  border: 1px solid
+    rgba(128, 128, 128, 0.15);
+
+  border-radius: 10px;
+
+  background:
+    rgba(128, 128, 128, 0.035);
+
+  color: inherit;
+
+  font-family: inherit;
+
+  font-size: 10px;
+
+  font-weight: 650;
+
+  cursor: pointer;
+
+}
+
+
+.markAllNotificationsBtn:hover {
+
+  background:
+    rgba(128, 128, 128, 0.08);
+
+}
+
+
+/* ==========================================
+   SUMMARY
+========================================== */
+
+.sellerNotificationSummary {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 12px;
+
+  margin-bottom: 16px;
+
+}
+
+
+.notificationSummaryItem {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 16px;
+
+  border: 1px solid
+    rgba(128, 128, 128, 0.15);
+
+  border-radius: 15px;
+
+  background:
+    rgba(128, 128, 128, 0.025);
+
+}
+
+
+.notificationSummaryIcon {
+
+  width: 38px;
+
+  height: 38px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background:
+    rgba(128, 128, 128, 0.08);
+
+  font-size: 16px;
+
+}
+
+
+.notificationSummaryIcon.unread {
+
+  background:
+    rgba(90, 100, 220, 0.10);
+
+}
+
+
+.notificationSummaryIcon.sales {
+
+  background:
+    rgba(50, 160, 100, 0.10);
+
+}
+
+
+.notificationSummaryIcon.system {
+
+  background:
+    rgba(220, 160, 50, 0.10);
+
+}
+
+
+.notificationSummaryItem strong {
+
+  display: block;
+
+  font-size: 17px;
+
+  font-weight: 750;
+
+}
+
+
+.notificationSummaryItem small {
+
+  display: block;
+
+  margin-top: 2px;
+
+  font-size: 10px;
+
+  opacity: 0.5;
+
+}
+
+
+/* ==========================================
+   TOOLBAR
+========================================== */
+
+.sellerNotificationsToolbar {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 12px;
+
+}
+
+
+.notificationFilters {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  overflow-x: auto;
+
+}
+
+
+.notificationFilter {
+
+  padding: 8px 12px;
+
+  border: 0;
+
+  border-radius: 8px;
+
+  background: transparent;
+
+  color: inherit;
+
+  font-family: inherit;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+  overflow-x: hidden;
+
+}
+
+
+.notificationFilter:hover {
+
+  background:
+    rgba(128, 128, 128, 0.07);
+
+}
+
+
+.notificationFilter.active {
+
+  background: #111;
+
+  color: #fff;
+
+}
+
+
+.notificationSearchBtn {
+
+  width: 34px;
+
+  height: 34px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border: 1px solid
+    rgba(128, 128, 128, 0.15);
+
+  border-radius: 9px;
+
+  background:
+    rgba(128, 128, 128, 0.035);
+
+  color: inherit;
+
+  cursor: pointer;
+
+}
+
+
+/* ==========================================
+   NOTIFICATIONS CARD
+========================================== */
+
+.sellerNotificationsCard {
+
+  border: 1px solid
+    rgba(128, 128, 128, 0.15);
+
+  border-radius: 18px;
+
+  background:
+    rgba(128, 128, 128, 0.025);
+
+  overflow: hidden;
+
+}
+
+
+/* ==========================================
+   NOTIFICATION ITEM
+========================================== */
+
+.sellerNotificationItem {
+
+  position: relative;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 14px;
+
+  padding: 19px 20px;
+
+  border-bottom: 1px solid
+    rgba(128, 128, 128, 0.10);
+
+  transition:
+    background 0.2s ease;
+
+}
+
+
+.sellerNotificationItem:last-child {
+
+  border-bottom: 0;
+
+}
+
+
+.sellerNotificationItem:hover {
+
+  background:
+    rgba(128, 128, 128, 0.045);
+
+}
+
+
+.sellerNotificationItem.unread {
+
+  background:
+    rgba(128, 128, 128, 0.035);
+
+}
+
+
+/* ==========================================
+   NOTIFICATION ICON
+========================================== */
+
+.notificationItemIcon {
+
+  width: 42px;
+
+  height: 42px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background:
+    rgba(128, 128, 128, 0.08);
+
+  font-size: 17px;
+
+}
+
+
+.notificationItemIcon.sale {
+
+  background:
+    rgba(50, 160, 100, 0.10);
+
+}
+
+
+.notificationItemIcon.earning {
+
+  background:
+    rgba(80, 100, 210, 0.10);
+
+}
+
+
+.notificationItemIcon.product {
+
+  background:
+    rgba(220, 160, 50, 0.10);
+
+}
+
+
+.notificationItemIcon.system {
+
+  background:
+    rgba(150, 90, 180, 0.10);
+
+}
+
+
+/* ==========================================
+   CONTENT
+========================================== */
+
+.notificationItemContent {
+
+  flex: 1;
+
+  min-width: 0;
+
+}
+
+
+.notificationItemTop {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+}
+
+
+.notificationItemTop h3 {
+
+  margin: 0;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+}
+
+
+.notificationTime {
+
+  flex-shrink: 0;
+
+  font-size: 9px;
+
+  opacity: 0.45;
+
+}
+
+
+.notificationItemContent p {
+
+  margin: 5px 0 0;
+
+  font-size: 11px;
+
+  line-height: 1.6;
+
+  opacity: 0.62;
+
+}
+
+
+.notificationItemContent p strong {
+
+  font-weight: 650;
+
+  opacity: 1;
+
+}
+
+
+/* ==========================================
+   META
+========================================== */
+
+.notificationItemMeta {
+
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  margin-top: 9px;
+
+}
+
+
+.notificationItemMeta span {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 4px;
+
+  font-size: 9px;
+
+  opacity: 0.5;
+
+}
+
+
+.notificationItemMeta i {
+
+  font-size: 12px;
+
+}
+
+
+/* ==========================================
+   UNREAD DOT
+========================================== */
+
+.notificationUnreadDot {
+
+  width: 7px;
+
+  height: 7px;
+
+  flex-shrink: 0;
+
+  margin-top: 6px;
+
+  border-radius: 50%;
+
+  background: #111;
+
+}
+
+
+.sellerNotificationItem:not(.unread)
+.notificationUnreadDot {
+
+  display: none;
+
+}
+
+
+/* ==========================================
+   EMPTY STATE
+========================================== */
+
+.notificationsEmptyState {
+
+  padding: 65px 20px;
+
+  text-align: center;
+
+}
+
+
+.notificationsEmptyIcon {
+
+  width: 52px;
+
+  height: 52px;
+
+  margin: 0 auto 12px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 15px;
+
+  background:
+    rgba(128, 128, 128, 0.08);
+
+  font-size: 22px;
+
+}
+
+
+.notificationsEmptyState h3 {
+
+  margin: 0;
+
+  font-size: 14px;
+
+}
+
+
+.notificationsEmptyState p {
+
+  margin: 5px 0 0;
+
+  font-size: 11px;
+
+  opacity: 0.5;
+
+}
+
+
+/* ==========================================
+   DESKTOP — FIXED SIDEBAR
+========================================== */
+
+@media (min-width: 768px) {
+
+  .sellerNotificationsPage {
+
+    margin-left: 250px;
+
+    width: calc(100% - 250px);
+
+    max-width: 1050px;
+
+    padding: 30px;
+
+  }
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 767px) {
+
+  .sellerNotificationsPage {
+
+    padding: 15px;
+
+  }
+
+
+  .sellerNotificationsHeader {
+
+    align-items: flex-start;
+
+    flex-direction: column;
+
+  }
+
+
+  .markAllNotificationsBtn {
+
+    width: 100%;
+
+    justify-content: center;
+
+  }
+
+
+  .sellerNotificationSummary {
+
+    grid-template-columns:
+      1fr 1fr;
+
+  }
+
+}
+
+
+/* ==========================================
+   SMALL MOBILE
+========================================== */
+
+@media (max-width: 450px) {
+
+  .sellerNotificationSummary {
+
+    gap: 8px;
+
+  }
+
+
+  .notificationSummaryItem {
+
+    padding: 12px;
+
+  }
+
+
+  .notificationSummaryIcon {
+
+    width: 33px;
+
+    height: 33px;
+
+  }
+
+
+  .sellerNotificationItem {
+
+    padding: 15px;
+
+    gap: 10px;
+
+  }
+
+
+  .notificationItemIcon {
+
+    width: 37px;
+
+    height: 37px;
+
+    border-radius: 10px;
+
+  }
+
+
+  .notificationItemTop {
+
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 3px;
+
+  }
+
+
+  .notificationTime {
+
+    order: 2;
+
+  }
+
+}

@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Product</title>
+  <link rel="stylesheet" href="sellerProfile.css">
+  <link rel="stylesheet" href="sellerUploadPage.css">
+
+  
+  <!--remix icons-->
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
+
+
+<!--=== DARK MODE SCRIPT ========-->
+<script>
+
+document.addEventListener("DOMContentLoaded", ()=> {
+// DARK THEME
+
+const themeButton = document.getElementById('theme-button')
+const darkTheme = 'dark-mode'
+const iconTheme = 'ri-sun-line'
+
+const selectedTheme = localStorage.getItem('selected-theme')
+const selectedIcon = localStorage.getItem('selected-icon')
+
+
+
+const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
+const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'ri-moon-line' : 'ri-sun-line'
+
+
+// We validate if the user previously chose a topic
+if(selectedTheme){
+  // If the validations is fulfilled, we ask the issue was to know if we activated or deactivated
+  document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
+  themeButton.classList[selectedIcon === 'ri-moon-line' ? 'add' : 'remove'](iconTheme) 
+}
+
+// Active / deactivated the theme manually with the button
+themeButton.addEventListener("click", ()=> {
+  // Add or remove the dark / icon theme
+  document.body.classList.toggle(darkTheme)
+  themeButton.classList.toggle(iconTheme)
+  // We save theme and the current icon the user chose
+  localStorage.setItem('selected-theme', getCurrentTheme())
+  localStorage.setItem('selected-icon', getCurrentIcon())
+})
+
+});
+
+
+</script>
+<!--=== DARK MODE SCRIPT ENDS ===-->
+
+</head>
+<body>
+  <!--============ NAV ============-->
+  <nav class="nav-container nav-bar">
+    <div class="nav-bar-left">
+      <img src="../css/icons/newLogo.png" alt="newLogo">
+    </div>
+   
+    <div class="nav-actions">
+
+      
+
+        <!---login button-->
+        <i class="ri-user-line login-button material-icons" id="login-button"></i>
+
+            <!---theme button -->
+        <i class="ri-moon-foggy-line change-theme material-icons" id="theme-button"></i>
+
+
+        <!---menu button-->
+        <i class="ri-menu-2-line material-icons" id="menu"></i>
+      </div>
+  </nav>
+
+
+  <!--========= SIDE MENU ===========-->
+  <menu class="sidebar ">
+    <div class="sidebar-wrapper">
+   <div class="creator-studio">
+      <i class="ri-layout-masonry-line"></i>
+      <h5>EcoData Creator Studio</h5>
+   </div>
+   
+
+   <div class="sidebar-wrapper2">
+     <a href="sellerDashboard.html">
+      <i class="ri-dashboard-3-line"></i>
+      <h5>Dashboard</h5>
+    </a>
+
+     <a href="sellerDashboard.html">
+      <i class="ri-box-3-line"></i>
+      <h5>Products</h5>
+    </a>
+
+     <a href="sellerUploadPage.html" class="active">
+      <i class="ri-upload-cloud-2-line"></i>
+      <h5>Upload Product</h5>
+    </a>
+
+     <a href="sellerDashboard.html">
+      <i class="ri-bar-chart-box-line"></i>
+      <h5>Sales</h5>
+    </a>
+
+     <a href="sellerDashboard.html">
+      <i class="ri-money-dollar-circle-line"></i>
+      <h5>Earnings</h5>
+    </a>
+
+     <a href="sellerDashboard.html">
+      <i class="ri-bank-card-line"></i>
+      <h5>Withdrawals</h5>
+    </a>
+
+    <div class="sidebarView">
+        <h4>CREATOR</h4>
+      </div>
+
+     <a href="sellerProfile.html" >
+      <i class="ri-user-3-line"></i>
+      <h5>Profile</h5>
+    </a>
+
+      <a href="sellerSettings.html" >
+      <i class="ri-settings-3-line"></i>
+      <h5>Settings</h5>
+    </a>
+
+      <a href="sellerMessages.html">
+      <i class="ri-message-3-line"></i>
+      <h5>Messages</h5>
+    </a>
+
+
+      <a href="helpCenter.html">
+      <i class="ri-question-line"></i>
+      <h5>Help & Support</h5>
+    </a>
+
+   </div>
+    
+
+    </div>
+  </menu>
+
+
+   <!--========= SIDE MENU ===========-->
+  <menu class="sidebarPhone">
+    <div class="sidebar-wrapper">
+   <div class="creator-studio">
+      <i class="ri-layout-masonry-line"></i>
+      <h5>EcoData Creator Studio</h5>
+   </div>
+   
+
+   <div class="sidebar-wrapper2">
+     <a href="sellerDashboard.html">
+      <i class="ri-dashboard-3-line"></i>
+      <h5>Dashboard</h5>
+    </a>
+
+     <a href="sellerDashboard.html">
+      <i class="ri-box-3-line"></i>
+      <h5>Products</h5>
+    </a>
+
+     <a href="sellerUploadPage.html" class="active">
+      <i class="ri-upload-cloud-2-line"></i>
+      <h5>Upload Product</h5>
+    </a>
+
+     <a href="sellerDashboard.html">
+      <i class="ri-bar-chart-box-line"></i>
+      <h5>Sales</h5>
+    </a>
+
+     <a href="sellerDashboard.html">
+      <i class="ri-money-dollar-circle-line"></i>
+      <h5>Earnings</h5>
+    </a>
+
+     <a href="sellerDashboard.html">
+      <i class="ri-bank-card-line"></i>
+      <h5>Withdrawals</h5>
+    </a>
+
+    <div class="sidebarView">
+        <h4>CREATOR</h4>
+      </div>
+
+     <a href="sellerProfile.html">
+      <i class="ri-user-3-line"></i>
+      <h5>Profile</h5>
+    </a>
+
+      <a href="sellerSettings.html" >
+      <i class="ri-settings-3-line"></i>
+      <h5>Settings</h5>
+    </a>
+
+      <a href="sellerMessages.html">
+      <i class="ri-message-3-line"></i>
+      <h5>Messages</h5>
+    </a>
+
+
+      <a href="helpCenter.html">
+      <i class="ri-question-line"></i>
+      <h5>Help & Support</h5>
+    </a>
+
+   </div>
+    
+
+    </div>
+  </menu>
+
+  <!---========= MAIN ==============-->
+  <main class="main-container">
+    <!-- ==========================================
+     SELLER UPLOAD PRODUCT PAGE
+========================================== -->
+
+<section class="sellerUploadPage">
+
+  <!-- ==========================================
+       PAGE HEADER
+  =========================================== -->
+
+  <div class="sellerUploadHeader">
+
+    <div>
+      <div class="sellerUploadTitleRow">
+
+        <div class="sellerUploadTitleIcon">
+          <i class="ri-upload-cloud-2-line"></i>
+        </div>
+
+        <div>
+          <h1>Upload Product</h1>
+
+          <p>
+            Add a new digital product to your creator store.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ==========================================
+       UPLOAD FORM
+  =========================================== -->
+
+  <div class="sellerUploadCard">
+
+    <form
+      class="sellerUploadForm"
+      id="uploadProductForm"
+    >
+
+
+      <!-- ========================================
+           BASIC INFORMATION
+      ========================================= -->
+
+      <div class="sellerUploadSection">
+
+        <div class="sellerUploadSectionHeader">
+
+          <div class="sellerUploadSectionIcon">
+            <i class="ri-information-line"></i>
+          </div>
+
+          <div>
+            <h2>Product Information</h2>
+
+            <p>
+              Tell customers what your product is about.
+            </p>
+          </div>
+
+        </div>
+
+
+        <!-- TITLE -->
+
+        <div class="form-group">
+
+          <label for="productTitle">
+            Product Title
+          </label>
+
+          <input
+            type="text"
+            id="productTitle"
+            placeholder="Enter product title"
+            autocomplete="off"
+          >
+
+          <small>
+            Choose a clear and attractive title.
+          </small>
+
+        </div>
+
+
+        <!-- ======================================
+             PRODUCT TYPE
+        ======================================= -->
+
+        <div class="form-group">
+
+          <label>
+            Product Type
+          </label>
+
+
+          <div class="productTypeGrid">
+
+            <!-- EBOOK -->
+
+            <button
+              type="button"
+              class="productTypeCard"
+              data-type="ebook"
+            >
+
+              <span class="productTypeIcon">
+                <i class="ri-book-open-line"></i>
+              </span>
+
+              <span class="productTypeContent">
+                <strong>Ebook</strong>
+                <small>Digital book</small>
+              </span>
+
+            </button>
+
+
+            <!-- NOTES -->
+
+            <button
+              type="button"
+              class="productTypeCard"
+              data-type="notes"
+            >
+
+              <span class="productTypeIcon">
+                <i class="ri-file-paper-2-line"></i>
+              </span>
+
+              <span class="productTypeContent">
+                <strong>Notes</strong>
+                <small>Study materials</small>
+              </span>
+
+            </button>
+
+
+            <!-- VIDEO -->
+
+            <button
+              type="button"
+              class="productTypeCard"
+              data-type="video"
+            >
+
+              <span class="productTypeIcon">
+                <i class="ri-video-line"></i>
+              </span>
+
+              <span class="productTypeContent">
+                <strong>Video</strong>
+                <small>Educational video</small>
+              </span>
+
+            </button>
+
+
+            <!-- TEMPLATES -->
+
+            <button
+              type="button"
+              class="productTypeCard"
+              data-type="templates"
+            >
+
+              <span class="productTypeIcon">
+                <i class="ri-layout-grid-line"></i>
+              </span>
+
+              <span class="productTypeContent">
+                <strong>Templates</strong>
+                <small>Ready-to-use files</small>
+              </span>
+
+            </button>
+
+
+            <!-- ZIP -->
+
+            <button
+              type="button"
+              class="productTypeCard"
+              data-type="zip"
+            >
+
+              <span class="productTypeIcon">
+                <i class="ri-folder-zip-line"></i>
+              </span>
+
+              <span class="productTypeContent">
+                <strong>ZIP</strong>
+                <small>Multiple files</small>
+              </span>
+
+            </button>
+
+
+            <!-- AFFILIATE -->
+
+            <button
+              type="button"
+              class="productTypeCard"
+              data-type="affiliate"
+            >
+
+              <span class="productTypeIcon">
+                <i class="ri-links-line"></i>
+              </span>
+
+              <span class="productTypeContent">
+                <strong>Affiliate</strong>
+                <small>External product</small>
+              </span>
+
+            </button>
+
+
+            <!-- SERVICE -->
+
+            <button
+              type="button"
+              class="productTypeCard"
+              data-type="service"
+            >
+
+              <span class="productTypeIcon">
+                <i class="ri-service-line"></i>
+              </span>
+
+              <span class="productTypeContent">
+                <strong>Service</strong>
+                <small>Sell your service</small>
+              </span>
+
+            </button>
+
+          </div>
+
+
+          <!-- KEEP EXISTING ID -->
+
+          <input
+            type="hidden"
+            id="productType"
+            name="type"
+            value=""
+          >
+
+        </div>
+
+
+        <!-- ======================================
+             CATEGORY
+        ======================================= -->
+
+        <div class="form-group">
+
+          <label for="productCategoryButton">
+            Category
+          </label>
+
+
+          <button
+            type="button"
+            id="productCategoryButton"
+            class="cateBtn"
+          >
+
+            <span>
+              <i class="ri-price-tag-3-line"></i>
+            </span>
+
+            <span id="productCategoryText">
+              Product Category
+            </span>
+
+            <i class="ri-arrow-down-s-line"></i>
+
+          </button>
+
+
+          <section
+            class="cate-sheet"
+            id="productCategorySheet"
+            style="display:none;"
+          >
+
+            <div
+              class="cateSelect"
+              data-category="education"
+            >
+              <i class="ri-graduation-cap-line"></i>
+              Education
+            </div>
+
+
+            <div
+              class="cateSelect"
+              data-category="technology"
+            >
+              <i class="ri-macbook-line"></i>
+              Technology
+            </div>
+
+
+            <div
+              class="cateSelect"
+              data-category="programming"
+            >
+              <i class="ri-code-s-slash-line"></i>
+              Programming
+            </div>
+
+
+            <div
+              class="cateSelect"
+              data-category="engineering"
+            >
+              <i class="ri-tools-line"></i>
+              Engineering
+            </div>
+
+
+            <div
+              class="cateSelect"
+              data-category="services"
+            >
+              <i class="ri-service-line"></i>
+              Services
+            </div>
+
+
+            <div
+              class="cateSelect"
+              data-category="other"
+            >
+              <i class="ri-more-line"></i>
+              Other
+            </div>
+
+          </section>
+
+
+          <!-- KEEP EXISTING ID -->
+
+          <input
+            type="hidden"
+            id="productCategory"
+            name="category"
+            value=""
+          >
+
+        </div>
+
+
+        <!-- ======================================
+             DESCRIPTION
+        ======================================= -->
+
+        <div class="form-group">
+
+          <label for="productDescription">
+            Description
+          </label>
+
+
+          <textarea
+            id="productDescription"
+            class="text-area"
+            placeholder="Describe your product, what customers will receive, and why they should buy it..."
+          ></textarea>
+
+
+          <small>
+            Give customers enough information to understand
+            what they are purchasing.
+          </small>
+
+        </div>
+
+
+        <!-- ======================================
+             PRICE
+        ======================================= -->
+
+        <div class="form-group">
+
+          <label for="productPrice">
+            Price
+          </label>
+
+
+          <div class="priceInputWrapper">
+
+            <span class="priceCurrency">
+              GHS
+            </span>
+
+            <input
+              id="productPrice"
+              type="number"
+              placeholder="0.00"
+              min="0"
+              step="0.01"
+            >
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ==========================================
+           PRODUCT MEDIA
+      =========================================== -->
+
+      <div class="sellerUploadSection">
+
+        <div class="sellerUploadSectionHeader">
+
+          <div class="sellerUploadSectionIcon">
+            <i class="ri-folder-upload-line"></i>
+          </div>
+
+          <div>
+
+            <h2>Product Files</h2>
+
+            <p>
+              Upload your product and its thumbnail.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- ======================================
+             THUMBNAIL
+        ======================================= -->
+
+        <div class="form-group">
+
+          <label for="coverImage">
+            Product Thumbnail
+          </label>
+
+
+          <div class="sellerFileBox">
+
+            <div class="sellerFileIcon">
+              <i class="ri-image-line"></i>
+            </div>
+
+
+            <div class="sellerFileInfo">
+
+              <strong>
+                Upload Cover Image
+              </strong>
+
+              <small>
+                JPG, PNG or WebP
+              </small>
+
+            </div>
+
+
+            <label
+              for="coverImage"
+              class="sellerFileButton"
+            >
+              Choose
+            </label>
+
+
+            <input
+              type="file"
+              id="coverImage"
+              accept="image/*"
+              hidden
+            >
+
+          </div>
+
+        </div>
+
+
+        <!-- ======================================
+             PRODUCT FILE
+        ======================================= -->
+
+        <div
+          class="form-group"
+          id="productFileGroup"
+        >
+
+          <label for="productFile">
+            Product File
+          </label>
+
+
+          <div class="sellerFileBox">
+
+            <div class="sellerFileIcon">
+              <i class="ri-file-upload-line"></i>
+            </div>
+
+
+            <div class="sellerFileInfo">
+
+              <strong>
+                Upload Product File
+              </strong>
+
+              <small>
+                PDF, ZIP and supported formats
+              </small>
+
+            </div>
+
+
+            <label
+              for="productFile"
+              class="sellerFileButton"
+            >
+              Choose
+            </label>
+
+
+            <!-- KEEP ORIGINAL ID -->
+
+            <input
+              type="file"
+              id="productFile"
+              hidden
+            >
+
+          </div>
+
+        </div>
+
+
+        <!-- ======================================
+             YOUTUBE
+        ======================================= -->
+
+        <div
+          class="form-group"
+          id="youtubeGroup"
+          style="display:none;"
+        >
+
+          <label for="youtubeUrl">
+            YouTube Video
+          </label>
+
+
+          <div class="sellerInputIconWrapper">
+
+            <i class="ri-youtube-line"></i>
+
+            <input
+              type="url"
+              id="youtubeUrl"
+              placeholder="Paste YouTube video link"
+            >
+
+          </div>
+
+        </div>
+
+
+        <!-- ======================================
+             AFFILIATE
+        ======================================= -->
+
+        <div
+          class="form-group"
+          id="affiliateGroup"
+          style="display:none;"
+        >
+
+          <label for="affiliateUrl">
+            Affiliate Link
+          </label>
+
+
+          <div class="sellerInputIconWrapper">
+
+            <i class="ri-links-line"></i>
+
+            <input
+              type="url"
+              id="affiliateUrl"
+              placeholder="Paste affiliate product link"
+            >
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ==========================================
+           CREATOR REVENUE
+      =========================================== -->
+
+      <div class="sellerUploadInfoBox">
+
+        <div class="sellerUploadInfoIcon">
+
+          <i class="ri-money-dollar-circle-line"></i>
+
+        </div>
+
+
+        <div>
+
+          <strong>
+            Creator Revenue
+          </strong>
+
+          <p>
+            You receive <b>70%</b> of every successful
+            product sale. EcoData keeps <b>30%</b> as the
+            platform fee.
+          </p>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ==========================================
+           SUBMIT
+      =========================================== -->
+
+      <div class="sellerUploadFooter">
+
+        <div class="sellerUploadSecurity">
+
+          <i class="ri-shield-check-line"></i>
+
+          <span>
+            Your product will be reviewed before publishing.
+          </span>
+
+        </div>
+
+
+        <button
+          type="submit"
+          id="uploadProduct"
+          class="upload"
+        >
+
+          <i class="ri-upload-cloud-2-line"></i>
+
+          <span>
+            Upload Product
+          </span>
+
+        </button>
+
+      </div>
+
+
+    </form>
+
+  </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+      <!-----BOTTOM-NAVBAR----->
+  <div class="bottom-navbar" id="navIconDiv">
+    <div class="btom-navIcon" onclick="window.location.href='./index.html'">
+      <div class="activeImg active" id="activeMtn">
+        <i class="ri-dashboard-line material-icons"></i>
+      </div>
+      <small class="bottomIcon-textNav">Dashboard</small>
+    </div>
+
+    <div class="btom-navIcon">
+      <div class="activeImg" > 
+        <i class="ri-book-open-line material-icons"></i>
+      </div>
+      <small class="bottomIcon-textNav">Products</small>
+    </div>
+
+
+   
+
+
+      <div class="btom-navIcon addBar" >
+      <div class="activeImg" id="activeTel" > 
+       <i class="ri-add-circle-line material-icons addBtn"></i>
+      </div>
+      <small class="bottomIcon-textNav">Upload</small>
+    </div>
+
+
+     <div class="btom-navIcon" >
+      <div class="activeImg" id="activeAir" > 
+      <i class="ri-shopping-bag-3-line material-icons"></i>
+      </div>
+      <small class="bottomIcon-textNav"> Sales</small>
+    </div>
+       <div class="btom-navIcon" >
+      <div class="activeImg" id="activeAir" > 
+      <i class="ri-user-settings-line material-icons"></i>
+      </div>
+      <small class="bottomIcon-textNav">Profile</small>
+    </div>
+
+
+   
+
+
+  </div>
+  </main>
+
+
+  <script type="module" src="sellerUpload.js"></script>
+</body>
+</html>

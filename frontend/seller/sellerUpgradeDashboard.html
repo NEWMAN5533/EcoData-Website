@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seller Dashboard</title>
+  <link rel="stylesheet" href="sellerProfile.css">
+  <link rel="stylesheet" href="sellerUpgradeDashboard.css">
+
+  <!--remix icons-->
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
+
+
+<!--=== DARK MODE SCRIPT ========-->
+<script>
+
+document.addEventListener("DOMContentLoaded", ()=> {
+// DARK THEME
+
+const themeButton = document.getElementById('theme-button')
+const darkTheme = 'dark-mode'
+const iconTheme = 'ri-sun-line'
+
+const selectedTheme = localStorage.getItem('selected-theme')
+const selectedIcon = localStorage.getItem('selected-icon')
+
+
+
+const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
+const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'ri-moon-line' : 'ri-sun-line'
+
+
+// We validate if the user previously chose a topic
+if(selectedTheme){
+  // If the validations is fulfilled, we ask the issue was to know if we activated or deactivated
+  document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
+  themeButton.classList[selectedIcon === 'ri-moon-line' ? 'add' : 'remove'](iconTheme) 
+}
+
+// Active / deactivated the theme manually with the button
+themeButton.addEventListener("click", ()=> {
+  // Add or remove the dark / icon theme
+  document.body.classList.toggle(darkTheme)
+  themeButton.classList.toggle(iconTheme)
+  // We save theme and the current icon the user chose
+  localStorage.setItem('selected-theme', getCurrentTheme())
+  localStorage.setItem('selected-icon', getCurrentIcon())
+})
+
+});
+
+
+</script>
+<!--=== DARK MODE SCRIPT ENDS ===-->
+
+</head>
+<body>
+    <!--============ NAV ============-->
+  <nav class="nav-container nav-bar">
+    <div class="nav-bar-left">
+      <img src="../css/icons/newLogo.png" alt="newLogo">
+    </div>
+   
+    <div class="nav-actions">
+
+      
+
+        <!---login button-->
+        <i class="ri-user-line login-button material-icons" id="login-button"></i>
+
+            <!---theme button -->
+        <i class="ri-moon-foggy-line change-theme material-icons" id="theme-button"></i>
+
+
+        <!---menu button-->
+        <i class="ri-menu-2-line material-icons" id="menu"></i>
+      </div>
+  </nav>
+
+
+  <!--========= SIDE MENU ===========-->
+  <menu class="sidebar ">
+    <div class="sidebar-wrapper">
+   <div class="creator-studio">
+      <i class="ri-layout-masonry-line"></i>
+      <h5>EcoData Creator Studio</h5>
+   </div>
+   
+
+   <div class="sidebar-wrapper2">
+     <a href="sellerUpgradeDashboard.html" class="active">
+      <i class="ri-dashboard-3-line"></i>
+      <h5>Dashboard</h5>
+    </a>
+
+     <a href="sellerDashboard.html">
+      <i class="ri-box-3-line"></i>
+      <h5>Products</h5>
+    </a>
+
+     <a href="sellerUploadPage.html" >
+      <i class="ri-upload-cloud-2-line"></i>
+      <h5>Upload Product</h5>
+    </a>
+
+     <a href="sellerDashboard.html">
+      <i class="ri-bar-chart-box-line"></i>
+      <h5>Sales</h5>
+    </a>
+
+     <a href="sellerDashboard.html">
+      <i class="ri-money-dollar-circle-line"></i>
+      <h5>Earnings</h5>
+    </a>
+
+     <a href="sellerDashboard.html">
+      <i class="ri-bank-card-line"></i>
+      <h5>Withdrawals</h5>
+    </a>
+
+    <div class="sidebarView">
+        <h4>CREATOR</h4>
+      </div>
+
+     <a href="sellerProfile.html" >
+      <i class="ri-user-3-line"></i>
+      <h5>Profile</h5>
+    </a>
+
+      <a href="sellerSettings.html" >
+      <i class="ri-settings-3-line"></i>
+      <h5>Settings</h5>
+    </a>
+
+      <a href="sellerMessages.html">
+      <i class="ri-message-3-line"></i>
+      <h5>Messages</h5>
+    </a>
+
+
+      <a href="helpCenter.html">
+      <i class="ri-question-line"></i>
+      <h5>Help & Support</h5>
+    </a>
+
+   </div>
+    
+
+    </div>
+  </menu>
+
+
+   <!--========= SIDE MENU ===========-->
+  <menu class="sidebarPhone">
+    <div class="sidebar-wrapper">
+   <div class="creator-studio">
+      <i class="ri-layout-masonry-line"></i>
+      <h5>EcoData Creator Studio</h5>
+   </div>
+   
+
+   <div class="sidebar-wrapper2">
+     <a href="sellerUpgradeDashboard.html" class="active">
+      <i class="ri-dashboard-3-line"></i>
+      <h5>Dashboard</h5>
+    </a>
+
+     <a href="sellerDashboard.html">
+      <i class="ri-box-3-line"></i>
+      <h5>Products</h5>
+    </a>
+
+     <a href="sellerUploadPage.html" >
+      <i class="ri-upload-cloud-2-line"></i>
+      <h5>Upload Product</h5>
+    </a>
+
+     <a href="sellerDashboard.html">
+      <i class="ri-bar-chart-box-line"></i>
+      <h5>Sales</h5>
+    </a>
+
+     <a href="sellerDashboard.html">
+      <i class="ri-money-dollar-circle-line"></i>
+      <h5>Earnings</h5>
+    </a>
+
+     <a href="sellerDashboard.html">
+      <i class="ri-bank-card-line"></i>
+      <h5>Withdrawals</h5>
+    </a>
+
+    <div class="sidebarView">
+        <h4>CREATOR</h4>
+      </div>
+
+     <a href="sellerProfile.html">
+      <i class="ri-user-3-line"></i>
+      <h5>Profile</h5>
+    </a>
+
+      <a href="sellerSettings.html" >
+      <i class="ri-settings-3-line"></i>
+      <h5>Settings</h5>
+    </a>
+
+      <a href="sellerMessages.html">
+      <i class="ri-message-3-line"></i>
+      <h5>Messages</h5>
+    </a>
+
+
+      <a href="helpCenter.html">
+      <i class="ri-question-line"></i>
+      <h5>Help & Support</h5>
+    </a>
+
+   </div>
+    
+
+    </div>
+  </menu>
+
+  <!---========= MAIN ==============-->
+  <main class="main-container">
+
+    <!-- ==========================================
+     SELLER DASHBOARD
+========================================== -->
+
+<section class="sellerDashboardPage">
+
+
+  <!-- ========================================
+       PAGE HEADER
+  ========================================= -->
+
+  <div class="sellerDashboardHeader">
+
+    <div class="sellerDashboardTitleRow">
+
+      <div class="sellerDashboardTitleIcon">
+        <i class="ri-dashboard-3-line"></i>
+      </div>
+
+      <div>
+
+        <h1>Dashboard</h1>
+
+        <p>
+          Overview of your creator store performance.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- ========================================
+       DAILY ANALYTICS
+  ========================================= -->
+
+  <section class="sellerAnalyticsSection">
+
+    <div class="sellerSectionHeading">
+
+      <div>
+
+        <h2>Daily Analytics</h2>
+
+        <p>
+          Monitor your products, sales and store activity.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="sellerAnalyticsGrid">
+
+
+      <!-- ======================================
+           TOTAL PRODUCTS
+      ======================================= -->
+
+      <div class="sellerAnalyticsCard">
+
+        <div class="sellerAnalyticsTop">
+
+          <span>Total Products</span>
+
+          <div class="sellerAnalyticsIcon">
+            <i class="ri-stack-line"></i>
+          </div>
+
+        </div>
+
+        <div class="sellerAnalyticsBottom">
+
+          <strong id="totalEbooks">
+            0
+          </strong>
+
+          <span>
+            Products
+          </span>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ======================================
+           PUBLISHED
+      ======================================= -->
+
+      <div class="sellerAnalyticsCard">
+
+        <div class="sellerAnalyticsTop">
+
+          <span>Published</span>
+
+          <div class="sellerAnalyticsIcon">
+            <i class="ri-checkbox-circle-line"></i>
+          </div>
+
+        </div>
+
+        <div class="sellerAnalyticsBottom">
+
+          <strong id="publishedEbooks">
+            0
+          </strong>
+
+          <span>
+            Live products
+          </span>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ======================================
+           PENDING
+      ======================================= -->
+
+      <div class="sellerAnalyticsCard">
+
+        <div class="sellerAnalyticsTop">
+
+          <span>Pending Products</span>
+
+          <div class="sellerAnalyticsIcon">
+            <i class="ri-time-line"></i>
+          </div>
+
+        </div>
+
+        <div class="sellerAnalyticsBottom">
+
+          <strong id="pendingEbooks">
+            0
+          </strong>
+
+          <span>
+            Awaiting review
+          </span>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ======================================
+           TOTAL SALES
+      ======================================= -->
+
+      <div class="sellerAnalyticsCard">
+
+        <div class="sellerAnalyticsTop">
+
+          <span>Total Sales</span>
+
+          <div class="sellerAnalyticsIcon">
+            <i class="ri-shopping-bag-3-line"></i>
+          </div>
+
+        </div>
+
+        <div class="sellerAnalyticsBottom">
+
+          <strong id="totalSales">
+            0
+          </strong>
+
+          <span>
+            Completed sales
+          </span>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ======================================
+           TOTAL EARNINGS
+      ======================================= -->
+
+      <div class="sellerAnalyticsCard">
+
+        <div class="sellerAnalyticsTop">
+
+          <span>Total Earnings</span>
+
+          <div class="sellerAnalyticsIcon">
+            <i class="ri-wallet-3-line"></i>
+          </div>
+
+        </div>
+
+        <div class="sellerAnalyticsBottom">
+
+          <strong id="totalEarnings">
+            0
+          </strong>
+
+          <span>
+            Creator earnings
+          </span>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ======================================
+           AVAILABLE BALANCE
+      ======================================= -->
+
+      <div class="sellerAnalyticsCard">
+
+        <div class="sellerAnalyticsTop">
+
+          <span>Available Balance</span>
+
+          <div class="sellerAnalyticsIcon">
+            <i class="ri-bank-card-line"></i>
+          </div>
+
+        </div>
+
+        <div class="sellerAnalyticsBottom">
+
+          <strong id="availableBalance">
+            0
+          </strong>
+
+          <span>
+            Available to withdraw
+          </span>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ======================================
+           CONVERSION RATE
+      ======================================= -->
+
+      <div
+        class="sellerAnalyticsCard"
+        style="display:none;"
+      >
+
+        <div class="sellerAnalyticsTop">
+
+          <span>Conversion Rate</span>
+
+          <div class="sellerAnalyticsIcon">
+            <i class="ri-percent-line"></i>
+          </div>
+
+        </div>
+
+        <div class="sellerAnalyticsBottom">
+
+          <strong id="conversionRate">
+            0
+          </strong>
+
+          <span>
+            Store conversion
+          </span>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ======================================
+           VIEWS
+      ======================================= -->
+
+      <div class="sellerAnalyticsCard">
+
+        <div class="sellerAnalyticsTop">
+
+          <span>Total Views</span>
+
+          <div class="sellerAnalyticsIcon">
+            <i class="ri-eye-line"></i>
+          </div>
+
+        </div>
+
+        <div class="sellerAnalyticsBottom">
+
+          <strong id="ViewsRate">
+            0
+          </strong>
+
+          <span>
+            Product views
+          </span>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ==========================================
+       SALES OVERVIEW
+  =========================================== -->
+
+  <section class="salesOverview">
+
+
+    <!-- HEADER -->
+
+    <div class="salesOverviewHeader">
+
+      <div class="salesOverviewTitle">
+
+        <div class="salesOverviewIcon">
+          <i class="ri-bar-chart-grouped-line"></i>
+        </div>
+
+        <div>
+
+          <h2>
+            Sales Overview
+          </h2>
+
+          <p>
+            Track your sales performance over time.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- PERIOD FILTER -->
+
+      <div class="salesPeriod">
+
+        <button
+          class="salesPeriodBtn active"
+          data-period="7"
+        >
+          7 Days
+        </button>
+
+        <button
+          class="salesPeriodBtn"
+          data-period="30"
+        >
+          30 Days
+        </button>
+
+        <button
+          class="salesPeriodBtn"
+          data-period="90"
+        >
+          3 Months
+        </button>
+
+        <button
+          class="salesPeriodBtn"
+          data-period="all"
+        >
+          All
+        </button>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ========================================
+         SALES STATISTICS
+    ========================================= -->
+
+    <div class="salesStats">
+
+
+      <!-- TOTAL SALES -->
+
+      <div class="salesStatCard">
+
+        <div class="salesStatTop">
+
+          <div class="salesStatIcon">
+            <i class="ri-shopping-bag-3-line"></i>
+          </div>
+
+          <span>
+            Total Sales
+          </span>
+
+        </div>
+
+        <strong id="salesOverviewTotalSales">
+          0
+        </strong>
+
+        <small>
+          Completed sales
+        </small>
+
+      </div>
+
+
+
+      <!-- REVENUE -->
+
+      <div class="salesStatCard">
+
+        <div class="salesStatTop">
+
+          <div class="salesStatIcon">
+            <i class="ri-money-dollar-circle-line"></i>
+          </div>
+
+          <span>
+            Total Revenue
+          </span>
+
+        </div>
+
+        <strong id="salesOverviewRevenue">
+          GHS 0.00
+        </strong>
+
+        <small>
+          Gross product revenue
+        </small>
+
+      </div>
+
+
+
+      <!-- CREATOR EARNINGS -->
+
+      <div class="salesStatCard">
+
+        <div class="salesStatTop">
+
+          <div class="salesStatIcon">
+            <i class="ri-wallet-3-line"></i>
+          </div>
+
+          <span>
+            Creator Earnings
+          </span>
+
+        </div>
+
+        <strong id="salesOverviewEarnings">
+          GHS 0.00
+        </strong>
+
+        <small>
+          Your 70% share
+        </small>
+
+      </div>
+
+
+
+      <!-- AVAILABLE BALANCE -->
+
+      <div class="salesStatCard">
+
+        <div class="salesStatTop">
+
+          <div class="salesStatIcon">
+            <i class="ri-bank-card-line"></i>
+          </div>
+
+          <span>
+            Available Balance
+          </span>
+
+        </div>
+
+        <strong id="salesOverviewBalance">
+          GHS 0.00
+        </strong>
+
+        <small>
+          Available for withdrawal
+        </small>
+
+      </div>
+
+
+    </div>
+
+
+
+    <!-- ========================================
+         CHART CARD
+    ========================================= -->
+
+    <div class="salesChartCard">
+
+
+      <!-- CHART HEADER -->
+
+      <div class="salesChartHeader">
+
+        <div>
+
+          <h3 id="salesChartTitle">
+            Revenue
+          </h3>
+
+          <span id="salesChartSubtitle">
+            Daily revenue
+          </span>
+
+        </div>
+
+
+        <!-- METRIC SWITCHER -->
+
+        <div class="salesMetricSwitcher">
+
+          <button
+            class="salesMetricBtn active"
+            data-metric="revenue"
+          >
+            <i class="ri-money-dollar-circle-line"></i>
+            Revenue
+          </button>
+
+          <button
+            class="salesMetricBtn"
+            data-metric="sales"
+          >
+            <i class="ri-shopping-bag-3-line"></i>
+            Sales
+          </button>
+
+          <button
+            class="salesMetricBtn"
+            data-metric="earnings"
+          >
+            <i class="ri-wallet-3-line"></i>
+            Earnings
+          </button>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- CHART -->
+
+      <div class="salesChartWrapper">
+
+        <div
+          id="creatorSalesChart"
+          class="creatorSalesChart"
+        ></div>
+
+
+        <!-- EMPTY STATE -->
+
+        <div
+          id="salesChartEmpty"
+          class="salesChartEmpty"
+        >
+
+          <div class="salesEmptyIcon">
+
+            <i class="ri-bar-chart-grouped-line"></i>
+
+          </div>
+
+          <h4>
+            No sales yet
+          </h4>
+
+          <p>
+            Your sales activity will appear here
+            once customers purchase your products.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ==========================================
+       PRODUCTS TABLE
+  =========================================== -->
+
+  <section class="sellerProductsSection">
+
+
+    <!-- TABLE HEADER -->
+
+    <div class="sellerProductsHeader">
+
+      <div class="sellerProductsTitle">
+
+        <div class="sellerProductsIcon">
+          <i class="ri-stack-line"></i>
+        </div>
+
+        <div>
+
+          <h2>
+            Products
+          </h2>
+
+          <p>
+            Track and manage all your products.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <a
+        href="#"
+        class="sellerViewProductsBtn"
+      >
+        View All
+
+        <i class="ri-arrow-right-line"></i>
+
+      </a>
+
+    </div>
+
+
+
+    <!-- TABLE -->
+
+    <div class="sellerProductsCard">
+
+      <div class="table-scroll-area">
+
+
+        <!-- TABLE HEADER -->
+
+        <div class="table-header">
+
+          <span>
+            COVER
+          </span>
+
+          <span>
+            TITLE
+          </span>
+
+          <span>
+            TYPE
+          </span>
+
+          <span>
+            PRICE
+          </span>
+
+          <span>
+            STATUS
+          </span>
+
+          <span>
+            SALES
+          </span>
+
+          <span>
+            UPDATED-AT
+          </span>
+
+          <span>
+            DATE-SUBMITTED
+          </span>
+
+          <span>
+            ACTION
+          </span>
+
+        </div>
+
+
+        <!-- DYNAMIC PRODUCTS -->
+
+        <div class="main-row-content">
+
+          <div
+            class="row-wrapper"
+            id="creatorProductsBody"
+          >
+
+            <!--
+              sellerDashboard.js
+              inserts products here
+            -->
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+</section>
+
+
+
+    
+      <!-----BOTTOM-NAVBAR----->
+  <div class="bottom-navbar" id="navIconDiv">
+    <div class="btom-navIcon" onclick="window.location.href='./index.html'">
+      <div class="activeImg active" id="activeMtn">
+        <i class="ri-dashboard-line material-icons"></i>
+      </div>
+      <small class="bottomIcon-textNav">Dashboard</small>
+    </div>
+
+    <div class="btom-navIcon">
+      <div class="activeImg" > 
+        <i class="ri-book-open-line material-icons"></i>
+      </div>
+      <small class="bottomIcon-textNav">Products</small>
+    </div>
+
+
+   
+
+
+      <div class="btom-navIcon addBar" >
+      <div class="activeImg" id="activeTel" > 
+       <i class="ri-add-circle-line material-icons addBtn"></i>
+      </div>
+      <small class="bottomIcon-textNav">Upload</small>
+    </div>
+
+
+     <div class="btom-navIcon" >
+      <div class="activeImg" id="activeAir" > 
+      <i class="ri-shopping-bag-3-line material-icons"></i>
+      </div>
+      <small class="bottomIcon-textNav"> Sales</small>
+    </div>
+       <div class="btom-navIcon" >
+      <div class="activeImg" id="activeAir" > 
+      <i class="ri-user-settings-line material-icons"></i>
+      </div>
+      <small class="bottomIcon-textNav">Profile</small>
+    </div>
+
+
+   
+
+
+  </div>
+  </main>
+
+
+  <script type="module" src="sellerUpgradeDashboard.js"></script>
+</body>
+</html>

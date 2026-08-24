@@ -1,0 +1,1361 @@
+:root {
+  --color-white: #fff;
+  --color-light: #f5f4f7;
+  --color-gray-light: #86848c;
+  --color-gray-dark: #56555e;
+  --color-dark: #27282f;
+  --color-primary: rgb(71, 7, 234);
+  --color-success: rgb(34, 202, 75);
+  --color-danger: rgb(255, 67, 54);
+  --color-warning:  rgb(234, 181, 7);
+  --color-purple: rgb(160, 99, 245);
+  --color-primary-light: rgba(71, 7, 234, 0.2);
+  --color-success-light: rgba(34, 202, 75, 0.2);
+  --color-danger-light: rgba(255, 67, 54, 0.2);
+  --color-purple-light: rgba(160, 99, 245, 0.2);
+
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  --card-padding: 1.6rem;
+  --border-cl: rgb(226, 226, 226);
+
+  --radius-1: 0.5rem;
+  --radius-2: 1rem;
+  --radius-3: 1.6rem;
+
+  --transition: all 300ms ease;
+}
+
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  list-style: none;
+  text-decoration: none;
+  appearance: none;
+  background: transparent;
+}
+
+html{
+  font-size: 12px;
+}
+
+body{
+  background: var(--color-light);
+  font-family: var(--font-family);
+  display: grid;
+  grid-template-columns: 17rem auto;
+  color: var(--color-gray-light);
+  gap: 2rem;
+  transition: var(--transition);
+  min-height: 100vw;
+}
+
+.nav-actions #menu{
+  display: flex;
+}
+
+@media screen and (max-width: 500px) {
+  body{
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .sidebar,
+  .sidebarPhone{
+    position: fixed;
+    top: 0 !important;
+    margin-top: 0 !important;
+    left: -500px;
+    display: flex;
+    flex-direction: column;
+    width: 230px;
+    background: var(--color-light);
+    overflow-y: auto !important;
+    z-index: 999;
+    transition: var(--transition);
+  }
+
+
+}
+
+
+/* ==========================================
+   SELLER PROFILE + FIXED SIDEBAR
+   DESKTOP: 768px AND ABOVE
+========================================== */
+
+@media (min-width: 768px) {
+
+  /* ------------------------------------------
+     FIXED SIDEBAR
+  ------------------------------------------ */
+
+  .sidebar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 17rem;
+    height: 100vh;
+
+    z-index: 1000;
+
+    overflow-y: hidden !important;
+    overflow-x: hidden;
+  }
+
+
+  /* ------------------------------------------
+     PROFILE CONTENT
+     Leave space for sidebar
+  ------------------------------------------ */
+
+  .sellerProfilePage {
+
+    width: auto;
+
+    min-width: calc(100vw - 272px);
+
+    margin-left: 238px !important;
+
+    padding: 30px;
+
+  }
+
+}
+
+
+/* ==========================================
+   LARGE DESKTOP
+========================================== */
+
+@media (min-width: 1200px) {
+
+  .sellerProfilePage {
+
+    margin-left: 250px !important;
+
+    min-width: calc(100vw - 272px) !important;
+
+    padding-left: 35px;
+    padding-right: 35px;
+
+    overflow-x: hidden !important;
+
+  }
+
+  .sidebar{
+    width: 242px !important;
+    overflow-y: hidden;
+  }
+
+}
+
+
+/* ==========================================
+   TABLET / MOBILE
+   SIDEBAR IS NOT FIXED
+========================================== */
+
+@media (max-width: 767px) {
+
+  .sidebar {
+
+    display: none;
+
+  }
+
+
+  .sellerProfilePage {
+
+    width: 100%;
+
+    margin-left: 0;
+
+    padding: 15px;
+
+  }
+
+}
+
+@media screen and (min-width: 768px) {
+  .nav-actions #menu{
+    display: none !important;
+  }
+
+  
+}
+
+h1, h2,h3, h4, h5, h5{
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--color-dark);
+}
+
+h1{
+  font-size: 2.3rem;
+  font-weight: 900;
+}
+
+h2{
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+h3{
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+h4{
+ font-size: 1rem;
+}
+
+h5{
+  font-size: 1rem;
+}
+
+h6{
+  font-size: .8rem;
+}
+
+small{
+  font-size:  0.77rem;
+}
+
+
+
+
+
+.nav-bar{
+  width: 100vw;
+  height: 4rem;
+  background: var(--color-white);
+  display: flex;
+  place-items: center;
+  position: fixed;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  border-bottom: 1px solid var(--border-cl);
+}
+
+@media screen and (min-width: 768px) {
+  .nav-bar{
+    max-width: calc(100vw - 18rem) !important;
+    right: 0 !important;
+    left: 20rem !important;
+    position: fixed;
+  }
+
+  .nav-actions{
+    margin-right: 3rem !important;
+  }
+}
+
+.nav-bar-left{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  width: max-content;
+  overflow: hidden;
+  justify-content: center;
+}
+
+.nav-bar-left img{
+  width: 7rem;
+  display: block;
+  object-fit: cover;
+  margin-top: 1rem;
+  margin-left: -1rem;
+}
+
+.nav-actions{
+  display: flex;
+  padding-right: .5rem;
+  gap: 1rem;
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+
+.nav-actions i{
+  font-size: 1.2rem;
+}
+
+
+
+
+
+/**** SIDE MENU ******/
+.sidebar{
+  margin-top: 0;
+  min-height: calc(100vh - 4.1rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem !important;
+  border-right: 1px solid rgb(226, 226, 226);
+}
+
+.sidebarPhone{
+  margin-top: 0;
+  min-height: calc(100vh - 4.1rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem !important;
+  border-right: 1px solid rgb(226, 226, 226);
+}
+
+.sidebar-wrapper2{
+  width: 100%;
+  height: calc(100vh - 7rem) !important;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem 0;
+  overflow-y: auto;
+}
+
+
+
+.sidebar .creator-studio{
+  background: var(--color-white); 
+  font-size: 1.3rem;
+  width: 100%;
+  height: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding: 0 2rem;
+  gap: 1rem;
+  white-space: nowrap;
+}
+
+.sidebarPhone .creator-studio{
+  font-size: 1.3rem;
+  width: 100%;
+  height: 7rem;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding: 0 2rem;
+  gap: 1rem;
+  white-space: nowrap;
+}
+
+@media screen and (min-width: 768px) {
+  .sidebarPhone{
+    display: none;
+  }
+
+
+}
+
+@media screen and (max-width: 500px) {
+  .sidebarPhone{
+    display: flex !important;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .sidebar .creator-studio,
+  .sidebarPhone .creator-studio{
+    background: var(--color-white);
+    padding: 0 1rem !important;
+    border-bottom: 1px solid var(--border-cl);
+  }
+
+  .sidebar .creator-studio i,
+  .sidebarPhone .creator-studio i{
+  color: var(--color-gray-dark);
+}
+
+.sidebar .creator-studio h5,
+.sidebarPhone .creator-studio h5{
+  color: var(--color-gray-dark);
+  font-size: 1.1rem;
+  font-family: var(--font-family);
+  flex-wrap: wrap;
+}
+
+}
+
+
+.sidebar .creator-studio h5,
+.sidebarPhone .creator-studio h5{
+  color: var(--color-gray-dark);
+  font-size: 1.1rem;
+  font-family: var(--font-family);
+  flex-wrap: wrap;
+}
+
+ .sidebar .creator-studio i,
+  .sidebarPhone .creator-studio i{
+  color: var(--color-gray-dark);
+  }
+
+.creator-studio i{
+  color: var(--color-light);
+  font-size: 2.2rem;
+}
+
+.creator-studio h5{
+  color: var(--color-white);
+  font-size: 1.1rem;
+  font-family: var(--font-family);
+}
+
+.sidebar a,
+.sidebarPhone a{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 4vw 1.5rem 2vw;
+  transition: var(--transition);
+}
+
+.sidebar a i,
+.sidebarPhone a i{
+  font-size: 1.4rem;
+  color: var(--color-gray-dark);
+}
+
+.sidebar a h5,
+.sidebarPhone a h5{
+  font-weight: 500;
+  color: var(--color-gray-dark);
+}
+
+.sidebar a.active,
+.sidebarPhone a.active{
+  background: var(--color-white);
+  color: var(--color-primary);
+  border-left: 0.5rem solid var(--color-primary);
+  padding-left: calc(2vw - 0.5rem);
+  transition: var(--transition);
+}
+
+.sidebar a:hover,
+.sidebarPhone a:hover{
+  background: var(--color-white) !important;
+  color: var(--color-gray-dark);
+}
+
+.sidebar a.active *,
+.sidebarPhone a.active *{
+  color: var(--color-primary);
+}
+
+.sidebarView{
+  width: 100%;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding: 0 2rem;
+}
+
+.sidebarView h4{
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-bottom: 1px solid var(--color-danger-light);
+}
+
+
+
+/******* MAIN CONTAINER *****/
+.main-container{
+  margin-top: 4rem !important;
+  position: relative;
+  width: 98%;
+
+}
+
+
+
+/* ==========================================
+   SELLER PROFILE PAGE
+========================================== */
+
+.sellerProfilePage {
+  width: 100%;
+  max-width: 1180px;
+  height: max-content;
+  margin-bottom: 5.5rem;
+  padding: 34px;
+}
+
+
+
+/* ==========================================
+   PROFILE HERO
+========================================== */
+
+.sellerProfileHero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+
+  padding: 30px;
+
+  border: 1px solid rgba(128, 128, 128, 0.15);
+  border-radius: 22px;
+
+  background: var(--color-white);
+
+  margin-bottom: 16px;
+}
+
+
+.sellerProfileIdentity {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+
+/* ==========================================
+   AVATAR
+========================================== */
+
+.sellerAvatarWrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+
+.sellerProfileAvatar {
+  width: 105px;
+  height: 105px;
+
+  display: block;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  border: 4px solid
+    rgba(128, 128, 128, 0.12);
+
+  background: rgba(128, 128, 128, 0.08);
+}
+
+
+.sellerAvatarBadge {
+  position: absolute;
+
+  right: 3px;
+  bottom: 5px;
+
+  width: 27px;
+  height: 27px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #111;
+  color: #fff;
+
+  border: 3px solid
+    var(--body-bg, #fff);
+
+  font-size: 12px;
+}
+
+
+/* ==========================================
+   IDENTITY
+========================================== */
+
+.sellerNameRow {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+
+.sellerNameRow h1 {
+  margin: 0;
+
+  font-size: 27px;
+  font-weight: 750;
+
+  letter-spacing: -0.7px;
+}
+
+
+.sellerVerified {
+  display: flex;
+  align-items: center;
+
+  font-size: 18px;
+}
+
+
+.sellerUsername {
+  margin: 5px 0 12px;
+
+  font-size: 13px;
+
+  opacity: 0.55;
+}
+
+
+.sellerRole {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 6px 10px;
+
+  border-radius: 8px;
+
+  background: rgba(128, 128, 128, 0.08);
+
+  font-size: 11px;
+  font-weight: 650;
+}
+
+
+.sellerRoleIcon {
+  font-size: 14px;
+}
+
+
+/* ==========================================
+   EDIT BUTTON
+========================================== */
+
+.editSellerProfileBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 11px 16px;
+
+  border: 0;
+  border-radius: 10px;
+
+  background: #111;
+  color: #fff;
+
+  font-size: 12px;
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+
+.editSellerProfileBtn:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+
+/* ==========================================
+   STATISTICS
+========================================== */
+
+.sellerProfileStats {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 12px;
+
+  margin-bottom: 16px;
+}
+
+
+.sellerProfileStat {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  padding: 18px;
+
+  border: 1px solid rgba(128, 128, 128, 0.15);
+  border-radius: 16px;
+
+  background: var(--color-white);
+}
+
+
+.sellerProfileStatIcon {
+  width: 40px;
+  height: 40px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 11px;
+
+  background: rgba(128, 128, 128, 0.08);
+
+  font-size: 18px;
+}
+
+
+.sellerProfileStat strong {
+  display: block;
+
+  font-size: 19px;
+  font-weight: 750;
+}
+
+
+.sellerProfileStat small {
+  display: block;
+
+  margin-top: 3px;
+
+  font-size: 11px;
+
+  opacity: 0.5;
+}
+
+
+/* ==========================================
+   CONTENT
+========================================== */
+
+.sellerProfileContent {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 16px;
+}
+
+
+.sellerProfileCard {
+  padding: 22px;
+
+  border: 1px solid rgba(128, 128, 128, 0.15);
+  border-radius: 18px;
+
+  background: var(--color-white);
+}
+
+
+/* ==========================================
+   CARD HEADER
+========================================== */
+
+.sellerProfileCardHeader > div {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+
+.sellerSectionIcon {
+  width: 38px;
+  height: 38px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: rgba(128, 128, 128, 0.08);
+
+  font-size: 17px;
+}
+
+
+.sellerProfileCardHeader h2 {
+  margin: 0;
+
+  font-size: 15px;
+  font-weight: 700;
+}
+
+
+.sellerProfileCardHeader p {
+  margin: 3px 0 0;
+
+  font-size: 11px;
+
+  opacity: 0.5;
+}
+
+
+/* ==========================================
+   BIO
+========================================== */
+
+.sellerProfileBio {
+  margin: 20px 0 0;
+
+  font-size: 13px;
+  line-height: 1.7;
+
+  opacity: 0.72;
+}
+
+
+/* ==========================================
+   SELLER INFORMATION
+========================================== */
+
+.sellerInformationGrid {
+  display: grid;
+
+  grid-template-columns:
+    1fr;
+
+  gap: 17px;
+
+  margin-top: 22px;
+}
+
+
+.sellerInformationItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+
+.sellerInformationIcon {
+  width: 36px;
+  height: 36px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background: rgba(128, 128, 128, 0.08);
+
+  font-size: 16px;
+}
+
+
+.sellerInformationItem small {
+  display: block;
+
+  margin-bottom: 3px;
+
+  font-size: 10px;
+
+  opacity: 0.5;
+}
+
+
+.sellerInformationItem strong {
+  display: block;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  word-break: break-word;
+}
+
+
+/* ==========================================
+   SOCIAL LINKS
+========================================== */
+
+.sellerSocialLinks {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 9px;
+
+  margin-top: 20px;
+}
+
+
+.sellerSocialLink {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  min-width: 0;
+
+  padding: 11px;
+
+  border: 1px solid rgba(128, 128, 128, 0.12);
+  border-radius: 10px;
+
+  color: inherit;
+
+  text-decoration: none;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.sellerSocialLink:hover {
+  background: rgba(128, 128, 128, 0.07);
+  transform: translateY(-1px);
+}
+
+
+.sellerSocialIcon {
+  width: 28px;
+  height: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  background: rgba(128, 128, 128, 0.08);
+
+  font-size: 14px;
+}
+
+
+.sellerSocialLink > i:last-child {
+  margin-left: auto;
+
+  opacity: 0.4;
+}
+
+
+/* ==========================================
+   EARNINGS
+========================================== */
+
+.sellerEarningsCard {
+  grid-column: 1 / -1;
+}
+
+
+.sellerEarningsGrid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 12px;
+
+  margin-top: 22px;
+}
+
+
+.sellerEarningsGrid > div {
+  padding: 15px;
+
+  border-radius: 12px;
+
+  background: rgba(128, 128, 128, 0.06);
+}
+
+
+.sellerEarningsGrid small {
+  display: block;
+
+  margin-bottom: 6px;
+
+  font-size: 10px;
+
+  opacity: 0.5;
+}
+
+
+.sellerEarningsGrid strong {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 850px) {
+
+  .sellerProfileContent {
+    grid-template-columns: 1fr;
+  }
+
+  .sellerEarningsCard {
+    grid-column: auto;
+  }
+
+  .sellerEarningsGrid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+}
+
+
+@media (max-width: 650px) {
+
+  .sellerProfilePage {
+    padding: 15px;
+  }
+
+
+  .sellerProfileHero {
+    flex-direction: column;
+    align-items: stretch;
+
+    padding: 22px;
+  }
+
+
+  .sellerProfileIdentity {
+    align-items: flex-start;
+  }
+
+
+  .sellerProfileAvatar {
+    width: 82px;
+    height: 82px;
+  }
+
+
+  .sellerNameRow h1 {
+    font-size: 21px;
+  }
+
+
+  .editSellerProfileBtn {
+    width: 100%;
+  }
+
+
+  .sellerProfileStats {
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+}
+
+
+@media (max-width: 450px) {
+
+  .sellerProfileIdentity {
+    gap: 13px;
+  }
+
+
+  .sellerProfileStat {
+    padding: 14px;
+  }
+
+
+  .sellerProfileStatIcon {
+    width: 34px;
+    height: 34px;
+
+    font-size: 15px;
+  }
+
+
+  .sellerProfileStat strong {
+    font-size: 16px;
+  }
+
+
+  .sellerSocialLinks {
+    grid-template-columns: 1fr;
+  }
+
+
+  .sellerEarningsGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+}
+
+
+
+
+
+/*****
+BOTTOM NAVIGATION BAR STYLE CSS
+******/
+ 
+
+    :root{
+  --darkMode-bg-cl: rgb(10, 10, 10);
+  --darkMode-bg-cl-2: rgb(10, 1, 22);
+  --welcome-card-bg: rgba(37, 36, 36, 0.918);
+  --welcome-card-bg-1: rgb(2, 2, 39);
+    }
+    .bottom-navbar{
+      width: 100%;
+      max-width: 99.99%;
+      height: 4rem;
+      justify-self: center;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      gap: .3rem;
+      z-index: 99;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .1rem;
+      background: var(--color-white);
+      backdrop-filter: unset;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.26);
+    }
+
+   
+
+
+
+    .bottom-navbar .btom-navIcon{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      width: 25%;
+      gap: .3rem;
+      height: 99%;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-user-select: none;
+      outline: none;
+      -ms-user-select: none;;
+      user-select: none;
+    }
+
+    .btom-navIcon .activeImg{
+      padding: .2rem 1.16rem;
+      display: flex;
+      position: relative;
+      align-items: center;
+      justify-content: center;
+      border-radius: .9rem;
+    -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;;
+  user-select: none;
+    }
+
+    .activeImg.active{
+    background: rgba(56, 56, 56, 0.863);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+   
+
+    /***
+    AFA ACTIVE
+    ***/
+      .activeImg.activeMin{
+    padding: .19rem .3rem;
+    background: rgba(53, 50, 50, 0.849);
+    box-shadow: 0 2px 6px rgba(68, 68, 68, 0.3);
+    border: 1px solid var(--primary-cl);
+    }
+
+ 
+
+ /***
+    AFA ACTIVE ENDS
+    ***/
+
+
+     /***
+    PAY ACTIVE
+    ***/
+    .activeImg.activeMin{
+    padding: .19rem .3rem;
+    background: rgb(39, 37, 37);
+    box-shadow: 0 2px 6px rgba(68, 68, 68, 0.3);
+    border: 1px solid var(--primary-cl);
+    }
+   
+      /***
+    PAY ACTIVE ENDS
+    ***/
+
+
+
+      /***
+    INFO ACTIVE ENDS
+    ***/
+
+    .activeImg img{
+      width: 1.3rem;
+      height: 1.3rem;
+    }
+
+  .activeImg .pin{
+    width: 2rem;
+    height: 1.8rem;
+    margin-bottom: -.3rem;
+  }
+
+  .material-icons{
+    color: var(--color-gray-light);
+    font-size: 1.4rem !important;
+    font-weight: 300 !important;
+  }
+
+
+  .menu{
+    font-size: 1.2rem !important;
+    cursor: pointer;
+  }
+
+
+    .btom-navIcon .bottomIcon-textNav{
+      font-size: .76rem;
+      font-weight: 700;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      color: var(--color-gray-dark) !important;
+    }
+
+   
+
+  .gridCard-wrapper{
+    margin-bottom: 3rem;
+  }
+
+
+
+
+
+
+
+ /****
+ ecoshop-fixedBtn
+ *****/
+   
+
+      .ecodataShopBtn{
+        width: 100%;
+        height: 0;
+        background: red;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        margin-bottom: 4rem;
+        z-index: 99999999999999999;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-user-select: none;
+        outline: none;
+        -ms-user-select: none;;
+        user-select: none;
+      }
+      .shop-fixedBtn{
+        width: 3.4rem;
+        height: 3.4rem;
+        position: fixed;
+        padding: .4rem;
+        bottom: 2.5rem;
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;;
+        background: rgb(245, 223, 200);
+        border-radius: 50%;
+
+        z-index: 999 !important;
+        box-shadow: 0 10px 20px rgba(32, 32, 32, 0.6) !important;
+        cursor: pointer;
+        border: 1px solid var(--thin-border-cl);
+        -webkit-tap-highlight-color: transparent;
+        -webkit-user-select: none;
+        outline: none;
+        -ms-user-select: none;;
+        user-select: none;
+      }
+
+     
+
+      .shop-fixedBtn img{
+        width: 3.2rem;
+        height: 3.2rem;
+      }
+
+
+
+ 
+/*********************
+/ ACTIVE COUNT ORDERS
+*********************/
+        .btom-navIcon .nav-badge{
+          position: absolute;
+          top: 1px;
+          right: 9px;
+          width:  19px;
+          height:  14px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: rgb(7, 184, 125);
+          text-align: center;
+          border-radius: 50%;
+          color: rgb(44, 44, 44);
+          font-size: .55rem;
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+      
+
+        .addBar{
+          margin-bottom: .3rem;
+          line-height: .9;
+          padding-bottom: .3rem;
+        }
+
+        .addBtn{
+          border: 1px solid rgb(151, 149, 149);
+          border-radius: .4rem;
+          padding:.2rem .4rem;
+        }
+
+
+        @media screen and (min-width: 768px){
+          .bottom-navbar{
+            display: none !important;
+          }
+        }
+   
+/****************************
+/ ACTIVE COUNT ORDERS ENDS
+*****************************/
+

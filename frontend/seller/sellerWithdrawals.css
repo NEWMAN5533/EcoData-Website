@@ -1,0 +1,950 @@
+:root {
+  --color-white: #fff;
+  --color-light: #f5f4f7;
+  --color-gray-light: #86848c;
+  --color-gray-dark: #56555e;
+  --color-dark: #27282f;
+  --color-primary: rgb(71, 7, 234);
+  --color-success: rgb(34, 202, 75);
+  --color-danger: rgb(255, 67, 54);
+  --color-warning:  rgb(234, 181, 7);
+  --color-purple: rgb(160, 99, 245);
+  --color-primary-light: rgba(71, 7, 234, 0.2);
+  --color-success-light: rgba(34, 202, 75, 0.2);
+  --color-danger-light: rgba(255, 67, 54, 0.2);
+  --color-purple-light: rgba(160, 99, 245, 0.2);
+
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  --card-padding: 1.6rem;
+  --border-cl: rgb(226, 226, 226);
+
+  --radius-1: 0.5rem;
+  --radius-2: 1rem;
+  --radius-3: 1.6rem;
+
+  --transition: all 300ms ease;
+}
+/* ==========================================
+   SELLER PROFILE + FIXED SIDEBAR
+   DESKTOP: 768px AND ABOVE
+========================================== */
+
+@media (min-width: 768px) {
+
+  /* ------------------------------------------
+     FIXED SIDEBAR
+  ------------------------------------------ */
+
+  .sidebar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 17rem;
+    height: 100vh;
+
+    z-index: 1000;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+
+  /* ------------------------------------------
+     PROFILE CONTENT
+     Leave space for sidebar
+  ------------------------------------------ */
+
+  .sellerWithdrawalPage{
+
+    width: auto;
+
+    min-width: calc(100vw - 272px);
+
+    margin-left: 238px !important;
+
+    padding: 30px;
+
+  }
+
+}
+
+
+/* ==========================================
+   LARGE DESKTOP
+========================================== */
+
+@media (min-width: 1200px) {
+
+  .sellerWithdrawalPage {
+
+    margin-left: 250px !important;
+
+    min-width: calc(100vw - 272px) !important;
+
+    padding-left: 35px;
+    padding-right: 35px;
+
+    overflow-x: hidden !important;
+
+  }
+
+  .sidebar{
+    width: 242px !important;
+  }
+
+}
+
+
+/* ==========================================
+   TABLET / MOBILE
+   SIDEBAR IS NOT FIXED
+========================================== */
+
+@media (max-width: 767px) {
+  .main-container{
+    width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .sidebar {
+
+    display: none;
+
+  }
+
+
+  .sellerWithdrawalPage {
+
+    width: 100%;
+
+    margin-left: 0;
+
+    padding: 15px;
+
+    margin-bottom: 5.5rem  !important;
+
+  }
+}
+
+
+
+
+/* ==========================================
+   SELLER WITHDRAWAL PAGE
+========================================== */
+
+.sellerWithdrawalPage {
+  width: 100%;
+  max-width: 1180px;
+
+  margin: 0 auto;
+  padding: 24px;
+
+  box-sizing: border-box;
+}
+
+
+/* ==========================================
+   PAGE HEADER
+========================================== */
+
+.sellerWithdrawalHeader {
+  margin-bottom: 20px;
+}
+
+
+.sellerWithdrawalTitle {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+
+.sellerWithdrawalTitleIcon {
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 12px;
+
+  background:
+    rgba(128, 128, 128, 0.09);
+
+  font-size: 20px;
+}
+
+
+.sellerWithdrawalTitle h1 {
+  margin: 0;
+
+  font-size: 25px;
+  font-weight: 750;
+
+  letter-spacing: -0.6px;
+}
+
+
+.sellerWithdrawalTitle p {
+  margin: 4px 0 0;
+
+  font-size: 12px;
+
+  opacity: 0.5;
+}
+
+
+/* ==========================================
+   BALANCE OVERVIEW
+========================================== */
+
+.withdrawalOverview {
+  display: grid;
+
+  grid-template-columns:
+    1.4fr
+    1fr
+    1fr;
+
+  gap: 12px;
+
+  margin-bottom: 16px;
+}
+
+
+/* ==========================================
+   MAIN BALANCE CARD
+========================================== */
+
+.withdrawalBalanceCard {
+  padding: 20px;
+
+  border: 1px solid
+    rgba(128, 128, 128, 0.15);
+
+  border-radius: 18px;
+
+  background:
+    rgba(128, 128, 128, 0.035);
+}
+
+
+.withdrawalCardTop {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 15px;
+}
+
+
+.withdrawalCardTop span {
+  display: block;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  opacity: 0.5;
+}
+
+
+.withdrawalCardTop strong {
+  display: block;
+
+  margin-top: 8px;
+
+  font-size: 26px;
+
+  font-weight: 750;
+
+  letter-spacing: -0.7px;
+}
+
+
+.withdrawalBalanceCard > p {
+  margin: 10px 0 0;
+
+  font-size: 10px;
+
+  opacity: 0.4;
+}
+
+
+.withdrawalCardIcon {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 11px;
+
+  background:
+    rgba(128, 128, 128, 0.09);
+
+  font-size: 18px;
+}
+
+
+/* ==========================================
+   SUMMARY CARDS
+========================================== */
+
+.withdrawalSummaryCard {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  min-width: 0;
+
+  padding: 18px;
+
+  border: 1px solid
+    rgba(128, 128, 128, 0.15);
+
+  border-radius: 16px;
+
+  background:
+    rgba(128, 128, 128, 0.025);
+}
+
+
+.withdrawalSummaryIcon {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 10px;
+
+  background:
+    rgba(128, 128, 128, 0.08);
+
+  font-size: 17px;
+}
+
+
+.withdrawalSummaryCard span {
+  display: block;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  opacity: 0.5;
+}
+
+
+.withdrawalSummaryCard strong {
+  display: block;
+
+  margin-top: 5px;
+
+  font-size: 18px;
+
+  font-weight: 750;
+
+  letter-spacing: -0.3px;
+}
+
+
+.withdrawalSummaryCard small {
+  display: block;
+
+  margin-top: 3px;
+
+  font-size: 9px;
+
+  opacity: 0.4;
+}
+
+
+/* ==========================================
+   WITHDRAW ACTION
+========================================== */
+
+.withdrawalActionCard {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 20px;
+
+  margin-bottom: 20px;
+
+  border: 1px solid
+    rgba(128, 128, 128, 0.15);
+
+  border-radius: 18px;
+
+  background:
+    rgba(128, 128, 128, 0.025);
+}
+
+
+.withdrawalActionIcon {
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 12px;
+
+  background:
+    rgba(128, 128, 128, 0.09);
+
+  font-size: 20px;
+}
+
+
+.withdrawalActionContent {
+  min-width: 0;
+
+  flex: 1;
+}
+
+
+.withdrawalActionContent h2 {
+  margin: 0;
+
+  font-size: 14px;
+
+  font-weight: 700;
+}
+
+
+.withdrawalActionContent p {
+  margin: 4px 0 0;
+
+  font-size: 10px;
+
+  line-height: 1.5;
+
+  opacity: 0.5;
+}
+
+
+/* ==========================================
+   WITHDRAW BUTTON
+========================================== */
+
+.sellerWithdrawButton {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  flex-shrink: 0;
+
+  padding: 10px 15px;
+
+  border: 0;
+
+  border-radius: 10px;
+
+  background: #111;
+
+  color: #fff;
+
+  font-family: inherit;
+
+  font-size: 11px;
+
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+
+.sellerWithdrawButton:hover {
+  opacity: 0.88;
+
+  transform: translateY(-1px);
+}
+
+
+.sellerWithdrawButton i {
+  font-size: 14px;
+}
+
+
+/* ==========================================
+   HISTORY SECTION
+========================================== */
+
+.withdrawalHistorySection {
+  width: 100%;
+}
+
+
+.withdrawalHistoryHeader {
+  margin-bottom: 12px;
+}
+
+
+.withdrawalHistoryTitle {
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+}
+
+
+.withdrawalHistoryIcon {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 11px;
+
+  background:
+    rgba(128, 128, 128, 0.08);
+
+  font-size: 17px;
+}
+
+
+.withdrawalHistoryTitle h2 {
+  margin: 0;
+
+  font-size: 15px;
+
+  font-weight: 700;
+}
+
+
+.withdrawalHistoryTitle p {
+  margin: 3px 0 0;
+
+  font-size: 11px;
+
+  opacity: 0.5;
+}
+
+
+/* ==========================================
+   TABLE CARD
+========================================== */
+
+.withdrawalTableCard {
+  width: 100%;
+
+  border: 1px solid
+    rgba(128, 128, 128, 0.15);
+
+  border-radius: 18px;
+
+  background:
+    rgba(128, 128, 128, 0.025);
+
+  overflow: hidden;
+}
+
+
+/* ==========================================
+   TABLE SCROLL
+========================================== */
+
+.withdrawalTableScroll {
+  width: 100%;
+
+  overflow-x: auto;
+
+  scrollbar-width: thin;
+}
+
+
+.withdrawalTableScroll::-webkit-scrollbar {
+  height: 5px;
+}
+
+
+.withdrawalTableScroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+.withdrawalTableScroll::-webkit-scrollbar-thumb {
+  background:
+    rgba(128, 128, 128, 0.25);
+
+  border-radius: 10px;
+}
+
+
+/* ==========================================
+   TABLE HEADER
+========================================== */
+
+.withdrawalTableHeader {
+
+  min-width: 720px;
+
+  display: grid;
+
+  grid-template-columns:
+    130px
+    160px
+    140px
+    120px
+    minmax(150px, 1fr);
+
+  align-items: center;
+
+  padding: 13px 15px;
+
+  border-bottom: 1px solid
+    rgba(128, 128, 128, 0.12);
+
+  background:
+    rgba(128, 128, 128, 0.035);
+}
+
+
+.withdrawalTableHeader span {
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.4px;
+
+  opacity: 0.42;
+}
+
+
+/* ==========================================
+   TABLE BODY
+========================================== */
+
+.withdrawalTableBody {
+  width: 100%;
+
+  min-width: 720px;
+}
+
+
+/* ==========================================
+   TABLE ROW
+========================================== */
+
+.withdrawalTableRow {
+
+  display: grid;
+
+  grid-template-columns:
+    130px
+    160px
+    140px
+    120px
+    minmax(150px, 1fr);
+
+  align-items: center;
+
+  min-height: 58px;
+
+  padding: 8px 15px;
+
+  border-bottom: 1px solid
+    rgba(128, 128, 128, 0.08);
+}
+
+
+.withdrawalTableRow:last-child {
+  border-bottom: 0;
+}
+
+
+.withdrawalTableRow small {
+  font-size: 10px;
+
+  opacity: 0.7;
+}
+
+
+/* ==========================================
+   STATUS
+========================================== */
+
+.withdrawalStatus {
+  display: inline-flex;
+
+  align-items: center;
+
+  width: fit-content;
+
+  padding: 5px 8px;
+
+  border-radius: 7px;
+
+  font-size: 9px;
+
+  font-weight: 650;
+}
+
+
+.withdrawalStatus.approved,
+.withdrawalStatus.paid {
+  background:
+    rgba(0, 150, 80, 0.08);
+}
+
+
+.withdrawalStatus.pending {
+  background:
+    rgba(128, 128, 128, 0.09);
+}
+
+
+.withdrawalStatus.rejected {
+  background:
+    rgba(200, 50, 50, 0.08);
+}
+
+
+/* ==========================================
+   EMPTY STATE
+========================================== */
+
+.withdrawalEmpty {
+
+  min-height: 210px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 30px;
+
+  text-align: center;
+}
+
+
+.withdrawalEmptyIcon {
+
+  width: 54px;
+  height: 54px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 11px;
+
+  border-radius: 15px;
+
+  background:
+    rgba(128, 128, 128, 0.08);
+
+  font-size: 23px;
+
+  opacity: 0.65;
+}
+
+
+.withdrawalEmpty h3 {
+  margin: 0;
+
+  font-size: 13px;
+
+  font-weight: 700;
+}
+
+
+.withdrawalEmpty p {
+
+  max-width: 300px;
+
+  margin: 6px 0 0;
+
+  font-size: 10px;
+
+  line-height: 1.6;
+
+  opacity: 0.45;
+}
+
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 900px) {
+
+  .withdrawalOverview {
+
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+
+  .withdrawalBalanceCard {
+
+    grid-column: 1 / -1;
+  }
+
+}
+
+
+/* ==========================================
+   SMALL TABLET
+========================================== */
+
+@media (max-width: 650px) {
+
+  .sellerWithdrawalPage {
+
+    padding: 15px;
+  }
+
+
+  .withdrawalOverview {
+
+    grid-template-columns: 1fr;
+  }
+
+
+  .withdrawalBalanceCard {
+
+    grid-column: auto;
+  }
+
+
+  .withdrawalActionCard {
+
+    align-items: flex-start;
+
+    flex-wrap: wrap;
+  }
+
+
+  .withdrawalActionContent {
+
+    flex-basis: calc(100% - 60px);
+  }
+
+
+  .sellerWithdrawButton {
+
+    width: 100%;
+
+    margin-top: 4px;
+  }
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 450px) {
+
+  .sellerWithdrawalPage {
+
+    padding: 11px;
+  }
+
+
+  .sellerWithdrawalTitleIcon {
+
+    width: 40px;
+    height: 40px;
+
+    font-size: 18px;
+  }
+
+
+  .sellerWithdrawalTitle h1 {
+
+    font-size: 21px;
+  }
+
+
+  .sellerWithdrawalTitle p {
+
+    font-size: 10px;
+  }
+
+
+  .withdrawalBalanceCard {
+
+    padding: 16px;
+  }
+
+
+  .withdrawalCardTop strong {
+
+    font-size: 22px;
+  }
+
+
+  .withdrawalSummaryCard {
+
+    padding: 15px;
+  }
+
+
+  .withdrawalActionCard {
+
+    padding: 16px;
+  }
+
+
+  .withdrawalHistoryTitle h2 {
+
+    font-size: 14px;
+  }
+
+
+  .withdrawalHistoryTitle p {
+
+    display: none;
+  }
+
+}

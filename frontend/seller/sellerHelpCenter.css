@@ -1,0 +1,996 @@
+:root {
+  --color-white: #fff;
+  --color-light: #f5f4f7;
+  --color-gray-light: #86848c;
+  --color-gray-dark: #56555e;
+  --color-dark: #27282f;
+  --color-primary: rgb(71, 7, 234);
+  --color-success: rgb(34, 202, 75);
+  --color-danger: rgb(255, 67, 54);
+  --color-warning:  rgb(234, 181, 7);
+  --color-purple: rgb(160, 99, 245);
+  --color-primary-light: rgba(71, 7, 234, 0.2);
+  --color-success-light: rgba(34, 202, 75, 0.2);
+  --color-danger-light: rgba(255, 67, 54, 0.2);
+  --color-purple-light: rgba(160, 99, 245, 0.2);
+
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  --card-padding: 1.6rem;
+  --border-cl: rgb(226, 226, 226);
+
+  --radius-1: 0.5rem;
+  --radius-2: 1rem;
+  --radius-3: 1.6rem;
+
+  --transition: all 300ms ease;
+}
+
+
+
+/* ==========================================
+   SELLER PROFILE + FIXED SIDEBAR
+   DESKTOP: 768px AND ABOVE
+========================================== */
+
+@media (min-width: 768px) {
+
+  /* ------------------------------------------
+     FIXED SIDEBAR
+  ------------------------------------------ */
+
+  .sidebar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 17rem;
+    height: 100vh;
+
+    z-index: 1000;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+
+  /* ------------------------------------------
+     PROFILE CONTENT
+     Leave space for sidebar
+  ------------------------------------------ */
+
+  .sellerHelpPage {
+
+    width: auto;
+
+    min-width: calc(100vw - 272px);
+
+    margin-left: 238px !important;
+
+    padding: 30px;
+
+  }
+
+}
+
+
+/* ==========================================
+   LARGE DESKTOP
+========================================== */
+
+@media (min-width: 1200px) {
+
+  .sellerHelpPage {
+
+    margin-left: 250px !important;
+
+    min-width: calc(100vw - 272px) !important;
+
+    padding-left: 35px;
+    padding-right: 35px;
+
+    overflow-x: hidden !important;
+
+  }
+
+  .sidebar{
+    width: 242px !important;
+  }
+
+}
+
+
+/* ==========================================
+   TABLET / MOBILE
+   SIDEBAR IS NOT FIXED
+========================================== */
+
+@media (max-width: 767px) {
+
+  .sidebar {
+
+    display: none;
+
+  }
+
+}
+
+
+
+
+
+
+/* ==========================================
+   SELLER HELP & SUPPORT
+========================================== */
+
+.sellerHelpPage {
+
+  width: 100%;
+
+  max-width: 1050px;
+
+  margin-bottom: 4.5rem;
+
+  padding: 24px;
+
+}
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.sellerHelpHeader {
+
+  margin-bottom: 20px;
+
+}
+
+
+.sellerHelpTitleRow {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+}
+
+
+.sellerHelpTitleIcon {
+
+  width: 45px;
+
+  height: 45px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background:
+    rgba(128, 128, 128, 0.08);
+
+  font-size: 20px;
+
+}
+
+
+.sellerHelpTitleRow h1 {
+
+  margin: 0;
+
+  font-size: 25px;
+
+  font-weight: 750;
+
+  letter-spacing: -0.5px;
+
+}
+
+
+.sellerHelpTitleRow p {
+
+  margin: 4px 0 0;
+
+  font-size: 12px;
+
+  opacity: 0.5;
+
+}
+
+
+/* ==========================================
+   SEARCH CARD
+========================================== */
+
+.sellerHelpSearchCard {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  padding: 22px;
+
+  margin-bottom: 25px;
+
+  border: 1px solid
+    rgba(128, 128, 128, 0.15);
+
+  border-radius: 18px;
+
+  background:
+    var(--color-white);
+
+}
+
+
+.sellerHelpSearchIcon {
+
+  width: 43px;
+
+  height: 43px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 11px;
+
+  background:
+    rgba(128, 128, 128, 0.08);
+
+  font-size: 18px;
+
+}
+
+
+.sellerHelpSearchContent {
+
+  flex: 1;
+
+}
+
+
+.sellerHelpSearchContent h2 {
+
+  margin: 0;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+}
+
+
+.sellerHelpSearchContent p {
+
+  margin: 3px 0 0;
+
+  font-size: 10px;
+
+  opacity: 0.5;
+
+}
+
+
+.sellerHelpSearchBox {
+
+  width: 300px;
+
+  height: 40px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 0 12px;
+
+  border: 1px solid
+    rgba(128, 128, 128, 0.15);
+
+  border-radius: 10px;
+
+  background:
+    rgba(128, 128, 128, 0.035);
+
+}
+
+
+.sellerHelpSearchBox i {
+
+  font-size: 14px;
+
+  opacity: 0.45;
+
+}
+
+
+.sellerHelpSearchBox input {
+
+  width: 100%;
+
+  border: 0;
+
+  outline: 0;
+
+  background: transparent;
+
+  color: inherit;
+
+  font-family: inherit;
+
+  font-size: 11px;
+
+}
+
+
+/* ==========================================
+   SECTION HEADER
+========================================== */
+
+.sellerHelpSectionHeader {
+
+  margin-bottom: 12px;
+
+}
+
+
+.sellerHelpSectionHeader h2 {
+
+  margin: 0;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+}
+
+
+.sellerHelpSectionHeader p {
+
+  margin: 3px 0 0;
+
+  font-size: 10px;
+
+  opacity: 0.5;
+
+}
+
+
+.sellerFaqHeader {
+
+  margin-top: 28px;
+
+}
+
+
+/* ==========================================
+   HELP CATEGORIES
+========================================== */
+
+.sellerHelpCategories {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 10px;
+
+}
+
+
+.sellerHelpCategory {
+
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 15px;
+
+  border: 1px solid
+    rgba(128, 128, 128, 0.14);
+
+  border-radius: 14px;
+
+  background:
+    var(--color-purple-light);
+
+  color: inherit;
+
+  text-align: left;
+
+  font-family: inherit;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+
+}
+
+
+.sellerHelpCategory:hover {
+
+  background:
+    rgba(128, 128, 128, 0.065);
+
+  transform: translateY(-1px);
+
+}
+
+
+.sellerHelpCategoryIcon {
+
+  width: 39px;
+
+  height: 39px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background:
+    var(--color-white);
+
+  font-size: 17px;
+
+}
+
+
+.sellerHelpCategoryContent {
+
+  flex: 1;
+
+  min-width: 0;
+
+}
+
+
+.sellerHelpCategoryContent strong {
+
+  display: block;
+
+  font-size: 12px;
+
+}
+
+
+.sellerHelpCategoryContent small {
+
+  display: block;
+
+  margin-top: 3px;
+
+  font-size: 10px;
+
+  line-height: 1.4;
+
+  opacity: 0.5;
+
+}
+
+
+.sellerHelpCategory > i {
+
+  font-size: 17px;
+
+  opacity: 0.35;
+
+}
+
+
+/* ==========================================
+   FAQ CARD
+========================================== */
+
+.sellerFaqCard {
+
+  border: 1px solid
+    rgba(128, 128, 128, 0.15);
+
+  border-radius: 17px;
+
+  background:
+    rgba(128, 128, 128, 0.025);
+
+  overflow: hidden;
+
+}
+
+
+.sellerFaqItem {
+
+  border-bottom: 1px solid
+    rgba(128, 128, 128, 0.10);
+
+}
+
+
+.sellerFaqItem:last-child {
+
+  border-bottom: 0;
+
+}
+
+
+.sellerFaqQuestion {
+
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding: 17px 19px;
+
+  border: 0;
+
+  background: transparent;
+
+  color: inherit;
+
+  text-align: left;
+
+  font-family: inherit;
+
+  font-size: 11px;
+
+  font-weight: 650;
+
+  cursor: pointer;
+
+}
+
+
+.sellerFaqQuestion i {
+
+  font-size: 17px;
+
+  opacity: 0.45;
+
+  transition:
+    transform 0.2s ease;
+
+}
+
+
+.sellerFaqItem.active
+.sellerFaqQuestion i {
+
+  transform: rotate(45deg);
+
+}
+
+
+.sellerFaqAnswer {
+
+  display: grid;
+
+  grid-template-rows: 0fr;
+
+  transition:
+    grid-template-rows 0.25s ease;
+
+}
+
+
+.sellerFaqAnswer p {
+
+  min-height: 0;
+
+  overflow: hidden;
+
+  margin: 0;
+
+  padding: 0 19px;
+
+  font-size: 10px;
+
+  line-height: 1.7;
+
+  opacity: 0.58;
+
+}
+
+
+.sellerFaqItem.active
+.sellerFaqAnswer {
+
+  grid-template-rows: 1fr;
+
+}
+
+
+.sellerFaqItem.active
+.sellerFaqAnswer p {
+
+  padding-bottom: 17px;
+
+}
+
+
+/* ==========================================
+   SUPPORT CARD
+========================================== */
+
+.sellerSupportCard {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  margin-top: 16px;
+
+  padding: 20px;
+
+  border: 1px solid
+    rgba(128, 128, 128, 0.15);
+
+  border-radius: 17px;
+
+  background:
+    var(--color-white);
+
+}
+
+
+.sellerSupportIcon {
+
+  width: 43px;
+
+  height: 43px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 11px;
+
+  background:
+    rgba(128, 128, 128, 0.08);
+
+  font-size: 19px;
+
+}
+
+
+.sellerSupportContent {
+
+  flex: 1;
+
+}
+
+
+.sellerSupportContent h2 {
+
+  margin: 0;
+
+  font-size: 14px;
+
+}
+
+
+.sellerSupportContent p {
+
+  margin: 4px 0 0;
+
+  font-size: 10px;
+
+  opacity: 0.5;
+
+}
+
+
+.sellerContactSupportBtn {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 10px 14px;
+
+  border: 0;
+
+  border-radius: 9px;
+
+  background: #111;
+
+  color: #fff;
+
+  font-family: inherit;
+
+  font-size: 10px;
+
+  font-weight: 650;
+
+  cursor: pointer;
+
+}
+
+
+.sellerContactSupportBtn:hover {
+
+  opacity: 0.88;
+
+}
+
+
+/* ==========================================
+   RESOURCES
+========================================== */
+
+.sellerHelpResources {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 10px;
+
+}
+
+
+.sellerHelpResource {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 14px;
+
+  border: 1px solid
+    rgba(128, 128, 128, 0.14);
+
+  border-radius: 13px;
+
+  color: inherit;
+
+  text-decoration: none;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+
+}
+
+
+.sellerHelpResource:hover {
+
+  background:
+    rgba(128, 128, 128, 0.06);
+
+  transform: translateY(-1px);
+
+}
+
+
+.sellerHelpResourceIcon {
+
+  width: 35px;
+
+  height: 35px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background:
+    rgba(128, 128, 128, 0.08);
+
+}
+
+
+.sellerHelpResource span:nth-child(2) {
+
+  flex: 1;
+
+}
+
+
+.sellerHelpResource strong {
+
+  display: block;
+
+  font-size: 11px;
+
+}
+
+
+.sellerHelpResource small {
+
+  display: block;
+
+  margin-top: 3px;
+
+  font-size: 9px;
+
+  line-height: 1.4;
+
+  opacity: 0.5;
+
+}
+
+
+.sellerHelpResource > i {
+
+  font-size: 16px;
+
+  opacity: 0.35;
+
+}
+
+
+/* ==========================================
+   DESKTOP — FIXED SIDEBAR
+========================================== */
+
+@media (min-width: 768px) {
+
+  .sellerHelpPage {
+
+    margin-left: 250px;
+
+    width: calc(100% - 250px);
+
+    max-width: 1050px;
+
+    padding: 30px;
+
+  }
+
+}
+
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 800px) {
+
+  .sellerHelpSearchCard {
+
+    align-items: flex-start;
+
+    flex-wrap: wrap;
+
+  }
+
+
+  .sellerHelpSearchBox {
+
+    width: 100%;
+
+  }
+
+
+  .sellerHelpResources {
+
+    grid-template-columns: 1fr;
+
+  }
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 767px) {
+
+  .sellerHelpPage {
+
+    padding: 15px;
+
+  }
+
+
+  .sellerHelpCategories {
+
+    grid-template-columns: 1fr;
+
+  }
+
+
+  .sellerSupportCard {
+
+    align-items: flex-start;
+
+    flex-wrap: wrap;
+
+  }
+
+
+  .sellerContactSupportBtn {
+
+    width: 100%;
+
+  }
+
+}
+
+
+/* ==========================================
+   SMALL MOBILE
+========================================== */
+
+@media (max-width: 450px) {
+
+  .sellerHelpSearchCard {
+
+    padding: 17px;
+
+  }
+
+
+  .sellerHelpTitleRow h1 {
+
+    font-size: 21px;
+
+  }
+
+
+  .sellerHelpCategory {
+
+    padding: 13px;
+
+  }
+
+
+  .sellerFaqQuestion {
+
+    padding: 15px;
+
+  }
+
+}

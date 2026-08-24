@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="seller-dashboard.css">
   <link rel="stylesheet" href="seller-dashboard2.css">
   <link rel="stylesheet" href="seller-dahsboard3.css">
+  <link rel="stylesheet" href="seller-dashboard4.css">
 
   <!---GOOGLE MATERIAL ICON--LINK---->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -14,50 +15,10 @@
 <!--remix icons-->
 <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
 
+<!--========== APEX CHART ==================-->
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
 
-<!--=== DARK MODE SCRIPT ========-->
-<script>
-
-document.addEventListener("DOMContentLoaded", ()=> {
-// DARK THEME
-
-const themeButton = document.getElementById('theme-button')
-const darkTheme = 'dark-mode'
-const iconTheme = 'ri-sun-line'
-
-const selectedTheme = localStorage.getItem('selected-theme')
-const selectedIcon = localStorage.getItem('selected-icon')
-
-
-
-const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
-const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'ri-moon-line' : 'ri-sun-line'
-
-
-// We validate if the user previously chose a topic
-if(selectedTheme){
-  // If the validations is fulfilled, we ask the issue was to know if we activated or deactivated
-  document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
-  themeButton.classList[selectedIcon === 'ri-moon-line' ? 'add' : 'remove'](iconTheme) 
-}
-
-// Active / deactivated the theme manually with the button
-themeButton.addEventListener("click", ()=> {
-  // Add or remove the dark / icon theme
-  document.body.classList.toggle(darkTheme)
-  themeButton.classList.toggle(iconTheme)
-  // We save theme and the current icon the user chose
-  localStorage.setItem('selected-theme', getCurrentTheme())
-  localStorage.setItem('selected-icon', getCurrentIcon())
-})
-
-});
-
-
-</script>
-<!--=== DARK MODE SCRIPT ENDS ===-->
 
 </head>
 <body>
@@ -300,7 +261,7 @@ themeButton.addEventListener("click", ()=> {
 
 
             <!--Total Sales---->
-            <div class="total-section-card">
+            <div class="total-section-card" style="display: none;">
                 <div class="section-card-top">
                 <div class="card-top-left">
                   <p>Total Sales</p>
@@ -315,7 +276,7 @@ themeButton.addEventListener("click", ()=> {
               </div>
             </div>
             <!---Total Earnings---->
-            <div class="total-section-card">
+            <div class="total-section-card" style="display: none;">
                 <div class="section-card-top">
                 <div class="card-top-left">
                   <p>Total Earnings</p>
@@ -330,7 +291,7 @@ themeButton.addEventListener("click", ()=> {
               </div>
             </div>
             <!---Available Balance---->
-            <div class="total-section-card">
+            <div class="total-section-card" style="display: none;">
                 <div class="section-card-top">
                 <div class="card-top-left">
                   <p>Available Balance</p>
@@ -346,7 +307,7 @@ themeButton.addEventListener("click", ()=> {
             </div>
 
              <!---Conversion rate---->
-            <div class="total-section-card">
+            <div class="total-section-card" style="display: none;">
                 <div class="section-card-top">
                 <div class="card-top-left">
                   <p>Conversion Rate</p>
@@ -435,7 +396,7 @@ themeButton.addEventListener("click", ()=> {
 
   <div class="salesStats">
 
-    <div class="salesStatCard">
+    <div class="salesStatCard statCard1">
 
       <div class="salesStatTop">
         <span>Total Sales</span>
@@ -454,7 +415,7 @@ themeButton.addEventListener("click", ()=> {
     </div>
 
 
-    <div class="salesStatCard">
+    <div class="salesStatCard statCard2">
 
       <div class="salesStatTop">
         <span>Total Revenue</span>
@@ -473,7 +434,7 @@ themeButton.addEventListener("click", ()=> {
     </div>
 
 
-    <div class="salesStatCard">
+    <div class="salesStatCard statCard3">
 
       <div class="salesStatTop">
         <span>Creator Earnings</span>
@@ -492,7 +453,7 @@ themeButton.addEventListener("click", ()=> {
     </div>
 
 
-    <div class="salesStatCard">
+    <div class="salesStatCard statCard4">
 
       <div class="salesStatTop">
         <span>Available Balance</span>

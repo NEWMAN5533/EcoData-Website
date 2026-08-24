@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Messages Center</title>
+  <link rel="stylesheet" href="sellerProfile.css">
+  <link rel="stylesheet" href="sellerMessages.css">
+
+      <!--remix icons-->
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
+
+
+<!--=== DARK MODE SCRIPT ========-->
+<script>
+
+document.addEventListener("DOMContentLoaded", ()=> {
+// DARK THEME
+
+const themeButton = document.getElementById('theme-button')
+const darkTheme = 'dark-mode'
+const iconTheme = 'ri-sun-line'
+
+const selectedTheme = localStorage.getItem('selected-theme')
+const selectedIcon = localStorage.getItem('selected-icon')
+
+
+
+const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
+const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'ri-moon-line' : 'ri-sun-line'
+
+
+// We validate if the user previously chose a topic
+if(selectedTheme){
+  // If the validations is fulfilled, we ask the issue was to know if we activated or deactivated
+  document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
+  themeButton.classList[selectedIcon === 'ri-moon-line' ? 'add' : 'remove'](iconTheme) 
+}
+
+// Active / deactivated the theme manually with the button
+themeButton.addEventListener("click", ()=> {
+  // Add or remove the dark / icon theme
+  document.body.classList.toggle(darkTheme)
+  themeButton.classList.toggle(iconTheme)
+  // We save theme and the current icon the user chose
+  localStorage.setItem('selected-theme', getCurrentTheme())
+  localStorage.setItem('selected-icon', getCurrentIcon())
+})
+
+});
+
+
+</script>
+<!--=== DARK MODE SCRIPT ENDS ===-->
+
+</head>
+<body>
+      <!--============ NAV ============-->
+  <nav class="nav-container nav-bar">
+    <div class="nav-bar-left">
+      <img src="../css/icons/newLogo.png" alt="newLogo">
+    </div>
+   
+    <div class="nav-actions">
+
+      
+
+        <!---login button-->
+        <i class="ri-user-line login-button material-icons" id="login-button"></i>
+
+            <!---theme button -->
+        <i class="ri-moon-foggy-line change-theme material-icons" id="theme-button"></i>
+
+
+        <!---menu button-->
+        <i class="ri-menu-2-line material-icons" id="menu"></i>
+      </div>
+  </nav>
+
+
+  <!--========= SIDE MENU ===========-->
+  <menu class="sidebar ">
+    <div class="sidebar-wrapper">
+   <div class="creator-studio">
+      <i class="ri-layout-masonry-line"></i>
+      <h5>EcoData Creator Studio</h5>
+   </div>
+   
+
+   <div class="sidebar-wrapper2">
+     <a href="sellerProfile.html">
+      <i class="ri-dashboard-3-line"></i>
+      <h5>Dashboard</h5>
+    </a>
+
+     <a href="sellerProfile.html">
+      <i class="ri-box-3-line"></i>
+      <h5>Products</h5>
+    </a>
+
+     <a href="sellerProfile.html">
+      <i class="ri-upload-cloud-2-line"></i>
+      <h5>Upload Product</h5>
+    </a>
+
+     <a href="sellerProfile.html">
+      <i class="ri-bar-chart-box-line"></i>
+      <h5>Sales</h5>
+    </a>
+
+     <a href="sellerProfile.html">
+      <i class="ri-money-dollar-circle-line"></i>
+      <h5>Earnings</h5>
+    </a>
+
+     <a href="sellerProfile.html">
+      <i class="ri-bank-card-line"></i>
+      <h5>Withdrawals</h5>
+    </a>
+
+    <div class="sidebarView">
+        <h4>CREATOR</h4>
+      </div>
+
+     <a href="sellerProfile.html" >
+      <i class="ri-user-3-line"></i>
+      <h5>Profile</h5>
+    </a>
+
+      <a href="sellerSettings.html">
+      <i class="ri-settings-3-line"></i>
+      <h5>Settings</h5>
+    </a>
+
+      <a href="sellerMessages.html" class="active">
+      <i class="ri-message-3-line"></i>
+      <h5>Messages</h5>
+    </a>
+
+
+      <a href="sellerHelpCenter.html">
+      <i class="ri-question-line"></i>
+      <h5>Help & Support</h5>
+    </a>
+
+   </div>
+    
+
+    </div>
+  </menu>
+
+
+   <!--========= SIDE MENU ===========-->
+  <menu class="sidebarPhone">
+    <div class="sidebar-wrapper">
+   <div class="creator-studio">
+      <i class="ri-layout-masonry-line"></i>
+      <h5>EcoData Creator Studio</h5>
+   </div>
+   
+
+   <div class="sidebar-wrapper2">
+     <a href="sellerDashboard.html">
+      <i class="ri-dashboard-3-line"></i>
+      <h5>Dashboard</h5>
+    </a>
+
+     <a href="sellerDashboard.html">
+      <i class="ri-box-3-line"></i>
+      <h5>Products</h5>
+    </a>
+
+     <a href="sellerDashboard.html">
+      <i class="ri-upload-cloud-2-line"></i>
+      <h5>Upload Product</h5>
+    </a>
+
+     <a href="sellerDashboard.html">
+      <i class="ri-bar-chart-box-line"></i>
+      <h5>Sales</h5>
+    </a>
+
+     <a href="sellerDashboard.html">
+      <i class="ri-money-dollar-circle-line"></i>
+      <h5>Earnings</h5>
+    </a>
+
+     <a href="sellerDashboard.html">
+      <i class="ri-bank-card-line"></i>
+      <h5>Withdrawals</h5>
+    </a>
+
+    <div class="sidebarView">
+        <h4>CREATOR</h4>
+      </div>
+
+     <a href="sellerProfile.html" >
+      <i class="ri-user-3-line"></i>
+      <h5>Profile</h5>
+    </a>
+
+      <a href="sellerSettings.html">
+      <i class="ri-settings-3-line"></i>
+      <h5>Settings</h5>
+    </a>
+
+      <a href="sellerMessages.html" class="active">
+      <i class="ri-message-3-line"></i>
+      <h5>Messages</h5>
+    </a>
+
+
+      <a href="helpCenter.html">
+      <i class="ri-question-line"></i>
+      <h5>Help & Support</h5>
+    </a>
+
+   </div>
+    
+
+    </div>
+  </menu>
+
+
+  
+  <!---========= MAIN ==============-->
+  <main class="main-container">
+    <!-- ==========================================
+     SELLER NOTIFICATIONS PAGE
+========================================== -->
+
+<section class="sellerNotificationsPage">
+
+  <!-- ========================================
+       PAGE HEADER
+  ========================================= -->
+
+  <div class="sellerNotificationsHeader">
+
+    <div class="sellerNotificationsTitleRow">
+
+      <span class="sellerNotificationsTitleIcon">
+        <i class="ri-notification-3-line"></i>
+      </span>
+
+      <div>
+
+        <h1>
+          Notifications
+        </h1>
+
+        <p>
+          Stay updated with your creator activity.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <button
+      type="button"
+      id="markAllNotificationsReadBtn"
+      class="markAllNotificationsBtn"
+    >
+
+      <i class="ri-check-double-line"></i>
+
+      Mark all as read
+
+    </button>
+
+  </div>
+
+
+  <!-- ========================================
+       NOTIFICATION SUMMARY
+  ========================================= -->
+
+  <div class="sellerNotificationSummary">
+
+
+    <div class="notificationSummaryItem">
+
+      <span class="notificationSummaryIcon">
+        <i class="ri-notification-3-line"></i>
+      </span>
+
+      <div>
+
+        <strong id="totalNotifications">
+          0
+        </strong>
+
+        <small>
+          Total
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <div class="notificationSummaryItem">
+
+      <span class="notificationSummaryIcon unread">
+        <i class="ri-mail-unread-line"></i>
+      </span>
+
+      <div>
+
+        <strong id="unreadNotifications">
+          0
+        </strong>
+
+        <small>
+          Unread
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <div class="notificationSummaryItem">
+
+      <span class="notificationSummaryIcon sales">
+        <i class="ri-shopping-bag-3-line"></i>
+      </span>
+
+      <div>
+
+        <strong id="salesNotifications">
+          0
+        </strong>
+
+        <small>
+          Sales
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <div class="notificationSummaryItem">
+
+      <span class="notificationSummaryIcon system">
+        <i class="ri-information-line"></i>
+      </span>
+
+      <div>
+
+        <strong id="systemNotifications">
+          0
+        </strong>
+
+        <small>
+          System
+        </small>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================================
+       FILTER BAR
+  ========================================= -->
+
+  <div class="sellerNotificationsToolbar">
+
+    <div class="notificationFilters">
+
+      <button
+        type="button"
+        class="notificationFilter active"
+        data-filter="all"
+      >
+        All
+      </button>
+
+      <button
+        type="button"
+        class="notificationFilter"
+        data-filter="unread"
+      >
+        Unread
+      </button>
+
+      <button
+        type="button"
+        class="notificationFilter"
+        data-filter="sales"
+      >
+        Sales
+      </button>
+
+      <button
+        type="button"
+        class="notificationFilter"
+        data-filter="earnings"
+      >
+        Earnings
+      </button>
+
+      <button
+        type="button"
+        class="notificationFilter"
+        data-filter="system"
+      >
+        System
+      </button>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="notificationSearchBtn"
+      id="notificationSearchBtn"
+      title="Search notifications"
+    >
+
+      <i class="ri-search-line"></i>
+
+    </button>
+
+  </div>
+
+
+  <!-- ========================================
+       NOTIFICATIONS LIST
+  ========================================= -->
+
+  <div class="sellerNotificationsCard">
+
+    <div class="sellerNotificationsList"
+         id="sellerNotificationsList">
+
+
+      <!-- ====================================
+           NOTIFICATION
+      ==================================== -->
+
+      <article
+        class="sellerNotificationItem unread"
+        data-type="sales"
+      >
+
+        <div class="notificationItemIcon sale">
+
+          <i class="ri-shopping-bag-3-line"></i>
+
+        </div>
+
+
+        <div class="notificationItemContent">
+
+          <div class="notificationItemTop">
+
+            <h3>
+              New product sale
+            </h3>
+
+            <span class="notificationTime">
+              Just now
+            </span>
+
+          </div>
+
+
+          <p>
+            Your product
+            <strong>T-shirts</strong>
+            was purchased by a customer.
+          </p>
+
+
+          <div class="notificationItemMeta">
+
+            <span>
+              <i class="ri-money-dollar-circle-line"></i>
+
+              GHS 15.00
+            </span>
+
+            <span>
+              <i class="ri-time-line"></i>
+
+              Today
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <span class="notificationUnreadDot"></span>
+
+      </article>
+
+
+      <!-- ====================================
+           EARNINGS
+      ==================================== -->
+
+      <article
+        class="sellerNotificationItem unread"
+        data-type="earnings"
+      >
+
+        <div class="notificationItemIcon earning">
+
+          <i class="ri-wallet-3-line"></i>
+
+        </div>
+
+
+        <div class="notificationItemContent">
+
+          <div class="notificationItemTop">
+
+            <h3>
+              Earnings credited
+            </h3>
+
+            <span class="notificationTime">
+              2 hours ago
+            </span>
+
+          </div>
+
+
+          <p>
+            Your creator earnings have been updated.
+          </p>
+
+
+          <div class="notificationItemMeta">
+
+            <span>
+              <i class="ri-money-dollar-circle-line"></i>
+
+              GHS 10.50
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <span class="notificationUnreadDot"></span>
+
+      </article>
+
+
+      <!-- ====================================
+           PRODUCT
+      ==================================== -->
+
+      <article
+        class="sellerNotificationItem"
+        data-type="system"
+      >
+
+        <div class="notificationItemIcon product">
+
+          <i class="ri-box-3-line"></i>
+
+        </div>
+
+
+        <div class="notificationItemContent">
+
+          <div class="notificationItemTop">
+
+            <h3>
+              Product submitted
+            </h3>
+
+            <span class="notificationTime">
+              Yesterday
+            </span>
+
+          </div>
+
+
+          <p>
+            Your product
+            <strong>Book</strong>
+            has been submitted for review.
+          </p>
+
+        </div>
+
+      </article>
+
+
+      <!-- ====================================
+           PLATFORM
+      ==================================== -->
+
+      <article
+        class="sellerNotificationItem"
+        data-type="system"
+      >
+
+        <div class="notificationItemIcon system">
+
+          <i class="ri-megaphone-line"></i>
+
+        </div>
+
+
+        <div class="notificationItemContent">
+
+          <div class="notificationItemTop">
+
+            <h3>
+              Creator platform update
+            </h3>
+
+            <span class="notificationTime">
+              3 days ago
+            </span>
+
+          </div>
+
+
+          <p>
+            New creator tools and improvements
+            are now available.
+          </p>
+
+        </div>
+
+      </article>
+
+
+    </div>
+
+
+    <!-- ======================================
+         EMPTY STATE
+    ======================================= -->
+
+    <div
+      id="notificationsEmptyState"
+      class="notificationsEmptyState"
+      style="display:none;"
+    >
+
+      <div class="notificationsEmptyIcon">
+
+        <i class="ri-notification-off-line"></i>
+
+      </div>
+
+      <h3>
+        No notifications
+      </h3>
+
+      <p>
+        You're all caught up.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+  </main>
+
+
+    <!-----BOTTOM-NAVBAR----->
+  <div class="bottom-navbar" id="navIconDiv">
+    <div class="btom-navIcon" onclick="window.location.href='./index.html'">
+      <div class="activeImg active" id="activeMtn">
+        <i class="ri-dashboard-line material-icons"></i>
+      </div>
+      <small class="bottomIcon-textNav">Dashboard</small>
+    </div>
+
+    <div class="btom-navIcon">
+      <div class="activeImg" > 
+        <i class="ri-book-open-line material-icons"></i>
+      </div>
+      <small class="bottomIcon-textNav">Products</small>
+    </div>
+
+
+   
+
+
+      <div class="btom-navIcon addBar" >
+      <div class="activeImg" id="activeTel" > 
+       <i class="ri-add-circle-line material-icons addBtn"></i>
+      </div>
+      <small class="bottomIcon-textNav">Upload</small>
+    </div>
+
+
+     <div class="btom-navIcon" >
+      <div class="activeImg" id="activeAir" > 
+      <i class="ri-shopping-bag-3-line material-icons"></i>
+      </div>
+      <small class="bottomIcon-textNav"> Sales</small>
+    </div>
+       <div class="btom-navIcon" >
+      <div class="activeImg" id="activeAir" > 
+      <i class="ri-user-settings-line material-icons"></i>
+      </div>
+      <small class="bottomIcon-textNav">Profile</small>
+    </div>
+
+
+   
+
+
+  </div>
+
+  <script type="module" src="sellerSettings.js"></script>
+</body>
+</html>

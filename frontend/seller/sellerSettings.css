@@ -1,0 +1,866 @@
+:root {
+  --color-white: #fff;
+  --color-light: #f5f4f7;
+  --color-gray-light: #86848c;
+  --color-gray-dark: #56555e;
+  --color-dark: #27282f;
+  --color-primary: rgb(71, 7, 234);
+  --color-success: rgb(34, 202, 75);
+  --color-danger: rgb(255, 67, 54);
+  --color-warning:  rgb(234, 181, 7);
+  --color-purple: rgb(160, 99, 245);
+  --color-primary-light: rgba(71, 7, 234, 0.2);
+  --color-success-light: rgba(34, 202, 75, 0.2);
+  --color-danger-light: rgba(255, 67, 54, 0.2);
+  --color-purple-light: rgba(160, 99, 245, 0.2);
+
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  --card-padding: 1.6rem;
+  --border-cl: rgb(226, 226, 226);
+
+  --radius-1: 0.5rem;
+  --radius-2: 1rem;
+  --radius-3: 1.6rem;
+
+  --transition: all 300ms ease;
+}
+/* ==========================================
+   SELLER PROFILE + FIXED SIDEBAR
+   DESKTOP: 768px AND ABOVE
+========================================== */
+
+@media (min-width: 768px) {
+
+  /* ------------------------------------------
+     FIXED SIDEBAR
+  ------------------------------------------ */
+
+  .sidebar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 17rem;
+    height: 100vh;
+
+    z-index: 1000;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+
+  /* ------------------------------------------
+     PROFILE CONTENT
+     Leave space for sidebar
+  ------------------------------------------ */
+
+  .sellerSettingsPage {
+
+    width: auto;
+
+    min-width: calc(100vw - 272px);
+
+    margin-left: 238px !important;
+
+    padding: 30px;
+
+  }
+
+}
+
+
+/* ==========================================
+   LARGE DESKTOP
+========================================== */
+
+@media (min-width: 1200px) {
+
+  .sellerSettingsPage {
+
+    margin-left: 250px !important;
+
+    min-width: calc(100vw - 272px) !important;
+
+    padding-left: 35px;
+    padding-right: 35px;
+
+    overflow-x: hidden !important;
+
+  }
+
+  .sidebar{
+    width: 242px !important;
+  }
+
+}
+
+
+/* ==========================================
+   TABLET / MOBILE
+   SIDEBAR IS NOT FIXED
+========================================== */
+
+@media (max-width: 767px) {
+
+  .sidebar {
+
+    display: none;
+
+  }
+
+
+  .sellerSettingsPage {
+
+    width: 100%;
+
+    margin-left: 0;
+
+    padding: 15px;
+
+  }
+}
+
+/* ==========================================
+   SELLER SETTINGS PAGE
+========================================== */
+
+.sellerSettingsPage {
+  width: 100%;
+  max-width: 1000px;
+  margin-bottom: 4.5rem;
+  padding: 24px;
+}
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.sellerSettingsHeader {
+  margin-bottom: 20px;
+}
+
+
+.sellerSettingsTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+
+.sellerSettingsTitleIcon {
+  width: 45px;
+  height: 45px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background: rgba(128, 128, 128, 0.08);
+
+  font-size: 20px;
+}
+
+
+.sellerSettingsTitleRow h1 {
+  margin: 0;
+
+  font-size: 25px;
+  font-weight: 750;
+
+  letter-spacing: -0.5px;
+}
+
+
+.sellerSettingsTitleRow p {
+  margin: 4px 0 0;
+
+  font-size: 12px;
+
+  opacity: 0.5;
+}
+
+
+/* ==========================================
+   CARD
+========================================== */
+
+.sellerSettingsCard {
+  padding: 22px;
+
+  margin-bottom: 16px;
+
+  border: 1px solid rgba(128, 128, 128, 0.15);
+
+  border-radius: 18px;
+
+  background: var(--color-white);
+}
+
+
+/* ==========================================
+   CARD HEADER
+========================================== */
+
+.sellerSettingsCardHeader {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  margin-bottom: 22px;
+}
+
+
+.sellerSettingsSectionIcon {
+  width: 38px;
+  height: 38px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: rgba(128, 128, 128, 0.08);
+
+  font-size: 17px;
+}
+
+
+.sellerSettingsCardHeader h2 {
+  margin: 0;
+
+  font-size: 15px;
+  font-weight: 700;
+}
+
+
+.sellerSettingsCardHeader p {
+  margin: 3px 0 0;
+
+  font-size: 11px;
+
+  opacity: 0.5;
+}
+
+
+/* ==========================================
+   ACCOUNT FIELDS
+========================================== */
+
+.sellerSettingsFields {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 17px;
+}
+
+
+.sellerSettingsField label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  font-size: 11px;
+  font-weight: 650;
+
+  opacity: 0.7;
+}
+
+
+.sellerSettingsInputWrapper {
+  display: flex;
+  align-items: center;
+
+  height: 43px;
+
+  padding: 0 12px;
+
+  gap: 9px;
+
+  border: 1px solid rgba(128, 128, 128, 0.16);
+
+  border-radius: 10px;
+
+  background: rgba(128, 128, 128, 0.035);
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+
+.sellerSettingsInputWrapper:focus-within {
+  border-color: rgba(128, 128, 128, 0.45);
+
+  background: rgba(128, 128, 128, 0.06);
+}
+
+
+.sellerSettingsInputWrapper > i {
+  font-size: 15px;
+
+  opacity: 0.45;
+}
+
+
+.sellerSettingsInputWrapper input {
+  width: 100%;
+
+  border: 0;
+  outline: 0;
+
+  background: transparent;
+
+  color: inherit;
+
+  font-family: inherit;
+
+  font-size: 12px;
+}
+
+
+.sellerSettingsInputPrefix {
+  font-size: 12px;
+
+  opacity: 0.45;
+}
+
+
+/* ==========================================
+   SAVE BUTTON
+========================================== */
+
+.sellerSettingsActions {
+  display: flex;
+
+  justify-content: flex-end;
+
+  margin-top: 20px;
+}
+
+
+.sellerSettingsSaveBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 10px 15px;
+
+  border: 0;
+
+  border-radius: 10px;
+
+  background: #111;
+
+  color: #fff;
+
+  font-size: 11px;
+  font-weight: 650;
+
+  cursor: pointer;
+}
+
+
+.sellerSettingsSaveBtn:hover {
+  opacity: 0.88;
+}
+
+
+/* ==========================================
+   SETTINGS OPTIONS
+========================================== */
+
+.sellerSettingsOptions {
+  display: flex;
+
+  flex-direction: column;
+}
+
+
+.sellerSettingsOption {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 15px 0;
+
+  border-bottom: 1px solid rgba(128, 128, 128, 0.10);
+}
+
+
+.sellerSettingsOption:last-child {
+  border-bottom: 0;
+
+  padding-bottom: 0;
+}
+
+
+.sellerSettingsOption:first-child {
+  padding-top: 0;
+}
+
+
+.sellerSettingsOptionInfo {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+}
+
+
+.sellerSettingsOptionIcon {
+  width: 36px;
+  height: 36px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background: rgba(128, 128, 128, 0.08);
+
+  font-size: 15px;
+}
+
+
+.sellerSettingsOptionInfo strong {
+  display: block;
+
+  font-size: 12px;
+}
+
+
+.sellerSettingsOptionInfo small {
+  display: block;
+
+  margin-top: 3px;
+
+  font-size: 10px;
+
+  opacity: 0.5;
+}
+
+
+/* ==========================================
+   SWITCH
+========================================== */
+
+.settingsSwitch {
+  position: relative;
+
+  width: 40px;
+  height: 22px;
+
+  flex-shrink: 0;
+
+  cursor: pointer;
+}
+
+
+.settingsSwitch input {
+  position: absolute;
+
+  opacity: 0;
+
+  pointer-events: none;
+}
+
+
+.settingsSwitch span {
+  position: absolute;
+
+  inset: 0;
+
+  border-radius: 30px;
+
+  background: rgba(128, 128, 128, 0.25);
+
+  transition: 0.2s ease;
+}
+
+
+.settingsSwitch span::before {
+  content: "";
+
+  position: absolute;
+
+  width: 16px;
+  height: 16px;
+
+  top: 3px;
+  left: 3px;
+
+  border-radius: 50%;
+
+  background: #fff;
+
+  transition: 0.2s ease;
+}
+
+
+.settingsSwitch input:checked + span {
+  background: #111;
+}
+
+
+.settingsSwitch input:checked + span::before {
+  transform: translateX(18px);
+}
+
+
+/* ==========================================
+   STORE PREFERENCES
+========================================== */
+
+.sellerSettingsRows {
+  display: flex;
+
+  flex-direction: column;
+}
+
+
+.sellerSettingsRow {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 15px 0;
+
+  border-bottom: 1px solid rgba(128, 128, 128, 0.10);
+}
+
+
+.sellerSettingsRow:first-child {
+  padding-top: 0;
+}
+
+
+.sellerSettingsRow:last-child {
+  padding-bottom: 0;
+
+  border-bottom: 0;
+}
+
+
+.sellerSettingsRow strong {
+  display: block;
+
+  font-size: 12px;
+}
+
+
+.sellerSettingsRow small {
+  display: block;
+
+  margin-top: 3px;
+
+  font-size: 10px;
+
+  opacity: 0.5;
+}
+
+
+.sellerSettingsSelect {
+  min-width: 145px;
+
+  padding: 9px 11px;
+
+  border: 1px solid rgba(128, 128, 128, 0.16);
+
+  border-radius: 9px;
+
+  outline: 0;
+
+  background: rgba(128, 128, 128, 0.035);
+
+  color: inherit;
+
+  font-family: inherit;
+
+  font-size: 11px;
+}
+
+
+/* ==========================================
+   SECURITY ACTION
+========================================== */
+
+.sellerSettingsActionRow {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 13px;
+
+  border: 1px solid rgba(128, 128, 128, 0.12);
+
+  border-radius: 11px;
+
+  background: transparent;
+
+  color: inherit;
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+
+.sellerSettingsActionIcon {
+  width: 36px;
+  height: 36px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background: rgba(128, 128, 128, 0.08);
+}
+
+
+.sellerSettingsActionRow span:nth-child(2) {
+  flex: 1;
+}
+
+
+.sellerSettingsActionRow strong {
+  display: block;
+
+  font-size: 12px;
+}
+
+
+.sellerSettingsActionRow small {
+  display: block;
+
+  margin-top: 3px;
+
+  font-size: 10px;
+
+  opacity: 0.5;
+}
+
+
+.sellerSettingsActionRow > i:last-child {
+  opacity: 0.45;
+
+  font-size: 17px;
+}
+
+
+/* ==========================================
+   DANGER ZONE
+========================================== */
+
+.sellerDangerCard {
+  border-color: rgba(220, 60, 60, 0.18);
+}
+
+
+.sellerDangerActions {
+  display: flex;
+
+  flex-direction: column;
+}
+
+
+.sellerDangerRow {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 15px 0;
+
+  border-bottom: 1px solid rgba(128, 128, 128, 0.10);
+}
+
+
+.sellerDangerRow:last-child {
+  border-bottom: 0;
+
+  padding-bottom: 0;
+}
+
+
+.sellerDangerRow:first-child {
+  padding-top: 0;
+}
+
+
+.sellerDangerRow strong {
+  display: block;
+
+  font-size: 12px;
+}
+
+
+.sellerDangerRow small {
+  display: block;
+
+  margin-top: 3px;
+
+  font-size: 10px;
+
+  opacity: 0.5;
+}
+
+
+.sellerDeactivateBtn,
+.sellerDeleteBtn {
+  flex-shrink: 0;
+
+  padding: 9px 13px;
+
+  border-radius: 9px;
+
+  font-family: inherit;
+
+  font-size: 10px;
+  font-weight: 650;
+
+  cursor: pointer;
+}
+
+
+.sellerDeactivateBtn {
+  border: 1px solid rgba(128, 128, 128, 0.2);
+
+  background: transparent;
+
+  color: inherit;
+}
+
+
+.sellerDeleteBtn {
+  border: 0;
+
+  background: rgba(210, 50, 50, 0.10);
+
+  color: #c62828;
+}
+
+
+/* ==========================================
+   DESKTOP — FIXED SIDEBAR
+========================================== */
+
+@media (min-width: 768px) {
+
+  .sellerSettingsPage {
+
+    margin-left: 250px;
+
+    width: calc(100% - 250px);
+
+    max-width: 1000px;
+
+    padding: 30px;
+
+  }
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 767px) {
+
+  .sellerSettingsPage {
+    padding: 15px;
+  }
+
+
+  .sellerSettingsFields {
+    grid-template-columns: 1fr;
+  }
+
+
+  .sellerSettingsRow,
+  .sellerDangerRow {
+    align-items: flex-start;
+  }
+
+}
+
+
+@media (max-width: 500px) {
+
+  .sellerSettingsCard {
+    padding: 17px;
+  }
+
+
+  .sellerSettingsTitleRow h1 {
+    font-size: 21px;
+  }
+
+
+  .sellerSettingsOption {
+    align-items: flex-start;
+  }
+
+
+  .sellerSettingsRow,
+  .sellerDangerRow {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+
+  .sellerSettingsSelect {
+    width: 100%;
+  }
+
+
+  .sellerDeactivateBtn,
+  .sellerDeleteBtn {
+    width: 100%;
+  }
+
+
+  .sellerSettingsActions {
+    justify-content: stretch;
+  }
+
+
+  .sellerSettingsSaveBtn {
+    width: 100%;
+
+    justify-content: center;
+  }
+
+}

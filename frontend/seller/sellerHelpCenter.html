@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help?</title>
+  <link rel="stylesheet" href="sellerProfile.css">
+  <link rel="stylesheet" href="sellerHelpCenter.css">
+
+        <!--remix icons-->
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
+
+
+<!--=== DARK MODE SCRIPT ========-->
+<script>
+
+document.addEventListener("DOMContentLoaded", ()=> {
+// DARK THEME
+
+const themeButton = document.getElementById('theme-button')
+const darkTheme = 'dark-mode'
+const iconTheme = 'ri-sun-line'
+
+const selectedTheme = localStorage.getItem('selected-theme')
+const selectedIcon = localStorage.getItem('selected-icon')
+
+
+
+const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
+const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'ri-moon-line' : 'ri-sun-line'
+
+
+// We validate if the user previously chose a topic
+if(selectedTheme){
+  // If the validations is fulfilled, we ask the issue was to know if we activated or deactivated
+  document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
+  themeButton.classList[selectedIcon === 'ri-moon-line' ? 'add' : 'remove'](iconTheme) 
+}
+
+// Active / deactivated the theme manually with the button
+themeButton.addEventListener("click", ()=> {
+  // Add or remove the dark / icon theme
+  document.body.classList.toggle(darkTheme)
+  themeButton.classList.toggle(iconTheme)
+  // We save theme and the current icon the user chose
+  localStorage.setItem('selected-theme', getCurrentTheme())
+  localStorage.setItem('selected-icon', getCurrentIcon())
+})
+
+});
+
+
+</script>
+<!--=== DARK MODE SCRIPT ENDS ===-->
+
+</head>
+<body>
+      <!--============ NAV ============-->
+  <nav class="nav-container nav-bar">
+    <div class="nav-bar-left">
+      <img src="../css/icons/newLogo.png" alt="newLogo">
+    </div>
+   
+    <div class="nav-actions">
+
+      
+
+        <!---login button-->
+        <i class="ri-user-line login-button material-icons" id="login-button"></i>
+
+            <!---theme button -->
+        <i class="ri-moon-foggy-line change-theme material-icons" id="theme-button"></i>
+
+
+        <!---menu button-->
+        <i class="ri-menu-2-line material-icons" id="menu"></i>
+      </div>
+  </nav>
+
+
+  <!--========= SIDE MENU ===========-->
+  <menu class="sidebar ">
+    <div class="sidebar-wrapper">
+   <div class="creator-studio">
+      <i class="ri-layout-masonry-line"></i>
+      <h5>EcoData Creator Studio</h5>
+   </div>
+   
+
+   <div class="sidebar-wrapper2">
+     <a href="sellerProfile.html">
+      <i class="ri-dashboard-3-line"></i>
+      <h5>Dashboard</h5>
+    </a>
+
+     <a href="sellerProfile.html">
+      <i class="ri-box-3-line"></i>
+      <h5>Products</h5>
+    </a>
+
+     <a href="sellerProfile.html">
+      <i class="ri-upload-cloud-2-line"></i>
+      <h5>Upload Product</h5>
+    </a>
+
+     <a href="sellerProfile.html">
+      <i class="ri-bar-chart-box-line"></i>
+      <h5>Sales</h5>
+    </a>
+
+     <a href="sellerProfile.html">
+      <i class="ri-money-dollar-circle-line"></i>
+      <h5>Earnings</h5>
+    </a>
+
+     <a href="sellerProfile.html">
+      <i class="ri-bank-card-line"></i>
+      <h5>Withdrawals</h5>
+    </a>
+
+    <div class="sidebarView">
+        <h4>CREATOR</h4>
+      </div>
+
+     <a href="sellerProfile.html" >
+      <i class="ri-user-3-line"></i>
+      <h5>Profile</h5>
+    </a>
+
+      <a href="sellerSettings.html">
+      <i class="ri-settings-3-line"></i>
+      <h5>Settings</h5>
+    </a>
+
+      <a href="sellerMessages.html" >
+      <i class="ri-message-3-line"></i>
+      <h5>Messages</h5>
+    </a>
+
+
+      <a href="sellerHelpCenter.html" class="active">
+      <i class="ri-question-line"></i>
+      <h5>Help & Support</h5>
+    </a>
+
+   </div>
+    
+
+    </div>
+  </menu>
+
+
+   <!--========= SIDE MENU ===========-->
+  <menu class="sidebarPhone">
+    <div class="sidebar-wrapper">
+   <div class="creator-studio">
+      <i class="ri-layout-masonry-line"></i>
+      <h5>EcoData Creator Studio</h5>
+   </div>
+   
+
+   <div class="sidebar-wrapper2">
+     <a href="sellerDashboard.html">
+      <i class="ri-dashboard-3-line"></i>
+      <h5>Dashboard</h5>
+    </a>
+
+     <a href="sellerDashboard.html">
+      <i class="ri-box-3-line"></i>
+      <h5>Products</h5>
+    </a>
+
+     <a href="sellerDashboard.html">
+      <i class="ri-upload-cloud-2-line"></i>
+      <h5>Upload Product</h5>
+    </a>
+
+     <a href="sellerDashboard.html">
+      <i class="ri-bar-chart-box-line"></i>
+      <h5>Sales</h5>
+    </a>
+
+     <a href="sellerDashboard.html">
+      <i class="ri-money-dollar-circle-line"></i>
+      <h5>Earnings</h5>
+    </a>
+
+     <a href="sellerDashboard.html">
+      <i class="ri-bank-card-line"></i>
+      <h5>Withdrawals</h5>
+    </a>
+
+    <div class="sidebarView">
+        <h4>CREATOR</h4>
+      </div>
+
+     <a href="sellerProfile.html" >
+      <i class="ri-user-3-line"></i>
+      <h5>Profile</h5>
+    </a>
+
+      <a href="sellerSettings.html">
+      <i class="ri-settings-3-line"></i>
+      <h5>Settings</h5>
+    </a>
+
+      <a href="sellerMessages.html">
+      <i class="ri-message-3-line"></i>
+      <h5>Messages</h5>
+    </a>
+
+
+      <a href="helpCenter.html" class="active">
+      <i class="ri-question-line"></i>
+      <h5>Help & Support</h5>
+    </a>
+
+   </div>
+    
+
+    </div>
+  </menu>
+
+
+  
+  <!---========= MAIN ==============-->
+  <main class="main-container">
+    <!-- ==========================================
+     SELLER HELP & SUPPORT PAGE
+========================================== -->
+
+<section class="sellerHelpPage">
+
+  <!-- ========================================
+       HEADER
+  ========================================= -->
+
+  <div class="sellerHelpHeader">
+
+    <div class="sellerHelpTitleRow">
+
+      <span class="sellerHelpTitleIcon">
+        <i class="ri-question-line"></i>
+      </span>
+
+      <div>
+
+        <h1>
+          Help & Support
+        </h1>
+
+        <p>
+          Find answers or get help with your creator account.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================================
+       SEARCH
+  ========================================= -->
+
+  <div class="sellerHelpSearchCard">
+
+    <div class="sellerHelpSearchIcon">
+      <i class="ri-search-line"></i>
+    </div>
+
+    <div class="sellerHelpSearchContent">
+
+      <h2>
+        How can we help?
+      </h2>
+
+      <p>
+        Search our help center for answers and guides.
+      </p>
+
+    </div>
+
+
+    <div class="sellerHelpSearchBox">
+
+      <i class="ri-search-line"></i>
+
+      <input
+        type="search"
+        id="sellerHelpSearch"
+        placeholder="Search for help..."
+        autocomplete="off"
+      >
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================================
+       QUICK HELP
+  ========================================= -->
+
+  <div class="sellerHelpSectionHeader">
+
+    <div>
+
+      <h2>
+        Quick Help
+      </h2>
+
+      <p>
+        Browse common creator topics.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="sellerHelpCategories">
+
+
+    <!-- PRODUCTS -->
+
+    <button
+      type="button"
+      class="sellerHelpCategory"
+      data-category="products"
+    >
+
+      <span class="sellerHelpCategoryIcon products">
+        <i class="ri-box-3-line"></i>
+      </span>
+
+      <span class="sellerHelpCategoryContent">
+
+        <strong>
+          Products
+        </strong>
+
+        <small>
+          Upload, manage and sell your products.
+        </small>
+
+      </span>
+
+      <i class="ri-arrow-right-s-line"></i>
+
+    </button>
+
+
+    <!-- SALES -->
+
+    <button
+      type="button"
+      class="sellerHelpCategory"
+      data-category="sales"
+    >
+
+      <span class="sellerHelpCategoryIcon sales">
+        <i class="ri-shopping-bag-3-line"></i>
+      </span>
+
+      <span class="sellerHelpCategoryContent">
+
+        <strong>
+          Sales
+        </strong>
+
+        <small>
+          Learn how product sales are processed.
+        </small>
+
+      </span>
+
+      <i class="ri-arrow-right-s-line"></i>
+
+    </button>
+
+
+    <!-- EARNINGS -->
+
+    <button
+      type="button"
+      class="sellerHelpCategory"
+      data-category="earnings"
+    >
+
+      <span class="sellerHelpCategoryIcon earnings">
+        <i class="ri-wallet-3-line"></i>
+      </span>
+
+      <span class="sellerHelpCategoryContent">
+
+        <strong>
+          Earnings
+        </strong>
+
+        <small>
+          Understand creator earnings and fees.
+        </small>
+
+      </span>
+
+      <i class="ri-arrow-right-s-line"></i>
+
+    </button>
+
+
+    <!-- WITHDRAWALS -->
+
+    <button
+      type="button"
+      class="sellerHelpCategory"
+      data-category="withdrawals"
+    >
+
+      <span class="sellerHelpCategoryIcon withdrawals">
+        <i class="ri-bank-card-line"></i>
+      </span>
+
+      <span class="sellerHelpCategoryContent">
+
+        <strong>
+          Withdrawals
+        </strong>
+
+        <small>
+          Learn about requesting and receiving payments.
+        </small>
+
+      </span>
+
+      <i class="ri-arrow-right-s-line"></i>
+
+    </button>
+
+
+    <!-- ACCOUNT -->
+
+    <button
+      type="button"
+      class="sellerHelpCategory"
+      data-category="account"
+    >
+
+      <span class="sellerHelpCategoryIcon account">
+        <i class="ri-user-settings-line"></i>
+      </span>
+
+      <span class="sellerHelpCategoryContent">
+
+        <strong>
+          Account
+        </strong>
+
+        <small>
+          Manage your profile, security and settings.
+        </small>
+
+      </span>
+
+      <i class="ri-arrow-right-s-line"></i>
+
+    </button>
+
+
+    <!-- SECURITY -->
+
+    <button
+      type="button"
+      class="sellerHelpCategory"
+      data-category="security"
+    >
+
+      <span class="sellerHelpCategoryIcon security">
+        <i class="ri-shield-check-line"></i>
+      </span>
+
+      <span class="sellerHelpCategoryContent">
+
+        <strong>
+          Security
+        </strong>
+
+        <small>
+          Keep your creator account secure.
+        </small>
+
+      </span>
+
+      <i class="ri-arrow-right-s-line"></i>
+
+    </button>
+
+  </div>
+
+
+  <!-- ========================================
+       FAQ
+  ========================================= -->
+
+  <div class="sellerHelpSectionHeader sellerFaqHeader">
+
+    <div>
+
+      <h2>
+        Frequently Asked Questions
+      </h2>
+
+      <p>
+        Answers to common creator questions.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="sellerFaqCard">
+
+
+    <!-- FAQ 1 -->
+
+    <div class="sellerFaqItem">
+
+      <button
+        type="button"
+        class="sellerFaqQuestion"
+      >
+
+        <span>
+          How do I upload a product?
+        </span>
+
+        <i class="ri-add-line"></i>
+
+      </button>
+
+
+      <div class="sellerFaqAnswer">
+
+        <p>
+          Open Products from your Creator Studio sidebar
+          and select Upload Product. Add your product
+          information, price and required files, then
+          submit it for review.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- FAQ 2 -->
+
+    <div class="sellerFaqItem">
+
+      <button
+        type="button"
+        class="sellerFaqQuestion"
+      >
+
+        <span>
+          How are creator earnings calculated?
+        </span>
+
+        <i class="ri-add-line"></i>
+
+      </button>
+
+
+      <div class="sellerFaqAnswer">
+
+        <p>
+          Creator earnings are calculated from the creator
+          share assigned to your product. Your current
+          creator share is 70%, while the platform share is
+          30%.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- FAQ 3 -->
+
+    <div class="sellerFaqItem">
+
+      <button
+        type="button"
+        class="sellerFaqQuestion"
+      >
+
+        <span>
+          When can I withdraw my earnings?
+        </span>
+
+        <i class="ri-add-line"></i>
+
+      </button>
+
+
+      <div class="sellerFaqAnswer">
+
+        <p>
+          Once your earnings become available for withdrawal,
+          you can submit a withdrawal request from the
+          Withdrawals section of Creator Studio.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- FAQ 4 -->
+
+    <div class="sellerFaqItem">
+
+      <button
+        type="button"
+        class="sellerFaqQuestion"
+      >
+
+        <span>
+          Why is my product still pending?
+        </span>
+
+        <i class="ri-add-line"></i>
+
+      </button>
+
+
+      <div class="sellerFaqAnswer">
+
+        <p>
+          Products may remain pending while they are being
+          reviewed. You will receive a notification when
+          the product status changes.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- FAQ 5 -->
+
+    <div class="sellerFaqItem">
+
+      <button
+        type="button"
+        class="sellerFaqQuestion"
+      >
+
+        <span>
+          How can I update my creator profile?
+        </span>
+
+        <i class="ri-add-line"></i>
+
+      </button>
+
+
+      <div class="sellerFaqAnswer">
+
+        <p>
+          Open your Profile page from the Creator Studio
+          sidebar and select Edit Profile to update your
+          public creator information.
+        </p>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+  <!-- ========================================
+       CONTACT SUPPORT
+  ========================================= -->
+
+  <div class="sellerSupportCard">
+
+    <div class="sellerSupportIcon">
+
+      <i class="ri-customer-service-2-line"></i>
+
+    </div>
+
+
+    <div class="sellerSupportContent">
+
+      <h2>
+        Still need help?
+      </h2>
+
+      <p>
+        Our support team is here to help you with your
+        creator account.
+      </p>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="sellerContactSupportBtn"
+      id="contactSupportBtn"
+    >
+
+      <i class="ri-message-3-line"></i>
+
+      Contact Support
+
+    </button>
+
+  </div>
+
+
+  <!-- ========================================
+       RESOURCES
+  ========================================= -->
+
+  <div class="sellerHelpSectionHeader">
+
+    <div>
+
+      <h2>
+        Creator Resources
+      </h2>
+
+      <p>
+        Useful resources for growing your store.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="sellerHelpResources">
+
+
+    <a
+      href="#"
+      class="sellerHelpResource"
+    >
+
+      <span class="sellerHelpResourceIcon">
+        <i class="ri-book-open-line"></i>
+      </span>
+
+      <span>
+
+        <strong>
+          Creator Guide
+        </strong>
+
+        <small>
+          Learn how to get started as a creator.
+        </small>
+
+      </span>
+
+      <i class="ri-arrow-right-s-line"></i>
+
+    </a>
+
+
+    <a
+      href="#"
+      class="sellerHelpResource"
+    >
+
+      <span class="sellerHelpResourceIcon">
+        <i class="ri-lightbulb-line"></i>
+      </span>
+
+      <span>
+
+        <strong>
+          Selling Tips
+        </strong>
+
+        <small>
+          Improve your products and increase sales.
+        </small>
+
+      </span>
+
+      <i class="ri-arrow-right-s-line"></i>
+
+    </a>
+
+
+    <a
+      href="#"
+      class="sellerHelpResource"
+    >
+
+      <span class="sellerHelpResourceIcon">
+        <i class="ri-shield-check-line"></i>
+      </span>
+
+      <span>
+
+        <strong>
+          Safety & Security
+        </strong>
+
+        <small>
+          Protect your account and creator content.
+        </small>
+
+      </span>
+
+      <i class="ri-arrow-right-s-line"></i>
+
+    </a>
+
+  </div>
+
+</section>
+  </main>
+  
+
+
+     <!-----BOTTOM-NAVBAR----->
+  <div class="bottom-navbar" id="navIconDiv">
+    <div class="btom-navIcon" onclick="window.location.href='./index.html'">
+      <div class="activeImg active" id="activeMtn">
+        <i class="ri-dashboard-line material-icons"></i>
+      </div>
+      <small class="bottomIcon-textNav">Dashboard</small>
+    </div>
+
+    <div class="btom-navIcon">
+      <div class="activeImg" > 
+        <i class="ri-book-open-line material-icons"></i>
+      </div>
+      <small class="bottomIcon-textNav">Products</small>
+    </div>
+
+
+   
+
+
+      <div class="btom-navIcon addBar" >
+      <div class="activeImg" id="activeTel" > 
+       <i class="ri-add-circle-line material-icons addBtn"></i>
+      </div>
+      <small class="bottomIcon-textNav">Upload</small>
+    </div>
+
+
+     <div class="btom-navIcon" >
+      <div class="activeImg" id="activeAir" > 
+      <i class="ri-shopping-bag-3-line material-icons"></i>
+      </div>
+      <small class="bottomIcon-textNav"> Sales</small>
+    </div>
+       <div class="btom-navIcon" >
+      <div class="activeImg" id="activeAir" > 
+      <i class="ri-user-settings-line material-icons"></i>
+      </div>
+      <small class="bottomIcon-textNav">Profile</small>
+    </div>
+
+
+   
+
+
+  </div>
+
+  <script type="module" src="sellerHelpCenter.js"></script>
+</body>
+</html>
