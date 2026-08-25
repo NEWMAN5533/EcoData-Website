@@ -597,8 +597,6 @@ CREATE STORE LINK
     z-index: 99999999999999999;
     transition: .4s ease;
     border-right: 1px solid var(--text-cl-2);
-    border-start-end-radius: 1.4rem;
-    border-end-end-radius: 1.4rem;
     box-shadow: 0 10px 20px rgba(0,0,0,0.13);
   }
 
@@ -612,7 +610,7 @@ CREATE STORE LINK
   }
 
   .dark-mode .ecodata-sidebar{
-    background: var(--darkMode-bg-cl);
+    background: var(--card-bg-dark);
 
     border-right: 1px solid var(--thin-border) !important;
   }

@@ -986,12 +986,12 @@ TRUSTED LOGOS ALIGN
     }
 
     .dark-mode #gridView{
-      background:  var(--background-cl-1);
+      background:  var(--card-bg-dark);
       border: 1px solid var(--thin-border);
       border-end-end-radius: 0;
       gap: 3rem !important;
       border-end-start-radius: 0;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.35);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
     }
 
 .dark-mode .gridCard{
