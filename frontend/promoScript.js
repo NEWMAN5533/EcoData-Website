@@ -40,7 +40,7 @@
     const showDay = showNow.getDay();
     let showEnd = new Date(showNow);
 
-    if(showDay === 3){
+    if(showDay === 2){
       showEnd.setDate(showNow.getDate());
       showEnd.setHours(23, 50, 59, 999);
 
