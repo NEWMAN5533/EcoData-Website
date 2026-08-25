@@ -1,3 +1,9 @@
+.main-grid-container .ads-container-right,
+.main-grid-container .grid-container-main{
+  border-left: none !important;
+  border-right: none !important;
+}
+
 
 :root {
   --bg-cl: #FFF;
