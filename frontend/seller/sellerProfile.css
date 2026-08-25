@@ -260,6 +260,10 @@ body.dark-mode::-webkit-scrollbar-thumb{
 }
 
 
+body.dark-mode i{
+  color: var(--color-light) !important;
+}
+
 body.dark-mode::-webkit-scrollbar{
   background: var(--button-hover);
 }
