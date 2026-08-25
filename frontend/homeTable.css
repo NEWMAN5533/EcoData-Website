@@ -238,7 +238,7 @@
 }
 
 .dark-mode #liveOrderRows .live-row{
-  border-bottom: 1px solid var(--thin-border) !important;
+  border-bottom: 1px solid var(--background-cl-1) !important;
 }
 
 

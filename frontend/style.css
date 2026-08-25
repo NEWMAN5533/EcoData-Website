@@ -3401,7 +3401,7 @@ NETcARD VIEW ENDS
 }
 
 .dark-mode .card-container #gridView #mtnArea,
-.dark-mode .card-container #gridView #telArea,
+.dark-mode .card-container #gridView #teleArea,
 .dark-mode .card-container #gridView #tigoArea{
   border: none !important;
 }
