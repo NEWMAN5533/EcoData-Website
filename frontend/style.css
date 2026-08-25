@@ -3362,8 +3362,7 @@ GRID VIEW
 
 .dark-mode #normalView #mtnArea{
   background: var(--card-bg-dark) !important;
-  border-bottom: 1px solid var(--thin-border);
-  border: 1px solid var(--thin-border);
+  border: none !important;
 }
 
 
@@ -3388,8 +3387,23 @@ NETcARD VIEW ENDS
 *****/
 
 .dark-mode #normalView{
-  box-shadow:  0 2px 6px rgba(0, 0, 0, 0.6);
+  box-shadow:  0 2px 6px rgba(0, 0, 0, 0.1);
   border-bottom: 9px solid var(--thin-border);
+}
+
+
+.card-container #gridView{
+  box-shadow: none !important;
+}
+
+.dark-mode .card-container #gridView{
+  box-shadow: none !important;
+}
+
+.dark-mode .card-container #gridView #mtnArea,
+.dark-mode .card-container #gridView #telArea,
+.dark-mode .card-container #gridView #tigoArea{
+  border: none !important;
 }
 
 .view.active{
@@ -3409,7 +3423,6 @@ NETcARD VIEW ENDS
 }
 
 .dark-mode .view.active #mtnArea{
-  background: var(--background-cl-1) !important;
   margin-bottom: 1.5rem;
   box-shadow: 0 !important;
   border-bottom: 1px solid var(--thin-border);
