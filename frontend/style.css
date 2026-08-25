@@ -2871,19 +2871,15 @@ NEW GRID & NORMAL UI UPDATE (20th/1/2026
   justify-content: center;
   align-items: center;
   border-radius: .6rem;
-  background: rgb(245, 245, 245);
+  background: rgb(248, 248, 248);
   padding: 1rem .3rem;
   height: max-content;
   flex-direction: column;
-  box-shadow: var(--card-box-shadow);
-  border: 1px solid var(--primary-cl);
+  border: 1px solid rgba(226, 226, 226, 226);
   margin: 2rem 0;
 }
 
-.dark-mode .normalGrid-container 
-{
-  background: var(--darkMode-bg-cl);
-}
+
 
   .normalGrid-container .titlen{
     width: 100%;
@@ -3346,42 +3342,28 @@ GRID VIEW
   padding: 0;
   margin-bottom: 4rem;
   background: rgba(245,245,245,245);
-  box-shadow: var(--card-box-shadow);
   border-end-end-radius: 1.5rem;
   border-end-start-radius: 1.5rem;
-  border-bottom: 12px solid var(--card-mtn-bg);
+  border-bottom: 12px solid var(--card-mtn-bg) !important;
   display:  flex;
   justify-content: center !important;
   align-items: center;
   position: relative;
+  box-shadow: unset !important;
 }
 
 .dark-mode #normalView{
-  border: 1px solid var(--thin-border);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 22);
-  background: var(--darkMode-bg-cl);
+  border-top: 9px solid var(--background-cl-1) !important;
+  background: var(--card-bg-dark) !important;
   border-bottom: 12px solid var(--card-mtn-bg) !important;
 }
 
-#normalView .top-dashboard{
-  width: 100%;
-  height: 5rem;
-  display: flex;
-  flex-direction: column;
-  border-bottom: 1px solid rgb(243, 240, 240);
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  background: rgb(255, 255, 255);
-  margin-bottom: 2rem;
-  padding-bottom: .4rem;
-  box-shadow:  0 10px 20px rgba(0, 0, 0, 0.1);
-}
 
-.dark-mode #normalView .top-dashboard{
-  background: var(--darkMode-bg-cl);
+
+.dark-mode #normalView #mtnArea{
+  background: var(--card-bg-dark) !important;
   border-bottom: 1px solid var(--thin-border);
-  box-shadow:  0 10px 20px rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--thin-border);
 }
 
 
@@ -3465,6 +3447,10 @@ NETcARD VIEW ENDS
   user-select: none;
 }
 
+.dark-mode .select-btn{
+  background: #111318;
+}
+
 #selectBtn{
   white-space: nowrap;
   font-size: .88rem !important;
@@ -3506,7 +3492,7 @@ box-shadow: 0 8px 14px  rgba(56, 55, 55, 0.2);
 
 
 .dark-mode .single-order  {
-  background: rgb(29, 36, 41);
+  background: var(--card-bg-dark);
   border: 1px solid var(--thin-border);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8) !important;
 }

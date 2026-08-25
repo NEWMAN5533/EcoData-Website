@@ -17,6 +17,17 @@
   /*====NEW===ROOT====*/
   /*====NEW===ROOT====*/
 
+ /* Main backgrounds */
+  --body-bg-dark: #0b0d10;
+  --page-bg-dark: #0b0d10;
+  --sidebar-bg-dark: #101318;
+  --surface-bg-dark: #14181e;
+  --surface-bg-hover-dark: #191e25;
+
+  /* Cards */
+  --card-bg-dark: #12161c;
+  --card-bg-hover-dark: #171c23;
+  --card-elevated-dark: #181d24;
 
   /***
   NEW ROOT
@@ -59,7 +70,10 @@
   --card-tigo-bg:  #6cbff7cb;
 }
 
-
+body.dark-mode {
+  --darkMode-bg-cl: var(--body-bg-dark);
+  --thin-border: var(--surface-bg-hover-dark);
+}
 /**
 * NAV-RIGHT
 **/
@@ -290,24 +304,25 @@ SNACKBAR SECTION
  .card-container .welcome-hero{
   width: 100%;
   max-width: 98%;
-  height: 8.85rem;
+  height: 9.85rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
   gap: 0;
   background: #ffffff;
-  border: 1px solid rgb(214, 212, 212);
   margin-top: .6rem;
   margin-bottom: .5rem;
-  box-shadow: 0 2px 6px rgba(49, 49, 49, 0.15);
+  box-shadow: unset !important;
   border-radius: .1rem;
+  overflow: hidden;
  }
 
  .dark-mode  .card-container .welcome-hero{
-  background: var(--darkMode-bg-cl);
+  background: var(--card-bg-dark);
   box-shadow: 0 10x 20px rgba(0,0,0,0.2);
   border: 1px solid var(--thin-border);
+  border-radius: .8rem;
  }
 
 
@@ -321,13 +336,11 @@ SNACKBAR SECTION
   align-items: center;
   justify-content: space-between;
   position: relative;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
  
  }
 
  .dark-mode  .welcome-hero .welcome-hero-top{
-  border-bottom: 1px solid var(--thin-border);
-  background: var(--darkMode-bg-cl);
+  background: var(--card-bg-dark);
  }
  
  .welcome-hero-top .wht-left{
@@ -384,7 +397,7 @@ SNACKBAR SECTION
    .dark-mode .wht-right .ecb{
     border: none;
     color:  rgba(254, 255, 224, 0.219);
-    background: var(--darkMode-bg-cl);
+    background: var(--card-bg-dark);
    }
 
 
@@ -824,7 +837,7 @@ clock section
 }
 
 .dark-mode .trusted-by {
-  background: var(--darkMode-bg-cl) !important;
+  background: var(--card-bg-dark) !important;
   box-shadow: 0 2px 6px rgba(0,0,0,0.2) !important;
   border: 1px solid var(--thin-border);
 }
@@ -1231,13 +1244,8 @@ NOTICE BOARD SECTION
   justify-content: flex-start;
   position: relative;
   margin: 1rem !important;
-  border: 1px solid rgb(247, 244, 244);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
-.dark-mode .notice-container {
-  border: 1px solid var(--thin-border);
-}
 
 .notice-container h3{
   color: white;
@@ -1319,7 +1327,7 @@ NOTICE BOARD SECTION
   opacity: .7;
   margin: .3rem;
   display: flex;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 
@@ -1327,8 +1335,8 @@ NOTICE BOARD SECTION
  
 
 .dark-mode .notice-board {
-  background: var(--background-cl-1) !important;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.542);
+  background: var(--card-bg-dark)!important;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .1);
   border-left: 5px solid white !important;
 }
 
@@ -1392,14 +1400,13 @@ SOCIAL FOLLOW SECTION
   padding: .2rem .4rem !important;
   height: 5rem;
   position: relative;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   border: 1px solid rgb(211, 211, 211);
   border-radius: 6px;
 }
 
 .dark-mode .follow-share-container{
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6) ;
-  background-color:var(--thin-border);
+  background-color: var(--card-bg-dark);
   border: 2px solid var(--background-cl-1);
 }
 
@@ -1644,9 +1651,9 @@ gap: .6rem;
 
 .dark-mode .total-card {
 
-  background: var(--background-cl-2) !important;
+  background: var(--card-bg-dark) !important;
   padding: .3rem;
-  box-shadow: 0 10px 20px rgba(22, 22, 22, 0.9) !important;
+  box-shadow: 0 10px 20px rgba(22, 22, 22, 0.2) !important;
 }
 
 .dark-mode .total-card {
@@ -1755,10 +1762,10 @@ DASHBOARD SECTION ENDS
 
 
 
-
-
-
-
+.dark-mode .card-container .normalGrid-container{
+  background: var(--card-bg-dark) !important;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
 
 
 /***
@@ -1794,8 +1801,8 @@ border: 1px solid rgb(223, 223, 223);
 }
 
 .dark-mode .normalOrgridBtn-wrapping{
-  background: var(--darkMode-bg-cl);
-  border: 1px solid var(--thin-border);
+  background: var(--card-bg-hover-dark);
+  border: 2px solid var(--thin-border);
 }
 
 .normalOrgridBtn-wrapping .normalOrgridBtn{

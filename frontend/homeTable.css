@@ -16,6 +16,18 @@
 
   /*====NEW===ROOT====*/
 
+ /* Main backgrounds */
+  --body-bg-dark: #0b0d10;
+  --page-bg-dark: #0b0d10;
+  --sidebar-bg-dark: #101318;
+  --surface-bg-dark: #14181e;
+  --surface-bg-hover-dark: #191e25;
+
+  /* Cards */
+  --card-bg-dark: #12161c;
+  --card-bg-hover-dark: #171c23;
+  --card-elevated-dark: #181d24;
+
 
 
   /***
@@ -80,15 +92,14 @@
   border-end-start-radius: .5rem;
   border-start-start-radius: .5rem;
   border-start-end-radius: .5rem;
-  border: 1px solid rgb(219, 219, 219);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  border: 1px solid rgba(226, 226, 226, 226);
   overflow: hidden;
 }
 
 .dark-mode .table-section{
-  background: var(--darkMode-cl) !important;
+  background: var(--card-bg-dark) !important;
   border: 1px solid var(--thin-border);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
 .table-section .table-title{
@@ -176,10 +187,9 @@
 }
 
 .dark-mode .content-wrapper .table-header {
-  background: var(--darkMode-bg-cl) !important;
+  background: var(--card-bg-dark) !important;
   color: var(--table-hd-cl-2);
-  border-bottom: 1px solid rgba(95, 94, 94, 0.411);
-
+  border-bottom: none !important;
 }
 
 .content-wrapper .main-row-content {
