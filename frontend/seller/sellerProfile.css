@@ -238,6 +238,42 @@ html{
   font-size: 12px;
 }
 
+button,
+i{
+-webkit-tap-highlight-color: transparent;
+-webkit-user-select: none;
+outline: none;
+-ms-user-select: none;;
+user-select: none;
+}
+
+
+body.dark-mode::-webkit-scrollbar{
+  background: var(--button-hover);
+}
+
+
+
+body.dark-mode::-webkit-scrollbar-thumb{
+  background: rgb(50, 53, 54);
+  border-radius: 1rem;
+}
+
+
+body.dark-mode::-webkit-scrollbar{
+  background: var(--button-hover);
+}
+
+.dark-mode .sidebar-wrapper2::-webkit-scrollbar{
+  background: var(--button-hover);
+}
+
+.dark-mode .sidebar-wrapper2::-webkit-scrollbar-thumb{
+  background: rgb(50, 53, 54);
+  border-radius: 1rem;
+}
+
+
 body{
   background: var(--color-light);
   font-family: var(--font-family);
@@ -249,6 +285,8 @@ body{
   min-height: 100vw;
 }
 
+
+/****** DARK MODE ****/
 body.dark-mode,
 .dark-mode .bottom-navbar{
   background: var(--body-bg-dark) !important;
@@ -257,14 +295,14 @@ body.dark-mode,
 
 .dark-mode .sellerProfileCard,
 .dark-mode .sellerProfileHero,
-.dark-mode .sellerProfileStat,
-.dark-mode .creator-studio{
+.dark-mode .sellerProfileStat{
   background: var(--card-bg-dark) !important;
 }
 
 .dark-mode .sidebar,
 .dark-mode .sidebarPhone,
-.dark-mode .nav-bar{
+.dark-mode .nav-bar,
+.dark-mode .creator-studio{
   background: var(--sidebar-bg-dark) !important;
 }
 
@@ -274,7 +312,9 @@ body.dark-mode,
   box-shadow: none !important;
 }
 
-
+.dark-mode h1, h2, h3, p{
+  color: var(--color-light) !important;
+}
 
 .dark-mode .sidebar a:hover,
 .dark-mode .sidebarPhone a:hover{
@@ -284,7 +324,7 @@ body.dark-mode,
 .dark-mode .sidebar a.active,
 .dark-mode .sidebarPhone a.active{
   background: var(--surface-bg-hover-dark) !important;
-  
+  transition: background 0s ease !important;
 }
 
 .dark-mode .sidebar a h5,
@@ -302,6 +342,12 @@ body.dark-mode,
   background: var(--button-bg-dark);
   color: var(--button-text-dark);
 }
+
+/****** DARK MODE ****/
+
+
+
+
 
 .nav-actions #menu{
   display: flex;
@@ -375,6 +421,15 @@ body.dark-mode,
 
   }
 
+  .nav-bar{
+    min-width: calc(100vw - 200px) !important;
+    margin-left: -36px !important;
+  }
+
+  .nav-actions{
+    padding-right: 1rem !important;
+  }
+
 }
 
 
@@ -383,6 +438,16 @@ body.dark-mode,
 ========================================== */
 
 @media (min-width: 1200px) {
+
+   .nav-bar{
+    min-width: calc(100vw - 200px) !important;
+    margin-left: 2px !important;
+  }
+
+  .nav-actions,
+  .nav-bar-left{
+    padding-right: 3.5rem !important;
+  }
 
   .sellerProfilePage {
 
