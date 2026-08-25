@@ -457,8 +457,9 @@ MAIN CONTAINER
   left: 0;
   right: 0;
   top: 0;
-  background: var(--card-bg-dark) !important;
+  background: var(--body-bg-dark) !important;
   overflow: hidden;
+  border-bottom: 1px solid var(--thin-border) !important;
 }
 
 
@@ -503,6 +504,12 @@ MAIN CONTAINER
   justify-content: center;
 }
 
+
+@media screen and (min-width: 768px){
+  #sidebarViewer{
+    display: none !important;
+  }
+}
 
 
 .dark-mode .container .navbar .nav-right{

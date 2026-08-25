@@ -304,12 +304,12 @@ SNACKBAR SECTION
  .card-container .welcome-hero{
   width: 100%;
   max-width: 98%;
-  height: 9.85rem;
+  height: 23.4rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
-  gap: 0;
+  gap: .3rem;
   background: #ffffff;
   margin-top: .6rem;
   margin-bottom: .5rem;
@@ -319,9 +319,8 @@ SNACKBAR SECTION
  }
 
  .dark-mode  .card-container .welcome-hero{
-  background: var(--card-bg-dark);
+  background: none !important;
   box-shadow: 0 10x 20px rgba(0,0,0,0.2);
-  border: 1px solid var(--thin-border);
   border-radius: .8rem;
  }
 
@@ -331,7 +330,7 @@ SNACKBAR SECTION
   width: 100%;
   max-width: 99.99%;
   display: flex;
-  height: 30%;
+  height: 15%;
   gap: 0;
   align-items: center;
   justify-content: space-between;
@@ -341,6 +340,7 @@ SNACKBAR SECTION
 
  .dark-mode  .welcome-hero .welcome-hero-top{
   background: var(--card-bg-dark);
+  border-bottom: 1px solid var(--thin-border);
  }
  
  .welcome-hero-top .wht-left{
@@ -400,18 +400,236 @@ SNACKBAR SECTION
     background: var(--card-bg-dark);
    }
 
+   /**==============================
+      GIVE AWAY STATUS
+      ==========================***/
+  .card-container .welcome-hero .seller-status-bar{
+    height: 55%;
+  }
+
+.status-swiper h1{
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  margin-bottom: .5rem;
+  font-size: .85rem;
+  padding: 0;
+  color: var(--text-cl-3);
+  font-weight: 600;
+  font-family: var(--font-fm);
+  opacity: .8;
+}
+
+.dark-mode .status-swiper h1{
+  color: var(--primary-cl) !important;
+}
+
+.status-swiper h1 img{
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+/* seller status bar */
+.seller-status-bar{
+  width: 100%;
+  background: var(--background-cl);
+  font-family: var(--font-fm);
+  overflow: hidden;
+  padding: .5rem;
+}
+
+.dark-mode .seller-status-bar{
+   background: var(--body-bg-dark) !important;
+}
+
+
+.status-swiper {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Vertical rectangular status card — WhatsApp style */
+.status-card.swiper-slide {
+  width: 5.5rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.status-card-bg {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 14;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(34, 43, 40, 0.4); /* unviewed = teal border */
+  transition: transform 0.15s ease, border-color 0.2s ease;
+}
+
+.status-card-bg p{
+  background: var(--primary-cl);
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  height: 1.4rem;
+  display: flex;
+  color: var(--text-cl-3);
+  align-items: center;
+  justify-content: center;
+  font-size: .67rem;
+  font-weight: 600;
+  border-radius: .3rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  padding: 0 .7rem;
+  cursor: default;
+  transition: color .15s ease;
+  z-index: 999;
+}
+
+.dark-mode .status-card-bg p{
+  background: var(--card-bg-hover-dark) !important;
+  color: var(--primary-cl) !important;
+}
+
+.status-card:active .status-card-bg {
+  transform: scale(0.96);
+}
+
+.status-card-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Viewed state — muted gray border instead of teal */
+.status-card.viewed .status-card-bg {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Small gradient scrim at bottom for legibility if you add text/overlay later */
+.status-card-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.35) 100%);
+  pointer-events: none;
+}
+
+/* Small circular avatar overlaid top-left, like WhatsApp */
+.status-card-avatar {
+  position: absolute;
+  top: 0.4rem;
+  left: 0.4rem;
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  padding: 2px;
+  z-index: 2;
+}
+
+.status-card-avatar-active {
+  background: linear-gradient(135deg, #070707, #161616, #4d3a1e);
+}
+
+.status-card-avatar-viewed {
+  background: rgba(37, 37, 37, 0.3);
+}
+
+.status-card-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2.5px solid #187551;
+}
+
+
+
+
+ .gb-tagSpot{
+  background: var(--card-bg-hover-dark);
+  position: absolute;
+  top: 2rem;
+  right: 1.2rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  display: flex;
+  color: var(--primary-cl);
+  align-items: center;
+  justify-content: center;
+  font-size: .65rem;
+  font-weight: 600;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  border: 1px solid var(--thin-border-1);
+  padding: 0 .4rem;
+  border-radius: 50%;
+  cursor: default;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+  transition: color .15s ease;
+  z-index: 999;
+}
+
+.status-card-bg-muted .add-status:hover{
+  color: #b46e05;
+}
+
+
+.status-add-icon {
+  font-size: 1.6rem;
+  color: #00d49a;
+}
+
+.status-card-name {
+  font-size: 0.66rem;
+  text-align: center;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  position: absolute;
+  z-index: 99999;
+  bottom: .5rem;
+  align-items: center;
+  justify-content: start;
+  font-weight: 700;
+  padding-left: .3rem;
+}
+
+.status-card-add .status-card-name {
+  color: #fff;
+  font-weight: 600;
+}
+
+
+
+
+   /**==============================
+      GIVE AWAY STATUS ENDS
+      ==========================***/
+
 
 
    /*****BOTTOM SECTION*****/
   .welcome-hero .welcome-hero-bottom{
   width: 100%;
   max-width: 99.9%;
-  height: 70%;
+  height: 30%;
   display: flex;
   justify-content: space-between;
   padding: .2rem;
   position: relative;
 
+  }
+
+  .dark-mode .welcome-hero .welcome-hero-bottom{
+    border-top: 1px solid var(--thin-border);
+    background: var(--card-bg-dark);
   }
 
 

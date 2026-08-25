@@ -25,6 +25,12 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="EcoData">
 
+ <!---=== css file ===-->
+  <link rel="stylesheet" href="./swiper-bundle.min.css">
+
+ <!--== cdn link ==-->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css" />
+
 
 <!----GOOGLE-SITE-SEARCH-ENDS-->
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -32,9 +38,45 @@
 
 <!---GOOGLE MATERIAL ICON--LINK---->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 <!--remix icons-->
 <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
 
+
+<script>
+      document.addEventListener("DOMContentLoaded", ()=> {
+
+      
+      // TOP SELL SWIPER 
+let topSwiper = new Swiper('.status-swiper', {
+  loop: true,
+  spaceBetween: 12,
+  grabCursor: true,
+  slidesPerView: false,
+  centeredSlides: true,
+  speed: 8000,
+
+  autoplay: {
+    delay: 0,
+    disableOnInteraction: false,
+    pauseOnMouseEnter: false,
+  },
+  // Ensure start
+  initialSlide: 0,
+  allowTouchMove: false,
+  freeMode: true,
+  
+
+
+   breakpoints: {
+    375: {
+      spaceBetween: 12,
+    }
+  }
+});
+
+});
+</script>
 <!--=== DARK MODE SCRIPT ========-->
 <script>
 
@@ -466,7 +508,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
       
   
 
-    
+    <!--== HERO TOP ==-->
     <div class="welcome-hero-top">
 
       <div class="wht-left"> 
@@ -476,7 +518,85 @@ document.addEventListener("DOMContentLoaded", ()=> {
       <button class="ecb" ></button>
       </div>
     </div>
-    <!---bottom-->
+
+    
+
+    <!--== HERO MIDDLE GIVEAWAY STATUS ==-->
+     <section class="seller-status-bar">
+
+          <div class="swiper status-swiper">
+            <h1> <img src="./css/uiIcons/gift.png" alt=""> Status</h1>
+              <div class="swiper-wrapper">
+
+                  <!-- "All Sellers" item -->
+                   <div class="swiper-slide status-card">
+                      <div class="status-card-bg">
+                          <p id="leaderPhone1">----****--</p>
+                      </div>
+                      <div class="status-card-avatar status-card-avatar-active">
+                          <img id="leaderImg1" src="./css/uiIcons/leader (3).png" alt="">
+                      </div>
+                      <small class="gb-tagSpot">GB?</small>
+                      <span class="status-card-name" id="leaderPoints1">Points: ---</span>
+                  </div>
+                 
+
+
+                  <div class="swiper-slide status-card">
+                      <div class="status-card-bg">
+                           <p id="leaderPhone2">----****--</p>
+                      </div>
+                      <div class="status-card-avatar status-card-avatar-active">
+                          <img id="leaderImg1" src="./css/uiIcons/leader (1).png" alt="">
+                      </div>
+                        <small class="gb-tagSpot">GB?</small>
+                      <span class="status-card-name" id="leaderPoints2">Points: ---</span>
+                  </div>
+
+                  <div class="swiper-slide status-card">
+                      <div class="status-card-bg">
+                           <p id="leaderPhone3">----****--</p>
+                      </div>
+                      <div class="status-card-avatar status-card-avatar-active">
+                          <img id="leaderImg1" src="./css/uiIcons/leader (2).png" alt="">
+                      </div>
+                       <small class="gb-tagSpot">GB?</small>
+                      <span class="status-card-name" id="leaderPoints3">Points: ---</span>
+                  </div>
+
+                  <div class="swiper-slide status-card">
+                      <div class="status-card-bg">
+                         <p id="leaderPhone4">----****--</p>
+                      </div>
+                      <div class="status-card-avatar status-card-avatar-active">
+                          <img id="leaderImg1" src="./css/icons/personal.png" alt="">
+                      </div>
+                       <small class="gb-tagSpot">--</small>
+                      <span class="status-card-name" id="leaderPoints4">Points: ---</span>
+                  </div>
+
+                  <div class="swiper-slide status-card">
+                      <div class="status-card-bg">
+                         <p id="leaderPhone5">----****--</p>
+                      </div>
+                      <div class="status-card-avatar status-card-avatar-active">
+                           <img id="leaderImg1" src="./css/icons/personal.png" alt="">
+                      </div>
+                       <small class="gb-tagSpot">--</small>
+                      <span class="status-card-name" id="leaderPoints5">Points: ---</span>
+                  </div>
+              </div>
+          </div>
+
+           <div class="leaderboard-start" style="display: none;">
+    <i class="ri-calendar-event-line"></i>
+    <span id="leaderboardStartText"></span>
+    </div>
+      </section>
+
+
+
+    <!--== HERO BOTTOM ==-->
     <div class="welcome-hero-bottom">
       <div class="grid-overlay" style='display: none;'></div>
       <div class="whb-left">
@@ -533,6 +653,8 @@ document.addEventListener("DOMContentLoaded", ()=> {
         </div>
       </div>
     </div>
+
+
   </section>
 
 
@@ -1422,14 +1544,12 @@ document.addEventListener("DOMContentLoaded", ()=> {
   <div class="live-badge" id="liveBadge">PROMO ACTIVE NOW!</div>
 
 
-   <section class="leaderChartBar">
-    <div class="leaderboard-start">
-    <i class="ri-calendar-event-line"></i>
-    <span id="leaderboardStartText"></span>
-    </div>
-  </section>
+  
   <!-----LEADERBOARD----->
-  <section class="leaderWrapper" id="leaderWrapper">
+   <section class="leaderChartBar" style="display: none;">
+   
+  </section>
+  <section class="leaderWrapper" id="leaderWrapper" style="display: none;">
    <div class="leaderTopWrapper">
      <div class="leaderTop">
       <p> 
@@ -1501,7 +1621,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
     <div class="top5-right">
     <div class="leader-ranking rk1">
-      <div class="ranking-points " id="leaderPhone1">-********-</div>
+      <div class="ranking-points " >-********-</div>
 
       <div class="ranking-points " id="leaderStars1">
         <i class="ri-star-fill"></i>
@@ -1510,44 +1630,44 @@ document.addEventListener("DOMContentLoaded", ()=> {
         <i class="ri-star-fill"></i>
         <i class="ri-star-fill"></i>
       </div>
-      <div class="ranking-points" id="leaderPoints1">--</div>
+      <div class="ranking-points" >--</div>
     </div>
      <div class="leader-ranking rk2">
-      <div class="ranking-points" id="leaderPhone2">-********-</div>
+      <div class="ranking-points" >-********-</div>
       <div class="ranking-points" id="leaderStars2">
         <i class="ri-star-fill"></i>
         <i class="ri-star-fill"></i>
         <i class="ri-star-fill"></i>
         <i class="ri-star-fill"></i>
       </div>
-      <div class="ranking-points" id="leaderPoints2">--</div>
+      <div class="ranking-points" >--</div>
     </div>
 
      <div class="leader-ranking rk3">
-      <div class="ranking-points" id="leaderPhone3">-********-</div>
+      <div class="ranking-points" >-********-</div>
       <div class="ranking-points" id="leaderStars3">
         <i class="ri-star-fill"></i>
         <i class="ri-star-fill"></i>
         <i class="ri-star-fill"></i>
       </div>
-      <div class="ranking-points" id="leaderPoints3">--</div>
+      <div class="ranking-points" >--</div>
     </div>
 
      <div class="leader-ranking">
-      <div class="ranking-points" id="leaderPhone4">-********-</div>
+      <div class="ranking-points">-********-</div>
       <div class="ranking-points" id="leaderStars4">
         <i class="ri-star-fill"></i>
         <i class="ri-star-fill"></i> 
       </div>
-      <div class="ranking-points" id="leaderPoints4">--</div>
+      <div class="ranking-points" >--</div>
     </div>
 
      <div class="leader-ranking">
-      <div class="ranking-points" id="leaderPhone5">-********-</div>
+      <div class="ranking-points" >-********-</div>
       <div class="ranking-points" id="leaderStars5">
         <i class="ri-star-fill"></i>
       </div>
-      <div class="ranking-points" id="leaderPoints5">--</div>
+      <div class="ranking-points" >--</div>
     </div>
     </div>
    </div>
@@ -5827,9 +5947,13 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
 <!--GREETINGS WITH-usernameDisplay----->
 <script type="module" src="userRestriction.js"></script>
+
 <script type="module" src="deliveryIndicator.js"></script>
+
 <script src='scrollreveal.min.js'></script>
 <script src='swiper-bundle.min.js'></script>
+
+ <script src="https://cdnjs.coudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script> 
 
 
 
