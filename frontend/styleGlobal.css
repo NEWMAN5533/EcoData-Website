@@ -304,7 +304,7 @@ SNACKBAR SECTION
  .card-container .welcome-hero{
   width: 100%;
   max-width: 98%;
-  height: 23.4rem;
+  height: 23.7rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -432,10 +432,11 @@ SNACKBAR SECTION
 /* seller status bar */
 .seller-status-bar{
   width: 100%;
-  background: var(--background-cl);
+  background: var(--primary-cl);
   font-family: var(--font-fm);
   overflow: hidden;
   padding: .5rem;
+  opacity: .9;
 }
 
 .dark-mode .seller-status-bar{

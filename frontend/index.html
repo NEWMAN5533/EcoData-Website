@@ -25,11 +25,15 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="EcoData">
 
- <!---=== css file ===-->
-  <link rel="stylesheet" href="./swiper-bundle.min.css">
+
 
  <!--== cdn link ==-->
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css" />
+
+ <!---=== css file ===-->
+  <link rel="stylesheet" href="./swiper-bundle.min.css">
+
+
 
 
 <!----GOOGLE-SITE-SEARCH-ENDS-->
@@ -43,40 +47,7 @@
 <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
 
 
-<script>
-      document.addEventListener("DOMContentLoaded", ()=> {
 
-      
-      // TOP SELL SWIPER 
-let topSwiper = new Swiper('.status-swiper', {
-  loop: true,
-  spaceBetween: 12,
-  grabCursor: true,
-  slidesPerView: false,
-  centeredSlides: true,
-  speed: 8000,
-
-  autoplay: {
-    delay: 0,
-    disableOnInteraction: false,
-    pauseOnMouseEnter: false,
-  },
-  // Ensure start
-  initialSlide: 0,
-  allowTouchMove: false,
-  freeMode: true,
-  
-
-
-   breakpoints: {
-    375: {
-      spaceBetween: 12,
-    }
-  }
-});
-
-});
-</script>
 <!--=== DARK MODE SCRIPT ========-->
 <script>
 
@@ -588,9 +559,9 @@ document.addEventListener("DOMContentLoaded", ()=> {
               </div>
           </div>
 
-           <div class="leaderboard-start" style="display: none;">
+           <div class="leaderboard-start" style="margin-top: .6rem;">
     <i class="ri-calendar-event-line"></i>
-    <span id="leaderboardStartText"></span>
+    <span id="leaderboardStartText" style="font-size: .65rem;opacity:0.5;"></span>
     </div>
       </section>
 
@@ -619,7 +590,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
         <div class="whb-right-top">
           <div class="ratingContainer">
     <div class="stat-card float">
-        <div class="stat-num">1.3K+</div>
+        <div class="stat-num">1.37K+</div>
         <div class="stat-label">Happy Users</div>
       </div>
       <div class="stat-card float" style="animation-delay:0.5s">
@@ -5941,6 +5912,9 @@ document.addEventListener("DOMContentLoaded", ()=> {
  <!-- Load Paystack library -->
   <script src="https://js.paystack.co/v2/inline.js"></script>
 
+
+   <script src="https://cdnjs.coudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script> 
+
 <script type="module" src="./firebase-config.js"></script>
 
 <script type="module" src="main.js"></script>
@@ -5953,7 +5927,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 <script src='scrollreveal.min.js'></script>
 <script src='swiper-bundle.min.js'></script>
 
- <script src="https://cdnjs.coudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script> 
+
 
 
 
@@ -5961,7 +5935,9 @@ document.addEventListener("DOMContentLoaded", ()=> {
 <script src="promoScript.js"></script>
 <script src="global.js"></script>
 
+<script>
 
+</script>
 
 <!---MODE BTN-SCRIPT---->
 <script>
@@ -6001,6 +5977,34 @@ document.addEventListener("DOMContentLoaded", ()=> {
     }
   })
 
+
+    // TOP SELL SWIPER 
+let topSwiper = new Swiper('.status-swiper', {
+  loop: true,
+  spaceBetween: 18,
+  grabCursor: true,
+  slidesPerView: "auto",
+  centeredSlides: true,
+  speed: 8000,
+
+  autoplay: {
+    delay: 0,
+    disableOnInteraction: false,
+    pauseOnMouseEnter: true,
+  },
+  // Ensure start
+  initialSlide: 0,
+  allowTouchMove: false,
+  freeMode: true,
+  
+
+
+   breakpoints: {
+    1200: {
+      spaceBetween: 32,
+    }
+  }
+});
 
    });
 </script>
