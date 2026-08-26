@@ -5910,7 +5910,8 @@ let topSwiper = new Swiper(".status-swiper", {
   spaceBetween: 12,
   grabCursor: true,
   slidesPerView: 'auto',
-  centeredSlides: 'auto',
+  centeredSlides: false,
+  loopAdditionalSlides: 9,
   speed: 5000,
 
   autoplay: {
@@ -5919,7 +5920,7 @@ let topSwiper = new Swiper(".status-swiper", {
     pauseOnMouseEnter: false,
   },
   allowTouchMove: true,
-  freeMode: true,
+
 
   breakpoints: {
     640: {
@@ -5927,6 +5928,7 @@ let topSwiper = new Swiper(".status-swiper", {
     }
   }
 });
+
 
 
    });
