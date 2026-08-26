@@ -322,6 +322,7 @@ SNACKBAR SECTION
   background: none !important;
   box-shadow: 0 10x 20px rgba(0,0,0,0.2);
   border-radius: .8rem;
+  border: 1px solid var(--card-bg-dark);
  }
 
 
