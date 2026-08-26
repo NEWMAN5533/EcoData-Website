@@ -217,6 +217,10 @@ body.dark-mode::-webkit-scrollbar-thumb{
       animation: spinAt 4s linear infinite;
     }
 
+  .status-swiper h1 img{
+    animation: spinAt 8s linear infinite;
+  }
+
     .baw6{
       animation: spinAt 4s linear infinite;
     }
