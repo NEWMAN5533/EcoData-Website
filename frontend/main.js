@@ -2798,44 +2798,34 @@ function loadLeaderboard() {
   );
 
 }
-
 //===========================
 // RENDER LEADERS
 //===========================
 function renderLeaderboard(leaders) {
 
   //========================================
-  // CLEAR ALL 5 POSITIONS FIRST
+  // CLEAR ALL 5 POSITIONS
+  // UPDATE EVERY SWIPER CLONE TOO
   //========================================
   for (let i = 1; i <= 5; i++) {
 
-    const phoneEl =
-      document.getElementById(
-        `leaderPhone${i}`
-      );
+    document
+      .querySelectorAll(`#leaderPhone${i}`)
+      .forEach(el => {
+        el.textContent = "---";
+      });
 
-    const pointsEl =
-      document.getElementById(
-        `leaderPoints${i}`
-      );
+    document
+      .querySelectorAll(`#leaderPoints${i}`)
+      .forEach(el => {
+        el.textContent = "0 points";
+      });
 
-    const starsEl =
-      document.getElementById(
-        `leaderStars${i}`
-      );
-
-
-    if (phoneEl) {
-      phoneEl.textContent = "---";
-    }
-
-    if (pointsEl) {
-      pointsEl.textContent = "0 points";
-    }
-
-    if (starsEl) {
-      starsEl.innerHTML = "";
-    }
+    document
+      .querySelectorAll(`#leaderStars${i}`)
+      .forEach(el => {
+        el.innerHTML = "";
+      });
 
   }
 
@@ -2845,54 +2835,45 @@ function renderLeaderboard(leaders) {
   //========================================
   leaders.forEach((leader, index) => {
 
-    const i =
-      index + 1;
+    const i = index + 1;
 
 
-    const phoneEl =
-      document.getElementById(
-        `leaderPhone${i}`
-      );
+    //======================================
+    // UPDATE ALL CLONES
+    //======================================
+    document
+      .querySelectorAll(`#leaderPhone${i}`)
+      .forEach(el => {
 
-    const pointsEl =
-      document.getElementById(
-        `leaderPoints${i}`
-      );
+        el.textContent =
+          maskPhone(leader.phone);
 
-    const starsEl =
-      document.getElementById(
-        `leaderStars${i}`
-      );
+      });
 
 
-    if (phoneEl) {
+    document
+      .querySelectorAll(`#leaderPoints${i}`)
+      .forEach(el => {
 
-      phoneEl.textContent =
-        maskPhone(leader.phone);
+        el.textContent =
+          Number(leader.points || 0) +
+          " points";
 
-    }
-
-
-    if (pointsEl) {
-
-      pointsEl.textContent =
-        Number(leader.points || 0) +
-        " points";
-
-    }
+      });
 
 
-    if (starsEl) {
+    document
+      .querySelectorAll(`#leaderStars${i}`)
+      .forEach(el => {
 
-      starsEl.innerHTML =
-        getStars(i);
+        el.innerHTML =
+          getStars(i);
 
-    }
+      });
 
   });
 
 }
-
 
 
 //=================
