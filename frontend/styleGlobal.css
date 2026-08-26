@@ -304,7 +304,7 @@ SNACKBAR SECTION
  .card-container .welcome-hero{
   width: 100%;
   max-width: 98%;
-  height: 28.4rem;
+  height: 28rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -555,8 +555,8 @@ SNACKBAR SECTION
  .gb-tagSpot{
   background: var(--card-bg-hover-dark);
   position: absolute;
-  top: 2rem;
-  right: 2.1rem;
+  top: 2.5rem;
+  right: 2.5rem;
   width: 1.8rem;
   height: 1.8rem;
   display: flex;
