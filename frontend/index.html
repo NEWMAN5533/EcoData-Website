@@ -508,6 +508,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
                           <img  src="./css/uiIcons/leader (3).png" alt="">
                       </div>
                       <small class="gb-tagSpot">GB?</small>
+                      <small class="rank-tagSpot">#1</small>
                       <span class="status-card-name" id="leaderPoints1">Points: ---</span>
                   </div>
                  
@@ -521,6 +522,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
                           <img  src="./css/uiIcons/leader (1).png" alt="">
                       </div>
                         <small class="gb-tagSpot">GB?</small>
+                        <small class="rank-tagSpot">#2</small>
                       <span class="status-card-name" id="leaderPoints2">Points: ---</span>
                   </div>
 
@@ -532,6 +534,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
                           <img  src="./css/uiIcons/leader (2).png" alt="">
                       </div>
                        <small class="gb-tagSpot">GB?</small>
+                       <small class="rank-tagSpot">#3</small>
                       <span class="status-card-name" id="leaderPoints3">Points: ---</span>
                   </div>
 
@@ -543,6 +546,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
                           <img  src="./css/icons/personal.png" alt="">
                       </div>
                        <small class="gb-tagSpot">--</small>
+                       <small class="rank-tagSpot">#4</small>
                       <span class="status-card-name" id="leaderPoints4">Points: ---</span>
                   </div>
 
@@ -554,7 +558,56 @@ document.addEventListener("DOMContentLoaded", ()=> {
                            <img src="./css/icons/personal.png" alt="">
                       </div>
                        <small class="gb-tagSpot">--</small>
+                       <small class="rank-tagSpot">#5</small>
                       <span class="status-card-name" id="leaderPoints5">Points: ---</span>
+                  </div>
+
+                  <div class="swiper-slide status-card">
+                      <div class="status-card-bg">
+                         <p id="leaderPhone6">----****--</p>
+                      </div>
+                      <div class="status-card-avatar status-card-avatar-active">
+                           <img src="./css/icons/personal.png" alt="">
+                      </div>
+                       <small class="gb-tagSpot">--</small>
+                       <small class="rank-tagSpot">#6</small>
+                      <span class="status-card-name" id="leaderPoints6">Points: ---</span>
+                  </div>
+
+                  <div class="swiper-slide status-card">
+                      <div class="status-card-bg">
+                         <p id="leaderPhone7">----****--</p>
+                      </div>
+                      <div class="status-card-avatar status-card-avatar-active">
+                           <img src="./css/icons/personal.png" alt="">
+                      </div>
+                       <small class="gb-tagSpot">--</small>
+                       <small class="rank-tagSpot">#7</small>
+                      <span class="status-card-name" id="leaderPoints7">Points: ---</span>
+                  </div>
+
+                  <div class="swiper-slide status-card">
+                      <div class="status-card-bg">
+                         <p id="leaderPhone8">----****--</p>
+                      </div>
+                      <div class="status-card-avatar status-card-avatar-active">
+                           <img src="./css/icons/personal.png" alt="">
+                      </div>
+                       <small class="gb-tagSpot">--</small>
+                       <small class="rank-tagSpot">#8</small>
+                      <span class="status-card-name" id="leaderPoints8">Points: ---</span>
+                  </div>
+
+                  <div class="swiper-slide status-card">
+                      <div class="status-card-bg">
+                         <p id="leaderPhone9">----****--</p>
+                      </div>
+                      <div class="status-card-avatar status-card-avatar-active">
+                           <img src="./css/icons/personal.png" alt="">
+                      </div>
+                       <small class="gb-tagSpot">--</small>
+                       <small class="rank-tagSpot">#9</small>
+                      <span class="status-card-name" id="leaderPoints9">Points: ---</span>
                   </div>
               </div>
           </div>
@@ -5849,51 +5902,32 @@ document.addEventListener("DOMContentLoaded", ()=> {
     }
   })
 
+
+
+
 let topSwiper = new Swiper(".status-swiper", {
-
-  loop: true,
-
-  slidesPerView: 3,
-  slidesPerGroup: 1,
-  spaceBetween: 18,
-
-  centeredSlides: false,
-
+ loop: true,
+  spaceBetween: 12,
   grabCursor: true,
-  allowTouchMove: true,
-
-  speed: 6000,
+  slidesPerView: 'auto',
+  centeredSlides: 'auto',
+  speed: 5000,
 
   autoplay: {
     delay: 0,
     disableOnInteraction: false,
-    pauseOnMouseEnter: true
+    pauseOnMouseEnter: false,
   },
-
+  allowTouchMove: false,
+  freeMode: true,
 
   breakpoints: {
-    0: {
-      slidesPerView: 3,
-      spaceBetween: 12
-    },
-
-    480: {
-      slidesPerView: 3,
-      spaceBetween: 14
-    },
-
-    768: {
-      slidesPerView: 3,
-      spaceBetween: 18
-    },
-
-    1200: {
-      slidesPerView: 3,
-      spaceBetween: 32
+    640: {
+      spaceBetween: 32,
     }
   }
-
 });
+
 
    });
 </script>

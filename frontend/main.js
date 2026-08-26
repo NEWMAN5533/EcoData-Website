@@ -1014,9 +1014,9 @@ function activateTrackers() {
 
 // un activate trackers when no orders
 function unActivateTrackers(){
- const firstTracker = document.getElementById("deliveryTracker1").style.display = "none";
+ const firstTracker = document.getElementById("deliveryTracker1").style.display = "flex";
 
- const secondTracker = document.getElementById("deliveryTracker2").style.display = "none";
+ const secondTracker = document.getElementById("deliveryTracker2").style.display = "flex";
 }
 
 //=================================
@@ -2772,7 +2772,7 @@ function loadLeaderboard() {
             );
 
           })
-          .slice(0, 5);
+          .slice(0, 9);
 
 
       console.log(
@@ -2807,7 +2807,7 @@ function renderLeaderboard(leaders) {
   // CLEAR ALL 5 POSITIONS
   // UPDATE EVERY SWIPER CLONE TOO
   //========================================
-  for (let i = 1; i <= 5; i++) {
+  for (let i = 1; i <= 9; i++) {
 
     document
       .querySelectorAll(`#leaderPhone${i}`)
