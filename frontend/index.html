@@ -463,10 +463,29 @@ document.addEventListener("DOMContentLoaded", ()=> {
         <span class="sk" style="width:140px; height: 28px;">
 
         </span>  
-            <span class="sk" style="width:90px;height:17px;"></span>  
+            <span class="sk" style="width:80px;height:17px; border-radius: .2rem;"></span>  
+      </div>
+
+      <div class="sk-welcome-card-middle">
+        <div class="sk-welcome-card-middle-top">
+           <span class="sk" style="width:80px; height: 14px; border-radius: .2rem;"></span>  
+        </div>
+
+        <div class="sk-welcome-card-middle-middle">
+        <span class="sk" style="width: 80px; height: 120px; border-radius: .8rem;"></span>
+
+        <span class="sk" style="width: 80px; height: 120px; border-radius: .8rem;"></span>
+
+        <span class="sk" style="width: 80px; height: 120px; border-radius: .8rem;"></span>
+        </div>
+        <div class="sk-welcome-card-middle-btom">
+           <span class="sk" style="width: 180px; height: 14px; border-radius: .2rem;"></span>  
+        </div>
+  
       </div>
 
       <div class="sk-welcome-card-bottom">
+        
         <span class="sk" style="width: 100%;height:90%;"></span>  
         
       </div>
@@ -494,7 +513,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
     <!--== HERO MIDDLE GIVEAWAY STATUS ==-->
      <section class="seller-status-bar">
-
+      
           <div class="swiper status-swiper">
             <h1> <img src="./css/uiIcons/gift.png" alt=""> Status</h1>
               <div class="swiper-wrapper">
@@ -610,6 +629,13 @@ document.addEventListener("DOMContentLoaded", ()=> {
                       <span class="status-card-name" id="leaderPoints9">Points: ---</span>
                   </div>
               </div>
+
+              <!--== pagination ==-->
+              <div class="swiper-controls">
+                <div class="swiper-pagination"></div>
+               
+              </div>
+              
           </div>
 
            <div class="leaderboard-start" style="margin-top: .6rem;">
@@ -5906,6 +5932,8 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
 
 let topSwiper = new Swiper(".status-swiper", {
+
+
  loop: true,
   spaceBetween: 12,
   grabCursor: true,
@@ -5913,6 +5941,13 @@ let topSwiper = new Swiper(".status-swiper", {
   centeredSlides: false,
   loopAdditionalSlides: 9,
   speed: 5000,
+
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+  },
+
+ 
 
   autoplay: {
     delay: 0,
