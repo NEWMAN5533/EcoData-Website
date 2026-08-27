@@ -463,31 +463,51 @@ document.addEventListener("DOMContentLoaded", ()=> {
         <span class="sk" style="width:140px; height: 28px;">
 
         </span>  
-            <span class="sk" style="width:80px;height:17px; border-radius: .2rem;"></span>  
+            <span style="display: none;" class="sk" style="width:80px;height:17px; border-radius: .2rem;"></span>  
       </div>
 
       <div class="sk-welcome-card-middle">
         <div class="sk-welcome-card-middle-top">
-           <span class="sk" style="width:80px; height: 14px; border-radius: .2rem;"></span>  
+           <span class="sk" style="width:50px; height: 14px; border-radius: .3rem;"></span>  
         </div>
 
         <div class="sk-welcome-card-middle-middle">
-        <span class="sk" style="width: 80px; height: 120px; border-radius: .8rem;"></span>
+        <span class="sk" style="width: 90px; height: 120px; border-radius: .8rem;"></span>
 
-        <span class="sk" style="width: 80px; height: 120px; border-radius: .8rem;"></span>
+        <span class="sk" style="width: 90px; height: 120px; border-radius: .8rem;"></span>
 
-        <span class="sk" style="width: 80px; height: 120px; border-radius: .8rem;"></span>
+        <span class="sk" style="width: 90px; height: 120px; border-radius: .8rem;"></span>
         </div>
         <div class="sk-welcome-card-middle-btom">
-           <span class="sk" style="width: 180px; height: 14px; border-radius: .2rem;"></span>  
+           <span class="sk" style="width: 210px; height: 14px; border-radius: .2rem;"></span>  
         </div>
   
       </div>
 
       <div class="sk-welcome-card-bottom">
-        
-        <span class="sk" style="width: 100%;height:90%;"></span>  
-        
+        <div class="sk-welcome-card-bottom-left">
+           <span class="sk" style="width:50px; height: 14px; border-radius: .3rem;"></span> 
+            <span class="sk" style="width:90px; height: 14px; border-radius: .3rem;"></span> 
+             <span class="sk" style="width:90px; height: 14px; border-radius: .3rem;"></span> 
+
+              
+               <span class="sk" style="width:110px; height: 24px; border-radius: .3rem; margin-top:.6rem;"></span> 
+        </div>
+        <div class="sk-welcome-card-bottom-right">
+          <div class="sk-welcome-card-bottom-right-top">
+            <span class="sk" style="width:50px; height: 50px; border-radius: .2rem;"></span> 
+
+             <span class="sk" style="width:50px; height: 50px; border-radius: .2rem;"></span> 
+
+              <span class="sk" style="width:50px; height: 50px; border-radius: .2rem;"></span> 
+
+
+          </div>
+
+          <div class="sk-welcome-card-bottom-right-bottom">
+            <span class="sk" style="width:100px; height: 14px; border-radius: .2rem;"></span> 
+          </div>
+        </div>
       </div>
     </div>
       <!-- Animated background particles----->
@@ -632,7 +652,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
               <!--== pagination ==-->
               <div class="swiper-controls">
-                <div class="swiper-pagination"></div>
+                <div class="swiper-pagination" style="display: none;"></div>
                
               </div>
               
@@ -5941,13 +5961,6 @@ let topSwiper = new Swiper(".status-swiper", {
   centeredSlides: false,
   loopAdditionalSlides: 9,
   speed: 5000,
-
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true,
-  },
-
- 
 
   autoplay: {
     delay: 0,
