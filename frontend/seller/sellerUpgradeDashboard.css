@@ -26,17 +26,18 @@
   --transition: all 300ms ease;
 }
 
+
 :root {
   /* ==========================================
      SELLER CREATOR STUDIO — LIGHT THEME
   ========================================== */
 
   /* Main backgrounds */
-  --body-bg: #f7f8fa;
-  --page-bg: #f7f8fa;
-  --sidebar-bg: #ffffff;
-  --surface-bg: #ffffff;
-  --surface-bg-hover: #f5f6f8;
+  --body-bg-light: #f7f8fa;
+  --page-bg-light: #f7f8fa;
+  --sidebar-bg-light: #ffffff;
+  --surface-bg-light: #ffffff;
+  --surface-bg-hover-light: #f5f6f8;
 
   /* Cards */
   --card-bg: #ffffff;
@@ -130,21 +131,21 @@
   ========================================== */
 
   /* Main backgrounds */
-  --body-bg: #0b0d10;
-  --page-bg: #0b0d10;
-  --sidebar-bg: #101318;
-  --surface-bg: #14181e;
-  --surface-bg-hover: #191e25;
+  --body-bg-dark: #0b0d10;
+  --page-bg-dark: #0b0d10;
+  --sidebar-bg-dark: #101318;
+  --surface-bg-dark: #14181e;
+  --surface-bg-hover-dark: #191e25;
 
   /* Cards */
-  --card-bg: #12161c;
-  --card-bg-hover: #171c23;
-  --card-elevated: #181d24;
+  --card-bg-dark: #12161c;
+  --card-bg-hover-dark: #171c23;
+  --card-elevated-dark: #181d24;
 
   /* Borders */
-  --border-color: rgba(255, 255, 255, 0.08);
-  --border-light: rgba(255, 255, 255, 0.055);
-  --border-hover: rgba(255, 255, 255, 0.14);
+  --border-color-dark: rgba(255, 255, 255, 0.08);
+  --border-light-dark: rgba(255, 255, 255, 0.055);
+  --border-hover-dark: rgba(255, 255, 255, 0.14);
 
   /* Text */
   --text-color: #f1f3f5;
@@ -186,9 +187,9 @@
   --input-placeholder: #5f6670;
 
   /* Buttons */
-  --button-bg: #f1f3f5;
-  --button-text: #0b0d10;
-  --button-hover: #ffffff;
+  --button-bg-dark: #f1f3f5;
+  --button-text-dark: #0b0d10;
+  --button-hover-dark: #ffffff;
 
   /* Sidebar */
   --sidebar-border: rgba(255, 255, 255, 0.07);
@@ -220,6 +221,46 @@
   /* General */
   --transition-fast: 0.18s ease;
   --transition-normal: 0.25s ease;
+}
+
+body.dark-mode{
+  --color-white: var(--card-bg-dark) !important;
+
+}
+
+.dark-mode h1,h2,h3{
+  color: var(--button-text);
+  opacity: .8;
+}
+
+.dark-mode p{
+  color: var(--button-text) !important;
+
+}
+
+body.dark-mode::-webkit-scrollbar{
+  background: var(--button-hover);
+}
+
+
+
+body.dark-mode::-webkit-scrollbar-thumb{
+  background: rgb(50, 53, 54);
+  border-radius: 1rem;
+}
+
+
+body.dark-mode::-webkit-scrollbar{
+  background: var(--button-hover);
+}
+
+.dark-mode .sidebar-wrapper2::-webkit-scrollbar{
+  background: var(--button-hover);
+}
+
+.dark-mode .sidebar-wrapper2::-webkit-scrollbar-thumb{
+  background: rgb(50, 53, 54);
+  border-radius: 1rem;
 }
 /* ==========================================
    SELLER PROFILE + FIXED SIDEBAR
@@ -351,6 +392,14 @@
 }
 
 
+.sellerDashboardTitleRow p{
+  color: var(--text-faint) !important;
+}
+
+.dark-mode .sellerDashboardTitleRow p{
+  color: var(--color-light) !important;
+}
+
 .sellerDashboardTitleIcon {
   width: 44px;
   height: 44px;
@@ -404,7 +453,6 @@
 
 .sellerSectionHeading h2 {
   margin: 0;
-
   font-size: 15px;
   font-weight: 700;
 }
@@ -413,7 +461,7 @@
 .sellerSectionHeading p {
   margin: 4px 0 0;
 
-  font-size: 11px;
+  font-size: 12px;
 
   opacity: 0.5;
 }
@@ -447,7 +495,7 @@
 
   border-radius: 16px;
 
-  background: rgba(128, 128, 128, 0.025);
+  background: var(--color-white) !important;
 
   transition:
     transform 0.2s ease,
@@ -461,7 +509,7 @@
   transform: translateY(-2px);
 
   background:
-    rgba(128, 128, 128, 0.045);
+    var(--color-light);
 
   border-color:
     rgba(128, 128, 128, 0.22);
@@ -487,17 +535,24 @@
 
   min-width: 0;
 
-  font-size: 10px;
+  font-size: 12px !important;
 
   font-weight: 600;
 
   opacity: 0.55;
+  color: var(--text-faint);
 
   white-space: nowrap;
 
   overflow: hidden;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
   text-overflow: ellipsis;
+}
+
+.dark-mode .sellerAnalyticsTop > span {
+  color: var(--button-text) !important;
+  opacity: 1 !important;
 }
 
 
@@ -544,11 +599,17 @@
 
   line-height: 1;
 
+  color: var(--text-faint);
+
   font-weight: 750;
 
   letter-spacing: -0.5px;
 }
 
+.dark-mode .sellerAnalyticsBottom strong{
+  color: var(--button-text);
+  opacity: .8;
+}
 
 .sellerAnalyticsBottom span {
 
@@ -659,7 +720,7 @@
   border-radius: 10px;
 
   background:
-    rgba(128, 128, 128, 0.035);
+    var(--color-white);
 }
 
 
@@ -736,7 +797,7 @@
   border-radius: 16px;
 
   background:
-    rgba(128, 128, 128, 0.025);
+    var(--color-white);
 
   transition:
     transform 0.2s ease,
@@ -769,11 +830,17 @@
 
 .salesStatTop span {
 
-  font-size: 10px;
+  font-size: 12px !important;
+  color: var(--text-faint);
 
   font-weight: 600;
 
   opacity: 0.52;
+}
+
+.dark-mode .salesStatTop span {
+  color: var(--button-text) !important;
+  opacity: .8;
 }
 
 
@@ -804,9 +871,16 @@
 
   font-size: 21px;
 
+  color: var(--text-faint) !important;
+
   font-weight: 750;
 
   letter-spacing: -0.4px;
+}
+
+.dark-mode .salesStatCard > strong {
+  color: var(--button-text) !important;
+  opacity: .8;
 }
 
 
@@ -816,12 +890,16 @@
 
   margin-top: 5px;
 
-  font-size: 9px;
+  font-size: 11px;
 
   opacity: 0.42;
 }
 
 
+.dark-mode .salesStatCard > small {
+  color: var(--button-light) !important;
+  opacity: .8;
+}
 /* ==========================================
    CHART CARD
 ========================================== */
@@ -836,9 +914,11 @@
   border-radius: 18px;
 
   background:
-    rgba(128, 128, 128, 0.025);
+    var(--color-white);
 
   overflow: hidden;
+
+  margin: 40px 0;
 }
 
 
@@ -864,9 +944,15 @@
 
   margin: 0;
 
+  color: var(--button-bg) !important;
+
   font-size: 14px;
 
   font-weight: 700;
+}
+
+.dark-mode .salesChartHeader h3{
+  color: var(--color-light) !important;
 }
 
 
@@ -876,9 +962,13 @@
 
   margin-top: 3px;
 
-  font-size: 10px;
+  font-size: 11px;
 
   opacity: 0.45;
+}
+
+.dark-mode .salesChartHeader > div:first-child span {
+  color: var(--color-light);
 }
 
 
@@ -902,7 +992,7 @@
   border-radius: 9px;
 
   background:
-    rgba(128, 128, 128, 0.035);
+    var(--color-white);
 }
 
 
@@ -1192,7 +1282,7 @@
   font-weight: 600;
 
   background:
-    rgba(128, 128, 128, 0.035);
+    var(--color-white);
 
   transition:
     background 0.2s ease,
@@ -1229,7 +1319,7 @@
   border-radius: 18px;
 
   background:
-    rgba(128, 128, 128, 0.025);
+    var(--color-white);
 
   overflow: hidden;
 }
@@ -1280,7 +1370,7 @@
     rgba(128, 128, 128, 0.12);
 
   background:
-    rgba(128, 128, 128, 0.035);
+    var(--color-white);
 }
 
 

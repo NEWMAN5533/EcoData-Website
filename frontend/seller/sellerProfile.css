@@ -56,6 +56,7 @@
   --text-muted: #858c98;
   --text-faint: #aeb4bd;
 
+
   /* Accent */
   --accent-color: #6d4aff;
   --accent-hover: #5d3bea;
@@ -260,13 +261,6 @@ body.dark-mode::-webkit-scrollbar-thumb{
 }
 
 
-body.dark-mode i{
-  color: var(--color-light) !important;
-}
-
-body.dark-mode::-webkit-scrollbar{
-  background: var(--button-hover);
-}
 
 .dark-mode .sidebar-wrapper2::-webkit-scrollbar{
   background: var(--button-hover);

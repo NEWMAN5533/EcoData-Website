@@ -27,7 +27,127 @@
 }
 
 
+:root {
+  /* ==========================================
+     SELLER CREATOR STUDIO — DARK THEME
+  ========================================== */
 
+  /* Main backgrounds */
+  --body-bg-dark: #0b0d10;
+  --page-bg-dark: #0b0d10;
+  --sidebar-bg-dark: #101318;
+  --surface-bg-dark: #14181e;
+  --surface-bg-hover-dark: #191e25;
+
+  /* Cards */
+  --card-bg-dark: #12161c;
+  --card-bg-hover-dark: #171c23;
+  --card-elevated-dark: #181d24;
+
+  /* Borders */
+  --border-color-dark: rgba(255, 255, 255, 0.08);
+  --border-light-dark: rgba(255, 255, 255, 0.055);
+  --border-hover-dark: rgba(255, 255, 255, 0.14);
+
+  /* Text */
+  --text-color: #f1f3f5;
+  --text-primary: #f5f7f9;
+  --text-secondary: #a7adb7;
+  --text-muted: #737b87;
+  --text-faint: #555d68;
+
+  /* Accent */
+  --accent-color: #7c5cff;
+  --accent-hover: #8d70ff;
+  --accent-soft: rgba(124, 92, 255, 0.12);
+  --accent-border: rgba(124, 92, 255, 0.25);
+
+  /* Success */
+  --success-color: #35d49a;
+  --success-soft: rgba(53, 212, 154, 0.10);
+  --success-border: rgba(53, 212, 154, 0.20);
+
+  /* Warning */
+  --warning-color: #f5b84b;
+  --warning-soft: rgba(245, 184, 75, 0.10);
+  --warning-border: rgba(245, 184, 75, 0.20);
+
+  /* Danger */
+  --danger-color: #ff5f6d;
+  --danger-soft: rgba(255, 95, 109, 0.10);
+  --danger-border: rgba(255, 95, 109, 0.20);
+
+  /* Info */
+  --info-color: #55b8ff;
+  --info-soft: rgba(85, 184, 255, 0.10);
+  --info-border: rgba(85, 184, 255, 0.20);
+
+  /* Inputs */
+  --input-bg: #0f1318;
+  --input-border: rgba(255, 255, 255, 0.09);
+  --input-border-focus: rgba(124, 92, 255, 0.55);
+  --input-placeholder: #5f6670;
+
+  /* Buttons */
+  --button-bg-dark: #f1f3f5;
+  --button-text-dark: #0b0d10;
+  --button-hover-dark: #ffffff;
+
+  /* Sidebar */
+  --sidebar-border: rgba(255, 255, 255, 0.07);
+  --sidebar-item-hover: rgba(255, 255, 255, 0.055);
+  --sidebar-item-active: rgba(124, 92, 255, 0.12);
+  --sidebar-item-active-text: #a996ff;
+
+  /* Tables */
+  --table-header-bg: rgba(255, 255, 255, 0.025);
+  --table-row-hover: rgba(255, 255, 255, 0.025);
+  --table-divider: rgba(255, 255, 255, 0.06);
+
+  /* Charts */
+  --chart-grid: rgba(255, 255, 255, 0.06);
+  --chart-text: #777f8b;
+  --chart-tooltip-bg: #171c23;
+
+  /* Shadows */
+  --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.18);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.35);
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+
+  /* General */
+  --transition-fast: 0.18s ease;
+  --transition-normal: 0.25s ease;
+}
+/* =======================
+DARK MODE SETTINGS
+========================*/
+body.dark-mode {
+  --color-white: var(--card-bg-dark) !important;
+  --text-faint: var(--color-light);
+  --text-muted: var(--color-gray-light);
+}
+
+
+/** 
+UTIL
+==*/
+h2{
+  color: var(--text-faint) !important;
+}
+
+
+
+small{
+  color: var(--text-muted);
+  font-size: 12px !important;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
 
 
 /* ==========================================
@@ -232,7 +352,7 @@
 
   border-radius: 10px;
 
-  background: #111;
+  background: var(--surface-bg-dark);
 
   color: #fff;
 
@@ -240,7 +360,7 @@
 
   font-family: inherit;
 
-  font-size: 11px;
+  font-size: 12px;
 
   font-weight: 650;
 
@@ -249,6 +369,11 @@
   transition:
     transform 0.2s ease,
     opacity 0.2s ease;
+}
+
+.dark-mode .sellerAddProductBtn{
+  background: var(--button-bg-dark);
+  color: var(--button-text-dark);
 }
 
 
@@ -294,8 +419,9 @@
 
   border-radius: 16px;
 
+
   background:
-    rgba(128, 128, 128, 0.025);
+    var(--color-white);
 
   transition:
     transform 0.2s ease,
@@ -329,7 +455,7 @@
 .sellerProductStatTop span {
   min-width: 0;
 
-  font-size: 10px;
+  font-size: 12px !important;
 
   font-weight: 600;
 
@@ -338,6 +464,8 @@
   white-space: nowrap;
 
   overflow: hidden;
+
+  color: var(--text-faint);
 
   text-overflow: ellipsis;
 }
@@ -377,6 +505,10 @@
   letter-spacing: -0.5px;
 }
 
+.dark-mode strong{
+  color: var(--color-light);
+}
+
 
 .sellerProductStatCard small {
   display: block;
@@ -412,7 +544,7 @@
   border-radius: 16px;
 
   background:
-    rgba(128, 128, 128, 0.025);
+    var(--color-white);
 }
 
 
@@ -548,6 +680,10 @@
     opacity 0.2s ease;
 }
 
+.dark-mode .sellerProductFilter{
+  background: palegoldenrod;
+}
+
 
 .sellerProductFilter:hover {
   opacity: 0.8;
@@ -556,10 +692,14 @@
     rgba(128, 128, 128, 0.05);
 }
 
+.dark-mode .sellerProductFilter:hover {
+  background: var(--text-secondary);
+
+}
+
 
 .sellerProductFilter.active {
-  background:
-    rgba(128, 128, 128, 0.09);
+  background: var(--text-secondary);
 
   border-color:
     rgba(128, 128, 128, 0.22);
@@ -581,7 +721,7 @@
   border-radius: 18px;
 
   background:
-    rgba(128, 128, 128, 0.025);
+    var(--color-white);
 
   overflow: hidden;
 }
