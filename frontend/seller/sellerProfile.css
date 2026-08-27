@@ -254,8 +254,10 @@
 
 @media (min-width: 768px){
 
+/** LIGHT MODE WITH CURVED CORNER **/
 
 
+/** DARK MODE WITH CURVE CORNER **/
   .dark-mode .sellerProfilePage,
   .dark-mode .sellerEarningsPage,
   .dark-mode .sellerUploadPage,
@@ -269,6 +271,9 @@
     border-top: 1px solid var(--card-bg-hover-dark);
     border-left: 1px solid var(--card-bg-hover-dark);
     border-start-start-radius: 2rem;
+    border-end-end-radius: 2rem;
+    border-end-start-radius: 2rem;
+    border-start-end-radius: 2rem;
     margin-top: .5rem;
     background: var(--body-bg-dark) !important;
   }
