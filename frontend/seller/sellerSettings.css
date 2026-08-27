@@ -253,9 +253,7 @@ h1,h2,
   color: var(--color-gray-light) !important
 }
 
-body.dark-mode i{
-  color: var(--color-light) !important;
-}
+
 
 
 body.dark-mode h1, h2, h3, p{
@@ -602,7 +600,7 @@ body.dark-mode h1, h2, h3, p{
 
   border-radius: 10px;
 
-  background: var(--color-white);
+  background: var(--button-bg);
 
   color: #fff;
 
@@ -610,6 +608,10 @@ body.dark-mode h1, h2, h3, p{
   font-weight: 650;
 
   cursor: pointer;
+}
+
+.dark-mode .sellerSettingsSaveBtn{
+ background: var(--color-white) !important;
 }
 
 

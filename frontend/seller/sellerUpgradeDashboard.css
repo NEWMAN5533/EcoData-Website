@@ -734,7 +734,7 @@ body.dark-mode::-webkit-scrollbar{
 
   border-radius: 7px;
 
-  background: transparent;
+  background: rgba(128, 128, 128, 0.13);
 
   color: inherit;
 
@@ -754,6 +754,12 @@ body.dark-mode::-webkit-scrollbar{
     transform 0.2s ease;
 }
 
+.dark-mode .salesPeriodBtn{
+  
+  color: var(--button-hover);
+  font-size: 10px ;
+}
+
 
 .salesPeriodBtn:hover {
 
@@ -763,10 +769,16 @@ body.dark-mode::-webkit-scrollbar{
 
 .salesPeriodBtn.active {
 
-  background:
-    rgba(128, 128, 128, 0.12);
-
+  background: var(--text-faint);
+  font-size: 11px !important;
   opacity: 1;
+  color: white;
+}
+
+.dark-mode .salesPeriodBtn.active{
+  color: var(--color-light);
+  background:
+    rgb(16, 196, 142);
 }
 
 
@@ -1012,9 +1024,9 @@ body.dark-mode::-webkit-scrollbar{
 
   border-radius: 6px;
 
-  background: transparent;
+  background: var(--color-light);
 
-  color: inherit;
+  color: var(--text-faint);
 
   font-family: inherit;
 
@@ -1041,15 +1053,22 @@ body.dark-mode::-webkit-scrollbar{
 .salesMetricBtn:hover {
 
   opacity: 0.8;
+
 }
 
 
 .salesMetricBtn.active {
 
   background:
-    rgba(128, 128, 128, 0.12);
+    var(--text-faint);
+    color: white;
+    font-size: 11px;
 
   opacity: 1;
+}
+
+.salesMetricBtn.active i{
+  color: rgb(131, 163, 150) !important;
 }
 
 
