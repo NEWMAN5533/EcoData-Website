@@ -243,7 +243,7 @@
 
 .dark-mode .sidebar .creator-studio,
 .dark-mode .sidebarPhone .creator-studio{
-  border-bottom: 1px solid rgb(37, 37, 37);
+  border-bottom: 1px solid var(--card-bg-hover-dark);
   box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
@@ -252,7 +252,27 @@
   border-bottom: 1px solid rgba(226, 226, 226, 226);
 }
 
+@media (min-width: 768px){
 
+
+
+  .dark-mode .sellerProfilePage,
+  .dark-mode .sellerEarningsPage,
+  .dark-mode .sellerUploadPage,
+  .dark-mode .sellerSettingsPage,
+  .dark-mode .sellerDashboardPage,
+  .dark-mode .sellerProductsPage,
+  .dark-mode .sellerSalesPage,
+  .dark-mode .sellerWithdrawalPage,
+  .dark-mode .sellerNotificationsPage,
+  .dark-mode .sellerHelpPage{
+    border-top: 1px solid var(--card-bg-hover-dark);
+    border-left: 1px solid var(--card-bg-hover-dark);
+    border-start-start-radius: 2rem;
+    margin-top: .5rem;
+    background: var(--body-bg-dark) !important;
+  }
+}
 
 .creator-studio .creator-st-left{
   width: 40%;
@@ -447,16 +467,14 @@ body{
   display: grid;
   grid-template-columns: 17rem auto;
   color: var(--color-gray-light);
-  gap: 2rem;
   transition: background 0s ease;
-  min-height: 100vw;
 }
 
 
 /****** DARK MODE ****/
 body.dark-mode,
 .dark-mode .bottom-navbar{
-  background: var(--body-bg-dark) !important;
+  background: var(--sidebar-bg-dark) !important;
   transition: 0s ease !important;
 }
 
@@ -584,8 +602,6 @@ body.dark-mode,
 
     margin-left: 238px !important;
 
-    padding: 30px;
-
   }
 
   .nav-bar{
@@ -620,10 +636,9 @@ body.dark-mode,
 
     margin-left: 250px !important;
 
-    min-width: calc(100vw - 272px) !important;
+   
 
-    padding-left: 35px;
-    padding-right: 35px;
+   
 
     overflow-x: hidden !important;
 
@@ -979,8 +994,13 @@ small{
   width: 100%;
   max-width: 1180px;
   height: max-content;
-  margin-bottom: 5.5rem;
   padding: 34px;
+}
+
+@media screen and (max-width: 768px){
+  .sellerProfilePage{
+    margin-bottom: 5.5rem;
+  }
 }
 
 
