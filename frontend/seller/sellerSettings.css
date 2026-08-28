@@ -610,9 +610,7 @@ body.dark-mode h1, h2, h3, p{
   cursor: pointer;
 }
 
-.dark-mode .sellerSettingsSaveBtn{
- background: var(--color-white) !important;
-}
+
 
 
 
