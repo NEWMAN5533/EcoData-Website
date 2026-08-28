@@ -270,6 +270,7 @@
   .dark-mode .sellerHelpPage{
     border-top: 1px solid var(--card-bg-hover-dark);
     border-left: 1px solid var(--card-bg-hover-dark);
+    border-right: 1px solid var(--card-bg-hover-dark);
     border-start-start-radius: 2rem;
     border-end-end-radius: 2rem;
     border-end-start-radius: 2rem;
@@ -357,7 +358,8 @@
 }
 
 .ri-eye-line,
-.ri-bank-card-line{
+.ri-bank-card-line,
+.ri-bank-card-2-line{
    color: rgb(121, 211, 214);
 }
 
@@ -366,7 +368,8 @@
 }
 
 .ri-user-3-line,
-.ri-time-line{
+.ri-time-line,
+.ri-history-line{
   color: rgb(16, 139, 196);
 }
 
@@ -375,7 +378,8 @@
 }
 
 .ri-mail-line,
-.ri-bar-chart-grouped-line{
+.ri-bar-chart-grouped-line,
+.ri-notification-3-line{
   color: rgb(16, 196, 142);
 }
 
@@ -396,8 +400,13 @@
   color: rgb(16, 100, 196);
 }
 
-.ri-instagram-line{
+.ri-instagram-line,
+.ri-mail-unread-line{
   color: rgb(199, 106, 183);
+}
+
+.notificationUnreadDot{
+  background: rgb(16, 196, 142)!important;
 }
 
 .ri-youtube-line,
