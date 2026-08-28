@@ -379,12 +379,15 @@
 
 .ri-mail-line,
 .ri-bar-chart-grouped-line,
-.ri-notification-3-line{
+.ri-notification-3-line,
+.ri-calendar-line,
+.ri-line-chart-line{
   color: rgb(16, 196, 142);
 }
 
 .ri-phone-line,
-.ri-checkbox-circle-line{
+.ri-checkbox-circle-line,
+.ri-file-list-3-line{
   color: rgb(89, 224, 119);
 }
 
@@ -405,12 +408,13 @@
   color: rgb(199, 106, 183);
 }
 
-.notificationUnreadDot{
+.notificationUnreadDot.activeImg{
   background: rgb(16, 196, 142)!important;
 }
 
 .ri-youtube-line,
-.ri-money-dollar-circle-line{
+.ri-money-dollar-circle-line,
+.ri-money-dollar-box-line{
   color: rgb(196, 58, 16);
 }
 
