@@ -26,7 +26,107 @@
   --transition: all 300ms ease;
 }
 
+:root {
+  /* ==========================================
+     SELLER CREATOR STUDIO — DARK THEME
+  ========================================== */
 
+  /* Main backgrounds */
+  --body-bg-dark: #0b0d10;
+  --page-bg-dark: #0b0d10;
+  --sidebar-bg-dark: #101318;
+  --surface-bg-dark: #14181e;
+  --surface-bg-hover-dark: #191e25;
+
+  /* Cards */
+  --card-bg-dark: #12161c;
+  --card-bg-hover-dark: #171c23;
+  --card-elevated-dark: #181d24;
+
+  /* Borders */
+  --border-color-dark: rgba(255, 255, 255, 0.08);
+  --border-light-dark: rgba(255, 255, 255, 0.055);
+  --border-hover-dark: rgba(255, 255, 255, 0.14);
+
+  /* Text */
+  --text-color: #f1f3f5;
+  --text-primary: #f5f7f9;
+  --text-secondary: #a7adb7;
+  --text-muted: #737b87;
+  --text-faint: #555d68;
+
+  /* Accent */
+  --accent-color: #7c5cff;
+  --accent-hover: #8d70ff;
+  --accent-soft: rgba(124, 92, 255, 0.12);
+  --accent-border: rgba(124, 92, 255, 0.25);
+
+  /* Success */
+  --success-color: #35d49a;
+  --success-soft: rgba(53, 212, 154, 0.10);
+  --success-border: rgba(53, 212, 154, 0.20);
+
+  /* Warning */
+  --warning-color: #f5b84b;
+  --warning-soft: rgba(245, 184, 75, 0.10);
+  --warning-border: rgba(245, 184, 75, 0.20);
+
+  /* Danger */
+  --danger-color: #ff5f6d;
+  --danger-soft: rgba(255, 95, 109, 0.10);
+  --danger-border: rgba(255, 95, 109, 0.20);
+
+  /* Info */
+  --info-color: #55b8ff;
+  --info-soft: rgba(85, 184, 255, 0.10);
+  --info-border: rgba(85, 184, 255, 0.20);
+
+  /* Inputs */
+  --input-bg: #0f1318;
+  --input-border: rgba(255, 255, 255, 0.09);
+  --input-border-focus: rgba(124, 92, 255, 0.55);
+  --input-placeholder: #5f6670;
+
+  /* Buttons */
+  --button-bg-dark: #f1f3f5;
+  --button-text-dark: #0b0d10;
+  --button-hover-dark: #ffffff;
+
+  /* Sidebar */
+  --sidebar-border: rgba(255, 255, 255, 0.07);
+  --sidebar-item-hover: rgba(255, 255, 255, 0.055);
+  --sidebar-item-active: rgba(124, 92, 255, 0.12);
+  --sidebar-item-active-text: #a996ff;
+
+  /* Tables */
+  --table-header-bg: rgba(255, 255, 255, 0.025);
+  --table-row-hover: rgba(255, 255, 255, 0.025);
+  --table-divider: rgba(255, 255, 255, 0.06);
+
+  /* Charts */
+  --chart-grid: rgba(255, 255, 255, 0.06);
+  --chart-text: #777f8b;
+  --chart-tooltip-bg: #171c23;
+
+  /* Shadows */
+  --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.18);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.35);
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+
+  /* General */
+  --transition-fast: 0.18s ease;
+  --transition-normal: 0.25s ease;
+}
+
+body.dark-mode{
+  --color-white: var(--card-bg-dark) !important; 
+}
 
 /* ==========================================
    SELLER PROFILE + FIXED SIDEBAR
@@ -139,10 +239,16 @@
 
   max-width: 1050px;
 
-  margin-bottom: 4.5rem;
+ 
 
   padding: 24px;
 
+}
+
+@media screen and (max-width: 500px) {
+  .sellerNotificationsPage{
+    margin-bottom: 4.5rem;
+  }
 }
 
 
@@ -242,9 +348,9 @@
   border-radius: 10px;
 
   background:
-    rgba(128, 128, 128, 0.035);
+    var(--button-text-dark);
 
-  color: inherit;
+  color: var(--color-white);
 
   font-family: inherit;
 
@@ -253,8 +359,16 @@
   font-weight: 650;
 
   cursor: pointer;
+opacity: .9;
 
 }
+
+.dark-mode .markAllNotificationsBtn{
+  opacity: .8;
+  font-size: 11px;
+}
+
+
 
 
 .markAllNotificationsBtn:hover {
@@ -299,7 +413,7 @@
   border-radius: 15px;
 
   background:
-    rgba(128, 128, 128, 0.025);
+    var(--color-white);
 
 }
 
@@ -419,6 +533,9 @@
   background: transparent;
 
   color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   font-family: inherit;
 
@@ -431,6 +548,11 @@
   cursor: pointer;
   overflow-x: hidden;
 
+}
+
+.dark-mode .notificationFilter{
+  background: var(--surface-bg-hover-dark);
+  color: var(--color-light);
 }
 
 
@@ -448,6 +570,10 @@
 
   color: #fff;
 
+}
+
+.dark-mode .notificationFilter.active{
+  background: var(--accent-hover)
 }
 
 
@@ -513,6 +639,8 @@
 
   gap: 14px;
 
+  background: var(--color-white);
+
   padding: 19px 20px;
 
   border-bottom: 1px solid
@@ -545,6 +673,12 @@
     rgba(128, 128, 128, 0.035);
 
 }
+
+.dark-mode .sellerNotificationItem.unread:hover{
+  background: var(--card-bg-dark);
+}
+
+
 
 
 /* ==========================================
@@ -639,8 +773,15 @@
 
   font-size: 12px;
 
+  color: var(--text-faint) !important;
+
   font-weight: 700;
 
+}
+
+.dark-mode .notificationItemTop h3{
+  color: var(--color-light) !important;
+  opacity: 1;
 }
 
 
