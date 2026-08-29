@@ -304,7 +304,7 @@ SNACKBAR SECTION
  .card-container .welcome-hero{
   width: 100%;
   max-width: 98%;
-  height: 24rem;
+  height: 25.3rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -407,8 +407,11 @@ SNACKBAR SECTION
     height: 55%;
   }
 
-.status-swiper h1{
+.status-swiper .h1{
   display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 2.2rem;
   align-items: center;
   gap: .6rem;
   margin-bottom: .5rem;
@@ -420,11 +423,22 @@ SNACKBAR SECTION
   opacity: .8;
 }
 
-.dark-mode .status-swiper h1{
+.h1 .statt{
+  width: 50%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: .4rem;
+}
+
+
+
+.dark-mode .status-swiper .h1{
   color: var(--primary-cl) !important;
 }
 
-.status-swiper h1 img{
+.status-swiper .h1 img{
   width: 1.2rem;
   height: 1.2rem;
 }
@@ -669,7 +683,72 @@ SNACKBAR SECTION
 }
 
 
+/**
+GIVE AWAY TIMER 
+***/
+.giveawayTimer{
+  display: flex;
+  width: 50%;
+  height: 100%;
+  gap: .6rem !important;
+  align-items: center;
+  justify-content: space-between;
+  white-space: nowrap;
+  padding: .2rem .1rem !important;
+  border-radius: .6rem;
+}
 
+.giveawayClock i{
+ color: rgb(228, 121, 34);
+ font-size: .9rem;
+}
+
+.giveawayTimer .timerCardBox{
+  width: 2rem;
+  height: 2rem;
+
+  border-radius: 4px;
+  border-bottom: 1px solid rgba(226, 226, 226, 226);
+  padding: .3rem 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center !important;
+  line-height: .9;
+  align-items: center;
+  
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.dark-mode .giveawayTimer .timerCardBox{
+  background: transparent !important;
+  border-bottom: 1px solid rgba(232, 232, 232, 232);
+}
+
+.timerCardBox p{
+  font-size: 12px;
+  font-weight: 600;
+  color: #16a34a;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.timerCardBox small{
+  margin-top: 8px;
+  font-size: 10px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: #777;
+}
+
+.dark-mode .timerCardBox small{
+  color: white !important;
+}
+
+#giveawayStatus{
+  margin-top: 18px;
+  text-align: center;
+  font-weight: 600;
+  color: #16a34a;
+}
 
 
 
