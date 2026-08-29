@@ -636,7 +636,47 @@ SNACKBAR SECTION
   font-weight: 600;
 }
 
+/** SWIPER PAGINATION **/
+.status-swiper{
+  position: relative;
+  padding-bottom: 36px;
+}
 
+.swiper-controls{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 0 12px;
+}
+
+.swiper-pagination{
+  position: static !important;
+  width: auto;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  margin-top: .5rem;
+  gap: 6px;
+}
+
+.swiper-pagination-bullet{
+  margin: 0 !important;
+}
+
+
+
+.leaderboard-start span{
+  color: var(--text-cl-3);
+}
+
+ .dark-mode .leaderboard-start span{
+  color: rgba(226, 226, 226, 226) !important;
+}
 
 
    /**==============================
