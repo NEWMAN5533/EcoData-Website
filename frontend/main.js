@@ -49,6 +49,9 @@ const endTimeText = LEADERBOARD_ENDS.toLocaleDateString("en-US", {
     year: "numeric"
 });
 
+
+
+
 //=========================
 // LEADERBOARD START DATE
 //=========================
@@ -2774,6 +2777,11 @@ function loadLeaderboard() {
           })
           .slice(0, 9);
 
+          const topThree =
+          leaders.slice(0, 3);
+
+          updateWinnerCelebration(topThree);
+
 
       console.log(
         "🏆 Competition Leaders",
@@ -2798,6 +2806,9 @@ function loadLeaderboard() {
   );
 
 }
+
+
+
 //===========================
 // RENDER LEADERS
 //===========================
@@ -2909,3 +2920,895 @@ loadLeaderboard();
 //TIME
 document.getElementById("leaderboardStartText").textContent =
 `Free GB GIVEAWAY: ${leaderboardStartText} - ${endTimeText}`;
+
+
+//========================================
+// AUTOMATIC CELEBRATION CHECK
+//========================================
+
+
+
+
+
+//========================================
+// UPDATE CELEBRATION WINNERS
+//========================================
+
+function updateWinnerCelebration(
+    leaders
+) {
+
+    const topThree =
+        leaders.slice(0, 3);
+
+
+    for (
+        let i = 1;
+        i <= 3;
+        i++
+    ) {
+
+        const winner =
+            topThree[i - 1];
+
+
+        const phoneElement =
+            document.getElementById(
+                `celebrationWinner${i}`
+            );
+
+
+        const pointsElement =
+            document.getElementById(
+                `celebrationPoints${i}`
+            );
+
+
+        if (!winner) {
+
+            if (phoneElement) {
+                phoneElement.textContent =
+                    "---";
+            }
+
+            if (pointsElement) {
+                pointsElement.textContent =
+                    "0 points";
+            }
+
+            continue;
+
+        }
+
+
+        if (phoneElement) {
+
+            phoneElement.textContent =
+                maskPhone(
+                    winner.phone
+                );
+
+        }
+
+
+        if (pointsElement) {
+
+            pointsElement.textContent =
+                Number(winner.points || 0) +
+                " points";
+
+        }
+
+    }
+
+}
+
+
+
+
+//========================================
+// ACTUAL GIVEAWAY DATES
+//========================================
+
+const GIVEAWAY_END_DATE =
+    new Date("2026-08-31T23:59:59");
+
+const CELEBRATION_START =
+    new Date("2026-09-01T00:00:00");
+
+const CELEBRATION_END =
+    new Date("2026-09-01T23:59:59");
+
+
+//========================================
+// GIVEAWAY CELEBRATION DATE
+//========================================
+
+let celebrationDismissed = false;
+
+document.addEventListener("DOMContentLoaded", ()=> {
+ //========================================
+// WINNER CELEBRATION SYSTEM
+//========================================
+
+const winnerCelebration =
+    document.getElementById(
+        "winnerCelebration"
+    );
+
+const fireworksCanvas =
+    document.getElementById(
+        "fireworksCanvas"
+    );
+
+const confettiCanvas =
+    document.getElementById(
+        "confettiCanvas"
+    );
+
+const winnerCloseBtn =
+    document.getElementById(
+        "winnerCloseBtn"
+    );
+
+
+const fireworksCtx =
+    fireworksCanvas.getContext("2d");
+
+const confettiCtx =
+    confettiCanvas.getContext("2d");
+
+
+//========================================
+// CANVAS SIZE
+//========================================
+
+function resizeCelebrationCanvas() {
+
+    fireworksCanvas.width =
+        window.innerWidth;
+
+    fireworksCanvas.height =
+        window.innerHeight;
+
+
+    confettiCanvas.width =
+        window.innerWidth;
+
+    confettiCanvas.height =
+        window.innerHeight;
+
+}
+
+
+resizeCelebrationCanvas();
+
+
+window.addEventListener(
+    "resize",
+    resizeCelebrationCanvas
+);
+
+
+//========================================
+// FIREWORK PARTICLES
+//========================================
+
+let fireworks = [];
+
+let fireworkRockets = [];
+
+
+function createFirework(
+    x,
+    y
+) {
+
+    const particleCount =
+        70 + Math.floor(
+            Math.random() * 50
+        );
+
+
+    for (
+        let i = 0;
+        i < particleCount;
+        i++
+    ) {
+
+        const angle =
+            Math.random() *
+            Math.PI *
+            2;
+
+
+        const speed =
+            2 +
+            Math.random() * 5;
+
+
+        fireworks.push({
+
+            x,
+            y,
+
+            vx:
+                Math.cos(angle) *
+                speed,
+
+            vy:
+                Math.sin(angle) *
+                speed,
+
+            life:
+                1,
+
+            decay:
+                .012 +
+                Math.random() * .018,
+
+            size:
+                1 +
+                Math.random() * 2.5,
+
+            hue:
+                Math.floor(
+                    Math.random() * 360
+                )
+
+        });
+
+    }
+
+}
+
+
+//========================================
+// FIREWORK ROCKET
+//========================================
+
+function launchFirework() {
+
+    fireworkRockets.push({
+
+        x:
+            Math.random() *
+            fireworksCanvas.width,
+
+        y:
+            fireworksCanvas.height,
+
+        targetY:
+            100 +
+            Math.random() *
+            (
+                fireworksCanvas.height *
+                .45
+            ),
+
+        speed:
+            7 +
+            Math.random() * 4
+
+    });
+
+}
+
+
+//========================================
+// UPDATE FIREWORKS
+//========================================
+
+function updateFireworks() {
+
+    fireworksCtx.clearRect(
+        0,
+        0,
+        fireworksCanvas.width,
+        fireworksCanvas.height
+    );
+
+
+    //=============================
+    // ROCKETS
+    //=============================
+
+    for (
+        let i =
+            fireworkRockets.length - 1;
+
+        i >= 0;
+
+        i--
+    ) {
+
+        const rocket =
+            fireworkRockets[i];
+
+
+        rocket.y -=
+            rocket.speed;
+
+
+        // Rocket glow
+
+        fireworksCtx.beginPath();
+
+        fireworksCtx.arc(
+            rocket.x,
+            rocket.y,
+            3,
+            0,
+            Math.PI * 2
+        );
+
+        fireworksCtx.fillStyle =
+            "#ffffff";
+
+        fireworksCtx.shadowBlur =
+            15;
+
+        fireworksCtx.shadowColor =
+            "#ffffff";
+
+        fireworksCtx.fill();
+
+        fireworksCtx.shadowBlur = 0;
+
+
+        // Explosion
+
+        if (
+            rocket.y <=
+            rocket.targetY
+        ) {
+
+            createFirework(
+                rocket.x,
+                rocket.y
+            );
+
+            fireworkRockets.splice(
+                i,
+                1
+            );
+
+        }
+
+    }
+
+
+    //=============================
+    // PARTICLES
+    //=============================
+
+    for (
+        let i =
+            fireworks.length - 1;
+
+        i >= 0;
+
+        i--
+    ) {
+
+        const particle =
+            fireworks[i];
+
+
+        particle.x +=
+            particle.vx;
+
+        particle.y +=
+            particle.vy;
+
+
+        // Gravity
+
+        particle.vy +=
+            .045;
+
+
+        particle.vx *=
+            .985;
+
+
+        particle.life -=
+            particle.decay;
+
+
+        if (
+            particle.life <= 0
+        ) {
+
+            fireworks.splice(
+                i,
+                1
+            );
+
+            continue;
+
+        }
+
+
+        fireworksCtx.beginPath();
+
+
+        fireworksCtx.arc(
+            particle.x,
+            particle.y,
+            particle.size,
+            0,
+            Math.PI * 2
+        );
+
+
+        fireworksCtx.fillStyle =
+            `hsla(
+                ${particle.hue},
+                100%,
+                65%,
+                ${particle.life}
+            )`;
+
+
+        fireworksCtx.shadowBlur =
+            12;
+
+        fireworksCtx.shadowColor =
+            `hsl(
+                ${particle.hue},
+                100%,
+                60%
+            )`;
+
+
+        fireworksCtx.fill();
+
+        fireworksCtx.shadowBlur =
+            0;
+
+    }
+
+}
+
+
+//========================================
+// CONFETTI
+//========================================
+
+let confetti = [];
+
+
+function createConfetti() {
+
+    confetti = [];
+
+
+    const amount =
+        Math.min(
+            180,
+            Math.floor(
+                window.innerWidth / 5
+            )
+        );
+
+
+    for (
+        let i = 0;
+        i < amount;
+        i++
+    ) {
+
+        confetti.push({
+
+            x:
+                Math.random() *
+                confettiCanvas.width,
+
+            y:
+                -Math.random() *
+                confettiCanvas.height,
+
+            width:
+                5 +
+                Math.random() * 7,
+
+            height:
+                8 +
+                Math.random() * 12,
+
+            speed:
+                1 +
+                Math.random() * 3,
+
+            rotation:
+                Math.random() *
+                Math.PI *
+                2,
+
+            rotationSpeed:
+                -.08 +
+                Math.random() *
+                .16,
+
+            drift:
+                -.5 +
+                Math.random(),
+
+            hue:
+                Math.floor(
+                    Math.random() * 360
+                )
+
+        });
+
+    }
+
+}
+
+
+//========================================
+// UPDATE CONFETTI
+//========================================
+
+function updateConfetti() {
+
+    confettiCtx.clearRect(
+        0,
+        0,
+        confettiCanvas.width,
+        confettiCanvas.height
+    );
+
+
+    confetti.forEach(
+        piece => {
+
+            piece.y +=
+                piece.speed;
+
+            piece.x +=
+                Math.sin(
+                    piece.y * .02
+                ) *
+                piece.drift;
+
+            piece.rotation +=
+                piece.rotationSpeed;
+
+
+            if (
+                piece.y >
+                confettiCanvas.height
+            ) {
+
+                piece.y = -20;
+
+                piece.x =
+                    Math.random() *
+                    confettiCanvas.width;
+
+            }
+
+
+            confettiCtx.save();
+
+
+            confettiCtx.translate(
+                piece.x,
+                piece.y
+            );
+
+
+            confettiCtx.rotate(
+                piece.rotation
+            );
+
+
+            confettiCtx.fillStyle =
+                `hsl(
+                    ${piece.hue},
+                    90%,
+                    55%
+                )`;
+
+
+            confettiCtx.fillRect(
+                -piece.width / 2,
+                -piece.height / 2,
+                piece.width,
+                piece.height
+            );
+
+
+            confettiCtx.restore();
+
+        }
+    );
+
+}
+
+
+//========================================
+// ANIMATION LOOP
+//========================================
+
+let celebrationAnimation;
+
+
+function celebrationLoop() {
+
+    updateFireworks();
+
+    updateConfetti();
+
+    celebrationAnimation =
+        requestAnimationFrame(
+            celebrationLoop
+        );
+
+}
+
+
+//========================================
+// START CELEBRATION
+//========================================
+
+//========================================
+// START CELEBRATION
+//========================================
+
+let fireworkInterval = null;
+
+function startWinnerCelebration() {
+
+
+
+
+    if (!winnerCelebration) {
+        return;
+    }
+
+    if(celebrationDismissed) return;
+
+
+    // Already running
+    if (
+        winnerCelebration.classList.contains(
+            "active"
+        )
+    ) {
+        return;
+    }
+
+
+    // Show celebration
+  winnerCelebration.style.display= "flex";
+
+    winnerCelebration.classList.add(
+        "active"
+    );
+
+
+    // Reset particles
+
+    fireworks = [];
+
+    fireworkRockets = [];
+
+
+    // Create confetti
+
+    createConfetti();
+
+
+    // Start animation
+
+    cancelAnimationFrame(
+        celebrationAnimation
+    );
+
+    celebrationLoop();
+
+
+    // First firework
+
+    launchFirework();
+
+
+    // Prevent duplicate intervals
+
+    clearInterval(
+        fireworkInterval
+    );
+
+
+    // Continuous fireworks
+
+    fireworkInterval =
+        setInterval(() => {
+
+            if (
+                !winnerCelebration.classList.contains(
+                    "active"
+                )
+            ) {
+
+                clearInterval(
+                    fireworkInterval
+                );
+
+                fireworkInterval = null;
+
+                return;
+            }
+
+
+            launchFirework();
+
+
+            if (
+                Math.random() > 0.55
+            ) {
+
+                setTimeout(
+                    launchFirework,
+                    250
+                );
+
+            }
+
+        }, 700);
+
+}
+
+
+//========================================
+// CLOSE CELEBRATION
+//========================================
+
+function closeWinnerCelebration() {
+
+    // Hide the entire container
+    winnerCelebration.style.display = "none";
+
+    // Stop fireworks
+    clearInterval(fireworkInterval);
+    fireworkInterval = null;
+
+    // Stop animation
+    cancelAnimationFrame(
+        celebrationAnimation
+    );
+
+    // Clear animation data
+    fireworks = [];
+    fireworkRockets = [];
+    confetti = [];
+
+    // Clear canvases
+    fireworksCtx.clearRect(
+        0,
+        0,
+        fireworksCanvas.width,
+        fireworksCanvas.height
+    );
+
+    confettiCtx.clearRect(
+        0,
+        0,
+        confettiCanvas.width,
+        confettiCanvas.height
+    );
+}
+
+
+//========================================
+// STOP CELEBRATION
+//========================================
+
+function stopWinnerCelebration() {
+
+    if (!winnerCelebration) {
+        return;
+    }
+
+
+    winnerCelebration.classList.remove(
+        "active"
+    );
+
+
+    // Stop fireworks interval
+
+    clearInterval(
+        fireworkInterval
+    );
+
+    fireworkInterval = null;
+
+
+    // Stop animation loop
+
+    cancelAnimationFrame(
+        celebrationAnimation
+    );
+
+
+    // Clear particles
+
+    fireworks = [];
+
+    fireworkRockets = [];
+
+    confetti = [];
+
+
+    // Clear canvas
+
+    fireworksCtx.clearRect(
+        0,
+        0,
+        fireworksCanvas.width,
+        fireworksCanvas.height
+    );
+
+
+    confettiCtx.clearRect(
+        0,
+        0,
+        confettiCanvas.width,
+        confettiCanvas.height
+    );
+
+}
+
+
+if (winnerCloseBtn) {
+
+    winnerCloseBtn.addEventListener(
+        "click",
+        closeWinnerCelebration
+    );
+
+}
+
+
+
+//========================================
+// CHECK CELEBRATION TIME
+//========================================
+
+function checkGiveawayCelebration() {
+
+    const now =
+        new Date();
+
+
+    if (
+        now >= CELEBRATION_START &&
+        now <= CELEBRATION_END
+    ) {
+
+        startWinnerCelebration();
+
+    } else {
+
+        stopWinnerCelebration();
+
+    }
+
+}
+
+
+checkGiveawayCelebration();
+
+setInterval(
+    checkGiveawayCelebration,
+    1000
+);
+
+})
+
+
+

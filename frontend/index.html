@@ -547,7 +547,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
         <div class="timerCardBox">
           <p id="giveawayDays">00</p>
-          <small>D</small>
+          <small>Days</small>
         </div>
 
         <div class="timerCardBox">
@@ -579,7 +579,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
                       <div class="status-card-avatar status-card-avatar-active">
                           <img  src="./css/uiIcons/leader (3).png" alt="">
                       </div>
-                      <small class="gb-tagSpot">GB?</small>
+                      <small class="gb-tagSpot">3GB</small>
                       <small class="rank-tagSpot">#1</small>
                       <span class="status-card-name" id="leaderPoints1">Points: ---</span>
                   </div>
@@ -593,7 +593,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
                       <div class="status-card-avatar status-card-avatar-active">
                           <img  src="./css/uiIcons/leader (1).png" alt="">
                       </div>
-                        <small class="gb-tagSpot">GB?</small>
+                        <small class="gb-tagSpot">2GB</small>
                         <small class="rank-tagSpot">#2</small>
                       <span class="status-card-name" id="leaderPoints2">Points: ---</span>
                   </div>
@@ -605,7 +605,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
                       <div class="status-card-avatar status-card-avatar-active">
                           <img  src="./css/uiIcons/leader (2).png" alt="">
                       </div>
-                       <small class="gb-tagSpot">GB?</small>
+                       <small class="gb-tagSpot">1GB</small>
                        <small class="rank-tagSpot">#3</small>
                       <span class="status-card-name" id="leaderPoints3">Points: ---</span>
                   </div>
@@ -697,6 +697,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
     
     </div>
+
       </section>
 
 
@@ -760,6 +761,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
     </div>
 
 
+  
   </section>
 
 
@@ -5685,6 +5687,130 @@ document.addEventListener("DOMContentLoaded", ()=> {
     </a>
   </div>
 
+  
+    <!--================================
+    WINNER CELEBRATION
+=================================-->
+<!--================================
+    GIVEAWAY WINNER CELEBRATION
+=================================-->
+
+<div id="winnerCelebration" class="winnerCelebration">
+
+    <!-- Fireworks -->
+    <canvas id="fireworksCanvas"></canvas>
+
+    <!-- Confetti -->
+    <canvas id="confettiCanvas"></canvas>
+
+
+    <!-- Celebration Content -->
+    <div class="winnerCelebrationContent">
+
+        <div class="winnerTitle">
+            🎉 Congratulations! 🎉
+        </div>
+
+
+        <p class="winnerSubtitle">
+            Congratulations to our
+            <strong>Top 3 Winners!</strong>
+        </p>
+
+
+        <p class="winnerDescription">
+            Thank you to everyone who participated
+            in this month's giveaway.
+        </p>
+
+
+        <!-- TOP 3 -->
+        <div class="topThreeWinners">
+
+            <!-- 1ST -->
+            <div class="winnerRow firstWinner">
+
+                <div class="winnerRank">
+                    🥇
+                </div>
+
+                <div class="winnerInfo">
+
+                    <strong id="celebrationWinner1">
+                        --- 
+                    </strong>
+
+                    <small id="celebrationPoints1">
+                        0 points
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- 2ND -->
+            <div class="winnerRow">
+
+                <div class="winnerRank">
+                    🥈
+                </div>
+
+                <div class="winnerInfo">
+
+                    <strong id="celebrationWinner2">
+                        ---
+                    </strong>
+
+                    <small id="celebrationPoints2">
+                        0 points
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- 3RD -->
+            <div class="winnerRow">
+
+                <div class="winnerRank">
+                    🥉
+                </div>
+
+                <div class="winnerInfo">
+
+                    <strong id="celebrationWinner3">
+                        ---
+                    </strong>
+
+                    <small id="celebrationPoints3">
+                        0 points
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="winnerThanks">
+            🎊 Well done to all our participants!
+        </div>
+
+
+        <button
+            type="button"
+            id="winnerCloseBtn"
+            class="winnerCloseBtn"
+        >
+            Continue
+        </button>
+
+    </div>
+
+</div>
 
 
 
@@ -6028,6 +6154,7 @@ updateGiveawayCountdown();
 const giveawayTimer =
 setInterval(updateGiveawayCountdown, 1000);
 })
+
 
 
 
