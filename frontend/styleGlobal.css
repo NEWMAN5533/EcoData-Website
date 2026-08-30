@@ -751,7 +751,525 @@ GIVE AWAY TIMER
 }
 
 
+/**===============
+ CELEBRATE WINNERS
+ ===============**/
+/*================================
+  WINNER CELEBRATION
+================================*/
 
+.winnerCelebration {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 9999999999999999999999999;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(5, 35, 65, .72),
+            rgba(0, 0, 0, .94)
+        );
+
+    backdrop-filter: blur(3px);
+
+}
+
+
+.winnerCelebration.active {
+
+    display: flex;
+
+    animation:
+        celebrationFadeIn
+        .5s ease forwards;
+
+}
+
+
+/*================================
+  CANVAS
+================================*/
+
+#fireworksCanvas,
+#confettiCanvas {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+
+}
+
+#fireworksCanvas {
+    z-index: 1;
+}
+
+#confettiCanvas {
+    z-index: 2;
+}
+
+
+/*================================
+  CONTENT
+================================*/
+
+.winnerCelebrationContent {
+
+    position: relative;
+
+    z-index: 999999999999;
+
+    width: min(
+        92%,
+        450px
+    );
+
+    padding: 28px 20px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #092d58,
+            #03162d
+        );
+
+    border: 3px solid #f6c400;
+
+    box-shadow:
+
+        0 0 0 3px
+        rgba(255, 204, 0, .12),
+
+        0 0 35px
+        rgba(255, 196, 0, .45),
+
+        0 25px 70px
+        rgba(0, 0, 0, .8);
+
+    transform: scale(.5);
+
+    opacity: 0;
+}
+
+
+/* POP */
+
+.winnerCelebration.active
+.winnerCelebrationContent {
+
+    animation:
+        winnerPanelPop
+        .7s
+        cubic-bezier(
+            .175,
+            .885,
+            .32,
+            1.275
+        )
+        forwards;
+
+}
+
+
+/*================================
+  TITLE
+================================*/
+
+.winnerTitle {
+
+    padding: 15px 10px;
+
+    margin-bottom: 10px;
+
+    border-radius: 12px;
+
+    color: #ffd000;
+
+    font-size: clamp(
+        25px,
+        7vw,
+        38px
+    );
+
+    font-weight: 900;
+
+    text-shadow:
+        2px 2px 0 #765000,
+        0 0 12px
+        rgba(255, 220, 0, .7);
+
+    animation:
+        titleGlow
+        1.5s
+        ease-in-out
+        infinite;
+
+}
+
+
+/*================================
+  SUBTITLE
+================================*/
+
+.winnerSubtitle {
+
+    margin: 0;
+
+    color: white;
+
+    font-size: 20px;
+
+    font-weight: 500;
+
+}
+
+
+.winnerSubtitle strong {
+
+    color: #ffd000;
+
+}
+
+
+/*================================
+  DESCRIPTION
+================================*/
+
+.winnerDescription {
+
+    margin: 10px 0 22px;
+
+    color: rgba(255,255,255,.72);
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+}
+
+
+/*================================
+  TOP THREE
+================================*/
+
+.topThreeWinners {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+}
+
+
+/*================================
+  WINNER ROW
+================================*/
+
+.winnerRow {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 12px 14px;
+
+    border-radius: 13px;
+
+    background:
+        rgba(255,255,255,.08);
+
+    border: 1px solid
+        rgba(255,255,255,.08);
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,0,0,.25);
+
+    transform: translateX(-30px);
+
+    opacity: 0;
+
+}
+
+
+.winnerCelebration.active
+.winnerRow {
+
+    animation:
+        winnerRowIn
+        .5s
+        ease
+        forwards;
+
+}
+
+
+.winnerCelebration.active
+.winnerRow:nth-child(1) {
+
+    animation-delay: .45s;
+
+}
+
+
+.winnerCelebration.active
+.winnerRow:nth-child(2) {
+
+    animation-delay: .6s;
+
+}
+
+
+.winnerCelebration.active
+.winnerRow:nth-child(3) {
+
+    animation-delay: .75s;
+
+}
+
+
+/* FIRST PLACE */
+
+.firstWinner {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,196,0,.22),
+            rgba(255,196,0,.08)
+        );
+
+    border-color:
+        rgba(255,210,0,.45);
+
+}
+
+
+/*================================
+  RANK
+================================*/
+
+.winnerRank {
+
+    width: 42px;
+
+    flex-shrink: 0;
+
+    font-size: 29px;
+
+}
+
+
+/*================================
+  WINNER INFO
+================================*/
+
+.winnerInfo {
+
+    flex: 1;
+
+    text-align: left;
+
+}
+
+
+.winnerInfo strong {
+
+    display: block;
+
+    color: white;
+
+    font-size: 17px;
+
+}
+
+
+.winnerInfo small {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: #ffd000;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+}
+
+
+/*================================
+  THANK YOU
+================================*/
+
+.winnerThanks {
+
+    margin-top: 20px;
+
+    color: white;
+
+    font-size: 14px;
+
+}
+
+
+/*================================
+  BUTTON
+================================*/
+
+.winnerCloseBtn {
+
+    margin-top: 20px;
+
+    padding: 11px 30px;
+
+    border: none;
+
+    border-radius: 25px;
+
+    cursor: pointer;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    background:
+        linear-gradient(
+            135deg,
+            #22c94b,
+            #0a9d30
+        );
+
+    box-shadow:
+        0 6px 18px
+        rgba(0,0,0,.35);
+
+}
+
+
+/*================================
+  ANIMATIONS
+================================*/
+
+@keyframes celebrationFadeIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
+}
+
+
+@keyframes winnerPanelPop {
+
+    0% {
+
+        transform:
+            scale(.5)
+            rotate(-4deg);
+
+        opacity: 0;
+
+    }
+
+    70% {
+
+        transform:
+            scale(1.04)
+            rotate(1deg);
+
+        opacity: 1;
+
+    }
+
+    100% {
+
+        transform:
+            scale(1)
+            rotate(0);
+
+        opacity: 1;
+
+    }
+
+}
+
+
+@keyframes winnerRowIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateX(-30px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateX(0);
+
+    }
+
+}
+
+
+@keyframes titleGlow {
+
+    0%,
+    100% {
+
+        filter:
+            brightness(1);
+
+    }
+
+    50% {
+
+        filter:
+            brightness(1.35);
+
+    }
+
+}
    /**==============================
       GIVE AWAY STATUS ENDS
       ==========================***/
