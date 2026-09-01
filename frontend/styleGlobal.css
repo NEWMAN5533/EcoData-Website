@@ -829,9 +829,7 @@ GIVE AWAY TIMER
 ================================*/
 
 .winnerCelebrationContent {
-
-    position: absolute;
-    bottom: 0;
+
 
     z-index: 999999999999;
 
@@ -839,8 +837,7 @@ GIVE AWAY TIMER
         92%,
         450px
     );
-
-    height: 88%;
+
 
     padding: 14px !important;
 
