@@ -476,22 +476,22 @@ document.addEventListener("click", () => {
       };
 
   
-     //  const feeToPay = (selectedBundle.price * 1.0195).toFixed(2);
-      // const onlyFee = (feeToPay - selectedBundle.price).toFixed(2);
-      // <span class="fee-badge">Fee: ${onlyFee}</span>
+       const feeToPay = (selectedBundle.price * 1.0195).toFixed(2);
+       const onlyFee = (feeToPay - selectedBundle.price).toFixed(2);
+      
 
       // Update button UI
       optionBtn.innerHTML = `
      
         ${opt.querySelector("span").textContent}
         <span class="price-badge">GHS ${selectedBundle.price}</span>
-       
+        <span class="fee-badge">Fee: ${onlyFee}</span>
         <span><img src="./css/icons/more.png.png"></span>
       `;
 
     
         // NORMAL VIEW PAYSTACK FEE REMOVED
-        // const priceWithFees = selectedBundle.price * 1.0195.toFixed(2);
+         const priceWithFees = selectedBundle.price * 1.0195.toFixed(2);
 
       // Update selectedModal placeholders
       const img = document.querySelector(".spanImgContent img");
@@ -501,13 +501,13 @@ document.addEventListener("click", () => {
       if (gbHolder) gbHolder.textContent = `${opt.querySelector("span").textContent}`;
 
 
-    //  const totalAmountContent = document.getElementById("totalAmountText");
-    //  if(totalAmountContent) totalAmountContent.textContent = 
-    //  "TotalAmount:";
+      const totalAmountContent = document.getElementById("totalAmountText");
+      if(totalAmountContent) totalAmountContent.textContent = 
+     "TotalAmount:";
 
-    //  const priceHolder = document.getElementById("placeHolderPriceTotal");
+      const priceHolder = document.getElementById("placeHolderPriceTotal");
 
-    //  if (priceHolder) priceHolder.textContent = `GHS₵${priceWithFees.toFixed(2)}`;
+      if (priceHolder) priceHolder.textContent = `GHS₵${priceWithFees.toFixed(2)}`;
 
       const networkHolder = document.getElementById("networkTextContent");
       if (networkHolder) networkHolder.textContent = selectedBundle.network.toUpperCase();
@@ -674,9 +674,9 @@ lastValidation = validation;
 
            
 
-         //   const priceWithFee = (bundle.price * 1.0195).toFixed(2);
+            const priceWithFee = (bundle.price * 1.0195).toFixed(2);
 
-          //  const priceFee = (priceWithFee - bundle.price).toFixed(2);
+            const priceFee = (priceWithFee - bundle.price).toFixed(2);
 
           // Update modal preview
           document.getElementById("priceTag").textContent =
@@ -691,10 +691,10 @@ lastValidation = validation;
           `${bundle.dataValue.toUpperCase()}`;
 
           // PAYSTACK CHARGE FEE REMOVED
-         // document.getElementById("amount").textContent = 
-        // `GHS₵ ${priceWithFee}`;
+          document.getElementById("amount").textContent = 
+        `GHS₵ ${priceWithFee}`;
 
-        //  document.getElementById("priceWithFee").textContent = `GHS₵ $ {priceFee}`;
+          document.getElementById("priceWithFee").textContent = `GHS₵ ${priceFee}`;
 
 
 
@@ -1056,7 +1056,7 @@ if(!lastValidation?.eligible){
 
   const { network, packageName, size, price } = bundle;
 
-  // const payWithFee = Number((bundle.price * 1.0195).toFixed(2));
+   const payWithFee = Number((bundle.price * 1.0195).toFixed(2));
 
 
 
@@ -1075,7 +1075,7 @@ if(!lastValidation?.eligible){
     paystack.newTransaction({
       key: "pk_live_635856447ee14b583349141b7271f64c9b969749",
       email: userEmail,
-      amount: price * 100,
+      amount: payWithFee * 100,
       currency: "GHS",
 
 
@@ -1184,7 +1184,7 @@ const orderData = {
 
   dataValue: `${(bundle.dataValue || selectedBundle.dataValue || 0)}`,
 
-  amount: Number(bundle.price || 0),
+  amount: Number(bundle.price * 1.0195 || 0),
 
   status: "pending",
 
