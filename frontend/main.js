@@ -35,8 +35,8 @@ const API_BASE = (() => {
 //=========================
 // LEADERBOARD START DATE
 //=========================
-const LEADERBOARD_START = new Date("2026-08-01");
-const LEADERBOARD_ENDS = new Date("2026-08-31T23:59:59");
+const LEADERBOARD_START = new Date("2026-09-01");
+const LEADERBOARD_ENDS = new Date("2026-09-30T23:59:59");
 
 const leaderboardStartText = LEADERBOARD_START.toLocaleDateString("en-US", {
     month: "short",
@@ -1017,9 +1017,9 @@ function activateTrackers() {
 
 // un activate trackers when no orders
 function unActivateTrackers(){
- const firstTracker = document.getElementById("deliveryTracker1").style.display = "flex";
+ const firstTracker = document.getElementById("deliveryTracker1").style.display = "none";
 
- const secondTracker = document.getElementById("deliveryTracker2").style.display = "flex";
+ const secondTracker = document.getElementById("deliveryTracker2").style.display = "none";
 }
 
 //=================================
@@ -2549,6 +2549,123 @@ airtelScrollBtn.addEventListener("click", () => {
 
 
 
+//========================================
+// ADD ORDER TO LEADERBOARD
+//========================================
+
+function addOrderToLeaderboard(customers, order) {
+
+    const phone =
+        String(order.recipient || "").trim();
+
+    if (!phone) return;
+
+
+    //========================================
+    // CREATE CUSTOMER
+    //========================================
+
+    if (!customers[phone]) {
+
+        customers[phone] = {
+
+            phone,
+
+            totalGB: 0,
+
+            totalOrders: 0,
+
+            totalSpent: 0,
+
+            points: 0,
+
+            manualOverride: false,
+
+            manualPoints: null,
+
+            manualUpdatedAt: 0
+
+        };
+
+    }
+
+
+    const customer =
+        customers[phone];
+
+
+    //========================================
+    // ORDER DATA
+    //========================================
+
+    const gb =
+        Number(order.volume || 0);
+
+    const amount =
+        Number(order.amount || 0);
+
+
+    customer.totalGB += gb;
+
+    customer.totalOrders++;
+
+    customer.totalSpent += amount;
+
+
+    //========================================
+    // CHECK MANUAL POINTS
+    //========================================
+
+    const hasManualPoints =
+        order.manualPoints !== undefined &&
+        order.manualPoints !== null;
+
+
+    if (hasManualPoints) {
+
+        const manualValue =
+            Number(order.manualPoints);
+
+
+        //====================================
+        // MANUAL UPDATE TIME
+        //====================================
+
+        const manualTime =
+            order.manualUpdatedAt?.toDate
+                ? order.manualUpdatedAt
+                    .toDate()
+                    .getTime()
+                : new Date(
+                    order.manualUpdatedAt || 0
+                  ).getTime();
+
+
+        //====================================
+        // NEWEST MANUAL ASSIGNMENT WINS
+        //====================================
+
+        if (
+            !customer.manualOverride ||
+            manualTime >
+            customer.manualUpdatedAt
+        ) {
+
+            customer.manualOverride = true;
+
+            customer.manualPoints =
+                manualValue;
+
+            customer.manualUpdatedAt =
+                manualTime;
+
+        }
+
+    }
+
+}
+
+
 
 
 //===================
@@ -2565,6 +2682,7 @@ function loadLeaderboard() {
   // NO ORDERBY
   // NO FIRESTORE INDEX REQUIRED
   //========================================
+
   const q =
     query(collection(db, "orders"));
 
@@ -2573,12 +2691,59 @@ function loadLeaderboard() {
     q,
     (snapshot) => {
 
-      const customers = {};
+      //========================================
+      // CURRENT + PREVIOUS MONTH CUSTOMERS
+      //========================================
+
+     
+
+      const currentCustomers = {};
+
+      const previousCustomers = {};
 
 
       //========================================
-      // READ ALL ORDERS
+      // CURRENT DATE
       //========================================
+
+      const now = new Date();
+
+
+      //========================================
+      // PREVIOUS MONTH START
+      //========================================
+
+      const previousMonthStart =
+        new Date(
+          now.getFullYear(),
+          now.getMonth() - 1,
+          1,
+          0,
+          0,
+          0,
+          0
+        );
+
+
+      //========================================
+      // PREVIOUS MONTH END
+      //========================================
+
+      const previousMonthEnd =
+        new Date(
+          now.getFullYear(),
+          now.getMonth(),
+          0,
+          23,
+          59,
+          59,
+          999
+        );
+
+      //========================================
+      // READ ALL ORDERS ONCE
+      //========================================
+
       snapshot.forEach(doc => {
 
         const order = doc.data();
@@ -2587,6 +2752,7 @@ function loadLeaderboard() {
         //========================================
         // IGNORE FAILED / CANCELLED
         //========================================
+
         const status =
           String(order.status || "")
             .toLowerCase();
@@ -2601,8 +2767,9 @@ function loadLeaderboard() {
 
 
         //========================================
-        // CHECK COMPETITION DATE
+        // ORDER DATE
         //========================================
+
         const orderDate =
           order.createdAt?.toDate
             ? order.createdAt.toDate()
@@ -2610,9 +2777,7 @@ function loadLeaderboard() {
 
 
         if (
-          isNaN(orderDate.getTime()) ||
-          orderDate < LEADERBOARD_START ||
-          orderDate > LEADERBOARD_ENDS
+          isNaN(orderDate.getTime())
         ) {
           return;
         }
@@ -2621,175 +2786,109 @@ function loadLeaderboard() {
         //========================================
         // CUSTOMER PHONE
         //========================================
+
         const phone =
-          String(order.recipient || "").trim();
+          String(
+            order.recipient || ""
+          ).trim();
 
 
         if (!phone) return;
 
 
         //========================================
-        // CREATE CUSTOMER
+        // PREVIOUS MONTH
         //========================================
-        if (!customers[phone]) {
 
-          customers[phone] = {
+        if (
+          orderDate >= previousMonthStart &&
+          orderDate <= previousMonthEnd
+        ) {
 
-            phone,
-
-            totalGB: 0,
-
-            totalOrders: 0,
-
-            points: 0,
-
-            manualOverride: false,
-
-            manualPoints: null,
-
-            manualUpdatedAt: 0
-
-          };
+          addOrderToLeaderboard(
+            previousCustomers,
+            order
+          );
 
         }
 
 
-        const customer =
-          customers[phone];
-
-
         //========================================
-        // NORMAL ORDER DATA
+        // CURRENT GIVEAWAY
         //========================================
-        const gb =
-          Number(order.volume || 0);
 
+        if (
+          orderDate >= LEADERBOARD_START &&
+          orderDate <= LEADERBOARD_ENDS
+        ) {
 
-        customer.totalGB += gb;
-
-        customer.totalOrders++;
-
-
-        //========================================
-        // CHECK MANUAL POINTS
-        //========================================
-        const hasManualPoints =
-          order.manualPoints !== undefined &&
-          order.manualPoints !== null;
-
-
-        if (hasManualPoints) {
-
-          const manualValue =
-            Number(order.manualPoints);
-
-
-          //====================================
-          // GET MANUAL UPDATE TIME
-          //====================================
-          const manualTime =
-            order.manualUpdatedAt?.toDate
-              ? order.manualUpdatedAt.toDate().getTime()
-              : new Date(
-                  order.manualUpdatedAt || 0
-                ).getTime();
-
-
-          //====================================
-          // ONLY NEWEST MANUAL ASSIGNMENT WINS
-          //====================================
-          if (
-            !customer.manualOverride ||
-            manualTime >
-            customer.manualUpdatedAt
-          ) {
-
-            customer.manualOverride = true;
-
-            customer.manualPoints =
-              manualValue;
-
-            customer.manualUpdatedAt =
-              manualTime;
-
-          }
+          addOrderToLeaderboard(
+            currentCustomers,
+            order
+          );
 
         }
 
       });
 
 
+      finalizeLeaderboardPoints(currentCustomers);
+
+      finalizeLeaderboardPoints(previousCustomers);
+
       //========================================
-      // FINALIZE CUSTOMER POINTS
+      // SORT CURRENT MONTH
       //========================================
-      Object.values(customers)
-        .forEach(customer => {
 
-          if (customer.manualOverride) {
-
-            //==============================
-            // ADMIN MANUAL POINTS WIN
-            //==============================
-            customer.points =
-              customer.manualPoints;
-
-          } else {
-
-            //==============================
-            // NORMAL CALCULATION
-            // 1GB = 6 POINTS
-            //==============================
-            customer.points =
-              customer.totalGB * 6;
-
-          }
-
-        });
+      const currentLeaders =
+        Object.values(currentCustomers)
+          .sort(sortLeaderboard)
+          .slice(0, 9);
 
 
       //========================================
-      // SORT IN JAVASCRIPT
+      // SORT PREVIOUS MONTH
       //========================================
-      const leaders =
-        Object.values(customers)
-          .sort((a, b) => {
 
-            // Highest points first
-            if (
-              b.points !== a.points
-            ) {
-
-              return (
-                b.points -
-                a.points
-              );
-
-            }
-
-
-            // Tie breaker:
-            // Highest GB first
-            return (
-              b.totalGB -
-              a.totalGB
-            );
-
-          })
+      const previousWinners =
+        Object.values(previousCustomers)
+          .sort(sortLeaderboard)
           .slice(0, 3);
 
-          const topThree =
-          leaders.slice(0, 3);
 
-          updateWinnerCelebration(topThree);
+      //========================================
+      // UPDATE NORMAL LEADERBOARD
+      //========================================
 
-
-      console.log(
-        "🏆 Competition Leaders",
-        leaders
+      renderLeaderboard(
+        currentLeaders
       );
 
 
-      renderLeaderboard(leaders);
+      //========================================
+      // UPDATE CELEBRATION
+      // WITH LAST MONTH'S TOP 3
+      //========================================
+
+      updateWinnerCelebration(
+        previousWinners
+      );
+
+
+      //========================================
+      // DEBUG
+      //========================================
+
+      console.log(
+        "🏆 Current Month Leaders:",
+        currentLeaders
+      );
+
+
+      console.log(
+        "🎉 Previous Month Winners:",
+        previousWinners
+      );
 
     },
 
@@ -2803,6 +2902,60 @@ function loadLeaderboard() {
 
     }
 
+  );
+
+}
+
+
+
+//=========================
+// FINALIZE POINTS
+//=========================
+function finalizeLeaderboardPoints(customers){
+
+Object.values(customers).forEach(customer => {
+if (customer.manualOverride){
+// Admin-assigned points
+customer.points =
+customer.manualPoints;
+
+} else{
+// Normal calculation
+// 1GB = 6 POINTS
+customer.points =
+customer.totalGB * 6;
+}
+
+
+});
+}
+
+//========================================
+// SORT LEADERBOARD
+//========================================
+
+function sortLeaderboard(a, b) {
+
+  // Highest points first
+
+  if (
+    b.points !== a.points
+  ) {
+
+    return (
+      b.points -
+      a.points
+    );
+
+  }
+
+
+  // Tie breaker:
+  // Highest GB first
+
+  return (
+    b.totalGB -
+    a.totalGB
   );
 
 }
@@ -2916,10 +3069,39 @@ function getStars(rank){
 
 }
 
+
 loadLeaderboard();
-//TIME
-document.getElementById("leaderboardStartText").textContent =
-`Free GB GIVEAWAY: ${leaderboardStartText} - ${endTimeText}`;
+resetGiveAwayHtml();
+
+// RESET GIVEAWAY TIMER HTML
+function resetGiveAwayHtml(){
+  //TIME
+const defaultHtml = document.getElementById("leaderboardStartText");
+
+const leaderboardResetText = document.getElementById("leaderboardResetText");
+
+
+
+if(!defaultHtml) return;
+
+
+const now = new
+Date();
+
+
+// Competition has ended
+if(now >= LEADERBOARD_ENDS){
+
+  defaultHtml.textContent = 
+  `Free GB GIVEAWAY: ${leaderboardStartText} - ${endTimeText} ends.`
+} else {
+  defaultHtml.textContent =
+  `Free GB GIVEAWAY: ${leaderboardStartText} - ${endTimeText}`
+}
+
+return;
+}
+
 
 
 //========================================
@@ -2934,72 +3116,100 @@ document.getElementById("leaderboardStartText").textContent =
 // UPDATE CELEBRATION WINNERS
 //========================================
 
-function updateWinnerCelebration(
-    leaders
-) {
+//========================================
+// UPDATE WINNER CELEBRATION
+// LAST MONTH'S TOP 3
+//========================================
 
-    const topThree =
-        leaders.slice(0, 3);
+function updateWinnerCelebration(winners) {
 
-
-    for (
-        let i = 1;
-        i <= 3;
-        i++
-    ) {
-
-        const winner =
-            topThree[i - 1];
+  if (!Array.isArray(winners)) {
+    return;
+  }
 
 
-        const phoneElement =
-            document.getElementById(
-                `celebrationWinner${i}`
-            );
+  //========================================
+  // TOP 3 ONLY
+  //========================================
+
+  const topThree =
+    winners.slice(0, 3);
 
 
-        const pointsElement =
-            document.getElementById(
-                `celebrationPoints${i}`
-            );
+  for (
+    let i = 1;
+    i <= 3;
+    i++
+  ) {
+
+    const winner =
+      topThree[i - 1];
 
 
-        if (!winner) {
-
-            if (phoneElement) {
-                phoneElement.textContent =
-                    "---";
-            }
-
-            if (pointsElement) {
-                pointsElement.textContent =
-                    "0 points";
-            }
-
-            continue;
-
-        }
+    const phoneElement =
+      document.getElementById(
+        `celebrationWinner${i}`
+      );
 
 
-        if (phoneElement) {
-
-            phoneElement.textContent =
-                maskPhone(
-                    winner.phone
-                );
-
-        }
+    const pointsElement =
+      document.getElementById(
+        `celebrationPoints${i}`
+      );
 
 
-        if (pointsElement) {
+    //======================================
+    // NO WINNER
+    //======================================
 
-            pointsElement.textContent =
-                Number(winner.points || 0) +
-                " points";
+    if (!winner) {
 
-        }
+      if (phoneElement) {
+        phoneElement.textContent = "---";
+      }
+
+      if (pointsElement) {
+        pointsElement.textContent = "---";
+      }
+
+      continue;
+    }
+
+
+    //======================================
+    // PHONE
+    //======================================
+
+    if (phoneElement) {
+
+      phoneElement.textContent =
+        maskPhone(
+          winner.phone
+        );
 
     }
+
+
+    //======================================
+    // POINTS
+    //======================================
+
+    if (pointsElement) {
+
+      pointsElement.textContent =
+        Number(
+          winner.points || 0
+        ) + " points";
+
+    }
+
+  }
+
+
+  console.log(
+    "🎉 Celebration Top 3:",
+    topThree
+  );
 
 }
 
@@ -3017,7 +3227,7 @@ const CELEBRATION_START =
     new Date("2026-09-01T00:00:00");
 
 const CELEBRATION_END =
-    new Date("2026-09-01T23:59:59");
+    new Date("2026-09-02T23:59:59");
 
 
 //========================================
@@ -3550,26 +3760,105 @@ function celebrationLoop() {
 }
 
 
-//========================================
-// START CELEBRATION
-//========================================
 
 //========================================
-// START CELEBRATION
+// WINNER CELEBRATION
 //========================================
 
 let fireworkInterval = null;
 
+
+
+//========================================
+// UPDATE WINNER INFORMATION
+//========================================
+
+function updateWinnerCelebration(winners) {
+
+    if (!Array.isArray(winners)) {
+        return;
+    }
+
+
+    const topThree =
+        winners.slice(0, 3);
+
+
+    topThree.forEach((winner, index) => {
+
+        const rank =
+            index + 1;
+
+
+        const phoneElement =
+            document.getElementById(
+                `celebrationWinner${rank}`
+            );
+
+
+        const pointsElement =
+            document.getElementById(
+                `celebrationPoints${rank}`
+            );
+
+
+        if (!winner) {
+
+            if (phoneElement) {
+                phoneElement.textContent = "---";
+            }
+
+            if (pointsElement) {
+                pointsElement.textContent = "---";
+            }
+
+            return;
+        }
+
+
+        if (phoneElement) {
+
+            phoneElement.textContent =
+                maskPhone(
+                    winner.phone
+                );
+
+        }
+
+
+        if (pointsElement) {
+
+            pointsElement.textContent =
+                `${Number(winner.points || 0)} points`;
+
+        }
+
+    });
+
+
+    console.log(
+        "🎉 Last Month Top 3:",
+        topThree
+    );
+
+}
+
+
+//========================================
+// START CELEBRATION
+//========================================
+
 function startWinnerCelebration() {
-
-
-
 
     if (!winnerCelebration) {
         return;
     }
 
-    if(celebrationDismissed) return;
+
+    // User already closed it
+    if (celebrationDismissed) {
+        return;
+    }
 
 
     // Already running
@@ -3582,48 +3871,53 @@ function startWinnerCelebration() {
     }
 
 
-    // Show celebration
-  winnerCelebration.style.display= "flex";
+    //========================================
+    // SHOW WHOLE CONTAINER
+    //========================================
+
+    winnerCelebration.style.display =
+        "flex";
+
 
     winnerCelebration.classList.add(
         "active"
     );
 
 
-    // Reset particles
+    //========================================
+    // RESET ANIMATION
+    //========================================
 
     fireworks = [];
 
     fireworkRockets = [];
 
-
-    // Create confetti
-
     createConfetti();
 
-
-    // Start animation
 
     cancelAnimationFrame(
         celebrationAnimation
     );
 
+
     celebrationLoop();
 
 
-    // First firework
+    //========================================
+    // FIRST FIREWORK
+    //========================================
 
     launchFirework();
 
 
-    // Prevent duplicate intervals
+    //========================================
+    // FIREWORK INTERVAL
+    //========================================
 
     clearInterval(
         fireworkInterval
     );
 
-
-    // Continuous fireworks
 
     fireworkInterval =
         setInterval(() => {
@@ -3647,6 +3941,8 @@ function startWinnerCelebration() {
             launchFirework();
 
 
+            // Sometimes launch two
+
             if (
                 Math.random() > 0.55
             ) {
@@ -3665,53 +3961,21 @@ function startWinnerCelebration() {
 
 //========================================
 // CLOSE CELEBRATION
+// USER CAN PURCHASE DATA
 //========================================
 
 function closeWinnerCelebration() {
 
-    // Hide the entire container
-    winnerCelebration.style.display = "none";
-
-    // Stop fireworks
-    clearInterval(fireworkInterval);
-    fireworkInterval = null;
-
-    // Stop animation
-    cancelAnimationFrame(
-        celebrationAnimation
-    );
-
-    // Clear animation data
-    fireworks = [];
-    fireworkRockets = [];
-    confetti = [];
-
-    // Clear canvases
-    fireworksCtx.clearRect(
-        0,
-        0,
-        fireworksCanvas.width,
-        fireworksCanvas.height
-    );
-
-    confettiCtx.clearRect(
-        0,
-        0,
-        confettiCanvas.width,
-        confettiCanvas.height
-    );
-}
+    // Prevent automatic reopening
+    celebrationDismissed = true;
 
 
-//========================================
-// STOP CELEBRATION
-//========================================
+    //========================================
+    // HIDE WHOLE CONTAINER
+    //========================================
 
-function stopWinnerCelebration() {
-
-    if (!winnerCelebration) {
-        return;
-    }
+    winnerCelebration.style.display =
+        "none";
 
 
     winnerCelebration.classList.remove(
@@ -3719,7 +3983,9 @@ function stopWinnerCelebration() {
     );
 
 
-    // Stop fireworks interval
+    //========================================
+    // STOP FIREWORKS
+    //========================================
 
     clearInterval(
         fireworkInterval
@@ -3728,14 +3994,18 @@ function stopWinnerCelebration() {
     fireworkInterval = null;
 
 
-    // Stop animation loop
+    //========================================
+    // STOP ANIMATION
+    //========================================
 
     cancelAnimationFrame(
         celebrationAnimation
     );
 
 
-    // Clear particles
+    //========================================
+    // CLEAR PARTICLES
+    //========================================
 
     fireworks = [];
 
@@ -3744,7 +4014,9 @@ function stopWinnerCelebration() {
     confetti = [];
 
 
-    // Clear canvas
+    //========================================
+    // CLEAR CANVASES
+    //========================================
 
     fireworksCtx.clearRect(
         0,
@@ -3774,6 +4046,82 @@ if (winnerCloseBtn) {
 }
 
 
+//========================================
+// STOP CELEBRATION
+//========================================
+
+function stopWinnerCelebration() {
+
+    if (!winnerCelebration) {
+        return;
+    }
+
+
+    //========================================
+    // HIDE WHOLE CONTAINER
+    //========================================
+
+    winnerCelebration.style.display =
+        "none";
+
+
+    winnerCelebration.classList.remove(
+        "active"
+    );
+
+
+    //========================================
+    // STOP FIREWORKS
+    //========================================
+
+    clearInterval(
+        fireworkInterval
+    );
+
+    fireworkInterval = null;
+
+
+    //========================================
+    // STOP ANIMATION
+    //========================================
+
+    cancelAnimationFrame(
+        celebrationAnimation
+    );
+
+
+    //========================================
+    // CLEAR PARTICLES
+    //========================================
+
+    fireworks = [];
+
+    fireworkRockets = [];
+
+    confetti = [];
+
+
+    //========================================
+    // CLEAR CANVASES
+    //========================================
+
+    fireworksCtx.clearRect(
+        0,
+        0,
+        fireworksCanvas.width,
+        fireworksCanvas.height
+    );
+
+
+    confettiCtx.clearRect(
+        0,
+        0,
+        confettiCanvas.width,
+        confettiCanvas.height
+    );
+
+}
+
 
 //========================================
 // CHECK CELEBRATION TIME
@@ -3792,7 +4140,8 @@ function checkGiveawayCelebration() {
 
         startWinnerCelebration();
 
-    } else {
+    }
+    else {
 
         stopWinnerCelebration();
 
@@ -3801,14 +4150,21 @@ function checkGiveawayCelebration() {
 }
 
 
+//========================================
+// INITIAL CHECK
+//========================================
+
 checkGiveawayCelebration();
+
+
+//========================================
+// CHECK EVERY SECOND
+//========================================
 
 setInterval(
     checkGiveawayCelebration,
     1000
 );
 
-})
 
-
-
+});

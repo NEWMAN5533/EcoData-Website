@@ -215,7 +215,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
               </div>
 
               <div class="tag">
-                <small>New</small>
+                <small></small>
               </div>
               
             </div> 
@@ -579,7 +579,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
                       <div class="status-card-avatar status-card-avatar-active">
                           <img  src="./css/uiIcons/leader (3).png" alt="">
                       </div>
-                      <small class="gb-tagSpot">3GB</small>
+                      <small class="gb-tagSpot">--</small>
                       <small class="rank-tagSpot">#1</small>
                       <span class="status-card-name" id="leaderPoints1">Points: ---</span>
                   </div>
@@ -593,7 +593,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
                       <div class="status-card-avatar status-card-avatar-active">
                           <img  src="./css/uiIcons/leader (1).png" alt="">
                       </div>
-                        <small class="gb-tagSpot">2GB</small>
+                        <small class="gb-tagSpot">--</small>
                         <small class="rank-tagSpot">#2</small>
                       <span class="status-card-name" id="leaderPoints2">Points: ---</span>
                   </div>
@@ -605,12 +605,12 @@ document.addEventListener("DOMContentLoaded", ()=> {
                       <div class="status-card-avatar status-card-avatar-active">
                           <img  src="./css/uiIcons/leader (2).png" alt="">
                       </div>
-                       <small class="gb-tagSpot">1GB</small>
+                       <small class="gb-tagSpot">--</small>
                        <small class="rank-tagSpot">#3</small>
                       <span class="status-card-name" id="leaderPoints3">Points: ---</span>
                   </div>
 
-                  <div class="swiper-slide status-card" style="display:none">
+                  <div class="swiper-slide status-card">
                       <div class="status-card-bg">
                          <p id="leaderPhone4">----****--</p>
                       </div>
@@ -622,7 +622,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
                       <span class="status-card-name" id="leaderPoints4">Points: ---</span>
                   </div>
 
-                  <div class="swiper-slide status-card" style="display:none">
+                  <div class="swiper-slide status-card">
                       <div class="status-card-bg">
                          <p id="leaderPhone5">----****--</p>
                       </div>
@@ -634,7 +634,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
                       <span class="status-card-name" id="leaderPoints5">Points: ---</span>
                   </div>
 
-                  <div class="swiper-slide status-card" style="display:none">
+                  <div class="swiper-slide status-card">
                       <div class="status-card-bg">
                          <p id="leaderPhone6">----****--</p>
                       </div>
@@ -646,7 +646,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
                       <span class="status-card-name" id="leaderPoints6">Points: ---</span>
                   </div>
 
-                  <div class="swiper-slide status-card" style="display:none">
+                  <div class="swiper-slide status-card">
                       <div class="status-card-bg">
                          <p id="leaderPhone7">----****--</p>
                       </div>
@@ -658,7 +658,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
                       <span class="status-card-name" id="leaderPoints7">Points: ---</span>
                   </div>
 
-                  <div class="swiper-slide status-card" style="display:none">
+                  <div class="swiper-slide status-card">
                       <div class="status-card-bg">
                          <p id="leaderPhone8">----****--</p>
                       </div>
@@ -670,7 +670,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
                       <span class="status-card-name" id="leaderPoints8">Points: ---</span>
                   </div>
 
-                  <div class="swiper-slide status-card" style="display:none">
+                  <div class="swiper-slide status-card">
                       <div class="status-card-bg">
                          <p id="leaderPhone9">----****--</p>
                       </div>
@@ -694,6 +694,8 @@ document.addEventListener("DOMContentLoaded", ()=> {
     <div class="leaderboard-start" style="margin-top: .6rem;">
       <i class="ri-calendar-event-line"></i>
       <span id="leaderboardStartText" style="font-size: .65rem; opacity:0.5;"></span>
+
+       <span style="display: none;" id="leaderboardResetText" style="font-size: .65rem; opacity:0.5;"></span>
 
     
     </div>
@@ -5714,6 +5716,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
         <p class="winnerSubtitle">
             Congratulations to our
+            Last Month
             <strong>Top 3 Winners!</strong>
         </p>
 
@@ -6055,9 +6058,6 @@ document.addEventListener("DOMContentLoaded", ()=> {
  <!-- Load Paystack library -->
   <script src="https://js.paystack.co/v2/inline.js"></script>
 
-
-  
-
 <script type="module" src="./firebase-config.js"></script>
 
 <script type="module" src="main.js"></script>
@@ -6085,8 +6085,9 @@ document.addEventListener("DOMContentLoaded", ()=> {
 document.addEventListener("DOMContentLoaded", ()=> {
 
 // GIVEAWAY TIMER 
+const GIVEAWAY_TIMER_START = new Date("2026-09-01T23:59:59");
+const GIVEAWAY_TIMER_ENDS = new Date("2026-09-30T23:59:59");
 
-const GIVEAWAY_END = new Date("2026-08-31T23:59:59");
 
 const giveawayDays = 
 document.getElementById("giveawayDays");
@@ -6109,7 +6110,7 @@ function updateGiveawayCountdown(){
   const now = new Date();
 
   const remaining =
-  GIVEAWAY_END - now;
+ GIVEAWAY_TIMER_ENDS - now;
 
   if(remaining <= 0){
   
@@ -6225,7 +6226,7 @@ let topSwiper = new Swiper(".status-swiper", {
   grabCursor: true,
   slidesPerView: 'auto',
   centeredSlides: false,
-  loopAdditionalSlides: 3,
+  loopAdditionalSlides: 9,
   speed: 5000,
 
   autoplay: {
