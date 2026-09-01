@@ -1,3 +1,8 @@
+
+// GIVEAWAY TIMER 
+const GIVEAWAY_TIMER_START = new Date("2026-09-01T23:59:59");
+const GIVEAWAY_TIMER_ENDS = new Date("2026-09-30T23:59:59");
+
 // CUSTOM CURSOR JS
   document.addEventListener("DOMContentLoaded", () => {
 
@@ -11,6 +16,103 @@ if(shoppingBtn){
   showSnackBar(" ✅ Coming up soon for sellers and buyers. You can Buy Data bundle, and register AFA. Thank You", "success", 5000);
 }
 });
+
+
+
+
+
+
+// GIVE AWAY JS
+const giveawayDays = 
+document.getElementById("giveawayDays");
+
+const giveawayHours =
+document.getElementById("giveawayHours");
+
+const giveawayMinutes = 
+document.getElementById("giveawayMinutes");
+
+const giveawaySeconds =
+document.getElementById("giveawaySeconds");
+
+const giveawayStatus =
+document.getElementById("giveawayStatus");
+
+
+function updateGiveawayCountdown(){
+
+  const now = new Date();
+
+  const remaining =
+ GIVEAWAY_TIMER_ENDS - now;
+
+  if(remaining <= 0){
+  
+    giveawayDays.textContent = "00";
+    giveawayHours.textContent = "00";
+    giveawayMinutes.textContent = "00";
+
+
+    giveawayStatus.textContent = 
+    "GIVEAWAY ENDED";
+
+    clearInterval(giveawayTimer);
+
+    return;
+  }
+
+  const days = 
+  Math.floor(
+    remaining / (1000 * 60 * 60 * 24)
+  );
+
+  const hours =
+  Math.floor(
+    (remaining % (1000 * 60 * 60 * 24)
+  ) / ( 1000 * 60 * 60)
+);
+
+ const minutes =
+ Math.floor(
+  (remaining % (1000 * 60 * 60)) / (1000 * 60)
+ );
+
+
+
+
+
+
+ 
+ giveawayDays.textContent = 
+ String(days).padStart(2, "0");
+
+  giveawayHours.textContent = 
+ String(hours).padStart(2, "0");
+
+  giveawayMinutes.textContent = 
+ String(minutes).padStart(2, "0");
+
+
+}
+
+
+
+updateGiveawayCountdown();
+
+const giveawayTimer =
+setInterval(updateGiveawayCountdown, 1000);
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

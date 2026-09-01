@@ -426,7 +426,40 @@
      <section class="seller-status-bar">
       
           <div class="swiper status-swiper">
-            <h1> <img src="./css/uiIcons/gift.png" alt=""> Status</h1>
+           <div class="h1">
+              <div class="statt">
+                <img src="./css/uiIcons/gift.png" alt=""> Status
+              </div>
+      <!--===============-
+      GIVEAWAY COUNTING
+      =================-->
+
+      <div class="giveawayTimer">
+
+        <div class="timerCardBox">
+          <p id="giveawayDays">00</p>
+          <small>Days</small>
+        </div>
+
+        <div class="timerCardBox">
+          <p id="giveawayHours">00</p>
+          <small>Hrs</small>
+        </div>
+
+        <div class="timerCardBox">
+          <p id="giveawayMinutes">00</p>
+          <small>Mins</small>
+        </div>
+
+        <div class="timerCardBox" style="border-bottom: none !important;">
+          <p class="giveawayClock">
+            <i class="ri-time-line"></i>
+          </p>
+          <small>Ends-In</small>
+        </div>
+      </div>
+      <p id="giveawayStatus" style="display: none;"></p>
+            </div>
               <div class="swiper-wrapper">
 
                   <!-- "All Sellers" item -->
@@ -1492,6 +1525,11 @@ let topSwiper = new Swiper(".status-swiper", {
 
    });
 </script>
+
+
+
+
+
 
 
 <!---HIDE MULTIPLE DIV--->

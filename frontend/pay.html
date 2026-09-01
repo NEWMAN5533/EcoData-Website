@@ -417,11 +417,45 @@
     </div>
   </div>
 
+  
     <!--== HERO MIDDLE GIVEAWAY STATUS ==-->
      <section class="seller-status-bar">
       
           <div class="swiper status-swiper">
-            <h1> <img src="./css/uiIcons/gift.png" alt=""> Status</h1>
+            <div class="h1">
+              <div class="statt">
+                <img src="./css/uiIcons/gift.png" alt=""> Status
+              </div>
+      <!--===============-
+      GIVEAWAY COUNTING
+      =================-->
+
+      <div class="giveawayTimer">
+
+        <div class="timerCardBox">
+          <p id="giveawayDays">00</p>
+          <small>Days</small>
+        </div>
+
+        <div class="timerCardBox">
+          <p id="giveawayHours">00</p>
+          <small>Hrs</small>
+        </div>
+
+        <div class="timerCardBox">
+          <p id="giveawayMinutes">00</p>
+          <small>Mins</small>
+        </div>
+
+        <div class="timerCardBox" style="border-bottom: none !important;">
+          <p class="giveawayClock">
+            <i class="ri-time-line"></i>
+          </p>
+          <small>Ends-In</small>
+        </div>
+      </div>
+      <p id="giveawayStatus" style="display: none;"></p>
+            </div>
               <div class="swiper-wrapper">
 
                   <!-- "All Sellers" item -->
@@ -432,7 +466,7 @@
                       <div class="status-card-avatar status-card-avatar-active">
                           <img  src="./css/uiIcons/leader (3).png" alt="">
                       </div>
-                      <small class="gb-tagSpot">GB?</small>
+                      <small class="gb-tagSpot">--</small>
                       <small class="rank-tagSpot">#1</small>
                       <span class="status-card-name" id="leaderPoints1">Points: ---</span>
                   </div>
@@ -446,7 +480,7 @@
                       <div class="status-card-avatar status-card-avatar-active">
                           <img  src="./css/uiIcons/leader (1).png" alt="">
                       </div>
-                        <small class="gb-tagSpot">GB?</small>
+                        <small class="gb-tagSpot">--</small>
                         <small class="rank-tagSpot">#2</small>
                       <span class="status-card-name" id="leaderPoints2">Points: ---</span>
                   </div>
@@ -458,7 +492,7 @@
                       <div class="status-card-avatar status-card-avatar-active">
                           <img  src="./css/uiIcons/leader (2).png" alt="">
                       </div>
-                       <small class="gb-tagSpot">GB?</small>
+                       <small class="gb-tagSpot">--</small>
                        <small class="rank-tagSpot">#3</small>
                       <span class="status-card-name" id="leaderPoints3">Points: ---</span>
                   </div>
@@ -545,11 +579,14 @@
           </div>
 
     <div class="leaderboard-start" style="margin-top: .6rem;">
-    <i class="ri-calendar-event-line"></i>
-    <span  style="font-size: .65rem;opacity:0.5;">
-      Check bundle page for live update.
-    </span>
+      <i class="ri-calendar-event-line"></i>
+      <span id="leaderboardStartText" style="font-size: .65rem; opacity:0.5;"></span>
+
+       <span style="display: none;" id="leaderboardResetText" style="font-size: .65rem; opacity:0.5;"></span>
+
+    
     </div>
+
       </section>
     <!---bottom-->
   <div class="welcome-hero-bottom">
@@ -1341,6 +1378,13 @@ let topSwiper = new Swiper(".status-swiper", {
 
   });
 </script>
+
+
+
+
+
+
+
 <!---NOTIFICATION-DIV-->
 <script>
   document.addEventListener("DOMContentLoaded", () => {
