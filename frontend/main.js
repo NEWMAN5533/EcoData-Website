@@ -2775,7 +2775,7 @@ function loadLeaderboard() {
             );
 
           })
-          .slice(0, 9);
+          .slice(0, 3);
 
           const topThree =
           leaders.slice(0, 3);
