@@ -40,8 +40,8 @@
     const showDay = showNow.getDay();
     let showEnd = new Date(showNow);
 
-    if(showDay === 3){
-      showEnd.setDate(showNow.getDate());
+    if(showDay === 2){
+      showEnd.setDate(showNow.getDate() + 1);
       showEnd.setHours(23, 50, 59, 999);
 
       bar.style.display = 'flex';
@@ -242,6 +242,10 @@
 
   });
   // PROMO SCRIPT ENDS
+
+
+
+
 
 
 
