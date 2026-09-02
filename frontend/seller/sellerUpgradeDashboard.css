@@ -238,6 +238,10 @@ body.dark-mode{
 
 }
 
+
+
+
+
 body.dark-mode::-webkit-scrollbar{
   background: var(--button-hover);
 }
@@ -254,6 +258,13 @@ body.dark-mode::-webkit-scrollbar{
   background: var(--button-hover);
 }
 
+
+
+
+
+
+
+
 .dark-mode .sidebar-wrapper2::-webkit-scrollbar{
   background: var(--button-hover);
 }
@@ -262,6 +273,17 @@ body.dark-mode::-webkit-scrollbar{
   background: rgb(50, 53, 54);
   border-radius: 1rem;
 }
+
+
+
+
+
+
+
+
+
+
+
 /* ==========================================
    SELLER PROFILE + FIXED SIDEBAR
    DESKTOP: 768px AND ABOVE
@@ -370,11 +392,17 @@ body.dark-mode::-webkit-scrollbar{
 .sellerDashboardPage {
   width: 100%;
   max-width: 1180px;
-  margin-bottom: 4.5rem;
+ 
   padding: 24px;
   box-sizing: border-box;
 }
 
+
+@media screen and (max-width: 500px){
+  .sellerDashboardPage{
+    margin-bottom: 5.5rem !important;
+  }
+}
 
 /* ==========================================
    DASHBOARD HEADER
@@ -498,9 +526,9 @@ body.dark-mode::-webkit-scrollbar{
   background: var(--color-white) !important;
 
   transition:
-    transform 0.2s ease,
-    background 0.2s ease,
-    border-color 0.2s ease;
+    transform 0s ease,
+    background 0s ease,
+    border-color 0s ease;
 }
 
 
@@ -749,9 +777,9 @@ body.dark-mode::-webkit-scrollbar{
   opacity: 0.5;
 
   transition:
-    background 0.2s ease,
-    opacity 0.2s ease,
-    transform 0.2s ease;
+    background 0s ease,
+    opacity 0s ease,
+    transform 0s ease;
 }
 
 .dark-mode .salesPeriodBtn{
@@ -812,8 +840,8 @@ body.dark-mode::-webkit-scrollbar{
     var(--color-white);
 
   transition:
-    transform 0.2s ease,
-    border-color 0.2s ease;
+    transform 0s ease,
+    border-color 0s ease;
 }
 
 
@@ -1039,8 +1067,8 @@ body.dark-mode::-webkit-scrollbar{
   opacity: 0.48;
 
   transition:
-    background 0.2s ease,
-    opacity 0.2s ease;
+    background 0s ease,
+    opacity 0s ease;
 }
 
 
@@ -1258,9 +1286,15 @@ body.dark-mode::-webkit-scrollbar{
   margin: 0;
 
   font-size: 15px;
-
+  color: var(--text-faint) !important;
   font-weight: 700;
 }
+
+.dark-mode .sellerProductsHeader h2{
+  color: var(--color-light) !important;
+}
+
+
 
 
 .sellerProductsHeader p {
@@ -1268,6 +1302,8 @@ body.dark-mode::-webkit-scrollbar{
   margin: 3px 0 0;
 
   font-size: 11px;
+
+  color: var(--text-faint) !important;
 
   opacity: 0.5;
 }
@@ -1399,9 +1435,14 @@ body.dark-mode::-webkit-scrollbar{
 
   font-weight: 700;
 
+  color: var(--text-faint) !important;
   letter-spacing: 0.4px;
 
-  opacity: 0.42;
+  opacity: 0.82;
+}
+
+.dark-mode .sellerProductsCard .table-header span{
+  color: var(--color-light) !important;
 }
 
 
