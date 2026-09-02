@@ -1085,8 +1085,13 @@ body.dark-mode{
   font-size: 10px;
 
   line-height: 1.6;
+  color: var(--text-faint) !important;
 
   opacity: 0.55;
+}
+
+.dark-mode .sellerUploadInfoBox p{
+  opacity: .7;
 }
 
 
