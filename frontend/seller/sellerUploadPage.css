@@ -579,8 +579,19 @@ body.dark-mode{
 .productTypeCard.active {
 
   border-color: currentColor;
+  opacity: .22;
 
   background: rgba(128, 128, 128, 0.09);
+}
+
+.dark-mode .productTypeCard.active {
+  border-color: var(--color-light);
+  opacity: .22;
+}
+
+.productTypeCard.active strong {
+  opacity: 1;
+  color: var(--text-faint);
 }
 
 
@@ -722,13 +733,21 @@ body.dark-mode{
   opacity: 0.65;
 }
 
+.dark-mode .cateBtn > span:nth-child(2){
+  color: var(--color-light);
+  opacity: .42;
+}
+
 
 .cateBtn > i:last-child {
 
-  opacity: 0.5;
+  opacity: 0.8;
 
   font-size: 16px;
+  color: var(--text-faint);
 }
+
+
 
 
 /* ==========================================
