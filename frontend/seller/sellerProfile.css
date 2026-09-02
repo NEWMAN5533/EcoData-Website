@@ -447,11 +447,13 @@ html{
 }
 
 button,
-i{
+i,
+.nav-actions i,
+.nav-actions{
 -webkit-tap-highlight-color: transparent;
 -webkit-user-select: none;
 outline: none;
--ms-user-select: none;;
+-ms-user-select: none;
 user-select: none;
 }
 
@@ -823,6 +825,12 @@ small{
   border-right: 1px solid rgb(226, 226, 226);
 }
 
+
+
+
+
+
+
 .sidebarPhone{
   margin-top: 0;
   min-height: calc(100vh - 4.1rem);
@@ -831,6 +839,10 @@ small{
   gap: 0 !important;
   border-right: 1px solid rgb(226, 226, 226);
 }
+
+
+
+
 
 .sidebar-wrapper2{
   width: 100%;
@@ -841,6 +853,7 @@ small{
   padding: 1rem 0;
   overflow-y: auto;
 }
+
 
 
 
@@ -991,7 +1004,6 @@ small{
   border-bottom: 1px solid var(--color-purple);
 
 }
-
 
 
 /******* MAIN CONTAINER *****/
@@ -1713,6 +1725,8 @@ BOTTOM NAVIGATION BAR STYLE CSS
       align-items: center;
       justify-content: center;
       border-radius: .9rem;
+      transition: background 0s,  .3s ease;
+     
         -webkit-tap-highlight-color: transparent;
       -webkit-user-select: none;
       outline: none;
@@ -1721,11 +1735,25 @@ BOTTOM NAVIGATION BAR STYLE CSS
     }
 
     .activeImg.active{
+    animation: resizing .3s ease;
     background: rgba(241, 241, 241, 0.863);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     }
 
-   
+   .dark-mode .activeImg.active{
+    animation: resizing .4s ease;
+    background: var(--button-hover) !important;
+   }
+
+   @keyframes resizing {
+    from{
+      transform: scale(0.5);
+    }
+
+    to{
+      transform: scale(1);
+    }
+   }
 
   .activeImg .pin{
     width: 2rem;
@@ -1753,7 +1781,9 @@ BOTTOM NAVIGATION BAR STYLE CSS
       color: var(--color-gray-light) !important;
     }
 
-   
+   .dark-mode  .btom-navIcon .bottomIcon-textNav{
+    color: var(--color-light) !important;
+   }
 
   .gridCard-wrapper{
     margin-bottom: 3rem;
