@@ -338,7 +338,14 @@ body.dark-mode{
 
   font-size: 12px;
 
+  color: var(--text-faint) !important;
+
   opacity: 0.55;
+}
+
+.dark-mode .sellerSalesHeader p {
+  color: var(--color-light) !important;
+  opacity: .4;
 }
 
 
@@ -434,7 +441,7 @@ body.dark-mode{
 
 .dark-mode .sellerSalesCardTop > span {
   color: var(--color-light) !important; 
-  opacity: .9;
+  opacity: 1;
 }
 
 
@@ -710,9 +717,9 @@ body.dark-mode{
 
     110px
 
-    120px
+    140px
 
-    130px
+    160px
 
     130px;
 
@@ -727,6 +734,56 @@ body.dark-mode{
     rgba(128, 128, 128, 0.035);
 
   box-sizing: border-box;
+}
+
+@media screen and (min-width: 768px){
+
+  
+.sellerSalesTableCard {
+
+  width: 100%;
+
+  max-width: 87%;
+
+}
+  
+.sellerSalesTableContent .live-body-rowS {
+
+  grid-template-columns:
+
+    minmax(180px, 1.5fr)
+
+    minmax(130px, 1fr)
+
+    160px
+
+    140px
+
+    160px
+
+    130px !important;
+}
+
+
+.sellerSalesTableContent .live-body-rowS {
+
+  grid-template-columns:
+
+    minmax(180px,1.5fr)
+
+    minmax(130px, 1fr)
+
+    16px
+
+    140px
+
+    160px
+
+    130px !important;
+}
+
+
+
 }
 
 
@@ -789,9 +846,9 @@ body.dark-mode{
 
     110px
 
-    120px
+    140px
 
-    130px
+    160px
 
     130px;
 
