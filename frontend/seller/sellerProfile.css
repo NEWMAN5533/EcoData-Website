@@ -1720,7 +1720,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
     .bottom-navbar{
       width: 100%;
       max-width: 99.99%;
-      height: 4.3rem;
+      height: 4.8rem;
       justify-self: center;
       position: fixed;
       bottom: 0;
@@ -1758,12 +1758,12 @@ BOTTOM NAVIGATION BAR STYLE CSS
     }
 
     .btom-navIcon .activeImg{
-      padding: .2rem 1.16rem;
+      padding: .4rem 1.46rem;
       display: flex;
       position: relative;
       align-items: center;
       justify-content: center;
-      border-radius: .9rem;
+      border-radius: 2rem;
       transition: background 0s,  .5s ease;
      
         -webkit-tap-highlight-color: transparent;
@@ -1787,6 +1787,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
     .dark-mode .activeImg .active{
       color: var(--color-light);
       opacity: .9;
+      font-size: 1.6rem !important;
     }
 
 
@@ -1798,6 +1799,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
    .dark-mode .activeImg.active i{
     color: var(--color-light);
     opacity: .9;
+    font-size: 1.6rem !important;
    }
 
    @keyframes resizing {
@@ -1942,15 +1944,17 @@ BOTTOM NAVIGATION BAR STYLE CSS
 
         .addBtn{
           margin-bottom: 1.4rem !important;
-          border: 1px solid rgb(151, 149, 149);
+          border: 2px solid rgb(209, 208, 208);
           border-radius: .4rem;
-          padding: 1.2rem;
+          padding: 1.4rem;
           background: rgba(6, 108, 116, 0.267);
           border-radius: 50%;
         }
 
-      
-
+      .dark-mode .addBtn{
+        border: 2px solid rgba(53, 52, 52, 0.945) !important;
+        background: rgba(5, 14, 34, 0.856);
+      }
     
 
         /* display none for upload btn
