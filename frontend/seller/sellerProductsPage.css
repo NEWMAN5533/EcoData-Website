@@ -327,9 +327,16 @@ small{
 .sellerProductsPageTitle p {
   margin: 4px 0 0;
 
-  font-size: 12px;
+  font-size: 11px !important;
+
+  color: var(--text-faint) !important;
 
   opacity: 0.5;
+}
+
+.dark-mode .sellerProductsPageTitle p {
+ color: var(--color-light);
+ opacity: .42;
 }
 
 
@@ -367,9 +374,11 @@ small{
 
   cursor: pointer;
 
+  opacity: .9;
+
   transition:
-    transform 0.2s ease,
-    opacity 0.2s ease;
+    transform 0s ease,
+    opacity 0s ease;
 }
 
 .dark-mode .sellerAddProductBtn{
@@ -425,9 +434,9 @@ small{
     var(--color-white);
 
   transition:
-    transform 0.2s ease,
-    background 0.2s ease,
-    border-color 0.2s ease;
+    transform 0s ease,
+    background 0s ease,
+    border-color 0s ease;
 }
 
 
@@ -469,6 +478,11 @@ small{
   color: var(--text-faint);
 
   text-overflow: ellipsis;
+}
+
+.dark-mode .sellerProductStatTop span {
+  color: var(--color-light);
+  opacity: 1;
 }
 
 
@@ -760,7 +774,15 @@ small{
 
   font-size: 10px;
 
-  opacity: 0.45;
+  color: var(--text-faint) !important;
+
+
+  opacity: 0.75;
+}
+
+.dark-mode .sellerProductListHeader p {
+  color: var(--color-light);
+  opacity: .42;
 }
 
 
