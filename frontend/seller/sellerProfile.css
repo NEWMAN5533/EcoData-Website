@@ -388,7 +388,8 @@
 .ri-notification-3-line,
 .ri-calendar-line,
 .ri-line-chart-line,
-.ri-book-open-line{
+.ri-book-open-line,
+.ri-arrow-right-up-line{
   color: rgb(16, 196, 142);
 }
 
@@ -404,7 +405,8 @@
   color:  rgb(196, 82, 16);
 }
 
-.ri-links-line{
+.ri-links-line,
+.ri-arrow-right-down-line{
   color: rgb(209, 106, 21);
 }
 
@@ -528,6 +530,8 @@ body.dark-mode,
   border-right: var(--border-color-dark);
   box-shadow: none !important;
 }
+
+
 
 .dark-mode h1, h2, h3, p{
   color: var(--color-light) !important;
@@ -723,11 +727,7 @@ body.dark-mode,
   
 }
 
-h1, h2,h3, h4, h5, h5{
-  font-weight: 600;
-  line-height: 1.1;
-  color: var(--color-dark);
-}
+
 
 h1{
   font-size: 2.3rem;
@@ -1165,8 +1165,18 @@ small{
 
   font-size: 13px;
 
+  color: var(--text-faint) !important;
+
+
   opacity: 0.55;
 }
+
+.dark-mode .sellerUsername {
+  color: var(--color-light) !important;
+  opacity: .42;
+}
+
+
 
 
 .sellerRole {
@@ -1359,16 +1369,31 @@ small{
   margin: 0;
 
   font-size: 15px;
+
+  color: var(--text-faint) !important;
+  opacity: .77;
   font-weight: 700;
+}
+
+.dark-mode .sellerProfileCardHeader h2{
+  color: var(--color-light) !important;
+  opacity: .9;
 }
 
 
 .sellerProfileCardHeader p {
   margin: 3px 0 0;
 
+  color: var(--text-faint) !important;
+
   font-size: 11px;
 
   opacity: 0.5;
+}
+
+.dark-mode .sellerProfileCardHeader p{
+  color: var(--color-light) !important;
+  opacity: .42;
 }
 
 
@@ -1378,6 +1403,8 @@ small{
 
 .sellerProfileBio {
   margin: 20px 0 0;
+
+  color: var(--text-faint) !important;
 
   font-size: 13px;
   line-height: 1.7;
@@ -1693,7 +1720,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
     .bottom-navbar{
       width: 100%;
       max-width: 99.99%;
-      height: 4.8rem;
+      height: 4.3rem;
       justify-self: center;
       position: fixed;
       bottom: 0;
@@ -1703,8 +1730,8 @@ BOTTOM NAVIGATION BAR STYLE CSS
       z-index: 99;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: .1rem;
+      justify-content: space-around !important;
+      padding: .1rem .4rem;
       background: var(--color-light) !important;
       backdrop-filter: unset;
     }
@@ -1737,7 +1764,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
       align-items: center;
       justify-content: center;
       border-radius: .9rem;
-      transition: background 0s,  .3s ease;
+      transition: background 0s,  .5s ease;
      
         -webkit-tap-highlight-color: transparent;
       -webkit-user-select: none;
@@ -1747,14 +1774,30 @@ BOTTOM NAVIGATION BAR STYLE CSS
     }
 
     .activeImg.active{
-    animation: resizing .3s ease;
+    animation: resizing .5s ease;
     background: rgba(241, 241, 241, 0.863);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     }
 
+    .activeImg .active{
+      color: var(--accent-color);
+      opacity: 1;
+    }
+
+    .dark-mode .activeImg .active{
+      color: var(--color-light);
+      opacity: .9;
+    }
+
+
    .dark-mode .activeImg.active{
     animation: resizing .4s ease;
     background: var(--button-hover) !important;
+   }
+
+   .dark-mode .activeImg.active i{
+    color: var(--color-light);
+    opacity: .9;
    }
 
    @keyframes resizing {
@@ -1885,21 +1928,36 @@ BOTTOM NAVIGATION BAR STYLE CSS
           box-shadow: 0 2px 6px rgba(0,0,0,0.2);
         }
 
-      
+    
 
         .addBar{
-          margin-bottom: -.4rem;
+          margin-bottom: 1rem !important;
           line-height: .9;
           padding-bottom: .3rem;
         }
 
-        .addBtn{
-          border: 1px solid rgb(151, 149, 149);
-          border-radius: .4rem;
-          padding:.2rem .4rem;
+        .addBar .bottomIcon-textNav{
+          display: none;
         }
 
+        .addBtn{
+          margin-bottom: 1.4rem !important;
+          border: 1px solid rgb(151, 149, 149);
+          border-radius: .4rem;
+          padding: 1.2rem;
+          background: rgba(6, 108, 116, 0.267);
+          border-radius: 50%;
+        }
 
+      
+
+    
+
+        /* display none for upload btn
+        */
+
+
+     
         @media screen and (min-width: 768px){
           .bottom-navbar{
             display: none !important;
