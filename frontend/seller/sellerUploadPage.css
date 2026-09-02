@@ -248,7 +248,7 @@ body.dark-mode{
 
 @media screen and (max-width: 500px) {
   .sellerUploadPage{
-      margin-bottom: 4.5rem;
+      margin-bottom: 5.5rem;
   }
 }
 
@@ -300,9 +300,17 @@ body.dark-mode{
 .sellerUploadHeader p {
   margin: 4px 0 0;
 
+  color: var(--text-faint) !important;
+
+
   font-size: 12px;
 
   opacity: 0.55;
+}
+
+.dark-mode .sellerUploadHeader p{
+  color: var(--color-light) !important;
+  opacity: .42;
 }
 
 
