@@ -5,6 +5,12 @@ const GIVEAWAY_TIMER_ENDS = new Date("2026-09-30T23:59:59");
 
 // CUSTOM CURSOR JS
   document.addEventListener("DOMContentLoaded", () => {
+    // total orders
+    const totalCustomersOrders = document.getElementById("stat-num");
+    if(totalCustomersOrders){
+      totalCustomersOrders.textContent = 
+      "1.41K+";
+    }
 
   
 const shoppingBtn = document.getElementById("shoppingBtn");
