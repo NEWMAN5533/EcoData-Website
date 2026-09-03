@@ -400,7 +400,7 @@ body.dark-mode::-webkit-scrollbar{
 
 @media screen and (max-width: 500px){
   .sellerDashboardPage{
-    margin-bottom: 5.5rem !important;
+    margin-bottom: 7.5rem !important;
   }
 }
 
@@ -1360,24 +1360,7 @@ body.dark-mode::-webkit-scrollbar{
 }
 
 
-/* ==========================================
-   PRODUCTS CARD
-========================================== */
 
-.sellerProductsCard {
-
-  width: 100%;
-
-  border: 1px solid
-    rgba(128, 128, 128, 0.15);
-
-  border-radius: 18px;
-
-  background:
-    var(--color-white);
-
-  overflow: hidden;
-}
 
 
 /* ==========================================
@@ -1387,10 +1370,10 @@ body.dark-mode::-webkit-scrollbar{
 .sellerProductsCard .table-scroll-area {
 
   width: 100%;
-
-  overflow-x: auto;
-
-  scrollbar-width: thin;
+  height: 100%;
+  overflow-x: auto;   /* horizontal scroll */
+  overflow-y: auto;   /* vertical scroll */
+  white-space: nowrap;
 }
 
 
@@ -1399,46 +1382,42 @@ body.dark-mode::-webkit-scrollbar{
 ========================================== */
 
 .sellerProductsCard .table-header {
-
-  min-width: 950px;
-
+ /* Fixed column widths — same as before */
   display: grid;
-
-  grid-template-columns:
-    65px
-    minmax(150px, 1.5fr)
-    100px
-    90px
-    100px
-    70px
-    130px
-    140px
-    90px;
-
   align-items: center;
+  justify-items: center;
+  grid-template-columns: 
+    80px 120px 110px 100px 100px 100px 110px 150px 120px;
+    margin-left: .5rem;
 
-  gap: 0;
+  /* sticky top so it stays visible while scrolling vertically */
+  position: sticky;
+  top: 0;
+  z-index: 1;
 
-  padding: 13px 15px;
-
-  border-bottom: 1px solid
-    rgba(128, 128, 128, 0.12);
-
-  background:
-    var(--color-white);
+  /* Remove position: absolute — it was breaking x-axis sync */
+  color: var(--text-cl-4);
+  font-weight: 500;
+  font-size: .84rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: system-ui, sans-serif;
+  padding: .5rem 0;
+  width: 100%;
+  min-width: max-content; 
 }
+
 
 
 .sellerProductsCard .table-header span {
 
-  font-size: 8px;
+  font-size: 11px;
 
   font-weight: 700;
 
   color: var(--text-faint) !important;
   letter-spacing: 0.4px;
 
-  opacity: 0.82;
+  opacity: 0.9;
 }
 
 .dark-mode .sellerProductsCard .table-header span{
@@ -1453,6 +1432,14 @@ body.dark-mode::-webkit-scrollbar{
 .sellerProductsCard .main-row-content {
 
   width: 100%;
+  display: grid;
+  justify-items: center;
+  padding: 0 .5rem;
+  align-items: start;
+  grid-template-columns: 
+  80px 120px 110px 100px 100px 100px 110px 150px 120px;
+  position: relative;
+  min-width: max-content; /* ensures rows stretch with header */
 }
 
 
@@ -1540,6 +1527,666 @@ body.dark-mode::-webkit-scrollbar{
 
 
 
+.product-title-wrapper {
+  position: relative;
+  display: inline-block;
+  max-width: 180px;
+  cursor: pointer;
+}
+
+.product-title-short {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Full title tooltip */
+.product-title-tooltip {
+  position: absolute;
+  z-index: 9999999999999999999;
+
+  bottom: calc(100% + -68px);
+  left: 50%;
+
+  transform: translateX(-50%) translateY(5px);
+
+  width: max-content;
+  max-width: 280px;
+
+  padding: 9px 12px;
+
+  background: #111820;
+  color: #fff;
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+
+  font-size: 13px;
+  line-height: 1.4;
+
+  white-space: normal;
+  word-break: break-word;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+
+  opacity: 0;
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* Small arrow */
+.product-title-tooltip::after {
+  content: "";
+
+  position: absolute;
+
+  top: 100%;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  border: 6px solid transparent;
+  border-top-color: #111820;
+}
+
+/* Hover */
+.product-title-wrapper:hover
+.product-title-tooltip {
+  opacity: 1;
+  visibility: visible;
+
+  transform:
+    translateX(-50%)
+    translateY(0);
+}
+
+
+
+
+
+
+
+
+/* =================================
+   PRODUCT ACTION
+================================= */
+
+.product-action-cell {
+  position: relative;
+}
+
+.product-action-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+
+/* THREE DOT BUTTON */
+
+.product-action-btn {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 7px;
+
+  background: rgba(255,255,255,0.04);
+  color: #fff;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.product-action-btn:hover {
+  background: rgba(255,255,255,0.10);
+}
+
+.product-action-btn i {
+  font-size: 18px;
+}
+
+
+/* =================================
+   ACTION MENU
+================================= */
+
+.product-action-menu {
+  position: absolute;
+
+  top: calc(100% + 6px);
+  right: 0;
+
+  width: 180px;
+
+  padding: 6px;
+
+  background: #101820e3;
+
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+
+  box-shadow:
+    0 12px 30px rgba(0,0,0,0.45);
+
+  z-index: 9999;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transform:
+    translateY(-5px)
+    scale(0.97);
+
+  transform-origin: top right;
+
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease,
+    visibility 0.18s ease;
+}
+
+
+/* OPEN */
+
+.product-action-wrapper.menu-open
+.product-action-menu {
+
+  opacity: 1;
+  visibility: visible;
+
+  transform:
+    translateY(0)
+    scale(1);
+}
+
+
+/* =================================
+   MENU ITEMS
+================================= */
+
+.product-menu-item {
+
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 10px 11px;
+
+  border: none;
+  border-radius: 7px;
+
+  background: transparent;
+
+  color: #e8e8e8;
+
+  font-size: 13px;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    color 0.18s ease;
+}
+
+.product-menu-item:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+.product-menu-item i {
+  width: 18px;
+
+  font-size: 17px;
+}
+
+
+/* DELETE */
+
+.product-menu-item.delete-action {
+  color: #ff6b6b;
+}
+
+.product-menu-item.delete-action:hover {
+  background: rgba(255,70,70,0.10);
+}
+
+
+/* DIVIDER */
+
+.product-menu-divider {
+  height: 1px;
+
+  margin: 5px 4px;
+
+  background:
+    rgba(255,255,255,0.08);
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================
+  EDIT PRODUCT MODAL
+========================================== */
+
+.edit-product-overlay {
+  position: fixed;
+  inset: 0;
+
+  z-index: 99999999999999999999999999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(0, 0, 0, 0.65);
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition:
+    opacity 0.18s ease,
+    visibility 0.18s ease;
+}
+
+.edit-product-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+.edit-product-modal {
+  width: min(560px, 100%);
+
+  max-height: 90vh;
+
+  overflow-y: auto;
+
+  padding: 22px;
+
+  background: #101820;
+
+  border: 1px solid rgba(255,255,255,0.12);
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.5);
+
+  transform: translateY(12px) scale(0.98);
+
+  transition:
+    transform 0.18s ease;
+}
+
+.edit-product-overlay.show
+.edit-product-modal {
+  transform:
+    translateY(0)
+    scale(1);
+}
+
+
+/* HEADER */
+
+.edit-product-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  margin-bottom: 22px;
+}
+
+.edit-product-header h3 {
+  margin: 0;
+
+  color: #fff;
+
+  font-size: 19px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.edit-product-header p {
+  margin: 5px 0 0;
+
+  color: #8f99a6;
+
+  font-size: 13px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+.edit-product-close {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 8px;
+
+  background: rgba(255,255,255,0.06);
+
+  color: #fff;
+
+  cursor: pointer;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.edit-product-close:hover {
+  background: rgba(255,255,255,0.12);
+}
+
+
+/* FORM */
+
+.edit-product-form {
+  display: flex;
+  flex-direction: column;
+
+  gap: 15px;
+}
+
+.edit-product-field {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.edit-product-field label {
+  color: #cbd1d9;
+
+  font-size: 13px;
+
+  font-weight: 600;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.edit-product-field input,
+.edit-product-field textarea,
+.edit-product-field select {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 11px 12px;
+
+  border: 1px solid rgba(255,255,255,0.12);
+
+  border-radius: 8px;
+
+  outline: none;
+
+  background: rgba(255,255,255,0.045);
+
+  color: #fff;
+
+  font-size: 14px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.edit-product-field textarea {
+  min-height: 110px;
+
+  resize: vertical;
+}
+
+.edit-product-field input:focus,
+.edit-product-field textarea:focus,
+.edit-product-field select:focus {
+  border-color: #168cff;
+}
+
+
+/* GRID */
+
+.edit-product-grid {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 12px;
+}
+
+
+/* TYPE CONDITIONAL FIELDS */
+
+#editYoutubeField,
+#editAffiliateField {
+  display: none;
+}
+
+
+/* ACTIONS */
+
+.edit-product-actions {
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  padding-top: 8px;
+}
+
+.edit-cancel-btn,
+.edit-save-btn {
+  min-height: 40px;
+
+  padding: 0 15px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.edit-cancel-btn {
+  background: rgba(255,255,255,0.07);
+
+  color: #d5d9df;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.edit-save-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  background: #168cff;
+
+  color: #fff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.edit-save-btn:hover {
+  filter: brightness(1.08);
+}
+
+.edit-save-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+  .edit-product-overlay {
+    padding: 12px;
+  }
+
+  .edit-product-modal {
+    padding: 18px;
+
+    max-height: 88vh;
+    max-width: 94%;
+  }
+
+  .edit-product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .edit-product-actions {
+    flex-direction: column-reverse;
+  }
+
+  .edit-cancel-btn,
+  .edit-save-btn {
+    width: 100%;
+  }
+
+}
+
+
+
+/*=============================
+ DELETE CONFIRMATION
+=============================*/
+.delete-confirmation{
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, 30px);
+  bottom: 25px;
+  width: min( calc(100% - 30px), 460px);
+  background: rgba(15, 15, 18, 0.97);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  pointer-event: none;
+  transition: opacity .2s ease, transform .2s ease;
+  z-index: 999999;
+  backdrop-filter: blur(12px);
+  
+}
+
+.delete-confirmation.show{
+  opacity: 1;
+  transform: translate(-50%, 0);
+  pointer-event: auto;
+}
+/*============================
+CONTENT
+============================*/
+.delete-confirmation.content{
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 15px;
+}
+
+
+/*=================
+ICON
+=================*/
+.delete-confirmation.icon{
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  background: rgba(220, 53, 69, 0.12);
+
+  color: #ef6675;
+  font-size: 20px;
+  
+}
+/*======================
+TEXT
+======================*/
+.delete-confirmation.text{
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+}
+
+.delete-confirmation-text strong{
+  color: #fff;
+  font-size: 14px;
+}
+
+.delete-confirmation-text span{
+  color: rgba(255, 255, 255, .55);
+  font-size: 12px;
+}
+
+/*=======================
+ACTIONS 
+=======================*/
+.delete.confirmation-actions{
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.delete-cancel-btn,
+.delete-confirm-btn{
+  border: none;
+  border-radius: 9px;
+  padding: 9px 13px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  
+}
+
+.delete-cancel-btn{
+  background: rgba(255, 255, 255, .7);
+  color: rgba(255, 255, 255, .75);
+}
+.delete-confirm-btn{
+  background: #b83243;
+  color: white;
+}
+
+.delete-cancel-btn:hover{
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.delete-confirm-btn:hover{
+  background: #d13d50;
+}
 
 
 

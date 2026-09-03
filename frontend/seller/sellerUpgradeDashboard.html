@@ -7,6 +7,10 @@
   <link rel="stylesheet" href="sellerProfile.css">
   <link rel="stylesheet" href="sellerUpgradeDashboard.css">
 
+  <!----== EXTERNAL CSS ====--->
+  <link rel="stylesheet" href="seller-dashboard2.css">
+
+
   <!--remix icons-->
 <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
 
@@ -938,7 +942,7 @@ themeButton.addEventListener("click", ()=> {
 
 
       <a
-        href="#"
+        href="./sellerProductsPage.html"
         class="sellerViewProductsBtn"
       >
         View All
@@ -1009,6 +1013,9 @@ themeButton.addEventListener("click", ()=> {
             class="row-wrapper"
             id="creatorProductsBody"
           >
+
+             <!-- dynamic rows -->
+        
 
             <!--
               sellerDashboard.js
@@ -1082,6 +1089,10 @@ themeButton.addEventListener("click", ()=> {
   </main>
 
 
-  <script type="module" src="sellerUpgradeDashboard.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+   <script src="./sellerJs/sellerCommon.js"></script>
+  
+  <script type="module" src="./sellerJs/sellerDashboard.js"></script>
 </body>
 </html>

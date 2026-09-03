@@ -155,7 +155,7 @@ second container css little changes
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.second-container .table-section{
+.second-container .sellerProductsCard{
   width: 100%;
   max-width: 100% !important;
 }
@@ -241,289 +241,14 @@ CHECKBOX STYLE
 
 
 
-/*****
-BOTTOM NAVIGATION BAR STYLE CSS
-******/
- 
-
-    :root{
-  --darkMode-bg-cl: rgb(10, 10, 10);
-  --darkMode-bg-cl-2: rgb(10, 1, 22);
-  --welcome-card-bg: rgba(37, 36, 36, 0.918);
-  --welcome-card-bg-1: rgb(2, 2, 39);
-    }
-    .bottom-navbar{
-      width: 100%;
-      max-width: 99.99%;
-      height: 4rem;
-      justify-self: center;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      gap: .3rem;
-      z-index: 999999;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: .1rem;
-      background: var(--welcome-card-bg-2);
-
-      border-top: 1px solid var(--thin-border);
-      box-shadow: 0 10px 40px rgba(26, 25, 25, 0.99);
-    }
-
-    .dark-mode .bottom-navbar{
-      background: var(--darkMode-bg-cl);
-      border: 1px solid var(--thin-border) !important;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.99);
-    }
-
-
-
-    .bottom-navbar .btom-navIcon{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      width: 25%;
-      gap: .3rem;
-      height: 99%;
-      cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;;
-  user-select: none;
-    }
-
-    .btom-navIcon .activeImg{
-      padding: .2rem 1.16rem;
-      display: flex;
-      position: relative;
-      align-items: center;
-      justify-content: center;
-      border-radius: .9rem;
-    -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;;
-  user-select: none;
-    }
-
-    .activeImg.active{
-    background: rgba(56, 56, 56, 0.863);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    }
-
-    .dark-mode .activeImg.active{
-      background: rgba(46, 87, 61, 0.747);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3) !important;
-      border: 1px solid var(--thin-border);
-    }
-
-    /***
-    AFA ACTIVE
-    ***/
-      .activeImg.activeMin{
-    padding: .19rem .3rem;
-     background: rgba(53, 50, 50, 0.849);
-    box-shadow: 0 2px 6px rgba(68, 68, 68, 0.3);
-    border: 1px solid var(--primary-cl);
-    }
-
-    .dark-mode .activeImg.activeImg.activeMin{
-      background: rgba(46, 87, 61, 0.747);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      border: 1px solid var(--thin-border);
-    }
-
- /***
-    AFA ACTIVE ENDS
-    ***/
-
-
-     /***
-    PAY ACTIVE
-    ***/
-    .activeImg.activeMin{
-    padding: .19rem .3rem;
-    background: rgb(39, 37, 37);
-    box-shadow: 0 2px 6px rgba(68, 68, 68, 0.3);
-    border: 1px solid var(--primary-cl);
-    }
-    .dark-mode .activeImg.activeMin{
-      background: rgba(46, 87, 61, 0.747);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      border: 1px solid var(--thin-border);
-    }
-
-      /***
-    PAY ACTIVE ENDS
-    ***/
-
-
-
-      /***
-    INFO ACTIVE ENDS
-    ***/
-
-    .activeImg img{
-      width: 1.3rem;
-      height: 1.3rem;
-    }
-
-  .activeImg .pin{
-    width: 2rem;
-    height: 1.8rem;
-    margin-bottom: -.3rem;
-  }
-
-  .material-icons{
-    color: rgba(248, 245, 218, 0.89);
-    font-size: 1rem !important;
-    font-weight: 300 !important;
-  }
-
-
-  .menu{
-    font-size: 1.2rem !important;
-    cursor: pointer;
-  }
-
-
-    .btom-navIcon .bottomIcon-textNav{
-      font-size: .76rem;
-      font-weight: 700;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      color: rgb(223, 223, 223) !important;
-    }
-
-    .dark-mode .btom-navIcon .bottomIcon-textNav{
-      color: white;
-      opacity: .7;
-    }
-
-  .gridCard-wrapper{
-    margin-bottom: 3rem;
-  }
-
-
-
-
-
-
-
- /****
- ecoshop-fixedBtn
- *****/
-   
-
-      .ecodataShopBtn{
-        width: 100%;
-        height: 0;
-        background: red;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: absolute;
-        margin-bottom: 4rem;
-        z-index: 99999999999999999;
-        -webkit-tap-highlight-color: transparent;
-        -webkit-user-select: none;
-        outline: none;
-        -ms-user-select: none;;
-        user-select: none;
-      }
-      .shop-fixedBtn{
-        width: 3.4rem;
-        height: 3.4rem;
-        position: fixed;
-        padding: .4rem;
-        bottom: 2.5rem;
-        position: fixed;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        align-items: center;
-        justify-content: center;;
-        background: rgb(245, 223, 200);
-        border-radius: 50%;
-
-        z-index: 999 !important;
-        box-shadow: 0 10px 20px rgba(32, 32, 32, 0.6) !important;
-        cursor: pointer;
-        border: 1px solid var(--thin-border-cl);
-        -webkit-tap-highlight-color: transparent;
-        -webkit-user-select: none;
-        outline: none;
-        -ms-user-select: none;;
-        user-select: none;
-      }
-
-      .dark-mode .shop-fixedBtn{
-        box-shadow: 0 10px 20px rgba(34, 34, 34, 0.73) !important;
-      }
-
-      .shop-fixedBtn img{
-        width: 3.2rem;
-        height: 3.2rem;
-      }
-
-
-
- 
-/*********************
-/ ACTIVE COUNT ORDERS
-*********************/
-        .btom-navIcon .nav-badge{
-          position: absolute;
-          top: 1px;
-          right: 9px;
-          width:  19px;
-          height:  14px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          background: rgb(7, 184, 125);
-          text-align: center;
-          border-radius: 50%;
-          color: rgb(44, 44, 44);
-          font-size: .55rem;
-          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-          box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-        }
-
-        .dark-mode  .btom-navIcon .nav-badge{
-          background:  rgb(7, 184, 31) !important;
-          color: rgb(44, 44, 44);
-        }
-
-        .addBar{
-          margin-bottom: .3rem;
-          line-height: .9;
-          padding-bottom: .3rem;
-        }
-
-        .addBtn{
-          border: 1px solid rgb(151, 149, 149);
-          border-radius: .4rem;
-          padding:.2rem .4rem;
-        }
-   
-/****************************
-/ ACTIVE COUNT ORDERS ENDS
-*****************************/
 
 
 
 /*******TABLE SECTION**********/
-.table-section{
+.sellerProductsCard{
   width: 100%;
-  max-width: 94%;
   margin-bottom: 1rem !important;
-  height: 30rem;
+  height: 25rem;
   display: flex;
   padding: .2rem;
   flex-direction: column;
@@ -533,61 +258,38 @@ BOTTOM NAVIGATION BAR STYLE CSS
   align-items: center;
   gap: .13rem;
   backdrop-filter: blur(18px);
-  border-end-end-radius: .2rem;
-  border-end-start-radius: .2rem;
-  border-start-start-radius: .2rem;
-  border-start-end-radius: .2rem;
+  border-radius: 18px;
   border: 1px solid var(--text-cl-2);
   overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.13);
+
+
+    width: 100%;
+
+  border: 1px solid
+    rgba(128, 128, 128, 0.15);
+
+  border-radius: 18px;
+
+  background:
+    var(--color-white);
+
+  overflow: hidden;
 }
 
 
 
-.dark-mode .table-section{
-  background: var(--darkMode-bg-cl) !important;
-  box-shadow: 0 10px  20px rgba(0,0,0,0.36);
-  border: 1px solid var(--thin-border);
-}
+
 
 @media screen and (min-width: 768px) {
-  .table-section,
-  .table-section .table-title{
+  .sellerProductsCard,
+  .sellerProductsCard .table-title{
     background: var(--welcome-card-bg-2);
   }
 }
 
-.table-section .table-title{
-  width: 100%;
-  height: 10%;
-  background: linear-gradient(135deg, var(--primary-cl), var(--background-cl));
-  backdrop-filter: blur(18px);
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  position: relative;
-  padding: 1rem;
-  border: 1px solid var(--text-cl-2);
-}
 
-.dark-mode .table-section .table-title{
-   background: linear-gradient(135deg, var(--darkMode-bg-cl), var(--background-cl-1));
-   border: 1px solid var(--thin-border);
-}
 
-.dark-mode .table-title{
-  background: var(--darkMode-bg-cl) !important;
-  border: 1px solid var(--thin-border);
-}
-
-.table-title p{
-  font-size: .85rem;
-  font-family: system ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  color: rgb(221, 96, 23);
-  font-weight: 600;
-}
-
-.table-section .content-wrapper {
+.sellerProductsCard .content-wrapper {
   width: 100%;
   height: 90%;
   display: flex;
@@ -599,7 +301,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
   overflow: hidden;
 }
 
-.dark-mode .table-section .content-wrapper{
+.dark-mode .sellerProductsCard .content-wrapper{
   border: 1px solid var(--thin-border);
 }
 
@@ -638,20 +340,20 @@ BOTTOM NAVIGATION BAR STYLE CSS
 }
 
 .dark-mode .content-wrapper .table-header{
-  background: var(--darkMode-bg-cl);
+  background: var(--);
   border-bottom: none !important;
   color:var(--primary-cl);
 }
 
 @media screen and (min-width: 768px) {
-  .content-wrapper .table-header{
+  .sellerProductsCard .content-wrapper .table-header{
     background: var(--welcome-card-bg-2);
     border-bottom: 1px solid var(--thin-border);
   }
 }
 
 
-.dark-mode .content-wrapper .table-header,
+.dark-mode .sellerProductsCard  .content-wrapper .table-header,
 .dark-mode .content-wrapper .sl-header{
   background: var(--darkMode-bg-cl);
   border-bottom: 1px solid var(--thin-border);
@@ -659,7 +361,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
 }
 
 
-.content-wrapper .main-row-content {
+ .sellerProductsCard .main-row-content {
   width: 100%;
   display: grid;
   justify-items: center;
@@ -673,7 +375,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
 
 
 
-.main-row-content #empty-body{
+.sellerProductsCard  .main-row-content #empty-body{
   position: fixed;
   color: var(--text-cl-2);
   transform: translateX(-50%) !important;
@@ -685,7 +387,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
 
 }
 
-.dark-mode .main-row-content #empty-body{
+.dark-mode .sellerProductsCard .main-row-content #empty-body{
   color: var(--background-cl);
   opacity: .5;
 }
@@ -695,7 +397,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
 ========================================== */
 
 .loading-products,
-.dark-mode.loading-products {
+.dark-mode .loading-products {
   width: 100%;
   min-height: 180px;
 
@@ -748,7 +450,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
   /* Remove position: absolute — it was collapsing the height */
 }
 
- .live-body-rowT{
+ .sellerProductsCard .live-body-rowT{
  justify-items: center;
  align-items: center;
  min-width: max-content;
@@ -891,7 +593,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
 
 
   /**** withdrawal *****/
-  .table-section .withdraw{
+  .sellerProductsCard .withdraw{
     justify-content: space-between;
     align-items: center;
     display: flex;
