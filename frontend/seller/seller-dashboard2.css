@@ -280,15 +280,6 @@ CHECKBOX STYLE
 
 
 
-@media screen and (min-width: 768px) {
-  .sellerProductsCard,
-  .sellerProductsCard .table-title{
-    background: var(--welcome-card-bg-2);
-  }
-}
-
-
-
 .sellerProductsCard .content-wrapper {
   width: 100%;
   height: 90%;
@@ -336,18 +327,18 @@ CHECKBOX STYLE
   font-family: system-ui, sans-serif;
   padding: .5rem 0;
   width: 100%;
+  background: var(--color-white);
   min-width: max-content; /* prevents collapsing on narrow viewports */
 }
 
 .dark-mode .content-wrapper .table-header{
-  background: var(--);
+  background: var(--card-bg-dark) !important;
   border-bottom: none !important;
   color:var(--primary-cl);
 }
 
 @media screen and (min-width: 768px) {
   .sellerProductsCard .content-wrapper .table-header{
-    background: var(--welcome-card-bg-2);
     border-bottom: 1px solid var(--thin-border);
   }
 }
