@@ -2716,15 +2716,15 @@ DAILY ANALYTICS SECTION
 }
 
 .card-performance.increase {
-    color: #159570;
+    color: #159570 !important;
 }
 
 .card-performance.decrease {
-    color: #e05252;
+    color: #e05252 !important;
 }
 
 .card-performance.neutral {
-    color: #8b9298;
+    color: #8b9298 !important;
 }
 
 .card-performance .performance-detail{
