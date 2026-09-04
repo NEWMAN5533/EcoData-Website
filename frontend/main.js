@@ -1896,50 +1896,81 @@ function renderCardPerformance(
   previous,
   lowerIsBetter = false
 ) {
-
   const element = document.getElementById(elementId);
 
   if (!element) return;
 
-  const change =
-    calculatePercentageChange(current, previous);
+  current = Number(current) || 0;
+  previous = Number(previous) || 0;
 
-  const percentage =
-    Math.abs(change).toFixed(1);
+  const change = calculatePercentageChange(
+    current,
+    previous
+  );
+
+  const percentage = Math.abs(change).toFixed(1);
 
   let icon = "ri-arrow-right-line";
   let state = "neutral";
+  let directionText = "No change";
 
   if (change > 0) {
-
     icon = "ri-arrow-right-up-line";
 
     state = lowerIsBetter
       ? "decrease"
       : "increase";
 
-  } else if (change < 0) {
+    directionText = lowerIsBetter
+      ? "higher"
+      : "higher";
 
+  } else if (change < 0) {
     icon = "ri-arrow-right-down-line";
 
     state = lowerIsBetter
       ? "increase"
       : "decrease";
+
+    directionText = "lower";
   }
 
-  element.className =
-    `card-performance ${state}`;
+  element.className = `card-performance ${state}`;
+
+  if (change === 0) {
+
+    element.innerHTML = `
+      <div class="performance-main">
+        <i class="${icon}"></i>
+        <span class="performance-value">
+          No change
+        </span>
+      </div>
+
+      <div class="performance-detail">
+        ${current} this month • ${previous} last month
+      </div>
+    `;
+
+    return;
+  }
 
   element.innerHTML = `
-    <i class="${icon}"></i>
+    <div class="performance-main">
+      <i class="${icon}"></i>
 
-    <span class="performance-value">
-      ${percentage}%
-    </span>
+      <span class="performance-value">
+        ${percentage}%
+      </span>
 
-    <span class="performance-label">
-      vs last month
-    </span>
+      <span class="performance-direction">
+        ${directionText}
+      </span>
+    </div>
+
+    <div class="performance-detail">
+      ${current} this month • ${previous} last month
+    </div>
   `;
 }
 

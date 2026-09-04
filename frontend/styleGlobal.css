@@ -2682,9 +2682,32 @@ DAILY ANALYTICS SECTION
     font-size: 14px;
 }
 
+.performance-main{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.performance-main i {
+    font-size: 14px;
+}
+
 .card-performance .performance-value {
     font-weight: 500;
 }
+
+.performance-direction{
+  font-weight: 500;
+}
+
+
+.card-performance-detail{
+  margin-top: 3px;
+  color: #8b9298;
+  font-size: 11px;
+  font-weight: 500;
+}
+
 
 .card-performance .performance-label {
     color: #8b9298;
@@ -2703,6 +2726,12 @@ DAILY ANALYTICS SECTION
 .card-performance.neutral {
     color: #8b9298;
 }
+
+.card-performance .performance-detail{
+  color: #8b9298;
+}
+
+
 
 
 /****
