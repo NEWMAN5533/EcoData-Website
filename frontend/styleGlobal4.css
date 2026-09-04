@@ -302,7 +302,7 @@ gap: .8rem !important;
 align-items: center;
 justify-content: start;
 position: relative;
-margin-top: .5rem;
+margin-top: 1rem;
 transition: .1s ease;
 padding: .2rem 0;
 }
@@ -1437,11 +1437,11 @@ NEW BADGE ENDS
 }
 
 .trust-swiper .swiper-pagination-bullet {
-  width: 8px;
-  height: 8px;
+  width: 16px;
+  
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.25);
-  opacity: 1;
+  background: rgba(68, 51, 51, 0.856) !important;
+  
   margin: 0 !important;
   transition: background 0.3s ease, width 0.3s ease, transform 0.15s ease;
   cursor: pointer;
@@ -1453,17 +1453,18 @@ NEW BADGE ENDS
 }
 
 .dark-mode .trust-swiper .swiper-pagination-bullet:hover {
-  background: linear-gradient(135deg, #92570b, #ac6a15);
+  background: linear-gradient(135deg, #d4c1a7, #e9c290);
   transform: scale(1.15);
 }
 
 .trust-swiper .swiper-pagination-bullet-active {
-  background: linear-gradient(135deg, #814e0b, #915910);
-  width: 26px;
+  background: linear-gradient(135deg, #dabb92, #d8ab71) !important;
+  width: 16px;
   box-shadow: 0 0 10px rgba(202, 141, 49, 0.5);
 }
 
 .dark-mode .trust-swiper .swiper-pagination-bullet-active {
+   background: linear-gradient(135deg, #dabb92c2, #d8ab71bb) !important;
    box-shadow: 0 0 10px rgba(202, 141, 49, 0.144);
 }
 

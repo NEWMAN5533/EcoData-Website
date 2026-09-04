@@ -1717,29 +1717,20 @@ clock section
   max-width: 98% !important;
   height: 15.8rem !important;
   max-height: 16rem !important;
-  margin: 1rem;
+  margin: 1rem 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
   overflow: hidden;
   position: relative;
-  border-radius: .8rem !important;
-  box-shadow:
-    0 2px 0 rgba(255,255,255,0.08) inset,
-    0 20px 60px rgba(0,0,0,0.35),
-    0 1px 0 rgba(120,200,170,0.15) !important;
-  transition: box-shadow 0.3s ease;
+  border-radius: .6rem !important;
+ 
   animation: backColorChanger 53s infinite;
-  font-family: 'DM Sans', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.trusted-by:hover {
-  box-shadow:
-    0 2px 0 rgba(255,255,255,0.1) inset,
-    0 28px 70px rgba(0,0,0,0.45),
-    0 1px 0 rgba(120,200,170,0.2) !important;
-}
+
 
 .dark-mode .trusted-by {
   background: var(--card-bg-dark) !important;
@@ -1929,7 +1920,7 @@ clock section
   align-items: center;
   gap: .5rem;
   text-align: center;
-  font-family: 'Syne', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 700;
   letter-spacing: -0.01em;
   text-shadow: 0 1px 8px rgba(0,0,0,0.3);
@@ -1965,7 +1956,7 @@ clock section
   gap: .1rem;
   background: none;
   white-space: nowrap;
-  font-family: 'DM Sans', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   z-index: 10;
@@ -1989,7 +1980,7 @@ clock section
   text-align: center;
   gap: .45rem;
   white-space: nowrap;
-  font-family: 'DM Sans', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   color: rgba(220,215,215,0.9);
   font-weight: 500;
   transition: transform 0.2s ease;
@@ -2305,12 +2296,12 @@ SOCIAL FOLLOW SECTION
   padding: .2rem .4rem !important;
   height: 5rem;
   position: relative;
-  border: 1px solid rgb(211, 211, 211);
+  border: 1px solid rgb(221, 220, 220);
   border-radius: 6px;
 }
 
 .dark-mode .follow-share-container{
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6) ;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2) ;
   background-color: var(--card-bg-dark);
   border: 2px solid var(--background-cl-1);
 }
@@ -2716,15 +2707,15 @@ DAILY ANALYTICS SECTION
 }
 
 .card-performance.increase {
-    color: #159570 !important;
+    color: #159570;
 }
 
 .card-performance.decrease {
-    color: #e05252 !important;
+    color: #e05252;
 }
 
 .card-performance.neutral {
-    color: #8b9298 !important;
+    color: #8b9298;
 }
 
 .card-performance .performance-detail{
