@@ -1894,7 +1894,8 @@ function renderCardPerformance(
   elementId,
   current,
   previous,
-  lowerIsBetter = false
+  lowerIsBetter = false,
+  isData = false
 ) {
   const element = document.getElementById(elementId);
 
@@ -1921,9 +1922,7 @@ function renderCardPerformance(
       ? "decrease"
       : "increase";
 
-    directionText = lowerIsBetter
-      ? "higher"
-      : "higher";
+    directionText = "higher";
 
   } else if (change < 0) {
     icon = "ri-arrow-right-down-line";
@@ -1935,28 +1934,48 @@ function renderCardPerformance(
     directionText = "lower";
   }
 
-  element.className = `card-performance ${state}`;
 
+  // Format the comparison values
+  const currentDisplay = isData
+    ? formatDataSize(current)
+    : current.toLocaleString();
+
+  const previousDisplay = isData
+    ? formatDataSize(previous)
+    : previous.toLocaleString();
+
+
+  element.className =
+    `card-performance ${state}`;
+
+
+  // No change
   if (change === 0) {
 
     element.innerHTML = `
       <div class="performance-main">
         <i class="${icon}"></i>
+
         <span class="performance-value">
           No change
         </span>
       </div>
 
       <div class="performance-detail">
-        ${current} this month • ${previous} last month
+        ${currentDisplay} this month
+        •
+        ${previousDisplay} last month
       </div>
     `;
 
     return;
   }
 
+
+  // Increase / decrease
   element.innerHTML = `
     <div class="performance-main">
+
       <i class="${icon}"></i>
 
       <span class="performance-value">
@@ -1966,10 +1985,13 @@ function renderCardPerformance(
       <span class="performance-direction">
         ${directionText}
       </span>
+
     </div>
 
     <div class="performance-detail">
-      ${current} this month • ${previous} last month
+      ${currentDisplay} this month
+      •
+      ${previousDisplay} last month
     </div>
   `;
 }
@@ -2100,7 +2122,9 @@ function renderHomepageTotals() {
 
     currentMonthGB,
 
-    previousMonthGB
+    previousMonthGB,
+    false,
+    true
   );
 
 
