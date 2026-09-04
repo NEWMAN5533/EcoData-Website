@@ -829,7 +829,6 @@ GIVE AWAY TIMER
 ================================*/
 
 .winnerCelebrationContent {
-
 
     z-index: 999999999999;
 
@@ -837,7 +836,8 @@ GIVE AWAY TIMER
         92%,
         450px
     );
-
+
+  
 
     padding: 14px !important;
 
@@ -2481,10 +2481,6 @@ SOCIAL FOLLOW SECTION
 SOCIAL FOLLOW SECTION ENDS
 ****/
 
-/***
-DAILY ANALYTICS SECTION
-****/
-
 
 /****
 DASHBOARD TOTALS OVERVIEW
@@ -2534,6 +2530,9 @@ position: relative;
 align-items: center;
 gap: .6rem;
 }
+
+
+
 
 
 
@@ -2631,9 +2630,12 @@ top section
   width: 100%;
   max-width: 94%;
   display: flex;
+  flex-direction: column;
+
+  gap: .4rem;
   align-items: center;
   justify-content: start !important;
-  height: 3rem;
+  height: 3.4rem;
   padding: 0 !important;
 }
 
@@ -2642,7 +2644,65 @@ top section
   border: 2px solid var(--thin-border);
 }
 
+.total-card-bottom .total-performance{
+  width: 100%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
 
+
+
+
+
+/***
+DAILY ANALYTICS SECTION
+****/
+.total-card-icon {
+    font-size: 20px;
+    line-height: 1;
+    color: #159570;
+}
+
+.total-card-bottom .card-performance {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    gap: 5px;
+    margin-top: 8px;
+    min-height: 20px;
+    font-size: 11px;
+    font-weight: 500;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.card-performance i {
+    font-size: 14px;
+}
+
+.card-performance .performance-value {
+    font-weight: 500;
+}
+
+.card-performance .performance-label {
+    color: #8b9298;
+    font-weight: 500;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.card-performance.increase {
+    color: #159570;
+}
+
+.card-performance.decrease {
+    color: #e05252;
+}
+
+.card-performance.neutral {
+    color: #8b9298;
+}
 
 
 /****

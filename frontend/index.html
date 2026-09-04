@@ -523,6 +523,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
       <div class="wht-left"> 
         <p id="usernameDisplay"></p>
+        
       </div>
       <div class="wht-right">
       <button class="ecb" ></button>
@@ -1899,49 +1900,93 @@ document.addEventListener("DOMContentLoaded", ()=> {
       <span class="sk" style="width:88%;height:5rem; margin-right:3px; "></span>  
     </div>
 
-    <div class="total-card" style="background: #fff;">
+  <!-- Total Orders -->
+<div class="total-card" style="background: #fff;">
 
-      <div class="total-card-top">
-        <small>Total Orders</small>
-        <img src="./css/icons/totalorder.png" alt="total-icon" loading="lazy">
-      </div>
-      <div class="total-card-bottom">
-        <p id="totalOrders">0</p>
-      </div>
+  <div class="total-card-top">
+    <small>Total Orders</small>
+    <i class="ri-shopping-cart-2-line total-card-icon"></i>
+  </div>
+
+  <div class="total-card-bottom">
+   
+
+      <div class="total-performance">
+       <p id="totalOrders">0</p>
     </div>
 
-    <!---next-->
-    <div class="total-card">
-      <div class="total-card-top">
-        <small>Total Data</small>
-        <img src="./css/icons/totalData.png" alt="totalGB" loading="lazy">
-      </div>
-      <div class="total-card-bottom">
-        <p id="totalGB">0</p>
-      </div>
+    <div class="card-performance" id="ordersPerformance">
+      <!-- JS will insert performance here -->
+    </div>
+  </div>
+
+</div>
+
+
+<!-- Total Data -->
+<div class="total-card">
+
+  <div class="total-card-top">
+    <small>Total Data</small>
+    <i class="ri-database-2-line total-card-icon"></i>
+  </div>
+
+  <div class="total-card-bottom">
+    <div class="total-performance">
+      <p id="totalGB">0</p>
     </div>
 
-      <div class="total-card">
-      <div class="total-card-top">
-        <small>Pending Orders </small>
-        <img src="./css/icons/recent.png" alt="spent-icon" loading="lazy">
-      </div>
-      <div class="total-card-bottom">
-        <p id="pendingTotal">0</p>
-      </div>
+    <div class="card-performance" id="dataPerformance">
+      <!-- JS will insert performance here -->
+    </div>
+  </div>
+
+</div>
+
+
+<!-- Pending Orders -->
+<div class="total-card">
+
+  <div class="total-card-top">
+    <small>Pending Orders</small>
+    <i class="ri-time-line total-card-icon"></i>
+  </div>
+
+  <div class="total-card-bottom">
+    
+     <div class="total-performance">
+     <p id="pendingTotal">0</p>
     </div>
 
-
-
-    <div class="total-card">
-      <div class="total-card-top">
-        <small>Completed Orders </small>
-        <img src="./css/uiIcons/approval.png" alt="spent-icon" loading="lazy">
-      </div>
-      <div class="total-card-bottom">
-        <p id="completedOrders">0</p>
-      </div>
+    <div class="card-performance" id="pendingPerformance">
+      <!-- JS will insert performance here -->
     </div>
+  </div>
+
+</div>
+
+
+<!-- Completed Orders -->
+<div class="total-card">
+
+  <div class="total-card-top">
+    <small>Completed Orders</small>
+    <i class="ri-checkbox-circle-line total-card-icon"></i>
+  </div>
+
+  <div class="total-card-bottom">
+   
+
+    <div class="total-performance">
+      <p id="completedOrders">0</p>
+    </div>
+
+    <div class="card-performance" id="completedPerformance">
+      <!-- JS will insert performance here -->
+    </div>
+  </div>
+
+</div>
 
 
   </div>

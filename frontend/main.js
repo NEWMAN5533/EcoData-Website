@@ -1807,24 +1807,330 @@ function updateHomepageTotals(orderData) {
   renderHomepageTotals();
 }
 
+//========================
+// FORMAT TOTALGB
+//========================
 
 
+// ---------- FORMAT DATA SIZE ----------
+function formatDataSize(gb) {
+  gb = Number(gb) || 0;
+
+  if (gb >= 1000) {
+    const tb = gb / 1000;
+
+    return `${Number(tb.toFixed(2))}TB`;
+  }
+
+  return `${Number(gb.toFixed(2))}GB`;
+}
+
+
+function getOrdersForMonth(orders, year, month) {
+
+  return orders.filter(order => {
+
+    if (!order.createdAt) return false;
+
+    const date = new Date(order.createdAt);
+
+    if (isNaN(date.getTime())) return false;
+
+    return (
+      date.getFullYear() === year &&
+      date.getMonth() === month
+    );
+  });
+}
+
+
+
+function getOrderStatus(order) {
+  return String(order.status || "pending").toLowerCase();
+}
+
+
+function isPendingOrder(order) {
+  return getOrderStatus(order) === "pending";
+}
+
+
+function isCompletedOrder(order) {
+  return getOrderStatus(order) === "delivered";
+}
+
+
+function calculateOrderData(orders) {
+
+  return orders.reduce((total, order) => {
+
+    const volume = Number(
+      String(order.volume || "")
+        .replace(/GB/gi, "")
+        .trim()
+    ) || 0;
+
+    return total + volume;
+
+  }, 0);
+}
+
+
+function calculatePercentageChange(current, previous) {
+
+  current = Number(current) || 0;
+  previous = Number(previous) || 0;
+
+  if (previous === 0) {
+    return current > 0 ? 100 : 0;
+  }
+
+  return ((current - previous) / previous) * 100;
+}
+
+
+
+function renderCardPerformance(
+  elementId,
+  current,
+  previous,
+  lowerIsBetter = false
+) {
+
+  const element = document.getElementById(elementId);
+
+  if (!element) return;
+
+  const change =
+    calculatePercentageChange(current, previous);
+
+  const percentage =
+    Math.abs(change).toFixed(1);
+
+  let icon = "ri-arrow-right-line";
+  let state = "neutral";
+
+  if (change > 0) {
+
+    icon = "ri-arrow-right-up-line";
+
+    state = lowerIsBetter
+      ? "decrease"
+      : "increase";
+
+  } else if (change < 0) {
+
+    icon = "ri-arrow-right-down-line";
+
+    state = lowerIsBetter
+      ? "increase"
+      : "decrease";
+  }
+
+  element.className =
+    `card-performance ${state}`;
+
+  element.innerHTML = `
+    <i class="${icon}"></i>
+
+    <span class="performance-value">
+      ${percentage}%
+    </span>
+
+    <span class="performance-label">
+      vs last month
+    </span>
+  `;
+}
 
 
 // ---------- RENDER TOTALS ----------
 function renderHomepageTotals() {
-  const ordersEl = document.getElementById("totalOrders");
-  const gbEl = document.getElementById("totalGB");
 
-  const orders = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
+  const ordersEl =
+    document.getElementById("totalOrders");
+
+  const gbEl =
+    document.getElementById("totalGB");
+
+  const pendingEl =
+    document.getElementById("pendingTotal");
+
+  const completedEl =
+    document.getElementById("completedOrders");
 
 
-  if (!ordersEl || !gbEl ) return;
+  const orders =
+    JSON.parse(
+      localStorage.getItem(LIVE_ORDERS_KEY)
+    ) || [];
+
+
+  if (!ordersEl || !gbEl) return;
+
+
+  // ==========================================
+  // ALL-TIME TOTALS
+  // ==========================================
 
   ordersEl.textContent = orders.length;
-  gbEl.textContent = `${ecoTotals.gb}GB`;
- 
+
+
+  // Your existing all-time data total
+  gbEl.textContent =
+    formatDataSize(ecoTotals.gb);
+
+
+  // ==========================================
+  // CURRENT TOTAL STATUS
+  // ==========================================
+
+  const pendingOrders =
+    orders.filter(isPendingOrder);
+
+  const completedOrders =
+    orders.filter(isCompletedOrder);
+
+
+  if (pendingEl) {
+    pendingEl.textContent =
+      pendingOrders.length;
+  }
+
+  if (completedEl) {
+    completedEl.textContent =
+      completedOrders.length;
+  }
+
+
+  // ==========================================
+  // CURRENT MONTH
+  // ==========================================
+
+  const now = new Date();
+
+  const currentMonthOrders =
+    getOrdersForMonth(
+      orders,
+      now.getFullYear(),
+      now.getMonth()
+    );
+
+
+  // ==========================================
+  // PREVIOUS MONTH
+  // ==========================================
+
+  const previousMonthDate =
+    new Date(
+      now.getFullYear(),
+      now.getMonth() - 1,
+      1
+    );
+
+  const previousMonthOrders =
+    getOrdersForMonth(
+      orders,
+      previousMonthDate.getFullYear(),
+      previousMonthDate.getMonth()
+    );
+
+
+  // ==========================================
+  // TOTAL ORDERS PERFORMANCE
+  // ==========================================
+
+  renderCardPerformance(
+    "ordersPerformance",
+
+    currentMonthOrders.length,
+
+    previousMonthOrders.length
+  );
+
+
+  // ==========================================
+  // TOTAL DATA PERFORMANCE
+  // ==========================================
+
+  const currentMonthGB =
+    calculateOrderData(
+      currentMonthOrders
+    );
+
+  const previousMonthGB =
+    calculateOrderData(
+      previousMonthOrders
+    );
+
+
+  renderCardPerformance(
+    "dataPerformance",
+
+    currentMonthGB,
+
+    previousMonthGB
+  );
+
+
+  // ==========================================
+  // PENDING ORDERS PERFORMANCE
+  // ==========================================
+
+  const currentPending =
+    currentMonthOrders.filter(
+      isPendingOrder
+    ).length;
+
+  const previousPending =
+    previousMonthOrders.filter(
+      isPendingOrder
+    ).length;
+
+
+  renderCardPerformance(
+    "pendingPerformance",
+
+    currentPending,
+
+    previousPending,
+
+    true
+  );
+
+
+  // ==========================================
+  // COMPLETED ORDERS PERFORMANCE
+  // ==========================================
+
+  const currentCompleted =
+    currentMonthOrders.filter(
+      isCompletedOrder
+    ).length;
+
+  const previousCompleted =
+    previousMonthOrders.filter(
+      isCompletedOrder
+    ).length;
+
+
+  renderCardPerformance(
+    "completedPerformance",
+
+    currentCompleted,
+
+    previousCompleted
+  );
 }
+
+
+
+
+
+
+//========================
+// FORMAT TOTALGBend
+//========================
 
 // Load totals on page refresh
 document.addEventListener("DOMContentLoaded", () => {
