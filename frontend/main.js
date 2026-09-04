@@ -1503,69 +1503,88 @@ const normalized = {
 }
 // handleNewOrder ends//
 
+
 const LIVE_ORDERS_KEY = "ecoLiveOrders";
 const MAX_LIVE_ORDERS = 1000;
 
 function saveLiveOrder(order) {
   if (!order || !order.orderId) return;
 
-  const existing = 
-
+  const existing =
     JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY) || "[]");
 
-  const index = existing.findIndex(o => o.orderId === order.orderId);
+  const index = existing.findIndex(
+    o => o.orderId === order.orderId
+  );
 
   if (index !== -1) {
     const current = existing[index];
 
-    // Merge without overwriting status if already delivered/failed
     existing[index] = {
       ...current,
       ...order,
 
-   
+      // Don't allow terminal status to be overwritten
+      status:
+        isTerminalStatus(current.status)
+          ? current.status
+          : order.status,
 
-    // Don't allow terminal status to be overwritten
-      status: 
-      isTerminalStatus(current.status)
-        ? existing[index].status
-        : order.status,
+      // Preserve the original submitted time
+      createdAt:
+        current.createdAt || Date.now(),
 
+      // Keep the original timestamp
+      timestamp:
+        current.timestamp || Date.now(),
 
-     // preserve the origin submitted time
-    createdAt: current.createdAt || Date.now(),    
+      // ⭐ Preserve the original pending-entry time
+      pendingAt:
+        current.pendingAt ||
+        order.pendingAt ||
+        Date.now(),
 
-    // keep the original timestamp
-      timestamp: current.timestamp || Date.now(),
-
-    // Preserve DeliveredAt; only update it in updatedLiveOrderStatus()
-      updatedAt:  order.updatedAt || current.updatedAt,
+      // Preserve update time
+      updatedAt:
+        order.updatedAt || current.updatedAt,
     };
+
   } else {
+
     // New order on top
+    const now = Date.now();
+
     existing.unshift({
       ...order,
-      timestamp: Date.now(), // SINGLE SOURCE OF TRUTH
-    // Submitted time (set once)
-      createdAt: order.createdAt || Date.now(),
 
-    // Initial update time (Same as creation)
-      updatedAt: order.updatedAt || Date.now(),
+      // Single source of truth
+      timestamp: now,
 
+      // Submitted time
+      createdAt:
+        order.createdAt || now,
+
+      // ⭐ First time the order entered pending
+      pendingAt:
+        order.pendingAt || now,
+
+      // Initial update time
+      updatedAt:
+        order.updatedAt || now,
     });
   }
 
   // Keep latest N orders
   localStorage.setItem(
     LIVE_ORDERS_KEY,
-    JSON.stringify(existing.slice(0,
-  MAX_LIVE_ORDERS))
+    JSON.stringify(
+      existing.slice(0, MAX_LIVE_ORDERS)
+    )
   );
 
   updatePendingCard();
   loadActiveBadge();
 }
-
 // ends
 
 
@@ -1844,6 +1863,22 @@ function getOrdersForMonth(orders, year, month) {
 }
 
 
+function getOrdersByPendingMonth(orders, year, month) {
+  return orders.filter(order => {
+    if (!order.pendingAt) return false;
+
+    const date = new Date(order.pendingAt);
+
+    if (isNaN(date.getTime())) return false;
+
+    return (
+      date.getFullYear() === year &&
+      date.getMonth() === month
+    );
+  });
+}
+
+
 
 function getOrderStatus(order) {
   return String(order.status || "pending").toLowerCase();
@@ -1997,6 +2032,8 @@ function renderCardPerformance(
 }
 
 
+
+
 // ---------- RENDER TOTALS ----------
 function renderHomepageTotals() {
 
@@ -2023,13 +2060,27 @@ function renderHomepageTotals() {
 
 
   // ==========================================
+  // DATE REFERENCES
+  // ==========================================
+
+  const now = new Date();
+
+  const previousMonthDate =
+    new Date(
+      now.getFullYear(),
+      now.getMonth() - 1,
+      1
+    );
+
+
+  // ==========================================
   // ALL-TIME TOTALS
   // ==========================================
 
-  ordersEl.textContent = orders.length;
+  ordersEl.textContent =
+    orders.length;
 
 
-  // Your existing all-time data total
   gbEl.textContent =
     formatDataSize(ecoTotals.gb);
 
@@ -2050,6 +2101,7 @@ function renderHomepageTotals() {
       pendingOrders.length;
   }
 
+
   if (completedEl) {
     completedEl.textContent =
       completedOrders.length;
@@ -2057,10 +2109,8 @@ function renderHomepageTotals() {
 
 
   // ==========================================
-  // CURRENT MONTH
+  // CURRENT MONTH ORDERS
   // ==========================================
-
-  const now = new Date();
 
   const currentMonthOrders =
     getOrdersForMonth(
@@ -2071,15 +2121,8 @@ function renderHomepageTotals() {
 
 
   // ==========================================
-  // PREVIOUS MONTH
+  // PREVIOUS MONTH ORDERS
   // ==========================================
-
-  const previousMonthDate =
-    new Date(
-      now.getFullYear(),
-      now.getMonth() - 1,
-      1
-    );
 
   const previousMonthOrders =
     getOrdersForMonth(
@@ -2095,9 +2138,7 @@ function renderHomepageTotals() {
 
   renderCardPerformance(
     "ordersPerformance",
-
     currentMonthOrders.length,
-
     previousMonthOrders.length
   );
 
@@ -2119,9 +2160,7 @@ function renderHomepageTotals() {
 
   renderCardPerformance(
     "dataPerformance",
-
     currentMonthGB,
-
     previousMonthGB,
     false,
     true
@@ -2130,26 +2169,29 @@ function renderHomepageTotals() {
 
   // ==========================================
   // PENDING ORDERS PERFORMANCE
+  // Uses pendingAt — NOT current status
   // ==========================================
 
-  const currentPending =
-    currentMonthOrders.filter(
-      isPendingOrder
-    ).length;
+  const currentPendingOrders =
+    getOrdersByPendingMonth(
+      orders,
+      now.getFullYear(),
+      now.getMonth()
+    );
 
-  const previousPending =
-    previousMonthOrders.filter(
-      isPendingOrder
-    ).length;
+
+  const previousPendingOrders =
+    getOrdersByPendingMonth(
+      orders,
+      previousMonthDate.getFullYear(),
+      previousMonthDate.getMonth()
+    );
 
 
   renderCardPerformance(
     "pendingPerformance",
-
-    currentPending,
-
-    previousPending,
-
+    currentPendingOrders.length,
+    previousPendingOrders.length,
     true
   );
 
@@ -2163,6 +2205,7 @@ function renderHomepageTotals() {
       isCompletedOrder
     ).length;
 
+
   const previousCompleted =
     previousMonthOrders.filter(
       isCompletedOrder
@@ -2171,17 +2214,10 @@ function renderHomepageTotals() {
 
   renderCardPerformance(
     "completedPerformance",
-
     currentCompleted,
-
     previousCompleted
   );
 }
-
-
-
-
-
 
 //========================
 // FORMAT TOTALGBend
@@ -2539,6 +2575,7 @@ function updateLiveOrderStatus(orderId, newStatus) {
 const wasDelivered = currentStatus === ["delivered","cancelled", "failed"];
 const nowDelivered = newStatus ===  ["delivered","cancelled", "failed"];
 
+
   orders[index] = {
     ...orders[index],
     status: newStatus,
@@ -2546,6 +2583,7 @@ const nowDelivered = newStatus ===  ["delivered","cancelled", "failed"];
     updatedAt: currentStatus !== newStatus
     ? Date.now()
     : orders[index].updatedAt,
+
 
     deliveredAt: nowDelivered 
     ? (orders[index].deliveredAt || Date.now()) 
