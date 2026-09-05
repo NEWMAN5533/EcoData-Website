@@ -17,6 +17,7 @@ import {
   collection,
   onSnapshot,
   updateDoc,
+  addDoc,
   query as firestoreQuery,
   query,
   doc,
