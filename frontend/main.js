@@ -1997,6 +1997,56 @@ function renderCardPerformance(
 }
 
 
+function renderPendingPerformance(pendingCount, totalOrders){
+  const element = 
+  document.getElementById("pendingPerformance");
+
+  if(!element) return;
+
+  const percentage =
+  totalOrders > 0
+  ? (pendingCount / totalOrders) * 100
+  : 0
+
+  const percentageText =
+  percentage.toFixed(1);
+
+  const isGood = percentage <= 50;
+  const arrowIcon =
+  isGood
+  ? "ri-arrow-right-down-line"
+  : "ri-arrow-right-up-line";
+
+  const percentageColor =
+  isGood
+  ? "#159570"
+  : "#e05252";
+
+  element.className = "card-performance neutral";
+
+  element.innerHTML = `
+  <div class="performance-main">
+   <i class="${arrowIcon}" style="color: ${percentageColor};"></i>
+
+   <span class="performance-value" style="color: ${percentageColor};">
+    ${percentageText}%
+   </span>
+
+   <span class="performance-direction">
+   of monthly orders
+   </span>
+  </div>
+
+  <div class="performance-detail">
+   ${pendingCount.toLocaleString()}
+   of
+   ${totalOrders.toLocaleString()}
+   orders this month
+  </div>
+  `;
+}
+
+
 // ---------- RENDER TOTALS ----------
 function renderHomepageTotals() {
 
@@ -2137,21 +2187,14 @@ function renderHomepageTotals() {
       isPendingOrder
     ).length;
 
-  const previousPending =
-    previousMonthOrders.filter(
-      isPendingOrder
-    ).length;
+  const currentTotalOrders =
+  currentMonthOrders.length;
 
-
-  renderCardPerformance(
-    "pendingPerformance",
-
-    currentPending,
-
-    previousPending,
-
-    true
+  renderPendingPerformance(
+    currentPending,  // pendingCount
+    currentTotalOrders  // totalOrders
   );
+
 
 
   // ==========================================
