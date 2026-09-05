@@ -2997,11 +2997,16 @@ function addOrderToLeaderboard(customers, order) {
     const customer =
         customers[phone];
 
+    const isAdminLeaderboard =
+    order.LD_Status === "leaderboard" ||
+    order.status === "leaderboard";
+
 
     //========================================
-    // ORDER DATA
+    // NORMAL CUSTOMER ORDER
     //========================================
 
+    if(!isAdminLeaderboard){
     const gb =
         Number(order.volume || 0);
 
@@ -3015,9 +3020,10 @@ function addOrderToLeaderboard(customers, order) {
 
     customer.totalSpent += amount;
 
+    }
 
     //========================================
-    // CHECK MANUAL POINTS
+    // CHECK MANUAL POINTS FROM ADMIN
     //========================================
 
     const hasManualPoints =
@@ -3168,6 +3174,18 @@ function loadLeaderboard() {
         ) {
           return;
         }
+
+        
+        const isAdminLeaderboard =
+        order.LD_Status === "leaderboard";
+        if(!isAdminLeaderboard && 
+          (order.status === "failed" ||
+            order.status === "cancelled"
+          )
+        ) { return;}
+
+
+
 
 
         //========================================

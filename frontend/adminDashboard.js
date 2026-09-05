@@ -486,7 +486,7 @@ if (addLeaderBtn) {
 
             amount: 0,
 
-            status: "leaderboard",
+            LD_Status: "leaderboard",
 
             source: "admin",
 
@@ -834,10 +834,10 @@ function buildCustomerLeaderboard(orders){
  const leaderboard = Object.values(customers)
  .sort((a,b)=>b.points-a.points);
 
- console.table(leaderboardCustomers.slice(0,5));
+ console.table(leaderboardCustomers.slice(0,9));
 
 
- return leaderboardCustomers.slice(0,5);
+ return leaderboardCustomers.slice(0,9);
 }
 
 
