@@ -1,4 +1,4 @@
-// UPDATED AT 17th/Aug, 2026 [BACKUP MAIN.JS]
+// UPDATED AT 4th/September, 2026 [BACKUP MAIN.JS]
 
 // --- Firebase Imports ---
 import { auth, db } from "./firebase-config.js";
@@ -1923,6 +1923,47 @@ function calculatePercentageChange(current, previous) {
   return ((current - previous) / previous) * 100;
 }
 
+function renderPendingPerformance(pendingCount, totalOrders){
+  const element =
+  document.getElementById("pendingPerformance");
+
+  if(!element) return;
+
+  const percentage = 
+  totalOrders > 0
+  ? ((pendingCount / totalOrders) * 100).toFixed(1)
+  : 0;
+
+ const percentageText =
+ percentage.toFixed(1);
+
+ const percentageColor =
+ percentage <= 50
+? "#159570"
+: "#e05252";
+
+  element.className = "card-performance neutral";
+
+  element.innerHTML = `
+  <div class="performance-main">
+
+    <span class="performance-value" style="color: ${percentageColor};">
+    ${percentageText}%
+    </span>
+
+    <span class="performance-direction">
+      of monthly orders
+    </span>
+  </div>
+
+  <div class="performance-detail">
+    ${pendingCount.toLocaleString()} of
+    ${totalOrders.toLocaleString()}
+    orders this month
+  </div>
+  `;
+}
+
 
 
 function renderCardPerformance(
@@ -2169,30 +2210,17 @@ function renderHomepageTotals() {
 
   // ==========================================
   // PENDING ORDERS PERFORMANCE
-  // Uses pendingAt — NOT current status
+  // 
   // ==========================================
 
-  const currentPendingOrders =
-    getOrdersByPendingMonth(
-      orders,
-      now.getFullYear(),
-      now.getMonth()
-    );
+  const currentPending =
+  currentMonthOrders.filter(
+    isPendingOrder
+  ).length;
 
-
-  const previousPendingOrders =
-    getOrdersByPendingMonth(
-      orders,
-      previousMonthDate.getFullYear(),
-      previousMonthDate.getMonth()
-    );
-
-
-  renderCardPerformance(
-    "pendingPerformance",
-    currentPendingOrders.length,
-    previousPendingOrders.length,
-    true
+  renderPendingPerformance(
+    currentPending,
+    currentMonthOrders.length
   );
 
 
