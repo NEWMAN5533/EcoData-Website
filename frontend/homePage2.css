@@ -8,8 +8,7 @@
    ========================================================= */
    .side-panel{
     position: fixed;
-    top: 4rem;
-    bottom: 5rem;
+    bottom: 14rem;
     right: .5rem;
     width: 4rem;
     height: 15rem;
