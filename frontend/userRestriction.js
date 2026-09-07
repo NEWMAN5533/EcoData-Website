@@ -102,7 +102,6 @@ if(selLogout){
 
 try{
   await signOut(auth);
-    showSnackBar("Logged Out successfully!");
   } catch(error){
   console.error("LogOut error", error);
   showSnackBar("Error logging out.", "warning", 3000);

@@ -73,6 +73,11 @@
   box-shadow: 0 10px 20px rgba(0,0,0,0.1);
   border: 1px solid var(--border);
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .dark-mode .checker-order {
