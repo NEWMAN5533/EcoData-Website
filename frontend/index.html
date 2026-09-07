@@ -106,6 +106,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
   <link rel="stylesheet" href="styleGlobal4.css">
   <link rel="stylesheet" href="styleSkeletonUi.css">
   <link rel="stylesheet" href="homePage.css">
+  <link rel="stylesheet" href="homePage2.css">
   <link rel="stylesheet" href="homeTable.css">
 
   <!---new bundle card style----->
@@ -449,7 +450,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
   
           <!---MAIN-->
-         <div class="grid-container-main">
+<div class="grid-container-main">
           
   <!---CARD CONTAINER------>
   <section class="card-container">
@@ -1548,7 +1549,16 @@ document.addEventListener("DOMContentLoaded", ()=> {
   <!---SCROLL THUMBNAIL--REUSABLE--CARD ADS----ends---->
 
 
-  <!--DELIVERY INDICATOR-->
+
+
+
+
+
+
+
+        
+
+  <!-------DELIVERY TRACKER 1---->
   <section id='deliveryTracker1' class="delivery-indicator" style='display: none;'>
    <div id="sk-deliverTracker1" class="sk-delivery-indicator-container">
     <div class="sk-indicator-left">
@@ -1589,7 +1599,11 @@ document.addEventListener("DOMContentLoaded", ()=> {
     </div>
   </section>
   
-  <!--bottom-->
+
+
+
+
+  <!--DELIVERY TRACKER 2----->
   <section id="deliveryTracker2" class='indicator-bottom'style='display: none;'>
 
      <div id="sk-deliverTracker2" class="sk-delivery-indicator-container2">
@@ -1657,7 +1671,11 @@ document.addEventListener("DOMContentLoaded", ()=> {
  
    
   </section>
+
   <!--DELIVERY INDICATOR-->
+
+
+
 
 
 
@@ -2122,6 +2140,35 @@ document.addEventListener("DOMContentLoaded", ()=> {
   <!-- ends -->
 
   <!----dashboard-overview-->
+
+  <section class="myLiveOrderStatus" style="display: none;">
+    <div class="liveOrderSearch">
+
+    <div class="liveOrderSearchHeader">
+        <h2>Search Live Order</h2>
+        <p>Enter an Order ID or reference to check its latest status.</p>
+    </div>
+
+    <div class="liveOrderSearchBox">
+        <input
+            type="text"
+            id="liveOrderSearchInput"
+            placeholder="Enter Order ID or reference"
+            autocomplete="off"
+        >
+
+        <button
+            type="button"
+            id="liveOrderSearchBtn"
+        >
+            Search
+        </button>
+    </div>
+
+    <div id="liveOrderResult"></div>
+
+</div>
+  </section>
   <!----ENDS-->
 
 
@@ -5747,6 +5794,29 @@ document.addEventListener("DOMContentLoaded", ()=> {
     </div>
   </div>
   <!----PAYSTACK-LOADER-->
+
+
+  <!---SIDE PANEL-->
+  <section class="side-panel">
+   <div class="panel-top">
+    <div class="checker-order" id="checkOrderStat">
+      <img src="./css/icons/totalData.png" alt="">
+    </div>
+
+    <div class="checker-order" onclick="window.location.href='./signUp.html'">
+      <img src="./css/icons/personal.png" alt="">
+    </div>
+   </div>
+   <div class="panel-bottom">
+      <div class="checker-order"  onclick='window.location.href ="./terms.html"'>
+       <img src="./css/icons/terms (1).png" alt="">
+    </div>
+
+      <div class="checker-order" id="selLogout">
+        <img src="./css/icons/logout.png" alt="">
+    </div>
+   </div>
+  </section>
 
 
 

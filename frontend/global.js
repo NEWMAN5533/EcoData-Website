@@ -3,8 +3,28 @@
 const GIVEAWAY_TIMER_START = new Date("2026-09-01T23:59:59");
 const GIVEAWAY_TIMER_ENDS = new Date("2026-09-30T23:59:59");
 
+
 // CUSTOM CURSOR JS
   document.addEventListener("DOMContentLoaded", () => {
+
+  //======================
+  // ORDER STATUS CHECKER
+  //=======================
+  const statusCheckerBtn = document.getElementById("checkOrderStat");
+
+
+  if(statusCheckerBtn) {
+    statusCheckerBtn.addEventListener("click", ()=> {
+      showSnackBar("Coming up soon for order status checking by orderId.", 5000);
+    })
+  }
+
+  //===========================
+  // ORDER STATUS CHECKER ENDS
+  //===========================
+
+
+  
     // total orders
     const totalCustomersOrders = document.getElementById("stat-num");
     if(totalCustomersOrders){
@@ -227,6 +247,8 @@ function showSnackBar(message, type = "info", duration = 4000) {
  
  });
 // CUSTOM CURSOR JS ENDS
+
+
 
 
 // SIDEBAR TOGGLE
