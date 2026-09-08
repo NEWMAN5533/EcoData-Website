@@ -10,7 +10,58 @@ const GIVEAWAY_TIMER_ENDS = new Date("2026-09-30T23:59:59");
   //======================
   // ORDER STATUS CHECKER
   //=======================
+
+
+  const panelSwitch = document.getElementById("panelSwitch");
+  const panelContainer = document.getElementById("sidePanel");
   const statusCheckerBtn = document.getElementById("checkOrderStat");
+
+function openPanel(){
+  panelContainer.style.right = ".5rem";
+  
+  panelSwitch.style.right = "-200px";
+}
+
+function closePanel(){
+  panelContainer.style.right = "-200px";
+
+  panelSwitch.style.right = "-3.8rem";
+}
+
+// Switch
+panelSwitch.addEventListener("click", (event) => {
+  event.stopPropagation();
+
+  if(panelContainer.style.right === ".5rem"){
+    closePanel();
+  } else{
+    openPanel();
+  }
+});
+
+
+// keep clicks inside the panel from closing
+panelContainer.addEventListener("click", (event)=> {
+  event.stopPropagation();
+});
+
+// window clicking outside check
+window.addEventListener("click", (event) => {
+  // ignore clicks on the switch
+  if(panelSwitch.contains(event.target)){
+    return;
+  }
+
+  // ignore clicks on panelContainer
+  if(panelContainer.contains(event.target)){
+    return;
+  }
+
+
+  closePanel();
+})
+
+
 
 
   if(statusCheckerBtn) {
@@ -19,12 +70,17 @@ const GIVEAWAY_TIMER_ENDS = new Date("2026-09-30T23:59:59");
     })
   }
 
+
+
+
+
+
   //===========================
   // ORDER STATUS CHECKER ENDS
   //===========================
 
 
-  
+
     // total orders
     const totalCustomersOrders = document.getElementById("stat-num");
     if(totalCustomersOrders){

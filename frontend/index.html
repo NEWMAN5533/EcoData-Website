@@ -456,7 +456,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
   <section class="card-container">
 
   <!----WELCOME HERO---->
-  <section class="welcome-hero">
+  <section class="welcome-hero ">
 
       <!---welcome=card---->
     <div id="sk-Welcome" class="sk-welcome-card">
@@ -805,7 +805,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
 
   <!-----COUNTER-ENDS--->
-<section class="trust-swiper-container">
+<section class="trust-swiper-container ">
   <div class="swiper trust-swiper">
     <div class="swiper-wrapper">
 
@@ -2074,7 +2074,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
 
 
- <section class="table-section">
+ <section class="table-section ">
   <div id="sk-table" class="sk-table-container">
     <div class="sk-table-top">
       <div class="sk-tt-top">
@@ -2141,35 +2141,6 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
   <!----dashboard-overview-->
 
-  <section class="myLiveOrderStatus" style="display: none;">
-    <div class="liveOrderSearch">
-
-    <div class="liveOrderSearchHeader">
-        <h2>Search Live Order</h2>
-        <p>Enter an Order ID or reference to check its latest status.</p>
-    </div>
-
-    <div class="liveOrderSearchBox">
-        <input
-            type="text"
-            id="liveOrderSearchInput"
-            placeholder="Enter Order ID or reference"
-            autocomplete="off"
-        >
-
-        <button
-            type="button"
-            id="liveOrderSearchBtn"
-        >
-            Search
-        </button>
-    </div>
-
-    <div id="liveOrderResult"></div>
-
-</div>
-  </section>
-  <!----ENDS-->
 
 
 
@@ -2276,7 +2247,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
   <!-----INDIVIDUAL SECTIONS-VIEW TOGGLE---->
  
 
-  <section id="normalView" class="view active" >
+  <section id="normalView" class="view active " >
   <div id="sk-normalView" class="sk-normalView-container">
     <div class="sk-normal-tp-wrapper">
        <div class="sk-normal-top">
@@ -5796,8 +5767,41 @@ document.addEventListener("DOMContentLoaded", ()=> {
   <!----PAYSTACK-LOADER-->
 
 
+  <!--LIVE ORDER STATUS CHECK-SECTION---->
+
+  
+  <section class="myLiveOrderStatus" style="display: none;">
+    <div class="liveOrderSearch">
+
+    <div class="liveOrderSearchHeader">
+        <h2>Search Live Order</h2>
+        <p>Enter an Order ID or reference to check its latest status.</p>
+    </div>
+
+    <div class="liveOrderSearchBox">
+        <input
+            type="text"
+            id="liveOrderSearchInput"
+            placeholder="Enter Order ID or reference"
+            autocomplete="off"
+        >
+
+        <button
+            type="button"
+            id="liveOrderSearchBtn"
+        >
+            Search
+        </button>
+    </div>
+
+    <div id="liveOrderResult"></div>
+
+</div>
+  </section>
+  <!----ENDS-->
+
   <!---SIDE PANEL-->
-  <section class="side-panel">
+  <section class="side-panel" id="sidePanel">
    <div class="panel-top">
     <div class="checker-order" id="checkOrderStat">
       <img src="./css/icons/totalData.png" alt="">
@@ -5809,13 +5813,17 @@ document.addEventListener("DOMContentLoaded", ()=> {
    </div>
    <div class="panel-bottom">
       <div class="checker-order"  onclick='window.location.href ="./terms.html"'>
-       <img src="./css/icons/terms (1).png" alt="">
+       <img src="./css/icons/list.jpg" alt="">
     </div>
 
-      <div class="checker-order" id="selLogout">
-        <img src="./css/icons/logout.png" alt="">
+      <div class="checker-order" onclick="window.location.href = './bundlesInfo.html'">
+        <img src="./css/icons/terms (1).png" alt="">
     </div>
    </div>
+  </section>
+
+  <section class="panel-drawer" id="panelSwitch">
+    <div class="panel-drawer-tip"></div>
   </section>
 
 
