@@ -5769,35 +5769,154 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
   <!--LIVE ORDER STATUS CHECK-SECTION---->
 
-  
-  <section class="myLiveOrderStatus" style="display: none;">
-    <div class="liveOrderSearch">
+  <section class="status-modal" id="statusCheckModal">
+    <div class="status-modal-content">
+      <div class="header-content">
+        <h2>Check Order with ID:</h2>
+        <div class="close-modal" id="closeStatusCheckModal">
+          &times;
+        </div>
+      </div>
 
-    <div class="liveOrderSearchHeader">
-        <h2>Search Live Order</h2>
-        <p>Enter an Order ID or reference to check its latest status.</p>
+      <div class="live-content-header">
+        <div class="live-header-top-content">
+          <img src="./css/icons/totalData.png" alt="" />
+        </div>
+        <p>You should note these next time when purchasing</p>
+      </div>
+
+      <div class="note-status-content">
+        <div><small>1</small>
+          <p>Make sure you data connection is stable during payment processing.
+
+          </p>
+        </div>
+
+          <div><small>2</small>
+          <p>
+            After Momo prompt, Click "I have completed the payment" so the system can verify the payment.
+          </p>
+        </div>
+
+        <div>
+          <small>3</small>
+          <p>
+            Wait for data purchase response and do not close the website.
+          </p>
+        </div>
+
+        <div>
+          <small>4</small>
+          <p>
+            Contact our Admin line on whatsAPP for <strong>ORD-ID</strong> anytime it happens.
+          </p>
+
+      </div>
+
+      </div>
+
+
+      <div class="live-content-header">
+        LIVE STATUS 
+      </div>
+
+
+      
+       
+    <!-- TABLE -->
+
+    <div class="status-live-content">
+
+      <div class="table-scroll-area">
+
+
+        <!-- TABLE HEADER -->
+
+        <div class="table-header">
+
+          <span>
+            ORD-ID
+          </span>
+
+          <span>
+            RECIPIENT
+          </span>
+
+          <span>
+            SIZE
+          </span>
+
+          <span>
+            STATUS
+          </span>
+
+          <span>
+            DATE
+          </span>
+        </div>
+
+
+        <!-- DYNAMIC PRODUCTS -->
+
+        <div class="main-row-content">
+
+          <div
+            class="row-wrapper"
+            id="liveOrderResult"
+          >
+
+            <!-- dynamic rows -->
+            <div id="emptyDataState">
+              No search yet
+              </div>
+            <!--
+              sellerDashboard.js
+              inserts products here
+            -->
+
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
+     
 
-    <div class="liveOrderSearchBox">
-        <input
-            type="text"
-            id="liveOrderSearchInput"
-            placeholder="Enter Order ID or reference"
-            autocomplete="off"
-        >
+       <div class="live-content-header">
+        ORD-ID / REFERENCE
+      </div>
 
-        <button
-            type="button"
-            id="liveOrderSearchBtn"
-        >
-            Search
-        </button>
+
+      <!---SEARCH INPUTS-->
+      <div class="status-search-input-content">
+        <div>
+          <label>
+            Search Live Order
+          </label>
+        </div>
+        <div>
+          <input 
+          type="text"
+          id="OrderSearchInput"
+          placeholder="Enter Order ID"
+          autocomplete="off"
+          class="manualSearchInputField">
+        </div>
+        <div>
+         <button 
+          type="button"
+          id="searchStatBtn"
+          class="manualSearchBtn"
+          >Search 
+         </button>
+        </div>
+      </div>
+
+
     </div>
-
-    <div id="liveOrderResult"></div>
-
-</div>
   </section>
+ 
   <!----ENDS-->
 
   <!---SIDE PANEL-->
