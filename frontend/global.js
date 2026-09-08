@@ -62,17 +62,63 @@ window.addEventListener("click", (event) => {
 })
 
 
+//===========================
+// CHECK MODAL
+//===========================
+const statusCheckModal = document.getElementById("statusCheckModal");
+const closeStatusCheckModal = document.getElementById("closeStatusCheckModal");
+
+const webMenuIcon = document.getElementById("sidebarViewer");
+
+// isOpen function
+function isStatusModalOpen(){
+
+ 
+  webMenuIcon.style.display = "none";
+ 
+}
+
+// add close function
+function statusModalClose(){
+ statusCheckModal.style.top = "-50rem";
+ webMenuIcon.style.display = "flex";
+
+}
 
 
-  if(statusCheckerBtn) {
-    statusCheckerBtn.addEventListener("click", ()=> {
-      showSnackBar("Coming up soon for order status checking by orderId.", 5000);
-    })
-  }
+
+// add eventlistener
+closeStatusCheckModal.addEventListener("click", ()=> {
+ statusModalClose();
+})
 
 
 
+//===========================
+// CHECK MODAL ENDS
+//===========================
 
+function openCheckModal() {
+  statusCheckModal.style.top = "3.4rem";
+}
+
+
+function checkMe(){
+    statusCheckerBtn.addEventListener("click", (e)=> {
+      e.stopPropagation();
+
+      if(statusCheckModal.style.display === "flex"){
+        statusModalClose();
+      } else{
+        openCheckModal();
+      }
+
+      isStatusModalOpen();
+  })
+  
+}
+
+checkMe();
 
 
   //===========================
