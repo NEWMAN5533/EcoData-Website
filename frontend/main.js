@@ -1017,9 +1017,9 @@ function activateTrackers() {
 
 // un activate trackers when no orders
 function unActivateTrackers(){
- const firstTracker = document.getElementById("deliveryTracker1").style.display = "none";
+ const firstTracker = document.getElementById("deliveryTracker1").style.display = "flex";
 
- const secondTracker = document.getElementById("deliveryTracker2").style.display = "none";
+ const secondTracker = document.getElementById("deliveryTracker2").style.display = "flex";
 }
 
 //=================================
@@ -4590,3 +4590,762 @@ setInterval(
 
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ============================================================
+// LIVE ORDER STATUS SEARCH
+// ============================================================
+
+const LIVE_ORDER_STORAGE_KEY = "ecoDataLiveOrders";
+
+const OrderSearchInput =
+  document.getElementById("OrderSearchInput");
+
+const searchStatBtn =
+  document.getElementById("searchStatBtn");
+
+const liveOrderResult =
+  document.getElementById("liveOrderResult");
+
+const emptyDataState = document.getElementById("emptyDataState");
+
+
+// ============================================================
+// LOAD SAVED ORDERS
+// ============================================================
+
+let liveOrders = loadCheckedLiveOrders();
+
+
+// ============================================================
+// LOCAL STORAGE
+// ============================================================
+
+function loadCheckedLiveOrders() {
+  try {
+
+    const saved =
+      localStorage.getItem(LIVE_ORDER_STORAGE_KEY);
+
+    if (!saved) {
+      return [];
+    }
+
+    const parsed = JSON.parse(saved);
+
+    return Array.isArray(parsed)
+      ? parsed
+      : [];
+
+  } catch (error) {
+
+    console.error(
+      "Failed to load live orders:",
+      error
+    );
+
+    return [];
+  }
+}
+
+
+function saveLiveOrders() {
+
+  try {
+
+    localStorage.setItem(
+      LIVE_ORDER_STORAGE_KEY,
+      JSON.stringify(liveOrders)
+    );
+
+  } catch (error) {
+
+    console.error(
+      "Failed to save live orders:",
+      error
+    );
+
+  }
+}
+
+
+// ============================================================
+// SEARCH ORDER
+// ============================================================
+
+async function searchLiveOrder() {
+
+  const orderIdOrRef =
+    OrderSearchInput.value.trim();
+
+
+  if (!orderIdOrRef) {
+
+    showLiveOrderMessage(
+      "Enter an Order ID to search.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  // Prevent duplicate searches while loading
+  searchStatBtn.disabled = true;
+
+  searchStatBtn.textContent = "Searching...";
+
+
+  showLiveOrderMessage(
+    "Checking live order status...",
+    "loading"
+  );
+
+
+  try {
+
+    // --------------------------------------------------------
+    // CALL YOUR NEW ROUTER
+    // --------------------------------------------------------
+
+    const response = await fetch(
+      `/api/live-order-status/${encodeURIComponent(orderIdOrRef)}`
+    );
+
+
+    const returnedOrder =
+      await response.json();
+
+
+    // --------------------------------------------------------
+    // CHECK RESPONSE
+    // --------------------------------------------------------
+
+    if (
+      !response.ok ||
+      !returnedOrder.success ||
+      !returnedOrder.order
+    ) {
+
+      throw new Error(
+        returnedOrder.message ||
+        "Order not found."
+      );
+    }
+
+
+    const order =
+      returnedOrder.order;
+
+
+    // --------------------------------------------------------
+    // CHECK IF ORDER ALREADY EXISTS
+    // --------------------------------------------------------
+
+    const existingIndex =
+      liveOrders.findIndex(
+        item =>
+          item.orderId === order.orderId
+      );
+
+
+    if (existingIndex !== -1) {
+
+      // ------------------------------------------------------
+      // UPDATE EXISTING ORDER
+      // ------------------------------------------------------
+
+      liveOrders[existingIndex] = {
+        ...liveOrders[existingIndex],
+
+        recipient:
+          order.recipient ||
+          liveOrders[existingIndex].recipient,
+
+        size:
+          order.volume ??
+          liveOrders[existingIndex].size,
+
+        status:
+          order.status ||
+          liveOrders[existingIndex].status,
+
+        timestamp:
+          order.timestamp ||
+          liveOrders[existingIndex].timestamp
+      };
+
+    } else {
+
+      // ------------------------------------------------------
+      // CREATE NEW ORDER
+      // ------------------------------------------------------
+
+      liveOrders.push({
+
+        orderId:
+          order.orderId,
+
+        recipient:
+          order.recipient || "—",
+
+        size:
+          order.volume ?? "—",
+
+        status:
+          order.status || "unknown",
+
+        timestamp:
+          order.timestamp || null
+
+      });
+
+    }
+
+
+    // --------------------------------------------------------
+    // SAVE TO LOCAL STORAGE
+    // --------------------------------------------------------
+
+    saveLiveOrders();
+
+
+    // --------------------------------------------------------
+    // RENDER TABLE
+    // --------------------------------------------------------
+
+    renderLiveOrders();
+
+
+    // Clear search field
+    OrderSearchInput.value = "";
+
+
+  } catch (error) {
+
+    console.error(
+      "Live order search error:",
+      error
+    );
+
+
+    showLiveOrderMessage(
+      error.message ||
+      "Unable to retrieve order status.",
+      "error"
+    );
+
+
+  } finally {
+
+    searchStatBtn.disabled = false;
+
+    searchStatBtn.textContent = "Search";
+
+  }
+
+}
+
+
+// ============================================================
+// RENDER ALL SAVED ORDERS
+// ============================================================
+
+function renderLiveOrders() {
+
+  // Clear current rows
+  liveOrderResult.innerHTML = "";
+
+
+  // ----------------------------------------------------------
+  // NO ORDERS
+  // ----------------------------------------------------------
+
+  if (!liveOrders.length) {
+
+    emptyDataState.innerHTML = `
+      <div class="sellerProductsEmpty">
+        No live orders searched yet.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  // ----------------------------------------------------------
+  // CREATE ROW FOR EACH ORDER
+  // ----------------------------------------------------------
+
+  [...liveOrders]
+  .reverse()
+  .forEach(order => {
+
+    const row =
+      document.createElement("div");
+
+    row.className = "live-row";
+
+    row.dataset.orderId =
+      order.orderId;
+
+
+    row.innerHTML = `
+
+      <span class="live-order-cell order-id-cell">
+        ${escapeLiveOrderHTML(order.orderId)}
+      </span>
+
+      <span class="live-order-cell recipient-cell">
+        ${escapeLiveOrderHTML(order.recipient)}
+      </span>
+
+      <span class="live-order-cell size-cell">
+        ${escapeLiveOrderHTML(order.size)}
+      </span>
+
+      <span class="live-order-cell status-cell">
+
+        <span
+          class="live-status-pill ${getLiveStatusClass(order.status)}"
+        >
+
+          <span class="live-status-dot"></span>
+
+          ${escapeLiveOrderHTML(
+            formatLiveStatus(order.status)
+          )}
+
+        </span>
+
+      </span>
+
+      <span class="live-order-cell date-cell">
+        ${formatLiveOrderDate(order.timestamp)}
+      </span>
+
+    `;
+
+
+    liveOrderResult.prepend(row);
+
+  });
+
+}
+
+
+// ============================================================
+// POLL SWIFT FOR LIVE STATUS
+// ============================================================
+
+async function refreshLiveOrderStatuses() {
+
+  if (!liveOrders.length) {
+    return;
+  }
+
+
+  // ----------------------------------------------------------
+  // CHECK EVERY SAVED ORDER
+  // ----------------------------------------------------------
+
+  for (const order of liveOrders) {
+
+    try {
+
+      const response = await fetch(
+        `/api/live-order-status/${encodeURIComponent(order.orderId)}`
+      );
+
+
+      const returnedOrder =
+        await response.json();
+
+
+      if (
+        !response.ok ||
+        !returnedOrder.success ||
+        !returnedOrder.order
+      ) {
+
+        continue;
+      }
+
+
+      const freshOrder =
+        returnedOrder.order;
+
+
+      // ------------------------------------------------------
+      // FIND STORED ORDER
+      // ------------------------------------------------------
+
+      const index =
+        liveOrders.findIndex(
+          item =>
+            item.orderId === order.orderId
+        );
+
+
+      if (index === -1) {
+        continue;
+      }
+
+
+      // ------------------------------------------------------
+      // UPDATE LIVE STATUS
+      // ------------------------------------------------------
+
+      liveOrders[index].status =
+        freshOrder.status ||
+        liveOrders[index].status;
+
+
+      // ------------------------------------------------------
+      // Keep latest timestamp if Swift provides it
+      // ------------------------------------------------------
+
+      if (freshOrder.timestamp) {
+
+        liveOrders[index].timestamp =
+          freshOrder.timestamp;
+
+      }
+
+
+      // Recipient can also be refreshed
+      if (freshOrder.recipient) {
+
+        liveOrders[index].recipient =
+          freshOrder.recipient;
+
+      }
+
+
+      // Size can also be refreshed
+      if (freshOrder.volume !== undefined) {
+
+        liveOrders[index].size =
+          freshOrder.volume;
+
+      }
+
+
+      // ------------------------------------------------------
+      // UPDATE ONLY THE ROW
+      // ------------------------------------------------------
+
+      updateLiveOrderRow(
+        liveOrders[index]
+      );
+
+
+    } catch (error) {
+
+      console.error(
+        `Failed to refresh ${order.orderId}:`,
+        error
+      );
+
+    }
+
+  }
+
+
+  // Save latest statuses
+  saveLiveOrders();
+
+}
+
+
+// ============================================================
+// UPDATE ONE ROW WITHOUT REBUILDING THE TABLE
+// ============================================================
+
+function updateLiveOrderRow(order) {
+
+  const row =
+    liveOrderResult.querySelector(
+      `.live-order-row[data-order-id="${CSS.escape(order.orderId)}"]`
+    );
+
+
+  if (!row) {
+    return;
+  }
+
+
+  const statusCell =
+    row.querySelector(".status-cell");
+
+
+  if (statusCell) {
+
+    statusCell.innerHTML = `
+
+      <span
+        class="live-status-pill ${getLiveStatusClass(order.status)}"
+      >
+
+        <span class="live-status-dot"></span>
+
+        ${escapeLiveOrderHTML(
+          formatLiveStatus(order.status)
+        )}
+
+      </span>
+
+    `;
+
+  }
+
+
+  // Update recipient if changed
+  const recipientCell =
+    row.querySelector(".recipient-cell");
+
+  if (recipientCell) {
+
+    recipientCell.textContent =
+      order.recipient || "—";
+
+  }
+
+
+  // Update size if changed
+  const sizeCell =
+    row.querySelector(".size-cell");
+
+  if (sizeCell) {
+
+    sizeCell.textContent =
+      order.size ?? "—";
+
+  }
+
+
+  // Update timestamp
+  const dateCell =
+    row.querySelector(".date-cell");
+
+  if (dateCell) {
+
+    dateCell.textContent =
+      formatLiveOrderDate(order.timestamp);
+
+  }
+
+}
+
+
+// ============================================================
+// STATUS CLASS
+// ============================================================
+
+function getLiveStatusClass(status) {
+
+  const normalized =
+    String(status || "")
+      .toLowerCase()
+      .trim();
+
+
+  if (
+    normalized === "delivered" ||
+    normalized === "completed" ||
+    normalized === "success" ||
+    normalized === "successful"
+  ) {
+
+    return "status-delivered";
+
+  }
+
+
+  if (
+    normalized === "pending" ||
+    normalized === "processing" ||
+    normalized === "in-progress"
+  ) {
+
+    return "status-pending";
+
+  }
+
+
+  if (
+    normalized === "failed" ||
+    normalized === "cancelled" ||
+    normalized === "canceled"
+  ) {
+
+    return "status-failed";
+
+  }
+
+
+  return "status-unknown";
+
+}
+
+
+// ============================================================
+// FORMAT STATUS
+// ============================================================
+
+function formatLiveStatus(status) {
+
+  if (!status) {
+    return "Unknown";
+  }
+
+
+  const value =
+    String(status)
+      .toLowerCase()
+      .trim();
+
+
+  return value.charAt(0).toUpperCase() +
+         value.slice(1);
+
+}
+
+
+// ============================================================
+// FORMAT DATE
+// ============================================================
+
+function formatLiveOrderDate(timestamp) {
+
+  if (!timestamp) {
+    return "—";
+  }
+
+
+  const date =
+    new Date(timestamp);
+
+
+  if (Number.isNaN(date.getTime())) {
+    return "—";
+  }
+
+
+  return date.toLocaleString(
+    undefined,
+    {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit"
+    }
+  );
+
+}
+
+
+// ============================================================
+// ESCAPE HTML
+// ============================================================
+
+function escapeLiveOrderHTML(value) {
+
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+
+
+// ============================================================
+// MESSAGE
+// ============================================================
+
+function showLiveOrderMessage(
+  message,
+  type = "error"
+) {
+
+  liveOrderResult.innerHTML = `
+
+    <div class="liveOrderMessage ${type}">
+      ${escapeLiveOrderHTML(message)}
+    </div>
+
+  `;
+
+}
+
+
+// ============================================================
+// SEARCH BUTTON
+// ============================================================
+
+if (searchStatBtn) {
+
+  searchStatBtn.addEventListener(
+    "click",
+    searchLiveOrder
+  );
+
+}
+
+
+// ============================================================
+// ENTER KEY SEARCH
+// ============================================================
+
+if (OrderSearchInput) {
+
+  OrderSearchInput.addEventListener(
+    "keydown",
+    event => {
+
+      if (event.key === "Enter") {
+
+        event.preventDefault();
+
+        searchLiveOrder();
+
+      }
+
+    }
+  );
+
+}
+
+
+// ============================================================
+// INITIAL TABLE LOAD
+// ============================================================
+
+renderLiveOrders();
+
+
+// ============================================================
+// LIVE STATUS POLLING — EVERY 5 SECONDS
+// ============================================================
+
+setInterval(
+  refreshLiveOrderStatuses,
+  5000
+);
