@@ -659,6 +659,10 @@ ul {
   background: var(--color-light) !important; 
 }
 
+.main-container .all-products-wrapper{
+  border: none !important;
+}
+
 .dark-mode .main-container {
    background: var(--card-bg-dark) !important;
 }
