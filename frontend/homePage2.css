@@ -678,7 +678,7 @@ font-family: var(--font-family);
   align-items: center;
   justify-items: center;
   grid-template-columns: 
-    80px 100px 110px 110px 120px;
+    100px 140px  120px 140px  170px;
     margin-left: .5rem;
 
   /* sticky top so it stays visible while scrolling vertically */
@@ -728,7 +728,7 @@ font-family: var(--font-family);
   padding: 0 .5rem;
   align-items: start;
   grid-template-columns: 
-  80px 130px  120px 140px  170px;
+  100px 140px  120px 140px  170px;
   position: relative;
   min-width: max-content; /* ensures rows stretch with header */
 }
@@ -911,6 +911,11 @@ font-family: var(--font-family);
 }
 
 
+.dark-mode  div .manualSearchInputField{
+   border: 1px dashed var(--color-light);
+}
+
+
 /** button **/
 .status-search-input-content div .manualSearchBtn{
   width: 90%;
@@ -958,7 +963,7 @@ font-family: var(--font-family);
   display: grid;
 
   grid-template-columns:
-  80px 130px  120px 140px  170px;
+  100px 140px  120px 140px  170px;
 
   align-items: center;
 
