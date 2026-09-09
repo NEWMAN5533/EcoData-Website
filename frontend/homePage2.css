@@ -992,17 +992,18 @@ font-family: var(--font-family);
 
   padding: 0 16px;
 
-  color: var(
-    --text-primary,
-    #24262b
-  );
+  color: var(--text-faint);
 
   font-size: 13px;
   font-weight: 500;
 
   overflow: hidden;
-  text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.dark-mode .live-order-cell {
+  color: var(--color-light) !important;
+  opacity: .8;
 }
 
 
@@ -1068,7 +1069,7 @@ font-family: var(--font-family);
 
 .live-status-pill.status-pending {
   color: #b45309;
-  background: rgba(245, 158, 11, 0.11);
+  background: rgba(52, 121, 138, 0.11);
 }
 
 
