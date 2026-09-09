@@ -728,7 +728,7 @@ font-family: var(--font-family);
   padding: 0 .5rem;
   align-items: start;
   grid-template-columns: 
-  80px 100px 110px 110px 120px;
+  80px 130px  120px 140px  170px;
   position: relative;
   min-width: max-content; /* ensures rows stretch with header */
 }
@@ -954,20 +954,25 @@ font-family: var(--font-family);
    LIVE ORDER ROW
    ========================================================= */
 
-.live-order-row {
+.live-row {
   display: grid;
 
   grid-template-columns:
-  80px 100px 110px 110px 120px;
+  80px 130px  120px 140px  170px;
 
   align-items: center;
 
   height: 2.4rem;
 
-  
+  color: var(--text-faint);
 
   border-bottom: 1px solid
     var(--border-color, #717272);
+}
+
+
+.dark-mode .live-row {
+  color: var(--button-hover) !important;
 }
 
 
