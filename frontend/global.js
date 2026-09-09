@@ -80,7 +80,7 @@ function isStatusModalOpen(){
 
 // add close function
 function statusModalClose(){
- statusCheckModal.style.top = "-90rem";
+ statusCheckModal.style.top = "-200%";
  webMenuIcon.style.display = "flex";
 
 }
@@ -134,19 +134,25 @@ checkMe();
       "1.41K+";
     }
 
-  
+  //===================================
+  // STATE MANAGEMENT (PAGE ROUTING)
+  //===================================
 const shoppingBtn = document.getElementById("shoppingBtn");
 
 shoppingBtn.addEventListener("click", (e) =>{
   e.stopPropagation();
 if(shoppingBtn){
-  window.location.href = '#';
-  showSnackBar(" ✅ Coming up soon for sellers and buyers. You can Buy Data bundle, and register AFA. Thank You", "success", 5000);
+  window.location.href = './ecodataStore/homeClient.html';
+
+  // showSnackBar(" ✅ Coming up soon for sellers and buyers. You can Buy Data bundle, and register AFA. Thank You", "success", 5000);
+  
 }
 });
 
 
-
+ //===================================
+  // STATE MANAGEMENT (PAGE ROUTING)
+  //==================================
 
 
 
