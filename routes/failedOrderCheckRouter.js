@@ -46,18 +46,20 @@ console.log(
   "Swift API key loaded:",
   Boolean(process.env.SWIFT_API_KEY)
 );
-    const response = await axios.get(swiftUrl, {
-      headers: {
-        "x-api-key": process.env.SWIFT_API_KEY,
-        "Content-Type": "application/json"
-      },
-      timeout: 10000
-    });
+    
+     const response = await axios.get(swiftUrl, {
+  headers: {
+    "x-api-key": process.env.SWIFT_API_KEY,
+    "Content-Type": "application/json"
+  },
+  timeout: 10000
+});
 
-    console.log(
-      "SwiftData response:",
-      response.data
-    );
+console.log(
+  "FULL SWIFTDATA ORDER RESPONSE:",
+  JSON.stringify(response.data, null, 2)
+);
+
 
     //===========================
     // VALIDATE SWIFT RESPONSE
