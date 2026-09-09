@@ -1117,7 +1117,7 @@ font-family: var(--font-family);
   .live-order-row {
 
     grid-template-columns:
-      80px 100px 110px 110px 120px;
+      100px 140px  120px 140px  170px;
   }
 
   .live-order-cell {
