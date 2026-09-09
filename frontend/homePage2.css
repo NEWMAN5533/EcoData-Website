@@ -976,9 +976,7 @@ font-family: var(--font-family);
 }
 
 
-.dark-mode .live-row {
-  color: var(--button-hover) !important;
-}
+
 
 
 
