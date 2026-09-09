@@ -4639,7 +4639,7 @@ function loadCheckedLiveOrders() {
   try {
 
     const saved =
-      localStorage.getItem(LIVE_ORDER_STORAGE_KEY);
+      localStorage.removeItem(LIVE_ORDER_STORAGE_KEY);
 
     if (!saved) {
       return [];
