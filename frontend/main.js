@@ -4777,7 +4777,7 @@ async function searchLiveOrder() {
           liveOrders[existingIndex].recipient,
 
         size:
-          order.volume ??
+          order.size ??
           liveOrders[existingIndex].size,
 
         status:
@@ -4804,7 +4804,7 @@ async function searchLiveOrder() {
           order.recipient || "—",
 
         size:
-          order.volume ?? "—",
+          order.size ?? "—",
 
         status:
           order.status || "unknown",
@@ -4898,7 +4898,7 @@ function renderLiveOrders() {
     const row =
       document.createElement("div");
 
-    row.className = "live-order-row";
+    row.className = "live-row";
 
     row.dataset.orderId =
       order.orderId;
@@ -4941,7 +4941,7 @@ function renderLiveOrders() {
     `;
 
 
-    liveOrderResult.prepend(row);
+    liveOrderResult.appendChild(row);
 
   });
 
@@ -5037,10 +5037,10 @@ async function refreshLiveOrderStatuses() {
 
 
       // Size can also be refreshed
-      if (freshOrder.volume !== undefined) {
+      if (freshOrder.size !== undefined) {
 
         liveOrders[index].size =
-          freshOrder.volume;
+          freshOrder.size;
 
       }
 
@@ -5080,7 +5080,7 @@ function updateLiveOrderRow(order) {
 
   const row =
     liveOrderResult.querySelector(
-      `.live-order-row[data-order-id="${CSS.escape(order.orderId)}"]`
+      `.live-row[data-order-id="${CSS.escape(order.orderId)}"]`
     );
 
 
