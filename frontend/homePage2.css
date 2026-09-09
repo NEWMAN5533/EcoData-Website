@@ -278,7 +278,11 @@ body.dark-mode{
   }
 }
 
-
+@media screen and (min-width: 768px){
+  .panel-drawer{
+    display: none !important;
+  }
+}
 
 
 
@@ -954,31 +958,16 @@ font-family: var(--font-family);
   display: grid;
 
   grid-template-columns:
-    1.25fr
-    1.4fr
-    0.7fr
-    1fr
-    1.25fr;
+  80px 100px 110px 110px 120px;
 
   align-items: center;
 
-  min-height: 62px;
+  height: 2.4rem;
 
   border-bottom: 1px solid
-    var(--border-color, #eceef1);
-
-  background: var(--card-bg, #ffffff);
-
-  transition:
-    background 0.2s ease;
+    var(--border-color, #717272);
 }
 
-.live-order-row:hover {
-  background: var(
-    --table-row-hover,
-    #f8fafc
-  );
-}
 
 
 .live-order-cell {
