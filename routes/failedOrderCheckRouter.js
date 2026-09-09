@@ -35,7 +35,7 @@ failedOrderCheckRouter.get("/:orderIdOrRef", async (req, res) => {
     // SWIFT ORDER STATUS URL
     //========================
     const swiftUrl =
-      `${base}/api/v1/order/status/${encodeURIComponent(orderIdOrRef)}`;
+      `${base}/order/status/${encodeURIComponent(orderIdOrRef)}`;
 
     console.log("Checking SwiftData:", swiftUrl);
 
