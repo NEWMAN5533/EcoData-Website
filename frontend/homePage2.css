@@ -989,7 +989,7 @@ font-family: var(--font-family);
   display: grid;
 
   grid-template-columns:
-  100px 140px  120px 140px  170px !important;
+  100px 140px  120px 140px  170px;
 
   align-items: center;
 
