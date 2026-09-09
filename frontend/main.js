@@ -4898,7 +4898,7 @@ function renderLiveOrders() {
     const row =
       document.createElement("div");
 
-    row.className = "live-row";
+    row.className = "live-order-row";
 
     row.dataset.orderId =
       order.orderId;
