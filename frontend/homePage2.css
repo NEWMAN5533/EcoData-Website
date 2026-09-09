@@ -964,6 +964,8 @@ font-family: var(--font-family);
 
   height: 2.4rem;
 
+  
+
   border-bottom: 1px solid
     var(--border-color, #717272);
 }
@@ -1105,12 +1107,7 @@ font-family: var(--font-family);
   .live-order-row {
 
     grid-template-columns:
-      140px
-      150px
-      80px
-      110px
-      150px;
-
+      80px 100px 110px 110px 120px;
   }
 
   .live-order-cell {
