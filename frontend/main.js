@@ -4830,6 +4830,9 @@ async function searchLiveOrder() {
 
     renderLiveOrders();
 
+    // play success sound
+    playSuccessSound();
+
 
     // Clear search field
     OrderSearchInput.value = "";
@@ -5342,10 +5345,30 @@ renderLiveOrders();
 
 
 // ============================================================
-// LIVE STATUS POLLING — EVERY 5 SECONDS
+// LIVE STATUS POLLING — EVERY 30 SECONDS
+// check active orders every 30 seconds
+// NEVER RUNS A NEW CYCLE WHILE THE PREVIOUS
+// ON IS RUNNING
 // ============================================================
+async function startLiveOrderVendorPolling() {
+  while(true){
+    try {
+      await refreshLiveOrderStatuses();
 
-setInterval(
-  refreshLiveOrderStatuses,
-  5000
-);
+    } catch(error){
+      console.log("Live order polling error:", error
+      );
+    }
+
+    // wait 30 seconds AFTER the current polling cycle finishes
+    await new Promise(resolve => {
+      setTimeout(resolve, 40000);
+    }
+  );
+  }
+}
+
+document.addEventListener("DOMContentLoaded",()=> {
+  // start polling
+  startLiveOrderVendorPolling();
+})
