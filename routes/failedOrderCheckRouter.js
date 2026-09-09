@@ -42,6 +42,10 @@ failedOrderCheckRouter.get("/:orderIdOrRef", async (req, res) => {
     //========================
     // REQUEST SWIFT
     //========================
+console.log(
+  "Swift API key loaded:",
+  Boolean(process.env.SWIFT_API_KEY)
+);
     const response = await axios.get(swiftUrl, {
       headers: {
         "x-api-key": process.env.SWIFT_API_KEY,
@@ -87,37 +91,32 @@ failedOrderCheckRouter.get("/:orderIdOrRef", async (req, res) => {
       }
     });
 
-  } catch (error) {
+   } catch (error) {
 
-    console.error(
-      "Live Order Status Search Error:",
-      error.response?.data || error.message
-    );
+  console.error("========== LIVE ORDER STATUS ERROR ==========");
+  console.error("Message:", error.message);
+  console.error("Status:", error.response?.status);
+  console.error("SwiftData response:", error.response?.data);
+  console.error("SwiftData headers:", error.response?.headers);
+  console.error("==============================================");
 
-    //==================
-    // SWIFT RESPONSE ERROR
-    //==================
-    if (error.response) {
-
-      return res.status(
-        error.response.status || 500
-      ).json({
-        success: false,
-        message:
-          error.response.data?.message ||
-          "Unable to retrieve order status."
-      });
-    }
-
-    //========================
-    // TIMEOUT / NETWORK ERROR
-    //========================
-    return res.status(500).json({
+  if (error.response) {
+    return res.status(error.response.status || 500).json({
       success: false,
       message:
-        "Unable to connect to the live order service."
+        error.response.data?.message ||
+        error.response.data?.error ||
+        "Unable to retrieve order status.",
+      swiftError: error.response.data
     });
   }
+
+  return res.status(500).json({
+    success: false,
+    message: "Unable to connect to the live order service.",
+    error: error.message
+  });
+}
 });
 
 export default failedOrderCheckRouter;
