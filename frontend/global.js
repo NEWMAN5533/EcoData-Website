@@ -80,7 +80,7 @@ function isStatusModalOpen(){
 
 // add close function
 function statusModalClose(){
- statusCheckModal.style.top = "-50rem";
+ statusCheckModal.style.top = "-90rem";
  webMenuIcon.style.display = "flex";
 
 }
