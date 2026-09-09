@@ -439,7 +439,7 @@ body.dark-mode{
   overflow: hidden;
   transition: 1s ease !important; 
 
-  background: #3d3b3b1a;
+  background: var(--color-white);
   -webkit-backdrop-filter: blur(28px);
   backdrop-filter: blur(28px);
 }
@@ -451,7 +451,7 @@ body.dark-mode{
 }
 
 .dark-mode .status-modal{
-  background: #3d3b3b1a !important;
+  background: var(--card-bg-dark) !important;
 }
 
 .status-modal .status-modal-content{
@@ -685,6 +685,7 @@ font-family: var(--font-family);
   position: sticky;
   top: 0;
   z-index: 1;
+  background: var(--color-white);
 
   /* Remove position: absolute — it was breaking x-axis sync */
   color: var(--text-cl-4);
@@ -695,6 +696,10 @@ font-family: var(--font-family);
   padding: .5rem 0;
   width: 100%;
   min-width: max-content; 
+}
+
+.dark-mode .status-live-content .table-header{
+  background: var(--card-bg-dark) !important;
 }
 
 
@@ -924,7 +929,7 @@ font-family: var(--font-family);
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: #fff;
   background: var(--button-hover);
   border: none;
@@ -939,7 +944,9 @@ font-family: var(--font-family);
   opacity: .8;
 }
 
-
+.dark-mode div .manualSearchBtn {
+  background: #914307 !important;
+}
 
 
 
