@@ -371,6 +371,15 @@ ul {
 }
 
 
+.swiper-slide{
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
 /* =========================================================
    GLOBAL CONTAINER
    ========================================================= */
@@ -554,15 +563,19 @@ ul {
 .mobile-sidebar {
   position: fixed;
   inset: 0 auto 0 0;
-  width: min(310px, 88vw);
+  width: min(280px, 88vw);
   background: var(--color-light);
   z-index: 3000;
-  left: -500px;
+  left: 0px;
   transition: left .7s ease, background 0s ease;
   box-shadow: 20px 0 50px rgba(0,0,0,.12);
   display: flex;
   flex-direction: column;
   padding: 20px 15px;
+}
+
+.dark-mode .mobile-sidebar{
+  border-right: 1px solid var(--border);
 }
 
 .mobile-sidebar.active {
@@ -574,7 +587,13 @@ ul {
   align-items: center;
   justify-content: space-between;
   padding-bottom: 20px;
+}
+
+.sidebar-middle{
+  border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
+  box-shadow: inset var(--shadow-sm);
+  border-radius: .6rem;
 }
 
 .profile-img {
@@ -589,13 +608,21 @@ ul {
   display: block;
   border-radius: 50%;
   overflow: hidden;
+  padding: .2px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--primary-dark);
 }
 
 .pro img {
-  width: 5rem;
-  height: 5rem;
+  width: 40px;
+  height: 40px;
   object-fit: cover;
 }
+
+
 
 #mobileProfileImage{
   width: 4rem;
@@ -1668,7 +1695,7 @@ ul {
 
 }
 
-.seller-slide
+
 
 .seller-card {
   overflow: hidden;

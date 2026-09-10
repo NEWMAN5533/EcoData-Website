@@ -513,10 +513,6 @@
 
   background: #f3f4f6;
 
-  transition:
-    border-color .2s ease,
-    box-shadow .2s ease,
-    transform .2s ease;
 }
 
 .nav-profile:hover {
