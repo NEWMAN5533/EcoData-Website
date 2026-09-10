@@ -341,7 +341,10 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+small,
+strong,
+p {
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
@@ -821,8 +824,8 @@ ul {
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding-right: 16px;
+  gap: 16px;
+  padding-right: 2px;
 }
 
 .nav-actions > i {
@@ -846,6 +849,8 @@ ul {
   background: var(--surface-2);
   color: var(--primary);
 }
+
+
 
 
 .cart3 {
@@ -2471,3 +2476,273 @@ body.dark-theme .seller-rank {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--primary);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*****
+BOTTOM NAVIGATION BAR STYLE CSS
+******/
+ 
+
+    :root{
+  --darkMode-bg-cl: rgb(10, 10, 10);
+  --darkMode-bg-cl-2: rgb(10, 1, 22);
+  --welcome-card-bg: rgba(37, 36, 36, 0.918);
+  --welcome-card-bg-1: rgb(2, 2, 39);
+    }
+    .bottom-navbar{
+      width: 100%;
+      height: 4.8rem;
+      justify-self: center;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 99;
+      display: flex;
+      align-items: center;
+      justify-content: space-around !important;
+      padding: .1rem .4rem;
+      background: var(--color-light) !important;
+      backdrop-filter: unset;
+    }
+
+   
+
+
+
+    .bottom-navbar .btom-navIcon{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      width: 25%;
+      gap: .5rem;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-user-select: none;
+      outline: none;
+      -ms-user-select: none;;
+      user-select: none;
+    }
+
+    .btom-navIcon .activeImg{
+      display: flex;
+      position: relative;
+      align-items: center;
+      justify-content: center;
+      border-radius: 2rem;
+      padding: 0 1rem !important;
+      transition: background 0s,  .5s ease;
+     
+        -webkit-tap-highlight-color: transparent;
+      -webkit-user-select: none;
+      outline: none;
+      -ms-user-select: none;;
+      user-select: none;
+    }
+
+    .activeImg.active{
+    animation: resizing .5s ease;
+    background: rgba(241, 241, 241, 0.863);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    color: var(--text-faint);
+    }
+
+    .activeImg .active{
+      color: var(--accent-color);
+      opacity: 1;
+    }
+
+    .dark-mode .activeImg .active{
+      color: var(--color-light);
+      opacity: .9;
+    }
+
+
+   .dark-mode .activeImg.active{
+    animation: resizing .4s ease;
+    background: var(--button-hover) !important;
+   }
+
+   .dark-mode .activeImg.active i{
+    color: #fff !important;
+    opacity: .8;
+   }
+
+   @keyframes resizing {
+    from{
+      transform: scale(0.5);
+    }
+
+    to{
+      transform: scale(1);
+    }
+   }
+
+ 
+
+   .btom-navIcon .material-icons{
+    color: var(--color-gray-light);
+    font-size: 1.2rem !important;
+    font-weight: 300 !important;
+  }
+
+  .dark-mode .material-icons{
+    color: #fff !important;
+    opacity: .7;
+  }
+
+
+
+
+
+    .btom-navIcon .bottomIcon-textNav{
+      font-size: .72rem !important;
+      font-weight: 500;
+      color: var(--color-gray-light) !important;
+    }
+
+   .dark-mode  .btom-navIcon .bottomIcon-textNav{
+    color: var(--product-card-text) !important;
+   }
+
+ 
+
+
+
+
+
+
+
+ /****
+ ecoshop-fixedBtn
+ *****/
+   
+
+      .ecodataShopBtn{
+        width: 100%;
+        height: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        margin-bottom: 4rem;
+        z-index: 99999999999999999;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-user-select: none;
+        outline: none;
+        -ms-user-select: none;;
+        user-select: none;
+      }
+
+
+
+
+
+      .shop-fixedBtn{
+        width: 3.4rem;
+        height: 3.4rem;
+        position: fixed;
+        padding: .4rem;
+        bottom: 2.5rem;
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;;
+        background: rgb(245, 223, 200);
+        border-radius: 50%;
+
+        z-index: 999 !important;
+        box-shadow: 0 10px 20px rgba(32, 32, 32, 0.6) !important;
+        cursor: pointer;
+        border: 1px solid var(--thin-border-cl);
+        -webkit-tap-highlight-color: transparent;
+        -webkit-user-select: none;
+        outline: none;
+        -ms-user-select: none;;
+        user-select: none;
+      }
+
+
+
+ 
+/*********************
+/ ACTIVE COUNT ORDERS
+*********************/
+        .btom-navIcon .nav-badge{
+          position: absolute;
+          top: 1px;
+          right: 9px;
+          width:  19px;
+          height:  14px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: rgb(7, 184, 125);
+          text-align: center;
+          border-radius: 50%;
+          color: rgb(44, 44, 44);
+          font-size: .55rem;
+          font-family: var(--font-family);
+          box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+    
+
+        .addBar{
+          margin-bottom: 1rem !important;
+          line-height: .9;
+          padding-bottom: .3rem;
+        }
+
+        .addBar .bottomIcon-textNav{
+          display: none;
+        }
+
+        .addBtn{
+          margin-bottom: 1.4rem !important;
+          border: 2px solid rgb(209, 208, 208);
+          border-radius: .4rem;
+          padding: 1rem;
+          background: rgba(6, 108, 116, 0.267);
+          border-radius: 50%;
+        }
+
+      .dark-mode .addBtn{
+        border: 2px solid rgba(53, 52, 52, 0.945) !important;
+        background: rgba(5, 14, 34, 0.856);
+      }
+    
+
+        /* display none for upload btn
+        */
+
+
+     
+        @media screen and (min-width: 768px){
+          .bottom-navbar{
+            display: none !important;
+          }
+        }
+   
+/****************************
+/ ACTIVE COUNT ORDERS ENDS
+*****************************/
+
