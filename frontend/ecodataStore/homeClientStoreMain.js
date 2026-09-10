@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded",()=> {
 const mobileSidebar = document.getElementById("mobileSidebar");
 const mobileSidebarToggler = document.getElementById("menuIcon");
 const secondToggler = document.getElementById("mobileSidebarClose");
+const pageNavigationBar = document.getElementById("header");
+const pageBottomNavigationBar = document.getElementById("navIconDiv");
 
 function isSidebarOpen(){
   mobileSidebar.style.left = "0";
@@ -52,12 +54,91 @@ searchIcon.addEventListener("click", function(e) {
 
 });
 
-//=======================
+//============================
+// Add box-shadow on navbar
+// when scrolling downward
+//============================
+
+function setNavigationBarShadow(){
+  pageNavigationBar.style.boxShadow = "0 2px 6px rgba(0,0,0,0.018)";
+}
+
+function unSetNavigationBarShadow(){
+  pageNavigationBar.style.boxShadow = "0";
+}
+
+window.addEventListener("scroll", (e)=> {
+  e.stopPropagation();
+
+
+  if(scrollY >= 80 ) {
+    setNavigationBarShadow();
+  
+  }
+
+
+  if(scrollX <=80){
+    unSetNavigationBarShadow();
+  
+  }
+
+});
+
+//=====================================
+// Hide bottom NavigationBar on scroll
+//=====================================
+
+let lastScrollY = window.scrollY;
+let scrollTicking = false;
+
+const SCROLL_THRESHOLD = 8;
+
+function handleBottomNavScroll(){
+  const currentScrollY = window.scrollY;
+
+  // Always show at the top of the page
+  if(currentScrollY <= 10 ){
+
+    pageBottomNavigationBar.classList.remove("nav-hidden");
+    lastScrollY = currentScrollY;
+    return;
+  }
+
+  const difference = currentScrollY - lastScrollY;
+
+  // Ignore very small movement
+  if(Math.abs(difference) < SCROLL_THRESHOLD) {
+    return;
+  }
+
+  // Scrolling Down
+  if(difference > 0){
+    pageBottomNavigationBar.classList.add("nav-hidden");
+  } else {
+    // Scroll up
+    pageBottomNavigationBar.classList.remove("nav-hidden");
+  }
+
+  lastScrollY = currentScrollY;
+}
+
+window.addEventListener("scroll", ()=> {
+  if(!scrollTicking){
+    window.requestAnimationFrame(()=> {
+      handleBottomNavScroll();
+      scrollTicking = false;
+    });
+
+    scrollTicking = true;
+  }
+}, { passive: true}
+);
+
+
+
+//======================
 // ?
-//=======================
-
-
-
+//======================
 });
 
 

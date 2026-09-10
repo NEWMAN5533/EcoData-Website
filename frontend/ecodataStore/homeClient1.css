@@ -861,6 +861,12 @@ ul {
   user-select: none;
 }
 
+@media screen and (min-width: 768px) {
+  .nav-actions{
+    padding-right: 16px !important;
+  }
+}
+
 .nav-actions > i {
   width: 39px;
   height: 39px;
@@ -2554,6 +2560,18 @@ BOTTOM NAVIGATION BAR STYLE CSS
       padding: .1rem .4rem;
       background: var(--color-light) !important;
       backdrop-filter: unset;
+
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.25s ease;
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* hide it */
+    .bottom-navbar.nav-hidden{
+      transform: translateY(110%);
+      opacity: 0;
+      pointer-events: none;
     }
 
    
