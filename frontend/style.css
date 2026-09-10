@@ -3340,7 +3340,7 @@ GRID VIEW
   width: 100%;
   max-width:94%;
   padding: 0;
-  margin-bottom: 4rem;
+  margin-bottom: .3rem !important;
   background: rgba(245,245,245,245);
   border-end-end-radius: 1.5rem;
   border-end-start-radius: 1.5rem;

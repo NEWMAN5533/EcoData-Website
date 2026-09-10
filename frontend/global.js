@@ -70,6 +70,10 @@ const closeStatusCheckModal = document.getElementById("closeStatusCheckModal");
 
 const webMenuIcon = document.getElementById("sidebarViewer");
 
+
+
+
+
 // isOpen function
 function isStatusModalOpen(){
 
@@ -352,6 +356,13 @@ function showSnackBar(message, type = "info", duration = 4000) {
 // snackbar ends
 
 
+
+
+
+
+
+
+
  
  });
 // CUSTOM CURSOR JS ENDS
@@ -427,6 +438,15 @@ window.addEventListener("click", function(e){
   } else{
     chatBox.style.display = "flex";
   }
+
+
+
+
+
+
+
+
+
 });
 
 
@@ -434,3 +454,84 @@ window.addEventListener("click", function(e){
 
 
 
+
+
+
+document.addEventListener('DOMContentLoaded', ()=> {
+
+const pageBottomNavigationBar = document.getElementById("navIconDiv");
+const mainContainer = document.getElementById("scrollContainer");
+
+const onlyShowBtomNavSection = document.getElementById("onlyShowBtomNavSection");
+
+
+
+//=========================
+// SECTION OVERRIDE
+//=========================
+
+
+
+
+
+//=====================================
+// Hide bottom NavigationBar on scroll
+//=====================================
+
+let lastScrollY = mainContainer.scrollTop;
+let scrollTicking = false;
+
+const SCROLL_THRESHOLD = 8;
+
+function handleBottomNavScroll(){
+  const currentScrollY = mainContainer.scrollTop;
+
+  // Always show at the top of the page
+  if(currentScrollY <= 10 ){
+
+    pageBottomNavigationBar.style.transform = "translateY(0)";
+    pageBottomNavigationBar.style.opacity = "1";
+    lastScrollY = currentScrollY;
+    return;
+  }
+
+  // Section currently controls the nav
+
+
+  const difference = currentScrollY - lastScrollY;
+
+  // Ignore very small movement
+  if(Math.abs(difference) < SCROLL_THRESHOLD) {
+    return;
+  }
+
+  // Scrolling Down
+  if(difference > 0){
+    pageBottomNavigationBar.style.transform = "translateY(110%)";
+    pageBottomNavigationBar.style.opacity = "0";
+  } else {
+    // Scroll up
+    pageBottomNavigationBar.style.transform = "translateY(0)";
+    pageBottomNavigationBar.style.opacity = "1";
+  }
+
+  lastScrollY = currentScrollY;
+}
+
+mainContainer.addEventListener("scroll", ()=> {
+  if(!scrollTicking){
+
+    requestAnimationFrame(()=> {
+      handleBottomNavScroll();
+      scrollTicking = false;
+    });
+
+    scrollTicking = true;
+  }
+}, { passive: true}
+);
+
+
+
+
+  })

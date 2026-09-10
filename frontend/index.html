@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 <!---body section---->
 <body>
     <!--100vw & 100vh container---->
-  <div class="container">
+  <div class="container" id="mainContainer">
 
     <div class="cursor" id="cursor"></div>
     <div class="cursor-ring" id="cursorRing"></div>
@@ -450,7 +450,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
   
           <!---MAIN-->
-<div class="grid-container-main">
+<div class="grid-container-main" id="scrollContainer">
           
   <!---CARD CONTAINER------>
   <section class="card-container">
@@ -2334,7 +2334,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
       <h2>MTN DATA BUNDLE</h2>
       <button class="packs">14 Packages Available</button>
     </div>
-    <div class="single-order">
+    <div class="single-order" id="onlyShowBtomNavSection">
 
       <small class="bundleRecipient">Bundle Recipient Number</small>
       <!---phone-input-here-->
@@ -5772,7 +5772,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
   <section class="status-modal" id="statusCheckModal">
     <div class="status-modal-content">
       <div class="header-content">
-        <h2>Check Order with ID:</h2>
+        <h2>Check Order with an ID:</h2>
         <div class="close-modal" id="closeStatusCheckModal">
           &times;
         </div>
@@ -6156,7 +6156,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
       </div>
 
     
-    <div class="ecodataShopBtn" >
+    <div class="ecodataShopBtn">
         <div class="shop-fixedBtn" id="shoppingBtn" >
        <i class="ri-shopping-bag-3-fill"></i>
         <i class="ri-store-2-line sellerAuth material-icons" style="display: none;"></i>
