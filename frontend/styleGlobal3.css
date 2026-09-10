@@ -849,7 +849,25 @@ BOTTOM NAVIGATION BAR STYLE CSS
       justify-content: space-between;
       padding: .1rem;
       background: var(--primary-cl) !important;
+
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.25s ease !important;
+      transform: translateY(0) !important;
+      opacity: 1;
     }
+
+    .grid-container-main {
+      overflow-y: auto !important;
+    }
+
+ /* hide it */
+    .bottom-navbar.nav-hidden{
+      transform: translateY(110%) !important;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+
 
     .dark-mode .bottom-navbar{
       background:   var(--body-bg-dark) !important;
