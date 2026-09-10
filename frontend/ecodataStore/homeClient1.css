@@ -826,6 +826,11 @@ ul {
   align-items: center;
   gap: 16px;
   padding-right: 2px;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .nav-actions > i {
@@ -841,6 +846,11 @@ ul {
   font-size: 20px;
 
   cursor: pointer;
+   -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;
+  user-select: none;
 
 }
 
