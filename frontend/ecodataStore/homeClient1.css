@@ -549,9 +549,10 @@ ul {
 /* =========================================================
    SIDEBAR BOTTOM
    ========================================================= */
-
+.left-sidebar-top{
+  border-bottom: none !important;
+}
 .left-sidebar-bottom {
-  border-top: 1px solid var(--border-light);
   padding-top: 12px;
 }
 
@@ -566,7 +567,7 @@ ul {
   width: min(280px, 88vw);
   background: var(--color-light);
   z-index: 3000;
-  left: 0px;
+  left: -500px;
   transition: left .7s ease, background 0s ease;
   box-shadow: 20px 0 50px rgba(0,0,0,.12);
   display: flex;
