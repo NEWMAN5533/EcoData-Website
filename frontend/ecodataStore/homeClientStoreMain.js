@@ -8,11 +8,11 @@ const mobileSidebarToggler = document.getElementById("menuIcon");
 const secondToggler = document.getElementById("mobileSidebarClose");
 
 function isSidebarOpen(){
-  mobileSidebar.classList.add("active");
+  mobileSidebar.style.left = "0";
 }
 
 function closeMobileSidebar(){
-  mobileSidebar.classList.remove("active");
+  mobileSidebar.style.left = "-500px";
 }
 
 // Add eventListener

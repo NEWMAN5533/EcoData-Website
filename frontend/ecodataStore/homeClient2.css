@@ -437,7 +437,6 @@
   place-items: center;
 
   border: 0;
-  border-radius: 9px;
 
   background: transparent;
 
@@ -452,19 +451,6 @@
 
 .nav-action i {
   font-size: 20px;
-}
-
-.nav-action:hover {
-  background: var(--border);
-  color: var(--primary);
-}
-
-.dark-mode .nav-action:hover{
-  background: var(--button-hover);
-}
-
-.nav-action:active {
-  transform: scale(.95);
 }
 
 
