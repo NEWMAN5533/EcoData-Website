@@ -4639,7 +4639,7 @@ function loadCheckedLiveOrders() {
   try {
 
     const saved =
-      localStorage.removeItem(LIVE_ORDER_STORAGE_KEY);
+      localStorage.getItem(LIVE_ORDER_STORAGE_KEY);
 
     if (!saved) {
       return [];
@@ -4880,7 +4880,7 @@ function renderLiveOrders() {
 
   if (!liveOrders.length) {
 
-    emptyDataState.innerHTML = `
+    liveOrderResult.innerHTML = `
       <div class="sellerProductsEmpty">
         No live orders searched yet.
       </div>
