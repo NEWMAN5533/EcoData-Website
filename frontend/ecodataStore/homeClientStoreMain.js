@@ -7,6 +7,7 @@ const mobileSidebar = document.getElementById("mobileSidebar");
 const mobileSidebarToggler = document.getElementById("menuIcon");
 const secondToggler = document.getElementById("mobileSidebarClose");
 const pageNavigationBar = document.getElementById("header");
+
 const pageBottomNavigationBar = document.getElementById("navIconDiv");
 
 function isSidebarOpen(){
@@ -60,29 +61,14 @@ searchIcon.addEventListener("click", function(e) {
 //============================
 
 function setNavigationBarShadow(){
-  pageNavigationBar.style.boxShadow = "0 2px 6px rgba(0,0,0,0.018)";
+  pageNavigationBar.style.boxShadow = "0 2px 6px rgba(0,0,0,0.09)";
 }
 
 function unSetNavigationBarShadow(){
-  pageNavigationBar.style.boxShadow = "0";
+  pageNavigationBar.style.boxShadow = "none";
 }
 
-window.addEventListener("scroll", (e)=> {
-  e.stopPropagation();
-
-
-  if(scrollY >= 80 ) {
-    setNavigationBarShadow();
-  
-  }
-
-
-  if(scrollX <=80){
-    unSetNavigationBarShadow();
-  
-  }
-
-});
+unSetNavigationBarShadow();
 
 //=====================================
 // Hide bottom NavigationBar on scroll
@@ -98,11 +84,18 @@ function handleBottomNavScroll(){
 
   // Always show at the top of the page
   if(currentScrollY <= 10 ){
-
     pageBottomNavigationBar.classList.remove("nav-hidden");
     lastScrollY = currentScrollY;
     return;
   }
+
+  if(currentScrollY >= 10 ){
+    setNavigationBarShadow();
+  } else{
+    unSetNavigationBarShadow();
+  }
+
+
 
   const difference = currentScrollY - lastScrollY;
 
