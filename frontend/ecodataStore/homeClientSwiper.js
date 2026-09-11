@@ -1,6 +1,37 @@
 document.addEventListener("DOMContentLoaded", ()=> {
   
 
+let topSwiper = new Swiper(".status-swiper", {
+  loop: true,
+  spaceBetween: 12,
+  grabCursor: true,
+  slidesPerView: 4,
+  allowTouchMove: true,
+
+  autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+    },
+
+  breakpoints: {
+    320: {
+      spaceBetween: 12,
+    },
+    375: {
+      spaceBetween: 4,
+    },
+    640: {
+      spaceBetween: 12,
+    }
+  }
+});
+
+
+
+
+
+
 
 // HERO SWIPER
 let heroSwiper = new Swiper('.hero-swiper', {

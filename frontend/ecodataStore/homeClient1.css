@@ -343,6 +343,7 @@ h4,
 h5,
 h6,
 small,
+span,
 strong,
 p {
   font-family: 'Plus Jakarta Sans', sans-serif;
@@ -656,6 +657,11 @@ ul {
   background: var(--surface-2);
   color: var(--product-card-text);
   font-size: 22px;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 
@@ -2601,7 +2607,6 @@ BOTTOM NAVIGATION BAR STYLE CSS
       justify-content: center;
       border-radius: 2rem;
       padding: 0 1rem !important;
-      transition: background 0s,  .5s ease;
 
       -webkit-tap-highlight-color: transparent;
       -webkit-user-select: none;
@@ -2629,7 +2634,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
 
 
    .dark-mode .activeImg.active{
-    animation: resizing .4s ease;
+    animation: resizing .6s ease;
     background: var(--button-hover) !important;
    }
 
@@ -2640,7 +2645,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
 
    @keyframes resizing {
     from{
-      transform: scale(0.5);
+      transform: scale(0.7);
     }
 
     to{
