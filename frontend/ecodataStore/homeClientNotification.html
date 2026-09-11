@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="description"
+    content="EcoData Store — Discover digital products, physical goods and professional services from trusted sellers across Ghana."
+  >
+
+  <title>Notifications & Messages | EcoData Store</title>
+
+   <!---=== css file ===-->
+  <link rel="stylesheet" href="./swiper-bundle.min.css">
+
+  <!--== cdn link ==-->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css" />
+
+
+  <!--=== DARK MODE SCRIPT ========-->
+<script>
+
+document.addEventListener("DOMContentLoaded", ()=> {
+// DARK THEME
+
+const themeButton = document.getElementById('theme-button')
+const darkTheme = 'dark-mode'
+const iconTheme = 'ri-sun-line'
+
+const selectedTheme = localStorage.getItem('selected-theme')
+const selectedIcon = localStorage.getItem('selected-icon')
+
+
+
+const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
+const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'ri-moon-line' : 'ri-sun-line'
+
+
+// We validate if the user previously chose a topic
+if(selectedTheme){
+  // If the validations is fulfilled, we ask the issue was to know if we activated or deactivated
+  document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
+  themeButton.classList[selectedIcon === 'ri-moon-line' ? 'add' : 'remove'](iconTheme) 
+}
+
+// Active / deactivated the theme manually with the button
+themeButton.addEventListener("click", ()=> {
+  // Add or remove the dark / icon theme
+  document.body.classList.toggle(darkTheme)
+  themeButton.classList.toggle(iconTheme)
+  // We save theme and the current icon the user chose
+  localStorage.setItem('selected-theme', getCurrentTheme())
+  localStorage.setItem('selected-icon', getCurrentIcon())
+})
+
+});
+
+
+</script>
+<!--=== DARK MODE SCRIPT ENDS ===-->
+
+  <!--=========================
+      STYLES
+  ========================== -->
+  <link rel="stylesheet" href="homeClient1.css">
+  <link rel="stylesheet" href="homeClient2.css">
+  <!--Actual page-->
+  <link rel="stylesheet" href="homeClientNottification.css">
+
+
+  <!-- Swiper -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css"
+  >
+
+  <!-- Remix Icons -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css"
+    rel="stylesheet"
+  >
+</head>
+
+<body>
+
+<!-- =====================================================
+     APP CONTAINER
+====================================================== -->
+<div class="app-container">
+
+  <!-- ===================================================
+       DESKTOP SIDEBAR
+  ==================================================== -->
+  <aside class="left-sidebar" id="desktopSidebar">
+
+    <!-- Profile -->
+    <div class="left-sidebar-top">
+
+      <div class="userProfile">
+        <div class="pro-wrap">
+          <img
+            id="sidebarProfileImage"
+            src="../ecdoataStore/icons/profile.jpg"
+            alt="Profile"
+          >
+        </div>
+      </div>
+
+      <div class="user-credentials">
+
+        <span class="user-greeting">
+          Hello,
+        </span>
+
+        <strong
+          class="user-name"
+          id="usernameDisplayfull"
+        >
+          User
+        </strong>
+
+        <small
+          class="user-id"
+          id="userId"
+        >
+          ID: --------
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar-middle">
+
+      <div class="customer-content">
+
+        <!-- SHOP -->
+        <span class="aside-section-label">
+          Shop
+        </span>
+
+        <div class="aside-nav ">
+          <a href="index.html">
+            <i class="ri-home-5-line"></i>
+            <span>Home</span>
+          </a>
+        </div>
+
+        <div class="aside-nav active-aside">
+          <a href="products.html">
+            <i class="ri-compass-3-line"></i>
+            <span>Products</span>
+          </a>
+        </div>
+
+        <div class="aside-nav">
+          <a href="categories.html">
+            <i class="ri-layout-grid-line"></i>
+            <span>Categories</span>
+          </a>
+        </div>
+
+        <div class="aside-nav">
+          <a href="wishlist.html">
+            <i class="ri-heart-line"></i>
+            <span>Wishlist</span>
+            <span class="nav-count" id="wishlistCount">0</span>
+          </a>
+        </div>
+
+
+        <!-- ORDERS -->
+        <span class="aside-section-label">
+          Orders
+        </span>
+
+        <div class="aside-nav">
+          <a href="orders.html">
+            <i class="ri-file-list-3-line"></i>
+            <span>My Orders</span>
+          </a>
+        </div>
+
+        <div class="aside-nav">
+          <a href="downloads.html">
+            <i class="ri-download-cloud-line"></i>
+            <span>My Downloads</span>
+          </a>
+        </div>
+
+        <div class="aside-nav">
+          <a href="services.html">
+            <i class="ri-mail-send-line"></i>
+            <span>Service Requests</span>
+          </a>
+        </div>
+
+        <div class="aside-nav">
+          <a href="addresses.html">
+            <i class="ri-map-pin-2-line"></i>
+            <span>My Addresses</span>
+          </a>
+        </div>
+
+
+        <!-- UPDATES -->
+        <span class="aside-section-label">
+          Updates
+        </span>
+
+        <div class="aside-nav">
+          <a href="messages.html">
+            <i class="ri-message-3-line"></i>
+            <span>Messages</span>
+            <span class="nav-count" id="messageCount1">0</span>
+          </a>
+        </div>
+
+        <div class="aside-nav">
+          <a onclick="window.location.href='./homeClientNotification.html'">
+            <i class="ri-notification-3-line"></i>
+            <span>Notifications</span>
+            <span class="nav-count" id="notificationCount1">0</span>
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Sidebar Bottom -->
+    <div class="left-sidebar-bottom">
+
+      <div class="aside-nav">
+        <a href="settings.html">
+          <i class="ri-settings-3-line"></i>
+          <span>Settings</span>
+        </a>
+      </div>
+
+      <div class="aside-nav">
+        <a href="profile.html">
+          <i class="ri-user-3-line"></i>
+          <span>Profile</span>
+        </a>
+      </div>
+
+      <div class="aside-nav aside-nav-danger">
+        <a href="#" id="logoutButton">
+          <i class="ri-logout-box-line"></i>
+          <span>Logout</span>
+        </a>
+      </div>
+
+    </div>
+
+  </aside>
+
+
+
+  <!-- ===================================================
+       MOBILE SIDEBAR
+  ==================================================== -->
+  <aside class="mobile-sidebar" id="mobileSidebar">
+
+    <div class="sidebar-top">
+
+      <div class="profile-img">
+
+        <div class="profile">
+
+          <div class="pro-wrapper pro">
+
+            <img
+              id="mobileProfileImage"
+              src="../ecdoataStore/icons/profile.jpg"
+              alt="Profile"
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="right-side">
+
+          <span class="user-greeting">
+            Hello,
+          </span>
+
+          <strong id="mobileUsername">
+            User
+          </strong>
+
+          <small id="mobileUserId">
+            ID: --------
+          </small>
+
+        </div>
+
+      </div>
+
+      <!---close button for mobile sidebar---->
+      <button
+        type="button"
+        class="mobile-sidebar-close"
+        id="mobileSidebarClose"
+        aria-label="Close menu"
+      >
+        <i class="ri-close-line"></i>
+      </button>
+
+    </div>
+
+
+    <div class="sidebar-middle">
+
+      <div class="customer-content">
+
+        <span class="aside-section-label">
+          Shop
+        </span>
+
+        <div class="aside-nav">
+          <a href="index.html">
+            <i class="ri-home-5-line"></i>
+            Home
+          </a>
+        </div>
+
+        <div class="aside-nav active-aside">
+          <a href="products.html">
+            <i class="ri-compass-3-line"></i>
+            <span>Products</span>
+          </a>
+        </div>
+
+        <div class="aside-nav">
+          <a href="categories.html">
+            <i class="ri-layout-grid-line"></i>
+            <span>Categories</span>
+          </a>
+        </div>
+
+        <div class="aside-nav">
+          <a href="wishlist.html">
+            <i class="ri-heart-line"></i>
+            <span>Wishlist</span>
+          </a>
+        </div>
+
+
+        <span class="aside-section-label">
+          Orders
+        </span>
+
+        <div class="aside-nav">
+          <a href="orders.html">
+            <i class="ri-file-list-3-line"></i>
+            <span>  My Orders</span>
+          </a>
+        </div>
+
+        <div class="aside-nav">
+          <a href="downloads.html">
+            <i class="ri-download-cloud-line"></i>
+            <span>My Downloads</span>
+          </a>
+        </div>
+
+        <div class="aside-nav">
+          <a href="services.html">
+            <i class="ri-mail-send-line"></i>
+            <span>Service Requests</span>
+          </a>
+        </div>
+
+        <div class="aside-nav">
+          <a href="addresses.html">
+            <i class="ri-map-pin-2-line"></i>
+            <span>My Addresses</span>
+          </a>
+        </div>
+
+
+        <span class="aside-section-label">
+         <span> Updates</span>
+        </span>
+
+        <div class="aside-nav">
+          <a href="messages.html">
+            <i class="ri-message-3-line"></i>
+            <span>Messages</span>
+            <span class="nav-count" id="messageCount2">0</span>
+          </a>
+        </div>
+
+        <div class="aside-nav">
+          <a onclick="window.location.href='./homeClientNotification.html'">
+            <i class="ri-notification-3-line"></i>
+            <span>Notifications</span>
+            <span class="nav-count" id="notificationCount2">0</span>
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="sidebar-bottom">
+
+      <div class="aside-nav">
+        <a href="settings.html">
+          <i class="ri-settings-3-line"></i>
+          <span>Settings</span>
+        </a>
+      </div>
+
+      <div class="aside-nav">
+        <a href="profile.html">
+          <i class="ri-user-3-line"></i>
+          <span>Profile</span>
+        </a>
+      </div>
+
+      <div class="aside-nav aside-nav-danger">
+        <a href="#" id="mobileLogoutButton">
+          <i class="ri-logout-box-line"></i>
+          <span>Logout</span>
+        </a>
+      </div>
+
+    </div>
+
+  </aside>
+
+
+
+  <!-- ===================================================
+      MAIN AREA
+  ==================================================== -->
+  <main class="main-container" id="mainContainer">
+
+
+    <!-- =================================================
+      NAVBAR
+    ================================================== -->
+    <header class="navbar" id="header">
+
+      <div class="nav-left">
+          <!-- Brand -->
+        <a href="index.html" class="left-side brand">
+          <img src="../css/icons/newLogo.png" alt="">
+        </a>
+      </div>
+
+    
+
+
+      <!-- Desktop Search -->
+      <div class="desktop-search" >
+
+        <i class="ri-search-line"></i>
+
+        <input 
+          type="search"
+          id="desktopSearchInput"
+          placeholder="Search products, sellers and services..."
+          autocomplete="off"
+        >
+
+        <button
+          type="button"
+          id="desktopSearchButton"
+          aria-label="Search"
+        >
+          <i class="ri-arrow-right-line"></i>
+        </button>
+
+      </div>
+
+
+      <!-- Navbar Actions -->
+      <div class="nav-actions">
+
+        <!-- Search mobile -->
+        <button
+          type="button"
+          class="nav-action search-button"
+          id="searchIcon"
+          aria-label="Search"
+        >
+          <i class="ri-search-line"></i>
+        </button>
+
+
+
+
+      <!---theme button -->
+        <i class="ri-moon-foggy-line change-theme material-icons" id="theme-button"></i>
+
+
+        <!-- Wishlist -->
+        <a
+          href="wishlist.html"
+          class="nav-action"
+          aria-label="Wishlist"
+        >
+          <i class="ri-heart-3-line"></i>
+          <span
+            class="cart-count2"
+            id="navWishlistCount"
+          >
+            0
+          </span>
+        </a>
+
+
+        <!-- Notifications -->
+        <a
+          href="notifications.html"
+          class="nav-action"
+          aria-label="Notifications"
+        >
+          <i class="ri-notification-3-line"></i>
+
+          <span
+            class="cart-count2"
+            id="navNotificationCount"
+          >
+            0
+          </span>
+        </a>
+
+
+        <!-- Cart -->
+        <a
+          href="cart.html"
+          class="nav-action"
+          aria-label="Shopping cart"
+        >
+          <i class="ri-shopping-cart-2-line"></i>
+
+          <span
+            class="cart-count2"
+            id="cartCount"
+          >
+            0
+          </span>
+        </a>
+
+
+
+
+       
+
+
+        <!-- Mobile Menu -->
+        <button
+          type="button"
+          class="nav-action"
+          id="menuIcon"
+          aria-label="Open menu"
+        >
+          <i class="ri-menu-2-line"></i>
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <!---============================
+     NOTIFICATION SECTION
+     =============================-->
+
+
+    <section class="account-layout">
+        <header class="account-page-header">
+
+      <h1>Notifications & Messages</h1>
+
+
+      <p>
+        Stay updated with your orders, account activity,
+        store updates and messages.
+      </p>
+
+    </header>
+
+
+      <!-- ==========================================
+           CONTENT
+      =========================================== -->
+
+      <section class="notifications-content">
+
+
+        <!-- ======================================
+             SUMMARY
+        ======================================= -->
+
+        <div class="notification-summary">
+
+
+          <div class="notification-summary-card">
+
+            <div class="notification-summary-icon">
+
+              <i class="ri-notification-3-line" style=" color: rgb(16, 196, 142)"></i>
+
+            </div>
+
+            <div>
+
+              <span>Unread</span>
+
+              <strong id="unreadTotal">
+                4
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <div class="notification-summary-card">
+
+            <div class="notification-summary-icon">
+
+              <i class="ri-shopping-bag-3-line"></i>
+
+            </div>
+
+            <div>
+
+              <span>Order Updates</span>
+
+              <strong id="orderNotificationTotal">
+                2
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <div class="notification-summary-card">
+
+            <div class="notification-summary-icon">
+
+              <i class="ri-message-3-line" style=" color: rgb(16, 196, 97)"></i>
+
+            </div>
+
+            <div>
+
+              <span>Messages</span>
+
+              <strong id="messageTotal">
+                3
+              </strong>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- ======================================
+             TABS
+        ======================================= -->
+
+        <div class="notification-tabs">
+
+          <button
+            class="notification-tab active"
+            data-tab="notifications"
+          >
+
+            <i class="ri-notification-3-line"></i>
+
+            Notifications
+
+            <span id="notificationTabCount">
+              4
+            </span>
+
+          </button>
+
+
+          <button
+            class="notification-tab"
+            data-tab="messages"
+          >
+
+            <i class="ri-message-3-line"></i>
+
+            Messages
+
+            <span id="messageTabCount">
+              2
+            </span>
+
+          </button>
+
+        </div>
+
+
+
+        <!-- ======================================
+             NOTIFICATIONS PANEL
+        ======================================= -->
+
+        <div
+          class="notification-panel active"
+          id="notificationsPanel"
+        >
+
+
+          <div class="notification-toolbar">
+
+            <div>
+
+              <h2>
+                Notifications
+              </h2>
+
+              <span>
+                Your latest account activity
+              </span>
+
+            </div>
+
+
+            <div class="notification-actions">
+
+              <button
+                class="notification-action-btn"
+                id="markAllReadBtn"
+              >
+
+                <i class="ri-check-double-line"></i>
+
+                Mark all read
+
+              </button>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- FILTERS -->
+
+          <div class="notification-filters">
+
+            <button
+              class="notification-filter active"
+              data-filter="all"
+            >
+              All
+            </button>
+
+            <button
+              class="notification-filter"
+              data-filter="unread"
+            >
+              Unread
+            </button>
+
+            <button
+              class="notification-filter"
+              data-filter="orders"
+            >
+              Orders
+            </button>
+
+            <button
+              class="notification-filter"
+              data-filter="promotions"
+            >
+              Promotions
+            </button>
+
+            <button
+              class="notification-filter"
+              data-filter="security"
+            >
+              Security
+            </button>
+
+          </div>
+
+
+
+          <!-- NOTIFICATION LIST -->
+
+          <div
+            class="notification-list"
+            id="notificationList"
+          >
+
+
+            <!-- ORDER -->
+
+            <article
+              class="notification-item unread"
+              data-type="orders"
+              data-id="n1"
+            >
+
+              <div class="notification-item-icon order">
+
+                <i class="ri-shopping-bag-3-line"></i>
+
+              </div>
+
+
+              <div class="notification-item-body">
+
+                <div class="notification-item-top">
+
+                  <strong>
+                    Your order is being processed
+                  </strong>
+
+                  <time>
+                    15 min ago
+                  </time>
+
+                </div>
+
+
+                <p>
+                  Order ED-20260908-1024 is currently
+                  being processed by the seller.
+                </p>
+
+
+                <div class="notification-item-meta">
+
+                  <span>
+                    Order Update
+                  </span>
+
+                  <a href="orders.html">
+                    View order
+                  </a>
+
+                </div>
+
+              </div>
+
+
+              <button
+                class="notification-more"
+                title="More"
+              >
+                <i class="ri-more-2-fill"></i>
+              </button>
+
+            </article>
+
+
+
+            <!-- DELIVERY -->
+
+            <article
+              class="notification-item unread"
+              data-type="orders"
+              data-id="n2"
+            >
+
+              <div class="notification-item-icon delivery">
+
+                <i class="ri-truck-line"></i>
+
+              </div>
+
+
+              <div class="notification-item-body">
+
+                <div class="notification-item-top">
+
+                  <strong>
+                    Your order has been delivered
+                  </strong>
+
+                  <time>
+                    Yesterday
+                  </time>
+
+                </div>
+
+
+                <p>
+                  Modern Professional CV Template
+                  is now available in your downloads.
+                </p>
+
+
+                <div class="notification-item-meta">
+
+                  <span>
+                    Delivery
+                  </span>
+
+                  <a href="downloads.html">
+                    Open download
+                  </a>
+
+                </div>
+
+              </div>
+
+
+              <button
+                class="notification-more"
+                title="More"
+              >
+                <i class="ri-more-2-fill"></i>
+              </button>
+
+            </article>
+
+
+
+            <!-- PROMOTION -->
+
+            <article
+              class="notification-item unread"
+              data-type="promotions"
+              data-id="n3"
+            >
+
+              <div class="notification-item-icon promotion">
+
+                <i class="ri-gift-line"></i>
+
+              </div>
+
+
+              <div class="notification-item-body">
+
+                <div class="notification-item-top">
+
+                  <strong>
+                    September Store Promotion
+                  </strong>
+
+                  <time>
+                    2 days ago
+                  </time>
+
+                </div>
+
+
+                <p>
+                  New products and special offers are now
+                  available in the EcoData Store.
+                </p>
+
+
+                <div class="notification-item-meta">
+
+                  <span>
+                    Promotion
+                  </span>
+
+                  <a href="index.html">
+                    Browse store
+                  </a>
+
+                </div>
+
+              </div>
+
+
+              <button
+                class="notification-more"
+                title="More"
+              >
+                <i class="ri-more-2-fill"></i>
+              </button>
+
+            </article>
+
+
+
+            <!-- SECURITY -->
+
+            <article
+              class="notification-item unread"
+              data-type="security"
+              data-id="n4"
+            >
+
+              <div class="notification-item-icon security">
+
+                <i class="ri-shield-check-line"></i>
+
+              </div>
+
+
+              <div class="notification-item-body">
+
+                <div class="notification-item-top">
+
+                  <strong>
+                    New login detected
+                  </strong>
+
+                  <time>
+                    3 days ago
+                  </time>
+
+                </div>
+
+
+                <p>
+                  Your account was accessed from a new
+                  Android device.
+                </p>
+
+
+                <div class="notification-item-meta">
+
+                  <span>
+                    Security
+                  </span>
+
+                  <a href="security.html">
+                    Review security
+                  </a>
+
+                </div>
+
+              </div>
+
+
+              <button
+                class="notification-more"
+                title="More"
+              >
+                <i class="ri-more-2-fill"></i>
+              </button>
+
+            </article>
+
+
+
+            <!-- READ -->
+
+            <article
+              class="notification-item"
+              data-type="orders"
+              data-id="n5"
+            >
+
+              <div class="notification-item-icon payment">
+
+                <i class="ri-bank-card-line"></i>
+
+              </div>
+
+
+              <div class="notification-item-body">
+
+                <div class="notification-item-top">
+
+                  <strong>
+                    Payment confirmed
+                  </strong>
+
+                  <time>
+                    Sep 8
+                  </time>
+
+                </div>
+
+
+                <p>
+                  Your payment for order
+                  ED-20260908-1024 was received successfully.
+                </p>
+
+
+                <div class="notification-item-meta">
+
+                  <span>
+                    Payment
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <button
+                class="notification-more"
+                title="More"
+              >
+                <i class="ri-more-2-fill"></i>
+              </button>
+
+            </article>
+
+
+          </div>
+
+
+          <!-- EMPTY STATE -->
+
+          <div
+            class="notification-empty"
+            id="notificationEmpty"
+          >
+
+            <div class="notification-empty-icon">
+
+              <i class="ri-notification-off-line"></i>
+
+            </div>
+
+            <strong>
+              No notifications
+            </strong>
+
+            <span>
+              You're all caught up.
+            </span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ======================================
+             MESSAGES PANEL
+        ======================================= -->
+
+        <div
+          class="notification-panel"
+          id="messagesPanel"
+        >
+
+
+          <div class="notification-toolbar">
+
+            <div>
+
+              <h2>
+                Messages
+              </h2>
+
+              <span>
+                Conversations and support messages
+              </span>
+
+            </div>
+
+
+            <button
+              class="notification-action-btn"
+              id="newMessageBtn"
+            >
+
+              <i class="ri-add-line"></i>
+
+              New Message
+
+            </button>
+
+          </div>
+
+
+
+          <!-- MESSAGE SEARCH -->
+
+          <div class="message-search">
+
+            <i class="ri-search-line"></i>
+
+            <input
+              type="search"
+              id="messageSearch"
+              placeholder="Search messages..."
+            >
+
+          </div>
+
+
+
+          <!-- MESSAGE LIST -->
+
+          <div
+            class="message-list"
+            id="messageList"
+          >
+
+
+            <!-- SUPPORT -->
+
+            <article
+              class="message-item unread"
+              data-message-id="m1"
+              data-search="ecodata support order help"
+            >
+
+              <div class="message-avatar support">
+
+                <i class="ri-customer-service-2-line"></i>
+
+              </div>
+
+
+              <div class="message-body">
+
+                <div class="message-top">
+
+                  <strong>
+                    EcoData Support
+                  </strong>
+
+                  <time>
+                    20 min ago
+                  </time>
+
+                </div>
+
+
+                <p class="message-subject">
+                  Order assistance
+                </p>
+
+
+                <p class="message-preview">
+                  Hello, we've received your request
+                  and are checking the order status...
+                </p>
+
+              </div>
+
+
+              <span class="message-unread-dot"></span>
+
+            </article>
+
+
+
+            <!-- SELLER -->
+
+            <article
+              class="message-item unread"
+              data-message-id="m2"
+              data-search="seller modern cv template"
+            >
+
+              <div class="message-avatar seller">
+
+                <i class="ri-store-2-line"></i>
+
+              </div>
+
+
+              <div class="message-body">
+
+                <div class="message-top">
+
+                  <strong>
+                    Creative Templates
+                  </strong>
+
+                  <time>
+                    Yesterday
+                  </time>
+
+                </div>
+
+
+                <p class="message-subject">
+                  Your digital product
+                </p>
+
+
+                <p class="message-preview">
+                  Thank you for purchasing. Your files
+                  have been updated with the latest version.
+                </p>
+
+              </div>
+
+
+              <span class="message-unread-dot"></span>
+
+            </article>
+
+
+
+            <!-- ECODATA -->
+
+            <article
+              class="message-item"
+              data-message-id="m3"
+              data-search="ecodata store welcome"
+            >
+
+              <div class="message-avatar store">
+
+                <i class="ri-store-line"></i>
+
+              </div>
+
+
+              <div class="message-body">
+
+                <div class="message-top">
+
+                  <strong>
+                    EcoData Store
+                  </strong>
+
+                  <time>
+                    Sep 5
+                  </time>
+
+                </div>
+
+
+                <p class="message-subject">
+                  Welcome to EcoData Store
+                </p>
+
+
+                <p class="message-preview">
+                  Your marketplace account is ready.
+                  Start exploring products, services...
+                </p>
+
+              </div>
+
+            </article>
+
+
+          </div>
+
+
+
+          <!-- MESSAGE EMPTY -->
+
+          <div
+            class="message-empty"
+            id="messageEmpty"
+          >
+
+            <div class="notification-empty-icon">
+
+              <i class="ri-message-3-line"></i>
+
+            </div>
+
+            <strong>
+              No messages found
+            </strong>
+
+            <span>
+              Your conversations will appear here.
+            </span>
+
+          </div>
+
+        </div>
+
+
+      </section>
+
+    </section>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  </main>
+
+         <!-----BOTTOM-NAVBAR----->
+  <div class="bottom-navbar" id="navIconDiv">
+    <div class="btom-navIcon" onclick="window.location.href='./homeClient.html'">
+      <div class="activeImg " id="activeMtn">
+        <i class="ri-store-3-line material-icons"></i>
+      </div>
+      <small class="bottomIcon-textNav">Shop</small>
+    </div>
+
+    <div class="btom-navIcon" onclick="window.location.href='./homeClientProduct.html'">
+      <div class="activeImg  " > 
+        <i class="ri-compass-3-line material-icons"></i>
+      </div>
+      <small class="bottomIcon-textNav">Products</small>
+    </div>
+
+
+   
+
+
+      <div class="btom-navIcon addBar">
+      <div class="activeImg" id="activeTel" > 
+       <i class="ri-download-cloud-line material-icons addBtn"></i>
+      </div>
+      <small class="bottomIcon-textNav">My downloads</small>
+    </div>
+
+
+     <div class="btom-navIcon">
+      <div class="activeImg" id="activeAir" > 
+      <i class="ri-file-list-3-line material-icons"></i>
+      </div>
+      <small class="bottomIcon-textNav"> Orders</small>
+    </div>
+
+    
+       <div class="btom-navIcon">
+      <div class="activeImg" id="activeAir" > 
+      <i class="ri-user-settings-line material-icons"></i>
+      </div>
+      <small class="bottomIcon-textNav">Profile</small>
+    </div>
+
+
+   
+
+
+  </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     SWIPER
+====================================================== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
+
+<!-- =====================================================
+     MAIN JS
+====================================================== -->
+<script src="./scrollreveal.min.js"></script>
+
+<!---=========== SWIPER JS===========-->
+<script src="./swiper-bundle.min.js"></script>
+
+<script src="./homeClientSwiper.js"></script>
+
+<script src="./homeClientStoreMain.js"></script>
+
+
+
+</body>
+</html>
