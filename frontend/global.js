@@ -146,9 +146,9 @@ const shoppingBtn = document.getElementById("shoppingBtn");
 shoppingBtn.addEventListener("click", (e) =>{
   e.stopPropagation();
 if(shoppingBtn){
-  window.location.href = './ecodataStore/homeClient.html';
+  window.location.href = '#';
 
-  // showSnackBar(" ✅ Coming up soon for sellers and buyers. You can Buy Data bundle, and register AFA. Thank You", "success", 5000);
+ showSnackBar(" ✅ Coming up soon for sellers and buyers. You can Buy Data bundle, and register AFA. Thank You", "success", 5000);
   
 }
 });
