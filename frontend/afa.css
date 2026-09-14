@@ -67,6 +67,100 @@
 }
 
 
+/* =========================================================
+   ECODATA STORE — MAIN CLIENT MARKETPLACE UI
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+body,
+button,
+input {
+  font-family: 'Inter', sans-serif !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+small,
+span,
+strong,
+p {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+:root {
+  --primary: #16a34a;
+  --primary-dark: #15803d;
+  --primary-light: #22c55e;
+
+  --accent: #f59e0b;
+  --danger: #ef4444;
+  --info: #3b82f6;
+
+  --bg: #f7f8fa;
+  --surface: #ffffff;
+  --surface-2: #f1f5f3;
+
+  --text: #111827;
+  --text-soft: #667085;
+  --text-muted: #98a2b3;
+  --product-card-text: #2c2c2c;
+
+  --border: #e7e9ee;
+  --border-light: #eef0f3;
+
+  --shadow-sm: 0 2px 8px rgba(16, 24, 40, .05);
+  --shadow-md: 0 8px 25px rgba(16, 24, 40, .08);
+  --shadow-lg: 0 18px 50px rgba(16, 24, 40, .12);
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 28px;
+
+  --sidebar-width: 262px;
+  --navbar-height: 64px;
+
+  --transition: 0s ease;
+
+  --icon-color: #596273;
+}
+
+
+:root {
+  --color-white: #fff;
+  --color-light: #f5f4f7;
+  --color-gray-light: #86848c;
+  --color-gray-dark: #56555e;
+  --color-dark: #27282f;
+  --color-primary: rgb(71, 7, 234);
+  --color-success: rgb(34, 202, 75);
+  --color-danger: rgb(255, 67, 54);
+  --color-warning:  rgb(234, 181, 7);
+  --color-purple: rgb(160, 99, 245);
+  --color-primary-light: rgba(71, 7, 234, 0.2);
+  --color-success-light: rgba(34, 202, 75, 0.2);
+  --color-danger-light: rgba(255, 67, 54, 0.2);
+  --color-purple-light: rgba(160, 99, 245, 0.2);
+
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  --card-padding: 1.6rem;
+  --border-cl: rgb(226, 226, 226);
+
+  --radius-1: 0.5rem;
+  --radius-2: 1rem;
+  --radius-3: 1.6rem;
+
+  --transition: all 300ms ease;
+}
+
+
+
 
 /****
 AFA REGISTRATION
@@ -77,9 +171,11 @@ AFA REGISTRATION
   background: none;
   align-items: center;
   justify-content: center;
-  top: calc(100vh - 80vh) !important;
-  left: calc(100vw - 90vw) !important;
-  z-index: 999;
+  width: 94%;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999999999;
 }
 
 .afa-receipt {
@@ -240,7 +336,7 @@ AFA RECEIPT ENDS
   justify-items: center;
   align-items: center;
   gap: .1rem;
-  background:  rgba(39, 39, 39, 0.89);
+  background: rgb(54, 52, 52);
   backdrop-filter: blur(18px);
   border-end-end-radius: .2rem;
   border-end-start-radius: .2rem;
@@ -258,14 +354,13 @@ AFA RECEIPT ENDS
 .table-section .table-title{
   width: 100%;
   height: 10%;
-  background: linear-gradient(135deg, rgba(39, 39, 39, 0.89), rgba(117, 117, 117, 0.89)) ;
+ 
   backdrop-filter: blur(18px);
   display: flex;
   align-items: center;
   justify-content: start;
   position: relative;
   padding: 1rem;
-  border: 1px solid  rgb(121, 121, 121);
   box-shadow: 0 10px 20px rgba(0,0,0,0.15);
   border-radius: .2rem;
 }
@@ -283,7 +378,6 @@ AFA RECEIPT ENDS
   display: flex;
   flex-direction: column;
   position: relative;
-  border: 1px solid rgb(128, 134, 134);
   border-radius: .2rem;
   /* Remove overflow from here — move it to table-scroll-area */
   overflow: hidden;
@@ -296,6 +390,7 @@ AFA RECEIPT ENDS
   overflow-x: auto;   /* horizontal scroll */
   overflow-y: auto;   /* vertical scroll */
   white-space: nowrap;
+  
 }
 
 .content-wrapper .table-header {
@@ -305,7 +400,7 @@ AFA RECEIPT ENDS
   justify-items: center;
   align-self: center;
   grid-template-columns: 
-    70px 110px 90px 110px 100px 120px 120px 120px ;
+    160px 130px 160px 150px 100px 190px 170px 120px ;
 
   /* sticky top so it stays visible while scrolling vertically */
   position: sticky;
@@ -315,12 +410,11 @@ AFA RECEIPT ENDS
   /* Remove position: absolute — it was breaking x-axis sync */
   color: white;
   font-weight: 600;
-  border-bottom: 1px solid rgb(94, 93, 93);/* needs a background when sticky */
-  font-family: system-ui, sans-serif;
+  font-size: .86rem;
+
   padding: .5rem 0;
   margin-left: .5rem;
   width: 100%;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
   min-width: max-content; /* prevents collapsing on narrow viewports */
 }
 
@@ -331,7 +425,7 @@ AFA RECEIPT ENDS
   padding: 0 .5rem;
   align-items: start;
   grid-template-columns: 
-    70px 110px 90px 110px 100px 120px 120px 120px ;
+    180px 130px 160px 150px 100px 190px 170px 120px ;
   position: relative;
   min-width: max-content; /* ensures rows stretch with header */
 }
@@ -368,7 +462,7 @@ AFA RECEIPT ENDS
  width: 100%;
  height: 2.2rem;
  border-bottom: 1px solid rgb(100, 99, 99);
- grid-template-columns:   110px 80px 90px 100px 100px 100px 110px 150px 80px 120px;
+ grid-template-columns:  180px 130px 160px 150px 100px 190px 170px 120px ;
  display: grid;
 }
 
@@ -377,7 +471,7 @@ AFA RECEIPT ENDS
 }
 
 .afaRow-reg small{
-  font-size: .81rem;
+  font-size: .67rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 600;
   color: rgb(173, 173, 173);
@@ -385,3 +479,375 @@ AFA RECEIPT ENDS
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   AFA REGISTRATION HISTORY / LIVE STATUS TABLE
+   ========================================================= */
+
+.afaTable-container {
+  width: 100%;
+  margin-top: 25px;
+  display: none;
+}
+
+.afaTable-container .table-section {
+  width: 100%;
+
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+/* =========================================================
+   TABLE TITLE
+   ========================================================= */
+
+.afaTable-container .table-title {
+  width: 100%;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border-color, #e7e7e7);
+}
+
+.afaTable-container .table-title p {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  color: var(--text-color, #171717);
+}
+
+/* =========================================================
+   SCROLL AREA
+   ========================================================= */
+
+.afaTable-container .content-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.afaTable-container .table-scroll-area {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.afaTable-container .table-header {
+  min-width: 1050px;
+
+  display: grid;
+
+  grid-template-columns:
+    180px
+    130px
+    160px
+    150px
+    100px
+    190px
+    170px
+    120px;
+
+  align-items: center;
+
+  padding: 14px 20px;
+
+
+
+}
+
+.afaTable-container .table-header span {
+  font-size: 11px;
+  font-weight: 700;
+  color: #777;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   ROW CONTAINER
+   ========================================================= */
+
+.afaTable-container .main-row-content {
+  width: 100%;
+}
+
+.afaTable-container .row-wrapper {
+  min-width: 1050px;
+}
+
+/* =========================================================
+   DYNAMIC ROW
+   ========================================================= */
+
+.afaTable-container .afa-history-row {
+  display: grid;
+
+  grid-template-columns:
+    180px
+    130px
+    160px
+    150px
+    100px
+    190px
+    170px
+    120px;
+
+  align-items: center;
+
+  padding: 16px 20px;
+
+  border-bottom: 1px solid var(--border-color, #eeeeee);
+
+  transition:
+    background .2s ease,
+    transform .2s ease;
+}
+
+.afaTable-container .afa-history-row:last-child {
+  border-bottom: none;
+}
+
+.afaTable-container .afa-history-row:hover {
+  background: #fafafa;
+}
+
+/* =========================================================
+   CELL
+   ========================================================= */
+
+.afaTable-container .afa-cell {
+  min-width: 0;
+  padding-right: 15px;
+
+  font-size: 13px;
+  color: #333;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.afaTable-container .afa-cell.name {
+  font-weight: 600;
+  color: #171717;
+}
+
+.afaTable-container .afa-cell.amount {
+  font-weight: 700;
+}
+
+.afaTable-container .afa-cell.reference {
+  font-family: monospace;
+  font-size: 11px;
+  color: #666;
+}
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.afa-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 85px;
+
+  padding: 6px 10px;
+
+  border-radius: 999px;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  text-transform: capitalize;
+
+  white-space: nowrap;
+}
+
+/* Pending */
+
+.afa-status.pending {
+  color: #8a6500;
+  background: #fff8df;
+}
+
+/* Processing */
+
+.afa-status.processing,
+.afa-status.in-progress {
+  color: #315d91;
+  background: #edf5ff;
+}
+
+/* Success */
+
+.afa-status.completed,
+.afa-status.delivered,
+.afa-status.success,
+.afa-status.successful {
+  color: #176b45;
+  background: #eaf8f1;
+}
+
+/* Failed */
+
+.afa-status.failed {
+  color: #a83232;
+  background: #fff0f0;
+}
+
+/* Cancelled */
+
+.afa-status.cancelled,
+.afa-status.canceled {
+  color: #666;
+  background: #f1f1f1;
+}
+
+/* =========================================================
+   LIVE STATUS DOT
+   ========================================================= */
+
+.afa-status.live {
+  gap: 6px;
+}
+
+.afa-status.live::before {
+  content: "";
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: currentColor;
+
+  animation: afaLivePulse 1.6s ease-in-out infinite;
+}
+
+@keyframes afaLivePulse {
+  0% {
+    opacity: .35;
+    transform: scale(.8);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: .35;
+    transform: scale(.8);
+  }
+}
+
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .afaTable-container {
+    margin-top: 18px;
+  }
+
+  .afaTable-container .table-section {
+    border-radius: 14px;
+  }
+
+  .afaTable-container .table-title {
+    padding: 15px 16px;
+  }
+
+  .afaTable-container .table-title p {
+    font-size: 12px;
+  }
+
+  .afaTable-container .table-header {
+    padding: 13px 16px;
+  }
+
+  .afaTable-container .afa-history-row {
+    padding: 15px 16px;
+  }
+
+  .afaTable-container .afa-cell {
+    font-size: 12px;
+  }
+
+  .afa-status {
+    min-width: 78px;
+    padding: 5px 8px;
+    font-size: 9px;
+  }
+}
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+body.dark-mode .afaTable-container .table-section {
+  background: #111;
+  border-color: #262626;
+}
+
+body.dark-mode .afaTable-container .table-title {
+  border-color: #262626;
+}
+
+body.dark-mode .afaTable-container .table-title p {
+  color: #f5f5f5;
+}
+
+
+
+body.dark-mode .afaTable-container .table-header span {
+  color: #888;
+}
+
+body.dark-mode .afaTable-container .afa-history-row {
+  border-color: #262626;
+}
+
+body.dark-mode .afaTable-container .afa-history-row:hover {
+  background: #181818;
+}
+
+body.dark-mode .afaTable-container .afa-cell {
+  color: #bdbdbd;
+}
+
+body.dark-mode .afaTable-container .afa-cell.name {
+  color: #f5f5f5;
+}
+
+body.dark-mode .afaTable-container .afa-cell.reference {
+  color: #888;
+}
+
+body.dark-mode #afaEmpty-body {
+  color: #777;
+}
