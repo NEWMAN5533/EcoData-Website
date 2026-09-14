@@ -1017,6 +1017,8 @@ function saveNewAfaRegistration(
 
   }
 
+  
+
 
   saveAfaRegistrations();
 
@@ -1155,6 +1157,76 @@ function closeReceipt() {
 }
 
 
+
+
+function createAfaHistoryRow(item){
+
+  const row = document.createElement("div");
+  row.className = "afa-history-row";
+
+  // name
+  const name = document.createElement("span");
+  name.className = "afa-cell name";
+  name.textContent = item.name || "";
+
+  // phone
+  const phone = document.createElement("span");
+  phone.className = "afa-cell";
+  phone.textContext = item.phoneNumber || "";
+
+  // Ghana card
+  const ghanaCard = document.createElement("span");
+  ghanaCard.className = "afa-cell";
+  ghanaCard.textContent = item.idNumber || "";
+
+  // Status
+  const status = document.createElement("span");
+  const normalizedStatus = String(item.status || "pending").toLowerCase().trim();
+
+  status.className = `afa-cell afa-status ${normalizedStatus}`;
+
+  status.textContent = formatAfaStatus(item.status);
+
+
+  // Region
+  const region = document.createElement("span");
+  region.className = "afa-cell";
+  region.textContent = item.region || "";
+
+  // Amount 
+  const amount = document.createElement("span");
+  amount.className = "afa-cell amount";
+  amount.textContent = `GHS ${Number(item.ecoDataPrice ?? 20).toFixed(2)}`;
+
+  // Payment Reference
+  const reference = document.createElement("span");
+  reference.className = "afa-cell reference";
+  reference.textContent = item.paymentReference || "";
+
+  // Date submitted
+  const date = document.createElement("span");
+  date.className = "afa-cell";
+  date.textContent = formatAfaDate(item.submittedAt);
+
+
+  //===========================
+  // APPEND ALL CELLS
+  //===========================
+  row.appendChild(name);
+  row.appendChild(phone);
+  row.appendChild(ghanaCard);
+  row.appendChild(status);
+  row.appendChild(region);
+  row.appendChild(amount);
+  row.appendChild(reference);
+  row.appendChild(date);
+
+  return row
+
+}
+
+
+
 // ==========================================
 // FORMAT STATUS
 // ==========================================
@@ -1221,141 +1293,49 @@ function formatAfaStatus(
 // AFA HISTORY TABLE
 // ==========================================
 
-const afaRowWrapper =
+
+
+
+function renderAfaHistory() {
+  const container = document.getElementById("afaHistoryTrack");
+
+  const wrapper =
   document.getElementById(
     "afaRowWrapper"
   );
 
-const afaEmptyBody =
+const empty =
   document.getElementById(
     "afaEmpty-body"
   );
 
-
-function renderAfaHistory() {
-
-  if (!afaRowWrapper) return;
+  if (!container ||  !wrapper || empty) return;
 
 
-  afaRowWrapper.innerHTML = "";
+  // clear only the dynamic rows
+  wrapper.replaceChildren();
 
-
+  // No registration
   if (
-    !afaRegistrations.length
+    afaRegistrations || afaRegistrations.length === 0
   ) {
 
-    if (afaEmptyBody) {
-
-      afaEmptyBody.hidden =
-        false;
-
-    }
-
+    empty.hidden = false;
+    container.style.display = "flex";
     return;
-
   }
 
+  // we have registration
+  empty.hidden = true;
 
-  if (afaEmptyBody) {
+  // Always append rows
+  afaRegistrations.forEach((item) => {
+    const row = createAfaHistoryRow(item);
 
-    afaEmptyBody.hidden =
-      true;
+    wrapper.appendChild(row);
+  });
 
-  }
-
-
-  afaRegistrations.forEach(
-    registration => {
-
-      afaRowWrapper.appendChild(
-        createAfaTableRow(
-          registration
-        )
-      );
-
-    }
-  );
-
-}
-
-
-function createAfaTableRow(
-  registration
-) {
-
-  const row =
-    document.createElement(
-      "div"
-    );
-
-
-  row.className =
-    "afa-history-row";
-
-
-  row.dataset.registrationId =
-    registration.registrationId ||
-    "";
-
-
-  row.innerHTML = `
-
-    <span class="afa-history-cell afa-name-cell">
-      ${escapeAfaHTML(
-        registration.name || "—"
-      )}
-    </span>
-
-    <span class="afa-history-cell afa-phone-cell">
-      ${escapeAfaHTML(
-        registration.phoneNumber || "—"
-      )}
-    </span>
-
-    <span class="afa-history-cell afa-card-cell">
-      ${escapeAfaHTML(
-        registration.idNumber || "—"
-      )}
-    </span>
-
-       <span class="afa-history-cell afa-status-cell">
-      ${createAfaStatusPill(
-        registration.status
-      )}
-    </span>
-
-    <span class="afa-history-cell afa-region-cell">
-      ${escapeAfaHTML(
-        registration.region || "—"
-      )}
-    </span>
-
-    <span class="afa-history-cell afa-amount-cell">
-      GHS ${Number(
-        registration.ecoDataPrice ??
-        AFA_PRICE_GHS
-      ).toFixed(2)}
-    </span>
-
-    <span class="afa-history-cell afa-payment-cell">
-      ${escapeAfaHTML(
-        registration.paymentReference ||
-        "—"
-      )}
-    </span>
-
-    <span class="afa-history-cell afa-date-cell">
-      ${formatAfaDate(
-        registration.submittedAt
-      )}
-    </span>
-
- 
-
-  `;
-
-
-  return row;
+ container.style.display = "flex";
 
 }
 
@@ -1363,6 +1343,7 @@ function createAfaTableRow(
 // ==========================================
 // STATUS PILL
 // ==========================================
+
 
 function createAfaStatusPill(
   status
