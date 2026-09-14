@@ -1,128 +1,286 @@
-import express from 'express';
-import axios from 'axios';
+import express from "express";
+import axios from "axios";
 
-const afaRegisterRouter = express.Router();
+const afaRegisterRouter = (verifyPaystack) => {
 
-afaRegisterRouter.post("/afa-register", async (req, res) => {
+  const router = express.Router();
 
-const {
-  phone,
-  fullName,
-  paymentReference,
-} = req.body;
+  router.post("/register", async (req, res) => {
 
-const result = await handleAFARequest({
-  phone: phone,
-  fullName: fullname,
-  paymentReference: paymentReference
-});
+    console.log("========== AFA REGISTRATION REQUEST ==========");
 
-res.status(result.status).json(result.body);
+    try {
 
-async function handleAFARequest({phone, fullName, paymentReference}) {
-  // Validate 
-  if(!phone || !fullName || !paymentReference){
-    return {
-      ok: false,
-      status: 400,
-      body: {
-        success: false,
-        message: "Missing require field"
+      const {
+        name,
+        phoneNumber,
+        idNumber,
+        occupation,
+        location,
+        region,
+        dateOfBirth,
+        paymentReference
+      } = req.body;
+
+
+      // =========================
+      // VALIDATION
+      // =========================
+
+      if (
+        !name ||
+        !phoneNumber ||
+        !idNumber ||
+        !occupation ||
+        !location ||
+        !region ||
+        !dateOfBirth ||
+        !paymentReference
+      ) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "All AFA registration fields and payment reference are required"
+        });
       }
-    }
-  }
-
-  // Duplicate protection
-  if(processedOrders.has(paymentReference)){
-    return {
-      ok: true,
-      status: 200,
-      body: {
-        success: true,
-        message: "Afa Already registered",
-        ...processedOrders.get(paymentReference).response,
-      },
-    };
-  }
 
 
-}
+      // =========================
+      // VERIFY PAYSTACK
+      // =========================
+
+      console.log(
+        "Verifying AFA payment:",
+        paymentReference
+      );
+
+      const verification =
+        await verifyPaystack(paymentReference);
+
+      const payment =
+        verification.data?.data;
 
 
+      if (
+        !verification.data?.status ||
+        payment?.status !== "success"
+      ) {
 
-  try {
-    // ====================
-    // VERIFY PAYMENT
-    // ====================
-    const verification = await axios.get(
-      `https://api.paystack.co/transaction/verify/${paymentReference}`,
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
-        },
+        return res.status(400).json({
+          success: false,
+          message: "Payment verification failed."
+        });
+
       }
-    );
 
-    if (!verification.data.status) {
-      throw new Error("Payment verification failed");
-    }
 
-    const paidAmount = verification.data.data.amount / 100;
+      // =========================
+      // VERIFY AMOUNT
+      // =========================
 
-    if (paidAmount !== 20) {
-      throw new Error("Invalid payment amount");
-    }
+      const ECODATA_AFA_PRICE = 20;
 
-    // ====================
-    // 🚫 REMOVE SWIFT CALL
-    // ====================
+      const paidAmount =
+        Number(payment.amount || 0);
 
-    // ====================
-    // SAVE AFA REQUEST (YOU CONTROL THIS)
-    // ====================
-    const responseData = {
-      registrationId: "AFA-" + Date.now(),
-      name: fullName,
-      phoneNumber: phone,
-      registrationPrice: paidAmount,
-      status: "pending", // 🔥 always pending (admin approval)
-      submittedAt: new Date().toISOString(),
-    };
+      const expectedAmount =
+        ECODATA_AFA_PRICE * 100;
 
-    // Store in memory (you can later move to DB)
-    processedOrders.set(paymentReference, {
-      status: "success",
-      response: responseData,
-    });
 
-    return {
-      ok: true,
-      status: 200,
-      body: {
-        success: true,
-        message: "Registration submitted successfully",
-        ...responseData,
-      },
-    };
-  } catch (err) {
-    const errData = err.response?.data || err.message;
+      if (paidAmount !== expectedAmount) {
 
-    processedOrders.set(paymentReference, {
-      status: "failed",
-      response: { error: errData },
-    });
+        console.log(
+          "Invalid AFA payment amount:",
+          paidAmount
+        );
 
-    return {
-      ok: false,
-      status: 500,
-      body: {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid AFA payment amount."
+        });
+
+      }
+
+
+      // =========================
+      // CLEAN DATA
+      // =========================
+
+      const registrationData = {
+
+        name: String(name).trim(),
+
+        phoneNumber:
+          String(phoneNumber).trim(),
+
+        idNumber:
+          String(idNumber).trim(),
+
+        occupation:
+          String(occupation).trim(),
+
+        location:
+          String(location).trim(),
+
+        region:
+          String(region).trim(),
+
+        dateOfBirth:
+          String(dateOfBirth).trim(),
+
+        webhookUrl:
+          "https://swiftdata-link.com/api/webhooks/afa"
+      };
+
+
+      // =========================
+      // SWIFT BASE
+      // =========================
+
+      const base = (
+        process.env.SWIFT_BASE_URL ||
+        "https://swiftdata-link.com/api/v1"
+      ).replace(/\/$/, "");
+
+
+      // =========================
+      // SWIFT AFA ENDPOINT
+      // =========================
+
+      const swiftUrl =
+        `${base}/afa/register`;
+
+
+      console.log(
+        "Sending AFA registration to:",
+        swiftUrl
+      );
+
+
+      // =========================
+      // SEND TO SWIFT
+      // =========================
+
+      const response = await axios.post(
+        swiftUrl,
+        registrationData,
+        {
+          headers: {
+            "x-api-key":
+              process.env.SWIFT_API_KEY,
+
+            "Content-Type":
+              "application/json"
+          },
+
+          timeout: 15000
+        }
+      );
+
+
+      console.log(
+        "Swift AFA response:",
+        response.data
+      );
+
+
+      // =========================
+      // SUCCESS
+      // =========================
+
+      if (response.data?.success) {
+
+        const registration = {
+
+          ...response.data.registration,
+
+          ecoDataPrice:
+            ECODATA_AFA_PRICE,
+
+          paymentReference:
+            payment.reference ||
+            paymentReference
+        };
+
+
+        return res.json({
+
+          success: true,
+
+          registration,
+
+          authMethod:
+            response.data.authMethod ||
+            "api-key"
+        });
+
+      }
+
+
+      // =========================
+      // SWIFT FAILURE
+      // =========================
+
+      return res.status(400).json({
+
         success: false,
-        message: "AFA submission failed",
-        error: errData,
-      },
+
+        message:
+          response.data?.message ||
+          "AFA registration failed",
+
+        details:
+          response.data
+      });
+
+
+    } catch (error) {
+
+      console.error(
+        "======== AFA REGISTRATION ERROR =========="
+      );
+
+      console.error(
+        error.response?.data ||
+        error.message
+      );
+
+
+      if (error.response) {
+
+        return res.status(
+          error.response.status || 500
+        ).json({
+
+          success: false,
+
+          message:
+            error.response.data?.message ||
+            "AFA registration request failed",
+
+          details:
+            error.response.data || null
+        });
+
+      }
+
+
+      return res.status(500).json({
+
+        success: false,
+
+        message:
+          "Unable to complete AFA registration",
+
+        error:
+          error.message
+      });
+
     }
-  }
-} 
-)
+
+  });
+
+  return router;
+};
 
 export default afaRegisterRouter;
