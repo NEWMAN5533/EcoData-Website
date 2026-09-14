@@ -102,7 +102,6 @@
   
 </head>
 
-<script src="global.js"></script>
 <body>
 
 
@@ -613,7 +612,7 @@
       <div class="whb-right-top">
         <div class="ratingContainer">
   <div class="stat-card float">
-      <div class="stat-num"  id="stat-num"></div>
+      <div class="stat-num"id="stat-num"></div>
       <div class="stat-label">Happy Users</div>
     </div>
     <div class="stat-card float" style="animation-delay:0.5s">
@@ -654,7 +653,7 @@
 
 
 
- <section class="trusted-by trusted-by-afa">
+<section class="trusted-by trusted-by-afa">
 
           <div class="particles">
             <span></span><span></span><span></span><span></span>
@@ -705,65 +704,100 @@
             <div class="baw-glow baw-glow-afa"></div>
           </div>
 
-        </section>
+</section>
 <!----TRUSTED-MESSAGE---ends------>
 
 
 <!---AFA-SUCCESS-RECEIPT--->
-
+<!--- AFA SUCCESS RECEIPT --->
 <section id="afaReceipt" class="afa-receipt">
-  <div class="receipt-card" >
-    <h3>AFA Registration Successful</h3>
 
-    <div class="receipt-row">
-      <span>Name</span>
-      <strong id="rName"></strong>
+  <div class="receipt-card">
+
+    <div class="receipt-header">
+      <div class="receipt-success-icon">
+        ✓
+      </div>
+
+      <h3>AFA Registration Successful</h3>
+      <p>Your AFA registration has been submitted successfully.</p>
     </div>
 
-    
-    <div class="receipt-row">
-      <span>Phone</span>
-      <strong id="rPhone"></strong>
+
+    <!-- Registration Details -->
+    <div class="receipt-details">
+
+      <div class="receipt-row">
+        <span>Name</span>
+        <strong id="rName">—</strong>
+      </div>
+
+      <div class="receipt-row">
+        <span>Phone</span>
+        <strong id="rPhone">—</strong>
+      </div>
+
+      <div class="receipt-row">
+        <span>Ghana Card</span>
+        <strong id="rGhanaCard">—</strong>
+      </div>
+
+      <div class="receipt-row">
+        <span>Region</span>
+        <strong id="rRegion">—</strong>
+      </div>
+
+      <div class="receipt-row">
+        <span>AFA Registration ID</span>
+        <strong id="rRegistrationId">—</strong>
+      </div>
+
+      <div class="receipt-row">
+        <span>Status</span>
+        <strong id="rStatus">Pending</strong>
+      </div>
+
+      <div class="receipt-row receipt-amount-row">
+        <span>Amount Paid</span>
+        <strong id="rAmount">GHS 20.00</strong>
+      </div>
+
+      <div class="receipt-row">
+        <span>Payment Ref</span>
+        <strong id="rRef">—</strong>
+      </div>
+
     </div>
 
-    
-    <div class="receipt-row">
-      <span>Ghana Card</span>
-      <strong id="rGhanaCard"></strong>
-    </div>
 
-    
-    <div class="receipt-row">
-      <span>Region</span>
-      <strong id="rRegion"></strong>
-    </div>
-
-    
-    <div class="receipt-row">
-      <span>Amount Paid</span>
-      <strong>GHS 20.00</strong>
-    </div>
-
-    
-    <div class="receipt-row">
-      <span>Payment Ref</span>
-      <strong id="rRef"></strong>
-    </div>
-
+    <!-- Actions -->
     <div class="receipt-actions">
-      <button onclick="downloadReceipt()">
+
+      <button
+        type="button"
+        onclick="downloadReceipt()"
+      >
         Download Receipt
       </button>
-      <button onclick="closeReceipt()">Close</button>
+
+      <button
+        type="button"
+        onclick="closeReceipt()"
+      >
+        Close
+      </button>
+
     </div>
+
   </div>
+
 </section>
 
 
 <!---AFA-SUCCESS RECEIPT-ends--->
 
 <!---AFA-UI-SECTION-->
-<div class="afa-container" >
+<section class="afa-container" >
   <div class="span">
     <p> MTN AFA Program</p>
   </div>
@@ -958,11 +992,11 @@
       </div>
     </div>
   </div>
-</div>
+</section>
 <!--AFA-UI-ENDS-->
 
 
-<section class="afaTable-container" id="afaHistoryTrack" style="display: none;">
+<section class="afaTable-container" id="afaHistoryTrack" >
  <section class="table-section">
   <div class="table-title">
     <p>AFA REGISTERED HISTORY</p>
@@ -993,7 +1027,6 @@
  
 
 </section>
-</section>
 
 
 
@@ -1001,7 +1034,8 @@
 
 
 
-<div class="what-group-btn">
+
+<section class="what-group-btn">
   <span class="informattion">Join</span>
 
   <a href="https://chat.whatsapp.com/LwhZNOyUQsJIGTQRL9cIXT?mode=hqrt3">
@@ -1009,30 +1043,30 @@
     <div class="pulse-ring-delay"></div>
   <img src="./css/icons/whats.png" alt="" loading="lazy">
   </a>
-</div>
+</section>
 
 
 
 
 
-  <!-- ✅ WhatsApp Floating Chat -->
-<div class="chatBox" id="whatsappChat">
-  <div id="chatButton" class="message">
-    <img src="./css/icons/chatMe.png" alt="image" loading="lazy">
+   <!-- ✅ WhatsApp Floating Chat -->
+  <div class="chatBox" id="whatsappChat">
+    <div id="chatButton" class="message">
+      <img src="./css/icons/chatMe.png" alt="image" loading="lazy">
+    </div>
+    <!---whatsapp chatBox-->
+    <div id="chatBox">
+      <h4>Chat Ecodata Admin</h4>
+      <input type="text" id="whatsappMessage" placeholder="Type your message..." />
+      <button id="sendMsgBtn">Send</button>
+    </div>
   </div>
-  <!---whatsapp chatBox-->
-  <div id="chatBox">
-    <h4>Chat Ecodata Admin</h4>
-    <input type="text" id="whatsappMessage" placeholder="Type your message..." />
-    <button id="sendMsgBtn">Send</button>
-  </div>
-</div>
 
 
 
 
 <!------MENU-CARD----->
-<div class="menu-card-container" id="closeCard" style="display: none">
+<section class="menu-card-container" id="closeCard" style="display: none">
        <div class="link">
        <a href="terms.html">
         <img src="./css/icons/list.jpg" alt="image" loading="lazy">
@@ -1280,13 +1314,14 @@
 <script type="module" src="./firebase-config.js"></script>
 
 
-<script src="afa.js"></script>
-<script src="global.js"></script>
+<script src="afaRegistration.js"></script>
 
 <script src='scrollreveal.min.js'></script>
 <script src='swiper-bundle.min.js'></script>
 
  <script src="https://cdnjs.coudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script> 
+
+ <script src="global.js"></script>
 
 
 
@@ -1590,26 +1625,7 @@ let topSwiper = new Swiper(".status-swiper", {
 
 
 
-<!---NOTIFICATION----->
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    
-const notificationIcon = document.querySelectorAll(".notifity");
-const notifyCount = document.getElementById("notifyCount");
-const NOTIFY_KEY = "notifications_read";
 
-// on page load
-if (localStorage.getItem(NOTIFY_KEY) === "true") {
-  notifyCount.style.display = "none";
-}
-
-// click to mark as read 
-notificationIcon.addEventListener("click", () => {
-  notifyCount.style.display = "none";
-  localStorage.setItem(NOTIFY_KEY, "true");
-});
-  });
-</script>
 
 
 
