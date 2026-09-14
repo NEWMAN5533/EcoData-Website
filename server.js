@@ -18,6 +18,7 @@ import validateRecipientRoute from "./routes/validateRecipient.js";
 import restrictionsRoute from "./routes/restrictions.js";
 import exclusiveAgentRoute from "./routes/exclusivePage.js";
 import afaRegisterRouter from "./routes/afaRegisterRoute.js";
+import afaStatusRouter from "./routes/afaStatusRouter.js";
 import getVoucherRouter from "./routes/getVouchersRoute.js";
 import postVoucherRouter from "./routes/postVoucherRouter.js";
 import failedOrderCheckRouter from "./routes/failedOrderCheckRouter.js";
@@ -60,16 +61,18 @@ app.use("/api/validate-recipient", validateRecipientRoute);
 app.use("/api/restrictions", restrictionsRoute);
 app.use("/api/paystack/webhook", paystackWebhookRouter);
 
-app.use("/api/initiate-subscription", subscriptionRouter);
+
 app.use("/api/admin", adminRoute);
 app.use("/api/admin", syncOrderRoute);
 app.use("/api/verify-payment", exclusiveAgentRoute);
-app.use("/api/afa-register", afaRegisterRouter);
+app.use("/api/afa", afaRegisterRouter(verifyPaystack));
+app.use("/api/afa/status", afaStatusRouter);
 app.use("/api/live-order-status", failedOrderCheckRouter);
 app.use("/api/vouchers", getVoucherRouter);
 app.use("/api/vouchers", postVoucherRouter);
 
 // ecodata store upp.use()
+app.use("/api/initiate-subscription", subscriptionRouter);
 app.use("/api/create-store", storeRouter);
 app.use("/api/creator/products", createProductRouter);
 
