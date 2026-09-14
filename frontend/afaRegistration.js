@@ -59,10 +59,10 @@ regionBtn?.addEventListener("click", (e) => {
   if (!regionSheet) return;
 
   const isOpen =
-    regionSheet.style.display === "block";
+    regionSheet.style.display === "flex";
 
   regionSheet.style.display =
-    isOpen ? "none" : "block";
+    isOpen ? "none" : "flex";
 
 });
 
@@ -1318,6 +1318,12 @@ function createAfaTableRow(
       )}
     </span>
 
+       <span class="afa-history-cell afa-status-cell">
+      ${createAfaStatusPill(
+        registration.status
+      )}
+    </span>
+
     <span class="afa-history-cell afa-region-cell">
       ${escapeAfaHTML(
         registration.region || "—"
@@ -1344,11 +1350,7 @@ function createAfaTableRow(
       )}
     </span>
 
-    <span class="afa-history-cell afa-status-cell">
-      ${createAfaStatusPill(
-        registration.status
-      )}
-    </span>
+ 
 
   `;
 
