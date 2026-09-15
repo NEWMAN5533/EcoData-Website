@@ -908,9 +908,12 @@ async function registerAfaCustomer(
 // SAVE AFA REGISTRATION
 // ==========================================
 
-let afaRegistrations =
-  loadAfaRegistrations();
+let afaRegistrations = loadAfaRegistrations();
 
+
+// ==========================================
+// LOAD AFA REGISTRATIONS
+// ==========================================
 
 function loadAfaRegistrations() {
 
@@ -944,22 +947,36 @@ function loadAfaRegistrations() {
 }
 
 
+// ==========================================
+// SAVE ALL AFA REGISTRATIONS
+// ==========================================
+
 function saveAfaRegistrations() {
 
   try {
-    localStorage.setItem(
-    AFA_STORAGE_KEY,
-    JSON.stringify(
-      afaRegistrations
-    )
-  );
 
-  } catch(error){
-    console.error("Failed to save AFA registration:", error);
+    localStorage.setItem(
+      AFA_STORAGE_KEY,
+      JSON.stringify(
+        afaRegistrations
+      )
+    );
+
+  } catch (error) {
+
+    console.error(
+      "Failed to save AFA registration:",
+      error
+    );
+
   }
 
 }
 
+
+// ==========================================
+// SAVE NEW AFA REGISTRATION
+// ==========================================
 
 function saveNewAfaRegistration(
   registration,
@@ -973,11 +990,17 @@ function saveNewAfaRegistration(
     paymentReference:
       paymentReference || null,
 
+    // Always keep EcoData's customer price
     ecoDataPrice:
-      registration.ecoDataPrice ?? AFA_PRICE_GHS
+      registration.ecoDataPrice ??
+      AFA_PRICE_GHS
 
   };
 
+
+  // ========================================
+  // CHECK IF REGISTRATION ALREADY EXISTS
+  // ========================================
 
   const existingIndex =
     afaRegistrations.findIndex(
@@ -986,6 +1009,10 @@ function saveNewAfaRegistration(
         newRegistration.registrationId
     );
 
+
+  // ========================================
+  // UPDATE EXISTING REGISTRATION
+  // ========================================
 
   if (existingIndex !== -1) {
 
@@ -1001,7 +1028,12 @@ function saveNewAfaRegistration(
 
     };
 
+
   } else {
+
+    // ======================================
+    // ADD NEW REGISTRATION TO TOP
+    // ======================================
 
     afaRegistrations.unshift(
       newRegistration
@@ -1010,7 +1042,10 @@ function saveNewAfaRegistration(
   }
 
 
-  // Maximum local history
+  // ========================================
+  // MAXIMUM LOCAL HISTORY
+  // ========================================
+
   if (
     afaRegistrations.length > 50
   ) {
@@ -1024,19 +1059,54 @@ function saveNewAfaRegistration(
   }
 
 
+  // ========================================
+  // SAVE TO LOCAL STORAGE
+  // ========================================
+
   saveAfaRegistrations();
 
-  renderAfaHistory();
+
+  // ========================================
+  // UPDATE ONLY THIS TABLE ROW
+  // ========================================
+
+  renderAfaHistoryRow(
+    newRegistration
+  );
+
+
+  // Make sure history container is visible
+  const container =
+    document.getElementById(
+      "afaHistoryTrack"
+    );
+
+  if (container) {
+    container.style.display = "flex";
+  }
 
 
   return newRegistration;
 
 }
 
-document.addEventListener("DOMContentLoaded", ()=> {
-  renderAfaHistory();
-  startAfaPolling();
-})
+
+// ==========================================
+// INITIALIZE AFA HISTORY
+// ==========================================
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    // Render saved registrations
+    renderAfaHistory();
+
+    // Start status checking
+    startAfaPolling();
+
+  }
+);
 
 
 // ==========================================
@@ -1228,78 +1298,106 @@ function formatAfaStatus(
 }
 
 
+
 // ==========================================
-// AFA HISTORY TABLE
+// RENDER AFA HISTORY ROW
 // ==========================================
 
-function renderAfaHistory() {
+function renderAfaHistoryRow(registration) {
 
-  const container = document.getElementById("afaHistoryTrack");
+  const tableBody =
+    document.getElementById("afaRowWrapper");
 
-
-  const afaRowWrapper =
-  document.getElementById(
-    "afaRowWrapper"
-  );
-
-const afaEmptyBody =
-  document.getElementById(
-    "afaEmpty-body"
-  );
+  if (!tableBody) return;
 
 
-  if (!container || !afaEmptyBody || !afaRowWrapper) return;
+  // Remove empty placeholder
+  const empty =
+    document.getElementById("afaEmpty-body");
 
-
-  afaRowWrapper.innerHTML = "";
-
-
-  if (
-    !afaRegistrations ||
-    afaRegistrations.length === 0
-  ) {
-      afaEmptyBody.hidden =
-        false;
-      container.style.display = "flex";
-    return;
+  if (empty) {
+    empty.hidden = true;
   }
 
 
-  // Registration exist
-    afaEmptyBody.hidden =
-      true;
+  // ==========================================
+  // FIND EXISTING ROW
+  // ==========================================
 
-
-  afaRegistrations.forEach(
-    registration => {
-
-      const row = createAfaTableRow(registration);
-
-      afaRowWrapper.appendChild(row);
-
-    });
-  container.style.display = 'flex';
-}
-
-
-function createAfaTableRow(
-  registration
-) {
-
-  const row =
-    document.createElement(
-      "div"
+  let row =
+    tableBody.querySelector(
+      `[data-id="${registration.registrationId}"]`
     );
 
 
-  row.className =
-    "afa-history-row";
+  // ==========================================
+  // CREATE ROW IF IT DOESN'T EXIST
+  // ==========================================
+
+  if (!row) {
+
+    row = document.createElement("div");
+
+    row.className =
+      "afa-history-row";
+
+    row.dataset.id =
+      registration.registrationId || "";
+
+    tableBody.appendChild(row);
+  }
 
 
-  row.dataset.registrationId =
-    registration.registrationId ||
-    "";
+  // ==========================================
+  // STATUS
+  // ==========================================
 
+  const status =
+    registration.status || "pending";
+
+
+  // ==========================================
+  // DATE
+  // ==========================================
+
+  const date =
+    registration.submittedAt
+      ? (() => {
+
+          const d =
+            new Date(
+              registration.submittedAt
+            );
+
+          const datePart =
+            d.toLocaleDateString(
+              "en-US",
+              {
+                month: "short",
+                day: "2-digit",
+                year: "numeric"
+              }
+            );
+
+          const timePart =
+            d.toLocaleTimeString(
+              "en-US",
+              {
+                hour: "numeric",
+                minute: "2-digit",
+                hour12: true
+              }
+            ).toUpperCase();
+
+          return `${datePart} ${timePart}`;
+
+        })()
+      : "N/A";
+
+
+  // ==========================================
+  // UPDATE ROW
+  // ==========================================
 
   row.innerHTML = `
 
@@ -1309,11 +1407,13 @@ function createAfaTableRow(
       )}
     </span>
 
+
     <span class="afa-history-cell afa-phone-cell">
       ${escapeAfaHTML(
         registration.phoneNumber || "—"
       )}
     </span>
+
 
     <span class="afa-history-cell afa-card-cell">
       ${escapeAfaHTML(
@@ -1321,17 +1421,24 @@ function createAfaTableRow(
       )}
     </span>
 
-      <span class="afa-history-cell afa-status-cell">
-      ${createAfaStatusPill(
-        registration.status
-      )}
+
+    <span class="afa-history-cell afa-status-cell">
+
+      <span class="afa-status-badge ${getAfaStatusClass(status)}">
+
+        ${createAfaStatusPill(status)}
+
+      </span>
+
     </span>
+
 
     <span class="afa-history-cell afa-region-cell">
       ${escapeAfaHTML(
         registration.region || "—"
       )}
     </span>
+
 
     <span class="afa-history-cell afa-amount-cell">
       GHS ${Number(
@@ -1340,6 +1447,7 @@ function createAfaTableRow(
       ).toFixed(2)}
     </span>
 
+
     <span class="afa-history-cell afa-payment-cell">
       ${escapeAfaHTML(
         registration.paymentReference ||
@@ -1347,20 +1455,71 @@ function createAfaTableRow(
       )}
     </span>
 
+
     <span class="afa-history-cell afa-date-cell">
-      ${formatAfaDate(
-        registration.submittedAt
-      )}
+      ${date}
     </span>
 
- 
-
   `;
-
-
-  return row;
-
 }
+
+
+function renderAfaHistory() {
+
+  const container =
+    document.getElementById("afaHistoryTrack");
+
+  const tableBody =
+    document.getElementById("afaRowWrapper");
+
+  const empty =
+    document.getElementById("afaEmpty-body");
+
+  if (
+    !container ||
+    !tableBody ||
+    !empty
+  ) return;
+
+
+  // ==========================================
+  // NO REGISTRATIONS
+  // ==========================================
+
+  if (
+    !afaRegistrations ||
+    afaRegistrations.length === 0
+  ) {
+
+    empty.hidden = false;
+
+    container.style.display = "flex";
+
+    return;
+  }
+
+
+  // ==========================================
+  // REGISTRATIONS EXIST
+  // ==========================================
+
+  empty.hidden = true;
+
+
+  afaRegistrations.forEach(
+    registration => {
+
+      renderAfaHistoryRow(
+        registration
+      );
+
+    }
+  );
+
+
+  container.style.display = "flex";
+}
+
 
 
 // ==========================================
