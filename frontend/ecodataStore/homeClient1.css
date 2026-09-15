@@ -522,6 +522,7 @@ ul {
   background: var(--border-light);
   color: var(--primary);
   transform: translateX(2px);
+  cursor: pointer;
 }
 
 .active-aside a {
@@ -821,6 +822,12 @@ ul {
   -webkit-backdrop-filter: blur(18px);
   backdrop-filter: blur(18px);
 
+}
+
+@media screen and (max-width: 600px) {
+  .navbar{
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08) !important;
+  }
 }
 
 /* when scrolling set navbar background */
@@ -2559,7 +2566,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
     }
     .bottom-navbar{
       width: 100%;
-      height: 5rem;
+      height: 4.5rem;
       justify-self: center;
       position: fixed;
       bottom: 0;
@@ -2772,7 +2779,6 @@ BOTTOM NAVIGATION BAR STYLE CSS
     
 
         .addBar{
-          margin-bottom: 1rem !important;
           line-height: .9;
           padding-bottom: .3rem;
         }
@@ -2782,7 +2788,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
         }
 
         .addBtn{
-          margin-bottom: .5rem !important;
+          margin-bottom: .1rem !important;
           border: 2px solid rgb(209, 208, 208);
           border-radius: .4rem;
           padding: 1rem;
