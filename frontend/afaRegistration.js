@@ -876,6 +876,7 @@ async function registerAfaCustomer(
     result =
       await response.json();
 
+
   } catch {
 
     throw new Error(
@@ -945,12 +946,17 @@ function loadAfaRegistrations() {
 
 function saveAfaRegistrations() {
 
-  localStorage.setItem(
+  try {
+     localStorage.setItem(
     AFA_STORAGE_KEY,
     JSON.stringify(
       afaRegistrations
     )
   );
+
+  } catch(error){
+    console.error("Failed to save AFA registration:", error);
+  }
 
 }
 
@@ -1026,6 +1032,11 @@ function saveNewAfaRegistration(
   return newRegistration;
 
 }
+
+document.addEventListener("DOMContentLoaded", ()=> {
+  renderAfaHistory();
+  startAfaPolling();
+})
 
 
 // ==========================================
@@ -1221,7 +1232,12 @@ function formatAfaStatus(
 // AFA HISTORY TABLE
 // ==========================================
 
-const afaRowWrapper =
+function renderAfaHistory() {
+
+  const container = document.getElementById("afaHistoryTrack");
+
+
+  const afaRowWrapper =
   document.getElementById(
     "afaRowWrapper"
   );
@@ -1232,50 +1248,37 @@ const afaEmptyBody =
   );
 
 
-function renderAfaHistory() {
-
-  if (!afaRowWrapper) return;
+  if (!container || !afaEmptyBody || afaRowWrapper) return;
 
 
   afaRowWrapper.innerHTML = "";
 
 
   if (
-    !afaRegistrations.length
+    !afaRegistrations ||
+    afaRegistrations.length === 0
   ) {
-
-    if (afaEmptyBody) {
-
       afaEmptyBody.hidden =
         false;
-
-    }
-
+      container.style.display = "none";
     return;
-
   }
 
 
-  if (afaEmptyBody) {
-
+  // Registration exist
     afaEmptyBody.hidden =
       true;
-
-  }
 
 
   afaRegistrations.forEach(
     registration => {
 
-      afaRowWrapper.appendChild(
-        createAfaTableRow(
-          registration
-        )
-      );
+      const row = createAfaTableRow(registration);
 
-    }
-  );
+      afaRowWrapper.appendChild(row);
 
+    });
+  container.style.display = 'flex';
 }
 
 
@@ -1318,7 +1321,7 @@ function createAfaTableRow(
       )}
     </span>
 
-       <span class="afa-history-cell afa-status-cell">
+      <span class="afa-history-cell afa-status-cell">
       ${createAfaStatusPill(
         registration.status
       )}
