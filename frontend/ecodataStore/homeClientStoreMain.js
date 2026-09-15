@@ -55,20 +55,6 @@ searchIcon.addEventListener("click", function(e) {
 
 });
 
-//============================
-// Add box-shadow on navbar
-// when scrolling downward
-//============================
-
-function setNavigationBarShadow(){
-  pageNavigationBar.style.boxShadow = "0 2px 6px rgba(0,0,0,0.09)";
-}
-
-function unSetNavigationBarShadow(){
-  pageNavigationBar.style.boxShadow = "none";
-}
-
-unSetNavigationBarShadow();
 
 //=====================================
 // Hide bottom NavigationBar on scroll
@@ -89,11 +75,6 @@ function handleBottomNavScroll(){
     return;
   }
 
-  if(currentScrollY >= 10 ){
-    setNavigationBarShadow();
-  } else{
-    unSetNavigationBarShadow();
-  }
 
 
 
