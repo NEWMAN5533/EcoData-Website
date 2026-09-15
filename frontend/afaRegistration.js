@@ -947,7 +947,7 @@ function loadAfaRegistrations() {
 function saveAfaRegistrations() {
 
   try {
-     localStorage.setItem(
+    localStorage.setItem(
     AFA_STORAGE_KEY,
     JSON.stringify(
       afaRegistrations
@@ -1248,7 +1248,7 @@ const afaEmptyBody =
   );
 
 
-  if (!container || !afaEmptyBody || afaRowWrapper) return;
+  if (!container || !afaEmptyBody || !afaRowWrapper) return;
 
 
   afaRowWrapper.innerHTML = "";
@@ -1260,7 +1260,7 @@ const afaEmptyBody =
   ) {
       afaEmptyBody.hidden =
         false;
-      container.style.display = "none";
+      container.style.display = "flex";
     return;
   }
 
