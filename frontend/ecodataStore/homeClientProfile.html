@@ -234,6 +234,17 @@ themeButton.addEventListener("click", ()=> {
           </a>
         </div>
 
+         <span class="aside-section-label ">
+         Account Security 
+        </span>
+
+        <div class="aside-nav ">
+        <a onclick="window.location.href='./homeClientSecurity.html'">
+          <i class="ri-shield-keyhole-line"></i>
+          <span>Authentication</span>
+        </a>
+       </div>
+
       </div>
 
     </div>
@@ -426,6 +437,17 @@ themeButton.addEventListener("click", ()=> {
           </a>
         </div>
 
+         <span class="aside-section-label ">
+         Account Security 
+        </span>
+
+        <div class="aside-nav ">
+        <a onclick="window.location.href='./homeClientSecurity.html'">
+          <i class="ri-shield-keyhole-line"></i>
+          <span>Authentication</span>
+        </a>
+       </div>
+
       </div>
 
     </div>
@@ -594,9 +616,554 @@ themeButton.addEventListener("click", ()=> {
 
 
     <!---============================
-     SETTINGS SECTION
+     PROFILE SECTION
      =============================-->
 
+  <main class="account-container">
+
+    <!-- PAGE HEADER -->
+    <div class="account-page-header">
+
+      <div class="account-page-badge">
+        <i class="ri-user-line"></i>
+        Account
+      </div>
+
+      <h1>My Profile</h1>
+
+      <p>
+        Manage your personal information and account details.
+      </p>
+
+    </div>
+
+
+
+    <!-- =========================
+         ACCOUNT LAYOUT
+    ========================== -->
+    <div class="account-layout">
+
+
+      <!-- =====================
+           SIDEBAR
+      ====================== -->
+      <aside class="account-sidebar">
+
+        <div class="account-user-mini">
+
+          <div class="account-mini-avatar" id="sidebarAvatar">
+            <i class="ri-user-line"></i>
+          </div>
+
+          <div class="account-mini-info">
+
+            <strong id="sidebarName">
+              Ilyas Ahmed
+            </strong>
+
+            <span id="sidebarEmail">
+              user@example.com
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <nav class="account-nav">
+
+          <a href="profile.html" class="active">
+            <i class="ri-user-line"></i>
+            <span>Profile</span>
+          </a>
+
+          <a href="downloads.html">
+            <i class="ri-download-2-line"></i>
+            <span>Downloads</span>
+          </a>
+
+          <a href="wishlist.html">
+            <i class="ri-heart-3-line"></i>
+            <span>Wishlist</span>
+          </a>
+
+          <a href="orders.html">
+            <i class="ri-shopping-bag-3-line"></i>
+            <span>My Orders</span>
+          </a>
+
+          <a href="notifications.html">
+            <i class="ri-notification-3-line"></i>
+            <span>Notifications</span>
+          </a>
+
+          <a href="settings.html">
+            <i class="ri-settings-3-line"></i>
+            <span>Settings</span>
+          </a>
+
+          <a href="security.html">
+            <i class="ri-shield-check-line"></i>
+            <span>Security</span>
+          </a>
+
+          <button type="button" id="signOutBtn">
+            <i class="ri-logout-box-r-line"></i>
+            <span>Sign Out</span>
+          </button>
+
+        </nav>
+
+      </aside>
+
+
+
+      <!-- =====================
+           CONTENT
+      ====================== -->
+      <section class="account-content">
+
+
+        <!-- =====================
+             PROFILE HERO
+        ====================== -->
+        <div class="account-card profile-hero">
+
+          <div class="profile-avatar-wrapper">
+
+            <div class="profile-avatar" id="profileAvatar">
+
+              <img
+                id="profileAvatarImage"
+                src=""
+                alt="Profile photo"
+              >
+
+              <i
+                class="ri-user-line"
+                id="profileAvatarIcon"
+              ></i>
+
+            </div>
+
+
+            <label
+              for="avatarInput"
+              class="avatar-edit-btn"
+              title="Change profile photo"
+            >
+              <i class="ri-camera-line"></i>
+            </label>
+
+            <input
+              type="file"
+              id="avatarInput"
+              accept="image/*"
+              hidden
+            >
+
+          </div>
+
+
+          <div class="profile-hero-info">
+
+            <div class="profile-name-row">
+
+              <h2 id="profileName">
+                Ilyas Ahmed
+              </h2>
+
+              <span class="profile-status">
+                <i class="ri-checkbox-circle-fill"></i>
+                Active
+              </span>
+
+            </div>
+
+            <p id="profileEmail">
+              user@example.com
+            </p>
+
+            <span class="profile-member">
+              <i class="ri-calendar-line"></i>
+              Member since 2026
+            </span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =====================
+             ACCOUNT STATS
+        ====================== -->
+        <div class="account-stats">
+
+          <div class="account-stat">
+
+            <div class="account-stat-icon">
+              <i class="ri-shopping-bag-3-line"></i>
+            </div>
+
+            <div>
+              <strong>24</strong>
+              <span>Orders</span>
+            </div>
+
+          </div>
+
+
+          <div class="account-stat">
+
+            <div class="account-stat-icon">
+              <i class="ri-download-2-line"></i>
+            </div>
+
+            <div>
+              <strong>12</strong>
+              <span>Downloads</span>
+            </div>
+
+          </div>
+
+
+          <div class="account-stat">
+
+            <div class="account-stat-icon">
+              <i class="ri-heart-3-line"></i>
+            </div>
+
+            <div>
+              <strong>8</strong>
+              <span>Wishlist</span>
+            </div>
+
+          </div>
+
+
+          <div class="account-stat">
+
+            <div class="account-stat-icon">
+              <i class="ri-calendar-line"></i>
+            </div>
+
+            <div>
+              <strong>2026</strong>
+              <span>Member Since</span>
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =====================
+             PERSONAL INFORMATION
+        ====================== -->
+        <div class="account-card">
+
+          <div class="account-card-header">
+
+            <div>
+
+              <h2 class="account-card-title">
+                Personal Information
+              </h2>
+
+              <p>
+                Update the information associated with your account.
+              </p>
+
+            </div>
+
+            <i class="ri-user-settings-line"></i>
+
+          </div>
+
+
+
+          <form id="profileForm">
+
+            <div class="profile-form-grid">
+
+
+              <!-- FULL NAME -->
+              <div class="profile-field">
+
+                <label for="fullName">
+                  Full Name
+                </label>
+
+                <div class="profile-input">
+
+                  <i class="ri-user-line"></i>
+
+                  <input
+                    type="text"
+                    id="fullName"
+                    value="Ilyas Ahmed"
+                    autocomplete="name"
+                  >
+
+                </div>
+
+              </div>
+
+
+
+              <!-- EMAIL -->
+              <div class="profile-field">
+
+                <label for="email">
+                  Email Address
+                </label>
+
+                <div class="profile-input">
+
+                  <i class="ri-mail-line"></i>
+
+                  <input
+                    type="email"
+                    id="email"
+                    value="user@example.com"
+                    autocomplete="email"
+                  >
+
+                </div>
+
+              </div>
+
+
+
+              <!-- PHONE -->
+              <div class="profile-field">
+
+                <label for="phone">
+                  Phone Number
+                </label>
+
+                <div class="profile-input">
+
+                  <i class="ri-phone-line"></i>
+
+                  <input
+                    type="tel"
+                    id="phone"
+                    placeholder="+233 XX XXX XXXX"
+                  >
+
+                </div>
+
+              </div>
+
+
+
+              <!-- COUNTRY -->
+              <div class="profile-field">
+
+                <label for="country">
+                  Country
+                </label>
+
+                <div class="profile-input">
+
+                  <i class="ri-global-line"></i>
+
+                  <select id="country">
+
+                    <option value="Ghana">
+                      Ghana
+                    </option>
+
+                    <option value="Nigeria">
+                      Nigeria
+                    </option>
+
+                    <option value="Kenya">
+                      Kenya
+                    </option>
+
+                    <option value="Other">
+                      Other
+                    </option>
+
+                  </select>
+
+                </div>
+
+              </div>
+
+
+            </div>
+
+
+
+            <!-- BIO -->
+            <div class="profile-field profile-bio-field">
+
+              <label for="bio">
+                Bio
+              </label>
+
+              <div class="profile-textarea">
+
+                <textarea
+                  id="bio"
+                  rows="4"
+                  maxlength="250"
+                  placeholder="Tell us a little about yourself..."
+                ></textarea>
+
+              </div>
+
+              <small>
+                <span id="bioCount">0</span>/250 characters
+              </small>
+
+            </div>
+
+
+
+            <!-- FORM ACTIONS -->
+            <div class="profile-form-actions">
+
+              <button
+                type="button"
+                class="account-btn secondary"
+                id="cancelProfileBtn"
+              >
+                Cancel
+              </button>
+
+              <button
+                type="submit"
+                class="account-btn primary"
+                id="saveProfileBtn"
+              >
+                <i class="ri-save-3-line"></i>
+                Save Changes
+              </button>
+
+            </div>
+
+          </form>
+
+        </div>
+
+
+
+        <!-- =====================
+             ACCOUNT INFORMATION
+        ====================== -->
+        <div class="account-card">
+
+          <div class="account-card-header">
+
+            <div>
+
+              <h2 class="account-card-title">
+                Account Information
+              </h2>
+
+              <p>
+                Basic information about your EcoData Store account.
+              </p>
+
+            </div>
+
+            <i class="ri-information-line"></i>
+
+          </div>
+
+
+
+          <div class="profile-info-list">
+
+
+            <div class="profile-info-row">
+
+              <div class="profile-info-label">
+
+                <i class="ri-fingerprint-line"></i>
+
+                <span>Account ID</span>
+
+              </div>
+
+              <strong>
+                ECO-USER-2026
+              </strong>
+
+            </div>
+
+
+            <div class="profile-info-row">
+
+              <div class="profile-info-label">
+
+                <i class="ri-shield-check-line"></i>
+
+                <span>Account Status</span>
+
+              </div>
+
+              <span class="profile-status">
+                <i class="ri-checkbox-circle-fill"></i>
+                Active
+              </span>
+
+            </div>
+
+
+            <div class="profile-info-row">
+
+              <div class="profile-info-label">
+
+                <i class="ri-calendar-line"></i>
+
+                <span>Member Since</span>
+
+              </div>
+
+              <strong>
+                September 2026
+              </strong>
+
+            </div>
+
+
+            <div class="profile-info-row">
+
+              <div class="profile-info-label">
+
+                <i class="ri-time-line"></i>
+
+                <span>Last Updated</span>
+
+              </div>
+
+              <strong id="lastUpdated">
+                Just now
+              </strong>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+      </section>
+
+    </div>
+
+  </main>
+
+
+ 
 
   
 
