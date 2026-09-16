@@ -135,7 +135,7 @@ checkMe();
     const totalCustomersOrders = document.getElementById("stat-num");
     if(totalCustomersOrders){
       totalCustomersOrders.textContent = 
-      "1.42K+";
+      "1.44K+";
     }
 
   //===================================
