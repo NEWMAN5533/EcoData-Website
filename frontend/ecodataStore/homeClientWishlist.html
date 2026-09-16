@@ -595,9 +595,304 @@ themeButton.addEventListener("click", ()=> {
 
 
     <!---============================
-     SETTINGS SECTION
+     WISHLIST SECTION
      =============================-->
 
+
+
+
+  <!-- ==============================
+       ACCOUNT CONTAINER
+  =============================== -->
+  <main class="account-container">
+
+    <!-- PAGE HEADER -->
+    <header class="account-page-header">
+
+      <div>
+        <span class="account-page-badge">
+          <i class="ri-heart-3-line"></i>
+          Saved Products
+        </span>
+
+        <h1>Wishlist</h1>
+
+        <p>
+          Keep products and services you may want to purchase later.
+        </p>
+      </div>
+
+    </header>
+
+
+
+    <!-- ==============================
+         ACCOUNT LAYOUT
+    =============================== -->
+    <div class="account-layout">
+
+
+      <!-- SIDEBAR -->
+      <aside class="account-sidebar">
+
+        <div class="account-user-mini">
+
+          <div class="account-user-avatar">
+            <i class="ri-user-3-line"></i>
+          </div>
+
+          <div>
+            <strong id="sidebarUserName">EcoData User</strong>
+            <span id="sidebarUserEmail">user@example.com</span>
+          </div>
+
+        </div>
+
+
+        <nav class="account-nav">
+
+          <a href="profile.html">
+            <i class="ri-user-line"></i>
+            <span>Profile</span>
+          </a>
+
+          <a href="downloads.html">
+            <i class="ri-download-2-line"></i>
+            <span>Downloads</span>
+          </a>
+
+          <a href="wishlist.html" class="active">
+            <i class="ri-heart-3-line"></i>
+            <span>Wishlist</span>
+          </a>
+
+          <a href="orders.html">
+            <i class="ri-shopping-bag-3-line"></i>
+            <span>My Orders</span>
+          </a>
+
+          <a href="notifications.html">
+            <i class="ri-notification-3-line"></i>
+            <span>Notifications</span>
+          </a>
+
+          <a href="settings.html">
+            <i class="ri-settings-3-line"></i>
+            <span>Settings</span>
+          </a>
+
+          <a href="security.html">
+            <i class="ri-shield-check-line"></i>
+            <span>Security</span>
+          </a>
+
+          <button type="button" id="signOutBtn">
+            <i class="ri-logout-box-r-line"></i>
+            <span>Sign Out</span>
+          </button>
+
+        </nav>
+
+      </aside>
+
+
+
+      <!-- ==============================
+           MAIN CONTENT
+      =============================== -->
+      <section class="account-content">
+
+
+        <!-- ==============================
+             WISHLIST SUMMARY
+        =============================== -->
+        <div class="wishlist-stats">
+
+
+          <div class="wishlist-stat-card">
+
+            <div class="wishlist-stat-icon">
+              <i class="ri-heart-3-line"></i>
+            </div>
+
+            <div>
+              <span>Saved Products</span>
+              <strong id="wishlistTotal">0</strong>
+            </div>
+
+          </div>
+
+
+          <div class="wishlist-stat-card">
+
+            <div class="wishlist-stat-icon">
+              <i class="ri-checkbox-circle-line"></i>
+            </div>
+
+            <div>
+              <span>Available</span>
+              <strong id="wishlistAvailable">0</strong>
+            </div>
+
+          </div>
+
+
+          <div class="wishlist-stat-card">
+
+            <div class="wishlist-stat-icon">
+              <i class="ri-price-tag-3-line"></i>
+            </div>
+
+            <div>
+              <span>Categories</span>
+              <strong id="wishlistCategories">0</strong>
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ==============================
+             WISHLIST CARD
+        =============================== -->
+        <div class="account-card wishlist-card">
+
+
+          <div class="account-card-header">
+
+            <div>
+              <h2 class="account-card-title">
+                Your Wishlist
+              </h2>
+
+              <p>
+                Products you've saved for later.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              class="account-btn account-btn-secondary"
+              id="clearWishlistBtn"
+            >
+              <i class="ri-delete-bin-6-line"></i>
+              Clear Wishlist
+            </button>
+
+          </div>
+
+
+
+          <!-- CONTROLS -->
+          <div class="wishlist-controls">
+
+            <div class="wishlist-search">
+
+              <i class="ri-search-line"></i>
+
+              <input
+                type="search"
+                id="wishlistInlineSearch"
+                placeholder="Search saved products..."
+              >
+
+            </div>
+
+
+            <select id="wishlistFilter">
+
+              <option value="all">
+                All Products
+              </option>
+
+              <option value="digital">
+                Digital
+              </option>
+
+              <option value="physical">
+                Physical
+              </option>
+
+              <option value="service">
+                Services
+              </option>
+
+            </select>
+
+
+            <select id="wishlistSort">
+
+              <option value="recent">
+                Recently Added
+              </option>
+
+              <option value="low">
+                Price: Low to High
+              </option>
+
+              <option value="high">
+                Price: High to Low
+              </option>
+
+              <option value="rating">
+                Highest Rated
+              </option>
+
+            </select>
+
+          </div>
+
+
+
+          <!-- PRODUCT GRID -->
+          <div
+            class="wishlist-grid"
+            id="wishlistGrid"
+          ></div>
+
+
+
+          <!-- EMPTY STATE -->
+          <div
+            class="wishlist-empty"
+            id="wishlistEmpty"
+            hidden
+          >
+
+            <div class="wishlist-empty-icon">
+              <i class="ri-heart-3-line"></i>
+            </div>
+
+            <h3>Your wishlist is empty</h3>
+
+            <p>
+              Save products you like and come back to them whenever you're ready.
+            </p>
+
+            <a
+              href="index.html"
+              class="account-btn account-btn-primary"
+            >
+              <i class="ri-store-2-line"></i>
+              Browse Store
+            </a>
+
+          </div>
+
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+
+
+ 
 
   
 

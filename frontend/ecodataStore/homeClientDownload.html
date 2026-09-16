@@ -595,8 +595,1167 @@ themeButton.addEventListener("click", ()=> {
 
 
     <!---============================
-     SETTINGS SECTION
+     DOWNLOAD SECTION
      =============================-->
+
+
+
+  <!-- ==========================================
+       MAIN
+  =========================================== -->
+
+  <main class="account-container">
+
+
+    <!-- PAGE HEADER -->
+
+    <header class="account-page-header">
+
+      <div class="account-header-badge">
+
+        <i class="ri-download-2-line"></i>
+
+        Digital Library
+
+      </div>
+
+
+      <h1>My Downloads</h1>
+
+
+      <p>
+        Access the digital products you've purchased
+        from EcoData Store anytime.
+      </p>
+
+    </header>
+
+
+
+    <div class="account-layout">
+
+
+      <!-- ==========================================
+           SIDEBAR
+      =========================================== -->
+
+      <aside class="account-sidebar">
+
+
+        <div class="account-user-mini">
+
+          <div class="account-user-avatar">
+            IA
+          </div>
+
+
+          <div>
+
+            <strong>Ilyas Ahmed</strong>
+
+            <span>
+              ilyas@example.com
+            </span>
+
+          </div>
+
+        </div>
+
+
+
+        <nav class="account-nav">
+
+          <a href="profile.html">
+
+            <i class="ri-user-line"></i>
+
+            <span>Profile</span>
+
+          </a>
+
+
+          <a
+            href="downloads.html"
+            class="active"
+          >
+
+            <i class="ri-download-2-line"></i>
+
+            <span>Downloads</span>
+
+          </a>
+
+
+          <a href="wishlist.html">
+
+            <i class="ri-heart-3-line"></i>
+
+            <span>Wishlist</span>
+
+          </a>
+
+
+          <a href="orders.html">
+
+            <i class="ri-shopping-bag-3-line"></i>
+
+            <span>My Orders</span>
+
+          </a>
+
+
+          <a href="notifications.html">
+
+            <i class="ri-notification-3-line"></i>
+
+            <span>Notifications</span>
+
+          </a>
+
+
+          <a href="settings.html">
+
+            <i class="ri-settings-3-line"></i>
+
+            <span>Settings</span>
+
+          </a>
+
+
+          <a href="security.html">
+
+            <i class="ri-shield-check-line"></i>
+
+            <span>Security</span>
+
+          </a>
+
+
+          <button
+            class="account-signout"
+            id="signOutBtn"
+          >
+
+            <i class="ri-logout-box-r-line"></i>
+
+            <span>Sign Out</span>
+
+          </button>
+
+        </nav>
+
+      </aside>
+
+
+
+      <!-- ==========================================
+           CONTENT
+      =========================================== -->
+
+      <section class="downloads-content">
+
+
+        <!-- ======================================
+             SUMMARY
+        ======================================= -->
+
+        <div class="downloads-summary">
+
+
+          <div class="downloads-stat">
+
+            <div class="downloads-stat-icon">
+              <i class="ri-download-2-line"></i>
+            </div>
+
+            <div>
+
+              <span>Total Downloads</span>
+
+              <strong id="totalDownloads">
+                12
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <div class="downloads-stat">
+
+            <div class="downloads-stat-icon">
+              <i class="ri-file-list-3-line"></i>
+            </div>
+
+            <div>
+
+              <span>Digital Products</span>
+
+              <strong id="digitalProducts">
+                8
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <div class="downloads-stat">
+
+            <div class="downloads-stat-icon">
+              <i class="ri-hard-drive-2-line"></i>
+            </div>
+
+            <div>
+
+              <span>Library Size</span>
+
+              <strong id="librarySize">
+                48 MB
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <div class="downloads-stat">
+
+            <div class="downloads-stat-icon">
+              <i class="ri-time-line"></i>
+            </div>
+
+            <div>
+
+              <span>Recent Downloads</span>
+
+              <strong id="recentDownloads">
+                3
+              </strong>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ======================================
+             LIBRARY CARD
+        ======================================= -->
+
+        <section class="downloads-card">
+
+
+          <!-- CARD HEADER -->
+
+          <div class="downloads-card-header">
+
+            <div>
+
+              <h2>
+                Your Library
+              </h2>
+
+              <p>
+                Products available for download
+              </p>
+
+            </div>
+
+
+            <button
+              class="downloads-refresh"
+              id="refreshDownloads"
+            >
+
+              <i class="ri-refresh-line"></i>
+
+              Refresh
+
+            </button>
+
+          </div>
+
+
+
+          <!-- ====================================
+               SEARCH + SORT
+          ===================================== -->
+
+          <div class="downloads-toolbar">
+
+
+            <div class="downloads-library-search">
+
+              <i class="ri-search-line"></i>
+
+              <input
+                type="search"
+                id="librarySearch"
+                placeholder="Search your downloads..."
+              >
+
+            </div>
+
+
+            <div class="downloads-sort">
+
+              <label for="downloadSort">
+                Sort
+              </label>
+
+              <select id="downloadSort">
+
+                <option value="recent">
+                  Recently Downloaded
+                </option>
+
+                <option value="oldest">
+                  Oldest
+                </option>
+
+                <option value="name">
+                  Name
+                </option>
+
+                <option value="size">
+                  File Size
+                </option>
+
+              </select>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- ====================================
+               FILTERS
+          ===================================== -->
+
+          <div class="downloads-filters">
+
+            <button
+              class="download-filter active"
+              data-filter="all"
+            >
+              All
+              <span>8</span>
+            </button>
+
+
+            <button
+              class="download-filter"
+              data-filter="pdf"
+            >
+              PDF
+              <span>3</span>
+            </button>
+
+
+            <button
+              class="download-filter"
+              data-filter="template"
+            >
+              Templates
+              <span>3</span>
+            </button>
+
+
+            <button
+              class="download-filter"
+              data-filter="ebook"
+            >
+              Ebooks
+              <span>1</span>
+            </button>
+
+
+            <button
+              class="download-filter"
+              data-filter="other"
+            >
+              Other
+              <span>1</span>
+            </button>
+
+          </div>
+
+
+
+          <!-- ====================================
+               DOWNLOAD LIST
+          ===================================== -->
+
+          <div
+            class="download-list"
+            id="downloadList"
+          >
+
+
+            <!-- PRODUCT 1 -->
+
+            <article
+              class="download-item"
+              data-type="template"
+              data-name="Modern Professional CV Template"
+              data-size="4.2"
+              data-date="2026-09-08"
+            >
+
+              <div class="download-thumbnail">
+
+                <div class="download-file-icon docx">
+                  <i class="ri-file-word-2-line"></i>
+                </div>
+
+              </div>
+
+
+              <div class="download-info">
+
+                <div class="download-title-row">
+
+                  <h3>
+                    Modern Professional CV Template
+                  </h3>
+
+                  <span class="download-new">
+                    New
+                  </span>
+
+                </div>
+
+
+                <p>
+                  Professional CV template for job
+                  applications and career profiles.
+                </p>
+
+
+                <div class="download-meta">
+
+                  <span>
+                    <i class="ri-file-text-line"></i>
+                    DOCX
+                  </span>
+
+                  <span>
+                    <i class="ri-hard-drive-line"></i>
+                    4.2 MB
+                  </span>
+
+                  <span>
+                    <i class="ri-calendar-line"></i>
+                    Sep 08, 2026
+                  </span>
+
+                  <span>
+                    <i class="ri-download-2-line"></i>
+                    2 downloads
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <div class="download-actions">
+
+                <button
+                  class="download-view-btn"
+                  data-product="Modern Professional CV Template"
+                >
+                  <i class="ri-eye-line"></i>
+                  View
+                </button>
+
+
+                <button
+                  class="download-btn"
+                  data-product="Modern Professional CV Template"
+                >
+                  <i class="ri-download-2-line"></i>
+                  Download
+                </button>
+
+              </div>
+
+            </article>
+
+
+
+            <!-- PRODUCT 2 -->
+
+            <article
+              class="download-item"
+              data-type="ebook"
+              data-name="Small Business Starter Guide"
+              data-size="8.7"
+              data-date="2026-09-05"
+            >
+
+              <div class="download-thumbnail">
+
+                <div class="download-file-icon pdf">
+                  <i class="ri-file-pdf-2-line"></i>
+                </div>
+
+              </div>
+
+
+              <div class="download-info">
+
+                <div class="download-title-row">
+
+                  <h3>
+                    Small Business Starter Guide
+                  </h3>
+
+                </div>
+
+
+                <p>
+                  A practical guide for starting and
+                  managing a small business.
+                </p>
+
+
+                <div class="download-meta">
+
+                  <span>
+                    <i class="ri-file-pdf-line"></i>
+                    PDF
+                  </span>
+
+                  <span>
+                    <i class="ri-hard-drive-line"></i>
+                    8.7 MB
+                  </span>
+
+                  <span>
+                    <i class="ri-calendar-line"></i>
+                    Sep 05, 2026
+                  </span>
+
+                  <span>
+                    <i class="ri-download-2-line"></i>
+                    1 download
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <div class="download-actions">
+
+                <button
+                  class="download-view-btn"
+                  data-product="Small Business Starter Guide"
+                >
+                  <i class="ri-eye-line"></i>
+                  View
+                </button>
+
+
+                <button
+                  class="download-btn"
+                  data-product="Small Business Starter Guide"
+                >
+                  <i class="ri-download-2-line"></i>
+                  Download
+                </button>
+
+              </div>
+
+            </article>
+
+
+
+            <!-- PRODUCT 3 -->
+
+            <article
+              class="download-item"
+              data-type="pdf"
+              data-name="Social Media Content Planner"
+              data-size="2.1"
+              data-date="2026-08-29"
+            >
+
+              <div class="download-thumbnail">
+
+                <div class="download-file-icon pdf">
+                  <i class="ri-file-pdf-2-line"></i>
+                </div>
+
+              </div>
+
+
+              <div class="download-info">
+
+                <div class="download-title-row">
+
+                  <h3>
+                    Social Media Content Planner
+                  </h3>
+
+                </div>
+
+
+                <p>
+                  Plan and organize your social media
+                  content throughout the month.
+                </p>
+
+
+                <div class="download-meta">
+
+                  <span>
+                    <i class="ri-file-pdf-line"></i>
+                    PDF
+                  </span>
+
+                  <span>
+                    <i class="ri-hard-drive-line"></i>
+                    2.1 MB
+                  </span>
+
+                  <span>
+                    <i class="ri-calendar-line"></i>
+                    Aug 29, 2026
+                  </span>
+
+                  <span>
+                    <i class="ri-download-2-line"></i>
+                    5 downloads
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <div class="download-actions">
+
+                <button
+                  class="download-view-btn"
+                  data-product="Social Media Content Planner"
+                >
+                  <i class="ri-eye-line"></i>
+                  View
+                </button>
+
+
+                <button
+                  class="download-btn"
+                  data-product="Social Media Content Planner"
+                >
+                  <i class="ri-download-2-line"></i>
+                  Download
+                </button>
+
+              </div>
+
+            </article>
+
+
+
+            <!-- PRODUCT 4 -->
+
+            <article
+              class="download-item"
+              data-type="template"
+              data-name="Professional Invoice Template"
+              data-size="1.6"
+              data-date="2026-08-21"
+            >
+
+              <div class="download-thumbnail">
+
+                <div class="download-file-icon xlsx">
+                  <i class="ri-file-excel-2-line"></i>
+                </div>
+
+              </div>
+
+
+              <div class="download-info">
+
+                <div class="download-title-row">
+
+                  <h3>
+                    Professional Invoice Template
+                  </h3>
+
+                </div>
+
+
+                <p>
+                  Clean invoice template for freelancers
+                  and small businesses.
+                </p>
+
+
+                <div class="download-meta">
+
+                  <span>
+                    <i class="ri-file-excel-line"></i>
+                    XLSX
+                  </span>
+
+                  <span>
+                    <i class="ri-hard-drive-line"></i>
+                    1.6 MB
+                  </span>
+
+                  <span>
+                    <i class="ri-calendar-line"></i>
+                    Aug 21, 2026
+                  </span>
+
+                  <span>
+                    <i class="ri-download-2-line"></i>
+                    4 downloads
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <div class="download-actions">
+
+                <button
+                  class="download-view-btn"
+                  data-product="Professional Invoice Template"
+                >
+                  <i class="ri-eye-line"></i>
+                  View
+                </button>
+
+
+                <button
+                  class="download-btn"
+                  data-product="Professional Invoice Template"
+                >
+                  <i class="ri-download-2-line"></i>
+                  Download
+                </button>
+
+              </div>
+
+            </article>
+
+
+
+            <!-- PRODUCT 5 -->
+
+            <article
+              class="download-item"
+              data-type="pdf"
+              data-name="Freelancer Pricing Guide"
+              data-size="3.8"
+              data-date="2026-08-17"
+            >
+
+              <div class="download-thumbnail">
+
+                <div class="download-file-icon pdf">
+                  <i class="ri-file-pdf-2-line"></i>
+                </div>
+
+              </div>
+
+
+              <div class="download-info">
+
+                <div class="download-title-row">
+
+                  <h3>
+                    Freelancer Pricing Guide
+                  </h3>
+
+                </div>
+
+
+                <p>
+                  Practical pricing strategies for
+                  freelance services.
+                </p>
+
+
+                <div class="download-meta">
+
+                  <span>
+                    <i class="ri-file-pdf-line"></i>
+                    PDF
+                  </span>
+
+                  <span>
+                    <i class="ri-hard-drive-line"></i>
+                    3.8 MB
+                  </span>
+
+                  <span>
+                    <i class="ri-calendar-line"></i>
+                    Aug 17, 2026
+                  </span>
+
+                  <span>
+                    <i class="ri-download-2-line"></i>
+                    1 download
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <div class="download-actions">
+
+                <button
+                  class="download-view-btn"
+                  data-product="Freelancer Pricing Guide"
+                >
+                  <i class="ri-eye-line"></i>
+                  View
+                </button>
+
+
+                <button
+                  class="download-btn"
+                  data-product="Freelancer Pricing Guide"
+                >
+                  <i class="ri-download-2-line"></i>
+                  Download
+                </button>
+
+              </div>
+
+            </article>
+
+
+
+            <!-- PRODUCT 6 -->
+
+            <article
+              class="download-item"
+              data-type="template"
+              data-name="Business Proposal Template"
+              data-size="2.9"
+              data-date="2026-08-12"
+            >
+
+              <div class="download-thumbnail">
+
+                <div class="download-file-icon docx">
+                  <i class="ri-file-word-2-line"></i>
+                </div>
+
+              </div>
+
+
+              <div class="download-info">
+
+                <div class="download-title-row">
+
+                  <h3>
+                    Business Proposal Template
+                  </h3>
+
+                </div>
+
+
+                <p>
+                  Professional proposal template for
+                  businesses and freelancers.
+                </p>
+
+
+                <div class="download-meta">
+
+                  <span>
+                    <i class="ri-file-word-line"></i>
+                    DOCX
+                  </span>
+
+                  <span>
+                    <i class="ri-hard-drive-line"></i>
+                    2.9 MB
+                  </span>
+
+                  <span>
+                    <i class="ri-calendar-line"></i>
+                    Aug 12, 2026
+                  </span>
+
+                  <span>
+                    <i class="ri-download-2-line"></i>
+                    2 downloads
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <div class="download-actions">
+
+                <button
+                  class="download-view-btn"
+                  data-product="Business Proposal Template"
+                >
+                  <i class="ri-eye-line"></i>
+                  View
+                </button>
+
+
+                <button
+                  class="download-btn"
+                  data-product="Business Proposal Template"
+                >
+                  <i class="ri-download-2-line"></i>
+                  Download
+                </button>
+
+              </div>
+
+            </article>
+
+
+
+            <!-- PRODUCT 7 -->
+
+            <article
+              class="download-item"
+              data-type="other"
+              data-name="Invoice Spreadsheet Pack"
+              data-size="5.4"
+              data-date="2026-08-07"
+            >
+
+              <div class="download-thumbnail">
+
+                <div class="download-file-icon zip">
+                  <i class="ri-file-zip-line"></i>
+                </div>
+
+              </div>
+
+
+              <div class="download-info">
+
+                <div class="download-title-row">
+
+                  <h3>
+                    Invoice Spreadsheet Pack
+                  </h3>
+
+                </div>
+
+
+                <p>
+                  A collection of spreadsheet tools for
+                  tracking business invoices.
+                </p>
+
+
+                <div class="download-meta">
+
+                  <span>
+                    <i class="ri-file-zip-line"></i>
+                    ZIP
+                  </span>
+
+                  <span>
+                    <i class="ri-hard-drive-line"></i>
+                    5.4 MB
+                  </span>
+
+                  <span>
+                    <i class="ri-calendar-line"></i>
+                    Aug 07, 2026
+                  </span>
+
+                  <span>
+                    <i class="ri-download-2-line"></i>
+                    2 downloads
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <div class="download-actions">
+
+                <button
+                  class="download-view-btn"
+                  data-product="Invoice Spreadsheet Pack"
+                >
+                  <i class="ri-eye-line"></i>
+                  View
+                </button>
+
+
+                <button
+                  class="download-btn"
+                  data-product="Invoice Spreadsheet Pack"
+                >
+                  <i class="ri-download-2-line"></i>
+                  Download
+                </button>
+
+              </div>
+
+            </article>
+
+
+
+            <!-- PRODUCT 8 -->
+
+            <article
+              class="download-item"
+              data-type="pdf"
+              data-name="Social Media Growth Checklist"
+              data-size="1.8"
+              data-date="2026-08-02"
+            >
+
+              <div class="download-thumbnail">
+
+                <div class="download-file-icon pdf">
+                  <i class="ri-file-pdf-2-line"></i>
+                </div>
+
+              </div>
+
+
+              <div class="download-info">
+
+                <div class="download-title-row">
+
+                  <h3>
+                    Social Media Growth Checklist
+                  </h3>
+
+                </div>
+
+
+                <p>
+                  A simple checklist for improving your
+                  social media presence.
+                </p>
+
+
+                <div class="download-meta">
+
+                  <span>
+                    <i class="ri-file-pdf-line"></i>
+                    PDF
+                  </span>
+
+                  <span>
+                    <i class="ri-hard-drive-line"></i>
+                    1.8 MB
+                  </span>
+
+                  <span>
+                    <i class="ri-calendar-line"></i>
+                    Aug 02, 2026
+                  </span>
+
+                  <span>
+                    <i class="ri-download-2-line"></i>
+                    3 downloads
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <div class="download-actions">
+
+                <button
+                  class="download-view-btn"
+                  data-product="Social Media Growth Checklist"
+                >
+                  <i class="ri-eye-line"></i>
+                  View
+                </button>
+
+
+                <button
+                  class="download-btn"
+                  data-product="Social Media Growth Checklist"
+                >
+                  <i class="ri-download-2-line"></i>
+                  Download
+                </button>
+
+              </div>
+
+            </article>
+
+
+          </div>
+
+
+
+          <!-- ====================================
+               EMPTY STATE
+          ===================================== -->
+
+          <div
+            class="downloads-empty"
+            id="downloadsEmpty"
+          >
+
+            <div class="downloads-empty-icon">
+
+              <i class="ri-download-cloud-2-line"></i>
+
+            </div>
+
+
+            <h3>
+              No downloads found
+            </h3>
+
+
+            <p>
+              Products you purchase will appear
+              in your digital library.
+            </p>
+
+
+            <a
+              href="index.html"
+              class="account-primary-btn"
+            >
+
+              <i class="ri-store-2-line"></i>
+
+              Browse Store
+
+            </a>
+
+          </div>
+
+
+        </section>
+
+      </section>
+
+    </div>
+
+  </main>
+
 
 
   

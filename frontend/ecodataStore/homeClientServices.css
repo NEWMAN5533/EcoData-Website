@@ -1,0 +1,832 @@
+/* ==========================================
+   SERVICES STATS
+========================================== */
+
+.services-stats {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 14px;
+
+  margin-bottom: 18px;
+}
+
+
+.services-stat-card {
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 16px;
+
+  border: 1px solid
+    rgba(128, 128, 128, .15);
+
+  border-radius: 14px;
+
+  background:
+    rgba(128, 128, 128, .025);
+}
+
+
+.services-stat-icon {
+
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background:
+    rgba(128, 128, 128, .08);
+
+  font-size: 19px;
+}
+
+
+.services-stat-card span {
+
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: #777;
+
+  font-size: 11px;
+}
+
+
+.services-stat-card strong {
+
+  display: block;
+
+  font-size: 19px;
+
+}
+
+
+
+/* ==========================================
+   TABS
+========================================== */
+
+.services-tabs {
+
+  display: flex;
+
+  gap: 6px;
+
+  margin-bottom: 14px;
+
+  padding: 4px;
+
+  width: fit-content;
+
+  border: 1px solid
+    rgba(128, 128, 128, .15);
+
+  border-radius: 10px;
+
+  background:
+    rgba(128, 128, 128, .035);
+}
+
+
+.services-tab {
+
+  min-height: 34px;
+
+  padding: 0 13px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  border: 0;
+
+  border-radius: 7px;
+
+  background: transparent;
+
+  color: #777;
+
+  cursor: pointer;
+
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+
+  transition: .2s ease;
+}
+
+
+.services-tab:hover {
+
+  color: #111;
+
+}
+
+
+.services-tab.active {
+
+  background: #111;
+
+  color: #fff;
+
+}
+
+
+
+/* ==========================================
+   CONTROLS
+========================================== */
+
+.services-controls {
+
+  display: grid;
+
+  grid-template-columns:
+    1fr 170px 170px;
+
+  gap: 10px;
+
+  margin-bottom: 16px;
+}
+
+
+.services-search {
+
+  position: relative;
+}
+
+
+.services-search i {
+
+  position: absolute;
+
+  left: 13px;
+  top: 50%;
+
+  transform:
+    translateY(-50%);
+
+  color: #888;
+
+  font-size: 16px;
+
+}
+
+
+.services-search input,
+.services-controls select {
+
+  width: 100%;
+  height: 40px;
+
+  border: 1px solid
+    rgba(128, 128, 128, .18);
+
+  border-radius: 9px;
+
+  background:
+    rgba(128, 128, 128, .035);
+
+  outline: none;
+
+  font: inherit;
+
+  font-size: 12px;
+
+  transition: .2s ease;
+
+}
+
+
+.services-search input {
+
+  padding:
+    0 12px 0 38px;
+
+}
+
+
+.services-controls select {
+
+  padding: 0 10px;
+
+}
+
+
+.services-search input:focus,
+.services-controls select:focus {
+
+  border-color:
+    rgba(128, 128, 128, .4);
+
+}
+
+
+
+/* ==========================================
+   SERVICE LIST
+========================================== */
+
+.services-list {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
+}
+
+
+
+/* ==========================================
+   SERVICE ITEM
+========================================== */
+
+.service-item {
+
+  display: grid;
+
+  grid-template-columns:
+    48px 1fr auto;
+
+  align-items: center;
+
+  gap: 13px;
+
+  padding: 14px;
+
+  border: 1px solid
+    rgba(128, 128, 128, .14);
+
+  border-radius: 13px;
+
+  background:
+    rgba(128, 128, 128, .02);
+
+  transition: .2s ease;
+
+}
+
+
+.service-item:hover {
+
+  border-color:
+    rgba(128, 128, 128, .28);
+
+  transform:
+    translateY(-1px);
+
+}
+
+
+
+/* ==========================================
+   ICON
+========================================== */
+
+.service-item-icon {
+
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 11px;
+
+  background:
+    rgba(128, 128, 128, .08);
+
+  font-size: 21px;
+
+  color: #666;
+
+}
+
+
+
+/* ==========================================
+   INFORMATION
+========================================== */
+
+.service-item-info {
+
+  min-width: 0;
+
+}
+
+
+.service-item-title {
+
+  margin: 0 0 4px;
+
+  font-size: 13px;
+
+  font-weight: 650;
+
+}
+
+
+.service-item-meta {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  color: #777;
+
+  font-size: 10px;
+
+}
+
+
+.service-item-meta span {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 3px;
+
+}
+
+
+
+/* ==========================================
+   STATUS
+========================================== */
+
+.service-status {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  width: fit-content;
+
+  padding: 4px 7px;
+
+  border-radius: 6px;
+
+  font-size: 9px;
+
+  font-weight: 650;
+
+}
+
+
+.service-status.pending {
+
+  background:
+    rgba(128, 128, 128, .1);
+
+  color: #666;
+
+}
+
+
+.service-status.progress {
+
+  background:
+    rgba(128, 128, 128, .13);
+
+  color: #444;
+
+}
+
+
+.service-status.completed {
+
+  background:
+    rgba(128, 128, 128, .08);
+
+  color: #555;
+
+}
+
+
+.service-status.cancelled {
+
+  background:
+    rgba(128, 128, 128, .06);
+
+  color: #888;
+
+}
+
+
+
+/* ==========================================
+   RIGHT SIDE
+========================================== */
+
+.service-item-right {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+}
+
+
+.service-item-price {
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+
+}
+
+
+.service-item-actions {
+
+  display: flex;
+
+  gap: 6px;
+
+}
+
+
+.service-action {
+
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid
+    rgba(128, 128, 128, .16);
+
+  border-radius: 8px;
+
+  background:
+    rgba(128, 128, 128, .035);
+
+  color: #555;
+
+  cursor: pointer;
+
+  transition: .2s ease;
+
+}
+
+
+.service-action:hover {
+
+  background: #111;
+
+  color: #fff;
+
+}
+
+
+
+/* ==========================================
+   REQUEST BADGE
+========================================== */
+
+.request-badge {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 4px;
+
+  padding: 3px 6px;
+
+  margin-right: 4px;
+
+  border-radius: 5px;
+
+  background:
+    rgba(128, 128, 128, .08);
+
+  font-size: 8px;
+
+  font-weight: 650;
+
+  text-transform: uppercase;
+
+}
+
+
+
+/* ==========================================
+   EMPTY
+========================================== */
+
+.services-empty {
+
+  padding: 60px 20px;
+
+  text-align: center;
+
+}
+
+
+.services-empty-icon {
+
+  width: 58px;
+  height: 58px;
+
+  margin:
+    0 auto 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    rgba(128, 128, 128, .08);
+
+  font-size: 25px;
+
+}
+
+
+.services-empty h3 {
+
+  margin: 0 0 7px;
+
+  font-size: 17px;
+
+}
+
+
+.services-empty p {
+
+  max-width: 400px;
+
+  margin:
+    0 auto 18px;
+
+  color: #777;
+
+  font-size: 12px;
+
+  line-height: 1.6;
+
+}
+
+
+
+/* ==========================================
+   DARK MODE
+========================================== */
+
+body.dark-mode
+.services-stat-card,
+body.dark-mode
+.service-item {
+
+  background: #171717;
+
+  border-color:
+    rgba(255, 255, 255, .09);
+
+}
+
+
+body.dark-mode
+.services-tabs {
+
+  background: #171717;
+
+  border-color:
+    rgba(255, 255, 255, .09);
+
+}
+
+
+body.dark-mode
+.services-tab {
+
+  color: #888;
+
+}
+
+
+body.dark-mode
+.services-tab:hover {
+
+  color: #eee;
+
+}
+
+
+body.dark-mode
+.services-tab.active {
+
+  background: #eee;
+
+  color: #111;
+
+}
+
+
+body.dark-mode
+.services-search input,
+body.dark-mode
+.services-controls select {
+
+  background: #1d1d1d;
+
+  border-color:
+    rgba(255, 255, 255, .1);
+
+  color: #ddd;
+
+}
+
+
+body.dark-mode
+.service-item-icon {
+
+  background:
+    rgba(255, 255, 255, .05);
+
+  color: #aaa;
+
+}
+
+
+body.dark-mode
+.service-action {
+
+  background:
+    rgba(255, 255, 255, .04);
+
+  border-color:
+    rgba(255, 255, 255, .1);
+
+  color: #aaa;
+
+}
+
+
+body.dark-mode
+.service-action:hover {
+
+  background: #eee;
+
+  color: #111;
+
+}
+
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 1000px) {
+
+  .services-stats {
+
+    grid-template-columns:
+      repeat(2, 1fr);
+
+  }
+
+}
+
+
+@media (max-width: 750px) {
+
+  .services-controls {
+
+    grid-template-columns:
+      1fr 1fr;
+
+  }
+
+  .services-search {
+
+    grid-column:
+      1 / -1;
+
+  }
+
+
+  .service-item {
+
+    grid-template-columns:
+      44px 1fr;
+
+  }
+
+
+  .service-item-right {
+
+    grid-column:
+      2;
+
+    justify-content:
+      space-between;
+
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .services-stats {
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+
+  .services-tabs {
+
+    width: 100%;
+
+  }
+
+
+  .services-tab {
+
+    flex: 1;
+
+    justify-content:
+      center;
+
+  }
+
+
+  .services-controls {
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+
+  .services-search {
+
+    grid-column:
+      auto;
+
+  }
+
+}
+
+
+@media (max-width: 430px) {
+
+  .service-item {
+
+    grid-template-columns:
+      42px 1fr;
+
+    gap: 10px;
+
+  }
+
+
+  .service-item-icon {
+
+    width: 42px;
+    height: 42px;
+
+  }
+
+
+  .service-item-right {
+
+    grid-column:
+      1 / -1;
+
+    padding-top: 4px;
+
+  }
+
+}

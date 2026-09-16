@@ -9,7 +9,7 @@
     content="EcoData Store — Discover digital products, physical goods and professional services from trusted sellers across Ghana."
   >
 
-  <title>EcoData Store | Services Request</title>
+  <title> EcoData Store | Settings </title>
 
    <!---=== css file ===-->
   <link rel="stylesheet" href="./swiper-bundle.min.css">
@@ -66,7 +66,7 @@ themeButton.addEventListener("click", ()=> {
   <link rel="stylesheet" href="homeClient1.css">
   <link rel="stylesheet" href="homeClient2.css">
   <!--Actual page-->
-  <link rel="stylesheet" href="homeClientServices.css">
+  <link rel="stylesheet" href="homeClientSecurity.css">
 
 
   <!-- Swiper -->
@@ -133,11 +133,9 @@ themeButton.addEventListener("click", ()=> {
 
 
     <!-- Sidebar Navigation -->
-    
     <div class="sidebar-middle">
 
       <div class="customer-content">
-
         <span class="aside-section-label creatorContentAuth">
           Creator Dashboard
         </span>
@@ -149,25 +147,26 @@ themeButton.addEventListener("click", ()=> {
         </a>
        </div>
 
+        <!-- SHOP -->
         <span class="aside-section-label">
           Shop
         </span>
 
-        <div class="aside-nav">
-          <a onclick="window.location.href='./homeClient.html'">
+        <div class="aside-nav ">
+          <a href="index.html">
             <i class="ri-home-5-line"></i>
-            Home
+            <span>Home</span>
           </a>
         </div>
 
         <div class="aside-nav ">
-          <a onclick="window.location.href='./homeClientProduct.html'">
+          <a href="products.html">
             <i class="ri-compass-3-line"></i>
             <span>Products</span>
           </a>
         </div>
 
-        <div class="aside-nav" style="display: none;">
+        <div class="aside-nav">
           <a href="categories.html">
             <i class="ri-layout-grid-line"></i>
             <span>Categories</span>
@@ -175,55 +174,58 @@ themeButton.addEventListener("click", ()=> {
         </div>
 
         <div class="aside-nav">
-          <a onclick="window.location.href='./homeClientWishlist.html'">
+          <a href="wishlist.html">
             <i class="ri-heart-line"></i>
             <span>Wishlist</span>
+            <span class="nav-count" id="wishlistCount">0</span>
           </a>
         </div>
 
 
+        <!-- ORDERS -->
         <span class="aside-section-label">
           Orders
         </span>
 
-        <div class="aside-nav ">
-          <a onclick="window.location.href='./homeClientOrders.html'">
+        <div class="aside-nav">
+          <a href="orders.html">
             <i class="ri-file-list-3-line"></i>
-            <span>  My Orders</span>
+            <span>My Orders</span>
           </a>
         </div>
 
         <div class="aside-nav">
-          <a onclick="window.location.href='./homeClientDownload.html'">
+          <a href="downloads.html">
             <i class="ri-download-cloud-line"></i>
             <span>My Downloads</span>
           </a>
         </div>
 
-        <div class="aside-nav active-aside">
-          <a onclick="window.location.href='./homeClientServices.html'">
+        <div class="aside-nav">
+          <a href="services.html">
             <i class="ri-mail-send-line"></i>
             <span>Service Requests</span>
           </a>
         </div>
 
         <div class="aside-nav">
-          <a onclick="window.location.href='./homeClientAddresses.html'">
+          <a href="addresses.html">
             <i class="ri-map-pin-2-line"></i>
             <span>My Addresses</span>
           </a>
         </div>
 
 
+        <!-- UPDATES -->
         <span class="aside-section-label">
-         <span> Updates</span>
+          Updates
         </span>
 
         <div class="aside-nav">
-          <a onclick="window.location.href='./homeClientMessages.html'">
+          <a href="messages.html">
             <i class="ri-message-3-line"></i>
             <span>Messages</span>
-            <span class="nav-count" id="messageCount2">0</span>
+            <span class="nav-count" id="messageCount1">0</span>
           </a>
         </div>
 
@@ -231,7 +233,7 @@ themeButton.addEventListener("click", ()=> {
           <a onclick="window.location.href='./homeClientNotification.html'">
             <i class="ri-notification-3-line"></i>
             <span>Notifications</span>
-            <span class="nav-count" id="notificationCount2">0</span>
+            <span class="nav-count" id="notificationCount1">0</span>
           </a>
         </div>
 
@@ -243,7 +245,7 @@ themeButton.addEventListener("click", ()=> {
     <!-- Sidebar Bottom -->
     <div class="left-sidebar-bottom">
 
-      <div class="aside-nav">
+      <div class="aside-nav active-aside">
         <a onclick="window.location.href='./homeClientSettings.html'">
           <i class="ri-settings-3-line"></i>
           <span>Settings</span>
@@ -325,12 +327,9 @@ themeButton.addEventListener("click", ()=> {
     </div>
 
 
-      <!-- Sidebar Navigation -->
-    
-    <div class="sidebar-middle">
+   <div class="sidebar-middle">
 
       <div class="customer-content">
-
         <span class="aside-section-label creatorContentAuth">
           Creator Dashboard
         </span>
@@ -379,7 +378,7 @@ themeButton.addEventListener("click", ()=> {
           Orders
         </span>
 
-        <div class="aside-nav ">
+        <div class="aside-nav">
           <a onclick="window.location.href='./homeClientOrders.html'">
             <i class="ri-file-list-3-line"></i>
             <span>  My Orders</span>
@@ -393,7 +392,7 @@ themeButton.addEventListener("click", ()=> {
           </a>
         </div>
 
-        <div class="aside-nav active-aside">
+        <div class="aside-nav">
           <a onclick="window.location.href='./homeClientServices.html'">
             <i class="ri-mail-send-line"></i>
             <span>Service Requests</span>
@@ -433,9 +432,10 @@ themeButton.addEventListener("click", ()=> {
     </div>
 
 
+
     <div class="sidebar-bottom">
 
-      <div class="aside-nav ">
+      <div class="aside-nav active-aside">
         <a onclick="window.location.href='./homeClientSettings.html'">
           <i class="ri-settings-3-line"></i>
           <span>Settings</span>
@@ -597,82 +597,55 @@ themeButton.addEventListener("click", ()=> {
 
 
     <!---============================
-     SERVICES & SECTION
+     SECURITY SECTION
      =============================-->
 
 
 
-
-  <!-- ==========================================
-       ACCOUNT
-  =========================================== -->
+  <!-- =========================
+       PAGE
+  ========================== -->
 
   <main class="account-container">
 
-
-    <!-- PAGE HEADER -->
-
     <header class="account-page-header">
 
-      <div>
-
-        <span class="account-page-badge">
-
-          <i class="ri-customer-service-2-line"></i>
-
-          Services
-
-        </span>
-
-
-        <h1>
-          Services & Requests
-        </h1>
-
-
-        <p>
-          Track services you've purchased and requests you've submitted.
-        </p>
-
+      <div class="account-header-badge">
+        <i class="ri-shield-check-line"></i>
+        Account Security
       </div>
 
-    </header>
+      <h1>Security</h1>
 
+      <p>
+        Protect your EcoData Store account and manage your
+        sign-in methods, devices and security settings.
+      </p>
+
+    </header>
 
 
     <div class="account-layout">
 
 
-      <!-- ======================================
+      <!-- =========================
            SIDEBAR
-      ======================================= -->
+      ========================== -->
 
       <aside class="account-sidebar">
-
 
         <div class="account-user-mini">
 
           <div class="account-user-avatar">
-
-            <i class="ri-user-3-line"></i>
-
+            E
           </div>
 
-
           <div>
-
-            <strong>
-              EcoData User
-            </strong>
-
-            <span>
-              user@example.com
-            </span>
-
+            <strong>EcoData User</strong>
+            <span>user@example.com</span>
           </div>
 
         </div>
-
 
 
         <nav class="account-nav">
@@ -682,83 +655,48 @@ themeButton.addEventListener("click", ()=> {
             <span>Profile</span>
           </a>
 
-
           <a href="downloads.html">
             <i class="ri-download-2-line"></i>
             <span>Downloads</span>
           </a>
 
-
           <a href="wishlist.html">
-            <i class="ri-heart-3-line"></i>
+            <i class="ri-heart-line"></i>
             <span>Wishlist</span>
           </a>
-
 
           <a href="orders.html">
             <i class="ri-shopping-bag-3-line"></i>
             <span>My Orders</span>
           </a>
 
-
-          <a
-            href="services.html"
-            class="active"
-          >
-
+          <a href="services.html">
             <i class="ri-customer-service-2-line"></i>
-
-            <span>
-              Services & Requests
-            </span>
-
+            <span>Services & Requests</span>
           </a>
-
 
           <a href="notifications.html">
-
             <i class="ri-notification-3-line"></i>
-
-            <span>
-              Notifications
-            </span>
-
+            <span>Notifications</span>
           </a>
-
 
           <a href="settings.html">
-
             <i class="ri-settings-3-line"></i>
-
-            <span>
-              Settings
-            </span>
-
+            <span>Settings</span>
           </a>
 
-
-          <a href="security.html">
-
-            <i class="ri-shield-check-line"></i>
-
-            <span>
-              Security
-            </span>
-
+          <a href="security.html" class="active">
+            <i class="ri-shield-keyhole-line"></i>
+            <span>Security</span>
           </a>
-
 
           <button
             type="button"
+            class="account-signout"
             id="signOutBtn"
           >
-
             <i class="ri-logout-box-r-line"></i>
-
-            <span>
-              Sign Out
-            </span>
-
+            <span>Sign Out</span>
           </button>
 
         </nav>
@@ -766,99 +704,50 @@ themeButton.addEventListener("click", ()=> {
       </aside>
 
 
-
-      <!-- ======================================
+      <!-- =========================
            CONTENT
-      ======================================= -->
+      ========================== -->
 
-      <section class="account-content">
-
-
-        <!-- ==================================
-             STATS
-        =================================== -->
-
-        <div class="services-stats">
+      <section class="security-content">
 
 
-          <div class="services-stat-card">
+        <!-- SECURITY STATUS -->
 
-            <div class="services-stat-icon">
-              <i class="ri-service-line"></i>
-            </div>
+        <div class="security-card security-overview">
 
-            <div>
-
-              <span>
-                Total Services
-              </span>
-
-              <strong id="totalServices">
-                0
-              </strong>
-
-            </div>
-
+          <div class="security-overview-icon">
+            <i class="ri-shield-check-line"></i>
           </div>
 
+          <div class="security-overview-info">
 
-          <div class="services-stat-card">
+            <div class="security-card-header">
 
-            <div class="services-stat-icon">
-              <i class="ri-loader-4-line"></i>
-            </div>
+              <div>
+                <h2>Security Status</h2>
 
-            <div>
+                <p>
+                  Your account security configuration.
+                </p>
+              </div>
 
-              <span>
-                In Progress
+              <span class="security-status secure">
+                <i class="ri-check-line"></i>
+                Protected
               </span>
 
-              <strong id="servicesProgress">
-                0
-              </strong>
-
             </div>
 
-          </div>
+            <div class="security-progress">
 
+              <div class="security-progress-top">
+                <span>Security setup</span>
+                <strong id="securityPercent">75%</strong>
+              </div>
 
-          <div class="services-stat-card">
-
-            <div class="services-stat-icon">
-              <i class="ri-checkbox-circle-line"></i>
-            </div>
-
-            <div>
-
-              <span>
-                Completed
-              </span>
-
-              <strong id="servicesCompleted">
-                0
-              </strong>
-
-            </div>
-
-          </div>
-
-
-          <div class="services-stat-card">
-
-            <div class="services-stat-icon">
-              <i class="ri-questionnaire-line"></i>
-            </div>
-
-            <div>
-
-              <span>
-                Active Requests
-              </span>
-
-              <strong id="activeRequests">
-                0
-              </strong>
+              <div class="security-progress-bar">
+                <span id="securityProgress"></span>
+              </div>
 
             </div>
 
@@ -867,200 +756,481 @@ themeButton.addEventListener("click", ()=> {
         </div>
 
 
+        <!-- =========================
+             PASSKEY / FINGERPRINT
+        ========================== -->
 
-        <!-- ==================================
-             TABS
-        =================================== -->
+        <div class="security-card">
 
-        <div class="services-tabs">
+          <div class="security-card-header">
 
-          <button
-            type="button"
-            class="services-tab active"
-            data-tab="services"
-          >
+            <div class="security-card-title-row">
 
-            <i class="ri-service-line"></i>
+              <div class="security-row-icon">
+                <i class="ri-fingerprint-line"></i>
+              </div>
 
-            My Services
+              <div>
+                <h2>Fingerprint & Passkey</h2>
 
-          </button>
+                <p>
+                  Use your device's biometric authentication
+                  for faster and safer sign-in.
+                </p>
+              </div>
+
+            </div>
+
+          </div>
 
 
-          <button
-            type="button"
-            class="services-tab"
-            data-tab="requests"
-          >
+          <div class="passkey-box">
 
-            <i class="ri-questionnaire-line"></i>
+            <div class="passkey-icon">
+              <i class="ri-fingerprint-line"></i>
+            </div>
 
-            My Requests
+            <div class="passkey-info">
 
-          </button>
+              <strong id="passkeyTitle">
+                Secure sign-in
+              </strong>
+
+              <span id="passkeyDescription">
+                Register this device with a passkey.
+                You can use fingerprint, Face ID or your
+                device PIN when supported.
+              </span>
+
+            </div>
+
+            <span
+              class="security-status"
+              id="passkeyStatus"
+            >
+              Not enabled
+            </span>
+
+          </div>
+
+
+          <div class="security-action-row">
+
+            <button
+              type="button"
+              class="account-btn primary"
+              id="setupPasskeyBtn"
+            >
+              <i class="ri-fingerprint-line"></i>
+              Set Up Passkey
+            </button>
+
+            <button
+              type="button"
+              class="account-btn secondary"
+              id="removePasskeyBtn"
+              hidden
+            >
+              <i class="ri-delete-bin-line"></i>
+              Remove
+            </button>
+
+          </div>
+
+          <small class="security-note">
+            <i class="ri-information-line"></i>
+            Your biometric data never needs to be sent to EcoData.
+            Authentication is handled securely by your device and browser.
+          </small>
 
         </div>
 
 
+        <!-- =========================
+             PASSWORD
+        ========================== -->
 
-        <!-- ==================================
-             MAIN CARD
-        =================================== -->
+        <div class="security-card">
 
-        <div class="account-card services-card">
+          <div class="security-card-header">
+
+            <div class="security-card-title-row">
+
+              <div class="security-row-icon">
+                <i class="ri-lock-password-line"></i>
+              </div>
+
+              <div>
+                <h2>Password</h2>
+
+                <p>
+                  Change your account password regularly.
+                </p>
+              </div>
+
+            </div>
+
+          </div>
 
 
-          <div class="account-card-header">
+          <form id="passwordForm" class="security-form">
 
-            <div>
+            <div class="security-field">
 
-              <h2
-                class="account-card-title"
-                id="servicesTitle"
-              >
-                My Services
-              </h2>
+              <label for="currentPassword">
+                Current Password
+              </label>
 
-              <p id="servicesDescription">
-                Services you've purchased from creators.
-              </p>
+              <div class="password-input">
+
+                <input
+                  type="password"
+                  id="currentPassword"
+                  autocomplete="current-password"
+                  required
+                >
+
+                <button
+                  type="button"
+                  class="password-toggle"
+                  data-target="currentPassword"
+                >
+                  <i class="ri-eye-line"></i>
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <div class="security-form-grid">
+
+              <div class="security-field">
+
+                <label for="newPassword">
+                  New Password
+                </label>
+
+                <div class="password-input">
+
+                  <input
+                    type="password"
+                    id="newPassword"
+                    autocomplete="new-password"
+                    required
+                  >
+
+                  <button
+                    type="button"
+                    class="password-toggle"
+                    data-target="newPassword"
+                  >
+                    <i class="ri-eye-line"></i>
+                  </button>
+
+                </div>
+
+              </div>
+
+
+              <div class="security-field">
+
+                <label for="confirmPassword">
+                  Confirm Password
+                </label>
+
+                <div class="password-input">
+
+                  <input
+                    type="password"
+                    id="confirmPassword"
+                    autocomplete="new-password"
+                    required
+                  >
+
+                  <button
+                    type="button"
+                    class="password-toggle"
+                    data-target="confirmPassword"
+                  >
+                    <i class="ri-eye-line"></i>
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="password-strength">
+
+              <div class="password-strength-top">
+
+                <span>Password strength</span>
+
+                <strong id="passwordStrengthText">
+                  —
+                </strong>
+
+              </div>
+
+              <div class="password-strength-bar">
+                <span id="passwordStrengthBar"></span>
+              </div>
 
             </div>
 
 
             <button
-              type="button"
-              class="account-btn account-btn-secondary"
-              id="refreshServicesBtn"
+              type="submit"
+              class="account-btn primary"
             >
+              <i class="ri-lock-password-line"></i>
+              Change Password
+            </button>
 
-              <i class="ri-refresh-line"></i>
+          </form>
 
-              Refresh
+        </div>
 
+
+        <!-- =========================
+             TWO FACTOR
+        ========================== -->
+
+        <div class="security-card">
+
+          <div class="security-card-header">
+
+            <div class="security-card-title-row">
+
+              <div class="security-row-icon">
+                <i class="ri-shield-keyhole-line"></i>
+              </div>
+
+              <div>
+                <h2>Two-Factor Authentication</h2>
+
+                <p>
+                  Add another layer of protection to your account.
+                </p>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="security-setting-row">
+
+            <div class="security-setting-info">
+
+              <strong>Authenticator App</strong>
+
+              <span>
+                Require a verification code when signing in.
+              </span>
+
+            </div>
+
+            <label class="security-toggle">
+
+              <input
+                type="checkbox"
+                id="twoFactorToggle"
+              >
+
+              <span></span>
+
+            </label>
+
+          </div>
+
+
+          <div class="security-note-box">
+
+            <i class="ri-information-line"></i>
+
+            <span>
+              Two-factor authentication will be connected
+              to your authentication provider when the backend
+              is implemented.
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- =========================
+             LOGIN ACTIVITY
+        ========================== -->
+
+        <div class="security-card">
+
+          <div class="security-card-header">
+
+            <div class="security-card-title-row">
+
+              <div class="security-row-icon">
+                <i class="ri-device-line"></i>
+              </div>
+
+              <div>
+                <h2>Login Activity</h2>
+
+                <p>
+                  Review devices that have accessed your account.
+                </p>
+              </div>
+
+            </div>
+
+            <button
+              type="button"
+              class="account-btn secondary"
+              id="signOutOtherBtn"
+            >
+              Sign Out Other Devices
             </button>
 
           </div>
 
 
+          <div id="loginActivityList">
 
-          <!-- ==================================
-               CONTROLS
-          =================================== -->
+            <div class="login-device current">
 
-          <div class="services-controls">
+              <div class="device-icon">
+                <i class="ri-smartphone-line"></i>
+              </div>
 
+              <div class="device-info">
 
-            <div class="services-search">
+                <strong>Current Device</strong>
 
-              <i class="ri-search-line"></i>
+                <span>
+                  Android • EcoData Store
+                </span>
 
-              <input
-                type="search"
-                id="servicesInlineSearch"
-                placeholder="Search..."
-              >
+              </div>
+
+              <div class="device-meta">
+
+                <span class="device-current">
+                  Active now
+                </span>
+
+                <small>
+                  Today
+                </small>
+
+              </div>
 
             </div>
 
 
-            <select id="servicesStatus">
+            <div class="login-device">
 
-              <option value="all">
-                All Status
-              </option>
+              <div class="device-icon">
+                <i class="ri-computer-line"></i>
+              </div>
 
-              <option value="pending">
-                Pending
-              </option>
+              <div class="device-info">
 
-              <option value="progress">
-                In Progress
-              </option>
+                <strong>Web Browser</strong>
 
-              <option value="completed">
-                Completed
-              </option>
+                <span>
+                  Chrome • Desktop
+                </span>
 
-              <option value="cancelled">
-                Cancelled
-              </option>
+              </div>
 
-            </select>
+              <div class="device-meta">
+
+                <small>
+                  Sep 12, 2026
+                </small>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
 
 
-            <select id="servicesSort">
+        <!-- =========================
+             DANGER ZONE
+        ========================== -->
 
-              <option value="recent">
-                Newest
-              </option>
+        <div class="security-card danger-card">
 
-              <option value="oldest">
-                Oldest
-              </option>
+          <div class="security-card-header">
 
-              <option value="high">
-                Highest Amount
-              </option>
+            <div class="security-card-title-row">
 
-              <option value="low">
-                Lowest Amount
-              </option>
+              <div class="security-row-icon danger-icon">
+                <i class="ri-error-warning-line"></i>
+              </div>
 
-            </select>
+              <div>
+                <h2>Danger Zone</h2>
+
+                <p>
+                  Actions that affect your account access.
+                </p>
+              </div>
+
+            </div>
 
           </div>
 
 
+          <div class="danger-action">
 
-          <!-- ==================================
-               LIST
-          =================================== -->
+            <div>
 
-          <div
-            class="services-list"
-            id="servicesList"
-          ></div>
+              <strong>Sign out all devices</strong>
 
-
-
-          <!-- ==================================
-               EMPTY
-          =================================== -->
-
-          <div
-            class="services-empty"
-            id="servicesEmpty"
-            hidden
-          >
-
-            <div class="services-empty-icon">
-
-              <i class="ri-service-line"></i>
+              <span>
+                End all active sessions except this device.
+              </span>
 
             </div>
 
-
-            <h3>
-              Nothing here yet
-            </h3>
-
-
-            <p>
-              Services and requests you create will appear here.
-            </p>
-
-
-            <a
-              href="index.html"
-              class="account-btn account-btn-primary"
+            <button
+              type="button"
+              class="account-btn danger"
+              id="signOutAllBtn"
             >
+              Sign Out All
+            </button>
 
-              <i class="ri-store-2-line"></i>
+          </div>
 
-              Browse Services
 
-            </a>
+          <div class="danger-action">
+
+            <div>
+
+              <strong>Delete account</strong>
+
+              <span>
+                Permanently remove your EcoData Store account.
+              </span>
+
+            </div>
+
+            <button
+              type="button"
+              class="account-btn danger"
+              id="deleteAccountBtn"
+            >
+              Delete Account
+            </button>
 
           </div>
 
@@ -1074,7 +1244,19 @@ themeButton.addEventListener("click", ()=> {
 
 
 
- 
+
+
+
+  <!--=========================================
+    MAIN
+  ========================================== -->
+
+
+
+  
+
+
+
 
   
 
@@ -1166,7 +1348,7 @@ themeButton.addEventListener("click", ()=> {
 
 <script src="./homeClientStoreMain.js"></script>
 
-<script src="./homeClientServices.js"></script>
+<script src="./homeClientSecurity.js"></script>
 
 
 

@@ -599,7 +599,487 @@ themeButton.addEventListener("click", ()=> {
      =============================-->
 
 
-  
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>My Cart | EcoData Store</title>
+
+
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css"
+  >
+
+
+  <link
+    rel="stylesheet"
+    href="css/store.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="css/account.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="css/cart.css"
+  >
+
+</head>
+
+
+<body>
+
+
+  <!-- =========================================
+       NAVBAR
+  ========================================== -->
+
+  <nav class="store-navbar">
+
+    <div class="store-nav-inner">
+
+
+      <a
+        href="index.html"
+        class="store-brand"
+      >
+
+        <span class="store-brand-icon">
+
+          <i class="ri-shopping-bag-3-line"></i>
+
+        </span>
+
+        <span>
+          EcoData Store
+        </span>
+
+      </a>
+
+
+
+      <div class="store-search">
+
+        <i class="ri-search-line"></i>
+
+        <input
+          type="search"
+          id="storeSearch"
+          placeholder="Search products, services..."
+        >
+
+      </div>
+
+
+
+      <div class="store-nav-actions">
+
+
+        <button
+          class="store-nav-icon"
+          title="Wishlist"
+        >
+
+          <i class="ri-heart-3-line"></i>
+
+        </button>
+
+
+
+        <button
+          class="store-nav-icon cart-nav-button"
+          title="Cart"
+        >
+
+          <i class="ri-shopping-cart-line"></i>
+
+          <span
+            class="cart-count2"
+            id="navCartCount"
+          >
+            0
+          </span>
+
+        </button>
+
+
+
+        <button
+          class="store-profile"
+          title="Profile"
+        >
+
+          <span class="store-profile-avatar">
+
+            <i class="ri-user-line"></i>
+
+          </span>
+
+        </button>
+
+
+      </div>
+
+    </div>
+
+  </nav>
+
+
+
+  <!-- =========================================
+       MAIN
+  ========================================== -->
+
+  <main class="account-container">
+
+
+    <!-- PAGE HEADER -->
+
+    <div class="account-page-header">
+
+
+      <div class="account-page-badge">
+
+        <i class="ri-shopping-cart-2-line"></i>
+
+        Shopping
+
+      </div>
+
+
+      <h1>
+        My Cart
+      </h1>
+
+
+      <p>
+        Review your selected products before checkout.
+      </p>
+
+
+    </div>
+
+
+
+    <!-- =========================================
+         CART LAYOUT
+    ========================================== -->
+
+    <div class="cart-layout">
+
+
+      <!-- =======================================
+           CART ITEMS
+      ======================================== -->
+
+      <section class="cart-main">
+
+
+        <div class="account-card cart-items-card">
+
+
+          <div class="cart-card-header">
+
+            <div>
+
+              <h2 class="account-card-title">
+                Your Cart
+              </h2>
+
+              <p id="cartItemLabel">
+                0 items
+              </p>
+
+            </div>
+
+
+            <button
+              type="button"
+              class="cart-clear-btn"
+              id="clearCartBtn"
+            >
+
+              <i class="ri-delete-bin-line"></i>
+
+              Clear Cart
+
+            </button>
+
+          </div>
+
+
+
+          <!-- ITEMS -->
+
+          <div
+            class="cart-items"
+            id="cartItems"
+          ></div>
+
+
+
+          <!-- EMPTY STATE -->
+
+          <div
+            class="cart-empty"
+            id="cartEmpty"
+            hidden
+          >
+
+            <div class="cart-empty-icon">
+
+              <i class="ri-shopping-cart-2-line"></i>
+
+            </div>
+
+
+            <h3>
+              Your cart is empty
+            </h3>
+
+
+            <p>
+              You haven't added anything to your cart yet.
+            </p>
+
+
+            <a
+              href="index.html"
+              class="account-btn primary"
+            >
+
+              <i class="ri-store-2-line"></i>
+
+              Browse Store
+
+            </a>
+
+          </div>
+
+
+        </div>
+
+
+        <!-- CONTINUE SHOPPING -->
+
+        <a
+          href="index.html"
+          class="cart-continue"
+        >
+
+          <i class="ri-arrow-left-line"></i>
+
+          Continue Shopping
+
+        </a>
+
+
+      </section>
+
+
+
+      <!-- =======================================
+           SUMMARY
+      ======================================== -->
+
+      <aside class="cart-summary">
+
+
+        <div class="account-card cart-summary-card">
+
+
+          <div class="cart-summary-header">
+
+            <h2>
+              Order Summary
+            </h2>
+
+          </div>
+
+
+
+          <!-- SUBTOTAL -->
+
+          <div class="cart-summary-row">
+
+            <span>
+              Subtotal
+            </span>
+
+            <strong id="cartSubtotal">
+              GH₵0.00
+            </strong>
+
+          </div>
+
+
+
+          <!-- DELIVERY -->
+
+          <div class="cart-summary-row">
+
+            <span>
+              Delivery
+            </span>
+
+            <strong id="cartDelivery">
+              GH₵0.00
+            </strong>
+
+          </div>
+
+
+
+          <!-- DISCOUNT -->
+
+          <div
+            class="cart-summary-row discount-row"
+            id="discountRow"
+            hidden
+          >
+
+            <span>
+              Discount
+            </span>
+
+            <strong id="cartDiscount">
+              -GH₵0.00
+            </strong>
+
+          </div>
+
+
+
+          <!-- DIVIDER -->
+
+          <div class="cart-summary-divider"></div>
+
+
+
+          <!-- TOTAL -->
+
+          <div class="cart-total-row">
+
+            <span>
+              Total
+            </span>
+
+            <strong id="cartTotal">
+              GH₵0.00
+            </strong>
+
+          </div>
+
+
+
+          <!-- PROMO -->
+
+          <div class="cart-promo">
+
+            <label for="promoCode">
+              Promo Code
+            </label>
+
+
+            <div class="promo-input">
+
+              <input
+                type="text"
+                id="promoCode"
+                placeholder="Enter code"
+                autocomplete="off"
+              >
+
+
+              <button
+                type="button"
+                id="applyPromoBtn"
+              >
+                Apply
+              </button>
+
+            </div>
+
+
+            <small id="promoMessage"></small>
+
+          </div>
+
+
+
+          <!-- CHECKOUT -->
+
+          <button
+            type="button"
+            class="cart-checkout-btn"
+            id="checkoutBtn"
+          >
+
+            <i class="ri-lock-2-line"></i>
+
+            Proceed to Checkout
+
+          </button>
+
+
+
+          <!-- SECURE NOTE -->
+
+          <div class="cart-secure-note">
+
+            <i class="ri-shield-check-line"></i>
+
+            <span>
+              Secure checkout powered by EcoData.
+            </span>
+
+          </div>
+
+
+        </div>
+
+
+        <!-- PAYMENT METHODS -->
+
+        <div class="cart-payment-note">
+
+          <span>
+            We accept
+          </span>
+
+          <div>
+
+            <span>Mobile Money</span>
+
+            <span>Bank Card</span>
+
+          </div>
+
+        </div>
+
+
+      </aside>
+
+    </div>
+
+
+  </main>
+
+
+  <script src="js/cart.js"></script>
+
+</body>
+</html>
 
 
 

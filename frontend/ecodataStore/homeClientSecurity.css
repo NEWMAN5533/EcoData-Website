@@ -1,0 +1,884 @@
+/* ==========================================
+   SECURITY PAGE
+========================================== */
+
+.security-content {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+
+/* ==========================================
+   SECURITY CARD
+========================================== */
+
+.security-card {
+  background: #fff;
+  border: 1px solid rgba(128, 128, 128, .15);
+  border-radius: 16px;
+  padding: 22px;
+}
+
+.security-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.security-card-title-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+}
+
+.security-card-header h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 650;
+}
+
+.security-card-header p {
+  margin: 5px 0 0;
+  color: #777;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+
+/* ==========================================
+   SECURITY OVERVIEW
+========================================== */
+
+.security-overview {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.security-overview-icon {
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+  background: rgba(128, 128, 128, .09);
+
+  font-size: 25px;
+}
+
+.security-overview-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.security-overview-info .security-card-header {
+  margin-bottom: 14px;
+}
+
+
+/* ==========================================
+   STATUS
+========================================== */
+
+.security-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
+  width: fit-content;
+
+  padding: 5px 9px;
+  border-radius: 999px;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  background: rgba(128, 128, 128, .09);
+  color: #666;
+}
+
+.security-status.secure {
+  background: rgba(40, 167, 69, .09);
+  color: #268a43;
+}
+
+.security-status.warning {
+  background: rgba(255, 170, 0, .10);
+  color: #9a6b00;
+}
+
+
+/* ==========================================
+   SECURITY PROGRESS
+========================================== */
+
+.security-progress-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 7px;
+
+  font-size: 11px;
+  color: #777;
+}
+
+.security-progress-top strong {
+  color: #444;
+  font-size: 11px;
+}
+
+.security-progress-bar {
+  width: 100%;
+  height: 6px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+  background: rgba(128, 128, 128, .12);
+}
+
+.security-progress-bar span {
+  display: block;
+
+  width: 75%;
+  height: 100%;
+
+  border-radius: inherit;
+  background: #444;
+
+  transition: width .3s ease;
+}
+
+
+/* ==========================================
+   ROW ICON
+========================================== */
+
+.security-row-icon {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: rgba(128, 128, 128, .09);
+
+  font-size: 18px;
+}
+
+
+/* ==========================================
+   PASSKEY
+========================================== */
+
+.passkey-box {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  padding: 15px;
+
+  border: 1px solid rgba(128, 128, 128, .13);
+  border-radius: 12px;
+
+  background: rgba(128, 128, 128, .035);
+}
+
+.passkey-icon {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 11px;
+
+  background: rgba(128, 128, 128, .10);
+
+  font-size: 21px;
+}
+
+.passkey-info {
+  flex: 1;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.passkey-info strong {
+  font-size: 12px;
+}
+
+.passkey-info span {
+  color: #777;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.security-action-row {
+  display: flex;
+  gap: 9px;
+  margin-top: 14px;
+}
+
+.security-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+
+  margin-top: 15px;
+
+  color: #888;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.security-note i {
+  margin-top: 1px;
+}
+
+
+/* ==========================================
+   BUTTONS
+========================================== */
+
+.account-btn {
+  min-height: 37px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  padding: 0 13px;
+
+  border: 1px solid transparent;
+  border-radius: 9px;
+
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    transform .18s ease,
+    background .18s ease,
+    border-color .18s ease,
+    opacity .18s ease;
+}
+
+.account-btn:hover {
+  transform: translateY(-1px);
+}
+
+.account-btn:disabled {
+  cursor: not-allowed;
+  opacity: .55;
+  transform: none;
+}
+
+.account-btn.primary {
+  background: #222;
+  color: #fff;
+}
+
+.account-btn.primary:hover {
+  background: #000;
+}
+
+.account-btn.secondary {
+  background: rgba(128, 128, 128, .07);
+  border-color: rgba(128, 128, 128, .15);
+  color: #333;
+}
+
+.account-btn.secondary:hover {
+  background: rgba(128, 128, 128, .12);
+}
+
+.account-btn.danger {
+  background: rgba(220, 53, 69, .08);
+  border-color: rgba(220, 53, 69, .14);
+  color: #c72e3e;
+}
+
+
+/* ==========================================
+   SECURITY FORM
+========================================== */
+
+.security-form {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+}
+
+.security-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.security-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.security-field label {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.password-input {
+  position: relative;
+}
+
+.password-input input {
+  width: 100%;
+  height: 40px;
+
+  padding: 0 40px 0 12px;
+
+  border: 1px solid rgba(128, 128, 128, .17);
+  border-radius: 9px;
+
+  outline: none;
+
+  background: #fff;
+
+  color: #222;
+
+  font-family: inherit;
+  font-size: 11px;
+
+  transition:
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.password-input input:focus {
+  border-color: rgba(80, 80, 80, .4);
+  box-shadow: 0 0 0 3px rgba(128, 128, 128, .07);
+}
+
+.password-toggle {
+  position: absolute;
+
+  top: 50%;
+  right: 9px;
+
+  transform: translateY(-50%);
+
+  width: 28px;
+  height: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+  background: transparent;
+
+  color: #777;
+
+  cursor: pointer;
+}
+
+
+/* ==========================================
+   PASSWORD STRENGTH
+========================================== */
+
+.password-strength {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.password-strength-top {
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 10px;
+  color: #888;
+}
+
+.password-strength-top strong {
+  color: #555;
+}
+
+.password-strength-bar {
+  height: 5px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background: rgba(128, 128, 128, .12);
+}
+
+.password-strength-bar span {
+  display: block;
+
+  width: 0;
+  height: 100%;
+
+  border-radius: inherit;
+
+  background: #777;
+
+  transition: width .25s ease;
+}
+
+
+/* ==========================================
+   TWO FACTOR
+========================================== */
+
+.security-setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  padding: 14px 0;
+
+  border-top: 1px solid rgba(128, 128, 128, .11);
+  border-bottom: 1px solid rgba(128, 128, 128, .11);
+}
+
+.security-setting-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.security-setting-info strong {
+  font-size: 12px;
+}
+
+.security-setting-info span {
+  color: #777;
+  font-size: 10px;
+}
+
+
+/* ==========================================
+   TOGGLE
+========================================== */
+
+.security-toggle {
+  position: relative;
+
+  width: 42px;
+  height: 23px;
+
+  flex-shrink: 0;
+
+  cursor: pointer;
+}
+
+.security-toggle input {
+  position: absolute;
+
+  width: 0;
+  height: 0;
+
+  opacity: 0;
+}
+
+.security-toggle span {
+  position: absolute;
+  inset: 0;
+
+  border-radius: 999px;
+
+  background: rgba(128, 128, 128, .18);
+
+  transition: background .2s ease;
+}
+
+.security-toggle span::before {
+  content: "";
+
+  position: absolute;
+
+  top: 3px;
+  left: 3px;
+
+  width: 17px;
+  height: 17px;
+
+  border-radius: 50%;
+
+  background: #fff;
+
+  box-shadow: 0 1px 4px rgba(0,0,0,.15);
+
+  transition: transform .2s ease;
+}
+
+.security-toggle input:checked + span {
+  background: #444;
+}
+
+.security-toggle input:checked + span::before {
+  transform: translateX(19px);
+}
+
+
+/* ==========================================
+   INFORMATION BOX
+========================================== */
+
+.security-note-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+
+  margin-top: 15px;
+
+  padding: 11px 12px;
+
+  border-radius: 9px;
+
+  background: rgba(128, 128, 128, .06);
+
+  color: #777;
+
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.security-note-box i {
+  margin-top: 1px;
+}
+
+
+/* ==========================================
+   LOGIN ACTIVITY
+========================================== */
+
+#loginActivityList {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-device {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 14px 0;
+
+  border-top: 1px solid rgba(128, 128, 128, .11);
+}
+
+.login-device:first-child {
+  border-top: 0;
+}
+
+.device-icon {
+  width: 39px;
+  height: 39px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 10px;
+
+  background: rgba(128, 128, 128, .08);
+
+  font-size: 18px;
+}
+
+.device-info {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.device-info strong {
+  font-size: 11px;
+}
+
+.device-info span {
+  color: #777;
+  font-size: 10px;
+}
+
+.device-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.device-meta small {
+  color: #888;
+  font-size: 9px;
+}
+
+.device-current {
+  font-size: 9px;
+  font-weight: 600;
+  color: #268a43;
+}
+
+
+/* ==========================================
+   DANGER ZONE
+========================================== */
+
+.danger-card {
+  border-color: rgba(220, 53, 69, .15);
+}
+
+.danger-icon {
+  color: #c72e3e;
+  background: rgba(220, 53, 69, .08);
+}
+
+.danger-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  padding: 15px 0;
+
+  border-top: 1px solid rgba(128, 128, 128, .11);
+}
+
+.danger-action:first-of-type {
+  border-top: 0;
+}
+
+.danger-action > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.danger-action strong {
+  font-size: 11px;
+}
+
+.danger-action span {
+  color: #777;
+  font-size: 10px;
+}
+
+
+/* ==========================================
+   DARK MODE
+========================================== */
+
+body.dark-mode .security-card {
+  background: #171717;
+  border-color: rgba(255, 255, 255, .09);
+}
+
+body.dark-mode .security-card-header p,
+body.dark-mode .passkey-info span,
+body.dark-mode .security-note,
+body.dark-mode .security-setting-info span,
+body.dark-mode .device-info span,
+body.dark-mode .device-meta small,
+body.dark-mode .security-note-box,
+body.dark-mode .password-strength-top {
+  color: #888;
+}
+
+body.dark-mode .security-overview-icon,
+body.dark-mode .security-row-icon,
+body.dark-mode .passkey-icon,
+body.dark-mode .device-icon {
+  background: rgba(255, 255, 255, .06);
+}
+
+body.dark-mode .security-progress-bar,
+body.dark-mode .password-strength-bar {
+  background: rgba(255, 255, 255, .09);
+}
+
+body.dark-mode .security-progress-bar span {
+  background: #ddd;
+}
+
+body.dark-mode .security-progress-top strong,
+body.dark-mode .password-strength-top strong {
+  color: #ccc;
+}
+
+body.dark-mode .passkey-box {
+  background: rgba(255, 255, 255, .025);
+  border-color: rgba(255, 255, 255, .08);
+}
+
+body.dark-mode .password-input input {
+  background: #1d1d1d;
+  border-color: rgba(255, 255, 255, .1);
+  color: #eee;
+}
+
+body.dark-mode .password-input input:focus {
+  border-color: rgba(255, 255, 255, .25);
+}
+
+body.dark-mode .account-btn.primary {
+  background: #eee;
+  color: #111;
+}
+
+body.dark-mode .account-btn.primary:hover {
+  background: #fff;
+}
+
+body.dark-mode .account-btn.secondary {
+  background: rgba(255, 255, 255, .05);
+  border-color: rgba(255, 255, 255, .1);
+  color: #ddd;
+}
+
+body.dark-mode .security-setting-row,
+body.dark-mode .login-device,
+body.dark-mode .danger-action {
+  border-color: rgba(255, 255, 255, .07);
+}
+
+body.dark-mode .security-toggle span {
+  background: rgba(255, 255, 255, .15);
+}
+
+body.dark-mode .security-toggle input:checked + span {
+  background: #eee;
+}
+
+body.dark-mode .security-toggle input:checked + span::before {
+  background: #111;
+}
+
+body.dark-mode .security-note-box {
+  background: rgba(255, 255, 255, .045);
+}
+
+body.dark-mode .security-status.secure {
+  background: rgba(40, 167, 69, .12);
+}
+
+body.dark-mode .danger-card {
+  border-color: rgba(220, 53, 69, .18);
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 800px) {
+
+  .security-card-header {
+    flex-direction: column;
+  }
+
+  .security-card-header > .account-btn {
+    width: fit-content;
+  }
+
+}
+
+
+@media (max-width: 650px) {
+
+  .security-card {
+    padding: 17px;
+  }
+
+  .security-overview {
+    align-items: flex-start;
+  }
+
+  .security-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .passkey-box {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .passkey-box .security-status {
+    margin-left: 55px;
+  }
+
+  .security-action-row {
+    flex-direction: column;
+  }
+
+  .security-action-row .account-btn {
+    width: 100%;
+  }
+
+  .login-device {
+    align-items: flex-start;
+  }
+
+  .device-meta {
+    text-align: right;
+  }
+
+  .danger-action {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .danger-action .account-btn {
+    width: 100%;
+  }
+
+}
+
+
+@media (max-width: 430px) {
+
+  .security-overview {
+    flex-direction: column;
+  }
+
+  .security-overview-icon {
+    width: 45px;
+    height: 45px;
+  }
+
+  .security-card-header h2 {
+    font-size: 15px;
+  }
+
+}

@@ -593,10 +593,434 @@ themeButton.addEventListener("click", ()=> {
 
 
     <!---============================
-     SETTINGS SECTION
+     My Orders SECTION
      =============================-->
 
+  <main class="account-container">
 
+    <!-- PAGE HEADER -->
+
+    <div class="account-page-header">
+
+      <div class="account-page-badge">
+
+        <i class="ri-shopping-bag-3-line"></i>
+
+        Account
+
+      </div>
+
+
+      <h1>My Orders</h1>
+
+
+      <p>
+        View your purchases, order status and transaction history.
+      </p>
+
+    </div>
+
+
+
+    <div class="account-layout">
+
+
+      <!-- =====================================
+           SIDEBAR
+      ====================================== -->
+
+      <aside class="account-sidebar">
+
+        <div class="account-user-mini">
+
+          <div class="account-mini-avatar">
+            <i class="ri-user-line"></i>
+          </div>
+
+
+          <div class="account-mini-info">
+
+            <strong id="sidebarName">
+              Ilyas Ahmed
+            </strong>
+
+            <span id="sidebarEmail">
+              user@example.com
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <nav class="account-nav">
+
+          <a href="profile.html">
+
+            <i class="ri-user-line"></i>
+
+            <span>Profile</span>
+
+          </a>
+
+
+          <a href="downloads.html">
+
+            <i class="ri-download-2-line"></i>
+
+            <span>Downloads</span>
+
+          </a>
+
+
+          <a href="wishlist.html">
+
+            <i class="ri-heart-3-line"></i>
+
+            <span>Wishlist</span>
+
+          </a>
+
+
+          <a
+            href="orders.html"
+            class="active"
+          >
+
+            <i class="ri-shopping-bag-3-line"></i>
+
+            <span>My Orders</span>
+
+          </a>
+
+
+          <a href="notifications.html">
+
+            <i class="ri-notification-3-line"></i>
+
+            <span>Notifications</span>
+
+          </a>
+
+
+          <a href="settings.html">
+
+            <i class="ri-settings-3-line"></i>
+
+            <span>Settings</span>
+
+          </a>
+
+
+          <a href="security.html">
+
+            <i class="ri-shield-check-line"></i>
+
+            <span>Security</span>
+
+          </a>
+
+
+          <button
+            type="button"
+            id="signOutBtn"
+          >
+
+            <i class="ri-logout-box-r-line"></i>
+
+            <span>Sign Out</span>
+
+          </button>
+
+        </nav>
+
+      </aside>
+
+
+
+      <!-- =====================================
+           CONTENT
+      ====================================== -->
+
+      <section class="account-content">
+
+
+        <!-- =================================
+             ORDER STATS
+        ================================== -->
+
+        <div class="order-stats">
+
+
+          <div class="order-stat">
+
+            <div class="order-stat-icon">
+              <i class="ri-shopping-bag-3-line"></i>
+            </div>
+
+            <div>
+
+              <strong id="totalOrders">
+                24
+              </strong>
+
+              <span>
+                Total Orders
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="order-stat">
+
+            <div class="order-stat-icon">
+              <i class="ri-time-line"></i>
+            </div>
+
+            <div>
+
+              <strong id="processingOrders">
+                2
+              </strong>
+
+              <span>
+                Processing
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="order-stat">
+
+            <div class="order-stat-icon">
+              <i class="ri-checkbox-circle-line"></i>
+            </div>
+
+            <div>
+
+              <strong id="deliveredOrders">
+                21
+              </strong>
+
+              <span>
+                Delivered
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="order-stat">
+
+            <div class="order-stat-icon">
+              <i class="ri-close-circle-line"></i>
+            </div>
+
+            <div>
+
+              <strong id="failedOrders">
+                1
+              </strong>
+
+              <span>
+                Failed
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =================================
+             ORDERS CARD
+        ================================== -->
+
+        <div class="account-card orders-card">
+
+
+          <!-- HEADER -->
+
+          <div class="account-card-header">
+
+            <div>
+
+              <h2 class="account-card-title">
+                Order History
+              </h2>
+
+              <p>
+                Your recent purchases from EcoData Store.
+              </p>
+
+            </div>
+
+
+            <a
+              href="index.html"
+              class="orders-shop-btn"
+            >
+
+              <i class="ri-store-2-line"></i>
+
+              Continue Shopping
+
+            </a>
+
+          </div>
+
+
+
+          <!-- =================================
+               CONTROLS
+          ================================== -->
+
+          <div class="orders-controls">
+
+
+            <!-- SEARCH -->
+
+            <div class="orders-search">
+
+              <i class="ri-search-line"></i>
+
+              <input
+                type="search"
+                id="orderSearch"
+                placeholder="Search order ID, product or seller..."
+              >
+
+            </div>
+
+
+
+            <!-- FILTER -->
+
+            <select id="orderFilter">
+
+              <option value="all">
+                All Orders
+              </option>
+
+              <option value="processing">
+                Processing
+              </option>
+
+              <option value="delivered">
+                Delivered
+              </option>
+
+              <option value="failed">
+                Failed
+              </option>
+
+              <option value="cancelled">
+                Cancelled
+              </option>
+
+            </select>
+
+
+
+            <!-- SORT -->
+
+            <select id="orderSort">
+
+              <option value="newest">
+                Newest
+              </option>
+
+              <option value="oldest">
+                Oldest
+              </option>
+
+              <option value="highest">
+                Highest Amount
+              </option>
+
+              <option value="lowest">
+                Lowest Amount
+              </option>
+
+            </select>
+
+          </div>
+
+
+
+          <!-- =================================
+               ORDERS LIST
+          ================================== -->
+
+          <div
+            class="orders-list"
+            id="ordersList"
+          ></div>
+
+
+
+          <!-- =================================
+               EMPTY STATE
+          ================================== -->
+
+          <div
+            class="orders-empty"
+            id="ordersEmpty"
+            hidden
+          >
+
+            <div class="orders-empty-icon">
+
+              <i class="ri-shopping-bag-3-line"></i>
+
+            </div>
+
+
+            <h3>
+              No orders found
+            </h3>
+
+
+            <p>
+              We couldn't find any orders matching your search.
+            </p>
+
+
+            <button
+              type="button"
+              class="account-btn primary"
+              id="clearOrderFilters"
+            >
+
+              <i class="ri-refresh-line"></i>
+
+              Clear Filters
+
+            </button>
+
+          </div>
+
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+
+  <script src="js/orders.js"></script>
+
+</body>
+</html>
   
 
 
@@ -617,8 +1041,27 @@ themeButton.addEventListener("click", ()=> {
 
   </main>
 
-         <!-----BOTTOM-NAVBAR----->
-         <!-----BOTTOM-NAVBAR----->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-----BOTTOM-NAVBAR----->
   <div class="bottom-navbar" id="navIconDiv">
     <div class="btom-navIcon" onclick="window.location.href='./homeClient.html'">
       <div class="activeImg " id="activeMtn">
