@@ -601,6 +601,642 @@ themeButton.addEventListener("click", ()=> {
      =============================-->
 
 
+
+
+  <!-- =========================================
+       MAIN
+  ========================================== -->
+  <main class="account-container">
+
+    <!-- PAGE HEADER -->
+    <div class="account-page-header">
+
+      <div class="account-page-badge">
+        <i class="ri-settings-3-line"></i>
+        Account
+      </div>
+
+      <h1>Settings</h1>
+
+      <p>
+        Manage your preferences and EcoData Store experience.
+      </p>
+
+    </div>
+
+
+
+    <div class="account-layout">
+
+
+      <!-- =====================================
+           SIDEBAR
+      ====================================== -->
+      <aside class="account-sidebar">
+
+        <div class="account-user-mini">
+
+          <div class="account-mini-avatar">
+            <i class="ri-user-line"></i>
+          </div>
+
+          <div class="account-mini-info">
+
+            <strong id="sidebarName">
+              Ilyas Ahmed
+            </strong>
+
+            <span id="sidebarEmail">
+              user@example.com
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <nav class="account-nav">
+
+          <a href="profile.html">
+            <i class="ri-user-line"></i>
+            <span>Profile</span>
+          </a>
+
+
+          <a href="downloads.html">
+            <i class="ri-download-2-line"></i>
+            <span>Downloads</span>
+          </a>
+
+
+          <a href="wishlist.html">
+            <i class="ri-heart-3-line"></i>
+            <span>Wishlist</span>
+          </a>
+
+
+          <a href="orders.html">
+            <i class="ri-shopping-bag-3-line"></i>
+            <span>My Orders</span>
+          </a>
+
+
+          <a href="notifications.html">
+            <i class="ri-notification-3-line"></i>
+            <span>Notifications</span>
+          </a>
+
+
+          <a
+            href="settings.html"
+            class="active"
+          >
+            <i class="ri-settings-3-line"></i>
+            <span>Settings</span>
+          </a>
+
+
+          <a href="security.html">
+            <i class="ri-shield-check-line"></i>
+            <span>Security</span>
+          </a>
+
+
+          <button
+            type="button"
+            id="signOutBtn"
+          >
+            <i class="ri-logout-box-r-line"></i>
+            <span>Sign Out</span>
+          </button>
+
+        </nav>
+
+      </aside>
+
+
+
+      <!-- =====================================
+           CONTENT
+      ====================================== -->
+      <section class="account-content">
+
+
+        <!-- =================================
+             APPEARANCE
+        ================================== -->
+        <div class="settings-card">
+
+          <div class="settings-card-header">
+
+            <div>
+
+              <h2 class="account-card-title">
+                Appearance
+              </h2>
+
+              <p>
+                Customize how EcoData Store looks and feels.
+              </p>
+
+            </div>
+
+            <i class="ri-palette-line"></i>
+
+          </div>
+
+
+
+          <!-- DARK MODE -->
+          <div class="settings-row">
+
+            <div class="settings-row-icon">
+              <i class="ri-moon-line"></i>
+            </div>
+
+
+            <div class="settings-row-info">
+
+              <strong>Dark Mode</strong>
+
+              <span>
+                Use a darker appearance across the store.
+              </span>
+
+            </div>
+
+
+            <label class="settings-toggle">
+
+              <input
+                type="checkbox"
+                id="darkModeToggle"
+              >
+
+              <span class="toggle-slider"></span>
+
+            </label>
+
+          </div>
+
+
+
+          <!-- REDUCE MOTION -->
+          <div class="settings-row">
+
+            <div class="settings-row-icon">
+              <i class="ri-speed-mini-line"></i>
+            </div>
+
+
+            <div class="settings-row-info">
+
+              <strong>Reduce Motion</strong>
+
+              <span>
+                Reduce animations and transition effects.
+              </span>
+
+            </div>
+
+
+            <label class="settings-toggle">
+
+              <input
+                type="checkbox"
+                id="reduceMotionToggle"
+              >
+
+              <span class="toggle-slider"></span>
+
+            </label>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =================================
+             NOTIFICATIONS
+        ================================== -->
+        <div class="settings-card">
+
+          <div class="settings-card-header">
+
+            <div>
+
+              <h2 class="account-card-title">
+                Notifications
+              </h2>
+
+              <p>
+                Choose which store notifications you receive.
+              </p>
+
+            </div>
+
+            <i class="ri-notification-3-line"></i>
+
+          </div>
+
+
+
+          <!-- ORDER UPDATES -->
+          <div class="settings-row">
+
+            <div class="settings-row-icon">
+              <i class="ri-shopping-bag-3-line"></i>
+            </div>
+
+
+            <div class="settings-row-info">
+
+              <strong>Order Updates</strong>
+
+              <span>
+                Receive updates about your orders.
+              </span>
+
+            </div>
+
+
+            <label class="settings-toggle">
+
+              <input
+                type="checkbox"
+                id="orderNotifications"
+                checked
+              >
+
+              <span class="toggle-slider"></span>
+
+            </label>
+
+          </div>
+
+
+
+          <!-- PROMOTIONS -->
+          <div class="settings-row">
+
+            <div class="settings-row-icon">
+              <i class="ri-price-tag-3-line"></i>
+            </div>
+
+
+            <div class="settings-row-info">
+
+              <strong>Promotions</strong>
+
+              <span>
+                Get notified about offers and promotions.
+              </span>
+
+            </div>
+
+
+            <label class="settings-toggle">
+
+              <input
+                type="checkbox"
+                id="promotionNotifications"
+                checked
+              >
+
+              <span class="toggle-slider"></span>
+
+            </label>
+
+          </div>
+
+
+
+          <!-- WISHLIST -->
+          <div class="settings-row">
+
+            <div class="settings-row-icon">
+              <i class="ri-heart-3-line"></i>
+            </div>
+
+
+            <div class="settings-row-info">
+
+              <strong>Wishlist Alerts</strong>
+
+              <span>
+                Get updates about saved products.
+              </span>
+
+            </div>
+
+
+            <label class="settings-toggle">
+
+              <input
+                type="checkbox"
+                id="wishlistNotifications"
+                checked
+              >
+
+              <span class="toggle-slider"></span>
+
+            </label>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =================================
+             SHOPPING PREFERENCES
+        ================================== -->
+        <div class="settings-card">
+
+          <div class="settings-card-header">
+
+            <div>
+
+              <h2 class="account-card-title">
+                Shopping Preferences
+              </h2>
+
+              <p>
+                Set your preferred shopping options.
+              </p>
+
+            </div>
+
+            <i class="ri-shopping-cart-line"></i>
+
+          </div>
+
+
+
+          <div class="settings-form-grid">
+
+
+            <!-- CURRENCY -->
+            <div class="settings-field">
+
+              <label for="currency">
+                Currency
+              </label>
+
+              <div class="settings-select">
+
+                <i class="ri-money-dollar-circle-line"></i>
+
+                <select id="currency">
+
+                  <option value="GHS">
+                    Ghana Cedi (GH₵)
+                  </option>
+
+                  <option value="USD">
+                    US Dollar ($)
+                  </option>
+
+                  <option value="GBP">
+                    British Pound (£)
+                  </option>
+
+                </select>
+
+              </div>
+
+            </div>
+
+
+
+            <!-- LANGUAGE -->
+            <div class="settings-field">
+
+              <label for="language">
+                Language
+              </label>
+
+              <div class="settings-select">
+
+                <i class="ri-translate-2"></i>
+
+                <select id="language">
+
+                  <option value="English">
+                    English
+                  </option>
+
+                </select>
+
+              </div>
+
+            </div>
+
+
+
+            <!-- LOCATION -->
+            <div class="settings-field">
+
+              <label for="deliveryLocation">
+                Default Location
+              </label>
+
+              <div class="settings-select">
+
+                <i class="ri-map-pin-line"></i>
+
+                <select id="deliveryLocation">
+
+                  <option value="Ghana">
+                    Ghana
+                  </option>
+
+                  <option value="Nigeria">
+                    Nigeria
+                  </option>
+
+                  <option value="Kenya">
+                    Kenya
+                  </option>
+
+                  <option value="Other">
+                    Other
+                  </option>
+
+                </select>
+
+              </div>
+
+            </div>
+
+
+
+            <!-- PAYMENT -->
+            <div class="settings-field">
+
+              <label for="defaultPayment">
+                Preferred Payment
+              </label>
+
+              <div class="settings-select">
+
+                <i class="ri-bank-card-line"></i>
+
+                <select id="defaultPayment">
+
+                  <option value="Mobile Money">
+                    Mobile Money
+                  </option>
+
+                  <option value="Bank Card">
+                    Bank Card
+                  </option>
+
+                </select>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =================================
+             EMAIL PREFERENCES
+        ================================== -->
+        <div class="settings-card">
+
+          <div class="settings-card-header">
+
+            <div>
+
+              <h2 class="account-card-title">
+                Email Preferences
+              </h2>
+
+              <p>
+                Manage the emails EcoData Store sends to you.
+              </p>
+
+            </div>
+
+            <i class="ri-mail-settings-line"></i>
+
+          </div>
+
+
+
+          <!-- ORDER EMAILS -->
+          <div class="settings-row">
+
+            <div class="settings-row-icon">
+              <i class="ri-mail-check-line"></i>
+            </div>
+
+
+            <div class="settings-row-info">
+
+              <strong>Order Emails</strong>
+
+              <span>
+                Receive important emails about your orders.
+              </span>
+
+            </div>
+
+
+            <label class="settings-toggle">
+
+              <input
+                type="checkbox"
+                id="orderEmails"
+                checked
+              >
+
+              <span class="toggle-slider"></span>
+
+            </label>
+
+          </div>
+
+
+
+          <!-- STORE UPDATES -->
+          <div class="settings-row">
+
+            <div class="settings-row-icon">
+              <i class="ri-mail-line"></i>
+            </div>
+
+
+            <div class="settings-row-info">
+
+              <strong>Store Updates</strong>
+
+              <span>
+                Receive news, updates and store announcements.
+              </span>
+
+            </div>
+
+
+            <label class="settings-toggle">
+
+              <input
+                type="checkbox"
+                id="storeEmails"
+                checked
+              >
+
+              <span class="toggle-slider"></span>
+
+            </label>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =================================
+             SAVE BAR
+        ================================== -->
+        <div class="settings-save-bar">
+
+          <span id="saveStatus">
+            <i class="ri-check-line"></i>
+            Your preferences are saved automatically.
+          </span>
+
+
+          <button
+            type="button"
+            class="account-btn primary"
+            id="saveSettingsBtn"
+          >
+            <i class="ri-save-3-line"></i>
+            Save Changes
+          </button>
+
+        </div>
+
+
+      </section>
+
+    </div>
+
+  </main>
+
+
+  
+
+
+
+
   
 
 
