@@ -139,33 +139,6 @@ window.addEventListener("scroll", ()=> {
 
 
 
-//======================
-// PRODUCT SKELETON UI
-//======================
-
-function fadeThumbSkeleton(delay = 5000) {
-
-  const thumbSkeleton =
-    document.querySelectorAll(".tsContainer");
-
-  if (!thumbSkeleton.length) return;
-
-  thumbSkeleton.forEach(img => {
-
-    setTimeout(() => {
-
-      img.classList.add("ts-fade-out");
-
-      setTimeout(() => {
-        img.remove();
-      }, 300);
-
-    }, delay);
-
-  });
-}
-
-fadeThumbSkeleton(5000);
 
 //===================
 // THUMB REVEAL
@@ -176,5 +149,82 @@ fadeThumbSkeleton(5000);
 // ?
 //==================
 });
+
+
+
+//======================
+// PRODUCT SKELETON UI
+//======================
+
+function hideSkeleton(skeleton) {
+
+  skeleton.classList.add("ts-fade-out");
+
+  setTimeout(() => {
+    skeleton.remove();
+  }, 300);
+
+}
+
+
+function initProductSkeletons() {
+
+  const images =
+    document.querySelectorAll(".product-image");
+
+  images.forEach(img => {
+
+    const skeleton =
+      img.parentElement.querySelector(".tsContainer");
+
+    if (!skeleton) return;
+
+
+    // Already loaded
+    if (img.complete) {
+
+      hideSkeleton(skeleton);
+
+      return;
+    }
+
+
+    // Wait for image
+    img.addEventListener("load", () => {
+
+      hideSkeleton(skeleton);
+
+    }, { once: true });
+
+
+    // If image fails
+    img.addEventListener("error", () => {
+
+      hideSkeleton(skeleton);
+
+    }, { once: true });
+
+  });
+
+}
+
+
+//======================
+// DOM READY
+//======================
+
+if (document.readyState === "loading") {
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    initProductSkeletons
+  );
+
+} else {
+
+  initProductSkeletons();
+
+}
+
 
 

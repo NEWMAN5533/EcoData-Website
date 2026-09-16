@@ -101,7 +101,8 @@
   opacity: 1;
   aspect-ratio: 1/1;
   overflow: hidden;
-  
+  transition:  opacity .3s ease;
+  inset: 0;
 }
 
 .tsContainer.ts-fade-out{
