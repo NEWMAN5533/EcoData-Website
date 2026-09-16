@@ -1,5 +1,34 @@
 document.addEventListener("DOMContentLoaded",()=> {
 
+  //===================
+  // PAGE ROUTING
+  //===================
+  const profilePageRouting = document.getElementById("mobileProfileImage");
+
+  profilePageRouting.addEventListener("click", (e)=> {
+    e.stopPropagation();
+
+    window.location.href = "./homeClientProfile.html";
+  });
+
+  //===============
+  // Desktop sidebar
+  //===============
+  const sidebarProfileImage = document.getElementById("sidebarProfileImage");
+
+  sidebarProfileImage.addEventListener("click", (e)=> {
+    e.stopPropagation();
+
+    window.location.href = "./homeClientProfile.html";
+  });
+
+  //=====================================
+  // later will authenticate with creator
+  //=====================================
+  document.querySelectorAll(".creatorContentAuth").forEach(cra => {
+    cra.style.display = "none";
+  });
+
 //==================
 // SIDEBAR TOGGLE
 //==================
@@ -111,8 +140,41 @@ window.addEventListener("scroll", ()=> {
 
 
 //======================
-// ?
+// PRODUCT SKELETON UI
 //======================
+
+function fadeThumbSkeleton(delay = 5000) {
+
+  const thumbSkeleton =
+    document.querySelectorAll(".tsContainer");
+
+  if (!thumbSkeleton.length) return;
+
+  thumbSkeleton.forEach(img => {
+
+    setTimeout(() => {
+
+      img.classList.add("ts-fade-out");
+
+      setTimeout(() => {
+        img.remove();
+      }, 300);
+
+    }, delay);
+
+  });
+}
+
+fadeThumbSkeleton(5000);
+
+//===================
+// THUMB REVEAL
+//===================
+
+
+//==================
+// ?
+//==================
 });
 
 

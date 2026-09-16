@@ -1,0 +1,138 @@
+:root{
+  --sk-lightMode:  linear-gradient(
+    105deg,
+    #ffffff 0%,
+    #f3f5f7 35%,
+    #e8ebef 65%,
+    #f7f8fa 100%
+    );
+
+  --sk-backgroundWhiteMode: #fafbfc;
+  --sk-shimmer-light: linear-gradient(
+    105deg,
+    #edf0f3 0%,
+    #f9fafb 45%,
+    #e5e9ed 55%,
+    #f1f3f5 100%
+  )
+
+
+  --sk-darkMode:  linear-gradient(
+    110deg,
+    #1c2028 0%,
+    #252a33 38%,
+    #303641 68%,
+    #20252e 100%
+    );
+
+  --sk-backgroundDarkMode:  #12161d;
+  --sk-shimmer-dark: linear-gradient(
+    105deg,
+    #1d222a 0%,
+    #2b313b 45%,
+    #39414d 55%,
+    #242a33 100%
+  )
+}
+
+ .ts {  
+  background: var(--sk-lightMode); 
+  background-size: 200% 100%;  
+  animation: sk-shimmer 2.8s ease-in-out infinite;  
+  border-radius: 6px;  
+  display: flex;  
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+  will-change: background-position;
+}
+
+.dark-mode .ts {
+  background: var(--sk-darkMode); 
+  background-size: 200% 100%;
+  background-image: var(--sk-shimmer-dark);
+  animation: sk-shimmer 2.8s ease-in-out infinite;  
+  border-radius: 6px;  
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+  will-change: background-position;
+}
+
+
+
+@media(prefers-reduced-motion: reduce){
+  .ts{
+    animation: none;
+  }
+}
+
+
+
+@keyframes sk-shimmer {  
+  0%   { background-position: 200% 0; }  
+  100% { background-position: -50% 0; }  
+}  
+  
+/* ── Skeleton Overlay ── */  
+
+
+
+
+.ts,
+.ts-fade-out{
+  transform: translateZ(0);
+}
+
+
+/*** sections css */
+
+
+
+.tsContainer{
+  position: relative;
+  width: 100%;
+  z-index: 99;
+  background: var(--sk-backgroundWhiteMode);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  
+}
+
+.tsContainer.ts-fade-out{
+  opacity: 0;
+}
+
+
+.dark-mode .tsContainer{
+  background: var(--sk-backgroundDarkMode);
+}
+
+/* spinner */
+.product-spinner{
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border:  3px solid rgba(0,0,0,0.10);
+  border-radius: 50%;
+  border-top-color: #111;
+  animation: productSpinner .7s linear infinite;
+}
+
+.dark-mode .product-spinner {
+  border: 3px solid rgb(105, 101, 101);
+  border-top-color: aquamarine;
+}
+
+@keyframes productSpinner {
+  to{
+    transform: rotate(360deg);
+  }
+}
+
+

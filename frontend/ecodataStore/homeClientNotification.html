@@ -9,7 +9,7 @@
     content="EcoData Store — Discover digital products, physical goods and professional services from trusted sellers across Ghana."
   >
 
-  <title>Notifications & Messages | EcoData Store</title>
+  <title>EcoData Store | Notifications</title>
 
    <!---=== css file ===-->
   <link rel="stylesheet" href="./swiper-bundle.min.css">
@@ -137,6 +137,16 @@ themeButton.addEventListener("click", ()=> {
     <div class="sidebar-middle">
 
       <div class="customer-content">
+        <span class="aside-section-label creatorContentAuth">
+          Creator Dashboard
+        </span>
+
+        <div class="aside-nav creatorContentAuth">
+        <a onclick="window.location.href='../seller/sellerUpgradeDashboard.html'">
+          <i class="ri-dashboard-3-line"></i>
+          <span>My Dashboard</span>
+        </a>
+       </div>
 
         <span class="aside-section-label">
           Shop
@@ -319,6 +329,17 @@ themeButton.addEventListener("click", ()=> {
 
       <div class="customer-content">
 
+        <span class="aside-section-label creatorContentAuth">
+          Creator Dashboard
+        </span>
+
+        <div class="aside-nav creatorContentAuth">
+        <a onclick="window.location.href='../seller/sellerUpgradeDashboard.html'">
+          <i class="ri-dashboard-3-line"></i>
+          <span>My Dashboard</span>
+        </a>
+       </div>
+
         <span class="aside-section-label">
           Shop
         </span>
@@ -459,7 +480,7 @@ themeButton.addEventListener("click", ()=> {
 
 
       <!-- Desktop Search -->
-      <div class="desktop-search" >
+      <div class="desktop-search" style="display: none;">
 
         <i class="ri-search-line"></i>
 
@@ -694,7 +715,7 @@ themeButton.addEventListener("click", ()=> {
 
           <button
             class="notification-tab"
-            onclick="window.location.href='./homeClientMessages.html'"
+            onclick="window.location.href='./homeClientMessage.html'"
             data-tab="messages"
           >
 
@@ -1401,7 +1422,8 @@ themeButton.addEventListener("click", ()=> {
 
   </main>
 
-         <!-----BOTTOM-NAVBAR----->
+ 
+          <!-----BOTTOM-NAVBAR----->
   <div class="bottom-navbar" id="navIconDiv">
     <div class="btom-navIcon" onclick="window.location.href='./homeClient.html'">
       <div class="activeImg " id="activeMtn">
@@ -1411,7 +1433,7 @@ themeButton.addEventListener("click", ()=> {
     </div>
 
     <div class="btom-navIcon" onclick="window.location.href='./homeClientProduct.html'">
-      <div class="activeImg  " > 
+      <div class="activeImg ">
         <i class="ri-compass-3-line material-icons"></i>
       </div>
       <small class="bottomIcon-textNav">Products</small>
@@ -1421,15 +1443,15 @@ themeButton.addEventListener("click", ()=> {
    
 
 
-      <div class="btom-navIcon addBar">
-      <div class="activeImg" id="activeTel" > 
+      <div class="btom-navIcon addBar" >
+      <div class="activeImg" id="activeTel" onclick="window.location.href='./homeClientDownload.html'"> 
        <i class="ri-download-cloud-line material-icons addBtn"></i>
       </div>
       <small class="bottomIcon-textNav">My downloads</small>
     </div>
 
 
-     <div class="btom-navIcon">
+     <div class="btom-navIcon" onclick="window.location.href='./homeClientOrders.html'">
       <div class="activeImg" id="activeAir" > 
       <i class="ri-file-list-3-line material-icons"></i>
       </div>
@@ -1437,7 +1459,7 @@ themeButton.addEventListener("click", ()=> {
     </div>
 
     
-       <div class="btom-navIcon">
+       <div class="btom-navIcon" onclick="window.location.href='./homeClientProfile.html'">
       <div class="activeImg" id="activeAir" > 
       <i class="ri-user-settings-line material-icons"></i>
       </div>

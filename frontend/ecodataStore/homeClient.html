@@ -66,6 +66,8 @@ themeButton.addEventListener("click", ()=> {
   <link rel="stylesheet" href="homeClient1.css">
   <link rel="stylesheet" href="homeClient2.css">
 
+  <link rel="stylesheet" href="thumbSkeleton.css">
+
   <!-- Swiper -->
   <link
     rel="stylesheet"
@@ -133,6 +135,17 @@ themeButton.addEventListener("click", ()=> {
     <div class="sidebar-middle">
 
       <div class="customer-content">
+
+        <span class="aside-section-label creatorContentAuth">
+          Creator Dashboard
+        </span>
+
+        <div class="aside-nav creatorContentAuth">
+        <a onclick="window.location.href='../seller/sellerUpgradeDashboard.html'">
+          <i class="ri-dashboard-3-line"></i>
+          <span>My Dashboard</span>
+        </a>
+       </div>
 
         <span class="aside-section-label">
           Shop
@@ -315,6 +328,17 @@ themeButton.addEventListener("click", ()=> {
 
       <div class="customer-content">
 
+        <span class="aside-section-label creatorContentAuth">
+          Creator Dashboard
+        </span>
+
+        <div class="aside-nav creatorContentAuth">
+        <a onclick="window.location.href='../seller/sellerUpgradeDashboard.html'">
+          <i class="ri-dashboard-3-line"></i>
+          <span>My Dashboard</span>
+        </a>
+       </div>
+
         <span class="aside-section-label">
           Shop
         </span>
@@ -408,6 +432,8 @@ themeButton.addEventListener("click", ()=> {
 
     <div class="sidebar-bottom">
 
+    
+
       <div class="aside-nav">
         <a onclick="window.location.href='./homeClientSettings.html'">
           <i class="ri-settings-3-line"></i>
@@ -457,7 +483,7 @@ themeButton.addEventListener("click", ()=> {
 
 
       <!-- Desktop Search -->
-      <div class="desktop-search" >
+      <div class="desktop-search" style="display: none;">
 
         <i class="ri-search-line"></i>
 
@@ -570,9 +596,9 @@ themeButton.addEventListener("click", ()=> {
 
 
 
-    <!-- =================================================
+    <!--=================================================
         MOBILE SEARCH
-    ================================================== -->
+    ==================================================-->
     <div
       class="search"
       id="search-content"
@@ -886,7 +912,7 @@ themeButton.addEventListener("click", ()=> {
 
     
 
-          <!---PRODUCTS-CONTAINER----->
+          <!---PRODUCtsContainer----->
 <section class="products-main-container">
 
 <div class="all-products-wrapper">
@@ -1043,8 +1069,16 @@ themeButton.addEventListener("click", ()=> {
 
                 <!--=== FEATURED GRID =====-->
                 <div class="featured-side-grid">
+
                   <article class="product-card product-card-compact">
                     <div class="product-thumb">
+                        <!-- Skeleton -->  
+                      <div  class="tsContainer">  
+                        <div class="product-spinner">
+
+                        </div>  
+                      </div> 
+
                       <img src="../ecdoataStore/products/men3.png" alt="">
                       <button class="product-wishlist" aria-label="Add to wishlist">
                         <i class="ri-heart-line"></i>
@@ -1066,6 +1100,13 @@ themeButton.addEventListener("click", ()=> {
 
                    <article class="product-card product-card-compact">
                     <div class="product-thumb">
+                        <!-- Skeleton -->  
+                      <div  class="tsContainer">  
+                        <div class="product-spinner">
+
+                        </div>  
+                      </div> 
+
                       <img src="../ecdoataStore/products/men2.png" alt="">
                       <button class="product-wishlist" aria-label="Add to wishlist">
                         <i class="ri-heart-line"></i>
@@ -1087,6 +1128,12 @@ themeButton.addEventListener("click", ()=> {
 
                      <article class="product-card product-card-compact">
                     <div class="product-thumb">
+                        <!-- Skeleton -->  
+                      <div  class="tsContainer">  
+                        <div class="product-spinner">
+
+                        </div>  
+                      </div> 
                       <img src="../ecdoataStore/products/men6.png" alt="">
                       <button class="product-wishlist" aria-label="Add to wishlist">
                         <i class="ri-heart-line"></i>
@@ -1108,6 +1155,12 @@ themeButton.addEventListener("click", ()=> {
 
                    <article class="product-card product-card-compact">
                     <div class="product-thumb">
+                        <!-- Skeleton -->  
+                      <div  class="tsContainer">  
+                        <div class="product-spinner">
+
+                        </div>  
+                      </div> 
                       <img src="../ecdoataStore/products/men3.png" alt="">
                       <button class="product-wishlist" aria-label="Add to wishlist">
                         <i class="ri-heart-line"></i>
@@ -1129,6 +1182,12 @@ themeButton.addEventListener("click", ()=> {
 
                    <article class="product-card product-card-compact">
                     <div class="product-thumb">
+                        <!-- Skeleton -->  
+                      <div  class="tsContainer">  
+                        <div class="product-spinner">
+
+                        </div>  
+                      </div> 
                       <img src="../ecdoataStore/products/men6.png" alt="">
                       <button class="product-wishlist" aria-label="Add to wishlist">
                         <i class="ri-heart-line"></i>
@@ -1151,6 +1210,12 @@ themeButton.addEventListener("click", ()=> {
                   
                    <article class="product-card product-card-compact">
                     <div class="product-thumb">
+                        <!-- Skeleton -->  
+                      <div  class="tsContainer">  
+                        <div class="product-spinner">
+
+                        </div>  
+                      </div> 
                       <img src="../ecdoataStore/products/men2.png" alt="">
                       <button class="product-wishlist" aria-label="Add to wishlist">
                         <i class="ri-heart-line"></i>
@@ -1194,6 +1259,12 @@ themeButton.addEventListener("click", ()=> {
 
         <article class="product-card">
             <div class="product-thumb">
+                <!-- Skeleton -->  
+                      <div  class="tsContainer">  
+                        <div class="product-spinner">
+
+                        </div>  
+                      </div> 
                 <img src="../ecdoataStore/products/men6.png" alt="Instagram Growth Guide">
                 <span class="product-new-badge">
                     <i class="ri-flashlight-fill"></i> New
@@ -1223,6 +1294,12 @@ themeButton.addEventListener("click", ()=> {
 
         <article class="product-card">
             <div class="product-thumb">
+                <!-- Skeleton -->  
+                      <div  class="tsContainer">  
+                        <div class="product-spinner">
+
+                        </div>  
+                      </div> 
                 <img src="../ecdoataStore/products/men3.png" alt="Handmade Beaded Bracelet">
                 <span class="product-new-badge">
                     <i class="ri-flashlight-fill"></i> New
@@ -1253,6 +1330,12 @@ themeButton.addEventListener("click", ()=> {
         
         <article class="product-card">
             <div class="product-thumb">
+                <!-- Skeleton -->  
+                      <div  class="tsContainer">  
+                        <div class="product-spinner">
+
+                        </div>  
+                      </div> 
                 <img src="../ecdoataStore/products/men11.png" alt="Bluetooth Speaker Mini">
                 <span class="product-new-badge">
                     <i class="ri-flashlight-fill"></i> New
@@ -1282,6 +1365,12 @@ themeButton.addEventListener("click", ()=> {
 
           <article class="product-card">
             <div class="product-thumb">
+                <!-- Skeleton -->  
+                      <div  class="tsContainer">  
+                        <div class="product-spinner">
+
+                        </div>  
+                      </div> 
                 <img src="../ecdoataStore/products/men11.png" alt="Bluetooth Speaker Mini">
                 <span class="product-new-badge">
                     <i class="ri-flashlight-fill"></i> New
@@ -1311,6 +1400,12 @@ themeButton.addEventListener("click", ()=> {
 
         <article class="product-card">
             <div class="product-thumb">
+                <!-- Skeleton -->  
+                      <div  class="tsContainer">  
+                        <div class="product-spinner">
+
+                        </div>  
+                      </div> 
                 <img src="../ecdoataStore/products/men6.png" alt="Logo Design Starter Pack">
                 <span class="product-new-badge">
                     <i class="ri-flashlight-fill"></i> New
@@ -1340,6 +1435,12 @@ themeButton.addEventListener("click", ()=> {
 
         <article class="product-card">
             <div class="product-thumb">
+                <!-- Skeleton -->  
+                      <div  class="tsContainer">  
+                        <div class="product-spinner">
+
+                        </div>  
+                      </div> 
                 <img src="../ecdoataStore/products/men1.png" alt="Bluetooth Speaker Mini">
                 <span class="product-new-badge">
                     <i class="ri-flashlight-fill"></i> New
@@ -1369,6 +1470,12 @@ themeButton.addEventListener("click", ()=> {
 
            <article class="product-card">
             <div class="product-thumb">
+                <!-- Skeleton -->  
+                      <div  class="tsContainer">  
+                        <div class="product-spinner">
+
+                        </div>  
+                      </div> 
                 <img src="../ecdoataStore/products/men12.png" alt="Logo Design Starter Pack">
                 <span class="product-new-badge">
                     <i class="ri-flashlight-fill"></i> New
@@ -1398,6 +1505,12 @@ themeButton.addEventListener("click", ()=> {
 
          <article class="product-card">
             <div class="product-thumb">
+                <!-- Skeleton -->  
+                      <div  class="tsContainer">  
+                        <div class="product-spinner">
+
+                        </div>  
+                      </div> 
                 <img src="../ecdoataStore/products/men4.png" alt="Logo Design Starter Pack">
                 <span class="product-new-badge">
                     <i class="ri-flashlight-fill"></i> New
@@ -1465,6 +1578,12 @@ themeButton.addEventListener("click", ()=> {
 
      <article class="product-card swiper-slide">
             <div class="product-thumb">
+                <!-- Skeleton -->  
+                      <div  class="tsContainer">  
+                        <div class="product-spinner">
+
+                        </div>  
+                      </div> 
                 <img src="../ecdoataStore/products/men6.png" alt="Instagram Growth Guide">
                 <span class="product-new-badge">
                     <i class="ri-flashlight-fill"></i> New
@@ -1492,6 +1611,12 @@ themeButton.addEventListener("click", ()=> {
 
         <article class="product-card swiper-slide">
             <div class="product-thumb">
+                <!-- Skeleton -->  
+                      <div  class="tsContainer">  
+                        <div class="product-spinner">
+
+                        </div>  
+                      </div> 
                 <img src="../ecdoataStore/products/men3.png" alt="Handmade Beaded Bracelet">
                 <span class="product-new-badge">
                     <i class="ri-flashlight-fill"></i> New
@@ -1520,6 +1645,12 @@ themeButton.addEventListener("click", ()=> {
         
         <article class="product-card swiper-slide">
             <div class="product-thumb">
+                <!-- Skeleton -->  
+                      <div  class="tsContainer">  
+                        <div class="product-spinner">
+
+                        </div>  
+                      </div> 
                 <img src="../ecdoataStore/products/men11.png" alt="Bluetooth Speaker Mini">
                 <span class="product-new-badge">
                     <i class="ri-flashlight-fill"></i> New
@@ -1547,6 +1678,12 @@ themeButton.addEventListener("click", ()=> {
 
           <article class="product-card swiper-slide">
             <div class="product-thumb">
+                <!-- Skeleton -->  
+                      <div  class="tsContainer">  
+                        <div class="product-spinner">
+
+                        </div>  
+                      </div> 
                 <img src="../ecdoataStore/products/men11.png" alt="Bluetooth Speaker Mini">
                 <span class="product-new-badge">
                     <i class="ri-flashlight-fill"></i> New
@@ -1604,6 +1741,12 @@ themeButton.addEventListener("click", ()=> {
 
         <article class="product-card">
             <div class="product-thumb">
+                <!-- Skeleton -->  
+                      <div  class="tsContainer">  
+                        <div class="product-spinner">
+
+                        </div>  
+                      </div> 
                 <img src="../css/marketsImages/watch2.jpg" alt="Canva Pro Template Pack">
                 <span class="product-metric">
                     <i class="ri-eye-fill"></i> 12.4k
@@ -1632,6 +1775,12 @@ themeButton.addEventListener("click", ()=> {
 
         <article class="product-card">
             <div class="product-thumb">
+                <!-- Skeleton -->  
+                      <div  class="tsContainer">  
+                        <div class="product-spinner">
+
+                        </div>  
+                      </div> 
                 <img src="../css/marketsImages/thinkbook-back.jpg" alt="Wireless Earbuds Pro">
                 <span class="product-metric">
                     <i class="ri-eye-fill"></i> 9.8k
@@ -1658,6 +1807,12 @@ themeButton.addEventListener("click", ()=> {
 
         <article class="product-card">
             <div class="product-thumb">
+                <!-- Skeleton -->  
+                      <div  class="tsContainer">  
+                        <div class="product-spinner">
+
+                        </div>  
+                      </div> 
                 <img src="../ecdoataStore/products/men12.png" alt="Complete Web Dev Course">
                 <span class="product-metric">
                     <i class="ri-eye-fill"></i> 8.1k
@@ -1684,6 +1839,12 @@ themeButton.addEventListener("click", ()=> {
 
         <article class="product-card">
             <div class="product-thumb">
+                <!-- Skeleton -->  
+                      <div  class="tsContainer">  
+                        <div class="product-spinner">
+
+                        </div>  
+                      </div> 
                 <img src="../ecdoataStore/products/iphone.png" alt="Logo Design Service">
                 <span class="product-metric">
                     <i class="ri-eye-fill"></i> 7.3k
@@ -1715,6 +1876,12 @@ themeButton.addEventListener("click", ()=> {
 
         <article class="product-card">
             <div class="product-thumb">
+                <!-- Skeleton -->  
+                      <div class="tsContainer">  
+                        <div class="product-spinner">
+
+                        </div>  
+                      </div> 
                 <img src="../css/marketsImages/kitchen.png" alt="10GB Data Bundle">
                 <span class="product-metric product-metric-purchased">
                     <i class="ri-shopping-bag-fill"></i> 3.2k sold
@@ -1741,6 +1908,12 @@ themeButton.addEventListener("click", ()=> {
 
         <article class="product-card">
             <div class="product-thumb">
+                <!-- Skeleton -->  
+                      <div  class="tsContainer">  
+                        <div class="product-spinner">
+
+                        </div>  
+                      </div> 
                 <img src="../ecdoataStore/products/men6.png" alt="Business Plan Template">
                 <span class="product-metric product-metric-purchased">
                     <i class="ri-shopping-bag-fill"></i> 2.6k sold
@@ -1767,6 +1940,12 @@ themeButton.addEventListener("click", ()=> {
 
         <article class="product-card">
             <div class="product-thumb">
+                <!-- Skeleton -->  
+                      <div  class="tsContainer">  
+                        <div class="product-spinner">
+
+                        </div>  
+                      </div> 
                 <img src="../ecdoataStore/products/men3.png" alt="Phone Case Bundle">
                 <span class="product-metric product-metric-purchased">
                     <i class="ri-shopping-bag-fill"></i> 1.9k sold
@@ -1793,6 +1972,12 @@ themeButton.addEventListener("click", ()=> {
 
         <article class="product-card">
             <div class="product-thumb">
+                <!-- Skeleton -->  
+                      <div  class="tsContainer">  
+                        <div class="product-spinner">
+
+                        </div>  
+                      </div> 
                 <img src="../ecdoataStore/products/product1 (2).jpg" alt="CV Writing Service">
                 <span class="product-metric product-metric-purchased">
                     <i class="ri-shopping-bag-fill"></i> 1.4k sold
@@ -2453,7 +2638,7 @@ themeButton.addEventListener("click", ()=> {
 
   </main>
 
-         <!-----BOTTOM-NAVBAR----->
+  <!-----BOTTOM-NAVBAR----->
   <div class="bottom-navbar" id="navIconDiv">
     <div class="btom-navIcon" onclick="window.location.href='./homeClient.html'">
       <div class="activeImg active" id="activeMtn">
@@ -2502,17 +2687,18 @@ themeButton.addEventListener("click", ()=> {
 
   </div>
 
+
 </div>
 
 
 
 <!-- =====================================================
-     SWIPER
+  SWIPER
 ====================================================== -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
 
 <!-- =====================================================
-     MAIN JS
+  MAIN JS
 ====================================================== -->
 <script src="./scrollreveal.min.js"></script>
 

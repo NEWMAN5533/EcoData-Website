@@ -9,7 +9,7 @@
     content="EcoData Store — Discover digital products, physical goods and professional services from trusted sellers across Ghana."
   >
 
-  <title>EcoData Store | My Orders </title>
+  <title>EcoData Store | Notifications</title>
 
    <!---=== css file ===-->
   <link rel="stylesheet" href="./swiper-bundle.min.css">
@@ -66,7 +66,7 @@ themeButton.addEventListener("click", ()=> {
   <link rel="stylesheet" href="homeClient1.css">
   <link rel="stylesheet" href="homeClient2.css">
   <!--Actual page-->
-  <link rel="stylesheet" href="homeClientOrders.css">
+  <link rel="stylesheet" href="homeClientNottification.css">
 
 
   <!-- Swiper -->
@@ -132,10 +132,11 @@ themeButton.addEventListener("click", ()=> {
     </div>
 
 
+    <!-- Sidebar Navigation -->
+   
     <div class="sidebar-middle">
 
       <div class="customer-content">
-
         <span class="aside-section-label creatorContentAuth">
           Creator Dashboard
         </span>
@@ -184,7 +185,7 @@ themeButton.addEventListener("click", ()=> {
           Orders
         </span>
 
-        <div class="aside-nav active-aside">
+        <div class="aside-nav">
           <a onclick="window.location.href='./homeClientOrders.html'">
             <i class="ri-file-list-3-line"></i>
             <span>  My Orders</span>
@@ -217,7 +218,7 @@ themeButton.addEventListener("click", ()=> {
          <span> Updates</span>
         </span>
 
-        <div class="aside-nav">
+        <div class="aside-nav active-aside">
           <a onclick="window.location.href='./homeClientMessages.html'">
             <i class="ri-message-3-line"></i>
             <span>Messages</span>
@@ -225,7 +226,7 @@ themeButton.addEventListener("click", ()=> {
           </a>
         </div>
 
-        <div class="aside-nav ">
+        <div class="aside-nav">
           <a onclick="window.location.href='./homeClientNotification.html'">
             <i class="ri-notification-3-line"></i>
             <span>Notifications</span>
@@ -323,6 +324,7 @@ themeButton.addEventListener("click", ()=> {
     </div>
 
 
+   
     <div class="sidebar-middle">
 
       <div class="customer-content">
@@ -337,7 +339,7 @@ themeButton.addEventListener("click", ()=> {
           <span>My Dashboard</span>
         </a>
        </div>
-       
+
         <span class="aside-section-label">
           Shop
         </span>
@@ -375,7 +377,7 @@ themeButton.addEventListener("click", ()=> {
           Orders
         </span>
 
-        <div class="aside-nav active-aside">
+        <div class="aside-nav">
           <a onclick="window.location.href='./homeClientOrders.html'">
             <i class="ri-file-list-3-line"></i>
             <span>  My Orders</span>
@@ -408,7 +410,7 @@ themeButton.addEventListener("click", ()=> {
          <span> Updates</span>
         </span>
 
-        <div class="aside-nav">
+        <div class="aside-nav active-aside">
           <a onclick="window.location.href='./homeClientMessages.html'">
             <i class="ri-message-3-line"></i>
             <span>Messages</span>
@@ -416,7 +418,7 @@ themeButton.addEventListener("click", ()=> {
           </a>
         </div>
 
-        <div class="aside-nav ">
+        <div class="aside-nav">
           <a onclick="window.location.href='./homeClientNotification.html'">
             <i class="ri-notification-3-line"></i>
             <span>Notifications</span>
@@ -462,9 +464,7 @@ themeButton.addEventListener("click", ()=> {
       MAIN AREA
   ==================================================== -->
   <main class="main-container" id="mainContainer">
-
-
-      <!-- =================================================
+   <!-- =================================================
       NAVBAR
     ================================================== -->
     <header class="navbar" id="header">
@@ -591,13 +591,819 @@ themeButton.addEventListener("click", ()=> {
 
     </header>
 
-
     <!---============================
-     SETTINGS SECTION
+     NOTIFICATION SECTION
      =============================-->
 
 
-  
+    <section class="account-layout">
+        <header class="account-page-header">
+
+      <h1> Messages & Notifications</h1>
+
+
+      <p>
+        Stay updated with your orders, account activity,
+        store updates and messages.
+      </p>
+
+    </header>
+
+
+      <!-- ==========================================
+           CONTENT
+      =========================================== -->
+
+      <section class="notifications-content">
+
+
+        <!-- ======================================
+             SUMMARY
+        ======================================= -->
+
+        <div class="notification-summary">
+
+
+          <div class="notification-summary-card">
+
+            <div class="notification-summary-icon">
+
+              <i class="ri-notification-3-line" style=" color: rgb(16, 196, 142)"></i>
+
+            </div>
+
+            <div>
+
+              <span>Unread</span>
+
+              <strong id="unreadTotal">
+                4
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <div class="notification-summary-card">
+
+            <div class="notification-summary-icon">
+
+              <i class="ri-shopping-bag-3-line"></i>
+
+            </div>
+
+            <div>
+
+              <span>Order Updates</span>
+
+              <strong id="orderNotificationTotal">
+                2
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <div class="notification-summary-card">
+
+            <div class="notification-summary-icon">
+
+              <i class="ri-message-3-line" style=" color: rgb(16, 196, 97)"></i>
+
+            </div>
+
+            <div>
+
+              <span>Messages</span>
+
+              <strong id="messageTotal">
+                3
+              </strong>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- ======================================
+             TABS
+        ======================================= -->
+
+        <div class="notification-tabs">
+
+          <button
+            class="notification-tab "
+            onclick="window.location.href='./homeClientNotification.html'"
+            data-tab="notifications"
+          >
+
+            <i class="ri-notification-3-line"></i>
+
+            Notifications
+
+            <span id="notificationTabCount">
+              4
+            </span>
+
+          </button>
+
+
+          <button
+            class="notification-tab active"
+            onclick="window.location.href='./homeClientMessage.html'"
+            data-tab="messages"
+          >
+
+            <i class="ri-message-3-line"></i>
+
+            Messages
+
+            <span id="messageTabCount">
+              2
+            </span>
+
+          </button>
+
+        </div>
+
+
+
+        <!-- ======================================
+             NOTIFICATIONS PANEL
+        ======================================= -->
+
+        <div
+          class="notification-panel active"
+          id="notificationsPanel"
+        >
+
+
+          <div class="notification-toolbar">
+
+            <div>
+
+              <h2>
+                Notifications
+              </h2>
+
+              <span>
+                Your latest account activity
+              </span>
+
+            </div>
+
+
+            <div class="notification-actions">
+
+              <button
+                class="notification-action-btn"
+                id="markAllReadBtn"
+              >
+
+                <i class="ri-check-double-line"></i>
+
+                Mark all read
+
+              </button>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- FILTERS -->
+
+          <div class="notification-filters">
+
+            <button
+              class="notification-filter active"
+              data-filter="all"
+            >
+              All
+            </button>
+
+            <button
+              class="notification-filter"
+              data-filter="unread"
+            >
+              Unread
+            </button>
+
+            <button
+              class="notification-filter"
+              data-filter="orders"
+            >
+              Orders
+            </button>
+
+            <button
+              class="notification-filter"
+              data-filter="promotions"
+            >
+              Promotions
+            </button>
+
+            <button
+              class="notification-filter"
+              data-filter="security"
+            >
+              Security
+            </button>
+
+          </div>
+
+
+
+          <!-- NOTIFICATION LIST -->
+
+          <div
+            class="notification-list"
+            id="notificationList"
+          >
+
+
+            <!-- ORDER -->
+
+            <article
+              class="notification-item unread"
+              data-type="orders"
+              data-id="n1"
+            >
+
+              <div class="notification-item-icon order">
+
+                <i class="ri-shopping-bag-3-line"></i>
+
+              </div>
+
+
+              <div class="notification-item-body">
+
+                <div class="notification-item-top">
+
+                  <strong>
+                    Your order is being processed
+                  </strong>
+
+                  <time>
+                    15 min ago
+                  </time>
+
+                </div>
+
+
+                <p>
+                  Order ED-20260908-1024 is currently
+                  being processed by the seller.
+                </p>
+
+
+                <div class="notification-item-meta">
+
+                  <span>
+                    Order Update
+                  </span>
+
+                  <a href="orders.html">
+                    View order
+                  </a>
+
+                </div>
+
+              </div>
+
+
+              <button
+                class="notification-more"
+                title="More"
+              >
+                <i class="ri-more-2-fill"></i>
+              </button>
+
+            </article>
+
+
+
+            <!-- DELIVERY -->
+
+            <article
+              class="notification-item unread"
+              data-type="orders"
+              data-id="n2"
+            >
+
+              <div class="notification-item-icon delivery">
+
+                <i class="ri-truck-line"></i>
+
+              </div>
+
+
+              <div class="notification-item-body">
+
+                <div class="notification-item-top">
+
+                  <strong>
+                    Your order has been delivered
+                  </strong>
+
+                  <time>
+                    Yesterday
+                  </time>
+
+                </div>
+
+
+                <p>
+                  Modern Professional CV Template
+                  is now available in your downloads.
+                </p>
+
+
+                <div class="notification-item-meta">
+
+                  <span>
+                    Delivery
+                  </span>
+
+                  <a href="downloads.html">
+                    Open download
+                  </a>
+
+                </div>
+
+              </div>
+
+
+              <button
+                class="notification-more"
+                title="More"
+              >
+                <i class="ri-more-2-fill"></i>
+              </button>
+
+            </article>
+
+
+
+            <!-- PROMOTION -->
+
+            <article
+              class="notification-item unread"
+              data-type="promotions"
+              data-id="n3"
+            >
+
+              <div class="notification-item-icon promotion">
+
+                <i class="ri-gift-line"></i>
+
+              </div>
+
+
+              <div class="notification-item-body">
+
+                <div class="notification-item-top">
+
+                  <strong>
+                    September Store Promotion
+                  </strong>
+
+                  <time>
+                    2 days ago
+                  </time>
+
+                </div>
+
+
+                <p>
+                  New products and special offers are now
+                  available in the EcoData Store.
+                </p>
+
+
+                <div class="notification-item-meta">
+
+                  <span>
+                    Promotion
+                  </span>
+
+                  <a href="index.html">
+                    Browse store
+                  </a>
+
+                </div>
+
+              </div>
+
+
+              <button
+                class="notification-more"
+                title="More"
+              >
+                <i class="ri-more-2-fill"></i>
+              </button>
+
+            </article>
+
+
+
+            <!-- SECURITY -->
+
+            <article
+              class="notification-item unread"
+              data-type="security"
+              data-id="n4"
+            >
+
+              <div class="notification-item-icon security">
+
+                <i class="ri-shield-check-line"></i>
+
+              </div>
+
+
+              <div class="notification-item-body">
+
+                <div class="notification-item-top">
+
+                  <strong>
+                    New login detected
+                  </strong>
+
+                  <time>
+                    3 days ago
+                  </time>
+
+                </div>
+
+
+                <p>
+                  Your account was accessed from a new
+                  Android device.
+                </p>
+
+
+                <div class="notification-item-meta">
+
+                  <span>
+                    Security
+                  </span>
+
+                  <a href="security.html">
+                    Review security
+                  </a>
+
+                </div>
+
+              </div>
+
+
+              <button
+                class="notification-more"
+                title="More"
+              >
+                <i class="ri-more-2-fill"></i>
+              </button>
+
+            </article>
+
+
+
+            <!-- READ -->
+
+            <article
+              class="notification-item"
+              data-type="orders"
+              data-id="n5"
+            >
+
+              <div class="notification-item-icon payment">
+
+                <i class="ri-bank-card-line"></i>
+
+              </div>
+
+
+              <div class="notification-item-body">
+
+                <div class="notification-item-top">
+
+                  <strong>
+                    Payment confirmed
+                  </strong>
+
+                  <time>
+                    Sep 8
+                  </time>
+
+                </div>
+
+
+                <p>
+                  Your payment for order
+                  ED-20260908-1024 was received successfully.
+                </p>
+
+
+                <div class="notification-item-meta">
+
+                  <span>
+                    Payment
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <button
+                class="notification-more"
+                title="More"
+              >
+                <i class="ri-more-2-fill"></i>
+              </button>
+
+            </article>
+
+
+          </div>
+
+
+          <!-- EMPTY STATE -->
+
+          <div
+            class="notification-empty"
+            id="notificationEmpty"
+          >
+
+            <div class="notification-empty-icon">
+
+              <i class="ri-notification-off-line"></i>
+
+            </div>
+
+            <strong>
+              No notifications
+            </strong>
+
+            <span>
+              You're all caught up.
+            </span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ======================================
+             MESSAGES PANEL
+        ======================================= -->
+
+        <div
+          class="notification-panel"
+          id="messagesPanel"
+        >
+
+
+          <div class="notification-toolbar">
+
+            <div>
+
+              <h2>
+                Messages
+              </h2>
+
+              <span>
+                Conversations and support messages
+              </span>
+
+            </div>
+
+
+            <button
+              class="notification-action-btn"
+              id="newMessageBtn"
+            >
+
+              <i class="ri-add-line"></i>
+
+              New Message
+
+            </button>
+
+          </div>
+
+
+
+          <!-- MESSAGE SEARCH -->
+
+          <div class="message-search">
+
+            <i class="ri-search-line"></i>
+
+            <input
+              type="search"
+              id="messageSearch"
+              placeholder="Search messages..."
+            >
+
+          </div>
+
+
+
+          <!-- MESSAGE LIST -->
+
+          <div
+            class="message-list"
+            id="messageList"
+          >
+
+
+            <!-- SUPPORT -->
+
+            <article
+              class="message-item unread"
+              data-message-id="m1"
+              data-search="ecodata support order help"
+            >
+
+              <div class="message-avatar support">
+
+                <i class="ri-customer-service-2-line"></i>
+
+              </div>
+
+
+              <div class="message-body">
+
+                <div class="message-top">
+
+                  <strong>
+                    EcoData Support
+                  </strong>
+
+                  <time>
+                    20 min ago
+                  </time>
+
+                </div>
+
+
+                <p class="message-subject">
+                  Order assistance
+                </p>
+
+
+                <p class="message-preview">
+                  Hello, we've received your request
+                  and are checking the order status...
+                </p>
+
+              </div>
+
+
+              <span class="message-unread-dot"></span>
+
+            </article>
+
+
+
+            <!-- SELLER -->
+
+            <article
+              class="message-item unread"
+              data-message-id="m2"
+              data-search="seller modern cv template"
+            >
+
+              <div class="message-avatar seller">
+
+                <i class="ri-store-2-line"></i>
+
+              </div>
+
+
+              <div class="message-body">
+
+                <div class="message-top">
+
+                  <strong>
+                    Creative Templates
+                  </strong>
+
+                  <time>
+                    Yesterday
+                  </time>
+
+                </div>
+
+
+                <p class="message-subject">
+                  Your digital product
+                </p>
+
+
+                <p class="message-preview">
+                  Thank you for purchasing. Your files
+                  have been updated with the latest version.
+                </p>
+
+              </div>
+
+
+              <span class="message-unread-dot"></span>
+
+            </article>
+
+
+
+            <!-- ECODATA -->
+
+            <article
+              class="message-item"
+              data-message-id="m3"
+              data-search="ecodata store welcome"
+            >
+
+              <div class="message-avatar store">
+
+                <i class="ri-store-line"></i>
+
+              </div>
+
+
+              <div class="message-body">
+
+                <div class="message-top">
+
+                  <strong>
+                    EcoData Store
+                  </strong>
+
+                  <time>
+                    Sep 5
+                  </time>
+
+                </div>
+
+
+                <p class="message-subject">
+                  Welcome to EcoData Store
+                </p>
+
+
+                <p class="message-preview">
+                  Your marketplace account is ready.
+                  Start exploring products, services...
+                </p>
+
+              </div>
+
+            </article>
+
+
+          </div>
+
+
+
+          <!-- MESSAGE EMPTY -->
+
+          <div
+            class="message-empty"
+            id="messageEmpty"
+          >
+
+            <div class="notification-empty-icon">
+
+              <i class="ri-message-3-line"></i>
+
+            </div>
+
+            <strong>
+              No messages found
+            </strong>
+
+            <span>
+              Your conversations will appear here.
+            </span>
+
+          </div>
+
+        </div>
+
+
+      </section>
+
+    </section>
 
 
 
@@ -617,8 +1423,7 @@ themeButton.addEventListener("click", ()=> {
 
   </main>
 
-         <!-----BOTTOM-NAVBAR----->
-         <!-----BOTTOM-NAVBAR----->
+            <!-----BOTTOM-NAVBAR----->
   <div class="bottom-navbar" id="navIconDiv">
     <div class="btom-navIcon" onclick="window.location.href='./homeClient.html'">
       <div class="activeImg " id="activeMtn">
@@ -647,7 +1452,7 @@ themeButton.addEventListener("click", ()=> {
 
 
      <div class="btom-navIcon" onclick="window.location.href='./homeClientOrders.html'">
-      <div class="activeImg active" id="activeAir" > 
+      <div class="activeImg" id="activeAir" > 
       <i class="ri-file-list-3-line material-icons"></i>
       </div>
       <small class="bottomIcon-textNav"> Orders</small>
@@ -688,7 +1493,7 @@ themeButton.addEventListener("click", ()=> {
 
 <script src="./homeClientStoreMain.js"></script>
 
-<script src="./homeClientOrders.js"></script>
+<script src="./homeClientNotification.js"></script>
 
 
 
