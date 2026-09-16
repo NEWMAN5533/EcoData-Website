@@ -1,142 +1,10 @@
 
-// GIVEAWAY TIMER 
-const GIVEAWAY_TIMER_START = new Date("2026-09-01T23:59:59");
-const GIVEAWAY_TIMER_ENDS = new Date("2026-09-30T23:59:59");
+
 
 
 // CUSTOM CURSOR JS
   document.addEventListener("DOMContentLoaded", () => {
 
-  //======================
-  // ORDER STATUS CHECKER
-  //=======================
-
-
-  const panelSwitch = document.getElementById("panelSwitch");
-  const panelContainer = document.getElementById("sidePanel");
-  const statusCheckerBtn = document.getElementById("checkOrderStat");
-
-function openPanel(){
-  panelContainer.style.right = ".5rem";
-  
-  panelSwitch.style.right = "-200px";
-}
-
-function closePanel(){
-  panelContainer.style.right = "-200px";
-
-  panelSwitch.style.right = "-3.8rem";
-}
-
-// Switch
-panelSwitch.addEventListener("click", (event) => {
-  event.stopPropagation();
-
-  if(panelContainer.style.right === ".5rem"){
-    closePanel();
-  } else{
-    openPanel();
-  }
-});
-
-
-// keep clicks inside the panel from closing
-panelContainer.addEventListener("click", (event)=> {
-  event.stopPropagation();
-});
-
-// window clicking outside check
-window.addEventListener("click", (event) => {
-  // ignore clicks on the switch
-  if(panelSwitch.contains(event.target)){
-    return;
-  }
-
-  // ignore clicks on panelContainer
-  if(panelContainer.contains(event.target)){
-    return;
-  }
-
-
-  closePanel();
-})
-
-
-//===========================
-// CHECK MODAL
-//===========================
-const statusCheckModal = document.getElementById("statusCheckModal");
-const closeStatusCheckModal = document.getElementById("closeStatusCheckModal");
-
-const webMenuIcon = document.getElementById("sidebarViewer");
-
-
-
-
-
-// isOpen function
-function isStatusModalOpen(){
-
- 
-  webMenuIcon.style.display = "none";
- 
-}
-
-// add close function
-function statusModalClose(){
- statusCheckModal.style.top = "-200%";
- webMenuIcon.style.display = "flex";
-
-}
-
-
-
-// add eventlistener
-closeStatusCheckModal.addEventListener("click", ()=> {
- statusModalClose();
-})
-
-
-
-//===========================
-// CHECK MODAL ENDS
-//===========================
-
-function openCheckModal() {
-  statusCheckModal.style.top = "3.4rem";
-}
-
-
-function checkMe(){
-    statusCheckerBtn.addEventListener("click", (e)=> {
-      e.stopPropagation();
-
-      if(statusCheckModal.style.display === "flex"){
-        statusModalClose();
-      } else{
-        openCheckModal();
-      }
-
-      isStatusModalOpen();
-  })
-  
-}
-
-checkMe();
-
-
-  //===========================
-  // ORDER STATUS CHECKER ENDS
-  //===========================
-
-
-
-    // total orders
-    const totalCustomersOrders = document.getElementById("stat-num");
-    if(totalCustomersOrders){
-      totalCustomersOrders.textContent = 
-      "1.44K+";
-    }
 
   //===================================
   // STATE MANAGEMENT (PAGE ROUTING)
@@ -146,101 +14,26 @@ const shoppingBtn = document.getElementById("shoppingBtn");
 shoppingBtn.addEventListener("click", (e) =>{
   e.stopPropagation();
 if(shoppingBtn){
-  window.location.href = '#';
+  window.location.href = './homeClient.html';
 
- showSnackBar(" ✅ Coming up soon for sellers and buyers. You can Buy Data bundle, and register AFA. Thank You", "success", 5000);
+ // showSnackBar(" ✅ Coming up soon for sellers and buyers. You can Buy Data bundle, and register AFA. Thank You", "success", 5000);
   
 }
 });
 
 
+    // total orders
+    const totalCustomersOrders = document.getElementById("stat-num");
+    if(totalCustomersOrders){
+      totalCustomersOrders.textContent = 
+      "1.44K+";
+    }
+
+
+
  //===================================
   // STATE MANAGEMENT (PAGE ROUTING)
   //==================================
-
-
-
-// GIVE AWAY JS
-const giveawayDays = 
-document.getElementById("giveawayDays");
-
-const giveawayHours =
-document.getElementById("giveawayHours");
-
-const giveawayMinutes = 
-document.getElementById("giveawayMinutes");
-
-const giveawaySeconds =
-document.getElementById("giveawaySeconds");
-
-const giveawayStatus =
-document.getElementById("giveawayStatus");
-
-
-function updateGiveawayCountdown(){
-
-  const now = new Date();
-
-  const remaining =
- GIVEAWAY_TIMER_ENDS - now;
-
-  if(remaining <= 0){
-  
-    giveawayDays.textContent = "00";
-    giveawayHours.textContent = "00";
-    giveawayMinutes.textContent = "00";
-
-
-    giveawayStatus.textContent = 
-    "GIVEAWAY ENDED";
-
-    clearInterval(giveawayTimer);
-
-    return;
-  }
-
-  const days = 
-  Math.floor(
-    remaining / (1000 * 60 * 60 * 24)
-  );
-
-  const hours =
-  Math.floor(
-    (remaining % (1000 * 60 * 60 * 24)
-  ) / ( 1000 * 60 * 60)
-);
-
- const minutes =
- Math.floor(
-  (remaining % (1000 * 60 * 60)) / (1000 * 60)
- );
-
-
-
-
-
-
- 
- giveawayDays.textContent = 
- String(days).padStart(2, "0");
-
-  giveawayHours.textContent = 
- String(hours).padStart(2, "0");
-
-  giveawayMinutes.textContent = 
- String(minutes).padStart(2, "0");
-
-
-}
-
-
-
-updateGiveawayCountdown();
-
-const giveawayTimer =
-setInterval(updateGiveawayCountdown, 1000);
-
-
 
 
 
@@ -273,37 +66,6 @@ setInterval(updateGiveawayCountdown, 1000);
     requestAnimationFrame(animateRing);
   }
   animateRing();
-
-
-
- // SHARE BTN
- const shareBtn = document.getElementById("shareBtn");
-
- shareBtn.addEventListener('click', async () =>
-{
-  const shareData = {
-    title: "EcoData",
-    text: "Check out Ecodata Website, the smartest, digital and trusted data bundle purchase website y'll love to use.",
-    url: window.location.href
-  };
-
-  // Native share
-  if (navigator.share) {
-    try {
-      await navigator.share(shareData);
-    } catch (err) {
-      console.log("Share Cancelled");
-    }
-  }
- 
-  // FallBack (Desktop)
-  else {
-    navigator.clipboard.writeText(shareData.url).then(() => {
-      showSnackBar("Link copied! ");
-  });
-}
-});
-
 
 
 
@@ -402,52 +164,6 @@ const cardCloser = document.getElementById("ecoDataSidebar");
 })
 
 
-// whatsApp sending message btn
- // === CONFIG ===
-  const whatsappNumber = "233535565637";
-
-  // === ELEMENTS ===
-  const chatButton = document.getElementById("chatButton");
-  const chatBox = document.getElementById("chatBox");
-  const sendBtn = document.getElementById("sendMsgBtn");
-
-  // === TOGGLE CHAT BOX ===
-  chatButton.addEventListener("click", () => {
-    chatBox.classList.toggle("show");
-  });
-
-  // === SEND MESSAGE ===
-  sendBtn.addEventListener("click", () => {
-    const message = document.getElementById("whatsappMessage").value.trim();
-    if (!message) {
-      showSnackBar("Please type your message before sending.");
-      return;
-    }
-
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappURL =` https://wa.me/${233535565637}?text=${encodedMessage}`;
-    window.open(whatsappURL, "_blank");
-    document.getElementById("whatsappMessage").value = ""; // clear after sending
-});
-
-// window click event (chatBox)
-window.addEventListener("click", function(e){
-  e.stopPropagation();
-  if(!chatBox.contains(e.target) && !chatButton.contains(e.target)){
-    chatBox.style.display = "none";
-  } else{
-    chatBox.style.display = "flex";
-  }
-
-
-
-
-
-
-
-
-
-});
 
 
 
