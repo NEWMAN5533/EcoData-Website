@@ -1,4 +1,5 @@
-.processing{
+.processing,
+.leaderboard{
   background: orange;
   color: rgb(243, 234, 183);
 
@@ -35,7 +36,8 @@
 
 
 /* Shimmer */
-.processing::after {
+.processing::after, 
+.leaderboard::after
   content: "";
 
   position: absolute;
