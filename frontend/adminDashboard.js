@@ -406,7 +406,7 @@ if (addLeaderBtn) {
         // specifically for leaderboard management.
         if (
           order.source === "admin" &&
-          order.status === "leaderboard"
+          order.LD_Status === "leaderboard"
         ) {
 
           const updatedTime =
@@ -489,6 +489,8 @@ if (addLeaderBtn) {
 
             LD_Status: "leaderboard",
 
+            status: "pending",
+            
             source: "admin",
 
             createdAt: new Date(),
@@ -528,7 +530,7 @@ if (addLeaderBtn) {
           // as the leaderboard record.
           source: "admin",
 
-          status: "leaderboard"
+          LD_Status: "leaderboard"
 
         }
       );
@@ -657,7 +659,7 @@ async function saveManualPoints(
 
       if (
         order.source !== "admin" ||
-        order.status !== "leaderboard"
+        order.LD_Status !== "leaderboard"
       ) {
         return;
       }
@@ -754,7 +756,7 @@ async function saveManualPoints(
 
         source: "admin",
 
-        status: "leaderboard"
+        LD_Status: "leaderboard"
 
       }
     );
