@@ -17,7 +17,6 @@ import {
   collection,
   onSnapshot,
   updateDoc,
-  addDoc,
   query as firestoreQuery,
   query,
   doc,
@@ -406,7 +405,7 @@ if (addLeaderBtn) {
         // specifically for leaderboard management.
         if (
           order.source === "admin" &&
-          order.LD_Status === "leaderboard"
+          order.status === "leaderboard"
         ) {
 
           const updatedTime =
@@ -489,8 +488,6 @@ if (addLeaderBtn) {
 
             LD_Status: "leaderboard",
 
-            status: "pending",
-            
             source: "admin",
 
             createdAt: new Date(),
@@ -659,7 +656,7 @@ async function saveManualPoints(
 
       if (
         order.source !== "admin" ||
-        order.LD_Status !== "leaderboard"
+        order.status !== "leaderboard"
       ) {
         return;
       }
@@ -756,7 +753,7 @@ async function saveManualPoints(
 
         source: "admin",
 
-        LD_Status: "leaderboard"
+        status: "leaderboard"
 
       }
     );

@@ -1020,7 +1020,7 @@ function unActivateTrackers(){
  const firstTracker = document.getElementById("deliveryTracker1").style.display = "none";
 
  const secondTracker = document.getElementById("deliveryTracker2").style.display = "none";
-};
+}
 
 //=================================
 // ACTIVATE DELIVERY TRACKER ENDS
@@ -2997,14 +2997,16 @@ function addOrderToLeaderboard(customers, order) {
     const customer =
         customers[phone];
 
-   
+    const isAdminLeaderboard =
+    order.LD_Status === "leaderboard" ||
+    order.status === "leaderboard";
 
 
     //========================================
     // NORMAL CUSTOMER ORDER
     //========================================
 
-    
+    if(!isAdminLeaderboard){
     const gb =
         Number(order.volume || 0);
 
@@ -3018,7 +3020,7 @@ function addOrderToLeaderboard(customers, order) {
 
     customer.totalSpent += amount;
 
-  
+    }
 
     //========================================
     // CHECK MANUAL POINTS FROM ADMIN
