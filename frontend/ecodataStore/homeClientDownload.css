@@ -548,7 +548,7 @@ body.dark-mode{
 
   outline: none;
 
-  background: rgba(128, 128, 128, .025);
+  background: var(--color-light);
 
   color: var(--product-card-text);
   font-size: 10px;
