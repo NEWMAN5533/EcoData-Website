@@ -273,10 +273,83 @@
    SETTINGS CARD
 ========================================= */
 
-.settings-card {
-  background: #fff;
 
-  border: 1px solid rgba(128, 128, 128, .15);
+body,
+button,
+input {
+  font-family: 'Inter', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+small,
+span,
+strong,
+p {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+h1,h2,h3,strong{
+  color: var(--product-card-text);
+}
+
+
+
+.account-container{
+  width: 100%;
+  max-width: 94%;
+
+  justify-self: center;
+ 
+}
+
+@media screen and (max-width: 600px) {
+  .account-container{
+   margin: 0 0 4rem 0;
+  }
+}
+
+
+.account-page-header{
+  width: 100%;
+  max-width: 94%;
+  margin: 10px;
+  padding: 0 10px 0 0;
+}
+
+@media screen and (min-width: 768px) {
+  .account-page-header{
+    padding: 0 20px;
+  }
+}
+
+.account-page-badge{
+  color: var(--product-card-text) !important;
+  opacity: .8;
+  font-size: .8rem;
+}
+
+.account-page-header h1{
+  font-size: 1.6rem;
+  color: var(--product-card-text);
+  opacity: .9;
+}
+
+.account-page-header p{
+  color: var(--text-faint);
+  opacity: .8;
+  font-size: .7rem;
+}
+
+
+.settings-card {
+  background: var(--color-white);
+
+  border: 1px solid var(--border);
 
   border-radius: 16px;
 
@@ -520,9 +593,7 @@
 
   background: rgba(128, 128, 128, .025);
 
-  transition:
-    border-color .2s ease,
-    background .2s ease;
+
 }
 
 
@@ -555,7 +626,8 @@
 
   background: transparent;
 
-  color: inherit;
+  color: var(--product-card-text);
+  opacity: .8;
 
   font: inherit;
 
@@ -590,7 +662,7 @@
 
   border-radius: 14px;
 
-  background: rgba(128, 128, 128, .035);
+  background: var(--color-light);
 }
 
 
@@ -614,99 +686,21 @@
 
 .settings-save-bar .account-btn {
   flex-shrink: 0;
+
+  padding: .4rem;
+  border-radius: 6px;
+  background: var(--color-white);
+  color: var(--product-card-text);
+  
+  border: 1px solid var(--border);
 }
 
-
-/* =========================================
-   DARK MODE
-========================================= */
-
-body.dark-mode .settings-card {
-  background: #171717;
-
-  border-color: rgba(255, 255, 255, .09);
+@media screen and (max-width: 600px){
+  .settings-save-bar .account-btn {
+    box-shadow: var(--shadow-sm);
+  }
 }
 
-
-body.dark-mode .settings-card-header {
-  border-bottom-color: rgba(255, 255, 255, .07);
-}
-
-
-body.dark-mode .settings-card-header > i,
-body.dark-mode .settings-row-icon {
-  background: rgba(255, 255, 255, .06);
-
-  color: #999;
-}
-
-
-body.dark-mode .settings-card-header p,
-body.dark-mode .settings-row-info span {
-  color: #888;
-}
-
-
-body.dark-mode .settings-row {
-  border-bottom-color: rgba(255, 255, 255, .07);
-}
-
-
-body.dark-mode .settings-field label {
-  color: #aaa;
-}
-
-
-body.dark-mode .settings-select {
-  background: rgba(255, 255, 255, .025);
-
-  border-color: rgba(255, 255, 255, .1);
-}
-
-
-body.dark-mode .settings-select:focus-within {
-  border-color: rgba(255, 255, 255, .25);
-
-  background: rgba(255, 255, 255, .04);
-}
-
-
-body.dark-mode .settings-select select {
-  color: #ddd;
-}
-
-
-body.dark-mode .settings-select select option {
-  background: #1d1d1d;
-  color: #eee;
-}
-
-
-body.dark-mode .settings-save-bar {
-  background: rgba(255, 255, 255, .025);
-
-  border-color: rgba(255, 255, 255, .09);
-}
-
-
-body.dark-mode .settings-save-bar span {
-  color: #777;
-}
-
-
-body.dark-mode .toggle-slider {
-  background: rgba(255, 255, 255, .15);
-}
-
-
-body.dark-mode .settings-toggle input:checked + .toggle-slider {
-  background: #eee;
-}
-
-
-body.dark-mode .settings-toggle input:checked + .toggle-slider::before {
-  background: #111;
-}
 
 
 /* =========================================
