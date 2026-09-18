@@ -322,7 +322,9 @@ function renderOrders(orders) {
 const addLeaderBtn =
   document.getElementById("addLeaderPoints");
 
-if (addLeaderBtn) {
+
+
+  if (addLeaderBtn) {
 
   addLeaderBtn.addEventListener("click", async () => {
 
@@ -330,20 +332,31 @@ if (addLeaderBtn) {
       document.getElementById("phone").value.trim();
 
     const manualPoints =
-      Number(document.getElementById("manualPoints").value);
+      Number(
+        document.getElementById("manualPoints").value
+      );
 
     const gb =
-      Number(document.getElementById("leaderGB").value);
+      Number(
+        document.getElementById("leaderGB").value
+      );
 
     if (!phone) {
-      showSnackBar("Enter customer phone.", "warning");
+      showSnackBar(
+        "Enter customer phone.",
+        "warning"
+      );
       return;
     }
 
     if (!gb || gb <= 0) {
-      showSnackBar("Enter valid GB.", "warning");
+      showSnackBar(
+        "Enter valid GB.",
+        "warning"
+      );
       return;
     }
+
 
     //=========================
     // CALCULATE POINTS
@@ -353,80 +366,85 @@ if (addLeaderBtn) {
         ? manualPoints
         : gb * 6;
 
+
     try {
 
       const db = window.FIRESTORE;
 
       if (!db) {
-        showSnackBar("Firestore is not available.", "error");
+        showSnackBar(
+          "Firestore is not available.",
+          "error"
+        );
         return;
       }
 
+
       //========================================
-      // GET ALL ORDERS
-      // NO FIRESTORE ORDERBY / INDEX NEEDED
+      // GET ORDERS
       //========================================
       const q =
-        query(collection(db, "orders"));
+        query(
+          collection(db, "orders")
+        );
 
       const snapshot =
         await getDocs(q);
 
-      let matchingOrders = [];
+
+      //========================================
+      // FIND ONLY ADMIN LEADERBOARD RECORDS
+      //========================================
+      let manualRecord = null;
+      let latestManualTime = 0;
+
 
       snapshot.forEach(doc => {
 
         const order = doc.data();
 
         const orderPhone =
-          String(order.recipient || "").trim();
-
-        if (orderPhone !== phone) return;
-
-        matchingOrders.push({
-          id: doc.id,
-          ref: doc.ref,
-          data: order
-        });
-
-      });
+          String(
+            order.recipient || ""
+          ).trim();
 
 
-      //========================================
-      // FIND EXISTING MANUAL LEADERBOARD RECORD
-      //========================================
-      let manualRecord = null;
+        if (orderPhone !== phone) {
+          return;
+        }
 
-      matchingOrders.forEach(item => {
 
-        const order = item.data;
-
-        // Prefer records created by the admin
-        // specifically for leaderboard management.
+        // IMPORTANT:
+        // Only records specifically created
+        // for leaderboard management.
         if (
-          order.source === "admin" &&
-          order.status === "leaderboard"
+          order.source !== "admin" ||
+          order.LD_Status !== "leaderboard"
+        ) {
+          return;
+        }
+
+
+        const updatedTime =
+          order.manualUpdatedAt?.toMillis
+            ? order.manualUpdatedAt.toMillis()
+            : new Date(
+                order.manualUpdatedAt || 0
+              ).getTime();
+
+
+        if (
+          !manualRecord ||
+          updatedTime > latestManualTime
         ) {
 
-          const updatedTime =
-            order.manualUpdatedAt?.toMillis
-              ? order.manualUpdatedAt.toMillis()
-              : new Date(
-                  order.manualUpdatedAt || 0
-                ).getTime();
+          manualRecord = {
+            ref: doc.ref,
+            data: order
+          };
 
-          if (
-            !manualRecord ||
-            updatedTime >
-            manualRecord.updatedTime
-          ) {
-
-            manualRecord = {
-              ...item,
-              updatedTime
-            };
-
-          }
+          latestManualTime =
+            updatedTime;
 
         }
 
@@ -434,73 +452,40 @@ if (addLeaderBtn) {
 
 
       //========================================
-      // IF NO DEDICATED MANUAL RECORD EXISTS
-      // FIND THE MOST RECENT ORDER
+      // ADMIN LEADERBOARD RECORD EXISTS
       //========================================
-      if (!manualRecord && matchingOrders.length) {
+      if (manualRecord) {
 
-        let latestOrder = null;
-        let latestTime = 0;
-
-        matchingOrders.forEach(item => {
-
-          const order = item.data;
-
-          const time =
-            order.createdAt?.toMillis
-              ? order.createdAt.toMillis()
-              : new Date(
-                  order.createdAt || 0
-                ).getTime();
-
-          if (time > latestTime) {
-
-            latestTime = time;
-            latestOrder = item;
-
-          }
-
-        });
-
-        manualRecord = latestOrder;
-
-      }
-
-
-      //========================================
-      // CREATE NEW LEADERBOARD RECORD
-      //========================================
-      if (!manualRecord) {
-
-        await addDoc(
-          collection(db, "orders"),
+        await updateDoc(
+          manualRecord.ref,
           {
-
-            recipient: phone,
 
             manualPoints: points,
 
             manualGB: gb,
 
-            volume: gb,
+            // Keep this record separate
+            // from normal delivery orders.
+            volume: 0,
 
             amount: 0,
 
-            LD_Status: "leaderboard",
-
             source: "admin",
 
-            createdAt: new Date(),
+            LD_Status: "leaderboard",
 
-            updatedAt: new Date(),
+            manualUpdatedAt:
+              serverTimestamp(),
 
-            manualUpdatedAt: new Date()
+            updatedAt:
+              serverTimestamp()
 
           }
         );
 
+
         showSnackBar(
-          "New leaderboard member created.",
+          `${phone} updated to ${points} points.`,
           "success"
         );
 
@@ -509,32 +494,49 @@ if (addLeaderBtn) {
 
 
       //========================================
-      // UPDATE EXISTING RECORD
+      // NO ADMIN RECORD
+      //
+      // CREATE A SEPARATE RECORD.
+      //
+      // NEVER MODIFY A REAL ORDER.
       //========================================
-      await updateDoc(
-        manualRecord.ref,
+      await addDoc(
+        collection(db, "orders"),
         {
+
+          recipient: phone,
 
           manualPoints: points,
 
           manualGB: gb,
 
-          manualUpdatedAt: new Date(),
+          // IMPORTANT:
+          // Do NOT put the assigned GB here.
+          // This is not a data purchase.
+          volume: 0,
 
-          updatedAt: new Date(),
+          amount: 0,
 
-          // Make sure it remains identifiable
-          // as the leaderboard record.
+          // Dedicated leaderboard marker
+          LD_Status: "leaderboard",
+
           source: "admin",
 
-          LD_Status: "leaderboard"
+          createdAt:
+            serverTimestamp(),
+
+          updatedAt:
+            serverTimestamp(),
+
+          manualUpdatedAt:
+            serverTimestamp()
 
         }
       );
 
 
       showSnackBar(
-        `${phone} updated to ${points} points.`,
+        "New leaderboard member created.",
         "success"
       );
 
@@ -656,7 +658,7 @@ async function saveManualPoints(
 
       if (
         order.source !== "admin" ||
-        order.status !== "leaderboard"
+        order.LD_Status !== "leaderboard"
       ) {
         return;
       }
@@ -753,7 +755,7 @@ async function saveManualPoints(
 
         source: "admin",
 
-        status: "leaderboard"
+        LD_Status: "leaderboard"
 
       }
     );
