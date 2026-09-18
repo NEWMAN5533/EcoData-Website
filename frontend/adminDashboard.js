@@ -1717,30 +1717,7 @@ onSnapshot(
   }
 );
 
-setInterval(() => {
-  const lastDeliveredEl = document.getElementById("lastDelivered");
 
-  if (!lastDeliveredEl) return;
-
- // =========================
-// LAST DELIVERED
-// =========================
-const lastDeliveredFormatted =
-`${deliveredDate.toLocaleDateString("en-US", {
-  month: "short",
-  day: "2-digit",
-  year: "numeric"
-})} • ${deliveredDate.toLocaleTimeString("en-US", {
-  hour: "numeric",
-  minute: "2-digit",
-  hour12: true
-}).toUpperCase()}`;
-
-if (lastDeliveredEl) {
-  lastDeliveredEl.textContent = lastDeliveredFormatted;
-}
-
-}, 5000);
 
 
 
