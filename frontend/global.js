@@ -14,7 +14,7 @@ const shoppingBtn = document.getElementById("shoppingBtn");
 shoppingBtn.addEventListener("click", (e) =>{
   e.stopPropagation();
 if(shoppingBtn){
-  window.location.href = './homeClient.html';
+  window.location.href = './ecodataStore/homeClient.html';
 
  // showSnackBar(" ✅ Coming up soon for sellers and buyers. You can Buy Data bundle, and register AFA. Thank You", "success", 5000);
   
@@ -246,6 +246,8 @@ mainContainer.addEventListener("scroll", ()=> {
   }
 }, { passive: true}
 );
+
+
 
 
 
