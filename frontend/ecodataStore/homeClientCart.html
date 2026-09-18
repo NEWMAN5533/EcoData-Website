@@ -617,150 +617,9 @@ themeButton.addEventListener("click", ()=> {
 
 
     <!---============================
-     SETTINGS SECTION
+     CART SECTION
      =============================-->
 
-
-  <!DOCTYPE html>
-<html lang="en">
-<head>
-
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>My Cart | EcoData Store</title>
-
-
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css"
-  >
-
-
-  <link
-    rel="stylesheet"
-    href="css/store.css"
-  >
-
-  <link
-    rel="stylesheet"
-    href="css/account.css"
-  >
-
-  <link
-    rel="stylesheet"
-    href="css/cart.css"
-  >
-
-</head>
-
-
-<body>
-
-
-  <!-- =========================================
-       NAVBAR
-  ========================================== -->
-
-  <nav class="store-navbar">
-
-    <div class="store-nav-inner">
-
-
-      <a
-        href="index.html"
-        class="store-brand"
-      >
-
-        <span class="store-brand-icon">
-
-          <i class="ri-shopping-bag-3-line"></i>
-
-        </span>
-
-        <span>
-          EcoData Store
-        </span>
-
-      </a>
-
-
-
-      <div class="store-search">
-
-        <i class="ri-search-line"></i>
-
-        <input
-          type="search"
-          id="storeSearch"
-          placeholder="Search products, services..."
-        >
-
-      </div>
-
-
-
-      <div class="store-nav-actions">
-
-
-        <button
-          class="store-nav-icon"
-          title="Wishlist"
-        >
-
-          <i class="ri-heart-3-line"></i>
-
-        </button>
-
-
-
-        <button
-          class="store-nav-icon cart-nav-button"
-          title="Cart"
-        >
-
-          <i class="ri-shopping-cart-line"></i>
-
-          <span
-            class="cart-count2"
-            id="navCartCount"
-          >
-            0
-          </span>
-
-        </button>
-
-
-
-        <button
-          class="store-profile"
-          title="Profile"
-        >
-
-          <span class="store-profile-avatar">
-
-            <i class="ri-user-line"></i>
-
-          </span>
-
-        </button>
-
-
-      </div>
-
-    </div>
-
-  </nav>
-
-
-
-  <!-- =========================================
-       MAIN
-  ========================================== -->
 
   <main class="account-container">
 
@@ -895,7 +754,7 @@ themeButton.addEventListener("click", ()=> {
         <!-- CONTINUE SHOPPING -->
 
         <a
-          href="index.html"
+          href="./homeClientProduct.html"
           class="cart-continue"
         >
 
@@ -1043,6 +902,7 @@ themeButton.addEventListener("click", ()=> {
 
           <button
             type="button"
+            onclick="window.location.href='./homeClientCheckout.html'"
             class="cart-checkout-btn"
             id="checkoutBtn"
           >
@@ -1098,10 +958,7 @@ themeButton.addEventListener("click", ()=> {
   </main>
 
 
-  <script src="js/cart.js"></script>
 
-</body>
-</html>
 
 
 
