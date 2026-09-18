@@ -468,17 +468,12 @@ const addLeaderBtn =
             // from normal delivery orders.
             volume: 0,
 
-            amount: 0,
-
             source: "admin",
 
             LD_Status: "leaderboard",
 
             manualUpdatedAt:
               serverTimestamp(),
-
-            updatedAt:
-              serverTimestamp()
 
           }
         );
@@ -523,9 +518,6 @@ const addLeaderBtn =
           source: "admin",
 
           createdAt:
-            serverTimestamp(),
-
-          updatedAt:
             serverTimestamp(),
 
           manualUpdatedAt:
