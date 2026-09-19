@@ -616,10 +616,525 @@ themeButton.addEventListener("click", ()=> {
 
 
     <!---============================
-     SETTINGS SECTION
+     MY ADDRESSES SECTION
      =============================-->
+  
+  <!-- =========================
+       PAGE
+  ========================== --> 
+<main class="addresses-page">
+    <!-- HEADER -->
+
+<header class="addresses-header">
+
+  <div>
+
+    <span class="addresses-eyebrow">
+      Account
+    </span>
+
+    <h1>My Addresses</h1>
+
+    <p>
+      Manage your saved delivery addresses.
+    </p>
+
+  </div>
 
 
+  <button
+    type="button"
+    id="addAddressBtn"
+    class="add-address-btn"
+  >
+
+    <i class="ri-add-line"></i>
+
+    Add Address
+
+  </button>
+
+</header>
+
+
+<!-- =========================
+     DEFAULT ADDRESS NOTICE
+========================== -->
+
+<div class="address-info-banner">
+
+  <div class="address-info-icon">
+    <i class="ri-map-pin-user-line"></i>
+  </div>
+
+  <div>
+
+    <strong>Choose your default address</strong>
+
+    <p>
+      Your default address will be automatically
+      selected during checkout.
+    </p>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     ADDRESS LIST
+========================== -->
+
+<section class="addresses-section">
+
+  <div class="addresses-section-header">
+
+    <div>
+
+      <span class="addresses-card-label">
+        Saved locations
+      </span>
+
+      <h2>Your Addresses</h2>
+
+    </div>
+
+    <span
+      id="addressCount"
+      class="address-count"
+    >
+      0 addresses
+    </span>
+
+  </div>
+
+
+  <div
+    id="addressesList"
+    class="addresses-grid"
+  ></div>
+
+
+  <!-- EMPTY STATE -->
+
+  <div
+    id="addressesEmpty"
+    class="addresses-empty"
+  >
+
+    <div class="addresses-empty-icon">
+      <i class="ri-map-pin-line"></i>
+    </div>
+
+    <h3>No saved addresses</h3>
+
+    <p>
+      Add a delivery address to make checkout
+      faster and easier.
+    </p>
+
+    <button
+      type="button"
+      id="emptyAddAddressBtn"
+      class="add-address-btn"
+    >
+
+      <i class="ri-add-line"></i>
+
+      Add Your First Address
+
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     ACCOUNT LINKS
+========================== -->
+
+<section class="address-account-links">
+
+  <a href="./homeClientProfile.html">
+    <i class="ri-user-3-line"></i>
+    <span>
+      <strong>Profile</strong>
+      <small>Personal information</small>
+    </span>
+    <i class="ri-arrow-right-s-line"></i>
+  </a>
+
+
+  <a href="./homeClientOrders.html">
+    <i class="ri-shopping-bag-3-line"></i>
+    <span>
+      <strong>My Orders</strong>
+      <small>View your purchases</small>
+    </span>
+    <i class="ri-arrow-right-s-line"></i>
+  </a>
+
+
+  <a href="./homeClientSettings.html">
+    <i class="ri-settings-3-line"></i>
+    <span>
+      <strong>Settings</strong>
+      <small>Account preferences</small>
+    </span>
+    <i class="ri-arrow-right-s-line"></i>
+  </a>
+
+</section>
+
+</main>  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- =========================
+       ADDRESS MODAL
+  ========================== -->  
+  <div
+    id="addressModal"
+    class="address-modal"
+    aria-hidden="true"
+  ><div class="address-modal-overlay"></div>
+
+
+<div
+  class="address-modal-box"
+  role="dialog"
+  aria-modal="true"
+>
+
+  <div class="address-modal-header">
+
+    <div>
+
+      <span class="addresses-card-label">
+        Delivery
+      </span>
+
+      <h2 id="addressModalTitle">
+        Add Address
+      </h2>
+
+    </div>
+
+    <button
+      type="button"
+      id="closeAddressModal"
+      class="modal-close-btn"
+      aria-label="Close"
+    >
+      <i class="ri-close-line"></i>
+    </button>
+
+  </div>
+
+
+  <form id="addressForm">
+
+
+    <!-- ADDRESS LABEL -->
+
+    <div class="address-type-section">
+
+      <label>Address Type</label>
+
+      <div class="address-type-options">
+
+
+        <label class="address-type-option active">
+
+          <input
+            type="radio"
+            name="addressType"
+            value="Home"
+            checked
+          >
+
+          <i class="ri-home-4-line"></i>
+
+          <span>Home</span>
+
+        </label>
+
+
+        <label class="address-type-option">
+
+          <input
+            type="radio"
+            name="addressType"
+            value="Work"
+          >
+
+          <i class="ri-briefcase-4-line"></i>
+
+          <span>Work</span>
+
+        </label>
+
+
+        <label class="address-type-option">
+
+          <input
+            type="radio"
+            name="addressType"
+            value="Other"
+          >
+
+          <i class="ri-map-pin-line"></i>
+
+          <span>Other</span>
+
+        </label>
+
+      </div>
+
+    </div>
+
+
+    <!-- NAME / PHONE -->
+
+    <div class="address-form-grid">
+
+      <div class="address-field">
+
+        <label for="addressName">
+          Full Name
+        </label>
+
+        <div class="address-input">
+
+          <i class="ri-user-line"></i>
+
+          <input
+            type="text"
+            id="addressName"
+            placeholder="Recipient name"
+            autocomplete="name"
+          >
+
+        </div>
+
+        <small id="addressNameError"></small>
+
+      </div>
+
+
+      <div class="address-field">
+
+        <label for="addressPhone">
+          Phone Number
+        </label>
+
+        <div class="address-input">
+
+          <i class="ri-phone-line"></i>
+
+          <input
+            type="tel"
+            id="addressPhone"
+            placeholder="0XXXXXXXXX"
+            autocomplete="tel"
+          >
+
+        </div>
+
+        <small id="addressPhoneError"></small>
+
+      </div>
+
+
+      <!-- ADDRESS -->
+
+      <div class="address-field address-field-full">
+
+        <label for="addressLine">
+          Address
+        </label>
+
+        <div class="address-input">
+
+          <i class="ri-map-pin-line"></i>
+
+          <input
+            type="text"
+            id="addressLine"
+            placeholder="House number, street, area"
+            autocomplete="street-address"
+          >
+
+        </div>
+
+        <small id="addressLineError"></small>
+
+      </div>
+
+
+      <!-- CITY -->
+
+      <div class="address-field">
+
+        <label for="addressCity">
+          City / Town
+        </label>
+
+        <div class="address-input">
+
+          <i class="ri-building-line"></i>
+
+          <input
+            type="text"
+            id="addressCity"
+            placeholder="e.g. Sunyani"
+          >
+
+        </div>
+
+      </div>
+
+
+      <!-- REGION -->
+
+      <div class="address-field">
+
+        <label for="addressRegion">
+          Region
+        </label>
+
+        <div class="address-input">
+
+          <i class="ri-map-2-line"></i>
+
+          <select id="addressRegion">
+
+            <option value="">
+              Select region
+            </option>
+
+            <option>Ahafo</option>
+            <option>Ashanti</option>
+            <option>Bono</option>
+            <option>Bono East</option>
+            <option>Central</option>
+            <option>Eastern</option>
+            <option>Greater Accra</option>
+            <option>North East</option>
+            <option>Northern</option>
+            <option>Oti</option>
+            <option>Savannah</option>
+            <option>Upper East</option>
+            <option>Upper West</option>
+            <option>Volta</option>
+            <option>Western</option>
+            <option>Western North</option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+
+      <!-- DIGITAL LOCATION -->
+
+      <div class="address-field address-field-full">
+
+        <label for="addressLandmark">
+          Landmark
+          <span>Optional</span>
+        </label>
+
+        <div class="address-input">
+
+          <i class="ri-compass-3-line"></i>
+
+          <input
+            type="text"
+            id="addressLandmark"
+            placeholder="Nearby landmark or location"
+          >
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- DEFAULT -->
+
+    <label class="default-address-option">
+
+      <input
+        type="checkbox"
+        id="addressDefault"
+      >
+
+      <span class="custom-checkbox">
+        <i class="ri-check-line"></i>
+      </span>
+
+      <span>
+        <strong>Set as default address</strong>
+        <small>
+          Use this address automatically at checkout.
+        </small>
+      </span>
+
+    </label>
+
+
+    <!-- ACTIONS -->
+
+    <div class="address-modal-footer">
+
+      <button
+        type="button"
+        id="cancelAddressBtn"
+        class="address-cancel-btn"
+      >
+        Cancel
+      </button>
+
+      <button
+        type="submit"
+        class="address-save-btn"
+      >
+
+        <i class="ri-save-line"></i>
+
+        Save Address
+
+      </button>
+
+    </div>
+
+  </form>
+
+</div>
+
+  </div>  
+  
+  <!-- SNACKBAR -->  
+   <div
+    id="addressSnackbar"
+    class="address-snackbar"
+  ></div>  
+ 
   
 
 
