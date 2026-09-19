@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Sellers | EcoData Admin</title>
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin-dashboard.css">
+  <link rel="stylesheet" href="css/admin-pages.css">
+</head>
+
+<body>
+
+  <div class="admin-layout">
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+    <aside class="admin-sidebar" id="adminSidebar">
+
+      <div class="admin-sidebar-header">
+        <a href="index.html" class="admin-brand">
+          <span class="admin-brand-mark">E</span>
+
+          <div>
+            <strong>EcoData</strong>
+            <small>Admin</small>
+          </div>
+        </a>
+
+        <button
+          class="admin-sidebar-close"
+          id="sidebarClose"
+          type="button"
+        >
+          <i class="ri-close-line"></i>
+        </button>
+      </div>
+
+
+      <nav class="admin-nav">
+
+        <div class="admin-nav-section">
+          <span class="admin-nav-title">Overview</span>
+
+          <a href="index.html" class="admin-nav-link">
+            <i class="ri-dashboard-line"></i>
+            <span>Dashboard</span>
+          </a>
+        </div>
+
+
+        <div class="admin-nav-section">
+          <span class="admin-nav-title">Management</span>
+
+          <a href="users.html" class="admin-nav-link">
+            <i class="ri-user-line"></i>
+            <span>Users</span>
+          </a>
+
+          <a href="sellers.html" class="admin-nav-link active">
+            <i class="ri-store-2-line"></i>
+            <span>Sellers</span>
+          </a>
+
+          <a href="products.html" class="admin-nav-link">
+            <i class="ri-shopping-bag-3-line"></i>
+            <span>Products</span>
+          </a>
+
+          <a href="orders.html" class="admin-nav-link">
+            <i class="ri-file-list-3-line"></i>
+            <span>Orders</span>
+          </a>
+
+          <a href="services.html" class="admin-nav-link">
+            <i class="ri-customer-service-2-line"></i>
+            <span>Services</span>
+          </a>
+        </div>
+
+
+        <div class="admin-nav-section">
+          <span class="admin-nav-title">Finance</span>
+
+          <a href="payments.html" class="admin-nav-link">
+            <i class="ri-bank-card-line"></i>
+            <span>Payments</span>
+          </a>
+
+          <a href="withdrawals.html" class="admin-nav-link">
+            <i class="ri-wallet-3-line"></i>
+            <span>Withdrawals</span>
+          </a>
+        </div>
+
+
+        <div class="admin-nav-section">
+          <span class="admin-nav-title">Store</span>
+
+          <a href="categories.html" class="admin-nav-link">
+            <i class="ri-layout-grid-line"></i>
+            <span>Categories</span>
+          </a>
+
+          <a href="notifications.html" class="admin-nav-link">
+            <i class="ri-notification-3-line"></i>
+            <span>Notifications</span>
+          </a>
+        </div>
+
+
+        <div class="admin-nav-section">
+          <span class="admin-nav-title">Reports</span>
+
+          <a href="reports.html" class="admin-nav-link">
+            <i class="ri-bar-chart-box-line"></i>
+            <span>Reports & Analytics</span>
+          </a>
+
+          <a href="activity.html" class="admin-nav-link">
+            <i class="ri-history-line"></i>
+            <span>Activity Log</span>
+          </a>
+        </div>
+
+
+        <div class="admin-nav-section">
+          <span class="admin-nav-title">System</span>
+
+          <a href="admins.html" class="admin-nav-link">
+            <i class="ri-shield-user-line"></i>
+            <span>Administrators</span>
+          </a>
+
+          <a href="settings.html" class="admin-nav-link">
+            <i class="ri-settings-3-line"></i>
+            <span>Settings</span>
+          </a>
+        </div>
+
+      </nav>
+
+
+      <div class="admin-sidebar-bottom">
+
+        <a
+          href="../index.html"
+          class="admin-open-store"
+          target="_blank"
+        >
+          <i class="ri-store-line"></i>
+          <span>Open Store</span>
+          <i class="ri-external-link-line"></i>
+        </a>
+
+      </div>
+
+    </aside>
+
+
+    <!-- =========================================
+         MOBILE OVERLAY
+    ========================================== -->
+    <div
+      class="admin-sidebar-overlay"
+      id="sidebarOverlay"
+    ></div>
+
+
+    <!-- =========================================
+         MAIN
+    ========================================== -->
+    <main class="admin-main">
+
+
+      <!-- =======================================
+           TOPBAR
+      ======================================== -->
+      <header class="admin-topbar">
+
+        <div class="admin-topbar-left">
+
+          <button
+            class="admin-mobile-menu"
+            id="sidebarOpen"
+            type="button"
+          >
+            <i class="ri-menu-line"></i>
+          </button>
+
+
+          <div class="admin-page-context">
+            <strong>Sellers</strong>
+            <span>Manage marketplace sellers</span>
+          </div>
+
+        </div>
+
+
+        <div class="admin-topbar-actions">
+
+          <div class="admin-global-search">
+            <i class="ri-search-line"></i>
+
+            <input
+              type="search"
+              id="globalSearch"
+              placeholder="Search..."
+              autocomplete="off"
+            >
+          </div>
+
+
+          <button
+            class="admin-icon-button"
+            type="button"
+            title="Notifications"
+          >
+            <i class="ri-notification-3-line"></i>
+            <span class="admin-notification-dot"></span>
+          </button>
+
+
+          <button
+            class="admin-profile-button"
+            id="adminProfileButton"
+            type="button"
+          >
+            <span class="admin-profile-avatar">A</span>
+
+            <span class="admin-profile-info">
+              <strong>Admin</strong>
+              <small>Administrator</small>
+            </span>
+
+            <i class="ri-arrow-down-s-line"></i>
+          </button>
+
+        </div>
+
+      </header>
+
+
+      <!-- =======================================
+           CONTENT
+      ======================================== -->
+      <div class="admin-content">
+
+
+        <!-- PAGE HEADER -->
+        <div class="admin-page-header">
+
+          <div>
+            <span class="admin-page-eyebrow">
+              Marketplace
+            </span>
+
+            <h1>Sellers</h1>
+
+            <p>
+              Review seller applications and manage marketplace sellers.
+            </p>
+          </div>
+
+
+          <div class="admin-page-header-actions">
+
+            <button
+              type="button"
+              class="admin-secondary-button"
+              id="refreshSellers"
+            >
+              <i class="ri-refresh-line"></i>
+              <span>Refresh</span>
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- =====================================
+             STATISTICS
+        ====================================== -->
+        <div class="management-stat-grid seller-stat-grid">
+
+          <div class="management-stat-card">
+
+            <div class="management-stat-icon">
+              <i class="ri-store-2-line"></i>
+            </div>
+
+            <div>
+              <span>Total Sellers</span>
+              <strong id="totalSellers">0</strong>
+            </div>
+
+          </div>
+
+
+          <div class="management-stat-card">
+
+            <div class="management-stat-icon">
+              <i class="ri-time-line"></i>
+            </div>
+
+            <div>
+              <span>Pending Applications</span>
+              <strong id="pendingSellers">0</strong>
+            </div>
+
+          </div>
+
+
+          <div class="management-stat-card">
+
+            <div class="management-stat-icon">
+              <i class="ri-checkbox-circle-line"></i>
+            </div>
+
+            <div>
+              <span>Active Sellers</span>
+              <strong id="activeSellers">0</strong>
+            </div>
+
+          </div>
+
+
+          <div class="management-stat-card">
+
+            <div class="management-stat-icon">
+              <i class="ri-money-dollar-circle-line"></i>
+            </div>
+
+            <div>
+              <span>Total Sales</span>
+              <strong id="totalSales">GH₵0</strong>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- =====================================
+             SELLER MANAGEMENT
+        ====================================== -->
+        <section class="management-card">
+
+          <div class="management-card-header">
+
+            <div>
+              <h2>Seller Management</h2>
+
+              <p>
+                Search, review and manage seller accounts.
+              </p>
+            </div>
+
+          </div>
+
+
+          <!-- TOOLBAR -->
+          <div class="management-toolbar">
+
+            <div class="management-search">
+
+              <i class="ri-search-line"></i>
+
+              <input
+                type="search"
+                id="sellerSearch"
+                placeholder="Search seller, owner, email or phone..."
+                autocomplete="off"
+              >
+
+            </div>
+
+
+            <div class="management-filters">
+
+              <select id="statusFilter">
+                <option value="all">All Status</option>
+                <option value="active">Active</option>
+                <option value="pending">Pending</option>
+                <option value="suspended">Suspended</option>
+                <option value="rejected">Rejected</option>
+              </select>
+
+
+              <select id="sortFilter">
+                <option value="newest">Newest</option>
+                <option value="oldest">Oldest</option>
+                <option value="sales">Highest Sales</option>
+                <option value="earnings">Highest Earnings</option>
+                <option value="products">Most Products</option>
+                <option value="orders">Most Orders</option>
+                <option value="name">Name A-Z</option>
+              </select>
+
+            </div>
+
+          </div>
+
+
+          <!-- RESULT BAR -->
+          <div class="management-result-bar">
+
+            <span id="sellerResultCount">
+              0 sellers
+            </span>
+
+
+            <button
+              type="button"
+              id="clearSellerFilters"
+              class="management-clear-button"
+            >
+              Clear filters
+            </button>
+
+          </div>
+
+
+          <!-- TABLE -->
+          <div class="management-table-wrapper">
+
+            <table class="management-table">
+
+              <thead>
+
+                <tr>
+                  <th>Seller</th>
+                  <th>Products</th>
+                  <th>Orders</th>
+                  <th>Sales</th>
+                  <th>Earnings</th>
+                  <th>Status</th>
+                  <th>Joined</th>
+                  <th></th>
+                </tr>
+
+              </thead>
+
+
+              <tbody id="sellerTableBody"></tbody>
+
+            </table>
+
+
+            <!-- EMPTY -->
+            <div
+              class="management-empty"
+              id="sellerEmpty"
+              hidden
+            >
+
+              <div class="management-empty-icon">
+                <i class="ri-store-2-line"></i>
+              </div>
+
+              <h3>No sellers found</h3>
+
+              <p>
+                Try changing your search or filters.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- PAGINATION -->
+          <div
+            class="management-pagination"
+            id="sellerPagination"
+          ></div>
+
+        </section>
+
+      </div>
+
+    </main>
+
+  </div>
+
+
+  <!-- =========================================
+       SELLER DETAIL DRAWER
+  ========================================== -->
+
+  <div
+    class="admin-drawer-overlay"
+    id="sellerDrawerOverlay"
+    hidden
+  ></div>
+
+
+  <aside
+    class="admin-detail-drawer"
+    id="sellerDrawer"
+    aria-hidden="true"
+  >
+
+    <div class="drawer-header">
+
+      <div>
+        <span>Seller Details</span>
+        <h2 id="drawerSellerName">Seller</h2>
+      </div>
+
+
+      <button
+        type="button"
+        class="drawer-close"
+        id="closeSellerDrawer"
+      >
+        <i class="ri-close-line"></i>
+      </button>
+
+    </div>
+
+
+    <div class="drawer-content">
+
+
+      <!-- PROFILE -->
+      <div class="drawer-user-profile">
+
+        <div
+          class="drawer-user-avatar"
+          id="drawerSellerAvatar"
+        >
+          S
+        </div>
+
+
+        <div>
+
+          <h3 id="drawerSellerTitle">
+            Seller
+          </h3>
+
+          <p id="drawerSellerId">
+            SEL-00000
+          </p>
+
+          <div id="drawerSellerStatus"></div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ACCOUNT -->
+      <section class="drawer-section">
+
+        <div class="drawer-section-title">
+          <i class="ri-store-2-line"></i>
+          <span>Seller Account</span>
+        </div>
+
+
+        <div class="drawer-info-grid">
+
+          <div class="drawer-info-item">
+            <span>Owner</span>
+            <strong id="drawerOwner">—</strong>
+          </div>
+
+          <div class="drawer-info-item">
+            <span>Seller ID</span>
+            <strong id="drawerId">—</strong>
+          </div>
+
+          <div class="drawer-info-item">
+            <span>Joined</span>
+            <strong id="drawerJoined">—</strong>
+          </div>
+
+          <div class="drawer-info-item">
+            <span>Application</span>
+            <strong id="drawerApplicationDate">—</strong>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- CONTACT -->
+      <section class="drawer-section">
+
+        <div class="drawer-section-title">
+          <i class="ri-contacts-line"></i>
+          <span>Contact</span>
+        </div>
+
+
+        <div class="drawer-info-grid">
+
+          <div class="drawer-info-item">
+            <span>Email</span>
+            <strong id="drawerEmail">—</strong>
+          </div>
+
+          <div class="drawer-info-item">
+            <span>Phone</span>
+            <strong id="drawerPhone">—</strong>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- PERFORMANCE -->
+      <section class="drawer-section">
+
+        <div class="drawer-section-title">
+          <i class="ri-line-chart-line"></i>
+          <span>Performance</span>
+        </div>
+
+
+        <div class="drawer-info-grid">
+
+          <div class="drawer-info-item">
+            <span>Products</span>
+            <strong id="drawerProducts">0</strong>
+          </div>
+
+          <div class="drawer-info-item">
+            <span>Orders</span>
+            <strong id="drawerOrders">0</strong>
+          </div>
+
+          <div class="drawer-info-item">
+            <span>Total Sales</span>
+            <strong id="drawerSales">GH₵0</strong>
+          </div>
+
+          <div class="drawer-info-item">
+            <span>Earnings</span>
+            <strong id="drawerEarnings">GH₵0</strong>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ACTIONS -->
+      <section class="drawer-section">
+
+        <div class="drawer-section-title">
+          <i class="ri-links-line"></i>
+          <span>Management</span>
+        </div>
+
+
+        <div class="seller-drawer-actions">
+
+          <button
+            type="button"
+            class="admin-secondary-button"
+            id="viewSellerProducts"
+          >
+            <i class="ri-shopping-bag-3-line"></i>
+            Products
+          </button>
+
+
+          <button
+            type="button"
+            class="admin-secondary-button"
+            id="viewSellerOrders"
+          >
+            <i class="ri-file-list-3-line"></i>
+            Orders
+          </button>
+
+
+          <button
+            type="button"
+            class="admin-secondary-button"
+            id="viewSellerWithdrawals"
+          >
+            <i class="ri-wallet-3-line"></i>
+            Withdrawals
+          </button>
+
+        </div>
+
+      </section>
+
+    </div>
+
+
+    <div class="drawer-footer">
+
+      <button
+        type="button"
+        class="admin-danger-button"
+        id="sellerPrimaryAction"
+      >
+        <i class="ri-forbid-2-line"></i>
+        <span>Action</span>
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <script src="js/admin.js"></script>
+  <script src="js/sellers.js"></script>
+
+</body>
+</html>

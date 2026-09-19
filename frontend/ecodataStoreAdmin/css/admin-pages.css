@@ -1,0 +1,4508 @@
+/* ==========================================
+   ECODATA ADMIN — MANAGEMENT PAGES
+========================================== */
+
+
+/* ==========================================
+   PAGE HEADER
+========================================== */
+
+.admin-page-header {
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 24px;
+}
+
+
+.admin-page-header h1 {
+
+  margin-top: 2px;
+
+  font-size: 25px;
+  font-weight: 700;
+
+  letter-spacing: -.03em;
+}
+
+
+.admin-page-header p {
+
+  margin-top: 5px;
+
+  color: #777;
+
+  font-size: 12px;
+}
+
+
+.admin-secondary-button {
+
+  min-height: 38px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 0 13px;
+
+  background: #fff;
+
+  border:
+    1px solid rgba(0,0,0,.09);
+
+  border-radius: 8px;
+
+  color: #444;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  transition:
+    background .2s ease,
+    border-color .2s ease,
+    transform .2s ease;
+}
+
+
+.admin-secondary-button:hover {
+
+  background: #f7f7f7;
+
+  border-color:
+    rgba(0,0,0,.14);
+
+  transform:
+    translateY(-1px);
+}
+
+
+.admin-danger-button {
+
+  min-height: 38px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 0 13px;
+
+  background: #181818;
+  color: #fff;
+
+  border-radius: 8px;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+
+/* ==========================================
+   MANAGEMENT STATISTICS
+========================================== */
+
+.management-stat-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 13px;
+
+  margin-bottom: 17px;
+}
+
+
+.management-stat-card {
+
+  min-height: 82px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 15px;
+
+  background: #fff;
+
+  border:
+    1px solid rgba(0,0,0,.07);
+
+  border-radius: 13px;
+}
+
+
+.management-stat-icon {
+
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 9px;
+
+  background: #f2f2f2;
+
+  color: #333;
+
+  font-size: 18px;
+}
+
+
+.management-stat-card div {
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+.management-stat-card div span {
+
+  color: #888;
+
+  font-size: 10px;
+}
+
+
+.management-stat-card div strong {
+
+  margin-top: 2px;
+
+  font-size: 19px;
+}
+
+
+/* ==========================================
+   MANAGEMENT CARD
+========================================== */
+
+.management-card {
+
+  overflow: hidden;
+
+  background: #fff;
+
+  border:
+    1px solid rgba(0,0,0,.07);
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 2px 10px rgba(0,0,0,.025);
+}
+
+
+/* ==========================================
+   TOOLBAR
+========================================== */
+
+.management-toolbar {
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  padding: 15px 17px;
+
+  border-bottom:
+    1px solid rgba(0,0,0,.06);
+}
+
+
+.management-search {
+
+  width: min(380px, 100%);
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 0 10px;
+
+  background: #fafafa;
+
+  border:
+    1px solid rgba(0,0,0,.08);
+
+  border-radius: 8px;
+
+  color: #999;
+}
+
+
+.management-search i {
+  font-size: 16px;
+}
+
+
+.management-search input {
+
+  width: 100%;
+
+  border: 0;
+  outline: 0;
+
+  background: transparent;
+
+  color: #222;
+
+  font-size: 11px;
+}
+
+
+.management-search input::placeholder {
+  color: #aaa;
+}
+
+
+.management-filters {
+
+  display: flex;
+
+  gap: 7px;
+}
+
+
+.management-filters select {
+
+  height: 38px;
+
+  min-width: 110px;
+
+  padding: 0 9px;
+
+  background: #fafafa;
+
+  border:
+    1px solid rgba(0,0,0,.08);
+
+  border-radius: 8px;
+
+  outline: none;
+
+  color: #555;
+
+  font-size: 10px;
+}
+
+
+/* ==========================================
+   RESULT BAR
+========================================== */
+
+.management-result-bar {
+
+  min-height: 43px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 17px;
+
+  border-bottom:
+    1px solid rgba(0,0,0,.05);
+}
+
+
+.management-result-bar span {
+
+  color: #888;
+
+  font-size: 10px;
+}
+
+
+.management-result-bar button {
+
+  background: transparent;
+
+  color: #777;
+
+  font-size: 10px;
+}
+
+
+.management-result-bar button:hover {
+  color: #111;
+}
+
+
+/* ==========================================
+   TABLE
+========================================== */
+
+.management-table-wrapper {
+
+  width: 100%;
+
+  overflow-x: auto;
+}
+
+
+.management-table {
+
+  width: 100%;
+
+  min-width: 800px;
+
+  border-collapse: collapse;
+}
+
+
+.management-table th {
+
+  height: 43px;
+
+  padding: 0 15px;
+
+  background: #fafafa;
+
+  color: #999;
+
+  font-size: 9px;
+  font-weight: 650;
+
+  text-align: left;
+
+  white-space: nowrap;
+
+  border-bottom:
+    1px solid rgba(0,0,0,.06);
+}
+
+
+.management-table td {
+
+  padding: 12px 15px;
+
+  border-bottom:
+    1px solid rgba(0,0,0,.045);
+
+  color: #555;
+
+  font-size: 10px;
+
+  vertical-align: middle;
+}
+
+
+.management-table tbody tr {
+
+  transition:
+    background .15s ease;
+}
+
+
+.management-table tbody tr:hover {
+  background: #fcfcfc;
+}
+
+
+.management-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+
+/* ==========================================
+   USER CELL
+========================================== */
+
+.management-user {
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  min-width: 190px;
+}
+
+
+.management-avatar {
+
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #ededed;
+
+  color: #555;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+
+.management-user-info {
+
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+.management-user-info strong {
+
+  color: #222;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.management-user-info span {
+
+  margin-top: 2px;
+
+  color: #999;
+
+  font-size: 9px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* ==========================================
+   TYPE BADGE
+========================================== */
+
+.management-type {
+
+  display: inline-flex;
+
+  min-height: 23px;
+
+  align-items: center;
+
+  padding: 0 8px;
+
+  border-radius: 20px;
+
+  background: #f1f1f1;
+
+  color: #666;
+
+  font-size: 8px;
+  font-weight: 600;
+}
+
+
+/* ==========================================
+   STATUS
+========================================== */
+
+.management-status {
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 5px;
+
+  min-height: 23px;
+
+  padding: 0 8px;
+
+  border-radius: 20px;
+
+  background: #f1f1f1;
+
+  color: #555;
+
+  font-size: 8px;
+  font-weight: 600;
+}
+
+
+.management-status::before {
+
+  content: "";
+
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: #777;
+}
+
+
+.management-status.active::before {
+  background: #333;
+}
+
+
+.management-status.suspended {
+  background: #e8e8e8;
+  color: #777;
+}
+
+
+.management-status.suspended::before {
+  background: #999;
+}
+
+
+/* ==========================================
+   ACTION BUTTON
+========================================== */
+
+.management-action-button {
+
+  width: 31px;
+  height: 31px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 7px;
+
+  background: transparent;
+
+  color: #777;
+
+  font-size: 17px;
+}
+
+
+.management-action-button:hover {
+  background: #f0f0f0;
+  color: #222;
+}
+
+
+/* ==========================================
+   DROPDOWN
+========================================== */
+
+.management-action-wrapper {
+  position: relative;
+}
+
+
+.management-action-menu {
+
+  position: absolute;
+
+  right: 0;
+  top: calc(100% + 5px);
+
+  width: 165px;
+
+  padding: 5px;
+
+  background: #fff;
+
+  border:
+    1px solid rgba(0,0,0,.08);
+
+  border-radius: 9px;
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,.1);
+
+  z-index: 100;
+}
+
+
+.management-action-menu button {
+
+  width: 100%;
+  min-height: 34px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 0 8px;
+
+  border-radius: 6px;
+
+  background: transparent;
+
+  color: #555;
+
+  font-size: 10px;
+
+  text-align: left;
+}
+
+
+.management-action-menu button:hover {
+  background: #f5f5f5;
+}
+
+
+.management-action-menu i {
+  font-size: 15px;
+}
+
+
+/* ==========================================
+   PAGINATION
+========================================== */
+
+.management-pagination {
+
+  min-height: 59px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding: 0 17px;
+
+  border-top:
+    1px solid rgba(0,0,0,.06);
+}
+
+
+.management-pagination > span {
+
+  color: #999;
+
+  font-size: 9px;
+}
+
+
+.pagination-buttons {
+
+  display: flex;
+  align-items: center;
+
+  gap: 4px;
+}
+
+
+.pagination-buttons button {
+
+  min-width: 29px;
+  height: 29px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid rgba(0,0,0,.08);
+
+  border-radius: 6px;
+
+  background: #fff;
+
+  color: #777;
+
+  font-size: 10px;
+}
+
+
+.pagination-buttons button:hover {
+  background: #f5f5f5;
+}
+
+
+.pagination-buttons button.active {
+
+  background: #111;
+  color: #fff;
+
+  border-color: #111;
+}
+
+
+.pagination-buttons > span {
+
+  padding: 0 3px;
+
+  color: #aaa;
+
+  font-size: 10px;
+}
+
+
+/* ==========================================
+   EMPTY STATE
+========================================== */
+
+.management-empty {
+
+  padding: 65px 20px;
+
+  text-align: center;
+}
+
+
+.management-empty > span {
+
+  width: 52px;
+  height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto 12px;
+
+  border-radius: 50%;
+
+  background: #f2f2f2;
+
+  color: #777;
+
+  font-size: 23px;
+}
+
+
+.management-empty h3 {
+
+  font-size: 14px;
+}
+
+
+.management-empty p {
+
+  margin: 4px 0 15px;
+
+  color: #999;
+
+  font-size: 10px;
+}
+
+
+/* ==========================================
+   DRAWER
+========================================== */
+
+.admin-drawer-overlay {
+
+  position: fixed;
+
+  inset: 0;
+
+  background:
+    rgba(0,0,0,.38);
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition:
+    opacity .2s ease,
+    visibility .2s ease;
+
+  z-index: 1300;
+}
+
+
+.admin-drawer-overlay.show {
+
+  opacity: 1;
+  visibility: visible;
+}
+
+
+.admin-detail-drawer {
+
+  position: fixed;
+
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  width: min(430px, 100%);
+
+  display: flex;
+  flex-direction: column;
+
+  background: #fff;
+
+  border-left:
+    1px solid rgba(0,0,0,.08);
+
+  transform:
+    translateX(100%);
+
+  transition:
+    transform .25s ease;
+
+  z-index: 1400;
+}
+
+
+.admin-detail-drawer.show {
+
+  transform:
+    translateX(0);
+}
+
+
+.drawer-header {
+
+  min-height: 72px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 18px;
+
+  border-bottom:
+    1px solid rgba(0,0,0,.07);
+}
+
+
+.drawer-header div {
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+.drawer-header div span {
+
+  color: #999;
+
+  font-size: 8px;
+  font-weight: 700;
+
+  letter-spacing: .08em;
+}
+
+
+.drawer-header div strong {
+
+  margin-top: 3px;
+
+  font-size: 14px;
+}
+
+
+.drawer-header > button {
+
+  width: 33px;
+  height: 33px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  background: #f3f3f3;
+
+  color: #555;
+
+  font-size: 18px;
+}
+
+
+.drawer-content {
+
+  flex: 1;
+
+  overflow-y: auto;
+
+  padding: 20px;
+}
+
+
+.drawer-footer {
+
+  display: flex;
+
+  gap: 8px;
+
+  padding: 13px 18px;
+
+  border-top:
+    1px solid rgba(0,0,0,.07);
+}
+
+
+.drawer-footer button {
+  flex: 1;
+}
+
+
+/* ==========================================
+   DRAWER USER PROFILE
+========================================== */
+
+.drawer-user-profile {
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  margin-bottom: 22px;
+}
+
+
+.drawer-user-avatar {
+
+  width: 54px;
+  height: 54px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #ededed;
+
+  color: #555;
+
+  font-size: 17px;
+  font-weight: 600;
+}
+
+
+.drawer-user-profile div {
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+.drawer-user-profile strong {
+  font-size: 15px;
+}
+
+
+.drawer-user-profile span {
+
+  margin-top: 2px;
+
+  color: #999;
+
+  font-size: 10px;
+}
+
+
+/* ==========================================
+   DRAWER SECTIONS
+========================================== */
+
+.drawer-section {
+
+  margin-bottom: 20px;
+}
+
+
+.drawer-section-title {
+
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #999;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: .06em;
+
+  text-transform: uppercase;
+}
+
+
+.drawer-info-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 8px;
+}
+
+
+.drawer-info-item {
+
+  padding: 11px;
+
+  background: #fafafa;
+
+  border:
+    1px solid rgba(0,0,0,.06);
+
+  border-radius: 9px;
+}
+
+
+.drawer-info-item span {
+
+  display: block;
+
+  color: #999;
+
+  font-size: 8px;
+}
+
+
+.drawer-info-item strong {
+
+  display: block;
+
+  margin-top: 3px;
+
+  color: #333;
+
+  font-size: 10px;
+}
+
+
+.drawer-list {
+
+  display: flex;
+  flex-direction: column;
+
+  border:
+    1px solid rgba(0,0,0,.06);
+
+  border-radius: 9px;
+
+  overflow: hidden;
+}
+
+
+.drawer-list-item {
+
+  min-height: 39px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 10px;
+
+  border-bottom:
+    1px solid rgba(0,0,0,.05);
+}
+
+
+.drawer-list-item:last-child {
+  border-bottom: 0;
+}
+
+
+.drawer-list-item span {
+  color: #888;
+  font-size: 9px;
+}
+
+
+.drawer-list-item strong {
+  font-size: 10px;
+}
+
+
+/* ==========================================
+   DARK MODE
+========================================== */
+
+body.dark-mode .admin-page-header p,
+body.dark-mode .management-stat-card div span,
+body.dark-mode .management-result-bar span,
+body.dark-mode .management-table td,
+body.dark-mode .drawer-user-profile span,
+body.dark-mode .drawer-info-item span,
+body.dark-mode .drawer-list-item span {
+  color: #777;
+}
+
+
+body.dark-mode .admin-secondary-button {
+
+  background: #1c1c1c;
+
+  border-color:
+    rgba(255,255,255,.09);
+
+  color: #ccc;
+}
+
+
+body.dark-mode .admin-secondary-button:hover {
+  background: #222;
+}
+
+
+body.dark-mode .management-card,
+body.dark-mode .management-stat-card,
+body.dark-mode .admin-detail-drawer {
+
+  background: #171717;
+
+  border-color:
+    rgba(255,255,255,.08);
+}
+
+
+body.dark-mode .management-stat-icon,
+body.dark-mode .management-search,
+body.dark-mode .management-filters select,
+body.dark-mode .management-empty > span,
+body.dark-mode .drawer-header > button,
+body.dark-mode .drawer-info-item {
+
+  background: #202020;
+
+  border-color:
+    rgba(255,255,255,.08);
+
+  color: #aaa;
+}
+
+
+body.dark-mode .management-search input {
+  color: #ddd;
+}
+
+
+body.dark-mode .management-table th {
+  background: #1c1c1c;
+  color: #777;
+
+  border-color:
+    rgba(255,255,255,.07);
+}
+
+
+body.dark-mode .management-table td {
+  border-color:
+    rgba(255,255,255,.055);
+}
+
+
+body.dark-mode .management-table tbody tr:hover {
+  background: #1b1b1b;
+}
+
+
+body.dark-mode .management-user-info strong,
+body.dark-mode .drawer-user-profile strong,
+body.dark-mode .drawer-info-item strong {
+  color: #eee;
+}
+
+
+body.dark-mode .management-avatar,
+body.dark-mode .drawer-user-avatar {
+  background: #252525;
+  color: #ccc;
+}
+
+
+body.dark-mode .management-action-button:hover {
+  background: #242424;
+}
+
+
+body.dark-mode .management-action-menu {
+
+  background: #1b1b1b;
+
+  border-color:
+    rgba(255,255,255,.08);
+}
+
+
+body.dark-mode .management-action-menu button {
+  color: #aaa;
+}
+
+
+body.dark-mode .management-action-menu button:hover {
+  background: #242424;
+}
+
+
+body.dark-mode .pagination-buttons button {
+
+  background: #1b1b1b;
+
+  border-color:
+    rgba(255,255,255,.08);
+
+  color: #aaa;
+}
+
+
+body.dark-mode .pagination-buttons button.active {
+  background: #eee;
+  color: #111;
+}
+
+
+body.dark-mode .drawer-header,
+body.dark-mode .drawer-footer {
+
+  border-color:
+    rgba(255,255,255,.08);
+}
+
+
+body.dark-mode .drawer-list {
+  border-color:
+    rgba(255,255,255,.08);
+}
+
+
+body.dark-mode .drawer-list-item {
+  border-color:
+    rgba(255,255,255,.06);
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 1100px) {
+
+  .management-toolbar {
+
+    align-items: stretch;
+
+    flex-direction: column;
+  }
+
+  .management-search {
+    width: 100%;
+  }
+
+  .management-filters {
+    width: 100%;
+  }
+
+  .management-filters select {
+    flex: 1;
+  }
+
+}
+
+
+@media (max-width: 800px) {
+
+  .management-stat-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .admin-page-header {
+
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .management-stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .management-filters {
+
+    display: grid;
+
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+  .management-filters select {
+    min-width: 0;
+  }
+
+  .management-filters select:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .management-pagination {
+
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    padding:
+      12px 15px;
+  }
+
+}
+
+
+@media (max-width: 430px) {
+
+  .management-filters {
+    grid-template-columns: 1fr;
+  }
+
+  .management-filters select:last-child {
+    grid-column: auto;
+  }
+
+  .pagination-buttons .pagination-number:nth-of-type(2),
+  .pagination-buttons .pagination-number:nth-of-type(3) {
+    display: none;
+  }
+
+}
+
+
+
+
+/* ==========================================
+   SELLER MANAGEMENT
+========================================== */
+
+.seller-stat-grid {
+  margin-bottom: 22px;
+}
+
+
+/* Seller drawer action buttons */
+
+.seller-drawer-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.seller-drawer-actions .admin-secondary-button {
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 10px;
+}
+
+
+/* Seller status */
+
+.management-status.status-pending {
+  background: #f5f5f5;
+  color: #555;
+  border-color: #ddd;
+}
+
+.management-status.status-rejected {
+  background: #eeeeee;
+  color: #555;
+  border-color: #d5d5d5;
+}
+
+
+/* Seller table */
+
+.management-seller {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-width: 190px;
+}
+
+.management-seller-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  background: #f1f1f1;
+  border: 1px solid #e2e2e2;
+
+  color: #222;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.management-seller-info {
+  min-width: 0;
+}
+
+.management-seller-info strong {
+  display: block;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.management-seller-info span {
+  display: block;
+
+  margin-top: 2px;
+
+  color: #888;
+
+  font-size: 11px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* Seller action menu */
+
+.seller-action-menu {
+  min-width: 170px;
+}
+
+
+/* Dark mode */
+
+body.dark-mode .management-seller-avatar {
+  background: #252525;
+  border-color: #333;
+  color: #f4f4f4;
+}
+
+body.dark-mode .management-status.status-pending,
+body.dark-mode .management-status.status-rejected {
+  background: #252525;
+  color: #ccc;
+  border-color: #383838;
+}
+
+
+/* ==========================================
+   SELLER RESPONSIVE
+========================================== */
+
+@media (max-width: 800px) {
+
+  .seller-drawer-actions {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .seller-stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+@media (max-width: 430px) {
+
+  .seller-stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+
+
+/* ==========================================
+   PRODUCT MANAGEMENT
+========================================== */
+
+.product-stat-grid {
+  margin-bottom: 22px;
+}
+
+
+/* Product table */
+
+.management-product {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-width: 220px;
+}
+
+.management-product-image {
+  width: 44px;
+  height: 44px;
+
+  flex-shrink: 0;
+
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f1f1f1;
+  border: 1px solid #e2e2e2;
+
+  color: #888;
+
+  overflow: hidden;
+}
+
+.management-product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.management-product-info {
+  min-width: 0;
+}
+
+.management-product-info strong {
+  display: block;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.management-product-info span {
+  display: block;
+
+  margin-top: 2px;
+
+  color: #888;
+
+  font-size: 11px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* Product type */
+
+.management-product-type {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
+  padding: 5px 8px;
+
+  border-radius: 6px;
+
+  background: #f5f5f5;
+  border: 1px solid #e5e5e5;
+
+  color: #555;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+
+/* Product drawer */
+
+.drawer-product-profile {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid #ededed;
+}
+
+.drawer-product-image {
+  width: 64px;
+  height: 64px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background: #f1f1f1;
+  border: 1px solid #e2e2e2;
+
+  color: #888;
+
+  overflow: hidden;
+}
+
+.drawer-product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.drawer-product-profile h3 {
+  margin: 0;
+
+  font-size: 15px;
+}
+
+.drawer-product-profile p {
+  margin: 4px 0 8px;
+
+  color: #999;
+
+  font-size: 11px;
+}
+
+
+/* Drawer actions */
+
+.product-drawer-actions {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 8px;
+}
+
+.product-drawer-actions
+.admin-secondary-button {
+  justify-content: center;
+
+  min-height: 42px;
+
+  padding: 0 9px;
+}
+
+
+/* Dark mode */
+
+body.dark-mode
+.management-product-image {
+
+  background: #252525;
+  border-color: #333;
+}
+
+body.dark-mode
+.management-product-type {
+
+  background: #252525;
+  border-color: #383838;
+
+  color: #ccc;
+}
+
+body.dark-mode
+.drawer-product-profile {
+
+  border-color: #333;
+}
+
+body.dark-mode
+.drawer-product-image {
+
+  background: #252525;
+  border-color: #333;
+}
+
+
+/* Responsive */
+
+@media (max-width: 1100px) {
+
+  .management-toolbar {
+    align-items: stretch;
+  }
+
+  .management-filters {
+    flex-wrap: wrap;
+  }
+
+}
+
+
+@media (max-width: 800px) {
+
+  .product-drawer-actions {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .product-stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+@media (max-width: 430px) {
+
+  .product-stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   ORDER MANAGEMENT
+========================================== */
+
+.order-stat-grid {
+  margin-bottom: 22px;
+}
+
+
+/* ==========================================
+   ORDER TABLE
+========================================== */
+
+.management-order {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  min-width: 150px;
+}
+
+.management-order-icon {
+  width: 38px;
+  height: 38px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background: #f2f2f2;
+  border: 1px solid #e3e3e3;
+
+  color: #555;
+
+  font-size: 16px;
+}
+
+.management-order-info {
+  min-width: 0;
+}
+
+.management-order-info strong {
+  display: block;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.management-order-info span {
+  display: block;
+
+  margin-top: 2px;
+
+  color: #999;
+
+  font-size: 10px;
+}
+
+
+/* ==========================================
+   PAYMENT BADGE
+========================================== */
+
+.management-payment {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
+  padding: 5px 8px;
+
+  border-radius: 6px;
+
+  background: #f5f5f5;
+  border: 1px solid #e5e5e5;
+
+  color: #555;
+
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.management-payment i {
+  font-size: 12px;
+}
+
+
+/* ==========================================
+   ORDER DRAWER
+========================================== */
+
+.drawer-order-status {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 10px;
+
+  margin-bottom: 20px;
+}
+
+.drawer-order-status > div {
+  padding: 12px;
+
+  border: 1px solid #e7e7e7;
+
+  border-radius: 10px;
+
+  background: #fafafa;
+}
+
+.drawer-order-status span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #999;
+
+  font-size: 10px;
+}
+
+.drawer-order-status strong {
+  font-size: 13px;
+}
+
+
+/* ==========================================
+   ORDER ACTIONS
+========================================== */
+
+.order-drawer-actions {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 8px;
+}
+
+.order-drawer-actions
+.admin-secondary-button {
+  justify-content: center;
+
+  min-height: 42px;
+
+  padding: 0 8px;
+}
+
+
+/* ==========================================
+   DARK MODE
+========================================== */
+
+body.dark-mode
+.management-order-icon {
+  background: #252525;
+  border-color: #333;
+  color: #ccc;
+}
+
+body.dark-mode
+.management-payment {
+  background: #252525;
+  border-color: #383838;
+  color: #ccc;
+}
+
+body.dark-mode
+.drawer-order-status > div {
+  background: #202020;
+  border-color: #333;
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 800px) {
+
+  .order-drawer-actions {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .order-stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .drawer-order-status {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 430px) {
+
+  .order-stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+
+
+
+
+/* =========================================================
+   SERVICES PAGE
+========================================================= */
+
+.services-stats-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+
+/* ---------------------------------------------------------
+   SERVICES TABLE
+--------------------------------------------------------- */
+
+.services-table th,
+.services-table td {
+  white-space: nowrap;
+}
+
+.services-table th:nth-child(3) {
+  min-width: 170px;
+}
+
+.services-table th:nth-child(4) {
+  min-width: 150px;
+}
+
+
+/* ---------------------------------------------------------
+   SERVICE DESCRIPTION
+--------------------------------------------------------- */
+
+.service-description {
+  padding: 14px 15px;
+  border: 1px solid var(--admin-border);
+  border-radius: 10px;
+  background: var(--admin-surface-soft);
+  color: var(--admin-text-secondary);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+
+/* ---------------------------------------------------------
+   DRAWER STATUS
+--------------------------------------------------------- */
+
+.service-drawer-status-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+
+
+/* ---------------------------------------------------------
+   PERSON CARD
+--------------------------------------------------------- */
+
+.service-person-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px;
+  border: 1px solid var(--admin-border);
+  border-radius: 12px;
+  background: var(--admin-surface-soft);
+}
+
+.service-person-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  background: var(--admin-text);
+  color: var(--admin-background);
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.service-person-card > div:last-child {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.service-person-card strong {
+  color: var(--admin-text);
+  font-size: 13px;
+}
+
+.service-person-card span {
+  color: var(--admin-text-muted);
+  font-size: 11px;
+}
+
+
+/* ---------------------------------------------------------
+   SELLER SELECT
+--------------------------------------------------------- */
+
+.service-seller-select {
+  width: 100%;
+  height: 43px;
+
+  padding: 0 13px;
+
+  border: 1px solid var(--admin-border);
+  border-radius: 9px;
+
+  background: var(--admin-surface);
+  color: var(--admin-text);
+
+  outline: none;
+  cursor: pointer;
+}
+
+.service-seller-select:focus {
+  border-color: var(--admin-text);
+}
+
+
+/* ---------------------------------------------------------
+   PAYMENT SUMMARY
+--------------------------------------------------------- */
+
+.admin-payment-summary {
+  border: 1px solid var(--admin-border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.admin-payment-summary > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 12px 14px;
+
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.admin-payment-summary > div:last-child {
+  border-bottom: 0;
+}
+
+.admin-payment-summary span {
+  color: var(--admin-text-muted);
+  font-size: 12px;
+}
+
+.admin-payment-summary strong {
+  color: var(--admin-text);
+  font-size: 13px;
+}
+
+.admin-payment-summary .total {
+  background: var(--admin-surface-soft);
+}
+
+.admin-payment-summary .total strong {
+  font-size: 15px;
+}
+
+
+/* ---------------------------------------------------------
+   SERVICE STATUS BADGES
+--------------------------------------------------------- */
+
+/* =========================================================
+   SERVICES MANAGEMENT PAGE
+   EcoData Admin
+========================================================= */
+
+
+/* =========================================================
+   SERVICES STATS
+========================================================= */
+
+.services-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+
+/* =========================================================
+   SERVICE STAT ICONS
+========================================================= */
+
+.services-stats-grid
+.admin-stat-icon {
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   MANAGEMENT CARD
+========================================================= */
+
+.admin-management-card {
+  position: relative;
+}
+
+
+/* =========================================================
+   FILTER BAR
+========================================================= */
+
+.admin-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  margin-bottom: 18px;
+}
+
+
+/* Search */
+
+.admin-filter-search {
+  position: relative;
+  flex: 1 1 280px;
+  min-width: 230px;
+}
+
+.admin-filter-search i {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  color: var(--admin-text-muted);
+  font-size: 16px;
+
+  pointer-events: none;
+}
+
+.admin-filter-search input {
+  width: 100%;
+  height: 42px;
+
+  padding: 0 14px 0 38px;
+
+  border: 1px solid var(--admin-border);
+  border-radius: 9px;
+
+  outline: none;
+
+  background: var(--admin-surface);
+  color: var(--admin-text);
+
+  font-family: inherit;
+  font-size: 13px;
+
+  transition:
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.admin-filter-search input::placeholder {
+  color: var(--admin-text-muted);
+}
+
+.admin-filter-search input:focus {
+  border-color: var(--admin-text);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(0, 0, 0, .04);
+}
+
+
+/* =========================================================
+   FILTER SELECTS
+========================================================= */
+
+.admin-filter-bar select {
+  height: 42px;
+
+  min-width: 145px;
+
+  padding: 0 34px 0 12px;
+
+  border: 1px solid var(--admin-border);
+  border-radius: 9px;
+
+  outline: none;
+
+  background-color: var(--admin-surface);
+  color: var(--admin-text);
+
+  font-family: inherit;
+  font-size: 12px;
+
+  cursor: pointer;
+
+  transition:
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.admin-filter-bar select:focus {
+  border-color: var(--admin-text);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(0, 0, 0, .04);
+}
+
+
+/* =========================================================
+   CLEAR FILTER BUTTON
+========================================================= */
+
+.admin-clear-filters {
+  height: 42px;
+
+  padding: 0 14px;
+
+  border: 1px solid var(--admin-border);
+  border-radius: 9px;
+
+  background: var(--admin-surface);
+  color: var(--admin-text-secondary);
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background .2s ease,
+    color .2s ease,
+    border-color .2s ease;
+}
+
+.admin-clear-filters:hover {
+  background: var(--admin-surface-soft);
+  color: var(--admin-text);
+  border-color: var(--admin-text-muted);
+}
+
+
+/* =========================================================
+   SERVICES TABLE
+========================================================= */
+
+.services-table {
+  min-width: 1050px;
+}
+
+.services-table th,
+.services-table td {
+  white-space: nowrap;
+}
+
+.services-table th {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.services-table th:nth-child(1) {
+  min-width: 160px;
+}
+
+.services-table th:nth-child(2) {
+  min-width: 165px;
+}
+
+.services-table th:nth-child(3) {
+  min-width: 170px;
+}
+
+.services-table th:nth-child(4) {
+  min-width: 145px;
+}
+
+.services-table th:nth-child(5) {
+  min-width: 100px;
+}
+
+.services-table th:nth-child(6) {
+  min-width: 100px;
+}
+
+.services-table th:nth-child(7) {
+  min-width: 125px;
+}
+
+.services-table th:nth-child(8) {
+  min-width: 110px;
+}
+
+.services-table th:last-child {
+  width: 75px;
+}
+
+
+/* =========================================================
+   TABLE PRIMARY CONTENT
+========================================================= */
+
+.services-table .admin-table-primary {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.services-table .admin-table-primary strong {
+  color: var(--admin-text);
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.services-table .admin-table-primary span {
+  color: var(--admin-text-muted);
+  font-size: 10px;
+}
+
+.services-table .admin-table-secondary {
+  color: var(--admin-text-secondary);
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   STATUS BADGES
+========================================================= */
+
+.service-status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  min-height: 25px;
+
+  padding: 4px 8px;
+
+  border-radius: 6px;
+
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 650;
+
+  white-space: nowrap;
+}
+
+.service-status-badge i {
+  font-size: 12px;
+}
+
+
+/* Pending */
+
+.service-status-badge.pending {
+  background: rgba(245, 158, 11, .10);
+  color: #b45309;
+}
+
+
+/* Assigned */
+
+.service-status-badge.assigned {
+  background: rgba(59, 130, 246, .10);
+  color: #2563eb;
+}
+
+
+/* In progress */
+
+.service-status-badge.in_progress {
+  background: rgba(99, 102, 241, .10);
+  color: #4f46e5;
+}
+
+
+/* Completed */
+
+.service-status-badge.completed {
+  background: rgba(16, 185, 129, .10);
+  color: #059669;
+}
+
+
+/* Cancelled */
+
+.service-status-badge.cancelled {
+  background: rgba(239, 68, 68, .10);
+  color: #dc2626;
+}
+
+
+/* =========================================================
+   PAYMENT BADGES
+========================================================= */
+
+.service-payment-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 25px;
+
+  padding: 4px 8px;
+
+  border-radius: 6px;
+
+  font-size: 10px;
+  font-weight: 650;
+
+  white-space: nowrap;
+}
+
+
+/* Paid */
+
+.service-payment-badge.paid {
+  background: rgba(16, 185, 129, .10);
+  color: #059669;
+}
+
+
+/* Pending */
+
+.service-payment-badge.pending {
+  background: rgba(245, 158, 11, .10);
+  color: #b45309;
+}
+
+
+/* Failed */
+
+.service-payment-badge.failed {
+  background: rgba(239, 68, 68, .10);
+  color: #dc2626;
+}
+
+
+/* Refunded */
+
+.service-payment-badge.refunded {
+  background: rgba(107, 114, 128, .12);
+  color: #4b5563;
+}
+
+
+/* =========================================================
+   TABLE ACTIONS
+========================================================= */
+
+.services-table .admin-row-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+}
+
+.services-table .admin-row-action {
+  width: 32px;
+  height: 32px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--admin-border);
+  border-radius: 7px;
+
+  background: var(--admin-surface);
+  color: var(--admin-text-secondary);
+
+  cursor: pointer;
+
+  transition:
+    background .2s ease,
+    color .2s ease,
+    border-color .2s ease;
+}
+
+.services-table .admin-row-action:hover {
+  background: var(--admin-surface-soft);
+  color: var(--admin-text);
+  border-color: var(--admin-text-muted);
+}
+
+.services-table .admin-row-action i {
+  font-size: 15px;
+}
+
+
+/* =========================================================
+   ACTION MENU
+========================================================= */
+
+.services-table .admin-action-menu {
+  position: absolute;
+
+  right: 15px;
+  top: calc(100% - 5px);
+
+  z-index: 20;
+
+  min-width: 175px;
+
+  padding: 6px;
+
+  border: 1px solid var(--admin-border);
+  border-radius: 10px;
+
+  background: var(--admin-surface);
+
+  box-shadow:
+    0 12px 35px
+    rgba(0, 0, 0, .10);
+
+  opacity: 0;
+  visibility: hidden;
+
+  transform:
+    translateY(-5px);
+
+  transition:
+    opacity .16s ease,
+    transform .16s ease,
+    visibility .16s ease;
+}
+
+.services-table .admin-action-menu.show {
+  opacity: 1;
+  visibility: visible;
+
+  transform:
+    translateY(0);
+}
+
+.services-table .admin-action-menu button {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 9px 10px;
+
+  border: 0;
+  border-radius: 7px;
+
+  background: transparent;
+  color: var(--admin-text-secondary);
+
+  font-family: inherit;
+  font-size: 12px;
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.services-table .admin-action-menu button:hover {
+  background: var(--admin-surface-soft);
+  color: var(--admin-text);
+}
+
+.services-table .admin-action-menu button i {
+  font-size: 15px;
+}
+
+.services-table .admin-action-menu button.danger {
+  color: #dc2626;
+}
+
+.services-table .admin-action-menu button.danger:hover {
+  background: rgba(239, 68, 68, .08);
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+#serviceEmptyState {
+  padding: 65px 20px;
+}
+
+#serviceEmptyState .admin-empty-icon {
+  width: 58px;
+  height: 58px;
+
+  margin: 0 auto 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--admin-border);
+  border-radius: 14px;
+
+  background: var(--admin-surface-soft);
+  color: var(--admin-text-muted);
+
+  font-size: 24px;
+}
+
+#serviceEmptyState h3 {
+  margin: 0 0 6px;
+
+  color: var(--admin-text);
+
+  font-size: 14px;
+}
+
+#serviceEmptyState p {
+  margin: 0;
+
+  color: var(--admin-text-muted);
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+#servicePagination {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 5px;
+
+  margin-top: 18px;
+}
+
+#servicePagination .admin-page-btn {
+  width: 34px;
+  height: 34px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--admin-border);
+  border-radius: 7px;
+
+  background: var(--admin-surface);
+  color: var(--admin-text-secondary);
+
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background .2s ease,
+    color .2s ease,
+    border-color .2s ease;
+}
+
+#servicePagination .admin-page-btn:hover:not(:disabled) {
+  background: var(--admin-surface-soft);
+  color: var(--admin-text);
+}
+
+#servicePagination .admin-page-btn.active {
+  background: var(--admin-text);
+  color: var(--admin-background);
+
+  border-color: var(--admin-text);
+}
+
+#servicePagination .admin-page-btn:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   DRAWER OVERLAY
+========================================================= */
+
+#serviceDrawerOverlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 900;
+
+  background: rgba(0, 0, 0, .38);
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition:
+    opacity .25s ease,
+    visibility .25s ease;
+
+  backdrop-filter: blur(2px);
+}
+
+#serviceDrawerOverlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* =========================================================
+   SERVICE DETAILS DRAWER
+========================================================= */
+
+.service-details-drawer {
+  position: fixed;
+
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  z-index: 1000;
+
+  width: min(480px, 100%);
+
+  display: flex;
+  flex-direction: column;
+
+  background: var(--admin-surface);
+
+  border-left: 1px solid var(--admin-border);
+
+  box-shadow:
+    -15px 0 45px
+    rgba(0, 0, 0, .08);
+
+  transform: translateX(100%);
+
+  transition:
+    transform .28s cubic-bezier(.4, 0, .2, 1);
+}
+
+.service-details-drawer.open {
+  transform: translateX(0);
+}
+
+
+/* =========================================================
+   DRAWER HEADER
+========================================================= */
+
+.service-details-drawer
+.admin-drawer-header {
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 20px;
+
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.service-details-drawer
+.admin-drawer-header > div {
+  min-width: 0;
+}
+
+.service-details-drawer
+.admin-drawer-header span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: var(--admin-text-muted);
+
+  font-size: 10px;
+  font-weight: 600;
+
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.service-details-drawer
+.admin-drawer-header h2 {
+  margin: 0;
+
+  color: var(--admin-text);
+
+  font-size: 16px;
+  font-weight: 700;
+
+  word-break: break-word;
+}
+
+.service-details-drawer
+.admin-drawer-close {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+
+  background: var(--admin-surface);
+  color: var(--admin-text-secondary);
+
+  cursor: pointer;
+
+  transition:
+    background .2s ease,
+    color .2s ease;
+}
+
+.service-details-drawer
+.admin-drawer-close:hover {
+  background: var(--admin-surface-soft);
+  color: var(--admin-text);
+}
+
+.service-details-drawer
+.admin-drawer-close i {
+  font-size: 18px;
+}
+
+
+/* =========================================================
+   DRAWER BODY
+========================================================= */
+
+.service-details-drawer
+.admin-drawer-body {
+  flex: 1;
+
+  overflow-y: auto;
+
+  padding: 20px;
+}
+
+
+/* Scrollbar */
+
+.service-details-drawer
+.admin-drawer-body::-webkit-scrollbar {
+  width: 5px;
+}
+
+.service-details-drawer
+.admin-drawer-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.service-details-drawer
+.admin-drawer-body::-webkit-scrollbar-thumb {
+  background: var(--admin-border);
+  border-radius: 10px;
+}
+
+
+/* =========================================================
+   DRAWER STATUS ROW
+========================================================= */
+
+.service-drawer-status-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-bottom: 22px;
+}
+
+
+/* =========================================================
+   DRAWER SECTIONS
+========================================================= */
+
+.service-details-drawer
+.admin-drawer-section {
+  margin-bottom: 24px;
+}
+
+.service-details-drawer
+.admin-drawer-section:last-child {
+  margin-bottom: 0;
+}
+
+.service-details-drawer
+.admin-drawer-section-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  margin-bottom: 11px;
+
+  color: var(--admin-text);
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.service-details-drawer
+.admin-drawer-section-title i {
+  color: var(--admin-text-muted);
+
+  font-size: 15px;
+}
+
+
+/* =========================================================
+   DETAIL LIST
+========================================================= */
+
+.service-details-drawer
+.admin-detail-list {
+  overflow: hidden;
+
+  border: 1px solid var(--admin-border);
+  border-radius: 11px;
+}
+
+.service-details-drawer
+.admin-detail-list > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 11px 13px;
+
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.service-details-drawer
+.admin-detail-list > div:last-child {
+  border-bottom: 0;
+}
+
+.service-details-drawer
+.admin-detail-list span {
+  color: var(--admin-text-muted);
+
+  font-size: 11px;
+}
+
+.service-details-drawer
+.admin-detail-list strong {
+  max-width: 62%;
+
+  color: var(--admin-text);
+
+  font-size: 12px;
+  font-weight: 600;
+
+  text-align: right;
+
+  word-break: break-word;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.service-description {
+  padding: 14px;
+
+  border: 1px solid var(--admin-border);
+  border-radius: 11px;
+
+  background: var(--admin-surface-soft);
+
+  color: var(--admin-text-secondary);
+
+  font-size: 12px;
+  line-height: 1.7;
+
+  word-break: break-word;
+}
+
+
+/* =========================================================
+   CUSTOMER CARD
+========================================================= */
+
+.service-person-card {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 13px;
+
+  border: 1px solid var(--admin-border);
+  border-radius: 11px;
+
+  background: var(--admin-surface-soft);
+}
+
+.service-person-avatar {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: var(--admin-text);
+  color: var(--admin-background);
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.service-person-card > div:last-child {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+.service-person-card strong {
+  color: var(--admin-text);
+
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.service-person-card span {
+  color: var(--admin-text-muted);
+
+  font-size: 11px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   SELLER SELECT
+========================================================= */
+
+.service-seller-select {
+  width: 100%;
+  height: 43px;
+
+  padding: 0 12px;
+
+  border: 1px solid var(--admin-border);
+  border-radius: 9px;
+
+  outline: none;
+
+  background: var(--admin-surface);
+  color: var(--admin-text);
+
+  font-family: inherit;
+  font-size: 12px;
+
+  cursor: pointer;
+
+  transition:
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.service-seller-select:focus {
+  border-color: var(--admin-text);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(0, 0, 0, .04);
+}
+
+
+/* =========================================================
+   PAYMENT SUMMARY
+========================================================= */
+
+.admin-payment-summary {
+  overflow: hidden;
+
+  border: 1px solid var(--admin-border);
+  border-radius: 11px;
+}
+
+.admin-payment-summary > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding: 12px 14px;
+
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.admin-payment-summary > div:last-child {
+  border-bottom: 0;
+}
+
+.admin-payment-summary span {
+  color: var(--admin-text-muted);
+
+  font-size: 11px;
+}
+
+.admin-payment-summary strong {
+  color: var(--admin-text);
+
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.admin-payment-summary .total {
+  background: var(--admin-surface-soft);
+}
+
+.admin-payment-summary .total span {
+  color: var(--admin-text-secondary);
+  font-weight: 600;
+}
+
+.admin-payment-summary .total strong {
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   DRAWER FOOTER
+========================================================= */
+
+.service-details-drawer
+.admin-drawer-footer {
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 14px 20px;
+
+  border-top: 1px solid var(--admin-border);
+
+  background: var(--admin-surface);
+}
+
+.service-details-drawer
+.admin-drawer-footer .admin-btn {
+  min-height: 42px;
+
+  flex: 1;
+
+  justify-content: center;
+}
+
+.service-details-drawer
+.admin-drawer-footer
+#serviceCancelBtn {
+  color: #dc2626;
+}
+
+.service-details-drawer
+.admin-drawer-footer
+#serviceCancelBtn:hover {
+  background: rgba(239, 68, 68, .07);
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+[data-theme="dark"]
+.service-status-badge.pending {
+  color: #fbbf24;
+}
+
+[data-theme="dark"]
+.service-status-badge.assigned {
+  color: #60a5fa;
+}
+
+[data-theme="dark"]
+.service-status-badge.in_progress {
+  color: #818cf8;
+}
+
+[data-theme="dark"]
+.service-status-badge.completed {
+  color: #34d399;
+}
+
+[data-theme="dark"]
+.service-status-badge.cancelled {
+  color: #f87171;
+}
+
+[data-theme="dark"]
+.service-payment-badge.paid {
+  color: #34d399;
+}
+
+[data-theme="dark"]
+.service-payment-badge.pending {
+  color: #fbbf24;
+}
+
+[data-theme="dark"]
+.service-payment-badge.failed {
+  color: #f87171;
+}
+
+[data-theme="dark"]
+.service-payment-badge.refunded {
+  color: #9ca3af;
+}
+
+
+/* =========================================================
+   RESPONSIVE — 1250px
+========================================================= */
+
+@media (max-width: 1250px) {
+
+  .services-stats-grid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 1000px
+========================================================= */
+
+@media (max-width: 1000px) {
+
+  .admin-filter-search {
+    flex-basis: 100%;
+  }
+
+  .admin-filter-bar select {
+    flex: 1;
+    min-width: 130px;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 800px
+========================================================= */
+
+@media (max-width: 800px) {
+
+  .services-stats-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+  }
+
+  .admin-filter-bar {
+    align-items: stretch;
+  }
+
+  .admin-filter-bar select {
+    flex: 1 1 calc(50% - 5px);
+  }
+
+  .admin-clear-filters {
+    flex: 0 0 auto;
+  }
+
+  .service-details-drawer {
+    width: min(460px, 100%);
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 600px
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .services-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-filter-bar {
+    display: grid;
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 8px;
+  }
+
+  .admin-filter-search {
+    grid-column: 1 / -1;
+  }
+
+  .admin-filter-bar select {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .admin-clear-filters {
+    width: 100%;
+  }
+
+  #servicePagination {
+    justify-content: center;
+  }
+
+  .service-details-drawer
+  .admin-drawer-body {
+    padding: 16px;
+  }
+
+  .service-details-drawer
+  .admin-drawer-header {
+    padding: 16px;
+  }
+
+  .service-details-drawer
+  .admin-drawer-footer {
+    padding: 12px 16px;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 430px
+========================================================= */
+
+@media (max-width: 430px) {
+
+  .admin-filter-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-filter-search {
+    grid-column: auto;
+  }
+
+  .service-details-drawer
+  .admin-drawer-footer {
+    flex-direction: column;
+  }
+
+  .service-details-drawer
+  .admin-drawer-footer
+  .admin-btn {
+    width: 100%;
+  }
+
+  .service-details-drawer
+  .admin-detail-list > div {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .service-details-drawer
+  .admin-detail-list strong {
+    max-width: 100%;
+
+    text-align: left;
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   PAYMENTS MANAGEMENT
+   ========================================================= */
+
+
+/* =========================================================
+   PAYMENT STATS
+   ========================================================= */
+
+.payments-stats-grid {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.payments-stats-grid .admin-stat-card {
+  min-width: 0;
+}
+
+.payments-stats-grid .admin-stat-content strong {
+  font-size: 20px;
+}
+
+
+/* =========================================================
+   PAYMENT MANAGEMENT CARD
+   ========================================================= */
+
+.payments-management-card {
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   PAYMENT FILTERS
+   ========================================================= */
+
+.payments-filters {
+  align-items: center;
+}
+
+.payments-search {
+  flex: 1 1 280px;
+  min-width: 240px;
+}
+
+.payments-filters select {
+  min-width: 145px;
+}
+
+
+/* =========================================================
+   PAYMENT TABLE
+   ========================================================= */
+
+.payments-table-wrap {
+  overflow-x: auto;
+}
+
+.payments-table {
+  min-width: 1180px;
+}
+
+.payments-table th,
+.payments-table td {
+  white-space: nowrap;
+}
+
+.payments-table th:nth-child(1) {
+  min-width: 190px;
+}
+
+.payments-table th:nth-child(2) {
+  min-width: 165px;
+}
+
+.payments-table th:nth-child(3) {
+  min-width: 150px;
+}
+
+.payments-table th:nth-child(4) {
+  min-width: 100px;
+}
+
+.payments-table th:nth-child(5),
+.payments-table th:nth-child(6) {
+  min-width: 110px;
+}
+
+.payments-table th:nth-child(7) {
+  min-width: 130px;
+}
+
+.payments-table th:nth-child(8) {
+  min-width: 120px;
+}
+
+.payments-table th:nth-child(9) {
+  min-width: 150px;
+}
+
+
+/* =========================================================
+   TRANSACTION CELL
+   ========================================================= */
+
+.payment-transaction-cell {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-width: 180px;
+}
+
+.payment-transaction-icon {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--admin-border);
+  border-radius: 10px;
+
+  background: var(--admin-surface-soft);
+
+  color: var(--admin-text);
+  font-size: 18px;
+}
+
+.payment-transaction-info {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.payment-transaction-info strong {
+  color: var(--admin-text);
+  font-size: 13px;
+  font-weight: 650;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.payment-transaction-info span {
+  color: var(--admin-text-muted);
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   CUSTOMER CELL
+   ========================================================= */
+
+.payment-customer-cell {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.payment-customer-avatar {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--admin-surface-soft);
+  border: 1px solid var(--admin-border);
+
+  color: var(--admin-text);
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.payment-customer-info {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.payment-customer-info strong {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--admin-text);
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.payment-customer-info span {
+  font-size: 11px;
+  color: var(--admin-text-muted);
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   PAYMENT REFERENCE
+   ========================================================= */
+
+.payment-reference {
+  display: inline-flex;
+  align-items: center;
+
+  max-width: 160px;
+
+  padding: 5px 8px;
+
+  border: 1px solid var(--admin-border);
+  border-radius: 6px;
+
+  background: var(--admin-surface-soft);
+
+  color: var(--admin-text);
+  font-size: 11px;
+  font-family: monospace;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   PAYMENT TYPE
+   ========================================================= */
+
+.payment-type {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  color: var(--admin-text-secondary);
+
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.payment-type i {
+  font-size: 15px;
+}
+
+
+/* =========================================================
+   PAYMENT AMOUNTS
+   ========================================================= */
+
+.payment-amount {
+  color: var(--admin-text);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.payment-fee {
+  color: var(--admin-text-muted);
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   PAYMENT METHOD
+   ========================================================= */
+
+.payment-method {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  color: var(--admin-text-secondary);
+
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.payment-method i {
+  font-size: 16px;
+}
+
+
+/* =========================================================
+   PAYMENT STATUS BADGES
+   ========================================================= */
+
+.payment-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 5px 9px;
+
+  border: 1px solid transparent;
+  border-radius: 999px;
+
+  font-size: 11px;
+  font-weight: 650;
+
+  white-space: nowrap;
+}
+
+.payment-status-badge i {
+  font-size: 13px;
+}
+
+
+/* Successful */
+
+.payment-status-successful {
+  background: #edf8f1;
+  border-color: #cfead8;
+  color: #247545;
+}
+
+
+/* Pending */
+
+.payment-status-pending {
+  background: #fff8e8;
+  border-color: #f0dfad;
+  color: #8b6817;
+}
+
+
+/* Failed */
+
+.payment-status-failed {
+  background: #fff0f0;
+  border-color: #f0cccc;
+  color: #a43737;
+}
+
+
+/* Refunded */
+
+.payment-status-refunded {
+  background: #f0f0f8;
+  border-color: #d8d8e8;
+  color: #5c5c78;
+}
+
+
+/* =========================================================
+   PAYMENT ACTION
+   ========================================================= */
+
+.payment-action-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.payment-action-btn {
+  width: 34px;
+  height: 34px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+
+  background: var(--admin-surface);
+
+  color: var(--admin-text-secondary);
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease;
+}
+
+.payment-action-btn:hover {
+  background: var(--admin-surface-soft);
+  border-color: var(--admin-border-strong);
+  color: var(--admin-text);
+}
+
+
+/* =========================================================
+   PAYMENT ACTION MENU
+   ========================================================= */
+
+.payment-action-menu {
+  position: absolute;
+  z-index: 30;
+
+  top: calc(100% + 7px);
+  right: 0;
+
+  min-width: 165px;
+
+  padding: 6px;
+
+  border: 1px solid var(--admin-border);
+  border-radius: 10px;
+
+  background: var(--admin-surface);
+
+  box-shadow: var(--admin-shadow-lg);
+
+  display: none;
+}
+
+.payment-action-menu.open {
+  display: block;
+}
+
+.payment-action-menu button {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 9px 10px;
+
+  border: 0;
+  border-radius: 7px;
+
+  background: transparent;
+
+  color: var(--admin-text-secondary);
+
+  font-family: inherit;
+  font-size: 12px;
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.payment-action-menu button:hover {
+  background: var(--admin-surface-soft);
+  color: var(--admin-text);
+}
+
+.payment-action-menu button.danger {
+  color: #a43737;
+}
+
+.payment-action-menu button i {
+  font-size: 15px;
+}
+
+
+/* =========================================================
+   PAYMENT DETAIL DRAWER
+   ========================================================= */
+
+.payment-detail-drawer {
+  width: min(470px, 100vw);
+}
+
+
+/* =========================================================
+   DRAWER STATUS
+   ========================================================= */
+
+.payment-drawer-status {
+  margin-bottom: 22px;
+}
+
+
+/* =========================================================
+   PAYMENT DETAIL SECTION
+   ========================================================= */
+
+.payment-detail-section {
+  padding: 0 0 22px;
+  margin-bottom: 22px;
+
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.payment-detail-section:last-child {
+  border-bottom: 0;
+  margin-bottom: 0;
+}
+
+.payment-detail-section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-bottom: 13px;
+}
+
+.payment-detail-section-title i {
+  color: var(--admin-text-muted);
+  font-size: 16px;
+}
+
+.payment-detail-section-title h3 {
+  margin: 0;
+
+  color: var(--admin-text);
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   PAYMENT SUMMARY
+   ========================================================= */
+
+.payment-summary-card {
+  padding: 16px;
+
+  border: 1px solid var(--admin-border);
+  border-radius: 12px;
+
+  background: var(--admin-surface-soft);
+}
+
+.payment-summary-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding-bottom: 15px;
+  margin-bottom: 12px;
+
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.payment-summary-main span {
+  color: var(--admin-text-muted);
+  font-size: 12px;
+}
+
+.payment-summary-main strong {
+  color: var(--admin-text);
+  font-size: 22px;
+  font-weight: 750;
+}
+
+.payment-summary-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding: 6px 0;
+}
+
+.payment-summary-row span {
+  color: var(--admin-text-muted);
+  font-size: 12px;
+}
+
+.payment-summary-row strong {
+  color: var(--admin-text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.payment-summary-total {
+  margin-top: 7px;
+  padding-top: 12px;
+
+  border-top: 1px solid var(--admin-border);
+}
+
+.payment-summary-total span {
+  color: var(--admin-text);
+  font-weight: 600;
+}
+
+.payment-summary-total strong {
+  color: var(--admin-text);
+  font-size: 14px;
+  font-weight: 750;
+}
+
+
+/* =========================================================
+   PAYMENT DETAIL LIST
+   ========================================================= */
+
+.payment-detail-section .admin-detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.payment-detail-section .admin-detail-list > div {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 9px 0;
+
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.payment-detail-section .admin-detail-list > div:last-child {
+  border-bottom: 0;
+}
+
+.payment-detail-section .admin-detail-list span {
+  color: var(--admin-text-muted);
+  font-size: 11px;
+}
+
+.payment-detail-section .admin-detail-list strong {
+  max-width: 60%;
+
+  color: var(--admin-text);
+  font-size: 12px;
+  font-weight: 600;
+  text-align: right;
+
+  word-break: break-word;
+}
+
+
+/* =========================================================
+   CUSTOMER CARD
+   ========================================================= */
+
+.payment-person-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 12px;
+
+  border: 1px solid var(--admin-border);
+  border-radius: 11px;
+
+  background: var(--admin-surface-soft);
+}
+
+.payment-person-avatar {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--admin-text);
+  color: var(--admin-background);
+
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.payment-person-card > div:last-child {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.payment-person-card strong {
+  color: var(--admin-text);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.payment-person-card span {
+  color: var(--admin-text-muted);
+  font-size: 11px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   REFUND BOX
+   ========================================================= */
+
+.payment-refund-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.payment-refund-box > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  padding: 12px;
+
+  border: 1px solid var(--admin-border);
+  border-radius: 10px;
+
+  background: var(--admin-surface-soft);
+}
+
+.payment-refund-box span {
+  color: var(--admin-text-muted);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.payment-refund-box strong {
+  color: var(--admin-text);
+  font-size: 12px;
+  font-weight: 650;
+}
+
+
+/* =========================================================
+   GATEWAY DETAILS
+   ========================================================= */
+
+.payment-gateway-box {
+  padding: 12px;
+
+  border: 1px solid var(--admin-border);
+  border-radius: 10px;
+
+  background: var(--admin-surface-soft);
+}
+
+.payment-gateway-box > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding: 8px 0;
+
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.payment-gateway-box > div:last-child {
+  border-bottom: 0;
+}
+
+.payment-gateway-box span {
+  color: var(--admin-text-muted);
+  font-size: 11px;
+}
+
+.payment-gateway-box strong {
+  color: var(--admin-text);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   DRAWER FOOTER
+   ========================================================= */
+
+.payment-detail-drawer .admin-drawer-footer {
+  display: flex;
+  gap: 10px;
+}
+
+.payment-detail-drawer .admin-drawer-footer .admin-btn {
+  flex: 1;
+}
+
+
+/* =========================================================
+   REFUND BUTTON
+   ========================================================= */
+
+.payment-detail-drawer .admin-btn-danger {
+  color: #a43737;
+  border-color: #e4c3c3;
+  background: #fff7f7;
+}
+
+.payment-detail-drawer .admin-btn-danger:hover {
+  background: #fff0f0;
+  border-color: #d9aaaa;
+}
+
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+[data-theme="dark"] .payment-status-successful {
+  background: rgba(36, 117, 69, 0.14);
+  border-color: rgba(74, 170, 105, 0.25);
+  color: #8bd6a2;
+}
+
+[data-theme="dark"] .payment-status-pending {
+  background: rgba(139, 104, 23, 0.14);
+  border-color: rgba(218, 178, 72, 0.25);
+  color: #e5c878;
+}
+
+[data-theme="dark"] .payment-status-failed {
+  background: rgba(164, 55, 55, 0.14);
+  border-color: rgba(220, 95, 95, 0.25);
+  color: #ed9a9a;
+}
+
+[data-theme="dark"] .payment-status-refunded {
+  background: rgba(92, 92, 120, 0.14);
+  border-color: rgba(130, 130, 165, 0.25);
+  color: #b9b9dc;
+}
+
+[data-theme="dark"] .payment-detail-drawer .admin-btn-danger {
+  color: #ed9a9a;
+  border-color: rgba(220, 95, 95, 0.25);
+  background: rgba(164, 55, 55, 0.10);
+}
+
+[data-theme="dark"] .payment-detail-drawer .admin-btn-danger:hover {
+  background: rgba(164, 55, 55, 0.16);
+}
+
+
+/* =========================================================
+   RESPONSIVE — LARGE TABLET
+   ========================================================= */
+
+@media (max-width: 1250px) {
+
+  .payments-stats-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .payments-filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .payments-search {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .payments-filters select {
+    width: 100%;
+  }
+
+  .payments-filters .admin-btn {
+    width: 100%;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — SMALL TABLET
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+  .payments-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .payment-detail-drawer {
+    width: min(440px, 100vw);
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .payments-stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .payments-stats-grid .admin-stat-card {
+    padding: 13px;
+  }
+
+  .payments-stats-grid .admin-stat-icon {
+    width: 34px;
+    height: 34px;
+    flex-basis: 34px;
+  }
+
+  .payments-stats-grid .admin-stat-content strong {
+    font-size: 17px;
+  }
+
+  .payments-stats-grid .admin-stat-content span {
+    font-size: 10px;
+  }
+
+
+  .payments-filters {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .payments-search {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .payments-filters select,
+  .payments-filters .admin-btn {
+    width: 100%;
+  }
+
+
+  .payment-detail-drawer {
+    width: 100%;
+  }
+
+  .payment-detail-drawer .admin-drawer-footer {
+    flex-direction: column;
+  }
+
+  .payment-detail-drawer .admin-drawer-footer .admin-btn {
+    width: 100%;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 430px) {
+
+  .payments-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .payment-refund-box {
+    grid-template-columns: 1fr;
+  }
+
+  .payment-summary-main strong {
+    font-size: 19px;
+  }
+
+  .payment-person-card {
+    padding: 10px;
+  }
+
+}
+

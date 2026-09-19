@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Products | EcoData Admin</title>
+
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css"
+  >
+
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin-dashboard.css">
+  <link rel="stylesheet" href="css/admin-pages.css">
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+  <!-- =========================================
+       SIDEBAR
+  ========================================== -->
+
+  <aside
+    class="admin-sidebar"
+    id="adminSidebar"
+  >
+
+    <div class="admin-sidebar-header">
+
+      <a
+        href="index.html"
+        class="admin-brand"
+      >
+        <span class="admin-brand-mark">E</span>
+
+        <div>
+          <strong>EcoData</strong>
+          <small>Admin</small>
+        </div>
+      </a>
+
+      <button
+        type="button"
+        class="admin-sidebar-close"
+        id="sidebarClose"
+      >
+        <i class="ri-close-line"></i>
+      </button>
+
+    </div>
+
+
+    <nav class="admin-nav">
+
+      <div class="admin-nav-section">
+
+        <span class="admin-nav-title">
+          Overview
+        </span>
+
+        <a
+          href="index.html"
+          class="admin-nav-link"
+        >
+          <i class="ri-dashboard-line"></i>
+          <span>Dashboard</span>
+        </a>
+
+      </div>
+
+
+      <div class="admin-nav-section">
+
+        <span class="admin-nav-title">
+          Management
+        </span>
+
+        <a
+          href="users.html"
+          class="admin-nav-link"
+        >
+          <i class="ri-user-line"></i>
+          <span>Users</span>
+        </a>
+
+        <a
+          href="sellers.html"
+          class="admin-nav-link"
+        >
+          <i class="ri-store-2-line"></i>
+          <span>Sellers</span>
+        </a>
+
+        <a
+          href="products.html"
+          class="admin-nav-link active"
+        >
+          <i class="ri-shopping-bag-3-line"></i>
+          <span>Products</span>
+        </a>
+
+        <a
+          href="orders.html"
+          class="admin-nav-link"
+        >
+          <i class="ri-file-list-3-line"></i>
+          <span>Orders</span>
+        </a>
+
+        <a
+          href="services.html"
+          class="admin-nav-link"
+        >
+          <i class="ri-customer-service-2-line"></i>
+          <span>Services</span>
+        </a>
+
+      </div>
+
+
+      <div class="admin-nav-section">
+
+        <span class="admin-nav-title">
+          Finance
+        </span>
+
+        <a
+          href="payments.html"
+          class="admin-nav-link"
+        >
+          <i class="ri-bank-card-line"></i>
+          <span>Payments</span>
+        </a>
+
+        <a
+          href="withdrawals.html"
+          class="admin-nav-link"
+        >
+          <i class="ri-wallet-3-line"></i>
+          <span>Withdrawals</span>
+        </a>
+
+      </div>
+
+
+      <div class="admin-nav-section">
+
+        <span class="admin-nav-title">
+          Store
+        </span>
+
+        <a
+          href="categories.html"
+          class="admin-nav-link"
+        >
+          <i class="ri-layout-grid-line"></i>
+          <span>Categories</span>
+        </a>
+
+        <a
+          href="notifications.html"
+          class="admin-nav-link"
+        >
+          <i class="ri-notification-3-line"></i>
+          <span>Notifications</span>
+        </a>
+
+      </div>
+
+
+      <div class="admin-nav-section">
+
+        <span class="admin-nav-title">
+          Reports
+        </span>
+
+        <a
+          href="reports.html"
+          class="admin-nav-link"
+        >
+          <i class="ri-bar-chart-box-line"></i>
+          <span>Reports & Analytics</span>
+        </a>
+
+        <a
+          href="activity.html"
+          class="admin-nav-link"
+        >
+          <i class="ri-history-line"></i>
+          <span>Activity Log</span>
+        </a>
+
+      </div>
+
+
+      <div class="admin-nav-section">
+
+        <span class="admin-nav-title">
+          System
+        </span>
+
+        <a
+          href="admins.html"
+          class="admin-nav-link"
+        >
+          <i class="ri-shield-user-line"></i>
+          <span>Administrators</span>
+        </a>
+
+        <a
+          href="settings.html"
+          class="admin-nav-link"
+        >
+          <i class="ri-settings-3-line"></i>
+          <span>Settings</span>
+        </a>
+
+      </div>
+
+    </nav>
+
+
+    <div class="admin-sidebar-bottom">
+
+      <a
+        href="../index.html"
+        target="_blank"
+        class="admin-open-store"
+      >
+        <i class="ri-store-line"></i>
+        <span>Open Store</span>
+        <i class="ri-external-link-line"></i>
+      </a>
+
+    </div>
+
+  </aside>
+
+
+  <div
+    class="admin-sidebar-overlay"
+    id="sidebarOverlay"
+  ></div>
+
+
+  <!-- =========================================
+       MAIN
+  ========================================== -->
+
+  <main class="admin-main">
+
+    <!-- TOPBAR -->
+
+    <header class="admin-topbar">
+
+      <div class="admin-topbar-left">
+
+        <button
+          type="button"
+          class="admin-mobile-menu"
+          id="sidebarOpen"
+        >
+          <i class="ri-menu-line"></i>
+        </button>
+
+
+        <div class="admin-page-context">
+
+          <strong>Products</strong>
+
+          <span>
+            Manage marketplace products
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="admin-topbar-actions">
+
+        <div class="admin-global-search">
+
+          <i class="ri-search-line"></i>
+
+          <input
+            type="search"
+            id="globalSearch"
+            placeholder="Search..."
+            autocomplete="off"
+          >
+
+        </div>
+
+
+        <button
+          type="button"
+          class="admin-icon-button"
+          title="Notifications"
+        >
+          <i class="ri-notification-3-line"></i>
+          <span class="admin-notification-dot"></span>
+        </button>
+
+
+        <button
+          type="button"
+          class="admin-profile-button"
+        >
+
+          <span class="admin-profile-avatar">
+            A
+          </span>
+
+          <span class="admin-profile-info">
+            <strong>Admin</strong>
+            <small>Administrator</small>
+          </span>
+
+          <i class="ri-arrow-down-s-line"></i>
+
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <!-- CONTENT -->
+
+    <div class="admin-content">
+
+
+      <!-- PAGE HEADER -->
+
+      <div class="admin-page-header">
+
+        <div>
+
+          <span class="admin-page-eyebrow">
+            Marketplace
+          </span>
+
+          <h1>Products</h1>
+
+          <p>
+            Review and manage products listed on EcoData Store.
+          </p>
+
+        </div>
+
+
+        <div class="admin-page-header-actions">
+
+          <button
+            type="button"
+            class="admin-secondary-button"
+            id="refreshProducts"
+          >
+            <i class="ri-refresh-line"></i>
+            <span>Refresh</span>
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- =====================================
+           STATISTICS
+      ====================================== -->
+
+      <div class="management-stat-grid product-stat-grid">
+
+        <div class="management-stat-card">
+
+          <div class="management-stat-icon">
+            <i class="ri-shopping-bag-3-line"></i>
+          </div>
+
+          <div>
+            <span>Total Products</span>
+            <strong id="totalProducts">0</strong>
+          </div>
+
+        </div>
+
+
+        <div class="management-stat-card">
+
+          <div class="management-stat-icon">
+            <i class="ri-time-line"></i>
+          </div>
+
+          <div>
+            <span>Pending Review</span>
+            <strong id="pendingProducts">0</strong>
+          </div>
+
+        </div>
+
+
+        <div class="management-stat-card">
+
+          <div class="management-stat-icon">
+            <i class="ri-checkbox-circle-line"></i>
+          </div>
+
+          <div>
+            <span>Published</span>
+            <strong id="publishedProducts">0</strong>
+          </div>
+
+        </div>
+
+
+        <div class="management-stat-card">
+
+          <div class="management-stat-icon">
+            <i class="ri-money-dollar-circle-line"></i>
+          </div>
+
+          <div>
+            <span>Total Sales</span>
+            <strong id="totalProductSales">
+              GH₵0
+            </strong>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =====================================
+           PRODUCT MANAGEMENT
+      ====================================== -->
+
+      <section class="management-card">
+
+        <div class="management-card-header">
+
+          <div>
+
+            <h2>Product Management</h2>
+
+            <p>
+              Search, review and control marketplace listings.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- TOOLBAR -->
+
+        <div class="management-toolbar">
+
+          <div class="management-search">
+
+            <i class="ri-search-line"></i>
+
+            <input
+              type="search"
+              id="productSearch"
+              placeholder="Search product, seller or category..."
+              autocomplete="off"
+            >
+
+          </div>
+
+
+          <div class="management-filters">
+
+            <select id="statusFilter">
+
+              <option value="all">
+                All Status
+              </option>
+
+              <option value="published">
+                Published
+              </option>
+
+              <option value="pending">
+                Pending
+              </option>
+
+              <option value="hidden">
+                Hidden
+              </option>
+
+              <option value="rejected">
+                Rejected
+              </option>
+
+            </select>
+
+
+            <select id="typeFilter">
+
+              <option value="all">
+                All Types
+              </option>
+
+              <option value="digital">
+                Digital
+              </option>
+
+              <option value="physical">
+                Physical
+              </option>
+
+              <option value="service">
+                Service
+              </option>
+
+            </select>
+
+
+            <select id="categoryFilter">
+
+              <option value="all">
+                All Categories
+              </option>
+
+            </select>
+
+
+            <select id="sortFilter">
+
+              <option value="newest">
+                Newest
+              </option>
+
+              <option value="oldest">
+                Oldest
+              </option>
+
+              <option value="sales">
+                Highest Sales
+              </option>
+
+              <option value="priceHigh">
+                Highest Price
+              </option>
+
+              <option value="priceLow">
+                Lowest Price
+              </option>
+
+              <option value="name">
+                Name A-Z
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <!-- RESULT BAR -->
+
+        <div class="management-result-bar">
+
+          <span id="productResultCount">
+            0 products
+          </span>
+
+          <button
+            type="button"
+            class="management-clear-button"
+            id="clearProductFilters"
+          >
+            Clear filters
+          </button>
+
+        </div>
+
+
+        <!-- TABLE -->
+
+        <div class="management-table-wrapper">
+
+          <table class="management-table">
+
+            <thead>
+
+              <tr>
+
+                <th>Product</th>
+                <th>Seller</th>
+                <th>Type</th>
+                <th>Price</th>
+                <th>Sales</th>
+                <th>Status</th>
+                <th>Added</th>
+                <th></th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody id="productTableBody"></tbody>
+
+          </table>
+
+
+          <!-- EMPTY -->
+
+          <div
+            class="management-empty"
+            id="productEmpty"
+            hidden
+          >
+
+            <div class="management-empty-icon">
+              <i class="ri-shopping-bag-3-line"></i>
+            </div>
+
+            <h3>No products found</h3>
+
+            <p>
+              Try changing your search or filters.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- PAGINATION -->
+
+        <div
+          class="management-pagination"
+          id="productPagination"
+        ></div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+</div>
+
+
+<!-- =========================================
+     PRODUCT DRAWER
+========================================== -->
+
+<div
+  class="admin-drawer-overlay"
+  id="productDrawerOverlay"
+  hidden
+></div>
+
+
+<aside
+  class="admin-detail-drawer"
+  id="productDrawer"
+  aria-hidden="true"
+>
+
+  <div class="drawer-header">
+
+    <div>
+
+      <span>Product Details</span>
+
+      <h2 id="drawerProductName">
+        Product
+      </h2>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="drawer-close"
+      id="closeProductDrawer"
+    >
+      <i class="ri-close-line"></i>
+    </button>
+
+  </div>
+
+
+  <div class="drawer-content">
+
+
+    <!-- PRODUCT PROFILE -->
+
+    <div class="drawer-product-profile">
+
+      <div
+        class="drawer-product-image"
+        id="drawerProductImage"
+      >
+        <i class="ri-image-line"></i>
+      </div>
+
+
+      <div>
+
+        <h3 id="drawerProductTitle">
+          Product
+        </h3>
+
+        <p id="drawerProductId">
+          PRD-00000
+        </p>
+
+        <div id="drawerProductStatus"></div>
+
+      </div>
+
+    </div>
+
+
+    <!-- PRODUCT INFO -->
+
+    <section class="drawer-section">
+
+      <div class="drawer-section-title">
+
+        <i class="ri-information-line"></i>
+
+        <span>
+          Product Information
+        </span>
+
+      </div>
+
+
+      <div class="drawer-info-grid">
+
+        <div class="drawer-info-item">
+
+          <span>Category</span>
+
+          <strong id="drawerCategory">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="drawer-info-item">
+
+          <span>Type</span>
+
+          <strong id="drawerType">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="drawer-info-item">
+
+          <span>Price</span>
+
+          <strong id="drawerPrice">
+            GH₵0
+          </strong>
+
+        </div>
+
+
+        <div class="drawer-info-item">
+
+          <span>Added</span>
+
+          <strong id="drawerAdded">
+            —
+          </strong>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- SELLER -->
+
+    <section class="drawer-section">
+
+      <div class="drawer-section-title">
+
+        <i class="ri-store-2-line"></i>
+
+        <span>
+          Seller
+        </span>
+
+      </div>
+
+
+      <div class="drawer-info-grid">
+
+        <div class="drawer-info-item">
+
+          <span>Seller</span>
+
+          <strong id="drawerSeller">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="drawer-info-item">
+
+          <span>Seller ID</span>
+
+          <strong id="drawerSellerId">
+            —
+          </strong>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- PERFORMANCE -->
+
+    <section class="drawer-section">
+
+      <div class="drawer-section-title">
+
+        <i class="ri-line-chart-line"></i>
+
+        <span>
+          Performance
+        </span>
+
+      </div>
+
+
+      <div class="drawer-info-grid">
+
+        <div class="drawer-info-item">
+
+          <span>Units Sold</span>
+
+          <strong id="drawerUnitsSold">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="drawer-info-item">
+
+          <span>Total Sales</span>
+
+          <strong id="drawerTotalSales">
+            GH₵0
+          </strong>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ACTIONS -->
+
+    <section class="drawer-section">
+
+      <div class="drawer-section-title">
+
+        <i class="ri-settings-3-line"></i>
+
+        <span>
+          Management
+        </span>
+
+      </div>
+
+
+      <div class="product-drawer-actions">
+
+        <button
+          type="button"
+          class="admin-secondary-button"
+          id="viewProductSeller"
+        >
+          <i class="ri-store-2-line"></i>
+          Seller
+        </button>
+
+
+        <button
+          type="button"
+          class="admin-secondary-button"
+          id="viewProductOrders"
+        >
+          <i class="ri-file-list-3-line"></i>
+          Orders
+        </button>
+
+
+        <button
+          type="button"
+          class="admin-secondary-button"
+          id="openProduct"
+        >
+          <i class="ri-external-link-line"></i>
+          Open
+        </button>
+
+      </div>
+
+    </section>
+
+  </div>
+
+
+  <div class="drawer-footer">
+
+    <button
+      type="button"
+      class="admin-danger-button"
+      id="productPrimaryAction"
+    >
+      <i class="ri-forbid-2-line"></i>
+      <span>Action</span>
+    </button>
+
+  </div>
+
+</aside>
+
+
+<script src="js/admin.js"></script>
+<script src="js/products.js"></script>
+
+</body>
+</html>

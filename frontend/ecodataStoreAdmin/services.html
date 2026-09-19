@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Services | EcoData Admin</title>
+
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="css/admin.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="css/admin-dashboard.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="css/admin-pages.css"
+  >
+</head>
+
+<body>
+
+  <!-- =========================
+       MOBILE OVERLAY
+  ========================== -->
+  <div
+    class="admin-mobile-overlay"
+    id="adminMobileOverlay"
+  ></div>
+
+
+  <!-- =========================
+       SIDEBAR
+  ========================== -->
+  <aside class="admin-sidebar" id="adminSidebar">
+
+    <div class="admin-sidebar-header">
+
+      <a href="index.html" class="admin-logo">
+        <span class="admin-logo-mark">
+          E
+        </span>
+
+        <span>
+          EcoData
+        </span>
+      </a>
+
+      <button
+        class="admin-sidebar-close"
+        id="adminSidebarClose"
+        aria-label="Close menu"
+      >
+        <i class="ri-close-line"></i>
+      </button>
+
+    </div>
+
+
+    <nav class="admin-nav">
+
+      <div class="admin-nav-section">
+        <span class="admin-nav-label">
+          Overview
+        </span>
+
+        <a href="index.html" class="admin-nav-link">
+          <i class="ri-dashboard-line"></i>
+          <span>Dashboard</span>
+        </a>
+      </div>
+
+
+      <div class="admin-nav-section">
+
+        <span class="admin-nav-label">
+          Marketplace
+        </span>
+
+        <a href="users.html" class="admin-nav-link">
+          <i class="ri-user-3-line"></i>
+          <span>Users</span>
+        </a>
+
+        <a href="sellers.html" class="admin-nav-link">
+          <i class="ri-store-2-line"></i>
+          <span>Sellers</span>
+        </a>
+
+        <a href="products.html" class="admin-nav-link">
+          <i class="ri-shopping-bag-3-line"></i>
+          <span>Products</span>
+        </a>
+
+        <a href="orders.html" class="admin-nav-link">
+          <i class="ri-shopping-cart-line"></i>
+          <span>Orders</span>
+        </a>
+
+        <a
+          href="services.html"
+          class="admin-nav-link active"
+        >
+          <i class="ri-service-line"></i>
+          <span>Services</span>
+        </a>
+
+      </div>
+
+
+      <div class="admin-nav-section">
+
+        <span class="admin-nav-label">
+          Finance
+        </span>
+
+        <a href="payments.html" class="admin-nav-link">
+          <i class="ri-bank-card-line"></i>
+          <span>Payments</span>
+        </a>
+
+        <a href="withdrawals.html" class="admin-nav-link">
+          <i class="ri-wallet-3-line"></i>
+          <span>Withdrawals</span>
+        </a>
+
+      </div>
+
+
+      <div class="admin-nav-section">
+
+        <span class="admin-nav-label">
+          Management
+        </span>
+
+        <a href="categories.html" class="admin-nav-link">
+          <i class="ri-folder-line"></i>
+          <span>Categories</span>
+        </a>
+
+        <a href="notifications.html" class="admin-nav-link">
+          <i class="ri-notification-3-line"></i>
+          <span>Notifications</span>
+        </a>
+
+        <a href="reports.html" class="admin-nav-link">
+          <i class="ri-bar-chart-2-line"></i>
+          <span>Reports & Analytics</span>
+        </a>
+
+        <a href="activity.html" class="admin-nav-link">
+          <i class="ri-history-line"></i>
+          <span>Activity Log</span>
+        </a>
+
+      </div>
+
+
+      <div class="admin-nav-section">
+
+        <span class="admin-nav-label">
+          System
+        </span>
+
+        <a href="admins.html" class="admin-nav-link">
+          <i class="ri-admin-line"></i>
+          <span>Administrators</span>
+        </a>
+
+        <a href="settings.html" class="admin-nav-link">
+          <i class="ri-settings-3-line"></i>
+          <span>Settings</span>
+        </a>
+
+      </div>
+
+    </nav>
+
+
+    <div class="admin-sidebar-footer">
+
+      <a
+        href="../index.html"
+        class="admin-open-store"
+      >
+        <i class="ri-external-link-line"></i>
+        <span>Open Store</span>
+      </a>
+
+    </div>
+
+  </aside>
+
+
+
+  <!-- =========================
+       MAIN
+  ========================== -->
+  <main class="admin-main">
+
+    <!-- TOPBAR -->
+    <header class="admin-topbar">
+
+      <div class="admin-topbar-left">
+
+        <button
+          class="admin-mobile-menu"
+          id="adminMobileMenu"
+          aria-label="Open menu"
+        >
+          <i class="ri-menu-line"></i>
+        </button>
+
+        <div class="admin-page-context">
+          <span>Marketplace</span>
+          <strong>Services</strong>
+        </div>
+
+      </div>
+
+
+      <div class="admin-topbar-actions">
+
+        <div class="admin-global-search">
+
+          <i class="ri-search-line"></i>
+
+          <input
+            type="text"
+            placeholder="Search..."
+            id="adminGlobalSearch"
+          >
+
+          <span class="admin-search-key">
+            /
+          </span>
+
+        </div>
+
+
+        <button
+          class="admin-icon-button"
+          title="Notifications"
+        >
+          <i class="ri-notification-3-line"></i>
+          <span class="admin-notification-dot"></span>
+        </button>
+
+
+        <button
+          class="admin-theme-toggle"
+          id="adminThemeToggle"
+          title="Toggle theme"
+        >
+          <i class="ri-moon-line"></i>
+        </button>
+
+
+        <div class="admin-profile">
+
+          <div class="admin-profile-avatar">
+            A
+          </div>
+
+          <div class="admin-profile-info">
+            <strong>Administrator</strong>
+            <span>Admin</span>
+          </div>
+
+          <i class="ri-arrow-down-s-line"></i>
+
+        </div>
+
+      </div>
+
+    </header>
+
+
+
+    <!-- PAGE CONTENT -->
+    <div class="admin-page-content">
+
+      <!-- PAGE HEADER -->
+      <div class="admin-page-header">
+
+        <div>
+          <span class="admin-page-eyebrow">
+            Marketplace
+          </span>
+
+          <h1>
+            Services
+          </h1>
+
+          <p>
+            Manage service requests, sellers, payments and fulfillment.
+          </p>
+        </div>
+
+        <div class="admin-page-header-actions">
+
+          <button
+            class="admin-btn admin-btn-secondary"
+            id="refreshServices"
+          >
+            <i class="ri-refresh-line"></i>
+            Refresh
+          </button>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- =========================
+           STATS
+      ========================== -->
+      <div class="admin-stats-grid services-stats-grid">
+
+        <div class="admin-stat-card">
+
+          <div class="admin-stat-icon">
+            <i class="ri-service-line"></i>
+          </div>
+
+          <div class="admin-stat-content">
+            <span>Total Requests</span>
+            <strong id="totalServices">
+              0
+            </strong>
+            <small>
+              All service requests
+            </small>
+          </div>
+
+        </div>
+
+
+        <div class="admin-stat-card">
+
+          <div class="admin-stat-icon warning">
+            <i class="ri-time-line"></i>
+          </div>
+
+          <div class="admin-stat-content">
+            <span>Pending</span>
+            <strong id="pendingServices">
+              0
+            </strong>
+            <small>
+              Awaiting assignment
+            </small>
+          </div>
+
+        </div>
+
+
+        <div class="admin-stat-card">
+
+          <div class="admin-stat-icon info">
+            <i class="ri-loader-4-line"></i>
+          </div>
+
+          <div class="admin-stat-content">
+            <span>In Progress</span>
+            <strong id="progressServices">
+              0
+            </strong>
+            <small>
+              Currently being fulfilled
+            </small>
+          </div>
+
+        </div>
+
+
+        <div class="admin-stat-card">
+
+          <div class="admin-stat-icon success">
+            <i class="ri-checkbox-circle-line"></i>
+          </div>
+
+          <div class="admin-stat-content">
+            <span>Completed</span>
+            <strong id="completedServices">
+              0
+            </strong>
+            <small>
+              Successfully completed
+            </small>
+          </div>
+
+        </div>
+
+
+        <div class="admin-stat-card">
+
+          <div class="admin-stat-icon">
+            <i class="ri-money-dollar-circle-line"></i>
+          </div>
+
+          <div class="admin-stat-content">
+            <span>Service Revenue</span>
+            <strong id="serviceRevenue">
+              GH₵0
+            </strong>
+            <small>
+              From completed services
+            </small>
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- =========================
+           MANAGEMENT CARD
+      ========================== -->
+      <section class="admin-management-card">
+
+        <div class="admin-management-header">
+
+          <div>
+
+            <h2>
+              Service Requests
+            </h2>
+
+            <p>
+              Review and manage customer service requests.
+            </p>
+
+          </div>
+
+          <div class="admin-result-count">
+            <strong id="serviceResultCount">
+              0
+            </strong>
+            results
+          </div>
+
+        </div>
+
+
+
+        <!-- FILTERS -->
+        <div class="admin-filter-bar">
+
+          <div class="admin-filter-search">
+
+            <i class="ri-search-line"></i>
+
+            <input
+              type="text"
+              id="serviceSearch"
+              placeholder="Search request, customer, seller or service..."
+            >
+
+          </div>
+
+
+          <select id="serviceStatusFilter">
+
+            <option value="all">
+              All Statuses
+            </option>
+
+            <option value="pending">
+              Pending
+            </option>
+
+            <option value="assigned">
+              Assigned
+            </option>
+
+            <option value="in_progress">
+              In Progress
+            </option>
+
+            <option value="completed">
+              Completed
+            </option>
+
+            <option value="cancelled">
+              Cancelled
+            </option>
+
+          </select>
+
+
+          <select id="servicePaymentFilter">
+
+            <option value="all">
+              All Payments
+            </option>
+
+            <option value="paid">
+              Paid
+            </option>
+
+            <option value="pending">
+              Payment Pending
+            </option>
+
+            <option value="failed">
+              Failed
+            </option>
+
+            <option value="refunded">
+              Refunded
+            </option>
+
+          </select>
+
+
+          <select id="serviceCategoryFilter">
+
+            <option value="all">
+              All Categories
+            </option>
+
+            <option value="design">
+              Design
+            </option>
+
+            <option value="writing">
+              Writing
+            </option>
+
+            <option value="education">
+              Education
+            </option>
+
+            <option value="technology">
+              Technology
+            </option>
+
+            <option value="documents">
+              Documents
+            </option>
+
+          </select>
+
+
+          <select id="serviceSort">
+
+            <option value="newest">
+              Newest
+            </option>
+
+            <option value="oldest">
+              Oldest
+            </option>
+
+            <option value="highest">
+              Highest Amount
+            </option>
+
+            <option value="lowest">
+              Lowest Amount
+            </option>
+
+          </select>
+
+
+          <button
+            class="admin-clear-filters"
+            id="clearServiceFilters"
+          >
+            Clear
+          </button>
+
+        </div>
+
+
+
+        <!-- TABLE -->
+        <div class="admin-table-wrapper">
+
+          <table class="admin-data-table services-table">
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  Request
+                </th>
+
+                <th>
+                  Customer
+                </th>
+
+                <th>
+                  Service
+                </th>
+
+                <th>
+                  Seller
+                </th>
+
+                <th>
+                  Amount
+                </th>
+
+                <th>
+                  Payment
+                </th>
+
+                <th>
+                  Status
+                </th>
+
+                <th>
+                  Submitted
+                </th>
+
+                <th>
+                </th>
+
+              </tr>
+
+            </thead>
+
+            <tbody id="serviceTableBody">
+            </tbody>
+
+          </table>
+
+
+
+          <!-- EMPTY STATE -->
+          <div
+            class="admin-empty-state"
+            id="serviceEmptyState"
+            hidden
+          >
+
+            <div class="admin-empty-icon">
+              <i class="ri-service-line"></i>
+            </div>
+
+            <h3>
+              No service requests found
+            </h3>
+
+            <p>
+              Try changing your search or filters.
+            </p>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- PAGINATION -->
+        <div
+          class="admin-pagination"
+          id="servicePagination"
+        ></div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+
+
+  <!-- =========================
+       SERVICE DETAILS DRAWER
+  ========================== -->
+  <div
+    class="admin-drawer-overlay"
+    id="serviceDrawerOverlay"
+  ></div>
+
+
+  <aside
+    class="admin-details-drawer service-details-drawer"
+    id="serviceDetailsDrawer"
+  >
+
+    <div class="admin-drawer-header">
+
+      <div>
+
+        <span>
+          Service Request
+        </span>
+
+        <h2 id="drawerServiceId">
+          SRV-000000
+        </h2>
+
+      </div>
+
+      <button
+        class="admin-drawer-close"
+        id="closeServiceDrawer"
+      >
+        <i class="ri-close-line"></i>
+      </button>
+
+    </div>
+
+
+
+    <div class="admin-drawer-body">
+
+      <!-- STATUS -->
+      <div class="service-drawer-status-row">
+
+        <div id="drawerServiceStatus">
+        </div>
+
+        <div id="drawerServicePayment">
+        </div>
+
+      </div>
+
+
+
+      <!-- REQUEST -->
+      <div class="admin-drawer-section">
+
+        <div class="admin-drawer-section-title">
+          <i class="ri-file-list-3-line"></i>
+          Request Details
+        </div>
+
+        <div class="admin-detail-list">
+
+          <div>
+            <span>Reference</span>
+            <strong id="drawerReference">—</strong>
+          </div>
+
+          <div>
+            <span>Service</span>
+            <strong id="drawerServiceName">—</strong>
+          </div>
+
+          <div>
+            <span>Category</span>
+            <strong id="drawerCategory">—</strong>
+          </div>
+
+          <div>
+            <span>Amount</span>
+            <strong id="drawerAmount">—</strong>
+          </div>
+
+          <div>
+            <span>Submitted</span>
+            <strong id="drawerSubmitted">—</strong>
+          </div>
+
+          <div>
+            <span>Updated</span>
+            <strong id="drawerUpdated">—</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- DESCRIPTION -->
+      <div class="admin-drawer-section">
+
+        <div class="admin-drawer-section-title">
+          <i class="ri-chat-3-line"></i>
+          Request Description
+        </div>
+
+        <div
+          class="service-description"
+          id="drawerDescription"
+        >
+          —
+        </div>
+
+      </div>
+
+
+
+      <!-- CUSTOMER -->
+      <div class="admin-drawer-section">
+
+        <div class="admin-drawer-section-title">
+          <i class="ri-user-line"></i>
+          Customer
+        </div>
+
+        <div class="service-person-card">
+
+          <div class="service-person-avatar" id="drawerCustomerAvatar">
+            A
+          </div>
+
+          <div>
+
+            <strong id="drawerCustomer">
+              —
+            </strong>
+
+            <span id="drawerCustomerPhone">
+              —
+            </span>
+
+            <span id="drawerCustomerEmail">
+              —
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- SELLER -->
+      <div class="admin-drawer-section">
+
+        <div class="admin-drawer-section-title">
+          <i class="ri-store-2-line"></i>
+          Assigned Seller
+        </div>
+
+        <select
+          class="service-seller-select"
+          id="drawerSellerSelect"
+        >
+          <option value="">
+            Unassigned
+          </option>
+        </select>
+
+      </div>
+
+
+
+      <!-- PAYMENT -->
+      <div class="admin-drawer-section">
+
+        <div class="admin-drawer-section-title">
+          <i class="ri-bank-card-line"></i>
+          Payment
+        </div>
+
+        <div class="admin-payment-summary">
+
+          <div>
+            <span>Service Amount</span>
+            <strong id="drawerServiceAmount">
+              GH₵0
+            </strong>
+          </div>
+
+          <div>
+            <span>Platform Fee</span>
+            <strong id="drawerPlatformFee">
+              GH₵0
+            </strong>
+          </div>
+
+          <div class="total">
+
+            <span>Total Paid</span>
+
+            <strong id="drawerTotalPaid">
+              GH₵0
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- DRAWER ACTIONS -->
+    <div class="admin-drawer-footer">
+
+      <button
+        class="admin-btn admin-btn-secondary"
+        id="serviceCancelBtn"
+      >
+        <i class="ri-close-circle-line"></i>
+        Cancel Request
+      </button>
+
+      <button
+        class="admin-btn admin-btn-primary"
+        id="serviceStatusBtn"
+      >
+        Update Status
+      </button>
+
+    </div>
+
+  </aside>
+
+
+
+  <script src="js/admin.js"></script>
+  <script src="js/services.js"></script>
+
+</body>
+</html>
