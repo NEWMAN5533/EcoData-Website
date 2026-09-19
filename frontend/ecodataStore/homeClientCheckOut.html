@@ -207,7 +207,7 @@ themeButton.addEventListener("click", ()=> {
         </div>
 
         <div class="aside-nav">
-          <a onclick="window.location.href='./homeClientAddresses.html'">
+          <a onclick="window.location.href='./homeClientMyAddresses.html'">
             <i class="ri-map-pin-2-line"></i>
             <span>My Addresses</span>
           </a>
@@ -410,7 +410,7 @@ themeButton.addEventListener("click", ()=> {
         </div>
 
         <div class="aside-nav">
-          <a onclick="window.location.href='./homeClientAddresses.html'">
+          <a onclick="window.location.href='./homeClientMyAddresses.html'">
             <i class="ri-map-pin-2-line"></i>
             <span>My Addresses</span>
           </a>
@@ -617,345 +617,649 @@ themeButton.addEventListener("click", ()=> {
 
 
     <!---============================
-     CART SECTION
+     CHECKOUT SECTION
      =============================-->
 
+  <!-- =========================
+       CHECKOUT PAGE
+  ========================== -->
 
   <main class="account-container">
 
+    <!-- HEADER -->
 
-    <!-- PAGE HEADER -->
+    <div class="checkout-header">
 
-    <div class="account-page-header">
+      <div>
+        <div class="checkout-breadcrumb">
+          <a href="cart.html">Cart</a>
+          <i class="ri-arrow-right-s-line"></i>
+          <span>Checkout</span>
+        </div>
 
+        <h1>Checkout</h1>
 
-      <div class="account-page-badge">
-
-        <i class="ri-shopping-cart-2-line"></i>
-
-        Shopping
-
+        <p>
+          Complete your order securely.
+        </p>
       </div>
-
-
-      <h1>
-        My Cart
-      </h1>
-
-
-      <p>
-        Review your selected products before checkout.
-      </p>
-
 
     </div>
 
 
+    <!-- =========================
+         CHECKOUT STEPS
+    ========================== -->
 
-    <!-- =========================================
-         CART LAYOUT
-    ========================================== -->
+    <div class="checkout-steps">
 
-    <div class="cart-layout">
+      <div class="checkout-step completed">
+        <span class="step-number">
+          <i class="ri-check-line"></i>
+        </span>
 
-
-      <!-- =======================================
-           CART ITEMS
-      ======================================== -->
-
-      <section class="cart-main">
-
-
-        <div class="account-card cart-items-card">
+        <div>
+          <strong>Cart</strong>
+          <small>Your items</small>
+        </div>
+      </div>
 
 
-          <div class="cart-card-header">
+      <div class="checkout-step active">
+
+        <span class="step-number">
+          2
+        </span>
+
+        <div>
+          <strong>Checkout</strong>
+          <small>Payment & details</small>
+        </div>
+
+      </div>
+
+
+      <div class="checkout-step">
+
+        <span class="step-number">
+          3
+        </span>
+
+        <div>
+          <strong>Complete</strong>
+          <small>Order confirmation</small>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         EMPTY CHECKOUT
+    ========================== -->
+
+    <section id="checkoutEmpty" class="checkout-empty">
+
+      <div class="checkout-empty-icon">
+        <i class="ri-shopping-cart-line"></i>
+      </div>
+
+      <h2>Your cart is empty</h2>
+
+      <p>
+        Add something to your cart before continuing to checkout.
+      </p>
+
+      <a href="index.html" class="checkout-primary-btn">
+        <i class="ri-store-2-line"></i>
+        Browse Store
+      </a>
+
+    </section>
+
+
+    <!-- =========================
+         CHECKOUT CONTENT
+    ========================== -->
+
+    <section id="checkoutContent" class="checkout-layout">
+
+
+      <!-- =========================
+           LEFT SIDE
+      ========================== -->
+
+      <div class="checkout-main">
+
+
+        <!-- CUSTOMER INFORMATION -->
+
+        <div class="checkout-card">
+
+          <div class="checkout-card-header">
+
+            <div>
+              <h2>Contact Information</h2>
+
+              <p>
+                Where should we send your order details?
+              </p>
+            </div>
+
+            <span class="checkout-card-icon">
+              <i class="ri-user-3-line"></i>
+            </span>
+
+          </div>
+
+
+          <div class="checkout-form-grid">
+
+            <div class="checkout-field">
+
+              <label for="customerName">
+                Full Name
+              </label>
+
+              <div class="checkout-input">
+
+                <i class="ri-user-line"></i>
+
+                <input
+                  type="text"
+                  id="customerName"
+                  placeholder="Enter your full name"
+                  autocomplete="name"
+                >
+
+              </div>
+
+              <small
+                class="checkout-error"
+                id="customerNameError"
+              ></small>
+
+            </div>
+
+
+            <div class="checkout-field">
+
+              <label for="customerPhone">
+                Phone Number
+              </label>
+
+              <div class="checkout-input">
+
+                <i class="ri-phone-line"></i>
+
+                <input
+                  type="tel"
+                  id="customerPhone"
+                  placeholder="0XXXXXXXXX"
+                  autocomplete="tel"
+                >
+
+              </div>
+
+              <small
+                class="checkout-error"
+                id="customerPhoneError"
+              ></small>
+
+            </div>
+
+
+            <div class="checkout-field checkout-full">
+
+              <label for="customerEmail">
+                Email Address
+              </label>
+
+              <div class="checkout-input">
+
+                <i class="ri-mail-line"></i>
+
+                <input
+                  type="email"
+                  id="customerEmail"
+                  placeholder="you@example.com"
+                  autocomplete="email"
+                >
+
+              </div>
+
+              <small
+                class="checkout-error"
+                id="customerEmailError"
+              ></small>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- DELIVERY INFORMATION -->
+
+        <div
+          id="deliveryCard"
+          class="checkout-card"
+        >
+
+          <div class="checkout-card-header">
 
             <div>
 
-              <h2 class="account-card-title">
-                Your Cart
-              </h2>
+              <h2>Delivery Information</h2>
 
-              <p id="cartItemLabel">
+              <p>
+                Where should we deliver your physical items?
+              </p>
+
+            </div>
+
+            <span class="checkout-card-icon">
+              <i class="ri-map-pin-line"></i>
+            </span>
+
+          </div>
+
+
+          <div class="checkout-form-grid">
+
+
+            <div class="checkout-field checkout-full">
+
+              <label for="deliveryAddress">
+                Delivery Address
+              </label>
+
+              <div class="checkout-input">
+
+                <i class="ri-home-4-line"></i>
+
+                <input
+                  type="text"
+                  id="deliveryAddress"
+                  placeholder="House number, street, area"
+                  autocomplete="street-address"
+                >
+
+              </div>
+
+              <small
+                class="checkout-error"
+                id="deliveryAddressError"
+              ></small>
+
+            </div>
+
+
+            <div class="checkout-field">
+
+              <label for="deliveryCity">
+                City / Town
+              </label>
+
+              <div class="checkout-input">
+
+                <i class="ri-building-line"></i>
+
+                <input
+                  type="text"
+                  id="deliveryCity"
+                  placeholder="e.g. Sunyani"
+                >
+
+              </div>
+
+            </div>
+
+
+            <div class="checkout-field">
+
+              <label for="deliveryRegion">
+                Region
+              </label>
+
+              <div class="checkout-input">
+
+                <i class="ri-map-2-line"></i>
+
+                <select id="deliveryRegion">
+
+                  <option value="">
+                    Select region
+                  </option>
+
+                  <option>Ahafo</option>
+                  <option>Ashanti</option>
+                  <option>Bono</option>
+                  <option>Bono East</option>
+                  <option>Central</option>
+                  <option>Eastern</option>
+                  <option>Greater Accra</option>
+                  <option>North East</option>
+                  <option>Northern</option>
+                  <option>Oti</option>
+                  <option>Savannah</option>
+                  <option>Upper East</option>
+                  <option>Upper West</option>
+                  <option>Volta</option>
+                  <option>Western</option>
+                  <option>Western North</option>
+
+                </select>
+
+              </div>
+
+            </div>
+
+
+            <div class="checkout-field checkout-full">
+
+              <label for="deliveryNotes">
+                Delivery Notes
+                <span>Optional</span>
+              </label>
+
+              <textarea
+                id="deliveryNotes"
+                rows="3"
+                placeholder="Any directions or additional information?"
+              ></textarea>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- PAYMENT -->
+
+        <div class="checkout-card">
+
+          <div class="checkout-card-header">
+
+            <div>
+
+              <h2>Payment Method</h2>
+
+              <p>
+                Choose how you want to pay.
+              </p>
+
+            </div>
+
+            <span class="checkout-card-icon">
+              <i class="ri-bank-card-line"></i>
+            </span>
+
+          </div>
+
+
+          <div class="payment-methods">
+
+
+            <label class="payment-option active">
+
+              <input
+                type="radio"
+                name="paymentMethod"
+                value="mobile_money"
+                checked
+              >
+
+              <div class="payment-option-icon">
+                <i class="ri-smartphone-line"></i>
+              </div>
+
+              <div class="payment-option-info">
+
+                <strong>Mobile Money</strong>
+
+                <span>
+                  Pay securely with Mobile Money
+                </span>
+
+              </div>
+
+              <i class="ri-checkbox-circle-fill payment-check"></i>
+
+            </label>
+
+
+            <label class="payment-option">
+
+              <input
+                type="radio"
+                name="paymentMethod"
+                value="card"
+              >
+
+              <div class="payment-option-icon">
+                <i class="ri-bank-card-line"></i>
+              </div>
+
+              <div class="payment-option-info">
+
+                <strong>Bank Card</strong>
+
+                <span>
+                  Visa, Mastercard and supported cards
+                </span>
+
+              </div>
+
+              <i class="ri-checkbox-circle-fill payment-check"></i>
+
+            </label>
+
+
+          </div>
+
+        </div>
+
+
+        <!-- ORDER NOTES -->
+
+        <div class="checkout-card checkout-note-card">
+
+          <i class="ri-information-line"></i>
+
+          <div>
+
+            <strong>Secure payment</strong>
+
+            <p>
+              Your payment will be processed securely.
+              Never share your PIN, OTP or card security details
+              with anyone.
+            </p>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+      <!-- =========================
+           RIGHT SIDE
+      ========================== -->
+
+      <aside class="checkout-sidebar">
+
+
+        <!-- ORDER SUMMARY -->
+
+        <div class="checkout-card order-summary-card">
+
+          <div class="checkout-card-header">
+
+            <div>
+
+              <h2>Your Order</h2>
+
+              <p id="orderItemCount">
                 0 items
               </p>
 
             </div>
 
-
-            <button
-              type="button"
-              class="cart-clear-btn"
-              id="clearCartBtn"
-            >
-
-              <i class="ri-delete-bin-line"></i>
-
-              Clear Cart
-
-            </button>
-
           </div>
 
 
-
-          <!-- ITEMS -->
-
           <div
-            class="cart-items"
-            id="cartItems"
+            id="checkoutItems"
+            class="checkout-items"
           ></div>
-
-
-
-          <!-- EMPTY STATE -->
-
-          <div
-            class="cart-empty"
-            id="cartEmpty"
-            hidden
-          >
-
-            <div class="cart-empty-icon">
-
-              <i class="ri-shopping-cart-2-line"></i>
-
-            </div>
-
-
-            <h3>
-              Your cart is empty
-            </h3>
-
-
-            <p>
-              You haven't added anything to your cart yet.
-            </p>
-
-
-            <a
-              href="index.html"
-              class="account-btn primary"
-            >
-
-              <i class="ri-store-2-line"></i>
-
-              Browse Store
-
-            </a>
-
-          </div>
-
-
-        </div>
-
-
-        <!-- CONTINUE SHOPPING -->
-
-        <a
-          href="./homeClientProduct.html"
-          class="cart-continue"
-        >
-
-          <i class="ri-arrow-left-line"></i>
-
-          Continue Shopping
-
-        </a>
-
-
-      </section>
-
-
-
-      <!-- =======================================
-           SUMMARY
-      ======================================== -->
-
-      <aside class="cart-summary">
-
-
-        <div class="account-card cart-summary-card">
-
-
-          <div class="cart-summary-header">
-
-            <h2>
-              Order Summary
-            </h2>
-
-          </div>
-
-
-
-          <!-- SUBTOTAL -->
-
-          <div class="cart-summary-row">
-
-            <span>
-              Subtotal
-            </span>
-
-            <strong id="cartSubtotal">
-              GH₵0.00
-            </strong>
-
-          </div>
-
-
-
-          <!-- DELIVERY -->
-
-          <div class="cart-summary-row">
-
-            <span>
-              Delivery
-            </span>
-
-            <strong id="cartDelivery">
-              GH₵0.00
-            </strong>
-
-          </div>
-
-
-
-          <!-- DISCOUNT -->
-
-          <div
-            class="cart-summary-row discount-row"
-            id="discountRow"
-            hidden
-          >
-
-            <span>
-              Discount
-            </span>
-
-            <strong id="cartDiscount">
-              -GH₵0.00
-            </strong>
-
-          </div>
-
-
-
-          <!-- DIVIDER -->
-
-          <div class="cart-summary-divider"></div>
-
-
-
-          <!-- TOTAL -->
-
-          <div class="cart-total-row">
-
-            <span>
-              Total
-            </span>
-
-            <strong id="cartTotal">
-              GH₵0.00
-            </strong>
-
-          </div>
-
 
 
           <!-- PROMO -->
 
-          <div class="cart-promo">
+          <div class="checkout-promo">
 
-            <label for="promoCode">
+            <label for="checkoutPromoCode">
               Promo Code
             </label>
 
-
-            <div class="promo-input">
+            <div class="promo-input-row">
 
               <input
                 type="text"
-                id="promoCode"
+                id="checkoutPromoCode"
                 placeholder="Enter code"
-                autocomplete="off"
               >
-
 
               <button
                 type="button"
-                id="applyPromoBtn"
+                id="applyCheckoutPromo"
               >
                 Apply
               </button>
 
             </div>
 
-
-            <small id="promoMessage"></small>
+            <small id="checkoutPromoMessage"></small>
 
           </div>
 
 
+          <!-- TOTALS -->
 
-          <!-- CHECKOUT -->
+          <div class="checkout-totals">
+
+            <div>
+
+              <span>Subtotal</span>
+
+              <strong id="checkoutSubtotal">
+                GH₵0.00
+              </strong>
+
+            </div>
+
+
+            <div id="checkoutDeliveryRow">
+
+              <span>Delivery</span>
+
+              <strong id="checkoutDelivery">
+                GH₵0.00
+              </strong>
+
+            </div>
+
+
+            <div
+              id="checkoutDiscountRow"
+              class="discount-row"
+              hidden
+            >
+
+              <span>Discount</span>
+
+              <strong id="checkoutDiscount">
+                -GH₵0.00
+              </strong>
+
+            </div>
+
+
+            <div class="checkout-total">
+
+              <span>Total</span>
+
+              <strong id="checkoutTotal">
+                GH₵0.00
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <!-- PLACE ORDER -->
 
           <button
             type="button"
-            onclick="window.location.href='./homeClientCheckOut.html'"
-            class="cart-checkout-btn"
-            id="checkoutBtn"
+            id="placeOrderBtn"
+            class="place-order-btn"
           >
 
-            <i class="ri-lock-2-line"></i>
+            <span>
+              <i class="ri-lock-line"></i>
+              Place Order
+            </span>
 
-            Proceed to Checkout
+            <i class="ri-arrow-right-line"></i>
 
           </button>
 
 
-
-          <!-- SECURE NOTE -->
-
-          <div class="cart-secure-note">
+          <div class="checkout-security">
 
             <i class="ri-shield-check-line"></i>
 
             <span>
-              Secure checkout powered by EcoData.
+              Secure checkout
             </span>
 
           </div>
 
-
         </div>
 
 
-        <!-- PAYMENT METHODS -->
+        <!-- BACK TO CART -->
 
-        <div class="cart-payment-note">
+        <a
+          href="cart.html"
+          class="back-cart-btn"
+        >
 
-          <span>
-            We accept
-          </span>
+          <i class="ri-arrow-left-line"></i>
 
-          <div>
+          Return to Cart
 
-            <span>Mobile Money</span>
-
-            <span>Bank Card</span>
-
-          </div>
-
-        </div>
+        </a>
 
 
       </aside>
 
-    </div>
-
+    </section>
 
   </main>
+
+
+
+
+
+
 
 
 
