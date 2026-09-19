@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Payments | EcoData Admin</title>
+
+  <!-- Remix Icons -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css"
+    rel="stylesheet"
+  >
+
+  <!-- Admin Styles -->
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin-pages.css">
+</head>
+
+<body>
+
+  <!-- =========================
+       MOBILE OVERLAY
+  ========================== -->
+  <div class="admin-mobile-overlay" id="adminMobileOverlay"></div>
+
+
+  <!-- =========================
+       SIDEBAR
+  ========================== -->
+  <aside class="admin-sidebar" id="adminSidebar">
+
+   <div class="admin-sidebar-top">
+
+      <a href="index.html" class="admin-brand">
+
+        <span class="admin-brand-icon">
+          <i class="ri-store-2-line"></i>
+        </span>
+
+        <span class="admin-brand-text">
+          <strong>EcoData</strong>
+          <small>Admin</small>
+        </span>
+
+      </a>
+
+      <button
+        class="admin-sidebar-close"
+        id="sidebarClose"
+        aria-label="Close sidebar"
+      >
+        <i class="ri-close-line"></i>
+      </button>
+
+    </div>
+
+
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+    <nav class="admin-nav">
+
+      <div class="admin-nav-section">
+        <span class="admin-nav-label">Overview</span>
+
+        <a href="index.html" class="admin-nav-link">
+          <i class="ri-dashboard-line"></i>
+          <span>Dashboard</span>
+        </a>
+      </div>
+
+
+      <div class="admin-nav-section">
+
+        <span class="admin-nav-label">Marketplace</span>
+
+        <a href="users.html" class="admin-nav-link">
+          <i class="ri-user-3-line"></i>
+          <span>Users</span>
+        </a>
+
+        <a href="sellers.html" class="admin-nav-link">
+          <i class="ri-store-line"></i>
+          <span>Sellers</span>
+        </a>
+
+        <a href="products.html" class="admin-nav-link">
+          <i class="ri-box-3-line"></i>
+          <span>Products</span>
+        </a>
+
+        <a href="orders.html" class="admin-nav-link">
+          <i class="ri-shopping-bag-3-line"></i>
+          <span>Orders</span>
+        </a>
+
+        <a href="services.html" class="admin-nav-link">
+          <i class="ri-service-line"></i>
+          <span>Services</span>
+        </a>
+
+      </div>
+
+
+      <div class="admin-nav-section">
+
+        <span class="admin-nav-label">Finance</span>
+
+        <a href="payments.html" class="admin-nav-link active">
+          <i class="ri-bank-card-line"></i>
+          <span>Payments</span>
+        </a>
+
+        <a href="withdrawals.html" class="admin-nav-link">
+          <i class="ri-money-dollar-circle-line"></i>
+          <span>Withdrawals</span>
+        </a>
+
+      </div>
+
+
+      <div class="admin-nav-section">
+
+        <span class="admin-nav-label">Management</span>
+
+        <a href="categories.html" class="admin-nav-link">
+          <i class="ri-grid-line"></i>
+          <span>Categories</span>
+        </a>
+
+        <a href="notifications.html" class="admin-nav-link">
+          <i class="ri-notification-3-line"></i>
+          <span>Notifications</span>
+        </a>
+
+        <a href="reports.html" class="admin-nav-link">
+          <i class="ri-bar-chart-box-line"></i>
+          <span>Reports & Analytics</span>
+        </a>
+
+        <a href="activity.html" class="admin-nav-link">
+          <i class="ri-history-line"></i>
+          <span>Activity Log</span>
+        </a>
+
+      </div>
+
+
+      <div class="admin-nav-section">
+
+        <span class="admin-nav-label">System</span>
+
+        <a href="admins.html" class="admin-nav-link">
+          <i class="ri-admin-line"></i>
+          <span>Administrators</span>
+        </a>
+
+        <a href="settings.html" class="admin-nav-link">
+          <i class="ri-settings-3-line"></i>
+          <span>Settings</span>
+        </a>
+
+      </div>
+
+    </nav>
+
+
+    <!-- =========================
+         SIDEBAR FOOTER
+    ========================== -->
+    <div class="admin-sidebar-footer">
+
+      <a
+        href="../index.html"
+        class="admin-open-store"
+        target="_blank"
+      >
+        <i class="ri-external-link-line"></i>
+        <span>Open Store</span>
+      </a>
+
+    </div>
+
+  </aside>
+
+
+  <!-- =========================
+       MAIN
+  ========================== -->
+  <main class="admin-main">
+
+
+    <!-- =========================
+         TOP BAR
+    ========================== -->
+    <header class="admin-topbar">
+
+        <div class="admin-topbar-left">
+
+          <button
+            class="admin-menu-button"
+            id="sidebarToggle"
+            aria-label="Open sidebar"
+          >
+            <i class="ri-menu-line"></i>
+          </button>
+
+          <div class="admin-page-context">
+
+            <strong>Reports</strong>
+
+            <span>
+              Overview of your store
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="admin-topbar-right">
+
+
+          <!-- SEARCH -->
+
+          <div class="admin-search">
+
+            <i class="ri-search-line"></i>
+
+            <input
+              type="search"
+              id="adminSearch"
+              placeholder="Search..."
+              autocomplete="off"
+            >
+
+            <span class="admin-search-shortcut">
+              /
+            </span>
+
+          </div>
+
+
+          <!-- NOTIFICATIONS -->
+
+          <button
+            class="admin-icon-button notification-button"
+            id="notificationButton"
+            aria-label="Notifications"
+          >
+
+            <i class="ri-notification-3-line"></i>
+
+            <span class="notification-dot"></span>
+
+          </button>
+
+
+          <!-- ADMIN PROFILE -->
+
+          <div class="admin-profile-wrapper">
+
+            <button
+              class="admin-profile-button"
+              id="adminProfileButton"
+            >
+
+              <span class="admin-avatar">
+                <i class="ri-admin-line"></i>
+              </span>
+
+              <span class="admin-profile-info">
+
+                <strong>Admin</strong>
+
+                <small>
+                  Super Admin
+                </small>
+
+              </span>
+
+              <i class="ri-arrow-down-s-line"></i>
+
+            </button>
+
+
+            <!-- PROFILE MENU -->
+
+            <div
+              class="admin-profile-menu"
+              id="adminProfileMenu"
+            >
+
+              <div class="admin-profile-menu-header">
+
+                <span class="admin-avatar large">
+                  <i class="ri-admin-line"></i>
+                </span>
+
+                <div>
+
+                  <strong>Administrator</strong>
+
+                  <span>Super Admin</span>
+
+                </div>
+
+              </div>
+
+              <div class="admin-profile-menu-divider"></div>
+
+              <a href="settings.html">
+                <i class="ri-settings-3-line"></i>
+                <span>Settings</span>
+              </a>
+
+              <a href="../index.html">
+                <i class="ri-store-2-line"></i>
+                <span>View Store</span>
+              </a>
+
+              <div class="admin-profile-menu-divider"></div>
+
+              <button id="adminLogoutButton">
+                <i class="ri-logout-box-r-line"></i>
+                <span>Sign Out</span>
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </header>
+
+
+    <!-- =========================
+         PAGE CONTENT
+  
+
+    
+
+  </main>
+
+
+  <!-- =========================
+       PAYMENT DETAIL DRAWER
+  ========================== -->
+  <div
+    class="admin-drawer-overlay"
+    id="paymentDrawerOverlay"
+  ></div>
+
+
+  <aside
+    class="admin-detail-drawer payment-detail-drawer"
+    id="paymentDrawer"
+    aria-hidden="true"
+  >
+
+    <!-- DRAWER HEADER -->
+    <div class="admin-drawer-header">
+
+      <div>
+
+        <span class="admin-drawer-eyebrow">
+          Payment Transaction
+        </span>
+
+        <h2 id="drawerPaymentId">
+          —
+        </h2>
+
+      </div>
+
+
+      <button
+        class="admin-drawer-close"
+        id="closePaymentDrawer"
+        type="button"
+        aria-label="Close payment details"
+      >
+        <i class="ri-close-line"></i>
+      </button>
+
+    </div>
+
+
+    <!-- DRAWER BODY -->
+    <div class="admin-drawer-body">
+
+
+      <!-- STATUS -->
+      <div
+        class="payment-drawer-status"
+        id="drawerPaymentStatus"
+      ></div>
+
+
+      <!-- PAYMENT SUMMARY -->
+      <section class="payment-detail-section">
+
+        <div class="payment-detail-section-title">
+          <i class="ri-money-dollar-circle-line"></i>
+          <h3>Payment Summary</h3>
+        </div>
+
+
+        <div class="payment-summary-card">
+
+          <div class="payment-summary-main">
+
+            <span>Amount Paid</span>
+
+            <strong id="drawerAmount">
+              GH₵0.00
+            </strong>
+
+          </div>
+
+
+          <div class="payment-summary-row">
+
+            <span>Subtotal</span>
+
+            <strong id="drawerSubtotal">
+              GH₵0.00
+            </strong>
+
+          </div>
+
+
+          <div class="payment-summary-row">
+
+            <span>Gateway Fee</span>
+
+            <strong id="drawerFee">
+              GH₵0.00
+            </strong>
+
+          </div>
+
+
+          <div class="payment-summary-row payment-summary-total">
+
+            <span>Net Amount</span>
+
+            <strong id="drawerNetAmount">
+              GH₵0.00
+            </strong>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- TRANSACTION INFO -->
+      <section class="payment-detail-section">
+
+        <div class="payment-detail-section-title">
+          <i class="ri-file-list-3-line"></i>
+          <h3>Transaction Information</h3>
+        </div>
+
+
+        <div class="admin-detail-list">
+
+          <div>
+            <span>Transaction ID</span>
+            <strong id="drawerTransactionId">—</strong>
+          </div>
+
+          <div>
+            <span>Payment Reference</span>
+            <strong id="drawerReference">—</strong>
+          </div>
+
+          <div>
+            <span>Gateway Reference</span>
+            <strong id="drawerGatewayReference">—</strong>
+          </div>
+
+          <div>
+            <span>Payment Type</span>
+            <strong id="drawerPaymentType">—</strong>
+          </div>
+
+          <div>
+            <span>Payment Method</span>
+            <strong id="drawerPaymentMethod">—</strong>
+          </div>
+
+          <div>
+            <span>Currency</span>
+            <strong id="drawerCurrency">GHS</strong>
+          </div>
+
+          <div>
+            <span>Created</span>
+            <strong id="drawerCreated">—</strong>
+          </div>
+
+          <div>
+            <span>Updated</span>
+            <strong id="drawerUpdated">—</strong>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- CUSTOMER -->
+      <section class="payment-detail-section">
+
+        <div class="payment-detail-section-title">
+          <i class="ri-user-3-line"></i>
+          <h3>Customer</h3>
+        </div>
+
+
+        <div class="payment-person-card">
+
+          <div class="payment-person-avatar" id="drawerCustomerAvatar">
+            A
+          </div>
+
+          <div>
+
+            <strong id="drawerCustomerName">
+              —
+            </strong>
+
+            <span id="drawerCustomerEmail">
+              —
+            </span>
+
+            <span id="drawerCustomerPhone">
+              —
+            </span>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- RELATED ITEM -->
+      <section class="payment-detail-section">
+
+        <div class="payment-detail-section-title">
+          <i class="ri-links-line"></i>
+          <h3>Related Transaction</h3>
+        </div>
+
+
+        <div class="admin-detail-list">
+
+          <div>
+            <span>Reference</span>
+            <strong id="drawerRelatedReference">—</strong>
+          </div>
+
+          <div>
+            <span>Item</span>
+            <strong id="drawerRelatedItem">—</strong>
+          </div>
+
+          <div>
+            <span>Seller</span>
+            <strong id="drawerRelatedSeller">—</strong>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- REFUND -->
+      <section
+        class="payment-detail-section"
+        id="drawerRefundSection"
+      >
+
+        <div class="payment-detail-section-title">
+          <i class="ri-arrow-go-back-line"></i>
+          <h3>Refund</h3>
+        </div>
+
+
+        <div class="payment-refund-box">
+
+          <div>
+            <span>Refund Status</span>
+            <strong id="drawerRefundStatus">
+              Not Refunded
+            </strong>
+          </div>
+
+          <div>
+            <span>Refund Amount</span>
+            <strong id="drawerRefundAmount">
+              GH₵0.00
+            </strong>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- GATEWAY RESPONSE -->
+      <section class="payment-detail-section">
+
+        <div class="payment-detail-section-title">
+          <i class="ri-code-s-line"></i>
+          <h3>Gateway Details</h3>
+        </div>
+
+
+        <div class="payment-gateway-box">
+
+          <div>
+            <span>Gateway</span>
+            <strong id="drawerGateway">
+              Paystack
+            </strong>
+          </div>
+
+          <div>
+            <span>Gateway Status</span>
+            <strong id="drawerGatewayStatus">
+              —
+            </strong>
+          </div>
+
+          <div>
+            <span>Channel</span>
+            <strong id="drawerChannel">
+              —
+            </strong>
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+
+
+    <!-- DRAWER FOOTER -->
+    <div class="admin-drawer-footer">
+
+      <button
+        class="admin-btn admin-btn-danger"
+        id="refundPaymentBtn"
+        type="button"
+      >
+        <i class="ri-arrow-go-back-line"></i>
+        Refund
+      </button>
+
+
+      <button
+        class="admin-btn admin-btn-primary"
+        id="verifyPaymentBtn"
+        type="button"
+      >
+        <i class="ri-shield-check-line"></i>
+        Verify Payment
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <!-- =========================
+       SCRIPT
+  ========================== -->
+  <script src="js/admin.js"></script>
+  <script src="js/withdrawals.js"></script>
+
+</body>
+</html>
+
