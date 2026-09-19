@@ -112,11 +112,11 @@ let users = [
 // STATE
 // ==========================================
 
-let filteredUsers = [];
+let filteredUsers = [...users];
 
 let currentPage = 1;
 
-const USERS_PER_PAGE = 6;
+const USERS_PER_PAGE = 5;
 
 let selectedUser = null;
 
@@ -437,6 +437,8 @@ function applyUserFilters() {
 
 function renderUsers() {
 
+  
+
   const total =
     filteredUsers.length;
 
@@ -450,7 +452,7 @@ function renderUsers() {
     userResultCount.textContent =
       "0 users";
 
-    updatePagination();
+
 
     return;
 
@@ -491,8 +493,6 @@ function renderUsers() {
         : "users"
     }`;
 
-
-  updatePagination();
 
 }
 
@@ -1016,113 +1016,28 @@ emptyClearFilters.addEventListener(
 // ==========================================
 // PAGINATION
 // ==========================================
+const container = 
+document.getElementById("paginationButtons");
 
-function updatePagination() {
-
-  const total =
-    filteredUsers.length;
-
-  const totalPages =
-    Math.max(
-      1,
-      Math.ceil(
-        total / USERS_PER_PAGE
-      )
-    );
+const infoElement = 
+document.getElementById("paginationInfo");
 
 
-  if (currentPage > totalPages) {
-    currentPage = totalPages;
-  }
+renderPagination({
+container: paginationButtons,
+infoElement: paginationInfo,
+totalItems: filteredUsers.length,
 
+currentPage,
 
-  const start =
-    total === 0
-      ? 0
-      : ((currentPage - 1) *
-        USERS_PER_PAGE) + 1;
+itemsPerPage: USERS_PER_PAGE,
 
+onPageChange: (page) => {
+  currentPage = page;
 
-  const end =
-    Math.min(
-      currentPage *
-      USERS_PER_PAGE,
-      total
-    );
-
-
-  paginationInfo.textContent =
-    total === 0
-
-      ? "Showing 0 users"
-
-      : `Showing ${start}–${end} of ${
-          total.toLocaleString()
-        }`;
-
-
-  previousPage.disabled =
-    currentPage <= 1;
-
-  nextPage.disabled =
-    currentPage >= totalPages;
-
-
-  previousPage.style.opacity =
-    previousPage.disabled
-      ? ".4"
-      : "1";
-
-  nextPage.style.opacity =
-    nextPage.disabled
-      ? ".4"
-      : "1";
-
+  renderUsers();
 }
-
-
-// ==========================================
-// PREVIOUS
-// ==========================================
-
-previousPage.addEventListener(
-  "click",
-  () => {
-
-    if (currentPage <= 1) return;
-
-    currentPage--;
-
-    renderUsers();
-
-  }
-);
-
-
-// ==========================================
-// NEXT
-// ==========================================
-
-nextPage.addEventListener(
-  "click",
-  () => {
-
-    const totalPages =
-      Math.ceil(
-        filteredUsers.length /
-        USERS_PER_PAGE
-      );
-
-    if (
-      currentPage >= totalPages
-    ) return;
-
-    currentPage++;
-
-    renderUsers();
-
-  }
-);
+});
 
 
 // ==========================================

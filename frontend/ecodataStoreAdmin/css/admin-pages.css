@@ -1,7 +1,309 @@
+/* =========================================================
+   ECODATA STORE — MAIN CLIENT MARKETPLACE UI
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+:root {
+  --primary: #16a34a;
+  --primary-dark: #15803d;
+  --primary-light: #22c55e;
+
+  --accent: #f59e0b;
+  --danger: #ef4444;
+  --info: #3b82f6;
+
+  --bg: #f7f8fa;
+  --surface: #ffffff;
+  --surface-2: #f1f5f3;
+
+  --text: #111827;
+  --text-soft: #667085;
+  --text-muted: #98a2b3;
+  --product-card-text: #2c2c2c;
+
+  --border: #e7e9ee;
+  --border-light: #eef0f3;
+
+  --shadow-sm: 0 2px 8px rgba(16, 24, 40, .05);
+  --shadow-md: 0 8px 25px rgba(16, 24, 40, .08);
+  --shadow-lg: 0 18px 50px rgba(16, 24, 40, .12);
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 28px;
+
+  --sidebar-width: 262px;
+  --navbar-height: 64px;
+
+  --transition: 0s ease;
+
+  --icon-color: #596273;
+}
+
+
+:root {
+  --color-white: #fff;
+  --color-light: #f5f4f7;
+  --color-gray-light: #86848c;
+  --color-gray-dark: #56555e;
+  --color-dark: #27282f;
+  --color-primary: rgb(71, 7, 234);
+  --color-success: rgb(34, 202, 75);
+  --color-danger: rgb(255, 67, 54);
+  --color-warning:  rgb(234, 181, 7);
+  --color-purple: rgb(160, 99, 245);
+  --color-primary-light: rgba(71, 7, 234, 0.2);
+  --color-success-light: rgba(34, 202, 75, 0.2);
+  --color-danger-light: rgba(255, 67, 54, 0.2);
+  --color-purple-light: rgba(160, 99, 245, 0.2);
+
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  --card-padding: 1.6rem;
+  --border-cl: rgb(226, 226, 226);
+
+  --radius-1: 0.5rem;
+  --radius-2: 1rem;
+  --radius-3: 1.6rem;
+
+  --transition: all 300ms ease;
+}
+
+
+:root {
+  /* ==========================================
+     SELLER CREATOR STUDIO — LIGHT THEME
+  ========================================== */
+
+  /* Main backgrounds */
+  --body-bg-light: #f7f8fa;
+  --page-bg-light: #f7f8fa;
+  --sidebar-bg-light: #ffffff;
+  --surface-bg-light: #ffffff;
+  --surface-bg-hover-light: #f5f6f8;
+
+  /* Cards */
+  --card-bg: #ffffff;
+  --card-bg-hover: #fafbfc;
+  --card-elevated: #ffffff;
+
+  /* Borders */
+  --border-color: rgba(15, 23, 42, 0.09);
+  --border-light: rgba(15, 23, 42, 0.055);
+  --border-hover: rgba(15, 23, 42, 0.15);
+
+  /* Text */
+  --text-color: #171a21;
+  --text-primary: #111318;
+  --text-secondary: #5f6672;
+  --text-muted: #858c98;
+  --text-faint: #aeb4bd;
+
+
+  /* Accent */
+  --accent-color: #6d4aff;
+  --accent-hover: #5d3bea;
+  --accent-soft: rgba(109, 74, 255, 0.08);
+  --accent-border: rgba(109, 74, 255, 0.20);
+
+  /* Success */
+  --success-color: #16a978;
+  --success-soft: rgba(22, 169, 120, 0.08);
+  --success-border: rgba(22, 169, 120, 0.18);
+
+  /* Warning */
+  --warning-color: #d99518;
+  --warning-soft: rgba(217, 149, 24, 0.09);
+  --warning-border: rgba(217, 149, 24, 0.18);
+
+  /* Danger */
+  --danger-color: #e5485d;
+  --danger-soft: rgba(229, 72, 93, 0.08);
+  --danger-border: rgba(229, 72, 93, 0.18);
+
+  /* Info */
+  --info-color: #168bd2;
+  --info-soft: rgba(22, 139, 210, 0.08);
+  --info-border: rgba(22, 139, 210, 0.18);
+
+  /* Inputs */
+  --input-bg: #ffffff;
+  --input-border: rgba(15, 23, 42, 0.11);
+  --input-border-focus: rgba(109, 74, 255, 0.45);
+  --input-placeholder: #9aa1ac;
+
+  /* Buttons */
+  --button-bg: #111318;
+  --button-text: #ffffff;
+  --button-hover: #24272d;
+
+  /* Sidebar */
+  --sidebar-border: rgba(15, 23, 42, 0.08);
+  --sidebar-item-hover: rgba(15, 23, 42, 0.045);
+  --sidebar-item-active: rgba(109, 74, 255, 0.08);
+  --sidebar-item-active-text: #6240ed;
+
+  /* Tables */
+  --table-header-bg: #f8f9fb;
+  --table-row-hover: rgba(15, 23, 42, 0.025);
+  --table-divider: rgba(15, 23, 42, 0.065);
+
+  /* Charts */
+  --chart-grid: rgba(15, 23, 42, 0.07);
+  --chart-text: #858c98;
+  --chart-tooltip-bg: #ffffff;
+
+  /* Shadows */
+  --shadow-sm: 0 4px 15px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 10px 30px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 20px 50px rgba(15, 23, 42, 0.12);
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+
+  /* General */
+  --transition-fast: 0.18s ease;
+  --transition-normal: 0.25s ease;
+}
+
+:root {
+  /* ==========================================
+     SELLER CREATOR STUDIO — DARK THEME
+  ========================================== */
+
+  /* Main backgrounds */
+  --body-bg-dark: #0b0d10;
+  --page-bg-dark: #0b0d10;
+  --sidebar-bg-dark: #101318;
+  --surface-bg-dark: #14181e;
+  --surface-bg-hover-dark: #191e25;
+
+  /* Cards */
+  --card-bg-dark: #12161c;
+  --card-bg-hover-dark: #171c23;
+  --card-elevated-dark: #181d24;
+
+  /* Borders */
+  --border-color-dark: rgba(255, 255, 255, 0.08);
+  --border-light-dark: rgba(255, 255, 255, 0.055);
+  --border-hover-dark: rgba(255, 255, 255, 0.14);
+
+  /* Text */
+  --text-color: #f1f3f5;
+  --text-primary: #f5f7f9;
+  --text-secondary: #a7adb7;
+  --text-muted: #737b87;
+  --text-faint: #555d68;
+
+  /* Accent */
+  --accent-color: #7c5cff;
+  --accent-hover: #8d70ff;
+  --accent-soft: rgba(124, 92, 255, 0.12);
+  --accent-border: rgba(124, 92, 255, 0.25);
+
+  /* Success */
+  --success-color: #35d49a;
+  --success-soft: rgba(53, 212, 154, 0.10);
+  --success-border: rgba(53, 212, 154, 0.20);
+
+  /* Warning */
+  --warning-color: #f5b84b;
+  --warning-soft: rgba(245, 184, 75, 0.10);
+  --warning-border: rgba(245, 184, 75, 0.20);
+
+  /* Danger */
+  --danger-color: #ff5f6d;
+  --danger-soft: rgba(255, 95, 109, 0.10);
+  --danger-border: rgba(255, 95, 109, 0.20);
+
+  /* Info */
+  --info-color: #55b8ff;
+  --info-soft: rgba(85, 184, 255, 0.10);
+  --info-border: rgba(85, 184, 255, 0.20);
+
+  /* Inputs */
+  --input-bg: #0f1318;
+  --input-border: rgba(255, 255, 255, 0.09);
+  --input-border-focus: rgba(124, 92, 255, 0.55);
+  --input-placeholder: #5f6670;
+
+  /* Buttons */
+  --button-bg-dark: #f1f3f5;
+  --button-text-dark: #0b0d10;
+  --button-hover-dark: #ffffff;
+
+  /* Sidebar */
+  --sidebar-border: rgba(255, 255, 255, 0.07);
+  --sidebar-item-hover: rgba(255, 255, 255, 0.055);
+  --sidebar-item-active: rgba(124, 92, 255, 0.12);
+  --sidebar-item-active-text: #a996ff;
+
+  /* Tables */
+  --table-header-bg: rgba(255, 255, 255, 0.025);
+  --table-row-hover: rgba(255, 255, 255, 0.025);
+  --table-divider: rgba(255, 255, 255, 0.06);
+
+  /* Charts */
+  --chart-grid: rgba(255, 255, 255, 0.06);
+  --chart-text: #777f8b;
+  --chart-tooltip-bg: #171c23;
+
+  /* Shadows */
+  --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.18);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.35);
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+
+  /* General */
+  --transition-fast: 0.18s ease;
+  --transition-normal: 0.25s ease;
+}
+
+
+
+body,
+button,
+input {
+  font-family: 'Inter', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+small,
+span,
+strong,
+p {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+h1,h2,h3{
+  color: var(--product-card-text);
+}
+
+
+
+
+
 /* ==========================================
    ECODATA ADMIN — MANAGEMENT PAGES
 ========================================== */
-
+.management-card-header{
+  padding: 16px 0 0 16px;
+}
 
 /* ==========================================
    PAGE HEADER
@@ -579,97 +881,23 @@
    ACTION BUTTON
 ========================================== */
 
-.management-action-button {
-
-  width: 31px;
-  height: 31px;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 7px;
-
-  background: transparent;
-
-  color: #777;
-
-  font-size: 17px;
-}
 
 
-.management-action-button:hover {
-  background: #f0f0f0;
-  color: #222;
-}
 
 
-/* ==========================================
-   DROPDOWN
-========================================== */
-
-.management-action-wrapper {
-  position: relative;
-}
 
 
-.management-action-menu {
-
-  position: absolute;
-
-  right: 0;
-  top: calc(100% + 5px);
-
-  width: 165px;
-
-  padding: 5px;
-
-  background: #fff;
-
-  border:
-    1px solid rgba(0,0,0,.08);
-
-  border-radius: 9px;
-
-  box-shadow:
-    0 10px 25px rgba(0,0,0,.1);
-
-  z-index: 100;
-}
 
 
-.management-action-menu button {
-
-  width: 100%;
-  min-height: 34px;
-
-  display: flex;
-  align-items: center;
-
-  gap: 8px;
-
-  padding: 0 8px;
-
-  border-radius: 6px;
-
-  background: transparent;
-
-  color: #555;
-
-  font-size: 10px;
-
-  text-align: left;
-}
 
 
-.management-action-menu button:hover {
-  background: #f5f5f5;
-}
 
 
-.management-action-menu i {
-  font-size: 15px;
-}
+
+
+
+
+
 
 
 /* ==========================================
@@ -754,6 +982,12 @@
 
   font-size: 10px;
 }
+
+
+
+
+
+
 
 
 /* ==========================================
@@ -2012,274 +2246,351 @@ body.dark-mode
 
 
 
-
-
-/* =========================================================
-   SERVICES PAGE
-========================================================= */
-
-.services-stats-grid {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-}
-
-
-/* ---------------------------------------------------------
-   SERVICES TABLE
---------------------------------------------------------- */
-
-.services-table th,
-.services-table td {
-  white-space: nowrap;
-}
-
-.services-table th:nth-child(3) {
-  min-width: 170px;
-}
-
-.services-table th:nth-child(4) {
-  min-width: 150px;
-}
-
-
-/* ---------------------------------------------------------
-   SERVICE DESCRIPTION
---------------------------------------------------------- */
-
-.service-description {
-  padding: 14px 15px;
-  border: 1px solid var(--admin-border);
-  border-radius: 10px;
-  background: var(--admin-surface-soft);
-  color: var(--admin-text-secondary);
-  font-size: 13px;
-  line-height: 1.65;
-}
-
-
-/* ---------------------------------------------------------
-   DRAWER STATUS
---------------------------------------------------------- */
-
-.service-drawer-status-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 22px;
-}
-
-
-/* ---------------------------------------------------------
-   PERSON CARD
---------------------------------------------------------- */
-
-.service-person-card {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 13px;
-  border: 1px solid var(--admin-border);
-  border-radius: 12px;
-  background: var(--admin-surface-soft);
-}
-
-.service-person-avatar {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-
-  background: var(--admin-text);
-  color: var(--admin-background);
-
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.service-person-card > div:last-child {
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.service-person-card strong {
-  color: var(--admin-text);
-  font-size: 13px;
-}
-
-.service-person-card span {
-  color: var(--admin-text-muted);
-  font-size: 11px;
-}
-
-
-/* ---------------------------------------------------------
-   SELLER SELECT
---------------------------------------------------------- */
-
-.service-seller-select {
-  width: 100%;
-  height: 43px;
-
-  padding: 0 13px;
-
-  border: 1px solid var(--admin-border);
-  border-radius: 9px;
-
-  background: var(--admin-surface);
-  color: var(--admin-text);
-
-  outline: none;
-  cursor: pointer;
-}
-
-.service-seller-select:focus {
-  border-color: var(--admin-text);
-}
-
-
-/* ---------------------------------------------------------
-   PAYMENT SUMMARY
---------------------------------------------------------- */
-
-.admin-payment-summary {
-  border: 1px solid var(--admin-border);
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.admin-payment-summary > div {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 12px 14px;
-
-  border-bottom: 1px solid var(--admin-border);
-}
-
-.admin-payment-summary > div:last-child {
-  border-bottom: 0;
-}
-
-.admin-payment-summary span {
-  color: var(--admin-text-muted);
-  font-size: 12px;
-}
-
-.admin-payment-summary strong {
-  color: var(--admin-text);
-  font-size: 13px;
-}
-
-.admin-payment-summary .total {
-  background: var(--admin-surface-soft);
-}
-
-.admin-payment-summary .total strong {
-  font-size: 15px;
-}
-
-
-/* ---------------------------------------------------------
-   SERVICE STATUS BADGES
---------------------------------------------------------- */
-
 /* =========================================================
    SERVICES MANAGEMENT PAGE
-   EcoData Admin
-========================================================= */
+   Matches the main Admin Dashboard UI
+   ========================================================= */
+
+   
+
+.admin-page-content{
+  width: 100%;
+  max-width: 96%;
+  margin: 24px 0 24px 0;
+  justify-self: center;
+
+}
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+
+.admin-page-content .admin-page-header {
+  margin-bottom: 26px;
+}
+
+.admin-page-content .admin-page-header h1 {
+  margin: 4px 0 6px;
+  font-size: 28px;
+  line-height: 1.2;
+  font-weight: 750;
+  letter-spacing: -0.5px;
+}
+
+.admin-page-content .admin-page-header p {
+  margin: 0;
+  max-width: 650px;
+  color: var(--admin-text-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.admin-page-eyebrow {
+  display: inline-flex;
+  align-items: center;
+
+  color: var(--admin-text-muted);
+
+  font-size: 11px;
+  font-weight: 650;
+
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
 
 
 /* =========================================================
-   SERVICES STATS
-========================================================= */
+   HEADER ACTIONS
+   ========================================================= */
+
+.admin-page-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+/* =========================================================
+   STATS
+   ========================================================= */
 
 .services-stats-grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 16px;
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
+
+  gap: 14px;
+
   margin-bottom: 22px;
 }
 
 
 /* =========================================================
-   SERVICE STAT ICONS
-========================================================= */
+   STAT CARD
+   ========================================================= */
 
-.services-stats-grid
-.admin-stat-icon {
-  flex-shrink: 0;
+.services-stats-grid .admin-stat-card {
+  min-width: 0;
+
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+
+  padding: 17px;
+
+  border: 1px solid var(--admin-border);
+  border-radius: 13px;
+
+  background: var(--admin-surface);
+
+  box-shadow: var(--admin-shadow-sm);
+
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.services-stats-grid .admin-stat-card:hover {
+  border-color: var(--admin-border-strong);
+
+  transform: translateY(-1px);
+
+  box-shadow: var(--admin-shadow-md);
+}
+
+
+/* =========================================================
+   STAT ICON
+   ========================================================= */
+
+.services-stats-grid .admin-stat-icon {
+  width: 40px;
+  height: 40px;
+
+  flex: 0 0 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: var(--admin-surface-soft);
+  border: 1px solid var(--admin-border);
+
+  color: var(--admin-text);
+
+  font-size: 18px;
+}
+
+.services-stats-grid .admin-stat-icon.warning {
+  color: #98711b;
+  background: #fff9eb;
+  border-color: #f0dfae;
+}
+
+.services-stats-grid .admin-stat-icon.info {
+  color: #566b89;
+  background: #f1f5fa;
+  border-color: #dce4ef;
+}
+
+.services-stats-grid .admin-stat-icon.success {
+  color: #397651;
+  background: #eef8f1;
+  border-color: #d3e9da;
+}
+
+
+/* =========================================================
+   STAT CONTENT
+   ========================================================= */
+
+.services-stats-grid .admin-stat-content {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.services-stats-grid .admin-stat-content > span {
+  margin-bottom: 3px;
+
+  color: var(--admin-text-muted);
+
+  font-size: 11px;
+  font-weight: 550;
+}
+
+.services-stats-grid .admin-stat-content strong {
+  color: var(--admin-text);
+
+  font-size: 21px;
+  line-height: 1.25;
+  font-weight: 750;
+
+  letter-spacing: -0.3px;
+}
+
+.services-stats-grid .admin-stat-content small {
+  margin-top: 4px;
+
+  color: var(--admin-text-muted);
+
+  font-size: 10px;
+  line-height: 1.4;
 }
 
 
 /* =========================================================
    MANAGEMENT CARD
-========================================================= */
+   ========================================================= */
 
-.admin-management-card {
-  position: relative;
+.admin-page-content .admin-management-card {
+  overflow: visible;
+
+  border: 1px solid var(--admin-border);
+  border-radius: 15px;
+
+  background: var(--admin-surface);
+
+  box-shadow: var(--admin-shadow-sm);
+}
+
+
+/* =========================================================
+   MANAGEMENT HEADER
+   ========================================================= */
+
+.admin-page-content .admin-management-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 20px 20px 17px;
+
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.admin-page-content .admin-management-header h2 {
+  margin: 0 0 4px;
+
+  color: var(--admin-text);
+
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.admin-page-content .admin-management-header p {
+  margin: 0;
+
+  color: var(--admin-text-muted);
+
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   RESULT COUNT
+   ========================================================= */
+
+.admin-result-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+
+  padding: 6px 9px;
+
+  border: 1px solid var(--admin-border);
+  border-radius: 7px;
+
+  background: var(--admin-surface-soft);
+
+  color: var(--admin-text-muted);
+
+  font-size: 11px;
+
+  white-space: nowrap;
+}
+
+.admin-result-count strong {
+  color: var(--admin-text);
+
+  font-weight: 700;
 }
 
 
 /* =========================================================
    FILTER BAR
-========================================================= */
+   ========================================================= */
 
 .admin-filter-bar {
   display: flex;
   align-items: center;
-  gap: 10px;
   flex-wrap: wrap;
-  margin-top: 20px;
-  margin-bottom: 18px;
+
+  gap: 9px;
+
+  padding: 15px 20px;
+
+  border-bottom: 1px solid var(--admin-border);
+
+  background: var(--admin-surface);
 }
 
 
-/* Search */
+/* =========================================================
+   SEARCH
+   ========================================================= */
 
 .admin-filter-search {
   position: relative;
+
   flex: 1 1 280px;
+
   min-width: 230px;
 }
 
 .admin-filter-search i {
   position: absolute;
-  left: 13px;
+
+  left: 12px;
   top: 50%;
+
   transform: translateY(-50%);
 
   color: var(--admin-text-muted);
-  font-size: 16px;
+
+  font-size: 15px;
 
   pointer-events: none;
 }
 
 .admin-filter-search input {
   width: 100%;
-  height: 42px;
+  height: 38px;
 
-  padding: 0 14px 0 38px;
+  padding: 0 12px 0 36px;
 
   border: 1px solid var(--admin-border);
-  border-radius: 9px;
+  border-radius: 8px;
 
   outline: none;
 
-  background: var(--admin-surface);
+  background: var(--admin-surface-soft);
+
   color: var(--admin-text);
 
   font-family: inherit;
-  font-size: 13px;
+  font-size: 12px;
 
   transition:
-    border-color .2s ease,
-    box-shadow .2s ease;
+    border-color 0.18s ease,
+    background 0.18s ease,
+    box-shadow 0.18s ease;
 }
 
 .admin-filter-search input::placeholder {
@@ -2287,187 +2598,491 @@ body.dark-mode
 }
 
 .admin-filter-search input:focus {
-  border-color: var(--admin-text);
+  border-color: var(--admin-border-strong);
+
+  background: var(--admin-surface);
 
   box-shadow:
     0 0 0 3px
-    rgba(0, 0, 0, .04);
+    rgba(0, 0, 0, 0.035);
 }
 
 
 /* =========================================================
    FILTER SELECTS
-========================================================= */
+   ========================================================= */
 
 .admin-filter-bar select {
-  height: 42px;
+  height: 38px;
 
   min-width: 145px;
 
-  padding: 0 34px 0 12px;
+  padding: 0 30px 0 11px;
 
   border: 1px solid var(--admin-border);
-  border-radius: 9px;
+  border-radius: 8px;
 
   outline: none;
 
-  background-color: var(--admin-surface);
-  color: var(--admin-text);
+  background-color: var(--admin-surface-soft);
+  color: var(--admin-text-secondary);
 
   font-family: inherit;
-  font-size: 12px;
+  font-size: 11px;
 
   cursor: pointer;
 
   transition:
-    border-color .2s ease,
-    box-shadow .2s ease;
+    border-color 0.18s ease,
+    background 0.18s ease;
+}
+
+.admin-filter-bar select:hover {
+  border-color: var(--admin-border-strong);
 }
 
 .admin-filter-bar select:focus {
-  border-color: var(--admin-text);
+  border-color: var(--admin-border-strong);
 
-  box-shadow:
-    0 0 0 3px
-    rgba(0, 0, 0, .04);
+  background: var(--admin-surface);
 }
 
 
 /* =========================================================
-   CLEAR FILTER BUTTON
-========================================================= */
+   CLEAR FILTERS
+   ========================================================= */
 
 .admin-clear-filters {
-  height: 42px;
+  height: 38px;
 
-  padding: 0 14px;
+  padding: 0 13px;
 
   border: 1px solid var(--admin-border);
-  border-radius: 9px;
+  border-radius: 8px;
 
-  background: var(--admin-surface);
-  color: var(--admin-text-secondary);
+  background: transparent;
+
+  color: var(--admin-text-muted);
 
   font-family: inherit;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
 
   cursor: pointer;
 
   transition:
-    background .2s ease,
-    color .2s ease,
-    border-color .2s ease;
+    color 0.18s ease,
+    background 0.18s ease,
+    border-color 0.18s ease;
 }
 
 .admin-clear-filters:hover {
-  background: var(--admin-surface-soft);
   color: var(--admin-text);
-  border-color: var(--admin-text-muted);
+
+  background: var(--admin-surface-soft);
+
+  border-color: var(--admin-border-strong);
 }
 
 
 /* =========================================================
-   SERVICES TABLE
-========================================================= */
+   TABLE WRAPPER
+   ========================================================= */
 
-.services-table {
+.admin-table-wrapper {
+  width: 100%;
+
+  overflow-x: auto;
+  overflow-y: visible;
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.admin-data-table {
+  width: 100%;
+
+  border-collapse: separate;
+  border-spacing: 0;
+
   min-width: 1050px;
 }
 
-.services-table th,
-.services-table td {
+
+/* =========================================================
+   TABLE HEADER
+   ========================================================= */
+
+.admin-data-table thead th {
+  height: 42px;
+
+  padding: 0 14px;
+
+  border-bottom: 1px solid var(--admin-border);
+
+  background: var(--admin-surface-soft);
+
+  color: var(--admin-text-muted);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  text-align: left;
+
+  text-transform: uppercase;
+  letter-spacing: 0.045em;
+
   white-space: nowrap;
 }
 
-.services-table th {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: .06em;
+.admin-data-table thead th:first-child {
+  padding-left: 20px;
 }
 
-.services-table th:nth-child(1) {
-  min-width: 160px;
+.admin-data-table thead th:last-child {
+  padding-right: 20px;
 }
 
-.services-table th:nth-child(2) {
+
+/* =========================================================
+   TABLE BODY
+   ========================================================= */
+
+.admin-data-table tbody td {
+  height: 64px;
+
+  padding: 10px 14px;
+
+  border-bottom: 1px solid var(--admin-border);
+
+  background: var(--admin-surface);
+
+  color: var(--admin-text-secondary);
+
+  font-size: 12px;
+
+  vertical-align: middle;
+
+  transition:
+    background 0.15s ease;
+}
+
+.admin-data-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.admin-data-table tbody tr:hover td {
+  background: var(--admin-surface-soft);
+}
+
+.admin-data-table tbody td:first-child {
+  padding-left: 20px;
+}
+
+.admin-data-table tbody td:last-child {
+  padding-right: 20px;
+}
+
+
+/* =========================================================
+   REQUEST CELL
+   ========================================================= */
+
+.service-request-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
   min-width: 165px;
 }
 
-.services-table th:nth-child(3) {
-  min-width: 170px;
+.service-request-icon {
+  width: 34px;
+  height: 34px;
+
+  flex: 0 0 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--admin-border);
+  border-radius: 9px;
+
+  background: var(--admin-surface-soft);
+
+  color: var(--admin-text);
+
+  font-size: 15px;
 }
 
-.services-table th:nth-child(4) {
+.service-request-info {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.service-request-info strong {
+  max-width: 145px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  color: var(--admin-text);
+
+  font-size: 12px;
+  font-weight: 650;
+
+  white-space: nowrap;
+}
+
+.service-request-info span {
+  color: var(--admin-text-muted);
+
+  font-family: monospace;
+  font-size: 10px;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   CUSTOMER CELL
+   ========================================================= */
+
+.service-customer-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
   min-width: 145px;
 }
 
-.services-table th:nth-child(5) {
-  min-width: 100px;
+.service-customer-avatar {
+  width: 30px;
+  height: 30px;
+
+  flex: 0 0 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--admin-border);
+  border-radius: 50%;
+
+  background: var(--admin-surface-soft);
+
+  color: var(--admin-text);
+
+  font-size: 10px;
+  font-weight: 700;
 }
 
-.services-table th:nth-child(6) {
-  min-width: 100px;
+.service-customer-info {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
-.services-table th:nth-child(7) {
+.service-customer-info strong {
+  max-width: 125px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  color: var(--admin-text);
+
+  font-size: 11px;
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+.service-customer-info span {
+  color: var(--admin-text-muted);
+
+  font-size: 10px;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   SERVICE NAME
+   ========================================================= */
+
+.service-name-cell {
+  min-width: 145px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.service-name-cell strong {
+  color: var(--admin-text);
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.service-name-cell span {
+  color: var(--admin-text-muted);
+
+  font-size: 10px;
+
+  text-transform: capitalize;
+}
+
+
+/* =========================================================
+   SELLER CELL
+   ========================================================= */
+
+.service-seller-cell {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
   min-width: 125px;
 }
 
-.services-table th:nth-child(8) {
-  min-width: 110px;
-}
+.service-seller-icon {
+  width: 27px;
+  height: 27px;
 
-.services-table th:last-child {
-  width: 75px;
-}
+  flex: 0 0 27px;
 
-
-/* =========================================================
-   TABLE PRIMARY CONTENT
-========================================================= */
-
-.services-table .admin-table-primary {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
+  align-items: center;
+  justify-content: center;
 
-.services-table .admin-table-primary strong {
-  color: var(--admin-text);
-  font-size: 12px;
-  font-weight: 650;
-}
+  border: 1px solid var(--admin-border);
+  border-radius: 7px;
 
-.services-table .admin-table-primary span {
+  background: var(--admin-surface-soft);
+
   color: var(--admin-text-muted);
-  font-size: 10px;
+
+  font-size: 13px;
 }
 
-.services-table .admin-table-secondary {
+.service-seller-cell span {
+  max-width: 105px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+
   color: var(--admin-text-secondary);
-  font-size: 12px;
+
+  font-size: 11px;
+  font-weight: 550;
+
+  white-space: nowrap;
 }
 
 
 /* =========================================================
-   STATUS BADGES
-========================================================= */
+   AMOUNT
+   ========================================================= */
+
+.service-amount {
+  color: var(--admin-text);
+
+  font-size: 12px;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   PAYMENT BADGE
+   ========================================================= */
+
+.service-payment-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
+  padding: 5px 8px;
+
+  border: 1px solid transparent;
+  border-radius: 999px;
+
+  font-size: 10px;
+  font-weight: 650;
+
+  white-space: nowrap;
+}
+
+.service-payment-badge i {
+  font-size: 12px;
+}
+
+
+/* Paid */
+
+.service-payment-paid {
+  color: #397651;
+
+  background: #eef8f1;
+  border-color: #d2e8d9;
+}
+
+
+/* Pending */
+
+.service-payment-pending {
+  color: #8c6c1d;
+
+  background: #fff8e8;
+  border-color: #efdfb3;
+}
+
+
+/* Failed */
+
+.service-payment-failed {
+  color: #a33b3b;
+
+  background: #fff1f1;
+  border-color: #efcece;
+}
+
+
+/* Refunded */
+
+.service-payment-refunded {
+  color: #62627b;
+
+  background: #f1f1f7;
+  border-color: #dcdce9;
+}
+
+
+/* =========================================================
+   SERVICE STATUS BADGE
+   ========================================================= */
 
 .service-status-badge {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 5px;
 
-  min-height: 25px;
+  padding: 5px 8px;
 
-  padding: 4px 8px;
-
-  border-radius: 6px;
+  border: 1px solid transparent;
+  border-radius: 999px;
 
   font-size: 10px;
-  line-height: 1;
   font-weight: 650;
 
   white-space: nowrap;
@@ -2480,291 +3095,264 @@ body.dark-mode
 
 /* Pending */
 
-.service-status-badge.pending {
-  background: rgba(245, 158, 11, .10);
-  color: #b45309;
+.service-status-pending {
+  color: #8c6c1d;
+
+  background: #fff8e8;
+  border-color: #efdfb3;
 }
 
 
 /* Assigned */
 
-.service-status-badge.assigned {
-  background: rgba(59, 130, 246, .10);
-  color: #2563eb;
+.service-status-assigned {
+  color: #596b86;
+
+  background: #f1f5fa;
+  border-color: #dce4ee;
 }
 
 
 /* In progress */
 
-.service-status-badge.in_progress {
-  background: rgba(99, 102, 241, .10);
-  color: #4f46e5;
+.service-status-progress {
+  color: #596b86;
+
+  background: #f1f5fa;
+  border-color: #dce4ee;
 }
 
 
 /* Completed */
 
-.service-status-badge.completed {
-  background: rgba(16, 185, 129, .10);
-  color: #059669;
+.service-status-completed {
+  color: #397651;
+
+  background: #eef8f1;
+  border-color: #d2e8d9;
 }
 
 
 /* Cancelled */
 
-.service-status-badge.cancelled {
-  background: rgba(239, 68, 68, .10);
-  color: #dc2626;
+.service-status-cancelled {
+  color: #a33b3b;
+
+  background: #fff1f1;
+  border-color: #efcece;
 }
 
 
 /* =========================================================
-   PAYMENT BADGES
-========================================================= */
+   SUBMITTED DATE
+   ========================================================= */
 
-.service-payment-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  min-height: 25px;
-
-  padding: 4px 8px;
-
-  border-radius: 6px;
-
-  font-size: 10px;
-  font-weight: 650;
+.service-date {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 
   white-space: nowrap;
 }
 
+.service-date strong {
+  color: var(--admin-text-secondary);
 
-/* Paid */
-
-.service-payment-badge.paid {
-  background: rgba(16, 185, 129, .10);
-  color: #059669;
+  font-size: 10px;
+  font-weight: 550;
 }
 
+.service-date span {
+  color: var(--admin-text-muted);
 
-/* Pending */
-
-.service-payment-badge.pending {
-  background: rgba(245, 158, 11, .10);
-  color: #b45309;
-}
-
-
-/* Failed */
-
-.service-payment-badge.failed {
-  background: rgba(239, 68, 68, .10);
-  color: #dc2626;
-}
-
-
-/* Refunded */
-
-.service-payment-badge.refunded {
-  background: rgba(107, 114, 128, .12);
-  color: #4b5563;
+  font-size: 9px;
 }
 
 
 /* =========================================================
-   TABLE ACTIONS
-========================================================= */
+   ACTION BUTTON
+   ========================================================= */
 
-.services-table .admin-row-actions {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 5px;
+.service-action-wrap {
+  position: relative;
+
+  display: inline-flex;
 }
 
-.services-table .admin-row-action {
+.service-action-btn {
   width: 32px;
   height: 32px;
 
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
 
   border: 1px solid var(--admin-border);
-  border-radius: 7px;
+  border-radius: 8px;
 
   background: var(--admin-surface);
-  color: var(--admin-text-secondary);
+
+  color: var(--admin-text-muted);
 
   cursor: pointer;
 
   transition:
-    background .2s ease,
-    color .2s ease,
-    border-color .2s ease;
+    color 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease;
 }
 
-.services-table .admin-row-action:hover {
-  background: var(--admin-surface-soft);
+.service-action-btn:hover {
   color: var(--admin-text);
-  border-color: var(--admin-text-muted);
-}
 
-.services-table .admin-row-action i {
-  font-size: 15px;
+  border-color: var(--admin-border-strong);
+
+  background: var(--admin-surface-soft);
 }
 
 
 /* =========================================================
    ACTION MENU
-========================================================= */
+   ========================================================= */
 
-.services-table .admin-action-menu {
+.service-action-menu {
   position: absolute;
 
-  right: 15px;
-  top: calc(100% - 5px);
+  z-index: 50;
 
-  z-index: 20;
+  top: calc(100% + 6px);
+  right: 0;
 
-  min-width: 175px;
+  width: 160px;
 
-  padding: 6px;
+  padding: 5px;
 
   border: 1px solid var(--admin-border);
   border-radius: 10px;
 
   background: var(--admin-surface);
 
-  box-shadow:
-    0 12px 35px
-    rgba(0, 0, 0, .10);
+  box-shadow: var(--admin-shadow-lg);
 
-  opacity: 0;
-  visibility: hidden;
-
-  transform:
-    translateY(-5px);
-
-  transition:
-    opacity .16s ease,
-    transform .16s ease,
-    visibility .16s ease;
+  display: none;
 }
 
-.services-table .admin-action-menu.show {
-  opacity: 1;
-  visibility: visible;
-
-  transform:
-    translateY(0);
+.service-action-menu.open {
+  display: block;
 }
 
-.services-table .admin-action-menu button {
+.service-action-menu button {
   width: 100%;
 
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 8px;
 
-  padding: 9px 10px;
+  padding: 9px 9px;
 
   border: 0;
   border-radius: 7px;
 
   background: transparent;
+
   color: var(--admin-text-secondary);
 
   font-family: inherit;
-  font-size: 12px;
+  font-size: 11px;
 
   text-align: left;
 
   cursor: pointer;
 }
 
-.services-table .admin-action-menu button:hover {
+.service-action-menu button:hover {
   background: var(--admin-surface-soft);
+
   color: var(--admin-text);
 }
 
-.services-table .admin-action-menu button i {
-  font-size: 15px;
+.service-action-menu button.danger {
+  color: #a33b3b;
 }
 
-.services-table .admin-action-menu button.danger {
-  color: #dc2626;
-}
-
-.services-table .admin-action-menu button.danger:hover {
-  background: rgba(239, 68, 68, .08);
+.service-action-menu button i {
+  font-size: 14px;
 }
 
 
 /* =========================================================
    EMPTY STATE
-========================================================= */
+   ========================================================= */
 
-#serviceEmptyState {
-  padding: 65px 20px;
+.admin-page-content .admin-empty-state {
+  padding: 60px 20px;
+
+  text-align: center;
+
+  border-top: 0;
 }
 
-#serviceEmptyState .admin-empty-icon {
-  width: 58px;
-  height: 58px;
+.admin-page-content .admin-empty-icon {
+  width: 48px;
+  height: 48px;
 
-  margin: 0 auto 15px;
+  margin: 0 auto 13px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   border: 1px solid var(--admin-border);
-  border-radius: 14px;
+  border-radius: 12px;
 
   background: var(--admin-surface-soft);
+
   color: var(--admin-text-muted);
 
-  font-size: 24px;
+  font-size: 20px;
 }
 
-#serviceEmptyState h3 {
-  margin: 0 0 6px;
+.admin-page-content .admin-empty-state h3 {
+  margin: 0 0 5px;
 
   color: var(--admin-text);
 
   font-size: 14px;
+  font-weight: 700;
 }
 
-#serviceEmptyState p {
+.admin-page-content .admin-empty-state p {
   margin: 0;
 
   color: var(--admin-text-muted);
 
-  font-size: 12px;
+  font-size: 11px;
 }
 
 
 /* =========================================================
    PAGINATION
-========================================================= */
+   ========================================================= */
 
-#servicePagination {
+.admin-page-content .admin-pagination {
+  min-height: 58px;
+
   display: flex;
   align-items: center;
   justify-content: flex-end;
 
   gap: 5px;
 
-  margin-top: 18px;
+  padding: 10px 20px;
+
+  border-top: 1px solid var(--admin-border);
 }
 
-#servicePagination .admin-page-btn {
-  width: 34px;
-  height: 34px;
+.admin-page-content .admin-pagination button {
+  width: 31px;
+  height: 31px;
 
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
 
@@ -2772,81 +3360,57 @@ body.dark-mode
   border-radius: 7px;
 
   background: var(--admin-surface);
-  color: var(--admin-text-secondary);
+
+  color: var(--admin-text-muted);
 
   font-family: inherit;
-  font-size: 11px;
-  font-weight: 600;
+  font-size: 10px;
 
   cursor: pointer;
 
   transition:
-    background .2s ease,
-    color .2s ease,
-    border-color .2s ease;
+    color 0.18s ease,
+    background 0.18s ease,
+    border-color 0.18s ease;
 }
 
-#servicePagination .admin-page-btn:hover:not(:disabled) {
-  background: var(--admin-surface-soft);
+.admin-page-content .admin-pagination button:hover:not(:disabled) {
   color: var(--admin-text);
+
+  background: var(--admin-surface-soft);
+
+  border-color: var(--admin-border-strong);
 }
 
-#servicePagination .admin-page-btn.active {
-  background: var(--admin-text);
+.admin-page-content .admin-pagination button.active {
   color: var(--admin-background);
+
+  background: var(--admin-text);
 
   border-color: var(--admin-text);
 }
 
-#servicePagination .admin-page-btn:disabled {
-  opacity: .4;
+.admin-page-content .admin-pagination button:disabled {
+  opacity: 0.4;
+
   cursor: not-allowed;
 }
 
 
 /* =========================================================
-   DRAWER OVERLAY
-========================================================= */
-
-#serviceDrawerOverlay {
-  position: fixed;
-
-  inset: 0;
-
-  z-index: 900;
-
-  background: rgba(0, 0, 0, .38);
-
-  opacity: 0;
-  visibility: hidden;
-
-  transition:
-    opacity .25s ease,
-    visibility .25s ease;
-
-  backdrop-filter: blur(2px);
-}
-
-#serviceDrawerOverlay.show {
-  opacity: 1;
-  visibility: visible;
-}
-
-
-/* =========================================================
    SERVICE DETAILS DRAWER
-========================================================= */
+   ========================================================= */
 
 .service-details-drawer {
+  width: min(470px, 100vw);
+
   position: fixed;
 
   top: 0;
   right: 0;
   bottom: 0;
 
-  z-index: 1000;
-
-  width: min(480px, 100%);
+  z-index: 1001;
 
   display: flex;
   flex-direction: column;
@@ -2855,14 +3419,12 @@ body.dark-mode
 
   border-left: 1px solid var(--admin-border);
 
-  box-shadow:
-    -15px 0 45px
-    rgba(0, 0, 0, .08);
+  box-shadow: var(--admin-shadow-lg);
 
   transform: translateX(100%);
 
   transition:
-    transform .28s cubic-bezier(.4, 0, .2, 1);
+    transform 0.28s ease;
 }
 
 .service-details-drawer.open {
@@ -2871,32 +3433,62 @@ body.dark-mode
 
 
 /* =========================================================
-   DRAWER HEADER
-========================================================= */
+   DRAWER OVERLAY
+   ========================================================= */
 
-.service-details-drawer
-.admin-drawer-header {
-  flex-shrink: 0;
+.admin-drawer-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 1000;
+
+  background: rgba(0, 0, 0, 0.38);
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  transition:
+    opacity 0.25s ease,
+    visibility 0.25s ease;
+}
+
+.admin-drawer-overlay.open {
+  opacity: 1;
+
+  visibility: visible;
+}
+
+
+/* =========================================================
+   DRAWER HEADER
+   ========================================================= */
+
+.service-details-drawer .admin-drawer-header {
+  min-height: 78px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  padding: 20px;
+  gap: 15px;
+
+  padding: 16px 20px;
 
   border-bottom: 1px solid var(--admin-border);
+
+  background: var(--admin-surface);
 }
 
-.service-details-drawer
-.admin-drawer-header > div {
+.service-details-drawer .admin-drawer-header > div {
   min-width: 0;
 }
 
-.service-details-drawer
-.admin-drawer-header span {
+.service-details-drawer .admin-drawer-header span {
   display: block;
 
-  margin-bottom: 5px;
+  margin-bottom: 3px;
 
   color: var(--admin-text-muted);
 
@@ -2904,63 +3496,66 @@ body.dark-mode
   font-weight: 600;
 
   text-transform: uppercase;
-  letter-spacing: .06em;
+  letter-spacing: 0.06em;
 }
 
-.service-details-drawer
-.admin-drawer-header h2 {
+.service-details-drawer .admin-drawer-header h2 {
   margin: 0;
 
   color: var(--admin-text);
 
-  font-size: 16px;
-  font-weight: 700;
+  font-family: monospace;
 
-  word-break: break-word;
+  font-size: 15px;
+  font-weight: 700;
 }
 
-.service-details-drawer
-.admin-drawer-close {
-  width: 36px;
-  height: 36px;
+
+/* =========================================================
+   DRAWER CLOSE
+   ========================================================= */
+
+.service-details-drawer .admin-drawer-close {
+  width: 34px;
+  height: 34px;
+
+  flex: 0 0 34px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  flex-shrink: 0;
-
   border: 1px solid var(--admin-border);
   border-radius: 8px;
 
-  background: var(--admin-surface);
-  color: var(--admin-text-secondary);
+  background: var(--admin-surface-soft);
+
+  color: var(--admin-text-muted);
+
+  font-size: 17px;
 
   cursor: pointer;
 
   transition:
-    background .2s ease,
-    color .2s ease;
+    color 0.18s ease,
+    background 0.18s ease,
+    border-color 0.18s ease;
 }
 
-.service-details-drawer
-.admin-drawer-close:hover {
-  background: var(--admin-surface-soft);
+.service-details-drawer .admin-drawer-close:hover {
   color: var(--admin-text);
-}
 
-.service-details-drawer
-.admin-drawer-close i {
-  font-size: 18px;
+  border-color: var(--admin-border-strong);
+
+  background: var(--admin-surface);
 }
 
 
 /* =========================================================
    DRAWER BODY
-========================================================= */
+   ========================================================= */
 
-.service-details-drawer
-.admin-drawer-body {
+.service-details-drawer .admin-drawer-body {
   flex: 1;
 
   overflow-y: auto;
@@ -2969,61 +3564,42 @@ body.dark-mode
 }
 
 
-/* Scrollbar */
-
-.service-details-drawer
-.admin-drawer-body::-webkit-scrollbar {
-  width: 5px;
-}
-
-.service-details-drawer
-.admin-drawer-body::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.service-details-drawer
-.admin-drawer-body::-webkit-scrollbar-thumb {
-  background: var(--admin-border);
-  border-radius: 10px;
-}
-
-
 /* =========================================================
    DRAWER STATUS ROW
-========================================================= */
+   ========================================================= */
 
 .service-drawer-status-row {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
+  justify-content: space-between;
 
-  gap: 8px;
+  gap: 10px;
 
-  margin-bottom: 22px;
+  margin-bottom: 20px;
 }
 
 
 /* =========================================================
-   DRAWER SECTIONS
-========================================================= */
+   DRAWER SECTION
+   ========================================================= */
 
-.service-details-drawer
-.admin-drawer-section {
-  margin-bottom: 24px;
+.service-details-drawer .admin-drawer-section {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+
+  border-bottom: 1px solid var(--admin-border);
 }
 
-.service-details-drawer
-.admin-drawer-section:last-child {
-  margin-bottom: 0;
+.service-details-drawer .admin-drawer-section:last-child {
+  border-bottom: 0;
 }
 
-.service-details-drawer
 .admin-drawer-section-title {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
 
-  margin-bottom: 11px;
+  margin-bottom: 12px;
 
   color: var(--admin-text);
 
@@ -3031,7 +3607,6 @@ body.dark-mode
   font-weight: 700;
 }
 
-.service-details-drawer
 .admin-drawer-section-title i {
   color: var(--admin-text-muted);
 
@@ -3041,49 +3616,42 @@ body.dark-mode
 
 /* =========================================================
    DETAIL LIST
-========================================================= */
+   ========================================================= */
 
-.service-details-drawer
-.admin-detail-list {
-  overflow: hidden;
-
-  border: 1px solid var(--admin-border);
-  border-radius: 11px;
+.service-details-drawer .admin-detail-list {
+  display: flex;
+  flex-direction: column;
 }
 
-.service-details-drawer
-.admin-detail-list > div {
+.service-details-drawer .admin-detail-list > div {
+  min-height: 38px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   gap: 20px;
 
-  padding: 11px 13px;
-
   border-bottom: 1px solid var(--admin-border);
 }
 
-.service-details-drawer
-.admin-detail-list > div:last-child {
+.service-details-drawer .admin-detail-list > div:last-child {
   border-bottom: 0;
 }
 
-.service-details-drawer
-.admin-detail-list span {
+.service-details-drawer .admin-detail-list span {
   color: var(--admin-text-muted);
 
   font-size: 11px;
 }
 
-.service-details-drawer
-.admin-detail-list strong {
-  max-width: 62%;
+.service-details-drawer .admin-detail-list strong {
+  max-width: 60%;
 
   color: var(--admin-text);
 
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 650;
 
   text-align: right;
 
@@ -3093,36 +3661,35 @@ body.dark-mode
 
 /* =========================================================
    DESCRIPTION
-========================================================= */
+   ========================================================= */
 
 .service-description {
-  padding: 14px;
+  padding: 13px;
 
   border: 1px solid var(--admin-border);
-  border-radius: 11px;
+  border-radius: 10px;
 
   background: var(--admin-surface-soft);
 
   color: var(--admin-text-secondary);
 
-  font-size: 12px;
-  line-height: 1.7;
+  font-size: 11px;
+  line-height: 1.65;
 
-  word-break: break-word;
+  white-space: pre-wrap;
 }
 
 
 /* =========================================================
-   CUSTOMER CARD
-========================================================= */
+   PERSON CARD
+   ========================================================= */
 
 .service-person-card {
   display: flex;
   align-items: center;
+  gap: 11px;
 
-  gap: 12px;
-
-  padding: 13px;
+  padding: 12px;
 
   border: 1px solid var(--admin-border);
   border-radius: 11px;
@@ -3131,22 +3698,23 @@ body.dark-mode
 }
 
 .service-person-avatar {
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
+
+  flex: 0 0 40px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  flex-shrink: 0;
-
   border-radius: 50%;
 
   background: var(--admin-text);
+
   color: var(--admin-background);
 
-  font-size: 14px;
-  font-weight: 700;
+  font-size: 13px;
+  font-weight: 750;
 }
 
 .service-person-card > div:last-child {
@@ -3154,73 +3722,71 @@ body.dark-mode
 
   display: flex;
   flex-direction: column;
-
   gap: 3px;
 }
 
 .service-person-card strong {
   color: var(--admin-text);
 
-  font-size: 13px;
-  font-weight: 650;
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .service-person-card span {
   color: var(--admin-text-muted);
 
-  font-size: 11px;
+  font-size: 10px;
 
   overflow: hidden;
   text-overflow: ellipsis;
+
+  white-space: nowrap;
 }
 
 
 /* =========================================================
    SELLER SELECT
-========================================================= */
+   ========================================================= */
 
 .service-seller-select {
   width: 100%;
-  height: 43px;
+  height: 40px;
 
-  padding: 0 12px;
+  padding: 0 35px 0 11px;
 
   border: 1px solid var(--admin-border);
-  border-radius: 9px;
+  border-radius: 8px;
 
   outline: none;
 
-  background: var(--admin-surface);
+  background: var(--admin-surface-soft);
+
   color: var(--admin-text);
 
   font-family: inherit;
-  font-size: 12px;
+  font-size: 11px;
 
   cursor: pointer;
-
-  transition:
-    border-color .2s ease,
-    box-shadow .2s ease;
 }
 
 .service-seller-select:focus {
-  border-color: var(--admin-text);
+  border-color: var(--admin-border-strong);
 
-  box-shadow:
-    0 0 0 3px
-    rgba(0, 0, 0, .04);
+  background: var(--admin-surface);
 }
 
 
 /* =========================================================
    PAYMENT SUMMARY
-========================================================= */
+   ========================================================= */
 
 .admin-payment-summary {
-  overflow: hidden;
+  padding: 12px;
 
   border: 1px solid var(--admin-border);
   border-radius: 11px;
+
+  background: var(--admin-surface-soft);
 }
 
 .admin-payment-summary > div {
@@ -3230,7 +3796,7 @@ body.dark-mode
 
   gap: 15px;
 
-  padding: 12px 14px;
+  min-height: 34px;
 
   border-bottom: 1px solid var(--admin-border);
 }
@@ -3248,31 +3814,37 @@ body.dark-mode
 .admin-payment-summary strong {
   color: var(--admin-text);
 
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 650;
 }
 
 .admin-payment-summary .total {
-  background: var(--admin-surface-soft);
+  margin-top: 4px;
+
+  border-top: 1px solid var(--admin-border);
+  border-bottom: 0;
+
+  padding-top: 7px;
 }
 
 .admin-payment-summary .total span {
-  color: var(--admin-text-secondary);
-  font-weight: 600;
+  color: var(--admin-text);
+
+  font-weight: 650;
 }
 
 .admin-payment-summary .total strong {
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 750;
 }
 
 
 /* =========================================================
    DRAWER FOOTER
-========================================================= */
+   ========================================================= */
 
-.service-details-drawer
-.admin-drawer-footer {
-  flex-shrink: 0;
+.service-details-drawer .admin-drawer-footer {
+  min-height: 72px;
 
   display: flex;
   align-items: center;
@@ -3286,81 +3858,82 @@ body.dark-mode
   background: var(--admin-surface);
 }
 
-.service-details-drawer
-.admin-drawer-footer .admin-btn {
-  min-height: 42px;
-
+.service-details-drawer .admin-drawer-footer .admin-btn {
   flex: 1;
-
-  justify-content: center;
-}
-
-.service-details-drawer
-.admin-drawer-footer
-#serviceCancelBtn {
-  color: #dc2626;
-}
-
-.service-details-drawer
-.admin-drawer-footer
-#serviceCancelBtn:hover {
-  background: rgba(239, 68, 68, .07);
 }
 
 
 /* =========================================================
    DARK MODE
-========================================================= */
+   ========================================================= */
 
-[data-theme="dark"]
-.service-status-badge.pending {
-  color: #fbbf24;
+[data-theme="dark"] .services-stats-grid .admin-stat-icon.warning {
+  color: #e4c875;
+  background: rgba(150, 112, 25, 0.13);
+  border-color: rgba(220, 180, 72, 0.22);
 }
 
-[data-theme="dark"]
-.service-status-badge.assigned {
-  color: #60a5fa;
+[data-theme="dark"] .services-stats-grid .admin-stat-icon.info {
+  color: #aebed5;
+  background: rgba(80, 105, 140, 0.14);
+  border-color: rgba(120, 145, 180, 0.22);
 }
 
-[data-theme="dark"]
-.service-status-badge.in_progress {
-  color: #818cf8;
+[data-theme="dark"] .services-stats-grid .admin-stat-icon.success {
+  color: #8bd3a0;
+  background: rgba(55, 125, 80, 0.14);
+  border-color: rgba(90, 165, 110, 0.22);
 }
 
-[data-theme="dark"]
-.service-status-badge.completed {
-  color: #34d399;
+
+[data-theme="dark"] .service-payment-paid,
+[data-theme="dark"] .service-status-completed {
+  color: #8bd3a0;
+
+  background: rgba(55, 125, 80, 0.13);
+
+  border-color: rgba(90, 165, 110, 0.23);
 }
 
-[data-theme="dark"]
-.service-status-badge.cancelled {
-  color: #f87171;
+
+[data-theme="dark"] .service-payment-pending,
+[data-theme="dark"] .service-status-pending {
+  color: #e5cb7a;
+
+  background: rgba(145, 110, 25, 0.13);
+
+  border-color: rgba(215, 175, 65, 0.22);
 }
 
-[data-theme="dark"]
-.service-payment-badge.paid {
-  color: #34d399;
+
+[data-theme="dark"] .service-payment-failed,
+[data-theme="dark"] .service-status-cancelled {
+  color: #ed9999;
+
+  background: rgba(165, 55, 55, 0.13);
+
+  border-color: rgba(220, 95, 95, 0.22);
 }
 
-[data-theme="dark"]
-.service-payment-badge.pending {
-  color: #fbbf24;
+
+[data-theme="dark"] .service-payment-refunded {
+  color: #b8b8d8;
+
+  background: rgba(90, 90, 120, 0.13);
+
+  border-color: rgba(130, 130, 165, 0.22);
 }
 
-[data-theme="dark"]
-.service-payment-badge.failed {
-  color: #f87171;
-}
 
-[data-theme="dark"]
-.service-payment-badge.refunded {
-  color: #9ca3af;
+[data-theme="dark"] .service-payment-badge,
+[data-theme="dark"] .service-status-badge {
+  box-shadow: none;
 }
 
 
 /* =========================================================
-   RESPONSIVE — 1250px
-========================================================= */
+   LARGE TABLET
+   ========================================================= */
 
 @media (max-width: 1250px) {
 
@@ -3373,127 +3946,207 @@ body.dark-mode
 
 
 /* =========================================================
-   RESPONSIVE — 1000px
-========================================================= */
+   TABLET
+   ========================================================= */
 
 @media (max-width: 1000px) {
-
-  .admin-filter-search {
-    flex-basis: 100%;
-  }
-
-  .admin-filter-bar select {
-    flex: 1;
-    min-width: 130px;
-  }
-
-}
-
-
-/* =========================================================
-   RESPONSIVE — 800px
-========================================================= */
-
-@media (max-width: 800px) {
 
   .services-stats-grid {
     grid-template-columns:
       repeat(2, minmax(0, 1fr));
-
-    gap: 12px;
   }
 
-  .admin-filter-bar {
-    align-items: stretch;
-  }
-
-  .admin-filter-bar select {
-    flex: 1 1 calc(50% - 5px);
-  }
-
-  .admin-clear-filters {
-    flex: 0 0 auto;
-  }
-
-  .service-details-drawer {
-    width: min(460px, 100%);
-  }
-
-}
-
-
-/* =========================================================
-   RESPONSIVE — 600px
-========================================================= */
-
-@media (max-width: 600px) {
-
-  .services-stats-grid {
-    grid-template-columns: 1fr;
-  }
 
   .admin-filter-bar {
     display: grid;
 
     grid-template-columns:
       repeat(2, minmax(0, 1fr));
-
-    gap: 8px;
   }
 
+
   .admin-filter-search {
+    width: 100%;
+    min-width: 0;
+
     grid-column: 1 / -1;
   }
 
-  .admin-filter-bar select {
-    width: 100%;
-    min-width: 0;
-  }
 
+  .admin-filter-bar select,
   .admin-clear-filters {
     width: 100%;
-  }
-
-  #servicePagination {
-    justify-content: center;
-  }
-
-  .service-details-drawer
-  .admin-drawer-body {
-    padding: 16px;
-  }
-
-  .service-details-drawer
-  .admin-drawer-header {
-    padding: 16px;
-  }
-
-  .service-details-drawer
-  .admin-drawer-footer {
-    padding: 12px 16px;
   }
 
 }
 
 
 /* =========================================================
-   RESPONSIVE — 430px
-========================================================= */
+   SMALL TABLET
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+  .admin-page-content .admin-page-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .admin-page-header-actions {
+    width: 100%;
+  }
+
+  .admin-page-header-actions .admin-btn {
+    width: 100%;
+  }
+
+
+  .admin-page-content .admin-management-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+
+  .admin-result-count {
+    align-self: flex-start;
+  }
+
+
+  .service-details-drawer {
+    width: min(450px, 100vw);
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .services-stats-grid {
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+  }
+
+
+  .services-stats-grid .admin-stat-card {
+    padding: 13px;
+
+    gap: 9px;
+  }
+
+
+  .services-stats-grid .admin-stat-icon {
+    width: 34px;
+    height: 34px;
+
+    flex-basis: 34px;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+  }
+
+
+  .services-stats-grid .admin-stat-content > span {
+    font-size: 10px;
+  }
+
+
+  .services-stats-grid .admin-stat-content strong {
+    font-size: 17px;
+  }
+
+
+  .services-stats-grid .admin-stat-content small {
+    display: none;
+  }
+
+
+  .admin-page-content .admin-management-header {
+    padding: 16px;
+  }
+
+
+  .admin-filter-bar {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+    padding: 13px 16px;
+  }
+
+
+  .admin-filter-search,
+  .admin-filter-bar select,
+  .admin-clear-filters {
+    width: 100%;
+  }
+
+
+  .admin-page-content .admin-pagination {
+    justify-content: center;
+
+    padding: 10px 16px;
+  }
+
+
+  .service-details-drawer {
+    width: 100%;
+  }
+
+
+  .service-details-drawer .admin-drawer-body {
+    padding: 17px;
+  }
+
+
+  .service-details-drawer .admin-drawer-header {
+    padding: 14px 17px;
+  }
+
+
+  .service-details-drawer .admin-drawer-footer {
+    padding: 12px 17px;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
 
 @media (max-width: 430px) {
 
-  .admin-filter-bar {
+  .services-stats-grid {
     grid-template-columns: 1fr;
   }
 
-  .admin-filter-search {
-    grid-column: auto;
+
+  .services-stats-grid .admin-stat-card {
+    min-height: 70px;
   }
 
-  .service-details-drawer
-  .admin-drawer-footer {
+
+  .service-drawer-status-row {
+    align-items: flex-start;
+
     flex-direction: column;
   }
+
+
+  .service-details-drawer .admin-drawer-footer {
+    flex-direction: column;
+  }
+
 
   .service-details-drawer
   .admin-drawer-footer
@@ -3501,21 +4154,35 @@ body.dark-mode
     width: 100%;
   }
 
-  .service-details-drawer
-  .admin-detail-list > div {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .service-details-drawer
-  .admin-detail-list strong {
-    max-width: 100%;
-
-    text-align: left;
-  }
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3527,432 +4194,135 @@ body.dark-mode
 
 
 /* =========================================================
-   PAYMENTS MANAGEMENT
+   UNIVERSAL MANAGEMENT ACTION
+   Used by Orders, Products, Sellers, Services, etc.
    ========================================================= */
 
-
-/* =========================================================
-   PAYMENT STATS
-   ========================================================= */
-
-.payments-stats-grid {
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-}
-
-.payments-stats-grid .admin-stat-card {
-  min-width: 0;
-}
-
-.payments-stats-grid .admin-stat-content strong {
-  font-size: 20px;
-}
-
-
-/* =========================================================
-   PAYMENT MANAGEMENT CARD
-   ========================================================= */
-
-.payments-management-card {
-  overflow: hidden;
-}
-
-
-/* =========================================================
-   PAYMENT FILTERS
-   ========================================================= */
-
-.payments-filters {
-  align-items: center;
-}
-
-.payments-search {
-  flex: 1 1 280px;
-  min-width: 240px;
-}
-
-.payments-filters select {
-  min-width: 145px;
-}
-
-
-/* =========================================================
-   PAYMENT TABLE
-   ========================================================= */
-
-.payments-table-wrap {
-  overflow-x: auto;
-}
-
-.payments-table {
-  min-width: 1180px;
-}
-
-.payments-table th,
-.payments-table td {
-  white-space: nowrap;
-}
-
-.payments-table th:nth-child(1) {
-  min-width: 190px;
-}
-
-.payments-table th:nth-child(2) {
-  min-width: 165px;
-}
-
-.payments-table th:nth-child(3) {
-  min-width: 150px;
-}
-
-.payments-table th:nth-child(4) {
-  min-width: 100px;
-}
-
-.payments-table th:nth-child(5),
-.payments-table th:nth-child(6) {
-  min-width: 110px;
-}
-
-.payments-table th:nth-child(7) {
-  min-width: 130px;
-}
-
-.payments-table th:nth-child(8) {
-  min-width: 120px;
-}
-
-.payments-table th:nth-child(9) {
-  min-width: 150px;
-}
-
-
-/* =========================================================
-   TRANSACTION CELL
-   ========================================================= */
-
-.payment-transaction-cell {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  min-width: 180px;
-}
-
-.payment-transaction-icon {
-  width: 38px;
-  height: 38px;
-  flex: 0 0 38px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border: 1px solid var(--admin-border);
-  border-radius: 10px;
-
-  background: var(--admin-surface-soft);
-
-  color: var(--admin-text);
-  font-size: 18px;
-}
-
-.payment-transaction-info {
-  min-width: 0;
-
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.payment-transaction-info strong {
-  color: var(--admin-text);
-  font-size: 13px;
-  font-weight: 650;
-
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.payment-transaction-info span {
-  color: var(--admin-text-muted);
-  font-size: 11px;
-}
-
-
-/* =========================================================
-   CUSTOMER CELL
-   ========================================================= */
-
-.payment-customer-cell {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-}
-
-.payment-customer-avatar {
-  width: 32px;
-  height: 32px;
-  flex: 0 0 32px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
-
-  background: var(--admin-surface-soft);
-  border: 1px solid var(--admin-border);
-
-  color: var(--admin-text);
-
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.payment-customer-info {
-  min-width: 0;
-
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.payment-customer-info strong {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--admin-text);
-
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.payment-customer-info span {
-  font-size: 11px;
-  color: var(--admin-text-muted);
-
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-
-/* =========================================================
-   PAYMENT REFERENCE
-   ========================================================= */
-
-.payment-reference {
-  display: inline-flex;
-  align-items: center;
-
-  max-width: 160px;
-
-  padding: 5px 8px;
-
-  border: 1px solid var(--admin-border);
-  border-radius: 6px;
-
-  background: var(--admin-surface-soft);
-
-  color: var(--admin-text);
-  font-size: 11px;
-  font-family: monospace;
-
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-
-/* =========================================================
-   PAYMENT TYPE
-   ========================================================= */
-
-.payment-type {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-
-  color: var(--admin-text-secondary);
-
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.payment-type i {
-  font-size: 15px;
-}
-
-
-/* =========================================================
-   PAYMENT AMOUNTS
-   ========================================================= */
-
-.payment-amount {
-  color: var(--admin-text);
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.payment-fee {
-  color: var(--admin-text-muted);
-  font-size: 12px;
-}
-
-
-/* =========================================================
-   PAYMENT METHOD
-   ========================================================= */
-
-.payment-method {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-
-  color: var(--admin-text-secondary);
-
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.payment-method i {
-  font-size: 16px;
-}
-
-
-/* =========================================================
-   PAYMENT STATUS BADGES
-   ========================================================= */
-
-.payment-status-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-
-  padding: 5px 9px;
-
-  border: 1px solid transparent;
-  border-radius: 999px;
-
-  font-size: 11px;
-  font-weight: 650;
-
-  white-space: nowrap;
-}
-
-.payment-status-badge i {
-  font-size: 13px;
-}
-
-
-/* Successful */
-
-.payment-status-successful {
-  background: #edf8f1;
-  border-color: #cfead8;
-  color: #247545;
-}
-
-
-/* Pending */
-
-.payment-status-pending {
-  background: #fff8e8;
-  border-color: #f0dfad;
-  color: #8b6817;
-}
-
-
-/* Failed */
-
-.payment-status-failed {
-  background: #fff0f0;
-  border-color: #f0cccc;
-  color: #a43737;
-}
-
-
-/* Refunded */
-
-.payment-status-refunded {
-  background: #f0f0f8;
-  border-color: #d8d8e8;
-  color: #5c5c78;
-}
-
-
-/* =========================================================
-   PAYMENT ACTION
-   ========================================================= */
-
-.payment-action-wrap {
+.management-action {
   position: relative;
+
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.payment-action-btn {
-  width: 34px;
-  height: 34px;
+
+/* =========================================================
+   ACTION BUTTON
+   ========================================================= */
+
+.management-action-button {
+  width: 36px;
+  height: 36px;
+
+  padding: 0;
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
   border: 1px solid var(--admin-border);
-  border-radius: 8px;
+  border-radius: 9px;
 
   background: var(--admin-surface);
-
   color: var(--admin-text-secondary);
+
+  font-family: inherit;
+  font-size: 18px;
 
   cursor: pointer;
 
   transition:
     background 0.18s ease,
     border-color 0.18s ease,
-    color 0.18s ease;
+    color 0.18s ease,
+    transform 0.15s ease;
 }
 
-.payment-action-btn:hover {
+
+.management-action-button:hover {
   background: var(--admin-surface-soft);
   border-color: var(--admin-border-strong);
   color: var(--admin-text);
 }
 
 
+.management-action-button:active {
+  transform: scale(0.94);
+}
+
+
+.management-action-button i {
+  pointer-events: none;
+}
+
+
 /* =========================================================
-   PAYMENT ACTION MENU
+   ACTION MENU
    ========================================================= */
 
-.payment-action-menu {
+.management-action-menu {
   position: absolute;
-  z-index: 30;
 
   top: calc(100% + 7px);
   right: 0;
 
-  min-width: 165px;
+  min-width: 180px;
 
   padding: 6px;
 
-  border: 1px solid var(--admin-border);
-  border-radius: 10px;
-
   background: var(--admin-surface);
+
+  border: 1px solid var(--admin-border);
+  border-radius: 11px;
 
   box-shadow: var(--admin-shadow-lg);
 
-  display: none;
+  z-index: 100;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transform:
+    translateY(-5px)
+    scale(0.98);
+
+  transform-origin: top right;
+
+  transition:
+    opacity 0.15s ease,
+    visibility 0.15s ease,
+    transform 0.15s ease;
 }
 
-.payment-action-menu.open {
-  display: block;
+
+/* OPEN STATE */
+
+.management-action-menu.show {
+  opacity: 1;
+  visibility: visible;
+
+  transform:
+    translateY(0)
+    scale(1);
 }
 
-.payment-action-menu button {
+
+/* =========================================================
+   MENU BUTTON
+   ========================================================= */
+
+.management-action-menu button {
   width: 100%;
+
+  min-height: 36px;
 
   display: flex;
   align-items: center;
-  gap: 9px;
 
-  padding: 9px 10px;
+  gap: 10px;
+
+  padding: 8px 10px;
 
   border: 0;
   border-radius: 7px;
@@ -3962,366 +4332,70 @@ body.dark-mode
   color: var(--admin-text-secondary);
 
   font-family: inherit;
-  font-size: 12px;
+  font-size: 13px;
+  font-weight: 500;
+
   text-align: left;
 
   cursor: pointer;
+
+  transition:
+    background 0.16s ease,
+    color 0.16s ease;
 }
 
-.payment-action-menu button:hover {
+
+.management-action-menu button:hover {
   background: var(--admin-surface-soft);
   color: var(--admin-text);
 }
 
-.payment-action-menu button.danger {
-  color: #a43737;
-}
 
-.payment-action-menu button i {
-  font-size: 15px;
-}
+.management-action-menu button i {
+  width: 17px;
 
+  flex-shrink: 0;
 
-/* =========================================================
-   PAYMENT DETAIL DRAWER
-   ========================================================= */
-
-.payment-detail-drawer {
-  width: min(470px, 100vw);
-}
-
-
-/* =========================================================
-   DRAWER STATUS
-   ========================================================= */
-
-.payment-drawer-status {
-  margin-bottom: 22px;
-}
-
-
-/* =========================================================
-   PAYMENT DETAIL SECTION
-   ========================================================= */
-
-.payment-detail-section {
-  padding: 0 0 22px;
-  margin-bottom: 22px;
-
-  border-bottom: 1px solid var(--admin-border);
-}
-
-.payment-detail-section:last-child {
-  border-bottom: 0;
-  margin-bottom: 0;
-}
-
-.payment-detail-section-title {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  margin-bottom: 13px;
-}
-
-.payment-detail-section-title i {
-  color: var(--admin-text-muted);
-  font-size: 16px;
-}
-
-.payment-detail-section-title h3 {
-  margin: 0;
-
-  color: var(--admin-text);
-
-  font-size: 13px;
-  font-weight: 700;
-}
-
-
-/* =========================================================
-   PAYMENT SUMMARY
-   ========================================================= */
-
-.payment-summary-card {
-  padding: 16px;
-
-  border: 1px solid var(--admin-border);
-  border-radius: 12px;
-
-  background: var(--admin-surface-soft);
-}
-
-.payment-summary-main {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 15px;
-
-  padding-bottom: 15px;
-  margin-bottom: 12px;
-
-  border-bottom: 1px solid var(--admin-border);
-}
-
-.payment-summary-main span {
-  color: var(--admin-text-muted);
-  font-size: 12px;
-}
-
-.payment-summary-main strong {
-  color: var(--admin-text);
-  font-size: 22px;
-  font-weight: 750;
-}
-
-.payment-summary-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 15px;
-
-  padding: 6px 0;
-}
-
-.payment-summary-row span {
-  color: var(--admin-text-muted);
-  font-size: 12px;
-}
-
-.payment-summary-row strong {
-  color: var(--admin-text-secondary);
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.payment-summary-total {
-  margin-top: 7px;
-  padding-top: 12px;
-
-  border-top: 1px solid var(--admin-border);
-}
-
-.payment-summary-total span {
-  color: var(--admin-text);
-  font-weight: 600;
-}
-
-.payment-summary-total strong {
-  color: var(--admin-text);
-  font-size: 14px;
-  font-weight: 750;
-}
-
-
-/* =========================================================
-   PAYMENT DETAIL LIST
-   ========================================================= */
-
-.payment-detail-section .admin-detail-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.payment-detail-section .admin-detail-list > div {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-
-  gap: 20px;
-
-  padding: 9px 0;
-
-  border-bottom: 1px solid var(--admin-border);
-}
-
-.payment-detail-section .admin-detail-list > div:last-child {
-  border-bottom: 0;
-}
-
-.payment-detail-section .admin-detail-list span {
-  color: var(--admin-text-muted);
-  font-size: 11px;
-}
-
-.payment-detail-section .admin-detail-list strong {
-  max-width: 60%;
-
-  color: var(--admin-text);
-  font-size: 12px;
-  font-weight: 600;
-  text-align: right;
-
-  word-break: break-word;
-}
-
-
-/* =========================================================
-   CUSTOMER CARD
-   ========================================================= */
-
-.payment-person-card {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  padding: 12px;
-
-  border: 1px solid var(--admin-border);
-  border-radius: 11px;
-
-  background: var(--admin-surface-soft);
-}
-
-.payment-person-avatar {
-  width: 42px;
-  height: 42px;
-  flex: 0 0 42px;
-
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  border-radius: 50%;
+  font-size: 16px;
 
-  background: var(--admin-text);
-  color: var(--admin-background);
-
-  font-size: 14px;
-  font-weight: 750;
-}
-
-.payment-person-card > div:last-child {
-  min-width: 0;
-
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.payment-person-card strong {
-  color: var(--admin-text);
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.payment-person-card span {
   color: var(--admin-text-muted);
-  font-size: 11px;
-
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 
-/* =========================================================
-   REFUND BOX
-   ========================================================= */
-
-.payment-refund-box {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-
-.payment-refund-box > div {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-
-  padding: 12px;
-
-  border: 1px solid var(--admin-border);
-  border-radius: 10px;
-
-  background: var(--admin-surface-soft);
-}
-
-.payment-refund-box span {
-  color: var(--admin-text-muted);
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.payment-refund-box strong {
+.management-action-menu button:hover i {
   color: var(--admin-text);
-  font-size: 12px;
-  font-weight: 650;
 }
 
 
 /* =========================================================
-   GATEWAY DETAILS
+   DANGER ACTION
    ========================================================= */
 
-.payment-gateway-box {
-  padding: 12px;
-
-  border: 1px solid var(--admin-border);
-  border-radius: 10px;
-
-  background: var(--admin-surface-soft);
-}
-
-.payment-gateway-box > div {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 15px;
-
-  padding: 8px 0;
-
-  border-bottom: 1px solid var(--admin-border);
-}
-
-.payment-gateway-box > div:last-child {
-  border-bottom: 0;
-}
-
-.payment-gateway-box span {
-  color: var(--admin-text-muted);
-  font-size: 11px;
-}
-
-.payment-gateway-box strong {
-  color: var(--admin-text);
-  font-size: 12px;
-  font-weight: 600;
+.management-action-menu button.danger,
+.management-action-menu button[data-action="cancel"],
+.management-action-menu button[data-action="reject"],
+.management-action-menu button[data-action="suspend"] {
+  color: #dc2626;
 }
 
 
-/* =========================================================
-   DRAWER FOOTER
-   ========================================================= */
-
-.payment-detail-drawer .admin-drawer-footer {
-  display: flex;
-  gap: 10px;
-}
-
-.payment-detail-drawer .admin-drawer-footer .admin-btn {
-  flex: 1;
+.management-action-menu button.danger i,
+.management-action-menu button[data-action="cancel"] i,
+.management-action-menu button[data-action="reject"] i,
+.management-action-menu button[data-action="suspend"] i {
+  color: #dc2626;
 }
 
 
-/* =========================================================
-   REFUND BUTTON
-   ========================================================= */
-
-.payment-detail-drawer .admin-btn-danger {
-  color: #a43737;
-  border-color: #e4c3c3;
-  background: #fff7f7;
-}
-
-.payment-detail-drawer .admin-btn-danger:hover {
-  background: #fff0f0;
-  border-color: #d9aaaa;
+.management-action-menu button.danger:hover,
+.management-action-menu button[data-action="cancel"]:hover,
+.management-action-menu button[data-action="reject"]:hover,
+.management-action-menu button[data-action="suspend"]:hover {
+  background: rgba(220, 38, 38, 0.07);
 }
 
 
@@ -4329,179 +4403,47 @@ body.dark-mode
    DARK MODE
    ========================================================= */
 
-[data-theme="dark"] .payment-status-successful {
-  background: rgba(36, 117, 69, 0.14);
-  border-color: rgba(74, 170, 105, 0.25);
-  color: #8bd6a2;
+[data-theme="dark"] .management-action-button:hover {
+  background: var(--admin-surface-soft);
 }
 
-[data-theme="dark"] .payment-status-pending {
-  background: rgba(139, 104, 23, 0.14);
-  border-color: rgba(218, 178, 72, 0.25);
-  color: #e5c878;
-}
 
-[data-theme="dark"] .payment-status-failed {
-  background: rgba(164, 55, 55, 0.14);
-  border-color: rgba(220, 95, 95, 0.25);
-  color: #ed9a9a;
-}
+[data-theme="dark"]
+.management-action-menu
+button.danger:hover,
 
-[data-theme="dark"] .payment-status-refunded {
-  background: rgba(92, 92, 120, 0.14);
-  border-color: rgba(130, 130, 165, 0.25);
-  color: #b9b9dc;
-}
+[data-theme="dark"]
+.management-action-menu
+button[data-action="cancel"]:hover,
 
-[data-theme="dark"] .payment-detail-drawer .admin-btn-danger {
-  color: #ed9a9a;
-  border-color: rgba(220, 95, 95, 0.25);
-  background: rgba(164, 55, 55, 0.10);
-}
+[data-theme="dark"]
+.management-action-menu
+button[data-action="reject"]:hover,
 
-[data-theme="dark"] .payment-detail-drawer .admin-btn-danger:hover {
-  background: rgba(164, 55, 55, 0.16);
+[data-theme="dark"]
+.management-action-menu
+button[data-action="suspend"]:hover {
+  background: rgba(220, 38, 38, 0.12);
 }
 
 
 /* =========================================================
-   RESPONSIVE — LARGE TABLET
-   ========================================================= */
-
-@media (max-width: 1250px) {
-
-  .payments-stats-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-}
-
-
-/* =========================================================
-   RESPONSIVE — TABLET
-   ========================================================= */
-
-@media (max-width: 1000px) {
-
-  .payments-filters {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .payments-search {
-    grid-column: 1 / -1;
-    width: 100%;
-  }
-
-  .payments-filters select {
-    width: 100%;
-  }
-
-  .payments-filters .admin-btn {
-    width: 100%;
-  }
-
-}
-
-
-/* =========================================================
-   RESPONSIVE — SMALL TABLET
-   ========================================================= */
-
-@media (max-width: 800px) {
-
-  .payments-stats-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .payment-detail-drawer {
-    width: min(440px, 100vw);
-  }
-
-}
-
-
-/* =========================================================
-   RESPONSIVE — MOBILE
+   MOBILE
    ========================================================= */
 
 @media (max-width: 600px) {
 
-  .payments-stats-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-
-  .payments-stats-grid .admin-stat-card {
-    padding: 13px;
-  }
-
-  .payments-stats-grid .admin-stat-icon {
+  .management-action-button {
     width: 34px;
     height: 34px;
-    flex-basis: 34px;
-  }
 
-  .payments-stats-grid .admin-stat-content strong {
+    border-radius: 8px;
+
     font-size: 17px;
   }
 
-  .payments-stats-grid .admin-stat-content span {
-    font-size: 10px;
-  }
-
-
-  .payments-filters {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .payments-search {
-    min-width: 0;
-    width: 100%;
-  }
-
-  .payments-filters select,
-  .payments-filters .admin-btn {
-    width: 100%;
-  }
-
-
-  .payment-detail-drawer {
-    width: 100%;
-  }
-
-  .payment-detail-drawer .admin-drawer-footer {
-    flex-direction: column;
-  }
-
-  .payment-detail-drawer .admin-drawer-footer .admin-btn {
-    width: 100%;
-  }
-
-}
-
-
-/* =========================================================
-   RESPONSIVE — VERY SMALL MOBILE
-   ========================================================= */
-
-@media (max-width: 430px) {
-
-  .payments-stats-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .payment-refund-box {
-    grid-template-columns: 1fr;
-  }
-
-  .payment-summary-main strong {
-    font-size: 19px;
-  }
-
-  .payment-person-card {
-    padding: 10px;
+  .management-action-menu {
+    min-width: 170px;
   }
 
 }

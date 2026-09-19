@@ -195,11 +195,11 @@ let products = [
 // STATE
 // ======================================================
 
-let filteredProducts = [];
+let filteredProducts = [...products];
 
 let currentPage = 1;
 
-const PRODUCTS_PER_PAGE = 6;
+const PRODUCTS_PER_PAGE = 5;
 
 let selectedProduct = null;
 
@@ -639,7 +639,7 @@ function renderProducts() {
   });
 
 
-  renderPagination();
+
 
 }
 
@@ -734,90 +734,87 @@ function createProductRow(product) {
 
     <td>
 
+
       <div class="management-action">
+
+  <button
+    type="button"
+    class="management-action-button"
+    data-action="open"
+    data-id="${product.id}"
+    title="Manage product"
+  >
+    <i class="ri-more-2-fill"></i>
+  </button>
+
+  <div class="management-action-menu">
+
+    <button
+      type="button"
+      data-action="view"
+      data-id="${product.id}"
+    >
+      <i class="ri-eye-line"></i>
+      View details
+    </button>
+
+    ${
+      product.status === "pending"
+      ? `
+        <button
+          type="button"
+          data-action="approve"
+          data-id="${product.id}"
+        >
+          <i class="ri-check-line"></i>
+          Approve
+        </button>
 
         <button
           type="button"
-          class="management-action-button"
-          data-action="open"
+          data-action="reject"
           data-id="${product.id}"
-          title="Manage product"
         >
-          <i class="ri-more-2-fill"></i>
+          <i class="ri-close-line"></i>
+          Reject
         </button>
+      `
+      : ""
+    }
 
+    ${
+      product.status === "published"
+      ? `
+        <button
+          type="button"
+          data-action="hide"
+          data-id="${product.id}"
+        >
+          <i class="ri-eye-off-line"></i>
+          Hide product
+        </button>
+      `
+      : ""
+    }
 
-        <div class="management-action-menu">
+    ${
+      product.status === "hidden"
+      ? `
+        <button
+          type="button"
+          data-action="publish"
+          data-id="${product.id}"
+        >
+          <i class="ri-eye-line"></i>
+          Publish
+        </button>
+      `
+      : ""
+    }
 
-          <button
-            type="button"
-            data-action="view"
-            data-id="${product.id}"
-          >
-            <i class="ri-eye-line"></i>
-            View details
-          </button>
+  </div>
 
-
-          ${
-            product.status === "pending"
-            ? `
-              <button
-                type="button"
-                data-action="approve"
-                data-id="${product.id}"
-              >
-                <i class="ri-check-line"></i>
-                Approve
-              </button>
-
-              <button
-                type="button"
-                data-action="reject"
-                data-id="${product.id}"
-              >
-                <i class="ri-close-line"></i>
-                Reject
-              </button>
-            `
-            : ""
-          }
-
-
-          ${
-            product.status === "published"
-            ? `
-              <button
-                type="button"
-                data-action="hide"
-                data-id="${product.id}"
-              >
-                <i class="ri-eye-off-line"></i>
-                Hide product
-              </button>
-            `
-            : ""
-          }
-
-
-          ${
-            product.status === "hidden"
-            ? `
-              <button
-                type="button"
-                data-action="publish"
-                data-id="${product.id}"
-              >
-                <i class="ri-eye-line"></i>
-                Publish
-              </button>
-            `
-            : ""
-          }
-
-        </div>
-
-      </div>
+</div>
 
     </td>
 
@@ -1440,159 +1437,28 @@ openProduct.addEventListener(
 // ======================================================
 // PAGINATION
 // ======================================================
+const container = 
+document.getElementById("paginationButtons");
 
-function renderPagination() {
-
-  const totalPages =
-    Math.ceil(
-      filteredProducts.length /
-      PRODUCTS_PER_PAGE
-    );
+const infoElement = 
+document.getElementById("paginationInfo");
 
 
-  productPagination.innerHTML =
-    "";
+renderPagination({
+container: paginationButtons,
+infoElement: paginationInfo,
+totalItems: filteredProducts.length,
 
+currentPage,
 
-  if (totalPages <= 1) return;
+itemsPerPage: PRODUCTS_PER_PAGE,
 
+onPageChange: (page) => {
+  currentPage = page;
 
-  const previous =
-    document.createElement(
-      "button"
-    );
-
-
-  previous.type =
-    "button";
-
-  previous.className =
-    "management-page-button";
-
-  previous.innerHTML =
-    `<i class="ri-arrow-left-s-line"></i>`;
-
-  previous.disabled =
-    currentPage === 1;
-
-
-  previous.addEventListener(
-    "click",
-    () => {
-
-      if (currentPage <= 1)
-        return;
-
-
-      currentPage--;
-
-      renderProducts();
-
-    }
-  );
-
-
-  productPagination.appendChild(
-    previous
-  );
-
-
-  for (
-    let page = 1;
-    page <= totalPages;
-    page++
-  ) {
-
-    const button =
-      document.createElement(
-        "button"
-      );
-
-
-    button.type =
-      "button";
-
-    button.className =
-      "management-page-button";
-
-
-    if (
-      page === currentPage
-    ) {
-
-      button.classList.add(
-        "active"
-      );
-
-    }
-
-
-    button.textContent =
-      page;
-
-
-    button.addEventListener(
-      "click",
-      () => {
-
-        currentPage =
-          page;
-
-        renderProducts();
-
-      }
-    );
-
-
-    productPagination.appendChild(
-      button
-    );
-
-  }
-
-
-  const next =
-    document.createElement(
-      "button"
-    );
-
-
-  next.type =
-    "button";
-
-  next.className =
-    "management-page-button";
-
-  next.innerHTML =
-    `<i class="ri-arrow-right-s-line"></i>`;
-
-  next.disabled =
-    currentPage === totalPages;
-
-
-  next.addEventListener(
-    "click",
-    () => {
-
-      if (
-        currentPage >=
-        totalPages
-      ) return;
-
-
-      currentPage++;
-
-      renderProducts();
-
-    }
-  );
-
-
-  productPagination.appendChild(
-    next
-  );
-
+  renderProducts();
 }
+});
 
 
 // ======================================================

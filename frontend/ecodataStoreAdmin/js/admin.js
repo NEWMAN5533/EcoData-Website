@@ -379,3 +379,401 @@ window.EcoAdmin = {
   }
 
 };
+
+
+
+
+
+//=========================
+// UNIVERSAL PAGINATION
+//=========================
+
+function renderPagination({
+  container,
+  itemsPerPage,
+  infoElement,
+  currentPage,
+  totalItems,
+  onPageChange
+}) {
+
+  // =========================
+  // CHECK CONTAINER
+  // =========================
+
+  if (!container) {
+    console.warn(
+      "Pagination container was not found."
+    );
+
+    return;
+  }
+
+
+  // =========================
+  // CALCULATE TOTAL PAGES
+  // =========================
+
+  const totalPages =
+    Math.ceil(
+      totalItems / itemsPerPage
+    );
+
+
+  // =========================
+  // ONLY ONE PAGE / NO RESULTS
+  // =========================
+
+  if (totalPages <= 1) {
+
+    if (infoElement) {
+
+      if (totalItems === 0) {
+
+        infoElement.textContent =
+          "Showing 0 of 0";
+
+      } else {
+
+        infoElement.textContent =
+          `Showing 1–${Math.min(
+            itemsPerPage,
+            totalItems
+          )} of ${totalItems}`;
+
+      }
+
+    }
+
+    container.innerHTML = "";
+
+    return;
+  }
+
+
+  // =========================
+  // CALCULATE SHOWING RANGE
+  // =========================
+
+  const start =
+    (currentPage - 1) *
+    itemsPerPage + 1;
+
+  const end =
+    Math.min(
+      currentPage * itemsPerPage,
+      totalItems
+    );
+
+
+  // =========================
+  // UPDATE PAGINATION INFO
+  // =========================
+
+  if (infoElement) {
+
+    infoElement.textContent =
+      `Showing ${start}–${end} of ${totalItems}`;
+
+  }
+
+
+  // =========================
+  // CREATE PAGE LIST
+  // =========================
+
+  const pages = [];
+
+
+  // Always show first page
+
+  pages.push(1);
+
+
+  // =========================
+  // PAGES AROUND CURRENT PAGE
+  // =========================
+
+  const startPage =
+    Math.max(
+      2,
+      currentPage - 1
+    );
+
+
+  const endPage =
+    Math.min(
+      totalPages - 1,
+      currentPage + 1
+    );
+
+
+  // =========================
+  // ELLIPSIS BEFORE
+  // =========================
+
+  if (startPage > 2) {
+
+    pages.push("...");
+
+  }
+
+
+  // =========================
+  // MIDDLE PAGES
+  // =========================
+
+  for (
+    let page = startPage;
+    page <= endPage;
+    page++
+  ) {
+
+    pages.push(page);
+
+  }
+
+
+  // =========================
+  // ELLIPSIS AFTER
+  // =========================
+
+  if (
+    endPage <
+    totalPages - 1
+  ) {
+
+    pages.push("...");
+
+  }
+
+
+  // =========================
+  // ALWAYS SHOW LAST PAGE
+  // =========================
+
+  if (totalPages > 1) {
+
+    pages.push(totalPages);
+
+  }
+
+
+  // =========================
+  // BUILD HTML
+  // =========================
+
+  let html = "";
+
+
+  // =========================
+  // PREVIOUS BUTTON
+  // =========================
+
+  html += `
+    <button
+      id="previousPage"
+      class="pagination-nav"
+      aria-label="Previous page"
+      data-page="${currentPage - 1}"
+      ${currentPage === 1 ? "disabled" : ""}
+    >
+      <i class="ri-arrow-left-s-line"></i>
+    </button>
+  `;
+
+
+  // =========================
+  // PAGE NUMBERS
+  // =========================
+
+  pages.forEach(page => {
+
+    // Ellipsis
+
+    if (page === "...") {
+
+      html += `
+        <span class="pagination-ellipsis">
+          ...
+        </span>
+      `;
+
+      return;
+    }
+
+
+    // Page button
+
+    html += `
+      <button
+        type="button"
+        class="pagination-number ${
+          page === currentPage
+            ? "active"
+            : ""
+        }"
+        data-page="${page}"
+      >
+        ${page}
+      </button>
+    `;
+
+  });
+
+
+  // =========================
+  // NEXT BUTTON
+  // =========================
+
+  html += `
+    <button
+      id="nextPage"
+      class="pagination-nav"
+      aria-label="Next page"
+      data-page="${currentPage + 1}"
+      ${
+        currentPage === totalPages
+          ? "disabled"
+          : ""
+      }
+    >
+      <i class="ri-arrow-right-s-line"></i>
+    </button>
+  `;
+
+
+  // =========================
+  // INSERT HTML
+  // =========================
+
+  container.innerHTML =
+    html;
+
+
+  // =========================
+  // PAGE BUTTON EVENTS
+  // =========================
+
+  container
+    .querySelectorAll(
+      "[data-page]"
+    )
+    .forEach(button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          const page =
+            Number(
+              button.dataset.page
+            );
+
+
+          if (
+            page < 1 ||
+            page > totalPages
+          ) {
+            return;
+          }
+
+
+          onPageChange(page);
+
+        }
+      );
+
+    });
+
+}
+
+
+
+
+// =========================================================
+// UNIVERSAL MANAGEMENT ACTION MENUS
+// =========================================================
+
+document.addEventListener("click", (event) => {
+
+  const actionButton =
+    event.target.closest(
+      ".management-action-button"
+    );
+
+
+  // -----------------------------------------
+  // OPEN / CLOSE MENU
+  // -----------------------------------------
+
+  if (actionButton) {
+
+    event.stopPropagation();
+
+    const wrapper =
+      actionButton.closest(
+        ".management-action"
+      );
+
+    if (!wrapper) return;
+
+
+    // Close every other menu
+    document
+      .querySelectorAll(
+        ".management-action-menu.show"
+      )
+      .forEach(menu => {
+
+        if (
+          !wrapper.contains(menu)
+        ) {
+          menu.classList.remove("show");
+        }
+
+      });
+
+
+    const menu =
+      wrapper.querySelector(
+        ".management-action-menu"
+      );
+
+    if (menu) {
+
+      menu.classList.toggle(
+        "show"
+      );
+
+    }
+
+    return;
+  }
+
+
+  // -----------------------------------------
+  // CLOSE WHEN CLICKING OUTSIDE
+  // -----------------------------------------
+
+  if (
+    !event.target.closest(
+      ".management-action"
+    )
+  ) {
+
+    document
+      .querySelectorAll(
+        ".management-action-menu.show"
+      )
+      .forEach(menu => {
+
+        menu.classList.remove(
+          "show"
+        );
+
+      });
+
+  }
+
+});

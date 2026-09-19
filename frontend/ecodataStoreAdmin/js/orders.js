@@ -2,6 +2,11 @@
 // ECODATA ADMIN — ORDERS MANAGEMENT
 // ======================================================
 
+// ======================================================
+// STATE
+// ======================================================
+
+
 
 // ======================================================
 // DEMO DATA
@@ -254,23 +259,49 @@ let orders = [
     status: "refunded",
 
     date: "2026-09-13T16:08:00"
+  },
+
+    {
+    id: "ORD-20260913-009",
+    reference: "ECO-4PZ81C",
+
+    buyer: "Aisha Yakubu",
+    buyerId: "USR-10008",
+    buyerPhone: "059 228 7711",
+    buyerEmail: "aisha@example.com",
+
+    seller: "Study Vault",
+    sellerId: "SEL-10003",
+
+    product: "BECE Mathematics Notes",
+    productId: "PRD-10001",
+
+    type: "digital",
+
+    quantity: 1,
+
+    subtotal: 25,
+    delivery: 0,
+    discount: 0,
+    total: 25,
+
+    payment: "refunded",
+    status: "refunded",
+
+    date: "2026-09-13T16:08:00"
   }
 
 ];
 
 
-// ======================================================
-// STATE
-// ======================================================
+let filteredOrders = [...orders];
 
-let filteredOrders = [];
 
 let currentPage = 1;
 
-const ORDERS_PER_PAGE = 6;
+const ORDERS_PER_PAGE = 5;
 
 let selectedOrder = null;
-
 
 // ======================================================
 // ELEMENTS
@@ -685,7 +716,7 @@ function renderOrders() {
   });
 
 
-  renderPagination();
+
 
 }
 
@@ -772,83 +803,78 @@ function createOrderRow(order) {
 
     <td>
 
-      <div class="management-action">
+     <div class="management-action">
 
+  <button
+    type="button"
+    class="management-action-button"
+    data-action="open"
+    data-id="${order.id}"
+    title="Manage order"
+  >
+    <i class="ri-more-2-fill"></i>
+  </button>
+
+  <div class="management-action-menu">
+
+    <button
+      type="button"
+      data-action="view"
+      data-id="${order.id}"
+    >
+      <i class="ri-eye-line"></i>
+      View details
+    </button>
+
+    ${
+      order.status === "pending"
+      ? `
         <button
           type="button"
-          class="management-action-button"
-          data-action="open"
+          data-action="process"
           data-id="${order.id}"
-          title="Manage order"
         >
-          <i class="ri-more-2-fill"></i>
+          <i class="ri-loader-4-line"></i>
+          Mark processing
         </button>
+      `
+      : ""
+    }
 
+    ${
+      order.status === "processing"
+      ? `
+        <button
+          type="button"
+          data-action="complete"
+          data-id="${order.id}"
+        >
+          <i class="ri-checkbox-circle-line"></i>
+          Mark completed
+        </button>
+      `
+      : ""
+    }
 
-        <div class="management-action-menu">
+    ${
+      order.status === "pending" ||
+      order.status === "processing"
+      ? `
+        <button
+          type="button"
+          data-action="cancel"
+          data-id="${order.id}"
+        >
+          <i class="ri-close-circle-line"></i>
+          Cancel order
+        </button>
+      `
+      : ""
+    }
 
-          <button
-            type="button"
-            data-action="view"
-            data-id="${order.id}"
-          >
-            <i class="ri-eye-line"></i>
-            View details
-          </button>
+  </div>
 
-
-          ${
-            order.status === "pending"
-            ? `
-              <button
-                type="button"
-                data-action="process"
-                data-id="${order.id}"
-              >
-                <i class="ri-loader-4-line"></i>
-                Mark processing
-              </button>
-            `
-            : ""
-          }
-
-
-          ${
-            order.status === "processing"
-            ? `
-              <button
-                type="button"
-                data-action="complete"
-                data-id="${order.id}"
-              >
-                <i class="ri-checkbox-circle-line"></i>
-                Mark completed
-              </button>
-            `
-            : ""
-          }
-
-
-          ${
-            order.status === "pending" ||
-            order.status === "processing"
-            ? `
-              <button
-                type="button"
-                data-action="cancel"
-                data-id="${order.id}"
-              >
-                <i class="ri-close-circle-line"></i>
-                Cancel order
-              </button>
-            `
-            : ""
-          }
-
-        </div>
-
-      </div>
-
+</div>
     </td>
 
   `;
@@ -1324,163 +1350,27 @@ orderPrimaryAction.addEventListener(
 // PAGINATION
 // ======================================================
 
-function renderPagination() {
+const container = 
+document.getElementById("paginationButtons");
 
-  const totalPages =
-    Math.ceil(
-      filteredOrders.length /
-      ORDERS_PER_PAGE
-    );
+const infoElement = 
+document.getElementById("paginationInfo");
 
+renderPagination({
+container: paginationButtons,
+infoElement: paginationInfo,
+totalItems: filteredOrders.length,
 
-  orderPagination.innerHTML =
-    "";
+currentPage,
 
+itemsPerPage: ORDERS_PER_PAGE,
 
-  if (totalPages <= 1)
-    return;
+onPageChange: (page) => {
+  currentPage = page;
 
-
-  const previous =
-    document.createElement(
-      "button"
-    );
-
-
-  previous.type =
-    "button";
-
-  previous.className =
-    "management-page-button";
-
-  previous.innerHTML =
-    `<i class="ri-arrow-left-s-line"></i>`;
-
-  previous.disabled =
-    currentPage === 1;
-
-
-  previous.addEventListener(
-    "click",
-    () => {
-
-      if (
-        currentPage <= 1
-      )
-        return;
-
-
-      currentPage--;
-
-      renderOrders();
-
-    }
-  );
-
-
-  orderPagination.appendChild(
-    previous
-  );
-
-
-  for (
-    let page = 1;
-    page <= totalPages;
-    page++
-  ) {
-
-    const button =
-      document.createElement(
-        "button"
-      );
-
-
-    button.type =
-      "button";
-
-    button.className =
-      "management-page-button";
-
-
-    if (
-      page === currentPage
-    ) {
-
-      button.classList.add(
-        "active"
-      );
-
-    }
-
-
-    button.textContent =
-      page;
-
-
-    button.addEventListener(
-      "click",
-      () => {
-
-        currentPage =
-          page;
-
-        renderOrders();
-
-      }
-    );
-
-
-    orderPagination.appendChild(
-      button
-    );
-
-  }
-
-
-  const next =
-    document.createElement(
-      "button"
-    );
-
-
-  next.type =
-    "button";
-
-  next.className =
-    "management-page-button";
-
-  next.innerHTML =
-    `<i class="ri-arrow-right-s-line"></i>`;
-
-  next.disabled =
-    currentPage ===
-    totalPages;
-
-
-  next.addEventListener(
-    "click",
-    () => {
-
-      if (
-        currentPage >=
-        totalPages
-      )
-        return;
-
-
-      currentPage++;
-
-      renderOrders();
-
-    }
-  );
-
-
-  orderPagination.appendChild(
-    next
-  );
-
+  renderOrders();
 }
+});
 
 
 // ======================================================

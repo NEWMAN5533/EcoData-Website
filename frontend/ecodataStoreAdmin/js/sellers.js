@@ -167,11 +167,11 @@ let sellers = [
 // STATE
 // ======================================================
 
-let filteredSellers = [];
+let filteredSellers = [...sellers];
 
 let currentPage = 1;
 
-const SELLERS_PER_PAGE = 6;
+const SELLERS_PER_PAGE = 5;
 
 let selectedSeller = null;
 
@@ -475,7 +475,6 @@ function renderSellers() {
   });
 
 
-  renderPagination();
 
 }
 
@@ -549,88 +548,86 @@ function createSellerRow(seller) {
 
     <td>
 
-      <div class="management-action">
+    <div class="management-action">
+
+  <button
+    type="button"
+    class="management-action-button"
+    data-action="open"
+    data-id="${seller.id}"
+    title="Manage seller"
+  >
+    <i class="ri-more-2-fill"></i>
+  </button>
+
+  <div class="management-action-menu">
+
+    <button
+      type="button"
+      data-action="view"
+      data-id="${seller.id}"
+    >
+      <i class="ri-eye-line"></i>
+      View details
+    </button>
+
+    ${
+      seller.status === "pending"
+      ? `
+        <button
+          type="button"
+          data-action="approve"
+          data-id="${seller.id}"
+        >
+          <i class="ri-check-line"></i>
+          Approve
+        </button>
 
         <button
           type="button"
-          class="management-action-button"
-          data-action="open"
+          data-action="reject"
           data-id="${seller.id}"
-          title="Manage seller"
         >
-          <i class="ri-more-2-fill"></i>
+          <i class="ri-close-line"></i>
+          Reject
         </button>
+      `
+      : ""
+    }
 
+    ${
+      seller.status === "active"
+      ? `
+        <button
+          type="button"
+          data-action="suspend"
+          data-id="${seller.id}"
+        >
+          <i class="ri-forbid-2-line"></i>
+          Suspend
+        </button>
+      `
+      : ""
+    }
 
-        <div class="management-action-menu seller-action-menu">
+    ${
+      seller.status === "suspended"
+      ? `
+        <button
+          type="button"
+          data-action="activate"
+          data-id="${seller.id}"
+        >
+          <i class="ri-checkbox-circle-line"></i>
+          Activate
+        </button>
+      `
+      : ""
+    }
 
-          <button
-            type="button"
-            data-action="view"
-            data-id="${seller.id}"
-          >
-            <i class="ri-eye-line"></i>
-            View details
-          </button>
+  </div>
 
-          ${
-            seller.status === "pending"
-            ? `
-              <button
-                type="button"
-                data-action="approve"
-                data-id="${seller.id}"
-              >
-                <i class="ri-check-line"></i>
-                Approve
-              </button>
-
-              <button
-                type="button"
-                data-action="reject"
-                data-id="${seller.id}"
-              >
-                <i class="ri-close-line"></i>
-                Reject
-              </button>
-            `
-            : ""
-          }
-
-          ${
-            seller.status === "active"
-            ? `
-              <button
-                type="button"
-                data-action="suspend"
-                data-id="${seller.id}"
-              >
-                <i class="ri-forbid-2-line"></i>
-                Suspend
-              </button>
-            `
-            : ""
-          }
-
-          ${
-            seller.status === "suspended"
-            ? `
-              <button
-                type="button"
-                data-action="activate"
-                data-id="${seller.id}"
-              >
-                <i class="ri-checkbox-circle-line"></i>
-                Activate
-              </button>
-            `
-            : ""
-          }
-
-        </div>
-
-      </div>
-
+</div>
     </td>
 
   `;
@@ -1179,136 +1176,6 @@ viewSellerWithdrawals.addEventListener(
 );
 
 
-// ======================================================
-// PAGINATION
-// ======================================================
-
-function renderPagination() {
-
-  const totalPages =
-    Math.ceil(
-      filteredSellers.length /
-      SELLERS_PER_PAGE
-    );
-
-
-  sellerPagination.innerHTML = "";
-
-
-  if (totalPages <= 1) return;
-
-
-  const previous =
-    document.createElement("button");
-
-  previous.type = "button";
-
-  previous.className =
-    "management-page-button";
-
-  previous.innerHTML =
-    `<i class="ri-arrow-left-s-line"></i>`;
-
-  previous.disabled =
-    currentPage === 1;
-
-
-  previous.addEventListener(
-    "click",
-    () => {
-
-      if (currentPage <= 1) return;
-
-      currentPage--;
-
-      renderSellers();
-
-    }
-  );
-
-
-  sellerPagination.appendChild(
-    previous
-  );
-
-
-  for (
-    let page = 1;
-    page <= totalPages;
-    page++
-  ) {
-
-    const button =
-      document.createElement("button");
-
-    button.type = "button";
-
-    button.className =
-      "management-page-button";
-
-
-    if (page === currentPage) {
-      button.classList.add("active");
-    }
-
-
-    button.textContent =
-      page;
-
-
-    button.addEventListener(
-      "click",
-      () => {
-
-        currentPage = page;
-
-        renderSellers();
-
-      }
-    );
-
-
-    sellerPagination.appendChild(
-      button
-    );
-
-  }
-
-
-  const next =
-    document.createElement("button");
-
-  next.type = "button";
-
-  next.className =
-    "management-page-button";
-
-  next.innerHTML =
-    `<i class="ri-arrow-right-s-line"></i>`;
-
-  next.disabled =
-    currentPage === totalPages;
-
-
-  next.addEventListener(
-    "click",
-    () => {
-
-      if (currentPage >= totalPages) return;
-
-      currentPage++;
-
-      renderSellers();
-
-    }
-  );
-
-
-  sellerPagination.appendChild(
-    next
-  );
-
-}
 
 
 // ======================================================
@@ -1619,3 +1486,29 @@ document.addEventListener(
 
   }
 );
+
+
+// =========================================================
+// PAGINATION
+// =========================================================
+const container = 
+document.getElementById("paginationButtons");
+
+const infoElement = 
+document.getElementById("paginationInfo");
+
+renderPagination({
+container: paginationButtons,
+infoElement: paginationInfo,
+totalItems: filteredSellers.length,
+
+currentPage,
+
+itemsPerPage: SELLERS_PER_PAGE,
+
+onPageChange: (page) => {
+  currentPage = page;
+
+  renderSellers();
+}
+});

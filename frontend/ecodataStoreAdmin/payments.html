@@ -33,24 +33,25 @@
   ========================== -->
   <aside class="admin-sidebar" id="adminSidebar">
 
-    <div class="admin-sidebar-header">
+   <div class="admin-sidebar-top">
 
       <a href="index.html" class="admin-brand">
+
         <span class="admin-brand-icon">
           <i class="ri-store-2-line"></i>
         </span>
 
         <span class="admin-brand-text">
-          EcoData
+          <strong>EcoData</strong>
           <small>Admin</small>
         </span>
+
       </a>
 
       <button
         class="admin-sidebar-close"
-        id="adminSidebarClose"
-        type="button"
-        aria-label="Close menu"
+        id="sidebarClose"
+        aria-label="Close sidebar"
       >
         <i class="ri-close-line"></i>
       </button>
@@ -194,71 +195,148 @@
 
 
     <!-- =========================
-         TOPBAR
+         TOP BAR
     ========================== -->
     <header class="admin-topbar">
 
-      <div class="admin-topbar-left">
+        <div class="admin-topbar-left">
 
-        <button
-          class="admin-menu-toggle"
-          id="adminMenuToggle"
-          type="button"
-          aria-label="Open menu"
-        >
-          <i class="ri-menu-line"></i>
-        </button>
-
-        <div class="admin-page-context">
-          <span>Finance</span>
-          <strong>Payments</strong>
-        </div>
-
-      </div>
-
-
-      <div class="admin-topbar-right">
-
-        <div class="admin-global-search">
-          <i class="ri-search-line"></i>
-
-          <input
-            type="search"
-            id="globalAdminSearch"
-            placeholder="Search..."
-            autocomplete="off"
+          <button
+            class="admin-menu-button"
+            id="sidebarToggle"
+            aria-label="Open sidebar"
           >
+            <i class="ri-menu-line"></i>
+          </button>
+
+          <div class="admin-page-context">
+
+            <strong>Payments</strong>
+
+            <span>
+              Overview of your store
+            </span>
+
+          </div>
+
         </div>
 
 
-        <button
-          class="admin-topbar-icon"
-          type="button"
-          aria-label="Notifications"
-        >
-          <i class="ri-notification-3-line"></i>
-          <span class="admin-notification-dot"></span>
-        </button>
+        <div class="admin-topbar-right">
 
 
-        <div class="admin-profile">
+          <!-- SEARCH -->
 
-          <div class="admin-profile-avatar">
-            A
+          <div class="admin-search">
+
+            <i class="ri-search-line"></i>
+
+            <input
+              type="search"
+              id="adminSearch"
+              placeholder="Search..."
+              autocomplete="off"
+            >
+
+            <span class="admin-search-shortcut">
+              /
+            </span>
+
           </div>
 
-          <div class="admin-profile-info">
-            <strong>Admin</strong>
-            <span>Administrator</span>
-          </div>
 
-          <i class="ri-arrow-down-s-line"></i>
+          <!-- NOTIFICATIONS -->
+
+          <button
+            class="admin-icon-button notification-button"
+            id="notificationButton"
+            aria-label="Notifications"
+          >
+
+            <i class="ri-notification-3-line"></i>
+
+            <span class="notification-dot"></span>
+
+          </button>
+
+
+          <!-- ADMIN PROFILE -->
+
+          <div class="admin-profile-wrapper">
+
+            <button
+              class="admin-profile-button"
+              id="adminProfileButton"
+            >
+
+              <span class="admin-avatar">
+                <i class="ri-admin-line"></i>
+              </span>
+
+              <span class="admin-profile-info">
+
+                <strong>Admin</strong>
+
+                <small>
+                  Super Admin
+                </small>
+
+              </span>
+
+              <i class="ri-arrow-down-s-line"></i>
+
+            </button>
+
+
+            <!-- PROFILE MENU -->
+
+            <div
+              class="admin-profile-menu"
+              id="adminProfileMenu"
+            >
+
+              <div class="admin-profile-menu-header">
+
+                <span class="admin-avatar large">
+                  <i class="ri-admin-line"></i>
+                </span>
+
+                <div>
+
+                  <strong>Administrator</strong>
+
+                  <span>Super Admin</span>
+
+                </div>
+
+              </div>
+
+              <div class="admin-profile-menu-divider"></div>
+
+              <a href="settings.html">
+                <i class="ri-settings-3-line"></i>
+                <span>Settings</span>
+              </a>
+
+              <a href="../index.html">
+                <i class="ri-store-2-line"></i>
+                <span>View Store</span>
+              </a>
+
+              <div class="admin-profile-menu-divider"></div>
+
+              <button id="adminLogoutButton">
+                <i class="ri-logout-box-r-line"></i>
+                <span>Sign Out</span>
+              </button>
+
+            </div>
+
+          </div>
 
         </div>
 
-      </div>
-
-    </header>
+      </header>
 
 
     <!-- =========================
@@ -575,6 +653,9 @@
       </section>
 
     </div>
+
+
+    
 
   </main>
 

@@ -47,22 +47,25 @@
   ========================== -->
   <aside class="admin-sidebar" id="adminSidebar">
 
-    <div class="admin-sidebar-header">
+    <div class="admin-sidebar-top">
 
-      <a href="index.html" class="admin-logo">
-        <span class="admin-logo-mark">
-          E
+      <a href="index.html" class="admin-brand">
+
+        <span class="admin-brand-icon">
+          <i class="ri-store-2-line"></i>
         </span>
 
-        <span>
-          EcoData
+        <span class="admin-brand-text">
+          <strong>EcoData</strong>
+          <small>Admin</small>
         </span>
+
       </a>
 
       <button
         class="admin-sidebar-close"
-        id="adminSidebarClose"
-        aria-label="Close menu"
+        id="sidebarClose"
+        aria-label="Close sidebar"
       >
         <i class="ri-close-line"></i>
       </button>
@@ -211,82 +214,149 @@
   ========================== -->
   <main class="admin-main">
 
-    <!-- TOPBAR -->
+    <!--=================
+       TOP BAR
+    ===================-->
     <header class="admin-topbar">
 
-      <div class="admin-topbar-left">
+        <div class="admin-topbar-left">
 
-        <button
-          class="admin-mobile-menu"
-          id="adminMobileMenu"
-          aria-label="Open menu"
-        >
-          <i class="ri-menu-line"></i>
-        </button>
+          <button
+            class="admin-menu-button"
+            id="sidebarToggle"
+            aria-label="Open sidebar"
+          >
+            <i class="ri-menu-line"></i>
+          </button>
 
-        <div class="admin-page-context">
-          <span>Marketplace</span>
-          <strong>Services</strong>
+          <div class="admin-page-context">
+
+            <strong>Services</strong>
+
+            <span>
+              Overview of your store
+            </span>
+
+          </div>
+
         </div>
 
-      </div>
+
+        <div class="admin-topbar-right">
 
 
-      <div class="admin-topbar-actions">
+          <!-- SEARCH -->
 
-        <div class="admin-global-search">
+          <div class="admin-search">
 
-          <i class="ri-search-line"></i>
+            <i class="ri-search-line"></i>
 
-          <input
-            type="text"
-            placeholder="Search..."
-            id="adminGlobalSearch"
+            <input
+              type="search"
+              id="adminSearch"
+              placeholder="Search..."
+              autocomplete="off"
+            >
+
+            <span class="admin-search-shortcut">
+              /
+            </span>
+
+          </div>
+
+
+          <!-- NOTIFICATIONS -->
+
+          <button
+            class="admin-icon-button notification-button"
+            id="notificationButton"
+            aria-label="Notifications"
           >
 
-          <span class="admin-search-key">
-            /
-          </span>
+            <i class="ri-notification-3-line"></i>
+
+            <span class="notification-dot"></span>
+
+          </button>
+
+
+          <!-- ADMIN PROFILE -->
+
+          <div class="admin-profile-wrapper">
+
+            <button
+              class="admin-profile-button"
+              id="adminProfileButton"
+            >
+
+              <span class="admin-avatar">
+                <i class="ri-admin-line"></i>
+              </span>
+
+              <span class="admin-profile-info">
+
+                <strong>Admin</strong>
+
+                <small>
+                  Super Admin
+                </small>
+
+              </span>
+
+              <i class="ri-arrow-down-s-line"></i>
+
+            </button>
+
+
+            <!-- PROFILE MENU -->
+
+            <div
+              class="admin-profile-menu"
+              id="adminProfileMenu"
+            >
+
+              <div class="admin-profile-menu-header">
+
+                <span class="admin-avatar large">
+                  <i class="ri-admin-line"></i>
+                </span>
+
+                <div>
+
+                  <strong>Administrator</strong>
+
+                  <span>Super Admin</span>
+
+                </div>
+
+              </div>
+
+              <div class="admin-profile-menu-divider"></div>
+
+              <a href="settings.html">
+                <i class="ri-settings-3-line"></i>
+                <span>Settings</span>
+              </a>
+
+              <a href="../index.html">
+                <i class="ri-store-2-line"></i>
+                <span>View Store</span>
+              </a>
+
+              <div class="admin-profile-menu-divider"></div>
+
+              <button id="adminLogoutButton">
+                <i class="ri-logout-box-r-line"></i>
+                <span>Sign Out</span>
+              </button>
+
+            </div>
+
+          </div>
 
         </div>
 
-
-        <button
-          class="admin-icon-button"
-          title="Notifications"
-        >
-          <i class="ri-notification-3-line"></i>
-          <span class="admin-notification-dot"></span>
-        </button>
-
-
-        <button
-          class="admin-theme-toggle"
-          id="adminThemeToggle"
-          title="Toggle theme"
-        >
-          <i class="ri-moon-line"></i>
-        </button>
-
-
-        <div class="admin-profile">
-
-          <div class="admin-profile-avatar">
-            A
-          </div>
-
-          <div class="admin-profile-info">
-            <strong>Administrator</strong>
-            <span>Admin</span>
-          </div>
-
-          <i class="ri-arrow-down-s-line"></i>
-
-        </div>
-
-      </div>
-
-    </header>
+      </header>
 
 
 
@@ -310,17 +380,19 @@
           </p>
         </div>
 
-        <div class="admin-page-header-actions">
+        
+          <div class="admin-page-header-actions">
 
-          <button
-            class="admin-btn admin-btn-secondary"
-            id="refreshServices"
-          >
-            <i class="ri-refresh-line"></i>
-            Refresh
-          </button>
+            <button
+              type="button"
+              class="admin-secondary-button"
+              id="refreshSellers"
+            >
+              <i class="ri-refresh-line"></i>
+              <span>Refresh</span>
+            </button>
 
-        </div>
+          </div>
 
       </div>
 
@@ -447,6 +519,7 @@
             </p>
 
           </div>
+          
 
           <div class="admin-result-count">
             <strong id="serviceResultCount">
@@ -462,17 +535,20 @@
         <!-- FILTERS -->
         <div class="admin-filter-bar">
 
-          <div class="admin-filter-search">
+           <div class="management-search">
 
             <i class="ri-search-line"></i>
 
             <input
-              type="text"
+             type="text"
               id="serviceSearch"
               placeholder="Search request, customer, seller or service..."
+              autocomplete="off"
             >
 
           </div>
+
+         
 
 
           <select id="serviceStatusFilter">
@@ -671,10 +747,20 @@
 
 
         <!-- PAGINATION -->
-        <div
-          class="admin-pagination"
-          id="servicePagination"
-        ></div>
+         <div class="management-pagination">
+
+          <span id="paginationInfo">
+            Showing 1–6 of 2,846
+          </span>
+
+          <div class="pagination-buttons"
+          id="paginationButtons">
+
+          
+
+          </div>
+
+        </div>
 
       </section>
 

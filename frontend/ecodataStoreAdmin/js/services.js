@@ -238,11 +238,11 @@ let serviceRequests = [
 ];
 
 
-let filteredServices = [];
+let filteredServices = [...serviceRequests];
 let currentPage = 1;
 let selectedService = null;
 
-const SERVICES_PER_PAGE = 6;
+const SERVICES_PER_PAGE = 5;
 
 
 // =========================================================
@@ -300,7 +300,7 @@ document.addEventListener(
 
     applyServiceFilters();
 
-    setupServiceEvents();
+  
 
   }
 );
@@ -607,10 +607,6 @@ function renderServices() {
     pageServices
       .map(createServiceRow)
       .join("");
-
-
-  renderServicePagination();
-
 }
 
 
@@ -727,67 +723,61 @@ function createServiceRow(service) {
 
       <td>
 
-        <div class="admin-row-actions">
 
-          <button
-            class="admin-row-action"
-            data-action="view"
-            data-id="${service.id}"
-            title="View request"
-          >
-            <i class="ri-eye-line"></i>
-          </button>
+      
 
-          <button
-            class="admin-row-action"
-            data-action="menu"
-            data-id="${service.id}"
-            title="More"
-          >
-            <i class="ri-more-2-fill"></i>
-          </button>
+       <div class="management-action">
 
-        </div>
+  <button
+    type="button"
+    class="management-action-button"
+    data-action="open"
+    data-id="${service.id}"
+    title="Manage service request"
+  >
+    <i class="ri-more-2-fill"></i>
+  </button>
 
-        <div
-          class="admin-action-menu"
-          data-menu="${service.id}"
+  <div class="management-action-menu">
+
+    <button
+      type="button"
+      data-action="view"
+      data-id="${service.id}"
+    >
+      <i class="ri-eye-line"></i>
+      View details
+    </button>
+
+    <button
+      type="button"
+      data-action="next"
+      data-id="${service.id}"
+    >
+      <i class="ri-arrow-right-line"></i>
+      Update status
+    </button>
+
+    ${
+      service.status !== "completed" &&
+      service.status !== "cancelled"
+      ? `
+        <button
+          type="button"
+          class="danger"
+          data-action="cancel"
+          data-id="${service.id}"
         >
+          <i class="ri-close-circle-line"></i>
+          Cancel request
+        </button>
+      `
+      : ""
+    }
 
-          <button
-            data-action="view"
-            data-id="${service.id}"
-          >
-            <i class="ri-eye-line"></i>
-            View Details
-          </button>
+  </div>
 
-          <button
-            data-action="next"
-            data-id="${service.id}"
-          >
-            <i class="ri-arrow-right-line"></i>
-            Update Status
-          </button>
-
-          ${
-            service.status !== "completed" &&
-            service.status !== "cancelled"
-              ? `
-                <button
-                  class="danger"
-                  data-action="cancel"
-                  data-id="${service.id}"
-                >
-                  <i class="ri-close-circle-line"></i>
-                  Cancel Request
-                </button>
-              `
-              : ""
-          }
-
-        </div>
-
+</div>
       </td>
 
     </tr>
@@ -1484,109 +1474,27 @@ function updateServiceStats() {
 // =========================================================
 // PAGINATION
 // =========================================================
+const container = 
+document.getElementById("paginationButtons");
 
-function renderServicePagination() {
+const infoElement = 
+document.getElementById("paginationInfo");
 
-  const totalPages =
-    Math.ceil(
-      filteredServices.length /
-      SERVICES_PER_PAGE
-    );
+renderPagination({
+container: paginationButtons,
+infoElement: paginationInfo,
+totalItems: filteredServices.length,
 
+currentPage,
 
-  if (totalPages <= 1) {
+itemsPerPage: SERVICES_PER_PAGE,
 
-    servicePagination.innerHTML = "";
+onPageChange: (page) => {
+  currentPage = page;
 
-    return;
-
-  }
-
-
-  let html = "";
-
-
-  html += `
-    <button
-      class="admin-page-btn"
-      data-page="${currentPage - 1}"
-      ${currentPage === 1 ? "disabled" : ""}
-    >
-      <i class="ri-arrow-left-s-line"></i>
-    </button>
-  `;
-
-
-  for (
-    let page = 1;
-    page <= totalPages;
-    page++
-  ) {
-
-    html += `
-      <button
-        class="admin-page-btn ${
-          page === currentPage
-            ? "active"
-            : ""
-        }"
-        data-page="${page}"
-      >
-        ${page}
-      </button>
-    `;
-
-  }
-
-
-  html += `
-    <button
-      class="admin-page-btn"
-      data-page="${currentPage + 1}"
-      ${currentPage === totalPages ? "disabled" : ""}
-    >
-      <i class="ri-arrow-right-s-line"></i>
-    </button>
-  `;
-
-
-  servicePagination.innerHTML =
-    html;
-
-
-  servicePagination
-    .querySelectorAll(
-      "[data-page]"
-    )
-    .forEach(button => {
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          const page =
-            Number(
-              button.dataset.page
-            );
-
-
-          if (
-            page < 1 ||
-            page > totalPages
-          ) return;
-
-
-          currentPage = page;
-
-          renderServices();
-
-        }
-      );
-
-    });
-
+  renderServices();
 }
-
+});
 
 // =========================================================
 // CLEAR FILTERS
