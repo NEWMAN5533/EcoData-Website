@@ -1,541 +1,601 @@
-/* =========================================
-   PROFILE PAGE
-========================================= */
+/* ==========================================
+ECODATA STORE PROFILE
+========================================== */
 
-document.addEventListener("DOMContentLoaded", () => {
+const PROFILE_KEY = "ecoStoreProfile";
+const CART_KEY = "ecoStoreCart";
 
-  const profileForm =
-    document.getElementById("profileForm");
+// ==========================================
+// DEFAULT PROFILE
+// ==========================================
 
-  const fullName =
-    document.getElementById("fullName");
+const defaultProfile = {
 
-  const email =
-    document.getElementById("email");
+name: "IA Tech",
 
-  const phone =
-    document.getElementById("phone");
+email: "user@example.com",
 
-  const country =
-    document.getElementById("country");
+phone: "",
 
-  const bio =
-    document.getElementById("bio");
+country: "Ghana",
 
-  const bioCount =
-    document.getElementById("bioCount");
+bio: "",
 
-  const profileName =
-    document.getElementById("profileName");
+avatar: "",
 
-  const profileEmail =
-    document.getElementById("profileEmail");
+memberSince: "2026"
 
-  const sidebarName =
-    document.getElementById("sidebarName");
+};
 
-  const sidebarEmail =
-    document.getElementById("sidebarEmail");
+// ==========================================
+// DOM
+// ==========================================
 
-  const saveProfileBtn =
-    document.getElementById("saveProfileBtn");
+const profileForm =
+document.getElementById(
+"profileForm"
+);
 
-  const cancelProfileBtn =
-    document.getElementById("cancelProfileBtn");
+const fullName =
+document.getElementById(
+"fullName"
+);
 
-  const signOutBtn =
-    document.getElementById("signOutBtn");
+const email =
+document.getElementById(
+"email"
+);
 
-  const avatarInput =
-    document.getElementById("avatarInput");
+const phone =
+document.getElementById(
+"phone"
+);
 
-  const profileAvatarImage =
-    document.getElementById("profileAvatarImage");
+const country =
+document.getElementById(
+"country"
+);
 
-  const profileAvatarIcon =
-    document.getElementById("profileAvatarIcon");
+const bio =
+document.getElementById(
+"bio"
+);
 
-  const navAvatar =
-    document.getElementById("navAvatar");
+const profileAvatar =
+document.getElementById(
+"profileAvatar"
+);
 
-  const sidebarAvatar =
-    document.getElementById("sidebarAvatar");
+const avatarInput =
+document.getElementById(
+"avatarInput"
+);
 
-  const lastUpdated =
-    document.getElementById("lastUpdated");
+const displayName =
+document.getElementById(
+"profileDisplayName"
+);
 
+const displayEmail =
+document.getElementById(
+"profileDisplayEmail"
+);
 
-  /* =========================================
-     DEFAULT PROFILE
-  ========================================= */
+const saveMessage =
+document.getElementById(
+"profileSaveMessage"
+);
 
-  const defaultProfile = {
+const cancelBtn =
+document.getElementById(
+"cancelProfileBtn"
+);
 
-    name: "Ilyas Ahmed",
+const signOutBtn =
+document.getElementById(
+"signOutBtn"
+);
 
-    email: "user@example.com",
+// ==========================================
+// LOAD PROFILE
+// ==========================================
 
-    phone: "",
+function loadProfile() {
 
-    country: "Ghana",
+try {
 
-    bio: "",
+const saved =
+  localStorage.getItem(
+    PROFILE_KEY
+  );
 
-    avatar: "",
+if (!saved) {
 
-    updatedAt: "Just now"
-
+  return {
+    ...defaultProfile
   };
 
+}
 
-  /* =========================================
-     LOAD PROFILE
-  ========================================= */
+const parsed =
+  JSON.parse(saved);
 
-  function loadProfile() {
+return {
+  ...defaultProfile,
+  ...(parsed || {})
+};
 
-    let savedProfile = null;
+} catch (error) {
 
-    try {
+console.error(
+  "Unable to load profile:",
+  error
+);
 
-      savedProfile =
-        JSON.parse(
-          localStorage.getItem("ecoStoreProfile")
-        );
+return {
+  ...defaultProfile
+};
 
-    } catch (error) {
+}
 
-      console.warn(
-        "Unable to read saved profile."
-      );
+}
 
-    }
+// ==========================================
+// SAVE PROFILE
+// ==========================================
 
+function saveProfile(profile) {
 
-    const profile = {
+localStorage.setItem(
+PROFILE_KEY,
+JSON.stringify(profile)
+);
 
-      ...defaultProfile,
+}
 
-      ...(savedProfile || {})
+// ==========================================
+// APPLY PROFILE TO UI
+// ==========================================
 
-    };
+function renderProfile(profile) {
 
+fullName.value =
+profile.name || "";
 
-    fullName.value =
-      profile.name;
+email.value =
+profile.email || "";
 
-    email.value =
-      profile.email;
+phone.value =
+profile.phone || "";
 
-    phone.value =
-      profile.phone;
+country.value =
+profile.country || "Ghana";
 
-    country.value =
-      profile.country;
+bio.value =
+profile.bio || "";
 
-    bio.value =
-      profile.bio;
+displayName.textContent =
+profile.name ||
+"Your Name";
 
+displayEmail.textContent =
+profile.email ||
+"No email added";
 
-    updateProfileDisplay(profile);
+renderAvatar(
+profile.avatar
+);
 
-    updateBioCount();
+}
 
-  }
+// ==========================================
+// AVATAR
+// ==========================================
 
+function renderAvatar(
+avatar
+) {
 
-  /* =========================================
-     UPDATE PROFILE DISPLAY
-  ========================================= */
+if (avatar) {
 
-  function updateProfileDisplay(profile) {
+profileAvatar.innerHTML = `
 
-    profileName.textContent =
-      profile.name || "EcoData User";
+  <img
+    src="${avatar}"
+    alt="Profile photo"
+  >
 
-    profileEmail.textContent =
-      profile.email || "No email added";
+`;
 
-    sidebarName.textContent =
-      profile.name || "EcoData User";
+return;
 
-    sidebarEmail.textContent =
-      profile.email || "No email added";
+}
 
-    lastUpdated.textContent =
-      profile.updatedAt || "Just now";
+profileAvatar.innerHTML = `
 
+<i class="ri-user-3-line"></i>
 
-    if (profile.avatar) {
+`;
 
-      profileAvatarImage.src =
-        profile.avatar;
+}
 
-      profileAvatarImage.classList.add("show");
+// ==========================================
+// AVATAR UPLOAD
+// ==========================================
 
-      profileAvatarIcon.classList.add("hide");
+avatarInput.addEventListener(
+"change",
+handleAvatarChange
+);
 
-      setAvatarBackground(
-        navAvatar,
-        profile.avatar
-      );
+function handleAvatarChange(event) {
 
-      setAvatarBackground(
-        sidebarAvatar,
-        profile.avatar
-      );
+const file =
+event.target.files?.[0];
 
-    } else {
+if (!file) {
+return;
+}
 
-      profileAvatarImage.src = "";
+if (!file.type.startsWith("image/")) {
 
-      profileAvatarImage.classList.remove("show");
+showSnackbar(
+  "Please select an image."
+);
 
-      profileAvatarIcon.classList.remove("hide");
+return;
 
-      clearAvatarBackground(navAvatar);
+}
 
-      clearAvatarBackground(sidebarAvatar);
+/*
+Frontend demo only.
 
-    }
+For production, upload the image
+to Firebase Storage instead of
+storing a large Base64 string.
 
-  }
+*/
 
+const reader =
+new FileReader();
 
-  /* =========================================
-     AVATAR BACKGROUND
-  ========================================= */
+reader.onload = () => {
 
-  function setAvatarBackground(element, image) {
-
-    element.style.backgroundImage =
-      `url("${image}")`;
-
-    element.style.backgroundSize =
-      "cover";
-
-    element.style.backgroundPosition =
-      "center";
-
-    element.innerHTML = "";
-
-  }
-
-
-  function clearAvatarBackground(element) {
-
-    element.style.backgroundImage = "";
-
-    element.innerHTML =
-      '<i class="ri-user-line"></i>';
-
-  }
-
-
-  /* =========================================
-     BIO COUNTER
-  ========================================= */
-
-  function updateBioCount() {
-
-    bioCount.textContent =
-      bio.value.length;
-
-  }
-
-
-  bio.addEventListener(
-    "input",
-    updateBioCount
-  );
-
-
-  /* =========================================
-     SAVE PROFILE
-  ========================================= */
-
-  profileForm.addEventListener(
-    "submit",
-    async (event) => {
-
-      event.preventDefault();
-
-
-      const name =
-        fullName.value.trim();
-
-      const userEmail =
-        email.value.trim();
-
-
-      if (!name) {
-
-        fullName.focus();
-
-        alert(
-          "Please enter your full name."
-        );
-
-        return;
-
-      }
-
-
-      if (!userEmail) {
-
-        email.focus();
-
-        alert(
-          "Please enter your email address."
-        );
-
-        return;
-
-      }
-
-
-      saveProfileBtn.disabled = true;
-
-
-      const originalHTML =
-        saveProfileBtn.innerHTML;
-
-
-      saveProfileBtn.innerHTML = `
-        <i class="ri-loader-4-line ri-spin"></i>
-        Saving...
-      `;
-
-
-      await new Promise(resolve =>
-        setTimeout(resolve, 700)
-      );
-
-
-      let oldProfile = {};
-
-      try {
-
-        oldProfile =
-          JSON.parse(
-            localStorage.getItem(
-              "ecoStoreProfile"
-            )
-          ) || {};
-
-      } catch {
-
-        oldProfile = {};
-
-      }
-
-
-      const profile = {
-
-        ...defaultProfile,
-
-        ...oldProfile,
-
-        name,
-
-        email: userEmail,
-
-        phone:
-          phone.value.trim(),
-
-        country:
-          country.value,
-
-        bio:
-          bio.value.trim(),
-
-        avatar:
-          oldProfile.avatar || "",
-
-        updatedAt:
-          new Date().toLocaleString(
-            "en-GH",
-            {
-              dateStyle: "medium",
-              timeStyle: "short"
-            }
-          )
-
-      };
-
-
-      localStorage.setItem(
-        "ecoStoreProfile",
-        JSON.stringify(profile)
-      );
-
-
-      updateProfileDisplay(profile);
-
-
-      saveProfileBtn.innerHTML = `
-        <i class="ri-check-line"></i>
-        Saved
-      `;
-
-
-      setTimeout(() => {
-
-        saveProfileBtn.innerHTML =
-          originalHTML;
-
-        saveProfileBtn.disabled =
-          false;
-
-      }, 1200);
-
-    }
-  );
-
-
-  /* =========================================
-     CANCEL CHANGES
-  ========================================= */
-
-  cancelProfileBtn.addEventListener(
-    "click",
-    () => {
-
-      loadProfile();
-
-    }
-  );
-
-
-  /* =========================================
-     PROFILE PHOTO
-  ========================================= */
-
-  avatarInput.addEventListener(
-    "change",
-    () => {
-
-      const file =
-        avatarInput.files?.[0];
-
-      if (!file) return;
-
-
-      if (!file.type.startsWith("image/")) {
-
-        alert(
-          "Please select an image file."
-        );
-
-        return;
-
-      }
-
-
-      const reader =
-        new FileReader();
-
-
-      reader.onload = () => {
-
-        const image =
-          reader.result;
-
-
-        profileAvatarImage.src =
-          image;
-
-        profileAvatarImage.classList.add(
-          "show"
-        );
-
-        profileAvatarIcon.classList.add(
-          "hide"
-        );
-
-
-        setAvatarBackground(
-          navAvatar,
-          image
-        );
-
-        setAvatarBackground(
-          sidebarAvatar,
-          image
-        );
-
-
-        let profile = {};
-
-        try {
-
-          profile =
-            JSON.parse(
-              localStorage.getItem(
-                "ecoStoreProfile"
-              )
-            ) || {};
-
-        } catch {
-
-          profile = {};
-
-        }
-
-
-        profile.avatar =
-          image;
-
-
-        localStorage.setItem(
-          "ecoStoreProfile",
-          JSON.stringify(profile)
-        );
-
-      };
-
-
-      reader.readAsDataURL(file);
-
-    }
-  );
-
-
-  /* =========================================
-     SIGN OUT
-  ========================================= */
-
-  signOutBtn.addEventListener(
-    "click",
-    () => {
-
-      const confirmLogout =
-        confirm(
-          "Are you sure you want to sign out?"
-        );
-
-
-      if (!confirmLogout) return;
-
-
-      console.log(
-        "User signed out."
-      );
-
-
-      // Firebase logout will be added later.
-
-      window.location.href =
-        "index.html";
-
-    }
-  );
-
-
-  /* =========================================
-     INITIALIZE
-  ========================================= */
-
+const profile =
   loadProfile();
 
-});
+profile.avatar =
+  reader.result;
+
+saveProfile(profile);
+
+renderAvatar(
+  profile.avatar
+);
+
+
+showSnackbar(
+  "Profile photo updated."
+);
+
+};
+
+reader.readAsDataURL(file);
+
+}
+
+// ==========================================
+// SAVE FORM
+// ==========================================
+
+profileForm.addEventListener(
+"submit",
+event => {
+
+event.preventDefault();
+
+
+const name =
+  fullName.value.trim();
+
+const userEmail =
+  email.value.trim();
+
+
+if (!name) {
+
+  showSnackbar(
+    "Please enter your full name."
+  );
+
+  fullName.focus();
+
+  return;
+}
+
+
+if (
+  !userEmail ||
+  !isValidEmail(userEmail)
+) {
+
+  showSnackbar(
+    "Please enter a valid email."
+  );
+
+  email.focus();
+
+  return;
+}
+
+
+const currentProfile =
+  loadProfile();
+
+
+const updatedProfile = {
+
+  ...currentProfile,
+
+  name,
+
+  email: userEmail,
+
+  phone:
+    phone.value.trim(),
+
+  country:
+    country.value,
+
+  bio:
+    bio.value.trim()
+
+};
+
+
+saveProfile(
+  updatedProfile
+);
+
+
+renderProfile(
+  updatedProfile
+);
+
+
+saveMessage.textContent =
+  "Changes saved";
+
+
+setTimeout(() => {
+
+  saveMessage.textContent =
+    "";
+
+}, 2500);
+
+
+showSnackbar(
+  "Profile updated successfully."
+);
+
+}
+);
+
+// ==========================================
+// CANCEL
+// ==========================================
+
+cancelBtn.addEventListener(
+"click",
+() => {
+
+const profile =
+  loadProfile();
+
+renderProfile(
+  profile
+);
+
+saveMessage.textContent =
+  "";
+
+}
+);
+
+// ==========================================
+// EMAIL VALIDATION
+// ==========================================
+
+function isValidEmail(
+value
+) {
+
+return /^[^\s@]+@[^\s@]+.[^\s@]+$/
+.test(value);
+
+}
+
+// ==========================================
+// CART COUNT
+// ==========================================
+
+function updateCartCount() {
+
+const cartCount =
+document.getElementById(
+"navCartCount"
+);
+
+if (!cartCount) {
+return;
+}
+
+try {
+
+const saved =
+  localStorage.getItem(
+    CART_KEY
+  );
+
+const cart =
+  saved
+    ? JSON.parse(saved)
+    : [];
+
+
+const count =
+  Array.isArray(cart)
+    ? cart.reduce(
+        (total, item) =>
+          total +
+          Number(
+            item.quantity || 1
+          ),
+        0
+      )
+    : 0;
+
+
+cartCount.textContent =
+  count;
+
+} catch {
+
+cartCount.textContent =
+  "0";
+
+}
+
+}
+
+// ==========================================
+// SEARCH
+// ==========================================
+
+const profileSearch =
+document.getElementById(
+"profileSearch"
+);
+
+if (profileSearch) {
+
+profileSearch.addEventListener(
+"keydown",
+event => {
+
+  if (
+    event.key === "Enter"
+  ) {
+
+    const query =
+      profileSearch.value
+        .trim();
+
+    if (!query) {
+      return;
+    }
+
+
+    window.location.href =
+      `index.html?search=${encodeURIComponent(
+        query
+      )}`;
+
+  }
+
+}
+
+);
+
+}
+
+// ==========================================
+// SIGN OUT
+// ==========================================
+
+signOutBtn.addEventListener(
+"click",
+() => {
+
+const confirmed =
+  window.confirm(
+    "Are you sure you want to sign out?"
+  );
+
+
+if (!confirmed) {
+  return;
+}
+
+
+/*
+  Firebase Auth logout will be
+  connected here later:
+
+  await signOut(auth);
+*/
+
+
+showSnackbar(
+  "Signed out successfully."
+);
+
+
+setTimeout(() => {
+
+  window.location.href =
+    "index.html";
+
+}, 700);
+
+}
+);
+
+// ==========================================
+// SNACKBAR
+// ==========================================
+
+function showSnackbar(
+message
+) {
+
+const snackbar =
+document.getElementById(
+"profileSnackbar"
+);
+
+snackbar.textContent =
+message;
+
+snackbar.classList.add(
+"show"
+);
+
+clearTimeout(
+showSnackbar.timer
+);
+
+showSnackbar.timer =
+setTimeout(() => {
+
+  snackbar.classList.remove(
+    "show"
+  );
+
+}, 2500);
+
+}
+
+// ==========================================
+// INITIALIZE
+// ==========================================
+
+const profile =
+loadProfile();
+
+renderProfile(
+profile
+);
+
+updateCartCount();
