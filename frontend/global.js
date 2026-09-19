@@ -26,7 +26,7 @@ if(shoppingBtn){
     const totalCustomersOrders = document.getElementById("stat-num");
     if(totalCustomersOrders){
       totalCustomersOrders.textContent = 
-      "1.44K+";
+      "1.45K+";
     }
 
 
