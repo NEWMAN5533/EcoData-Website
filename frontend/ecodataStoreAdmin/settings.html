@@ -341,9 +341,1035 @@
 
     <!-- =========================
          PAGE CONTENT
-  
+   ==========================--->
 
-    
+    <!-- ==========================================
+     ADMINISTRATOR SETTINGS PAGE
+========================================== -->
+
+<div class="admin-page-content">
+
+  <!-- PAGE HEADER -->
+  <div class="admin-page-header">
+    <div>
+      <div class="admin-page-eyebrow">
+        Administration
+      </div>
+
+      <h1>Administrator Settings</h1>
+
+      <p>
+        Manage your administrator profile, security,
+        notifications and dashboard preferences.
+      </p>
+    </div>
+  </div>
+
+
+  <!-- SETTINGS LAYOUT -->
+  <div class="admin-settings-layout">
+
+
+    <!-- SETTINGS NAVIGATION -->
+    <aside class="admin-settings-sidebar">
+
+      <button
+        type="button"
+        class="admin-settings-nav-item active"
+        data-settings-tab="profile"
+      >
+        <i class="ri-user-line"></i>
+
+        <span>
+          <strong>Profile</strong>
+          <small>Personal information</small>
+        </span>
+      </button>
+
+
+      <button
+        type="button"
+        class="admin-settings-nav-item"
+        data-settings-tab="security"
+      >
+        <i class="ri-shield-check-line"></i>
+
+        <span>
+          <strong>Security</strong>
+          <small>Password and access</small>
+        </span>
+      </button>
+
+
+      <button
+        type="button"
+        class="admin-settings-nav-item"
+        data-settings-tab="notifications"
+      >
+        <i class="ri-notification-3-line"></i>
+
+        <span>
+          <strong>Notifications</strong>
+          <small>Alerts and updates</small>
+        </span>
+      </button>
+
+
+      <button
+        type="button"
+        class="admin-settings-nav-item"
+        data-settings-tab="preferences"
+      >
+        <i class="ri-settings-3-line"></i>
+
+        <span>
+          <strong>Preferences</strong>
+          <small>Dashboard preferences</small>
+        </span>
+      </button>
+
+
+      <button
+        type="button"
+        class="admin-settings-nav-item"
+        data-settings-tab="sessions"
+      >
+        <i class="ri-device-line"></i>
+
+        <span>
+          <strong>Sessions</strong>
+          <small>Active devices</small>
+        </span>
+      </button>
+
+    </aside>
+
+
+    <!-- SETTINGS CONTENT -->
+    <main class="admin-settings-content">
+
+
+      <!-- ==========================================
+           PROFILE
+      ========================================== -->
+
+      <section
+        class="admin-settings-panel active"
+        data-settings-panel="profile"
+      >
+
+        <div class="admin-settings-panel-header">
+
+          <div>
+            <h2>Profile Information</h2>
+
+            <p>
+              Update the information associated with
+              your administrator account.
+            </p>
+          </div>
+
+        </div>
+
+
+        <!-- PROFILE SUMMARY -->
+        <div class="admin-profile-summary">
+
+          <div class="admin-profile-avatar" id="settingsAvatar">
+            AD
+          </div>
+
+          <div class="admin-profile-summary-info">
+
+            <strong id="settingsProfileName">
+              Admin User
+            </strong>
+
+            <span id="settingsProfileEmail">
+              admin@example.com
+            </span>
+
+            <small>
+              Super Administrator
+            </small>
+
+          </div>
+
+          <button
+            type="button"
+            class="admin-btn admin-btn-secondary"
+            id="changeAvatarBtn"
+          >
+            <i class="ri-image-edit-line"></i>
+            Change Avatar
+          </button>
+
+        </div>
+
+
+        <!-- PROFILE FORM -->
+        <div class="admin-settings-form-grid">
+
+          <div class="admin-form-group">
+
+            <label for="adminFirstName">
+              First Name
+            </label>
+
+            <input
+              type="text"
+              id="adminFirstName"
+              value="Admin"
+              autocomplete="given-name"
+            >
+
+          </div>
+
+
+          <div class="admin-form-group">
+
+            <label for="adminLastName">
+              Last Name
+            </label>
+
+            <input
+              type="text"
+              id="adminLastName"
+              value="User"
+              autocomplete="family-name"
+            >
+
+          </div>
+
+
+          <div class="admin-form-group">
+
+            <label for="adminEmail">
+              Email Address
+            </label>
+
+            <input
+              type="email"
+              id="adminEmail"
+              value="admin@example.com"
+              autocomplete="email"
+            >
+
+          </div>
+
+
+          <div class="admin-form-group">
+
+            <label for="adminPhone">
+              Phone Number
+            </label>
+
+            <input
+              type="tel"
+              id="adminPhone"
+              placeholder="024 000 0000"
+              autocomplete="tel"
+            >
+
+          </div>
+
+
+          <div class="admin-form-group full-width">
+
+            <label for="adminRole">
+              Administrator Role
+            </label>
+
+            <input
+              type="text"
+              id="adminRole"
+              value="Super Administrator"
+              disabled
+            >
+
+            <small class="admin-form-help">
+              Your administrator role can only be changed
+              by another authorized administrator.
+            </small>
+
+          </div>
+
+        </div>
+
+
+        <div class="admin-settings-actions">
+
+          <button
+            type="button"
+            class="admin-btn admin-btn-secondary"
+            id="resetProfileBtn"
+          >
+            Cancel
+          </button>
+
+          <button
+            type="button"
+            class="admin-btn admin-btn-primary"
+            id="saveProfileBtn"
+          >
+            <i class="ri-save-line"></i>
+            Save Changes
+          </button>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- ==========================================
+           SECURITY
+      ========================================== -->
+
+      <section
+        class="admin-settings-panel"
+        data-settings-panel="security"
+      >
+
+        <div class="admin-settings-panel-header">
+
+          <div>
+            <h2>Security</h2>
+
+            <p>
+              Protect your administrator account and
+              manage authentication settings.
+            </p>
+          </div>
+
+        </div>
+
+
+        <!-- PASSWORD -->
+        <div class="admin-settings-section">
+
+          <div class="admin-settings-section-heading">
+
+            <div class="admin-settings-section-icon">
+              <i class="ri-lock-password-line"></i>
+            </div>
+
+            <div>
+              <h3>Password</h3>
+
+              <p>
+                Change the password used to access
+                the administrator dashboard.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="admin-settings-form-grid">
+
+            <div class="admin-form-group full-width">
+
+              <label for="currentPassword">
+                Current Password
+              </label>
+
+              <div class="admin-password-field">
+
+                <input
+                  type="password"
+                  id="currentPassword"
+                  autocomplete="current-password"
+                >
+
+                <button
+                  type="button"
+                  class="admin-password-toggle"
+                  data-password-target="currentPassword"
+                  aria-label="Show password"
+                >
+                  <i class="ri-eye-line"></i>
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <div class="admin-form-group">
+
+              <label for="newPassword">
+                New Password
+              </label>
+
+              <div class="admin-password-field">
+
+                <input
+                  type="password"
+                  id="newPassword"
+                  autocomplete="new-password"
+                >
+
+                <button
+                  type="button"
+                  class="admin-password-toggle"
+                  data-password-target="newPassword"
+                  aria-label="Show password"
+                >
+                  <i class="ri-eye-line"></i>
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <div class="admin-form-group">
+
+              <label for="confirmPassword">
+                Confirm Password
+              </label>
+
+              <div class="admin-password-field">
+
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  autocomplete="new-password"
+                >
+
+                <button
+                  type="button"
+                  class="admin-password-toggle"
+                  data-password-target="confirmPassword"
+                  aria-label="Show password"
+                >
+                  <i class="ri-eye-line"></i>
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="admin-password-requirements">
+
+            <span id="passwordLength">
+              <i class="ri-checkbox-blank-circle-line"></i>
+              At least 8 characters
+            </span>
+
+            <span id="passwordNumber">
+              <i class="ri-checkbox-blank-circle-line"></i>
+              Contains a number
+            </span>
+
+            <span id="passwordUppercase">
+              <i class="ri-checkbox-blank-circle-line"></i>
+              Contains an uppercase letter
+            </span>
+
+          </div>
+
+
+          <div class="admin-settings-actions">
+
+            <button
+              type="button"
+              class="admin-btn admin-btn-primary"
+              id="changePasswordBtn"
+            >
+              <i class="ri-lock-line"></i>
+              Update Password
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- TWO FACTOR -->
+        <div class="admin-settings-section">
+
+          <div class="admin-settings-row">
+
+            <div class="admin-settings-row-info">
+
+              <div class="admin-settings-section-icon">
+                <i class="ri-shield-keyhole-line"></i>
+              </div>
+
+              <div>
+                <h3>Two-Factor Authentication</h3>
+
+                <p>
+                  Add an additional layer of security
+                  to your administrator account.
+                </p>
+              </div>
+
+            </div>
+
+            <label class="admin-switch">
+
+              <input
+                type="checkbox"
+                id="twoFactorToggle"
+              >
+
+              <span></span>
+
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <!-- LOGIN ALERTS -->
+        <div class="admin-settings-section">
+
+          <div class="admin-settings-row">
+
+            <div class="admin-settings-row-info">
+
+              <div class="admin-settings-section-icon">
+                <i class="ri-login-box-line"></i>
+              </div>
+
+              <div>
+                <h3>Login Alerts</h3>
+
+                <p>
+                  Receive an alert when your account is
+                  accessed from a new device.
+                </p>
+              </div>
+
+            </div>
+
+            <label class="admin-switch">
+
+              <input
+                type="checkbox"
+                id="loginAlertsToggle"
+                checked
+              >
+
+              <span></span>
+
+            </label>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- ==========================================
+           NOTIFICATIONS
+      ========================================== -->
+
+      <section
+        class="admin-settings-panel"
+        data-settings-panel="notifications"
+      >
+
+        <div class="admin-settings-panel-header">
+
+          <div>
+            <h2>Notifications</h2>
+
+            <p>
+              Choose which administrator alerts you
+              want to receive.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="admin-settings-section">
+
+          <div class="admin-settings-row">
+
+            <div class="admin-settings-row-info">
+
+              <div class="admin-settings-section-icon">
+                <i class="ri-shopping-bag-3-line"></i>
+              </div>
+
+              <div>
+                <h3>New Orders</h3>
+
+                <p>
+                  Notify me when a new order is received.
+                </p>
+              </div>
+
+            </div>
+
+            <label class="admin-switch">
+
+              <input
+                type="checkbox"
+                id="orderNotifications"
+                checked
+              >
+
+              <span></span>
+
+            </label>
+
+          </div>
+
+
+          <div class="admin-settings-row">
+
+            <div class="admin-settings-row-info">
+
+              <div class="admin-settings-section-icon">
+                <i class="ri-money-dollar-circle-line"></i>
+              </div>
+
+              <div>
+                <h3>Payment Notifications</h3>
+
+                <p>
+                  Receive alerts for successful and
+                  failed payments.
+                </p>
+              </div>
+
+            </div>
+
+            <label class="admin-switch">
+
+              <input
+                type="checkbox"
+                id="paymentNotifications"
+                checked
+              >
+
+              <span></span>
+
+            </label>
+
+          </div>
+
+
+          <div class="admin-settings-row">
+
+            <div class="admin-settings-row-info">
+
+              <div class="admin-settings-section-icon">
+                <i class="ri-user-add-line"></i>
+              </div>
+
+              <div>
+                <h3>New Administrators</h3>
+
+                <p>
+                  Notify me when a new administrator
+                  account is created.
+                </p>
+              </div>
+
+            </div>
+
+            <label class="admin-switch">
+
+              <input
+                type="checkbox"
+                id="adminNotifications"
+                checked
+              >
+
+              <span></span>
+
+            </label>
+
+          </div>
+
+
+          <div class="admin-settings-row">
+
+            <div class="admin-settings-row-info">
+
+              <div class="admin-settings-section-icon">
+                <i class="ri-error-warning-line"></i>
+              </div>
+
+              <div>
+                <h3>System Alerts</h3>
+
+                <p>
+                  Receive important system and service
+                  alerts.
+                </p>
+              </div>
+
+            </div>
+
+            <label class="admin-switch">
+
+              <input
+                type="checkbox"
+                id="systemNotifications"
+                checked
+              >
+
+              <span></span>
+
+            </label>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- ==========================================
+           PREFERENCES
+      ========================================== -->
+
+      <section
+        class="admin-settings-panel"
+        data-settings-panel="preferences"
+      >
+
+        <div class="admin-settings-panel-header">
+
+          <div>
+            <h2>Dashboard Preferences</h2>
+
+            <p>
+              Customize how the administrator dashboard
+              behaves for you.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="admin-settings-section">
+
+          <div class="admin-form-group">
+
+            <label for="defaultPage">
+              Default Dashboard Page
+            </label>
+
+            <select id="defaultPage">
+
+              <option value="dashboard">
+                Dashboard
+              </option>
+
+              <option value="orders">
+                Orders
+              </option>
+
+              <option value="users">
+                Users
+              </option>
+
+              <option value="products">
+                Products
+              </option>
+
+              <option value="payments">
+                Payments
+              </option>
+
+            </select>
+
+            <small class="admin-form-help">
+              This page will open automatically when
+              you enter the administrator dashboard.
+            </small>
+
+          </div>
+
+
+          <div class="admin-settings-row">
+
+            <div class="admin-settings-row-info">
+
+              <div class="admin-settings-section-icon">
+                <i class="ri-menu-fold-line"></i>
+              </div>
+
+              <div>
+                <h3>Collapsed Sidebar</h3>
+
+                <p>
+                  Keep the dashboard sidebar collapsed
+                  by default.
+                </p>
+              </div>
+
+            </div>
+
+            <label class="admin-switch">
+
+              <input
+                type="checkbox"
+                id="collapsedSidebar"
+              >
+
+              <span></span>
+
+            </label>
+
+          </div>
+
+
+          <div class="admin-settings-row">
+
+            <div class="admin-settings-row-info">
+
+              <div class="admin-settings-section-icon">
+                <i class="ri-refresh-line"></i>
+              </div>
+
+              <div>
+                <h3>Auto Refresh</h3>
+
+                <p>
+                  Automatically refresh dashboard data
+                  when new information is available.
+                </p>
+              </div>
+
+            </div>
+
+            <label class="admin-switch">
+
+              <input
+                type="checkbox"
+                id="autoRefresh"
+                checked
+              >
+
+              <span></span>
+
+            </label>
+
+          </div>
+
+
+          <div class="admin-settings-row">
+
+            <div class="admin-settings-row-info">
+
+              <div class="admin-settings-section-icon">
+                <i class="ri-time-line"></i>
+              </div>
+
+              <div>
+                <h3>24-Hour Time Format</h3>
+
+                <p>
+                  Display dashboard timestamps using
+                  the 24-hour clock.
+                </p>
+              </div>
+
+            </div>
+
+            <label class="admin-switch">
+
+              <input
+                type="checkbox"
+                id="timeFormat"
+              >
+
+              <span></span>
+
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <div class="admin-settings-actions">
+
+          <button
+            type="button"
+            class="admin-btn admin-btn-primary"
+            id="savePreferencesBtn"
+          >
+            <i class="ri-save-line"></i>
+            Save Preferences
+          </button>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- ==========================================
+           SESSIONS
+      ========================================== -->
+
+      <section
+        class="admin-settings-panel"
+        data-settings-panel="sessions"
+      >
+
+        <div class="admin-settings-panel-header">
+
+          <div>
+            <h2>Active Sessions</h2>
+
+            <p>
+              Review devices that are currently signed
+              into your administrator account.
+            </p>
+          </div>
+
+          <button
+            type="button"
+            class="admin-btn admin-btn-danger"
+            id="logoutOtherSessionsBtn"
+          >
+            <i class="ri-logout-box-r-line"></i>
+            Sign Out Other Sessions
+          </button>
+
+        </div>
+
+
+        <div class="admin-session-list">
+
+
+          <!-- CURRENT SESSION -->
+          <div class="admin-session-item current">
+
+            <div class="admin-session-icon">
+              <i class="ri-smartphone-line"></i>
+            </div>
+
+            <div class="admin-session-info">
+
+              <strong>
+                Current Device
+              </strong>
+
+              <span>
+                Android · Chrome
+              </span>
+
+              <small>
+                Active now · Current session
+              </small>
+
+            </div>
+
+            <span class="admin-session-current">
+              Current
+            </span>
+
+          </div>
+
+
+          <!-- SESSION -->
+          <div class="admin-session-item">
+
+            <div class="admin-session-icon">
+              <i class="ri-computer-line"></i>
+            </div>
+
+            <div class="admin-session-info">
+
+              <strong>
+                Windows Computer
+              </strong>
+
+              <span>
+                Chrome · Windows
+              </span>
+
+              <small>
+                Last active 2 hours ago
+              </small>
+
+            </div>
+
+            <button
+              type="button"
+              class="admin-session-revoke"
+            >
+              Revoke
+            </button>
+
+          </div>
+
+
+          <!-- SESSION -->
+          <div class="admin-session-item">
+
+            <div class="admin-session-icon">
+              <i class="ri-tablet-line"></i>
+            </div>
+
+            <div class="admin-session-info">
+
+              <strong>
+                Tablet
+              </strong>
+
+              <span>
+                Chrome · Android
+              </span>
+
+              <small>
+                Last active yesterday
+              </small>
+
+            </div>
+
+            <button
+              type="button"
+              class="admin-session-revoke"
+            >
+              Revoke
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+</div>
+
+
+<!-- ==========================================
+     SETTINGS MESSAGE
+========================================== -->
+
+<div
+  class="admin-settings-message"
+  id="adminSettingsMessage"
+  aria-live="polite"
+>
+  <i class="ri-check-line"></i>
+  <span></span>
+</div>
 
   </main>
 
@@ -687,7 +1713,7 @@
        SCRIPT
   ========================== -->
   <script src="js/admin.js"></script>
-  <script src="js/withdrawals.js"></script>
+  <script src="js/settings.js"></script>
 
 </body>
 </html>

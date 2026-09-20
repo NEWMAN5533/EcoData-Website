@@ -341,7 +341,682 @@
 
     <!-- =========================
          PAGE CONTENT
-  
+  ==============================--->
+
+
+  <!-- ==========================================
+     ADMINISTRATOR PAYMENTS PAGE
+========================================== -->
+
+<div class="admin-page-content">
+
+  <!-- PAGE HEADER -->
+  <div class="admin-page-header">
+
+    <div>
+
+      <div class="admin-page-eyebrow">
+        Finance
+      </div>
+
+      <h1>Payments</h1>
+
+      <p>
+        Monitor payments, transactions, payment methods
+        and transaction statuses across EcoData.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- ==========================================
+       PAYMENT STATS
+  ========================================== -->
+
+  <section class="admin-stats-grid payments-stats-grid">
+
+    <!-- TOTAL PAYMENTS -->
+    <div class="admin-stat-card">
+
+      <div class="admin-stat-icon">
+        <i class="ri-wallet-3-line"></i>
+      </div>
+
+      <div class="admin-stat-content">
+
+        <span>Total Payments</span>
+
+        <strong id="totalPayments">
+          0
+        </strong>
+
+        <small>
+          All transactions
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <!-- SUCCESSFUL -->
+    <div class="admin-stat-card">
+
+      <div class="admin-stat-icon">
+        <i class="ri-checkbox-circle-line"></i>
+      </div>
+
+      <div class="admin-stat-content">
+
+        <span>Successful</span>
+
+        <strong id="successfulPayments">
+          0
+        </strong>
+
+        <small>
+          Completed payments
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <!-- PENDING -->
+    <div class="admin-stat-card">
+
+      <div class="admin-stat-icon">
+        <i class="ri-time-line"></i>
+      </div>
+
+      <div class="admin-stat-content">
+
+        <span>Pending</span>
+
+        <strong id="pendingPayments">
+          0
+        </strong>
+
+        <small>
+          Awaiting confirmation
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <!-- FAILED -->
+    <div class="admin-stat-card">
+
+      <div class="admin-stat-icon">
+        <i class="ri-close-circle-line"></i>
+      </div>
+
+      <div class="admin-stat-content">
+
+        <span>Failed</span>
+
+        <strong id="failedPayments">
+          0
+        </strong>
+
+        <small>
+          Unsuccessful payments
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <!-- TOTAL REVENUE -->
+    <div class="admin-stat-card">
+
+      <div class="admin-stat-icon">
+        <i class="ri-money-dollar-circle-line"></i>
+      </div>
+
+      <div class="admin-stat-content">
+
+        <span>Payment Volume</span>
+
+        <strong id="paymentVolume">
+          GHS 0.00
+        </strong>
+
+        <small>
+          Successful payments
+        </small>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ==========================================
+       PAYMENT MANAGEMENT
+  ========================================== -->
+
+  <section class="admin-management-card">
+
+
+    <!-- MANAGEMENT HEADER -->
+    <div class="admin-management-header">
+
+      <div>
+
+        <h2>
+          Payment Transactions
+        </h2>
+
+        <span
+          class="admin-result-count"
+          id="paymentResultCount"
+        >
+          0 payments
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         FILTER BAR
+    ========================================== -->
+
+    <div class="admin-filter-bar">
+
+
+      <!-- SEARCH -->
+      <div class="admin-filter-search">
+
+        <i class="ri-search-line"></i>
+
+        <input
+          type="search"
+          id="paymentSearch"
+          placeholder="Search transaction, reference or customer..."
+          autocomplete="off"
+        >
+
+      </div>
+
+
+      <!-- STATUS -->
+      <select id="paymentStatusFilter">
+
+        <option value="all">
+          All Statuses
+        </option>
+
+        <option value="successful">
+          Successful
+        </option>
+
+        <option value="pending">
+          Pending
+        </option>
+
+        <option value="failed">
+          Failed
+        </option>
+
+        <option value="refunded">
+          Refunded
+        </option>
+
+      </select>
+
+
+      <!-- METHOD -->
+      <select id="paymentMethodFilter">
+
+        <option value="all">
+          All Methods
+        </option>
+
+        <option value="paystack">
+          Paystack
+        </option>
+
+        <option value="mobile_money">
+          Mobile Money
+        </option>
+
+        <option value="card">
+          Card
+        </option>
+
+        <option value="bank">
+          Bank
+        </option>
+
+      </select>
+
+
+      <!-- TYPE -->
+      <select id="paymentTypeFilter">
+
+        <option value="all">
+          All Types
+        </option>
+
+        <option value="data">
+          Data Bundle
+        </option>
+
+        <option value="afa">
+          AFA
+        </option>
+
+        <option value="product">
+          Product
+        </option>
+
+        <option value="service">
+          Service
+        </option>
+
+      </select>
+
+
+      <!-- SORT -->
+      <select id="paymentSort">
+
+        <option value="newest">
+          Newest
+        </option>
+
+        <option value="oldest">
+          Oldest
+        </option>
+
+        <option value="highest">
+          Highest Amount
+        </option>
+
+        <option value="lowest">
+          Lowest Amount
+        </option>
+
+      </select>
+
+
+      <!-- CLEAR -->
+      <button
+        type="button"
+        class="admin-clear-filters"
+        id="clearPaymentFilters"
+      >
+        <i class="ri-close-line"></i>
+        Clear
+      </button>
+
+    </div>
+
+
+
+    <!-- ==========================================
+         TABLE
+    ========================================== -->
+
+    <div class="admin-table-wrapper">
+
+      <table class="admin-data-table payments-table">
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Transaction
+            </th>
+
+            <th>
+              Customer
+            </th>
+
+            <th>
+              Type
+            </th>
+
+            <th>
+              Method
+            </th>
+
+            <th>
+              Amount
+            </th>
+
+            <th>
+              Status
+            </th>
+
+            <th>
+              Date
+            </th>
+
+            <th>
+              Action
+            </th>
+
+          </tr>
+
+        </thead>
+
+        <tbody id="paymentTableBody">
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <!-- EMPTY STATE -->
+
+    <div
+      class="admin-empty-state"
+      id="paymentEmptyState"
+      hidden
+    >
+
+      <div class="admin-empty-icon">
+        <i class="ri-wallet-3-line"></i>
+      </div>
+
+      <h3>
+        No payments found
+      </h3>
+
+      <p>
+        Try changing your search or filter options.
+      </p>
+
+    </div>
+
+
+    <!-- PAGINATION -->
+
+    <div
+      class="admin-pagination"
+      id="paymentPagination"
+    ></div>
+
+  </section>
+
+</div>
+
+
+
+<!-- ==========================================
+     PAYMENT DETAILS DRAWER
+========================================== -->
+
+<div
+  class="admin-drawer-overlay"
+  id="paymentDrawerOverlay"
+></div>
+
+
+<aside
+  class="payment-details-drawer"
+  id="paymentDrawer"
+  aria-hidden="true"
+>
+
+  <!-- DRAWER HEADER -->
+
+  <div class="admin-drawer-header">
+
+    <div>
+
+      <span class="admin-drawer-eyebrow">
+        Payment Details
+      </span>
+
+      <h2 id="paymentDrawerTitle">
+        Payment
+      </h2>
+
+    </div>
+
+    <button
+      type="button"
+      class="admin-drawer-close"
+      id="closePaymentDrawer"
+      aria-label="Close payment details"
+    >
+      <i class="ri-close-line"></i>
+    </button>
+
+  </div>
+
+
+  <!-- DRAWER BODY -->
+
+  <div class="admin-drawer-body">
+
+
+    <!-- PAYMENT SUMMARY -->
+
+    <div class="payment-drawer-summary">
+
+      <div class="payment-drawer-icon">
+        <i class="ri-wallet-3-line"></i>
+      </div>
+
+      <div>
+
+        <strong id="drawerPaymentAmount">
+          GHS 0.00
+        </strong>
+
+        <span id="drawerPaymentStatus">
+          Successful
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- TRANSACTION -->
+
+    <section class="admin-drawer-section">
+
+      <h3 class="admin-drawer-section-title">
+        Transaction
+      </h3>
+
+      <div class="admin-detail-list">
+
+        <div>
+
+          <span>
+            Payment ID
+          </span>
+
+          <strong id="drawerPaymentId">
+            —
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span>
+            Reference
+          </span>
+
+          <strong id="drawerPaymentReference">
+            —
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span>
+            Type
+          </span>
+
+          <strong id="drawerPaymentType">
+            —
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span>
+            Method
+          </span>
+
+          <strong id="drawerPaymentMethod">
+            —
+          </strong>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CUSTOMER -->
+
+    <section class="admin-drawer-section">
+
+      <h3 class="admin-drawer-section-title">
+        Customer
+      </h3>
+
+      <div class="admin-detail-list">
+
+        <div>
+
+          <span>
+            Name
+          </span>
+
+          <strong id="drawerCustomerName">
+            —
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span>
+            Email
+          </span>
+
+          <strong id="drawerCustomerEmail">
+            —
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span>
+            Phone
+          </span>
+
+          <strong id="drawerCustomerPhone">
+            —
+          </strong>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- TIMELINE -->
+
+    <section class="admin-drawer-section">
+
+      <h3 class="admin-drawer-section-title">
+        Timeline
+      </h3>
+
+      <div class="admin-payment-timeline">
+
+        <div class="payment-timeline-item">
+
+          <div class="payment-timeline-dot"></div>
+
+          <div>
+
+            <strong>
+              Payment Created
+            </strong>
+
+            <span id="drawerCreatedAt">
+              —
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="payment-timeline-item">
+
+          <div class="payment-timeline-dot"></div>
+
+          <div>
+
+            <strong>
+              Payment Updated
+            </strong>
+
+            <span id="drawerUpdatedAt">
+              —
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
+
+
+  <!-- DRAWER FOOTER -->
+
+  <div class="admin-drawer-footer">
+
+    <button
+      type="button"
+      class="admin-btn admin-btn-secondary"
+      id="copyPaymentReference"
+    >
+      <i class="ri-file-copy-line"></i>
+      Copy Reference
+    </button>
+
+  </div>
+
+</aside>
 
     
 
@@ -687,7 +1362,7 @@
        SCRIPT
   ========================== -->
   <script src="js/admin.js"></script>
-  <script src="js/withdrawals.js"></script>
+  <script src="js/payments.js"></script>
 
 </body>
 </html>

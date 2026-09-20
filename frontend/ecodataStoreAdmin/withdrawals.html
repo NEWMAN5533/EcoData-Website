@@ -338,10 +338,629 @@
 
       </header>
 
+  <!-- =========================================
+       WITHDRAWALS PAGE
+  ========================================== -->
 
-    <!-- =========================
-         PAGE CONTENT
-  
+  <main class="admin-page-content">
+
+    <!-- PAGE HEADER -->
+    <div class="admin-page-header">
+
+      <div>
+        <div class="admin-page-eyebrow">
+          Finance
+        </div>
+
+        <h1>
+          Withdrawals
+        </h1>
+
+        <p>
+          Review withdrawal requests, monitor payout activity
+          and manage seller withdrawals across EcoData.
+        </p>
+      </div>
+
+    </div>
+
+
+    <!-- =========================================
+         STATISTICS
+    ========================================== -->
+
+    <section class="admin-stats-grid withdrawals-stats-grid">
+
+      <!-- Total -->
+      <div class="admin-stat-card">
+
+        <div class="admin-stat-icon">
+          <i class="ri-bank-card-line"></i>
+        </div>
+
+        <div class="admin-stat-content">
+
+          <span>
+            Total Withdrawals
+          </span>
+
+          <strong id="totalWithdrawals">
+            0
+          </strong>
+
+          <small>
+            All withdrawal requests
+          </small>
+
+        </div>
+
+      </div>
+
+
+      <!-- Pending -->
+      <div class="admin-stat-card">
+
+        <div class="admin-stat-icon">
+          <i class="ri-time-line"></i>
+        </div>
+
+        <div class="admin-stat-content">
+
+          <span>
+            Pending
+          </span>
+
+          <strong id="pendingWithdrawals">
+            0
+          </strong>
+
+          <small>
+            Awaiting review
+          </small>
+
+        </div>
+
+      </div>
+
+
+      <!-- Approved -->
+      <div class="admin-stat-card">
+
+        <div class="admin-stat-icon">
+          <i class="ri-checkbox-circle-line"></i>
+        </div>
+
+        <div class="admin-stat-content">
+
+          <span>
+            Approved
+          </span>
+
+          <strong id="approvedWithdrawals">
+            0
+          </strong>
+
+          <small>
+            Approved requests
+          </small>
+
+        </div>
+
+      </div>
+
+
+      <!-- Paid -->
+      <div class="admin-stat-card">
+
+        <div class="admin-stat-icon">
+          <i class="ri-money-dollar-circle-line"></i>
+        </div>
+
+        <div class="admin-stat-content">
+
+          <span>
+            Paid
+          </span>
+
+          <strong id="paidWithdrawals">
+            0
+          </strong>
+
+          <small>
+            Completed payouts
+          </small>
+
+        </div>
+
+      </div>
+
+
+      <!-- Total Volume -->
+      <div class="admin-stat-card">
+
+        <div class="admin-stat-icon">
+          <i class="ri-wallet-3-line"></i>
+        </div>
+
+        <div class="admin-stat-content">
+
+          <span>
+            Withdrawal Volume
+          </span>
+
+          <strong id="withdrawalVolume">
+            GHS 0.00
+          </strong>
+
+          <small>
+            Total requested amount
+          </small>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         WITHDRAWALS MANAGEMENT
+    ========================================== -->
+
+    <section class="admin-management-card">
+
+      <!-- MANAGEMENT HEADER -->
+      <div class="admin-management-header">
+
+        <div>
+
+          <h2>
+            Withdrawal Requests
+          </h2>
+
+          <span
+            class="admin-result-count"
+            id="withdrawalResultCount"
+          >
+            0 withdrawals
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- =========================================
+           FILTER BAR
+      ========================================== -->
+
+      <div class="admin-filter-bar">
+
+            <!-- Search -->
+           <div class="management-search">
+
+            <i class="ri-search-line"></i>
+
+            <input
+             type="search"
+            id="withdrawalSearch"
+            placeholder="Search seller, reference or phone..."
+            autocomplete="off"
+            >
+
+          </div>
+
+
+        <!-- Status -->
+        <select id="withdrawalStatusFilter">
+
+          <option value="all">
+            All Statuses
+          </option>
+
+          <option value="pending">
+            Pending
+          </option>
+
+          <option value="approved">
+            Approved
+          </option>
+
+          <option value="paid">
+            Paid
+          </option>
+
+          <option value="rejected">
+            Rejected
+          </option>
+
+          <option value="cancelled">
+            Cancelled
+          </option>
+
+        </select>
+
+
+        <!-- Method -->
+        <select id="withdrawalMethodFilter">
+
+          <option value="all">
+            All Methods
+          </option>
+
+          <option value="mobile_money">
+            Mobile Money
+          </option>
+
+          <option value="bank">
+            Bank Transfer
+          </option>
+
+        </select>
+
+
+        <!-- Sort -->
+        <select id="withdrawalSort">
+
+          <option value="newest">
+            Newest
+          </option>
+
+          <option value="oldest">
+            Oldest
+          </option>
+
+          <option value="highest">
+            Highest Amount
+          </option>
+
+          <option value="lowest">
+            Lowest Amount
+          </option>
+
+        </select>
+
+
+        <!-- Clear -->
+        <button
+          type="button"
+          class="admin-clear-filters"
+          id="clearWithdrawalFilters"
+        >
+          <i class="ri-refresh-line"></i>
+          Clear
+        </button>
+
+      </div>
+
+
+      <!-- =========================================
+           TABLE
+      ========================================== -->
+
+      <div class="admin-table-wrapper">
+
+        <table class="admin-data-table withdrawals-table">
+
+          <thead>
+
+            <tr>
+
+              <th>
+                Withdrawal
+              </th>
+
+              <th>
+                Seller
+              </th>
+
+              <th>
+                Method
+              </th>
+
+              <th>
+                Amount
+              </th>
+
+              <th>
+                Status
+              </th>
+
+              <th>
+                Requested
+              </th>
+
+              <th>
+                Action
+              </th>
+
+            </tr>
+
+          </thead>
+
+          <tbody id="withdrawalTableBody">
+          </tbody>
+
+        </table>
+
+      </div>
+
+
+      <!-- EMPTY STATE -->
+
+      <div
+        class="admin-empty-state"
+        id="withdrawalEmptyState"
+        hidden
+      >
+
+        <div class="admin-empty-icon">
+          <i class="ri-wallet-3-line"></i>
+        </div>
+
+        <h3>
+          No withdrawals found
+        </h3>
+
+        <p>
+          No withdrawal requests match your current filters.
+        </p>
+
+      </div>
+
+
+      <!-- PAGINATION -->
+
+      <div
+        class="admin-pagination"
+        id="withdrawalPagination"
+      ></div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================================
+       DRAWER OVERLAY
+  ========================================== -->
+
+  <div
+    class="admin-drawer-overlay"
+    id="withdrawalDrawerOverlay"
+  ></div>
+
+
+  <!-- =========================================
+       WITHDRAWAL DETAILS DRAWER
+  ========================================== -->
+
+  <aside
+    class="withdrawal-details-drawer"
+    id="withdrawalDrawer"
+    aria-hidden="true"
+  >
+
+    <!-- HEADER -->
+
+    <div class="admin-drawer-header">
+
+      <div>
+
+        <span class="admin-drawer-eyebrow">
+          Withdrawal Details
+        </span>
+
+        <h2 id="withdrawalDrawerTitle">
+          Withdrawal
+        </h2>
+
+      </div>
+
+      <button
+        type="button"
+        class="admin-drawer-close"
+        id="closeWithdrawalDrawer"
+        aria-label="Close withdrawal details"
+      >
+        <i class="ri-close-line"></i>
+      </button>
+
+    </div>
+
+
+    <!-- BODY -->
+
+    <div class="admin-drawer-body">
+
+      <!-- STATUS -->
+
+      <div
+        class="withdrawal-drawer-status"
+        id="withdrawalDrawerStatus"
+      >
+        Pending
+      </div>
+
+
+      <!-- AMOUNT -->
+
+      <div class="withdrawal-amount-card">
+
+        <span>
+          Withdrawal Amount
+        </span>
+
+        <strong id="drawerWithdrawalAmount">
+          GHS 0.00
+        </strong>
+
+      </div>
+
+
+      <!-- SELLER -->
+
+      <div class="admin-drawer-section">
+
+        <h3 class="admin-drawer-section-title">
+          Seller Information
+        </h3>
+
+        <div class="admin-detail-list">
+
+          <div class="admin-detail-item">
+
+            <span>
+              Seller
+            </span>
+
+            <strong id="drawerSeller">
+              —
+            </strong>
+
+          </div>
+
+          <div class="admin-detail-item">
+
+            <span>
+              Seller ID
+            </span>
+
+            <strong id="drawerSellerId">
+              —
+            </strong>
+
+          </div>
+
+          <div class="admin-detail-item">
+
+            <span>
+              Phone
+            </span>
+
+            <strong id="drawerPhone">
+              —
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- PAYOUT -->
+
+      <div class="admin-drawer-section">
+
+        <h3 class="admin-drawer-section-title">
+          Payout Information
+        </h3>
+
+        <div class="admin-detail-list">
+
+          <div class="admin-detail-item">
+
+            <span>
+              Method
+            </span>
+
+            <strong id="drawerMethod">
+              —
+            </strong>
+
+          </div>
+
+          <div class="admin-detail-item">
+
+            <span>
+              Account
+            </span>
+
+            <strong id="drawerAccount">
+              —
+            </strong>
+
+          </div>
+
+          <div class="admin-detail-item">
+
+            <span>
+              Account Name
+            </span>
+
+            <strong id="drawerAccountName">
+              —
+            </strong>
+
+          </div>
+
+          <div class="admin-detail-item">
+
+            <span>
+              Reference
+            </span>
+
+            <strong id="drawerReference">
+              —
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- TIMELINE -->
+
+      <div class="admin-drawer-section">
+
+        <h3 class="admin-drawer-section-title">
+          Timeline
+        </h3>
+
+        <div
+          class="withdrawal-timeline"
+          id="withdrawalTimeline"
+        ></div>
+
+      </div>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="admin-drawer-footer">
+
+      <button
+        type="button"
+        class="admin-btn admin-btn-danger"
+        id="rejectWithdrawalBtn"
+      >
+        <i class="ri-close-circle-line"></i>
+        Reject
+      </button>
+
+      <button
+        type="button"
+        class="admin-btn admin-btn-primary"
+        id="approveWithdrawalBtn"
+      >
+        <i class="ri-check-line"></i>
+        Approve
+      </button>
+
+    </div>
+
+  </aside>
+
+
+
+
+
+
 
     
 

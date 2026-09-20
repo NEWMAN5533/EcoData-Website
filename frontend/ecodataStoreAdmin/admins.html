@@ -341,16 +341,984 @@
 
     <!-- =========================
          PAGE CONTENT
-  
+     ==========================-->
+
+     <!-- =========================================================
+     ADMINISTRATORS MANAGEMENT PAGE
+     ========================================================= -->
+
+<div class="admin-page-content">
+
+
+  <!-- =====================================================
+       PAGE HEADER
+       ===================================================== -->
+
+  <div class="admin-page-header">
+
+    <div>
+
+      <div class="admin-breadcrumb">
+
+        <span>Administration</span>
+
+        <i class="ri-arrow-right-s-line"></i>
+
+        <strong>Administrators</strong>
+
+      </div>
+
+
+      <h1>
+        Administrators
+      </h1>
+
+
+      <p>
+        Manage administrator accounts, access levels,
+        permissions and account status.
+      </p>
+
+    </div>
+
+
+    <div class="admin-page-header-actions">
+
+      <button
+        class="admin-btn admin-btn-primary"
+        id="addAdministratorBtn"
+        type="button"
+      >
+
+        <i class="ri-user-add-line"></i>
+
+        <span>
+          Add Administrator
+        </span>
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =====================================================
+       ADMINISTRATOR STATS
+       ===================================================== -->
+
+  <section class="admin-stats-grid administrators-stats-grid">
+
+
+    <!-- Total -->
+
+    <div class="admin-stat-card">
+
+      <div class="admin-stat-icon">
+
+        <i class="ri-admin-line"></i>
+
+      </div>
+
+
+      <div class="admin-stat-content">
+
+        <span>
+          Total Administrators
+        </span>
+
+        <strong id="totalAdministrators">
+          0
+        </strong>
+
+        <small>
+          All administrator accounts
+        </small>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- Active -->
+
+    <div class="admin-stat-card">
+
+      <div class="admin-stat-icon success">
+
+        <i class="ri-checkbox-circle-line"></i>
+
+      </div>
+
+
+      <div class="admin-stat-content">
+
+        <span>
+          Active
+        </span>
+
+        <strong id="activeAdministrators">
+          0
+        </strong>
+
+        <small>
+          Currently active
+        </small>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- Suspended -->
+
+    <div class="admin-stat-card">
+
+      <div class="admin-stat-icon warning">
+
+        <i class="ri-pause-circle-line"></i>
+
+      </div>
+
+
+      <div class="admin-stat-content">
+
+        <span>
+          Suspended
+        </span>
+
+        <strong id="suspendedAdministrators">
+          0
+        </strong>
+
+        <small>
+          Temporarily restricted
+        </small>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- Super Admins -->
+
+    <div class="admin-stat-card">
+
+      <div class="admin-stat-icon info">
+
+        <i class="ri-shield-star-line"></i>
+
+      </div>
+
+
+      <div class="admin-stat-content">
+
+        <span>
+          Super Admins
+        </span>
+
+        <strong id="superAdministrators">
+          0
+        </strong>
+
+        <small>
+          Full system access
+        </small>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- Last Activity -->
+
+    <div class="admin-stat-card">
+
+      <div class="admin-stat-icon">
+
+        <i class="ri-history-line"></i>
+
+      </div>
+
+
+      <div class="admin-stat-content">
+
+        <span>
+          Recent Activity
+        </span>
+
+        <strong id="administratorActivity">
+          —
+        </strong>
+
+        <small>
+          Latest administrator action
+        </small>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       ADMINISTRATOR MANAGEMENT
+       ===================================================== -->
+
+  <section class="admin-management-card">
+
+
+    <!-- MANAGEMENT HEADER -->
+
+    <div class="admin-management-header">
+
+      <div>
+
+        <h2>
+          Administrator Accounts
+        </h2>
+
+        <p>
+          View and manage all administrator accounts.
+        </p>
+
+      </div>
+
+
+      <span
+        class="admin-result-count"
+        id="administratorResultCount"
+      >
+        0 administrators
+      </span>
+
+    </div>
+
+
+
+    <!-- =================================================
+         FILTER BAR
+         ================================================= -->
+
+    <div class="admin-filter-bar">
+
+
+      <!-- Search -->
+
+      <div class="admin-filter-search">
+
+        <i class="ri-search-line"></i>
+
+        <input
+          type="search"
+          id="administratorSearch"
+          placeholder="Search administrator, email or ID..."
+          autocomplete="off"
+        >
+
+      </div>
+
+
+
+      <!-- Status -->
+
+      <select id="administratorStatusFilter">
+
+        <option value="all">
+          All Statuses
+        </option>
+
+        <option value="active">
+          Active
+        </option>
+
+        <option value="suspended">
+          Suspended
+        </option>
+
+      </select>
+
+
+
+      <!-- Role -->
+
+      <select id="administratorRoleFilter">
+
+        <option value="all">
+          All Roles
+        </option>
+
+        <option value="super_admin">
+          Super Admin
+        </option>
+
+        <option value="admin">
+          Administrator
+        </option>
+
+        <option value="moderator">
+          Moderator
+        </option>
+
+        <option value="support">
+          Support
+        </option>
+
+      </select>
+
+
+
+      <!-- Sort -->
+
+      <select id="administratorSort">
+
+        <option value="newest">
+          Newest
+        </option>
+
+        <option value="oldest">
+          Oldest
+        </option>
+
+        <option value="name_az">
+          Name A–Z
+        </option>
+
+        <option value="name_za">
+          Name Z–A
+        </option>
+
+        <option value="recent_activity">
+          Recent Activity
+        </option>
+
+      </select>
+
+
+
+      <!-- Clear -->
+
+      <button
+        class="admin-clear-filters"
+        id="clearAdministratorFilters"
+        type="button"
+      >
+
+        <i class="ri-filter-off-line"></i>
+
+        Clear
+
+      </button>
+
+    </div>
+
+
+
+    <!-- =================================================
+         TABLE
+         ================================================= -->
+
+    <div class="admin-table-wrapper">
+
+      <table class="admin-data-table administrators-table">
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Administrator
+            </th>
+
+            <th>
+              Role
+            </th>
+
+            <th>
+              Email
+            </th>
+
+            <th>
+              Access
+            </th>
+
+            <th>
+              Status
+            </th>
+
+            <th>
+              Last Activity
+            </th>
+
+            <th>
+              Created
+            </th>
+
+            <th></th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody id="administratorTableBody">
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+
+    <!-- =================================================
+         EMPTY STATE
+         ================================================= -->
+
+    <div
+      class="admin-empty-state"
+      id="administratorEmptyState"
+      hidden
+    >
+
+      <div class="admin-empty-icon">
+
+        <i class="ri-admin-line"></i>
+
+      </div>
+
+
+      <h3>
+        No administrators found
+      </h3>
+
+
+      <p>
+        No administrator accounts match your current filters.
+      </p>
+
+
+      <button
+        class="admin-btn admin-btn-secondary"
+        id="emptyClearAdministratorFilters"
+        type="button"
+      >
+
+        Clear Filters
+
+      </button>
+
+    </div>
+
+
+
+    <!-- =================================================
+         PAGINATION
+         ================================================= -->
+
+    <div
+      class="admin-pagination"
+      id="administratorPagination"
+    ></div>
+
+  </section>
+
+</div>
+
+
+
+<!-- =========================================================
+     ADMINISTRATOR DETAILS DRAWER
+     ========================================================= -->
+
+<div
+  class="admin-drawer-overlay"
+  id="administratorDrawerOverlay"
+></div>
+
+
+
+<aside
+  class="admin-detail-drawer administrator-details-drawer"
+  id="administratorDrawer"
+  aria-hidden="true"
+>
+
+
+  <!-- =====================================================
+       DRAWER HEADER
+       ===================================================== -->
+
+  <div class="admin-drawer-header">
+
+    <div>
+
+      <span>
+        Administrator Account
+      </span>
+
+      <h2 id="drawerAdministratorId">
+        —
+      </h2>
+
+    </div>
+
+
+    <button
+      class="admin-drawer-close"
+      id="closeAdministratorDrawer"
+      type="button"
+      aria-label="Close administrator details"
+    >
+
+      <i class="ri-close-line"></i>
+
+    </button>
+
+  </div>
+
+
+
+  <!-- =====================================================
+       DRAWER BODY
+       ===================================================== -->
+
+  <div class="admin-drawer-body">
+
+
+    <!-- =================================================
+         STATUS
+         ================================================= -->
+
+    <div
+      class="administrator-drawer-status-row"
+      id="drawerAdministratorStatus"
+    ></div>
+
+
+
+    <!-- =================================================
+         ADMINISTRATOR PROFILE
+         ================================================= -->
+
+    <section class="admin-drawer-section">
+
+
+      <div class="admin-drawer-section-title">
+
+        <i class="ri-user-3-line"></i>
+
+        <h3>
+          Profile
+        </h3>
+
+      </div>
+
+
+      <div class="service-person-card administrator-person-card">
+
+
+        <div
+          class="service-person-avatar"
+          id="drawerAdministratorAvatar"
+        >
+          A
+        </div>
+
+
+        <div>
+
+          <strong id="drawerAdministratorName">
+            —
+          </strong>
+
+          <span id="drawerAdministratorEmail">
+            —
+          </span>
+
+          <span id="drawerAdministratorPhone">
+            —
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         ACCOUNT INFORMATION
+         ================================================= -->
+
+    <section class="admin-drawer-section">
+
+
+      <div class="admin-drawer-section-title">
+
+        <i class="ri-shield-user-line"></i>
+
+        <h3>
+          Account Information
+        </h3>
+
+      </div>
+
+
+      <div class="admin-detail-list">
+
+
+        <div>
+
+          <span>
+            Administrator ID
+          </span>
+
+          <strong id="drawerAdministratorAccountId">
+            —
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span>
+            Role
+          </span>
+
+          <strong id="drawerAdministratorRole">
+            —
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span>
+            Account Status
+          </span>
+
+          <strong id="drawerAdministratorStatusText">
+            —
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span>
+            Created
+          </span>
+
+          <strong id="drawerAdministratorCreated">
+            —
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span>
+            Last Updated
+          </span>
+
+          <strong id="drawerAdministratorUpdated">
+            —
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span>
+            Last Activity
+          </span>
+
+          <strong id="drawerAdministratorLastActivity">
+            —
+          </strong>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         ACCESS & PERMISSIONS
+         ================================================= -->
+
+    <section class="admin-drawer-section">
+
+
+      <div class="admin-drawer-section-title">
+
+        <i class="ri-lock-2-line"></i>
+
+        <h3>
+          Access & Permissions
+        </h3>
+
+      </div>
+
+
+      <div class="administrator-permissions-box">
+
+
+        <div>
+
+          <span>
+            Dashboard
+          </span>
+
+          <strong id="permissionDashboard">
+            Full Access
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span>
+            Users
+          </span>
+
+          <strong id="permissionUsers">
+            —
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span>
+            Sellers
+          </span>
+
+          <strong id="permissionSellers">
+            —
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span>
+            Orders
+          </span>
+
+          <strong id="permissionOrders">
+            —
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span>
+            Finance
+          </span>
+
+          <strong id="permissionFinance">
+            —
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span>
+            Settings
+          </span>
+
+          <strong id="permissionSettings">
+            —
+          </strong>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         SECURITY
+         ================================================= -->
+
+    <section class="admin-drawer-section">
+
+
+      <div class="admin-drawer-section-title">
+
+        <i class="ri-shield-check-line"></i>
+
+        <h3>
+          Security
+        </h3>
+
+      </div>
+
+
+      <div class="admin-detail-list">
+
+
+        <div>
+
+          <span>
+            Two-Factor Authentication
+          </span>
+
+          <strong id="drawerTwoFactor">
+            —
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span>
+            Last Login
+          </span>
+
+          <strong id="drawerLastLogin">
+            —
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span>
+            Login IP
+          </span>
+
+          <strong id="drawerLoginIp">
+            —
+          </strong>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         ADMIN NOTE
+         ================================================= -->
+
+    <section
+      class="admin-drawer-section"
+      id="administratorNoteSection"
+    >
+
+
+      <div class="admin-drawer-section-title">
+
+        <i class="ri-sticky-note-line"></i>
+
+        <h3>
+          Admin Note
+        </h3>
+
+      </div>
+
+
+      <div
+        class="administrator-note"
+        id="drawerAdministratorNote"
+      >
+        —
+      </div>
+
+    </section>
+
+  </div>
+
+
+
+  <!-- =====================================================
+       DRAWER FOOTER
+       ===================================================== -->
+
+  <div class="admin-drawer-footer">
+
+
+    <button
+      class="admin-btn admin-btn-danger"
+      id="deleteAdministratorBtn"
+      type="button"
+    >
+
+      <i class="ri-delete-bin-line"></i>
+
+      Delete
+
+    </button>
+
+
+    <button
+      class="admin-btn admin-btn-secondary"
+      id="suspendAdministratorBtn"
+      type="button"
+    >
+
+      <i class="ri-pause-circle-line"></i>
+
+      Suspend
+
+    </button>
+
+
+    <button
+      class="admin-btn admin-btn-primary"
+      id="editAdministratorBtn"
+      type="button"
+    >
+
+      <i class="ri-edit-line"></i>
+
+      Edit
+
+    </button>
+
+  </div>
+
+</aside>
+
 
     
 
   </main>
 
 
-  <!-- =========================
+  <!---=========================
        PAYMENT DETAIL DRAWER
-  ========================== -->
+  ========================== --->
   <div
     class="admin-drawer-overlay"
     id="paymentDrawerOverlay"
@@ -687,7 +1655,7 @@
        SCRIPT
   ========================== -->
   <script src="js/admin.js"></script>
-  <script src="js/withdrawals.js"></script>
+  <script src="js/admins.js"></script>
 
 </body>
 </html>
