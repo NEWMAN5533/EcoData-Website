@@ -102,13 +102,16 @@ function getFilteredBundleOrders() {
   // ==========================
 
   const searchInput =
-    document.getElementById("bundleSearch");
+    document.getElementById("bundleOrderSearch");
 
   const searchTerm =
     searchInput?.value
       ?.trim()
       .toLowerCase() || "";
 
+    //==================
+    // SEARCH TERM
+    //==================
   if (searchTerm) {
 
     filtered = filtered.filter(order => {
@@ -509,6 +512,20 @@ function renderBundleOrders() {
 
 }
 
+
+//======================
+// SEARCH ORDER BY ID
+//======================
+const bundleOrderSearch = document.getElementById("bundleOrderSearch");
+
+if(bundleOrderSearch){
+  bundleOrderSearch.addEventListener("input", ()=> {
+    // Start form page 1
+    // whenever the search changes
+    bundleCurrentPage = 1;
+    renderBundleOrders();
+  })
+}
 
 
 const bundleRowWrapper =
@@ -2522,43 +2539,70 @@ const monthlyOrders = orders.filter(order => {
   // =========================
 
   // TOTALS
-  document.getElementById("totalOrder").textContent =
-    totalOrders;
+  setDashboardText(
+    "totalOrder",
+    totalOrders
+  );
 
-  document.getElementById("pendingOrder").textContent =
-    pendingOrders;
-
-  document.getElementById("processingOrder").textContent =
-    processingOrders;
-
-  document.getElementById("deliveredOrder").textContent =
-    deliveredOrders;
-
-  document.getElementById("failedOrder").textContent =
-    failedOrders;
+  
+// Pending orders
+  setDashboardText(
+    "pendingOrder",
+    pendingOrders
+  );
 
 
+  // processing orders
+  setDashboardText(
+    "processingOrder",
+    processingOrders
+  );
+
+  // delivered orders
+  setDashboardText(
+    "deliveredOrder",
+    deliveredOrders
+  );
 
 
+  // failed orders
+  setDashboardText(
+    "failedOrder",
+    failedOrders
+  );
+ 
 
   // TIME-BASED
-  document.getElementById("todayOrder").textContent =
-    todayOrders;
+  setDashboardText(
+    "todayOrder",
+    totalOrders
+  )
+ 
 
-  document.getElementById("weeklyOrder").textContent =
-    weeklyOrders;
+  // WEEKLY ORDERS
+  setDashboardText(
+    "weeklyOrder",
+    weeklyOrders
+  );
 
-  document.getElementById("monthlyOrder").textContent =
-    monthlyOrders;
+
+// MONTHLY ORDERS
+setDashboardText(
+  "monthlyOrder",
+  monthlyOrders
+);
 
 
+  // MONEY\
+  setDashboardText(
+    "totalRevenue",
+    `₵ ${totalRevenue.toFixed(2)}`
+  );
 
-  // MONEY
-  document.getElementById("totalRevenue").textContent =
-    `₵ ${totalRevenue.toFixed(2)}`;
-
-  document.getElementById("todayRevenue").textContent =
-    `₵ ${todayRevenue.toFixed(2)}`;
+  setDashboardText(
+    "todayRevenue",
+    `₵ ${todayRevenue.toFixed(2)}`
+  );
 
 }
 
