@@ -1215,3 +1215,2231 @@ body.dark-mode .admin-profile-menu {
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   ECODATA ADMINISTRATOR
+   BUNDLE DASHBOARD
+========================================================= */
+
+
+
+
+/* =========================================================
+   SECTION LABEL
+========================================================= */
+
+.bundle-section-label {
+  margin: 4px 0 14px;
+}
+
+/* =========================================================
+BUNDLE DASHBOARD — STATS + MONITOR + ANALYTICS
+Scoped so it does not affect other administrator pages
+========================================================= */
+
+/* =========================================================
+
+1. BUNDLE STATS GRID
+   ========================================================= */
+
+.bundle-dashboard .bundle-stats-grid {
+display:grid;
+grid-template-columns:repeat(5, minmax(0, 1fr));
+gap:14px;
+margin-bottom:22px;
+}
+
+/* =========================================================
+2. STAT CARD
+========================================================= */
+
+.bundle-dashboard .bundle-stats-grid .admin-stat-card {
+min-width:0;
+min-height:112px;
+
+display:flex;
+align-items:center;
+gap:13px;
+
+padding:17px 16px;
+
+border:1px solid var(--admin-border);
+border-radius:13px;
+
+background:var(--admin-surface);
+box-shadow:var(--admin-shadow-sm);
+
+transition:
+border-color .2s ease,
+box-shadow .2s ease,
+transform .2s ease;
+}
+
+.bundle-dashboard .bundle-stats-grid .admin-stat-card:hover {
+border-color:var(--admin-border-strong, var(--admin-border));
+box-shadow:var(--admin-shadow-md, var(--admin-shadow-sm));
+transform:translateY(-1px);
+}
+
+/* =========================================================
+3. STAT ICON
+========================================================= */
+
+.bundle-dashboard .bundle-stats-grid .admin-stat-icon {
+width:42px;
+height:42px;
+
+flex:0 0 42px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+border:1px solid var(--admin-border);
+
+border-radius:10px;
+
+background:var(--admin-surface-soft);
+color:var(--admin-text-secondary);
+
+font-size:19px;
+}
+
+.bundle-dashboard .bundle-stats-grid .admin-stat-icon i {
+line-height:1;
+}
+
+/* =========================================================
+4. STAT CONTENT
+========================================================= */
+
+.bundle-dashboard .bundle-stats-grid .admin-stat-content {
+min-width:0;
+
+display:flex;
+flex-direction:column;
+justify-content:center;
+}
+
+.bundle-dashboard .bundle-stats-grid .admin-stat-content span {
+display:block;
+
+margin-bottom:4px;
+
+color:var(--admin-text-muted);
+
+font-size:10px;
+font-weight:700;
+
+text-transform:uppercase;
+letter-spacing:.035em;
+
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+}
+
+.bundle-dashboard .bundle-stats-grid .admin-stat-content strong {
+display:block;
+
+margin:0 0 3px;
+
+color:var(--admin-text);
+
+font-size:20px;
+line-height:1.15;
+font-weight:750;
+
+letter-spacing:-.35px;
+
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+}
+
+.bundle-dashboard .bundle-stats-grid .admin-stat-content small {
+display:block;
+
+color:var(--admin-text-muted);
+
+font-size:9px;
+line-height:1.35;
+
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+}
+
+/* =========================================================
+5. DELIVERY + LEADERBOARD GRID
+========================================================= */
+
+.bundle-dashboard .bundle-monitor-grid {
+display:grid;
+grid-template-columns:minmax(0, 1.35fr) minmax(340px, .65fr);
+gap:16px;
+
+margin-bottom:28px;
+}
+
+/* =========================================================
+6. MANAGEMENT CARDS
+========================================================= */
+
+.bundle-dashboard .bundle-delivery-card,
+.bundle-dashboard .leaderboard-manager,
+.bundle-dashboard .bundle-chart-card {
+min-width:0;
+
+overflow:visible;
+
+border:1px solid var(--admin-border);
+border-radius:15px;
+
+background:var(--admin-surface);
+box-shadow:var(--admin-shadow-sm);
+}
+
+/* =========================================================
+7. MANAGEMENT HEADER
+========================================================= */
+
+.bundle-dashboard .bundle-delivery-card .admin-management-header,
+.bundle-dashboard .leaderboard-manager .admin-management-header,
+.bundle-dashboard .bundle-chart-card .admin-management-header {
+min-height:72px;
+
+display:flex;
+align-items:center;
+justify-content:space-between;
+
+gap:15px;
+
+padding:17px 20px;
+
+border-bottom:1px solid var(--admin-border);
+}
+
+.bundle-dashboard .admin-management-header > div:first-child {
+min-width:0;
+}
+
+.bundle-dashboard .admin-management-header h2 {
+margin:0 0 4px;
+
+color:var(--admin-text);
+
+font-size:15px;
+line-height:1.3;
+font-weight:750;
+
+letter-spacing:-.15px;
+}
+
+.bundle-dashboard .admin-result-count {
+display:block;
+
+color:var(--admin-text-muted);
+
+font-size:10px;
+line-height:1.4;
+}
+
+/* =========================================================
+8. LIVE INDICATOR
+========================================================= */
+
+.bundle-dashboard .bundle-live-indicator {
+display:flex;
+align-items:center;
+gap:7px;
+
+flex-shrink:0;
+
+color:var(--admin-text-muted);
+
+font-size:10px;
+font-weight:650;
+}
+
+.bundle-dashboard .delivery-bubble {
+width:8px;
+height:8px;
+
+display:inline-block;
+
+border-radius:50%;
+
+background:currentColor;
+
+box-shadow:0 0 0 4px color-mix(
+in srgb,
+currentColor 12%,
+transparent
+);
+}
+
+.bundle-dashboard .delivery-bubble.fast {
+color:#3f8f5f;
+}
+
+/* =========================================================
+9. DELIVERY BODY
+========================================================= */
+
+.bundle-dashboard .bundle-delivery-body {
+padding:20px;
+}
+
+/* =========================================================
+10. CURRENT DELIVERY STATUS
+========================================================= */
+
+.bundle-dashboard .bundle-delivery-status {
+display:flex;
+align-items:flex-start;
+
+gap:14px;
+
+padding:16px;
+
+border:1px solid var(--admin-border);
+
+border-radius:11px;
+
+background:var(--admin-surface-soft);
+
+margin-bottom:18px;
+}
+
+.bundle-dashboard .bundle-status-icon {
+width:38px;
+height:38px;
+
+flex:0 0 38px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+border:1px solid var(--admin-border);
+
+border-radius:9px;
+
+background:var(--admin-surface);
+}
+
+.bundle-dashboard .bundle-status-icon .delivery-bubble {
+width:10px;
+height:10px;
+}
+
+.bundle-dashboard .bundle-delivery-message {
+min-width:0;
+
+display:flex;
+flex-direction:column;
+
+gap:7px;
+}
+
+.bundle-dashboard .bundle-delivery-message strong {
+color:var(--admin-text);
+
+font-size:12px;
+line-height:1.55;
+font-weight:650;
+}
+
+.bundle-dashboard .bundle-delivery-message span {
+display:flex;
+align-items:center;
+gap:5px;
+
+color:var(--admin-text-muted);
+
+font-size:10px;
+}
+
+.bundle-dashboard .bundle-delivery-message span i {
+font-size:13px;
+}
+
+/* =========================================================
+11. DELIVERY METRICS
+========================================================= */
+
+.bundle-dashboard .bundle-delivery-metrics {
+display:grid;
+grid-template-columns:repeat(2, minmax(0, 1fr));
+
+gap:10px;
+
+margin-bottom:16px;
+}
+
+.bundle-dashboard .bundle-delivery-metric {
+min-width:0;
+
+display:flex;
+flex-direction:column;
+gap:7px;
+
+padding:13px 14px;
+
+border:1px solid var(--admin-border);
+
+border-radius:10px;
+
+background:var(--admin-surface);
+}
+
+.bundle-dashboard .bundle-delivery-metric span {
+display:flex;
+align-items:center;
+gap:6px;
+
+color:var(--admin-text-muted);
+
+font-size:9px;
+line-height:1.35;
+
+text-transform:uppercase;
+letter-spacing:.035em;
+}
+
+.bundle-dashboard .bundle-delivery-metric span i {
+font-size:13px;
+}
+
+.bundle-dashboard .bundle-delivery-metric strong {
+color:var(--admin-text);
+
+font-size:13px;
+line-height:1.3;
+font-weight:700;
+
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+}
+
+/* =========================================================
+12. LAST DELIVERED
+========================================================= */
+
+.bundle-dashboard .bundle-last-delivered {
+min-height:46px;
+
+display:flex;
+align-items:center;
+
+gap:10px;
+
+padding:10px 13px;
+
+border-top:1px solid var(--admin-border);
+
+color:var(--admin-text-muted);
+
+font-size:10px;
+}
+
+.bundle-dashboard .bundle-last-delivered span {
+flex:1;
+}
+
+.bundle-dashboard .bundle-last-delivered strong {
+color:var(--admin-text-secondary);
+
+font-size:10px;
+font-weight:650;
+}
+
+.bundle-dashboard .bundle-last-delivered > i {
+color:var(--admin-text-muted);
+
+font-size:14px;
+}
+
+/* =========================================================
+13. LEADERBOARD MANAGER
+========================================================= */
+
+.bundle-dashboard .leaderboard-manager {
+display:flex;
+flex-direction:column;
+}
+
+.bundle-dashboard .bundle-manager-icon {
+width:38px;
+height:38px;
+
+flex:0 0 38px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+border:1px solid var(--admin-border);
+
+border-radius:9px;
+
+background:var(--admin-surface-soft);
+
+color:var(--admin-text-secondary);
+
+font-size:17px;
+}
+
+.bundle-dashboard .bundle-manager-body {
+display:flex;
+flex-direction:column;
+
+gap:15px;
+
+padding:20px;
+}
+
+/* =========================================================
+14. FORM GROUP
+========================================================= */
+
+.bundle-dashboard .bundle-manager-body .admin-form-group {
+display:flex;
+flex-direction:column;
+
+gap:7px;
+}
+
+.bundle-dashboard .bundle-manager-body .admin-form-group label {
+color:var(--admin-text-secondary);
+
+font-size:10px;
+font-weight:700;
+
+letter-spacing:.02em;
+}
+
+/* =========================================================
+15. INPUT WRAPPER
+========================================================= */
+
+.bundle-dashboard .bundle-input-wrap {
+position:relative;
+
+width:100%;
+}
+
+.bundle-dashboard .bundle-input-wrap > i {
+position:absolute;
+
+top:50%;
+left:12px;
+
+transform:translateY(-50%);
+
+color:var(--admin-text-muted);
+
+font-size:15px;
+
+pointer-events:none;
+}
+
+.bundle-dashboard .bundle-input-wrap input {
+width:100%;
+height:40px;
+
+padding:0 12px 0 36px;
+
+border:1px solid var(--admin-border);
+
+border-radius:8px;
+
+outline:none;
+
+background:var(--admin-surface-soft);
+
+color:var(--admin-text);
+
+font-family:inherit;
+
+font-size:11px;
+
+transition:
+border-color .2s ease,
+box-shadow .2s ease,
+background .2s ease;
+}
+
+.bundle-dashboard .bundle-input-wrap input::placeholder {
+color:var(--admin-text-muted);
+}
+
+.bundle-dashboard .bundle-input-wrap input:focus {
+border-color:var(--admin-text-muted);
+
+background:var(--admin-surface);
+
+box-shadow:0 0 0 3px
+color-mix(
+in srgb,
+var(--admin-text) 6%,
+transparent
+);
+}
+
+/* =========================================================
+16. ADD POINTS BUTTON
+========================================================= */
+
+.bundle-dashboard .bundle-add-points {
+width:100%;
+min-height:40px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+gap:7px;
+
+margin-top:3px;
+
+border:1px solid var(--admin-text);
+
+border-radius:8px;
+
+background:var(--admin-text);
+
+color:var(--admin-background);
+
+font-family:inherit;
+
+font-size:11px;
+font-weight:700;
+
+cursor:pointer;
+
+transition:
+opacity .2s ease,
+transform .2s ease;
+}
+
+.bundle-dashboard .bundle-add-points:hover {
+opacity:.9;
+}
+
+.bundle-dashboard .bundle-add-points:active {
+transform:scale(.985);
+}
+
+.bundle-dashboard .bundle-add-points i {
+font-size:15px;
+}
+
+/* =========================================================
+17. ANALYTICS LABEL
+========================================================= */
+
+.bundle-dashboard .bundle-section-label {
+display:block;
+
+margin:0 0 9px;
+
+color:var(--admin-text-muted);
+
+font-size:10px;
+font-weight:750;
+
+text-transform:uppercase;
+letter-spacing:.08em;
+}
+
+/* =========================================================
+18. CHART CARD
+========================================================= */
+
+.bundle-dashboard .bundle-chart-card {
+overflow:hidden;
+
+margin-bottom:28px;
+}
+
+/* =========================================================
+19. CHART TOGGLE
+========================================================= */
+
+.bundle-dashboard .chart-toggle {
+display:flex;
+align-items:center;
+
+padding:3px;
+
+border:1px solid var(--admin-border);
+
+border-radius:8px;
+
+background:var(--admin-surface-soft);
+
+flex-shrink:0;
+}
+
+.bundle-dashboard .chart-toggle button {
+height:29px;
+
+padding:0 11px;
+
+border:0;
+
+border-radius:6px;
+
+background:transparent;
+
+color:var(--admin-text-muted);
+
+font-family:inherit;
+
+font-size:10px;
+font-weight:650;
+
+cursor:pointer;
+
+transition:
+background .2s ease,
+color .2s ease;
+}
+
+.bundle-dashboard .chart-toggle button:hover {
+color:var(--admin-text);
+}
+
+.bundle-dashboard .chart-toggle button.active {
+background:var(--admin-surface);
+
+color:var(--admin-text);
+
+box-shadow:var(--admin-shadow-sm);
+}
+
+/* =========================================================
+20. CHART WRAPPER
+========================================================= */
+
+.bundle-dashboard .bundle-chart-wrapper {
+position:relative;
+
+width:100%;
+
+height:340px;
+
+padding:20px;
+}
+
+.bundle-dashboard .bundle-chart-wrapper canvas {
+width:100% !important;
+height:100% !important;
+}
+
+
+
+
+
+
+
+
+/* =========================================================
+BUNDLE ANALYTICS GRID
+========================================================= */
+
+.bundle-dashboard .bundle-analytics-grid {
+display:grid;
+
+grid-template-columns:
+minmax(0, 1.55fr)
+minmax(300px, .65fr);
+
+gap:16px;
+
+margin-bottom:28px;
+}
+
+/* =========================================================
+DASHBOARD CARDS
+========================================================= */
+
+.bundle-dashboard .admin-dashboard-card {
+min-width:0;
+
+border:1px solid var(--admin-border);
+
+border-radius:15px;
+
+background:var(--admin-surface);
+
+box-shadow:var(--admin-shadow-sm);
+
+overflow:hidden;
+}
+
+/* =========================================================
+CARD HEADER
+========================================================= */
+
+.bundle-dashboard .admin-card-header {
+min-height:72px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+gap:15px;
+
+padding:17px 20px;
+
+border-bottom:1px solid var(--admin-border);
+}
+
+.bundle-dashboard .admin-card-header > div {
+min-width:0;
+}
+
+.bundle-dashboard .admin-card-header h2 {
+margin:0 0 4px;
+
+color:var(--admin-text);
+
+font-size:15px;
+
+line-height:1.3;
+
+font-weight:750;
+
+letter-spacing:-.15px;
+}
+
+.bundle-dashboard .admin-card-header p {
+margin:0;
+
+color:var(--admin-text-muted);
+
+font-size:10px;
+
+line-height:1.4;
+}
+
+/* =========================================================
+REVENUE PERIOD SELECT
+========================================================= */
+
+.bundle-dashboard .revenue-card .admin-card-header select {
+height:34px;
+
+min-width:125px;
+
+padding:0 28px 0 10px;
+
+border:1px solid var(--admin-border);
+
+border-radius:8px;
+
+outline:none;
+
+background:var(--admin-surface-soft);
+
+color:var(--admin-text-secondary);
+
+font-family:inherit;
+
+font-size:10px;
+
+cursor:pointer;
+}
+
+/* =========================================================
+CHART WRAPPER
+========================================================= */
+
+.bundle-dashboard .revenue-card .admin-chart-wrapper {
+position:relative;
+
+display:flex;
+
+width:100%;
+
+height:285px;
+
+padding:20px 20px 0;
+}
+
+/* =========================================================
+Y AXIS
+========================================================= */
+
+.bundle-dashboard .admin-chart-y {
+width:38px;
+
+flex:0 0 38px;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:space-between;
+
+padding:0 8px 10px 0;
+
+color:var(--admin-text-muted);
+
+font-size:9px;
+
+text-align:right;
+}
+
+/* =========================================================
+CHART AREA
+========================================================= */
+
+.bundle-dashboard .admin-chart {
+position:relative;
+
+flex:1;
+
+min-width:0;
+
+height:100%;
+
+overflow:hidden;
+
+border-left:1px solid var(--admin-border);
+
+border-bottom:1px solid var(--admin-border);
+}
+
+/* =========================================================
+GRID LINES
+========================================================= */
+
+.bundle-dashboard .chart-grid-line {
+position:absolute;
+
+left:0;
+right:0;
+
+height:1px;
+
+background:var(--admin-border);
+
+opacity:.75;
+}
+
+.bundle-dashboard .chart-grid-line.line-1 {
+top:0;
+}
+
+.bundle-dashboard .chart-grid-line.line-2 {
+top:25%;
+}
+
+.bundle-dashboard .chart-grid-line.line-3 {
+top:50%;
+}
+
+.bundle-dashboard .chart-grid-line.line-4 {
+top:75%;
+}
+
+/* =========================================================
+REVENUE SVG
+========================================================= */
+
+.bundle-dashboard .revenue-svg {
+position:absolute;
+
+inset:0;
+
+width:100%;
+height:100%;
+
+overflow:visible;
+}
+
+/* =========================================================
+REVENUE AREA
+========================================================= */
+
+.bundle-dashboard .revenue-area {
+fill:url(#revenueGradient);
+}
+
+/* =========================================================
+REVENUE LINE
+========================================================= */
+
+.bundle-dashboard .revenue-line {
+fill:none;
+
+stroke:var(--admin-text);
+
+stroke-width:2;
+
+vector-effect:non-scaling-stroke;
+}
+
+/* =========================================================
+CHART TOOLTIP
+========================================================= */
+
+.bundle-dashboard .chart-tooltip {
+position:absolute;
+
+top:18%;
+
+left:70%;
+
+z-index:5;
+
+display:flex;
+
+flex-direction:column;
+
+gap:3px;
+
+min-width:105px;
+
+padding:9px 11px;
+
+border:1px solid var(--admin-border);
+
+border-radius:8px;
+
+background:var(--admin-surface);
+
+box-shadow:var(--admin-shadow-md);
+
+pointer-events:none;
+}
+
+.bundle-dashboard .chart-tooltip strong {
+color:var(--admin-text);
+
+font-size:11px;
+
+font-weight:750;
+}
+
+.bundle-dashboard .chart-tooltip span {
+color:var(--admin-text-muted);
+
+font-size:8px;
+}
+
+/* =========================================================
+CHART LABELS
+========================================================= */
+
+.bundle-dashboard .admin-chart-labels {
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+padding:9px 20px 15px 58px;
+
+color:var(--admin-text-muted);
+
+font-size:9px;
+}
+
+/* =========================================================
+ORDER SUMMARY
+========================================================= */
+
+.bundle-dashboard .order-summary-card {
+display:flex;
+
+flex-direction:column;
+}
+
+.bundle-dashboard .order-summary-card .admin-card-header a {
+display:inline-flex;
+
+align-items:center;
+
+gap:4px;
+
+color:var(--admin-text-secondary);
+
+font-size:10px;
+
+font-weight:650;
+
+text-decoration:none;
+
+white-space:nowrap;
+}
+
+.bundle-dashboard .order-summary-card .admin-card-header a:hover {
+color:var(--admin-text);
+}
+
+.bundle-dashboard .order-summary-card .admin-card-header a i {
+font-size:12px;
+}
+
+/* =========================================================
+ORDER SUMMARY LIST
+========================================================= */
+
+.bundle-dashboard .order-summary-list {
+display:flex;
+
+flex-direction:column;
+
+gap:0;
+
+padding:8px 20px 12px;
+}
+
+/* =========================================================
+ORDER ITEM
+========================================================= */
+
+.bundle-dashboard .order-summary-item {
+display:grid;
+
+grid-template-columns:38px 75px minmax(0,1fr);
+
+align-items:center;
+
+gap:11px;
+
+min-height:67px;
+
+border-bottom:1px solid var(--admin-border);
+}
+
+.bundle-dashboard .order-summary-item:last-child {
+border-bottom:0;
+}
+
+/* =========================================================
+ORDER ICON
+========================================================= */
+
+.bundle-dashboard .order-summary-icon {
+width:36px;
+height:36px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+border:1px solid var(--admin-border);
+
+border-radius:9px;
+
+background:var(--admin-surface-soft);
+
+color:var(--admin-text-secondary);
+
+font-size:15px;
+}
+
+/* Keep statuses subtle */
+
+.bundle-dashboard .order-summary-icon.pending {
+color:var(--admin-text-secondary);
+}
+
+.bundle-dashboard .order-summary-icon.processing {
+color:var(--admin-text-secondary);
+}
+
+.bundle-dashboard .order-summary-icon.completed {
+color:var(--admin-text-secondary);
+}
+
+.bundle-dashboard .order-summary-icon.failed {
+color:var(--admin-text-secondary);
+}
+
+/* =========================================================
+ORDER INFO
+========================================================= */
+
+.bundle-dashboard .order-summary-info {
+min-width:0;
+
+display:flex;
+
+flex-direction:column;
+
+gap:3px;
+}
+
+.bundle-dashboard .order-summary-info strong {
+color:var(--admin-text);
+
+font-size:16px;
+
+line-height:1.2;
+
+font-weight:750;
+}
+
+.bundle-dashboard .order-summary-info span {
+color:var(--admin-text-muted);
+
+font-size:9px;
+}
+
+/* =========================================================
+ORDER BAR
+========================================================= */
+
+.bundle-dashboard .order-summary-bar {
+width:100%;
+
+height:5px;
+
+overflow:hidden;
+
+border-radius:999px;
+
+background:var(--admin-surface-soft);
+
+border:1px solid var(--admin-border);
+}
+
+.bundle-dashboard .order-summary-bar span {
+display:block;
+
+height:100%;
+
+border-radius:999px;
+
+background:var(--admin-text);
+}
+
+/* =========================================================
+1250px
+========================================================= */
+
+@media (max-width:1250px) {
+
+.bundle-dashboard .bundle-analytics-grid {
+grid-template-columns:minmax(0,1.3fr) minmax(280px,.7fr);
+}
+
+}
+
+/* =========================================================
+1000px
+========================================================= */
+
+@media (max-width:1000px) {
+
+.bundle-dashboard .bundle-analytics-grid {
+grid-template-columns:1fr;
+}
+
+.bundle-dashboard .order-summary-card {
+min-height:auto;
+}
+
+.bundle-dashboard .order-summary-list {
+display:grid;
+
+grid-template-columns:
+  repeat(2,minmax(0,1fr));
+
+column-gap:20px;
+
+}
+
+.bundle-dashboard .order-summary-item:nth-child(3) {
+border-bottom:0;
+}
+
+}
+
+/* =========================================================
+600px
+========================================================= */
+
+@media (max-width:600px) {
+
+.bundle-dashboard .revenue-card .admin-card-header {
+align-items:flex-start;
+
+flex-direction:column;
+
+}
+
+.bundle-dashboard .revenue-card .admin-card-header select {
+width:100%;
+}
+
+.bundle-dashboard .revenue-card .admin-chart-wrapper {
+height:245px;
+
+padding:15px 15px 0;
+
+}
+
+.bundle-dashboard .admin-chart-labels {
+padding-left:53px;
+
+padding-right:15px;
+
+}
+
+.bundle-dashboard .order-summary-list {
+grid-template-columns:1fr;
+
+column-gap:0;
+
+}
+
+.bundle-dashboard .order-summary-item:nth-child(3) {
+border-bottom:1px solid var(--admin-border);
+}
+
+}
+
+/* =========================================================
+430px
+========================================================= */
+
+@media (max-width:430px) {
+
+.bundle-dashboard .revenue-card .admin-chart-wrapper {
+height:220px;
+}
+
+.bundle-dashboard .admin-chart-y {
+width:32px;
+
+flex-basis:32px;
+
+padding-right:6px;
+
+font-size:8px;
+
+}
+
+.bundle-dashboard .admin-chart-labels {
+padding-left:47px;
+
+font-size:8px;
+
+}
+
+.bundle-dashboard .order-summary-list {
+padding-left:15px;
+
+padding-right:15px;
+
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+/* =================================
+   BUNDLE ORDER ACTIONS
+================================= */
+
+.bundle-order-actions {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Three dots button */
+
+.bundle-action-button {
+  width: 36px;
+  height: 36px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid #e7e7e7;
+  border-radius: 8px;
+
+  background: #fff;
+  color: #555;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.bundle-action-button i {
+  font-size: 19px;
+}
+
+.bundle-action-button:hover {
+  background: #f6f6f6;
+  border-color: #d8d8d8;
+  color: #111;
+}
+
+.bundle-action-button:active {
+  transform: scale(0.95);
+}
+
+
+/* =================================
+   POPUP MENU
+================================= */
+
+.bundle-action-menu {
+  position: absolute;
+
+  top: calc(100% + 7px);
+  right: 0;
+
+  width: 155px;
+
+  padding: 6px;
+
+  background: #fff;
+
+  border: 1px solid #e8e8e8;
+  border-radius: 10px;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.10);
+
+  z-index: 100;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-5px) scale(0.98);
+
+  transform-origin: top right;
+
+  transition:
+    opacity 0.15s ease,
+    visibility 0.15s ease,
+    transform 0.15s ease;
+}
+
+
+/* Open state */
+
+.bundle-order-actions.active
+.bundle-action-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+
+/* =================================
+   MENU ITEMS
+================================= */
+
+.bundle-action-menu button {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 9px 10px;
+
+  border: 0;
+  border-radius: 7px;
+
+  background: transparent;
+
+  color: #333;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.bundle-action-menu button:hover {
+  background: #f5f5f5;
+  color: #111;
+}
+
+
+/* =================================
+   STATUS DOT
+================================= */
+
+.action-status-dot {
+  width: 7px;
+  height: 7px;
+
+  flex: 0 0 7px;
+
+  border-radius: 50%;
+}
+
+.action-status-dot.pending {
+  background: #d99a00;
+}
+
+.action-status-dot.processing {
+  background: #3478db;
+}
+
+.action-status-dot.delivered {
+  background: #26945b;
+}
+
+.action-status-dot.failed {
+  background: #d84b57;
+}
+
+
+/* =================================
+   ORDER STATUS BADGE
+================================= */
+
+.bundle-order-status {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+
+  min-width: 82px;
+
+  padding: 5px 10px;
+
+  border-radius: 6px;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  text-transform: capitalize;
+
+  overflow: hidden;
+}
+
+
+/* =================================
+   PROCESSING SHIMMER
+================================= */
+
+.bundle-order-status.processing::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    110deg,
+    transparent 25%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 75%
+  );
+
+  background-size: 200% 100%;
+
+  animation: bundleStatusShimmer 2.2s
+    linear infinite;
+
+  pointer-events: none;
+}
+
+
+@keyframes bundleStatusShimmer {
+
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -50% 0;
+  }
+
+}
+
+
+/* =================================
+   PENDING
+================================= */
+
+.bundle-order-status.pending {
+  color: #8a6500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(224, 173, 0, 0.12);
+
+  border: 1px solid rgba(224, 173, 0, 0.18);
+}
+
+
+/* =================================
+   PROCESSING
+================================= */
+
+.bundle-order-status.processing {
+  color: #2767ad;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+
+  background: rgba(52, 120, 219, 0.11);
+
+  border: 1px solid rgba(52, 120, 219, 0.17);
+}
+
+
+/* =================================
+   DELIVERED
+================================= */
+
+.bundle-order-status.delivered {
+  color: #f7f7f7 !important;
+
+  background: rgba(18, 141, 100, 0.575);
+
+  border-radius: 1.2rem;
+  font-size: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(38, 148, 91, 0.349);
+}
+
+
+/* =================================
+   FAILED
+================================= */
+
+.bundle-order-status.failed {
+  color: #b13f4a;
+
+  background: rgba(216, 75, 87, 0.11);
+
+  border: 1px solid rgba(216, 75, 87, 0.17);
+}
+
+
+/**** PAGINATION */
+
+.bundle-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+
+  margin-top: 16px;
+}
+
+@media screen and (max-width: 768px) {
+  .bundle-pagination {
+    justify-content: center !important;
+    margin: 10px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .bundle-pagination {
+    margin: 10px 24px 10px 24px !important;
+  }
+}
+
+.bundle-page-btn {
+  width: 34px;
+  height: 34px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #e5e5e5;
+  border-radius: 7px;
+
+  background: #e7e7e7;
+  color: #555;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.bundle-page-btn:hover:not(:disabled) {
+  background: #f5f5f5;
+  border-color: #d5d5d5;
+  color: #111;
+}
+
+.bundle-page-btn.active {
+  background: #111;
+  border-color: #111;
+  color: #fff;
+}
+
+.bundle-page-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+
+.bundle-page-ellipsis {
+  min-width: 34px;
+  height: 34px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #888;
+
+  font-size: 13px;
+  font-weight: 500;
+}
+
+
+
+
+/* =========================================================
+21. RESPONSIVE — 1250px
+========================================================= */
+
+@media (max-width:1250px) {
+
+.bundle-dashboard .bundle-stats-grid {
+grid-template-columns:repeat(4, minmax(0, 1fr));
+}
+
+.bundle-dashboard .bundle-monitor-grid {
+grid-template-columns:minmax(0, 1fr);
+}
+
+}
+
+/* =========================================================
+22. RESPONSIVE — 1000px
+========================================================= */
+
+@media (max-width:1000px) {
+
+.bundle-dashboard .bundle-stats-grid {
+grid-template-columns:repeat(3, minmax(0, 1fr));
+}
+
+}
+
+/* =========================================================
+23. RESPONSIVE — 800px
+========================================================= */
+
+@media (max-width:800px) {
+
+.bundle-dashboard .bundle-stats-grid {
+grid-template-columns:repeat(2, minmax(0, 1fr));
+}
+
+.bundle-dashboard .bundle-delivery-metrics {
+grid-template-columns:repeat(2, minmax(0, 1fr));
+}
+
+.bundle-dashboard .bundle-chart-wrapper {
+height:300px;
+}
+
+}
+
+/* =========================================================
+24. RESPONSIVE — 600px
+========================================================= */
+
+@media (max-width:600px) {
+
+.bundle-dashboard .bundle-stats-grid {
+grid-template-columns:repeat(2, minmax(0, 1fr));
+gap:10px;
+}
+
+.bundle-dashboard .bundle-stats-grid .admin-stat-card {
+min-height:100px;
+
+gap:10px;
+
+padding:13px 12px;
+
+}
+
+.bundle-dashboard .bundle-stats-grid .admin-stat-icon {
+width:36px;
+height:36px;
+flex-basis:36px;
+
+font-size:16px;
+
+}
+
+.bundle-dashboard .bundle-stats-grid .admin-stat-content strong {
+font-size:17px;
+}
+
+.bundle-dashboard .bundle-stats-grid .admin-stat-content span {
+font-size:9px;
+}
+
+.bundle-dashboard .bundle-stats-grid .admin-stat-content small {
+font-size:8px;
+}
+
+.bundle-dashboard .bundle-delivery-card .admin-management-header,
+.bundle-dashboard .leaderboard-manager .admin-management-header,
+.bundle-dashboard .bundle-chart-card .admin-management-header {
+padding:15px;
+}
+
+.bundle-dashboard .bundle-delivery-body,
+.bundle-dashboard .bundle-manager-body {
+padding:15px;
+}
+
+.bundle-dashboard .bundle-delivery-metrics {
+grid-template-columns:1fr;
+}
+
+.bundle-dashboard .bundle-chart-wrapper {
+height:260px;
+padding:15px;
+}
+
+}
+
+/* =========================================================
+25. RESPONSIVE — 430px
+========================================================= */
+
+@media (max-width:430px) {
+
+.bundle-dashboard .bundle-stats-grid {
+grid-template-columns:1fr;
+}
+
+.bundle-dashboard .bundle-stats-grid .admin-stat-card {
+min-height:88px;
+}
+
+.bundle-dashboard .bundle-stats-grid .admin-stat-content strong {
+font-size:19px;
+}
+
+.bundle-dashboard .bundle-delivery-status {
+padding:13px;
+}
+
+.bundle-dashboard .bundle-chart-card .admin-management-header {
+align-items:flex-start;
+flex-direction:column;
+}
+
+.bundle-dashboard .chart-toggle {
+width:100%;
+}
+
+.bundle-dashboard .chart-toggle button {
+flex:1;
+}
+
+}
+
+/* =========================================================
+26. DARK MODE
+========================================================= */
+
+[data-theme="dark"] .bundle-dashboard .bundle-stats-grid .admin-stat-card,
+[data-theme="dark"] .bundle-dashboard .bundle-delivery-card,
+[data-theme="dark"] .bundle-dashboard .leaderboard-manager,
+[data-theme="dark"] .bundle-dashboard .bundle-chart-card,
+[data-theme="dark"] .bundle-dashboard .bundle-delivery-metric,
+[data-theme="dark"] .bundle-dashboard .bundle-status-icon {
+box-shadow:none;
+}
+
+[data-theme="dark"] .bundle-dashboard .bundle-input-wrap input {
+background:var(--admin-surface-soft);
+}
+
+[data-theme="dark"] .bundle-dashboard .chart-toggle button.active {
+background:var(--admin-surface);
+}
+
+/* =========================================================
+   ORDERS TABLE
+========================================================= */
+
+.bundle-orders-card {
+  overflow: visible;
+}
+
+
+.bundle-orders-table {
+  min-width: 1100px;
+}
+
+
+/* =========================================================
+   TABLE STATUS
+========================================================= */
+
+.bundle-order-status {
+  display: inline-flex;
+  align-items: center;
+
+  min-height: 24px;
+
+  padding: 0 8px;
+
+  border: 1px solid var(--admin-border);
+
+  border-radius: 6px;
+
+  background: var(--admin-surface-soft);
+
+  color: var(--admin-text-secondary);
+
+  font-size: 9px;
+  font-weight: 700;
+
+  text-transform: capitalize;
+}
+
+
+.bundle-order-status.delivered {
+  color: var(--admin-text);
+}
+
+
+.bundle-order-status.pending,
+.bundle-order-status.processing {
+  color: var(--admin-text-secondary);
+}
+
+
+.bundle-order-status.failed {
+  color: var(--admin-text-muted);
+}
+
+
+/* =========================================================
+   PAYMENT STATUS
+========================================================= */
+
+.bundle-paid-status {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 5px;
+
+  color: var(--admin-text-secondary);
+
+  font-size: 10px;
+  font-weight: 650;
+}
+
+
+.bundle-paid-status i {
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.bundle-orders-card .admin-empty-state {
+  padding: 45px 20px;
+}
+
+
+/* =========================================================
+   ADMIN MESSAGE
+========================================================= */
+
+.bundle-admin-message {
+  position: fixed;
+
+  left: 50%;
+  bottom: 24px;
+
+  z-index: 1200;
+
+  min-width: 220px;
+  max-width: calc(100vw - 30px);
+
+  padding: 12px 16px;
+
+  border: 1px solid var(--admin-border);
+  border-radius: 9px;
+
+  background: var(--admin-surface);
+
+  color: var(--admin-text);
+
+  box-shadow: var(--admin-shadow-lg);
+
+  font-size: 11px;
+  font-weight: 600;
+
+  text-align: center;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transform:
+    translate(-50%, 10px);
+
+  transition:
+    opacity .22s ease,
+    visibility .22s ease,
+    transform .22s ease;
+}
+
+
+.bundle-admin-message.show {
+  opacity: 1;
+  visibility: visible;
+
+  transform:
+    translate(-50%, 0);
+}
+
+
+/* =========================================================
+   RESPONSIVE — 1250
+========================================================= */
+
+@media (max-width: 1250px) {
+
+  .bundle-stats-grid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 1000
+========================================================= */
+
+@media (max-width: 1000px) {
+
+  .bundle-monitor-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bundle-stats-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 800
+========================================================= */
+
+@media (max-width: 800px) {
+
+  .bundle-chart-wrapper {
+    height: 300px;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 600
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .bundle-stats-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 10px;
+  }
+
+
+  .bundle-stats-grid .admin-stat-card {
+    min-height: 88px;
+
+    padding: 13px;
+
+    gap: 9px;
+  }
+
+
+  .bundle-stats-grid .admin-stat-icon {
+    width: 36px;
+    height: 36px;
+
+    flex-basis: 36px;
+
+    font-size: 15px;
+  }
+
+
+  .bundle-stats-grid .admin-stat-content strong {
+    font-size: 17px;
+  }
+
+
+  .bundle-stats-grid .admin-stat-content span {
+    font-size: 9px;
+  }
+
+
+  .bundle-stats-grid .admin-stat-content small {
+    font-size: 8px;
+  }
+
+
+  .bundle-delivery-body,
+  .bundle-manager-body {
+    padding: 15px;
+  }
+
+
+  .bundle-delivery-metrics {
+    grid-template-columns: 1fr;
+  }
+
+
+  .bundle-chart-wrapper {
+    height: 270px;
+
+    padding: 14px;
+  }
+
+
+  .chart-toggle button {
+    padding: 0 8px;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 430
+========================================================= */
+
+@media (max-width: 430px) {
+
+  .bundle-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .bundle-stats-grid .admin-stat-card {
+    min-height: 82px;
+  }
+
+
+  .bundle-monitor-grid {
+    gap: 12px;
+  }
+
+
+  .bundle-delivery-status {
+    padding: 12px;
+  }
+
+
+  .bundle-chart-wrapper {
+    height: 240px;
+  }
+
+
+  .chart-toggle button {
+    padding: 0 7px;
+
+    font-size: 9px;
+  }
+
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+[data-theme="dark"] .bundle-stats-grid .admin-stat-card:hover {
+  background: var(--admin-surface-soft);
+}
+
+
+[data-theme="dark"] .bundle-delivery-status {
+  background: var(--admin-surface-soft);
+}
+
+
+[data-theme="dark"] .bundle-input-wrap input {
+  background: var(--admin-surface-soft);
+}
+
+
+[data-theme="dark"] .bundle-input-wrap input:focus {
+  background: var(--admin-surface);
+}
