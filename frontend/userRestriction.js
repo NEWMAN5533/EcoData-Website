@@ -95,19 +95,8 @@ if (userData.isAdmin === true) {
 
 const lapOutBtn = document.getElementById("logOut");
 const logOutBtn = document.getElementById("lapOut");
-const selLogout = document.getElementById("selLogout");
 
-if(selLogout){
-  selLogout.addEventListener("click", async() => {
 
-try{
-  await signOut(auth);
-  } catch(error){
-  console.error("LogOut error", error);
-  showSnackBar("Error logging out.", "warning", 3000);
-}
-});
-}
 
 
 if(logOutBtn){
