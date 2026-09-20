@@ -683,6 +683,51 @@ document.addEventListener("click", (event) => {
 
 
 
+//===================
+// REFRESH 
+//===================
+const refreshBundleDashboard = document.getElementById("refreshBundleDashboard");
+
+if(refreshBundleDashboard){
+  refreshBundleDashboard.addEventListener("click", async ()=> {
+
+    // Prevent double click
+    if(refreshBundleDashboard.dataset.refreshing === "true"){
+      return;
+    }
+
+    refreshBundleDashboard.dataset.refreshing = "true";
+
+    const icon = refreshBundleDashboard.querySelector("i");
+
+    if(icon){
+      icon.classList.add("bundle-refresh-spin");
+    }
+
+    try{
+      // re-render current Firestore data
+      bundleCurrentPage = 1;
+      renderBundleOrders();
+      updateCards(bundleOrders);
+      updateProfitCards(bundleOrders);
+      buildCustomerLeaderboard(bundleOrders);
+      buildRevenueChart(bundleOrders);
+      updateOrderSummary(bundleOrders);
+
+      // Small delay
+      await new Promise(resolve => 
+        setTimeout(resolve, 500)
+      );
+    } finally{
+      if(icon){
+        icon.classList.remove("bundle-refresh-spin");
+      }
+
+      refreshBundleDashboard.dataset.refreshing = "false";
+    }
+  });
+}
+
 
 
 // =========================
