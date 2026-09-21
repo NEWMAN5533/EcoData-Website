@@ -3328,7 +3328,48 @@ padding-right:15px;
 
 
 
+.bundle-refresh-spin{
+  animation: bundleRefreshSpin .7s linear infinite;
+}
 
+@keyframes bundleRefreshSpin {
+  from{
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg);
+  }
+}
+
+
+/* ========================
+REVENUE CHART HOVER
+========================*/
+
+.revenue-hover-line{
+  stroke: currentColor;
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.revenue-hover-dot{
+  fill: currentColor;
+  stroke: #fff;
+  stroke-width: 3;
+  pointer-events: none;
+}
+
+#chartTooltip{
+  pointer-events: none;
+  transition: opacity .15s ease, transform .15s ease;
+}
+
+#chartTooltip.hidden{
+  opacity: 0;
+  visibility: hidden;
+}
 
 
 
@@ -3642,6 +3683,21 @@ background:var(--admin-surface);
   color: var(--admin-text-muted);
 }
 
+
+
+.bundle-order-status.processing i{
+  animation: statusIconSpin 0.7s infinite ;
+}
+
+@keyframes statusIconSpin {
+  from{
+    transform: rotate(0deg);
+  }
+
+  to{
+    transform: rotate(360deg);
+  }
+}
 
 /* =========================================================
    PAYMENT STATUS

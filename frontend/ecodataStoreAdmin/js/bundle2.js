@@ -369,6 +369,7 @@ function createBundleOrderRow(order) {
         <span class="bundle-order-status ${normalizeBundleStatus(status)}">
 
           <span>
+            ${getStatusIcon(order.status)}
             ${escapeHtml(status)}
           </span>
 
@@ -869,6 +870,33 @@ function getOrderStatus(order){
   .toLowerCase()
   .trim();
 }
+
+
+//====================
+// GET STATUS ICON 
+//====================
+function getStatusIcon(status) {
+  switch ((status || "").toLowerCase()) {
+    case "pending":
+      return `<i class="ri-time-line status-icon"></i>`;
+
+    case "processing":
+      return `<i class="ri-refresh-line status-icon spinning"></i>`;
+
+    case "delivered":
+    case "sent":
+      return `<i class="ri-check-double-line status-icon"></i>`;
+
+    case "cancelled":
+      return `<i class="ri-close-circle-line status-icon"></i>`;
+
+    default:
+      return `<i class="ri-information-line status-icon"></i>`;
+  }
+}
+
+
+
 // ==========================================
 // BUILD REVENUE CHART
 // ==========================================
