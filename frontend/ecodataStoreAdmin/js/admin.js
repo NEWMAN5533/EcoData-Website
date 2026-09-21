@@ -78,6 +78,12 @@ sidebarOverlay?.addEventListener(
 );
 
 
+window.addEventListener("click", (e)=> {
+  if(!sidebar.contains(e.target)  &&!sidebarToggle.contains(e.target)){
+    closeSidebar();
+  }
+})
+
 // ==========================================
 // CLOSE SIDEBAR WHEN LINK IS CLICKED
 // ON MOBILE
