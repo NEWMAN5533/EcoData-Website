@@ -1157,6 +1157,11 @@ function buildRevenueChart(orders = []) {
     maxRevenue
   );
 
+  setupRevenueChartHover(
+    chartPoints,
+    maxRevenue
+  )
+
 }
 
 
@@ -1696,6 +1701,273 @@ function updateRevenueTooltip(
 
 
 
+
+//============================
+// SVG HOVER 
+//============================
+function setupRevenueChartHover(points, maxRevenue){
+ const svg = document.querySelector(".revenue-svg");
+
+ const tooltip = document.getElementById("chartTooltip");
+
+ if(!svg || !tooltip || !points.length){
+  return;
+ }
+
+
+ // Remove old hover element
+ svg.querySelectorAll(".revenue-hover-line, .revenue-hover-dot").forEach(element => element.remove());
+
+ const width = 700;
+ const height = 220;
+ const usableWidth = width - 10;
+ const coordinates = points.map((point, index) => {
+
+  const x =
+  points.length === 1
+  ? width / 2
+  : index * (
+    usableWidth / (points.length - 1)
+  );
+
+  const ratio = 
+  point.revenue / maxRevenue;
+
+  const y =
+  height - (ratio * 180 );
+
+  return{
+    x,
+    y,
+    point
+  };
+ }
+);
+
+//================
+// VERTICAL GUIDE LINE
+//======================
+
+const line = 
+document.createElementNS(
+  "http://www.w3.org/2000/svg", 
+  "line"
+);
+
+line.classList.add("revenue-hover-line");
+
+line.setAttribute(
+  "y1",
+  "20"
+);
+
+line.setAttribute(
+  "y2",
+  "240"
+);
+
+line.style.display = "none";
+svg.appendChild(line);
+
+
+
+//===================
+// HOVER DOT
+//===================
+const dot = 
+document.createElementNS(
+  "http://www.w3.org/2000/svg",
+  "circle"
+);
+
+dot.classList.add("revenue-hover-dot");
+
+dot.setAttribute(
+  "r",
+  "5"
+);
+
+dot.style.display = "none";
+svg.appendChild(dot);
+
+
+//=====================
+// HOVER AREA
+//=====================
+let hoverArea = 
+svg.querySelector(".revenue-hover-area");
+
+if(hoverArea){
+  hoverArea.remove();
+}
+
+hoverArea =
+document.createElementNS(
+  "http://www.w3.org/2000/svg",
+  "rect"
+);
+
+hoverArea.classList.add("revenue-hover-area");
+
+hoverArea.setAttribute(
+  "x",
+  "0"
+);
+
+hoverArea.setAttribute(
+  "y",
+  "0"
+);
+
+hoverArea.setAttribute(
+  "width",
+  "700"
+);
+
+hoverArea.setAttribute(
+  "height",
+  "240"
+);
+
+hoverArea.setAttribute(
+  "fill",
+  "transparent"
+);
+
+hoverArea.style.cursor = "crosshair";
+svg.appendChild(hoverArea);
+
+
+
+//===================
+// MOUSE MOVE
+//===================
+hoverArea.addEventListener("mousemove",
+  event => {
+    const rect = 
+    svg.getBoundingClientRect();
+
+    const mouseX = 
+    (event.clientX - rect.left) * (width / rect.width);
+
+    let closest =
+    coordinates[0];
+
+    let smallestDistance = 
+    Math.abs(mouseX - closest.x);
+
+    coordinates.forEach(
+      coordinate => {
+
+        const distance = Math.abs(
+          mouseX - coordinate.x
+        );
+        if(
+          distance < 
+          smallestDistance
+        ){
+          smallestDistance = distance;
+
+          closest = coordinate;
+        }
+      }
+    );
+
+    //===================
+    // UPDATE GUIDE LINE
+    //===================
+    line.setAttribute(
+      "x1",
+      closest.x
+    );
+
+    line.setAttribute(
+      "x2",
+      closest.x
+    );
+
+    line.style.display = "block";
+
+
+    //===================
+    // UPDATE DOT
+    //===================
+    dot.setAttribute(
+      "cx",
+      closest.x
+    );
+
+    dot.setAttribute(
+      "cy",
+      closest.y
+    );
+
+    dot.style.display = "block";
+
+
+    //=================
+    // UPDATE TOOLTIP
+    //=================
+    const revenue = 
+    Number(closest.point.revenue) || 0;
+
+    const date =
+    closest.point.date;
+
+    const strong =
+     tooltip.querySelector("strong");
+
+    const span =
+    tooltip.querySelector("span");
+
+    if(strong){
+      strong.textContent = `GHS${revenue.toLocaleString("en-GH",
+        {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        }
+      )}`;
+    }
+
+    if(span){
+      span.textContent =
+      date.toLocaleDateString("en-US",
+        {
+          month: "long",
+          day: "numeric",
+          year: "numeric"
+        }
+      );
+    }
+
+    //==================
+    // POSITION TOOLTIP
+    //=================
+    const tooltipX =
+    (closest.x / width) * 100;
+
+    tooltip.style.left =
+    `${Math.min(
+      82,
+      Math.max(
+        8,
+        tooltipX
+      )
+    )}%`;
+
+    tooltip.classList.remove("hidden");
+  }
+);
+
+//==========================
+// MOUSE LEAVE
+//==========================
+hoverArea.addEventListener("mouseleave", ()=> {
+  line.style.display = "none";
+  dot.style.display = "none";
+  tooltip.classList.add("hidden");
+});
+}
 
 
 
