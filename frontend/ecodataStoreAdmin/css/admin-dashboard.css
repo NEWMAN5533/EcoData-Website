@@ -3313,7 +3313,7 @@ padding-right:15px;
 
 
 .bundle-order-status.processing i{
-  animation: spinStatusIcon .9s ease linear infinite !important;
+  animation: spinStatusIcon .8s  linear infinite !important;
 }
 
 @keyframes spinStatusIcon {
