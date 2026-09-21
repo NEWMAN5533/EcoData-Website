@@ -225,13 +225,13 @@ function normalizeBundleStatus(value){
 
 
 /* =========================================================
-   ESCAPE HTML
+  ESCAPE HTML
 ========================================================= */
 
 function escapeHtml(value) {
 
   if (value === null || value === undefined) {
-    return "";
+    return "N/A";
   }
 
   return String(value)
@@ -368,9 +368,8 @@ function createBundleOrderRow(order) {
       <td>
 
         <span class="bundle-order-status ${normalizeBundleStatus(status)}">
-
+          ${getStatusIcon(order.status)}
           <span>
-            ${getStatusIcon(order.status)}
             ${escapeHtml(status)}
           </span>
 
@@ -2183,20 +2182,11 @@ items.forEach(
 
     }
 
+  //=======================
+  // SHOW PERCENTAGE
+  //=======================
 
-    /*
-     * Keep a small visible width
-     * when there are orders.
-     */
 
-    if (
-      count > 0 &&
-      percentage < 5
-    ) {
-
-      percentage = 5;
-
-    }
 
 
     bar.style.width =

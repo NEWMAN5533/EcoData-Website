@@ -3228,6 +3228,7 @@ padding-right:15px;
   padding: 5px 10px;
 
   border-radius: 6px;
+  gap: .5rem;
 
   font-size: 12px;
   font-weight: 600;
@@ -3286,7 +3287,8 @@ padding-right:15px;
   display: flex;
   align-items: center;
   justify-content: center;
-
+  border-radius: 1.2rem;
+  font-size: 12px;
   background: #3478db;
 
 }
@@ -3307,6 +3309,21 @@ padding-right:15px;
 
   background: #d99a00;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.13);
+}
+
+
+.bundle-order-status.processing i{
+  animation: spinStatusIcon .9s ease linear infinite !important;
+}
+
+@keyframes spinStatusIcon {
+  from{
+    transform: rotate(0deg);
+  }
+
+  to{
+    transform: rotate(360deg);
+  }
 }
 
 
