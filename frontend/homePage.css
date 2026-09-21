@@ -5,9 +5,21 @@
 }
 
 
+.buy-btn{
+  transition: transform .2s, opacity .2s !important;
+}
+
+
+.buy-btn:hover{
+  transform: translateY(-1px) !important;
+  opacity: .9 !important;
+}
+
+
+
 :root {
   --bg-cl: #FFF;
-  --primary-cl: #fff;
+  --primary-cl: #f5f4f7;
   --secondary-cl: rgb(50, 50, 190);
   --dark-cl: #0a0a0a;
   --ascent-cl: rgb(158, 97, 209);
@@ -1774,7 +1786,54 @@ border: 1px solid rgb(235, 235, 235);
   font-size:.84rem !important;
 }
 
-/*  DELIVERY TIME TRACKER  ENDS */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   :root{
