@@ -21,6 +21,7 @@ import {
   doc,
   query,
   setDoc,
+  deleteDoc,
   addDoc,
   orderBy,
   where,
@@ -427,11 +428,30 @@ function createBundleOrderRow(order) {
 
       <button
         type="button"
+        data-status="cancelled"
+        data-order-id="${escapeHtml(order.firestoreId)}"
+      >
+        <span class="action-status-dot cancelled"></span>
+        Cancelled
+      </button>
+
+      <button
+        type="button"
         data-status="failed"
         data-order-id="${escapeHtml(order.firestoreId)}"
       >
         <span class="action-status-dot failed"></span>
         Failed
+      </button>
+
+      <button
+        type="button"
+        class="delete-order-action"
+        data-action="delete"
+        data-order-id="${escapeHtml(order.firestoreId)}"
+      >
+        <i class="ri-delete-bin-line"></i>
+        Delete Order
       </button>
 
     </div>
@@ -591,6 +611,46 @@ if (bundleRowWrapper) {
 
         return;
       }
+
+
+
+
+      const deleteButton =
+  event.target.closest(
+    ".delete-order-action"
+  );
+
+if (deleteButton) {
+  const orderId =
+    deleteButton.dataset.orderId;
+
+  if (!orderId) return;
+
+  const container =
+    deleteButton.closest(
+      ".bundle-order-actions"
+    );
+
+  if (container) {
+    container.classList.remove("active");
+
+    const button =
+      container.querySelector(
+        ".bundle-action-button"
+      );
+
+    if (button) {
+      button.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+    }
+  }
+
+  deleteOrder(orderId);
+
+  return;
+}
 
 
       // ==========================
@@ -2677,6 +2737,74 @@ function buildCustomerLeaderboard(orders){
 
  return leaderboardCustomers.slice(0,9);
 }
+
+
+
+
+
+
+
+
+
+
+//=============================
+// DELETE ORDER DOC
+//=============================
+
+window.deleteOrder = async function(orderId) {
+
+  if (!orderId) {
+    console.error(
+      "Delete failed: missing Firestore document ID"
+    );
+    return;
+  }
+
+  const confirmed =
+    window.confirm(
+      "Are you sure you want to delete this order?\n\nThis action cannot be undone."
+    );
+
+  if (!confirmed) {
+    return;
+  }
+
+  try {
+
+    const db =
+      window.FIRESTORE;
+
+    if (!db) {
+      throw new Error(
+        "Firestore is not initialized."
+      );
+    }
+
+    const orderRef =
+      doc(
+        db,
+        "orders",
+        orderId
+      );
+
+    await deleteDoc(orderRef);
+
+    console.log(
+      `Order ${orderId} deleted successfully.`
+    );
+
+  } catch (error) {
+
+    console.error(
+      "Failed to delete order:",
+      error
+    );
+
+    alert(
+      "Failed to delete the order. Please try again."
+    );
+  }
+};
 
 
 

@@ -3108,7 +3108,18 @@ padding-right:15px;
   transform: translateY(0) scale(1);
 }
 
+.delete-order-action {
+  color: #c0394b !important;
+  border-top: 1px solid #eeeeee;
+}
 
+.delete-order-action i {
+  font-size: 15px;
+}
+
+.delete-order-action:hover {
+  background: rgba(192, 57, 75, 0.08);
+}
 /* =================================
    MENU ITEMS
 ================================= */
@@ -3171,6 +3182,10 @@ padding-right:15px;
 
 .action-status-dot.delivered {
   background: #26945b;
+}
+
+.action-status-dot.cancelled {
+  background: #242726;
 }
 
 .action-status-dot.failed {
