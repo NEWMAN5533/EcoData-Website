@@ -79,6 +79,7 @@ let bundleCurrentPage = 1;
 
 const BUNDLE_ITEMS_PER_PAGE = 10;
 
+let bundleOrderInitialized = false;
 
 
 // =========================
@@ -826,11 +827,27 @@ async function loadOrderRealTime() {
 
       });
 
+      // Detect newly order
+      if(bundleOrderInitialized){
+        snapshot.docChanges().forEach(change => {
+          if(change.type === "added"){
+            const newOrder = {
+              firestoreId: change.doc.id,
+              ...change.doc.data()
+            };
+            showNewOrderNotification(newOrder);
+          }
+        });
+      }
+
 
       //====================
       // STORE DATABASE ORDERS
       //====================
       bundleOrders = orders;
+
+      // Mark initial database load as complete
+      bundleOrderInitialized = true;
 
       // KEEP CURRENT PAGE IF STILL VALID
 
@@ -2732,6 +2749,156 @@ function buildCustomerLeaderboard(orders){
 
 
 
+//==========================
+// NOTIFICATION SOUND
+//==========================
+function showNewOrderNotification(order){
+  // Remove existing notification
+  const existing = 
+  document.querySelector("new-order-notification");
+
+  if(existing){
+    existing.remove();
+  }
+
+  const orderId = 
+  order.orderId || "New Order";
+
+  const network =
+  order.network
+  ? 
+  String(order.network).toUpperCase()
+  : "-";
+
+  const volume =
+  order.volume !== undefined &&
+  order.volume !== null
+  ? `${order.volume}GB`
+  : "-";
+
+
+  const amount =
+  Number(order.amount) || 0;
+
+  const recipient =
+  order.recipient || "-";
+
+  const notification =
+  document.createElement("div");
+
+  notification.className = "new-order-notification";
+
+  notification.innerHTML = `
+  <div class="new-order-icon">
+  <i class="ri-shopping-bag-3-line"></i>
+  </div>
+
+  <div class="new-order-content">
+    <strong>
+      New Order Received
+    </strong>
+
+    <div class="new-order-details">
+
+      <span>
+      ${escapeHtml(orderId)}
+      </span>
+
+      <span>
+        ${escapeHtml(network)}
+      </span>
+
+      <span>
+        GHS${amount.toFixed(2)}
+      </span>
+
+    </div>
+
+      <small>
+        ${escapeHtml(recipient)}
+      </small>
+  </div>
+
+  <button type="button"
+  class="new-order-close" aria-label="close notification"
+  >
+    <i class="ri-close-line"></i>
+  </button>
+  `;
+
+  document.body.appendChild(notification);
+
+  // Play sound
+  playNewOrderSound();
+
+  // Close button
+  const closeButton = 
+  notification.querySelector(".new-order-close");
+
+  if(closeButton){
+    closeButton.addEventListener("click", ()=> {
+      removeNewOrderNotification(notification);
+    });
+  }
+
+  // Trigger entrance animation
+  requestAnimationFrame(() => {
+    notification.classList.add("show");
+  });
+
+  // remove automatically
+  setTimeout(() => {
+    removeNewOrderNotification(notification);
+  }, 6000);
+}
+
+
+// NOTIFICATION REMOVE FUNCTION
+function removeNewOrderNotification(notification){
+  if(!notification) return;
+
+  notification.classList.remove("show");
+
+  setTimeout(()=> {
+    if(notification.isConnected){
+      notification.remove();
+    }
+  }, 300);
+}
+
+
+// =======================
+// PLAY SOUND WHEN ORDER IS SUCCESSFUL
+// ===========================
+function playNewOrderSound() {
+
+  const audioCtx = new (window.AudioContext ||
+    window.webkitAudioContext)();
+
+  const playTone = (freq, start, duration) => {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+
+    osc.type = "sine";
+    osc.frequency.value = freq;
+
+    gain.gain.setValueAtTime(2.5,
+      audioCtx.currentTime + start);
+      gain.gain.exponentialRampToValueAtTime(0.001,
+        audioCtx.currentTime + start + duration);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start(audioCtx.currentTime + start);
+      osc.stop(audioCtx.currentTime + start + duration);
+  };
+
+  // Three-tone success chime
+  playTone(800, 0, 0.15);
+  playTone(1000, 0.15, 0.15);
+  playTone(1300, 0.30, 0.2);
+}
 
 
 
