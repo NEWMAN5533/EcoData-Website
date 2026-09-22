@@ -3205,7 +3205,7 @@ const monthlyOrders = orders.filter(order => {
   // TIME-BASED
   setDashboardText(
     "todayOrder",
-    totalOrders
+    todayOrders
   )
  
 
