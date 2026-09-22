@@ -458,7 +458,7 @@ h1,h2,h3,strong{
 
 :root.admin-dark {
 
-  --admin-chart-line: #f2f2f2;
+  --admin-chart-line: #000000 !important;
   --admin-chart-area: rgba(242, 242, 242, 0.08);
 
   --admin-chart-grid: #2c2c2c;
@@ -493,7 +493,7 @@ h1,h2,h3,strong{
 
   stroke: var(--admin-chart-grid);
 
-  stroke-width: 1;
+  stroke-width: 2.2;
 
   vector-effect: non-scaling-stroke;
 
@@ -515,7 +515,7 @@ h1,h2,h3,strong{
 
 #reportRevenueLine {
 
-  fill: none;
+  fill: var(--admin-chart-line);
 
   stroke: var(--admin-chart-line);
 
