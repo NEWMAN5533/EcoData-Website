@@ -7,7 +7,7 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Payments | EcoData Admin</title>
+  <title>Data Bundles | EcoData Admin</title>
 
   <!-- Remix Icons -->
   <link
@@ -17,8 +17,35 @@
 
   <!-- Admin Styles -->
   <link rel="stylesheet" href="css/admin.css">
+   <link rel="stylesheet" href="css/admin-dashboard.css">
   <link rel="stylesheet" href="css/admin-pages.css">
-  <link rel="stylesheet" href="css/admin-dashboard.css">
+ 
+
+
+  <!---======THEME SCRIPT=========-->
+<script>
+(function () {
+
+  const savedTheme =
+    localStorage.getItem("ecoDataAdminTheme") || "system";
+
+  const systemDark =
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  const shouldUseDark =
+    savedTheme === "dark" ||
+    (savedTheme === "system" && systemDark);
+
+  document.documentElement.dataset.adminTheme =
+    savedTheme;
+
+  if (shouldUseDark) {
+    document.documentElement.classList.add("admin-dark");
+  }
+
+})();
+</script>
 </head>
 
 <body>
