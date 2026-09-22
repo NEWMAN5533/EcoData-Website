@@ -18,6 +18,35 @@
   <!-- Admin Styles -->
   <link rel="stylesheet" href="css/admin.css">
   <link rel="stylesheet" href="css/admin-pages.css">
+
+
+
+  <!---======THEME SCRIPT=========-->
+<script>
+(function () {
+
+  const savedTheme =
+    localStorage.getItem("ecoDataAdminTheme") || "system";
+
+  const systemDark =
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  const shouldUseDark =
+    savedTheme === "dark" ||
+    (savedTheme === "system" && systemDark);
+
+  document.documentElement.dataset.adminTheme =
+    savedTheme;
+
+  if (shouldUseDark) {
+    document.documentElement.classList.add("admin-dark");
+  }
+
+})();
+</script>
+
+
 </head>
 
 <body>
@@ -1222,7 +1251,27 @@
 
           </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
+
+
+
+
+
+
+
+
 
 
         <div class="admin-settings-actions">
@@ -1375,6 +1424,182 @@
         </div>
 
       </section>
+
+
+      <section class="admin-settings-section">
+
+  <div class="admin-settings-section-header">
+
+    <div>
+
+      <span class="admin-settings-eyebrow">
+        Interface
+      </span>
+
+      <h3>
+        Appearance
+      </h3>
+
+      <p>
+        Customize how the EcoData administrator interface
+        appears on your device.
+      </p>
+
+    </div>
+
+    <div class="admin-settings-section-icon">
+      <i class="ri-contrast-2-line"></i>
+    </div>
+
+  </div>
+
+
+  <!-- Theme -->
+
+  <div class="admin-setting-row">
+
+    <div class="admin-setting-info">
+
+      <div class="admin-setting-icon">
+        <i class="ri-moon-line"></i>
+      </div>
+
+      <div>
+
+        <strong>
+          Theme
+        </strong>
+
+        <small>
+          Choose how the administrator interface
+          should appear.
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <div class="admin-theme-selector">
+
+      <button
+        type="button"
+        class="admin-theme-option"
+        data-theme="light"
+      >
+
+        <i class="ri-sun-line"></i>
+
+        <span>
+          Light
+        </span>
+
+      </button>
+
+
+      <button
+        type="button"
+        class="admin-theme-option"
+        data-theme="dark"
+      >
+
+        <i class="ri-moon-line"></i>
+
+        <span>
+          Dark
+        </span>
+
+      </button>
+
+
+      <button
+        type="button"
+        class="admin-theme-option"
+        data-theme="system"
+      >
+
+        <i class="ri-computer-line"></i>
+
+        <span>
+          System
+        </span>
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- Preview -->
+
+  <div class="admin-theme-preview">
+
+    <div class="admin-theme-preview-top">
+
+      <div>
+
+        <span>
+          Preview
+        </span>
+
+        <strong>
+          Admin workspace
+        </strong>
+
+      </div>
+
+      <div class="admin-theme-preview-dot"></div>
+
+    </div>
+
+
+    <div class="admin-theme-preview-body">
+
+      <div class="admin-theme-preview-sidebar">
+
+        <div class="preview-sidebar-logo"></div>
+
+        <div class="preview-sidebar-line active"></div>
+        <div class="preview-sidebar-line"></div>
+        <div class="preview-sidebar-line"></div>
+        <div class="preview-sidebar-line"></div>
+
+      </div>
+
+
+      <div class="admin-theme-preview-content">
+
+        <div class="preview-content-title"></div>
+
+        <div class="preview-content-subtitle"></div>
+
+
+        <div class="preview-content-cards">
+
+          <div></div>
+          <div></div>
+          <div></div>
+
+        </div>
+
+
+        <div class="preview-content-table">
+
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
 
     </main>
 
@@ -1790,6 +2015,7 @@
        SCRIPT
   ========================== -->
   <script src="js/admin.js"></script>
+  <script src="js/admin-theme.js"></script>
   <script src="js/settings.js"></script>
 
 </body>
