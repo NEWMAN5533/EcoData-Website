@@ -426,11 +426,161 @@ h1,h2,h3,strong{
 
   display: flex;
 
-
+  background: transparent !important;
 
   padding:
     18px 18px 0;
-  background: var(--admin-surface)
+}
+
+
+
+/* =========================================================
+   SVG / CHART THEME VARIABLES
+   ========================================================= */
+
+:root {
+
+  --admin-chart-line: #171717;
+  --admin-chart-area: rgba(23, 23, 23, 0.08);
+
+  --admin-chart-grid: #e9e9e7;
+  --admin-chart-label: #8a8a88;
+
+  --admin-chart-hover-line: #777777;
+  --admin-chart-point: #171717;
+
+  --admin-chart-tooltip-bg: #ffffff;
+  --admin-chart-tooltip-border: #e1e1df;
+  --admin-chart-tooltip-text: #171717;
+
+}
+
+
+:root.admin-dark {
+
+  --admin-chart-line: #f2f2f2;
+  --admin-chart-area: rgba(242, 242, 242, 0.08);
+
+  --admin-chart-grid: #2c2c2c;
+  --admin-chart-label: #8f8f8f;
+
+  --admin-chart-hover-line: #777777;
+  --admin-chart-point: #f2f2f2;
+
+  --admin-chart-tooltip-bg: #202020;
+  --admin-chart-tooltip-border: #383838;
+  --admin-chart-tooltip-text: #f2f2f2;
+
+}
+
+/* =========================================================
+   REVENUE SVG
+   ========================================================= */
+
+.revenue-svg {
+
+  width: 100%;
+  height: 100%;
+
+  overflow: visible;
+
+}
+
+
+/* Chart grid */
+
+.revenue-svg .chart-grid-line {
+
+  stroke: var(--admin-chart-grid);
+
+  stroke-width: 1;
+
+  vector-effect: non-scaling-stroke;
+
+}
+
+
+/* Revenue area */
+
+#reportRevenueArea {
+
+  fill: var(--admin-chart-area);
+
+  stroke: none;
+
+}
+
+
+/* Revenue line */
+
+#reportRevenueLine {
+
+  fill: none;
+
+  stroke: var(--admin-chart-line);
+
+  stroke-width: 2.2;
+
+  stroke-linecap: round;
+
+  stroke-linejoin: round;
+
+  vector-effect: non-scaling-stroke;
+
+}
+
+
+/* Chart labels */
+
+#reportRevenueLabels text {
+
+  fill: var(--admin-chart-label);
+
+  font-size: 10px;
+
+}
+
+
+/* Hover vertical line */
+
+#reportChartHoverLine {
+
+  stroke: var(--admin-chart-hover-line);
+
+  stroke-width: 1;
+
+  stroke-dasharray: 4 4;
+
+  vector-effect: non-scaling-stroke;
+
+}
+
+
+/* Hover point */
+
+#reportChartHoverPoint {
+
+  fill: var(--admin-chart-point);
+
+  stroke: var(--admin-surface);
+
+  stroke-width: 3;
+
+}
+
+
+/* Tooltip */
+
+#reportChartTooltip {
+
+  background: var(--admin-chart-tooltip-bg) ;
+
+  border: 1px solid var(--admin-chart-tooltip-border);
+
+  color: var(--admin-chart-tooltip-text);
+
+  box-shadow: var(--admin-shadow-md);
+
 }
 
 
@@ -470,8 +620,13 @@ h1,h2,h3,strong{
 
   height: 1px;
 
+  stroke: var(--admin-chart-grid);
+
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+
   background:
-    rgba(0,0,0,.055);
+    var(--admin-chart-grid) !important;
 }
 
 
@@ -507,7 +662,7 @@ h1,h2,h3,strong{
 
 .revenue-area {
 
-  fill: url(#revenueGradient);
+  fill: var(--admin-chart-area) !important;
 
 }
 
@@ -516,9 +671,10 @@ h1,h2,h3,strong{
 
   fill: none;
 
-  stroke: #222;
+  stroke:var(--admin-chart-line);
 
-  stroke-width: 2;
+  stroke-width: 2.2;
+  stroke-linejoin: round;
 
   vector-effect: non-scaling-stroke;
 }
@@ -536,11 +692,13 @@ h1,h2,h3,strong{
   display: flex;
   flex-direction: column;
 
-  background:var(--admin-tooltip);
+  background:var(--admin-chart-tooltip-bg) !important;
 
   border-radius: 7px;
 
-  font-size: 9px;
+  border: 1px solid var(--admin-chart-tooltip-border);
+
+  font-size: 10px;
 
   box-shadow:
     0 5px 15px rgba(0,0,0,.15);
@@ -573,7 +731,9 @@ h1,h2,h3,strong{
 
   color: #aaa;
 
-  font-size: 9px;
+  fill: var(--admin-chart-label);
+
+  font-size: 10px;
 }
 
 
