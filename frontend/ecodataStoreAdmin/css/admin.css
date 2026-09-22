@@ -35,7 +35,7 @@
 
   --admin-sidebar-width: 270px;
   --admin-topbar-height: 70px;
-  --admin-tooltip: rgb(17, 128, 107);
+  --admin-tooltip: var(--admin-surface-soft);
 
   --admin-radius: 14px;
   --admin-small-radius: 9px;
@@ -64,6 +64,7 @@
   --admin-surface-hover:#252525;
   --admin-button-bg: #cccccc;
   --admin-button-scd-bg: #b1b1b1;
+  --admin-tooltip: var(--admin-surface-soft);
 
   --admin-border:#2c2c2c;
   --admin-border-strong:#383838;
@@ -73,7 +74,7 @@
   --admin-text-dark: #2c2c2c;
   --admin-text-secondary:#c4c4c4;
   --admin-text-muted:#e4e1e1;
-  --admin-tooltip: rgb(104, 43, 43);
+
 
   --admin-icon:#aaaaaa;
 
@@ -960,12 +961,16 @@ cursor: pointer;
   padding: 0;
 }
 
-html {
+html,
+body {
   scroll-behavior: smooth;
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
 }
 
 body {
-
+  min-height: 100dvh !important;
   font-family:
     Inter,
     -apple-system,
@@ -1346,6 +1351,13 @@ i{
     1px solid var(--admin-border);
 
   backdrop-filter: blur(12px);
+}
+
+@media screen and (max-width: 600px) {
+  .admin-topbar{
+    background: var(--admin-bg) !important;
+    border-bottom: none !important;
+  }
 }
 
 

@@ -30,7 +30,9 @@ h1,h2,h3{
   color: var(--admin-text-white) !important;
 }
 
-
+tr, td, th{
+  color: var(--admin-text-secondary) !important;
+}
 
 
 
@@ -90,21 +92,18 @@ h1,h2,h3{
 
   padding: 0 13px;
 
-  background: #fff;
-
-  border:
-    1px solid rgba(0,0,0,.09);
+  background: var(--admin-surface);
+  border: 1px solid var(--admin-border);
 
   border-radius: 8px;
 
-  color: #444;
+  color:var(--admin-text-secondary);
 
   font-size: 11px;
   font-weight: 600;
 
   transition:
-    background .2s ease,
-    border-color .2s ease,
+ 
     transform .2s ease;
 }
 
@@ -171,10 +170,10 @@ h1,h2,h3{
 
   padding: 15px;
 
-  background: #fff;
+  background: var(--admin-surface-soft);
 
   border:
-    1px solid rgba(0,0,0,.07);
+    1px solid var(--admin-border);
 
   border-radius: 13px;
 }
@@ -193,9 +192,10 @@ h1,h2,h3{
 
   border-radius: 9px;
 
-  background: #f2f2f2;
+  background: var(--admin-surface);
 
-  color: #333;
+  color: var(--admin-text-secondary);
+  border: 1px solid var(--admin-border);;
 
   font-size: 18px;
 }
@@ -232,15 +232,15 @@ h1,h2,h3{
 
   overflow: hidden;
 
-  background: #fff;
+  background: var(--admin-surface);
 
   border:
-    1px solid rgba(0,0,0,.07);
+    1px solid var(--admin-border);
 
   border-radius: 14px;
 
   box-shadow:
-    0 2px 10px rgba(0,0,0,.025);
+    var(--admin-shadow-md);
 }
 
 
@@ -275,14 +275,14 @@ h1,h2,h3{
 
   padding: 0 10px;
 
-  background: #fafafa;
+
 
   border:
     1px solid rgba(0,0,0,.08);
 
   border-radius: 8px;
 
-  color: #999;
+  color: var(--admin-text-muted);
 }
 
 
@@ -300,14 +300,14 @@ h1,h2,h3{
 
   background: transparent;
 
-  color: #222;
+  color: var(--admin-text-secondary);
 
-  font-size: 11px;
+  font-size: 12px;
 }
 
 
 .management-search input::placeholder {
-  color: #aaa;
+  color: var(--admin-text-muted);
 }
 
 
@@ -327,16 +327,16 @@ h1,h2,h3{
 
   padding: 0 9px;
 
-  background: #fafafa;
+  background: var(--admin-surface-soft);
 
   border:
-    1px solid rgba(0,0,0,.08);
+    1px solid var(--admin-border);
 
   border-radius: 8px;
 
   outline: none;
 
-  color: #555;
+  color:var(--admin-text-muted);
 
   font-size: 10px;
 }
@@ -355,6 +355,7 @@ h1,h2,h3{
   justify-content: space-between;
 
   padding: 0 17px;
+  margin: 0 0 18px 0;
 
   border-bottom:
     1px solid rgba(0,0,0,.05);
@@ -373,7 +374,7 @@ h1,h2,h3{
 
   background: transparent;
 
-  color: #777;
+  color: var(--admin-text-secondary);
 
   font-size: 10px;
 }
@@ -412,11 +413,11 @@ h1,h2,h3{
 
   padding: 0 15px;
 
-  background: #fafafa;
+  background: var(--admin-surface-soft);
 
-  color: #999;
+  color: var(--admin-text-muted);
 
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 650;
 
   text-align: left;
@@ -446,9 +447,13 @@ h1,h2,h3{
 
 
 .management-table tbody tr:hover {
-  background: #fcfcfc;
+  background: var(--admin-surface-soft);
 }
 
+
+.management-table tbody tr span{
+  color: var(--admin-text-muted);
+}
 
 .management-table tbody tr:last-child td {
   border-bottom: 0;
@@ -470,7 +475,9 @@ h1,h2,h3{
 }
 
 
-.management-avatar {
+.management-avatar,
+.management-seller-avatar,
+.administrator-avatar{
 
   width: 34px;
   height: 34px;
@@ -483,9 +490,10 @@ h1,h2,h3{
 
   border-radius: 50%;
 
-  background: #ededed;
+  background: var(--admin-surface-hover) !important;
 
-  color: #555;
+  color: var(--admin-text-muted) !important;
+  border: 1px solid var(--admin-border) !important;
 
   font-size: 11px;
   font-weight: 600;
@@ -544,9 +552,9 @@ h1,h2,h3{
 
   border-radius: 20px;
 
-  background: #f1f1f1;
+  background: var(--admin-surface-hover);
 
-  color: #666;
+  color: var(--admin-text-white);
 
   font-size: 8px;
   font-weight: 600;
@@ -570,9 +578,10 @@ h1,h2,h3{
 
   border-radius: 20px;
 
-  background: #f1f1f1;
+  background: var(--admin-surface-soft);
 
-  color: #555;
+
+  border: 1px solid var(--admin-border);
 
   font-size: 8px;
   font-weight: 600;
@@ -591,20 +600,90 @@ h1,h2,h3{
   background: #777;
 }
 
-
-.management-status.active::before {
-  background: #333;
+.management-status.active{
+  color: #037c6c;
 }
 
 
+
+.management-status.status-pending{
+  color: #2a8096 !important;
+  background: var(--admin-surface) !important;
+  border: 1px solid var(--admin-border) !important;
+}
+
+
+.management-status.status-pending::before{
+  background: #2a8096;
+}
+
+
+
+
+.management-status.status-rejected{
+  color: #962a41 !important;
+  background: var(--admin-surface) !important;
+  border: 1px solid var(--admin-border) !important;
+}
+
+
+
+.management-status.status-published{
+  color: #2a9664 !important;
+  background: var(--admin-surface) !important;
+  border: 1px solid var(--admin-border) !important;
+}
+
+
+.management-status.status-hidden{
+  color: #502a96 !important;
+  background: var(--admin-surface) !important;
+  border: 1px solid var(--admin-border) !important;
+}
+
+
+.management-status.status-hidden::before {
+  background: #502a96 !important;
+  
+}
+
+
+.management-status.status-published::before{
+  background: #2a9664 !important;
+}
+
+.management-status.status-rejected::before{
+  background: #7c031d;
+}
+
+
+
+
+.management-status.status-active{
+  color: #037c6c;
+}
+
+
+
+
+.management-status.status-active::before{
+  background: #037c6c;
+}
+.management-status.active::before {
+  background: #037c6c;
+  
+}
+
+
+
+
 .management-status.suspended {
-  background: #e8e8e8;
-  color: #777;
+  color: rgb(153, 52, 52);
 }
 
 
 .management-status.suspended::before {
-  background: #999;
+  background: rgb(153, 52, 52);
 }
 
 
@@ -654,7 +733,7 @@ h1,h2,h3{
 
 .management-pagination > span {
 
-  color: #999;
+  color: var(--admin-text-secondary);
 
   font-size: 9px;
 }
@@ -683,25 +762,24 @@ h1,h2,h3{
 
   border-radius: 6px;
 
-  background: #fff;
+  background: var(--admin-bg);
 
-  color: #777;
+  color: var(--admin-text-muted);
 
-  font-size: 10px;
+  font-size: 12px;
 }
 
 
 .pagination-buttons button:hover {
-  background: #f5f5f5;
+  border: 1px solid var(--admin-border);
+  box-shadow: var(--admin-shadow-md);
 }
 
 
 .pagination-buttons button.active {
 
-  background: #111;
+  background: rgba(0, 128, 79, 0.726);
   color: #fff;
-
-  border-color: #111;
 }
 
 
@@ -1224,19 +1302,6 @@ h1,h2,h3{
 }
 
 
-/* Seller status */
-
-.management-status.status-pending {
-  background: #f5f5f5;
-  color: #555;
-  border-color: #ddd;
-}
-
-.management-status.status-rejected {
-  background: #eeeeee;
-  color: #555;
-  border-color: #d5d5d5;
-}
 
 
 /* Seller table */
@@ -1382,8 +1447,8 @@ h1,h2,h3{
   align-items: center;
   justify-content: center;
 
-  background: #f1f1f1;
-  border: 1px solid #e2e2e2;
+  background: var(--admin-surface-soft);
+  border: 1px solid var(--admin-border);
 
   color: #888;
 
@@ -1437,12 +1502,12 @@ h1,h2,h3{
 
   border-radius: 6px;
 
-  background: #f5f5f5;
-  border: 1px solid #e5e5e5;
+  background: var(--admin-surface-soft);
+  border: 1px solid var(--admin-border);
 
-  color: #555;
+  color: var(--admin-text-muted);
 
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
 }
 
@@ -1647,8 +1712,8 @@ body.dark-mode
 
   border-radius: 9px;
 
-  background: #f2f2f2;
-  border: 1px solid #e3e3e3;
+  background: var(--admin-surface-soft);
+  border: 1px solid var(--admin-border);
 
   color: #555;
 
@@ -1694,8 +1759,8 @@ body.dark-mode
 
   border-radius: 6px;
 
-  background: #f5f5f5;
-  border: 1px solid #e5e5e5;
+  background: transparent;
+  border: 1px solid var(--admin-border);
 
   color: #555;
 
@@ -2567,7 +2632,7 @@ body.dark-mode
    ========================================================= */
 
 .service-amount {
-  color: var(--admin-text);
+  color: var(--admin-text-secondary);
 
   font-size: 12px;
   font-weight: 700;
@@ -3424,72 +3489,6 @@ body.dark-mode
 }
 
 
-/* =========================================================
-   DARK MODE
-   ========================================================= */
-
-[data-theme="dark"] .services-stats-grid .admin-stat-icon.warning {
-  color: #e4c875;
-  background: rgba(150, 112, 25, 0.13);
-  border-color: rgba(220, 180, 72, 0.22);
-}
-
-[data-theme="dark"] .services-stats-grid .admin-stat-icon.info {
-  color: #aebed5;
-  background: rgba(80, 105, 140, 0.14);
-  border-color: rgba(120, 145, 180, 0.22);
-}
-
-[data-theme="dark"] .services-stats-grid .admin-stat-icon.success {
-  color: #8bd3a0;
-  background: rgba(55, 125, 80, 0.14);
-  border-color: rgba(90, 165, 110, 0.22);
-}
-
-
-[data-theme="dark"] .service-payment-paid,
-[data-theme="dark"] .service-status-completed {
-  color: #8bd3a0;
-
-  background: rgba(55, 125, 80, 0.13);
-
-  border-color: rgba(90, 165, 110, 0.23);
-}
-
-
-[data-theme="dark"] .service-payment-pending,
-[data-theme="dark"] .service-status-pending {
-  color: #e5cb7a;
-
-  background: rgba(145, 110, 25, 0.13);
-
-  border-color: rgba(215, 175, 65, 0.22);
-}
-
-
-[data-theme="dark"] .service-payment-failed,
-[data-theme="dark"] .service-status-cancelled {
-  color: #ed9999;
-
-  background: rgba(165, 55, 55, 0.13);
-
-  border-color: rgba(220, 95, 95, 0.22);
-}
-
-
-[data-theme="dark"] .service-payment-refunded {
-  color: #b8b8d8;
-
-  background: rgba(90, 90, 120, 0.13);
-
-  border-color: rgba(130, 130, 165, 0.22);
-}
-
-
-[data-theme="dark"] .service-payment-badge,
-[data-theme="dark"] .service-status-badge {
-  box-shadow: none;
-}
 
 
 /* =========================================================
@@ -6540,90 +6539,6 @@ body.dark-mode
 }
 
 
-/* =========================================================
-   DARK MODE
-   ========================================================= */
-
-[data-theme="dark"] .administrators-stats-grid .admin-stat-icon.warning {
-  color: #e4c875;
-
-  background: rgba(150, 112, 25, 0.13);
-
-  border-color: rgba(220, 180, 72, 0.22);
-}
-
-[data-theme="dark"] .administrators-stats-grid .admin-stat-icon.info {
-  color: #aebed5;
-
-  background: rgba(80, 105, 140, 0.14);
-
-  border-color: rgba(120, 145, 180, 0.22);
-}
-
-[data-theme="dark"] .administrators-stats-grid .admin-stat-icon.success {
-  color: #8bd3a0;
-
-  background: rgba(55, 125, 80, 0.14);
-
-  border-color: rgba(90, 165, 110, 0.22);
-}
-
-[data-theme="dark"] .administrators-stats-grid .admin-stat-icon.danger {
-  color: #ed9999;
-
-  background: rgba(165, 55, 55, 0.13);
-
-  border-color: rgba(220, 95, 95, 0.22);
-}
-
-[data-theme="dark"] .administrator-role-super {
-  color: #e5d38a;
-
-  background: rgba(150, 125, 30, 0.13);
-
-  border-color: rgba(210, 180, 70, 0.22);
-}
-
-[data-theme="dark"] .administrator-role-admin {
-  color: #aebed5;
-
-  background: rgba(80, 105, 140, 0.14);
-
-  border-color: rgba(120, 145, 180, 0.22);
-}
-
-[data-theme="dark"] .administrator-role-moderator {
-  color: #b8b8d8;
-
-  background: rgba(90, 90, 120, 0.13);
-
-  border-color: rgba(130, 130, 165, 0.22);
-}
-
-[data-theme="dark"] .administrator-role-support {
-  color: #8bd3a0;
-
-  background: rgba(55, 125, 80, 0.13);
-
-  border-color: rgba(90, 165, 110, 0.23);
-}
-
-[data-theme="dark"] .administrator-status-active {
-  color: #8bd3a0;
-
-  background: rgba(55, 125, 80, 0.13);
-
-  border-color: rgba(90, 165, 110, 0.23);
-}
-
-[data-theme="dark"] .administrator-status-suspended {
-  color: #e5cb7a;
-
-  background: rgba(145, 110, 25, 0.13);
-
-  border-color: rgba(215, 175, 65, 0.22);
-}
-
 
 /* =========================================================
    LARGE TABLET
@@ -7833,12 +7748,12 @@ body.dark-mode
 
   padding: 10px 11px;
 
-  border: 1px solid #ddd;
+  border: 1px solid var(--admin-border);
   border-radius: 8px;
   outline: none;
 
-  background: #fff;
-  color: #222;
+  background: var(--admin-surface-soft);
+  color: var(--admin-text-muted);
 
   font-family: inherit;
   font-size: 11px;
@@ -7847,7 +7762,7 @@ body.dark-mode
 .categories-page .category-form-group input:focus,
 .categories-page .category-form-group select:focus,
 .categories-page .category-form-group textarea:focus {
-  border-color: #aaa;
+  border-color: var(--admin-border);
 }
 
 .categories-page .category-form-group textarea {
@@ -7856,7 +7771,7 @@ body.dark-mode
 }
 
 .categories-page .category-form-group small {
-  color: #999;
+  color: var(--admin-text-secondary);
   font-size: 9px;
 }
 
@@ -7895,10 +7810,10 @@ body.dark-mode
   padding: 25px;
   box-sizing: border-box;
 
-  border: 1px solid #ddd;
+  border: 1px solid var(--admin-border);
   border-radius: 14px;
 
-  background: #fff;
+  background: var(--admin-surface);
 
   box-shadow:
     0 15px 40px rgba(0, 0, 0, .15);
