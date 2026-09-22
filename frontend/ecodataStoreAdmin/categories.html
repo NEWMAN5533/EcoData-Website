@@ -367,9 +367,607 @@
 
     <!-- =========================
          PAGE CONTENT
-  
+   ==========================--->
 
     
+
+
+
+
+
+
+<div class="admin-page-content categories-page">
+
+  <!-- =========================
+       PAGE HEADER
+  ========================== -->
+  <div class="admin-page-header">
+
+    <div>
+      <div class="admin-page-eyebrow">
+        <i class="ri-price-tag-3-line"></i>
+        Marketplace
+      </div>
+
+      <h1>Categories</h1>
+
+      <p>
+        Organize marketplace products and services into clear,
+        manageable categories across your EcoData Store.
+      </p>
+    </div>
+
+    <div class="admin-page-header-actions">
+
+      <button
+        type="button"
+        class="admin-secondary-button"
+        id="refreshCategories"
+      >
+        <i class="ri-refresh-line"></i>
+        Refresh
+      </button>
+
+      <button
+        type="button"
+        class="admin-secondary-button"
+        id="exportCategories"
+      >
+        <i class="ri-download-2-line"></i>
+        Export
+      </button>
+
+      <button
+        type="button"
+        class="admin-primary-button"
+        id="addCategoryButton"
+      >
+        <i class="ri-add-line"></i>
+        Add Category
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       STATISTICS
+  ========================== -->
+  <div class="admin-stats-grid categories-stats-grid">
+
+    <div class="admin-stat-card">
+
+      <div class="admin-stat-icon">
+        <i class="ri-price-tag-3-line"></i>
+      </div>
+
+      <div class="admin-stat-content">
+        <span>Total Categories</span>
+        <strong id="totalCategories">0</strong>
+        <small>All marketplace categories</small>
+      </div>
+
+    </div>
+
+
+    <div class="admin-stat-card">
+
+      <div class="admin-stat-icon">
+        <i class="ri-checkbox-circle-line"></i>
+      </div>
+
+      <div class="admin-stat-content">
+        <span>Active Categories</span>
+        <strong id="activeCategories">0</strong>
+        <small>Currently visible</small>
+      </div>
+
+    </div>
+
+
+    <div class="admin-stat-card">
+
+      <div class="admin-stat-icon">
+        <i class="ri-eye-off-line"></i>
+      </div>
+
+      <div class="admin-stat-content">
+        <span>Hidden Categories</span>
+        <strong id="hiddenCategories">0</strong>
+        <small>Not visible to users</small>
+      </div>
+
+    </div>
+
+
+    <div class="admin-stat-card">
+
+      <div class="admin-stat-icon">
+        <i class="ri-shopping-bag-3-line"></i>
+      </div>
+
+      <div class="admin-stat-content">
+        <span>Total Products</span>
+        <strong id="categoryProducts">0</strong>
+        <small>Products across categories</small>
+      </div>
+
+    </div>
+
+
+    <div class="admin-stat-card">
+
+      <div class="admin-stat-icon">
+        <i class="ri-bar-chart-box-line"></i>
+      </div>
+
+      <div class="admin-stat-content">
+        <span>Average Products</span>
+        <strong id="averageProducts">0</strong>
+        <small>Products per category</small>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       CATEGORY MANAGEMENT
+  ========================== -->
+  <div class="admin-management-card categories-management-card">
+
+    <div class="admin-management-header">
+
+      <div>
+        <h2>Category Management</h2>
+
+        <span
+          class="admin-result-count"
+          id="categoryResultCount"
+        >
+          0 categories
+        </span>
+      </div>
+
+    </div>
+
+
+    <!-- FILTER BAR -->
+    <div class="admin-filter-bar categories-filter-bar">
+
+      <div class="admin-filter-search">
+
+        <i class="ri-search-line"></i>
+
+        <input
+          type="search"
+          id="categorySearch"
+          placeholder="Search categories..."
+          autocomplete="off"
+        />
+
+      </div>
+
+
+      <select id="categoryTypeFilter">
+
+        <option value="all">All Types</option>
+        <option value="physical">Physical</option>
+        <option value="digital">Digital</option>
+        <option value="service">Services</option>
+
+      </select>
+
+
+      <select id="categoryStatusFilter">
+
+        <option value="all">All Status</option>
+        <option value="active">Active</option>
+        <option value="hidden">Hidden</option>
+
+      </select>
+
+
+      <button
+        type="button"
+        class="admin-clear-filters"
+        id="clearCategoryFilters"
+      >
+        <i class="ri-filter-off-line"></i>
+        Clear
+      </button>
+
+    </div>
+
+
+    <!-- TABLE -->
+    <div class="admin-table-wrapper">
+
+      <table class="admin-data-table categories-table">
+
+        <thead>
+
+          <tr>
+
+            <th>Category</th>
+            <th>Type</th>
+            <th>Products</th>
+            <th>Status</th>
+            <th>Created</th>
+            <th>Updated</th>
+            <th>Action</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody id="categoryTableBody">
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <!-- PAGINATION -->
+    <div class="admin-pagination categories-pagination">
+
+      <span id="categoryPaginationInfo">
+        Showing 0 of 0
+      </span>
+
+      <div id="categoryPagination">
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       CATEGORY DRAWER
+  ========================== -->
+  <div
+    class="admin-drawer-overlay"
+    id="categoryDrawer"
+  >
+
+    <aside class="admin-drawer">
+
+      <div class="admin-drawer-header">
+
+        <div>
+
+          <span class="admin-page-eyebrow">
+            Category
+          </span>
+
+          <h3 id="categoryDrawerTitle">
+            Category Details
+          </h3>
+
+        </div>
+
+        <button
+          type="button"
+          class="admin-drawer-close"
+          id="closeCategoryDrawer"
+          aria-label="Close"
+        >
+          <i class="ri-close-line"></i>
+        </button>
+
+      </div>
+
+
+      <div class="admin-drawer-body">
+
+        <!-- VIEW DETAILS -->
+        <div id="categoryDetailsView">
+
+          <div class="category-detail-hero">
+
+            <div
+              class="category-detail-icon"
+              id="categoryDetailIcon"
+            >
+              <i class="ri-price-tag-3-line"></i>
+            </div>
+
+            <div>
+
+              <h4 id="categoryDetailName">
+                Category Name
+              </h4>
+
+              <span id="categoryDetailSlug">
+                category-slug
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="admin-drawer-section-title">
+            Category Information
+          </div>
+
+          <div class="admin-detail-list">
+
+            <div class="admin-detail-row">
+              <span>Category ID</span>
+              <strong id="categoryDetailId">—</strong>
+            </div>
+
+            <div class="admin-detail-row">
+              <span>Type</span>
+              <strong id="categoryDetailType">—</strong>
+            </div>
+
+            <div class="admin-detail-row">
+              <span>Products</span>
+              <strong id="categoryDetailProducts">—</strong>
+            </div>
+
+            <div class="admin-detail-row">
+              <span>Status</span>
+              <strong id="categoryDetailStatus">—</strong>
+            </div>
+
+            <div class="admin-detail-row">
+              <span>Created</span>
+              <strong id="categoryDetailCreated">—</strong>
+            </div>
+
+            <div class="admin-detail-row">
+              <span>Updated</span>
+              <strong id="categoryDetailUpdated">—</strong>
+            </div>
+
+          </div>
+
+
+          <div class="admin-drawer-section-title">
+            Description
+          </div>
+
+          <p
+            class="category-detail-description"
+            id="categoryDetailDescription"
+          >
+            —
+          </p>
+
+        </div>
+
+
+        <!-- EDIT FORM -->
+        <form
+          id="categoryForm"
+          class="category-form"
+          hidden
+        >
+
+          <div class="category-form-group">
+
+            <label for="categoryNameInput">
+              Category Name
+            </label>
+
+            <input
+              type="text"
+              id="categoryNameInput"
+              placeholder="e.g. Fashion"
+              required
+            />
+
+          </div>
+
+
+          <div class="category-form-row">
+
+            <div class="category-form-group">
+
+              <label for="categoryTypeInput">
+                Type
+              </label>
+
+              <select id="categoryTypeInput" required>
+
+                <option value="physical">
+                  Physical
+                </option>
+
+                <option value="digital">
+                  Digital
+                </option>
+
+                <option value="service">
+                  Service
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="category-form-group">
+
+              <label for="categoryStatusInput">
+                Status
+              </label>
+
+              <select id="categoryStatusInput" required>
+
+                <option value="active">
+                  Active
+                </option>
+
+                <option value="hidden">
+                  Hidden
+                </option>
+
+              </select>
+
+            </div>
+
+          </div>
+
+
+          <div class="category-form-group">
+
+            <label for="categoryDescriptionInput">
+              Description
+            </label>
+
+            <textarea
+              id="categoryDescriptionInput"
+              rows="4"
+              placeholder="Describe this category..."
+            ></textarea>
+
+          </div>
+
+
+          <div class="category-form-group">
+
+            <label for="categoryIconInput">
+              Icon
+            </label>
+
+            <input
+              type="text"
+              id="categoryIconInput"
+              placeholder="ri-shirt-line"
+            />
+
+            <small>
+              Use a Remix Icon class name.
+            </small>
+
+          </div>
+
+        </form>
+
+      </div>
+
+
+      <div class="admin-drawer-footer">
+
+        <button
+          type="button"
+          class="admin-secondary-button"
+          id="closeCategoryDrawerButton"
+        >
+          Close
+        </button>
+
+        <button
+          type="button"
+          class="admin-primary-button"
+          id="editCategoryButton"
+        >
+          <i class="ri-edit-line"></i>
+          Edit Category
+        </button>
+
+        <button
+          type="button"
+          class="admin-primary-button"
+          id="saveCategoryButton"
+          hidden
+        >
+          <i class="ri-save-line"></i>
+          Save Category
+        </button>
+
+      </div>
+
+    </aside>
+
+  </div>
+
+
+  <!-- =========================
+       DELETE CONFIRMATION
+  ========================== -->
+  <div
+    class="category-confirm-overlay"
+    id="categoryConfirm"
+  >
+
+    <div class="category-confirm-card">
+
+      <div class="category-confirm-icon">
+        <i class="ri-delete-bin-6-line"></i>
+      </div>
+
+      <h3>Delete Category?</h3>
+
+      <p>
+        This will permanently remove
+        <strong id="deleteCategoryName">this category</strong>
+        from the demo data.
+      </p>
+
+      <div class="category-confirm-actions">
+
+        <button
+          type="button"
+          class="admin-secondary-button"
+          id="cancelCategoryDelete"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="button"
+          class="category-delete-button"
+          id="confirmCategoryDelete"
+        >
+          <i class="ri-delete-bin-6-line"></i>
+          Delete
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       MESSAGE
+  ========================== -->
+  <div
+    class="admin-snackbar"
+    id="categoriesMessage"
+  >
+    <i class="ri-checkbox-circle-line"></i>
+    <span></span>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   </main>
 
@@ -713,7 +1311,7 @@
        SCRIPT
   ========================== -->
   <script src="js/admin.js"></script>
-  <script src="js/withdrawals.js"></script>
+  <script src="js/categories.js"></script>
 
 </body>
 </html>

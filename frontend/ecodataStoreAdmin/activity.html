@@ -365,9 +365,613 @@
 
     <!-- =========================
          PAGE CONTENT
-  
+   ==========================----->
 
     
+
+
+
+<!-- ==========================================
+     ADMINISTRATOR ACTIVITY LOG
+========================================== -->
+
+<div class="admin-page-content activity-log-page">
+
+  <!-- ==========================================
+       PAGE HEADER
+  =========================================== -->
+
+  <div class="admin-page-header">
+
+    <div>
+
+      <div class="admin-page-eyebrow">
+        <i class="ri-history-line"></i>
+        Security & Audit
+      </div>
+
+      <h1>Activity Log</h1>
+
+      <p>
+        Track administrator actions, system changes and important
+        activity across your EcoData dashboard.
+      </p>
+
+    </div>
+
+
+    <div class="admin-page-header-actions">
+
+      <button
+        type="button"
+        class="activity-header-button"
+        id="refreshActivityLog"
+      >
+        <i class="ri-refresh-line"></i>
+        Refresh
+      </button>
+
+      <button
+        type="button"
+        class="activity-header-button"
+        id="exportActivityLog"
+      >
+        <i class="ri-download-2-line"></i>
+        Export
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ==========================================
+       STATS
+  =========================================== -->
+
+  <div class="admin-stats-grid activity-stats-grid">
+
+    <!-- TOTAL -->
+    <div class="admin-stat-card">
+
+      <div class="admin-stat-icon">
+        <i class="ri-history-line"></i>
+      </div>
+
+      <div class="admin-stat-content">
+
+        <span>Total Activities</span>
+
+        <strong id="totalActivities">
+          0
+        </strong>
+
+        <small>
+          Recorded administrator actions
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <!-- TODAY -->
+    <div class="admin-stat-card">
+
+      <div class="admin-stat-icon">
+        <i class="ri-calendar-check-line"></i>
+      </div>
+
+      <div class="admin-stat-content">
+
+        <span>Today's Activity</span>
+
+        <strong id="todayActivities">
+          0
+        </strong>
+
+        <small>
+          Actions recorded today
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <!-- ADMIN ACTIONS -->
+    <div class="admin-stat-card">
+
+      <div class="admin-stat-icon">
+        <i class="ri-admin-line"></i>
+      </div>
+
+      <div class="admin-stat-content">
+
+        <span>Admin Actions</span>
+
+        <strong id="adminActivities">
+          0
+        </strong>
+
+        <small>
+          Manual administrator actions
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <!-- SYSTEM -->
+    <div class="admin-stat-card">
+
+      <div class="admin-stat-icon">
+        <i class="ri-settings-3-line"></i>
+      </div>
+
+      <div class="admin-stat-content">
+
+        <span>System Events</span>
+
+        <strong id="systemActivities">
+          0
+        </strong>
+
+        <small>
+          Automated system activity
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <!-- SECURITY -->
+    <div class="admin-stat-card">
+
+      <div class="admin-stat-icon">
+        <i class="ri-shield-check-line"></i>
+      </div>
+
+      <div class="admin-stat-content">
+
+        <span>Security Events</span>
+
+        <strong id="securityActivities">
+          0
+        </strong>
+
+        <small>
+          Login and security activity
+        </small>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ==========================================
+       ACTIVITY MANAGEMENT CARD
+  =========================================== -->
+
+  <div class="admin-management-card activity-management-card">
+
+    <!-- HEADER -->
+
+    <div class="admin-management-header">
+
+      <div>
+
+        <h2>
+          Administrator Activity
+        </h2>
+
+        <span
+          class="admin-result-count"
+          id="activityResultCount"
+        >
+          Showing 0 activities
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         FILTER BAR
+    =========================================== -->
+
+    <div class="admin-filter-bar activity-filter-bar">
+
+      <!-- SEARCH -->
+
+      <div class="admin-filter-search">
+
+        <i class="ri-search-line"></i>
+
+        <input
+          type="search"
+          id="activitySearch"
+          placeholder="Search activity..."
+          autocomplete="off"
+        >
+
+      </div>
+
+
+      <!-- ACTION TYPE -->
+
+      <select id="activityTypeFilter">
+
+        <option value="all">
+          All activity
+        </option>
+
+        <option value="order">
+          Orders
+        </option>
+
+        <option value="payment">
+          Payments
+        </option>
+
+        <option value="user">
+          Users
+        </option>
+
+        <option value="marketplace">
+          Marketplace
+        </option>
+
+        <option value="settings">
+          Settings
+        </option>
+
+        <option value="security">
+          Security
+        </option>
+
+        <option value="system">
+          System
+        </option>
+
+      </select>
+
+
+      <!-- ACTOR -->
+
+      <select id="activityActorFilter">
+
+        <option value="all">
+          All actors
+        </option>
+
+        <option value="admin">
+          Administrator
+        </option>
+
+        <option value="system">
+          System
+        </option>
+
+      </select>
+
+
+      <!-- ACTION -->
+
+      <select id="activityActionFilter">
+
+        <option value="all">
+          All actions
+        </option>
+
+        <option value="created">
+          Created
+        </option>
+
+        <option value="updated">
+          Updated
+        </option>
+
+        <option value="deleted">
+          Deleted
+        </option>
+
+        <option value="viewed">
+          Viewed
+        </option>
+
+        <option value="login">
+          Login
+        </option>
+
+        <option value="logout">
+          Logout
+        </option>
+
+        <option value="approved">
+          Approved
+        </option>
+
+        <option value="failed">
+          Failed
+        </option>
+
+      </select>
+
+
+      <!-- CLEAR -->
+
+      <button
+        type="button"
+        class="admin-clear-filters"
+        id="clearActivityFilters"
+      >
+        <i class="ri-filter-off-line"></i>
+        Clear
+      </button>
+
+    </div>
+
+
+    <!-- ==========================================
+         TABLE
+    =========================================== -->
+
+    <div class="admin-table-wrapper">
+
+      <table class="admin-data-table activity-table">
+
+        <thead>
+
+          <tr>
+
+            <th>Activity</th>
+
+            <th>Actor</th>
+
+            <th>Action</th>
+
+            <th>Target</th>
+
+            <th>Date & Time</th>
+
+            <th>Action</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody id="activityTableBody">
+          <!-- Demo activities inserted by JS -->
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <!-- ==========================================
+         PAGINATION
+    =========================================== -->
+
+    <div class="admin-pagination">
+
+      <span
+        class="admin-pagination-info"
+        id="activityPaginationInfo"
+      >
+        Showing 0 of 0
+      </span>
+
+      <div id="activityPagination"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ==========================================
+       ACTIVITY DETAIL DRAWER
+  =========================================== -->
+
+  <div
+    class="admin-drawer-overlay"
+    id="activityDrawer"
+    aria-hidden="true"
+  >
+
+    <aside class="admin-drawer">
+
+      <!-- HEADER -->
+
+      <div class="admin-drawer-header">
+
+        <div>
+
+          <span class="admin-drawer-eyebrow">
+            Audit Record
+          </span>
+
+          <h2>
+            Activity Details
+          </h2>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="admin-drawer-close"
+          id="closeActivityDrawer"
+          aria-label="Close activity details"
+        >
+          <i class="ri-close-line"></i>
+        </button>
+
+      </div>
+
+
+      <!-- BODY -->
+
+      <div class="admin-drawer-body">
+
+        <div
+          class="activity-detail-icon"
+          id="activityDetailIcon"
+        >
+          <i class="ri-history-line"></i>
+        </div>
+
+
+        <h3 id="activityDetailTitle">
+          Activity title
+        </h3>
+
+
+        <p
+          class="activity-detail-description"
+          id="activityDetailDescription"
+        >
+          Activity description.
+        </p>
+
+
+        <!-- DETAILS -->
+
+        <div class="admin-detail-list">
+
+          <div class="admin-detail-row">
+
+            <span>Activity ID</span>
+
+            <strong id="activityDetailId">
+              —
+            </strong>
+
+          </div>
+
+
+          <div class="admin-detail-row">
+
+            <span>Actor</span>
+
+            <strong id="activityDetailActor">
+              —
+            </strong>
+
+          </div>
+
+
+          <div class="admin-detail-row">
+
+            <span>Action</span>
+
+            <strong id="activityDetailAction">
+              —
+            </strong>
+
+          </div>
+
+
+          <div class="admin-detail-row">
+
+            <span>Category</span>
+
+            <strong id="activityDetailType">
+              —
+            </strong>
+
+          </div>
+
+
+          <div class="admin-detail-row">
+
+            <span>Target</span>
+
+            <strong id="activityDetailTarget">
+              —
+            </strong>
+
+          </div>
+
+
+          <div class="admin-detail-row">
+
+            <span>Date & Time</span>
+
+            <strong id="activityDetailDate">
+              —
+            </strong>
+
+          </div>
+
+
+          <div class="admin-detail-row">
+
+            <span>IP Address</span>
+
+            <strong id="activityDetailIP">
+              —
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- FOOTER -->
+
+      <div class="admin-drawer-footer">
+
+        <button
+          type="button"
+          class="admin-drawer-primary-button"
+          id="closeActivityDrawerButton"
+        >
+          Close
+        </button>
+
+      </div>
+
+    </aside>
+
+  </div>
+
+
+  <!-- SNACKBAR -->
+
+  <div
+    class="admin-snackbar"
+    id="activityMessage"
+    aria-live="polite"
+  ></div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   </main>
 
@@ -711,7 +1315,7 @@
        SCRIPT
   ========================== -->
   <script src="js/admin.js"></script>
-  <script src="js/withdrawals.js"></script>
+  <script src="js/activities.js"></script>
 
 </body>
 </html>

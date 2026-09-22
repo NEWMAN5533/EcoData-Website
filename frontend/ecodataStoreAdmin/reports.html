@@ -365,14 +365,865 @@
 
     <!-- =========================
          PAGE CONTENT
-  
+     ==========================--->
+
+     <!-- ==========================================
+     ADMIN REPORTS & ANALYTICS
+========================================== -->
+
+<div class="admin-page-content reports-page">
+
+  <!-- ========================================
+       PAGE HEADER
+  ========================================= -->
+  <div class="admin-page-header">
+
+    <div>
+      <span class="admin-page-eyebrow">
+        Analytics
+      </span>
+
+      <h1>Reports & Analytics</h1>
+
+      <p>
+        Monitor revenue, orders, users, sellers and marketplace
+        performance from one place.
+      </p>
+    </div>
+
+    <div class="admin-page-header-actions">
+
+      <button
+        type="button"
+        class="admin-secondary-button"
+        id="refreshReports"
+      >
+        <i class="ri-refresh-line"></i>
+        <span>Refresh</span>
+      </button>
+
+      <button
+        type="button"
+        class="admin-primary-button"
+        id="exportReports"
+      >
+        <i class="ri-download-2-line"></i>
+        <span>Export</span>
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================================
+       REPORT PERIOD
+  ========================================= -->
+  <div class="reports-period-bar">
+
+    <div class="reports-period-info">
+      <span>Report period</span>
+      <strong id="reportPeriodLabel">
+        Last 30 days
+      </strong>
+    </div>
+
+    <div class="reports-period-buttons">
+
+      <button
+        type="button"
+        class="report-period-button"
+        data-period="7"
+      >
+        7 Days
+      </button>
+
+      <button
+        type="button"
+        class="report-period-button active"
+        data-period="30"
+      >
+        30 Days
+      </button>
+
+      <button
+        type="button"
+        class="report-period-button"
+        data-period="90"
+      >
+        3 Months
+      </button>
+
+      <button
+        type="button"
+        class="report-period-button"
+        data-period="365"
+      >
+        This Year
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================================
+       KPI STATS
+  ========================================= -->
+  <div class="admin-stats-grid reports-stats-grid">
+
+    <!-- REVENUE -->
+    <div class="admin-stat-card">
+
+      <div class="admin-stat-icon">
+        <i class="ri-money-dollar-circle-line"></i>
+      </div>
+
+      <div class="admin-stat-content">
+
+        <span>Revenue</span>
+
+        <strong id="reportRevenue">
+          GH₵0.00
+        </strong>
+
+        <small
+          id="reportRevenueChange"
+          class="report-stat-change"
+        >
+          —
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <!-- ORDERS -->
+    <div class="admin-stat-card">
+
+      <div class="admin-stat-icon">
+        <i class="ri-shopping-bag-3-line"></i>
+      </div>
+
+      <div class="admin-stat-content">
+
+        <span>Orders</span>
+
+        <strong id="reportOrders">
+          0
+        </strong>
+
+        <small
+          id="reportOrdersChange"
+          class="report-stat-change"
+        >
+          —
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <!-- USERS -->
+    <div class="admin-stat-card">
+
+      <div class="admin-stat-icon">
+        <i class="ri-user-3-line"></i>
+      </div>
+
+      <div class="admin-stat-content">
+
+        <span>Users</span>
+
+        <strong id="reportUsers">
+          0
+        </strong>
+
+        <small
+          id="reportUsersChange"
+          class="report-stat-change"
+        >
+          —
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <!-- SELLERS -->
+    <div class="admin-stat-card">
+
+      <div class="admin-stat-icon">
+        <i class="ri-store-2-line"></i>
+      </div>
+
+      <div class="admin-stat-content">
+
+        <span>Sellers</span>
+
+        <strong id="reportSellers">
+          0
+        </strong>
+
+        <small
+          id="reportSellersChange"
+          class="report-stat-change"
+        >
+          —
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <!-- AVERAGE ORDER -->
+    <div class="admin-stat-card">
+
+      <div class="admin-stat-icon">
+        <i class="ri-bar-chart-box-line"></i>
+      </div>
+
+      <div class="admin-stat-content">
+
+        <span>Average Order</span>
+
+        <strong id="reportAverageOrder">
+          GH₵0.00
+        </strong>
+
+        <small>
+          Per completed order
+        </small>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================================
+       REVENUE + ORDERS
+  ========================================= -->
+  <div class="reports-main-grid">
+
+
+    <!-- ======================================
+         REVENUE OVERVIEW
+    ====================================== -->
+    <div class="admin-dashboard-card revenue-card">
+
+      <div class="admin-card-header">
+
+        <div>
+
+          <h2>Revenue Overview</h2>
+
+          <p>
+            Revenue performance over the selected period
+          </p>
+
+        </div>
+
+        <select id="revenueChartPeriod">
+
+          <option value="7">
+            Last 7 days
+          </option>
+
+          <option
+            value="30"
+            selected
+          >
+            Last 30 days
+          </option>
+
+          <option value="90">
+            Last 3 months
+          </option>
+
+          <option value="365">
+            This year
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="admin-chart-wrapper">
+
+        <div class="admin-chart-y">
+
+          <span>40k</span>
+          <span>30k</span>
+          <span>20k</span>
+          <span>10k</span>
+          <span>0</span>
+
+        </div>
+
+
+        <div class="admin-chart">
+
+          <div class="chart-grid-line line-1"></div>
+          <div class="chart-grid-line line-2"></div>
+          <div class="chart-grid-line line-3"></div>
+          <div class="chart-grid-line line-4"></div>
+
+
+          <svg
+            viewBox="0 0 700 240"
+            preserveAspectRatio="none"
+            class="revenue-svg"
+          >
+
+            <defs>
+
+              <linearGradient
+                id="reportRevenueGradient"
+                x1="0"
+                y1="0"
+                x2="0"
+                y2="1"
+              >
+
+                <stop
+                  offset="0%"
+                  stop-opacity=".16"
+                ></stop>
+
+                <stop
+                  offset="100%"
+                  stop-opacity="0"
+                ></stop>
+
+              </linearGradient>
+
+            </defs>
+
+
+            <path
+              class="revenue-area"
+              id="reportRevenueArea"
+              d="M0,220 L700,220 L0,240 Z"
+            ></path>
+
+            <path
+              class="revenue-line"
+              id="reportRevenueLine"
+              d="M0,220 L700,220"
+            ></path>
+
+          </svg>
+
+
+          <div
+            class="chart-tooltip"
+            id="reportChartTooltip"
+          >
+
+            <strong>
+              GH₵0.00
+            </strong>
+
+            <span>
+              No data
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="admin-chart-labels"
+        id="reportRevenueLabels"
+      >
+
+        <span>—</span>
+        <span>—</span>
+        <span>—</span>
+        <span>—</span>
+        <span>—</span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ======================================
+         ORDERS OVERVIEW
+    ====================================== -->
+    <div class="admin-dashboard-card reports-orders-card">
+
+      <div class="admin-card-header">
+
+        <div>
+
+          <h2>Orders Overview</h2>
+
+          <p>
+            Order activity during this period
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="orders-overview-chart">
+
+        <svg
+          viewBox="0 0 500 250"
+          preserveAspectRatio="none"
+          class="orders-svg"
+        >
+
+          <defs>
+
+            <linearGradient
+              id="ordersGradient"
+              x1="0"
+              y1="0"
+              x2="0"
+              y2="1"
+            >
+
+              <stop
+                offset="0%"
+                stop-opacity=".14"
+              ></stop>
+
+              <stop
+                offset="100%"
+                stop-opacity="0"
+              ></stop>
+
+            </linearGradient>
+
+          </defs>
+
+
+          <path
+            id="ordersArea"
+            class="orders-area"
+            d="M0,220 L500,220 L0,250 Z"
+          ></path>
+
+          <path
+            id="ordersLine"
+            class="orders-line"
+            d="M0,220 L500,220"
+          ></path>
+
+        </svg>
+
+      </div>
+
+
+      <div
+        class="orders-chart-labels"
+        id="ordersChartLabels"
+      >
+        <span>—</span>
+        <span>—</span>
+        <span>—</span>
+        <span>—</span>
+        <span>—</span>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================================
+       ORDER PERFORMANCE
+  ========================================= -->
+  <div class="admin-management-card report-performance-card">
+
+    <div class="admin-management-header">
+
+      <div>
+
+        <span class="admin-page-eyebrow">
+          Performance
+        </span>
+
+        <h2>Order Performance</h2>
+
+        <p>
+          Breakdown of orders by their current status.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="order-performance-grid">
+
+      <!-- PENDING -->
+      <div class="performance-item">
+
+        <div class="performance-item-top">
+
+          <div class="performance-icon pending">
+            <i class="ri-time-line"></i>
+          </div>
+
+          <div>
+
+            <strong id="pendingPerformance">
+              0
+            </strong>
+
+            <span>
+              Pending
+            </span>
+
+          </div>
+
+        </div>
+
+        <div class="performance-bar">
+          <span
+            id="pendingPerformanceBar"
+            style="width:0%"
+          ></span>
+        </div>
+
+      </div>
+
+
+      <!-- PROCESSING -->
+      <div class="performance-item">
+
+        <div class="performance-item-top">
+
+          <div class="performance-icon processing">
+            <i class="ri-loader-4-line"></i>
+          </div>
+
+          <div>
+
+            <strong id="processingPerformance">
+              0
+            </strong>
+
+            <span>
+              Processing
+            </span>
+
+          </div>
+
+        </div>
+
+        <div class="performance-bar">
+          <span
+            id="processingPerformanceBar"
+            style="width:0%"
+          ></span>
+        </div>
+
+      </div>
+
+
+      <!-- DELIVERED -->
+      <div class="performance-item">
+
+        <div class="performance-item-top">
+
+          <div class="performance-icon completed">
+            <i class="ri-checkbox-circle-line"></i>
+          </div>
+
+          <div>
+
+            <strong id="completedPerformance">
+              0
+            </strong>
+
+            <span>
+              Delivered
+            </span>
+
+          </div>
+
+        </div>
+
+        <div class="performance-bar">
+          <span
+            id="completedPerformanceBar"
+            style="width:0%"
+          ></span>
+        </div>
+
+      </div>
+
+
+      <!-- FAILED -->
+      <div class="performance-item">
+
+        <div class="performance-item-top">
+
+          <div class="performance-icon failed">
+            <i class="ri-close-circle-line"></i>
+          </div>
+
+          <div>
+
+            <strong id="failedPerformance">
+              0
+            </strong>
+
+            <span>
+              Failed
+            </span>
+
+          </div>
+
+        </div>
+
+        <div class="performance-bar">
+          <span
+            id="failedPerformanceBar"
+            style="width:0%"
+          ></span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================================
+       PRODUCTS + SELLERS
+  ========================================= -->
+  <div class="reports-two-column-grid">
+
+
+    <!-- TOP PRODUCTS -->
+    <div class="admin-management-card report-list-card">
+
+      <div class="admin-management-header">
+
+        <div>
+
+          <h2>Top Products</h2>
+
+          <p>
+            Products generating the most sales.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="report-ranking-list"
+        id="topProductsList"
+      ></div>
+
+    </div>
+
+
+    <!-- TOP SELLERS -->
+    <div class="admin-management-card report-list-card">
+
+      <div class="admin-management-header">
+
+        <div>
+
+          <h2>Top Sellers</h2>
+
+          <p>
+            Seller performance by sales.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="report-ranking-list"
+        id="topSellersList"
+      ></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================================
+       PAYMENT + MARKETPLACE
+  ========================================= -->
+  <div class="reports-two-column-grid">
+
+
+    <!-- PAYMENT METHODS -->
+    <div class="admin-management-card report-list-card">
+
+      <div class="admin-management-header">
+
+        <div>
+
+          <h2>Payment Methods</h2>
+
+          <p>
+            Distribution of completed payments.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="payment-method-list"
+        id="paymentMethodsList"
+      ></div>
+
+    </div>
+
+
+    <!-- MARKETPLACE SUMMARY -->
+    <div class="admin-management-card report-list-card">
+
+      <div class="admin-management-header">
+
+        <div>
+
+          <h2>Marketplace Summary</h2>
+
+          <p>
+            Current marketplace performance.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="marketplace-summary">
+
+        <div class="marketplace-summary-item">
+
+          <span>
+            Products
+          </span>
+
+          <strong id="marketplaceProducts">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="marketplace-summary-item">
+
+          <span>
+            Published
+          </span>
+
+          <strong id="marketplacePublished">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="marketplace-summary-item">
+
+          <span>
+            Pending
+          </span>
+
+          <strong id="marketplacePending">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="marketplace-summary-item">
+
+          <span>
+            Sales
+          </span>
+
+          <strong id="marketplaceSales">
+            GH₵0.00
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================================
+       RECENT ACTIVITY
+  ========================================= -->
+  <div class="admin-management-card report-activity-card">
+
+    <div class="admin-management-header">
+
+      <div>
+
+        <h2>Recent Activity</h2>
+
+        <p>
+          Latest activity across the platform.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="report-activity-list"
+      id="recentActivityList"
+    ></div>
+
+  </div>
+
+</div>
+
+
+<!-- ==========================================
+     REPORT MESSAGE
+========================================== -->
+
+<div
+  class="admin-snackbar"
+  id="reportsMessage"
+>
+  <i class="ri-check-line"></i>
+  <span></span>
+</div>
 
     
 
   </main>
 
 
-  <!-- =========================
+  <!--=========================
        PAYMENT DETAIL DRAWER
   ========================== -->
   <div
@@ -711,7 +1562,7 @@
        SCRIPT
   ========================== -->
   <script src="js/admin.js"></script>
-  <script src="js/withdrawals.js"></script>
+  <script src="js/reports.js"></script>
 
 </body>
 </html>

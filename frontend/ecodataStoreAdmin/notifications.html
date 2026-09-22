@@ -367,9 +367,555 @@
 
     <!-- =========================
          PAGE CONTENT
-  
+   ============================--->
 
     
+
+
+
+
+<!-- ==========================================
+     ADMIN NOTIFICATIONS PAGE
+========================================== -->
+
+<div class="admin-page-content notifications-page">
+
+  <!-- PAGE HEADER -->
+  <div class="admin-page-header">
+
+    <div>
+      <div class="admin-page-eyebrow">
+        <i class="ri-notification-3-line"></i>
+        System Center
+      </div>
+
+      <h1>Notifications</h1>
+
+      <p>
+        Monitor system alerts, orders, payments, users and other important
+        activity across your EcoData dashboard.
+      </p>
+    </div>
+
+    <div class="admin-page-header-actions">
+
+      <button
+        type="button"
+        class="admin-header-button"
+        id="markAllNotificationsRead"
+      >
+        <i class="ri-check-double-line"></i>
+        Mark all as read
+      </button>
+
+      <button
+        type="button"
+        class="admin-header-button"
+        id="refreshNotifications"
+      >
+        <i class="ri-refresh-line"></i>
+        Refresh
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ==========================================
+       NOTIFICATION STATS
+  =========================================== -->
+
+  <div class="admin-stats-grid notifications-stats-grid">
+
+    <!-- TOTAL -->
+    <div class="admin-stat-card">
+
+      <div class="admin-stat-icon">
+        <i class="ri-notification-3-line"></i>
+      </div>
+
+      <div class="admin-stat-content">
+
+        <span>Total Notifications</span>
+
+        <strong id="totalNotifications">
+          0
+        </strong>
+
+        <small>
+          All system notifications
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <!-- UNREAD -->
+    <div class="admin-stat-card">
+
+      <div class="admin-stat-icon">
+        <i class="ri-mail-unread-line"></i>
+      </div>
+
+      <div class="admin-stat-content">
+
+        <span>Unread</span>
+
+        <strong id="unreadNotifications">
+          0
+        </strong>
+
+        <small>
+          Require attention
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <!-- ORDERS -->
+    <div class="admin-stat-card">
+
+      <div class="admin-stat-icon">
+        <i class="ri-shopping-bag-3-line"></i>
+      </div>
+
+      <div class="admin-stat-content">
+
+        <span>Order Alerts</span>
+
+        <strong id="orderNotifications">
+          0
+        </strong>
+
+        <small>
+          Recent order activity
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <!-- PAYMENTS -->
+    <div class="admin-stat-card">
+
+      <div class="admin-stat-icon">
+        <i class="ri-bank-card-line"></i>
+      </div>
+
+      <div class="admin-stat-content">
+
+        <span>Payment Alerts</span>
+
+        <strong id="paymentNotifications">
+          0
+        </strong>
+
+        <small>
+          Payment activity
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <!-- SYSTEM -->
+    <div class="admin-stat-card">
+
+      <div class="admin-stat-icon">
+        <i class="ri-settings-3-line"></i>
+      </div>
+
+      <div class="admin-stat-content">
+
+        <span>System Alerts</span>
+
+        <strong id="systemNotifications">
+          0
+        </strong>
+
+        <small>
+          System activity
+        </small>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ==========================================
+       NOTIFICATIONS MANAGEMENT CARD
+  =========================================== -->
+
+  <div class="admin-management-card notifications-management-card">
+
+    <!-- HEADER -->
+    <div class="admin-management-header">
+
+      <div>
+
+        <h2>
+          Notification Center
+        </h2>
+
+        <span
+          class="admin-result-count"
+          id="notificationResultCount"
+        >
+          Showing 0 notifications
+        </span>
+
+      </div>
+
+      <button
+        type="button"
+        class="notifications-clear-button"
+        id="clearNotifications"
+      >
+        <i class="ri-delete-bin-6-line"></i>
+        Clear all
+      </button>
+
+    </div>
+
+
+    <!-- FILTER BAR -->
+    <div class="admin-filter-bar notifications-filter-bar">
+
+      <!-- SEARCH -->
+      <div class="admin-filter-search">
+
+        <i class="ri-search-line"></i>
+
+        <input
+          type="search"
+          id="notificationSearch"
+          placeholder="Search notifications..."
+          autocomplete="off"
+        >
+
+      </div>
+
+
+      <!-- TYPE -->
+      <select id="notificationTypeFilter">
+
+        <option value="all">
+          All types
+        </option>
+
+        <option value="order">
+          Orders
+        </option>
+
+        <option value="payment">
+          Payments
+        </option>
+
+        <option value="user">
+          Users
+        </option>
+
+        <option value="system">
+          System
+        </option>
+
+        <option value="marketplace">
+          Marketplace
+        </option>
+
+      </select>
+
+
+      <!-- STATUS -->
+      <select id="notificationStatusFilter">
+
+        <option value="all">
+          All status
+        </option>
+
+        <option value="unread">
+          Unread
+        </option>
+
+        <option value="read">
+          Read
+        </option>
+
+      </select>
+
+
+      <!-- PRIORITY -->
+      <select id="notificationPriorityFilter">
+
+        <option value="all">
+          All priority
+        </option>
+
+        <option value="high">
+          High
+        </option>
+
+        <option value="normal">
+          Normal
+        </option>
+
+        <option value="low">
+          Low
+        </option>
+
+      </select>
+
+
+      <!-- CLEAR FILTERS -->
+      <button
+        type="button"
+        class="admin-clear-filters"
+        id="clearNotificationFilters"
+      >
+        <i class="ri-filter-off-line"></i>
+        Clear
+      </button>
+
+    </div>
+
+
+    <!-- TABLE -->
+    <div class="admin-table-wrapper">
+
+      <table class="admin-data-table notifications-table">
+
+        <thead>
+
+          <tr>
+
+            <th>Notification</th>
+
+            <th>Type</th>
+
+            <th>Priority</th>
+
+            <th>Status</th>
+
+            <th>Date</th>
+
+            <th>Action</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody id="notificationTableBody">
+          <!-- Demo notifications inserted by JS -->
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <!-- PAGINATION -->
+    <div class="admin-pagination">
+
+      <span
+        class="admin-pagination-info"
+        id="notificationPaginationInfo"
+      >
+        Showing 0 of 0
+      </span>
+
+      <div id="notificationPagination"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ==========================================
+       NOTIFICATION DRAWER
+  =========================================== -->
+
+  <div
+    class="admin-drawer-overlay"
+    id="notificationDrawer"
+    aria-hidden="true"
+  >
+
+    <aside class="admin-drawer">
+
+      <div class="admin-drawer-header">
+
+        <div>
+
+          <span class="admin-drawer-eyebrow">
+            Notification
+          </span>
+
+          <h2 id="notificationDrawerTitle">
+            Notification details
+          </h2>
+
+        </div>
+
+        <button
+          type="button"
+          class="admin-drawer-close"
+          id="closeNotificationDrawer"
+          aria-label="Close notification"
+        >
+          <i class="ri-close-line"></i>
+        </button>
+
+      </div>
+
+
+      <div class="admin-drawer-body">
+
+        <!-- ICON -->
+        <div
+          class="notification-detail-icon"
+          id="notificationDetailIcon"
+        >
+          <i class="ri-notification-3-line"></i>
+        </div>
+
+
+        <!-- TITLE -->
+        <h3 id="notificationDetailHeading">
+          Notification title
+        </h3>
+
+
+        <!-- MESSAGE -->
+        <p
+          class="notification-detail-message"
+          id="notificationDetailMessage"
+        >
+          Notification message.
+        </p>
+
+
+        <!-- DETAILS -->
+        <div class="admin-detail-list">
+
+          <div class="admin-detail-row">
+
+            <span>Type</span>
+
+            <strong id="notificationDetailType">
+              —
+            </strong>
+
+          </div>
+
+
+          <div class="admin-detail-row">
+
+            <span>Priority</span>
+
+            <strong id="notificationDetailPriority">
+              —
+            </strong>
+
+          </div>
+
+
+          <div class="admin-detail-row">
+
+            <span>Status</span>
+
+            <strong id="notificationDetailStatus">
+              —
+            </strong>
+
+          </div>
+
+
+          <div class="admin-detail-row">
+
+            <span>Date</span>
+
+            <strong id="notificationDetailDate">
+              —
+            </strong>
+
+          </div>
+
+
+          <div class="admin-detail-row">
+
+            <span>Notification ID</span>
+
+            <strong id="notificationDetailId">
+              —
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="admin-drawer-footer">
+
+        <button
+          type="button"
+          class="admin-drawer-secondary-button"
+          id="drawerMarkRead"
+        >
+          <i class="ri-check-line"></i>
+          Mark as read
+        </button>
+
+        <button
+          type="button"
+          class="admin-drawer-primary-button"
+          id="drawerCloseButton"
+        >
+          Close
+        </button>
+
+      </div>
+
+    </aside>
+
+  </div>
+
+
+  <!-- SNACKBAR -->
+  <div
+    class="admin-snackbar"
+    id="notificationsMessage"
+    aria-live="polite"
+  ></div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   </main>
 
@@ -713,7 +1259,7 @@
        SCRIPT
   ========================== -->
   <script src="js/admin.js"></script>
-  <script src="js/withdrawals.js"></script>
+  <script src="js/notifications.js"></script>
 
 </body>
 </html>
