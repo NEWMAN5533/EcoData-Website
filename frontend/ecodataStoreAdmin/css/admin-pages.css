@@ -34,7 +34,20 @@ tr, td, th{
   color: var(--admin-text-secondary) !important;
 }
 
+/*** USER DRAWER **/
+#userDrawer{
+  border: var(--admin-border);
+  background: var(--admin-surface);
+}
+#userDrawerContent{
+  background: var(--admin-surface-soft);
+  border-top: 1px solid var(--admin-border-strong);
+  border-bottom: 1px solid var(--admin-border-strong);
+}
 
+.drawer-info-item{
+
+}
 
 /* ==========================================
    ECODATA ADMIN — MANAGEMENT PAGES
@@ -892,10 +905,10 @@ tr, td, th{
   display: flex;
   flex-direction: column;
 
-  background: #fff;
+  background: var(--admin-surface-soft);
 
   border-left:
-    1px solid rgba(0,0,0,.08);
+    var(--admin-border-strong);
 
   transform:
     translateX(100%);
@@ -904,6 +917,12 @@ tr, td, th{
     transform .25s ease;
 
   z-index: 1400;
+}
+
+@media screen and (max-width: 600px) {
+  .admin-detail-drawer{
+    border-left: 0 !important;
+  }
 }
 
 
@@ -990,6 +1009,8 @@ tr, td, th{
 
   gap: 8px;
 
+  background: var(--admin-surface-soft);
+
   padding: 13px 18px;
 
   border-top:
@@ -1000,6 +1021,16 @@ tr, td, th{
 .drawer-footer button {
   flex: 1;
 }
+
+#closeUserDrawer{
+  background: var(--admin-surface);
+  border: 1px solid var(--admin-border);
+  border-radius: 12px;
+}
+
+
+
+
 
 
 /* ==========================================
@@ -1028,9 +1059,10 @@ tr, td, th{
 
   border-radius: 50%;
 
-  background: #ededed;
+  background: var(--admin-surface);
+  border: 1px solid var(--admin-border);
 
-  color: #555;
+  color: var(--admin-text-white);
 
   font-size: 17px;
   font-weight: 600;
@@ -1101,10 +1133,10 @@ tr, td, th{
 
   padding: 11px;
 
-  background: #fafafa;
+  background: var(--admin-surface);
 
-  border:
-    1px solid rgba(0,0,0,.06);
+  border: 1px solid
+    var(--admin-border-strong);
 
   border-radius: 9px;
 }
@@ -1138,7 +1170,7 @@ tr, td, th{
   flex-direction: column;
 
   border:
-    1px solid rgba(0,0,0,.06);
+    1px solid var(--admin-border);
 
   border-radius: 9px;
 
@@ -1157,7 +1189,7 @@ tr, td, th{
   padding: 0 10px;
 
   border-bottom:
-    1px solid rgba(0,0,0,.05);
+    1px solid var(--admin-border);
 }
 
 
@@ -1167,7 +1199,7 @@ tr, td, th{
 
 
 .drawer-list-item span {
-  color: #888;
+  color:var(--admin-text-secondary);
   font-size: 9px;
 }
 
@@ -9811,10 +9843,10 @@ body.dark-mode
   display: flex;
   flex-direction: column;
 
-  background: #fff;
+  background: var(--admin-surface);
 
   box-shadow:
-    -12px 0 35px rgba(0, 0, 0, .08);
+    var(--admin-shadow-lg);
 
   transform: translateX(100%);
 
@@ -9841,7 +9873,9 @@ body.dark-mode
 
   padding: 0 20px;
 
-  border-bottom: 1px solid #e6e6e6;
+  background: var(--admin-surface-soft);
+
+  border-bottom: 1px solid var(--admin-border-strong);
 }
 
 .notifications-page .admin-drawer-eyebrow {
@@ -9849,7 +9883,7 @@ body.dark-mode
 
   margin-bottom: 4px;
 
-  color: #999;
+  color:var(--admin-text-secondary);
 
   font-size: 9px;
   font-weight: 700;
@@ -9861,7 +9895,6 @@ body.dark-mode
 .notifications-page .admin-drawer-header h2 {
   margin: 0;
 
-  color: #222;
 
   font-size: 16px;
   font-weight: 720;
@@ -9875,11 +9908,11 @@ body.dark-mode
   align-items: center;
   justify-content: center;
 
-  border: 1px solid #e3e3e3;
+  border: 1px solid var(--admin-border);
   border-radius: 7px;
 
-  background: #fff;
-  color: #777;
+  background: var(--admin-surface-soft);
+  color:var(--admin-text-secondary);
 
   cursor: pointer;
 }
@@ -9907,11 +9940,11 @@ body.dark-mode
 
   margin-bottom: 18px;
 
-  border: 1px solid #e3e3e3;
+  border: 1px solid var(--admin-border);
   border-radius: 13px;
 
-  background: #f7f7f7;
-  color: #333;
+  background: var(--admin-surface-soft);
+  color:var(--admin-text-muted);
 
   font-size: 22px;
 }
@@ -9924,7 +9957,7 @@ body.dark-mode
 .notifications-page #notificationDetailHeading {
   margin: 0;
 
-  color: #222;
+  color: var(--admin-text-white);
 
   font-size: 18px;
   line-height: 1.35;
@@ -9934,7 +9967,7 @@ body.dark-mode
 .notifications-page .notification-detail-message {
   margin: 9px 0 25px;
 
-  color: #777;
+  color:var(--admin-text-muted);
 
   font-size: 12px;
   line-height: 1.7;
@@ -9946,7 +9979,7 @@ body.dark-mode
 ========================================================= */
 
 .notifications-page .admin-detail-list {
-  border-top: 1px solid #e6e6e6;
+  border-top: 1px solid var(--admin-border);
 }
 
 .notifications-page .admin-detail-row {
@@ -9957,16 +9990,16 @@ body.dark-mode
   justify-content: space-between;
   gap: 15px;
 
-  border-bottom: 1px solid #e8e8e8;
+  border-bottom: 1px solid var(--admin-border-strong);
 }
 
 .notifications-page .admin-detail-row span {
-  color: #999;
+  color: var(--admin-text-secondary);
   font-size: 10px;
 }
 
 .notifications-page .admin-detail-row strong {
-  color: #444;
+  color: var(--admin-text-white);
   font-size: 10px;
   font-weight: 650;
   text-align: right;
@@ -9986,7 +10019,9 @@ body.dark-mode
 
   padding: 12px 20px;
 
-  border-top: 1px solid #e6e6e6;
+  background: var(--admin-surface-soft);
+
+  border-top: 1px solid var(--admin-border-strong);
 }
 
 .notifications-page .admin-drawer-secondary-button,
@@ -10005,17 +10040,17 @@ body.dark-mode
 }
 
 .notifications-page .admin-drawer-secondary-button {
-  border: 1px solid #e2e2e2;
+  border: 1px solid var(--admin-border);
 
-  background: #fff;
-  color: #555;
+  background: var(--admin-surface);
+  color: var(--admin-text-secondary);
 }
 
 .notifications-page .admin-drawer-primary-button {
-  border: 1px solid #222;
+  border: 1px solid var(--admin-border-strong);
 
-  background: #222;
-  color: #fff;
+  background: var(--admin-surface-soft);
+  color: var(--admin-text-muted);
 }
 
 
@@ -10036,7 +10071,7 @@ body.dark-mode
   border: 1px solid #333;
   border-radius: 9px;
 
-  background: #222;
+  background: #076656;
   color: #fff;
 
   font-size: 11px;

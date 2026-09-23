@@ -732,7 +732,7 @@ cursor: pointer;
 
 .admin-drawer{
 
-  background:var(--admin-surface);
+  background:var(--admin-surface-soft) !important;
 
   border-color:var(--admin-border);
 
