@@ -1669,7 +1669,7 @@ i{
   border-radius: 12px;
 
   box-shadow:
-    0 12px 30px rgba(0,0,0,.1);
+    var(--admin-shadow-lg);
 
   opacity: 0;
   visibility: hidden;
@@ -1765,9 +1765,9 @@ i{
 .admin-profile-menu a:hover,
 .admin-profile-menu button:hover {
 
-  background: var(--admin-hover);
+  background: var(--admin-surface-hover);
 
-  color: var(--admin-text);
+  color: var(--admin-text-secondary);
 }
 
 
