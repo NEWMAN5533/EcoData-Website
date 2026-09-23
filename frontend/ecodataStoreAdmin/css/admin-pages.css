@@ -9843,6 +9843,8 @@ body.dark-mode
   display: flex;
   flex-direction: column;
 
+
+
   background: var(--admin-surface);
 
   box-shadow:
@@ -9928,6 +9930,8 @@ body.dark-mode
   overflow-y: auto;
 
   padding: 25px 20px;
+
+  background: var(--admin-surface);
 }
 
 .notifications-page .notification-detail-icon {
@@ -9943,7 +9947,7 @@ body.dark-mode
   border: 1px solid var(--admin-border);
   border-radius: 13px;
 
-  background: var(--admin-surface-soft);
+  background: var(--admin-surface);
   color:var(--admin-text-muted);
 
   font-size: 22px;
