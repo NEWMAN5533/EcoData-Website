@@ -125,6 +125,17 @@ h1,h2,h3,strong{
   color: var(--admin-text-white) !important;
 }
 
+.filters-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+@media screen and (min-width: 768px) {
+  .filters-wrapper{
+    flex-direction: unset !important;
+  }
+}
 
 
 html,

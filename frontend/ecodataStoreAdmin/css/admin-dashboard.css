@@ -3551,6 +3551,7 @@ flex:1;
 
 .bundle-paid-status i {
   font-size: 13px;
+  color: rgb(0, 128, 107);
 }
 
 
@@ -3583,9 +3584,9 @@ flex:1;
   border: 1px solid var(--admin-border);
   border-radius: 9px;
 
-  background: var(--admin-surface);
+  background: var(--admin-surface-soft);
 
-  color: var(--admin-text);
+  color: var(--admin-text-secondary);
 
   box-shadow: var(--admin-shadow-lg);
 
