@@ -640,7 +640,7 @@
 
 
     <!-- ======================================
-         REVENUE OVERVIEW
+        REVENUE OVERVIEW
     ====================================== -->
     <div class="admin-dashboard-card revenue-card">
 
@@ -681,106 +681,129 @@
 
       </div>
 
+    <div class="admin-chart-wrapper">
 
-      <div class="admin-chart-wrapper">
+  <div class="admin-chart-y">
 
-        <div class="admin-chart-y">
+    <span>40k</span>
+    <span>30k</span>
+    <span>20k</span>
+    <span>10k</span>
+    <span>0</span>
 
-          <span>40k</span>
-          <span>30k</span>
-          <span>20k</span>
-          <span>10k</span>
-          <span>0</span>
-
-        </div>
-
-
-        <div class="admin-chart">
-
-          <div class="chart-grid-line line-1"></div>
-          <div class="chart-grid-line line-2"></div>
-          <div class="chart-grid-line line-3"></div>
-          <div class="chart-grid-line line-4"></div>
+  </div>
 
 
-          <svg
-            viewBox="0 0 700 240"
-            preserveAspectRatio="none"
-            class="revenue-svg"
-          >
+  <div class="admin-chart">
 
-            <defs>
-
-              <linearGradient
-                id="reportRevenueGradient"
-                x1="0"
-                y1="0"
-                x2="0"
-                y2="1"
-              >
-
-                <stop
-                  offset="0%"
-                  stop-opacity=".16"
-                ></stop>
-
-                <stop
-                  offset="100%"
-                  stop-opacity="0"
-                ></stop>
-
-              </linearGradient>
-
-            </defs>
+    <div class="chart-grid-line line-1"></div>
+    <div class="chart-grid-line line-2"></div>
+    <div class="chart-grid-line line-3"></div>
+    <div class="chart-grid-line line-4"></div>
 
 
-            <path
-              class="revenue-area"
-              id="reportRevenueArea"
-              d="M0,220 L700,220 L0,240 Z"
-            ></path>
+    <svg
+      viewBox="0 0 700 240"
+      preserveAspectRatio="none"
+      class="revenue-svg"
+    >
 
-            <path
-              class="revenue-line"
-              id="reportRevenueLine"
-              d="M0,220 L700,220"
-            ></path>
+      <defs>
 
-          </svg>
+        <linearGradient
+          id="revenueGradient"
+          x1="0"
+          y1="0"
+          x2="0"
+          y2="1"
+        >
+
+        <!--top of area-->
+          <stop
+            offset="0%"
+            stop-opacity=".20"
+            stop-color="var(--admin-chart-line)"
+          />
+
+          <!---middle--->
+          <stop
+            offset="55%"
+            stop-color="var(--admin-chart-line)"
+            stop-opacity="0.07"
+          />
+
+          <!---bottom-->
+          <stop 
+            offset="100%"
+            stop-color="var(--admin-chart-line)"
+            opacity="0"
+            />
+
+        </linearGradient>
+
+      </defs>
 
 
-          <div
-            class="chart-tooltip"
-            id="reportChartTooltip"
-          >
-
-            <strong>
-              GH₵0.00
-            </strong>
-
-            <span>
-              No data
-            </span>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div
-        class="admin-chart-labels"
-        id="reportRevenueLabels"
+      <path
+        class="revenue-area"
+        d="M0,205
+           C40,190 55,175 90,182
+           C120,188 135,150 170,158
+           C205,166 220,135 250,142
+           C285,150 300,108 335,118
+           C365,127 390,98 420,104
+           C455,110 470,78 505,91
+           C540,103 560,62 595,76
+           C630,90 650,48 700,55
+           L700,240
+           L0,240 Z"
       >
 
-        <span>—</span>
-        <span>—</span>
-        <span>—</span>
-        <span>—</span>
-        <span>—</span>
 
-      </div>
+      <path
+        class="revenue-line"
+        d="M0,205
+           C40,190 55,175 90,182
+           C120,188 135,150 170,158
+           C205,166 220,135 250,142
+           C285,150 300,108 335,118
+           C365,127 390,98 420,104
+           C455,110 470,78 505,91
+           C540,103 560,62 595,76
+           C630,90 650,48 700,55"
+      ></path>
+
+    </svg>
+
+
+    <div
+      class="chart-tooltip"
+      id="chartTooltip"
+    >
+
+      <strong>
+        0
+      </strong>
+
+      <span>
+        0
+      </span>
+
+    </div>
+
+  </div>
+
+    </div>
+
+    <div class="admin-chart-labels">
+
+  <span>Sep 1</span>
+  <span>Sep 5</span>
+  <span>Sep 10</span>
+  <span>Sep 15</span>
+  <span>Sep 19</span>
+
+    </div>
 
     </div>
 
@@ -805,66 +828,130 @@
       </div>
 
 
-      <div class="orders-overview-chart">
+    
+    <div class="admin-chart-wrapper">
 
-        <svg
-          viewBox="0 0 500 250"
-          preserveAspectRatio="none"
-          class="orders-svg"
+  <div class="admin-chart-y">
+
+    <span>40k</span>
+    <span>30k</span>
+    <span>20k</span>
+    <span>10k</span>
+    <span>0</span>
+
+  </div>
+
+
+  <div class="admin-chart">
+
+    <div class="chart-grid-line line-1"></div>
+    <div class="chart-grid-line line-2"></div>
+    <div class="chart-grid-line line-3"></div>
+    <div class="chart-grid-line line-4"></div>
+
+
+    <svg
+      viewBox="0 0 700 240"
+      preserveAspectRatio="none"
+      class="revenue-svg"
+    >
+
+      <defs>
+
+        <linearGradient
+          id="revenueGradient"
+          x1="0"
+          y1="0"
+          x2="0"
+          y2="1"
         >
 
-          <defs>
+        <!--top of area-->
+          <stop
+            offset="0%"
+            stop-opacity=".20"
+            stop-color="var(--admin-chart-line)"
+          />
 
-            <linearGradient
-              id="ordersGradient"
-              x1="0"
-              y1="0"
-              x2="0"
-              y2="1"
-            >
+          <!---middle--->
+          <stop
+            offset="55%"
+            stop-color="var(--admin-chart-line)"
+            stop-opacity="0.07"
+          />
 
-              <stop
-                offset="0%"
-                stop-opacity=".14"
-              ></stop>
+          <!---bottom-->
+          <stop 
+            offset="100%"
+            stop-color="var(--admin-chart-line)"
+            opacity="0"
+            />
 
-              <stop
-                offset="100%"
-                stop-opacity="0"
-              ></stop>
+        </linearGradient>
 
-            </linearGradient>
-
-          </defs>
-
-
-          <path
-            id="ordersArea"
-            class="orders-area"
-            d="M0,220 L500,220 L0,250 Z"
-          ></path>
-
-          <path
-            id="ordersLine"
-            class="orders-line"
-            d="M0,220 L500,220"
-          ></path>
-
-        </svg>
-
-      </div>
+      </defs>
 
 
-      <div
-        class="orders-chart-labels"
-        id="ordersChartLabels"
+      <path
+        class="revenue-area"
+        d="M0,205
+           C40,190 55,175 90,182
+           C120,188 135,150 170,158
+           C205,166 220,135 250,142
+           C285,150 300,108 335,118
+           C365,127 390,98 420,104
+           C455,110 470,78 505,91
+           C540,103 560,62 595,76
+           C630,90 650,48 700,55
+           L700,240
+           L0,240 Z"
       >
-        <span>—</span>
-        <span>—</span>
-        <span>—</span>
-        <span>—</span>
-        <span>—</span>
-      </div>
+
+
+      <path
+        class="revenue-line"
+        d="M0,205
+           C40,190 55,175 90,182
+           C120,188 135,150 170,158
+           C205,166 220,135 250,142
+           C285,150 300,108 335,118
+           C365,127 390,98 420,104
+           C455,110 470,78 505,91
+           C540,103 560,62 595,76
+           C630,90 650,48 700,55"
+      ></path>
+
+    </svg>
+
+
+    <div
+      class="chart-tooltip"
+      id="chartTooltip"
+    >
+
+      <strong>
+        0
+      </strong>
+
+      <span>
+        0
+      </span>
+
+    </div>
+
+  </div>
+
+    </div>
+
+    <div class="admin-chart-labels">
+
+  <span>Sep 1</span>
+  <span>Sep 5</span>
+  <span>Sep 10</span>
+  <span>Sep 15</span>
+  <span>Sep 19</span>
+
+    </div>
 
     </div>
 
@@ -1246,6 +1333,65 @@
 </div>
 
     
+
+
+
+
+
+
+
+
+
+<!-----BOTTOM-NAVBAR----->
+  <div class="bottom-navbar" id="navIconDiv">
+    <div class="btom-navIcon" onclick="window.location.href='./bundles.html'">
+      <div class="activeImg ">
+            <i class="ri-router-line material-icons"></i>
+      </div>
+      <small class="bottomIcon-textNav">Bundles</small>
+    </div>
+
+    <div class="btom-navIcon" onclick="window.location.href='./products.html'">
+      <div class="activeImg ">
+        <i class="ri-compass-3-line material-icons"></i>
+      </div>
+      <small class="bottomIcon-textNav">Products</small>
+    </div>
+
+
+   
+
+
+      <div class="btom-navIcon addBar" >
+      <div class="activeImg" id="activeTel" onclick="window.location.href='./withdrawals.html'"> 
+       <i class="ri-download-cloud-line material-icons addBtn"></i>
+      </div>
+    </div>
+
+
+     <div class="btom-navIcon" onclick="window.location.href='./orders.html'">
+      <div class="activeImg" id="activeAir" > 
+      <i class="ri-file-list-3-line material-icons"></i>
+      </div>
+      <small class="bottomIcon-textNav"> Orders</small>
+    </div>
+
+    
+       <div class="btom-navIcon" onclick="window.location.href='./settings.html'">
+      <div class="activeImg" id="activeAir" > 
+      <i class="ri-user-settings-line material-icons"></i>
+      </div>
+      <small class="bottomIcon-textNav">Settings</small>
+    </div>
+
+
+   
+
+
+  </div>
+
+
+
 
   </main>
 
