@@ -6724,24 +6724,30 @@ window.addEventListener("click", function(e){
 
 let topSwiper = new Swiper(".status-swiper", {
 
+ slidesPerView: "auto",
+ spaceBetween: 12,
 
- loop: true,
-  spaceBetween: 12,
-  grabCursor: true,
-  slidesPerView: 'auto',
-  centeredSlides: false,
-  loopAdditionalSlides: 9,
-  speed: 5000,
+ freeMode: {
+  enabled: true,
+  momentum: true,
+  momentumBounce: false,
+ },
 
-  autoplay: {
-    delay: 0,
-    disableOnInteraction: false,
-    pauseOnMouseEnter: false,
-  },
-  allowTouchMove: true,
+ grabCursor: true,
+
+ watchSlidesProgress: true,
+
+ resistance: true,
+ resistanceRatio: 0.85,
 
 
   breakpoints: {
+     320: {
+      spaceBetween: 12,
+    },
+     375: {
+      spaceBetween: 12,
+    },
     640: {
       spaceBetween: 32,
     }
