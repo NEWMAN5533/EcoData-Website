@@ -3036,9 +3036,13 @@ padding-right:15px;
   text-transform: capitalize;
 
   overflow: hidden;
+
+  color: var(--admin-chart-grid);
 }
 
-
+.bundle-order-status i{
+  color: #f5f3f3;
+}
 /* =================================
    PROCESSING SHIMMER
 ================================= */
