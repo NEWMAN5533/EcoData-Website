@@ -1017,9 +1017,9 @@ function activateTrackers() {
 
 // un activate trackers when no orders
 function unActivateTrackers(){
- const firstTracker = document.getElementById("deliveryTracker1").style.display = "none";
+ const firstTracker = document.getElementById("deliveryTracker1").style.display = "flex";
 
- const secondTracker = document.getElementById("deliveryTracker2").style.display = "none";
+ const secondTracker = document.getElementById("deliveryTracker2").style.display = "flex";
 }
 
 //=================================
@@ -1656,7 +1656,7 @@ console.log("timeStamp", order.timestamp);
 
     <span class="status-cell">
       <span class="status-badge ${getStatusClass(order.status)}">
-      ${getStatusIcon(order.status)}
+        ${getStatusIcon(order.status)}
       <span>${order.status}</span>
       </span>
     </span>
@@ -3000,6 +3000,9 @@ function addOrderToLeaderboard(customers, order) {
     const isAdminLeaderboard =
     order.LD_Status === "leaderboard" ||
     order.status === "leaderboard";
+
+
+    
 
 
     //========================================
