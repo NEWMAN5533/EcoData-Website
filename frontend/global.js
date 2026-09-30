@@ -194,7 +194,7 @@ const onlyShowBtomNavSection = document.getElementById("onlyShowBtomNavSection")
 //=========================
 const systemUpgradeModal = document.getElementById("upgradeModal");
 if(systemUpgradeModal){
-  systemUpgradeModal.style.display = "none";
+  systemUpgradeModal.style.display = "flex";
 }
 
 
