@@ -1,4 +1,18 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+small,
+span,
+strong,
+p {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
 :root {
   --bg-cl: #FFF;
   --primary-cl: #fff;
@@ -70,129 +84,6 @@
   --card-tigo-bg:  #6cbff7cb;
 }
 
-body.dark-mode {
-  --darkMode-bg-cl: var(--body-bg-dark);
-  --thin-border: var(--surface-bg-hover-dark);
-}
-/**
-* NAV-RIGHT
-**/
-.nav-right{
-  display: flex;
-  width: max-content;
-  height: auto;
-  gap: .8rem;
-  align-items: center !important;
-  justify-content: end;
-  margin-right: .2rem;
-}
-
-.nav-right .sun-icon{
-  color: var(--text-cl);
-  font-size: 1.1rem;
-}
-
-.nav-right img{
-  width: 2rem;
-  height: 1.8rem;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;;
-  user-select: none;
-}
-
-.nav-right .theme-switch {
-  display: flex;
-  margin-left: .8rem;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;;
-  user-select: none;
-}
-
-
-
-.login {
-  display: flex;
-  align-items: center;
-  width: max-content;
-  justify-content: space-between;
-}
-
-.login a{
-  text-align: center;
-  text-decoration: none;
-  list-style: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 .8rem;
-  color: var(--card-full-bg-cl);
-}
-
-
-.login img {
-  width: 1.4rem;
-  height: 1.4rem;
-  margin: 0 .5rem;
-  background: var(--background-cl);
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.dark-mode .menu-icon{
-  border-radius: 4px;
-  height: 1.76rem !important;
-  padding: .3px;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;;
-  user-select: none;
-}
-
-.menu{
-  font-size: 1.3rem;
-  margin-top: .4rem;
-  color: var(--text-cl);
-  cursor: pointer;
-}
-
-.moon{
-  font-size: 1.3rem;
-  color: var(--text-cl);
-  color: white !important;
-  margin-bottom: .2rem;
-}
-
-.dark-mode .menu,
-.dark-mode .moon{
-  color: rgb(226, 226, 226) !important;
-}
-
-.menu-icon {
-  border-radius: 4px;
-  height: 1.06rem !important;
-  padding: .3px;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;;
-  user-select: none;
-}
-
-.slider .icon .sun{
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;;
-  user-select: none;
-}
-
-
 
 
 
@@ -255,7 +146,7 @@ SNACKBAR SECTION
   padding: .5rem;
   border-radius: 4px !important;
   font-weight: 600;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ 
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
   z-index: 200000000000000000000; /* above input popup */
   opacity: 0;
@@ -356,7 +247,7 @@ SNACKBAR SECTION
 
  .welcome-hero-top .wht-left p{
   font-size: .9rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ 
   font-weight: 600;
   color: rgb(70, 70, 77);
  }
@@ -390,7 +281,7 @@ SNACKBAR SECTION
     font-size: .9rem;
     color: rgb(141, 139, 139);
     background: none;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+   
     font-weight: 600;
    }
 
@@ -507,7 +398,7 @@ SNACKBAR SECTION
   font-size: .67rem;
   font-weight: 600;
   border-radius: .3rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ 
   padding: 0 .7rem;
   cursor: default;
   transition: color .15s ease;
@@ -585,7 +476,7 @@ SNACKBAR SECTION
   justify-content: center;
   font-size: .65rem;
   font-weight: 600;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ 
   padding: 0 .4rem;
   border-radius: 50%;
   cursor: default;
@@ -611,7 +502,7 @@ SNACKBAR SECTION
   justify-content: center;
   font-size: .75rem;
   font-weight: 600;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ 
   padding: 0 .4rem !important;
   cursor: default;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
@@ -734,13 +625,13 @@ GIVE AWAY TIMER
   font-size: 12px;
   font-weight: 600;
   color: #16a34a;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ 
 }
 
 .timerCardBox small{
   margin-top: 8px;
   font-size: 10px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ 
   color: #777;
 }
 
@@ -935,7 +826,7 @@ GIVE AWAY TIMER
         infinite;
 
 
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+   
 
 }
 
@@ -958,7 +849,7 @@ GIVE AWAY TIMER
     font-size: 20px;
 
     font-weight: 500;
-     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
 
 }
 
@@ -984,7 +875,7 @@ GIVE AWAY TIMER
 
     line-height: 1.5;
 
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+   
 
 }
 
@@ -1102,7 +993,7 @@ GIVE AWAY TIMER
 
     font-size: 29px;
 
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+   
 
 }
 
@@ -1165,7 +1056,7 @@ GIVE AWAY TIMER
     font-size: 14px;
 
 
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+   
 
 }
 
@@ -1203,7 +1094,7 @@ GIVE AWAY TIMER
         0 6px 18px
         rgba(0,0,0,.35);
 
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+   
 
 }
 
@@ -1388,24 +1279,31 @@ GIVE AWAY TIMER
  .whb-left .time-close{
   width: 100%;
   min-height: 30%;
-  display: flex;
+  display: flex !important;
+
+
+
+
   gap: .2rem;
+  margin-top: .3rem;
+
   align-items: center;
   justify-items: start !important;
-  padding-left: .1rem;
+
   color: rgb(0, 124, 128);
   font-size: .8rem;
-  padding-bottom: .4rem;
+
   padding-left: .3rem;
   white-space: nowrap;
   font-weight: 600;
-   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
  }
 
-.whb-left .time-close .pulse-dot{
-  margin-top: .3rem;
-  margin-left: .2rem;
-}
+ .whatsapp-channel
+
+
+
+
+
 
 
 
@@ -1549,7 +1447,7 @@ clock section
 
   .stat-num 
   {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+   
     font-size: .55rem;
     font-weight: 800;
     color: var(--gold);
@@ -1650,7 +1548,7 @@ clock section
       justify-content: center;
       font-size: .97rem;
       font-weight: 600;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;
+      
       margin-right: .1rem;
       margin-top: .64rem;
     }
@@ -1691,7 +1589,7 @@ clock section
 .live-order-body {
   height: 400px !important;
   scroll-behavior: smooth;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ 
   padding: .8rem .2rem;
 }
 
@@ -1732,7 +1630,7 @@ clock section
   border-radius: .6rem !important;
  
   animation: backColorChanger 53s infinite;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ 
 }
 
 
@@ -1925,7 +1823,7 @@ clock section
   align-items: center;
   gap: .5rem;
   text-align: center;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ 
   font-weight: 700;
   letter-spacing: -0.01em;
   text-shadow: 0 1px 8px rgba(0,0,0,0.3);
@@ -1961,7 +1859,7 @@ clock section
   gap: .1rem;
   background: none;
   white-space: nowrap;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ 
   letter-spacing: 0.04em;
   text-transform: uppercase;
   z-index: 10;
@@ -1985,7 +1883,7 @@ clock section
   text-align: center;
   gap: .45rem;
   white-space: nowrap;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ 
   color: rgba(220,215,215,0.9);
   font-weight: 500;
   transition: transform 0.2s ease;
@@ -2151,7 +2049,7 @@ NOTICE BOARD SECTION
 .notice-container h3{
   color: white;
   font-size: 1.3rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ 
   font-weight: 500;
   background: black;
   padding: .5rem 2rem;
@@ -2206,13 +2104,13 @@ NOTICE BOARD SECTION
 
 .dark-mode .notice-text h4{
   color: rgb(192, 190, 190);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ 
   font-weight: 500;
 }
 
 .notice-text h4{
   color: rgb(22, 22, 31);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ 
   font-weight: 500;
 }
 
@@ -2342,7 +2240,7 @@ SOCIAL FOLLOW SECTION
   border-radius: 3px;
   color: white;
   font-size: 1.1rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ 
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   -webkit-user-select: none;
@@ -2403,7 +2301,7 @@ SOCIAL FOLLOW SECTION
   font-size: .75rem;
   font-weight: 600 !important;
   white-space: nowrap;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ 
   padding-bottom: .2rem;
   margin-right: .6rem;
   color: white;
@@ -2432,14 +2330,16 @@ SOCIAL FOLLOW SECTION
 
 
 .whatsapp-channel{
-  width: 97%;
+  width: 90% !important;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  justify-content: center;
+  gap: .5rem;
   background: linear-gradient(90deg, #0abb68dc, #06db71e1);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: .9rem;
+ 
+  font-size: .7rem;
   color: var(--background-cl);
   border: none;
   border-radius: 1rem;
@@ -2461,8 +2361,8 @@ SOCIAL FOLLOW SECTION
 }
 
 .whatsapp-channel img{
-  width: 1.6rem;
-  height: 1.6rem
+  width: 1.4rem;
+  height: 1.4rem
 }
 
 
@@ -2497,7 +2397,7 @@ DASHBOARD TOTALS OVERVIEW
 .daily-analytics h4{
   color: rgb(18, 26, 31) !important;
   font-size: 1.05rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ 
   font-weight: 600;
   margin-top: .8rem !important;
 }
@@ -2580,26 +2480,26 @@ top section
 .total-card-top small{
   font-size: .85rem;
   color: var(--thin-border);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ 
 }
 
 .dark-mode .total-card-top small{
   font-size: .85rem;
   color: rgb(20, 142, 163);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ 
 }
 
 
 .dark-mode .total-card-top .cedis{
   font-size: .87rem !important;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ 
 }
 
 
 .total-card-top .cedis{
   font-size: .87rem !important;
   color: rgb(30, 209, 149);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ 
 }
 
 .total-card .total-card-top img{
@@ -2612,7 +2512,7 @@ top section
   font-size: .86rem !important;
   font-weight: 700;
   color: var(--thin-border-1);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ 
 }
 
 .dark-mode .total-card .total-card-bottom p{
@@ -2671,7 +2571,7 @@ DAILY ANALYTICS SECTION
     min-height: 20px;
     font-size: 11px;
     font-weight: 500;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+   
 }
 
 .card-performance i {
@@ -2708,7 +2608,7 @@ DAILY ANALYTICS SECTION
 .card-performance .performance-label {
     color: #8b9298;
     font-weight: 500;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+   
 }
 
 .card-performance.increase {
@@ -2833,7 +2733,7 @@ border: 1px solid rgb(223, 223, 223);
   padding: .5rem 3.5rem;
   color: rgb(100, 91, 83);
   border-radius: .1rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ 
   font-weight: 600;
   border: 1px solid rgb(230, 230, 230);
   font-size: .9rem;

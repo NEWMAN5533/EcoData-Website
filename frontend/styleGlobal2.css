@@ -1,4 +1,100 @@
-  
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+small,
+span,
+strong,
+p {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+
+
+:root {
+
+  --noti-bg:
+    var(--admin-bg, #f6f6f6);
+
+  --noti-surface:
+    var(--admin-surface, #ffffff);
+
+  --noti-surface-soft:
+    var(--admin-surface-subtle, #f8f8f8);
+
+  --noti-text:
+    var(--admin-text, #171717);
+
+  --noti-muted:
+    var(--admin-text-muted, #737373);
+
+  --noti-border:
+    var(--admin-border, #e7e7e7);
+
+  --noti-border-strong:
+    var(--admin-border-strong, #d5d5d5);
+
+  --noti-accent: #171717;
+
+  --noti-success: #16845d;
+
+  --noti-warning: #c4a80c;
+
+  --noti-radius-lg: 18px;
+
+  --noti-radius-md: 12px;
+
+  --noti-shadow-sm:
+    0 2px 8px rgba(0,0,0,.035);
+
+  --noti-shadow-md:
+    0 12px 30px rgba(0,0,0,.065);
+
+  --noti-transition:
+    220ms cubic-bezier(.2,.7,.2,1);
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+body.dark-mode {
+
+  --noti-bg: #0d0d0d;
+
+  --noti-surface: #151515;
+
+  --noti-surface-soft: #1b1b1b;
+
+  --noti-text: #f5f5f5;
+
+  --noti-muted: #999999;
+
+  --noti-border: #292929;
+
+  --noti-border-strong: #373737;
+
+  --noti-accent: #ffffff;
+
+  --noti-success: #36c98a;
+
+  --noti-warning: #d7bc20;
+
+  --noti-shadow-sm:
+    0 3px 12px rgba(0,0,0,.25);
+
+  --noti-shadow-md:
+    0 15px 40px rgba(0,0,0,.35);
+}
+
+
+
+
 :root {
   --bg-cl: #FFF;
   --primary-cl: #fff;
@@ -15,8 +111,19 @@
   --airteltigo-btn: rgb(28, 46, 119);
 
   /*====NEW===ROOT====*/
+  /*====NEW===ROOT====*/
 
+ /* Main backgrounds */
+  --body-bg-dark: #0b0d10;
+  --page-bg-dark: #0b0d10;
+  --sidebar-bg-dark: #101318;
+  --surface-bg-dark: #14181e;
+  --surface-bg-hover-dark: #191e25;
 
+  /* Cards */
+  --card-bg-dark: #12161c;
+  --card-bg-hover-dark: #171c23;
+  --card-elevated-dark: #181d24;
 
   /***
   NEW ROOT
@@ -29,12 +136,13 @@
   /***
   DARK MODE COLORS
   ***/
-
-  --welcome-card-bg-2:  #141c27 ;
+  --darkMode-bg-cl: rgb(24, 29, 35) !important;
+  --welcome-card-bg-2:  #141c27;
   --welcome-card-bg:  #0e141b ;
   --welcome-card-bg-3: rgba(77, 77, 77, 0.89);
   --welcome-card-border: rgb(74, 88, 94);
-
+  --thin-border: rgb(38, 49, 49);
+  --thin-border2:rgb(44, 61, 61);
   --text-cl: rgb(145, 168, 164);
   --text-cl-2: rgb(210, 216, 216);
   --text-cl-3: rgb(139, 141, 141);
@@ -42,6 +150,7 @@
   /**
   BORDER SOLID COLORS
   **/
+  --thin-border-1:  #0d6d5a;
   --thin-border-2:  #830616;
   --thin-border-3:  #b97207;
   --thin-border-4:  #036aa7;
@@ -58,403 +167,122 @@
 }
 
 
-/****
-MAIN CONTAINER
-****/
-.container{
-  width: 100vw;
-  height: max-content !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  position: relative;
-  padding: 0;
-  margin: 0;
-  background: transparent;
+
+
+
+/* =========================================================
+    NAVBAR & SIDEBAR
+   ========================================================= */
+.client-topbar{
+  background: var(--bg-cl);
 }
 
-
-
-.container .navbar 
-{
-background: #fff;
+.dark-mode .client-topbar{
+  background: var(--body-bg-dark) !important;
 }
 
-
-
-.dark-mode .container .navbar {
-  border-bottom: 1px solid var(--thin-border) !important;
-  box-shadow: none !important;
-  background: var(--darkMode-bg-cl);
+@media screen and (min-width: 768px){
+  .dark-mode .client-topbar{
+    background: var(--card-bg-dark) !important;
+  }
 }
 
+/* =========================================================
+    MAIN CONTAINER SETTINGS
+============================================================*/
 
-
-.container .main-grid-container{
+.client-main .main-grid-container{
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  height: calc(100vh - 3.5rem) !important;
-  margin-top: 3.4rem !important;
+  grid-template-columns: repeat(2, 1fr);
+  height: calc(100vh - 70px );
   position: relative;
   align-items: center;
   justify-content: center;
   justify-self: center;
   overflow-y: hidden !important;
-}
-
-.container .main-grid-container{
-  margin-top: 3.4rem !important;
-  overflow-y: hidden !important;
-}
-
-.dark-mode .main-grid-container{
-  margin-top: 3.4rem !important;
-  overflow-y: hidden !important;
+  background: var(--bg-cl);
 }
 
 
 
 
 
+.clamper{
+  color: rgba(255, 153, 0, 0.863) !important;
+}
 
-/****
-aside section
-****/
-.container .main-grid-container .grid-container-aside{
-  width: 20vw;
-  height: calc(100vh - 3.5rem) !important;
+.card-container .client-page-header{
+  width: 100%;
+  max-width: 98%;
   display: flex;
   flex-direction: column;
-  position: relative;
-  border-right:  1px solid var(--text-cl-2);
-}
-
-.dark-mode .main-grid-container .grid-container-aside {
-  border-right:  1px solid var(--thin-border) ;
-}
-
-
-/*****
-GRID-CONTAINER SIDEBAR
-*****/
-.grid-container-aside .userProfile-container{
-  width: 100%;
-  height: 15vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  border-bottom: 1px solid var(--text-cl-2);
-  padding-left: 1.2rem;
-}
-
-.dark-mode .userProfile-container{
-  border-bottom: 1px solid var(--thin-border);
-}
-
-
-.userProfile-container .user{
-  width: 100%;
-  height: 100%;
-  display: flex;
   gap: 1rem;
-  align-items: center;
+  align-items: start;
   justify-content: start;
-  position: relative;
-}
-
-.userProfile-container .user .us{
-  display: flex;
-  gap: .5rem;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  width: 2.8rem;
-  height: 2.8rem;
-  background: linear-gradient( 135deg, rgb(77, 189, 209), rgb(35, 35, 105));
-  border-radius: 40%;
-  text-align: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-}
-
-  .us h1{
-  margin: 0;
-  padding: 0;
-  font-size: 1.3rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-weight: 600;
-  color: white;
-}
-
-.user h3{
-  color: rgb(87, 87, 94);
-}
-
-.dark-mode .userProfile-container .user h3{
-  color: var(--primary-cl);
-  opacity: .9;
+  margin: 14px auto;
+  padding: 10px;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.grid-container-aside .quick-links-section{
-  width: 100%;
-  height: 51vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  position: relative;
-  border-bottom: 1px solid var(--text-cl-2);
-  overflow-y: hidden;
-  overflow-x: hidden;
+.client-page-header h1{
+  color: var(--card-bg-dark) !important;
 }
 
 
-.dark-mode .quick-links-section{
-  border-bottom: 1px solid var(--thin-border);
-}
-
-.quick-links-section .link-section-wrapper{
-  width: 100%;
-  height: 87vh;
-  overflow-y: auto;
-  padding: 0 1rem ;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
-  position: relative;
-  overflow-x: hidden;
-}
-
-.quick-links-section .link-section-wrapper h4{
-  margin: 0;
-  line-height: .9;
-}
-
-.link-section-wrapper .quicker-nav{
-width: 100%;
-height: 2.5rem;;
-display: flex;
-gap: .6rem;
-align-items: center;
-justify-content: start;
-position: relative;
-margin-top: .5rem;
-transition: .1s ease;
-padding: .2rem 0;
-}
-
-
-
-.link-section-wrapper .quicker-nav img{
-  width: 2rem;
-  height: 2rem;
-  background: var(--background-cl);
-  border-radius: 8px;
-  padding: .2rem;
-  box-shadow: 0 2px 6px rgba(252, 175, 11, 0.199);
-}
-
-.dark-mode .link-section-wrapper .quicker-nav img{
-  background: white;
-  opacity: .8;
-}
-
-
-.link-section-wrapper .quicker-nav p{
-  font-size: .9rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-weight: 600;
-  color: var(--thin-border);
-  opacity: .7;
-
-}
-
-.dark-mode .link-section-wrapper .quicker-nav p{
-  color: rgba(248, 207, 152, 0.911);
-  opacity: .8;
-}
-
-
-
-.link-section-wrapper .quicker-nav.active {
-  background: rgb(189, 184, 116);
-  padding-left: .8rem;
-  border-radius: .4rem;
-}
-
-
-.dark-mode .link-section-wrapper .quicker-nav.active {
-  background: none;
-  padding-left: .8rem;
-  border-radius: .4rem;
-  border: 1px solid var(--thin-border);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.75);
-}
-
-
-
-.link-section-wrapper .quicker-nav:hover{
-background: rgb(247, 246, 246);
-padding-left: .8rem;
-border-radius: .4rem;
-box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-cursor: pointer;
-}
-
-.dark-mode .link-section-wrapper .quicker-nav:hover{
-  background: none;
-  border: 1px solid var(--thin-border);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-}
-
-.dark-mode .link-section-wrapper .quicker-nav:hover p{
-  color: white;
-}
-
-
-
-.link-section-wrapper .quicker-nav:hover img{
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-}
-
-
-/****
-CREATE STORE LINK
-*****/
-.quick-links-section .storeBuild{
-  width: 100%;
-  height: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 1rem;
-  position: relative;
-  background: var(--background-cl);
-  border-radius: .4rem;
-  border: 1px solid var(--text-cl-2);
-}
-
-
-
-.dark-mode .storeBuild {
-  background: var(--thin-border);
-  border-radius: .4rem;
-  border: 1px solid var(--background-cl);
-  opacity: .7;
-}
-
-.storeBuild p{
-  color: rgb(94, 92, 90);
-  font-weight: 600;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-.dark-mode .storeBuild p{
-  color: var(--primary-cl);
-
-}
-
-
-
-
-
-
-
-
-
-
-.grid-container-aside .bottom-nav{
-  width: 100%;
-  height: 25vh;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  padding: .6rem;
-}
-
-
-
-.bottom-nav .sign-link{
-  width: 100%;
-  height: 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: start;
+.client-btn-primary{
+  padding: 1rem 2rem;
   background: transparent;
-  margin-top: .5rem;
-  padding-left: .8rem;
+  border-radius: 10px;
+  color: var(--admin-text-muted);
+  border: 1px solid var(--thin-border);
+  font-weight: 600;
+  cursor: not-allowed;
 }
 
-.sign-link .login{
-  border: none;
-  background-color: var(--background-cl);
-  color: var(--btn-bg-cl);
-  font-weight: 500;
-  display: flex;
-  align-items:center;
-  justify-content: center;
-  width: 50%;
-  font-size: .8rem;
-  padding: .3rem;
-  border-radius: 3px;
-  transition: .1s ease;
+.dark-mode .client-btn-primary,
+.dark-mode .client-page-header h1{
+  color: var(--bg-cl) !important;
+  opacity: .8;
 }
 
-.sign-link .login img{
-    width: 1.1rem;
-    height: 1.3rem;
-    margin-right: .5rem;;
-    border-radius: 0;
+
+
+
+
+
+
+
+
+
+.dark-mode .client-main .main-grid-container{
+  background: var(--body-bg-dark) !important;
+}
+
+
+
+@media screen and (min-width: 768px) {
+  .main-grid-container{
+    padding: 0 2rem !important;
+    
   }
 
-.dark-mode .login{
-  color: rgb(48, 48, 54);
+  .dark-mode .client-main .main-grid-container{
+    background: var(--card-bg-dark) !important;
+  }
 }
 
-.login:hover{
-  cursor: pointer;
-  background: linear-gradient(135deg, rgb(8, 128, 102), rgb(0, 77, 128));
-  color: white;
-  font-size: .8rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+.card-container{
+  width: 100%;
 }
 
-.sign-link:nth-child(3) .login{
-  background: rgb(255, 115, 0);
-  color: white;
-  opacity: .8;
-}
+@media screen and (max-width: 768px){
+  .card-container {
+    margin-top: 60px !important;
+  }
 
-.sign-link:first-child .login 
-{
-  background: linear-gradient(135deg, rgb(8, 128, 102), rgb(0, 77, 128));
-  color: rgb(181, 238, 181);
-}
-
-.sign-link:nth-child(2) .login{
-  background: linear-gradient(135deg, rgb(8, 128, 102), rgb(0, 77, 128));
-  color: white;
+  .client-main .main-grid-container{
+    height: 100% !important;
+  }
 }
 
 
@@ -463,65 +291,16 @@ CREATE STORE LINK
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.card-container .welcome-card{
-  margin-top: 1vh !important;
-  margin-bottom: .7rem;
-  
-
-}
-
-
-
-
-
-
-
-
-
-
-/*****
-main section
-*****/
-/*******
-MAIN GRID CONTAINER SECTION
-*******/
-.container .main-grid-container .grid-container-main{
+.client-main .main-grid-container .grid-container-main{
   width: 45vw;
-  height: calc(100vh - 3.5rem) !important;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
+  align-items: center;
   position: relative;
-  overflow-y: auto;
   scrollbar-width: none;
-  border-right: 1px solid var(--text-cl-2);
 }
 
 
@@ -531,430 +310,17 @@ MAIN GRID CONTAINER SECTION
   display: none !important; 
 }
 
-.dark-mode .container .main-grid-container .grid-container-main {
-  border-right: 1px solid var(--thin-border);
-}
 
 
+/* =========================================================
+   01. HERO STATUS GIVEAWAY
+   ========================================================= */
 
+/* =========================================================
+   02. HERO TRUST SWIPER
+   ========================================================= */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- .ads-container-right{
-  width: 35vw;
-  height: calc(100vh - 3.5rem) !important;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: center;
-  position: relative;
-  padding-top: 1rem;
-  overflow-y: auto;
-}
-
-
-.ads-container-right .side-title {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  justify-content: center;
-  width: 100%;
-  max-width: 80%;
-  margin-bottom: -1rem;
-}
-
-.side-title .imgup{
-  width: 100%;
-  height: 8rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-
-  background: url(./css/icons/market.png);
-  background-size: contain;
-  background-position: center;
-}
-
-.container .ads-container-right .side-title h2{
-  color: wheat;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-
-
-
-
-.dark-mode .container .ads-container-right  .side-title  h2{
-  color: wheat;
-  opacity: .9;
-}
-
-
-
-
-
-/****
-AGENT PAGE CODE SECTION
-*****/
-/****
-agent cta
-*****/
-
-.dark-mode #usernameDisplay{
-  color: rgb(233, 231, 231) !important;
-}
-
-.agent-upgrade-wrapper{
-width: 100%;
-max-width: 340px;
-height: 30rem;
-display: flex;
-flex-direction: column;
-align-items: center;
-padding-top: 1rem;
-position: relative;
-margin-bottom: 3rem;
-}
-
-
-.agent-upgrade {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: column;
-  height: 25rem;
-  max-width: 300px;
-  margin: 20px auto;
-  padding: 30px;
-  text-align: center;
-  background: #ffffff;
-  border-radius: 14px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
-  border-bottom: 4px solid rgb(177, 138, 79);
-}
-
-.dark-mode .agent-upgrade{
-  background: var(--welcome-card-bg);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-  border: 2px solid var(--thin-border-5);
-}
-
-.agent-upgrade strong{
-  color: rgb(51, 49, 49);
-  font-size: .74rem;
-}
-
-.dark-mode .agent-upgrade p strong{
-  color: rgb(2, 255, 221);
-}
-
-.agent-upgrade img{
-  width: 3rem;
-  height: 3rem;
-}
-
-.dark-mode .agent-upgrade img{
-  background: white;
-  padding: 6px;
-  border-radius: 50%;
-  opacity: .8;
-}
-
-.agent-upgrade h2 {
-  font-size: 26px;
-  margin-bottom: 15px;
-  color: #53595f;
-}
-
-.dark-mode .agent-upgrade h2{
-color: white;
-}
-
-.agent-upgrade p {
-  font-size: 15px;
-  color: #555;
-  line-height: 1.6;
-  margin-bottom: 25px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-.dark-mode .agent-upgrade p{
-  color: white;
-  opacity: .5;
-}
-
-.agent-upgrade button {
-  background: linear-gradient(134deg, rgb(241, 218, 8),rgb(180, 106, 8));
-  color: white;
-  border: none;
-  padding: 14px 28px;
-  font-size: 15px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s ease;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;;
-  user-select: none;
-}
-
-.agent-upgrade button:hover {
-  transform: translateY(-3px);
-}
-
-
-/****
-AGENT CTA ENDS
-****/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  /*****
-  PAYSTACK LOADER
-  ******/
-
-
-   .loader-card img{
-    width: 2.5rem;
-    height: 1.9rem;
-    margin-bottom: -.9rem;
-  }
-
-  .loader-card p{
-    font-weight: 600;
-    color: rgb(224, 226, 226);
-    font-size: 1rem;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
-
-/***
-LOADING SPINNER
-****/
-.paystack-loader{
-  position: fixed;
-  inset: 0;
-  backdrop-filter: blur(6px);
-  justify-content: center;
-  align-items: center;
-}
-
-.paystack-loader .loader-navbar{
-  width: 100%;
-  padding: 0 1rem;
-  height: 3.3rem;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  justify-content: space-between;
-  align-items: center;
-  align-content: center;
-  border-bottom: 1px solid var(--thin-border);
-}
-
-.paystack-loader .loader-navbar .loader-navbar-left{
-  display: flex;
-  position: relative;
-}
-
-.loader-navbar .loader-navbar-left img{
-  width: 3rem;
-  height: 3rem;
-}
-
-#paystackLoader{
-  backdrop-filter: blur(1px);
-  background:  var(--background-cl-1);
-  z-index: 999999000000;
-  overflow: hidden;
-}
-
-.paystack-loader.hidden{
-  display: none;
-}
-
-.loader-card {
-  background: b(56, 43, 43)rg;
-  padding: 2px 40px;
-  border-radius: 5px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 320px;
-  align-items: center;
-  justify-content: center;
-  align-items: center;
-  gap: .7rem;
-  text-align: center;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: .9rem;
-  animation: scaleIn .25s ease;
-  box-shadow: 0 2px 6px rgba(15, 15, 15, 0.01);
-  z-index: 999999999999;
-}
-
-.loader-card p{
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: .9rem;
-}
-
- .loader-card .loading-dots
-  {
-    display: flex;
-    gap: 6px;
-    width: max-content;
-    height: 2rem;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    background: transparent;
-    padding: .2rem 1rem;
-    border-radius: 16px;
-    box-shadow: 0 2px 8px rgba(44, 43, 43, 0.18);
-    border: 1px solid rgba(34, 34, 33, 0.363);
-  }
-
-  .loading-dots span{
-    width: 6px;
-    height: 6px;
-    border-radius: 40%;
-    align-items: 50%;
-    background: #e7ebe9;
-
-    animation: bouncerDots 1.9s infinite ease-in-out;
-  }
-
-  /* display each dot */
-  .loader-dots span:nth-child(1) 
-  {
-    animation-delay: 0s;
-  }
-
-    .loader-dots span:nth-child(2) 
-  {
-    animation-delay: 0.2s;
-  }
-
-      .loader-dots span:nth-child(3) 
-  {
-    animation-delay: 0.4s;
-  }
-
-        .loader-dots span:nth-child(3) 
-  {
-    animation-delay: 0.6s;
-  }
-
-  /* keyframe */
-  @keyframes bouncerDots {
-   0% {
-    opacity: 0;
-    scale: 0.6;
-   }
-
-   20%{
-    opacity: 1;
-   }
-
-   40% {
-    opacity: 0;
-
-   }
-   100%{
-    scale: 0.6;
-    opacity: 0;
-   }
-  }
-
-
-
-
-
-
-
-.spinner{
-    width: 29px;
-    height: 29px;
-    border: 3.5px solid rgb(147, 149, 150);
-    border-top: 3.5px solid transparent;
-    border-radius: 50%;
-    animation: spin 1.1s linear infinite;
-    display: none;
-}
-
-
-
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-/***
-LOADING SPINNER
-****/
-
-  /*****
-  PAYSTACK LOADER ENDS=============================
-  ******/
-
-
+   
     /****
 TRUSTED LOGOS ALIGN
 ****/
@@ -962,8 +328,48 @@ TRUSTED LOGOS ALIGN
   justify-content: center !important;
 }
 
+/* =========================================================
+   03. THUMBNAIL SCROLLING
+   ========================================================= */
+
+/* =========================================================
+   04. DELIVERY TRACKERS
+   ========================================================= */
+
+/* =========================================================
+  05. NOTICE CONTAINER
+========================================================= */
 
 
+/* =========================================================
+   06. INSTALL PWA
+   ========================================================= */
+
+
+/* =========================================================
+   07. FOLLOW CHANNEL
+   ========================================================= */
+
+/* =========================================================
+   08. HOME TOTAL ANALYTICS
+   ========================================================= */
+
+
+/* =========================================================
+   09. ORDERS TABLE
+   ========================================================= */
+
+
+/* =========================================================
+   10. SELECT OFFER CONTAINER
+   ========================================================= */
+
+
+/* =========================================================
+   11. NORMAL VIEW & GRID CARD VIEW
+   ========================================================= */
+
+   
     /*****
     GRID CARDS RESIZING
     ******/
@@ -1062,7 +468,7 @@ TRUSTED LOGOS ALIGN
      }
 
     .hero-text-container .hero-top-content .top-right-content h2{
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+     
       font-size: 1rem;
       font-weight: 500;
       color: var(--text-cl-3);
@@ -1077,7 +483,7 @@ TRUSTED LOGOS ALIGN
 
 
   .hero-text-container .hero-top-content .top-right-content small{
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+     
       font-size: .7rem;
       font-weight: 500;
       color: var(--text-cl-3);
@@ -1096,7 +502,7 @@ TRUSTED LOGOS ALIGN
       margin-top: 2.1rem;
       color: white;
       opacity: .8;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+     
       font-weight: 600;
       font-size: 1rem;
       height: 2.3rem;
@@ -1133,8 +539,1109 @@ TRUSTED LOGOS ALIGN
 
 
 
+/* =========================================================
+   12. MODALS
+   ========================================================= */
 
 
+/* =========================================================
+   13. SCRIPTS
+   ========================================================= */
+
+/* =========================================================
+   08. FORM CONTROLS
+   ========================================================= */
+
+
+
+
+
+
+
+
+
+
+/*** ============ GRID JUNCTION 2 =============**/
+
+
+
+/* =========================================================
+    01. HERO
+   ========================================================= */
+
+
+
+
+/* =========================================================
+   02.  
+   ==============================================
+   
+/* =========================================================
+   PREMIUM OFFERS
+   Modern dashboard-style sidebar
+========================================================= */
+
+:root {
+
+  /* ---------- Premium Surface ---------- */
+  --premium-bg: var(--admin-bg, #f5f5f5);
+  --premium-surface: var(--admin-surface, #ffffff);
+  --premium-surface-soft:
+    var(--admin-surface-subtle, #f8f8f8);
+
+  /* ---------- Text ---------- */
+  --premium-text:
+    var(--admin-text, #171717);
+
+  --premium-muted:
+    var(--admin-text-muted, #737373);
+
+  /* ---------- Borders ---------- */
+  --premium-border:
+    var(--admin-border, #e7e7e7);
+
+  --premium-border-strong:
+    var(--admin-border-strong, #d5d5d5);
+
+  /* ---------- Accent ---------- */
+  --premium-accent: #171717;
+  --premium-accent-soft: #f1f1f1;
+
+  /* ---------- Status ---------- */
+  --premium-success: #16845d;
+  --premium-success-soft: rgba(22, 132, 93, .09);
+
+  /* ---------- Radius ---------- */
+  --premium-radius-sm: 10px;
+  --premium-radius-md: 14px;
+  --premium-radius-lg: 18px;
+
+  /* ---------- Shadows ---------- */
+  --premium-shadow-sm:
+    0 2px 8px rgba(0, 0, 0, .04);
+
+  --premium-shadow-md:
+    0 10px 28px rgba(0, 0, 0, .07);
+
+  --premium-shadow-lg:
+    0 18px 45px rgba(0, 0, 0, .10);
+
+  /* ---------- Motion ---------- */
+  --premium-transition:
+    220ms cubic-bezier(.2, .7, .2, 1);
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+html.dark-mode {
+
+  --premium-bg: #0d0d0d;
+  --premium-surface: #151515;
+  --premium-surface-soft: #1b1b1b;
+
+  --premium-text: #f5f5f5;
+  --premium-muted: #9b9b9b;
+
+  --premium-border: #292929;
+  --premium-border-strong: #363636;
+
+  --premium-accent: #ffffff;
+  --premium-accent-soft: #242424;
+
+  --premium-success: #35c98b;
+  --premium-success-soft: rgba(53, 201, 139, .10);
+
+  --premium-shadow-sm:
+    0 2px 10px rgba(0, 0, 0, .25);
+
+  --premium-shadow-md:
+    0 12px 30px rgba(0, 0, 0, .32);
+
+  --premium-shadow-lg:
+    0 20px 50px rgba(0, 0, 0, .40);
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+========================================================= */
+
+
+/* =========================================================
+   PREMIUM OFFERS — VERTICAL SCROLL
+========================================================= */
+
+.ads-container-right {
+  width: 95%;
+  min-width: 0;
+
+  /* Allow the offers column to scroll */
+  height: 100vh;
+  overflow-x: hidden;
+
+  gap: 2rem;
+
+  /* Smooth touch scrolling */
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+
+  /* Prevent scrollbar from affecting layout */
+  scrollbar-gutter: stable;
+}
+
+.premium-offers {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+
+}
+
+.ads-wrapper{
+  display: flex;
+  width: 90%;
+  align-items: end;
+  margin-top: 1rem;
+  justify-content: end;
+  flex-direction: column;
+  gap: 1.5rem;
+  justify-items: center;
+  justify-self: center;
+}
+
+.premium-offers-header {
+  flex-shrink: 0;
+}
+
+.premium-offer-card {
+  flex-shrink: 0;
+}
+
+
+
+.ads-container-right::-webkit-scrollbar {
+  width: 5px;
+}
+
+.ads-container-right::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ads-container-right::-webkit-scrollbar-thumb {
+  background: var(--premium-border-strong);
+  border-radius: 999px;
+}
+
+.ads-container-right::-webkit-scrollbar-thumb:hover {
+  background: var(--premium-muted);
+}
+
+
+/* Firefox */
+
+.ads-container-right {
+  scrollbar-width: thin;
+  scrollbar-color:
+    var(--premium-border-strong)
+    transparent;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .ads-container-right {
+    max-height: none;
+    overflow: visible;
+    scrollbar-width: auto;
+  }
+
+}
+
+
+/* =========================================================
+   SECTION HEADER
+========================================================= */
+
+.premium-offers-header {
+  position: relative;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 14px;
+
+  margin-bottom: 3px;
+  padding: 18px;
+
+  border: 1px solid var(--premium-border);
+  border-radius: var(--premium-radius-lg);
+
+  background:
+    linear-gradient(
+      145deg,
+      var(--premium-surface),
+      var(--premium-surface-soft)
+    );
+
+  box-shadow: var(--premium-shadow-sm);
+
+  overflow: hidden;
+}
+
+
+/* subtle header glow */
+
+.premium-offers-header::after {
+
+  content: "";
+
+  position: absolute;
+
+  width: 120px;
+  height: 120px;
+
+  right: -55px;
+  top: -55px;
+
+  border-radius: 50%;
+
+  background: rgba(0, 0, 0, .035);
+
+  pointer-events: none;
+}
+
+
+.premium-offers-header .side-title-content {
+  min-width: 0;
+}
+
+
+.premium-eyebrow {
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 5px;
+
+  margin-bottom: 6px;
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: .13em;
+
+  color: var(--premium-muted);
+}
+
+
+.premium-eyebrow i {
+  font-size: 12px;
+}
+
+
+.premium-offers-header h2 {
+
+  margin: 0;
+
+  color: var(--premium-text);
+
+  font-size: 19px;
+  font-weight: 750;
+
+  letter-spacing: -.035em;
+}
+
+
+.premium-offers-header p {
+
+  margin: 5px 0 0;
+
+  color: var(--premium-muted);
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+
+.premium-header-icon {
+
+  flex: 0 0 auto;
+
+  width: 40px;
+  height: 40px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid var(--premium-border);
+
+  border-radius: 12px;
+
+  background: var(--premium-surface-soft);
+
+  color: var(--premium-text);
+
+  font-size: 18px;
+
+  transition:
+    transform var(--premium-transition),
+    background var(--premium-transition);
+}
+
+
+.premium-offers-header:hover .premium-header-icon {
+
+  transform: rotate(-5deg) scale(1.04);
+
+  background: var(--premium-accent-soft);
+}
+
+
+/* =========================================================
+   OFFER CARD
+========================================================= */
+.agent-upgrade-wrapper {
+  margin-bottom: 7rem;
+}
+.premium-offer-card {
+
+  width: 100%;
+
+ 
+
+  border: 1px solid var(--premium-border);
+
+  border-radius: var(--premium-radius-lg);
+
+  background: var(--premium-surface);
+
+  box-shadow: var(--premium-shadow-sm);
+
+  overflow: hidden;
+
+  transition:
+    transform var(--premium-transition),
+    box-shadow var(--premium-transition),
+    border-color var(--premium-transition);
+}
+
+
+.premium-offer-card:hover {
+
+  transform: translateY(-3px);
+
+  border-color: var(--premium-border-strong);
+
+  box-shadow: var(--premium-shadow-md);
+}
+
+
+/* =========================================================
+   CARD BODY
+========================================================= */
+
+.agent-upgrade {
+
+  position: relative;
+
+  padding: 18px;
+
+  overflow: hidden;
+}
+
+
+/* subtle background decoration */
+
+.agent-upgrade::before {
+
+  content: "";
+
+  position: absolute;
+
+  width: 160px;
+  height: 160px;
+
+  right: -95px;
+  top: -80px;
+
+  border-radius: 50%;
+
+  background: var(--premium-accent-soft);
+
+  opacity: .7;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   TOP ROW
+========================================================= */
+
+.premium-card-top {
+
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-bottom: 17px;
+}
+
+
+.premium-card-icon {
+
+  width: 52px;
+  height: 52px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid var(--premium-border);
+
+  border-radius: 15px;
+
+  background: var(--premium-surface-soft);
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.02);
+
+  transition:
+    transform var(--premium-transition),
+    border-color var(--premium-transition);
+}
+
+
+.premium-card-icon img {
+
+  width: 29px;
+  height: 29px;
+
+  object-fit: contain;
+}
+
+
+.premium-offer-card:hover .premium-card-icon {
+
+  transform: translateY(-2px);
+
+  border-color: var(--premium-border-strong);
+}
+
+
+/* =========================================================
+   BADGE
+========================================================= */
+
+.premium-card-badge {
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 5px;
+
+  padding: 6px 9px;
+
+  border: 1px solid var(--premium-border);
+
+  border-radius: 999px;
+
+  background: var(--premium-surface-soft);
+
+  color: var(--premium-text);
+
+  font-size: 10px;
+  font-weight: 750;
+
+  white-space: nowrap;
+}
+
+
+.premium-card-badge i {
+  font-size: 11px;
+}
+
+
+.premium-card-badge.coming-soon {
+
+  color: var(--premium-muted);
+
+  font-size: 9px;
+
+  letter-spacing: .04em;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.premium-card-content {
+
+  position: relative;
+  z-index: 1;
+}
+
+
+.premium-card-label {
+
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: var(--premium-muted);
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: .13em;
+}
+
+
+.premium-card-content h3 {
+
+  margin: 0;
+
+  color: var(--premium-text);
+
+  font-size: 17px;
+  font-weight: 750;
+
+  line-height: 1.25;
+
+  letter-spacing: -.025em;
+}
+
+
+.premium-card-content p {
+
+  margin: 8px 0 0;
+
+  color: var(--premium-muted);
+
+  font-size: 12px;
+
+  line-height: 1.65;
+}
+
+
+/* =========================================================
+   BENEFITS
+========================================================= */
+
+.premium-card-footer {
+
+  position: relative;
+  z-index: 1;
+
+  display: grid;
+
+  gap: 7px;
+
+  margin-top: 15px;
+
+  padding-top: 14px;
+
+  border-top: 1px solid var(--premium-border);
+}
+
+
+.premium-benefit {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color: var(--premium-muted);
+
+  font-size: 11px;
+}
+
+
+.premium-benefit i {
+
+  flex: 0 0 auto;
+
+  color: var(--premium-success);
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   ACTION BUTTON
+========================================================= */
+
+.premium-action-btn {
+
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-top: 17px;
+
+  padding: 11px 14px;
+
+  border: 1px solid var(--premium-text);
+
+  border-radius: 11px;
+
+  background: var(--premium-text);
+
+  color: var(--premium-surface);
+
+  font: inherit;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform var(--premium-transition),
+    opacity var(--premium-transition),
+    box-shadow var(--premium-transition);
+}
+
+
+.premium-action-btn i {
+
+  font-size: 14px;
+
+  transition:
+    transform var(--premium-transition);
+}
+
+
+.premium-action-btn:hover {
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 7px 18px rgba(0,0,0,.12);
+}
+
+
+.premium-action-btn:hover i {
+
+  transform: translateX(3px);
+}
+
+
+.premium-action-btn:active {
+
+  transform: translateY(0) scale(.985);
+}
+
+
+/* =========================================================
+   DISABLED / COMING SOON
+========================================================= */
+
+.premium-action-disabled {
+
+  border-color: var(--premium-border);
+
+  background: var(--premium-surface-soft);
+
+  color: var(--premium-muted);
+
+  cursor: not-allowed;
+
+  box-shadow: none;
+}
+
+
+.premium-action-disabled:hover {
+
+  transform: none;
+
+  box-shadow: none;
+}
+
+
+.premium-action-disabled i {
+  display: none;
+}
+
+
+/* =========================================================
+   AGENT CARD — SMALL ACCENT
+========================================================= */
+
+.premium-agent-card {
+
+  background:
+    linear-gradient(
+      145deg,
+      var(--premium-surface),
+      var(--premium-surface-soft)
+    );
+}
+
+
+/* =========================================================
+   STORE CARD
+========================================================= */
+
+.premium-store-card {
+
+  background:
+    linear-gradient(
+      145deg,
+      var(--premium-surface),
+      var(--premium-surface-soft)
+    );
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+  .premium-offers-header {
+
+    padding: 15px;
+
+    border-radius: 15px;
+  }
+
+
+  .premium-offers-header h2 {
+    font-size: 17px;
+  }
+
+
+  .premium-offers-header p {
+    font-size: 11px;
+  }
+
+
+  .premium-header-icon {
+
+    width: 36px;
+    height: 36px;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+  }
+
+
+  .agent-upgrade {
+    padding: 16px;
+  }
+
+
+  .premium-card-content h3 {
+    font-size: 16px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media (max-width: 430px) {
+
+  .premium-offers-header {
+
+    padding: 14px;
+  }
+
+
+  .premium-card-top {
+    margin-bottom: 14px;
+  }
+
+
+  .premium-card-icon {
+
+    width: 47px;
+    height: 47px;
+
+    border-radius: 13px;
+  }
+
+
+  .premium-card-icon img {
+
+    width: 26px;
+    height: 26px;
+  }
+
+
+  .premium-card-content p {
+
+    font-size: 11.5px;
+
+    line-height: 1.6;
+  }
+
+
+  .premium-card-footer {
+
+    margin-top: 13px;
+    padding-top: 12px;
+  }
+
+}
+/* =========================================================
+   03. 
+   ========================================================= */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+/* ========================MODALS= JUNCTION=================
+   .  
+   ========================================================= */
+
+    /*****
+  PAYSTACK LOADER
+  ******/
+
+
+   .loader-card img{
+    width: 2.5rem;
+    height: 1.9rem;
+    margin-bottom: -.9rem;
+  }
+
+  .loader-card p{
+    font-weight: 600;
+    color: rgb(224, 226, 226);
+    font-size: 1rem;
+   
+  }
+
+/***
+LOADING SPINNER
+****/
+.paystack-loader{
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(6px);
+  justify-content: center;
+  align-items: center;
+}
+
+.paystack-loader .loader-navbar{
+  width: 100%;
+  padding: 0 1rem;
+  height: 3.3rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  border-bottom: 1px solid var(--thin-border);
+}
+
+.paystack-loader .loader-navbar .loader-navbar-left{
+  display: flex;
+  position: relative;
+}
+
+.loader-navbar .loader-navbar-left img{
+  width: 3rem;
+  height: 3rem;
+}
+
+#paystackLoader{
+  backdrop-filter: blur(1px);
+  background:  var(--background-cl-1);
+  z-index: 999999000000;
+  overflow: hidden;
+}
+
+.paystack-loader.hidden{
+  display: none;
+}
+
+.loader-card {
+  background: b(56, 43, 43)rg;
+  padding: 2px 40px;
+  border-radius: 5px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  gap: .7rem;
+  text-align: center;
+ 
+  font-size: .9rem;
+  animation: scaleIn .25s ease;
+  box-shadow: 0 2px 6px rgba(15, 15, 15, 0.01);
+  z-index: 999999999999;
+}
+
+.loader-card p{
+ 
+  font-size: .9rem;
+}
+
+ .loader-card .loading-dots
+  {
+    display: flex;
+    gap: 6px;
+    width: max-content;
+    height: 2rem;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    padding: .2rem 1rem;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(44, 43, 43, 0.18);
+    border: 1px solid rgba(34, 34, 33, 0.363);
+  }
+
+  .loading-dots span{
+    width: 6px;
+    height: 6px;
+    border-radius: 40%;
+    align-items: 50%;
+    background: #e7ebe9;
+
+    animation: bouncerDots 1.9s infinite ease-in-out;
+  }
+
+  /* display each dot */
+  .loader-dots span:nth-child(1) 
+  {
+    animation-delay: 0s;
+  }
+
+    .loader-dots span:nth-child(2) 
+  {
+    animation-delay: 0.2s;
+  }
+
+      .loader-dots span:nth-child(3) 
+  {
+    animation-delay: 0.4s;
+  }
+
+        .loader-dots span:nth-child(3) 
+  {
+    animation-delay: 0.6s;
+  }
+
+  /* keyframe */
+  @keyframes bouncerDots {
+   0% {
+    opacity: 0;
+    scale: 0.6;
+   }
+
+   20%{
+    opacity: 1;
+   }
+
+   40% {
+    opacity: 0;
+
+   }
+   100%{
+    scale: 0.6;
+    opacity: 0;
+   }
+  }
+
+
+.spinner{
+    width: 29px;
+    height: 29px;
+    border: 3.5px solid rgb(147, 149, 150);
+    border-top: 3.5px solid transparent;
+    border-radius: 50%;
+    animation: spin 1.1s linear infinite;
+    display: none;
+}
+
+
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /*****
+  PAYSTACK LOADER ENDS=============================
+  ******/
+
+/* =========================================================
+   02. 
+   ========================MODALS=ENDS====================== */
+ 
 
 
 
@@ -1201,7 +1708,7 @@ MAKE MAIN 100%
 /***
 GRID RESET
 ***/
- .container .main-grid-container{
+ .client-main .main-grid-container{
   display: grid;
   grid-template-columns: repeat(1, 1fr);
  }
@@ -1211,8 +1718,8 @@ GRID RESET
  CLOSE ALL BORDERS @ LAPTOP UI FOR PHONES
  ***/
   .main-grid-container .grid-container-main,
-  .container .main-grid-container .grid-container-aside,
-  .container .navbar
+  .client-main .main-grid-container .grid-container-aside,
+  .client-main .navbar
  {
   border-left: none !important;
   border-right: none !important;
@@ -1436,7 +1943,7 @@ MAKE MAIN 100%
 
 
 
- .container .main-grid-container{
+ .client-main .main-grid-container{
   display: grid;
   grid-template-columns: repeat(1, 1fr);
  }
@@ -1447,8 +1954,8 @@ MAKE MAIN 100%
  CLOSE ALL BORDERS @ LAPTOP UI FOR PHONES
  ***/
   .main-grid-container .grid-container-main,
-  .container .main-grid-container .grid-container-aside,
-  .container .navbar
+  .client-main .main-grid-container .grid-container-aside,
+  .client-main .navbar
  {
   border-left: none !important;
   border-right: none !important;
@@ -1558,7 +2065,7 @@ MAKE MAIN 100%
 
 
 
- .container .main-grid-container{
+ .client-main .main-grid-container{
   display: grid;
   grid-template-columns: repeat(1, 1fr);
  }
@@ -1570,8 +2077,8 @@ MAKE MAIN 100%
  CLOSE ALL BORDERS @ LAPTOP UI FOR PHONES
  ***/
   .main-grid-container .grid-container-main,
-  .container .main-grid-container .grid-container-aside,
-  .container .navbar
+  .client-main .main-grid-container .grid-container-aside,
+  .client-main .navbar
  {
   border-left: none !important;
   border-right: none !important;
@@ -1661,7 +2168,7 @@ MAKE MAIN 100%
 
 
 
- .container .main-grid-container{
+ .client-main .main-grid-container{
   display: grid;
   grid-template-columns: repeat(1, 1fr);
  }
@@ -1671,8 +2178,8 @@ MAKE MAIN 100%
  CLOSE ALL BORDERS @ LAPTOP UI FOR PHONES
  ***/
   .main-grid-container .grid-container-main,
-  .container .main-grid-container .grid-container-aside,
-  .container .navbar
+  .client-main .main-grid-container .grid-container-aside,
+  .client-main .navbar
  {
   border-left: none !important;
   border-right: none !important;
@@ -1767,7 +2274,7 @@ MAKE MAIN 100%
 
 
 
- .container .main-grid-container{
+ .client-main .main-grid-container{
   display: grid;
   grid-template-columns: repeat(1, 1fr);
  }
@@ -1777,8 +2284,8 @@ MAKE MAIN 100%
  CLOSE ALL BORDERS @ LAPTOP UI FOR PHONES
  ***/
   .main-grid-container .grid-container-main,
-  .container .main-grid-container .grid-container-aside,
-  .container .navbar
+  .client-main .main-grid-container .grid-container-aside,
+  .client-main .navbar
  {
   border-left: none !important;
   border-right: none !important;
@@ -1877,7 +2384,7 @@ MAKE MAIN 100%
 
 
 
- .container .main-grid-container{
+ .client-main .main-grid-container{
   display: grid;
   grid-template-columns: repeat(1, 1fr);
  }
@@ -1887,8 +2394,8 @@ MAKE MAIN 100%
  CLOSE ALL BORDERS @ LAPTOP UI FOR PHONES
  ***/
   .main-grid-container .grid-container-main,
-  .container .main-grid-container .grid-container-aside,
-  .container .navbar
+  .client-main .main-grid-container .grid-container-aside,
+  .client-main .navbar
  {
   border-left: none !important;
   border-right: none !important;
@@ -1985,7 +2492,7 @@ MAKE MAIN 100%
 
 
 
- .container .main-grid-container{
+ .client-main .main-grid-container{
   display: grid;
   grid-template-columns: repeat(1, 1fr);
  }
@@ -1995,8 +2502,8 @@ MAKE MAIN 100%
  CLOSE ALL BORDERS @ LAPTOP UI FOR PHONES
  ***/
   .main-grid-container .grid-container-main,
-  .container .main-grid-container .grid-container-aside,
-  .container .navbar
+  .client-main .main-grid-container .grid-container-aside,
+  .client-main .navbar
  {
   border-left: none !important;
   border-right: none !important;
@@ -2047,7 +2554,7 @@ DISPLAY NONE DIV
   display: none !important;
 }
 
- .container .navbar{
+ .client-main .navbar{
   border-bottom: 1px solid var(--text-cl-2) !important;
    box-shadow: none !important;
    opacity: .5;
@@ -2118,7 +2625,7 @@ REDUCE WIDTH OF LEFT SIDEBAR'S
 
 .bottom-nav .sign-link:nth-child(2) .login{
   font-size: .65rem !important;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ 
 }
 
 
@@ -2243,16 +2750,16 @@ LAPTOP START
       display: none !important;
     }
 
- .container .navbar{
+ .client-main .navbar{
   border-bottom: 1px solid var(--text-cl-2) !important;
    box-shadow: none !important;
    opacity: .5;
  }
-  .dark-mode .container .navbar{
+  .dark-mode .client-main .navbar{
       box-shadow: none !important;
     }
 
-    .container .main-grid-container{
+    .client-main .main-grid-container{
   overflow-y: hidden !important;
 }
     
@@ -2373,7 +2880,7 @@ TRUSTED LOGOS ALIGN
 
 
 .trusted-container .trusted-text{
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ 
   font-size: 1rem !important;
 }
 /****
@@ -2505,7 +3012,7 @@ WHAT'APP CHAT BUTTON
 
 
     .hero-text-container .hero-top-content .top-right-content h2{
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+     
       font-size: 1rem;
       font-weight: 500;
       color: var(--text-cl-3);
@@ -2520,7 +3027,7 @@ WHAT'APP CHAT BUTTON
 
 
   .hero-text-container .hero-top-content .top-right-content small{
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+     
       font-size: .7rem;
       font-weight: 500;
       color: var(--text-cl-3);
@@ -2539,7 +3046,7 @@ WHAT'APP CHAT BUTTON
       margin-top: 2.1rem;
       color: white;
       opacity: .8;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+     
       font-weight: 600;
       font-size: 1rem;
       height: 2.3rem;
@@ -2619,17 +3126,17 @@ WHAT'APP CHAT BUTTON
       display: none !important;
     }
 
-.container .navbar{
+.client-main .navbar{
   border: 1px solid var(--text-cl-2) !important;
   box-shadow: none !important;
   opacity: .5;
 }
-    .dark-mode .container .navbar{
+    .dark-mode .client-main .navbar{
       box-shadow: none !important;
     }
 
 
-    .container .main-grid-container{
+    .client-main .main-grid-container{
   overflow-y: hidden !important;
 }
 
@@ -2757,7 +3264,7 @@ TRUSTED LOGOS ALIGN
 
 
 .trusted-container .trusted-text{
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ 
   font-size: 1rem !important;
 }
 /****
@@ -2887,7 +3394,7 @@ WHAT'APP CHAT BUTTON
 
 
     .hero-text-container .hero-top-content .top-right-content h2{
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+     
       font-size: 1rem;
       font-weight: 500;
       color: var(--text-cl-3);
@@ -2902,7 +3409,7 @@ WHAT'APP CHAT BUTTON
 
 
   .hero-text-container .hero-top-content .top-right-content small{
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+     
       font-size: .7rem;
       font-weight: 500;
       color: var(--text-cl-3);
@@ -2921,7 +3428,7 @@ WHAT'APP CHAT BUTTON
       margin-top: 2.1rem;
       color: white;
       opacity: .8;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+     
       font-weight: 600;
       font-size: 1rem;
       height: 2.3rem;

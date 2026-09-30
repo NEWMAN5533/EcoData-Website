@@ -1,136 +1,39 @@
 
-:root {
-  --color-white: #fff;
-  --color-light: #f5f4f7;
-  --color-gray-light: #86848c;
-  --color-gray-dark: #56555e;
-  --color-dark: #27282f;
-  --color-primary: rgb(71, 7, 234);
-  --color-success: rgb(34, 202, 75);
-  --color-danger: rgb(255, 67, 54);
-  --color-warning:  rgb(234, 181, 7);
-  --color-purple: rgb(160, 99, 245);
-  --color-primary-light: rgba(71, 7, 234, 0.2);
-  --color-success-light: rgba(34, 202, 75, 0.2);
-  --color-danger-light: rgba(255, 67, 54, 0.2);
-  --color-purple-light: rgba(160, 99, 245, 0.2);
-
-  --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-
-  --card-padding: 1.6rem;
-  --border-cl: rgb(226, 226, 226);
-
-  --radius-1: 0.5rem;
-  --radius-2: 1rem;
-  --radius-3: 1.6rem;
-
-  --transition: all 300ms ease;
-}
-    
-:root {
-  /* ==========================================
-     SELLER CREATOR STUDIO — LIGHT THEME
-  ========================================== */
-
-  /* Main backgrounds */
-  --body-bg-light: #f7f8fa;
-  --page-bg-light: #f7f8fa;
-  --sidebar-bg-light: #ffffff;
-  --surface-bg-light: #ffffff;
-  --surface-bg-hover-light: #f5f6f8;
-
-  /* Cards */
-  --card-bg: #ffffff;
-  --card-bg-hover: #fafbfc;
-  --card-elevated: #ffffff;
-
-  /* Borders */
-  --border-color: rgba(15, 23, 42, 0.09);
-  --border-light: rgba(15, 23, 42, 0.055);
-  --border-hover: rgba(15, 23, 42, 0.15);
-
-  /* Text */
-  --text-color: #171a21;
-  --text-primary: #111318;
-  --text-secondary: #5f6672;
-  --text-muted: #858c98;
-  --text-faint: #aeb4bd;
-
-  /* Accent */
-  --accent-color: #6d4aff;
-  --accent-hover: #5d3bea;
-  --accent-soft: rgba(109, 74, 255, 0.08);
-  --accent-border: rgba(109, 74, 255, 0.20);
-
-  /* Success */
-  --success-color: #16a978;
-  --success-soft: rgba(22, 169, 120, 0.08);
-  --success-border: rgba(22, 169, 120, 0.18);
-
-  /* Warning */
-  --warning-color: #d99518;
-  --warning-soft: rgba(217, 149, 24, 0.09);
-  --warning-border: rgba(217, 149, 24, 0.18);
-
-  /* Danger */
-  --danger-color: #e5485d;
-  --danger-soft: rgba(229, 72, 93, 0.08);
-  --danger-border: rgba(229, 72, 93, 0.18);
-
-  /* Info */
-  --info-color: #168bd2;
-  --info-soft: rgba(22, 139, 210, 0.08);
-  --info-border: rgba(22, 139, 210, 0.18);
-
-  /* Inputs */
-  --input-bg: #ffffff;
-  --input-border: rgba(15, 23, 42, 0.11);
-  --input-border-focus: rgba(109, 74, 255, 0.45);
-  --input-placeholder: #9aa1ac;
-
-  /* Buttons */
-  --button-bg: #111318;
-  --button-text: #ffffff;
-  --button-hover: #24272d;
-
-  /* Sidebar */
-  --sidebar-border: rgba(15, 23, 42, 0.08);
-  --sidebar-item-hover: rgba(15, 23, 42, 0.045);
-  --sidebar-item-active: rgba(109, 74, 255, 0.08);
-  --sidebar-item-active-text: #6240ed;
-
-  /* Tables */
-  --table-header-bg: #f8f9fb;
-  --table-row-hover: rgba(15, 23, 42, 0.025);
-  --table-divider: rgba(15, 23, 42, 0.065);
-
-  /* Charts */
-  --chart-grid: rgba(15, 23, 42, 0.07);
-  --chart-text: #858c98;
-  --chart-tooltip-bg: #ffffff;
-
-  /* Shadows */
-  --shadow-sm: 0 4px 15px rgba(15, 23, 42, 0.06);
-  --shadow-md: 0 10px 30px rgba(15, 23, 42, 0.08);
-  --shadow-lg: 0 20px 50px rgba(15, 23, 42, 0.12);
-
-  /* Radius */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 20px;
-
-  /* General */
-  --transition-fast: 0.18s ease;
-  --transition-normal: 0.25s ease;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+small,
+span,
+strong,
+p {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
 }
 
-:root {
-  /* ==========================================
-     SELLER CREATOR STUDIO — DARK THEME
-  ========================================== */
 
-  /* Main backgrounds */
+
+:root {
+  --bg-cl: #FFF;
+  --primary-cl: #fff;
+  --secondary-cl: rgb(50, 50, 190);
+  --dark-cl: #0a0a0a;
+  --ascent-cl: rgb(158, 97, 209);
+  --background-cl: #e6e8ce;
+  --card-full-bg-cl: rgb(255, 217, 0);
+  --card-full-tele-bg-cl: rgb(221, 19, 19);
+  --card-full-airtel-bg-cl:  rgb(6, 6, 231);
+  --border-cl-2: rgba(66, 66, 26, 0.226);
+  --mtn-btn: rgb(193, 196, 19);
+  --telecel-btn: rgb(180, 57, 19);
+  --airteltigo-btn: rgb(28, 46, 119);
+
+  /*====NEW===ROOT====*/
+  /*====NEW===ROOT====*/
+
+ /* Main backgrounds */
   --body-bg-dark: #0b0d10;
   --page-bg-dark: #0b0d10;
   --sidebar-bg-dark: #101318;
@@ -142,163 +45,32 @@
   --card-bg-hover-dark: #171c23;
   --card-elevated-dark: #181d24;
 
-  /* Borders */
-  --border-color-dark: rgba(128, 128, 128, 0.15);
-  --border-light-dark: rgba(255, 255, 255, 0.055);
-  --border-hover-dark: rgba(255, 255, 255, 0.14);
-
-  /* Text */
-  --text-color: #f1f3f5;
-  --text-primary: #f5f7f9;
-  --text-secondary: #a7adb7;
-  --text-muted: #737b87;
-  --text-faint: #555d68;
-
-  /* Accent */
-  --accent-color: #7c5cff;
-  --accent-hover: #8d70ff;
-  --accent-soft: rgba(124, 92, 255, 0.12);
-  --accent-border: rgba(124, 92, 255, 0.25);
-
-  /* Success */
-  --success-color: #35d49a;
-  --success-soft: rgba(53, 212, 154, 0.10);
-  --success-border: rgba(53, 212, 154, 0.20);
-
-  /* Warning */
-  --warning-color: #f5b84b;
-  --warning-soft: rgba(245, 184, 75, 0.10);
-  --warning-border: rgba(245, 184, 75, 0.20);
-
-  /* Danger */
-  --danger-color: #ff5f6d;
-  --danger-soft: rgba(255, 95, 109, 0.10);
-  --danger-border: rgba(255, 95, 109, 0.20);
-
-  /* Info */
-  --info-color: #55b8ff;
-  --info-soft: rgba(85, 184, 255, 0.10);
-  --info-border: rgba(85, 184, 255, 0.20);
-
-  /* Inputs */
-  --input-bg: #0f1318;
-  --input-border: rgba(255, 255, 255, 0.09);
-  --input-border-focus: rgba(124, 92, 255, 0.55);
-  --input-placeholder: #5f6670;
-
-  /* Buttons */
-  --button-bg-dark: #f1f3f5;
-  --button-text-dark: #0b0d10;
-  --button-hover-dark: #ffffff;
-
-  /* Sidebar */
-  --sidebar-border: rgba(255, 255, 255, 0.07);
-  --sidebar-item-hover: rgba(255, 255, 255, 0.055);
-  --sidebar-item-active: rgba(124, 92, 255, 0.12);
-  --sidebar-item-active-text: #a996ff;
-
-  /* Tables */
-  --table-header-bg: rgba(255, 255, 255, 0.025);
-  --table-row-hover: rgba(255, 255, 255, 0.025);
-  --table-divider: rgba(255, 255, 255, 0.06);
-
-  /* Charts */
-  --chart-grid: rgba(255, 255, 255, 0.06);
-  --chart-text: #777f8b;
-  --chart-tooltip-bg: #171c23;
-
-  /* Shadows */
-  --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.18);
-  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.25);
-  --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.35);
-
-  /* Radius */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 20px;
-
-  /* General */
-  --transition-fast: 0.18s ease;
-  --transition-normal: 0.25s ease;
-}
-
-
-    :root {
-    --ink: #0f0e0c;
-    --paper: #f5f0e8;
-    --cream: #ede8dc;
-    --rust: #c4522a;
-    --sage: #7a8c6e;
-    --gold: #c9a84c;
-    --dust: #b8b0a0;
-    --white: #faf8f4;
-    --shadow: rgba(15,14,12,0.12);
-      --darkM-cl: #111b21;
-  --darkM1-cl: #0b141a;
-
-
-
-
-    --bg-cl: #181c47f8;
-  --bg-cl-2: #1f314b;
-  --secondary-bg:  rgb(235, 232, 232);
-  --secondary-bg-2:  rgba(9, 21, 87, 0.63);
-  --primary-cl: #fff;
-  --color-light: #f5f4f7;
-  --secondary-cl: rgb(50, 50, 190);
-  --dark-cl: #0a0a0a;
-  --ascent-cl: rgb(158, 97, 209);
-  --background-cl: #ecece4;
-  --card-full-bg-cl: rgb(255, 217, 0);
-  --card-full-tele-bg-cl: rgb(221, 19, 19);
-  --card-full-airtel-bg-cl:  rgb(6, 6, 231);
-  --border-cl-2: rgba(66, 66, 26, 0.226);
-  --mtn-btn: rgb(193, 196, 19);
-  --telecel-btn: rgb(180, 57, 19);
-  --airteltigo-btn: rgb(28, 46, 119);
-
-  --hero-grid-overlay: linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.7));
-  --hero-badge-bg: rgba(255,255,255, 0.1);
-  --text-shadow: 0 2px 20px rgba(0,0,0,0.5);
-  --hero-filter: drop-shadow(0 2px 8px rgba( 0,0,0,0.6));
-
-
   /***
   NEW ROOT
   ***/
-  --btn-bg-cl: rgba(250, 125, 9, 0.329);
+  --btn-bg-cl: rgb(250, 126, 9);
   --user-panel-bg: rgba(42, 42, 194, 0.938);
-  --clock-bg-cl: rgb(2, 61, 52);
-  --section-badge: rgba(0, 212, 154, 0.1);
+  --clock-bg-cl: rgba(252, 175, 11, 0.199);
+  --clock-bg-cl-1: rgb(2, 61, 52);
 
   /***
   DARK MODE COLORS
   ***/
-
-  --welcome-card-bg: rgb(2, 2, 39);
-  --welcome-card-bg-2: rgb(24, 5, 5);
+  --darkMode-bg-cl: rgb(24, 29, 35) !important;
+  --welcome-card-bg-2:  #141c27;
+  --welcome-card-bg:  #0e141b ;
+  --welcome-card-bg-3: rgba(77, 77, 77, 0.89);
   --welcome-card-border: rgb(74, 88, 94);
- 
+  --thin-border: rgb(38, 49, 49);
+  --thin-border2:rgb(44, 61, 61);
   --text-cl: rgb(145, 168, 164);
   --text-cl-2: rgb(210, 216, 216);
-
-
   --text-cl-3: rgb(139, 141, 141);
-
-
-  --darkM-cl: #111b21;
-  --darkM1-cl: #0b141a;
-  --fab-cl: #00a884;
-  --fab-cl: #1f2c34;
-  --accentG-cl: #00a884;
-  --primaryT-cl: #e9edef;
-  --secondaryMT-cl: #8696a0;
-  --dividerB-cl: #2a3942;
 
   /**
   BORDER SOLID COLORS
   **/
+  --thin-border-1:  #0d6d5a;
   --thin-border-2:  #830616;
   --thin-border-3:  #b97207;
   --thin-border-4:  #036aa7;
@@ -312,53 +84,11 @@
   --card-mtn-bg:  #faba5ad0;
   --card-tel-bg:  #fa537dd0;
   --card-tigo-bg:  #6cbff7cb;
-   --btn-bg-cl: rgb(250, 126, 9);
+}
 
-  /*** box-shadow **/
---nv-menu-bsh: 0 -8px 32px hsla(0, 0%, 0%, .1);
---card-box-bsh: 0 2px 6px hsla(0, 0%, 0%, .2);
---card-bg-cl: rgba(255, 255, 255, 0.04);
 
-  /**** 
-  new root variables
-   --header-height: 3.2rem;
-
-  /*======== COLORS ============*/
-  --first-color: hsl(230, 62%, 56%);
-  --title-color: hsl(230, 70%, 16%);
-  --text-color: hsl(230, 16%, 45%);
-  --border-color: hsl(230, 50%, 90%);
-  --white-color: hsl(0, 0%, 100%);
-  --body-color: hsl(230, 100%, 96%);
-  --container-color: hsl(0, 0%, 100%);
-
-  /*======== FONT & TYPOGRAPHY ============*/
-  --body-font: "Montserrat", sans-serif;
-  --second-font: "Montserrat", sans-serif;
-  --biggest-font-size: "Montserrat", sans-serif;
-  --h1-font-size: 1.5rem;
-  --h2-font-size:  1.25rem;
-  --h3-font-size: 1rem;
-
-  --normal-font-size: .938rem;
-  --small-font-size:  .813rem;
-  --smaller-font-size: .75rem;
-
-  /*======== FONT WEIGHT ============*/
-  --font-regular: 400;
-  --font-medium: 400;
-  --font-semi-bold: 400;
-  --font-fm:  system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-
-  /*======== Z INDEX ============*/
-  --z-tooltip: 10;
-  --z-fixed: 100;
-  }
 
   
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { scroll-behavior: smooth; }
 
   
   /* Custom cursor */
@@ -412,158 +142,8 @@
    }
 
 
-/****
-MAIN CONTAINER
-****/
-.container{
-  width: 100vw;
-  height: max-content;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: column;
-  position: relative;
-  padding: 0;
-  margin: 0;
-  background: transparent;
-}
 
-
-
-
-
-.container .navbar{
-  width: 100%;
-  height: 3.5rem !important;
-  display: flex;
-  background: #fff !important;
-  align-items: center;
-  align-content: center !important;
-  justify-content: space-between;
-  padding: 0 .8rem;
-  position: fixed !important;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10000000;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-.dark-mode .container .navbar{
-  width: 100% !important;
-  height: 3.5rem !important;
-  z-index: 100000000;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  background: var(--body-bg-dark) !important;
-  overflow: hidden;
-  border-bottom: 1px solid var(--thin-border) !important;
-}
-
-
-
-
-/**
-* NAV LEFT
-**/
-.container .navbar .nav-left{
-  display: flex;
-  position: relative;
-  justify-self:start;
-  height: 100%;
-
-  padding: 1rem 0;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-}
-
-
-.dark-mode .container .navbar .nav-left{
-  display: flex;
-  position: relative;
-  justify-self:start;
-  height: 100%;
-
-  padding: 1rem 0;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-}
-
-
-.container .navbar .nav-right{
-  display: flex;
-  position: relative;
-  justify-self:end;
-  height: 100%;
-  padding: .8rem 0;
-  align-items: center;
-  justify-content: center;
-}
-
-
-@media screen and (min-width: 768px){
-  #sidebarViewer{
-    display: none !important;
-  }
-}
-
-
-.dark-mode .container .navbar .nav-right{
-  display: flex;
-  position: relative;
-  justify-self:end;
-  height: 100%;
-  padding: .8rem 0;
-  align-items: center;
-  justify-content: center;
-}
-
-
-
-.container .navbar .nav-left img{
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.log-out{
-  padding: 8px 16px;
-  background: #e63946;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: .2s ease;
-  margin-left: 1rem;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;;
-  user-select: none;
-      }
-
-      .log-out:hover{
-        background: #c1121f;
-      }
-
-
-
-
-      .card-container .welcome-card {
-        margin-top: 1vh !important;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-      }
+ 
 
 
 
@@ -577,7 +157,7 @@ MAIN CONTAINER
 ads 
 *****/
 .gallery {
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 10px;
   margin: 16px;
@@ -618,7 +198,7 @@ justify-content: center;
 }
 
 .install-title p{
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ 
   font-size: .8rem;
   color: rgb(20, 18, 14);
   font-weight: 500;
@@ -721,7 +301,7 @@ position: relative;
   justify-content: center;
   text-align: center;
   color: var(--text-cl);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ 
   font-size: .8rem;
   background-color: rgb(255, 255, 255);
   backdrop-filter: blur(18px);
@@ -836,7 +416,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
     .bottom-navbar{
       width: 100%;
       max-width: 99.99%;
-      height: 4rem;
+      height: 4.2rem;
       justify-self: center;
       position: fixed;
       bottom: 0;
@@ -895,7 +475,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
     }
 
     .btom-navIcon .activeImg{
-      padding: .19rem 1.16rem;
+      padding: .22rem 1.16rem !important;
       display: flex;
       position: relative;
       align-items: center;
@@ -924,7 +504,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
     AFA ACTIVE
     ***/
       .activeImg.activeMin{
-    padding: .19rem .3rem;
+    padding: .19rem .3rem !important;
     background: rgba(240, 240, 240, 0.363);
     box-shadow: 0 2px 6px rgba(68, 68, 68, 0.3);
     border: 1px solid  rgba(240, 240, 240, 0.363);
@@ -945,7 +525,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
     PAY ACTIVE
     ***/
     .activeImg.activeMin{
-    padding: .19rem .3rem;
+    padding: .19rem .3rem !important;
     background: rgba(240, 240, 240, 0.363);
     box-shadow: 0 2px 6px rgba(68, 68, 68, 0.3);
     border: 1px solid  rgba(240, 240, 240, 0.363);
@@ -982,7 +562,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
     .btom-navIcon .bottomIcon-textNav{
       font-size: .76rem;
       font-weight: 700;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+     
       color: rgb(116, 116, 117);
     }
 

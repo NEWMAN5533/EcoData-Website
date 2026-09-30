@@ -416,7 +416,7 @@ WELCOME SK ENDS
   .google-thumbnails-wrapper .sk-info-container{
     position: absolute;
     width: 100%;
-    height: 100% ;
+    height: 110% ;
     justify-self: center;
     align-items: center;
     justify-content: center !important;
@@ -424,6 +424,7 @@ WELCOME SK ENDS
     display: flex;
     padding: 0 1rem;
     gap: .7rem;
+    margin: 0 !important;
     border-radius: 0;
     z-index: 99;
   }
@@ -515,7 +516,8 @@ WELCOME SK ENDS
   position: absolute;
   width: 101%;
   height: 9rem;
-  margin-top: -.5rem;
+
+  margin-top: -.2rem;
   border-radius: 4px;
   display: flex;
   flex-direction: column;

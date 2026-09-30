@@ -1,0 +1,136 @@
+
+/* =========================================================
+   03. BASE
+   ========================================================= */
+   
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+small,
+span,
+strong,
+p {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+html{
+    font-size: 14.5px !important;
+  }
+
+.client-content,
+.client-content *,
+.client-content *::before,
+.client-content *::after {
+  box-sizing: border-box;
+}
+
+.client-content {
+  width: 98%;
+  border: 1px solid var(--client-border);
+  margin-inline: auto;
+  padding: 0 !important;
+
+
+  margin-bottom: 4rem;
+
+  color: var(--client-text);
+  box-shadow: var(--client-shadow-lg);
+  border-end-end-radius: 16px;
+  border-end-start-radius: 16px;
+}
+
+@media screen and (min-width: 768px) {
+  .client-content{
+    box-shadow: unset !important;
+    border: unset !important;
+  }
+}
+
+.client-content img {
+  max-width: 100%;
+}
+
+.client-content button,
+.client-content input,
+.client-content select {
+  font: inherit;
+}
+
+.client-content button,
+.client-content a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.client-content a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+
+.client-content select,
+.client-content input {
+  min-height: 38px;
+
+  border: 1px solid var(--client-border);
+  border-radius: 9px;
+
+  outline: none;
+
+  background: var(--client-surface-soft);
+  color: var(--client-text);
+
+  transition:
+    border-color var(--client-transition),
+    box-shadow var(--client-transition),
+    background var(--client-transition);
+}
+
+.client-content select {
+  padding: 0 11px;
+}
+
+.client-content input {
+  padding: 0 12px;
+}
+
+.client-content input::placeholder {
+  color: var(--client-muted-2);
+}
+
+.client-content input:focus,
+.client-content select:focus {
+  border-color: var(--client-border-strong);
+
+  box-shadow:
+    0 0 0 3px var(--client-accent-soft);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

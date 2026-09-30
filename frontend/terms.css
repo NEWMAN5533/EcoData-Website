@@ -72,19 +72,8 @@ html:focus-within{
 
 
 
-    body {
-      font-family: "Poppins", sans-serif;
-      line-height: 1.7;
 
-      color: #222;
-      padding: 30px;
-      max-width: 900px;
-      margin: auto;
-    }
-
-    .grid-container-main .card-container{
-
-    }
+  
 
     .card-container .main-terms-of-use-cont{
       margin-top: -3.5rem;

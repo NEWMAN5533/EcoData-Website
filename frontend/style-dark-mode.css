@@ -1,0 +1,289 @@
+/* =========================================================
+   ECODATA HYBRID PAGE
+   Dashboard Architecture + Normal Page UI
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+small,
+span,
+strong,
+p {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+/* =========================================================
+   01. DESIGN TOKENS
+   ========================================================= */
+
+:root {
+
+  /* ---------- PAGE COLORS ---------- */
+
+  --client-bg: #f6f7f8;
+  --client-surface: #ffffff;
+  --client-surface-2: #fafafa;
+  --client-surface-soft: #f1f3f4;
+
+  --client-text: #111315;
+  --client-text-soft: #34383c;
+  --client-muted: #73787d;
+  --client-muted-2: #9a9fa4;
+
+  --client-border: #e5e7e9;
+  --client-border-strong: #d6d9dc;
+
+  /* ---------- ACCENT ---------- */
+
+  --client-accent: #111315;
+  --client-accent-hover: #25282b;
+  --client-accent-soft: rgba(17, 19, 21, .07);
+
+  /* ---------- STATUS ---------- */
+
+  --client-success: #16845d;
+  --client-success-soft: rgba(22, 132, 93, .10);
+
+  --client-warning: #b7791f;
+  --client-warning-soft: rgba(183, 121, 31, .11);
+
+  --client-danger: #c73b3b;
+  --client-danger-soft: rgba(199, 59, 59, .10);
+
+  --client-info: #3d6fa8;
+  --client-info-soft: rgba(61, 111, 168, .10);
+
+
+  /* ---------- SHADOWS ---------- */
+
+  --client-shadow-sm:
+    0 1px 2px rgba(0, 0, 0, .04);
+
+  --client-shadow-md:
+    0 8px 24px rgba(0, 0, 0, .06);
+
+  --client-shadow-lg:
+    0 18px 50px rgba(0, 0, 0, .09);
+
+
+  /* ---------- RADIUS ---------- */
+
+  --client-radius-sm: 8px;
+  --client-radius-md: 12px;
+  --client-radius-lg: 16px;
+  --client-radius-xl: 22px;
+
+  /* ---------- SPACING ---------- */
+
+  --client-space-1: 4px;
+  --client-space-2: 8px;
+  --client-space-3: 12px;
+  --client-space-4: 16px;
+  --client-space-5: 20px;
+  --client-space-6: 24px;
+  --client-space-7: 32px;
+  --client-space-8: 40px;
+
+  /* ---------- MOTION ---------- */
+
+  --client-transition:
+    180ms cubic-bezier(.2,.65,.3,1);
+
+  --client-transition-slow:
+    320ms cubic-bezier(.2,.65,.3,1);
+
+}
+
+
+/* =========================================================
+   02. DARK MODE
+   ========================================================= */
+
+html.dark-mode {
+
+  --client-bg: #0d0f10;
+  --client-surface: #151719;
+  --client-surface-2: #191b1e;
+  --client-surface-soft: #202327;
+
+  --client-text: #f3f4f5;
+  --client-text-soft: #d5d8db;
+
+  --client-muted: #969ca2;
+  --client-muted-2: #6f757b;
+
+  --client-border: #292d31;
+  --client-border-strong: #373c41;
+
+  --client-accent: #f4f5f6;
+  --client-accent-hover: #ffffff;
+  --client-accent-soft: rgba(255,255,255,.08);
+
+  --client-shadow-sm:
+    0 1px 2px rgba(0,0,0,.20);
+
+  --client-shadow-md:
+    0 10px 28px rgba(0,0,0,.25);
+
+  --client-shadow-lg:
+    0 20px 55px rgba(0,0,0,.35);
+}
+
+
+
+
+/* ==========================================
+   ECODATA client — SHARED STYLES
+========================================== */
+
+:root {
+
+  --client-bg: #f6f6f6;
+  --client-surface: #ffffff;
+  --client-surface-soft: #fafafa;
+
+  -client-button-bg: #2c2c2c;
+  --client-button-scd-bg: #3b3b3b;
+
+  --client-text: #151515;
+  --client-text-white: #2c2c2c;
+  --client-text-dark: #f2f2f2;
+  --client-text-secondary: #666;
+  --client-text-muted: #929292;
+  --bar-span: rgba(0, 128, 107, 0.829);
+
+  --client-border: rgba(0, 0, 0, .08);
+  --client-border-strong: rgba(0, 0, 0, .12);
+
+  --client-icon: #666;
+
+  --client-hover: rgba(0, 0, 0, .035);
+
+  --client-sidebar-width: 270px;
+  --client-topbar-height: 70px;
+  --client-tooltip: var(--client-surface-soft);
+
+  --client-radius: 14px;
+  --client-small-radius: 9px;
+
+  --client-shadow:
+    0 2px 12px rgba(0, 0, 0, .035);
+
+
+}
+
+
+/* =========================================================
+   DARK THEME
+========================================================= */
+
+:root.client-dark{
+
+  --client-bg:#111111;
+
+  --client-surface:#181818;
+  --client-surface-soft:#202020;
+  --client-surface-hover:#252525;
+  --client-button-bg: #cccccc;
+  --client-button-scd-bg: #b1b1b1;
+  --client-tooltip: var(--client-surface-soft);
+
+  --client-border:#2c2c2c;
+  --client-border-strong:#383838;
+  --bar-span: rgba(10, 110, 72, 0.829);
+
+  --client-text-white:#f2f2f2;
+  --client-text-dark: #2c2c2c;
+  --client-text-secondary:#c4c4c4;
+  --client-text-muted:#e4e1e1;
+
+
+  --client-icon:#aaaaaa;
+
+  --client-input:#1c1c1c;
+  --client-input-focus:#202020;
+
+  --client-overlay:rgba(0,0,0,.72);
+
+  --client-shadow-sm:
+    0 3px 14px rgba(0,0,0,.22);
+
+  --client-shadow-md:
+    0 8px 25px rgba(0,0,0,.30);
+
+  --client-shadow-lg:
+    0 18px 45px rgba(0,0,0,.42);
+
+  --client-scrollbar:#444444;
+  --client-scrollbar-track:#181818;
+}
+
+/* =========================================================
+   01. HERO STATUS GIVEAWAY
+   ========================================================= */
+
+/* =========================================================
+   02. HERO TRUST SWIPER
+   ========================================================= */
+
+/* =========================================================
+   03. THUMBNAIL SCROLLING
+   ========================================================= */
+
+/* =========================================================
+   04. DELIVERY TRACKERS
+   ========================================================= */
+
+/* =========================================================
+  05. NOTICE CONTAINER
+========================================================= */
+
+
+/* =========================================================
+   06. INSTALL PWA
+   ========================================================= */
+
+
+/* =========================================================
+   07. FOLLOW CHANNEL
+   ========================================================= */
+
+/* =========================================================
+   08. HOME TOTAL ANALYTICS
+   ========================================================= */
+
+
+/* =========================================================
+   09. ORDERS TABLE
+   ========================================================= */
+
+
+/* =========================================================
+   10. SELECT OFFER CONTAINER
+   ========================================================= */
+
+
+/* =========================================================
+   11. NORMAL VIEW & GRID CARD VIEW
+   ========================================================= */
+
+
+
+/* =========================================================
+   12. MODALS
+   ========================================================= */
+
+
+/* =========================================================
+   13. SCRIPTS
+   ========================================================= */
+
+/* =========================================================
+   08. FORM CONTROLS
+   ========================================================= */
