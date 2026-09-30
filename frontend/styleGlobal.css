@@ -312,7 +312,7 @@ SNACKBAR SECTION
   gap: .6rem;
   margin-bottom: .5rem;
   font-size: .85rem;
-  padding: 0;
+  padding: 0 .3rem 0 0;
   color: var(--text-cl-3);
   font-weight: 600;
   font-family: var(--font-fm);
@@ -320,7 +320,7 @@ SNACKBAR SECTION
 }
 
 .h1 .statt{
-  width: 50%;
+  width: 30%;
   height: auto;
   display: flex;
   align-items: center;
