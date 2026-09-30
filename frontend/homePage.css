@@ -1,29 +1,27 @@
-.main-grid-container .ads-container-right,
-.main-grid-container .grid-container-main{
-  border-left: none !important;
-  border-right: none !important;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+small,
+span,
+strong,
+p {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
 }
-
-
-.buy-btn{
-  transition: transform .2s, opacity .2s !important;
-}
-
-
-.buy-btn:hover{
-  transform: translateY(-1px) !important;
-  opacity: .9 !important;
-}
-
 
 
 :root {
   --bg-cl: #FFF;
-  --primary-cl: #f5f4f7;
+  --primary-cl: #fff;
   --secondary-cl: rgb(50, 50, 190);
   --dark-cl: #0a0a0a;
   --ascent-cl: rgb(158, 97, 209);
   --background-cl: #e6e8ce;
+  --background-cl-1: rgba(26, 30, 32, 0.877);
   --card-full-bg-cl: rgb(255, 217, 0);
   --card-full-tele-bg-cl: rgb(221, 19, 19);
   --card-full-airtel-bg-cl:  rgb(6, 6, 231);
@@ -33,9 +31,9 @@
   --airteltigo-btn: rgb(28, 46, 119);
 
   /*====NEW===ROOT====*/
+  /*====NEW===ROOT====*/
 
-
-  /* Main backgrounds */
+ /* Main backgrounds */
   --body-bg-dark: #0b0d10;
   --page-bg-dark: #0b0d10;
   --sidebar-bg-dark: #101318;
@@ -58,12 +56,13 @@
   /***
   DARK MODE COLORS
   ***/
-  
+  --darkMode-bg-cl: rgb(24, 29, 35) !important;
   --welcome-card-bg-2:  #141c27;
-  --welcome-card-bg:  #0e141b;
+  --welcome-card-bg:  #0e141b ;
   --welcome-card-bg-3: rgba(77, 77, 77, 0.89);
   --welcome-card-border: rgb(74, 88, 94);
-
+  --thin-border: rgb(38, 49, 49);
+  --thin-border2:rgb(44, 61, 61);
   --text-cl: rgb(145, 168, 164);
   --text-cl-2: rgb(210, 216, 216);
   --text-cl-3: rgb(139, 141, 141);
@@ -71,6 +70,7 @@
   /**
   BORDER SOLID COLORS
   **/
+  --thin-border-1:  #0d6d5a;
   --thin-border-2:  #830616;
   --thin-border-3:  #b97207;
   --thin-border-4:  #036aa7;
@@ -88,34 +88,112 @@
 
 
 
-
-body.dark-mode::-webkit-scrollbar{
-  background: var(--button-hover) !important;
+.main-grid-container .ads-container-right,
+.main-grid-container .grid-container-main{
+  border-left: none !important;
+  border-right: none !important;
 }
 
 
-
-body.dark-mode::-webkit-scrollbar-thumb{
-  background: rgb(50, 53, 54) !important;
-  border-radius: 1rem;
-}
-
-.dark-mode .link-section-wrapper::-webkit-scrollbar{
-  background: var(--button-hover);
-}
-
-.dark-mode .link-section-wrapper::-webkit-scrollbar-thumb{
-  background: rgb(50, 53, 54);
-  border-radius: 1rem;
+.buy-btn{
+  transition: transform .2s, opacity .2s !important;
 }
 
 
+.buy-btn:hover{
+  transform: translateY(-1px) !important;
+  opacity: .9 !important;
+}
 
+/** ==================================
+    SYSTEM UPDATING MODAL
+  ==============================***/
+    .system-updating-modal{
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      z-index: 9999999999999999999999999999999999999999999
+    }
+
+
+    .updating-modal-content{
+      width: 100%;
+      height: 100%;
+      display:flex;
+      flex-direction: column;
+      line-height: 1.1;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background:  #fff;
+      backdrop-filter: blur(20px);
+    }
+
+    .update-top{
+      width: 100%;
+      max-width: 94%;
+      height: 50%;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+
+    .update-bottom{
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+
+      height: 50%;
+      padding: 20px;
+    }
+
+    .update-bottom h2{
+      font-size: 2rem;
+      animation: popupTiming 5s linear infinite;
+    }
+
+    .update-bottom p{
+      text-align: center;
+      margin-top: .3rem;
+      font-size: 1rem;
+      line-height: 1.4;
+      font-weight: 500;
+      color: var(--text-cl-3);
+    }
+
+
+    @keyframes popupTiming {
+      0%{
+        transform: scale(1);
+      }
+      40%{
+        transform: scale(0.9)
+      }
+      80%{
+        transform: translateY(2px) scale(0.8);
+      }
+      100%{
+        transform: scale(1);
+      }
+    }
+
+
+/** ==================================
+    SYSTEM UPDATING MODAL ENDS
+  ==============================***/
 
 
   .old-user{
     color: rgb(68, 70, 70);
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
     margin-top: .8rem;
     font-size: .72rem;
     display:flex;
@@ -521,7 +599,7 @@ text-transform: uppercase !important;
 
   .gridCard .gridCard-middle .oldTag small{
     color: rgb(238, 82, 82) !important;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
     font-weight: 600;
   }
 
@@ -531,7 +609,7 @@ text-transform: uppercase !important;
 
       #usedBy{
        animation: spark 6s linear infinite;
-       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+       
        display: flex;
        line-height: 1;
        font-size: .68rem;
@@ -711,7 +789,7 @@ text-transform: uppercase !important;
   border-radius: 4px;
   font-weight: 700;
   font-size: 1.05rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  
   box-shadow: 0 2px 6px rgba(66, 66, 66, 0.1);
 }
 
@@ -727,7 +805,7 @@ text-transform: uppercase !important;
   font-size:18px;
   font-weight: 600;
   color:#4a5555;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  
   border-radius: 4px;
   box-shadow: 0 2px 6px rgba(66, 66, 66, 0.1);
 }
@@ -818,7 +896,7 @@ width: 50%;
   .businessInfo-right p{
     font-size: .6rem !important;
     white-space: nowrap;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
   }
 
    .businessInfo .businessInfo-powered{
@@ -833,7 +911,7 @@ width: 50%;
  .businessInfo-powered{
   font-size: .6rem;
   white-space: nowrap;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  
   color: rgb(82, 82, 87);
  }
 
@@ -906,7 +984,7 @@ width: 50%;
   margin: 1.25rem 0;
   width: 100%;
   max-width: 98%;
-  height: 8.2rem;
+  height: 8.6rem ;
   background: none;
   display: flex;
   flex-direction: column;
@@ -933,7 +1011,7 @@ width: 50%;
   position: relative;
   color: var(--background-cl);
   font-size: .65rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  
   border-start-start-radius: 4px;
   border-start-end-radius: 4px;
   background: var(--thin-border-1);
@@ -973,7 +1051,7 @@ gap: .1rem;
 }
 
 .left-promo-content small{
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  
   font-size: .96rem;
   color: var(--text-cl);
 }
@@ -995,7 +1073,7 @@ gap: .1rem;
 }
 
 .left-promo-content p{
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  
   font-size: .73rem;
   color: var(--text-cl-3);
 }
@@ -1034,7 +1112,7 @@ border: 1px solid rgb(235, 235, 235);
   align-items: center;
   justify-content: center;
   font-size: .55rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  
 }
 .right-promo-content .timer{
   font-size: 1.28rem;
@@ -1047,7 +1125,7 @@ border: 1px solid rgb(235, 235, 235);
   justify-content: space-between;
   font-weight: 600;
   letter-spacing: 2px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  
   border-radius: .2rem;
 }
 
@@ -1134,7 +1212,7 @@ border: 1px solid rgb(235, 235, 235);
   align-items: center;
   font-weight: 600;
   padding-top: .6rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  
 }
 
 .label img{
@@ -1441,8 +1519,8 @@ border: 1px solid rgb(235, 235, 235);
     color: rgb(3, 43, 34);
     font-weight: 600;
     font-size: .9rem;
-    gap: .4rem;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    line-height: 1.6;
+    
     justify-content: start;
   }
 
@@ -1455,7 +1533,7 @@ border: 1px solid rgb(235, 235, 235);
     color: rgb(255, 145, 0);
     font-size: .85rem;
     font-weight: 500;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
     transition: color .15s ease;
   }
 
@@ -1471,7 +1549,7 @@ border: 1px solid rgb(235, 235, 235);
   .indicator-top small{
     color: rgb(74, 92, 88);
     font-size: .8rem;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
     font-weight: 500;
   }
 
@@ -1486,13 +1564,13 @@ border: 1px solid rgb(235, 235, 235);
   #actualDateWithTime{
       color: rgb(74, 92, 88);
     font-size: .8rem;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
     font-weight: 500;
   }
 
   .dark-mode #actualDateWithTime{
     color: var(--bg-cl);
-     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+     
     font-weight: 500;
   }
 
@@ -1582,7 +1660,7 @@ border: 1px solid rgb(235, 235, 235);
     flex-direction: column;
     border-left: 1px solid  rgba(206, 240, 206, 0.712);
     align-items: start;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
     justify-content: start;
     }
 
@@ -1664,7 +1742,8 @@ border: 1px solid rgb(235, 235, 235);
       justify-content: start;
       position: relative;
       font-size: .8rem;
-      color: rgb(41, 54, 50)
+      line-height: 1.1;
+      color: rgb(41, 54, 50);
     }
 
     .ttop-wrap-btom .estimata{
@@ -1714,7 +1793,7 @@ border: 1px solid rgb(235, 235, 235);
       color: var(--bg-cl);
       opacity: .7;
       font-size: .8rem;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      
     }
 
 
@@ -1736,7 +1815,7 @@ border: 1px solid rgb(235, 235, 235);
       border-top: 1px solid rgba(206, 240, 206, 0.712);
       color: rgb(3, 168, 127);
       font-size: .8rem;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      
     }
 
     .dark-mode .turnAround-bottom {
@@ -1750,7 +1829,7 @@ border: 1px solid rgb(235, 235, 235);
       border-top: 1px solid var(--thin-border);
       border-radius: 1px;
       white-space: nowrap;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      
     }
 
 
@@ -1837,7 +1916,7 @@ border: 1px solid rgb(235, 235, 235);
 
 
   :root{
-    --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
     --content-bg: rgb(54, 53, 53);
     --gp-bg-cl: rgb(228, 188, 10);
     --gp-border: rgb(228, 188, 10);
