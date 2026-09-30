@@ -116,7 +116,7 @@ p {
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      z-index: 9999999999999999999999999999999999999999999
+      z-index: 9999999999999999999999999999999999999999999999999999999999
     }
 
 
@@ -135,11 +135,17 @@ p {
 
     .update-top{
       width: 100%;
-      max-width: 94%;
+    
       height: 50%;
       align-items: center;
       justify-content: center;
       position: relative;
+    }
+
+
+    .update-top img{
+      align-self: center;
+      
     }
 
 
