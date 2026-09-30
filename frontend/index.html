@@ -98,6 +98,13 @@ document.addEventListener("DOMContentLoaded", ()=> {
 </script>
 <!--=== DARK MODE SCRIPT ENDS ===-->
 
+
+  <link rel="stylesheet" href="style-client-app.css">
+
+  <link rel="stylesheet" href="style-client-app2.css">
+
+   <!---dark-mode-root-css-->
+ <link rel="stylesheet" href="style-dark-mode.css">
   <!---css-link-->
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="styleGlobal.css">
@@ -128,319 +135,391 @@ document.addEventListener("DOMContentLoaded", ()=> {
 <!---body section---->
 <body>
     <!--100vw & 100vh container---->
-  <div class="container" id="mainContainer">
+  <div class="client-app" id="mainContainer">
 
-    <div class="cursor" id="cursor"></div>
+   <div class="cursor" id="cursor"></div>
     <div class="cursor-ring" id="cursorRing"></div>
+    <!-- ========================================
+         SIDEBAR
+    ========================================= -->
 
-  <!--sidebar----->
-    <div class="ecodata-sidebar" id="ecoDataSidebar">
-    <div class="ecodata-sidebar-top">
-        <div class="userProfile-container">
-            <div class="user" id="userPro">
-              <span class="us">
-                <h1>U</h1>
-              </span>
-              <h3>User Panel</h3>
-            </div>
+
+        <!---== SIDEBAR ----->
+        <aside class="client-sidebar" id="clientSidebar">
+             <div class="client-sidebar-top">
+
+        <!-- BRAND -->
+        <a href="index.html" class="client-brand">
+
+          <span class="client-brand-icon">
+            <i class="ri-user-3-line"></i>
+          </span>
+
+          <span class="client-brand-text">
+            <strong>User</strong>
+            <small>Panel</small>
+          </span>
+
+        </a>
+
+
+        <!-- CLOSE MOBILE SIDEBAR -->
+        <button
+          class="client-sidebar-close"
+          id="sidebarClose"
+          aria-label="Close sidebar"
+        >
+          <i class="ri-close-line"></i>
+        </button>
+
+      </div>
+
+
+      <!-- NAVIGATION -->
+
+      <nav class="client-nav">
+
+        <div class="client-nav-section">
+
+          <span class="client-nav-label">
+          Panel  Overview
+          </span>
+
+          <a href="index.html" class="client-nav-link active">
+            <i class="ri-home-4-line material-icons c1"></i>
+            <span>Home</span>
+          </a>
+
         </div>
-    </div>
-      <!---sidebar-middle-->
-    <div class="ecodata-sidebar-middle">
-        <!---middle-->
-    <div class="quick-links-section">
-      <div class="link-section-wrapper">
-        <!---network-nav-ends---->
-          <div class="quicker-nav active" >
-            <div class="naver" onclick="window.location.href='./index.html'">
-             <i class="ri-home-4-line material-icons c1"></i>
-              <p>
-              Home
-              </p>
-              </div>
-              <div class="tag">
-                <i class="ri-check-line material-icons pact"></i>
-              </div>
-            </div> 
 
-           <div id="adminAccessLink3" class="quicker-nav">
-              <div class="naver"  onclick="window.location.href='./ecodataStoreAdmin/index.html'">
-                <i class="ri-dashboard-3-line material-icons c2"></i>
-              <p>Admin Dashboard</p>
-              </div>
-            
-            </div> 
 
-              <div id="adminAccessLink4" class="quicker-nav">
-              <div class="naver"  onclick="window.location.href = 'agentPage.html'">
-                <i class="ri-vip-crown-line material-icons c3"></i>
-              <p>Exclusive Page</p>
-              </div>
-            
-            </div> 
 
-            
+        
+        <div class="client-nav-section" id="clientAccessLink1" style="display: none;">
+
+          <span class="client-nav-label">
+            client Dashboard
+          </span>
+
+          <a onclick="window.location.href='./ecodataStoreclient/index.html'" class="client-nav-link ">
+            <i class="ri-dashboard-3-line material-icons c2"></i>
+            <span>Dashboard</span>
+          </a>
+
+        </div>
+
+
+        <div class="client-nav-section" id="clientAccessLink2" style="display: none;">
+
+          <span class="client-nav-label">
+            Exclusive page
+          </span>
+
+          <a onclick="window.location.href='./agentPage.html'"  class="client-nav-link">
+            <i class="ri-vip-crown-line material-icons c3"></i>
+            <span>Exclusive</span>
+          </a>
+
+        
+
+          
+        </div>
+
+
+        <div class="client-nav-section">
+
+          <span class="client-nav-label">
+            Quick links
+          </span>
+
+
+            <a href="./afa.html" class="client-nav-link">
+            <i class="ri-user-follow-line material-icons c5"></i>
+            <span>AFA Reigistration</span>
+          </a>
+
+          <a href="./vouchers.html" class="client-nav-link">
+            <i class="ri-ticket-2-line material-icons c7"></i>
+            <span>Vouchers Shop</span>
+          </a>
+
+           <a href="./pay.html" class="client-nav-link">
+            <i class="ri-price-tag-3-line material-icons c4"></i>
+            <span>Get discount</span>
+          </a>
+
+
+          
+           <a href="./notification.html" class="client-nav-link">
+            <i class="ri-notification-3-line material-icons c5"></i>
+            <span>Notifications</span>
+          </a>
+
+        
 
       
-            <div class="quicker-nav">
-              <div class="naver"  onclick="window.location.href='./pay.html'">
-               <i class="ri-price-tag-3-line material-icons c4"></i>
-              <p> Discounts</p>
-              </div>
-            
-            </div> 
-
-            <div class="quicker-nav">
-              <div class="naver"  onclick="window.location.href='./afa.html'">
-                <i class="ri-user-follow-line material-icons c5"></i>
-              <p>AFA Registration</p>
-              </div>
-            
-            </div>
-          
-            <!----terms & cons--->
-
-          
-      <div class="quicker-nav" >
-        <div class="naver" onclick="window.location.href='./bundlesInfo.html'">
-          <i class="ri-information-line material-icons c6"></i>
-          <p>Info</p>
         </div>
-      </div>
-          
-
-              <div title="New" class="quicker-nav " >
-              <div class="naver" onclick="window.location.href='./vouchers.html'">
-             <i class="ri-ticket-2-line material-icons c7"></i>
-              <p>Vouchers Shop</p>
-              </div>
-
-              <div class="tag">
-                <small></small>
-              </div>
-              
-            </div> 
-
-            
-            <div title="Coming up soon!" class="quicker-nav " >
-              <div class="naver" onclick="window.location.href='#'">
-             <i class="ri-book-2-line material-icons c8"></i>
-              <p>Ebooks</p>
-              </div>
-
-              <div class="tag">
-                <small>Coming Up!</small>
-              </div>
-              
-            </div> 
-
-          
-
-            <div title="Coming Up Soon!" class="quicker-nav" >
-              <div class="naver" onclick="window.location.href='ecdoataStore/shop.html'">
-              <i class="ri-store-2-line material-icons c9"></i>
-                <p>Get Store</p>
-              </div>
-              <div class="tag">
-                <small>Coming up!</small>
-              </div>
-            </div>
-
-      </div>
-    </div>
-  </div>
-    <div class="ecodata-sidebar-bottom">
-        <!--bottom-->
-          <div class="bottom-nav">
-            <div class="sign-link">
-              <button onclick="window.location.href = 'login.html'" class="login">
-                Login
-              </button>
-            
-            </div>
-          
-            <div class="sign-link">
-                <button class="login" onclick="window.location.href='terms.html'">
-            Terms & Condition
-          </button>
-            </div>
-
-              <div class="sign-link">
-                <button class="login " id="logOut" >
-                <img src="./css/icons/logout.png" alt="" loading="lazy"> Logout
-              </button>
-            </div>
-          </div>
-    </div>
-  </div>
 
 
-      <!----NAVIGATION-BAR-SECTION------->
-  
-  <nav class="navbar">
-      <div id="sk-NavBar" class="sk-welcome" >  
-      <div class="sk-welcome-top">  
-        <span class="sk" style="width:2.5rem;height:2.5rem;
-        border-radius: 50%;">
-      </span>  
+        <div class="client-nav-section">
+
+          <span class="client-nav-label">
+            Coming soon!
+          </span>
+
+           <a href="#" class="client-nav-link">
+            <i class="ri-book-2-line material-icons c8"></i>
+            <span>Ebooks</span>
+          </a>
+
+          <a href="#" class="client-nav-link">
+            <i class="ri-store-2-line material-icons c9"></i>
+            <span>Get Store</span>
+          </a>
+
+         
+
+        </div>
+
+
+        <div class="client-nav-section" >
+
+          <span class="client-nav-label">
+            Terms of Service
+          </span>
+
         
-        <span class="sk" style="width:120px;height:26px;border-radius:8px;"></span>  
-      </div>  
+
+
+             <a href="./bundlesInfo.html" class="client-nav-link">
+            <i class="ri-information-line material-icons c6"></i>
+            <span>Bundle info</span>
+          </a>
+          
+            <a href="./terms.html" class="client-nav-link">
+            <i class="ri-file-text-line material-icons c3"></i>
+            <span>Terms & conditions</span>
+          </a>
+
+         
+
+          <a href="./settings.html" class="client-nav-link" style="display: none;">
+            <i class="ri-settings-3-line material-icons c2"></i>
+            <span>Settings</span>
+          </a>
+
+        </div>
+
+      </nav>
+
+
+      <!-- SIDEBAR FOOTER -->
+
+      <div class="client-sidebar-footer">
+
+        <a href="" class="client-store-link">
+          <i class="ri-login-box-line"></i>
+          <span>Logout</span>
+        </a>
+
+      </div>
+
+        </aside>
+
+
+
+        
+
+    <!-- ========================================
+          SIDEBAR OVERLAY
+    ========================================= -->
+
+    <div
+      class="client-sidebar-overlay"
+      id="sidebarOverlay"
+    ></div>
+
+
+<!-- ========================================
+ MAIN AREA
+========================================= -->
+
+<div class="client-main">
+
+  <header class="client-topbar">
+
+        <div class="client-topbar-left">
+
+        
+
+          <div class="client-page-context">
+
+             <a href="index.html" >
+             <img style="width: 8rem; height: 6rem; margin-top: .5rem; margin-left: -1.2rem;" class="newLogo" src="./css/icons/newLogo.png" alt="image" loading="lazy">
+            </a>
+
     
-    </div> 
+          </div>
+
+        </div>
+
+
+        <div class="client-topbar-right">
+
+
+          <!-- SEARCH -->
+
+          <div class="client-search" style="display: none;">
+
+            <i class="ri-search-line"></i>
+
+            <input
+              type="search"
+              id="clientSearch"
+              placeholder="Search..."
+              autocomplete="off"
+            >
+
+            <span class="client-search-shortcut">
+              /
+            </span>
+
+          </div>
+
+
+          <!-- NOTIFICATIONS -->
+
+          
+
+          <button
+            class="client-icon-button notification-button"
+            
+            aria-label="Notifications"
+            onclick="window.location.href='./notification.html'"
+          >
+
+            <i class="ri-notification-3-line"></i>
+
+            <span class="notification-dot"></span>
+
+          </button>
+
+                <!---DARK MODE-->
+        <label class="theme-switch" >
+          <input  type="checkbox" id="themeToggle">
+          <span class="slider">
+            <span class="icon sun">
+            <i class="ri-sun-line material-icons sun-icon"></i>
+            </span>
+            <span class="icon moon">
+              <i class="ri-moon-foggy-line material-icons moon"></i>
+            </span>
+          </span>
+        </label>
+
+
+          <!-- client PROFILE -->
+
+          <div class="client-profile-wrapper">
+
+            <button
+              class="client-profile-button"
+              id="clientProfileButton"
+            
+            >
+          
+
+              <span class="client-avatar" id="userNameCut">
+                <h5>GU</h5>
+              </span>
+
+              <span class="client-profile-info">
+
+                <strong>User</strong>
+
+                <small>
+                  Profile
+                </small>
+
+              </span>
+
+              <i class="ri-arrow-down-s-line"></i>
+
+            </button>
+
+
+            <!-- PROFILE MENU -->
+
+            <div
+              class="client-profile-menu"
+              id="clientProfileMenu"
+            >
+
+              <div class="client-profile-menu-header">
+
+                <span class="client-avatar large">
+                  <i class="ri-user-line"></i>
+                </span>
+
+                <div>
+
+                  <strong>clientistrator</strong>
+
+                  <span>Super client</span>
+
+                </div>
+
+              </div>
+
+              <div class="client-profile-menu-divider"></div>
+
+              <a href="settings.html">
+                <i class="ri-settings-3-line"></i>
+                <span>Settings</span>
+              </a>
+
+              <a href="../index.html">
+                <i class="ri-store-2-line"></i>
+                <span>View Store</span>
+              </a>
+
+              <div class="client-profile-menu-divider"></div>
+
+              <button id="clientLogoutButton">
+                <i class="ri-logout-box-r-line"></i>
+                <span>Sign Out</span>
+              </button>
+
+            </div>
+
+            
+
+          </div>
+
+            <button
+            class="client-menu-button"
+            id="sidebarToggle"
+            aria-label="Open sidebar"
+          >
+            <i class="ri-menu-line"></i>
+          </button>
+
+        </div>
+
+</header>
+
+
+
+
   
 
-  <div class="nav-left">
-  <a href="index.html">
-    <img class="newLogo" src="./css/icons/newLogo.png" alt="image" loading="lazy">
-  </a>
-  </div>
-  <div class="nav-right">
 
-
-    <div class="notis">
-
-    <img onclick="window.location.href='notification.html'" class="notifity" src="./css/icons/notify (1).png" alt="" loading="lazy" style="display: none;">
-      <!--<span id="notifyCount"></span>-->
-
-    <i class="ri-notification-3-line notifity" onclick="window.location.href='notification.html'"></i> 
-    </div>
-
-  
-  
-  <!---DARK MODE-->
-  <label class="theme-switch" >
-    <input  type="checkbox" id="themeToggle">
-    <span class="slider">
-      <span class="icon sun">
-      <i class="ri-sun-line sun-icon"></i>
-      </span>
-      <span class="icon moon">
-        <i class="ri-moon-foggy-line moon"></i>
-      </span>
-    </span>
-  </label>
-
- <i class="ri-menu-2-line menu" id="sidebarViewer"></i>
-  </div>
-
-
-  </nav>
 
   <!---MAIN-GRID-CONTAINER---->
       <div class="main-grid-container" >
 
 
 
-
-        <!--SIDEBAR-->
-        <div class="grid-container-aside">
-          <div class="userProfile-container">
-            <div class="user" id="userPro">
-              <span class="us"><h1>U</h1>
-              </span>
-              <h3>User Panel</h3>
-            </div>
-          </div>
-          
-          <!---middle-->
-          <div class="quick-links-section">
-            <div class="link-section-wrapper">
-            <!---network-nav-ends---->
-            
-            <div class="quicker-nav active" onclick="window.location.href='./index.html'">
-              <img src="./css/icons/home.png" alt="" loading="lazy">
-              <p>Home</p>
-            </div> 
-
-             <div id="adminAccessLink1" class="quicker-nav" onclick="window.location.href='./ecodataStoreAdmin/index.html'" >
-              <img src="./css/icons/dashboard.png" alt="" loading="lazy">
-              <p>Admin Dashboard</p>
-            </div>
-
-             <div id="adminAccessLink2" class="quicker-nav" onclick="window.location.href='agentPage.html'" >
-              <img src="./css/icons/agent.png" alt="" loading="lazy">
-              <p>Exclusive Page</p>
-            </div>
-            
-
-
-            <div class="quicker-nav" onclick="window.location.href='./pay.html'">
-              <img src="./css/icons/like.png" alt="" loading="lazy">
-              <p>Get discounts</p>
-            </div> 
-
-            <div class="quicker-nav" onclick="window.location.href='./afa.html'">
-              <img src="./css/icons/personal.png" alt="" loading="lazy">
-              <p>AFA Registration</p>
-            </div>
-          
-            <!----terms & cons--->
-
-          
-              <div class="quicker-nav" onclick="window.location.href='./bundlesInfo.html'">
-                <img src="./css/icons/terms (1).png" alt="" loading="lazy">
-                <p>Info</p>
-            </div>
-
-              <div title="New" class="quicker-nav " >
-              <div class="naver" onclick="window.location.href='./vouchers.html'">
-             <i class="ri-ticket-2-line material-icons c7"></i>
-              <p>Vouchers Shop</p>
-              </div>
-
-              <div class="tag">
-                <small>New</small>
-              </div>
-              
-            </div> 
-          
-
-            
-
-            
-            <div title="Coming up soon!" class="quicker-nav " onclick="window.location.href='#'">
-              <img src="./css/icons/ebook.png" alt="" loading="lazy">
-              <p>ebooks</p>
-
-              <div class="tag">
-                <small>Coming Up!</small>
-              </div>
-            </div> 
-
-            <div title="Coming Up Soon!" class="quicker-nav" >
-                <img src="./css/uiIcons/store.png" alt="" loading="lazy">
-                <p>Get Store</p>
-
-                <div class="tag">
-                <small>Coming up!</small>
-              </div>
-            </div>
-
-            </div>
-          </div>
-          <!--bottom-->
-          <div class="bottom-nav">
-            <div class="sign-link">
-              <button onclick="window.location.href = 'login.html'" class="login">
-                Login
-              </button>
-            
-            </div>
-          
-            <div class="sign-link">
-                <button class="login" onclick="window.location.href='terms.html'">
-            Terms & Condition
-          </button>
-            </div>
-
-              <div class="sign-link ">
-                <button class="login " id="lapOut">
-                <img src="./css/icons/logout.png" alt="" loading="lazy"> Logout
-              </button>
-            </div>
-          </div>
-        </div>
 
 
 
@@ -707,6 +786,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
 
     <!--== HERO BOTTOM ==-->
+    <!--== HERO BOTTOM ==-->
     <div class="welcome-hero-bottom">
       <div class="grid-overlay" style='display: none;'></div>
       <div class="whb-left">
@@ -720,9 +800,8 @@ document.addEventListener("DOMContentLoaded", ()=> {
         </div>
         <!---close-time-btom--->
         <div class="time-close">
-          <span>Active 24/7 <span class="pulse-dot">
-          <img src="./css/icons/timer.png" alt="" loading="lazy"> 
-          </span> </span>
+          <span >Active 24/7</span>
+          <img style="width: 1.4rem; height: 1.4rem;" src="./css/icons/timer.png" alt="" loading="lazy"> 
         </div>
       </div>
       <div class="whb-right">
@@ -777,28 +856,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
 
 
-  <!---MANUAL ORDER CHECKER---->
-    <!----right-div-->
-  <div class="manual-container" style="display: none !important;">
-    
-  <div class="manual-right">
-    <div class="manual-left-top">
-      <div class="status-result" id="statusResult"></div>
-    </div>
-  </div>
-
-  <div class="manual-right">
-    <section class="order-status-section">
-    <h2>Check Order</h2>
-    <span><img src="./icons/icons8-wifi.gif" alt="image" loading="lazy"></span>
-    <input type="text" id="orderInput" placeholder="Enter Order ID">
-    <button class="checkBt" id="checkBtn">Check Status</button>
-    
-  </section>
-    </div>
-
-
-  </div>
+ 
 
 
 
@@ -1910,9 +1968,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
             <span class="sk" style="width:56%;height:32px; margin-right: 16px;"></span>  
         </div>
         <div class="sk-fsc-left-right">
-          <span class="sk" style="width:26%;height:32px;"></span>
-          <span class="sk" style="width:26%;height:32px;"></span>
-          <span class="sk" style="width:26%;height:32px;"></span>
+          <span class="sk" style="width:156%;height:32px; border-radius: 1rem;"></span>
         </div>
       </div>
       <div class="sk-fsc-right">
@@ -5667,7 +5723,9 @@ document.addEventListener("DOMContentLoaded", ()=> {
     </div>
   </div>
 
- <!-- === UPDATING MODAL =====-->
+
+
+  <!-- === UPDATING MODAL =====-->
    <section class="system-updating-modal" id="upgradeModal">
     <div class="updating-modal-content">
       <div class="update-top">
@@ -5680,6 +5738,8 @@ document.addEventListener("DOMContentLoaded", ()=> {
       </div>
     </div>
    </section>
+
+
   <!--THURSDAYS MODAL-->
   <section class="terif-thursModal" id='terifModal'>
    <div class= 'terif-content' id='terifContent'>
@@ -6202,17 +6262,6 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
 
 
-    
-    
-
-      
-    
-
-
-
-  
-
-    
 
     <!-- ✅ WhatsApp Floating Chat -->
   <div class="chatBox" id="whatsappChat">
@@ -6273,7 +6322,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
 
   <!--MAIN-CONTAINER-ENDS-->
-        </div>
+</div>
 
       
 
@@ -6287,76 +6336,173 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
 
 
+   <!-- ==========================================
+     PREMIUM OFFERS
+========================================== -->
 
-  <!----MAIN-RIGHT--------->
-    <div class="ads-container-right">
-    
-      <div class="side-title">
-        <h2>Premium Offers</h2>
-        <div class="imgup"></div>
+<aside class="ads-container-right premium-offers">
+<div class="ads-wrapper">
+  <!-- SECTION HEADER -->
+  <div class="side-title premium-offers-header">
+    <div class="side-title-content">
+      <span class="premium-eyebrow">
+        <i class="ri-sparkling-2-line"></i>
+        EXCLUSIVE
+      </span>
+
+      <h2>Premium Offers</h2>
+
+      <p>Unlock more ways to save and grow.</p>
+    </div>
+
+    <div class="premium-header-icon">
+      <i class="ri-vip-crown-2-line"></i>
+    </div>
+  </div>
+
+
+  <!-- ==========================================
+       AGENT UPGRADE
+  =========================================== -->
+
+  <div class="agent-upgrade-wrapper premium-offer-card">
+
+    <div class="agent-upgrade premium-agent-card">
+
+      <div class="premium-card-top">
+
+        <div class="premium-card-icon">
+          <img
+            src="./css/icons/agent.png"
+            alt="Agent"
+            loading="lazy"
+          >
+        </div>
+
+        <span class="premium-card-badge">
+          <i class="ri-price-tag-3-line"></i>
+          GHS 50
+        </span>
+
       </div>
 
 
+      <div class="premium-card-content">
+
+        <span class="premium-card-label">
+          RESELLER ACCESS
+        </span>
+
+        <h3>Join for Exclusive Benefits</h3>
+
+        <p>
+          Unlock discounted prices for personal use or reselling.
+          Register once and start saving or earning more.
+        </p>
+
+      </div>
 
 
+      <div class="premium-card-footer">
+
+        <div class="premium-benefit">
+          <i class="ri-checkbox-circle-fill"></i>
+          <span>Discounted prices</span>
+        </div>
+
+        <div class="premium-benefit">
+          <i class="ri-checkbox-circle-fill"></i>
+          <span>Reselling opportunities</span>
+        </div>
+
+      </div>
 
 
+      <button
+        type="button"
+        class="premium-action-btn"
+        onclick="goToPayment()"
+      >
+        <span>Upgrade Now</span>
+        <i class="ri-arrow-right-line"></i>
+      </button>
 
-
-      <!----REGISTRATION---->
-
-
-
-
-
-
-
-      <!----REGISTRATION---->
-  <div class="agent-upgrade-wrapper" >
-
-  <div class="agent-upgrade">
-    <h2>Join for Exclusive Benefits</h2>
-    <img src="./css/icons/agent.png" alt=""loading="lazy">
-    <p>
-      Unlock discounted prices for personal use or reselling.
-      Pay a one-time registration fee of <strong>GHS 50</strong>
-      and start earning or saving more today.
-    </p>
-
-    <button onclick="goToPayment()">Upgrade Now</button>
-  </div>
-  </div>
-
-
-
-
-
-
-
-
-      <!----REGISTRATION---->
-  <div class="agent-upgrade-wrapper" >
-
-  <div class="agent-upgrade">
-    <h2>Get online Store</h2>
-    <img src="./css/uiIcons/store.png" alt=""loading="lazy">
-    <p>
-    Create Online store to increase your sales.
-    Receive Orders via WhatsApp daily. 
-    
-    </p>
-
-    <button title="Coming Up soon!">Get store</button>
-  </div>
-  </div>
-
-
-
-
-
-
-  <!---right-ends-->
     </div>
+
+  </div>
+
+
+  <!-- ==========================================
+       ONLINE STORE
+  =========================================== -->
+
+  <div class="agent-upgrade-wrapper premium-offer-card">
+
+    <div class="agent-upgrade premium-store-card">
+
+      <div class="premium-card-top">
+
+        <div class="premium-card-icon">
+          <img
+            src="./css/uiIcons/store.png"
+            alt="Online Store"
+            loading="lazy"
+          >
+        </div>
+
+        <span class="premium-card-badge coming-soon">
+          Coming Soon
+        </span>
+
+      </div>
+
+
+      <div class="premium-card-content">
+
+        <span class="premium-card-label">
+          SELL ONLINE
+        </span>
+
+        <h3>Get Your Online Store</h3>
+
+        <p>
+          Create your own online store, showcase your products
+          and receive orders directly through WhatsApp.
+        </p>
+
+      </div>
+
+
+      <div class="premium-card-footer">
+
+        <div class="premium-benefit">
+          <i class="ri-checkbox-circle-fill"></i>
+          <span>Online product showcase</span>
+        </div>
+
+        <div class="premium-benefit">
+          <i class="ri-checkbox-circle-fill"></i>
+          <span>WhatsApp orders</span>
+        </div>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="premium-action-btn premium-action-disabled"
+        title="Coming Soon!"
+        disabled
+      >
+        <span>Get Store</span>
+        <i class="ri-arrow-right-line"></i>
+      </button>
+
+    </div>
+
+  </div>
+</div>
+</aside>
 
 
 
@@ -6366,6 +6512,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
 
       <!--CONTAINER-ENDS-->
+</div>
   </div>
 
 
@@ -6394,6 +6541,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 <script src="styleSkeloton.js"></script>
 <script src="promoScript.js"></script>
 <script src="global.js"></script>
+<script src="client.js"></script>
 
 
 <script>

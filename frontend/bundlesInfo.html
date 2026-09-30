@@ -4,6 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EcoData | Bundles Info</title>
+
+
+  
+  <link rel="stylesheet" href="style-client-app.css">
+
+  <link rel="stylesheet" href="style-client-app2.css">
+
+   <!---dark-mode-root-css-->
+ <link rel="stylesheet" href="style-dark-mode.css">
+
+
   <link rel="stylesheet" href="bundles.css" />
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="styleGlobal.css">
@@ -19,311 +30,9 @@
 <!--remix icons-->
 <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
 
-<style>
-  :root {
-  --bg-cl: #FFF;
-  --primary-cl: #fff;
-  --secondary-cl: rgb(50, 50, 190);
-  --dark-cl: #0a0a0a;
-  --ascent-cl: rgb(158, 97, 209);
-  --background-cl: #e6e8ce;
-  --card-full-bg-cl: rgb(255, 217, 0);
-  --card-full-tele-bg-cl: rgb(221, 19, 19);
-  --card-full-airtel-bg-cl:  rgb(6, 6, 231);
-  --border-cl-2: rgba(66, 66, 26, 0.226);
-  --mtn-btn: rgb(193, 196, 19);
-  --telecel-btn: rgb(180, 57, 19);
-  --airteltigo-btn: rgb(28, 46, 119);
-}
 
 
 
-* {
-  box-sizing: border-box;
-  outline: none;
-  list-style: none;
-  text-decoration: none;
-}
-
-html:focus-within{
-  scroll-behavior: smooth;
-}
-
-
-body {
-  width: 100%;
-  height: 100%;
-  background: transparent;
-  overflow-y: auto;
-  margin: 0;
-  padding: 0;
-}
-
-
-
-/****
-MENU-CARD SECTION
-****/
-.menu-card-container {
-  width: 100%;
-  max-width: 15rem;
-  height: 33rem;
-  position: fixed;
-  display: flex;
-  align-items: start;
-  justify-content: center;
-  flex-direction: column;
-  gap: .5rem;
-  right: -500px;
-  top: 3.8rem;
-  color: rgb(104, 98, 98);
-  border: 1px solid var(--thin-border-1);
-  background: rgb(239, 236, 236);
-  box-shadow: 0 2px 6px rgba(73, 72, 72, 0.7);
-  border-radius: .4rem;
-  z-index: 999999999999999;
-  transition: .5s ease-in-out;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;;
-  user-select: none;
-}
-
-
-
-.dark-mode .menu-card-container {
-  width: 100%;
-  max-width: 15rem;
-  height: 33rem;
-  position: fixed;
-  display: flex;
-  align-items: start;
-  justify-content: center;
-  flex-direction: column;
-  gap: .5rem;
-  right: -500px;
-  top: 3.8rem;
-  border: 1px solid var(--thin-border) !important;
-  background: var(--background-cl-1);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-  border-radius: .4rem;
-  transition: .5s ease-in-out;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;;
-  user-select: none;
-}
-
-
-#closeCard.active{
-  right: 1px;
-}
-
-.menu-ranking-links{
-  width: 100%;
-  height: max-content;
-  padding: .2rem;
-  display: flex;
-  gap: .5rem;
-  color: white;
-  flex-direction: column;
-  position: relative;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;;
-  user-select: none;
-  z-index: 99;
-}
-
-.join-btn{
-  width: 11.5rem;
-  height: 2.1rem;
-  margin-left: .6rem;
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  text-align: center;
-  color: white;
-  background: var(--thin-border-1);
-  border: 2px solid green;
-  border-radius: 2rem;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;;
-  user-select: none;
-}
-
-.join-btn:hover{
-  cursor: pointer;
-  background: var(--btn-bg-cl);
-  border: 2px solid rgb(252, 210, 172);
-}
-
-.join-btn img{
-  width: 1.3rem;
-  height: 1.3rem;
-  margin-right: .2rem;
-}
-
-.grp{
-  width: 9rem;
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;;
-  user-select: none;
-}
-
-
-.tiktok{
-  width: 6rem;
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;;
-  user-select: none;
-}
-
-
-
-
-/****
-WATCH VIDEO SECTION
-***/
-
-
-
-
-.login {
-  display: flex;
-  align-items: center;
-  width: max-content;
-  justify-content: space-between;
-}
-
-.login a{
-  text-align: center;
-  text-decoration: none;
-  list-style: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 .8rem;
-  color: var(--card-full-bg-cl);
-}
-
-
-.login img {
-  width: 1.4rem;
-  height: 1.4rem;
-  margin: 0 .5rem;
-  background: var(--background-cl);
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.menu-icon{
-  border-radius: 4px;
-  padding: .3px;
-}
-
-.faq{
-  margin-bottom: 3.4rem;
-}
-
-
-
-</style>
-
-
-<style>
-  .bundle-info {
-    text-align: center;
-    padding: 2rem;
-   
-    margin: auto;
-  }
-  .network-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin: 1.5rem 0;
-  }
-  .network-btn {
-    padding: 0.8rem 1rem;
-    border: none;
-    width: 7rem;
-    color: #fff;
-    border-radius: 2px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: .4s;
-  }
-  .network-btn:hover {
-    background-color: #004aad;
-  }
-  .bundle-details {
-    background: #fffefe;
-    border-radius: 12px;
-    padding: 1.5rem;
-    margin-top: 1rem;
-    text-align: left;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-}
-
-.bundle-details p{
-  font-size: 1.1rem;
-}
-
-/***
-BUTTONS STYLES
-***/
-.mtn-btn{
-  background: linear-gradient(135deg, rgb(243, 243, 34), rgb(102, 102, 57));
-  border-radius: .3rem;
-  height: 2.3rem;
-  font-size: .9rem;
-}
-
-.mtn-btn:hover{
-  background: rgb(212, 212, 35);
-  
-}
-
-.telecel-btn{
-  background: linear-gradient(135deg, rgb(138, 65, 66), rgb(243,5,5));
-    border-radius: .3rem;
-  height: 2.3rem;
-  font-size: .9rem;
-}
-
-.telecel-btn:hover{
-  background: rgb(223, 14, 14);
-}
-
-.airtel-btn{
- background: linear-gradient(135deg, rgb(7,7,230), rgb(29, 29, 77));
-   border-radius: .3rem;
-  height: 2.3rem;
-  font-size: .9rem;
-}
-
-.airtel-btn:hover{
-  background: rgb(7, 7, 230);
-}
-
-
-</style>
 
 
 
@@ -342,117 +51,1634 @@ BUTTONS STYLES
 
 
 
-  <div class="container">
+  <div class="client-app">
     <!---navbar-here-->
-<!-----NAVIGATION BAR-SECTION---->
-  <nav class="navbar">
-<div class="nav-left">
-  <a href="index.html">
-    <img class="newLogo" src="./css/icons/newLogo.png" alt="image" loading="lazy">
-  </a>
-  </div>
 
-<div class="nav-right">
+         <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+    <!-- ========================================
+         SIDEBAR
+    ========================================= -->
 
- 
- 
- 
- <!---DARK MODE-->
 
-  </nav>
-<!-----NAVIGATION BAR-SECTION---->
+        <!---== SIDEBAR ----->
+        <aside class="client-sidebar" id="clientSidebar">
+             <div class="client-sidebar-top">
+
+        <!-- BRAND -->
+        <a href="index.html" class="client-brand">
+
+          <span class="client-brand-icon">
+            <i class="ri-user-3-line"></i>
+          </span>
+
+          <span class="client-brand-text">
+            <strong>User</strong>
+            <small>Panel</small>
+          </span>
+
+        </a>
+
+
+        <!-- CLOSE MOBILE SIDEBAR -->
+        <button
+          class="client-sidebar-close"
+          id="sidebarClose"
+          aria-label="Close sidebar"
+        >
+          <i class="ri-close-line"></i>
+        </button>
+
+      </div>
+
+
+      <!-- NAVIGATION -->
+
+      <nav class="client-nav">
+
+        <div class="client-nav-section">
+
+          <span class="client-nav-label">
+          Panel  Overview
+          </span>
+
+          <a href="index.html" class="client-nav-link active">
+            <i class="ri-home-4-line material-icons c1"></i>
+            <span>Home</span>
+          </a>
+
+        </div>
+
+
+
+        
+        <div class="client-nav-section" id="clientAccessLink1" style="display: none;">
+
+          <span class="client-nav-label">
+            client Dashboard
+          </span>
+
+          <a onclick="window.location.href='./ecodataStoreclient/index.html'" class="client-nav-link ">
+            <i class="ri-dashboard-3-line material-icons c2"></i>
+            <span>Dashboard</span>
+          </a>
+
+        </div>
+
+
+        <div class="client-nav-section" id="clientAccessLink2" style="display: none;">
+
+          <span class="client-nav-label">
+            Exclusive page
+          </span>
+
+          <a onclick="window.location.href='./agentPage.html'"  class="client-nav-link">
+            <i class="ri-vip-crown-line material-icons c3"></i>
+            <span>Exclusive</span>
+          </a>
+
+        
+
+          
+        </div>
+
+
+        <div class="client-nav-section">
+
+          <span class="client-nav-label">
+            Quick links
+          </span>
+
+
+            <a href="./afa.html" class="client-nav-link">
+            <i class="ri-user-follow-line material-icons c5"></i>
+            <span>AFA Reigistration</span>
+          </a>
+
+          <a href="./vouchers.html" class="client-nav-link">
+            <i class="ri-ticket-2-line material-icons c7"></i>
+            <span>Vouchers Shop</span>
+          </a>
+
+           <a href="./pay.html" class="client-nav-link">
+            <i class="ri-price-tag-3-line material-icons c4"></i>
+            <span>Get discount</span>
+          </a>
+
+
+          
+           <a href="./notification.html" class="client-nav-link">
+            <i class="ri-notification-3-line material-icons c5"></i>
+            <span>Notifications</span>
+          </a>
+
+        
+
+      
+        </div>
+
+
+        <div class="client-nav-section">
+
+          <span class="client-nav-label">
+            Coming soon!
+          </span>
+
+           <a href="#" class="client-nav-link">
+            <i class="ri-book-2-line material-icons c8"></i>
+            <span>Ebooks</span>
+          </a>
+
+          <a href="#" class="client-nav-link">
+            <i class="ri-store-2-line material-icons c9"></i>
+            <span>Get Store</span>
+          </a>
+
+         
+
+        </div>
+
+
+        <div class="client-nav-section" >
+
+          <span class="client-nav-label">
+            Terms of Service
+          </span>
+
+        
+
+
+             <a href="./bundlesInfo.html" class="client-nav-link">
+            <i class="ri-information-line material-icons c6"></i>
+            <span>Bundle info</span>
+          </a>
+          
+            <a href="./terms.html" class="client-nav-link">
+            <i class="ri-file-text-line material-icons c3"></i>
+            <span>Terms & conditions</span>
+          </a>
+
+         
+
+          <a href="./settings.html" class="client-nav-link" style="display: none;">
+            <i class="ri-settings-3-line material-icons c2"></i>
+            <span>Settings</span>
+          </a>
+
+        </div>
+
+      </nav>
+
+
+      <!-- SIDEBAR FOOTER -->
+
+      <div class="client-sidebar-footer">
+
+        <a href="" class="client-store-link">
+          <i class="ri-login-box-line"></i>
+          <span>Logout</span>
+        </a>
+
+      </div>
+
+        </aside>
+
+
+
+        
+
+    <!-- ========================================
+          SIDEBAR OVERLAY
+    ========================================= -->
+
+    <div
+      class="client-sidebar-overlay"
+      id="sidebarOverlay"
+    ></div>
+
+
+<!-- ========================================
+ MAIN AREA
+========================================= -->
+
+<div class="client-main">
+
+  <header class="client-topbar">
+
+        <div class="client-topbar-left">
+
+        
+
+          <div class="client-page-context">
+
+             <a href="index.html" >
+             <img style="width: 8rem; height: 6rem; margin-top: .5rem; margin-left: -1.2rem;" class="newLogo" src="./css/icons/newLogo.png" alt="image" loading="lazy">
+            </a>
+
+    
+          </div>
+
+        </div>
+
+
+        <div class="client-topbar-right">
+
+
+          <!-- SEARCH -->
+
+          <div class="client-search" style="display: none;">
+
+            <i class="ri-search-line"></i>
+
+            <input
+              type="search"
+              id="clientSearch"
+              placeholder="Search..."
+              autocomplete="off"
+            >
+
+            <span class="client-search-shortcut">
+              /
+            </span>
+
+          </div>
+
+
+          <!-- NOTIFICATIONS -->
+
+          
+
+          <button
+            class="client-icon-button notification-button"
+            
+            aria-label="Notifications"
+            onclick="window.location.href='./notification.html'"
+          >
+
+            <i class="ri-notification-3-line"></i>
+
+            <span class="notification-dot"></span>
+
+          </button>
+
+                <!---DARK MODE-->
+        <label class="theme-switch" >
+          <input  type="checkbox" id="themeToggle">
+          <span class="slider">
+            <span class="icon sun">
+            <i class="ri-sun-line material-icons sun-icon"></i>
+            </span>
+            <span class="icon moon">
+              <i class="ri-moon-foggy-line material-icons moon"></i>
+            </span>
+          </span>
+        </label>
+
+
+          <!-- client PROFILE -->
+
+          <div class="client-profile-wrapper">
+
+            <button
+              class="client-profile-button"
+              id="clientProfileButton"
+            
+            >
+          
+
+              <span class="client-avatar" id="userNameCut">
+                <h5>GU</h5>
+              </span>
+
+              <span class="client-profile-info">
+
+                <strong>User</strong>
+
+                <small>
+                  Profile
+                </small>
+
+              </span>
+
+              <i class="ri-arrow-down-s-line"></i>
+
+            </button>
+
+
+            <!-- PROFILE MENU -->
+
+            <div
+              class="client-profile-menu"
+              id="clientProfileMenu"
+            >
+
+              <div class="client-profile-menu-header">
+
+                <span class="client-avatar large">
+                  <i class="ri-user-line"></i>
+                </span>
+
+                <div>
+
+                  <strong>clientistrator</strong>
+
+                  <span>Super client</span>
+
+                </div>
+
+              </div>
+
+              <div class="client-profile-menu-divider"></div>
+
+              <a href="settings.html">
+                <i class="ri-settings-3-line"></i>
+                <span>Settings</span>
+              </a>
+
+              <a href="../index.html">
+                <i class="ri-store-2-line"></i>
+                <span>View Store</span>
+              </a>
+
+              <div class="client-profile-menu-divider"></div>
+
+              <button id="clientLogoutButton">
+                <i class="ri-logout-box-r-line"></i>
+                <span>Sign Out</span>
+              </button>
+
+            </div>
+
+            
+
+          </div>
+
+            <button
+            class="client-menu-button"
+            id="sidebarToggle"
+            aria-label="Open sidebar"
+          >
+            <i class="ri-menu-line"></i>
+          </button>
+
+        </div>
+
+</header>
 
     <div class="main-grid-container">
 
 
 
-       <!--SIDEBAR-->
-      <div class="grid-container-aside">
-
-
-        <div class="userProfile-container">
-          <div class="user" id="userPro">
-            <span class="us"><h1>U</h1>
-            </span>
-            <h3>User Panel</h3>
-          </div>
-        </div>
-        
-        <!---middle-->
-        <div class="quick-links-section">
-          <div class="link-section-wrapper">
-          <!---network-nav-ends---->
-
-           <div class="quicker-nav" onclick="window.location.href='./index.html'">
-            <img src="./css/icons/home.png" alt="" loading="lazy">
-            <p>Home</p>
-          </div> 
-
-
-           <div class="quicker-nav " onclick="window.location.href='./pay.html'">
-            <img src="./css/icons/like.png" alt="" loading="lazy">
-            <p>Get Discount</p>
-          </div> 
-
-          <div class="quicker-nav " onclick="window.location.href='./afa.html'">
-            <img src="./css/icons/personal.png" alt="" loading="lazy">
-            <p>AFA Registration</p>
-          </div>
-        
-          <!----terms & cons--->
-
-        
-          <div class="quicker-nav active" onclick="window.location.href='./bundlesInfo.html'">
-              <img src="./css/icons/terms (1).png" alt="" loading="lazy">
-              <p>Info</p>
-          </div>
-         
-
     
+<style>
+  /* =========================================================
+   ECODATA MODERN INFORMATION CONTAINER
+   ========================================================= */
 
-          <div title="Coming up soon!" class="quicker-nav " onclick="window.location.href='#'">
-            <img src="./css/icons/ebook.png" alt="" loading="lazy">
-            <p>ebooks</p>
+/* =========================================================
+   SHARED SECTION
+   ========================================================= */
 
-             <div class="tag">
-              <small>New</small>
-            </div>
-          </div> 
+.card-container > section {
 
-           <div title="Coming Up Soon!" class="quicker-nav">
-              <img src="./css/uiIcons/store.png" alt="" loading="lazy">
-              <p>Get Store</p>
+  position: relative;
 
-              <div class="tag">
-              <small>Coming up!</small>
-            </div>
-          </div>
+  padding: 38px;
 
-          </div>
-        </div>
-        <!--bottom-->
-        <div class="bottom-nav">
-          <div class="sign-link">
-            <button onclick="window.location.href = 'login.html'" class="login">
-              Login
-            </button>
-           
-          </div>
-        
-          <div class="sign-link">
-              <button class="login" onclick="window.location.href='terms.html'">
-          Terms & Condition
-        </button>
-          </div>
+  border-bottom:
+    1px solid var(--client-border);
+}
 
-            <div class="sign-link">
-             <button class="login lapOut" >
-              <img src="./css/icons/logout.png" alt="" loading="lazy"> Logout
-            </button>
-          </div>
-        </div>
-      </div>
+.card-container > section:last-child {
 
+  border-bottom: 0;
+}
+
+.section-eyebrow {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  margin-bottom: 9px;
+
+  color: var(--client-muted);
+
+  font-size: .65rem;
+  font-weight: 800;
+
+  text-transform: uppercase;
+
+  letter-spacing: .12em;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+
+  min-height: 400px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 85% 20%,
+      var(--client-accent-soft),
+      transparent 30%
+    ),
+    linear-gradient(
+      145deg,
+      var(--client-surface),
+      var(--client-surface-soft)
+    );
+}
+
+.hero::before {
+
+  content: "";
+
+  position: absolute;
+
+  width: 300px;
+  height: 300px;
+
+  right: -120px;
+  bottom: -150px;
+
+  border-radius: 50%;
+
+  border:
+    1px solid var(--client-border-strong);
+
+  opacity: .5;
+}
+
+.hero-content {
+
+  position: relative;
+  z-index: 1;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap: 50px;
+
+  align-items: center;
+
+  flex: 1;
+}
+
+.hero-title {
+
+  position: relative;
+}
+
+.hero-eyebrow {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  margin-bottom: 16px;
+
+  padding: 6px 9px;
+
+  border:
+    1px solid var(--client-border);
+
+  border-radius: 999px;
+
+  background: var(--client-surface);
+
+  color: var(--client-muted);
+
+  font-size: .63rem;
+  font-weight: 750;
+
+  text-transform: uppercase;
+
+  letter-spacing: .08em;
+}
+
+.hero-title h1 {
+
+  margin: 0;
+
+  max-width: 550px;
+
+  color: var(--client-text);
+
+  font-size:
+    clamp(2.5rem, 5vw, 4.6rem);
+
+  line-height: .94;
+
+  letter-spacing: -.065em;
+
+  font-weight: 820;
+}
+
+.hero-title h1 span {
+
+  display: block;
+
+  color: var(--client-muted);
+}
+
+.hero-greeting {
+
+  position: absolute;
+
+  top: -35px;
+  right: 10px;
+
+  display: grid;
+
+  place-items: center;
+
+  width: 68px;
+  height: 68px;
+
+  border-radius: 20px;
+
+  background: var(--client-surface);
+
+  border:
+    1px solid var(--client-border);
+
+  box-shadow: var(--client-shadow-sm);
+
+  transform: rotate(7deg);
+
+  animation:
+    ecoGreetingFloat 4s ease-in-out infinite;
+}
+
+.hero-greeting img {
+
+  width: 38px;
+  height: 38px;
+
+  object-fit: contain;
+}
+
+@keyframes ecoGreetingFloat {
+
+  0%, 100% {
+    transform: rotate(7deg) translateY(0);
+  }
+
+  50% {
+    transform: rotate(4deg) translateY(-5px);
+  }
+}
+
+.hero-cta {
+
+  max-width: 480px;
+}
+
+.hero-cta-badge {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  margin-bottom: 15px;
+
+  color: var(--client-success);
+
+  font-size: .68rem;
+  font-weight: 750;
+}
+
+.hero-cta h2 {
+
+  margin: 0;
+
+  color: var(--client-text);
+
+  font-size:
+    clamp(1.65rem, 3vw, 2.55rem);
+
+  line-height: 1.08;
+
+  letter-spacing: -.045em;
+
+  font-weight: 780;
+}
+
+.hero-cta h2 span {
+
+  color: var(--client-muted);
+}
+
+.hero-cta p {
+
+  max-width: 400px;
+
+  margin: 13px 0 0;
+
+
+
+  font-size: .85rem;
+
+  line-height: 1.65;
+}
+
+.hero-bottom {
+
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-top: 35px;
+}
+
+.hero-feature {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 8px 11px;
+
+  border:
+    1px solid var(--client-border);
+
+  border-radius: 9px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--client-surface) 75%,
+      transparent
+    );
+
+  color: var(--client-muted);
+
+  font-size: .65rem;
+  font-weight: 680;
+}
+
+.hero-feature i {
+
+  color: var(--client-text);
+
+  font-size: .8rem;
+}
+
+
+/* =========================================================
+   BUNDLE INFO
+   ========================================================= */
+
+.bundle-info {
+
+  background: var(--client-surface);
+}
+
+.info-title {
+
+  max-width: 620px;
+
+  margin-bottom: 24px;
+}
+
+.info-title h2,
+.workflow-heading h2,
+.faq-heading h2 {
+
+  margin: 0;
+
+  color: var(--client-text);
+
+  font-size:
+    clamp(1.35rem, 2.5vw, 1.8rem);
+
+  letter-spacing: -.035em;
+
+  font-weight: 780;
+}
+
+.info-title p,
+.workflow-heading p,
+.faq-heading p {
+
+  margin: 7px 0 0;
+
+  color: var(--client-muted);
+
+  font-size: .78rem;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   NETWORK SELECTOR
+   ========================================================= */
+
+.network-selector {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 10px;
+}
+
+.network-btn {
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+
+  min-height: 72px;
+
+  padding: 11px;
+
+  border:
+    1px solid var(--client-border);
+
+  border-radius: 13px;
+
+  outline: none;
+
+  background: var(--client-surface-2);
+
+  color: var(--client-text);
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    transform var(--client-transition),
+    border-color var(--client-transition),
+    background var(--client-transition),
+    box-shadow var(--client-transition);
+}
+
+.network-btn:hover {
+
+  transform: translateY(-2px);
+
+  border-color: var(--client-border-strong);
+
+  background: var(--client-surface);
+
+  box-shadow: var(--client-shadow-sm);
+}
+
+.network-btn:focus-visible {
+
+  box-shadow:
+    0 0 0 3px var(--client-accent-soft);
+}
+
+.network-btn-icon {
+
+  display: grid;
+
+  place-items: center;
+
+  flex-shrink: 0;
+
+  width: 39px;
+  height: 39px;
+
+  border-radius: 10px;
+
+  background: var(--client-surface-soft);
+
+  color: var(--client-text);
+
+  font-size: .95rem;
+}
+
+.network-btn-content {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+
+  min-width: 0;
+}
+
+.network-btn-content strong {
+
+  font-size: .76rem;
+  font-weight: 760;
+}
+
+.network-btn-content small {
+
+  color: var(--client-muted);
+
+  font-size: .59rem;
+}
+
+.network-arrow {
+
+  margin-left: auto;
+
+  color: var(--client-muted-2);
+
+  font-size: .85rem;
+
+  transition:
+    transform var(--client-transition);
+}
+
+.network-btn:hover .network-arrow {
+
+  transform: translateX(3px);
+
+  color: var(--client-text);
+}
+
+
+/* =========================================================
+   BUNDLE DETAILS
+   ========================================================= */
+
+.bundle-details {
+
+  min-height: 105px;
+
+  margin-top: 12px;
+
+  padding: 16px;
+
+  border:
+    1px solid var(--client-border);
+
+  border-radius: 13px;
+
+  background: var(--client-surface-2);
+
+  animation:
+    bundleDetailsIn .25s ease;
+}
+
+@keyframes bundleDetailsIn {
+
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bundle-details-empty {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  min-height: 70px;
+}
+
+.bundle-details-icon {
+
+  display: grid;
+
+  place-items: center;
+
+  flex-shrink: 0;
+
+  width: 38px;
+  height: 38px;
+
+  border-radius: 10px;
+
+  background: var(--client-surface-soft);
+
+  color: var(--client-muted);
+}
+
+.bundle-details-empty strong {
+
+  display: block;
+
+  color: var(--client-text);
+
+  font-size: .75rem;
+}
+
+.bundle-details-empty p {
+
+  margin: 4px 0 0;
+
+  color: var(--client-muted);
+
+  font-size: .65rem;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   WORKFLOW
+   ========================================================= */
+
+.workflow {
+
+  background: var(--client-surface-2);
+}
+
+.workflow-heading {
+
+  max-width: 600px;
+
+  margin-bottom: 28px;
+}
+
+.steps {
+
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 10px;
+}
+
+.steps::before {
+
+  content: "";
+
+  position: absolute;
+
+  left: 9%;
+  right: 9%;
+
+  top: 32px;
+
+  height: 1px;
+
+  background: var(--client-border-strong);
+}
+
+.step {
+
+  position: relative;
+  z-index: 1;
+
+  min-width: 0;
+
+  padding: 18px;
+
+  border:
+    1px solid var(--client-border);
+
+  border-radius: 14px;
+
+  background: var(--client-surface);
+
+  transition:
+    transform var(--client-transition),
+    border-color var(--client-transition),
+    box-shadow var(--client-transition);
+}
+
+.step:hover {
+
+  transform: translateY(-3px);
+
+  border-color: var(--client-border-strong);
+
+  box-shadow: var(--client-shadow-md);
+}
+
+.step-number {
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 30px;
+  height: 30px;
+
+  margin-bottom: 13px;
+
+  border:
+    1px solid var(--client-border);
+
+  border-radius: 8px;
+
+  background: var(--client-surface);
+
+  color: var(--client-muted);
+
+  font-size: .6rem;
+  font-weight: 800;
+}
+
+.step-icon {
+
+  display: grid;
+
+  place-items: center;
+
+  width: 40px;
+  height: 40px;
+
+  margin-bottom: 14px;
+
+  border-radius: 10px;
+
+  background: var(--client-surface-soft);
+
+  color: var(--client-text);
+
+  font-size: .95rem;
+}
+
+.step-label {
+
+  color: var(--client-muted);
+
+  font-size: .58rem;
+  font-weight: 750;
+
+  text-transform: uppercase;
+
+  letter-spacing: .08em;
+}
+
+.step h3 {
+
+  margin: 5px 0 6px;
+
+  color: var(--client-text);
+
+  font-size: .82rem;
+  font-weight: 760;
+}
+
+.step p {
+
+  margin: 0;
+
+  color: var(--client-muted);
+
+  font-size: .66rem;
+
+  line-height: 1.65;
+}
+
+.step p strong {
+
+  color: var(--client-text);
+
+  font-weight: 750;
+}
+
+.step-note {
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 7px;
+
+  margin-top: 11px;
+
+  padding: 9px;
+
+  border:
+    1px solid var(--client-warning-soft);
+
+  border-radius: 9px;
+
+  background: var(--client-warning-soft);
+
+  color: var(--client-warning);
+
+  font-size: .59rem;
+
+  line-height: 1.5;
+}
+
+.step-note i {
+
+  flex-shrink: 0;
+
+  margin-top: 1px;
+}
+
+
+/* =========================================================
+   FAQ
+   ========================================================= */
+
+.faq {
+
+  background: var(--client-surface);
+}
+
+.faq-heading {
+
+  max-width: 600px;
+
+  margin-bottom: 22px;
+}
+
+.faq-list {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.faq details {
+
+  border:
+    1px solid var(--client-border);
+
+  border-radius: 12px;
+
+  background: var(--client-surface-2);
+
+  overflow: hidden;
+
+  transition:
+    border-color var(--client-transition),
+    background var(--client-transition);
+}
+
+.faq details:hover {
+
+  border-color: var(--client-border-strong);
+}
+
+.faq details[open] {
+
+  background: var(--client-surface);
+
+  border-color: var(--client-border-strong);
+}
+
+.faq summary {
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding: 15px;
+
+  list-style: none;
+
+  cursor: pointer;
+
+  user-select: none;
+}
+
+.faq summary::-webkit-details-marker {
+
+  display: none;
+}
+
+.faq-question {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  min-width: 0;
+
+  color: var(--client-text);
+
+  font-size: .74rem;
+  font-weight: 700;
+}
+
+.faq-question > i {
+
+  display: grid;
+
+  place-items: center;
+
+  flex-shrink: 0;
+
+  width: 29px;
+  height: 29px;
+
+  border-radius: 8px;
+
+  background: var(--client-surface-soft);
+
+  color: var(--client-muted);
+
+  font-size: .8rem;
+}
+
+.faq-toggle {
+
+  display: grid;
+
+  place-items: center;
+
+  flex-shrink: 0;
+
+  width: 27px;
+  height: 27px;
+
+  border-radius: 7px;
+
+  background: var(--client-surface-soft);
+
+  color: var(--client-muted);
+
+  transition:
+    transform var(--client-transition);
+}
+
+.faq details[open] .faq-toggle {
+
+  transform: rotate(45deg);
+
+  color: var(--client-text);
+}
+
+.faq-answer {
+
+  padding:
+    0
+    15px
+    15px
+    54px;
+
+  animation:
+    faqAnswerIn .2s ease;
+}
+
+@keyframes faqAnswerIn {
+
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.faq-answer p {
+
+  margin: 0;
+
+  color: var(--client-muted);
+
+  font-size: .67rem;
+
+  line-height: 1.7;
+}
+
+.faq-answer strong {
+
+  color: var(--client-text);
+
+  font-weight: 750;
+}
+
+
+/* =========================================================
+   SUPPORT CONTACTS
+   ========================================================= */
+
+.support-contact {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 8px;
+
+  margin-top: 12px;
+}
+
+.support-item {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 10px;
+
+  border:
+    1px solid var(--client-border);
+
+  border-radius: 10px;
+
+  background: var(--client-surface-2);
+}
+
+.support-item img {
+
+  width: 30px;
+  height: 30px;
+
+  flex-shrink: 0;
+
+  object-fit: cover;
+
+  border-radius: 8px;
+}
+
+.support-item div {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 2px;
+
+  min-width: 0;
+}
+
+.support-item small {
+
+  color: var(--client-muted-2);
+
+  font-size: .55rem;
+}
+
+.support-item strong {
+
+  color: var(--client-text);
+
+  font-size: .64rem;
+
+  word-break: break-word;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .card-container > section {
+
+    padding: 28px;
+  }
+
+  .hero-content {
+
+    grid-template-columns: 1fr;
+
+    gap: 30px;
+  }
+
+  .hero {
+
+    min-height: auto;
+  }
+
+  .hero-title h1 {
+
+    max-width: 650px;
+  }
+
+  .hero-cta {
+
+    max-width: 650px;
+  }
+
+  .network-selector {
+
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+  .steps {
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .steps::before {
+
+    display: none;
+  }
+}
+
+
+@media (max-width: 650px) {
+
+  .card-container {
+
+    margin: 16px 8px;
+
+    border-radius: 18px;
+  }
+
+  .card-container > section {
+
+    padding: 22px 16px;
+  }
+
+  .hero-content {
+
+    gap: 35px;
+  }
+
+  .hero-title h1 {
+
+    font-size: clamp(2.25rem, 12vw, 3.4rem);
+  }
+
+  .hero-greeting {
+
+    width: 54px;
+    height: 54px;
+
+    top: -20px;
+    right: 0;
+  }
+
+  .hero-greeting img {
+
+    width: 30px;
+    height: 30px;
+  }
+
+  .hero-bottom {
+
+    flex-wrap: wrap;
+
+    margin-top: 28px;
+  }
+
+  .hero-feature {
+
+    flex: 1;
+
+    justify-content: center;
+
+    min-width: 110px;
+  }
+
+  .network-selector {
+
+    grid-template-columns: 1fr;
+  }
+
+  .network-btn {
+
+    min-height: 64px;
+  }
+
+  .steps {
+
+    grid-template-columns: 1fr;
+  }
+
+  .step {
+
+    padding: 15px;
+  }
+
+  .support-contact {
+
+    grid-template-columns: 1fr;
+  }
+
+  .faq-answer {
+
+    padding-left: 15px;
+  }
+}
+
+
+@media (max-width: 430px) {
+
+  .card-container {
+
+    margin-inline: 5px;
+
+    border-radius: 15px;
+  }
+
+  .card-container > section {
+
+    padding: 20px 13px;
+  }
+
+  .hero-title h1 {
+
+    font-size: 2.35rem;
+  }
+
+  .hero-cta h2 {
+
+    font-size: 1.55rem;
+  }
+
+  .hero-bottom {
+
+    display: grid;
+
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .hero-feature {
+
+    min-width: 0;
+
+    padding: 8px 6px;
+
+    font-size: .57rem;
+  }
+
+  .hero-feature:last-child {
+
+    grid-column: 1 / -1;
+  }
+
+  .bundle-details {
+
+    padding: 12px;
+  }
+
+  .faq summary {
+
+    padding: 13px;
+  }
+
+  .faq-question {
+
+    font-size: .68rem;
+  }
+
+  .faq-answer {
+
+    padding:
+      0
+      13px
+      13px
+      13px;
+  }
+}
+</style>
 
 
       <div class="grid-container-main">
@@ -679,71 +1905,183 @@ BUTTONS STYLES
 
 
 
-       
- <!----MAIN-RIGHT--------->
-  <div class="ads-container-right">
-   
-    <div class="side-title">
-       <h2>Premium Offers</h2>
-       <div class="imgup"></div>
+
+      
+   <!-- ==========================================
+     PREMIUM OFFERS
+========================================== -->
+
+<aside class="ads-container-right premium-offers">
+<div class="ads-wrapper">
+  <!-- SECTION HEADER -->
+  <div class="side-title premium-offers-header">
+    <div class="side-title-content">
+      <span class="premium-eyebrow">
+        <i class="ri-sparkling-2-line"></i>
+        EXCLUSIVE
+      </span>
+
+      <h2>Premium Offers</h2>
+
+      <p>Unlock more ways to save and grow.</p>
     </div>
 
-
-
-
-
-
-
-
-    <!----REGISTRATION---->
-
-
-    <!----REGISTRATION---->
-<div class="agent-upgrade-wrapper" >
-
-<div class="agent-upgrade">
-  <h2>Join for Exclusive Benefits</h2>
-  <img src="./css/icons/agent.png" alt=""loading="lazy">
-  <p>
-    Unlock discounted prices for personal use or reselling.
-    Pay a one-time registration fee of <strong>GHS 50</strong>
-    and start earning or saving more today.
-  </p>
-
-  <button onclick="goToPayment()">Upgrade Now</button>
-</div>
-</div>
-
-
-    <!----REGISTRATION---->
-<div class="agent-upgrade-wrapper" >
-
-<div class="agent-upgrade">
-  <h2>Get online Store</h2>
-  <img src="./css/uiIcons/store.png" alt=""loading="lazy">
-  <p>
-   Create Online store to increase your sales.
-   Receive Orders via WhatsApp daily. 
-  
-  </p>
-
-  <button title="Coming Up Soon!">Get Store</button>
-</div>
-</div>
-
-
-
-
-
-
-<!---right-ends-->
+    <div class="premium-header-icon">
+      <i class="ri-vip-crown-2-line"></i>
+    </div>
   </div>
 
 
+  <!-- ==========================================
+       AGENT UPGRADE
+  =========================================== -->
+
+  <div class="agent-upgrade-wrapper premium-offer-card">
+
+    <div class="agent-upgrade premium-agent-card">
+
+      <div class="premium-card-top">
+
+        <div class="premium-card-icon">
+          <img
+            src="./css/icons/agent.png"
+            alt="Agent"
+            loading="lazy"
+          >
+        </div>
+
+        <span class="premium-card-badge">
+          <i class="ri-price-tag-3-line"></i>
+          GHS 50
+        </span>
+
+      </div>
+
+
+      <div class="premium-card-content">
+
+        <span class="premium-card-label">
+          RESELLER ACCESS
+        </span>
+
+        <h3>Join for Exclusive Benefits</h3>
+
+        <p>
+          Unlock discounted prices for personal use or reselling.
+          Register once and start saving or earning more.
+        </p>
+
+      </div>
+
+
+      <div class="premium-card-footer">
+
+        <div class="premium-benefit">
+          <i class="ri-checkbox-circle-fill"></i>
+          <span>Discounted prices</span>
+        </div>
+
+        <div class="premium-benefit">
+          <i class="ri-checkbox-circle-fill"></i>
+          <span>Reselling opportunities</span>
+        </div>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="premium-action-btn"
+        onclick="goToPayment()"
+      >
+        <span>Upgrade Now</span>
+        <i class="ri-arrow-right-line"></i>
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ==========================================
+       ONLINE STORE
+  =========================================== -->
+
+  <div class="agent-upgrade-wrapper premium-offer-card">
+
+    <div class="agent-upgrade premium-store-card">
+
+      <div class="premium-card-top">
+
+        <div class="premium-card-icon">
+          <img
+            src="./css/uiIcons/store.png"
+            alt="Online Store"
+            loading="lazy"
+          >
+        </div>
+
+        <span class="premium-card-badge coming-soon">
+          Coming Soon
+        </span>
+
+      </div>
+
+
+      <div class="premium-card-content">
+
+        <span class="premium-card-label">
+          SELL ONLINE
+        </span>
+
+        <h3>Get Your Online Store</h3>
+
+        <p>
+          Create your own online store, showcase your products
+          and receive orders directly through WhatsApp.
+        </p>
+
+      </div>
+
+
+      <div class="premium-card-footer">
+
+        <div class="premium-benefit">
+          <i class="ri-checkbox-circle-fill"></i>
+          <span>Online product showcase</span>
+        </div>
+
+        <div class="premium-benefit">
+          <i class="ri-checkbox-circle-fill"></i>
+          <span>WhatsApp orders</span>
+        </div>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="premium-action-btn premium-action-disabled"
+        title="Coming Soon!"
+        disabled
+      >
+        <span>Get Store</span>
+        <i class="ri-arrow-right-line"></i>
+      </button>
+
+    </div>
+
+  </div>
+</div>
+</aside>
+
 
 
 
     </div>
+
+
+</div>
   </div>
 
 
@@ -762,6 +2100,7 @@ BUTTONS STYLES
 
 
  <script src="bundles.js"></script>
+ <script src="client.js"></script>
 
 <!----LOGOUT-JS------>
  <script type="module">

@@ -34,7 +34,15 @@
 <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
 
 
+
+  <link rel="stylesheet" href="style-client-app.css">
+
+  <link rel="stylesheet" href="style-client-app2.css">
+
+   <!---dark-mode-root-css-->
+ <link rel="stylesheet" href="style-dark-mode.css">
   <!---css-link-->
+  <link rel="stylesheet" href="notification.css">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="styleGlobal.css">
   <link rel="stylesheet" href="styleGlobal2.css">
@@ -42,639 +50,758 @@
   <link rel="stylesheet" href="styleGlobal4.css">
 
 
-  <style>
-
-    *{
-      box-sizing: border-box;
-    }
-
-    body{
-      width: 100%;
-      height: 100vh;
-      margin: 0;
-      padding: 0;
-
-    }
-
-    .notification-container{
-      width: 100%;
-      height: calc(100vh - 3.5rem) !important;
-      max-width: 400px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 .5rem;
-      flex-direction: column;
-      gap: 1rem;
-      justify-self: center;
-      top: 3.1rem;
-      position: relative;
-      margin-bottom: 4rem;
-    }
-
-    .notification-container .noti-wrap{
-      width: 100%;
-      min-height: 82rem !important;
-      max-width: 400px;
-      display: flex;
-      align-items: center;
-      justify-content: start;
-      padding: 0 .5rem;
-      flex-direction: column;
-      gap: 2rem;
-      justify-self: center;
-      position: relative;
-      margin-top: -3rem;
-      margin-bottom: 1rem;
-
-    }
-
-    .notification-container .notification-card{
-      width: 100%;
-      max-width: 98%;
-      height: max-content;
-      justify-self: center;
-      display: flex;
-      gap: .7rem;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-      flex-direction: column;
-      background: white;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-      border-radius: .6rem;
-      position: relative;
-    }
-
-    .notification-card .noti-top{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: max-content;
-      padding: .2rem;
-      background: rgb(149, 149, 165);
-      border-radius: 4px;
-      color: white;
-      opacity: .7;
-    }
-
-    .notification-card .noti-middle{
-      color: rgb(116, 121, 128);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      font-size: .8rem;
-    }
-
-    .dark-mode .notification-card {
-      background: var(--welcome-card-bg);
-      border: 1px solid rgb(51, 48, 48);
-    }
-
-    .noti-title{
-      width: 100%;
-      height: 3rem;
-      display:flex;
-      align-items: center;
-      justify-content: start;
-      padding: 0 1rem;
-    } 
-
-    .noti-title h1{
-      color: rgb(83, 87, 99);
-      font-size: 1.4rem;
-    }
-
-
-    .dark-mode .noti-title h1{
-      color: white;
-      opacity: .74;
-    }
-
-    /***
-    NOTI BTTOM
-    **/
-    .notification-card .noti-bottom{
-      width: 100%;
-      height: max-content;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: relative;
-    }
-
-    .numb{
-      font-size: 14px;
-      background: rgb(172, 171, 171);
-      padding: 0 .2rem;
-      border-radius: 50%;
-      display: flex;
-      color: rgb(58, 57, 56);
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      margin: .2rem 0;
-      
-    }
-
-    .noti-bottom .mark{
-      border: none;
-      background: rgb(76, 76, 83);
-      color: white;
-      padding: .1rem .2rem;
-      font-size: .6rem;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: max-content;
-      height: 1rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      cursor: pointer;
-      border-radius: 2px;
-      opacity: .7;
-    }
-
-      .notification-card .noti-bottom {
-      border: 1px solid rgb(235, 226, 226);
-      color: rgb(15, 127, 192);
-      padding: .3rem;
-      font-size: .7rem;
-      font-weight: 600;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    }
-
-    .dark-mode .noti-bottom {
-      border: 1px solid rgb(8, 25, 48);
-      color: rgb(15, 127, 192);
-      padding: .3rem;
-      font-size: .7rem;
-      font-weight: 600;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    }
-
-.nav-right .theme-switch {
-  display: flex;
-  margin-left: 1rem;
-}
-
-/***
-Delete button
-****/
-.notification-card .deleteM {
-  border: none;
-  color: rgb(34, 41, 43);
-  background: rgb(190, 184, 184);
-  font-size: .7rem;
-  border-radius: 2px;
-  cursor: pointer;
-}
-  </style>
 
   
-  
 
- 
 
 <script src="global.js"></script>
 </head>
 <body>
 
 
- <div class="cursor" id="cursor"></div>
+
+
+
+
+
+    <div class="client-app">
+       <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
-
-
-
- <!--sidebar----->
-    <div class="ecodata-sidebar" id="ecoDataSidebar">
-    <div class="ecodata-sidebar-top">
-        <div class="userProfile-container">
-            <div class="user" id="userPro">
-              <span class="us">
-                <h1>U</h1>
-              </span>
-              <h3>User Panel</h3>
-            </div>
-        </div>
-    </div>
-      <!---sidebar-middle-->
-    <div class="ecodata-sidebar-middle">
-        <!---middle-->
-    <div class="quick-links-section">
-      <div class="link-section-wrapper">
-        <!---network-nav-ends---->
-          <div class="quicker-nav" >
-            <div class="naver" onclick="window.location.href='./index.html'">
-             <i class="ri-home-4-line material-icons c1"></i>
-              <p>
-              Home
-              </p>
-              </div>
-              <div class="tag">
-               
-              </div>
-            </div> 
-
-
-          
-
-            
-
-      
-            <div class="quicker-nav">
-              <div class="naver"  onclick="window.location.href='./pay.html'">
-               <i class="ri-price-tag-3-line material-icons c4"></i>
-              <p> Discounts</p>
-              </div>
-            
-            </div> 
-
-            <div class="quicker-nav">
-              <div class="naver"  onclick="window.location.href='./afa.html'">
-                <i class="ri-user-follow-line material-icons c5"></i>
-              <p>AFA Registration</p>
-              </div>
-            
-            </div>
-          
-            <!----terms & cons--->
-
-          
-      <div class="quicker-nav" >
-        <div class="naver" onclick="window.location.href='./bundlesInfo.html'">
-          <i class="ri-information-line material-icons c6"></i>
-          <p>Info</p>
-        </div>
-      </div>
-          
-
-              <div title="Coming up soon!" class="quicker-nav " >
-              <div class="naver" onclick="window.location.href='./vouchers.html'">
-             <i class="ri-ticket-2-line material-icons c7"></i>
-              <p>Vouchers Shop</p>
-              </div>
-
-              <div class="tag">
-                <small>New</small>
-              </div>
-              
-            </div> 
-
-            
-            <div title="Coming up soon!" class="quicker-nav " >
-              <div class="naver" onclick="window.location.href='#'">
-             <i class="ri-book-2-line material-icons c8"></i>
-              <p>Ebooks</p>
-              </div>
-
-              <div class="tag">
-                <small>Coming Up!</small>
-              </div>
-              
-            </div> 
-
-          
-
-            <div title="Coming Up Soon!" class="quicker-nav" >
-              <div class="naver" onclick="window.location.href='ecdoataStore/shop.html'">
-              <i class="ri-store-2-line material-icons c9"></i>
-                <p>Get Store</p>
-              </div>
-              <div class="tag">
-                <small>Coming up!</small>
-              </div>
-            </div>
-
-      </div>
-    </div>
-  </div>
-    <div class="ecodata-sidebar-bottom">
-        <!--bottom-->
-          <div class="bottom-nav">
-            <div class="sign-link">
-              <button onclick="window.location.href = 'login.html'" class="login">
-                Login
-              </button>
-            
-            </div>
-          
-            <div class="sign-link">
-                <button class="login" onclick="window.location.href='terms.html'">
-            Terms & Condition
-          </button>
-            </div>
-
-              <div class="sign-link">
-                <button class="login " id="logOut" >
-                <img src="./css/icons/logout.png" alt="" loading="lazy"> Logout
-              </button>
-            </div>
-          </div>
-    </div>
-  </div>
-
-
-    <div class="container">
     <!---navbar-here-->
     
-  <nav class="navbar">
-      <div id="sk-NavBar" class="sk-welcome" >  
-      <div class="sk-welcome-top">  
-        <span class="sk" style="width:2.5rem;height:2.5rem;
-        border-radius: 50%;">
-      </span>  
-        
-        <span class="sk" style="width:120px;height:26px;border-radius:8px;"></span>  
-      </div>  
+
     
-    </div> 
-  
+        <!---== SIDEBAR ----->
+        <aside class="client-sidebar" id="clientSidebar">
+             <div class="client-sidebar-top">
 
- <div class="nav-left">
-  <a href="index.html">
-    <img class="newLogo" src="./css/icons/newLogo.png" alt="image" loading="lazy">
-  </a>
-  </div>
-  <div class="nav-right">
+        <!-- BRAND -->
+        <a href="index.html" class="client-brand">
 
+          <span class="client-brand-icon">
+            <i class="ri-user-3-line"></i>
+          </span>
 
-    <div class="notis">
+          <span class="client-brand-text">
+            <strong>User</strong>
+            <small>Panel</small>
+          </span>
 
-    <img onclick="window.location.href='notification.html'" class="notifity" src="./css/icons/notify (1).png" alt="" loading="lazy" style="display: none;">
-      <!--<span id="notifyCount"></span>-->
-
-    <i class="ri-notification-3-line notifity" onclick="window.location.href='notification.html'"></i> 
-    </div>
-
-  
-  
-  <!---DARK MODE-->
-  <label class="theme-switch" >
-    <input  type="checkbox" id="themeToggle">
-    <span class="slider">
-      <span class="icon sun">
-      <i class="ri-sun-line sun-icon"></i>
-      </span>
-      <span class="icon moon">
-        <i class="ri-moon-foggy-line moon"></i>
-      </span>
-    </span>
-  </label>
-
- <i class="ri-menu-2-line menu" id="sidebarViewer"></i>
-  </div>
+        </a>
 
 
-  </nav>
+        <!-- CLOSE MOBILE SIDEBAR -->
+        <button
+          class="client-sidebar-close"
+          id="sidebarClose"
+          aria-label="Close sidebar"
+        >
+          <i class="ri-close-line"></i>
+        </button>
+
+      </div>
+
+
+      <!-- NAVIGATION -->
+
+      <nav class="client-nav">
+
+        <div class="client-nav-section">
+
+          <span class="client-nav-label">
+          Panel  Overview
+          </span>
+
+          <a href="index.html" class="client-nav-link active">
+            <i class="ri-home-4-line material-icons c1"></i>
+            <span>Home</span>
+          </a>
+
+        </div>
+
+
+
+        
+        <div class="client-nav-section" id="clientAccessLink1" style="display: none;">
+
+          <span class="client-nav-label">
+            client Dashboard
+          </span>
+
+          <a onclick="window.location.href='./ecodataStoreclient/index.html'" class="client-nav-link ">
+            <i class="ri-dashboard-3-line material-icons c2"></i>
+            <span>Dashboard</span>
+          </a>
+
+        </div>
+
+
+        <div class="client-nav-section" id="clientAccessLink2" style="display: none;">
+
+          <span class="client-nav-label">
+            Exclusive page
+          </span>
+
+          <a onclick="window.location.href='./agentPage.html'"  class="client-nav-link">
+            <i class="ri-vip-crown-line material-icons c3"></i>
+            <span>Exclusive</span>
+          </a>
+
+        
+
+          
+        </div>
+
+
+        <div class="client-nav-section">
+
+          <span class="client-nav-label">
+            Quick links
+          </span>
+
+
+            <a href="./afa.html" class="client-nav-link">
+            <i class="ri-user-follow-line material-icons c5"></i>
+            <span>AFA Reigistration</span>
+          </a>
+
+          <a href="./vouchers.html" class="client-nav-link">
+            <i class="ri-ticket-2-line material-icons c7"></i>
+            <span>Vouchers Shop</span>
+          </a>
+
+           <a href="./pay.html" class="client-nav-link">
+            <i class="ri-price-tag-3-line material-icons c4"></i>
+            <span>Get discount</span>
+          </a>
+
+
+          
+           <a href="./notification.html" class="client-nav-link">
+            <i class="ri-notification-3-line material-icons c5"></i>
+            <span>Notifications</span>
+          </a>
+
+        
+
+      
+        </div>
+
+
+        <div class="client-nav-section">
+
+          <span class="client-nav-label">
+            Coming soon!
+          </span>
+
+           <a href="#" class="client-nav-link">
+            <i class="ri-book-2-line material-icons c8"></i>
+            <span>Ebooks</span>
+          </a>
+
+          <a href="#" class="client-nav-link">
+            <i class="ri-store-2-line material-icons c9"></i>
+            <span>Get Store</span>
+          </a>
+
+         
+
+        </div>
+
+
+        <div class="client-nav-section" >
+
+          <span class="client-nav-label">
+            Terms of Service
+          </span>
+
+        
+
+
+             <a href="./bundlesInfo.html" class="client-nav-link">
+            <i class="ri-information-line material-icons c6"></i>
+            <span>Bundle info</span>
+          </a>
+          
+            <a href="./terms.html" class="client-nav-link">
+            <i class="ri-file-text-line material-icons c3"></i>
+            <span>Terms & conditions</span>
+          </a>
+
+         
+
+          <a href="./settings.html" class="client-nav-link" style="display: none;">
+            <i class="ri-settings-3-line material-icons c2"></i>
+            <span>Settings</span>
+          </a>
+
+        </div>
+
+      </nav>
+
+
+      <!-- SIDEBAR FOOTER -->
+
+      <div class="client-sidebar-footer">
+
+        <a href="" class="client-store-link">
+          <i class="ri-login-box-line"></i>
+          <span>Logout</span>
+        </a>
+
+      </div>
+
+        </aside>
+
+
+
+        
+
+    <!-- ========================================
+          SIDEBAR OVERLAY
+    ========================================= -->
+
+    <div
+      class="client-sidebar-overlay"
+      id="sidebarOverlay"
+    ></div>
+
+
+<!-- ========================================
+ MAIN AREA
+========================================= -->
+
+<div class="client-main">
+
+  <header class="client-topbar">
+
+        <div class="client-topbar-left">
+
+        
+
+          <div class="client-page-context">
+
+             <a href="index.html" >
+             <img style="width: 8rem; height: 6rem; margin-top: .5rem; margin-left: -1.2rem;" class="newLogo" src="./css/icons/newLogo.png" alt="image" loading="lazy">
+            </a>
+
+    
+          </div>
+
+        </div>
+
+
+        <div class="client-topbar-right">
+
+
+          <!-- SEARCH -->
+
+          <div class="client-search" style="display: none;">
+
+            <i class="ri-search-line"></i>
+
+            <input
+              type="search"
+              id="clientSearch"
+              placeholder="Search..."
+              autocomplete="off"
+            >
+
+            <span class="client-search-shortcut">
+              /
+            </span>
+
+          </div>
+
+
+          <!-- NOTIFICATIONS -->
+
+          
+
+          <button
+            class="client-icon-button notification-button"
+            
+            aria-label="Notifications"
+            onclick="window.location.href='./notification.html'"
+          >
+
+            <i class="ri-notification-3-line"></i>
+
+            <span class="notification-dot"></span>
+
+          </button>
+
+                <!---DARK MODE-->
+        <label class="theme-switch" >
+          <input  type="checkbox" id="themeToggle">
+          <span class="slider">
+            <span class="icon sun">
+            <i class="ri-sun-line material-icons sun-icon"></i>
+            </span>
+            <span class="icon moon">
+              <i class="ri-moon-foggy-line material-icons moon"></i>
+            </span>
+          </span>
+        </label>
+
+
+          <!-- client PROFILE -->
+
+          <div class="client-profile-wrapper">
+
+            <button
+              class="client-profile-button"
+              id="clientProfileButton"
+            
+            >
+          
+
+              <span class="client-avatar" id="userNameCut">
+                <h5>GU</h5>
+              </span>
+
+              <span class="client-profile-info">
+
+                <strong>User</strong>
+
+                <small>
+                  Profile
+                </small>
+
+              </span>
+
+              <i class="ri-arrow-down-s-line"></i>
+
+            </button>
+
+
+            <!-- PROFILE MENU -->
+
+            <div
+              class="client-profile-menu"
+              id="clientProfileMenu"
+            >
+
+              <div class="client-profile-menu-header">
+
+                <span class="client-avatar large">
+                  <i class="ri-user-line"></i>
+                </span>
+
+                <div>
+
+                  <strong>clientistrator</strong>
+
+                  <span>Super client</span>
+
+                </div>
+
+              </div>
+
+              <div class="client-profile-menu-divider"></div>
+
+              <a href="settings.html">
+                <i class="ri-settings-3-line"></i>
+                <span>Settings</span>
+              </a>
+
+              <a href="../index.html">
+                <i class="ri-store-2-line"></i>
+                <span>View Store</span>
+              </a>
+
+              <div class="client-profile-menu-divider"></div>
+
+              <button id="clientLogoutButton">
+                <i class="ri-logout-box-r-line"></i>
+                <span>Sign Out</span>
+              </button>
+
+            </div>
+
+            
+
+          </div>
+
+            <button
+            class="client-menu-button"
+            id="sidebarToggle"
+            aria-label="Open sidebar"
+          >
+            <i class="ri-menu-line"></i>
+          </button>
+
+        </div>
+
+</header>
+
+
+
+
+
     <div class="main-grid-container">
 
 
 
 
-      <!--SIDEBAR-->
-      <div class="grid-container-aside">
-
-
-        <div class="userProfile-container">
-          <div class="user" id="userPro">
-            <span class="us"><h1>U</h1>
-            </span>
-            <h3>User Panel</h3>
-          </div>
-        </div>
-        
-        <!---middle-->
-        <div class="quick-links-section">
-          <div class="link-section-wrapper">
-          <!---network-nav-ends---->
-
-             <div class="quicker-nav" onclick="window.location.href='./index.html'">
-            <img src="./css/icons/home.png" alt="" loading="lazy">
-            <p>Home</p>
-          </div> 
-
-
-
-           <div class="quicker-nav" onclick="window.location.href='./pay.html'">
-            <img src="./css/icons/like.png" alt="" loading="lazy">
-            <p>Get Discount</p>
-          </div> 
-
-          <div class="quicker-nav" onclick="window.location.href='./afa.html'">
-            <img src="./css/icons/personal.png" alt="" loading="lazy">
-            <p>AFA Registration</p>
-          </div>
-        
-          <!----terms & cons--->
-
-        
-            <div class="quicker-nav" onclick="window.location.href='./bundlesInfo.html'">
-              <img src="./css/icons/terms (1).png" alt="" loading="lazy">
-              <p>Info</p>
-          </div>
-         
-
-
-          <div title="Coming up soon!" class="quicker-nav " onclick="window.location.href='#'">
-            <img src="./css/icons/ebook.png" alt="" loading="lazy">
-            <p>ebooks</p>
-
-             <div class="tag">
-              <small>New</small>
-            </div>
-          </div> 
-
-           <div class="quicker-nav" onclick="window.location.href='./ecdoataStore/welcomingPage.html'">
-              <img src="./css/uiIcons/store.png" alt="" loading="lazy">
-              <p>Get Store</p>
-
-              <div class="tag">
-              <small>Coming up!</small>
-            </div>
-          </div>
-
-          </div>
-        </div>
-        <!--bottom-->
-         <!--bottom-->
-        <div class="bottom-nav">
-          <div class="sign-link">
-            <button onclick="window.location.href = 'login.html'" class="login">
-              Login
-            </button>
-           
-          </div>
-        
-          <div class="sign-link">
-              <button class="login" onclick="window.location.href='terms.html'">
-          Terms & Condition
-        </button>
-          </div>
-
-            <div class="sign-link">
-             <button class="login " id="lapOut">
-              <img src="./css/icons/logout.png" alt="" loading="lazy"> Logout
-            </button>
-          </div>
-        </div>
-      </div>
 
 
 
       <div class="grid-container-main">
 
-        
-<!----MAIN-NOTIFICATION-CONTAINER-->
-<div class="notification-container">
+      
+<!-- ==========================================
+     NOTIFICATION CENTER
+========================================== -->
+
+<section class="notification-container" aria-labelledby="notificationTitle">
+
   <div class="noti-wrap">
-      <div class="noti-title">
-    <h1>Notifications</h1>
+
+    <!-- HEADER -->
+    <header class="noti-title">
+
+      <div class="noti-title-main">
+
+        <div class="noti-title-icon">
+          <i class="ri-notification-3-line"></i>
+        </div>
+
+        <div>
+          <span class="noti-eyebrow">
+            ECOdata UPDATES
+          </span>
+
+          <h1 id="notificationTitle">
+            Notifications
+          </h1>
+
+          <p>
+            Important updates, service information and announcements.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="noti-status">
+        <span class="noti-status-dot"></span>
+        <span>Active</span>
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         NOTIFICATION 1
+    =========================================== -->
+
+    <article class="notification-card">
+
+      <div class="noti-card-head">
+
+        <div class="noti-card-icon support">
+          <i class="ri-customer-service-2-line"></i>
+        </div>
+
+        <div class="noti-top">
+          Order Delivery Support
+
+          <span class="noti-label">
+            Support
+          </span>
+        </div>
+
+      </div>
+
+
+      <div class="noti-middle">
+
+        <p>
+          If your order status shows <strong>Delivered</strong> but the
+          data has not been received or reflected on your number,
+          please contact Admin within <strong>24 hours</strong> using
+          the chat button on the Home Page.
+        </p>
+
+        <p>
+          Kindly provide the following details:
+        </p>
+
+
+        <div class="noti-subheading">
+          <i class="ri-information-line"></i>
+          Report requirements
+        </div>
+
+
+        <div class="noti-requirements">
+
+          <div class="noti-requirement">
+            <span class="numb">1</span>
+            <span>Order ID</span>
+          </div>
+
+          <div class="noti-requirement">
+            <span class="numb">2</span>
+            <span>Recipient Number</span>
+          </div>
+
+          <div class="noti-requirement">
+            <span class="numb">3</span>
+            <span>Bundle Size (GB)</span>
+          </div>
+
+        </div>
+
+
+        <p class="noti-closing">
+          Thank you for helping us resolve issues promptly.
+        </p>
+
+      </div>
+
+
+      <div class="noti-bottom">
+
+        <div class="noti-bottoml">
+          <i class="ri-shield-check-line"></i>
+          Admin Verified
+        </div>
+
+        <div class="noti-bottomR">
+          <span>Official Update</span>
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <!-- ==========================================
+         NOTIFICATION 2
+    =========================================== -->
+
+    <article class="notification-card">
+
+      <div class="noti-card-head">
+
+        <div class="noti-card-icon pricing">
+          <i class="ri-price-tag-3-line"></i>
+        </div>
+
+        <div class="noti-top">
+          MTN Data Pricing Update
+
+          <span class="noti-label">
+            Pricing
+          </span>
+        </div>
+
+      </div>
+
+
+      <div class="noti-middle">
+
+        <p>
+          Please note that <strong>MTN data bundle prices</strong>
+          have been updated.
+        </p>
+
+        <p>
+          Each data offer now has its own pricing structure due to
+          variations in portals and market rates.
+        </p>
+
+        <div class="noti-highlight">
+          <i class="ri-eye-line"></i>
+
+          <span>
+            Kindly review the displayed price before placing your order.
+          </span>
+        </div>
+
+        <p class="noti-closing">
+          Thank you for your understanding and continued support.
+        </p>
+
+      </div>
+
+
+      <div class="noti-bottom">
+
+        <div class="noti-bottoml">
+          <i class="ri-shield-check-line"></i>
+          Admin Verified
+        </div>
+
+        <div class="noti-bottomR">
+          <span>Pricing Update</span>
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <!-- ==========================================
+         NOTIFICATION 3
+    =========================================== -->
+
+    <article class="notification-card">
+
+      <div class="noti-card-head">
+
+        <div class="noti-card-icon service">
+          <i class="ri-flashlight-line"></i>
+        </div>
+
+        <div class="noti-top">
+          New Service: Special Mashup
+
+          <span class="noti-label">
+            New Service
+          </span>
+        </div>
+
+      </div>
+
+
+      <div class="noti-middle">
+
+        <p>
+          We're excited to introduce
+          <strong>Special Mashup</strong>, offering more talk time
+          and MASH DATA at exceptional prices.
+        </p>
+
+
+        <!-- MASH DATA -->
+
+        <div class="noti-subheading">
+          <i class="ri-database-2-line"></i>
+          MASH DATA
+        </div>
+
+
+        <div class="mashup-price-grid">
+
+          <div class="mashup-price">
+            <strong>3GB</strong>
+            <span>GHS 13</span>
+          </div>
+
+          <div class="mashup-price">
+            <strong>5GB</strong>
+            <span>GHS 19</span>
+          </div>
+
+          <div class="mashup-price">
+            <strong>10GB</strong>
+            <span>GHS 42</span>
+          </div>
+
+          <div class="mashup-price">
+            <strong>20GB</strong>
+            <span>GHS 82</span>
+          </div>
+
+          <div class="mashup-price">
+            <strong>50GB</strong>
+            <span>GHS 150</span>
+          </div>
+
+          <div class="mashup-price">
+            <strong>217GB</strong>
+            <span>GHS 365</span>
+          </div>
+
+        </div>
+
+
+        <!-- MASHUP PACKAGES -->
+
+        <div class="noti-subheading mashup-heading">
+          <i class="ri-phone-line"></i>
+          Mashup Packages
+        </div>
+
+
+        <div class="mashup-packages">
+
+          <div class="mashup-package">
+            <span class="numb">1</span>
+
+            <div>
+              <strong>371 Minutes + 903MB</strong>
+              <small>GHS 17.99</small>
+            </div>
+          </div>
+
+
+          <div class="mashup-package">
+            <span class="numb">2</span>
+
+            <div>
+              <strong>740 Minutes + 1.8GB</strong>
+              <small>GHS 39.99</small>
+            </div>
+          </div>
+
+
+          <div class="mashup-package">
+            <span class="numb">3</span>
+
+            <div>
+              <strong>Bossu Mashup</strong>
+              <small>1100 Minutes + 2.7GB — GHS 56.97</small>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="noti-highlight noti-highlight-gold">
+
+          <i class="ri-infinity-line"></i>
+
+          <strong>
+            All MASH DATA are non-expiry.
+          </strong>
+
+        </div>
+
+
+        <p class="noti-closing">
+          Stay connected longer with family and friends while enjoying
+          exceptional value.
+        </p>
+
+        <p class="noti-available">
+          <i class="ri-checkbox-circle-fill"></i>
+          Available now on EcoData.
+        </p>
+
+      </div>
+
+
+      <div class="noti-bottom">
+
+        <div class="noti-bottoml">
+          <i class="ri-shield-check-line"></i>
+          Admin Verified
+        </div>
+
+        <div class="noti-bottomR">
+          <span>New Service</span>
+        </div>
+
+      </div>
+
+    </article>
+
   </div>
 
-  <!--noti 1-->
-<!---noti 3-->
-<div class="notification-card">
-  <div class="noti-top">
-    Order Delivery Support
-  </div>
-  <div class="noti-middle">
-    If your order status shows Delivered but the data has not been received or reflected on your number, please contact Admin within 24 hours using the chat button on the Home Page.
-
-Kindly provide the following details: <br>
-   <p style="margin: .4rem;">
-   
-</p>
-<h4 style="color: rgb(196, 168, 12);">Report requirements</h4>
-   <p style="margin: .3rem;">
-   
-</p>
-<span class="numb">1.</span> Order ID <br>
-   <p style="margin: .1rem;">
-   
-</p>
-
-<span class="numb">2.</span> Recipient Number <br>
-   <p style="margin: .1rem;">
-   
-</p>
-
-<span class="numb">3.</span> Bundle Size (GB) <br>
-
-   <p style="margin: .4rem;">
-   
-</p>
-
-Thank you for helping us resolve issues promptly.
-
-
-  </div>
-  <div class="noti-bottom">
-    <div class="noti-bottoml">
-      Admin Verified ✔️
-    </div>
-    <div class="noti-bottomR">
-      
-    </div>
-  </div>
-</div>
-
-<!---noti 2-->
-<div class="notification-card">
-  <div class="noti-top">
-     MTN Data Pricing Update
-  </div>
-  <div class="noti-middle">
-   Please note that MTN data bundle prices have been updated.
-
-Each data offer now has its own pricing structure due to variations in portals and market rates. Kindly review the displayed price before placing your order.
-
-Thank you for your understanding and continued support.
-  </div>
-  <div class="noti-bottom">
-    <div class="noti-bottoml">
-      
-Admin Verified ✔️
-    </div>
-    <div class="noti-bottomR">
-       
-    </div>
-  </div>
-</div>
-
-<!---noti 3-->
-<div class="notification-card">
-  <div class="noti-top">
-     New Service: Special Mashup
-  </div>
-  <div class="noti-middle">
-    We're excited to introduce Special Mashup, offering more talk time and MASH DATA at unbeatable prices! <br>
-    <p style="margin: .4rem;">
-   
-</p>
-  <h4 style="color: rgb(196, 168, 12);">MASH DATA's:</h4>
-  <p style="margin: .1rem;">
-   
-</p>
-3GB = 13Cedis <br>
-  <p style="margin: .1rem;">
-   
-</p>
-5GB = 19Cedis <br>
-  <p style="margin: .1rem;">
-   
-</p>
-
-10GB = 42Cedis <br>
-<p style="margin: .1rem;">
-   
-</p>
-20GB = 82Cedis <br>
-<p style="margin: .1rem;">
-   
-</p>
-50GB = 150Cedis <br>
-<p style="margin: .1rem;">
-   
-</p>
-217GB = 365Cedis <br>
-<p style="margin: .4rem;">
-   
-</p>
-<span class="numb">1.</span> 371 Minutes + 903 MB — GHS17.99 <br>
-<p style="margin: .1rem;">
-   
-</p>
-<span class="numb">2.</span> 740 Minutes + 1.8GB — GHS39.99 <br>
-<p style="margin: .1rem;">
-   
-</p>
-<span class="numb">3.</span> Bossu Mashup (1100 Minutes + 2.7gb) — GHS56.97
-
-<h5 style="margin: .3rem; color: rgb(196, 168, 12);">
-  All MASH DATA ARE NONE EXPIRY.
-</h5>
-<p style="margin: .4rem;">
-   
-</p>
-Stay connected longer with family and friends while enjoying exceptional value.
-
-Available now on EcoData. 
-  </div>
-  <div class="noti-bottom">
-    <div class="noti-bottoml">
-      Admin Verified ✔️
-    </div>
-    <div class="noti-bottomR">
-       
-    </div>
-  </div>
-</div>
-
-
-  </div>
-</div>
-
+</section>
 
 
 
@@ -819,68 +946,180 @@ Available now on EcoData.
 
       
      
- <!----MAIN-RIGHT--------->
-  <div class="ads-container-right">
-   
-    <div class="side-title">
-       <h2>Premium Offers</h2>
-       <div class="imgup"></div>
+
+   <!-- ==========================================
+     PREMIUM OFFERS
+========================================== -->
+
+<aside class="ads-container-right premium-offers">
+<div class="ads-wrapper">
+  <!-- SECTION HEADER -->
+  <div class="side-title premium-offers-header">
+    <div class="side-title-content">
+      <span class="premium-eyebrow">
+        <i class="ri-sparkling-2-line"></i>
+        EXCLUSIVE
+      </span>
+
+      <h2>Premium Offers</h2>
+
+      <p>Unlock more ways to save and grow.</p>
     </div>
 
-
-
-
-
-
-
-
-    <!----REGISTRATION---->
-
-
-    <!----REGISTRATION---->
-<div class="agent-upgrade-wrapper" >
-
-<div class="agent-upgrade">
-  <h2>Join for Exclusive Benefits</h2>
-  <img src="./css/icons/agent.png" alt=""loading="lazy">
-  <p>
-    Unlock discounted prices for personal use or reselling.
-    Pay a one-time registration fee of <strong>GHS 100</strong>
-    and start earning or saving more today.
-  </p>
-
-  <button onclick="goToPayment()">Upgrade Now</button>
-</div>
-</div>
-
-
-    <!----REGISTRATION---->
-<div class="agent-upgrade-wrapper" >
-
-<div class="agent-upgrade">
-  <h2>Get online Store</h2>
-  <img src="./css/uiIcons/store.png" alt=""loading="lazy">
-  <p>
-   Create Online store to increase your sales.
-   Receive Orders via WhatsApp daily. 
-  
-  </p>
-
-  <button onclick="window.location.href='./ecdoataStore/welcomingPage.html'">Upgrade Now</button>
-</div>
-</div>
-
-
-
-
-
-
-<!---right-ends-->
+    <div class="premium-header-icon">
+      <i class="ri-vip-crown-2-line"></i>
+    </div>
   </div>
 
 
+  <!-- ==========================================
+       AGENT UPGRADE
+  =========================================== -->
+
+  <div class="agent-upgrade-wrapper premium-offer-card">
+
+    <div class="agent-upgrade premium-agent-card">
+
+      <div class="premium-card-top">
+
+        <div class="premium-card-icon">
+          <img
+            src="./css/icons/agent.png"
+            alt="Agent"
+            loading="lazy"
+          >
+        </div>
+
+        <span class="premium-card-badge">
+          <i class="ri-price-tag-3-line"></i>
+          GHS 50
+        </span>
+
+      </div>
+
+
+      <div class="premium-card-content">
+
+        <span class="premium-card-label">
+          RESELLER ACCESS
+        </span>
+
+        <h3>Join for Exclusive Benefits</h3>
+
+        <p>
+          Unlock discounted prices for personal use or reselling.
+          Register once and start saving or earning more.
+        </p>
+
+      </div>
+
+
+      <div class="premium-card-footer">
+
+        <div class="premium-benefit">
+          <i class="ri-checkbox-circle-fill"></i>
+          <span>Discounted prices</span>
+        </div>
+
+        <div class="premium-benefit">
+          <i class="ri-checkbox-circle-fill"></i>
+          <span>Reselling opportunities</span>
+        </div>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="premium-action-btn"
+        onclick="goToPayment()"
+      >
+        <span>Upgrade Now</span>
+        <i class="ri-arrow-right-line"></i>
+      </button>
 
     </div>
+
+  </div>
+
+
+  <!-- ==========================================
+       ONLINE STORE
+  =========================================== -->
+
+  <div class="agent-upgrade-wrapper premium-offer-card">
+
+    <div class="agent-upgrade premium-store-card">
+
+      <div class="premium-card-top">
+
+        <div class="premium-card-icon">
+          <img
+            src="./css/uiIcons/store.png"
+            alt="Online Store"
+            loading="lazy"
+          >
+        </div>
+
+        <span class="premium-card-badge coming-soon">
+          Coming Soon
+        </span>
+
+      </div>
+
+
+      <div class="premium-card-content">
+
+        <span class="premium-card-label">
+          SELL ONLINE
+        </span>
+
+        <h3>Get Your Online Store</h3>
+
+        <p>
+          Create your own online store, showcase your products
+          and receive orders directly through WhatsApp.
+        </p>
+
+      </div>
+
+
+      <div class="premium-card-footer">
+
+        <div class="premium-benefit">
+          <i class="ri-checkbox-circle-fill"></i>
+          <span>Online product showcase</span>
+        </div>
+
+        <div class="premium-benefit">
+          <i class="ri-checkbox-circle-fill"></i>
+          <span>WhatsApp orders</span>
+        </div>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="premium-action-btn premium-action-disabled"
+        title="Coming Soon!"
+        disabled
+      >
+        <span>Get Store</span>
+        <i class="ri-arrow-right-line"></i>
+      </button>
+
+    </div>
+
+  </div>
+</div>
+</aside>
+
+
+
+    </div>
+
+</div>
   </div>
 
 
@@ -938,6 +1177,7 @@ const cardCloser = document.getElementById("ecoDataSidebar");
 
 <script src="userRestriction.js"></script>
 <script src="global.js"></script>
+<script src="client.js"></script>
 
 
 
