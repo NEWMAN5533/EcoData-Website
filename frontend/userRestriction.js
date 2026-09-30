@@ -52,22 +52,18 @@ onAuthStateChanged(auth, async (user) => {
     
      const adminLink1 = document.getElementById("adminAccessLink1");
      const adminLink2 = document.getElementById("adminAccessLink2");
-     const adminLink3 = document.getElementById("adminAccessLink3");
-     const adminLink4 = document.getElementById("adminAccessLink4");
 
-     const agentLinks = [
-      adminLink2,
-      adminLink4
-     ];
+     const agentLinks = adminLink2;
+
+
 
    if (
   userData.isAgent === true &&
   userData.isAdmin !== true
 ){
- agentLinks.forEach(agL => {
-  agL.style.display = "flex";
- });
-}
+ agentLinks.style.display = "flex";
+ };
+
 
    
 
@@ -75,8 +71,6 @@ onAuthStateChanged(auth, async (user) => {
    const adminLinks = [
   adminLink1,
   adminLink2,
-  adminLink3,
-  adminLink4
 ];
 
 if (userData.isAdmin === true) {
