@@ -31,10 +31,17 @@ if(shoppingBtn){
 
 
 
- //===================================
-  // STATE MANAGEMENT (PAGE ROUTING)
-  //==================================
+//=======================
+// SAFE DOM TEXT UPDATE
+//=======================
+function setDashboardText(id, value){
+ const element = 
+ document.getElementById(id);
 
+ if(element){
+  element.textContent = value;
+ }
+}
 
 
 
@@ -183,16 +190,21 @@ const onlyShowBtomNavSection = document.getElementById("onlyShowBtomNavSection")
 
 
 //=========================
-// SECTION OVERRIDE
+// SYSTEM UPGRADE MODAL
 //=========================
-
-
-
+const systemUpgradeModal = document.getElementById("upgradeModal");
+if(systemUpgradeModal){
+  systemUpgradeModal.style.display = "none";
+}
 
 
 //=====================================
 // Hide bottom NavigationBar on scroll
 //=====================================
+
+
+
+
 
 let lastScrollY = mainContainer.scrollTop;
 let scrollTicking = false;
@@ -205,8 +217,8 @@ function handleBottomNavScroll(){
   // Always show at the top of the page
   if(currentScrollY <= 10 ){
 
-    pageBottomNavigationBar.style.transform = "translateY(0)";
-    pageBottomNavigationBar.style.opacity = "1";
+    pageBottomNavigationBar.style.bottom = "0";
+    
     lastScrollY = currentScrollY;
     return;
   }
@@ -223,12 +235,12 @@ function handleBottomNavScroll(){
 
   // Scrolling Down
   if(difference > 0){
-    pageBottomNavigationBar.style.transform = "translateY(110%)";
-    pageBottomNavigationBar.style.opacity = "0";
+    pageBottomNavigationBar.style.bottom = "-200px";
+   
   } else {
     // Scroll up
-    pageBottomNavigationBar.style.transform = "translateY(0)";
-    pageBottomNavigationBar.style.opacity = "1";
+    pageBottomNavigationBar.style.bottom = "0";
+   
   }
 
   lastScrollY = currentScrollY;

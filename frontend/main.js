@@ -364,13 +364,22 @@ function resetSelectedBundle(reason = "") {
   optionBtn.innerHTML = `Select bundle <span><img src="./css/icons/more.png.png"></span>`;
 
   // clear placeholders
-  const gbHolder = document.querySelector(".placeHolderGB");
+  const gbHolder = document.querySelector(".selectedModal-top-left-content");
   if (gbHolder) gbHolder.textContent = "";
+
+  const totalHintText = document.querySelector(".selectedModal-bottom-left-content");
+  if(totalHintText) totalHintText.textContent = "";
 
   const priceHolder = document.querySelector(".placeHolderPrice");
   if(priceHolder) priceHolder.textContent = "";
 
-  const networkHolder = document.querySelector(".selectedModal-right");
+  const totalAmountText = document.getElementById("totalAmountText");
+  if(totalAmountText) totalAmountText.textContent = "";
+
+  const priceHolder2 = document.getElementById("placeHolderPriceTotal");
+  if(priceHolder2) priceHolder2.textContent = "";
+
+  const networkHolder = document.querySelector(".selectedModal-top-right-content");
   if(networkHolder) networkHolder.textContent = "";
 
 
@@ -679,22 +688,59 @@ lastValidation = validation;
             const priceFee = (priceWithFee - bundle.price).toFixed(2);
 
           // Update modal preview
-          document.getElementById("priceTag").textContent =
-            `GHS₵ ${bundle.price}`;
-          document.getElementById("networkTag").textContent =
-            `${bundle.network.toUpperCase()} `;
-          document.getElementById("sizeTag").textContent =
-          `${bundle.dataValue}`;
-          document.getElementById("netWorth").textContent = 
-          `${bundle.network.toUpperCase()}`;
-          document.getElementById("gbSize").textContent =
-          `${bundle.dataValue.toUpperCase()}`;
 
-          // PAYSTACK CHARGE FEE REMOVED
-          document.getElementById("amount").textContent = 
-        `GHS₵ ${priceWithFee}`;
+          //========================
+           // SAVE DOM TEXT
+           //========================
+          setDashboardText(
+            "priceTag",
+            `GHS₵ ${bundle.price}`
+          )
 
-          document.getElementById("priceWithFee").textContent = `GHS₵ ${priceFee}`;
+          setDashboardText(
+            "networkTag",
+            `${bundle.network.toUpperCase()} `
+          )
+
+          setDashboardText(
+            "sizeTag",
+            `${bundle.dataValue}`
+          )
+
+          setDashboardText(
+            "netWorth",
+          `${bundle.network.toUpperCase()}`
+          )
+
+          setDashboardText(
+            "gbSize",
+            `${bundle.dataValue.toUpperCase()}`
+          )
+
+             // PAYSTACK CHARGE FEE REMOVED
+          setDashboardText(
+            "amount",
+            `GHS₵ ${priceWithFee}`
+          )
+
+
+          setDashboardText(
+            "priceWithFee",
+            `GHS₵ ${priceFee}`
+          )
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -809,6 +855,8 @@ normalModeBtn.addEventListener("click", (e) => {
   e.stopPropagation();
 
   bundleTitle.textContent = "MTN Bundles";
+  
+
   telecelAirtel.style.display = "block";
 
   // remove background to the div when active
@@ -1017,14 +1065,29 @@ function activateTrackers() {
 
 // un activate trackers when no orders
 function unActivateTrackers(){
- const firstTracker = document.getElementById("deliveryTracker1").style.display = "none";
+ const firstTracker = document.getElementById("deliveryTracker1").style.display = "flex";
 
- const secondTracker = document.getElementById("deliveryTracker2").style.display = "none";
+ const secondTracker = document.getElementById("deliveryTracker2").style.display = "flex";
 }
 
 //=================================
 // ACTIVATE DELIVERY TRACKER ENDS
 //=================================
+
+//=======================
+// SAFE DOM TEXT UPDATE
+//=======================
+function setDashboardText(id, value){
+ const element = 
+ document.getElementById(id);
+
+ if(element){
+  element.textContent = value;
+ }
+}
+
+
+
 
 
 
@@ -2094,16 +2157,27 @@ function renderHomepageTotals() {
   const completedOrders =
     orders.filter(isCompletedOrder);
 
+  // ==========================================
+  //  SAVE DOM TEXT
 
-  if (pendingEl) {
-    pendingEl.textContent =
-      pendingOrders.length;
-  }
+  if(pendingEl){
+    setDashboardText(
+    "pendingTotal",
+    pendingOrders.length
+  )
+}
 
-  if (completedEl) {
-    completedEl.textContent =
-      completedOrders.length;
-  }
+
+
+ if(completedEl){
+    setDashboardText(
+    "pendingTotal",
+     completedOrders.length
+  )
+}
+
+
+ 
 
 
   // ==========================================
@@ -2824,34 +2898,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
-
-
-// ScrollBtn 
- const scrollBtn =
-  document.querySelector(".floating-scroll");
-  const bundleSection = 
-  document.getElementById("bundles");
-
- scrollBtn.addEventListener("click", () => {
-  if ( bundleSection) {
-    bundleSection.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-  }
- });
-
- // Auto-hide after scroll
- window.addEventListener("scroll", ()=> {
-  if (window.scrollY > 80) {
-    scrollBtn.style.opacity = "0";
-    scrollBtn.style.pointerEvents = 'none';
-  } else {
-    scrollBtn.style.opacity = "1";
-    scrollBtn.style.pointerEvents = "auto";
-  }
- });
 
 
 
@@ -3646,13 +3692,13 @@ function updateWinnerCelebration(winners) {
 //========================================
 
 const GIVEAWAY_END_DATE =
-    new Date("2026-08-31T23:59:59");
+    new Date("2026-09-30T23:59:59");
 
 const CELEBRATION_START =
-    new Date("2026-09-01T00:00:00");
+    new Date("2026-10-01T00:00:00");
 
 const CELEBRATION_END =
-    new Date("2026-09-01T23:59:59");
+    new Date("2026-10-01T23:59:59");
 
 
 //========================================
@@ -4162,7 +4208,6 @@ function updateConfetti() {
     );
 
 }
-
 
 //========================================
 // ANIMATION LOOP
