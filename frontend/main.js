@@ -35,8 +35,8 @@ const API_BASE = (() => {
 //=========================
 // LEADERBOARD START DATE
 //=========================
-const LEADERBOARD_START = new Date("2026-09-01");
-const LEADERBOARD_ENDS = new Date("2026-09-30T23:59:59");
+const LEADERBOARD_START = new Date("2026-10-01");
+const LEADERBOARD_ENDS = new Date("2026-10-31T23:59:59");
 
 const leaderboardStartText = LEADERBOARD_START.toLocaleDateString("en-US", {
     month: "short",
@@ -3692,13 +3692,13 @@ function updateWinnerCelebration(winners) {
 //========================================
 
 const GIVEAWAY_END_DATE =
-    new Date("2026-09-30T23:59:59");
+    new Date("2026-10-31T23:59:59");
 
 const CELEBRATION_START =
-    new Date("2026-09-30T00:00:00");
+    new Date("2026-11-01T00:00:00");
 
 const CELEBRATION_END =
-    new Date("2026-10-01T23:59:59");
+    new Date("2026-11-01T23:59:59");
 
 
 //========================================
