@@ -50,8 +50,8 @@ onAuthStateChanged(auth, async (user) => {
     const userData = userSnap.data();
 
     
-     const adminLink1 = document.getElementById("clientAccessLink1");
-     const adminLink2 = document.getElementById("agentAccessLink1");
+     const adminLink1 = document.getElementById("adminAccessLink1");
+     const adminLink2 = document.getElementById("agentAccessLink2");
 
      const agentLinks = adminLink2;
 

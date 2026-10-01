@@ -1065,9 +1065,9 @@ function activateTrackers() {
 
 // un activate trackers when no orders
 function unActivateTrackers(){
- const firstTracker = document.getElementById("deliveryTracker1").style.display = "flex";
+ const firstTracker = document.getElementById("deliveryTracker1").style.display = "none";
 
- const secondTracker = document.getElementById("deliveryTracker2").style.display = "flex";
+ const secondTracker = document.getElementById("deliveryTracker2").style.display = "none";
 }
 
 //=================================
@@ -3695,10 +3695,10 @@ const GIVEAWAY_END_DATE =
     new Date("2026-09-30T23:59:59");
 
 const CELEBRATION_START =
-    new Date("2026-10-01T00:00:00");
+    new Date("2026-09-30T00:00:00");
 
 const CELEBRATION_END =
-    new Date("2026-10-01T00:00:00");
+    new Date("2026-10-01T23:59:59");
 
 
 //========================================
@@ -4231,87 +4231,6 @@ function celebrationLoop() {
 
 
 
-//========================================
-// WINNER CELEBRATION
-//========================================
-
-let fireworkInterval = null;
-
-
-
-//========================================
-// UPDATE WINNER INFORMATION
-//========================================
-
-function updateWinnerCelebration(winners) {
-
-    if (!Array.isArray(winners)) {
-        return;
-    }
-
-
-    const topThree =
-        winners.slice(0, 3);
-
-
-    topThree.forEach((winner, index) => {
-
-        const rank =
-            index + 1;
-
-
-        const phoneElement =
-            document.getElementById(
-                `celebrationWinner${rank}`
-            );
-
-
-        const pointsElement =
-            document.getElementById(
-                `celebrationPoints${rank}`
-            );
-
-
-        if (!winner) {
-
-            if (phoneElement) {
-                phoneElement.textContent = "---";
-            }
-
-            if (pointsElement) {
-                pointsElement.textContent = "---";
-            }
-
-            return;
-        }
-
-
-        if (phoneElement) {
-
-            phoneElement.textContent =
-                maskPhone(
-                    winner.phone
-                );
-
-        }
-
-
-        if (pointsElement) {
-
-            pointsElement.textContent =
-                `${Number(winner.points || 0)} points`;
-
-        }
-
-    });
-
-
-    console.log(
-        "🎉 Last Month Top 3:",
-        topThree
-    );
-
-}
 
 
 //========================================

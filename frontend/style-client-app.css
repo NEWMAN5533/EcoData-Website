@@ -447,7 +447,7 @@ p {
    SIDEBAR
 ========================================== */
 
-.client-sidebar {
+.client-app #clientSidebar {
 
   position: fixed;
 
@@ -458,16 +458,14 @@ p {
   width: var(--client-sidebar-width);
 
   background: var(--bg-cl);
+   display: flex;
+  flex-direction: column;
 
   border-right:
     1px solid var(--client-border);
+  overflow: hidden;
 
-  z-index: 999999999999999999999999;
-
-  display: flex;
-  flex-direction: column;
-
-
+  z-index: 999999999999999999999999999 !important;
 }
 
 
@@ -829,7 +827,7 @@ p {
 
   top: 0;
 
-  z-index: 9999999999999999999999;
+  
 
   display: flex;
   align-items: center;
@@ -841,6 +839,8 @@ p {
     1px solid var(--client-border);
 
   backdrop-filter: blur(12px);
+
+  z-index: 999999999;
 }
 
 

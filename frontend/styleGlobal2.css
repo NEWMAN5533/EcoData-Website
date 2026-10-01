@@ -267,6 +267,10 @@ body.dark-mode {
     
   }
 
+
+  .card-container{
+    margin: 60px 0;
+  }
   .dark-mode .client-main .main-grid-container{
     background: var(--card-bg-dark) !important;
   }
