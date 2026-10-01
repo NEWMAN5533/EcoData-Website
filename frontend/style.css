@@ -1738,7 +1738,7 @@ UPDATED UI STYLE
   max-width: 100% !important;
   position: fixed;
   bottom: 0 !important;
-  height: 65% !important;
+  height: 68% !important;
   text-align: center;
   animation: fadeIn 0.7s ease;
   border: none !important;
@@ -2099,7 +2099,7 @@ UPDATED UI STYLE
 
 .modal-content .selected-div2 input {
   width: 100%;
-  height: 2.7rem;
+  height: 2.9rem;
   padding: 8px;
   color: rgb(46, 44, 44);
   background: transparent;
@@ -2139,13 +2139,14 @@ UPDATED UI STYLE
   gap: .2rem;
   width: 100%;
   margin: 0 !important;
-  height: 4.5rem !important;
+  height: 4.7rem !important;
   max-width: 99% !important;
   justify-self: center;
   align-items: start;
   text-align: start;
+  line-height: 1.2;
   padding: 12px;
-  justify-content: start !important;
+  justify-content: center !important;
   border: 1px solid rgb(202, 226, 241) !important;
   background: rgba(192, 192, 241, 0.267);
   backdrop-filter: blur(10px);
@@ -2173,7 +2174,7 @@ UPDATED UI STYLE
 
 .modal-content .selected-div3 p{
   color: rgb(72, 72, 134);
-  font-size: .87rem;
+  font-size: .76rem;
   font-weight: 600;
   display: flex;
   gap: .3rem;
@@ -2287,7 +2288,9 @@ UPDATED UI STYLE
   justify-self: center;
   align-items: center;
   margin-bottom: .4rem !important;
-  padding: 3px;
+  padding: 8px;
+  gap: .4rem;
+  line-height: 1.2;
   justify-content: space-between !important;
   box-shadow: 0 !important;
   border: 1px solid rgb(202, 226, 241);
@@ -2296,7 +2299,7 @@ UPDATED UI STYLE
 
 .selected-div5 .selected-div5-packs{
   width: 100%;
-  height: 65%;
+  height: 72%;
   display: flex;
   align-items: center;
   justify-content: start;
@@ -2387,7 +2390,7 @@ UPDATED UI STYLE
 /*********SELECTED DIV5 BOTTOM*****/
 .selected-div5 .selected-div5-amount{
   width: 100%;
-  height: 35%;
+  height: 28%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -3403,6 +3406,7 @@ box-shadow: 0 8px 14px  rgba(56, 55, 55, 0.2);
   border-radius: 8px;
   justify-content: start;
   align-items: start;
+  padding: 0 10px;
   text-align: start;
 }
 
