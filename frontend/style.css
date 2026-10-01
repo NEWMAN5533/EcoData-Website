@@ -2305,7 +2305,7 @@ UPDATED UI STYLE
   justify-content: start;
   position: relative;
   padding: .3rem;
-  border-bottom:  1px solid var(--border-cl-2);
+  
 }
 
 .dark-mode .modal-content .selected-div5{
