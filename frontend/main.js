@@ -3698,7 +3698,7 @@ const CELEBRATION_START =
     new Date("2026-10-01T00:00:00");
 
 const CELEBRATION_END =
-    new Date("2026-10-01T23:59:59");
+    new Date("2026-10-01T00:00:00");
 
 
 //========================================
