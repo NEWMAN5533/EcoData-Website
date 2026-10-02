@@ -25,14 +25,13 @@
 
 
   
-  // === SEND MESSAGE ===
-  if(sendBtn){
+  // === SEND MESSAGE ====
     sendBtn.addEventListener("click", () => {
     const message = document.getElementById("whatsappMessage").value.trim();
     if (!message) {
       showSnackBar("Please type your message before sending.");
       return;
-    }
+    
 
     const encodedMessage = encodeURIComponent(message);
     const whatsappURL =` https://wa.me/${233535565637}?text=${encodedMessage}`;
