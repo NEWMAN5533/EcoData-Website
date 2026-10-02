@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const chatButton = $("chatButton");
   const chatBox = $("chatBox");
   const sendMsgBtn = $("sendMsgBtn");
-  const whatsappMessage = $("whatsappMessage");
+  const whatsappMessage = $("whatsppMessage");
 
 
   // -------------------------------
