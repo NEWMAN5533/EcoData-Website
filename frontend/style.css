@@ -1738,7 +1738,7 @@ UPDATED UI STYLE
   max-width: 100% !important;
   position: fixed;
   bottom: 0 !important;
-  height: 68% !important;
+  height: 67% !important;
   text-align: center;
   animation: fadeIn 0.7s ease;
   border: none !important;
@@ -4608,29 +4608,9 @@ SNACKBAR SECTION
   bottom: 5.4rem;
   right: 10px;
   z-index: 99999;
-  font-family: "Poppins", sans-serif;
 }
 
-/* Floating button */
-#chatButton {
-  background-color: #2a5a70;
-  color: white;
-  font-size: 26px;
-  width: 62px;
-  height: 52px;
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
- -ms-user-select: none;
-  user-select: none;
-}
+
 
 
 .message{
@@ -4656,15 +4636,23 @@ SNACKBAR SECTION
   bottom: 75px;
   right: 0;
   background: #fff;
-  width: 280px;
+  width: 260px;
+  border: 1px solid #2f6781;
+  height: 15rem;
   padding: 15px;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   animation: fadeIn 0.3s ease;
 }
 
+.dark-mode #chatBox {
+  background: var(--card-bg-dark) !important;
+  border: 1px solid var(--thin-border);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
 #chatBox.show {
-  display: flex;
+  display: flex !important;
 }
 
 #chatBox h4 {
@@ -4673,15 +4661,71 @@ SNACKBAR SECTION
   color: #61b2c0;
 }
 
-#chatBox input {
+.chatBox-header{
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
   width: 100%;
+  position: relative;
+  line-height: 1.7;
+  height: 4rem;
+}
+
+.chatBox-header img{
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.dark-mode .chatBox-header img{
+  background: linear-gradient(135deg, rgb(14, 109, 69), rgb(185, 139, 11));
+  border-color: var(--thin-border);
+  border-radius: 30%;
+  padding: .4rem;
+}
+
+.chatBox-header strong{
+  color: #ccc;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+#chatBox textArea {
+  width: 100%;
+  height: 90%;
   padding: 8px;
+  flex-wrap: wrap;
+  line-height: 1.2;
+  margin-top: .2rem;
   color: #292727;
   background-color: #dddae7;
   border-radius: 8px;
   border: 1px solid #ccc;
   margin-bottom: 10px;
-  font-size: 14px;
+  font-size: 16px;
+}
+
+
+/* Floating button */
+#chatButton {
+  background-color: #2a5a70;
+  color: white;
+  font-size: 26px;
+  width: 62px;
+  height: 52px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  outline: none;
+ -ms-user-select: none;
+  user-select: none;
 }
 
 #chatBox button {
@@ -4689,6 +4733,10 @@ SNACKBAR SECTION
   color: white;
   border: none;
   padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
@@ -4699,6 +4747,11 @@ SNACKBAR SECTION
   -ms-user-select: none;;
   user-select: none;
 
+}
+
+#chatBox button img{
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 #chatBox button:hover {
@@ -5856,13 +5909,13 @@ max-width: 320px;
 }
 
 /*** message ***/
- .chatBox .message{
+  .message{
   width: 3.3rem !important;
   height: 3rem !important;
   border-radius: 8px !important;
 }
 
-.chatBox .message img{
+ .message img{
   width: 2.2rem;
   height: 2.1rem;
 }
@@ -6983,13 +7036,13 @@ max-width: 320px;
 }
 
 /*** message ***/
- .chatBox .message{
+  .message{
   width: 3.3rem !important;
   height: 3rem !important;
   border-radius: 8px !important;
 }
 
-.chatBox .message img{
+ .message img{
   width: 2.2rem;
   height: 2.1rem;
 }
@@ -8216,13 +8269,13 @@ max-width: 320px;
 }
 
 /*** message ***/
- .chatBox .message{
+  .message{
   width: 3.3rem !important;
   height: 3rem !important;
   border-radius: 8px !important;
 }
 
-.chatBox .message img{
+ .message img{
   width: 2.2rem;
   height: 2.1rem;
 }
@@ -9407,13 +9460,13 @@ max-width: 320px;
 }
 
 /*** message ***/
- .chatBox .message{
+  .message{
   width: 3.3rem !important;
   height: 3rem !important;
   border-radius: 8px !important;
 }
 
-.chatBox .message img{
+ .message img{
   width: 2.2rem;
   height: 2.1rem;
 }
@@ -10606,13 +10659,13 @@ max-width: 320px;
 }
 
 /*** message ***/
- .chatBox .message{
+  .message{
   width: 3.3rem !important;
   height: 3rem !important;
   border-radius: 8px !important;
 }
 
-.chatBox .message img{
+ .message img{
   width: 2.2rem;
   height: 2.1rem;
 }
@@ -11801,13 +11854,13 @@ max-width: 320px;
 }
 
 /*** message ***/
- .chatBox .message{
+  .message{
   width: 3.3rem !important;
   height: 3rem !important;
   border-radius: 8px !important;
 }
 
-.chatBox .message img{
+ .message img{
   width: 2.2rem;
   height: 2.1rem;
 }
@@ -13001,13 +13054,13 @@ max-width: 320px;
 }
 
 /*** message ***/
- .chatBox .message{
+  .message{
   width: 3.3rem !important;
   height: 3rem !important;
   border-radius: 8px !important;
 }
 
-.chatBox .message img{
+ .message img{
   width: 2.2rem;
   height: 2.1rem;
 }
