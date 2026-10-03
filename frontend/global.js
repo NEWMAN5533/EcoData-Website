@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (totalCustomersOrders) {
 
-    totalCustomersOrders.textContent = "1.48K+";
+    totalCustomersOrders.textContent = "1.51K+";
 
   }
 
