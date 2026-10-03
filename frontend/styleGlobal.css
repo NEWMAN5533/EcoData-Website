@@ -2237,6 +2237,10 @@ SOCIAL FOLLOW SECTION
   height: 2.3rem;
   background: rgb(35, 133, 190);
   border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
   border-radius: 3px;
   color: white;
   font-size: 1.1rem;
@@ -2327,6 +2331,7 @@ SOCIAL FOLLOW SECTION
   width: 100%;
   position: relative;
 }
+
 
 
 .whatsapp-channel{
