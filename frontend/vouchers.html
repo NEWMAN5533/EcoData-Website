@@ -406,7 +406,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
           
 
               <span class="client-avatar" >
-                <h5 id="usernameInitials"></h5>
+                <h5 id="usernameInitials">GU</h5>
               </span>
 
               <span class="client-profile-info">
@@ -1695,19 +1695,27 @@ document.addEventListener("DOMContentLoaded", ()=> {
   </div>
   <!----WHATSAPP-GROUP--FIXED-BUTTON-ends---->
   
-    <!-- WhatsApp Floating Chat -->
+
+
+
+  
+    <!--====================
+      ADMIN WHATSAPP CHAT BUTTON
+      =====================-->
   <div class="chatBox" id="whatsappChat">
     <div id="chatButton" class="message">
       <img src="./css/icons/chatMe.png" alt="image" loading="lazy">
     </div>
     <!---whatsapp chatBox-->
     <div id="chatBox">
-      <h4>Chat Ecodata Admin</h4>
-      <input type="text" id="whatsappMessage" placeholder="Type your message..." />
-      <button id="sendMsgBtn">Send</button>
+
+      <div class="chatBox-header"> <img src="./css/icons/agent.png" alt="" loading="lazy"> <strong>Chat Admin</strong></div>
+      <textarea name="input" id="whatsppMessage" placeholder="Type your message..."></textarea>
+      <button id="sendMsgBtn">
+        <img src="./css/icons/whats.png" alt="" loading="lazy">
+        Send Message</button>
     </div>
   </div>
-   <!---WhatsApp Floating Chat ends--->
 
 
 

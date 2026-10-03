@@ -107,6 +107,9 @@
   }
 </style>
 
+
+
+
   
 </head>
 
@@ -411,7 +414,7 @@
           
 
               <span class="client-avatar">
-                <h5 id="usernameInitials"></h5>
+                <h5 id="usernameInitials">GU</h5>
               </span>
 
               <span class="client-profile-info">
@@ -1206,92 +1209,29 @@
 
 
 
-   <!-- ✅ WhatsApp Floating Chat -->
+  
+    <!--====================
+      ADMIN WHATSAPP CHAT BUTTON
+      =====================-->
   <div class="chatBox" id="whatsappChat">
     <div id="chatButton" class="message">
       <img src="./css/icons/chatMe.png" alt="image" loading="lazy">
     </div>
     <!---whatsapp chatBox-->
     <div id="chatBox">
-      <h4>Chat Ecodata Admin</h4>
-      <input type="text" id="whatsappMessage" placeholder="Type your message..." />
-      <button id="sendMsgBtn">Send</button>
+
+      <div class="chatBox-header"> <img src="./css/icons/agent.png" alt="" loading="lazy"> <strong>Chat Admin</strong></div>
+      <textarea name="input" id="whatsppMessage" placeholder="Type your message..."></textarea>
+      <button id="sendMsgBtn">
+        <img src="./css/icons/whats.png" alt="" loading="lazy">
+        Send Message</button>
     </div>
   </div>
 
 
 
 
-<!------MENU-CARD----->
-<section class="menu-card-container" id="closeCard" style="display: none">
-       <div class="link">
-       <a href="terms.html">
-        <img src="./css/icons/list.jpg" alt="image" loading="lazy">
-        <span>Terms of use</span>
-       </a>
-      </div>
 
-
-       <div class="link">
-       <a href="bundlesInfo.html">
-        <img src="./css/icons/terms (1).png" alt="image" loading="lazy">
-        <span>Bundles info</span>
-       </a>
-      </div>
-
-      
-       <div class="link">
-       <a href="./ecdoataStore/ecoshop.html">
-        <img src="./css/icons/logoImg.jpeg" alt="image" loading="lazy">
-        <span>EcoData Store</span>
-       </a>
-      </div>
-
-      
-       <div class="link">
-       <a href="#">
-        <img src="./css/icons/ebook.png" alt="image" loading="lazy">
-        <span>Ebooks Shop</span>
-       </a>
-      </div>
-
-      <div class="link">
-       <a href="./afa.html">
-        <img src="./css/icons/personal.png" alt="image" loading="lazy">
-        <span>AFA</span>
-       </a>
-      </div>
-
-        <div class="link">
-       <a href="./pay.html">
-        <img src="./css/icons/agent.png" alt="image" loading="lazy">
-        <span>Get discount</span>
-       </a>
-      </div>
-
-
-
-      <div class="menu-ranking-links">
-        <!--WHATSAPP GROUP-->
-      <a href="https://www.tiktok.com/@ecodata247?_r=1&_d=ei9853mf1g8eec&sec_uid=MS4wLjABAAAAiY9nBAfFbpbd7KRl0y4-JTcRL0WMtPt9Pr-FKt__N-hQvmFZLhhInTTpn7Y5oRos&share_author_id=7484812520763950088&sharer_language=en&source=h5_m&u_code=ejcbk20728bd87&utm_source=copy&utm_campaign=client_share&share_link_id=d9108b99-2843-43f1-8f6c-ed4b72ea3264&share_app_id=1340&ugbiz_name=Account&lang=en&user_id=7484812520763950088&sec_user_id=MS4wLjABAAAAiY9nBAfFbpbd7KRl0y4-JTcRL0WMtPt9Pr-FKt__N-hQvmFZLhhInTTpn7Y5oRos&enable_checksum=1">
-      <button class="join-btn tiktok"><img src="./css/icons/tiktok.png" alt="">Tiktok</button>
-      </a>
-      <!--WHATSAPP GROUP-->
-      <a href="https://chat.whatsapp.com/LwhZNOyUQsJIGTQRL9cIXT?mode=hqrt3">
-      <button class="join-btn grp"><img src="./css/icons/whats.png" alt="" loading="lazy"> WhatsApp Group</button>
-      </a>
-      <!---WHATSAPP CHANNEL-->
-      <a href="https://whatsapp.com/channel/0029VbBgYfqAzNbpoZDtnq3o">
-      <button class="join-btn"><img src="./css/icons/whats.png" alt="" loading="lazy">Join WhatsApp Channel</button>
-      </a>
-      </div>
-
-        <div class="button-wrapper">
-          <button onclick="window.location.href = 'signUp.html'" class="logout-btn">Sign-Up</button></a>
-
-       <button id="logOutBtn" class="log-out "><img src="./css/icons/logout.png" alt="" loading="lazy"> Logout</button>   
-      </div> 
-    </div>
 
 
 
@@ -1584,6 +1524,7 @@
 
 
 <script type="module" src="./firebase-config.js"></script>
+<script type="module" src="userRestriction.js"></script>
 
 
 <script src="afaRegistration.js"></script>
@@ -1595,166 +1536,8 @@
 
  <script src="global.js"></script>
  <script src="client.js"></script>
- <script src="client-theme.js"></script>
+ 
 
-
-
-<!---usernameDisplay----->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
-
-  import { signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-
-  const firebaseConfig = {
-    // TODO: replace these placeholder values with your Firebase project config
-  apiKey: "AIzaSyClNBlfigtQk8AZWdMZcU9sEtVcIrS0D1g",
-  authDomain: "ecodata-2bee6.firebaseapp.com",
-  projectId: "ecodata-2bee6",
-  storageBucket: "ecodata-2bee6.firebasestorage.app",
-  messagingSenderId: "544837123249",
-  appId: "1:544837123249:web:6c362350a00c6dab10b690"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-
-  onAuthStateChanged(auth, async (user) => {
-    const usernameDisplay = document.getElementById("usernameDisplay");
-
-// FORCE TO LOGIN THE USER //
-  
-
-
-const greeting = updateClock();
-
-    if (user) {
-      const userSnap = await getDoc(doc(db, "users", user.uid));
-      usernameDisplay.textContent = `${greeting}, ${userSnap.data().username}!`;
-    } else {
-      usernameDisplay.textContent = `${greeting}, Dear `;
-    }
-});
-
-
-const lapOutBtn = document.getElementById("lapOut");
-const logOutBtn = document.getElementById("logOut");
-
-// Logout
-if(logOutBtn) {
-  logOutBtn.addEventListener("click", async () => {
-    try{
-      await signOut(auth);
-      showSnackBar("Logged out successfully");
-
-    } catch (error){
-      console.error("Error logging in: ", error);
-    }
-  });
-};
-
-
-// LogOut on laptops
-if(lapOutBtn){
-  lapOutBtn.addEventListener("click", async () => {
-    try {
-      await signOut(auth);
-      showSnackBar("Logged out successfully");
-    } catch(err) {
-      console.error("Error Login in: ", err);
-      showSnackBar("Error logging out")
-    }
-  })
-}
-
-
-
-
-  
-  // === REAL TIME CLOCK ===
-function updateClock() {
-  const clock = document.getElementById("clock");
-  const now = new Date();
-
-  const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-  const dayName = days[now.getDay()];
-
-  let hours = now.getHours();
-  let minutes = now.getMinutes();
-  let seconds = now.getSeconds();
-
-  // Greeting logic
-  let greeting = "";
-  if (hours < 12) greeting = "Good Morning";
-  else if (hours < 18) greeting = "Good Afternoon";
-  else greeting = "Good Evening";
-
-  const ampm = hours >= 12 ? "PM" : "AM";
-
-  hours = hours % 12 || 12;
-  minutes = minutes < 10 ? "0" + minutes : minutes;
-  seconds = seconds < 10 ? "0" + seconds : seconds;
-
-  clock.innerHTML = `${dayName} ${hours}:${minutes}:${seconds} ${ampm}`;
-
-  return greeting; // 🔥 important
-}
-
-setInterval(updateClock, 1000);
-updateClock();
-
-
-
-
-// SNACKBAR SECTION //
-// ===== SNACKBAR FUNCTION ===== //
-let snackbarTimeout = null;
-
-function showSnackBar(message, type = "info", duration = 4000) {
-  let snackbar = document.querySelector(".snackbar");
-
-  // Create snackbar if it doesn't exist
-  if (!snackbar) {
-    snackbar = document.createElement("div");
-    snackbar.className = "snackbar";
-
-    snackbar.innerHTML = `
-      <span class="snackbar-text"></span>
-      <div class="snackbar-progress"></div>
-    `;
-
-    document.body.appendChild(snackbar);
-  }
-
-  // Update text
-  snackbar.querySelector(".snackbar-text").textContent = message;
-
-  // Color by type
-  if (type === "success") snackbar.style.background = "rgba(7, 29, 26, 0.95)";
-  else if (type === "error") snackbar.style.background = "#dc3545";
-  else if (type === "warning") snackbar.style.background = "#ffc107";
-  else snackbar.style.background = "rgba(7, 29, 26, 0.95)";
-
-  // Reset progress animation
-  const progress = snackbar.querySelector(".snackbar-progress");
-  progress.style.animation = "none";
-  void progress.offsetWidth;
-  progress.style.animation = `snackbar-progress ${duration}ms linear forwards`;
-
-  snackbar.classList.add("show");
-
-  // Clear previous timeout
-  if (snackbarTimeout) clearTimeout(snackbarTimeout);
-
-  snackbarTimeout = setTimeout(() => {
-    snackbar.classList.remove("show");
-  }, duration);
-}
-// snackbar ends
-
- </script>
 
 
 
@@ -1798,76 +1581,46 @@ function downloadReceipt() {
 
 
 
-<!---SWIPER SCRIPT-->
+<!-----DARK-MODE JS-->
 <script>
+  const toggle = document.getElementById("themeToggle");
+  const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
+  const savedTheme = localStorage.getItem("theme");
 
-  document.addEventListener("DOMContentLoaded", ()=> {
-
-let topSwiper = new Swiper(".status-swiper", {
-
-
- loop: true,
-  spaceBetween: 12,
-  grabCursor: true,
-  slidesPerView: 'auto',
-  centeredSlides: false,
-  loopAdditionalSlides: 9,
-  speed: 5000,
-
-  autoplay: {
-    delay: 0,
-    disableOnInteraction: false,
-    pauseOnMouseEnter: false,
-  },
-  allowTouchMove: true,
-
-
-  breakpoints: {
-    640: {
-      spaceBetween: 32,
+  function applyTheme(theme) {
+    if (theme === "dark") {
+      document.body.classList.add("dark-mode");
+      toggle.checked = true;
+    } else {
+      document.body.classList.remove("dark-mode");
+      toggle.checked = false;
     }
   }
-});
 
-
-
-   });
-</script>
-
-
-
-
-
-
-
-<!---HIDE MULTIPLE DIV--->
-
-  <!---======THEME SCRIPT=========-->
-<script>
-(function () {
-
-  const savedTheme =
-    localStorage.getItem("ecoDataClientTheme") || "system";
-
-  const systemDark =
-    window.matchMedia &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-  const shouldUseDark =
-    savedTheme === "dark" ||
-    (savedTheme === "system" && systemDark);
-
-  document.documentElement.dataset.clientTheme =
-    savedTheme;
-
-  if (shouldUseDark) {
-    document.documentElement.classList.add("client-dark");
+  if (savedTheme) {
+    applyTheme(savedTheme);
+  } else {
+    applyTheme(systemPrefersDark ? "dark" : "light");
   }
 
-})();
-</script>
+  toggle.addEventListener("change", () => {
+    if (toggle.checked) {
+      localStorage.setItem("theme", "dark");
+      applyTheme("dark");
+    } else {
+      localStorage.setItem("theme", "light");
+      applyTheme("light");
+    }
+  });
 
+  // Auto-change if system theme changes and user has no preference
+  window.matchMedia("(prefers-color-scheme: dark)").addListener(e => {
+    if (!localStorage.getItem("theme")) {
+      applyTheme(e.matches ? "dark" : "light");
+    }
+});
+</script>
 
 
 
