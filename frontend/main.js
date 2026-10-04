@@ -2613,51 +2613,87 @@ function updateLiveOrderStatus(orderId, newStatus) {
 
   const orders = getStoredOrders();
 
-  const index = orders.findIndex(o => o.orderId === orderId);
+  const index = orders.findIndex(
+    o => o.orderId === orderId
+  );
+
   if (index === -1) return;
 
-  const currentStatus = orders[index].status || "pending";
-  
-  if(STATUS_PRIORITY[newStatus] < STATUS_PRIORITY[currentStatus]) {
-    console.warn(`Blocked downgrade : ${currentStatus} → ${newStatus}`);
-    return;
-}
+  const currentStatus =
+    orders[index].status || "pending";
 
-// Detect first-time delivery
-const wasDelivered = currentStatus === ["delivered","cancelled", "failed"];
-const nowDelivered = newStatus ===  ["delivered","cancelled", "failed"];
+  // Prevent status downgrade
+  if (
+    STATUS_PRIORITY[newStatus] <
+    STATUS_PRIORITY[currentStatus]
+  ) {
+    console.warn(
+      `Blocked downgrade: ${currentStatus} → ${newStatus}`
+    );
+
+    return;
+  }
+
+  // Detect whether this order was already completed
+  const wasDelivered =
+    currentStatus === "delivered" ||
+    currentStatus === "cancelled" ||
+    currentStatus === "failed";
+
+  // Detect whether this update completes the order
+  const nowDelivered =
+    newStatus === "delivered" ||
+    newStatus === "cancelled" ||
+    newStatus === "failed";
 
   orders[index] = {
     ...orders[index],
+
     status: newStatus,
 
-    updatedAt: currentStatus !== newStatus
-    ? Date.now()
-    : orders[index].updatedAt,
+    updatedAt:
+      currentStatus !== newStatus
+        ? Date.now()
+        : orders[index].updatedAt,
 
-    deliveredAt: nowDelivered 
-    ? (orders[index].deliveredAt || Date.now()) 
-    : orders[index].deliveredAt
+    deliveredAt:
+      nowDelivered
+        ? (
+            orders[index].deliveredAt ||
+            Date.now()
+          )
+        : orders[index].deliveredAt
   };
 
+  localStorage.setItem(
+    LIVE_ORDERS_KEY,
+    JSON.stringify(orders)
+  );
 
-  localStorage.setItem(LIVE_ORDERS_KEY, JSON.stringify(orders));
-
-
-  // ONLY increment once when it becomes delivered
-  if(!wasDelivered && nowDelivered ) {
-    let completedTotal = 
-
-    parseInt(localStorage.getItem("ecoCompletedTotal")) || 0;
+  // ONLY increment once when the order first becomes completed
+  if (
+    !wasDelivered &&
+    nowDelivered
+  ) {
+    let completedTotal =
+      parseInt(
+        localStorage.getItem(
+          "ecoCompletedTotal"
+        )
+      ) || 0;
 
     completedTotal++;
 
-    localStorage.setItem("ecoCompletedTotal", completedTotal);
+    localStorage.setItem(
+      "ecoCompletedTotal",
+      completedTotal
+    );
   }
 
-  updatePendingCard();  // correct
+  updatePendingCard();
 
-  syncCompletedIfMismatch(); // recovery
+  // Recovery
+  syncCompletedIfMismatch();
 }
 
 
