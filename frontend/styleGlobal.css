@@ -271,7 +271,8 @@ SNACKBAR SECTION
 
   .welcome-hero-top .wht-left-top p{
   font-size: 1.1rem;
- 
+ display: flex;
+    white-space: nowrap;
   font-weight: 600;
   color: rgb(70, 70, 77);
  }
