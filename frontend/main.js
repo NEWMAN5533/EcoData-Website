@@ -1871,7 +1871,7 @@ function updateHomepageTotals(orderData) {
 }
 
 //========================
-// FORMAT TOTALGB
+// FORMAT TOTAL GB
 //========================
 
 
@@ -2301,7 +2301,7 @@ function renderHomepageTotals() {
 
 
 //========================
-// FORMAT TOTALGBend
+// FORMAT TOTAL GB end
 //========================
 
 // Load totals on page refresh
@@ -2313,27 +2313,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
-
- 
-
-// POLLING FUNCTION //
-
-// STATUS_POLL_INTERVAL and _statusPollTimer are declared earlier; avoid redeclaration to prevent errors.
-
- // ---------- HELPERS ----------
-function getStatusTextMapping(status) {
-  const s = (status || "").toLowerCase();
-  return {
-    delivered: "Your bundle is successfully delivered ✅.",
-    pending: "Order awaiting processing.",
-    processing: "Order is processing. Please wait.",
-    failed: "Order failed. Contact support or try again.",
-    cancelled: "Order was cancelled.",
-    refunded: "Payment refunded.",
-    resolved: "Issue resolved. Order completed."
-  }[s] || "Status update in progress.";
-}
 
 function getStatusClass(status) {
   return `status-${(status || "").toLowerCase()}`;
@@ -2832,72 +2811,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 // handleNewOrders Dom ends//
 
-
-
-
-// MANUAL ORDER CHECKER 
-document.addEventListener("DOMContentLoaded", () => {
-  const last = localStorage.getItem("lastOrderId");
-  const orderInput = document.getElementById("orderInput");
-  const checkBtn = document.getElementById("checkBtn");
-  const statusResult = document.getElementById("statusResult");
-
-  if (!orderInput || !checkBtn || !statusResult) return;
-
-  // Prefill input only
-  if (last) orderInput.value = last;
-
-  // 🔒 Manual checker must start empty
-  statusResult.innerHTML = "";
-
-  let manualCheckTriggered = false;
-
-  checkBtn.addEventListener("click", async () => {
-    const id = orderInput.value.trim();
-    if (!id) return showSnackBar("Please enter order ID.");
-
-    manualCheckTriggered = true;
-
-    statusResult.innerHTML = `
-      <div style="padding:10px;border-radius:8px;background:#f0f0f0;">
-        🌀 Checking order <strong>${id}</strong>...
-      </div>
-    `;
-
-    try {
-      const order = await checkOrderStatusOnce(id);
-      if (!manualCheckTriggered) return;
-
-      if (!order) {
-        statusResult.innerHTML = `
-          <div style="padding:10px;background:#ffdddd;border-radius:8px;">
-            ⚠ Order not found
-          </div>
-        `;
-        return;
-      }
-
-      const status = (order.status || "pending").toLowerCase();
-      const desc = getStatusTextMapping(status);
-
-      statusResult.innerHTML = `
-        <div style="padding:15px;border-radius:10px;border:2px solid #4caf50;">
-          <h3 style="text-transform:capitalize">${status}</h3>
-          <p><strong>Order ID:</strong> ${order.orderId || order.reference}</p>
-          <p><strong>Recipient:</strong> ${order.recipient}</p>
-          <p><strong>Volume:</strong> ${order.volume} GB</p>
-          <p>${desc}</p>
-        </div>
-      `;
-    } catch (err) {
-      statusResult.innerHTML = `
-        <div style="padding:10px;background:#ffdddd;border-radius:8px;">
-          ❌ Error checking status
-        </div>
-      `;
-    }
-  });
-});
 
 
 
