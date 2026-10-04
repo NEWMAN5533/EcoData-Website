@@ -167,7 +167,7 @@ onAuthStateChanged(auth, async (user) => {
           getUsernameInitials(username);
 
         // Only add lind after auth.user
-        usernameInitials.addEventLIstener("click", ()=> {
+        usernameInitials.addEventListener("click", ()=> {
           window.location.href = "./bundleProfile.html";
         })
 
@@ -298,11 +298,7 @@ onAuthStateChanged(auth, async (user) => {
 // ======================================================
 
 const lapOutBtn =
-  document.getElementById("logOut");
-
-const logOutBtn =
-  document.getElementById("lapOut");
-
+  document.getElementById("clientLogoutButton");
 
 
 
@@ -347,43 +343,6 @@ if (logOutBtn) {
 
 
 
-// ======================================================
-// LAPTOP LOGOUT
-// ======================================================
-
-if (lapOutBtn) {
-
-  lapOutBtn.addEventListener(
-    "click",
-    async () => {
-
-      try {
-
-        await signOut(auth);
-
-        showSnackBar(
-          "Logged out successfully!",
-          "success"
-        );
-
-      } catch (error) {
-
-        console.error(
-          "LogOut error:",
-          error
-        );
-
-        showSnackBar(
-          "Error logging out.",
-          "warning"
-        );
-
-      }
-
-    }
-  );
-
-}
 
 
 
