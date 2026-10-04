@@ -166,6 +166,11 @@ onAuthStateChanged(auth, async (user) => {
         usernameInitials.textContent =
           getUsernameInitials(username);
 
+        // Only add lind after auth.user
+        usernameInitials.addEventLIstener("click", ()=> {
+          window.location.href = "./bundleProfile.html";
+        })
+
       }
 
 
@@ -277,7 +282,7 @@ onAuthStateChanged(auth, async (user) => {
     if (usernameInitials) {
 
       usernameInitials.textContent =
-        "";
+        "GU";
 
     }
 
