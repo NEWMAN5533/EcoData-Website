@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>My Profile | EcoData</title>
+
+    <!---shortcut-icon-->
+  <link rel="shortcut icon" href="./css/icons/newLogo.png" type="image/png">
+
+  <!---ICO-->
+  <link rel="shortcut icon" href="./css/icons/newLogo.png" type="image/png">
+
+<!---FULL-OPEN-GRAPH-->
+<meta property="og:title" content="Buy Cheap Data Bundles in Ghana on Ecodata Website">
+<meta property="og:description" content="Affordable MTN, Telecel & AirtelTigo data bundles. Reliable, Fastest-delivery, and secure paystack payment.">
+<meta property="og:url" content="https://ecodata-app.onrender.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EcoData">
+
+   <!--== cdn link ==-->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css" />
+
+ <!---=== css file ===-->
+  <link rel="stylesheet" href="./swiper-bundle.min.css">
+
+
+
+
+<!----GOOGLE-SITE-SEARCH-ENDS-->
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+
+<!---GOOGLE MATERIAL ICON--LINK---->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!--remix icons-->
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
+
+
+ <link rel="stylesheet" href="style-client-app.css">
+
+  <link rel="stylesheet" href="style-client-app2.css">
+
+   <!---dark-mode-root-css-->
+ <link rel="stylesheet" href="style-dark-mode.css">
+  <!---css-link-->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styleGlobal.css">
+  <link rel="stylesheet" href="styleGlobal2.css">
+  <link rel="stylesheet" href="styleGlobal3.css">
+  <link rel="stylesheet" href="styleGlobal4.css">
+
+  <link rel="stylesheet" href="styleBundleProfile.css">
+</head>
+<body>
+<!---app-container--->
+<div class="client-app">
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+  <!---sidebar-->
+  <aside class="client-sidebar" id="clientSidebar">
+    <div class="client-sidebar-top">
+      <!-- BRAND -->
+        <a href="index.html" class="client-brand">
+          <span class="client-brand-icon">
+            <i class="ri-user-3-line"></i>
+          </span>
+
+          <span class="client-brand-text">
+            <strong>User</strong>
+            <small>Panel</small>
+          </span>
+        </a>
+    </div>
+    <!--NAVIGATION-->
+    <nav class="client-nav">
+      <div class="client-nav-section">
+        <div class="client-nav-label">
+          Panel OverView
+        </div>
+        <a href="./index.html" class="client-nav-link">
+          <i class="ri-home-4-line material-icons"></i>
+          <span>Home</span>
+        </a>
+        <a href="./bundleProfile.html" class="client-nav-link active">
+          <i class="ri-user-4-line material-icons"></i>
+          <span>My Profile</span>
+        </a>
+      </div>
+
+        <div class="client-nav-section">
+        <div class="client-nav-label">
+          Quick Links
+        </div>
+        <a href="./afa.html" class="client-nav-link">
+          <i class="ri-user-follow-line material-icons"></i>
+          <span>AFA Registration</span>
+        </a>
+        <a href="./vouchers.html" class="client-nav-link ">
+          <i class="ri-ticket-2-line material-icons"></i>
+          <span>Vouchers Shop</span>
+        </a>
+
+        <a href="./pay.html" class="client-nav-link ">
+          <i class="ri-price-tag-3-line material-icons"></i>
+          <span>Get Discount</span>
+        </a>
+
+        <a href="./vouchers.html" class="client-nav-link ">
+          <i class="ri-notification-2-line material-icons"></i>
+          <span>Notification</span>
+        </a>
+      </div>
+      <div class="client-nav-section">
+        <div class="client-nav-label">
+          Coming soon!
+        </div>
+          <a href="#" class="client-nav-link ">
+          <i class="ri-book-2-line material-icons"></i>
+          <span>Ebooks</span>
+          </a>
+
+          <a href="#" class="client-nav-link ">
+          <i class="ri-store-2-line material-icons"></i>
+          <span>Get Store</span>
+          </a>
+
+        <div class="client-nav-section">
+          <div class="client-nav-label">
+            Terms of Service
+          </div>
+            <a href="./bundlesInfo.html" class="client-nav-link">
+              <i class="ri-information-line"></i>
+              <span>Bundle Info</span>
+            </a>
+
+            <a href="./terms.html" class="client-nav-link" style="display: none;">
+            <i class="ri-file-text-line material-icons c2"></i>
+            <span>Terms & Conditions</span>
+            </a>
+
+            <a href="./settings.html" class="client-nav-link" style="display: none;">
+            <i class="ri-settings-3-line material-icons c2"></i>
+            <span>Settings</span>
+            </a>
+        </div>
+      </div>
+    </nav>
+    <!--sidebar footer---->
+    <div class="client-sidebar-footer">
+      <a href="./login.html" class="client-store-link">
+        <i class="ri-login-box-line"></i>
+        <span>Login</span>
+      </a>
+    </div>
+  </aside>
+  <!--sidebar overlay-->
+  <div class="client-sidebar-overlay" id="sidebarOverlay">
+  </div>
+  <!---main-->
+  <div class="client-main">
+    <!--TOP BAR-->
+    <header class="client-topbar">
+      <div class="client topbar-left">
+        <div class="client-page-context">
+          <a href="index.html" >
+            <img style="width: 8rem; height: 6rem; margin-top: .5rem; margin-left: -1.2rem;" class="newLogo" src="./css/icons/newLogo.png" alt="image" loading="lazy">
+          </a>
+        </div>
+      </div>
+      <div class="client-topbar-right">
+        <button class="client-icon-button notification-button"
+        aria-label="notification"
+        onclick="window.location.href='./notification.html'">
+        <i class="ri-notification-3-line"></i>
+        <span class="notification-dot"></span>
+        </button>
+        <!--DARK THEME-->
+        <label class="theme-switch" >
+          <input  type="checkbox" id="themeToggle">
+          <span class="slider">
+            <span class="icon sun">
+            <i class="ri-sun-line material-icons sun-icon"></i>
+            </span>
+            <span class="icon moon">
+              <i class="ri-moon-foggy-line material-icons moon"></i>
+            </span>
+          </span>
+        </label>
+        <div class="client-profile-wrapper">
+          <button class="client-profile-button" id="clientProfileButton">
+            <span class="client-avatar" >
+                <h5 id="usernameInitials"></h5>
+            </span>
+            <span class="client-profile-info">
+              <strong>User</strong>
+              <small>Profile</small>
+            </span>
+            <i class="ri-arrow-down-s-line"></i>
+          </button>
+          <!--profile menu-->
+          <div class="client-profile-menu" id="clientProfileMenu">
+            <div class="client-profile-menu-header">
+              <span class="client-avatar large">
+                <i class="ri-user-line"></i>
+              </span>
+            </div>
+            <strong>User Menu</strong>
+        <div class="client-profile-menu-divider"></div>
+          <a href="./settings.html">
+            <i class="ri-settings-3-line"></i>
+            <span>Settings</span>
+          </a>
+          <a href="./index.html">
+            <i class="ri-store-2-line"></i>
+            <span>View Store</span>
+          </a>
+          <div class="client-profile-menu-divider"></div>
+          <button id="clientLogoutButton">
+          <i class="ri-logout-box-r-line"></i>
+          <span>Sign Out</span>
+          </button>
+        </div>
+      </div>
+      <button class="client-menu-button" id="sidebarToggle"
+      aria-label="open sidebar">
+        <i class="ri-menu-line"></i>
+      </button>
+    </div>
+    </header>
+    <!---main grid repeat(2,1fr)-->
+    <div class="main-grid-container">
+      <div class="grid-container-main" id="scrollContainer">
+        <div class="card-container">
+          <main class="customer-profile">
+            <!--HEADER-->
+            <header class="profile-topbar">
+              <button class="back-btn" type="button"
+              aria-label="Go back">
+                <span><div class="ri-arrow-left-line"></div></span>
+              </button>
+              <h1>My Profile</h1>
+              <button class="settings-btn" aria-label="settings" type="button"
+              onclick="window.location.href='./bundle-settings.html'"
+              >
+                <i class="ri-settings-2-line"></i>
+              </button>
+            </header>
+            <!--Identity-->
+            <section class="profile-identity">
+              <div class="customer-avatar" id="customerAvatar">
+                IA
+              </div>
+              <div class="customer-info">
+                <h2 id="customerName">Il-yas Ahmed</h2>
+                <p id="customerPhone">0552944424</p>
+                <span class="customer-type">
+                  EcoData Bundle Customer
+                </span>
+              </div>
+              <button class="edit-profile-btn" id="editProfileBtn" style="display: none;">
+                Edit
+              </button>
+            </section>
+            <!--Account statistics-->
+            <div class="section-title">
+              <h2>Data Statistics</h2>
+            </div>
+            <section class="stats-grid">
+              <article class="stat-card">
+                <span class="stat-label">
+                  Total Orders
+                </span>
+                <strong id="totalOrders">
+                  48
+                </strong>
+              </article>
+                <article class="stat-card">
+                <span class="stat-label">
+                  Data Purchased
+                </span>
+                <strong>
+                  <span id="totalData">126</span>GB
+                </strong>
+              </article>
+
+                <article class="stat-card">
+                <span class="stat-label">
+                  Completed
+                </span>
+                <strong id="completedOrders">
+                  45
+                </strong>
+              </article>
+
+                <article class="stat-card">
+                <span class="stat-label">
+                  Pending
+                </span>
+                <strong id="pendingOrders">
+                  3
+                </strong>
+              </article>
+
+                <article class="stat-card">
+                <span class="stat-label">
+                  Failed
+                </span>
+                <strong id="failedOrders">
+                  2
+                </strong>
+              </article>
+
+                <article class="stat-card">
+                <span class="stat-label">
+                  Member Since
+                </span>
+                <strong class="number-date" id="memberSince">
+                  Aug 2025
+                </strong>
+              </article>
+            </section>
+            <!--GiveAway / Loyalty-->
+            
+            <section class="points-card">
+              <div class="points-header">
+                <div>
+                  <span class="section eyebrow">
+                    LOYALTY & GIVEAWAY
+                  </span>
+                  <h2>
+                    <span id="giveAwayPoints">758</span>
+                    <small>POINTS</small>
+                  </h2>
+                </div>
+
+                <div class="points-month">
+                  September
+                </div>
+              </div>
+              <div class="points-progress">
+                <div class="progress-info">
+                  <span>
+                    Monthly activity
+                  </span>
+                  <span id="pointsProgressText">
+                    758 / 1000
+                  </span>
+                </div>
+                <div class="progress-track">
+                  <div class="progress-fill" id="pointsProgress"></div>
+                </div>
+              </div>
+
+              <p class="points-notes">
+                Keep purchasing bundles to earn more points and qualify for EcoData giveaways.
+              </p>
+            </section>
+            <section class="profile-content-grid">
+              <!--Recent orders-->
+              <section class="profile-panel">
+                <div class="panel-header">
+                  <div>
+                    <span class="section-eyebrow">
+                      ACTIVITY
+                    </span>
+                    <h2>
+                      Recent Orders
+                    </h2>
+                  </div>
+                  <button class="text-btn" id="viewOrdersBtn" style="display: none;">
+                    View all
+                  </button>
+                </div>
+                <div class="recent-orders" id="recentOrders">
+                </div>
+              </section>
+
+              <!--account info-->
+              <section class="profile-panel">
+                <div class="panel-header">
+                  <div>
+                    <span class="section-eyebrow">
+                      ACCOUNT
+                    </span>
+                    <h2>Account Information</h2>
+                  </div>
+                </div>
+                <div class="account-list">
+                  <div class="account-item">
+                    <div class="account-icon">
+                      <i class="ri-phone-line"></i>
+                    </div>
+                    <div>
+                      <span>
+                        Phone Number
+                      </span>
+                      <strong id="accountPhone">
+                        0552944424
+                      </strong>
+                    </div>
+                  </div>
+                  <div class="account-item">
+                    <div class="account-icon">
+                      &copy;
+                    </div>
+                    <div>
+                      <span>
+                        Member Since
+                      </span>
+                      <strong id="accountMemberSince">
+                        September 2025
+                      </strong>
+                    </div>
+                  </div>
+
+                  <div class="account-item">
+                    <div class="account-icon">
+                      <i class="ri-check-line"></i>
+                    </div>
+                    <div>
+                      <span>
+                        Account Status
+                      </span>
+                      <strong class="active-status">
+                        Active
+                      </strong>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </section>
+            <!--NETWORK ACTIVITY-->
+            <section class="profile-panel network-pan">
+              <div class="panel-header">
+                <div>
+                  <span class="section-eyebrow">
+                    DATA ACTIVITY
+                  </span>
+                  <h2>Network Activity</h2>
+                </div>
+              </div>
+
+              <div class="network-grid">
+                <div class="network-card">
+                  <div class="network-top">
+                    <span class="network-name">
+                      MTN
+                    </span>
+                    <span class="network-count">
+                      <span id="mtnOrders">122</span> orders
+                    </span>
+                  </div>
+                  <strong>
+                    <span id="mtnData">82</span>GB
+                  </strong>
+                </div>
+                <div class="network-card">
+                  <div class="network-top">
+                    <span class="network-name">
+                      Telecel
+                    </span>
+                    <span class="network-count">
+                      <span id="telecelOrders">2</span> orders
+                    </span>
+                  </div>
+                  <strong>
+                    <span id="telecelData">5</span>GB
+                  </strong>
+                </div>
+
+                <div class="network-card">
+                  <div class="network-top">
+                    <span class="network-name">
+                      Airtel
+                    </span>
+                    <span class="network-count">
+                      <span id="airteltigoOrders">9</span> orders
+                    </span>
+                    </div>
+                    <strong>
+                      <span id="airteltigoData">11</span>GB
+                    </strong>
+                </div>
+              </div>
+            </section>
+
+            <!---Quick Actions-->
+            <section class="quick-actions">
+              <button class="quick-action" id="trackerBtn">
+                <span class="quick-icon">.</span>
+                <div>
+                  <strong>
+                    Delivery Tracker
+                  </strong>
+                  <small>
+                    Track your active orders
+                  </small>
+                </div>
+
+                <span class="arrow">
+                  <i class="ri-arrow-right-line"></i>
+                </span>
+              </button>
+              <button class="quick-action" id="historyBtn">
+                <span class="quick-icon">
+                  <i class="ri-menu-2-line"></i>
+                </span>
+
+                <div>
+                  <strong>
+                  Orders History
+                  </strong>
+                  <small>
+                  View all your purchases
+                  </small>
+                </div>
+
+                <span>
+                  <i class="ri-arrow-right-line"></i>
+                </span>
+              </button>
+              <button class="quick-action" id="accountSettingsBtn">
+                <span class="quick-icon">
+                  <i class="ri-settings-line"></i>
+                </span>
+                <div>
+                  <strong>
+                    Account Settings
+                  </strong>
+                  <small>
+                    Manage your profile
+                  </small>
+                </div>
+                <span>
+                  <i class="ri-arrow-right-line"></i>
+                </span>
+              </button>
+            </section>
+          </main>
+        </div>
+      </div>
+
+        <!-- ==========================================
+     PREMIUM OFFERS
+========================================== -->
+
+<aside class="ads-container-right premium-offers">
+<div class="ads-wrapper">
+  <!-- SECTION HEADER -->
+  <div class="side-title premium-offers-header">
+    <div class="side-title-content">
+      <span class="premium-eyebrow">
+        <i class="ri-sparkling-2-line"></i>
+        EXCLUSIVE
+      </span>
+
+      <h2>Premium Offers</h2>
+
+      <p>Unlock more ways to save and grow.</p>
+    </div>
+
+    <div class="premium-header-icon">
+      <i class="ri-vip-crown-2-line"></i>
+    </div>
+  </div>
+
+
+  <!-- ==========================================
+       AGENT UPGRADE
+  =========================================== -->
+
+  <div class="agent-upgrade-wrapper premium-offer-card">
+
+    <div class="agent-upgrade premium-agent-card">
+
+      <div class="premium-card-top">
+
+        <div class="premium-card-icon">
+          <img
+            src="./css/icons/agent.png"
+            alt="Agent"
+            loading="lazy"
+          >
+        </div>
+
+        <span class="premium-card-badge">
+          <i class="ri-price-tag-3-line"></i>
+          GHS 50
+        </span>
+
+      </div>
+
+
+      <div class="premium-card-content">
+
+        <span class="premium-card-label">
+          RESELLER ACCESS
+        </span>
+
+        <h3>Join for Exclusive Benefits</h3>
+
+        <p>
+          Unlock discounted prices for personal use or reselling.
+          Register once and start saving or earning more.
+        </p>
+
+      </div>
+
+
+      <div class="premium-card-footer">
+
+        <div class="premium-benefit">
+          <i class="ri-checkbox-circle-fill"></i>
+          <span>Discounted prices</span>
+        </div>
+
+        <div class="premium-benefit">
+          <i class="ri-checkbox-circle-fill"></i>
+          <span>Reselling opportunities</span>
+        </div>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="premium-action-btn"
+        onclick="goToPayment()"
+      >
+        <span>Upgrade Now</span>
+        <i class="ri-arrow-right-line"></i>
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ==========================================
+       ONLINE STORE
+  =========================================== -->
+
+  <div class="agent-upgrade-wrapper premium-offer-card">
+
+    <div class="agent-upgrade premium-store-card">
+
+      <div class="premium-card-top">
+
+        <div class="premium-card-icon">
+          <img
+            src="./css/uiIcons/store.png"
+            alt="Online Store"
+            loading="lazy"
+          >
+        </div>
+
+        <span class="premium-card-badge coming-soon">
+          Coming Soon
+        </span>
+
+      </div>
+
+
+      <div class="premium-card-content">
+
+        <span class="premium-card-label">
+          SELL ONLINE
+        </span>
+
+        <h3>Get Your Online Store</h3>
+
+        <p>
+          Create your own online store, showcase your products
+          and receive orders directly through WhatsApp.
+        </p>
+
+      </div>
+
+
+      <div class="premium-card-footer">
+
+        <div class="premium-benefit">
+          <i class="ri-checkbox-circle-fill"></i>
+          <span>Online product showcase</span>
+        </div>
+
+        <div class="premium-benefit">
+          <i class="ri-checkbox-circle-fill"></i>
+          <span>WhatsApp orders</span>
+        </div>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="premium-action-btn premium-action-disabled"
+        title="Coming Soon!"
+        disabled
+      >
+        <span>Get Store</span>
+        <i class="ri-arrow-right-line"></i>
+      </button>
+
+    </div>
+
+  </div>
+</div>
+</aside>
+    </div>
+  </div>
+
+
+
+  <!-----BOTTOM-NAVBAR----->
+    <div class="bottom-navbar" id="navIconDiv">
+      <div class="btom-navIcon" onclick="window.location.href='index.html'">
+        <div class="activeImg " id="activeMtn">
+          <i class="ri-router-line material-icons"></i>
+        </div>
+        <small class="bottomIcon-textNav">Bundles</small>
+      </div>
+      <div class="btom-navIcon">
+        <div class="activeImg" onclick="window.location.href ='pay.html'"> 
+          <i class="ri-price-tag-3-line material-icons"></i>
+        </div>
+        <small class="bottomIcon-textNav"> Discounts</small>
+      </div>
+    <div class="ecodataShopBtn">
+        <div class="shop-fixedBtn" id="shoppingBtn" >
+        <i class="ri-shopping-bag-3-fill"></i>
+        <i class="ri-store-2-line sellerAuth material-icons" style="display: none;"></i>
+        <small class="hero-headline shop">
+        Shop
+        </small>
+    </div>
+    </div>
+
+    <div class="btom-navIcon" >
+        <div class="activeImg" id="activeTel" onclick="window.location.href='afa.html'"> 
+          <i class="ri-user-follow-line material-icons"></i>
+        </div>
+        <small class="bottomIcon-textNav">AFA</small>
+    </div>
+
+
+    <div class="btom-navIcon" >
+      <div class="activeImg" id="activeAir" onclick="window.location.href='vouchers.html'"> 
+      <i class="ri-ticket-2-line material-icons"></i>
+      </div>
+      <small class="bottomIcon-textNav"> Vouchers</small>
+    </div>
+
+    </div>
+
+</div>
+
+
+
+
+<script src="bundleProfile.js"></script>
+<script src="client.js"></script>
+
+
+
+<!--=== DARK MODE SCRIPT ========-->
+<script>
+
+document.addEventListener("DOMContentLoaded", ()=> {
+// theme script (dark & light mode)
+  const toggle = document.getElementById("themeToggle");
+  const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  const savedTheme = localStorage.getItem("theme");
+
+  function applyTheme(theme) {
+    if (theme === "dark") {
+      document.body.classList.add("dark-mode");
+      toggle.checked = true;
+    } else {
+      document.body.classList.remove("dark-mode");
+      toggle.checked = false;
+    }
+  }
+
+  if (savedTheme) {
+    applyTheme(savedTheme);
+  } else {
+    applyTheme(systemPrefersDark ? "dark" : "light");
+  }
+
+  toggle.addEventListener("change", () => {
+    if (toggle.checked) {
+      localStorage.setItem("theme", "dark");
+      applyTheme("dark");
+    } else {
+      localStorage.setItem("theme", "light");
+      applyTheme("light");
+    }
+  });
+
+  // Auto-change if system theme changes and user has no preference
+  window.matchMedia("(prefers-color-scheme: dark)").addListener(e => {
+    if (!localStorage.getItem("theme")) {
+      applyTheme(e.matches ? "dark" : "light");
+    }
+});
+
+
+});
+
+
+</script>
+<!--=== DARK MODE SCRIPT ENDS ===-->
+</body>
+</html>
