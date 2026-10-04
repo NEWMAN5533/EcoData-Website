@@ -142,7 +142,7 @@ onAuthStateChanged(auth, async (user) => {
       // ==================================================
 
       usernameDisplay.textContent =
-        `${greeting}, ${username}!`;
+        `${greeting}, ${username} `;
 
 
       ifUserName.textContent =
@@ -203,6 +203,11 @@ onAuthStateChanged(auth, async (user) => {
           agentLinks.style.display =
             "flex";
 
+        // IF verification === "true" : url with window.location.href = "";
+          agentLinks.addEventListener("click", ()=> {
+            window.location.href = "./agentPage.html";
+          });
+
         }
 
       }
@@ -231,6 +236,16 @@ onAuthStateChanged(auth, async (user) => {
           }
 
         });
+
+
+        // IF verification === "true" : url with window.location.href =""
+      adminLink1.addEventListener("click", ()=> {
+        window.location.href = "./ecodataStoreAdmin/index.html";
+      });
+
+      adminLink2.addEventListener("click", ()=> {
+        window.location.href = "./agentPage.html";
+      })
 
       }
 

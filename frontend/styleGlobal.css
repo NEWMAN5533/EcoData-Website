@@ -233,28 +233,87 @@ SNACKBAR SECTION
   background: var(--card-bg-dark);
   border-bottom: 1px solid var(--thin-border);
  }
+
+ @media screen and (min-width: 768px) {
+  .dark-mode .welcome-hero .welcome-hero-top{
+    border-bottom: none !important;
+  }
+ }
  
  .welcome-hero-top .wht-left{
   width: 100%;
   max-width: 70%;
   height: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: start;
   position: relative;
+  line-height: 1;
   padding-left: .4rem;
  }
 
- .welcome-hero-top .wht-left p{
-  font-size: .9rem;
+ .wht-left .wht-left-top{
+   width: 100%;
+   height: 70%;
+   display: flex; 
+   gap: .4rem;
+   align-items: center;
+   justify-content: start;
+ }
+
+ .wht-left-top img{
+  width: 1.6rem;
+  height: 1.6rem;
+ }
+
+ .dark-mode  .wht-left-top .img1{
+  display: none !important;
+ }
+
+
+  .dark-mode  .wht-left-top .img2{
+  display: flex;
+ }
+
+  .welcome-hero-top .wht-left-top p{
+  font-size: 1.1rem;
  
   font-weight: 600;
   color: rgb(70, 70, 77);
  }
 
- .dark-mode .welcome-hero-top .wht-left p{
-  color: rgba(211, 241, 247, 0.925) ;
+
+  @media screen and (min-width: 768px) {
+  .welcome-hero-top .wht-left-top p{
+    font-size: 1.3rem;
+  }
  }
+
+ .dark-mode .welcome-hero-top .wht-left-top p{
+  color: rgba(211, 241, 247, 0.925);
+ }
+
+
+
+  .wht-left .wht-left-bottom{
+   width: 100%;
+   height: 30%;
+   display: flex;
+   align-items: start;
+   justify-content: start;
+   padding-bottom: .3rem;
+ }
+
+ .wht-left-bottom small{
+  font-size: .7rem;
+  color: rgb(219, 219, 219);
+ }
+
+  .dark-mode .wht-left-bottom small{
+  color: #888;
+ }
+
 
 
   .welcome-hero-top .wht-right{
@@ -351,7 +410,13 @@ SNACKBAR SECTION
 
 .dark-mode .seller-status-bar{
    background: var(--body-bg-dark) !important;
-   border: 1px solid var(--card-bg-dark);
+   border: 1px solid var(--card-bg-dark) !important;
+}
+
+@media screen and (min-width: 768px) {
+  .dark-mode .seller-status-bar{
+    border-radius: 14px ;
+  }
 }
 
 
@@ -1214,6 +1279,12 @@ GIVE AWAY TIMER
     border-top: 1px solid var(--thin-border);
     background: var(--card-bg-dark);
   }
+
+   @media screen and (min-width: 768px) {
+  .dark-mode .welcome-hero .welcome-hero-bottom{
+    border-top: none !important;
+  }
+ }
 
 
   /****bottom right*****/
@@ -2203,6 +2274,12 @@ SOCIAL FOLLOW SECTION
   border-radius: 6px;
 }
 
+@media screen and (min-width: 768px) {
+  .follow-share-container{
+    display: none !important;
+  }
+}
+
 .dark-mode .follow-share-container{
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2) ;
   background-color: var(--card-bg-dark);
@@ -2432,8 +2509,11 @@ align-items: center;
 gap: .6rem;
 }
 
-
-
+@media screen and (min-width: 768px) {
+  .totals-container{
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
 
 
 

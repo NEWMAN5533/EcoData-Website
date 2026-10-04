@@ -734,6 +734,17 @@ TOTALS CONTAINER
   z-index: 99;
 }
 
+@media screen and (min-width: 768px ){
+ .totals-container .sk-totals-container{
+  display: grid !important;
+  justify-items: center;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: repeat(2, 1fr)  !important;
+ }
+}
+
+
 .dark-mode .totals-container .sk-totals-container {
   background: var(--sk-backgroundDarkMode);
 }

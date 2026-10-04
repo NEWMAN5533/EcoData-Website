@@ -3206,10 +3206,14 @@ GRID VIEW
   #normalView{
     background: transparent !important;
     border: unset !important;
+    border-bottom: unset !important;
+    border-top: none !important;
   }
 
   .dark-mode #normalView{
     background: transparent !important;
+    border-bottom: unset !important;
+    border-top: none !important;
 
   }
 
@@ -4524,7 +4528,7 @@ SNACKBAR SECTION
 
 .what-group-btn{
   position: fixed;
-  bottom: 9.4rem;
+  bottom: 10rem;
   right: .8rem;
   z-index: 99999;
   display: flex;
@@ -4553,7 +4557,7 @@ SNACKBAR SECTION
   text-align: center;
   font-size: .7rem;
   position: absolute;
-  margin-bottom: 3.5rem;
+  margin-bottom: 4.1rem;
   margin-left: 1.2rem;
   border-radius: 50%;
   z-index: 2;
@@ -4575,7 +4579,7 @@ SNACKBAR SECTION
   width: 35px;
   height: 35px;
   right: 1.2rem;
-  bottom: 9.8rem;
+  bottom: 10.2rem;
   border-radius: 50%;
   background: radial-gradient(circle,
   rgba(37,211,102,0.7),
@@ -5029,7 +5033,7 @@ CARD TOP
 }
 
 
-
+.bundle-processing
 .link img{
   width: 2.1rem;
   height: 2.1rem;

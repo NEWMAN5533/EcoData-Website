@@ -194,13 +194,13 @@ document.addEventListener("DOMContentLoaded", ()=> {
           </a>
 
 
-           <a onclick="window.location.href='./ecodataStoreAdmin/index.html'" class="client-nav-link " id="adminAccessLink1" style="display: none;">
+            <a class="client-nav-link " id="adminAccessLink1" style="display: none;">
             <i class="ri-dashboard-3-line material-icons c2"></i>
             <span>Admin Dashboard</span>
           </a>
 
 
-            <a onclick="window.location.href='./agentPage.html'"  class="client-nav-link" id="agentAccessLink2" style="display: none;">
+            <a"  class="client-nav-link" id="agentAccessLink2" style="display: none;">
             <i class="ri-vip-crown-line material-icons c3"></i>
             <span>Exclusive Page</span>
           </a>
@@ -259,7 +259,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
             Coming soon!
           </span>
 
-           <a href="#" class="client-nav-link">
+          <a href="#" class="client-nav-link">
             <i class="ri-book-2-line material-icons c8"></i>
             <span>Ebooks</span>
           </a>
@@ -269,7 +269,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
             <span>Get Store</span>
           </a>
 
-         
+
 
         </div>
 
@@ -280,20 +280,17 @@ document.addEventListener("DOMContentLoaded", ()=> {
             Terms of Service
           </span>
 
-        
 
-
-             <a href="./bundlesInfo.html" class="client-nav-link">
+          <a href="./bundlesInfo.html" class="client-nav-link">
             <i class="ri-information-line material-icons c6"></i>
             <span>Bundle info</span>
           </a>
-          
+
             <a href="./terms.html" class="client-nav-link">
             <i class="ri-file-text-line material-icons c3"></i>
             <span>Terms & conditions</span>
           </a>
 
-         
 
           <a href="./settings.html" class="client-nav-link" style="display: none;">
             <i class="ri-settings-3-line material-icons c2"></i>
@@ -594,8 +591,14 @@ document.addEventListener("DOMContentLoaded", ()=> {
     <div class="welcome-hero-top">
 
       <div class="wht-left"> 
-        <p id="usernameDisplay"></p>
-        
+        <div class="wht-left-top">
+          <p id="usernameDisplay"></p>
+           <img img1 src="./css/icons/greetings.png" alt="" laoding="lazy">
+           <img img2 src="./css/icons/greetings.png" alt="" laoding="lazy" style="display: none;">
+        </div>
+        <div class="wht-left-bottom">
+          <small>Top up your data bundle with ease.</small>
+        </div>
       </div>
       <div class="wht-right">
       <button class="ecb" ></button>
@@ -6253,7 +6256,9 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
 
 
-    <!--  WhatsApp Floating Chat -->
+    <!--====================
+      ADMIN WHATSAPP CHAT BUTTON
+    =====================-->
   <div class="chatBox" id="whatsappChat">
     <div id="chatButton" class="message">
       <img src="./css/icons/chatMe.png" alt="image" loading="lazy">

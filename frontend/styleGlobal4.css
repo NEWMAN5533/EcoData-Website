@@ -167,35 +167,6 @@ p {
 
   
 
-/****
-aside section
-****/
-
-
-
-/*****
-GRID-CONTAINER SIDEBAR
-*****/
-.ecodata-sidebar .ecodata-sidebar-top .userProfile-container{
-  width: 100%;
-  height: 100%;
-  padding-left: 1.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  border-bottom: none !important;
-}
-
-/*** add a visual background to icons***/
-.naver .material-icons{
-  padding: .4rem;
-  border-radius: .6rem;
-  font-size: 1.05rem;
-  color: var(--primary-cl) !important;
-  opacity: .8;
-}
-
 .pact{
   font-size: .98rem;
 }
