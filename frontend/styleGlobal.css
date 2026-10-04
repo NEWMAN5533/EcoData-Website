@@ -219,7 +219,6 @@ SNACKBAR SECTION
 
  .welcome-hero .welcome-hero-top{
   width: 100%;
-  max-width: 99.99%;
   display: flex;
   height: 15%;
   gap: 0;
@@ -231,14 +230,9 @@ SNACKBAR SECTION
 
  .dark-mode  .welcome-hero .welcome-hero-top{
   background: var(--card-bg-dark);
-  border-bottom: 1px solid var(--thin-border);
  }
 
- @media screen and (min-width: 768px) {
-  .dark-mode .welcome-hero .welcome-hero-top{
-    border-bottom: none !important;
-  }
- }
+
  
  .welcome-hero-top .wht-left{
   width: 100%;
@@ -407,7 +401,7 @@ SNACKBAR SECTION
 
 .dark-mode .seller-status-bar{
    background: var(--body-bg-dark) !important;
-   border: 1px solid var(--card-bg-dark) !important;
+   border: 1px solid var(--thin-border) !important;
 }
 
 @media screen and (min-width: 768px) {
@@ -1263,9 +1257,9 @@ GIVE AWAY TIMER
    /*****BOTTOM SECTION*****/
   .welcome-hero .welcome-hero-bottom{
   width: 100%;
-  max-width: 99.9%;
   height: 30%;
   display: flex;
+  justify-self: center;
   justify-content: space-between;
   padding: .2rem;
   position: relative;
@@ -1273,15 +1267,10 @@ GIVE AWAY TIMER
   }
 
   .dark-mode .welcome-hero .welcome-hero-bottom{
-    border-top: 1px solid var(--thin-border);
     background: var(--card-bg-dark);
   }
 
-   @media screen and (min-width: 768px) {
-  .dark-mode .welcome-hero .welcome-hero-bottom{
-    border-top: none !important;
-  }
- }
+ 
 
 
   /****bottom right*****/
@@ -1311,7 +1300,7 @@ GIVE AWAY TIMER
 
   .whb-left .title-ecodata h5
   {
-    font-family: 'Syne', sans-serif;
+    
     font-weight: 600;
     line-height: 1.2;
     margin-bottom: 4px;
@@ -1832,7 +1821,7 @@ clock section
   color: #023b46;
   font-size: 0.67rem !important;
   font-weight: 700;
-  font-family: 'Syne', sans-serif;
+  
   letter-spacing: 0.06em;
   text-transform: uppercase;
   padding: 10px  !important;
@@ -2630,7 +2619,13 @@ top section
   justify-content: start;
 }
 
+@media screen and (min-width: 768px){
 
+.total-card-bottom .card-performance{
+  font-size: .72rem;
+  white-space: nowrap;
+  }
+}
 
 
 
