@@ -141,8 +141,8 @@ onAuthStateChanged(auth, async (user) => {
       // USERNAME DISPLAY
       // ==================================================
 
-      usernameDisplay.textContent =
-        `${greeting}, ${username} `;
+      usernameDisplay.innerHTML =
+        `${greeting}, ${username} <img src="./css/icons/waving.png" alt=""> `;
 
 
       ifUserName.textContent =
@@ -268,8 +268,8 @@ onAuthStateChanged(auth, async (user) => {
 
     if (usernameDisplay) {
 
-      usernameDisplay.textContent =
-        `${greeting}, Dear`;
+      usernameDisplay.innerHTML =
+        `${greeting}, Dear <img src="./css/icons/waving.png" alt="">`;
 
     }
 
