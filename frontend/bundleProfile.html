@@ -191,7 +191,7 @@
         </label>
         <div class="client-profile-wrapper">
           <button class="client-profile-button" id="clientProfileButton">
-            <span class="client-avatar" >
+            <span class="client-avatar" style="display: none;">
                 <h5 id="usernameInitials"></h5>
             </span>
             <span class="client-profile-info">
@@ -237,13 +237,14 @@
           <main class="customer-profile">
             <!--HEADER-->
             <header class="profile-topbar">
-              <button class="back-btn" type="button"
+              <button class="back-btn" type="button" 
+              style="display: none;"
               aria-label="Go back">
                 <span><div class="ri-arrow-left-line"></div></span>
               </button>
               <h1>My Profile</h1>
               <button class="settings-btn" aria-label="settings" type="button"
-              onclick="window.location.href='./bundle-settings.html'"
+              style='display: none;'
               >
                 <i class="ri-settings-2-line"></i>
               </button>
@@ -251,11 +252,11 @@
             <!--Identity-->
             <section class="profile-identity">
               <div class="customer-avatar" id="customerAvatar">
-                IA
+                GU
               </div>
               <div class="customer-info">
-                <h2 id="customerName">Il-yas Ahmed</h2>
-                <p id="customerPhone">0552944424</p>
+                <h2 id="customerName"></h2>
+                <p id="customerPhone"></p>
                 <span class="customer-type">
                   EcoData Bundle Customer
                 </span>
@@ -273,8 +274,8 @@
                 <span class="stat-label">
                   Total Orders
                 </span>
-                <strong id="totalOrders">
-                  48
+                <strong >
+                  <span id="totalOrders">--</span>
                 </strong>
               </article>
                 <article class="stat-card">
@@ -282,7 +283,7 @@
                   Data Purchased
                 </span>
                 <strong>
-                  <span id="totalData">126</span>GB
+                  <span id="totalData">0</span>GB
                 </strong>
               </article>
 
@@ -290,8 +291,8 @@
                 <span class="stat-label">
                   Completed
                 </span>
-                <strong id="completedOrders">
-                  45
+                <strong >
+                  <span id="completedOrders">--</span>
                 </strong>
               </article>
 
@@ -299,8 +300,8 @@
                 <span class="stat-label">
                   Pending
                 </span>
-                <strong id="pendingOrders">
-                  3
+                <strong >
+                  <span id="pendingOrders">--</span>
                 </strong>
               </article>
 
@@ -308,8 +309,8 @@
                 <span class="stat-label">
                   Failed
                 </span>
-                <strong id="failedOrders">
-                  2
+                <strong >
+                  <span id="failedOrders">--</span>
                 </strong>
               </article>
 
@@ -318,7 +319,7 @@
                   Member Since
                 </span>
                 <strong class="number-date" id="memberSince">
-                  Aug 2025
+                  --
                 </strong>
               </article>
             </section>
@@ -331,7 +332,7 @@
                     LOYALTY & GIVEAWAY
                   </span>
                   <h2>
-                    <span id="giveAwayPoints">758</span>
+                    <span id="giveAwayPoints">0</span>
                     <small>POINTS</small>
                   </h2>
                 </div>
@@ -346,7 +347,7 @@
                     Monthly activity
                   </span>
                   <span id="pointsProgressText">
-                    758 / 1000
+                    0 / 1000
                   </span>
                 </div>
                 <div class="progress-track">
@@ -398,7 +399,7 @@
                         Phone Number
                       </span>
                       <strong id="accountPhone">
-                        0552944424
+                        --
                       </strong>
                     </div>
                   </div>
@@ -411,7 +412,7 @@
                         Member Since
                       </span>
                       <strong id="accountMemberSince">
-                        September 2025
+                        --
                       </strong>
                     </div>
                   </div>
@@ -425,7 +426,7 @@
                         Account Status
                       </span>
                       <strong class="active-status">
-                        Active
+                        --
                       </strong>
                     </div>
                   </div>
@@ -450,11 +451,11 @@
                       MTN
                     </span>
                     <span class="network-count">
-                      <span id="mtnOrders">122</span> orders
+                      <span id="mtnOrders">0</span> orders
                     </span>
                   </div>
                   <strong>
-                    <span id="mtnData">82</span>GB
+                    <span id="mtnData">0</span>GB
                   </strong>
                 </div>
                 <div class="network-card">
@@ -463,11 +464,11 @@
                       Telecel
                     </span>
                     <span class="network-count">
-                      <span id="telecelOrders">2</span> orders
+                      <span id="telecelOrders">0</span> orders
                     </span>
                   </div>
                   <strong>
-                    <span id="telecelData">5</span>GB
+                    <span id="telecelData">0</span>GB
                   </strong>
                 </div>
 
@@ -477,11 +478,11 @@
                       Airtel
                     </span>
                     <span class="network-count">
-                      <span id="airteltigoOrders">9</span> orders
+                      <span id="airteltigoOrders">0</span> orders
                     </span>
                     </div>
                     <strong>
-                      <span id="airteltigoData">11</span>GB
+                      <span id="airteltigoData">0</span>GB
                     </strong>
                 </div>
               </div>

@@ -425,15 +425,19 @@ body.dark-mode {
 
 .profile-topbar{
   height: 58px;
-  display: grid;
-  grid-template-columns: 42px 1fr 42px;
+  width: 100%;
+  max-width: 96%;
+  display: flex;
+  justify-self: center;
   align-items: center;
-  margin: 22px;
+  justify-content: start;
+  margin: 22px 0;
+  white-space: nowrap;
 }
 
 .profile-topbar h1{
-  text-align: center;
-  font-size: 18px;
+  
+  font-size: 24px;
   font-weight: 700;
   color: var(--text-secondary);
 }
@@ -688,7 +692,7 @@ body.dark-mode {
 
 
 .progress-fill{
-  width: 75%;
+  width: 10%;
   background: var(--success);
   height: 100%;
   border-radius: 14px;

@@ -1065,9 +1065,9 @@ function activateTrackers() {
 
 // un activate trackers when no orders
 function unActivateTrackers(){
- const firstTracker = document.getElementById("deliveryTracker1").style.display = "flex";
+ const firstTracker = document.getElementById("deliveryTracker1").style.display = "none";
 
- const secondTracker = document.getElementById("deliveryTracker2").style.display = "flex";
+ const secondTracker = document.getElementById("deliveryTracker2").style.display = "none";
 }
 
 //=================================
@@ -1253,9 +1253,9 @@ const orderData = {
 
   source: "web",
 
-  isGuest: true,
+  isGuest: !auth.currentUser,
 
-  createdBy: null,
+  createdBy: auth.currentUser?.uid || null,
 
   createdAt: Date.now(),
 };
@@ -2430,14 +2430,6 @@ function startAutoPolling(orderIdOrRef) {
 
 
 // ---------- AFTER PURCHASE: show and poll ----------
-/**
- * Call this after your backend returns an order reply.
- * Example usage inside orderBundle function after successful response:
- *    const returnedOrder = result.order || result.swift || result; 
- *    handleNewOrder(returnedOrder);
- * 
- * 
- */
 // Load live orders on page refresh
 
 function loadLiveOrders() {
