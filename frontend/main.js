@@ -1255,7 +1255,7 @@ const orderData = {
 
   isGuest: !auth.currentUser,
 
-  createdBy: auth.currentUser?.uid || null,
+  createdBy: auth.currentUser?.uid || "guest",
 
   createdAt: Date.now(),
 };
