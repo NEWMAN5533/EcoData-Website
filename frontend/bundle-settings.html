@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>My Profile | EcoData</title>
+
+    <!---shortcut-icon-->
+  <link rel="shortcut icon" href="./css/icons/newLogo.png" type="image/png">
+
+  <!---ICO-->
+  <link rel="shortcut icon" href="./css/icons/newLogo.png" type="image/png">
+
+<!---FULL-OPEN-GRAPH-->
+<meta property="og:title" content="Buy Cheap Data Bundles in Ghana on Ecodata Website">
+<meta property="og:description" content="Affordable MTN, Telecel & AirtelTigo data bundles. Reliable, Fastest-delivery, and secure paystack payment.">
+<meta property="og:url" content="https://ecodata-app.onrender.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EcoData">
+
+   <!--== cdn link ==-->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css" />
+
+ <!---=== css file ===-->
+  <link rel="stylesheet" href="./swiper-bundle.min.css">
+
+
+
+
+<!----GOOGLE-SITE-SEARCH-ENDS-->
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+
+<!---GOOGLE MATERIAL ICON--LINK---->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!--remix icons-->
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
+
+
+ <link rel="stylesheet" href="style-client-app.css">
+
+  <link rel="stylesheet" href="style-client-app2.css">
+
+   <!---dark-mode-root-css-->
+ <link rel="stylesheet" href="style-dark-mode.css">
+  <!---css-link-->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styleGlobal.css">
+  <link rel="stylesheet" href="styleGlobal2.css">
+  <link rel="stylesheet" href="styleGlobal3.css">
+  <link rel="stylesheet" href="styleGlobal4.css">
+
+  <link rel="stylesheet" href="styleBundleSetting.css">
+</head>
+<body>
+<!---app-container--->
+<div class="client-app">
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+  <!---sidebar-->
+  <aside class="client-sidebar" id="clientSidebar">
+    <div class="client-sidebar-top">
+      <!-- BRAND -->
+        <a href="index.html" class="client-brand">
+          <span class="client-brand-icon">
+            <i class="ri-user-3-line"></i>
+          </span>
+
+          <span class="client-brand-text">
+            <strong>User</strong>
+            <small>Panel</small>
+          </span>
+        </a>
+    </div>
+    <!--NAVIGATION-->
+    <nav class="client-nav">
+      <div class="client-nav-section">
+        <div class="client-nav-label">
+          Panel OverView
+        </div>
+        <a href="./index.html" class="client-nav-link">
+          <i class="ri-home-4-line material-icons"></i>
+          <span>Home</span>
+        </a>
+        <a href="./bundleProfile.html" class="client-nav-link active">
+          <i class="ri-user-4-line material-icons"></i>
+          <span>My Profile</span>
+        </a>
+      </div>
+
+        <div class="client-nav-section">
+        <div class="client-nav-label">
+          Quick Links
+        </div>
+        <a href="./afa.html" class="client-nav-link">
+          <i class="ri-user-follow-line material-icons"></i>
+          <span>AFA Registration</span>
+        </a>
+        <a href="./vouchers.html" class="client-nav-link ">
+          <i class="ri-ticket-2-line material-icons"></i>
+          <span>Vouchers Shop</span>
+        </a>
+
+        <a href="./pay.html" class="client-nav-link ">
+          <i class="ri-price-tag-3-line material-icons"></i>
+          <span>Get Discount</span>
+        </a>
+
+        <a href="./vouchers.html" class="client-nav-link ">
+          <i class="ri-notification-2-line material-icons"></i>
+          <span>Notification</span>
+        </a>
+      </div>
+      <div class="client-nav-section">
+        <div class="client-nav-label">
+          Coming soon!
+        </div>
+          <a href="#" class="client-nav-link ">
+          <i class="ri-book-2-line material-icons"></i>
+          <span>Ebooks</span>
+          </a>
+
+          <a href="#" class="client-nav-link ">
+          <i class="ri-store-2-line material-icons"></i>
+          <span>Get Store</span>
+          </a>
+
+        <div class="client-nav-section">
+          <div class="client-nav-label">
+            Terms of Service
+          </div>
+            <a href="./bundlesInfo.html" class="client-nav-link">
+              <i class="ri-information-line"></i>
+              <span>Bundle Info</span>
+            </a>
+
+            <a href="./terms.html" class="client-nav-link" style="display: none;">
+            <i class="ri-file-text-line material-icons c2"></i>
+            <span>Terms & Conditions</span>
+            </a>
+
+            <a href="./settings.html" class="client-nav-link" style="display: none;">
+            <i class="ri-settings-3-line material-icons c2"></i>
+            <span>Settings</span>
+            </a>
+        </div>
+      </div>
+    </nav>
+    <!--sidebar footer---->
+    <div class="client-sidebar-footer">
+      <a href="./login.html" class="client-store-link">
+        <i class="ri-login-box-line"></i>
+        <span>Login</span>
+      </a>
+    </div>
+  </aside>
+  <!--sidebar overlay-->
+  <div class="client-sidebar-overlay" id="sidebarOverlay">
+  </div>
+  <!---main-->
+  <div class="client-main">
+    <!--TOP BAR-->
+    <header class="client-topbar">
+      <div class="client topbar-left">
+        <div class="client-page-context">
+          <a href="index.html" >
+            <img style="width: 8rem; height: 6rem; margin-top: .5rem; margin-left: -1.2rem;" class="newLogo" src="./css/icons/newLogo.png" alt="image" loading="lazy">
+          </a>
+        </div>
+      </div>
+      <div class="client-topbar-right">
+        <button class="client-icon-button notification-button"
+        aria-label="notification"
+        onclick="window.location.href='./notification.html'">
+        <i class="ri-notification-3-line"></i>
+        <span class="notification-dot"></span>
+        </button>
+        <!--DARK THEME-->
+        <label for="darkMode" class="theme-switch">
+          <input type="checkbox" id="themeToggle">
+          <span class="slider">
+            <span class="sun icon">
+              <i class="ri-sun-line material-icons sun-icon"></i>
+            </span>
+            <span class="icon moon">
+              <i class="ri-moon-foggy-line material-icons moon"></i>
+            </span>
+          </span>
+        </label>
+        <div class="client-profile-wrapper">
+          <button class="client-profile-button" id="clientProfileButton">
+            <span class="client-avatar">
+                <h5 id="usernameInitials"></h5>
+            </span>
+            <span class="client-profile-info">
+              <strong>User</strong>
+              <small>Profile</small>
+            </span>
+            <i class="ri-arrow-down-s-line"></i>
+          </button>
+          <!--profile menu-->
+          <div class="client-profile-menu" id="clientProfileMenu">
+            <div class="client-profile-menu-header">
+              <span class="client-avatar large">
+                <i class="ri-user-line"></i>
+              </span>
+            </div>
+            <strong>User Menu</strong>
+        <div class="client-profile-menu-divider"></div>
+          <a href="./settings.html">
+            <i class="ri-settings-3-line"></i>
+            <span>Settings</span>
+          </a>
+          <a href="./index.html">
+            <i class="ri-store-2-line"></i>
+            <span>View Store</span>
+          </a>
+          <div class="client-profile-menu-divider"></div>
+          <button id="clientLogoutButton">
+          <i class="ri-logout-box-r-line"></i>
+          <span>Sign Out</span>
+          </button>
+        </div>
+      </div>
+      <button class="client-menu-button" id="sidebarToggle"
+      aria-label="open sidebar">
+        <i class="ri-menu-line"></i>
+      </button>
+    </div>
+    </header>
+    <!---main grid repeat(2,1fr)-->
+    <div class="main-grid-container">
+      <div class="grid-container-main" id="scrollContainer">
+        <div class="card-container">
+          <main class="settings-page">
+
+
+            <!-- =====================================
+                TOP BAR
+            ====================================== -->
+
+            <header class="settings-topbar">
+
+              <button
+                class="back-btn"
+                id="backBtn"
+                type="button"
+                aria-label="Go back"
+              >
+                ←
+              </button>
+
+              <h1>
+                Settings
+              </h1>
+
+              <div class="topbar-space"></div>
+
+            </header>
+
+
+
+            <!-- =====================================
+                APPEARANCE
+            ====================================== -->
+
+            <section class="settings-section">
+
+              <div class="section-heading">
+
+                <span>
+                  APPEARANCE
+                </span>
+
+                <h2>
+                  Customize your experience
+                </h2>
+
+              </div>
+
+
+              <div class="settings-card">
+
+
+                <!-- DARK MODE -->
+
+                <div class="setting-row">
+
+                  <div class="setting-icon">
+                    ◐
+                  </div>
+
+                  <div class="setting-content">
+
+                    <strong>
+                      Dark Mode
+                    </strong>
+
+                    <small>
+                      Use a darker appearance throughout EcoData.
+                    </small>
+
+                  </div>
+
+                  <label class="switch">
+
+                    <input
+                      type="checkbox"
+                      id="darkModeToggle"
+                    >
+
+                    <span class="slider"></span>
+
+                  </label>
+
+                </div>
+
+
+              </div>
+
+            </section>
+
+
+
+            <!-- =====================================
+                NOTIFICATIONS
+            ====================================== -->
+
+            <section class="settings-section">
+
+              <div class="section-heading">
+
+                <span>
+                  NOTIFICATIONS
+                </span>
+
+                <h2>
+                  Stay updated
+                </h2>
+
+              </div>
+
+
+              <div class="settings-card">
+
+
+                <!-- ORDER UPDATES -->
+
+                <div class="setting-row">
+
+                  <div class="setting-icon">
+                    ◉
+                  </div>
+
+                  <div class="setting-content">
+
+                    <strong>
+                      Order Updates
+                    </strong>
+
+                    <small>
+                      Get updates when your bundle order changes status.
+                    </small>
+
+                  </div>
+
+                  <label class="switch">
+
+                    <input
+                      type="checkbox"
+                      id="orderNotifications"
+                      checked
+                    >
+
+                    <span class="slider"></span>
+
+                  </label>
+
+                </div>
+
+
+
+                <!-- DELIVERY UPDATES -->
+
+                <div class="setting-row">
+
+                  <div class="setting-icon">
+                    ✓
+                  </div>
+
+                  <div class="setting-content">
+
+                    <strong>
+                      Delivery Updates
+                    </strong>
+
+                    <small>
+                      Receive notifications when your order is delivered.
+                    </small>
+
+                  </div>
+
+                  <label class="switch">
+
+                    <input
+                      type="checkbox"
+                      id="deliveryNotifications"
+                      checked
+                    >
+
+                    <span class="slider"></span>
+
+                  </label>
+
+                </div>
+
+
+
+                <!-- PROMOTIONS -->
+
+                <div class="setting-row">
+
+                  <div class="setting-icon">
+                    %
+                  </div>
+
+                  <div class="setting-content">
+
+                    <strong>
+                      Promotions & Giveaways
+                    </strong>
+
+                    <small>
+                      Get important EcoData promotions and giveaway updates.
+                    </small>
+
+                  </div>
+
+                  <label class="switch">
+
+                    <input
+                      type="checkbox"
+                      id="promotionNotifications"
+                      checked
+                    >
+
+                    <span class="slider"></span>
+
+                  </label>
+
+                </div>
+
+
+              </div>
+
+            </section>
+
+
+
+            <!-- =====================================
+                ACCOUNT
+            ====================================== -->
+
+            <section class="settings-section">
+
+              <div class="section-heading">
+
+                <span>
+                  ACCOUNT
+                </span>
+
+                <h2>
+                  Manage your account
+                </h2>
+
+              </div>
+
+
+              <div class="settings-card">
+
+
+                <button
+                  class="action-row"
+                  id="editProfileBtn"
+                  type="button"
+                >
+
+                  <div class="setting-icon">
+                    ◉
+                  </div>
+
+                  <div class="setting-content">
+
+                    <strong>
+                      Edit Profile
+                    </strong>
+
+                    <small>
+                      Update your name and account information.
+                    </small>
+
+                  </div>
+
+                  <span class="row-arrow">
+                    →
+                  </span>
+
+                </button>
+
+
+
+                <button
+                  class="action-row"
+                  id="privacyBtn"
+                  type="button"
+                >
+
+                  <div class="setting-icon">
+                    🔒
+                  </div>
+
+                  <div class="setting-content">
+
+                    <strong>
+                      Privacy & Security
+                    </strong>
+
+                    <small>
+                      Manage your account privacy and security.
+                    </small>
+
+                  </div>
+
+                  <span class="row-arrow">
+                    →
+                  </span>
+
+                </button>
+
+
+              </div>
+
+            </section>
+
+
+
+            <!-- =====================================
+                LOCAL DATA
+            ====================================== -->
+
+            <section class="settings-section">
+
+              <div class="section-heading">
+
+                <span>
+                  DATA
+                </span>
+
+                <h2>
+                  Local information
+                </h2>
+
+              </div>
+
+
+              <div class="settings-card">
+
+
+                <button
+                  class="action-row danger-row"
+                  id="clearDataBtn"
+                  type="button"
+                >
+
+                  <div class="setting-icon">
+                    ×
+                  </div>
+
+                  <div class="setting-content">
+
+                    <strong>
+                      Clear Local Data
+                    </strong>
+
+                    <small>
+                      Remove locally stored EcoData information from this device.
+                    </small>
+
+                  </div>
+
+                  <span class="row-arrow">
+                    →
+                  </span>
+
+                </button>
+
+
+              </div>
+
+            </section>
+
+
+
+            <!-- =====================================
+                ABOUT
+            ====================================== -->
+
+            <section class="settings-section">
+
+              <div class="section-heading">
+
+                <span>
+                  ABOUT
+                </span>
+
+                <h2>
+                  EcoData
+                </h2>
+
+              </div>
+
+
+              <div class="about-card">
+
+                <div class="ecodata-logo">
+                  E
+                </div>
+
+                <div>
+
+                  <strong>
+                    EcoData
+                  </strong>
+
+                  <p>
+                    Bundle services made simple.
+                  </p>
+
+                  <small>
+                    Version 1.0.0
+                  </small>
+
+                </div>
+
+              </div>
+
+            </section>
+
+
+          </main>
+        </div>
+      </div>
+
+        <!-- ==========================================
+     PREMIUM OFFERS
+========================================== -->
+
+<aside class="ads-container-right premium-offers">
+<div class="ads-wrapper">
+  <!-- SECTION HEADER -->
+  <div class="side-title premium-offers-header">
+    <div class="side-title-content">
+      <span class="premium-eyebrow">
+        <i class="ri-sparkling-2-line"></i>
+        EXCLUSIVE
+      </span>
+
+      <h2>Premium Offers</h2>
+
+      <p>Unlock more ways to save and grow.</p>
+    </div>
+
+    <div class="premium-header-icon">
+      <i class="ri-vip-crown-2-line"></i>
+    </div>
+  </div>
+
+
+  <!-- ==========================================
+       AGENT UPGRADE
+  =========================================== -->
+
+  <div class="agent-upgrade-wrapper premium-offer-card">
+
+    <div class="agent-upgrade premium-agent-card">
+
+      <div class="premium-card-top">
+
+        <div class="premium-card-icon">
+          <img
+            src="./css/icons/agent.png"
+            alt="Agent"
+            loading="lazy"
+          >
+        </div>
+
+        <span class="premium-card-badge">
+          <i class="ri-price-tag-3-line"></i>
+          GHS 50
+        </span>
+
+      </div>
+
+
+      <div class="premium-card-content">
+
+        <span class="premium-card-label">
+          RESELLER ACCESS
+        </span>
+
+        <h3>Join for Exclusive Benefits</h3>
+
+        <p>
+          Unlock discounted prices for personal use or reselling.
+          Register once and start saving or earning more.
+        </p>
+
+      </div>
+
+
+      <div class="premium-card-footer">
+
+        <div class="premium-benefit">
+          <i class="ri-checkbox-circle-fill"></i>
+          <span>Discounted prices</span>
+        </div>
+
+        <div class="premium-benefit">
+          <i class="ri-checkbox-circle-fill"></i>
+          <span>Reselling opportunities</span>
+        </div>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="premium-action-btn"
+        onclick="goToPayment()"
+      >
+        <span>Upgrade Now</span>
+        <i class="ri-arrow-right-line"></i>
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ==========================================
+       ONLINE STORE
+  =========================================== -->
+
+  <div class="agent-upgrade-wrapper premium-offer-card">
+
+    <div class="agent-upgrade premium-store-card">
+
+      <div class="premium-card-top">
+
+        <div class="premium-card-icon">
+          <img
+            src="./css/uiIcons/store.png"
+            alt="Online Store"
+            loading="lazy"
+          >
+        </div>
+
+        <span class="premium-card-badge coming-soon">
+          Coming Soon
+        </span>
+
+      </div>
+
+
+      <div class="premium-card-content">
+
+        <span class="premium-card-label">
+          SELL ONLINE
+        </span>
+
+        <h3>Get Your Online Store</h3>
+
+        <p>
+          Create your own online store, showcase your products
+          and receive orders directly through WhatsApp.
+        </p>
+
+      </div>
+
+
+      <div class="premium-card-footer">
+
+        <div class="premium-benefit">
+          <i class="ri-checkbox-circle-fill"></i>
+          <span>Online product showcase</span>
+        </div>
+
+        <div class="premium-benefit">
+          <i class="ri-checkbox-circle-fill"></i>
+          <span>WhatsApp orders</span>
+        </div>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="premium-action-btn premium-action-disabled"
+        title="Coming Soon!"
+        disabled
+      >
+        <span>Get Store</span>
+        <i class="ri-arrow-right-line"></i>
+      </button>
+
+    </div>
+
+  </div>
+</div>
+</aside>
+    </div>
+  </div>
+
+
+
+  <!-----BOTTOM-NAVBAR----->
+    <div class="bottom-navbar" id="navIconDiv">
+      <div class="btom-navIcon" onclick="window.location.href='index.html'">
+        <div class="activeImg " id="activeMtn">
+          <i class="ri-router-line material-icons"></i>
+        </div>
+        <small class="bottomIcon-textNav">Bundles</small>
+      </div>
+      <div class="btom-navIcon">
+        <div class="activeImg" onclick="window.location.href ='pay.html'"> 
+          <i class="ri-price-tag-3-line material-icons"></i>
+        </div>
+        <small class="bottomIcon-textNav"> Discounts</small>
+      </div>
+    <div class="ecodataShopBtn">
+        <div class="shop-fixedBtn" id="shoppingBtn" >
+        <i class="ri-shopping-bag-3-fill"></i>
+        <i class="ri-store-2-line sellerAuth material-icons" style="display: none;"></i>
+        <small class="hero-headline shop">
+        Shop
+        </small>
+    </div>
+    </div>
+
+    <div class="btom-navIcon" >
+        <div class="activeImg" id="activeTel" onclick="window.location.href='afa.html'"> 
+          <i class="ri-user-follow-line material-icons"></i>
+        </div>
+        <small class="bottomIcon-textNav">AFA</small>
+    </div>
+
+
+    <div class="btom-navIcon" >
+      <div class="activeImg" id="activeAir" onclick="window.location.href='vouchers.html'"> 
+      <i class="ri-ticket-2-line material-icons"></i>
+      </div>
+      <small class="bottomIcon-textNav"> Vouchers</small>
+    </div>
+
+    </div>
+
+</div>
+
+
+
+
+<script src="bundleSettings.js"></script>
+<script src="client.js"></script>
+</body>
+</html>
