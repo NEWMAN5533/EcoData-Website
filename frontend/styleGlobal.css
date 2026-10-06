@@ -2497,6 +2497,7 @@ gap: .6rem;
 
 @media screen and (min-width: 768px) {
   .totals-container{
+    max-width: 96% !important;
     grid-template-columns: repeat(2, 1fr) !important;
   }
 }
@@ -2524,7 +2525,7 @@ gap: .6rem;
 
   background: var(--card-bg-dark) !important;
   padding: .3rem;
-  box-shadow: 0 10px 20px rgba(22, 22, 22, 0.2) !important;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4) !important;
 }
 
 .dark-mode .total-card {
@@ -2622,7 +2623,7 @@ top section
 @media screen and (min-width: 768px){
 
 .total-card-bottom .card-performance{
-  font-size: .62rem;
+  font-size: .57rem !important;
   white-space: nowrap;
   }
 }
