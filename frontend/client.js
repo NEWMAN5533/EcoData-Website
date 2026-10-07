@@ -1,4 +1,5 @@
-// ==========================================
+document.addEventListener("DOMContentLoaded", ()=> {
+  // ==========================================
 // ECODATA ADMIN — SHARED JAVASCRIPT
 // ==========================================
 
@@ -8,10 +9,10 @@
 // ==========================================
 
 const sidebar =
-  document.getElementById("clientSidebar");
+  document.getElementById("appSidebar");
 
 const sidebarToggle =
-  document.getElementById("sidebarToggle");
+  document.getElementById("appSidebarToggle");
 
 const sidebarClose =
   document.getElementById("sidebarClose");
@@ -19,8 +20,7 @@ const sidebarClose =
 const sidebarOverlay =
   document.getElementById("sidebarOverlay");
 
-const profileButton =
-  document.getElementById("clientProfileButton");
+
 
 
 
@@ -34,7 +34,7 @@ function openSidebar() {
 
   if (!sidebar) return;
 
-  sidebar.classList.add("open");
+  sidebar.style.left = "0";
 
   sidebarOverlay?.classList.add("show");
 
@@ -46,7 +46,7 @@ function closeSidebar() {
 
   if (!sidebar) return;
 
-  sidebar.classList.remove("open");
+  sidebar.style.left = "-500px";
 
   sidebarOverlay?.classList.remove("show");
 
@@ -142,35 +142,4 @@ setActiveAdminNavigation();
 
 
 
-// ==========================================
-// PROFILE MENU
-// ==========================================
-
-profileButton?.addEventListener(
-  "click",
-  event => {
-
-    event.stopPropagation();
-
-    profileMenu?.classList.toggle("show");
-
-  }
-);
-
-
-document.addEventListener(
-  "click",
-  event => {
-
-    if (
-      profileMenu &&
-      !profileMenu.contains(event.target) &&
-      !profileButton?.contains(event.target)
-    ) {
-
-      profileMenu.classList.remove("show");
-
-    }
-
-  }
-);
+});
