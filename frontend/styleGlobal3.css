@@ -401,7 +401,6 @@ Menu card
 
 
 
-
 /*****
 BOTTOM NAVIGATION BAR STYLE CSS
 ******/
@@ -428,7 +427,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
       align-items: center;
       justify-content: space-between;
       padding: .1rem;
-      background: var(--primary-cl) !important;
+      background: var(--bg-cl) !important;
 
       transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
       opacity 0.25s ease !important;
@@ -450,7 +449,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
 
 
     .dark-mode .bottom-navbar{
-      background:   var(--body-bg-dark) !important;
+      background:   var(--sidebar-bg-dark) !important;
       backdrop-filter: blur(18px);
       box-shadow: 0 2px 6px rgba(0,0,0,0.99);
     }

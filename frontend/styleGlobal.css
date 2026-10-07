@@ -202,17 +202,17 @@ SNACKBAR SECTION
   position: relative;
   gap: 0;
   margin-top: .3rem;
-  background: #ffffff;
   margin-bottom: .5rem;
   box-shadow: unset !important;
-  border-radius: .1rem;
+
  }
 
  .dark-mode  .card-container .welcome-hero{
   background: none !important;
-  box-shadow: 0 10x 20px rgba(0,0,0,0.2);
-  border-radius: .3rem !important;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  border-radius: .6rem !important;
   overflow: hidden;
+  border: 1px solid var(--thin-border);
  }
 
 
@@ -277,7 +277,7 @@ SNACKBAR SECTION
 
   @media screen and (min-width: 768px) {
   .welcome-hero-top .wht-left-top p{
-    font-size: 1.3rem;
+    font-size: 1.7rem !important;
   }
  }
 
@@ -401,7 +401,8 @@ SNACKBAR SECTION
 
 .dark-mode .seller-status-bar{
    background: var(--body-bg-dark) !important;
-   border: 1px solid var(--thin-border) !important;
+   border-top: 1px solid var(--thin-border) !important;
+   border-bottom: 1px solid var(--thin-border) !important;
 }
 
 @media screen and (min-width: 768px) {
@@ -2092,7 +2093,7 @@ NOTICE BOARD SECTION
 *******/
 .notice-container{
   width: 100%;
-  max-width: 98% !important;
+  max-width: 100% !important;
   height: max-content;
   display: flex;
   flex-direction: column;
@@ -2497,8 +2498,8 @@ gap: .6rem;
 
 @media screen and (min-width: 768px) {
   .totals-container{
-    max-width: 96% !important;
     grid-template-columns: repeat(2, 1fr) !important;
+    max-width: 98% !important;
   }
 }
 
@@ -2520,12 +2521,22 @@ gap: .6rem;
   box-shadow: 0 10px 20px rgba(10, 10, 10, 0.3);
 }
 
+@media screen and (min-width: 768px){
+  .total-card{
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04) !important;
+  }
+
+  .dark-mode .total-card{
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04) !important;
+  }
+}
+
 
 .dark-mode .total-card {
 
   background: var(--card-bg-dark) !important;
   padding: .3rem;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4) !important;
+  box-shadow: 0 10px 20px rgba(22, 22, 22, 0.2) !important;
 }
 
 .dark-mode .total-card {
@@ -2623,7 +2634,7 @@ top section
 @media screen and (min-width: 768px){
 
 .total-card-bottom .card-performance{
-  font-size: .57rem !important;
+  font-size: .62rem;
   white-space: nowrap;
   }
 }
