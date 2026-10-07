@@ -1079,7 +1079,7 @@ html.dark-mode .theme-sun {
   border-start-start-radius: 8px;
   border-left: 1px solid var(--app-border);
   border-top: 1px solid var(--app-border);
-  overflow-y: auto;
+  overflow-y: hidden;
 }
 
 @media screen and (max-width: 768px) {
