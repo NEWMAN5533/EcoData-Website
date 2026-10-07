@@ -261,7 +261,7 @@
    DARK MODE
    ========================================================= */
 
-body.dark-mode {
+html.dark-mode {
 
   /* =========================
      PAGE / SURFACE
@@ -692,7 +692,6 @@ body.dark-mode {
 
 
 .progress-fill{
-  width: 10%;
   background: var(--success);
   height: 100%;
   border-radius: 14px;
@@ -756,6 +755,7 @@ body.dark-mode {
   grid-template-columns: repeat(1,1fr);
   gap: 32px;
   margin-bottom: 32px;
+ 
 }
 
 @media screen and (min-width: 768px){
@@ -798,11 +798,14 @@ body.dark-mode {
 }
 
 /*** Recent orders **/
-.recent-orders{
+.recent-orders-info{
   display: flex;
   flex-direction: column;
   gap: 8px;
+  overflow-y: auto;
+  margin-top: 8px;
 }
+
 
 .order-row{
   display: grid;
@@ -817,19 +820,20 @@ body.dark-mode {
 }
 
 .network-badge{
-  width: 42px;
+  width: max-content;
+  padding: .3rem;
   height: 42px;
   border-radius: 11px;
-  background: var(--card-word);
+  background: var(--badge-bg);
   display: flex;
   align-items: center;
   justify-content: center;
-  
+  border-radius: 8px;
   font-size: 10px;
   font-weight: 800;
 }
 
-.order-main-strong{
+.main strong{
   display: block;
   font-size: 14px;
   margin-bottom: 3px;
@@ -850,30 +854,39 @@ body.dark-mode {
   background: var(--success);
   color: rgb(248, 246, 224);
   border-radius: 15px;
+
+  padding: 0 .5rem;
 }
 
 .status-processing{
   background: #e9a30c;
   color: rgb(248, 246, 224);
   border-radius: 15px;
+
+  padding: 0 .5rem;
 }
 
 .status-pending{
   background: rgb(37, 117, 207);
   color: rgb(248, 246, 224);
   border-radius: 15px;
+  padding: 0 .5rem;
 }
 
 .status-cancelled{
   background: #777;
   color: rgb(189, 188, 183);
   border-radius: 15px;
+
+  padding: 0 .5rem;
 }
 
 .status-failed{
   background: rgb(185, 47, 47);
   color: rgb(248, 246, 224);
   border-radius: 15px;
+
+  padding: 0 .5rem;
 }
 
 

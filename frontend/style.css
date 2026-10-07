@@ -612,325 +612,6 @@ NOTICE CONTAINER SECTION ENDS
 
 
 
-/***
-dark mode styles
-****/
-.theme-switch {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
-  width: 100%;
-  height: 100%;
-  background: none !important;
-  margin-right: .9rem;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;;
-  user-select: none;
-}
-
-
-
-
-.theme-switch input {
-  display: none;
-  background: none !important;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;;
-  user-select: none;
-}
-
-
-
-
-.theme-switch .slider{
-  position: absolute;
-  background: rgb(255, 253, 253);
-  width: 100%;
-  height: 100%;
-  transition: background 0s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 5px;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;;
-  user-select: none;
-}
-
-.dark-mode .theme-whitch .slider{
-background: none !important;
-}
-
-
-
-.slider span img{
-  width: 1.3rem;
-  height: 1.3rem;
-  rotate: 2deg;
-  padding: .18rem;
-  margin-top: -.1rem;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;;
-  user-select: none;
-}
-
-.slider .icon {
-  font-size: 14px;
-  opacity: 0.4;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  position: absolute;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;;
-  user-select: none;
-}
-
-
-.nav-right .notifity{
-  width: 1.2rem;
-  height: 1.1rem;
-  margin-top: .18rem;
-  display: flex;
-  position: fixed;
-  margin-right: .5rem;
-}
-
-.nav-right .notis{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-.notis span{
-margin-top: -1.2rem;
-margin-right: 1rem;
-font-size: .6rem;
-background: rgb(214, 8, 8);
-color: white;
-text-align: center;
-display: flex;
-justify-content: center;
-align-items: center;
-width: .8rem;
-height: .8rem;
-border-radius: 50%;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;;
-  user-select: none;
-}
-
-input:checked + .slider {
-  background: none;
-}
-
-input:checked + .slider .sun {
-  opacity: 0;
-}
-
-input:checked + .slider .moon {
-  opacity: 1;
-}
-
-.slider .moon {
-opacity:0;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  outline: none;
-  -ms-user-select: none;;
-  user-select: none;
-}
-
-/***
-dark css
-***/
-
-body.dark-mode {
-  background: var(--darkMode-bg-cl);
-  transition: 0s ease !important;
-}
-
-
-.dark-mode .navbar{
-  background: var(--darkMode-bg-cl);
-  border-bottom: 0.1px solid var(--thin-border);
-  box-shadow: 0 2px 6px rgba(60, 62, 63, 0.4);
-}
-
-.dark-mode .tree img{
-  display: none;
-}
-
-.darkRemain{
-  display: none;
-  align-items: center;
-  justify-content: center;
-}
-
-.dark-mode .darkRemain img{
-  width: 3rem;
-  height: 3rem;
-}
-
-.darkRemain img{
-  display: none;
-  animation: 5s rotate infinite;
-}
-
-@keyframes rotate {
-  0%{
-    transform: translateX(15px);
-  }
-}
-
-.dark-mode .darkRemain img{
-  display: flex;
-  transform: rotate3d(360deg);
-}
-
-.dark-mode .menu-icon{
-  background: #6f7070;
-  width: 1.8rem;
-  height: 1.6rem;
-  border-radius: .1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.dark-mode .welcome-card{
-  background: var(--welcome-card-bg);
-  border: 2px solid rgba(98, 126, 121, 0.849);
-  color: var(--background-cl);
-  box-shadow: 0 2px 6px rgba(92, 91, 91, 0.2);
-}
-
-.dark-mode .welcome-top{
-  background: var(--welcome-card-bg);
-  box-shadow: inset 0 2px 6px rgba(92, 91, 91, 0.);
-  border: 2px solid var(--thin-border);
-  border-radius: .2rem;
-}
-.dark-mode .welcome-top p{
-  color: var(--text-cl);
-}
-
-
-/**
-RIGHT INPUT
-8**/
-.dark-mode .welcome-top-right input{
-  border: 2px solid var(--thin-border);
-  color: var(--text-cl);
-  border-radius: .2rem;
-  box-shadow: 0 2px 6px rgba(52, 53, 54, 0.45);
-}
-
-/**
-WELCOME BOTTOM
-***/
-.dark-mode #clock,
-.dark-mode .close-time span{
-  border: 0.2px solid var(--thin-border-1);
-  padding: 0 .2rem;
-}
-
-.dark-mode .close-time{
-  border: 2px solid rgba(98, 126, 121, 0.849);
-  padding: .2rem .2rem;
-  border-start-end-radius: .4rem;
-  border-end-start-radius: .5rem;
-  margin-bottom: 0;
-  margin-left: 0;
-  box-shadow: 0 3px 7px solid rgba(0, 0, 0, 0.4);
-}
-
-/*--------NOTICE BOARD-----*/
-.dark-mode .notice-board{
-  color: var(--text-cl);
-  background: var(--welcome-card-bg);
-  border: 0.1px solid var(--thin-border);
-}
-
-.dark-mode .notice-board span{
-  background: var(--thin-border-3);
-}
-.dark-mode .notice-board strong{
-  color: var(--text-cl-2);
-}
-
-/****
-TWO DIV CONTAINER
-****/
-.dark-mode .two-div-container{
-  background: var(--welcome-card-bg);
-  border: 1px solid var(--thin-border);
-  box-shadow: 0 2px 6px 0 2px 6px rgba(105, 106, 107, 0.8);
-}
-
-.dark-mode .right-side-top{
-  border-left: none;
-  border-bottom: 1px solid var(--thin-border);
-}
-
-.dark-mode .right-side-btm{
-  border-left: none;
-  color: var(--text-cl-2);
-}
-
-.dark-mode .right-side-btm small, strong{
-  color: var(--text-cl-3)
-}
-
-
-.dark-mode .right-side{
-  border: 0.1px solid var(--thin-border);
-}
-
-
-
-
-
-.dark-mode .order-status-section input{
-  background: rgba(247, 244, 244, 0.589);
-  border: 0.2px solid var(--thin-border);
-  color: rgb(26, 19, 19);
-}
-
-.dark-mode .order-status-section input::placeholder{
-  color: rgb(39, 39, 39);
-  font-family: serif;
-}
-
-.dark-mode .order-status-section{
-  background: var(--welcome-card-bg);
-  border: 1px solid var(--thin-border);
-  color: var(--text-cl-2);
-  box-shadow:0 2px 6px rgba(22, 36, 51, 0.8);
-}
-
-.dark-mode .checkBt{
-  background: var(--darkMode-bg-cl);
-  border: .001px solid rgb(11, 31, 27);
-  box-shadow: 0 2px 6px rgba(66, 66, 68, 0.9);
-}
-
-.dark-mode .status-result{
-  background: var(--darkMode-bg-cl);
-}
-
 /****
 NETWORK PURCHASE DIV
 ***/
@@ -3293,6 +2974,12 @@ NETcARD VIEW ENDS
   border-top: 12px solid var(--thin-border);
 }
 
+@media screen and (min-width: 768px){
+  .dark-mode .view.active #mtnArea{
+    max-width: 98% !important;
+  }
+}
+
 .dark-mode .view.active #mtnArea .btn-div{
   margin-top: 2.8rem !important;
 }
@@ -5417,11 +5104,6 @@ AUTO SCROLLING STYLE
   NAVBAR SECTION
   **/
 
-  
-  .nav-left img{
-width: 2.4rem;
-height: 2.4rem;
-  }
 
   /***
   right navbar
@@ -6544,11 +6226,6 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   NAVBAR SECTION
   **/
 
-  
-  .nav-left img{
-width: 2.4rem;
-height: 2.4rem;
-  }
 
   /***
   right navbar
@@ -8981,10 +8658,7 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   **/
 
   
-  .nav-left img{
-width: 2.4rem;
-height: 2.4rem;
-  }
+
 
   /***
   right navbar
@@ -10164,12 +9838,6 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     display: none;
   }
   
-
-
-  .nav-left img{
-width: 2.4rem;
-height: 2.4rem;
-  }
 
   /***
   right navbar
@@ -11361,10 +11029,6 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   }
   
 
-  .nav-left img{
-width: 2.4rem;
-height: 2.4rem;
-  }
 
   /***
   right navbar
@@ -12561,11 +12225,6 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 
 
 
-  .nav-left img{
-width: 2.4rem;
-height: 2.4rem;
-  }
-
   /***
   right navbar
   ***/
@@ -13750,154 +13409,3 @@ box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* 6. Small tablets */
-@media (min-width: 600px){
-  .welcome-card{
-    display: none;
-  }
-
-
-}
-
-
-
-
-
-/* 7. Mid-size tablets */
-@media (min-width: 640px){
-    .welcome-card{
-    display: none;
-  }
-
-
-
-}
-
-
-
-
-/* 8. Tablets portrait */
-@media (min-width: 768px){
-    .welcome-card{
-    display: none;
-  }
-
-
-
-
-
-}
-
-/* 9. Tablets landscape / small laptops */
-@media (min-width: 800px){
-    .welcome-card{
-    display: none;
-  }
-
-
-
-
-
-
-}
-
-
-
-
-
-/* 10. Large tablets */
-@media (min-width: 900px){
-    .welcome-card{
-    display: none;
-  }
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* 11. Small laptops */
-@media (min-width: 1024px){
-    .welcome-card{
-    display: none;
-  }
-
-
-
-
-
-}
-
-/* 12. Medium laptops / desktops */
-@media (min-width: 1200px){
-    .welcome-card{
-    display: none;
-
-  }
-
-
-
-
-
-}
-
-
-/* 13. Large desktops */
-@media (min-width: 1280px){
-
-
-
-
-
-
-
-
-    .welcome-card{
-    display: none;
-  }
-}
-
-
-
-
-@media (min-width: 1366px){
-
-    .welcome-card{
-    display: none;
-  }
-}
