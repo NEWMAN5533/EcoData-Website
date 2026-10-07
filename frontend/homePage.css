@@ -110,32 +110,33 @@ p {
   ==============================***/
     .system-updating-modal{
       position: fixed;
-      width: 100%;
+      width: 100vw;
       height: 100vh;
       display: none;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      z-index: 9999999999999999999999999999999999999999999999999999999999
+      z-index: 9999999999999999999999999999999999999999999999999999999999;
     }
 
 
     .updating-modal-content{
       width: 100%;
-      height: 100%;
+      height: 100vh;
       display:flex;
       flex-direction: column;
       line-height: 1.1;
       align-items: center;
       justify-content: center;
       position: relative;
-      background:  #fff;
+      justify-self: center;
+      background:  var(--bg-cl);
       backdrop-filter: blur(20px);
     }
 
     .update-top{
       width: 100%;
-    
+      display: flex;
       height: 50%;
       align-items: center;
       justify-content: center;
@@ -143,9 +144,19 @@ p {
     }
 
 
+
     .update-top img{
       align-self: center;
-      
+      width: 90%;
+      height: 90%;
+    }
+
+
+    @media screen and (min-width:  768px){
+      .update-top img{
+        width: 28rem;
+        height: 28rem;
+      }
     }
 
 
@@ -164,6 +175,7 @@ p {
     .update-bottom h2{
       font-size: 2rem;
       animation: popupTiming 5s linear infinite;
+      color: rgb(17, 17, 17);
     }
 
     .update-bottom p{
@@ -172,7 +184,7 @@ p {
       font-size: 1rem;
       line-height: 1.4;
       font-weight: 500;
-      color: var(--text-cl-3);
+      color: #504f4f;
     }
 
 
@@ -213,7 +225,14 @@ p {
     color: rgb(156, 209, 206) !important;
   }
 
+:root{
+  --user-cl: rgb(68, 70, 70);
+}
 
+:root.dark-mode{
+  --user-cl: rgb(156, 209, 206);
+  --text-cl: var(--primary-cl); 
+}
 
 /**** HOME LEADER BOARD ****/
 .leaderChartBar{
@@ -304,7 +323,7 @@ p {
     }
 
     .dark-mode .leaderTop p{
-      color: white !important;
+      color: var(--primary-cl) !important;
     }
 
     .leaderTop p img{
