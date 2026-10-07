@@ -370,13 +370,7 @@ html{
   border-radius: 10px;
 }
 
-::-webkit-scrollbar-thumb{
-  background: #888;
-}
 
-::-webkit-scrollbar-track{
-  background: #555;
-}
 
 
 /*==========================
@@ -405,7 +399,10 @@ html{
     align-items: center;
     display: flex;
     justify-content: space-between;
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999999999;
   }
 
 
