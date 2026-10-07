@@ -35,19 +35,34 @@
 
 
 
-  <link rel="stylesheet" href="style-client-app.css">
-
-  <link rel="stylesheet" href="style-client-app2.css">
-
-   <!---dark-mode-root-css-->
- <link rel="stylesheet" href="style-dark-mode.css">
   <!---css-link-->
   <link rel="stylesheet" href="notification.css">
-  <link rel="stylesheet" href="style.css">
+ 
+  <script>
+  (() => {
+    const savedTheme = localStorage.getItem("ecoTheme");
+
+    if (savedTheme === "dark") {
+      document.documentElement.classList.add("dark-mode");
+    }
+  })();
+</script>
+
+
+
+
+ <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="store.css">
+  
+
+    <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="styleGlobal.css">
   <link rel="stylesheet" href="styleGlobal2.css">
   <link rel="stylesheet" href="styleGlobal3.css">
   <link rel="stylesheet" href="styleGlobal4.css">
+  <link rel="stylesheet" href="styleSkeletonUi.css">
+  <link rel="stylesheet" href="homePage.css">
+  <link rel="stylesheet" href="homePage2.css">
 
 
 
@@ -61,28 +76,19 @@
 
 
 
-
-
-
-    <div class="client-app">
-       <div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-    <!---navbar-here-->
-    
-
-    
+ <div class="app-container">
         <!---== SIDEBAR ----->
-        <aside class="client-sidebar" id="clientSidebar">
-             <div class="client-sidebar-top">
+        <aside class="app-sidebar" id="appSidebar" >
+             <div class="app-sidebar-top">
 
         <!-- BRAND -->
-        <a href="index.html" class="client-brand">
+        <a href="index.html" class="app-brand">
 
-          <span class="client-brand-icon">
+          <span class="app-brand-icon">
             <i class="ri-user-3-line"></i>
           </span>
 
-          <span class="client-brand-text">
+          <span class="app-brand-text">
             <strong>User</strong>
             <small>Panel</small>
           </span>
@@ -92,7 +98,7 @@
 
         <!-- CLOSE MOBILE SIDEBAR -->
         <button
-          class="client-sidebar-close"
+          class="app-sidebar-close"
           id="sidebarClose"
           aria-label="Close sidebar"
         >
@@ -104,80 +110,69 @@
 
       <!-- NAVIGATION -->
 
-      <nav class="client-nav">
+      <nav class="app-nav">
 
-        <div class="client-nav-section">
+        <div class="app-nav-section">
 
-          <span class="client-nav-label">
+          <span class="app-nav-label">
           Panel  Overview
           </span>
 
-          <a href="index.html" class="client-nav-link active">
+          <a href="index.html" class="app-nav-link active">
             <i class="ri-home-4-line material-icons c1"></i>
             <span>Home</span>
           </a>
 
-        </div>
 
-
-
-        
-        <div class="client-nav-section" id="clientAccessLink1" style="display: none;">
-
-          <span class="client-nav-label">
-            client Dashboard
-          </span>
-
-          <a onclick="window.location.href='./ecodataStoreclient/index.html'" class="client-nav-link ">
+            <a class="app-nav-link " id="adminAccessLink1" style="display: none;">
             <i class="ri-dashboard-3-line material-icons c2"></i>
-            <span>Dashboard</span>
+            <span>Admin Dashboard</span>
           </a>
+
+
+            <a"  class="app-nav-link" id="agentAccessLink2" style="display: none;">
+            <i class="ri-vip-crown-line material-icons c3"></i>
+            <span>Exclusive Page</span>
+          </a>
+
 
         </div>
 
 
-        <div class="client-nav-section" id="clientAccessLink2" style="display: none;">
-
-          <span class="client-nav-label">
-            Exclusive page
-          </span>
-
-          <a onclick="window.location.href='./agentPage.html'"  class="client-nav-link">
-            <i class="ri-vip-crown-line material-icons c3"></i>
-            <span>Exclusive</span>
-          </a>
 
         
+      
 
-          
-        </div>
+         
 
+         
 
-        <div class="client-nav-section">
+        
+        <div class="app-nav-section">
 
-          <span class="client-nav-label">
+          <span class="app-nav-label">
             Quick links
           </span>
 
 
-            <a href="./afa.html" class="client-nav-link">
+            <a href="./afa.html" class="app-nav-link">
             <i class="ri-user-follow-line material-icons c5"></i>
-            <span>AFA Reigistration</span>
+            <span>AFA Registration</span>
           </a>
 
-          <a href="./vouchers.html" class="client-nav-link">
+          <a href="./vouchers.html" class="app-nav-link">
             <i class="ri-ticket-2-line material-icons c7"></i>
             <span>Vouchers Shop</span>
           </a>
 
-           <a href="./pay.html" class="client-nav-link">
+           <a href="./pay.html" class="app-nav-link">
             <i class="ri-price-tag-3-line material-icons c4"></i>
             <span>Get discount</span>
           </a>
 
 
           
-           <a href="./notification.html" class="client-nav-link">
+           <a href="./notification.html" class="app-nav-link">
             <i class="ri-notification-3-line material-icons c5"></i>
             <span>Notifications</span>
           </a>
@@ -188,49 +183,46 @@
         </div>
 
 
-        <div class="client-nav-section">
+        <div class="app-nav-section">
 
-          <span class="client-nav-label">
+          <span class="app-nav-label">
             Coming soon!
           </span>
 
-           <a href="#" class="client-nav-link">
+          <a href="#" class="app-nav-link">
             <i class="ri-book-2-line material-icons c8"></i>
             <span>Ebooks</span>
           </a>
 
-          <a href="#" class="client-nav-link">
+          <a href="#" class="app-nav-link">
             <i class="ri-store-2-line material-icons c9"></i>
             <span>Get Store</span>
           </a>
 
-         
+
 
         </div>
 
 
-        <div class="client-nav-section" >
+        <div class="app-nav-section" >
 
-          <span class="client-nav-label">
+          <span class="app-nav-label">
             Terms of Service
           </span>
 
-        
 
-
-             <a href="./bundlesInfo.html" class="client-nav-link">
+          <a href="./bundlesInfo.html" class="app-nav-link">
             <i class="ri-information-line material-icons c6"></i>
             <span>Bundle info</span>
           </a>
-          
-            <a href="./terms.html" class="client-nav-link">
+
+            <a href="./terms.html" class="app-nav-link">
             <i class="ri-file-text-line material-icons c3"></i>
             <span>Terms & conditions</span>
           </a>
 
-         
 
-          <a href="./settings.html" class="client-nav-link" style="display: none;">
+          <a href="./settings.html" class="app-nav-link" style="display: none;">
             <i class="ri-settings-3-line material-icons c2"></i>
             <span>Settings</span>
           </a>
@@ -242,11 +234,11 @@
 
       <!-- SIDEBAR FOOTER -->
 
-      <div class="client-sidebar-footer">
+      <div class="app-sidebar-footer">
 
-        <a href="" class="client-store-link">
+        <a href="./login.html" class="app-store-link">
           <i class="ri-login-box-line"></i>
-          <span>Logout</span>
+          <span>Login</span>
         </a>
 
       </div>
@@ -267,53 +259,17 @@
     ></div>
 
 
-<!-- ========================================
- MAIN AREA
-========================================= -->
-
-<div class="client-main">
-
-  <header class="client-topbar">
-
-        <div class="client-topbar-left">
-
-        
-
-          <div class="client-page-context">
-
-             <a href="index.html" >
-             <img style="width: 8rem; height: 6rem; margin-top: .5rem; margin-left: -1.2rem;" class="newLogo" src="./css/icons/newLogo.png" alt="image" loading="lazy">
-            </a>
-
-    
-          </div>
-
-        </div>
-
-
-        <div class="client-topbar-right">
-
-
-          <!-- SEARCH -->
-
-          <div class="client-search" style="display: none;">
-
-            <i class="ri-search-line"></i>
-
-            <input
-              type="search"
-              id="clientSearch"
-              placeholder="Search..."
-              autocomplete="off"
-            >
-
-            <span class="client-search-shortcut">
-              /
-            </span>
-
-          </div>
-
-
+        <!-- ========================================
+          HEADER
+    ========================================= -->
+    <header class="app-nav-header">
+      <div class="app-nav-left">
+        <img src="./css/icons/newLogo.png" alt="">
+      </div>
+      <!--right-->
+        <div class="app-nav-right"
+        >
+          
           <!-- NOTIFICATIONS -->
 
           
@@ -331,19 +287,24 @@
 
           </button>
 
-                <!---DARK MODE-->
-        <label class="theme-switch" >
-          <input  type="checkbox" id="themeToggle">
-          <span class="slider">
-            <span class="icon sun">
-            <i class="ri-sun-line material-icons sun-icon"></i>
-            </span>
-            <span class="icon moon">
-              <i class="ri-moon-foggy-line material-icons moon"></i>
-            </span>
-          </span>
-        </label>
+                <!-- DARK MODE -->
+          <label class="theme-switch" aria-label="Toggle dark mode">
+            <input type="checkbox" id="themeToggle">
 
+            <span class="theme-slider">
+
+              <span class="theme-icon theme-sun">
+                <i class="ri-sun-line"></i>
+              </span>
+
+              <span class="theme-icon theme-moon">
+                <i class="ri-moon-foggy-line"></i>
+              </span>
+
+              <span class="theme-thumb"></span>
+
+            </span>
+          </label>
 
           <!-- client PROFILE -->
 
@@ -357,7 +318,7 @@
           
 
               <span class="client-avatar" >
-                <h5 id="usernameInitials"></h5>
+                <h5 id="usernameInitials">GU</h5>
               </span>
 
               <span class="client-profile-info">
@@ -390,9 +351,7 @@
 
                 <div>
 
-                  <strong>clientistrator</strong>
-
-                  <span>Super client</span>
+                  <strong>User Menu</strong>
 
                 </div>
 
@@ -400,12 +359,17 @@
 
               <div class="client-profile-menu-divider"></div>
 
-              <a href="settings.html">
+               <a href="./bundleProfile.html">
+                <i class="ri-settings-3-line"></i>
+                <span>My profile</span>
+              </a>
+
+              <a href="./bundelSettings.html">
                 <i class="ri-settings-3-line"></i>
                 <span>Settings</span>
               </a>
 
-              <a href="../index.html">
+              <a href="#">
                 <i class="ri-store-2-line"></i>
                 <span>View Store</span>
               </a>
@@ -423,34 +387,164 @@
 
           </div>
 
+
             <button
             class="client-menu-button"
-            id="sidebarToggle"
+            id="appSidebarToggle"
             aria-label="Open sidebar"
           >
             <i class="ri-menu-line"></i>
           </button>
+        </div>
+    </header>
+    <main class="container">
+      <section class="app-aside">
+          <!---== SIDEBAR ----->
+      <!-- NAVIGATION -->
+
+      <nav class="client-nav">
+
+        <div class="client-nav-section">
+
+          <span class="client-nav-label">
+          Panel  Overview
+          </span>
+
+          <a href="index.html" class="client-nav-link active">
+            <i class="ri-home-4-line material-icons c1"></i>
+            <span>Home</span>
+          </a>
+
+
+            <a class="client-nav-link " id="adminAccessLink1" style="display: none;">
+            <i class="ri-dashboard-3-line material-icons c2"></i>
+            <span>Admin Dashboard</span>
+          </a>
+
+
+            <a"  class="client-nav-link" id="agentAccessLink2" style="display: none;">
+            <i class="ri-vip-crown-line material-icons c3"></i>
+            <span>Exclusive Page</span>
+          </a>
+
 
         </div>
 
-</header>
 
 
+        
+      
+
+         
+
+         
+
+        
+        <div class="client-nav-section">
+
+          <span class="client-nav-label">
+            Quick links
+          </span>
 
 
+            <a href="./afa.html" class="client-nav-link">
+            <i class="ri-user-follow-line material-icons c5"></i>
+            <span>AFA Registration</span>
+          </a>
 
-    <div class="main-grid-container">
+          <a href="./vouchers.html" class="client-nav-link">
+            <i class="ri-ticket-2-line material-icons c7"></i>
+            <span>Vouchers Shop</span>
+          </a>
+
+           <a href="./pay.html" class="client-nav-link">
+            <i class="ri-price-tag-3-line material-icons c4"></i>
+            <span>Get discount</span>
+          </a>
 
 
+          
+           <a href="./notification.html" class="client-nav-link">
+            <i class="ri-notification-3-line material-icons c5"></i>
+            <span>Notifications</span>
+          </a>
 
-
-
-
-
-      <div class="grid-container-main">
+        
 
       
-<!-- ==========================================
+        </div>
+
+
+        <div class="client-nav-section">
+
+          <span class="client-nav-label">
+            Coming soon!
+          </span>
+
+          <a href="#" class="client-nav-link">
+            <i class="ri-book-2-line material-icons c8"></i>
+            <span>Ebooks</span>
+          </a>
+
+          <a href="#" class="client-nav-link">
+            <i class="ri-store-2-line material-icons c9"></i>
+            <span>Get Store</span>
+          </a>
+
+
+
+        </div>
+
+
+        <div class="client-nav-section" >
+
+          <span class="client-nav-label">
+            Terms of Service
+          </span>
+
+
+          <a href="./bundlesInfo.html" class="client-nav-link">
+            <i class="ri-information-line material-icons c6"></i>
+            <span>Bundle info</span>
+          </a>
+
+            <a href="./terms.html" class="client-nav-link">
+            <i class="ri-file-text-line material-icons c3"></i>
+            <span>Terms & conditions</span>
+          </a>
+
+
+          <a href="./settings.html" class="client-nav-link" style="display: none;">
+            <i class="ri-settings-3-line material-icons c2"></i>
+            <span>Settings</span>
+          </a>
+
+        </div>
+
+      </nav>
+
+
+      <!-- SIDEBAR FOOTER -->
+
+      <div class="client-sidebar-footer">
+
+        <a href="./login.html" class="client-store-link">
+          <i class="ri-login-box-line"></i>
+          <span>Login</span>
+        </a>
+
+      </div>
+
+       
+      </section>
+      <section class="app-main">
+        <div class="app-main-grid">
+          <section class="main-grid-left">
+            <!---CARD CONTAINER------>
+            <div class="main-card" id="scrollContainer">
+      <div class="card-container">
+
+        <!-- ==========================================
      NOTIFICATION CENTER
 ========================================== -->
 
@@ -803,6 +897,7 @@
 
 </section>
 
+      </div>
 
 
 
@@ -838,19 +933,6 @@
 
 
 
-<section class="foot">
-   <div class="foot-content">
-    <div class="cop-right">
-        <p style="text-align:center;color:#888;font-size:14px;">© 2026 Ecodata. All rights reserved.
-      </p>
-    </div>
-      <small class="powered">
-        
-      <strong>Powered by:</strong>   IA E-Business 
-    </small>
-  
-   </div>
-  </section>
 
 
 
@@ -936,237 +1018,196 @@
 
 
 
-
- <!-----BOTTOM-NAVBAR----->
- 
-
-
-      </div>
-
-
-      
-     
+    </div>
+          </section>
+          <section class="main-grid-right">
+            
 
    <!-- ==========================================
      PREMIUM OFFERS
 ========================================== -->
 
-<aside class="ads-container-right premium-offers">
-<div class="ads-wrapper">
-  <!-- SECTION HEADER -->
-  <div class="side-title premium-offers-header">
-    <div class="side-title-content">
-      <span class="premium-eyebrow">
-        <i class="ri-sparkling-2-line"></i>
-        EXCLUSIVE
-      </span>
+      <aside class="ads-container-right premium-offers">
+      <div class="ads-wrapper">
+        <!-- SECTION HEADER -->
+        <div class="side-title premium-offers-header">
+          <div class="side-title-content">
+            <span class="premium-eyebrow">
+              <i class="ri-sparkling-2-line"></i>
+              EXCLUSIVE
+            </span>
 
-      <h2>Premium Offers</h2>
+            <h2>Premium Offers</h2>
 
-      <p>Unlock more ways to save and grow.</p>
-    </div>
+            <p>Unlock more ways to save and grow.</p>
+          </div>
 
-    <div class="premium-header-icon">
-      <i class="ri-vip-crown-2-line"></i>
-    </div>
+          <div class="premium-header-icon">
+            <i class="ri-vip-crown-2-line"></i>
+          </div>
+        </div>
+
+
+        <!-- ==========================================
+            AGENT UPGRADE
+        =========================================== -->
+
+        <div class="agent-upgrade-wrapper premium-offer-card">
+
+          <div class="agent-upgrade premium-agent-card">
+
+            <div class="premium-card-top">
+
+              <div class="premium-card-icon">
+                <img
+                  src="./css/icons/agent.png"
+                  alt="Agent"
+                  loading="lazy"
+                >
+              </div>
+
+              <span class="premium-card-badge">
+                <i class="ri-price-tag-3-line"></i>
+                GHS 50
+              </span>
+
+            </div>
+
+
+            <div class="premium-card-content">
+
+              <span class="premium-card-label">
+                RESELLER ACCESS
+              </span>
+
+              <h3>Join for Exclusive Benefits</h3>
+
+              <p>
+                Unlock discounted prices for personal use or reselling.
+                Register once and start saving or earning more.
+              </p>
+
+            </div>
+
+
+            <div class="premium-card-footer">
+
+              <div class="premium-benefit">
+                <i class="ri-checkbox-circle-fill"></i>
+                <span>Discounted prices</span>
+              </div>
+
+              <div class="premium-benefit">
+                <i class="ri-checkbox-circle-fill"></i>
+                <span>Reselling opportunities</span>
+              </div>
+
+            </div>
+
+
+            <button
+              type="button"
+              class="premium-action-btn"
+              onclick="goToPayment()"
+            >
+              <span>Upgrade Now</span>
+              <i class="ri-arrow-right-line"></i>
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- ==========================================
+            ONLINE STORE
+        =========================================== -->
+
+        <div class="agent-upgrade-wrapper premium-offer-card">
+
+          <div class="agent-upgrade premium-store-card">
+
+            <div class="premium-card-top">
+
+              <div class="premium-card-icon">
+                <img
+                  src="./css/uiIcons/store.png"
+                  alt="Online Store"
+                  loading="lazy"
+                >
+              </div>
+
+              <span class="premium-card-badge coming-soon">
+                Coming Soon
+              </span>
+
+            </div>
+
+
+            <div class="premium-card-content">
+
+              <span class="premium-card-label">
+                SELL ONLINE
+              </span>
+
+              <h3>Get Your Online Store</h3>
+
+              <p>
+                Create your own online store, showcase your products
+                and receive orders directly through WhatsApp.
+              </p>
+
+            </div>
+
+
+            <div class="premium-card-footer">
+
+              <div class="premium-benefit">
+                <i class="ri-checkbox-circle-fill"></i>
+                <span>Online product showcase</span>
+              </div>
+
+              <div class="premium-benefit">
+                <i class="ri-checkbox-circle-fill"></i>
+                <span>WhatsApp orders</span>
+              </div>
+
+            </div>
+
+
+            <button
+              type="button"
+              class="premium-action-btn premium-action-disabled"
+              title="Coming Soon!"
+              disabled
+            >
+              <span>Get Store</span>
+              <i class="ri-arrow-right-line"></i>
+            </button>
+
+          </div>
+
+        </div>
+      </div>
+      </aside>
+          </section>
+        </div>
+      </section>
+    </main>
+   
   </div>
-
-
-  <!-- ==========================================
-       AGENT UPGRADE
-  =========================================== -->
-
-  <div class="agent-upgrade-wrapper premium-offer-card">
-
-    <div class="agent-upgrade premium-agent-card">
-
-      <div class="premium-card-top">
-
-        <div class="premium-card-icon">
-          <img
-            src="./css/icons/agent.png"
-            alt="Agent"
-            loading="lazy"
-          >
-        </div>
-
-        <span class="premium-card-badge">
-          <i class="ri-price-tag-3-line"></i>
-          GHS 50
-        </span>
-
-      </div>
-
-
-      <div class="premium-card-content">
-
-        <span class="premium-card-label">
-          RESELLER ACCESS
-        </span>
-
-        <h3>Join for Exclusive Benefits</h3>
-
-        <p>
-          Unlock discounted prices for personal use or reselling.
-          Register once and start saving or earning more.
-        </p>
-
-      </div>
-
-
-      <div class="premium-card-footer">
-
-        <div class="premium-benefit">
-          <i class="ri-checkbox-circle-fill"></i>
-          <span>Discounted prices</span>
-        </div>
-
-        <div class="premium-benefit">
-          <i class="ri-checkbox-circle-fill"></i>
-          <span>Reselling opportunities</span>
-        </div>
-
-      </div>
-
-
-      <button
-        type="button"
-        class="premium-action-btn"
-        onclick="goToPayment()"
-      >
-        <span>Upgrade Now</span>
-        <i class="ri-arrow-right-line"></i>
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <!-- ==========================================
-       ONLINE STORE
-  =========================================== -->
-
-  <div class="agent-upgrade-wrapper premium-offer-card">
-
-    <div class="agent-upgrade premium-store-card">
-
-      <div class="premium-card-top">
-
-        <div class="premium-card-icon">
-          <img
-            src="./css/uiIcons/store.png"
-            alt="Online Store"
-            loading="lazy"
-          >
-        </div>
-
-        <span class="premium-card-badge coming-soon">
-          Coming Soon
-        </span>
-
-      </div>
-
-
-      <div class="premium-card-content">
-
-        <span class="premium-card-label">
-          SELL ONLINE
-        </span>
-
-        <h3>Get Your Online Store</h3>
-
-        <p>
-          Create your own online store, showcase your products
-          and receive orders directly through WhatsApp.
-        </p>
-
-      </div>
-
-
-      <div class="premium-card-footer">
-
-        <div class="premium-benefit">
-          <i class="ri-checkbox-circle-fill"></i>
-          <span>Online product showcase</span>
-        </div>
-
-        <div class="premium-benefit">
-          <i class="ri-checkbox-circle-fill"></i>
-          <span>WhatsApp orders</span>
-        </div>
-
-      </div>
-
-
-      <button
-        type="button"
-        class="premium-action-btn premium-action-disabled"
-        title="Coming Soon!"
-        disabled
-      >
-        <span>Get Store</span>
-        <i class="ri-arrow-right-line"></i>
-      </button>
-
-    </div>
-
-  </div>
-</div>
-</aside>
-
-
-
-    </div>
-
-</div>
-  </div>
+  
 
 
 
 
 
 
-<!---MENU-CARD-JS-->
-<script>
-document.addEventListener("DOMContentLoaded", ()=> {
- const cardToggler = document.getElementById("cardToggler");
- const secondToggler = document.getElementById("menuDarkMode");
-const cardCloser = document.getElementById("ecoDataSidebar");
-
-  // toggle menu card
-  cardToggler.addEventListener("click", function(e) {
-    e.stopPropagation();
-    if(cardCloser.classList.contains("active")){
-      cardCloser.classList.remove("active");
-    } else{
-      cardCloser.classList.add("active");
-    }
-  });
-
-  // secondToggler
-  secondToggler.addEventListener("click", function(e) {
-    e.stopPropagation();
-
-    if(secondToggler) {
-      cardCloser.classList.add("active");
-    } else {
-      cardCloser.classList.remove("active");
-    }
-  })
-
-  // when ever clicked outside?
-  window.addEventListener("click", function(e) {
-    if(!cardCloser.contains(e.target) && !cardToggler.contains(e.target)) {
-      cardCloser.classList.remove("active");
-    }
-  })
-})
-
- 
 
 
-</script>
+
+
+
 
 
 
