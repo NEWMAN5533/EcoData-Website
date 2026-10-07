@@ -27,7 +27,7 @@
     #20252e 100%
     );
 
-  --sk-backgroundDarkMode:  #12161d;
+  --sk-backgroundDarkMode:  #191b1e !important;
   --sk-shimmer-dark: linear-gradient(
     105deg,
     #1d222a 0%,
