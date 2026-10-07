@@ -41,7 +41,7 @@ p {
   --surface-bg-hover-dark: #191e25;
 
   /* Cards */
-  --card-bg-dark: #12161c;
+  --card-bg-dark: #191b1e;
   --card-bg-hover-dark: #171c23;
   --card-elevated-dark: #181d24;
 
@@ -350,7 +350,7 @@ p {
    DARK MODE
    ========================================================= */
 
-body.dark-mode {
+html.dark-mode {
 
   /* =========================
      PAGE / SURFACE

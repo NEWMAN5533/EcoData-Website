@@ -32,14 +32,14 @@ p {
   /*====NEW===ROOT====*/
 
  /* Main backgrounds */
-  --body-bg-dark: #0b0d10;
+  --body-bg-dark: #0b0d10 !important;
   --page-bg-dark: #0b0d10;
   --sidebar-bg-dark: #101318;
   --surface-bg-dark: #14181e;
   --surface-bg-hover-dark: #191e25;
 
   /* Cards */
-  --card-bg-dark: #12161c;
+  --card-bg-dark: #151719 !important;
   --card-bg-hover-dark: #171c23;
   --card-elevated-dark: #181d24;
 
