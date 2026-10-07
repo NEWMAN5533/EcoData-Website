@@ -4,6 +4,39 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
+//=================================
+// DARK MODE JS
+//=================================
+
+const themeToggle = document.getElementById("themeToggle");
+
+if (themeToggle) {
+
+  themeToggle.checked =
+    document.documentElement.classList.contains("dark-mode");
+
+  themeToggle.addEventListener("change", () => {
+
+    const isDark = themeToggle.checked;
+
+    document.documentElement.classList.toggle(
+      "dark-mode",
+      isDark
+    );
+
+    localStorage.setItem(
+      "ecoTheme",
+      isDark ? "dark" : "light"
+    );
+
+  });
+
+}
+
+
+
+
+
   /* =======================================================
      ELEMENT HELPERS
      ======================================================= */
@@ -189,7 +222,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (systemUpgradeModal) {
 
-    systemUpgradeModal.style.display = "flex";
+    systemUpgradeModal.style.display = "none";
 
   }
 
