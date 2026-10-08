@@ -449,7 +449,7 @@ BOTTOM NAVIGATION BAR STYLE CSS
 
 
     .dark-mode .bottom-navbar{
-      background:   var(--sidebar-bg-dark) !important;
+      background:   var(--card-bg-dark) !important;
       backdrop-filter: blur(18px);
       box-shadow: 0 2px 6px rgba(0,0,0,0.99);
     }
