@@ -25,6 +25,7 @@ import failedOrderCheckRouter from "./routes/failedOrderCheckRouter.js";
 
 // ecodata store routes
 import { requireAuth, initializeClerk } from "./middleware/clerkAuth.js";
+import { getAuth } from "@clerk/express";
 import createProductRouter from "./routes/product.js";
 
 
@@ -82,7 +83,7 @@ app.use("/api/creator/products", createProductRouter);
 
 // CLERK AUTHENTICATION TEST
 app.get("api/auth/me", requireAuth, (req, res) => {
-  const {userId} = req.auth;
+  const {userId} = getAuth(req);
 
   return res.status(200).json({
     success: true,
