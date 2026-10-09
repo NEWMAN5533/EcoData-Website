@@ -10,6 +10,8 @@
     "dev": "nodemon server.js"
   },
   "dependencies": {
+    "@clerk/express": "^2.1.77",
+    "@neondatabase/serverless": "^1.2.0",
     "axios": "^1.12.2",
     "body-parser": "^2.2.2",
     "cloudinary": "^2.5.1",
