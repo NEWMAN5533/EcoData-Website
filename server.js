@@ -82,7 +82,7 @@ app.use("/api/creator/products", createProductRouter);
 
 
 // CLERK AUTHENTICATION TEST
-app.get("api/auth/me", requireAuth, (req, res) => {
+app.get("/api/auth/me", requireAuth, (req, res) => {
   const {userId} = getAuth(req);
 
   return res.status(200).json({
