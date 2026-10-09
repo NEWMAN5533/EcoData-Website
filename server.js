@@ -73,7 +73,7 @@ app.use("/api/vouchers", getVoucherRouter);
 app.use("/api/vouchers", postVoucherRouter);
 
 // ecodata store upp.use()
-app.use(initializeClerk());
+app.use(initializeClerk);
 
 app.use("/api/initiate-subscription", subscriptionRouter);
 app.use("/api/create-store", storeRouter);
