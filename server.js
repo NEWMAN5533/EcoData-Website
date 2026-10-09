@@ -24,6 +24,7 @@ import postVoucherRouter from "./routes/postVoucherRouter.js";
 import failedOrderCheckRouter from "./routes/failedOrderCheckRouter.js";
 
 // ecodata store routes
+import { requireAuth, initializeClerk } from "./middleware/clerkAuth.js";
 import createProductRouter from "./routes/product.js";
 
 
@@ -72,9 +73,27 @@ app.use("/api/vouchers", getVoucherRouter);
 app.use("/api/vouchers", postVoucherRouter);
 
 // ecodata store upp.use()
+app.use(initializeClerk());
+
 app.use("/api/initiate-subscription", subscriptionRouter);
 app.use("/api/create-store", storeRouter);
 app.use("/api/creator/products", createProductRouter);
+
+
+// CLERK AUTHENTICATION TEST
+app.get("api/auth/me", requireAuth, (req, res) => {
+  const {userId} = req.auth;
+
+  return res.status(200).json({
+    success: true,
+    message: "Authentication successful,",
+    user: {
+      clerkUserId: userId
+    }
+  });
+});
+
+
 
 
 
