@@ -194,7 +194,7 @@ if (themeToggle) {
 
   if (totalCustomersOrders) {
 
-    totalCustomersOrders.textContent = "1.51K+";
+    totalCustomersOrders.textContent = "1.54K+";
 
   }
 
