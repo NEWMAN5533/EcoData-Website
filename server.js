@@ -260,7 +260,7 @@ if (
 const actualAmountGHS = actualAmountPesewas / 100;
 
 // Verify against promo, agent and normal user prices
-const priceCheck = verifySellingPrice(size, actualAmountGHS);
+const priceCheck = verifySellingPrice(network, size, actualAmountGHS);
 
 if (!priceCheck.valid) {
   return {
