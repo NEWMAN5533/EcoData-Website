@@ -1,4 +1,4 @@
-// UPDATED AT 4th/September, 2026 [BACKUP MAIN.JS]
+// UPDATED AT 16th/October, 2026 [BACKUP MAIN.JS]
 
 // --- Firebase Imports ---
 import { auth, db } from "./firebase-config.js";
@@ -164,35 +164,51 @@ async function checkRestrictions(){
 //=================================
 //  VALIDATE RECIPIENT 
 //=================================
-   async function validateRecipient(phone, offerSlug) {
-    console.log("Sending validation:", {
-      phone,
-      offerSlug
+async function validateRecipient(phone, offerSlug, network) {
+  const normalizedNetwork = String(network || "")
+    .trim()
+    .toLowerCase();
+
+  // AT and Telecel do not require MTN recipient validation
+  if (["at", "telecel"].includes(normalizedNetwork)) {
+    return {
+      success: true,
+      eligible: true,
+      skipped: true,
+      message: "Recipient validation not required for this network."
+    };
+  }
+
+  console.log("Sending validation:", {
+    phone,
+    offerSlug,
+    network: normalizedNetwork
+  });
+
+  try {
+    const response = await fetch("/api/validate-recipient", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        phone,
+        offerSlug
+      })
     });
 
-    try {
-      const response = await fetch("/api/validate-recipient", {
-        method: "POST",
-        headers: {
-          "content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          phone,
-          offerSlug
-        })
-      });
+    return await response.json();
 
-      return await response.json();
+  } catch (error) {
+    console.log("Validation Error", error);
 
-    }  catch(error){
-      console.log("Validation Error", error);
-
-      return {
-        success: false,
-        message: "Unable to verify recipient"
-      }
-   }
+    return {
+      success: false,
+      eligible: false,
+      message: "Unable to verify recipient"
+    };
   }
+}
 //=================================
 // VALIDATE RECIPIENT ENDS
 //=================================
@@ -1102,13 +1118,26 @@ async function payWithPaystack(bundle, recipient) {
 // }
 
 
+const normalizedNetwork = String(bundle.network || "")
+  .trim()
+  .toLowerCase();
 
-//  =======================
-// PROTECT PAYMENT if(not verified user)
-if(!lastValidation?.eligible){
-  showSnackBar("Recipient verification require before payment", "warning", 3000);
+const requiresRecipientValidation =
+  !["at", "telecel"].includes(normalizedNetwork);
+
+if (
+  requiresRecipientValidation &&
+  !lastValidation?.eligible
+) {
+  showSnackBar(
+    "Recipient verification required before payment",
+    "warning",
+    3000
+  );
   return;
 }
+
+
 
   if(hasActiveOrder(recipient)){
     showSnackBar("❌ Number already has an active order", "warning", 4000
@@ -1167,7 +1196,7 @@ if(!lastValidation?.eligible){
           recipient,
           packageName,
           size,
-          response.reference
+          response.reference,
         );
       },
 
@@ -1184,7 +1213,7 @@ if(!lastValidation?.eligible){
 //NEW UPDATED 21/01/2026 //
 // === SEND ORDER TO BACKEND ===
 
-async function orderBundle(network, recipient, packageName, size, reference) {
+async function orderBundle(network, recipient, packageName, size, reference, ) {
 
   try {
 
