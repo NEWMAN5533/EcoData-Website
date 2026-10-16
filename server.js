@@ -11,6 +11,7 @@ import bodyParser from "body-parser";
 import storeRouter from "./routes/storesRoute.js";
 import paystackWebhookRouter from "./routes/paystackWebhookRouter.js";
 
+import { verifySellingPrice } from "./frontend/sellingPrice.js";
 import subscriptionRouter from "./routes/subscriptionRouter.js";
 import adminRoute from "./routes/adminOrderUpdate.js";
 import syncOrderRoute from "./routes/syncOrderStatus.js";
@@ -26,12 +27,18 @@ import failedOrderCheckRouter from "./routes/failedOrderCheckRouter.js";
 // ecodata store routes
 import { requireAuth, initializeClerk } from "./middleware/clerkAuth.js";
 import { getAuth } from "@clerk/express";
+import accountRouter from "./routes/accountRoute.js";
+import profileRouter from "./routes/profileRoute.js";
+import sellerProfileRouter from "./routes/sellerProfileRoute.js";
 import createProductRouter from "./routes/product.js";
+
 
 
 // Firebase Admin
 import { admin, db } from "./firebaseAdmin.js";
 import { startOrderSyncJob } from "./cron/syncOrders.js";
+
+
 
 
 dotenv.config();
@@ -82,6 +89,8 @@ app.use("/api/creator/products", createProductRouter);
 
 
 // CLERK AUTHENTICATION TEST
+app.use("/api/account", accountRouter);
+
 app.get("/api/auth/me", requireAuth, (req, res) => {
   const {userId} = getAuth(req);
 
@@ -94,7 +103,11 @@ app.get("/api/auth/me", requireAuth, (req, res) => {
   });
 });
 
+// CHECK AUTHENTICATION ENDS
 
+// USER PROFILE ROUTE
+app.use("/api/profile", profileRouter);
+app.use("/api/seller-profile", sellerProfileRouter);
 
 
 
@@ -153,12 +166,34 @@ async function verifyPaystack(paymentReference, retries = 3) {
 // HANDLE BUY DATA REQUEST (FIXED)
 // ================================
 // Helper: common logic for buy-data (POST or GET)
-export async function handleBuyDataRequest({network, recipient, pkg, size, paymentReference }) {
-  if (!network || !recipient || !pkg || !paymentReference) {
-    return { ok: false, status: 400, body: { success: false, message: "Missing required fields" } };
+export async function handleBuyDataRequest({
+  network, 
+  recipient, 
+  pkg, 
+  size, 
+  paymentReference }) {
+
+  if (
+    !network || 
+    !recipient || 
+    !pkg || 
+    !paymentReference ||
+    size === undefined
+    ) 
+    {
+    return { 
+      ok: false, 
+      status: 400, 
+      body: { 
+        success: false, 
+        message: "Missing required fields" } 
+      };
   }
 
-  // 🚨 1. STOP DUPLICATE REQUESTS HERE
+ 
+
+
+  // 2. STOP DUPLICATE REQUESTS HERE
   if (processedOrders.has(paymentReference)) {
     return {
       ok: true,
@@ -178,7 +213,10 @@ export async function handleBuyDataRequest({network, recipient, pkg, size, payme
 
     const verification = await verifyPaystack(paymentReference);
     
-    if(verification.data.data.status !== "success"){
+    const transaction = 
+    verification?.data?.data;
+
+    if(transaction?.status !== "success"){
       return {
         ok: false,
         status: 400,
@@ -189,7 +227,63 @@ export async function handleBuyDataRequest({network, recipient, pkg, size, payme
       };
     }
 
+    if(transaction.reference !== paymentReference){
+      return {
+        ok: false,
+        status: 400,
+        body: {
+          success: false,
+          message: "Payment reference mismatch"
+        }
+      };
+    }
+
+
+// Paystack returns the transaction amount in pesewas
+const actualAmountPesewas = Number(transaction.amount);
+
+if (
+  !Number.isFinite(actualAmountPesewas) ||
+  actualAmountPesewas <= 0
+) {
+  return {
+    ok: false,
+    status: 400,
+    body: {
+      success: false,
+      message: "Invalid payment amount."
+    }
+  };
+}
+
+// Convert pesewas to Ghana cedis
+const actualAmountGHS = actualAmountPesewas / 100;
+
+// Verify against promo, agent and normal user prices
+const priceCheck = verifySellingPrice(size, actualAmountGHS);
+
+if (!priceCheck.valid) {
+  return {
+    ok: false,
+    status: 400,
+    body: {
+      success: false,
+      message: priceCheck.message
+    }
+  };
+}
+
+console.log("Approved price verified:", {
+  paymentReference,
+  priceType: priceCheck.priceType,
+  expectedPrice: priceCheck.expectedPrice,
+  actualAmountGHS
+});
+
+
     console.log("Payment verified successfully for reference:", paymentReference);
+
+
   
     // 3. Build SwiftData order payload
     const orderData = {
@@ -292,7 +386,9 @@ export async function handleBuyDataRequest({network, recipient, pkg, size, payme
 
 // POST route
 app.post("/api/buy-data", async (req, res) => {
-  const { network, recipient, package: pkg, size, paymentReference } = req.body;
+  const { network, recipient, package: pkg, size, paymentReference,
+    
+   } = req.body;
   const result = await handleBuyDataRequest({ network, recipient, pkg, size, paymentReference });
 
   console.log("🔥 handleBuyDataRequest result:", result);
