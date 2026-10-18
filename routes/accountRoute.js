@@ -113,30 +113,41 @@ accountRouter.get(
       // RETURN ACCOUNT
       // --------------------------------------
 
+      const accountType = user.role === "seller" && seller
+      ? "seller"
+      : user.role === "user" && !seller
+      ? "user"
+      : null;
+
+      if(!accountType){
+        return res.status(403).json({
+          success: false,
+          code: "ACCOUNT_PROFILE_MISMATCH",
+          message: "Your account profile needs attention. Please contact support."
+        });
+      }
+
       return res.status(200).json({
         success: true,
+        accountType,
 
         account: {
           userId: user.clerk_user_id,
           firstName: user.first_name,
           lastName: user.last_name,
           email: user.email,
-          role: user.role,
+          role: user.role
+        },
 
-          accountType: seller
-            ? "seller"
-            : "user",
-
-          seller: seller
-            ? {
-                storeName: seller.store_name,
-                status: seller.status,
-                verified: seller.seller_verified,
-                canPublish: seller.can_publish,
-                canWithdraw: seller.can_withdraw
-              }
-            : null
+        seller: seller
+        ? {
+          storeName: seller.store_name,
+          status: seller.status,
+          verified: seller.seller_verified,
+          canPublish: seller.can_publish,
+          canWithdrawal: seller.can_withdraw
         }
+        : null
       });
 
     } catch (error) {
