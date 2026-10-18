@@ -1,27 +1,116 @@
+/* =========================================================
+   ECODATA STORE — MAIN CLIENT MARKETPLACE UI
+   ========================================================= */
 
-    :root {
-  --bg-cl: #181c47f8;
-  --bg-cl-2: #1f314b;
-  --dark-cl: #0a0a0a;
-  --card-full-bg-cl: rgb(255, 145, 0);
-  --primary-cl: #fff;
-  --secondary-cl: rgb(50, 50, 190);
-  --dark-cl: #0a0a0a;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
 
- /*====NEW===ROOT====*/
-  /*====NEW===ROOT====*/
-  --darkMode-bg-cl: rgb(24, 29, 36) !important;
-  --welcome-card-bg:  #0e141b !important;
-  --background-cl-1: rgb(29, 36, 41);
-  --background-cl-2: rgb(29, 36, 41);
-  --background-cl-2: rgb(29, 36, 41);
-  /***
-  NEW ROOT
-  ***/
-  --btn-bg-cl: rgb(250, 126, 9);
-  --border-cl: rgba(243, 237, 237, 0.301);
+
+
+/* ==========================================
+   ECODATA ADMIN — SHARED STYLES
+========================================== */
+
+:root {
+
+  --admin-bg: #f6f6f6;
+  --admin-surface: #ffffff;
+  --admin-surface-soft: #fafafa;
+
+  -admin-button-bg: #2c2c2c;
+  --admin-button-scd-bg: #3b3b3b;
+
+  --admin-text: #151515;
+  --admin-text-white: #2c2c2c;
+  --admin-text-dark: #f2f2f2;
+  --admin-text-secondary: #666;
+  --admin-text-muted: #929292;
+  --bar-span: rgba(0, 128, 107, 0.829);
+
+  --admin-border: rgba(0, 0, 0, .08);
+  --admin-border-strong: rgba(0, 0, 0, .12);
+
+  --admin-icon: #666;
+
+  --admin-hover: rgba(0, 0, 0, .035);
+
+  --admin-sidebar-width: 270px;
+  --admin-topbar-height: 70px;
+  --admin-tooltip: var(--admin-surface-soft);
+
+  --admin-radius: 14px;
+  --admin-small-radius: 9px;
+
+  --admin-shadow:
+    0 2px 12px rgba(0, 0, 0, .035);
+
+
 }
 
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+small,
+span,
+strong,
+p {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+h1,h2,h3,strong{
+  color: var(--admin-text-white) !important;
+}
+
+
+
+
+/* =========================================================
+   DARK THEME
+========================================================= */
+
+:root.admin-dark{
+
+  --admin-bg:#111111;
+
+  --admin-surface:#181818;
+  --admin-surface-soft:#202020;
+  --admin-surface-hover:#252525;
+  --admin-button-bg: #cccccc;
+  --admin-button-scd-bg: #b1b1b1;
+  --admin-tooltip: var(--admin-surface-soft);
+
+  --admin-border:#2c2c2c;
+  --admin-border-strong:#383838;
+  --bar-span: rgba(10, 110, 72, 0.829);
+
+  --admin-text-white:#f2f2f2;
+  --admin-text-dark: #2c2c2c;
+  --admin-text-secondary:#c4c4c4;
+  --admin-text-muted:#e4e1e1;
+
+
+  --admin-icon:#aaaaaa;
+
+  --admin-input:#1c1c1c;
+  --admin-input-focus:#202020;
+
+  --admin-overlay:rgba(0,0,0,.72);
+
+  --admin-shadow-sm:
+    0 3px 14px rgba(0,0,0,.22);
+
+  --admin-shadow-md:
+    0 8px 25px rgba(0,0,0,.30);
+
+  --admin-shadow-lg:
+    0 18px 45px rgba(0,0,0,.42);
+
+  --admin-scrollbar:#444444;
+  --admin-scrollbar-track:#181818;
+}
 
     *{
       box-sizing: border-box;
@@ -41,7 +130,6 @@
       height: 100vh;
       overflow-x: hidden;
     }
-
 
 
 

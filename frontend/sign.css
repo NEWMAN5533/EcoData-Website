@@ -1,26 +1,71 @@
+/* =========================================================
+   ECODATA STORE — MAIN CLIENT MARKETPLACE UI
+   ========================================================= */
 
-    :root {
-  --bg-cl: #181c47f8;
-  --bg-cl-2: #1f314b;
-  --dark-cl: #0a0a0a;
-  --card-full-bg-cl: rgb(255, 145, 0);
-  --primary-cl: #fff;
-  --secondary-cl: rgb(50, 50, 190);
-  --dark-cl: #0a0a0a;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
 
- /*====NEW===ROOT====*/
-  /*====NEW===ROOT====*/
-  --darkMode-bg-cl: rgb(24, 29, 36) !important;
-  --welcome-card-bg:  #0e141b !important;
-  --background-cl-1: rgb(29, 36, 41);
-  --background-cl-2: rgb(29, 36, 41);
-  --background-cl-2: rgb(29, 36, 41);
-  /***
-  NEW ROOT
-  ***/
-  --btn-bg-cl: rgb(250, 126, 9);
-  --border-cl: rgba(243, 237, 237, 0.301);
+
+
+
+
+
+    /* =========================================
+       ECODATA USER SIGNUP
+       BUNDLED STYLES
+    ========================================= */
+
+:root {
+  --signup-bg: #f7f7f5;
+  --signup-card: #ffffff;
+  --signup-text: #171717;
+  --signup-muted: #777774;
+  --signup-border: #e5e5e2;
+  --signup-soft: #f2f2ef;
+  --div-text: #f5f5f5;
+
+  --signup-input-bg: #ffffff;
+  --signup-input-text: #171717;
+  --signup-placeholder: #999997;
+
+  --signup-button-bg: #171717;
+  --signup-button-text: #ffffff;
+
+  --signup-icon-bg: #f1f1ef;
+  --signup-icon-text: #333333;
+
+  --signup-danger: #b42318;
+  --signup-success: #18794e;
+
+  --signup-radius: 16px;
+  --signup-input-radius: 11px;
 }
+
+
+/* =========================
+   DARK MODE
+========================= */
+
+html[data-theme="dark"] {
+  --signup-bg: #111111;
+  --signup-card: #1b1b1b;
+  --signup-text: #f2f2f2;
+  --signup-muted: #999999;
+  --signup-border: #303030;
+  --signup-soft: #242424;
+  --div-text: #f1f1f1;
+
+  --signup-input-bg: #161616;
+  --signup-input-text: #f2f2f2;
+  --signup-placeholder: #777777;
+
+  --signup-button-bg: #f2f2f2;
+  --signup-button-text: #111111;
+
+  --signup-icon-bg: #292929;
+  --signup-icon-text: #eeeeee;
+}
+
+
 
 
     *{
@@ -34,7 +79,6 @@
 
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
       width: 100vw;
       margin: 0;
       padding: 0;
@@ -53,7 +97,7 @@
       margin: 0;
       padding: 0;
       overflow-y: hidden;
-      background: var(--bg-cl-2);
+      background: var(--signup-bg);
     }
 
     .signUp-container .navigation{
@@ -64,17 +108,17 @@
       left: 0;
       right: 0;
       overflow: hidden;
-      padding: 0 1.2rem;
+      padding: 0 1rem;
       align-items: center;
       justify-content: space-between;
-      background: var(--bg-cl);
-      border-bottom:  1px solid rgb(79, 101, 114);
+
+      border-bottom:  1px solid  var(--signup-border);
       z-index: 999999;
     }
 
     .navigation .navigation-left{
       display: flex;
-      width: max-content;
+      width: 50%;
       height: 100%;
       align-items: center;
       justify-content: start;
@@ -95,6 +139,199 @@
 
   
 
+.right-nav{
+  position: fixed;
+  top: .2rem;
+  right: .5rem;
+  z-index: 9999999999;
+  padding: .2rem .5rem;
+
+  overflow:hidden;
+  width: max-content;
+  
+}
+
+/** signup theme **/
+.signup-theme-toggle{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  
+  height: 40px;
+  padding: 5px 9px;
+  
+  border: 1px solid var(--signup-border);
+  border-radius: 999px;
+  
+  background: var(--signup-input-bgt);
+  color: var(--signup-muted);
+  
+  cursor: pointer;
+  
+  user-select: none;
+}
+
+.sign-theme-toggle:hover{
+  border-color: var(--signup-border);
+
+  box-sizing:  0 4px 14px rgba(0,0,0,0.07);
+}
+
+
+.signup-theme-toggle:focus-visible{
+  outline: 2px solid var(--signup-text);
+  outline-offset: 3px;
+}
+
+/*======================
+ICONS
+=====================*/
+.theme-toggle-icon{
+  width: 18px;
+  height: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  font-size: 16px;
+  line-height: 1;
+  
+
+}
+
+
+.theme-toggle-icon i{
+  font-size: 16px;;
+}
+
+
+/** ============
+TOGGLE TRACK
+==============**/
+.theme-toggle-track{
+  position: relative;
+  
+  width: 42px;
+  height: 24px;
+  
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: var(--signup-card);
+
+  border: 1px solid var(--signup-border);
+
+}
+
+/***============
+TOGGLE THUMB
+=============*/
+.theme-toggle-thumb{
+  position: absolute;
+
+  top: 2px;
+  left: 2px;
+
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--admin-scrollbar);
+  box-sizing: 0 2px 5px rgba(0,0,0,0.18);
+  
+  transition: transform .25s cubic-bezier(
+    0.4,
+    0,
+    0.2,
+    1
+  )
+}
+
+
+
+html[data-theme="dark"]
+.signup-theme-toggle{
+  background: var(--admin-bg);
+
+}
+
+html[data-theme="dark"]
+.signup-theme-toggle
+.theme-toggle-thumb{
+  transform: translateX(18px);
+  
+}
+
+
+
+html[data-theme="dark"]
+.signup-theme-toggle
+.theme-moon{
+ color: var(--admin-text);
+ opacity: 1;
+  
+}
+
+
+html[data-theme="dark"]
+.signup-theme-toggle
+.theme-sun{
+ opacity: .45;
+  
+}
+
+/**=============
+DARK MODE 
+=============**/
+
+html[data-theme="light"]
+.signup-theme-toggle
+.theme-sun{
+  opacity: 1;
+  
+}
+
+
+
+html[data-theme="light"]
+.signup-theme-toggle
+.theme-moon{
+  opacity: .45;
+  
+}
+
+
+@media screen and (max-width: 600px) {
+  .signup-theme-toggle{
+    height: 38px;
+    padding: 4px 8px;
+    gap: 6px;
+  }
+
+  .theme-toggle-track{
+    width: 40px;
+    height: 23px;
+  }
+
+  .theme-toggle-thumb{
+    width: 17px;
+    height: 17px;
+  }
+
+  html[data-theme="dark"]
+  .signup-theme-toggle
+  .theme-toggle-thumb{
+    transform: translateX(17px);
+  }
+
+  .theme-toggle-icon,
+  .theme-toggle-icon i{
+    font-size: 15px;
+  }
+}
+
+
+
 
     .signUp-container .grid-container{
       width: 100%;
@@ -104,97 +341,110 @@
       position: relative;
       justify-content: center;
       align-items: center;
-      margin-top: 3.5rem;
+      margin-top: 3rem;
     }
 
     .grid-container .sidebar{
       width: 100%;
-      max-width: 40vw;
+      max-width: 38vw;
       display: flex;
+      flex-direction: column;
       height: 100%;
+      padding: 1rem 2rem 1rem 2rem;
       position: sticky;
       align-items: center;
       justify-content: center;
       justify-items: center;
-      border-right: 1px solid  rgb(79, 101, 114);
-      background: url(./css/images/bg.jpg);
-      background-size: cover;
+      border-right: 1px solid  var(--signup-border);
+    
+    }
+
+    .sidebar-signup-card{
+      width: 100%;
+      height: 80%;
+
+        background: url(./css/images/iphone.png);
+      background-size: contain !important;
       background-position: center;
       background-repeat: no-repeat;
     }
 
-.sidebar .signup-card{
-  width: 80%;
-  height: 80%;
+
+
+    .sidebar .buy-sell-note{
+      width: 100%;
+      height: 20%;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      border-top: 1px solid var(--signup-border);
+    }
+
+
+
+
+
+
+.sidebar .signup-right-content{
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  width: 7.2rem;
+  height: 20rem;
+  position: absolute;
+  right: 1rem;
+  top: 20%;
+  left: 80%;
+  transform: translateX(-50%);
+  
+  overflow: hidden;
   align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  position: relative;
-  border: 3px solid   rgb(225, 229, 231);
-  border-radius: .8rem;
-  backdrop-filter: blur(23px);
-  background: rgba(245, 243, 243, 0.171);
+  justify-content: space-around;
+  padding: .3rem 0;
+  background: transparent;
+  border-radius: 10px;
 }
 
-.signup-card .logoImg{
-  position: relative;
-  align-items: center;
-  justify-content: center;
+
+.signup-right-content div{
   display: flex;
+  align-items: center;
   flex-direction: column;
-  gap: 0;
-  width: 90%;
-  height: 60%;
-  margin-bottom: .5rem;
+  gap: .2rem;
+  line-height: 1;
+  text-align: center;
 }
 
-.logoImg h1{
-  margin: 0;
-  color: rgb(42, 64, 66);
-
+.signup-right-content div small{
+  background: rgba(49, 49, 51, 0.384);
+  border-radius: 1.2rem;
+  font-size: 10px;
+  white-space: nowrap;
+  color: var(--div-text);
+  font-weight: 600;
+  padding: .3rem;
+  border: 2px solid var(--signup-success);
 }
 
-.signup-card .logoImg img{
-  width: 83%;
-  height: 90%;
+.signup-right-content div img{
+  width: 3rem;
+  z-index: 2;
 }
 
-.signup-card .sign-note{
-  width: 90%;
-  height: 40%;
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  padding: .2rem;
-  border: 2px solid rgb(226, 222, 222);
-  display: flex;
-  flex-direction: column;
-  border-radius: 1rem;
-  box-shadow: 0 10px 20px rgba(243, 237, 237, 0.301);
-  font-size: 1.1rem;
-  color: rgba(20, 20, 22, 0.712);
-  font-weight: 800;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
 
-.sign-note .notes{
-  width: 1005;
-  max-width: 90%;
-  white-space: wrap;
-  height: 4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  background: none;
-  color: rgb(65, 43, 2);
-  font-size: 1.3rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-weight: 500;
-}
+
+
+
+
+
+
+
+
+
 
 
 /*****
