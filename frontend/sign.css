@@ -96,6 +96,8 @@ html[data-theme="dark"] {
       flex-direction: column;
       margin: 0;
       padding: 0;
+      align-items: center;
+      justify-content: space-between;
       overflow-y: hidden;
       background: var(--signup-bg);
     }
@@ -111,9 +113,16 @@ html[data-theme="dark"] {
       padding: 0 1rem;
       align-items: center;
       justify-content: space-between;
+      background: var(--signup-bg);
 
-      border-bottom:  1px solid  var(--signup-border);
+  
       z-index: 999999;
+    }
+
+    @media screen and (min-width: 768px){
+      .signUp-container .navigation{
+        border-bottom: 1px solid var(--signup-border);
+      }
     }
 
     .navigation .navigation-left{
@@ -341,7 +350,7 @@ html[data-theme="light"]
       position: relative;
       justify-content: center;
       align-items: center;
-      margin-top: 3rem;
+      margin-top: 3.5rem;
     }
 
     .grid-container .sidebar{
