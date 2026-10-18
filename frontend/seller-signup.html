@@ -1,0 +1,1509 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up | EcoData</title>
+
+    <!--remix icons-->
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="sign.css">
+  <link rel="stylesheet" href="signup-seller.css">
+  <link rel="stylesheet" href="newSignUp.css">
+
+
+
+
+
+</head>
+<body>
+
+
+<div class="signUp-container">
+  <!----navbar--->
+  <div class="navigation">
+    <div class="navigation-left">
+      <img class="newLogo" src="./css/icons/newLogo.png" alt="" loading="lazy">
+    </div>
+   
+     <div class="right-nav">
+      <button type="button" 
+      class='signup-theme-toggle' 
+      id="signupThemeToggle" 
+      aria-label="Toggle dark mode" 
+      aria-pressed="false">
+      
+        <span class="theme-toggle-icon theme-sun">
+          <i class="ri-sun-line"></i>
+        </span>
+
+        <span class="theme-toggle-track">
+          <span class="theme-toggle-thumb"></span>
+        </span>
+
+        <span class="theme-toggle-icon theme-moon">
+            <!---theme button -->
+        <i class="ri-moon-foggy-line change-theme material-icons" ></i>
+        </span>
+
+      </button>
+
+    </div>
+  </div>
+
+
+
+<div class="grid-container" >
+
+
+
+      <!--SIDEBAR-->
+      <div class="sidebar" >
+          <div class="signup-right-content">
+          <div class="div">
+            <img src="./css/images/note.png" alt="">
+            <small>Buy & Sell </small>
+          </div>
+          <div class="div">
+            <img src="./css/images/hero2.png" alt="">
+            <small>Digital products </small>
+          </div>
+          <div class="div">
+            <img src="./css/marketsImages/com.png" alt="">
+            <small >Physical Products </small>
+          </div>
+        </div>
+       <div class="sidebar-signup-card">
+        
+      
+       
+       </div>
+      
+        <div class="buy-sell-note">
+        <h2>
+          Get your account ready to buy & sell at the same time.
+        </h2>
+        <i class="ri-shopping-bag-3-line"></i>
+       </div>
+      </div>
+
+
+
+<div class="main-main" >
+
+
+    <!---NEW SIGN-UP-->
+    <!-- =================================
+         MAIN
+    ================================== -->
+
+    <section class="seller-container">
+
+      <div class="seller-card">
+
+
+        <!-- =================================
+             ICON
+        ================================== -->
+
+        <div class="seller-icon">
+
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+
+            <path
+              d="M3 9.5
+                 5 4h14l2 5.5"
+            />
+
+            <path
+              d="M4 9.5v10
+                 a1.5 1.5 0 0 0 1.5 1.5
+                 h13
+                 A1.5 1.5 0 0 0 20 19.5
+                 v-10"
+            />
+
+            <path
+              d="M3 9.5
+                 c0 1.4 1.1 2.5 2.5 2.5
+                 S8 10.9 8 9.5
+                 c0 1.4 1.1 2.5 2.5 2.5
+                 S13 10.9 13 9.5
+                 c0 1.4 1.1 2.5 2.5 2.5
+                 S18 10.9 18 9.5
+                 c0 1.4 1.1 2.5 2.5 2.5
+                 S23 10.9 21 9.5"
+            />
+
+            <path
+              d="M9 21v-5h6v5"
+            />
+
+          </svg>
+
+        </div>
+
+
+
+        <!-- =================================
+             HEADING
+        ================================== -->
+
+        <div class="seller-heading">
+
+          <p class="seller-eyebrow">
+            ECODATA SELLER
+          </p>
+
+          <h1>
+            Start selling on EcoData
+          </h1>
+
+          <p>
+            Create your seller account and start
+            offering products, digital downloads
+            or services through the marketplace.
+          </p>
+
+        </div>
+
+
+
+        <!-- =================================
+             BENEFITS
+        ================================== -->
+
+        <div class="seller-benefits">
+
+          <div class="seller-benefit">
+
+            <div class="seller-benefit-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 3v18" />
+                <path d="M17 7.5c0-1.7-2.2-3-5-3
+                         s-5 1.3-5 3
+                         2 2.7 5 3
+                         5 .3 5 3
+                         s-2.2 3-5 3
+                         -5-1.3-5-3" />
+              </svg>
+            </div>
+
+            <span>
+              Sell products
+            </span>
+
+          </div>
+
+
+          <div class="seller-benefit">
+
+            <div class="seller-benefit-icon">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M4 5h16v14H4z"
+                />
+                <path
+                  d="M8 9h8M8 13h5"
+                />
+              </svg>
+            </div>
+
+            <span>
+              Digital downloads
+            </span>
+
+          </div>
+
+
+          <div class="seller-benefit">
+
+            <div class="seller-benefit-icon">
+              <svg viewBox="0 0 24 24">
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="8"
+                />
+                <path
+                  d="M12 8v4l3 2"
+                />
+              </svg>
+            </div>
+
+            <span>
+              Offer services
+            </span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =================================
+             MESSAGE
+        ================================== -->
+
+        <div
+          id="sellerSignupMessage"
+          class="seller-message"
+          role="alert"
+          aria-live="polite"
+        ></div>
+
+
+
+        <!-- =================================
+             FORM
+        ================================== -->
+
+        <form
+          id="sellerSignupForm"
+          novalidate
+        >
+
+
+          <!-- =================================
+               NAME
+          ================================== -->
+
+          <div class="form-row">
+
+            <div class="form-group">
+
+              <label for="sellerFirstName">
+                First name
+              </label>
+
+              <input
+                type="text"
+                id="sellerFirstName"
+                name="firstName"
+                placeholder="First name"
+                autocomplete="given-name"
+                required
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="sellerLastName">
+                Last name
+              </label>
+
+              <input
+                type="text"
+                id="sellerLastName"
+                name="lastName"
+                placeholder="Last name"
+                autocomplete="family-name"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+
+          <!-- =================================
+               STORE NAME
+          ================================== -->
+
+          <div class="form-group">
+
+            <label for="sellerStoreName">
+              Store name
+            </label>
+
+            <input
+              type="text"
+              id="sellerStoreName"
+              name="storeName"
+              placeholder="e.g. Kelly's Collections"
+              autocomplete="organization"
+              required
+            >
+
+            <small class="field-help">
+              This is the name buyers will see on your store.
+            </small>
+
+          </div>
+
+
+          <div class="form-group">
+
+  <label for="sellerPhone">
+    Phone number
+  </label>
+
+  <div class="phone-input">
+
+    <span class="phone-country">
+      +233
+    </span>
+
+    <input
+      type="tel"
+      id="sellerPhone"
+      name="phone"
+      placeholder="24 123 4567"
+      inputmode="tel"
+      autocomplete="tel"
+      required
+    >
+
+  </div>
+
+  <small class="field-help">
+    Use a phone number you can be reached on.
+  </small>
+
+</div>
+
+
+
+          <!-- =================================
+               EMAIL
+          ================================== -->
+
+          <div class="form-group">
+
+            <label for="sellerEmail">
+              Email address
+            </label>
+
+            <div class="input-wrapper">
+
+              <svg
+                class="input-icon"
+                viewBox="0 0 24 24"
+              >
+                <rect
+                  x="3"
+                  y="5"
+                  width="18"
+                  height="14"
+                  rx="2"
+                />
+
+                <polyline
+                  points="3,7 12,13 21,7"
+                />
+              </svg>
+
+              <input
+                type="email"
+                id="sellerEmail"
+                name="email"
+                placeholder="you@example.com"
+                autocomplete="email"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+
+          <!-- =================================
+               SELLER TYPE
+          ================================== -->
+
+          <div class="form-group">
+
+            <label>
+              What do you want to sell?
+            </label>
+
+            <div class="seller-type-grid">
+
+
+              <label class="seller-type-option">
+
+                <input
+                  type="checkbox"
+                  name="sellerType"
+                  value="digital"
+                  id="sellerTypeDigital"
+                >
+
+                <span class="seller-type-box">
+
+                  <span class="seller-type-check">
+                    <svg viewBox="0 0 24 24">
+                      <polyline
+                        points="5,12 10,17 19,7"
+                      />
+                    </svg>
+                  </span>
+
+                  <span class="seller-type-icon">
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M5 3h10l4 4v14H5z"
+                      />
+                      <path
+                        d="M15 3v5h5"
+                      />
+                    </svg>
+                  </span>
+
+                  <strong>
+                    Digital
+                  </strong>
+
+                  <small>
+                    Ebooks, templates, PDFs
+                  </small>
+
+                </span>
+
+              </label>
+
+
+
+              <label class="seller-type-option">
+
+                <input
+                  type="checkbox"
+                  name="sellerType"
+                  value="physical"
+                  id="sellerTypePhysical"
+                >
+
+                <span class="seller-type-box">
+
+                  <span class="seller-type-check">
+                    <svg viewBox="0 0 24 24">
+                      <polyline
+                        points="5,12 10,17 19,7"
+                      />
+                    </svg>
+                  </span>
+
+                  <span class="seller-type-icon">
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M4 8h16v12H4z"
+                      />
+                      <path
+                        d="M8 8V5h8v3"
+                      />
+                    </svg>
+                  </span>
+
+                  <strong>
+                    Physical
+                  </strong>
+
+                  <small>
+                    Clothes, accessories, goods
+                  </small>
+
+                </span>
+
+              </label>
+
+
+
+              <label class="seller-type-option">
+
+                <input
+                  type="checkbox"
+                  name="sellerType"
+                  value="service"
+                  id="sellerTypeService"
+                >
+
+                <span class="seller-type-box">
+
+                  <span class="seller-type-check">
+                    <svg viewBox="0 0 24 24">
+                      <polyline
+                        points="5,12 10,17 19,7"
+                      />
+                    </svg>
+                  </span>
+
+                  <span class="seller-type-icon">
+                    <svg viewBox="0 0 24 24">
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="8"
+                      />
+                      <path
+                        d="M12 8v4l3 2"
+                      />
+                    </svg>
+                  </span>
+
+                  <strong>
+                    Services
+                  </strong>
+
+                  <small>
+                    Skills and professional services
+                  </small>
+
+                </span>
+
+              </label>
+
+            </div>
+
+          </div>
+
+
+          <!-- =================================
+     LOCATION
+================================== -->
+
+<div class="seller-location-section">
+
+  <div class="seller-section-heading">
+
+    <span class="seller-section-icon">
+      <i class="ri-map-pin-line"></i>
+    </span>
+
+    <div>
+      <strong>Business location</strong>
+
+      <p>
+        Tell buyers where your business is based.
+      </p>
+    </div>
+
+  </div>
+
+
+ <div class="form-group">
+
+  <label>
+    Country
+  </label>
+
+  <div
+    class="custom-select"
+    id="sellerCountrySelect"
+  >
+
+    <button
+      type="button"
+      class="custom-select-trigger"
+      aria-haspopup="listbox"
+      aria-expanded="false"
+    >
+
+      <span class="custom-select-value">
+        Ghana
+      </span>
+
+      <i class="ri-arrow-down-s-line"></i>
+
+    </button>
+
+
+    <div
+      class="custom-select-options"
+      role="listbox"
+    >
+
+      <div
+        class="custom-select-option selected"
+        role="option"
+        data-value="Ghana"
+        aria-selected="true"
+      >
+        <span>Ghana</span>
+
+        <i class="ri-check-line"></i>
+      </div>
+
+    </div>
+
+  </div>
+
+  <input
+    type="hidden"
+    id="sellerCountry"
+    name="country"
+    value="Ghana"
+  >
+
+</div>
+
+
+  <div class="form-row">
+
+  <div class="form-group">
+
+  <label>
+    Region
+  </label>
+
+  <div
+    class="custom-select"
+    id="sellerRegionSelect"
+  >
+
+    <button
+      type="button"
+      class="custom-select-trigger"
+      aria-haspopup="listbox"
+      aria-expanded="false"
+    >
+
+      <span class="custom-select-value">
+        Select region
+      </span>
+
+      <i class="ri-arrow-down-s-line"></i>
+
+    </button>
+
+
+    <div
+      class="custom-select-options"
+      role="listbox"
+    >
+
+      <div
+        class="custom-select-option"
+        role="option"
+        data-value="Greater Accra"
+      >
+        <span>Greater Accra</span>
+        <i class="ri-check-line"></i>
+      </div>
+
+      <div
+        class="custom-select-option"
+        role="option"
+        data-value="Ashanti"
+      >
+        <span>Ashanti</span>
+        <i class="ri-check-line"></i>
+      </div>
+
+      <div
+        class="custom-select-option"
+        role="option"
+        data-value="Ahafo"
+      >
+        <span>Ahafo</span>
+        <i class="ri-check-line"></i>
+      </div>
+
+      <div
+        class="custom-select-option"
+        role="option"
+        data-value="Bono"
+      >
+        <span>Bono</span>
+        <i class="ri-check-line"></i>
+      </div>
+
+      <div
+        class="custom-select-option"
+        role="option"
+        data-value="Bono East"
+      >
+        <span>Bono East</span>
+        <i class="ri-check-line"></i>
+      </div>
+
+      <div
+        class="custom-select-option"
+        role="option"
+        data-value="Central"
+      >
+        <span>Central</span>
+        <i class="ri-check-line"></i>
+      </div>
+
+      <div
+        class="custom-select-option"
+        role="option"
+        data-value="Eastern"
+      >
+        <span>Eastern</span>
+        <i class="ri-check-line"></i>
+      </div>
+
+      <div
+        class="custom-select-option"
+        role="option"
+        data-value="Northern"
+      >
+        <span>Northern</span>
+        <i class="ri-check-line"></i>
+      </div>
+
+      <div
+        class="custom-select-option"
+        role="option"
+        data-value="North East"
+      >
+        <span>North East</span>
+        <i class="ri-check-line"></i>
+      </div>
+
+      <div
+        class="custom-select-option"
+        role="option"
+        data-value="Oti"
+      >
+        <span>Oti</span>
+        <i class="ri-check-line"></i>
+      </div>
+
+      <div
+        class="custom-select-option"
+        role="option"
+        data-value="Savannah"
+      >
+        <span>Savannah</span>
+        <i class="ri-check-line"></i>
+      </div>
+
+      <div
+        class="custom-select-option"
+        role="option"
+        data-value="Upper East"
+      >
+        <span>Upper East</span>
+        <i class="ri-check-line"></i>
+      </div>
+
+      <div
+        class="custom-select-option"
+        role="option"
+        data-value="Upper West"
+      >
+        <span>Upper West</span>
+        <i class="ri-check-line"></i>
+      </div>
+
+      <div
+        class="custom-select-option"
+        role="option"
+        data-value="Volta"
+      >
+        <span>Volta</span>
+        <i class="ri-check-line"></i>
+      </div>
+
+      <div
+        class="custom-select-option"
+        role="option"
+        data-value="Western"
+      >
+        <span>Western</span>
+        <i class="ri-check-line"></i>
+      </div>
+
+      <div
+        class="custom-select-option"
+        role="option"
+        data-value="Western North"
+      >
+        <span>Western North</span>
+        <i class="ri-check-line"></i>
+      </div>
+
+    </div>
+
+  </div>
+
+  <input
+    type="hidden"
+    id="sellerRegion"
+    name="region"
+    value=""
+  >
+
+</div>
+
+    <div class="form-group">
+
+      <label for="sellerCity">
+        City / Town
+      </label>
+
+      <input
+        type="text"
+        id="sellerCity"
+        name="city"
+        placeholder="e.g. Accra"
+        autocomplete="address-level2"
+        required
+      >
+
+    </div>
+
+  </div>
+
+
+  <div class="form-group">
+
+    <label for="sellerArea">
+      Area
+      <span class="optional-label">
+        Optional
+      </span>
+    </label>
+
+    <input
+      type="text"
+      id="sellerArea"
+      name="area"
+      placeholder="e.g. Madina"
+      autocomplete="address-level3"
+    >
+
+    <small class="field-help">
+      A general area is enough. Do not enter your exact
+      house address.
+    </small>
+
+  </div>
+
+</div>
+
+
+
+          <!-- =================================
+               WHATSAPP SECTION
+          ================================== -->
+
+          <div
+            id="sellerWhatsappSection"
+            class="whatsapp-section"
+          >
+
+            <div class="whatsapp-heading">
+
+              <div class="whatsapp-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                  <path
+                    d="M20 11.5
+                       a8 8 0 0 1-11.7 7
+                       L4 20l1.5-4.1
+                       A8 8 0 1 1 20 11.5Z"
+                  />
+
+                <path
+                    d="M8.5 9.2
+                      C8.8 8.7 9 8.6 9.4 8.6
+                      H10
+                      C10.2 8.6 10.4 8.8 10.5 9
+                      L11.2 10.7
+                      C11.3 11 11.2 11.2 11 11.4
+                      L10.5 12
+                  "
+                  />
+
+                </svg>
+
+              </div>
+
+              <div>
+
+                <strong>
+                  Buyer WhatsApp contact
+                </strong>
+
+                <p>
+                  Allow buyers to contact you directly
+                  about physical products.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="whatsapp-control">
+
+              <label
+                class="toggle"
+                for="sellerWhatsappEnabled"
+              >
+
+                <input
+                  type="checkbox"
+                  id="sellerWhatsappEnabled"
+                  checked
+                >
+
+                <span class="toggle-slider"></span>
+
+              </label>
+
+              <span>
+                Allow WhatsApp DMs
+              </span>
+
+            </div>
+
+
+            <div
+              id="sellerWhatsappField"
+              class="whatsapp-field"
+            >
+
+              <label for="sellerWhatsapp">
+                WhatsApp number
+              </label>
+
+              <div class="whatsapp-input">
+
+                <span class="ghana-code">
+                  +233
+                </span>
+
+                <input
+                  type="tel"
+                  id="sellerWhatsapp"
+                  name="whatsapp"
+                  placeholder="24 123 4567"
+                  inputmode="tel"
+                  autocomplete="tel"
+                >
+
+              </div>
+
+              <small>
+                Buyers will use this number to contact
+                you about your physical products.
+              </small>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- =================================
+               PASSWORD
+          ================================== -->
+
+          <div class="form-group">
+
+            <label for="sellerPassword">
+              Password
+            </label>
+
+            <div class="input-wrapper">
+
+              <svg
+                class="input-icon"
+                viewBox="0 0 24 24"
+              >
+
+                <rect
+                  x="3"
+                  y="11"
+                  width="18"
+                  height="10"
+                  rx="2"
+                />
+
+                <path
+                  d="M7 11V7a5 5 0 0 1 10 0v4"
+                />
+
+              </svg>
+
+
+              <input
+                type="password"
+                id="sellerPassword"
+                name="password"
+                placeholder="Create a password"
+                autocomplete="new-password"
+                required
+              >
+
+
+              <button
+                type="button"
+                id="sellerPasswordToggle"
+                class="password-toggle"
+                aria-label="Show password"
+              >
+
+                <svg
+                  class="eye-open"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M2 12s3.5-7 10-7
+                       10 7 10 7-3.5 7-10 7
+                       S2 12 2 12Z"
+                  />
+
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="3"
+                  />
+                </svg>
+
+
+                <svg
+                  class="eye-closed"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="m3 3 18 18" />
+
+                  <path
+                    d="M10.6 5.1A10.7 10.7 0 0 1 12 5
+                       c6.5 0 10 7 10 7
+                       a17.7 17.7 0 0 1-3.2 4.1"
+                  />
+
+                  <path
+                    d="M6.2 6.2C3.5 8.2 2 12 2 12
+                       s3.5 7 10 7
+                       c1.5 0 2.8-.3 4-.8"
+                  />
+
+                </svg>
+
+              </button>
+
+            </div>
+
+
+            <div class="password-requirements">
+
+              <span
+                id="sellerLength"
+                class="requirement"
+              >
+                <span class="requirement-dot"></span>
+                15+ characters
+              </span>
+
+              <span
+                id="sellerNumber"
+                class="requirement"
+              >
+                <span class="requirement-dot"></span>
+                One number
+              </span>
+
+              <span
+                id="sellerUppercase"
+                class="requirement"
+              >
+                <span class="requirement-dot"></span>
+                One uppercase
+              </span>
+
+            </div>
+
+          </div>
+
+          <!-- =================================
+     CONFIRM PASSWORD
+================================== -->
+
+<div class="form-group">
+
+  <label for="sellerConfirmPassword">
+    Confirm password
+  </label>
+
+  <div class="input-wrapper">
+
+    <svg
+      class="input-icon"
+      viewBox="0 0 24 24"
+    >
+      <rect
+        x="3"
+        y="11"
+        width="18"
+        height="10"
+        rx="2"
+      />
+
+      <path
+        d="M7 11V7a5 5 0 0 1 10 0v4"
+      />
+    </svg>
+
+    <input
+      type="password"
+      id="sellerConfirmPassword"
+      name="confirmPassword"
+      placeholder="Confirm your password"
+      required
+    >
+
+    <button
+      type="button"
+      class="password-toggle"
+      data-password-target="sellerConfirmPassword"
+      aria-label="Show confirm password"
+      aria-pressed="false"
+    >
+      <i class="ri-eye-line"></i>
+    </button>
+
+  </div>
+
+  <small
+    id="sellerConfirmPasswordError"
+    class="field-error"
+  ></small>
+
+</div>
+
+
+ <!-- =================================
+     SELLER AGREEMENTS
+================================== -->
+
+<div class="seller-agreements">
+
+  <label class="terms-row" for="sellerTerms">
+    <input
+      type="checkbox"
+      id="sellerTerms"
+      name="sellerTerms"
+      required
+    >
+
+    <span class="custom-checkbox"></span>
+
+    <span class="terms-text">
+      I agree to the
+      <a href="seller-terms.html" target="_blank">Seller Terms</a>
+      and understand my responsibilities as an EcoData seller.
+    </span>
+  </label>
+
+
+  <label class="terms-row" for="sellerPrivacy">
+    <input
+      type="checkbox"
+      id="sellerPrivacy"
+      name="privacyPolicy"
+      required
+    >
+
+    <span class="custom-checkbox"></span>
+
+    <span class="terms-text">
+      I agree to the
+      <a href="privacy.html" target="_blank">Privacy Policy</a>.
+    </span>
+  </label>
+
+</div>
+
+
+
+          <!-- =================================
+               SUBMIT
+          ================================== -->
+
+          <button
+            type="submit"
+            id="sellerSignupButton"
+            class="seller-signup-button"
+          >
+
+            <span class="button-text">
+              Create seller account
+            </span>
+
+            <span
+              class="button-spinner"
+              aria-hidden="true"
+            ></span>
+
+          </button>
+
+
+        </form>
+
+
+
+        <!-- =================================
+             DIVIDER
+        ================================== -->
+
+        <div class="seller-divider">
+          <span>or</span>
+        </div>
+
+
+
+        <p class="seller-footer-text">
+
+          Already have an EcoData account?
+
+          <a href="login.html">
+            Sign in
+          </a>
+
+        </p>
+
+
+
+        <!-- =================================
+             NORMAL ACCOUNT CTA
+        ================================== -->
+
+        <a
+          href="signup.html"
+          class="normal-account-cta"
+        >
+
+          <span>
+            Don't want to sell?
+          </span>
+
+          <strong>
+            Create a normal account
+          </strong>
+
+          <svg viewBox="0 0 24 24">
+
+            <line
+              x1="5"
+              y1="12"
+              x2="19"
+              y2="12"
+            />
+
+            <polyline
+              points="12,5 19,12 12,19"
+            />
+
+          </svg>
+
+        </a>
+
+
+      </div>
+
+    </section>
+
+  <!---NEW SIGN-UP-->
+
+
+
+
+ 
+
+
+
+      </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!---VERIFICATION CODE-MODAL-->
+<div class="verification-code-modal" id="codeModal" style="display: none;">
+  <div class="success-modal-content code-modal">
+    <div class="success-text-p">
+      We have sent a verification code to your email, check and use code to verify <br> your account.
+    </div>
+    <div class="verify-form">
+      <label for="Enter verification code">Verification code</label>
+    <input
+     type="text" 
+     placeholder="Enter Code"
+     id="signupVerificationCode"
+     inputmode="numeric"
+     autocomplete="one-time-code"
+     maxlength="6"
+
+     >
+    </div>
+    <button class="verifyBtn" id="verifyCodeBtn">Verify </button>
+  </div>
+ 
+</div>
+
+
+
+<!---SUCCESS MODAL-->
+<div class="verification-success-modal" id="successModal" style="display: none;">
+ <section class="success-modal-content">
+  <div class="success-icon">
+    <img src="./css/icons/completed.png" alt="" loading="lazy">
+  </div>
+  <div class="success-note-h">
+    <h2>Verified</h2>
+  </div>
+  <div class="success-text-p">
+    You have successfully verify your account
+  </div>
+
+  <button onclick="window.location.href='#'" class="browse-home-btn">
+    Browse Home
+  </button>
+ </section>
+</div>
+
+
+<!--FAILED MODAL-->
+<div class="verification-failed-modal" id="fialedModal" style="display: none;">
+  <section class="success-modal-content">
+  <div class="success-icon">
+    <img src="./css/icons/completed.png" alt="" loading="lazy">
+  </div>
+  <div class="success-note-h">
+    <h2>Failed</h2>
+  </div>
+  <div class="success-text-p">
+   Account verification  failed
+  </div>
+
+  <button class="browse-home-btn">
+    Retry
+  </button>
+ </section>
+</div>
+
+
+
+</div>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script
+  defer
+  crossorigin="anonymous"
+  src="https://enjoyed-cub-1020.clerk.accounts.dev/npm/@clerk/ui@1/dist/ui.browser.js"
+  type="text/javascript">
+</script>
+
+<script
+  defer
+  crossorigin="anonymous"
+  data-clerk-publishable-key="pk_test_ZW5qb3llZC1jdWItMTAyMC5jbGVyay5hY2NvdW50cy5kZXYk"
+  src="https://enjoyed-cub-1020.clerk.accounts.dev/npm/@clerk/clerk-js@6/dist/clerk.browser.js"
+  type="text/javascript">
+</script>
+
+
+
+<!-- Firebase Core -->
+<script type="module" src="seller-signup.js">
+
+</script>
+
+
+<!---==== GLOBAL DARK THEME JS ==========-->
+<script>
+  
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  
+ const themeToggle = document.getElementById("signupThemeToggle");
+
+    const savedTheme = localStorage.getItem("ecoDataTheme") || "light";
+
+    document.documentElement.dataset.theme = savedTheme;
+
+    function updateThemeToggle(){
+      const isDark = document.documentElement.dataset.theme === "dark";
+
+      themeToggle?.setAttribute(
+        "aria-pressed",
+        String(isDark)
+      );
+
+      themeToggle?.classList.toggle("is-dark",
+      isDark);
+    }
+
+    themeToggle.addEventListener("click", ()=> {
+      const isDark =
+      document.documentElement.dataset.theme === "dark";
+
+      const newTheme = 
+      isDark ? "light" : "dark";
+
+      document.documentElement.dataset.theme = newTheme;
+
+      localStorage.setItem("ecoDataTheme", newTheme);
+
+      updateThemeToggle();
+    });
+
+    updateThemeToggle();
+
+
+})
+
+</script>
+
+
+
+  
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
