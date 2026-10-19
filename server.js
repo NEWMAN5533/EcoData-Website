@@ -37,6 +37,8 @@ import createProductRouter from "./routes/product.js";
 // Firebase Admin
 import { admin, db } from "./firebaseAdmin.js";
 import { startOrderSyncJob } from "./cron/syncOrders.js";
+import adminTestRouter from "./routes/adminTestRoute.js";
+import adminAccessDashboardRouter from "./routes/adminDashboardRoute.js";
 
 
 
@@ -107,7 +109,10 @@ app.get("/api/auth/me", requireAuth, (req, res) => {
 
 // USER PROFILE ROUTE
 app.use("/api/profile", profileRouter);
+// SELLER PROFILE ROUTE
 app.use("/api/seller-profile", sellerProfileRouter);
+app.use("/api/admin", adminTestRouter);
+app.use("/api/admin", adminAccessDashboardRouter);
 
 
 
@@ -255,6 +260,7 @@ if (
     }
   };
 }
+
 
 // Convert pesewas to Ghana cedis
 const actualAmountGHS = actualAmountPesewas / 100;
