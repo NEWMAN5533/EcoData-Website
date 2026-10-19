@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoData | Admin Login</title>
+
+  <link rel="stylesheet" href="adminLogin.css">
+
+
+<script>
+  (() => {
+    const savedTheme = localStorage.getItem("ecoTheme");
+
+    if (savedTheme === "dark") {
+      document.documentElement.classList.add("dark-mode");
+    }
+  })();
+</script>
+
+</head>
+
+<body>
+  <main class="layout">
+
+    <section class="brand-panel">
+      <div class="brand">
+        <div class="brand-mark">
+          <img src="./css/icons/newLogo.png" alt="">
+        </div>
+        <span>Eco<span>Data Store</span></span>
+      </div>
+
+      <div>
+        <p class="eyebrow">Administrator workspace</p>
+
+        <h1>
+          Admins Platform<br>
+          <span>controls.</span>
+        </h1>
+
+        <p class="brand-copy">
+          Manage EcoData operations from one secure workspace.
+          Access is restricted to authorized administrators.
+        </p>
+
+        <div class="features">
+          <div class="feature">
+            <div class="feature-icon">⌘</div>
+            <div>
+              <strong>Centralized management</strong>
+              <small>Keep platform operations organized.</small>
+            </div>
+          </div>
+
+          <div class="feature">
+            <div class="feature-icon">↗</div>
+            <div>
+              <strong>Operational insights</strong>
+              <small>Monitor activity and platform performance.</small>
+            </div>
+          </div>
+
+          <div class="feature">
+            <div class="feature-icon">✓</div>
+            <div>
+              <strong>Protected access</strong>
+              <small>Clerk authentication and server-side authorization.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="brand-footer">EcoData · Secure Administration</p>
+    </section>
+
+
+    <!---right section-->
+    <section class="login-panel">
+      <div class="login-navbar"></div>
+
+      <p id="amdinAccessMessage" class="adminProtocol">
+        Checking administrator access...
+      </p>
+      <main id="adminDashboardContent" style="display: none;">
+         <div class="login-content">
+
+        <div class="mobile-brand brand">
+          <div class="brand-mark">
+            <img src="./css/icons/newLogo.png" alt="">
+          </div>
+          <span>Eco<span style="color:#168354">Data</span></span>
+        </div>
+
+        <div class="security-badge">◆ &nbsp; ADMIN ACCESS ONLY</div>
+
+        <h2>Admin Login</h2>
+
+        <p class="subtitle">
+          Sign in with your authorized Clerk account<br>
+          to access the admin workspace.
+        </p>
+
+        <div id="error-message" role="alert"></div>
+
+        <div id="clerk-sign-in">
+          <p class="loading">Loading secure sign-in...</p>
+        </div>
+
+        <div id="clerk-captcha"></div>
+
+        <div class="security-note">
+          <div class="icon">♧</div>
+          <div>
+            <strong>Secure authentication</strong>
+            <small>Your credentials are handled by Clerk.</small>
+          </div>
+        </div>
+
+        <div class="security-note">
+          <div class="icon">▣</div>
+          <div>
+            <strong>Restricted administrator access</strong>
+            <small>Only active admin records are authorized.</small>
+          </div>
+        </div>
+
+        <footer class="page-footer">
+          © 2026 EcoData. All rights reserved.<br>
+          SECURE ACCESS · RESPONSIBLE MANAGEMENT
+        </footer>
+
+      </div>
+      </main>
+     
+    </section>
+
+  </main>
+
+
+
+<script
+  defer
+  crossorigin="anonymous"
+  src="https://enjoyed-cub-1020.clerk.accounts.dev/npm/@clerk/ui@1/dist/ui.browser.js"
+  type="text/javascript">
+</script>
+
+<script
+  defer
+  crossorigin="anonymous"
+  data-clerk-publishable-key="pk_test_ZW5qb3llZC1jdWItMTAyMC5jbGVyay5hY2NvdW50cy5kZXYk"
+  src="https://enjoyed-cub-1020.clerk.accounts.dev/npm/@clerk/clerk-js@6/dist/clerk.browser.js"
+  type="text/javascript">
+</script>
+
+<script>
+  async function grantAdminDashboardAccess() {
+    const dashboardContent = document.getElementById("adminDashboardContent");
+    const accessMessage = document.getElementById("adminAccessMessage");
+
+    // Hide sensitive dashboard content before verification
+    if(dashboardContent){
+      dashboardContent.style.display = "none";
+    };
+
+    if(accessMessage){
+      accessMessage.textContent = "Verifying administrator access...";
+    }
+
+    try{
+      // AWAIT CLERK LOAD
+      for (let i = 0; i < 50 && !window.Clerk; i++){
+        await new Promise(resolve => setTimeout(resolve, 200));
+      }
+
+      if(!window.Clerk){
+        throw new Error("Clerk did not load.");
+      }
+
+      await window.Clerk.load();
+
+      // Require a signed-in Clerk session
+     if(!window.Clerk.user || !window.Clerk.session){
+      window.location.replace("./adminLogin.html");
+      return;
+     }
+
+     const token = await window.Clerk.session.getToken();
+
+     if(!token){
+      throw new Error("Unable to obtain a Clerk session token.");
+     }
+
+     // Backend authorization
+     const response = await fetch("/api/admin/dashboard", {
+      method: "GET",
+      headers: {
+      Authorization: `Bearer ${token}`
+      }
+     });
+
+     const data = await response.json();
+     if(response.status === 401){
+      window.location.replace("./adminLogin.html");
+      return;
+     }
+
+     if(response.status === 403){
+      if(accessMessage){
+        accessMessage.textContent = "Access denied. This account is not authorized as an administrator.";
+      }
+      return;
+     }
+
+     if(!response.ok || !data.success){
+      throw new Error(
+        data.message || "Unable to authorize the admin dashboard."
+      );
+     }
+
+
+     // Grant access (show content)
+     if(dashboardContent){
+      dashboardContent.style.display = "";
+     }
+
+     if(accessMessage){
+      accessMessage.textContent = "Administrator access Verified."
+     }
+    } catch(error){
+      console.error("Admin dashboard authorization failed.", error);
+       if(accessMessage){
+        accessMessage.textContent = "Unable to verify access. Please refresh or try again.";
+       }
+
+   
+    }
+  }
+
+  grantAdminDashboardAccess();
+</script>
+
+<script type="module" src="adminLogin.js"></script>
+
+
+</body>
+</html>
