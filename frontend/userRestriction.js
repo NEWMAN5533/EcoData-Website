@@ -184,41 +184,22 @@ onAuthStateChanged(auth, async (user) => {
           "adminAccessLink1"
         );
 
-      const adminLink2 =
+      const adminLink2 = 
+      document.getElementById("adminAccessLink2");
+
+
+
+      const agentLink1 =
         document.getElementById(
-          "agentAccessLink2"
+          "agentAccessLink1"
         );
 
-
-      const agentLinks =
-        adminLink2;
-
-
-      // ==================================================
-      // AGENT ACCESS
-      // ==================================================
-
-      if (
-        userData.isAgent === true &&
-        userData.isAdmin !== true
-      ) {
-
-        if (agentLinks) {
-
-          agentLinks.style.display =
-            "flex";
-
-        // IF verification === "true" : url with window.location.href = "";
-          agentLinks.addEventListener("click", ()=> {
-            window.location.href = "./agentPage.html";
-          });
-
-        }
-
-      }
+      const agentLink2 = 
+      document.getElementById("agentAccessLink2");
 
 
-
+    
+        
       // ==================================================
       // ADMIN ACCESS
       // ==================================================
@@ -253,6 +234,43 @@ onAuthStateChanged(auth, async (user) => {
       })
 
       }
+
+
+      // ==================================================
+      // AGENT ACCESS
+      // ==================================================
+        const agentLinks = [
+          agentLink1,
+          agentLink2
+        ];
+
+
+      if (
+        userData.isAgent === true &&
+        userData.isAdmin !== true
+      ) {
+
+        agentLinks.forEach(link => {
+          if(link){
+            link.style.display = "flex";
+          }
+        });
+
+
+           // IF verification === "true" : url with window.location.href =""
+      agentLink1.addEventListener("click", ()=> {
+        window.location.href = "./agentPage.html";
+      });
+
+      agentLink2.addEventListener("click", ()=> {
+        window.location.href = "./agentPage.html";
+      })
+
+
+      }
+
+
+
 
 
     } catch (err) {
@@ -297,48 +315,6 @@ onAuthStateChanged(auth, async (user) => {
 // LOGOUT BUTTONS
 // ======================================================
 
-const lapOutBtn =
-  document.getElementById("clientLogoutButton");
-
-
-
-// ======================================================
-// NORMAL LOGOUT
-// ======================================================
-
-if (logOutBtn) {
-
-  logOutBtn.addEventListener(
-    "click",
-    async () => {
-
-      try {
-
-        await signOut(auth);
-
-        showSnackBar(
-          "Logged out successfully!",
-          "success"
-        );
-
-      } catch (err) {
-
-        console.error(
-          "LogOut error:",
-          err
-        );
-
-        showSnackBar(
-          "Error logging out.",
-          "warning"
-        );
-
-      }
-
-    }
-  );
-
-}
 
 
 
