@@ -1,4 +1,5 @@
 import { clerkMiddleware, getAuth } from "@clerk/express";
+import sql from "../backend/db.js";
 
 /***
  * /Initialize clerk authentication
@@ -27,16 +28,54 @@ export function requireAuth(req, res, next){
 }
 
 /***
- * Required an authenticated administrator.
+ * Required an authenticated administrator,manually authenticated admin
+ * Admin access is verified against Neon on the server
  * 
- * we will implement the actual admin authorization
- * using a trusted server-site role record in a later step.
  */
 
+export async function requiredAdmin( req, res, next ){
+  try{
+    const { userId } = getAuth(req);
 
-export function requiredAdmin(req, res, next){
-  return res.status(501).json({
-    success: false,
-    message: "Administrator authorization is not configured yet.",
-  });
+    if(!userId){
+      return res.status(401).json({
+        success: false,
+        code: "AUTHENTICATION__REQUIRED",
+        message: "Please sign in to continue."
+      });
+    }
+
+    // SYNC ADMINS
+    const admins = await sql `
+    SELECT id
+    FROM ecodata_admins
+    WHERE clerk_user_id = ${ userId }
+    AND active = TRUE
+    LIMIT 1
+    `;
+
+    if(admins.length === 0){
+      return res.status(403).json({
+        success: false,
+        code: "ADMIN_ACCESS_DENIED",
+        message: "You are not authorized to access the admin area."
+      });
+    }
+
+    req.admin = {
+      id: admins[0].id,
+      clerkUserId: userId
+    };
+
+    return next();
+
+  } catch(error){
+    console.error("Admin authorization error:", error);
+
+    return res.status(500).json({
+      success: false,
+      code: "ADMIN_AUTHORIZATION_ERROR",
+      message: "Unable to verified administrator access."
+    });
+  }
 }
