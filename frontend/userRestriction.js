@@ -174,103 +174,65 @@ onAuthStateChanged(auth, async (user) => {
       }
 
 
+// ==================================================
+ // ADMIN / AGENT ACCESS
+ // ==================================================
 
-      // ==================================================
-      // ADMIN / AGENT ACCESS
-      // ==================================================
+const adminLinks = [
+  {
+    element: document.getElementById("adminAccessLink1"),
+    url: "./ecodataStoreAdmin/index.html"
+  },
+  {
+    element: document.getElementById("adminAccessLink2"),
+    url: "./agentPage.html"
+  }
+];
 
-      const adminLink1 =
-        document.getElementById(
-          "adminAccessLink1"
-        );
+const agentLinks = [
+  document.getElementById("agentAccessLink1"),
+  document.getElementById("agentAccessLink2")
+];
 
-      const adminLink2 = 
-      document.getElementById("adminAccessLink2");
+// ==================================================
+// ADMIN ACCESS
+// ==================================================
 
+if (userData.isAdmin === true) {
 
+  adminLinks.forEach(({ element, url }) => {
 
-      const agentLink1 =
-        document.getElementById(
-          "agentAccessLink1"
-        );
+    if (!element) return;
 
-      const agentLink2 = 
-      document.getElementById("agentAccessLink2");
+    element.style.display = "flex";
 
+    element.addEventListener("click", () => {
+      window.location.href = url;
+    });
 
-    
-        
-      // ==================================================
-      // ADMIN ACCESS
-      // ==================================================
+  });
 
-      const adminLinks = [
-        adminLink1,
-        adminLink2
-      ];
+}
 
+// ==================================================
+// AGENT ACCESS
+// ==================================================
 
-      if (userData.isAdmin === true) {
+else if (userData.isAgent === true) {
 
-        adminLinks.forEach(link => {
+  agentLinks.forEach(element => {
 
-          if (link) {
+    if (!element) return;
 
-            link.style.display =
-              "flex";
+    element.style.display = "flex";
 
-          }
+    element.addEventListener("click", () => {
+      window.location.href = "./agentPage.html";
+    });
 
-        });
+  });
 
-
-        // IF verification === "true" : url with window.location.href =""
-      adminLink1.addEventListener("click", ()=> {
-        window.location.href = "./ecodataStoreAdmin/index.html";
-      });
-
-      adminLink2.addEventListener("click", ()=> {
-        window.location.href = "./agentPage.html";
-      })
-
-      }
-
-
-      // ==================================================
-      // AGENT ACCESS
-      // ==================================================
-        const agentLinks = [
-          agentLink1,
-          agentLink2
-        ];
-
-
-      if (
-        userData.isAgent === true &&
-        userData.isAdmin !== true
-      ) {
-
-        agentLinks.forEach(link => {
-          if(link){
-            link.style.display = "flex";
-          }
-        });
-
-
-           // IF verification === "true" : url with window.location.href =""
-      agentLink1.addEventListener("click", ()=> {
-        window.location.href = "./agentPage.html";
-      });
-
-      agentLink2.addEventListener("click", ()=> {
-        window.location.href = "./agentPage.html";
-      })
-
-
-      }
-
-
-
+}
 
 
     } catch (err) {
