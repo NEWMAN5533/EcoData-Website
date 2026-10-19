@@ -148,7 +148,7 @@
           </a>
 
 
-            <a"  class="app-nav-link" id="agentAccessLink2" style="display: none;">
+            <a"  class="app-nav-link" id="agentAccessLink1" style="display: none;">
             <i class="ri-vip-crown-line material-icons c3"></i>
             <span>Exclusive Page</span>
           </a>
@@ -434,7 +434,7 @@
           </a>
 
 
-            <a class="client-nav-link " id="adminAccessLink1" style="display: none;">
+            <a class="client-nav-link " id="adminAccessLink2" style="display: none;">
             <i class="ri-dashboard-3-line material-icons c2"></i>
             <span>Admin Dashboard</span>
           </a>
@@ -4955,12 +4955,12 @@
       </div>
 
       <div class="bundle-price">
-        <div class="price-amt"><span class="price-cedi">GHS₵</span>46.99</div>
+        <div class="price-amt"><span class="price-cedi">GHS₵</span>47.99</div>
         <button class="buy-btn"
           data-network="telecel"
           data-value="10GB"
           data-size="10"
-          data-price="46.99"
+          data-price="47.99"
         >
         <i class="ri-shopping-cart-line buyCart"></i>
         Buy Now</button>
@@ -6537,6 +6537,89 @@
 
 
 
+<script>
+async function showAdminSidebarLink() {
+  const adminLinkAuth1 =
+    document.getElementById("adminAccessLink1");
+
+  const adminLinkAuth2 =
+    document.getElementById("adminAccessLink2");
+
+  const adminLinks = [
+    adminLinkAuth1,
+    adminLinkAuth2
+  ].filter(Boolean);
+
+  // Hide all admin links until verified.
+  if (adminLinks.length === 0) return;
+
+  adminLinks.forEach(link => {
+    link.hidden = true;
+  });
+
+  try {
+    // Wait briefly for Clerk to load.
+    for (let i = 0; i < 50 && !window.Clerk; i++) {
+      await new Promise(resolve =>
+        setTimeout(resolve, 200)
+      );
+    }
+
+    if (!window.Clerk) return;
+
+    await window.Clerk.load();
+
+    // No signed-in session means no admin link.
+    if (!window.Clerk.user || !window.Clerk.session) {
+      return;
+    }
+
+    const token =
+      await window.Clerk.session.getToken();
+
+    if (!token) return;
+
+    // Verify administrator access through the backend.
+    const response = await fetch("/api/admin/dashboard", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    if (!response.ok) return;
+
+    const data = await response.json();
+
+    if (data.success === true) {
+      adminLinks.forEach(link => {
+        link.hidden = false;
+      });
+    }
+
+  } catch (error) {
+    console.error(
+      "Admin sidebar verification failed:",
+      error
+    );
+
+    adminLinks.forEach(link => {
+      link.hidden = true;
+    });
+  }
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener(
+    "DOMContentLoaded",
+    showAdminSidebarLink,
+    { once: true }
+  );
+} else {
+  showAdminSidebarLink();
+}
+</script>
+
 
 
 <script src="styleSkeloton.js"></script>
@@ -6544,6 +6627,20 @@
 <script src="global.js"></script>
 <script src="client.js"></script>
 
+<script
+  defer
+  crossorigin="anonymous"
+  src="https://enjoyed-cub-1020.clerk.accounts.dev/npm/@clerk/ui@1/dist/ui.browser.js"
+  type="text/javascript">
+</script>
+
+<script
+  defer
+  crossorigin="anonymous"
+  data-clerk-publishable-key="pk_test_ZW5qb3llZC1jdWItMTAyMC5jbGVyay5hY2NvdW50cy5kZXYk"
+  src="https://enjoyed-cub-1020.clerk.accounts.dev/npm/@clerk/clerk-js@6/dist/clerk.browser.js"
+  type="text/javascript">
+</script>
 
 <script>
   document.addEventListener("DOMContentLoaded",()=> {
