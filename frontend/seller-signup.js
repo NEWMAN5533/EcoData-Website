@@ -716,7 +716,7 @@ verifyButton?.addEventListener("click", async event => {
     }
 
     // Save the seller profile through the Express API.
-    const response = await fetch("/api/seller-profile", {
+    const response = await fetch("https://ecodata-app.onrender.com/api/seller", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -762,7 +762,7 @@ verifyButton?.addEventListener("click", async event => {
     // Never store passwords or Clerk session tokens in localStorage.
 
     setTimeout(() => {
-      window.location.href = "seller-login.html";
+      window.location.href = "login.html";
     }, 2500);
 
   } catch (error) {
