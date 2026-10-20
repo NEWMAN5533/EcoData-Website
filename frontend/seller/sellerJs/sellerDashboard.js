@@ -2,17 +2,17 @@
  //==========================
  // DASHBOARD INITIALIZATION
  //==========================
-const SELLER_ID = "TES_SELLER";
 
 const API_BASE = "https://ecodata-app.onrender.com";
 
 const CREATOR_PRODUCTS_API =
-`${API_BASE}/api/creator/products`;
+`${API_BASE}/api/seller/products`;
 
 let creatorProducts = [];
 
 document.addEventListener("DOMContentLoaded",()=>{
-  loadCreatorProducts(SELLER_ID); //later user.uid
+  loadSellerProducts(); //later user.uid
+  loadSellerStoreName();
 })
 
  
@@ -649,6 +649,43 @@ document.addEventListener(
 
 
 
+async function loadSellerStoreName() {
+  const desktopName = document.getElementById("sellerProfileUsername");
+  const mobileName = document.getElementById("sellerProfileUsernameMobile");
+
+  try {
+    const response = await fetch(
+      `${API_BASE}/api/seller/profile`,
+      {
+        credentials: "include",
+        headers: {
+          Accept: "application/json"
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok || !data.success) {
+      throw new Error(data.message || "Unable to load store profile.");
+    }
+
+    const storeName = data.seller?.storeName || data.seller?.store_name;
+
+    if (!storeName) {
+      throw new Error("Store name was not returned by the API.");
+    }
+
+    if (desktopName) desktopName.textContent = storeName;
+    if (mobileName) mobileName.textContent = storeName;
+
+  } catch (error) {
+    console.error("Load seller store name error:", error);
+
+    if (desktopName) desktopName.textContent = "My Store";
+    if (mobileName) mobileName.textContent = "My Store";
+  }
+}
 
 
 // ==========================================
@@ -714,9 +751,7 @@ function formatStatus(status) {
 // ==========================================
 // LOAD CREATOR PRODUCTS
 // ==========================================
-
-async function loadCreatorProducts(sellerId) {
-
+async function loadSellerProducts() {
   const productsBody =
     document.getElementById("creatorProductsBody");
 
@@ -725,14 +760,8 @@ async function loadCreatorProducts(sellerId) {
 
   if (!productsBody) return;
 
-
   try {
-
-    // =====================================
-    // LOADING STATE
-    // =====================================
-
-        productsBody.innerHTML = `
+    productsBody.innerHTML = `
       <div class="loading-products">
         <div class="loading-spinner"></div>
         <span>Loading products...</span>
@@ -743,460 +772,207 @@ async function loadCreatorProducts(sellerId) {
       emptyBody.hidden = true;
     }
 
-
-    // =====================================
-    // VALIDATE SELLER ID
-    // =====================================
-
-    if (!sellerId) {
-
-      throw new Error(
-        "Seller account could not be identified."
-      );
-
-    }
-
-
-    // =====================================
-    // FETCH PRODUCTS
-    // =====================================
-
     const response = await fetch(
-      `${API_BASE}/api/creator/products?sellerId=${encodeURIComponent(sellerId)}`
+      SELLER_PRODUCTS_API,
+      {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          Accept: "application/json"
+        }
+      }
     );
 
-    const data =
-      await response.json();
-
+    const data = await response.json();
 
     if (!response.ok || !data.success) {
-
       throw new Error(
-        data.message ||
-        "Unable to load products."
+        data.message || "Unable to load products."
       );
-
     }
 
+    creatorProducts = Array.isArray(data.products)
+      ? data.products
+      : [];
 
-    const products =
-      data.products || [];
+    updateSellerAnalytics(creatorProducts);
 
-    creatorProducts = products;
-
-    // call
-    updateSellerAnalytics(products);
-
-
-    // =====================================
-    // NO PRODUCTS
-    // =====================================
-
-    if (products.length === 0) {
-
+    if (creatorProducts.length === 0) {
       productsBody.innerHTML = "";
 
       if (emptyBody) {
-
         emptyBody.hidden = false;
-
         emptyBody.textContent =
           "No products submitted yet.";
-
       }
 
       return;
-
     }
-
-
-    // =====================================
-    // RENDER PRODUCTS
-    // =====================================
 
     productsBody.innerHTML = "";
 
+    creatorProducts.forEach(product => {
+      const row = document.createElement("div");
+      row.className = "live-body-rowT product-row";
 
-    products.forEach(product => {
+      // Product image
+      const cover = document.createElement("small");
+      const imageUrl =
+        product.coverUrl || product.imageUrl || "";
 
-      const row =
-        document.createElement("div");
-
-      row.className =
-        "live-body-rowT product-row";
-
-
-      // ===================================
-      // COVER
-      // ===================================
-
-      const cover =
-        document.createElement("small");
-
-      if (product.coverUrl) {
-
-        const img =
-          document.createElement("img");
-
-        img.src =
-          product.coverUrl;
-
-        img.alt =
-          product.title || "Product";
-
-        img.className =
-          "product-cover";
-
-        img.loading =
-          "lazy";
-
+      if (imageUrl) {
+        const img = document.createElement("img");
+        img.src = imageUrl;
+        img.alt = product.title || "Product";
+        img.className = "product-cover";
+        img.loading = "lazy";
+        img.onerror = () => {
+          img.replaceWith(
+            Object.assign(document.createElement("span"), {
+              className: "no-cover",
+              textContent: "No image"
+            })
+          );
+        };
         cover.appendChild(img);
-
       } else {
-
         cover.innerHTML = `
           <div class="no-cover">
             <i class="ri-image-line"></i>
           </div>
         `;
-
       }
 
+      // Product title
+      const title = document.createElement("small");
+      const titleWrapper = document.createElement("div");
+      titleWrapper.className = "product-title-wrapper";
 
-      // ===================================
-      // TITLE
-      // ===================================
-      function collapseTitle(title,
-        maxWords = 2){
+      const shortTitle = document.createElement("span");
+      shortTitle.className = "product-title-short";
 
-          if(!title) return "Untitled";
+      const fullTitle = document.createElement("div");
+      fullTitle.className = "product-title-tooltip";
 
-          const words = String(title).trim().split(/\s+/);
+      const productTitle = product.title || "Untitled";
+      const words = productTitle.trim().split(/\s+/);
 
-          if(words.length <= maxWords){
-            return words.join(" ");
-          }
-          return words.slice(0, maxWords).join(" ") + "...";
-        }
-      
-       const title =
-  document.createElement("small");
+      shortTitle.textContent =
+        words.length > 2
+          ? `${words.slice(0, 2).join(" ")}...`
+          : productTitle;
 
-const titleWrapper =
-  document.createElement("div");
+      fullTitle.textContent = productTitle;
 
-titleWrapper.className =
-  "product-title-wrapper";
+      titleWrapper.append(shortTitle, fullTitle);
+      title.appendChild(titleWrapper);
 
-const shortTitle =
-  document.createElement("span");
+      // Product type
+      const type = document.createElement("small");
 
-shortTitle.className =
-  "product-title-short";
+      const productType =
+        product.digitalType ||
+        product.productFormat ||
+        product.type ||
+        product.productType ||
+        product.product_type ||
+        "-";
 
-shortTitle.textContent =
-  collapseTitle(
-    product.title || "Untitled"
-  );
+      type.textContent = formatProductType(productType);
 
-const fullTitle =
-  document.createElement("div");
-
-fullTitle.className =
-  "product-title-tooltip";
-
-fullTitle.textContent =
-  product.title || "Untitled";
-
-titleWrapper.appendChild(shortTitle);
-titleWrapper.appendChild(fullTitle);
-
-title.appendChild(titleWrapper);
-
-
-      // ===================================
-      // TYPE
-      // ===================================
-
-      const type =
-        document.createElement("small");
-
-      type.textContent =
-        formatProductType(
-          product.type ||
-          product.productType ||
-          product.product_type);
-
-          console.log("PRODUCT TYPE:",{
-            id: product.id,
-            type: product.type,
-            productTyp: product.productType
-          });
-
-
-      // ===================================
-      // PRICE
-      // ===================================
-
-      const price =
-        document.createElement("small");
-
+      // Price
+      const price = document.createElement("small");
       price.textContent =
         `GHS ${Number(product.price || 0).toFixed(2)}`;
 
-
-      // ===================================
-      // STATUS
-      // ===================================
-
-      const status =
-        document.createElement("small");
-
+      // Status
+      const status = document.createElement("small");
       const statusValue =
-        String(
-          product.status || "pending"
-        ).toLowerCase();
-
-      status.textContent =
-        formatStatus(statusValue);
-
-      status.className =
-        `status-${statusValue}`;
-
-
-      // ===================================
-      // SALES
-      // ===================================
-
-      const sales =
-        document.createElement("small");
-
-      sales.textContent =
-        Number(product.sales || 0);
-
-
-      // ===================================
-      // UPDATED AT
-      // ===================================
-
-      const updatedAt =
-        document.createElement("small");
-
-      updatedAt.textContent =
-        formatDate(product.updatedAt);
-
-
-      // ===================================
-      // DATE SUBMITTED
-      // ===================================
-
-      const createdAt =
-        document.createElement("small");
-
-      createdAt.textContent =
-        formatDate(product.createdAt);
-
-
-  // ===================================
-// ACTION MENU
-// ===================================
-
-const action =
-  document.createElement("small");
-
-action.className =
-  "product-action-cell";
-
-const actionWrapper =
-  document.createElement("div");
-
-actionWrapper.className =
-  "product-action-wrapper";
-
-
-// ================================
-// THREE-DOT BUTTON
-// ================================
-
-const button =
-  document.createElement("button");
-
-button.className =
-  "product-action-btn";
-
-button.type =
-  "button";
-
-button.dataset.productId =
-  product.id || product.productId || "";
-
-button.innerHTML =
-  `<i class="ri-more-2-fill"></i>`;
-
-
-// ================================
-// ACTION MENU
-// ================================
-
-const menu =
-  document.createElement("div");
-
-menu.className =
-  "product-action-menu";
-
-
-// Edit
-const editButton =
-  document.createElement("button");
-
-editButton.className =
-  "product-menu-item";
-
-editButton.dataset.action =
-  "edit";
-
-editButton.innerHTML = `
-  <i class="ri-edit-line"></i>
-  <span>Edit Product</span>
-`;
-
-
-// View
-const viewButton =
-  document.createElement("button");
-
-viewButton.className =
-  "product-menu-item";
-
-viewButton.dataset.action =
-  "view";
-
-viewButton.innerHTML = `
-  <i class="ri-eye-line"></i>
-  <span>View Product</span>
-`;
-
-
-// Sales
-const salesButton =
-  document.createElement("button");
-
-salesButton.className =
-  "product-menu-item";
-
-salesButton.dataset.action =
-  "sales";
-
-salesButton.innerHTML = `
-  <i class="ri-bar-chart-line"></i>
-  <span>View Sales</span>
-`;
-
-
-// Duplicate
-const duplicateButton =
-  document.createElement("button");
-
-duplicateButton.className =
-  "product-menu-item";
-
-duplicateButton.dataset.action =
-  "duplicate";
-
-duplicateButton.innerHTML = `
-  <i class="ri-file-copy-line"></i>
-  <span>Duplicate</span>
-`;
-
-
-// Divider
-const divider =
-  document.createElement("div");
-
-divider.className =
-  "product-menu-divider";
-
-
-// Delete
-const deleteButton =
-  document.createElement("button");
-
-deleteButton.className =
-  "product-menu-item delete-action";
-
-deleteButton.dataset.action =
-  "delete";
-
-deleteButton.innerHTML = `
-  <i class="ri-delete-bin-line"></i>
-  <span>Delete Product</span>
-`;
-
-
-// ================================
-// BUILD MENU
-// ================================
-
-menu.appendChild(editButton);
-menu.appendChild(viewButton);
-menu.appendChild(salesButton);
-menu.appendChild(duplicateButton);
-menu.appendChild(divider);
-menu.appendChild(deleteButton);
-
-actionWrapper.appendChild(button);
-actionWrapper.appendChild(menu);
-
-action.appendChild(actionWrapper);
-
-      // ===================================
-      // ADD CELLS
-      // ===================================
-
-      row.appendChild(cover);
-      row.appendChild(title);
-      row.appendChild(type);
-      row.appendChild(price);
-      row.appendChild(status);
-      row.appendChild(sales);
-      row.appendChild(updatedAt);
-      row.appendChild(createdAt);
-      row.appendChild(action);
-
+        String(product.status || "pending").toLowerCase();
+
+      status.textContent = formatStatus(statusValue);
+      status.className = `status-${statusValue}`;
+
+      // Sales
+      const sales = document.createElement("small");
+      sales.textContent = Number(product.sales || 0).toLocaleString();
+
+      // Updated date
+      const updatedAt = document.createElement("small");
+      updatedAt.textContent = formatDate(product.updatedAt);
+
+      // Created date
+      const createdAt = document.createElement("small");
+      createdAt.textContent = formatDate(product.createdAt);
+
+      // Action menu
+      const action = document.createElement("small");
+      action.className = "product-action-cell";
+
+      const actionWrapper = document.createElement("div");
+      actionWrapper.className = "product-action-wrapper";
+
+      const button = document.createElement("button");
+      button.className = "product-action-btn";
+      button.type = "button";
+      button.dataset.productId = String(product.id);
+      button.innerHTML = `<i class="ri-more-2-fill"></i>`;
+
+      const menu = document.createElement("div");
+      menu.className = "product-action-menu";
+
+      const actions = [
+        ["edit", "ri-edit-line", "Edit Product"],
+        ["view", "ri-eye-line", "View Product"],
+        ["sales", "ri-bar-chart-line", "View Sales"],
+        ["duplicate", "ri-file-copy-line", "Duplicate"],
+        ["delete", "ri-delete-bin-line", "Delete Product"]
+      ];
+
+      actions.forEach(([actionName, iconName, label]) => {
+        const menuButton = document.createElement("button");
+        menuButton.type = "button";
+        menuButton.className =
+          `product-menu-item${actionName === "delete" ? " delete-action" : ""}`;
+
+        menuButton.dataset.action = actionName;
+        menuButton.innerHTML =
+          `<i class="${iconName}"></i><span>${label}</span>`;
+
+        menu.appendChild(menuButton);
+      });
+
+      actionWrapper.append(button, menu);
+      action.appendChild(actionWrapper);
+
+      row.append(
+        cover,
+        title,
+        type,
+        price,
+        status,
+        sales,
+        updatedAt,
+        createdAt,
+        action
+      );
 
       productsBody.appendChild(row);
-
     });
-
-
-    // =====================================
-    // PRODUCT ACTIONS
-    // =====================================
 
     setupProductActions();
 
-
   } catch (error) {
-
-    console.error(
-      "Load creator products error:",
-      error
-    );
+    console.error("Load seller products error:", error);
 
     productsBody.innerHTML = "";
 
     if (emptyBody) {
-
       emptyBody.hidden = false;
-
       emptyBody.textContent =
-        error.message ||
-        "Unable to load products.";
-
+        error.message || "Unable to load products.";
     }
-
   }
-
 }
 
 
@@ -1452,7 +1228,7 @@ function setupProductActions() {
 
 
               // Reload products
-              await loadCreatorProducts(
+              await loadSellerProducts(
                 SELLER_ID
               );
 
@@ -2026,7 +1802,7 @@ function openEditProductModal(productId) {
 
 
           // Refresh products
-          await loadCreatorProducts(
+          await loadSellerProducts(
             SELLER_ID
           );
 
