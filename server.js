@@ -112,7 +112,7 @@ app.get("/api/auth/me", requireAuth, (req, res) => {
 // USER PROFILE ROUTE
 app.use("/api/profile", profileRouter);
 // SELLER PROFILE ROUTE
-app.use("/api/seller-profile", sellerProfileRouter);
+app.use("/api/seller", sellerProfileRouter);
 app.use("/api/seller/products", sellerProductsRouter);
 
 // ADMIN ROUTES
