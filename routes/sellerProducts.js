@@ -1,7 +1,7 @@
 import express from "express";
 import { getAuth } from "@clerk/express";
 
-import sql from "../db.js";
+import sql from "../../backend/db.js";
 import { requireAuth } from "../../middleware/clerkAuth.js";
 
 const sellerProductsRouter = express.Router();
