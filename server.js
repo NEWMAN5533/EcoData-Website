@@ -30,6 +30,7 @@ import { getAuth } from "@clerk/express";
 import accountRouter from "./routes/accountRoute.js";
 import profileRouter from "./routes/profileRoute.js";
 import sellerProfileRouter from "./routes/sellerProfileRoute.js";
+import sellerProductsRouter from "./routes/sellerProducts.js";
 import createProductRouter from "./routes/product.js";
 
 
@@ -39,6 +40,7 @@ import { admin, db } from "./firebaseAdmin.js";
 import { startOrderSyncJob } from "./cron/syncOrders.js";
 import adminTestRouter from "./routes/adminTestRoute.js";
 import adminAccessDashboardRouter from "./routes/adminDashboardRoute.js";
+
 
 
 
@@ -111,6 +113,9 @@ app.get("/api/auth/me", requireAuth, (req, res) => {
 app.use("/api/profile", profileRouter);
 // SELLER PROFILE ROUTE
 app.use("/api/seller-profile", sellerProfileRouter);
+app.use("/api/seller/products", sellerProductsRouter);
+
+// ADMIN ROUTES
 app.use("/api/admin", adminTestRouter);
 app.use("/api/admin", adminAccessDashboardRouter);
 
