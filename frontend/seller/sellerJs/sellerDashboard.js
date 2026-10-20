@@ -250,7 +250,17 @@ async function loadSellerStoreName() {
       headers: await getClerkAuthHeaders()
     });
 
-    const data = await readApiResponse(response);
+
+   const contentType = response.headers.get("content-type") || "";
+const responseText = await response.clone().text();
+
+console.log("SELLER PROFILE URL:", response.url);
+console.log("SELLER PROFILE STATUS:", response.status);
+console.log("SELLER PROFILE CONTENT-TYPE:", contentType);
+console.log("SELLER PROFILE BODY:", responseText);
+
+const data = await readApiResponse(response);
+
 
     if (!response.ok || !data.success) {
       throw new Error(
