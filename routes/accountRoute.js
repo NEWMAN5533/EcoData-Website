@@ -109,23 +109,48 @@ accountRouter.get(
           : null;
 
 
-      // --------------------------------------
-      // RETURN ACCOUNT
+
+          // --------------------------------------
+      // CLASSIFY ACCOUNT TYPE
       // --------------------------------------
 
-      const accountType = user.role === "seller" && seller
-      ? "seller"
-      : user.role === "user" && !seller
-      ? "user"
-      : null;
+      let accountType = null;
 
-      if(!accountType){
+      // Admin role comes from the database, never from the client.
+      if (user.role === "admin") {
+        accountType = "admin";
+      }
+
+      // A seller profile may exist while the user's base role
+      // remains "user". Seller status is managed separately.
+      else if (
+        seller &&
+        ["user", "seller"].includes(user.role)
+      ) {
+        accountType = "seller";
+      }
+
+      // A regular user without a seller profile.
+      else if (
+        user.role === "user" &&
+        !seller
+      ) {
+        accountType = "user";
+      }
+
+      // Reject inconsistent profiles.
+      if (!accountType) {
         return res.status(403).json({
           success: false,
           code: "ACCOUNT_PROFILE_MISMATCH",
-          message: "Your account profile needs attention. Please contact support."
+          message:
+            "Your account profile needs attention. Please contact support."
         });
       }
+
+      // --------------------------------------
+      // RETURN ACCOUNT
+      // --------------------------------------
 
       return res.status(200).json({
         success: true,
@@ -140,15 +165,16 @@ accountRouter.get(
         },
 
         seller: seller
-        ? {
-          storeName: seller.store_name,
-          status: seller.status,
-          verified: seller.seller_verified,
-          canPublish: seller.can_publish,
-          canWithdrawal: seller.can_withdraw
-        }
-        : null
+          ? {
+              storeName: seller.store_name,
+              status: seller.status,
+              verified: seller.seller_verified,
+              canPublish: seller.can_publish,
+              canWithdrawal: seller.can_withdraw
+            }
+          : null
       });
+      
 
     } catch (error) {
 
