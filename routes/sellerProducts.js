@@ -119,7 +119,7 @@ function formatProduct(product) {
 // GET /api/seller/products
 // ==========================================
 
-router.get(
+sellerProductsRouter.get(
   "/",
   requireAuth,
   loadSeller,
@@ -170,7 +170,7 @@ router.get(
 // POST /api/seller/products
 // ==========================================
 
-router.post(
+sellerProductsRouter.post(
   "/",
   requireAuth,
   loadSeller,
