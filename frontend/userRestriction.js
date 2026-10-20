@@ -185,7 +185,7 @@ const adminLinks = [
   },
   {
     element: document.getElementById("adminAccessLink2"),
-    url: "./agentPage.html"
+    url: "./ecodataStoreAdmin/index.html"
   }
 ];
 
