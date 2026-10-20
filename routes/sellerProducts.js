@@ -58,10 +58,21 @@ async function loadSeller(req, res, next) {
 // ==========================================
 
 function requirePublishPermission(req, res, next) {
-  if (!req.seller.can_publish) {
+  // Block sellers who are not approved.
+  if (req.seller.status !== "approved") {
     return res.status(403).json({
       success: false,
-      message: "Your account is not currently allowed to publish products."
+      code: "SELLER_NOT_APPROVED",
+      message: "Your seller account must be approved before you can publish products."
+    });
+  }
+
+  // Block sellers without publishing permission.
+  if (req.seller.can_publish !== true) {
+    return res.status(403).json({
+      success: false,
+      code: "PUBLISH_PERMISSION_REQUIRED",
+      message: "Your account has not been granted permission to publish products."
     });
   }
 
