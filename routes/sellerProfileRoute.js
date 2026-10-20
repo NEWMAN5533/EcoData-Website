@@ -211,40 +211,99 @@ sellerProfileRouter.post(
       }
 
 
+
+      // ==========================================
+ // GET SELLER PROFILE
+ // GET /api/seller-profile
+ // ==========================================
+
+sellerProfileRouter.get(
+  "/profile",
+  requireAuth,
+  async (req, res) => {
+    try {
+      const { userId } = getAuth(req);
+
+      if (!userId) {
+        return res.status(401).json({
+          success: false,
+          message: "Please sign in to continue."
+        });
+      }
+
+      const rows = await sql`
+        SELECT
+          store_name,
+          seller_types,
+          status,
+          seller_verified,
+          can_publish,
+          can_withdraw
+        FROM ecodata_sellers
+        WHERE clerk_user_id = ${userId}
+        LIMIT 1
+      `;
+
+      if (rows.length === 0) {
+        return res.status(404).json({
+          success: false,
+          code: "SELLER_PROFILE_NOT_FOUND",
+          message: "Please complete your seller registration."
+        });
+      }
+
+      const seller = rows[0];
+
+      return res.status(200).json({
+        success: true,
+        seller: {
+          storeName: seller.store_name,
+          store_name: seller.store_name,
+          sellerTypes: seller.seller_types,
+          status: seller.status,
+          sellerVerified: seller.seller_verified,
+          canPublish: seller.can_publish,
+          canWithdraw: seller.can_withdraw
+        }
+      });
+
+    } catch (error) {
+      console.error("Get seller profile error:", error);
+
+      return res.status(500).json({
+        success: false,
+        message: "Unable to load your seller profile."
+      });
+    }
+  }
+);
+
       // --------------------------------------
-      // SAVE GENERAL USER PROFILE
+      // SAVE USER + SELLER PROFILE ATOMICALLY
       // --------------------------------------
 
-      await sql`
+      const userQuery = sql`
         INSERT INTO ecodata_users (
           clerk_user_id,
           first_name,
           last_name,
-          email,
-          role
+          email
         )
         VALUES (
           ${userId},
           ${cleanFirstName},
           ${cleanLastName},
-          ${cleanEmail},
-          'seller'
+          ${cleanEmail}
         )
         ON CONFLICT (clerk_user_id)
         DO UPDATE SET
           first_name = EXCLUDED.first_name,
           last_name = EXCLUDED.last_name,
           email = EXCLUDED.email,
-          role = 'seller',
           updated_at = NOW()
       `;
 
-
-      // --------------------------------------
-      // SAVE SELLER PROFILE
-      // --------------------------------------
-
-      await sql`
+      const sellerQuery = sql`
         INSERT INTO ecodata_sellers (
           clerk_user_id,
           store_name,
@@ -296,6 +355,12 @@ sellerProfileRouter.post(
           privacy_policy_accepted = TRUE,
           updated_at = NOW()
       `;
+
+      await sql.transaction([
+        userQuery,
+        sellerQuery
+      ]);
+
 
 
       // --------------------------------------
