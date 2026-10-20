@@ -64,7 +64,7 @@ themeButton.addEventListener("click", ()=> {
   display: flex;
   align-items: flex-start;
   gap: 14px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   padding: 18px;
   border-radius: 14px;
   background: transparent;
@@ -78,9 +78,8 @@ themeButton.addEventListener("click", ()=> {
   flex-shrink: 0;
   width: 42px;
   height: 42px;
-  margin: 24px 0;
   border-radius: 12px;
-  background: #f1f1f1;
+  background: #949292;
   font-size: 22px;
 }
 
@@ -88,14 +87,25 @@ themeButton.addEventListener("click", ()=> {
 
 .sellerApprovalNotice h3 {
   margin: 0 0 6px;
-  font-size: 16px;
-  color: #1d1c1c;
+  font-size: 14px;
+  font-weight: 500;
+  color: #2c2b2b !important;
+}
+
+.dark-mode .sellerApprovalNotice h3 {
+  
+  color: #ebe5e5 !important;
 }
 
 .sellerApprovalNotice p {
   margin: 0;
   line-height: 1.6;
-  color: rgb(56, 55, 55);
+  color: rgb(70, 67, 67) !important;
+}
+
+.dark-mode .sellerApprovalNotice p{
+  color: rgb(146, 144, 144) !important;
+  font-weight: 600;
 }
 
 .sellerUploadForm.is-access-blocked {
