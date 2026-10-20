@@ -4,6 +4,9 @@ import { getAuth } from "@clerk/express";
 import sql from "../backend/db.js";
 import { requireAuth } from "../middleware/clerkAuth.js";
 
+import upload from "../middleware/upload.js";
+import { uploadToCloudinary } from "../services/cloudinaryUpload.js";
+
 const sellerProductsRouter = express.Router();
 
 // ==========================================
@@ -97,6 +100,13 @@ function formatProduct(product) {
     productType: product.product_type,
     product_type: product.product_type,
 
+    subtype: product.product_subtype || "",
+    productSubtype: product.product_subtype || "",
+    product_subtype: product.product_subtype || "",
+
+    youtubeUrl: product.youtube_url || "",
+    affiliateUrl: product.affiliate_url || "",
+
     price: Number(product.price),
     compareAtPrice:
       product.compare_at_price == null
@@ -145,6 +155,9 @@ sellerProductsRouter.get(
           p.slug,
           p.description,
           p.product_type,
+          p.product_subtype,
+          p.youtube_url,
+          p.affiliate_url,
           p.price,
           p.compare_at_price,
           p.stock_quantity,
@@ -186,8 +199,16 @@ sellerProductsRouter.post(
   requireAuth,
   loadSeller,
   requirePublishPermission,
+   upload.fields([
+    { name: "cover", maxCount: 1},
+    { name: "file", maxCount: 1}
+  ]),
   async (req, res) => {
     try {
+
+      const coverFile = req.files?.cover?.[0] || null;
+      const productFile = req.files?.file?.[0] || null;
+
       const {
         title,
         name,
@@ -199,7 +220,9 @@ sellerProductsRouter.post(
         stockQuantity,
         categoryId,
         imageUrl,
-        coverUrl
+        coverUrl,
+        youtubeUrl,
+        affiliateUrl
       } = req.body || {};
 
       const productName = String(name ?? title ?? "").trim();
@@ -219,12 +242,34 @@ sellerProductsRouter.post(
         });
       }
 
-      if (!["physical", "digital"].includes(rawType)) {
-        return res.status(400).json({
-          success: false,
-          message: "Product type must be physical or digital."
-        });
-      }
+    
+
+      const productTypeMap = {
+  physical: { type: "physical", subtype: "physical" },
+  digital: { type: "digital", subtype: "digital" },
+  ebook: { type: "digital", subtype: "ebook" },
+  notes: { type: "digital", subtype: "notes" },
+  video: { type: "digital", subtype: "video" },
+  templates: { type: "digital", subtype: "templates" },
+  template: { type: "digital", subtype: "templates" },
+  zip: { type: "digital", subtype: "zip" },
+  affiliate: { type: "digital", subtype: "affiliate" },
+  service: { type: "physical", subtype: "service" }
+};
+
+const mappedProductType = productTypeMap[rawType];
+
+if (!mappedProductType) {
+  return res.status(400).json({
+    success: false,
+    message: "Choose a valid product type."
+  });
+}
+
+const databaseProductType = mappedProductType.type;
+const productSubtype = mappedProductType.subtype;
+
+
 
       if (
         price === undefined ||
@@ -279,7 +324,7 @@ sellerProductsRouter.post(
         }
       }
 
-      if (rawType === "physical" && parsedStock === null) {
+      if (mappedProductType.subtype === "physical" && parsedStock === null) {
         return res.status(400).json({
           success: false,
           message: "Enter the stock quantity for a physical product."
@@ -317,24 +362,196 @@ sellerProductsRouter.post(
         }
       }
 
-      const productImage = String(
-        imageUrl ?? coverUrl ?? ""
-      ).trim();
+    // 1. Get the existing image URL
+const productImage = String(
+  imageUrl ?? coverUrl ?? ""
+).trim();
 
-      if (productImage) {
-        try {
-          const parsedUrl = new URL(productImage);
+// 2. Validate the existing image URL
+if (productImage) {
+  try {
+    const parsedUrl = new URL(productImage);
 
-          if (parsedUrl.protocol !== "https:") {
-            throw new Error("HTTPS required");
-          }
-        } catch {
-          return res.status(400).json({
-            success: false,
-            message: "The product image must be a valid HTTPS URL."
-          });
-        }
-      }
+    if (parsedUrl.protocol !== "https:") {
+      throw new Error("HTTPS required");
+    }
+  } catch {
+    return res.status(400).json({
+      success: false,
+      message: "The product image must be a valid HTTPS URL."
+    });
+  }
+}
+
+// 3. Upload the new cover image HERE
+let uploadedCoverUrl = productImage || "";
+
+if (coverFile) {
+  if (!["image/jpeg", "image/png", "image/webp", "image/gif"].includes(coverFile.mimetype)) {
+    return res.status(400).json({
+      success: false,
+      message: "The cover must be an image file."
+    });
+  }
+
+  const coverUpload = await uploadToCloudinary(
+    coverFile.buffer,
+    {
+      folder: "ecodata/products/covers",
+      resource_type: "image"
+    }
+  );
+
+  uploadedCoverUrl = coverUpload.secure_url;
+}
+
+
+if (!uploadedCoverUrl) {
+  return res.status(400).json({
+    success: false,
+    message: "Please provide a product cover image."
+  });
+}
+
+// 4. Continue with your existing slug generation and SQL INSERT
+
+
+
+// Validate YouTube and affiliate URLs.
+function validateOptionalUrl(value, allowedHosts) {
+  const url = String(value ?? "").trim();
+
+  if (!url) return null;
+
+  try {
+    const parsed = new URL(url);
+
+    if (
+      parsed.protocol !== "https:" ||
+      !allowedHosts.some(
+        host =>
+          parsed.hostname === host ||
+          parsed.hostname.endsWith(`.${host}`)
+      )
+    ) {
+      return false;
+    }
+
+    return parsed.href;
+  } catch {
+    return false;
+  }
+}
+
+const parsedYoutubeUrl = validateOptionalUrl(
+  youtubeUrl,
+  ["youtube.com", "youtu.be"]
+);
+
+
+const parsedAffiliateUrl = validateOptionalUrl(
+  affiliateUrl,
+  ["amazon.com"]
+);
+
+
+if (parsedYoutubeUrl === false) {
+  return res.status(400).json({
+    success: false,
+    message: "Enter a valid HTTPS YouTube URL."
+  });
+}
+
+
+
+if (parsedAffiliateUrl === false) {
+  return res.status(400).json({
+    success: false,
+    message: "Enter a valid HTTPS Amazon affiliate URL."
+  });
+}
+
+
+if(productSubtype === "video" && ! parsedYoutubeUrl){
+  return res.status(400).json({
+    message: "An YouTube URL is required for video products."
+  });
+}
+
+
+if(productSubtype === "affiliate" && !parsedAffiliateUrl){
+  return res.status(400).json({
+    message: "An affiliate URL is required for affiliate products."
+  });
+}
+
+
+const fileRequiredTypes = [
+  "ebook",
+  "notes",
+  "templates",
+  "zip"
+];
+
+if (fileRequiredTypes.includes(productSubtype) && !productFile) {
+  return res.status(400).json({
+    success: false,
+    message: "Please select the digital product file to upload."
+  });
+}
+
+if (productFile && !fileRequiredTypes.includes(productSubtype)) {
+  return res.status(400).json({
+    success: false,
+    message: "File uploads are only supported for ebooks, notes, templates, and ZIP products."
+  });
+}
+
+
+
+let uploadedProductFile = null;
+
+if (productFile) {
+  const allowedFileTypes = {
+    ebook: ["application/pdf"],
+    notes: ["application/pdf"],
+    templates: [
+      "application/pdf",
+      "application/zip",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    ],
+    zip: [
+      "application/zip",
+      "application/x-zip-compressed"
+    ]
+  };
+
+  const allowedMimeTypes = allowedFileTypes[productSubtype] || [];
+
+  if (!allowedMimeTypes.includes(productFile.mimetype)) {
+    return res.status(400).json({
+      success: false,
+      message: "This file format is not supported for the selected product type."
+    });
+  }
+
+  const fileUpload = await uploadToCloudinary(
+    productFile.buffer,
+    {
+      folder: "ecodata/products/files",
+      resource_type: "raw",
+      type: "authenticated"
+    }
+  );
+
+  uploadedProductFile = {
+    publicId: fileUpload.public_id,
+    resourceType: fileUpload.resource_type
+  };
+}
+
 
       // Add a suffix so products with similar names
       // do not conflict on the unique slug constraint.
@@ -360,25 +577,35 @@ sellerProductsRouter.post(
           slug,
           description,
           product_type,
+          product_subtype,
+          youtube_url,
+          affiliate_url,
           price,
           compare_at_price,
           stock_quantity,
           status,
-          image_url
+          image_url,
+          file_public_id,
+          file_resource_type
         )
-        VALUES (
-          ${req.seller.id},
-          ${parsedCategoryId},
-          ${productName},
-          ${slug},
-          ${productDescription || null},
-          ${rawType},
-          ${parsedPrice},
-          ${parsedCompareAtPrice},
-          ${parsedStock},
-          'pending',
-          ${productImage || null}
-        )
+    VALUES (
+        ${req.seller.id},
+        ${parsedCategoryId},
+        ${productName},
+        ${slug},
+        ${productDescription || null},
+        ${databaseProductType},
+        ${productSubtype},
+        ${parsedYoutubeUrl},
+        ${parsedAffiliateUrl},
+        ${parsedPrice},
+        ${parsedCompareAtPrice},
+        ${parsedStock},
+        'pending',
+        ${uploadedCoverUrl || null},
+        ${uploadedProductFile?.publicId || null},
+        ${uploadedProductFile?.resourceType || null}
+      )
         RETURNING
           id,
           seller_id,
@@ -387,12 +614,17 @@ sellerProductsRouter.post(
           slug,
           description,
           product_type,
+          product_subtype,
+          youtube_url,
+          affiliate_url,
           price,
           compare_at_price,
           stock_quantity,
           status,
           featured,
           image_url,
+          file_public_id,
+          file_resource_type,
           created_at,
           updated_at
       `;
