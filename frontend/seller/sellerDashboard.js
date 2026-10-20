@@ -247,10 +247,19 @@ async function loadSellerStoreName() {
     const response = await fetch(SELLER_PROFILE_API, {
       method: "GET",
       credentials: "include",
-      headers: {
-        Accept: "application/json"
-      }
+      headers: await getClerkAuthHeaders()
     });
+
+
+    console.log("Seller profile URL:", response.url);
+    console.log("Seller profile status:", response.status);
+    console.log("Seller profile content type:", response.headers.get(
+      "content-type"
+    ));
+
+    const responseText = await 
+    response.clone().text();
+    console.log("Seller profile response:", responseText);
 
     const data = await readApiResponse(response);
 
@@ -289,6 +298,43 @@ async function loadSellerStoreName() {
   }
 }
 
+
+async function getClerkAuthHeaders() {
+  const clerk = window.Clerk;
+
+  if (!clerk) {
+    throw new Error(
+      "Clerk is not loaded on the seller dashboard."
+    );
+  }
+
+  if (typeof clerk.load === "function") {
+    await clerk.load();
+  }
+
+  const session = clerk.session;
+
+  if (!session) {
+    throw new Error(
+      "You must sign in before accessing your seller dashboard."
+    );
+  }
+
+  const token = await session.getToken();
+
+  if (!token) {
+    throw new Error(
+      "Unable to retrieve your Clerk session token."
+    );
+  }
+
+  return {
+    Accept: "application/json",
+    Authorization: `Bearer ${token}`
+  };
+}
+
+
 // ==========================================
 // LOAD SELLER PRODUCTS
 // GET /api/seller/products
@@ -320,10 +366,8 @@ async function loadSellerProducts() {
 
     const response = await fetch(SELLER_PRODUCTS_API, {
       method: "GET",
-      credentials: "include",
-      headers: {
-        Accept: "application/json"
-      }
+      headers: await getClerkAuthHeaders(),
+      credentials: "include"
     });
 
     const data = await readApiResponse(response);
