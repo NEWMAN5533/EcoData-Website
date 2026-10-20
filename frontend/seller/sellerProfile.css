@@ -766,7 +766,7 @@ small{
 
 .nav-bar{
   width: 100vw;
-  height: 4rem;
+  height: 4rem !important;
   background: var(--color-white);
   display: flex;
   place-items: center;
@@ -834,6 +834,7 @@ small{
   display: flex;
   flex-direction: column;
   gap: 1rem !important;
+  background: var(--sidebar-bg-light);
   border-right: 1px solid rgb(226, 226, 226);
 }
 

@@ -1,3 +1,151 @@
+const SELLER_API_BASE = "https://ecodata-app.onrender.com";
+const SELLER_PROFILE_API = `${SELLER_API_BASE}/api/seller/profile`;
+
+const uploadForm1 = document.getElementById("uploadProductForm");
+const uploadButton = document.getElementById("uploadProduct");
+const approvalNotice = document.getElementById("sellerApprovalNotice");
+const approvalTitle = document.getElementById("sellerApprovalTitle");
+const approvalMessage = document.getElementById("sellerApprovalMessage");
+
+let sellerCanPublish = false;
+
+async function checkSellerPublishingPermission() {
+  try {
+   
+    const clerk = window.Clerk;
+
+if (!clerk) {
+  throw new Error(
+    "Authentication is still loading. Please refresh the page and try again."
+  );
+}
+
+if (typeof clerk.load === "function") {
+  await clerk.load();
+}
+
+    if (!clerk.session) {
+      throw new Error("Please sign in to access product uploads.");
+    }
+
+    const token = await clerk.session.getToken();
+
+    if (!token) {
+      throw new Error("Unable to verify your sign-in session.");
+    }
+
+    const response = await fetch(SELLER_PROFILE_API, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`
+      },
+      credentials: "include"
+    });
+
+    const result = await response.json();
+
+   if (!response.ok || !result.success || !result.seller) {
+  if (result.code === "SELLER_PROFILE_NOT_FOUND") {
+    throw new Error("Please complete your seller registration before uploading products.");
+  }
+
+  throw new Error(
+    result.message || "Unable to verify your seller profile."
+  );
+}
+
+    const seller = result.seller;
+
+    sellerCanPublish =
+      seller.status === "approved" &&
+      seller.canPublish === true;
+
+    if (approvalNotice) {
+      approvalNotice.hidden = sellerCanPublish;
+    }
+
+    if (approvalTitle && !sellerCanPublish) {
+      approvalTitle.textContent =
+        seller.status === "suspended"
+          ? "Seller account suspended"
+          : "Publishing access pending";
+    }
+
+    if (approvalMessage && !sellerCanPublish) {
+      approvalMessage.textContent =
+        seller.status === "suspended"
+          ? "Your seller account is suspended. Contact support for assistance."
+          : "Your seller account must be approved and publishing permission granted before you can upload products.";
+    }
+
+    if (uploadForm1) {
+      uploadForm1.classList.toggle(
+        "is-access-blocked",
+        !sellerCanPublish
+      );
+
+      uploadForm1.querySelectorAll(
+        "input, textarea, select, button"
+      ).forEach(control => {
+        control.disabled = !sellerCanPublish;
+      });
+    }
+
+    return sellerCanPublish;
+  } catch (error) {
+    sellerCanPublish = false;
+
+    if (approvalNotice) {
+      approvalNotice.hidden = false;
+    }
+
+    if (approvalTitle) {
+      approvalTitle.textContent = "Unable to verify publishing access";
+    }
+
+    if (approvalMessage) {
+      approvalMessage.textContent =
+        error.message ||
+        "Please sign in again and reload this page.";
+    }
+
+    if (uploadForm1) {
+      uploadForm1.classList.add("is-access-blocked");
+
+      uploadForm1.querySelectorAll(
+        "input, textarea, select, button"
+      ).forEach(control => {
+        control.disabled = true;
+      });
+    }
+
+    console.error("Seller publishing permission check failed:", error);
+    return false;
+  }
+}
+
+checkSellerPublishingPermission();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -54,22 +202,23 @@ window.addEventListener("click", function(e) {
 //=========================
 // PRODUCT TYPE SELECTION
 //=========================
-document.querySelectorAll(".cateSelect2").forEach(item => {
-  item.addEventListener("click",()=> {
+document.querySelectorAll(".productTypeCard").forEach(item => {
+  item.addEventListener("click", () => {
     const value = item.dataset.type;
-    const text = item.textContent.trim();
 
-    if(!value) return;
+    if (!value || !typeInput) return;
 
-    // save actual backend value
+    // Save the selected backend product type.
     typeInput.value = value;
+
+    // Show the correct product fields.
     updateProductField(value);
 
-    //show selected text
-    typeButton.textContent = text;
+    // Highlight the selected card.
+    document.querySelectorAll(".productTypeCard").forEach(card => {
+      card.classList.toggle("active", card === item);
+    });
 
-    // close sheet 
-    typeSheet.style.display = "none";
     console.log("Selected product type:", value);
   });
 });
@@ -124,7 +273,11 @@ document.querySelectorAll(".cateSelect").forEach(item => {
     categoryInput.value = value;
 
     //Show selected text
-    categoryButton.textContent = text;
+    const categoryText = document.getElementById("productCategoryText");
+
+    if(categoryText){
+      categoryText.textContent = text;
+    }
 
     //close sheet
     categorySheet.style.display = "none";
@@ -186,7 +339,7 @@ function updateProductField(type){
   if(
     type === "ebook" ||
     type === "notes" ||
-    type === "template" ||
+    type === "templates" ||
     type === "zip"
   ) {
     if(productFileGroup){
@@ -223,7 +376,22 @@ function updateProductField(type){
       affiliateUrl.required = true;
     }
   }
+
+
+//====================
+// PHYSICAL / SERVICE
+//====================
+if (type === "service") {
+  if (productFile) {
+    productFile.required = false;
+    productFile.value = "";
+  }
 }
+
+}
+
+
+
 
 //==========================
 // WATCH TYPE SELECTION
@@ -246,17 +414,29 @@ if(typeInput){
 //===================
 // Also update immediately if a type
 // has already been selected.==
-updateProductField(typeInput?.value || "ebook");
+updateProductField(typeInput?.value || "");
 
 //=======================
 // CREATOR PRODUCT UPLOAD
 //=======================
 const uploadForm = 
-document.querySelector(".ebook-submit");
+document.getElementById("uploadProductForm");
 
 if(uploadForm){
   uploadForm.addEventListener("submit", async(event) => {
     event.preventDefault();
+
+    if (!sellerCanPublish) {
+  showSnackBar(
+    "Your seller account is not approved to publish products.",
+    "error"
+  );
+  return;
+}
+
+if (uploadButton) {
+  uploadButton.disabled = true;
+}
 
     //======================
     // GET VALUE
@@ -338,13 +518,30 @@ if(uploadForm){
       description
     );
 
-    formData.append(
-      "category",
-      category
-    );
+   
+        // Map selected category slug to Neon category ID.
+    const categoryIdMap = {
+      education: "1",
+      technology: "2",
+      programming: "3",
+      engineering: "4",
+      services: "5",
+      other: "6"
+    };
+
+    const categoryId = categoryIdMap[
+      String(category).trim().toLowerCase()
+    ];
+
+    if (!categoryId) {
+      showSnackBar("Invalid product category.");
+      return;
+    }
+
+    formData.append("categoryId", categoryId);
 
     formData.append(
-      "type",
+      "productType",
       type
     );
 
@@ -388,26 +585,35 @@ if(uploadForm){
       );
     }
 
-    //=====================
-    // TEMPORARY SELLER ID
-    //=====================
-    formData.append(
-      "sellerId",
-      SELLER_ID
-    );
+
 
     //==================
     // SEND
     //==================
    try {
 
-  const response = await fetch(
-    CREATOR_PRODUCTS_API,
-    {
-      method: "POST",
-      body: formData
-    }
-  );
+ const clerk = window.Clerk;
+
+if (!clerk || !clerk.session) {
+  throw new Error("Please sign in before uploading a product.");
+}
+
+const token = await clerk.session.getToken();
+
+if (!token) {
+  throw new Error("Unable to verify your sign-in session. Please sign in again.");
+}
+
+const response = await fetch(
+  `${SELLER_API_BASE}/api/seller/products`,
+  {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`
+    },
+    body: formData
+  }
+);
 
   const result = await response.json();
 
@@ -427,20 +633,35 @@ if(uploadForm){
 
   uploadForm.reset();
 
-  // reset selectors
-  document.getElementById("productType").value = "";
-  document.getElementById("productCategory").value = "";
 
-  document.getElementById(
-    "productTypeButton"
-  ).textContent = "Product Type";
 
-  document.getElementById(
-    "productCategoryButton"
-  ).textContent = "Product Category";
+  const productCategoryInput = document.getElementById("productCategory");
 
-  // Refresh
-  loadCreatorProducts(SELLER_ID);
+  if(productCategoryInput){
+    productCategoryInput.value = "";
+  }
+
+// Reset product type selection.
+const productTypeInput = document.getElementById("productType");
+
+if (productTypeInput) {
+  productTypeInput.value = "";
+}
+
+document.querySelectorAll(".productTypeCard").forEach(card => {
+  card.classList.remove("active");
+});
+
+updateProductField("");
+
+ 
+  const categoryText  = document.getElementById("productCategoryText");
+
+  if(categoryText){
+    categoryText.textContent = "Product Category";
+  }
+
+ 
 
 } catch (error) {
 
@@ -452,6 +673,10 @@ if(uploadForm){
     "error"
   );
 
+} finally{
+  if (uploadButton) {
+    uploadButton.disabled = false;
+  }
 }
   } 
 );

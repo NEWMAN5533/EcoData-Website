@@ -1510,13 +1510,21 @@ body.dark-mode::-webkit-scrollbar{
 
   margin: 0;
 
+
   font-size: 13px;
+}
+
+.dark-mode .sellerProductsEmpty h4 {
+  color: var(--color-light) !important;
+  opacity: 1;
 }
 
 
 .sellerProductsEmpty p {
 
   margin: 5px 0 0;
+
+  color: var(--text-muted) !important;
 
   font-size: 10px;
 
