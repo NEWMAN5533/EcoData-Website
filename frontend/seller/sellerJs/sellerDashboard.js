@@ -289,6 +289,43 @@ async function loadSellerStoreName() {
   }
 }
 
+
+async function getClerkAuthHeaders() {
+  const clerk = window.Clerk;
+
+  if (!clerk) {
+    throw new Error(
+      "Clerk is not loaded on the seller dashboard."
+    );
+  }
+
+  if (typeof clerk.load === "function") {
+    await clerk.load();
+  }
+
+  const session = clerk.session;
+
+  if (!session) {
+    throw new Error(
+      "You must sign in before accessing your seller dashboard."
+    );
+  }
+
+  const token = await session.getToken();
+
+  if (!token) {
+    throw new Error(
+      "Unable to retrieve your Clerk session token."
+    );
+  }
+
+  return {
+    Accept: "application/json",
+    Authorization: `Bearer ${token}`
+  };
+}
+
+
 // ==========================================
 // LOAD SELLER PRODUCTS
 // GET /api/seller/products
@@ -320,10 +357,8 @@ async function loadSellerProducts() {
 
     const response = await fetch(SELLER_PRODUCTS_API, {
       method: "GET",
-      credentials: "include",
-      headers: {
-        Accept: "application/json"
-      }
+      headers: await getClerkAuthHeaders(),
+      credentials: "include"
     });
 
     const data = await readApiResponse(response);
@@ -1248,11 +1283,51 @@ function showDeleteConfirmation(productId) {
 // Uses your existing showSnackBar if available.
 // ==========================================
 
-function showSnackBar(message, type = "info", duration = 3000) {
-  if (typeof window.showSnackBar === "function") {
-    window.showSnackBar(message, type, duration);
-    return;
+
+  
+// SNACKBAR SECTION //
+// ===== SNACKBAR FUNCTION ===== //
+let snackbarTimeout = null;
+
+function showSnackBar(message, type = "info", duration = 4000) {
+  let snackbar = document.querySelector(".snackbar");
+
+  // Create snackbar if it doesn't exist
+  if (!snackbar) {
+    snackbar = document.createElement("div");
+    snackbar.className = "snackbar";
+
+    snackbar.innerHTML = `
+      <span class="snackbar-text"></span>
+      <div class="snackbar-progress"></div>
+    `;
+
+    document.body.appendChild(snackbar);
   }
 
-  console.log(`[${type.toUpperCase()}] ${message}`);
+  // Update text
+  snackbar.querySelector(".snackbar-text").textContent = message;
+
+  // Color by type
+  if (type === "success") snackbar.style.background = "rgba(7, 29, 26, 0.95)";
+  else if (type === "error") snackbar.style.background = "#88353f";
+  else if (type === "warning") snackbar.style.background = "#413b2a";
+  else snackbar.style.background = "rgba(7, 29, 26, 0.95)";
+
+
+  // Reset progress animation
+  const progress = snackbar.querySelector(".snackbar-progress");
+  progress.style.animation = "none";
+  void progress.offsetWidth;
+  progress.style.animation = `snackbar-progress ${duration}ms linear forwards`;
+
+  snackbar.classList.add("show");
+
+  // Clear previous timeout
+  if (snackbarTimeout) clearTimeout(snackbarTimeout);
+
+  snackbarTimeout = setTimeout(() => {
+    snackbar.classList.remove("show");
+  }, duration);
 }
+// snackbar ends
