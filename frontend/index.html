@@ -254,7 +254,12 @@
 
       <div class="app-sidebar-footer">
 
-        <a href="./login.html" class="app-store-link">
+          <a  id="userLoginAuth2" href="./Login.html" class="app-store-link">
+          <i class="ri-login-box-line"></i>
+          <span>Login</span>
+        </a>
+
+        <a id="adminLoginAuth2" href="./adminLogin.html" class="app-store-link" hidden>
           <i class="ri-login-box-line"></i>
           <span>Login</span>
         </a>
@@ -546,7 +551,12 @@
 
       <div class="client-sidebar-footer">
 
-        <a href="./login.html" class="client-store-link">
+          <a  id="userLoginAuth1" href="./Login.html" class="app-store-link" style="display: none;">
+          <i class="ri-login-box-line"></i>
+          <span>Login</span>
+        </a>
+
+        <a id="adminLoginAuth2" href="./adminLogin.html" class="client-store-link">
           <i class="ri-login-box-line"></i>
           <span>Login</span>
         </a>
@@ -6535,15 +6545,42 @@
 
  <script src="https://cdnjs.coudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script> 
 
+<script
+  defer
+  crossorigin="anonymous"
+  src="https://enjoyed-cub-1020.clerk.accounts.dev/npm/@clerk/ui@1/dist/ui.browser.js"
+  type="text/javascript">
+</script>
 
+<script
+  defer
+  crossorigin="anonymous"
+  data-clerk-publishable-key="pk_test_ZW5qb3llZC1jdWItMTAyMC5jbGVyay5hY2NvdW50cy5kZXYk"
+  src="https://enjoyed-cub-1020.clerk.accounts.dev/npm/@clerk/clerk-js@6/dist/clerk.browser.js"
+  type="text/javascript">
+</script>
 
 <script>
 async function showAdminSidebarLink() {
   const adminLinkAuth1 =
-    document.getElementById("adminAccessLink1");
+    document.getElementById("adminLoginAuth1");
 
   const adminLinkAuth2 =
-    document.getElementById("adminAccessLink2");
+    document.getElementById("adminLoginAuth2");
+
+  const userLoginAuth1 = document.getElementById("userLoginAuth1");
+  const userLoginAuth2 = document.getElementById("userLoginAuth2");
+
+  const userLoginLinks = [
+    userLoginAuth1,
+    userLoginAuth2
+  ].filter(Boolean);
+
+  if(userLoginLinks){
+    userLoginLinks.forEach(link => {
+      link.hidden = false;
+    });
+  }
 
   const adminLinks = [
     adminLinkAuth1,
@@ -6555,6 +6592,7 @@ async function showAdminSidebarLink() {
 
   adminLinks.forEach(link => {
     link.hidden = true;
+
   });
 
   try {
@@ -6571,6 +6609,7 @@ async function showAdminSidebarLink() {
 
     // No signed-in session means no admin link.
     if (!window.Clerk.user || !window.Clerk.session) {
+
       return;
     }
 
@@ -6595,6 +6634,10 @@ async function showAdminSidebarLink() {
       adminLinks.forEach(link => {
         link.hidden = false;
       });
+
+      userLoginLinks.forEach(link => {
+        link.hidden = true;
+      })
     }
 
   } catch (error) {
@@ -6606,6 +6649,10 @@ async function showAdminSidebarLink() {
     adminLinks.forEach(link => {
       link.hidden = true;
     });
+
+    userLoginLinks.forEach(link => {
+      link.hidden = false;
+    })
   }
 }
 
@@ -6627,20 +6674,7 @@ if (document.readyState === "loading") {
 <script src="global.js"></script>
 <script src="client.js"></script>
 
-<script
-  defer
-  crossorigin="anonymous"
-  src="https://enjoyed-cub-1020.clerk.accounts.dev/npm/@clerk/ui@1/dist/ui.browser.js"
-  type="text/javascript">
-</script>
 
-<script
-  defer
-  crossorigin="anonymous"
-  data-clerk-publishable-key="pk_test_ZW5qb3llZC1jdWItMTAyMC5jbGVyay5hY2NvdW50cy5kZXYk"
-  src="https://enjoyed-cub-1020.clerk.accounts.dev/npm/@clerk/clerk-js@6/dist/clerk.browser.js"
-  type="text/javascript">
-</script>
 
 <script>
   document.addEventListener("DOMContentLoaded",()=> {

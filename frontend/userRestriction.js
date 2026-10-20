@@ -212,6 +212,19 @@ if (userData.isAdmin === true) {
 
   });
 
+
+    agentLinks.forEach(element => {
+
+    if (!element) return;
+
+    element.style.display = "flex";
+
+    element.addEventListener("click", () => {
+      window.location.href = "./agentPage.html";
+    });
+
+  });
+
 }
 
 // ==================================================
