@@ -247,9 +247,7 @@ async function loadSellerStoreName() {
     const response = await fetch(SELLER_PROFILE_API, {
       method: "GET",
       credentials: "include",
-      headers: {
-        Accept: "application/json"
-      }
+      headers: await getClerkAuthHeaders()
     });
 
     const data = await readApiResponse(response);
