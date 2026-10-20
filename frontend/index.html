@@ -254,15 +254,17 @@
 
       <div class="app-sidebar-footer">
 
-          <a  id="userLoginAuth2" href="./Login.html" class="app-store-link">
-          <i class="ri-login-box-line"></i>
-          <span>Login</span>
-        </a>
+        <!-- NORMAL USER LOGIN: visible by default -->
+<a
+  id="userLoginAuth1"
+  href="./login.html"
+  class="app-store-link"
+  style="display: flex;"
+>
+  <i class="ri-login-box-line"></i>
+  <span>Login</span>
+</a>
 
-        <a id="adminLoginAuth2" href="./adminLogin.html" class="app-store-link" hidden>
-          <i class="ri-login-box-line"></i>
-          <span>Login</span>
-        </a>
 
       </div>
 
@@ -551,15 +553,16 @@
 
       <div class="client-sidebar-footer">
 
-          <a  id="userLoginAuth1" href="./Login.html" class="app-store-link" style="display: none;">
-          <i class="ri-login-box-line"></i>
-          <span>Login</span>
-        </a>
-
-        <a id="adminLoginAuth2" href="./adminLogin.html" class="client-store-link">
-          <i class="ri-login-box-line"></i>
-          <span>Login</span>
-        </a>
+        <!-- NORMAL USER LOGIN: visible by default -->
+<a
+  id="userLoginAuth1"
+  href="./login.html"
+  class="app-store-link"
+  style="display: flex;"
+>
+  <i class="ri-login-box-line"></i>
+  <span>Login</span>
+</a>
 
       </div>
 
@@ -6560,43 +6563,29 @@
   type="text/javascript">
 </script>
 
-<script>
-async function showAdminSidebarLink() {
-  const adminLinkAuth1 =
-    document.getElementById("adminLoginAuth1");
 
-  const adminLinkAuth2 =
+  async function showAdminSidebarLink() {
+  const adminLogin =
     document.getElementById("adminLoginAuth2");
 
-  const userLoginAuth1 = document.getElementById("userLoginAuth1");
-  const userLoginAuth2 = document.getElementById("userLoginAuth2");
+  const userLogin =
+    document.getElementById("userLoginAuth1");
 
-  const userLoginLinks = [
-    userLoginAuth1,
-    userLoginAuth2
-  ].filter(Boolean);
-
-  if(userLoginLinks){
-    userLoginLinks.forEach(link => {
-      link.hidden = false;
-    });
+  // Default state: user login visible, admin login hidden.
+  if (userLogin) {
+    userLogin.hidden = false;
+    userLogin.style.display = "flex";
   }
 
-  const adminLinks = [
-    adminLinkAuth1,
-    adminLinkAuth2
-  ].filter(Boolean);
+  if (adminLogin) {
+    adminLogin.hidden = true;
+    adminLogin.style.display = "none";
+  }
 
-  // Hide all admin links until verified.
-  if (adminLinks.length === 0) return;
-
-  adminLinks.forEach(link => {
-    link.hidden = true;
-
-  });
+  if (!adminLogin || !userLogin) return;
 
   try {
-    // Wait briefly for Clerk to load.
+    // Wait for Clerk to initialize.
     for (let i = 0; i < 50 && !window.Clerk; i++) {
       await new Promise(resolve =>
         setTimeout(resolve, 200)
@@ -6607,18 +6596,16 @@ async function showAdminSidebarLink() {
 
     await window.Clerk.load();
 
-    // No signed-in session means no admin link.
+    // Require an authenticated Clerk session.
     if (!window.Clerk.user || !window.Clerk.session) {
-
       return;
     }
 
-    const token =
-      await window.Clerk.session.getToken();
+    const token = await window.Clerk.session.getToken();
 
     if (!token) return;
 
-    // Verify administrator access through the backend.
+    // Verify admin permissions on the backend.
     const response = await fetch("/api/admin/dashboard", {
       method: "GET",
       headers: {
@@ -6630,14 +6617,13 @@ async function showAdminSidebarLink() {
 
     const data = await response.json();
 
+    // Show admin login only after backend confirmation.
     if (data.success === true) {
-      adminLinks.forEach(link => {
-        link.hidden = false;
-      });
+      userLogin.hidden = true;
+      userLogin.style.display = "none";
 
-      userLoginLinks.forEach(link => {
-        link.hidden = true;
-      })
+      adminLogin.hidden = false;
+      adminLogin.style.display = "flex";
     }
 
   } catch (error) {
@@ -6646,13 +6632,12 @@ async function showAdminSidebarLink() {
       error
     );
 
-    adminLinks.forEach(link => {
-      link.hidden = true;
-    });
+    // Fail safely: show normal login only.
+    adminLogin.hidden = true;
+    adminLogin.style.display = "none";
 
-    userLoginLinks.forEach(link => {
-      link.hidden = false;
-    })
+    userLogin.hidden = false;
+    userLogin.style.display = "flex";
   }
 }
 
@@ -6663,11 +6648,7 @@ if (document.readyState === "loading") {
     { once: true }
   );
 } else {
-  showAdminSidebarLink();
-}
-</script>
-
-
+  showAdminSide
 
 <script src="styleSkeloton.js"></script>
 <script src="promoScript.js"></script>
