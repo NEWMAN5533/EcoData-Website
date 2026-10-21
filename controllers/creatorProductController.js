@@ -279,80 +279,82 @@ const validCategoryId = categories[0].id;
 
 
 //==============================
-// GET CREATOR PRODUCTS
-//==============================
-export async function getCreatorProducts(req, res){
-  try{
+ // GET CREATOR PRODUCTS
+ //==============================
+export async function getCreatorProducts(req, res) {
+  try {
+    const { userId } = getAuth(req);
 
-  const sellerId = String(req.query.sellerId || "").trim();
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: "Authentication required."
+      });
+    }
 
-  if(!sellerId){
-    return res.status(400).json({
+    // Find the seller associated with the authenticated Clerk user.
+    const sellers = await sql`
+      SELECT id
+      FROM ecodata_sellers
+      WHERE clerk_user_id = ${userId}
+      LIMIT 1
+    `;
+
+    if (sellers.length === 0) {
+      return res.status(403).json({
+        success: false,
+        message: "Seller profile not found."
+      });
+    }
+
+    const sellerId = sellers[0].id;
+
+    console.log("Loading products for seller:", sellerId);
+
+    // Return only products owned by this seller.
+    const products = await sql`
+      SELECT
+        p.id,
+        p.seller_id,
+        p.category_id,
+        c.name AS category_name,
+        p.name,
+        p.slug,
+        p.description,
+        p.product_type,
+        p.product_subtype,
+        p.price,
+        p.compare_at_price,
+        p.stock_quantity,
+        p.status,
+        p.featured,
+        p.image_url,
+        p.youtube_url,
+        p.affiliate_url,
+        p.created_at,
+        p.updated_at
+      FROM ecodata_products p
+      LEFT JOIN ecodata_categories c
+        ON c.id = p.category_id
+      WHERE p.seller_id = ${sellerId}
+      ORDER BY p.created_at DESC
+    `;
+
+    return res.status(200).json({
+      success: true,
+      count: products.length,
+      products
+    });
+
+  } catch (error) {
+    console.error("Get creator products error:", error);
+
+    return res.status(500).json({
       success: false,
-      message: "SellerId is not found."
+      message: "Unable to load creator products."
     });
   }
-  console.log("Loading product for seller:", sellerId);
-
-  //Simple firestore query.
-  //No orderBy = No composite index
-  const snapshot = await db 
-  .collection("products")
-  .where("sellerId", "==", sellerId)
-  .get();
-
-  console.log("Products found:", snapshot.size
-  );
-
-  const products = snapshot.docs.map(doc => {
-    const data = doc.data();
-    return{
-      id: doc.id,
-      ...data
-    };
-  }).sort((a,b) => {
-    const getTime = value =>{
-      if(!value) return 0;
-
-      // timestamp
-      if(typeof value.toMillis === "function"){
-        return value.toMillis();
-      }
-
-      //timestamp with seconds
-      if(typeof value.seconds === "number"){
-        return value.seconds * 1000;
-      }
-
-      // js Date/String
-      const time = new Date(value).getTime();
-      return Number.isNaN(time)
-      ? 0
-      : time;
-    };
-    return(
-      getTime(b.createdAt) -
-      getTime(a.createdAt)
-    );
-  });
-  return res.status(200).json({
-    success: true,
-    count: products.length, 
-    products
-  });
-} catch(error){
-  console.error(
-    "Get creator products error:", error
-  );
-
-  return res.status(500).json({
-    success: false,
-    message: "Unable to load creator products.", 
-    error: error.message
-  });
 }
-} 
-
 
 //====================================
 // UPDATE CREATOR PRODUCT
