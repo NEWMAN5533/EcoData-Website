@@ -181,6 +181,8 @@ const validCategoryId = categories[0].id;
       });
     }
 
+    const coverPublicId = coverUpload.public_id;
+
     // ======================
     // CLOUDINARY FILE UPLOAD
     // ======================
@@ -212,44 +214,46 @@ const validCategoryId = categories[0].id;
     // SAVE PRODUCT TO NEON
     // ======================
     const products = await sql`
-     INSERT INTO ecodata_products (
-        seller_id,
-        category_id,
-        name,
-        slug,
-        description,
-        product_type,
-        product_subtype,
-        price,
-        status,
-        image_url,
-        file_public_id,
-        file_url,
-        file_resource_type,
-        youtube_url,
-        affiliate_url,
-        updated_at
-      )
-      VALUES (
-        ${seller.id},
-        ${validCategoryId},
-        ${title.trim()},
-        ${slug},
-        ${description.trim()},
-        ${"digital"},
-        ${type},
-        ${productPrice},
-        'pending',
-        ${coverUpload?.secure_url || null},
-        ${fileUpload?.public_id || null},
-        ${fileUpload?.secure_url || null},
-        ${fileUpload ? "raw" : null},
-        ${type === "video" ? youtubeUrl.trim() : null},
-        ${type === "affiliate" ? affiliateUrl.trim() : null},
-        NOW()
-      )
-      RETURNING id, seller_id, name, slug, status, created_at
-    `;
+      INSERT INTO ecodata_products (
+    seller_id,
+    category_id,
+    name,
+    slug,
+    description,
+    product_type,
+    product_subtype,
+    price,
+    status,
+    image_url,
+    cover_public_id,
+    file_public_id,
+    file_url,
+    file_resource_type,
+    youtube_url,
+    affiliate_url,
+    updated_at
+  )
+  VALUES (
+    ${seller.id},
+    ${validCategoryId},
+    ${title.trim()},
+    ${slug},
+    ${description.trim()},
+    ${"digital"},
+    ${type},
+    ${productPrice},
+    'pending',
+    ${coverUpload?.secure_url || null},
+    ${coverUpload?.public_id || null},
+    ${fileUpload?.public_id || null},
+    ${fileUpload?.secure_url || null},
+    ${fileUpload ? "raw" : null},
+    ${type === "video" ? youtubeUrl.trim() : null},
+    ${type === "affiliate" ? affiliateUrl.trim() : null},
+    NOW()
+  )
+  RETURNING id, seller_id, name, slug, status, created_at
+`;
 
     const product = products[0];
 
@@ -647,194 +651,195 @@ export async function updateCreatorProduct(req, res) {
 }
 
 //====================================
-// DELETE CREATOR PRODUCT
-//====================================
+ // DELETE CREATOR PRODUCT — NEON + CLERK
+ //====================================
 export async function deleteCreatorProduct(req, res) {
   try {
+    // 1. Authenticate seller through Clerk
+    const { userId } = getAuth(req);
 
-    const productId =
-      String(req.params.productId || "").trim();
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: "Authentication required."
+      });
+    }
 
-    const sellerId =
-      String(req.query.sellerId || "").trim();
+    // 2. Validate product ID
+    const productId = String(req.params.productId || "").trim();
 
-
-    //================================
-    // VALIDATION
-    //================================
-
-    if (!productId) {
+    if (!/^\d+$/.test(productId) || Number(productId) <= 0) {
       return res.status(400).json({
         success: false,
-        message: "Product ID is required."
+        message: "A valid product ID is required."
       });
     }
 
-    if (!sellerId) {
-      return res.status(400).json({
-        success: false,
-        message: "Seller ID is required."
-      });
-    }
+    // 3. Find seller using their Clerk ID
+    const sellers = await sql`
+      SELECT id, status
+      FROM ecodata_sellers
+      WHERE clerk_user_id = ${userId}
+      LIMIT 1
+    `;
 
-
-    //================================
-    // FIND PRODUCT
-    //================================
-
-    const productRef =
-      db.collection("products").doc(productId);
-
-    const productSnap =
-      await productRef.get();
-
-
-    if (!productSnap.exists) {
-      return res.status(404).json({
-        success: false,
-        message: "Product not found."
-      });
-    }
-
-
-    const product =
-      productSnap.data();
-
-
-    //================================
-    // OWNERSHIP CHECK
-    //================================
-
-    if (product.sellerId !== sellerId) {
-
+    if (sellers.length === 0) {
       return res.status(403).json({
         success: false,
-        message:
-          "You are not allowed to delete this product."
+        message: "Seller profile not found."
       });
-
     }
 
+    const seller = sellers[0];
 
-    //================================
-    // PREVENT DELETING SOLD PRODUCTS
-    //================================
+    if (seller.status === "suspended") {
+      return res.status(403).json({
+        success: false,
+        message: "Your seller account is suspended."
+      });
+    }
 
-    const sales =
-      Number(product.sales || 0);
+    // 4. Verify ownership and retrieve Cloudinary IDs
+    const products = await sql`
+      SELECT
+        p.id,
+        p.seller_id,
+        p.image_url,
+        p.cover_public_id,
+        p.file_public_id,
+        p.file_resource_type
+      FROM ecodata_products p
+      WHERE p.id = ${productId}
+        AND p.seller_id = ${seller.id}
+      LIMIT 1
+    `;
 
+    if (products.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Product not found for this seller."
+      });
+    }
 
-    if (sales > 0) {
+    const product = products[0];
 
-      return res.status(400).json({
+    // 5. Prevent deletion if order records exist
+    const orderItems = await sql`
+      SELECT id
+      FROM ecodata_order_items
+      WHERE product_id = ${productId}
+      LIMIT 1
+    `;
+
+    if (orderItems.length > 0) {
+      return res.status(409).json({
         success: false,
         message:
-          "This product cannot be deleted because it has sales."
+          "This product cannot be deleted because it has purchase records."
       });
-
     }
 
+    // 6. Prevent deletion if sales records exist
+    const sales = await sql`
+      SELECT id
+      FROM ecodata_sales
+      WHERE product_id = ${productId}
+      LIMIT 1
+    `;
 
-    //================================
-    // DELETE COVER FROM CLOUDINARY
-    //================================
+    if (sales.length > 0) {
+      return res.status(409).json({
+        success: false,
+        message:
+          "This product cannot be deleted because it has sales records."
+      });
+    }
 
-    if (product.coverPublicId) {
+    // 7. Delete the product from Neon.
+    // Foreign keys also protect against deletion if order/sales
+    // records are inserted between our checks and this query.
+    const deleted = await sql`
+      DELETE FROM ecodata_products
+      WHERE id = ${productId}
+        AND seller_id = ${seller.id}
+      RETURNING id
+    `;
 
-      try {
+    if (deleted.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message:
+          "Product not found or no longer belongs to this seller."
+      });
+    }
 
-        await cloudinary.uploader.destroy(
-          product.coverPublicId,
+    // 8. Clean up Cloudinary assets after database deletion
+    const cloudinaryTasks = [];
+
+    // Delete cover only when its dedicated public ID exists
+    if (product.cover_public_id) {
+      cloudinaryTasks.push(
+        cloudinary.uploader.destroy(
+          product.cover_public_id,
+          { resource_type: "image" }
+        )
+      );
+    } else if (product.image_url) {
+      console.warn(
+        "Cover public ID missing; skipping cover cleanup:",
+        product.id
+      );
+    }
+
+    // Delete the digital file, if one exists
+    if (product.file_public_id) {
+      cloudinaryTasks.push(
+        cloudinary.uploader.destroy(
+          product.file_public_id,
           {
-            resource_type: "image"
+            resource_type: product.file_resource_type || "raw"
           }
-        );
-
-      } catch (error) {
-
-        console.error(
-          "Cover deletion failed:",
-          error
-        );
-
-      }
-
+        )
+      );
     }
 
+    const cleanupResults = await Promise.allSettled(cloudinaryTasks);
 
-    //================================
-    // DELETE PRODUCT FILE
-    //================================
-
-    if (product.filePublicId) {
-
-      try {
-
-        await cloudinary.uploader.destroy(
-          product.filePublicId,
-          {
-            resource_type: "raw"
-          }
-        );
-
-      } catch (error) {
-
+    cleanupResults.forEach((result) => {
+      if (result.status === "rejected") {
         console.error(
-          "Product file deletion failed:",
-          error
+          "Cloudinary cleanup failed:",
+          result.reason
         );
-
       }
+    });
 
-    }
-
-
-    //================================
-    // DELETE FIRESTORE PRODUCT
-    //================================
-
-    await productRef.delete();
-
-
-    console.log(
-      "Product deleted successfully:",
-      productId
-    );
-
+    console.log("Product deleted successfully:", productId);
 
     return res.status(200).json({
-
       success: true,
-
-      message:
-        "Product deleted successfully.",
-
+      message: "Product deleted successfully.",
       productId
-
     });
-
 
   } catch (error) {
+    // Handle a concurrent purchase or another foreign-key restriction
+    if (error.code === "23503") {
+      return res.status(409).json({
+        success: false,
+        message:
+          "This product is linked to other records and cannot be deleted."
+      });
+    }
 
-    console.error(
-      "Delete creator product error:",
-      error
-    );
-
+    console.error("Delete creator product error:", error);
 
     return res.status(500).json({
-
       success: false,
-
-      message:
-        "Unable to delete product."
-
+      message: "Unable to delete product."
     });
-
   }
 }
-
-
 
 
 
