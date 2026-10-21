@@ -32,18 +32,30 @@ sellerProfileRouter.get(
         });
       }
 
-      const rows = await sql`
-        SELECT
-          store_name,
-          seller_types,
-          status,
-          seller_verified,
-          can_publish,
-          can_withdraw
-        FROM ecodata_sellers
-        WHERE clerk_user_id = ${userId}
-        LIMIT 1
-      `;
+    const rows = await sql`
+      SELECT
+        s.store_name,
+        s.seller_types,
+        s.status,
+        s.seller_verified,
+        s.can_publish,
+        s.can_withdraw,
+        s.phone_number,
+        s.country,
+        s.region,
+        s.city,
+        s.area,
+        s.whatsapp_number,
+        s.whatsapp_enabled,
+        u.first_name,
+        u.last_name,
+        u.email
+      FROM ecodata_sellers s
+      LEFT JOIN ecodata_users u
+        ON u.clerk_user_id = s.clerk_user_id
+      WHERE s.clerk_user_id = ${userId}
+      LIMIT 1
+    `;
 
       if (rows.length === 0) {
         return res.status(404).json({
@@ -53,18 +65,47 @@ sellerProfileRouter.get(
         });
       }
 
-      const seller = rows[0];
+          const seller = rows[0];
+
+      const fullName = [
+        seller.first_name,
+        seller.last_name
+      ].filter(Boolean).join(" ");
+
+      const location = [
+        seller.area,
+        seller.city,
+        seller.region,
+        seller.country
+      ].filter(Boolean).join(", ");
 
       return res.status(200).json({
         success: true,
         seller: {
           storeName: seller.store_name,
           store_name: seller.store_name,
+
           sellerTypes: seller.seller_types,
           status: seller.status,
           sellerVerified: seller.seller_verified,
           canPublish: seller.can_publish,
-          canWithdraw: seller.can_withdraw
+          canWithdraw: seller.can_withdraw,
+
+          firstName: seller.first_name,
+          lastName: seller.last_name,
+          fullName,
+
+          email: seller.email,
+          phoneNumber: seller.phone_number,
+
+          country: seller.country,
+          region: seller.region,
+          city: seller.city,
+          area: seller.area,
+          location,
+
+          whatsappNumber: seller.whatsapp_number,
+          whatsappEnabled: seller.whatsapp_enabled
         }
       });
 
