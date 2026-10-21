@@ -144,7 +144,7 @@ const validCategoryId = categories[0].id;
         success: false,
         message: "A product cover image is required."
       });
-      
+
     }
 
     if (
@@ -219,6 +219,7 @@ const validCategoryId = categories[0].id;
         slug,
         description,
         product_type,
+        product_subtype,
         price,
         status,
         image_url,
@@ -235,6 +236,7 @@ const validCategoryId = categories[0].id;
         ${title.trim()},
         ${slug},
         ${description.trim()},
+        ${"digital"},
         ${type},
         ${productPrice},
         'pending',
