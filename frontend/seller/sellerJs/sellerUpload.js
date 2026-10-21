@@ -1,5 +1,5 @@
 const SELLER_API_BASE = "https://ecodata-app.onrender.com";
-const SELLER_PROFILE_API = `${SELLER_API_BASE}/api/creator/profile`;
+const SELLER_PROFILE_API = `${SELLER_API_BASE}/api/seller/profile`;
 
 const uploadForm1 = document.getElementById("uploadProductForm");
 const uploadButton = document.getElementById("uploadProduct");
