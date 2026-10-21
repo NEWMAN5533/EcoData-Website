@@ -9,33 +9,42 @@ const adminSellersRouter = express.Router();
 // =============================================
 adminSellersRouter.get("/", requiredAdmin, async (req, res) => {
   try {
+  
     const sellers = await sql`
-      SELECT
-        s.id,
-        s.clerk_user_id,
-        s.store_name,
-        s.seller_types,
-        s.phone_number,
-        s.whatsapp_number,
-        s.country,
-        s.region,
-        s.city,
-        s.area,
-        s.status,
-        s.seller_verified,
-        s.can_publish,
-        s.can_withdraw,
-        s.created_at,
-        s.updated_at,
-        u.first_name,
-        u.last_name,
-        u.email
-      FROM ecodata_sellers AS s
-      LEFT JOIN ecodata_users AS u
-        ON u.clerk_user_id = s.clerk_user_id
-      ORDER BY s.created_at DESC
-    `;
-
+  SELECT
+    s.id,
+    s.clerk_user_id,
+    s.store_name,
+    s.phone_number,
+    s.whatsapp_number,
+    s.seller_types,
+    s.country,
+    s.region,
+    s.city,
+    s.area,
+    s.status,
+    s.seller_verified,
+    s.can_publish,
+    s.can_withdraw,
+    s.created_at,
+    s.updated_at,
+    u.first_name,
+    u.last_name,
+    u.email,
+    COALESCE(p.product_count, 0)::int AS products
+  FROM ecodata_sellers AS s
+  LEFT JOIN ecodata_users AS u
+    ON u.clerk_user_id = s.clerk_user_id
+  LEFT JOIN (
+    SELECT
+      seller_id,
+      COUNT(*) AS product_count
+    FROM ecodata_products
+    GROUP BY seller_id
+  ) AS p
+    ON p.seller_id = s.id
+  ORDER BY s.created_at DESC
+`;
     const formattedSellers = sellers.map((seller) => ({
       id: String(seller.id),
       clerkUserId: seller.clerk_user_id,
