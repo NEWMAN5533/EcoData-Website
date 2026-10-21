@@ -453,24 +453,21 @@ function createSellerRow(seller) {
     </td>
 
 
-    <td>
-      ${seller.products}
-    </td>
+   <td>
+  ${Number(seller.products ?? 0)}
+</td>
 
+<td>
+  ${Number(seller.orders ?? 0)}
+</td>
 
-    <td>
-      ${seller.orders}
-    </td>
+<td>
+  ${formatMoney(seller.sales ?? 0)}
+</td>
 
-
-    <td>
-      ${formatMoney(seller.sales)}
-    </td>
-
-
-    <td>
-      ${formatMoney(seller.earnings)}
-    </td>
+<td>
+  ${formatMoney(seller.earnings ?? 0)}
+</td>
 
 
     <td>
