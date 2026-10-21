@@ -1,4 +1,134 @@
 
+async function loadSellerProfile() {
+  const API_URL =
+    "https://ecodata-app.onrender.com/api/seller/profile";
+
+  try {
+    const clerk = window.Clerk;
+
+    if (!clerk) {
+      throw new Error("Clerk has not loaded yet.");
+    }
+
+    if (typeof clerk.load === "function") {
+      await clerk.load();
+    }
+
+    const session = clerk.session;
+
+    if (!session) {
+      throw new Error("Please sign in to view your seller profile.");
+    }
+
+    const token = await session.getToken();
+
+    const response = await fetch(API_URL, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json"
+      }
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || !result.success || !result.seller) {
+      throw new Error(
+        result.message || "Unable to load seller profile."
+      );
+    }
+
+    const seller = result.seller;
+
+    // Store name
+    setText("sellerProfileName", seller.storeName || "My Store");
+
+    // Personal name / username
+    setText(
+      "sellerProfileUsername",
+      seller.fullName || "@seller"
+    );
+
+    // Contact information
+    setText("sellerProfileEmail", seller.email || "—");
+    setText("sellerProfilePhone", seller.phoneNumber || "—");
+    setText("sellerProfileLocation", seller.location || "Ghana");
+
+    // Verification badge
+    const verifiedBadge = document.querySelector(
+      ".sellerProfileHero .sellerVerified"
+    );
+
+    if (verifiedBadge) {
+      verifiedBadge.style.display =
+        seller.sellerVerified ? "inline-flex" : "none";
+    }
+
+    // Account status
+    const role = document.querySelector(
+      ".sellerProfileHero .sellerRole"
+    );
+
+    if (role) {
+      role.setAttribute(
+        "title",
+        `Account status: ${seller.status || "pending"}`
+      );
+    }
+
+    console.log("Seller profile loaded:", seller);
+
+  } catch (error) {
+    console.error("Failed to load seller profile:", error);
+
+    showSnackBar(
+      error.message || "Unable to load seller profile.",
+      "error"
+    );
+  }
+}
+
+
+
+
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    const clerk = window.Clerk;
+
+    if (!clerk) {
+      throw new Error("Clerk has not loaded. Please refresh.");
+    }
+
+    if (typeof clerk.load === "function") {
+      await clerk.load();
+    }
+
+    await loadSellerProfile();
+
+  } catch (error) {
+    console.error("Seller profile initialization failed:", error);
+
+    showSnackBar(
+      error.message || "Unable to initialize seller profile.",
+      "error"
+    );
+  }
+});
+
+
+
+
+
+
+
+
+
 
 
 
