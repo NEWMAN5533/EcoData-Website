@@ -357,80 +357,86 @@ export async function getCreatorProducts(req, res) {
 }
 
 //====================================
-// UPDATE CREATOR PRODUCT
-//====================================
+ // UPDATE CREATOR PRODUCT — NEON
+ //====================================
 export async function updateCreatorProduct(req, res) {
   try {
+    const { userId } = getAuth(req);
 
-    const productId =
-      String(req.params.productId || "").trim();
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: "Authentication required."
+      });
+    }
 
-    const sellerId =
-      String(req.body.sellerId || "").trim();
+    const productId = String(req.params.productId || "").trim();
 
-    if (!productId) {
+    if (!/^\d+$/.test(productId) || Number(productId) <= 0) {
       return res.status(400).json({
         success: false,
-        message: "Product ID is required."
+        message: "A valid product ID is required."
       });
     }
 
-    if (!sellerId) {
-      return res.status(400).json({
-        success: false,
-        message: "Seller ID is required."
-      });
-    }
+    // Find the authenticated seller.
+    const sellers = await sql`
+      SELECT id, status
+      FROM ecodata_sellers
+      WHERE clerk_user_id = ${userId}
+      LIMIT 1
+    `;
 
-    //================================
-    // FIND PRODUCT
-    //================================
-
-    const productRef =
-      db.collection("products").doc(productId);
-
-    const productSnap =
-      await productRef.get();
-
-    if (!productSnap.exists) {
-      return res.status(404).json({
-        success: false,
-        message: "Product not found."
-      });
-    }
-
-    const product =
-      productSnap.data();
-
-    //================================
-    // OWNERSHIP CHECK
-    //================================
-
-    if (product.sellerId !== sellerId) {
+    if (sellers.length === 0) {
       return res.status(403).json({
         success: false,
-        message: "You are not allowed to edit this product."
+        message: "Seller profile not found."
       });
     }
 
-    //================================
-    // GET UPDATE VALUES
-    //================================
+    const seller = sellers[0];
+
+    if (seller.status === "suspended") {
+      return res.status(403).json({
+        success: false,
+        message: "Your seller account is suspended."
+      });
+    }
+
+    // Confirm ownership before updating.
+    const existing = await sql`
+      SELECT id, product_type, product_subtype
+      FROM ecodata_products
+      WHERE id = ${productId}
+        AND seller_id = ${seller.id}
+      LIMIT 1
+    `;
+
+    if (existing.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Product not found for this seller."
+      });
+    }
+
+    const currentProduct = existing[0];
 
     const {
       title,
       description,
+      categoryId,
       category,
       price,
       type,
+      productType,
       youtubeUrl,
       affiliateUrl
     } = req.body;
 
     const updates = {};
 
+    // Product title -> database name.
     if (title !== undefined) {
-
       if (!String(title).trim()) {
         return res.status(400).json({
           success: false,
@@ -438,12 +444,10 @@ export async function updateCreatorProduct(req, res) {
         });
       }
 
-      updates.title =
-        String(title).trim();
+      updates.name = String(title).trim();
     }
 
     if (description !== undefined) {
-
       if (!String(description).trim()) {
         return res.status(400).json({
           success: false,
@@ -451,40 +455,84 @@ export async function updateCreatorProduct(req, res) {
         });
       }
 
-      updates.description =
-        String(description).trim();
-    }
-
-    if (category !== undefined) {
-      updates.category =
-        String(category).trim() || "Other";
+      updates.description = String(description).trim();
     }
 
     if (price !== undefined) {
+      const productPrice = Number(price);
 
-      const productPrice =
-        Number(price);
-
-      if (
-        !Number.isFinite(productPrice) ||
-        productPrice < 0
-      ) {
+      if (!Number.isFinite(productPrice) || productPrice < 0) {
         return res.status(400).json({
           success: false,
           message: "Invalid product price."
         });
       }
 
-      updates.price =
-        productPrice;
+      updates.price = productPrice;
     }
 
-    //================================
-    // TYPE
-    //================================
+    // Accept either categoryId or a category slug/name.
+    if (categoryId !== undefined) {
+      const parsedCategoryId = Number(categoryId);
 
-    if (type !== undefined) {
+      if (
+        !Number.isInteger(parsedCategoryId) ||
+        parsedCategoryId <= 0
+      ) {
+        return res.status(400).json({
+          success: false,
+          message: "A valid category is required."
+        });
+      }
 
+      const categories = await sql`
+        SELECT id
+        FROM ecodata_categories
+        WHERE id = ${parsedCategoryId}
+          AND is_active = TRUE
+        LIMIT 1
+      `;
+
+      if (categories.length === 0) {
+        return res.status(400).json({
+          success: false,
+          message: "Category not found or inactive."
+        });
+      }
+
+      updates.category_id = categories[0].id;
+    } else if (category !== undefined) {
+      const categoryValue = String(category).trim();
+
+      if (!categoryValue) {
+        return res.status(400).json({
+          success: false,
+          message: "A valid category is required."
+        });
+      }
+
+      const categories = await sql`
+        SELECT id
+        FROM ecodata_categories
+        WHERE is_active = TRUE
+          AND (slug = ${categoryValue} OR name = ${categoryValue})
+        LIMIT 1
+      `;
+
+      if (categories.length === 0) {
+        return res.status(400).json({
+          success: false,
+          message: "Category not found or inactive."
+        });
+      }
+
+      updates.category_id = categories[0].id;
+    }
+
+    // Product subtype, e.g. notes, ebook, video.
+    const requestedType = productType ?? type;
+
+    if (requestedType !== undefined) {
       const validTypes = [
         "ebook",
         "notes",
@@ -494,55 +542,102 @@ export async function updateCreatorProduct(req, res) {
         "affiliate"
       ];
 
-      if (!validTypes.includes(type)) {
+      if (!validTypes.includes(requestedType)) {
         return res.status(400).json({
           success: false,
           message: "Invalid product type."
         });
       }
 
-      updates.type = type;
+      updates.product_type =
+        requestedType === "affiliate" ? "digital" : "digital";
+
+      updates.product_subtype = requestedType;
     }
 
-    //================================
-    // TYPE-SPECIFIC URLS
-    //================================
-
     if (youtubeUrl !== undefined) {
-      updates.youtubeUrl =
-        String(youtubeUrl).trim() || null;
+      const url = String(youtubeUrl).trim();
+
+      if (url && currentProduct.product_subtype !== "video"
+          && requestedType !== "video") {
+        return res.status(400).json({
+          success: false,
+          message: "YouTube URL is only valid for video products."
+        });
+      }
+
+      updates.youtube_url = url || null;
     }
 
     if (affiliateUrl !== undefined) {
-      updates.affiliateUrl =
-        String(affiliateUrl).trim() || null;
+      const url = String(affiliateUrl).trim();
+
+      if (url && currentProduct.product_subtype !== "affiliate"
+          && requestedType !== "affiliate") {
+        return res.status(400).json({
+          success: false,
+          message: "Affiliate URL is only valid for affiliate products."
+        });
+      }
+
+      updates.affiliate_url = url || null;
     }
 
-    //================================
-    // UPDATED TIME
-    //================================
+    const fields = Object.keys(updates);
 
-    updates.updatedAt =
-      FieldValue.serverTimestamp();
+    if (fields.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "No valid product changes were provided."
+      });
+    }
 
-    //================================
-    // SAVE
-    //================================
+    // Update only explicitly supplied fields.
+    const updated = await sql`
+      UPDATE ecodata_products
+      SET
+        name = COALESCE(${updates.name ?? null}, name),
+        description = CASE
+          WHEN ${Object.hasOwn(updates, "description")}
+          THEN ${updates.description ?? null}
+          ELSE description
+        END,
+        price = COALESCE(${updates.price ?? null}, price),
+        category_id = COALESCE(${updates.category_id ?? null}, category_id),
+        product_type = COALESCE(${updates.product_type ?? null}, product_type),
+        product_subtype = COALESCE(${updates.product_subtype ?? null}, product_subtype),
+        youtube_url = CASE
+          WHEN ${Object.hasOwn(updates, "youtube_url")}
+          THEN ${updates.youtube_url ?? null}
+          ELSE youtube_url
+        END,
+        affiliate_url = CASE
+          WHEN ${Object.hasOwn(updates, "affiliate_url")}
+          THEN ${updates.affiliate_url ?? null}
+          ELSE affiliate_url
+        END,
+        updated_at = NOW()
+      WHERE id = ${productId}
+        AND seller_id = ${seller.id}
+      RETURNING id, name, price, product_type, product_subtype,
+                category_id, status, updated_at
+    `;
 
-    await productRef.update(updates);
+    if (updated.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Product not found or no longer belongs to this seller."
+      });
+    }
 
     return res.status(200).json({
       success: true,
       message: "Product updated successfully.",
-      productId
+      product: updated[0]
     });
 
   } catch (error) {
-
-    console.error(
-      "Update creator product error:",
-      error
-    );
+    console.error("Update creator product error:", error);
 
     return res.status(500).json({
       success: false,
@@ -550,7 +645,6 @@ export async function updateCreatorProduct(req, res) {
     });
   }
 }
-
 
 //====================================
 // DELETE CREATOR PRODUCT
