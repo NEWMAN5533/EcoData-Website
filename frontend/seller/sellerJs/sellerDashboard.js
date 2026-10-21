@@ -10,7 +10,7 @@ const API_BASE = "https://ecodata-app.onrender.com";
 const SELLER_PRODUCTS_API =
   `${API_BASE}/api/seller/products`;
 
-const CREATOR_PRODUCTS_API = `${API_BASE}/api/creator/products/${encodeURIComponent}`;
+const CREATOR_PRODUCTS_API = `${API_BASE}/api/creator/products`;
 const SELLER_PROFILE_API = `${API_BASE}/api/seller/profile`;
 
 let creatorProducts = [];
@@ -721,7 +721,7 @@ document.addEventListener("click", async event => {
 
     // Send the authenticated DELETE request
     const response = await fetch(
-      `${CREATOR_PRODUCTS_API}`,
+      `${CREATOR_PRODUCTS_API}/${encodeURIComponent(productId)}`,
       {
         method: "DELETE",
         headers: {
