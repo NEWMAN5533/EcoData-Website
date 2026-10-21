@@ -10,8 +10,7 @@ const API_BASE = "https://ecodata-app.onrender.com";
 const SELLER_PRODUCTS_API =
   `${API_BASE}/api/seller/products`;
 
-const SELLER_PROFILE_API =
-  `${API_BASE}/api/seller/profile`;
+const CREATOR_PRODUCTS_API = `${API_BASE}/creator/products`;
 
 let creatorProducts = [];
 let productsLoading = false;
