@@ -35,24 +35,33 @@ export function requireAuth(req, res, next){
 
 export async function requiredAdmin( req, res, next ){
   try{
+    
     const { userId } = getAuth(req);
 
-    if(!userId){
-      return res.status(401).json({
-        success: false,
-        code: "AUTHENTICATION__REQUIRED",
-        message: "Please sign in to continue."
-      });
-    }
+console.log("[ADMIN AUTH CHECK]", {
+  userId: userId || null,
+  hasUserId: Boolean(userId)
+});
 
-    // SYNC ADMINS
-    const admins = await sql `
-    SELECT id
-    FROM ecodata_admins
-    WHERE clerk_user_id = ${ userId }
+if (!userId) {
+  return res.status(401).json({
+    success: false,
+    code: "AUTHENTICATION__REQUIRED",
+    message: "Please sign in to continue."
+  });
+}
+
+const admins = await sql`
+  SELECT id
+  FROM ecodata_admins
+  WHERE clerk_user_id = ${userId}
     AND active = TRUE
-    LIMIT 1
-    `;
+  LIMIT 1
+`;
+
+console.log("[ADMIN DB CHECK]", {
+  matchingAdmins: admins.length
+});
 
     if(admins.length === 0){
       return res.status(403).json({
