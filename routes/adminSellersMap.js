@@ -45,10 +45,17 @@ adminSellersRouter.get("/", requiredAdmin, async (req, res) => {
     ON p.seller_id = s.id
   ORDER BY s.created_at DESC
 `;
-    const formattedSellers = sellers.map((seller) => ({
-      id: String(seller.id),
+    const formattedSellers = sellers.map((seller) => (
+      {
+   
+        id: String(seller.id),
       clerkUserId: seller.clerk_user_id,
       name: seller.store_name || "Unnamed Store",
+
+        // Add this line:
+        products: Number(seller.products ?? 0),
+
+
       owner: [seller.first_name, seller.last_name]
         .filter(Boolean)
         .join(" ") || "Not provided",
@@ -66,6 +73,7 @@ adminSellersRouter.get("/", requiredAdmin, async (req, res) => {
       canWithdraw: seller.can_withdraw === true,
       joined: seller.created_at,
       updatedAt: seller.updated_at
+    
     }));
 
     return res.status(200).json({
