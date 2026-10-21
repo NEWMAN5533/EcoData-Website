@@ -748,7 +748,7 @@ document.addEventListener("click", async event => {
     );
 
     // Refresh the existing seller product list
-    await loadCreatorProducts();
+    await window.loadCreatorProducts();
 
   } catch (error) {
     console.error("Delete product request failed:", error);
