@@ -689,21 +689,83 @@ document.addEventListener("click", async event => {
       return;
     }
 
+   
+
     if (action === "delete") {
-      const confirmed = await showDeleteConfirmation(productId);
+  const confirmed = await showDeleteConfirmation(productId);
 
-      if (!confirmed) return;
+  if (!confirmed) return;
 
-      // Do not call the old /api/creator/products route.
-      // A seller-scoped DELETE backend route must be implemented first.
+  try {
+    // Get the active Clerk session
+    const clerk = window.Clerk;
+    const session = clerk?.session;
+
+    if (!session) {
       showSnackBar(
-        "Delete is not connected yet. Add the authenticated DELETE /api/seller/products/:id route first.",
-        "warning",
-        5000
+        "Please sign in before deleting a product.",
+        "warning"
       );
-
       return;
     }
+
+    const token = await session.getToken();
+
+    if (!token) {
+      showSnackBar(
+        "Authentication failed. Please sign in again.",
+        "error"
+      );
+      return;
+    }
+
+    // Send the authenticated DELETE request
+    const response = await fetch(
+      `${CREATOR_PRODUCTS_API}/${encodeURIComponent(productId)}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json"
+        }
+      }
+    );
+
+    const result = await response.json().catch(() => ({}));
+
+    if (!response.ok || !result.success) {
+      showSnackBar(
+        result.message || "Unable to delete this product.",
+        "error",
+        5000
+      );
+      return;
+    }
+
+    showSnackBar(
+      result.message || "Product deleted successfully.",
+      "success"
+    );
+
+    // Refresh the existing seller product list
+    await loadCreatorProducts();
+
+  } catch (error) {
+    console.error("Delete product request failed:", error);
+
+    showSnackBar(
+      "A network error occurred. Please try again.",
+      "error",
+      5000
+    );
+  }
+
+  return;
+}
+
+
+
+
   }
 
   // Close menus when clicking outside.
