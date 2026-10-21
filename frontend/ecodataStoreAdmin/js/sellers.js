@@ -290,7 +290,11 @@ function renderSellers() {
 
     sellerEmpty.hidden = false;
 
-    sellerPagination.innerHTML = "";
+    const paginationContainer = document.getElementById("paginationButtons");
+
+if (paginationContainer) {
+  paginationContainer.innerHTML = "";
+}
 
     return;
 
