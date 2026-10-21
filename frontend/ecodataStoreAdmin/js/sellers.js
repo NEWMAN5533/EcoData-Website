@@ -77,6 +77,17 @@ if (!session) {
     filteredSellers = [...sellers];
     currentPage = 1;
 
+
+    console.log("Seller API response:", result.sellers);
+
+console.table(
+  result.sellers.map(seller => ({
+    name: seller.name,
+    id: seller.id,
+    products: seller.products
+  }))
+);
+
     console.log(`Loaded ${sellers.length} seller records from Neon.`);
   } catch (error) {
     console.error("Failed to load sellers:", error);
