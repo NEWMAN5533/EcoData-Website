@@ -1,17 +1,4 @@
-//====================================
-// CREATOR CONFIG
-//====================================
 
- const SELLER_ID = "TES_SELLER";
-
-// Later:
-// export const SELLER_ID = auth.currentUser.uid;
-
- const API_BASE =
-  "https://ecodata-app.onrender.com";
-
- const CREATOR_PRODUCTS_API =
-  `${API_BASE}/api/creator/products`;
 
 
 sellerSidebar();

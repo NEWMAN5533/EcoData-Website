@@ -393,7 +393,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     <a
-      href="upload-product.html"
+      href="./sellerUploadPage.html"
       class="sellerAddProductBtn"
     >
 
@@ -765,7 +765,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
   </div>
   </main>
+
+
+  <script
+  defer
+  crossorigin="anonymous"
+  src="https://enjoyed-cub-1020.clerk.accounts.dev/npm/@clerk/ui@1/dist/ui.browser.js"
+  type="text/javascript">
+</script>
+
+<script
+  defer
+  crossorigin="anonymous"
+  data-clerk-publishable-key="pk_test_ZW5qb3llZC1jdWItMTAyMC5jbGVyay5hY2NvdW50cy5kZXYk"
+  src="https://enjoyed-cub-1020.clerk.accounts.dev/npm/@clerk/clerk-js@6/dist/clerk.browser.js"
+  type="text/javascript">
+</script>
+
+
   <script src="./sellerJs/sellerCommon.js"></script>
-  <script type="module" src="sellerProducts.js"></script>
+  <script type="module" src="./sellerJs/sellerProducts.js"></script>
 </body>
 </html>
