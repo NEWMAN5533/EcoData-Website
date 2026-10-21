@@ -1,3 +1,6 @@
+import { showSnackBar } from "../../all_js/snackbar";
+
+
 const SELLER_API_BASE = "https://ecodata-app.onrender.com";
 const SELLER_PROFILE_API = `${SELLER_API_BASE}/api/seller/profile`;
 
@@ -617,7 +620,7 @@ if (!token) {
 }
 
 const response = await fetch(
-  `${SELLER_API_BASE}/api/seller/products`,
+  `${SELLER_API_BASE}/api/creator/products`,
   {
     method: "POST",
     headers: {
