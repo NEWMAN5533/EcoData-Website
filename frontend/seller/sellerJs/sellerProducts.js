@@ -184,6 +184,58 @@ function renderCreatorProducts(products) {
 }
 
 
+function setupCreatorProductFilters() {
+  const searchInput = document.getElementById("productSearch");
+  const filterButtons = document.querySelectorAll(
+    ".sellerProductFilter"
+  );
+
+  let activeFilter = "all";
+
+  function applyFilters() {
+    const searchTerm = (searchInput?.value || "")
+      .trim()
+      .toLowerCase();
+
+    const cards = document.querySelectorAll(
+      "#sellerProductGrid .sellerProductCard"
+    );
+
+    cards.forEach(card => {
+      const name = card.dataset.name || "";
+      const status = card.dataset.status || "pending";
+
+      const matchesSearch = name.includes(searchTerm);
+      const matchesFilter =
+        activeFilter === "all" || status === activeFilter;
+
+      card.style.display =
+        matchesSearch && matchesFilter ? "" : "none";
+    });
+  }
+
+  searchInput?.addEventListener("input", applyFilters);
+
+  filterButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      activeFilter = button.dataset.filter || "all";
+
+      filterButtons.forEach(item => {
+        item.classList.toggle("active", item === button);
+      });
+
+      applyFilters();
+    });
+  });
+
+  applyFilters();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  setupCreatorProductFilters();
+});
+
+
 document.addEventListener("DOMContentLoaded", () => {
   loadCreatorProducts();
 });
