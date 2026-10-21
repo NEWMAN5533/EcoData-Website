@@ -1,5 +1,5 @@
 const SELLER_API_BASE = "https://ecodata-app.onrender.com";
-const SELLER_PROFILE_API = `${SELLER_API_BASE}/api/seller/profile`;
+const SELLER_PROFILE_API = `${SELLER_API_BASE}/api/creator/profile`;
 
 const uploadForm1 = document.getElementById("uploadProductForm");
 const uploadButton = document.getElementById("uploadProduct");
@@ -438,10 +438,10 @@ if(uploadForm){
   uploadForm.addEventListener("submit", async(event) => {
     event.preventDefault();
 
-    if (!sellerCanPublish) {
-  showSnackBar(
-    "Your seller account is not approved to publish products.",
-    "error"
+// Pending sellers can submit product for review
+if(uploadForm1?.classList.contains("is-access-blocked")){
+  showSnackBar("Your seller account cannot submit products. Please check your seller status.", "error"
+
   );
   return;
 }
