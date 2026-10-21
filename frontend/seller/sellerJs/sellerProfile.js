@@ -1,4 +1,15 @@
 
+function setText(id, value) {
+  const element = document.getElementById(id);
+
+  if (!element) {
+    console.warn(`Seller profile element not found: #${id}`);
+    return;
+  }
+
+  element.textContent = String(value ?? "");
+}
+
 async function loadSellerProfile() {
   const API_URL =
     "https://ecodata-app.onrender.com/api/seller/profile";
