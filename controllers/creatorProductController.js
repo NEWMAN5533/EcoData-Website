@@ -1,13 +1,28 @@
 
-import { getFirestore, FieldValue } from "firebase-admin/firestore";
+import cloudinary from "../config/cloudinary.js";
 import {
   uploadToCloudinary
 } from "../services/cloudinaryUpload.js";
 
-const db = getFirestore();
+import sql from "../backend/db.js";
+import { getAuth } from "@clerk/express";
+import crypto from "node:crypto";
 
-export async function createProduct(req, res){
-  try{
+
+export async function createProduct(req, res) {
+  let coverUpload = null;
+  let fileUpload = null;
+
+  try {
+    const { userId } = getAuth(req);
+
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: "Authentication required."
+      });
+    }
+
     const {
       title,
       description,
@@ -15,31 +30,23 @@ export async function createProduct(req, res){
       price,
       type,
       youtubeUrl,
-      affiliateUrl,
-      sellerId,
+      affiliateUrl
     } = req.body;
 
-    //======================
+    // ======================
     // BASIC VALIDATION
-    //======================
-    if(!title?.trim()){
+    // ======================
+    if (!title?.trim()) {
       return res.status(400).json({
         success: false,
         message: "Product title is required."
       });
     }
 
-    if(!description?.trim()){
+    if (!description?.trim()) {
       return res.status(400).json({
         success: false,
-        message: "Product description required."
-      });
-    }
-
-    if(!type){
-      return res.status(400).json({
-        success: false,
-        message: "product type required."
+        message: "Product description is required."
       });
     }
 
@@ -52,7 +59,7 @@ export async function createProduct(req, res){
       "affiliate"
     ];
 
-    if(!validTypes.includes(type)){
+    if (!validTypes.includes(type)) {
       return res.status(400).json({
         success: false,
         message: "Invalid product type."
@@ -61,127 +68,164 @@ export async function createProduct(req, res){
 
     const productPrice = Number(price);
 
-    if(!Number.isFinite(productPrice) || 
-  productPrice < 0) {
-    return res.status(400).json({
-      success: false,
-      message: "Invalid product price."
-    });
-  }
-
-  //==========================
-  // TYPE-SPECIFIC VALIDATION
-  //==========================
-  const cover = req.files?.cover?.[0];
-  const file = req.files?.file?.[0];
-
-  let coverUpload = null;
-  let fileUpload = null;
-
-  if(cover) {
-    coverUpload = await uploadToCloudinary(cover.buffer, {
-      resource_type: "image",
-      folder: "ecodata/products/covers"
-    }
-  );
-  }
-
-  //===========================
-  // DIGITAL FILE UPLOAD
-  //===========================
-  if(
-    file && (type === "ebook" || type === "notes" || type === "template" || type === "zip")
-  ) {
-    fileUpload = await uploadToCloudinary(file.buffer, {
-      resourceType: "raw",
-      folder: `ecodata/products/${type}`
-    });
-  }
-
-  //=====================
-  // EDUCATIONAL VIDEOS
-  //=====================
-  if(type === "video"){
-    if(!youtubeUrl?.trim()){
+    if (!Number.isFinite(productPrice) || productPrice < 0) {
       return res.status(400).json({
         success: false,
-        message: "YouTube video link is required."
+        message: "Invalid product price."
       });
     }
-  }
 
-  if(
-    type === "ebook" ||
-    type === "notes" ||
-    type === "template" ||
-    type === "zip"
-  ) {
-    if(!file){
+      // Sellers may submit products while awaiting store approval.
+    // publishing remains controlled by admin approval workflow
+
+    const sellers = await sql`
+      SELECT id, status, can_publish
+      FROM ecodata_sellers
+      WHERE clerk_user_id = ${userId}
+      LIMIT 1
+    `;
+
+    if (sellers.length === 0) {
+      return res.status(403).json({
+        success: false,
+        message: "Your seller profile was not found."
+      });
+    }
+
+    const seller = sellers[0];
+
+  
+
+    // ======================
+    // TYPE-SPECIFIC VALIDATION
+    // ======================
+    const cover = req.files?.cover?.[0];
+    const file = req.files?.file?.[0];
+
+    if (
+      ["ebook", "notes", "template", "zip"].includes(type) &&
+      !file
+    ) {
       return res.status(400).json({
         success: false,
         message: "Product file is required."
       });
     }
-  }
 
+    if (type === "video" && !youtubeUrl?.trim()) {
+      return res.status(400).json({
+        success: false,
+        message: "YouTube video link is required."
+      });
+    }
 
-
-  if(type === "affiliate"){
-    if(!affiliateUrl?.trim()){
+    if (type === "affiliate" && !affiliateUrl?.trim()) {
       return res.status(400).json({
         success: false,
         message: "Affiliate URL is required."
       });
     }
-  }
 
-  //======================
-  // CREATE PRODUCT
-  //======================
-  const productRef = 
-  db.collection("products").doc();
+    // ======================
+    // CLOUDINARY COVER UPLOAD
+    // ======================
+    if (cover) {
+      coverUpload = await uploadToCloudinary(cover.buffer, {
+        resource_type: "image",
+        folder: "ecodata/products/covers"
+      });
+    }
 
-  const product = {
-    productId: productRef.id,
-    title: title.trim(),
-    description: description.trim(),
-    category: category?.trim() || "Other",
-    type,
-    price: productPrice,
-    sellerId: sellerId || null,
-    status: "pending",
-    sales: 0,
-    views: 0,
-    coverUrl: coverUpload?.secure_url || null,
-    coverPublicId: coverUpload?.public_id || null,
-    fileUrl: fileUpload?.secure_url || null,
-    filePublicId: fileUpload?.public_id|| null,
-    youtubeUrl: youtubeUrl || null,
-    affiliateUrl: affiliateUrl || null,
-    creatorSharePercent: 70,
-    platformSharePercent: 30,
-    createdAt: FieldValue.serverTimestamp(),
-    updatedAt: FieldValue.serverTimestamp()
-  };
+    // ======================
+    // CLOUDINARY FILE UPLOAD
+    // ======================
+    if (
+      file &&
+      ["ebook", "notes", "template", "zip"].includes(type)
+    ) {
+      fileUpload = await uploadToCloudinary(file.buffer, {
+        resource_type: "raw",
+        folder: `ecodata/products/${type}`
+      });
+    }
 
-  await productRef.set(product);
+    // ======================
+    // GENERATE UNIQUE SLUG
+    // ======================
+    const baseSlug = title
+      .trim()
+      .toLowerCase()
+      .normalize("NFKD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .slice(0, 150) || "product";
 
-  console.log("Product created:", productRef.id);
-  return res.status(201).json({
-    success: true,
-    message: "Product submitted for approval.", 
-    productId: productRef.id
-  });
+    const slug = `${baseSlug}-${crypto.randomUUID()}`;
 
- // catch block
-  } catch(error){
+    // ======================
+    // SAVE PRODUCT TO NEON
+    // ======================
+    const products = await sql`
+      INSERT INTO ecodata_products (
+        seller_id,
+        name,
+        slug,
+        description,
+        product_type,
+        price,
+        status,
+        image_url,
+        file_public_id,
+        file_resource_type,
+        youtube_url,
+        affiliate_url,
+        updated_at
+      )
+      VALUES (
+        ${seller.id},
+        ${title.trim()},
+        ${slug},
+        ${description.trim()},
+        ${type},
+        ${productPrice},
+        'pending',
+        ${coverUpload?.secure_url || null},
+        ${fileUpload?.public_id || null},
+        ${fileUpload ? "raw" : null},
+        ${type === "video" ? youtubeUrl.trim() : null},
+        ${type === "affiliate" ? affiliateUrl.trim() : null},
+        NOW()
+      )
+      RETURNING id, seller_id, name, slug, status, created_at
+    `;
+
+    const product = products[0];
+
+    console.log("Product created in Neon:", {
+      productId: String(product.id),
+      sellerId: String(product.seller_id)
+    });
+
+    return res.status(201).json({
+      success: true,
+      message: "Product submitted for approval.",
+      productId: String(product.id),
+      product
+    });
+
+  } catch (error) {
     console.error("Create product error:", error);
+
     return res.status(500).json({
       success: false,
       message: "Unable to create product."
     });
   }
 }
+
+
+
 
 //==============================
 // GET CREATOR PRODUCTS
