@@ -87,6 +87,8 @@
   }
 }
 
+window.loadCreatorProducts = loadCreatorProducts();
+
 function renderCreatorProducts(products) {
   const grid = document.getElementById("sellerProductGrid");
   const emptyState = document.getElementById("sellerProductsEmpty");
