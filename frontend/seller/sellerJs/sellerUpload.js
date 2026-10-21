@@ -11,18 +11,17 @@ let sellerCanPublish = false;
 
 async function checkSellerPublishingPermission() {
   try {
-   
     const clerk = window.Clerk;
 
-if (!clerk) {
-  throw new Error(
-    "Authentication is still loading. Please refresh the page and try again."
-  );
-}
+    if (!clerk) {
+      throw new Error(
+        "Authentication is still loading. Please refresh the page and try again."
+      );
+    }
 
-if (typeof clerk.load === "function") {
-  await clerk.load();
-}
+    if (typeof clerk.load === "function") {
+      await clerk.load();
+    }
 
     if (!clerk.session) {
       throw new Error("Please sign in to access product uploads.");
@@ -45,24 +44,31 @@ if (typeof clerk.load === "function") {
 
     const result = await response.json();
 
-   if (!response.ok || !result.success || !result.seller) {
-  if (result.code === "SELLER_PROFILE_NOT_FOUND") {
-    throw new Error("Please complete your seller registration before uploading products.");
-  }
+    if (!response.ok || !result.success || !result.seller) {
+      if (result.code === "SELLER_PROFILE_NOT_FOUND") {
+        throw new Error(
+          "Please complete your seller registration before uploading products."
+        );
+      }
 
-  throw new Error(
-    result.message || "Unable to verify your seller profile."
-  );
-}
+      throw new Error(
+        result.message || "Unable to verify your seller profile."
+      );
+    }
 
     const seller = result.seller;
 
+    // Submission access is separate from publishing permission.
+    const sellerCanSubmit =
+      seller.status !== "suspended";
+
+    // Publishing permission is still tracked separately.
     sellerCanPublish =
       seller.status === "approved" &&
       seller.canPublish === true;
 
     if (approvalNotice) {
-      approvalNotice.hidden = sellerCanPublish;
+      approvalNotice.hidden = sellerCanSubmit && sellerCanPublish;
     }
 
     if (approvalTitle && !sellerCanPublish) {
@@ -76,23 +82,24 @@ if (typeof clerk.load === "function") {
       approvalMessage.textContent =
         seller.status === "suspended"
           ? "Your seller account is suspended. Contact support for assistance."
-          : "Your seller account must be approved and publishing permission granted before you can upload products.";
+          : "You can submit products for review while your seller account is pending. Your products will not be published until the required approval is granted.";
     }
 
     if (uploadForm1) {
       uploadForm1.classList.toggle(
         "is-access-blocked",
-        !sellerCanPublish
+        !sellerCanSubmit
       );
 
       uploadForm1.querySelectorAll(
         "input, textarea, select, button"
       ).forEach(control => {
-        control.disabled = !sellerCanPublish;
+        control.disabled = !sellerCanSubmit;
       });
     }
 
-    return sellerCanPublish;
+    return sellerCanSubmit;
+
   } catch (error) {
     sellerCanPublish = false;
 
@@ -101,7 +108,8 @@ if (typeof clerk.load === "function") {
     }
 
     if (approvalTitle) {
-      approvalTitle.textContent = "Unable to verify publishing access";
+      approvalTitle.textContent =
+        "Unable to verify seller access";
     }
 
     if (approvalMessage) {
@@ -120,7 +128,11 @@ if (typeof clerk.load === "function") {
       });
     }
 
-    console.error("Seller publishing permission check failed:", error);
+    console.error(
+      "Seller submission permission check failed:",
+      error
+    );
+
     return false;
   }
 }
