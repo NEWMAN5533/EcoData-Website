@@ -31,6 +31,8 @@ import accountRouter from "./routes/accountRoute.js";
 import profileRouter from "./routes/profileRoute.js";
 import sellerProfileRouter from "./routes/sellerProfileRoute.js";
 import sellerProductsRouter from "./routes/sellerProducts.js";
+
+// Seller upload
 import createProductRouter from "./routes/product.js";
 
 
@@ -40,6 +42,7 @@ import { admin, db } from "./firebaseAdmin.js";
 import { startOrderSyncJob } from "./cron/syncOrders.js";
 import adminTestRouter from "./routes/adminTestRoute.js";
 import adminAccessDashboardRouter from "./routes/adminDashboardRoute.js";
+import adminSellersRouter from "./routes/adminSellersMap.js";
 
 
 
@@ -89,6 +92,9 @@ app.use(initializeClerk);
 
 app.use("/api/initiate-subscription", subscriptionRouter);
 app.use("/api/create-store", storeRouter);
+
+
+
 app.use("/api/creator/products", createProductRouter);
 
 
@@ -118,6 +124,7 @@ app.use("/api/seller/products", sellerProductsRouter);
 // ADMIN ROUTES
 app.use("/api/admin", adminTestRouter);
 app.use("/api/admin", adminAccessDashboardRouter);
+app.use("/api/admin/sellers", adminSellersRouter);
 
 
 
