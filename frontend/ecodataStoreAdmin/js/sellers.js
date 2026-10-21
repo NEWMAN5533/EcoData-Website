@@ -23,6 +23,81 @@ const SELLERS_PER_PAGE = 5;
 let selectedSeller = null;
 
 
+
+
+const SELLERS_API_URL =
+  "https://ecodata-app.onrender.com/api/admin/sellers";
+
+async function loadSellersFromBackend() {
+  try {
+    const clerk = window.Clerk;
+
+    if (!clerk) {
+      throw new Error("Clerk has not loaded yet. Refresh and try again.");
+    }
+
+    if (typeof clerk.load === "function") {
+      await clerk.load();
+    }
+
+   
+    const session = clerk.session;
+
+if (!session) {
+  throw new Error(
+    "No active Clerk session found. Please sign in to your administrator account, then return to this page."
+  );
+}
+
+
+
+    const token = await session.getToken();
+
+    if (!token) {
+      throw new Error("Unable to obtain your authentication token.");
+    }
+
+    const response = await fetch(SELLERS_API_URL, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json"
+      }
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || result.success !== true) {
+      throw new Error(
+        result.message || `Unable to load sellers (${response.status}).`
+      );
+    }
+
+    sellers = Array.isArray(result.sellers) ? result.sellers : [];
+    filteredSellers = [...sellers];
+    currentPage = 1;
+
+    console.log(`Loaded ${sellers.length} seller records from Neon.`);
+  } catch (error) {
+    console.error("Failed to load sellers:", error);
+    alert(error.message || "Unable to load seller records.");
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // ======================================================
 // ELEMENTS
 // ======================================================
@@ -139,17 +214,28 @@ const viewSellerWithdrawals =
   document.getElementById("viewSellerWithdrawals");
 
 
+
+
+
+
 // ======================================================
 // INITIALIZE
 // ======================================================
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  console.log("EcoDataStore sellers page initialized.");
+
+  await loadSellersFromBackend();
 
   updateStats();
-
   applySellerFilters();
-
 });
+
+
+
+
+
+
 
 
 // ======================================================
