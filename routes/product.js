@@ -10,7 +10,14 @@ import {
   deleteCreatorProduct
 } from "../controllers/creatorProductController.js";
 
+import { requireAuth } from "../middleware/clerkAuth.js";
+
+
+
 const createProductRouter = express.Router();
+
+// AUTHENTICATE VISITORS
+createProductRouter.use(requireAuth);
 
 createProductRouter.post("/", upload.fields([
   {name: "cover", maxCount: 1},
