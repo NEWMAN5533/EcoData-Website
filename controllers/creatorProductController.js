@@ -26,12 +26,13 @@ export async function createProduct(req, res) {
     const {
       title,
       description,
-      category,
+      categoryId,
       price,
-      type,
       youtubeUrl,
       affiliateUrl
     } = req.body;
+
+    const type = req.body.productType;
 
     // ======================
     // BASIC VALIDATION
@@ -49,6 +50,37 @@ export async function createProduct(req, res) {
         message: "Product description is required."
       });
     }
+
+    const parsedCategoryId = Number(categoryId);
+
+if (
+  categoryId == null ||
+  String(categoryId).trim() === "" ||
+  !Number.isInteger(parsedCategoryId) ||
+  parsedCategoryId <= 0
+) {
+  return res.status(400).json({
+    success: false,
+    message: "A valid product category is required."
+  });
+}
+
+const categories = await sql`
+  SELECT id
+  FROM ecodata_categories
+  WHERE id = ${parsedCategoryId}
+    AND is_active = TRUE
+  LIMIT 1
+`;
+
+if (categories.length === 0) {
+  return res.status(400).json({
+    success: false,
+    message: "This product category does not exist or is inactive."
+  });
+}
+
+const validCategoryId = categories[0].id;
 
     const validTypes = [
       "ebook",
@@ -94,13 +126,26 @@ export async function createProduct(req, res) {
 
     const seller = sellers[0];
 
-  
+    if(seller.status === "suspended"){
+      return res.status(403).json({
+        success: false,
+        message: "Your seller account is suspended. You cannot submit product."
+      });
+    }
 
     // ======================
     // TYPE-SPECIFIC VALIDATION
     // ======================
     const cover = req.files?.cover?.[0];
     const file = req.files?.file?.[0];
+
+    if(!cover){
+      return res.status(400).json({
+        success: false,
+        message: "A product cover image is required."
+      });
+      
+    }
 
     if (
       ["ebook", "notes", "template", "zip"].includes(type) &&
@@ -167,8 +212,9 @@ export async function createProduct(req, res) {
     // SAVE PRODUCT TO NEON
     // ======================
     const products = await sql`
-      INSERT INTO ecodata_products (
+     INSERT INTO ecodata_products (
         seller_id,
+        category_id,
         name,
         slug,
         description,
@@ -177,6 +223,7 @@ export async function createProduct(req, res) {
         status,
         image_url,
         file_public_id,
+        file_url,
         file_resource_type,
         youtube_url,
         affiliate_url,
@@ -184,6 +231,7 @@ export async function createProduct(req, res) {
       )
       VALUES (
         ${seller.id},
+        ${validCategoryId},
         ${title.trim()},
         ${slug},
         ${description.trim()},
@@ -192,6 +240,7 @@ export async function createProduct(req, res) {
         'pending',
         ${coverUpload?.secure_url || null},
         ${fileUpload?.public_id || null},
+        ${fileUpload?.secure_url || null},
         ${fileUpload ? "raw" : null},
         ${type === "video" ? youtubeUrl.trim() : null},
         ${type === "affiliate" ? affiliateUrl.trim() : null},
