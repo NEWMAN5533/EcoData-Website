@@ -85,9 +85,11 @@ sellerLogoRouter.post(
 
         const logoUrl = uploaded?.secure_url;
 
-        if(logoUrl){
-          throw new Error("Cloudinary did not return a secure image URL.")
+        if(typeof logoUrl !== "string" || !logoUrl.startsWith("https://")){
+          throw new Error("Cloudinary did not return a valid secure image URL.");
         }
+
+        console.log("Seller logo uploaded successfully.", logoUrl);
 
       // SAVE URL to auth seller
       const rows = await sql `
