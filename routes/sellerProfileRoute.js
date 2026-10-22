@@ -47,9 +47,16 @@ sellerProfileRouter.get(
         s.area,
         s.whatsapp_number,
         s.whatsapp_enabled,
+        s.about,
+        s.store_logo_url,
+        s.facebook_url,
+        s.instagram_url,
+        s.youtube_url,
+        s.website_url,
         u.first_name,
         u.last_name,
-        u.email
+        u.email,
+       
       FROM ecodata_sellers s
       LEFT JOIN ecodata_users u
         ON u.clerk_user_id = s.clerk_user_id
@@ -96,6 +103,14 @@ sellerProfileRouter.get(
           fullName,
 
           email: seller.email,
+
+        about: seller.about || "",
+        storeLogoUrl: seller.store_logo_url || "",
+        facebook: seller.facebook_url || "",
+        instagram: seller.instagram_url || "",
+        youtube: seller.youtube_url || "",
+        website: seller.website_url || "",
+
           phoneNumber: seller.phone_number,
 
           country: seller.country,
@@ -434,6 +449,153 @@ sellerProfileRouter.post(
     }
   }
 );
+
+
+
+
+/* ======================================
+   UPDATE SELLER PROFILE
+   PUT /api/seller/profile
+====================================== */
+
+sellerProfileRouter.put("/profile", requireAuth, async (req, res) => {
+  try {
+    const { userId } = getAuth(req);
+
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: "Authentication required."
+      });
+    }
+
+    const {
+      storeName,
+      about,
+      facebook,
+      instagram,
+      youtube,
+      website
+    } = req.body;
+
+    // Validate store name
+    if (
+      typeof storeName !== "string" ||
+      !storeName.trim() ||
+      storeName.trim().length > 100
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Store name is required and must be at most 100 characters."
+      });
+    }
+
+    // Validate About field
+    if (
+      about !== undefined &&
+      (typeof about !== "string" || about.length > 1000)
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "About must be text with a maximum of 1000 characters."
+      });
+    }
+
+    // Validate optional URLs
+    function validateOptionalUrl(value, fieldName) {
+      if (value === undefined || value === null || value === "") {
+        return null;
+      }
+
+      if (typeof value !== "string" || value.length > 2048) {
+        throw new Error(`${fieldName} is invalid.`);
+      }
+
+      let parsed;
+
+      try {
+        parsed = new URL(value);
+      } catch {
+        throw new Error(`${fieldName} must be a valid URL.`);
+      }
+
+      if (!["http:", "https:"].includes(parsed.protocol)) {
+        throw new Error(`${fieldName} must use HTTP or HTTPS.`);
+      }
+
+      return parsed.href;
+    }
+
+    let facebookUrl;
+    let instagramUrl;
+    let youtubeUrl;
+    let websiteUrl;
+
+    try {
+      facebookUrl = validateOptionalUrl(facebook, "Facebook link");
+      instagramUrl = validateOptionalUrl(instagram, "Instagram link");
+      youtubeUrl = validateOptionalUrl(youtube, "YouTube link");
+      websiteUrl = validateOptionalUrl(website, "Website link");
+    } catch (error) {
+      return res.status(400).json({
+        success: false,
+        message: error.message
+      });
+    }
+
+    const rows = await sql`
+      UPDATE ecodata_sellers
+      SET
+        store_name = ${storeName.trim()},
+        about = ${typeof about === "string" ? about.trim() : ""},
+        facebook_url = ${facebookUrl},
+        instagram_url = ${instagramUrl},
+        youtube_url = ${youtubeUrl},
+        website_url = ${websiteUrl},
+        updated_at = NOW()
+      WHERE clerk_user_id = ${userId}
+      RETURNING
+        store_name,
+        about,
+        facebook_url,
+        instagram_url,
+        youtube_url,
+        website_url
+    `;
+
+    if (rows.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Seller profile not found."
+      });
+    }
+
+    const seller = rows[0];
+
+    return res.status(200).json({
+      success: true,
+      message: "Seller profile updated successfully.",
+      seller: {
+        storeName: seller.store_name,
+        about: seller.about,
+        facebook: seller.facebook_url,
+        instagram: seller.instagram_url,
+        youtube: seller.youtube_url,
+        website: seller.website_url
+      }
+    });
+
+  } catch (error) {
+    console.error("Update seller profile error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Unable to update seller profile."
+    });
+  }
+});
+
+
 
 
 export default sellerProfileRouter;
