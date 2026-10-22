@@ -83,7 +83,7 @@ sellerLogoRouter.post(
           folder: "ecodata/seller-logo"
         });
 
-        const logoUrl = uploaded?.secure__url;
+        const logoUrl = uploaded?.secure_url;
 
         if(logoUrl){
           throw new Error("Cloudinary did not return a secure image URL.")
@@ -110,7 +110,7 @@ sellerLogoRouter.post(
         logoUrl: rows[0].store_logo_url
       });
 
-      
+
     } catch(error){
       console.error("Seller logo uploaded error:", error);
 
