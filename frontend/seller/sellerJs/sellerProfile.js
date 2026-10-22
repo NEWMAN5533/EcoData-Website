@@ -171,6 +171,258 @@ window.addEventListener("click", function(e){
 
 
 
+
+
+/* ======================================
+   EDIT SELLER PROFILE MODAL
+====================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("editSellerProfileModal");
+  const openBtn = document.getElementById("editSellerProfileBtn");
+  const closeBtn = document.getElementById("closeEditSellerProfileModal");
+
+  const logoInput = document.getElementById("editSellerLogo");
+  const logoPreview = document.getElementById("editSellerLogoPreview");
+  const removeLogoBtn = document.getElementById("removeEditSellerLogo");
+
+  const aboutInput = document.getElementById("editSellerAbout");
+  const aboutCount = document.getElementById("editSellerAboutCount");
+
+  if (!modal || !openBtn) {
+    console.warn("Edit seller profile modal elements were not found.");
+    return;
+  }
+
+  function openModal() {
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("seller-modal-open");
+  }
+
+  function closeModal() {
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("seller-modal-open");
+  }
+
+  openBtn.addEventListener("click", openModal);
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", closeModal);
+  }
+
+  modal.querySelectorAll("[data-close-seller-modal]").forEach(button => {
+    button.addEventListener("click", closeModal);
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && modal.classList.contains("is-open")) {
+      closeModal();
+    }
+  });
+
+  // Store logo preview
+  if (logoInput && logoPreview) {
+    logoInput.addEventListener("change", () => {
+      const file = logoInput.files?.[0];
+
+      if (!file) return;
+
+      if (!file.type.startsWith("image/")) {
+        showSnackBar("Please select an image file.", "error");
+        logoInput.value = "";
+        return;
+      }
+
+      if (file.size > 5 * 1024 * 1024) {
+        showSnackBar("Logo must be 5 MB or smaller.", "error");
+        logoInput.value = "";
+        return;
+      }
+
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        logoPreview.innerHTML = "";
+
+        const image = document.createElement("img");
+        image.src = reader.result;
+        image.alt = "Store logo preview";
+
+        logoPreview.appendChild(image);
+
+        if (removeLogoBtn) {
+          removeLogoBtn.hidden = false;
+        }
+      };
+
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // Remove selected logo
+  if (removeLogoBtn && logoInput && logoPreview) {
+    removeLogoBtn.addEventListener("click", () => {
+      logoInput.value = "";
+      logoPreview.innerHTML = '<i class="ri-store-2-line"></i>';
+      removeLogoBtn.hidden = true;
+    });
+  }
+
+  // About character counter
+  if (aboutInput && aboutCount) {
+    const updateAboutCount = () => {
+      aboutCount.textContent = aboutInput.value.length;
+    };
+
+    aboutInput.addEventListener("input", updateAboutCount);
+    updateAboutCount();
+  }
+});
+
+
+
+/* ======================================
+   SAVE SELLER PROFILE
+====================================== */
+
+const editSellerProfileForm = document.getElementById(
+  "editSellerProfileForm"
+);
+
+if (editSellerProfileForm) {
+  editSellerProfileForm.addEventListener("submit", async event => {
+    event.preventDefault();
+
+    const saveButton = document.getElementById("saveSellerProfileBtn");
+
+    const storeName = document
+      .getElementById("editSellerStoreName")
+      ?.value.trim();
+
+    const about = document
+      .getElementById("editSellerAbout")
+      ?.value.trim();
+
+    if (!storeName) {
+      showSnackBar("Please enter your store name.", "error");
+      return;
+    }
+
+    const payload = {
+      storeName,
+      about,
+      facebook: document.getElementById("editSellerFacebook")?.value.trim() || "",
+      instagram: document.getElementById("editSellerInstagram")?.value.trim() || "",
+      youtube: document.getElementById("editSellerYoutube")?.value.trim() || "",
+      website: document.getElementById("editSellerWebsite")?.value.trim() || ""
+    };
+
+    const originalButtonHTML = saveButton?.innerHTML;
+
+    try {
+      if (saveButton) {
+        saveButton.disabled = true;
+        saveButton.innerHTML = "Saving...";
+      }
+
+      const clerk = window.Clerk;
+
+      if (!clerk) {
+        throw new Error("Clerk has not loaded. Please refresh.");
+      }
+
+      if (typeof clerk.load === "function") {
+        await clerk.load();
+      }
+
+      const session = clerk.session;
+
+      if (!session) {
+        throw new Error("Please sign in to update your profile.");
+      }
+
+      const token = await session.getToken();
+
+      const response = await fetch(
+        "https://ecodata-app.onrender.com/api/seller/profile",
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify(payload)
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || "Unable to save seller profile.");
+      }
+
+      // Update the visible profile
+      const seller = result.seller;
+
+      setText("sellerProfileName", seller.storeName || "My Store");
+      setText("sellerProfileBio", seller.about || "No store description added yet.");
+
+      // Update the modal with the saved values
+      document.getElementById("editSellerStoreName").value =
+        seller.storeName || "";
+
+      document.getElementById("editSellerAbout").value =
+        seller.about || "";
+
+      document.getElementById("editSellerFacebook").value =
+        seller.facebook || "";
+
+      document.getElementById("editSellerInstagram").value =
+        seller.instagram || "";
+
+      document.getElementById("editSellerYoutube").value =
+        seller.youtube || "";
+
+      document.getElementById("editSellerWebsite").value =
+        seller.website || "";
+
+      const aboutCount = document.getElementById("editSellerAboutCount");
+
+      if (aboutCount) {
+        aboutCount.textContent = (seller.about || "").length;
+      }
+
+      showSnackBar("Seller profile saved successfully.", "success");
+
+      const modal = document.getElementById("editSellerProfileModal");
+
+      if (modal) {
+        modal.classList.remove("is-open");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("seller-modal-open");
+      }
+
+    } catch (error) {
+      console.error("Failed to save seller profile:", error);
+
+      showSnackBar(
+        error.message || "Unable to save seller profile.",
+        "error"
+      );
+
+    } finally {
+      if (saveButton) {
+        saveButton.disabled = false;
+        saveButton.innerHTML = originalButtonHTML || "Save changes";
+      }
+    }
+  });
+}
+
+
 // SNACKBAR SECTION //
 // ===== SNACKBAR FUNCTION ===== //
 let snackTimeout = null;
