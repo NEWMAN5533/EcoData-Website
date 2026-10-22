@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seller Profile</title>
+  <link rel="stylesheet" href="sellerProfile.css">
+  <link rel="stylesheet" href="sellerProfileEditModal.css">
+  <link rel="stylesheet" href="../snackbar.css">
+
+
+  <!--remix icons-->
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
+
+
+<!--=== DARK MODE SCRIPT ========-->
+<script>
+
+document.addEventListener("DOMContentLoaded", ()=> {
+// DARK THEME
+
+const themeButton = document.getElementById('theme-button')
+const darkTheme = 'dark-mode'
+const iconTheme = 'ri-sun-line'
+
+const selectedTheme = localStorage.getItem('selected-theme')
+const selectedIcon = localStorage.getItem('selected-icon')
+
+
+
+const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
+const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'ri-moon-line' : 'ri-sun-line'
+
+
+// We validate if the user previously chose a topic
+if(selectedTheme){
+  // If the validations is fulfilled, we ask the issue was to know if we activated or deactivated
+  document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
+  themeButton.classList[selectedIcon === 'ri-moon-line' ? 'add' : 'remove'](iconTheme) 
+}
+
+// Active / deactivated the theme manually with the button
+themeButton.addEventListener("click", ()=> {
+  // Add or remove the dark / icon theme
+  document.body.classList.toggle(darkTheme)
+  themeButton.classList.toggle(iconTheme)
+  // We save theme and the current icon the user chose
+  localStorage.setItem('selected-theme', getCurrentTheme())
+  localStorage.setItem('selected-icon', getCurrentIcon())
+})
+
+});
+
+
+</script>
+<!--=== DARK MODE SCRIPT ENDS ===-->
+
+</head>
+<body>
+
+
+  <!-- EDIT SELLER PROFILE MODAL -->
+<div
+  id="editSellerProfileModal"
+  class="edit-seller-modal"
+  aria-hidden="true"
+>
+  <div class="edit-seller-modal-overlay" data-close-seller-modal></div>
+
+  <section
+    class="edit-seller-modal-content"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="editSellerProfileTitle"
+  >
+    <header class="edit-seller-modal-header">
+      <div>
+        <span class="edit-seller-modal-eyebrow">YOUR STORE</span>
+        <h2 id="editSellerProfileTitle">Edit Profile</h2>
+        <p>Customize how buyers see your store.</p>
+      </div>
+
+      <button
+        type="button"
+        class="edit-seller-modal-close"
+        id="closeEditSellerProfileModal"
+        aria-label="Close edit profile"
+      >
+        <i class="ri-close-line"></i>
+      </button>
+    </header>
+
+    <form id="editSellerProfileForm">
+      <!-- STORE LOGO -->
+      <div class="edit-seller-logo-section">
+        <div class="edit-seller-logo-preview" id="editSellerLogoPreview">
+          <i class="ri-store-2-line"></i>
+        </div>
+
+        <div class="edit-seller-logo-details">
+          <h3>Store logo</h3>
+          <p>Use a clear image to represent your brand.</p>
+
+          <label
+            for="editSellerLogo"
+            class="edit-seller-upload-btn"
+          >
+            <i class="ri-upload-2-line"></i>
+            Choose image
+          </label>
+
+          <input
+            type="file"
+            id="editSellerLogo"
+            name="storeLogo"
+            accept="image/png,image/jpeg,image/webp"
+            hidden
+          />
+
+          <button
+            type="button"
+            id="removeEditSellerLogo"
+            class="edit-seller-remove-logo"
+            hidden
+          >
+            Remove
+          </button>
+
+          <small>PNG, JPG or WebP. Optional.</small>
+        </div>
+      </div>
+
+      <div class="edit-seller-form-divider"></div>
+
+      <!-- STORE NAME -->
+      <div class="edit-seller-field">
+        <label for="editSellerStoreName">Store name</label>
+        <input
+          type="text"
+          id="editSellerStoreName"
+          name="storeName"
+          maxlength="100"
+          placeholder="Enter your store name"
+        />
+      </div>
+
+      <!-- ABOUT -->
+      <div class="edit-seller-field">
+        <label for="editSellerAbout">About your store</label>
+        <textarea
+          id="editSellerAbout"
+          name="about"
+          rows="4"
+          maxlength="1000"
+          placeholder="Tell buyers about your store, products and services..."
+        ></textarea>
+
+        <div class="edit-seller-character-count">
+          <span id="editSellerAboutCount">0</span>/1000
+        </div>
+      </div>
+
+      <!-- SOCIAL LINKS -->
+      <div class="edit-seller-section-heading">
+        <h3>Social links</h3>
+        <span>Optional</span>
+      </div>
+
+      <div class="edit-seller-field">
+        <label for="editSellerFacebook">Facebook</label>
+        <div class="edit-seller-input-icon">
+          <i class="ri-facebook-fill"></i>
+          <input
+            type="url"
+            id="editSellerFacebook"
+            name="facebook"
+            placeholder="https://facebook.com/yourpage"
+          />
+        </div>
+      </div>
+
+      <div class="edit-seller-field">
+        <label for="editSellerInstagram">Instagram</label>
+        <div class="edit-seller-input-icon">
+          <i class="ri-instagram-line"></i>
+          <input
+            type="url"
+            id="editSellerInstagram"
+            name="instagram"
+            placeholder="https://instagram.com/yourpage"
+          />
+        </div>
+      </div>
+
+      <div class="edit-seller-field">
+        <label for="editSellerYoutube">YouTube</label>
+        <div class="edit-seller-input-icon">
+          <i class="ri-youtube-line"></i>
+          <input
+            type="url"
+            id="editSellerYoutube"
+            name="youtube"
+            placeholder="https://youtube.com/@yourchannel"
+          />
+        </div>
+      </div>
+
+      <div class="edit-seller-field">
+        <label for="editSellerWebsite">Website</label>
+        <div class="edit-seller-input-icon">
+          <i class="ri-global-line"></i>
+          <input
+            type="url"
+            id="editSellerWebsite"
+            name="website"
+            placeholder="https://yourwebsite.com"
+          />
+        </div>
+      </div>
+
+      <footer class="edit-seller-modal-footer">
+        <button
+          type="button"
+          class="edit-seller-cancel-btn"
+          data-close-seller-modal
+        >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="edit-seller-save-btn"
+          id="saveSellerProfileBtn"
+        >
+          <i class="ri-check-line"></i>
+          Save changes
+        </button>
+      </footer>
+    </form>
+  </section>
+</div>
+  <!--============ NAV ============-->
+  <nav class="nav-container nav-bar">
+    <div class="nav-bar-left">
+      <img src="../css/icons/newLogo.png" alt="newLogo">
+    </div>
+   
+    <div class="nav-actions">
+
+      
+
+        <!---login button-->
+        <i class="ri-user-line login-button material-icons" id="login-button"></i>
+
+            <!---theme button -->
+        <i class="ri-moon-foggy-line change-theme material-icons" id="theme-button"></i>
+
+
+        <!---menu button-->
+        <i class="ri-menu-2-line material-icons" id="menu"></i>
+      </div>
+  </nav>
+
+
+  <!--========= SIDE MENU ===========-->
+  <menu class="sidebar ">
+    <div class="sidebar-wrapper">
+    <div class="creator-studio">
+    <div class="creator-st-left">
+      <div class="sellerAvatarWrapper">
+
+        <img
+          id="sellerProfileAvatarLap"
+          class="sellerProfileAvatar"
+          src="../css/images/dg-watch.png"
+          alt="Seller profile"
+        >
+
+        <div class="sellerAvatarBadge">
+          <i class="ri-check-line"></i>
+        </div>
+
+      </div>
+    </div>
+    <div class="creator-st-right">
+    
+        <div class="sellerRole">
+
+          <span class="sellerRoleIcon">
+            <i class="ri-store-2-line"></i>
+          </span>
+
+          Creator / Seller
+
+        </div>
+         <p
+          id="sellerProfileUsernameLap"
+          class="sellerUsername"
+        >
+         @SELLER
+        </p>
+    </div>
+       
+   </div>
+   
+   
+
+   
+ <div class="sidebar-wrapper2">
+     <a href="sellerUpgradeDashboard.html">
+      <i class="ri-dashboard-3-line"></i>
+      <h5>Dashboard</h5>
+    </a>
+
+     <a href="sellerProductsPage.html">
+      <i class="ri-box-3-line"></i>
+      <h5>Products</h5>
+    </a>
+
+     <a href="sellerUploadPage.html">
+      <i class="ri-upload-cloud-2-line"></i>
+      <h5>Upload Product</h5>
+    </a>
+
+     <a href="sellerSalesPage.html">
+      <i class="ri-bar-chart-box-line"></i>
+      <h5>Sales</h5>
+    </a>
+
+     <a href="sellerEarningsPage.html">
+      <i class="ri-money-dollar-circle-line"></i>
+      <h5>Earnings</h5>
+    </a>
+
+     <a href="sellerWithdrawalPage.html">
+      <i class="ri-bank-card-line"></i>
+      <h5>Withdrawals</h5>
+    </a>
+
+    <div class="sidebarView">
+        <h4>CREATOR</h4>
+      </div>
+
+     <a href="sellerProfile.html"  class="active">
+      <i class="ri-user-3-line"></i>
+      <h5>Profile</h5>
+    </a>
+
+      <a href="sellerSettings.html">
+      <i class="ri-settings-3-line"></i>
+      <h5>Settings</h5>
+    </a>
+
+      <a href="sellerMessages.html">
+      <i class="ri-message-3-line"></i>
+      <h5>Messages</h5>
+    </a>
+
+
+      <a href="sellerHelpCenter.html" >
+      <i class="ri-question-line"></i>
+      <h5>Help & Support</h5>
+    </a>
+
+   </div>
+    
+
+    </div>
+  </menu>
+
+ <!--========= SIDE MENU ===========-->
+  <menu class="sidebarPhone">
+    <div class="sidebar-wrapper">
+   <div class="creator-studio">
+    <div class="creator-st-left">
+      <div class="sellerAvatarWrapper">
+
+        <img
+          id="sellerProfileAvatarMobile"
+          class="sellerProfileAvatar"
+          src="../css/images/dg-watch.png"
+          alt="Seller profile"
+        >
+
+        <div class="sellerAvatarBadge">
+          <i class="ri-check-line"></i>
+        </div>
+
+      </div>
+    </div>
+    <div class="creator-st-right">
+    
+        <div class="sellerRole">
+
+          <span class="sellerRoleIcon">
+            <i class="ri-store-2-line"></i>
+          </span>
+
+          Creator / Seller
+
+        </div>
+         <p
+          id="sellerProfileUsernameMobile"
+          class="sellerUsername"
+        >
+         @SELLER
+        </p>
+    </div>
+       
+   </div>
+   
+
+  
+   <div class="sidebar-wrapper2">
+     <a href="sellerUpgradeDashboard.html" >
+      <i class="ri-dashboard-3-line"></i>
+      <h5>Dashboard</h5>
+    </a>
+
+     <a href="sellerProductsPage.html">
+      <i class="ri-box-3-line"></i>
+      <h5>Products</h5>
+    </a>
+
+     <a href="sellerUploadPage.html">
+      <i class="ri-upload-cloud-2-line"></i>
+      <h5>Upload Product</h5>
+    </a>
+
+     <a href="sellerSalesPage.html" >
+      <i class="ri-bar-chart-box-line"></i>
+      <h5>Sales</h5>
+    </a>
+
+     <a href="sellerEarningsPage.html">
+      <i class="ri-money-dollar-circle-line"></i>
+      <h5>Earnings</h5>
+    </a>
+
+     <a href="sellerWithdrawalPage.html">
+      <i class="ri-bank-card-line"></i>
+      <h5>Withdrawals</h5>
+    </a>
+
+    <div class="sidebarView">
+        <h4>CREATOR</h4>
+      </div>
+
+     <a href="sellerProfile.html" class="active">
+      <i class="ri-user-3-line"></i>
+      <h5>Profile</h5>
+    </a>
+
+      <a href="sellerSettings.html" >
+      <i class="ri-settings-3-line"></i>
+      <h5>Settings</h5>
+    </a>
+
+      <a href="sellerMessages.html">
+      <i class="ri-message-3-line"></i>
+      <h5>Messages</h5>
+    </a>
+
+
+      <a href="sellerHelpCenter.html" >
+      <i class="ri-question-line"></i>
+      <h5>Help & Support</h5>
+    </a>
+
+   </div>
+
+    </div>
+  </menu>
+  <!---========= MAIN ==============-->
+  <main class="main-container">
+    <!-- ==========================================
+     SELLER PROFILE
+========================================== -->
+
+<section class="sellerProfilePage">
+
+  <!-- ========================================
+       PROFILE HERO
+  ========================================= -->
+
+  <div class="sellerProfileHero">
+
+    <div class="sellerProfileIdentity">
+
+      <div class="sellerAvatarWrapper">
+
+        <img
+          id="sellerProfileAvatar"
+          class="sellerProfileAvatar"
+          src="../css/images/dg-watch.png"
+          alt="Seller profile"
+        >
+
+        <div class="sellerAvatarBadge">
+          <i class="ri-check-line"></i>
+        </div>
+
+      </div>
+
+
+      <div class="sellerIdentityInfo">
+
+        <div class="sellerNameRow">
+
+          <h1 id="sellerProfileName">
+            EcoData Creator
+          </h1>
+
+          <span class="sellerVerified">
+            <i class="ri-verified-badge-fill"></i>
+          </span>
+
+        </div>
+
+
+        <p
+          id="sellerProfileUsername"
+          class="sellerUsername"
+        >
+          @TES_SELLER
+        </p>
+
+
+        <div class="sellerRole">
+
+          <span class="sellerRoleIcon">
+            <i class="ri-store-2-line"></i>
+          </span>
+
+          Creator / Seller
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <button
+      type="button"
+      id="editSellerProfileBtn"
+      class="editSellerProfileBtn"
+    >
+
+      <i class="ri-edit-line"></i>
+
+      <span>Edit Profile</span>
+
+    </button>
+
+  </div>
+
+
+  <!-- ========================================
+       SELLER STATISTICS
+  ========================================= -->
+
+  <div class="sellerProfileStats">
+
+    <div class="sellerProfileStat">
+
+      <span class="sellerProfileStatIcon">
+        <i class="ri-shopping-bag-3-line" ></i>
+      </span>
+
+      <div>
+        <strong id="sellerProfileProducts">
+          0
+        </strong>
+
+        <small>Products</small>
+      </div>
+
+    </div>
+
+
+    <div class="sellerProfileStat">
+
+      <span class="sellerProfileStatIcon">
+        <i class="ri-bar-chart-2-line" ></i>
+      </span>
+
+      <div>
+        <strong id="sellerProfileSales">
+          0
+        </strong>
+
+        <small>Sales</small>
+      </div>
+
+    </div>
+
+
+    <div class="sellerProfileStat">
+
+      <span class="sellerProfileStatIcon">
+        <i class="ri-eye-line"></i>
+      </span>
+
+      <div>
+        <strong id="sellerProfileViews">
+          0
+        </strong>
+
+        <small>Views</small>
+      </div>
+
+    </div>
+
+
+    <div class="sellerProfileStat">
+
+      <span class="sellerProfileStatIcon">
+        <i class="ri-star-fill" ></i>
+      </span>
+
+      <div>
+        <strong id="sellerProfileRating">
+          —
+        </strong>
+
+        <small>Rating</small>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================================
+       PROFILE CONTENT
+  ========================================= -->
+
+  <div class="sellerProfileContent">
+
+
+    <!-- ======================================
+         ABOUT
+    ======================================= -->
+
+    <div class="sellerProfileCard">
+
+      <div class="sellerProfileCardHeader">
+
+        <div>
+
+          <span class="sellerSectionIcon">
+            <i class="ri-user-3-line"></i>
+          </span>
+
+          <div>
+
+            <h2>About</h2>
+
+            <p>
+              About this creator
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <p
+        id="sellerProfileBio"
+        class="sellerProfileBio"
+      >
+        Digital products, educational resources
+        and more.
+      </p>
+
+    </div>
+
+
+    <!--======================================
+        SELLER INFORMATION
+    ======================================= -->
+
+    <div class="sellerProfileCard">
+
+      <div class="sellerProfileCardHeader">
+
+        <div>
+
+          <span class="sellerSectionIcon">
+            <i class="ri-information-line" ></i>
+          </span>
+
+          <div>
+
+            <h2>Seller Information</h2>
+
+            <p>
+              Contact and location details
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="sellerInformationGrid">
+
+
+        <div class="sellerInformationItem">
+
+          <span class="sellerInformationIcon">
+            <i class="ri-mail-line" style="color: rgb(16, 196, 142);"></i>
+          </span>
+
+          <div>
+
+            <small>Email</small>
+
+            <strong id="sellerProfileEmail">
+              —
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="sellerInformationItem">
+
+          <span class="sellerInformationIcon">
+            <i class="ri-phone-line" style="color: rgb(89, 224, 119);"></i>
+          </span>
+
+          <div>
+
+            <small>Phone</small>
+
+            <strong id="sellerProfilePhone">
+              —
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="sellerInformationItem">
+
+          <span class="sellerInformationIcon">
+            <i class="ri-map-pin-line" style="color: rgb(196, 82, 16);"></i>
+          </span>
+
+          <div>
+
+            <small>Location</small>
+
+            <strong id="sellerProfileLocation">
+              Ghana
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ======================================
+         SOCIAL LINKS
+    ======================================= -->
+
+    <div class="sellerProfileCard">
+
+      <div class="sellerProfileCardHeader">
+
+        <div>
+
+          <span class="sellerSectionIcon">
+            <i class="ri-links-line" style="color: rgb(209, 106, 21);"></i>
+          </span>
+
+          <div>
+
+            <h2>Social Links</h2>
+
+            <p>
+              Connect with this creator
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="sellerSocialLinks">
+
+
+        <a
+          id="sellerFacebook"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="sellerSocialLink"
+        >
+
+          <span class="sellerSocialIcon">
+            <i class="ri-facebook-fill" style="color: rgb(16, 100, 196);"></i>
+          </span>
+
+          <span>Facebook</span>
+
+          <i class="ri-arrow-right-up-line"></i>
+
+        </a>
+
+
+        <a
+          id="sellerInstagram"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="sellerSocialLink"
+        >
+
+          <span class="sellerSocialIcon">
+            <i class="ri-instagram-line" style="color: rgb(199, 106, 183);"></i>
+          </span>
+
+          <span>Instagram</span>
+
+          <i class="ri-arrow-right-up-line"></i>
+
+        </a>
+
+
+        <a
+          id="sellerYoutube"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="sellerSocialLink"
+        >
+
+          <span class="sellerSocialIcon">
+            <i class="ri-youtube-line" style="color: rgb(196, 58, 16);"></i>
+          </span>
+
+          <span>YouTube</span>
+
+          <i class="ri-arrow-right-up-line"></i>
+
+        </a>
+
+
+        <a
+          id="sellerWebsite"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="sellerSocialLink"
+        >
+
+          <span class="sellerSocialIcon">
+            <i class="ri-global-line" style="color: rgb(16, 79, 196);"></i>
+          </span>
+
+          <span>Website</span>
+
+          <i class="ri-arrow-right-up-line"></i>
+
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <!-- ======================================
+      CREATOR EARNINGS
+    ======================================= -->
+
+    <div class="sellerProfileCard sellerEarningsCard">
+
+      <div class="sellerProfileCardHeader">
+
+        <div>
+
+          <span class="sellerSectionIcon">
+            <i class="ri-wallet-3-line" style="color: rgb(196, 118, 16);"></i>
+          </span>
+
+          <div>
+
+            <h2>Creator Earnings</h2>
+
+            <p>
+              Your earnings from product sales
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="sellerEarningsGrid">
+
+
+        <div>
+
+          <small>Total Earnings</small>
+
+          <strong id="sellerProfileEarnings">
+            GHS 0.00
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <small>Available Balance</small>
+
+          <strong id="sellerProfileBalance">
+            GHS 0.00
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <small>Platform Fee</small>
+
+          <strong>
+            30%
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <small>Your Share</small>
+
+          <strong>
+            70%
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+
+    
+      <!-----BOTTOM-NAVBAR----->
+  <div class="bottom-navbar" id="navIconDiv">
+    <div class="btom-navIcon" onclick="window.location.href='../seller/sellerUpgradeDashboard.html'">
+      <div class="activeImg" id="activeMtn">
+        <i class="ri-dashboard-3-line material-icons"></i>
+      </div>
+      <small class="bottomIcon-textNav">Dashboard</small>
+    </div>
+
+    <div class="btom-navIcon"  onclick="window.location.href='../seller/sellerProductsPage.html'">
+      <div class="activeImg" > 
+        <i class="ri-box-3-line material-icons"></i>
+      </div>
+      <small class="bottomIcon-textNav">Products</small>
+    </div>
+
+
+   
+
+
+      <div class="btom-navIcon addBar"  onclick="window.location.href='../seller/sellerUploadPage.html'">
+      <div class="activeImg" id="activeTel" > 
+       <i class="ri-upload-cloud-2-line material-icons addBtn"></i>
+      </div>
+      <small class="bottomIcon-textNav">Upload</small>
+    </div>
+
+
+     <div class="btom-navIcon" onclick="window.location.href='../seller/sellerSalesPage.html'">
+      <div class="activeImg" id="activeAir" > 
+      <i class="ri-shopping-bag-3-line material-icons"></i>
+      </div>
+      <small class="bottomIcon-textNav"> Sales</small>
+    </div>
+
+    
+       <div class="btom-navIcon" onclick="window.location.href='../seller/sellerProfile.html'">
+      <div class="activeImg active" id="activeAir" > 
+      <i class="ri-user-settings-line material-icons"></i>
+      </div>
+      <small class="bottomIcon-textNav">Profile</small>
+    </div>
+
+
+   
+
+
+  </div>
+  </main>
+
+  <script
+  defer
+  crossorigin="anonymous"
+  src="https://enjoyed-cub-1020.clerk.accounts.dev/npm/@clerk/ui@1/dist/ui.browser.js"
+  type="text/javascript">
+</script>
+
+<script
+  defer
+  crossorigin="anonymous"
+  data-clerk-publishable-key="pk_test_ZW5qb3llZC1jdWItMTAyMC5jbGVyay5hY2NvdW50cy5kZXYk"
+  src="https://enjoyed-cub-1020.clerk.accounts.dev/npm/@clerk/clerk-js@6/dist/clerk.browser.js"
+  type="text/javascript">
+</script>
+
+<script src="./sellerJs/sellerCommon.js"></script>
+  <script type="module" src="./sellerJs/sellerProfile.js"></script>
+</body>
+</html>
