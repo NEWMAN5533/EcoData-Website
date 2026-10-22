@@ -55,8 +55,7 @@ sellerProfileRouter.get(
         s.website_url,
         u.first_name,
         u.last_name,
-        u.email,
-       
+        u.email
       FROM ecodata_sellers s
       LEFT JOIN ecodata_users u
         ON u.clerk_user_id = s.clerk_user_id
