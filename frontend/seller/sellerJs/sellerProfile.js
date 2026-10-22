@@ -172,7 +172,6 @@ window.addEventListener("click", function(e){
 
 
 
-
 /* ======================================
    EDIT SELLER PROFILE MODAL
 ====================================== */
@@ -279,7 +278,7 @@ document.addEventListener("DOMContentLoaded", () => {
     aboutInput.addEventListener("input", updateAboutCount);
     updateAboutCount();
   }
-});
+
 
 
 
@@ -421,6 +420,9 @@ if (editSellerProfileForm) {
     }
   });
 }
+
+});
+
 
 
 // SNACKBAR SECTION //
