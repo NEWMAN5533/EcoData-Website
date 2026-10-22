@@ -30,6 +30,7 @@ import { getAuth } from "@clerk/express";
 import accountRouter from "./routes/accountRoute.js";
 import profileRouter from "./routes/profileRoute.js";
 import sellerProfileRouter from "./routes/sellerProfileRoute.js";
+import sellerLogoRouter from "./routes/sellerLogoRoute.js";
 import sellerProductsRouter from "./routes/sellerProducts.js";
 
 // Seller upload
@@ -43,6 +44,7 @@ import { startOrderSyncJob } from "./cron/syncOrders.js";
 import adminTestRouter from "./routes/adminTestRoute.js";
 import adminAccessDashboardRouter from "./routes/adminDashboardRoute.js";
 import adminSellersRouter from "./routes/adminSellersMap.js";
+
 
 
 
@@ -119,6 +121,7 @@ app.get("/api/auth/me", requireAuth, (req, res) => {
 app.use("/api/profile", profileRouter);
 // SELLER PROFILE ROUTE
 app.use("/api/seller", sellerProfileRouter);
+app.use("/api/seller/logo", sellerLogoRouter)
 app.use("/api/seller/products", sellerProductsRouter);
 
 // ADMIN ROUTES
