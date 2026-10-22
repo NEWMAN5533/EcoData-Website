@@ -83,21 +83,16 @@ sellerLogoRouter.post(
           folder: "ecodata/seller-logo"
         });
 
-        console.log("Cloudinary upload result:", {
-          hasResult: Boolean(uploaded),
-          keys: uploaded ? Object.keys(uploaded) : [],
-          secure__url: uploaded?.secure__url,
-          public_id: uploaded?.public_id
-        })
+        const logoUrl = uploaded?.secure__url;
 
-      if(!uploaded?.secure__url){
-        throw new Error("Cloudinary did not return a secure image URL.");
-      }
+        if(logoUrl){
+          throw new Error("Cloudinary did not return a secure image URL.")
+        }
+
       // SAVE URL to auth seller
       const rows = await sql `
       UPDATE ecodata_sellers
-      SET
-      store_logo_url = ${uploaded.secure__url},
+      SET store_logo_url = ${logoUrl},
       updated_at = NOW()
       WHERE clerk_user_id = ${userId}
       RETURNING store_logo_url
@@ -114,6 +109,8 @@ sellerLogoRouter.post(
         message: "Seller logo uploaded successfully.",
         logoUrl: rows[0].store_logo_url
       });
+
+      
     } catch(error){
       console.error("Seller logo uploaded error:", error);
 
