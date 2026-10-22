@@ -1,0 +1,529 @@
+/* ======================================
+   ECODATASTORE - EDIT SELLER PROFILE
+====================================== */
+
+:root {
+  /* ==========================================
+     SELLER CREATOR STUDIO — LIGHT THEME
+  ========================================== */
+
+  /* Main backgrounds */
+  --body-bg-light: #f7f8fa;
+  --page-bg-light: #f7f8fa;
+  --sidebar-bg-light: #ffffff;
+  --surface-bg-light: #ffffff;
+  --surface-bg-hover-light: #f5f6f8;
+
+  /* Cards */
+  --card-bg: #ffffff;
+  --card-bg-hover: #fafbfc;
+  --card-elevated: #ffffff;
+
+  /* Borders */
+  --border-color: rgba(15, 23, 42, 0.09);
+  --border-light: rgba(15, 23, 42, 0.055);
+  --border-hover: rgba(15, 23, 42, 0.15);
+
+  /* Text */
+  --text-color: #171a21;
+  --text-primary: #111318;
+  --text-secondary: #5f6672;
+  --text-muted: #858c98;
+  --text-faint: #aeb4bd;
+
+
+  /* Accent */
+  --accent-color: #6d4aff;
+  --accent-hover: #5d3bea;
+  --accent-soft: rgba(109, 74, 255, 0.08);
+  --accent-border: rgba(109, 74, 255, 0.20);
+
+  /* Success */
+  --success-color: #16a978;
+  --success-soft: rgba(22, 169, 120, 0.08);
+  --success-border: rgba(22, 169, 120, 0.18);
+
+  /* Warning */
+  --warning-color: #d99518;
+  --warning-soft: rgba(217, 149, 24, 0.09);
+  --warning-border: rgba(217, 149, 24, 0.18);
+
+  /* Danger */
+  --danger-color: #e5485d;
+  --danger-soft: rgba(229, 72, 93, 0.08);
+  --danger-border: rgba(229, 72, 93, 0.18);
+
+  /* Info */
+  --info-color: #168bd2;
+  --info-soft: rgba(22, 139, 210, 0.08);
+  --info-border: rgba(22, 139, 210, 0.18);
+
+  /* Inputs */
+  --input-bg: #ffffff;
+  --input-border: rgba(15, 23, 42, 0.11);
+  --input-border-focus: rgba(109, 74, 255, 0.45);
+  --input-placeholder: #9aa1ac;
+
+  /* Buttons */
+  --button-bg: #111318;
+  --button-text: #ffffff;
+  --button-hover: #24272d;
+
+  /* Sidebar */
+  --sidebar-border: rgba(15, 23, 42, 0.08);
+  --sidebar-item-hover: rgba(15, 23, 42, 0.045);
+  --sidebar-item-active: rgba(109, 74, 255, 0.08);
+  --sidebar-item-active-text: #6240ed;
+
+  /* Tables */
+  --table-header-bg: #f8f9fb;
+  --table-row-hover: rgba(15, 23, 42, 0.025);
+  --table-divider: rgba(15, 23, 42, 0.065);
+
+  /* Charts */
+  --chart-grid: rgba(15, 23, 42, 0.07);
+  --chart-text: #858c98;
+  --chart-tooltip-bg: #ffffff;
+
+  /* Shadows */
+  --shadow-sm: 0 4px 15px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 10px 30px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 20px 50px rgba(15, 23, 42, 0.12);
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+
+  /* General */
+  --transition-fast: 0.18s ease;
+  --transition-normal: 0.25s ease;
+}
+
+:root {
+  /* ==========================================
+     SELLER CREATOR STUDIO — DARK THEME
+  ========================================== */
+
+  /* Main backgrounds */
+  --body-bg-dark: #0b0d10;
+  --page-bg-dark: #0b0d10;
+  --sidebar-bg-dark: #101318;
+  --surface-bg-dark: #14181e;
+  --surface-bg-hover-dark: #191e25;
+
+  /* Cards */
+  --card-bg: #12161c;
+  --card-bg-hover-dark: #171c23;
+  --card-elevated-dark: #181d24;
+
+  /* Borders */
+  --border-color-dark: rgba(255, 255, 255, 0.08);
+  --border-light-dark: rgba(255, 255, 255, 0.055);
+  --border-hover-dark: rgba(255, 255, 255, 0.14);
+
+  /* Text */
+  --text-color: #f1f3f5;
+  --text-primary: #f5f7f9;
+  --text-secondary: #a7adb7;
+  --text-muted: #737b87;
+  --text-faint: #555d68;
+
+  /* Accent */
+  --accent-color: #7c5cff;
+  --accent-hover: #8d70ff;
+  --accent-soft: rgba(124, 92, 255, 0.12);
+  --accent-border: rgba(124, 92, 255, 0.25);
+
+  /* Success */
+  --success-color: #35d49a;
+  --success-soft: rgba(53, 212, 154, 0.10);
+  --success-border: rgba(53, 212, 154, 0.20);
+
+  /* Warning */
+  --warning-color: #f5b84b;
+  --warning-soft: rgba(245, 184, 75, 0.10);
+  --warning-border: rgba(245, 184, 75, 0.20);
+
+  /* Danger */
+  --danger-color: #ff5f6d;
+  --danger-soft: rgba(255, 95, 109, 0.10);
+  --danger-border: rgba(255, 95, 109, 0.20);
+
+  /* Info */
+  --info-color: #55b8ff;
+  --info-soft: rgba(85, 184, 255, 0.10);
+  --info-border: rgba(85, 184, 255, 0.20);
+
+  /* Inputs */
+  --input-bg: #0f1318;
+  --input-border: rgba(255, 255, 255, 0.09);
+  --input-border-focus: rgba(124, 92, 255, 0.55);
+  --input-placeholder: #5f6670;
+
+  /* Buttons */
+  --button-bg-dark: #f1f3f5;
+  --button-text-dark: #0b0d10;
+  --button-hover-dark: #ffffff;
+
+  /* Sidebar */
+  --sidebar-border: rgba(255, 255, 255, 0.07);
+  --sidebar-item-hover: rgba(255, 255, 255, 0.055);
+  --sidebar-item-active: rgba(124, 92, 255, 0.12);
+  --sidebar-item-active-text: #a996ff;
+
+  /* Tables */
+  --table-header-bg: rgba(255, 255, 255, 0.025);
+  --table-row-hover: rgba(255, 255, 255, 0.025);
+  --table-divider: rgba(255, 255, 255, 0.06);
+
+  /* Charts */
+  --chart-grid: rgba(255, 255, 255, 0.06);
+  --chart-text: #777f8b;
+  --chart-tooltip-bg: #171c23;
+
+  /* Shadows */
+  --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.18);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.35);
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+
+  /* General */
+  --transition-fast: 0.18s ease;
+  --transition-normal: 0.25s ease;
+}
+
+
+.edit-seller-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.edit-seller-modal.is-open {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.edit-seller-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.62);
+  backdrop-filter: blur(7px);
+}
+
+.edit-seller-modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 28px;
+  border: 1px solid var(--border-color, #303030);
+  border-radius: 22px;
+  background: var(--card-bg, #151515);
+  color: var(--text-color, #f5f5f5);
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+  transform: translateY(16px) scale(0.98);
+  transition: transform 0.25s ease;
+}
+
+.edit-seller-modal.is-open .edit-seller-modal-content {
+  transform: translateY(0) scale(1);
+}
+
+.edit-seller-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 25px;
+}
+
+.edit-seller-modal-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #999;
+}
+
+.edit-seller-modal-header h2 {
+  margin: 7px 0;
+  font-size: 25px;
+  font-weight: 750;
+}
+
+.edit-seller-modal-header p,
+.edit-seller-logo-details p {
+  margin: 0;
+  color: var(--muted-color, #a2a2a2);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.edit-seller-modal-close {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border-color, #303030);
+  border-radius: 12px;
+  background: transparent;
+  color: inherit;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+.edit-seller-logo-section {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 18px;
+  border: 1px solid var(--border-color, #303030);
+  border-radius: 16px;
+  background: rgba(128, 128, 128, 0.04);
+}
+
+.edit-seller-logo-preview {
+  width: 86px;
+  height: 86px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px dashed #666;
+  border-radius: 18px;
+  background: rgba(128, 128, 128, 0.08);
+  font-size: 32px;
+}
+
+.edit-seller-logo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.edit-seller-logo-details h3,
+.edit-seller-section-heading h3 {
+  margin: 0 0 5px;
+  font-size: 14px;
+}
+
+.edit-seller-upload-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 12px 0 7px;
+  padding: 9px 12px;
+  border: 1px solid var(--border-color, #303030);
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.edit-seller-remove-logo {
+  margin-left: 6px;
+  border: 0;
+  background: transparent;
+  color: #e78a8a;
+  cursor: pointer;
+}
+
+.edit-seller-logo-details small {
+  display: block;
+  color: var(--muted-color, #999);
+  font-size: 11px;
+}
+
+.edit-seller-form-divider {
+  height: 1px;
+  margin: 24px 0;
+  background: var(--border-color, #303030);
+}
+
+.edit-seller-field {
+  margin-bottom: 19px;
+}
+
+.edit-seller-field > label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.edit-seller-field input,
+.edit-seller-field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 14px;
+  border: 1px solid var(--border-color, #343434);
+  border-radius: 12px;
+  outline: none;
+  background: var(--input-bg, #101010);
+  color: inherit;
+  font: inherit;
+  font-size: 13px;
+  transition: border-color 0.2s ease;
+}
+
+.edit-seller-field input:focus,
+.edit-seller-field textarea:focus {
+  border-color: var(--accent-color, #8c8c8c);
+}
+
+.edit-seller-field textarea {
+  resize: vertical;
+  min-height: 105px;
+  line-height: 1.6;
+}
+
+.edit-seller-character-count {
+  margin-top: 6px;
+  text-align: right;
+  color: var(--muted-color, #999);
+  font-size: 11px;
+}
+
+.edit-seller-section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 27px 0 18px;
+}
+
+.edit-seller-section-heading span {
+  color: var(--muted-color, #999);
+  font-size: 11px;
+}
+
+.edit-seller-input-icon {
+  position: relative;
+}
+
+.edit-seller-input-icon > i {
+  position: absolute;
+  top: 50%;
+  left: 13px;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: var(--muted-color, #aaa);
+  pointer-events: none;
+}
+
+.edit-seller-input-icon input {
+  padding-left: 42px;
+}
+
+.edit-seller-modal-footer {
+  position: sticky;
+  bottom: -28px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin: 28px -28px -28px;
+  padding: 18px 28px;
+  border-top: 1px solid var(--border-color, #303030);
+  background: var(--card-bg, #151515);
+}
+
+.edit-seller-cancel-btn,
+.edit-seller-save-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  min-height: 43px;
+  padding: 0 17px;
+  border-radius: 11px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.edit-seller-cancel-btn {
+  border: 1px solid var(--border-color, #333);
+  background: transparent;
+  color: inherit;
+}
+
+.edit-seller-save-btn {
+  border: 1px solid var(--accent-color);
+  background: var(--button-bg, #111);
+  color: #111;
+}
+
+.edit-seller-save-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+body.seller-modal-open {
+  overflow: hidden;
+}
+
+@media (max-width: 520px) {
+  .edit-seller-modal {
+    padding: 10px;
+    align-items: flex-end;
+  }
+
+  .edit-seller-modal-content {
+    max-height: 92vh;
+    padding: 20px;
+    border-radius: 20px 20px 14px 14px;
+  }
+
+  .edit-seller-modal-header h2 {
+    font-size: 22px;
+  }
+
+  .edit-seller-logo-section {
+    align-items: flex-start;
+    padding: 13px;
+    gap: 13px;
+  }
+
+  .edit-seller-logo-preview {
+    width: 68px;
+    height: 68px;
+    border-radius: 14px;
+  }
+
+  .edit-seller-modal-footer {
+    bottom: -20px;
+    margin: 24px -20px -20px;
+    padding: 15px 20px;
+  }
+
+  .edit-seller-cancel-btn,
+  .edit-seller-save-btn {
+    flex: 1;
+    padding: 0 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .edit-seller-modal,
+  .edit-seller-modal-content {
+    transition: none;
+  }
+}
