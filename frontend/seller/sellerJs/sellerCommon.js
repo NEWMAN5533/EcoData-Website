@@ -1,37 +1,117 @@
+document.addEventListener("DOMContentLoaded", async () => {
+  const logo1 = document.getElementById("sellerProfileAvatarLap");
+  const logo2 = document.getElementById("sellerProfileAvatarMobile");
+
+  const sellerName1 = document.getElementById("sellerProfileUsernameLap");
+  const sellerName2 = document.getElementById("sellerProfileUsernameMobile");
+
+  // No sidebar profile elements on this page.
+  if (!logo1 && !logo2 && !sellerName1 && !sellerName2) return;
+
+  const DEFAULT_LOGO = "../css/images/dg-watch.png";
+  const API_URL = "https://ecodata-app.onrender.com/api/seller/profile";
+
+  // Set safe defaults first.
+  if (logo1) logo1.src = DEFAULT_LOGO;
+  if (logo2) logo2.src = DEFAULT_LOGO;
+
+  if (sellerName1) sellerName1.textContent = "My Store";
+  if (sellerName2) sellerName2.textContent = "My Store";
+
+  // Image fallback handlers.
+  if (logo1) {
+    logo1.onerror = () => {
+      logo1.onerror = null;
+      logo1.src = DEFAULT_LOGO;
+    };
+  }
+
+  if (logo2) {
+    logo2.onerror = () => {
+      logo2.onerror = null;
+      logo2.src = DEFAULT_LOGO;
+    };
+  }
+
+  try {
+    const clerk = window.Clerk;
+
+    if (!clerk) {
+      throw new Error("Clerk has not loaded.");
+    }
+
+    if (typeof clerk.load === "function") {
+      await clerk.load();
+    }
+
+    const session = clerk.session;
+
+    if (!session) return;
+
+    const token = await session.getToken();
+
+    const response = await fetch(API_URL, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json"
+      }
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || !result.success || !result.seller) {
+      throw new Error(
+        result.message || "Unable to load seller profile."
+      );
+    }
+
+    const seller = result.seller;
+    const logoUrl = seller.storeLogoUrl || DEFAULT_LOGO;
+    const storeName = seller.storeName?.trim() || "My Store";
+
+    // Update desktop and mobile logos.
+    if (logo1) logo1.src = logoUrl;
+    if (logo2) logo2.src = logoUrl;
+
+    // Update desktop and mobile seller names.
+    if (sellerName1) sellerName1.textContent = storeName;
+    if (sellerName2) sellerName2.textContent = storeName;
+
+    console.log("Seller sidebar profile loaded:", {
+      storeName,
+      hasLogo: Boolean(seller.storeLogoUrl)
+    });
+
+  } catch (error) {
+    console.error("Seller sidebar profile loading failed:", error);
+  }
+});
 
 
+
+function sellerSidebar() {
+  const sidebarMenu = document.querySelector(".sidebarPhone");
+  const sidebarToggler = document.getElementById("menu");
+
+  if (!sidebarMenu || !sidebarToggler) return;
+
+  sidebarToggler.addEventListener("click", event => {
+    event.stopPropagation();
+    sidebarMenu.style.left = "0";
+  });
+
+  window.addEventListener("click", event => {
+    if (
+      !sidebarMenu.contains(event.target) &&
+      !sidebarToggler.contains(event.target)
+    ) {
+      sidebarMenu.style.left = "-500px";
+    }
+  });
+}
 
 sellerSidebar();
-
-
-//=======================
-// SIDEBAR TOGGLE
-//=======================
-
- function sellerSidebar(){
-
-const sidebarMenu = document.querySelector(".sidebarPhone");
-const sidebarToggler = document.getElementById("menu");
-
-// Add event listener
-sidebarToggler.addEventListener("click", function(e) {
-  e.stopPropagation();
-
-  if(sidebarToggler){
-    sidebarMenu.style.left = "0";
-  }
-
-});
-
-// Window click
-window.addEventListener("click", function(e){
-  if(!sidebarMenu.contains(e.target) && !sidebarToggler.contains(e.target)){
-    sidebarMenu.style.left = "-500px";
-  }
-});
-
-
-}
 
 
 

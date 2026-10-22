@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="sellerAvatarWrapper">
 
         <img
-          id="sellerProfileAvatar"
+          id="sellerProfileAvatarLap"
           class="sellerProfileAvatar"
           src="../css/images/dg-watch.png"
           alt="Seller profile"
@@ -176,10 +176,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         </div>
          <p
-          id="sellerProfileUsername"
+          id="sellerProfileUsernameLap"
           class="sellerUsername"
         >
-          @TES_SELLER
+          @SELLER
         </p>
     </div>
        
@@ -257,7 +257,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="sellerAvatarWrapper">
 
         <img
-          id="sellerProfileAvatar"
+          id="sellerProfileAvatarMobile"
           class="sellerProfileAvatar"
           src="../css/images/dg-watch.png"
           alt="Seller profile"
@@ -281,10 +281,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         </div>
          <p
-          id="sellerProfileUsername"
+          id="sellerProfileUsernameMobile"
           class="sellerUsername"
         >
-          @TES_SELLER
+          @SELLER
         </p>
     </div>
        
@@ -1012,6 +1012,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   </div>
 
-  <script type="module" src="sellerHelpCenter.js"></script>
+
+    <script
+  defer
+  crossorigin="anonymous"
+  src="https://enjoyed-cub-1020.clerk.accounts.dev/npm/@clerk/ui@1/dist/ui.browser.js"
+  type="text/javascript">
+</script>
+
+<script
+  defer
+  crossorigin="anonymous"
+  data-clerk-publishable-key="pk_test_ZW5qb3llZC1jdWItMTAyMC5jbGVyay5hY2NvdW50cy5kZXYk"
+  src="https://enjoyed-cub-1020.clerk.accounts.dev/npm/@clerk/clerk-js@6/dist/clerk.browser.js"
+  type="text/javascript">
+</script>
+  <script type="module" src="./sellerJs/sellerHelpCenter.js"></script>
 </body>
 </html>
