@@ -51,14 +51,29 @@ async function loadSellerProfile() {
 
     const seller = result.seller;
 
-    // Store name
-    setText("sellerProfileName", seller.storeName || "My Store");
+// Store name
+setText("sellerProfileName", seller.storeName || "My Store");
 
-    // Personal name / username
-    setText(
-      "sellerProfileUsername",
-      seller.fullName || "@seller"
-    );
+// About / bio
+setText(
+  "sellerProfileBio",
+  seller.about?.trim() ||
+  "Digital products, educational resources and more."
+);
+
+// Seller profile logo
+const profileAvatar = document.getElementById("sellerProfileAvatar");
+
+if (profileAvatar) {
+  profileAvatar.src =
+    seller.storeLogoUrl || "../css/images/dg-watch.png";
+}
+
+// Personal name / username
+setText(
+  "sellerProfileUsername",
+  seller.fullName || "@seller"
+);
 
     // Contact information
     setText("sellerProfileEmail", seller.email || "—");
@@ -193,11 +208,45 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  function openModal() {
-    modal.classList.add("is-open");
-    modal.setAttribute("aria-hidden", "false");
-    document.body.classList.add("seller-modal-open");
+function openModal() {
+  const profileAvatar = document.getElementById("sellerProfileAvatar");
+
+  const storeNameInput = document.getElementById("editSellerStoreName");
+  const aboutInput = document.getElementById("editSellerAbout");
+
+  if (storeNameInput) {
+    storeNameInput.value =
+      document.getElementById("sellerProfileName")?.textContent.trim() || "";
   }
+
+  if (aboutInput) {
+    aboutInput.value =
+      document.getElementById("sellerProfileBio")?.textContent.trim() || "";
+
+    if (aboutCount) {
+      aboutCount.textContent = aboutInput.value.length;
+    }
+  }
+
+  // Keep the edit preview consistent with the current profile logo.
+  if (profileAvatar && logoPreview) {
+    logoPreview.innerHTML = "";
+
+    const image = document.createElement("img");
+    image.src = profileAvatar.src;
+    image.alt = "Store logo preview";
+
+    logoPreview.appendChild(image);
+  }
+
+  if (removeLogoBtn) {
+    removeLogoBtn.hidden = true;
+  }
+
+  modal.classList.add("is-open");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("seller-modal-open");
+}
 
   function closeModal() {
     modal.classList.remove("is-open");
@@ -320,10 +369,10 @@ document.addEventListener("DOMContentLoaded", () => {
         logoPreview.appendChild(savedImage);
 
         // Update the visible profile logo, if present.
-        const profileLogo = document.getElementById("sellerProfileLogo");
+        const profileAvatar = document.getElementById("sellerProfileAvatar");
 
-        if (profileLogo) {
-          profileLogo.src = result.logoUrl;
+        if (profileAvatar) {
+          profileAvatar.src = result.logoUrl;
         }
 
         showSnackBar("Store logo uploaded successfully.", "success");
