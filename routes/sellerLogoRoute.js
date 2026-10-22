@@ -2,7 +2,7 @@ import express from "express";
 import multer from "multer";
 import { getAuth } from "@clerk/express";
 
-import { sql } from "../backend/db.js";
+import sql from "../backend/db.js";
 import { uploadToCloudinary } from "../services/cloudinaryUpload.js";
 
 const sellerLogoRouter = express.Router();
