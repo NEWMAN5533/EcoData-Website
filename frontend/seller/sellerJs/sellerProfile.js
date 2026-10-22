@@ -156,10 +156,10 @@ const sidebarToggler = document.getElementById("menu");
 sidebarToggler.addEventListener("click", function(e) {
   e.stopPropagation();
 
+
   if(sidebarToggler){
     sidebarMenu.style.left = "0";
   }
-
 });
 
 // Window click
@@ -221,15 +221,28 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Store logo preview
+
+
+
+
+// ======================================
+  // STORE LOGO PREVIEW + CLOUDINARY UPLOAD
+  // ======================================
+
   if (logoInput && logoPreview) {
-    logoInput.addEventListener("change", () => {
+    logoInput.addEventListener("change", async () => {
       const file = logoInput.files?.[0];
 
       if (!file) return;
 
-      if (!file.type.startsWith("image/")) {
-        showSnackBar("Please select an image file.", "error");
+      const allowedTypes = [
+        "image/jpeg",
+        "image/png",
+        "image/webp"
+      ];
+
+      if (!allowedTypes.includes(file.type)) {
+        showSnackBar("Choose a JPG, PNG, or WebP image.", "error");
         logoInput.value = "";
         return;
       }
@@ -240,6 +253,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
+      // Display preview immediately.
       const reader = new FileReader();
 
       reader.onload = () => {
@@ -257,10 +271,76 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
       reader.readAsDataURL(file);
+
+      // Upload the image to your backend.
+      try {
+        const clerk = window.Clerk;
+
+        if (!clerk) {
+          throw new Error("Clerk has not loaded. Please refresh.");
+        }
+
+        await clerk.load();
+
+        if (!clerk.session) {
+          throw new Error("Please sign in to upload your logo.");
+        }
+
+        const token = await clerk.session.getToken();
+
+        const formData = new FormData();
+        formData.append("logo", file);
+
+        const response = await fetch(
+          "https://ecodata-app.onrender.com/api/seller/logo",
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${token}`
+            },
+            body: formData
+          }
+        );
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success || !result.logoUrl) {
+          throw new Error(
+            result.message || "Unable to upload seller logo."
+          );
+        }
+
+        // Keep the permanent Cloudinary URL in the preview.
+        logoPreview.innerHTML = "";
+
+        const savedImage = document.createElement("img");
+        savedImage.src = result.logoUrl;
+        savedImage.alt = "Store logo";
+
+        logoPreview.appendChild(savedImage);
+
+        // Update the visible profile logo, if present.
+        const profileLogo = document.getElementById("sellerProfileLogo");
+
+        if (profileLogo) {
+          profileLogo.src = result.logoUrl;
+        }
+
+        showSnackBar("Store logo uploaded successfully.", "success");
+
+      } catch (error) {
+        console.error("Store logo upload failed:", error);
+
+        showSnackBar(
+          error.message || "Unable to upload store logo.",
+          "error"
+        );
+      }
     });
   }
 
-  // Remove selected logo
+  // Remove the current local selection.
+  // This does not delete the already uploaded Cloudinary logo.
   if (removeLogoBtn && logoInput && logoPreview) {
     removeLogoBtn.addEventListener("click", () => {
       logoInput.value = "";
@@ -268,6 +348,11 @@ document.addEventListener("DOMContentLoaded", () => {
       removeLogoBtn.hidden = true;
     });
   }
+
+
+
+
+
 
   // About character counter
   if (aboutInput && aboutCount) {
