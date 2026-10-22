@@ -2,7 +2,7 @@ import express from "express";
 import multer from "multer";
 import { getAuth } from "@clerk/express";
 
-import sql from "../backend/db.js";
+import sql  from "../backend/db.js";
 import { uploadToCloudinary } from "../services/cloudinaryUpload.js";
 
 const sellerLogoRouter = express.Router();
@@ -80,10 +80,16 @@ sellerLogoRouter.post(
         req.file.buffer,
         {
           resource_type: "image",
-          folder: "ecodata/seller-logo",
-          public_id: `seller_${userId.replace(/[^a-zA-Z0-9_-]/g, "_")}`
-        }
-      );
+          folder: "ecodata/seller-logo"
+        });
+
+        console.log("Cloudinary upload result:", {
+          hasResult: Boolean(uploaded),
+          keys: uploaded ? Object.keys(uploaded) : [],
+          secure__url: uploaded?.secure__url,
+          public_id: uploaded?.public_id
+        })
+
       if(!uploaded?.secure__url){
         throw new Error("Cloudinary did not return a secure image URL.");
       }
