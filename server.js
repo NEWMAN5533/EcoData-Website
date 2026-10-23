@@ -98,10 +98,8 @@ app.use("/api/create-store", storeRouter);
 
 
 
-app.use("/api/creator/products", createProductRouter);
-app.use("/api/creator/dashboard", createProductRouter );
-app.use("/api/creator/withdrawals", createProductRouter);
-app.use("/api/creator/sales", createProductRouter);
+app.use("/api/creator", createProductRouter);
+
 
 
 // CLERK AUTHENTICATION TEST
