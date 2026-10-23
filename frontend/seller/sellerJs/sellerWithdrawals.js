@@ -127,13 +127,19 @@ async function waitForClerk(timeout = 10000) {
 async function readResponse(response) {
   const text = await response.text();
 
-  let data = {};
+  console.log("API URL:", response.url);
+  console.log("HTTP status:", response.status);
+  console.log("Content-Type:", response.headers.get("content-type"));
+  console.log("Response preview:", text.slice(0, 500));
+
+  let data;
 
   try {
-    data = text ? JSON.parse(text) : {};
+    data = JSON.parse(text);
   } catch {
     throw new Error(
-      `The server returned an invalid response (HTTP ${response.status}).`
+      `Expected JSON from ${response.url}. ` +
+      `HTTP ${response.status}. Response: ${text.slice(0, 200)}`
     );
   }
 
@@ -147,7 +153,6 @@ async function readResponse(response) {
 
   return data;
 }
-
 /* ==========================================
    CURRENCY AND DATE FORMATTING
 ========================================== */
