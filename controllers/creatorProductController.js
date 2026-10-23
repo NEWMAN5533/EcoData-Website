@@ -843,580 +843,623 @@ export async function deleteCreatorProduct(req, res) {
 
 
 
+
+
+import { getAuth } from "@clerk/express";
+import sql from "../backend/db.js";
+
 // ==========================================
-// GET CREATOR DASHBOARD
+// GET CREATOR DASHBOARD — CLERK + NEON
 // ==========================================
 export async function getCreatorDashboard(req, res) {
   try {
+    // 1. Identify the seller through Clerk
+    const { userId } = getAuth(req);
 
-    const sellerId =
-      String(req.query.sellerId || "").trim();
-
-    if (!sellerId) {
-      return res.status(400).json({
+    if (!userId) {
+      return res.status(401).json({
         success: false,
-        message: "SellerId is required."
+        message: "Authentication required."
       });
     }
 
-    console.log(
-      "Loading dashboard for seller:",
-      sellerId
-    );
+    // 2. Resolve the authenticated user's seller record
+    const sellerRows = await sql`
+      SELECT
+        id,
+        clerk_user_id,
+        store_name,
+        status,
+        seller_verified,
+        can_publish,
+        can_withdraw
+      FROM ecodata_sellers
+      WHERE clerk_user_id = ${userId}
+      LIMIT 1
+    `;
 
+    if (!sellerRows.length) {
+      return res.status(404).json({
+        success: false,
+        message: "Seller profile not found."
+      });
+    }
 
-    // ======================================
-    // LOAD EVERYTHING IN PARALLEL
-    // ======================================
+    const seller = sellerRows[0];
+    const sellerId = seller.id;
 
-    const [
-      productsSnapshot,
-      salesSnapshot,
-      withdrawalsSnapshot
-    ] = await Promise.all([
+    // 3. Load products, sales, and withdrawals
+    const [productsRows, salesRows, withdrawalRows] =
+      await Promise.all([
+        sql`
+          SELECT *
+          FROM ecodata_products
+          WHERE seller_id = ${sellerId}
+          ORDER BY created_at DESC
+        `,
 
-      db
-        .collection("products")
-        .where("sellerId", "==", sellerId)
-        .get(),
+        sql`
+          SELECT
+            s.id,
+            s.order_item_id,
+            s.seller_id,
+            s.product_id,
+            s.quantity,
+            s.unit_price,
+            s.gross_amount,
+            s.sale_status,
+            s.sold_at,
+            s.created_at,
+            s.updated_at,
+            oi.order_id,
+            oi.product_name,
+            o.payment_status,
+            o.order_status,
+            o.currency,
+            o.paid_at
+          FROM ecodata_sales s
+          LEFT JOIN ecodata_order_items oi
+            ON oi.id = s.order_item_id
+          LEFT JOIN ecodata_orders o
+            ON o.id = oi.order_id
+          WHERE s.seller_id = ${sellerId}
+          ORDER BY s.created_at DESC
+        `,
 
-      db
-        .collection("sales")
-        .where("sellerId", "==", sellerId)
-        .get(),
+        sql`
+          SELECT
+            id,
+            seller_id,
+            amount,
+            currency,
+            payout_method,
+            status,
+            transaction_reference,
+            requested_at,
+            reviewed_at,
+            paid_at,
+            created_at,
+            updated_at
+          FROM ecodata_withdrawals
+          WHERE seller_id = ${sellerId}
+          ORDER BY requested_at DESC
+        `
+      ]);
 
-      db
-        .collection("withdrawals")
-        .where("sellerId", "==", sellerId)
-        .get()
+    // 4. Preserve familiar frontend field names
+    const products = productsRows.map(product => ({
+      ...product,
+      createdAt: product.created_at,
+      updatedAt: product.updated_at,
+      views: 0
+    }));
 
-    ]);
+    const sales = salesRows.map(sale => ({
+      ...sale,
+      createdAt: sale.created_at,
+      soldAt: sale.sold_at,
+      creatorShare: 0
+    }));
 
+    const withdrawals = withdrawalRows.map(withdrawal => ({
+      ...withdrawal,
+      requestedAt: withdrawal.requested_at,
+      createdAt: withdrawal.created_at,
+      updatedAt: withdrawal.updated_at,
+      paid: withdrawal.status === "paid"
+    }));
 
-    // ======================================
-    // HELPER — FIRESTORE DATE → TIMESTAMP
-    // ======================================
+    // 5. Product statistics
+    const totalProducts = products.length;
 
-    const getTime = value => {
+    const publishedProducts = products.filter(
+      product =>
+        String(product.status || "").toLowerCase() === "published"
+    ).length;
 
-      if (!value) return 0;
+    const pendingProducts = products.filter(
+      product =>
+        String(product.status || "").toLowerCase() === "pending"
+    ).length;
 
-      if (
-        typeof value.toMillis === "function"
-      ) {
-        return value.toMillis();
-      }
+    // 6. Count and calculate only eligible sales
+    // Confirm these status values match your checkout workflow.
+    const eligibleSales = sales.filter(sale => {
+      const saleStatus =
+        String(sale.sale_status || "").toLowerCase();
 
-      if (
-        typeof value.seconds === "number"
-      ) {
-        return value.seconds * 1000;
-      }
+      const paymentStatus =
+        String(sale.payment_status || "").toLowerCase();
 
-      const time =
-        new Date(value).getTime();
+      const orderStatus =
+        String(sale.order_status || "").toLowerCase();
 
-      return Number.isNaN(time)
-        ? 0
-        : time;
-    };
-
-
-    // ======================================
-    // PRODUCTS
-    // ======================================
-
-    const products =
-      productsSnapshot.docs
-        .map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }))
-        .sort((a, b) =>
-          getTime(b.createdAt) -
-          getTime(a.createdAt)
-        );
-
-
-    const totalProducts =
-      products.length;
-
-
-    const publishedProducts =
-      products.filter(
-        product =>
-          String(product.status || "")
-            .toLowerCase() === "published"
-      ).length;
-
-
-    const pendingProducts =
-      products.filter(
-        product =>
-          String(product.status || "")
-            .toLowerCase() === "pending"
-      ).length;
-
-
-    // ======================================
-    // SALES
-    // ======================================
-
-    const sales =
-      salesSnapshot.docs
-        .map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }))
-        .sort((a, b) =>
-          getTime(b.createdAt) -
-          getTime(a.createdAt)
-        );
-
-
-    const totalSales =
-      sales.length;
-
-
-    // ======================================
-    // SALES STATISTICS
-    // ======================================
+      return (
+        saleStatus === "completed" &&
+        paymentStatus === "paid" &&
+        ["completed", "delivered"].includes(orderStatus)
+      );
+    });
 
     let totalRevenue = 0;
-
     let totalEarnings = 0;
-
     let platformFees = 0;
 
+    const chartMap = new Map();
 
-    sales.forEach(sale => {
+    for (const sale of eligibleSales) {
+      const revenue = Number(sale.gross_amount || 0);
 
-      const creatorShare =
-        Number(sale.creatorShare || 0);
-
-
-      if (
-        !Number.isFinite(creatorShare) ||
-        creatorShare <= 0
-      ) {
-        return;
+      if (!Number.isFinite(revenue) || revenue <= 0) {
+        continue;
       }
 
+      const earnings = revenue * 0.70;
+      const fee = revenue * 0.30;
 
-      // ====================================
-      // CREATOR = 70%
-      // ====================================
+      totalRevenue += revenue;
+      totalEarnings += earnings;
+      platformFees += fee;
 
-      const saleRevenue =
-        creatorShare / 0.70;
+      const timestamp = sale.sold_at || sale.created_at;
 
+      if (!timestamp) continue;
 
-      // ====================================
-      // PLATFORM = 30%
-      // ====================================
-
-      const platformFee =
-        saleRevenue * 0.30;
-
-
-      totalEarnings +=
-        creatorShare;
-
-
-      totalRevenue +=
-        saleRevenue;
-
-
-      platformFees +=
-        platformFee;
-
-    });
-
-
-    // ======================================
-    // TOTAL VIEWS
-    // ======================================
-
-    let totalViews = 0;
-
-
-    products.forEach(product => {
-
-      const views =
-        Number(product.views || 0);
-
-
-      if (Number.isFinite(views)) {
-
-        totalViews += views;
-
-      }
-
-    });
-
-
-    // ======================================
-    // CONVERSION RATE
-    // ======================================
-
-    const conversionRate =
-      totalViews > 0
-        ? (totalSales / totalViews) * 100
-        : 0;
-
-
-    // ======================================
-    // WITHDRAWALS
-    // ======================================
-
-    const withdrawals =
-      withdrawalsSnapshot.docs
-        .map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }))
-        .sort((a, b) =>
-          getTime(b.requestedAt) -
-          getTime(a.requestedAt)
-        );
-
-
-    // ======================================
-    // PAID WITHDRAWALS
-    // ======================================
-
-    let withdrawalAmount = 0;
-
-
-    withdrawals.forEach(withdrawal => {
-
-      if (withdrawal.paid === true) {
-
-        const amount =
-          Number(withdrawal.amount || 0);
-
-
-        if (Number.isFinite(amount)) {
-
-          withdrawalAmount +=
-            amount;
-
-        }
-
-      }
-
-    });
-
-
-    // ======================================
-    // AVAILABLE BALANCE
-    // ======================================
-
-    const availableBalance =
-      Math.max(
-        0,
-        totalEarnings -
-        withdrawalAmount
-      );
-
-
-    // ======================================
-    // SALES CHART
-    // ======================================
-
-    const chartMap =
-      new Map();
-
-
-    sales.forEach(sale => {
-
-      const timestamp =
-        getTime(sale.createdAt);
-
-
-      if (!timestamp) return;
-
-
-      const date =
-        new Date(timestamp);
-
-
-      // YYYY-MM-DD
-      const dateKey =
-        date.toISOString().slice(0, 10);
-
-
-      // ====================================
-      // CREATE DAY
-      // ====================================
+      const dateKey = new Date(timestamp)
+        .toISOString()
+        .slice(0, 10);
 
       if (!chartMap.has(dateKey)) {
-
         chartMap.set(dateKey, {
-
           date: dateKey,
-
           sales: 0,
-
           revenue: 0,
-
           earnings: 0,
-
           platformFees: 0
-
         });
-
       }
 
-
-      const day =
-        chartMap.get(dateKey);
-
-
-      // ====================================
-      // SALE COUNT
-      // ====================================
-
+      const day = chartMap.get(dateKey);
       day.sales += 1;
+      day.revenue += revenue;
+      day.earnings += earnings;
+      day.platformFees += fee;
+    }
 
+    // Add the calculated share to each sale for the frontend
+    for (const sale of sales) {
+      const isEligible = eligibleSales.some(
+        eligible => eligible.id === sale.id
+      );
 
-      // ====================================
-      // CREATOR SHARE
-      // ====================================
+      const revenue = Number(sale.gross_amount || 0);
 
-      const creatorShare =
-        Number(sale.creatorShare || 0);
+      sale.creatorShare = isEligible
+        ? Number((revenue * 0.70).toFixed(2))
+        : 0;
+    }
 
+    // 7. Views are not stored in the current products schema
+    const totalViews = 0;
+    const conversionRate = 0;
 
-      if (
-        !Number.isFinite(creatorShare) ||
-        creatorShare <= 0
-      ) {
-        return;
-      }
+    // 8. Reserve withdrawals that have not reached a final state
+    const reservedStatuses = new Set([
+      "pending",
+      "approved",
+      "processing"
+    ]);
 
+    const withdrawalAmount = withdrawals
+      .filter(withdrawal => withdrawal.status === "paid")
+      .reduce((sum, withdrawal) => {
+        const amount = Number(withdrawal.amount || 0);
+        return sum + (
+          Number.isFinite(amount) && amount > 0 ? amount : 0
+        );
+      }, 0);
 
-      // ====================================
-      // REVENUE
-      // ====================================
-
-      const saleRevenue =
-        creatorShare / 0.70;
-
-
-      // ====================================
-      // PLATFORM FEE
-      // ====================================
-
-      const platformFee =
-        saleRevenue * 0.30;
-
-
-      day.revenue +=
-        saleRevenue;
-
-
-      day.earnings +=
-        creatorShare;
-
-
-      day.platformFees +=
-        platformFee;
-
-    });
-
-
-    // ======================================
-    // SORT CHART DATA
-    // ======================================
-
-    const chartData =
-      Array.from(
-        chartMap.values()
+    const reservedWithdrawalAmount = withdrawals
+      .filter(withdrawal =>
+        reservedStatuses.has(
+          String(withdrawal.status || "").toLowerCase()
+        )
       )
-      .sort((a, b) =>
-        a.date.localeCompare(b.date)
-      )
-      .map(day => ({
+      .reduce((sum, withdrawal) => {
+        const amount = Number(withdrawal.amount || 0);
+        return sum + (
+          Number.isFinite(amount) && amount > 0 ? amount : 0
+        );
+      }, 0);
 
-        date:
-          day.date,
-
-        sales:
-          day.sales,
-
-        revenue:
-          Number(
-            day.revenue.toFixed(2)
-          ),
-
-        earnings:
-          Number(
-            day.earnings.toFixed(2)
-          ),
-
-        platformFees:
-          Number(
-            day.platformFees.toFixed(2)
-          )
-
-      }));
-
-
-    // ======================================
-    // CHART ARRAYS
-    // ======================================
-
-    const chartLabels =
-      chartData.map(
-        day => day.date
-      );
-
-
-    const chartSales =
-      chartData.map(
-        day => day.sales
-      );
-
-
-    const chartRevenue =
-      chartData.map(
-        day => day.revenue
-      );
-
-
-    const chartEarnings =
-      chartData.map(
-        day => day.earnings
-      );
-
-
-    const chartPlatformFees =
-      chartData.map(
-        day => day.platformFees
-      );
-
-
-    // ======================================
-    // RESPONSE
-    // ======================================
-
-    return res.status(200).json({
-
-      success: true,
-
-
-      // ====================================
-      // DASHBOARD
-      // ====================================
-
-      dashboard: {
-
-        totalProducts,
-
-        publishedProducts,
-
-        pendingProducts,
-
-        totalSales,
-
-        totalRevenue:
-          Number(
-            totalRevenue.toFixed(2)
-          ),
-
-        totalEarnings:
-          Number(
-            totalEarnings.toFixed(2)
-          ),
-
-        platformFees:
-          Number(
-            platformFees.toFixed(2)
-          ),
-
-        availableBalance:
-          Number(
-            availableBalance.toFixed(2)
-          ),
-
-        conversionRate:
-          Number(
-            conversionRate.toFixed(2)
-          ),
-
-        views:
-          totalViews,
-
-        withdrawalAmount:
-          Number(
-            withdrawalAmount.toFixed(2)
-          )
-
-      },
-
-
-      // ====================================
-      // SALES CHART
-      // ====================================
-
-      chart: {
-
-        labels:
-          chartLabels,
-
-        sales:
-          chartSales,
-
-        revenue:
-          chartRevenue,
-
-        earnings:
-          chartEarnings,
-
-        platformFees:
-          chartPlatformFees,
-
-        data:
-          chartData
-
-      },
-
-
-      // ====================================
-      // EXISTING DATA
-      // ====================================
-
-      products,
-
-      sales,
-
-      withdrawals
-
-    });
-
-
-  } catch (error) {
-
-    console.error(
-      "Get creator dashboard failed:",
-      error
+    const availableBalance = Math.max(
+      0,
+      totalEarnings -
+        withdrawalAmount -
+        reservedWithdrawalAmount
     );
 
+    // 9. Chart data
+    const chartData = Array.from(chartMap.values())
+      .sort((a, b) => a.date.localeCompare(b.date))
+      .map(day => ({
+        date: day.date,
+        sales: day.sales,
+        revenue: Number(day.revenue.toFixed(2)),
+        earnings: Number(day.earnings.toFixed(2)),
+        platformFees: Number(day.platformFees.toFixed(2))
+      }));
 
-    return res.status(500).json({
+    const money = value => Number(value.toFixed(2));
 
-      success: false,
+    // 10. Response — keep existing frontend structure
+    return res.status(200).json({
+      success: true,
 
-      message:
-        "Unable to load dashboard."
+      dashboard: {
+        totalProducts,
+        publishedProducts,
+        pendingProducts,
+        totalSales: eligibleSales.length,
+        totalRevenue: money(totalRevenue),
+        totalEarnings: money(totalEarnings),
+        platformFees: money(platformFees),
+        availableBalance: money(availableBalance),
+        conversionRate,
+        views: totalViews,
+        withdrawalAmount: money(withdrawalAmount)
+      },
 
+      chart: {
+        labels: chartData.map(day => day.date),
+        sales: chartData.map(day => day.sales),
+        revenue: chartData.map(day => day.revenue),
+        earnings: chartData.map(day => day.earnings),
+        platformFees: chartData.map(day => day.platformFees),
+        data: chartData
+      },
+
+      products,
+      sales,
+      withdrawals
     });
 
+  } catch (error) {
+    console.error("Get creator dashboard failed:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Unable to load dashboard."
+    });
   }
 }
 
 
+// ==========================================
+// GET CREATOR DASHBOARD — CLERK + NEON
+// ==========================================
+export async function getCreatorDashboard(req, res) {
+  try {
+    // 1. Identify the seller through Clerk
+    const { userId } = getAuth(req);
+
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: "Authentication required."
+      });
+    }
+
+    // 2. Resolve the authenticated user's seller record
+    const sellerRows = await sql`
+      SELECT
+        id,
+        clerk_user_id,
+        store_name,
+        status,
+        seller_verified,
+        can_publish,
+        can_withdraw
+      FROM ecodata_sellers
+      WHERE clerk_user_id = ${userId}
+      LIMIT 1
+    `;
+
+    if (!sellerRows.length) {
+      return res.status(404).json({
+        success: false,
+        message: "Seller profile not found."
+      });
+    }
+
+    const seller = sellerRows[0];
+    const sellerId = seller.id;
+
+    // 3. Load products, sales, and withdrawals
+    const [productsRows, salesRows, withdrawalRows] =
+      await Promise.all([
+        sql`
+          SELECT *
+          FROM ecodata_products
+          WHERE seller_id = ${sellerId}
+          ORDER BY created_at DESC
+        `,
+
+        sql`
+          SELECT
+            s.id,
+            s.order_item_id,
+            s.seller_id,
+            s.product_id,
+            s.quantity,
+            s.unit_price,
+            s.gross_amount,
+            s.sale_status,
+            s.sold_at,
+            s.created_at,
+            s.updated_at,
+            oi.order_id,
+            oi.product_name,
+            o.payment_status,
+            o.order_status,
+            o.currency,
+            o.paid_at
+          FROM ecodata_sales s
+          LEFT JOIN ecodata_order_items oi
+            ON oi.id = s.order_item_id
+          LEFT JOIN ecodata_orders o
+            ON o.id = oi.order_id
+          WHERE s.seller_id = ${sellerId}
+          ORDER BY s.created_at DESC
+        `,
+
+        sql`
+          SELECT
+            id,
+            seller_id,
+            amount,
+            currency,
+            payout_method,
+            status,
+            transaction_reference,
+            requested_at,
+            reviewed_at,
+            paid_at,
+            created_at,
+            updated_at
+          FROM ecodata_withdrawals
+          WHERE seller_id = ${sellerId}
+          ORDER BY requested_at DESC
+        `
+      ]);
+
+    // 4. Preserve familiar frontend field names
+    const products = productsRows.map(product => ({
+      ...product,
+      createdAt: product.created_at,
+      updatedAt: product.updated_at,
+      views: 0
+    }));
+
+    const sales = salesRows.map(sale => ({
+      ...sale,
+      createdAt: sale.created_at,
+      soldAt: sale.sold_at,
+      creatorShare: 0
+    }));
+
+    const withdrawals = withdrawalRows.map(withdrawal => ({
+      ...withdrawal,
+      requestedAt: withdrawal.requested_at,
+      createdAt: withdrawal.created_at,
+      updatedAt: withdrawal.updated_at,
+      paid: withdrawal.status === "paid"
+    }));
+
+    // 5. Product statistics
+    const totalProducts = products.length;
+
+    const publishedProducts = products.filter(
+      product =>
+        String(product.status || "").toLowerCase() === "published"
+    ).length;
+
+    const pendingProducts = products.filter(
+      product =>
+        String(product.status || "").toLowerCase() === "pending"
+    ).length;
+
+    // 6. Count and calculate only eligible sales
+    // Confirm these status values match your checkout workflow.
+    const eligibleSales = sales.filter(sale => {
+      const saleStatus =
+        String(sale.sale_status || "").toLowerCase();
+
+      const paymentStatus =
+        String(sale.payment_status || "").toLowerCase();
+
+      const orderStatus =
+        String(sale.order_status || "").toLowerCase();
+
+      return (
+        saleStatus === "completed" &&
+        paymentStatus === "paid" &&
+        ["completed", "delivered"].includes(orderStatus)
+      );
+    });
+
+    let totalRevenue = 0;
+    let totalEarnings = 0;
+    let platformFees = 0;
+
+    const chartMap = new Map();
+
+    for (const sale of eligibleSales) {
+      const revenue = Number(sale.gross_amount || 0);
+
+      if (!Number.isFinite(revenue) || revenue <= 0) {
+        continue;
+      }
+
+      const earnings = revenue * 0.70;
+      const fee = revenue * 0.30;
+
+      totalRevenue += revenue;
+      totalEarnings += earnings;
+      platformFees += fee;
+
+      const timestamp = sale.sold_at || sale.created_at;
+
+      if (!timestamp) continue;
+
+      const dateKey = new Date(timestamp)
+        .toISOString()
+        .slice(0, 10);
+
+      if (!chartMap.has(dateKey)) {
+        chartMap.set(dateKey, {
+          date: dateKey,
+          sales: 0,
+          revenue: 0,
+          earnings: 0,
+          platformFees: 0
+        });
+      }
+
+      const day = chartMap.get(dateKey);
+      day.sales += 1;
+      day.revenue += revenue;
+      day.earnings += earnings;
+      day.platformFees += fee;
+    }
+
+    // Add the calculated share to each sale for the frontend
+    for (const sale of sales) {
+      const isEligible = eligibleSales.some(
+        eligible => eligible.id === sale.id
+      );
+
+      const revenue = Number(sale.gross_amount || 0);
+
+      sale.creatorShare = isEligible
+        ? Number((revenue * 0.70).toFixed(2))
+        : 0;
+    }
+
+    // 7. Views are not stored in the current products schema
+    const totalViews = 0;
+    const conversionRate = 0;
+
+    // 8. Reserve withdrawals that have not reached a final state
+    const reservedStatuses = new Set([
+      "pending",
+      "approved",
+      "processing"
+    ]);
+
+    const withdrawalAmount = withdrawals
+      .filter(withdrawal => withdrawal.status === "paid")
+      .reduce((sum, withdrawal) => {
+        const amount = Number(withdrawal.amount || 0);
+        return sum + (
+          Number.isFinite(amount) && amount > 0 ? amount : 0
+        );
+      }, 0);
+
+    const reservedWithdrawalAmount = withdrawals
+      .filter(withdrawal =>
+        reservedStatuses.has(
+          String(withdrawal.status || "").toLowerCase()
+        )
+      )
+      .reduce((sum, withdrawal) => {
+        const amount = Number(withdrawal.amount || 0);
+        return sum + (
+          Number.isFinite(amount) && amount > 0 ? amount : 0
+        );
+      }, 0);
+
+    const availableBalance = Math.max(
+      0,
+      totalEarnings -
+        withdrawalAmount -
+        reservedWithdrawalAmount
+    );
+
+    // 9. Chart data
+    const chartData = Array.from(chartMap.values())
+      .sort((a, b) => a.date.localeCompare(b.date))
+      .map(day => ({
+        date: day.date,
+        sales: day.sales,
+        revenue: Number(day.revenue.toFixed(2)),
+        earnings: Number(day.earnings.toFixed(2)),
+        platformFees: Number(day.platformFees.toFixed(2))
+      }));
+
+    const money = value => Number(value.toFixed(2));
+
+    // 10. Response — keep existing frontend structure
+    return res.status(200).json({
+      success: true,
+
+      dashboard: {
+        totalProducts,
+        publishedProducts,
+        pendingProducts,
+        totalSales: eligibleSales.length,
+        totalRevenue: money(totalRevenue),
+        totalEarnings: money(totalEarnings),
+        platformFees: money(platformFees),
+        availableBalance: money(availableBalance),
+        conversionRate,
+        views: totalViews,
+        withdrawalAmount: money(withdrawalAmount)
+      },
+
+      chart: {
+        labels: chartData.map(day => day.date),
+        sales: chartData.map(day => day.sales),
+        revenue: chartData.map(day => day.revenue),
+        earnings: chartData.map(day => day.earnings),
+        platformFees: chartData.map(day => day.platformFees),
+        data: chartData
+      },
+
+      products,
+      sales,
+      withdrawals
+    });
+
+  } catch (error) {
+    console.error("Get creator dashboard failed:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Unable to load dashboard."
+    });
+  }
+}
 
 
 //=======================
