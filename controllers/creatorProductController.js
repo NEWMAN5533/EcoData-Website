@@ -1151,12 +1151,17 @@ export async function getCreatorDashboard(req, res) {
 }
 
 
+
+
 // ==========================================
-// GET CREATOR DASHBOARD — CLERK + NEON
+// CREATE CREATOR WITHDRAWAL
+// CLERK + NEON + TRANSACTION
 // ==========================================
-export async function getCreatorDashboard(req, res) {
+export async function createCreatorWithdrawal(req, res) {
+  let client;
+
   try {
-    // 1. Identify the seller through Clerk
+    // 1. Authenticate the creator
     const { userId } = getAuth(req);
 
     if (!userId) {
@@ -1166,294 +1171,276 @@ export async function getCreatorDashboard(req, res) {
       });
     }
 
-    // 2. Resolve the authenticated user's seller record
-    const sellerRows = await sql`
-      SELECT
-        id,
-        clerk_user_id,
-        store_name,
-        status,
-        seller_verified,
-        can_publish,
-        can_withdraw
-      FROM ecodata_sellers
-      WHERE clerk_user_id = ${userId}
-      LIMIT 1
-    `;
+    // 2. Validate amount
+    const rawAmount = req.body?.amount;
 
-    if (!sellerRows.length) {
+    if (
+      rawAmount === undefined ||
+      rawAmount === null ||
+      !/^\d+(\.\d{1,2})?$/.test(String(rawAmount))
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Enter a valid withdrawal amount with up to 2 decimal places."
+      });
+    }
+
+    const amount = Number(rawAmount);
+    const amountCents = Math.round(amount * 100);
+
+    if (!Number.isSafeInteger(amountCents) || amountCents <= 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Withdrawal amount must be greater than zero."
+      });
+    }
+
+    // 3. Validate payout method and details
+    const payoutMethod = req.body?.payout_method;
+    const details = req.body?.payout_details;
+
+    if (!["mobile_money", "bank_transfer"].includes(payoutMethod)) {
+      return res.status(400).json({
+        success: false,
+        message: "Choose a supported payout method."
+      });
+    }
+
+    if (
+      !details ||
+      typeof details !== "object" ||
+      Array.isArray(details)
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Valid payout details are required."
+      });
+    }
+
+    let payoutDetails;
+
+    if (payoutMethod === "mobile_money") {
+      const network = String(details.network || "").trim();
+      const accountName = String(details.account_name || "").trim();
+      const phoneNumber = String(details.phone_number || "").trim();
+
+      if (
+        !["MTN", "Telecel", "AT"].includes(network) ||
+        !accountName ||
+        !phoneNumber ||
+        accountName.length > 120 ||
+        phoneNumber.length > 30
+      ) {
+        return res.status(400).json({
+          success: false,
+          message: "Provide a valid mobile money network, account name, and phone number."
+        });
+      }
+
+      payoutDetails = {
+        network,
+        account_name: accountName,
+        phone_number: phoneNumber
+      };
+    } else {
+      const accountName = String(details.account_name || "").trim();
+      const bankName = String(details.bank_name || "").trim();
+      const accountNumber = String(details.account_number || "").trim();
+
+      if (
+        !accountName ||
+        !bankName ||
+        !accountNumber ||
+        accountName.length > 120 ||
+        bankName.length > 120 ||
+        accountNumber.length > 50
+      ) {
+        return res.status(400).json({
+          success: false,
+          message: "Provide valid bank account details."
+        });
+      }
+
+      payoutDetails = {
+        account_name: accountName,
+        bank_name: bankName,
+        account_number: accountNumber
+      };
+    }
+
+    // 4. Begin transaction
+    client = await pool.connect();
+    await client.query("BEGIN");
+
+    // Lock this seller's row. Other withdrawal requests for this
+    // seller must wait until this transaction finishes.
+    const sellerResult = await client.query(
+      `SELECT
+         id,
+         status,
+         seller_verified,
+         can_withdraw
+       FROM ecodata_sellers
+       WHERE clerk_user_id = $1
+       FOR UPDATE`,
+      [userId]
+    );
+
+    if (sellerResult.rows.length === 0) {
+      await client.query("ROLLBACK");
+
       return res.status(404).json({
         success: false,
         message: "Seller profile not found."
       });
     }
 
-    const seller = sellerRows[0];
+    const seller = sellerResult.rows[0];
+
+    if (
+      seller.seller_verified !== true ||
+      seller.can_withdraw !== true
+    ) {
+      await client.query("ROLLBACK");
+
+      return res.status(403).json({
+        success: false,
+        message: "Your seller account is not authorized to withdraw funds."
+      });
+    }
+
     const sellerId = seller.id;
 
-    // 3. Load products, sales, and withdrawals
-    const [productsRows, salesRows, withdrawalRows] =
-      await Promise.all([
-        sql`
-          SELECT *
-          FROM ecodata_products
-          WHERE seller_id = ${sellerId}
-          ORDER BY created_at DESC
-        `,
-
-        sql`
-          SELECT
-            s.id,
-            s.order_item_id,
-            s.seller_id,
-            s.product_id,
-            s.quantity,
-            s.unit_price,
-            s.gross_amount,
-            s.sale_status,
-            s.sold_at,
-            s.created_at,
-            s.updated_at,
-            oi.order_id,
-            oi.product_name,
-            o.payment_status,
-            o.order_status,
-            o.currency,
-            o.paid_at
-          FROM ecodata_sales s
-          LEFT JOIN ecodata_order_items oi
-            ON oi.id = s.order_item_id
-          LEFT JOIN ecodata_orders o
-            ON o.id = oi.order_id
-          WHERE s.seller_id = ${sellerId}
-          ORDER BY s.created_at DESC
-        `,
-
-        sql`
-          SELECT
-            id,
-            seller_id,
-            amount,
-            currency,
-            payout_method,
-            status,
-            transaction_reference,
-            requested_at,
-            reviewed_at,
-            paid_at,
-            created_at,
-            updated_at
-          FROM ecodata_withdrawals
-          WHERE seller_id = ${sellerId}
-          ORDER BY requested_at DESC
-        `
-      ]);
-
-    // 4. Preserve familiar frontend field names
-    const products = productsRows.map(product => ({
-      ...product,
-      createdAt: product.created_at,
-      updatedAt: product.updated_at,
-      views: 0
-    }));
-
-    const sales = salesRows.map(sale => ({
-      ...sale,
-      createdAt: sale.created_at,
-      soldAt: sale.sold_at,
-      creatorShare: 0
-    }));
-
-    const withdrawals = withdrawalRows.map(withdrawal => ({
-      ...withdrawal,
-      requestedAt: withdrawal.requested_at,
-      createdAt: withdrawal.created_at,
-      updatedAt: withdrawal.updated_at,
-      paid: withdrawal.status === "paid"
-    }));
-
-    // 5. Product statistics
-    const totalProducts = products.length;
-
-    const publishedProducts = products.filter(
-      product =>
-        String(product.status || "").toLowerCase() === "published"
-    ).length;
-
-    const pendingProducts = products.filter(
-      product =>
-        String(product.status || "").toLowerCase() === "pending"
-    ).length;
-
-    // 6. Count and calculate only eligible sales
-    // Confirm these status values match your checkout workflow.
-    const eligibleSales = sales.filter(sale => {
-      const saleStatus =
-        String(sale.sale_status || "").toLowerCase();
-
-      const paymentStatus =
-        String(sale.payment_status || "").toLowerCase();
-
-      const orderStatus =
-        String(sale.order_status || "").toLowerCase();
-
-      return (
-        saleStatus === "completed" &&
-        paymentStatus === "paid" &&
-        ["completed", "delivered"].includes(orderStatus)
-      );
-    });
-
-    let totalRevenue = 0;
-    let totalEarnings = 0;
-    let platformFees = 0;
-
-    const chartMap = new Map();
-
-    for (const sale of eligibleSales) {
-      const revenue = Number(sale.gross_amount || 0);
-
-      if (!Number.isFinite(revenue) || revenue <= 0) {
-        continue;
-      }
-
-      const earnings = revenue * 0.70;
-      const fee = revenue * 0.30;
-
-      totalRevenue += revenue;
-      totalEarnings += earnings;
-      platformFees += fee;
-
-      const timestamp = sale.sold_at || sale.created_at;
-
-      if (!timestamp) continue;
-
-      const dateKey = new Date(timestamp)
-        .toISOString()
-        .slice(0, 10);
-
-      if (!chartMap.has(dateKey)) {
-        chartMap.set(dateKey, {
-          date: dateKey,
-          sales: 0,
-          revenue: 0,
-          earnings: 0,
-          platformFees: 0
-        });
-      }
-
-      const day = chartMap.get(dateKey);
-      day.sales += 1;
-      day.revenue += revenue;
-      day.earnings += earnings;
-      day.platformFees += fee;
-    }
-
-    // Add the calculated share to each sale for the frontend
-    for (const sale of sales) {
-      const isEligible = eligibleSales.some(
-        eligible => eligible.id === sale.id
-      );
-
-      const revenue = Number(sale.gross_amount || 0);
-
-      sale.creatorShare = isEligible
-        ? Number((revenue * 0.70).toFixed(2))
-        : 0;
-    }
-
-    // 7. Views are not stored in the current products schema
-    const totalViews = 0;
-    const conversionRate = 0;
-
-    // 8. Reserve withdrawals that have not reached a final state
-    const reservedStatuses = new Set([
-      "pending",
-      "approved",
-      "processing"
-    ]);
-
-    const withdrawalAmount = withdrawals
-      .filter(withdrawal => withdrawal.status === "paid")
-      .reduce((sum, withdrawal) => {
-        const amount = Number(withdrawal.amount || 0);
-        return sum + (
-          Number.isFinite(amount) && amount > 0 ? amount : 0
-        );
-      }, 0);
-
-    const reservedWithdrawalAmount = withdrawals
-      .filter(withdrawal =>
-        reservedStatuses.has(
-          String(withdrawal.status || "").toLowerCase()
-        )
-      )
-      .reduce((sum, withdrawal) => {
-        const amount = Number(withdrawal.amount || 0);
-        return sum + (
-          Number.isFinite(amount) && amount > 0 ? amount : 0
-        );
-      }, 0);
-
-    const availableBalance = Math.max(
-      0,
-      totalEarnings -
-        withdrawalAmount -
-        reservedWithdrawalAmount
+    // 5. Calculate creator earnings from completed, paid sales.
+    // Keep these status rules consistent with your checkout workflow.
+    const earningsResult = await client.query(
+      `SELECT COALESCE(
+         SUM(s.gross_amount * 0.70),
+         0
+       ) AS creator_earnings
+       FROM ecodata_sales s
+       JOIN ecodata_order_items oi
+         ON oi.id = s.order_item_id
+       JOIN ecodata_orders o
+         ON o.id = oi.order_id
+       WHERE s.seller_id = $1
+         AND LOWER(COALESCE(s.sale_status, '')) = 'completed'
+         AND LOWER(COALESCE(o.payment_status, '')) = 'paid'
+         AND LOWER(COALESCE(o.order_status, ''))
+             IN ('completed', 'delivered')`,
+      [sellerId]
     );
 
-    // 9. Chart data
-    const chartData = Array.from(chartMap.values())
-      .sort((a, b) => a.date.localeCompare(b.date))
-      .map(day => ({
-        date: day.date,
-        sales: day.sales,
-        revenue: Number(day.revenue.toFixed(2)),
-        earnings: Number(day.earnings.toFixed(2)),
-        platformFees: Number(day.platformFees.toFixed(2))
-      }));
+    // 6. Reserve outstanding withdrawals and deduct paid ones.
+    const withdrawalsResult = await client.query(
+      `SELECT COALESCE(SUM(amount), 0) AS committed_amount
+       FROM ecodata_withdrawals
+       WHERE seller_id = $1
+         AND status IN (
+           'pending',
+           'approved',
+           'processing',
+           'paid'
+         )`,
+      [sellerId]
+    );
 
-    const money = value => Number(value.toFixed(2));
+    const earnings = Number(
+      earningsResult.rows[0].creator_earnings
+    );
 
-    // 10. Response — keep existing frontend structure
-    return res.status(200).json({
+    const committed = Number(
+      withdrawalsResult.rows[0].committed_amount
+    );
+
+    if (
+      !Number.isFinite(earnings) ||
+      !Number.isFinite(committed)
+    ) {
+      throw new Error("Unable to calculate the seller's available balance.");
+    }
+
+    const availableCents = Math.max(
+      0,
+      Math.round(earnings * 100) -
+        Math.round(committed * 100)
+    );
+
+    if (amountCents > availableCents) {
+      await client.query("ROLLBACK");
+
+      return res.status(400).json({
+        success: false,
+        message: "Insufficient available balance.",
+        availableBalance: availableCents / 100
+      });
+    }
+
+    // 7. Create the withdrawal request
+    const insertResult = await client.query(
+      `INSERT INTO ecodata_withdrawals (
+         seller_id,
+         amount,
+         currency,
+         payout_method,
+         payout_details,
+         status
+       )
+       VALUES ($1, $2, 'GHS', $3, $4::jsonb, 'pending')
+       RETURNING
+         id,
+         seller_id,
+         amount,
+         currency,
+         payout_method,
+         status,
+         requested_at`,
+      [
+        sellerId,
+        (amountCents / 100).toFixed(2),
+        payoutMethod,
+        JSON.stringify(payoutDetails)
+      ]
+    );
+
+    await client.query("COMMIT");
+
+    const withdrawal = insertResult.rows[0];
+
+    return res.status(201).json({
       success: true,
-
-      dashboard: {
-        totalProducts,
-        publishedProducts,
-        pendingProducts,
-        totalSales: eligibleSales.length,
-        totalRevenue: money(totalRevenue),
-        totalEarnings: money(totalEarnings),
-        platformFees: money(platformFees),
-        availableBalance: money(availableBalance),
-        conversionRate,
-        views: totalViews,
-        withdrawalAmount: money(withdrawalAmount)
+      message: "Withdrawal request submitted successfully.",
+      withdrawal: {
+        id: withdrawal.id,
+        amount: Number(withdrawal.amount),
+        currency: withdrawal.currency,
+        payout_method: withdrawal.payout_method,
+        status: withdrawal.status,
+        requestedAt: withdrawal.requested_at
       },
-
-      chart: {
-        labels: chartData.map(day => day.date),
-        sales: chartData.map(day => day.sales),
-        revenue: chartData.map(day => day.revenue),
-        earnings: chartData.map(day => day.earnings),
-        platformFees: chartData.map(day => day.platformFees),
-        data: chartData
-      },
-
-      products,
-      sales,
-      withdrawals
+      availableBalance: (availableCents - amountCents) / 100
     });
 
   } catch (error) {
-    console.error("Get creator dashboard failed:", error);
+    if (client) {
+      try {
+        await client.query("ROLLBACK");
+      } catch (rollbackError) {
+        console.error("Withdrawal rollback failed:", rollbackError);
+      }
+    }
+
+    console.error("Create creator withdrawal failed:", error);
 
     return res.status(500).json({
       success: false,
-      message: "Unable to load dashboard."
+      message: "Unable to submit withdrawal request."
     });
+
+  } finally {
+    if (client) {
+      client.release();
+    }
   }
 }
 
