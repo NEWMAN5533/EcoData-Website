@@ -978,9 +978,8 @@ export async function getCreatorDashboard(req, res) {
         String(product.status || "").toLowerCase() === "pending"
     ).length;
 
-    // 6. Count and calculate only eligible sales
-    // Confirm these status values match your checkout workflow.
-    const eligibleSales = sales.filter(sale => {
+   // 6. Define the current eligible-sale rule
+    const isEligibleSale = sale => {
       const saleStatus =
         String(sale.sale_status || "").toLowerCase();
 
@@ -995,136 +994,177 @@ export async function getCreatorDashboard(req, res) {
         paymentStatus === "paid" &&
         ["completed", "delivered"].includes(orderStatus)
       );
-    });
+    };
 
-    let totalRevenue = 0;
-    let totalEarnings = 0;
-    let platformFees = 0;
+    const eligibleSales = sales.filter(isEligibleSale);
+
+    // Use integer cents for consistent financial calculations.
+    const toCents = value => {
+      const amount = Number(value);
+
+      return Number.isFinite(amount) && amount > 0
+        ? Math.round(amount * 100)
+        : 0;
+    };
+
+    const fromCents = cents => Number((cents / 100).toFixed(2));
+
+    let totalRevenueCents = 0;
+    let totalEarningsCents = 0;
+    let platformFeesCents = 0;
+    let pendingEarningsCents = 0;
+
+    const eligibleSaleIds = new Set(
+      eligibleSales.map(sale => String(sale.id))
+    );
 
     const chartMap = new Map();
 
-    for (const sale of eligibleSales) {
-      const revenue = Number(sale.gross_amount || 0);
+    for (const sale of sales) {
+      const grossCents = toCents(sale.gross_amount);
+      const eligible = eligibleSaleIds.has(String(sale.id));
 
-      if (!Number.isFinite(revenue) || revenue <= 0) {
+      // Apply the split to each eligible sale in cents.
+      const creatorCents = Math.round(grossCents * 0.70);
+      const feeCents = grossCents - creatorCents;
+
+      sale.creatorShare = eligible
+        ? fromCents(creatorCents)
+        : 0;
+
+      sale.platformFee = eligible
+        ? fromCents(feeCents)
+        : 0;
+
+      if (eligible) {
+        totalRevenueCents += grossCents;
+        totalEarningsCents += creatorCents;
+        platformFeesCents += feeCents;
+
+        const timestamp = sale.sold_at || sale.created_at;
+
+        if (timestamp) {
+          const date = new Date(timestamp);
+
+          if (!Number.isNaN(date.getTime())) {
+            const dateKey = date.toISOString().slice(0, 10);
+
+            if (!chartMap.has(dateKey)) {
+              chartMap.set(dateKey, {
+                date: dateKey,
+                sales: 0,
+                revenueCents: 0,
+                earningsCents: 0,
+                platformFeesCents: 0
+              });
+            }
+
+            const day = chartMap.get(dateKey);
+            day.sales += 1;
+            day.revenueCents += grossCents;
+            day.earningsCents += creatorCents;
+            day.platformFeesCents += feeCents;
+          }
+        }
+
         continue;
       }
 
-      const earnings = revenue * 0.70;
-      const fee = revenue * 0.30;
+      // Pending earnings are paid sales not yet eligible for earnings.
+      // Failed, cancelled, refunded and unpaid orders are excluded.
+      const paymentStatus =
+        String(sale.payment_status || "").toLowerCase();
 
-      totalRevenue += revenue;
-      totalEarnings += earnings;
-      platformFees += fee;
+      const saleStatus =
+        String(sale.sale_status || "").toLowerCase();
 
-      const timestamp = sale.sold_at || sale.created_at;
+      const orderStatus =
+        String(sale.order_status || "").toLowerCase();
 
-      if (!timestamp) continue;
+      const excludedStatuses = [
+        "failed",
+        "cancelled",
+        "canceled",
+        "refunded",
+        "rejected"
+      ];
 
-      const dateKey = new Date(timestamp)
-        .toISOString()
-        .slice(0, 10);
+      const excluded =
+        excludedStatuses.includes(saleStatus) ||
+        excludedStatuses.includes(orderStatus);
 
-      if (!chartMap.has(dateKey)) {
-        chartMap.set(dateKey, {
-          date: dateKey,
-          sales: 0,
-          revenue: 0,
-          earnings: 0,
-          platformFees: 0
-        });
+      if (paymentStatus === "paid" && !excluded) {
+        pendingEarningsCents += creatorCents;
       }
-
-      const day = chartMap.get(dateKey);
-      day.sales += 1;
-      day.revenue += revenue;
-      day.earnings += earnings;
-      day.platformFees += fee;
     }
 
-    // Add the calculated share to each sale for the frontend
-    for (const sale of sales) {
-      const isEligible = eligibleSales.some(
-        eligible => eligible.id === sale.id
-      );
-
-      const revenue = Number(sale.gross_amount || 0);
-
-      sale.creatorShare = isEligible
-        ? Number((revenue * 0.70).toFixed(2))
-        : 0;
-    }
-
-    // 7. Views are not stored in the current products schema
+    // 7. Views aren't stored in the current products schema
     const totalViews = 0;
     const conversionRate = 0;
 
-    // 8. Reserve withdrawals that have not reached a final state
+    // 8. Calculate withdrawals and available balance
     const reservedStatuses = new Set([
       "pending",
       "approved",
       "processing"
     ]);
 
-    const withdrawalAmount = withdrawals
-      .filter(withdrawal => withdrawal.status === "paid")
-      .reduce((sum, withdrawal) => {
-        const amount = Number(withdrawal.amount || 0);
-        return sum + (
-          Number.isFinite(amount) && amount > 0 ? amount : 0
-        );
-      }, 0);
+    const withdrawalAmountCents = withdrawals
+      .filter(withdrawal =>
+        String(withdrawal.status || "").toLowerCase() === "paid"
+      )
+      .reduce((sum, withdrawal) => sum + toCents(withdrawal.amount), 0);
 
-    const reservedWithdrawalAmount = withdrawals
+    const reservedWithdrawalCents = withdrawals
       .filter(withdrawal =>
         reservedStatuses.has(
           String(withdrawal.status || "").toLowerCase()
         )
       )
-      .reduce((sum, withdrawal) => {
-        const amount = Number(withdrawal.amount || 0);
-        return sum + (
-          Number.isFinite(amount) && amount > 0 ? amount : 0
-        );
-      }, 0);
+      .reduce((sum, withdrawal) => sum + toCents(withdrawal.amount), 0);
 
-    const availableBalance = Math.max(
+    const availableBalanceCents = Math.max(
       0,
-      totalEarnings -
-        withdrawalAmount -
-        reservedWithdrawalAmount
+      totalEarningsCents -
+        withdrawalAmountCents -
+        reservedWithdrawalCents
     );
+
 
     // 9. Chart data
     const chartData = Array.from(chartMap.values())
-      .sort((a, b) => a.date.localeCompare(b.date))
-      .map(day => ({
-        date: day.date,
-        sales: day.sales,
-        revenue: Number(day.revenue.toFixed(2)),
-        earnings: Number(day.earnings.toFixed(2)),
-        platformFees: Number(day.platformFees.toFixed(2))
-      }));
-
-    const money = value => Number(value.toFixed(2));
+    .sort((a, b) => a.date.localeCompare(b.date))
+    .map(day => ({
+      date: day.date,
+      sales: day.sales,
+      revenue: fromCents(day.revenueCents),
+      earnings: fromCents(day.earningsCents),
+      platformFees: fromCents(day.platformFeesCents)
+    }));
 
     // 10. Response — keep existing frontend structure
     return res.status(200).json({
       success: true,
 
-      dashboard: {
-        totalProducts,
-        publishedProducts,
-        pendingProducts,
-        totalSales: eligibleSales.length,
-        totalRevenue: money(totalRevenue),
-        totalEarnings: money(totalEarnings),
-        platformFees: money(platformFees),
-        availableBalance: money(availableBalance),
-        conversionRate,
-        views: totalViews,
-        withdrawalAmount: money(withdrawalAmount)
-      },
+     dashboard: {
+      totalProducts,
+      publishedProducts,
+      pendingProducts,
+
+      totalSales: eligibleSales.length,
+      totalRevenue: fromCents(totalRevenueCents),
+      totalEarnings: fromCents(totalEarningsCents),
+      platformFees: fromCents(platformFeesCents),
+      pendingEarnings: fromCents(pendingEarningsCents),
+      availableBalance: fromCents(availableBalanceCents),
+
+      conversionRate,
+      views: totalViews,
+      withdrawalAmount: fromCents(withdrawalAmountCents)
+    },
+
+
+      
 
       chart: {
         labels: chartData.map(day => day.date),
