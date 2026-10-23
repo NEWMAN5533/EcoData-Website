@@ -7,7 +7,8 @@ import {
   getCreatorWithdrawals,
   getCreatorDashboard,
   updateCreatorProduct,
-  deleteCreatorProduct
+  deleteCreatorProduct,
+  createCreatorWithdrawal
 } from "../controllers/creatorProductController.js";
 
 import { requireAuth } from "../middleware/clerkAuth.js";
@@ -26,6 +27,8 @@ createProductRouter.post("/", upload.fields([
 createProduct
 );
 
+
+
 //===================
 // GET CREATOR PRODUCTS
 //======================
@@ -39,6 +42,8 @@ createProductRouter.get("/sales",getCreatorSales);
 
 
 createProductRouter.get("/withdrawals",getCreatorWithdrawals);
+
+createProductRouter.post("/creator/withdrawals", createCreatorWithdrawal);
 
 
 createProductRouter.put("/:productId", updateCreatorProduct);
