@@ -1462,61 +1462,99 @@ export async function getCreatorDashboard(req, res) {
 }
 
 
+
 //=======================
-// GET CREATOR SALES
-//=======================
-export async function getCreatorSales(req, res){
+ // GET CREATOR SALES
+ // CLERK + NEON
+ //=======================
+export async function getCreatorSales(req, res) {
+  try {
+    // 1. Get authenticated Clerk user
+    const { userId } = getAuth(req);
 
-  try{
-
-    const sellerId = String(req.query.sellerId || "").trim();
-
-    if(!sellerId) {
-      return res.status(400).json({
+    if (!userId) {
+      return res.status(401).json({
         success: false,
-        message: "SellerId is required."
+        message: "Authentication required."
       });
     }
-    console.log("Loading sales for seller:", sellerId
-    );
 
-    const snapshot = await db
-    .collection("sales")
-    .where("sellerId", "==", sellerId)
-    .get();
+    // 2. Find the seller profile
+    const sellerRows = await sql`
+      SELECT id
+      FROM ecodata_sellers
+      WHERE clerk_user_id = ${userId}
+      LIMIT 1
+    `;
 
-    const sales = snapshot.docs
-    .map(doc => {
-      const data = doc.data();
+    if (!sellerRows.length) {
+      return res.status(404).json({
+        success: false,
+        message: "Seller profile not found."
+      });
+    }
 
-      return{
-        id: doc.id,
-        ...data
+    const sellerId = sellerRows[0].id;
+
+    // 3. Fetch this seller's sales
+    const rows = await sql`
+      SELECT
+        s.id,
+        s.order_item_id,
+        s.seller_id,
+        s.product_id,
+        s.quantity,
+        s.unit_price,
+        s.gross_amount,
+        s.sale_status,
+        s.sold_at,
+        s.created_at,
+        s.updated_at,
+        oi.order_id,
+        oi.product_name,
+        oi.product_type,
+        oi.product_subtype,
+        o.payment_status,
+        o.order_status,
+        o.currency,
+        o.payment_reference,
+        o.paid_at
+      FROM ecodata_sales s
+      LEFT JOIN ecodata_order_items oi
+        ON oi.id = s.order_item_id
+      LEFT JOIN ecodata_orders o
+        ON o.id = oi.order_id
+      WHERE s.seller_id = ${sellerId}
+      ORDER BY s.created_at DESC
+    `;
+
+    // 4. Preserve frontend-friendly fields
+    const sales = rows.map(sale => {
+      const grossAmount = Number(sale.gross_amount || 0);
+
+      const saleStatus =
+        String(sale.sale_status || "").toLowerCase();
+
+      const paymentStatus =
+        String(sale.payment_status || "").toLowerCase();
+
+      const orderStatus =
+        String(sale.order_status || "").toLowerCase();
+
+      const eligible =
+        saleStatus === "completed" &&
+        paymentStatus === "paid" &&
+        ["completed", "delivered"].includes(orderStatus);
+
+      return {
+        ...sale,
+        createdAt: sale.created_at,
+        soldAt: sale.sold_at,
+        creatorShare:
+          eligible && Number.isFinite(grossAmount)
+            ? Number((grossAmount * 0.70).toFixed(2))
+            : 0
       };
-    }).sort((a,b) => {
-      const getTime = value => {
-        if(!value) return 0;
-
-        if(typeof value.toMillis === "function"){
-          return value.toMillis();
-        }
-
-        if(typeof value.seconds === "number"){
-          return value.seconds * 1000;
-        }
-
-        const time =
-        new Date(value).getTime();
-
-        return Number.isNaN(time)
-        ? 0
-        : time;
-      };
-
-      return (
-        getTime(b.createdAt) -
-        getTime(a.createdAt)
-      );
     });
 
     return res.status(200).json({
@@ -1524,12 +1562,10 @@ export async function getCreatorSales(req, res){
       count: sales.length,
       sales
     });
-    // Error block
-  } catch(error){
-    console.error(
-      "Get creator sales error:", error
-    );
-    
+
+  } catch (error) {
+    console.error("Get creator sales error:", error);
+
     return res.status(500).json({
       success: false,
       message: "Unable to load creator sales."
@@ -1537,58 +1573,70 @@ export async function getCreatorSales(req, res){
   }
 }
 
-//=======================
-// GET CREATOR WITHDRAWALS
 //==========================
-export async function getCreatorWithdrawals(req, res){
-  try{
-    const sellerId = String(req.query.sellerId || "").trim();
+ // GET CREATOR WITHDRAWALS
+ // CLERK + NEON
+ //==========================
+export async function getCreatorWithdrawals(req, res) {
+  try {
+    // 1. Authenticate using Clerk
+    const { userId } = getAuth(req);
 
-    if(!sellerId){
-      return res.status(400).json({
+    if (!userId) {
+      return res.status(401).json({
         success: false,
-        message: "SellerId is required."
+        message: "Authentication required."
       });
     }
 
-    const snapshot = await db
-    .collection("withdrawals")
-    .where("sellerId", "==", sellerId)
-    .get();
+    // 2. Resolve seller from authenticated Clerk ID
+    const sellerRows = await sql`
+      SELECT id
+      FROM ecodata_sellers
+      WHERE clerk_user_id = ${userId}
+      LIMIT 1
+    `;
 
-    const withdrawals = snapshot.docs.map(doc => {
-      const data = doc.data();
+    if (!sellerRows.length) {
+      return res.status(404).json({
+        success: false,
+        message: "Seller profile not found."
+      });
+    }
 
-      return {
-        id: doc.id,
-        ...data
-      };
-    }).sort((a,b) => {
+    const sellerId = sellerRows[0].id;
 
-      const getTime = value => {
-        if(!value) return 0;
+    // 3. Fetch this seller's withdrawal history
+    const rows = await sql`
+      SELECT
+        id,
+        seller_id,
+        amount,
+        currency,
+        payout_method,
+        status,
+        transaction_reference,
+        admin_notes,
+        requested_at,
+        reviewed_at,
+        paid_at,
+        created_at,
+        updated_at
+      FROM ecodata_withdrawals
+      WHERE seller_id = ${sellerId}
+      ORDER BY requested_at DESC
+    `;
 
-        if(typeof value.toMillis === "function"){
-          return value.toMillis();
-        }
-
-        if(typeof value.seconds === "number"){
-          return value.seconds * 1000;
-        }
-
-        const time =
-        new Date(value).getTime();
-
-        return Number.isNaN(time)
-        ? 0
-        : time;
-      };
-
-      return (
-        getTime(b.requestedAt) -
-        getTime(a.requestedAt)
-      );
-    });
+    // 4. Preserve frontend-friendly field names
+    const withdrawals = rows.map(withdrawal => ({
+      ...withdrawal,
+      requestedAt: withdrawal.requested_at,
+      reviewedAt: withdrawal.reviewed_at,
+      paidAt: withdrawal.paid_at,
+      createdAt: withdrawal.created_at,
+      updatedAt: withdrawal.updated_at,
+      paid: withdrawal.status === "paid"
+    }));
 
     return res.status(200).json({
       success: true,
@@ -1596,8 +1644,7 @@ export async function getCreatorWithdrawals(req, res){
       withdrawals
     });
 
-    // error block
-  } catch(error){
+  } catch (error) {
     console.error("Get creator withdrawals error:", error);
 
     return res.status(500).json({
