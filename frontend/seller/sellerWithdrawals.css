@@ -1,3 +1,32 @@
+/* =========================================================
+   ECODATA STORE — MAIN CLIENT MARKETPLACE UI
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+
+
+
+body,
+button,
+input {
+  font-family: 'Inter', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+small,
+span,
+strong,
+p {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+
 :root {
   --color-white: #fff;
   --color-light: #f5f4f7;
@@ -980,6 +1009,313 @@ color: var(--color-light) !important;
 
   opacity: 0.65;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================
+   WITHDRAWAL REQUEST MODAL
+========================================== */
+
+.withdrawModalOverlay[hidden],
+#mobileMoneyFields[hidden],
+#bankTransferFields[hidden],
+.withdrawalFormMessage[hidden] {
+  display: none !important;
+}
+
+.withdrawModalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(12, 18, 30, 0.65);
+  backdrop-filter: blur(5px);
+  overflow-y: auto;
+}
+
+.withdrawModal {
+  width: min(100%, 510px);
+  max-height: 92vh;
+  overflow-y: auto;
+  padding: 25px;
+  border-radius: 20px;
+  background: #ffffff;
+  color: #172033;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
+}
+
+.dark-mode .withdrawModal {
+  background: #171b25;
+  color: #f4f6fb;
+}
+
+.withdrawModalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.withdrawModalEyebrow {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #64748b;
+}
+
+.withdrawModalHeader h2 {
+  margin: 0 0 7px;
+  font-size: 23px;
+}
+
+.withdrawModalHeader p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #64748b;
+}
+
+.dark-mode .withdrawModalHeader p,
+.dark-mode .withdrawModalEyebrow {
+  color: #a8b1c2;
+}
+
+.withdrawModalClose {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 11px;
+  cursor: pointer;
+  font-size: 22px;
+  background: #f1f5f9;
+  color: #334155;
+}
+
+.dark-mode .withdrawModalClose {
+  background: #292f3d;
+  color: #f4f6fb;
+}
+
+.withdrawModalBalance {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px;
+  margin-bottom: 22px;
+  border: 1px solid #dbeafe;
+  border-radius: 15px;
+  background: #eff6ff;
+}
+
+.withdrawModalBalance span {
+  font-size: 13px;
+  color: #475569;
+}
+
+.withdrawModalBalance strong {
+  font-size: 27px;
+  color: #1d4ed8;
+}
+
+.dark-mode .withdrawModalBalance {
+  background: #1d2a40;
+  border-color: #334767;
+}
+
+.dark-mode .withdrawModalBalance span {
+  color: #cbd5e1;
+}
+
+.withdrawFormGroup {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 17px;
+}
+
+.withdrawFormGroup label {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.withdrawFormGroup input,
+.withdrawFormGroup select {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 47px;
+  padding: 12px 13px;
+  border: 1px solid #d7deea;
+  border-radius: 10px;
+  outline: none;
+  font: inherit;
+  font-size: 14px;
+  color: #172033;
+  background: #ffffff;
+}
+
+.withdrawFormGroup input:focus,
+.withdrawFormGroup select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.dark-mode .withdrawFormGroup input,
+.dark-mode .withdrawFormGroup select {
+  background: #202634;
+  color: #f4f6fb;
+  border-color: #3b4558;
+}
+
+.withdrawMaxBtn {
+  align-self: flex-end;
+  border: 0;
+  font-size: .8rem;
+  padding: 6px 10px;
+  border-radius: 4px;
+  background: transparent;
+  color: #2563eb !important;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity .2s ease;
+}
+
+.withdrawMaxBtn:hover{
+  opacity: .8;
+}
+
+.withdrawModalActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.withdrawCancelButton,
+.withdrawSubmitButton {
+  min-height: 47px;
+  border-radius: 11px;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.withdrawCancelButton {
+  flex: 1;
+  background: transparent;
+  color: inherit;
+  border: 1px solid #d7deea;
+}
+
+.withdrawSubmitButton {
+  flex: 1.5;
+  border: 0;
+  background: #2563eb;
+  color: white;
+}
+
+.withdrawSubmitButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.withdrawSecurityNote {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  margin: 17px 0 0;
+  color: #64748b;
+  font-size: 12px;
+  text-align: center;
+}
+
+.withdrawalFormMessage {
+  padding: 12px;
+  margin: 12px 0;
+  border-radius: 9px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.withdrawalFormMessage.error {
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+.withdrawalFormMessage.success {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+@media (max-width: 480px) {
+  .withdrawModalOverlay {
+    padding: 10px;
+    align-items: center;
+  }
+
+  .withdrawModal {
+    padding: 19px;
+    border-radius: 16px;
+    max-height: 94vh;
+  }
+
+  .withdrawModalHeader h2 {
+    font-size: 20px;
+  }
+
+  .withdrawModalActions {
+    flex-direction: column-reverse;
+  }
+
+  .withdrawCancelButton,
+  .withdrawSubmitButton {
+    width: 100%;
+    flex: auto;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* ==========================================

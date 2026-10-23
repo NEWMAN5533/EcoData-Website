@@ -351,3 +351,256 @@ function showPageMessage(messageText) {
 
   rowWrapper.appendChild(message);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================
+   WITHDRAWAL MODAL — FRONTEND CONTROLLER
+========================================== */
+
+let currentAvailableBalance = 0;
+
+function initializeWithdrawalModal() {
+  const overlay = document.getElementById("withdrawModalOverlay");
+  const openButton = document.getElementById("withdrawBtn");
+  const closeButton = document.getElementById("closeWithdrawModal");
+  const cancelButton = document.getElementById("cancelWithdrawModal");
+  const form = document.getElementById("withdrawalRequestForm");
+  const methodSelect = document.getElementById("payoutMethod");
+  const mobileFields = document.getElementById("mobileMoneyFields");
+  const bankFields = document.getElementById("bankTransferFields");
+  const amountInput = document.getElementById("withdrawAmount");
+  const maxButton = document.getElementById("withdrawMaxBtn");
+  const message = document.getElementById("withdrawalFormMessage");
+  const submitButton = document.getElementById("submitWithdrawalBtn");
+
+  if (!overlay || !openButton || !form) {
+    console.error("Withdrawal modal elements are missing.");
+    return;
+  }
+
+  function showMessage(text, type = "") {
+    message.textContent = text;
+    message.className = "withdrawalFormMessage";
+
+    if (type) message.classList.add(type);
+
+    message.hidden = false;
+  }
+
+  function clearMessage() {
+    message.textContent = "";
+    message.className = "withdrawalFormMessage";
+    message.hidden = true;
+  }
+
+  function openModal() {
+    clearMessage();
+
+    const balanceElement = document.getElementById(
+      "withdrawalAvailableBalance"
+    );
+
+    if (balanceElement) {
+      document.getElementById("modalAvailableBalance").textContent =
+        balanceElement.textContent;
+    }
+
+    amountInput.value = "";
+    methodSelect.value = "";
+    mobileFields.hidden = true;
+    bankFields.hidden = true;
+
+    setFieldRequirements();
+
+    overlay.hidden = false;
+    document.body.style.overflow = "hidden";
+    amountInput.focus();
+  }
+
+  function closeModal() {
+    overlay.hidden = true;
+    document.body.style.overflow = "";
+    clearMessage();
+  }
+
+  function setFieldRequirements() {
+    const isMobile = methodSelect.value === "mobile_money";
+    const isBank = methodSelect.value === "bank_transfer";
+
+    mobileFields.hidden = !isMobile;
+    bankFields.hidden = !isBank;
+
+    document.getElementById("mobileNetwork").required = isMobile;
+    document.getElementById("mobileAccountName").required = isMobile;
+    document.getElementById("mobilePhone").required = isMobile;
+
+    document.getElementById("bankAccountName").required = isBank;
+    document.getElementById("bankName").required = isBank;
+    document.getElementById("bankAccountNumber").required = isBank;
+  }
+
+  openButton.addEventListener("click", openModal);
+  closeButton.addEventListener("click", closeModal);
+  cancelButton.addEventListener("click", closeModal);
+
+  methodSelect.addEventListener("change", () => {
+    clearMessage();
+    setFieldRequirements();
+  });
+
+  maxButton.addEventListener("click", () => {
+    amountInput.value = currentAvailableBalance.toFixed(2);
+    amountInput.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+
+  overlay.addEventListener("click", event => {
+    if (event.target === overlay) closeModal();
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && !overlay.hidden) {
+      closeModal();
+    }
+  });
+
+  form.addEventListener("submit", async event => {
+    event.preventDefault();
+    clearMessage();
+
+    const amount = Number(amountInput.value);
+    const method = methodSelect.value;
+
+    if (!Number.isFinite(amount) || amount <= 0) {
+      showMessage("Enter a valid withdrawal amount.", "error");
+      return;
+    }
+
+    if (Math.round(amount * 100) > Math.round(currentAvailableBalance * 100)) {
+      showMessage("The amount exceeds your available balance.", "error");
+      return;
+    }
+
+    let payoutDetails;
+
+    if (method === "mobile_money") {
+      payoutDetails = {
+        network: document.getElementById("mobileNetwork").value,
+        account_name: document.getElementById("mobileAccountName").value.trim(),
+        phone_number: document.getElementById("mobilePhone").value.trim()
+      };
+
+      if (
+        !payoutDetails.network ||
+        !payoutDetails.account_name ||
+        !payoutDetails.phone_number
+      ) {
+        showMessage("Complete all Mobile Money details.", "error");
+        return;
+      }
+    } else if (method === "bank_transfer") {
+      payoutDetails = {
+        account_name: document.getElementById("bankAccountName").value.trim(),
+        bank_name: document.getElementById("bankName").value.trim(),
+        account_number: document.getElementById("bankAccountNumber").value.trim()
+      };
+
+      if (
+        !payoutDetails.account_name ||
+        !payoutDetails.bank_name ||
+        !payoutDetails.account_number
+      ) {
+        showMessage("Complete all bank transfer details.", "error");
+        return;
+      }
+    } else {
+      showMessage("Select a payout method.", "error");
+      return;
+    }
+
+    try {
+      submitButton.disabled = true;
+      submitButton.innerHTML =
+        '<i class="ri-loader-4-line"></i> Submitting…';
+
+      const clerk = await waitForClerk();
+
+      if (!clerk.user || !clerk.session) {
+        throw new Error("Please sign in again to submit your request.");
+      }
+
+      const token = await clerk.session.getToken();
+
+      if (!token) {
+        throw new Error("Could not verify your session. Please sign in again.");
+      }
+
+      const response = await fetch(
+        `${API_BASE_URL}/api/creator/withdrawals`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify({
+            amount: amount.toFixed(2),
+            payoutMethod: method,
+            payoutDetails
+          })
+        }
+      );
+
+      const result = await readResponse(response);
+
+      if (!response.ok || result.success === false) {
+        throw new Error(
+          result.message ||
+          result.error ||
+          "Your withdrawal request could not be submitted."
+        );
+      }
+
+      showMessage(
+        result.message || "Your withdrawal request was submitted successfully.",
+        "success"
+      );
+
+      // Refresh history and balance after the server confirms success.
+      await initializeWithdrawalsPage();
+
+      // Close the modal after the success message has been visible briefly.
+      window.setTimeout(closeModal, 1200);
+
+    } catch (error) {
+      console.error("Withdrawal submission failed:", error);
+      showMessage(
+        error.message || "Unable to submit your withdrawal request.",
+        "error"
+      );
+    } finally {
+      submitButton.disabled = false;
+      submitButton.innerHTML =
+        '<i class="ri-secure-payment-line"></i> Submit request';
+    }
+  });
+}
+
+// Initialize the modal once.
+initializeWithdrawalModal();
