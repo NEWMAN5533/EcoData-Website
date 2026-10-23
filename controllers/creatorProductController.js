@@ -844,11 +844,6 @@ export async function deleteCreatorProduct(req, res) {
 
 
 
-
-
-import { getAuth } from "@clerk/express";
-import sql from "../backend/db.js";
-
 // ==========================================
 // GET CREATOR DASHBOARD — CLERK + NEON
 // ==========================================
