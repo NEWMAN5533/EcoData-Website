@@ -6,6 +6,7 @@ import {
 
 import sql from "../backend/db.js";
 import { getAuth } from "@clerk/express";
+import { pool } from "../backend/db.js";
 import crypto from "node:crypto";
 
 
@@ -1651,5 +1652,299 @@ export async function getCreatorWithdrawals(req, res) {
       success: false,
       message: "Unable to load withdrawals."
     });
+  }
+}
+
+
+
+
+// ==========================================
+// CREATE CREATOR WITHDRAWAL
+// CLERK + NEON + TRANSACTION
+// ==========================================
+export async function createCreatorWithdrawal(req, res) {
+  let client;
+
+  try {
+    // 1. Authenticate the creator
+    const { userId } = getAuth(req);
+
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: "Authentication required."
+      });
+    }
+
+    // 2. Validate amount
+    const rawAmount = req.body?.amount;
+
+    if (
+      rawAmount === undefined ||
+      rawAmount === null ||
+      !/^\d+(\.\d{1,2})?$/.test(String(rawAmount))
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Enter a valid withdrawal amount with up to 2 decimal places."
+      });
+    }
+
+    const amount = Number(rawAmount);
+    const amountCents = Math.round(amount * 100);
+
+    if (!Number.isSafeInteger(amountCents) || amountCents <= 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Withdrawal amount must be greater than zero."
+      });
+    }
+
+    // 3. Validate payout method and details
+    const payoutMethod = req.body?.payout_method;
+    const details = req.body?.payout_details;
+
+    if (!["mobile_money", "bank_transfer"].includes(payoutMethod)) {
+      return res.status(400).json({
+        success: false,
+        message: "Choose a supported payout method."
+      });
+    }
+
+    if (
+      !details ||
+      typeof details !== "object" ||
+      Array.isArray(details)
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Valid payout details are required."
+      });
+    }
+
+    let payoutDetails;
+
+    if (payoutMethod === "mobile_money") {
+      const network = String(details.network || "").trim();
+      const accountName = String(details.account_name || "").trim();
+      const phoneNumber = String(details.phone_number || "").trim();
+
+      if (
+        !["MTN", "Telecel", "AT"].includes(network) ||
+        !accountName ||
+        !phoneNumber ||
+        accountName.length > 120 ||
+        phoneNumber.length > 30
+      ) {
+        return res.status(400).json({
+          success: false,
+          message: "Provide a valid mobile money network, account name, and phone number."
+        });
+      }
+
+      payoutDetails = {
+        network,
+        account_name: accountName,
+        phone_number: phoneNumber
+      };
+    } else {
+      const accountName = String(details.account_name || "").trim();
+      const bankName = String(details.bank_name || "").trim();
+      const accountNumber = String(details.account_number || "").trim();
+
+      if (
+        !accountName ||
+        !bankName ||
+        !accountNumber ||
+        accountName.length > 120 ||
+        bankName.length > 120 ||
+        accountNumber.length > 50
+      ) {
+        return res.status(400).json({
+          success: false,
+          message: "Provide valid bank account details."
+        });
+      }
+
+      payoutDetails = {
+        account_name: accountName,
+        bank_name: bankName,
+        account_number: accountNumber
+      };
+    }
+
+    // 4. Begin transaction
+    client = await pool.connect();
+    await client.query("BEGIN");
+
+    // Lock this seller's row. Other withdrawal requests for this
+    // seller must wait until this transaction finishes.
+    const sellerResult = await client.query(
+      `SELECT
+         id,
+         status,
+         seller_verified,
+         can_withdraw
+       FROM ecodata_sellers
+       WHERE clerk_user_id = $1
+       FOR UPDATE`,
+      [userId]
+    );
+
+    if (sellerResult.rows.length === 0) {
+      await client.query("ROLLBACK");
+
+      return res.status(404).json({
+        success: false,
+        message: "Seller profile not found."
+      });
+    }
+
+    const seller = sellerResult.rows[0];
+
+    if (
+      seller.seller_verified !== true ||
+      seller.can_withdraw !== true
+    ) {
+      await client.query("ROLLBACK");
+
+      return res.status(403).json({
+        success: false,
+        message: "Your seller account is not authorized to withdraw funds."
+      });
+    }
+
+    const sellerId = seller.id;
+
+    // 5. Calculate creator earnings from completed, paid sales.
+    // Keep these status rules consistent with your checkout workflow.
+    const earningsResult = await client.query(
+      `SELECT COALESCE(
+         SUM(s.gross_amount * 0.70),
+         0
+       ) AS creator_earnings
+       FROM ecodata_sales s
+       JOIN ecodata_order_items oi
+         ON oi.id = s.order_item_id
+       JOIN ecodata_orders o
+         ON o.id = oi.order_id
+       WHERE s.seller_id = $1
+         AND LOWER(COALESCE(s.sale_status, '')) = 'completed'
+         AND LOWER(COALESCE(o.payment_status, '')) = 'paid'
+         AND LOWER(COALESCE(o.order_status, ''))
+             IN ('completed', 'delivered')`,
+      [sellerId]
+    );
+
+    // 6. Reserve outstanding withdrawals and deduct paid ones.
+    const withdrawalsResult = await client.query(
+      `SELECT COALESCE(SUM(amount), 0) AS committed_amount
+       FROM ecodata_withdrawals
+       WHERE seller_id = $1
+         AND status IN (
+           'pending',
+           'approved',
+           'processing',
+           'paid'
+         )`,
+      [sellerId]
+    );
+
+    const earnings = Number(
+      earningsResult.rows[0].creator_earnings
+    );
+
+    const committed = Number(
+      withdrawalsResult.rows[0].committed_amount
+    );
+
+    if (
+      !Number.isFinite(earnings) ||
+      !Number.isFinite(committed)
+    ) {
+      throw new Error("Unable to calculate the seller's available balance.");
+    }
+
+    const availableCents = Math.max(
+      0,
+      Math.round(earnings * 100) -
+        Math.round(committed * 100)
+    );
+
+    if (amountCents > availableCents) {
+      await client.query("ROLLBACK");
+
+      return res.status(400).json({
+        success: false,
+        message: "Insufficient available balance.",
+        availableBalance: availableCents / 100
+      });
+    }
+
+    // 7. Create the withdrawal request
+    const insertResult = await client.query(
+      `INSERT INTO ecodata_withdrawals (
+         seller_id,
+         amount,
+         currency,
+         payout_method,
+         payout_details,
+         status
+       )
+       VALUES ($1, $2, 'GHS', $3, $4::jsonb, 'pending')
+       RETURNING
+         id,
+         seller_id,
+         amount,
+         currency,
+         payout_method,
+         status,
+         requested_at`,
+      [
+        sellerId,
+        (amountCents / 100).toFixed(2),
+        payoutMethod,
+        JSON.stringify(payoutDetails)
+      ]
+    );
+
+    await client.query("COMMIT");
+
+    const withdrawal = insertResult.rows[0];
+
+    return res.status(201).json({
+      success: true,
+      message: "Withdrawal request submitted successfully.",
+      withdrawal: {
+        id: withdrawal.id,
+        amount: Number(withdrawal.amount),
+        currency: withdrawal.currency,
+        payout_method: withdrawal.payout_method,
+        status: withdrawal.status,
+        requestedAt: withdrawal.requested_at
+      },
+      availableBalance: (availableCents - amountCents) / 100
+    });
+
+  } catch (error) {
+    if (client) {
+      try {
+        await client.query("ROLLBACK");
+      } catch (rollbackError) {
+        console.error("Withdrawal rollback failed:", rollbackError);
+      }
+    }
+
+    console.error("Create creator withdrawal failed:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Unable to submit withdrawal request."
+    });
+
+  } finally {
+    if (client) {
+      client.release();
+    }
   }
 }
