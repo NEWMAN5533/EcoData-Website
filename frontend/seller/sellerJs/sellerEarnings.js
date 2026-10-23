@@ -254,9 +254,7 @@ function renderSummary() {
     })
     .reduce((sum, sale) => sum + getCreatorAmount(sale), 0);
 
-  const pendingEarnings = allSales
-    .filter(isPendingSale)
-    .reduce((sum, sale) => sum + getCreatorAmount(sale), 0);
+  const pendingEarnings = Number(dashboard.pendingEarnings ?? 0) || 0;
 
   setText("availableBalance", formatMoney(availableBalance));
   setText("totalEarnings", formatMoney(totalEarnings));
