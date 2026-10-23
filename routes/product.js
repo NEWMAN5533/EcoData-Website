@@ -35,13 +35,13 @@ createProduct
 createProductRouter.get("/",getCreatorProducts);
 
 
-createProductRouter.get("/dashboard",getCreatorDashboard);
+createProductRouter.get("/creator/dashboard",getCreatorDashboard);
 
 
-createProductRouter.get("/sales",getCreatorSales);
+createProductRouter.get("/creator/sales",getCreatorSales);
 
 
-createProductRouter.get("/withdrawals",getCreatorWithdrawals);
+createProductRouter.get("/creator/withdrawals",getCreatorWithdrawals);
 
 createProductRouter.post("/creator/withdrawals", createCreatorWithdrawal);
 
