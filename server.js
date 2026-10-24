@@ -24,26 +24,35 @@ import getVoucherRouter from "./routes/getVouchersRoute.js";
 import postVoucherRouter from "./routes/postVoucherRouter.js";
 import failedOrderCheckRouter from "./routes/failedOrderCheckRouter.js";
 
-// ecodata store routes
+//=============================
+// ECODATA STORE ROUTES
+//=============================
+
+// AUTH.USER
 import { requireAuth, initializeClerk } from "./middleware/clerkAuth.js";
 import { getAuth } from "@clerk/express";
+
+// AUTH.USER.PROFILE
 import accountRouter from "./routes/accountRoute.js";
 import profileRouter from "./routes/profileRoute.js";
+
+
+// AUTH.SELLER (PROFILE & LOGICS)
 import sellerProfileRouter from "./routes/sellerProfileRoute.js";
 import sellerLogoRouter from "./routes/sellerLogoRoute.js";
 import sellerProductsRouter from "./routes/sellerProducts.js";
-
-// Seller upload
 import createProductRouter from "./routes/product.js";
+import sellerSettingsRouter from "./routes/sellerSettingsRoute.js";
 
 
 
-// Firebase Admin
+// AUTH.ADMIN
 import { admin, db } from "./firebaseAdmin.js";
 import { startOrderSyncJob } from "./cron/syncOrders.js";
 import adminTestRouter from "./routes/adminTestRoute.js";
 import adminAccessDashboardRouter from "./routes/adminDashboardRoute.js";
 import adminSellersRouter from "./routes/adminSellersMap.js";
+
 
 
 
@@ -97,9 +106,10 @@ app.use("/api/create-store", storeRouter);
 
 
 
-
-app.use("/api/creator", createProductRouter);
-
+app.use("/api/creator/products", createProductRouter);
+app.use("/api/creator/dashboard", createProductRouter );
+app.use("/api/creator/withdrawals", createProductRouter);
+app.use("/api/creator/sales", createProductRouter);
 
 
 // CLERK AUTHENTICATION TEST
@@ -125,6 +135,7 @@ app.use("/api/profile", profileRouter);
 app.use("/api/seller", sellerProfileRouter);
 app.use("/api/seller/logo", sellerLogoRouter)
 app.use("/api/seller/products", sellerProductsRouter);
+app.use("/api/seller-settings", sellerSettingsRouter);
 
 // ADMIN ROUTES
 app.use("/api/admin", adminTestRouter);
