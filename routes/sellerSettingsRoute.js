@@ -23,8 +23,8 @@ sellerSettingsRouter.get("/", requiredAdmin, async(req, res) => {
     }
 
     // Confirm this account has a seller profile
-    const sellers = sql`
-    SELECT clerk_user_id
+    const sellers = await sql`
+    SELECT id
     FROM ecodata_sellers
     WHERE clerk_user_id = ${ userId }
     LIMIT 1
