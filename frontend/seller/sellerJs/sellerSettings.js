@@ -292,6 +292,83 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+
+
+
+
+
+
+
+/* =========================================
+   SAVE BASIC ACCOUNT INFORMATION
+========================================= */
+
+const displayNameInput = document.getElementById("settingsDisplayName");
+const phoneInput = document.getElementById("settingsPhone");
+const saveAccountBtn = document.getElementById("saveAccountSettingsBtn");
+
+if (saveAccountBtn && displayNameInput && phoneInput) {
+  saveAccountBtn.addEventListener("click", async (event) => {
+    event.preventDefault();
+
+    const displayName = displayNameInput.value.trim();
+    const phone = phoneInput.value.trim();
+
+    if (displayName.length < 2) {
+      alert("Please enter a valid display name.");
+      displayNameInput.focus();
+      return;
+    }
+
+    saveAccountBtn.disabled = true;
+
+    const originalText = saveAccountBtn.textContent;
+    saveAccountBtn.textContent = "Saving...";
+
+    try {
+      const token = await getClerkToken();
+
+      const response = await fetch(
+        `${API_BASE}/api/seller-settings/account`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            displayName,
+            phone
+          })
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.message || "Unable to save account information."
+        );
+      }
+
+      displayNameInput.value = result.account.displayName;
+      phoneInput.value = result.account.phone;
+
+      alert("Account information saved successfully!");
+    } catch (error) {
+      console.error("Save account information error:", error);
+      alert(error.message || "Something went wrong while saving.");
+    } finally {
+      saveAccountBtn.disabled = false;
+      saveAccountBtn.textContent = originalText;
+    }
+  });
+}
+
+
+
+
+
 //=======================
 // SIDEBAR TOGGLE
 //=======================
