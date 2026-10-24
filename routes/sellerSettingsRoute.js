@@ -1,7 +1,7 @@
 import express from "express";
 import { getAuth } from "@clerk/express";
 
-import sql from "../backend/db.js";
+import sql, { pool } from "../backend/db.js";
 import { requireAuth } from "../middleware/clerkAuth.js";
 
 const sellerSettingsRouter = express.Router();
@@ -181,7 +181,11 @@ sellerSettingsRouter.put("/", requireAuth, async (req, res) => {
    PUT /api/seller-settings/account
 ========================================= */
 
+// PUT /api/seller-settings/account
 sellerSettingsRouter.put("/account", requireAuth, async (req, res) => {
+  let client;
+  let transactionStarted = false;
+
   try {
     const { userId } = getAuth(req);
 
@@ -202,7 +206,7 @@ sellerSettingsRouter.put("/account", requireAuth, async (req, res) => {
     ) {
       return res.status(400).json({
         success: false,
-        message: "Enter a display name between 2 and 80 characters."
+        message: "Display name must be between 2 and 80 characters."
       });
     }
 
@@ -213,78 +217,114 @@ sellerSettingsRouter.put("/account", requireAuth, async (req, res) => {
     ) {
       return res.status(400).json({
         success: false,
-        message: "Enter a valid phone number."
+        message: "Please enter a valid phone number."
       });
     }
 
-    const nameParts = displayName.trim().split(/\s+/);
+    const cleanName = displayName.trim();
+    const cleanPhone = phone.trim();
+
+    const nameParts = cleanName.split(/\s+/);
     const firstName = nameParts.shift();
     const lastName = nameParts.join(" ");
 
-    // Verify the seller profile belongs to this Clerk user.
-    const sellers = await sql`
-      SELECT clerk_user_id
-      FROM ecodata_sellers
-      WHERE clerk_user_id = ${userId}
-      LIMIT 1
-    `;
+    // Acquire one database connection for the transaction.
+    client = await pool.connect();
 
-    if (!sellers.length) {
+    await client.query("BEGIN");
+    transactionStarted = true;
+
+    // Confirm the authenticated user exists.
+    const users = await client.query(
+      `SELECT clerk_user_id
+       FROM ecodata_users
+       WHERE clerk_user_id = $1
+       LIMIT 1`,
+      [userId]
+    );
+
+    if (users.rows.length === 0) {
+      await client.query("ROLLBACK");
+      transactionStarted = false;
+
       return res.status(404).json({
         success: false,
-        message: "Seller profile not found."
+        code: "USER_PROFILE_NOT_FOUND",
+        message: "Your account profile was not found."
       });
     }
 
-    // Confirm that the associated account exists.
-    const users = await sql`
-      SELECT clerk_user_id
-      FROM ecodata_users
-      WHERE clerk_user_id = ${userId}
-      LIMIT 1
-    `;
+    // Update the user's display name.
+    await client.query(
+      `UPDATE ecodata_users
+       SET first_name = $1,
+           last_name = $2
+       WHERE clerk_user_id = $3`,
+      [firstName, lastName, userId]
+    );
 
-    if (!users.length) {
-      return res.status(404).json({
-        success: false,
-        message: "Account profile not found."
-      });
+    // Check whether this account has a seller profile.
+    const sellers = await client.query(
+      `SELECT clerk_user_id
+       FROM ecodata_sellers
+       WHERE clerk_user_id = $1
+       LIMIT 1`,
+      [userId]
+    );
+
+    const isSeller = sellers.rows.length > 0;
+
+    // Save the phone number for seller accounts.
+    if (isSeller) {
+      await client.query(
+        `UPDATE ecodata_sellers
+         SET phone_number = $1
+         WHERE clerk_user_id = $2`,
+        [cleanPhone, userId]
+      );
     }
 
-    // Update the account name.
-    await sql`
-      UPDATE ecodata_users
-      SET
-        first_name = ${firstName},
-        last_name = ${lastName}
-      WHERE clerk_user_id = ${userId}
-    `;
-
-    // Update the seller's contact number.
-    await sql`
-      UPDATE ecodata_sellers
-      SET phone_number = ${phone.trim()}
-      WHERE clerk_user_id = ${userId}
-    `;
+    // Commit both updates together.
+    await client.query("COMMIT");
+    transactionStarted = false;
 
     return res.json({
       success: true,
       message: "Account information updated successfully.",
       account: {
-        displayName: displayName.trim(),
-        phone: phone.trim()
+        isSeller,
+        displayName: cleanName,
+        phone: cleanPhone
       }
     });
+
   } catch (error) {
-    console.error("Update seller account error:", error);
+    // Roll back any incomplete transaction.
+    if (client && transactionStarted) {
+      try {
+        await client.query("ROLLBACK");
+      } catch (rollbackError) {
+        console.error(
+          "Account update rollback error:",
+          rollbackError
+        );
+      }
+    }
+
+    console.error("Update account information error:", error);
 
     return res.status(500).json({
       success: false,
       message: "Unable to update your account information."
     });
+
+  } finally {
+    // Always release the database connection.
+    if (client) {
+      client.release();
+    }
   }
 });
-
 
 
 
