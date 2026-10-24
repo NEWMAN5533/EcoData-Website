@@ -1,6 +1,6 @@
 // =========================
-// FIREBASE IMPORTS
-// =========================
+ // FIREBASE IMPORTS
+ // =========================
 import { db } from "./firebase-config.js";
 
 import {
@@ -9,12 +9,8 @@ import {
   onSnapshot,
   query,
   orderBy,
-  limit,
- 
+  limit
 } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
-
-
-
 
 
 // =========================
@@ -22,77 +18,138 @@ import {
 // =========================
 const DELIVERY_TIME_KEY = "ecoLastDeliveryTime";
 const LAST_ORDER_KEY = "ecoLastDeliveredOrderId";
+const LAST_DELIVERED_AT_KEY = "lastDeliveredAt";
 
 
+// =========================
+// DATE HELPERS
+// =========================
+function getTimestamp(value) {
+  if (value == null) return NaN;
 
+  if (typeof value.toMillis === "function") {
+    return value.toMillis();
+  }
+
+  if (typeof value.toDate === "function") {
+    return value.toDate().getTime();
+  }
+
+  if (value instanceof Date) {
+    return value.getTime();
+  }
+
+  if (typeof value === "number") {
+    return value;
+  }
+
+  return new Date(value).getTime();
+}
+
+
+function formatDateTime(date) {
+  return `${date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "2-digit",
+    year: "numeric"
+  })} • ${date.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true
+  }).toUpperCase()}`;
+}
+
+
+function formatDuration(totalMinutes) {
+  const minutes = Math.max(0, Math.floor(totalMinutes));
+
+  const days = Math.floor(minutes / 1440);
+  const hours = Math.floor((minutes % 1440) / 60);
+  const remainingMinutes = minutes % 60;
+
+  if (days > 0) {
+    return `${days}d ${hours}h ${remainingMinutes}m`;
+  }
+
+  if (hours > 0) {
+    return `${hours}h ${remainingMinutes}m`;
+  }
+
+  return `${remainingMinutes} min`;
+}
 
 
 // =========================
 // DELIVERY INDICATOR
 // =========================
 function updateDeliveryIndicator(snapshot) {
-
   try {
-
-   if(snapshot.empty) {
-    console.log("No delivered orders.");
-    return;
-   }
-
-
+    // =========================
+    // CHECK SNAPSHOT
+    // =========================
+    if (snapshot.empty) {
+      console.log("No delivered orders found.");
+      return;
+    }
 
     // =========================
-    // FIND LATEST DELIVERED ORDER
+    // GET LATEST DELIVERED ORDER
     // =========================
+    const doc = snapshot.docs[0];
+
     const order = {
-      id: snapshot.docs[0].id,
-      ...snapshot.docs[0].data()
+      ...doc.data(),
+      id: doc.id
     };
 
     console.log("Latest delivered order:", order);
 
     // =========================
-    // LAST DELIVERED DATE
+    // GET TIMESTAMPS
     // =========================
-    const deliveredDate = order.updatedAt?.toDate
-      ? order.updatedAt.toDate()
-      : new Date(order.updatedAt);
+    const createdAt = getTimestamp(order.createdAt);
+    const updatedAt = getTimestamp(order.updatedAt);
 
-    const lastDelivered =
-      `${deliveredDate.toLocaleDateString("en-US", {
-        month: "short",
-        day: "2-digit",
-        year: "numeric"
-      })} • ${deliveredDate.toLocaleTimeString("en-US", {
-        hour: "numeric",
-        minute: "2-digit",
-        hour12: true
-      }).toUpperCase()}`;
+    if (
+      !Number.isFinite(createdAt) ||
+      !Number.isFinite(updatedAt) ||
+      createdAt <= 0 ||
+      updatedAt <= 0 ||
+      updatedAt < createdAt
+    ) {
+      console.error("Invalid order timestamps:", {
+        createdAt: order.createdAt,
+        updatedAt: order.updatedAt
+      });
+
+      return;
+    }
+
+    const createdDate = new Date(createdAt);
+    const deliveredDate = new Date(updatedAt);
 
     // =========================
-    // CACHE DELIVERY TIMESTAMP
+    // ORDER IDENTIFICATION
     // =========================
-    const currentOrderKey =
-      order.orderId || order.id;
+    const currentOrderKey = String(order.orderId || order.id);
 
     const storedOrderKey =
       localStorage.getItem(LAST_ORDER_KEY);
 
-    let deliveredAt =
-      Number(localStorage.getItem("lastDeliveredAt"));
+    let deliveredAt = Number(
+      localStorage.getItem(LAST_DELIVERED_AT_KEY)
+    );
 
     if (
       storedOrderKey !== currentOrderKey ||
-      !deliveredAt
+      !Number.isFinite(deliveredAt) ||
+      deliveredAt <= 0
     ) {
-
-      deliveredAt = order.updatedAt?.toMillis
-        ? order.updatedAt.toMillis()
-        : order.updatedAt;
+      deliveredAt = updatedAt;
 
       localStorage.setItem(
-        "lastDeliveredAt",
-        deliveredAt
+        LAST_DELIVERED_AT_KEY,
+        String(deliveredAt)
       );
 
       localStorage.setItem(
@@ -100,141 +157,90 @@ function updateDeliveryIndicator(snapshot) {
         currentOrderKey
       );
 
-      console.log("✅ Saved new delivery timestamp");
-
+      console.log("Saved latest delivery timestamp.");
     } else {
-
-      console.log("📦 Using cached timestamp");
-
+      console.log("Using cached delivery timestamp.");
     }
 
     // =========================
-    // CALCULATE DELIVERY TIME
+    // CALCULATE DELIVERY DURATION
     // =========================
-    const createdAt = 
-    order.createdAt?.toMillis
-    ? order.createdAt.toMillis()
-    : new Date(order.createdAt).getTime();
-
-    const updatedAt = 
-    order.updatedAt?.toMillis
-    ? order.updatedAt.toMillis()
-    : new (order.updatedAt).getTime();
-
     const elapsed = updatedAt - createdAt;
 
-    const totalMinutes = Math.max(
-      1,
+    const elapsedMinutes = Math.max(
+      0,
       Math.floor(elapsed / 60000)
     );
 
-    const days =
-      Math.floor(totalMinutes / 1440);
+    const deliveryTime = formatDuration(elapsedMinutes);
 
-    const hours =
-      Math.floor((totalMinutes % 1440) / 60);
+    console.log("Delivery duration:", deliveryTime);
+    console.log("Elapsed minutes:", elapsedMinutes);
 
-    const minutes =
-      totalMinutes % 60;
+    // =========================
+    // FORMAT ORDER TIMES
+    // =========================
+    const placedAtFormatted = formatDateTime(createdDate);
+    const deliveredAtFormatted = formatDateTime(deliveredDate);
 
-    let deliveryTime = "";
+    // =========================
+    // GET INDICATOR ELEMENTS
+    // =========================
+    const bubble = document.getElementById("deliveryBubble1");
+    const bubble2 = document.getElementById("deliveryBubble2");
+    const messageEl = document.getElementById("deliveryMessage");
 
-    if (days > 0) {
+    // =========================
+    // DELIVERY STATUS RULES
+    // =========================
+    let deliveryClass;
+    let deliveryMessage;
 
-      deliveryTime =
-        `${days}d ${hours}h ${minutes}m`;
+    if (elapsedMinutes <= 10) {
+      deliveryClass = "instant";
 
-    } else if (hours > 0) {
+      deliveryMessage =
+        "Instant Delivery! Most orders are completed in under 10 minutes.";
 
-      deliveryTime =
-        `${hours}h ${minutes}m`;
+    } else if (elapsedMinutes <= 30) {
+      deliveryClass = "fast";
+
+      deliveryMessage =
+        "MTN is delivering fast right now. Enjoy the speedy delivery!";
+
+    } else if (elapsedMinutes <= 90) {
+      deliveryClass = "normal";
+
+      deliveryMessage =
+        "Orders are processing normally. Please allow up to 90 minutes.";
 
     } else {
+      deliveryClass = "slow";
 
-      deliveryTime =
-        `${minutes} min`;
-
+      deliveryMessage =
+        "Orders are taking longer than usual. Please allow additional processing time.";
     }
 
+    // =========================
+    // UPDATE INDICATOR CLASSES
+    // =========================
+    if (bubble) {
+      bubble.className = "delivery-bubble";
+      bubble.classList.add(deliveryClass);
+    }
+
+    if (bubble2) {
+      bubble2.className = "delivery-bubble2";
+      bubble2.classList.add(deliveryClass);
+    }
+
+    if (messageEl) {
+      messageEl.textContent = deliveryMessage;
+    }
 
     // =========================
-// PLACED AT TIME
-// =========================
-
-const createdDate = 
-order.createdAt?.toDate
-? order.createdAt.toDate()
-: new Date(order.createdAt);
-
-
-// Format Placed At
-const placedAtFormatted =
-`${createdDate.toLocaleDateString("en-US", {
-  month: "short",
-  day: "2-digit",
-  year: "numeric"
-})} • ${createdDate.toLocaleTimeString("en-US", {
-  hour: "numeric",
-  minute: "2-digit",
-  hour12: true
-}).toUpperCase()}`;
-
-  // change text colors when there's slow, fast or normal deliveryTime
-
-
-const bubble = document.getElementById("deliveryBubble1");
-
-const bubble2 = document.getElementById("deliveryBubble2");
-
-const messageEl = document.getElementById("deliveryMessage");
-
-bubble.className = "delivery-bubble";
-
-bubble2.classList = "delivery-bubble2";
-
-const elapsedMinutes = Math.floor(elapsed / 60000);
-
-if(elapsedMinutes <= 10 ) {
-  bubble.classList.add("instant");
-  bubble2.classList.add("instant");
-
-   messageEl.textContent =
-    "Instant Delivery. Most Orders are completed in under 10 minutes.";
-}
-
-if(elapsedMinutes <= 30 ){
-  bubble.classList.add("fast");
-  bubble2.classList.add("fast");
-
-   
-  messageEl.textContent =
-    "MTN is delivering Fast like Lightning  right now, let enjoy this moment of fast delivering.";
- 
-
-} else if(elapsedMinutes <= 90) {
-  bubble.classList.add("normal");
-  bubble2.classList.add("normal");
-
-   messageEl.textContent =
-    "Orders are processing normally. Please allow up to 90 minutes.";
-
-} else {
-  bubble.classList.add("slow");
-  bubble2.classList.add("slow");
-
-}
-
-
-
-
-
-
+    // UPDATE DELIVERY TIME UI
     // =========================
-    // UPDATE UI
-    // =========================
-
-  
-  
     const deliveryTimeEl =
       document.getElementById("deliveryTime");
 
@@ -253,59 +259,55 @@ if(elapsedMinutes <= 30 ){
     const deliveredAtTime =
       document.getElementById("deliveredAtTime");
 
-    if (deliveryTimeEl)
+    if (deliveryTimeEl) {
       deliveryTimeEl.textContent = deliveryTime;
+    }
 
-    if (actualTimeEl)
+    if (actualTimeEl) {
       actualTimeEl.textContent = deliveryTime;
+    }
 
-    if (turnAroundTime)
+    if (turnAroundTime) {
       turnAroundTime.textContent = deliveryTime;
+    }
 
-    if (placedAtTime)
+    if (placedAtTime) {
       placedAtTime.textContent = placedAtFormatted;
+    }
 
-    if (deliveredAtTime)
-      deliveredAtTime.textContent = deliveryTime;
+    if (deliveredAtTime) {
+      deliveredAtTime.textContent = deliveredAtFormatted;
+    }
 
     if (lastDeliveredEl) {
-     // =========================
-// LAST DELIVERED
-// =========================
-const lastDeliveredFormatted =
-`${deliveredDate.toLocaleDateString("en-US", {
-  month: "short",
-  day: "2-digit",
-  year: "numeric"
-})} • ${deliveredDate.toLocaleTimeString("en-US", {
-  hour: "numeric",
-  minute: "2-digit",
-  hour12: true
-}).toUpperCase()}`;
-
-if (lastDeliveredEl) {
-  lastDeliveredEl.textContent = lastDeliveredFormatted;
-}
+      lastDeliveredEl.textContent = deliveredAtFormatted;
     }
+
+    // =========================
+    // CACHE DISPLAY VALUES
+    // =========================
+    localStorage.setItem(
+      DELIVERY_TIME_KEY,
+      deliveryTime
+    );
+
     // =========================
     // DEBUG
     // =========================
-    console.log("Current Order:", currentOrderKey);
-    console.log("Stored Order:", storedOrderKey);
-    console.log("Delivered At:", new Date(deliveredAt));
-    console.log("Current Time:", new Date());
-    console.log("Elapsed:", deliveryTime);
+    console.log("Current order:", currentOrderKey);
+    console.log("Stored order:", storedOrderKey);
+    console.log("Delivered at:", deliveredDate);
+    console.log("Current time:", new Date());
+    console.log("Delivery class:", deliveryClass);
 
-  } catch (err) {
-
-    console.error("Delivery indicator error:", err);
-
+  } catch (error) {
+    console.error("Delivery indicator error:", error);
   }
-
 }
 
+
 // =========================
-// START
+// FIRESTORE QUERY
 // =========================
 const deliveredQuery = query(
   collection(db, "orders"),
@@ -314,34 +316,18 @@ const deliveredQuery = query(
   limit(1)
 );
 
+
+// =========================
+// LISTEN FOR DELIVERY UPDATES
+// =========================
 onSnapshot(
   deliveredQuery,
   (snapshot) => {
-    console.log("Delivery update");
+    console.log("Delivery data updated.");
+
     updateDeliveryIndicator(snapshot);
   },
   (error) => {
-    console.error("Snapshot error:", error);
+    console.error("Delivery snapshot error:", error);
   }
 );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
