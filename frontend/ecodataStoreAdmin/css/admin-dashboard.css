@@ -1643,6 +1643,17 @@ color:#3f8f5f;
     animation:ripple 1.8s infinite;
 }
 
+
+/* INSTANT */
+.delivery-bubble.instant{
+    background: rgba(5, 235, 120);
+    box-shadow:0 0 10px #04db70;
+}
+
+.delivery-bubble.instant::after{
+  border:  2px solid  #04db70;
+}
+
 /* FAST */
 .delivery-bubble.fast{
     background:#00d26a;
@@ -1708,6 +1719,17 @@ color:#3f8f5f;
     inset:0;
     border-radius:50%;
     animation:ripple 1.8s infinite;
+}
+
+
+/* INSTANT */
+.delivery-bubble2.instant{
+    background: rgba(5, 235, 120);
+    box-shadow:0 0 10px #04db70;
+}
+
+.delivery-bubble2.instant::after{
+  border:  2px solid  #04db70;
 }
 
 /* FAST */
@@ -3043,6 +3065,8 @@ padding-right:15px;
 .bundle-order-status i{
   color: #f5f3f3;
 }
+
+
 /* =================================
    PROCESSING SHIMMER
 ================================= */
