@@ -289,7 +289,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==============================
 
   loadSettings();
-});
+
 
 
 
@@ -366,7 +366,7 @@ if (saveAccountBtn && displayNameInput && phoneInput) {
 }
 
 
-
+});
 
 
 //=======================
