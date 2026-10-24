@@ -289,4 +289,73 @@ sellerSettingsRouter.put("/account", requireAuth, async (req, res) => {
 
 
 
+// GET /api/seller-settings/account
+sellerSettingsRouter.get("/account", requireAuth, async (req, res) => {
+  try {
+    const { userId } = getAuth(req);
+
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: "Please sign in to continue."
+      });
+    }
+
+    // Find the user and check whether a seller profile exists.
+    const rows = await sql`
+      SELECT
+        u.first_name,
+        u.last_name,
+        u.email,
+        s.clerk_user_id AS seller_id,
+        s.phone_number
+      FROM ecodata_users u
+      LEFT JOIN ecodata_sellers s
+        ON s.clerk_user_id = u.clerk_user_id
+      WHERE u.clerk_user_id = ${userId}
+      LIMIT 1
+    `;
+
+    if (!rows.length) {
+      return res.status(404).json({
+        success: false,
+        message: "Account profile not found."
+      });
+    }
+
+    const user = rows[0];
+    const isSeller = Boolean(user.seller_id);
+
+    const savedName = [
+      user.first_name,
+      user.last_name
+    ]
+      .filter(Boolean)
+      .join(" ")
+      .trim();
+
+    return res.json({
+      success: true,
+      account: {
+        isSeller,
+        displayName: savedName || (
+          isSeller ? "Creator/seller" : "EcoData/user"
+        ),
+        username: "",
+        email: user.email || "",
+        phone: user.phone_number || ""
+      }
+    });
+  } catch (error) {
+    console.error("Load account information error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Unable to load account information."
+    });
+  }
+});
+
+
+
 export default sellerSettingsRouter;
