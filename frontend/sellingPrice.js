@@ -37,14 +37,14 @@ function calculateSellingPrice(basePrice) {
 // MTN BASE PRICES
 // ==========================================
 export const SELLING_PRICES = [
-  { volume: 1, promoPrice: 5.70, agentPrice: 5.70, userPrice: 5.99 },
-  { volume: 2, promoPrice: 11.50, agentPrice: 11.50, userPrice: 11.99 },
-  { volume: 3, promoPrice: 17.20, agentPrice: 15.90, userPrice: 17.99 },
-  { volume: 4, promoPrice: 21.60, agentPrice: 19.90, userPrice: 22.90 },
-  { volume: 5, promoPrice: 25.50, agentPrice: 24.60, userPrice: 26.99 },
+  { volume: 1, promoPrice: 5.65, agentPrice: 5.70, userPrice: 5.65 },
+  { volume: 2, promoPrice: 11.50, agentPrice: 11.50, userPrice: 11.50 },
+  { volume: 3, promoPrice: 17.20, agentPrice: 15.90, userPrice: 17.20 },
+  { volume: 4, promoPrice: 21.60, agentPrice: 19.90, userPrice: 22.60 },
+  { volume: 5, promoPrice: 25.50, agentPrice: 24.60, userPrice: 26.30 },
   { volume: 6, promoPrice: 28.90, agentPrice: 29.60, userPrice: 32.99 },
   { volume: 8, promoPrice: 39.00, agentPrice: 38.60, userPrice: 47.99 },
-  { volume: 10, promoPrice: 46.20, agentPrice: 45.60, userPrice: 47.99 },
+  { volume: 10, promoPrice: 46.20, agentPrice: 45.60, userPrice: 46.20 },
   { volume: 15, promoPrice: 67.00, agentPrice: 65.99, userPrice: 69.97 },
   { volume: 20, promoPrice: 88.00, agentPrice: 85.99, userPrice: 92.98 },
   { volume: 25, promoPrice: 109.00, agentPrice: 107.99, userPrice: 112.99 },
