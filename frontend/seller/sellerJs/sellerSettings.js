@@ -366,6 +366,77 @@ if (saveAccountBtn && displayNameInput && phoneInput) {
 }
 
 
+
+
+
+
+
+async function loadAccountInformation() {
+  const displayNameInput =
+    document.getElementById("settingsDisplayName");
+
+  const usernameInput =
+    document.getElementById("settingsUsername");
+
+  const emailInput =
+    document.getElementById("settingsEmail");
+
+  const phoneInput =
+    document.getElementById("settingsPhone");
+
+  try {
+    const token = await getClerkToken();
+
+    const response = await fetch(
+      `${API_BASE}/api/seller-settings/account`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    const result = await response.json();
+
+    if (!response.ok || !result.success) {
+      throw new Error(
+        result.message || "Unable to load account information."
+      );
+    }
+
+    const account = result.account;
+
+    if (displayNameInput) {
+      displayNameInput.value = account.displayName;
+    }
+
+    if (usernameInput) {
+      usernameInput.value = account.username || "";
+    }
+
+    if (emailInput) {
+      emailInput.value = account.email || "";
+    }
+
+    if (phoneInput) {
+      phoneInput.value = account.phone || "";
+    }
+
+    console.log(
+      "Account information loaded:",
+      account.isSeller ? "Seller account" : "Regular user account"
+    );
+
+  } catch (error) {
+    console.error("Load account information error:", error);
+  }
+}
+
+
+
+
+loadAccountInformation();
 });
 
 
