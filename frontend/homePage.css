@@ -1364,8 +1364,8 @@ border: 1px solid rgb(235, 235, 235);
 /* bubble 1 */
 
 .delivery-bubble{
-    width:17px;
-    height:17px;
+    width:12px;
+    height:12px;
     border-radius:50%;
     position: absolute;
     top: -1.4rem !important;
@@ -1442,8 +1442,8 @@ border: 1px solid rgb(235, 235, 235);
 /* bubble 2 */
 
 .delivery-bubble2{
-    width:17px;
-    height:17px;
+    width:12px;
+    height:12px;
     border-radius:50%;
     position: absolute;
     top: -1.4rem !important;
