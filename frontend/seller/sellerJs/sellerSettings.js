@@ -1,7 +1,295 @@
+/* =========================================
+   ECODATASTORE — SELLER SETTINGS
+   Notifications + Store Preferences
+========================================= */
 
+const API_BASE = "https://ecodata-app.onrender.com";
+const SETTINGS_ENDPOINT = `${API_BASE}/api/seller-settings`;
 
+document.addEventListener("DOMContentLoaded", () => {
+  // ==============================
+  // DOM ELEMENTS
+  // ==============================
 
+  const notifySales = document.getElementById("notifySales");
+  const notifyWithdrawals = document.getElementById("notifyWithdrawals");
+  const notifyProducts = document.getElementById("notifyProducts");
 
+  const storeVisibility = document.getElementById("storeVisibility");
+  const storeCurrency = document.getElementById("storeCurrency");
+
+  const preferenceControls = [
+    notifySales,
+    notifyWithdrawals,
+    notifyProducts,
+    storeVisibility,
+    storeCurrency
+  ].filter(Boolean);
+
+  if (preferenceControls.length === 0) {
+    console.warn("Seller settings controls were not found.");
+    return;
+  }
+
+  // ==============================
+  // STATUS MESSAGE
+  // ==============================
+
+  const status = document.createElement("p");
+
+  status.id = "sellerSettingsStatus";
+  status.setAttribute("role", "status");
+  status.setAttribute("aria-live", "polite");
+
+  status.style.marginTop = "12px";
+  status.style.fontSize = "13px";
+
+  // Place the message near the first preference control.
+  const statusParent =
+    storeVisibility?.parentElement ||
+    notifySales?.parentElement ||
+    preferenceControls[0].parentElement;
+
+  statusParent?.appendChild(status);
+
+  function showStatus(message, type = "info") {
+    status.textContent = message;
+
+    status.style.color =
+      type === "error"
+        ? "#dc2626"
+        : type === "success"
+          ? "#15803d"
+          : "inherit";
+  }
+
+  // ==============================
+  // CLERK AUTHENTICATION
+  // ==============================
+
+  async function getClerkToken() {
+    // Wait briefly for Clerk to initialize.
+    const timeoutAt = Date.now() + 10000;
+
+    while (
+      (!window.Clerk || !window.Clerk.session) &&
+      Date.now() < timeoutAt
+    ) {
+      await new Promise(resolve => setTimeout(resolve, 200));
+    }
+
+    if (!window.Clerk?.session) {
+      throw new Error(
+        "Clerk is not ready. Refresh the page and try again."
+      );
+    }
+
+    const token = await window.Clerk.session.getToken();
+
+    if (!token) {
+      throw new Error("Please sign in to access seller settings.");
+    }
+
+    return token;
+  }
+
+  // ==============================
+  // API REQUEST HELPER
+  // ==============================
+
+  async function settingsRequest(method, body) {
+    const token = await getClerkToken();
+
+    const options = {
+      method,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json"
+      }
+    };
+
+    if (body !== undefined) {
+      options.headers["Content-Type"] = "application/json";
+      options.body = JSON.stringify(body);
+    }
+
+    const response = await fetch(SETTINGS_ENDPOINT, options);
+
+    let result;
+
+    try {
+      result = await response.json();
+    } catch {
+      throw new Error("The server returned an invalid response.");
+    }
+
+    if (!response.ok) {
+      throw new Error(
+        result.message ||
+        result.error ||
+        `Settings request failed (${response.status}).`
+      );
+    }
+
+    return result;
+  }
+
+  // ==============================
+  // READ SETTINGS FROM API
+  // ==============================
+
+  function setControlsDisabled(disabled) {
+    preferenceControls.forEach(control => {
+      control.disabled = disabled;
+    });
+  }
+
+  function applySettings(settings) {
+    if (notifySales && typeof settings.notifySales === "boolean") {
+      notifySales.checked = settings.notifySales;
+    }
+
+    if (
+      notifyWithdrawals &&
+      typeof settings.notifyWithdrawals === "boolean"
+    ) {
+      notifyWithdrawals.checked = settings.notifyWithdrawals;
+    }
+
+    if (
+      notifyProducts &&
+      typeof settings.notifyProducts === "boolean"
+    ) {
+      notifyProducts.checked = settings.notifyProducts;
+    }
+
+    if (
+      storeVisibility &&
+      ["public", "private"].includes(settings.storeVisibility)
+    ) {
+      storeVisibility.value = settings.storeVisibility;
+    }
+
+    if (
+      storeCurrency &&
+      settings.storeCurrency === "GHS"
+    ) {
+      storeCurrency.value = "GHS";
+    }
+  }
+
+  async function loadSettings() {
+    setControlsDisabled(true);
+    showStatus("Loading your settings...");
+
+    try {
+      const result = await settingsRequest("GET");
+
+      // Supports either { settings: {...} } or direct settings.
+      const settings = result.settings || result;
+
+      applySettings(settings);
+
+      showStatus("Settings loaded.", "success");
+    } catch (error) {
+      console.error("Failed to load seller settings:", error);
+
+      showStatus(
+        error.message || "Could not load your settings.",
+        "error"
+      );
+    } finally {
+      setControlsDisabled(false);
+    }
+  }
+
+  // ==============================
+  // COLLECT CURRENT PREFERENCES
+  // ==============================
+
+  function collectSettings() {
+    return {
+      notifySales: notifySales
+        ? notifySales.checked
+        : true,
+
+      notifyWithdrawals: notifyWithdrawals
+        ? notifyWithdrawals.checked
+        : true,
+
+      notifyProducts: notifyProducts
+        ? notifyProducts.checked
+        : true,
+
+      storeVisibility: storeVisibility
+        ? storeVisibility.value
+        : "public",
+
+      storeCurrency: storeCurrency
+        ? storeCurrency.value
+        : "GHS"
+    };
+  }
+
+  // ==============================
+  // SAVE SETTINGS TO API
+  // ==============================
+
+  let saveQueue = Promise.resolve();
+  let changeVersion = 0;
+
+  function saveSettings() {
+    const version = ++changeVersion;
+    const settings = collectSettings();
+
+    // Serialize requests so rapid changes don't overwrite
+    // a newer selection with an older request.
+    saveQueue = saveQueue
+      .catch(() => {})
+      .then(async () => {
+        if (version !== changeVersion) {
+          return;
+        }
+
+        showStatus("Saving your settings...");
+
+        try {
+          await settingsRequest("PUT", settings);
+
+          if (version === changeVersion) {
+            showStatus("Settings saved successfully.", "success");
+          }
+        } catch (error) {
+          console.error("Failed to save seller settings:", error);
+
+          if (version === changeVersion) {
+            showStatus(
+              error.message || "Could not save your settings.",
+              "error"
+            );
+          }
+        }
+      });
+
+    return saveQueue;
+  }
+
+  // ==============================
+  // AUTO-SAVE ON CHANGE
+  // ==============================
+
+  preferenceControls.forEach(control => {
+    control.addEventListener("change", () => {
+      saveSettings();
+    });
+  });
+
+  // ==============================
+  // INITIALIZE
+  // ==============================
+
+  loadSettings();
+});
 
 
 //=======================
