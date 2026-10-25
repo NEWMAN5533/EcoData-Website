@@ -154,7 +154,7 @@ app.use(initializeClerk);
 //========================
 app.use("/api/admin/vendor", vendorManagementRouter);
 app.use("/api/vendor-status", vendorStatusRouter);
-app.use("/api/vendor-settings", vendorSettingsRouter);
+app.use("/api/admin/vendor", vendorSettingsRouter);
 app.use("/api/verify-recipient", dataMartRecipientVerificationRoute);
 
 app.use("/api/initiate-subscription", subscriptionRouter);
