@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="css/admin.css">
    <link rel="stylesheet" href="css/admin-dashboard.css">
   <link rel="stylesheet" href="css/admin-pages.css">
+  <link rel="stylesheet" href="css/adminBundle.css">
  
 
 
@@ -981,6 +982,101 @@
   </div>
 
 
+
+<!-- VENDOR MANAGEMENT PAGE -->
+<section id="vendorManagementPage" class="vendor-management-page" >
+  <div class="vendor-page-header">
+    <div>
+      <p class="vendor-eyebrow">ECODATA ADMINISTRATION</p>
+      <h2>Vendor Management</h2>
+      <p class="vendor-page-description">
+        Manage the provider responsible for processing data bundle purchases.
+      </p>
+    </div>
+
+    <button type="button" id="refreshVendorSettings"
+      class="vendor-refresh-btn">
+      ↻ Refresh
+    </button>
+  </div>
+
+  <div id="vendorAlert" class="vendor-alert" role="status"
+    aria-live="polite" hidden></div>
+
+  <div class="vendor-current-card">
+    <div class="vendor-current-icon">⚙</div>
+    <div class="vendor-current-info">
+      <span class="vendor-label">ACTIVE BUNDLE VENDOR</span>
+      <h3 id="currentVendorName">Loading...</h3>
+      <p id="currentVendorDescription">
+        Retrieving vendor settings from the server.
+      </p>
+    </div>
+    <span id="vendorStatusBadge" class="vendor-status-badge">
+      Loading
+    </span>
+  </div>
+
+  <div class="vendor-config-card">
+    <div class="vendor-card-heading">
+      <div>
+        <h3>Switch bundle provider</h3>
+        <p>Choose which provider receives new bundle purchase requests.</p>
+      </div>
+    </div>
+
+    <form id="vendorSettingsForm">
+      <label for="activeVendorSelect">Select vendor</label>
+
+      <select id="activeVendorSelect" name="activeVendor" required>
+        <option value="swiftdata">SwiftData</option>
+        <option value="datamart">DataMart Ghana</option>
+      </select>
+
+      <div class="vendor-provider-options">
+        <label class="vendor-option" for="activeVendorSelect">
+          <span class="vendor-option-icon">S</span>
+          <span>
+            <strong>SwiftData</strong>
+            <small>Existing bundle provider</small>
+          </span>
+        </label>
+
+        <label class="vendor-option" for="activeVendorSelect">
+          <span class="vendor-option-icon">D</span>
+          <span>
+            <strong>DataMart Ghana</strong>
+            <small>Alternative bundle provider</small>
+          </span>
+        </label>
+      </div>
+
+      <p class="vendor-warning">
+        Switching vendors affects new purchases processed through
+        the vendor-routing logic. It does not automatically migrate
+        existing orders.
+      </p>
+
+      <button type="submit" id="saveVendorSettings"
+        class="vendor-save-btn">
+        Save vendor settings
+      </button>
+    </form>
+  </div>
+
+  <div class="vendor-info-card">
+    <h3>How vendor switching works</h3>
+    <ul>
+      <li>The active vendor is stored in Neon PostgreSQL.</li>
+      <li>Only active administrators can change the setting.</li>
+      <li>Existing orders should continue using their original provider.</li>
+      <li>Provider failures must not be treated as proof of failed delivery.</li>
+    </ul>
+  </div>
+</section>
+
+
+
   <!-- ==========================================
        ANALYTICS GRAPH
   =========================================== -->
@@ -1886,6 +1982,7 @@
   <script type="module" src="js/bundle2.js"></script>
   <script src="js/admin.js"></script>
   <script src="js/vendorPrice.js"></script>
+  <script src="js/admin-vendor-management.js" defer></script>
 
 </body>
 </html>
