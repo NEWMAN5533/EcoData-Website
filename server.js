@@ -271,7 +271,7 @@ if (activeVendor === "datamart") {
   };
 }
 
-return res.status(result.status).json(result.body);
+
 
 
 
