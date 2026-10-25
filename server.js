@@ -234,45 +234,6 @@ async function verifyPaystack(paymentReference, retries = 3) {
 
 
 
-const activeVendor = await getActiveVendor();
-
-let result;
-
-if (activeVendor === "datamart") {
-  result = await handleDataMartBuyDataRequest(
-    {
-      network,
-      recipient,
-      pkg,
-      size,
-      paymentReference,
-    },
-    {
-      verifyPaystack,
-      processedOrders,
-    }
-  );
-} else if (activeVendor === "swiftdata") {
-  result = await handleSwiftDataBuyDataRequest({
-    network,
-    recipient,
-    pkg,
-    size,
-    paymentReference,
-  });
-} else {
-  result = {
-    ok: false,
-    status: 500,
-    body: {
-      success: false,
-      message: "The configured bundle vendor is unsupported.",
-    },
-  };
-}
-
-
-
 
 
 // Helper: common logic for buy-data (POST or GET)
@@ -519,6 +480,60 @@ app.get("/api/buy-data", async (req, res) => {
   const result = await handleSwiftDataBuyDataRequest({ network, recipient, pkg, size, paymentReference });
   return res.status(result.status).json(result.body);
 });
+
+
+
+
+
+/* =========================================
+   DATAMART PURCHASE ROUTE
+   POST /api/datamart/buy-data
+========================================= */
+
+app.post("/api/datamart/buy-data", async (req, res) => {
+  const {
+    network,
+    recipient,
+    package: pkg,
+    size,
+    paymentReference,
+  } = req.body;
+
+  try {
+    const result = await handleDataMartBuyDataRequest(
+      {
+        network,
+        recipient,
+        pkg,
+        size,
+        paymentReference,
+      },
+      {
+        verifyPaystack,
+        processedOrders,
+      }
+    );
+
+    console.log(
+      "DataMart purchase result:",
+      result.status,
+      result.body?.message
+    );
+
+    return res.status(result.status).json(result.body);
+  } catch (error) {
+    console.error("DataMart route error:", error.message);
+
+    return res.status(500).json({
+      success: false,
+      message: "Unable to process the DataMart order.",
+    });
+  }
+});
+
+
+
+
 
 // Status route
 app.get("/api/v1/order/status/:orderIdOrRef", async (req, res) => {
