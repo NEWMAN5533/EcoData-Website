@@ -1,0 +1,82 @@
+
+=============1=DATABASE & DATA STRUCTURE==============
+
+D-orders == for digital orders
+
+P-orders == for physical orders
+
+Wishlist == user Wishlist
+
+admins == Ecodata admins auth
+
+customerStats 
+
+downloads == users downloads
+
+ebooks == digital books, pdf etc
+
+leaderboard == giveaway
+
+messages == seller notices
+
+notifications == marketplace notifications
+
+orders == bundle orders
+
+products == marketplace products
+
+sales  == sellers sales 
+
+sellers  == sellers auth
+
+settings == admin marketplace settings
+
+stores  == personal stores
+
+users == regular users
+
+voucherOrders   == wassce & bece checkers
+
+withdrawRequests == marketplace sellers withdrawRequests
+
+
+=================2=USER BACKEND=================
+
+1. PROFILE        === GET /api/user/profile
+2. PROFILE update === PUT /api/user/profile
+3. ORDERS         === GET /api/user/orders
+4. DOWNLOADS      === GET /api/user/downloads
+5. WISHLIST       === GET /api/user/wishlist
+6. ADD WISHLIST ITEM  === POST /api/user/wishlist
+7. REMOVE             === DELETE /api/user/wishlist
+
+=================3=SELLER BACKEND================
+
+1. CREATE PRODUCT === POST /api/creator/products
+2. LIST PRODUCT   === POST /api/creator/products
+3. UPDATE PRODUCT === PUT /api/creator/products/productId
+4. DELETE PRODUCT === DELETE /api/creator/products/productId
+5. DASHBOARD      === GET /api/creator/products/dashboard
+6. SALES          === GET /api/creator/products/sales
+7. WITHDRAWALS    === GET /api/creator/products/withdrawals
+8. LATER: approval, publishing, sales, earnings, platform fees and withdrawals
+
+================4=ADMIN BACKEND===================
+The tool to operate the marketplace
+1. PRODUCTS === pending, approve, reject and suspend
+2. USERS === view, manage and suspend
+3. ORDERS === view, process, complete and handle failures
+4. WITHDRAWALS === pending, approve, reject and mark paid
+5. ANALYTICS === revenue, sales, users, sellers and platform earnings
+
+================PAYMENT & MARKETPLACE FLOW=========
+1. user purchase a product
+2. payment process through paystack
+3. webhook confirms the successful payment
+4. create the order
+5. create the sale records
+6. calculate the 70% creator / 30% platform split
+6. update the product sale count
+6. create the user's download entitlement
+6. update user and seller dashboard data
+6. seller earnings becomes available for withdrawal

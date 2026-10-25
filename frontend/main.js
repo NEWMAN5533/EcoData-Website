@@ -1,4 +1,4 @@
-// UPDATED AT 16th/October, 2026 [BACKUP MAIN.JS]
+// UPDATED AT 4th/September, 2026 [BACKUP MAIN.JS]
 
 // --- Firebase Imports ---
 import { auth, db } from "./firebase-config.js";
@@ -157,6 +157,55 @@ async function checkRestrictions(){
   }
 }
 
+
+async function canUseNormalDeliveryMode() {
+  try {
+    const response = await fetch("/api/vendor-status", {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        Accept: "application/json"
+      }
+    });
+
+    if (!response.ok) {
+      showSnackBar(
+        "Unable to verify the active Normal Offer. Please try again.",
+        "error",
+        4000
+      );
+      return false;
+    }
+
+    const result = await response.json();
+
+    const activeVendor = String(
+      result.activeVendor ?? result.vendor ?? ""
+    ).trim().toLowerCase();
+
+    if (activeVendor !== "datamart") {
+      showSnackBar(
+        "Normal Delivery Mode is available only when Normal Delivery is active. Please select another offer.",
+        "error",
+        5000
+      );
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    console.error("Vendor check failed:", error);
+
+    showSnackBar(
+      "Unable to verify the active vendor. Please try again.",
+      "error",
+      4000
+    );
+
+    return false;
+  }
+}
+
 //=================================
 //  CHECK RESTRICTIONS ENDS
 //=================================
@@ -212,6 +261,133 @@ async function validateRecipient(phone, offerSlug, network) {
 //=================================
 // VALIDATE RECIPIENT ENDS
 //=================================
+
+
+
+/* =========================================
+   VENDOR-AWARE RECIPIENT VALIDATION
+
+   SwiftData:
+   Uses the existing validateRecipient().
+
+   DataMart:
+   Uses the backend DataMart verification
+   before allowing payment to continue.
+========================================= */
+
+function normalizeGhanaPhone(phone) {
+  let value = String(phone || "").trim();
+
+  if (value.startsWith("+233")) {
+    value = "0" + value.substring(4);
+  } else if (value.startsWith("233")) {
+    value = "0" + value.substring(3);
+  }
+
+  return value;
+}
+
+async function precheckRecipientBeforePayment(bundle, recipient) {
+  const phone = normalizeGhanaPhone(recipient);
+
+  if (!/^0\d{9}$/.test(phone)) {
+    showSnackBar("Enter a valid 10-digit Ghanaian phone number.", "error", 4000);
+    return false;
+  }
+
+  try {
+    // Ask the backend which vendor is active.
+    // DataMart verification is performed by this endpoint.
+    const response = await fetch("/api/verify-recipient", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        network: bundle.network,
+        recipient: phone,
+        size: Number(bundle.size)
+      })
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || result.canProceed !== true) {
+      showSnackBar(
+        result.message || "Recipient verification failed.",
+        "error",
+        5000
+      );
+      return false;
+    }
+
+    // =====================================
+    // DATAMART VALIDATION
+    // The backend has already verified it.
+    // Do not run SwiftData validation here.
+    // =====================================
+    if (result.provider === "datamart") {
+      lastValidation = {
+        success: true,
+        provider: "datamart",
+        verification: result.verification
+      };
+
+      showSnackBar(
+        result.message || " Recipient verification passed.",
+        "success",
+        3000
+      );
+
+      return true;
+    }
+
+    // =====================================
+    // SWIFTDATA VALIDATION
+    // Preserve your existing validation.
+    // =====================================
+    if (result.provider === "swiftdata" && bundle.network === "mtn") {
+      const validation = await validateRecipient(
+        "233" + phone.substring(1),
+        bundle.packageName
+      );
+
+      if (!validation.success) {
+        showSnackBar(
+          validation.message || "Recipient validation failed.",
+          "error",
+          4000
+        );
+        return false;
+      }
+
+      if (!validation.eligible) {
+        showSnackBar(
+          validation.message || "This recipient is not eligible.",
+          "error",
+          4000
+        );
+        return false;
+      }
+
+      lastValidation = validation;
+    }
+
+    return true;
+
+  } catch (error) {
+    console.error("Recipient precheck error:", error);
+
+    showSnackBar(
+      "Unable to verify the recipient. Please try again.",
+      "error",
+      4000
+    );
+
+    return false;
+  }
+}
+
 
 
 
@@ -448,37 +624,71 @@ selectBtn.addEventListener("click", (e) => {
   dropdownOffer.classList.toggle("show");
 });
 
-// Select package
+// Select delivery package
 deliveryOptions.forEach(option => {
-  option.addEventListener("click", (e) => {
+  option.addEventListener("click", async (e) => {
     e.stopPropagation();
 
     const mode = option.dataset.mode;
 
-  
-    // RESET BUNDLE WHEN MODE CHANGED
-    resetSelectedBundle("Offer changed please select bundle.");
-    // save to localStorage
+    // Only DataMart can use NORMAL DELIVERY MODE.
+    // Check before changing the UI or saving the selection.
+    if (mode === "normal") {
+      const allowed = await canUseNormalDeliveryMode();
+
+      if (!allowed) {
+        showSnackBar("Please choose another offer. Normal Delivery Mode is currently unavailable.", "error", 4000
+        );
+        dropdownOffer.classList.remove("show");
+        return;
+      }
+    }
+
+    // Validate the selected mode.
+    if (!PACKAGE_MAP[mode]) {
+      showSnackBar(
+        "Invalid delivery offer selected.",
+        "error",
+        4000
+      );
+      return;
+    }
+
+    // Reset the previously selected bundle.
+    resetSelectedBundle("Offer changed. Please select a bundle.");
+
+    // Save the selection only after the vendor check passes.
     localStorage.setItem(STORAGE_KEY, mode);
+
+    // Update the existing package UI.
     applyPackageUI(mode);
 
-    // ✅ SET GLOBAL PACKAGE NAME
     selectedPackageName = PACKAGE_MAP[mode];
 
-    // Update button text
+    // Update the main selection button.
     selectBtn.innerHTML = `
       ${option.querySelector("span").textContent}
-      <p class='doneSelect'> <img src="./css/icons/done (2).png" ></p>
-      <p class='doneSelect darkM'> <img src="./css/icons/done (1).png" ></p>
-      <span>     <img src="./css/icons/more.png.png"></span>
+      <p class="doneSelect">
+        <img src="./css/icons/done (2).png">
+      </p>
+      <p class="doneSelect darkM">
+        <img src="./css/icons/done (1).png">
+      </p>
+      <span>
+        <img src="./css/icons/more.png.png">
+      </span>
     `;
 
+    // Update active option.
     dropdownOffer.classList.remove("show");
-    deliveryOptions.forEach(o => 
-      o.classList.remove("active"));
-      option.classList.add("active");
 
-    showSnackBar(" Offer Updated ", "info", 2000);
+    deliveryOptions.forEach(item => {
+      item.classList.remove("active");
+    });
+
+    option.classList.add("active");
+
+    showSnackBar("Offer updated.", "info", 2000);
   });
 });
 
@@ -590,6 +800,21 @@ document.addEventListener("click", () => {
           }
 
           bundle = {...selectedBundle};
+
+
+
+
+          const precheckPassed = await
+          precheckRecipientBeforePayment(
+            bundle,
+            recipient
+          );
+
+          if(!precheckPassed) {
+            return;
+          }
+
+
           lastPurchasedBundle = bundle; // 🔑 SAVE FOR POST-PAYMENT
 
           //====================
@@ -653,6 +878,19 @@ lastValidation = validation;
             size: Number(button.dataset.size),
             price: Number(button.dataset.price),
           };
+
+
+          // Validate
+          if(
+            !bundle.network ||
+            !Number.isFinite(bundle.size) ||
+            bundle.size <= 0 ||
+            !Number.isFinite(bundle.price ) ||
+            bundle.price <= 0
+          ) {
+            showSnackBar("Invalid bundle details. Please try again.", "error", 4000);
+            return;
+          }
 
 
           // MTN NETWORK BG
@@ -762,6 +1000,16 @@ lastValidation = validation;
 
           // if(validate.success){proceed to payment}
           createPhoneModal(async inputNumber => {
+
+            const precheckPassed = await precheckRecipientBeforePayment(
+              bundle,
+              inputNumber
+            );
+
+            if(!precheckPassed) return;
+
+
+            
 
             let formattedPhone = inputNumber.trim();
             // convert Ghana format (024xxxxxxxx) to 23324xxxxxxxxx
@@ -1125,10 +1373,16 @@ const normalizedNetwork = String(bundle.network || "")
 const requiresRecipientValidation =
   !["at", "telecel"].includes(normalizedNetwork);
 
-if (
-  requiresRecipientValidation &&
-  !lastValidation?.eligible
-) {
+const validatedProvider = lastValidation?.provider;
+
+// DataMart validation uses success.
+// SwiftData retains its existing eligible check.
+const recipientValidated =
+  validatedProvider === "datamart"
+    ? lastValidation?.success === true
+    : lastValidation?.eligible === true;
+
+if (requiresRecipientValidation && !recipientValidated) {
   showSnackBar(
     "Recipient verification required before payment",
     "warning",
@@ -1146,7 +1400,7 @@ if (
     }
 
 
-  const { network, packageName, size, price } = bundle;
+  const { network, packageName, size } = bundle;
 
    const payWithFee = Number((bundle.price * 1.0195).toFixed(2));
 
@@ -2551,6 +2805,9 @@ function getNetwork(order) {
 
   return detected;
 }
+
+
+
 
 //====================
 // GET STATUS ICON 
