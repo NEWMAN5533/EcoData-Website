@@ -280,7 +280,7 @@ if (activeVendor === "datamart") {
 // HANDLE BUY DATA REQUEST (FIXED)
 // ================================
 // Helper: common logic for buy-data (POST or GET)
-export async function handleBuyDataRequest({
+export async function handleSwiftDataBuyDataRequest({
   network, 
   recipient, 
   pkg, 
@@ -477,7 +477,7 @@ console.log("Approved price verified:", {
       message: err.message
     };
 
-    console.error("🔥 handleBuyDataRequest error:", errData);
+    console.error("🔥 handleSwiftDataBuyDataRequest error:", errData);
 
     // Save failure so duplicate network retry does not call Swift again
     processedOrders.set(paymentReference, {
@@ -504,9 +504,9 @@ app.post("/api/buy-data", async (req, res) => {
   const { network, recipient, package: pkg, size, paymentReference,
     
    } = req.body;
-  const result = await handleBuyDataRequest({ network, recipient, pkg, size, paymentReference });
+  const result = await handleSwiftDataBuyDataRequest({ network, recipient, pkg, size, paymentReference });
 
-  console.log("🔥 handleBuyDataRequest result:", result);
+  console.log("🔥 handleSwiftDataBuyDataRequest result:", result);
 
   return res.status(result.status).json(result.body);
 });
@@ -516,7 +516,7 @@ app.post("/api/buy-data", async (req, res) => {
 // GET route
 app.get("/api/buy-data", async (req, res) => {
   const { network, recipient, package: pkg, size, paymentReference } = req.query;
-  const result = await handleBuyDataRequest({ network, recipient, pkg, size, paymentReference });
+  const result = await handleSwiftDataBuyDataRequest({ network, recipient, pkg, size, paymentReference });
   return res.status(result.status).json(result.body);
 });
 
