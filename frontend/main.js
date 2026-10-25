@@ -1443,16 +1443,28 @@ if (requiresRecipientValidation && !recipientValidated) {
 
     
 
+
       onSuccess: (response) => {
-        hideLoader();
-        orderBundle(
-          network,
-          recipient,
-          packageName,
-          size,
-          response.reference,
-        );
-      },
+  hideLoader();
+
+  if (activeVendor === "datamart") {
+    orderDataMartBundle(
+      network,
+      recipient,
+      packageName,
+      size,
+      response.reference
+    );
+  } else {
+    orderBundle(
+      network,
+      recipient,
+      packageName,
+      size,
+      response.reference
+    );
+  }
+},
 
       onCancel: () => {
         hideLoader();
@@ -1580,6 +1592,165 @@ try {
 //ends//
 //ends//
 
+
+async function orderDataMartBundle(
+  network,
+  recipient,
+  packageName,
+  size,
+  reference
+) {
+  const API_BASE =
+    window.location.hostname === "localhost"
+      ? "http://localhost:3000"
+      : "https://ecodata-app.onrender.com";
+
+  try {
+    showLoader();
+
+    const response = await fetch(
+      `${API_BASE}/api/datamart/buy-data`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          network,
+          recipient,
+          package: packageName,
+          size,
+          paymentReference: reference,
+        }),
+      }
+    );
+
+    const result = await response.json();
+
+    if (!response.ok || !result.success) {
+      console.error("DataMart order response:", result);
+
+      showSnackBar(
+        result.message ||
+          "Payment received, but the purchase is not confirmed. Please check your order status.",
+        "warning",
+        6000
+      );
+
+      return;
+    }
+
+    const order = result.order || {};
+    const bundle = lastPurchasedBundle;
+
+    if (!bundle) {
+      console.error(
+        "DataMart purchase response received, but bundle context is missing.",
+        order
+      );
+
+      showSnackBar(
+        "Purchase response received. Please check your order history.",
+        "warning",
+        6000
+      );
+
+      return;
+    }
+
+    const orderStatus = String(
+      order.orderStatus || "processing"
+    ).toLowerCase();
+
+    const orderData = {
+      orderId:
+        order.purchaseId ||
+        order.providerOrderReference ||
+        order.paymentReference ||
+        reference,
+
+      reference:
+        order.providerOrderReference || reference,
+
+      paymentReference: reference,
+
+      recipient,
+
+      network: bundle.network || network,
+
+      volume: Number(bundle.size || size || 0),
+
+      dataValue: String(
+        bundle.dataValue || selectedBundle?.dataValue || 0
+      ),
+
+      amount: Number(
+        order.checkoutAmount ?? (Number(bundle.price) * 1.0195)
+      ),
+
+      status: orderStatus,
+
+      source: "web",
+
+      provider: "datamart",
+
+      isGuest: !auth.currentUser,
+
+      createdBy: auth.currentUser?.uid || "guest",
+
+      createdAt: Date.now(),
+    };
+
+    // Only announce completed delivery as a completed purchase.
+    if (orderStatus === "completed") {
+      playSuccessSound();
+
+      showSnackBar(
+        `${size}GB bundle purchased successfully!`,
+        "success",
+        6000
+      );
+    } else {
+      showSnackBar(
+        `${size}GB order received. Current status: ${orderStatus}.`,
+        "success",
+        6000
+      );
+    }
+
+    handleNewOrder(order);
+
+    updateHomepageTotals(orderData);
+
+    try {
+      await saveOrderToFirestore(orderData);
+    } catch (error) {
+      console.error("DataMart Firestore save failed:", error);
+    }
+
+    try {
+      saveGuestOrder(orderData);
+    } catch (error) {
+      console.error("DataMart guest order save failed:", error);
+    }
+
+    try {
+      activateTrackers();
+    } catch (error) {
+      console.error("DataMart tracker activation failed:", error);
+    }
+  } catch (error) {
+    console.error("DataMart order error:", error);
+
+    showSnackBar(
+      "We could not confirm the order status. Check your order history before retrying.",
+      "warning",
+      6000
+    );
+  } finally {
+    hideLoader();
+  }
+}
 //====================
 // SAVE WITH RETRY
 //====================
