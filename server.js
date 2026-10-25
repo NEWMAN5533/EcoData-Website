@@ -64,7 +64,7 @@ import {
 ========================================= */
 import dataMartRecipientVerificationRoute
   from "./routes/dataMartRecipientVerificationRoute.js";
-import vendorSettingsRouter from "./routes/vendorSettings.js";
+import vendorSettingsRouter from "./routes/vendorSettingsRoute.js";
 import vendorStatusRouter from "./routes/vendorStatus.js";
 
 
