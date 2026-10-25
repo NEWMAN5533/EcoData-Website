@@ -1,7 +1,7 @@
 import express from "express";
 import crypto from "crypto";
 import { admin, db } from "../firebaseAdmin.js";
-import { handleBuyDataRequest } from "../server.js"
+import { handleSwiftDataBuyDataRequest } from "../server.js"
 
 const paystackWebhookRouter = express.Router();
 
