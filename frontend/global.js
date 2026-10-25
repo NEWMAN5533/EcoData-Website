@@ -222,7 +222,7 @@ if (themeToggle) {
 
   if (systemUpgradeModal) {
 
-    systemUpgradeModal.style.display = "none";
+    systemUpgradeModal.style.display = "flex";
 
   }
 
