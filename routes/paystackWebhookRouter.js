@@ -64,7 +64,7 @@ paystackWebhookRouter.post("/paystack/webhook", async (req, res) => {
     if (metadata.type === "bundle") {
   const { network, recipient, pkg, size } = metadata;
 
-  await handleBuyDataRequest({
+  await handleSwiftDataBuyDataRequest({
     network,
     recipient,
     pkg,
