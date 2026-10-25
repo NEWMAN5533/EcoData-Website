@@ -14,9 +14,11 @@ const ALLOWED_NETWORKS = [
 
 const ALLOWED_STATUSES = [
   "pending",
+  "waiting",
   "processing",
   "completed",
   "failed",
+  "refunded",
   "unknown"
 ];
 
@@ -212,7 +214,9 @@ export async function updateDataMartOrder(
         ${responseJson}::jsonb,
         provider_response
       ),
-      last_error = ${lastError ?? null},
+      last_error = COALESCE(${lastError ?? null},
+      last_error
+      ),
       updated_at = NOW()
     WHERE payment_reference = ${String(paymentReference)}
     RETURNING *
