@@ -32,12 +32,12 @@ import failedOrderCheckRouter from "./routes/failedOrderCheckRouter.js";
    VENDOR MANAGEMENT
 ========================================= */
 import vendorManagementRouter from "./routes/vendorManagementRoute.js";
-import { getActiveVendor } from "./services/vendorManager.js";
 import { handleDataMartBuyDataRequest } from "./services/dataMartBundler.js";
 
 /* =========================================
    DATAMART SERVICE
 ========================================= */
+import webhookRouter from "./routes/dataMartWebhookRoute.js";
 
 
 /* =========================================
@@ -137,6 +137,7 @@ app.use("/api/admin/vendor", vendorManagementRouter);
 app.use("/api/vendor-status", vendorStatusRouter);
 app.use("/api/admin/vendor", vendorSettingsRouter);
 app.use("/api/verify-recipient", dataMartRecipientVerificationRoute);
+app.use("/webhook", webhookRouter);
 
 app.use("/api/initiate-subscription", subscriptionRouter);
 app.use("/api/create-store", storeRouter);
