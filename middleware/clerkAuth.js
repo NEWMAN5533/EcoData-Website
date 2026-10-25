@@ -1,4 +1,4 @@
-import { clerkMiddleware, getAuth } from "@clerk/express";
+import { clerkMiddleware, getAuth, clerkClient } from "@clerk/express";
 import sql from "../backend/db.js";
 
 /***
