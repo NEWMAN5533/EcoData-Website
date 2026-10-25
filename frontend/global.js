@@ -194,7 +194,7 @@ if (themeToggle) {
 
   if (totalCustomersOrders) {
 
-    totalCustomersOrders.textContent = "1.54K+";
+    totalCustomersOrders.textContent = "1.51K+";
 
   }
 
@@ -222,7 +222,7 @@ if (themeToggle) {
 
   if (systemUpgradeModal) {
 
-    systemUpgradeModal.style.display = "none";
+    systemUpgradeModal.style.display = "flex";
 
   }
 
