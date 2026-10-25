@@ -33,37 +33,28 @@ export function requireAuth(req, res, next){
  * 
  */
 
-export async function requiredAdmin( req, res, next ){
-  try{
-    
+export async function requiredAdmin(req, res, next) {
+  try {
     const { userId } = getAuth(req);
 
-console.log("[ADMIN AUTH CHECK]", {
-  userId: userId || null,
-  hasUserId: Boolean(userId)
-});
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        code: "AUTHENTICATION_REQUIRED",
+        message: "Please sign in to continue."
+      });
+    }
 
-if (!userId) {
-  return res.status(401).json({
-    success: false,
-    code: "AUTHENTICATION__REQUIRED",
-    message: "Please sign in to continue."
-  });
-}
+    // Find an active administrator by the authenticated Clerk user ID.
+    const admins = await sql`
+      SELECT id, email
+      FROM ecodata_admins
+      WHERE clerk_user_id = ${userId}
+        AND active = TRUE
+      LIMIT 1
+    `;
 
-const admins = await sql`
-  SELECT id
-  FROM ecodata_admins
-  WHERE clerk_user_id = ${userId}
-    AND active = TRUE
-  LIMIT 1
-`;
-
-console.log("[ADMIN DB CHECK]", {
-  matchingAdmins: admins.length
-});
-
-    if(admins.length === 0){
+    if (admins.length === 0) {
       return res.status(403).json({
         success: false,
         code: "ADMIN_ACCESS_DENIED",
@@ -71,20 +62,46 @@ console.log("[ADMIN DB CHECK]", {
       });
     }
 
+    // Get the user's email from the authenticated Clerk account.
+    const client =
+      typeof clerkClient === "function"
+        ? await clerkClient()
+        : clerkClient;
+
+    const clerkUser = await client.users.getUser(userId);
+
+    const verifiedEmails = clerkUser.emailAddresses
+      .filter(
+        address => address.verification?.status === "verified"
+      )
+      .map(address => address.emailAddress.toLowerCase());
+
+    const adminEmail = String(admins[0].email || "")
+      .trim()
+      .toLowerCase();
+
+    if (!adminEmail || !verifiedEmails.includes(adminEmail)) {
+      return res.status(403).json({
+        success: false,
+        code: "ADMIN_EMAIL_MISMATCH",
+        message: "Your verified email does not match the administrator record."
+      });
+    }
+
     req.admin = {
       id: admins[0].id,
-      clerkUserId: userId
+      clerkUserId: userId,
+      email: adminEmail
     };
 
     return next();
-
-  } catch(error){
+  } catch (error) {
     console.error("Admin authorization error:", error);
 
     return res.status(500).json({
       success: false,
       code: "ADMIN_AUTHORIZATION_ERROR",
-      message: "Unable to verified administrator access."
+      message: "Unable to verify administrator access."
     });
   }
 }
