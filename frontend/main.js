@@ -1441,30 +1441,87 @@ if (requiresRecipientValidation && !recipientValidated) {
         ],
       },
 
-    
+    onSuccess: async (response) => {
+  console.log("✅ Paystack onSuccess fired:", response.reference);
 
-
-      onSuccess: (response) => {
   hideLoader();
 
-  if (activeVendor === "datamart") {
-    orderDataMartBundle(
-      network,
-      recipient,
-      packageName,
-      size,
-      response.reference
+  try {
+    // Get the active vendor from the backend.
+    const API_BASE =
+      window.location.hostname === "localhost"
+        ? "http://localhost:3000"
+        : "https://ecodata-app.onrender.com";
+
+    console.log("🔎 Fetching active vendor...");
+
+    const vendorResponse = await fetch(
+      `${API_BASE}/api/vendor-status`
     );
-  } else {
-    orderBundle(
-      network,
-      recipient,
-      packageName,
-      size,
-      response.reference
+
+    const vendorResult = await vendorResponse.json();
+
+    console.log("📦 Vendor status response:", vendorResult);
+
+    if (!vendorResponse.ok) {
+      throw new Error(
+        vendorResult.message || "Unable to retrieve active vendor."
+      );
+    }
+
+    const activeVendor =
+      vendorResult.activeVendor ||
+      vendorResult.vendor ||
+      vendorResult.active ||
+      vendorResult.name;
+
+    if (!activeVendor) {
+      throw new Error(
+        "Active vendor missing from /api/vendor-status response."
+      );
+    }
+
+    console.log("🚚 Active vendor:", activeVendor);
+
+    if (String(activeVendor).toLowerCase() === "datamart") {
+      console.log("➡️ Calling DataMart purchase function...");
+
+      await orderDataMartBundle(
+        network,
+        recipient,
+        packageName,
+        size,
+        response.reference
+      );
+    } else if (
+      String(activeVendor).toLowerCase() === "swiftdata"
+    ) {
+      console.log("➡️ Calling SwiftData purchase function...");
+
+      await orderBundle(
+        network,
+        recipient,
+        packageName,
+        size,
+        response.reference
+      );
+    } else {
+      throw new Error(
+        `Unsupported active vendor: ${activeVendor}`
+      );
+    }
+  } catch (error) {
+    console.error("❌ Post-payment processing error:", error);
+
+    showSnackBar(
+      "Payment succeeded, but order processing could not start. Contact support with your payment reference: " +
+        response.reference,
+      "error",
+      8000
     );
   }
 },
+
 
       onCancel: () => {
         hideLoader();
