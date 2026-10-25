@@ -39,7 +39,8 @@ async function loadSeller(req, res, next) {
     if (!sellers.length) {
       return res.status(403).json({
         success: false,
-        message: "No seller profile was found for this account."
+        code: "SELLER_PROFILE_NOT_FOUND",
+        message: "Please complete your seller registration before uploading products."
       });
     }
 

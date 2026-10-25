@@ -32,18 +32,18 @@ createProduct
 //===================
 // GET CREATOR PRODUCTS
 //======================
-createProductRouter.get("/products",getCreatorProducts);
+createProductRouter.get("/",getCreatorProducts);
 
 
-createProductRouter.get("/dashboard",getCreatorDashboard);
+createProductRouter.get("/",getCreatorDashboard);
 
 
-createProductRouter.get("/sales",getCreatorSales);
+createProductRouter.get("/",getCreatorSales);
 
 
-createProductRouter.get("/withdrawals",getCreatorWithdrawals);
+createProductRouter.get("/",getCreatorWithdrawals);
 
-createProductRouter.post("/withdrawals", createCreatorWithdrawal);
+createProductRouter.post("/", createCreatorWithdrawal);
 
 
 createProductRouter.put("/:productId", updateCreatorProduct);
