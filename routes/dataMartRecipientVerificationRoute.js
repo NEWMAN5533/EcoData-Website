@@ -126,6 +126,7 @@ dataMartRecipientVerificationRoute.post("/", async (req, res) => {
       {
         headers: {
           "X-API-Key": apiKey,
+          "X-API-Secret": process.env.DATAMART_API_SECRET,
         },
       }
     );
@@ -137,10 +138,14 @@ dataMartRecipientVerificationRoute.post("/", async (req, res) => {
       !result ||
       typeof result.servable !== "boolean"
     ) {
-      console.error(
-        "Unexpected DataMart verification response:",
-        response.data
-      );
+    
+
+      console.error("Recipient verification failed:", {
+  message: error.message,
+  providerStatus: providerStatus ?? null,
+  providerCode: providerCode ?? null,
+  providerMessage: providerBody?.message ?? null,
+});
 
       return res.status(502).json({
         success: false,
