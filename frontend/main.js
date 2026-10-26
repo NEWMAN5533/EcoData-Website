@@ -291,20 +291,22 @@ async function precheckRecipientBeforePayment(bundle, recipient) {
   const phone = normalizeGhanaPhone(recipient);
 
   if (!/^0\d{9}$/.test(phone)) {
-    showSnackBar("Enter a valid 10-digit Ghanaian phone number.", "error", 4000);
+    showSnackBar(
+      "Enter a valid 10-digit Ghanaian phone number.",
+      "error",
+      4000
+    );
     return false;
   }
 
   try {
-    // Ask the backend which vendor is active.
-    // DataMart verification is performed by this endpoint.
     const response = await fetch("/api/verify-recipient", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        network: bundle.network,
+        network: bundle.network || "mtn",
         recipient: phone,
         size: Number(bundle.size)
       })
@@ -321,11 +323,7 @@ async function precheckRecipientBeforePayment(bundle, recipient) {
       return false;
     }
 
-    // =====================================
-    // DATAMART VALIDATION
-    // The backend has already verified it.
-    // Do not run SwiftData validation here.
-    // =====================================
+    // DataMart has already checked the recipient on the backend.
     if (result.provider === "datamart") {
       lastValidation = {
         success: true,
@@ -334,7 +332,7 @@ async function precheckRecipientBeforePayment(bundle, recipient) {
       };
 
       showSnackBar(
-        result.message || " Recipient verification passed.",
+        result.message || "Recipient verification passed.",
         "success",
         3000
       );
@@ -342,28 +340,16 @@ async function precheckRecipientBeforePayment(bundle, recipient) {
       return true;
     }
 
-    // =====================================
-    // SWIFTDATA VALIDATION
-    // Preserve your existing validation.
-    // =====================================
+    // Preserve the existing SwiftData validation.
     if (result.provider === "swiftdata" && bundle.network === "mtn") {
       const validation = await validateRecipient(
         "233" + phone.substring(1),
         bundle.packageName
       );
 
-      if (!validation.success) {
+      if (!validation.success || !validation.eligible) {
         showSnackBar(
           validation.message || "Recipient validation failed.",
-          "error",
-          4000
-        );
-        return false;
-      }
-
-      if (!validation.eligible) {
-        showSnackBar(
-          validation.message || "This recipient is not eligible.",
           "error",
           4000
         );
@@ -374,7 +360,6 @@ async function precheckRecipientBeforePayment(bundle, recipient) {
     }
 
     return true;
-
   } catch (error) {
     console.error("Recipient precheck error:", error);
 
@@ -387,7 +372,6 @@ async function precheckRecipientBeforePayment(bundle, recipient) {
     return false;
   }
 }
-
 
 
 
