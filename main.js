@@ -1,5 +1,4 @@
-// UPDATED AT 18th/July, 2026 [BACKUP MAIN.JS]
-
+// UPDATED AT 4th/September, 2026 [BACKUP MAIN.JS]
 
 // --- Firebase Imports ---
 import { auth, db } from "./firebase-config.js";
@@ -7,6 +6,8 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/fi
 import {
   collection,
   addDoc,
+  onSnapshot,
+  limit,
   doc,
   getDoc,
   getFirestore,
@@ -31,6 +32,29 @@ const API_BASE = (() => {
 })();
 
 
+//=========================
+// LEADERBOARD START DATE
+//=========================
+const LEADERBOARD_START = new Date("2026-10-01");
+const LEADERBOARD_ENDS = new Date("2026-10-31T23:59:59");
+
+const leaderboardStartText = LEADERBOARD_START.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric"
+});
+
+const endTimeText = LEADERBOARD_ENDS.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric"
+});
+
+
+
+
+//=========================
+// LEADERBOARD START DATE
+//=========================
 
 // ---------- GLOBAL VARIABLES ----------
 let STATUS_POLL_INTERVAL = 5000;
@@ -40,18 +64,27 @@ let _statusPollTimer = null; // to hold the interval timer ID
 let selectedBundle = null;      // used for UI selection (normal view)
 let lastPurchasedBundle = null; // used after payment (normal + grid)
 
+// protect payment (save successful)
+let lastValidation = null;
+
 // default selectedPackage
-let selectedPackageName = "mtn_data_normal_delivery";
+let selectedPackageName = "mtn_data_express_delivery";
 
 const PACKAGE_MAP = {
-  normal: "mtn_data_express_delivery",
+  normal: "mtn_data_normal_delivery",
   express: "mtn_data_express_delivery",
-  numbers: "when_order_fails_or_cancel_try_here",
+  numbers: "mtn_verified_numbers",
   mashup: "special_mashup_bundle_packages"
 };
 
 const STORAGE_KEY = "selected_mtn_package";
 
+
+function getVendorForPackage(packageName) {
+  return packageName === "mtn_data_normal_delivery"
+    ? "datamart"
+    : "swiftdata";
+}
 
 
 
@@ -80,6 +113,8 @@ function resolvePackageName(network) {
 //NEW UPDATED 21/01/2026  (DOMCONTENTLOADER)//
 document.addEventListener("DOMContentLoaded", () => {
 
+
+  
 
 const selectBtn = document.getElementById("selectBtn");
 const dropdownOffer = document.getElementById("dropdownOffer");
@@ -111,8 +146,257 @@ const mtnArea = document.getElementById("mtnArea");
 const mtnAreaDiv = document.getElementById("bundles");
 
 
+//=================================
+//  CHECK RESTRICTIONS
+//=================================
+
+async function checkRestrictions(){
+  try {
+    const response = await fetch("/api/restrictions");
+
+    return await response.json();
+  } catch(error) {
+    console.error("Restrictions check failed", error);
+    return {
+      success: false
+    };
+  }
+}
 
 
+async function canUseNormalDeliveryMode() {
+  try {
+    const response = await fetch("/api/vendor-status", {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        Accept: "application/json"
+      }
+    });
+
+    if (!response.ok) {
+      showSnackBar(
+        "Unable to verify the active Normal Offer. Please try again.",
+        "error",
+        4000
+      );
+      return false;
+    }
+
+    const result = await response.json();
+
+    const activeVendor = String(
+      result.activeVendor ?? result.vendor ?? ""
+    ).trim().toLowerCase();
+
+    if (activeVendor !== "datamart") {
+      showSnackBar(
+        "Normal Delivery Mode is available only when Normal Delivery is active. Please select another offer.",
+        "error",
+        5000
+      );
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    console.error("Vendor check failed:", error);
+
+    showSnackBar(
+      "Unable to verify the active vendor. Please try again.",
+      "error",
+      4000
+    );
+
+    return false;
+  }
+}
+
+//=================================
+//  CHECK RESTRICTIONS ENDS
+//=================================
+
+//=================================
+//  VALIDATE RECIPIENT 
+//=================================
+async function validateRecipient(phone, offerSlug, network) {
+  const normalizedNetwork = String(network || "")
+    .trim()
+    .toLowerCase();
+
+  // AT and Telecel do not require MTN recipient validation
+  if (["at", "telecel"].includes(normalizedNetwork)) {
+    return {
+      success: true,
+      eligible: true,
+      skipped: true,
+      message: "Recipient validation not required for this network."
+    };
+  }
+
+  console.log("Sending validation:", {
+    phone,
+    offerSlug,
+    network: normalizedNetwork
+  });
+
+  try {
+    const response = await fetch("/api/validate-recipient", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        phone,
+        offerSlug
+      })
+    });
+
+    return await response.json();
+
+  } catch (error) {
+    console.log("Validation Error", error);
+
+    return {
+      success: false,
+      eligible: false,
+      message: "Unable to verify recipient"
+    };
+  }
+}
+//=================================
+// VALIDATE RECIPIENT ENDS
+//=================================
+
+
+
+/* =========================================
+   VENDOR-AWARE RECIPIENT VALIDATION
+
+   SwiftData:
+   Uses the existing validateRecipient().
+
+   DataMart:
+   Uses the backend DataMart verification
+   before allowing payment to continue.
+========================================= */
+
+function normalizeGhanaPhone(phone) {
+  let value = String(phone || "").trim();
+
+  if (value.startsWith("+233")) {
+    value = "0" + value.substring(4);
+  } else if (value.startsWith("233")) {
+    value = "0" + value.substring(3);
+  }
+
+  return value;
+}
+
+async function precheckRecipientBeforePayment(bundle, recipient) {
+  const phone = normalizeGhanaPhone(recipient);
+
+  if (!/^0\d{9}$/.test(phone)) {
+    showSnackBar(
+      "Enter a valid 10-digit Ghanaian phone number.",
+      "error",
+      4000
+    );
+    return false;
+  }
+
+  const vendor = getVendorForPackage(bundle.packageName);
+
+  console.log("Offer:", bundle.packageName);
+  console.log("Selected vendor:", vendor);
+
+  try {
+    // DataMart: verify through DataMart only.
+    if (vendor === "datamart") {
+      const response = await fetch("/api/verify-recipient", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          network: bundle.network || "mtn",
+          recipient: phone,
+          size: Number(bundle.size),
+          offerSlug: bundle.packageName
+        })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || result.canProceed !== true) {
+        showSnackBar(
+          result.message || "Recipient verification failed.",
+          "error",
+          5000
+        );
+        return false;
+      }
+
+      if (result.provider !== "datamart") {
+        showSnackBar(
+          "Verification provider mismatch. Please try again.",
+          "error",
+          4000
+        );
+        return false;
+      }
+
+      lastValidation = {
+        success: true,
+        eligible: true,
+        provider: "datamart",
+        verification: result.verification
+      };
+
+      showSnackBar(
+        result.message || "Recipient verified.",
+        "success",
+        3000
+      );
+
+      return true;
+    }
+
+    // SwiftData: preserve the existing validation.
+    const validation = await validateRecipient(
+      "233" + phone.substring(1),
+      bundle.packageName,
+      bundle.network
+    );
+
+    if (!validation.success || !validation.eligible) {
+      showSnackBar(
+        validation.message || "Recipient validation failed.",
+        "error",
+        4000
+      );
+      return false;
+    }
+
+    lastValidation = {
+      ...validation,
+      provider: "swiftdata"
+    };
+
+    return true;
+
+  } catch (error) {
+    console.error("Recipient precheck error:", error);
+
+    showSnackBar(
+      "Unable to verify the recipient. Please try again.",
+      "error",
+      4000
+    );
+
+    return false;
+  }
+}
 
 
 
@@ -120,12 +404,12 @@ const mtnAreaDiv = document.getElementById("bundles");
   function applyPackageUI(mode) {
   selectedPackageName = PACKAGE_MAP[mode];
 
-  if(mode === "express" || "numbers"){
+  if(mode === "express" ||  mode === "numbers"){
 
 
   mashTopRightContainerh2.textContent = "MTN Data Bundle";
   mashTopRightContainerSmall.textContent = "Purchase MTN data bundles for single or multiple recipients";
-  mashTopRightContainerBtn.textContent = "16 Packages Available";
+  mashTopRightContainerBtn.textContent = "14 Packages Available";
 
       // resize the dropdown container
     flexingContainer.style.height = "28rem";
@@ -178,7 +462,7 @@ const mtnAreaDiv = document.getElementById("bundles");
      mashTopRightContainerh2.textContent = "MTN Data Bundle";
   mashTopRightContainerSmall.textContent = "Purchase MTN data bundles for single or multiple recipients";
 
-  mashTopRightContainerBtn.textContent = "16 Packages Available";
+  mashTopRightContainerBtn.textContent = "14 Packages Available";
 
       // resize the dropdown container
     flexingContainer.style.height = "28rem";
@@ -189,7 +473,7 @@ const mtnAreaDiv = document.getElementById("bundles");
     mashTitle.textContent = "MTN DATA BUNDLE";
 
     // packs to
-    mashPacks.textContent = "16 Packages Available";
+    mashPacks.textContent = "14 Packages Available";
    
     // change labelRecipient to
     mashRecipient.textContent = "Bundle Recipient Number";
@@ -281,13 +565,22 @@ function resetSelectedBundle(reason = "") {
   optionBtn.innerHTML = `Select bundle <span><img src="./css/icons/more.png.png"></span>`;
 
   // clear placeholders
-  const gbHolder = document.querySelector(".placeHolderGB");
+  const gbHolder = document.querySelector(".selectedModal-top-left-content");
   if (gbHolder) gbHolder.textContent = "";
+
+  const totalHintText = document.querySelector(".selectedModal-bottom-left-content");
+  if(totalHintText) totalHintText.textContent = "";
 
   const priceHolder = document.querySelector(".placeHolderPrice");
   if(priceHolder) priceHolder.textContent = "";
 
-  const networkHolder = document.querySelector(".selectedModal-right");
+  const totalAmountText = document.getElementById("totalAmountText");
+  if(totalAmountText) totalAmountText.textContent = "";
+
+  const priceHolder2 = document.getElementById("placeHolderPriceTotal");
+  if(priceHolder2) priceHolder2.textContent = "";
+
+  const networkHolder = document.querySelector(".selectedModal-top-right-content");
   if(networkHolder) networkHolder.textContent = "";
 
 
@@ -308,7 +601,7 @@ function resetSelectedBundle(reason = "") {
 
 
   const saveMode = 
-  localStorage.removeItem(STORAGE_KEY) || "express";
+  localStorage.removeItem(STORAGE_KEY) || "normal";
 
   const activeOption = document.querySelector(`.optionDelevery[data-mode="${saveMode}"]`);
 
@@ -340,37 +633,71 @@ selectBtn.addEventListener("click", (e) => {
   dropdownOffer.classList.toggle("show");
 });
 
-// Select package
+// Select delivery package
 deliveryOptions.forEach(option => {
-  option.addEventListener("click", (e) => {
+  option.addEventListener("click", async (e) => {
     e.stopPropagation();
 
     const mode = option.dataset.mode;
 
-  
-    // RESET BUNDLE WHEN MODE CHANGED
-    resetSelectedBundle("Offer changed please select bundle.");
-    // save to localStorage
+    // Only DataMart can use NORMAL DELIVERY MODE.
+    // Check before changing the UI or saving the selection.
+    if (mode === "normal") {
+      const allowed = await canUseNormalDeliveryMode();
+
+      if (!allowed) {
+        showSnackBar("Please choose another offer. Normal Delivery Mode is currently unavailable.", "error", 4000
+        );
+        dropdownOffer.classList.remove("show");
+        return;
+      }
+    }
+
+    // Validate the selected mode.
+    if (!PACKAGE_MAP[mode]) {
+      showSnackBar(
+        "Invalid delivery offer selected.",
+        "error",
+        4000
+      );
+      return;
+    }
+
+    // Reset the previously selected bundle.
+    resetSelectedBundle("Offer changed. Please select a bundle.");
+
+    // Save the selection only after the vendor check passes.
     localStorage.setItem(STORAGE_KEY, mode);
+
+    // Update the existing package UI.
     applyPackageUI(mode);
 
-    // ✅ SET GLOBAL PACKAGE NAME
     selectedPackageName = PACKAGE_MAP[mode];
 
-    // Update button text
+    // Update the main selection button.
     selectBtn.innerHTML = `
       ${option.querySelector("span").textContent}
-      <p class='doneSelect'> <img src="./css/icons/done (2).png" ></p>
-      <p class='doneSelect darkM'> <img src="./css/icons/done (1).png" ></p>
-      <span>     <img src="./css/icons/more.png.png"></span>
+      <p class="doneSelect">
+        <img src="./css/icons/done (2).png">
+      </p>
+      <p class="doneSelect darkM">
+        <img src="./css/icons/done (1).png">
+      </p>
+      <span>
+        <img src="./css/icons/more.png.png">
+      </span>
     `;
 
+    // Update active option.
     dropdownOffer.classList.remove("show");
-    deliveryOptions.forEach(o => 
-      o.classList.remove("active"));
-      option.classList.add("active");
 
-    showSnackBar(" Offer Updated ", "info", 2000);
+    deliveryOptions.forEach(item => {
+      item.classList.remove("active");
+    });
+
+    option.classList.add("active");
+
+    showSnackBar("Offer updated.", "info", 2000);
   });
 });
 
@@ -395,6 +722,7 @@ document.addEventListener("click", () => {
   
        const feeToPay = (selectedBundle.price * 1.0195).toFixed(2);
        const onlyFee = (feeToPay - selectedBundle.price).toFixed(2);
+      
 
       // Update button UI
       optionBtn.innerHTML = `
@@ -406,8 +734,8 @@ document.addEventListener("click", () => {
       `;
 
     
-
-           const priceWithFees = selectedBundle.price * 1.0195.toFixed(2);
+        // NORMAL VIEW PAYSTACK FEE REMOVED
+         const priceWithFees = selectedBundle.price * 1.0195.toFixed(2);
 
       // Update selectedModal placeholders
       const img = document.querySelector(".spanImgContent img");
@@ -419,7 +747,7 @@ document.addEventListener("click", () => {
 
       const totalAmountContent = document.getElementById("totalAmountText");
       if(totalAmountContent) totalAmountContent.textContent = 
-      "TotalAmount:";
+     "TotalAmount:";
 
       const priceHolder = document.getElementById("placeHolderPriceTotal");
 
@@ -445,7 +773,7 @@ document.addEventListener("click", () => {
   document.querySelectorAll("#normalView .buy-btn,  #gridView .buy-btn")
     .forEach(button => {
 
-      button.addEventListener("click", () => {
+      button.addEventListener("click", async () => {
 
 
       bottomNavDiv.style.display = "flex";
@@ -481,8 +809,40 @@ document.addEventListener("click", () => {
           }
 
           bundle = {...selectedBundle};
+
+
+
+
+          const precheckPassed = await
+          precheckRecipientBeforePayment(
+            bundle,
+            recipient
+          );
+
+          if(!precheckPassed) {
+            return;
+          }
+
+
           lastPurchasedBundle = bundle; // 🔑 SAVE FOR POST-PAYMENT
 
+          //====================
+          // VALIDATE ROUTING 
+          //====================
+ 
+
+          //==========================
+          // VALIDATE ROUTING (NUMBER)
+          //==========================
+
+
+          
+
+
+
+
+
+          // if(validate.success){proceed to payment}
           payWithPaystack(bundle, recipient);
           resetSelectedBundle();
         }
@@ -497,7 +857,19 @@ document.addEventListener("click", () => {
             price: Number(button.dataset.price),
           };
 
-          lastPurchasedBundle = bundle; // 🔑 SAVE FOR POST-PAYMENT
+
+          // Validate
+          if(
+            !bundle.network ||
+            !Number.isFinite(bundle.size) ||
+            bundle.size <= 0 ||
+            !Number.isFinite(bundle.price ) ||
+            bundle.price <= 0
+          ) {
+            showSnackBar("Invalid bundle details. Please try again.", "error", 4000);
+            return;
+          }
+
 
           // MTN NETWORK BG
             if(button.dataset.network === "mtn"){
@@ -548,22 +920,85 @@ document.addEventListener("click", () => {
             const priceFee = (priceWithFee - bundle.price).toFixed(2);
 
           // Update modal preview
-          document.getElementById("priceTag").textContent =
-            `GHS₵ ${bundle.price}`;
-          document.getElementById("networkTag").textContent =
-            `${bundle.network.toUpperCase()} `;
-          document.getElementById("sizeTag").textContent =
-          `${bundle.dataValue}`;
-          document.getElementById("netWorth").textContent = 
-          `${bundle.network.toUpperCase()}`;
-          document.getElementById("gbSize").textContent =
-          `${bundle.dataValue.toUpperCase()}`;
-          document.getElementById("amount").textContent = 
-          `GHS₵ ${priceWithFee}`;
-          document.getElementById("priceWithFee").textContent = `GHS₵ ${priceFee}`;
+
+          //========================
+           // SAVE DOM TEXT
+           //========================
+          setDashboardText(
+            "priceTag",
+            `GHS₵ ${bundle.price}`
+          )
+
+          setDashboardText(
+            "networkTag",
+            `${bundle.network.toUpperCase()} `
+          )
+
+          setDashboardText(
+            "sizeTag",
+            `${bundle.dataValue}`
+          )
+
+          setDashboardText(
+            "netWorth",
+          `${bundle.network.toUpperCase()}`
+          )
+
+          setDashboardText(
+            "gbSize",
+            `${bundle.dataValue.toUpperCase()}`
+          )
+
+             // PAYSTACK CHARGE FEE REMOVED
+          setDashboardText(
+            "amount",
+            `GHS₵ ${priceWithFee}`
+          )
 
 
-          createPhoneModal(inputNumber => {
+          setDashboardText(
+            "priceWithFee",
+            `GHS₵ ${priceFee}`
+          )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          // if(validate.success){proceed to payment}
+          createPhoneModal(async inputNumber => {
+
+            const precheckPassed = await precheckRecipientBeforePayment(
+              bundle,
+              inputNumber
+            );
+
+            if(!precheckPassed) return;
+
+
+            
+
+            let formattedPhone = inputNumber.trim();
+            // convert Ghana format (024xxxxxxxx) to 23324xxxxxxxxx
+            if(formattedPhone.startsWith("0")){
+              formattedPhone = "233" + formattedPhone.substring(1);
+            }
+
+       
+            // save bundle 
+            lastPurchasedBundle = bundle;
+
             payWithPaystack(bundle, inputNumber);
             resetSelectedBundle();
           });
@@ -634,6 +1069,8 @@ normalModeBtn.addEventListener("click", (e) => {
   e.stopPropagation();
 
   bundleTitle.textContent = "MTN Bundles";
+  
+
   telecelAirtel.style.display = "block";
 
   // remove background to the div when active
@@ -756,6 +1193,7 @@ function hideLoader() {
 
 
 
+
 // =======================
 // PLAY SOUND WHEN ORDER IS SUCCESSFUL
 // ===========================
@@ -834,21 +1272,34 @@ function hasActiveOrder(recipient) {
 function activateTrackers() {
  const firstTracker = document.getElementById("deliveryTracker1").style.display = "flex";
 
- const secondTracker = document.getElementById("deliveryTracker2").style.display = 'flex';
+ const secondTracker = document.getElementById("deliveryTracker2").style.display = "flex";
 };
 
 
 
-// un activate trackers when no orders 
+// un activate trackers when no orders
 function unActivateTrackers(){
-   const firstTracker = document.getElementById("deliveryTracker1").style.display = "flex";
+ const firstTracker = document.getElementById("deliveryTracker1").style.display = "flex";
 
- const secondTracker = document.getElementById("deliveryTracker2").style.display = 'flex';
+ const secondTracker = document.getElementById("deliveryTracker2").style.display = "flex";
 }
 
 //=================================
 // ACTIVATE DELIVERY TRACKER ENDS
 //=================================
+
+//=======================
+// SAFE DOM TEXT UPDATE
+//=======================
+function setDashboardText(id, value){
+ const element = 
+ document.getElementById(id);
+
+ if(element){
+  element.textContent = value;
+ }
+}
+
 
 
 
@@ -860,9 +1311,37 @@ function unActivateTrackers(){
 async function payWithPaystack(bundle, recipient) {
 
 //  if(bundle.network?.toLowerCase() === "mtn") {
-//    showSnackBar("📱 MTN ORDER LOCKED DUE TO MUCH ORDERS PROCESSING. Please try again later.",   "success", 10000);
+//   showSnackBar("📱 MTN ORDER PAUSED, WE ARE IMPLEMENTING  PREMIUM SYSTEM TO IMPROVE DELIVERY. PLEASE TRY AGAIN LATER.",   "success", 10000);
 //  return;
-//  }
+// }
+
+
+const normalizedNetwork = String(bundle.network || "")
+  .trim()
+  .toLowerCase();
+
+const requiresRecipientValidation =
+  !["at", "telecel"].includes(normalizedNetwork);
+
+const validatedProvider = lastValidation?.provider;
+
+// DataMart validation uses success.
+// SwiftData retains its existing eligible check.
+const recipientValidated =
+  validatedProvider === "datamart"
+    ? lastValidation?.success === true
+    : lastValidation?.eligible === true;
+
+if (requiresRecipientValidation && !recipientValidated) {
+  showSnackBar(
+    "Recipient verification required before payment",
+    "warning",
+    3000
+  );
+  return;
+}
+
+
 
   if(hasActiveOrder(recipient)){
     showSnackBar("❌ Number already has an active order", "warning", 4000
@@ -870,9 +1349,20 @@ async function payWithPaystack(bundle, recipient) {
     return; // STOP PAYMENT
     }
 
-  const { network, packageName, size, price } = bundle;
-  const payWithFee = Number((bundle.price * 1.0195).toFixed(2));
 
+  const { network, packageName, size } = bundle;
+
+   const payWithFee = Number((bundle.price * 1.0195).toFixed(2));
+
+
+   console.log("Checkout price debug:", {
+  offer: packageName,
+  network,
+  size,
+  bundlePrice: bundle.price,
+  checkoutPrice: payWithFee,
+  paystackAmountPesewas: Math.round(payWithFee * 100)
+});
 
   const user = auth.currentUser;
   const userEmail = user?.email || `${recipient}@ecodata.com`;
@@ -909,18 +1399,87 @@ async function payWithPaystack(bundle, recipient) {
         ],
       },
 
-    
+    onSuccess: async (response) => {
+  console.log("✅ Paystack onSuccess fired:", response.reference);
 
-      onSuccess: (response) => {
-        hideLoader();
-        orderBundle(
-          network,
-          recipient,
-          packageName,
-          size,
-          response.reference
-        );
-      },
+  hideLoader();
+
+  try {
+    // Get the active vendor from the backend.
+    const API_BASE =
+      window.location.hostname === "localhost"
+        ? "http://localhost:3000"
+        : "https://ecodata-app.onrender.com";
+
+    console.log("🔎 Fetching active vendor...");
+
+    const vendorResponse = await fetch(
+      `${API_BASE}/api/vendor-status`
+    );
+
+    const vendorResult = await vendorResponse.json();
+
+    console.log("📦 Vendor status response:", vendorResult);
+
+    if (!vendorResponse.ok) {
+      throw new Error(
+        vendorResult.message || "Unable to retrieve active vendor."
+      );
+    }
+
+    const activeVendor =
+      vendorResult.activeVendor ||
+      vendorResult.vendor ||
+      vendorResult.active ||
+      vendorResult.name;
+
+    if (!activeVendor) {
+      throw new Error(
+        "Active vendor missing from /api/vendor-status response."
+      );
+    }
+
+    console.log("🚚 Active vendor:", activeVendor);
+
+    if (String(activeVendor).toLowerCase() === "datamart") {
+      console.log("➡️ Calling DataMart purchase function...");
+
+      await orderDataMartBundle(
+        network,
+        recipient,
+        packageName,
+        size,
+        response.reference
+      );
+    } else if (
+      String(activeVendor).toLowerCase() === "swiftdata"
+    ) {
+      console.log("➡️ Calling SwiftData purchase function...");
+
+      await orderBundle(
+        network,
+        recipient,
+        packageName,
+        size,
+        response.reference
+      );
+    } else {
+      throw new Error(
+        `Unsupported active vendor: ${activeVendor}`
+      );
+    }
+  } catch (error) {
+    console.error("❌ Post-payment processing error:", error);
+
+    showSnackBar(
+      "Payment succeeded, but order processing could not start. Contact support with your payment reference: " +
+        response.reference,
+      "error",
+      8000
+    );
+  }
+},
+
 
       onCancel: () => {
         hideLoader();
@@ -935,7 +1494,7 @@ async function payWithPaystack(bundle, recipient) {
 //NEW UPDATED 21/01/2026 //
 // === SEND ORDER TO BACKEND ===
 
-async function orderBundle(network, recipient, packageName, size, reference) {
+async function orderBundle(network, recipient, packageName, size, reference, ) {
 
   try {
 
@@ -950,7 +1509,7 @@ async function orderBundle(network, recipient, packageName, size, reference) {
         ? "http://localhost:3000"
         : "https://ecodata-app.onrender.com";
 
-    
+
 
   const response = await fetch(
   `${API_BASE}/api/buy-data`,
@@ -977,42 +1536,36 @@ async function orderBundle(network, recipient, packageName, size, reference) {
     }
 
     playSuccessSound();
-      showSnackBar(`📱${size}GB Order Placed successfully!`, "success", 6000);
+      showSnackBar(`📱${size}GB ORDER PLACED SUCCESSFULLY!`, "success", 6000);
    
 
- 
 
-    const returnedOrder = result.order?.order || result.order || result;
+const returnedOrder = result.order?.order || result.order || result;
 
 const orderData = {
   orderId:
     returnedOrder.orderId ||
     returnedOrder.reference,
 
-  reference:
-    returnedOrder.reference,
+  reference: returnedOrder.reference,
 
   recipient,
 
-  network:
-    bundle.network,
+  network: bundle.network,
 
-  volume:
-    Number(bundle.size || size || 0),
+  volume: Number(bundle.size || size || 0),
 
   dataValue: `${(bundle.dataValue || selectedBundle.dataValue || 0)}`,
 
-  amount:
-    Number(bundle.price || 0),
+  amount: Number(bundle.price * 1.0195 || 0),
 
-  
   status: "pending",
 
   source: "web",
 
-  isGuest: true,
+  isGuest: !auth.currentUser,
 
-  createdBy: null,
+  createdBy: auth.currentUser?.uid || "guest",
 
   createdAt: Date.now(),
 };
@@ -1021,33 +1574,284 @@ handleNewOrder(returnedOrder);
 
 updateHomepageTotals(orderData);
 
-await saveOrderToFirestore(orderData);
+ console.log("Calling saveOrderToFirestore...");
+ console.log(orderData);
 
-saveGuestOrder(orderData);
+try {
+  const firestoreId =
+  await saveOrderToFirestore(orderData);
+  console.log("Returned Firestore ID:", firestoreId);
+} catch (e) {
+console.error("SaveOrderToFireStore failed:", e)
+}
 
-activateTrackers();
+try {
+  saveGuestOrder(orderData);
+} catch (e) {
+  console.error("saveGuestOrder failed:", e);
+}
+
+try {
+  activateTrackers();
+} catch (e) {
+  console.error("activateTrackers failed:", e);
+}
 
   } catch (err) {
-    console.error("⚠ Server error:", err);
-    showSnackBar("Network problem, contact admin now.", "warning", 20000);
-  }
+  console.error("orderBundle error:", err);
+  console.error(err.stack);
+
+  showSnackBar(`📱${size}GB ORDER PLACED SUCCESSFULLY!`, "success", 6000);
+}
 }
 //ends//
 //ends//
 
 
+async function orderDataMartBundle(
+  network,
+  recipient,
+  packageName,
+  size,
+  reference
+) {
+  const API_BASE =
+    window.location.hostname === "localhost"
+      ? "http://localhost:3000"
+      : "https://ecodata-app.onrender.com";
+
+  try {
+   
+
+    const response = await fetch(
+      `${API_BASE}/api/datamart/buy-data`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          network,
+          recipient,
+          package: packageName,
+          size,
+          paymentReference: reference,
+        }),
+      }
+    );
+
+    const result = await response.json();
+
+    if (!response.ok || !result.success) {
+      console.error("DataMart order response:", result);
+
+      showSnackBar(
+        result.message ||
+          "Payment received, but the purchase is not confirmed. Please check your order status.",
+        "warning",
+        6000
+      );
+
+      return;
+    }
+
+    const order = result.order || {};
+    const bundle = lastPurchasedBundle;
+
+    if (!bundle) {
+      console.error(
+        "DataMart purchase response received, but bundle context is missing.",
+        order
+      );
+
+      showSnackBar(
+        "Purchase response received. Please check your order history.",
+        "warning",
+        6000
+      );
+
+      return;
+    }
+
+    const orderStatus = String(
+      order.orderStatus || "processing"
+    ).toLowerCase();
+
+    const orderData = {
+      orderId:
+        order.purchaseId ||
+        order.providerOrderReference ||
+        order.paymentReference ||
+        reference,
+
+      reference:
+        order.providerOrderReference || reference,
+
+      paymentReference: reference,
+
+      recipient,
+
+      network: bundle.network || network,
+
+      volume: Number(bundle.size || size || 0),
+
+      dataValue: String(
+        bundle.dataValue || selectedBundle?.dataValue || 0
+      ),
+
+      amount: Number(
+        order.checkoutAmount ?? (Number(bundle.price) * 1.0195)
+      ),
+
+      status: orderStatus,
+
+      source: "web",
+
+      provider: "datamart",
+
+      isGuest: !auth.currentUser,
+
+      createdBy: auth.currentUser?.uid || "guest",
+
+      createdAt: Date.now(),
+    };
+
+    // Only announce completed delivery as a completed purchase.
+    if (orderStatus === "completed") {
+      playSuccessSound();
+
+      showSnackBar(
+        `${size}GB bundle purchased successfully!`,
+        "success",
+        6000
+      );
+    } else {
+      showSnackBar(
+        `${size}GB order received. Current status: ${orderStatus}.`,
+        "success",
+        6000
+      );
+    }
+
+
+
+    await handleOrderByActiveVendor(
+      returnOrder,
+      paymentReference,
+      customerPhone
+    );
+
+    updateHomepageTotals(orderData);
+
+    try {
+      await saveOrderToFirestore(orderData);
+    } catch (error) {
+      console.error(" Firestore save failed:", error);
+    }
+
+    try {
+      saveGuestOrder(orderData);
+    } catch (error) {
+      console.error(" guest order save failed:", error);
+    }
+
+    try {
+      activateTrackers();
+    } catch (error) {
+      console.error(" tracker activation failed:", error);
+    }
+  } catch (error) {
+    console.error(" order error:", error);
+
+    showSnackBar(
+      "We could not confirm the order status. Check your order history before retrying.",
+      "warning",
+      6000
+    );
+  }
+
+}
+//====================
+// SAVE WITH RETRY
+//====================
+async function saveWithRetry(collectionRef, orderData) {
+
+  let attempt = 1;
+
+  while (true) {
+
+    try {
+
+      const docRef = await addDoc(
+        collectionRef,
+        orderData
+      );
+
+      console.log(
+        `✅ Order saved on attempt ${attempt}`,
+        docRef.id
+      );
+
+      return docRef;
+
+    } catch (error) {
+
+      console.warn(
+        `❌ Save failed (Attempt ${attempt})`,
+        error
+      );
+
+      //==========================
+      // STOP RETRYING
+      //==========================
+      if (
+        error.code === "permission-denied" ||
+        error.code === "failed-precondition" ||
+        error.code === "resource-exhausted" || // quota exceeded
+        error.code === "unauthenticated" ||
+        error.code === "invalid-argument"
+      ) {
+
+        console.error(
+          "⛔ Permanent Firestore error. Retry stopped.",
+          error
+        );
+
+        throw error;
+
+      }
+
+      //==========================
+      // RETRY FOREVER
+      //==========================
+      console.log(
+        `🔄 Retrying in 2 seconds...`
+      );
+
+      await new Promise(resolve =>
+        setTimeout(resolve, 2000)
+      );
+
+      attempt++;
+
+    }
+
+  }
+
+}
+
 // ---------- FIRESTORE HELPER ----------
 async function saveOrderToFirestore(orderData) {
+  console.log("Entered saveOrderToFirestore()");
+  console.log(orderData);
   try {
     const db = window.FIRESTORE;
+
     if (!db) {
-      console.warn("Firestore not initialized.");
+      console.warn("Window.FIRESTORE is undefined");
       return null;
     }
 
-    const { collection, addDoc, serverTimestamp } = await import(
-      "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"
-    );
 
  const firestoreData = {
 
@@ -1063,10 +1867,7 @@ async function saveOrderToFirestore(orderData) {
 
   amount: Number(orderData.amount || 0),
 
-  vendorPrice:
-    Number(orderData.vendorPrice || 0),
-
-    dataValue: `${(orderData.dataValue  || 0)}`,
+  dataValue: `${(orderData.dataValue  || 0)}`,
 
 
 
@@ -1081,10 +1882,13 @@ async function saveOrderToFirestore(orderData) {
 
 };
 
-    const ordersCol = collection(db, "orders");
-    const result = await addDoc(ordersCol, firestoreData);
 
-    console.log("✅ Order saved to Firestore:", result.id);
+console.log("Saving document...");
+console.log(firestoreData);
+    const ordersCol = collection(db, "orders");
+    const result = await saveWithRetry(ordersCol, firestoreData);
+    
+    console.log(" Order saved to Firestore:", result.id);
     return result.id;
 
   } catch (err) {
@@ -1093,12 +1897,40 @@ async function saveOrderToFirestore(orderData) {
   }
 }
 
+async function handleOrderByActiveVendor(orderResult) {
+  const response = await fetch(
+    `${API_BASE}/api/vendor-status`,
+    {
+      headers: { Accept: "application/json" },
+      cache: "no-store"
+    }
+  );
 
+  if (!response.ok) {
+    throw new Error("Unable to retrieve active vendor.");
+  }
+
+  const result = await response.json();
+
+  if (!result.success || !result.activeVendor) {
+    throw new Error("Active vendor was not returned.");
+  }
+
+  const activeVendor = String(result.activeVendor).toLowerCase();
+
+  if (activeVendor === "datamart") {
+    handleNewDataMartOrder(orderResult);
+  } else if (activeVendor === "swiftdata") {
+    handleNewOrder(orderResult);
+  } else {
+    throw new Error(`Unsupported vendor: ${activeVendor}`);
+  }
+}
 
 
 // ---------- LOCAL STORAGE HELPER ----------
 
-// ✅ Save Guest Orders to Local Storage
+// Save Guest Orders to Local Storage
 function saveGuestOrder(orderData) {
   try {
     // Load existing guest orders or start fresh
@@ -1175,9 +2007,6 @@ const normalized = {
 
   source: "web",
 
-  createdAt: Date.now(),
-  updatedAt: Date.now(),
-
 };
 
   if (!normalized.orderId) return;
@@ -1202,11 +2031,20 @@ const normalized = {
   row.dataset.id = normalized.orderId;
 
   row.innerHTML = `
-    <span>${normalized.orderId}</span>
-    <span>${normalized.volume}GB</span>
-    <span>${normalized.recipient}</span>
+    <span>
+      ${normalized.orderId}
+    </span>
+
+    <span>
+      ${normalized.volume}GB
+    </span>
+
+    <span>
+      ${normalized.recipient}
+    </span>
+
     <span class="status-cell">
-      <span class="status-badge ${getStatusClass(normalized.status)}">
+      <sp class="status-badge ${getStatusClass(normalized.status)}">
         ${normalized.status}
       </span>
     </span>
@@ -1228,7 +2066,295 @@ const normalized = {
   // ---------- LIVE STATUS POLLING ----------
   startAutoPolling(normalized.orderId);
 }
-// handleNewOrder ends//
+
+
+
+
+
+function formatOrderId(paymentReference) {
+  const digits = String(paymentReference || "").replace(/\D/g, "");
+  return `ED-${digits.slice(-6).padStart(6, "0")}`;
+}
+
+function handleNewDataMartOrder(returnedOrder, paymentReference, customerPhone) {
+  if (!returnedOrder) return;
+
+  // Keep DataMart's provider reference for polling only.
+  const providerReference =
+    returnedOrder.providerOrderReference ||
+    returnedOrder.orderReference ||
+    returnedOrder.reference;
+
+  if (!providerReference) {
+    console.error(
+      "DataMart response has no provider order reference:",
+      returnedOrder
+    );
+    return;
+  }
+
+  // The payment reference identifies the EcoData order.
+  if (!paymentReference) {
+    console.error(
+      "Missing EcoData payment reference for DataMart order."
+    );
+    return;
+  }
+
+  const costPrice = Number(
+    returnedOrder.providerPrice ??
+    returnedOrder.price ??
+    0
+  );
+
+  const sellingPrice = Number(selectedBundle?.price || 0);
+
+  const normalized = {
+    orderId: formatOrderId(paymentReference),
+    paymentReference: String(paymentReference),
+    providerOrderReference: String(providerReference),
+
+    status:
+      returnedOrder.orderStatus ||
+      returnedOrder.status ||
+      "processing",
+
+    recipient:
+      customerPhone ||
+      returnedOrder.phoneNumber ||
+      returnedOrder.phone ||
+      returnedOrder.recipient ||
+      "-",
+
+    amount: sellingPrice,
+    costPrice,
+    profit: sellingPrice - costPrice,
+
+    network:
+      returnedOrder.network ||
+      selectedBundle?.network ||
+      "-",
+
+    volume:
+      returnedOrder.capacity ??
+      returnedOrder.capacityGb ??
+      returnedOrder.size ??
+      selectedBundle?.size ??
+      0,
+
+    source: "web",
+    provider: "datamart"
+  };
+
+  // Store the provider reference separately from the displayed Order ID.
+  localStorage.setItem(
+    "lastDataMartOrderReference",
+    String(providerReference)
+  );
+
+  saveLiveOrder(normalized);
+  renderLiveOrderRow(normalized);
+  createOrUpdateStatusCard(normalized);
+
+  // Poll DataMart using its provider reference, never the ED display ID.
+  startDataMartAutoPolling(String(providerReference));
+}
+
+
+const dataMartPollingTimers = new Map();
+function startDataMartAutoPolling(providerReference) {
+  if (!providerReference) return;
+
+  const reference = String(providerReference).trim();
+  if (!reference) return;
+
+  // Prevent duplicate polling for the same DataMart order.
+  if (dataMartPollingTimers.has(reference)) return;
+
+  let stopped = false;
+  let requestInProgress = false;
+  let timer = null;
+
+  const terminalStatuses = new Set([
+    "completed",
+    "delivered",
+    "success",
+    "successful",
+    "failed",
+    "cancelled",
+    "canceled",
+    "refunded"
+  ]);
+
+  const statusMap = {
+    completed: "completed",
+    delivered: "completed",
+    success: "completed",
+    successful: "completed",
+    failed: "failed",
+    cancelled: "failed",
+    canceled: "failed",
+    refunded: "refunded",
+    waiting: "processing",
+    pending: "processing",
+    processing: "processing",
+    in_progress: "processing",
+    "in progress": "processing"
+  };
+
+  async function checkStatus() {
+    if (stopped || requestInProgress) return;
+
+    requestInProgress = true;
+
+    try {
+      const response = await fetch(
+        `${API_BASE}/api/datamart/order-status/${encodeURIComponent(reference)}`,
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json"
+          },
+          cache: "no-store"
+        }
+      );
+
+      let result;
+
+      try {
+        result = await response.json();
+      } catch {
+        console.error(
+          "DataMart status endpoint returned invalid JSON:",
+          response.status
+        );
+        return;
+      }
+
+      if (!response.ok || !result?.success) {
+        console.warn("DataMart status check failed:", {
+          httpStatus: response.status,
+          message:
+            result?.message || "Unknown status-check error"
+        });
+
+        // A temporary API error must not mark an order as failed.
+        return;
+      }
+
+      const orderData = result.order || result.data || {};
+
+      const rawStatus = String(
+        orderData.status ||
+        orderData.orderStatus ||
+        "processing"
+      ).trim().toLowerCase();
+
+      const status = statusMap[rawStatus] || rawStatus;
+
+      let orders;
+
+      try {
+        orders = JSON.parse(
+          localStorage.getItem(LIVE_ORDERS_KEY) || "[]"
+        );
+
+        if (!Array.isArray(orders)) {
+          orders = [];
+        }
+      } catch {
+        console.error("Could not parse saved live orders.");
+        return;
+      }
+
+      // Match using the DataMart provider reference,
+      // NOT the short EcoData display ID.
+      const index = orders.findIndex(order =>
+        String(order.providerOrderReference || "").trim() === reference &&
+        String(order.provider || "").toLowerCase() === "datamart"
+      );
+
+      if (index === -1) {
+        console.warn(
+          "DataMart order not found locally by providerOrderReference:",
+          reference
+        );
+
+        // Keep polling: the local order may be saved shortly.
+        return;
+      }
+
+      const currentOrder = orders[index];
+
+      // Never overwrite an already terminal local status.
+      if (
+        terminalStatuses.has(
+          String(currentOrder.status || "").trim().toLowerCase()
+        )
+      ) {
+        stopPolling();
+        return;
+      }
+
+      const updatedOrder = {
+        ...currentOrder,
+        status,
+        updatedAt: Date.now(),
+        provider: "datamart",
+        providerOrderReference: reference
+      };
+
+      orders[index] = updatedOrder;
+
+      localStorage.setItem(
+        LIVE_ORDERS_KEY,
+        JSON.stringify(orders)
+      );
+
+      renderLiveOrderRow(updatedOrder);
+      createOrUpdateStatusCard(updatedOrder);
+      updatePendingCard();
+      loadActiveBadge();
+
+      console.log(
+        "DataMart live status:",
+        updatedOrder.orderId,
+        status
+      );
+
+      if (terminalStatuses.has(status)) {
+        stopPolling();
+      }
+    } catch (error) {
+      console.error(
+        "DataMart polling error:",
+        error.message
+      );
+    } finally {
+      requestInProgress = false;
+    }
+  }
+
+  function stopPolling() {
+    stopped = true;
+
+    if (timer !== null) {
+      clearInterval(timer);
+      timer = null;
+    }
+
+    dataMartPollingTimers.delete(reference);
+  }
+
+  // Register before making the initial request.
+  dataMartPollingTimers.set(reference, stopPolling);
+
+  checkStatus();
+  timer = setInterval(checkStatus, 10000);
+}
+
+
+
 
 const LIVE_ORDERS_KEY = "ecoLiveOrders";
 const MAX_LIVE_ORDERS = 1000;
@@ -1236,53 +2362,53 @@ const MAX_LIVE_ORDERS = 1000;
 function saveLiveOrder(order) {
   if (!order || !order.orderId) return;
 
-  const existing = 
+  const normalizedOrder = {
+    ...order,
+    provider: String(order.provider || "swiftdata").toLowerCase()
+  };
 
-    JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY) || "[]");
+  const existing = JSON.parse(
+    localStorage.getItem(LIVE_ORDERS_KEY) || "[]"
+  );
 
-  const index = existing.findIndex(o => o.orderId === order.orderId);
+  const index = existing.findIndex(o =>
+    o.orderId === normalizedOrder.orderId &&
+    String(o.provider || "swiftdata").toLowerCase() ===
+      normalizedOrder.provider
+  );
 
   if (index !== -1) {
     const current = existing[index];
+    const currentIsTerminal = isTerminalStatus(current.status);
 
-    // Merge without overwriting status if already delivered/failed
     existing[index] = {
       ...current,
-      ...order,
+      ...normalizedOrder,
 
-    // preserve the origin submitted time
-    createdAt: order.createdAt || Date.now(),
+      // Preserve terminal status.
+      status: currentIsTerminal
+        ? current.status
+        : normalizedOrder.status,
 
-    // Don't allow terminal status to be overwritten
-      status: 
-      isTerminalStatus(current.status)
-        ? existing[index].status
-        : order.status,
-
-    // keep the original timestamp
+      // Preserve original timestamps.
+      createdAt: current.createdAt || Date.now(),
       timestamp: current.timestamp || Date.now(),
 
-    // Preserve DeliveredAt; only update it in updatedLiveOrderStatus()
-      updatedAt:  order.updatedAt || current.updatedAt,
+      // Preserve update timestamp unless explicitly supplied.
+      updatedAt: normalizedOrder.updatedAt || current.updatedAt
     };
   } else {
-    // New order on top
     existing.unshift({
-      ...order,
-      timestamp: Date.now(), // SINGLE SOURCE OF TRUTH
-    // Submitted time (set once)
-      createdAt: order.createdAt || Date.now(),
-    // Initial update time (Same as creation)
-      updatedAt: order.updatedAt || Date.now(),
-
+      ...normalizedOrder,
+      timestamp: normalizedOrder.timestamp || Date.now(),
+      createdAt: normalizedOrder.createdAt || Date.now(),
+      updatedAt: normalizedOrder.updatedAt || Date.now()
     });
   }
 
-  // Keep latest N orders
   localStorage.setItem(
     LIVE_ORDERS_KEY,
-    JSON.stringify(existing.slice(0,
-  MAX_LIVE_ORDERS))
+    JSON.stringify(existing.slice(0, MAX_LIVE_ORDERS))
   );
 
   updatePendingCard();
@@ -1355,28 +2481,56 @@ console.log("UpdatedAt", order.updatedAt);
 console.log("timeStamp", order.timestamp);
 
 
-  let row = tableBody.querySelector(`[data-id="${order.orderId}"]`);
+  const provider = String(
+  order.provider || "swiftdata"
+).toLowerCase();
 
-  if (!row) {
-    row = document.createElement("div");
-    row.className = "live-row";
-    row.dataset.id = order.orderId;
-    tableBody.appendChild(row);
-  }
+let row = Array.from(
+  tableBody.querySelectorAll(".live-row")
+).find(row =>
+  row.dataset.id === String(order.orderId) &&
+  String(row.dataset.provider || "swiftdata").toLowerCase() === provider
+);
+
+if (!row) {
+  row = document.createElement("div");
+  row.className = "live-row";
+  row.dataset.id = order.orderId;
+  row.dataset.provider = provider;
+  tableBody.appendChild(row);
+}
 
   row.innerHTML = `
-    <span>${order.orderId}</span>
-    <span>${getNetwork(order)}</span>
-    <span>${order.volume}GB</span>
-    <span>${order.recipient}</span>
+    <span>
+      ${order.orderId}
+    </span>
+
+    <span>
+      ${order.recipient}
+    </span>
+
+    <span>
+      ${order.volume}GB
+    </span>
+
     <span class="status-cell">
       <span class="status-badge ${getStatusClass(order.status)}">
-        ${order.status}
+        ${getStatusIcon(order.status)}
+      <span>${order.status}</span>
       </span>
     </span>
-    <span>${date}</span>
-    <span>Yes</span>
-    <span>${update}</span>
+
+    <span>
+      ${getNetwork(order)}
+    </span>
+
+    <span>
+      Yes
+    </span>
+
+    <span>
+      ${date}
+    </span>
   `;
 }
 
@@ -1451,7 +2605,7 @@ function isTerminalStatus(status) {
 // ---------- POLLING FUNCTION ----------
 async function checkOrderStatusOnce(orderIdOrRef) {
   try {
-    // 🟩 Talk to your own backend now (not directly to SwiftData)
+    // Talk to backend (not directly )
     const res = await fetch(`${API_BASE}/api/v1/order/status/${encodeURIComponent(orderIdOrRef)}`,{
       method: "GET",
       headers: { "Content-Type": "application/json" }
@@ -1512,52 +2666,459 @@ function updateHomepageTotals(orderData) {
   renderHomepageTotals();
 }
 
+//========================
+// FORMAT TOTAL GB
+//========================
 
 
+// ---------- FORMAT DATA SIZE ----------
+function formatDataSize(gb) {
+  gb = Number(gb) || 0;
+
+  if (gb >= 1000) {
+    const tb = gb / 1000;
+
+    return `${Number(tb.toFixed(2))}TB`;
+  }
+
+  return `${Number(gb.toFixed(2))}GB`;
+}
+
+
+function getOrdersForMonth(orders, year, month) {
+
+  return orders.filter(order => {
+
+    if (!order.createdAt) return false;
+
+    const date = new Date(order.createdAt);
+
+    if (isNaN(date.getTime())) return false;
+
+    return (
+      date.getFullYear() === year &&
+      date.getMonth() === month
+    );
+  });
+}
+
+
+
+function getOrderStatus(order) {
+  return String(order.status || "pending").toLowerCase();
+}
+
+
+function isPendingOrder(order) {
+  return getOrderStatus(order) === "pending";
+}
+
+
+function isCompletedOrder(order) {
+  return getOrderStatus(order) === "delivered";
+}
+
+
+function calculateOrderData(orders) {
+
+  return orders.reduce((total, order) => {
+
+    const volume = Number(
+      String(order.volume || "")
+        .replace(/GB/gi, "")
+        .trim()
+    ) || 0;
+
+    return total + volume;
+
+  }, 0);
+}
+
+
+function calculatePercentageChange(current, previous) {
+
+  current = Number(current) || 0;
+  previous = Number(previous) || 0;
+
+  if (previous === 0) {
+    return current > 0 ? 100 : 0;
+  }
+
+  return ((current - previous) / previous) * 100;
+}
+
+
+
+function renderCardPerformance(
+  elementId,
+  current,
+  previous,
+  lowerIsBetter = false,
+  isData = false
+) {
+  const element = document.getElementById(elementId);
+
+  if (!element) return;
+
+  current = Number(current) || 0;
+  previous = Number(previous) || 0;
+
+  const change = calculatePercentageChange(
+    current,
+    previous
+  );
+
+  const percentage = Math.abs(change).toFixed(1);
+
+  let icon = "ri-arrow-right-line";
+  let state = "neutral";
+  let directionText = "No change";
+
+  if (change > 0) {
+    icon = "ri-arrow-right-up-line";
+
+    state = lowerIsBetter
+      ? "decrease"
+      : "increase";
+
+    directionText = "higher";
+
+  } else if (change < 0) {
+    icon = "ri-arrow-right-down-line";
+
+    state = lowerIsBetter
+      ? "increase"
+      : "decrease";
+
+    directionText = "lower";
+  }
+
+
+  // Format the comparison values
+  const currentDisplay = isData
+    ? formatDataSize(current)
+    : current.toLocaleString();
+
+  const previousDisplay = isData
+    ? formatDataSize(previous)
+    : previous.toLocaleString();
+
+
+  element.className =
+    `card-performance ${state}`;
+
+
+  // No change
+  if (change === 0) {
+
+    element.innerHTML = `
+      <div class="performance-main">
+        <i class="${icon}"></i>
+
+        <span class="performance-value">
+          No change
+        </span>
+      </div>
+
+      <div class="performance-detail">
+        ${currentDisplay} this month
+        •
+        ${previousDisplay} last month
+      </div>
+    `;
+
+    return;
+  }
+
+
+  // Increase / decrease
+  element.innerHTML = `
+    <div class="performance-main">
+
+      <i class="${icon}"></i>
+
+      <span class="performance-value">
+        ${percentage}%
+      </span>
+
+      <span class="performance-direction">
+        ${directionText}
+      </span>
+
+    </div>
+
+    <div class="performance-detail">
+      ${currentDisplay} this month
+      •
+      ${previousDisplay} last month
+    </div>
+  `;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+function renderPendingPerformance(pendingCount, totalOrders){
+  const element = 
+  document.getElementById("pendingPerformance");
+
+  if(!element) return;
+
+  const percentage =
+  totalOrders > 0
+  ? (pendingCount / totalOrders) * 100
+  : 0
+
+  const percentageText =
+  percentage.toFixed(1);
+
+  const isGood = percentage <= 50;
+  const arrowIcon =
+  isGood
+  ? "ri-arrow-right-down-line"
+  : "ri-arrow-right-up-line";
+
+  const percentageColor =
+  isGood
+  ? "#159570"
+  : "#e05252";
+
+  element.className = "card-performance neutral";
+
+  element.innerHTML = `
+  <div class="performance-main">
+   <i class="${arrowIcon}" style="color: ${percentageColor};"></i>
+
+   <span class="performance-value" style="color: ${percentageColor};">
+    ${percentageText}%
+   </span>
+
+   <span class="performance-direction">
+   of monthly orders
+   </span>
+  </div>
+
+  <div class="performance-detail">
+   ${pendingCount.toLocaleString()}
+   of
+   ${totalOrders.toLocaleString()}
+   orders this month
+  </div>
+  `;
+}
 
 
 // ---------- RENDER TOTALS ----------
 function renderHomepageTotals() {
-  const ordersEl = document.getElementById("totalOrders");
-  const gbEl = document.getElementById("totalGB");
+
+  const ordersEl =
+    document.getElementById("totalOrders");
+
+  const gbEl =
+    document.getElementById("totalGB");
+
+  const pendingEl =
+    document.getElementById("pendingTotal");
+
+  const completedEl =
+    document.getElementById("completedOrders");
 
 
-  if (!ordersEl || !gbEl ) return;
+  const orders =
+    JSON.parse(
+      localStorage.getItem(LIVE_ORDERS_KEY)
+    ) || [];
 
-  ordersEl.textContent = ecoTotals.orders;
-  gbEl.textContent = `${ecoTotals.gb}GB`;
- 
+
+  if (!ordersEl || !gbEl) return;
+
+
+  // ==========================================
+  // ALL-TIME TOTALS
+  // ==========================================
+
+  ordersEl.textContent = orders.length;
+
+
+  // Your existing all-time data total
+  gbEl.textContent =
+    formatDataSize(ecoTotals.gb);
+
+
+  // ==========================================
+  // CURRENT TOTAL STATUS
+  // ==========================================
+
+  const pendingOrders =
+    orders.filter(isPendingOrder);
+
+  const completedOrders =
+    orders.filter(isCompletedOrder);
+
+  // ==========================================
+  //  SAVE DOM TEXT
+
+  if(pendingEl){
+    setDashboardText(
+    "pendingTotal",
+    pendingOrders.length
+  )
 }
+
+
+
+ if(completedEl){
+    setDashboardText(
+    "pendingTotal",
+     completedOrders.length
+  )
+}
+
+
+ 
+
+
+  // ==========================================
+  // CURRENT MONTH
+  // ==========================================
+
+  const now = new Date();
+
+  const currentMonthOrders =
+    getOrdersForMonth(
+      orders,
+      now.getFullYear(),
+      now.getMonth()
+    );
+
+
+  // ==========================================
+  // PREVIOUS MONTH
+  // ==========================================
+
+  const previousMonthDate =
+    new Date(
+      now.getFullYear(),
+      now.getMonth() - 1,
+      1
+    );
+
+  const previousMonthOrders =
+    getOrdersForMonth(
+      orders,
+      previousMonthDate.getFullYear(),
+      previousMonthDate.getMonth()
+    );
+
+
+  // ==========================================
+  // TOTAL ORDERS PERFORMANCE
+  // ==========================================
+
+  renderCardPerformance(
+    "ordersPerformance",
+
+    currentMonthOrders.length,
+
+    previousMonthOrders.length
+  );
+
+
+  // ==========================================
+  // TOTAL DATA PERFORMANCE
+  // ==========================================
+
+  const currentMonthGB =
+    calculateOrderData(
+      currentMonthOrders
+    );
+
+  const previousMonthGB =
+    calculateOrderData(
+      previousMonthOrders
+    );
+
+
+  renderCardPerformance(
+    "dataPerformance",
+
+    currentMonthGB,
+
+    previousMonthGB,
+    false,
+    true
+  );
+
+
+  // ==========================================
+  // PENDING ORDERS PERFORMANCE
+  // ==========================================
+
+  const currentPending =
+    currentMonthOrders.filter(
+      isPendingOrder
+    ).length;
+
+  const currentTotalOrders =
+  currentMonthOrders.length;
+
+  renderPendingPerformance(
+    currentPending,  // pendingCount
+    currentTotalOrders  // totalOrders
+  );
+
+
+
+  // ==========================================
+  // COMPLETED ORDERS PERFORMANCE
+  // ==========================================
+
+  const currentCompleted =
+    currentMonthOrders.filter(
+      isCompletedOrder
+    ).length;
+
+  const previousCompleted =
+    previousMonthOrders.filter(
+      isCompletedOrder
+    ).length;
+
+
+  renderCardPerformance(
+    "completedPerformance",
+
+    currentCompleted,
+
+    previousCompleted
+  );
+}
+
+
+
+
+
+
+//========================
+// FORMAT TOTAL GB end
+//========================
 
 // Load totals on page refresh
 document.addEventListener("DOMContentLoaded", () => {
+  
   ecoTotals = JSON.parse(localStorage.getItem("ecoTotals")) || ecoTotals;
   renderHomepageTotals();
 });
 
 
 
-
-
- 
-
-// POLLING FUNCTION //
-
-// STATUS_POLL_INTERVAL and _statusPollTimer are declared earlier; avoid redeclaration to prevent errors.
-
- // ---------- HELPERS ----------
-function getStatusTextMapping(status) {
-  const s = (status || "").toLowerCase();
-  return {
-    delivered: "Your bundle is successfully delivered ✅.",
-    pending: "Order awaiting processing.",
-    processing: "Order is processing. Please wait.",
-    failed: "Order failed. Contact support or try again.",
-    cancelled: "Order was cancelled.",
-    refunded: "Payment refunded.",
-    resolved: "Issue resolved. Order completed."
-  }[s] || "Status update in progress.";
-}
 
 function getStatusClass(status) {
   return `status-${(status || "").toLowerCase()}`;
@@ -1613,17 +3174,35 @@ document.addEventListener("DOMContentLoaded", async () => {
   const lastOrderId = localStorage.getItem("lastOrderId");
   if (!lastOrderId) return;
 
-  // Try to fetch latest status
+  const orders = JSON.parse(
+    localStorage.getItem(LIVE_ORDERS_KEY) || "[]"
+  );
+
+  const savedOrder = orders.find(order =>
+    String(order.orderId) === String(lastOrderId) ||
+    String(order.providerOrderReference || "") === String(lastOrderId)
+  );
+
+  // DataMart has its own dedicated status endpoint.
+  if (
+    savedOrder &&
+    String(savedOrder.provider || "").toLowerCase() === "datamart"
+  ) {
+    if (savedOrder.providerOrderReference) {
+      startDataMartAutoPolling(
+        savedOrder.providerOrderReference
+      );
+    }
+    return;
+  }
+
+  // Existing SwiftData flow remains unchanged.
   const order = await checkOrderStatusOnce(lastOrderId);
   if (!order) return;
 
-  // Rebuild UI
-  updateLiveOrderCard(order);      // persistent
-
-  // Resume polling
+  updateLiveOrderCard(order);
   startAutoPolling(lastOrderId);
 });
-
 
 // lIVE ORDER ENDS
 
@@ -1634,36 +3213,70 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 function startAutoPolling(orderIdOrRef) {
-  // Stop any existing polling first
+  if (!orderIdOrRef) return;
+
+  const ordersAtStart = getStoredOrders();
+
+  // If the selected order is DataMart, never call SwiftData for it.
+  const selectedOrder = ordersAtStart.find(order =>
+    String(order.orderId) === String(orderIdOrRef) ||
+    String(order.providerOrderReference || "") === String(orderIdOrRef)
+  );
+
+  if (
+    selectedOrder &&
+    String(selectedOrder.provider || "").toLowerCase() === "datamart"
+  ) {
+    if (selectedOrder.providerOrderReference) {
+      startDataMartAutoPolling(
+        selectedOrder.providerOrderReference
+      );
+    }
+    return;
+  }
+
+  // Existing SwiftData polling.
   stopStatusPolling();
 
   const statusResult = document.getElementById("statusResult");
   if (statusResult) statusResult.innerHTML = "";
 
-  // Initial immediate check for this specific order
   (async () => {
-    if (!orderIdOrRef) return;
     const order = await checkOrderStatusOnce(orderIdOrRef);
-    if (order) {
-      createOrUpdateStatusCard(order); // popup card
-      updateLiveOrderCard(order);      // table row
-      updateStatusBadge(order.status || "pending");
-      saveLiveOrder(order);            // persist status
-    }
+    if (!order) return;
+
+    createOrUpdateStatusCard(order);
+    updateLiveOrderCard(order);
+    updateStatusBadge(order.status || "pending");
+    saveLiveOrder(order);
   })();
 
-  // Poll all stored orders for updates (except terminal)
   _statusPollTimer = setInterval(async () => {
     const orders = getStoredOrders();
-    for (let order of orders) {
-      if (isTerminalStatus(order.status)) continue; // skip delivered/failed
+
+    for (const order of orders) {
+      // Do not send DataMart orders to the SwiftData endpoint.
+      if (
+        String(order.provider || "swiftdata").toLowerCase() === "datamart"
+      ) {
+        if (order.providerOrderReference) {
+          startDataMartAutoPolling(
+            order.providerOrderReference
+          );
+        }
+        continue;
+      }
+
+      if (isTerminalStatus(order.status)) continue;
+
       const latest = await checkOrderStatusOnce(order.orderId);
       if (!latest) continue;
 
-      saveLiveOrder(latest);           // merge status
-      renderLiveOrderRow(latest);      // update table
-      if (orderIdOrRef === latest.orderId) {
-        createOrUpdateStatusCard(latest);  // popup card only for this order
+      saveLiveOrder(latest);
+      renderLiveOrderRow(latest);
+
+      if (String(orderIdOrRef) === String(latest.orderId)) {
+        createOrUpdateStatusCard(latest);
         updateStatusBadge(latest.status || "pending");
       }
     }
@@ -1673,16 +3286,7 @@ function startAutoPolling(orderIdOrRef) {
 
 
 
-
 // ---------- AFTER PURCHASE: show and poll ----------
-/**
- * Call this after your backend returns an order reply.
- * Example usage inside orderBundle function after successful response:
- *    const returnedOrder = result.order || result.swift || result; 
- *    handleNewOrder(returnedOrder);
- * 
- * 
- */
 // Load live orders on page refresh
 
 function loadLiveOrders() {
@@ -1777,11 +3381,37 @@ function getNetwork(order) {
 }
 
 
+
+
+//====================
+// GET STATUS ICON 
+//====================
+function getStatusIcon(status) {
+  switch ((status || "").toLowerCase()) {
+    case "pending":
+      return `<i class="ri-time-line status-icon"></i>`;
+
+    case "processing":
+      return `<i class="ri-refresh-line status-icon spinning"></i>`;
+
+    case "delivered":
+    case "sent":
+      return `<i class="ri-check-double-line status-icon"></i>`;
+
+    case "cancelled":
+      return `<i class="ri-close-circle-line status-icon"></i>`;
+
+    default:
+      return `<i class="ri-information-line status-icon"></i>`;
+  }
+}
+
+
 // ===========================
 // FUNCTION LOAD ACTIVE BADGE
 // ==========================
 
-function loadActiveBadge(){
+ function loadActiveBadge(){
   const orders = 
   JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
 
@@ -1820,7 +3450,7 @@ function getOrderStats() {
   const orders = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
 
 
-  const completedStatuses = ["delivered", "completed", "success"];
+  const completedStatuses = ["delivered", "completed", "success","cancelled", "failed"];
 
 
   return {
@@ -1843,82 +3473,91 @@ function updateLiveOrderStatus(orderId, newStatus) {
 
   const orders = getStoredOrders();
 
-  const index = orders.findIndex(o => o.orderId === orderId);
-  if (index === -1) return;
-
-  const currentStatus = orders[index].status || "pending";
-  
-  if(STATUS_PRIORITY[newStatus] < STATUS_PRIORITY[currentStatus]) {
-    console.warn(`Blocked downgrade : ${currentStatus} → ${newStatus}`);
-    return;
-}
-
-// Detect first-time delivery
-const wasDelivered = currentStatus === "delivered";
-const nowDelivered = newStatus === "delivered";
-
-  orders[index] = {
-    ...orders[index],
-    status: newStatus,
-
-    updatedAt: currentStatus !== newStatus
-    ? Date.now()
-    : orders[index].updatedAt,
-
-    deliveredAt: nowDelivered 
-    ? (orders[index].deliveredAt || Date.now()) 
-    : orders[index].deliveredAt
-  };
-
-
-  localStorage.setItem(LIVE_ORDERS_KEY, JSON.stringify(orders));
-
-
-  // ONLY increment once when it becomes delivered
-  if(!wasDelivered && nowDelivered ) {
-    let completedTotal = 
-
-    parseInt(localStorage.getItem("ecoCompletedTotal")) || 0;
-
-    completedTotal++;
-
-    localStorage.setItem("ecoCompletedTotal", completedTotal);
-  }
-
-  updatePendingCard();  // correct
-
-  syncCompletedIfMismatch(); // recovery
-}
-
-
-
-function updateOrderTimestamp(orderId, newStatus) {
-
-  const orders = getStoredOrders();
-
   const index = orders.findIndex(
     o => o.orderId === orderId
   );
 
   if (index === -1) return;
 
-  // Set CreatedAt only once
-  if (!orders[index].createdAt) {
-    orders[index].createdAt = Date.now();
+  const currentStatus =
+    orders[index].status || "pending";
+
+  // Prevent status downgrade
+  if (
+    STATUS_PRIORITY[newStatus] <
+    STATUS_PRIORITY[currentStatus]
+  ) {
+    console.warn(
+      `Blocked downgrade: ${currentStatus} → ${newStatus}`
+    );
+
+    return;
   }
 
-  // Update UpdatedAt only if status changed
-  if (orders[index].status !== newStatus) {
-    orders[index].updatedAt = Date.now();
-    orders[index].status = newStatus;
-  }
+  // Detect whether this order was already completed
+  const wasDelivered =
+    currentStatus === "delivered" ||
+    currentStatus === "cancelled" ||
+    currentStatus === "failed";
+
+  // Detect whether this update completes the order
+  const nowDelivered =
+    newStatus === "delivered" ||
+    newStatus === "cancelled" ||
+    newStatus === "failed";
+
+  orders[index] = {
+    ...orders[index],
+
+    status: newStatus,
+
+    updatedAt:
+      currentStatus !== newStatus
+        ? Date.now()
+        : orders[index].updatedAt,
+
+    deliveredAt:
+      nowDelivered
+        ? (
+            orders[index].deliveredAt ||
+            Date.now()
+          )
+        : orders[index].deliveredAt
+  };
 
   localStorage.setItem(
     LIVE_ORDERS_KEY,
     JSON.stringify(orders)
   );
 
+  // ONLY increment once when the order first becomes completed
+  if (
+    !wasDelivered &&
+    nowDelivered
+  ) {
+    let completedTotal =
+      parseInt(
+        localStorage.getItem(
+          "ecoCompletedTotal"
+        )
+      ) || 0;
+
+    completedTotal++;
+
+    localStorage.setItem(
+      "ecoCompletedTotal",
+      completedTotal
+    );
+  }
+
+  updatePendingCard();
+
+  // Recovery
+  syncCompletedIfMismatch();
 }
+
+
+
 
 
 
@@ -1950,7 +3589,7 @@ function syncCompletedIfMismatch() {
   const orders =
     JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
 
-  const completedStatuses = ["delivered", "completed", "success"];
+  const completedStatuses = ["delivered", "completed", "success", "cancelled", "failed"];
 
 
 
@@ -1986,7 +3625,7 @@ const orders = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
 
 
   const deliveredCount = orders.filter(o =>
-    ["delivered", "completed", "success"].includes(
+    ["delivered", "completed", "success", "cancelled", "failed"].includes(
       o.status?.toLowerCase()
     )
   ).length;
@@ -2064,126 +3703,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-document.addEventListener("DOMContentLoaded", () => {
-  const last = localStorage.getItem("lastOrderId");
-  const orderInput = document.getElementById("orderInput");
-  const checkBtn = document.getElementById("checkBtn");
-  const statusResult = document.getElementById("statusResult");
-
-  if (!orderInput || !checkBtn || !statusResult) return;
-
-  // Prefill input only
-  if (last) orderInput.value = last;
-
-  // 🔒 Manual checker must start empty
-  statusResult.innerHTML = "";
-
-  let manualCheckTriggered = false;
-
-  checkBtn.addEventListener("click", async () => {
-    const id = orderInput.value.trim();
-    if (!id) return showSnackBar("Please enter order ID.");
-
-    manualCheckTriggered = true;
-
-    statusResult.innerHTML = `
-      <div style="padding:10px;border-radius:8px;background:#f0f0f0;">
-        🌀 Checking order <strong>${id}</strong>...
-      </div>
-    `;
-
-    try {
-      const order = await checkOrderStatusOnce(id);
-      if (!manualCheckTriggered) return;
-
-      if (!order) {
-        statusResult.innerHTML = `
-          <div style="padding:10px;background:#ffdddd;border-radius:8px;">
-            ⚠ Order not found
-          </div>
-        `;
-        return;
-      }
-
-      const status = (order.status || "pending").toLowerCase();
-      const desc = getStatusTextMapping(status);
-
-      statusResult.innerHTML = `
-        <div style="padding:15px;border-radius:10px;border:2px solid #4caf50;">
-          <h3 style="text-transform:capitalize">${status}</h3>
-          <p><strong>Order ID:</strong> ${order.orderId || order.reference}</p>
-          <p><strong>Recipient:</strong> ${order.recipient}</p>
-          <p><strong>Volume:</strong> ${order.volume} GB</p>
-          <p>${desc}</p>
-        </div>
-      `;
-    } catch (err) {
-      statusResult.innerHTML = `
-        <div style="padding:10px;background:#ffdddd;border-radius:8px;">
-          ❌ Error checking status
-        </div>
-      `;
-    }
-  });
-});
-
-
-
-// ScrollBtn 
- const scrollBtn =
-  document.querySelector(".floating-scroll");
-  const bundleSection = 
-  document.getElementById("bundles");
-
- scrollBtn.addEventListener("click", () => {
-  if ( bundleSection) {
-    bundleSection.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-  }
- });
-
- // Auto-hide after scroll
- window.addEventListener("scroll", ()=> {
-  if (window.scrollY > 80) {
-    scrollBtn.style.opacity = "0";
-    scrollBtn.style.pointerEvents = 'none';
-  } else {
-    scrollBtn.style.opacity = "1";
-    scrollBtn.style.pointerEvents = "auto";
-  }
- });
-
-
-
-
- // SHARE BTN
- const shareBtn = document.getElementById("shareBtn");
-
- shareBtn.addEventListener('click', async () =>
-{
-  const shareData = {
-    title: "EcoData",
-    text: "Check out Ecodata Website, the smartest, digital and trusted data bundle purchase website y'll love to use.",
-    url: window.location.href
-  };
-
-  // Native share
-  if (navigator.share) {
-    try {
-      await navigator.share(shareData);
-    } catch (err) {
-      console.log("Share Cancelled");
-    }
-  }
-  // FallBack (Desktop)
-  else {
-    navigator.clipboard.writeText(shareData.url).then(() => {
-      showSnackBar("Link copied! ");
-  });
-}
-});
 
 
 
@@ -2280,40 +3799,2344 @@ airtelScrollBtn.addEventListener("click", () => {
 
 
 
-// whatsApp sending message btn
- // === CONFIG ===
-  const whatsappNumber = "233535565637";
 
-  // === ELEMENTS ===
-  const chatButton = document.getElementById("chatButton");
-  const chatBox = document.getElementById("chatBox");
-  const sendBtn = document.getElementById("sendMsgBtn");
+//========================================
+// ADD ORDER TO LEADERBOARD
+//========================================
 
-  // === TOGGLE CHAT BOX ===
-  chatButton.addEventListener("click", () => {
-    chatBox.classList.toggle("show");
-  });
+function addOrderToLeaderboard(customers, order) {
 
-  // === SEND MESSAGE ===
-  sendBtn.addEventListener("click", () => {
-    const message = document.getElementById("whatsappMessage").value.trim();
-    if (!message) {
-      showSnackBar("Please type your message before sending.");
-      return;
+    const phone =
+        String(order.recipient || "").trim();
+
+    if (!phone) return;
+
+
+    //========================================
+    // CREATE CUSTOMER
+    //========================================
+
+    if (!customers[phone]) {
+
+        customers[phone] = {
+
+            phone,
+
+            totalGB: 0,
+
+            totalOrders: 0,
+
+            totalSpent: 0,
+
+            points: 0,
+
+            manualOverride: false,
+
+            manualPoints: null,
+
+            manualUpdatedAt: 0
+
+        };
+
     }
 
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappURL =` https://wa.me/${233535565637}?text=${encodedMessage}`;
-    window.open(whatsappURL, "_blank");
-    document.getElementById("whatsappMessage").value = ""; // clear after sending
+
+    const customer =
+        customers[phone];
+
+    const isAdminLeaderboard =
+    order.LD_Status === "leaderboard" ||
+    order.status === "leaderboard";
+
+
+    
+
+
+    //========================================
+    // NORMAL CUSTOMER ORDER
+    //========================================
+
+    if(!isAdminLeaderboard){
+    const gb =
+        Number(order.volume || 0);
+
+    const amount =
+        Number(order.amount || 0);
+
+
+    customer.totalGB += gb;
+
+    customer.totalOrders++;
+
+    customer.totalSpent += amount;
+
+    }
+
+    //========================================
+    // CHECK MANUAL POINTS FROM ADMIN
+    //========================================
+
+    const hasManualPoints =
+        order.manualPoints !== undefined &&
+        order.manualPoints !== null;
+
+
+    if (hasManualPoints) {
+
+        const manualValue =
+            Number(order.manualPoints);
+
+
+        //====================================
+        // MANUAL UPDATE TIME
+        //====================================
+
+        const manualTime =
+            order.manualUpdatedAt?.toDate
+                ? order.manualUpdatedAt
+                    .toDate()
+                    .getTime()
+                : new Date(
+                    order.manualUpdatedAt || 0
+                  ).getTime();
+
+
+        //====================================
+        // NEWEST MANUAL ASSIGNMENT WINS
+        //====================================
+
+        if (
+            !customer.manualOverride ||
+            manualTime >
+            customer.manualUpdatedAt
+        ) {
+
+            customer.manualOverride = true;
+
+            customer.manualPoints =
+                manualValue;
+
+            customer.manualUpdatedAt =
+                manualTime;
+
+        }
+
+    }
+
+}
+
+
+
+
+//===================
+// MONTHLY LEADERBOARD
+//====================
+function loadLeaderboard() {
+
+  const db = window.FIRESTORE;
+
+  if (!db) return;
+
+
+  //========================================
+  // NO ORDERBY
+  // NO FIRESTORE INDEX REQUIRED
+  //========================================
+
+  const q =
+    query(collection(db, "orders"));
+
+
+  onSnapshot(
+    q,
+    (snapshot) => {
+
+      //========================================
+      // CURRENT + PREVIOUS MONTH CUSTOMERS
+      //========================================
+
+     
+
+      const currentCustomers = {};
+
+      const previousCustomers = {};
+
+
+      //========================================
+      // CURRENT DATE
+      //========================================
+
+      const now = new Date();
+
+
+      //========================================
+      // PREVIOUS MONTH START
+      //========================================
+
+      const previousMonthStart =
+        new Date(
+          now.getFullYear(),
+          now.getMonth() - 1,
+          1,
+          0,
+          0,
+          0,
+          0
+        );
+
+
+      //========================================
+      // PREVIOUS MONTH END
+      //========================================
+
+      const previousMonthEnd =
+        new Date(
+          now.getFullYear(),
+          now.getMonth(),
+          0,
+          23,
+          59,
+          59,
+          999
+        );
+
+      //========================================
+      // READ ALL ORDERS ONCE
+      //========================================
+
+      snapshot.forEach(doc => {
+
+        const order = doc.data();
+
+
+        //========================================
+        // IGNORE FAILED / CANCELLED
+        //========================================
+
+        const status =
+          String(order.status || "")
+            .toLowerCase();
+
+
+        if (
+          status === "failed" ||
+          status === "cancelled"
+        ) {
+          return;
+        }
+
+        
+        const isAdminLeaderboard =
+        order.LD_Status === "leaderboard";
+        if(!isAdminLeaderboard && 
+          (order.status === "failed" ||
+            order.status === "cancelled"
+          )
+        ) { return;}
+
+
+
+
+
+        //========================================
+        // ORDER DATE
+        //========================================
+
+        const orderDate =
+          order.createdAt?.toDate
+            ? order.createdAt.toDate()
+            : new Date(order.createdAt);
+
+
+        if (
+          isNaN(orderDate.getTime())
+        ) {
+          return;
+        }
+
+
+        //========================================
+        // CUSTOMER PHONE
+        //========================================
+
+        const phone =
+          String(
+            order.recipient || ""
+          ).trim();
+
+
+        if (!phone) return;
+
+
+        //========================================
+        // PREVIOUS MONTH
+        //========================================
+
+        if (
+          orderDate >= previousMonthStart &&
+          orderDate <= previousMonthEnd
+        ) {
+
+          addOrderToLeaderboard(
+            previousCustomers,
+            order
+          );
+
+        }
+
+
+        //========================================
+        // CURRENT GIVEAWAY
+        //========================================
+
+        if (
+          orderDate >= LEADERBOARD_START &&
+          orderDate <= LEADERBOARD_ENDS
+        ) {
+
+          addOrderToLeaderboard(
+            currentCustomers,
+            order
+          );
+
+        }
+
+      });
+
+
+      finalizeLeaderboardPoints(currentCustomers);
+
+      finalizeLeaderboardPoints(previousCustomers);
+
+      //========================================
+      // SORT CURRENT MONTH
+      //========================================
+
+      const currentLeaders =
+        Object.values(currentCustomers)
+          .sort(sortLeaderboard)
+          .slice(0, 9);
+
+
+      //========================================
+      // SORT PREVIOUS MONTH
+      //========================================
+
+      const previousWinners =
+        Object.values(previousCustomers)
+          .sort(sortLeaderboard)
+          .slice(0, 3);
+
+
+      //========================================
+      // UPDATE NORMAL LEADERBOARD
+      //========================================
+
+      renderLeaderboard(
+        currentLeaders
+      );
+
+
+      //========================================
+      // UPDATE CELEBRATION
+      // WITH LAST MONTH'S TOP 3
+      //========================================
+
+      updateWinnerCelebration(
+        previousWinners
+      );
+
+
+      //========================================
+      // DEBUG
+      //========================================
+
+      console.log(
+        "🏆 Current Month Leaders:",
+        currentLeaders
+      );
+
+
+      console.log(
+        "🎉 Previous Month Winners:",
+        previousWinners
+      );
+
+    },
+
+
+    (error) => {
+
+      console.error(
+        "Leaderboard listener error:",
+        error
+      );
+
+    }
+
+  );
+
+}
+
+
+
+//=========================
+// FINALIZE POINTS
+//=========================
+function finalizeLeaderboardPoints(customers){
+
+Object.values(customers).forEach(customer => {
+if (customer.manualOverride){
+// Admin-assigned points
+customer.points =
+customer.manualPoints;
+
+} else{
+// Normal calculation
+// 1GB = 6 POINTS
+customer.points =
+customer.totalGB * 6;
+}
+
+
+});
+}
+
+//========================================
+// SORT LEADERBOARD
+//========================================
+
+function sortLeaderboard(a, b) {
+
+  // Highest points first
+
+  if (
+    b.points !== a.points
+  ) {
+
+    return (
+      b.points -
+      a.points
+    );
+
+  }
+
+
+  // Tie breaker:
+  // Highest GB first
+
+  return (
+    b.totalGB -
+    a.totalGB
+  );
+
+}
+
+
+
+//===========================
+// RENDER LEADERS
+//===========================
+function renderLeaderboard(leaders) {
+
+  //========================================
+  // CLEAR ALL 5 POSITIONS
+  // UPDATE EVERY SWIPER CLONE TOO
+  //========================================
+  for (let i = 1; i <= 9; i++) {
+
+    document
+      .querySelectorAll(`#leaderPhone${i}`)
+      .forEach(el => {
+        el.textContent = "---";
+      });
+
+    document
+      .querySelectorAll(`#leaderPoints${i}`)
+      .forEach(el => {
+        el.textContent = "0 points";
+      });
+
+    document
+      .querySelectorAll(`#leaderStars${i}`)
+      .forEach(el => {
+        el.innerHTML = "";
+      });
+
+  }
+
+
+  //========================================
+  // RENDER CURRENT LEADERS
+  //========================================
+  leaders.forEach((leader, index) => {
+
+    const i = index + 1;
+
+
+    //======================================
+    // UPDATE ALL CLONES
+    //======================================
+    document
+      .querySelectorAll(`#leaderPhone${i}`)
+      .forEach(el => {
+
+        el.textContent =
+          maskPhone(leader.phone);
+
+      });
+
+
+    document
+      .querySelectorAll(`#leaderPoints${i}`)
+      .forEach(el => {
+
+        el.textContent =
+          Number(leader.points || 0) +
+          " points";
+
+      });
+
+
+    document
+      .querySelectorAll(`#leaderStars${i}`)
+      .forEach(el => {
+
+        el.innerHTML =
+          getStars(i);
+
+      });
+
+  });
+
+}
+
+
+//=================
+// HIDE PHONE
+//=================
+function maskPhone(phone){
+
+    if(!phone) return "Unknown";
+
+    return phone.substring(0,5) + "***" + phone.substring(8);
+
+}
+
+
+//==============
+// GET STARS
+//==============
+function getStars(rank){
+
+    let stars="";
+
+    for(let i=0;i<6-rank;i++){
+
+        stars += `<i class="ri-star-fill"></i>`;
+
+    }
+
+    return stars;
+
+}
+
+
+loadLeaderboard();
+resetGiveAwayHtml();
+
+// RESET GIVEAWAY TIMER HTML
+function resetGiveAwayHtml(){
+  //TIME
+const defaultHtml = document.getElementById("leaderboardStartText");
+
+const leaderboardResetText = document.getElementById("leaderboardResetText");
+
+
+
+if(!defaultHtml) return;
+
+
+const now = new
+Date();
+
+
+// Competition has ended
+if(now >= LEADERBOARD_ENDS){
+
+  defaultHtml.textContent = 
+  `Free GB GIVEAWAY: ${leaderboardStartText} - ${endTimeText} ends.`
+} else {
+  defaultHtml.textContent =
+  `Free GB GIVEAWAY: ${leaderboardStartText} - ${endTimeText}`
+}
+
+return;
+}
+
+
+
+//========================================
+// AUTOMATIC CELEBRATION CHECK
+//========================================
+
+
+
+
+
+//========================================
+// UPDATE CELEBRATION WINNERS
+//========================================
+
+//========================================
+// UPDATE WINNER CELEBRATION
+// LAST MONTH'S TOP 3
+//========================================
+
+function updateWinnerCelebration(winners) {
+
+  if (!Array.isArray(winners)) {
+    return;
+  }
+
+
+  //========================================
+  // TOP 3 ONLY
+  //========================================
+
+  const topThree =
+    winners.slice(0, 3);
+
+
+  for (
+    let i = 1;
+    i <= 3;
+    i++
+  ) {
+
+    const winner =
+      topThree[i - 1];
+
+
+    const phoneElement =
+      document.getElementById(
+        `celebrationWinner${i}`
+      );
+
+
+    const pointsElement =
+      document.getElementById(
+        `celebrationPoints${i}`
+      );
+
+
+    //======================================
+    // NO WINNER
+    //======================================
+
+    if (!winner) {
+
+      if (phoneElement) {
+        phoneElement.textContent = "---";
+      }
+
+      if (pointsElement) {
+        pointsElement.textContent = "---";
+      }
+
+      continue;
+    }
+
+
+    //======================================
+    // PHONE
+    //======================================
+
+    if (phoneElement) {
+
+      phoneElement.textContent =
+        maskPhone(
+          winner.phone
+        );
+
+    }
+
+
+    //======================================
+    // POINTS
+    //======================================
+
+    if (pointsElement) {
+
+      pointsElement.textContent =
+        Number(
+          winner.points || 0
+        ) + " points";
+
+    }
+
+  }
+
+
+  console.log(
+    "🎉 Celebration Top 3:",
+    topThree
+  );
+
+}
+
+
+
+
+//========================================
+// ACTUAL GIVEAWAY DATES
+//========================================
+
+const GIVEAWAY_END_DATE =
+    new Date("2026-10-31T23:59:59");
+
+const CELEBRATION_START =
+    new Date("2026-11-01T00:00:00");
+
+const CELEBRATION_END =
+    new Date("2026-11-01T23:59:59");
+
+
+//========================================
+// GIVEAWAY CELEBRATION DATE
+//========================================
+
+let celebrationDismissed = false;
+
+document.addEventListener("DOMContentLoaded", ()=> {
+ //========================================
+// WINNER CELEBRATION SYSTEM
+//========================================
+
+const winnerCelebration =
+    document.getElementById(
+        "winnerCelebration"
+    );
+
+const fireworksCanvas =
+    document.getElementById(
+        "fireworksCanvas"
+    );
+
+const confettiCanvas =
+    document.getElementById(
+        "confettiCanvas"
+    );
+
+const winnerCloseBtn =
+    document.getElementById(
+        "winnerCloseBtn"
+    );
+
+
+const fireworksCtx =
+    fireworksCanvas.getContext("2d");
+
+const confettiCtx =
+    confettiCanvas.getContext("2d");
+
+
+//========================================
+// CANVAS SIZE
+//========================================
+
+function resizeCelebrationCanvas() {
+
+    fireworksCanvas.width =
+        window.innerWidth;
+
+    fireworksCanvas.height =
+        window.innerHeight;
+
+
+    confettiCanvas.width =
+        window.innerWidth;
+
+    confettiCanvas.height =
+        window.innerHeight;
+
+}
+
+
+resizeCelebrationCanvas();
+
+
+window.addEventListener(
+    "resize",
+    resizeCelebrationCanvas
+);
+
+
+//========================================
+// FIREWORK PARTICLES
+//========================================
+
+let fireworks = [];
+
+let fireworkRockets = [];
+
+
+function createFirework(
+    x,
+    y
+) {
+
+    const particleCount =
+        70 + Math.floor(
+            Math.random() * 50
+        );
+
+
+    for (
+        let i = 0;
+        i < particleCount;
+        i++
+    ) {
+
+        const angle =
+            Math.random() *
+            Math.PI *
+            2;
+
+
+        const speed =
+            2 +
+            Math.random() * 5;
+
+
+        fireworks.push({
+
+            x,
+            y,
+
+            vx:
+                Math.cos(angle) *
+                speed,
+
+            vy:
+                Math.sin(angle) *
+                speed,
+
+            life:
+                1,
+
+            decay:
+                .012 +
+                Math.random() * .018,
+
+            size:
+                1 +
+                Math.random() * 2.5,
+
+            hue:
+                Math.floor(
+                    Math.random() * 360
+                )
+
+        });
+
+    }
+
+}
+
+
+//========================================
+// FIREWORK ROCKET
+//========================================
+
+function launchFirework() {
+
+    fireworkRockets.push({
+
+        x:
+            Math.random() *
+            fireworksCanvas.width,
+
+        y:
+            fireworksCanvas.height,
+
+        targetY:
+            100 +
+            Math.random() *
+            (
+                fireworksCanvas.height *
+                .45
+            ),
+
+        speed:
+            7 +
+            Math.random() * 4
+
+    });
+
+}
+
+
+//========================================
+// UPDATE FIREWORKS
+//========================================
+
+function updateFireworks() {
+
+    fireworksCtx.clearRect(
+        0,
+        0,
+        fireworksCanvas.width,
+        fireworksCanvas.height
+    );
+
+
+    //=============================
+    // ROCKETS
+    //=============================
+
+    for (
+        let i =
+            fireworkRockets.length - 1;
+
+        i >= 0;
+
+        i--
+    ) {
+
+        const rocket =
+            fireworkRockets[i];
+
+
+        rocket.y -=
+            rocket.speed;
+
+
+        // Rocket glow
+
+        fireworksCtx.beginPath();
+
+        fireworksCtx.arc(
+            rocket.x,
+            rocket.y,
+            3,
+            0,
+            Math.PI * 2
+        );
+
+        fireworksCtx.fillStyle =
+            "#ffffff";
+
+        fireworksCtx.shadowBlur =
+            15;
+
+        fireworksCtx.shadowColor =
+            "#ffffff";
+
+        fireworksCtx.fill();
+
+        fireworksCtx.shadowBlur = 0;
+
+
+        // Explosion
+
+        if (
+            rocket.y <=
+            rocket.targetY
+        ) {
+
+            createFirework(
+                rocket.x,
+                rocket.y
+            );
+
+            fireworkRockets.splice(
+                i,
+                1
+            );
+
+        }
+
+    }
+
+
+    //=============================
+    // PARTICLES
+    //=============================
+
+    for (
+        let i =
+            fireworks.length - 1;
+
+        i >= 0;
+
+        i--
+    ) {
+
+        const particle =
+            fireworks[i];
+
+
+        particle.x +=
+            particle.vx;
+
+        particle.y +=
+            particle.vy;
+
+
+        // Gravity
+
+        particle.vy +=
+            .045;
+
+
+        particle.vx *=
+            .985;
+
+
+        particle.life -=
+            particle.decay;
+
+
+        if (
+            particle.life <= 0
+        ) {
+
+            fireworks.splice(
+                i,
+                1
+            );
+
+            continue;
+
+        }
+
+
+        fireworksCtx.beginPath();
+
+
+        fireworksCtx.arc(
+            particle.x,
+            particle.y,
+            particle.size,
+            0,
+            Math.PI * 2
+        );
+
+
+        fireworksCtx.fillStyle =
+            `hsla(
+                ${particle.hue},
+                100%,
+                65%,
+                ${particle.life}
+            )`;
+
+
+        fireworksCtx.shadowBlur =
+            12;
+
+        fireworksCtx.shadowColor =
+            `hsl(
+                ${particle.hue},
+                100%,
+                60%
+            )`;
+
+
+        fireworksCtx.fill();
+
+        fireworksCtx.shadowBlur =
+            0;
+
+    }
+
+}
+
+
+//========================================
+// CONFETTI
+//========================================
+
+let confetti = [];
+
+
+function createConfetti() {
+
+    confetti = [];
+
+
+    const amount =
+        Math.min(
+            180,
+            Math.floor(
+                window.innerWidth / 5
+            )
+        );
+
+
+    for (
+        let i = 0;
+        i < amount;
+        i++
+    ) {
+
+        confetti.push({
+
+            x:
+                Math.random() *
+                confettiCanvas.width,
+
+            y:
+                -Math.random() *
+                confettiCanvas.height,
+
+            width:
+                5 +
+                Math.random() * 7,
+
+            height:
+                8 +
+                Math.random() * 12,
+
+            speed:
+                1 +
+                Math.random() * 3,
+
+            rotation:
+                Math.random() *
+                Math.PI *
+                2,
+
+            rotationSpeed:
+                -.08 +
+                Math.random() *
+                .16,
+
+            drift:
+                -.5 +
+                Math.random(),
+
+            hue:
+                Math.floor(
+                    Math.random() * 360
+                )
+
+        });
+
+    }
+
+}
+
+
+//========================================
+// UPDATE CONFETTI
+//========================================
+
+function updateConfetti() {
+
+    confettiCtx.clearRect(
+        0,
+        0,
+        confettiCanvas.width,
+        confettiCanvas.height
+    );
+
+
+    confetti.forEach(
+        piece => {
+
+            piece.y +=
+                piece.speed;
+
+            piece.x +=
+                Math.sin(
+                    piece.y * .02
+                ) *
+                piece.drift;
+
+            piece.rotation +=
+                piece.rotationSpeed;
+
+
+            if (
+                piece.y >
+                confettiCanvas.height
+            ) {
+
+                piece.y = -20;
+
+                piece.x =
+                    Math.random() *
+                    confettiCanvas.width;
+
+            }
+
+
+            confettiCtx.save();
+
+
+            confettiCtx.translate(
+                piece.x,
+                piece.y
+            );
+
+
+            confettiCtx.rotate(
+                piece.rotation
+            );
+
+
+            confettiCtx.fillStyle =
+                `hsl(
+                    ${piece.hue},
+                    90%,
+                    55%
+                )`;
+
+
+            confettiCtx.fillRect(
+                -piece.width / 2,
+                -piece.height / 2,
+                piece.width,
+                piece.height
+            );
+
+
+            confettiCtx.restore();
+
+        }
+    );
+
+}
+
+//========================================
+// ANIMATION LOOP
+//========================================
+
+let celebrationAnimation;
+
+
+function celebrationLoop() {
+
+    updateFireworks();
+
+    updateConfetti();
+
+    celebrationAnimation =
+        requestAnimationFrame(
+            celebrationLoop
+        );
+
+}
+
+
+
+
+
+//========================================
+// START CELEBRATION
+//========================================
+
+function startWinnerCelebration() {
+
+    if (!winnerCelebration) {
+        return;
+    }
+
+
+    // User already closed it
+    if (celebrationDismissed) {
+        return;
+    }
+
+
+    // Already running
+    if (
+        winnerCelebration.classList.contains(
+            "active"
+        )
+    ) {
+        return;
+    }
+
+
+    //========================================
+    // SHOW WHOLE CONTAINER
+    //========================================
+
+    winnerCelebration.style.display =
+        "flex";
+
+
+    winnerCelebration.classList.add(
+        "active"
+    );
+
+
+    //========================================
+    // RESET ANIMATION
+    //========================================
+
+    fireworks = [];
+
+    fireworkRockets = [];
+
+    createConfetti();
+
+
+    cancelAnimationFrame(
+        celebrationAnimation
+    );
+
+
+    celebrationLoop();
+
+
+    //========================================
+    // FIRST FIREWORK
+    //========================================
+
+    launchFirework();
+
+
+    //========================================
+    // FIREWORK INTERVAL
+    //========================================
+
+    clearInterval(
+        fireworkInterval
+    );
+
+
+    fireworkInterval =
+        setInterval(() => {
+
+            if (
+                !winnerCelebration.classList.contains(
+                    "active"
+                )
+            ) {
+
+                clearInterval(
+                    fireworkInterval
+                );
+
+                fireworkInterval = null;
+
+                return;
+            }
+
+
+            launchFirework();
+
+
+            // Sometimes launch two
+
+            if (
+                Math.random() > 0.55
+            ) {
+
+                setTimeout(
+                    launchFirework,
+                    250
+                );
+
+            }
+
+        }, 700);
+
+}
+
+
+//========================================
+// CLOSE CELEBRATION
+// USER CAN PURCHASE DATA
+//========================================
+
+function closeWinnerCelebration() {
+
+    // Prevent automatic reopening
+    celebrationDismissed = true;
+
+
+    //========================================
+    // HIDE WHOLE CONTAINER
+    //========================================
+
+    winnerCelebration.style.display =
+        "none";
+
+
+    winnerCelebration.classList.remove(
+        "active"
+    );
+
+
+    //========================================
+    // STOP FIREWORKS
+    //========================================
+
+    clearInterval(
+        fireworkInterval
+    );
+
+    fireworkInterval = null;
+
+
+    //========================================
+    // STOP ANIMATION
+    //========================================
+
+    cancelAnimationFrame(
+        celebrationAnimation
+    );
+
+
+    //========================================
+    // CLEAR PARTICLES
+    //========================================
+
+    fireworks = [];
+
+    fireworkRockets = [];
+
+    confetti = [];
+
+
+    //========================================
+    // CLEAR CANVASES
+    //========================================
+
+    fireworksCtx.clearRect(
+        0,
+        0,
+        fireworksCanvas.width,
+        fireworksCanvas.height
+    );
+
+
+    confettiCtx.clearRect(
+        0,
+        0,
+        confettiCanvas.width,
+        confettiCanvas.height
+    );
+
+}
+
+
+if (winnerCloseBtn) {
+
+    winnerCloseBtn.addEventListener(
+        "click",
+        closeWinnerCelebration
+    );
+
+}
+
+
+//========================================
+// STOP CELEBRATION
+//========================================
+
+function stopWinnerCelebration() {
+
+    if (!winnerCelebration) {
+        return;
+    }
+
+
+    //========================================
+    // HIDE WHOLE CONTAINER
+    //========================================
+
+    winnerCelebration.style.display =
+        "none";
+
+
+    winnerCelebration.classList.remove(
+        "active"
+    );
+
+
+    //========================================
+    // STOP FIREWORKS
+    //========================================
+
+    clearInterval(
+        fireworkInterval
+    );
+
+    fireworkInterval = null;
+
+
+    //========================================
+    // STOP ANIMATION
+    //========================================
+
+    cancelAnimationFrame(
+        celebrationAnimation
+    );
+
+
+    //========================================
+    // CLEAR PARTICLES
+    //========================================
+
+    fireworks = [];
+
+    fireworkRockets = [];
+
+    confetti = [];
+
+
+    //========================================
+    // CLEAR CANVASES
+    //========================================
+
+    fireworksCtx.clearRect(
+        0,
+        0,
+        fireworksCanvas.width,
+        fireworksCanvas.height
+    );
+
+
+    confettiCtx.clearRect(
+        0,
+        0,
+        confettiCanvas.width,
+        confettiCanvas.height
+    );
+
+}
+
+
+//========================================
+// CHECK CELEBRATION TIME
+//========================================
+
+function checkGiveawayCelebration() {
+
+    const now =
+        new Date();
+
+
+    if (
+        now >= CELEBRATION_START &&
+        now <= CELEBRATION_END
+    ) {
+
+        startWinnerCelebration();
+
+    }
+    else {
+
+        stopWinnerCelebration();
+
+    }
+
+}
+
+
+//========================================
+// INITIAL CHECK
+//========================================
+
+checkGiveawayCelebration();
+
+
+//========================================
+// CHECK EVERY SECOND
+//========================================
+
+setInterval(
+    checkGiveawayCelebration,
+    1000
+);
+
+
 });
 
-// window click event (chatBox)
-window.addEventListener("click", function(e){
-  e.stopPropagation();
-  if(!chatBox.contains(e.target) && !chatButton.contains(e.target)){
-    chatBox.style.display = "none";
-  } else{
-    chatBox.style.display = "flex";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ============================================================
+// LIVE ORDER STATUS SEARCH
+// ============================================================
+
+const LIVE_ORDER_STORAGE_KEY = "ecoDataLiveOrders";
+
+const OrderSearchInput =
+  document.getElementById("OrderSearchInput");
+
+const searchStatBtn =
+  document.getElementById("searchStatBtn");
+
+const liveOrderResult =
+  document.getElementById("liveOrderResult");
+
+const emptyDataState = document.getElementById("emptyDataState");
+
+
+// ============================================================
+// LOAD SAVED ORDERS
+// ============================================================
+
+let liveOrders = loadCheckedLiveOrders();
+
+
+// ============================================================
+// LOCAL STORAGE
+// ============================================================
+
+function loadCheckedLiveOrders() {
+  try {
+
+    const saved =
+      localStorage.getItem(LIVE_ORDER_STORAGE_KEY);
+
+    if (!saved) {
+      return [];
+    }
+
+    const parsed = JSON.parse(saved);
+
+    return Array.isArray(parsed)
+      ? parsed
+      : [];
+
+  } catch (error) {
+
+    console.error(
+      "Failed to load live orders:",
+      error
+    );
+
+    return [];
   }
-});
+}
+
+
+function saveLiveOrders() {
+
+  try {
+
+    localStorage.setItem(
+      LIVE_ORDER_STORAGE_KEY,
+      JSON.stringify(liveOrders)
+    );
+
+  } catch (error) {
+
+    console.error(
+      "Failed to save live orders:",
+      error
+    );
+
+  }
+}
+
+
+// ============================================================
+// SEARCH ORDER
+// ============================================================
+
+async function searchLiveOrder() {
+
+  const orderIdOrRef =
+    OrderSearchInput.value.trim();
+
+
+  if (!orderIdOrRef) {
+
+    showLiveOrderMessage(
+      "Enter an Order ID to search.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  // Prevent duplicate searches while loading
+  searchStatBtn.disabled = true;
+
+  searchStatBtn.textContent = "Searching...";
+
+
+  showLiveOrderMessage(
+    "Checking live order status...",
+    "loading"
+  );
+
+
+  try {
+
+    // --------------------------------------------------------
+    // CALL YOUR NEW ROUTER
+    // --------------------------------------------------------
+
+    const response = await fetch(
+      `/api/live-order-status/${encodeURIComponent(orderIdOrRef)}`
+    );
+
+
+    const returnedOrder =
+      await response.json();
+
+
+    // --------------------------------------------------------
+    // CHECK RESPONSE
+    // --------------------------------------------------------
+
+    if (
+      !response.ok ||
+      !returnedOrder.success ||
+      !returnedOrder.order
+    ) {
+
+      throw new Error(
+        returnedOrder.message ||
+        "Order not found."
+      );
+    }
+
+
+    const order =
+      returnedOrder.order;
+
+
+    // --------------------------------------------------------
+    // CHECK IF ORDER ALREADY EXISTS
+    // --------------------------------------------------------
+
+    const existingIndex =
+      liveOrders.findIndex(
+        item =>
+          item.orderId === order.orderId
+      );
+
+
+    if (existingIndex !== -1) {
+
+      // ------------------------------------------------------
+      // UPDATE EXISTING ORDER
+      // ------------------------------------------------------
+
+      liveOrders[existingIndex] = {
+        ...liveOrders[existingIndex],
+
+        recipient:
+          order.recipient ||
+          liveOrders[existingIndex].recipient,
+
+        size:
+          order.size ??
+          liveOrders[existingIndex].size,
+
+        status:
+          order.status ||
+          liveOrders[existingIndex].status,
+
+        timestamp:
+          order.timestamp ||
+          liveOrders[existingIndex].timestamp
+      };
+
+    } else {
+
+      // ------------------------------------------------------
+      // CREATE NEW ORDER
+      // ------------------------------------------------------
+
+      liveOrders.push({
+
+        orderId:
+          order.orderId,
+
+        recipient:
+          order.recipient || "—",
+
+        size:
+          order.size ?? "—",
+
+        status:
+          order.status || "unknown",
+
+        timestamp:
+          order.timestamp || null
+
+      });
+
+    }
+
+
+    // --------------------------------------------------------
+    // SAVE TO LOCAL STORAGE
+    // --------------------------------------------------------
+
+    saveLiveOrders();
+
+
+    // --------------------------------------------------------
+    // RENDER TABLE
+    // --------------------------------------------------------
+
+    renderLiveOrders();
+
+    // play success sound
+    playSuccessSound();
+
+
+    // Clear search field
+    OrderSearchInput.value = "";
+
+
+  } catch (error) {
+
+    console.error(
+      "Live order search error:",
+      error
+    );
+
+
+    showLiveOrderMessage(
+      error.message ||
+      "Unable to retrieve order status.",
+      "error"
+    );
+
+
+  } finally {
+
+    searchStatBtn.disabled = false;
+
+    searchStatBtn.textContent = "Search";
+
+  }
+
+}
+
+
+// ============================================================
+// RENDER ALL SAVED ORDERS
+// ============================================================
+
+function renderLiveOrders() {
+
+  // Clear current rows
+  liveOrderResult.innerHTML = "";
+
+
+  // ----------------------------------------------------------
+  // NO ORDERS
+  // ----------------------------------------------------------
+
+  if (!liveOrders.length) {
+
+    liveOrderResult.innerHTML = `
+      <div class="sellerProductsEmpty">
+        No live orders searched yet.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  // ----------------------------------------------------------
+  // CREATE ROW FOR EACH ORDER
+  // ----------------------------------------------------------
+
+  [...liveOrders]
+  .reverse()
+  .forEach(order => {
+
+    const row =
+      document.createElement("div");
+
+    row.className = "live-row";
+
+    row.dataset.orderId =
+      order.orderId;
+
+
+    row.innerHTML = `
+
+      <span class="live-order-cell order-id-cell">
+        ${escapeLiveOrderHTML(order.orderId)}
+      </span>
+
+      <span class="live-order-cell recipient-cell">
+        ${escapeLiveOrderHTML(order.recipient)}
+      </span>
+
+      <span class="live-order-cell size-cell">
+        ${escapeLiveOrderHTML(order.size)}
+      </span>
+
+      <span class="live-order-cell status-cell">
+
+        <span
+          class="live-status-pill ${getLiveStatusClass(order.status)}"
+        >
+
+          <span class="live-status-dot"></span>
+
+          ${escapeLiveOrderHTML(
+            formatLiveStatus(order.status)
+          )}
+
+        </span>
+
+      </span>
+
+      <span class="live-order-cell date-cell">
+        ${formatLiveOrderDate(order.timestamp)}
+      </span>
+
+    `;
+
+
+    liveOrderResult.appendChild(row);
+
+  });
+
+}
+
+
+// ============================================================
+// POLL SWIFT FOR LIVE STATUS
+// ============================================================
+
+async function refreshLiveOrderStatuses() {
+
+  if (!liveOrders.length) {
+    return;
+  }
+
+
+  // ----------------------------------------------------------
+  // CHECK EVERY SAVED ORDER
+  // ----------------------------------------------------------
+
+  for (const order of liveOrders) {
+
+    try {
+
+      const response = await fetch(
+        `/api/live-order-status/${encodeURIComponent(order.orderId)}`
+      );
+
+
+      const returnedOrder =
+        await response.json();
+
+
+      if (
+        !response.ok ||
+        !returnedOrder.success ||
+        !returnedOrder.order
+      ) {
+
+        continue;
+      }
+
+
+      const freshOrder =
+        returnedOrder.order;
+
+
+      // ------------------------------------------------------
+      // FIND STORED ORDER
+      // ------------------------------------------------------
+
+      const index =
+        liveOrders.findIndex(
+          item =>
+            item.orderId === order.orderId
+        );
+
+
+      if (index === -1) {
+        continue;
+      }
+
+
+      // ------------------------------------------------------
+      // UPDATE LIVE STATUS
+      // ------------------------------------------------------
+
+      liveOrders[index].status =
+        freshOrder.status ||
+        liveOrders[index].status;
+
+
+      // ------------------------------------------------------
+      // Keep latest timestamp if Swift provides it
+      // ------------------------------------------------------
+
+      if (freshOrder.timestamp) {
+
+        liveOrders[index].timestamp =
+          freshOrder.timestamp;
+
+      }
+
+
+      // Recipient can also be refreshed
+      if (freshOrder.recipient) {
+
+        liveOrders[index].recipient =
+          freshOrder.recipient;
+
+      }
+
+
+      // Size can also be refreshed
+      if (freshOrder.size !== undefined) {
+
+        liveOrders[index].size =
+          freshOrder.size;
+
+      }
+
+
+      // ------------------------------------------------------
+      // UPDATE ONLY THE ROW
+      // ------------------------------------------------------
+
+      updateLiveOrderRow(
+        liveOrders[index]
+      );
+
+
+    } catch (error) {
+
+      console.error(
+        `Failed to refresh ${order.orderId}:`,
+        error
+      );
+
+    }
+
+  }
+
+
+  // Save latest statuses
+  saveLiveOrders();
+
+}
+
+
+// ============================================================
+// UPDATE ONE ROW WITHOUT REBUILDING THE TABLE
+// ============================================================
+
+function updateLiveOrderRow(order) {
+
+  const row =
+    liveOrderResult.querySelector(
+      `.live-row[data-order-id="${CSS.escape(order.orderId)}"]`
+    );
+
+
+  if (!row) {
+    return;
+  }
+
+
+  const statusCell =
+    row.querySelector(".status-cell");
+
+
+  if (statusCell) {
+
+    statusCell.innerHTML = `
+
+      <span
+        class="live-status-pill ${getLiveStatusClass(order.status)}"
+      >
+
+        <span class="live-status-dot"></span>
+
+        ${escapeLiveOrderHTML(
+          formatLiveStatus(order.status)
+        )}
+
+      </span>
+
+    `;
+
+  }
+
+
+  // Update recipient if changed
+  const recipientCell =
+    row.querySelector(".recipient-cell");
+
+  if (recipientCell) {
+
+    recipientCell.textContent =
+      order.recipient || "—";
+
+  }
+
+
+  // Update size if changed
+  const sizeCell =
+    row.querySelector(".size-cell");
+
+  if (sizeCell) {
+
+    sizeCell.textContent =
+      order.size ?? "—";
+
+  }
+
+
+  // Update timestamp
+  const dateCell =
+    row.querySelector(".date-cell");
+
+  if (dateCell) {
+
+    dateCell.textContent =
+      formatLiveOrderDate(order.timestamp);
+
+  }
+
+}
+
+
+// ============================================================
+// STATUS CLASS
+// ============================================================
+
+function getLiveStatusClass(status) {
+
+  const normalized =
+    String(status || "")
+      .toLowerCase()
+      .trim();
+
+
+  if (
+    normalized === "delivered" ||
+    normalized === "completed" ||
+    normalized === "success" ||
+    normalized === "successful"
+  ) {
+
+    return "status-delivered";
+
+  }
+
+
+  if (
+    normalized === "pending" ||
+    normalized === "processing" ||
+    normalized === "in-progress"
+  ) {
+
+    return "status-pending";
+
+  }
+
+
+  if (
+    normalized === "failed" ||
+    normalized === "cancelled" ||
+    normalized === "canceled"
+  ) {
+
+    return "status-failed";
+
+  }
+
+
+  return "status-unknown";
+
+}
+
+
+// ============================================================
+// FORMAT STATUS
+// ============================================================
+
+function formatLiveStatus(status) {
+
+  if (!status) {
+    return "Unknown";
+  }
+
+
+  const value =
+    String(status)
+      .toLowerCase()
+      .trim();
+
+
+  return value.charAt(0).toUpperCase() +
+         value.slice(1);
+
+}
+
+
+// ============================================================
+// FORMAT DATE
+// ============================================================
+
+function formatLiveOrderDate(timestamp) {
+
+  if (!timestamp) {
+    return "—";
+  }
+
+
+  const date =
+    new Date(timestamp);
+
+
+  if (Number.isNaN(date.getTime())) {
+    return "—";
+  }
+
+
+  return date.toLocaleString(
+    undefined,
+    {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit"
+    }
+  );
+
+}
+
+
+// ============================================================
+// ESCAPE HTML
+// ============================================================
+
+function escapeLiveOrderHTML(value) {
+
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+
+
+// ============================================================
+// MESSAGE
+// ============================================================
+
+function showLiveOrderMessage(
+  message,
+  type = "error"
+) {
+
+  liveOrderResult.innerHTML = `
+
+    <div class="liveOrderMessage ${type}">
+      ${escapeLiveOrderHTML(message)}
+    </div>
+
+  `;
+
+}
+
+
+// ============================================================
+// SEARCH BUTTON
+// ============================================================
+
+if (searchStatBtn) {
+
+  searchStatBtn.addEventListener(
+    "click",
+    searchLiveOrder
+  );
+
+}
+
+
+// ============================================================
+// ENTER KEY SEARCH
+// ============================================================
+
+if (OrderSearchInput) {
+
+  OrderSearchInput.addEventListener(
+    "keydown",
+    event => {
+
+      if (event.key === "Enter") {
+
+        event.preventDefault();
+
+        searchLiveOrder();
+
+      }
+
+    }
+  );
+
+}
+
+
+// ============================================================
+// INITIAL TABLE LOAD
+// ============================================================
+
+renderLiveOrders();
+
+
+// ============================================================
+// LIVE STATUS POLLING — EVERY 30 SECONDS
+// check active orders every 30 seconds
+// NEVER RUNS A NEW CYCLE WHILE THE PREVIOUS
+// ON IS RUNNING
+// ============================================================
+async function startLiveOrderVendorPolling() {
+  while(true){
+    try {
+      await refreshLiveOrderStatuses();
+
+    } catch(error){
+      console.log("Live order polling error:", error
+      );
+    }
+
+    // wait 30 seconds AFTER the current polling cycle finishes
+    await new Promise(resolve => {
+      setTimeout(resolve, 40000);
+    }
+  );
+  }
+}
+
+document.addEventListener("DOMContentLoaded",()=> {
+  // start polling
+  startLiveOrderVendorPolling();
+})
