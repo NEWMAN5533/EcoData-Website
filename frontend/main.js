@@ -2559,7 +2559,9 @@ function saveLiveOrder(order) {
 // ends
 
 
+// =========================
 // RENDER LIVE ORDER ROW
+// =========================
 function renderLiveOrderRow(order) {
   if (!order || !order.orderId) {
     console.error("Cannot render live order: missing orderId.", order);
@@ -2567,45 +2569,71 @@ function renderLiveOrderRow(order) {
   }
 
   const tableBody = document.getElementById("liveOrderRows");
+  if (!tableBody) return;
 
-  if (!tableBody) {
-    console.warn(
-      "Live orders table #liveOrderRows is not present on this page."
-    );
-    return;
-  }
-
+  // =========================
+  // NORMALIZE ORDER
+  // =========================
   const normalized = {
     ...order,
     orderId: String(order.orderId),
-    provider: String(order.provider || "swiftdata").toLowerCase()
+    provider: String(order.provider || "swiftdata").toLowerCase(),
+    recipient: order.recipient || "-",
+    volume: order.volume ?? 0,
+    status: order.status || "processing"
   };
 
+  // =========================
+  // REMOVE EMPTY PLACEHOLDER
+  // =========================
   const empty = tableBody.querySelector(".empty-state");
   if (empty) empty.remove();
 
-  const formatDate = value => {
+  // =========================
+  // FORMAT DATE
+  // =========================
+  function formatOrderDate(value) {
     if (!value) return "N/A";
 
-    const date = new Date(value);
+    const d = new Date(value);
 
-    if (Number.isNaN(date.getTime())) return "N/A";
+    if (Number.isNaN(d.getTime())) return "N/A";
 
-    const datePart = date.toLocaleDateString("en-US", {
+    const datePart = d.toLocaleDateString("en-US", {
       month: "short",
       day: "2-digit",
       year: "numeric"
     });
 
-    const timePart = date.toLocaleTimeString("en-US", {
+    const timePart = d.toLocaleTimeString("en-US", {
       hour: "numeric",
       minute: "2-digit",
       hour12: true
     }).toUpperCase();
 
     return `${datePart} ${timePart}`;
-  };
+  }
 
+  // Structure created date
+  const date = formatOrderDate(
+    normalized.createdAt || normalized.timestamp
+  );
+
+  // Structure updated date
+  const update = formatOrderDate(normalized.updatedAt);
+
+  // =========================
+  // DEBUG LOGS
+  // =========================
+  console.log("Live order:", normalized);
+  console.log("createdAt:", normalized.createdAt);
+  console.log("updatedAt:", normalized.updatedAt);
+  console.log("timestamp:", normalized.timestamp);
+
+  // =========================
+  // FIND EXISTING ROW
+  // Match order ID + provider
+  // =========================
   let row = Array.from(
     tableBody.querySelectorAll(".live-row")
   ).find(item =>
@@ -2623,56 +2651,89 @@ function renderLiveOrderRow(order) {
     row.dataset.provider = normalized.provider;
   }
 
-  // Build cells safely without inserting provider data as HTML.
+  // =========================
+  // BUILD ROW
+  // Preserve your existing seven-column design
+  // =========================
   row.replaceChildren();
 
-  const addCell = (value, className = "") => {
-    const cell = document.createElement("span");
+  function addCell(value, className = "") {
+    const span = document.createElement("span");
 
-    if (className) cell.className = className;
+    if (className) span.className = className;
 
-    cell.textContent = String(value ?? "-");
-    row.appendChild(cell);
+    span.textContent = String(value ?? "-");
+    row.appendChild(span);
 
-    return cell;
-  };
+    return span;
+  }
 
+  // Order ID
   addCell(normalized.orderId);
-  addCell(normalized.recipient || "-");
-  addCell(`${normalized.volume ?? 0}GB`);
 
+  // Recipient
+  addCell(normalized.recipient);
+
+  // Data volume
+  addCell(`${normalized.volume}GB`);
+
+  // Status
   const statusCell = addCell("", "status-cell");
-  const statusBadge = document.createElement("span");
+  const badge = document.createElement("span");
 
-  statusBadge.className =
+  badge.className =
     `status-badge ${getStatusClass(normalized.status)}`;
 
-     addCell(
-  statusBadge.appendChild(
-      `${getStatusIcon(normalized.status)} `
-    )
-  );
+ // =========================
+  // STATUS BADGE WITH REMIX ICON
+  // =========================
+ 
 
+  badge.className =
+    `status-badge ${getStatusClass(normalized.status)}`;
+
+  // Render the Remix Icon HTML returned by getStatusIcon()
+  const iconContainer = document.createElement("span");
+  iconContainer.innerHTML = getStatusIcon(normalized.status);
+
+  badge.appendChild(iconContainer.firstElementChild);
+
+  // Status text
   const statusText = document.createElement("span");
-  statusText.textContent = normalized.status || "processing";
+  statusText.textContent = normalized.status;
 
-  statusBadge.appendChild(statusText);
-  statusCell.appendChild(statusBadge);
+  badge.appendChild(statusText);
+  statusCell.appendChild(badge);
 
+
+
+  badge.appendChild(statusText);
+  statusCell.appendChild(badge);
+
+  // Network
   addCell(getNetwork(normalized));
-  addCell("Yes");
-  addCell(formatDate(normalized.createdAt));
 
-  if (isNewRow) {
+  // Payment
+  addCell("Yes");
+
+  // Created date
+  addCell(date);
+
+  // =========================
+  // INSERT NEWEST ROW AT TOP
+  // =========================
+  if (isNewRow || tableBody.firstElementChild !== row) {
     tableBody.appendChild(row);
   }
 
   console.log("Live order row rendered:", {
     orderId: normalized.orderId,
-    provider: normalized.provider
+    provider: normalized.provider,
+    status: normalized.status,
+    createdDate: date,
+    updatedDate: update
   });
 }
-
 console.log(JSON.parse(localStorage.getItem("ecoLiveOrders")));
 
 
