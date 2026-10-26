@@ -290,28 +290,48 @@ export async function purchaseWithDataMart({
 ========================================= */
 
 export async function getDataMartOrderStatus(reference) {
-  if (!reference) {
-    throw new Error("DataMart order reference is required.");
+  const orderReference = String(reference || "").trim();
+
+  if (!orderReference) {
+    throw new Error("Ecodata order reference is required.");
+  }
+
+  const apiKey = getApiKey();
+  const apiSecret = process.env.DATAMART_API_SECRET;
+
+  if (!apiKey) {
+    throw new Error("DATAMART_API_KEY is not configured.");
+  }
+
+  if (!apiSecret) {
+    throw new Error("DATAMART_API_SECRET is not configured.");
   }
 
   try {
     const response = await datamart.get(
-      `/order-status/${encodeURIComponent(reference)}`,
+      `/order-status/${encodeURIComponent(orderReference)}`,
       {
         headers: {
-          "X-API-Key": getApiKey()
+          "X-API-Key": apiKey,
+          "X-API-Secret": apiSecret,
+          Accept: "application/json"
         }
       }
     );
 
     return response.data;
-
   } catch (error) {
-    error.providerHttpStatus = error.response?.status;
-    error.providerResponse = error.response?.data;
+    error.providerHttpStatus = error.response?.status ?? null;
+    error.providerResponse = error.response?.data ?? null;
+
+    console.error("Order status request rejected:", {
+      httpStatus: error.providerHttpStatus,
+      code: error.providerResponse?.code ?? null,
+      message: error.providerResponse?.message ?? error.message
+    });
+
     throw error;
   }
 }
-
 
 
