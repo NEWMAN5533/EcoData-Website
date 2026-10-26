@@ -219,12 +219,33 @@ export async function handleDataMartBuyDataRequest(
 
     const expectedCheckoutPrice = getCheckoutPrice(baseSellingPrice);
 
+    console.log("DataMart payment price check:", {
+  paymentReference: reference,
+  paystackAmountPesewas: amountPesewas,
+  actualAmountGHS,
+  baseSellingPrice,
+  expectedCheckoutPrice,
+  feeRate: PAYSTACK_FEE_RATE
+});
+
+
+console.log("Backend price debug:", {
+  network,
+  size,
+  baseSellingPrice,
+  expectedCheckoutPrice,
+  actualAmountGHS,
+  paystackAmountPesewas: amountPesewas
+});
+
     if (!sameMoney(actualAmountGHS, expectedCheckoutPrice)) {
       return failure(
         400,
         "The payment amount does not match the configured DataMart selling price."
       );
     }
+
+
 
     // 3. Retrieve and match the DataMart provider package.
     const packages = await getDataMartPackages(network);

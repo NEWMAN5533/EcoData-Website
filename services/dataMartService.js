@@ -45,46 +45,6 @@ export function mapNetworkToDataMart(network) {
    GET AVAILABLE DATAMART PACKAGES
    GET /data-packages?network=YELLO
 ========================================= */
-
-
-
-
-
-export async function getDataMartPackages(network) {
-  const normalizedNetwork = mapNetworkToDataMart(network);
-
-  if (!normalizedNetwork) {
-    throw new Error("Unsupported DataMart network.");
-  }
-
-  const response = await datamart.get("/data-packages", {
-    params: {
-      network: normalizedNetwork
-    },
-    headers: {
-      "X-API-Key": getApiKey()
-    }
-  });
-
-  if (response.data?.status !== "success") {
-    throw new Error("Unable to retrieve DataMart packages.");
-  }
-
-  const packages = response.data.data?.[normalizedNetwork];
-
-  if (!Array.isArray(packages)) {
-    throw new Error(
-      `Invalid package list returned for ${normalizedNetwork}.`
-    );
-  }
-
-  return packages;
-}
-
-/* =========================================
-   MATCH EXISTING BUNDLE CARD TO DATAMART
-========================================= */
-
 export function matchDataMartPackage(bundle, packages) {
   if (!bundle || !Array.isArray(packages)) {
     throw new Error("Bundle or DataMart package list is invalid.");
@@ -103,7 +63,7 @@ export function matchDataMartPackage(bundle, packages) {
   }
 
   const match = packages.find(pkg =>
-    pkg.network === network &&
+    String(pkg.network || "").trim().toUpperCase() === network &&
     Number(pkg.capacity) === capacity
   );
 
@@ -118,7 +78,7 @@ export function matchDataMartPackage(bundle, packages) {
 
   if (
     !Number.isFinite(providerPrice) ||
-    providerPrice < 0 ||
+    providerPrice <= 0 ||
     !Number.isFinite(sellingPrice) ||
     sellingPrice <= 0
   ) {
@@ -133,6 +93,63 @@ export function matchDataMartPackage(bundle, packages) {
     dataValue: bundle.dataValue
   };
 }
+
+
+
+
+export async function getDataMartPackages(network) {
+  const normalizedNetwork = mapNetworkToDataMart(network);
+
+  if (!normalizedNetwork) {
+    throw new Error("Unsupported DataMart network.");
+  }
+
+  const response = await datamart.get("/data-packages", {
+    params: { network: normalizedNetwork },
+    headers: {
+      "X-API-Key": getApiKey()
+    }
+  });
+
+  const body = response.data;
+
+  console.log("DataMart packages API diagnostic:", {
+    httpStatus: response.status,
+    apiStatus: body?.status,
+    dataIsObject: !!body?.data && typeof body.data === "object",
+    dataKeys:
+      body?.data && typeof body.data === "object"
+        ? Object.keys(body.data)
+        : [],
+    requestedNetwork: normalizedNetwork,
+    requestedNetworkIsArray: Array.isArray(
+      body?.data?.[normalizedNetwork]
+    ),
+    message: body?.message
+  });
+
+  if (body?.status !== "success") {
+    throw new Error(
+      body?.message || "Unable to retrieve DataMart packages."
+    );
+  }
+
+  const packages = body.data?.[normalizedNetwork];
+
+  if (!Array.isArray(packages)) {
+    throw new Error(
+      `Invalid package list returned for ${normalizedNetwork}.`
+    );
+  }
+
+  return packages;
+}
+
+
+
+
+
+
 
 /* =========================================
    PURCHASE DATA THROUGH DATAMART
