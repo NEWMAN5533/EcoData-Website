@@ -113,38 +113,55 @@ export async function getDataMartPackages(network) {
 
   const body = response.data;
 
-  console.log("DataMart packages API diagnostic:", {
-    httpStatus: response.status,
-    apiStatus: body?.status,
-    dataIsObject: !!body?.data && typeof body.data === "object",
-    dataKeys:
-      body?.data && typeof body.data === "object"
-        ? Object.keys(body.data)
-        : [],
-    requestedNetwork: normalizedNetwork,
-    requestedNetworkIsArray: Array.isArray(
-      body?.data?.[normalizedNetwork]
-    ),
-    message: body?.message
-  });
-
   if (body?.status !== "success") {
     throw new Error(
       body?.message || "Unable to retrieve DataMart packages."
     );
   }
 
-  const packages = body.data?.[normalizedNetwork];
+  const data = body.data;
+  let packages;
 
-  if (!Array.isArray(packages)) {
+  // Documented response:
+  // data: { YELLO: [...], TELECEL: [...], AT_PREMIUM: [...] }
+  if (
+    data &&
+    !Array.isArray(data) &&
+    typeof data === "object"
+  ) {
+    packages = data[normalizedNetwork];
+  }
+
+  // Alternative response: data is directly an array of packages.
+  if (Array.isArray(data)) {
+    packages = data.filter(pkg => {
+      const packageNetwork = String(pkg?.network || "")
+        .trim()
+        .toUpperCase();
+
+      return packageNetwork === normalizedNetwork;
+    });
+  }
+
+  console.log("DataMart package parsing:", {
+    requestedNetwork: normalizedNetwork,
+    dataIsArray: Array.isArray(data),
+    packageCount: Array.isArray(packages)
+      ? packages.length
+      : 0,
+    firstPackage: Array.isArray(packages)
+      ? packages[0]
+      : null
+  });
+
+  if (!Array.isArray(packages) || packages.length === 0) {
     throw new Error(
-      `Invalid package list returned for ${normalizedNetwork}.`
+      `No DataMart packages found for ${normalizedNetwork}.`
     );
   }
 
   return packages;
 }
-
 
 
 
