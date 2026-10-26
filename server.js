@@ -544,179 +544,40 @@ app.post("/api/datamart/buy-data", async (req, res) => {
 
 
 
+// Status route
 app.get("/api/v1/order/status/:orderIdOrRef", async (req, res) => {
-  const orderIdOrRef = String(
-    req.params.orderIdOrRef || ""
-  ).trim();
+  const { orderIdOrRef } = req.params;
 
   if (!orderIdOrRef) {
-    return res.status(400).json({
-      success: false,
-      message: "Missing order ID or reference."
-    });
+    return res.status(400).json({ success: false, message: "Missing order ID or reference" });
   }
 
   try {
-    // 1. Check whether this is a DataMart order first.
-    let dataMartOrder = null;
-
-    try {
-      dataMartOrder =
-        await getDataMartOrderByProviderReference(orderIdOrRef);
-    } catch (lookupError) {
-      console.error(
-        "DataMart order lookup failed:",
-        lookupError.message
-      );
-
-      // Do not silently send the request to SwiftData if the
-      // DataMart lookup failed. That could misroute an order.
-      return res.status(500).json({
-        success: false,
-        provider: "datamart",
-        message: "Unable to identify the order provider."
-      });
-    }
-
-    if (dataMartOrder) {
-      // 2. Route DataMart orders to the DataMart polling endpoint.
-      const currentStatus = String(
-        dataMartOrder.orderStatus || "pending"
-      ).trim().toLowerCase();
-
-      const terminalStatuses = [
-        "completed",
-        "failed",
-        "refunded"
-      ];
-
-      if (terminalStatuses.includes(currentStatus)) {
-        return res.json({
-          success: true,
-          provider: "datamart",
-          order: {
-            orderReference:
-              dataMartOrder.providerOrderReference || orderIdOrRef,
-            status: currentStatus
-          }
-        });
-      }
-
-      if (!dataMartOrder.providerOrderReference) {
-        return res.json({
-          success: true,
-          provider: "datamart",
-          order: {
-            orderReference: orderIdOrRef,
-            status: currentStatus
-          }
-        });
-      }
-
-      const providerResult = await getDataMartOrderStatus(
-        dataMartOrder.providerOrderReference
-      );
-
-      const providerData =
-        providerResult?.data ?? providerResult;
-
-      const rawStatus = String(
-        providerData?.status ??
-        providerData?.orderStatus ??
-        ""
-      ).trim().toLowerCase();
-
-      const statusMap = {
-        completed: "completed",
-        delivered: "completed",
-        success: "completed",
-        successful: "completed",
-        failed: "failed",
-        cancelled: "failed",
-        canceled: "failed",
-        rejected: "failed",
-        refunded: "refunded",
-        waiting: "processing",
-        pending: "processing",
-        processing: "processing",
-        in_progress: "processing",
-        "in progress": "processing"
-      };
-
-      const liveStatus = statusMap[rawStatus];
-
-      return res.json({
-        success: true,
-        provider: "datamart",
-        order: {
-          orderReference:
-            dataMartOrder.providerOrderReference,
-          status: liveStatus || currentStatus,
-          providerStatus: rawStatus || null
-        }
-      });
-    }
-
-    // 3. Not a DataMart order: preserve the original SwiftData flow.
-    const swiftApiKey = process.env.SWIFT_API_KEY;
-
-    if (!swiftApiKey) {
-      console.error("SWIFT_API_KEY is not configured.");
-
-      return res.status(500).json({
-        success: false,
-        provider: "swiftdata",
-        message: "SwiftData status service is not configured."
-      });
-    }
-
-    const base = (
-      process.env.SWIFT_BASE_URL ||
-      "https://swiftdata-link.com"
-    ).replace(/\/$/, "");
-
-    const swiftUrl =
-      `${base}/order/status/${encodeURIComponent(orderIdOrRef)}`;
+    const base = (process.env.SWIFT_BASE_URL || "https://swiftdata-link.com").replace(/\/$/, "");
+    const swiftUrl = `${base}/order/status/${encodeURIComponent(orderIdOrRef)}`;
 
     const response = await axios.get(swiftUrl, {
       headers: {
-        "x-api-key": swiftApiKey,
-        "Content-Type": "application/json"
+        "x-api-key": process.env.SWIFT_API_KEY,
+        "Content-Type": "application/json",
       },
-      timeout: 10000
+      timeout: 10000,
     });
 
     if (response.data?.success) {
-      return res.json({
-        success: true,
-        provider: "swiftdata",
-        order: response.data.order
+      return res.json({ success: true, order: response.data.order });
+    } else {
+      return res.status(400).json({
+        success: false,
+        message: response.data?.message || "Failed to fetch order status",
+        details: response.data,
       });
     }
-
-    return res.status(400).json({
-      success: false,
-      provider: "swiftdata",
-      message:
-        response.data?.message ||
-        "Failed to fetch SwiftData order status"
-    });
-
   } catch (error) {
-    console.error("Order status route failed:", {
-      provider: error.provider || null,
-      httpStatus: error.providerHttpStatus ||
-        error.response?.status || null,
-      code: error.providerResponse?.code ||
-        error.response?.data?.code || null,
-      message: error.providerResponse?.message ||
-        error.response?.data?.message ||
-        error.message
-    });
-
-    return res.status(502).json({
+    return res.status(500).json({
       success: false,
-      message: "Unable to retrieve the latest order status."
+      message: "Error fetching order status",
+      error: error.response?.data || error.message,
     });
   }
 });
