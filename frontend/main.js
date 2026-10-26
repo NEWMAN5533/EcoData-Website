@@ -300,31 +300,74 @@ async function precheckRecipientBeforePayment(bundle, recipient) {
   }
 
   try {
-    const response = await fetch("/api/verify-recipient", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        network: bundle.network || "mtn",
-        recipient: phone,
-        size: Number(bundle.size)
-      })
+    // 1. Check the active vendor FIRST.
+    const vendorResponse = await fetch("/api/vendor-status", {
+      method: "GET",
+      cache: "no-store"
     });
 
-    const result = await response.json();
+    if (!vendorResponse.ok) {
+      throw new Error("Unable to determine the active data vendor.");
+    }
 
-    if (!response.ok || result.canProceed !== true) {
+    const vendorResult = await vendorResponse.json();
+
+    const activeVendor = String(
+      vendorResult.activeVendor || ""
+    ).trim().toLowerCase();
+
+    console.log("Active vendor before validation:", activeVendor);
+
+    if (!["datamart", "swiftdata"].includes(activeVendor)) {
       showSnackBar(
-        result.message || "Recipient verification failed.",
+        "The data provider is unavailable. Please try again.",
         "error",
-        5000
+        4000
       );
       return false;
     }
 
-    // DataMart has already checked the recipient on the backend.
-    if (result.provider === "datamart") {
+    // 2. DataMart verification ONLY.
+    if (activeVendor === "datamart") {
+      const response = await fetch("/api/verify-recipient", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        cache: "no-store",
+        body: JSON.stringify({
+          network: bundle.network || "mtn",
+          recipient: phone,
+          size: Number(bundle.size)
+        })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || result.canProceed !== true) {
+        showSnackBar(
+          result.message || "Recipient verification failed.",
+          "error",
+          5000
+        );
+        return false;
+      }
+
+      // Ensure the backend used DataMart too.
+      if (result.provider !== "datamart") {
+        console.error("Vendor mismatch:", {
+          activeVendor,
+          verifiedBy: result.provider
+        });
+
+        showSnackBar(
+          "The active provider changed. Please retry verification.",
+          "error",
+          4000
+        );
+        return false;
+      }
+
       lastValidation = {
         success: true,
         provider: "datamart",
@@ -340,8 +383,13 @@ async function precheckRecipientBeforePayment(bundle, recipient) {
       return true;
     }
 
-    // Preserve the existing SwiftData validation.
-    if (result.provider === "swiftdata" && bundle.network === "mtn") {
+    // 3. SwiftData validation ONLY.
+    if (activeVendor === "swiftdata") {
+      if (String(bundle.network).toLowerCase() !== "mtn") {
+        // Preserve your existing flow for other networks.
+        return true;
+      }
+
       const validation = await validateRecipient(
         "233" + phone.substring(1),
         bundle.packageName
@@ -356,10 +404,16 @@ async function precheckRecipientBeforePayment(bundle, recipient) {
         return false;
       }
 
-      lastValidation = validation;
+      lastValidation = {
+        ...validation,
+        provider: "swiftdata"
+      };
+
+      return true;
     }
 
-    return true;
+    return false;
+
   } catch (error) {
     console.error("Recipient precheck error:", error);
 
