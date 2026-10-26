@@ -2647,8 +2647,10 @@ function renderLiveOrderRow(order) {
   statusBadge.className =
     `status-badge ${getStatusClass(normalized.status)}`;
 
+     addCell(
   statusBadge.appendChild(
-    document.createTextNode(`${getStatusIcon(normalized.status)} `)
+      `${getStatusIcon(normalized.status)} `
+    )
   );
 
   const statusText = document.createElement("span");
