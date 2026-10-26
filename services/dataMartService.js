@@ -47,70 +47,8 @@ export function mapNetworkToDataMart(network) {
 ========================================= */
 
 
-/* =========================================
-   VERIFY MTN RECIPIENT
-   POST /verify-number
-========================================= */
 
-export async function verifyDataMartRecipient(phoneNumber) {
-  let phone = String(phoneNumber || "").trim();
 
-  // Normalize Ghana phone numbers.
-  if (phone.startsWith("+233")) {
-    phone = "0" + phone.slice(4);
-  } else if (phone.startsWith("233")) {
-    phone = "0" + phone.slice(3);
-  }
-
-  if (!/^0\d{9}$/.test(phone)) {
-    throw new Error("Invalid recipient phone number.");
-  }
-
-  try {
-    const response = await datamart.post(
-      "/verify-number",
-      {
-        phoneNumber: phone
-      },
-      {
-        headers: {
-          "X-API-Key": getApiKey()
-        }
-      }
-    );
-
-    const result = response.data?.data;
-
-    if (!result || typeof result.servable !== "boolean") {
-      const error = new Error(
-        "DataMart returned an invalid recipient verification response."
-      );
-
-      error.providerHttpStatus = response.status;
-      error.providerResponse = response.data;
-
-      throw error;
-    }
-
-    return {
-      phoneNumber: result.phoneNumber || phone,
-      network: result.network || "MTN",
-      servable: result.servable,
-      recommendation: result.recommendation || null,
-      message: result.message || "",
-      cached: Boolean(result.cached)
-    };
-
-  } catch (error) {
-    error.providerHttpStatus =
-      error.response?.status ?? error.providerHttpStatus;
-
-    error.providerResponse =
-      error.response?.data ?? error.providerResponse;
-
-    throw error;
-  }
-}
 
 export async function getDataMartPackages(network) {
   const normalizedNetwork = mapNetworkToDataMart(network);
