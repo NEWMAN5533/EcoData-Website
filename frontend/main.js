@@ -2662,7 +2662,7 @@ function renderLiveOrderRow(order) {
   addCell(formatDate(normalized.createdAt));
 
   if (isNewRow) {
-    tableBody.prepend(row);
+    tableBody.appendChild(row);
   }
 
   console.log("Live order row rendered:", {
