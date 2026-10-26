@@ -168,10 +168,10 @@ export async function getDataMartPackages(network) {
 
 
 
-/* =========================================
-   PURCHASE DATA THROUGH DATAMART
-   POST /purchase
-========================================= */
+// =========================================
+// PURCHASE DATA THROUGH DATAMART
+// POST /purchase
+// =========================================
 
 export async function purchaseWithDataMart({
   phoneNumber,
@@ -207,6 +207,20 @@ export async function purchaseWithDataMart({
     throw new Error("A unique order idempotency key is required.");
   }
 
+  const apiSecret = process.env.DATAMART_API_SECRET;
+  const referencePrefix = process.env.DATAMART_REFERENCE_PREFIX;
+
+  if (!apiSecret) {
+    throw new Error("DATAMART_API_SECRET is not configured.");
+  }
+
+  if (!referencePrefix) {
+    throw new Error("DATAMART_REFERENCE_PREFIX is not configured.");
+  }
+
+  // Must match the reference prefix configured in DataMart.
+  const ref = `${referencePrefix}${idempotencyKey}`;
+
   try {
     const response = await datamart.post(
       "/purchase",
@@ -214,11 +228,13 @@ export async function purchaseWithDataMart({
         phoneNumber: phone,
         network: normalizedNetwork,
         capacity: String(size),
-        gateway: "wallet"
+        gateway: "wallet",
+        ref
       },
       {
         headers: {
           "X-API-Key": getApiKey(),
+          "X-API-Secret": apiSecret,
           "X-Idempotency-Key": idempotencyKey
         }
       }
@@ -265,6 +281,8 @@ export async function purchaseWithDataMart({
     throw error;
   }
 }
+
+
 
 /* =========================================
    GET DATAMART ORDER STATUS
