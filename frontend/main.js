@@ -1680,7 +1680,12 @@ const orderData = {
   createdAt: Date.now(),
 };
 
-handleNewOrder(returnedOrder);
+await handleOrderByActiveVendor({
+  ...returnedOrder,
+  provider: "swiftdata"
+},
+"swiftdata"
+);
 
 updateHomepageTotals(orderData);
 
@@ -1845,7 +1850,20 @@ async function orderDataMartBundle(
 
 
 
-    await handleOrderByActiveVendor(order);
+   await handleOrderByActiveVendor({
+  ...orderData,
+  ...order,
+
+  orderId: orderData.orderId,
+  reference: orderData.reference,
+  paymentReference: reference,
+  recipient,
+  network: orderData.network,
+  volume: orderData.volume,
+  provider: "datamart"
+},
+"datamart"
+);
 
     updateHomepageTotals(orderData);
 
@@ -2003,6 +2021,32 @@ console.log(firestoreData);
   }
 }
 
+
+
+
+// ---------- LOCAL STORAGE HELPER ----------
+
+// Save Guest Orders to Local Storage
+function saveGuestOrder(orderData) {
+  try {
+    // Load existing guest orders or start fresh
+    const existing = JSON.parse(localStorage.getItem("guestOrders") || "[]");
+
+    // Avoid saving duplicates
+    const isDuplicate = existing.some(o => o.orderId === orderData.orderId);
+    if (isDuplicate) return;
+
+    existing.push(orderData);
+
+    localStorage.setItem("guestOrders", JSON.stringify(existing));
+    console.log("💾 Guest order saved locally:", orderData);
+
+  } catch (err) {
+    console.error("❌ Failed to save guest order:", err);
+  }
+}
+
+
 async function handleOrderByActiveVendor(orderResult) {
   const response = await fetch(
     `${API_BASE}/api/vendor-status`,
@@ -2030,29 +2074,6 @@ async function handleOrderByActiveVendor(orderResult) {
     handleNewOrder(orderResult);
   } else {
     throw new Error(`Unsupported vendor: ${activeVendor}`);
-  }
-}
-
-
-// ---------- LOCAL STORAGE HELPER ----------
-
-// Save Guest Orders to Local Storage
-function saveGuestOrder(orderData) {
-  try {
-    // Load existing guest orders or start fresh
-    const existing = JSON.parse(localStorage.getItem("guestOrders") || "[]");
-
-    // Avoid saving duplicates
-    const isDuplicate = existing.some(o => o.orderId === orderData.orderId);
-    if (isDuplicate) return;
-
-    existing.push(orderData);
-
-    localStorage.setItem("guestOrders", JSON.stringify(existing));
-    console.log("💾 Guest order saved locally:", orderData);
-
-  } catch (err) {
-    console.error("❌ Failed to save guest order:", err);
   }
 }
 
@@ -2177,63 +2198,102 @@ const normalized = {
 
 
 
+
+
+
 function handleNewDataMartOrder(returnedOrder) {
   if (!returnedOrder) return;
 
-  const providerReference =
-    returnedOrder.orderReference ||
+  const orderId = String(
+    returnedOrder.orderId ||
+    returnedOrder.purchaseId ||
     returnedOrder.providerOrderReference ||
-    returnedOrder.reference;
+    returnedOrder.orderReference ||
+    returnedOrder.reference ||
+    returnedOrder.paymentReference ||
+    ""
+  );
 
-  if (!providerReference) {
+  if (!orderId) {
     console.error(
-      "DataMart response has no provider order reference:",
+      " Order cannot be displayed because its ID is missing:",
       returnedOrder
     );
     return;
   }
 
   const costPrice = Number(
+    returnedOrder.costPrice ??
     returnedOrder.providerPrice ??
     returnedOrder.price ??
     0
   );
 
   const normalized = {
-    orderId: String(providerReference),
-    reference: String(providerReference),
+    orderId,
 
-    status:
-      returnedOrder.orderStatus ||
+    reference: String(
+      returnedOrder.reference ||
+      returnedOrder.paymentReference ||
+      returnedOrder.providerOrderReference ||
+      orderId
+    ),
+
+    paymentReference:
+      returnedOrder.paymentReference || null,
+
+    status: String(
       returnedOrder.status ||
-      "processing",
+      returnedOrder.orderStatus ||
+      "processing"
+    ).toLowerCase(),
 
     recipient:
+      returnedOrder.recipient ||
       returnedOrder.phoneNumber ||
       returnedOrder.phone ||
-      returnedOrder.recipient ||
+      returnedOrder.items?.[0]?.recipient ||
       "-",
 
-    amount: Number(selectedBundle?.price || 0),
+    amount: Number(
+      returnedOrder.amount ??
+      selectedBundle?.price ??
+      0
+    ),
+
     costPrice,
 
-    profit:
-      Number(selectedBundle?.price || 0) - costPrice,
+    profit: Number(
+      returnedOrder.profit ??
+      (
+        Number(returnedOrder.amount ?? selectedBundle?.price ?? 0) -
+        costPrice
+      )
+    ),
 
     network:
       returnedOrder.network ||
       selectedBundle?.network ||
       "-",
 
-    volume:
+    volume: Number(
+      returnedOrder.volume ??
       returnedOrder.capacity ??
       returnedOrder.capacityGb ??
       returnedOrder.size ??
       selectedBundle?.size ??
-      0,
+      0
+    ),
+
+    dataValue: String(
+      returnedOrder.dataValue ??
+      selectedBundle?.dataValue ??
+      ""
+    ),
 
     source: "web",
-    provider: "datamart"
+    provider: "datamart",
+    createdAt: returnedOrder.createdAt || Date.now()
   };
 
   localStorage.setItem(
@@ -2241,12 +2301,18 @@ function handleNewDataMartOrder(returnedOrder) {
     normalized.orderId
   );
 
+  // Persist and update the live table.
   saveLiveOrder(normalized);
   renderLiveOrderRow(normalized);
   createOrUpdateStatusCard(normalized);
 
   startDataMartAutoPolling(normalized.orderId);
+
+  console.log("DataMart live order normalized:", normalized);
 }
+
+
+
 
 
 
@@ -2418,27 +2484,36 @@ function startDataMartAutoPolling(providerReference) {
 
 
 
-
-
-
 const LIVE_ORDERS_KEY = "ecoLiveOrders";
 const MAX_LIVE_ORDERS = 1000;
 
 function saveLiveOrder(order) {
-  if (!order || !order.orderId) return;
+  if (!order || !order.orderId) {
+    console.error("Cannot save live order: missing orderId.", order);
+    return false;
+  }
 
   const normalizedOrder = {
     ...order,
+    orderId: String(order.orderId),
     provider: String(order.provider || "swiftdata").toLowerCase()
   };
 
-  const existing = JSON.parse(
-    localStorage.getItem(LIVE_ORDERS_KEY) || "[]"
-  );
+  let existing = [];
 
-  const index = existing.findIndex(o =>
-    o.orderId === normalizedOrder.orderId &&
-    String(o.provider || "swiftdata").toLowerCase() ===
+  try {
+    const stored = localStorage.getItem(LIVE_ORDERS_KEY);
+    const parsed = stored ? JSON.parse(stored) : [];
+
+    existing = Array.isArray(parsed) ? parsed : [];
+  } catch (error) {
+    console.error("Could not read saved live orders:", error);
+    existing = [];
+  }
+
+  const index = existing.findIndex(item =>
+    String(item.orderId) === normalizedOrder.orderId &&
+    String(item.provider || "swiftdata").toLowerCase() ===
       normalizedOrder.provider
   );
 
@@ -2449,35 +2524,36 @@ function saveLiveOrder(order) {
     existing[index] = {
       ...current,
       ...normalizedOrder,
-
-      // Preserve terminal status.
       status: currentIsTerminal
         ? current.status
         : normalizedOrder.status,
-
-      // Preserve original timestamps.
       createdAt: current.createdAt || Date.now(),
       timestamp: current.timestamp || Date.now(),
-
-      // Preserve update timestamp unless explicitly supplied.
       updatedAt: normalizedOrder.updatedAt || current.updatedAt
     };
   } else {
     existing.unshift({
       ...normalizedOrder,
-      timestamp: normalizedOrder.timestamp || Date.now(),
       createdAt: normalizedOrder.createdAt || Date.now(),
+      timestamp: normalizedOrder.timestamp || Date.now(),
       updatedAt: normalizedOrder.updatedAt || Date.now()
     });
   }
 
-  localStorage.setItem(
-    LIVE_ORDERS_KEY,
-    JSON.stringify(existing.slice(0, MAX_LIVE_ORDERS))
-  );
+  try {
+    localStorage.setItem(
+      LIVE_ORDERS_KEY,
+      JSON.stringify(existing.slice(0, MAX_LIVE_ORDERS))
+    );
+  } catch (error) {
+    console.error("Could not persist live order:", error);
+    return false;
+  }
 
   updatePendingCard();
   loadActiveBadge();
+
+  return true;
 }
 
 // ends
@@ -2485,120 +2561,115 @@ function saveLiveOrder(order) {
 
 // RENDER LIVE ORDER ROW
 function renderLiveOrderRow(order) {
-  const tableBody = document.getElementById("liveOrderRows");
-  if (!tableBody) return;
+  if (!order || !order.orderId) {
+    console.error("Cannot render live order: missing orderId.", order);
+    return;
+  }
 
-  // Remove empty placeholder
+  const tableBody = document.getElementById("liveOrderRows");
+
+  if (!tableBody) {
+    console.warn(
+      "Live orders table #liveOrderRows is not present on this page."
+    );
+    return;
+  }
+
+  const normalized = {
+    ...order,
+    orderId: String(order.orderId),
+    provider: String(order.provider || "swiftdata").toLowerCase()
+  };
+
   const empty = tableBody.querySelector(".empty-state");
   if (empty) empty.remove();
 
+  const formatDate = value => {
+    if (!value) return "N/A";
 
-  //structure status updatedDated
-    const date =
-      order.createdAt
-        ? (() =>{
-          const d = new Date(order.createdAt);
-          const datePart =
-          d.toLocaleDateString("en-US", {
-            month: "short",
-            day: "2-digit",
-            year: "numeric"
-          });
+    const date = new Date(value);
 
-          const timePart =
-          d.toLocaleTimeString("en-US", {
-            hour: "numeric",
-            minute: "2-digit",
-            hour12: true
-          }).toUpperCase();
+    if (Number.isNaN(date.getTime())) return "N/A";
 
-          return `${datePart} ${timePart}`;
-        })() : "N/A";
+    const datePart = date.toLocaleDateString("en-US", {
+      month: "short",
+      day: "2-digit",
+      year: "numeric"
+    });
 
+    const timePart = date.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true
+    }).toUpperCase();
 
-    // structure status updatedTime
-   const update = order.updatedAt
-  ? (() => {
-      const d = new Date(order.updatedAt);
+    return `${datePart} ${timePart}`;
+  };
 
-      const datePart = d.toLocaleDateString("en-US", {
-        month: "short",
-        day: "2-digit",
-        year: "numeric"
-      });
+  let row = Array.from(
+    tableBody.querySelectorAll(".live-row")
+  ).find(item =>
+    item.dataset.id === normalized.orderId &&
+    String(item.dataset.provider || "swiftdata").toLowerCase() ===
+      normalized.provider
+  );
 
-      const timePart = d.toLocaleTimeString("en-US", {
-        hour: "numeric",
-        minute: "2-digit",
-        hour12: true
-      }).toUpperCase();
+  const isNewRow = !row;
 
-      return `${datePart} ${timePart}`;
-    })()
-  : "N/A";
+  if (!row) {
+    row = document.createElement("div");
+    row.className = "live-row";
+    row.dataset.id = normalized.orderId;
+    row.dataset.provider = normalized.provider;
+  }
 
+  // Build cells safely without inserting provider data as HTML.
+  row.replaceChildren();
 
-console.log("Order",order);
-console.log(
-  "createdAt", order.createdAt
-);
-console.log("UpdatedAt", order.updatedAt);
-console.log("timeStamp", order.timestamp);
+  const addCell = (value, className = "") => {
+    const cell = document.createElement("span");
 
+    if (className) cell.className = className;
 
-  const provider = String(
-  order.provider || "swiftdata"
-).toLowerCase();
+    cell.textContent = String(value ?? "-");
+    row.appendChild(cell);
 
-let row = Array.from(
-  tableBody.querySelectorAll(".live-row")
-).find(row =>
-  row.dataset.id === String(order.orderId) &&
-  String(row.dataset.provider || "swiftdata").toLowerCase() === provider
-);
+    return cell;
+  };
 
-if (!row) {
-  row = document.createElement("div");
-  row.className = "live-row";
-  row.dataset.id = order.orderId;
-  row.dataset.provider = provider;
-  tableBody.appendChild(row);
+  addCell(normalized.orderId);
+  addCell(normalized.recipient || "-");
+  addCell(`${normalized.volume ?? 0}GB`);
+
+  const statusCell = addCell("", "status-cell");
+  const statusBadge = document.createElement("span");
+
+  statusBadge.className =
+    `status-badge ${getStatusClass(normalized.status)}`;
+
+  statusBadge.appendChild(
+    document.createTextNode(`${getStatusIcon(normalized.status)} `)
+  );
+
+  const statusText = document.createElement("span");
+  statusText.textContent = normalized.status || "processing";
+
+  statusBadge.appendChild(statusText);
+  statusCell.appendChild(statusBadge);
+
+  addCell(getNetwork(normalized));
+  addCell("Yes");
+  addCell(formatDate(normalized.createdAt));
+
+  if (isNewRow) {
+    tableBody.prepend(row);
+  }
+
+  console.log("Live order row rendered:", {
+    orderId: normalized.orderId,
+    provider: normalized.provider
+  });
 }
-
-  row.innerHTML = `
-    <span>
-      ${order.orderId}
-    </span>
-
-    <span>
-      ${order.recipient}
-    </span>
-
-    <span>
-      ${order.volume}GB
-    </span>
-
-    <span class="status-cell">
-      <span class="status-badge ${getStatusClass(order.status)}">
-        ${getStatusIcon(order.status)}
-      <span>${order.status}</span>
-      </span>
-    </span>
-
-    <span>
-      ${getNetwork(order)}
-    </span>
-
-    <span>
-      Yes
-    </span>
-
-    <span>
-      ${date}
-    </span>
-  `;
-}
-
 
 console.log(JSON.parse(localStorage.getItem("ecoLiveOrders")));
 
