@@ -588,134 +588,95 @@ app.get("/api/v1/order/status/:orderIdOrRef", async (req, res) => {
 
 
 app.get("/api/datamart/order-status/:reference", async (req, res) => {
-  const reference = String(req.params.reference || "").trim();
+const reference = String(req.params.reference || "").trim();
 
-  if (!reference) {
-    return res.status(400).json({
-      success: false,
-      message: "DataMart order reference is required."
-    });
+if (!reference) {
+return res.status(400).json({
+success: false,
+message: "DataMart order reference is required."
+});
+}
+
+try {
+// Fetch the latest status directly from DataMart.
+const result = await getDataMartOrderStatus(reference);
+
+if (result?.status !== "success" || !result?.data) {
+  return res.status(502).json({
+    success: false,
+    provider: "datamart",
+    message: "DataMart returned an invalid status response."
+  });
+}
+
+const providerOrder = result.data;
+
+// DataMart returns orderStatus inside result.data.
+const rawStatus = String(
+  providerOrder.orderStatus || ""
+).trim().toLowerCase();
+
+const statusMap = {
+  completed: "completed",
+  delivered: "completed",
+  success: "completed",
+  successful: "completed",
+  failed: "failed",
+  cancelled: "failed",
+  canceled: "failed",
+  rejected: "failed",
+  refunded: "refunded",
+  pending: "processing",
+  waiting: "processing",
+  processing: "processing",
+  in_progress: "processing",
+  "in progress": "processing"
+};
+
+const normalizedStatus = statusMap[rawStatus];
+
+if (!normalizedStatus) {
+  console.warn("Unknown DataMart order status:", rawStatus);
+
+  return res.json({
+    success: true,
+    provider: "datamart",
+    source: "provider",
+    order: {
+      orderReference: providerOrder.reference || reference,
+      status: "processing",
+      providerStatus: rawStatus || null
+    }
+  });
+}
+
+return res.json({
+  success: true,
+  provider: "datamart",
+  source: "provider",
+  order: {
+    orderReference: providerOrder.reference || reference,
+    status: normalizedStatus,
+    providerStatus: rawStatus,
+    updatedAt: providerOrder.updatedAt || null
   }
+});
 
-  try {
-    // The frontend supplies the DataMart provider reference.
-    const order =
-      await getDataMartOrderByProviderReference(reference);
+} catch (error) {
+console.error("DataMart status route failed:", {
+reference,
+httpStatus: error.providerHttpStatus,
+providerResponse: error.providerResponse,
+message: error.message
+});
 
-    if (!order) {
-      return res.status(404).json({
-        success: false,
-        message: "DataMart order not found."
-      });
-    }
+return res.status(502).json({
+  success: false,
+  provider: "datamart",
+  message: "Unable to retrieve the latest DataMart order status."
+});
 
-    const currentStatus =
-      String(order.orderStatus || "pending").toLowerCase();
-
-    // Return terminal states already recorded by the webhook.
-    if (["completed", "failed", "refunded"].includes(currentStatus)) {
-      return res.json({
-        success: true,
-        provider: "datamart",
-        source: "database",
-        order: {
-          orderReference: order.providerOrderReference,
-          status: currentStatus
-        }
-      });
-    }
-
-    if (!order.providerOrderReference) {
-      return res.json({
-        success: true,
-        provider: "datamart",
-        source: "database",
-        order: {
-          orderReference: reference,
-          status: currentStatus
-        }
-      });
-    }
-
-    // Ask DataMart for the latest status.
-    const result = await getDataMartOrderStatus(
-      order.providerOrderReference
-    );
-
-    const providerData = result?.data ?? result;
-    const rawStatus = String(
-      providerData?.status ?? providerData?.orderStatus ?? ""
-    ).trim().toLowerCase();
-
-    const statusMap = {
-      completed: "completed",
-      success: "completed",
-      successful: "completed",
-      delivered: "completed",
-      failed: "failed",
-      cancelled: "failed",
-      canceled: "failed",
-      rejected: "failed",
-      refunded: "refunded",
-      waiting: "processing",
-      pending: "processing",
-      processing: "processing",
-      in_progress: "processing",
-      "in progress": "processing"
-    };
-
-    const nextStatus = statusMap[rawStatus];
-
-    if (nextStatus) {
-      // Do not let a stale provider response downgrade a terminal order.
-      const latestOrder =
-        await getDataMartOrderByProviderReference(reference);
-
-      const latestStatus =
-        String(latestOrder?.orderStatus || "").toLowerCase();
-
-      const latestIsTerminal =
-        ["completed", "failed", "refunded"].includes(latestStatus);
-
-      const isNonTerminal =
-        ["pending", "processing", "unknown"].includes(nextStatus);
-
-      if (!(latestIsTerminal && isNonTerminal)) {
-        const updates = {
-          orderStatus: nextStatus,
-          providerResponse: result
-        };
-
-        if (nextStatus === "failed") {
-          updates.lastError = " Reported that the order failed.";
-        }
-
-        await updateDataMartOrder(order.paymentReference, updates);
-      }
-    }
-
-    return res.json({
-      success: true,
-      provider: "datamart",
-      source: "provider",
-      order: {
-        orderReference: order.providerOrderReference,
-        status: nextStatus || currentStatus,
-        providerStatus: rawStatus || null
-      }
-    });
-  } catch (error) {
-    console.error(
-      "Live status error:",
-      error.providerResponse || error.message
-    );
-
-    return res.status(502).json({
-      success: false,
-      provider: "datamart",
-      message: "Unable to retrieve the latest DataMart order status."
-    });
-  }
+}
 });
 
 
