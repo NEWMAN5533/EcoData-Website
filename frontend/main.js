@@ -1355,6 +1355,14 @@ if (requiresRecipientValidation && !recipientValidated) {
    const payWithFee = Number((bundle.price * 1.0195).toFixed(2));
 
 
+   console.log("Checkout price debug:", {
+  offer: packageName,
+  network,
+  size,
+  bundlePrice: bundle.price,
+  checkoutPrice: payWithFee,
+  paystackAmountPesewas: Math.round(payWithFee * 100)
+});
 
   const user = auth.currentUser;
   const userEmail = user?.email || `${recipient}@ecodata.com`;
