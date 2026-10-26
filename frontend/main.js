@@ -313,7 +313,7 @@ async function precheckRecipientBeforePayment(bundle, recipient) {
   try {
     // DataMart: verify through DataMart only.
     if (vendor === "datamart") {
-      const response = await fetch("/api/verify-number", {
+      const response = await fetch("/api/verify-recipient", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
