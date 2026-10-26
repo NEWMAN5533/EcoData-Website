@@ -1,4 +1,4 @@
-// UPDATED AT 4th/September, 2026 [BACKUP MAIN.JS]
+// UPDATED AT 24th/October, 2026 [BACKUP MAIN.JS]
 
 // --- Firebase Imports ---
 import { auth, db } from "./firebase-config.js";
@@ -81,7 +81,10 @@ const STORAGE_KEY = "selected_mtn_package";
 
 
 function getVendorForPackage(packageName) {
-  return packageName === "mtn_data_normal_delivery"
+  const normalizedPackage = String(packageName || "").trim();
+
+  return normalizedPackage === 
+  PACKAGE_MAP.normal
     ? "datamart"
     : "swiftdata";
 }
@@ -165,52 +168,13 @@ async function checkRestrictions(){
 
 
 async function canUseNormalDeliveryMode() {
-  try {
-    const response = await fetch("/api/vendor-status", {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        Accept: "application/json"
-      }
-    });
+  // Normal Delivery is always selectable.
+  // Vendor routing is handled by getVendorForPackage().
+  // Recipient verification is handled before payment.
 
-    if (!response.ok) {
-      showSnackBar(
-        "Unable to verify the active Normal Offer. Please try again.",
-        "error",
-        4000
-      );
-      return false;
-    }
-
-    const result = await response.json();
-
-    const activeVendor = String(
-      result.activeVendor ?? result.vendor ?? ""
-    ).trim().toLowerCase();
-
-    if (activeVendor !== "datamart") {
-      showSnackBar(
-        "Normal Delivery Mode is available only when Normal Delivery is active. Please select another offer.",
-        "error",
-        5000
-      );
-      return false;
-    }
-
-    return true;
-  } catch (error) {
-    console.error("Vendor check failed:", error);
-
-    showSnackBar(
-      "Unable to verify the active vendor. Please try again.",
-      "error",
-      4000
-    );
-
-    return false;
-  }
+  return true;
 }
+
 
 //=================================
 //  CHECK RESTRICTIONS ENDS
@@ -382,7 +346,7 @@ async function precheckRecipientBeforePayment(bundle, recipient) {
       ) {
         showSnackBar(
           result.message ||
-            "This recipient cannot receive the selected bundle.",
+            "This recipient cannot receive the selected bundle. Please select another offer",
           "error",
           5000
         );
@@ -711,7 +675,7 @@ function resetSelectedBundle(reason = "") {
 
 
   const saveMode = 
-  localStorage.removeItem(STORAGE_KEY) || "normal";
+  localStorage.getItem(STORAGE_KEY) || "normal";
 
   const activeOption = document.querySelector(`.optionDelevery[data-mode="${saveMode}"]`);
 
@@ -1509,75 +1473,58 @@ if (requiresRecipientValidation && !recipientValidated) {
         ],
       },
 
-    onSuccess: async (response) => {
+onSuccess: async (response) => {
   console.log("✅ Paystack onSuccess fired:", response.reference);
 
   hideLoader();
 
   try {
-    // Get the active vendor from the backend.
-    const API_BASE =
-      window.location.hostname === "localhost"
-        ? "http://localhost:3000"
-        : "https://ecodata-app.onrender.com";
+    // =========================
+    // GET THE SELECTED PACKAGE
+    // =========================
+    const currentPackageName =
+      lastPurchasedBundle?.packageName || packageName;
 
-    console.log("🔎 Fetching active vendor...");
-
-    const vendorResponse = await fetch(
-      `${API_BASE}/api/vendor-status`
-    );
-
-    const vendorResult = await vendorResponse.json();
-
-    console.log("📦 Vendor status response:", vendorResult);
-
-    if (!vendorResponse.ok) {
+    if (!currentPackageName) {
       throw new Error(
-        vendorResult.message || "Unable to retrieve active vendor."
+        "Selected package is missing. Cannot determine the vendor."
       );
     }
 
-    const activeVendor =
-      vendorResult.activeVendor ||
-      vendorResult.vendor ||
-      vendorResult.active ||
-      vendorResult.name;
+    console.log("📦 Selected package:", currentPackageName);
 
-    if (!activeVendor) {
-      throw new Error(
-        "Active vendor missing from /api/vendor-status response."
-      );
-    }
+    // =========================
+    // DETERMINE VENDOR BY PACKAGE
+    // =========================
+    const activeVendor = getVendorForPackage(currentPackageName);
 
-    console.log("🚚 Active vendor:", activeVendor);
+    console.log("🚚 Vendor selected for package:", activeVendor);
 
-    if (String(activeVendor).toLowerCase() === "datamart") {
-      console.log("➡️ Calling DataMart purchase function...");
+    // =========================
+    // PROCESS THE PURCHASE
+    // =========================
+    if (activeVendor === "datamart") {
+      console.log("➡️ Calling Vendor2 purchase function...");
 
       await orderDataMartBundle(
         network,
         recipient,
-        packageName,
-        size,
-        response.reference
-      );
-    } else if (
-      String(activeVendor).toLowerCase() === "swiftdata"
-    ) {
-      console.log("➡️ Calling SwiftData purchase function...");
-
-      await orderBundle(
-        network,
-        recipient,
-        packageName,
+        currentPackageName,
         size,
         response.reference
       );
     } else {
-      throw new Error(
-        `Unsupported active vendor: ${activeVendor}`
+      console.log("➡️ Calling Vendor1 purchase function...");
+
+      await orderBundle(
+        network,
+        recipient,
+        currentPackageName,
+        size,
+        response.reference
       );
     }
+
   } catch (error) {
     console.error("❌ Post-payment processing error:", error);
 
@@ -1589,7 +1536,6 @@ if (requiresRecipientValidation && !recipientValidated) {
     );
   }
 },
-
 
       onCancel: () => {
         hideLoader();
