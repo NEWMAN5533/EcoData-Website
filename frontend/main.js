@@ -1755,81 +1755,61 @@ async function orderDataMartBundle(
       }
     );
 
-    const result = await response.json();
+    
+const result = await response.json();
 
-    if (!response.ok || !result.success) {
-      console.error("DataMart order response:", result);
+//  returns the purchase details inside result.data.
+const order = result.data || {};
 
-      showSnackBar(
-        result.message ||
-          "Payment received, but the purchase is not confirmed. Please check your order status.",
-        "warning",
-        6000
-      );
+// Use the public order reference as EcoData's displayed order ID.
 
-      return;
-    }
+const orderId = order.orderReference
+  ? `ED-${String(order.orderReference).slice(-5)}`
+  : "";
 
-    const order = result.order || {};
+
+if (result.status !== "success" || !orderId) {
+  showSnackBar(
+    result.message || "Unable to confirm the DataMart order.",
+    "error",
+    5000
+  );
+  return;
+}
+
+
     const bundle = lastPurchasedBundle;
-
-    if (!bundle) {
-      console.error(
-        "DataMart purchase response received, but bundle context is missing.",
-        order
-      );
-
-      showSnackBar(
-        "Purchase response received. Please check your order history.",
-        "warning",
-        6000
-      );
-
-      return;
-    }
+    
 
     const orderStatus = String(
       order.orderStatus || "processing"
     ).toLowerCase();
 
-    const orderData = {
-      orderId:
-        order.purchaseId ||
-        order.providerOrderReference ||
-        order.paymentReference ||
-        reference,
 
-      reference:
-        order.providerOrderReference || reference,
+const orderData = {
+  orderId: orderId,
+  reference: orderId,
+  paymentReference: reference,
 
-      paymentReference: reference,
+  recipient,
+  network: order.network || bundle?.network || network,
+  volume: Number(order.capacity ?? bundle?.size ?? size),
+  dataValue: String(bundle?.dataValue ?? order.capacity ?? size),
 
-      recipient,
+  amount: Number(order.price ?? bundle?.price ?? 0),
+  costPrice: Number(order.price ?? 0),
 
-      network: bundle.network || network,
+  status: String(order.orderStatus || "processing").toLowerCase(),
 
-      volume: Number(bundle.size || size || 0),
+  source: "web",
+  provider: "datamart",
+  isGuest: !auth.currentUser,
+  createdBy: auth.currentUser?.uid || "guest",
 
-      dataValue: String(
-        bundle.dataValue || selectedBundle?.dataValue || 0
-      ),
+  createdAt: Date.now(),
+  updatedAt: Date.now()
+};
 
-      amount: Number(
-        order.checkoutAmount ?? (Number(bundle.price) * 1.0195)
-      ),
-
-      status: orderStatus,
-
-      source: "web",
-
-      provider: "datamart",
-
-      isGuest: !auth.currentUser,
-
-      createdBy: auth.currentUser?.uid || "guest",
-
-      createdAt: Date.now(),
-    };
 
     // Only announce completed delivery as a completed purchase.
     if (orderStatus === "completed") {
