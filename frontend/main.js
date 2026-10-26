@@ -2155,72 +2155,86 @@ function handleNewDataMartOrder(returnedOrder) {
     0
   );
 
-  const normalized = {
-    orderId,
+const normalized = {
+// Public EcoData order ID, e.g. ED-2CD34.
+orderId,
 
-    reference: String(
-      returnedOrder.reference ||
-      returnedOrder.paymentReference ||
-      returnedOrder.providerOrderReference ||
-      orderId
-    ),
+// Full DataMart reference used for provider status checks,
+// e.g. GN-AB12CD34.
+providerOrderReference: String(
+returnedOrder.providerOrderReference ||
+returnedOrder.orderReference ||
+returnedOrder.reference ||
+""
+).trim(),
 
-    paymentReference:
-      returnedOrder.paymentReference || null,
+// existing reference field for compatibility.
+reference: String(
+returnedOrder.reference ||
+returnedOrder.orderReference ||
+returnedOrder.providerOrderReference ||
+orderId
+),
 
-    status: String(
-      returnedOrder.status ||
-      returnedOrder.orderStatus ||
-      "processing"
-    ).toLowerCase(),
+paymentReference:
+returnedOrder.paymentReference || null,
 
-    recipient:
-      returnedOrder.recipient ||
-      returnedOrder.phoneNumber ||
-      returnedOrder.phone ||
-      returnedOrder.items?.[0]?.recipient ||
-      "-",
+status: String(
+returnedOrder.status ||
+returnedOrder.orderStatus ||
+"processing"
+).toLowerCase(),
 
-    amount: Number(
-      returnedOrder.amount ??
-      selectedBundle?.price ??
-      0
-    ),
+recipient:
+returnedOrder.recipient ||
+returnedOrder.phoneNumber ||
+returnedOrder.phone ||
+returnedOrder.items?.[0]?.recipient ||
+"-",
 
-    costPrice,
+amount: Number(
+returnedOrder.amount ??
+selectedBundle?.price ??
+0
+),
 
-    profit: Number(
-      returnedOrder.profit ??
-      (
-        Number(returnedOrder.amount ?? selectedBundle?.price ?? 0) -
-        costPrice
-      )
-    ),
+costPrice,
 
-    network:
-      returnedOrder.network ||
-      selectedBundle?.network ||
-      "-",
+profit: Number(
+returnedOrder.profit ??
+(
+Number(
+returnedOrder.amount ??
+selectedBundle?.price ??
+0
+) - costPrice
+)
+),
 
-    volume: Number(
-      returnedOrder.volume ??
-      returnedOrder.capacity ??
-      returnedOrder.capacityGb ??
-      returnedOrder.size ??
-      selectedBundle?.size ??
-      0
-    ),
+network:
+returnedOrder.network ||
+selectedBundle?.network ||
+"-",
 
-    dataValue: String(
-      returnedOrder.dataValue ??
-      selectedBundle?.dataValue ??
-      ""
-    ),
+volume: Number(
+returnedOrder.volume ??
+returnedOrder.capacity ??
+returnedOrder.capacityGb ??
+returnedOrder.size ??
+selectedBundle?.size ??
+0
+),
 
-    source: "web",
-    provider: "datamart",
-    createdAt: returnedOrder.createdAt || Date.now()
-  };
+dataValue: String(
+returnedOrder.dataValue ??
+selectedBundle?.dataValue ??
+""
+),
+
+source: "web",
+provider: "datamart",
+createdAt: returnedOrder.createdAt || Date.now()
+};
 
   localStorage.setItem(
     "lastDataMartOrderReference",
@@ -2232,7 +2246,13 @@ function handleNewDataMartOrder(returnedOrder) {
   renderLiveOrderRow(normalized);
   createOrUpdateStatusCard(normalized);
 
-  startDataMartAutoPolling(normalized.orderId);
+ if(normalized.providerOrderReference){
+  startDataMartAutoPolling(normalized.providerOrderReference);
+ } else{
+  console.error("Cannot poll live status: provider reference is missing.", 
+    normalized.orderId
+  )
+ }
 
   console.log("DataMart live order normalized:", normalized);
 }
