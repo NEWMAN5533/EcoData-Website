@@ -995,35 +995,7 @@ document.addEventListener("click", () => {
               formattedPhone = "233" + formattedPhone.substring(1);
             }
 
-            // Validate routing (number)
-            if(bundle.network === "mtn") {
-
-              const validation = await validateRecipient(
-                formattedPhone,
-                bundle.packageName
-              );
-
-            if (!validation.success) {
-          showSnackBar(
-            validation.message || "Validation failed",
-            "error",
-            4000
-          );
-          return;
-        }
-
-        if (!validation.eligible) {
-          showSnackBar(
-            validation.message || "Recipient is not eligible",
-            "error",
-            4000
-          );
-          return;
-        }
-
-        lastValidation = validation;
-            }
-
+       
             // save bundle 
             lastPurchasedBundle = bundle;
 
