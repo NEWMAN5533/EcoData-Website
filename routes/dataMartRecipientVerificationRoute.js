@@ -2,6 +2,7 @@ import express from "express";
 import { getActiveVendor } from "../services/vendorManager.js";
 import { verifyDataMartRecipient } from "../services/dataMartService.js";
 
+
 const dataMartRecipientVerificationRoute = express.Router();
 
 dataMartRecipientVerificationRoute.post("/", async (req, res) => {
