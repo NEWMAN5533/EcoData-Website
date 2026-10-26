@@ -1,6 +1,6 @@
 // src/services/dataMartSellingPrices.js
 
-const MINIMUM_PROFIT = 1.00;
+const MINIMUM_PROFIT = 0.20;
 
 // Enter your chosen fixed selling prices here.
 // These prices exclude the Paystack fee.
