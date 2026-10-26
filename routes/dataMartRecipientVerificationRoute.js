@@ -27,11 +27,28 @@ function normalizeGhanaPhoneNumber(value) {
   return /^0\d{9}$/.test(phone) ? phone : null;
 }
 
+function allowPurchaseWithoutVerification(res, reason) {
+  console.warn(
+    "DataMart recipient verification unavailable; allowing checkout to continue:",
+    reason
+  );
+
+  return res.status(200).json({
+    success: true,
+    canProceed: true,
+    verificationRequired: false,
+    verificationSkipped: true,
+    provider: "datamart",
+    code: "VERIFY_UNAVAILABLE",
+    message:
+      "Recipient verification is temporarily unavailable. You may continue to payment.",
+  });
+}
+
 dataMartRecipientVerificationRoute.post("/", async (req, res) => {
   try {
     const { network, recipient, size } = req.body ?? {};
 
-    // 1. Validate the request.
     if (!network || !recipient || size == null) {
       return res.status(400).json({
         success: false,
@@ -66,7 +83,6 @@ dataMartRecipientVerificationRoute.post("/", async (req, res) => {
       });
     }
 
-    // 2. Preserve the existing SwiftData purchase flow.
     const activeVendor = String(await getActiveVendor())
       .trim()
       .toLowerCase();
@@ -91,72 +107,98 @@ dataMartRecipientVerificationRoute.post("/", async (req, res) => {
       });
     }
 
-    // 3. DataMart's documented verification is for MTN only.
+    // DataMart verification is documented for MTN only.
+    // Other networks skip this optional pre-check.
     if (!["MTN", "YELLO"].includes(normalizedNetwork)) {
-      return res.status(422).json({
-        success: false,
-        canProceed: false,
-        verificationRequired: true,
-        code: "NETWORK_VERIFICATION_UNAVAILABLE",
-        message:
-          "Recipient verification through DataMart is currently available for MTN only.",
-      });
+      return allowPurchaseWithoutVerification(
+        res,
+        `Verification not supported for network ${normalizedNetwork}`
+      );
     }
 
-    // 4. Call DataMart directly. No database cache.
     const apiKey = process.env.DATAMART_API_KEY;
+    const apiSecret = process.env.DATAMART_API_SECRET;
 
-    if (!apiKey) {
-      console.error("DATAMART_API_KEY is not configured.");
+    if (!apiKey || !apiSecret) {
+      console.error(
+        "DataMart verification credentials are not fully configured."
+      );
 
-      return res.status(500).json({
-        success: false,
-        canProceed: false,
-        code: "VERIFICATION_CONFIG_ERROR",
-        message:
-          "Recipient verification is temporarily unavailable.",
-      });
+      return allowPurchaseWithoutVerification(
+        res,
+        "Verification credentials are missing"
+      );
     }
 
-    const response = await datamart.post(
-      "/verify-number",
-      {
-        phoneNumber: phone,
-      },
-      {
-        headers: {
-          "X-API-Key": apiKey,
-          "X-API-Secret": process.env.DATAMART_API_SECRET,
+    let response;
+
+    try {
+      response = await datamart.post(
+        "/verify-number",
+        {
+          phoneNumber: phone,
         },
+        {
+          headers: {
+            "X-API-Key": apiKey,
+            "X-API-Secret": apiSecret,
+          },
+        }
+      );
+    } catch (error) {
+      const providerStatus = error.response?.status;
+      const providerBody = error.response?.data;
+      const providerCode = providerBody?.code;
+
+      console.error("DataMart recipient verification request failed:", {
+        message: error.message,
+        providerStatus: providerStatus ?? null,
+        providerCode: providerCode ?? null,
+      });
+
+      // These failures indicate that the verification service
+      // could not reliably give us a result.
+      if (
+        !error.response ||
+        providerStatus >= 500 ||
+        providerStatus === 408 ||
+        providerStatus === 429 ||
+        providerCode === "VERIFY_UNAVAILABLE" ||
+        providerCode === "RATE_LIMIT_EXCEEDED"
+      ) {
+        return allowPurchaseWithoutVerification(
+          res,
+          providerCode || providerStatus || error.code || error.message
+        );
       }
-    );
+
+      // Unexpected client/auth/config errors should not be
+      // silently treated as a recipient verification result.
+      return res.status(502).json({
+        success: false,
+        canProceed: false,
+        code: "VERIFICATION_FAILED",
+        message:
+          "We could not verify this recipient. Please try again.",
+      });
+    }
 
     const result = response.data?.data;
 
+    // A malformed response is a verification outage, not proof
+    // that the recipient is invalid.
     if (
       response.data?.status !== "success" ||
       !result ||
       typeof result.servable !== "boolean"
     ) {
-    
-
-      console.error("Recipient verification failed:", {
-  message: error.message,
-  providerStatus: providerStatus ?? null,
-  providerCode: providerCode ?? null,
-  providerMessage: providerBody?.message ?? null,
-});
-
-      return res.status(502).json({
-        success: false,
-        canProceed: false,
-        code: "INVALID_VERIFICATION_RESPONSE",
-        message:
-          "We could not confirm this recipient's eligibility. Please try again.",
-      });
+      return allowPurchaseWithoutVerification(
+        res,
+        "DataMart returned an incomplete verification response"
+      );
     }
 
-    // 5. Active line: any supported bundle size may proceed.
+    // Verified, eligible line.
     if (
       result.servable === true &&
       result.recommendation === "sell_any"
@@ -165,6 +207,7 @@ dataMartRecipientVerificationRoute.post("/", async (req, res) => {
         success: true,
         canProceed: true,
         verificationRequired: true,
+        verificationSkipped: false,
         provider: "datamart",
         verification: result,
         message:
@@ -173,7 +216,7 @@ dataMartRecipientVerificationRoute.post("/", async (req, res) => {
       });
     }
 
-    // 6. New/frozen line: only the 1GB activation bundle may proceed.
+    // Activation-required line: only 1GB can proceed.
     if (
       result.servable === false &&
       result.recommendation === "activate_first"
@@ -184,11 +227,12 @@ dataMartRecipientVerificationRoute.post("/", async (req, res) => {
           canProceed: true,
           verificationRequired: true,
           activationRequired: true,
+          verificationSkipped: false,
           provider: "datamart",
           verification: result,
           message:
             result.message ||
-            "Select the 1GB activation bundle and allow up to 72 hours for activation.",
+            "Select the 1GB activation bundle and allow time for activation.",
         });
       }
 
@@ -205,7 +249,7 @@ dataMartRecipientVerificationRoute.post("/", async (req, res) => {
       });
     }
 
-    // 7. Do not approve an unknown recommendation.
+    // A definite rejection must still block the purchase.
     return res.status(422).json({
       success: false,
       canProceed: false,
@@ -217,50 +261,14 @@ dataMartRecipientVerificationRoute.post("/", async (req, res) => {
         "This recipient could not be approved for the selected bundle.",
     });
   } catch (error) {
-    const providerStatus = error.response?.status;
-    const providerBody = error.response?.data;
-    const providerCode = providerBody?.code;
-
-    console.error("Recipient verification failed:", {
+    console.error("Recipient verification route error:", {
       message: error.message,
-      providerStatus: providerStatus ?? null,
-      providerCode: providerCode ?? null,
     });
 
-    if (
-      providerStatus === 429 ||
-      providerCode === "RATE_LIMIT_EXCEEDED"
-    ) {
-      return res.status(429).json({
-        success: false,
-        canProceed: false,
-        code: "RATE_LIMIT_EXCEEDED",
-        retryAfter: providerBody?.retryAfter,
-        message:
-          "Too many verification requests. Please wait before trying again.",
-      });
-    }
-
-    if (
-      providerStatus === 503 ||
-      providerCode === "VERIFY_UNAVAILABLE"
-    ) {
-      return res.status(503).json({
-        success: false,
-        canProceed: false,
-        code: "VERIFY_UNAVAILABLE",
-        message:
-          "Recipient verification is temporarily unavailable. Please try again shortly.",
-      });
-    }
-
-    return res.status(502).json({
-      success: false,
-      canProceed: false,
-      code: "VERIFICATION_FAILED",
-      message:
-        "We could not verify this recipient. Please try again.",
-    });
+    return allowPurchaseWithoutVerification(
+      res,
+      "Unexpected error in the verification route"
+    );
   }
 });
 
