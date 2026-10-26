@@ -2162,13 +2162,13 @@ function handleNewDataMartOrder(returnedOrder, paymentReference, customerPhone) 
 
 
 const dataMartPollingTimers = new Map();
-
 function startDataMartAutoPolling(providerReference) {
   if (!providerReference) return;
 
   const reference = String(providerReference).trim();
   if (!reference) return;
 
+  // Prevent duplicate polling for the same DataMart order.
   if (dataMartPollingTimers.has(reference)) return;
 
   let stopped = false;
@@ -2212,7 +2212,9 @@ function startDataMartAutoPolling(providerReference) {
         `${API_BASE}/api/datamart/order-status/${encodeURIComponent(reference)}`,
         {
           method: "GET",
-          headers: { Accept: "application/json" },
+          headers: {
+            Accept: "application/json"
+          },
           cache: "no-store"
         }
       );
@@ -2232,11 +2234,11 @@ function startDataMartAutoPolling(providerReference) {
       if (!response.ok || !result?.success) {
         console.warn("DataMart status check failed:", {
           httpStatus: response.status,
-          code: result?.code || null,
-          message: result?.message || "Unknown status-check error"
+          message:
+            result?.message || "Unknown status-check error"
         });
 
-        // Keep polling; a temporary error should not mark an order failed.
+        // A temporary API error must not mark an order as failed.
         return;
       }
 
@@ -2250,27 +2252,41 @@ function startDataMartAutoPolling(providerReference) {
 
       const status = statusMap[rawStatus] || rawStatus;
 
-      const orders = JSON.parse(
-        localStorage.getItem(LIVE_ORDERS_KEY) || "[]"
-      );
+      let orders;
 
-      // Match the saved order using the identifier fields your app stores.
+      try {
+        orders = JSON.parse(
+          localStorage.getItem(LIVE_ORDERS_KEY) || "[]"
+        );
+
+        if (!Array.isArray(orders)) {
+          orders = [];
+        }
+      } catch {
+        console.error("Could not parse saved live orders.");
+        return;
+      }
+
+      // Match using the DataMart provider reference,
+      // NOT the short EcoData display ID.
       const index = orders.findIndex(order =>
-        String(order.orderId) === reference &&
-        String(order.provider || "swiftdata").toLowerCase() === "datamart"
+        String(order.providerOrderReference || "").trim() === reference &&
+        String(order.provider || "").toLowerCase() === "datamart"
       );
 
       if (index === -1) {
         console.warn(
-          "DataMart order not found locally. Check whether the polling reference matches orderId:",
+          "DataMart order not found locally by providerOrderReference:",
           reference
         );
-        stopPolling();
+
+        // Keep polling: the local order may be saved shortly.
         return;
       }
 
       const currentOrder = orders[index];
 
+      // Never overwrite an already terminal local status.
       if (
         terminalStatuses.has(
           String(currentOrder.status || "").trim().toLowerCase()
@@ -2284,7 +2300,8 @@ function startDataMartAutoPolling(providerReference) {
         ...currentOrder,
         status,
         updatedAt: Date.now(),
-        provider: "datamart"
+        provider: "datamart",
+        providerOrderReference: reference
       };
 
       orders[index] = updatedOrder;
@@ -2299,13 +2316,20 @@ function startDataMartAutoPolling(providerReference) {
       updatePendingCard();
       loadActiveBadge();
 
-      console.log("DataMart live status:", reference, status);
+      console.log(
+        "DataMart live status:",
+        updatedOrder.orderId,
+        status
+      );
 
       if (terminalStatuses.has(status)) {
         stopPolling();
       }
     } catch (error) {
-      console.error("DataMart polling error:", error.message);
+      console.error(
+        "DataMart polling error:",
+        error.message
+      );
     } finally {
       requestInProgress = false;
     }
@@ -2322,13 +2346,12 @@ function startDataMartAutoPolling(providerReference) {
     dataMartPollingTimers.delete(reference);
   }
 
-  // Register the stop callback before the first request starts.
+  // Register before making the initial request.
   dataMartPollingTimers.set(reference, stopPolling);
 
   checkStatus();
   timer = setInterval(checkStatus, 10000);
 }
-
 
 
 
