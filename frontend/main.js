@@ -80,6 +80,12 @@ const PACKAGE_MAP = {
 const STORAGE_KEY = "selected_mtn_package";
 
 
+function getVendorForPackage(packageName) {
+  return packageName === "mtn_data_normal_delivery"
+    ? "datamart"
+    : "swiftdata";
+}
+
 
 
 function resolvePackageName(network) {
@@ -299,46 +305,24 @@ async function precheckRecipientBeforePayment(bundle, recipient) {
     return false;
   }
 
+  const vendor = getVendorForPackage(bundle.packageName);
+
+  console.log("Offer:", bundle.packageName);
+  console.log("Selected vendor:", vendor);
+
   try {
-    // 1. Check the active vendor FIRST.
-    const vendorResponse = await fetch("/api/vendor-status", {
-      method: "GET",
-      cache: "no-store"
-    });
-
-    if (!vendorResponse.ok) {
-      throw new Error("Unable to determine the active data vendor.");
-    }
-
-    const vendorResult = await vendorResponse.json();
-
-    const activeVendor = String(
-      vendorResult.activeVendor || ""
-    ).trim().toLowerCase();
-
-    console.log("Active vendor before validation:", activeVendor);
-
-    if (!["datamart", "swiftdata"].includes(activeVendor)) {
-      showSnackBar(
-        "The data provider is unavailable. Please try again.",
-        "error",
-        4000
-      );
-      return false;
-    }
-
-    // 2. DataMart verification ONLY.
-    if (activeVendor === "datamart") {
-      const response = await fetch("/api/verify-recipient", {
+    // DataMart: verify through DataMart only.
+    if (vendor === "datamart") {
+      const response = await fetch("/api/verify-number", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        cache: "no-store",
         body: JSON.stringify({
           network: bundle.network || "mtn",
           recipient: phone,
-          size: Number(bundle.size)
+          size: Number(bundle.size),
+          offerSlug: bundle.packageName
         })
       });
 
@@ -353,15 +337,9 @@ async function precheckRecipientBeforePayment(bundle, recipient) {
         return false;
       }
 
-      // Ensure the backend used DataMart too.
       if (result.provider !== "datamart") {
-        console.error("Vendor mismatch:", {
-          activeVendor,
-          verifiedBy: result.provider
-        });
-
         showSnackBar(
-          "The active provider changed. Please retry verification.",
+          "Verification provider mismatch. Please try again.",
           "error",
           4000
         );
@@ -370,12 +348,13 @@ async function precheckRecipientBeforePayment(bundle, recipient) {
 
       lastValidation = {
         success: true,
+        eligible: true,
         provider: "datamart",
         verification: result.verification
       };
 
       showSnackBar(
-        result.message || "Recipient verification passed.",
+        result.message || "Recipient verified.",
         "success",
         3000
       );
@@ -383,36 +362,28 @@ async function precheckRecipientBeforePayment(bundle, recipient) {
       return true;
     }
 
-    // 3. SwiftData validation ONLY.
-    if (activeVendor === "swiftdata") {
-      if (String(bundle.network).toLowerCase() !== "mtn") {
-        // Preserve your existing flow for other networks.
-        return true;
-      }
+    // SwiftData: preserve the existing validation.
+    const validation = await validateRecipient(
+      "233" + phone.substring(1),
+      bundle.packageName,
+      bundle.network
+    );
 
-      const validation = await validateRecipient(
-        "233" + phone.substring(1),
-        bundle.packageName
+    if (!validation.success || !validation.eligible) {
+      showSnackBar(
+        validation.message || "Recipient validation failed.",
+        "error",
+        4000
       );
-
-      if (!validation.success || !validation.eligible) {
-        showSnackBar(
-          validation.message || "Recipient validation failed.",
-          "error",
-          4000
-        );
-        return false;
-      }
-
-      lastValidation = {
-        ...validation,
-        provider: "swiftdata"
-      };
-
-      return true;
+      return false;
     }
 
-    return false;
+    lastValidation = {
+      ...validation,
+      provider: "swiftdata"
+    };
+
+    return true;
 
   } catch (error) {
     console.error("Recipient precheck error:", error);
@@ -858,38 +829,7 @@ document.addEventListener("click", () => {
           //====================
           // VALIDATE ROUTING 
           //====================
-          if(bundle.network === "mtn"){
-
-            const validation = await
-            validateRecipient("233" + recipient.substring(1),
-            selectedBundle.packageName
-        );
-
-
-        if (!validation.success) {
-        showSnackBar(
-          validation.message || "Validation failed",
-          "error",
-          4000
-        );
-        return;
-      }
-
-      if (!validation.eligible) {
-        showSnackBar(
-          validation.message || "Recipient is not eligible",
-          "error",
-          4000
-        );
-        return;
-      }
-
-   
-
-lastValidation = validation;
-
-      
-        }
+ 
 
           //==========================
           // VALIDATE ROUTING (NUMBER)
