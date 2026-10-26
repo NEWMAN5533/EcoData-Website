@@ -1,20 +1,43 @@
 import express from "express";
+import axios from "axios";
 import { getActiveVendor } from "../services/vendorManager.js";
-import { verifyDataMartRecipient } from "../services/dataMartService.js";
-
 
 const dataMartRecipientVerificationRoute = express.Router();
+
+const DATAMART_API_URL =
+  "https://api.datamartgh.shop/api/developer";
+
+const datamart = axios.create({
+  baseURL: DATAMART_API_URL,
+  timeout: 20000,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+function normalizeGhanaPhoneNumber(value) {
+  let phone = String(value || "").trim();
+
+  if (phone.startsWith("+233")) {
+    phone = "0" + phone.slice(4);
+  } else if (phone.startsWith("233")) {
+    phone = "0" + phone.slice(3);
+  }
+
+  return /^0\d{9}$/.test(phone) ? phone : null;
+}
 
 dataMartRecipientVerificationRoute.post("/", async (req, res) => {
   try {
     const { network, recipient, size } = req.body ?? {};
 
-    // 1. Validate required fields.
+    // 1. Validate the request.
     if (!network || !recipient || size == null) {
       return res.status(400).json({
         success: false,
         canProceed: false,
-        message: "Network, recipient number, and bundle size are required.",
+        message:
+          "Network, recipient number, and bundle size are required.",
       });
     }
 
@@ -23,8 +46,17 @@ dataMartRecipientVerificationRoute.post("/", async (req, res) => {
       .toUpperCase()
       .replace(/[\s-]+/g, "");
 
-    const phone = String(recipient).trim();
+    const phone = normalizeGhanaPhoneNumber(recipient);
     const capacity = Number(size);
+
+    if (!phone) {
+      return res.status(400).json({
+        success: false,
+        canProceed: false,
+        code: "INVALID_RECIPIENT",
+        message: "Enter a valid Ghanaian phone number.",
+      });
+    }
 
     if (!Number.isFinite(capacity) || capacity <= 0) {
       return res.status(400).json({
@@ -34,12 +66,11 @@ dataMartRecipientVerificationRoute.post("/", async (req, res) => {
       });
     }
 
-    // 2. Check which vendor is active.
+    // 2. Preserve the existing SwiftData purchase flow.
     const activeVendor = String(await getActiveVendor())
       .trim()
       .toLowerCase();
 
-    // Preserve the existing SwiftData purchase flow.
     if (activeVendor === "swiftdata") {
       return res.json({
         success: true,
@@ -55,11 +86,12 @@ dataMartRecipientVerificationRoute.post("/", async (req, res) => {
         success: false,
         canProceed: false,
         code: "VENDOR_UNAVAILABLE",
-        message: "The active data provider is unavailable. Please try again.",
+        message:
+          "The active data provider is unavailable. Please try again.",
       });
     }
 
-    // 3. DataMart's documented verification supports MTN only.
+    // 3. DataMart's documented verification is for MTN only.
     if (!["MTN", "YELLO"].includes(normalizedNetwork)) {
       return res.status(422).json({
         success: false,
@@ -67,14 +99,59 @@ dataMartRecipientVerificationRoute.post("/", async (req, res) => {
         verificationRequired: true,
         code: "NETWORK_VERIFICATION_UNAVAILABLE",
         message:
-          "Recipient verification is currently available for MTN only. Payment cannot proceed through this verification flow for the selected network.",
+          "Recipient verification through DataMart is currently available for MTN only.",
       });
     }
 
-    // 4. Call DataMart directly. No database cache is needed.
-    const result = await verifyDataMartRecipient(phone);
+    // 4. Call DataMart directly. No database cache.
+    const apiKey = process.env.DATAMART_API_KEY;
 
-    // 5. The number can receive any bundle size.
+    if (!apiKey) {
+      console.error("DATAMART_API_KEY is not configured.");
+
+      return res.status(500).json({
+        success: false,
+        canProceed: false,
+        code: "VERIFICATION_CONFIG_ERROR",
+        message:
+          "Recipient verification is temporarily unavailable.",
+      });
+    }
+
+    const response = await datamart.post(
+      "/verify-number",
+      {
+        phoneNumber: phone,
+      },
+      {
+        headers: {
+          "X-API-Key": apiKey,
+        },
+      }
+    );
+
+    const result = response.data?.data;
+
+    if (
+      response.data?.status !== "success" ||
+      !result ||
+      typeof result.servable !== "boolean"
+    ) {
+      console.error(
+        "Unexpected DataMart verification response:",
+        response.data
+      );
+
+      return res.status(502).json({
+        success: false,
+        canProceed: false,
+        code: "INVALID_VERIFICATION_RESPONSE",
+        message:
+          "We could not confirm this recipient's eligibility. Please try again.",
+      });
+    }
+
+    // 5. Active line: any supported bundle size may proceed.
     if (
       result.servable === true &&
       result.recommendation === "sell_any"
@@ -91,7 +168,7 @@ dataMartRecipientVerificationRoute.post("/", async (req, res) => {
       });
     }
 
-    // 6. New/frozen number: allow only the 1GB activation bundle.
+    // 6. New/frozen line: only the 1GB activation bundle may proceed.
     if (
       result.servable === false &&
       result.recommendation === "activate_first"
@@ -106,7 +183,7 @@ dataMartRecipientVerificationRoute.post("/", async (req, res) => {
           verification: result,
           message:
             result.message ||
-            "This number needs activation. Purchase 1GB first and allow up to 72 hours for activation.",
+            "Select the 1GB activation bundle and allow up to 72 hours for activation.",
         });
       }
 
@@ -123,7 +200,7 @@ dataMartRecipientVerificationRoute.post("/", async (req, res) => {
       });
     }
 
-    // 7. Unexpected or unsupported verification response.
+    // 7. Do not approve an unknown recommendation.
     return res.status(422).json({
       success: false,
       canProceed: false,
@@ -132,23 +209,19 @@ dataMartRecipientVerificationRoute.post("/", async (req, res) => {
       verification: result,
       message:
         result.message ||
-        "We could not confirm that this number can receive data. Please check the number or try again later.",
+        "This recipient could not be approved for the selected bundle.",
     });
   } catch (error) {
-    const providerStatus = error.providerHttpStatus;
-    const providerCode =
-      error.providerResponse?.code ||
-      error.providerCode ||
-      error.code;
+    const providerStatus = error.response?.status;
+    const providerBody = error.response?.data;
+    const providerCode = providerBody?.code;
 
     console.error("Recipient verification failed:", {
       message: error.message,
       providerStatus: providerStatus ?? null,
       providerCode: providerCode ?? null,
-      providerResponse: error.providerResponse ?? null,
     });
 
-    // DataMart rate limit: maximum two real checks per minute per API key.
     if (
       providerStatus === 429 ||
       providerCode === "RATE_LIMIT_EXCEEDED"
@@ -157,13 +230,12 @@ dataMartRecipientVerificationRoute.post("/", async (req, res) => {
         success: false,
         canProceed: false,
         code: "RATE_LIMIT_EXCEEDED",
-        retryAfter: error.providerResponse?.retryAfter,
+        retryAfter: providerBody?.retryAfter,
         message:
           "Too many verification requests. Please wait before trying again.",
       });
     }
 
-    // DataMart verification temporarily unavailable.
     if (
       providerStatus === 503 ||
       providerCode === "VERIFY_UNAVAILABLE"
@@ -177,11 +249,12 @@ dataMartRecipientVerificationRoute.post("/", async (req, res) => {
       });
     }
 
-    return res.status(500).json({
+    return res.status(502).json({
       success: false,
       canProceed: false,
       code: "VERIFICATION_FAILED",
-      message: "We could not verify this recipient. Please try again.",
+      message:
+        "We could not verify this recipient. Please try again.",
     });
   }
 });
