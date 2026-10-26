@@ -1735,7 +1735,11 @@ async function orderDataMartBundle(
 
 
 
-    await handleOrderByActiveVendor(order);
+    await handleOrderByActiveVendor(
+      returnOrder,
+      paymentReference,
+      customerPhone
+    );
 
     updateHomepageTotals(orderData);
 
@@ -2067,12 +2071,18 @@ const normalized = {
 
 
 
-function handleNewDataMartOrder(returnedOrder) {
+function formatOrderId(paymentReference) {
+  const digits = String(paymentReference || "").replace(/\D/g, "");
+  return `ED-${digits.slice(-6).padStart(6, "0")}`;
+}
+
+function handleNewDataMartOrder(returnedOrder, paymentReference, customerPhone) {
   if (!returnedOrder) return;
 
+  // Keep DataMart's provider reference for polling only.
   const providerReference =
-    returnedOrder.orderReference ||
     returnedOrder.providerOrderReference ||
+    returnedOrder.orderReference ||
     returnedOrder.reference;
 
   if (!providerReference) {
@@ -2083,15 +2093,26 @@ function handleNewDataMartOrder(returnedOrder) {
     return;
   }
 
+  // The payment reference identifies the EcoData order.
+  if (!paymentReference) {
+    console.error(
+      "Missing EcoData payment reference for DataMart order."
+    );
+    return;
+  }
+
   const costPrice = Number(
     returnedOrder.providerPrice ??
     returnedOrder.price ??
     0
   );
 
+  const sellingPrice = Number(selectedBundle?.price || 0);
+
   const normalized = {
-    orderId: String(providerReference),
-    reference: String(providerReference),
+    orderId: formatOrderId(paymentReference),
+    paymentReference: String(paymentReference),
+    providerOrderReference: String(providerReference),
 
     status:
       returnedOrder.orderStatus ||
@@ -2099,16 +2120,15 @@ function handleNewDataMartOrder(returnedOrder) {
       "processing",
 
     recipient:
+      customerPhone ||
       returnedOrder.phoneNumber ||
       returnedOrder.phone ||
       returnedOrder.recipient ||
       "-",
 
-    amount: Number(selectedBundle?.price || 0),
+    amount: sellingPrice,
     costPrice,
-
-    profit:
-      Number(selectedBundle?.price || 0) - costPrice,
+    profit: sellingPrice - costPrice,
 
     network:
       returnedOrder.network ||
@@ -2126,18 +2146,19 @@ function handleNewDataMartOrder(returnedOrder) {
     provider: "datamart"
   };
 
+  // Store the provider reference separately from the displayed Order ID.
   localStorage.setItem(
     "lastDataMartOrderReference",
-    normalized.orderId
+    String(providerReference)
   );
 
   saveLiveOrder(normalized);
   renderLiveOrderRow(normalized);
   createOrUpdateStatusCard(normalized);
 
-  startDataMartAutoPolling(normalized.orderId);
+  // Poll DataMart using its provider reference, never the ED display ID.
+  startDataMartAutoPolling(String(providerReference));
 }
-
 
 
 const dataMartPollingTimers = new Map();
