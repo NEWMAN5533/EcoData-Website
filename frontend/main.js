@@ -296,6 +296,7 @@ function normalizeGhanaPhone(phone) {
 async function precheckRecipientBeforePayment(bundle, recipient) {
   const phone = normalizeGhanaPhone(recipient);
 
+  // 1. Validate phone number locally first.
   if (!/^0\d{9}$/.test(phone)) {
     showSnackBar(
       "Enter a valid 10-digit Ghanaian phone number.",
@@ -311,12 +312,15 @@ async function precheckRecipientBeforePayment(bundle, recipient) {
   console.log("Selected vendor:", vendor);
 
   try {
-    // DataMart: verify through DataMart only.
+    // =========================================
+    // DATAMART RECIPIENT VERIFICATION
+    // =========================================
     if (vendor === "datamart") {
       const response = await fetch("/api/verify-recipient", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Accept": "application/json"
         },
         body: JSON.stringify({
           network: bundle.network || "mtn",
@@ -326,43 +330,128 @@ async function precheckRecipientBeforePayment(bundle, recipient) {
         })
       });
 
-      const result = await response.json();
+      let result;
 
-      if (!response.ok || result.canProceed !== true) {
+      try {
+        result = await response.json();
+      } catch {
+        result = null;
+      }
+
+      console.log("DataMart verification response:", {
+        httpStatus: response.status,
+        result
+      });
+
+      // -----------------------------------------
+      // A. Backend explicitly approves purchase.
+      // -----------------------------------------
+      if (result?.canProceed === true) {
+        lastValidation = {
+          success: true,
+          eligible: true,
+          provider: result.provider || "datamart",
+          verification: result.verification || null,
+          verificationSkipped:
+            result.verificationSkipped === true
+        };
+
         showSnackBar(
-          result.message || "Recipient verification failed.",
+          result.message ||
+            "Recipient check complete. You may continue.",
+          "success",
+          3000
+        );
+
+        return true;
+      }
+
+      // -----------------------------------------
+      // B. Confirmed recipient rejection.
+      // These conditions MUST block payment.
+      // -----------------------------------------
+      const blockingCodes = [
+        "INVALID_RECIPIENT",
+        "RECIPIENT_NOT_VERIFIED",
+        "RECIPIENT_ACTIVATION_REQUIRED"
+      ];
+
+      if (
+        blockingCodes.includes(result?.code) ||
+        result?.activationRequired === true
+      ) {
+        showSnackBar(
+          result.message ||
+            "This recipient cannot receive the selected bundle.",
           "error",
           5000
         );
+
         return false;
       }
 
-      if (result.provider !== "datamart") {
+      // -----------------------------------------
+      // C. Verification unavailable.
+      // Allow payment to continue if the backend
+      // explicitly marks the failure as temporary.
+      // -----------------------------------------
+      const temporaryFailureCodes = [
+        "VERIFY_UNAVAILABLE",
+        "VERIFICATION_FAILED",
+        "INVALID_VERIFICATION_RESPONSE",
+        "NETWORK_VERIFICATION_UNAVAILABLE",
+        "VERIFICATION_CONFIG_ERROR",
+        "VENDOR_UNAVAILABLE"
+      ];
+
+      const temporaryHttpStatuses = [
+        408,
+        429,
+        500,
+        502,
+        503,
+        504
+      ];
+
+      const verificationUnavailable =
+        temporaryFailureCodes.includes(result?.code) ||
+        temporaryHttpStatuses.includes(response.status);
+
+      if (verificationUnavailable) {
+        lastValidation = {
+          success: true,
+          eligible: true,
+          provider: "datamart",
+          verificationSkipped: true,
+          verificationStatus: "unavailable"
+        };
+
         showSnackBar(
-          "Verification provider mismatch. Please try again.",
-          "error",
-          4000
+          "Recipient verification is temporarily unavailable. You can continue with your purchase.",
+          "info",
+          5000
         );
-        return false;
+
+        return true;
       }
 
-      lastValidation = {
-        success: true,
-        eligible: true,
-        provider: "datamart",
-        verification: result.verification
-      };
-
+      // -----------------------------------------
+      // D. Unknown or ambiguous response.
+      // Fail safely instead of assuming approval.
+      // -----------------------------------------
       showSnackBar(
-        result.message || "Recipient verified.",
-        "success",
-        3000
+        result?.message ||
+          "We could not confirm this recipient. Please try again.",
+        "error",
+        5000
       );
 
-      return true;
+      return false;
     }
 
-    // SwiftData: preserve the existing validation.
+    // =========================================
+    // SWIFTDATA: KEEP EXISTING VALIDATION
+    // =========================================
     const validation = await validateRecipient(
       "233" + phone.substring(1),
       bundle.packageName,
@@ -375,6 +464,7 @@ async function precheckRecipientBeforePayment(bundle, recipient) {
         "error",
         4000
       );
+
       return false;
     }
 
@@ -388,6 +478,27 @@ async function precheckRecipientBeforePayment(bundle, recipient) {
   } catch (error) {
     console.error("Recipient precheck error:", error);
 
+    // A network exception means verification failed,
+    // not that the recipient was confirmed invalid.
+    // Allow the purchase to continue for DataMart only.
+    if (vendor === "datamart") {
+      lastValidation = {
+        success: true,
+        eligible: true,
+        provider: "datamart",
+        verificationSkipped: true,
+        verificationStatus: "unavailable"
+      };
+
+      showSnackBar(
+        "Recipient verification is temporarily unavailable. You can continue with your purchase.",
+        "info",
+        5000
+      );
+
+      return true;
+    }
+
     showSnackBar(
       "Unable to verify the recipient. Please try again.",
       "error",
@@ -397,7 +508,6 @@ async function precheckRecipientBeforePayment(bundle, recipient) {
     return false;
   }
 }
-
 
 
 
