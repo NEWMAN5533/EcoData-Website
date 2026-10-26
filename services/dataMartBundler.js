@@ -115,9 +115,9 @@ export async function handleDataMartBuyDataRequest(
   }
 
   if (typeof verifyPaystack !== "function" || !processedOrders) {
-    console.error("DataMart handler dependencies are missing.");
+    console.error("Ecodata handler dependencies are missing.");
 
-    return failure(500, "DataMart purchase service is not configured.");
+    return failure(500, "Ecodata purchase service is not configured.");
   }
 
   // Check the persistent DataMart record before the in-memory cache.
@@ -142,7 +142,7 @@ export async function handleDataMartBuyDataRequest(
           status: 200,
           body: {
             success: true,
-            message: "This DataMart order was already processed.",
+            message: "This Ecodata order was already processed.",
             order: orderResponse,
           },
         };
@@ -151,23 +151,23 @@ export async function handleDataMartBuyDataRequest(
       if (orderStatus === "failed") {
         return failure(
           409,
-          "This DataMart order previously failed. Check its saved record before taking further action.",
+          "This Ecodata order previously failed. Check its saved record before taking further action.",
           { order: orderResponse }
         );
       }
 
       return failure(
         202,
-        "This DataMart order is already recorded and was not resubmitted.",
+        "This Ecodata order is already recorded and was not resubmitted.",
         { order: orderResponse }
       );
     }
   } catch (error) {
-    console.error("Failed to check existing DataMart order:", error.message);
+    console.error("Failed to check existing Ecodata order:", error.message);
 
     return failure(
       500,
-      "Unable to check the existing DataMart order. No new purchase was submitted."
+      "Unable to check the existing Ecodata order. No new purchase was submitted."
     );
   }
 
@@ -214,12 +214,12 @@ export async function handleDataMartBuyDataRequest(
       !Number.isFinite(Number(baseSellingPrice)) ||
       Number(baseSellingPrice) <= 0
     ) {
-      return failure(400, "Invalid DataMart selling price.");
+      return failure(400, "Invalid Ecodata selling price.");
     }
 
     const expectedCheckoutPrice = getCheckoutPrice(baseSellingPrice);
 
-    console.log("DataMart payment price check:", {
+    console.log("Ecodata payment price check:", {
   paymentReference: reference,
   paystackAmountPesewas: amountPesewas,
   actualAmountGHS,
@@ -227,7 +227,6 @@ export async function handleDataMartBuyDataRequest(
   expectedCheckoutPrice,
   feeRate: PAYSTACK_FEE_RATE
 });
-
 
 console.log("Backend price debug:", {
   network,
@@ -241,7 +240,7 @@ console.log("Backend price debug:", {
     if (!sameMoney(actualAmountGHS, expectedCheckoutPrice)) {
       return failure(
         400,
-        "The payment amount does not match the configured DataMart selling price."
+        "The payment amount does not match the configured base price."
       );
     }
 
