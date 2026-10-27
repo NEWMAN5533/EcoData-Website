@@ -2691,6 +2691,187 @@ function saveLiveOrder(order) {
 // ends
 
 
+
+
+
+
+
+const MANUAL_DATAMART_PAYMENT_REFERENCES = [
+  "T219499556421049"
+];
+
+async function reconcileManualDataMartOrders() {
+  const API_BASE =
+    window.location.hostname === "localhost"
+      ? "http://localhost:3000"
+      : "https://ecodata-app.onrender.com";
+
+  const references = [
+    ...new Set(
+      MANUAL_DATAMART_PAYMENT_REFERENCES
+        .map(ref => String(ref || "").trim())
+        .filter(Boolean)
+    )
+  ];
+
+  if (!references.length) {
+    console.warn("No payment references provided.");
+    return;
+  }
+
+  const orders = JSON.parse(
+    localStorage.getItem(LIVE_ORDERS_KEY) || "[]"
+  );
+
+  for (const paymentReference of references) {
+    const providerReference =
+      `Ia553341879ecodata-${paymentReference}`;
+
+    console.log(
+      "Checking DataMart order:",
+      providerReference
+    );
+
+    try {
+      const response = await fetch(
+        `${API_BASE}/api/datamart/order-status/${encodeURIComponent(providerReference)}`,
+        {
+          method: "GET",
+          headers: { Accept: "application/json" },
+          cache: "no-store"
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok || result.success !== true) {
+        console.error(
+          "Status lookup failed:",
+          paymentReference,
+          result
+        );
+        continue;
+      }
+
+      const providerOrder = result.order || result.data || {};
+
+      const rawStatus = String(
+        providerOrder.status ||
+        providerOrder.orderStatus ||
+        "processing"
+      ).trim().toLowerCase();
+
+      const statusMap = {
+        completed: "completed",
+        delivered: "completed",
+        success: "completed",
+        successful: "completed",
+        failed: "failed",
+        cancelled: "failed",
+        canceled: "failed",
+        rejected: "failed",
+        refunded: "refunded",
+        pending: "processing",
+        waiting: "processing",
+        processing: "processing",
+        in_progress: "processing",
+        "in progress": "processing"
+      };
+
+      const status = statusMap[rawStatus] || rawStatus;
+
+      // Match by either the saved provider reference
+      // or the original payment reference.
+      const index = orders.findIndex(order => {
+        if (
+          String(order.provider || "").toLowerCase() !== "datamart"
+        ) {
+          return false;
+        }
+
+        return (
+          String(order.providerOrderReference || "").trim() ===
+            providerReference ||
+          String(order.orderReference || "").trim() ===
+            providerReference ||
+          String(order.paymentReference || "").trim() ===
+            paymentReference
+        );
+      });
+
+      if (index === -1) {
+        console.warn(
+          "Provider status found, but no saved order matched.",
+          {
+            paymentReference,
+            providerReference,
+            status
+          }
+        );
+        continue;
+      }
+
+      const updatedOrder = {
+        ...orders[index],
+        provider: "datamart",
+        providerOrderReference: providerReference,
+        paymentReference,
+        status,
+        updatedAt: Date.now()
+      };
+
+      orders[index] = updatedOrder;
+
+      localStorage.setItem(
+        LIVE_ORDERS_KEY,
+        JSON.stringify(orders)
+      );
+
+      renderLiveOrderRow(updatedOrder);
+      createOrUpdateStatusCard(updatedOrder);
+
+      if (typeof updatePendingCard === "function") {
+        updatePendingCard();
+      }
+
+      if (typeof loadActiveBadge === "function") {
+        loadActiveBadge();
+      }
+
+      console.log("Manual reconciliation successful:", {
+        paymentReference,
+        providerReference,
+        status
+      });
+
+    } catch (error) {
+      console.error(
+        "Manual reconciliation failed:",
+        paymentReference,
+        error
+      );
+    }
+  }
+}
+
+
+
+document.addEventListener(
+  "DOMContentLoaded", ()=> {
+    reconcileManualDataMartOrders();
+  }
+)
+
+
+
+
+
+
+
+
+
+
+
 // =========================
 // RENDER LIVE ORDER ROW
 // =========================
