@@ -1626,11 +1626,8 @@ const orderData = {
   createdAt: Date.now(),
 };
 
-await handleOrderByActiveVendor({
-  ...returnedOrder,
-  provider: "swiftdata"
-},
-"swiftdata"
+ handleNewOrder(
+  ...returnedOrder
 );
 
 updateHomepageTotals(orderData);
