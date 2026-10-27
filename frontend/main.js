@@ -3067,7 +3067,7 @@ function renderLiveOrderRow(order) {
   // INSERT NEWEST ROW AT TOP
   // =========================
   if (isNewRow || tableBody.firstElementChild !== row) {
-    tableBody.appendChild(row);
+    tableBody.prepend(row);
   }
 
   console.log("Live order row rendered:", {
