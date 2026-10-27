@@ -1702,6 +1702,7 @@ async function orderDataMartBundle(
 
     try {
       result = await response.json();
+  
       if(result.success && result.order){
         handleNewDataMartOrder(result.order);
       }
@@ -1908,21 +1909,23 @@ async function orderDataMartBundle(
       console.error("Guest order save failed:", error);
     }
 
-    try {
-      activateTrackers();
+   try {
+  activateTrackers();
 
-      // Poll only when the full provider reference is available.
-      if (
-        providerOrderReference &&
-        typeof startDataMartAutoPolling === "function"
-      ) {
-        startDataMartAutoPolling(providerOrderReference);
-      }
-    } catch (error) {
-      console.error("Tracker activation failed:", error);
-    }
+  if (
+    orderData.provider === "datamart" &&
+    orderData.providerOrderReference &&
+    typeof startDataMartAutoPolling === "function"
+  ) {
+    startDataMartAutoPolling(
+      orderData.providerOrderReference
+    );
+  }
+} catch (error) {
+  console.error("Tracker activation failed:", error);
+} 
 
-    return {
+   return {
       success: true,
       completed: isCompleted,
       order: orderData
