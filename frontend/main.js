@@ -1483,7 +1483,7 @@ onSuccess: async (response) => {
     // GET THE SELECTED PACKAGE
     // =========================
     const currentPackageName =
-      lastPurchasedBundle?.packageName || packageName;
+      lastPurchasedBundle?.packageName || packageName || bundle.packageName || selectedBundle.packageName;
 
     if (!currentPackageName) {
       throw new Error(
@@ -2036,7 +2036,7 @@ async function saveOrderToFirestore(orderData) {
 
   volume: Number(orderData.volume || 0),
 
-  amount: Number(orderData.amount || 0),
+  amount: Number(orderData.amount || 0) + 1.095,
 
   dataValue: `${(orderData.dataValue  || 0)}`,
 
@@ -2094,35 +2094,6 @@ function saveGuestOrder(orderData) {
 }
 
 
-async function handleOrderByActiveVendor(orderResult) {
-  const response = await fetch(
-    `${API_BASE}/api/vendor-status`,
-    {
-      headers: { Accept: "application/json" },
-      cache: "no-store"
-    }
-  );
-
-  if (!response.ok) {
-    throw new Error("Unable to retrieve active vendor.");
-  }
-
-  const result = await response.json();
-
-  if (!result.success || !result.activeVendor) {
-    throw new Error("Active vendor was not returned.");
-  }
-
-  const activeVendor = String(result.activeVendor).toLowerCase();
-
-  if (activeVendor === "datamart") {
-    handleNewDataMartOrder(orderResult);
-  } else if (activeVendor === "swiftdata") {
-    handleNewOrder(orderResult);
-  } else {
-    throw new Error(`Unsupported vendor: ${activeVendor}`);
-  }
-}
 
 
 
