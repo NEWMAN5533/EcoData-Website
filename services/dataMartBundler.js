@@ -273,7 +273,7 @@ console.log("Backend price debug:", {
       providerCost: matchedPackage.providerPrice,
     });
 
-    console.log("DataMart pricing check:", {
+    console.log("Ecodata pricing check:", {
       network,
       size: Number(size),
       sellingPrice: profitCheck.sellingPrice,
@@ -302,7 +302,7 @@ console.log("Backend price debug:", {
 
       return failure(
         202,
-        "This DataMart payment is already recorded. No additional purchase was submitted.",
+        "This Ecodata payment is already recorded. No additional purchase was submitted.",
         { order: orderResponse }
       );
     }
@@ -310,7 +310,7 @@ console.log("Backend price debug:", {
     // 6. Record and block an order that fails the profit requirement.
     if (!profitCheck.profitable) {
       const errorMessage =
-        `DataMart order blocked: gross profit GH₵${profitCheck.grossProfit.toFixed(2)} ` +
+        `Ecodata order blocked: gross profit GH₵${profitCheck.grossProfit.toFixed(2)} ` +
         `is below the required GH₵${profitCheck.minimumProfit.toFixed(2)}.`;
 
       const blockedOrder = await updateDataMartOrder(reference, {
@@ -401,8 +401,8 @@ console.log("Backend price debug:", {
             updatedOrder.orderStatus === "completed"
               ? "Data bundle purchased successfully."
               : successful
-                ? "DataMart accepted the purchase request."
-                : "DataMart reported that the purchase failed.",
+                ? "Ecodata accepted the purchase request."
+                : "Ecodata reported that the purchase failed.",
           order: orderResponse,
         },
       };
@@ -434,7 +434,7 @@ console.log("Backend price debug:", {
         response: orderResponse,
       });
 
-      console.error("DataMart purchase outcome:", {
+      console.error("Ecodata purchase outcome:", {
         paymentReference: reference,
         orderStatus: savedFailure.orderStatus,
         httpStatus: httpStatus ?? null,
@@ -443,17 +443,17 @@ console.log("Backend price debug:", {
       return failure(
         definitelyRejected ? 400 : 202,
         definitelyRejected
-          ? "DataMart rejected the purchase. Check the saved order before retrying."
-          : "The DataMart purchase outcome is uncertain. Verify the provider order before attempting another purchase.",
+          ? "Ecodata rejected the purchase. Check the saved order before retrying."
+          : "The Ecodata purchase outcome is uncertain. Verify the provider order before attempting another purchase.",
         { order: orderResponse }
       );
     }
   } catch (error) {
-    console.error("DataMart buy-data handler error:", {
+    console.error("Ecodata buy-data handler error:", {
       message: error.message,
       paymentReference: reference,
     });
 
-    return failure(500, "Failed to process the DataMart order.");
+    return failure(500, "Failed to process the Ecodata order.");
   }
 }
