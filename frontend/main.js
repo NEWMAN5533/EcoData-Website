@@ -2224,7 +2224,32 @@ const normalized = {
 
 
 
+function getDataMartProviderReference(order) {
+  const savedReference = String(
+    order.providerOrderReference ||
+    order.datamartReference ||
+    order.orderReference ||
+    ""
+  ).trim();
 
+  // Use a saved full provider reference when available.
+  if (savedReference.startsWith("Ia553341879ecodata-")) {
+    return savedReference;
+  }
+
+  // Otherwise, reconstruct it from the Paystack payment reference.
+  const paymentReference = String(
+    order.paymentReference ||
+    order.paystackReference ||
+    ""
+  ).trim();
+
+  if (!paymentReference) {
+    return "";
+  }
+
+  return `Ia553341879ecodata-${paymentReference}`;
+}
 
 
 
@@ -2485,41 +2510,31 @@ function startDataMartAutoPolling(providerReference) {
 
       const status = statusMap[rawStatus] || rawStatus;
 
+
+
+
       const orders = JSON.parse(
-        localStorage.getItem(LIVE_ORDERS_KEY) || "[]"
-      );
+  localStorage.getItem(LIVE_ORDERS_KEY) || "[]"
+);
 
-      // Match the FULL provider reference, not the public ED-xxxxx ID.
-      const index = orders.findIndex(order => {
-        const provider = String(
-          order.provider || ""
-        ).toLowerCase();
+const index = orders.findIndex(order => {
+  if (String(order.provider || "").toLowerCase() !== "datamart") {
+    return false;
+  }
 
-        const savedProviderReference = String(
-          order.providerOrderReference ||
-          order.orderReference ||
-          ""
-        ).trim();
+  const savedProviderReference =
+    getDataMartProviderReference(order);
 
-        return (
-          provider === "datamart" &&
-          savedProviderReference === reference
-        );
-      });
+  return savedProviderReference === reference;
+});
 
-      if (index === -1) {
-        console.warn(
-          "EcoData status received, but no matching saved order was found.",
-          {
-            providerReference: reference,
-            savedOrderCount: orders.length
-          }
-        );
-
-        // Do not permanently stop here; the order may be saved
-        // shortly after the first status request.
-        return;
-      }
+if (index === -1) {
+  console.warn(
+    "No matching order found for provider reference:",
+    reference
+  );
+  return;
+}
 
       const currentOrder = orders[index];
 
