@@ -2205,7 +2205,7 @@ const normalized = {
   `;
 
   // Add newest on top
-  tableBody.append(row);
+  tableBody.prepend(row);
 
   console.log(normalized);
   
