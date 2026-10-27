@@ -1,4 +1,3 @@
-
 import express from "express";
 import crypto from "crypto";
 
@@ -147,24 +146,10 @@ function shouldIgnoreStatusUpdate(currentStatus, nextStatus) {
   return false;
 }
 
-// ==========================================
-// DATAMART WEBHOOK ENDPOINT
-// POST /webhook
-// ==========================================
-webhookRouter.post("/", async (req, res) => {
-  const receivedAt = Date.now();
-
-  // ------------------------------------------
-  // 1. Validate signature
-  // ------------------------------------------
+webhookRouter.post("/", (req, res) => {
+  // 1. Verify the signature before acknowledging the event.
   if (!verifyDataMartSignature(req)) {
-    console.warn("Rejected DataMart webhook: invalid signature.", {
-      event: req.body?.event || null,
-      hasSecret: Boolean(process.env.DATAMART_WEBHOOK_SECRET),
-      hasSignature: Boolean(
-        req.get("X-DataMart-Signature")
-      ),
-    });
+    console.warn("Rejected EcoData webhook: invalid signature.");
 
     return res.status(401).json({
       received: false,
@@ -172,9 +157,7 @@ webhookRouter.post("/", async (req, res) => {
     });
   }
 
-  // ------------------------------------------
-  // 2. Validate payload
-  // ------------------------------------------
+  // 2. Validate the payload.
   const { event, data } = req.body || {};
 
   if (
@@ -189,162 +172,118 @@ webhookRouter.post("/", async (req, res) => {
     });
   }
 
-  const providerOrderReference = String(
-    data.orderReference
-  ).trim();
+  const orderReference = String(data.orderReference).trim();
 
-  if (!providerOrderReference) {
+  if (!orderReference) {
     return res.status(400).json({
       received: false,
       message: "Invalid order reference.",
     });
   }
 
-  console.log("DataMart webhook received:", {
+  // Snapshot the payload before background processing.
+  const payload = JSON.parse(JSON.stringify(req.body));
+
+  console.log("EcoData webhook accepted:", {
     event,
-    orderReference: providerOrderReference,
-    providerStatus: data.status || null,
+    orderReference,
   });
 
-  try {
-    // ------------------------------------------
-    // 3. Find the matching EcoData order
-    // ------------------------------------------
-    const lookupStartedAt = Date.now();
+  // 3. Acknowledge DataMart immediately.
+  res.status(200).json({
+    received: true,
+    message: "Webhook acknowledged.",
+  });
 
-    const order = await getDataMartOrderByProviderReference(
-      providerOrderReference
-    );
-
-    console.log("DataMart order lookup finished:", {
-      orderReference: providerOrderReference,
-      found: Boolean(order),
-      durationMs: Date.now() - lookupStartedAt,
+  // 4. Process the order after sending the response.
+  setImmediate(() => {
+    processDataMartWebhook(event, payload).catch((error) => {
+      console.error("Background DataMart webhook processing failed:", {
+        event,
+        orderReference,
+        message: error.message,
+      });
     });
+  });
+});
+
+// ==========================================
+// PROCESS WEBHOOK IN BACKGROUND
+// ==========================================
+async function processDataMartWebhook(event, payload) {
+  const { data } = payload;
+  const orderReference = String(data.orderReference).trim();
+
+  try {
+    const order = await getDataMartOrderByProviderReference(
+      orderReference
+    );
 
     if (!order) {
-      console.warn("No matching EcoData order for DataMart webhook:", {
+      console.error("EcoData webhook order not found:", {
         event,
-        orderReference: providerOrderReference,
+        orderReference,
       });
 
-      // Return 404 so the mismatch can be investigated.
-      // Check that the reference sent to this function is
-      // the same reference saved in the database.
-      return res.status(404).json({
-        received: false,
-        message: "Matching DataMart order not found.",
-      });
+      return;
     }
 
-    // ------------------------------------------
-    // 4. Map provider status
-    // ------------------------------------------
-    const nextStatus = mapWebhookStatus(
-      event,
-      data.status
-    );
+    const nextStatus = mapWebhookStatus(event, data.status);
 
     if (!nextStatus) {
-      console.warn("Ignoring unsupported DataMart event:", {
+      console.log("Unsupported EcoData event ignored:", {
         event,
-        orderReference: providerOrderReference,
+        orderReference,
         providerStatus: data.status || null,
       });
 
-      // Acknowledge unsupported events to prevent retries
-      // for events this endpoint is not designed to process.
-      return res.status(200).json({
-        received: true,
-        ignored: true,
-        message: "Unsupported event ignored.",
-      });
+      return;
     }
 
-    const currentStatus = String(
-      order.orderStatus || ""
-    )
+    const currentStatus = String(order.orderStatus || "")
       .trim()
       .toLowerCase();
 
-    // ------------------------------------------
-    // 5. Protect existing final statuses
-    // ------------------------------------------
     if (shouldIgnoreStatusUpdate(currentStatus, nextStatus)) {
-      console.log("DataMart status update ignored:", {
-        orderReference: providerOrderReference,
+      console.log("EcoData status update ignored:", {
+        orderReference,
         currentStatus,
         incomingStatus: nextStatus,
       });
 
-      return res.status(200).json({
-        received: true,
-        ignored: true,
-        orderStatus: currentStatus,
-        message: "Status update would overwrite a protected final status.",
-      });
+      return;
     }
-
-    // ------------------------------------------
-    // 6. Update the stored EcoData order
-    // ------------------------------------------
-    const updateStartedAt = Date.now();
 
     const updatedOrder = await updateDataMartOrder(
       order.paymentReference,
       {
         orderStatus: nextStatus,
-
-        providerOrderReference,
-
+        providerOrderReference: orderReference,
         providerTransactionReference:
           data.transactionId ?? undefined,
-
-        providerPurchaseId:
-          data.orderId ?? undefined,
-
-        providerPrice:
-          data.price ?? undefined,
-
-        providerResponse: req.body,
-
+        providerPurchaseId: data.orderId ?? undefined,
+        providerPrice: data.price ?? undefined,
+        providerResponse: payload,
         lastError:
           nextStatus === "failed"
-            ? "DataMart reported that the order failed."
+            ? "EcoData reported that the order failed."
             : null,
       }
     );
 
-    console.log("DataMart order update finished:", {
-      orderReference: providerOrderReference,
+    console.log("Ecodata webhook processed:", {
+      event,
+      orderReference,
       paymentReference: order.paymentReference,
-      orderStatus: updatedOrder?.orderStatus || nextStatus,
-      durationMs: Date.now() - updateStartedAt,
-      totalDurationMs: Date.now() - receivedAt,
-    });
-
-    // ------------------------------------------
-    // 7. Acknowledge successful processing
-    // ------------------------------------------
-    return res.status(200).json({
-      received: true,
       orderStatus: updatedOrder?.orderStatus || nextStatus,
     });
   } catch (error) {
-    console.error("DataMart webhook processing failed:", {
+    console.error("EcoData background update failed:", {
       event,
-      orderReference: providerOrderReference,
+      orderReference,
       message: error.message,
-      totalDurationMs: Date.now() - receivedAt,
-    });
-
-    // A 500 response signals that processing failed.
-    // DataMart may retry, depending on its retry policy.
-    return res.status(500).json({
-      received: false,
-      message: "Unable to process DataMart webhook.",
     });
   }
-});
+}
 
 export default webhookRouter;
