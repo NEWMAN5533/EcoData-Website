@@ -1697,6 +1697,7 @@ async function orderDataMartBundle(
       }
     );
 
+
     // Safely parse the backend response.
     let result;
 
@@ -1706,6 +1707,11 @@ async function orderDataMartBundle(
       if(result.success && result.order){
         handleNewDataMartOrder(result.order);
       }
+
+
+      
+    console.log("FULL VENDOR2 PURCHASE RESPONSE:",);
+    console.log("VENDOR2 ORDER OBJECT:", result.order || result.data);
 
     } catch {
       throw new Error(
@@ -1746,7 +1752,6 @@ async function orderDataMartBundle(
     const providerOrderReference = String(
       order.providerOrderReference ||
       order.orderReference ||
-      order.reference ||
       ""
     ).trim();
 
@@ -1820,6 +1825,7 @@ async function orderDataMartBundle(
       recipient:
         order.phoneNumber ||
         order.recipient ||
+        order.phone ||
         recipient,
 
       network:
@@ -2234,7 +2240,6 @@ function handleNewDataMartOrder(returnedOrder) {
   const providerOrderReference = String(
     order.providerOrderReference ||
     order.orderReference ||
-    order.reference ||
     ""
   ).trim();
 
