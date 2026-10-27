@@ -2205,7 +2205,7 @@ const normalized = {
   `;
 
   // Add newest on top
-  tableBody.appendChild(row);
+  tableBody.prepend(row);
 
   console.log(normalized);
   
@@ -2565,10 +2565,18 @@ if (index === -1) {
 
       orders[index] = updatedOrder;
 
+      const sortedOrders = sortLiveOrders(orders);
+
       localStorage.setItem(
         LIVE_ORDERS_KEY,
         JSON.stringify(orders)
       );
+
+      if(typeof renderLiveOrderRow === "function"){
+        renderLiveOrderRow(sortedOrders);
+      } else{
+        renderLiveOrderRow(updatedOrder);
+      }
 
       renderLiveOrderRow(updatedOrder);
       createOrUpdateStatusCard(updatedOrder);
@@ -2700,7 +2708,19 @@ function saveLiveOrder(order) {
 
 
 
+function sortLiveOrders(orders) {
+  return [...orders].sort((a, b) => {
+    const timeA = Number(
+      a.updatedAt || a.createdAt || a.timestamp || 0
+    );
 
+    const timeB = Number(
+      b.updatedAt || b.createdAt || b.timestamp || 0
+    );
+
+    return timeB - timeA; // Newest activity first
+  });
+}
 
 
 
@@ -2836,10 +2856,20 @@ async function reconcileManualDataMartOrders() {
 
       orders[index] = updatedOrder;
 
+
+      const sortedOrders = sortLiveOrders(orders);
+
       localStorage.setItem(
         LIVE_ORDERS_KEY,
-        JSON.stringify(orders)
+        JSON.stringify(sortedOrders)
       );
+
+      // Refresh table in sorted order
+      if(typeof renderLiveOrderRow === "function"){
+        renderLiveOrderRow(sortedOrders);
+      } else{
+        renderLiveOrderRow(updatedOrder);
+      }
 
       renderLiveOrderRow(updatedOrder);
       createOrUpdateStatusCard(updatedOrder);
