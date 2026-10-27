@@ -2231,16 +2231,28 @@ const normalized = {
 function handleNewDataMartOrder(returnedOrder) {
   if (!returnedOrder) return;
 
+
   // Support either the unwrapped order or the backend response.
   const order =
     returnedOrder.order ||
     returnedOrder.data ||
     returnedOrder;
 
+
+      const paymentReference = String(
+    order.paymentReference || ""
+  ).trim();
+
+
   const providerOrderReference = String(
     order.providerOrderReference ||
     order.orderReference ||
-    ""
+    ( 
+      paymentReference
+      ? `Ia553341879ecodata-${paymentReference}`
+      : ""
+    )
+
   ).trim();
 
   // Keep EcoData's public ID separate from DataMart's reference.
