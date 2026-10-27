@@ -1,4 +1,4 @@
-// UPDATED AT 4th/September, 2026 [BACKUP MAIN.JS]
+// UPDATED AT 24th/October, 2026 [BACKUP MAIN.JS]
 
 // --- Firebase Imports ---
 import { auth, db } from "./firebase-config.js";
@@ -81,7 +81,10 @@ const STORAGE_KEY = "selected_mtn_package";
 
 
 function getVendorForPackage(packageName) {
-  return packageName === "mtn_data_normal_delivery"
+  const normalizedPackage = String(packageName || "").trim();
+
+  return normalizedPackage === 
+  PACKAGE_MAP.normal
     ? "datamart"
     : "swiftdata";
 }
@@ -165,52 +168,13 @@ async function checkRestrictions(){
 
 
 async function canUseNormalDeliveryMode() {
-  try {
-    const response = await fetch("/api/vendor-status", {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        Accept: "application/json"
-      }
-    });
+  // Normal Delivery is always selectable.
+  // Vendor routing is handled by getVendorForPackage().
+  // Recipient verification is handled before payment.
 
-    if (!response.ok) {
-      showSnackBar(
-        "Unable to verify the active Normal Offer. Please try again.",
-        "error",
-        4000
-      );
-      return false;
-    }
-
-    const result = await response.json();
-
-    const activeVendor = String(
-      result.activeVendor ?? result.vendor ?? ""
-    ).trim().toLowerCase();
-
-    if (activeVendor !== "datamart") {
-      showSnackBar(
-        "Normal Delivery Mode is available only when Normal Delivery is active. Please select another offer.",
-        "error",
-        5000
-      );
-      return false;
-    }
-
-    return true;
-  } catch (error) {
-    console.error("Vendor check failed:", error);
-
-    showSnackBar(
-      "Unable to verify the active vendor. Please try again.",
-      "error",
-      4000
-    );
-
-    return false;
-  }
+  return true;
 }
+
 
 //=================================
 //  CHECK RESTRICTIONS ENDS
@@ -296,6 +260,7 @@ function normalizeGhanaPhone(phone) {
 async function precheckRecipientBeforePayment(bundle, recipient) {
   const phone = normalizeGhanaPhone(recipient);
 
+  // 1. Validate phone number locally first.
   if (!/^0\d{9}$/.test(phone)) {
     showSnackBar(
       "Enter a valid 10-digit Ghanaian phone number.",
@@ -311,12 +276,15 @@ async function precheckRecipientBeforePayment(bundle, recipient) {
   console.log("Selected vendor:", vendor);
 
   try {
-    // DataMart: verify through DataMart only.
+    // =========================================
+    // DATAMART RECIPIENT VERIFICATION
+    // =========================================
     if (vendor === "datamart") {
       const response = await fetch("/api/verify-recipient", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Accept": "application/json"
         },
         body: JSON.stringify({
           network: bundle.network || "mtn",
@@ -326,43 +294,128 @@ async function precheckRecipientBeforePayment(bundle, recipient) {
         })
       });
 
-      const result = await response.json();
+      let result;
 
-      if (!response.ok || result.canProceed !== true) {
+      try {
+        result = await response.json();
+      } catch {
+        result = null;
+      }
+
+      console.log("DataMart verification response:", {
+        httpStatus: response.status,
+        result
+      });
+
+      // -----------------------------------------
+      // A. Backend explicitly approves purchase.
+      // -----------------------------------------
+      if (result?.canProceed === true) {
+        lastValidation = {
+          success: true,
+          eligible: true,
+          provider: result.provider || "datamart",
+          verification: result.verification || null,
+          verificationSkipped:
+            result.verificationSkipped === true
+        };
+
         showSnackBar(
-          result.message || "Recipient verification failed.",
+          result.message ||
+            "Recipient check complete. You may continue.",
+          "success",
+          3000
+        );
+
+        return true;
+      }
+
+      // -----------------------------------------
+      // B. Confirmed recipient rejection.
+      // These conditions MUST block payment.
+      // -----------------------------------------
+      const blockingCodes = [
+        "INVALID_RECIPIENT",
+        "RECIPIENT_NOT_VERIFIED",
+        "RECIPIENT_ACTIVATION_REQUIRED"
+      ];
+
+      if (
+        blockingCodes.includes(result?.code) ||
+        result?.activationRequired === true
+      ) {
+        showSnackBar(
+          result.message ||
+            "This recipient cannot receive the selected bundle. Please select another offer",
           "error",
           5000
         );
+
         return false;
       }
 
-      if (result.provider !== "datamart") {
+      // -----------------------------------------
+      // C. Verification unavailable.
+      // Allow payment to continue if the backend
+      // explicitly marks the failure as temporary.
+      // -----------------------------------------
+      const temporaryFailureCodes = [
+        "VERIFY_UNAVAILABLE",
+        "VERIFICATION_FAILED",
+        "INVALID_VERIFICATION_RESPONSE",
+        "NETWORK_VERIFICATION_UNAVAILABLE",
+        "VERIFICATION_CONFIG_ERROR",
+        "VENDOR_UNAVAILABLE"
+      ];
+
+      const temporaryHttpStatuses = [
+        408,
+        429,
+        500,
+        502,
+        503,
+        504
+      ];
+
+      const verificationUnavailable =
+        temporaryFailureCodes.includes(result?.code) ||
+        temporaryHttpStatuses.includes(response.status);
+
+      if (verificationUnavailable) {
+        lastValidation = {
+          success: true,
+          eligible: true,
+          provider: "datamart",
+          verificationSkipped: true,
+          verificationStatus: "unavailable"
+        };
+
         showSnackBar(
-          "Verification provider mismatch. Please try again.",
-          "error",
-          4000
+          "Recipient verification is temporarily unavailable. You can continue with your purchase.",
+          "info",
+          5000
         );
-        return false;
+
+        return true;
       }
 
-      lastValidation = {
-        success: true,
-        eligible: true,
-        provider: "datamart",
-        verification: result.verification
-      };
-
+      // -----------------------------------------
+      // D. Unknown or ambiguous response.
+      // Fail safely instead of assuming approval.
+      // -----------------------------------------
       showSnackBar(
-        result.message || "Recipient verified.",
-        "success",
-        3000
+        result?.message ||
+          "We could not confirm this recipient. Please try again.",
+        "error",
+        5000
       );
 
-      return true;
+      return false;
     }
 
-    // SwiftData: preserve the existing validation.
+    // =========================================
+    // SWIFTDATA: KEEP EXISTING VALIDATION
+    // =========================================
     const validation = await validateRecipient(
       "233" + phone.substring(1),
       bundle.packageName,
@@ -375,6 +428,7 @@ async function precheckRecipientBeforePayment(bundle, recipient) {
         "error",
         4000
       );
+
       return false;
     }
 
@@ -388,6 +442,27 @@ async function precheckRecipientBeforePayment(bundle, recipient) {
   } catch (error) {
     console.error("Recipient precheck error:", error);
 
+    // A network exception means verification failed,
+    // not that the recipient was confirmed invalid.
+    // Allow the purchase to continue for DataMart only.
+    if (vendor === "datamart") {
+      lastValidation = {
+        success: true,
+        eligible: true,
+        provider: "datamart",
+        verificationSkipped: true,
+        verificationStatus: "unavailable"
+      };
+
+      showSnackBar(
+        "Recipient verification is temporarily unavailable. You can continue with your purchase.",
+        "info",
+        5000
+      );
+
+      return true;
+    }
+
     showSnackBar(
       "Unable to verify the recipient. Please try again.",
       "error",
@@ -397,7 +472,6 @@ async function precheckRecipientBeforePayment(bundle, recipient) {
     return false;
   }
 }
-
 
 
 
@@ -601,7 +675,7 @@ function resetSelectedBundle(reason = "") {
 
 
   const saveMode = 
-  localStorage.getItem(STORAGE_KEY) || "express";
+  localStorage.removeItem(STORAGE_KEY) || "normal";
 
   const activeOption = document.querySelector(`.optionDelevery[data-mode="${saveMode}"]`);
 
@@ -1279,9 +1353,9 @@ function activateTrackers() {
 
 // un activate trackers when no orders
 function unActivateTrackers(){
- const firstTracker = document.getElementById("deliveryTracker1").style.display = "flex";
+ const firstTracker = document.getElementById("deliveryTracker1").style.display = "none";
 
- const secondTracker = document.getElementById("deliveryTracker2").style.display = "flex";
+ const secondTracker = document.getElementById("deliveryTracker2").style.display = "none";
 }
 
 //=================================
@@ -1399,75 +1473,58 @@ if (requiresRecipientValidation && !recipientValidated) {
         ],
       },
 
-    onSuccess: async (response) => {
+onSuccess: async (response) => {
   console.log("✅ Paystack onSuccess fired:", response.reference);
 
   hideLoader();
 
   try {
-    // Get the active vendor from the backend.
-    const API_BASE =
-      window.location.hostname === "localhost"
-        ? "http://localhost:3000"
-        : "https://ecodata-app.onrender.com";
+    // =========================
+    // GET THE SELECTED PACKAGE
+    // =========================
+    const currentPackageName =
+      lastPurchasedBundle?.packageName || packageName || bundle.packageName || selectedBundle.packageName;
 
-    console.log("🔎 Fetching active vendor...");
-
-    const vendorResponse = await fetch(
-      `${API_BASE}/api/vendor-status`
-    );
-
-    const vendorResult = await vendorResponse.json();
-
-    console.log("📦 Vendor status response:", vendorResult);
-
-    if (!vendorResponse.ok) {
+    if (!currentPackageName) {
       throw new Error(
-        vendorResult.message || "Unable to retrieve active vendor."
+        "Selected package is missing. Cannot determine the vendor."
       );
     }
 
-    const activeVendor =
-      vendorResult.activeVendor ||
-      vendorResult.vendor ||
-      vendorResult.active ||
-      vendorResult.name;
+    console.log("📦 Selected package:", currentPackageName);
 
-    if (!activeVendor) {
-      throw new Error(
-        "Active vendor missing from /api/vendor-status response."
-      );
-    }
+    // =========================
+    // DETERMINE VENDOR BY PACKAGE
+    // =========================
+    const activeVendor = getVendorForPackage(currentPackageName);
 
-    console.log("🚚 Active vendor:", activeVendor);
+    console.log("🚚 Vendor selected for package:", activeVendor);
 
-    if (String(activeVendor).toLowerCase() === "datamart") {
-      console.log("➡️ Calling DataMart purchase function...");
+    // =========================
+    // PROCESS THE PURCHASE
+    // =========================
+    if (activeVendor === "datamart") {
+      console.log("➡️ Calling Vendor2 purchase function...");
 
       await orderDataMartBundle(
         network,
         recipient,
-        packageName,
-        size,
-        response.reference
-      );
-    } else if (
-      String(activeVendor).toLowerCase() === "swiftdata"
-    ) {
-      console.log("➡️ Calling SwiftData purchase function...");
-
-      await orderBundle(
-        network,
-        recipient,
-        packageName,
+        currentPackageName,
         size,
         response.reference
       );
     } else {
-      throw new Error(
-        `Unsupported active vendor: ${activeVendor}`
+      console.log("➡️ Calling Vendor1 purchase function...");
+
+      await orderBundle(
+        network,
+        recipient,
+        currentPackageName,
+        size,
+        response.reference
       );
     }
+
   } catch (error) {
     console.error("❌ Post-payment processing error:", error);
 
@@ -1479,7 +1536,6 @@ if (requiresRecipientValidation && !recipientValidated) {
     );
   }
 },
-
 
       onCancel: () => {
         hideLoader();
@@ -1570,7 +1626,9 @@ const orderData = {
   createdAt: Date.now(),
 };
 
-handleNewOrder(returnedOrder);
+ handleNewOrder(
+  ...returnedOrder
+);
 
 updateHomepageTotals(orderData);
 
@@ -1621,151 +1679,277 @@ async function orderDataMartBundle(
       : "https://ecodata-app.onrender.com";
 
   try {
-   
-
     const response = await fetch(
       `${API_BASE}/api/datamart/buy-data`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json"
         },
         body: JSON.stringify({
           network,
           recipient,
           package: packageName,
           size,
-          paymentReference: reference,
-        }),
+          paymentReference: reference
+        })
       }
     );
 
-    const result = await response.json();
 
-    if (!response.ok || !result.success) {
-      console.error("DataMart order response:", result);
+    // Safely parse the backend response.
+    let result;
 
-      showSnackBar(
-        result.message ||
-          "Payment received, but the purchase is not confirmed. Please check your order status.",
-        "warning",
-        6000
+    try {
+      result = await response.json();
+  
+      if(result.success && result.order){
+        handleNewDataMartOrder(result.order);
+      }
+
+
+      
+    console.log("FULL VENDOR2 PURCHASE RESPONSE:",);
+    console.log("VENDOR2 ORDER OBJECT:", result.order || result.data);
+
+    } catch {
+      throw new Error(
+        `EcoData returned an invalid response (HTTP ${response.status}).`
       );
-
-      return;
     }
 
-    const order = result.order || {};
-    const bundle = lastPurchasedBundle;
+    // IMPORTANT:
+    // The backend returns the order under result.order,
+    // not result.data.
+    const order = result.order || result.data || {};
 
-    if (!bundle) {
-      console.error(
-        "DataMart purchase response received, but bundle context is missing.",
-        order
+    // HTTP 202 means accepted for processing, not completed.
+    const isAcceptedResponse =
+      response.status === 202 &&
+      Boolean(order.providerOrderReference || order.paymentReference);
+
+    if (
+      !response.ok ||
+      (!result.success && !isAcceptedResponse)
+    ) {
+      showSnackBar(
+        result.message ||
+          "Unable to confirm the DataMart order.",
+        "error",
+        5000
       );
 
+      return {
+        success: false,
+        order: order
+      };
+    }
+
+    const bundle = lastPurchasedBundle;
+
+    // Keep the provider reference separate from EcoData's public ID.
+    const providerOrderReference = String(
+      order.providerOrderReference ||
+      order.orderReference ||
+      ""
+    ).trim();
+
+    const paymentReference = String(
+      order.paymentReference || reference || ""
+    ).trim();
+
+    // Reuse the saved public ID if the backend returns an existing order.
+    const existingPublicId = String(
+      order.orderId || order.id || ""
+    ).trim();
+
+    const orderId =
+      existingPublicId.startsWith("EDO-")
+        ? existingPublicId
+        : providerOrderReference
+          ? `EDO-${providerOrderReference.slice(-6)}`
+          : "";
+
+    if (!orderId) {
+      console.error("Ecodata response missing order references:", {
+        responseStatus: response.status,
+        result
+      });
+
       showSnackBar(
-        "Purchase response received. Please check your order history.",
+        "The purchase response is missing an order reference. Check Order History before retrying.",
         "warning",
         6000
       );
 
-      return;
+      return {
+        success: false,
+        order
+      };
     }
 
     const orderStatus = String(
-      order.orderStatus || "processing"
-    ).toLowerCase();
+      order.orderStatus ||
+      order.status ||
+      "processing"
+    ).trim().toLowerCase();
+
+    const completedStatuses = [
+      "completed",
+      "delivered",
+      "success",
+      "successful"
+    ];
+
+    const failedStatuses = [
+      "failed",
+      "cancelled",
+      "canceled",
+      "rejected"
+    ];
+
+    const isCompleted = completedStatuses.includes(orderStatus);
+    const isFailed = failedStatuses.includes(orderStatus);
 
     const orderData = {
-      orderId:
-        order.purchaseId ||
-        order.providerOrderReference ||
-        order.paymentReference ||
-        reference,
+      orderId,
 
-      reference:
-        order.providerOrderReference || reference,
+      // Provider reference is essential for DataMart status polling.
+      providerOrderReference,
 
-      paymentReference: reference,
+      // Keep compatibility with existing frontend components.
+      reference: orderId,
+      paymentReference,
 
-      recipient,
+      recipient:
+        order.phoneNumber ||
+        order.recipient ||
+        order.phone ||
+        recipient,
 
-      network: bundle.network || network,
+      network:
+        order.network ||
+        bundle?.network ||
+        network,
 
-      volume: Number(bundle.size || size || 0),
+      volume: Number(
+        order.capacity ??
+        order.volume ??
+        bundle?.size ??
+        size
+      ),
 
       dataValue: String(
-        bundle.dataValue || selectedBundle?.dataValue || 0
+        bundle?.dataValue ??
+        order.capacity ??
+        size
       ),
 
       amount: Number(
-        order.checkoutAmount ?? (Number(bundle.price) * 1.0195)
+        order.sellingPrice ??
+        order.amount ??
+        bundle?.price ??
+        0
       ),
 
-      status: orderStatus,
+      costPrice: Number(order.providerPrice ?? order.price ?? 0),
+
+      status: isCompleted
+        ? "completed"
+        : isFailed
+          ? "failed"
+          : "processing",
 
       source: "web",
-
       provider: "datamart",
 
       isGuest: !auth.currentUser,
-
       createdBy: auth.currentUser?.uid || "guest",
 
-      createdAt: Date.now(),
+      createdAt: order.createdAt
+        ? new Date(order.createdAt).getTime()
+        : Date.now(),
+
+      updatedAt: Date.now()
     };
 
-    // Only announce completed delivery as a completed purchase.
-    if (orderStatus === "completed") {
+    // Tell the user what actually happened.
+    if (isCompleted) {
       playSuccessSound();
 
       showSnackBar(
-        `${size}GB bundle purchased successfully!`,
+        `${orderData.volume}GB ORDER PLACED SUCCESSFULLY!!`,
         "success",
+        6000
+      );
+    } else if (isFailed) {
+      showSnackBar(
+        "Ecodata reported that this purchase failed. Check the order record before taking further action.",
+        "error",
         6000
       );
     } else {
       showSnackBar(
-        `${size}GB order received. Current status: ${orderStatus}.`,
+        isAcceptedResponse
+          ? "Your Ecodata order is already recorded or still processing. Check Order History for updates."
+          : `${orderData.volume}GB order accepted. Current status: ${orderStatus}.`,
         "success",
         6000
       );
     }
 
-
-
-    await handleOrderByActiveVendor(order);
-
+    // Do not call a function here if it can submit another vendor purchase.
+    // The backend has already submitted the DataMart purchase.
     updateHomepageTotals(orderData);
 
     try {
       await saveOrderToFirestore(orderData);
     } catch (error) {
-      console.error(" Firestore save failed:", error);
+      console.error("Firestore save failed:", error);
     }
 
     try {
       saveGuestOrder(orderData);
     } catch (error) {
-      console.error(" guest order save failed:", error);
+      console.error("Guest order save failed:", error);
     }
 
-    try {
-      activateTrackers();
-    } catch (error) {
-      console.error(" tracker activation failed:", error);
-    }
+   try {
+  activateTrackers();
+
+  if (
+    orderData.provider === "datamart" &&
+    orderData.providerOrderReference &&
+    typeof startDataMartAutoPolling === "function"
+  ) {
+    startDataMartAutoPolling(
+      orderData.providerOrderReference
+    );
+  }
+} catch (error) {
+  console.error("Tracker activation failed:", error);
+} 
+
+   return {
+      success: true,
+      completed: isCompleted,
+      order: orderData
+    };
   } catch (error) {
-    console.error(" order error:", error);
+    console.error("Ecodata order request failed:", error);
 
     showSnackBar(
-      "We could not confirm the order status. Check your order history before retrying.",
+      "We could not confirm the order response. Check Order History before retrying.",
       "warning",
       6000
     );
-  }
 
+    return {
+      success: false,
+      error: error.message
+    };
+  }
 }
 //====================
 // SAVE WITH RETRY
@@ -1861,7 +2045,7 @@ async function saveOrderToFirestore(orderData) {
 
   volume: Number(orderData.volume || 0),
 
-  amount: Number(orderData.amount || 0),
+  amount: Number(orderData.amount || 0) + 1.095,
 
   dataValue: `${(orderData.dataValue  || 0)}`,
 
@@ -1893,35 +2077,7 @@ console.log(firestoreData);
   }
 }
 
-async function handleOrderByActiveVendor(orderResult) {
-  const response = await fetch(
-    `${API_BASE}/api/vendor-status`,
-    {
-      headers: { Accept: "application/json" },
-      cache: "no-store"
-    }
-  );
 
-  if (!response.ok) {
-    throw new Error("Unable to retrieve active vendor.");
-  }
-
-  const result = await response.json();
-
-  if (!result.success || !result.activeVendor) {
-    throw new Error("Active vendor was not returned.");
-  }
-
-  const activeVendor = String(result.activeVendor).toLowerCase();
-
-  if (activeVendor === "datamart") {
-    handleNewDataMartOrder(orderResult);
-  } else if (activeVendor === "swiftdata") {
-    handleNewOrder(orderResult);
-  } else {
-    throw new Error(`Unsupported vendor: ${activeVendor}`);
-  }
-}
 
 
 // ---------- LOCAL STORAGE HELPER ----------
@@ -1945,6 +2101,8 @@ function saveGuestOrder(orderData) {
     console.error("❌ Failed to save guest order:", err);
   }
 }
+
+
 
 
 
@@ -2047,7 +2205,7 @@ const normalized = {
   `;
 
   // Add newest on top
-  tableBody.prepend(row);
+  tableBody.appendChild(row);
 
   console.log(normalized);
   
@@ -2067,87 +2225,215 @@ const normalized = {
 
 
 
+
+
+
 function handleNewDataMartOrder(returnedOrder) {
   if (!returnedOrder) return;
 
-  const providerReference =
-    returnedOrder.orderReference ||
-    returnedOrder.providerOrderReference ||
-    returnedOrder.reference;
 
-  if (!providerReference) {
+  // Support either the unwrapped order or the backend response.
+  const order =
+    returnedOrder.order ||
+    returnedOrder.data ||
+    returnedOrder;
+
+
+      const paymentReference = String(
+    order.paymentReference || ""
+  ).trim();
+
+
+  const providerOrderReference = String(
+    order.providerOrderReference ||
+    order.orderReference ||
+    ( 
+      paymentReference
+      ? `Ia553341879ecodata-${paymentReference}`
+      : ""
+    )
+
+  ).trim();
+
+  // Keep EcoData's public ID separate from DataMart's reference.
+  const existingOrderId = String(order.orderId || "").trim();
+
+  const orderId = existingOrderId.startsWith("EDO-")
+    ? existingOrderId
+    : providerOrderReference
+      ? `EDO-${providerOrderReference.slice(-6)}`
+      : existingOrderId;
+
+  if (!orderId) {
     console.error(
-      "DataMart response has no provider order reference:",
-      returnedOrder
+      "DataMart order cannot be displayed: order ID is missing.",
+      order
     );
     return;
   }
 
   const costPrice = Number(
-    returnedOrder.providerPrice ??
-    returnedOrder.price ??
+    order.costPrice ??
+    order.providerPrice ??
+    order.price ??
     0
   );
 
-  const normalized = {
-    orderId: String(providerReference),
-    reference: String(providerReference),
+  const amount = Number(
+    order.amount ??
+    order.sellingPrice ??
+    order.checkoutAmount ??
+    selectedBundle?.price ??
+    0
+  );
 
-    status:
-      returnedOrder.orderStatus ||
-      returnedOrder.status ||
-      "processing",
+  const rawStatus = String(
+    order.status ||
+    order.orderStatus ||
+    "pending"
+  ).trim().toLowerCase();
+
+  const statusMap = {
+    completed: "delivered",
+    delivered: "delivered",
+    success: "delivered",
+    successful: "delivered",
+
+    failed: "failed",
+    cancelled: "failed",
+    canceled: "failed",
+    rejected: "failed",
+
+    refunded: "refunded",
+
+    pending: "pending",
+    waiting: "pending",
+
+    processing: "processing",
+    in_progress: "processing",
+    "in progress": "processing",
+    unknown: "pending"
+  };
+
+  const normalized = {
+    orderId,
+
+    // Full DataMart reference, used for status requests.
+    providerOrderReference,
+
+    // Preserve the public ID in the existing compatibility field.
+    reference: orderId,
+
+    paymentReference: order.paymentReference || null,
+
+    status: statusMap[rawStatus] || rawStatus,
 
     recipient:
-      returnedOrder.phoneNumber ||
-      returnedOrder.phone ||
-      returnedOrder.recipient ||
+      order.recipient ||
+      order.phoneNumber ||
+      order.phone ||
+      order.items?.[0]?.recipient ||
       "-",
 
-    amount: Number(selectedBundle?.price || 0),
-    costPrice,
-
-    profit:
-      Number(selectedBundle?.price || 0) - costPrice,
-
     network:
-      returnedOrder.network ||
+      order.network ||
       selectedBundle?.network ||
       "-",
 
-    volume:
-      returnedOrder.capacity ??
-      returnedOrder.capacityGb ??
-      returnedOrder.size ??
+    volume: Number(
+      order.volume ??
+      order.capacity ??
+      order.capacityGb ??
+      order.size ??
       selectedBundle?.size ??
-      0,
+      0
+    ),
+
+    dataValue: String(
+      order.dataValue ??
+      selectedBundle?.dataValue ??
+      order.capacity ??
+      order.size ??
+      ""
+    ),
+
+    amount,
+    costPrice,
+
+    profit: Number(
+      order.profit ?? (amount - costPrice)
+    ),
 
     source: "web",
-    provider: "datamart"
+    provider: "datamart",
+
+    createdAt: order.createdAt || Date.now(),
+    updatedAt: Date.now()
   };
 
-  localStorage.setItem(
-    "lastDataMartOrderReference",
-    normalized.orderId
-  );
+  // Store the FULL provider reference for recovery/status checks.
+  if (providerOrderReference) {
+    localStorage.setItem(
+      "lastDataMartOrderReference",
+      providerOrderReference
+    );
+  }
 
+  // Persist and update the live table.
   saveLiveOrder(normalized);
   renderLiveOrderRow(normalized);
   createOrUpdateStatusCard(normalized);
 
-  startDataMartAutoPolling(normalized.orderId);
+  if (providerOrderReference) {
+    startDataMartAutoPolling(providerOrderReference);
+  } else {
+    console.warn(
+      "Your order saved, but live status polling cannot start: provider reference is missing.",
+      normalized.orderId
+    );
+  }
+
+  console.log(" Live order normalized:", normalized);
+
+  return normalized;
 }
 
+
+function getDataMartProviderReference(order) {
+  const savedReference = String(
+    order.providerOrderReference ||
+    order.datamartReference ||
+    order.orderReference ||
+    ""
+  ).trim();
+
+  // Use a saved full provider reference when available.
+  if (savedReference.startsWith("Ia553341879ecodata-")) {
+    return savedReference;
+  }
+
+  // Otherwise, reconstruct it from the Paystack payment reference.
+  const paymentReference = String(
+    order.paymentReference ||
+    order.paystackReference ||
+    ""
+  ).trim();
+
+  if (!paymentReference) {
+    return "";
+  }
+
+  return `Ia553341879ecodata-${paymentReference}`;
+}
 
 
 const dataMartPollingTimers = new Map();
 
 function startDataMartAutoPolling(providerReference) {
-  if (!providerReference) return;
+  const reference = String(providerReference || "").trim();
 
-  const reference = String(providerReference);
+  if (!reference) return;
 
-  // Prevent duplicate polling loops.
   if (dataMartPollingTimers.has(reference)) return;
 
   let stopped = false;
@@ -2165,6 +2451,28 @@ function startDataMartAutoPolling(providerReference) {
     "refunded"
   ];
 
+ const statusMap = {
+    completed: "delivered",
+    delivered: "delivered",
+    success: "delivered",
+    successful: "delivered",
+
+    failed: "failed",
+    cancelled: "failed",
+    canceled: "failed",
+    rejected: "failed",
+
+    refunded: "refunded",
+
+    pending: "pending",
+    waiting: "pending",
+
+    processing: "processing",
+    in_progress: "processing",
+    "in progress": "processing",
+    unknown: "pending"
+  };
+
   async function checkStatus() {
     if (stopped || requestInProgress) return;
 
@@ -2180,11 +2488,21 @@ function startDataMartAutoPolling(providerReference) {
         }
       );
 
-      const result = await response.json();
+      let result;
 
-      if (!response.ok || !result.success) {
+      try {
+        result = await response.json();
+      } catch {
         console.warn(
-          "DataMart status check failed:",
+          "EcoData status endpoint returned invalid JSON:",
+          response.status
+        );
+        return;
+      }
+
+      if (!response.ok || result.success !== true) {
+        console.warn(
+          "EcoData status check failed:",
           result.message || response.status
         );
         return;
@@ -2198,53 +2516,41 @@ function startDataMartAutoPolling(providerReference) {
         "processing"
       ).trim().toLowerCase();
 
-      const statusMap = {
-        completed: "completed",
-        delivered: "completed",
-        success: "completed",
-        successful: "completed",
-        failed: "failed",
-        cancelled: "failed",
-        canceled: "failed",
-        refunded: "refunded",
-        waiting: "processing",
-        pending: "processing",
-        processing: "processing",
-        in_progress: "processing",
-        "in progress": "processing"
-      };
-
       const status = statusMap[rawStatus] || rawStatus;
 
-      // Read the current saved order.
+
+
+
       const orders = JSON.parse(
-        localStorage.getItem(LIVE_ORDERS_KEY) || "[]"
-      );
+  localStorage.getItem(LIVE_ORDERS_KEY) || "[]"
+);
 
-      const index = orders.findIndex(order =>
-        String(order.orderId) === reference &&
-        String(order.provider || "swiftdata").toLowerCase() === "datamart"
-      );
+const index = orders.findIndex(order => {
+  if (String(order.provider || "").toLowerCase() !== "datamart") {
+    return false;
+  }
 
-      if (index === -1) {
-        console.warn(
-          "DataMart order is not in ecoLiveOrders:",
-          reference
-        );
+  const savedProviderReference =
+    getDataMartProviderReference(order);
 
-        stopPolling();
-        return;
-      }
+  return savedProviderReference === reference;
+});
+
+if (index === -1) {
+  console.warn(
+    "No matching order found for provider reference:",
+    reference
+  );
+  return;
+}
 
       const currentOrder = orders[index];
 
-      // Never downgrade a terminal status from saved local data.
-      const currentIsTerminal =
+      if (
         terminalStatuses.includes(
           String(currentOrder.status || "").toLowerCase()
-        );
-
-      if (currentIsTerminal) {
+        )
+      ) {
         stopPolling();
         return;
       }
@@ -2252,27 +2558,33 @@ function startDataMartAutoPolling(providerReference) {
       const updatedOrder = {
         ...currentOrder,
         status,
-        updatedAt: Date.now(),
-        provider: "datamart"
+        provider: "datamart",
+        providerOrderReference: reference,
+        updatedAt: Date.now()
       };
 
-      // Preserve createdAt and timestamp.
       orders[index] = updatedOrder;
+
+      const sortedOrders = sortLiveOrders(orders);
 
       localStorage.setItem(
         LIVE_ORDERS_KEY,
         JSON.stringify(orders)
       );
 
-      // Refresh the existing UI.
+      if(typeof renderLiveOrderRow === "function"){
+        renderLiveOrderRow(sortedOrders);
+      } else{
+        renderLiveOrderRow(updatedOrder);
+      }
+
       renderLiveOrderRow(updatedOrder);
       createOrUpdateStatusCard(updatedOrder);
-
       updatePendingCard();
       loadActiveBadge();
 
       console.log(
-        "DataMart live status:",
+        "EcoData live status:",
         reference,
         status
       );
@@ -2281,7 +2593,7 @@ function startDataMartAutoPolling(providerReference) {
         stopPolling();
       }
     } catch (error) {
-      console.error("DataMart polling error:", error);
+      console.error("EcoData polling error:", error);
     } finally {
       requestInProgress = false;
     }
@@ -2298,16 +2610,13 @@ function startDataMartAutoPolling(providerReference) {
     dataMartPollingTimers.delete(reference);
   }
 
-  // Check immediately, then every 10 seconds.
+  // Register the polling loop before the first asynchronous request.
+  dataMartPollingTimers.set(reference, stopPolling);
+
   checkStatus();
 
   timer = setInterval(checkStatus, 10000);
-
-  dataMartPollingTimers.set(reference, stopPolling);
 }
-
-
-
 
 
 
@@ -2315,20 +2624,37 @@ const LIVE_ORDERS_KEY = "ecoLiveOrders";
 const MAX_LIVE_ORDERS = 1000;
 
 function saveLiveOrder(order) {
-  if (!order || !order.orderId) return;
+  if (!order || !order.orderId) {
+    console.error("Cannot save live order: missing orderId.", order);
+    return false;
+  }
 
   const normalizedOrder = {
     ...order,
-    provider: String(order.provider || "swiftdata").toLowerCase()
+    orderId: String(order.orderId),
+    provider: String(order.provider || "swiftdata").toLowerCase(),
+
+    // Preserve the full DataMart reference.
+    providerOrderReference: String(
+      order.providerOrderReference ||
+      order.orderReference ||
+      ""
+    ).trim()
   };
 
-  const existing = JSON.parse(
-    localStorage.getItem(LIVE_ORDERS_KEY) || "[]"
-  );
+  let existing = [];
 
-  const index = existing.findIndex(o =>
-    o.orderId === normalizedOrder.orderId &&
-    String(o.provider || "swiftdata").toLowerCase() ===
+  try {
+    const stored = localStorage.getItem(LIVE_ORDERS_KEY);
+    const parsed = stored ? JSON.parse(stored) : [];
+    existing = Array.isArray(parsed) ? parsed : [];
+  } catch (error) {
+    console.error("Could not read saved live orders:", error);
+  }
+
+  const index = existing.findIndex(item =>
+    String(item.orderId) === normalizedOrder.orderId &&
+    String(item.provider || "swiftdata").toLowerCase() ===
       normalizedOrder.provider
   );
 
@@ -2340,156 +2666,418 @@ function saveLiveOrder(order) {
       ...current,
       ...normalizedOrder,
 
-      // Preserve terminal status.
+      // Do not erase a saved provider reference with an empty value.
+      providerOrderReference:
+        normalizedOrder.providerOrderReference ||
+        current.providerOrderReference ||
+        "",
+
       status: currentIsTerminal
         ? current.status
         : normalizedOrder.status,
 
-      // Preserve original timestamps.
       createdAt: current.createdAt || Date.now(),
       timestamp: current.timestamp || Date.now(),
-
-      // Preserve update timestamp unless explicitly supplied.
       updatedAt: normalizedOrder.updatedAt || current.updatedAt
     };
   } else {
     existing.unshift({
       ...normalizedOrder,
-      timestamp: normalizedOrder.timestamp || Date.now(),
       createdAt: normalizedOrder.createdAt || Date.now(),
+      timestamp: normalizedOrder.timestamp || Date.now(),
       updatedAt: normalizedOrder.updatedAt || Date.now()
     });
   }
 
-  localStorage.setItem(
-    LIVE_ORDERS_KEY,
-    JSON.stringify(existing.slice(0, MAX_LIVE_ORDERS))
-  );
+  try {
+    localStorage.setItem(
+      LIVE_ORDERS_KEY,
+      JSON.stringify(existing.slice(0, MAX_LIVE_ORDERS))
+    );
+  } catch (error) {
+    console.error("Could not persist live order:", error);
+    return false;
+  }
 
   updatePendingCard();
   loadActiveBadge();
-}
 
+  return true;
+}
 // ends
 
 
+
+function sortLiveOrders(orders) {
+  return [...orders].sort((a, b) => {
+    const timeA = Number(
+      a.updatedAt || a.createdAt || a.timestamp || 0
+    );
+
+    const timeB = Number(
+      b.updatedAt || b.createdAt || b.timestamp || 0
+    );
+
+    return timeB - timeA; // Newest activity first
+  });
+}
+
+
+
+const MANUAL_DATAMART_PAYMENT_REFERENCES = [
+  "T219499556421049"
+];
+
+async function reconcileManualDataMartOrders() {
+  const API_BASE =
+    window.location.hostname === "localhost"
+      ? "http://localhost:3000"
+      : "https://ecodata-app.onrender.com";
+
+  const references = [
+    ...new Set(
+      MANUAL_DATAMART_PAYMENT_REFERENCES
+        .map(ref => String(ref || "").trim())
+        .filter(Boolean)
+    )
+  ];
+
+  if (!references.length) {
+    console.warn("No payment references provided.");
+    return;
+  }
+
+  const orders = JSON.parse(
+    localStorage.getItem(LIVE_ORDERS_KEY) || "[]"
+  );
+
+  for (const paymentReference of references) {
+    const providerReference =
+      `Ia553341879ecodata-${paymentReference}`;
+
+    console.log(
+      "Checking DataMart order:",
+      providerReference
+    );
+
+    try {
+      const response = await fetch(
+        `${API_BASE}/api/datamart/order-status/${encodeURIComponent(providerReference)}`,
+        {
+          method: "GET",
+          headers: { Accept: "application/json" },
+          cache: "no-store"
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok || result.success !== true) {
+        console.error(
+          "Status lookup failed:",
+          paymentReference,
+          result
+        );
+        continue;
+      }
+
+      const providerOrder = result.order || result.data || {};
+
+      const rawStatus = String(
+        providerOrder.status ||
+        providerOrder.orderStatus ||
+        "processing"
+      ).trim().toLowerCase();
+
+ 
+       const statusMap = {
+    completed: "delivered",
+    delivered: "delivered",
+    success: "delivered",
+    successful: "delivered",
+
+    failed: "failed",
+    cancelled: "failed",
+    canceled: "failed",
+    rejected: "failed",
+
+    refunded: "refunded",
+
+    pending: "pending",
+    waiting: "pending",
+
+    processing: "processing",
+    in_progress: "processing",
+    "in progress": "processing",
+    unknown: "pending"
+  };
+
+      const status = statusMap[rawStatus] || rawStatus;
+
+      // Match by either the saved provider reference
+      // or the original payment reference.
+      const index = orders.findIndex(order => {
+        if (
+          String(order.provider || "").toLowerCase() !== "datamart"
+        ) {
+          return false;
+        }
+
+        return (
+          String(order.providerOrderReference || "").trim() ===
+            providerReference ||
+          String(order.orderReference || "").trim() ===
+            providerReference ||
+          String(order.paymentReference || "").trim() ===
+            paymentReference
+        );
+      });
+
+      if (index === -1) {
+        console.warn(
+          "Provider status found, but no saved order matched.",
+          {
+            paymentReference,
+            providerReference,
+            status
+          }
+        );
+        continue;
+      }
+
+      const updatedOrder = {
+        ...orders[index],
+        provider: "datamart",
+        providerOrderReference: providerReference,
+        paymentReference,
+        status,
+        updatedAt: Date.now()
+      };
+
+      orders[index] = updatedOrder;
+
+
+      const sortedOrders = sortLiveOrders(orders);
+
+      localStorage.setItem(
+        LIVE_ORDERS_KEY,
+        JSON.stringify(sortedOrders)
+      );
+
+      // Refresh table in sorted order
+      if(typeof renderLiveOrderRow === "function"){
+        renderLiveOrderRow(sortedOrders);
+      } else{
+        renderLiveOrderRow(updatedOrder);
+      }
+
+      renderLiveOrderRow(updatedOrder);
+      createOrUpdateStatusCard(updatedOrder);
+
+      if (typeof updatePendingCard === "function") {
+        updatePendingCard();
+      }
+
+      if (typeof loadActiveBadge === "function") {
+        loadActiveBadge();
+      }
+
+      console.log("Manual reconciliation successful:", {
+        paymentReference,
+        providerReference,
+        status
+      });
+
+    } catch (error) {
+      console.error(
+        "Manual reconciliation failed:",
+        paymentReference,
+        error
+      );
+    }
+  }
+}
+
+
+
+document.addEventListener(
+  "DOMContentLoaded", ()=> {
+    reconcileManualDataMartOrders();
+  }
+)
+
+
+
+
+
+
+
+
+
+
+
+// =========================
 // RENDER LIVE ORDER ROW
+// =========================
 function renderLiveOrderRow(order) {
+  if (!order || !order.orderId) {
+    console.error("Cannot render live order: missing orderId.", order);
+    return;
+  }
+
   const tableBody = document.getElementById("liveOrderRows");
   if (!tableBody) return;
 
-  // Remove empty placeholder
+  // =========================
+  // NORMALIZE ORDER
+  // =========================
+  const normalized = {
+    ...order,
+    orderId: String(order.orderId),
+    provider: String(order.provider || "swiftdata").toLowerCase(),
+    recipient: order.recipient || order.phone || order.phoneNumber || "-",
+    volume: order.volume ?? 0,
+    status: order.status || "processing"
+  };
+
+  // =========================
+  // REMOVE EMPTY PLACEHOLDER
+  // =========================
   const empty = tableBody.querySelector(".empty-state");
   if (empty) empty.remove();
 
+  // =========================
+  // FORMAT DATE
+  // =========================
+  function formatOrderDate(value) {
+    if (!value) return "N/A";
 
-  //structure status updatedDated
-    const date =
-      order.createdAt
-        ? (() =>{
-          const d = new Date(order.createdAt);
-          const datePart =
-          d.toLocaleDateString("en-US", {
-            month: "short",
-            day: "2-digit",
-            year: "numeric"
-          });
+    const d = new Date(value);
 
-          const timePart =
-          d.toLocaleTimeString("en-US", {
-            hour: "numeric",
-            minute: "2-digit",
-            hour12: true
-          }).toUpperCase();
+    if (Number.isNaN(d.getTime())) return "N/A";
 
-          return `${datePart} ${timePart}`;
-        })() : "N/A";
+    const datePart = d.toLocaleDateString("en-US", {
+      month: "short",
+      day: "2-digit",
+      year: "numeric"
+    });
 
+    const timePart = d.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true
+    }).toUpperCase();
 
-    // structure status updatedTime
-   const update = order.updatedAt
-  ? (() => {
-      const d = new Date(order.updatedAt);
+    return `${datePart} ${timePart}`;
+  }
 
-      const datePart = d.toLocaleDateString("en-US", {
-        month: "short",
-        day: "2-digit",
-        year: "numeric"
-      });
+  // Structure created date
+  const date = formatOrderDate(
+    normalized.createdAt || normalized.timestamp
+  );
 
-      const timePart = d.toLocaleTimeString("en-US", {
-        hour: "numeric",
-        minute: "2-digit",
-        hour12: true
-      }).toUpperCase();
+  // Structure updated date
+  const update = formatOrderDate(normalized.updatedAt);
 
-      return `${datePart} ${timePart}`;
-    })()
-  : "N/A";
+  // =========================
+  // DEBUG LOGS
+  // =========================
+  console.log("Live order:", normalized);
+  console.log("createdAt:", normalized.createdAt);
+  console.log("updatedAt:", normalized.updatedAt);
+  console.log("timestamp:", normalized.timestamp);
 
+  // =========================
+  // FIND EXISTING ROW
+  // Match order ID + provider
+  // =========================
+  let row = Array.from(
+    tableBody.querySelectorAll(".live-row")
+  ).find(item =>
+    item.dataset.id === normalized.orderId &&
+    String(item.dataset.provider || "swiftdata").toLowerCase() ===
+      normalized.provider
+  );
 
-console.log("Order",order);
-console.log(
-  "createdAt", order.createdAt
-);
-console.log("UpdatedAt", order.updatedAt);
-console.log("timeStamp", order.timestamp);
+  const isNewRow = !row;
 
+  if (!row) {
+    row = document.createElement("div");
+    row.className = "live-row";
+    row.dataset.id = normalized.orderId;
+    row.dataset.provider = normalized.provider;
+  }
 
-  const provider = String(
-  order.provider || "swiftdata"
-).toLowerCase();
+  // =========================
+  // BUILD ROW
+  // Preserve your existing seven-column design
+  // =========================
+  row.replaceChildren();
 
-let row = Array.from(
-  tableBody.querySelectorAll(".live-row")
-).find(row =>
-  row.dataset.id === String(order.orderId) &&
-  String(row.dataset.provider || "swiftdata").toLowerCase() === provider
-);
+  function addCell(value, className = "") {
+    const span = document.createElement("span");
 
-if (!row) {
-  row = document.createElement("div");
-  row.className = "live-row";
-  row.dataset.id = order.orderId;
-  row.dataset.provider = provider;
-  tableBody.appendChild(row);
+    if (className) span.className = className;
+
+    span.textContent = String(value ?? "-");
+    row.appendChild(span);
+
+    return span;
+  }
+
+  // Order ID
+  addCell(normalized.orderId);
+
+  // Recipient
+  addCell(normalized.recipient || normalized.phone || normalized.phoneNumber);
+
+  // Data volume
+  addCell(`${normalized.volume}GB`);
+
+// Status
+  const statusCell = addCell("", "status-cell");
+  const badge = document.createElement("span");
+
+  badge.className =
+    `status-badge ${getStatusClass(normalized.status)}`;
+
+  const iconContainer = document.createElement("span");
+  iconContainer.innerHTML = getStatusIcon(normalized.status);
+
+  if (iconContainer.firstElementChild) {
+    badge.appendChild(iconContainer.firstElementChild);
+  }
+
+  const statusText = document.createElement("span");
+  statusText.textContent = normalized.status;
+
+  badge.appendChild(statusText);
+  statusCell.appendChild(badge);
+
+  // Network
+  addCell(getNetwork(normalized));
+
+  // Payment
+  addCell("Yes");
+
+  // Created date
+  addCell(date);
+
+  // =========================
+  // INSERT NEWEST ROW AT TOP
+  // =========================
+  if (isNewRow || tableBody.firstElementChild !== row) {
+    tableBody.prepend(row);
+  }
+
+  console.log("Live order row rendered:", {
+    orderId: normalized.orderId,
+    provider: normalized.provider,
+    status: normalized.status,
+    createdDate: date,
+    updatedDate: update
+  });
 }
-
-  row.innerHTML = `
-    <span>
-      ${order.orderId}
-    </span>
-
-    <span>
-      ${order.recipient}
-    </span>
-
-    <span>
-      ${order.volume}GB
-    </span>
-
-    <span class="status-cell">
-      <span class="status-badge ${getStatusClass(order.status)}">
-        ${getStatusIcon(order.status)}
-      <span>${order.status}</span>
-      </span>
-    </span>
-
-    <span>
-      ${getNetwork(order)}
-    </span>
-
-    <span>
-      Yes
-    </span>
-
-    <span>
-      ${date}
-    </span>
-  `;
-}
-
-
 console.log(JSON.parse(localStorage.getItem("ecoLiveOrders")));
 
 
