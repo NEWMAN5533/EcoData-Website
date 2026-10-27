@@ -2228,7 +2228,7 @@ const normalized = {
   `;
 
   // Add newest on top
-  tableBody.appendChild(row);
+  tableBody.append(row);
 
   console.log(normalized);
   
@@ -2707,7 +2707,7 @@ function renderLiveOrderRow(order) {
     ...order,
     orderId: String(order.orderId),
     provider: String(order.provider || "swiftdata").toLowerCase(),
-    recipient: order.recipient || "-",
+    recipient: order.recipient || order.phone || order.phoneNumber || "-",
     volume: order.volume ?? 0,
     status: order.status || "processing"
   };
@@ -2801,7 +2801,7 @@ function renderLiveOrderRow(order) {
   addCell(normalized.orderId);
 
   // Recipient
-  addCell(normalized.recipient);
+  addCell(normalized.recipient || normalized.phone || normalized.phoneNumber);
 
   // Data volume
   addCell(`${normalized.volume}GB`);
