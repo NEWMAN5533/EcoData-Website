@@ -2315,25 +2315,29 @@ function handleNewDataMartOrder(returnedOrder) {
   const rawStatus = String(
     order.status ||
     order.orderStatus ||
-    "processing"
+    "pending"
   ).trim().toLowerCase();
 
   const statusMap = {
-    completed: "completed",
-    delivered: "completed",
-    success: "completed",
-    successful: "completed",
+    completed: "delivered",
+    delivered: "delivered",
+    success: "delivered",
+    successful: "delivered",
+
     failed: "failed",
     cancelled: "failed",
     canceled: "failed",
     rejected: "failed",
+
     refunded: "refunded",
-    pending: "processing",
-    waiting: "processing",
+
+    pending: "pending",
+    waiting: "pending",
+
     processing: "processing",
     in_progress: "processing",
     "in progress": "processing",
-    unknown: "processing"
+    unknown: "pending"
   };
 
   const normalized = {
@@ -2447,22 +2451,26 @@ function startDataMartAutoPolling(providerReference) {
     "refunded"
   ];
 
-  const statusMap = {
-    completed: "completed",
-    delivered: "completed",
-    success: "completed",
-    successful: "completed",
+ const statusMap = {
+    completed: "delivered",
+    delivered: "delivered",
+    success: "delivered",
+    successful: "delivered",
+
     failed: "failed",
     cancelled: "failed",
     canceled: "failed",
     rejected: "failed",
+
     refunded: "refunded",
-    waiting: "processing",
-    pending: "processing",
+
+    pending: "pending",
+    waiting: "pending",
+
     processing: "processing",
     in_progress: "processing",
     "in progress": "processing",
-    unknown: "processing"
+    unknown: "pending"
   };
 
   async function checkStatus() {
@@ -2761,22 +2769,28 @@ async function reconcileManualDataMartOrders() {
         "processing"
       ).trim().toLowerCase();
 
-      const statusMap = {
-        completed: "completed",
-        delivered: "completed",
-        success: "completed",
-        successful: "completed",
-        failed: "failed",
-        cancelled: "failed",
-        canceled: "failed",
-        rejected: "failed",
-        refunded: "refunded",
-        pending: "processing",
-        waiting: "processing",
-        processing: "processing",
-        in_progress: "processing",
-        "in progress": "processing"
-      };
+ 
+       const statusMap = {
+    completed: "delivered",
+    delivered: "delivered",
+    success: "delivered",
+    successful: "delivered",
+
+    failed: "failed",
+    cancelled: "failed",
+    canceled: "failed",
+    rejected: "failed",
+
+    refunded: "refunded",
+
+    pending: "pending",
+    waiting: "pending",
+
+    processing: "processing",
+    in_progress: "processing",
+    "in progress": "processing",
+    unknown: "pending"
+  };
 
       const status = statusMap[rawStatus] || rawStatus;
 
