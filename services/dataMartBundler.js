@@ -10,13 +10,10 @@ import {
   mapNetworkToDataMart,
 } from "./dataMartService.js";
 
-import {
-  createDataMartOrder,
-  updateDataMartOrder,
-  getDataMartOrderByPaymentReference,
-} from "./dataMartOrderRepository.js";
+
 
 const PAYSTACK_FEE_RATE = 0.0195;
+const VERIFICATION_TIMEOUT_MS = 1500;
 
 function getCheckoutPrice(basePrice) {
   return Number(
@@ -28,62 +25,54 @@ function sameMoney(a, b) {
   return Math.round(Number(a) * 100) === Math.round(Number(b) * 100);
 }
 
-function normalizeDataMartStatus(status) {
-  const normalized = String(status ?? "").trim().toLowerCase();
+function failure(status, message, extra = {}) {
+  return {
+    ok: false,
+    status,
+    body: { success: false, message, ...extra },
+  };
+}
 
-  if (
-    ["completed", "success", "successful", "delivered"].includes(normalized)
-  ) {
+function normalizeDataMartStatus(status) {
+  const value = String(status ?? "").trim().toLowerCase();
+
+  if (["completed", "success", "successful", "delivered"].includes(value)) {
     return "completed";
   }
 
-  if (
-    ["failed", "cancelled", "canceled", "rejected"].includes(normalized)
-  ) {
+  if (["failed", "cancelled", "canceled", "rejected"].includes(value)) {
     return "failed";
   }
 
-  if (
-    ["pending", "processing", "in_progress", "in progress"].includes(normalized)
-  ) {
+  if (["pending", "processing", "in_progress", "in progress"].includes(value)) {
     return "processing";
   }
 
   return "unknown";
 }
 
-function existingDataMartOrderResponse(order) {
-  return {
-    provider: "datamart",
-    paymentReference: order.paymentReference,
-    providerOrderReference: order.providerOrderReference ?? null,
-    transactionReference: order.providerTransactionReference ?? null,
-    purchaseId: order.providerPurchaseId ?? null,
-    network: order.network,
-    capacity: order.capacityGb,
-    sellingPrice: order.sellingPrice,
-    providerPrice: order.providerPrice ?? null,
-    orderStatus: order.orderStatus,
-  };
-}
+function verificationTimedOut(promise, timeoutMs) {
+  let timer;
 
-function failure(status, message, extra = {}) {
-  return {
-    ok: false,
-    status,
-    body: {
-      success: false,
-      message,
-      ...extra,
-    },
-  };
+  return Promise.race([
+    Promise.resolve(promise),
+    new Promise((_, reject) => {
+      timer = setTimeout(
+        () => reject(new Error("RECIPIENT_VERIFICATION_TIMEOUT")),
+        timeoutMs
+      );
+    }),
+  ]).finally(() => clearTimeout(timer));
 }
 
 /**
- * DataMart-only purchase handler.
+ * Direct DataMart purchase handler.
  *
- * verifyPaystack and processedOrders are injected from server.js.
- * No SwiftData code or active-vendor selection belongs here.
+ * No Neon repository calls.
+ * No webhook waiting.
+ * No Firestore integration.
+ *
+ * verifyRecipient is optional and must be passed in if available.
  */
 export async function handleDataMartBuyDataRequest(
   {
@@ -95,6 +84,7 @@ export async function handleDataMartBuyDataRequest(
   },
   {
     verifyPaystack,
+    verifyRecipient,
     processedOrders,
   }
 ) {
@@ -103,91 +93,66 @@ export async function handleDataMartBuyDataRequest(
     !recipient ||
     !pkg ||
     !paymentReference ||
-    size === undefined
+    size === undefined ||
+    !String(recipient).trim()
   ) {
     return failure(400, "Missing required fields.");
   }
 
   const reference = String(paymentReference).trim();
+  const phoneNumber = String(recipient).trim();
+  const capacity = Number(size);
 
-  if (!reference) {
-    return failure(400, "Invalid payment reference.");
+  if (!reference || !Number.isFinite(capacity) || capacity <= 0) {
+    return failure(400, "Invalid payment reference or bundle size.");
   }
 
-  if (typeof verifyPaystack !== "function" || !processedOrders) {
-    console.error("Ecodata handler dependencies are missing.");
-
-    return failure(500, "Ecodata purchase service is not configured.");
+  if (
+    typeof verifyPaystack !== "function" ||
+    !(processedOrders instanceof Map)
+  ) {
+    return failure(500, "Purchase service is not configured.");
   }
 
-  // Check the persistent DataMart record before the in-memory cache.
-  // Neon remains the authoritative record for DataMart orders.
-  try {
-    const existingOrder =
-      await getDataMartOrderByPaymentReference(reference);
-
-    if (existingOrder) {
-      const orderResponse = existingDataMartOrderResponse(existingOrder);
-      const orderStatus = existingOrder.orderStatus;
-
-      processedOrders.set(reference, {
-        status:
-          orderStatus === "failed" ? "failed" : "processing",
-        response: orderResponse,
-      });
-
-      if (orderStatus === "completed") {
-        return {
-          ok: true,
-          status: 200,
-          body: {
-            success: true,
-            message: "This Ecodata order was already processed.",
-            order: orderResponse,
-          },
-        };
-      }
-
-      if (orderStatus === "failed") {
-        return failure(
-          409,
-          "This Ecodata order previously failed. Check its saved record before taking further action.",
-          { order: orderResponse }
-        );
-      }
-
-      return failure(
-        202,
-        "This Ecodata order is already recorded and was not resubmitted.",
-        { order: orderResponse }
-      );
-    }
-  } catch (error) {
-    console.error("Failed to check existing Ecodata order:", error.message);
-
-    return failure(
-      500,
-      "Unable to check the existing Ecodata order. No new purchase was submitted."
-    );
-  }
-
-  // Prevent duplicate requests within this server process.
+  // Prevent concurrent requests with the same payment reference
+  // within this running server process.
   if (processedOrders.has(reference)) {
     const existing = processedOrders.get(reference);
 
     return {
       ok: existing.status !== "failed",
-      status: existing.status === "failed" ? 400 : 200,
+      status: existing.status === "failed" ? 409 : 202,
       body: {
         success: existing.status !== "failed",
-        message: "This payment reference has already been processed.",
-        order: existing.response,
+        message: "This payment reference is already being processed or was processed.",
+        order: existing.response ?? null,
       },
     };
   }
 
+  const reservation = {
+    status: "processing",
+    response: {
+      provider: "datamart",
+      paymentReference: reference,
+      orderStatus: "processing",
+    },
+  };
+
+  processedOrders.set(reference, reservation);
+
+  // Before a provider request has been attempted, a failure can release
+  // the in-memory reservation. After submission, keep it to avoid retries.
+  let providerAttempted = false;
+
+  const releaseReservation = () => {
+    if (!providerAttempted && processedOrders.get(reference) === reservation) {
+      processedOrders.delete(reference);
+    }
+  };
+
   try {
-    // 1. Verify Paystack payment server-side.
+    // 1. Verify the payment with Paystack.
     const verification = await verifyPaystack(reference);
     const transaction = verification?.data?.data;
 
@@ -195,265 +160,185 @@ export async function handleDataMartBuyDataRequest(
       transaction?.status !== "success" ||
       transaction.reference !== reference
     ) {
+      releaseReservation();
       return failure(400, "Payment verification failed.");
     }
 
     const amountPesewas = Number(transaction.amount);
 
     if (!Number.isFinite(amountPesewas) || amountPesewas <= 0) {
+      releaseReservation();
       return failure(400, "Invalid payment amount.");
     }
 
     const actualAmountGHS = amountPesewas / 100;
 
-    // 2. Validate DataMart's selling price.
-    // This is the base price before the Paystack fee.
-    const baseSellingPrice = getDataMartSellingPrice(network, size);
+    // 2. Validate the selling price and checkout amount.
+    const baseSellingPrice = getDataMartSellingPrice(network, capacity);
 
-    if (
-      !Number.isFinite(Number(baseSellingPrice)) ||
-      Number(baseSellingPrice) <= 0
-    ) {
+    if (!Number.isFinite(Number(baseSellingPrice)) || Number(baseSellingPrice) <= 0) {
+      releaseReservation();
       return failure(400, "Invalid Ecodata selling price.");
     }
 
     const expectedCheckoutPrice = getCheckoutPrice(baseSellingPrice);
 
-    console.log("Ecodata payment price check:", {
-  paymentReference: reference,
-  paystackAmountPesewas: amountPesewas,
-  actualAmountGHS,
-  baseSellingPrice,
-  expectedCheckoutPrice,
-  feeRate: PAYSTACK_FEE_RATE
-});
-
-console.log("Backend price debug:", {
-  network,
-  size,
-  baseSellingPrice,
-  expectedCheckoutPrice,
-  actualAmountGHS,
-  paystackAmountPesewas: amountPesewas
-});
-
     if (!sameMoney(actualAmountGHS, expectedCheckoutPrice)) {
-      return failure(
-        400,
-        "The payment amount does not match the configured base price."
-      );
+      releaseReservation();
+      return failure(400, "The payment amount does not match the configured price.");
     }
 
+    // 3. Attempt recipient verification only when a verifier is available.
+    // A timeout or service outage fails open; a confirmed rejection does not.
+    if (typeof verifyRecipient === "function") {
+      try {
+        const result = await verificationTimedOut(
+          verifyRecipient({
+            network,
+            recipient: phoneNumber,
+            size: capacity,
+          }),
+          VERIFICATION_TIMEOUT_MS
+        );
 
+        if (result?.available === false || result?.unavailable === true) {
+          console.warn("Recipient verification unavailable; proceeding.", {
+            paymentReference: reference,
+          });
+        } else if (
+          result?.valid === false ||
+          result?.verified === false ||
+          result?.rejected === true
+        ) {
+          releaseReservation();
+          return failure(400, "The recipient could not be verified.");
+        }
+      } catch (error) {
+        console.warn("Recipient verification unavailable; proceeding.", {
+          paymentReference: reference,
+          reason: error.message,
+        });
+      }
+    } else {
+      console.warn("No recipient verifier configured; proceeding with purchase.", {
+        paymentReference: reference,
+      });
+    }
 
-    // 3. Retrieve and match the DataMart provider package.
+    // 4. Retrieve and match the DataMart package.
     const packages = await getDataMartPackages(network);
 
     const matchedPackage = matchDataMartPackage(
       {
         network,
-        size,
-        price: baseSellingPrice,
+        size: capacity,
+        price: Number(baseSellingPrice),
       },
       packages
     );
 
     if (!matchedPackage) {
-      return failure(
-        400,
-        "This bundle is not currently available from DataMart."
-      );
+      releaseReservation();
+      return failure(400, "This bundle is not currently available.");
     }
 
-    // 4. Enforce at least GH₵1.00 gross profit.
-    // Paystack fees are excluded from this calculation.
+    // 5. Enforce the minimum gross-profit requirement.
     const profitCheck = checkDataMartProfit({
       network,
-      volume: size,
+      volume: capacity,
       providerCost: matchedPackage.providerPrice,
     });
 
-    console.log("Ecodata pricing check:", {
-      network,
-      size: Number(size),
-      sellingPrice: profitCheck.sellingPrice,
-      providerCost: profitCheck.providerCost,
-      grossProfit: profitCheck.grossProfit,
-      minimumProfit: profitCheck.minimumProfit,
-      profitable: profitCheck.profitable,
-    });
+    if (!profitCheck.profitable) {
+      releaseReservation();
 
+      return failure(409, "This bundle does not meet the minimum gross-profit requirement.", {
+        grossProfit: profitCheck.grossProfit,
+        minimumProfit: profitCheck.minimumProfit,
+      });
+    }
+
+    // 6. Submit directly to DataMart. No webhook is awaited.
     const idempotencyKey = `ecodata-${reference}`;
 
-    // 5. Create the persistent order before submitting to the provider.
-    const result = await createDataMartOrder({
-      paymentReference: reference,
-      idempotencyKey,
-      customerPhone: String(recipient).trim(),
+    // From this point, don't automatically release the reservation after
+    // an error: backend may have received the request despite a timeout.
+    providerAttempted = true;
+
+    const providerOrder = await purchaseWithDataMart({
+      phoneNumber,
       network: mapNetworkToDataMart(network),
-      capacityGb: Number(size),
-      sellingPrice: profitCheck.sellingPrice,
+      capacity,
+      idempotencyKey,
     });
 
-    const savedOrder = result.order;
+    const orderStatus = normalizeDataMartStatus(providerOrder?.orderStatus);
 
-    if (!result.created) {
-      const orderResponse = existingDataMartOrderResponse(savedOrder);
+    const order = {
+      provider: "datamart",
+      paymentReference: reference,
+      providerOrderReference: providerOrder?.orderReference ?? null,
+      transactionReference: providerOrder?.transactionReference ?? null,
+      purchaseId: providerOrder?.purchaseId ?? null,
+      network: providerOrder?.network ?? network,
+      capacity: providerOrder?.capacity ?? capacity,
+      sellingPrice: profitCheck.sellingPrice,
+      checkoutAmount: actualAmountGHS,
+      providerPrice: providerOrder?.price ?? matchedPackage.providerPrice,
+      grossProfit: profitCheck.grossProfit,
+      orderStatus,
+    };
+
+    const successful = orderStatus !== "failed";
+
+    processedOrders.set(reference, {
+      status: successful ? "processing" : "failed",
+      response: order,
+    });
+
+    return {
+      ok: successful,
+      status: successful ? 200 : 400,
+      body: {
+        success: successful,
+        message:
+          orderStatus === "completed"
+            ? "Data bundle purchased successfully."
+            : successful
+              ? "EcoData accepted the purchase request."
+              : "EcoData reported that the purchase failed.",
+        order,
+      },
+    };
+  } catch (error) {
+    console.error("Direct purchase error:", {
+      paymentReference: reference,
+      message: error.message,
+      providerHttpStatus: error.providerHttpStatus ?? null,
+    });
+
+    if (providerAttempted) {
+      // The provider outcome may be uncertain. Keep the reference blocked
+      // until the order can be checked, rather than risking a duplicate.
+      const order = {
+        ...reservation.response,
+        orderStatus: "unknown",
+      };
+
+      processedOrders.set(reference, {
+        status: "processing",
+        response: order,
+      });
 
       return failure(
         202,
-        "This Ecodata payment is already recorded. No additional purchase was submitted.",
-        { order: orderResponse }
+        "The purchase outcome is uncertain. Check the provider order before retrying.",
+        { order }
       );
     }
 
-    // 6. Record and block an order that fails the profit requirement.
-    if (!profitCheck.profitable) {
-      const errorMessage =
-        `Ecodata order blocked: gross profit GH₵${profitCheck.grossProfit.toFixed(2)} ` +
-        `is below the required GH₵${profitCheck.minimumProfit.toFixed(2)}.`;
+    releaseReservation();
 
-      const blockedOrder = await updateDataMartOrder(reference, {
-        orderStatus: "failed",
-        providerPrice: profitCheck.providerCost,
-        lastError: errorMessage,
-        providerResponse: {
-          reason: "minimum_profit_not_met",
-          sellingPrice: profitCheck.sellingPrice,
-          providerCost: profitCheck.providerCost,
-          grossProfit: profitCheck.grossProfit,
-          minimumProfit: profitCheck.minimumProfit,
-        },
-      });
-
-      const orderResponse = existingDataMartOrderResponse(blockedOrder);
-
-      processedOrders.set(reference, {
-        status: "failed",
-        response: orderResponse,
-      });
-
-      console.error(errorMessage);
-
-      return failure(
-        409,
-        "This bundle does not meet the minimum GH₵1.00 gross-profit requirement. The verified payment has been recorded for review.",
-        { order: orderResponse }
-      );
-    }
-
-    // 7. Submit the purchase to DataMart.
-    try {
-      const providerOrder = await purchaseWithDataMart({
-        phoneNumber: recipient,
-        network,
-        capacity: size,
-        idempotencyKey: savedOrder.idempotencyKey,
-      });
-
-      const normalizedStatus = normalizeDataMartStatus(
-        providerOrder.orderStatus
-      );
-
-      const updatedOrder = await updateDataMartOrder(reference, {
-        orderStatus: normalizedStatus,
-        providerOrderReference: providerOrder.orderReference,
-        providerTransactionReference:
-          providerOrder.transactionReference,
-        providerPurchaseId: providerOrder.purchaseId,
-        providerPrice: providerOrder.price,
-        providerResponse: providerOrder,
-        lastError: null,
-      });
-
-      const orderResponse = {
-        provider: "datamart",
-        paymentReference: reference,
-        providerOrderReference: providerOrder.orderReference ?? null,
-        transactionReference:
-          providerOrder.transactionReference ?? null,
-        purchaseId: providerOrder.purchaseId ?? null,
-        network: providerOrder.network,
-        capacity: providerOrder.capacity,
-        sellingPrice: profitCheck.sellingPrice,
-        checkoutAmount: actualAmountGHS,
-        providerPrice: providerOrder.price ?? null,
-        grossProfit: profitCheck.grossProfit,
-        orderStatus: updatedOrder.orderStatus,
-      };
-
-      processedOrders.set(reference, {
-        status:
-          updatedOrder.orderStatus === "failed"
-            ? "failed"
-            : "processing",
-        response: orderResponse,
-      });
-
-      const successful = updatedOrder.orderStatus !== "failed";
-
-      return {
-        ok: successful,
-        status: successful ? 200 : 400,
-        body: {
-          success: successful,
-          message:
-            updatedOrder.orderStatus === "completed"
-              ? "Data bundle purchased successfully."
-              : successful
-                ? "Ecodata accepted the purchase request."
-                : "Ecodata reported that the purchase failed.",
-          order: orderResponse,
-        },
-      };
-    } catch (providerError) {
-      const httpStatus = providerError.providerHttpStatus;
-
-      const definitelyRejected =
-        Number.isInteger(httpStatus) &&
-        httpStatus >= 400 &&
-        httpStatus < 500 &&
-        httpStatus !== 408 &&
-        httpStatus !== 429;
-
-      const savedFailure = await updateDataMartOrder(reference, {
-        orderStatus: definitelyRejected ? "failed" : "unknown",
-        providerResponse: providerError.providerResponse ?? {
-          message:
-            providerError.providerMessage ?? providerError.message,
-        },
-        lastError:
-          providerError.providerMessage ?? providerError.message,
-      });
-
-      const orderResponse =
-        existingDataMartOrderResponse(savedFailure);
-
-      processedOrders.set(reference, {
-        status: definitelyRejected ? "failed" : "processing",
-        response: orderResponse,
-      });
-
-      console.error("Ecodata purchase outcome:", {
-        paymentReference: reference,
-        orderStatus: savedFailure.orderStatus,
-        httpStatus: httpStatus ?? null,
-      });
-
-      return failure(
-        definitelyRejected ? 400 : 202,
-        definitelyRejected
-          ? "Ecodata rejected the purchase. Check the saved order before retrying."
-          : "The Ecodata purchase outcome is uncertain. Verify the provider order before attempting another purchase.",
-        { order: orderResponse }
-      );
-    }
-  } catch (error) {
-    console.error("Ecodata buy-data handler error:", {
-      message: error.message,
-      paymentReference: reference,
-    });
-
-    return failure(500, "Failed to process the Ecodata order.");
+    return failure(502, "Unable to prepare the DataMart purchase. No provider purchase was submitted.");
   }
 }
