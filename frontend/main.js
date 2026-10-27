@@ -2205,7 +2205,7 @@ const normalized = {
   `;
 
   // Add newest on top
-  tableBody.prepend(row);
+  tableBody.append(row);
 
   console.log(normalized);
   
@@ -2224,32 +2224,7 @@ const normalized = {
 
 
 
-function getDataMartProviderReference(order) {
-  const savedReference = String(
-    order.providerOrderReference ||
-    order.datamartReference ||
-    order.orderReference ||
-    ""
-  ).trim();
 
-  // Use a saved full provider reference when available.
-  if (savedReference.startsWith("Ia553341879ecodata-")) {
-    return savedReference;
-  }
-
-  // Otherwise, reconstruct it from the Paystack payment reference.
-  const paymentReference = String(
-    order.paymentReference ||
-    order.paystackReference ||
-    ""
-  ).trim();
-
-  if (!paymentReference) {
-    return "";
-  }
-
-  return `Ia553341879ecodata-${paymentReference}`;
-}
 
 
 
@@ -2424,7 +2399,32 @@ function handleNewDataMartOrder(returnedOrder) {
 }
 
 
+function getDataMartProviderReference(order) {
+  const savedReference = String(
+    order.providerOrderReference ||
+    order.datamartReference ||
+    order.orderReference ||
+    ""
+  ).trim();
 
+  // Use a saved full provider reference when available.
+  if (savedReference.startsWith("Ia553341879ecodata-")) {
+    return savedReference;
+  }
+
+  // Otherwise, reconstruct it from the Paystack payment reference.
+  const paymentReference = String(
+    order.paymentReference ||
+    order.paystackReference ||
+    ""
+  ).trim();
+
+  if (!paymentReference) {
+    return "";
+  }
+
+  return `Ia553341879ecodata-${paymentReference}`;
+}
 
 
 const dataMartPollingTimers = new Map();
