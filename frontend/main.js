@@ -3023,7 +3023,7 @@ function renderLiveOrderRow(order) {
   // INSERT NEWEST ROW AT TOP
   // =========================
   if (isNewRow || tableBody.firstElementChild !== row) {
-    tableBody.append(row);
+    tableBody.appendChild(row);
   }
 
   console.log("Live order row rendered:", {
