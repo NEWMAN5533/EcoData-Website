@@ -2473,7 +2473,7 @@ function startDataMartAutoPolling(providerReference) {
         result = await response.json();
       } catch {
         console.warn(
-          "DataMart status endpoint returned invalid JSON:",
+          "EcoData status endpoint returned invalid JSON:",
           response.status
         );
         return;
@@ -2481,7 +2481,7 @@ function startDataMartAutoPolling(providerReference) {
 
       if (!response.ok || result.success !== true) {
         console.warn(
-          "DataMart status check failed:",
+          "EcoData status check failed:",
           result.message || response.status
         );
         return;
@@ -2839,7 +2839,7 @@ function renderLiveOrderRow(order) {
   // INSERT NEWEST ROW AT TOP
   // =========================
   if (isNewRow || tableBody.firstElementChild !== row) {
-    tableBody.appendChild(row);
+    tableBody.append(row);
   }
 
   console.log("Live order row rendered:", {
