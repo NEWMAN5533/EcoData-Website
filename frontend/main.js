@@ -1669,8 +1669,6 @@ try {
 //ends//
 
 
-
-
 async function orderDataMartBundle(
   network,
   recipient,
@@ -1707,12 +1705,10 @@ async function orderDataMartBundle(
 
     try {
       result = await response.json();
+      if(result.success && result.order){
+        handleNewDataMartOrder(result.order);
+      }
 
-    if (result.success && result.order) {
-  handleNewDataMartOrder(result.order);
-}
-
-      
     } catch {
       throw new Error(
         `EcoData returned an invalid response (HTTP ${response.status}).`
@@ -1766,14 +1762,14 @@ async function orderDataMartBundle(
     ).trim();
 
     const orderId =
-      existingPublicId.startsWith("ED-")
+      existingPublicId.startsWith("EDO-")
         ? existingPublicId
         : providerOrderReference
-          ? `ED-${providerOrderReference.slice(-5)}`
+          ? `EDO-${providerOrderReference.slice(-6)}`
           : "";
 
     if (!orderId) {
-      console.error("DataMart response missing order references:", {
+      console.error("Ecodata response missing order references:", {
         responseStatus: response.status,
         result
       });
@@ -1879,20 +1875,20 @@ async function orderDataMartBundle(
       playSuccessSound();
 
       showSnackBar(
-        `${orderData.volume}GB bundle purchased successfully!`,
+        `${orderData.volume}GB ORDER PLACED SUCCESSFULLY!!`,
         "success",
         6000
       );
     } else if (isFailed) {
       showSnackBar(
-        "EcoData reported that this purchase failed. Check the order record before taking further action.",
+        "Ecodata reported that this purchase failed. Check the order record before taking further action.",
         "error",
         6000
       );
     } else {
       showSnackBar(
         isAcceptedResponse
-          ? "Your order is already recorded or still processing. Check Order History for updates."
+          ? "Your Ecodata order is already recorded or still processing. Check Order History for updates."
           : `${orderData.volume}GB order accepted. Current status: ${orderStatus}.`,
         "success",
         6000
@@ -1935,7 +1931,7 @@ async function orderDataMartBundle(
       order: orderData
     };
   } catch (error) {
-    console.error("EcoData order request failed:", error);
+    console.error("Ecodata order request failed:", error);
 
     showSnackBar(
       "We could not confirm the order response. Check Order History before retrying.",
@@ -1949,10 +1945,6 @@ async function orderDataMartBundle(
     };
   }
 }
-
-
-
-
 //====================
 // SAVE WITH RETRY
 //====================
@@ -2250,10 +2242,7 @@ const normalized = {
 
   // ---------- LIVE STATUS POLLING ----------
   startAutoPolling(normalized.orderId);
-} 
-
-
-
+}
 
 
 
@@ -2281,10 +2270,10 @@ function handleNewDataMartOrder(returnedOrder) {
   // Keep EcoData's public ID separate from DataMart's reference.
   const existingOrderId = String(order.orderId || "").trim();
 
-  const orderId = existingOrderId.startsWith("ED-")
+  const orderId = existingOrderId.startsWith("EDO-")
     ? existingOrderId
     : providerOrderReference
-      ? `ED-${providerOrderReference.slice(-5)}`
+      ? `EDO-${providerOrderReference.slice(-6)}`
       : existingOrderId;
 
   if (!orderId) {
@@ -2407,15 +2396,16 @@ function handleNewDataMartOrder(returnedOrder) {
     startDataMartAutoPolling(providerOrderReference);
   } else {
     console.warn(
-      "EcoData order saved, but live status polling cannot start: provider reference is missing.",
+      "Your order saved, but live status polling cannot start: provider reference is missing.",
       normalized.orderId
     );
   }
 
-  console.log("EcoData live order normalized:", normalized);
+  console.log(" Live order normalized:", normalized);
 
   return normalized;
 }
+
 
 
 
@@ -2531,7 +2521,7 @@ function startDataMartAutoPolling(providerReference) {
 
       if (index === -1) {
         console.warn(
-          "DataMart status received, but no matching saved order was found.",
+          "EcoData status received, but no matching saved order was found.",
           {
             providerReference: reference,
             savedOrderCount: orders.length
@@ -2575,7 +2565,7 @@ function startDataMartAutoPolling(providerReference) {
       loadActiveBadge();
 
       console.log(
-        "DataMart live status:",
+        "EcoData live status:",
         reference,
         status
       );
@@ -2584,7 +2574,7 @@ function startDataMartAutoPolling(providerReference) {
         stopPolling();
       }
     } catch (error) {
-      console.error("Live status polling error:", error);
+      console.error("EcoData polling error:", error);
     } finally {
       requestInProgress = false;
     }
@@ -2611,15 +2601,6 @@ function startDataMartAutoPolling(providerReference) {
 
 
 
-
-
-
-
-
-
-
-
-
 const LIVE_ORDERS_KEY = "ecoLiveOrders";
 const MAX_LIVE_ORDERS = 1000;
 
@@ -2632,7 +2613,14 @@ function saveLiveOrder(order) {
   const normalizedOrder = {
     ...order,
     orderId: String(order.orderId),
-    provider: String(order.provider || "swiftdata").toLowerCase()
+    provider: String(order.provider || "swiftdata").toLowerCase(),
+
+    // Preserve the full DataMart reference.
+    providerOrderReference: String(
+      order.providerOrderReference ||
+      order.orderReference ||
+      ""
+    ).trim()
   };
 
   let existing = [];
@@ -2640,11 +2628,9 @@ function saveLiveOrder(order) {
   try {
     const stored = localStorage.getItem(LIVE_ORDERS_KEY);
     const parsed = stored ? JSON.parse(stored) : [];
-
     existing = Array.isArray(parsed) ? parsed : [];
   } catch (error) {
     console.error("Could not read saved live orders:", error);
-    existing = [];
   }
 
   const index = existing.findIndex(item =>
@@ -2660,9 +2646,17 @@ function saveLiveOrder(order) {
     existing[index] = {
       ...current,
       ...normalizedOrder,
+
+      // Do not erase a saved provider reference with an empty value.
+      providerOrderReference:
+        normalizedOrder.providerOrderReference ||
+        current.providerOrderReference ||
+        "",
+
       status: currentIsTerminal
         ? current.status
         : normalizedOrder.status,
+
       createdAt: current.createdAt || Date.now(),
       timestamp: current.timestamp || Date.now(),
       updatedAt: normalizedOrder.updatedAt || current.updatedAt
@@ -2691,7 +2685,6 @@ function saveLiveOrder(order) {
 
   return true;
 }
-
 // ends
 
 
@@ -2813,35 +2806,22 @@ function renderLiveOrderRow(order) {
   // Data volume
   addCell(`${normalized.volume}GB`);
 
-  // Status
+// Status
   const statusCell = addCell("", "status-cell");
   const badge = document.createElement("span");
 
   badge.className =
     `status-badge ${getStatusClass(normalized.status)}`;
 
- // =========================
-  // STATUS BADGE WITH REMIX ICON
-  // =========================
- 
-
-  badge.className =
-    `status-badge ${getStatusClass(normalized.status)}`;
-
-  // Render the Remix Icon HTML returned by getStatusIcon()
   const iconContainer = document.createElement("span");
   iconContainer.innerHTML = getStatusIcon(normalized.status);
 
-  badge.appendChild(iconContainer.firstElementChild);
+  if (iconContainer.firstElementChild) {
+    badge.appendChild(iconContainer.firstElementChild);
+  }
 
-  // Status text
   const statusText = document.createElement("span");
   statusText.textContent = normalized.status;
-
-  badge.appendChild(statusText);
-  statusCell.appendChild(badge);
-
-
 
   badge.appendChild(statusText);
   statusCell.appendChild(badge);
