@@ -2204,8 +2204,7 @@ const normalized = {
     </span>
   `;
 
-  // Add newest on top
-  tableBody.append(row);
+
 
   console.log(normalized);
   
