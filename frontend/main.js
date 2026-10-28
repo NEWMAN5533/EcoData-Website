@@ -2739,17 +2739,101 @@ function saveLiveOrder(order) {
 
 
 function sortLiveOrders(orders) {
-  return [...orders].sort((a, b) => {
-    const timeA = Number(
-      a.updatedAt || a.createdAt || a.timestamp || 0
-    );
+  if (!Array.isArray(orders)) {
+    console.warn("sortLiveOrders: Expected an array.");
+    return [];
+  }
 
-    const timeB = Number(
-      b.updatedAt || b.createdAt || b.timestamp || 0
-    );
+  // Convert supported date formats into milliseconds.
+  function getTimestamp(value) {
+    if (value === null || value === undefined || value === "") {
+      return 0;
+    }
 
-    return timeB - timeA; // Newest activity first
-  });
+    // Date objects
+    if (value instanceof Date) {
+      const time = value.getTime();
+      return Number.isFinite(time) ? time : 0;
+    }
+
+    // Firestore Timestamp objects
+    if (typeof value === "object") {
+      if (typeof value.toMillis === "function") {
+        const time = value.toMillis();
+        return Number.isFinite(time) ? time : 0;
+      }
+
+      if (typeof value.seconds === "number") {
+        return value.seconds * 1000;
+      }
+
+      if (typeof value._seconds === "number") {
+        return value._seconds * 1000;
+      }
+    }
+
+    // Numeric Unix timestamp (seconds or milliseconds)
+    if (typeof value === "number") {
+      if (!Number.isFinite(value) || value <= 0) return 0;
+
+      return value < 1e12 ? value * 1000 : value;
+    }
+
+    // Numeric timestamp stored as a string
+    if (/^\d+$/.test(String(value).trim())) {
+      const numeric = Number(value);
+
+      if (!Number.isFinite(numeric) || numeric <= 0) return 0;
+
+      return numeric < 1e12 ? numeric * 1000 : numeric;
+    }
+
+    // ISO date strings and other parseable date strings
+    const parsed = Date.parse(value);
+
+    return Number.isFinite(parsed) ? parsed : 0;
+  }
+
+  function getCreationTime(order) {
+    // Prefer original creation time so status updates
+    // do not push old orders to the top.
+    const fields = [
+      order.createdAt,
+      order.timestamp,
+      order.created_at,
+      order.dateCreated,
+      order.orderDate
+    ];
+
+    for (const field of fields) {
+      const time = getTimestamp(field);
+
+      if (time > 0) return time;
+    }
+
+    // Fallback only when no creation time exists.
+    return getTimestamp(order.updatedAt);
+  }
+
+  return orders
+    .filter(order => order && typeof order === "object")
+    .map((order, index) => ({
+      order,
+      index,
+      creationTime: getCreationTime(order)
+    }))
+    .sort((a, b) => {
+      // Newest order first.
+      const timeDifference = b.creationTime - a.creationTime;
+
+      if (timeDifference !== 0) {
+        return timeDifference;
+      }
+
+      // Keep the original order for equal or missing timestamps.
+      return a.index - b.index;
+    })
+    .map(item => item.order);
 }
 
 
