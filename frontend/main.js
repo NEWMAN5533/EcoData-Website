@@ -3066,7 +3066,7 @@ function renderLiveOrderRow(order) {
   // =========================
   // INSERT NEWEST ROW AT TOP
   // =========================
-  if (isNewRow || tableBody.firstElementChild !== row) {
+  if (isNewRow || tableBody) {
     tableBody.appendChild(row);
   }
 
