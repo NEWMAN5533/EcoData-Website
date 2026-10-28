@@ -1665,7 +1665,6 @@ try {
 //ends//
 //ends//
 
-
 async function orderDataMartBundle(
   network,
   recipient,
@@ -1697,37 +1696,43 @@ async function orderDataMartBundle(
       }
     );
 
-
-    // Safely parse the backend response.
+    // =========================
+    // PARSE BACKEND RESPONSE
+    // =========================
     let result;
 
     try {
       result = await response.json();
-  
-      if(result.success && result.order){
-        handleNewDataMartOrder(result.order);
-      }
-
-
-      
-    console.log("FULL VENDOR2 PURCHASE RESPONSE:",);
-    console.log("VENDOR2 ORDER OBJECT:", result.order || result.data);
-
     } catch {
       throw new Error(
         `EcoData returned an invalid response (HTTP ${response.status}).`
       );
     }
 
-    // IMPORTANT:
-    // The backend returns the order under result.order,
-    // not result.data.
+    console.log("FULL DATAMART PURCHASE RESPONSE:", result);
+
     const order = result.order || result.data || {};
 
-    // HTTP 202 means accepted for processing, not completed.
+    // =========================
+    // ACCEPTANCE CHECK
+    // =========================
+    const paymentReference = String(
+      order.paymentReference || reference || ""
+    ).trim();
+
+    const providerOrderReference = String(
+      order.providerOrderReference ||
+      order.orderReference ||
+      (
+        paymentReference
+          ? `Ia553341879ecodata-${paymentReference}`
+          : ""
+      )
+    ).trim();
+
     const isAcceptedResponse =
       response.status === 202 &&
-      Boolean(order.providerOrderReference || order.paymentReference);
+      Boolean(paymentReference || providerOrderReference);
 
     if (
       !response.ok ||
@@ -1742,43 +1747,31 @@ async function orderDataMartBundle(
 
       return {
         success: false,
-        order: order
+        order
       };
     }
 
-    const bundle = lastPurchasedBundle;
-
-    // Keep the provider reference separate from EcoData's public ID.
-    const providerOrderReference = String(
-      order.providerOrderReference ||
-      order.orderReference ||
-      ""
-    ).trim();
-
-    const paymentReference = String(
-      order.paymentReference || reference || ""
-    ).trim();
-
-    // Reuse the saved public ID if the backend returns an existing order.
+    // =========================
+    // CREATE STABLE ORDER ID
+    // =========================
     const existingPublicId = String(
       order.orderId || order.id || ""
     ).trim();
 
-    const orderId =
-      existingPublicId.startsWith("EDO-")
-        ? existingPublicId
-        : providerOrderReference
-          ? `EDO-${providerOrderReference.slice(-6)}`
-          : "";
+    const orderId = existingPublicId.startsWith("EDO-")
+      ? existingPublicId
+      : providerOrderReference
+        ? `EDO-${providerOrderReference.slice(-6)}`
+        : "";
 
     if (!orderId) {
-      console.error("Ecodata response missing order references:", {
-        responseStatus: response.status,
+      console.error(
+        "DataMart purchase accepted, but the response lacks usable order references:",
         result
-      });
+      );
 
       showSnackBar(
-        "The purchase response is missing an order reference. Check Order History before retrying.",
+        "The purchase may have been accepted, but its order reference is missing. Check Order History before retrying.",
         "warning",
         6000
       );
@@ -1789,44 +1782,78 @@ async function orderDataMartBundle(
       };
     }
 
-    const orderStatus = String(
+    const bundle = lastPurchasedBundle;
+
+    // =========================
+    // NORMALIZE STATUS
+    // =========================
+    const rawStatus = String(
       order.orderStatus ||
       order.status ||
       "processing"
     ).trim().toLowerCase();
 
-    const completedStatuses = [
-      "completed",
-      "delivered",
-      "success",
-      "successful"
-    ];
+    const statusMap = {
+      completed: "delivered",
+      delivered: "delivered",
+      success: "delivered",
+      successful: "delivered",
 
-    const failedStatuses = [
-      "failed",
-      "cancelled",
-      "canceled",
-      "rejected"
-    ];
+      failed: "failed",
+      cancelled: "failed",
+      canceled: "failed",
+      rejected: "failed",
 
-    const isCompleted = completedStatuses.includes(orderStatus);
-    const isFailed = failedStatuses.includes(orderStatus);
+      refunded: "refunded",
+
+      pending: "processing",
+      waiting: "processing",
+      processing: "processing",
+      in_progress: "processing",
+      "in progress": "processing",
+      unknown: "processing"
+    };
+
+    const status = statusMap[rawStatus] || rawStatus;
+
+    // =========================
+    // PRESERVE RECIPIENT NUMBER
+    // =========================
+    const orderRecipient =
+      order.recipient ||
+      order.phoneNumber ||
+      order.phone ||
+      order.recipientNumber ||
+      order.msisdn ||
+      order.items?.[0]?.recipient ||
+      order.items?.[0]?.phoneNumber ||
+      recipient ||
+      "-";
+
+    const amount = Number(
+      order.sellingPrice ??
+      order.amount ??
+      order.checkoutAmount ??
+      bundle?.price ??
+      0
+    );
+
+    const costPrice = Number(
+      order.providerPrice ??
+      order.costPrice ??
+      order.price ??
+      0
+    );
 
     const orderData = {
+      ...order,
+
       orderId,
-
-      // Provider reference is essential for DataMart status polling.
       providerOrderReference,
-
-      // Keep compatibility with existing frontend components.
       reference: orderId,
       paymentReference,
 
-      recipient:
-        order.phoneNumber ||
-        order.recipient ||
-        order.phone ||
-        recipient,
+      recipient: orderRecipient,
 
       network:
         order.network ||
@@ -1837,29 +1864,23 @@ async function orderDataMartBundle(
         order.capacity ??
         order.volume ??
         bundle?.size ??
-        size
-      ),
-
-      dataValue: String(
-        bundle?.dataValue ??
-        order.capacity ??
-        size
-      ),
-
-      amount: Number(
-        order.sellingPrice ??
-        order.amount ??
-        bundle?.price ??
+        size ??
         0
       ),
 
-      costPrice: Number(order.providerPrice ?? order.price ?? 0),
+      dataValue: String(
+        order.dataValue ??
+        bundle?.dataValue ??
+        order.capacity ??
+        size ??
+        ""
+      ),
 
-      status: isCompleted
-        ? "completed"
-        : isFailed
-          ? "failed"
-          : "processing",
+      amount,
+      costPrice,
+      profit: Number(order.profit ?? amount - costPrice),
+
+      status,
 
       source: "web",
       provider: "datamart",
@@ -1874,70 +1895,98 @@ async function orderDataMartBundle(
       updatedAt: Date.now()
     };
 
-    // Tell the user what actually happened.
-    if (isCompleted) {
-      playSuccessSound();
+    console.log("NORMALIZED DATAMART ORDER:", orderData);
 
-      showSnackBar(
-        `${orderData.volume}GB ORDER PLACED SUCCESSFULLY!!`,
-        "success",
-        6000
-      );
-    } else if (isFailed) {
-      showSnackBar(
-        "Ecodata reported that this purchase failed. Check the order record before taking further action.",
-        "error",
-        6000
-      );
-    } else {
-      showSnackBar(
-        isAcceptedResponse
-          ? "Your Ecodata order is already recorded or still processing. Check Order History for updates."
-          : `${orderData.volume}GB order accepted. Current status: ${orderStatus}.`,
-        "success",
-        6000
-      );
+    // =========================
+    // UPDATE HOMEPAGE TOTALS
+    // =========================
+    try {
+      updateHomepageTotals(orderData);
+    } catch (error) {
+      console.error("Homepage totals update failed:", error);
     }
 
-    // Do not call a function here if it can submit another vendor purchase.
-    // The backend has already submitted the DataMart purchase.
-    updateHomepageTotals(orderData);
-
+    // =========================
+    // SAVE FIRESTORE ORDER
+    // =========================
     try {
       await saveOrderToFirestore(orderData);
     } catch (error) {
       console.error("Firestore save failed:", error);
     }
 
+    // =========================
+    // SAVE GUEST ORDER
+    // =========================
     try {
       saveGuestOrder(orderData);
     } catch (error) {
       console.error("Guest order save failed:", error);
     }
 
-   try {
-  activateTrackers();
+    // =========================
+    // SAVE AND RENDER LIVE ORDER
+    // =========================
+    try {
+      // The handler receives the submitted recipient and
+      // complete references, even if DataMart omitted them.
+      handleNewDataMartOrder(orderData);
+    } catch (error) {
+      console.error(
+        "Purchase accepted, but live-order rendering failed:",
+        error
+      );
+    }
 
-  if (
-    orderData.provider === "datamart" &&
-    orderData.providerOrderReference &&
-    typeof startDataMartAutoPolling === "function"
-  ) {
-    startDataMartAutoPolling(
-      orderData.providerOrderReference
-    );
-  }
-} catch (error) {
-  console.error("Tracker activation failed:", error);
-} 
+    // =========================
+    // ACTIVATE TRACKERS
+    // =========================
+    try {
+      activateTrackers();
 
-   return {
+      // handleNewDataMartOrder already starts DataMart polling.
+      // Do not start it a second time here.
+    } catch (error) {
+      console.error("Tracker activation failed:", error);
+    }
+
+    // =========================
+    // USER FEEDBACK
+    // =========================
+    if (status === "delivered") {
+      try {
+        playSuccessSound();
+      } catch (error) {
+        console.warn("Success sound unavailable:", error);
+      }
+
+      showSnackBar(
+        `${orderData.volume}GB ORDER DELIVERED SUCCESSFULLY!`,
+        "success",
+        6000
+      );
+    } else if (status === "failed") {
+      showSnackBar(
+        "The provider reported that this purchase failed. Check the order record before retrying.",
+        "error",
+        6000
+      );
+    } else {
+      showSnackBar(
+        `${orderData.volume}GB order accepted. Current status: ${status}.`,
+        "success",
+        6000
+      );
+    }
+
+    return {
       success: true,
-      completed: isCompleted,
+      completed: status === "delivered",
       order: orderData
     };
+
   } catch (error) {
-    console.error("Ecodata order request failed:", error);
+    console.error("DataMart order request failed:", error);
 
     showSnackBar(
       "We could not confirm the order response. Check Order History before retrying.",
@@ -1951,6 +2000,7 @@ async function orderDataMartBundle(
     };
   }
 }
+
 //====================
 // SAVE WITH RETRY
 //====================
