@@ -3107,41 +3107,16 @@ function renderLiveOrderRow(order) {
   // Created date
   addCell(date);
 
-// =========================
-// KEEP TABLE NEWEST-FIRST
-// =========================
-function getOrderTimestamp(row) {
-  const value = row.dataset.createdAt;
-  if (!value) return 0;
-
-  const timestamp = Number(value);
-
-  if (Number.isFinite(timestamp) && timestamp > 0) {
-    return timestamp;
+  // =========================
+  // INSERTION BEHAVIOR
+  // =========================
+  if (isNewRow) {
+    // New orders appear at the top.
+    tableBody.appendChild(row);
+  } else {
+    // Existing rows stay in their current position.
+    // Do not append, prepend, or appendChild the row here.
   }
-
-  const parsed = new Date(value).getTime();
-  return Number.isFinite(parsed) ? parsed : 0;
-}
-
-// Set the creation time on the row.
-row.dataset.createdAt = String(
-  normalized.createdAt ||
-  normalized.timestamp ||
-  0
-);
-
-// Sort all rows from newest to oldest.
-const rows = Array.from(
-  tableBody.querySelectorAll(".live-row")
-);
-
-rows.sort((a, b) =>
-  getOrderTimestamp(b) - getOrderTimestamp(a)
-);
-
-// Reinsert rows in sorted order.
-rows.forEach(item => tableBody.appendChild(item));
 
   console.log("Live order row rendered:", {
     orderId: normalized.orderId,
