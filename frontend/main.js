@@ -1627,7 +1627,7 @@ const orderData = {
 };
 
  handleNewOrder(
-  ...returnedOrder
+  orderData
 );
 
 updateHomepageTotals(orderData);
