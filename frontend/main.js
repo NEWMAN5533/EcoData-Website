@@ -2204,7 +2204,8 @@ const normalized = {
     </span>
   `;
 
-
+  // Add newest on top
+  tableBody.appendChild(row);
 
   console.log(normalized);
   
@@ -3066,7 +3067,7 @@ function renderLiveOrderRow(order) {
   // INSERT NEWEST ROW AT TOP
   // =========================
   if (isNewRow || tableBody.firstElementChild !== row) {
-    tableBody.prepend(row);
+    tableBody.appendChild(row);
   }
 
   console.log("Live order row rendered:", {
