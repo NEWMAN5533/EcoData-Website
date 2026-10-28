@@ -2900,16 +2900,9 @@ function sortLiveOrders(orders) {
 
 
 const MANUAL_DATAMART_PAYMENT_REFERENCES = [
-  "T219499556421049",
-  "T652983780634136",
-  "T810016818469546",
-  "T355159701406231",
-  "T278211592395010",
- "T125193613302570",
-  "T936502392766662",
-  "T355159701406231",
-  "T772777523040753",
-  "T185311447740190",
+  "T722189380499497",
+  "T708013691490490",
+ 
 ];
 
 async function reconcileManualDataMartOrders() {
@@ -2940,7 +2933,7 @@ async function reconcileManualDataMartOrders() {
       `Ia553341879ecodata-${paymentReference}`;
 
     console.log(
-      "Checking DataMart order:",
+      "Checking Live order:",
       providerReference
     );
 
