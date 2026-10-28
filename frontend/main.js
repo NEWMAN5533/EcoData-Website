@@ -3053,7 +3053,7 @@ function renderLiveOrderRow(order) {
   // =========================
   if (isNewRow) {
     // New orders appear at the top.
-    tableBody.prepend(row);
+    tableBody.appendChild(row);
   } else {
     // Existing rows stay in their current position.
     // Do not append, prepend, or appendChild the row here.
