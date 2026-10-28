@@ -2176,36 +2176,7 @@ const normalized = {
   const empty = tableBody.querySelector(".empty-state");
   if (empty) empty.remove();
 
-  // Prevent duplicate row
-  if (tableBody.querySelector(`[data-id="${normalized.orderId}"]`)) return;
-
-  // Create row
-  const row = document.createElement("div");
-  row.className = "live-row";
-  row.dataset.id = normalized.orderId;
-
-  row.innerHTML = `
-    <span>
-      ${normalized.orderId}
-    </span>
-
-    <span>
-      ${normalized.volume}GB
-    </span>
-
-    <span>
-      ${normalized.recipient}
-    </span>
-
-    <span class="status-cell">
-      <sp class="status-badge ${getStatusClass(normalized.status)}">
-        ${normalized.status}
-      </span>
-    </span>
-  `;
-
-  // Add newest on top
-  tableBody.appendChild(row);
+ 
 
   console.log(normalized);
   
@@ -2328,12 +2299,21 @@ function handleNewDataMartOrder(returnedOrder) {
 
     status: statusMap[rawStatus] || rawStatus,
 
-    recipient:
-      order.recipient ||
-      order.phoneNumber ||
-      order.phone ||
-      order.items?.[0]?.recipient ||
-      "-",
+   recipient:
+   returnedOrder.items?.[0].recipient ||
+   returnedOrder.recipient || 
+   returnedOrder.phoneNumber ||
+  order.recipient ||
+  order.phoneNumber ||
+  order.phone ||
+  order.recipientNumber ||
+  order.items?.[0]?.recipient ||
+  order.items?.[0]?.phoneNumber ||
+  selectedBundle?.recipient ||
+  selectedBundle?.phoneNumber ||
+  bundle?.recipient ||
+  bundle?.phoneNumber ||
+  "",
 
     network:
       order.network ||
@@ -2928,6 +2908,19 @@ function renderLiveOrderRow(order) {
   const tableBody = document.getElementById("liveOrderRows");
   if (!tableBody) return;
 
+  const recipient = 
+  order.recipient ||
+  order.phoneNumber ||
+  order.phone ||
+  order.recipientNumber ||
+  order.items?.[0]?.recipient ||
+  order.items?.[0]?.phoneNumber ||
+  selectedBundle?.recipient ||
+  selectedBundle?.phoneNumber ||
+  bundle?.recipient ||
+  bundle?.phoneNumber ||
+  "";
+
   // =========================
   // NORMALIZE ORDER
   // =========================
@@ -2935,7 +2928,7 @@ function renderLiveOrderRow(order) {
     ...order,
     orderId: String(order.orderId),
     provider: String(order.provider || "swiftdata").toLowerCase(),
-    recipient: order.recipient || order.phone || order.phoneNumber || "-",
+    recipient,
     volume: order.volume ?? 0,
     status: order.status || "processing"
   };
@@ -2971,21 +2964,11 @@ function renderLiveOrderRow(order) {
     return `${datePart} ${timePart}`;
   }
 
-  // Structure created date
   const date = formatOrderDate(
     normalized.createdAt || normalized.timestamp
   );
 
-  // Structure updated date
   const update = formatOrderDate(normalized.updatedAt);
-
-  // =========================
-  // DEBUG LOGS
-  // =========================
-  console.log("Live order:", normalized);
-  console.log("createdAt:", normalized.createdAt);
-  console.log("updatedAt:", normalized.updatedAt);
-  console.log("timestamp:", normalized.timestamp);
 
   // =========================
   // FIND EXISTING ROW
@@ -3001,7 +2984,10 @@ function renderLiveOrderRow(order) {
 
   const isNewRow = !row;
 
-  if (!row) {
+  // =========================
+  // CREATE ROW ONLY IF NEW
+  // =========================
+  if (isNewRow) {
     row = document.createElement("div");
     row.className = "live-row";
     row.dataset.id = normalized.orderId;
@@ -3009,8 +2995,7 @@ function renderLiveOrderRow(order) {
   }
 
   // =========================
-  // BUILD ROW
-  // Preserve your existing seven-column design
+  // BUILD / REFRESH ROW CELLS
   // =========================
   row.replaceChildren();
 
@@ -3029,12 +3014,12 @@ function renderLiveOrderRow(order) {
   addCell(normalized.orderId);
 
   // Recipient
-  addCell(normalized.recipient || normalized.phone || normalized.phoneNumber);
+  addCell(normalized.recipient);
 
   // Data volume
   addCell(`${normalized.volume}GB`);
 
-// Status
+  // Status
   const statusCell = addCell("", "status-cell");
   const badge = document.createElement("span");
 
@@ -3064,10 +3049,14 @@ function renderLiveOrderRow(order) {
   addCell(date);
 
   // =========================
-  // INSERT NEWEST ROW AT TOP
+  // INSERTION BEHAVIOR
   // =========================
-  if (isNewRow || tableBody) {
-    tableBody.appendChild(row);
+  if (isNewRow) {
+    // New orders appear at the top.
+    tableBody.prepend(row);
+  } else {
+    // Existing rows stay in their current position.
+    // Do not append, prepend, or appendChild the row here.
   }
 
   console.log("Live order row rendered:", {
@@ -3075,7 +3064,8 @@ function renderLiveOrderRow(order) {
     provider: normalized.provider,
     status: normalized.status,
     createdDate: date,
-    updatedDate: update
+    updatedDate: update,
+    isNewRow
   });
 }
 console.log(JSON.parse(localStorage.getItem("ecoLiveOrders")));
