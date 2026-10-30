@@ -7,7 +7,7 @@ restrictionsRoute.get("/", async (req, res) => {
   try {
     const response = await axios.get(
 
-      "https://swiftdata-link.com/api/v1/restrictions",
+      "https://swiftdata-link.com/api/v1/restrictions/validate",
       {
         headers: {
           "x-api-key": process.env.SWIFT_API_KEY
