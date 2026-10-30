@@ -68,12 +68,12 @@ let lastPurchasedBundle = null; // used after payment (normal + grid)
 let lastValidation = null;
 
 // default selectedPackage
-let selectedPackageName = "mtn_data_express_delivery";
+let selectedPackageName = "mtn_data";
 
 const PACKAGE_MAP = {
   normal: "mtn_data_normal_delivery",
-  express: "mtn_data_express_delivery",
-  numbers: "mtn_verified_numbers",
+  express: "mtn_data",
+  numbers: "mtn_data",
   mashup: "special_mashup_bundle_packages"
 };
 
@@ -1846,8 +1846,6 @@ async function orderDataMartBundle(
     );
 
     const orderData = {
-      ...order,
-
       orderId,
       providerOrderReference,
       reference: orderId,
@@ -3314,7 +3312,7 @@ function isTerminalStatus(status) {
 async function checkOrderStatusOnce(orderIdOrRef) {
   try {
     // Talk to backend (not directly )
-    const res = await fetch(`${API_BASE}/api/v1/order/status/${encodeURIComponent(orderIdOrRef)}`,{
+    const res = await fetch(`${API_BASE}/api/v2/orders/status/${encodeURIComponent(orderIdOrRef)}`,{
       method: "GET",
       headers: { "Content-Type": "application/json" }
     });
