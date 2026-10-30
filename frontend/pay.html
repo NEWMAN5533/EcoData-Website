@@ -61,15 +61,7 @@
 
   <link rel="stylesheet" href="pay.css">
   
-<script>
-  (() => {
-    const savedTheme = localStorage.getItem("ecoTheme");
 
-    if (savedTheme === "dark") {
-      document.documentElement.classList.add("dark-mode");
-    }
-  })();
-</script>
 
 
 
@@ -531,551 +523,440 @@
 
 <section class="card-container">
 
+<!-- ==========================================
+     EXCLUSIVE DISCOUNTS — PAGE HEADER
+========================================== -->
 
-   <!-- =====================================================
-       PAGE HEADER
-       ===================================================== -->
+<header class="exclusive-hero">
+  <div class="exclusive-hero__content">
+    <span class="exclusive-hero__eyebrow">
+      <span class="exclusive-hero__live-dot"></span>
+      EXCLUSIVE MEMBER BENEFITS
+    </span>
 
-  <div class="client-page-header">
+    <h1>
+      <span class="exclusive-hero__highlight">Exclusive</span>
+      Discount Access
+    </h1>
 
-    <div>
+    <p class="exclusive-hero__description">
+      Unlock reduced prices on eligible offers. Spend less on data,
+      save more, and grow your reselling profits.
+    </p>
 
-    
+    <div class="exclusive-hero__highlights">
+      <span>
+        <i class="ri-price-tag-3-line"></i>
+        Member-only pricing
+      </span>
 
+      <span>
+        <i class="ri-shield-check-line"></i>
+        Verified account access
+      </span>
+    </div>
+  </div>
 
-      <h1>
-        <span class="clamper">Exclusive</span> Discount
-      </h1>
-
-
-      <p>
-        Get exclusive reduced prices on all eligible offers. 
-        Pay less than regular.
-      </p>
-
+  <div class="exclusive-hero__action">
+    <div class="exclusive-hero__visual">
+      <div class="exclusive-hero__visual-ring"></div>
+      <div class="exclusive-hero__visual-icon">
+        <i class="ri-vip-crown-2-line"></i>
+      </div>
+      <span class="exclusive-hero__visual-label">MEMBER ACCESS</span>
+      <strong class="exclusive-hero__visual-title">Save more.</strong>
+      <span class="exclusive-hero__visual-subtitle">Get more value with EcoData.</span>
     </div>
 
+    <button
+      class="exclusive-button exclusive-button--primary"
+      type="button"
+      onclick="document.getElementById('payBtn')?.scrollIntoView({ behavior: 'smooth', block: 'center' })"
+    >
+      <i class="ri-lock-unlock-line"></i>
+      <span>Unlock Now</span>
+      <i class="ri-arrow-right-line exclusive-button__arrow"></i>
+    </button>
+  </div>
+</header>
 
-    <div class="client-page-header-actions" >
 
-      <button
-        class="client-btn client-btn-primary"
-        type="button"
-      >
+<!-- ==========================================
+     TRUSTED DISCOUNT PROMO
+     Kept hidden as in the original HTML
+========================================== -->
 
-        <i class="ri-user-add-line"></i>
+<section class="exclusive-promo" style="display: none;">
+  <div class="exclusive-promo__particles">
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+  </div>
 
-        <span>
-          Unlock Now
+  <div class="exclusive-promo__grid" style="display: none;"></div>
+
+  <div class="exclusive-promo__inner">
+    <div class="exclusive-promo__content">
+      <div class="exclusive-promo__badges">
+        <span class="exclusive-promo__pulse"></span>
+        <span class="exclusive-promo__member-badge">
+          <i class="ri-vip-crown-line"></i>
+          Members Only
+        </span>
+      </div>
+
+      <h2 class="exclusive-promo__title">
+        Unlock
+        <span>Exclusive Discounts</span>
+      </h2>
+
+      <p class="exclusive-promo__description">
+        Get access to special prices designed to help you save more.
+      </p>
+
+      <div class="exclusive-promo__features">
+        <span class="exclusive-promo__feature">
+          <i class="ri-price-tag-3-fill"></i>
+          Up to 7% Off
         </span>
 
-      </button>
-
+        <span class="exclusive-promo__feature">
+          <i class="ri-refresh-line"></i>
+          Updated Daily
+        </span>
+      </div>
     </div>
 
-  </div>
-<!----WELCOME HERO---->
-<section class="welcome-hero" style="display: none;">
-
-     <!---welcome=card---->
-  <div id="sk-Welcome" class="sk-welcome-card">
-    <div class="sk-welcome-card-top">
-       <span class="sk" style="width:140px; height: 28px;">
-
-       </span>  
-          <span class="sk" style="width:90px;height:17px;"></span>  
-    </div>
-
-    <div class="sk-welcome-card-bottom">
-       <span class="sk" style="width: 100%;height:90%;"></span>  
-      
-    </div>
-  </div>
-    <!-- Animated background particles----->
-  <div class="particles">
-    <span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span>
-  </div>
-  
- 
-  <div class="welcome-hero-top" >
-   
-
-    <div class="wht-left"> 
-      <p id="usernameDisplay"></p>
-    </div>
-    <div class="wht-right">
-    <button class="ecb" ></button>
+    <div class="exclusive-promo__spotlight">
+      <div class="exclusive-promo__spotlight-card">
+        <span class="exclusive-promo__percent">7<small>%</small></span>
+        <span class="exclusive-promo__spotlight-label">Maximum Savings</span>
+        <span class="exclusive-promo__ribbon">UNLOCK ACCESS</span>
+      </div>
     </div>
   </div>
 
-  
-    <!--== HERO MIDDLE GIVEAWAY STATUS ==-->
-     <section class="seller-status-bar" >
-      
-          <div class="swiper status-swiper">
-            <div class="h1">
-              <div class="statt">
-                <img src="./css/uiIcons/gift.png" alt=""> Status
-              </div>
-      <!--===============-
-      GIVEAWAY COUNTING
-      =================-->
-
-      <div class="giveawayTimer">
-
-        <div class="timerCardBox">
-          <p id="giveawayDays">00</p>
-          <small>Days</small>
-        </div>
-
-        <div class="timerCardBox">
-          <p id="giveawayHours">00</p>
-          <small>Hrs</small>
-        </div>
-
-        <div class="timerCardBox">
-          <p id="giveawayMinutes">00</p>
-          <small>Mins</small>
-        </div>
-
-        <div class="timerCardBox" style="border-bottom: none !important;">
-          <p class="giveawayClock">
-            <i class="ri-time-line"></i>
-          </p>
-          <small>Ends-In</small>
-        </div>
-      </div>
-      <p id="giveawayStatus" style="display: none;"></p>
-            </div>
-              <div class="swiper-wrapper">
-
-                  <!-- "All Sellers" item -->
-                   <div class="swiper-slide status-card">
-                      <div class="status-card-bg">
-                          <p id="leaderPhone1">----****--</p>
-                      </div>
-                      <div class="status-card-avatar status-card-avatar-active">
-                          <img  src="./css/uiIcons/leader (3).png" alt="">
-                      </div>
-                      <small class="gb-tagSpot">--</small>
-                      <small class="rank-tagSpot">#1</small>
-                      <span class="status-card-name" id="leaderPoints1">Points: ---</span>
-                  </div>
-                 
-
-
-                  <div class="swiper-slide status-card">
-                      <div class="status-card-bg">
-                           <p id="leaderPhone2">----****--</p>
-                      </div>
-                      <div class="status-card-avatar status-card-avatar-active">
-                          <img  src="./css/uiIcons/leader (1).png" alt="">
-                      </div>
-                        <small class="gb-tagSpot">--</small>
-                        <small class="rank-tagSpot">#2</small>
-                      <span class="status-card-name" id="leaderPoints2">Points: ---</span>
-                  </div>
-
-                  <div class="swiper-slide status-card">
-                      <div class="status-card-bg">
-                           <p id="leaderPhone3">----****--</p>
-                      </div>
-                      <div class="status-card-avatar status-card-avatar-active">
-                          <img  src="./css/uiIcons/leader (2).png" alt="">
-                      </div>
-                       <small class="gb-tagSpot">--</small>
-                       <small class="rank-tagSpot">#3</small>
-                      <span class="status-card-name" id="leaderPoints3">Points: ---</span>
-                  </div>
-
-                  <div class="swiper-slide status-card">
-                      <div class="status-card-bg">
-                         <p id="leaderPhone4">----****--</p>
-                      </div>
-                      <div class="status-card-avatar status-card-avatar-active">
-                          <img  src="./css/icons/personal.png" alt="">
-                      </div>
-                       <small class="gb-tagSpot">--</small>
-                       <small class="rank-tagSpot">#4</small>
-                      <span class="status-card-name" id="leaderPoints4">Points: ---</span>
-                  </div>
-
-                  <div class="swiper-slide status-card">
-                      <div class="status-card-bg">
-                         <p id="leaderPhone5">----****--</p>
-                      </div>
-                      <div class="status-card-avatar status-card-avatar-active">
-                           <img src="./css/icons/personal.png" alt="">
-                      </div>
-                       <small class="gb-tagSpot">--</small>
-                       <small class="rank-tagSpot">#5</small>
-                      <span class="status-card-name" id="leaderPoints5">Points: ---</span>
-                  </div>
-
-                  <div class="swiper-slide status-card">
-                      <div class="status-card-bg">
-                         <p id="leaderPhone6">----****--</p>
-                      </div>
-                      <div class="status-card-avatar status-card-avatar-active">
-                           <img src="./css/icons/personal.png" alt="">
-                      </div>
-                       <small class="gb-tagSpot">--</small>
-                       <small class="rank-tagSpot">#6</small>
-                      <span class="status-card-name" id="leaderPoints6">Points: ---</span>
-                  </div>
-
-                  <div class="swiper-slide status-card">
-                      <div class="status-card-bg">
-                         <p id="leaderPhone7">----****--</p>
-                      </div>
-                      <div class="status-card-avatar status-card-avatar-active">
-                           <img src="./css/icons/personal.png" alt="">
-                      </div>
-                       <small class="gb-tagSpot">--</small>
-                       <small class="rank-tagSpot">#7</small>
-                      <span class="status-card-name" id="leaderPoints7">Points: ---</span>
-                  </div>
-
-                  <div class="swiper-slide status-card">
-                      <div class="status-card-bg">
-                         <p id="leaderPhone8">----****--</p>
-                      </div>
-                      <div class="status-card-avatar status-card-avatar-active">
-                           <img src="./css/icons/personal.png" alt="">
-                      </div>
-                       <small class="gb-tagSpot">--</small>
-                       <small class="rank-tagSpot">#8</small>
-                      <span class="status-card-name" id="leaderPoints8">Points: ---</span>
-                  </div>
-
-                  <div class="swiper-slide status-card">
-                      <div class="status-card-bg">
-                         <p id="leaderPhone9">----****--</p>
-                      </div>
-                      <div class="status-card-avatar status-card-avatar-active">
-                           <img src="./css/icons/personal.png" alt="">
-                      </div>
-                       <small class="gb-tagSpot">--</small>
-                       <small class="rank-tagSpot">#9</small>
-                      <span class="status-card-name" id="leaderPoints9">Points: ---</span>
-                  </div>
-              </div>
-
-              <!--== pagination ==-->
-              <div class="swiper-controls">
-                <div class="swiper-pagination" style="display: none;"></div>
-               
-              </div>
-              
-          </div>
-
-    <div class="leaderboard-start" style="margin-top: .6rem;">
-      <i class="ri-calendar-event-line"></i>
-      <span id="leaderboardStartText" style="font-size: .65rem; opacity:0.5;"></span>
-
-       <span style="display: none;" id="leaderboardResetText" style="font-size: .65rem; opacity:0.5;"></span>
-
-    
-    </div>
-
-      </section>
-  
-
-       <!--== HERO BOTTOM ==-->
-    <div class="welcome-hero-bottom">
-      <div class="grid-overlay" style='display: none;'></div>
-      <div class="whb-left">
-        <!--title-tag-->
-        <div class="title-ecodata">
-          <h5>
-          EcoData.<br>
-          <span class="accent">Cheap</span> Prices.<br>
-          <span class="stroke">No Stress.</span>
-          </h5>
-        </div>
-        <!---close-time-btom--->
-        <div class="time-close">
-          <span >Active 24/7</span>
-          <img style="width: 1.4rem; height: 1.4rem;" src="./css/icons/timer.png" alt="" loading="lazy"> 
-        </div>
-      </div>
-      <div class="whb-right">
-        <div class="whb-right-top">
-          <div class="ratingContainer">
-    <div class="stat-card float">
-        <div class="stat-num" id="stat-num"></div>
-        <div class="stat-label">Happy Users</div>
-      </div>
-      <div class="stat-card float" style="animation-delay:0.5s">
-        <div class="stat-num">&lt;30m</div>
-        <div class="stat-label">Avg. Delivery</div>
-      </div>
-      <div class="stat-card float" style="animation-delay:1s">
-        <div class="stat-num">4.5★</div>
-        <div class="stat-label">Customer Rating</div>
-      </div>
+  <div class="exclusive-promo__artwork">
+    <img src="./css/images/baw.png" alt="Exclusive discount promotion" loading="lazy">
+    <div class="exclusive-promo__glow"></div>
   </div>
-        </div>
-        <div class="whb-right-bottom">
-            <div class="endR" >
-        <div class="endS" style="display: none;">
-          <img src="./css/uiIcons/star.png" alt="" loading>
-          <img src="./css/uiIcons/star.png" alt="" loading>
-          <img src="./css/uiIcons/star.png" alt="" loading>
-          <img src="./css/uiIcons/star.png" alt="" loading>
-          <img src="./css/uiIcons/star.png" alt="" loading>
-        </div>
-
-        
-
-
-        <div class="clockr">
-            <div  id="clock"></div>
-        </div>
-      
-      </div>
-        </div>
-      </div>
-    </div>
-</section>
-
-<!----TRUSTED-MESSAGE-->
-
-<section class="trusted-by trusted-by-discounts">
-
-          <div class="particles">
-            <span></span><span></span><span></span><span></span>
-            <span></span><span></span><span></span><span></span>
-          </div>
-          <div class="grid-overlay" style='display: none;'></div>
-
-          <div class="trusted-container trusted-container-split " style="padding-bottom: .4rem;">
-
-            <div class="trust-split-left">
-              <div class="wrapper-notice">
-                <span class="pulse-dot"></span>
-                <span class="trusted-badge">✦ Members Only</span>
-              </div>
-
-              <p class="trusted-text">
-                Unlock <span class="trust-highlight">Exclusive Discounts</span>
-              </p>
-
-              <div class="payment-methods-row">
-                <div class="payment-method-chip">
-                  <i class="ri-price-tag-3-fill"></i>
-                  <span>Up to 7% Off</span>
-                </div>
-                <div class="payment-method-chip">
-                  <i class="ri-refresh-line"></i>
-                  <span>Updated Daily</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="trust-split-right">
-              <div class="discount-spotlight-card">
-                <span class="discount-spotlight-percent">7<small>%</small></span>
-                <span class="discount-spotlight-label">Max Savings</span>
-                <div class="discount-spotlight-ribbon">Unlock Now</div>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="baw-right">
-            <img src="./css/images/baw.png" alt="" loading="lazy">
-            <div class="baw-glow baw-glow-discounts"></div>
-          </div>
-
 </section>
 
 
-<!----TRUSTED-MESSAGE---ends-->
+<!-- ==========================================
+     EXCLUSIVE MEMBERSHIP BENEFITS
+========================================== -->
 
+<section class="exclusive-benefits">
+  <div class="exclusive-section-heading">
+    <span class="exclusive-section-heading__eyebrow">
+      WHY CHOOSE EXCLUSIVE?
+    </span>
 
+    <h2>More value with every purchase.</h2>
 
+    <p>
+      Enjoy special pricing and make your EcoData experience work harder for you.
+    </p>
+  </div>
 
+  <div class="exclusive-benefits__grid">
 
-<section class="benefit-notes">
+    <article class="exclusive-benefit-card">
+      <div class="exclusive-benefit-card__icon">
+        <img src="./css/icons/totalspent.png" alt="" loading="lazy">
+      </div>
 
+      <span class="exclusive-benefit-card__number">01</span>
 
-  <section class="agent-benefits">
-  <h2>Why Register  Exclusive?</h2>
+      <h3>Discounted Prices</h3>
 
-  <div class="benefits-container">
-
-    <div class="benefit-card">
-      <h3><img src="./css/icons/totalspent.png" alt=""> Discounted Prices</h3>
       <p>
-        Get exclusive reduced prices on all eligible offers. 
-        Pay less than regular users and increase your savings or profit margin.
+        Get reduced prices on eligible offers. Pay less than regular users
+        and increase your savings or profit margin.
+      </p>
+
+      <div class="exclusive-benefit-card__footer">
+        <i class="ri-check-line"></i>
+        <span>Save on eligible offers</span>
+      </div>
+    </article>
+
+    <article class="exclusive-benefit-card">
+      <div class="exclusive-benefit-card__icon">
+        <img src="./css/icons/totalorder.png" alt="" loading="lazy">
+      </div>
+
+      <span class="exclusive-benefit-card__number">02</span>
+
+      <h3>Personal Use Advantage</h3>
+
+      <p>
+        Enjoy lower costs for your own data and services. Ideal for
+        frequent users looking for more affordable pricing.
+      </p>
+
+      <div class="exclusive-benefit-card__footer">
+        <i class="ri-check-line"></i>
+        <span>Lower personal costs</span>
+      </div>
+    </article>
+
+    <article class="exclusive-benefit-card">
+      <div class="exclusive-benefit-card__icon">
+        <img src="./css/icons/totalData.png" alt="" loading="lazy">
+      </div>
+
+      <span class="exclusive-benefit-card__number">03</span>
+
+      <h3>Resell &amp; Earn</h3>
+
+      <p>
+        Purchase at discounted agent rates and resell at your chosen
+        market price. Keep the difference as your profit.
+      </p>
+
+      <div class="exclusive-benefit-card__footer">
+        <i class="ri-check-line"></i>
+        <span>Potential resale profits</span>
+      </div>
+    </article>
+
+    <article class="exclusive-benefit-card">
+      <div class="exclusive-benefit-card__icon">
+        <img src="./css/icons/secure-payment.png" alt="" loading="lazy">
+      </div>
+
+      <span class="exclusive-benefit-card__number">04</span>
+
+      <h3>Secure Agent Access</h3>
+
+      <p>
+        Your agent status is verified and linked to your account to
+        help protect access to exclusive pricing.
+      </p>
+
+      <div class="exclusive-benefit-card__footer">
+        <i class="ri-check-line"></i>
+        <span>Account-linked access</span>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+
+<!-- ==========================================
+     MTN EXCLUSIVE PRICE LIST
+     Kept hidden as in the original HTML
+========================================== -->
+
+<section class="exclusive-pricing" style="display: none;">
+  <header class="exclusive-pricing__header">
+    <span class="exclusive-pricing__eyebrow">MEMBER RATE CARD</span>
+    <h2>MTN Exclusive Prices</h2>
+    <p>Compare the available normal and express rates.</p>
+  </header>
+
+  <div class="exclusive-pricing__comparison">
+    <article class="exclusive-price-card">
+      <div class="exclusive-price-card__header">
+        <span class="exclusive-price-card__icon">
+          <i class="ri-smartphone-line"></i>
+        </span>
+        <div>
+          <h3>Normal Delivery</h3>
+          <p>MTN data bundles</p>
+        </div>
+      </div>
+
+      <ul class="exclusive-price-card__list">
+        <li><span>1GB</span><strong>GH₵5.20</strong></li>
+        <li><span>2GB</span><strong>GH₵10.80</strong></li>
+        <li><span>3GB</span><strong>GH₵15.20</strong></li>
+        <li><span>4GB</span><strong>GH₵19.30</strong></li>
+        <li><span>5GB</span><strong>GH₵24.50</strong></li>
+        <li><span>6GB</span><strong>GH₵28.60</strong></li>
+        <li><span>8GB</span><strong>GH₵37.80</strong></li>
+        <li><span>10GB</span><strong>GH₵44.30</strong></li>
+        <li><span>15GB</span><strong>GH₵64.20</strong></li>
+        <li><span>20GB</span><strong>GH₵85.10</strong></li>
+        <li><span>25GB</span><strong>GH₵105.30</strong></li>
+        <li><span>30GB</span><strong>GH₵125.40</strong></li>
+        <li><span>40GB</span><strong>GH₵164.00</strong></li>
+        <li><span>50GB</span><strong>GH₵198.20</strong></li>
+      </ul>
+    </article>
+
+    <article class="exclusive-price-card exclusive-price-card--featured">
+      <div class="exclusive-price-card__header">
+        <span class="exclusive-price-card__icon">
+          <i class="ri-flashlight-line"></i>
+        </span>
+        <div>
+          <h3>Express Delivery</h3>
+          <p>MTN data bundles</p>
+        </div>
+        <span class="exclusive-price-card__tag">EXPRESS</span>
+      </div>
+
+      <ul class="exclusive-price-card__list">
+        <li><span>1GB</span><strong>GH₵5.40</strong></li>
+        <li><span>2GB</span><strong>GH₵10.90</strong></li>
+        <li><span>3GB</span><strong>GH₵15.60</strong></li>
+        <li><span>4GB</span><strong>GH₵19.90</strong></li>
+        <li><span>5GB</span><strong>GH₵24.90</strong></li>
+        <li><span>6GB</span><strong>GH₵29.40</strong></li>
+        <li><span>8GB</span><strong>GH₵38.50</strong></li>
+        <li><span>10GB</span><strong>GH₵45.00</strong></li>
+        <li><span>15GB</span><strong>GH₵65.00</strong></li>
+        <li><span>20GB</span><strong>GH₵85.70</strong></li>
+        <li><span>25GB</span><strong>GH₵107.30</strong></li>
+        <li><span>30GB</span><strong>GH₵126.20</strong></li>
+        <li><span>40GB</span><strong>GH₵165.10</strong></li>
+        <li><span>50GB</span><strong>GH₵203.00</strong></li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+
+<!-- ==========================================
+     TELECEL & AIRTELTIGO PRICE LIST
+     Kept hidden as in the original HTML
+========================================== -->
+
+<section class="exclusive-pricing" style="display: none;">
+  <header class="exclusive-pricing__header">
+    <span class="exclusive-pricing__eyebrow">NETWORK RATE CARD</span>
+    <h2>Telecel &amp; AirtelTigo</h2>
+    <p>Explore the available member bundle prices.</p>
+  </header>
+
+  <div class="exclusive-pricing__comparison">
+    <article class="exclusive-price-card">
+      <div class="exclusive-price-card__header">
+        <span class="exclusive-price-card__icon">
+          <i class="ri-signal-tower-line"></i>
+        </span>
+        <div>
+          <h3>Telecel</h3>
+          <p>Bundle prices</p>
+        </div>
+      </div>
+
+      <ul class="exclusive-price-card__list">
+        <li><span>2GB</span><strong>GH₵11.90</strong></li>
+        <li><span>3GB</span><strong>GH₵16.70</strong></li>
+        <li><span>5GB</span><strong>GH₵24.50</strong></li>
+        <li><span>10GB</span><strong>GH₵45.10</strong></li>
+        <li><span>15GB</span><strong>GH₵64.60</strong></li>
+        <li><span>20GB</span><strong>GH₵87.00</strong></li>
+        <li><span>25GB</span><strong>GH₵105.00</strong></li>
+        <li><span>30GB</span><strong>GH₵134.00</strong></li>
+        <li><span>35GB</span><strong>GH₵138.00</strong></li>
+        <li><span>40GB</span><strong>GH₵160.00</strong></li>
+        <li><span>50GB</span><strong>GH₵199.00</strong></li>
+        <li><span>100GB</span><strong>GH₵385.00</strong></li>
+      </ul>
+    </article>
+
+    <article class="exclusive-price-card">
+      <div class="exclusive-price-card__header">
+        <span class="exclusive-price-card__icon">
+          <i class="ri-signal-wifi-3-line"></i>
+        </span>
+        <div>
+          <h3>AirtelTigo</h3>
+          <p>Bundle prices</p>
+        </div>
+      </div>
+
+      <ul class="exclusive-price-card__list">
+        <li><span>1GB</span><strong>GH₵5.50</strong></li>
+        <li><span>2GB</span><strong>GH₵11.00</strong></li>
+        <li><span>3GB</span><strong>GH₵14.90</strong></li>
+        <li><span>4GB</span><strong>GH₵18.00</strong></li>
+        <li><span>5GB</span><strong>GH₵23.70</strong></li>
+        <li><span>6GB</span><strong>GH₵26.70</strong></li>
+        <li><span>7GB</span><strong>GH₵30.00</strong></li>
+        <li><span>8GB</span><strong>GH₵36.00</strong></li>
+        <li><span>9GB</span><strong>GH₵40.00</strong></li>
+        <li><span>10GB</span><strong>GH₵50.00</strong></li>
+        <li><span>12GB</span><strong>GH₵52.00</strong></li>
+        <li><span>15GB</span><strong>GH₵69.00</strong></li>
+        <li><span>20GB</span><strong>GH₵89.00</strong></li>
+        <li><span>25GB</span><strong>GH₵111.00</strong></li>
+        <li><span>30GB</span><strong>GH₵129.00</strong></li>
+        <li><span>40GB</span><strong>GH₵163.00</strong></li>
+        <li><span>50GB</span><strong>GH₵110.00</strong></li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+
+<!-- ==========================================
+     MEMBERSHIP ACCESS PAYMENT
+========================================== -->
+
+<section class="exclusive-access">
+  <div class="exclusive-access__card">
+
+    <div class="exclusive-access__top">
+      <span class="exclusive-access__icon">
+        <i class="ri-vip-crown-2-line"></i>
+      </span>
+
+      <span class="exclusive-access__badge">
+        <i class="ri-sparkling-2-line"></i>
+        Exclusive membership
+      </span>
+    </div>
+
+    <div class="exclusive-access__price">
+      <span class="exclusive-access__old-price">
+        GHS 50
+      </span>
+
+      <span class="exclusive-access__price-label">
+        Membership access
+      </span>
+
+      <h2>Unlock Exclusive Access</h2>
+
+      <p>
+        Get started with your exclusive membership and access eligible
+        discounted prices.
       </p>
     </div>
 
-    <div class="benefit-card">
-      <h3><img src="./css/icons/totalorder.png" alt=""> Personal Use Advantage</h3>
-      <p>
-        Enjoy lower costs for your own data and services. 
-        Perfect for heavy users who want consistent affordable pricing.
-      </p>
+    <div class="exclusive-access__divider"></div>
+
+    <div class="exclusive-access__benefits">
+      <span>
+        <i class="ri-check-line"></i>
+        Exclusive pricing
+      </span>
+
+      <span>
+        <i class="ri-check-line"></i>
+        Account-linked access
+      </span>
     </div>
 
-    <div class="benefit-card">
-      <h3><img src="./css/icons/totalData.png" alt=""> Resell & Earn</h3>
-      <p>
-        Buy at discounted agent rates and resell at market prices. 
-        Keep the difference as your profit.
-      </p>
-    </div>
+    <button id="payBtn" class="exclusive-access__button" type="button">
+      <span>Get Access</span>
+      <i class="ri-arrow-right-line"></i>
+    </button>
 
-    <div class="benefit-card">
-      <h3><img src="./css/icons/secure-payment.png" alt=""> Secure Agent Access</h3>
-      <p>
-        Your agent status is securely verified and linked to your account, 
-        giving you protected access to exclusive pricing.
-      </p>
-    </div>
+    <span class="exclusive-access__secure-note">
+      <i class="ri-lock-line"></i>
+      Secure access payment
+    </span>
 
   </div>
 </section>
 
-
-
-
-</section>
-
-
-
-<section class="agent-price" style="display: none;">
-  <div class="price-title">
-    <h2>Exclusive Price List</h2>
-  </div>
-  <div class="price-list">
-    <div class="both-tags">
-      <div class="title-tag-left">
-        Exclusive Normal Price <br>( MTN ) 
-      </div>
-      <div class="title-tag-right">
-        Exclusive Express Price <br>
-        ( MTN )
-      </div>
-    </div>
-    <div class="price-wrapper">
-        <div class="price-list-normal exclude">
-          <ul>
-            <li>1GB = 5.20</li>
-            <li>2GB = 10.80</li>
-            <li>3GB = 15.20</li>
-            <li>4GB = 19.30</li>
-            <li>5GB = 24.50</li>
-            <li>6GB = 28.60</li>
-            <li>8GB = 37.80</li>
-            <li>10GB = 44.30</li>
-            <li>15GB = 64.20</li>
-            <li>20GB = 85.10</li>
-            <li>25GB = 105.30</li>
-            <li>30GB = 125.40</li>
-            <li>40GB = 164</li>
-            <li>50GB = 198.20</li>
-          </ul>
-    </div>
-    <div class="price-list-express exclude">
-        <ul>
-            <li>1GB = 5.40</li>
-            <li>2GB = 10.90</li>
-            <li>3GB = 15.60</li>
-            <li>4GB = 19.90</li>
-            <li>5GB = 24.90</li>
-            <li>6GB = 29.40</li>
-            <li>8GB = 38.50</li>
-            <li>10GB = 45</li>
-            <li>15GB = 65</li>
-            <li>20GB = 85.70</li>
-            <li>25GB = 107.30</li>
-            <li>30GB = 126.20</li>
-            <li>40GB = 165.10</li>
-            <li>50GB = 203</li>
-          </ul>
-    </div>
-    
-    </div>
-  </div>
-</section>
-
-
-
-<!----AGENT PRICE TABLE-->
-<section class="agent-price" style="display: none;">
-  <div class="price-title">
-    <h2>TELECEL & AIRTELTIGO </h2>
-  </div>
-  <div class="price-list">
-    <div class="both-tags">
-      <div class="title-tag-left">
-        TELECEL
-      </div>
-      <div class="title-tag-right">
-        AIRTELTIGO
-      </div>
-    </div>
-    <div class="price-wrapper">
-        <div class="price-list-normal include">
-          <ul>
-            <li>2GB = 11.90</li>
-            <li>3GB = 16.70</li>
-            <li>5GB = 24.50</li>
-            <li>10GB = 45.10</li>
-            <li>15GB = 64.60</li>
-            <li>20GB = 87</li>
-            <li>25GB = 105</li>
-            <li>30GB = 134</li>
-            <li>35GB = 138</li>
-            <li>40GB = 160</li>
-            <li>50GB = 199</li>
-            <li>100GB = 385</li>
-          </ul>
-    </div>
-    <div class="price-list-express include">
-        <ul>
-            <li>1GB = 5.50</li>
-            <li>2GB = 11</li>
-            <li>3GB = 14.90</li>
-            <li>4GB = 18</li>
-            <li>5GB = 23.70</li>
-            <li>6GB = 26.70</li>
-            <li>7GB = 30</li>
-            <li>8GB = 36</li>
-            <li>9GB = 40</li>
-            <li>10GB = 50</li>
-            <li>12GB = 52</li>
-            <li>15GB = 69</li>
-            <li>20GB = 89</li>
-            <li>25GB = 111</li>
-            <li>30GB = 129</li>
-            <li>40GB = 163</li>
-            <li>50GB = 110</li>
-          </ul>
-    </div>
-    
-    </div>
-  </div>
-</section>
-
-<div class="register-bnefits">
- <div class="old-price">
-    <p class="priceSub">GHS 50 </p>
- </div>
- 
- <div class="priceTagger">
-  <i class="ri-price-tag-3-line"></i>
- <div class="tagNote">
-   <h2>Unlock Exclusive Access </h2>
- </div>
- </div>
-<button id="payBtn" class="regis">Get Access</button>
-</div>
 </section>
 
 
@@ -1279,6 +1160,7 @@
 
     </div>
           </section>
+
           <section class="main-grid-right">
             
 
