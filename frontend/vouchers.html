@@ -22,15 +22,7 @@
 <!--remix icons-->
 <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
 
-<script>
-  (() => {
-    const savedTheme = localStorage.getItem("ecoTheme");
 
-    if (savedTheme === "dark") {
-      document.documentElement.classList.add("dark-mode");
-    }
-  })();
-</script>
 
 
 
@@ -535,798 +527,241 @@
           <!---CARD CONTAINER------>
           <section class="card-container">
 
-             
-   <!-- =====================================================
-       PAGE HEADER
-       ===================================================== -->
+ 
+            <!-- ==========================================
+     VOUCHERS PAGE HEADER
+========================================== -->
 
-  <div class="client-page-header">
-
-    <div>
-
-    
-
-
-      <h1>
-        <span class="clamper">vouchers</span> shop
-      </h1>
-
-
-      <p>
-        Grab your WASSCE & BECE results checker card with ease.
-      </p>
-
+<header class="voucher-page-header">
+  <div class="voucher-page-header__content">
+    <div class="voucher-page-header__eyebrow">
+      <span class="voucher-page-header__dot"></span>
+      ECODATA DIGITAL VOUCHERS
     </div>
 
+    <h1>
+      <span class="voucher-page-header__highlight">Vouchers</span>
+      Shop
+    </h1>
 
-    <div class="client-page-header-actions" >
+    <p>
+      Grab your WASSCE and BECE results checker cards with ease.
+      Purchase securely and receive your voucher details digitally.
+    </p>
 
-      <button
-        class="client-btn client-btn-primary"
-        type="button"
-      >
-
-        <i class="ri-ticket-2-line"></i>
-
-        <span>
-          Grab Voucher Now
-        </span>
-
-      </button>
-
+    <div class="voucher-page-header__features">
+      <span><i class="ri-shield-check-line"></i> Secure purchase</span>
+      <span><i class="ri-mail-send-line"></i> Digital delivery</span>
     </div>
-
   </div>
-             
 
-
- <!-----COUNTER-ENDS--->
-<section class="trust-swiper-container">
-  <div class="swiper trust-swiper">
-    <div class="swiper-wrapper">
-
-      <!---swiper slide-->
-      <div class="swiper-slide">
-          <!----TRUSTED-MESSAGE--1---->
-       <section class="trusted-by " >
-
-    <!-- Trusted By Skeleton -->
-    <div id="sk-Trusted" class="sk-trusted" style='display:none;'>  
-      <div class="sk-trust-left">
-        <div class="sk-section-title">  
-        <span class="sk" style="width:160px;height:18px;margin-bottom:8px;display:block;"></span>  
-        <span class="sk" style="width:200px;height:14px;display:block;"></span>  
-      </div>  
-      <div class="sk-logos">  
-        <div class="sk-logo-item">  
-          <span class="sk" style="width:44px;height:44px;border-radius:50%;"></span>  
-          <span class="sk" style="width:40px;height:11px;"></span>  
-        </div>  
-        <div class="sk-logo-item">  
-          <span class="sk" style="width:44px;height:44px;border-radius:50%;"></span>  
-          <span class="sk" style="width:50px;height:11px;"></span>  
-        </div>  
-        <div class="sk-logo-item">  
-          <span class="sk" style="width:44px;height:44px;border-radius:50%;"></span>  
-          <span class="sk" style="width:60px;height:11px;"></span>  
-        </div>  
-        <div class="sk-logo-item">  
-          <span class="sk" style="width:44px;height:44px;border-radius:50%;"></span>  
-          <span class="sk" style="width:55px;height:11px;"></span>  
-        </div>  
-      </div> 
-      </div>
-      <div class="sk-imageContainer" >
-        <span class="sk" style="width:68px;height:126px;margin-left: 2rem; border-radius:10px;flex-shrink:0;"></span> 
-      </div> 
+  <div class="voucher-page-header__action">
+    <div class="voucher-page-header__icon">
+      <i class="ri-ticket-2-line"></i>
     </div>
 
+    <button
+      class="voucher-page-button"
+      type="button"
+      onclick="document.querySelector('.voucher-page-shop')?.scrollIntoView({behavior:'smooth',block:'start'})"
+    >
+      <i class="ri-shopping-bag-3-line"></i>
+      <span>Grab Voucher Now</span>
+      <i class="ri-arrow-down-line voucher-page-button__arrow"></i>
+    </button>
 
-    <!-- Animated background particles----->
-    <div class="particles">
-      <span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span>
-    </div>
+    <small>Simple, convenient and digital</small>
+  </div>
+</header>
 
-    <!-- Decorative grid overlay------>
-    <div class="grid-overlay" style='display: none;'></div>
 
-    <div class="trusted-container">
+<!-- ==========================================
+     FOLLOW / SHARE SECTION
+========================================== -->
 
-      <div class="wrapper-notice">
-        <span class="pulse-dot"></span>
-        <span class="trusted-badge"> Trusted Digital Plug</span>
-      </div>
-
-      <p class="trusted-text" style="white-space: nowrap;">
-        Digital Services In Ghana
-        <img src="./css/icons/flag3.jpg" alt="flag" loading="lazy">
-      </p>
-
-      <div class="trusted-logos">
-        <div class="trust">
-          <div class="logo-wrap">
-            <img src="./css/images/mtn-badge2.jpg" alt="MTN" loading="lazy">
-          </div>
-          MTN
-        </div>
-        <div class="divider-dot"></div>
-        <div class="trust">
-          <div class="logo-wrap">
-            <img src="./css/images/telecel.jpg" alt="Vodafone" loading="lazy">
-          </div>
-          Telecel
-        </div>
-        <div class="divider-dot"></div>
-        <div class="trust">
-          <div class="logo-wrap">
-            <img src="./css/images/tigo.jpg" alt="AirtelTigo" loading="lazy">
-          </div>
-          AirtelTigo
-        </div>
-        <div class="divider-dot"></div>
-        <div class="trust pay">
-          <div class="logo-wrap secure-wrap">
-            <img class="icont-secure" src="./css/icons/icons-secure.png" alt="Secure-icon" loading="lazy">
-          </div>
-          Secured Payment
-        </div>
+<section class="voucher-page-follow" aria-label="Follow EcoData">
+  <div
+    id="sk-follow-share"
+    class="voucher-page-follow__skeleton"
+    style="display: none;"
+  >
+    <div class="voucher-page-follow__skeleton-left">
+      <span class="voucher-page-skeleton" style="width:56%;height:32px;"></span>
+      <div class="voucher-page-follow__skeleton-items">
+        <span class="voucher-page-skeleton" style="width:26%;height:32px;"></span>
+        <span class="voucher-page-skeleton" style="width:26%;height:32px;"></span>
+        <span class="voucher-page-skeleton" style="width:26%;height:32px;"></span>
       </div>
     </div>
 
-    <div class="baw-right">
-      <img  src="./css/images/baw.png" alt="" loading="lazy">
-      <div class="baw-glow"></div>
+    <div class="voucher-page-follow__skeleton-right">
+      <span class="voucher-page-skeleton" style="width:54%;height:32px;"></span>
+    </div>
+  </div>
+
+  <div class="voucher-page-follow__social">
+    <div class="voucher-page-follow__label">
+      <i class="ri-rss-line"></i>
+      <small>Follow EcoData</small>
     </div>
 
-       </section>
-      </div>
+    <div id="rightBarFollow" class="voucher-page-follow__links">
+      <a
+        href="https://whatsapp.com/channel/0029VbBgYfqAzNbpoZDtnq3o"
+        class="voucher-page-channel-link"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img src="./css/icons/whats.png" alt="" loading="lazy">
+        <span>WhatsApp Channel</span>
+        <i class="ri-arrow-up-right-line"></i>
+      </a>
 
+      <a
+        style="display: none;"
+        href="https://chat.whatsapp.com/LwhZNOyUQsJIGTQRL9cIXT?mode=hqrt3"
+      >
+        <img src="./css/icons/whats.png" alt="" loading="lazy">
+      </a>
 
-         
-    
-              <!-- ===== SLIDE 5: AFA Registration ===== -->
-      <div class="swiper-slide">
-        <section class="trusted-by trusted-by-afa">
+      <a
+        href="https://m.me/cm/AbZ-WlUIuuVhFZKK/?send_source=cm%3Acopy_invite_link"
+        style="display: none;"
+      >
+        <img src="./css/icons/messenger.png" alt="" loading="lazy">
+      </a>
 
-          <div class="particles">
-            <span></span><span></span><span></span><span></span>
-            <span></span><span></span><span></span><span></span>
-          </div>
-          <div class="grid-overlay"style='display: none;'></div>
+      <a
+        style="display: none;"
+        href="http://www.facebook.com/share/1NTDoNJtGW/"
+      >
+        <img src="./css/icons/faceb.png" alt="" loading="lazy">
+      </a>
 
-          <div class="trusted-container trusted-container-split baw4-tc">
-
-            <div class="trust-split-left">
-              <div class="wrapper-notice">
-                <span class="pulse-dot"></span>
-                <span class="trusted-badge"> Quick Setup</span>
-              </div>
-
-              <p class="trusted-text">
-                Register Your <span class="trust-highlight">AFA Number</span>
-              </p>
-
-              <div class="payment-methods-row">
-                <div class="payment-method-chip">
-                  <i class="ri-timer-flash-line"></i>
-                  <span>Under 5 mins</span>
-                </div>
-                <div class="payment-method-chip">
-                  <i class="ri-shield-check-line"></i>
-                  <span>Verified</span>
-                </div>
-              </div>
-
-              <a href="afa.html" class="whb-cta-btn">
-                Register Now
-                <i class="ri-arrow-right-line"></i>
-              </a>
-            </div>
-
-            <div class="trust-split-right afa-split">
-              <div class="security-badge-card">
-                <div class="security-badge-icon afa-badge-icon">
-                  <i class="ri-user-follow-line "></i>
-                </div>
-                <div class="security-badge-text">
-                  <span class="security-badge-title">One-Time Setup</span>
-                  <span class="security-badge-sub">Unlock </span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="baw-right baw4-tr">
-            <img class='baw4' src="./css/images/baw4.png" alt="" loading="lazy">
-            <div class="baw-glow baw-glow-afa"></div>
-          </div>
-
-        </section>
-      </div>
-
-      <!-- ===== SLIDE 6: Delivery Tracker ===== -->
-      <div class="swiper-slide">
-        <section class="trusted-by trusted-by-tracker">
-
-          <div class="particles">
-            <span></span><span></span><span></span><span></span>
-            <span></span><span></span><span></span><span></span>
-          </div>
-          <div class="grid-overlay" style='display:none;'></div>
-
-          <div class="trusted-container baw5-tc">
-
-            <div class="wrapper-notice">
-              <span class="pulse-dot"></span>
-              <span class="trusted-badge"> Know Where It Is</span>
-            </div>
-
-            <p class="trusted-text">
-              Track Your Order <span class="trust-highlight">Live</span>
-            </p>
-
-            <div class="tracker-progress-row">
-
-              <div class="tracker-step tracker-step-done">
-                <div class="tracker-step-icon">
-                  <i class="ri-check-line"></i>
-                </div>
-                <span class="tracker-step-label">Order Placed</span>
-              </div>
-
-              <div class="tracker-progress-line tracker-progress-line-done"></div>
-
-              <div class="tracker-step tracker-step-active">
-                <div class="tracker-step-icon">
-                  <i class="ri-truck-line"></i>
-                </div>
-                <span class="tracker-step-label">On the Way</span>
-              </div>
-
-              <div class="tracker-progress-line"></div>
-
-              <div class="tracker-step">
-                <div class="tracker-step-icon">
-                  <i class="ri-home-smile-line"></i>
-                </div>
-                <span class="tracker-step-label">Delivered</span>
-              </div>
-
-            </div>
-
-            <a href="track-order.html" class="whb-cta-btn tracker-cta">
-              Track My Order
-              <i class="ri-arrow-right-line"></i>
-            </a>
-
-          </div>
-
-          <div class="baw-right baw5-tr">
-            <img class='baw5' src="./css/images/baw5.png" alt="" loading="lazy">
-            <div class="baw-glow baw-glow-tracker"></div>
-          </div>
-
-        </section>
-      </div>
-
-
-            <!-- ===== SLIDE 7: Exclusive Page Discounts ===== -->
-      <div class="swiper-slide" >
-        <section class="trusted-by trusted-by-discounts">
-
-          <div class="particles">
-            <span></span><span></span><span></span><span></span>
-            <span></span><span></span><span></span><span></span>
-          </div>
-          <div class="grid-overlay" style='display: none;'></div>
-
-          <div class="trusted-container trusted-container-split">
-
-            <div class="trust-split-left">
-              <div class="wrapper-notice">
-                <span class="pulse-dot"></span>
-                <span class="trusted-badge"> Members Only</span>
-              </div>
-
-              <p class="trusted-text">
-                Unlock <span class="trust-highlight">Exclusive Discounts</span>
-              </p>
-
-              <div class="payment-methods-row">
-                <div class="payment-method-chip">
-                  <i class="ri-price-tag-3-fill"></i>
-                  <span>Up to 4% Off</span>
-                </div>
-                <div class="payment-method-chip">
-                  <i class="ri-refresh-line"></i>
-                  <span>Updated Daily</span>
-                </div>
-              </div>
-
-              <a href="pay.html" class="whb-cta-btn">
-                Unlock Now
-                <i class="ri-arrow-right-line"></i>
-              </a>
-            </div>
-
-            <div class="trust-split-right">
-              <div class="discount-spotlight-card">
-                <span class="discount-spotlight-percent">4<small>%</small></span>
-                <span class="discount-spotlight-label">Max Savings</span>
-                <div class="discount-spotlight-ribbon">Unlock Now</div>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="baw-right">
-            <img src="./css/images/baw.png" alt="" loading="lazy">
-            <div class="baw-glow baw-glow-discounts"></div>
-          </div>
-
-        </section>
-      </div>
-
-      <!----result checker-------->
-      <div class="swiper-slide">
-  <section class="trusted-by trusted-by-comingsoon">
-
-    <div class="particles">
-      <span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span>
+      <a
+        style="display: none;"
+        href="https://www.tiktok.com/@ecodata247?_r=1&_d=ei9853mf1g8eec&sec_uid=MS4wLjABAAAAiY9nBAfFbpbd7KRl0y4-JTcRL0WMtPt9Pr-FKt__N-hQvmFZLhhInTTpn7Y5oRos&share_author_id=7484812520763950088&sharer_language=en&source=h5_m&u_code=ejcbk20728bd87&utm_source=copy&utm_campaign=client_share&share_link_id=d9108b99-2843-43f1-8f6c-ed4b72ea3264&share_app_id=1340&ugbiz_name=Account&lang=en&user_id=7484812520763950088&sec_user_id=MS4wLjABAAAAiY9nBAfFbpbd7KRl0y4-JTcRL0WMtPt9Pr-FKt__N-hQvmFZLhhInTTpn7Y5oRos&enable_checksum=1"
+      >
+        <img src="./css/icons/tiktok.png" alt="" loading="lazy">
+      </a>
     </div>
-    <div class="grid-overlay" style='display: none;'></div>
+  </div>
 
-    <div class="trusted-container">
-
-    
-      <div class="wrapper-notice">
-        <span class="pulse-dot"></span>
-        <span class="trusted-badge"> RESULTS CHECKER</span>
-      </div>
-
-      <p class="trusted-text" >
-        BECE <span class="trust-highlight">CHECKER</span> vouchers is now available for purchase.
-      </p>
-      
-      <div class="shoe-card-wrap">
-    <div class="shoe-card">
-       <img style="width: 10rem; height: 8rem;" src="./css/icons/bece.png" alt="Sneaker" class="shoe-card-image">
-    </div>
-      </div>
-
-      <div class="coming-soon-progress-wrap">
-        <div class="coming-soon-progress-bar">
-          <div class="coming-soon-progress-fill" style="width: 100%;"></div>
-        </div>
-        <span class="coming-soon-progress-label">100% Available</span>
-      </div>
-
-
-
-
-    </div>
-
-    <div class="baw-right">
-      <img src="./css/images/baw.png" alt="" loading="lazy">
-      <div class="baw-glow baw-glow-comingsoon"></div>
-    </div>
-
-  </section>
-      </div>
-
-
-
-
-      <!-- ===== SLIDE 8: Shop Section Coming Soon ===== -->
-<div class="swiper-slide">
-  <section class="trusted-by trusted-by-comingsoon">
-
-    <div class="particles">
-      <span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span>
-    </div>
-    <div class="grid-overlay" style='display: none;'></div>
-
-    <div class="trusted-container">
-
-    
-      <div class="wrapper-notice">
-        <span class="pulse-dot"></span>
-        <span class="trusted-badge"> Coming Soon</span>
-      </div>
-
-      <p class="trusted-text" >
-        The <span class="trust-highlight">Shop Section</span>  Is Almost Here
-      </p>
-      
-      <div class="shoe-card-wrap">
-    <div class="shoe-card">
-       <img src="./css/images/dg-watch.png" alt="Sneaker" class="shoe-card-image">
-    </div>
-      </div>
-
-      <div class="coming-soon-progress-wrap">
-        <div class="coming-soon-progress-bar">
-          <div class="coming-soon-progress-fill" style="width: 62%;"></div>
-        </div>
-        <span class="coming-soon-progress-label">62% ready</span>
-      </div>
-
-
-
-
-    </div>
-
-    <div class="baw-right">
-      <img src="./css/images/baw.png" alt="" loading="lazy">
-      <div class="baw-glow baw-glow-comingsoon"></div>
-    </div>
-
-  </section>
-</div>
-
-
-
-
-      
-    </div>
-    <!--PAGINATION-->
-    <div class="swiper-pagination"></div>
+  <div class="voucher-page-follow__share">
+    <button id="shareBtn" type="button" title="Share EcoData" aria-label="Share EcoData">
+      <i class="ri-share-forward-line"></i>
+    </button>
   </div>
 </section>
 
 
-            <!---SCROLL THUMBNAIL--REUSABLE--CARD ADS-->
-            <div class="google-thumbnails-wrapper">
-              <div id="sk-info" class="sk-info-container" style='display: none;'>
-                <div class="sk-info-left">
-                  <span class="sk" style="width:100%;height:18px;"></span>  
-                  
-                </div>
-                <div class="sk-info-right">
-                  <span class="sk" style="width:90%;height:18px;"></span>
-                </div>
-              </div>
-
-
-              
-
-
-              <div class="google-thumbnails" id="thumbnailScroll">
-
-
-                <div class="google-thumbnail thumb1" >
-              <img class="analy" src="./css/uiIcons/loudspeaker.png" alt="" loading="lazy">
-                <span style='margin: .3rem; color: rgb(6, 182, 158)'>
-                  DELIVERY IS ONGOING SMOOTHLY, PLACE YOUR ORDER NOW TO ENJOY THE MOMENT.
-                </span>
-
-                <span style='color: rgb(6, 182, 158); margin: .3rem; '>IF YOU ARE NEW HERE, DON'T USE OR SELECT  <span style='color: rgb(182, 126, 6); margin: .2rem;'>MTN ALL VERIFIED NUMBERS TO</span>
-                PLACE YOUR ORDER. JUST PLACE YOUR ORDER ON THE SELECTED OFFER TO AVOID REJECTION OR CANCELLATION. THANK YOU</span>
-                </div>
-
-
-                  <div class="google-thumbnail thumb1" >
-              <img class="analy" src="./css/uiIcons/loudspeaker.png" alt="" loading="lazy">
-                DELIVERY IS ONGOING SMOOTHLY,
-                PLACE YOUR ORDER CONFIDENTLY. EVERYONE WILL RECEIVE HIS OR HER DATA PURCHASE. 
-
-                <span style='color: rgb(182, 126, 6); margin: .4rem;'>ALL SUBMITTED AFA REGISTRATIONS ARE UNDER PROCESSING. </span>
-
-
-
-                <span style='color: rgb(6, 182, 138); margin: .4rem;'>
-                  JOIN OUR NEWLY WHATSAPP CHANNEL AND STAY CONNECTED WITH THE ECODATA COMMUNITY.
-                </span>
-                </div>
-
-            
-                <div class="google-thumbnail thumb1 " style="display: none;">
-                <span style="color: rgb(235, 193, 7); margin: .4rem;">[ MASHUP IS OFF ON THE PORTAL! ]</span> THE SPECIAL MASHUP BUNDLE IS OFF ON THE PORTAL AGAIN, WE WILL RESTORE AS SOON AS IT COMES BACK.  <span style="color: rgb(7, 235, 148); margin: .2rem;">[ TAKE ADVANTAGE WHEN IT COMES BACK ]</span>
-
-                
-
-                </div>
-                
-                
-
-            <div class="google-thumbnail thumb1" style="display: none;">
-              <img class="analy" src="./css/uiIcons/loudspeaker.png" alt="" loading="lazy">
-                  NEW SERVICE  ALERT! <span style="color: rgb(235, 193, 7); margin: .4rem;">[ SPECIAL MASHUP BUNDLES & MASH-DATA ]</span> Enjoy more value for less with our  Special Mashup packages, giving you more minutes and special data-bundles at a lower cost than regular MTN Mashup!
-
-                  <span style="color: rgb(235, 193, 7); margin: .4rem;">[ 3GB MASH-DATA @ 13gh ]</span>
-
-                    <span style="color: rgb(7, 235, 178); margin: .4rem;">[ 5GB MASH-DATA @ 19gh ]</span>
-
-                    <span style="color: rgb(235, 193, 7); margin: .4rem;">[ 10GB MASH-DATA @ 42gh ]</span>
-
-                    <span style="color: rgb(7, 235, 178); margin: .4rem;">[ 20GB MASH-DATA @ 75gh ]</span>
-
-                    <span style="color: rgb(235, 193, 7); margin: .4rem;">[ 30GB MASH-DATA @ 88gh ]</span>
-
-                    <span style="color: rgb(7, 235, 178); margin: .4rem;">[ 40GB MASH-DATA @ 100gh ]</span>
-
-                      <span style="color: rgb(235, 193, 7); margin: .4rem;">[ 50GB MASH-DATA @ 140gh ]</span>
-
-                      <span style="color: rgb(7, 235, 178); margin: .4rem;">[ 60GB MASH-DATA @ 170gh ]</span>
-
-                      <span style="color: rgb(235, 193, 7); margin: .4rem;">[ 100GB MASH-DATA @ 262gh ]</span>
-
-
-                    <span style="color: rgb(7, 235, 178); margin: .4rem;">[ 217GB MASH-DATA @ 365gh ]</span>
-
-                      <span style="color: rgb(7, 235, 178); margin: .4rem;">[ ALL MASH-DATA ARE NONE-EXPIRY ]</span>
-
-
-                      
-                  <span style="color: rgb(235, 193, 7); margin: .4rem;">[ 372-MINS + 903MB for 17.99gh ]</span>
-
-                  <span style="color: rgb(7, 235, 178); margin: .4rem;">[ 744-MINS + 1.8GB for 39.85gh ]</span>
-
-                  <span style="color: rgb(235, 193, 7); margin: .4rem;">[ 1116-MINS + 2.7GB for 56.97gh ]</span>
-
-                  
-                    <span style="color: rgb(7, 216, 164); margin: .4rem;">[ 
-                      YOU CAN USE IT TO CALL ALL NETWORKS WITH NO WORRIES ]</span>
-
-                  STAY CONNECTED LONGER WITH FRIENDS,FAMILY, AND LOVED ONES WITHOUT BREAKING THE BANK.
-                      <span style="color: rgb(235, 193, 7); margin: .4rem;"> 
-                        Order now and enjoy unbreakable value!
-
-                      </span>
-                </div>
-                
-              
-              
-
-                <div class="google-thumbnail thumb2" id="promThumbnail" style='display: none;'>
-                  <img class="analy" src="./css/uiIcons/loudspeaker.png" alt="" loading="lazy">
-                  PROMO IS <span style="color: rgb(235, 193, 7); margin: .4rem;">ACTIVE</span> NOW  <span style="color: rgb(7, 235, 178); margin: .4rem;">BUY @</span> DISCOUNTED
-                  on MTN DATA
-                  <span style="color: rgb(235, 193, 7); margin: .4rem;">[1GB = 4.7]</span>
-                  <span style="color: rgb(7, 235, 178); margin: .4rem;">[2GB = 9.8]</span>
-                  <span style="color: rgb(235, 193, 7); margin: .4rem;">[3GB = 14.60]</span>
-                  <span style="color: rgb(7, 235, 178); margin: .4rem;">[4GB = 19.30]</span>
-                  <span style="color: rgb(235, 193, 7); margin: .4rem;">[5GB = 23.5]</span>
-                  <span style="color: rgb(7, 235, 178); margin: .4rem;">[10GB = 43.20]</span>
-                  <span style="color: rgb(235, 193, 7); margin: .4rem;">[20GB = 85]</span>
-                  <span style="color: rgb(7, 235, 178); margin: .4rem;">[25GB = 105]</span>
-                    CHECK BACK EVERY  <span style="color: wheat; margin: .0.4rem">[ THURSDAY AND FRIDAY'S ]</span>
-                  
-                </div>
-
-
-
-              <div class="google-thumbnail thumb1" style='display: none;'>
-                  <img class="fol" src="./css/uiIcons/star.png" alt="" loading="lazy"> WELCOME TO EcoData. <span style="color: #cf8d11; margin-left: 0.4rem;
-                  ">We're</span>  glad to have you here. <span style="color: #cf8d11; margin-left: 0.4rem;
-                  ">Discover</span> fast, reliable, and affordable services designed just for you.  <span style="color: #cf8d11; margin-left: 0.4rem; ">Whether</span> you're here to purchase data bundle, explore our offers, or manage your account - we've made everything simple and seamless. <img class="fol" src="./css/uiIcons/gurantee.png" alt="" loading="lazy"> 
-                  <span style="color: #cf8d11; margin-left: 0.4rem;">Get started</span> and enjoy a better digital experience.
-
-                  <span style="color: #cf8d11; margin-left: 0.4rem;">For any 
-                  </span>
-                  <span style="color: #18b60a; margin-left: 0.1rem;">question
-                  </span>
-                  , chat our Admin on whatsApp through the chatButton 
-                    <img class="fol" src="./css/icons/chatMe.png" alt="" loading="lazy">
-              </div>
-
-              
-
-
-                <div class="google-thumbnail thumb2 promThumbnailOff" style="display: none;">
-                  <img class="analy" src="./css/icons/market.png" alt="" loading="lazy">
-                  WE ARE RUNNING PROMO! EVERY<span style="color: wheat; margin: .0.4rem">THURSDAY AND FRIDAY'S</span> on MTN DATA, buy at lower cost at these promo days. 
-                  <span style="color: rgb(235, 193, 7); margin: .4rem;">[1GB = 4.7]</span>
-                  <span style="color: rgb(7, 235, 178); margin: .4rem;">[2GB = 9.8]</span>
-                  <span style="color: rgb(235, 193, 7); margin: .4rem;">[3GB = 14.60]</span>
-                  <span style="color: rgb(7, 235, 178); margin: .4rem;">[4GB = 19.30]</span>
-                  <span style="color: rgb(235, 193, 7); margin: .4rem;">[5GB = 23.50]</span>
-                  <span style="color: rgb(7, 235, 178); margin: .4rem;">[10GB = 43.20]</span>
-                  <span style="color: rgb(235, 193, 7); margin: .4rem;">[20GB = 85]</span>
-                  <span style="color: rgb(7, 235, 178); margin: .4rem;">[25GB = 105]</span>
-                    CHECK BACK EVERY  <span style="color: wheat; margin: .0.4rem">[ THURSDAY AND FRIDAY'S ]</span>
-                </div>
-
-
-
-
-
-
-              <div class="google-thumbnail thumb2" style='color: white; '>
-                  <img src="./css/uiIcons/loudspeaker.png" alt="" loading="lazy" style="text-transform: uppercase;">
-                      ARE YOU SOMEONE WHO IS PAYING MORE ON MTN MASHUP DAILY?  <span style="color: rgba(7, 235, 140, 0.932); margin: .4rem;"> MTN AFA BUNDLE IS RECOMMENDED FOR YOU, </span> 
-                      <span style="color: rgba(255, 255, 255, 0.911); margin: .4rem;">DIAL *1848# to BUY AFA BUNDLE FOR LONG CALLS. </span>
-                      IF YOU ARE NOT AFA MEMBER YET, YOU CAN  <span style="color: rgba(7, 235, 140, 0.904); margin: .4rem;"> REGISTER TO BECOME AN AFA MEMBER AT OUR AFA PAGE. </span>
-
-                    With 10cedis, AFA GIVES YOU 258mins (onnet calls) , 500mins CUG for AFA to AFA MEMBER CALL, 30mins other networks (offnet calls).
-              </div>
-              
-
-                
-
-              
-                <div class="google-thumbnail thumb2" style=" text-transform: uppercase; color: white;">
-                  <img src="./css/icons/chatMe.png" alt="" loading="lazy">
-                      Report any order with status updated as DELIVERED but still not  received with: Order ID, Number, and GB via admin chatButton within 30mins.
-                </div>
-
-            
-
-                <div class="google-thumbnail thumb2" style="display: none;">
-                  <img style="height: 2.2rem !important; width: 2.2rem !important;" class="analy" src="./css/icons/logoImg.png" alt="" loading="lazy">
-                  <span style="color: rgb(255, 136, 0); margin-right: .4rem;">ECOSHOP</span> is UNDER DEVELOPMENT, OUR Team is WORKING ON IT. <span style="color: #0ebb90; margin-left: .4rem;"> FEEL FREE TO BUY YOUR DATA BUNDLE ANYTIME.</span>
-                </div>
-
-
-
-
-
-
-            <div class="google-thumbnail thumb2" style="display: none;">
-              <img class="analy" src="./css/uiIcons/loudspeaker.png" alt="" loading="lazy">
-                Unlock Premium price Page by paying a one-time payment of 50 cedis!, and pay less than regular...
-                </div>
-
-
-                
-              
-
-
-
-
-
-                
-
-
-                    <div class="google-thumbnail thumb1 " style="display: none;" ><img  class="folshare" src="./css/icons/whats_admin.png" alt="" loading="lazy">
-                  YOU CAN SHARE THE WEBSITE LINK BY CLICKING THE BLUE SHARE BUTTON
-                </div>
-
-              </div>
-            </div>
-            <!---SCROLL THUMBNAIL--REUSABLE--CARD ADS----ends---->
-
-          <!----PERSISTENT-CARD-(ALWAYS-VISIBLE)--->
-          <!-- LIVE ORDER CONTAINER -->
-          <section class="follow-share-container" >
-            <div id="sk-follow-share" class="sk-follow-share-container" style='display: none;'>
-              <div class="sk-fsc-left">
-                <div class="sk-fsc-left-left">
-                    <span class="sk" style="width:56%;height:32px; margin-right: 16px;"></span>  
-                </div>
-                <div class="sk-fsc-left-right">
-                  <span class="sk" style="width:26%;height:32px;"></span>
-                  <span class="sk" style="width:26%;height:32px;"></span>
-                  <span class="sk" style="width:26%;height:32px;"></span>
-                </div>
-              </div>
-              <div class="sk-fsc-right">
-                <span class="sk" style="width:54%;height:32px;"></span>
-              </div>
-            </div>
-          <div class="social-follow">
-            <div class="follow-left">
-            <small>Click to Follow :</small>
-            </div>
-
-            <div id="rightBarFollow"  >
-
-
-              <a href="https://whatsapp.com/channel/0029VbBgYfqAzNbpoZDtnq3o" class="channel-link-tag">
-              <button class="whatsapp-channel">
-                <img src="./css/icons/whats.png" alt="facebook-logo" loading="lazy">
-                WhatsApp Channel</button>
-              </a>
-
-
-
-
-              <a style="display: none;" href="https://chat.whatsapp.com/LwhZNOyUQsJIGTQRL9cIXT?mode=hqrt3" > <img src="./css/icons/whats.png" alt="facebook-logo" loading="lazy"></a>
-
-          <a href="https://m.me/cm/AbZ-WlUIuuVhFZKK/?send_source=cm%3Acopy_invite_link" style="display: none;"> <img class="meg" src="./css/icons/messenger.png" alt="facebook-logo" loading="lazy"></a>
-
-            <a style="display: none;" class="fab" href="http://www.facebook.com/share/1NTDoNJtGW/"> <img src="./css/icons/faceb.png" alt="facebook-logo" loading="lazy"></a>
-
-              <a style="display: none;" href="https://www.tiktok.com/@ecodata247?_r=1&_d=ei9853mf1g8eec&sec_uid=MS4wLjABAAAAiY9nBAfFbpbd7KRl0y4-JTcRL0WMtPt9Pr-FKt__N-hQvmFZLhhInTTpn7Y5oRos&share_author_id=7484812520763950088&sharer_language=en&source=h5_m&u_code=ejcbk20728bd87&utm_source=copy&utm_campaign=client_share&share_link_id=d9108b99-2843-43f1-8f6c-ed4b72ea3264&share_app_id=1340&ugbiz_name=Account&lang=en&user_id=7484812520763950088&sec_user_id=MS4wLjABAAAAiY9nBAfFbpbd7KRl0y4-JTcRL0WMtPt9Pr-FKt__N-hQvmFZLhhInTTpn7Y5oRos&enable_checksum=1"><img class="tikop" src="./css/icons/tiktok.png" alt="facebook-logo"></a>
-
-
-            </div>
-          </div>
-
-          <!----SHARE-BTN-->
-          <div class="pls-share">
-          <button id="shareBtn" title="Share EcoData">
-            <i class="ri-share-forward-line"></i>
-          </button>
-          </div>
-          </section>
-
-
-
-          <!---dashboard totals 0ver view-->
-  <div class="daily-analytics" style='margin-top: 2rem !important;'>
-    <h4>Vouchers Analytics Overview</h4>
-  </div>
-
-  <!----TOTAL -CONTAINER-CARD-->
-  <div id="homepageTotals" class="totals-container" style="background: transparent !important;">
-
-    <div id="sk-totals" class="sk-totals-container" style='display: none;'>
-      <span class="sk" style="width:88%;height:5rem; margin-right:3px; "></span>  
-
-      <span class="sk" style="width:88%;height:5rem; margin-right:3px;"></span>  
-
-      <span class="sk" style="width:88%;height:5rem; margin-right:3px; "></span>  
-
-      <span class="sk" style="width:88%;height:5rem; margin-right:3px; "></span>  
+<!-- ==========================================
+     VOUCHERS ANALYTICS
+========================================== -->
+
+<section class="voucher-page-analytics">
+  <div class="voucher-page-section-heading">
+    <div>
+      <span class="voucher-page-section-heading__eyebrow">YOUR OVERVIEW</span>
+      <h2>Vouchers Analytics</h2>
+      <p>A quick overview of your voucher activity.</p>
     </div>
 
-    <div class="total-card" style="background: #fff;">
+    <div class="voucher-page-section-heading__icon">
+      <i class="ri-bar-chart-box-line"></i>
+    </div>
+  </div>
 
-      <div class="total-card-top">
-        <small>Total Vouchers</small>
-        <img src="./css/icons/totalorder.png" alt="total-icon" loading="lazy">
+  <div
+    id="homepageTotals"
+    class="voucher-page-analytics__grid"
+  >
+    <div
+      id="sk-totals"
+      class="voucher-page-analytics__skeleton"
+      style="display: none;"
+    >
+      <span class="voucher-page-skeleton" style="height:5rem;"></span>
+      <span class="voucher-page-skeleton" style="height:5rem;"></span>
+      <span class="voucher-page-skeleton" style="height:5rem;"></span>
+      <span class="voucher-page-skeleton" style="height:5rem;"></span>
+    </div>
+
+    <article class="voucher-page-stat-card">
+      <div class="voucher-page-stat-card__top">
+        <span>Total Vouchers</span>
+        <div class="voucher-page-stat-card__icon">
+          <img src="./css/icons/totalorder.png" alt="" loading="lazy">
+        </div>
       </div>
-      <div class="total-card-bottom">
+      <div class="voucher-page-stat-card__bottom">
         <p id="totalVouchers">0</p>
+        <small>Voucher records</small>
       </div>
-    </div>
+    </article>
 
-    <!---next-->
-    <div class="total-card">
-      <div class="total-card-top">
-        <small>Quantity Ordered</small>
-        <img src="./css/icons/totalData.png" alt="totalGB" loading="lazy">
+    <article class="voucher-page-stat-card">
+      <div class="voucher-page-stat-card__top">
+        <span>Quantity Ordered</span>
+        <div class="voucher-page-stat-card__icon">
+          <img src="./css/icons/totalData.png" alt="" loading="lazy">
+        </div>
       </div>
-      <div class="total-card-bottom">
+      <div class="voucher-page-stat-card__bottom">
         <p id="totalVoc">0</p>
+        <small>Units ordered</small>
       </div>
-    </div>
+    </article>
 
-      <div class="total-card">
-      <div class="total-card-top">
-        <small>Total Amount </small>
-        <img src="./css/icons/recent.png" alt="spent-icon" loading="lazy">
+    <article class="voucher-page-stat-card">
+      <div class="voucher-page-stat-card__top">
+        <span>Total Amount</span>
+        <div class="voucher-page-stat-card__icon">
+          <img src="./css/icons/recent.png" alt="" loading="lazy">
+        </div>
       </div>
-      <div class="total-card-bottom">
+      <div class="voucher-page-stat-card__bottom">
         <p id="totalVocAmount">0</p>
+        <small>Total voucher spend</small>
       </div>
-    </div>
+    </article>
 
-
-
-    <div class="total-card">
-      <div class="total-card-top">
-        <small>Completed Vouchers </small>
-        <img src="./css/uiIcons/approval.png" alt="spent-icon" loading="lazy">
+    <article class="voucher-page-stat-card">
+      <div class="voucher-page-stat-card__top">
+        <span>Completed Vouchers</span>
+        <div class="voucher-page-stat-card__icon">
+          <img src="./css/uiIcons/approval.png" alt="" loading="lazy">
+        </div>
       </div>
-      <div class="total-card-bottom">
+      <div class="voucher-page-stat-card__bottom">
         <p id="vocCompletedOrders">0</p>
+        <small>Completed orders</small>
       </div>
+    </article>
+  </div>
+</section>
+
+
+<!-- ==========================================
+     VOUCHERS ORDER HISTORY
+========================================== -->
+
+<section class="voucher-page-history">
+  <div class="voucher-page-history__heading">
+    <div>
+      <span class="voucher-page-section-heading__eyebrow">ORDER TRACKING</span>
+      <h2>Vouchers History</h2>
+      <p>Review your recent voucher orders and their statuses.</p>
     </div>
 
-
+    <div class="voucher-page-history__icon">
+      <i class="ri-history-line"></i>
+    </div>
   </div>
-  <!---ends-->
 
-
-
-
- <section class="table-section">
- 
-   <!-- Orders Table Skeleton -->  
-
-  <div class="table-title">
-    <p>Vouchers History</p>
-  </div>
-  <div class="content-wrapper">
-    <div class="table-scroll-area">
-      <!-- TABLE HEADER -->
-      <div class="table-header">
+  <div class="voucher-page-history__table">
+    <div class="voucher-page-history__table-scroll">
+      <div class="voucher-page-history__table-header">
         <span>Voucher</span>
         <span>Phone</span>
         <span>Quantity</span>
@@ -1336,159 +771,178 @@
         <span>Email</span>
       </div>
 
-      <div class="main-row-content">
-        <div class="row-wrapper" id="liveOrderRows">
-          <p class="empty-state" id="empty-body" hidden>No recent vouchers yet</p>
-          <!-- dynamic rows -->
-        </div>
+      <div class="voucher-page-history__rows" id="liveOrderRows">
+        <p class="voucher-page-history__empty" id="empty-body" hidden>
+          <i class="ri-inbox-line"></i>
+          <span>No recent vouchers yet</span>
+        </p>
+        <!-- Dynamic rows inserted by existing JavaScript -->
       </div>
     </div>
   </div>
 </section>
-  <!-- ends -->
 
 
+<!-- ==========================================
+     VOUCHER SHOP
+========================================== -->
 
+<section class="voucher-page-shop">
+  <div class="voucher-page-shop__heading">
+    <div class="voucher-page-shop__heading-icon">
+      <i class="ri-ticket-2-line"></i>
+    </div>
 
+    <div class="voucher-page-shop__heading-copy">
+      <span class="voucher-page-section-heading__eyebrow">DIGITAL PRODUCTS</span>
+      <h2>Voucher Shop</h2>
+      <p>Browse and purchase digital examination vouchers.</p>
+    </div>
+  </div>
 
-          <section class="vouchers-container">
-            <div class="topOf-voucher">
-              <div class="leftOf-voucher">
-               <div class="leftI-wrapper">
-                <i class="ri-ticket-2-line material-icons icn"></i>
-               </div>
-              </div>
-              <div class="rightOf-voucher">
-                <div class="rightTopOf-voucher">
-                  <h2>Voucher Shop</h2>
-                </div>
-                <div class="rightBottomOf-voucher">
-                  <small>
-                  Browse and purchase digital vouchers
-                  </small>
-                </div>
-              </div>
-            </div>
-            <div class="voucher-price">
-              <div class="leftOpPrice">
-                <h3 id="activePrice">GHS N/A</h3>
-              </div>
-              <div class="rightOpRefresh">
-                <i class="ri-refresh-line material-icons"></i>
-              </div>
-            </div>
-            <div class="search-voucher">
-                <i class="ri-find-replace-line material-icons risearch"></i>
-                <input class="voucherSearch" type="text" placeholder="Search vouchers by name or category">
-            </div>
-            <div class="bottomOf-voucher">
-              <div class="grid-voucher-container">
+  <div class="voucher-page-shop__price-bar">
+    <div class="voucher-page-shop__price-copy">
+      <span>Current voucher price</span>
+      <h3 id="activePrice">GHS N/A</h3>
+    </div>
 
+    <div class="voucher-page-shop__refresh-icon" aria-hidden="true">
+      <i class="ri-refresh-line"></i>
+    </div>
+  </div>
 
-                <!---bece voucher-->
-                <div class="grid-voucher-card bece"
-                  data-slug="bece_checker"
-                  data-name="BECE Checker"
-                  data-stock="false"
-                  data-stocked="0"
-                  data-price="22.5">
-                  <div class="bece-top">
-                    <div class="voucher-badge">
-                      <p>examination</p>
-                    </div>
-                    <div class="img">
-                      <i class="ri-layout-line material-icons"></i>
-                    </div>
+  <label class="voucher-page-search">
+    <i class="ri-search-line"></i>
+    <input
+      class="voucher-page-search__input"
+      type="text"
+      placeholder="Search vouchers by name or category"
+      aria-label="Search vouchers by name or category"
+    >
+  </label>
 
-                    <div class="vouchrer">
-                    <small class="outStock" >Out of <span>Stock</span></small>
-                    <small class="stock" style="display: flex;">12 <span>left</span></small>
-                    </div>
-                  </div>
-                  <div class="bece-btom">
-                    <div class="bece-btom-left">
-                      <div class="bece-left-top">
-                        <h2 >BECE Vouchers</h2>
-                        <small >BECE RESULT CHECKER</small>
-                      </div>
-                      <div class="bece-left-btom">
-                        <p>GHS N/A</p>
-                      </div>
-                    </div>
-                    <div class="bece-btom-right">
-                      <button class="buy-vtn sold-out"></button>
-                    </div>
-                  </div>
-                </div>
+  <div class="voucher-page-product-grid">
+    <!-- BECE VOUCHER -->
+    <article
+      class="voucher-page-product-card voucher-page-product-card--bece"
+      data-slug="bece_checker"
+      data-name="BECE Checker"
+      data-stock="false"
+      data-stocked="0"
+      data-price="22.5"
+    >
+      <div class="voucher-page-product-card__visual">
+        <span class="voucher-page-product-card__category">
+          <i class="ri-graduation-cap-line"></i>
+          Examination
+        </span>
 
+        <div class="voucher-page-product-card__illustration">
+          <i class="ri-file-list-3-line"></i>
+        </div>
 
+        <div class="voucher-page-product-card__stock">
+          <small class="voucher-page-product-card__out-stock">
+            Out of <span>Stock</span>
+          </small>
+          <small class="voucher-page-product-card__stock-count" style="display: flex;">
+            12 <span>left</span>
+          </small>
+        </div>
+      </div>
 
+      <div class="voucher-page-product-card__details">
+        <div class="voucher-page-product-card__info">
+          <h3>BECE Vouchers</h3>
+          <p>BECE RESULT CHECKER</p>
+          <div class="voucher-page-product-card__price">
+            <span>Price</span>
+            <strong>GHS N/A</strong>
+          </div>
+        </div>
 
+        <div class="voucher-page-product-card__buy">
+          <button
+            class="voucher-page-buy-button voucher-page-buy-button--sold-out"
+            type="button"
+            aria-label="BECE voucher currently unavailable"
+          >
+          </button>
+        </div>
+      </div>
+    </article>
 
+    <!-- WASSCE VOUCHER -->
+    <article
+      class="voucher-page-product-card voucher-page-product-card--wassce"
+      data-slug="wassce_checker"
+      data-name="WASSCE Checker"
+      data-stock="false"
+      data-stocked="0"
+      data-price="23.50"
+    >
+      <div class="voucher-page-product-card__visual">
+        <span class="voucher-page-product-card__category">
+          <i class="ri-graduation-cap-line"></i>
+          Examination
+        </span>
 
+        <div class="voucher-page-product-card__illustration">
+          <i class="ri-file-list-3-line"></i>
+        </div>
 
+        <div class="voucher-page-product-card__stock">
+          <small class="voucher-page-product-card__out-stock">
+            Out of <span>Stock</span>
+          </small>
+          <small class="voucher-page-product-card__stock-count" style="display: flex;">
+            12 <span>left</span>
+          </small>
+        </div>
+      </div>
 
-                <div class="grid-voucher-card wassce"
-                data-slug="wassce_checker"
-                data-name="WASSCE Checker"
-                data-stock="false"
-                data-stocked="0"
-                data-price="23.50"
-                >
-                  <div class="wassce-top">
-                    <div class="voucher-badge">
-                      <p> examination</p>
-                    </div>
-                    <div class="img">
-                      <i class="ri-layout-line material-icons"></i>
-                    </div>
+      <div class="voucher-page-product-card__details">
+        <div class="voucher-page-product-card__info">
+          <h3>WASSCE Checker</h3>
+          <p>WASSCE RESULT CHECKER</p>
+          <div class="voucher-page-product-card__price">
+            <span>Price</span>
+            <strong>GHS N/A</strong>
+          </div>
+        </div>
 
-                    <div class="vouchrer " >
-                    <small class="outStock" >Out of <span>Stock</span></small>
-                    <small class="stock" style="display: flex;">12 <span>left</span></small>
-                    </div>
-                  </div>
-                  <div class="wassce-btom">
-                    <div class="bece-btom-left">
-                      <div class="bece-left-top">
-                        <h2 >WASSCE Checker</h2>
-                        <small >WASSCE RESULT CHECKER</small>
-                      </div>
-                      <div class="bece-left-btom">
-                        <p>GHS N/A</p>
-                      </div>
-                    </div>
-                    <div class="bece-btom-right">
-                      <button class="buy-vtn sold-out"></button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            
-            </div>
-              <section class="short-note">
-                <div>
-                <div class="quick">
-                  <i class="ri-shield-check-line material-icons"></i>
+        <div class="voucher-page-product-card__buy">
+          <button
+            class="voucher-page-buy-button voucher-page-buy-button--sold-out"
+            type="button"
+            aria-label="WASSCE voucher currently unavailable"
+          >
+          </button>
+        </div>
+      </div>
+    </article>
+  </div>
 
-                </div>
-                <h2>Purchase one or more vouchers of a specific type.
-                  Vouchers will be delivered via SMS, Email, and optionally WhatsApp.
-                </h2>
-                </div>
+  <!-- DELIVERY NOTE -->
+  <aside class="voucher-page-delivery-note">
+    <div class="voucher-page-delivery-note__icon">
+      <i class="ri-shield-check-line"></i>
+    </div>
 
+    <div class="voucher-page-delivery-note__content">
+      <h3>Digital delivery, made easy</h3>
+      <p>
+        Purchase one or more vouchers of a specific type. Voucher details
+        will be delivered via SMS, email, and optionally WhatsApp.
+      </p>
+    </div>
+  </aside>
 
-                <div style="display: none;">
-                <div class="quick">
-                  <i class="ri-mac-line material-icons"></i>
-                </div>
-                <small>Powered by IA-TECH
-                </small>
-                </div>
-              </section>
-          </section>
-
-
+  <div style="display: none;">
+    <i class="ri-mac-line"></i>
+    <small>Powered by IA-TECH</small>
+  </div>
+</section>
 
 
           </section>
@@ -1498,112 +952,198 @@
 
 
 
+<!-- VOUCHER PURCHASE MODAL -->
+<div class="voucher-modal-overlay voucher-purchase-modal" id="voucherContainer">
+  <div class="voucher-modal-card voucher-modal-content" role="dialog" aria-modal="true" aria-labelledby="voucherName2">
 
-    <!--VOUCHER MODAL---->
-    <div class="voucher-purchase-modal" id="voucherContainer">
-      <div class="voucher-modal-content">
-        <div class="tip"></div>
-        <div class="voucher-group V-group1">
-          <div class="v-group1-left">
-            <div class="Vg-left-left">
-              <i class="ri-shopping-cart-line icon"></i>
-            </div>
-            <div class="Vg-left-right">
-              <div class="vg-ri-top">
-                <p id="voucherName2"> BECE Voucher</p>
-              </div>
-              <div class="vg-ri-btom">
-                <small id="topDecsStock"> N/A . GHS N/A each</small>
-              </div>
-            </div>
-          </div>
-          <div id="closeVoucher" class="right-top-content">
-          <p>&times</p>
-        </div>
-        </div>
-        <div class="voucher-group V-group2">
-          <div class="v2-group1 quantity ">
-            <div class="quant-label">Quantity</div>
-            <div class="v2-wrapper qty">
-              <span class="decrease" id="decreaseBtn">-</span>
-              <div class="quantityCounter" id="count">1</div>
-              <span class="increase" id="increaseBtn">+</span>
-            </div>
-          </div>
-          <div class="v2-group1 quantity">
-            <div class="v2-wrapper v2-total">
-              <div class='v2-total-top'>
-                <div class='v2-total-top-left'>
-                  Total
-                </div>
-                <div id="totalPrice" class='v2-total-top-right'>
-                  GHS N/A
-                </div>
-              </div>
-              <div class='v2-total-btom'>
-                <div class='v2-total-btom-left'>
-                  Voucher
-                </div>
-                <div id="voucherName1" class='v2-total-btom-right'>
-                  N/A
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="v2-group1 quantity">
-            <div class="quant-label">Phone number *</div>
-            <div class="v2-wrapper">
-              <input 
-              id="voucherPhone"
-              class="v2-input" 
-              type="tel"
-              maxlength="10"
-              inputmode="numeric"
-              placeholder="0XXXXXXXXX or +233XXXXXXXXX">
-            </div>
-          </div>
-          <div class="v2-group1 quantity">
-            <div class="quant-label">Email address *</div>
-            <div class="v2-wrapper">
-              <input
-              id="voucherEmail"
-               class="v2-input" 
-               type="text" 
-               placeholder="your@email.com">
-            </div>
-          </div>
-          <div class="v2-group1 quantity la">
-            <div class="quant-label ">WhatsApp (optional)</div>
-            <div class="v2-wrapper check">
-              <div class="wrapIn">
-                <div class="inpu-wrap">
-                  <input 
-              class="v2-inp" 
-              type="checkbox" 
-              id="sendWhatsapp" 
-               >
-               
-                </div>
-                <div class="v2-input-div">
-                  <i class="ri-whatsapp-fill material-icons wa"></i>
-                  Send Via WhatsApp?
-                </div>
-              </div>
-            </div>
-          </div>
+    <div class="voucher-modal-handle tip"></div>
+
+    <!-- Header -->
+    <div class="voucher-modal-header voucher-group V-group1">
+      <div class="voucher-modal-product">
+        <div class="voucher-modal-product-icon Vg-left-left">
+          <i class="ri-shopping-cart-line icon"></i>
         </div>
 
+        <div class="voucher-modal-product-info Vg-left-right">
+          <div class="voucher-modal-product-title vg-ri-top">
+            <p id="voucherName2">BECE Voucher</p>
+          </div>
 
-
-        <!---buy-vtn-->
-        <div class="voucher-group V-group3">
-          <button class="buy-vtn vtn" id="buy-vtn">
-            <i class="ri-shopping-cart-line icon"></i>
-            Pay GHS N/A</button>
+          <div class="voucher-modal-product-meta vg-ri-btom">
+            <small id="topDecsStock">N/A · GHS N/A each</small>
+          </div>
         </div>
       </div>
+
+      <button
+        type="button"
+        id="closeVoucher"
+        class="voucher-modal-close right-top-content"
+        aria-label="Close voucher purchase"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
-    <!--VOUCHER MODAL-ENDS--->
+
+    <!-- Order Details -->
+    <div class="voucher-modal-body voucher-group V-group2">
+
+      <!-- Quantity -->
+      <div class="voucher-modal-field v2-group1 quantity">
+        <label class="voucher-modal-label quant-label">Quantity</label>
+
+        <div class="voucher-modal-quantity v2-wrapper qty">
+          <button
+            type="button"
+            class="voucher-modal-quantity-btn decrease"
+            id="decreaseBtn"
+            aria-label="Decrease quantity"
+          >−</button>
+
+          <div
+            class="voucher-modal-quantity-value quantityCounter"
+            id="count"
+            aria-live="polite"
+          >1</div>
+
+          <button
+            type="button"
+            class="voucher-modal-quantity-btn increase"
+            id="increaseBtn"
+            aria-label="Increase quantity"
+          >+</button>
+        </div>
+      </div>
+
+      <!-- Total -->
+      <div class="voucher-modal-total-field v2-group1 quantity">
+        <div class="voucher-modal-total v2-wrapper v2-total">
+          <div class="voucher-modal-total-row v2-total-top">
+            <span class="voucher-modal-total-label v2-total-top-left">
+              Total
+            </span>
+
+            <strong
+              id="totalPrice"
+              class="voucher-modal-total-price v2-total-top-right"
+            >GHS N/A</strong>
+          </div>
+
+          <div class="voucher-modal-total-divider"></div>
+
+          <div class="voucher-modal-total-row voucher-modal-total-subrow v2-total-btom">
+            <span class="voucher-modal-total-label v2-total-btom-left">
+              Voucher
+            </span>
+
+            <span
+              id="voucherName1"
+              class="voucher-modal-total-name v2-total-btom-right"
+            >N/A</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phone Number -->
+      <div class="voucher-modal-field v2-group1 quantity">
+        <label class="voucher-modal-label quant-label" for="voucherPhone">
+          Phone number <span class="voucher-modal-required">*</span>
+        </label>
+
+        <div class="voucher-modal-input-wrap v2-wrapper">
+          <i class="ri-phone-line voucher-modal-input-icon" aria-hidden="true"></i>
+
+          <input
+            id="voucherPhone"
+            class="voucher-modal-input v2-input"
+            type="tel"
+            maxlength="13"
+            inputmode="tel"
+            autocomplete="tel"
+            placeholder="0XXXXXXXXX or +233XXXXXXXXX"
+            required
+          >
+        </div>
+
+        <small class="voucher-modal-hint">
+          Enter the number where you want to receive delivery updates.
+        </small>
+      </div>
+
+      <!-- Email -->
+      <div class="voucher-modal-field v2-group1 quantity">
+        <label class="voucher-modal-label quant-label" for="voucherEmail">
+          Email address <span class="voucher-modal-required">*</span>
+        </label>
+
+        <div class="voucher-modal-input-wrap v2-wrapper">
+          <i class="ri-mail-line voucher-modal-input-icon" aria-hidden="true"></i>
+
+          <input
+            id="voucherEmail"
+            class="voucher-modal-input v2-input"
+            type="email"
+            autocomplete="email"
+            placeholder="your@email.com"
+            required
+          >
+        </div>
+      </div>
+
+      <!-- Optional WhatsApp -->
+      <div class="voucher-modal-field voucher-modal-whatsapp-field v2-group1 quantity la">
+        <div class="voucher-modal-label quant-label">
+          WhatsApp <span class="voucher-modal-optional">(optional)</span>
+        </div>
+
+        <label class="voucher-modal-whatsapp-option v2-wrapper check" for="sendWhatsapp">
+          <span class="voucher-modal-whatsapp-left wrapIn">
+            <span class="voucher-modal-checkbox-wrap inpu-wrap">
+              <input
+                class="voucher-modal-checkbox v2-inp"
+                type="checkbox"
+                id="sendWhatsapp"
+              >
+            </span>
+
+            <span class="voucher-modal-whatsapp-copy v2-input-div">
+              <i class="ri-whatsapp-fill wa" aria-hidden="true"></i>
+              <span>Send updates via WhatsApp</span>
+            </span>
+          </span>
+
+          <span class="voucher-modal-whatsapp-badge">Optional</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Payment -->
+    <div class="voucher-modal-footer voucher-group V-group3">
+      <button
+        type="button"
+        class="voucher-modal-pay-button buy-vtn vtn"
+        id="buy-vtn"
+      >
+        <span class="voucher-modal-pay-icon">
+          <i class="ri-shopping-cart-line icon" aria-hidden="true"></i>
+        </span>
+
+        <span class="voucher-modal-pay-label">Pay</span>
+        <span class="voucher-modal-pay-amount">GHS N/A</span>
+
+        <i class="ri-arrow-right-line voucher-modal-pay-arrow" aria-hidden="true"></i>
+      </button>
+
+      <p class="voucher-modal-secure-note">
+        <i class="ri-shield-check-line" aria-hidden="true"></i>
+        Review your details before completing payment.
+      </p>
+    </div>
+
+  </div>
+</div>
+<!-- VOUCHER PURCHASE MODAL END -->
 
 
 
@@ -1724,39 +1264,146 @@
   </div>
   <!-----SIGN UP CARD SECTION--ENDS--->
 
-    <!----WHATSAPP-GROUP--FIXED-BUTTON----->
-  <div class="what-group-btn">
-    <span class="informattion">Join</span>
-
-    <a href="https://chat.whatsapp.com/LwhZNOyUQsJIGTQRL9cIXT?mode=hqrt3">
-      <div class="pulse-ring"></div>
-      <div class="pulse-ring-delay"></div>
-    <img src="./css/icons/whats.png" alt="" loading="lazy">
-    </a>
-  </div>
-  <!----WHATSAPP-GROUP--FIXED-BUTTON-ends---->
-  
-
-
 
   
-    <!--====================
-      ADMIN WHATSAPP CHAT BUTTON
-      =====================-->
-  <div class="chatBox" id="whatsappChat">
-    <div id="chatButton" class="message">
-      <img src="./css/icons/chatMe.png" alt="image" loading="lazy">
-    </div>
-    <!---whatsapp chatBox-->
-    <div id="chatBox">
 
-      <div class="chatBox-header"> <img src="./css/icons/agent.png" alt="" loading="lazy"> <strong>Chat Admin</strong></div>
-      <textarea name="input" id="whatsppMessage" placeholder="Type your message..."></textarea>
-      <button id="sendMsgBtn">
-        <img src="./css/icons/whats.png" alt="" loading="lazy">
-        Send Message</button>
+
+
+  <!-- =========================
+     ECODATA ADMIN WHATSAPP CHAT
+========================= -->
+<section class="admin-chat-widget chatBox" id="whatsappChat">
+
+  <!-- Floating Chat Button -->
+  <button
+    type="button"
+    id="chatButton"
+    class="admin-chat-launcher message"
+    aria-label="Open admin chat"
+    aria-controls="chatBox"
+    aria-expanded="false"
+  >
+    <img
+      src="./css/icons/chatMe.png"
+      alt=""
+      class="admin-chat-launcher-image"
+      loading="lazy"
+    >
+
+    <span class="admin-chat-notification" aria-hidden="true"></span>
+  </button>
+
+  <!-- Chat Panel -->
+  <section
+    id="chatBox"
+    class="admin-chat-panel"
+    aria-label="Chat with EcoData admin"
+    aria-hidden="true"
+  >
+
+    <!-- Header -->
+    <header class="admin-chat-header chatBox-header">
+
+      <div class="admin-chat-header-profile">
+        <div class="admin-chat-agent-avatar">
+          <img
+            src="./css/icons/agent.png"
+            alt=""
+            loading="lazy"
+          >
+        </div>
+
+        <div class="admin-chat-agent-details">
+          <strong>Chat Admin</strong>
+          <span class="admin-chat-status">
+            <span class="admin-chat-status-dot"></span>
+            Here to help you
+          </span>
+        </div>
+      </div>
+
+      <button
+        type="button"
+        class="admin-chat-close"
+        id="adminChatClose"
+        aria-label="Close chat"
+      >
+        &times;
+      </button>
+
+    </header>
+
+    <!-- Conversation Area -->
+    <div class="admin-chat-conversation">
+
+      <div class="admin-chat-welcome-icon">
+        <i class="ri-customer-service-2-line"></i>
+      </div>
+
+      <h3 class="admin-chat-welcome-title">
+        How can we help?
+      </h3>
+
+      <p class="admin-chat-welcome-description">
+        Send a message to the EcoData admin team on WhatsApp.
+      </p>
+
+      <div class="admin-chat-info">
+        <i class="ri-shield-check-line"></i>
+        <span>You're contacting EcoData support.</span>
+      </div>
+
     </div>
-  </div>
+
+    <!-- Message Composer -->
+    <div class="admin-chat-composer">
+
+      <label class="admin-chat-input-label" for="whatsppMessage">
+        Your message
+      </label>
+
+      <textarea
+        name="input"
+        id="whatsppMessage"
+        class="admin-chat-message-input"
+        placeholder="Type your message..."
+        rows="3"
+        maxlength="1500"
+      ></textarea>
+
+      <div class="admin-chat-composer-footer">
+        <span class="admin-chat-input-hint">
+          <i class="ri-lock-line"></i>
+          Message sent via WhatsApp
+        </span>
+
+        <span class="admin-chat-character-count" id="adminChatCharCount">
+          0/1500
+        </span>
+      </div>
+
+      <button
+        type="button"
+        id="sendMsgBtn"
+        class="admin-chat-send-button"
+      >
+        <img
+          src="./css/icons/whats.png"
+          alt=""
+          class="admin-chat-send-icon"
+          loading="lazy"
+        >
+
+        <span>Send Message</span>
+
+        <i class="ri-arrow-right-up-line admin-chat-send-arrow"></i>
+      </button>
+
+    </div>
+
+  </section>
+</section>
+<!-- END ECODATA ADMIN WHATSAPP CHAT -->
 
 
 

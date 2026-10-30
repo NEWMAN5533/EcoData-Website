@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // DISPLAY VOUCHER PRICE
   //======================
   function displayVoucherPrice(){
-    document.querySelectorAll(".grid-voucher-card").forEach(card => {
+    document.querySelectorAll(".voucher-page-product-card").forEach(card => {
       const activeCardPriceEl = document.getElementById("activePrice");
       const topDescStocked = document.getElementById("topDecsStock");
 
@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ACTIVATE STOCK VOUCHER
   //========================
   function activateVoucherStock(){
-    document.querySelectorAll(".grid-voucher-card").forEach(card => {
+    document.querySelectorAll(".voucher-page-product-card").forEach(card => {
 
 
       const available =
@@ -145,8 +145,8 @@ document.addEventListener("DOMContentLoaded", () => {
      
 
       if(available){
-        card.querySelector(".outStock").style.display = "none";
-        card.querySelector(".stock").style.display = "flex";
+        card.querySelector(".voucher-page-product-card__out-stock").style.display = "none";
+        card.querySelector(".voucher-page-product-card__stock-count").style.display = "flex";
 
   
 
