@@ -3,6 +3,63 @@
    ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
+(() => {
+  const chatButton = document.getElementById("chatButton");
+  const chatPanel = document.getElementById("chatBox");
+  const closeButton = document.getElementById("adminChatClose");
+  const messageInput = document.getElementById("whatsppMessage");
+  const characterCount = document.getElementById("adminChatCharCount");
+
+  if (!chatButton || !chatPanel) return;
+
+  function openAdminChat() {
+    chatPanel.classList.add("admin-chat-is-open");
+    chatPanel.setAttribute("aria-hidden", "false");
+    chatButton.setAttribute("aria-expanded", "true");
+
+    if (messageInput) {
+      messageInput.focus({ preventScroll: true });
+    }
+  }
+
+  function closeAdminChat() {
+    chatPanel.classList.remove("admin-chat-is-open");
+    chatPanel.setAttribute("aria-hidden", "true");
+    chatButton.setAttribute("aria-expanded", "false");
+    chatButton.focus({ preventScroll: true });
+  }
+
+  chatButton.addEventListener("click", () => {
+    if (chatPanel.classList.contains("admin-chat-is-open")) {
+      closeAdminChat();
+    } else {
+      openAdminChat();
+    }
+  });
+
+  closeButton?.addEventListener("click", closeAdminChat);
+
+  document.addEventListener("keydown", (event) => {
+    if (
+      event.key === "Escape" &&
+      chatPanel.classList.contains("admin-chat-is-open")
+    ) {
+      closeAdminChat();
+    }
+  });
+
+  function updateCharacterCount() {
+    if (!messageInput || !characterCount) return;
+
+    characterCount.textContent =
+      `${messageInput.value.length}/1500`;
+  }
+
+  messageInput?.addEventListener("input", updateCharacterCount);
+
+  updateCharacterCount();
+})();
+
 
 //=================================
 // DARK MODE JS

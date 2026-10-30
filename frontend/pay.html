@@ -1136,23 +1136,141 @@
 <!----PAYSTACK-LOADER-->
 
 
-    <!--====================
-      ADMIN WHATSAPP CHAT BUTTON
-      =====================-->
-  <div class="chatBox" id="whatsappChat">
-    <div id="chatButton" class="message">
-      <img src="./css/icons/chatMe.png" alt="image" loading="lazy">
-    </div>
-    <!---whatsapp chatBox-->
-    <div id="chatBox">
+<!-- =========================
+     ECODATA ADMIN WHATSAPP CHAT
+========================= -->
+<section class="admin-chat-widget chatBox" id="whatsappChat">
 
-      <div class="chatBox-header"> <img src="./css/icons/agent.png" alt="" loading="lazy"> <strong>Chat Admin</strong></div>
-      <textarea name="input" id="whatsppMessage" placeholder="Type your message..."></textarea>
-      <button id="sendMsgBtn">
-        <img src="./css/icons/whats.png" alt="" loading="lazy">
-        Send Message</button>
+  <!-- Floating Chat Button -->
+  <button
+    type="button"
+    id="chatButton"
+    class="admin-chat-launcher message"
+    aria-label="Open admin chat"
+    aria-controls="chatBox"
+    aria-expanded="false"
+  >
+    <img
+      src="./css/icons/chatMe.png"
+      alt=""
+      class="admin-chat-launcher-image"
+      loading="lazy"
+    >
+
+    <span class="admin-chat-notification" aria-hidden="true"></span>
+  </button>
+
+  <!-- Chat Panel -->
+  <section
+    id="chatBox"
+    class="admin-chat-panel"
+    aria-label="Chat with EcoData admin"
+    aria-hidden="true"
+  >
+
+    <!-- Header -->
+    <header class="admin-chat-header chatBox-header">
+
+      <div class="admin-chat-header-profile">
+        <div class="admin-chat-agent-avatar">
+          <img
+            src="./css/icons/agent.png"
+            alt=""
+            loading="lazy"
+          >
+        </div>
+
+        <div class="admin-chat-agent-details">
+          <strong>Chat Admin</strong>
+          <span class="admin-chat-status">
+            <span class="admin-chat-status-dot"></span>
+            Here to help you
+          </span>
+        </div>
+      </div>
+
+      <button
+        type="button"
+        class="admin-chat-close"
+        id="adminChatClose"
+        aria-label="Close chat"
+      >
+        &times;
+      </button>
+
+    </header>
+
+    <!-- Conversation Area -->
+    <div class="admin-chat-conversation">
+
+      <div class="admin-chat-welcome-icon">
+        <i class="ri-customer-service-2-line"></i>
+      </div>
+
+      <h3 class="admin-chat-welcome-title">
+        How can we help?
+      </h3>
+
+      <p class="admin-chat-welcome-description">
+        Send a message to the EcoData admin team on WhatsApp.
+      </p>
+
+      <div class="admin-chat-info">
+        <i class="ri-shield-check-line"></i>
+        <span>You're contacting EcoData support.</span>
+      </div>
+
     </div>
-  </div>
+
+    <!-- Message Composer -->
+    <div class="admin-chat-composer">
+
+      <label class="admin-chat-input-label" for="whatsppMessage">
+        Your message
+      </label>
+
+      <textarea
+        name="input"
+        id="whatsppMessage"
+        class="admin-chat-message-input"
+        placeholder="Type your message..."
+        rows="3"
+        maxlength="1500"
+      ></textarea>
+
+      <div class="admin-chat-composer-footer">
+        <span class="admin-chat-input-hint">
+          <i class="ri-lock-line"></i>
+          Message sent via WhatsApp
+        </span>
+
+        <span class="admin-chat-character-count" id="adminChatCharCount">
+          0/1500
+        </span>
+      </div>
+
+      <button
+        type="button"
+        id="sendMsgBtn"
+        class="admin-chat-send-button"
+      >
+        <img
+          src="./css/icons/whats.png"
+          alt=""
+          class="admin-chat-send-icon"
+          loading="lazy"
+        >
+
+        <span>Send Message</span>
+
+        <i class="ri-arrow-right-up-line admin-chat-send-arrow"></i>
+      </button>
+
+    </div>
+
+  </section>
+</section>
+<!-- END ECODATA ADMIN WHATSAPP CHAT -->
 
 
 
