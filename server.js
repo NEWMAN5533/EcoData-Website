@@ -383,7 +383,7 @@ console.log("Approved price verified:", {
     console.log("Full SwiftData order payload:", orderData);
 
     // 4. Post to SwiftData
-    const swiftBase = (process.env.SWIFT_BASE_URL || "https://swiftdata-link.com").replace(/\/$/, "");
+    const swiftBase = (process.env.SWIFT_BASE_URL).replace(/\/$/, "");
 
     console.log(" Sending to swiftData:", {
       network,
@@ -393,7 +393,7 @@ console.log("Approved price verified:", {
       paymentReference
     });
 
-    const swiftUrl = `${swiftBase}/order/${network}`;
+    const swiftUrl = `${swiftBase}/orders`;
 
     console.log("SwiftData URL:", swiftUrl);
 
@@ -545,7 +545,7 @@ app.post("/api/datamart/buy-data", async (req, res) => {
 
 
 // Status route
-app.get("/api/v1/order/status/:orderIdOrRef", async (req, res) => {
+app.get("/api/v2/order/status/:orderIdOrRef", async (req, res) => {
   const { orderIdOrRef } = req.params;
 
   if (!orderIdOrRef) {
@@ -553,8 +553,8 @@ app.get("/api/v1/order/status/:orderIdOrRef", async (req, res) => {
   }
 
   try {
-    const base = (process.env.SWIFT_BASE_URL || "https://swiftdata-link.com").replace(/\/$/, "");
-    const swiftUrl = `${base}/order/status/${encodeURIComponent(orderIdOrRef)}`;
+    const base = (process.env.SWIFT_BASE_URL ).replace(/\/$/, "");
+    const swiftUrl = `${base}/orders/status/${encodeURIComponent(orderIdOrRef)}`;
 
     const response = await axios.get(swiftUrl, {
       headers: {
