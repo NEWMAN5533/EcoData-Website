@@ -45,15 +45,6 @@
 
 
 
-<script>
-  (() => {
-    const savedTheme = localStorage.getItem("ecoTheme");
-
-    if (savedTheme === "dark") {
-      document.documentElement.classList.add("dark-mode");
-    }
-  })();
-</script>
 
    <link rel="stylesheet" href="app.css">
   <link rel="stylesheet" href="store.css">
@@ -343,7 +334,7 @@
           </button>
 
                 <!-- DARK MODE -->
-          <label class="theme-switch" aria-label="Toggle dark mode">
+          <label class="theme-switch" aria-label="Toggle dark mode" style="display: none;">
             <input type="checkbox" id="themeToggle">
 
             <span class="theme-slider">
@@ -521,382 +512,95 @@
 <!------MAIN SECTION----->
 <section class="card-container">
 
+<!-- MTN AFA PAGE HEADER -->
+<header class="client-page-header afa-page-header">
 
-  <div class="client-page-header">
+  <div class="afa-page-header-content">
 
-    <div>
-
-    
-
-
-      <h1>
-       <span class="clamper" > MTN</span> ALL-FOR-ALL
-      </h1>
-
-
-      <p>
-        Register for MTN's All-For-All bundle and enjoy Lifetime benefits.
-      </p>
-
+    <div class="afa-page-header-badge">
+      <span class="afa-page-header-dot"></span>
+      MTN AFA PROGRAM
     </div>
 
+    <h1>
+      <span class="clamper">MTN</span>
+      <span class="afa-page-header-title">ALL-FOR-ALL</span>
+    </h1>
 
-    <div class="client-page-header-actions" >
+    <p>
+      Register for MTN's All-For-All bundle and enjoy
+      exclusive lifetime benefits.
+    </p>
 
-      <button
-        class="client-btn client-btn-primary"
-        type="button"
-      >
-
-        <i class="ri-mobile-3-line"></i>
-
-        <span>
-          Register Now
-        </span>
-
-      </button>
-
+    <div class="afa-page-header-features">
+      <span><i class="ri-check-line"></i> Exclusive benefits</span>
+      <span><i class="ri-check-line"></i> Easy registration</span>
     </div>
 
   </div>
 
-  <!----WELCOME HERO---->
-<section class="welcome-hero" style="display: none;">
+  <div class="client-page-header-actions afa-page-header-actions">
 
-     <!---welcome=card---->
-  <div id="sk-Welcome" class="sk-welcome-card">
-    <div class="sk-welcome-card-top">
-       <span class="sk" style="width:140px; height: 28px;">
+    <button
+      class="client-btn client-btn-primary afa-register-btn"
+      type="button"
+      onclick="document.querySelector('.afa-container')?.scrollIntoView({ behavior: 'smooth', block: 'start' })"
+    >
+      <i class="ri-mobile-3-line"></i>
+      <span>Register Now</span>
+      <i class="ri-arrow-right-line afa-register-arrow"></i>
+    </button>
 
-       </span>  
-          <span class="sk" style="width:90px;height:17px;"></span>  
-    </div>
-
-    <div class="sk-welcome-card-bottom">
-       <span class="sk" style="width: 100%;height:90%;"></span>  
-      
-    </div>
-  </div>
-    <!-- Animated background particles----->
-  <div class="particles">
-    <span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span>
-  </div>
-    
- 
-  <div class="welcome-hero-top">
-    
-
-    <div class="wht-left"> 
-      <p id="usernameDisplay"></p>
-    </div>
-    <div class="wht-right">
-    <button class="ecb" ></button>
-    </div>
-  </div>
-   <!--== HERO MIDDLE GIVEAWAY STATUS ==-->
-     <section class="seller-status-bar">
-      
-          <div class="swiper status-swiper">
-           <div class="h1">
-              <div class="statt">
-                <img src="./css/uiIcons/gift.png" alt=""> Status
-              </div>
-      <!--===============-
-      GIVEAWAY COUNTING
-      =================-->
-
-      <div class="giveawayTimer">
-
-        <div class="timerCardBox">
-          <p id="giveawayDays">00</p>
-          <small>Days</small>
-        </div>
-
-        <div class="timerCardBox">
-          <p id="giveawayHours">00</p>
-          <small>Hrs</small>
-        </div>
-
-        <div class="timerCardBox">
-          <p id="giveawayMinutes">00</p>
-          <small>Mins</small>
-        </div>
-
-        <div class="timerCardBox" style="border-bottom: none !important;">
-          <p class="giveawayClock">
-            <i class="ri-time-line"></i>
-          </p>
-          <small>Ends-In</small>
-        </div>
-      </div>
-      <p id="giveawayStatus" style="display: none;"></p>
-            </div>
-              <div class="swiper-wrapper">
-
-                  <!-- "All Sellers" item -->
-                   <div class="swiper-slide status-card">
-                      <div class="status-card-bg">
-                          <p id="leaderPhone1">----****--</p>
-                      </div>
-                      <div class="status-card-avatar status-card-avatar-active">
-                          <img  src="./css/uiIcons/leader (3).png" alt="">
-                      </div>
-                      <small class="gb-tagSpot">GB?</small>
-                      <small class="rank-tagSpot">#1</small>
-                      <span class="status-card-name" id="leaderPoints1">Points: ---</span>
-                  </div>
-                 
-
-
-                  <div class="swiper-slide status-card">
-                      <div class="status-card-bg">
-                           <p id="leaderPhone2">----****--</p>
-                      </div>
-                      <div class="status-card-avatar status-card-avatar-active">
-                          <img  src="./css/uiIcons/leader (1).png" alt="">
-                      </div>
-                        <small class="gb-tagSpot">GB?</small>
-                        <small class="rank-tagSpot">#2</small>
-                      <span class="status-card-name" id="leaderPoints2">Points: ---</span>
-                  </div>
-
-                  <div class="swiper-slide status-card">
-                      <div class="status-card-bg">
-                           <p id="leaderPhone3">----****--</p>
-                      </div>
-                      <div class="status-card-avatar status-card-avatar-active">
-                          <img  src="./css/uiIcons/leader (2).png" alt="">
-                      </div>
-                       <small class="gb-tagSpot">GB?</small>
-                       <small class="rank-tagSpot">#3</small>
-                      <span class="status-card-name" id="leaderPoints3">Points: ---</span>
-                  </div>
-
-                  <div class="swiper-slide status-card">
-                      <div class="status-card-bg">
-                         <p id="leaderPhone4">----****--</p>
-                      </div>
-                      <div class="status-card-avatar status-card-avatar-active">
-                          <img  src="./css/icons/personal.png" alt="">
-                      </div>
-                       <small class="gb-tagSpot">--</small>
-                       <small class="rank-tagSpot">#4</small>
-                      <span class="status-card-name" id="leaderPoints4">Points: ---</span>
-                  </div>
-
-                  <div class="swiper-slide status-card">
-                      <div class="status-card-bg">
-                         <p id="leaderPhone5">----****--</p>
-                      </div>
-                      <div class="status-card-avatar status-card-avatar-active">
-                           <img src="./css/icons/personal.png" alt="">
-                      </div>
-                       <small class="gb-tagSpot">--</small>
-                       <small class="rank-tagSpot">#5</small>
-                      <span class="status-card-name" id="leaderPoints5">Points: ---</span>
-                  </div>
-
-                  <div class="swiper-slide status-card">
-                      <div class="status-card-bg">
-                         <p id="leaderPhone6">----****--</p>
-                      </div>
-                      <div class="status-card-avatar status-card-avatar-active">
-                           <img src="./css/icons/personal.png" alt="">
-                      </div>
-                       <small class="gb-tagSpot">--</small>
-                       <small class="rank-tagSpot">#6</small>
-                      <span class="status-card-name" id="leaderPoints6">Points: ---</span>
-                  </div>
-
-                  <div class="swiper-slide status-card">
-                      <div class="status-card-bg">
-                         <p id="leaderPhone7">----****--</p>
-                      </div>
-                      <div class="status-card-avatar status-card-avatar-active">
-                           <img src="./css/icons/personal.png" alt="">
-                      </div>
-                       <small class="gb-tagSpot">--</small>
-                       <small class="rank-tagSpot">#7</small>
-                      <span class="status-card-name" id="leaderPoints7">Points: ---</span>
-                  </div>
-
-                  <div class="swiper-slide status-card">
-                      <div class="status-card-bg">
-                         <p id="leaderPhone8">----****--</p>
-                      </div>
-                      <div class="status-card-avatar status-card-avatar-active">
-                           <img src="./css/icons/personal.png" alt="">
-                      </div>
-                       <small class="gb-tagSpot">--</small>
-                       <small class="rank-tagSpot">#8</small>
-                      <span class="status-card-name" id="leaderPoints8">Points: ---</span>
-                  </div>
-
-                  <div class="swiper-slide status-card">
-                      <div class="status-card-bg">
-                         <p id="leaderPhone9">----****--</p>
-                      </div>
-                      <div class="status-card-avatar status-card-avatar-active">
-                           <img src="./css/icons/personal.png" alt="">
-                      </div>
-                       <small class="gb-tagSpot">--</small>
-                       <small class="rank-tagSpot">#9</small>
-                      <span class="status-card-name" id="leaderPoints9">Points: ---</span>
-                  </div>
-              </div>
-
-              <!--== pagination ==-->
-              <div class="swiper-controls">
-                <div class="swiper-pagination" style="display: none;"></div>
-               
-              </div>
-              
-          </div>
-
-    <div class="leaderboard-start" style="margin-top: .6rem;">
-    <i class="ri-calendar-event-line"></i>
-    <span  style="font-size: .65rem;opacity:0.5;">
-      Check bundle page for live update.
+    <span class="afa-page-header-note">
+      <i class="ri-shield-check-line"></i>
+      Simple and convenient
     </span>
-    </div>
-      </section>
 
-  <!--== HERO BOTTOM ==-->
-    <div class="welcome-hero-bottom">
-      <div class="grid-overlay" style='display: none;'></div>
-      <div class="whb-left">
-        <!--title-tag-->
-        <div class="title-ecodata">
-          <h5>
-          EcoData.<br>
-          <span class="accent">Cheap</span> Prices.<br>
-          <span class="stroke">No Stress.</span>
-          </h5>
-        </div>
-        <!---close-time-btom--->
-        <div class="time-close">
-          <span >Active 24/7</span>
-          <img style="width: 1.4rem; height: 1.4rem;" src="./css/icons/timer.png" alt="" loading="lazy"> 
-        </div>
-      </div>
-      <div class="whb-right">
-        <div class="whb-right-top">
-          <div class="ratingContainer">
-    <div class="stat-card float">
-        <div class="stat-num" id="stat-num"></div>
-        <div class="stat-label">Happy Users</div>
-      </div>
-      <div class="stat-card float" style="animation-delay:0.5s">
-        <div class="stat-num">&lt;30m</div>
-        <div class="stat-label">Avg. Delivery</div>
-      </div>
-      <div class="stat-card float" style="animation-delay:1s">
-        <div class="stat-num">4.5★</div>
-        <div class="stat-label">Customer Rating</div>
-      </div>
   </div>
-        </div>
-        <div class="whb-right-bottom">
-            <div class="endR" >
-        <div class="endS" style="display: none;">
-          <img src="./css/uiIcons/star.png" alt="" loading>
-          <img src="./css/uiIcons/star.png" alt="" loading>
-          <img src="./css/uiIcons/star.png" alt="" loading>
-          <img src="./css/uiIcons/star.png" alt="" loading>
-          <img src="./css/uiIcons/star.png" alt="" loading>
-        </div>
 
-        
-
-
-        <div class="clockr">
-            <div  id="clock"></div>
-        </div>
-      
-      </div>
-        </div>
-      </div>
-    </div>
-</section>
+</header>
+<!-- MTN AFA PAGE HEADER END -->
 
 
 <!-----COUNTER-ENDS--->
 
 
 
-<section class="trusted-by trusted-by-afa">
 
-          <div class="particles">
-            <span></span><span></span><span></span><span></span>
-            <span></span><span></span><span></span><span></span>
-          </div>
-          <div class="grid-overlay" style='display: none;'></div>
-
-          <div class="trusted-container trusted-container-split" style='padding-bottom: .4rem;'>
-
-            <div class="trust-split-left">
-              <div class="wrapper-notice">
-                <span class="pulse-dot"></span>
-                <span class="trusted-badge">✦ Quick Setup</span>
-              </div>
-
-              <p class="trusted-text">
-                Register Your <span class="trust-highlight">AFA Number</span>
-              </p>
-
-              <div class="payment-methods-row">
-                <div class="payment-method-chip">
-                  <i class="ri-timer-flash-line"></i>
-                  <span>Under 5 mins</span>
-                </div>
-                <div class="payment-method-chip">
-                  <i class="ri-shield-check-line"></i>
-                  <span>Verified</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="trust-split-right">
-              <div class="security-badge-card">
-                <div class="security-badge-icon afa-badge-icon">
-                  <i class="ri-user-follow-line "></i>
-                </div>
-                <div class="security-badge-text">
-                  <span class="security-badge-title">One-Time Setup</span>
-                  <span class="security-badge-sub">Unlock </span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="baw-right">
-            <img src="./css/images/baw.png" alt="" loading="lazy">
-            <div class="baw-glow baw-glow-afa"></div>
-          </div>
-
-</section>
-<!----TRUSTED-MESSAGE---ends------>
-
-
-<!---AFA-SUCCESS-RECEIPT--->
-<!--- AFA SUCCESS RECEIPT --->
+<!-- AFA SUCCESS RECEIPT -->
 <section id="afaReceipt" class="afa-receipt">
 
   <div class="receipt-card">
 
+    <!-- Receipt header -->
     <div class="receipt-header">
-      <div class="receipt-success-icon">
-        ✓
+
+      <div class="receipt-success-icon" aria-hidden="true">
+        <span>✓</span>
       </div>
 
+      <span class="afa-receipt-eyebrow">REGISTRATION RECEIPT</span>
+
       <h3>AFA Registration Successful</h3>
-      <p>Your AFA registration has been submitted successfully.</p>
+
+      <p>
+        Your registration has been submitted successfully.
+        Keep this receipt for your records.
+      </p>
+
+      <div class="afa-receipt-status">
+        <span class="afa-receipt-status-dot"></span>
+        Registration received
+      </div>
+
     </div>
 
+    <!-- Receipt divider -->
+    <div class="afa-receipt-divider">
+      <span>REGISTRATION DETAILS</span>
+    </div>
 
-    <!-- Registration Details -->
+    <!-- Registration details -->
     <div class="receipt-details">
 
       <div class="receipt-row">
@@ -924,36 +628,55 @@
         <strong id="rRegistrationId">—</strong>
       </div>
 
-      <div class="receipt-row">
+      <div class="receipt-row receipt-status-row">
         <span>Status</span>
         <strong id="rStatus">Pending</strong>
       </div>
 
-      <div class="receipt-row receipt-amount-row">
-        <span>Amount Paid</span>
+      <!-- Amount highlight -->
+      <div class="receipt-amount-panel">
+        <div class="receipt-amount-label">
+          <span class="afa-receipt-payment-icon">₵</span>
+          <div>
+            <span>Payment Summary</span>
+            <small>Registration fee</small>
+          </div>
+        </div>
+
         <strong id="rAmount">GHS 20.00</strong>
       </div>
 
-      <div class="receipt-row">
-        <span>Payment Ref</span>
+      <div class="receipt-row receipt-ref-row">
+        <span>Payment Reference</span>
         <strong id="rRef">—</strong>
       </div>
 
     </div>
 
+    <!-- Receipt footer -->
+    <div class="afa-receipt-footer">
+      <span class="afa-receipt-footer-icon">✓</span>
+      <p>
+        Keep your registration ID and payment reference
+        for future enquiries.
+      </p>
+    </div>
 
-    <!-- Actions -->
+    <!-- Actions: existing JavaScript functions preserved -->
     <div class="receipt-actions">
 
       <button
         type="button"
+        class="afa-receipt-download"
         onclick="downloadReceipt()"
       >
+        <span class="afa-receipt-action-icon">↓</span>
         Download Receipt
       </button>
 
       <button
         type="button"
+        class="afa-receipt-close"
         onclick="closeReceipt()"
       >
         Close
@@ -964,240 +687,397 @@
   </div>
 
 </section>
+<!-- AFA SUCCESS RECEIPT END -->
 
 
 <!---AFA-SUCCESS RECEIPT-ends--->
 
-<!---AFA-UI-SECTION-->
-<section class="afa-container" >
-  <div class="span">
-    <p> MTN AFA Program</p>
-  </div>
-  <div class="p-title">
-    Register for MTN's All-For-All bundle and enjoy <br> exclusive benefits.
-  </div>
-  <div class="afa-package-card">
-    <div class="package-card-top">
-      <h3>AFA PACKAGE</h3>
-      <small>Lifetime benefits await</small>
+<!-- MTN AFA PROGRAM -->
+<section class="afa-container">
+
+  <!-- Program introduction -->
+  <div class="afa-hero">
+    <div class="span">
+      <span class="afa-status-dot"></span>
+      <p>MTN AFA Program</p>
     </div>
-    <div class="package-card-bottom">
-      
-      <div class="ul-div">
-       <p class="pi"> Monthly Benefits</p>
-      <ul>
-        <li><span>1.</span> 250 mins onnet calls</li>
-        <li><span>2.</span> 30 mins offnet calls</li>
-        <li><span>3.</span> 500 mins CUG calls</li>
-        <li><span>4.</span> 25 SMS messages</li>
-      </ul>
+
+    <h2 class="p-title">
+      Enjoy more with
+      <span>MTN AFA.</span>
+    </h2>
+
+    <p class="afa-hero-description">
+      Register once and enjoy exclusive calling benefits
+      designed for MTN AFA members.
+    </p>
+
+    <div class="afa-hero-meta">
+      <span><i class="afa-check-icon">✓</i> Exclusive benefits</span>
+      <span><i class="afa-check-icon">✓</i> Simple registration</span>
+    </div>
+  </div>
+
+  <!-- Package benefits -->
+  <div class="afa-package-card">
+
+    <div class="package-card-top">
+      <div class="afa-package-icon">AFA</div>
+
+      <div class="afa-package-heading">
+        <span class="afa-eyebrow">MEMBER BENEFITS</span>
+        <h3>AFA PACKAGE</h3>
+        <small>Benefits available to registered members</small>
       </div>
-      <!---exclusive-->
-      <div class="ul-exclusive">
-        <p class="pi">Exclusive Perks</p>
+
+      <span class="afa-lifetime-badge">Lifetime</span>
+    </div>
+
+    <div class="package-card-bottom">
+
+      <!-- Monthly benefits -->
+      <div class="ul-div">
+        <p class="pi">
+          <span class="afa-section-icon">↗</span>
+          Monthly Benefits
+        </p>
+
         <ul>
-          <li><span>1.</span> One-time Lifetime registration</li>
-          <li><span>2.</span> Unlimited calls with AFA members</li>
-          <li><span>3.</span> Renew via <span class="renew">*1848#</span></li>
+          <li><span>01</span><p>250 mins onnet calls</p></li>
+          <li><span>02</span><p>30 mins offnet calls</p></li>
+          <li><span>03</span><p>500 mins CUG calls</p></li>
+          <li><span>04</span><p>25 SMS messages</p></li>
         </ul>
       </div>
+
+      <!-- Exclusive benefits -->
+      <div class="ul-exclusive">
+        <p class="pi">
+          <span class="afa-section-icon">✦</span>
+          Exclusive Perks
+        </p>
+
+        <ul>
+          <li><span>01</span><p>One-time lifetime registration</p></li>
+          <li><span>02</span><p>Unlimited calls with AFA members</p></li>
+          <li>
+            <span>03</span>
+            <p>Renew via <strong class="renew">*1848#</strong></p>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="afa-package-note">
+      <span class="afa-note-icon">i</span>
+      <p>Monthly benefits are subject to the applicable AFA package terms.</p>
     </div>
   </div>
 
-
+  <!-- Activation instructions -->
   <div class="how-to-activate">
+
     <div class="how-top">
-  
-      <h5>How to Activate</h5>
+      <div>
+        <span class="afa-eyebrow">QUICK GUIDE</span>
+        <h5>How to Activate</h5>
+        <p>Follow these steps to activate your AFA bundle.</p>
+      </div>
+
+      <div class="afa-dial-badge">*1848#</div>
     </div>
+
     <div class="how-bottom">
-         <ul>
-           <li><span>1</span> Dial *1848#</li>
-          <li><span>2</span> Select Buy AFA Bundle</li>
-          <li><span>3</span> Choose your offer</li>
-          <li><span>4</span> Confirm & enter MoMo PIN</li>
-          <li><span>5</span> Get SMS confirmation</li>
-         </ul>
+      <ul>
+        <li><span>01</span><p>Dial <strong>*1848#</strong></p></li>
+        <li><span>02</span><p>Select Buy AFA Bundle</p></li>
+        <li><span>03</span><p>Choose your offer</p></li>
+        <li><span>04</span><p>Confirm and enter your MoMo PIN</p></li>
+        <li><span>05</span><p>Receive SMS confirmation</p></li>
+      </ul>
     </div>
+
   </div>
 
+  <!-- Registration -->
   <div class="registration-form">
+
     <div class="reg-top">
       <div class="reg-top-left">
+        <span class="afa-eyebrow">GET STARTED</span>
         <h4>Registration Form</h4>
-      <p>Complete all fields to register for <br> the AFA bundle</p>
+        <p>Enter your details carefully to register for the AFA program.</p>
       </div>
-    <div class="reg-top-right">
-      <small>Registration <br> Fee</small>
-      <h4>GHS 20</h4>
+
+      <div class="reg-top-right">
+        <small>Registration Fee</small>
+        <h4>GH₵ 20.00</h4>
+        <span>One-time fee</span>
+      </div>
     </div>
-    </div>
+
     <div class="reg-bottom">
       <div class="reg-form-container">
+
         <div class="personal-info">
-          <img src="./css/icons/personal.png" alt="" loading="lazy">
-          <p>Personal Information</p>
-        </div>
-        <!---form-->
-       <!-- AFA FORM -->
-<form  id="afa-Form">
-
-  <!-- Full Name -->
-  <div class="form-group">
-    <label class="afa-label">Full Name</label>
-    <input
-      class="afaInput"
-      name="fullName"
-      placeholder="Full Name"
-      required
-    />
-  </div>
-
-  <!-- Phone Number -->
-  <div class="form-group">
-    <label class="afa-label">Phone Number</label>
-    <input
-      class="afaInput"
-      name="phone"
-      placeholder="Phone Number"
-      type="tel"
-      required
-    />
-  </div>
-
-  <!-- Ghana Card -->
-  <div class="form-group">
-    <label class="afa-label">Ghana Card</label>
-    <input
-      class="afaInput"
-      name="ghanaCard"
-      placeholder="GHA-XXXXXXXXX-X"
-      required
-    />
-  </div>
-
-  <!-- Occupation -->
-  <div class="form-group">
-    <label class="afa-label">Occupation</label>
-    <input
-      class="afaInput"
-      name="occupation"
-      placeholder="Occupation"
-      required
-    />
-  </div>
-
-  <!-- Location -->
-  <div class="form-group">
-    <label class="afa-label">Location</label>
-    <input
-      class="afaInput"
-      name="location"
-      placeholder="Location"
-      required
-    />
-  </div>
-
-  <!-- Region Selector -->
-  <div class="form-group">
-    <div class="form-wrapperRegions">
-      <button id="" class="afaInput region" type="button">
-        Select Your Region
-        <img src="./css/icons/more.png.png" alt="">
-      </button>
-
-      <section class="regions-sheet" >
-        <div class="regions-sheet-left">
-
-          <div class="regionSelect" data-region="Greater Accra">Greater Accra</div>
-          <div class="regionSelect" data-region="Ashanti">Ashanti</div>
-          <div class="regionSelect" data-region="Central">Central Region</div>
-          <div class="regionSelect" data-region="Eastern">Eastern Region</div>
-          <div class="regionSelect" data-region="Western">Western Region</div>
-          <div class="regionSelect" data-region="Northern">Northern Region</div>
-          <div class="regionSelect" data-region="Ahafo">Ahafo Region</div>
-          <div class="regionSelect" data-region="Bono East">Bono East</div>
-
+          <div class="afa-form-icon">01</div>
+          <div>
+            <p>Personal Information</p>
+            <small>Provide your details below</small>
+          </div>
         </div>
 
-        <div class="regions-sheet-right">
+        <!-- Keep this form ID unchanged -->
+        <form id="afa-Form">
 
-          <div class="regionSelect" data-region="North East">North East Region</div>
-          <div class="regionSelect" data-region="Upper East">Upper East Region</div>
-          <div class="regionSelect" data-region="Upper West">Upper West Region</div>
-          <div class="regionSelect" data-region="Savannah">Savannah Region</div>
-          <div class="regionSelect" data-region="Volta">Volta Region</div>
-          <div class="regionSelect" data-region="Oti">Oti Region</div>
-          <div class="regionSelect" data-region="Bono">Bono</div>
+          <div class="afa-form-grid">
 
-        </div>
-      </section>
-    </div>
-  </div>
+            <!-- Full Name -->
+            <div class="form-group">
+              <label class="afa-label" for="afaFullName">Full Name</label>
+              <input
+                id="afaFullName"
+                class="afaInput"
+                name="fullName"
+                type="text"
+                placeholder="Enter your full name"
+                autocomplete="name"
+                required
+              />
+            </div>
 
-  <!-- Date of Birth -->
-  <div class="form-group">
-    <label class="afa-label">Date of Birth</label>
-    <input
-      type="date"
-      id="afaDob"
-      name="dob"
-      class="afaInput"
-      required
-    />
-  </div>
+            <!-- Phone Number -->
+            <div class="form-group">
+              <label class="afa-label" for="afaPhone">Phone Number</label>
+              <input
+                id="afaPhone"
+                class="afaInput"
+                name="phone"
+                type="tel"
+                placeholder="e.g. 0241234567"
+                autocomplete="tel"
+                inputmode="tel"
+                required
+              />
+            </div>
 
-  <!-- Submit -->
-  <div class="form-group btnSub">
-    <button type="submit" id="afaSubmit" class="btn-primary">
-      Proceed with Registration
-    </button>
-  </div>
+            <!-- Ghana Card -->
+            <div class="form-group">
+              <label class="afa-label" for="afaGhanaCard">Ghana Card</label>
+              <input
+                id="afaGhanaCard"
+                class="afaInput"
+                name="ghanaCard"
+                type="text"
+                placeholder="GHA-XXXXXXXXX-X"
+                autocomplete="off"
+                required
+              />
+            </div>
 
-  <div class="securance">
-    <small>
-      Your information is only use for <br> Registration.
-    </small>
-  </div>
+            <!-- Occupation -->
+            <div class="form-group">
+              <label class="afa-label" for="afaOccupation">Occupation</label>
+              <input
+                id="afaOccupation"
+                class="afaInput"
+                name="occupation"
+                type="text"
+                placeholder="Enter your occupation"
+                autocomplete="organization-title"
+                required
+              />
+            </div>
 
-</form>
+            <!-- Location -->
+            <div class="form-group">
+              <label class="afa-label" for="afaLocation">Town / Location</label>
+              <input
+                id="afaLocation"
+                class="afaInput"
+                name="location"
+                type="text"
+                placeholder="Enter your town or location"
+                autocomplete="address-level2"
+                required
+              />
+            </div>
+
+            <!-- Region selector: original hooks preserved -->
+            <div class="form-group">
+              <label class="afa-label">Region</label>
+
+              <div class="form-wrapperRegions">
+                <button
+                  id=""
+                  class="afaInput region"
+                  type="button"
+                  aria-haspopup="true"
+                >
+                  <span class="afa-region-label">Select your region</span>
+                  <img
+                    src="./css/icons/more.png.png"
+                    alt=""
+                    loading="lazy"
+                  />
+                </button>
+
+                <section class="regions-sheet">
+                  <div class="regions-sheet-left">
+                    <div class="regionSelect" data-region="Greater Accra">Greater Accra</div>
+                    <div class="regionSelect" data-region="Ashanti">Ashanti</div>
+                    <div class="regionSelect" data-region="Central">Central Region</div>
+                    <div class="regionSelect" data-region="Eastern">Eastern Region</div>
+                    <div class="regionSelect" data-region="Western">Western Region</div>
+                    <div class="regionSelect" data-region="Northern">Northern Region</div>
+                    <div class="regionSelect" data-region="Ahafo">Ahafo Region</div>
+                    <div class="regionSelect" data-region="Bono East">Bono East</div>
+                  </div>
+
+                  <div class="regions-sheet-right">
+                    <div class="regionSelect" data-region="North East">North East Region</div>
+                    <div class="regionSelect" data-region="Upper East">Upper East Region</div>
+                    <div class="regionSelect" data-region="Upper West">Upper West Region</div>
+                    <div class="regionSelect" data-region="Savannah">Savannah Region</div>
+                    <div class="regionSelect" data-region="Volta">Volta Region</div>
+                    <div class="regionSelect" data-region="Oti">Oti Region</div>
+                    <div class="regionSelect" data-region="Bono">Bono Region</div>
+                  </div>
+                </section>
+              </div>
+            </div>
+
+            <!-- Date of Birth: original ID preserved -->
+            <div class="form-group">
+              <label class="afa-label" for="afaDob">Date of Birth</label>
+              <input
+                type="date"
+                id="afaDob"
+                name="dob"
+                class="afaInput"
+                autocomplete="bday"
+                required
+              />
+            </div>
+
+          </div>
+
+          <!-- Submit: original ID and class preserved -->
+          <div class="form-group btnSub">
+            <button type="submit" id="afaSubmit" class="btn-primary">
+              <span>Proceed with Registration</span>
+              <span class="afa-button-arrow">→</span>
+            </button>
+          </div>
+
+          <div class="securance">
+            <span class="afa-security-icon">✓</span>
+            <small>
+              Your information will be used for AFA registration.
+              Please ensure your details are accurate.
+            </small>
+          </div>
+
+        </form>
+
       </div>
     </div>
   </div>
+
 </section>
-<!--AFA-UI-ENDS-->
+<!-- MTN AFA UI END -->
 
 
-<section class="afaTable-container" id="afaHistoryTrack" >
- <section class="table-section">
-  <div class="table-title">
-    <p>AFA HISTORY</p>
-  </div>
-  <div class="content-wrapper">
-    <div class="table-scroll-area">
-      <!-- TABLE HEADER -->
-      <div class="table-header">
-        <span>Name</span>
-        <span>Phone</span>
-        <span>GhanaCard</span>
-        <span>Status</span>
-        <span>Region</span>
-        <span>Amount</span>
-        <span>PaymentRef</span>        
-        <span>Date submitted</span>
-      </div>
 
-      <div class="main-row-content">
-        <p id="afaEmpty-body" hidden>No registered data yet</p>
-        <div class="row-wrapper" id="afaRowWrapper">
-          <!-- dynamic rows -->
+
+
+
+<section class="afa-records" id="afaHistoryTrack">
+  <div class="afa-records__panel">
+
+    <!-- Header -->
+    <header class="afa-records__header">
+      <div class="afa-records__heading">
+        <div class="afa-records__icon">
+          <i class="ri-history-line"></i>
+        </div>
+
+        <div class="afa-records__heading-text">
+          <span class="afa-records__eyebrow">ACCOUNT ACTIVITY</span>
+          <h2>AFA Registration History</h2>
+          <p>View your registration details, status and payment records.</p>
         </div>
       </div>
-    </div>
-  </div>
-</section>
- 
 
+      <div class="afa-records__header-tag">
+        <i class="ri-shield-check-line"></i>
+        <span>Registration records</span>
+      </div>
+    </header>
+
+    <!-- Table toolbar -->
+    <div class="afa-records__toolbar">
+      <div class="afa-records__toolbar-title">
+        <i class="ri-file-list-3-line"></i>
+        <span>All registrations</span>
+      </div>
+
+      <span class="afa-records__scroll-hint">
+        <i class="ri-arrow-left-right-line"></i>
+        Scroll horizontally to view all details
+      </span>
+    </div>
+
+    <!-- Table -->
+    <div class="afa-records__table-viewport">
+      <div class="afa-records__table">
+
+        <div class="afa-records__table-head">
+          <span>Applicant</span>
+          <span>Phone number</span>
+          <span>Ghana Card</span>
+          <span>Status</span>
+          <span>Region</span>
+          <span>Amount</span>
+          <span>Payment reference</span>
+          <span>Date submitted</span>
+        </div>
+
+        <div class="afa-records__table-body">
+          <p id="afaEmpty-body" class="afa-records__empty" hidden>
+            <span class="afa-records__empty-icon">
+              <i class="ri-inbox-2-line"></i>
+            </span>
+
+            <strong>No registrations yet</strong>
+
+            <span>
+              Your AFA registration records will appear here once available.
+            </span>
+          </p>
+
+          <div class="afa-records__rows" id="afaRowWrapper">
+            <!-- Dynamic registration rows are inserted here -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="afa-records__footer">
+      <div class="afa-records__footer-icon">
+        <i class="ri-lock-2-line"></i>
+      </div>
+
+      <p>
+        <strong>Keep your records handy.</strong>
+        Check your registration status and payment reference here.
+      </p>
+    </footer>
+
+  </div>
 </section>
 
 
