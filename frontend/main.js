@@ -2417,16 +2417,7 @@ function handleNewDataMartOrder(returnedOrder) {
   createOrUpdateStatusCard(normalized);
 
   // Start Auto polling 
-  if (normalized.providerOrderReference) {
-    startDataMartAutoPolling(
-      normalized.providerOrderReference
-    );
-  } else {
-    console.warn(
-      "Your order saved, but live status polling cannot start: provider reference is missing.",
-      normalized.orderId
-    );
-  }
+    startDataMartAutoPolling(order.providerOrderReference);
 
   console.log(" Live order normalized:", normalized);
 
@@ -2439,7 +2430,9 @@ const dataMartPollingTimers = new Map();
 function startDataMartAutoPolling(providerReference) {
   const reference = String(providerReference || "").trim();
 
-  if (!reference || dataMartPollingTimers.has(reference)) return;
+  if (!reference || dataMartPollingTimers.has(reference)) {
+    return;
+  }
 
   const API_BASE =
     window.location.hostname === "localhost"
@@ -2476,14 +2469,18 @@ function startDataMartAutoPolling(providerReference) {
     processing: "processing",
     in_progress: "processing",
     "in progress": "processing",
-    unknown: "pending"
+    unknown: "processing"
   };
 
   let stopped = false;
   let requestInProgress = false;
   let timer = null;
+  let attempts = 0;
 
-  function stopPolling() {
+  const MAX_ATTEMPTS = 180; // 30 minutes at 10-second intervals
+  const POLLING_INTERVAL_MS = 10000;
+
+  function stopPolling(reason = "Polling stopped") {
     if (stopped) return;
 
     stopped = true;
@@ -2495,7 +2492,7 @@ function startDataMartAutoPolling(providerReference) {
 
     dataMartPollingTimers.delete(reference);
 
-    console.log("Live polling stopped:", reference);
+    console.log(reason, reference);
   }
 
   function getSavedOrders() {
@@ -2519,23 +2516,24 @@ function startDataMartAutoPolling(providerReference) {
         return false;
       }
 
-      const savedReference = String(
+      const providerRef = String(
         order.providerOrderReference ||
         order.orderReference ||
         ""
       ).trim();
 
-      const paymentReference = String(
+      const paymentRef = String(
         order.paymentReference || ""
       ).trim();
 
-      // Match the full provider reference or reconstruct it
-      // from the original payment reference.
       return (
-        savedReference === reference ||
+        providerRef === reference ||
         (
-          paymentReference &&
-          `Ia553341879ecodata-${paymentReference}` === reference
+          paymentRef &&
+          (
+            reference === paymentRef ||
+            reference === `Ia553341879ecodata-${paymentRef}`
+          )
         )
       );
     });
@@ -2544,32 +2542,16 @@ function startDataMartAutoPolling(providerReference) {
   async function checkStatus() {
     if (stopped || requestInProgress) return;
 
+    if (attempts >= MAX_ATTEMPTS) {
+      stopPolling("Polling limit reached:");
+      return;
+    }
+
     requestInProgress = true;
+    attempts++;
 
     try {
-      // Read the latest saved order before contacting the provider.
-      let orders = getSavedOrders();
-      let index = findMatchingOrder(orders);
-
-      if (index === -1) {
-        console.warn(
-          "Live polling: no saved order matches reference:",
-          reference
-        );
-        return;
-      }
-
-      // Do not continue polling an order already marked terminal.
-      const currentOrder = orders[index];
-      const currentStatus = String(
-        currentOrder.status || ""
-      ).trim().toLowerCase();
-
-      if (terminalStatuses.has(currentStatus)) {
-        stopPolling();
-        return;
-      }
-
+      // Check the backend even if the order is not yet in localStorage.
       const response = await fetch(
         `${API_BASE}/api/datamart/order-status/${encodeURIComponent(reference)}`,
         {
@@ -2584,16 +2566,12 @@ function startDataMartAutoPolling(providerReference) {
       try {
         result = await response.json();
       } catch {
-        console.warn(
-          "EcoData returned invalid JSON:",
-          response.status,
-          reference
-        );
+        console.warn("Invalid status JSON:", response.status, reference);
         return;
       }
 
       if (!response.ok || result.success !== true) {
-        console.warn("Live status lookup failed:", {
+        console.warn("DataMart status request failed:", {
           reference,
           httpStatus: response.status,
           message: result.message
@@ -2610,26 +2588,26 @@ function startDataMartAutoPolling(providerReference) {
       ).trim().toLowerCase();
 
       if (!rawStatus) {
-        console.warn(
-          "Live Order response contains no status:",
+        console.warn("DataMart response contains no status:", {
           reference,
           providerOrder
-        );
+        });
         return;
       }
 
       const status = statusMap[rawStatus] || rawStatus;
 
-      // Re-read storage because another function may have updated
-      // the order while the network request was running.
-      orders = getSavedOrders();
-      index = findMatchingOrder(orders);
+      // Re-read storage after the network request.
+      const orders = getSavedOrders();
+      const index = findMatchingOrder(orders);
 
       if (index === -1) {
         console.warn(
-          " Saved Order disappeared from storage:",
-          reference
+          "Provider status received, but no matching local order exists:",
+          { reference, status }
         );
+
+        // Continue briefly in case the order is saved asynchronously.
         return;
       }
 
@@ -2638,23 +2616,24 @@ function startDataMartAutoPolling(providerReference) {
         latestOrder.status || ""
       ).trim().toLowerCase();
 
-      // Respect terminal status updates from another process.
+      // Never overwrite a terminal status with an older provider response.
       if (terminalStatuses.has(latestStatus)) {
-        stopPolling();
+        stopPolling("Order already has a terminal status:");
         return;
       }
 
       const updatedOrder = {
         ...latestOrder,
         provider: "datamart",
-        providerOrderReference: reference,
+        providerOrderReference:
+          latestOrder.providerOrderReference || reference,
         status,
+        providerStatus: rawStatus,
         updatedAt: Date.now()
       };
 
       orders[index] = updatedOrder;
 
-      // Persist the same sorted list that the table should display.
       const sortedOrders =
         typeof sortLiveOrders === "function"
           ? sortLiveOrders(orders)
@@ -2665,7 +2644,6 @@ function startDataMartAutoPolling(providerReference) {
         JSON.stringify(sortedOrders)
       );
 
-      // IMPORTANT: renderLiveOrderRow accepts ONE order, not an array.
       if (typeof renderLiveOrderRow === "function") {
         renderLiveOrderRow(updatedOrder);
       }
@@ -2682,7 +2660,7 @@ function startDataMartAutoPolling(providerReference) {
         loadActiveBadge();
       }
 
-      console.log("Live auto status update:", {
+      console.log("DataMart status updated:", {
         reference,
         previousStatus: latestStatus,
         providerStatus: rawStatus,
@@ -2690,10 +2668,10 @@ function startDataMartAutoPolling(providerReference) {
       });
 
       if (terminalStatuses.has(status)) {
-        stopPolling();
+        stopPolling("Terminal order status reached:");
       }
     } catch (error) {
-      console.error("Live auto-polling error:", {
+      console.error("DataMart polling error:", {
         reference,
         message: error.message
       });
@@ -2702,12 +2680,14 @@ function startDataMartAutoPolling(providerReference) {
     }
   }
 
-  // Register before the first request to prevent duplicate pollers.
+  // Register the poller before making the first request.
   dataMartPollingTimers.set(reference, stopPolling);
 
-  // Check immediately, then every 10 seconds.
+  // Create the interval before the first asynchronous check.
+  timer = setInterval(checkStatus, POLLING_INTERVAL_MS);
+
+  // First status check happens immediately.
   checkStatus();
-  timer = setInterval(checkStatus, 10000);
 }
 
 
@@ -2902,6 +2882,7 @@ function sortLiveOrders(orders) {
 const MANUAL_DATAMART_PAYMENT_REFERENCES = [
   "T722189380499497",
   "T708013691490490",
+  "T845658004075839"
  
 ];
 
