@@ -1729,17 +1729,12 @@ strong, b { font-size: inherit; }
 .eco-home-table-body {
   width: 100%;
   min-width: 0;
-  overflow-y: auto;
-  position: relative;
- 
 }
 
 .eco-home-order-rows {
   width: 100%;
   min-width: 860px;
-  height: 28rem;
-  display: flex;
-  align-items: center;
+  
  
 }
 
