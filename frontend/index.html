@@ -58,6 +58,7 @@
   })();
 </script>
 
+<link rel="stylesheet" href="new-ui-style.css">
 
   <link rel="stylesheet" href="app.css">
   <link rel="stylesheet" href="store.css">
@@ -576,8 +577,14 @@
   <!---CARD CONTAINER------>
   <section class="card-container">
 
+ 
+
+
+
+ 
+
   <!----WELCOME HERO---->
-  <section class="welcome-hero ">
+  <section class="welcome-hero " >
 
       <!---welcome=card---->
     <div id="sk-Welcome" class="sk-welcome-card">
@@ -845,7 +852,7 @@
           </h5>
         </div>
         <!---close-time-btom--->
-        <div class="time-close">
+        <div class="time-close" style="display:none;">
           <span >Active 24/7</span>
           <img style="width: 1.4rem; height: 1.4rem;" src="./css/icons/timer.png" alt="" loading="lazy"> 
         </div>
@@ -867,22 +874,10 @@
       </div>
   </div>
         </div>
-        <div class="whb-right-bottom">
+        <div class="whb-right-bottom" >
             <div class="endR" >
-        <div class="endS" style="display: none;">
-          <img src="./css/uiIcons/star.png" alt="" loading>
-          <img src="./css/uiIcons/star.png" alt="" loading>
-          <img src="./css/uiIcons/star.png" alt="" loading>
-          <img src="./css/uiIcons/star.png" alt="" loading>
-          <img src="./css/uiIcons/star.png" alt="" loading>
-        </div>
 
-        
-
-
-        <div class="clockr">
-            <div  id="clock"></div>
-        </div>
+       
       
       </div>
         </div>
@@ -1661,122 +1656,270 @@
 
 
         
+<!-- ==========================================
+     ECODATA DELIVERY TRACKER 1
+========================================== -->
+<section id="deliveryTracker1" class="eco-delivery-status-panel" style="display: none;">
 
-  <!-------DELIVERY TRACKER 1---->
-  <section id='deliveryTracker1' class="delivery-indicator" style='display: none;'>
-   <div id="sk-deliverTracker1" class="sk-delivery-indicator-container">
-    <div class="sk-indicator-left">
-      <span class="sk" style="width: 30px; height: 30px;
-      border-radius: 50%; margin-top: 1rem;"></span>  
+  <div id="sk-deliverTracker1" class="eco-delivery-skeleton" style="display: none;">
+    <div class="eco-delivery-skeleton-symbol">
+      <span class="eco-delivery-shimmer eco-delivery-shimmer-circle"></span>
     </div>
-    <div class="sk-indicator-right">
-      <div class="sk-indicator-right-top">
-        <span class="sk" style="width:96%; height:38px;margin-right: 7px;"></span>  
+    <div class="eco-delivery-skeleton-content">
+      <span class="eco-delivery-shimmer eco-delivery-shimmer-line eco-delivery-line-wide"></span>
+      <span class="eco-delivery-shimmer eco-delivery-shimmer-line eco-delivery-line-short"></span>
+    </div>
+  </div>
+
+  <div class="eco-delivery-status-card">
+
+    <header class="eco-delivery-card-heading">
+      <div class="eco-delivery-heading-symbol">
+        <i class="ri-truck-line" aria-hidden="true"></i>
       </div>
-      <div class="sk-indicator-right-bottom">
-        <span class="sk" style="width:96%; height:38px;margin-right: 7px;"></span> 
+
+      <div class="eco-delivery-heading-text">
+        <span class="eco-delivery-eyebrow">NETWORK STATUS</span>
+        <h3>Delivery Updates</h3>
       </div>
-    </div>
-   </div>
 
+      <div class="eco-delivery-status-indicator">
+        <span id="deliveryBubble1" class="eco-delivery-status-dot fast"></span>
+      </div>
+    </header>
 
-    <div class="left-side-indicator">
-      <div class="delivery-status">
-  <span id="deliveryBubble1" class="delivery-bubble fast">
-  </span>
-    </div>
-    </div>
-    <div class="indicator-top">
-      <p id="deliveryMessage">
+    <div class="eco-delivery-status-content">
+
+      <p id="deliveryMessage" class="eco-delivery-status-message">
         MTN is delivering slightly slow right now.
         Your order will still be delivered.
-        <i class="ri-checkbox-line"></i>
+        <i class="ri-checkbox-line" aria-hidden="true"></i>
       </p>
-      
-      <h3>Last (batch) delivered in: <small id="deliveryTime"> </small></h3>
 
-      <small>
-        <i class="ri-timer-line"></i>
-        Last order delivered In: 
-        <span id='actualDateWithTime'></span>
-      </small>
-    </div>
-  </section>
-  
+      <div class="eco-delivery-highlight">
+        <div class="eco-delivery-highlight-icon">
+          <i class="ri-timer-line" aria-hidden="true"></i>
+        </div>
 
-
-
-
-  <!--DELIVERY TRACKER 2----->
-  <section id="deliveryTracker2" class='indicator-bottom'style='display: none;'>
-
-     <div id="sk-deliverTracker2" class="sk-delivery-indicator-container2">
-    <div class="sk-indicator-left">
-      <span class="sk" style="width: 30px; height: 30px;
-      border-radius: 50%; margin-top: 1rem;"></span>  
-    </div>
-    <div class="sk-indicator-right">
-      <div class="sk-indicator-right-top">
-        <span class="sk" style="width:96%; height:38px;margin-right: 7px;"></span>  
-      </div>
-      <div class="sk-indicator-right-bottom">
-        <span class="sk" style="width:96%; height:38px;margin-right: 7px;"></span> 
-      </div>
-    </div>
-   </div>
-
-   <div class="turnAround">
-
-      <div class="turnAround-top">
-
-    <div class="left-side-indicator">
-      <div class="delivery-status">
-      <span id="deliveryBubble2" class="delivery-bubble fast">
-      </span>
-    </div>
-    </div>
-     <div class="right-side-ttop">
-         <div class="side-ttop-wraper">
-          
-          <div class="ttop-wrap-top">
-               <div class="flexi" style='display: flex; width: 100%; height: max-content; align-items: center; gap: .3rem; padding-top: .1rem;'>
-                 <i style="font-weight: 300;" class="ri-timer-line"></i>
-              Current OrderTurnAround (last batch): about 
-               </div>
-              <p id="turnAroundTime"></p>
-          </div>
-
-          <div class="ttop-wrap-btom">
-            Last order estimatedDeliveryTime: 
-             <div class="estimata">
-              placedAt: 
-            <p id='placedAtTime'></p> 
-             </div>
-            <div class="estimator">
-              delivered In: <p id="deliveredAtTime"></p> 
-            </div>
-          </div>
-          </div>
-     </div>
-   
-      </div>
-      
-
-      <div class="turnAround-bottom">
-        <div class="around-wrapper">
-          Last delivered 
-         <p id='lastDelivered'>
-          Loading...</p>
-          <i class="ri-checkbox-line"></i>
+        <div class="eco-delivery-highlight-details">
+          <span class="eco-delivery-field-label">Last batch delivery time</span>
+          <h3><small id="deliveryTime"></small></h3>
         </div>
       </div>
+
+      <div class="eco-delivery-last-update">
+        <i class="ri-history-line" aria-hidden="true"></i>
+        <span>Last order delivered:</span>
+        <strong id="actualDateWithTime"></strong>
       </div>
 
- 
-   
-  </section>
+    </div>
+  </div>
+</section>
 
-  <!--DELIVERY INDICATOR-->
+
+<!-- ==========================================
+     ECODATA DELIVERY TRACKER 2
+========================================== -->
+<section id="deliveryTracker2" class="eco-delivery-turnaround-panel" style="display: none;">
+
+  <div id="sk-deliverTracker2" class="eco-delivery-skeleton" style="display: none;">
+    <div class="eco-delivery-skeleton-symbol">
+      <span class="eco-delivery-shimmer eco-delivery-shimmer-circle"></span>
+    </div>
+    <div class="eco-delivery-skeleton-content">
+      <span class="eco-delivery-shimmer eco-delivery-shimmer-line eco-delivery-line-wide"></span>
+      <span class="eco-delivery-shimmer eco-delivery-shimmer-line eco-delivery-line-short"></span>
+    </div>
+  </div>
+
+  <div class="eco-delivery-turnaround-card">
+
+    <header class="eco-delivery-card-heading">
+      <div class="eco-delivery-heading-symbol">
+        <i class="ri-pulse-line" aria-hidden="true"></i>
+      </div>
+
+      <div class="eco-delivery-heading-text">
+        <span class="eco-delivery-eyebrow">ORDER MONITOR</span>
+        <h3>Delivery Turnaround</h3>
+      </div>
+
+      <div class="eco-delivery-status-indicator">
+        <span id="deliveryBubble2" class="eco-delivery-status-dot fast"></span>
+      </div>
+    </header>
+
+    <div class="eco-delivery-turnaround-content">
+
+      <div class="eco-delivery-turnaround-summary">
+        <div class="eco-delivery-turnaround-label">
+          <i class="ri-timer-line" aria-hidden="true"></i>
+          <span>Current turnaround for the last batch</span>
+        </div>
+
+        <p id="turnAroundTime" class="eco-delivery-turnaround-value"></p>
+      </div>
+
+      <div class="eco-delivery-time-grid">
+
+        <article class="eco-delivery-time-card">
+          <span class="eco-delivery-time-heading">
+            <i class="ri-calendar-check-line" aria-hidden="true"></i>
+            Order placed
+          </span>
+
+          <div class="eco-delivery-time-detail">
+            <span>Placed at</span>
+            <p id="placedAtTime"></p>
+          </div>
+        </article>
+
+        <article class="eco-delivery-time-card">
+          <span class="eco-delivery-time-heading">
+            <i class="ri-checkbox-circle-line" aria-hidden="true"></i>
+            Delivery time
+          </span>
+
+          <div class="eco-delivery-time-detail">
+            <span>Delivered in</span>
+            <p id="deliveredAtTime"></p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <footer class="eco-delivery-completion">
+      <div class="eco-delivery-completion-symbol">
+        <i class="ri-check-double-line" aria-hidden="true"></i>
+      </div>
+
+      <div class="eco-delivery-completion-text">
+        <span>Last delivered order</span>
+        <p id="lastDelivered">Loading...</p>
+      </div>
+
+      <i class="ri-checkbox-line eco-delivery-completion-check" aria-hidden="true"></i>
+    </footer>
+
+  </div>
+</section>
+
+
+<!-- ==========================================
+     ECODATA IMPORTANT NOTICE BOARD
+========================================== -->
+<section class="eco-notice-panel">
+
+  <div class="eco-notice-decoration" aria-hidden="true">
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+  </div>
+
+  <div class="eco-notice-grid-decoration" style="display: none;"></div>
+
+  <div id="sk-Notice" class="eco-notice-skeleton">
+    <span class="eco-notice-shimmer eco-notice-shimmer-title"></span>
+    <span class="eco-notice-shimmer"></span>
+    <span class="eco-notice-shimmer"></span>
+    <span class="eco-notice-shimmer"></span>
+    <span class="eco-notice-shimmer"></span>
+    <span class="eco-notice-shimmer"></span>
+    <span class="eco-notice-shimmer"></span>
+  </div>
+
+  <header class="eco-notice-heading">
+    <div class="eco-notice-heading-symbol">
+      <i class="ri-notification-3-line" aria-hidden="true"></i>
+    </div>
+
+    <div class="eco-notice-heading-copy">
+      <span class="eco-notice-eyebrow">PLEASE READ</span>
+      <h4>Important Notes</h4>
+    </div>
+
+    <span class="eco-notice-live-label">
+      <span></span>
+      Updates
+    </span>
+  </header>
+
+  <div class="eco-notice-list">
+
+    <!-- Retained hidden notice -->
+    <div class="eco-notice-item" style="display: none;">
+      <small>
+        <span>1</span>
+        You Can buy Special Mashup at lower cost
+        <strong>AnyTime!</strong>
+        The first <small>10 packages are Mash-Data packages.</small>
+        The dashboard will read both bundle and mashup orders attached with
+        <strong>( GB or MINS )</strong>, note that its just a tag.
+      </small>
+    </div>
+
+    <article class="eco-notice-item">
+      <span class="eco-notice-number">01</span>
+      <div class="eco-notice-message">
+        <strong>We're active 24/7</strong>
+        <p>Buy data bundles anytime. There is no daily closing time.</p>
+      </div>
+      <i class="ri-time-line eco-notice-item-symbol" aria-hidden="true"></i>
+    </article>
+
+    <!-- Retained hidden fee notice -->
+    <div class="eco-notice-item" style="display: none;">
+      <small>
+        <span>2</span>
+        Bundle finalPrice is calculated with <strong>(1.95%)</strong>
+        of <strong>Paystack Fee.</strong>
+      </small>
+    </div>
+
+    <article class="eco-notice-item">
+      <span class="eco-notice-number">02</span>
+      <div class="eco-notice-message">
+        <strong>Website loading</strong>
+        <p>
+          Our services run on Render. If the website displays
+          “Application Loading”, please wait a few seconds and try again.
+        </p>
+      </div>
+      <i class="ri-global-line eco-notice-item-symbol" aria-hidden="true"></i>
+    </article>
+
+    <article class="eco-notice-item eco-notice-mobile-item">
+      <span class="eco-notice-number">03</span>
+      <div class="eco-notice-message">
+        <strong>Install EcoData on your device</strong>
+        <p>Follow the steps to add the website to your home screen for easier access.</p>
+      </div>
+      <i class="ri-smartphone-line eco-notice-item-symbol" aria-hidden="true"></i>
+    </article>
+
+    <article class="eco-notice-item eco-notice-mobile-item">
+      <span class="eco-notice-number">04</span>
+      <div class="eco-notice-message">
+        <strong>Confirm your MoMo payment</strong>
+        <p>
+          After a successful MoMo payment, click
+          <strong>“I have completed the payment”</strong> when prompted.
+        </p>
+      </div>
+      <i class="ri-secure-payment-line eco-notice-item-symbol" aria-hidden="true"></i>
+    </article>
+
+  </div>
+
+  <footer class="eco-notice-footer">
+    <i class="ri-shield-check-line" aria-hidden="true"></i>
+    <span>Thank you for choosing EcoData.</span>
+  </footer>
+
+</section>
+
+
 
 
 
@@ -1840,76 +1983,9 @@
   
   
 
+ 
 
-  <!---NOTICE BOARD=-CONTAINER-->
-  <section class="notice-container"  style="background: transparent !important;">
-    <!-- Animated background particles----->
-    <div class="particles">
-      <span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span>
-    </div>
-      <div class="grid-overlay" style="display: none;"></div>
-
-    
-    <!-- Notice Board Skeleton -->  
-    <div id="sk-Notice" class="sk-notice">  
-      <span class="sk" style="width:140px;height:16px;"></span>  
-        <span class="sk" style="width:100%;height:13px;"></span>  
-        <span class="sk" style="width:100%;height:13px;"></span>  
-        <span class="sk" style="width:100%;height:13px;"></span>  
-        <span class="sk" style="width:100%;height:13px;"></span>  
-        <span class="sk" style="width:100%;height:13px;"></span>  
-        <span class="sk" style="width:100%;height:13px;"></span>  
-    </div>  
-
-
-
-
-
-
-    <div class="notice-tag">
-      <div class="notice-text">
-        <h4>Important Notes</h4>
-      
-      </div>
-    </div>
-
-      <!----NOTICE-->
-      <div class="notice-board" style="border-radius: 0 !important;">
-        
-        <div class="notice-top" style="display: none;">
-          <small><span>1</span>You Can buy Special Mashup at lower cost <strong>AnyTime!</strong>
-          The first <small> 10 packages are Mash-Data packages.</small>
-          The dashboard will read both bundle and mashup orders attached with <strong>( GB or MINS ) </strong>, note that its just a tag.
-          </small>
-        </div>
-
-         <div class="notice-top" >
-          <small><span>1</span>You Can buy Data  <strong>AnyTime!</strong>
-         no closing. <strong>We are Active 24/7 </strong>
-          </small>
-        </div>
-
-         <div class="notice-top" style="display: none;">
-          <small><span>2</span>Bundle finalPrice is calculated with <strong> ( 1.95% ) </strong> of <strong>Paystack Fee.</strong>
-          </small>
-        </div>
-
-        <div class="notice-top">
-          <small><span>2</span>Our services are running on <span>Render</span> <strong>that ensures security, and</strong> if you encounter <strong> Application Loading,</strong> please exercise patience.</small>
-        </div>
-      
-      
-
-          <div class="notice-top lapNone">
-          <small><span>3</span><strong>Follow The Steps to Install the App</strong> by adding to home screen.</small>
-        </div>
-
-        <div class="notice-top lapNone">
-          <small><span>4</span>Don't forget to click, <strong>"I have completed the payment"</strong> after successful <strong>Momo payment. </strong>That is <strong>(Very important).</strong></small>
-        </div>
-      </div>
-  </section>
+ 
 
 
 
@@ -2004,353 +2080,444 @@
   </div>
 
 
+<!-- ==========================================
+     ECODATA SOCIAL FOLLOW & SHARE BAR
+========================================== -->
+<section class="eco-home-social-panel">
 
-  <!----PERSISTENT-CARD-(ALWAYS-VISIBLE)--->
-  <!-- LIVE ORDER CONTAINER -->
-  <section class="follow-share-container" >
-    <div id="sk-follow-share" class="sk-follow-share-container">
-      <div class="sk-fsc-left">
-        <div class="sk-fsc-left-left">
-            <span class="sk" style="width:56%;height:32px; margin-right: 16px;"></span>  
-        </div>
-        <div class="sk-fsc-left-right">
-          <span class="sk" style="width:156%;height:32px; border-radius: 1rem;"></span>
-        </div>
-      </div>
-      <div class="sk-fsc-right">
-        <span class="sk" style="width:54%;height:32px;"></span>
+  <div id="sk-follow-share" class="eco-home-social-skeleton">
+    <div class="eco-home-social-skeleton-left">
+      <span class="eco-home-shimmer" style="width:56%;height:32px;"></span>
+      <span class="eco-home-shimmer" style="width:100%;height:32px;border-radius:16px;"></span>
+    </div>
+    <div class="eco-home-social-skeleton-right">
+      <span class="eco-home-shimmer" style="width:54%;height:32px;"></span>
+    </div>
+  </div>
+
+  <div class="eco-home-social-content">
+
+    <div class="eco-home-social-label">
+      <span class="eco-home-social-icon">
+        <i class="ri-heart-3-line" aria-hidden="true"></i>
+      </span>
+      <div>
+        <small>Stay connected</small>
+        <strong>Follow EcoData</strong>
       </div>
     </div>
-  <div class="social-follow">
-    <div class="follow-left">
-    <small>Click to Follow :</small>
-    </div>
 
-    <div id="rightBarFollow"  >
+    <div id="rightBarFollow" class="eco-home-social-actions">
 
-
-      <a href="https://whatsapp.com/channel/0029VbBgYfqAzNbpoZDtnq3o" class="channel-link-tag">
-      <button class="whatsapp-channel">
-        <img src="./css/icons/whats.png" alt="facebook-logo" loading="lazy">
-        WhatsApp Channel</button>
+      <a href="https://whatsapp.com/channel/0029VbBgYfqAzNbpoZDtnq3o"
+         class="eco-home-channel-link">
+        <button type="button" class="eco-home-whatsapp-button">
+          <img src="./css/icons/whats.png" alt="" loading="lazy">
+          <span>WhatsApp Channel</span>
+          <i class="ri-arrow-up-right-line" aria-hidden="true"></i>
+        </button>
       </a>
 
+      <a style="display:none;"
+         href="https://chat.whatsapp.com/LwhZNOyUQsJIGTQRL9cIXT?mode=hqrt3">
+        <img src="./css/icons/whats.png" alt="" loading="lazy">
+      </a>
 
+      <a style="display:none;"
+         href="https://m.me/cm/AbZ-WlUIuuVhFZKK/?send_source=cm%3Acopy_invite_link">
+        <img src="./css/icons/messenger.png" alt="" loading="lazy">
+      </a>
 
+      <a style="display:none;"
+         href="http://www.facebook.com/share/1NTDoNJtGW/">
+        <img src="./css/icons/faceb.png" alt="" loading="lazy">
+      </a>
 
-      <a style="display: none;" href="https://chat.whatsapp.com/LwhZNOyUQsJIGTQRL9cIXT?mode=hqrt3" > <img src="./css/icons/whats.png" alt="facebook-logo" loading="lazy"></a>
-
-  <a href="https://m.me/cm/AbZ-WlUIuuVhFZKK/?send_source=cm%3Acopy_invite_link" style="display: none;"> <img class="meg" src="./css/icons/messenger.png" alt="facebook-logo" loading="lazy"></a>
-
-    <a style="display: none;" class="fab" href="http://www.facebook.com/share/1NTDoNJtGW/"> <img src="./css/icons/faceb.png" alt="facebook-logo" loading="lazy"></a>
-
-      <a style="display: none;" href="https://www.tiktok.com/@ecodata247?_r=1&_d=ei9853mf1g8eec&sec_uid=MS4wLjABAAAAiY9nBAfFbpbd7KRl0y4-JTcRL0WMtPt9Pr-FKt__N-hQvmFZLhhInTTpn7Y5oRos&share_author_id=7484812520763950088&sharer_language=en&source=h5_m&u_code=ejcbk20728bd87&utm_source=copy&utm_campaign=client_share&share_link_id=d9108b99-2843-43f1-8f6c-ed4b72ea3264&share_app_id=1340&ugbiz_name=Account&lang=en&user_id=7484812520763950088&sec_user_id=MS4wLjABAAAAiY9nBAfFbpbd7KRl0y4-JTcRL0WMtPt9Pr-FKt__N-hQvmFZLhhInTTpn7Y5oRos&enable_checksum=1"><img class="tikop" src="./css/icons/tiktok.png" alt="facebook-logo"></a>
-
+      <a style="display:none;"
+         href="https://www.tiktok.com/@ecodata247?_r=1&_d=ei9853mf1g8eec&sec_uid=MS4wLjABAAAAiY9nBAfFbpbd7KRl0y4-JTcRL0WMtPt9Pr-FKt__N-hQvmFZLhhInTTpn7Y5oRos&share_author_id=7484812520763950088&sharer_language=en&source=h5_m&u_code=ejcbk20728bd87&utm_source=copy&utm_campaign=client_share&share_link_id=d9108b99-2843-43f1-8f6c-ed4b72ea3264&share_app_id=1340&ugbiz_name=Account&lang=en&user_id=7484812520763950088&sec_user_id=MS4wLjABAAAAiY9nBAfFbpbd7KRl0y4-JTcRL0WMtPt9Pr-FKt__N-hQvmFZLhhInTTpn7Y5oRos&enable_checksum=1">
+        <img src="./css/icons/tiktok.png" alt="" loading="lazy">
+      </a>
 
     </div>
-  </div>
 
-  <!----SHARE-BTN-->
-  <div class="pls-share">
-  <button id="shareBtn" title="Share EcoData">
-    <i class="ri-share-forward-line"></i>
-  </button>
-  </div>
-  </section>
-
-
-  
-  <!---dashboard totals 0ver view-->
-  <div class="daily-analytics">
-    <div id="sk-daily" class="sk-daily-analytics">
-      <span class="sk" style="width:56%;height:20px; "></span>  
+    <div class="eco-home-share-area">
+      <button id="shareBtn"
+              class="eco-home-share-button"
+              type="button"
+              title="Share EcoData"
+              aria-label="Share EcoData">
+        <i class="ri-share-forward-line" aria-hidden="true"></i>
+      </button>
     </div>
+
+  </div>
+</section>
+
+
+<!-- ==========================================
+     DASHBOARD ANALYTICS HEADING
+========================================== -->
+<header class="eco-home-analytics-heading">
+
+  <div id="sk-daily" class="eco-home-analytics-skeleton">
+    <span class="eco-home-shimmer" style="width:56%;height:20px;"></span>
+  </div>
+
+  <div class="eco-home-section-heading-icon">
+    <i class="ri-bar-chart-box-line" aria-hidden="true"></i>
+  </div>
+
+  <div class="eco-home-section-heading-copy">
+    <span class="eco-home-section-eyebrow">YOUR ACTIVITY</span>
     <h4>Daily Analytics Overview</h4>
+    <p>A quick summary of your data bundle orders.</p>
+  </div>
+</header>
+
+
+<!-- ==========================================
+     DASHBOARD TOTALS
+========================================== -->
+<div id="homepageTotals"
+     class="eco-home-totals-panel"
+     style="background:transparent !important;">
+
+  <div id="sk-totals" class="eco-home-totals-skeleton">
+    <span class="eco-home-shimmer"></span>
+    <span class="eco-home-shimmer"></span>
+    <span class="eco-home-shimmer"></span>
+    <span class="eco-home-shimmer"></span>
   </div>
 
-  <!----TOTAL -CONTAINER-CARD-->
-  <div id="homepageTotals" class="totals-container" style="background: transparent !important;">
-
-    <div id="sk-totals" class="sk-totals-container">
-      <span class="sk" style="width:88%;height:5rem; margin-right:3px; "></span>  
-
-      <span class="sk" style="width:88%;height:5rem; margin-right:3px;"></span>  
-
-      <span class="sk" style="width:88%;height:5rem; margin-right:3px; "></span>  
-
-      <span class="sk" style="width:88%;height:5rem; margin-right:3px; "></span>  
+  <!-- TOTAL ORDERS -->
+  <article class="eco-home-total-card eco-home-orders-card">
+    <div class="eco-home-total-heading">
+      <span class="eco-home-total-icon">
+        <i class="ri-shopping-cart-2-line" aria-hidden="true"></i>
+      </span>
+      <span class="eco-home-total-caption">Total Orders</span>
     </div>
 
-  <!-- Total Orders -->
-<div class="total-card" style="background: #fff;">
-
-  <div class="total-card-top">
-    <small>Total Orders</small>
-    <i class="ri-shopping-cart-2-line total-card-icon"></i>
-  </div>
-
-  <div class="total-card-bottom">
-
-
-      <div class="total-performance">
-      <p id="totalOrders">0</p>
-    </div>
-
-    <div class="card-performance" id="ordersPerformance">
-      <!-- JS will insert performance here -->
-    </div>
-  </div>
-
-</div>
-
-
-<!-- Total Data -->
-<div class="total-card">
-
-  <div class="total-card-top">
-    <small>Total Data</small>
-    <i class="ri-database-2-line total-card-icon"></i>
-  </div>
-
-  <div class="total-card-bottom">
-    <div class="total-performance">
-      <p id="totalGB">0</p>
-    </div>
-
-    <div class="card-performance" id="dataPerformance">
-      <!-- JS will insert performance here -->
-    </div>
-  </div>
-
-</div>
-
-
-<!-- Pending Orders -->
-<div class="total-card">
-
-  <div class="total-card-top">
-    <small>Pending Orders</small>
-    <i class="ri-time-line total-card-icon"></i>
-  </div>
-
-  <div class="total-card-bottom">
-    
-     <div class="total-performance">
-     <p id="pendingTotal">0</p>
-    </div>
-
-    <div class="card-performance" id="pendingPerformance">
-      <!-- JS will insert performance here -->
-    </div>
-  </div>
-
-</div>
-
-
-<!-- Completed Orders -->
-<div class="total-card">
-
-  <div class="total-card-top">
-    <small>Completed Orders</small>
-    <i class="ri-checkbox-circle-line total-card-icon"></i>
-  </div>
-
-  <div class="total-card-bottom">
-   
-
-    <div class="total-performance">
-      <p id="completedOrders">0</p>
-    </div>
-
-    <div class="card-performance" id="completedPerformance">
-      <!-- JS will insert performance here -->
-    </div>
-  </div>
-
-</div>
-
-
-  </div>
-  <!---ends-->
-
-
-
-
- <section class="table-section ">
-  <div id="sk-table" class="sk-table-container">
-    <div class="sk-table-top">
-      <div class="sk-tt-top">
-         <span class="sk" style="width:56%;height:20px; "></span>  
+    <div class="eco-home-total-main">
+      <div class="eco-home-total-value">
+        <p id="totalOrders">0</p>
       </div>
-      <div class="sk-tt-btom">
-         <span class="sk" style="width:20%;height:16px; border-radius: 3px; "></span> 
-         <span class="sk" style="width:20%;height:16px; border-radius: 3px;  "></span> 
-         <span class="sk" style="width:20%;height:16px; border-radius: 3px;  "></span> 
-         <span class="sk" style="width:20%;height:16px; border-radius: 3px;  "></span> 
+      <div class="eco-home-total-performance" id="ordersPerformance">
+        <!-- Existing JavaScript inserts performance here -->
       </div>
     </div>
-    <div class="sk-table-body">
-       <span class="sk" style="width:91%;height:20px; border-radius: 5px;  "></span> 
-       <span class="sk" style="width:91%;height:20px; border-radius: 5px;  "></span> 
 
-       <span class="sk" style="width:91%;height:20px; border-radius: 5px;  "></span> 
+    <span class="eco-home-total-bottom-label">All recorded orders</span>
+  </article>
 
-       <span class="sk" style="width:91%;height:20px; border-radius: 5px;  "></span> 
-       <span class="sk" style="width:91%;height:20px; border-radius: 5px;  "></span> 
-
-       <span class="sk" style="width:91%;height:20px; border-radius: 5px;  "></span> 
-
-       <span class="sk" style="width:91%;height:20px; border-radius: 5px;  "></span> 
-
-       <span class="sk" style="width:91%;height:20px; border-radius: 5px;  "></span> 
-
-       <span class="sk" style="width:91%;height:20px; border-radius: 5px;  "></span> 
-
-       <span class="sk" style="width:91%;height:20px; border-radius: 5px;  "></span> 
-
-       <span class="sk" style="width:91%;height:20px; border-radius: 5px;  "></span> 
-      
+  <!-- TOTAL DATA -->
+  <article class="eco-home-total-card eco-home-data-card">
+    <div class="eco-home-total-heading">
+      <span class="eco-home-total-icon">
+        <i class="ri-database-2-line" aria-hidden="true"></i>
+      </span>
+      <span class="eco-home-total-caption">Total Data</span>
     </div>
-  </div>
-   <!-- Orders Table Skeleton -->  
 
-  <div class="table-title">
-    <p>Orders History</p>
+    <div class="eco-home-total-main">
+      <div class="eco-home-total-value">
+        <p id="totalGB">0</p>
+      </div>
+      <div class="eco-home-total-performance" id="dataPerformance">
+        <!-- Existing JavaScript inserts performance here -->
+      </div>
+    </div>
+
+    <span class="eco-home-total-bottom-label">Data bundle volume</span>
+  </article>
+
+  <!-- PENDING ORDERS -->
+  <article class="eco-home-total-card eco-home-pending-card">
+    <div class="eco-home-total-heading">
+      <span class="eco-home-total-icon">
+        <i class="ri-time-line" aria-hidden="true"></i>
+      </span>
+      <span class="eco-home-total-caption">Pending Orders</span>
+    </div>
+
+    <div class="eco-home-total-main">
+      <div class="eco-home-total-value">
+        <p id="pendingTotal">0</p>
+      </div>
+      <div class="eco-home-total-performance" id="pendingPerformance">
+        <!-- Existing JavaScript inserts performance here -->
+      </div>
+    </div>
+
+    <span class="eco-home-total-bottom-label">Awaiting completion</span>
+  </article>
+
+  <!-- COMPLETED ORDERS -->
+  <article class="eco-home-total-card eco-home-completed-card">
+    <div class="eco-home-total-heading">
+      <span class="eco-home-total-icon">
+        <i class="ri-checkbox-circle-line" aria-hidden="true"></i>
+      </span>
+      <span class="eco-home-total-caption">Completed Orders</span>
+    </div>
+
+    <div class="eco-home-total-main">
+      <div class="eco-home-total-value">
+        <p id="completedOrders">0</p>
+      </div>
+      <div class="eco-home-total-performance" id="completedPerformance">
+        <!-- Existing JavaScript inserts performance here -->
+      </div>
+    </div>
+
+    <span class="eco-home-total-bottom-label">Successfully completed</span>
+  </article>
+
+</div>
+
+
+<!-- ==========================================
+     ORDER HISTORY TABLE
+========================================== -->
+<section class="eco-home-orders-section">
+
+  <!-- Table loading skeleton -->
+  <div id="sk-table" class="eco-home-table-skeleton">
+
+    <div class="eco-home-table-skeleton-heading">
+      <span class="eco-home-shimmer" style="width:56%;height:20px;"></span>
+    </div>
+
+    <div class="eco-home-table-skeleton-columns">
+      <span class="eco-home-shimmer"></span>
+      <span class="eco-home-shimmer"></span>
+      <span class="eco-home-shimmer"></span>
+      <span class="eco-home-shimmer"></span>
+    </div>
+
+    <div class="eco-home-table-skeleton-rows">
+      <span class="eco-home-shimmer"></span>
+      <span class="eco-home-shimmer"></span>
+      <span class="eco-home-shimmer"></span>
+      <span class="eco-home-shimmer"></span>
+      <span class="eco-home-shimmer"></span>
+      <span class="eco-home-shimmer"></span>
+      <span class="eco-home-shimmer"></span>
+      <span class="eco-home-shimmer"></span>
+      <span class="eco-home-shimmer"></span>
+      <span class="eco-home-shimmer"></span>
+      <span class="eco-home-shimmer"></span>
+    </div>
+
   </div>
-  <div class="content-wrapper">
-    <div class="table-scroll-area">
-      <!-- TABLE HEADER -->
-      <div class="table-header">
-        <span>Order-ID</span>
+
+  <header class="eco-home-orders-heading">
+    <div class="eco-home-orders-heading-symbol">
+      <i class="ri-file-list-3-line" aria-hidden="true"></i>
+    </div>
+
+    <div class="eco-home-orders-heading-copy">
+      <span class="eco-home-section-eyebrow">YOUR TRANSACTIONS</span>
+      <h4>Orders History</h4>
+      <p>Review your recent bundle orders and their status.</p>
+    </div>
+  </header>
+
+  <div class="eco-home-table-frame">
+    <div class="eco-home-table-scroll">
+
+      <div class="eco-home-table-header">
+        <span>Order ID</span>
         <span>Recipient</span>
         <span>Size</span>
         <span>Status</span>
         <span>Network</span>
         <span>Paid?</span>
-        <span>Date-Submitted</span>
+        <span>Date Submitted</span>
       </div>
 
-      <div class="main-row-content">
-        <div class="row-wrapper" id="liveOrderRows">
+      <div class="eco-home-table-body">
+        <div class="eco-home-order-rows" id="liveOrderRows">
           <p id="empty-body" hidden>No recent orders yet</p>
-          <!-- dynamic rows -->
+          <!-- Existing JavaScript inserts dynamic order rows here -->
         </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+<!-- END ECODATA DASHBOARD OVERVIEW -->
+
+
+
+
+
+ <!-- ==========================================
+     ECODATA OFFER SELECTOR
+========================================== -->
+<section class="eco-offer-section">
+
+  <!-- Loading skeleton -->
+  <div id="sk-mode-btn" class="eco-offer-loading">
+    <div class="eco-offer-loading-heading">
+      <span class="eco-offer-shimmer" style="width:60%;height:46px;"></span>
+      <span class="eco-offer-shimmer" style="width:94%;height:26px;"></span>
+    </div>
+
+    <div class="eco-offer-loading-content">
+      <div class="eco-offer-loading-select">
+        <span class="eco-offer-shimmer" style="width:80%;height:46px;"></span>
+      </div>
+
+      <div class="eco-offer-loading-preview">
+        <span class="eco-offer-shimmer" style="width:80%;height:136px;"></span>
       </div>
     </div>
   </div>
-</section>
-  <!-- ends -->
 
-  <!----dashboard-overview-->
-
-
-
-
-
-   <!----NORMALVIEW-SECTION-->
-  <section class="normalGrid-container">
-    <div id="sk-mode-btn" class="sk-mode-btn-container">
-      <div class="sk-mode-top">
-         <span class="sk" style="width:60%;height:46px; border-radius: 3px; margin-right: 13px;"></span>
-          <span class="sk" style="width:94%;height:26px; margin-right: 13px; border-radius: 3px; "></span>
-      </div>
-      <div class="sk-mode-bottom">
-        <div class="sk-mode-btom-top">
-           <span class="sk" style="width:80%;height:46px; border-radius: 10px;margin-top: .5rem;"></span>
-        </div>
-        <div class="sk-mode-btom-bottom">
-           <span class="sk" style="width:80%;height:136px; border-radius: 1rem;margin-top: .5rem;"></span>
-        </div>
-      </div>
+  <!-- Section heading -->
+  <header class="eco-offer-heading">
+    <div class="eco-offer-heading-icon">
+      <i class="ri-sim-card-line" aria-hidden="true"></i>
     </div>
 
-
-    <div class="titlen" style="gap:0.52rem;">
-      <div class="mtn-offers-title"><h2 >Select MTN Offer</h2>
-      </div>
-    <div class="choose-offer"> 
-      <small>Choose from available MTN data offers</small>
-    </div>
-    <div class="old-user">
-      Old user? place it on MTN ALL VERIFIED...
-    </div>
+    <div class="eco-offer-heading-copy">
+      <span class="eco-offer-eyebrow">CHOOSE YOUR BUNDLE</span>
+      <h2>Select MTN Offer</h2>
+      <p>Choose from available MTN data offers</p>
     </div>
 
+    <div class="eco-offer-user-tip" style="display: none;">
+      <i class="ri-information-line" aria-hidden="true"></i>
+      <span>Old user? Place your order under MTN ALL VERIFIED NUMBERS.</span>
+    </div>
+  </header>
 
+  <!-- Offer dropdown -->
+  <div class="eco-offer-selector">
 
+    <button type="button" class="eco-offer-selector-button" id="selectBtn">
+      <span class="eco-offer-selector-leading">
+        <span class="eco-offer-selector-icon">
+          <i class="ri-wifi-line" aria-hidden="true"></i>
+        </span>
 
-    <!---offer-select-options-->
-    <div class="custom-select">
-    <button class="select-btn" id="selectBtn">
-      Select Available MTN Offer
-    
-      <span><img src="./css/icons/more.png.png" alt="dropdown" loading="lazy"></span>
+        <span class="eco-offer-selector-label">
+          <small>AVAILABLE OFFERS</small>
+          <strong>Select Available MTN Offer</strong>
+        </span>
+      </span>
+
+      <span class="eco-offer-selector-chevron">
+        <i class="ri-arrow-down-s-line" aria-hidden="true"></i>
+      </span>
     </button>
 
-    <div class="select-dropdown" id="dropdownOffer">
-      <!--normal---->
-      <div class="optionDelevery" data-mode="normal" >
-        <span >MTN DATA NORMAL DELIVERY 
-        
+    <div class="eco-offer-dropdown" id="dropdownOffer">
+
+      <div class="eco-offer-option" data-mode="normal">
+        <span class="eco-offer-option-icon">
+          <i class="ri-truck-line" aria-hidden="true"></i>
         </span>
-        <small>NON-EXPIRY</small>
-      </div>
-      <!---express-->
-      <div class="optionDelevery" data-mode="express" style="display: none;">
-        <span>MTN DATA EXPRESS DELIVERY 
-        
+        <span class="eco-offer-option-copy">
+          <strong>MTN DATA NORMAL DELIVERY</strong>
+          <small>NON-EXPIRY</small>
         </span>
-        <small>NON-EXPIRY</small>
+        <i class="ri-arrow-right-s-line eco-offer-option-arrow" aria-hidden="true"></i>
       </div>
 
-        <!---express-->
-      <div class="optionDelevery" data-mode="numbers" style="display: none;">
-        <span>MTN ALL VERIFIED NUMBERS
-        
+      <div class="eco-offer-option" data-mode="express" >
+        <span class="eco-offer-option-icon">
+          <i class="ri-flashlight-line" aria-hidden="true"></i>
         </span>
-        <small>NON-EXPIRY</small>
-      </div>
-      <!---Special-Mashup-->
-        <div class="optionDelevery" data-mode="mashup" style="display: none">
-        <span>SPECIAL MASHUP-BUNDLE 
+        <span class="eco-offer-option-copy">
+          <strong>MTN DATA EXPRESS DELIVERY</strong>
+          <small>NON-EXPIRY</small>
         </span>
-        <small>VOICE-MINS</small>
+        <i class="ri-arrow-right-s-line eco-offer-option-arrow" aria-hidden="true"></i>
       </div>
+
+      <div class="eco-offer-option" data-mode="numbers" >
+        <span class="eco-offer-option-icon">
+          <i class="ri-shield-check-line" aria-hidden="true"></i>
+        </span>
+        <span class="eco-offer-option-copy">
+          <strong>MTN ALL VERIFIED NUMBERS</strong>
+          <small>NON-EXPIRY</small>
+        </span>
+        <i class="ri-arrow-right-s-line eco-offer-option-arrow" aria-hidden="true"></i>
+      </div>
+
+      <div class="eco-offer-option" data-mode="mashup" style="display:none;">
+        <span class="eco-offer-option-icon">
+          <i class="ri-phone-line" aria-hidden="true"></i>
+        </span>
+        <span class="eco-offer-option-copy">
+          <strong>SPECIAL MASHUP-BUNDLE</strong>
+          <small>VOICE-MINS</small>
+        </span>
+        <i class="ri-arrow-right-s-line eco-offer-option-arrow" aria-hidden="true"></i>
+      </div>
+
     </div>
+
     <div id="offerDisplay"></div>
   </div>
 
-  <!----choose grid 0r normal btns-->
-  <div class="normalOrgridBtn-wrapping">
-    <div class="normalOrgridBtn">
-    <div class="mode-btn-wrapper">
-      
-      <button class="mode-Btn active " id="normalModeBtn"><img src="./css/icons/list (1).png" alt="" loading="lazy"> List</button>
-       <button class="mode-Btn " id="gridModeBtn"><img src="./css/icons/grid.png" alt="" loading="lazy"> Grid</button>
-   
-    </div>
+  <!-- List and grid view controls -->
+  <div class="eco-offer-view-panel">
+
+    <div class="eco-offer-view-controls">
+      <span class="eco-offer-view-caption">DISPLAY STYLE</span>
+
+      <div class="eco-offer-view-switch">
+        <button type="button" class="eco-offer-view-button active" id="normalModeBtn">
+          <i class="ri-list-check-2" aria-hidden="true"></i>
+          <span>List</span>
+        </button>
+
+        <button type="button" class="eco-offer-view-button" id="gridModeBtn">
+          <i class="ri-grid-line" aria-hidden="true"></i>
+          <span>Grid</span>
+        </button>
+      </div>
     </div>
 
-    <div class="pack-wrapper">
-      <div class="packages active">
-      <small></small>
-    <p id="bundleTitle">MTN Bundles</p>
-    </div>
+    <!-- Bundle category tabs -->
+    <div class="eco-offer-category-tabs">
 
-    <div class=" packagesta">
-      <small></small>
-    <p  id="teleAirtel">Telecel & <span class="tigoo">AirtelTigo</span></p>
-    </div>
-    </div>
-  
+      <div class="eco-offer-category-tab active packages" style="display: none;">
+        <span class="eco-offer-category-icon">
+          <i class="ri-database-2-line" aria-hidden="true"></i>
+        </span>
+        <span class="eco-offer-category-copy" style="display: none;">
+          <small>AVAILABLE BUNDLES</small>
+          <p id="bundleTitle">MTN Bundles</p>
+        </span>
+        <i class="ri-arrow-right-s-line eco-offer-category-arrow" aria-hidden="true"></i>
+      </div>
 
+      <div class="eco-offer-category-tab packagesta" style="display: none;">
+        <span class="eco-offer-category-icon">
+          <i class="ri-sim-card-2-line" aria-hidden="true"></i>
+        </span>
+        <span class="eco-offer-category-copy" style="display: none;">
+          <small>OTHER NETWORKS</small>
+          <p id="teleAirtel">Telecel & <span class="eco-offer-airtel-label tigoo">AirtelTigo</span></p>
+        </span>
+        <i class="ri-arrow-right-s-line eco-offer-category-arrow" aria-hidden="true"></i>
+      </div>
+
+    </div>
   </div>
-  </section>
-  <!-----INDIVIDUAL SECTIONS-VIEW TOGGLE---->
+
+</section>
+<!-- END ECODATA OFFER SELECTOR -->
  
 
   <section id="normalView" class="view active " >
-  <div id="sk-normalView" class="sk-normalView-container">
+  <div id="sk-normalView" class="sk-normalView-container" style="display: none;">
     <div class="sk-normal-tp-wrapper">
        <div class="sk-normal-top">
           <span class="sk" style="width:70px;height:70px; border-radius: 40%; "></span>
@@ -2436,521 +2603,627 @@
       <h2>MTN DATA BUNDLE</h2>
       <button class="packs">14 Packages Available</button>
     </div>
-    <div class="single-order" id="onlyShowBtomNavSection">
+  <div class="eco-bundle-order" id="onlyShowBtomNavSection">
 
-      <small class="bundleRecipient">Bundle Recipient Number</small>
-      <!---phone-input-here-->
-      <input class="normalInput" type="tel" placeholder=" 0241234567">
-      <small class="sel">Bundle</small>
+  <label class="eco-bundle-label" for="ecoBundleRecipient">
+    Bundle Recipient Number
+  </label>
 
-      <div class="custom-option">
-        <!---visible-btn-->
-        <button class="selection-btn" id="optionBtn">
-      Select bundle
-       <span>
-        <img src="./css/icons/more.png.png" alt="dropdown" loading="lazy">
-       </span>
+  <div class="eco-bundle-phone-wrap">
+    <i class="ri-smartphone-line eco-bundle-phone-icon"></i>
+    <input
+      id="ecoBundleRecipient"
+      class="eco-bundle-phone-input normalInput"
+      type="tel"
+      placeholder="0241234567"
+      inputmode="tel"
+      autocomplete="tel"
+    >
+  </div>
+
+  <small class="eco-bundle-field-label">Select your bundle</small>
+
+  <div class="eco-bundle-picker">
+
+    <button
+      class="eco-bundle-picker-button"
+      id="optionBtn"
+      type="button"
+      aria-expanded="false"
+      aria-controls="moveDown"
+    >
+      <span class="eco-bundle-picker-leading">
+        <span class="eco-bundle-picker-icon">
+          <i class="ri-database-2-line"></i>
+        </span>
+        <span class="eco-bundle-picker-copy">
+          <strong>Select bundle</strong>
+          <small>Choose your preferred data size</small>
+        </span>
+      </span>
+
+      <i class="ri-arrow-down-s-line eco-bundle-picker-chevron"></i>
     </button>
-    <!----option-card-->
-    <div class="dropwrapper">
-      <div class="option-dropdown" id="moveDown">
+
+    <div class="eco-bundle-dropdown-shell">
+      <div class="eco-bundle-dropdown" id="moveDown">
+
+        <!---==============MTN PROMO========================-->
+        <div class="eco-bundle-options" id="promoActive">
+
+          <div class="eco-bundle-option eco-bundle-option--active"
+            data-network="mtn" data-value="1GB" data-size="1" data-price="4.40">
+            <span class="eco-bundle-option-size">1GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 4.40</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="2GB" data-size="2" data-price="9.50">
+            <span class="eco-bundle-option-size">2GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 9.50</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="3GB" data-size="3" data-price="13.95">
+            <span class="eco-bundle-option-size">3GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 13.95</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="4GB" data-size="4" data-price="18.70">
+            <span class="eco-bundle-option-size">4GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 18.70</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="5GB" data-size="5" data-price="23.90">
+            <span class="eco-bundle-option-size">5GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 23.90</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="6GB" data-size="6" data-price="27.40">
+            <span class="eco-bundle-option-size">6GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 27.40</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="7GB" data-size="7" data-price="37.96"
+            style="display:none;">
+            <span class="eco-bundle-option-size">7GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 37.96</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="8GB" data-size="8" data-price="36.30">
+            <span class="eco-bundle-option-size">8GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 36.30</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="9GB" data-size="9" data-price="43.40"
+            style="display:none;">
+            <span class="eco-bundle-option-size">9GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 43.99</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="10GB" data-size="10" data-price="43.40">
+            <span class="eco-bundle-option-size">10GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 43.40</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="12GB" data-size="12" data-price="62.70"
+            style="display:none;">
+            <span class="eco-bundle-option-size">12GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 62.70</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="15GB" data-size="15" data-price="62.70">
+            <span class="eco-bundle-option-size">15GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 62.70</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="20GB" data-size="20" data-price="82.50">
+            <span class="eco-bundle-option-size">20GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 82.50</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="25GB" data-size="25" data-price="102.80">
+            <span class="eco-bundle-option-size">25GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 102.80</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="30GB" data-size="30" data-price="124.50">
+            <span class="eco-bundle-option-size">30GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 124.50</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="40GB" data-size="40" data-price="161.70">
+            <span class="eco-bundle-option-size">40GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 161.70</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="50GB" data-size="50" data-price="204.40">
+            <span class="eco-bundle-option-size">50GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 204.40</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+        </div>
+        <!---==============MTN PROMO========================-->
+
+
+        <!---=================MTN NORMAL ===================-->
+        <div class="eco-bundle-options" id="topOpt">
+
+          <div class="eco-bundle-option eco-bundle-option--active"
+            data-network="mtn" data-value="1GB" data-size="1" data-price="4.40">
+            <span class="eco-bundle-option-size">1GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 4.40</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="2GB" data-size="2" data-price="9.50">
+            <span class="eco-bundle-option-size">2GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 9.50</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="3GB" data-size="3" data-price="13.95">
+            <span class="eco-bundle-option-size">3GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 13.95</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="4GB" data-size="4" data-price="18.70">
+            <span class="eco-bundle-option-size">4GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 18.70</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="5GB" data-size="5" data-price="23.90">
+            <span class="eco-bundle-option-size">5GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 23.90</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="6GB" data-size="6" data-price="27.40">
+            <span class="eco-bundle-option-size">6GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 27.40</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="7GB" data-size="7" data-price="37.96"
+            style="display:none;">
+            <span class="eco-bundle-option-size">7GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 37.96</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="8GB" data-size="8" data-price="36.30">
+            <span class="eco-bundle-option-size">8GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 36.30</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="9GB" data-size="9" data-price="43.40"
+            style="display:none;">
+            <span class="eco-bundle-option-size">9GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 43.99</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="10GB" data-size="10" data-price="43.40">
+            <span class="eco-bundle-option-size">10GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 43.40</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="12GB" data-size="12" data-price="62.70"
+            style="display:none;">
+            <span class="eco-bundle-option-size">12GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 62.70</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="15GB" data-size="15" data-price="62.70">
+            <span class="eco-bundle-option-size">15GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 62.70</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="20GB" data-size="20" data-price="82.50">
+            <span class="eco-bundle-option-size">20GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 82.50</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="25GB" data-size="25" data-price="102.80">
+            <span class="eco-bundle-option-size">25GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 102.80</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="30GB" data-size="30" data-price="124.50">
+            <span class="eco-bundle-option-size">30GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 124.50</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="40GB" data-size="40" data-price="161.70">
+            <span class="eco-bundle-option-size">40GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 161.70</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="50GB" data-size="50" data-price="204.40">
+            <span class="eco-bundle-option-size">50GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 204.40</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+        </div>
+        <!---=================MTN NORMAL ===================-->
+
+        <!--=================MTN EXPRESS====================-->
+         <div class="eco-bundle-options" id="bottomOpt" style="display: none;">
+          <div class="eco-bundle-option eco-bundle-option--active"
+            data-network="mtn" data-value="1GB" data-size="1" data-price="5.65">
+            <span class="eco-bundle-option-size">1GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 5.65</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="2GB" data-size="2" data-price="11.50">
+            <span class="eco-bundle-option-size">2GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 11.50</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="3GB" data-size="3" data-price="17.20">
+            <span class="eco-bundle-option-size">3GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 17.20</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="4GB" data-size="4" data-price="21.60">
+            <span class="eco-bundle-option-size">4GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 21.60</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="5GB" data-size="5" data-price="26.30">
+            <span class="eco-bundle-option-size">5GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 26.30</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="6GB" data-size="6" data-price="32.99">
+            <span class="eco-bundle-option-size">6GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 32.99</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="8GB" data-size="8" data-price="40.99">
+            <span class="eco-bundle-option-size">8GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 40.99</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="10GB" data-size="10" data-price="46.20">
+            <span class="eco-bundle-option-size">10GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 46.20</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="15GB" data-size="15" data-price="69.97">
+            <span class="eco-bundle-option-size">15GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 69.97</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="20GB" data-size="20" data-price="92.98">
+            <span class="eco-bundle-option-size">20GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 92.98</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+
+          
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="25GB" data-size="25" data-price="112.97">
+            <span class="eco-bundle-option-size">25GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 112.97</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+          
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="30GB" data-size="30" data-price="132.97">
+            <span class="eco-bundle-option-size">30GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 132.97</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+
+          
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="40GB" data-size="40" data-price="171.99">
+            <span class="eco-bundle-option-size">40GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 171.99</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+
+
+          
+          <div class="eco-bundle-option"
+            data-network="mtn" data-value="50GB" data-size="50" data-price="218.98">
+            <span class="eco-bundle-option-size">50GB</span>
+            <span class="eco-bundle-option-details">
+              <small>Data bundle</small>
+              <strong>GH₵ 218.98</strong>
+            </span>
+            <i class="ri-check-line eco-bundle-option-check"></i>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Selected bundle summary -->
+  <div class="eco-bundle-summary">
+
+    <div class="eco-bundle-summary-header">
+      <div class="eco-bundle-summary-heading">
+        <span class="eco-bundle-summary-icon">
+          <i class="ri-checkbox-circle-fill"></i>
+        </span>
+        <div class="eco-bundle-summary-title">
+          <strong>Order summary</strong>
+          <small>Your selected bundle</small>
+        </div>
+      </div>
+
+      <small class="eco-bundle-summary-network" id="networkTextContent"></small>
+    </div>
+
+    <div class="eco-bundle-summary-main">
+      <div class="eco-bundle-summary-size">
+        <small>Selected data</small>
+        <strong id="placeHolderGB"></strong>
+      </div>
+
+      <div class="eco-bundle-summary-price">
+        <small>Total amount</small>
+        <strong id="placeHolderPriceTotal"></strong>
+      </div>
+    </div>
+
+    <div class="eco-bundle-summary-footer">
+      <span>Total to pay</span>
+      <strong id="totalAmountText"></strong>
+    </div>
+
+  </div>
+
+  <button id="placeOrderBtn" class="eco-bundle-order-button" type="button">
+    <i class="ri-shopping-cart-line eco-bundle-order-cart"></i>
+    <span>Place Order</span>
+    <i class="ri-arrow-right-line eco-bundle-order-arrow"></i>
+  </button>
+
+</div>
+
+    
+
 
    
 
-  <!----PROMO-DIV-START----->
-  <div id="promoActive">
-        <!---select-1-->
-      <div class="optionSelect active" 
-    data-network="mtn"
-    data-value="1GB"
-    data-size="1"
-    data-price="4.40">
-        <span>1GB</span>
-        <small>GHS 4.40</small>
-      </div>
-      <!---select-2-->
-      <div class="optionSelect" 
-    data-network="mtn"
-    data-value="2GB"
-    data-size="2"
-    data-price="9.50">
-        <span>2GB</span>
-        <small>GHS 9.50</small>
-      </div>
-      <!---select-3-->
-      <div class="optionSelect" 
-    data-network="mtn"
-    data-value="3GB"
-    data-size="3"
-    data-price="13.95">
-        <span>3GB</span>
-        <small>GHS 13.95</small>
-      </div>
-      <!---select-4-->
-        <div class="optionSelect" 
-    data-network="mtn"
-    data-value="4GB"
-    data-size="4"
-    data-price="18.70">
-        <span>4GB</span>
-        <small>GHS 18.70</small>
-      </div>
-      <!---select-5-->
-      <div class="optionSelect"
-    data-network="mtn"
-    data-value="5GB"
-    data-size="5"
-    data-price="23.90">
-        <span>5GB</span>
-        <small>GHS 23.90</small>
-      </div>
-      <!---select-6-->
-      <div class="optionSelect" 
-    data-network="mtn"
-    data-value="6GB"
-    data-size="6"
-    data-price="27.40">
-        <span>6GB</span>
-        <small>GHS 27.40</small>
-      </div>
-      <!---select-7-->
-        <div class="optionSelect"
-    data-network="mtn"
-    data-value="7GB"
-    data-size="7"
-    data-price="37.96"
-    style="display:none;"
-    >
-        <span>7GB</span>
-        <small>GHS 37.96</small>
-      </div>
-      <!---select-8-->
-      <div class="optionSelect" 
-    data-network="mtn"
-    data-value="8GB"
-    data-size="8"
-    data-price="36.30">
-        <span>8GB</span>
-        <small>GHS 36.30</small>
-      </div>
-      <!---select-9-->
-       <div class="optionSelect" 
-    data-network="mtn"
-    data-value="9GB"
-    data-size="9"
-    data-price="43.40" style="display: none;"
-    >
-        <span>9GB</span>
-        <small>GHS 43.99</small>
-      </div>
-      <!---select-10-->
-        <div class="optionSelect" 
-    data-network="mtn"
-    data-value="10GB"
-    data-size="10"
-    data-price="43.40">
-        <span>10GB</span>
-        <small>GHS 43.40</small>
-      </div>
-      <!---select-11-->
-      <div class="optionSelect" 
-    data-network="mtn"
-    data-value="12GB"
-    data-size="12"
-    data-price="62.70"
-    style="display: none;"
-    >
-        <span>12GB</span>
-        <small>GHS 62.70</small>
-      </div>
-      <!---select-12-->
-      <div class="optionSelect" 
-    data-network="mtn"
-    data-value="15GB"
-    data-size="15"
-    data-price="62.70">
-        <span>15GB</span>
-        <small>GHS 62.70</small>
-      </div>
-      <!---select-13-->
-      <div class="optionSelect" 
-    data-network="mtn"
-    data-value="20GB"
-    data-size="20"
-    data-price="82.50">
-        <span>20GB</span>
-        <small>GHS 82.50</small>
-      </div>
-      <!---select-14-->
-      <div class="optionSelect" 
-    data-network="mtn"
-    data-value="25GB"
-    data-size="25"
-    data-price="102.80">
-        <span>25GB</span>
-        <small>GHS 102.80</small>
-      </div>
-      <!---select-15-->
-      <div class="optionSelect" 
-    data-network="mtn"
-    data-value="30GB"
-    data-size="30"
-    data-price="124.50">
-        <span>30GB</span>
-        <small>GHS 124.50</small>
-      </div>
-      <!---select-16-->
-      <div class="optionSelect" 
-    data-network="mtn"
-    data-value="40GB"
-    data-size="40"
-    data-price="161.70">
-        <span>40GB</span>
-        <small>GHS 161.70</small>
-      </div>
-      <!---select-17-->
-      <div class="optionSelect"
-    data-network="mtn"
-    data-value="50GB"
-    data-size="50"
-    data-price="204.40">
-        <span>50GB</span>
-        <small>GHS 204.40</small>
-      </div>
-      <!---select-ends-->
-  </div>
-  <!---PROMO-DIV-ENDS-->
-  
-
-
-
-  <!-----NORMAL-DELIVERY-PRICE-DIV------>
-      <div id="topOpt">
-        <!---select-1-->
-      <div class="optionSelect active" 
-    data-network="mtn"
-    data-value="1GB"
-    data-size="1"
-    data-price="4.40">
-        <span>1GB</span>
-        <small>GHS 4.40</small>
-      </div>
-      <!---select-2-->
-      <div class="optionSelect" 
-    data-network="mtn"
-    data-value="2GB"
-    data-size="2"
-    data-price="9.50">
-        <span>2GB</span>
-        <small>GHS 9.50</small>
-      </div>
-      <!---select-3-->
-      <div class="optionSelect" 
-    data-network="mtn"
-    data-value="3GB"
-    data-size="3"
-    data-price="13.95">
-        <span>3GB</span>
-        <small>GHS 13.95</small>
-      </div>
-      <!---select-4-->
-        <div class="optionSelect" 
-    data-network="mtn"
-    data-value="4GB"
-    data-size="4"
-    data-price="18.70">
-        <span>4GB</span>
-        <small>GHS 18.70</small>
-      </div>
-      <!---select-5-->
-      <div class="optionSelect"
-    data-network="mtn"
-    data-value="5GB"
-    data-size="5"
-    data-price="23.90">
-        <span>5GB</span>
-        <small>GHS 23.90</small>
-      </div>
-      <!---select-6-->
-      <div class="optionSelect" 
-    data-network="mtn"
-    data-value="6GB"
-    data-size="6"
-    data-price="27.40">
-        <span>6GB</span>
-        <small>GHS 27.40</small>
-      </div>
-      <!---select-7-->
-        <div class="optionSelect"
-    data-network="mtn"
-    data-value="7GB"
-    data-size="7"
-    data-price="37.96"
-    style="display:none;"
-    >
-        <span>7GB</span>
-        <small>GHS 37.96</small>
-      </div>
-      <!---select-8-->
-      <div class="optionSelect" 
-    data-network="mtn"
-    data-value="8GB"
-    data-size="8"
-    data-price="36.30">
-        <span>8GB</span>
-        <small>GHS 36.30</small>
-      </div>
-      <!---select-9-->
-       <div class="optionSelect" 
-    data-network="mtn"
-    data-value="9GB"
-    data-size="9"
-    data-price="43.40" style="display: none;"
-    >
-        <span>9GB</span>
-        <small>GHS 43.99</small>
-      </div>
-      <!---select-10-->
-        <div class="optionSelect" 
-    data-network="mtn"
-    data-value="10GB"
-    data-size="10"
-    data-price="43.40">
-        <span>10GB</span>
-        <small>GHS 43.40</small>
-      </div>
-      <!---select-11-->
-      <div class="optionSelect" 
-    data-network="mtn"
-    data-value="12GB"
-    data-size="12"
-    data-price="62.70"
-    style="display: none;"
-    >
-        <span>12GB</span>
-        <small>GHS 62.70</small>
-      </div>
-      <!---select-12-->
-      <div class="optionSelect" 
-    data-network="mtn"
-    data-value="15GB"
-    data-size="15"
-    data-price="62.70">
-        <span>15GB</span>
-        <small>GHS 62.70</small>
-      </div>
-      <!---select-13-->
-      <div class="optionSelect" 
-    data-network="mtn"
-    data-value="20GB"
-    data-size="20"
-    data-price="82.50">
-        <span>20GB</span>
-        <small>GHS 82.50</small>
-      </div>
-      <!---select-14-->
-      <div class="optionSelect" 
-    data-network="mtn"
-    data-value="25GB"
-    data-size="25"
-    data-price="102.80">
-        <span>25GB</span>
-        <small>GHS 102.80</small>
-      </div>
-      <!---select-15-->
-      <div class="optionSelect" 
-    data-network="mtn"
-    data-value="30GB"
-    data-size="30"
-    data-price="124.50">
-        <span>30GB</span>
-        <small>GHS 124.50</small>
-      </div>
-      <!---select-16-->
-      <div class="optionSelect" 
-    data-network="mtn"
-    data-value="40GB"
-    data-size="40"
-    data-price="161.70">
-        <span>40GB</span>
-        <small>GHS 161.70</small>
-      </div>
-      <!---select-17-->
-      <div class="optionSelect"
-    data-network="mtn"
-    data-value="50GB"
-    data-size="50"
-    data-price="204.40">
-        <span>50GB</span>
-        <small>GHS 204.40</small>
-      </div>
-      <!---select-ends-->
-      </div>
-  <!---NORMAL--DELIVERY-PRICE-DIV-ENDS--->
-
-
-        <!----EXPRESS-DELIVERY-PRICE-DIV----->
-        <div id="bottomOpt" style="display: none;">
-                <!---select-1-->
-      <div class="optionSelect active" 
-    data-network="mtn"
-    data-value="1GB"
-    data-size="1"
-    data-price="5.65">
-        <span>1GB</span>
-        <small>GHS 5.65</small>
-      </div>
-      <!---select-2-->
-      <div class="optionSelect" 
-    data-network="mtn"
-    data-value="2GB"
-    data-size="2"
-    data-price="11.50">
-        <span>2GB</span>
-        <small>GHS 11.50</small>
-      </div>
-      <!---select-3-->
-      <div class="optionSelect" 
-    data-network="mtn"
-    data-value="3B"
-    data-size="3"
-    data-price="17.20">
-        <span>3GB</span>
-        <small>GHS 17.20</small>
-      </div>
-      <!---select-4-->
-        <div class="optionSelect" 
-    data-network="mtn"
-    data-value="4GB"
-    data-size="4"
-    data-price="21.60">
-        <span>4GB</span>
-        <small>GHS 21.60</small>
-      </div>
-      <!---select-5-->
-      <div class="optionSelect"
-    data-network="mtn"
-    data-value="5GB"
-    data-size="5"
-    data-price="26.30">
-        <span>5GB</span>
-        <small>GHS 26.30</small>
-      </div>
-      <!---select-6-->
-      <div class="optionSelect" 
-    data-network="mtn"
-    data-value="6GB"
-    data-size="6"
-    data-price="32.99">
-        <span>6GB</span>
-        <small>GHS 32.99</small>
-      </div>
-      <!---select-7-->
-        <div class="optionSelect"
-    data-network="mtn"
-    data-value="7GB"
-    data-size="7"
-    data-price="37.97" style='display: none;'>
-        <span>7GB</span>
-        <small>GHS 37.97</small>
-      </div>
-      <!---select-8-->
-      <div class="optionSelect" 
-    data-network="mtn"
-    data-value="8GB"
-    data-size="8"
-    data-price="40.99">
-        <span>8GB</span>
-        <small>GHS 40.99</small>
-      </div>
-      <!---select-9-->
-       <div class="optionSelect" 
-    data-network="mtn"
-    data-value="9GB"
-    data-size="9"
-    data-price="44.99" style="display: none;">
-        <span>9GB</span>
-        <small>GHS 44.99</small>
-      </div>
-      <!---select-10-->
-        <div class="optionSelect" 
-    data-network="mtn"
-    data-value="10GB"
-    data-size="10"
-    data-price="46.20">
-        <span>10GB</span>
-        <small>GHS 46.20</small>
-      </div>
-      <!---select-11-->
-      <div class="optionSelect" 
-    data-network="mtn"
-    data-value="12GB"
-    data-size="12"
-    data-price="61.99" style='display: none;'>
-        <span>12GB</span>
-        <small>GHS 61.99</small>
-      </div>
-      <!---select-12-->
-      <div class="optionSelect" 
-    data-network="mtn"
-    data-value="15GB"
-    data-size="15"
-    data-price="69.97">
-        <span>15GB</span>
-        <small>GHS 69.97</small>
-      </div>
-      <!---select-13-->
-      <div class="optionSelect" 
-    data-network="mtn"
-    data-value="20GB"
-    data-size="20"
-    data-price="92.98">
-        <span>20GB</span>
-        <small>GHS 92.98</small>
-      </div>
-      <!---select-14-->
-      <div class="optionSelect" 
-    data-network="mtn"
-    data-value="25GB"
-    data-size="25"
-    data-price="112.99">
-        <span>25GB</span>
-        <small>GHS 112.99</small>
-      </div>
-      <!---select-15-->
-      <div class="optionSelect" 
-    data-network="mtn"
-    data-value="30GB"
-    data-size="30"
-    data-price="132.97">
-        <span>30GB</span>
-        <small>GHS 132.97</small>
-      </div>
-      <!---select-16-->
-      <div class="optionSelect" 
-    data-network="mtn"
-    data-value="40GB"
-    data-size="40"
-    data-price="171.99">
-        <span>40GB</span>
-        <small>GHS 171.99</small>
-      </div>
-      <!---select-17-->
-      <div class="optionSelect"
-    data-network="mtn"
-    data-value="50GB"
-    data-size="50"
-    data-price="218.98">
-        <span>50GB</span>
-        <small>GHS 218.98</small>
-      </div>
-      <!---select-ends-->
-        </div>
-        <!----EXPRESS-DELIVERY-PRICE-DIV------>
-
         
         <!----MASHUP-DIV----->
-        <div id="mash" >
+        <div id="mash" style="display: none;">
            <!---select-1-->
           <div class="optionSelect active"
           data-network="mtn"
@@ -3079,53 +3352,11 @@
         </div>
         <!---MASHUP--DIV------>
 
-    </div>
-    </div>
-
-
-    <!---selected-bundle-modal-here--->
-    <div class="selectedModal">
-      <div class="selectedModal-top">
-        <div class="selectedModal-top-left-content">
-          <div class='spanImgContent'>
-            <img src="./css/icons/completed.png" alt="selectedData" loading="lazy"></div>
-          <div class="gb-contentText"><small id="placeHolderGB"></small></div>
-        </div>
-        <div class="selectedModal-top-right-content">
-          <small id='networkTextContent'></small>
-        </div>
-      </div>
-
-
-
-      <div class="selectedModal-bottom">
-        <div class="selectedModal-bottom-leftTotal">
-          <small id="totalAmountText"></small>
-        </div>
-        <div class="selectedModal-bottom-leftTotalAmout">
-          <small id="placeHolderPriceTotal"></small>
-        </div>
-      </div>
-
-      </div>
-
-    </div>
-
-    <!---buy-btn-->
-      <button id="placeOrderBtn" class="buy-btn place-telbtn">
-        <i class="ri-shopping-cart-line buyCart"></i>
-      Place Order
-      </button>
-      </div>
-
-    
-
-
       <!----SINGLE CARD FOOTER---->
 
    
     
-     <section class="businessInfo">
+     <section class="businessInfo" style="display: none;">
       <div class="businessInfo-right">
           <p style="text-align:center;color:#888;font-size:10px ;">© 2026 Ecodata. All rights reserved.
         </p>
