@@ -3811,33 +3811,43 @@ function getStatusIcon(status) {
 }
 
 
-// ===========================
-// FUNCTION LOAD ACTIVE BADGE
-// ==========================
-
- function loadActiveBadge(){
-  const orders = 
-  JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
-
-  const activeOrderCount = orders.filter(ord => 
-    ord.status === "pending" || 
-    ord.status === "processing");
-
-    const activeBag = document.getElementById("activeBadge");
-
-  if(activeOrderCount.length === 0){
-    activeBag.style.display = "none";
-    unActivateTrackers();
-    return;
+function loadActiveBadge() {
+  let orders = [];
+  try {
+    const parsed = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY) || "[]");
+    orders = Array.isArray(parsed) ? parsed : [];
+  } catch (e) {
+    console.error("loadActiveBadge: bad storage", e);
   }
 
-  
-  activeBag.style.display = "flex";
+  const activeCount = orders.filter(ord => {
+    const s = String(ord.status || "").trim().toLowerCase();
+    return s === "pending" || s === "processing";
+  }).length;
 
-  activeBag.textContent = activeOrderCount.length;
-  activateTrackers();
+  const activeBag = document.getElementById("activeBadge");
+
+  if (activeBag) {
+    if (activeCount === 0) {
+      activeBag.style.display = "none";
+    } else {
+      activeBag.style.display = "flex";
+      activeBag.textContent = activeCount;
+    }
+  } else {
+    console.warn("loadActiveBadge: #activeBadge not found");
+  }
+
+  try {
+    if (activeCount === 0) {
+      if (typeof unActivateTrackers === "function") unActivateTrackers();
+    } else if (typeof activateTrackers === "function") {
+      activateTrackers();
+    }
+  } catch (e) {
+    console.error("Tracker toggle failed:", e);
+  }
 }
-
 
 // ================================
 // FUNCTION LOAD ACTIVE BADGE ENDS
