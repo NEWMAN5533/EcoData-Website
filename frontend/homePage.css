@@ -1368,7 +1368,6 @@ border: 1px solid rgb(235, 235, 235);
     height:12px;
     border-radius:50%;
     position: absolute;
-    top: -1.4rem !important;
     position:relative;
     animation: pulseByTime 1.8s infinite;
 }
@@ -1446,7 +1445,6 @@ border: 1px solid rgb(235, 235, 235);
     height:12px;
     border-radius:50%;
     position: absolute;
-    top: -1.4rem !important;
     position:relative;
     animation: pulseByTime 1.8s infinite;
 }
