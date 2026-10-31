@@ -14,11 +14,35 @@ p {
 }
 
 
+html{
+  font-size: 14px !important;
+}
 
-/* =====================================================
-   ECODATA DELIVERY & NOTICE SYSTEM
-   New class names | Existing IDs preserved
-===================================================== */
+
+/* Heading font sizes */
+h1 { font-size: 2rem; }
+h2 { font-size: 1.75rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1.125rem; }
+h6 { font-size: 1rem; }
+
+/* Small and strong */
+small { font-size: 0.875rem; }
+strong, b { font-size: inherit; }
+
+/* Font-size utilities */
+.text-xs   { font-size: 0.75rem; }
+.text-sm   { font-size: 0.875rem; }
+.text-base { font-size: 1rem; }
+.text-lg   { font-size: 1.125rem; }
+.text-xl   { font-size: 1.25rem; }
+.text-2xl  { font-size: 1.5rem; }
+.text-3xl  { font-size: 1.875rem; }
+.text-4xl  { font-size: 2.25rem; }
+.text-5xl  { font-size: 3rem; }
+
+
 
 /* ======================================================
    ECODATA DESIGN SYSTEM — LIGHT MODE
@@ -96,7 +120,7 @@ p {
   --eco-home-page: var(--afa-page);
   --eco-home-green: var(--afa-green);
   --eco-home-radius: 18px;
-  --box-sh-card: 0 2px 6px rgba(0, 0, 0, 0.2);
+  --box-sh-card: 0 2px 6px rgba(0, 0, 0, 0.02);
 
   /* ----------------------------------
      OFFER SELECTOR
@@ -123,7 +147,7 @@ p {
   --eco-bundle-page: #f7f8fa;
   --eco-bundle-green: #16834a;
   --eco-bundle-radius: 18px;
-  --eco-bundle-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  --eco-bundle-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
 
   /* ----------------------------------
      MTN HERO
@@ -223,7 +247,7 @@ p {
   --eco-home-surface: var(--afa-surface);
   --eco-home-page: var(--afa-page);
   --eco-home-green: var(--afa-green);
-  --box-sh-card: 0 2px 6px rgba(0, 0, 0, 0.2);
+  --box-sh-card: 0 2px 6px rgba(0, 0, 0, 0.02);
 
   /* ----------------------------------
      OFFER SELECTOR
@@ -250,7 +274,7 @@ p {
   --eco-bundle-page: var(--afa-page);
   --eco-bundle-green: var(--afa-green);
   --eco-bundle-radius: 18px;
-  --eco-bundle-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  --eco-bundle-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
 
   /* ----------------------------------
      MTN HERO
@@ -367,13 +391,13 @@ p {
   height: 11px;
   background: #f5a623;
   border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
 }
 
 /* Support existing status classes on the bubble elements. */
 .eco-delivery-status-dot.fast {
   background: #f5a623;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
 }
 
 .eco-delivery-status-dot.slow {
@@ -2267,27 +2291,6 @@ p {
 
 /* Dropdown options */
 
-.eco-offer-dropdown {
-  display: none;
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  z-index: 30;
-  width: 100%;
-  max-height: 330px;
-  padding: 8px;
-  overflow-y: auto;
-  background: var(--eco-offer-surface);
-  border: 1px solid var(--eco-offer-border);
-  border-radius: 16px;
-  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.13);
-}
-
-
-.eco-offer-dropdown.show{
-  display: flex;
-}
-
 
 
 
@@ -2345,6 +2348,7 @@ p {
   pointer-events: none;
   transform: translateY(-6px);
   transition: opacity 0.2s, transform 0.2s, visibility 0s linear 0.2s;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.53);
 }
 
 .eco-offer-dropdown.show {
@@ -2366,6 +2370,29 @@ p {
   transform: rotate(180deg);
 }
 
+
+
+.eco-offer-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 30;
+  width: 100%;
+  max-height: 330px;
+  padding: 8px;
+  overflow-y: auto;
+  background: var(--eco-offer-surface);
+  border: 1px solid var(--eco-offer-border);
+  border-radius: 16px;
+
+}
+
+
+.eco-offer-dropdown.show{
+  display: flex;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.53);
+}
 
 
 
@@ -2465,7 +2492,7 @@ p {
   color: #8fa39d;
   background: transparent;
   border: 0;
-  transition: background 0.2s, color 0.2s;
+ 
 }
 
 .eco-offer-view-button.active {
@@ -2512,7 +2539,7 @@ p {
   font-size: 12px;
   font-weight: 800;
   cursor: pointer;
-  transition: color 160ms ease, background 160ms ease;
+  
 }
 
 .eco-offer-view-button i {
@@ -2996,13 +3023,17 @@ p {
   left: 0;
   right: 0;
   z-index: 100;
-  width: 100%;
+  width: 96%;
   max-height: min(360px, 60vh);
   overflow: hidden;
   background: var(--afa-surface) !important;
-  border: 1px solid var(--afa-border);
+
+  padding-bottom: 36px;
   border-radius: 12px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+  box-shadow: 0 10px 20px rgba(39, 39, 39, 0.9);
+  border-top: 9px solid var(--eco-mtn-border);
+  border-bottom: 9px solid var(--eco-mtn-border);
+
 }
 
 .eco-bundle-dropdown.eco-bundle-dropdown--open {
@@ -3040,7 +3071,7 @@ p {
   align-items: center;
   gap: 9px;
   min-width: 0;
-  min-height: 42px;
+  height: 32px;
   margin: 10px 0;
   padding: 11px 10px;
   color: var(--afa-ink);
@@ -3067,11 +3098,12 @@ p {
   display: grid;
   flex: 0 0 auto;
   min-width: 42px;
-  min-height: 38px;
-  padding: 0 5px;
+  min-height: 28px;
+  padding: 0 2px;
   place-items: center;
   color: var(--eco-bundle-ink);
-  background: var(eco-);
+  background: var(--eco-mtn-border);
+  
   border-radius: 9px;
   font-size: 12px;
   font-weight: 850;
