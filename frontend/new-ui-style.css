@@ -1707,7 +1707,7 @@ strong, b { font-size: inherit; }
   color: var(--eco-home-muted);
   background: var(--eco-home-page);
   border-bottom: 1px solid var(--eco-home-border);
-  font-size: 13px;
+  font-size: 16px !important;
   font-weight: 800;
   white-space: nowrap;
   z-index: 1;

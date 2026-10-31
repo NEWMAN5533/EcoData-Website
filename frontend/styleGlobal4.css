@@ -107,12 +107,12 @@ p {
 
 
   .main-row-content #liveOrderRows .live-row{
-  grid-template-columns:  100px 120px  110px 130px 120px 110px 140px;
+  grid-template-columns: 100px 140px  120px 130px 120px 110px 140px;
  display: grid;
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  font-size: .83rem;
+  font-size: .76rem;
   font-weight: 600;
   color: rgb(150, 152, 155);
   white-space: nowrap;
@@ -124,7 +124,7 @@ p {
   color: rgb(129, 129, 129);
   font-weight: 600;
   
-  font-size: .83rem;
+  font-size: .76rem;
   border-bottom: 1px solid rgb(56, 56, 56) !important;
 }
 
