@@ -48,42 +48,6 @@
 ========================================== */
 
 
-:root.dark-mode
-{
-  color-scheme: dark;
-
-  /* HEADER */
-  --afa-header-yellow: #ffcc00;
-  --afa-header-ink: #f5f5f5;
-  --afa-header-muted: #a5aab4;
-
-  /* MAIN CONTAINER */
-  --afa-yellow: #ffcc00;
-  --afa-yellow-soft: #352d12;
-  --afa-ink: #f3f4f6;
-  --afa-muted: #a0a5b0;
-  --afa-border: #343945;
-  --afa-surface: #20242d;
-  --afa-page: #151820;
-  --afa-green: #45c77b;
-  --afa-radius: 20px;
-
-  /* AFA RECEIPT */
-  --receipt-yellow: #ffcc00;
-  --receipt-yellow-soft: #352d12;
-  --receipt-ink: #f3f4f6;
-  --receipt-muted: #a0a5b0;
-  --receipt-border: #343945;
-  --receipt-green: #45c77b;
-
-  /* AFA RECORDS */
-  --records-yellow: #ffcc00;
-  --records-yellow-light: #352d12;
-  --records-ink: #f3f4f6;
-  --records-muted: #a0a5b0;
-  --records-border: #343945;
-  --records-white: #20242d;
-}
 
 
 /* AFA HISTORY — DARK MODE */

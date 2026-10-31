@@ -690,23 +690,22 @@ TRUSTED LOGOS ALIGN
       gap: 3rem !important;
       justify-content: center;
       justify-self: center;
-      background: var(--primary-cl);
+    
       align-items: center;
       position: relative;
       margin-bottom: 2rem;
       border-end-start-radius: 0 !important;
       border-end-end-radius: 0 !important;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-      border-top: 14px solid rgb(21, 129, 124);
+
     }
 
     .dark-mode #gridView{
-      background:  var(--card-bg-dark);
+      
       border: 1px solid var(--thin-border);
       border-end-end-radius: 0;
       gap: 3rem !important;
       border-end-start-radius: 0;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    
     }
 
 .dark-mode .gridCard{
@@ -752,13 +751,13 @@ TRUSTED LOGOS ALIGN
 
       display: flex;
       position: relative;
-      background: var(--primary-cl);
+      
       margin: 2rem !important;
     }
 
     .dark-mode #gridView .hero-text-container{
       background: transparent;
-      border: 1px solid var(--background-cl-1);
+      
     }
 
 
