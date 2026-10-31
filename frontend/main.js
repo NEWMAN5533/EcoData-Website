@@ -113,240 +113,375 @@ function resolvePackageName(network) {
 
 
 
-//NEW UPDATED 21/01/2026  (DOMCONTENTLOADER)//
+//NEW UPDATED (DOMCONTENTLOADER) - synced with eco-bundle HTML//
 document.addEventListener("DOMContentLoaded", () => {
 
+  // =========================================
+  //  ELEMENT REFERENCES
+  // =========================================
 
-  
+  // Delivery offer dropdown (NOT the bundle options)
+  const selectBtn = document.getElementById("selectBtn");
+  const dropdownOffer = document.getElementById("dropdownOffer");
+  const deliveryOptions = document.querySelectorAll(".eco-offer-option");
 
-const selectBtn = document.getElementById("selectBtn");
-const dropdownOffer = document.getElementById("dropdownOffer");
-const deliveryOptions = document.querySelectorAll(".optionDelevery");
+  const targetDiv = document.getElementById("topOpt");
+  const unTargetDiv = document.getElementById("bottomOpt");
 
+  const gridExpressDiv = document.getElementById("gridExpressDiv");
+  const gridNormalDiv = document.getElementById("gridNormalDiv");
+  const gridMashupDiv = document.getElementById("mashGridDiv");
 
-const targetDiv = document.getElementById("topOpt");
-const unTargetDiv = document.getElementById("bottomOpt");
+  // Bundle picker (new eco-bundle markup)
+  const optionBtn = document.getElementById("optionBtn");
+  const moveDown = document.getElementById("moveDown");
+  const recipientInput = document.getElementById("ecoBundleRecipient");
 
-const gridExpressDiv = document.getElementById("gridExpressDiv");
-const gridNormalDiv = document.getElementById("gridNormalDiv");
-const gridMashupDiv = document.getElementById("mashGridDiv");
+  // Mashup toggle
+  const mashupNormal = document.getElementById("mash");
+  const mashLabel = document.querySelector(".eco-bundle-field-label");
+  const mashRecipient = document.querySelector(".eco-bundle-label");
+  const mashPacks = document.querySelector(".packs");
+  const mashTitle = document.querySelector(".top-dashboard h2");
+  const mashTopRightContainerh2 = document.querySelector(".top-right-content h2");
+  const mashTopRightContainerSmall = document.querySelector(".top-right-content small");
+  const mashTopRightContainerBtn = document.querySelector(".btn-div");
 
-// MASHUP TOGGLE
-const mashupNormal = document.getElementById("mash");
-const flexingContainer = document.getElementById("moveDown");
-const mashOptTextCont = document.getElementById("optionBtn");
-const mashLabel = document.querySelector(".sel");
-const mashRecipient = document.querySelector(".bundleRecipient");
-const mashPacks = document.querySelector(".packs");
-const mashTitle = document.querySelector(".top-dashboard h2");
-const mashTopRightContainerh2= document.querySelector(".top-right-content h2");
-const mashTopRightContainerSmall= document.querySelector(".top-right-content small");
-const mashTopRightContainerBtn= document.querySelector(".btn-div");
+  const mtnArea = document.getElementById("mtnArea");
+  const mtnAreaDiv = document.getElementById("bundles");
 
- // Update modal placeholders
+  const bottomNavDiv = document.getElementById("navIconDiv");
 
-const mtnArea = document.getElementById("mtnArea");
-const mtnAreaDiv = document.getElementById("bundles");
+  // =========================================
+  //  SMALL HELPERS
+  // =========================================
 
-
-//=================================
-//  CHECK RESTRICTIONS
-//=================================
-
-async function checkRestrictions(){
-  try {
-    const response = await fetch("/api/restrictions");
-
-    return await response.json();
-  } catch(error) {
-    console.error("Restrictions check failed", error);
-    return {
-      success: false
-    };
+  function setText(el, text) {
+    if (el) el.textContent = text;
   }
+
+  function setTextById(id, text) {
+    setText(document.getElementById(id), text);
+  }
+
+  function setDisplay(el, value) {
+    if (el) el.style.display = value;
+  }
+
+  // Updates only the inner text of the picker button so the icon/chevron survive
+  function setPicker(title, hint = "Choose your preferred data size") {
+    if (!optionBtn) return;
+    setText(optionBtn.querySelector(".eco-bundle-picker-copy strong"), title);
+    setText(optionBtn.querySelector(".eco-bundle-picker-copy small"), hint);
+  }
+
+  function clearActiveBundle() {
+    document
+      .querySelectorAll(".eco-bundle-option--active")
+      .forEach(o => o.classList.remove("eco-bundle-option--active"));
+  }
+
+  // Dropdown open/close with aria-expanded
+  function closeAllDropdowns() {
+    if (moveDown) moveDown.style.display = "none";
+    if (optionBtn) optionBtn.setAttribute("aria-expanded", "false");
+  }
+
+  function openBundleDropdown() {
+    if (moveDown) moveDown.style.display = "block";
+    if (optionBtn) optionBtn.setAttribute("aria-expanded", "true");
+  }
+
+  // Applies the network colour to the grid confirmation modal
+  function applyNetworkTheme(network) {
+    const themes = {
+      mtn: "rgba(245, 179, 57, 0.932)",
+      telecel: "linear-gradient(to right, rgb(241, 62, 122), rgb(192, 3, 82))",
+      at: "linear-gradient(to right, rgb(75, 148, 233), rgb(4, 145, 170))"
+    };
+
+    const bg = themes[network];
+    if (!bg) return;
+
+    [
+      document.querySelector(".modal-content-top"),
+      document.querySelector(".continue"),
+      document.getElementById("networkTag")
+    ].forEach(el => {
+      if (el) el.style.background = bg;
+    });
+  }
+
+
+
+
+  function setOfferButton(option) {
+  if (!selectBtn) return;
+
+  const icon  = option.querySelector(".eco-offer-option-icon i");
+  const title = option.querySelector(".eco-offer-option-copy strong");
+  const note  = option.querySelector(".eco-offer-option-copy small");
+
+  selectBtn.innerHTML = `
+    <span class="eco-offer-selector-leading">
+      <span class="eco-offer-selector-icon">
+        <i class="${icon ? icon.className : "ri-wifi-line"}" aria-hidden="true"></i>
+      </span>
+      <span class="eco-offer-selector-label">
+        <small>${note ? note.textContent.trim() : "SELECTED OFFER"}</small>
+        <strong>${title ? title.textContent.trim() : ""}</strong>
+      </span>
+    </span>
+
+    <span class="eco-offer-selector-chevron">
+      <i class="ri-arrow-down-s-line" aria-hidden="true"></i>
+    </span>
+  `;
 }
 
 
-async function canUseNormalDeliveryMode() {
-  // Normal Delivery is always selectable.
-  // Vendor routing is handled by getVendorForPackage().
-  // Recipient verification is handled before payment.
 
-  return true;
+function setActiveOffer(option) {
+  deliveryOptions.forEach(o => o.classList.remove("active", "eco-offer-option--active"));
+  option.classList.add("active", "eco-offer-option--active");
+}
+
+function setOfferDropdown(open) {
+  dropdownOffer.classList.toggle("show", open);
+  selectBtn.setAttribute("aria-expanded", String(open));
 }
 
 
-//=================================
-//  CHECK RESTRICTIONS ENDS
-//=================================
 
-//=================================
-//  VALIDATE RECIPIENT 
-//=================================
-async function validateRecipient(phone, offerSlug, network) {
-  const normalizedNetwork = String(network || "")
-    .trim()
-    .toLowerCase();
 
-  // AT and Telecel do not require MTN recipient validation
-  if (["at", "telecel"].includes(normalizedNetwork)) {
-    return {
-      success: true,
-      eligible: true,
-      skipped: true,
-      message: "Recipient validation not required for this network."
-    };
+
+
+
+
+
+function setButtonBusy(button, busy, label = "Processing...") {
+  button.disabled = busy;
+  button.setAttribute("aria-busy", String(busy));
+
+  // Only touch the <span> label so the icons survive
+  const span = button.querySelector("span");
+  if (!span) return;
+
+  if (busy) {
+    span.dataset.original = span.textContent;
+    span.textContent = label;
+  } else if (span.dataset.original) {
+    span.textContent = span.dataset.original;
+    delete span.dataset.original;
+  }
+}
+
+  // =========================================
+  //  CHECK RESTRICTIONS
+  // =========================================
+
+  async function checkRestrictions() {
+    try {
+      const response = await fetch("/api/restrictions");
+      return await response.json();
+    } catch (error) {
+      console.error("Restrictions check failed", error);
+      return { success: false };
+    }
   }
 
-  console.log("Sending validation:", {
-    phone,
-    offerSlug,
-    network: normalizedNetwork
-  });
+  async function canUseNormalDeliveryMode() {
+    // Normal Delivery is always selectable.
+    // Vendor routing is handled by getVendorForPackage().
+    // Recipient verification is handled before payment.
+    return true;
+  }
 
-  try {
-    const response = await fetch("/api/validate-recipient", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        phone,
-        offerSlug
-      })
+  // =========================================
+  //  VALIDATE RECIPIENT
+  // =========================================
+
+  async function validateRecipient(phone, offerSlug, network) {
+    const normalizedNetwork = String(network || "").trim().toLowerCase();
+
+    // AT and Telecel do not require MTN recipient validation
+    if (["at", "telecel"].includes(normalizedNetwork)) {
+      return {
+        success: true,
+        eligible: true,
+        skipped: true,
+        message: "Recipient validation not required for this network."
+      };
+    }
+
+    console.log("Sending validation:", {
+      phone,
+      offerSlug,
+      network: normalizedNetwork
     });
 
-    return await response.json();
-
-  } catch (error) {
-    console.log("Validation Error", error);
-
-    return {
-      success: false,
-      eligible: false,
-      message: "Unable to verify recipient"
-    };
-  }
-}
-//=================================
-// VALIDATE RECIPIENT ENDS
-//=================================
-
-
-
-/* =========================================
-   VENDOR-AWARE RECIPIENT VALIDATION
-
-   SwiftData:
-   Uses the existing validateRecipient().
-
-   DataMart:
-   Uses the backend DataMart verification
-   before allowing payment to continue.
-========================================= */
-
-function normalizeGhanaPhone(phone) {
-  let value = String(phone || "").trim();
-
-  if (value.startsWith("+233")) {
-    value = "0" + value.substring(4);
-  } else if (value.startsWith("233")) {
-    value = "0" + value.substring(3);
-  }
-
-  return value;
-}
-
-async function precheckRecipientBeforePayment(bundle, recipient) {
-  const phone = normalizeGhanaPhone(recipient);
-
-  // 1. Validate phone number locally first.
-  if (!/^0\d{9}$/.test(phone)) {
-    showSnackBar(
-      "Enter a valid 10-digit Ghanaian phone number.",
-      "error",
-      4000
-    );
-    return false;
-  }
-
-  const vendor = getVendorForPackage(bundle.packageName);
-
-  console.log("Offer:", bundle.packageName);
-  console.log("Selected vendor:", vendor);
-
-  try {
-    // =========================================
-    // DATAMART RECIPIENT VERIFICATION
-    // =========================================
-    if (vendor === "datamart") {
-      const response = await fetch("/api/verify-recipient", {
+    try {
+      const response = await fetch("/api/validate-recipient", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify({
-          network: bundle.network || "mtn",
-          recipient: phone,
-          size: Number(bundle.size),
-          offerSlug: bundle.packageName
-        })
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone, offerSlug })
       });
 
-      let result;
+      return await response.json();
+    } catch (error) {
+      console.log("Validation Error", error);
 
-      try {
-        result = await response.json();
-      } catch {
-        result = null;
-      }
+      return {
+        success: false,
+        eligible: false,
+        message: "Unable to verify recipient"
+      };
+    }
+  }
 
-      console.log("DataMart verification response:", {
-        httpStatus: response.status,
-        result
-      });
+  /* =========================================
+     VENDOR-AWARE RECIPIENT VALIDATION
 
-      // -----------------------------------------
-      // A. Backend explicitly approves purchase.
-      // -----------------------------------------
-      if (result?.canProceed === true) {
-        lastValidation = {
-          success: true,
-          eligible: true,
-          provider: result.provider || "datamart",
-          verification: result.verification || null,
-          verificationSkipped:
-            result.verificationSkipped === true
-        };
+     SwiftData: uses the existing validateRecipient().
+     DataMart: uses the backend verification
+     before allowing payment to continue.
+  ========================================= */
 
+  function normalizeGhanaPhone(phone) {
+    let value = String(phone || "").trim();
+
+    if (value.startsWith("+233")) {
+      value = "0" + value.substring(4);
+    } else if (value.startsWith("233")) {
+      value = "0" + value.substring(3);
+    }
+
+    return value;
+  }
+
+  async function precheckRecipientBeforePayment(bundle, recipient) {
+    const phone = normalizeGhanaPhone(recipient);
+
+    // 1. Validate phone number locally first.
+    if (!/^0\d{9}$/.test(phone)) {
+      showSnackBar("Enter a valid 10-digit Ghanaian phone number.", "error", 4000);
+      return false;
+    }
+
+    const vendor = getVendorForPackage(bundle.packageName);
+
+    console.log("Offer:", bundle.packageName);
+    console.log("Selected vendor:", vendor);
+
+    try {
+      // =========================================
+      // DATAMART RECIPIENT VERIFICATION
+      // =========================================
+      if (vendor === "datamart") {
+        const response = await fetch("/api/verify-recipient", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify({
+            network: bundle.network || "mtn",
+            recipient: phone,
+            size: Number(bundle.size),
+            offerSlug: bundle.packageName
+          })
+        });
+
+        let result;
+
+        try {
+          result = await response.json();
+        } catch {
+          result = null;
+        }
+
+        console.log("DataMart verification response:", {
+          httpStatus: response.status,
+          result
+        });
+
+        // A. Backend explicitly approves purchase.
+        if (result?.canProceed === true) {
+          lastValidation = {
+            success: true,
+            eligible: true,
+            provider: result.provider || "datamart",
+            verification: result.verification || null,
+            verificationSkipped: result.verificationSkipped === true
+          };
+
+          showSnackBar(
+            result.message || "Recipient check complete. You may continue.",
+            "success",
+            3000
+          );
+
+          return true;
+        }
+
+        // B. Confirmed recipient rejection. These MUST block payment.
+        const blockingCodes = [
+          "INVALID_RECIPIENT",
+          "RECIPIENT_NOT_VERIFIED",
+          "RECIPIENT_ACTIVATION_REQUIRED"
+        ];
+
+        if (
+          blockingCodes.includes(result?.code) ||
+          result?.activationRequired === true
+        ) {
+          showSnackBar(
+            result.message ||
+              "This recipient cannot receive the selected bundle. Please select another offer",
+            "error",
+            5000
+          );
+
+          return false;
+        }
+
+        // C. Verification temporarily unavailable: allow payment to continue.
+        const temporaryFailureCodes = [
+          "VERIFY_UNAVAILABLE",
+          "VERIFICATION_FAILED",
+          "INVALID_VERIFICATION_RESPONSE",
+          "NETWORK_VERIFICATION_UNAVAILABLE",
+          "VERIFICATION_CONFIG_ERROR",
+          "VENDOR_UNAVAILABLE"
+        ];
+
+        const temporaryHttpStatuses = [408, 429, 500, 502, 503, 504];
+
+        const verificationUnavailable =
+          temporaryFailureCodes.includes(result?.code) ||
+          temporaryHttpStatuses.includes(response.status);
+
+        if (verificationUnavailable) {
+          lastValidation = {
+            success: true,
+            eligible: true,
+            provider: "datamart",
+            verificationSkipped: true,
+            verificationStatus: "unavailable"
+          };
+
+          showSnackBar(
+            "Recipient verification is temporarily unavailable. You can continue with your purchase.",
+            "info",
+            5000
+          );
+
+          return true;
+        }
+
+        // D. Unknown or ambiguous response: fail safely.
         showSnackBar(
-          result.message ||
-            "Recipient check complete. You may continue.",
-          "success",
-          3000
-        );
-
-        return true;
-      }
-
-      // -----------------------------------------
-      // B. Confirmed recipient rejection.
-      // These conditions MUST block payment.
-      // -----------------------------------------
-      const blockingCodes = [
-        "INVALID_RECIPIENT",
-        "RECIPIENT_NOT_VERIFIED",
-        "RECIPIENT_ACTIVATION_REQUIRED"
-      ];
-
-      if (
-        blockingCodes.includes(result?.code) ||
-        result?.activationRequired === true
-      ) {
-        showSnackBar(
-          result.message ||
-            "This recipient cannot receive the selected bundle. Please select another offer",
+          result?.message || "We could not confirm this recipient. Please try again.",
           "error",
           5000
         );
@@ -354,34 +489,34 @@ async function precheckRecipientBeforePayment(bundle, recipient) {
         return false;
       }
 
-      // -----------------------------------------
-      // C. Verification unavailable.
-      // Allow payment to continue if the backend
-      // explicitly marks the failure as temporary.
-      // -----------------------------------------
-      const temporaryFailureCodes = [
-        "VERIFY_UNAVAILABLE",
-        "VERIFICATION_FAILED",
-        "INVALID_VERIFICATION_RESPONSE",
-        "NETWORK_VERIFICATION_UNAVAILABLE",
-        "VERIFICATION_CONFIG_ERROR",
-        "VENDOR_UNAVAILABLE"
-      ];
+      // =========================================
+      // SWIFTDATA: KEEP EXISTING VALIDATION
+      // =========================================
+      const validation = await validateRecipient(
+        "233" + phone.substring(1),
+        bundle.packageName,
+        bundle.network
+      );
 
-      const temporaryHttpStatuses = [
-        408,
-        429,
-        500,
-        502,
-        503,
-        504
-      ];
+      if (!validation.success || !validation.eligible) {
+        showSnackBar(validation.message || "Recipient validation failed.", "error", 4000);
+        return false;
+      }
 
-      const verificationUnavailable =
-        temporaryFailureCodes.includes(result?.code) ||
-        temporaryHttpStatuses.includes(response.status);
+      lastValidation = {
+        ...validation,
+        provider: "swiftdata"
+      };
 
-      if (verificationUnavailable) {
+      return true;
+
+    } catch (error) {
+      console.error("Recipient precheck error:", error);
+
+      // A network exception means verification failed,
+      // not that the recipient was confirmed invalid.
+      // Allow the purchase to continue for DataMart only.
+      if (vendor === "datamart") {
         lastValidation = {
           success: true,
           eligible: true,
@@ -399,799 +534,430 @@ async function precheckRecipientBeforePayment(bundle, recipient) {
         return true;
       }
 
-      // -----------------------------------------
-      // D. Unknown or ambiguous response.
-      // Fail safely instead of assuming approval.
-      // -----------------------------------------
-      showSnackBar(
-        result?.message ||
-          "We could not confirm this recipient. Please try again.",
-        "error",
-        5000
-      );
-
+      showSnackBar("Unable to verify the recipient. Please try again.", "error", 4000);
       return false;
     }
-
-    // =========================================
-    // SWIFTDATA: KEEP EXISTING VALIDATION
-    // =========================================
-    const validation = await validateRecipient(
-      "233" + phone.substring(1),
-      bundle.packageName,
-      bundle.network
-    );
-
-    if (!validation.success || !validation.eligible) {
-      showSnackBar(
-        validation.message || "Recipient validation failed.",
-        "error",
-        4000
-      );
-
-      return false;
-    }
-
-    lastValidation = {
-      ...validation,
-      provider: "swiftdata"
-    };
-
-    return true;
-
-  } catch (error) {
-    console.error("Recipient precheck error:", error);
-
-    // A network exception means verification failed,
-    // not that the recipient was confirmed invalid.
-    // Allow the purchase to continue for DataMart only.
-    if (vendor === "datamart") {
-      lastValidation = {
-        success: true,
-        eligible: true,
-        provider: "datamart",
-        verificationSkipped: true,
-        verificationStatus: "unavailable"
-      };
-
-      showSnackBar(
-        "Recipient verification is temporarily unavailable. You can continue with your purchase.",
-        "info",
-        5000
-      );
-
-      return true;
-    }
-
-    showSnackBar(
-      "Unable to verify the recipient. Please try again.",
-      "error",
-      4000
-    );
-
-    return false;
   }
-}
 
-
+  // =========================================
+  //  PACKAGE UI (NORMAL / EXPRESS / NUMBERS / MASHUP)
+  // =========================================
 
   function applyPackageUI(mode) {
-  selectedPackageName = PACKAGE_MAP[mode];
-
-  if(mode === "express" ||  mode === "numbers"){
-
-
-  mashTopRightContainerh2.textContent = "MTN Data Bundle";
-  mashTopRightContainerSmall.textContent = "Purchase MTN data bundles for single or multiple recipients";
-  mashTopRightContainerBtn.textContent = "14 Packages Available";
-
-      // resize the dropdown container
-    flexingContainer.style.height = "28rem";
-    flexingContainer.style.margin = "-12rem";
-
-    // title to
-    mashTitle.textContent = "MTN DATA BUNDLE";
-
-    // packs to
-    mashPacks.textContent = "13 Packages Available";
-   
-    // change labelRecipient to
-    mashRecipient.textContent = "Bundle Recipient Number";
-    // change label to
-    mashLabel.textContent = "Bundle";
-    
-     // change text to
-    mashOptTextCont.textContent = "Select Bundle";
-
-
-
-
-
-
-    targetDiv.style.display = "none";
-    gridExpressDiv.style.display = "block";
-    gridNormalDiv.style.display = "none";
-
-
-    unTargetDiv.style.display = "block";
-    gridMashupDiv.style.display = "none";
-
-    mtnArea.style.display = "block";
-    mtnAreaDiv.style.display = "block";
-  } else{
-    gridExpressDiv.style.display = "none";
-    unTargetDiv.style.display = "none";
-
-    targetDiv.style.display = "block";
-   
-
-    gridNormalDiv.style.display = "block";
-  }
-
-
-
-  // IF NORMAL
-  if(mode === "normal") {
-
-     mashTopRightContainerh2.textContent = "MTN Data Bundle";
-  mashTopRightContainerSmall.textContent = "Purchase MTN data bundles for single or multiple recipients";
-
-  mashTopRightContainerBtn.textContent = "14 Packages Available";
-
-      // resize the dropdown container
-    flexingContainer.style.height = "28rem";
-    flexingContainer.style.margin = "-12rem";
-
-
-  // title to
-    mashTitle.textContent = "MTN DATA BUNDLE";
-
-    // packs to
-    mashPacks.textContent = "14 Packages Available";
-   
-    // change labelRecipient to
-    mashRecipient.textContent = "Bundle Recipient Number";
-    // change label to
-    mashLabel.textContent = "Bundle";
-    
-     // change text to
-    mashOptTextCont.textContent = "Select Bundle";
-
-
-
-    gridExpressDiv.classList.add("active");
-    gridMashupDiv.style.display = "none";
-
-    mtnArea.style.display = "block";
-    mtnAreaDiv.style.display = "block";
-  } else{
-    gridExpressDiv.classList.remove("active");
-  }
-
-
-  // MASHUP
-  if(mode === "mashup"){
-
-  mashTopRightContainerh2.textContent = "Special Mashup Bundle";
-  mashTopRightContainerSmall.textContent = "Purchase MASHUP bundle for single  or multiple recipients";
-
-  mashTopRightContainerBtn.textContent = "13 Packages Available";
-     
-
-    mashupNormal.style.display = "block";
-
-    // resize the dropdown container
-    flexingContainer.style.height = "32.5rem";
-    flexingContainer.style.margin = "-20rem";
-
-    // title to
-    mashTitle.textContent = "SPECIAL MASHUP BUNDLES";
-
-    // packs to
-    mashPacks.textContent = "13 Packages Available";
-   
-    // change labelRecipient to
-    mashRecipient.textContent = "Mashup Recipient Number";
-    // change label to
-    mashLabel.textContent = "Mashup";
-    
-     // change text to
-    mashOptTextCont.textContent = "Select Mashup Bundle";
-
-
-    targetDiv.style.display = "none";
-    unTargetDiv.style.display = "none";
-    gridNormalDiv.style.display = "none";
-    gridExpressDiv.style.display = "none";
-
-       // Update modal preview
-
-    gridMashupDiv.style.display = "block";
-    mtnArea.style.display = "block";
-    mtnAreaDiv.style.display = "block";
-  } else{
-    mashupNormal.style.display = "none";
-
-   
-
-
-
-
-
-
-
-
-  }
-
-  
-}
-
-
-
-
-
-
-
-function resetSelectedBundle(reason = "") {
-  selectedBundle = null;
-
-  // reset button UI
-  optionBtn.innerHTML = `Select bundle <span><img src="./css/icons/more.png.png"></span>`;
-
-  // clear placeholders
-  const gbHolder = document.querySelector(".selectedModal-top-left-content");
-  if (gbHolder) gbHolder.textContent = "";
-
-  const totalHintText = document.querySelector(".selectedModal-bottom-left-content");
-  if(totalHintText) totalHintText.textContent = "";
-
-  const priceHolder = document.querySelector(".placeHolderPrice");
-  if(priceHolder) priceHolder.textContent = "";
-
-  const totalAmountText = document.getElementById("totalAmountText");
-  if(totalAmountText) totalAmountText.textContent = "";
-
-  const priceHolder2 = document.getElementById("placeHolderPriceTotal");
-  if(priceHolder2) priceHolder2.textContent = "";
-
-  const networkHolder = document.querySelector(".selectedModal-top-right-content");
-  if(networkHolder) networkHolder.textContent = "";
-
-
-  const img = document.querySelector(".selectedModal-left-left img");
-  if (img) img.style.display = "none";
-
-  // clears phone input (normal mode)
-
-  const input = document.querySelector("#normalView .normalInput");
-  if (input) input.value = "";
-
-  // feedback
-  if (reason) {
-    showSnackBar(reason, "info", 5000);
-  }
-}
-
-
-
-  const saveMode = 
-  localStorage.removeItem(STORAGE_KEY) || "normal";
-
-  const activeOption = document.querySelector(`.optionDelevery[data-mode="${saveMode}"]`);
-
-  if(activeOption) {
-    applyPackageUI(saveMode);
-    selectedPackageName =
-    PACKAGE_MAP[saveMode];
-
-
-      // UI state
-    dropdownOffer.classList.remove("show");
-    deliveryOptions.forEach(o => o.classList.remove("active"));
-    activeOption.classList.add("active");
-
-    // update button tex
-    selectBtn.innerHTML = `${activeOption.querySelector("span").textContent} 
-    <p class='doneSelect'> <img src="./css/icons/done (2).png" ></p>
-    <p class='doneSelect darkM'> <img src="./css/icons/done (1).png" ></p>
-    <span><img src="./css/icons/more.png.png"></span>`;
-  };
-
-
-
-
-
-// Toggle dropdown
-selectBtn.addEventListener("click", (e) => {
-  e.stopPropagation();
-  dropdownOffer.classList.toggle("show");
-});
-
-// Select delivery package
-deliveryOptions.forEach(option => {
-  option.addEventListener("click", async (e) => {
-    e.stopPropagation();
-
-    const mode = option.dataset.mode;
-
-    // Only DataMart can use NORMAL DELIVERY MODE.
-    // Check before changing the UI or saving the selection.
-    if (mode === "normal") {
-      const allowed = await canUseNormalDeliveryMode();
-
-      if (!allowed) {
-        showSnackBar("Please choose another offer. Normal Delivery Mode is currently unavailable.", "error", 4000
-        );
-        dropdownOffer.classList.remove("show");
-        return;
-      }
-    }
-
-    // Validate the selected mode.
-    if (!PACKAGE_MAP[mode]) {
-      showSnackBar(
-        "Invalid delivery offer selected.",
-        "error",
-        4000
-      );
-      return;
-    }
-
-    // Reset the previously selected bundle.
-    resetSelectedBundle("Offer changed. Please select a bundle.");
-
-    // Save the selection only after the vendor check passes.
-    localStorage.setItem(STORAGE_KEY, mode);
-
-    // Update the existing package UI.
-    applyPackageUI(mode);
-
     selectedPackageName = PACKAGE_MAP[mode];
 
-    // Update the main selection button.
-    selectBtn.innerHTML = `
-      ${option.querySelector("span").textContent}
-      <p class="doneSelect">
-        <img src="./css/icons/done (2).png">
-      </p>
-      <p class="doneSelect darkM">
-        <img src="./css/icons/done (1).png">
-      </p>
-      <span>
-        <img src="./css/icons/more.png.png">
-      </span>
-    `;
+    // Shared MTN text (express, numbers, normal)
+    function applyMtnText(packCount) {
+      setText(mashTopRightContainerh2, "MTN Data Bundle");
+      setText(mashTopRightContainerSmall, "Purchase MTN data bundles for single or multiple recipients");
+      setText(mashTopRightContainerBtn, "14 Packages Available");
 
-    // Update active option.
-    dropdownOffer.classList.remove("show");
+      setText(mashTitle, "MTN DATA BUNDLE");
+      setText(mashPacks, packCount);
 
-    deliveryOptions.forEach(item => {
-      item.classList.remove("active");
-    });
+      setText(mashRecipient, "Bundle Recipient Number");
+      setText(mashLabel, "Select your bundle");
+      setPicker("Select Bundle");
+    }
 
-    option.classList.add("active");
+    if (mode === "express" || mode === "numbers") {
+      applyMtnText("13 Packages Available");
 
-    showSnackBar("Offer updated.", "info", 2000);
+      setDisplay(targetDiv, "none");
+      setDisplay(gridExpressDiv, "block");
+      setDisplay(gridNormalDiv, "none");
+
+      setDisplay(unTargetDiv, "block");
+      setDisplay(gridMashupDiv, "none");
+
+      setDisplay(mtnArea, "block");
+      setDisplay(mtnAreaDiv, "block");
+    } else {
+      setDisplay(gridExpressDiv, "none");
+      setDisplay(unTargetDiv, "none");
+
+      setDisplay(targetDiv, "block");
+      setDisplay(gridNormalDiv, "block");
+    }
+
+    // NORMAL
+    if (mode === "normal") {
+      applyMtnText("14 Packages Available");
+
+      if (gridExpressDiv) gridExpressDiv.classList.add("active");
+      setDisplay(gridMashupDiv, "none");
+
+      setDisplay(mtnArea, "block");
+      setDisplay(mtnAreaDiv, "block");
+    } else if (gridExpressDiv) {
+      gridExpressDiv.classList.remove("active");
+    }
+
+    // MASHUP
+    if (mode === "mashup") {
+      setText(mashTopRightContainerh2, "Special Mashup Bundle");
+      setText(mashTopRightContainerSmall, "Purchase MASHUP bundle for single or multiple recipients");
+      setText(mashTopRightContainerBtn, "13 Packages Available");
+
+      setDisplay(mashupNormal, "block");
+
+      setText(mashTitle, "SPECIAL MASHUP BUNDLES");
+      setText(mashPacks, "13 Packages Available");
+
+      setText(mashRecipient, "Mashup Recipient Number");
+      setText(mashLabel, "Select your mashup bundle");
+      setPicker("Select Mashup Bundle");
+
+      setDisplay(targetDiv, "none");
+      setDisplay(unTargetDiv, "none");
+      setDisplay(gridNormalDiv, "none");
+      setDisplay(gridExpressDiv, "none");
+
+      setDisplay(gridMashupDiv, "block");
+      setDisplay(mtnArea, "block");
+      setDisplay(mtnAreaDiv, "block");
+    } else {
+      setDisplay(mashupNormal, "none");
+    }
+  }
+
+  // =========================================
+  //  RESET SELECTED BUNDLE
+  // =========================================
+
+  function resetSelectedBundle(reason = "") {
+    selectedBundle = null;
+
+    setPicker("Select bundle");
+
+    ["placeHolderGB", "networkTextContent", "totalAmountText", "placeHolderPriceTotal"]
+      .forEach(id => setTextById(id, ""));
+
+    clearActiveBundle();
+
+    if (recipientInput) recipientInput.value = "";
+
+    if (reason) {
+      showSnackBar(reason, "info", 5000);
+    }
+  }
+
+  // =========================================
+  //  RESTORE SAVED DELIVERY MODE
+  // =========================================
+
+  const savedMode = localStorage.removeItem(STORAGE_KEY);
+  const saveMode = PACKAGE_MAP[savedMode] ? savedMode : "normal";
+
+  const activeOption = document.querySelector(`.eco-offer-option[data-mode="${saveMode}"]`);
+
+  if (activeOption) {
+    applyPackageUI(saveMode);
+    selectedPackageName = PACKAGE_MAP[saveMode];
+    setActiveOffer(activeOption);
+    setOfferButton(activeOption);
+    setOfferDropdown(false);
+
+  }
+
+  // =========================================
+  //  DELIVERY OFFER DROPDOWN
+  // =========================================
+
+ if (selectBtn && dropdownOffer) {
+  selectBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    setOfferDropdown(!dropdownOffer.classList.contains("show"));
   });
-});
+}
 
-// Close when clicking outside
 document.addEventListener("click", () => {
-  dropdownOffer.classList.remove("show");
+  if (dropdownOffer) setOfferDropdown(false);
 });
 
+  // Select delivery package
+  deliveryOptions.forEach(option => {
+    option.addEventListener("click", async (e) => {
+      e.stopPropagation();
 
-  // ---------- OPTION SELECT (NORMAL VIEW) ---(MTN)-------
-  document.querySelectorAll('.optionSelect').forEach(opt => {
-    opt.addEventListener('click', () => {
+      const mode = option.dataset.mode;
+
+      if (mode === "normal") {
+        const allowed = await canUseNormalDeliveryMode();
+
+        if (!allowed) {
+          showSnackBar(
+            "Please choose another offer. Normal Delivery Mode is currently unavailable.",
+            "error",
+            4000
+          );
+          dropdownOffer.classList.remove("show");
+          return;
+        }
+      }
+
+      // Validate the selected mode.
+      if (!PACKAGE_MAP[mode]) {
+        showSnackBar("Invalid delivery offer selected.", "error", 4000);
+        return;
+      }
+
+      // Reset the previously selected bundle.
+      resetSelectedBundle("Offer changed. Please select a bundle.");
+
+      // Save the selection only after the checks pass.
+      localStorage.setItem(STORAGE_KEY, mode);
+
+      applyPackageUI(mode);
+      selectedPackageName = PACKAGE_MAP[mode];
+
+      // Update the main selection button.
+  
+      setOfferButton(option);
+      setOfferDropdown(false);
+      setActiveOffer(option);
+
+      showSnackBar("Offer updated.", "info", 2000);
+
+  
+    });
+  });
+
+
+
+  // =========================================
+  //  BUNDLE PICKER (NORMAL VIEW)
+  // =========================================
+
+  // Open / close the bundle dropdown
+  if (optionBtn) {
+    optionBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+
+      const isOpen = optionBtn.getAttribute("aria-expanded") === "true";
+
+      if (isOpen) {
+        closeAllDropdowns();
+      } else {
+        openBundleDropdown();
+      }
+    });
+  }
+
+  // Select a bundle option
+  document.querySelectorAll(".eco-bundle-option").forEach(opt => {
+    opt.addEventListener("click", () => {
 
       selectedBundle = {
         network: opt.dataset.network,
         dataValue: opt.dataset.value,
         packageName: resolvePackageName(opt.dataset.network),
         size: Number(opt.dataset.size),
-        price: Number(opt.dataset.price),
+        price: Number(opt.dataset.price)
       };
 
-  
-       const feeToPay = (selectedBundle.price * 1.0195).toFixed(2);
-       const onlyFee = (feeToPay - selectedBundle.price).toFixed(2);
-      
+      // Fee is 1.95% (same rate used for the total and the fee badge)
+      const total = Number((selectedBundle.price * 1.0195).toFixed(2));
+      const fee = (total - selectedBundle.price).toFixed(2);
 
-      // Update button UI
-      optionBtn.innerHTML = `
-     
-        ${opt.querySelector("span").textContent}
-        <span class="price-badge">GHS ${selectedBundle.price}</span>
-        <span class="fee-badge">Fee: ${onlyFee}</span>
-        <span><img src="./css/icons/more.png.png"></span>
-      `;
+      // Active state
+      clearActiveBundle();
+      opt.classList.add("eco-bundle-option--active");
 
-    
-        // NORMAL VIEW PAYSTACK FEE REMOVED
-         const priceWithFees = selectedBundle.price * 1.0195.toFixed(2);
+      // Picker button
+      setPicker(
+        opt.dataset.value,
+        `GH₵ ${selectedBundle.price.toFixed(2)} · Fee: ${fee}`
+      );
 
-      // Update selectedModal placeholders
-      const img = document.querySelector(".spanImgContent img");
-      if (img) img.style.display = "flex";
-
-      const gbHolder = document.getElementById("placeHolderGB");
-      if (gbHolder) gbHolder.textContent = `${opt.querySelector("span").textContent}`;
-
-
-      const totalAmountContent = document.getElementById("totalAmountText");
-      if(totalAmountContent) totalAmountContent.textContent = 
-     "TotalAmount:";
-
-      const priceHolder = document.getElementById("placeHolderPriceTotal");
-
-      if (priceHolder) priceHolder.textContent = `GHS₵${priceWithFees.toFixed(2)}`;
-
-      const networkHolder = document.getElementById("networkTextContent");
-      if (networkHolder) networkHolder.textContent = selectedBundle.network.toUpperCase();
+      // Order summary
+      setTextById("placeHolderGB", opt.dataset.value);
+      setTextById("networkTextContent", selectedBundle.network.toUpperCase());
+      setTextById("placeHolderPriceTotal", `GH₵ ${total.toFixed(2)}`);
+      setTextById("totalAmountText", `GH₵ ${total.toFixed(2)}`);
 
       closeAllDropdowns();
     });
   });
 
+  // =========================================
+  //  PLACE ORDER / BUY BUTTONS (NORMAL + GRID)
+  // =========================================
 
+document
+  .querySelectorAll("#normalView .eco-bundle-order-button, #gridView .buy-btn")
+  .forEach(button => {
 
+    button.addEventListener("click", async () => {
+      if (button.disabled) return;          // blocks double taps
+      setButtonBusy(button, true, "Checking...");
 
-   // BOTTOM NAVIGATION BAR (DISPLAY = NONE if())
-  const bottomNavDiv = document.getElementById("navIconDiv");
+      let paymentStarted = false;
 
+      try {
+        if (bottomNavDiv) bottomNavDiv.style.display = "flex";
 
-
-
-  // ---------- BUY BUTTONS (NORMAL + GRID) ----------
-  document.querySelectorAll("#normalView .buy-btn,  #gridView .buy-btn")
-    .forEach(button => {
-
-      button.addEventListener("click", async () => {
-
-
-      bottomNavDiv.style.display = "flex";
-
-        let bundle;
-        let recipient = "";
-
-       
         // ================= NORMAL VIEW =================
         if (button.closest("#normalView")) {
+
           if (!selectedBundle) {
-            // if no selected bundle ( bottomNav = flex )
-          bottomNavDiv.style.display = "flex";
             showSnackBar("📱 Please select a bundle first");
             return;
           }
 
-          const input = document.querySelector("#normalView .normalInput");
-          if (!input || !input.value.trim()) {
-            // if no input content keyed (bottomNav = flex)
-            bottomNavDiv.style.display = "flex";
-
+          if (!recipientInput || !recipientInput.value.trim()) {
             showSnackBar("📱 Please enter a phone number");
             return;
           }
 
-          recipient = input.value.trim();
+          const recipient = recipientInput.value.trim();
 
           if (!/^[0-9]{10}$/.test(recipient)) {
-  
             showSnackBar("📱 Phone number must be exactly 10 digits");
             return;
           }
 
-          bundle = {...selectedBundle};
+          const bundle = { ...selectedBundle };
 
+          const precheckPassed = await precheckRecipientBeforePayment(bundle, recipient);
+          if (!precheckPassed) return;
 
+          lastPurchasedBundle = bundle;
 
-
-          const precheckPassed = await
-          precheckRecipientBeforePayment(
-            bundle,
-            recipient
-          );
-
-          if(!precheckPassed) {
-            return;
-          }
-
-
-          lastPurchasedBundle = bundle; // 🔑 SAVE FOR POST-PAYMENT
-
-          //====================
-          // VALIDATE ROUTING 
-          //====================
- 
-
-          //==========================
-          // VALIDATE ROUTING (NUMBER)
-          //==========================
-
-
-          
-
-
-
-
-
-          // if(validate.success){proceed to payment}
+          paymentStarted = true;
           payWithPaystack(bundle, recipient);
           resetSelectedBundle();
         }
 
         // ================= GRID VIEW =================
         else {
-          bundle = {
+          const bundle = {
             network: button.dataset.network,
             dataValue: button.dataset.value,
             packageName: resolvePackageName(button.dataset.network),
             size: Number(button.dataset.size),
-            price: Number(button.dataset.price),
+            price: Number(button.dataset.price)
           };
 
-
-          // Validate
-          if(
+          if (
             !bundle.network ||
-            !Number.isFinite(bundle.size) ||
-            bundle.size <= 0 ||
-            !Number.isFinite(bundle.price ) ||
-            bundle.price <= 0
+            !Number.isFinite(bundle.size) || bundle.size <= 0 ||
+            !Number.isFinite(bundle.price) || bundle.price <= 0
           ) {
             showSnackBar("Invalid bundle details. Please try again.", "error", 4000);
             return;
           }
 
+          applyNetworkTheme(button.dataset.network);
 
-          // MTN NETWORK BG
-            if(button.dataset.network === "mtn"){
-               document.querySelector(".modal-content-top").style.backgroundColor = 
-              "rgba(245, 179, 57, 0.932)";
+          const priceWithFee = (bundle.price * 1.0195).toFixed(2);
+          const priceFee = (priceWithFee - bundle.price).toFixed(2);
 
-              document.querySelector(".continue").style.backgroundColor = 
-              "rgba(245, 179, 57, 0.932)";
+          setDashboardText("priceTag", `GHS₵ ${bundle.price}`);
+          setDashboardText("networkTag", `${bundle.network.toUpperCase()} `);
+          setDashboardText("sizeTag", `${bundle.dataValue}`);
+          setDashboardText("netWorth", `${bundle.network.toUpperCase()}`);
+          setDashboardText("gbSize", `${bundle.dataValue.toUpperCase()}`);
+          setDashboardText("amount", `GHS₵ ${priceWithFee}`);
+          setDashboardText("priceWithFee", `GHS₵ ${priceFee}`);
 
+          let submitting = false;   // guards the modal's continue button
 
-              document.getElementById("networkTag").style.backgroundColor =
-              "rgba(245, 179, 57, 0.932)";
-             }
-        
-            // TELECEL NETWORK BG
-            if(button.dataset.network === "telecel"){
-              document.querySelector(".modal-content-top").style.background = 
-              "linear-gradient(to right, rgb(241, 62, 122), rgb(192, 3, 82))";
-
-              document.querySelector(".continue").style.background = 
-              "linear-gradient(to right, rgb(241, 62, 122), rgb(192, 3, 82))";
-
-
-              document.getElementById("networkTag").style.background =
-              "linear-gradient(to right, rgb(241, 62, 122), rgb(192, 3, 82))";
-
-              
-            }
-
-            // AT NETWORK BG
-              if(button.dataset.network === "at"){
-              document.querySelector(".modal-content-top").style.background = 
-              " linear-gradient(to right, rgb(75, 148, 233), rgb(4, 145, 170))";
-
-              document.querySelector(".continue").style.background = 
-              " linear-gradient(to right, rgb(75, 148, 233), rgb(4, 145, 170))";
-
-              document.getElementById("networkTag").style.background =
-              "linear-gradient(to right, rgb(75, 148, 233), rgb(4, 145, 170))";
-
-               
-            }
-
-           
-
-            const priceWithFee = (bundle.price * 1.0195).toFixed(2);
-
-            const priceFee = (priceWithFee - bundle.price).toFixed(2);
-
-          // Update modal preview
-
-          //========================
-           // SAVE DOM TEXT
-           //========================
-          setDashboardText(
-            "priceTag",
-            `GHS₵ ${bundle.price}`
-          )
-
-          setDashboardText(
-            "networkTag",
-            `${bundle.network.toUpperCase()} `
-          )
-
-          setDashboardText(
-            "sizeTag",
-            `${bundle.dataValue}`
-          )
-
-          setDashboardText(
-            "netWorth",
-          `${bundle.network.toUpperCase()}`
-          )
-
-          setDashboardText(
-            "gbSize",
-            `${bundle.dataValue.toUpperCase()}`
-          )
-
-             // PAYSTACK CHARGE FEE REMOVED
-          setDashboardText(
-            "amount",
-            `GHS₵ ${priceWithFee}`
-          )
-
-
-          setDashboardText(
-            "priceWithFee",
-            `GHS₵ ${priceFee}`
-          )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          // if(validate.success){proceed to payment}
           createPhoneModal(async inputNumber => {
+            if (submitting) return;
+            submitting = true;
 
-            const precheckPassed = await precheckRecipientBeforePayment(
-              bundle,
-              inputNumber
-            );
+            try {
+              const precheckPassed = await precheckRecipientBeforePayment(bundle, inputNumber);
+              if (!precheckPassed) return;
 
-            if(!precheckPassed) return;
+              lastPurchasedBundle = bundle;
 
-
-            
-
-            let formattedPhone = inputNumber.trim();
-            // convert Ghana format (024xxxxxxxx) to 23324xxxxxxxxx
-            if(formattedPhone.startsWith("0")){
-              formattedPhone = "233" + formattedPhone.substring(1);
+              payWithPaystack(bundle, inputNumber);
+              resetSelectedBundle();
+            } finally {
+              // allow a retry if the check failed, stay locked once payment started
+              setTimeout(() => { submitting = false; }, 3000);
             }
-
-       
-            // save bundle 
-            lastPurchasedBundle = bundle;
-
-            payWithPaystack(bundle, inputNumber);
-            resetSelectedBundle();
           });
         }
-      });
+
+      } finally {
+        // Failed checks unlock right away; after payment starts, keep a short cooldown
+        setTimeout(() => setButtonBusy(button, false), paymentStarted ? 3000 : 0);
+      }
     });
+  });
+  // =========================================
+  //  NORMAL & GRID MODE TOGGLE
+  // =========================================
 
+  const normalModeBtn = document.getElementById("normalModeBtn");
+  const gridModeBtn = document.getElementById("gridModeBtn");
+  const normalView = document.getElementById("normalView");
+  const gridView = document.getElementById("gridView");
 
+  const bundleTitle = document.getElementById("bundleTitle");
+  const telecelAirtel = document.getElementById("teleAirtel");
 
+  // package divs
+  const mtnPackageDiv = document.querySelector(".packages");
+  const telecelPackageDiv = document.querySelector(".packagesta");
 
-// normal & grid js code
-const btn = document.getElementById('selectBtn');
-const dropdown = document.getElementById('dropdown');
+  // NORMAL MODE BTN
+  if (normalModeBtn) {
+    normalModeBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      normalModeBtn.classList.add("active");
+      gridModeBtn.classList.remove("active");
 
+      setText(bundleTitle, "MTN Bundles");
+      setDisplay(telecelAirtel, "block");
 
+      if (telecelPackageDiv) telecelPackageDiv.style.background = "white";
+      if (mtnPackageDiv) {
+        mtnPackageDiv.style.background =
+          "linear-gradient(134deg, rgb(241, 218, 8), rgb(180, 106, 8))";
+      }
 
-document.querySelectorAll('.option').forEach(opt => {
-  opt.onclick = () => {
-    btn.innerHTML = `
-      ${opt.dataset.gb}GB 
-      <span>GHS ${opt.dataset.price}</span>
-    `;
-    dropdown.style.display = 'none';
-  };
-});
+      // RESET BUNDLE WHEN MODE CHANGED
+      resetSelectedBundle();
 
-// NORMAL MODE JS
-// ---------- SELECT OPTION / DROPDOWN ----------
+      setDisplay(normalView, "block");
+      setDisplay(gridView, "none");
+    });
+  }
 
-const optionBtn = document.getElementById('optionBtn');
-const moveDown = document.getElementById('moveDown');
+  // GRID MODE BTN
+  if (gridModeBtn) {
+    gridModeBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
 
+      normalModeBtn.classList.remove("active");
+      gridModeBtn.classList.add("active");
 
-// Helper
-function closeAllDropdowns() {
-  moveDown.style.display = "none";
-}
+      setText(bundleTitle, "MTN");
+      setDisplay(telecelAirtel, "flex");
 
-// MTN
-optionBtn.addEventListener('click', (e) => {
-  e.stopPropagation();
-  closeAllDropdowns();
-  moveDown.style.display = "block";
-});
+      if (mtnPackageDiv) mtnPackageDiv.style.background = "white";
 
+      // RESET BUNDLE WHEN MODE CHANGED
+      resetSelectedBundle();
 
-// ---------- NORMAL & GRID MODE TOGGLE ----------
+      setDisplay(gridView, "block");
+      setDisplay(normalView, "none");
 
-const normalModeBtn = document.getElementById("normalModeBtn");
-const gridModeBtn = document.getElementById("gridModeBtn");
-const normalView = document.getElementById("normalView");
-const gridView = document.getElementById("gridView");
-// target bundleTitle section
-const bundleTitle = document.getElementById("bundleTitle");
-const telecelAirtel = document.getElementById("teleAirtel");
+      closeAllDropdowns();
+    });
+  }
 
-//package divs
-const mtnPackageDiv = document.querySelector(".packages");
-const telecelPackageDiv = document.querySelector(".packagesta");
+  // =========================================
+  //  CLOSE BUNDLE DROPDOWN WHEN CLICKING OUTSIDE
+  // =========================================
 
-
-
-
-
-
-// NORMAL MODE BTN
-normalModeBtn.addEventListener("click", (e) => {
-  e.stopPropagation();
-
-  bundleTitle.textContent = "MTN Bundles";
-  
-
-  telecelAirtel.style.display = "block";
-
-  // remove background to the div when active
- telecelPackageDiv.style.background = "white";
-
- 
- mtnPackageDiv.style.background = " background: linear-gradient(134deg, rgb(241, 218, 8),rgb(180, 106, 8));"
-
-
-    // RESET BUNDLE WHEN MODE CHANGED
-  resetSelectedBundle();
-
-  // TOGGLE CONTAINERS
-  normalView.style.display = "block";
-  gridView.style.display = "none";
-
-});
-
-// GRID MODE BTN
-gridModeBtn.addEventListener("click", (e) => {
-  e.stopPropagation();
- bundleTitle.textContent = "MTN";
- telecelAirtel.style.display = "flex";
-
-
-
-
- mtnPackageDiv.style.background = "white";
-
-    // RESET BUNDLE WHEN MODE CHANGED
-  resetSelectedBundle();
-  gridView.style.display = "block";
-  normalView.style.display = "none";
-
-  closeAllDropdowns();
-});
-
-
-// ---------- OTHER NETWORKS TOGGLE ----------
-
-
-// ---------- CLOSE DROPDOWN WHEN CLICKING OUTSIDE ----------
-
-window.addEventListener("click", () => {
-  closeAllDropdowns();
-});
-
+  window.addEventListener("click", () => {
+    closeAllDropdowns();
+  });
 
 });
 
@@ -1353,9 +1119,9 @@ function activateTrackers() {
 
 // un activate trackers when no orders
 function unActivateTrackers(){
- const firstTracker = document.getElementById("deliveryTracker1").style.display = "none";
+ const firstTracker = document.getElementById("deliveryTracker1").style.display = "flex";
 
- const secondTracker = document.getElementById("deliveryTracker2").style.display = "none";
+ const secondTracker = document.getElementById("deliveryTracker2").style.display = "flex";
 }
 
 //=================================
@@ -2425,8 +2191,10 @@ function handleNewDataMartOrder(returnedOrder) {
 
 const dataMartPollingTimers = new Map();
 
-function startDataMartAutoPolling(providerReference) {
+function startDataMartAutoPolling(providerReference, normalized) {
   const reference = String(providerReference || "").trim();
+
+  
 
   if (!reference || dataMartPollingTimers.has(reference)) {
     return;
@@ -2521,7 +2289,7 @@ function startDataMartAutoPolling(providerReference) {
       ).trim();
 
       const paymentRef = String(
-        order.paymentReference || ""
+        normalized.paymentReference || ""
       ).trim();
 
       return (
