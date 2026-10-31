@@ -1989,7 +1989,7 @@ const normalized = {
   if (!tableBody) return;
 
   // Remove empty placeholder
-  const empty = tableBody.querySelector(".empty-state");
+  const empty = tableBody.getElementById("liveOrderEmpty");
   if (empty) empty.remove();
 
  
@@ -2648,12 +2648,8 @@ function sortLiveOrders(orders) {
 const MANUAL_DATAMART_PAYMENT_REFERENCES = [
   "T722189380499497",
   "T708013691490490",
-  "T845658004075839", 
-  "T552899255687621",
- "T552899255687621",
-  "T058423103027388",
-  "T441938649211658",
-  "T183238815418020",
+  "T845658004075839"
+ 
 ];
 
 async function reconcileManualDataMartOrders() {
@@ -2840,7 +2836,6 @@ document.addEventListener(
 
 
 
-
 // =========================
 // RENDER LIVE ORDER ROW
 // =========================
@@ -2881,7 +2876,7 @@ function renderLiveOrderRow(order) {
   // =========================
   // REMOVE EMPTY PLACEHOLDER
   // =========================
-  const empty = tableBody.querySelector(".empty-state");
+   const empty = tableBody.getElementById("liveOrderEmpty");
   if (empty) empty.remove();
 
   // =========================

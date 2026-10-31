@@ -1766,6 +1766,77 @@ strong, b { font-size: inherit; }
   existing row-specific styles until that script is updated.
 */
 
+/* Scroller becomes a column so the body can fill the leftover height */
+.eco-home-table-scroll {
+  display: flex;
+  flex-direction: column;
+  container-type: inline-size; /* lets the empty state know the visible width */
+}
+
+.eco-home-table-header {
+  flex: 0 0 auto;
+}
+
+.eco-home-table-body {
+  flex: 1 1 auto;
+  min-width: 860px;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+}
+
+.eco-home-order-rows {
+  flex: 0 0 auto;
+}
+
+/* Empty state */
+.eco-home-empty {
+  position: sticky;
+  left: 0;                 /* stays put while scrolling sideways */
+  flex: 1 1 auto;          /* fills the body height */
+  align-self: flex-start;
+  width: 100cqw;           /* = visible width of the scroller */
+  min-height: 260px;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.eco-home-empty[hidden] {
+  display: none;
+}
+
+.eco-home-empty-icon {
+  width: 72px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 8px;
+  color: var(--eco-home-muted);
+  background: var(--eco-home-page);
+  border: 1px dashed var(--eco-home-border);
+  border-radius: 50%;
+  font-size: 32px;
+}
+
+.eco-home-empty-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.eco-home-empty-text {
+  margin: 0;
+  max-width: 280px;
+  color: var(--eco-home-muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 /* ======================================================
    DARK THEME
 ====================================================== */
