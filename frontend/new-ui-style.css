@@ -1790,6 +1790,12 @@ strong, b { font-size: inherit; }
 }
 
 /* Empty state */
+
+.empty-state{
+  display: none !important;
+}
+
+
 .eco-home-empty {
   position: sticky;
   left: 0;                 /* stays put while scrolling sideways */

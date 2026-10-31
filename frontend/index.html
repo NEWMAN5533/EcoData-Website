@@ -56,6 +56,20 @@
       document.documentElement.classList.add("dark-mode");
     }
   })();
+
+
+
+
+
+  const orderRows = document.getElementById('liveOrderRows');
+const orderEmpty = document.getElementById('liveOrderEmpty');
+
+const syncEmptyState = () => {
+  orderEmpty.hidden = orderRows.children.length > 0;
+};
+
+new MutationObserver(syncEmptyState).observe(orderRows, { childList: true });
+syncEmptyState();
 </script>
 
 <link rel="stylesheet" href="new-ui-style.css">
@@ -2348,7 +2362,7 @@
     </div>
     <h3 class="eco-home-empty-title">No orders yet</h3>
     <p class="eco-home-empty-text">Your data bundle orders will show up here once you place one.</p>
-  </div>
+        </div>
       </div>
 
     </div>
