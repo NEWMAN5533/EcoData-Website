@@ -624,12 +624,12 @@ strong, b { font-size: inherit; }
   flex: 0 0 40px;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 28px;
+  height: 28px;
   background: var(--eco-delivery-yellow);
-  color: var(--eco-delivery-ink);
+  color: var(--afa-green);
   border-radius: 12px;
-  font-size: 22px;
+  font-size: 18px;
 }
 
 .eco-delivery-completion-text {
@@ -1693,10 +1693,12 @@ strong, b { font-size: inherit; }
 .eco-home-table-frame {
   width: 100%;
   min-width: 0;
+  height: 28rem;
 }
 
 .eco-home-table-scroll {
   width: 100%;
+
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scrollbar-width: thin;
@@ -1718,30 +1720,32 @@ strong, b { font-size: inherit; }
   color: var(--eco-home-muted);
   background: var(--eco-home-page);
   border-bottom: 1px solid var(--eco-home-border);
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 800;
   white-space: nowrap;
+  z-index: 1;
 }
 
 .eco-home-table-body {
   width: 100%;
   min-width: 0;
+  overflow-y: auto;
+  position: relative;
+ 
 }
 
 .eco-home-order-rows {
   width: 100%;
   min-width: 860px;
+  height: 28rem;
+  display: flex;
+  align-items: center;
+ 
 }
 
 /* Empty order state */
 
-#empty-body {
-  margin: 0;
-  padding: 35px 20px;
-  color: var(--eco-home-muted);
-  font-size: 13px;
-  text-align: center;
-}
+
 
 /*
   Dynamic row styling is intentionally not guessed here.
