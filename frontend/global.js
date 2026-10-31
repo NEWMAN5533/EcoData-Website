@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 (() => {
   const chatButton = document.getElementById("chatButton");
   const chatPanel = document.getElementById("chatBox");
-  const closeButton = document.getElementById("adminChatClose");
+  const adminCloseButton = document.getElementById("adminChatClose");
   const messageInput = document.getElementById("whatsppMessage");
   const characterCount = document.getElementById("adminChatCharCount");
 
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function closeAdminChat() {
-    chatPanel.classList.remove("admin-chat-is-open");
+    document.querySelector(".admin-chat-is-open").style.display = "none";
     chatPanel.setAttribute("aria-hidden", "true");
     chatButton.setAttribute("aria-expanded", "false");
     chatButton.focus({ preventScroll: true });
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  closeButton?.addEventListener("click", closeAdminChat);
+  adminCloseButton?.addEventListener("click", closeAdminChat);
 
   document.addEventListener("keydown", (event) => {
     if (
