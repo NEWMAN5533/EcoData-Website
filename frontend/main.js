@@ -790,7 +790,7 @@ document
 
     button.addEventListener("click", async () => {
       if (button.disabled) return;          // blocks double taps
-      setButtonBusy(button, true, "Checking...");
+      setButtonBusy(button, true, "Checking verifica...");
 
       let paymentStarted = false;
 
@@ -1989,7 +1989,7 @@ const normalized = {
   if (!tableBody) return;
 
   // Remove empty placeholder
-  const empty = tableBody.getElementById("liveOrderEmpty");
+  const empty = tableBody.querySelector(".empty-state");
   if (empty) empty.remove();
 
  
@@ -2876,7 +2876,7 @@ function renderLiveOrderRow(order) {
   // =========================
   // REMOVE EMPTY PLACEHOLDER
   // =========================
-   const empty = tableBody.getElementById("liveOrderEmpty");
+  const empty = tableBody.querySelector(".empty-state");
   if (empty) empty.remove();
 
   // =========================
