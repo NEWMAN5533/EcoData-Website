@@ -1729,11 +1729,9 @@ strong, b { font-size: inherit; }
 .eco-home-table-body {
   width: 100%;
   min-width: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
   overflow-y: auto;
-  height: auto;
+ 
 }
 
 .eco-home-order-rows {
