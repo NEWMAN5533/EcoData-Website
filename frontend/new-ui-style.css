@@ -1690,20 +1690,7 @@ strong, b { font-size: inherit; }
 
 /* Table frame and horizontal scrolling */
 
-.eco-home-table-frame {
-  width: 100%;
-  min-width: 0;
-  height: 32rem;
-}
 
-.eco-home-table-scroll {
-  width: 100%;
-
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scrollbar-width: thin;
-  scrollbar-color: #c9c9c9 transparent;
-}
 
 .eco-home-table-header,
 .eco-home-order-rows {
@@ -1726,24 +1713,51 @@ strong, b { font-size: inherit; }
   z-index: 1;
 }
 
-.eco-home-table-body {
+
+
+/* Empty order state */
+
+.eco-home-table-frame {
   width: 100%;
   min-width: 0;
+  height: 32rem;
+  display: flex;            /* lets the scroller fill the frame */
+  flex-direction: column;
+}
 
-  overflow-y: auto;
- 
+/* The ONE scroll container (x and y) */
+.eco-home-table-scroll {
+  flex: 1 1 auto;
+  min-height: 0;            /* required so flex child can shrink and scroll */
+  width: 100%;
+  overflow: auto;           /* both axes */
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #c9c9c9 transparent;
+}
+
+/* Header: sticks to top, scrolls sideways with the body */
+.eco-home-table-header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  min-width: 860px;
+  /* keep your existing grid, padding, background, etc. */
+}
+
+/* Body no longer scrolls on its own */
+.eco-home-table-body {
+  width: 100%;
+  min-width: 860px;         /* same width as header so columns align */
+  display: block;           /* flex centering would misplace rows */
+  overflow: visible;
+  height: auto;
 }
 
 .eco-home-order-rows {
   width: 100%;
   min-width: 860px;
-  
- 
 }
-
-/* Empty order state */
-
-
 
 /*
   Dynamic row styling is intentionally not guessed here.
