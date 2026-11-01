@@ -246,7 +246,7 @@ p {
 #liveOrderRows .live-row{
  justify-items: center;
  align-items: center;
- min-width: 988px !important;
+ min-width: 958px !important;
  height: 2.6rem;
  border-bottom: 1px solid rgba(226, 226, 226, 226);
  grid-template-columns: 110px 110px  120px 100px 130px 150px 160px;
