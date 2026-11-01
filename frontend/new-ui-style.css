@@ -1718,16 +1718,14 @@ strong, b { font-size: inherit; }
 
 
 
-.eco-home-table-header{
-   min-width: 928px !important;
-}
+.eco-home-table-header,
 .eco-home-order-rows {
-  min-width: 958px !important;
+  min-width: 988px !important;
 }
 
 .eco-home-table-header {
   display: grid;
-  grid-template-columns: 120px 110px  120px 100px 120px 120px 140px;
+  grid-template-columns: 120px 110px  130px 120px 120px 120px 160px;
   align-items: center;
   gap: 14px;
   min-height: 53px;

@@ -107,7 +107,7 @@ p {
 
 
   .main-row-content #liveOrderRows .live-row{
-  grid-template-columns:110px 110px  120px 100px 130px 150px 160px;
+  grid-template-columns: 120px 110px  130px 130px 120px 150px 170px;
  display: grid;
   width: 100%;
   align-items: center;
