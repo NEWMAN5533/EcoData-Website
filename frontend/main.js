@@ -2595,8 +2595,7 @@ function renderLiveOrderRow(order) {
     return span;
   }
 
-  // Order ID
-  addCell(normalized.orderId);
+  
 
 
   // Status
@@ -2619,11 +2618,14 @@ function renderLiveOrderRow(order) {
   badge.appendChild(statusText);
   statusCell.appendChild(badge);
 
+
+    // Data volume
+  addCell(`${normalized.volume}GB`);
+
+
+
   // Recipient
   addCell(normalized.recipient);
-
-  // Data volume
-  addCell(`${normalized.volume}GB`);
 
 
   // Network
@@ -2631,6 +2633,10 @@ function renderLiveOrderRow(order) {
 
   // Payment
   addCell("Yes");
+
+
+    // Order ID
+  addCell(normalized.orderId);
 
 
 
