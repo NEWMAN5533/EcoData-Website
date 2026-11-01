@@ -1514,11 +1514,11 @@ strong, b { font-size: inherit; }
   border: 1px solid var(--eco-home-border);
   border-radius: var(--eco-home-radius);
   box-shadow: var(--box-sh-card);
-  transition: transform 180ms ease, border-color 180ms ease;
+  transition: transform 180ms ease, border-color 180ms ease; 
+  border-color: rgba(255, 204, 0, 0.8);
 }
 
 .eco-home-total-card:hover {
-  border-color: rgba(255, 204, 0, 0.8);
   transform: translateY(-2px);
 }
 
@@ -1718,9 +1718,11 @@ strong, b { font-size: inherit; }
 
 
 
-.eco-home-table-header,
-.eco-home-order-rows {
+.eco-home-table-header{
   min-width: 958px !important;
+}
+.eco-home-order-rows {
+  min-width: 988px !important;
 }
 
 .eco-home-table-header {
