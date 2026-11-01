@@ -1575,6 +1575,14 @@ strong, b { font-size: inherit; }
   white-space: nowrap;
 }
 
+
+#totalOrders,
+#totalGB,
+#pendingTotal,
+#completedOrders{
+  font-size: 1.35rem !important;
+}
+
 .eco-home-total-value {
   flex: 0 1 auto;
   min-width: 0;
