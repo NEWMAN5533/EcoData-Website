@@ -1378,8 +1378,8 @@ strong, b { font-size: inherit; }
   height: 43px;
   padding: 0;
   color: var(--eco-home-ink);
-  background: var(--eco-home-yellow);
-  border: 1px solid var(--eco-home-yellow);
+  background: var(--eco-home-page);
+  border: 1px solid var(--eco-home-border);
   border-radius: 13px;
   font-size: 21px;
   cursor: pointer;
@@ -1682,10 +1682,18 @@ strong, b { font-size: inherit; }
   border-bottom: 1px solid var(--eco-home-border);
 }
 
-.eco-home-orders-heading-symbol {
+.eco-home-orders-heading-symbol,
+.eco-notice-heading-symbol,
+.eco-home-section-heading-icon,
+.eco-home-social-icon {
   flex-basis: 43px;
   width: 43px;
   height: 43px;
+  background: var(--eco-delivery-yellow-soft);
+}
+
+.eco-notice-number{
+  background: var(--eco-home-border);
 }
 
 /* Table frame and horizontal scrolling */
@@ -1843,6 +1851,49 @@ strong, b { font-size: inherit; }
   line-height: 1.5;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#ordersPagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 16px 0;
+  flex-wrap: wrap;
+}
+#ordersPagination button {
+  min-width: 36px;
+  height: 36px;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+}
+#ordersPagination button.active {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+#ordersPagination button:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+.page-info { font-size: 13px; color: #777; margin-left: 6px; }
 /* ======================================================
    DARK THEME
 ====================================================== */
@@ -2015,6 +2066,10 @@ strong, b { font-size: inherit; }
 
   .eco-home-total-caption {
     font-size: 10px;
+    background: var(--eco-mtn-yellow-soft);
+    border-radius: 1rem;
+    padding: .2rem .4rem;
+    box-shadow: var(--box-sh-card);
   }
 
   .eco-home-total-main {
@@ -2022,14 +2077,40 @@ strong, b { font-size: inherit; }
     margin-top: 16px;
   }
 
-  .eco-home-total-value p {
-    font-size: clamp(21px, 6vw, 28px);
+  /* VALUE */
+  .eco-home-total-value{
+    font-size: 1.02rem !important;
   }
 
   .eco-home-total-performance {
     font-size: 9px;
+    display: flex;
+    align-items: center;
+    gap: .2rem;
+    white-space: nowrap !important;
   }
 
+  /*  BADGE */
+
+
+
+    /** TOTAL ORDERS PERFORMANCE **/
+  #ordersPerformance,
+  #dataPerformance,
+  #pendingPerformance,
+  #completedPerformance{
+    display: flex;
+    max-width: max-content;
+    font-size: 9px;
+    align-items: center;
+    font-weight: 600;
+  }
+
+
+  
+
+
+ 
   .eco-home-total-bottom-label {
     font-size: 9px;
     line-height: 1.5;
@@ -2239,8 +2320,8 @@ strong, b { font-size: inherit; }
   flex: 0 0 49px;
   width: 49px;
   height: 49px;
-  background: var(--eco-offer-yellow);
-  color: #171717;
+  background: var(--eco-bundle-yellow-soft);
+  color: var(--eco-bundle-yellow);
   border-radius: 15px;
   font-size: 25px;
 }
@@ -2342,7 +2423,8 @@ strong, b { font-size: inherit; }
   flex: 0 0 44px;
   width: 44px;
   height: 44px;
-  color: var(--eco-offer-ink);
+  color: var(--eco-offer-green);
+  opacity: .9;
   background: var(--eco-offer-yellow-soft);
   border-radius: 13px;
   font-size: 22px;
@@ -2356,15 +2438,19 @@ strong, b { font-size: inherit; }
 }
 
 .eco-offer-selector-label small {
-  color: var(--eco-offer-muted);
+  color: var(--eco-offer-green);
   font-size: 9px;
   font-weight: 800;
   letter-spacing: 1.1px;
+  padding: .2rem .4rem;
+  width: max-content;
+  background: var(--eco-mtn-border);
+  border-radius: 1rem;
 }
 
 .eco-offer-selector-label strong {
   color: var(--eco-offer-ink);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 800;
   line-height: 1.5;
 }
@@ -2517,8 +2603,8 @@ strong, b { font-size: inherit; }
   justify-content: center;
   width: 39px;
   height: 39px;
-  color: var(--eco-offer-ink);
-  background: var(--eco-offer-page);
+  color: var(--eco-offer-green);
+  background: var(--eco-mtn-border);
   border-radius: 12px;
   font-size: 19px;
 }
@@ -2533,7 +2619,7 @@ strong, b { font-size: inherit; }
 
 .eco-offer-option-copy strong {
   color: var(--eco-offer-ink);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   line-height: 1.5;
 }
@@ -2542,7 +2628,7 @@ strong, b { font-size: inherit; }
   width: fit-content;
   padding: 3px 7px;
   color: var(--eco-offer-muted);
-  background: var(--eco-offer-page);
+  background: var(--eco-mtn-border);
   border-radius: 5px;
   font-size: 9px;
   font-weight: 800;
