@@ -2390,191 +2390,84 @@ function sortLiveOrders(orders) {
 
 
 
-const MANUAL_DATAMART_PAYMENT_REFERENCES = [
-  "T722189380499497",
-  "T708013691490490",
-  "T845658004075839"
- 
-];
-
-async function reconcileManualDataMartOrders() {
-  const API_BASE =
-    window.location.hostname === "localhost"
-      ? "http://localhost:3000"
-      : "https://ecodata-app.onrender.com";
-
-  const references = [
-    ...new Set(
-      MANUAL_DATAMART_PAYMENT_REFERENCES
-        .map(ref => String(ref || "").trim())
-        .filter(Boolean)
-    )
-  ];
-
-  if (!references.length) {
-    console.warn("No payment references provided.");
-    return;
-  }
-
-  const orders = JSON.parse(
-    localStorage.getItem(LIVE_ORDERS_KEY) || "[]"
-  );
-
-  for (const paymentReference of references) {
-    const providerReference =
-      `Ia553341879ecodata-${paymentReference}`;
-
-    console.log(
-      "Checking Live order:",
-      providerReference
-    );
-
-    try {
-      const response = await fetch(
-        `${API_BASE}/api/datamart/order-status/${encodeURIComponent(providerReference)}`,
-        {
-          method: "GET",
-          headers: { Accept: "application/json" },
-          cache: "no-store"
-        }
-      );
-
-      const result = await response.json();
-
-      if (!response.ok || result.success !== true) {
-        console.error(
-          "Status lookup failed:",
-          paymentReference,
-          result
-        );
-        continue;
-      }
-
-      const providerOrder = result.order || result.data || {};
-
-      const rawStatus = String(
-        providerOrder.status ||
-        providerOrder.orderStatus ||
-        "processing"
-      ).trim().toLowerCase();
-
- 
-       const statusMap = {
-    completed: "delivered",
-    delivered: "delivered",
-    success: "delivered",
-    successful: "delivered",
-
-    failed: "failed",
-    cancelled: "failed",
-    canceled: "failed",
-    rejected: "failed",
-
-    refunded: "refunded",
-
-    pending: "pending",
-    waiting: "pending",
-
-    processing: "processing",
-    in_progress: "processing",
-    "in progress": "processing",
-    unknown: "pending"
-  };
-
-      const status = statusMap[rawStatus] || rawStatus;
-
-      // Match by either the saved provider reference
-      // or the original payment reference.
-      const index = orders.findIndex(order => {
-        if (
-          String(order.provider || "").toLowerCase() !== "datamart"
-        ) {
-          return false;
-        }
-
-        return (
-          String(order.providerOrderReference || "").trim() ===
-            providerReference ||
-          String(order.orderReference || "").trim() ===
-            providerReference ||
-          String(order.paymentReference || "").trim() ===
-            paymentReference
-        );
-      });
-
-      if (index === -1) {
-        console.warn(
-          "Provider status found, but no saved order matched.",
-          {
-            paymentReference,
-            providerReference,
-            status
-          }
-        );
-        continue;
-      }
-
-      const updatedOrder = {
-        ...orders[index],
-        provider: "datamart",
-        providerOrderReference: providerReference,
-        paymentReference,
-        status,
-        updatedAt: Date.now()
-      };
-
-      orders[index] = updatedOrder;
 
 
-      const sortedOrders = sortLiveOrders(orders);
-
-      localStorage.setItem(
-        LIVE_ORDERS_KEY,
-        JSON.stringify(sortedOrders)
-      );
-
-      // Refresh table in sorted order
-      if(typeof renderLiveOrderRow === "function"){
-        renderLiveOrderRow(updatedOrder);
-      }
-
-      createOrUpdateStatusCard(updatedOrder);
-
-      if (typeof updatePendingCard === "function") {
-        updatePendingCard();
-      }
-
-      if (typeof loadActiveBadge === "function") {
-        loadActiveBadge();
-      }
 
 
-      if(typeof updatePendingCard === "function" ) updatePendingCard();
-      if(typeof renderHomepageTotals === "function" ) renderHomepageTotals();
 
-      console.log("Manual reconciliation successful:", {
-        paymentReference,
-        providerReference,
-        status
-      });
 
-    } catch (error) {
-      console.error(
-        "Manual reconciliation failed:",
-        paymentReference,
-        error
-      );
-    }
-  }
+
+const FINAL_STATUSES = new Set(["delivered", "failed", "refunded"]);
+
+const DM_STATUS_MAP = {
+  completed: "delivered", delivered: "delivered",
+  success: "delivered", successful: "delivered",
+  failed: "failed", cancelled: "failed",
+  canceled: "failed", rejected: "failed",
+  refunded: "refunded",
+  pending: "pending", waiting: "pending",
+  processing: "processing", in_progress: "processing",
+  "in progress": "processing", unknown: "pending"
+};
+
+function readOrders() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY) || "[]");
+    return Array.isArray(parsed) ? parsed : [];
+  } catch { return []; }
 }
 
+function applyDataMartStatus({ reference, paymentReference }, rawStatus) {
+  const raw = String(rawStatus || "").trim().toLowerCase();
+  if (!raw) return null;
 
+  const next = DM_STATUS_MAP[raw] || "processing"; // unknown -> processing
 
-document.addEventListener(
-  "DOMContentLoaded", ()=> {
-    reconcileManualDataMartOrders();
-  }
-)
+  const orders = readOrders(); // fresh read, right before writing
+  const index = orders.findIndex(o =>
+    String(o.provider || "").toLowerCase() === "datamart" && (
+      String(o.providerOrderReference || "").trim() === reference ||
+      String(o.orderReference || "").trim() === reference ||
+      (paymentReference &&
+        String(o.paymentReference || "").trim() === paymentReference)
+    )
+  );
+  if (index === -1) return null;
+
+  const current = orders[index];
+  const cur = String(current.status || "").trim().toLowerCase();
+
+  // never downgrade a final status
+  if (FINAL_STATUSES.has(cur) && !FINAL_STATUSES.has(next)) return current;
+
+  if (cur === next && current.providerStatus === raw) return current;
+
+  const updated = {
+    ...current,
+    provider: "datamart",
+    providerOrderReference: reference,
+    paymentReference: paymentReference || current.paymentReference,
+    status: next,
+    providerStatus: raw,
+    updatedAt: Date.now()
+  };
+  orders[index] = updated;
+  localStorage.setItem(LIVE_ORDERS_KEY, JSON.stringify(orders));
+
+  const safe = (fn, ...a) => {
+    try { if (typeof fn === "function") fn(...a); }
+    catch (e) { console.error("UI update failed:", fn?.name, e); }
+  };
+  safe(renderLiveOrderRow, updated);
+  safe(createOrUpdateStatusCard, updated);
+  safe(updatePendingCard);
+  safe(renderHomepageTotals);
+  safe(loadActiveBadge);
+
+  console.log("DataMart status saved:", reference, cur, "->", next);
+  return updated;
+}
+
 
 
 
@@ -2760,7 +2653,109 @@ function renderLiveOrderRow(order) {
 console.log(JSON.parse(localStorage.getItem("ecoLiveOrders")));
 
 
-// ---------- LIVE ORDER CARD ---------
+// ---------- LIVE ORDER CARD -------
+
+
+
+
+
+
+
+const MANUAL_DATAMART_PAYMENT_REFERENCES = [
+  "T722189380499497",
+  "T708013691490490",
+  "T845658004075839"
+ 
+];
+
+async function reconcileManualDataMartOrders() {
+  const API_BASE =
+    window.location.hostname === "localhost"
+      ? "http://localhost:3000"
+      : "https://ecodata-app.onrender.com";
+
+  const references = [
+    ...new Set(
+      MANUAL_DATAMART_PAYMENT_REFERENCES
+        .map(ref => String(ref || "").trim())
+        .filter(Boolean)
+    )
+  ];
+
+  if (!references.length) {
+    console.warn("No payment references provided.");
+    return;
+  }
+
+
+
+  for (const paymentReference of references) {
+    const providerReference =
+      `Ia553341879ecodata-${paymentReference}`;
+
+    console.log(
+      "Checking Live order:",
+      providerReference
+    );
+
+    try {
+      const response = await fetch(
+        `${API_BASE}/api/datamart/order-status/${encodeURIComponent(providerReference)}`,
+        {
+          method: "GET",
+          headers: { Accept: "application/json" },
+          cache: "no-store"
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok || result.success !== true) {
+        console.error(
+          "Status lookup failed:",
+          paymentReference,
+          result
+        );
+        continue;
+      }
+
+      const providerOrder = result.order || result.data || {};
+
+      const rawStatus =
+        providerOrder.status || providerOrder.orderStatus || "";
+
+      const updated = applyDataMartStatus(
+        { reference: providerReference, paymentReference }, rawStatus
+      );
+
+      console.log(
+        updated ? "Reconciled:" : "No match / no status:",
+        paymentReference, updated?.status
+      );
+
+    } catch (error) {
+      console.error(
+        "Manual reconciliation failed:",
+        paymentReference,
+        error
+      );
+    }
+  }
+}
+
+
+
+document.addEventListener(
+  "DOMContentLoaded", ()=> {
+    reconcileManualDataMartOrders();
+  }
+)
+
+
+
+
+
+
 
 
 
@@ -2801,26 +2796,7 @@ function startDataMartAutoPolling(providerReference, normalized) {
     "delivered", "failed", "refunded"
   ]);
 
-  const statusMap = {
-    completed: "delivered",
-    delivered: "delivered",
-    success: "delivered",
-    successful: "delivered",
-
-    failed: "failed",
-    cancelled: "failed",
-    canceled: "failed",
-    rejected: "failed",
-
-    refunded: "refunded",
-
-    pending: "pending",
-    waiting: "pending",
-    processing: "processing",
-    in_progress: "processing",
-    "in progress": "processing",
-    unknown: "pending"
-  };
+ 
 
   let stopped = false;
   let requestInProgress = false;
@@ -2843,32 +2819,7 @@ function startDataMartAutoPolling(providerReference, normalized) {
     console.log(reason, reference);
   }
 
-  function getSavedOrders() {
-    try {
-      const saved = JSON.parse(
-        localStorage.getItem(LIVE_ORDERS_KEY) || "[]"
-      );
-      return Array.isArray(saved) ? saved : [];
-    } catch (error) {
-      console.error("Could not read saved live orders:", error);
-      return [];
-    }
-  }
 
-  // Same matching rules as manual reconciliation
-  function findMatchingOrder(orders) {
-    return orders.findIndex(order => {
-      if (String(order.provider || "").toLowerCase() !== "datamart") {
-        return false;
-      }
-
-      return (
-        String(order.providerOrderReference || "").trim() === reference ||
-        String(order.orderReference || "").trim() === reference ||
-        String(order.paymentReference || "").trim() === paymentReference
-      );
-    });
-  }
 
   async function checkStatus() {
     if (stopped || requestInProgress) return;
@@ -2908,39 +2859,30 @@ function startDataMartAutoPolling(providerReference, normalized) {
         return;
       }
 
+  
+    
       const providerOrder = result.order || result.data || {};
 
       const rawStatus = String(
-        providerOrder.status ||
-        providerOrder.orderStatus ||
-        "processing"
+        providerOrder.status || providerOrder.orderStatus || ""
       ).trim().toLowerCase();
 
-      const status = statusMap[rawStatus] || rawStatus;
-
-      // Re-read storage after the network request
-      const orders = getSavedOrders();
-      const index = findMatchingOrder(orders);
-
-      if (index === -1) {
-        console.warn("Provider status received, but no matching local order:", {
-          reference, paymentReference, status
-        });
-        return; // keep polling; order may be saved shortly
+      if (!rawStatus) {
+        console.warn("No status in provider response:", providerOrder);
+        return;
       }
 
-      const latestOrder = orders[index];
-      const latestStatus = String(latestOrder.status || "")
-        .trim().toLowerCase();
+      const updated = applyDataMartStatus(
+        { reference, paymentReference }, rawStatus
+      );
 
-      // Don't downgrade a finished order to a non-final status,
-      // but let the provider correct a final status if it differs.
-      if (
-        terminalStatuses.has(latestStatus) &&
-        !terminalStatuses.has(status)
-      ) {
-        stopPolling("Order already has a terminal status:");
+      if (!updated) {
+        console.warn("No matching local order:", { reference, paymentReference });
         return;
+      }
+
+      if (FINAL_STATUSES.has(String(updated.status).toLowerCase())) {
+        stopPolling("Terminal order status reached:");
       }
 
       // Only write/render when something actually changed
@@ -3015,7 +2957,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  loadActiveBadge();
 });
 
 
