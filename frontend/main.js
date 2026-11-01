@@ -2627,12 +2627,14 @@ function renderLiveOrderRow(order) {
   // Recipient
   addCell(normalized.recipient);
 
+   // Payment
+  addCell("Yes");
+
 
   // Network
   addCell(getNetwork(normalized));
 
-  // Payment
-  addCell("Yes");
+ 
 
 
     // Order ID
