@@ -1110,6 +1110,7 @@ function hasActiveOrder(recipient) {
 
 
 function activateTrackers() {
+ const firstTracker = document.getElementById("deliveryTracker1").style.display = "none";
 
  const secondTracker = document.getElementById("deliveryTracker2").style.display = "flex";
 };
@@ -1118,9 +1119,9 @@ function activateTrackers() {
 
 // un activate trackers when no orders
 function unActivateTrackers(){
- 
+ const firstTracker = document.getElementById("deliveryTracker1").style.display = "none";
 
- const secondTracker = document.getElementById("deliveryTracker2").style.display = "none";
+ const secondTracker = document.getElementById("deliveryTracker2").style.display = "flex";
 }
 
 //=================================
@@ -2956,7 +2957,7 @@ function startDataMartAutoPolling(providerReference, normalized) {
 
         if (typeof renderLiveOrderRow === "function") renderLiveOrderRow(updatedOrder);
         if (typeof createOrUpdateStatusCard === "function") createOrUpdateStatusCard(updatedOrder);
-       
+       if(typeof loadActiveBadge === "function" ) loadActiveBadge();
 
         console.log("DataMart status updated:", {
           reference,
@@ -3583,7 +3584,9 @@ function renderHomepageTotals() {
 document.addEventListener("DOMContentLoaded", () => {
   
   ecoTotals = JSON.parse(localStorage.getItem("ecoTotals")) || ecoTotals;
-  renderHomepageTotals();
+  
+
+  if(typeof renderHomepageTotals === "function") renderHomepageTotals();
 });
 
 
@@ -3715,9 +3718,14 @@ function loadLiveOrders() {
   const orders =
     JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
 
+  const emptyOrders = document.getElementById("liveOrderEmpty");
 
-  const empty = tableBody.querySelector(".empty-state");
-  if (empty) empty.remove();
+  if(!orders.length){
+    emptyOrders.style.display = "flex";
+  } else{
+    emptyOrders.style.display = "none";
+  }
+
 
   orders
     .sort((a, b) => {
@@ -3725,9 +3733,6 @@ function loadLiveOrders() {
     })
     .forEach(renderLiveOrderRow);
 
-  if (!orders.length) {
-    tableBody.innerHTML = `<p class="empty-state">No recent orders yet</p>`;
-  }
 }
 
 
