@@ -2971,7 +2971,7 @@ function startDataMartAutoPolling(providerReference, normalized) {
         stopPolling("Terminal order status reached:");
       }
     } catch (error) {
-      console.error("DataMart polling error:", {
+      console.error(" polling error:", {
         reference,
         message: error.message
       });
@@ -3002,6 +3002,8 @@ document.addEventListener("DOMContentLoaded", () => {
       );
     }
   });
+
+  loadActiveBadge();
 });
 
 
