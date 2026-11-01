@@ -2548,6 +2548,10 @@ async function reconcileManualDataMartOrders() {
         loadActiveBadge();
       }
 
+
+      if(typeof updatePendingCard === "function" ) updatePendingCard();
+      if(typeof renderHomepageTotals === "function" ) renderHomepageTotals();
+
       console.log("Manual reconciliation successful:", {
         paymentReference,
         providerReference,
@@ -2677,7 +2681,15 @@ function renderLiveOrderRow(order) {
   // =========================
   // BUILD / REFRESH ROW CELLS
   // =========================
-  row.replaceChildren();
+
+
+ const created = new Date( normalized.createdAt || normalized.timestamp).getTime() || Date.now();
+ 
+ row.dataset.created = created;
+ row.replaceChildren();
+
+
+
 
   function addCell(value, className = "") {
     const span = document.createElement("span");
@@ -2725,29 +2737,26 @@ function renderLiveOrderRow(order) {
   // Payment
   addCell("Yes");
 
+
+
   // Created date
   addCell(date);
 
-  // =========================
-  // INSERTION BEHAVIOR
-  // =========================
+  // Insert new rows by creation time (newest on top)
   if (isNewRow) {
-    // New orders appear at the top.
-    tableBody.appendChild(row);
-  } else {
-    // Existing rows stay in their current position.
-    // Do not append, prepend, or appendChild the row here.
+    const next = Array.from(tableBody.querySelectorAll(".live-row"))
+      .find(r => Number(r.dataset.created || 0) < created);
+    tableBody.insertBefore(row, next || null);
   }
 
   console.log("Live order row rendered:", {
     orderId: normalized.orderId,
-    provider: normalized.provider,
     status: normalized.status,
-    createdDate: date,
-    updatedDate: update,
     isNewRow
   });
 }
+ 
+
 console.log(JSON.parse(localStorage.getItem("ecoLiveOrders")));
 
 
@@ -2958,6 +2967,9 @@ function startDataMartAutoPolling(providerReference, normalized) {
         if (typeof renderLiveOrderRow === "function") renderLiveOrderRow(updatedOrder);
         if (typeof createOrUpdateStatusCard === "function") createOrUpdateStatusCard(updatedOrder);
        if(typeof loadActiveBadge === "function" ) loadActiveBadge();
+
+       if(typeof updatePendingCard === "function" ) updatePendingCard();
+       if(typeof renderHomepageTotals === "function" ) renderHomepageTotals();
 
         console.log("DataMart status updated:", {
           reference,
@@ -3182,12 +3194,12 @@ function getOrderStatus(order) {
 
 
 function isPendingOrder(order) {
-  return getOrderStatus(order) === "pending";
+  return PENDING_STATUSES.has(getOrderStats(order));
 }
 
 
 function isCompletedOrder(order) {
-  return getOrderStatus(order) === "delivered";
+  return COMPLETED_STATUSES.has(getOrderStats(order));
 }
 
 
@@ -3428,6 +3440,7 @@ function renderHomepageTotals() {
   // ==========================================
   // CURRENT TOTAL STATUS
   // ==========================================
+  const { pending, completed } = getOrderStats();
 
   const pendingOrders =
     orders.filter(isPendingOrder);
@@ -3438,21 +3451,8 @@ function renderHomepageTotals() {
   // ==========================================
   //  SAVE DOM TEXT
 
-  if(pendingEl){
-    setDashboardText(
-    "pendingTotal",
-    pendingOrders.length
-  )
-}
-
-
-
- if(completedEl){
-    setDashboardText(
-    "pendingTotal",
-     completedOrders.length
-  )
-}
+ if(pendingEl) pendingEl.textContent = pending;
+ if(completedEl) completedEl.textContent = completed;
 
 
  
@@ -3675,9 +3675,15 @@ function startAutoPolling(orderIdOrRef) {
   const statusResult = document.getElementById("statusResult");
   if (statusResult) statusResult.innerHTML = "";
 
+
+
   // Initial immediate check for this specific order
   (async () => {
     if (!orderIdOrRef) return;
+
+    const stored = getStoredOrders().find(o => o.orderId === orderIdOrRef);
+    if(String(stored?.provider || "").toLowerCase() === "datamart") return;
+
     const order = await checkOrderStatusOnce(orderIdOrRef);
     if (order) {
       createOrUpdateStatusCard(order); // popup card
@@ -3691,6 +3697,7 @@ function startAutoPolling(orderIdOrRef) {
   _statusPollTimer = setInterval(async () => {
     const orders = getStoredOrders();
     for (let order of orders) {
+      if(String(order.provider || "").toLowerCase() === "datamart") continue; 
       if (isTerminalStatus(order.status)) continue; // skip delivered/failed
       const latest = await checkOrderStatusOnce(order.orderId);
       if (!latest) continue;
@@ -3880,24 +3887,41 @@ function loadActiveBadge() {
 
 
 
+const COMPLETED_STATUSES = new Set([
+  "delivered", "completed", "success", "successful", "failed", "cancelled",
+  "rejected", "refunded"
+]);
 
-function getOrderStats() {
-  const orders = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
+const PENDING_STATUSES = new Set(["pending", "waiting"]);
 
+function getOrderStats(){
+  let orders = [];
 
-  const completedStatuses = ["delivered", "completed", "success","cancelled", "failed"];
+  try{
+    const parsed = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY) || "[]");
+     orders = Array.isArray(parsed) ? parsed : [];
+  } catch{}
 
+  let pending = 0, completed = 0;
 
-  return {
-    pending: orders.filter(o => (o.status || "").toLowerCase() === "pending").length,
+  orders.forEach(o => {
+    const s = String(o.status || "pending").trim().toLowerCase();
+    if(COMPLETED_STATUSES.has(s)) completed++;
+    else if(PENDING_STATUSES.has(s)) pending++;
+  });
 
-
-    completed: orders.filter(o => completedStatuses.includes(o.status?.toLowerCase())).length
-  };
-
+  return { pending, completed };
 }
 
+function updatePendingCard(){
+  const { pending, completed } = getOrderStats();
 
+  const pendingEl = document.getElementById("pendingTotal");
+  const completedEl = document.getElementById("completedOrders");
+
+  if(pendingEl) pendingEl.textContent = pending;
+  if(completedEl) completedEl.textContent = completed;
+}
 
 
 
@@ -3996,23 +4020,6 @@ function updateLiveOrderStatus(orderId, newStatus) {
 
 
 
-function updatePendingCard() {
-  const stats = getOrderStats();
-
-  // pending from storage
- const pendingEl = document.getElementById("pendingTotal");
-  if(pendingEl) pendingEl.textContent = stats.pending;
- 
-
-
-  const completedEl = document.getElementById("completedOrders");
-
-    // read from permanent storage
-    const completedTotal =
-  parseInt(localStorage.getItem("ecoCompletedTotal")) || 0;
-
-  if(completedEl) completedEl.textContent = completedTotal;
-}
 
 
 
@@ -4112,14 +4119,13 @@ function pollOrderStatus(orderId) {
 }
 //ends
 
+
+
+
 // ---------- LIVE ORDERS PERSISTENCE ----------
 document.addEventListener("DOMContentLoaded", () => {
   // single entry point for rendering
   loadLiveOrders();
-
-// background updates (if polling)
-  startAutoPolling();
-
   // Read delivered orders from HISTORY
   initializeCompletedCount();
 
@@ -4131,6 +4137,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // load nav badge
   loadActiveBadge();
+
+  try { startAutoPolling(); } catch(e) {console.error(e); }
 });
 // handleNewOrders Dom ends//
 
