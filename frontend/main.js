@@ -2575,6 +2575,193 @@ document.addEventListener(
 
 
 
+
+// =========================
+// RENDER LIVE ORDER ROW
+// =========================
+function renderLiveOrderRow(order) {
+  if (!order || !order.orderId) {
+    console.error("Cannot render live order: missing orderId.", order);
+    return;
+  }
+
+  const tableBody = document.getElementById("liveOrderRows");
+  if (!tableBody) return;
+
+  const recipient = 
+  order.recipient ||
+  order.phoneNumber ||
+  order.phone ||
+  order.recipientNumber ||
+  order.items?.[0]?.recipient ||
+  order.items?.[0]?.phoneNumber ||
+  selectedBundle?.recipient ||
+  selectedBundle?.phoneNumber ||
+  bundle?.recipient ||
+  bundle?.phoneNumber ||
+  "";
+
+  // =========================
+  // NORMALIZE ORDER
+  // =========================
+  const normalized = {
+    ...order,
+    orderId: String(order.orderId),
+    provider: String(order.provider || "swiftdata").toLowerCase(),
+    recipient,
+    volume: order.volume ?? 0,
+    status: order.status || "processing"
+  };
+
+  // =========================
+  // REMOVE EMPTY PLACEHOLDER
+  // =========================
+  const empty = tableBody.querySelector(".empty-state");
+  if (empty) empty.remove();
+
+  // =========================
+  // FORMAT DATE
+  // =========================
+  function formatOrderDate(value) {
+    if (!value) return "N/A";
+
+    const d = new Date(value);
+
+    if (Number.isNaN(d.getTime())) return "N/A";
+
+    const datePart = d.toLocaleDateString("en-US", {
+      month: "short",
+      day: "2-digit",
+      year: "numeric"
+    });
+
+    const timePart = d.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true
+    }).toUpperCase();
+
+    return `${datePart} ${timePart}`;
+  }
+
+  const date = formatOrderDate(
+    normalized.createdAt || normalized.timestamp
+  );
+
+  const update = formatOrderDate(normalized.updatedAt);
+
+  // =========================
+  // FIND EXISTING ROW
+  // Match order ID + provider
+  // =========================
+  let row = Array.from(
+    tableBody.querySelectorAll(".live-row")
+  ).find(item =>
+    item.dataset.id === normalized.orderId &&
+    String(item.dataset.provider || "swiftdata").toLowerCase() ===
+      normalized.provider
+  );
+
+  const isNewRow = !row;
+
+  // =========================
+  // CREATE ROW ONLY IF NEW
+  // =========================
+  if (isNewRow) {
+    row = document.createElement("div");
+    row.className = "live-row";
+    row.dataset.id = normalized.orderId;
+    row.dataset.provider = normalized.provider;
+  }
+
+  // =========================
+  // BUILD / REFRESH ROW CELLS
+  // =========================
+  row.replaceChildren();
+
+  function addCell(value, className = "") {
+    const span = document.createElement("span");
+
+    if (className) span.className = className;
+
+    span.textContent = String(value ?? "-");
+    row.appendChild(span);
+
+    return span;
+  }
+
+  // Order ID
+  addCell(normalized.orderId);
+
+  // Recipient
+  addCell(normalized.recipient);
+
+  // Data volume
+  addCell(`${normalized.volume}GB`);
+
+  // Status
+  const statusCell = addCell("", "status-cell");
+  const badge = document.createElement("span");
+
+  badge.className =
+    `status-badge ${getStatusClass(normalized.status)}`;
+
+  const iconContainer = document.createElement("span");
+  iconContainer.innerHTML = getStatusIcon(normalized.status);
+
+  if (iconContainer.firstElementChild) {
+    badge.appendChild(iconContainer.firstElementChild);
+  }
+
+  const statusText = document.createElement("span");
+  statusText.textContent = normalized.status;
+
+  badge.appendChild(statusText);
+  statusCell.appendChild(badge);
+
+  // Network
+  addCell(getNetwork(normalized));
+
+  // Payment
+  addCell("Yes");
+
+  // Created date
+  addCell(date);
+
+  // =========================
+  // INSERTION BEHAVIOR
+  // =========================
+  if (isNewRow) {
+    // New orders appear at the top.
+    tableBody.appendChild(row);
+  } else {
+    // Existing rows stay in their current position.
+    // Do not append, prepend, or appendChild the row here.
+  }
+
+  console.log("Live order row rendered:", {
+    orderId: normalized.orderId,
+    provider: normalized.provider,
+    status: normalized.status,
+    createdDate: date,
+    updatedDate: update,
+    isNewRow
+  });
+}
+console.log(JSON.parse(localStorage.getItem("ecoLiveOrders")));
+
+
+// ---------- LIVE ORDER CARD ---------
+
+
+
+
+
+
+
+
+
+
 const dataMartPollingTimers = new Map();
 
 const DATAMART_PREFIX = "Ia553341879ecodata-";
@@ -2770,8 +2957,7 @@ function startDataMartAutoPolling(providerReference, normalized) {
 
         if (typeof renderLiveOrderRow === "function") renderLiveOrderRow(updatedOrder);
         if (typeof createOrUpdateStatusCard === "function") createOrUpdateStatusCard(updatedOrder);
-        if (typeof updatePendingCard === "function") updatePendingCard();
-        if (typeof loadActiveBadge === "function") loadActiveBadge();
+       
 
         console.log("DataMart status updated:", {
           reference,
@@ -2818,182 +3004,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// =========================
-// RENDER LIVE ORDER ROW
-// =========================
-function renderLiveOrderRow(order) {
-  if (!order || !order.orderId) {
-    console.error("Cannot render live order: missing orderId.", order);
-    return;
-  }
-
-  const tableBody = document.getElementById("liveOrderRows");
-  if (!tableBody) return;
-
-  const recipient = 
-  order.recipient ||
-  order.phoneNumber ||
-  order.phone ||
-  order.recipientNumber ||
-  order.items?.[0]?.recipient ||
-  order.items?.[0]?.phoneNumber ||
-  selectedBundle?.recipient ||
-  selectedBundle?.phoneNumber ||
-  bundle?.recipient ||
-  bundle?.phoneNumber ||
-  "";
-
-  // =========================
-  // NORMALIZE ORDER
-  // =========================
-  const normalized = {
-    ...order,
-    orderId: String(order.orderId),
-    provider: String(order.provider || "swiftdata").toLowerCase(),
-    recipient,
-    volume: order.volume ?? 0,
-    status: order.status || "processing"
-  };
-
-  // =========================
-  // REMOVE EMPTY PLACEHOLDER
-  // =========================
-  const empty = tableBody.querySelector(".empty-state");
-  if (empty) empty.remove();
-
-  // =========================
-  // FORMAT DATE
-  // =========================
-  function formatOrderDate(value) {
-    if (!value) return "N/A";
-
-    const d = new Date(value);
-
-    if (Number.isNaN(d.getTime())) return "N/A";
-
-    const datePart = d.toLocaleDateString("en-US", {
-      month: "short",
-      day: "2-digit",
-      year: "numeric"
-    });
-
-    const timePart = d.toLocaleTimeString("en-US", {
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: true
-    }).toUpperCase();
-
-    return `${datePart} ${timePart}`;
-  }
-
-  const date = formatOrderDate(
-    normalized.createdAt || normalized.timestamp
-  );
-
-  const update = formatOrderDate(normalized.updatedAt);
-
-  // =========================
-  // FIND EXISTING ROW
-  // Match order ID + provider
-  // =========================
-  let row = Array.from(
-    tableBody.querySelectorAll(".live-row")
-  ).find(item =>
-    item.dataset.id === normalized.orderId &&
-    String(item.dataset.provider || "swiftdata").toLowerCase() ===
-      normalized.provider
-  );
-
-  const isNewRow = !row;
-
-  // =========================
-  // CREATE ROW ONLY IF NEW
-  // =========================
-  if (isNewRow) {
-    row = document.createElement("div");
-    row.className = "live-row";
-    row.dataset.id = normalized.orderId;
-    row.dataset.provider = normalized.provider;
-  }
-
-  // =========================
-  // BUILD / REFRESH ROW CELLS
-  // =========================
-  row.replaceChildren();
-
-  function addCell(value, className = "") {
-    const span = document.createElement("span");
-
-    if (className) span.className = className;
-
-    span.textContent = String(value ?? "-");
-    row.appendChild(span);
-
-    return span;
-  }
-
-  // Order ID
-  addCell(normalized.orderId);
-
-  // Recipient
-  addCell(normalized.recipient);
-
-  // Data volume
-  addCell(`${normalized.volume}GB`);
-
-  // Status
-  const statusCell = addCell("", "status-cell");
-  const badge = document.createElement("span");
-
-  badge.className =
-    `status-badge ${getStatusClass(normalized.status)}`;
-
-  const iconContainer = document.createElement("span");
-  iconContainer.innerHTML = getStatusIcon(normalized.status);
-
-  if (iconContainer.firstElementChild) {
-    badge.appendChild(iconContainer.firstElementChild);
-  }
-
-  const statusText = document.createElement("span");
-  statusText.textContent = normalized.status;
-
-  badge.appendChild(statusText);
-  statusCell.appendChild(badge);
-
-  // Network
-  addCell(getNetwork(normalized));
-
-  // Payment
-  addCell("Yes");
-
-  // Created date
-  addCell(date);
-
-  // =========================
-  // INSERTION BEHAVIOR
-  // =========================
-  if (isNewRow) {
-    // New orders appear at the top.
-    tableBody.appendChild(row);
-  } else {
-    // Existing rows stay in their current position.
-    // Do not append, prepend, or appendChild the row here.
-  }
-
-  console.log("Live order row rendered:", {
-    orderId: normalized.orderId,
-    provider: normalized.provider,
-    status: normalized.status,
-    createdDate: date,
-    updatedDate: update,
-    isNewRow
-  });
-}
-console.log(JSON.parse(localStorage.getItem("ecoLiveOrders")));
 
 
-// ---------- LIVE ORDER CARD ---------
+
+
+
 
 
 
