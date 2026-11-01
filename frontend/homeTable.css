@@ -183,7 +183,7 @@ p {
   background: var(--primary-cl) !important;
   align-self: center;
   grid-template-columns: 
-100px 140px  120px 130px 100px 100px 150px;
+110px 110px  120px 100px 130px 150px 160px;
 
   /* sticky top so it stays visible while scrolling vertically */
   position: sticky;
@@ -215,7 +215,7 @@ p {
   padding: 0 .5rem;
   align-items: start;
   grid-template-columns: 
-100px 110px  130px 100px 130px 120px 160px;
+110px 110px  120px 100px 130px 150px 160px;
   position: relative;
   min-width: max-content; /* ensures rows stretch with header */
 }
@@ -249,7 +249,7 @@ p {
  min-width: 958px !important;
  height: 2.6rem;
  border-bottom: 1px solid rgba(226, 226, 226, 226);
- grid-template-columns: 120px 110px  120px 100px 130px 120px 160px;
+ grid-template-columns: 110px 110px  120px 100px 130px 150px 160px;
  display: grid;
  white-space: nowrap !important;
 }
