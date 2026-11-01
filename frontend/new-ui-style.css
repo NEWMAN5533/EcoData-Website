@@ -1720,12 +1720,12 @@ strong, b { font-size: inherit; }
 
 .eco-home-table-header,
 .eco-home-order-rows {
-  min-width: 860px;
+  min-width: 958px !important;
 }
 
 .eco-home-table-header {
   display: grid;
-  grid-template-columns: 100px 140px  120px 130px 100px 100px 150px;
+  grid-template-columns: 120px 110px  120px 100px 130px 120px 160px;
   align-items: center;
   gap: 14px;
   min-height: 53px;
