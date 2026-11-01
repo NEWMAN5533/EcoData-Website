@@ -215,7 +215,7 @@ p {
   padding: 0 .5rem;
   align-items: start;
   grid-template-columns: 
-120px 110px  120px 100px 130px 120px 160px;
+100px 110px  130px 100px 130px 120px 160px;
   position: relative;
   min-width: max-content; /* ensures rows stretch with header */
 }
@@ -246,11 +246,10 @@ p {
 #liveOrderRows .live-row{
  justify-items: center;
  align-items: center;
- min-width: max-content;
- width: 100%;
+ min-width: 958px !important;
  height: 2.6rem;
  border-bottom: 1px solid rgba(226, 226, 226, 226);
- grid-template-columns:120px 110px  120px 100px 130px 120px 160px;
+ grid-template-columns: 120px 110px  120px 100px 130px 120px 160px;
  display: grid;
  white-space: nowrap !important;
 }
