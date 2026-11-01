@@ -2598,11 +2598,6 @@ function renderLiveOrderRow(order) {
   // Order ID
   addCell(normalized.orderId);
 
-  // Recipient
-  addCell(normalized.recipient);
-
-  // Data volume
-  addCell(`${normalized.volume}GB`);
 
   // Status
   const statusCell = addCell("", "status-cell");
@@ -2623,6 +2618,13 @@ function renderLiveOrderRow(order) {
 
   badge.appendChild(statusText);
   statusCell.appendChild(badge);
+
+  // Recipient
+  addCell(normalized.recipient);
+
+  // Data volume
+  addCell(`${normalized.volume}GB`);
+
 
   // Network
   addCell(getNetwork(normalized));
