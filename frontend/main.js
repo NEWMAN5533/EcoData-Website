@@ -3832,7 +3832,7 @@ const COMPLETED_STATUSES = new Set([
   "rejected", "refunded"
 ]);
 
-const PENDING_STATUSES = new Set(["pending", "waiting", "processing"]);
+const PENDING_STATUSES = new Set(["pending", "waiting", "queued"]);
 
 function getOrderStats(){
   let orders = [];
