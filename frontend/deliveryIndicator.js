@@ -190,7 +190,7 @@ function updateDeliveryIndicator(snapshot) {
     const bubble2 = document.getElementById("deliveryBubble2");
     const fasterDeliverySticker1 = document.getElementById("fasterDeliverySticker1");
     const fasterDeliverySticker2 = document.getElementById("fasterDeliverySticker2");
-    const fasterDeliverySticker3 = document.getElementById("fasterDeliverySticker2");
+    const fasterDeliverySticker3 = document.getElementById("fasterDeliverySticker3");
     const messageEl = document.getElementById("deliveryMessage");
 
     // =========================
