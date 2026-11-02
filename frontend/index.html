@@ -2351,7 +2351,7 @@ syncEmptyState();
       <div class="eco-home-table-header">
         
         <span>Status</span>
-        <span>Size</span>
+        <span>Size(GB)</span>
         <span>Recipient</span>
          <span>Paid?</span>
         <span>Network</span>
@@ -6868,7 +6868,35 @@ syncEmptyState();
 
 
 
+<button id="openSpin" class="btn">Spin &amp; win</button>
 
+<div class="spin-modal" id="spinModal" role="dialog" aria-modal="true" aria-labelledby="spinTitle" hidden>
+  <div class="spin-box">
+    <button class="spin-x" id="spinClose" aria-label="Close">&times;</button>
+    <h3 id="spinTitle">Spin &amp; win free data</h3>
+
+    <div class="row">
+      <input id="phone" type="tel" inputmode="numeric" maxlength="10" placeholder="Recipient number">
+      <button class="btn ghost" id="check">Check</button>
+    </div>
+
+    <div class="meter">
+      <div class="meter-top"><span id="meterLabel">Prize progress</span><b id="meterVal">0GB</b></div>
+      <div class="bar"><i id="bar"></i></div>
+    </div>
+    <p id="info">Buy data for this number to unlock 1GB and 2GB prizes.</p>
+
+    <div class="stage" id="stage">
+      <div class="rim" id="rim"></div>
+      <div class="pointer"></div>
+      <div id="wheel"></div>
+      <div class="hub">🎁</div>
+    </div>
+
+    <button class="btn" id="spinBtn">Spin the wheel</button>
+    <p id="result" aria-live="polite"></p>
+  </div>
+</div>
 
 
   </div>
@@ -7149,6 +7177,205 @@ setInterval(updateGiveawayCountdown, 1000);
 
 
 
+
+
+
+
+
+
+
+
+
+
+const SPIN_API = window.location.hostname === "localhost"
+  ? "http://localhost:3000" : "https://ecodata-app.onrender.com";
+
+// 8 segments: server says win 1GB / 2GB / none, we pick a matching segment
+const SEGMENTS = ["1GB", "Try again", "2GB", "Try again", "1GB", "Try again", "2GB", "Try again"];
+const SEG_DEG = 360 / SEGMENTS.length;
+const SPIN_PHONE_KEY = "ecoSpinPhone";
+
+const $ = id => document.getElementById(id);
+const el = {
+  modal: $("spinModal"), open: $("openSpin"), close: $("spinClose"),
+  wheel: $("wheel"), stage: $("stage"), rim: $("rim"),
+  phone: $("phone"), check: $("check"), spinBtn: $("spinBtn"),
+  info: $("info"), bar: $("bar"), meterVal: $("meterVal"), meterLabel: $("meterLabel"),
+  result: $("result")
+};
+
+let rotation = 0, busy = false;
+
+// ---------- build wheel ----------
+SEGMENTS.forEach((label, i) => {
+  const s = document.createElement("span");
+  s.style.setProperty("--a", `${i * SEG_DEG + SEG_DEG / 2}deg`);
+  s.textContent = label;
+  if (label === "Try again") s.className = "miss";
+  el.wheel.appendChild(s);
+});
+for (let i = 0; i < 24; i++) {
+  const b = document.createElement("i");
+  b.className = "bulb";
+  const a = (i / 24) * 2 * Math.PI;
+  b.style.left = `${50 + 48.6 * Math.sin(a)}%`;
+  b.style.top = `${50 - 48.6 * Math.cos(a)}%`;
+  el.rim.appendChild(b);
+}
+
+// ---------- helpers ----------
+function cleanPhone(v) {
+  let d = String(v || "").replace(/\D/g, "");
+  if (d.startsWith("233")) d = "0" + d.slice(3);
+  return d;
+}
+
+function toast(msg, type = "error") {
+  if (typeof showSnackBar === "function") showSnackBar(msg, type, 4500);
+  else el.result.textContent = msg;
+}
+
+async function api(path, options = {}) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 20000);
+  try {
+    const res = await fetch(`${SPIN_API}${path}`, {
+      ...options, signal: ctrl.signal, cache: "no-store",
+      headers: { Accept: "application/json",
+        ...(options.body ? { "Content-Type": "application/json" } : {}) }
+    });
+    let data = {};
+    try { data = await res.json(); } catch {}
+    return { ok: res.ok, status: res.status, data };
+  } finally { clearTimeout(timer); }
+}
+
+// ---------- status ----------
+function renderStatus(s) {
+  const credit = Number(s.creditGB) || 0;
+
+  if (s.prizeGB > 0) {
+    el.info.textContent = `Prize unlocked. Your next spin can win ${s.prizeGB}GB.`;
+  } else if (s.nextTier) {
+    el.info.textContent =
+      `Buy ${s.nextTier.remaining}GB more to unlock a ${s.nextTier.prizeGB}GB prize. You can still spin for fun.`;
+  }
+
+  if (s.nextTier) {
+    el.meterLabel.textContent = `Toward ${s.nextTier.prizeGB}GB prize`;
+    el.meterVal.textContent = `${credit} / ${s.nextTier.minGB}GB`;
+    el.bar.style.width = `${Math.min(100, (credit / s.nextTier.minGB) * 100)}%`;
+  } else {
+    el.meterLabel.textContent = "Top prize unlocked";
+    el.meterVal.textContent = `${credit}GB`;
+    el.bar.style.width = "100%";
+  }
+}
+
+async function checkStatus() {
+  const phone = cleanPhone(el.phone.value);
+  if (phone.length !== 10) {
+    el.info.textContent = "Enter a 10-digit number, like 0241234567.";
+    return null;
+  }
+  try {
+    const { ok, data } = await api(`/api/spin/status/${encodeURIComponent(phone)}`);
+    if (!ok || !data.success) { toast(data.message || "Could not check this number."); return null; }
+    try { localStorage.setItem(SPIN_PHONE_KEY, phone); } catch {}
+    renderStatus(data);
+    return data;
+  } catch (e) {
+    toast(e.name === "AbortError" ? "Server is slow. Try again shortly." : "No connection.");
+    return null;
+  }
+}
+
+// ---------- spin ----------
+async function spin() {
+  if (busy) return;
+  const phone = cleanPhone(el.phone.value);
+  if (phone.length !== 10) {
+    el.info.textContent = "Enter the number you buy data for first.";
+    return;
+  }
+
+  busy = true;
+  el.spinBtn.disabled = true;
+  el.result.textContent = "";
+  el.result.className = "";
+
+  let r;
+  try {
+    r = await api("/api/spin", { method: "POST", body: JSON.stringify({ phone }) });
+  } catch {
+    busy = false; el.spinBtn.disabled = false;
+    return toast("The spin did not go through. Try again.");
+  }
+
+  if (!r.ok || !r.data.success) {
+    busy = false; el.spinBtn.disabled = false;
+    return toast(r.status === 429 ? "Slow down. Wait a few seconds." : (r.data.message || "Spin failed."));
+  }
+
+  // Server already decided. Pick a matching segment to land on.
+  const wonLabel = r.data.win ? `${r.data.gb}GB` : "Try again";
+  const matches = SEGMENTS.map((l, i) => l === wonLabel ? i : -1).filter(i => i >= 0);
+  const idx = matches[Math.floor(Math.random() * matches.length)];
+
+  rotation += 360 * 6 + (360 - (idx * SEG_DEG + SEG_DEG / 2)) - (rotation % 360);
+  el.stage.classList.add("live");
+  el.wheel.style.transform = `rotate(${rotation}deg)`;
+
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  setTimeout(async () => {
+    el.stage.classList.remove("live");
+    busy = false;
+    el.spinBtn.disabled = false;
+
+    if (r.data.win) {
+      el.result.className = "win";
+      el.result.textContent = `🏆 You won ${r.data.gb}GB! It is on its way to ${phone}.`;
+      try { playSuccessSound?.(); } catch {}
+    } else {
+      el.result.textContent = "No prize this time. Spin again.";
+    }
+    await checkStatus();
+  }, reduced ? 300 : 5400);
+}
+
+// ---------- modal ----------
+function openModal() {
+  el.modal.hidden = false;
+  document.body.style.overflow = "hidden";
+  el.close.focus();
+
+  let saved = "";
+  try { saved = localStorage.getItem(SPIN_PHONE_KEY) || ""; } catch {}
+  if (!saved) {
+    try {
+      const orders = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY) || "[]");
+      saved = cleanPhone(orders[0]?.recipient || "");
+    } catch {}
+  }
+  if (saved && !el.phone.value) el.phone.value = saved;
+  if (cleanPhone(el.phone.value).length === 10) checkStatus();
+}
+
+function closeModal() {
+  if (busy) return;                  // don't close mid-spin
+  el.modal.hidden = true;
+  document.body.style.overflow = "";
+  el.open.focus();
+}
+
+el.open.addEventListener("click", openModal);
+el.close.addEventListener("click", closeModal);
+el.modal.addEventListener("click", e => { if (e.target === el.modal) closeModal(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !el.modal.hidden) closeModal(); });
+el.check.addEventListener("click", checkStatus);
+el.spinBtn.addEventListener("click", spin);
+el.phone.addEventListener("keydown", e => { if (e.key === "Enter") checkStatus(); });
   })
 </script>
 

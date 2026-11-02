@@ -790,7 +790,7 @@ document
 
     button.addEventListener("click", async () => {
       if (button.disabled) return;          // blocks double taps
-      setButtonBusy(button, true, "Checking verifica...");
+      setButtonBusy(button, true, "Verifying Number...");
 
       let paymentStarted = false;
 
@@ -1863,7 +1863,7 @@ async function saveOrderToFirestore(orderData) {
 
   volume: Number(orderData.volume || 0),
 
-  amount: Number(orderData.amount || 0) + 1.095,
+  amount: Number(orderData.amount * 1.0195 || 0),
 
   dataValue: `${(orderData.dataValue  || 0)}`,
 
@@ -3289,12 +3289,6 @@ function renderCardPerformance(
     </div>
   `;
 }
-
-
-
-
-
-
 
 
 
