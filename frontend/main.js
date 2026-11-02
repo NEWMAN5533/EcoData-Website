@@ -1121,7 +1121,7 @@ function activateTrackers() {
 function unActivateTrackers(){
  const firstTracker = document.getElementById("deliveryTracker1").style.display = "none";
 
- const secondTracker = document.getElementById("deliveryTracker2").style.display = "flex";
+ const secondTracker = document.getElementById("deliveryTracker2").style.display = "none";
 }
 
 //=================================
@@ -1141,7 +1141,82 @@ function setDashboardText(id, value){
 }
 
 
+const SUCCESS_ORDER_ICON = "./css/icons/success-order-popup.jpeg";
+const ORDERS_SECTION_ID = "eco-table-scroll-section";
 
+let successOrderPopupTimer = null;
+
+// Load the image early so the popup never waits for it
+(function preloadSuccessIcon() {
+  const img = new Image();
+  img.src = SUCCESS_ORDER_ICON;
+})();
+
+function showSuccessfulOrderPopup({ size, recipient } = {}) {
+  const overlay = document.getElementById("successOrderPopup");
+  if (!overlay) return;
+
+  const card = overlay.querySelector(".success-modal-content");
+  const icon = document.getElementById("successOrderIcon");
+  const sizeEl = document.getElementById("successOrderSize");
+  const recipientEl = document.getElementById("successOrderRecipient");
+
+  if (icon && !icon.getAttribute("src")) icon.src = SUCCESS_ORDER_ICON;
+
+  // textContent, never innerHTML: the recipient comes from user input
+  if (sizeEl) sizeEl.textContent = `${Number(size) || 0}GB`;
+  if (recipientEl) recipientEl.textContent = String(recipient || "your number");
+
+  clearTimeout(successOrderPopupTimer);
+
+  // Reset so the animation plays for every new order
+  overlay.classList.remove("is-visible");
+  overlay.setAttribute("aria-hidden", "true");
+  if (card) void card.offsetWidth;
+
+  overlay.classList.add("is-visible");
+  overlay.setAttribute("aria-hidden", "false");
+
+  document.getElementById("successOrderViewBtn")?.focus({ preventScroll: true });
+
+  successOrderPopupTimer = setTimeout(closeSuccessfulOrderPopup, 3800);
+}
+
+function closeSuccessfulOrderPopup() {
+  const overlay = document.getElementById("successOrderPopup");
+  if (!overlay) return;
+
+  clearTimeout(successOrderPopupTimer);
+  overlay.classList.remove("is-visible");
+  overlay.setAttribute("aria-hidden", "true");
+}
+
+function scrollToOrdersTable() {
+  const target = document.getElementById(ORDERS_SECTION_ID);
+  if (!target) return;
+
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  target.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const overlay = document.getElementById("successOrderPopup");
+
+  // View Order: hide the popup, then scroll to the orders table
+  document.getElementById("successOrderViewBtn")?.addEventListener("click", () => {
+    closeSuccessfulOrderPopup();
+    requestAnimationFrame(scrollToOrdersTable);
+  });
+
+  // Tap outside the card to close
+  overlay?.addEventListener("click", e => {
+    if (e.target === overlay) closeSuccessfulOrderPopup();
+  });
+
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") closeSuccessfulOrderPopup();
+  });
+});
 
 
 
@@ -1357,11 +1432,6 @@ async function orderBundle(network, recipient, packageName, size, reference, ) {
       return;
     }
 
-    playSuccessSound();
-      showSnackBar(`📱${size}GB ORDER PLACED SUCCESSFULLY!`, "success", 6000);
-   
-
-
 const returnedOrder = result.order?.order || result.order || result;
 
 const orderData = {
@@ -1380,6 +1450,7 @@ const orderData = {
   dataValue: `${(bundle.dataValue || selectedBundle.dataValue || 0)}`,
 
   amount: Number(bundle.price * 1.0195 || 0),
+  provider: "swiftdata",
 
   status: "pending",
 
@@ -1395,6 +1466,14 @@ const orderData = {
  handleNewOrder(
   orderData
 );
+
+try{
+  playSuccessSound();
+  showSuccessfulOrderPopup({
+    size: orderData.volume, 
+    recipient: orderData.recipient
+  });
+} catch (e) { console.error("Success popup failed:", e);}
 
 updateHomepageTotals(orderData);
 
@@ -1425,7 +1504,7 @@ try {
   console.error("orderBundle error:", err);
   console.error(err.stack);
 
-  showSnackBar(`📱${size}GB ORDER PLACED SUCCESSFULLY!`, "success", 6000);
+ // showSnackBar(`📱${size}GB ORDER PLACED SUCCESSFULLY!`, "success", 6000);
 }
 }
 //ends//
@@ -1532,7 +1611,7 @@ async function orderDataMartBundle(
 
     if (!orderId) {
       console.error(
-        "DataMart purchase accepted, but the response lacks usable order references:",
+        "Purchase accepted, but the response lacks usable order references:",
         result
       );
 
@@ -1739,12 +1818,11 @@ async function orderDataMartBundle(
       );
     } else {
 
-      playSuccessSound();
-      showSnackBar(
-        `${orderData.volume}GB order accepted. Current status: ${status}.`,
-        "success",
-        6000
-      );
+     try{ playSuccessSound();} catch{}
+     showSuccessfulOrderPopup({
+      size: orderData.volume,
+      recipient: orderData.recipient
+     });
     }
 
     return {
