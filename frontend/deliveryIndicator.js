@@ -188,6 +188,9 @@ function updateDeliveryIndicator(snapshot) {
     // =========================
     const bubble = document.getElementById("deliveryBubble1");
     const bubble2 = document.getElementById("deliveryBubble2");
+    const fasterDeliverySticker1 = document.getElementById("fasterDeliverySticker1");
+    const fasterDeliverySticker2 = document.getElementById("fasterDeliverySticker2");
+    const fasterDeliverySticker3 = document.getElementById("fasterDeliverySticker2");
     const messageEl = document.getElementById("deliveryMessage");
 
     // =========================
@@ -195,21 +198,25 @@ function updateDeliveryIndicator(snapshot) {
     // =========================
     let deliveryClass;
     let deliveryMessage;
+   
 
     if (elapsedMinutes <= 10) {
       deliveryClass = "instant";
+      fasterDeliverySticker1.style.display = "flex";
 
       deliveryMessage =
         "Instant Delivery! Most orders are completed in under 10 minutes.";
 
     } else if (elapsedMinutes <= 30) {
       deliveryClass = "fast";
+      fasterDeliverySticker2.style.display = "flex";
 
       deliveryMessage =
         "MTN is delivering fast right now. Enjoy the speedy delivery!";
 
     } else if (elapsedMinutes <= 90) {
       deliveryClass = "normal";
+      fasterDeliverySticker3.style.display = "flex";
 
       deliveryMessage =
         "Orders are processing normally. Please allow up to 90 minutes.";
@@ -237,6 +244,8 @@ function updateDeliveryIndicator(snapshot) {
     if (messageEl) {
       messageEl.textContent = deliveryMessage;
     }
+
+   
 
     // =========================
     // UPDATE DELIVERY TIME UI

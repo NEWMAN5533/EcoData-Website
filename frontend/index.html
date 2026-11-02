@@ -1762,18 +1762,31 @@ syncEmptyState();
     <div class="eco-delivery-turnaround-content">
 
        <p id="deliveryMessage" class="eco-delivery-status-message">
-        MTN is delivering slightly slow right now.
-        Your order will still be delivered.
+        Delivery update loading....
         <i class="ri-checkbox-line" aria-hidden="true"></i>
       </p>
 
       <div class="eco-delivery-turnaround-summary">
-        <div class="eco-delivery-turnaround-label">
+        <div class="eco-turnAroundTimer">
+          <div class="eco-delivery-turnaround-label">
+          <div class="turnDiv1">
           <i class="ri-timer-line" aria-hidden="true"></i>
           <span>Current turnaround for the last batch</span>
+          </div>
+
+           <div class="turnDiv2">
+            <p id="turnAroundTime" class="eco-delivery-turnaround-value"></p>
+           </div>
         </div>
 
-        <p id="turnAroundTime" class="eco-delivery-turnaround-value"></p>
+       
+        </div>
+
+        <div class="fastDeliverySticker">
+          <img src="./css/icons/sticker1.webp" alt="sticker" class="fastSticker" id="fasterDeliverySticker1">
+          <img src="./css/icons/sticker2.webp" alt="sticker" class="fastSticker" id="fasterDeliverySticker2">
+          <img src="./css/icons/sticker3.webp" alt="sticker" class="fastSticker" id="fasterDeliverySticker3">
+        </div>
       </div>
 
       <div class="eco-delivery-time-grid">
