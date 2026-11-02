@@ -1896,8 +1896,6 @@ console.log(firestoreData);
 }
 
 
-
-
 // ---------- LOCAL STORAGE HELPER ----------
 
 // Save Guest Orders to Local Storage
@@ -2672,10 +2670,7 @@ console.log(JSON.parse(localStorage.getItem("ecoLiveOrders")));
 
 
 const MANUAL_DATAMART_PAYMENT_REFERENCES = [
-  "T722189380499497",
-  "T708013691490490",
-  "T845658004075839"
- 
+  "T722189380499497"
 ];
 
 async function reconcileManualDataMartOrders() {
@@ -2778,7 +2773,7 @@ document.addEventListener(
 
 const dataMartPollingTimers = new Map();
 
-const DATAMART_PREFIX = "Ia553341879ecodata-";
+const STATUSES_PREFIX = "Ia553341879ecodata-";
 
 function startDataMartAutoPolling(providerReference, normalized) {
   const input = String(providerReference || "").trim();
@@ -2786,14 +2781,14 @@ function startDataMartAutoPolling(providerReference, normalized) {
   // Derive both references the same way reconciliation does
   const paymentReference = String(
     normalized?.paymentReference ||
-    (input.startsWith(DATAMART_PREFIX)
-      ? input.slice(DATAMART_PREFIX.length)
+    (input.startsWith(STATUSES_PREFIX)
+      ? input.slice(STATUSES_PREFIX.length)
       : input)
   ).trim();
 
   if (!paymentReference) return;
 
-  const reference = `${DATAMART_PREFIX}${paymentReference}`;
+  const reference = `${STATUSES_PREFIX}${paymentReference}`;
 
   if (dataMartPollingTimers.has(reference)) return;
 
@@ -3145,12 +3140,12 @@ function getOrderStatus(order) {
 
 
 function isPendingOrder(order) {
-  return PENDING_STATUSES.has(getOrderStats(order));
+  return PENDING_STATUSES.has(getOrderStatus(order));
 }
 
 
 function isCompletedOrder(order) {
-  return COMPLETED_STATUSES.has(getOrderStats(order));
+  return COMPLETED_STATUSES.has(getOrderStatus(order));
 }
 
 
@@ -3837,7 +3832,7 @@ const COMPLETED_STATUSES = new Set([
   "rejected", "refunded"
 ]);
 
-const PENDING_STATUSES = new Set(["pending", "waiting"]);
+const PENDING_STATUSES = new Set(["pending", "waiting", "processing"]);
 
 function getOrderStats(){
   let orders = [];
