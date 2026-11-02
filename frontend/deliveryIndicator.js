@@ -223,6 +223,7 @@ function updateDeliveryIndicator(snapshot) {
 
     } else {
       deliveryClass = "slow";
+      fasterDeliverySticker3.style.display = "flex";
 
       deliveryMessage =
         "Orders are taking longer than usual. Please allow additional processing time.";
