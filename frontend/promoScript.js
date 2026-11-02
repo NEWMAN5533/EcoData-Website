@@ -40,7 +40,7 @@
     const showDay = showNow.getDay();
     let showEnd = new Date(showNow);
 
-    if(showDay === 2 || showDay === 3){
+    if(showDay === 1 || showDay === 2 || showDay === 3){
 
       showEnd.setDate(showNow.getDate() + (3 - showDay));
       
