@@ -430,11 +430,11 @@ strong, b { font-size: inherit; }
   margin: 0 0 20px;
   padding: 14px 16px;
   color: var(--eco-delivery-ink);
-  background: var(--eco-delivery-yellow-soft);
-  border: 1px solid rgba(255, 204, 0, 0.45);
+  background: rgba(192, 252, 192, 0.274);
+  border: 1px solid rgba(192, 240, 225, 0.568);
   border-radius: 13px;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 18px !important;
+  font-weight: 600;
   line-height: 1.75;
   overflow-wrap: anywhere;
 }
