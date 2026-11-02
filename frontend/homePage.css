@@ -34,14 +34,14 @@ p {
   /*====NEW===ROOT====*/
 
  /* Main backgrounds */
-  --body-bg-dark: #0b0d10;
+  --body-bg-dark: #262626;
   --page-bg-dark: #0b0d10;
   --sidebar-bg-dark: #101318;
   --surface-bg-dark: #14181e;
   --surface-bg-hover-dark: #191e25;
 
   /* Cards */
-  --card-bg-dark: #12161c;
+  --card-bg-dark: #1d1d1d !important;
   --card-bg-hover-dark: #171c23;
   --card-elevated-dark: #181d24;
 
@@ -56,7 +56,7 @@ p {
   /***
   DARK MODE COLORS
   ***/
-  --darkMode-bg-cl: rgb(24, 29, 35) !important;
+  --darkMode-bg-cl: rgb(24, 29, 35);
   --welcome-card-bg-2:  #141c27;
   --welcome-card-bg:  #0e141b ;
   --welcome-card-bg-3: rgba(77, 77, 77, 0.89);
@@ -1008,7 +1008,7 @@ width: 50%;
   left: 0;
   margin: 1.25rem 0;
   width: 100%;
-  max-width: 98%;
+  max-width: 100%;
   height: 8.6rem ;
   background: none;
   display: flex;
@@ -1043,7 +1043,7 @@ width: 50%;
 }
 
 .dark-mode .promo-bar .promo-bar-top{
-  background: var(--background-cl-1) !important;
+  background: var(--card-bg-dark) !important;
   border-bottom: 1px solid var(--thin-border);
 }
 
@@ -1117,7 +1117,7 @@ border: 1px solid rgb(235, 235, 235);
 }
 
 .dark-mode  .right-promo-content {
-  background: var(--darkMode-bg-cl) !important;
+  background: var(--card-bg-dark) !important;
   border: 1px solid var(--thin-border);
 }
 
@@ -2253,6 +2253,7 @@ border: 1px solid rgb(235, 235, 235);
 
 
 
+    
 
 
 
@@ -2260,6 +2261,20 @@ border: 1px solid rgb(235, 235, 235);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
 /* ==========================================
    ECODATA ADMIN WHATSAPP CHAT
@@ -2684,3 +2699,263 @@ border: 1px solid rgb(235, 235, 235);
   }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ============ SPIN MODAL ============ */
+.spin-modal {
+  --sp-bg: #0b0f0e;
+  --sp-line: rgba(255,255,255,.12);
+  --sp-text: #eafaf5;
+  --sp-mute: #8fa8a0;
+  --sp-acc: #00d49a;
+  --sp-on-acc: #04140f;
+  --sp-seg1: #0e3b2f;
+  --sp-seg2: #08241c;
+  --sp-rim: #16322a;
+
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0,0,0,.65);
+  font-family: inherit;
+}
+
+
+
+
+.spin-modal #wheel span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: var(--sp-text);
+  /* turn to the segment, move out from the center, then lay the text along the radius */
+  transform: rotate(var(--a)) translateY(calc(var(--wheel) * -0.33)) rotate(-90deg);
+}
+.spin-modal #wheel span.miss {
+  font-size: .72rem;
+  font-weight: 600;
+  opacity: .75;
+}
+
+
+
+.spin-modal[hidden] { display: none; }
+
+.spin-modal *,
+.spin-modal *::before,
+.spin-modal *::after { box-sizing: border-box; }
+
+.spin-modal .spin-box {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  max-height: 94vh;
+  overflow-y: auto;
+  padding: 22px 18px calc(20px + env(safe-area-inset-bottom, 0px));
+  color: var(--sp-text);
+  background: var(--sp-bg);
+  background-image: radial-gradient(70% 30% at 50% 0%, rgba(0,212,154,.14), transparent 70%);
+  border: 1px solid var(--sp-line);
+  border-radius: 22px;
+}
+
+.spin-modal h3 { margin: 0 40px 14px 0; font-size: 1.25rem; font-weight: 800; }
+
+.spin-modal .spin-x {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--sp-line);
+  background: transparent;
+  color: var(--sp-text);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* number + buttons */
+.spin-modal .row { display: flex; gap: 8px; }
+
+.spin-modal input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 14px;
+  font: 600 1rem inherit;
+  letter-spacing: .04em;
+  color: var(--sp-text);
+  background: transparent;
+  border: 1px solid var(--sp-line);
+  border-radius: 12px;
+}
+
+.spin-modal .btn {
+  padding: 12px 18px;
+  font: 800 1rem inherit;
+  color: var(--sp-on-acc);
+  background: var(--sp-acc);
+  border: 1px solid var(--sp-acc);
+  border-radius: 12px;
+  cursor: pointer;
+}
+.spin-modal .btn.ghost { color: var(--sp-acc); background: transparent; }
+.spin-modal .btn:disabled { opacity: .4; cursor: not-allowed; }
+
+.spin-modal input:focus-visible,
+.spin-modal .btn:focus-visible,
+.spin-modal .spin-x:focus-visible { outline: 2px solid var(--sp-acc); outline-offset: 2px; }
+
+/* progress */
+.spin-modal .meter { margin-top: 14px; }
+.spin-modal .meter-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: .9rem;
+  color: var(--sp-mute);
+}
+.spin-modal .meter-top b { color: var(--sp-text); font-weight: 800; }
+.spin-modal .bar { height: 10px; overflow: hidden; border-radius: 10px; background: var(--sp-line); }
+.spin-modal .bar i {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: 10px;
+  background: var(--sp-acc);
+  transition: width .6s;
+}
+.spin-modal #info { min-height: 2.6em; margin: 10px 0 0; font-size: .9rem; line-height: 1.4; color: var(--sp-mute); }
+
+/* wheel */
+.spin-modal .stage {
+  --wheel: min(66vw, 280px);
+  position: relative;
+  width: var(--wheel);
+  height: var(--wheel);
+  margin: 34px auto 24px;
+}
+
+.spin-modal .rim {
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  background: var(--sp-rim);
+  box-shadow: 0 0 0 2px var(--sp-line), 0 0 40px rgba(0,212,154,.22);
+}
+.spin-modal .bulb {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  margin: -3.5px;
+  border-radius: 50%;
+  background: var(--sp-acc);
+  opacity: .35;
+}
+.spin-modal .stage.live .bulb { animation: spChase .5s steps(2) infinite; }
+.spin-modal .stage.live .bulb:nth-child(odd) { animation-delay: .25s; }
+@keyframes spChase { 50% { opacity: 1; box-shadow: 0 0 8px var(--sp-acc); } }
+
+.spin-modal #wheel {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--sp-seg1) 0 45deg,    var(--sp-seg2) 45deg 90deg,
+    var(--sp-seg1) 90deg 135deg, var(--sp-seg2) 135deg 180deg,
+    var(--sp-seg1) 180deg 225deg, var(--sp-seg2) 225deg 270deg,
+    var(--sp-seg1) 270deg 315deg, var(--sp-seg2) 315deg 360deg);
+  transition: transform 5.2s cubic-bezier(.12,.75,.15,1);
+}
+.spin-modal #wheel span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  font-weight: 800;
+  font-size: 1.2rem;
+  white-space: nowrap;
+  color: var(--sp-text);
+  transform: rotate(var(--a)) translateY(calc(var(--wheel) / -2 + 44px)) translate(-50%, -50%);
+}
+.spin-modal #wheel span.miss { font-size: .7rem; font-weight: 600; opacity: .7; }
+
+.spin-modal .hub {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin: -32px;
+  font-size: 1.6rem;
+  background: var(--sp-bg);
+  border: 3px solid var(--sp-acc);
+  border-radius: 50%;
+}
+
+.spin-modal .pointer {
+  position: absolute;
+  left: 50%;
+  top: -28px;
+  z-index: 3;
+  width: 0;
+  height: 0;
+  margin-left: -14px;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-top: 30px solid var(--sp-acc);
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,.4));
+}
+
+/* spin button + result */
+.spin-modal #spinBtn { display: block; width: 100%; padding: 15px; font-size: 1.1rem; }
+.spin-modal #result {
+  min-height: 1.5em;
+  margin: 12px 0 0;
+  text-align: center;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+.spin-modal #result.win { color: var(--sp-acc); }
+
+@media (prefers-reduced-motion: reduce) {
+  .spin-modal #wheel { transition-duration: .01s; }
+  .spin-modal .stage.live .bulb { animation: none; }
+}
