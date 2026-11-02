@@ -1,0 +1,446 @@
+
+
+
+    /* =========================================
+       ECODATA USER SIGNUP
+       BUNDLED STYLES
+    ========================================= */
+
+:root {
+  --signup-bg: #f7f7f5;
+  --signup-card: #ffffff;
+  --signup-text: #171717;
+  --signup-muted: #777774;
+  --signup-border: #e5e5e2;
+  --signup-soft: #f2f2ef;
+
+  --signup-input-bg: #ffffff;
+  --signup-input-text: #171717;
+  --signup-placeholder: #999997;
+
+  --signup-button-bg: #171717;
+  --signup-button-text: #ffffff;
+  --signup-button-google: #fff;
+  --signup-button-google-text: #171717;
+
+  --signup-icon-bg: #f1f1ef;
+  --signup-icon-text: #333333;
+
+  --signup-danger: #b42318;
+  --signup-success: #18794e;
+
+  --signup-radius: 16px;
+  --signup-input-radius: 11px;
+}
+
+
+/* =========================
+   DARK MODE
+========================= */
+
+html[data-theme="dark"] {
+  --signup-bg: #0b0d10;
+  --signup-card: #151719;
+  --signup-text: #f2f2f2;
+  --signup-muted: #999999;
+  --signup-border: #1d1d1d;
+  --signup-soft: #242424;
+
+  --signup-input-bg: #161616;
+  --signup-input-text: #f2f2f2;
+  --signup-placeholder: #777777;
+
+  --signup-button-bg: #f2f2f2;
+  --signup-button-text: #111111;
+  --signup-button-google: #494947;
+  --signup-button-google-text: #111;
+
+  --signup-icon-bg: #292929;
+  --signup-icon-text: #eeeeee;
+}
+
+
+    /* =========================================
+        RESET
+    ========================================= */
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      width: 100%;
+      min-height: 100%;
+      background: var(--signup-bg);
+    }
+
+    body {
+      width: 100%;
+      min-height: 100vh;
+
+      margin: 0;
+
+      background: var(--signup-bg);
+      color: var(--signup-text);
+
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    a {
+      color: inherit;
+    }
+
+
+ 
+
+
+
+/***==============================
+VERIFICATION CODE MODAL
+=============================***/
+.verification-code-modal{
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999999;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+ .verification-code-modal .code-modal{
+  justify-content: start;
+  align-items: start;
+  gap: 1.4rem;
+  position: relative;
+ }
+
+ .code-modal .success-text-p {
+  font-size: .8rem;
+  font-weight: 500;
+ }
+
+
+ .code-modal .verify-form{
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  height: 40%;
+  align-items: start;
+  justify-content: start;;
+ }
+
+
+ .code-modal label{
+  font-size: 1.2rem;
+  font-weight:700;
+  color: var(--signup-input-text);
+ }
+
+ .code-modal input{
+  border: none;
+  border-radius: var(--signup-input-radius);
+  width: 100%;
+  height: 3rem;
+  font-size: 1.3rem;
+  outline: none;
+  color: var(--signup-input-text);
+  background: var(--signup-input-bg);
+  padding: 0 .5rem;
+ }
+
+ .code-modal input::placeholder{
+  font-size: 1rem;
+ }
+
+ .code-modal input:focus{
+  border: 1px solid var(--signup-border);
+ }
+
+
+ /*** verify button ***/
+ .code-modal .verifyBtn{
+  width: 100%;
+  height: 3rem;
+  border: none;
+  border-radius: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--signup-success);
+  color: var(--signup-button-text);
+  font-weight: 500;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: opacity .2s ease;
+ }
+
+ .verifyBtn:hover{
+  opacity: .8;
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ #successOrderPopup {
+  position: fixed; inset: 0; z-index: 9999999999;
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px; background: rgba(0,0,0,.3);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity .25s, visibility .25s;
+}
+#successOrderPopup.is-visible {
+  opacity: 1; visibility: visible; pointer-events: auto;
+}
+#successOrderPopup.is-visible .success-modal-content {
+  animation: successPop .45s cubic-bezier(.2,.9,.3,1.2);
+}
+@keyframes successPop { from { transform: scale(.85); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  #successOrderPopup.is-visible .success-modal-content { animation: none; }
+}
+
+/*** ==============================
+ ACCOUNT VERIFICATION MODAL
+ =============================****/
+ .verification-success-modal{
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999999;
+  background: rgba(0, 0, 0, 0.2);
+ }
+
+ .success-modal-content{
+  width: 100%;
+  max-width: 290px;
+  height: 380px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  gap: 16px;
+  padding: 20px 14px;
+  border-radius: 11%;
+  background: #fff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.045);
+ }
+
+ .success-icon{
+  width: 100%;
+  height: 40%;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+ }
+
+ .success-icon img{
+  width: 12rem;
+  height: 12rem;
+ }
+
+ .success-note-h{
+  width: 100%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+ }
+
+ .success-note-h h2{
+  font-size: 1.7rem;
+  color: var(--signup-input-text);
+ }
+
+
+ .success-text-p{
+  width: 100%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;;
+ }
+
+ .success-text-p p{
+  color: var(--signup-icon-text);
+ }
+
+.browse-home-btn{
+  border:none;
+  width: 100%;
+  height: 20%;
+  margin-bottom: 1px;
+  padding: 10px 52px;
+  border-radius: 1.2rem;
+  background: var(--signup-success);
+  color: var(--signup-button-text);
+  font-size: large;
+  cursor: pointer;
+  transition: opacity .2s ease;
+}
+
+.browse-home-btn:hover{
+  opacity: .8;
+}
+
+
+
+
+/** =================================
+FAILED VERIFICATION MODAL
+===============================***/
+.verification-failed-modal{
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999999;
+  background: rgba(0, 0, 0, 0.12);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* =========================================
+       MOBILE
+    ========================================= */
+
+    @media (max-width: 600px) {
+
+      .signup-header {
+        padding:
+          calc(
+            18px +
+            env(safe-area-inset-top)
+          )
+          18px
+          18px;
+      }
+
+      .signup-brand {
+        font-size: 19px;
+      }
+
+      .back-login {
+        max-width: 145px;
+
+        text-align: right;
+
+        font-size: 11px;
+
+        line-height: 1.4;
+      }
+
+      .signup-container {
+        padding:
+          10px 14px 35px;
+      }
+
+      .signup-card {
+        padding:
+          28px 20px;
+
+        border-radius: 14px;
+
+        box-shadow:
+          0 10px 35px
+          rgba(0, 0, 0, 0.045);
+      }
+
+      .signup-heading h1 {
+        font-size: 26px;
+      }
+
+      .form-row {
+        grid-template-columns:
+          1fr;
+
+        gap: 0;
+      }
+
+      .form-group input {
+        height: 47px;
+      }
+
+      .password-requirements {
+        gap: 7px 11px;
+      }
+
+    }
+
+
+    /* =========================================
+       SMALL MOBILE
+    ========================================= */
+
+    @media (max-width: 380px) {
+
+      .signup-card {
+        padding:
+          25px 17px;
+      }
+
+      .signup-heading h1 {
+        font-size: 24px;
+      }
+
+    }
+
+
+ 
+
+
+
