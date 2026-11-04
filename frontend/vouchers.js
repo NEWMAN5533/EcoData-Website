@@ -151,13 +151,13 @@ document.addEventListener("DOMContentLoaded", () => {
   
 
         // means there is a stocked
-        card.querySelector(".stock").textContent = `
+        card.querySelector(".voucher-page-product-card__stock-count").textContent = `
         ${cardStocked} left`;
 
         // buy-btn opacity (1)
-        card.querySelector(".bece-btom-right button").innerHTML =
+        card.querySelector(".voucher-page-product-card__buy").innerHTML =
         "Buy Now";
-        card.querySelector(".bece-btom-right button").style.opacity = "1";
+        card.querySelector(".voucher-page-product-card__buy").style.opacity = "1";
 
         
       }
@@ -168,13 +168,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-        card.querySelector(".stock").style.display = "none";
-        card.querySelector(".outStock").style.display = "flex";
+        card.querySelector(".voucher-page-product-card__stock-count").style.display = "none";
+        card.querySelector(".voucher-page-product-card__out-stock").style.display = "flex";
 
         // buy-btn opacity (.4)
-        card.querySelector(".bece-btom-right button").innerHTML =
+        card.querySelector(".voucher-page-product-card__buy").innerHTML =
         "Sold Out";
-        card.querySelector(".bece-btom-right").style.opacity = "0.4";
+        card.querySelector(".voucher-page-product-card__buy").style.opacity = "0.4";
 
       }
 
@@ -719,8 +719,8 @@ async function saveVoucherOrder(order) {
 // VOUCHER SEARCH
 // ==============================
 
-const voucherSearch = document.querySelector(".voucherSearch");
-const voucherCards = document.querySelectorAll(".grid-voucher-card");
+const voucherSearch = document.querySelector(".voucher-page-search__input");
+const voucherCards = document.querySelectorAll(".voucher-page-product-card");
 
 if (voucherSearch && voucherCards.length) {
   voucherSearch.addEventListener("input", () => {

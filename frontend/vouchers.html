@@ -147,9 +147,9 @@
             <span>Vouchers Shop</span>
           </a>
 
-           <a href="./pay.html" class="app-nav-link">
-            <i class="ri-price-tag-3-line material-icons c4"></i>
-            <span>Get discount</span>
+           <a href="./mashup.html" class="app-nav-link">
+            <i class="ri-shuffle-line material-icons c4"></i>
+            <span>MTN Mashup</span>
           </a>
 
 
@@ -270,7 +270,7 @@
           </button>
 
                 <!-- DARK MODE -->
-          <label class="theme-switch" aria-label="Toggle dark mode">
+          <label class="theme-switch" aria-label="Toggle dark mode" style='display: none;'>
             <input type="checkbox" id="themeToggle">
 
             <span class="theme-slider">
@@ -290,7 +290,7 @@
 
           <!-- client PROFILE -->
 
-          <div class="client-profile-wrapper">
+          <div class="client-profile-wrapper" style="display: none;">
 
             <button
               class="client-profile-button"
@@ -439,9 +439,9 @@
             <span>Vouchers Shop</span>
           </a>
 
-           <a href="./pay.html" class="client-nav-link">
-            <i class="ri-price-tag-3-line material-icons c4"></i>
-            <span>Get discount</span>
+           <a href="./mashup.html" class="client-nav-link">
+            <i class="ri-shuffle-line material-icons c4"></i>
+            <span>MTN Mashup</span>
           </a>
 
 
@@ -867,6 +867,7 @@
             type="button"
             aria-label="BECE voucher currently unavailable"
           >
+          Buy Now
           </button>
         </div>
       </div>
@@ -917,6 +918,7 @@
             type="button"
             aria-label="WASSCE voucher currently unavailable"
           >
+          Buy Now
           </button>
         </div>
       </div>
@@ -953,7 +955,7 @@
 
 
 <!-- VOUCHER PURCHASE MODAL -->
-<div class="voucher-modal-overlay voucher-purchase-modal" id="voucherContainer">
+<section class="voucher-modal-overlay voucher-purchase-modal" id="voucherContainer">
   <div class="voucher-modal-card voucher-modal-content" role="dialog" aria-modal="true" aria-labelledby="voucherName2">
 
     <div class="voucher-modal-handle tip"></div>
@@ -1058,7 +1060,7 @@
             id="voucherPhone"
             class="voucher-modal-input v2-input"
             type="tel"
-            maxlength="13"
+            maxlength="10"
             inputmode="tel"
             autocomplete="tel"
             placeholder="0XXXXXXXXX or +233XXXXXXXXX"
@@ -1142,14 +1144,14 @@
     </div>
 
   </div>
-</div>
+</section>
 <!-- VOUCHER PURCHASE MODAL END -->
 
 
 
 
     <!-----BOTTOM-NAVBAR----->
-    <div class="bottom-navbar" id="navIconDiv">
+    <section class="bottom-navbar" id="navIconDiv">
       <div class="btom-navIcon" onclick="window.location.href='index.html'">
         <div class="activeImg " id="activeMtn">
           <i class="ri-router-line material-icons"></i>
@@ -1163,10 +1165,10 @@
       
 
       <div class="btom-navIcon">
-        <div class="activeImg" onclick="window.location.href ='pay.html'"> 
-          <i class="ri-price-tag-3-line material-icons"></i>
+        <div class="activeImg" onclick="window.location.href ='mashup.html'"> 
+          <i class="ri-shuffle-line material-icons"></i>
         </div>
-        <small class="bottomIcon-textNav"> Discount</small>
+        <small class="bottomIcon-textNav"> Mashup</small>
       </div>
 
     
@@ -1200,7 +1202,7 @@
 
 
 
-    </div>
+    </section>
     <!-----BOTTOM-NAVBAR--ends--->
 
     <!---LOADING-SPINNER-->
