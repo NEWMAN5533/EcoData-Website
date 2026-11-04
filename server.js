@@ -177,10 +177,6 @@ app.get("/api/auth/me", requireAuth, (req, res) => {
 
 
 
-import {
-  getDataMartMashupPackages
-} from "./services/dataMartService.js";
-
 // Adjust the import path to match your actual file.
 
 app.get("/api/datamart/mashup/packages", async (req, res) => {
