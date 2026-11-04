@@ -570,7 +570,7 @@ let afaRegistrations = loadAfaRegistrations();
 
 function loadAfaRegistrations() {
   try {
-    const saved = localStorage.getItem(AFA_STORAGE_KEY);
+    const saved = localStorage.removeItem(AFA_STORAGE_KEY);
 
     if (!saved) return [];
 

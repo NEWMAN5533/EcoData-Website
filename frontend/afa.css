@@ -300,12 +300,12 @@ strong, b { font-size: inherit; }
 :root{
 
   /* HEADER */
-  --afa-header-yellow: #ffcc00;
+  --afa-header-yellow: #e9c32b;
   --afa-header-ink: #191919;
   --afa-header-muted: #777777;
 
 /* MAIN CONTAINER */
-   --afa-yellow: #ffcc00;
+   --afa-yellow: #e9c32b;
   --afa-yellow-soft: #fff8d9;
   --afa-ink: #171717;
   --afa-muted: #737373;
@@ -318,7 +318,7 @@ strong, b { font-size: inherit; }
 
 
   /* AFA RECEIPT */
-   --receipt-yellow: #ffcc00;
+   --receipt-yellow: #e9c32b;
   --receipt-yellow-soft: #fff8d9;
   --receipt-ink: #191919;
   --receipt-muted: #777777;
@@ -326,7 +326,7 @@ strong, b { font-size: inherit; }
   --receipt-green: #18864b;
 
   /* AFA RECORDS */
-   --records-yellow: #ffcc00;
+   --records-yellow: #e9c32b;
   --records-yellow-light: #fff8d8;
   --records-ink: #202124;
   --records-muted: #777b84;
