@@ -60,6 +60,7 @@ strong, b { font-size: inherit; }
      BRAND / SHARED ACCENTS
   ---------------------------------- */
   --afa-yellow: #ffcc00;
+  --mashup-yellow: #ffcc00;
   --afa-yellow-soft: #fff8d9;
   --afa-green: #16834a;
 
@@ -180,6 +181,7 @@ strong, b { font-size: inherit; }
      BRAND / SHARED ACCENTS
   ---------------------------------- */
   --afa-yellow: #ffcc00;
+   --mashup-yellow: #ddb30a;
   --afa-yellow-soft: #3a3218;
   --afa-green: #4ade80;
 
@@ -437,7 +439,7 @@ strong, b { font-size: inherit; }
 ================================= */
 
 .mashup-card {
-  --mashup-yellow: #ffcc00;
+ 
   --mashup-ink: #191919;
   --mashup-muted: #777777;
   --mashup-border: #e9e9e9;
