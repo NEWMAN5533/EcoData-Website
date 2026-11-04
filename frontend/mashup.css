@@ -465,6 +465,11 @@ strong, b { font-size: inherit; }
     border-color 0.2s ease;
 }
 
+
+ .dark-mode .mashup-card{
+   border-color: var(--mashup-yellow);
+  }
+
 /* Price header */
 .mashup-card .mashup-card-top {
   display: flex;
@@ -613,9 +618,7 @@ strong, b { font-size: inherit; }
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.09);
   }
 
-  .dark-mode .mashup-card{
-   border-color: var(--mashup-yellow);
-  }
+ 
 
   .mashup-card .buy-mash:hover {
     background: var(--mashup-yellow);
