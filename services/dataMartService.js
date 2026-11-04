@@ -335,3 +335,271 @@ export async function getDataMartOrderStatus(reference) {
 }
 
 
+
+
+
+
+
+
+/* =========================================
+   DATAMART MTN MASHUP
+========================================= */
+
+function getMashupHeaders() {
+  const headers = {
+    "X-API-Key": getApiKey(),
+    "Accept": "application/json",
+    "Content-Type": "application/json"
+  };
+
+  // DataMart's MashUp API is also subject to
+  // the account's second-secret requirement.
+  const apiSecret = process.env.DATAMART_API_SECRET;
+
+  if (apiSecret) {
+    headers["X-API-Secret"] = apiSecret;
+  }
+
+  return headers;
+}
+
+/* =========================================
+   GET LIVE MASHUP CATALOGUE
+   GET /mashup/packages
+========================================= */
+
+export async function getDataMartMashupPackages() {
+  try {
+    const response = await datamart.get(
+      "/mashup/packages",
+      {
+        headers: getMashupHeaders()
+      }
+    );
+
+    const body = response.data;
+
+    if (
+      body?.status !== "success" ||
+      !Array.isArray(body.data)
+    ) {
+      const error = new Error(
+        body?.message ||
+        "Unable to retrieve DataMart MashUp packages."
+      );
+
+      error.providerHttpStatus = response.status;
+      error.providerResponse = body;
+      throw error;
+    }
+
+    // A closed lane means purchases cannot proceed.
+    // Still return the catalogue so the route can report
+    // availability accurately to the frontend.
+    return {
+      open: body.open === true,
+      currency: body.currency || "GHS",
+      pricingTier: body.pricingTier || null,
+
+      packages: body.data.map(pkg => ({
+        comboCost: Number(pkg.comboCost),
+        price: Number(pkg.price),
+        title: String(pkg.title || ""),
+        mb: Number(pkg.mb),
+        capacity: Number(pkg.capacity),
+        onnetMins: Number(pkg.onnetMins),
+        offnetMins: Number(pkg.offnetMins),
+        sms: Number(pkg.sms),
+        validityDays: Number(pkg.validityDays)
+      }))
+    };
+  } catch (error) {
+    error.providerHttpStatus =
+      error.response?.status ??
+      error.providerHttpStatus ??
+      null;
+
+    error.providerResponse =
+      error.response?.data ??
+      error.providerResponse ??
+      null;
+
+    console.error("DataMart MashUp catalogue error:", {
+      status: error.providerHttpStatus,
+      code: error.providerResponse?.code ?? null,
+      message: error.providerResponse?.message || error.message
+    });
+
+    throw error;
+  }
+}
+
+/* =========================================
+   PURCHASE MASHUP PACKAGE
+   POST /mashup/purchase
+========================================= */
+
+export async function purchaseDataMartMashup({
+  phoneNumber,
+  comboCost,
+  reference
+}) {
+  // Normalize Ghanaian phone number.
+  let phone = String(phoneNumber || "").trim();
+
+  if (phone.startsWith("+233")) {
+    phone = "0" + phone.slice(4);
+  } else if (phone.startsWith("233")) {
+    phone = "0" + phone.slice(3);
+  }
+
+  if (!/^0\d{9}$/.test(phone)) {
+    throw new Error("Invalid recipient phone number.");
+  }
+
+  const selectedComboCost = Number(comboCost);
+
+  if (
+    !Number.isInteger(selectedComboCost) ||
+    selectedComboCost <= 0
+  ) {
+    throw new Error("Invalid MashUp package selection.");
+  }
+
+  const orderReference = String(reference || "").trim();
+
+  if (
+    !orderReference ||
+    orderReference.length > 100
+  ) {
+    throw new Error("A valid unique order reference is required.");
+  }
+
+  const apiSecret = process.env.DATAMART_API_SECRET;
+
+  if (!apiSecret) {
+    throw new Error("DATAMART_API_SECRET is not configured.");
+  }
+
+  // Re-fetch the provider catalogue on the backend.
+  // Never trust a price submitted by the browser.
+  const catalogue = await getDataMartMashupPackages();
+
+  if (!catalogue.open) {
+    const error = new Error(
+      "DataMart MashUp is temporarily unavailable."
+    );
+
+    error.providerHttpStatus = 503;
+    error.providerResponse = {
+      code: "MASHUP_UNAVAILABLE"
+    };
+
+    throw error;
+  }
+
+  const selectedPackage = catalogue.packages.find(
+    pkg => pkg.comboCost === selectedComboCost
+  );
+
+  if (!selectedPackage) {
+    const error = new Error(
+      "The selected MashUp package is not available."
+    );
+
+    error.providerHttpStatus = 400;
+    error.providerResponse = {
+      code: "UNKNOWN_PACKAGE"
+    };
+
+    throw error;
+  }
+
+  try {
+    const response = await datamart.post(
+      "/mashup/purchase",
+      {
+        phoneNumber: phone,
+        comboCost: selectedPackage.comboCost,
+        ref: orderReference
+      },
+      {
+        headers: getMashupHeaders()
+      }
+    );
+
+    const body = response.data;
+
+    if (
+      body?.status !== "success" ||
+      !body?.data
+    ) {
+      const error = new Error(
+        body?.message ||
+        "DataMart MashUp purchase was unsuccessful."
+      );
+
+      error.providerHttpStatus = response.status;
+      error.providerResponse = body;
+
+      throw error;
+    }
+
+    const purchase = body.data;
+
+    return {
+      orderId: purchase.orderId ?? null,
+      reference: purchase.reference ?? orderReference,
+      phoneNumber: purchase.phoneNumber ?? phone,
+      network: purchase.network ?? "MTN_COMBO",
+      orderStatus: purchase.orderStatus ?? "pending",
+
+      comboCost: Number(
+        purchase.comboCost ?? selectedPackage.comboCost
+      ),
+
+      // Provider charge, not a customer-supplied price.
+      price: Number(purchase.price),
+
+      title: purchase.title ?? selectedPackage.title,
+      mb: Number(purchase.mb ?? selectedPackage.mb),
+      capacity: Number(
+        purchase.capacity ?? selectedPackage.capacity
+      ),
+      onnetMins: Number(
+        purchase.onnetMins ?? selectedPackage.onnetMins
+      ),
+      offnetMins: Number(
+        purchase.offnetMins ?? selectedPackage.offnetMins
+      ),
+      sms: Number(purchase.sms ?? selectedPackage.sms),
+      validityDays: Number(
+        purchase.validityDays ?? selectedPackage.validityDays
+      ),
+
+      balanceAfter: purchase.balanceAfter ?? null,
+      trackWith: purchase.trackWith ?? null,
+
+      providerResponse: body
+    };
+  } catch (error) {
+    error.providerHttpStatus =
+      error.response?.status ??
+      error.providerHttpStatus ??
+      null;
+
+    error.providerResponse =
+      error.response?.data ??
+      error.providerResponse ??
+      null;
+
+    console.error("DataMart MashUp purchase error:", {
+      status: error.providerHttpStatus,
+      code: error.providerResponse?.code ?? null,
+      message: error.providerResponse?.message || error.message,
+      reference: orderReference
+    });
+
+    throw error;
+  }
+}
