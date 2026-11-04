@@ -3,12 +3,13 @@ import axios from "axios";
 
 const afaStatusRouter = express.Router();
 
-afaStatusRouter.get("/:identifier", async (req, res) => {
+const SWIFT_BASE_URL =
+  "https://api.swiftdata-link.com/v2";
 
+afaStatusRouter.get("/:identifier", async (req, res) => {
   console.log("========== AFA STATUS CHECK ==========");
 
   try {
-
     const identifier =
       String(req.params.identifier || "").trim();
 
@@ -19,153 +20,115 @@ afaStatusRouter.get("/:identifier", async (req, res) => {
       });
     }
 
+    const apiKey = process.env.SWIFT_API_KEY;
+
+    if (!apiKey) {
+      console.error("SwiftData API key is not configured.");
+
+      return res.status(500).json({
+        success: false,
+        message: "AFA status service is temporarily unavailable."
+      });
+    }
 
     // =========================
-    // SWIFT BASE URL
-    // =========================
-
-    const base = (
-      process.env.SWIFT_BASE_URL ||
-      "https://swiftdata-link.com/api/v1"
-    ).replace(/\/$/, "");
-
-
-    // =========================
-    // SWIFT STATUS ENDPOINT
+    // CANONICAL SWIFTDATA V2
+    // GET /afa/:identifier
+    // Identifier = data.publicId
     // =========================
 
     const swiftUrl =
-      `${base}/afa/status/${encodeURIComponent(identifier)}`;
+      `${SWIFT_BASE_URL}/afa/${encodeURIComponent(identifier)}`;
 
+    console.log("Checking SwiftData AFA status.");
 
-    console.log(
-      "Checking AFA status:",
-      swiftUrl
-    );
-
-
-    // =========================
-    // REQUEST SWIFT
-    // =========================
-
-    const response = await axios.get(
-      swiftUrl,
-      {
-        headers: {
-          "x-api-key":
-            process.env.SWIFT_API_KEY,
-
-          "Content-Type":
-            "application/json"
-        },
-
-        timeout: 10000
-      }
-    );
-
-
-    console.log(
-      "Swift AFA status response:",
-      response.data
-    );
-
-
-    // =========================
-    // SUCCESS
-    // =========================
-
-    if (response.data?.success) {
-
-      return res.json({
-
-        success: true,
-
-        registration:
-          response.data.registration,
-
-        authMethod:
-          response.data.authMethod ||
-          "api-key"
-
-      });
-
-    }
-
-
-    // =========================
-    // SWIFT FAILURE
-    // =========================
-
-    return res.status(400).json({
-
-      success: false,
-
-      message:
-        response.data?.message ||
-        "Unable to fetch AFA registration status",
-
-      details:
-        response.data
-
+    const response = await axios.get(swiftUrl, {
+      headers: {
+        "x-api-key": apiKey,
+        "Content-Type": "application/json"
+      },
+      timeout: 15000
     });
 
+    const body = response.data;
+    const registration = body?.data;
+
+    console.log("SwiftData AFA status HTTP:", response.status);
+
+    // =========================
+    // VALIDATE V2 SUCCESS
+    // =========================
+
+    if (
+      response.status >= 200 &&
+      response.status < 300 &&
+      body?.success === true &&
+      registration?.publicId
+    ) {
+      return res.status(200).json({
+        success: true,
+        registration,
+        authMethod: "api-key"
+      });
+    }
+
+    console.error("Unexpected SwiftData AFA status response.");
+
+    return res.status(502).json({
+      success: false,
+      message: "SwiftData returned an invalid AFA status response."
+    });
 
   } catch (error) {
-
-    console.error(
-      "======== AFA STATUS ERROR =========="
-    );
-
-    console.error(
-      "Swift error:",
-      error.response?.data ||
-      error.message
-    );
-
-
-    // =========================
-    // SWIFT API ERROR
-    // =========================
+    console.error("========== AFA STATUS ERROR ==========");
 
     if (error.response) {
+      const providerBody = error.response.data;
+      const providerError = providerBody?.error;
 
-      return res.status(
-        error.response.status || 500
-      ).json({
+      console.error("SwiftData HTTP status:", error.response.status);
+      console.error("SwiftData error code:", providerError?.code);
+      console.error(
+        "SwiftData error message:",
+        providerError?.message ||
+          providerBody?.message ||
+          "Unknown provider error"
+      );
 
+      // Preserve relevant HTTP status semantics.
+      const status = [400, 401, 403, 404, 429].includes(
+        error.response.status
+      )
+        ? error.response.status
+        : 502;
+
+      return res.status(status).json({
         success: false,
-
         message:
-          error.response.data?.message ||
-          "AFA status request failed",
-
-        details:
-          error.response.data ||
-          null
-
+          status === 404
+            ? "AFA registration was not found."
+            : status === 401 || status === 403
+              ? "AFA status service authorization failed."
+              : status === 429
+                ? "AFA status service is busy. Please try again shortly."
+                : "Unable to fetch AFA registration status.",
+        providerCode: providerError?.code || null
       });
-
     }
 
+    console.error("AFA status connection error:", error.message);
 
-    // =========================
-    // NETWORK ERROR
-    // =========================
+    const timedOut =
+      error.code === "ECONNABORTED" ||
+      error.code === "ETIMEDOUT";
 
-    return res.status(500).json({
-
+    return res.status(timedOut ? 504 : 502).json({
       success: false,
-
-      message:
-        "Unable to connect to AFA status service",
-
-      error:
-        error.message
-
+      message: timedOut
+        ? "AFA status check timed out. Please try again."
+        : "Unable to connect to AFA status service."
     });
-
   }
-
 });
 
 export default afaStatusRouter;
