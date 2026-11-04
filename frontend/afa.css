@@ -1,4 +1,297 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+small,
+span,
+strong,
+p {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+
+p strong{
+  color: var(--afa-ink) !important;
+}
+
+html{
+  font-size: 14px !important;
+}
+
+
+/* Heading font sizes */
+h1 { font-size: 2rem; }
+h2 { font-size: 1.75rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1.125rem; }
+h6 { font-size: 1rem; }
+
+/* Small and strong */
+small { font-size: 0.875rem; }
+strong, b { font-size: inherit; }
+
+/* Font-size utilities */
+.text-xs   { font-size: 0.75rem; }
+.text-sm   { font-size: 0.875rem; }
+.text-base { font-size: 1rem; }
+.text-lg   { font-size: 1.125rem; }
+.text-xl   { font-size: 1.25rem; }
+.text-2xl  { font-size: 1.5rem; }
+.text-3xl  { font-size: 1.875rem; }
+.text-4xl  { font-size: 2.25rem; }
+.text-5xl  { font-size: 3rem; }
+
+
+
+/* ======================================================
+   ECODATA DESIGN SYSTEM — LIGHT MODE
+====================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* ----------------------------------
+     BRAND / SHARED ACCENTS
+  ---------------------------------- */
+  --afa-yellow: #ffcc00;
+  --afa-yellow-soft: #fff8d9;
+  --afa-green: #16834a;
+
+  /* ----------------------------------
+     GLOBAL SURFACES & TEXT
+  ---------------------------------- */
+  --afa-ink: #171717;
+  --afa-muted: #737373;
+  --afa-border: #e8e8e8;
+  --afa-surface: #ffffff;
+  --afa-page: #f7f8fa;
+  --afa-radius: 20px;
+
+  /* ----------------------------------
+     HEADER
+  ---------------------------------- */
+  --afa-header-yellow: var(--afa-yellow);
+  --afa-header-ink: #191919;
+  --afa-header-muted: #777777;
+
+  /* ----------------------------------
+     RECEIPTS
+  ---------------------------------- */
+  --receipt-yellow: var(--afa-yellow);
+  --receipt-yellow-soft: var(--afa-yellow-soft);
+  --receipt-ink: #191919;
+  --receipt-muted: #777777;
+  --receipt-border: #e9e9e9;
+  --receipt-green: #18864b;
+
+  /* ----------------------------------
+     RECORDS
+  ---------------------------------- */
+  --records-yellow: var(--afa-yellow);
+  --records-yellow-light: #fff8d8;
+  --records-ink: #202124;
+  --records-muted: #777b84;
+  --records-border: #e9ebef;
+  --records-white: #ffffff;
+
+  /* ----------------------------------
+     DELIVERY TRACKER
+  ---------------------------------- */
+  --eco-delivery-yellow: var(--afa-yellow);
+  --eco-delivery-yellow-soft: var(--afa-yellow-soft);
+  --eco-delivery-ink: var(--afa-ink);
+  --eco-delivery-muted: var(--afa-muted);
+  --eco-delivery-border: var(--afa-border);
+  --eco-delivery-surface: var(--afa-surface);
+  --eco-delivery-page: var(--afa-page);
+  --eco-delivery-green: var(--afa-green);
+  --eco-delivery-radius: 20px;
+
+  /* ----------------------------------
+     HOMEPAGE TOTALS / DASHBOARD
+  ---------------------------------- */
+  --eco-home-yellow: var(--afa-yellow);
+  --eco-home-yellow-soft: var(--afa-yellow-soft);
+  --eco-home-ink: var(--afa-ink);
+  --eco-home-muted: var(--afa-muted);
+  --eco-home-border: var(--afa-border);
+  --eco-home-surface: var(--afa-surface);
+  --eco-home-page: var(--afa-page);
+  --eco-home-green: var(--afa-green);
+  --eco-home-radius: 18px;
+  --box-sh-card: 0 2px 6px rgba(0, 0, 0, 0.02);
+
+  /* ----------------------------------
+     OFFER SELECTOR
+  ---------------------------------- */
+  --eco-offer-yellow: var(--afa-yellow);
+  --eco-offer-yellow-soft: var(--afa-yellow-soft);
+  --eco-offer-ink: var(--afa-ink);
+  --eco-offer-muted: var(--afa-muted);
+  --eco-offer-border: var(--afa-border);
+  --eco-offer-surface: var(--afa-surface);
+  --eco-offer-page: var(--afa-page);
+  --eco-offer-green: var(--afa-green);
+  --eco-offer-radius: 19px;
+
+  /* ----------------------------------
+     BUNDLE SELECTOR
+  ---------------------------------- */
+  --eco-bundle-yellow: var(--afa-yellow);
+  --eco-bundle-yellow-soft: var(--afa-yellow-soft);
+  --eco-bundle-ink: #191919;
+  --eco-bundle-muted: #777777;
+  --eco-bundle-border: #e8e8e8;
+  --eco-bundle-surface: #ffffff;
+  --eco-bundle-page: #f7f8fa;
+  --eco-bundle-green: #16834a;
+  --eco-bundle-radius: 18px;
+  --eco-bundle-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+
+  /* ----------------------------------
+     MTN HERO
+  ---------------------------------- */
+  --eco-mtn-yellow: var(--afa-yellow);
+  --eco-mtn-yellow-soft: var(--afa-yellow-soft);
+  --eco-mtn-ink: #191919;
+  --eco-mtn-muted: #737373;
+  --eco-mtn-border: #e9e9e9;
+  --eco-mtn-surface: var(--afa-surface);
+  --eco-mtn-green: var(--afa-green);
+}
+
+
+/* ======================================================
+   ECODATA DESIGN SYSTEM — DARK MODE
+   Activated when <html> or <body> has .dark-mode
+====================================================== */
+
+:root.dark-mode,
+.dark-mode {
+  color-scheme: dark;
+
+  /* ----------------------------------
+     BRAND / SHARED ACCENTS
+  ---------------------------------- */
+  --afa-yellow: #ffcc00;
+  --afa-yellow-soft: #3a3218;
+  --afa-green: #4ade80;
+
+
+  --eco-offer-surface: #1d1d1d;
+  --eco-offer-page: #262626;
+  --eco-offer-ink: #f5f5f5;
+  --eco-offer-muted: #b7b7b7;
+  --eco-offer-border: #383838;
+  --eco-offer-yellow-soft: #332d17;
+
+  /* ----------------------------------
+     GLOBAL SURFACES & TEXT
+  ---------------------------------- */
+  --afa-ink: #f5f5f5;
+  --afa-muted: #b0b4bc;
+  --afa-border: #373a40;
+  --afa-surface: #1d1d1d;
+  --afa-page: #151619;
+  --afa-radius: 20px;
+
+  /* ----------------------------------
+     HEADER
+  ---------------------------------- */
+  --afa-header-yellow: var(--afa-yellow);
+  --afa-header-ink: #f5f5f5;
+  --afa-header-muted: #b0b4bc;
+
+  /* ----------------------------------
+     RECEIPTS
+  ---------------------------------- */
+  --receipt-yellow: var(--afa-yellow);
+  --receipt-yellow-soft: #3a3218;
+  --receipt-ink: #f5f5f5;
+  --receipt-muted: #b0b4bc;
+  --receipt-border: #373a40;
+  --receipt-green: #4ade80;
+
+  /* ----------------------------------
+     RECORDS
+  ---------------------------------- */
+  --records-yellow: var(--afa-yellow);
+  --records-yellow-light: #3a3218;
+  --records-ink: #f5f5f5;
+  --records-muted: #b0b4bc;
+  --records-border: #373a40;
+  --records-white: #202124;
+
+  /* ----------------------------------
+     DELIVERY TRACKER
+  ---------------------------------- */
+  --eco-delivery-yellow: var(--afa-yellow);
+  --eco-delivery-yellow-soft: var(--afa-yellow-soft);
+  --eco-delivery-ink: var(--afa-ink);
+  --eco-delivery-muted: var(--afa-muted);
+  --eco-delivery-border: var(--afa-border);
+  --eco-delivery-surface: var(--afa-surface);
+  --eco-delivery-page: var(--afa-page);
+  --eco-delivery-green: var(--afa-green);
+  --eco-delivery-radius: 20px;
+
+  /* ----------------------------------
+     HOMEPAGE TOTALS / DASHBOARD
+  ---------------------------------- */
+  --eco-home-yellow: var(--afa-yellow);
+  --eco-home-yellow-soft: var(--afa-yellow-soft);
+  --eco-home-ink: var(--afa-ink);
+  --eco-home-muted: var(--afa-muted);
+  --eco-home-border: var(--afa-border);
+  --eco-home-surface: var(--afa-surface);
+  --eco-home-page: var(--afa-page);
+  --eco-home-green: var(--afa-green);
+  --box-sh-card: 0 2px 6px rgba(0, 0, 0, 0.02);
+
+  /* ----------------------------------
+     OFFER SELECTOR
+  ---------------------------------- */
+  --eco-offer-yellow: var(--afa-yellow);
+  --eco-offer-yellow-soft: var(--afa-yellow-soft);
+  --eco-offer-ink: var(--afa-ink);
+  --eco-offer-muted: var(--afa-muted);
+  --eco-offer-border: var(--afa-border);
+  --eco-offer-surface: var(--afa-surface);
+  --eco-offer-page: var(--afa-page);
+  --eco-offer-green: var(--afa-green);
+  --eco-offer-radius: 19px;
+
+  /* ----------------------------------
+     BUNDLE SELECTOR
+  ---------------------------------- */
+  --eco-bundle-yellow: var(--afa-yellow);
+  --eco-bundle-yellow-soft: var(--afa-yellow-soft);
+  --eco-bundle-ink: var(--afa-ink);
+  --eco-bundle-muted: var(--afa-muted);
+  --eco-bundle-border: var(--afa-border);
+  --eco-bundle-surface: var(--afa-surface);
+  --eco-bundle-page: var(--afa-page);
+  --eco-bundle-green: var(--afa-green);
+  --eco-bundle-radius: 18px;
+  --eco-bundle-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+
+  /* ----------------------------------
+     MTN HERO
+  ---------------------------------- */
+  --eco-mtn-yellow: var(--afa-yellow);
+  --eco-mtn-yellow-soft: var(--afa-yellow-soft);
+  --eco-mtn-ink: var(--afa-ink);
+  --eco-mtn-muted: var(--afa-muted);
+  --eco-mtn-border: var(--afa-border);
+  --eco-mtn-surface: var(--afa-surface);
+  --eco-mtn-green: var(--afa-green);
+}
+
 /* =========================================
    ECODATA — MTN AFA MODERN UI
    Scoped to .afa-container
@@ -173,7 +466,7 @@
   padding: 30px 32px;
   margin-bottom: 24px;
 
-  border: 1px solid #e9e9e9;
+  border: 1px solid var(--afa-border);
   border-radius: 22px;
 
   background:
@@ -185,6 +478,10 @@
     #ffffff;
 
   color: var(--afa-header-ink);
+}
+
+.dark-mode .afa-page-header{
+  background: linear-gradient(145deg, var(--afa-page), var(--afa-surface));
 }
 
 .afa-page-header .afa-page-header-content {
@@ -200,10 +497,10 @@
   padding: 7px 11px;
   margin-bottom: 16px;
 
-  border: 1px solid #f0e2a5;
+  border: 1px solid var(--afa-border);
   border-radius: 50px;
 
-  background: #fff8d9;
+  background: var(--afa-page);
   color: #735800;
 
   font-size: 10px;
@@ -578,7 +875,7 @@ body .card-container{
   height: 19px;
   place-items: center;
   border-radius: 50%;
-  background: #e8f6ec;
+  background: var(--afa-page);
   color: var(--afa-green);
   font-size: 12px;
   font-style: normal;
@@ -607,13 +904,17 @@ body .card-container{
   background: linear-gradient(115deg, #fffdf5, #ffffff 72%);
 }
 
+.dark-mode .afa-container .package-card-top{
+  background: var(--afa-surface);
+}
+
 .afa-container .afa-package-icon {
   display: grid;
   flex: 0 0 54px;
   height: 54px;
   place-items: center;
   border-radius: 16px;
-  background: var(--afa-yellow);
+  background: var(--afa-yellow-soft);
   color: #252000;
   font-size: 15px;
   font-weight: 900;
@@ -650,9 +951,9 @@ body .card-container{
 .afa-container .afa-lifetime-badge {
   flex-shrink: 0;
   padding: 7px 11px;
-  border: 1px solid #f0e0a0;
+  border: 1px solid var(--afa-border);
   border-radius: 50px;
-  background: #fff8d9;
+  background: var(--eco-offer-page);
   color: #705500;
   font-size: 11px;
   font-weight: 750;
@@ -671,7 +972,7 @@ body .card-container{
 
 .afa-container .ul-exclusive {
   border-left: 1px solid var(--afa-border);
-  background: #fdfdfd;
+  background: var(--afa-surface);
 }
 
 .afa-container .pi {
@@ -740,7 +1041,7 @@ body .card-container{
   gap: 10px;
   padding: 15px 25px;
   border-top: 1px solid var(--afa-border);
-  background: #fafafa;
+  background: var(--afa-surface);
 }
 
 .afa-container .afa-note-icon {
@@ -797,7 +1098,7 @@ body .card-container{
 .afa-container .afa-dial-badge {
   flex-shrink: 0;
   padding: 10px 15px;
-  border: 1px solid #efdfa0;
+  border: 1px solid var(--afa-border);
   border-radius: 12px;
   background: var(--afa-yellow-soft);
   color: #755900;
@@ -815,9 +1116,9 @@ body .card-container{
 .afa-container .how-bottom li {
   min-width: 0;
   padding: 15px 12px;
-  border: 1px solid #ededed;
+  border: 1px solid var(--afa-border);
   border-radius: 13px;
-  background: #fcfcfc;
+  background: var(--afa-surface);
 }
 
 .afa-container .how-bottom li > span {
@@ -827,14 +1128,14 @@ body .card-container{
   place-items: center;
   margin-bottom: 14px;
   border-radius: 10px;
-  background: var(--afa-yellow);
-  color: #302600;
+  background: var(--afa-yellow-soft);
+  color: var(--afa-ink);
   font-size: 10px;
   font-weight: 900;
 }
 
 .afa-container .how-bottom li p {
-  color: #454545;
+  color: #929191;
   font-size: 12px;
   line-height: 1.65;
 }
@@ -851,6 +1152,7 @@ body .card-container{
   overflow: visible;
   border: 1px solid var(--afa-border);
   border-radius: 23px;
+  overflow: hidden;
   background: var(--afa-surface);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.035);
 }
@@ -870,6 +1172,10 @@ body .card-container{
       transparent 45%
     ),
     #fff;
+}
+
+.dark-mode .afa-container .reg-top{
+  background: var(--afa-surface) !important;
 }
 
 .afa-container .reg-top-left {
@@ -895,7 +1201,7 @@ body .card-container{
   flex-shrink: 0;
   min-width: 138px;
   padding: 16px;
-  border: 1px solid #efdfa0;
+  border: 1px solid var(--afa-border);
   border-radius: 15px;
   background: var(--afa-yellow-soft);
 }
@@ -923,6 +1229,7 @@ body .card-container{
 
 .afa-container .reg-bottom {
   padding: 27px;
+  background: var(--eco-offer-page);
 }
 
 .afa-container .reg-form-container {
@@ -942,7 +1249,7 @@ body .card-container{
   flex: 0 0 43px;
   height: 43px;
   place-items: center;
-  border: 1px solid #efdfa0;
+  border: 1px solid var(--afa-border);
   border-radius: 13px;
   background: var(--afa-yellow-soft);
   color: #806100;
@@ -981,8 +1288,12 @@ body .card-container{
   display: block;
   margin-bottom: 8px;
   color: #353535;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 750;
+}
+
+.dark-mode .afa-container .afa-label{
+  color: var(--records-ink);
 }
 
 .afa-container .afaInput {
@@ -991,10 +1302,10 @@ body .card-container{
   min-width: 0;
   min-height: 49px;
   padding: 13px 14px;
-  border: 1px solid #dedede;
+  border: 1px solid var(--afa-border);
   border-radius: 11px;
   outline: none;
-  background: #fff;
+  background: var(--afa-surface);
   color: #202020;
   font-size: 13px;
   line-height: 1.5;
@@ -1004,13 +1315,15 @@ body .card-container{
     background 0.2s ease;
 }
 
+
+
 .afa-container .afaInput::placeholder {
   color: #a2a2a2;
   opacity: 1;
 }
 
 .afa-container .afaInput:hover {
-  border-color: #c4c4c4;
+  border-color: var(--afa-yellow);
 }
 
 .afa-container .afaInput:focus {
@@ -1110,7 +1423,7 @@ body .card-container{
 }
 
 .afa-container .regionSelect.selected {
-  border-color: #efdfa0;
+  border-color: var(--afa-border);
   background: #fff8d9;
   color: #654e00;
   font-weight: 750;
@@ -2029,9 +2342,9 @@ display: flex !important;
   width: 54px;
   height: 54px;
   color: #181818;
-  background: var(--records-yellow);
+  background: var(--records-yellow-soft);
   border-radius: 17px;
-  box-shadow: 0 6px 15px rgba(255, 204, 0, 0.2);
+  box-shadow: 0 2px 6px rgba(255, 204, 0, 0.1);
   font-size: 25px;
 }
 
@@ -2143,6 +2456,41 @@ display: flex !important;
 .afa-records__table {
   width: 100%;
   min-width: 1260px;
+}
+
+
+@media screen and (min-width: 768px){
+  .afa-records__table-head{
+     grid-template-columns:
+    minmax(155px, 1.25fr)
+    minmax(125px, 1fr)
+    minmax(150px, 1.15fr)
+    minmax(125px, 0.9fr)
+    minmax(120px, 0.9fr)
+    minmax(105px, 0.75fr)
+    minmax(190px, 1.35fr)
+    minmax(175px, 1.4fr) !important;
+  }
+
+
+
+  .afa-records__empty {
+ position: sticky;
+  left: 0;                 /* stays put while scrolling sideways */
+  flex: 1 1 auto;          /* fills the body height */
+  align-self: flex-start;
+  width: 100cqw;           /* = visible width of the scroller */
+  min-height: 260px;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 8px;
+}
+
+
 }
 
 /* COLUMN GRID */
