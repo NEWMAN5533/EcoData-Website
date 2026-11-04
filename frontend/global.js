@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const adminCloseButton = document.getElementById("adminChatClose");
   const messageInput = document.getElementById("whatsppMessage");
   const characterCount = document.getElementById("adminChatCharCount");
+  
 
   if (!chatButton || !chatPanel) return;
 
@@ -60,6 +61,17 @@ document.addEventListener("DOMContentLoaded", () => {
   updateCharacterCount();
 })();
 
+
+//=============================
+// MASHUP COMING SOON
+//=============================
+document.addEventListener("click", function(event) {
+  const mashButton = event.target.closest(".buy-mash");
+
+  if(!mashButton) return;
+
+  showSnackBar("Coming back soon! check later");
+})
 
 //=================================
 // DARK MODE JS
