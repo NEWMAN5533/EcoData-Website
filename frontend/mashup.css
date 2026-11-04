@@ -425,7 +425,7 @@ strong, b { font-size: inherit; }
   place-items: center;
   justify-self: center;
 
-  gap: 1.2rem;
+  gap: 1.8rem;
   border-radius: 8px;
   margin: 24px 0;
 }
@@ -455,7 +455,7 @@ strong, b { font-size: inherit; }
   background: var(--mashup-surface);
   color: var(--mashup-ink);
   border: 1px solid var(--mashup-border);
-  border-radius: 20px;
+  border-radius: 15px;
 
   box-shadow: 0 5px 18px rgba(0, 0, 0, 0.055);
 
@@ -472,7 +472,7 @@ strong, b { font-size: inherit; }
   justify-content: space-between;
   gap: 12px;
 
-  padding: 20px;
+  padding: 10px;
   background: var(--mashup-yellow);
   color: var(--mashup-ink);
 }
@@ -518,7 +518,7 @@ strong, b { font-size: inherit; }
 
 /* Benefits section */
 .mashup-card .mashup-card-middle {
-  padding: 18px 16px;
+  padding: 10px 16px;
 }
 
 .mashup-card .mcm-list-card {
@@ -535,13 +535,14 @@ strong, b { font-size: inherit; }
   gap: 7px;
 
   min-width: 0;
-  min-height: 75px;
+  min-height: 45px;
   box-sizing: border-box;
-  padding: 12px;
+  padding: 10px;
 
-  background: var(--mashup-page);
+  background: var(--mashup-surface);
   border: 1px solid var(--mashup-border);
   border-radius: 13px;
+  opacity: .9;
 }
 
 .mashup-card .mcm-list small {
@@ -563,7 +564,7 @@ strong, b { font-size: inherit; }
 
 /* Choose button */
 .mashup-card .mashup-card-bottom {
-  padding: 0 16px 17px;
+  padding: 0 16px 10px;
 }
 
 .mashup-card .buy-mash {
@@ -610,6 +611,10 @@ strong, b { font-size: inherit; }
     transform: translateY(-3px);
     border-color: var(--mashup-yellow);
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.09);
+  }
+
+  .dark-mode .mashup-card{
+   border-color: var(--mashup-yellow);
   }
 
   .mashup-card .buy-mash:hover {
