@@ -26,7 +26,7 @@ import failedOrderCheckRouter from "./routes/failedOrderCheckRouter.js";
 
 
 
-
+import { getDataMartMashupPackages } from "./services/dataMartService.js";
 
 /* =========================================
    VENDOR MANAGEMENT
@@ -171,6 +171,41 @@ app.get("/api/auth/me", requireAuth, (req, res) => {
       clerkUserId: userId
     }
   });
+});
+
+
+
+
+
+import {
+  getDataMartMashupPackages
+} from "./services/dataMartService.js";
+
+// Adjust the import path to match your actual file.
+
+app.get("/api/datamart/mashup/packages", async (req, res) => {
+  try {
+    const catalogue = await getDataMartMashupPackages();
+
+    return res.json({
+      success: true,
+      ...catalogue
+    });
+  } catch (error) {
+    const status = error.providerHttpStatus === 403
+      ? 403
+      : error.providerHttpStatus === 429
+        ? 429
+        : 502;
+
+    return res.status(status).json({
+      success: false,
+      code: error.providerResponse?.code || "MASHUP_CATALOGUE_ERROR",
+      message:
+        error.providerResponse?.message ||
+        "Unable to load MashUp packages right now."
+    });
+  }
 });
 
 // CHECK AUTHENTICATION ENDS
