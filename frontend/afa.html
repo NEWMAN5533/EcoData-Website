@@ -567,127 +567,6 @@
 
 
 
-<!-- AFA SUCCESS RECEIPT -->
-<section id="afaReceipt" class="afa-receipt">
-
-  <div class="receipt-card">
-
-    <!-- Receipt header -->
-    <div class="receipt-header">
-
-      <div class="receipt-success-icon" aria-hidden="true">
-        <span>✓</span>
-      </div>
-
-      <span class="afa-receipt-eyebrow">REGISTRATION RECEIPT</span>
-
-      <h3>AFA Registration Successful</h3>
-
-      <p>
-        Your registration has been submitted successfully.
-        Keep this receipt for your records.
-      </p>
-
-      <div class="afa-receipt-status">
-        <span class="afa-receipt-status-dot"></span>
-        Registration received
-      </div>
-
-    </div>
-
-    <!-- Receipt divider -->
-    <div class="afa-receipt-divider">
-      <span>REGISTRATION DETAILS</span>
-    </div>
-
-    <!-- Registration details -->
-    <div class="receipt-details">
-
-      <div class="receipt-row">
-        <span>Name</span>
-        <strong id="rName">—</strong>
-      </div>
-
-      <div class="receipt-row">
-        <span>Phone</span>
-        <strong id="rPhone">—</strong>
-      </div>
-
-      <div class="receipt-row">
-        <span>Ghana Card</span>
-        <strong id="rGhanaCard">—</strong>
-      </div>
-
-      <div class="receipt-row">
-        <span>Region</span>
-        <strong id="rRegion">—</strong>
-      </div>
-
-      <div class="receipt-row">
-        <span>AFA Registration ID</span>
-        <strong id="rRegistrationId">—</strong>
-      </div>
-
-      <div class="receipt-row receipt-status-row">
-        <span>Status</span>
-        <strong id="rStatus">Pending</strong>
-      </div>
-
-      <!-- Amount highlight -->
-      <div class="receipt-amount-panel">
-        <div class="receipt-amount-label">
-          <span class="afa-receipt-payment-icon">₵</span>
-          <div>
-            <span>Payment Summary</span>
-            <small>Registration fee</small>
-          </div>
-        </div>
-
-        <strong id="rAmount">GHS 20.00</strong>
-      </div>
-
-      <div class="receipt-row receipt-ref-row">
-        <span>Payment Reference</span>
-        <strong id="rRef">—</strong>
-      </div>
-
-    </div>
-
-    <!-- Receipt footer -->
-    <div class="afa-receipt-footer">
-      <span class="afa-receipt-footer-icon">✓</span>
-      <p>
-        Keep your registration ID and payment reference
-        for future enquiries.
-      </p>
-    </div>
-
-    <!-- Actions: existing JavaScript functions preserved -->
-    <div class="receipt-actions">
-
-      <button
-        type="button"
-        class="afa-receipt-download"
-        onclick="downloadReceipt()"
-      >
-        <span class="afa-receipt-action-icon">↓</span>
-        Download Receipt
-      </button>
-
-      <button
-        type="button"
-        class="afa-receipt-close"
-        onclick="closeReceipt()"
-      >
-        Close
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-<!-- AFA SUCCESS RECEIPT END -->
 
 
 <!---AFA-SUCCESS RECEIPT-ends--->
@@ -1326,6 +1205,129 @@
 </div>
 <!----PAYSTACK-LOADER-->
 
+
+
+<!-- AFA SUCCESS RECEIPT -->
+<section id="afaReceipt" class="afa-receipt">
+
+  <div class="receipt-card">
+
+    <!-- Receipt header -->
+    <div class="receipt-header">
+
+      <div class="receipt-success-icon" aria-hidden="true">
+        <img src="./css/icons/checked.jpeg" alt="Success">
+      </div>
+
+      <span class="afa-receipt-eyebrow">REGISTRATION RECEIPT</span>
+
+      <h3>AFA Registration Successful</h3>
+
+      <p>
+        Your registration has been submitted successfully.
+        Keep this receipt for your records.
+      </p>
+
+      <div class="afa-receipt-status">
+        <span class="afa-receipt-status-dot"></span>
+        Registration received
+      </div>
+
+    </div>
+
+    <!-- Receipt divider -->
+    <div class="afa-receipt-divider">
+      <span>REGISTRATION DETAILS</span>
+    </div>
+
+    <!-- Registration details -->
+    <div class="receipt-details">
+
+      <div class="receipt-row">
+        <span>Name</span>
+        <strong id="rName">—</strong>
+      </div>
+
+      <div class="receipt-row">
+        <span>Phone</span>
+        <strong id="rPhone">—</strong>
+      </div>
+
+      <div class="receipt-row">
+        <span>Ghana Card</span>
+        <strong id="rGhanaCard">—</strong>
+      </div>
+
+      <div class="receipt-row">
+        <span>Region</span>
+        <strong id="rRegion">—</strong>
+      </div>
+
+      <div class="receipt-row">
+        <span>AFA Registration ID</span>
+        <strong id="rRegistrationId">—</strong>
+      </div>
+
+      <div class="receipt-row receipt-status-row">
+        <span>Status</span>
+        <strong id="rStatus">Pending</strong>
+      </div>
+
+      <!-- Amount highlight -->
+      <div class="receipt-amount-panel">
+        <div class="receipt-amount-label">
+          <span class="afa-receipt-payment-icon">₵</span>
+          <div>
+            <span>Payment Summary</span>
+            <small>Registration fee</small>
+          </div>
+        </div>
+
+        <strong id="rAmount">GHS 20.00</strong>
+      </div>
+
+      <div class="receipt-row receipt-ref-row">
+        <span>Payment Reference</span>
+        <strong id="rRef">—</strong>
+      </div>
+
+    </div>
+
+    <!-- Receipt footer -->
+    <div class="afa-receipt-footer">
+      <span class="afa-receipt-footer-icon">✓</span>
+      <p>
+        Keep your registration ID and payment reference
+        for future enquiries.
+      </p>
+    </div>
+
+    <!-- Actions: existing JavaScript functions preserved -->
+    <div class="receipt-actions">
+
+      <button
+        type="button"
+        class="afa-receipt-download"
+        onclick="downloadReceipt()"
+      >
+        <span class="afa-receipt-action-icon">↓</span>
+        Download Receipt
+      </button>
+
+      <button
+        type="button"
+        class="afa-receipt-close"
+        onclick="closeReceipt()"
+      >
+        Close
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+<!-- AFA SUCCESS RECEIPT END -->
 
  
 </section>

@@ -1463,11 +1463,19 @@ body .card-container{
 .afa-receipt {
  
   display: none;
-  width: min(100% - 32px, 540px);
-  margin: 30px auto;
-  color: var(--receipt-ink);
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin: 0 !important;
+  align-items: center;
+  justify-content: center;
+  width: 100vw !important;
+  height: 100% !important;
   font-family: inherit;
-  line-height: 1.5;
+  overflow-y: auto;
+  background: rgba(0,0,0,0.6);
+  z-index: 9999999999999;
 }
 
 .afa-receipt *,
@@ -1490,6 +1498,10 @@ body .card-container{
 .afa-receipt .receipt-card {
   position: relative;
   overflow: hidden;
+  width: 100%;
+  max-width: 94%;
+  height: 90%;
+  overflow-y: auto;
   border: 1px solid var(--receipt-border);
   border-radius: 24px;
   background: #ffffff;
@@ -1521,11 +1533,16 @@ body .card-container{
   margin-bottom: 19px;
   border: 1px solid #cdebd8;
   border-radius: 22px;
-  background: #eaf8ef;
+  background: #fff;
   color: var(--receipt-green);
   font-size: 31px;
   font-weight: 800;
   box-shadow: 0 5px 16px rgba(24, 134, 75, 0.07);
+}
+
+.receipt-success-icon img{
+  width: 44px;
+  height: 44px;
 }
 
 .afa-receipt .afa-receipt-eyebrow {
@@ -1955,7 +1972,7 @@ body .card-container{
 
 .afa-records {
 
-display: none !important;
+display: flex !important;
   width: 100%;
   max-width: 1250px;
   margin: 28px auto;
@@ -2256,15 +2273,19 @@ display: none !important;
 /* EMPTY STATE */
 
 .afa-records__empty {
-  min-height: 250px;
-  margin: 0;
-  padding: 35px 20px;
+ position: sticky;
+  left: 0;                 /* stays put while scrolling sideways */
+  flex: 1 1 auto;          /* fills the body height */
+  align-self: flex-start;
+  width: 100cqw;           /* = visible width of the scroller */
+  min-height: 260px;
+  padding: 24px 20px;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
   text-align: center;
-  color: var(--records-muted);
+  gap: 8px;
 }
 
 .afa-records__empty[hidden] {
