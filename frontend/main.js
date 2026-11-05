@@ -1141,7 +1141,7 @@ function setDashboardText(id, value){
 }
 
 
-const SUCCESS_ORDER_ICON = "./css/icons/success-order-popup.jpeg";
+const SUCCESS_ORDER_ICON = "./css/icons/checked.jpeg";
 const ORDERS_SECTION_ID = "eco-table-scroll-section";
 
 let successOrderPopupTimer = null;
