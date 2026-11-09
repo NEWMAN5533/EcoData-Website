@@ -3562,27 +3562,50 @@ document.addEventListener("visibilitychange", () => {
 
 // ---------- AFTER PURCHASE: show and poll ----------
 // Load live orders on page refresh
-
 function loadLiveOrders() {
   const tableBody = document.getElementById("liveOrderRows");
   if (!tableBody) return;
 
-  const orders = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
+  const orders = JSON.parse(
+    localStorage.getItem(LIVE_ORDERS_KEY) || "[]"
+  );
 
   const emptyOrders = document.getElementById("liveOrderEmpty");
 
-  if (!orders.length) {
-    emptyOrders.style.display = "flex";
-  } else {
-    emptyOrders.style.display = "none";
+  if (emptyOrders) {
+    emptyOrders.style.display = orders.length ? "none" : "flex";
   }
 
-  orders
-    .sort((a, b) => {
-      return (b.timestamp || b.createdAt) - (a.timestamp || a.createdAt);
-    })
-    .forEach(renderLiveOrderRow);
+  // Clear existing rows before rebuilding from saved orders.
+  tableBody.querySelectorAll(".live-row").forEach((row) => row.remove());
+
+  // Convert ISO dates and numeric timestamps to comparable numbers.
+  const getOrderTime = (order) => {
+    const value = order.timestamp || order.createdAt;
+
+    if (!value) return 0;
+
+    const time =
+      typeof value === "number" ? value : new Date(value).getTime();
+
+    return Number.isFinite(time) ? time : 0;
+  };
+
+  [...orders]
+    .sort((a, b) => getOrderTime(b) - getOrderTime(a))
+    .forEach((order) => {
+      // Accept SwiftData's publicId if orderId is missing.
+      const normalizedOrder = {
+        ...order,
+        orderId: order.orderId || order.publicId || order.id,
+      };
+
+      renderLiveOrderRow(normalizedOrder);
+    });
 }
+
+
+
 
 // FUNCTION GET NETWORK PREFIX
 function getNetwork(order) {
