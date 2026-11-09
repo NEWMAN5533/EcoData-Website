@@ -23,7 +23,7 @@ validateRecipientRoute.post("/", async (req, res) => {
    }
    );
 
-    const response = await fetch("https://swiftdata-link.com/api/v1/orders/validate-recipient",
+    const response = await fetch("https://api.swiftdata-link.com/v2/beneficiary-check",
       {
         method: 'POST',
         headers: {
