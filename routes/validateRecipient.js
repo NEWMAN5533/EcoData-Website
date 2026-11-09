@@ -8,20 +8,30 @@ validateRecipientRoute.post("/", async (req, res) => {
   try {
     const { phone, phones, offerSlug, offerId, network } = req.body;
 
-    // Accept either the existing frontend's "phone"
-    // or the v2 API's "phones" array.
-    const recipients = Array.isArray(phones) ? phones : phone ? [phone] : [];
+    // Accept either "phone" or "phones".
+    const recipients = Array.isArray(phones)
+      ? phones
+      : phone
+        ? [phone]
+        : [];
 
-    if (recipients.length === 0) {
+    if (
+      recipients.length === 0 ||
+      recipients.some(
+        (item) => typeof item !== "string" || !item.trim()
+      )
+    ) {
       return res.status(400).json({
         success: false,
-        message: "At least one phone number is required.",
+        eligible: false,
+        message: "Valid recipient phone number(s) are required.",
       });
     }
 
     if (recipients.length > 2000) {
       return res.status(400).json({
         success: false,
+        eligible: false,
         message: "A maximum of 2000 phone numbers can be checked.",
       });
     }
@@ -29,6 +39,7 @@ validateRecipientRoute.post("/", async (req, res) => {
     if (!offerSlug && !offerId) {
       return res.status(400).json({
         success: false,
+        eligible: false,
         message: "A valid SwiftData offerSlug or offerId is required.",
       });
     }
@@ -40,6 +51,7 @@ validateRecipientRoute.post("/", async (req, res) => {
 
       return res.status(500).json({
         success: false,
+        eligible: false,
         message: "Recipient verification is not configured.",
       });
     }
@@ -64,22 +76,76 @@ validateRecipientRoute.post("/", async (req, res) => {
         },
         body: JSON.stringify(payload),
         signal: AbortSignal.timeout(20000),
-      },
+      }
     );
 
-    const data = await response.json();
+    const responseText = await response.text();
 
-    console.log("SwiftData v2 beneficiary response:", data);
+    let data;
 
-    // Preserve the provider's response so the frontend
-    // can read its existing verification result.
-    return res.status(response.status).json(data);
+    try {
+      data = JSON.parse(responseText);
+    } catch {
+      console.error(
+        "SwiftData returned a non-JSON response:",
+        response.status,
+        responseText.slice(0, 500)
+      );
+
+      return res.status(502).json({
+        success: false,
+        eligible: false,
+        message: "Invalid response from recipient verification service.",
+      });
+    }
+
+    console.log(
+      "SwiftData v2 beneficiary response:",
+      JSON.stringify(data, null, 2)
+    );
+
+    if (!response.ok || data?.success !== true) {
+      return res.status(response.status >= 400 ? response.status : 502).json({
+        success: false,
+        eligible: false,
+        message:
+          data?.error?.message ||
+          data?.message ||
+          "SwiftData recipient verification failed.",
+        error: data?.error,
+      });
+    }
+
+    // Extract the first recipient result.
+    const results = data?.data?.results;
+    const recipientResult = Array.isArray(results)
+      ? results[0]
+      : null;
+
+    // Only approve if the provider explicitly confirms eligibility.
+    const eligible = recipientResult?.eligible === true;
+
+    return res.status(200).json({
+      success: true,
+      eligible,
+      message:
+        recipientResult?.message ||
+        (eligible
+          ? "Recipient is eligible."
+          : "Recipient is not confirmed eligible."),
+      result: recipientResult,
+      data: data.data,
+    });
   } catch (error) {
     console.error("SwiftData recipient verification error:", error);
 
-    return res.status(500).json({
+    return res.status(502).json({
       success: false,
-      message: "Unable to validate recipient.",
+      eligible: false,
+      message:
+        error.name === "TimeoutError" || error.name === "AbortError"
+          ? "Recipient verification timed out. Please try again."
+          : "Unable to verify recipient right now. Please try again.",
     });
   }
 });
