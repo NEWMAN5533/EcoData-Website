@@ -507,7 +507,7 @@ export async function handleSwiftDataBuyDataRequest({
  
     // 6. Find the correct package in the SwiftData v2 catalogue.
     const selectedPackage = await
-      findSwiftDataPackage(
+      getSwiftDataCatalog (
   network,
   size,
   pkg
