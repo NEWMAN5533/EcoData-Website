@@ -3488,69 +3488,51 @@ function applySwiftStatus(localOrderId, swiftOrder) {
 
 
 
-const SWIFT_POLL_MAX_AGE_MS = 72 * 3600 * 1000;
 
 function startAutoPolling(orderIdOrRef) {
+  // Stop any existing polling first
   stopStatusPolling();
 
   const statusResult = document.getElementById("statusResult");
   if (statusResult) statusResult.innerHTML = "";
 
-  let busy = false;
 
-  async function tick() {
-    if (busy || document.hidden) return;
-    busy = true;
 
-    try {
-      const cutoff = Date.now() - SWIFT_POLL_MAX_AGE_MS;
+  // Initial immediate check for this specific order
+  (async () => {
+    if (!orderIdOrRef) return;
 
-      const eligible = getStoredOrders().filter(o =>
-        o.orderId &&
-        String(o.provider || "swiftdata").toLowerCase() !== "datamart" &&
-        !isTerminalStatus(o.status) &&
-        (new Date(o.createdAt || o.timestamp).getTime() || Date.now()) >= cutoff
-      );
-      if (!eligible.length) return;
+    const stored = getStoredOrders().find(o => o.orderId === orderIdOrRef);
+    if(String(stored?.provider || "").toLowerCase() === "datamart") return;
 
-      for (let i = 0; i < eligible.length; i += 200) {
-        const batch = eligible.slice(i, i + 200);
-        const result = await checkOrderStatusesOnce(batch.map(o => o.orderId));
-
-        const byRef = new Map();
-        for (const item of result.orders)
-          for (const key of swiftRefs(item)) byRef.set(key, item);
-
-        for (const stored of batch) {
-          const latest = byRef.get(String(stored.orderId).trim().toLowerCase());
-          if (!latest) continue;                        // unmatched is never a delivery
-
-          const updated = applySwiftStatus(stored.orderId, latest);
-          if (!updated) continue;
-
-          if (orderIdOrRef === stored.orderId) {
-            try {
-              createOrUpdateStatusCard(updated);
-              updateStatusBadge(updated.status || "pending");
-            } catch (e) { console.error(e); }
-          }
-        }
-      }
-    } catch (error) {
-      console.error("Bulk SwiftData polling error:", error);
-    } finally {
-      busy = false;
+    const order = await checkOrderStatusOnce(orderIdOrRef);
+    if (order) {
+      createOrUpdateStatusCard(order); // popup card
+      updateLiveOrderCard(order);      // table row
+      updateStatusBadge(order.status || "pending");
+      saveLiveOrder(order);            // persist status
     }
-  }
+  })();
 
-  tick();                                               // first check runs immediately
-  _statusPollTimer = setInterval(tick, STATUS_POLL_INTERVAL);
+  // Poll all stored orders for updates (except terminal)
+  _statusPollTimer = setInterval(async () => {
+    const orders = getStoredOrders();
+    for (let order of orders) {
+      if(String(order.provider || "").toLowerCase() === "datamart") continue; 
+      if (isTerminalStatus(order.status)) continue; // skip delivered/failed
+      const latest = await checkOrderStatusOnce(order.orderId);
+      if (!latest) continue;
+
+      saveLiveOrder(latest);           // merge status
+      renderLiveOrderRow(latest);      // update table
+      if (orderIdOrRef === latest.orderId) {
+        createOrUpdateStatusCard(latest);  // popup card only for this order
+        updateStatusBadge(latest.status || "pending");
+      }
+    }
+  }, STATUS_POLL_INTERVAL);
 }
 
-// catch up the moment the tab comes back
-document.addEventListener("visibilitychange", () => {
-  if (!document.hidden && _statusPollTimer) startAutoPolling();
-});
 
 
 
@@ -3562,50 +3544,27 @@ document.addEventListener("visibilitychange", () => {
 
 // ---------- AFTER PURCHASE: show and poll ----------
 // Load live orders on page refresh
+
 function loadLiveOrders() {
   const tableBody = document.getElementById("liveOrderRows");
   if (!tableBody) return;
 
-  const orders = JSON.parse(
-    localStorage.getItem(LIVE_ORDERS_KEY) || "[]"
-  );
+  const orders = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
 
   const emptyOrders = document.getElementById("liveOrderEmpty");
 
-  if (emptyOrders) {
-    emptyOrders.style.display = orders.length ? "none" : "flex";
+  if (!orders.length) {
+    emptyOrders.style.display = "flex";
+  } else {
+    emptyOrders.style.display = "none";
   }
 
-  // Clear existing rows before rebuilding from saved orders.
-  tableBody.querySelectorAll(".live-row").forEach((row) => row.remove());
-
-  // Convert ISO dates and numeric timestamps to comparable numbers.
-  const getOrderTime = (order) => {
-    const value = order.timestamp || order.createdAt;
-
-    if (!value) return 0;
-
-    const time =
-      typeof value === "number" ? value : new Date(value).getTime();
-
-    return Number.isFinite(time) ? time : 0;
-  };
-
-  [...orders]
-    .sort((a, b) => getOrderTime(b) - getOrderTime(a))
-    .forEach((order) => {
-      // Accept SwiftData's publicId if orderId is missing.
-      const normalizedOrder = {
-        ...order,
-        orderId: order.orderId || order.publicId || order.id,
-      };
-
-      renderLiveOrderRow(normalizedOrder);
-    });
+  orders
+    .sort((a, b) => {
+      return (b.timestamp || b.createdAt) - (a.timestamp || a.createdAt);
+    })
+    .forEach(renderLiveOrderRow);
 }
-
-
-
 
 // FUNCTION GET NETWORK PREFIX
 function getNetwork(order) {
