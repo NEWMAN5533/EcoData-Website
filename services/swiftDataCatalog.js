@@ -97,7 +97,7 @@ export async function findSwiftDataPackage(network, size, pkg) {
     .toLowerCase();
 
   const offerMap = {
-    mtn_data: "mtn_data_express_delivery",
+    mtn_data_express_delivery: "mtn_data_express_delivery",
     mtn_verified_numbers: "mtn_verified_numbers",
     telecel_expiry_bundle: "telecel_expiry_bundle",
     ishare_data_bundle: "ishare_data_bundle",
