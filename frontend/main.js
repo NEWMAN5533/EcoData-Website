@@ -2935,96 +2935,87 @@ function isTerminalStatus(status) {
 }
 
 
-// ---------- BULK STATUS CHECK ----------
-async function checkOrderStatusesOnce(orderIdsOrRefs) {
+// ---------- SINGLE LIVE STATUS CHECK ----------
+async function checkOrderStatusOnce(orderIdOrRef) {
   try {
-    if (!Array.isArray(orderIdsOrRefs) || orderIdsOrRefs.length === 0) {
-      return { orders: [], groups: [], missing: [] };
+    if (
+      typeof orderIdOrRef !== "string" ||
+      !orderIdOrRef.trim()
+    ) {
+      return null;
     }
 
-    // Exclude empty values and duplicate identifiers.
-    const identifiers = [
-      ...new Set(
-        orderIdsOrRefs
-          .filter((id) => typeof id === "string" && id.trim())
-          .map((id) => id.trim()),
-      ),
-    ];
+    const identifier = encodeURIComponent(orderIdOrRef.trim());
 
-    if (identifiers.length === 0) {
-      return { orders: [], groups: [], missing: [] };
-    }
-
-    // SwiftData allows a maximum of 200 identifiers per request.
-    const allOrders = [];
-    const allGroups = [];
-    const allMissing = [];
-
-    for (let i = 0; i < identifiers.length; i += 200) {
-      const batch = identifiers.slice(i, i + 200);
-
-      const res = await fetch(
-        `${API_BASE}/api/v2/orders/status`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ identifiers: batch }),
+    const res = await fetch(
+      `${API_BASE}/api/live-order-status/${identifier}`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
         },
+      },
+    );
+
+    if (!res.ok) {
+      console.warn(
+        "Live order status request failed:",
+        res.status,
+        orderIdOrRef,
       );
-
-      if (!res.ok) {
-        console.warn("Bulk status endpoint returned non-200", res.status);
-        continue;
-      }
-
-      const data = await res.json();
-
-      if (!data.success) {
-        console.warn("Bulk status check failed:", data.message);
-        continue;
-      }
-
-      allOrders.push(...(data.orders || []));
-      allGroups.push(...(data.groups || []));
-      allMissing.push(...(data.missing || []));
+      return null;
     }
 
-    return {
-      orders: allOrders,
-      groups: allGroups,
-      missing: allMissing,
-    };
-  } catch (err) {
-    console.error("Error checking SwiftData order statuses:", err);
+    const data = await res.json();
 
-    return {
-      orders: [],
-      groups: [],
-      missing: [],
-    };
+    if (!data.success || !data.order) {
+      return null;
+    }
+
+    return data.order;
+  } catch (err) {
+    console.error("Error checking live order status:", err);
+    return null;
   }
 }
 
 
-// ---------- SINGLE STATUS CHECK (BACKWARD COMPATIBILITY) ----------
-async function checkOrderStatusOnce(orderIdOrRef) {
-  const result = await checkOrderStatusesOnce([orderIdOrRef]);
+// ---------- BULK STATUS CHECK (USING OUR BACKEND) ----------
+async function checkOrderStatusesOnce(orderIdsOrRefs) {
+  if (
+    !Array.isArray(orderIdsOrRefs) ||
+    orderIdsOrRefs.length === 0
+  ) {
+    return { orders: [], groups: [], missing: [] };
+  }
 
-  // Return the matching single order, preserving the old function's behavior.
-  return (
-    result.orders.find(
-      (order) =>
-        order.publicId === orderIdOrRef ||
-        order.clientReference === orderIdOrRef ||
-        order.reference === orderIdOrRef,
-    ) ||
-    result.orders[0] ||
-    null
+  const identifiers = [
+    ...new Set(
+      orderIdsOrRefs
+        .filter((id) => typeof id === "string" && id.trim())
+        .map((id) => id.trim()),
+    ),
+  ];
+
+  const results = await Promise.all(
+    identifiers.map(async (identifier) => {
+      const order = await checkOrderStatusOnce(identifier);
+      return { identifier, order };
+    }),
   );
-}
 
+  return {
+    orders: results
+      .filter((result) => result.order)
+      .map((result) => result.order),
+
+    groups: [],
+
+    missing: results
+      .filter((result) => !result.order)
+      .map((result) => result.identifier),
+  };
+}
 // ---------- UPDATE HOME TOTALS ----------
 
 // Called AFTER a successful order is confirmed
@@ -3524,21 +3515,33 @@ function startAutoPolling(orderIdOrRef) {
 
         // This loop handles individual orders, not group summaries.
         for (const storedOrder of batch) {
+      
           const latest = result.orders.find((order) => {
-            const references = [
-              order.publicId,
-              order.clientReference,
-              order.reference,
-              order.orderId,
-              order.id,
-            ];
+  const references = [
+    order.publicId,
+    order.clientReference,
+    order.reference,
+    order.orderId,
+    order.id,
+  ];
 
-            return references.some(
-              (ref) =>
-                ref != null &&
-                String(ref) === String(storedOrder.orderId),
-            );
-          });
+  const storedReferences = [
+    storedOrder.orderId,
+    storedOrder.reference,
+    storedOrder.clientReference,
+    storedOrder.publicId,
+  ];
+
+  return references.some(
+    (ref) =>
+      ref != null &&
+      storedReferences.some(
+        (storedRef) =>
+          storedRef != null &&
+          String(ref) === String(storedRef),
+      ),
+  );
+});
 
           // Missing or unmatched results are not successful deliveries.
           if (!latest) continue;
