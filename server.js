@@ -17,7 +17,7 @@ import adminRoute from "./routes/adminOrderUpdate.js";
 import syncOrderRoute from "./routes/syncOrderStatus.js";
 import validateRecipientRoute from "./routes/validateRecipient.js";
 import restrictionsRoute from "./routes/restrictions.js";
-import { getSwiftDataCatalog } from "./services/swiftDataCatalog.js";
+import { getSwiftDataCatalog, findSwiftDataPackage } from "./services/swiftDataCatalog.js";
 import exclusiveAgentRoute from "./routes/exclusivePage.js";
 import afaRegisterRouter from "./routes/afaRegisterRoute.js";
 import afaStatusRouter from "./routes/afaStatusRouter.js";
@@ -507,7 +507,7 @@ export async function handleSwiftDataBuyDataRequest({
  
     // 6. Find the correct package in the SwiftData v2 catalogue.
     const selectedPackage = await
-      getSwiftDataCatalog (
+      findSwiftDataPackage (
   network,
   size,
   pkg
