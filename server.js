@@ -17,6 +17,7 @@ import adminRoute from "./routes/adminOrderUpdate.js";
 import syncOrderRoute from "./routes/syncOrderStatus.js";
 import validateRecipientRoute from "./routes/validateRecipient.js";
 import restrictionsRoute from "./routes/restrictions.js";
+import { findSwiftDataPackage } from "./services/swiftDataCatalog.js";
 import exclusiveAgentRoute from "./routes/exclusivePage.js";
 import afaRegisterRouter from "./routes/afaRegisterRoute.js";
 import afaStatusRouter from "./routes/afaStatusRouter.js";
@@ -124,6 +125,35 @@ app.use("/api/validate-recipient", validateRecipientRoute);
 app.use("/api/restrictions", restrictionsRoute);
 app.use("/api/paystack/webhook", paystackWebhookRouter);
 
+
+
+//================================
+// SWIFTDATA CATALOG CHECK
+//================================
+app.get("/api/swiftdata/v2/catalog", async (req, res) => {
+  try {
+    const offers = await getSwiftDataCatalog(req.query.network);
+
+    return res.json({
+      success: true,
+      offers
+    });
+  } catch (error) {
+    console.error("SwiftData v2 catalogue error:", {
+      status: error.providerHttpStatus ?? error.response?.status,
+      code: error.providerResponse?.error?.code,
+      message: error.message
+    });
+
+    return res.status(error.providerHttpStatus || error.response?.status || 502).json({
+      success: false,
+      code: error.providerResponse?.error?.code || null,
+      message:
+        error.providerResponse?.error?.message ||
+        "Unable to retrieve SwiftData packages."
+    });
+  }
+});
 
 app.use("/api/admin", adminRoute);
 app.use("/api/admin", syncOrderRoute);
@@ -275,230 +305,381 @@ async function verifyPaystack(paymentReference, retries = 3) {
 
 
 
+/* =========================================
+   SWIFTDATA V2 — BUY DATA
+   POST /orders
+========================================= */
 
-// Helper: common logic for buy-data (POST or GET)
-// ================================
-// HANDLE BUY DATA REQUEST (FIXED)
-// ================================
-// Helper: common logic for buy-data (POST or GET)
 export async function handleSwiftDataBuyDataRequest({
-  network, 
-  recipient, 
-  pkg, 
-  size, 
-  paymentReference }) {
-
-  if (
-    !network || 
-    !recipient || 
-    !pkg || 
-    !paymentReference ||
-    size === undefined
-    ) 
-    {
-    return { 
-      ok: false, 
-      status: 400, 
-      body: { 
-        success: false, 
-        message: "Missing required fields" } 
-      };
-  }
-
- 
-
-
-  // 2. STOP DUPLICATE REQUESTS HERE
-  if (processedOrders.has(paymentReference)) {
-    return {
-      ok: true,
-      status: 200,
-      body: {
-        success: true,
-        message: "Order already processed (duplicate prevented)",
-        order: processedOrders.get(paymentReference).response
-      }
-    };
-  }
-
-  
-
-  // 2. Verify Paystack payment
-  try {
-
-    const verification = await verifyPaystack(paymentReference);
-    
-    const transaction = 
-    verification?.data?.data;
-
-    if(transaction?.status !== "success"){
-      return {
-        ok: false,
-        status: 400,
-        body: {
-          success: false,
-          message: "Payment verification failed",
-        },
-      };
-    }
-
-    if(transaction.reference !== paymentReference){
-      return {
-        ok: false,
-        status: 400,
-        body: {
-          success: false,
-          message: "Payment reference mismatch"
-        }
-      };
-    }
-
-
-// Paystack returns the transaction amount in pesewas
-const actualAmountPesewas = Number(transaction.amount);
-
-if (
-  !Number.isFinite(actualAmountPesewas) ||
-  actualAmountPesewas <= 0
-) {
-  return {
-    ok: false,
-    status: 400,
-    body: {
-      success: false,
-      message: "Invalid payment amount."
-    }
-  };
-}
-
-
-// Convert pesewas to Ghana cedis
-const actualAmountGHS = actualAmountPesewas / 100;
-
-// Verify against promo, agent and normal user prices
-const priceCheck = verifySellingPrice(network, size, actualAmountGHS);
-
-if (!priceCheck.valid) {
-  return {
-    ok: false,
-    status: 400,
-    body: {
-      success: false,
-      message: priceCheck.message
-    }
-  };
-}
-
-console.log("Approved price verified:", {
+  network,
+  recipient,
+  pkg,
+  size,
   paymentReference,
-  priceType: priceCheck.priceType,
-  expectedPrice: priceCheck.expectedPrice,
-  actualAmountGHS
-});
+}) {
+  const reference = String(paymentReference || "").trim();
+  const phone = String(recipient || "").trim();
 
+  const capacity = Number(size);
 
-    console.log("Payment verified successfully for reference:", paymentReference);
-
-
-  
-    // 3. Build SwiftData order payload
-    const orderData = {
-      type: "single",
-      volume: parseInt(size, 10),
-      phone: recipient,
-      offerSlug: pkg,
-      webhookUrl:
-        process.env.SWIFT_WEBHOOK_URL || "https://swiftdata-link.com/api/webhooks/orders",
+  // 1. Validate required fields.
+  if (
+    !network ||
+    !phone ||
+    !reference ||
+    size === undefined ||
+    size === null ||
+    !Number.isFinite(capacity) ||
+    capacity <= 0
+  ) {
+    return {
+      ok: false,
+      status: 400,
+      body: {
+        success: false,
+        message: "Missing or invalid order fields.",
+      },
     };
+  }
 
-    console.log("Full SwiftData order payload:", orderData);
+  // 2. Prevent duplicate requests.
+  // A previous timeout or in-progress request must not
+  // trigger another provider purchase automatically.
+  const existingOrder = processedOrders.get(reference);
 
-    // 4. Post to SwiftData
-    const swiftBase = (process.env.SWIFT_BASE_URL).replace(/\/$/, "");
-
-    console.log(" Sending to swiftData:", {
-      network,
-      recipient,
-      pkg,
-      size,
-      paymentReference
-    });
-
-    const swiftUrl = `${swiftBase}/orders`;
-
-    console.log("SwiftData URL:", swiftUrl);
-
-    const swiftRes = await axios.post(swiftUrl, orderData, {
-      headers: {
-        "x-api-key": process.env.SWIFT_API_KEY,
-        "Content-Type": "application/json",
-      },
-      timeout: 15000,
-    });
-
-
-    processedOrders.set(paymentReference, {
-      status: "processing",
-      response: {
-        reference:
-          swiftRes.data?.reference || null,
-
-        orderId:
-          swiftRes.data?.orderId || null,
-      },
-    });
-
-    console.log("🔥 swiftData response:", swiftRes.data);
-
-    if (swiftRes.data?.success) {
+  if (existingOrder) {
+    if (
+      existingOrder.status === "processing" ||
+      existingOrder.status === "unknown"
+    ) {
       return {
         ok: true,
-        status: 200,
+        status: 202,
         body: {
           success: true,
-          message: "Bundle order placed",
-          order: swiftRes.data,
+          pendingReconciliation: true,
+          message:
+            "This payment is already being processed or checked. Please do not submit it again.",
+          order: existingOrder.response,
         },
       };
-    } else {
+    }
+
+    return {
+      ok: existingOrder.status === "completed",
+      status: existingOrder.status === "completed" ? 200 : 409,
+      body:
+        existingOrder.status === "completed"
+          ? {
+              success: true,
+              message: "Order already processed.",
+              order: existingOrder.response,
+            }
+          : {
+              success: false,
+              message:
+                "This payment reference has already been processed or requires reconciliation. Please contact support if necessary.",
+              order: existingOrder.response,
+            },
+    };
+  }
+
+  // Reserve the payment reference synchronously before
+  // awaiting Paystack or SwiftData.
+  processedOrders.set(reference, {
+    status: "processing",
+    response: {
+      paymentReference: reference,
+      orderStatus: "processing",
+    },
+  });
+
+  try {
+    // 3. Verify payment with Paystack.
+    const verification = await verifyPaystack(reference);
+    const transaction = verification?.data?.data;
+
+    if (
+      transaction?.status !== "success" ||
+      transaction.reference !== reference
+    ) {
+      processedOrders.set(reference, {
+        status: "failed",
+        response: {
+          paymentReference: reference,
+          message: "Payment verification failed.",
+        },
+      });
+
       return {
         ok: false,
         status: 400,
         body: {
           success: false,
-          message: "SwiftData request failed",
-          details: swiftRes.data,
+          message: "Payment verification failed or reference mismatched.",
         },
       };
     }
+
+    // 4. Validate the amount in pesewas.
+    const amountPesewas = Number(transaction.amount);
+
+    if (!Number.isFinite(amountPesewas) || amountPesewas <= 0) {
+      processedOrders.set(reference, {
+        status: "failed",
+        response: {
+          paymentReference: reference,
+          message: "Invalid payment amount.",
+        },
+      });
+
+      return {
+        ok: false,
+        status: 400,
+        body: {
+          success: false,
+          message: "Invalid payment amount.",
+        },
+      };
+    }
+
+    const amountGHS = amountPesewas / 100;
+
+    // Preserve EcoData's existing selling-price validation.
+    const priceCheck = verifySellingPrice(network, size, amountGHS);
+
+    if (!priceCheck.valid) {
+      processedOrders.set(reference, {
+        status: "failed",
+        response: {
+          paymentReference: reference,
+          message: priceCheck.message,
+        },
+      });
+
+      return {
+        ok: false,
+        status: 400,
+        body: {
+          success: false,
+          message: priceCheck.message,
+        },
+      };
+    }
+
+    console.log("SwiftData v2 payment verified:", {
+      paymentReference: reference,
+      priceType: priceCheck.priceType,
+      expectedPrice: priceCheck.expectedPrice,
+      actualAmountGHS: amountGHS,
+    });
+
+    // 5. Configure the v2 base URL.
+    // Set SWIFT_BASE_URL in Render to:
+    // https://api.swiftdata-link.com/v2
+    const swiftBase = (
+      process.env.SWIFT_BASE_URL || "https://api.swiftdata-link.com/v2"
+    ).replace(/\/+$/, "");
+
+    const apiKey = process.env.SWIFT_API_KEY;
+
+    if (!apiKey) {
+      // No provider request has been made, so this is not
+      // an uncertain provider purchase.
+      processedOrders.set(reference, {
+        status: "failed",
+        response: {
+          paymentReference: reference,
+          message: "SwiftData API key is not configured.",
+        },
+      });
+
+      return {
+        ok: false,
+        status: 500,
+        body: {
+          success: false,
+          message: "Data provider is not configured.",
+        },
+      };
+    }
+
+ 
+    // 6. Find the correct package in the SwiftData v2 catalogue.
+const selectedPackage = await findSwiftDataPackage(
+  network,
+  size
+);
+
+const orderData = {
+  msisdn: phone,
+  data: selectedPackage.sizeLabel,
+  reference,
+};
+
+if (selectedPackage.offerSlug) {
+  orderData.offerSlug = selectedPackage.offerSlug;
+} else if (selectedPackage.offerId) {
+  orderData.offerId = selectedPackage.offerId;
+} else {
+  throw new Error("No valid SwiftData offer identifier was found.");
+}
+
+console.log("Submitting SwiftData v2 order:", {
+  paymentReference: reference,
+  network,
+  data: selectedPackage.sizeLabel,
+  offerSlug: selectedPackage.offerSlug,
+  offerId: selectedPackage.offerId,
+});
+
+// 7. Submit the order to SwiftData v2.
+const swiftRes = await axios.post(
+  `${swiftBase}/orders`,
+  orderData,
+  {
+    headers: {
+      "X-API-Key": apiKey,
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    timeout: 20000,
+  }
+);
+
+const providerBody = swiftRes.data;
+const providerOrder = providerBody?.data;
+
+if (providerBody?.success !== true || !providerOrder) {
+  processedOrders.set(reference, {
+    status: "unknown",
+    response: {
+      paymentReference: reference,
+      providerResponse: providerBody || null,
+    },
+  });
+
+  return {
+    ok: false,
+    status: 502,
+    body: {
+      success: false,
+      pendingReconciliation: true,
+      message:
+        "The provider response could not be confirmed. Please do not retry this payment.",
+    },
+  };
+}
+
+// SwiftData accepting an order does not necessarily mean
+// the bundle has already been delivered.
+const order = {
+  ...providerOrder,
+  paymentReference: reference,
+  network,
+  recipient: phone,
+  size: capacity,
+  offerSlug: selectedPackage.offerSlug || null,
+  offerId: selectedPackage.offerId || null,
+};
+
+processedOrders.set(reference, {
+  status: "processing",
+  response: order,
+});
+
+console.log("SwiftData v2 order accepted:", {
+  paymentReference: reference,
+  providerReference:
+    providerOrder.reference ||
+    providerOrder.clientReference ||
+    null,
+  providerStatus:
+    providerOrder.status ||
+    providerOrder.orderStatus ||
+    "processing",
+});
+
+return {
+  ok: true,
+  status: 201,
+  body: {
+    success: true,
+    message: "Bundle order submitted successfully.",
+    order,
+  },
+};
   } catch (err) {
-    const errData = {
-      status: err.response?.status,
-      data: err.response?.data,
-      message: err.message
-    };
+    const providerStatus = err.response?.status ?? null;
+    const providerBody = err.response?.data ?? null;
 
-    console.error("🔥 handleSwiftDataBuyDataRequest error:", errData);
+    console.error("SwiftData v2 purchase error:", {
+      paymentReference: reference,
+      providerStatus,
+      providerCode: providerBody?.error?.code ?? null,
+      message: err.message,
+    });
 
-    // Save failure so duplicate network retry does not call Swift again
-    processedOrders.set(paymentReference, {
+    // Once the provider request may have been sent, a timeout,
+    // network failure, or server error can leave the purchase
+    // outcome uncertain. Never blindly retry the purchase.
+    const uncertain =
+      !err.response ||
+      err.code === "ECONNABORTED" ||
+      err.code === "ETIMEDOUT" ||
+      providerStatus >= 500 ||
+      providerStatus === 499;
+
+    if (uncertain) {
+      const savedResponse = {
+        paymentReference: reference,
+        providerStatus,
+        providerCode: providerBody?.error?.code ?? null,
+        message:
+          "The provider outcome is uncertain. Reconcile the order before retrying.",
+      };
+
+      processedOrders.set(reference, {
+        status: "unknown",
+        response: savedResponse,
+      });
+
+      return {
+        ok: false,
+        status: 504,
+        body: {
+          success: false,
+          pendingReconciliation: true,
+          message:
+            "We could not confirm the order status. Please do not pay again or retry this order yet.",
+          order: savedResponse,
+        },
+      };
+    }
+
+    // Definite provider rejection.
+    processedOrders.set(reference, {
       status: "failed",
-      response: errData,
+      response: {
+        paymentReference: reference,
+        providerStatus,
+        providerResponse: providerBody,
+      },
     });
 
     return {
       ok: false,
-      status: 500,
+      status:
+        providerStatus >= 400 && providerStatus < 500 ? providerStatus : 502,
       body: {
         success: false,
-        message: "Failed to process data order",
-        error: errData,
+        message:
+          providerBody?.error?.message || "SwiftData rejected the order.",
+        code: providerBody?.error?.code || null,
       },
     };
   }
-
 }
-
 
 // POST route
 app.post("/api/buy-data", async (req, res) => {
