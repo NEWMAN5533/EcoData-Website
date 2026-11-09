@@ -468,29 +468,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         return false;
       }
-
-      // =========================================
-      // SWIFTDATA V2 RECIPIENT VERIFICATION
-      // =========================================
-
-      // Telecel and AirtelTigo do not require recipient validation.
-      const normalizedNetwork = String(bundle.network || "")
-        .trim()
-        .toLowerCase();
-
-      if (["at", "airteltigo", "telecel"].includes(normalizedNetwork)) {
-        lastValidation = {
-          success: true,
-          eligible: true,
-          provider: "swiftdata",
-          verificationSkipped: true,
-        };
-
-        return true;
-      }
-
-   // =========================================
-      // SWIFTDATA V2 RECIPIENT VERIFICATION
+// =========================================
+      // SWIFTDATA V2 BENEFICIARY CHECK
       // =========================================
 
       const swiftResponse = await fetch(
@@ -502,21 +481,23 @@ document.addEventListener("DOMContentLoaded", () => {
             Accept: "application/json",
           },
           body: JSON.stringify({
-            phone: "233" + phone.substring(1),
+            phones: ["233" + phone.substring(1)],
             offerSlug: bundle.packageName,
-            network: bundle.network,
           }),
         }
       );
 
       const validation = await swiftResponse.json();
 
-      console.log("SwiftData v2 validation:", {
+      console.log("SwiftData beneficiary check:", {
         httpStatus: swiftResponse.status,
         validation,
       });
 
-      if (!swiftResponse.ok || validation?.eligible !== true) {
+      if (
+        !swiftResponse.ok ||
+        validation?.eligible !== true
+      ) {
         showSnackBar(
           validation?.message ||
             validation?.error?.message ||
@@ -536,8 +517,6 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
       return true;
-
-      
     } catch (error) {
       console.error("Recipient precheck error:", error);
 
