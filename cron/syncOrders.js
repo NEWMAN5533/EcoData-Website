@@ -37,10 +37,10 @@ let syncRunning = false;
 async function syncSwiftOrder(docSnap, order) {
   if (!order.orderId) return;
 
-  const base = (process.env.SWIFT_BASE_URL || "https://swiftdata-link.com")
+  const base = (process.env.SWIFT_BASE_URL || "https://api.swiftdata-link.com/v2")
     .replace(/\/$/, "");
 
-  const response = await axios.get(`${base}/order/status/${order.orderId}`, {
+  const response = await axios.get(`${base}/orders/status/${order.orderId}`, {
     headers: { "x-api-key": process.env.SWIFT_API_KEY }
   });
 
