@@ -2442,8 +2442,30 @@ function renderLiveOrderRow(order) {
     return;
   }
 
+  const resolvedOrderId = 
+  order.orderId ||
+  order.publicId ||
+  order.id;
+
+  if(resolvedOrderId){
+    console.log("Cannot render live order: missing order identifier.",
+      order,
+    );
+    return;
+  }
+
+
+  order = {
+    ...order,
+    orderId: String(resolvedOrderId),
+  };
+
   const tableBody = document.getElementById("liveOrderRows");
-  if (!tableBody) return;
+
+  if (!tableBody) {
+    console.error("Cannot find #liveOrderRows.");
+    return;
+  }
 
   const recipient =
     order.recipient ||
@@ -2917,43 +2939,70 @@ function stopStatusPolling() {
 
 
 
-
-// checks if status is terminal
+/**
+ * Checks whether an order has reached a terminal status.
+ */
 function isTerminalStatus(status) {
-  const s = (status || "").toLowerCase();
-  return [
-    "delivered",
-    "completed",
-    "success",
-    "failed",
-    "cancelled",
-    "refunded",
-    "resolved"].includes(s);
+  const s = String(status || "").trim().toLowerCase();
+  return FINAL_STATUSES.has(DM_STATUS_MAP[s] || s) || s === "resolved";
 }
 
-// ---------- POLLING FUNCTION ----------
-async function checkOrderStatusOnce(orderIdOrRef) {
-  try {
-    // Talk to backend (not directly )
-    const res = await fetch(`${API_BASE}/api/live-order-status/${encodeURIComponent(orderIdOrRef)}`,{
-      method: "GET",
-      headers: { "Content-Type": "application/json" }
-    });
 
+async function checkOrderStatusesOnce(orderIdsOrRefs) {
+  const empty = { orders: [], groups: [], missing: [] };
+  if (!Array.isArray(orderIdsOrRefs)) return empty;
 
-    if (!res.ok) {
-      console.warn("Status endpoint returned non-200", res.status);
-      return null;
+  const API_BASE = window.location.hostname === "localhost"
+    ? "http://localhost:3000" : "https://ecodata-app.onrender.com";
+
+  const identifiers = [...new Set(
+    orderIdsOrRefs.filter(id => typeof id === "string" && id.trim()).map(id => id.trim())
+  )];
+  if (!identifiers.length) return empty;
+
+  const all = { orders: [], groups: [], missing: [] };
+
+  for (let i = 0; i < identifiers.length; i += 200) {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 20000);
+
+    try {
+      const res = await fetch(`${API_BASE}/api/v2/orders/status`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ identifiers: identifiers.slice(i, i + 200) }),
+        cache: "no-store",
+        signal: ctrl.signal
+      });
+
+      if (!res.ok) { console.warn("Bulk status returned", res.status); continue; }
+
+      const data = await res.json();
+      if (!data.success) { console.warn("Bulk status failed:", data.message); continue; }
+
+      all.orders.push(...(data.orders || []));
+      all.groups.push(...(data.groups || []));
+      all.missing.push(...(data.missing || []));
+    } catch (err) {
+      console.error("Bulk status error:", err.name === "AbortError" ? "timeout" : err.message);
+    } finally {
+      clearTimeout(timer);
     }
-    const data = await res.json();
-    if (data && data.success && data.order) return data.order;
-    return null;
-  } catch (err) {
-    console.error("Error checking order status:", err);
-    return null;
-}
+  }
+  return all;
 }
 
+function swiftRefs(order) {
+  return [order?.publicId, order?.clientReference, order?.reference, order?.orderId, order?.id]
+    .filter(v => v != null).map(v => String(v).trim().toLowerCase());
+}
+
+async function checkOrderStatusOnce(orderIdOrRef) {
+  const result = await checkOrderStatusesOnce([orderIdOrRef]);
+  const wanted = String(orderIdOrRef).trim().toLowerCase();
+  // No fallback to orders[0]: an unmatched order must stay unmatched
+  return result.orders.find(o => swiftRefs(o).includes(wanted)) || null;
+}
 
 // Called AFTER a successful order is confirmed
 // ---------- UPDATE HOME TOTALS ----------
@@ -3387,51 +3436,121 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 
+
+function applySwiftStatus(localOrderId, swiftOrder) {
+  const raw = String(swiftOrder?.status || swiftOrder?.orderStatus || "")
+    .trim().toLowerCase();
+  if (!raw) return null;
+
+  const next = DM_STATUS_MAP[raw] || "processing";   // unknown counts as active
+
+  const orders = readOrders();                        // fresh read, right before writing
+  const index = orders.findIndex(o =>
+    String(o.orderId) === String(localOrderId) &&
+    String(o.provider || "swiftdata").toLowerCase() !== "datamart"
+  );
+  if (index === -1) return null;
+
+  const current = orders[index];
+  const curRaw = String(current.status || "").trim().toLowerCase();
+  const cur = DM_STATUS_MAP[curRaw] || curRaw;
+
+  // never turn a finished order back into an active one
+  if (FINAL_STATUSES.has(cur) && !FINAL_STATUSES.has(next)) return current;
+  if (cur === next && current.providerStatus === raw) return current;
+
+  // only status fields change, nothing else is overwritten
+  const updated = {
+    ...current,
+    provider: String(current.provider || "swiftdata").toLowerCase(),
+    status: next,
+    providerStatus: raw,
+    updatedAt: Date.now()
+  };
+  orders[index] = updated;
+  localStorage.setItem(LIVE_ORDERS_KEY, JSON.stringify(orders));
+
+  const safe = (fn, ...a) => {
+    try { if (typeof fn === "function") fn(...a); }
+    catch (e) { console.error("UI update failed:", fn?.name, e); }
+  };
+  safe(renderLiveOrderRow, updated);
+  safe(updatePendingCard);
+  safe(renderHomepageTotals);
+  safe(loadActiveBadge);
+
+  console.log("Swift status saved:", localOrderId, cur, "->", next);
+  return updated;
+}
+
+
+
+
+
+
+const SWIFT_POLL_MAX_AGE_MS = 72 * 3600 * 1000;
+
 function startAutoPolling(orderIdOrRef) {
-  // Stop any existing polling first
   stopStatusPolling();
 
   const statusResult = document.getElementById("statusResult");
   if (statusResult) statusResult.innerHTML = "";
 
+  let busy = false;
 
+  async function tick() {
+    if (busy || document.hidden) return;
+    busy = true;
 
-  // Initial immediate check for this specific order
-  (async () => {
-    if (!orderIdOrRef) return;
+    try {
+      const cutoff = Date.now() - SWIFT_POLL_MAX_AGE_MS;
 
-    const stored = getStoredOrders().find(o => o.orderId === orderIdOrRef);
-    if(String(stored?.provider || "").toLowerCase() === "datamart") return;
+      const eligible = getStoredOrders().filter(o =>
+        o.orderId &&
+        String(o.provider || "swiftdata").toLowerCase() !== "datamart" &&
+        !isTerminalStatus(o.status) &&
+        (new Date(o.createdAt || o.timestamp).getTime() || Date.now()) >= cutoff
+      );
+      if (!eligible.length) return;
 
-    const order = await checkOrderStatusOnce(orderIdOrRef);
-    if (order) {
-      createOrUpdateStatusCard(order); // popup card
-      updateLiveOrderCard(order);      // table row
-      updateStatusBadge(order.status || "pending");
-      saveLiveOrder(order);            // persist status
-    }
-  })();
+      for (let i = 0; i < eligible.length; i += 200) {
+        const batch = eligible.slice(i, i + 200);
+        const result = await checkOrderStatusesOnce(batch.map(o => o.orderId));
 
-  // Poll all stored orders for updates (except terminal)
-  _statusPollTimer = setInterval(async () => {
-    const orders = getStoredOrders();
-    for (let order of orders) {
-      if(String(order.provider || "").toLowerCase() === "datamart") continue; 
-      if (isTerminalStatus(order.status)) continue; // skip delivered/failed
-      const latest = await checkOrderStatusOnce(order.orderId);
-      if (!latest) continue;
+        const byRef = new Map();
+        for (const item of result.orders)
+          for (const key of swiftRefs(item)) byRef.set(key, item);
 
-      saveLiveOrder(latest);           // merge status
-      renderLiveOrderRow(latest);      // update table
-      if (orderIdOrRef === latest.orderId) {
-        createOrUpdateStatusCard(latest);  // popup card only for this order
-        updateStatusBadge(latest.status || "pending");
+        for (const stored of batch) {
+          const latest = byRef.get(String(stored.orderId).trim().toLowerCase());
+          if (!latest) continue;                        // unmatched is never a delivery
+
+          const updated = applySwiftStatus(stored.orderId, latest);
+          if (!updated) continue;
+
+          if (orderIdOrRef === stored.orderId) {
+            try {
+              createOrUpdateStatusCard(updated);
+              updateStatusBadge(updated.status || "pending");
+            } catch (e) { console.error(e); }
+          }
+        }
       }
+    } catch (error) {
+      console.error("Bulk SwiftData polling error:", error);
+    } finally {
+      busy = false;
     }
-  }, STATUS_POLL_INTERVAL);
+  }
+
+  tick();                                               // first check runs immediately
+  _statusPollTimer = setInterval(tick, STATUS_POLL_INTERVAL);
 }
 
-
+// catch up the moment the tab comes back
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden && _statusPollTimer) startAutoPolling();
+});
 
 
 
