@@ -121,8 +121,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "frontend")));
 
 // ROUTES
-app.use("/api/validate-recipient", validateRecipientRoute);
-app.use("/api/restrictions", restrictionsRoute);
+app.use("/api/beneficiary-check", validateRecipientRoute);
+app.use("/api/restrictions/validate", restrictionsRoute);
 app.use("/api/paystack/webhook", paystackWebhookRouter);
 
 
