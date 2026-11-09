@@ -60,7 +60,7 @@ export async function getSwiftDataCatalog() {
    FIND A DATA OFFER AND PACKAGE
 ========================================= */
 
-export async function findSwiftDataPackage(network, size) {
+export async function findSwiftDataPackage(network, size, pkg) {
   const normalizedNetwork = String(network || "")
     .trim()
     .toLowerCase()
@@ -91,8 +91,29 @@ export async function findSwiftDataPackage(network, size) {
     throw new Error("Invalid data bundle size.");
   }
 
+  // Match EcoData's package identifier to the SwiftData offer.
+  const packageName = String(pkg || "")
+    .trim()
+    .toLowerCase();
+
+  const offerMap = {
+    mtn_data: "mtn_data_express_delivery",
+    mtn_verified_numbers: "mtn_verified_numbers",
+    telecel_expiry_bundle: "telecel_expiry_bundle",
+    ishare_data_bundle: "ishare_data_bundle",
+  };
+
+  const expectedOfferSlug = offerMap[packageName];
+
+  if (!expectedOfferSlug) {
+    throw new Error(
+      `No SwiftData offer mapping exists for EcoData package: ${pkg}`
+    );
+  }
+
   const offers = await getSwiftDataCatalog();
 
+  // Match both the network and the exact offer.
   const matchingOffers = offers.filter((offer) => {
     const offerNetwork = String(offer.network || "")
       .trim()
@@ -103,9 +124,16 @@ export async function findSwiftDataPackage(network, size) {
       .trim()
       .toLowerCase();
 
+    const actualOfferSlug = String(
+      offer.offerSlug || offer.slug || ""
+    )
+      .trim()
+      .toLowerCase();
+
     return (
       acceptedNetworks.includes(offerNetwork) &&
       offerKind === "data" &&
+      actualOfferSlug === expectedOfferSlug &&
       Array.isArray(offer.packages)
     );
   });
@@ -113,7 +141,7 @@ export async function findSwiftDataPackage(network, size) {
   const matches = [];
 
   for (const offer of matchingOffers) {
-    const pkg = offer.packages.find((item) => {
+    const selected = offer.packages.find((item) => {
       const label = String(item.sizeLabel || "")
         .trim()
         .toUpperCase()
@@ -124,28 +152,28 @@ export async function findSwiftDataPackage(network, size) {
       return match && Number(match[1]) === capacity;
     });
 
-    if (pkg && (offer.offerSlug || offer.slug || offer.id)) {
+    if (selected) {
       matches.push({
         offerSlug: offer.offerSlug || offer.slug || null,
         offerId: offer.id || null,
         offerName: offer.name || null,
         network: offer.network,
-        sizeLabel: pkg.sizeLabel,
-        volumeMb: pkg.volumeMb ?? null,
-        priceMinor: pkg.priceMinor ?? null,
+        sizeLabel: selected.sizeLabel,
+        volumeMb: selected.volumeMb ?? null,
+        priceMinor: selected.priceMinor ?? null,
       });
     }
   }
 
   if (matches.length === 0) {
     throw new Error(
-      `SwiftData has no matching ${capacity}GB ${network} data package in the v2 catalogue.`
+      `SwiftData has no matching ${capacity}GB ${network} package for offer ${expectedOfferSlug}.`
     );
   }
 
   if (matches.length > 1) {
     throw new Error(
-      `Multiple SwiftData offers match ${capacity}GB ${network}. Configure an explicit offer preference.`
+      `Multiple SwiftData offers match ${capacity}GB ${network} for ${expectedOfferSlug}.`
     );
   }
 
