@@ -2161,38 +2161,63 @@ function handleNewDataMartOrder(returnedOrder) {
 const LIVE_ORDERS_KEY = "ecoLiveOrders";
 const MAX_LIVE_ORDERS = 1000;
 
+function resolveOrderId(o) {
+  return String(
+    o?.orderId || o?.publicId || o?.clientReference || o?.id || o?.reference || ""
+  ).trim();
+}
+
+function orderAliases(o) {
+  return [o?.orderId, o?.publicId, o?.clientReference, o?.reference, o?.id]
+    .filter(v => v != null && String(v).trim())
+    .map(v => String(v).trim().toLowerCase());
+}
+
 function saveLiveOrder(order) {
-  if (!order || !order.orderId) {
-    console.error("Cannot save live order: missing orderId.", order);
+  const orderId = resolveOrderId(order);
+
+  if (!orderId) {
+    console.error("Cannot save live order: no usable ID.", order);
     return false;
   }
 
+  const provider = String(order.provider || "swiftdata").toLowerCase();
+
+  // normalise the status if the shared map exists; never depend on it
+  const rawStatus = String(order.status || "").trim().toLowerCase();
+  const status =
+    (typeof DM_STATUS_MAP === "object" && DM_STATUS_MAP[rawStatus]) || rawStatus;
+
   const normalizedOrder = {
     ...order,
-    orderId: String(order.orderId),
-    provider: String(order.provider || "swiftdata").toLowerCase(),
-
-    // Preserve the full DataMart reference.
+    orderId,
+    provider,
+    status,
     providerOrderReference: String(
-      order.providerOrderReference || order.orderReference || "",
-    ).trim(),
+      order.providerOrderReference || order.orderReference || ""
+    ).trim()
   };
 
-  let existing = [];
+  // empty values must never erase saved ones
+  const incoming = Object.fromEntries(
+    Object.entries(normalizedOrder).filter(
+      ([, v]) => v !== undefined && v !== null && v !== ""
+    )
+  );
 
+  let existing = [];
   try {
-    const stored = localStorage.getItem(LIVE_ORDERS_KEY);
-    const parsed = stored ? JSON.parse(stored) : [];
+    const parsed = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY) || "[]");
     existing = Array.isArray(parsed) ? parsed : [];
   } catch (error) {
     console.error("Could not read saved live orders:", error);
   }
 
-  const index = existing.findIndex(
-    (item) =>
-      String(item.orderId) === normalizedOrder.orderId &&
-      String(item.provider || "swiftdata").toLowerCase() ===
-        normalizedOrder.provider,
+  // match on ANY shared ID, same provider
+  const newAliases = new Set(orderAliases(normalizedOrder));
+  const index = existing.findIndex(item =>
+    String(item.provider || "swiftdata").toLowerCase() === provider &&
+    orderAliases(item).some(a => newAliases.has(a))
   );
 
   if (index !== -1) {
@@ -2201,45 +2226,42 @@ function saveLiveOrder(order) {
 
     existing[index] = {
       ...current,
-      ...normalizedOrder,
-
-      // Do not erase a saved provider reference with an empty value.
-      providerOrderReference:
-        normalizedOrder.providerOrderReference ||
-        current.providerOrderReference ||
-        "",
-
-      status: currentIsTerminal ? current.status : normalizedOrder.status,
-
-      createdAt: current.createdAt || Date.now(),
-      timestamp: current.timestamp || Date.now(),
-      updatedAt: normalizedOrder.updatedAt || current.updatedAt,
+      ...incoming,
+      orderId: current.orderId,                 // keep the ID the row was drawn with
+      status: currentIsTerminal ? current.status : (incoming.status || current.status),
+      createdAt: current.createdAt || incoming.createdAt || Date.now(),
+      timestamp: current.timestamp || incoming.timestamp || Date.now(),
+      updatedAt: incoming.updatedAt || current.updatedAt || Date.now()
     };
   } else {
     existing.unshift({
-      ...normalizedOrder,
-      createdAt: normalizedOrder.createdAt || Date.now(),
-      timestamp: normalizedOrder.timestamp || Date.now(),
-      updatedAt: normalizedOrder.updatedAt || Date.now(),
+      ...incoming,
+      createdAt: incoming.createdAt || Date.now(),
+      timestamp: incoming.timestamp || Date.now(),
+      updatedAt: incoming.updatedAt || Date.now()
     });
   }
 
   try {
     localStorage.setItem(
       LIVE_ORDERS_KEY,
-      JSON.stringify(existing.slice(0, MAX_LIVE_ORDERS)),
+      JSON.stringify(existing.slice(0, MAX_LIVE_ORDERS))
     );
   } catch (error) {
     console.error("Could not persist live order:", error);
     return false;
   }
 
-  updatePendingCard();
-  loadActiveBadge();
+  // a failed card update must never stop the badge from updating
+  try { updatePendingCard(); } catch (e) { console.error("updatePendingCard:", e); }
+  try { loadActiveBadge(); } catch (e) { console.error("loadActiveBadge:", e); }
 
   return true;
 }
-// ends
+
+
+
+
 
 function sortLiveOrders(orders) {
   if (!Array.isArray(orders)) {
@@ -2599,7 +2621,11 @@ function renderLiveOrderRow(order) {
   addCell("Yes");
 
   // Network
-  addCell(getNetwork(normalized));
+  
+  let network = normalized.network || "-";
+  try { network = getNetwork(normalized);}
+  catch(e) { console.error("getNetwork failed:", e);}
+  addCell(network);
 
   // Order ID
   addCell(normalized.orderId);
