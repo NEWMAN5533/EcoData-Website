@@ -9,28 +9,26 @@ import {
   onSnapshot,
   limit,
   doc,
+  setDoc,
   getDoc,
   getFirestore,
   getDocs,
   query,
   orderBy,
   serverTimestamp,
-} from 
-"https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
-
-
-
-
-  // ---------- CONFIG ----------
+// ---------- CONFIG ----------
 const API_BASE = (() => {
   // use current host in prod or localhost for local dev
-  if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+  if (
+    window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1"
+  ) {
     return "http://localhost:3000";
   }
   return "https://ecodata-app.onrender.com"; // your deployed backend
 })();
-
 
 //=========================
 // LEADERBOARD START DATE
@@ -39,18 +37,15 @@ const LEADERBOARD_START = new Date("2026-11-01");
 const LEADERBOARD_ENDS = new Date("2026-11-30T23:59:59");
 
 const leaderboardStartText = LEADERBOARD_START.toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric"
+  month: "short",
+  day: "numeric",
 });
 
 const endTimeText = LEADERBOARD_ENDS.toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric"
+  month: "short",
+  day: "numeric",
+  year: "numeric",
 });
-
-
-
 
 //=========================
 // LEADERBOARD START DATE
@@ -61,7 +56,7 @@ let STATUS_POLL_INTERVAL = 5000;
 let _statusPollTimer = null; // to hold the interval timer ID
 
 // ---------- GLOBAL STATE ----------
-let selectedBundle = null;      // used for UI selection (normal view)
+let selectedBundle = null; // used for UI selection (normal view)
 let lastPurchasedBundle = null; // used after payment (normal + grid)
 
 // protect payment (save successful)
@@ -77,46 +72,30 @@ const PACKAGE_MAP = {
   mashup: "special_mashup_bundle_packages",
 };
 
-
 const STORAGE_KEY = "selected_mtn_package";
-
 
 function getVendorForPackage(packageName) {
   const normalizedPackage = String(packageName || "").trim();
 
-  return normalizedPackage === 
-  PACKAGE_MAP.normal
-    ? "datamart"
-    : "swiftdata";
+  return normalizedPackage === PACKAGE_MAP.normal ? "datamart" : "swiftdata";
 }
 
-
-
 function resolvePackageName(network) {
-
   if (network === "mtn") {
     return selectedPackageName;
   }
 
   if (network === "at") {
     return "ishare_data_bundle";
-
-
   }
 
   if (network === "telecel") {
     return "telecel_expiry_bundle";
   }
-
- 
 }
-
-
-
 
 //NEW UPDATED (DOMCONTENTLOADER) - synced with eco-bundle HTML//
 document.addEventListener("DOMContentLoaded", () => {
-
   // =========================================
   //  ELEMENT REFERENCES
   // =========================================
@@ -144,8 +123,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const mashRecipient = document.querySelector(".eco-bundle-label");
   const mashPacks = document.querySelector(".packs");
   const mashTitle = document.querySelector(".top-dashboard h2");
-  const mashTopRightContainerh2 = document.querySelector(".top-right-content h2");
-  const mashTopRightContainerSmall = document.querySelector(".top-right-content small");
+  const mashTopRightContainerh2 = document.querySelector(
+    ".top-right-content h2",
+  );
+  const mashTopRightContainerSmall = document.querySelector(
+    ".top-right-content small",
+  );
   const mashTopRightContainerBtn = document.querySelector(".btn-div");
 
   const mtnArea = document.getElementById("mtnArea");
@@ -179,7 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function clearActiveBundle() {
     document
       .querySelectorAll(".eco-bundle-option--active")
-      .forEach(o => o.classList.remove("eco-bundle-option--active"));
+      .forEach((o) => o.classList.remove("eco-bundle-option--active"));
   }
 
   // Dropdown open/close with aria-expanded
@@ -198,7 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const themes = {
       mtn: "rgba(245, 179, 57, 0.932)",
       telecel: "linear-gradient(to right, rgb(241, 62, 122), rgb(192, 3, 82))",
-      at: "linear-gradient(to right, rgb(75, 148, 233), rgb(4, 145, 170))"
+      at: "linear-gradient(to right, rgb(75, 148, 233), rgb(4, 145, 170))",
     };
 
     const bg = themes[network];
@@ -207,23 +190,20 @@ document.addEventListener("DOMContentLoaded", () => {
     [
       document.querySelector(".modal-content-top"),
       document.querySelector(".continue"),
-      document.getElementById("networkTag")
-    ].forEach(el => {
+      document.getElementById("networkTag"),
+    ].forEach((el) => {
       if (el) el.style.background = bg;
     });
   }
 
-
-
-
   function setOfferButton(option) {
-  if (!selectBtn) return;
+    if (!selectBtn) return;
 
-  const icon  = option.querySelector(".eco-offer-option-icon i");
-  const title = option.querySelector(".eco-offer-option-copy strong");
-  const note  = option.querySelector(".eco-offer-option-copy small");
+    const icon = option.querySelector(".eco-offer-option-icon i");
+    const title = option.querySelector(".eco-offer-option-copy strong");
+    const note = option.querySelector(".eco-offer-option-copy small");
 
-  selectBtn.innerHTML = `
+    selectBtn.innerHTML = `
     <span class="eco-offer-selector-leading">
       <span class="eco-offer-selector-icon">
         <i class="${icon ? icon.className : "ri-wifi-line"}" aria-hidden="true"></i>
@@ -238,44 +218,36 @@ document.addEventListener("DOMContentLoaded", () => {
       <i class="ri-arrow-down-s-line" aria-hidden="true"></i>
     </span>
   `;
-}
-
-
-
-function setActiveOffer(option) {
-  deliveryOptions.forEach(o => o.classList.remove("active", "eco-offer-option--active"));
-  option.classList.add("active", "eco-offer-option--active");
-}
-
-function setOfferDropdown(open) {
-  dropdownOffer.classList.toggle("show", open);
-  selectBtn.setAttribute("aria-expanded", String(open));
-}
-
-
-
-
-
-
-
-
-
-function setButtonBusy(button, busy, label = "Processing...") {
-  button.disabled = busy;
-  button.setAttribute("aria-busy", String(busy));
-
-  // Only touch the <span> label so the icons survive
-  const span = button.querySelector("span");
-  if (!span) return;
-
-  if (busy) {
-    span.dataset.original = span.textContent;
-    span.textContent = label;
-  } else if (span.dataset.original) {
-    span.textContent = span.dataset.original;
-    delete span.dataset.original;
   }
-}
+
+  function setActiveOffer(option) {
+    deliveryOptions.forEach((o) =>
+      o.classList.remove("active", "eco-offer-option--active"),
+    );
+    option.classList.add("active", "eco-offer-option--active");
+  }
+
+  function setOfferDropdown(open) {
+    dropdownOffer.classList.toggle("show", open);
+    selectBtn.setAttribute("aria-expanded", String(open));
+  }
+
+  function setButtonBusy(button, busy, label = "Processing...") {
+    button.disabled = busy;
+    button.setAttribute("aria-busy", String(busy));
+
+    // Only touch the <span> label so the icons survive
+    const span = button.querySelector("span");
+    if (!span) return;
+
+    if (busy) {
+      span.dataset.original = span.textContent;
+      span.textContent = label;
+    } else if (span.dataset.original) {
+      span.textContent = span.dataset.original;
+      delete span.dataset.original;
+    }
+  }
 
   // =========================================
   //  CHECK RESTRICTIONS
@@ -303,7 +275,9 @@ function setButtonBusy(button, busy, label = "Processing...") {
   // =========================================
 
   async function validateRecipient(phone, offerSlug, network) {
-    const normalizedNetwork = String(network || "").trim().toLowerCase();
+    const normalizedNetwork = String(network || "")
+      .trim()
+      .toLowerCase();
 
     // AT and Telecel do not require MTN recipient validation
     if (["at", "telecel"].includes(normalizedNetwork)) {
@@ -311,21 +285,21 @@ function setButtonBusy(button, busy, label = "Processing...") {
         success: true,
         eligible: true,
         skipped: true,
-        message: "Recipient validation not required for this network."
+        message: "Recipient validation not required for this network.",
       };
     }
 
     console.log("Sending validation:", {
       phone,
       offerSlug,
-      network: normalizedNetwork
+      network: normalizedNetwork,
     });
 
     try {
       const response = await fetch("/api/validate-recipient", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone, offerSlug })
+        body: JSON.stringify({ phone, offerSlug }),
       });
 
       return await response.json();
@@ -335,7 +309,7 @@ function setButtonBusy(button, busy, label = "Processing...") {
       return {
         success: false,
         eligible: false,
-        message: "Unable to verify recipient"
+        message: "Unable to verify recipient",
       };
     }
   }
@@ -365,7 +339,11 @@ function setButtonBusy(button, busy, label = "Processing...") {
 
     // 1. Validate phone number locally first.
     if (!/^0\d{9}$/.test(phone)) {
-      showSnackBar("Enter a valid 10-digit Ghanaian phone number.", "error", 4000);
+      showSnackBar(
+        "Enter a valid 10-digit Ghanaian phone number.",
+        "error",
+        4000,
+      );
       return false;
     }
 
@@ -383,14 +361,14 @@ function setButtonBusy(button, busy, label = "Processing...") {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Accept": "application/json"
+            Accept: "application/json",
           },
           body: JSON.stringify({
             network: bundle.network || "mtn",
             recipient: phone,
             size: Number(bundle.size),
-            offerSlug: bundle.packageName
-          })
+            offerSlug: bundle.packageName,
+          }),
         });
 
         let result;
@@ -403,7 +381,7 @@ function setButtonBusy(button, busy, label = "Processing...") {
 
         console.log("DataMart verification response:", {
           httpStatus: response.status,
-          result
+          result,
         });
 
         // A. Backend explicitly approves purchase.
@@ -413,13 +391,13 @@ function setButtonBusy(button, busy, label = "Processing...") {
             eligible: true,
             provider: result.provider || "datamart",
             verification: result.verification || null,
-            verificationSkipped: result.verificationSkipped === true
+            verificationSkipped: result.verificationSkipped === true,
           };
 
           showSnackBar(
             result.message || "Recipient check complete. You may continue.",
             "success",
-            3000
+            3000,
           );
 
           return true;
@@ -429,7 +407,7 @@ function setButtonBusy(button, busy, label = "Processing...") {
         const blockingCodes = [
           "INVALID_RECIPIENT",
           "RECIPIENT_NOT_VERIFIED",
-          "RECIPIENT_ACTIVATION_REQUIRED"
+          "RECIPIENT_ACTIVATION_REQUIRED",
         ];
 
         if (
@@ -440,7 +418,7 @@ function setButtonBusy(button, busy, label = "Processing...") {
             result.message ||
               "This recipient cannot receive the selected bundle. Please select another offer",
             "error",
-            5000
+            5000,
           );
 
           return false;
@@ -453,7 +431,7 @@ function setButtonBusy(button, busy, label = "Processing...") {
           "INVALID_VERIFICATION_RESPONSE",
           "NETWORK_VERIFICATION_UNAVAILABLE",
           "VERIFICATION_CONFIG_ERROR",
-          "VENDOR_UNAVAILABLE"
+          "VENDOR_UNAVAILABLE",
         ];
 
         const temporaryHttpStatuses = [408, 429, 500, 502, 503, 504];
@@ -468,13 +446,13 @@ function setButtonBusy(button, busy, label = "Processing...") {
             eligible: true,
             provider: "datamart",
             verificationSkipped: true,
-            verificationStatus: "unavailable"
+            verificationStatus: "unavailable",
           };
 
           showSnackBar(
             "Recipient verification is temporarily unavailable. You can continue with your purchase.",
             "info",
-            5000
+            5000,
           );
 
           return true;
@@ -482,31 +460,61 @@ function setButtonBusy(button, busy, label = "Processing...") {
 
         // D. Unknown or ambiguous response: fail safely.
         showSnackBar(
-          result?.message || "We could not confirm this recipient. Please try again.",
+          result?.message ||
+            "We could not confirm this recipient. Please try again.",
           "error",
-          5000
+          5000,
         );
 
         return false;
       }
 
       // =========================================
-      // SWIFTDATA: KEEP EXISTING VALIDATION
+      // SWIFTDATA V2 RECIPIENT VERIFICATION
       // =========================================
+
+      // Telecel and AirtelTigo do not require recipient validation.
+      const normalizedNetwork = String(bundle.network || "")
+        .trim()
+        .toLowerCase();
+
+      if (["at", "airteltigo", "telecel"].includes(normalizedNetwork)) {
+        lastValidation = {
+          success: true,
+          eligible: true,
+          provider: "swiftdata",
+          verificationSkipped: true,
+        };
+
+        return true;
+      }
+
       const validation = await validateRecipient(
         "233" + phone.substring(1),
         bundle.packageName,
-        bundle.network
+        bundle.network,
       );
 
-      if (!validation.success || !validation.eligible) {
-        showSnackBar(validation.message || "Recipient validation failed.", "error", 4000);
+      console.log("SwiftData v2 precheck result:", validation);
+
+      // Require explicit eligibility approval.
+      if (validation?.eligible !== true) {
+        showSnackBar(
+          validation?.message ||
+            validation?.error?.message ||
+            "We could not confirm this recipient. Please try again.",
+          "error",
+          4000,
+        );
+
         return false;
       }
 
       lastValidation = {
         ...validation,
-        provider: "swiftdata"
+        success: true,
+        eligible: true,
+        provider: "swiftdata",
       };
 
       return true;
@@ -523,19 +531,23 @@ function setButtonBusy(button, busy, label = "Processing...") {
           eligible: true,
           provider: "datamart",
           verificationSkipped: true,
-          verificationStatus: "unavailable"
+          verificationStatus: "unavailable",
         };
 
         showSnackBar(
           "Recipient verification is temporarily unavailable. You can continue with your purchase.",
           "info",
-          5000
+          5000,
         );
 
         return true;
       }
 
-      showSnackBar("Unable to verify the recipient. Please try again.", "error", 4000);
+      showSnackBar(
+        "Unable to verify the recipient. Please try again.",
+        "error",
+        4000,
+      );
       return false;
     }
   }
@@ -550,7 +562,10 @@ function setButtonBusy(button, busy, label = "Processing...") {
     // Shared MTN text (express, numbers, normal)
     function applyMtnText(packCount) {
       setText(mashTopRightContainerh2, "MTN Data Bundle");
-      setText(mashTopRightContainerSmall, "Purchase MTN data bundles for single or multiple recipients");
+      setText(
+        mashTopRightContainerSmall,
+        "Purchase MTN data bundles for single or multiple recipients",
+      );
       setText(mashTopRightContainerBtn, "14 Packages Available");
 
       setText(mashTitle, "MTN DATA BUNDLE");
@@ -597,7 +612,10 @@ function setButtonBusy(button, busy, label = "Processing...") {
     // MASHUP
     if (mode === "mashup") {
       setText(mashTopRightContainerh2, "Special Mashup Bundle");
-      setText(mashTopRightContainerSmall, "Purchase MASHUP bundle for single or multiple recipients");
+      setText(
+        mashTopRightContainerSmall,
+        "Purchase MASHUP bundle for single or multiple recipients",
+      );
       setText(mashTopRightContainerBtn, "13 Packages Available");
 
       setDisplay(mashupNormal, "block");
@@ -631,8 +649,12 @@ function setButtonBusy(button, busy, label = "Processing...") {
 
     setPicker("Select bundle");
 
-    ["placeHolderGB", "networkTextContent", "totalAmountText", "placeHolderPriceTotal"]
-      .forEach(id => setTextById(id, ""));
+    [
+      "placeHolderGB",
+      "networkTextContent",
+      "totalAmountText",
+      "placeHolderPriceTotal",
+    ].forEach((id) => setTextById(id, ""));
 
     clearActiveBundle();
 
@@ -650,7 +672,9 @@ function setButtonBusy(button, busy, label = "Processing...") {
   const savedMode = localStorage.removeItem(STORAGE_KEY);
   const saveMode = PACKAGE_MAP[savedMode] ? savedMode : "normal";
 
-  const activeOption = document.querySelector(`.eco-offer-option[data-mode="${saveMode}"]`);
+  const activeOption = document.querySelector(
+    `.eco-offer-option[data-mode="${saveMode}"]`,
+  );
 
   if (activeOption) {
     applyPackageUI(saveMode);
@@ -658,26 +682,25 @@ function setButtonBusy(button, busy, label = "Processing...") {
     setActiveOffer(activeOption);
     setOfferButton(activeOption);
     setOfferDropdown(false);
-
   }
 
   // =========================================
   //  DELIVERY OFFER DROPDOWN
   // =========================================
 
- if (selectBtn && dropdownOffer) {
-  selectBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    setOfferDropdown(!dropdownOffer.classList.contains("show"));
-  });
-}
+  if (selectBtn && dropdownOffer) {
+    selectBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      setOfferDropdown(!dropdownOffer.classList.contains("show"));
+    });
+  }
 
-document.addEventListener("click", () => {
-  if (dropdownOffer) setOfferDropdown(false);
-});
+  document.addEventListener("click", () => {
+    if (dropdownOffer) setOfferDropdown(false);
+  });
 
   // Select delivery package
-  deliveryOptions.forEach(option => {
+  deliveryOptions.forEach((option) => {
     option.addEventListener("click", async (e) => {
       e.stopPropagation();
 
@@ -690,7 +713,7 @@ document.addEventListener("click", () => {
           showSnackBar(
             "Please choose another offer. Normal Delivery Mode is currently unavailable.",
             "error",
-            4000
+            4000,
           );
           dropdownOffer.classList.remove("show");
           return;
@@ -713,18 +736,14 @@ document.addEventListener("click", () => {
       selectedPackageName = PACKAGE_MAP[mode];
 
       // Update the main selection button.
-  
+
       setOfferButton(option);
       setOfferDropdown(false);
       setActiveOffer(option);
 
       showSnackBar("Offer updated.", "info", 2000);
-
-  
     });
   });
-
-
 
   // =========================================
   //  BUNDLE PICKER (NORMAL VIEW)
@@ -746,15 +765,14 @@ document.addEventListener("click", () => {
   }
 
   // Select a bundle option
-  document.querySelectorAll(".eco-bundle-option").forEach(opt => {
+  document.querySelectorAll(".eco-bundle-option").forEach((opt) => {
     opt.addEventListener("click", () => {
-
       selectedBundle = {
         network: opt.dataset.network,
         dataValue: opt.dataset.value,
         packageName: resolvePackageName(opt.dataset.network),
         size: Number(opt.dataset.size),
-        price: Number(opt.dataset.price)
+        price: Number(opt.dataset.price),
       };
 
       // Fee is 1.95% (same rate used for the total and the fee badge)
@@ -768,7 +786,7 @@ document.addEventListener("click", () => {
       // Picker button
       setPicker(
         opt.dataset.value,
-        `GH₵ ${selectedBundle.price.toFixed(2)} · Fee: ${fee}`
+        `GH₵ ${selectedBundle.price.toFixed(2)} · Fee: ${fee}`,
       );
 
       // Order summary
@@ -785,110 +803,126 @@ document.addEventListener("click", () => {
   //  PLACE ORDER / BUY BUTTONS (NORMAL + GRID)
   // =========================================
 
-document
-  .querySelectorAll("#normalView .eco-bundle-order-button, #gridView .buy-btn")
-  .forEach(button => {
+  document
+    .querySelectorAll(
+      "#normalView .eco-bundle-order-button, #gridView .buy-btn",
+    )
+    .forEach((button) => {
+      button.addEventListener("click", async () => {
+        if (button.disabled) return; // blocks double taps
+        setButtonBusy(button, true, "Verifying Number...");
 
-    button.addEventListener("click", async () => {
-      if (button.disabled) return;          // blocks double taps
-      setButtonBusy(button, true, "Verifying Number...");
+        let paymentStarted = false;
 
-      let paymentStarted = false;
+        try {
+          if (bottomNavDiv) bottomNavDiv.style.display = "flex";
 
-      try {
-        if (bottomNavDiv) bottomNavDiv.style.display = "flex";
-
-        // ================= NORMAL VIEW =================
-        if (button.closest("#normalView")) {
-
-          if (!selectedBundle) {
-            showSnackBar("📱 Please select a bundle first");
-            return;
-          }
-
-          if (!recipientInput || !recipientInput.value.trim()) {
-            showSnackBar("📱 Please enter a phone number");
-            return;
-          }
-
-          const recipient = recipientInput.value.trim();
-
-          if (!/^[0-9]{10}$/.test(recipient)) {
-            showSnackBar("📱 Phone number must be exactly 10 digits");
-            return;
-          }
-
-          const bundle = { ...selectedBundle };
-
-          const precheckPassed = await precheckRecipientBeforePayment(bundle, recipient);
-          if (!precheckPassed) return;
-
-          lastPurchasedBundle = bundle;
-
-          paymentStarted = true;
-          payWithPaystack(bundle, recipient);
-          resetSelectedBundle();
-        }
-
-        // ================= GRID VIEW =================
-        else {
-          const bundle = {
-            network: button.dataset.network,
-            dataValue: button.dataset.value,
-            packageName: resolvePackageName(button.dataset.network),
-            size: Number(button.dataset.size),
-            price: Number(button.dataset.price)
-          };
-
-          if (
-            !bundle.network ||
-            !Number.isFinite(bundle.size) || bundle.size <= 0 ||
-            !Number.isFinite(bundle.price) || bundle.price <= 0
-          ) {
-            showSnackBar("Invalid bundle details. Please try again.", "error", 4000);
-            return;
-          }
-
-          applyNetworkTheme(button.dataset.network);
-
-          const priceWithFee = (bundle.price * 1.0195).toFixed(2);
-          const priceFee = (priceWithFee - bundle.price).toFixed(2);
-
-          setDashboardText("priceTag", `GHS₵ ${bundle.price}`);
-          setDashboardText("networkTag", `${bundle.network.toUpperCase()} `);
-          setDashboardText("sizeTag", `${bundle.dataValue}`);
-          setDashboardText("netWorth", `${bundle.network.toUpperCase()}`);
-          setDashboardText("gbSize", `${bundle.dataValue.toUpperCase()}`);
-          setDashboardText("amount", `GHS₵ ${priceWithFee}`);
-          setDashboardText("priceWithFee", `GHS₵ ${priceFee}`);
-
-          let submitting = false;   // guards the modal's continue button
-
-          createPhoneModal(async inputNumber => {
-            if (submitting) return;
-            submitting = true;
-
-            try {
-              const precheckPassed = await precheckRecipientBeforePayment(bundle, inputNumber);
-              if (!precheckPassed) return;
-
-              lastPurchasedBundle = bundle;
-
-              payWithPaystack(bundle, inputNumber);
-              resetSelectedBundle();
-            } finally {
-              // allow a retry if the check failed, stay locked once payment started
-              setTimeout(() => { submitting = false; }, 3000);
+          // ================= NORMAL VIEW =================
+          if (button.closest("#normalView")) {
+            if (!selectedBundle) {
+              showSnackBar("📱 Please select a bundle first");
+              return;
             }
-          });
-        }
 
-      } finally {
-        // Failed checks unlock right away; after payment starts, keep a short cooldown
-        setTimeout(() => setButtonBusy(button, false), paymentStarted ? 3000 : 0);
-      }
+            if (!recipientInput || !recipientInput.value.trim()) {
+              showSnackBar("📱 Please enter a phone number");
+              return;
+            }
+
+            const recipient = recipientInput.value.trim();
+
+            if (!/^[0-9]{10}$/.test(recipient)) {
+              showSnackBar("📱 Phone number must be exactly 10 digits");
+              return;
+            }
+
+            const bundle = { ...selectedBundle };
+
+            const precheckPassed = await precheckRecipientBeforePayment(
+              bundle,
+              recipient,
+            );
+            if (!precheckPassed) return;
+
+            lastPurchasedBundle = bundle;
+
+            paymentStarted = true;
+            payWithPaystack(bundle, recipient);
+            resetSelectedBundle();
+          }
+
+          // ================= GRID VIEW =================
+          else {
+            const bundle = {
+              network: button.dataset.network,
+              dataValue: button.dataset.value,
+              packageName: resolvePackageName(button.dataset.network),
+              size: Number(button.dataset.size),
+              price: Number(button.dataset.price),
+            };
+
+            if (
+              !bundle.network ||
+              !Number.isFinite(bundle.size) ||
+              bundle.size <= 0 ||
+              !Number.isFinite(bundle.price) ||
+              bundle.price <= 0
+            ) {
+              showSnackBar(
+                "Invalid bundle details. Please try again.",
+                "error",
+                4000,
+              );
+              return;
+            }
+
+            applyNetworkTheme(button.dataset.network);
+
+            const priceWithFee = (bundle.price * 1.0195).toFixed(2);
+            const priceFee = (priceWithFee - bundle.price).toFixed(2);
+
+            setDashboardText("priceTag", `GHS₵ ${bundle.price}`);
+            setDashboardText("networkTag", `${bundle.network.toUpperCase()} `);
+            setDashboardText("sizeTag", `${bundle.dataValue}`);
+            setDashboardText("netWorth", `${bundle.network.toUpperCase()}`);
+            setDashboardText("gbSize", `${bundle.dataValue.toUpperCase()}`);
+            setDashboardText("amount", `GHS₵ ${priceWithFee}`);
+            setDashboardText("priceWithFee", `GHS₵ ${priceFee}`);
+
+            let submitting = false; // guards the modal's continue button
+
+            createPhoneModal(async (inputNumber) => {
+              if (submitting) return;
+              submitting = true;
+
+              try {
+                const precheckPassed = await precheckRecipientBeforePayment(
+                  bundle,
+                  inputNumber,
+                );
+                if (!precheckPassed) return;
+
+                lastPurchasedBundle = bundle;
+
+                payWithPaystack(bundle, inputNumber);
+                resetSelectedBundle();
+              } finally {
+                // allow a retry if the check failed, stay locked once payment started
+                setTimeout(() => {
+                  submitting = false;
+                }, 3000);
+              }
+            });
+          }
+        } finally {
+          // Failed checks unlock right away; after payment starts, keep a short cooldown
+          setTimeout(
+            () => setButtonBusy(button, false),
+            paymentStarted ? 3000 : 0,
+          );
+        }
+      });
     });
-  });
   // =========================================
   //  NORMAL & GRID MODE TOGGLE
   // =========================================
@@ -959,27 +993,17 @@ document
   window.addEventListener("click", () => {
     closeAllDropdowns();
   });
-
 });
-
-
-
 
 //NEW UPDATED 21/01/2026 //
 function createPhoneModal(callback) {
-
   const modal = document.getElementById("phoneModal");
   const confirmBtn = document.getElementById("confirmBtn");
   const cancelBtn = document.getElementById("cancelBtn");
   const input = document.getElementById("recipientInput");
 
-  
-
-
   // Show modal
   modal.classList.add("show");
-
-
 
   cancelBtn.onclick = () => {
     modal.classList.remove("show");
@@ -993,36 +1017,31 @@ function createPhoneModal(callback) {
     }
 
     // digit only + exactly 10 numbers
-    if(!/^[0-9]{10}$/.test(recipient)) {
+    if (!/^[0-9]{10}$/.test(recipient)) {
       showSnackBar("📱 Phone number must be exactly 10 digits");
       return; // stop
     }
     modal.classList.remove("show");
     callback(recipient);
-};
+  };
 }
-
 
 // ===================
 // LOADER SPINNERS IFRAME
 //=====================
 
-
- 
-
-
 // --------------------==========
 
 function showLoader() {
   const loader = document.getElementById("paystackLoader");
-  if(!loader) return;
+  if (!loader) return;
   loader.style.display = "flex";
   document.body.classList.add("no-scroll");
 }
 
 function hideLoader() {
   const loader = document.getElementById("paystackLoader");
-  if(!loader) return;
+  if (!loader) return;
   loader.style.display = "none";
   document.body.classList.remove("no-scroll");
 }
@@ -1031,17 +1050,11 @@ function hideLoader() {
 // LOADER SPINNER IFRAME
 //=====================
 
-
-
-
-
 // =======================
 // PLAY SOUND WHEN ORDER IS SUCCESSFUL
 // ===========================
 function playSuccessSound() {
-
-  const audioCtx = new (window.AudioContext ||
-    window.webkitAudioContext)();
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
   const playTone = (freq, start, duration) => {
     const osc = audioCtx.createOscillator();
@@ -1050,34 +1063,32 @@ function playSuccessSound() {
     osc.type = "sine";
     osc.frequency.value = freq;
 
-    gain.gain.setValueAtTime(2.5,
-      audioCtx.currentTime + start);
-      gain.gain.exponentialRampToValueAtTime(0.001,
-        audioCtx.currentTime + start + duration);
+    gain.gain.setValueAtTime(2.5, audioCtx.currentTime + start);
+    gain.gain.exponentialRampToValueAtTime(
+      0.001,
+      audioCtx.currentTime + start + duration,
+    );
 
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
 
-      osc.start(audioCtx.currentTime + start);
-      osc.stop(audioCtx.currentTime + start + duration);
+    osc.start(audioCtx.currentTime + start);
+    osc.stop(audioCtx.currentTime + start + duration);
   };
 
   // Three-tone success chime
   playTone(800, 0, 0.15);
   playTone(1000, 0.15, 0.15);
-  playTone(1300, 0.30, 0.2);
+  playTone(1300, 0.3, 0.2);
 }
 
 // =======================
 // PLAY SOUND WHEN ORDER IS SUCCESSFUL ENDS
 // =======================
 
-
-
 // =================================================
 // CHECK IF THE RECIPIENT HAS ACTIVE ORDER (ALREADY)
 // =================================================
-
 
 const activeStatus = ["pending", "queued", "processing"];
 
@@ -1086,17 +1097,15 @@ function normalizeNumber(num = "") {
 }
 
 function hasActiveOrder(recipient) {
-  const orders =
-    JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
+  const orders = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
 
   const target = normalizeNumber(recipient);
 
-  return orders.some(o => {
+  return orders.some((o) => {
     const status = (o.status || "").toLowerCase();
 
     return (
-      normalizeNumber(o.recipient) === target &&
-      activeStatus.includes(status)
+      normalizeNumber(o.recipient) === target && activeStatus.includes(status)
     );
   });
 }
@@ -1104,25 +1113,29 @@ function hasActiveOrder(recipient) {
 // CHECK IF THE RECIPIENT HAS ACTIVE ORDER (ALREADY) ENDS
 // =================================================
 
-
 //===========================
 // ACTIVATE DELIVERY TRACKER
 //===========================
 
-
 function activateTrackers() {
- const firstTracker = document.getElementById("deliveryTracker1").style.display = "none";
+  const firstTracker = (document.getElementById(
+    "deliveryTracker1",
+  ).style.display = "none");
 
- const secondTracker = document.getElementById("deliveryTracker2").style.display = "flex";
-};
-
-
+  const secondTracker = (document.getElementById(
+    "deliveryTracker2",
+  ).style.display = "flex");
+}
 
 // un activate trackers when no orders
-function unActivateTrackers(){
- const firstTracker = document.getElementById("deliveryTracker1").style.display = "none";
+function unActivateTrackers() {
+  const firstTracker = (document.getElementById(
+    "deliveryTracker1",
+  ).style.display = "none");
 
- const secondTracker = document.getElementById("deliveryTracker2").style.display = "flex";
+  const secondTracker = (document.getElementById(
+    "deliveryTracker2",
+  ).style.display = "flex");
 }
 
 //=================================
@@ -1132,15 +1145,13 @@ function unActivateTrackers(){
 //=======================
 // SAFE DOM TEXT UPDATE
 //=======================
-function setDashboardText(id, value){
- const element = 
- document.getElementById(id);
+function setDashboardText(id, value) {
+  const element = document.getElementById(id);
 
- if(element){
-  element.textContent = value;
- }
+  if (element) {
+    element.textContent = value;
+  }
 }
-
 
 const SUCCESS_ORDER_ICON = "./css/icons/checked.jpeg";
 const ORDERS_SECTION_ID = "eco-table-scroll-section";
@@ -1178,9 +1189,11 @@ function showSuccessfulOrderPopup({ size, recipient } = {}) {
   overlay.classList.add("is-visible");
   overlay.setAttribute("aria-hidden", "false");
 
-  document.getElementById("successOrderViewBtn")?.focus({ preventScroll: true });
+  document
+    .getElementById("successOrderViewBtn")
+    ?.focus({ preventScroll: true });
 
-  successOrderPopupTimer = setTimeout(closeSuccessfulOrderPopup, 3800);
+  successOrderPopupTimer = setTimeout(closeSuccessfulOrderPopup, 30000);
 }
 
 function closeSuccessfulOrderPopup() {
@@ -1197,93 +1210,89 @@ function scrollToOrdersTable() {
   if (!target) return;
 
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  target.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  target.scrollIntoView({
+    behavior: reduce ? "auto" : "smooth",
+    block: "start",
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   const overlay = document.getElementById("successOrderPopup");
 
   // View Order: hide the popup, then scroll to the orders table
-  document.getElementById("successOrderViewBtn")?.addEventListener("click", () => {
-    closeSuccessfulOrderPopup();
-    requestAnimationFrame(scrollToOrdersTable);
-  });
+  document
+    .getElementById("successOrderViewBtn")
+    ?.addEventListener("click", () => {
+      closeSuccessfulOrderPopup();
+      requestAnimationFrame(scrollToOrdersTable);
+    });
 
   // Tap outside the card to close
-  overlay?.addEventListener("click", e => {
+  overlay?.addEventListener("click", (e) => {
     if (e.target === overlay) closeSuccessfulOrderPopup();
   });
 
-  document.addEventListener("keydown", e => {
+  document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeSuccessfulOrderPopup();
   });
 });
-
-
 
 //NEW UPDATED 21/01/2026 //
 // === PAYSTACK PAYMENT (Firebase version) ===
 
 async function payWithPaystack(bundle, recipient) {
+  //  if(bundle.network?.toLowerCase() === "mtn") {
+  //   showSnackBar("📱 MTN ORDER PAUSED, WE ARE IMPLEMENTING  PREMIUM SYSTEM TO IMPROVE DELIVERY. PLEASE TRY AGAIN LATER.",   "success", 10000);
+  //  return;
+  // }
 
-//  if(bundle.network?.toLowerCase() === "mtn") {
-//   showSnackBar("📱 MTN ORDER PAUSED, WE ARE IMPLEMENTING  PREMIUM SYSTEM TO IMPROVE DELIVERY. PLEASE TRY AGAIN LATER.",   "success", 10000);
-//  return;
-// }
+  const normalizedNetwork = String(bundle.network || "")
+    .trim()
+    .toLowerCase();
 
-
-const normalizedNetwork = String(bundle.network || "")
-  .trim()
-  .toLowerCase();
-
-const requiresRecipientValidation =
-  !["at", "telecel"].includes(normalizedNetwork);
-
-const validatedProvider = lastValidation?.provider;
-
-// DataMart validation uses success.
-// SwiftData retains its existing eligible check.
-const recipientValidated =
-  validatedProvider === "datamart"
-    ? lastValidation?.success === true
-    : lastValidation?.eligible === true;
-
-if (requiresRecipientValidation && !recipientValidated) {
-  showSnackBar(
-    "Recipient verification required before payment",
-    "warning",
-    3000
+  const requiresRecipientValidation = !["at", "telecel"].includes(
+    normalizedNetwork,
   );
-  return;
-}
 
+  const validatedProvider = lastValidation?.provider;
 
+  // DataMart validation uses success.
+  // SwiftData retains its existing eligible check.
+  const recipientValidated =
+    validatedProvider === "datamart"
+      ? lastValidation?.success === true
+      : lastValidation?.eligible === true;
 
-  if(hasActiveOrder(recipient)){
-    showSnackBar("❌ Number already has an active order", "warning", 4000
+  if (requiresRecipientValidation && !recipientValidated) {
+    showSnackBar(
+      "Recipient verification required before payment",
+      "warning",
+      3000,
     );
-    return; // STOP PAYMENT
-    }
+    return;
+  }
 
+  if (hasActiveOrder(recipient)) {
+    showSnackBar("❌ Number already has an active order", "warning", 4000);
+    return; // STOP PAYMENT
+  }
 
   const { network, packageName, size } = bundle;
 
-   const payWithFee = Number((bundle.price * 1.0195).toFixed(2));
+  const payWithFee = Number((bundle.price * 1.0195).toFixed(2));
 
-
-   console.log("Checkout price debug:", {
-  offer: packageName,
-  network,
-  size,
-  bundlePrice: bundle.price,
-  checkoutPrice: payWithFee,
-  paystackAmountPesewas: Math.round(payWithFee * 100)
-});
+  console.log("Checkout price debug:", {
+    offer: packageName,
+    network,
+    size,
+    bundlePrice: bundle.price,
+    checkoutPrice: payWithFee,
+    paystackAmountPesewas: Math.round(payWithFee * 100),
+  });
 
   const user = auth.currentUser;
   const userEmail = user?.email || `${recipient}@ecodata.com`;
   const userName = user?.nameDisplay || "Guest User";
-
 
   // 1️⃣ Show YOUR loader first
   showLoader();
@@ -1298,15 +1307,14 @@ if (requiresRecipientValidation && !recipientValidated) {
       amount: payWithFee * 100,
       currency: "GHS",
 
-
       metadata: {
-  type: "bundle",
-  recipient,
-  network,
-  pkg: packageName,
-  size,
+        type: "bundle",
+        recipient,
+        network,
+        pkg: packageName,
+        size,
 
-  custom_fields: [
+        custom_fields: [
           { display_name: "User Name", value: userName },
           { display_name: "Recipient", value: recipient },
           { display_name: "Network", value: network },
@@ -1315,87 +1323,86 @@ if (requiresRecipientValidation && !recipientValidated) {
         ],
       },
 
-onSuccess: async (response) => {
-  console.log("✅ Paystack onSuccess fired:", response.reference);
+      onSuccess: async (response) => {
+        console.log("✅ Paystack onSuccess fired:", response.reference);
 
-  hideLoader();
+        hideLoader();
 
-  try {
-    // =========================
-    // GET THE SELECTED PACKAGE
-    // =========================
-    const currentPackageName =
-      lastPurchasedBundle?.packageName || packageName || bundle.packageName || selectedBundle.packageName;
+        try {
+          // =========================
+          // GET THE SELECTED PACKAGE
+          // =========================
+          const currentPackageName =
+            lastPurchasedBundle?.packageName ||
+            packageName ||
+            bundle.packageName ||
+            selectedBundle.packageName;
 
-    if (!currentPackageName) {
-      throw new Error(
-        "Selected package is missing. Cannot determine the vendor."
-      );
-    }
+          if (!currentPackageName) {
+            throw new Error(
+              "Selected package is missing. Cannot determine the vendor.",
+            );
+          }
 
-    console.log("📦 Selected package:", currentPackageName);
+          console.log("📦 Selected package:", currentPackageName);
 
-    // =========================
-    // DETERMINE VENDOR BY PACKAGE
-    // =========================
-    const activeVendor = getVendorForPackage(currentPackageName);
+          // =========================
+          // DETERMINE VENDOR BY PACKAGE
+          // =========================
+          const activeVendor = getVendorForPackage(currentPackageName);
 
-    console.log("🚚 Vendor selected for package:", activeVendor);
+          console.log("🚚 Vendor selected for package:", activeVendor);
 
-    // =========================
-    // PROCESS THE PURCHASE
-    // =========================
-    if (activeVendor === "datamart") {
-      console.log("➡️ Calling Vendor2 purchase function...");
+          // =========================
+          // PROCESS THE PURCHASE
+          // =========================
+          if (activeVendor === "datamart") {
+            console.log("➡️ Calling Vendor2 purchase function...");
 
-      await orderDataMartBundle(
-        network,
-        recipient,
-        currentPackageName,
-        size,
-        response.reference
-      );
-    } else {
-      console.log("➡️ Calling Vendor1 purchase function...");
+            await orderDataMartBundle(
+              network,
+              recipient,
+              currentPackageName,
+              size,
+              response.reference,
+            );
+          } else {
+            console.log("➡️ Calling Vendor1 purchase function...");
 
-      await orderBundle(
-        network,
-        recipient,
-        currentPackageName,
-        size,
-        response.reference
-      );
-    }
+            await orderBundle(
+              network,
+              recipient,
+              currentPackageName,
+              size,
+              response.reference,
+            );
+          }
+        } catch (error) {
+          console.error("❌ Post-payment processing error:", error);
 
-  } catch (error) {
-    console.error("❌ Post-payment processing error:", error);
-
-    showSnackBar(
-      "Payment succeeded, but order processing could not start. Contact support with your payment reference: " +
-        response.reference,
-      "error",
-      8000
-    );
-  }
-},
+          showSnackBar(
+            "Payment succeeded, but order processing could not start. Contact support with your payment reference: " +
+              response.reference,
+            "error",
+            8000,
+          );
+        }
+      },
 
       onCancel: () => {
         hideLoader();
         showSnackBar("❌ Payment cancelled");
-      }
+      },
     });
-  }, 3120); 
+  }, 3120);
 }
 // SELECTED BUNDLE FOR UI UPDATE
-
 
 //NEW UPDATED 21/01/2026 //
 // === SEND ORDER TO BACKEND ===
 
-async function orderBundle(network, recipient, packageName, size, reference, ) {
-
+async function orderBundle(network, recipient, packageName, size, reference) {
   try {
-
     const bundle = lastPurchasedBundle;
     if (!bundle) {
       showSnackBar("⚠ Order context missing");
@@ -1407,24 +1414,19 @@ async function orderBundle(network, recipient, packageName, size, reference, ) {
         ? "http://localhost:3000"
         : "https://ecodata-app.onrender.com";
 
-
-
-  const response = await fetch(
-  `${API_BASE}/api/buy-data`,
-  {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      network,
-      recipient,
-      package: packageName,
-      size,
-      paymentReference: reference,
-    }),
-  }
-);
+    const response = await fetch(`${API_BASE}/api/buy-data`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        network,
+        recipient,
+        package: packageName,
+        size,
+        paymentReference: reference,
+      }),
+    });
 
     const result = await response.json();
 
@@ -1433,80 +1435,76 @@ async function orderBundle(network, recipient, packageName, size, reference, ) {
       return;
     }
 
-const returnedOrder = result.order?.order || result.order || result;
+    const returnedOrder = result.order?.order || result.order || result;
 
-const orderData = {
-  orderId:
-    returnedOrder.orderId ||
-    returnedOrder.reference,
+    const orderData = {
+      orderId: returnedOrder.orderId || returnedOrder.reference,
 
-  reference: returnedOrder.reference,
+      reference: returnedOrder.reference,
 
-  recipient,
+      recipient,
 
-  network: bundle.network,
+      network: bundle.network,
 
-  volume: Number(bundle.size || size || 0),
+      volume: Number(bundle.size || size || 0),
 
-  dataValue: `${(bundle.dataValue || selectedBundle.dataValue || 0)}`,
+      dataValue: `${bundle.dataValue || selectedBundle.dataValue || 0}`,
 
-  amount: Number(bundle.price * 1.0195 || 0),
-  provider: "swiftdata",
+      amount: Number(bundle.price * 1.0195 || 0),
+      provider: "swiftdata",
 
-  status: "pending",
+      status: "pending",
 
-  source: "web",
+      source: "web",
 
-  isGuest: !auth.currentUser,
+      isGuest: !auth.currentUser,
 
-  createdBy: auth.currentUser?.uid || "guest",
+      createdBy: auth.currentUser?.uid || "guest",
 
-  createdAt: Date.now(),
-};
+      createdAt: Date.now(),
+    };
 
- handleNewOrder(
-  orderData
-);
+    handleNewOrder(orderData);
 
-try{
-  playSuccessSound();
-  showSuccessfulOrderPopup({
-    size: orderData.volume, 
-    recipient: orderData.recipient
-  });
-} catch (e) { console.error("Success popup failed:", e);}
+    try {
+      playSuccessSound();
+      showSuccessfulOrderPopup({
+        size: orderData.volume,
+        recipient: orderData.recipient,
+      });
+    } catch (e) {
+      console.error("Success popup failed:", e);
+    }
 
-updateHomepageTotals(orderData);
+    updateHomepageTotals(orderData);
 
- console.log("Calling saveOrderToFirestore...");
- console.log(orderData);
+    console.log("Calling saveOrderToFirestore...");
+    console.log(orderData);
 
-try {
-  const firestoreId =
-  await saveOrderToFirestore(orderData);
-  console.log("Returned Firestore ID:", firestoreId);
-} catch (e) {
-console.error("SaveOrderToFireStore failed:", e)
-}
+    try {
+      const firestoreId = await saveOrderToFirestore(orderData);
+      console.log("Returned Firestore ID:", firestoreId);
+    } catch (e) {
+      console.error("SaveOrderToFireStore failed:", e);
+    }
 
-try {
-  saveGuestOrder(orderData);
-} catch (e) {
-  console.error("saveGuestOrder failed:", e);
-}
+    try {
+      saveGuestOrder(orderData);
+    } catch (e) {
+      console.error("saveGuestOrder failed:", e);
+    }
 
-try {
-  activateTrackers();
-} catch (e) {
-  console.error("activateTrackers failed:", e);
-}
-
+    try {
+      activateTrackers();
+    } catch (e) {
+      console.error("activateTrackers failed:", e);
+    }
   } catch (err) {
-  console.error("orderBundle error:", err);
-  console.error(err.stack);
+    console.error("orderBundle error:", err);
+    console.error(err.stack);
 
- // showSnackBar(`📱${size}GB ORDER PLACED SUCCESSFULLY!`, "success", 6000);
-}
+    // showSnackBar(`📱${size}GB ORDER PLACED SUCCESSFULLY!`, "success", 6000);
+  }
 }
 //ends//
 //ends//
@@ -1516,7 +1514,7 @@ async function orderDataMartBundle(
   recipient,
   packageName,
   size,
-  reference
+  reference,
 ) {
   const API_BASE =
     window.location.hostname === "localhost"
@@ -1524,23 +1522,20 @@ async function orderDataMartBundle(
       : "https://ecodata-app.onrender.com";
 
   try {
-    const response = await fetch(
-      `${API_BASE}/api/datamart/buy-data`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        },
-        body: JSON.stringify({
-          network,
-          recipient,
-          package: packageName,
-          size,
-          paymentReference: reference
-        })
-      }
-    );
+    const response = await fetch(`${API_BASE}/api/datamart/buy-data`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        network,
+        recipient,
+        package: packageName,
+        size,
+        paymentReference: reference,
+      }),
+    });
 
     // =========================
     // PARSE BACKEND RESPONSE
@@ -1551,7 +1546,7 @@ async function orderDataMartBundle(
       result = await response.json();
     } catch {
       throw new Error(
-        `EcoData returned an invalid response (HTTP ${response.status}).`
+        `EcoData returned an invalid response (HTTP ${response.status}).`,
       );
     }
 
@@ -1563,46 +1558,36 @@ async function orderDataMartBundle(
     // ACCEPTANCE CHECK
     // =========================
     const paymentReference = String(
-      order.paymentReference || reference || ""
+      order.paymentReference || reference || "",
     ).trim();
 
     const providerOrderReference = String(
       order.providerOrderReference ||
-      order.orderReference ||
-      (
-        paymentReference
-          ? `Ia553341879ecodata-${paymentReference}`
-          : ""
-      )
+        order.orderReference ||
+        (paymentReference ? `Ia553341879ecodata-${paymentReference}` : ""),
     ).trim();
 
     const isAcceptedResponse =
       response.status === 202 &&
       Boolean(paymentReference || providerOrderReference);
 
-    if (
-      !response.ok ||
-      (!result.success && !isAcceptedResponse)
-    ) {
+    if (!response.ok || (!result.success && !isAcceptedResponse)) {
       showSnackBar(
-        result.message ||
-          "Unable to confirm the DataMart order.",
+        result.message || "Unable to confirm the DataMart order.",
         "error",
-        5000
+        5000,
       );
 
       return {
         success: false,
-        order
+        order,
       };
     }
 
     // =========================
     // CREATE STABLE ORDER ID
     // =========================
-    const existingPublicId = String(
-      order.orderId || order.id || ""
-    ).trim();
+    const existingPublicId = String(order.orderId || order.id || "").trim();
 
     const orderId = existingPublicId.startsWith("EDO-")
       ? existingPublicId
@@ -1613,18 +1598,18 @@ async function orderDataMartBundle(
     if (!orderId) {
       console.error(
         "Purchase accepted, but the response lacks usable order references:",
-        result
+        result,
       );
 
       showSnackBar(
         "The purchase may have been accepted, but its order reference is missing. Check Order History before retrying.",
         "warning",
-        6000
+        6000,
       );
 
       return {
         success: false,
-        order
+        order,
       };
     }
 
@@ -1633,11 +1618,9 @@ async function orderDataMartBundle(
     // =========================
     // NORMALIZE STATUS
     // =========================
-    const rawStatus = String(
-      order.orderStatus ||
-      order.status ||
-      "processing"
-    ).trim().toLowerCase();
+    const rawStatus = String(order.orderStatus || order.status || "processing")
+      .trim()
+      .toLowerCase();
 
     const statusMap = {
       completed: "delivered",
@@ -1657,7 +1640,7 @@ async function orderDataMartBundle(
       processing: "processing",
       in_progress: "processing",
       "in progress": "processing",
-      unknown: "processing"
+      unknown: "processing",
     };
 
     const status = statusMap[rawStatus] || rawStatus;
@@ -1678,17 +1661,14 @@ async function orderDataMartBundle(
 
     const amount = Number(
       order.sellingPrice ??
-      order.amount ??
-      order.checkoutAmount ??
-      bundle?.price ??
-      0
+        order.amount ??
+        order.checkoutAmount ??
+        bundle?.price ??
+        0,
     );
 
     const costPrice = Number(
-      order.providerPrice ??
-      order.costPrice ??
-      order.price ??
-      0
+      order.providerPrice ?? order.costPrice ?? order.price ?? 0,
     );
 
     const orderData = {
@@ -1699,25 +1679,14 @@ async function orderDataMartBundle(
 
       recipient: orderRecipient,
 
-      network:
-        order.network ||
-        bundle?.network ||
-        network,
+      network: order.network || bundle?.network || network,
 
       volume: Number(
-        order.capacity ??
-        order.volume ??
-        bundle?.size ??
-        size ??
-        0
+        order.capacity ?? order.volume ?? bundle?.size ?? size ?? 0,
       ),
 
       dataValue: String(
-        order.dataValue ??
-        bundle?.dataValue ??
-        order.capacity ??
-        size ??
-        ""
+        order.dataValue ?? bundle?.dataValue ?? order.capacity ?? size ?? "",
       ),
 
       amount,
@@ -1736,13 +1705,11 @@ async function orderDataMartBundle(
         ? new Date(order.createdAt).getTime()
         : Date.now(),
 
-      updatedAt: Date.now()
+      updatedAt: Date.now(),
     };
 
     console.log("NORMALIZED DATAMART ORDER:", orderData);
 
-
- 
     // =========================
     // UPDATE HOMEPAGE TOTALS
     // =========================
@@ -1780,7 +1747,7 @@ async function orderDataMartBundle(
     } catch (error) {
       console.error(
         "Purchase accepted, but live-order rendering failed:",
-        error
+        error,
       );
     }
 
@@ -1809,171 +1776,163 @@ async function orderDataMartBundle(
       showSnackBar(
         `${orderData.volume}GB ORDER DELIVERED SUCCESSFULLY!`,
         "success",
-        6000
+        6000,
       );
     } else if (status === "failed") {
       showSnackBar(
         "The provider reported that this purchase failed. Check the order record before retrying.",
         "error",
-        6000
+        6000,
       );
     } else {
-
-     try{ playSuccessSound();} catch{}
-     showSuccessfulOrderPopup({
-      size: orderData.volume,
-      recipient: orderData.recipient
-     });
+      try {
+        playSuccessSound();
+      } catch {}
+      showSuccessfulOrderPopup({
+        size: orderData.volume,
+        recipient: orderData.recipient,
+      });
     }
 
     return {
       success: true,
       completed: status === "delivered",
-      order: orderData
+      order: orderData,
     };
-
   } catch (error) {
     console.error(" Order request failed:", error);
 
     showSnackBar(
       "We could not confirm the order response. Check Order History before retrying.",
       "warning",
-      6000
+      6000,
     );
 
     return {
       success: false,
-      error: error.message
+      error: error.message,
     };
   }
 }
 
-//====================
-// SAVE WITH RETRY
-//====================
-async function saveWithRetry(collectionRef, orderData) {
+const ORDER_SAVE_QUEUE_KEY = "ecoPendingOrderSaves";
+const ORDER_FEE_RATE = 1.0195;
+const round3 = (n) => Math.round(Number(n || 0) * 1000) / 1000;
 
-  let attempt = 1;
+function buildFirestoreOrder(o) {
+  const provider = String(o.provider || "swiftdata").toLowerCase();
 
-  while (true) {
+  // orderData.amount is the base price, so the fee is added here.
+  // Swift's orderBundle already applies the fee before calling this, so it is not applied twice.
+  const charged =
+    provider === "datamart"
+      ? round3(o.amount * ORDER_FEE_RATE)
+      : round3(o.amount);
+  const selling =
+    provider === "datamart"
+      ? round3(o.amount)
+      : round3(o.amount / ORDER_FEE_RATE);
 
-    try {
+  const status = String(o.status || "processing").toLowerCase();
 
-      const docRef = await addDoc(
-        collectionRef,
-        orderData
-      );
+  return {
+    orderId: o.orderId,
+    reference: o.reference || o.orderId,
+    provider,
+    paymentReference: o.paymentReference || null,
+    providerOrderReference: o.providerOrderReference || null,
 
-      console.log(
-        `✅ Order saved on attempt ${attempt}`,
-        docRef.id
-      );
+    recipient: o.recipient || "-",
+    network: o.network || "-",
+    volume: Number(o.volume || 0),
+    dataValue: String(o.dataValue ?? ""),
 
-      return docRef;
+    amount: charged,
+    sellingPrice: selling,
+    costPrice: round3(o.costPrice),
+    profit: round3(o.profit ?? selling - Number(o.costPrice || 0)),
 
-    } catch (error) {
+    status,
+    providerStatus: status,
+    statusSource: "web",
 
-      console.warn(
-        `❌ Save failed (Attempt ${attempt})`,
-        error
-      );
-
-      //==========================
-      // STOP RETRYING
-      //==========================
-      if (
-        error.code === "permission-denied" ||
-        error.code === "failed-precondition" ||
-        error.code === "resource-exhausted" || // quota exceeded
-        error.code === "unauthenticated" ||
-        error.code === "invalid-argument"
-      ) {
-
-        console.error(
-          "⛔ Permanent Firestore error. Retry stopped.",
-          error
-        );
-
-        throw error;
-
-      }
-
-      //==========================
-      // RETRY FOREVER
-      //==========================
-      console.log(
-        `🔄 Retrying in 2 seconds...`
-      );
-
-      await new Promise(resolve =>
-        setTimeout(resolve, 2000)
-      );
-
-      attempt++;
-
-    }
-
-  }
-
+    source: "web",
+    isGuest: Boolean(o.isGuest),
+    createdBy: o.createdBy || "guest",
+    createdAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
+  };
 }
 
-// ---------- FIRESTORE HELPER ----------
 async function saveOrderToFirestore(orderData) {
-  console.log("Entered saveOrderToFirestore()");
-  console.log(orderData);
+  const db = window.FIRESTORE;
+
+  if (!db) {
+    console.warn("Window.FIRESTORE is undefined");
+    return null;
+  }
+  if (!orderData?.orderId) {
+    console.error("saveOrderToFirestore: missing orderId", orderData);
+    return null;
+  }
+
+  const provider = String(orderData.provider || "swiftdata").toLowerCase();
+  const key =
+    provider === "datamart" ? orderData.paymentReference : orderData.orderId;
+
+  if (!key) {
+    console.error("saveOrderToFirestore: missing payment reference", orderData);
+    return null;
+  }
+
+  // Fixed document ID: saving twice can never create a duplicate
+  const ref = doc(db, "orders", `${provider}_${key}`);
+
   try {
-    const db = window.FIRESTORE;
-
-    if (!db) {
-      console.warn("Window.FIRESTORE is undefined");
-      return null;
-    }
-
-
- const firestoreData = {
-
-  orderId: orderData.orderId,
-
-  reference: orderData.reference,
-
-  status: String(orderData.status || "pending"),
-
-  recipient: orderData.recipient || "-",
-
-  volume: Number(orderData.volume || 0),
-
-  amount: Number(orderData.amount * 1.0195 || 0),
-
-  dataValue: `${(orderData.dataValue  || 0)}`,
-
-
-
-
-  network: orderData.network || "-",
-
-  source: "web",
-
-  createdAt: serverTimestamp(),
-
-  createdBy: orderData.createdBy || "guest",
-
-};
-
-
-console.log("Saving document...");
-console.log(firestoreData);
-    const ordersCol = collection(db, "orders");
-    const result = await saveWithRetry(ordersCol, firestoreData);
-    
-    console.log(" Order saved to Firestore:", result.id);
-    return result.id;
-
+    await setDoc(ref, buildFirestoreOrder(orderData));
+    console.log("Order saved to Firestore:", ref.id);
+    return ref.id;
   } catch (err) {
-    console.error("❌ Error saving order to Firestore:", err);
+    console.error("Firestore order save failed:", err.code, err.message);
+
+    if (err.code !== "permission-denied" && err.code !== "invalid-argument") {
+      queueOrderSave(orderData); // retried on refresh or when back online
+    }
     return null;
   }
 }
 
+// ---------- retry queue (survives refresh, capped) ----------
+function queueOrderSave(orderData) {
+  try {
+    const q = JSON.parse(localStorage.getItem(ORDER_SAVE_QUEUE_KEY) || "[]");
+    if (!q.some((x) => x.orderId === orderData.orderId)) {
+      q.push({ ...orderData, _tries: 0 });
+      localStorage.setItem(ORDER_SAVE_QUEUE_KEY, JSON.stringify(q.slice(-50)));
+    }
+  } catch {}
+}
+
+async function flushOrderSaveQueue() {
+  let q = [];
+  try {
+    q = JSON.parse(localStorage.getItem(ORDER_SAVE_QUEUE_KEY) || "[]");
+  } catch {}
+  if (!q.length) return;
+
+  const remaining = [];
+  for (const item of q) {
+    const id = await saveOrderToFirestore({ ...item, _noQueue: true });
+    if (!id && (item._tries || 0) < 5)
+      remaining.push({ ...item, _tries: (item._tries || 0) + 1 });
+  }
+  localStorage.setItem(ORDER_SAVE_QUEUE_KEY, JSON.stringify(remaining));
+}
+
+window.addEventListener("online", flushOrderSaveQueue);
+document.addEventListener("DOMContentLoaded", () =>
+  setTimeout(flushOrderSaveQueue, 3000),
+);
 
 // ---------- LOCAL STORAGE HELPER ----------
 
@@ -1984,79 +1943,55 @@ function saveGuestOrder(orderData) {
     const existing = JSON.parse(localStorage.getItem("guestOrders") || "[]");
 
     // Avoid saving duplicates
-    const isDuplicate = existing.some(o => o.orderId === orderData.orderId);
+    const isDuplicate = existing.some((o) => o.orderId === orderData.orderId);
     if (isDuplicate) return;
 
     existing.push(orderData);
 
     localStorage.setItem("guestOrders", JSON.stringify(existing));
     console.log("💾 Guest order saved locally:", orderData);
-
   } catch (err) {
     console.error("❌ Failed to save guest order:", err);
   }
 }
 
-
-
-
-
-
 function handleNewOrder(returnedOrder) {
   if (!returnedOrder) return;
 
   // Normalize Swift response
-const normalized = {
+  const normalized = {
+    orderId:
+      returnedOrder.orderId ||
+      returnedOrder.id ||
+      returnedOrder.order_id ||
+      returnedOrder.reference ||
+      null,
 
-  orderId:
-    returnedOrder.orderId ||
-    returnedOrder.id ||
-    returnedOrder.order_id ||
-    returnedOrder.reference ||
-    null,
+    reference: returnedOrder.reference || returnedOrder.orderId || null,
 
-  reference:
-    returnedOrder.reference ||
-    returnedOrder.orderId ||
-    null,
+    status: returnedOrder.status || returnedOrder.state || "processing",
 
-  status:
-    returnedOrder.status ||
-    returnedOrder.state ||
-    "processing",
+    recipient:
+      returnedOrder.items?.[0]?.recipient || returnedOrder.recipient || "-",
 
-  recipient:
-    returnedOrder.items?.[0]?.recipient ||
-    returnedOrder.recipient ||
-    "-",
+    // CUSTOMER PRICE
+    amount: Number(selectedBundle?.price || 0),
 
-  // CUSTOMER PRICE
-  amount:
-    Number(selectedBundle?.price || 0),
+    // ECODATA COST PRICE
+    costPrice: Number(returnedOrder.price || 0),
 
-  // ECODATA COST PRICE
-  costPrice:
-    Number(returnedOrder.price || 0),
+    // PROFIT
+    profit:
+      Number(selectedBundle?.price || 0) - Number(returnedOrder.price || 0),
 
-  // PROFIT
-  profit:
-    Number(selectedBundle?.price || 0)
-    -
-    Number(returnedOrder.price || 0),
+    // NETWORK
+    network: selectedBundle?.network || "-",
 
-  // NETWORK
-  network:
-    selectedBundle?.network || "-",
+    // DATA SIZE
+    volume: selectedBundle?.size || returnedOrder.volume || 0,
 
-  // DATA SIZE
-  volume:
-    selectedBundle?.size ||
-    returnedOrder.volume ||
-    0,
-
-  source: "web",
-
-};
+    source: "web",
+  };
 
   if (!normalized.orderId) return;
 
@@ -2071,10 +2006,8 @@ const normalized = {
   const empty = tableBody.querySelector(".empty-state");
   if (empty) empty.remove();
 
- 
-
   console.log(normalized);
-  
+
   // save for refresh persistence
   saveLiveOrder(normalized);
 
@@ -2087,38 +2020,18 @@ const normalized = {
   startAutoPolling(normalized.orderId);
 }
 
-
-
-
-
-
-
-
 function handleNewDataMartOrder(returnedOrder) {
   if (!returnedOrder) return;
 
-
   // Support either the unwrapped order or the backend response.
-  const order =
-    returnedOrder.order ||
-    returnedOrder.data ||
-    returnedOrder;
+  const order = returnedOrder.order || returnedOrder.data || returnedOrder;
 
-
-      const paymentReference = String(
-    order.paymentReference || ""
-  ).trim();
-
+  const paymentReference = String(order.paymentReference || "").trim();
 
   const providerOrderReference = String(
     order.providerOrderReference ||
-    order.orderReference ||
-    ( 
-      paymentReference
-      ? `Ia553341879ecodata-${paymentReference}`
-      : ""
-    )
-
+      order.orderReference ||
+      (paymentReference ? `Ia553341879ecodata-${paymentReference}` : ""),
   ).trim();
 
   // Keep EcoData's public ID separate from DataMart's reference.
@@ -2133,31 +2046,26 @@ function handleNewDataMartOrder(returnedOrder) {
   if (!orderId) {
     console.error(
       "DataMart order cannot be displayed: order ID is missing.",
-      order
+      order,
     );
     return;
   }
 
   const costPrice = Number(
-    order.costPrice ??
-    order.providerPrice ??
-    order.price ??
-    0
+    order.costPrice ?? order.providerPrice ?? order.price ?? 0,
   );
 
   const amount = Number(
     order.amount ??
-    order.sellingPrice ??
-    order.checkoutAmount ??
-    selectedBundle?.price ??
-    0
+      order.sellingPrice ??
+      order.checkoutAmount ??
+      selectedBundle?.price ??
+      0,
   );
 
-  const rawStatus = String(
-    order.status ||
-    order.orderStatus ||
-    "pending"
-  ).trim().toLowerCase();
+  const rawStatus = String(order.status || order.orderStatus || "pending")
+    .trim()
+    .toLowerCase();
 
   const statusMap = {
     completed: "delivered",
@@ -2178,7 +2086,7 @@ function handleNewDataMartOrder(returnedOrder) {
     processing: "processing",
     in_progress: "processing",
     "in progress": "processing",
-    unknown: "pending"
+    unknown: "pending",
   };
 
   const normalized = {
@@ -2194,64 +2102,56 @@ function handleNewDataMartOrder(returnedOrder) {
 
     status: statusMap[rawStatus] || rawStatus,
 
-   recipient:
-   returnedOrder.items?.[0].recipient ||
-   returnedOrder.recipient || 
-   returnedOrder.phoneNumber ||
-  order.recipient ||
-  order.phoneNumber ||
-  order.phone ||
-  order.recipientNumber ||
-  order.items?.[0]?.recipient ||
-  order.items?.[0]?.phoneNumber ||
-  selectedBundle?.recipient ||
-  selectedBundle?.phoneNumber ||
-  bundle?.recipient ||
-  bundle?.phoneNumber ||
-  "",
+    recipient:
+      returnedOrder.items?.[0].recipient ||
+      returnedOrder.recipient ||
+      returnedOrder.phoneNumber ||
+      order.recipient ||
+      order.phoneNumber ||
+      order.phone ||
+      order.recipientNumber ||
+      order.items?.[0]?.recipient ||
+      order.items?.[0]?.phoneNumber ||
+      selectedBundle?.recipient ||
+      selectedBundle?.phoneNumber ||
+      bundle?.recipient ||
+      bundle?.phoneNumber ||
+      "",
 
-    network:
-      order.network ||
-      selectedBundle?.network ||
-      "-",
+    network: order.network || selectedBundle?.network || "-",
 
     volume: Number(
       order.volume ??
-      order.capacity ??
-      order.capacityGb ??
-      order.size ??
-      selectedBundle?.size ??
-      0
+        order.capacity ??
+        order.capacityGb ??
+        order.size ??
+        selectedBundle?.size ??
+        0,
     ),
 
     dataValue: String(
       order.dataValue ??
-      selectedBundle?.dataValue ??
-      order.capacity ??
-      order.size ??
-      ""
+        selectedBundle?.dataValue ??
+        order.capacity ??
+        order.size ??
+        "",
     ),
 
     amount,
     costPrice,
 
-    profit: Number(
-      order.profit ?? (amount - costPrice)
-    ),
+    profit: Number(order.profit ?? amount - costPrice),
 
     source: "web",
     provider: "datamart",
 
     createdAt: order.createdAt || Date.now(),
-    updatedAt: Date.now()
+    updatedAt: Date.now(),
   };
 
   // Store the FULL provider reference for recovery/status checks.
   if (providerOrderReference) {
-    localStorage.setItem(
-      "lastDataMartOrderReference",
-      providerOrderReference
-    );
+    localStorage.setItem("lastDataMartOrderReference", providerOrderReference);
   }
 
   // Persist and update the live table.
@@ -2259,25 +2159,13 @@ function handleNewDataMartOrder(returnedOrder) {
   renderLiveOrderRow(normalized);
   createOrUpdateStatusCard(normalized);
 
-  // Start Auto polling 
-    startDataMartAutoPolling(order.providerOrderReference);
+  // Start Auto polling
+  startDataMartAutoPolling(order.providerOrderReference);
 
   console.log(" Live order normalized:", normalized);
 
   return normalized;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 const LIVE_ORDERS_KEY = "ecoLiveOrders";
 const MAX_LIVE_ORDERS = 1000;
@@ -2295,10 +2183,8 @@ function saveLiveOrder(order) {
 
     // Preserve the full DataMart reference.
     providerOrderReference: String(
-      order.providerOrderReference ||
-      order.orderReference ||
-      ""
-    ).trim()
+      order.providerOrderReference || order.orderReference || "",
+    ).trim(),
   };
 
   let existing = [];
@@ -2311,10 +2197,11 @@ function saveLiveOrder(order) {
     console.error("Could not read saved live orders:", error);
   }
 
-  const index = existing.findIndex(item =>
-    String(item.orderId) === normalizedOrder.orderId &&
-    String(item.provider || "swiftdata").toLowerCase() ===
-      normalizedOrder.provider
+  const index = existing.findIndex(
+    (item) =>
+      String(item.orderId) === normalizedOrder.orderId &&
+      String(item.provider || "swiftdata").toLowerCase() ===
+        normalizedOrder.provider,
   );
 
   if (index !== -1) {
@@ -2331,27 +2218,25 @@ function saveLiveOrder(order) {
         current.providerOrderReference ||
         "",
 
-      status: currentIsTerminal
-        ? current.status
-        : normalizedOrder.status,
+      status: currentIsTerminal ? current.status : normalizedOrder.status,
 
       createdAt: current.createdAt || Date.now(),
       timestamp: current.timestamp || Date.now(),
-      updatedAt: normalizedOrder.updatedAt || current.updatedAt
+      updatedAt: normalizedOrder.updatedAt || current.updatedAt,
     };
   } else {
     existing.unshift({
       ...normalizedOrder,
       createdAt: normalizedOrder.createdAt || Date.now(),
       timestamp: normalizedOrder.timestamp || Date.now(),
-      updatedAt: normalizedOrder.updatedAt || Date.now()
+      updatedAt: normalizedOrder.updatedAt || Date.now(),
     });
   }
 
   try {
     localStorage.setItem(
       LIVE_ORDERS_KEY,
-      JSON.stringify(existing.slice(0, MAX_LIVE_ORDERS))
+      JSON.stringify(existing.slice(0, MAX_LIVE_ORDERS)),
     );
   } catch (error) {
     console.error("Could not persist live order:", error);
@@ -2364,8 +2249,6 @@ function saveLiveOrder(order) {
   return true;
 }
 // ends
-
-
 
 function sortLiveOrders(orders) {
   if (!Array.isArray(orders)) {
@@ -2431,7 +2314,7 @@ function sortLiveOrders(orders) {
       order.timestamp,
       order.created_at,
       order.dateCreated,
-      order.orderDate
+      order.orderDate,
     ];
 
     for (const field of fields) {
@@ -2445,11 +2328,11 @@ function sortLiveOrders(orders) {
   }
 
   return orders
-    .filter(order => order && typeof order === "object")
+    .filter((order) => order && typeof order === "object")
     .map((order, index) => ({
       order,
       index,
-      creationTime: getCreationTime(order)
+      creationTime: getCreationTime(order),
     }))
     .sort((a, b) => {
       // Newest order first.
@@ -2462,57 +2345,61 @@ function sortLiveOrders(orders) {
       // Keep the original order for equal or missing timestamps.
       return a.index - b.index;
     })
-    .map(item => item.order);
+    .map((item) => item.order);
 }
-
-
-
-
-
-
-
-
-
 
 const FINAL_STATUSES = new Set(["delivered", "failed", "refunded"]);
 
 const DM_STATUS_MAP = {
-  completed: "delivered", delivered: "delivered",
-  success: "delivered", successful: "delivered",
-  failed: "failed", cancelled: "failed",
-  canceled: "failed", rejected: "failed",
+  completed: "delivered",
+  delivered: "delivered",
+  success: "delivered",
+  successful: "delivered",
+  failed: "failed",
+  cancelled: "failed",
+  canceled: "failed",
+  rejected: "failed",
   refunded: "refunded",
-  pending: "pending", waiting: "pending",
-  processing: "processing", in_progress: "processing",
-  "in progress": "processing", unknown: "pending"
+  pending: "pending",
+  waiting: "pending",
+  processing: "processing",
+  in_progress: "processing",
+  "in progress": "processing",
+  unknown: "pending",
 };
 
 function readOrders() {
   try {
     const parsed = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY) || "[]");
     return Array.isArray(parsed) ? parsed : [];
-  } catch { return []; }
+  } catch {
+    return [];
+  }
 }
 
 function applyDataMartStatus({ reference, paymentReference }, rawStatus) {
-  const raw = String(rawStatus || "").trim().toLowerCase();
+  const raw = String(rawStatus || "")
+    .trim()
+    .toLowerCase();
   if (!raw) return null;
 
   const next = DM_STATUS_MAP[raw] || "processing"; // unknown -> processing
 
   const orders = readOrders(); // fresh read, right before writing
-  const index = orders.findIndex(o =>
-    String(o.provider || "").toLowerCase() === "datamart" && (
-      String(o.providerOrderReference || "").trim() === reference ||
-      String(o.orderReference || "").trim() === reference ||
-      (paymentReference &&
-        String(o.paymentReference || "").trim() === paymentReference)
-    )
+  const index = orders.findIndex(
+    (o) =>
+      String(o.provider || "").toLowerCase() === "datamart" &&
+      (String(o.providerOrderReference || "").trim() === reference ||
+        String(o.orderReference || "").trim() === reference ||
+        (paymentReference &&
+          String(o.paymentReference || "").trim() === paymentReference)),
   );
   if (index === -1) return null;
 
   const current = orders[index];
-  const cur = String(current.status || "").trim().toLowerCase();
+  const cur = String(current.status || "")
+    .trim()
+    .toLowerCase();
 
   // never downgrade a final status
   if (FINAL_STATUSES.has(cur) && !FINAL_STATUSES.has(next)) return current;
@@ -2526,14 +2413,17 @@ function applyDataMartStatus({ reference, paymentReference }, rawStatus) {
     paymentReference: paymentReference || current.paymentReference,
     status: next,
     providerStatus: raw,
-    updatedAt: Date.now()
+    updatedAt: Date.now(),
   };
   orders[index] = updated;
   localStorage.setItem(LIVE_ORDERS_KEY, JSON.stringify(orders));
 
   const safe = (fn, ...a) => {
-    try { if (typeof fn === "function") fn(...a); }
-    catch (e) { console.error("UI update failed:", fn?.name, e); }
+    try {
+      if (typeof fn === "function") fn(...a);
+    } catch (e) {
+      console.error("UI update failed:", fn?.name, e);
+    }
   };
   safe(renderLiveOrderRow, updated);
   safe(createOrUpdateStatusCard, updated);
@@ -2544,11 +2434,6 @@ function applyDataMartStatus({ reference, paymentReference }, rawStatus) {
   console.log("DataMart status saved:", reference, cur, "->", next);
   return updated;
 }
-
-
-
-
-
 
 // =========================
 // RENDER LIVE ORDER ROW
@@ -2562,18 +2447,18 @@ function renderLiveOrderRow(order) {
   const tableBody = document.getElementById("liveOrderRows");
   if (!tableBody) return;
 
-  const recipient = 
-  order.recipient ||
-  order.phoneNumber ||
-  order.phone ||
-  order.recipientNumber ||
-  order.items?.[0]?.recipient ||
-  order.items?.[0]?.phoneNumber ||
-  selectedBundle?.recipient ||
-  selectedBundle?.phoneNumber ||
-  bundle?.recipient ||
-  bundle?.phoneNumber ||
-  "";
+  const recipient =
+    order.recipient ||
+    order.phoneNumber ||
+    order.phone ||
+    order.recipientNumber ||
+    order.items?.[0]?.recipient ||
+    order.items?.[0]?.phoneNumber ||
+    selectedBundle?.recipient ||
+    selectedBundle?.phoneNumber ||
+    bundle?.recipient ||
+    bundle?.phoneNumber ||
+    "";
 
   // =========================
   // NORMALIZE ORDER
@@ -2584,7 +2469,7 @@ function renderLiveOrderRow(order) {
     provider: String(order.provider || "swiftdata").toLowerCase(),
     recipient,
     volume: order.volume ?? 0,
-    status: order.status || "processing"
+    status: order.status || "processing",
   };
 
   // =========================
@@ -2606,21 +2491,21 @@ function renderLiveOrderRow(order) {
     const datePart = d.toLocaleDateString("en-US", {
       month: "short",
       day: "2-digit",
-      year: "numeric"
+      year: "numeric",
     });
 
-    const timePart = d.toLocaleTimeString("en-US", {
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: true
-    }).toUpperCase();
+    const timePart = d
+      .toLocaleTimeString("en-US", {
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true,
+      })
+      .toUpperCase();
 
     return `${datePart} ${timePart}`;
   }
 
-  const date = formatOrderDate(
-    normalized.createdAt || normalized.timestamp
-  );
+  const date = formatOrderDate(normalized.createdAt || normalized.timestamp);
 
   const update = formatOrderDate(normalized.updatedAt);
 
@@ -2628,12 +2513,11 @@ function renderLiveOrderRow(order) {
   // FIND EXISTING ROW
   // Match order ID + provider
   // =========================
-  let row = Array.from(
-    tableBody.querySelectorAll(".live-row")
-  ).find(item =>
-    item.dataset.id === normalized.orderId &&
-    String(item.dataset.provider || "swiftdata").toLowerCase() ===
-      normalized.provider
+  let row = Array.from(tableBody.querySelectorAll(".live-row")).find(
+    (item) =>
+      item.dataset.id === normalized.orderId &&
+      String(item.dataset.provider || "swiftdata").toLowerCase() ===
+        normalized.provider,
   );
 
   const isNewRow = !row;
@@ -2652,14 +2536,12 @@ function renderLiveOrderRow(order) {
   // BUILD / REFRESH ROW CELLS
   // =========================
 
+  const created =
+    new Date(normalized.createdAt || normalized.timestamp).getTime() ||
+    Date.now();
 
- const created = new Date( normalized.createdAt || normalized.timestamp).getTime() || Date.now();
- 
- row.dataset.created = created;
- row.replaceChildren();
-
-
-
+  row.dataset.created = created;
+  row.replaceChildren();
 
   function addCell(value, className = "") {
     const span = document.createElement("span");
@@ -2672,15 +2554,11 @@ function renderLiveOrderRow(order) {
     return span;
   }
 
-  
-
-
   // Status
   const statusCell = addCell("", "status-cell");
   const badge = document.createElement("span");
 
-  badge.className =
-    `status-badge ${getStatusClass(normalized.status)}`;
+  badge.className = `status-badge ${getStatusClass(normalized.status)}`;
 
   const iconContainer = document.createElement("span");
   iconContainer.innerHTML = getStatusIcon(normalized.status);
@@ -2695,62 +2573,44 @@ function renderLiveOrderRow(order) {
   badge.appendChild(statusText);
   statusCell.appendChild(badge);
 
-
-    // Data volume
+  // Data volume
   addCell(`${normalized.volume}GB`);
-
-
 
   // Recipient
   addCell(normalized.recipient);
 
-   // Payment
+  // Payment
   addCell("Yes");
-
 
   // Network
   addCell(getNetwork(normalized));
 
- 
-
-
-    // Order ID
+  // Order ID
   addCell(normalized.orderId);
-
-
 
   // Created date
   addCell(date);
 
   // Insert new rows by creation time (newest on top)
   if (isNewRow) {
-    const next = Array.from(tableBody.querySelectorAll(".live-row"))
-      .find(r => Number(r.dataset.created || 0) < created);
+    const next = Array.from(tableBody.querySelectorAll(".live-row")).find(
+      (r) => Number(r.dataset.created || 0) < created,
+    );
     tableBody.insertBefore(row, next || null);
   }
 
   console.log("Live order row rendered:", {
     orderId: normalized.orderId,
     status: normalized.status,
-    isNewRow
+    isNewRow,
   });
 }
- 
 
 console.log(JSON.parse(localStorage.getItem("ecoLiveOrders")));
 
-
 // ---------- LIVE ORDER CARD -------
 
-
-
-
-
-
-
-const MANUAL_DATAMART_PAYMENT_REFERENCES = [
-  "T722189380499497"
-];
+const MANUAL_DATAMART_PAYMENT_REFERENCES = ["T722189380499497"];
 
 async function reconcileManualDataMartOrders() {
   const API_BASE =
@@ -2760,10 +2620,10 @@ async function reconcileManualDataMartOrders() {
 
   const references = [
     ...new Set(
-      MANUAL_DATAMART_PAYMENT_REFERENCES
-        .map(ref => String(ref || "").trim())
-        .filter(Boolean)
-    )
+      MANUAL_DATAMART_PAYMENT_REFERENCES.map((ref) =>
+        String(ref || "").trim(),
+      ).filter(Boolean),
+    ),
   ];
 
   if (!references.length) {
@@ -2771,16 +2631,10 @@ async function reconcileManualDataMartOrders() {
     return;
   }
 
-
-
   for (const paymentReference of references) {
-    const providerReference =
-      `Ia553341879ecodata-${paymentReference}`;
+    const providerReference = `Ia553341879ecodata-${paymentReference}`;
 
-    console.log(
-      "Checking Live order:",
-      providerReference
-    );
+    console.log("Checking Live order:", providerReference);
 
     try {
       const response = await fetch(
@@ -2788,67 +2642,40 @@ async function reconcileManualDataMartOrders() {
         {
           method: "GET",
           headers: { Accept: "application/json" },
-          cache: "no-store"
-        }
+          cache: "no-store",
+        },
       );
 
       const result = await response.json();
 
       if (!response.ok || result.success !== true) {
-        console.error(
-          "Status lookup failed:",
-          paymentReference,
-          result
-        );
+        console.error("Status lookup failed:", paymentReference, result);
         continue;
       }
 
       const providerOrder = result.order || result.data || {};
 
-      const rawStatus =
-        providerOrder.status || providerOrder.orderStatus || "";
+      const rawStatus = providerOrder.status || providerOrder.orderStatus || "";
 
       const updated = applyDataMartStatus(
-        { reference: providerReference, paymentReference }, rawStatus
+        { reference: providerReference, paymentReference },
+        rawStatus,
       );
 
       console.log(
         updated ? "Reconciled:" : "No match / no status:",
-        paymentReference, updated?.status
-      );
-
-    } catch (error) {
-      console.error(
-        "Manual reconciliation failed:",
         paymentReference,
-        error
+        updated?.status,
       );
+    } catch (error) {
+      console.error("Manual reconciliation failed:", paymentReference, error);
     }
   }
 }
 
-
-
-document.addEventListener(
-  "DOMContentLoaded", ()=> {
-    reconcileManualDataMartOrders();
-  }
-)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+document.addEventListener("DOMContentLoaded", () => {
+  reconcileManualDataMartOrders();
+});
 
 const dataMartPollingTimers = new Map();
 
@@ -2860,9 +2687,9 @@ function startDataMartAutoPolling(providerReference, normalized) {
   // Derive both references the same way reconciliation does
   const paymentReference = String(
     normalized?.paymentReference ||
-    (input.startsWith(STATUSES_PREFIX)
-      ? input.slice(STATUSES_PREFIX.length)
-      : input)
+      (input.startsWith(STATUSES_PREFIX)
+        ? input.slice(STATUSES_PREFIX.length)
+        : input),
   ).trim();
 
   if (!paymentReference) return;
@@ -2876,11 +2703,7 @@ function startDataMartAutoPolling(providerReference, normalized) {
       ? "http://localhost:3000"
       : "https://ecodata-app.onrender.com";
 
-  const terminalStatuses = new Set([
-    "delivered", "failed", "refunded"
-  ]);
-
- 
+  const terminalStatuses = new Set(["delivered", "failed", "refunded"]);
 
   let stopped = false;
   let requestInProgress = false;
@@ -2903,8 +2726,6 @@ function startDataMartAutoPolling(providerReference, normalized) {
     console.log(reason, reference);
   }
 
-
-
   async function checkStatus() {
     if (stopped || requestInProgress) return;
 
@@ -2917,13 +2738,14 @@ function startDataMartAutoPolling(providerReference, normalized) {
     attempts++;
 
     try {
-      const response = await fetch(`
+      const response = await fetch(
+        `
         ${API_BASE}/api/datamart/order-status/${encodeURIComponent(reference)}`,
         {
           method: "GET",
           headers: { Accept: "application/json" },
-          cache: "no-store"
-        }
+          cache: "no-store",
+        },
       );
 
       let result;
@@ -2938,18 +2760,18 @@ function startDataMartAutoPolling(providerReference, normalized) {
         console.warn("DataMart status request failed:", {
           reference,
           httpStatus: response.status,
-          message: result.message
+          message: result.message,
         });
         return;
       }
 
-  
-    
       const providerOrder = result.order || result.data || {};
 
       const rawStatus = String(
-        providerOrder.status || providerOrder.orderStatus || ""
-      ).trim().toLowerCase();
+        providerOrder.status || providerOrder.orderStatus || "",
+      )
+        .trim()
+        .toLowerCase();
 
       if (!rawStatus) {
         console.warn("No status in provider response:", providerOrder);
@@ -2957,11 +2779,15 @@ function startDataMartAutoPolling(providerReference, normalized) {
       }
 
       const updated = applyDataMartStatus(
-        { reference, paymentReference }, rawStatus
+        { reference, paymentReference },
+        rawStatus,
       );
 
       if (!updated) {
-        console.warn("No matching local order:", { reference, paymentReference });
+        console.warn("No matching local order:", {
+          reference,
+          paymentReference,
+        });
         return;
       }
 
@@ -2978,7 +2804,7 @@ function startDataMartAutoPolling(providerReference, normalized) {
           paymentReference,
           status,
           providerStatus: rawStatus,
-          updatedAt: Date.now()
+          updatedAt: Date.now(),
         };
 
         orders[index] = updatedOrder;
@@ -2990,18 +2816,20 @@ function startDataMartAutoPolling(providerReference, normalized) {
 
         localStorage.setItem(LIVE_ORDERS_KEY, JSON.stringify(sortedOrders));
 
-        if (typeof renderLiveOrderRow === "function") renderLiveOrderRow(updatedOrder);
-        if (typeof createOrUpdateStatusCard === "function") createOrUpdateStatusCard(updatedOrder);
-       if(typeof loadActiveBadge === "function" ) loadActiveBadge();
+        if (typeof renderLiveOrderRow === "function")
+          renderLiveOrderRow(updatedOrder);
+        if (typeof createOrUpdateStatusCard === "function")
+          createOrUpdateStatusCard(updatedOrder);
+        if (typeof loadActiveBadge === "function") loadActiveBadge();
 
-       if(typeof updatePendingCard === "function" ) updatePendingCard();
-       if(typeof renderHomepageTotals === "function" ) renderHomepageTotals();
+        if (typeof updatePendingCard === "function") updatePendingCard();
+        if (typeof renderHomepageTotals === "function") renderHomepageTotals();
 
         console.log("DataMart status updated:", {
           reference,
           previousStatus: latestStatus,
           providerStatus: rawStatus,
-          savedStatus: status
+          savedStatus: status,
         });
       }
 
@@ -3011,7 +2839,7 @@ function startDataMartAutoPolling(providerReference, normalized) {
     } catch (error) {
       console.error(" polling error:", {
         reference,
-        message: error.message
+        message: error.message,
       });
     } finally {
       requestInProgress = false;
@@ -3023,33 +2851,22 @@ function startDataMartAutoPolling(providerReference, normalized) {
   checkStatus();
 }
 
-
-
 document.addEventListener("DOMContentLoaded", () => {
   const terminal = new Set(["delivered", "failed", "refunded"]);
   const orders = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY) || "[]");
 
-  orders.forEach(order => {
+  orders.forEach((order) => {
     if (
       String(order.provider || "").toLowerCase() === "datamart" &&
       !terminal.has(String(order.status || "").toLowerCase())
     ) {
       startDataMartAutoPolling(
         order.providerOrderReference || order.paymentReference,
-        { paymentReference: order.paymentReference }
+        { paymentReference: order.paymentReference },
       );
     }
   });
-
 });
-
-
-
-
-
-
-
-
 
 // popup statusCard
 
@@ -3089,7 +2906,6 @@ function createOrUpdateStatusCard(order) {
   }
 }
 
-
 // stop polling
 function stopStatusPolling() {
   if (_statusPollTimer) {
@@ -3108,18 +2924,21 @@ function isTerminalStatus(status) {
     "failed",
     "cancelled",
     "refunded",
-    "resolved"].includes(s);
+    "resolved",
+  ].includes(s);
 }
 
 // ---------- POLLING FUNCTION ----------
 async function checkOrderStatusOnce(orderIdOrRef) {
   try {
     // Talk to backend (not directly )
-    const res = await fetch(`${API_BASE}/api/v2/orders/status/${encodeURIComponent(orderIdOrRef)}`,{
-      method: "GET",
-      headers: { "Content-Type": "application/json" }
-    });
-
+    const res = await fetch(
+      `${API_BASE}/api/v2/orders/status/${encodeURIComponent(orderIdOrRef)}`,
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      },
+    );
 
     if (!res.ok) {
       console.warn("Status endpoint returned non-200", res.status);
@@ -3131,16 +2950,10 @@ async function checkOrderStatusOnce(orderIdOrRef) {
   } catch (err) {
     console.error("Error checking order status:", err);
     return null;
+  }
 }
-}
-
-
-
-
-
 
 // ---------- UPDATE HOME TOTALS ----------
-
 
 // Called AFTER a successful order is confirmed
 // ---------- UPDATE HOME TOTALS ----------
@@ -3166,7 +2979,6 @@ function updateHomepageTotals(orderData) {
   // Update totals using EcoData values (from button/data-price, NOT Swift)
   ecoTotals.orders += 1;
   ecoTotals.gb += Number(orderData.volume || 0);
- 
 
   // Persist totals to localStorage
   localStorage.setItem("ecoTotals", JSON.stringify(ecoTotals));
@@ -3178,7 +2990,6 @@ function updateHomepageTotals(orderData) {
 //========================
 // FORMAT TOTAL GB
 //========================
-
 
 // ---------- FORMAT DATA SIZE ----------
 function formatDataSize(gb) {
@@ -3193,59 +3004,44 @@ function formatDataSize(gb) {
   return `${Number(gb.toFixed(2))}GB`;
 }
 
-
 function getOrdersForMonth(orders, year, month) {
-
-  return orders.filter(order => {
-
+  return orders.filter((order) => {
     if (!order.createdAt) return false;
 
     const date = new Date(order.createdAt);
 
     if (isNaN(date.getTime())) return false;
 
-    return (
-      date.getFullYear() === year &&
-      date.getMonth() === month
-    );
+    return date.getFullYear() === year && date.getMonth() === month;
   });
 }
-
-
 
 function getOrderStatus(order) {
   return String(order.status || "pending").toLowerCase();
 }
 
-
 function isPendingOrder(order) {
   return PENDING_STATUSES.has(getOrderStatus(order));
 }
-
 
 function isCompletedOrder(order) {
   return COMPLETED_STATUSES.has(getOrderStatus(order));
 }
 
-
 function calculateOrderData(orders) {
-
   return orders.reduce((total, order) => {
-
-    const volume = Number(
-      String(order.volume || "")
-        .replace(/GB/gi, "")
-        .trim()
-    ) || 0;
+    const volume =
+      Number(
+        String(order.volume || "")
+          .replace(/GB/gi, "")
+          .trim(),
+      ) || 0;
 
     return total + volume;
-
   }, 0);
 }
 
-
 function calculatePercentageChange(current, previous) {
-
   current = Number(current) || 0;
   previous = Number(previous) || 0;
 
@@ -3256,14 +3052,12 @@ function calculatePercentageChange(current, previous) {
   return ((current - previous) / previous) * 100;
 }
 
-
-
 function renderCardPerformance(
   elementId,
   current,
   previous,
   lowerIsBetter = false,
-  isData = false
+  isData = false,
 ) {
   const element = document.getElementById(elementId);
 
@@ -3272,10 +3066,7 @@ function renderCardPerformance(
   current = Number(current) || 0;
   previous = Number(previous) || 0;
 
-  const change = calculatePercentageChange(
-    current,
-    previous
-  );
+  const change = calculatePercentageChange(current, previous);
 
   const percentage = Math.abs(change).toFixed(1);
 
@@ -3286,22 +3077,16 @@ function renderCardPerformance(
   if (change > 0) {
     icon = "ri-arrow-right-up-line";
 
-    state = lowerIsBetter
-      ? "decrease"
-      : "increase";
+    state = lowerIsBetter ? "decrease" : "increase";
 
     directionText = "higher";
-
   } else if (change < 0) {
     icon = "ri-arrow-right-down-line";
 
-    state = lowerIsBetter
-      ? "increase"
-      : "decrease";
+    state = lowerIsBetter ? "increase" : "decrease";
 
     directionText = "lower";
   }
-
 
   // Format the comparison values
   const currentDisplay = isData
@@ -3312,14 +3097,10 @@ function renderCardPerformance(
     ? formatDataSize(previous)
     : previous.toLocaleString();
 
-
-  element.className =
-    `card-performance ${state}`;
-
+  element.className = `card-performance ${state}`;
 
   // No change
   if (change === 0) {
-
     element.innerHTML = `
       <div class="performance-main">
         <i class="${icon}"></i>
@@ -3338,7 +3119,6 @@ function renderCardPerformance(
 
     return;
   }
-
 
   // Increase / decrease
   element.innerHTML = `
@@ -3364,35 +3144,21 @@ function renderCardPerformance(
   `;
 }
 
+function renderPendingPerformance(pendingCount, totalOrders) {
+  const element = document.getElementById("pendingPerformance");
 
+  if (!element) return;
 
+  const percentage = totalOrders > 0 ? (pendingCount / totalOrders) * 100 : 0;
 
-
-
-function renderPendingPerformance(pendingCount, totalOrders){
-  const element = 
-  document.getElementById("pendingPerformance");
-
-  if(!element) return;
-
-  const percentage =
-  totalOrders > 0
-  ? (pendingCount / totalOrders) * 100
-  : 0
-
-  const percentageText =
-  percentage.toFixed(1);
+  const percentageText = percentage.toFixed(1);
 
   const isGood = percentage <= 50;
-  const arrowIcon =
-  isGood
-  ? "ri-arrow-right-down-line"
-  : "ri-arrow-right-up-line";
+  const arrowIcon = isGood
+    ? "ri-arrow-right-down-line"
+    : "ri-arrow-right-up-line";
 
-  const percentageColor =
-  isGood
-  ? "#159570"
-  : "#e05252";
+  const percentageColor = isGood ? "#159570" : "#e05252";
 
   element.className = "card-performance neutral";
 
@@ -3418,31 +3184,19 @@ function renderPendingPerformance(pendingCount, totalOrders){
   `;
 }
 
-
 // ---------- RENDER TOTALS ----------
 function renderHomepageTotals() {
+  const ordersEl = document.getElementById("totalOrders");
 
-  const ordersEl =
-    document.getElementById("totalOrders");
+  const gbEl = document.getElementById("totalGB");
 
-  const gbEl =
-    document.getElementById("totalGB");
+  const pendingEl = document.getElementById("pendingTotal");
 
-  const pendingEl =
-    document.getElementById("pendingTotal");
+  const completedEl = document.getElementById("completedOrders");
 
-  const completedEl =
-    document.getElementById("completedOrders");
-
-
-  const orders =
-    JSON.parse(
-      localStorage.getItem(LIVE_ORDERS_KEY)
-    ) || [];
-
+  const orders = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
 
   if (!ordersEl || !gbEl) return;
-
 
   // ==========================================
   // ALL-TIME TOTALS
@@ -3450,32 +3204,23 @@ function renderHomepageTotals() {
 
   ordersEl.textContent = orders.length;
 
-
   // Your existing all-time data total
-  gbEl.textContent =
-    formatDataSize(ecoTotals.gb);
-
+  gbEl.textContent = formatDataSize(ecoTotals.gb);
 
   // ==========================================
   // CURRENT TOTAL STATUS
   // ==========================================
   const { pending, completed } = getOrderStats();
 
-  const pendingOrders =
-    orders.filter(isPendingOrder);
+  const pendingOrders = orders.filter(isPendingOrder);
 
-  const completedOrders =
-    orders.filter(isCompletedOrder);
+  const completedOrders = orders.filter(isCompletedOrder);
 
   // ==========================================
   //  SAVE DOM TEXT
 
- if(pendingEl) pendingEl.textContent = pending;
- if(completedEl) completedEl.textContent = completed;
-
-
- 
-
+  if (pendingEl) pendingEl.textContent = pending;
+  if (completedEl) completedEl.textContent = completed;
 
   // ==========================================
   // CURRENT MONTH
@@ -3483,32 +3228,23 @@ function renderHomepageTotals() {
 
   const now = new Date();
 
-  const currentMonthOrders =
-    getOrdersForMonth(
-      orders,
-      now.getFullYear(),
-      now.getMonth()
-    );
-
+  const currentMonthOrders = getOrdersForMonth(
+    orders,
+    now.getFullYear(),
+    now.getMonth(),
+  );
 
   // ==========================================
   // PREVIOUS MONTH
   // ==========================================
 
-  const previousMonthDate =
-    new Date(
-      now.getFullYear(),
-      now.getMonth() - 1,
-      1
-    );
+  const previousMonthDate = new Date(now.getFullYear(), now.getMonth() - 1, 1);
 
-  const previousMonthOrders =
-    getOrdersForMonth(
-      orders,
-      previousMonthDate.getFullYear(),
-      previousMonthDate.getMonth()
-    );
-
+  const previousMonthOrders = getOrdersForMonth(
+    orders,
+    previousMonthDate.getFullYear(),
+    previousMonthDate.getMonth(),
+  );
 
   // ==========================================
   // TOTAL ORDERS PERFORMANCE
@@ -3519,24 +3255,16 @@ function renderHomepageTotals() {
 
     currentMonthOrders.length,
 
-    previousMonthOrders.length
+    previousMonthOrders.length,
   );
-
 
   // ==========================================
   // TOTAL DATA PERFORMANCE
   // ==========================================
 
-  const currentMonthGB =
-    calculateOrderData(
-      currentMonthOrders
-    );
+  const currentMonthGB = calculateOrderData(currentMonthOrders);
 
-  const previousMonthGB =
-    calculateOrderData(
-      previousMonthOrders
-    );
-
+  const previousMonthGB = calculateOrderData(previousMonthOrders);
 
   renderCardPerformance(
     "dataPerformance",
@@ -3545,57 +3273,38 @@ function renderHomepageTotals() {
 
     previousMonthGB,
     false,
-    true
+    true,
   );
-
 
   // ==========================================
   // PENDING ORDERS PERFORMANCE
   // ==========================================
 
-  const currentPending =
-    currentMonthOrders.filter(
-      isPendingOrder
-    ).length;
+  const currentPending = currentMonthOrders.filter(isPendingOrder).length;
 
-  const currentTotalOrders =
-  currentMonthOrders.length;
+  const currentTotalOrders = currentMonthOrders.length;
 
   renderPendingPerformance(
-    currentPending,  // pendingCount
-    currentTotalOrders  // totalOrders
+    currentPending, // pendingCount
+    currentTotalOrders, // totalOrders
   );
-
-
 
   // ==========================================
   // COMPLETED ORDERS PERFORMANCE
   // ==========================================
 
-  const currentCompleted =
-    currentMonthOrders.filter(
-      isCompletedOrder
-    ).length;
+  const currentCompleted = currentMonthOrders.filter(isCompletedOrder).length;
 
-  const previousCompleted =
-    previousMonthOrders.filter(
-      isCompletedOrder
-    ).length;
-
+  const previousCompleted = previousMonthOrders.filter(isCompletedOrder).length;
 
   renderCardPerformance(
     "completedPerformance",
 
     currentCompleted,
 
-    previousCompleted
+    previousCompleted,
   );
 }
-
-
-
-
-
 
 //========================
 // FORMAT TOTAL GB end
@@ -3603,21 +3312,16 @@ function renderHomepageTotals() {
 
 // Load totals on page refresh
 document.addEventListener("DOMContentLoaded", () => {
-  
   ecoTotals = JSON.parse(localStorage.getItem("ecoTotals")) || ecoTotals;
-  
 
-  if(typeof renderHomepageTotals === "function") renderHomepageTotals();
+  if (typeof renderHomepageTotals === "function") renderHomepageTotals();
 });
-
-
-
 
 function getStatusClass(status) {
   return `status-${(status || "").toLowerCase()}`;
 }
 
-// LIVE ORDER 
+// LIVE ORDER
 // LIVE ORDER (table-compatible)
 function updateLiveOrderCard(order) {
   if (!order?.orderId) return;
@@ -3661,8 +3365,6 @@ function updateStatusBadge(newStatus) {
   badge.classList.add("status-animate");
 }
 
-
-
 document.addEventListener("DOMContentLoaded", async () => {
   const lastOrderId = localStorage.getItem("lastOrderId");
   if (!lastOrderId) return;
@@ -3672,20 +3374,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!order) return;
 
   // Rebuild UI
-  updateLiveOrderCard(order);      // persistent
+  updateLiveOrderCard(order); // persistent
 
   // Resume polling
   startAutoPolling(lastOrderId);
 });
 
-
 // lIVE ORDER ENDS
-
-
-
-
-
-
 
 function startAutoPolling(orderIdOrRef) {
   // Stop any existing polling first
@@ -3694,21 +3389,19 @@ function startAutoPolling(orderIdOrRef) {
   const statusResult = document.getElementById("statusResult");
   if (statusResult) statusResult.innerHTML = "";
 
-
-
   // Initial immediate check for this specific order
   (async () => {
     if (!orderIdOrRef) return;
 
-    const stored = getStoredOrders().find(o => o.orderId === orderIdOrRef);
-    if(String(stored?.provider || "").toLowerCase() === "datamart") return;
+    const stored = getStoredOrders().find((o) => o.orderId === orderIdOrRef);
+    if (String(stored?.provider || "").toLowerCase() === "datamart") return;
 
     const order = await checkOrderStatusOnce(orderIdOrRef);
     if (order) {
       createOrUpdateStatusCard(order); // popup card
-      updateLiveOrderCard(order);      // table row
+      updateLiveOrderCard(order); // table row
       updateStatusBadge(order.status || "pending");
-      saveLiveOrder(order);            // persist status
+      saveLiveOrder(order); // persist status
     }
   })();
 
@@ -3716,24 +3409,20 @@ function startAutoPolling(orderIdOrRef) {
   _statusPollTimer = setInterval(async () => {
     const orders = getStoredOrders();
     for (let order of orders) {
-      if(String(order.provider || "").toLowerCase() === "datamart") continue; 
+      if (String(order.provider || "").toLowerCase() === "datamart") continue;
       if (isTerminalStatus(order.status)) continue; // skip delivered/failed
       const latest = await checkOrderStatusOnce(order.orderId);
       if (!latest) continue;
 
-      saveLiveOrder(latest);           // merge status
-      renderLiveOrderRow(latest);      // update table
+      saveLiveOrder(latest); // merge status
+      renderLiveOrderRow(latest); // update table
       if (orderIdOrRef === latest.orderId) {
-        createOrUpdateStatusCard(latest);  // popup card only for this order
+        createOrUpdateStatusCard(latest); // popup card only for this order
         updateStatusBadge(latest.status || "pending");
       }
     }
   }, STATUS_POLL_INTERVAL);
 }
-
-
-
-
 
 // ---------- AFTER PURCHASE: show and poll ----------
 // Load live orders on page refresh
@@ -3742,40 +3431,30 @@ function loadLiveOrders() {
   const tableBody = document.getElementById("liveOrderRows");
   if (!tableBody) return;
 
-
-  const orders =
-    JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
+  const orders = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
 
   const emptyOrders = document.getElementById("liveOrderEmpty");
 
-  if(!orders.length){
+  if (!orders.length) {
     emptyOrders.style.display = "flex";
-  } else{
+  } else {
     emptyOrders.style.display = "none";
   }
-
 
   orders
     .sort((a, b) => {
       return (b.timestamp || b.createdAt) - (a.timestamp || a.createdAt);
     })
     .forEach(renderLiveOrderRow);
-
 }
-
 
 // FUNCTION GET NETWORK PREFIX
 function getNetwork(order) {
-
   console.log("======== GET NETWORK ========");
   console.log("Order:", order);
 
   // Already saved?
-  if (
-    order.network &&
-    order.network !== "-" &&
-    order.network !== "UNKNOWN"
-  ) {
+  if (order.network && order.network !== "-" && order.network !== "UNKNOWN") {
     console.log("✅ Using saved network:", order.network);
     return order.network.toUpperCase();
   }
@@ -3831,11 +3510,8 @@ function getNetwork(order) {
   return detected;
 }
 
-
-
-
 //====================
-// GET STATUS ICON 
+// GET STATUS ICON
 //====================
 function getStatusIcon(status) {
   switch ((status || "").toLowerCase()) {
@@ -3857,7 +3533,6 @@ function getStatusIcon(status) {
   }
 }
 
-
 function loadActiveBadge() {
   let orders = [];
   try {
@@ -3867,8 +3542,10 @@ function loadActiveBadge() {
     console.error("loadActiveBadge: bad storage", e);
   }
 
-  const activeCount = orders.filter(ord => {
-    const s = String(ord.status || "").trim().toLowerCase();
+  const activeCount = orders.filter((ord) => {
+    const s = String(ord.status || "")
+      .trim()
+      .toLowerCase();
     return s === "pending" || s === "processing";
   }).length;
 
@@ -3900,74 +3577,67 @@ function loadActiveBadge() {
 // FUNCTION LOAD ACTIVE BADGE ENDS
 // ================================
 
-
-
 // ---------- LIVE ORDERS PERSISTENCE ----------
 
-
-
 const COMPLETED_STATUSES = new Set([
-  "delivered", "completed", "success", "successful", "failed", "cancelled",
-  "rejected", "refunded"
+  "delivered",
+  "completed",
+  "success",
+  "successful",
+  "failed",
+  "cancelled",
+  "rejected",
+  "refunded",
 ]);
 
 const PENDING_STATUSES = new Set(["pending", "waiting", "queued"]);
 
-function getOrderStats(){
+function getOrderStats() {
   let orders = [];
 
-  try{
+  try {
     const parsed = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY) || "[]");
-     orders = Array.isArray(parsed) ? parsed : [];
-  } catch{}
+    orders = Array.isArray(parsed) ? parsed : [];
+  } catch {}
 
-  let pending = 0, completed = 0;
+  let pending = 0,
+    completed = 0;
 
-  orders.forEach(o => {
-    const s = String(o.status || "pending").trim().toLowerCase();
-    if(COMPLETED_STATUSES.has(s)) completed++;
-    else if(PENDING_STATUSES.has(s)) pending++;
+  orders.forEach((o) => {
+    const s = String(o.status || "pending")
+      .trim()
+      .toLowerCase();
+    if (COMPLETED_STATUSES.has(s)) completed++;
+    else if (PENDING_STATUSES.has(s)) pending++;
   });
 
   return { pending, completed };
 }
 
-function updatePendingCard(){
+function updatePendingCard() {
   const { pending, completed } = getOrderStats();
 
   const pendingEl = document.getElementById("pendingTotal");
   const completedEl = document.getElementById("completedOrders");
 
-  if(pendingEl) pendingEl.textContent = pending;
-  if(completedEl) completedEl.textContent = completed;
+  if (pendingEl) pendingEl.textContent = pending;
+  if (completedEl) completedEl.textContent = completed;
 }
-
-
-
-
 
 function updateLiveOrderStatus(orderId, newStatus) {
   if (!orderId || !newStatus) return;
 
   const orders = getStoredOrders();
 
-  const index = orders.findIndex(
-    o => o.orderId === orderId
-  );
+  const index = orders.findIndex((o) => o.orderId === orderId);
 
   if (index === -1) return;
 
-  const currentStatus =
-    orders[index].status || "pending";
+  const currentStatus = orders[index].status || "pending";
 
   // Prevent status downgrade
-  if (
-    STATUS_PRIORITY[newStatus] <
-    STATUS_PRIORITY[currentStatus]
-  ) {
-    console.warn(
-      `Blocked downgrade: ${currentStatus} → ${newStatus}`
-    );
+  if (STATUS_PRIORITY[newStatus] < STATUS_PRIORITY[currentStatus]) {
+    console.warn(`Blocked downgrade: ${currentStatus} → ${newStatus}`);
 
     return;
   }
@@ -3990,42 +3660,23 @@ function updateLiveOrderStatus(orderId, newStatus) {
     status: newStatus,
 
     updatedAt:
-      currentStatus !== newStatus
-        ? Date.now()
-        : orders[index].updatedAt,
+      currentStatus !== newStatus ? Date.now() : orders[index].updatedAt,
 
-    deliveredAt:
-      nowDelivered
-        ? (
-            orders[index].deliveredAt ||
-            Date.now()
-          )
-        : orders[index].deliveredAt
+    deliveredAt: nowDelivered
+      ? orders[index].deliveredAt || Date.now()
+      : orders[index].deliveredAt,
   };
 
-  localStorage.setItem(
-    LIVE_ORDERS_KEY,
-    JSON.stringify(orders)
-  );
+  localStorage.setItem(LIVE_ORDERS_KEY, JSON.stringify(orders));
 
   // ONLY increment once when the order first becomes completed
-  if (
-    !wasDelivered &&
-    nowDelivered
-  ) {
+  if (!wasDelivered && nowDelivered) {
     let completedTotal =
-      parseInt(
-        localStorage.getItem(
-          "ecoCompletedTotal"
-        )
-      ) || 0;
+      parseInt(localStorage.getItem("ecoCompletedTotal")) || 0;
 
     completedTotal++;
 
-    localStorage.setItem(
-      "ecoCompletedTotal",
-      completedTotal
-    );
+    localStorage.setItem("ecoCompletedTotal", completedTotal);
   }
 
   updatePendingCard();
@@ -4034,28 +3685,20 @@ function updateLiveOrderStatus(orderId, newStatus) {
   syncCompletedIfMismatch();
 }
 
-
-
-
-
-
-
-
-
-
-
-
 // AUTO FIX WHEN MISMATCH
 function syncCompletedIfMismatch() {
-  const orders =
-    JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
+  const orders = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
 
-  const completedStatuses = ["delivered", "completed", "success", "cancelled", "failed"];
+  const completedStatuses = [
+    "delivered",
+    "completed",
+    "success",
+    "cancelled",
+    "failed",
+  ];
 
-
-
-  const realCompleted = orders.filter(o =>
-    completedStatuses.includes(o.status?.toLowerCase())
+  const realCompleted = orders.filter((o) =>
+    completedStatuses.includes(o.status?.toLowerCase()),
   ).length;
 
   let storedCompleted =
@@ -4066,43 +3709,35 @@ function syncCompletedIfMismatch() {
     localStorage.setItem("ecoCompletedTotal", realCompleted);
 
     console.warn(
-      `Completed count corrected: ${storedCompleted} → ${realCompleted}`
+      `Completed count corrected: ${storedCompleted} → ${realCompleted}`,
     );
   }
 }
 
-
-
-
 // INITIALIZE ON PAGE LOAD (ONCE)
 function initializeCompletedCount() {
- const storedTotal = localStorage.getItem("ecoCompletedTotal");
+  const storedTotal = localStorage.getItem("ecoCompletedTotal");
 
- // IF ALREADY EXIST RETURN
- if(storedTotal !== null) return;
+  // IF ALREADY EXIST RETURN
+  if (storedTotal !== null) return;
 
+  const orders = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
 
-const orders = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
-
-
-  const deliveredCount = orders.filter(o =>
+  const deliveredCount = orders.filter((o) =>
     ["delivered", "completed", "success", "cancelled", "failed"].includes(
-      o.status?.toLowerCase()
-    )
+      o.status?.toLowerCase(),
+    ),
   ).length;
 
   const alreadyInitialized = localStorage.getItem("ecoCompletedInitialized");
 
   if (alreadyInitialized) return; //  prevents running again
 
-
-
   localStorage.setItem("ecoCompletedTotal", deliveredCount);
   localStorage.setItem("ecoCompletedInitialized", "true");
 }
 
-
-// DEBUG 
+// DEBUG
 console.log(localStorage.getItem("ecoCompletedTotal"));
 
 // STATUS PRIORITY LOADER
@@ -4111,35 +3746,29 @@ const STATUS_PRIORITY = {
   pending: 1,
   processing: 2,
   delivered: 3,
-  failed: 4
+  failed: 4,
 };
 
 function getStoredOrders() {
-  const orders =
-    JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY) || "[]");
+  const orders = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY) || "[]");
 
-  return orders .sort((a, b) => b.timestamp - a.timestamp);
+  return orders.sort((a, b) => b.timestamp - a.timestamp);
 }
-
-
 
 // ends
 
 function pollOrderStatus(orderId) {
   fetch(`check-status/${orderId}`)
-  .then(res => res.json())
-  .then(data => {
-    if (data.status) {
-      updateLiveOrderStatus(orderId, data.status);
-      loadLiveOrders(); // refresh ui
-    }
-  })
-  .catch(err => console.error(err));
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.status) {
+        updateLiveOrderStatus(orderId, data.status);
+        loadLiveOrders(); // refresh ui
+      }
+    })
+    .catch((err) => console.error(err));
 }
 //ends
-
-
-
 
 // ---------- LIVE ORDERS PERSISTENCE ----------
 document.addEventListener("DOMContentLoaded", () => {
@@ -4151,23 +3780,19 @@ document.addEventListener("DOMContentLoaded", () => {
   // Auto fix
   syncCompletedIfMismatch();
 
-// updatePendingOrders
+  // updatePendingOrders
   updatePendingCard();
 
   // load nav badge
   loadActiveBadge();
 
-  try { startAutoPolling(); } catch(e) {console.error(e); }
+  try {
+    startAutoPolling();
+  } catch (e) {
+    console.error(e);
+  }
 });
 // handleNewOrders Dom ends//
-
-
-
-
-
-
-
-
 
 // SNACKBAR SECTION //
 // ===== SNACKBAR FUNCTION ===== //
@@ -4198,7 +3823,6 @@ function showSnackBar(message, type = "info", duration = 4000) {
   else if (type === "warning") snackbar.style.background = "#413b2a";
   else snackbar.style.background = "rgba(7, 29, 26, 0.95)";
 
-
   // Reset progress animation
   const progress = snackbar.querySelector(".snackbar-progress");
   progress.style.animation = "none";
@@ -4216,17 +3840,16 @@ function showSnackBar(message, type = "info", duration = 4000) {
 }
 // snackbar ends
 
-
 // SCROLL TO SECTION BY CLICKING ON THE CARD-BOX
 const mtnScrollBtn = document.querySelector(".mtnBt");
 
 const mtnScrollSection = document.getElementById("mtnArea");
 
-mtnScrollBtn.addEventListener("click", () =>{
+mtnScrollBtn.addEventListener("click", () => {
   if (mtnScrollSection) {
     mtnScrollSection.scrollIntoView({
       behavior: "smooth",
-      block: "start"
+      block: "start",
     });
   }
 });
@@ -4237,12 +3860,12 @@ const teleScrollBtn = document.querySelector(".telecel");
 const teleScrollSection = document.getElementById("teleArea");
 
 teleScrollBtn.addEventListener("click", () => {
- if (teleScrollSection) {
-  teleScrollSection.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
- }
+  if (teleScrollSection) {
+    teleScrollSection.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
 });
 
 // same for AirtelTigo
@@ -4254,175 +3877,122 @@ airtelScrollBtn.addEventListener("click", () => {
   if (airtelScrollSection) {
     airtelScrollSection.scrollIntoView({
       behavior: "smooth",
-      block: "start"
+      block: "start",
     });
   }
 });
-
-
-
 
 //========================================
 // ADD ORDER TO LEADERBOARD
 //========================================
 
 function addOrderToLeaderboard(customers, order) {
+  const phone = String(order.recipient || "").trim();
 
-    const phone =
-        String(order.recipient || "").trim();
+  if (!phone) return;
 
-    if (!phone) return;
+  //========================================
+  // CREATE CUSTOMER
+  //========================================
 
+  if (!customers[phone]) {
+    customers[phone] = {
+      phone,
 
-    //========================================
-    // CREATE CUSTOMER
-    //========================================
+      totalGB: 0,
 
-    if (!customers[phone]) {
+      totalOrders: 0,
 
-        customers[phone] = {
+      totalSpent: 0,
 
-            phone,
+      points: 0,
 
-            totalGB: 0,
+      manualOverride: false,
 
-            totalOrders: 0,
+      manualPoints: null,
 
-            totalSpent: 0,
+      manualUpdatedAt: 0,
+    };
+  }
 
-            points: 0,
+  const customer = customers[phone];
 
-            manualOverride: false,
+  const isAdminLeaderboard =
+    order.LD_Status === "leaderboard" || order.status === "leaderboard";
 
-            manualPoints: null,
+  //========================================
+  // NORMAL CUSTOMER ORDER
+  //========================================
 
-            manualUpdatedAt: 0
+  if (!isAdminLeaderboard) {
+    const gb = Number(order.volume || 0);
 
-        };
-
-    }
-
-
-    const customer =
-        customers[phone];
-
-    const isAdminLeaderboard =
-    order.LD_Status === "leaderboard" ||
-    order.status === "leaderboard";
-
-
-    
-
-
-    //========================================
-    // NORMAL CUSTOMER ORDER
-    //========================================
-
-    if(!isAdminLeaderboard){
-    const gb =
-        Number(order.volume || 0);
-
-    const amount =
-        Number(order.amount || 0);
-
+    const amount = Number(order.amount || 0);
 
     customer.totalGB += gb;
 
     customer.totalOrders++;
 
     customer.totalSpent += amount;
+  }
 
+  //========================================
+  // CHECK MANUAL POINTS FROM ADMIN
+  //========================================
+
+  const hasManualPoints =
+    order.manualPoints !== undefined && order.manualPoints !== null;
+
+  if (hasManualPoints) {
+    const manualValue = Number(order.manualPoints);
+
+    //====================================
+    // MANUAL UPDATE TIME
+    //====================================
+
+    const manualTime = order.manualUpdatedAt?.toDate
+      ? order.manualUpdatedAt.toDate().getTime()
+      : new Date(order.manualUpdatedAt || 0).getTime();
+
+    //====================================
+    // NEWEST MANUAL ASSIGNMENT WINS
+    //====================================
+
+    if (!customer.manualOverride || manualTime > customer.manualUpdatedAt) {
+      customer.manualOverride = true;
+
+      customer.manualPoints = manualValue;
+
+      customer.manualUpdatedAt = manualTime;
     }
-
-    //========================================
-    // CHECK MANUAL POINTS FROM ADMIN
-    //========================================
-
-    const hasManualPoints =
-        order.manualPoints !== undefined &&
-        order.manualPoints !== null;
-
-
-    if (hasManualPoints) {
-
-        const manualValue =
-            Number(order.manualPoints);
-
-
-        //====================================
-        // MANUAL UPDATE TIME
-        //====================================
-
-        const manualTime =
-            order.manualUpdatedAt?.toDate
-                ? order.manualUpdatedAt
-                    .toDate()
-                    .getTime()
-                : new Date(
-                    order.manualUpdatedAt || 0
-                  ).getTime();
-
-
-        //====================================
-        // NEWEST MANUAL ASSIGNMENT WINS
-        //====================================
-
-        if (
-            !customer.manualOverride ||
-            manualTime >
-            customer.manualUpdatedAt
-        ) {
-
-            customer.manualOverride = true;
-
-            customer.manualPoints =
-                manualValue;
-
-            customer.manualUpdatedAt =
-                manualTime;
-
-        }
-
-    }
-
+  }
 }
-
-
-
 
 //===================
 // MONTHLY LEADERBOARD
 //====================
 function loadLeaderboard() {
-
   const db = window.FIRESTORE;
 
   if (!db) return;
-
 
   //========================================
   // NO ORDERBY
   // NO FIRESTORE INDEX REQUIRED
   //========================================
 
-  const q =
-    query(collection(db, "orders"));
-
+  const q = query(collection(db, "orders"));
 
   onSnapshot(
     q,
     (snapshot) => {
-
       //========================================
       // CURRENT + PREVIOUS MONTH CUSTOMERS
       //========================================
 
-     
-
       const currentCustomers = {};
 
       const previousCustomers = {};
-
 
       //========================================
       // CURRENT DATE
@@ -4430,141 +4000,95 @@ function loadLeaderboard() {
 
       const now = new Date();
 
-
       //========================================
       // PREVIOUS MONTH START
       //========================================
 
-      const previousMonthStart =
-        new Date(
-          now.getFullYear(),
-          now.getMonth() - 1,
-          1,
-          0,
-          0,
-          0,
-          0
-        );
-
+      const previousMonthStart = new Date(
+        now.getFullYear(),
+        now.getMonth() - 1,
+        1,
+        0,
+        0,
+        0,
+        0,
+      );
 
       //========================================
       // PREVIOUS MONTH END
       //========================================
 
-      const previousMonthEnd =
-        new Date(
-          now.getFullYear(),
-          now.getMonth(),
-          0,
-          23,
-          59,
-          59,
-          999
-        );
+      const previousMonthEnd = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        0,
+        23,
+        59,
+        59,
+        999,
+      );
 
       //========================================
       // READ ALL ORDERS ONCE
       //========================================
 
-      snapshot.forEach(doc => {
-
+      snapshot.forEach((doc) => {
         const order = doc.data();
-
 
         //========================================
         // IGNORE FAILED / CANCELLED
         //========================================
 
-        const status =
-          String(order.status || "")
-            .toLowerCase();
+        const status = String(order.status || "").toLowerCase();
 
-
-        if (
-          status === "failed" ||
-          status === "cancelled"
-        ) {
+        if (status === "failed" || status === "cancelled") {
           return;
         }
 
-        
-        const isAdminLeaderboard =
-        order.LD_Status === "leaderboard";
-        if(!isAdminLeaderboard && 
-          (order.status === "failed" ||
-            order.status === "cancelled"
-          )
-        ) { return;}
-
-
-
-
+        const isAdminLeaderboard = order.LD_Status === "leaderboard";
+        if (
+          !isAdminLeaderboard &&
+          (order.status === "failed" || order.status === "cancelled")
+        ) {
+          return;
+        }
 
         //========================================
         // ORDER DATE
         //========================================
 
-        const orderDate =
-          order.createdAt?.toDate
-            ? order.createdAt.toDate()
-            : new Date(order.createdAt);
+        const orderDate = order.createdAt?.toDate
+          ? order.createdAt.toDate()
+          : new Date(order.createdAt);
 
-
-        if (
-          isNaN(orderDate.getTime())
-        ) {
+        if (isNaN(orderDate.getTime())) {
           return;
         }
-
 
         //========================================
         // CUSTOMER PHONE
         //========================================
 
-        const phone =
-          String(
-            order.recipient || ""
-          ).trim();
-
+        const phone = String(order.recipient || "").trim();
 
         if (!phone) return;
-
 
         //========================================
         // PREVIOUS MONTH
         //========================================
 
-        if (
-          orderDate >= previousMonthStart &&
-          orderDate <= previousMonthEnd
-        ) {
-
-          addOrderToLeaderboard(
-            previousCustomers,
-            order
-          );
-
+        if (orderDate >= previousMonthStart && orderDate <= previousMonthEnd) {
+          addOrderToLeaderboard(previousCustomers, order);
         }
-
 
         //========================================
         // CURRENT GIVEAWAY
         //========================================
 
-        if (
-          orderDate >= LEADERBOARD_START &&
-          orderDate <= LEADERBOARD_ENDS
-        ) {
-
-          addOrderToLeaderboard(
-            currentCustomers,
-            order
-          );
-
+        if (orderDate >= LEADERBOARD_START && orderDate <= LEADERBOARD_ENDS) {
+          addOrderToLeaderboard(currentCustomers, order);
         }
-
       });
-
 
       finalizeLeaderboardPoints(currentCustomers);
 
@@ -4574,94 +4098,60 @@ function loadLeaderboard() {
       // SORT CURRENT MONTH
       //========================================
 
-      const currentLeaders =
-        Object.values(currentCustomers)
-          .sort(sortLeaderboard)
-          .slice(0, 9);
-
+      const currentLeaders = Object.values(currentCustomers)
+        .sort(sortLeaderboard)
+        .slice(0, 9);
 
       //========================================
       // SORT PREVIOUS MONTH
       //========================================
 
-      const previousWinners =
-        Object.values(previousCustomers)
-          .sort(sortLeaderboard)
-          .slice(0, 3);
-
+      const previousWinners = Object.values(previousCustomers)
+        .sort(sortLeaderboard)
+        .slice(0, 3);
 
       //========================================
       // UPDATE NORMAL LEADERBOARD
       //========================================
 
-      renderLeaderboard(
-        currentLeaders
-      );
-
+      renderLeaderboard(currentLeaders);
 
       //========================================
       // UPDATE CELEBRATION
       // WITH LAST MONTH'S TOP 3
       //========================================
 
-      updateWinnerCelebration(
-        previousWinners
-      );
-
+      updateWinnerCelebration(previousWinners);
 
       //========================================
       // DEBUG
       //========================================
 
-      console.log(
-        "🏆 Current Month Leaders:",
-        currentLeaders
-      );
+      console.log("🏆 Current Month Leaders:", currentLeaders);
 
-
-      console.log(
-        "🎉 Previous Month Winners:",
-        previousWinners
-      );
-
+      console.log("🎉 Previous Month Winners:", previousWinners);
     },
 
-
     (error) => {
-
-      console.error(
-        "Leaderboard listener error:",
-        error
-      );
-
-    }
-
+      console.error("Leaderboard listener error:", error);
+    },
   );
-
 }
-
-
 
 //=========================
 // FINALIZE POINTS
 //=========================
-function finalizeLeaderboardPoints(customers){
-
-Object.values(customers).forEach(customer => {
-if (customer.manualOverride){
-// Admin-assigned points
-customer.points =
-customer.manualPoints;
-
-} else{
-// Normal calculation
-// 1GB = 6 POINTS
-customer.points =
-customer.totalGB * 6;
-}
-
-
-});
+function finalizeLeaderboardPoints(customers) {
+  Object.values(customers).forEach((customer) => {
+    if (customer.manualOverride) {
+      // Admin-assigned points
+      customer.points = customer.manualPoints;
+    } else {
+      // Normal calculation
+      // 1GB = 6 POINTS
+      customer.points = customer.totalGB * 6;
+    }
+  });
 }
 
 //========================================
@@ -4669,182 +4159,112 @@ customer.totalGB * 6;
 //========================================
 
 function sortLeaderboard(a, b) {
-
   // Highest points first
 
-  if (
-    b.points !== a.points
-  ) {
-
-    return (
-      b.points -
-      a.points
-    );
-
+  if (b.points !== a.points) {
+    return b.points - a.points;
   }
-
 
   // Tie breaker:
   // Highest GB first
 
-  return (
-    b.totalGB -
-    a.totalGB
-  );
-
+  return b.totalGB - a.totalGB;
 }
-
-
 
 //===========================
 // RENDER LEADERS
 //===========================
 function renderLeaderboard(leaders) {
-
   //========================================
   // CLEAR ALL 5 POSITIONS
   // UPDATE EVERY SWIPER CLONE TOO
   //========================================
   for (let i = 1; i <= 9; i++) {
+    document.querySelectorAll(`#leaderPhone${i}`).forEach((el) => {
+      el.textContent = "---";
+    });
 
-    document
-      .querySelectorAll(`#leaderPhone${i}`)
-      .forEach(el => {
-        el.textContent = "---";
-      });
+    document.querySelectorAll(`#leaderPoints${i}`).forEach((el) => {
+      el.textContent = "0 points";
+    });
 
-    document
-      .querySelectorAll(`#leaderPoints${i}`)
-      .forEach(el => {
-        el.textContent = "0 points";
-      });
-
-    document
-      .querySelectorAll(`#leaderStars${i}`)
-      .forEach(el => {
-        el.innerHTML = "";
-      });
-
+    document.querySelectorAll(`#leaderStars${i}`).forEach((el) => {
+      el.innerHTML = "";
+    });
   }
-
 
   //========================================
   // RENDER CURRENT LEADERS
   //========================================
   leaders.forEach((leader, index) => {
-
     const i = index + 1;
-
 
     //======================================
     // UPDATE ALL CLONES
     //======================================
-    document
-      .querySelectorAll(`#leaderPhone${i}`)
-      .forEach(el => {
+    document.querySelectorAll(`#leaderPhone${i}`).forEach((el) => {
+      el.textContent = maskPhone(leader.phone);
+    });
 
-        el.textContent =
-          maskPhone(leader.phone);
+    document.querySelectorAll(`#leaderPoints${i}`).forEach((el) => {
+      el.textContent = Number(leader.points || 0) + " points";
+    });
 
-      });
-
-
-    document
-      .querySelectorAll(`#leaderPoints${i}`)
-      .forEach(el => {
-
-        el.textContent =
-          Number(leader.points || 0) +
-          " points";
-
-      });
-
-
-    document
-      .querySelectorAll(`#leaderStars${i}`)
-      .forEach(el => {
-
-        el.innerHTML =
-          getStars(i);
-
-      });
-
+    document.querySelectorAll(`#leaderStars${i}`).forEach((el) => {
+      el.innerHTML = getStars(i);
+    });
   });
-
 }
-
 
 //=================
 // HIDE PHONE
 //=================
-function maskPhone(phone){
+function maskPhone(phone) {
+  if (!phone) return "Unknown";
 
-    if(!phone) return "Unknown";
-
-    return phone.substring(0,5) + "***" + phone.substring(8);
-
+  return phone.substring(0, 5) + "***" + phone.substring(8);
 }
-
 
 //==============
 // GET STARS
 //==============
-function getStars(rank){
+function getStars(rank) {
+  let stars = "";
 
-    let stars="";
+  for (let i = 0; i < 6 - rank; i++) {
+    stars += `<i class="ri-star-fill"></i>`;
+  }
 
-    for(let i=0;i<6-rank;i++){
-
-        stars += `<i class="ri-star-fill"></i>`;
-
-    }
-
-    return stars;
-
+  return stars;
 }
-
 
 loadLeaderboard();
 resetGiveAwayHtml();
 
 // RESET GIVEAWAY TIMER HTML
-function resetGiveAwayHtml(){
+function resetGiveAwayHtml() {
   //TIME
-const defaultHtml = document.getElementById("leaderboardStartText");
+  const defaultHtml = document.getElementById("leaderboardStartText");
 
-const leaderboardResetText = document.getElementById("leaderboardResetText");
+  const leaderboardResetText = document.getElementById("leaderboardResetText");
 
+  if (!defaultHtml) return;
 
+  const now = new Date();
 
-if(!defaultHtml) return;
+  // Competition has ended
+  if (now >= LEADERBOARD_ENDS) {
+    defaultHtml.textContent = `Free GB GIVEAWAY: ${leaderboardStartText} - ${endTimeText} ends.`;
+  } else {
+    defaultHtml.textContent = `Free GB GIVEAWAY: ${leaderboardStartText} - ${endTimeText}`;
+  }
 
-
-const now = new
-Date();
-
-
-// Competition has ended
-if(now >= LEADERBOARD_ENDS){
-
-  defaultHtml.textContent = 
-  `Free GB GIVEAWAY: ${leaderboardStartText} - ${endTimeText} ends.`
-} else {
-  defaultHtml.textContent =
-  `Free GB GIVEAWAY: ${leaderboardStartText} - ${endTimeText}`
+  return;
 }
-
-return;
-}
-
-
 
 //========================================
 // AUTOMATIC CELEBRATION CHECK
 //========================================
-
-
-
-
 
 //========================================
 // UPDATE CELEBRATION WINNERS
@@ -4856,48 +4276,28 @@ return;
 //========================================
 
 function updateWinnerCelebration(winners) {
-
   if (!Array.isArray(winners)) {
     return;
   }
-
 
   //========================================
   // TOP 3 ONLY
   //========================================
 
-  const topThree =
-    winners.slice(0, 3);
+  const topThree = winners.slice(0, 3);
 
+  for (let i = 1; i <= 3; i++) {
+    const winner = topThree[i - 1];
 
-  for (
-    let i = 1;
-    i <= 3;
-    i++
-  ) {
+    const phoneElement = document.getElementById(`celebrationWinner${i}`);
 
-    const winner =
-      topThree[i - 1];
-
-
-    const phoneElement =
-      document.getElementById(
-        `celebrationWinner${i}`
-      );
-
-
-    const pointsElement =
-      document.getElementById(
-        `celebrationPoints${i}`
-      );
-
+    const pointsElement = document.getElementById(`celebrationPoints${i}`);
 
     //======================================
     // NO WINNER
     //======================================
 
     if (!winner) {
-
       if (phoneElement) {
         phoneElement.textContent = "---";
       }
@@ -4909,60 +4309,35 @@ function updateWinnerCelebration(winners) {
       continue;
     }
 
-
     //======================================
     // PHONE
     //======================================
 
     if (phoneElement) {
-
-      phoneElement.textContent =
-        maskPhone(
-          winner.phone
-        );
-
+      phoneElement.textContent = maskPhone(winner.phone);
     }
-
 
     //======================================
     // POINTS
     //======================================
 
     if (pointsElement) {
-
-      pointsElement.textContent =
-        Number(
-          winner.points || 0
-        ) + " points";
-
+      pointsElement.textContent = Number(winner.points || 0) + " points";
     }
-
   }
 
-
-  console.log(
-    "🎉 Celebration Top 3:",
-    topThree
-  );
-
+  console.log("🎉 Celebration Top 3:", topThree);
 }
-
-
-
 
 //========================================
 // ACTUAL GIVEAWAY DATES
 //========================================
 
-const GIVEAWAY_END_DATE =
-    new Date("2026-11-30T23:59:59");
+const GIVEAWAY_END_DATE = new Date("2026-11-30T23:59:59");
 
-const CELEBRATION_START =
-    new Date("2026-12-01T00:00:00");
+const CELEBRATION_START = new Date("2026-12-01T00:00:00");
 
-const CELEBRATION_END =
-    new Date("2026-12-01T23:59:59");
-
+const CELEBRATION_END = new Date("2026-12-01T23:59:59");
 
 //========================================
 // GIVEAWAY CELEBRATION DATE
@@ -4970,571 +4345,300 @@ const CELEBRATION_END =
 
 let celebrationDismissed = false;
 
-document.addEventListener("DOMContentLoaded", ()=> {
- //========================================
-// WINNER CELEBRATION SYSTEM
-//========================================
+document.addEventListener("DOMContentLoaded", () => {
+  //========================================
+  // WINNER CELEBRATION SYSTEM
+  //========================================
 
-const winnerCelebration =
-    document.getElementById(
-        "winnerCelebration"
-    );
+  const winnerCelebration = document.getElementById("winnerCelebration");
 
-const fireworksCanvas =
-    document.getElementById(
-        "fireworksCanvas"
-    );
+  const fireworksCanvas = document.getElementById("fireworksCanvas");
 
-const confettiCanvas =
-    document.getElementById(
-        "confettiCanvas"
-    );
+  const confettiCanvas = document.getElementById("confettiCanvas");
 
-const winnerCloseBtn =
-    document.getElementById(
-        "winnerCloseBtn"
-    );
+  const winnerCloseBtn = document.getElementById("winnerCloseBtn");
 
+  const fireworksCtx = fireworksCanvas.getContext("2d");
 
-const fireworksCtx =
-    fireworksCanvas.getContext("2d");
+  const confettiCtx = confettiCanvas.getContext("2d");
 
-const confettiCtx =
-    confettiCanvas.getContext("2d");
+  //========================================
+  // CANVAS SIZE
+  //========================================
 
+  function resizeCelebrationCanvas() {
+    fireworksCanvas.width = window.innerWidth;
 
-//========================================
-// CANVAS SIZE
-//========================================
+    fireworksCanvas.height = window.innerHeight;
 
-function resizeCelebrationCanvas() {
+    confettiCanvas.width = window.innerWidth;
 
-    fireworksCanvas.width =
-        window.innerWidth;
+    confettiCanvas.height = window.innerHeight;
+  }
 
-    fireworksCanvas.height =
-        window.innerHeight;
+  resizeCelebrationCanvas();
 
+  window.addEventListener("resize", resizeCelebrationCanvas);
 
-    confettiCanvas.width =
-        window.innerWidth;
+  //========================================
+  // FIREWORK PARTICLES
+  //========================================
 
-    confettiCanvas.height =
-        window.innerHeight;
+  let fireworks = [];
 
-}
+  let fireworkRockets = [];
 
+  function createFirework(x, y) {
+    const particleCount = 70 + Math.floor(Math.random() * 50);
 
-resizeCelebrationCanvas();
+    for (let i = 0; i < particleCount; i++) {
+      const angle = Math.random() * Math.PI * 2;
 
+      const speed = 2 + Math.random() * 5;
 
-window.addEventListener(
-    "resize",
-    resizeCelebrationCanvas
-);
+      fireworks.push({
+        x,
+        y,
 
+        vx: Math.cos(angle) * speed,
 
-//========================================
-// FIREWORK PARTICLES
-//========================================
+        vy: Math.sin(angle) * speed,
 
-let fireworks = [];
+        life: 1,
 
-let fireworkRockets = [];
+        decay: 0.012 + Math.random() * 0.018,
 
+        size: 1 + Math.random() * 2.5,
 
-function createFirework(
-    x,
-    y
-) {
-
-    const particleCount =
-        70 + Math.floor(
-            Math.random() * 50
-        );
-
-
-    for (
-        let i = 0;
-        i < particleCount;
-        i++
-    ) {
-
-        const angle =
-            Math.random() *
-            Math.PI *
-            2;
-
-
-        const speed =
-            2 +
-            Math.random() * 5;
-
-
-        fireworks.push({
-
-            x,
-            y,
-
-            vx:
-                Math.cos(angle) *
-                speed,
-
-            vy:
-                Math.sin(angle) *
-                speed,
-
-            life:
-                1,
-
-            decay:
-                .012 +
-                Math.random() * .018,
-
-            size:
-                1 +
-                Math.random() * 2.5,
-
-            hue:
-                Math.floor(
-                    Math.random() * 360
-                )
-
-        });
-
+        hue: Math.floor(Math.random() * 360),
+      });
     }
+  }
 
-}
+  //========================================
+  // FIREWORK ROCKET
+  //========================================
 
-
-//========================================
-// FIREWORK ROCKET
-//========================================
-
-function launchFirework() {
-
+  function launchFirework() {
     fireworkRockets.push({
+      x: Math.random() * fireworksCanvas.width,
 
-        x:
-            Math.random() *
-            fireworksCanvas.width,
+      y: fireworksCanvas.height,
 
-        y:
-            fireworksCanvas.height,
+      targetY: 100 + Math.random() * (fireworksCanvas.height * 0.45),
 
-        targetY:
-            100 +
-            Math.random() *
-            (
-                fireworksCanvas.height *
-                .45
-            ),
-
-        speed:
-            7 +
-            Math.random() * 4
-
+      speed: 7 + Math.random() * 4,
     });
+  }
 
-}
+  //========================================
+  // UPDATE FIREWORKS
+  //========================================
 
-
-//========================================
-// UPDATE FIREWORKS
-//========================================
-
-function updateFireworks() {
-
-    fireworksCtx.clearRect(
-        0,
-        0,
-        fireworksCanvas.width,
-        fireworksCanvas.height
-    );
-
+  function updateFireworks() {
+    fireworksCtx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
 
     //=============================
     // ROCKETS
     //=============================
 
-    for (
-        let i =
-            fireworkRockets.length - 1;
+    for (let i = fireworkRockets.length - 1; i >= 0; i--) {
+      const rocket = fireworkRockets[i];
 
-        i >= 0;
+      rocket.y -= rocket.speed;
 
-        i--
-    ) {
+      // Rocket glow
 
-        const rocket =
-            fireworkRockets[i];
+      fireworksCtx.beginPath();
 
+      fireworksCtx.arc(rocket.x, rocket.y, 3, 0, Math.PI * 2);
 
-        rocket.y -=
-            rocket.speed;
+      fireworksCtx.fillStyle = "#ffffff";
 
+      fireworksCtx.shadowBlur = 15;
 
-        // Rocket glow
+      fireworksCtx.shadowColor = "#ffffff";
 
-        fireworksCtx.beginPath();
+      fireworksCtx.fill();
 
-        fireworksCtx.arc(
-            rocket.x,
-            rocket.y,
-            3,
-            0,
-            Math.PI * 2
-        );
+      fireworksCtx.shadowBlur = 0;
 
-        fireworksCtx.fillStyle =
-            "#ffffff";
+      // Explosion
 
-        fireworksCtx.shadowBlur =
-            15;
+      if (rocket.y <= rocket.targetY) {
+        createFirework(rocket.x, rocket.y);
 
-        fireworksCtx.shadowColor =
-            "#ffffff";
-
-        fireworksCtx.fill();
-
-        fireworksCtx.shadowBlur = 0;
-
-
-        // Explosion
-
-        if (
-            rocket.y <=
-            rocket.targetY
-        ) {
-
-            createFirework(
-                rocket.x,
-                rocket.y
-            );
-
-            fireworkRockets.splice(
-                i,
-                1
-            );
-
-        }
-
+        fireworkRockets.splice(i, 1);
+      }
     }
-
 
     //=============================
     // PARTICLES
     //=============================
 
-    for (
-        let i =
-            fireworks.length - 1;
+    for (let i = fireworks.length - 1; i >= 0; i--) {
+      const particle = fireworks[i];
 
-        i >= 0;
+      particle.x += particle.vx;
 
-        i--
-    ) {
+      particle.y += particle.vy;
 
-        const particle =
-            fireworks[i];
+      // Gravity
 
+      particle.vy += 0.045;
 
-        particle.x +=
-            particle.vx;
+      particle.vx *= 0.985;
 
-        particle.y +=
-            particle.vy;
+      particle.life -= particle.decay;
 
+      if (particle.life <= 0) {
+        fireworks.splice(i, 1);
 
-        // Gravity
+        continue;
+      }
 
-        particle.vy +=
-            .045;
+      fireworksCtx.beginPath();
 
+      fireworksCtx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
 
-        particle.vx *=
-            .985;
-
-
-        particle.life -=
-            particle.decay;
-
-
-        if (
-            particle.life <= 0
-        ) {
-
-            fireworks.splice(
-                i,
-                1
-            );
-
-            continue;
-
-        }
-
-
-        fireworksCtx.beginPath();
-
-
-        fireworksCtx.arc(
-            particle.x,
-            particle.y,
-            particle.size,
-            0,
-            Math.PI * 2
-        );
-
-
-        fireworksCtx.fillStyle =
-            `hsla(
+      fireworksCtx.fillStyle = `hsla(
                 ${particle.hue},
                 100%,
                 65%,
                 ${particle.life}
             )`;
 
+      fireworksCtx.shadowBlur = 12;
 
-        fireworksCtx.shadowBlur =
-            12;
-
-        fireworksCtx.shadowColor =
-            `hsl(
+      fireworksCtx.shadowColor = `hsl(
                 ${particle.hue},
                 100%,
                 60%
             )`;
 
+      fireworksCtx.fill();
 
-        fireworksCtx.fill();
-
-        fireworksCtx.shadowBlur =
-            0;
-
+      fireworksCtx.shadowBlur = 0;
     }
+  }
 
-}
+  //========================================
+  // CONFETTI
+  //========================================
 
+  let confetti = [];
 
-//========================================
-// CONFETTI
-//========================================
-
-let confetti = [];
-
-
-function createConfetti() {
-
+  function createConfetti() {
     confetti = [];
 
+    const amount = Math.min(180, Math.floor(window.innerWidth / 5));
 
-    const amount =
-        Math.min(
-            180,
-            Math.floor(
-                window.innerWidth / 5
-            )
-        );
+    for (let i = 0; i < amount; i++) {
+      confetti.push({
+        x: Math.random() * confettiCanvas.width,
 
+        y: -Math.random() * confettiCanvas.height,
 
-    for (
-        let i = 0;
-        i < amount;
-        i++
-    ) {
+        width: 5 + Math.random() * 7,
 
-        confetti.push({
+        height: 8 + Math.random() * 12,
 
-            x:
-                Math.random() *
-                confettiCanvas.width,
+        speed: 1 + Math.random() * 3,
 
-            y:
-                -Math.random() *
-                confettiCanvas.height,
+        rotation: Math.random() * Math.PI * 2,
 
-            width:
-                5 +
-                Math.random() * 7,
+        rotationSpeed: -0.08 + Math.random() * 0.16,
 
-            height:
-                8 +
-                Math.random() * 12,
+        drift: -0.5 + Math.random(),
 
-            speed:
-                1 +
-                Math.random() * 3,
-
-            rotation:
-                Math.random() *
-                Math.PI *
-                2,
-
-            rotationSpeed:
-                -.08 +
-                Math.random() *
-                .16,
-
-            drift:
-                -.5 +
-                Math.random(),
-
-            hue:
-                Math.floor(
-                    Math.random() * 360
-                )
-
-        });
-
+        hue: Math.floor(Math.random() * 360),
+      });
     }
+  }
 
-}
+  //========================================
+  // UPDATE CONFETTI
+  //========================================
 
+  function updateConfetti() {
+    confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
 
-//========================================
-// UPDATE CONFETTI
-//========================================
+    confetti.forEach((piece) => {
+      piece.y += piece.speed;
 
-function updateConfetti() {
+      piece.x += Math.sin(piece.y * 0.02) * piece.drift;
 
-    confettiCtx.clearRect(
-        0,
-        0,
-        confettiCanvas.width,
-        confettiCanvas.height
-    );
+      piece.rotation += piece.rotationSpeed;
 
+      if (piece.y > confettiCanvas.height) {
+        piece.y = -20;
 
-    confetti.forEach(
-        piece => {
+        piece.x = Math.random() * confettiCanvas.width;
+      }
 
-            piece.y +=
-                piece.speed;
+      confettiCtx.save();
 
-            piece.x +=
-                Math.sin(
-                    piece.y * .02
-                ) *
-                piece.drift;
+      confettiCtx.translate(piece.x, piece.y);
 
-            piece.rotation +=
-                piece.rotationSpeed;
+      confettiCtx.rotate(piece.rotation);
 
-
-            if (
-                piece.y >
-                confettiCanvas.height
-            ) {
-
-                piece.y = -20;
-
-                piece.x =
-                    Math.random() *
-                    confettiCanvas.width;
-
-            }
-
-
-            confettiCtx.save();
-
-
-            confettiCtx.translate(
-                piece.x,
-                piece.y
-            );
-
-
-            confettiCtx.rotate(
-                piece.rotation
-            );
-
-
-            confettiCtx.fillStyle =
-                `hsl(
+      confettiCtx.fillStyle = `hsl(
                     ${piece.hue},
                     90%,
                     55%
                 )`;
 
+      confettiCtx.fillRect(
+        -piece.width / 2,
+        -piece.height / 2,
+        piece.width,
+        piece.height,
+      );
 
-            confettiCtx.fillRect(
-                -piece.width / 2,
-                -piece.height / 2,
-                piece.width,
-                piece.height
-            );
+      confettiCtx.restore();
+    });
+  }
 
+  //========================================
+  // ANIMATION LOOP
+  //========================================
 
-            confettiCtx.restore();
+  let celebrationAnimation;
 
-        }
-    );
-
-}
-
-//========================================
-// ANIMATION LOOP
-//========================================
-
-let celebrationAnimation;
-
-
-function celebrationLoop() {
-
+  function celebrationLoop() {
     updateFireworks();
 
     updateConfetti();
 
-    celebrationAnimation =
-        requestAnimationFrame(
-            celebrationLoop
-        );
+    celebrationAnimation = requestAnimationFrame(celebrationLoop);
+  }
 
-}
+  //========================================
+  // START CELEBRATION
+  //========================================
 
-
-
-
-
-//========================================
-// START CELEBRATION
-//========================================
-
-function startWinnerCelebration() {
-
+  function startWinnerCelebration() {
     if (!winnerCelebration) {
-        return;
+      return;
     }
-
 
     // User already closed it
     if (celebrationDismissed) {
-        return;
+      return;
     }
-
 
     // Already running
-    if (
-        winnerCelebration.classList.contains(
-            "active"
-        )
-    ) {
-        return;
+    if (winnerCelebration.classList.contains("active")) {
+      return;
     }
-
 
     //========================================
     // SHOW WHOLE CONTAINER
     //========================================
 
-    winnerCelebration.style.display =
-        "flex";
+    winnerCelebration.style.display = "flex";
 
-
-    winnerCelebration.classList.add(
-        "active"
-    );
-
+    winnerCelebration.classList.add("active");
 
     //========================================
     // RESET ANIMATION
@@ -5546,14 +4650,9 @@ function startWinnerCelebration() {
 
     createConfetti();
 
-
-    cancelAnimationFrame(
-        celebrationAnimation
-    );
-
+    cancelAnimationFrame(celebrationAnimation);
 
     celebrationLoop();
-
 
     //========================================
     // FIRST FIREWORK
@@ -5561,99 +4660,61 @@ function startWinnerCelebration() {
 
     launchFirework();
 
-
     //========================================
     // FIREWORK INTERVAL
     //========================================
 
-    clearInterval(
-        fireworkInterval
-    );
+    clearInterval(fireworkInterval);
 
+    fireworkInterval = setInterval(() => {
+      if (!winnerCelebration.classList.contains("active")) {
+        clearInterval(fireworkInterval);
 
-    fireworkInterval =
-        setInterval(() => {
+        fireworkInterval = null;
 
-            if (
-                !winnerCelebration.classList.contains(
-                    "active"
-                )
-            ) {
+        return;
+      }
 
-                clearInterval(
-                    fireworkInterval
-                );
+      launchFirework();
 
-                fireworkInterval = null;
+      // Sometimes launch two
 
-                return;
-            }
+      if (Math.random() > 0.55) {
+        setTimeout(launchFirework, 250);
+      }
+    }, 700);
+  }
 
+  //========================================
+  // CLOSE CELEBRATION
+  // USER CAN PURCHASE DATA
+  //========================================
 
-            launchFirework();
-
-
-            // Sometimes launch two
-
-            if (
-                Math.random() > 0.55
-            ) {
-
-                setTimeout(
-                    launchFirework,
-                    250
-                );
-
-            }
-
-        }, 700);
-
-}
-
-
-//========================================
-// CLOSE CELEBRATION
-// USER CAN PURCHASE DATA
-//========================================
-
-function closeWinnerCelebration() {
-
+  function closeWinnerCelebration() {
     // Prevent automatic reopening
     celebrationDismissed = true;
 
-
     //========================================
     // HIDE WHOLE CONTAINER
     //========================================
 
-    winnerCelebration.style.display =
-        "none";
+    winnerCelebration.style.display = "none";
 
-
-    winnerCelebration.classList.remove(
-        "active"
-    );
-
+    winnerCelebration.classList.remove("active");
 
     //========================================
     // STOP FIREWORKS
     //========================================
 
-    clearInterval(
-        fireworkInterval
-    );
+    clearInterval(fireworkInterval);
 
     fireworkInterval = null;
-
 
     //========================================
     // STOP ANIMATION
     //========================================
 
-    cancelAnimationFrame(
-        celebrationAnimation
-    );
-
+    cancelAnimationFrame(celebrationAnimation);
 
     //========================================
     // CLEAR PARTICLES
@@ -5665,82 +4726,49 @@ function closeWinnerCelebration() {
 
     confetti = [];
 
-
     //========================================
     // CLEAR CANVASES
     //========================================
 
-    fireworksCtx.clearRect(
-        0,
-        0,
-        fireworksCanvas.width,
-        fireworksCanvas.height
-    );
+    fireworksCtx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
 
+    confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+  }
 
-    confettiCtx.clearRect(
-        0,
-        0,
-        confettiCanvas.width,
-        confettiCanvas.height
-    );
+  if (winnerCloseBtn) {
+    winnerCloseBtn.addEventListener("click", closeWinnerCelebration);
+  }
 
-}
+  //========================================
+  // STOP CELEBRATION
+  //========================================
 
-
-if (winnerCloseBtn) {
-
-    winnerCloseBtn.addEventListener(
-        "click",
-        closeWinnerCelebration
-    );
-
-}
-
-
-//========================================
-// STOP CELEBRATION
-//========================================
-
-function stopWinnerCelebration() {
-
+  function stopWinnerCelebration() {
     if (!winnerCelebration) {
-        return;
+      return;
     }
-
 
     //========================================
     // HIDE WHOLE CONTAINER
     //========================================
 
-    winnerCelebration.style.display =
-        "none";
+    winnerCelebration.style.display = "none";
 
-
-    winnerCelebration.classList.remove(
-        "active"
-    );
-
+    winnerCelebration.classList.remove("active");
 
     //========================================
     // STOP FIREWORKS
     //========================================
 
-    clearInterval(
-        fireworkInterval
-    );
+    clearInterval(fireworkInterval);
 
     fireworkInterval = null;
-
 
     //========================================
     // STOP ANIMATION
     //========================================
 
-    cancelAnimationFrame(
-        celebrationAnimation
-    );
-
+    cancelAnimationFrame(celebrationAnimation);
 
     //========================================
     // CLEAR PARTICLES
@@ -5752,89 +4780,41 @@ function stopWinnerCelebration() {
 
     confetti = [];
 
-
     //========================================
     // CLEAR CANVASES
     //========================================
 
-    fireworksCtx.clearRect(
-        0,
-        0,
-        fireworksCanvas.width,
-        fireworksCanvas.height
-    );
+    fireworksCtx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
 
+    confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+  }
 
-    confettiCtx.clearRect(
-        0,
-        0,
-        confettiCanvas.width,
-        confettiCanvas.height
-    );
+  //========================================
+  // CHECK CELEBRATION TIME
+  //========================================
 
-}
+  function checkGiveawayCelebration() {
+    const now = new Date();
 
-
-//========================================
-// CHECK CELEBRATION TIME
-//========================================
-
-function checkGiveawayCelebration() {
-
-    const now =
-        new Date();
-
-
-    if (
-        now >= CELEBRATION_START &&
-        now <= CELEBRATION_END
-    ) {
-
-        startWinnerCelebration();
-
+    if (now >= CELEBRATION_START && now <= CELEBRATION_END) {
+      startWinnerCelebration();
+    } else {
+      stopWinnerCelebration();
     }
-    else {
+  }
 
-        stopWinnerCelebration();
+  //========================================
+  // INITIAL CHECK
+  //========================================
 
-    }
+  checkGiveawayCelebration();
 
-}
+  //========================================
+  // CHECK EVERY SECOND
+  //========================================
 
-
-//========================================
-// INITIAL CHECK
-//========================================
-
-checkGiveawayCelebration();
-
-
-//========================================
-// CHECK EVERY SECOND
-//========================================
-
-setInterval(
-    checkGiveawayCelebration,
-    1000
-);
-
-
+  setInterval(checkGiveawayCelebration, 1000);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // ============================================================
 // LIVE ORDER STATUS SEARCH
@@ -5842,17 +4822,13 @@ setInterval(
 
 const LIVE_ORDER_STORAGE_KEY = "ecoDataLiveOrders";
 
-const OrderSearchInput =
-  document.getElementById("OrderSearchInput");
+const OrderSearchInput = document.getElementById("OrderSearchInput");
 
-const searchStatBtn =
-  document.getElementById("searchStatBtn");
+const searchStatBtn = document.getElementById("searchStatBtn");
 
-const liveOrderResult =
-  document.getElementById("liveOrderResult");
+const liveOrderResult = document.getElementById("liveOrderResult");
 
 const emptyDataState = document.getElementById("emptyDataState");
-
 
 // ============================================================
 // LOAD SAVED ORDERS
@@ -5860,16 +4836,13 @@ const emptyDataState = document.getElementById("emptyDataState");
 
 let liveOrders = loadCheckedLiveOrders();
 
-
 // ============================================================
 // LOCAL STORAGE
 // ============================================================
 
 function loadCheckedLiveOrders() {
   try {
-
-    const saved =
-      localStorage.getItem(LIVE_ORDER_STORAGE_KEY);
+    const saved = localStorage.getItem(LIVE_ORDER_STORAGE_KEY);
 
     if (!saved) {
       return [];
@@ -5877,124 +4850,72 @@ function loadCheckedLiveOrders() {
 
     const parsed = JSON.parse(saved);
 
-    return Array.isArray(parsed)
-      ? parsed
-      : [];
-
+    return Array.isArray(parsed) ? parsed : [];
   } catch (error) {
-
-    console.error(
-      "Failed to load live orders:",
-      error
-    );
+    console.error("Failed to load live orders:", error);
 
     return [];
   }
 }
 
-
 function saveLiveOrders() {
-
   try {
-
-    localStorage.setItem(
-      LIVE_ORDER_STORAGE_KEY,
-      JSON.stringify(liveOrders)
-    );
-
+    localStorage.setItem(LIVE_ORDER_STORAGE_KEY, JSON.stringify(liveOrders));
   } catch (error) {
-
-    console.error(
-      "Failed to save live orders:",
-      error
-    );
-
+    console.error("Failed to save live orders:", error);
   }
 }
-
 
 // ============================================================
 // SEARCH ORDER
 // ============================================================
 
 async function searchLiveOrder() {
-
-  const orderIdOrRef =
-    OrderSearchInput.value.trim();
-
+  const orderIdOrRef = OrderSearchInput.value.trim();
 
   if (!orderIdOrRef) {
-
-    showLiveOrderMessage(
-      "Enter an Order ID to search.",
-      "error"
-    );
+    showLiveOrderMessage("Enter an Order ID to search.", "error");
 
     return;
   }
-
 
   // Prevent duplicate searches while loading
   searchStatBtn.disabled = true;
 
   searchStatBtn.textContent = "Searching...";
 
-
-  showLiveOrderMessage(
-    "Checking live order status...",
-    "loading"
-  );
-
+  showLiveOrderMessage("Checking live order status...", "loading");
 
   try {
-
     // --------------------------------------------------------
     // CALL YOUR NEW ROUTER
     // --------------------------------------------------------
 
     const response = await fetch(
-      `/api/live-order-status/${encodeURIComponent(orderIdOrRef)}`
+      `/api/live-order-status/${encodeURIComponent(orderIdOrRef)}`,
     );
 
-
-    const returnedOrder =
-      await response.json();
-
+    const returnedOrder = await response.json();
 
     // --------------------------------------------------------
     // CHECK RESPONSE
     // --------------------------------------------------------
 
-    if (
-      !response.ok ||
-      !returnedOrder.success ||
-      !returnedOrder.order
-    ) {
-
-      throw new Error(
-        returnedOrder.message ||
-        "Order not found."
-      );
+    if (!response.ok || !returnedOrder.success || !returnedOrder.order) {
+      throw new Error(returnedOrder.message || "Order not found.");
     }
 
-
-    const order =
-      returnedOrder.order;
-
+    const order = returnedOrder.order;
 
     // --------------------------------------------------------
     // CHECK IF ORDER ALREADY EXISTS
     // --------------------------------------------------------
 
-    const existingIndex =
-      liveOrders.findIndex(
-        item =>
-          item.orderId === order.orderId
-      );
-
+    const existingIndex = liveOrders.findIndex(
+      (item) => item.orderId === order.orderId,
+    );
 
     if (existingIndex !== -1) {
-
       // ------------------------------------------------------
       // UPDATE EXISTING ORDER
       // ------------------------------------------------------
@@ -6002,57 +4923,37 @@ async function searchLiveOrder() {
       liveOrders[existingIndex] = {
         ...liveOrders[existingIndex],
 
-        recipient:
-          order.recipient ||
-          liveOrders[existingIndex].recipient,
+        recipient: order.recipient || liveOrders[existingIndex].recipient,
 
-        size:
-          order.size ??
-          liveOrders[existingIndex].size,
+        size: order.size ?? liveOrders[existingIndex].size,
 
-        status:
-          order.status ||
-          liveOrders[existingIndex].status,
+        status: order.status || liveOrders[existingIndex].status,
 
-        timestamp:
-          order.timestamp ||
-          liveOrders[existingIndex].timestamp
+        timestamp: order.timestamp || liveOrders[existingIndex].timestamp,
       };
-
     } else {
-
       // ------------------------------------------------------
       // CREATE NEW ORDER
       // ------------------------------------------------------
 
       liveOrders.push({
+        orderId: order.orderId,
 
-        orderId:
-          order.orderId,
+        recipient: order.recipient || "—",
 
-        recipient:
-          order.recipient || "—",
+        size: order.size ?? "—",
 
-        size:
-          order.size ?? "—",
+        status: order.status || "unknown",
 
-        status:
-          order.status || "unknown",
-
-        timestamp:
-          order.timestamp || null
-
+        timestamp: order.timestamp || null,
       });
-
     }
-
 
     // --------------------------------------------------------
     // SAVE TO LOCAL STORAGE
     // --------------------------------------------------------
 
     saveLiveOrders();
-
 
     // --------------------------------------------------------
     // RENDER TABLE
@@ -6063,53 +4964,35 @@ async function searchLiveOrder() {
     // play success sound
     playSuccessSound();
 
-
     // Clear search field
     OrderSearchInput.value = "";
-
-
   } catch (error) {
-
-    console.error(
-      "Live order search error:",
-      error
-    );
-
+    console.error("Live order search error:", error);
 
     showLiveOrderMessage(
-      error.message ||
-      "Unable to retrieve order status.",
-      "error"
+      error.message || "Unable to retrieve order status.",
+      "error",
     );
-
-
   } finally {
-
     searchStatBtn.disabled = false;
 
     searchStatBtn.textContent = "Search";
-
   }
-
 }
-
 
 // ============================================================
 // RENDER ALL SAVED ORDERS
 // ============================================================
 
 function renderLiveOrders() {
-
   // Clear current rows
   liveOrderResult.innerHTML = "";
-
 
   // ----------------------------------------------------------
   // NO ORDERS
   // ----------------------------------------------------------
 
   if (!liveOrders.length) {
-
     liveOrderResult.innerHTML = `
       <div class="sellerProductsEmpty">
         No live orders searched yet.
@@ -6119,23 +5002,16 @@ function renderLiveOrders() {
     return;
   }
 
-
   // ----------------------------------------------------------
   // CREATE ROW FOR EACH ORDER
   // ----------------------------------------------------------
 
-  [...liveOrders]
-  .reverse()
-  .forEach(order => {
-
-    const row =
-      document.createElement("div");
+  [...liveOrders].reverse().forEach((order) => {
+    const row = document.createElement("div");
 
     row.className = "live-row";
 
-    row.dataset.orderId =
-      order.orderId;
-
+    row.dataset.orderId = order.orderId;
 
     row.innerHTML = `
 
@@ -6159,9 +5035,7 @@ function renderLiveOrders() {
 
           <span class="live-status-dot"></span>
 
-          ${escapeLiveOrderHTML(
-            formatLiveStatus(order.status)
-          )}
+          ${escapeLiveOrderHTML(formatLiveStatus(order.status))}
 
         </span>
 
@@ -6173,161 +5047,103 @@ function renderLiveOrders() {
 
     `;
 
-
     liveOrderResult.appendChild(row);
-
   });
-
 }
-
 
 // ============================================================
 // POLL SWIFT FOR LIVE STATUS
 // ============================================================
 
 async function refreshLiveOrderStatuses() {
-
   if (!liveOrders.length) {
     return;
   }
-
 
   // ----------------------------------------------------------
   // CHECK EVERY SAVED ORDER
   // ----------------------------------------------------------
 
   for (const order of liveOrders) {
-
     try {
-
       const response = await fetch(
-        `/api/live-order-status/${encodeURIComponent(order.orderId)}`
+        `/api/live-order-status/${encodeURIComponent(order.orderId)}`,
       );
 
+      const returnedOrder = await response.json();
 
-      const returnedOrder =
-        await response.json();
-
-
-      if (
-        !response.ok ||
-        !returnedOrder.success ||
-        !returnedOrder.order
-      ) {
-
+      if (!response.ok || !returnedOrder.success || !returnedOrder.order) {
         continue;
       }
 
-
-      const freshOrder =
-        returnedOrder.order;
-
+      const freshOrder = returnedOrder.order;
 
       // ------------------------------------------------------
       // FIND STORED ORDER
       // ------------------------------------------------------
 
-      const index =
-        liveOrders.findIndex(
-          item =>
-            item.orderId === order.orderId
-        );
-
+      const index = liveOrders.findIndex(
+        (item) => item.orderId === order.orderId,
+      );
 
       if (index === -1) {
         continue;
       }
 
-
       // ------------------------------------------------------
       // UPDATE LIVE STATUS
       // ------------------------------------------------------
 
-      liveOrders[index].status =
-        freshOrder.status ||
-        liveOrders[index].status;
-
+      liveOrders[index].status = freshOrder.status || liveOrders[index].status;
 
       // ------------------------------------------------------
       // Keep latest timestamp if Swift provides it
       // ------------------------------------------------------
 
       if (freshOrder.timestamp) {
-
-        liveOrders[index].timestamp =
-          freshOrder.timestamp;
-
+        liveOrders[index].timestamp = freshOrder.timestamp;
       }
-
 
       // Recipient can also be refreshed
       if (freshOrder.recipient) {
-
-        liveOrders[index].recipient =
-          freshOrder.recipient;
-
+        liveOrders[index].recipient = freshOrder.recipient;
       }
-
 
       // Size can also be refreshed
       if (freshOrder.size !== undefined) {
-
-        liveOrders[index].size =
-          freshOrder.size;
-
+        liveOrders[index].size = freshOrder.size;
       }
-
 
       // ------------------------------------------------------
       // UPDATE ONLY THE ROW
       // ------------------------------------------------------
 
-      updateLiveOrderRow(
-        liveOrders[index]
-      );
-
-
+      updateLiveOrderRow(liveOrders[index]);
     } catch (error) {
-
-      console.error(
-        `Failed to refresh ${order.orderId}:`,
-        error
-      );
-
+      console.error(`Failed to refresh ${order.orderId}:`, error);
     }
-
   }
-
 
   // Save latest statuses
   saveLiveOrders();
-
 }
-
 
 // ============================================================
 // UPDATE ONE ROW WITHOUT REBUILDING THE TABLE
 // ============================================================
 
 function updateLiveOrderRow(order) {
-
-  const row =
-    liveOrderResult.querySelector(
-      `.live-row[data-order-id="${CSS.escape(order.orderId)}"]`
-    );
-
+  const row = liveOrderResult.querySelector(
+    `.live-row[data-order-id="${CSS.escape(order.orderId)}"]`,
+  );
 
   if (!row) {
     return;
   }
 
-
-  const statusCell =
-    row.querySelector(".status-cell");
-
+  const statusCell = row.querySelector(".status-cell");
 
   if (statusCell) {
-
     statusCell.innerHTML = `
 
       <span
@@ -6336,66 +5152,43 @@ function updateLiveOrderRow(order) {
 
         <span class="live-status-dot"></span>
 
-        ${escapeLiveOrderHTML(
-          formatLiveStatus(order.status)
-        )}
+        ${escapeLiveOrderHTML(formatLiveStatus(order.status))}
 
       </span>
 
     `;
-
   }
-
 
   // Update recipient if changed
-  const recipientCell =
-    row.querySelector(".recipient-cell");
+  const recipientCell = row.querySelector(".recipient-cell");
 
   if (recipientCell) {
-
-    recipientCell.textContent =
-      order.recipient || "—";
-
+    recipientCell.textContent = order.recipient || "—";
   }
-
 
   // Update size if changed
-  const sizeCell =
-    row.querySelector(".size-cell");
+  const sizeCell = row.querySelector(".size-cell");
 
   if (sizeCell) {
-
-    sizeCell.textContent =
-      order.size ?? "—";
-
+    sizeCell.textContent = order.size ?? "—";
   }
-
 
   // Update timestamp
-  const dateCell =
-    row.querySelector(".date-cell");
+  const dateCell = row.querySelector(".date-cell");
 
   if (dateCell) {
-
-    dateCell.textContent =
-      formatLiveOrderDate(order.timestamp);
-
+    dateCell.textContent = formatLiveOrderDate(order.timestamp);
   }
-
 }
-
 
 // ============================================================
 // STATUS CLASS
 // ============================================================
 
 function getLiveStatusClass(status) {
-
-  const normalized =
-    String(status || "")
-      .toLowerCase()
-      .trim();
-
+  const normalized = String(status || "")
+    .toLowerCase()
+    .trim();
 
   if (
     normalized === "delivered" ||
@@ -6403,121 +5196,84 @@ function getLiveStatusClass(status) {
     normalized === "success" ||
     normalized === "successful"
   ) {
-
     return "status-delivered";
-
   }
-
 
   if (
     normalized === "pending" ||
     normalized === "processing" ||
     normalized === "in-progress"
   ) {
-
     return "status-pending";
-
   }
-
 
   if (
     normalized === "failed" ||
     normalized === "cancelled" ||
     normalized === "canceled"
   ) {
-
     return "status-failed";
-
   }
 
-
   return "status-unknown";
-
 }
-
 
 // ============================================================
 // FORMAT STATUS
 // ============================================================
 
 function formatLiveStatus(status) {
-
   if (!status) {
     return "Unknown";
   }
 
+  const value = String(status).toLowerCase().trim();
 
-  const value =
-    String(status)
-      .toLowerCase()
-      .trim();
-
-
-  return value.charAt(0).toUpperCase() +
-         value.slice(1);
-
+  return value.charAt(0).toUpperCase() + value.slice(1);
 }
-
 
 // ============================================================
 // FORMAT DATE
 // ============================================================
 
 function formatLiveOrderDate(timestamp) {
-
   if (!timestamp) {
     return "—";
   }
 
-
-  const date =
-    new Date(timestamp);
-
+  const date = new Date(timestamp);
 
   if (Number.isNaN(date.getTime())) {
     return "—";
   }
 
-
-  return date.toLocaleString(
-    undefined,
-    {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit"
-    }
-  );
-
+  return date.toLocaleString(undefined, {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 }
-
 
 // ============================================================
 // ESCAPE HTML
 // ============================================================
 
 function escapeLiveOrderHTML(value) {
-
   return String(value ?? "")
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
-
 }
-
 
 // ============================================================
 // MESSAGE
 // ============================================================
 
-function showLiveOrderMessage(
-  message,
-  type = "error"
-) {
-
+function showLiveOrderMessage(message, type = "error") {
   liveOrderResult.innerHTML = `
 
     <div class="liveOrderMessage ${type}">
@@ -6525,54 +5281,35 @@ function showLiveOrderMessage(
     </div>
 
   `;
-
 }
-
 
 // ============================================================
 // SEARCH BUTTON
 // ============================================================
 
 if (searchStatBtn) {
-
-  searchStatBtn.addEventListener(
-    "click",
-    searchLiveOrder
-  );
-
+  searchStatBtn.addEventListener("click", searchLiveOrder);
 }
-
 
 // ============================================================
 // ENTER KEY SEARCH
 // ============================================================
 
 if (OrderSearchInput) {
+  OrderSearchInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
 
-  OrderSearchInput.addEventListener(
-    "keydown",
-    event => {
-
-      if (event.key === "Enter") {
-
-        event.preventDefault();
-
-        searchLiveOrder();
-
-      }
-
+      searchLiveOrder();
     }
-  );
-
+  });
 }
-
 
 // ============================================================
 // INITIAL TABLE LOAD
 // ============================================================
 
 renderLiveOrders();
-
 
 // ============================================================
 // LIVE STATUS POLLING — EVERY 30 SECONDS
@@ -6581,24 +5318,21 @@ renderLiveOrders();
 // ON IS RUNNING
 // ============================================================
 async function startLiveOrderVendorPolling() {
-  while(true){
+  while (true) {
     try {
       await refreshLiveOrderStatuses();
-
-    } catch(error){
-      console.log("Live order polling error:", error
-      );
+    } catch (error) {
+      console.log("Live order polling error:", error);
     }
 
     // wait 30 seconds AFTER the current polling cycle finishes
-    await new Promise(resolve => {
+    await new Promise((resolve) => {
       setTimeout(resolve, 40000);
-    }
-  );
+    });
   }
 }
 
-document.addEventListener("DOMContentLoaded",()=> {
+document.addEventListener("DOMContentLoaded", () => {
   // start polling
   startLiveOrderVendorPolling();
-})
+});
