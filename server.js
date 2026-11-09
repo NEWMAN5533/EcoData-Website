@@ -17,7 +17,7 @@ import adminRoute from "./routes/adminOrderUpdate.js";
 import syncOrderRoute from "./routes/syncOrderStatus.js";
 import validateRecipientRoute from "./routes/validateRecipient.js";
 import restrictionsRoute from "./routes/restrictions.js";
-import { findSwiftDataPackage } from "./services/swiftDataCatalog.js";
+import { getSwiftDataCatalog } from "./services/swiftDataCatalog.js";
 import exclusiveAgentRoute from "./routes/exclusivePage.js";
 import afaRegisterRouter from "./routes/afaRegisterRoute.js";
 import afaStatusRouter from "./routes/afaStatusRouter.js";
