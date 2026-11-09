@@ -27,11 +27,11 @@ syncOrderRoute.get("/sync-order/:orderId", async (req, res) => {
     // ======================================
     const base =
       (process.env.SWIFT_BASE_URL ||
-      "https://swiftdata-link.com")
+      "https://api.swiftdata-link.com/v2")
       .replace(/\/$/, "");
 
     const swiftUrl =
-      `${base}/order/status/${encodeURIComponent(orderId)}`;
+      `${base}/orders/status/${encodeURIComponent(orderId)}`;
 
     const response = await axios.get(swiftUrl, {
 
