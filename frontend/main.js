@@ -2460,6 +2460,9 @@ function renderLiveOrderRow(order) {
     return;
   }
 
+  const emptyBox = document.getElementById("liveOrderEmpty");
+  if (emptyBox) emptyBox.style.display = "none";
+
   const recipient =
     order.recipient ||
     order.phoneNumber ||
@@ -2935,9 +2938,17 @@ function stopStatusPolling() {
 /**
  * Checks whether an order has reached a terminal status.
  */
+// checks if status is terminal
 function isTerminalStatus(status) {
-  const s = String(status || "").trim().toLowerCase();
-  return FINAL_STATUSES.has(DM_STATUS_MAP[s] || s) || s === "resolved";
+  const s = (status || "").toLowerCase();
+  return [
+    "delivered",
+    "completed",
+    "success",
+    "failed",
+    "cancelled",
+    "refunded",
+    "resolved"].includes(s);
 }
 
 
