@@ -2935,74 +2935,42 @@ function stopStatusPolling() {
 }
 
 
-
-
-
-
-/**
- * Checks whether an order has reached a terminal status.
- */
+// checks if status is terminal
 function isTerminalStatus(status) {
-  const s = String(status || "").trim().toLowerCase();
-  return FINAL_STATUSES.has(DM_STATUS_MAP[s] || s) || s === "resolved";
+  const s = (status || "").toLowerCase();
+  return [
+    "delivered",
+    "completed",
+    "success",
+    "failed",
+    "cancelled",
+    "refunded",
+    "resolved"].includes(s);
 }
 
-
-async function checkOrderStatusesOnce(orderIdsOrRefs) {
-  const empty = { orders: [], groups: [], missing: [] };
-  if (!Array.isArray(orderIdsOrRefs)) return empty;
-
-  const API_BASE = window.location.hostname === "localhost"
-    ? "http://localhost:3000" : "https://ecodata-app.onrender.com";
-
-  const identifiers = [...new Set(
-    orderIdsOrRefs.filter(id => typeof id === "string" && id.trim()).map(id => id.trim())
-  )];
-  if (!identifiers.length) return empty;
-
-  const all = { orders: [], groups: [], missing: [] };
-
-  for (let i = 0; i < identifiers.length; i += 200) {
-    const ctrl = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), 20000);
-
-    try {
-      const res = await fetch(`${API_BASE}/api/v2/orders/status`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ identifiers: identifiers.slice(i, i + 200) }),
-        cache: "no-store",
-        signal: ctrl.signal
-      });
-
-      if (!res.ok) { console.warn("Bulk status returned", res.status); continue; }
-
-      const data = await res.json();
-      if (!data.success) { console.warn("Bulk status failed:", data.message); continue; }
-
-      all.orders.push(...(data.orders || []));
-      all.groups.push(...(data.groups || []));
-      all.missing.push(...(data.missing || []));
-    } catch (err) {
-      console.error("Bulk status error:", err.name === "AbortError" ? "timeout" : err.message);
-    } finally {
-      clearTimeout(timer);
-    }
-  }
-  return all;
-}
-
-function swiftRefs(order) {
-  return [order?.publicId, order?.clientReference, order?.reference, order?.orderId, order?.id]
-    .filter(v => v != null).map(v => String(v).trim().toLowerCase());
-}
-
+// ---------- POLLING FUNCTION ----------
 async function checkOrderStatusOnce(orderIdOrRef) {
-  const result = await checkOrderStatusesOnce([orderIdOrRef]);
-  const wanted = String(orderIdOrRef).trim().toLowerCase();
-  // No fallback to orders[0]: an unmatched order must stay unmatched
-  return result.orders.find(o => swiftRefs(o).includes(wanted)) || null;
+  try {
+    // Talk to backend (not directly )
+    const res = await fetch(`${API_BASE}/api/v2/orders/status/${encodeURIComponent(orderIdOrRef)}`,{
+      method: "GET",
+      headers: { "Content-Type": "application/json" }
+    });
+
+
+    if (!res.ok) {
+      console.warn("Status endpoint returned non-200", res.status);
+      return null;
+    }
+    const data = await res.json();
+    if (data && data.success && data.order) return data.order;
+    return null;
+  } catch (err) {
+    console.error("Error checking order status:", err);
+    return null;
 }
+}
+
 
 // Called AFTER a successful order is confirmed
 // ---------- UPDATE HOME TOTALS ----------
