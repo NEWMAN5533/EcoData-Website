@@ -68,14 +68,15 @@ let lastPurchasedBundle = null; // used after payment (normal + grid)
 let lastValidation = null;
 
 // default selectedPackage
-let selectedPackageName = "mtn_data";
+let selectedPackageName = "mtn_data_express_delivery";
 
 const PACKAGE_MAP = {
   normal: "mtn_data_normal_delivery",
-  express: "mtn_data",
-  numbers: "mtn_data",
-  mashup: "special_mashup_bundle_packages"
+  express: "mtn_data_express_delivery",
+  numbers: "mtn_verified_numbers",
+  mashup: "special_mashup_bundle_packages",
 };
+
 
 const STORAGE_KEY = "selected_mtn_package";
 
