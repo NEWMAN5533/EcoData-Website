@@ -489,22 +489,40 @@ document.addEventListener("DOMContentLoaded", () => {
         return true;
       }
 
-      const validation = await validateRecipient(
-        "233" + phone.substring(1),
-        bundle.packageName,
-        bundle.network,
+   // =========================================
+      // SWIFTDATA V2 RECIPIENT VERIFICATION
+      // =========================================
+
+      const swiftResponse = await fetch(
+        "/api/validate-recipient",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            phone: "233" + phone.substring(1),
+            offerSlug: bundle.packageName,
+            network: bundle.network,
+          }),
+        }
       );
 
-      console.log("SwiftData v2 precheck result:", validation);
+      const validation = await swiftResponse.json();
 
-      // Require explicit eligibility approval.
-      if (validation?.eligible !== true) {
+      console.log("SwiftData v2 validation:", {
+        httpStatus: swiftResponse.status,
+        validation,
+      });
+
+      if (!swiftResponse.ok || validation?.eligible !== true) {
         showSnackBar(
           validation?.message ||
             validation?.error?.message ||
-            "We could not confirm this recipient. Please try again.",
+            "Recipient validation failed.",
           "error",
-          4000,
+          4000
         );
 
         return false;
@@ -519,6 +537,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       return true;
 
+      
     } catch (error) {
       console.error("Recipient precheck error:", error);
 
