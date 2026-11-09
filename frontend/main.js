@@ -1133,7 +1133,7 @@ function unActivateTrackers() {
 
   const secondTracker = (document.getElementById(
     "deliveryTracker2",
-  ).style.display = "flex");
+  ).style.display = "none");
 }
 
 //=================================
@@ -2921,102 +2921,66 @@ function stopStatusPolling() {
  * Checks whether an order has reached a terminal status.
  */
 function isTerminalStatus(status) {
-  const s = (status || "").toLowerCase();
-
-  return [
-    "delivered",
-    "completed",
-    "success",
-    "failed",
-    "cancelled",
-    "refunded",
-    "resolved",
-  ].includes(s);
+  const s = String(status || "").trim().toLowerCase();
+  return FINAL_STATUSES.has(DM_STATUS_MAP[s] || s) || s === "resolved";
 }
 
 
-// ---------- SINGLE LIVE STATUS CHECK ----------
-async function checkOrderStatusOnce(orderIdOrRef) {
-  try {
-    if (
-      typeof orderIdOrRef !== "string" ||
-      !orderIdOrRef.trim()
-    ) {
-      return null;
-    }
-
-    const identifier = encodeURIComponent(orderIdOrRef.trim());
-
-    const res = await fetch(
-      `${API_BASE}/api/live-order-status/${identifier}`,
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-        },
-      },
-    );
-
-    if (!res.ok) {
-      console.warn(
-        "Live order status request failed:",
-        res.status,
-        orderIdOrRef,
-      );
-      return null;
-    }
-
-    const data = await res.json();
-
-    if (!data.success || !data.order) {
-      return null;
-    }
-
-    return data.order;
-  } catch (err) {
-    console.error("Error checking live order status:", err);
-    return null;
-  }
-}
-
-
-// ---------- BULK STATUS CHECK (USING OUR BACKEND) ----------
 async function checkOrderStatusesOnce(orderIdsOrRefs) {
-  if (
-    !Array.isArray(orderIdsOrRefs) ||
-    orderIdsOrRefs.length === 0
-  ) {
-    return { orders: [], groups: [], missing: [] };
+  const empty = { orders: [], groups: [], missing: [] };
+  if (!Array.isArray(orderIdsOrRefs)) return empty;
+
+  const API_BASE = window.location.hostname === "localhost"
+    ? "http://localhost:3000" : "https://ecodata-app.onrender.com";
+
+  const identifiers = [...new Set(
+    orderIdsOrRefs.filter(id => typeof id === "string" && id.trim()).map(id => id.trim())
+  )];
+  if (!identifiers.length) return empty;
+
+  const all = { orders: [], groups: [], missing: [] };
+
+  for (let i = 0; i < identifiers.length; i += 200) {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 20000);
+
+    try {
+      const res = await fetch(`${API_BASE}/api/v2/orders/status`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ identifiers: identifiers.slice(i, i + 200) }),
+        cache: "no-store",
+        signal: ctrl.signal
+      });
+
+      if (!res.ok) { console.warn("Bulk status returned", res.status); continue; }
+
+      const data = await res.json();
+      if (!data.success) { console.warn("Bulk status failed:", data.message); continue; }
+
+      all.orders.push(...(data.orders || []));
+      all.groups.push(...(data.groups || []));
+      all.missing.push(...(data.missing || []));
+    } catch (err) {
+      console.error("Bulk status error:", err.name === "AbortError" ? "timeout" : err.message);
+    } finally {
+      clearTimeout(timer);
+    }
   }
-
-  const identifiers = [
-    ...new Set(
-      orderIdsOrRefs
-        .filter((id) => typeof id === "string" && id.trim())
-        .map((id) => id.trim()),
-    ),
-  ];
-
-  const results = await Promise.all(
-    identifiers.map(async (identifier) => {
-      const order = await checkOrderStatusOnce(identifier);
-      return { identifier, order };
-    }),
-  );
-
-  return {
-    orders: results
-      .filter((result) => result.order)
-      .map((result) => result.order),
-
-    groups: [],
-
-    missing: results
-      .filter((result) => !result.order)
-      .map((result) => result.identifier),
-  };
+  return all;
 }
-// ---------- UPDATE HOME TOTALS ----------
+
+function swiftRefs(order) {
+  return [order?.publicId, order?.clientReference, order?.reference, order?.orderId, order?.id]
+    .filter(v => v != null).map(v => String(v).trim().toLowerCase());
+}
+
+async function checkOrderStatusOnce(orderIdOrRef) {
+  const result = await checkOrderStatusesOnce([orderIdOrRef]);
+  const wanted = String(orderIdOrRef).trim().toLowerCase();
+  // No fallback to orders[0]: an unmatched order must stay unmatched
+  return result.orders.find(o => swiftRefs(o).includes(wanted)) || null;
+}
 
 // Called AFTER a successful order is confirmed
 // ---------- UPDATE HOME TOTALS ----------
@@ -3445,131 +3409,135 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 // lIVE ORDER ENDS
 
+
+
+
+
+
+
+function applySwiftStatus(localOrderId, swiftOrder) {
+  const raw = String(swiftOrder?.status || swiftOrder?.orderStatus || "")
+    .trim().toLowerCase();
+  if (!raw) return null;
+
+  const next = DM_STATUS_MAP[raw] || "processing";   // unknown counts as active
+
+  const orders = readOrders();                        // fresh read, right before writing
+  const index = orders.findIndex(o =>
+    String(o.orderId) === String(localOrderId) &&
+    String(o.provider || "swiftdata").toLowerCase() !== "datamart"
+  );
+  if (index === -1) return null;
+
+  const current = orders[index];
+  const curRaw = String(current.status || "").trim().toLowerCase();
+  const cur = DM_STATUS_MAP[curRaw] || curRaw;
+
+  // never turn a finished order back into an active one
+  if (FINAL_STATUSES.has(cur) && !FINAL_STATUSES.has(next)) return current;
+  if (cur === next && current.providerStatus === raw) return current;
+
+  // only status fields change, nothing else is overwritten
+  const updated = {
+    ...current,
+    provider: String(current.provider || "swiftdata").toLowerCase(),
+    status: next,
+    providerStatus: raw,
+    updatedAt: Date.now()
+  };
+  orders[index] = updated;
+  localStorage.setItem(LIVE_ORDERS_KEY, JSON.stringify(orders));
+
+  const safe = (fn, ...a) => {
+    try { if (typeof fn === "function") fn(...a); }
+    catch (e) { console.error("UI update failed:", fn?.name, e); }
+  };
+  safe(renderLiveOrderRow, updated);
+  safe(updatePendingCard);
+  safe(renderHomepageTotals);
+  safe(loadActiveBadge);
+
+  console.log("Swift status saved:", localOrderId, cur, "->", next);
+  return updated;
+}
+
+
+
+
+
+
+const SWIFT_POLL_MAX_AGE_MS = 72 * 3600 * 1000;
+
 function startAutoPolling(orderIdOrRef) {
-  // Stop any existing polling first.
   stopStatusPolling();
 
   const statusResult = document.getElementById("statusResult");
   if (statusResult) statusResult.innerHTML = "";
 
-  let pollingInProgress = false;
+  let busy = false;
 
-  // Initial immediate check for the selected order.
-  (async () => {
-    if (!orderIdOrRef) return;
-
-    const stored = getStoredOrders().find(
-      (o) => o.orderId === orderIdOrRef,
-    );
-
-    // Keep DataMart polling behavior unchanged.
-    if (String(stored?.provider || "").toLowerCase() === "datamart") {
-      return;
-    }
-
-    // Do not request an order that is already terminal.
-    if (stored && isTerminalStatus(stored.status)) return;
-
-    const order = await checkOrderStatusOnce(orderIdOrRef);
-    if (!order) return;
-
-    createOrUpdateStatusCard(order);
-    updateLiveOrderCard(order);
-    updateStatusBadge(order.status || "pending");
-    saveLiveOrder(order);
-  })();
-
-  // Bulk-poll all eligible SwiftData orders.
-  _statusPollTimer = setInterval(async () => {
-    // Prevent overlapping polling cycles.
-    if (pollingInProgress) return;
-    pollingInProgress = true;
+  async function tick() {
+    if (busy || document.hidden) return;
+    busy = true;
 
     try {
-      const orders = getStoredOrders();
+      const cutoff = Date.now() - SWIFT_POLL_MAX_AGE_MS;
 
-      const eligibleOrders = orders.filter((order) => {
-        if (!order.orderId) return false;
+      const eligible = getStoredOrders().filter(o =>
+        o.orderId &&
+        String(o.provider || "swiftdata").toLowerCase() !== "datamart" &&
+        !isTerminalStatus(o.status) &&
+        (new Date(o.createdAt || o.timestamp).getTime() || Date.now()) >= cutoff
+      );
+      if (!eligible.length) return;
 
-        // Never change DataMart handling.
-        if (
-          String(order.provider || "").toLowerCase() === "datamart"
-        ) {
-          return false;
-        }
+      for (let i = 0; i < eligible.length; i += 200) {
+        const batch = eligible.slice(i, i + 200);
+        const result = await checkOrderStatusesOnce(batch.map(o => o.orderId));
 
-        // Stop polling delivered, completed, failed, etc.
-        if (isTerminalStatus(order.status)) return false;
+        const byRef = new Map();
+        for (const item of result.orders)
+          for (const key of swiftRefs(item)) byRef.set(key, item);
 
-        return true;
-      });
+        for (const stored of batch) {
+          const latest = byRef.get(String(stored.orderId).trim().toLowerCase());
+          if (!latest) continue;                        // unmatched is never a delivery
 
-      if (eligibleOrders.length === 0) return;
+          const updated = applySwiftStatus(stored.orderId, latest);
+          if (!updated) continue;
 
-      // Request no more than 200 identifiers per batch.
-      for (let i = 0; i < eligibleOrders.length; i += 200) {
-        const batch = eligibleOrders.slice(i, i + 200);
-        const identifiers = batch.map((order) => order.orderId);
-
-        const result = await checkOrderStatusesOnce(identifiers);
-
-        // This loop handles individual orders, not group summaries.
-        for (const storedOrder of batch) {
-      
-          const latest = result.orders.find((order) => {
-  const references = [
-    order.publicId,
-    order.clientReference,
-    order.reference,
-    order.orderId,
-    order.id,
-  ];
-
-  const storedReferences = [
-    storedOrder.orderId,
-    storedOrder.reference,
-    storedOrder.clientReference,
-    storedOrder.publicId,
-  ];
-
-  return references.some(
-    (ref) =>
-      ref != null &&
-      storedReferences.some(
-        (storedRef) =>
-          storedRef != null &&
-          String(ref) === String(storedRef),
-      ),
-  );
-});
-
-          // Missing or unmatched results are not successful deliveries.
-          if (!latest) continue;
-
-          // Preserve the local ID and provider so existing UI/storage
-          // continues to identify this order correctly.
-          const updatedOrder = {
-            ...latest,
-            orderId: storedOrder.orderId,
-            provider: storedOrder.provider,
-          };
-
-          saveLiveOrder(updatedOrder);
-          renderLiveOrderRow(updatedOrder);
-
-          if (orderIdOrRef === storedOrder.orderId) {
-            createOrUpdateStatusCard(updatedOrder);
-            updateStatusBadge(updatedOrder.status || "pending");
+          if (orderIdOrRef === stored.orderId) {
+            try {
+              createOrUpdateStatusCard(updated);
+              updateStatusBadge(updated.status || "pending");
+            } catch (e) { console.error(e); }
           }
         }
       }
     } catch (error) {
       console.error("Bulk SwiftData polling error:", error);
     } finally {
-      pollingInProgress = false;
+      busy = false;
     }
-  }, STATUS_POLL_INTERVAL);
+  }
+
+  tick();                                               // first check runs immediately
+  _statusPollTimer = setInterval(tick, STATUS_POLL_INTERVAL);
 }
+
+// catch up the moment the tab comes back
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden && _statusPollTimer) startAutoPolling();
+});
+
+
+
+
+
+
+
+
+
 // ---------- AFTER PURCHASE: show and poll ----------
 // Load live orders on page refresh
 
