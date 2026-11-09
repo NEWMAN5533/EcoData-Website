@@ -706,6 +706,163 @@ app.get("/api/buy-data", async (req, res) => {
 
 
 
+/**
+ * SwiftData bulk status helper
+ * SWIFT_BASE_URL should be:
+ * https://api.swiftdata-link.com/v2
+ */
+async function fetchSwiftDataBulkStatus(identifiers) {
+  const base = process.env.SWIFT_BASE_URL?.replace(/\/+$/, "");
+  const apiKey = process.env.SWIFT_API_KEY;
+
+  if (!base || !apiKey) {
+    throw new Error("SwiftData base URL or API key is not configured.");
+  }
+
+  const response = await axios.post(
+    `${base}/orders/status`,
+    { identifiers },
+    {
+      headers: {
+        "X-API-Key": apiKey,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      timeout: 15000,
+    }
+  );
+
+  return response.data;
+}
+
+
+// New bulk status route
+app.post("/api/v2/orders/status", async (req, res) => {
+  try {
+    const { identifiers } = req.body || {};
+
+    if (
+      !Array.isArray(identifiers) ||
+      identifiers.length === 0 ||
+      identifiers.some(
+        (id) => typeof id !== "string" || !id.trim()
+      )
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "A non-empty identifiers array is required.",
+      });
+    }
+
+    if (identifiers.length > 200) {
+      return res.status(400).json({
+        success: false,
+        message: "A maximum of 200 identifiers can be checked per request.",
+      });
+    }
+
+    // Remove duplicate references and trim whitespace.
+    const uniqueIdentifiers = [
+      ...new Set(identifiers.map((id) => id.trim())),
+    ];
+
+    const data = await fetchSwiftDataBulkStatus(uniqueIdentifiers);
+
+    if (data?.success === false) {
+      return res.status(502).json({
+        success: false,
+        message: data.message || "SwiftData status lookup failed.",
+        details: data,
+      });
+    }
+
+    // Preserve the provider's separate orders, groups and missing buckets.
+    const result = data?.data ?? data;
+
+    return res.json({
+      success: true,
+      orders: result?.orders ?? [],
+      groups: result?.groups ?? [],
+      missing: result?.missing ?? [],
+    });
+  } catch (error) {
+    console.error(
+      "SwiftData bulk status error:",
+      error.response?.data || error.message
+    );
+
+    return res.status(error.response?.status || 502).json({
+      success: false,
+      message: "Error fetching SwiftData order statuses.",
+      error: error.response?.data || error.message,
+    });
+  }
+});
+
+
+// Backward-compatible single-order route.
+// Existing frontend calls can continue using this URL.
+app.get("/api/v2/orders/status/:orderIdOrRef", async (req, res) => {
+  const orderIdOrRef = req.params.orderIdOrRef?.trim();
+
+  if (!orderIdOrRef) {
+    return res.status(400).json({
+      success: false,
+      message: "Missing order ID or reference.",
+    });
+  }
+
+  try {
+    const data = await fetchSwiftDataBulkStatus([orderIdOrRef]);
+    const result = data?.data ?? data;
+
+    if (data?.success === false) {
+      return res.status(502).json({
+        success: false,
+        message: data.message || "Failed to fetch order status.",
+        details: data,
+      });
+    }
+
+    const orders = result?.orders ?? [];
+    const groups = result?.groups ?? [];
+    const missing = result?.missing ?? [];
+
+    // Preserve the old { success, order } response shape.
+    if (orders.length > 0) {
+      return res.json({
+        success: true,
+        order: orders[0],
+      });
+    }
+
+    // The identifier may refer to a bulk-purchase group.
+    if (groups.length > 0) {
+      return res.json({
+        success: true,
+        group: groups[0],
+      });
+    }
+
+    return res.status(404).json({
+      success: false,
+      message: "SwiftData did not find this order or group.",
+      missing,
+    });
+  } catch (error) {
+    console.error(
+      "SwiftData single status error:",
+      error.response?.data || error.message
+    );
+
+    return res.status(error.response?.status || 502).json({
+      success: false,
+      message: "Error fetching SwiftData order status.",
+      error: error.response?.data || error.message,
+    });
+  }
+});
+
 
 
 /* =========================================
@@ -755,46 +912,6 @@ app.post("/api/datamart/buy-data", async (req, res) => {
 });
 
 
-
-
-
-// Status route
-app.get("/api/v2/order/status/:orderIdOrRef", async (req, res) => {
-  const { orderIdOrRef } = req.params;
-
-  if (!orderIdOrRef) {
-    return res.status(400).json({ success: false, message: "Missing order ID or reference" });
-  }
-
-  try {
-    const base = (process.env.SWIFT_BASE_URL ).replace(/\/$/, "");
-    const swiftUrl = `${base}/orders/status/${encodeURIComponent(orderIdOrRef)}`;
-
-    const response = await axios.get(swiftUrl, {
-      headers: {
-        "x-api-key": process.env.SWIFT_API_KEY,
-        "Content-Type": "application/json",
-      },
-      timeout: 10000,
-    });
-
-    if (response.data?.success) {
-      return res.json({ success: true, order: response.data.order });
-    } else {
-      return res.status(400).json({
-        success: false,
-        message: response.data?.message || "Failed to fetch order status",
-        details: response.data,
-      });
-    }
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: "Error fetching order status",
-      error: error.response?.data || error.message,
-    });
-  }
-});
 
 
 
