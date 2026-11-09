@@ -1088,7 +1088,7 @@ function playSuccessSound() {
 // CHECK IF THE RECIPIENT HAS ACTIVE ORDER (ALREADY)
 // =================================================
 
-const activeStatus = ["pending", "queued", "processing"];
+const activeStatus = ["pending", "queued"];
 
 function normalizeNumber(num = "") {
   return String(num).replace(/\D/g, "").slice(-9);
