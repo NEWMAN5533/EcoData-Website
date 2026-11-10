@@ -3569,7 +3569,53 @@ document.addEventListener("visibilitychange", () => {
 
 
 
+const flat = v => {
+  if (v == null) return "";
+  if (typeof v === "object") return String(v.name ?? v.label ?? v.value ?? v.code ?? "");
+  return String(v);
+};
 
+const toMs = v => {
+  if (typeof v === "number") return v < 1e12 ? v * 1000 : v;
+  const t = Date.parse(v);
+  return Number.isFinite(t) ? t : 0;
+};
+
+function parseGB(v) {
+  if (typeof v === "number") return v;
+  const m = String(v ?? "").match(/[\d.]+/);
+  if (!m) return 0;
+  const n = Number(m[0]);
+  return /mb/i.test(String(v)) ? n / 1000 : n;
+}
+
+function repairStoredOrders() {
+  let list;
+  try { list = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY) || "[]"); } catch { return; }
+  if (!Array.isArray(list)) return;
+
+  const fixed = list
+    .filter(o => o && typeof o === "object")
+    .map(o => {
+      const s = flat(o.status).trim().toLowerCase();
+      return {
+        ...o,
+        orderId: String(o.orderId || o.publicId || o.clientReference || o.reference || o.id || "").trim(),
+        recipient: flat(o.recipient || o.beneficiaryMsisdn || o.msisdn) || "-",
+        network: flat(o.network) || undefined,
+        volume: parseGB(o.volume ?? o.sizeLabel ?? o.size),
+        status: (typeof DM_STATUS_MAP === "object" && DM_STATUS_MAP[s]) || s || "processing",
+        createdAt: toMs(o.createdAt) || toMs(o.timestamp) || Date.now(),
+        timestamp: toMs(o.timestamp) || toMs(o.createdAt) || Date.now(),
+        updatedAt: toMs(o.updatedAt) || Date.now()
+      };
+    })
+    .filter(o => o.orderId);
+
+  if (JSON.stringify(fixed) !== JSON.stringify(list)) {
+    localStorage.setItem(LIVE_ORDERS_KEY, JSON.stringify(fixed));
+  }
+}
 
 
 
