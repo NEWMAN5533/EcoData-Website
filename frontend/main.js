@@ -3581,22 +3581,35 @@ function loadLiveOrders() {
   const tableBody = document.getElementById("liveOrderRows");
   if (!tableBody) return;
 
-  const orders = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY)) || [];
+  try { repairStoredOrders(); } catch (e) { console.error("repair failed:", e); }
 
-  const emptyOrders = document.getElementById("liveOrderEmpty");
+  let orders = [];
+  try {
+    const parsed = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY) || "[]");
+    orders = Array.isArray(parsed) ? parsed : [];
+  } catch (e) { console.error(e); }
 
-  if (!orders.length) {
-    emptyOrders.style.display = "flex";
-  } else {
-    emptyOrders.style.display = "none";
-  }
+  const emptyBox = document.getElementById("liveOrderEmpty");
+  if (emptyBox) emptyBox.style.display = orders.length ? "none" : "flex";
 
   orders
-    .sort((a, b) => {
-      return (b.timestamp || b.createdAt) - (a.timestamp || a.createdAt);
-    })
-    .forEach(renderLiveOrderRow);
+    .sort((a, b) => toMs(a.createdAt) - toMs(b.createdAt))   // oldest first, each new row goes on top
+    .forEach(order => {
+      try { renderLiveOrderRow(order); }
+      catch (e) { console.error("Row failed:", order?.orderId, e); }
+    });
 }
+
+
+
+
+
+
+
+
+
+
+
 
 // FUNCTION GET NETWORK PREFIX
 function getNetwork(order) {
