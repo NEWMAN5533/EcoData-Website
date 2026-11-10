@@ -116,7 +116,7 @@ app.use(cors());
 app.use(bodyParser.json({ verify: (req, res, buf) => { req.rawBody = buf; } }));
 
 
-
+app.set("trust proxy", 1);                     // Render sits behind a proxy
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "frontend")));
@@ -161,8 +161,10 @@ app.use("/api/admin", syncOrderRoute);
 app.use("/api/verify-payment", exclusiveAgentRoute);
 app.use("/api/afa", afaRegisterRouter(verifyPaystack));
 app.use("/api/afa/status", afaStatusRouter);
-app.use("/api/live-order-status", swiftDataOrderStatusPolling);  // GET  /:id
-app.use("/api/v2/orders/status", swiftDataOrderStatusPolling);   // POST /  (the poller)
+ // GET  /:id
+app.use("/api/live-order-status", swiftDataOrderStatusPolling); 
+ // POST /  (the poller)
+app.use("/api/v2/orders/status", swiftDataOrderStatusPolling); 
 app.use("/api/vouchers", getVoucherRouter);
 app.use("/api/vouchers", postVoucherRouter);
 
