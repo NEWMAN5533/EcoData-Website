@@ -240,7 +240,7 @@ p {
   justify-items: center;
   align-items: center;
   min-width: 958px !important;
-  height: 2.9rem;
+  height:3rem;
   border-bottom: 1px solid rgba(226, 226, 226, 226);
   grid-template-columns: 110px 115px 130px 135px 140px 150px 170px 130px;
   display: grid;

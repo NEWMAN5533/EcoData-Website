@@ -1807,7 +1807,7 @@ strong, b { font-size: inherit; }
 .eco-home-table-frame {
   width: 100%;
   min-width: 0;
-  height: 32rem;
+  height: 33rem;
   display: flex;            /* lets the scroller fill the frame */
   flex-direction: column;
 }
