@@ -2367,6 +2367,7 @@ const DM_STATUS_MAP = {
   delivered: "delivered",
   success: "delivered",
   successful: "delivered",
+  processed: "delivered",
   failed: "failed",
   cancelled: "failed",
   canceled: "failed",
@@ -3246,6 +3247,7 @@ function isTerminalStatus(status) {
   return [
     "delivered",
     "completed",
+    "processed",
     "success",
     "failed",
     "cancelled",
