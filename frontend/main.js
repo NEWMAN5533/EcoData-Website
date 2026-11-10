@@ -2261,7 +2261,9 @@ function saveLiveOrder(order) {
 
 
 
-
+Object.assign(window, {
+  renderLiveOrderRow, loadLiveOrders, saveLiveOrder, getNetwork
+});
 
 function sortLiveOrders(orders) {
   if (!Array.isArray(orders)) {
