@@ -667,7 +667,7 @@ document.addEventListener("DOMContentLoaded", () => {
   //  RESTORE SAVED DELIVERY MODE
   // =========================================
 
-  const savedMode = localStorage.removeItem(STORAGE_KEY);
+  const savedMode = localStorage.getItem(STORAGE_KEY);
   const saveMode = PACKAGE_MAP[savedMode] ? savedMode : "express";
 
   const activeOption = document.querySelector(
@@ -2381,6 +2381,14 @@ const DM_STATUS_MAP = {
   unknown: "pending",
 };
 
+const normalizedStatus = raw => {
+  const s = String(raw || "").trim().toLowerCase();
+  return DM_STATUS_MAP[s] || s || "processing";
+}
+
+
+
+
 function readOrders() {
   try {
     const parsed = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY) || "[]");
@@ -3243,17 +3251,9 @@ function stopStatusPolling() {
  */
 // checks if status is terminal
 function isTerminalStatus(status) {
-  const s = (status || "").toLowerCase();
-  return [
-    "delivered",
-    "completed",
-    "processed",
-    "success",
-    "failed",
-    "cancelled",
-    "refunded",
-    "resolved"].includes(s);
+  return FINAL_STATUSES.has(normalizedStatus(status));
 }
+
 
 
 async function checkOrderStatusesOnce(orderIdsOrRefs) {
