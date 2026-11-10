@@ -23,7 +23,8 @@ import afaRegisterRouter from "./routes/afaRegisterRoute.js";
 import afaStatusRouter from "./routes/afaStatusRouter.js";
 import getVoucherRouter from "./routes/getVouchersRoute.js";
 import postVoucherRouter from "./routes/postVoucherRouter.js";
-import failedOrderCheckRouter from "./routes/failedOrderCheckRouter.js";
+// Status polling 
+import swiftDataOrderStatusPolling from "./routes/swiftDataOrderStatusPolling.js";
 
 
 
@@ -160,7 +161,8 @@ app.use("/api/admin", syncOrderRoute);
 app.use("/api/verify-payment", exclusiveAgentRoute);
 app.use("/api/afa", afaRegisterRouter(verifyPaystack));
 app.use("/api/afa/status", afaStatusRouter);
-app.use("/api/live-order-status", failedOrderCheckRouter);
+app.use("/api/live-order-status", swiftDataOrderStatusPolling);  // GET  /:id
+app.use("/api/v2/orders/status", swiftDataOrderStatusPolling);   // POST /  (the poller)
 app.use("/api/vouchers", getVoucherRouter);
 app.use("/api/vouchers", postVoucherRouter);
 
