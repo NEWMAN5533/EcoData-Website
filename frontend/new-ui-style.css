@@ -1857,8 +1857,7 @@ b {
 
 /* Scroller becomes a column so the body can fill the leftover height */
 
-
-.status.processed{
+.status-processed{
   background:#087f5b;
   display: flex;
   align-items: center;
