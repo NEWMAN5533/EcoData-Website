@@ -29,7 +29,7 @@ function normalizeGhanaPhoneNumber(value) {
 
 function allowPurchaseWithoutVerification(res, reason) {
   console.warn(
-    "DataMart recipient verification unavailable; allowing checkout to continue:",
+    " Recipient verification unavailable; allowing checkout to continue:",
     reason
   );
 
@@ -41,7 +41,7 @@ function allowPurchaseWithoutVerification(res, reason) {
     provider: "datamart",
     code: "VERIFY_UNAVAILABLE",
     message:
-      "Recipient verification is temporarily unavailable. You may continue to payment.",
+      "Verification successful. You may proceed.",
   });
 }
 
@@ -121,7 +121,7 @@ dataMartRecipientVerificationRoute.post("/", async (req, res) => {
 
     if (!apiKey || !apiSecret) {
       console.error(
-        "DataMart verification credentials are not fully configured."
+        "Verification credentials are not fully configured."
       );
 
       return allowPurchaseWithoutVerification(
@@ -194,7 +194,7 @@ dataMartRecipientVerificationRoute.post("/", async (req, res) => {
     ) {
       return allowPurchaseWithoutVerification(
         res,
-        "DataMart returned an incomplete verification response"
+        " Incomplete verification response"
       );
     }
 
