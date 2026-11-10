@@ -1088,7 +1088,7 @@ function playSuccessSound() {
 // CHECK IF THE RECIPIENT HAS ACTIVE ORDER (ALREADY)
 // =================================================
 
-const activeStatus = ["pending", "queued"];
+const activeStatus = [ "queued"];
 
 function normalizeNumber(num = "") {
   return String(num).replace(/\D/g, "").slice(-9);
@@ -1133,7 +1133,7 @@ function unActivateTrackers() {
 
   const secondTracker = (document.getElementById(
     "deliveryTracker2",
-  ).style.display = "flex");
+  ).style.display = "none");
 }
 
 //=================================
@@ -2409,6 +2409,9 @@ function applyDataMartStatus({ reference, paymentReference }, rawStatus) {
   if (index === -1) return null;
 
   const current = orders[index];
+  // Stop polling when user manually set
+  if (current.statusLocked) return current;
+
   const cur = String(current.status || "")
     .trim()
     .toLowerCase();
@@ -2446,6 +2449,263 @@ function applyDataMartStatus({ reference, paymentReference }, rawStatus) {
   console.log("DataMart status saved:", reference, cur, "->", next);
   return updated;
 }
+
+
+
+
+
+// =====================================
+// MANUAL USER ACTION BUTTON 
+//======================================
+const ORDER_STATUS_CHOICES = ["pending", "processing", "delivered", "failed", "refunded"];
+
+let orderMenu = null;
+let orderMenuTarget = null;
+
+// ---------- storage helpers ----------
+function liveOrdersRead() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(LIVE_ORDERS_KEY) || "[]");
+    return Array.isArray(parsed) ? parsed : [];
+  } catch { return []; }
+}
+
+function liveOrdersWrite(list) {
+  localStorage.setItem(LIVE_ORDERS_KEY, JSON.stringify(list));
+}
+
+const sameOrder = (o, id, provider) =>
+  String(o.orderId) === String(id) &&
+  String(o.provider || "swiftdata").toLowerCase() === String(provider || "swiftdata").toLowerCase();
+
+function findLiveOrder(id, provider) {
+  return liveOrdersRead().find(o => sameOrder(o, id, provider)) || null;
+}
+
+function refreshOrderViews() {
+  for (const fn of [updatePendingCard, renderHomepageTotals, loadActiveBadge]) {
+    try { if (typeof fn === "function") fn(); } catch (e) { console.error(fn?.name, e); }
+  }
+}
+
+const orderToast = (msg, type = "success") =>
+  typeof showSnackBar === "function" ? showSnackBar(msg, type, 3000) : console.log(msg);
+
+// ---------- copy ----------
+async function copyText(text) {
+  try { await navigator.clipboard.writeText(text); return true; } catch {}
+  try {
+    const t = document.createElement("textarea");
+    t.value = text;
+    t.style.cssText = "position:fixed;opacity:0";
+    document.body.appendChild(t);
+    t.select();
+    const ok = document.execCommand("copy");
+    t.remove();
+    return ok;
+  } catch { return false; }
+}
+
+async function copyOrder(order) {
+  const when = new Date(order.createdAt || order.timestamp);
+
+  const text = [
+    `Order: ${order.orderId}`,
+    `Recipient: ${order.recipient || "-"}`,
+    `Data: ${order.volume ?? 0}GB${order.network ? ` (${order.network})` : ""}`,
+    `Status: ${order.status}`,
+    `Date: ${Number.isNaN(when.getTime()) ? "N/A" : when.toLocaleString()}`
+  ].join("\n");           // to copy only the ID, use: const text = String(order.orderId);
+
+  orderToast(await copyText(text) ? "Order details copied" : "Could not copy", "success");
+}
+
+// ---------- delete ----------
+function deleteLiveOrder(order, row) {
+  if (!confirm(
+    `Delete order ${order.orderId} from this device?\n` +
+    `This does not cancel the order or change anything at the provider.`
+  )) return;
+
+  const id = String(order.orderId);
+  const provider = order.provider;
+
+  liveOrdersWrite(liveOrdersRead().filter(o => !sameOrder(o, id, provider)));
+
+  // the backup copy, so it can't come back
+  try {
+    const g = JSON.parse(localStorage.getItem("guestOrders") || "[]");
+    localStorage.setItem("guestOrders", JSON.stringify(g.filter(o => String(o.orderId) !== id)));
+  } catch {}
+
+  // stop the DataMart poller for this order
+  try {
+    const ref = order.providerOrderReference ||
+      (order.paymentReference ? `${DATAMART_PREFIX}${order.paymentReference}` : "");
+    if (ref && typeof dataMartPollingTimers !== "undefined") {
+      dataMartPollingTimers.get(ref)?.("Order deleted:");
+    }
+  } catch {}
+
+  row?.remove();
+
+  if (!document.querySelector("#liveOrderRows .live-row")) {
+    const emptyBox = document.getElementById("liveOrderEmpty");
+    if (emptyBox) emptyBox.style.display = "flex";
+  }
+
+  refreshOrderViews();
+  orderToast("Order deleted");
+}
+
+// ---------- change status ----------
+function setLiveOrderStatus(order, status) {
+  const list = liveOrdersRead();
+  const i = list.findIndex(o => sameOrder(o, order.orderId, order.provider));
+  if (i === -1) return;
+
+  list[i] = {
+    ...list[i],
+    status,
+    statusLocked: true,        // pollers leave a manually set status alone
+    statusSource: "manual",
+    updatedAt: Date.now()
+  };
+  liveOrdersWrite(list);
+
+  try { renderLiveOrderRow(list[i]); } catch (e) { console.error(e); }
+  refreshOrderViews();
+  orderToast(`Status set to ${status}`);
+}
+
+function resumeAutoStatus(order) {
+  const list = liveOrdersRead();
+  const i = list.findIndex(o => sameOrder(o, order.orderId, order.provider));
+  if (i === -1) return;
+
+  const { statusLocked, ...rest } = list[i];
+  list[i] = { ...rest, status: "processing", statusSource: "web", updatedAt: Date.now() };
+  liveOrdersWrite(list);
+
+  try { renderLiveOrderRow(list[i]); } catch (e) { console.error(e); }
+
+  // restart checking
+  try {
+    if (String(list[i].provider).toLowerCase() === "datamart") {
+      startDataMartAutoPolling(
+        list[i].providerOrderReference || list[i].paymentReference,
+        { paymentReference: list[i].paymentReference }
+      );
+    } else {
+      startAutoPolling();
+    }
+  } catch (e) { console.error(e); }
+
+  refreshOrderViews();
+  orderToast("Auto status resumed");
+}
+
+// ---------- menu ----------
+function menuItem(label, onClick, className = "") {
+  const b = document.createElement("button");
+  b.type = "button";
+  b.className = `order-menu-item ${className}`.trim();
+  b.setAttribute("role", "menuitem");
+  b.textContent = label;
+  b.onclick = onClick;
+  return b;
+}
+
+function placeOrderMenu(menu, btn) {
+  const r = btn.getBoundingClientRect();
+  const m = menu.getBoundingClientRect();
+
+  let top = r.bottom + 6;
+  if (top + m.height > innerHeight - 8) top = Math.max(8, r.top - m.height - 6);
+
+  const left = Math.min(Math.max(8, r.right - m.width), innerWidth - m.width - 8);
+
+  menu.style.top = `${top}px`;
+  menu.style.left = `${left}px`;
+}
+
+function closeOrderMenu() {
+  if (!orderMenu) return;
+  orderMenu.remove();
+  orderMenuTarget?.setAttribute("aria-expanded", "false");
+  orderMenu = null;
+  orderMenuTarget = null;
+}
+
+function openOrderMenu(btn) {
+  const row = btn.closest(".live-row");
+  const order = row && findLiveOrder(row.dataset.id, row.dataset.provider);
+  if (!order) return;
+
+  const wasThisButton = orderMenuTarget === btn;
+  closeOrderMenu();
+  if (wasThisButton) return;              // a second tap closes it
+
+  const menu = document.createElement("div");
+  menu.className = "order-menu";
+  menu.setAttribute("role", "menu");
+
+  const showMain = () => {
+    menu.replaceChildren(
+      menuItem("Copy details", () => { closeOrderMenu(); copyOrder(order); }),
+      menuItem("Change status", showStatuses),
+      menuItem("Delete order", () => { closeOrderMenu(); deleteLiveOrder(order, row); }, "danger")
+    );
+    placeOrderMenu(menu, btn);
+  };
+
+  const showStatuses = () => {
+    const current = String(order.status || "").trim().toLowerCase();
+
+    const items = ORDER_STATUS_CHOICES.map(s => {
+      const b = menuItem(s[0].toUpperCase() + s.slice(1), () => {
+        closeOrderMenu();
+        setLiveOrderStatus(order, s);
+      });
+      if (s === current) b.classList.add("current");
+      return b;
+    });
+
+    if (order.statusLocked) {
+      items.push(menuItem("Resume auto status", () => { closeOrderMenu(); resumeAutoStatus(order); }));
+    }
+    items.push(menuItem("‹ Back", showMain, "muted"));
+
+    menu.replaceChildren(...items);
+    placeOrderMenu(menu, btn);
+  };
+
+  document.body.appendChild(menu);
+  orderMenu = menu;
+  orderMenuTarget = btn;
+  btn.setAttribute("aria-expanded", "true");
+
+  showMain();
+  menu.querySelector("button")?.focus();
+}
+
+// one listener for every row, including rows drawn later
+document.addEventListener("click", e => {
+  const btn = e.target.closest(".row-action-btn");
+  if (btn) { openOrderMenu(btn); return; }
+  if (orderMenu && !orderMenu.contains(e.target)) closeOrderMenu();
+});
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeOrderMenu(); });
+window.addEventListener("resize", closeOrderMenu);
+document.addEventListener("scroll", closeOrderMenu, true);
+
+//=======================================
+// USER MANUAL ACTION BUTTON ENDS
+//=======================================
+
+
+
+
 
 // =========================
 // RENDER LIVE ORDER ROW
@@ -2619,6 +2879,19 @@ function renderLiveOrderRow(order) {
 
   // Created date
   addCell(date);
+
+ // Actions
+  const actionCell = addCell("", "action-cell");
+  const actionBtn = document.createElement("button");
+  actionBtn.type = "button";
+  actionBtn.className = "row-action-btn";
+  actionBtn.textContent = "⋮";
+  actionBtn.setAttribute("aria-label", "Order actions");
+  actionBtn.setAttribute("aria-haspopup", "menu");
+  actionBtn.setAttribute("aria-expanded", "false");
+  actionCell.appendChild(actionBtn);
+
+
 
   // Insert new rows by creation time (newest on top)
   if (isNewRow) {
@@ -2817,6 +3090,12 @@ function startDataMartAutoPolling(providerReference, normalized) {
           reference,
           paymentReference,
         });
+        return;
+      }
+
+      // Stop when user manually set status
+      if (updated.statusLocked) {
+        stopPolling("Status locked manually:");
         return;
       }
 
@@ -3469,6 +3748,9 @@ function applySwiftStatus(localOrderId, swiftOrder) {
   if (index === -1) return null;
 
   const current = orders[index];
+  // Stop polling whn user manually set 
+  if (current.statusLocked) return current;
+  
   const curRaw = String(current.status || "").trim().toLowerCase();
   const cur = DM_STATUS_MAP[curRaw] || curRaw;
 
