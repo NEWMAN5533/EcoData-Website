@@ -1,5 +1,4 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap");
 h1,
 h2,
 h3,
@@ -10,12 +9,11 @@ small,
 span,
 strong,
 p {
-  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-family: "Plus Jakarta Sans", sans-serif !important;
 }
 
-
 :root {
-  --bg-cl: #FFF;
+  --bg-cl: #fff;
   --primary-cl: #fff;
   --secondary-cl: rgb(50, 50, 190);
   --dark-cl: #0a0a0a;
@@ -23,7 +21,7 @@ p {
   --background-cl: #e6e8ce;
   --card-full-bg-cl: rgb(255, 217, 0);
   --card-full-tele-bg-cl: rgb(221, 19, 19);
-  --card-full-airtel-bg-cl:  rgb(6, 6, 231);
+  --card-full-airtel-bg-cl: rgb(6, 6, 231);
   --border-cl-2: rgba(66, 66, 26, 0.226);
   --mtn-btn: rgb(193, 196, 19);
   --telecel-btn: rgb(180, 57, 19);
@@ -32,7 +30,7 @@ p {
   /*====NEW===ROOT====*/
   /*====NEW===ROOT====*/
 
- /* Main backgrounds */
+  /* Main backgrounds */
   --body-bg-dark: #0b0d10;
   --page-bg-dark: #0b0d10;
   --sidebar-bg-dark: #101318;
@@ -56,12 +54,12 @@ p {
   DARK MODE COLORS
   ***/
   --darkMode-bg-cl: rgb(24, 29, 35) !important;
-  --welcome-card-bg-2:  #141c27;
-  --welcome-card-bg:  #0e141b ;
+  --welcome-card-bg-2: #141c27;
+  --welcome-card-bg: #0e141b;
   --welcome-card-bg-3: rgba(77, 77, 77, 0.89);
   --welcome-card-border: rgb(74, 88, 94);
   --thin-border: rgb(38, 49, 49);
-  --thin-border2:rgb(44, 61, 61);
+  --thin-border2: rgb(44, 61, 61);
   --text-cl: rgb(145, 168, 164);
   --text-cl-2: rgb(210, 216, 216);
   --text-cl-3: rgb(139, 141, 141);
@@ -69,30 +67,26 @@ p {
   /**
   BORDER SOLID COLORS
   **/
-  --thin-border-1:  #0d6d5a;
-  --thin-border-2:  #830616;
-  --thin-border-3:  #b97207;
-  --thin-border-4:  #036aa7;
-  --thin-border-5:  #bba907;
-  --thin-border-6:   rgb(17, 2, 31);
-  --thin-border-7:  rgb(1, 11, 39);
+  --thin-border-1: #0d6d5a;
+  --thin-border-2: #830616;
+  --thin-border-3: #b97207;
+  --thin-border-4: #036aa7;
+  --thin-border-5: #bba907;
+  --thin-border-6: rgb(17, 2, 31);
+  --thin-border-7: rgb(1, 11, 39);
 
   /***
   CARD BG
   ***/
-  --card-mtn-bg:  #faba5ad0;
-  --card-tel-bg:  #fa537dd0;
-  --card-tigo-bg:  #6cbff7cb;
+  --card-mtn-bg: #faba5ad0;
+  --card-tel-bg: #fa537dd0;
+  --card-tigo-bg: #6cbff7cb;
 }
 
-
-
-
-
-.table-section{
+.table-section {
   width: 100%;
   max-width: 94%;
-  padding: .2rem;
+  padding: 0.2rem;
   margin-top: 1.2rem;
   margin-bottom: 1rem !important;
   height: 30rem;
@@ -102,51 +96,55 @@ p {
   justify-content: center;
   justify-items: center;
   align-items: center;
-  gap: .2rem;
-  background:  white;
+  gap: 0.2rem;
+  background: white;
   backdrop-filter: blur(18px);
-  border-end-end-radius: .5rem;
-  border-end-start-radius: .5rem;
-  border-start-start-radius: .5rem;
-  border-start-end-radius: .5rem;
+  border-end-end-radius: 0.5rem;
+  border-end-start-radius: 0.5rem;
+  border-start-start-radius: 0.5rem;
+  border-start-end-radius: 0.5rem;
   border: 1px solid rgba(226, 226, 226, 226);
   overflow: hidden;
 }
 
-.dark-mode .table-section{
+.dark-mode .table-section {
   background: var(--card-bg-dark) !important;
   border: 1px solid var(--thin-border);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-.table-section .table-title{
+.table-section .table-title {
   width: 100%;
   height: 10%;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.89), rgba(241, 241, 241, 0.89)) ;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.89),
+    rgba(241, 241, 241, 0.89)
+  );
   backdrop-filter: blur(18px);
   display: flex;
   align-items: center;
   justify-content: start;
   position: relative;
   padding: 1rem;
-  border: 1px solid  rgb(209, 209, 209);
-  box-shadow: 0 2px 6px  rgba(0,0,0,0.1);
-  border-radius: .2rem;
+  border: 1px solid rgb(209, 209, 209);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0.2rem;
 }
 
-.dark-mode .table-section .table-title{
+.dark-mode .table-section .table-title {
   background: var(--background-cl-2);
   border: 1px solid var(--thin-border) !important;
 }
 
-.table-title p{
-  font-size: .85rem;
- 
+.table-title p {
+  font-size: 0.85rem;
+
   color: rgb(77, 74, 73);
   font-weight: 600;
 }
 
-.dark-mode .table-title p{
+.dark-mode .table-title p {
   color: rgba(252, 239, 216, 0.747);
 }
 
@@ -157,12 +155,12 @@ p {
   flex-direction: column;
   position: relative;
   border: 1px solid rgb(209, 209, 209);
-  border-radius: .2rem;
+  border-radius: 0.2rem;
   /* Remove overflow from here — move it to table-scroll-area */
   overflow: hidden;
 }
 
-.dark-mode .table-section .content-wrapper{
+.dark-mode .table-section .content-wrapper {
   border: 1px solid var(--thin-border);
 }
 
@@ -170,8 +168,8 @@ p {
 .content-wrapper .table-scroll-area {
   width: 100%;
   height: 100%;
-  overflow-x: auto;   /* horizontal scroll */
-  overflow-y: auto;   /* vertical scroll */
+  overflow-x: auto; /* horizontal scroll */
+  overflow-y: auto; /* vertical scroll */
   white-space: nowrap;
 }
 
@@ -182,8 +180,7 @@ p {
   justify-items: center;
   background: var(--primary-cl) !important;
   align-self: center;
-  grid-template-columns: 
-110px 115px  130px 135px 140px 150px 170px;
+  grid-template-columns: 110px 115px 130px 135px 140px 150px 170px 130px;
 
   /* sticky top so it stays visible while scrolling vertically */
   position: sticky;
@@ -192,12 +189,12 @@ p {
 
   /* Remove position: absolute — it was breaking x-axis sync */
   color: rgb(54, 66, 65);
-  font-size: .76rem;
+  font-size: 0.76rem;
   font-weight: 600;
   text-transform: uppercase;
   font-family: system-ui, sans-serif;
-  padding: .5rem 0;
-  margin-left: .1rem;
+  padding: 0.5rem 0;
+  margin-left: 0.1rem;
   width: 100%;
   min-width: max-content; /* prevents collapsing on narrow viewports */
 }
@@ -212,28 +209,24 @@ p {
   width: 100%;
   display: grid;
   justify-items: center;
-  padding: 0 .5rem;
+  padding: 0 0.5rem;
   align-items: start;
-  grid-template-columns: 
-110px 115px  130px 135px 140px 150px 170px;
+  grid-template-columns: 110px 115px 130px 135px 140px 150px 170px 130px;
   position: relative;
   min-width: max-content; /* ensures rows stretch with header */
 }
 
-
-
- .row-wrapper .empty-state{
+.row-wrapper .empty-state {
   position: fixed;
   color: rgb(145, 141, 141);
   transform: translateX(-50%) !important;
-  
+
   top: 50%;
   left: 50%;
   transform: translateX(-50%) !important;
-  font-size: .73rem;
+  font-size: 0.73rem;
   font-weight: 600;
 }
-
 
 #liveOrderRows {
   width: 100%;
@@ -243,18 +236,18 @@ p {
   /* Remove position: absolute — it was collapsing the height */
 }
 
-#liveOrderRows .live-row{
- justify-items: center;
- align-items: center;
- min-width: 958px !important;
- height: 2.6rem;
- border-bottom: 1px solid rgba(226, 226, 226, 226);
- grid-template-columns:110px 115px  130px 135px 140px 150px 170px;
- display: grid;
- white-space: nowrap !important;
+#liveOrderRows .live-row {
+  justify-items: center;
+  align-items: center;
+  min-width: 958px !important;
+  height: 2.6rem;
+  border-bottom: 1px solid rgba(226, 226, 226, 226);
+  grid-template-columns: 110px 115px 130px 135px 140px 150px 170px 130px;
+  display: grid;
+  white-space: nowrap !important;
 }
 
-.dark-mode #liveOrderRows .live-row{
+.dark-mode #liveOrderRows .live-row {
   border-bottom: 1px solid rgb(63, 62, 62) !important;
 }
 
@@ -265,3 +258,44 @@ p {
 
 
 
+
+
+/* Action menu */
+.order-menu {
+  position: fixed;
+  z-index: 9999;
+  min-width: 190px;
+  padding: 6px;
+  background: var(--menu-bg, #fff);
+  color: var(--menu-text, #111);
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+.order-menu-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 11px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.order-menu-item:hover,
+.order-menu-item:focus-visible {
+  background: rgba(21, 149, 112, 0.12);
+  outline: none;
+}
+.order-menu-item.current {
+  font-weight: 800;
+  color: #159570;
+}
+.order-menu-item.danger {
+  color: #e05252;
+}
+.order-menu-item.muted {
+  opacity: 0.65;
+}
