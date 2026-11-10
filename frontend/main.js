@@ -2261,9 +2261,6 @@ function saveLiveOrder(order) {
 
 
 
-Object.assign(window, {
-  renderLiveOrderRow, loadLiveOrders, saveLiveOrder, getNetwork
-});
 
 function sortLiveOrders(orders) {
   if (!Array.isArray(orders)) {
@@ -5500,4 +5497,15 @@ async function startLiveOrderVendorPolling() {
 document.addEventListener("DOMContentLoaded", () => {
   // start polling
   startLiveOrderVendorPolling();
+});
+
+
+
+
+
+
+
+
+Object.assign(window, {
+  renderLiveOrderRow, loadLiveOrders, saveLiveOrder, getNetwork
 });
