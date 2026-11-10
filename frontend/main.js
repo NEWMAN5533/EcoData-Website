@@ -2451,31 +2451,19 @@ function applyDataMartStatus({ reference, paymentReference }, rawStatus) {
 // RENDER LIVE ORDER ROW
 // =========================
 function renderLiveOrderRow(order) {
-  if (!order || !order.orderId) {
-    console.error("Cannot render live order: missing orderId.", order);
+  const resolvedOrderId = String(
+    order?.orderId || order?.publicId || order?.clientReference ||
+    order?.id || order?.reference || ""
+  ).trim();
+
+  if (!resolvedOrderId) {
+    console.error("Cannot render live order: missing order identifier.", order);
     return;
   }
 
-  const resolvedOrderId = 
-  order.orderId ||
-  order.publicId ||
-  order.id;
-
-  if(resolvedOrderId){
-    console.log("Cannot render live order: missing order identifier.",
-      order,
-    );
-    return;
-  }
-
-
-  order = {
-    ...order,
-    orderId: String(resolvedOrderId),
-  };
+  order = { ...order, orderId: resolvedOrderId };
 
   const tableBody = document.getElementById("liveOrderRows");
-
   if (!tableBody) {
     console.error("Cannot find #liveOrderRows.");
     return;
