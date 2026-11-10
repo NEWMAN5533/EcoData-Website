@@ -24,7 +24,7 @@ import afaStatusRouter from "./routes/afaStatusRouter.js";
 import getVoucherRouter from "./routes/getVouchersRoute.js";
 import postVoucherRouter from "./routes/postVoucherRouter.js";
 // Status polling 
-import swiftDataOrderStatusPolling from "./routes/swiftDataOrderStatusPolling.js";
+import swiftDataOrderStatusPolling from "./routes/swiftDataOrderStatusRoute.js";
 
 
 
