@@ -1858,13 +1858,13 @@ b {
 /* Scroller becomes a column so the body can fill the leftover height */
 
 .status-processed{
-  background:#36a886de;
+  background:#38695bde;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 1.1rem;
-  color: #43ca75 !important;
-  padding: .1rem .4rem;
+  color: #63c9a2 !important;
+  padding: .2rem .6rem;
 }
 
 
