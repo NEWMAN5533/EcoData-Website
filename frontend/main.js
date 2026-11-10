@@ -668,7 +668,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================================
 
   const savedMode = localStorage.removeItem(STORAGE_KEY);
-  const saveMode = PACKAGE_MAP[savedMode] ? savedMode : "normal";
+  const saveMode = PACKAGE_MAP[savedMode] ? savedMode : "express";
 
   const activeOption = document.querySelector(
     `.eco-offer-option[data-mode="${saveMode}"]`,
@@ -4028,6 +4028,9 @@ function getStatusIcon(status) {
     case "sent":
       return `<i class="ri-check-double-line status-icon"></i>`;
 
+      case "processed":
+      return `<i class="ri-check-double-line status-icon"></i>`;
+
     case "cancelled":
       return `<i class="ri-close-circle-line status-icon"></i>`;
 
@@ -4090,6 +4093,7 @@ const COMPLETED_STATUSES = new Set([
   "failed",
   "cancelled",
   "rejected",
+  "processed",
   "refunded",
 ]);
 
@@ -4196,6 +4200,7 @@ function syncCompletedIfMismatch() {
     "delivered",
     "completed",
     "success",
+    "processed",
     "cancelled",
     "failed",
   ];
