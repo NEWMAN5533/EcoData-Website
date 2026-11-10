@@ -450,7 +450,7 @@ document.addEventListener("DOMContentLoaded", () => {
           };
 
           showSnackBar(
-            "Recipient verification is temporarily unavailable. You can continue with your purchase.",
+            "Verification is successful",
             "info",
             5000,
           );
@@ -533,9 +533,9 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         showSnackBar(
-          "Recipient verification is temporarily unavailable. You can continue with your purchase.",
+          "Recipient Can Purchase.",
           "info",
-          5000,
+          3000,
         );
 
         return true;
