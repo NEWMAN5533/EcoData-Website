@@ -1,5 +1,4 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap");
 h1,
 h2,
 h3,
@@ -10,39 +9,70 @@ small,
 span,
 strong,
 p {
-  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-family: "Plus Jakarta Sans", sans-serif !important;
 }
 
-
-html{
+html {
   font-size: 14px !important;
 }
 
-
 /* Heading font sizes */
-h1 { font-size: 2rem; }
-h2 { font-size: 1.75rem; }
-h3 { font-size: 1.5rem; }
-h4 { font-size: 1.25rem; }
-h5 { font-size: 1.125rem; }
-h6 { font-size: 1rem; }
+h1 {
+  font-size: 2rem;
+}
+h2 {
+  font-size: 1.75rem;
+}
+h3 {
+  font-size: 1.5rem;
+}
+h4 {
+  font-size: 1.25rem;
+}
+h5 {
+  font-size: 1.125rem;
+}
+h6 {
+  font-size: 1rem;
+}
 
 /* Small and strong */
-small { font-size: 0.875rem; }
-strong, b { font-size: inherit; }
+small {
+  font-size: 0.875rem;
+}
+strong,
+b {
+  font-size: inherit;
+}
 
 /* Font-size utilities */
-.text-xs   { font-size: 0.75rem; }
-.text-sm   { font-size: 0.875rem; }
-.text-base { font-size: 1rem; }
-.text-lg   { font-size: 1.125rem; }
-.text-xl   { font-size: 1.25rem; }
-.text-2xl  { font-size: 1.5rem; }
-.text-3xl  { font-size: 1.875rem; }
-.text-4xl  { font-size: 2.25rem; }
-.text-5xl  { font-size: 3rem; }
-
-
+.text-xs {
+  font-size: 0.75rem;
+}
+.text-sm {
+  font-size: 0.875rem;
+}
+.text-base {
+  font-size: 1rem;
+}
+.text-lg {
+  font-size: 1.125rem;
+}
+.text-xl {
+  font-size: 1.25rem;
+}
+.text-2xl {
+  font-size: 1.5rem;
+}
+.text-3xl {
+  font-size: 1.875rem;
+}
+.text-4xl {
+  font-size: 2.25rem;
+}
+.text-5xl {
+  font-size: 3rem;
+}
 
 /* ======================================================
    ECODATA DESIGN SYSTEM — LIGHT MODE
@@ -161,7 +191,6 @@ strong, b { font-size: inherit; }
   --eco-mtn-green: var(--afa-green);
 }
 
-
 /* ======================================================
    ECODATA DESIGN SYSTEM — DARK MODE
    Activated when <html> or <body> has .dark-mode
@@ -177,7 +206,6 @@ strong, b { font-size: inherit; }
   --afa-yellow: #ffcc00;
   --afa-yellow-soft: #3a3218;
   --afa-green: #4ade80;
-
 
   --eco-offer-surface: #1d1d1d;
   --eco-offer-page: #262626;
@@ -423,7 +451,7 @@ strong, b { font-size: inherit; }
 
 .eco-delivery-status-content {
   padding: 22px;
-  gap: .8rem;
+  gap: 0.8rem;
 }
 
 .eco-delivery-status-message {
@@ -527,30 +555,29 @@ strong, b { font-size: inherit; }
   display: flex;
   width: 100%;
   height: 5rem;
-  margin-top: .4rem;
+  margin-top: 0.4rem;
   align-items: center;
   justify-content: space-between;
-  padding:  8px;
+  padding: 8px;
   background: var(--eco-delivery-ink);
   border-radius: 16px;
   color: #ffffff;
 }
 
-.eco-turnAroundTimer{
-  display:flex;
+.eco-turnAroundTimer {
+  display: flex;
   align-items: start;
   justify-content: start;
   flex-direction: column;
   width: 70%;
   height: 100%;
-  gap: .4rem;
-  
+  gap: 0.4rem;
 }
 
 .eco-delivery-turnaround-label {
   display: flex;
   align-items: start;
-  flex-direction:column;
+  flex-direction: column;
   justify-content: start;
   white-space: nowrap;
   gap: 10px;
@@ -567,9 +594,7 @@ strong, b { font-size: inherit; }
   font-size: 16px;
 }
 
-
-
-.eco-delivery-turnaround-label .turDiv1{
+.eco-delivery-turnaround-label .turDiv1 {
   width: 100%;
   height: 30%;
   display: flex;
@@ -577,8 +602,7 @@ strong, b { font-size: inherit; }
   justify-content: start;
 }
 
-
-.eco-delivery-turnaround-label .turDiv2{
+.eco-delivery-turnaround-label .turDiv2 {
   width: 100%;
   height: 70%;
   display: flex;
@@ -591,32 +615,22 @@ strong, b { font-size: inherit; }
   color: var(--eco-delivery-yellow);
   font-size: 16px !important;
   font-weight: 800;
-
 }
 
-
-
 /* fast delivery sticker */
-.fastDeliverySticker{
+.fastDeliverySticker {
   display: flex;
   align-items: center;
   width: 30%;
   justify-content: center;
 }
 
-.fastSticker{
+.fastSticker {
   display: none;
   width: 60px;
   height: 60px;
   object-fit: contain;
 }
-
-
-
-
-
-
-
 
 .eco-delivery-time-grid {
   display: grid;
@@ -658,7 +672,7 @@ strong, b { font-size: inherit; }
   color: var(--eco-delivery-muted);
   font-size: 11px;
   background: var(--eco-delivery-border);
-  padding: .2rem .6rem;
+  padding: 0.2rem 0.6rem;
   border-radius: 1rem;
   width: max-content;
 }
@@ -717,7 +731,6 @@ strong, b { font-size: inherit; }
   font-size: 10px;
   font-weight: 800;
   line-height: 1.6;
-
 }
 
 .eco-delivery-completion-check {
@@ -799,11 +812,6 @@ strong, b { font-size: inherit; }
     transform: translateX(100%);
   }
 }
-
-
-
-
-
 
 /* =========================
    NOTICE BOARD
@@ -893,7 +901,9 @@ strong, b { font-size: inherit; }
   background: var(--eco-delivery-page);
   border: 1px solid var(--eco-delivery-border);
   border-radius: 15px;
-  transition: border-color 180ms ease, transform 180ms ease;
+  transition:
+    border-color 180ms ease,
+    transform 180ms ease;
 }
 
 .eco-notice-item:hover {
@@ -1231,15 +1241,10 @@ strong, b { font-size: inherit; }
   }
 }
 
-
-
-
-
 /* ======================================================
    ECODATA HOMEPAGE DASHBOARD
    New class system — existing IDs retained
 ====================================================== */
-
 
 /* Universal box sizing for new sections */
 
@@ -1415,7 +1420,9 @@ strong, b { font-size: inherit; }
   font-size: 12px;
   font-weight: 800;
   cursor: pointer;
-  transition: background 180ms ease, transform 180ms ease;
+  transition:
+    background 180ms ease,
+    transform 180ms ease;
 }
 
 .eco-home-whatsapp-button img {
@@ -1454,7 +1461,9 @@ strong, b { font-size: inherit; }
   border-radius: 13px;
   font-size: 21px;
   cursor: pointer;
-  transition: transform 180ms ease, box-shadow 180ms ease;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
 }
 
 #shareBtn.eco-home-share-button:hover {
@@ -1537,7 +1546,7 @@ strong, b { font-size: inherit; }
   margin-bottom: 24px;
 }
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 600px) {
   #homepageTotals.eco-home-totals-panel {
     grid-template-columns: repeat(1, 1fr) !important;
   }
@@ -1568,14 +1577,16 @@ strong, b { font-size: inherit; }
   justify-content: space-between;
   min-width: 0;
   min-height: 168px;
-  margin-top: .8rem;
+  margin-top: 0.8rem;
   padding: 19px;
   overflow: hidden;
   background: var(--eco-home-surface);
   border: 1px solid var(--eco-home-border);
   border-radius: var(--eco-home-radius);
   box-shadow: var(--box-sh-card);
-  transition: transform 180ms ease, border-color 180ms ease; 
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease;
   border-color: rgba(255, 204, 0, 0.8);
 }
 
@@ -1624,8 +1635,6 @@ strong, b { font-size: inherit; }
   text-align: right;
 }
 
-
-
 .eco-home-total-main {
   display: flex;
   align-items: center;
@@ -1636,11 +1645,10 @@ strong, b { font-size: inherit; }
   white-space: nowrap;
 }
 
-
 #totalOrders,
 #totalGB,
 #pendingTotal,
-#completedOrders{
+#completedOrders {
   font-size: 1.35rem !important;
 }
 
@@ -1690,8 +1698,6 @@ strong, b { font-size: inherit; }
     font-size: 22px;
   }
 }
-
-
 
 .eco-home-total-bottom-label {
   display: block;
@@ -1771,13 +1777,11 @@ strong, b { font-size: inherit; }
   background: var(--eco-delivery-yellow-soft);
 }
 
-.eco-notice-number{
+.eco-notice-number {
   background: var(--eco-home-border);
 }
 
 /* Table frame and horizontal scrolling */
-
-
 
 .eco-home-table-header,
 .eco-home-order-rows {
@@ -1786,7 +1790,7 @@ strong, b { font-size: inherit; }
 
 .eco-home-table-header {
   display: grid;
-  grid-template-columns: 120px 110px  130px 120px 120px 120px 160px 90px;
+  grid-template-columns: 120px 110px 130px 120px 120px 120px 160px 90px;
   align-items: center;
   gap: 14px;
   min-height: 53px;
@@ -1800,24 +1804,22 @@ strong, b { font-size: inherit; }
   z-index: 1;
 }
 
-
-
 /* Empty order state */
 
 .eco-home-table-frame {
   width: 100%;
   min-width: 0;
   height: 33rem;
-  display: flex;            /* lets the scroller fill the frame */
+  display: flex; /* lets the scroller fill the frame */
   flex-direction: column;
 }
 
 /* The ONE scroll container (x and y) */
 .eco-home-table-scroll {
   flex: 1 1 auto;
-  min-height: 0;            /* required so flex child can shrink and scroll */
+  min-height: 0; /* required so flex child can shrink and scroll */
   width: 100%;
-  overflow: auto;           /* both axes */
+  overflow: auto; /* both axes */
   overscroll-behavior: contain;
   scrollbar-width: thin;
   scrollbar-color: #c9c9c9 transparent;
@@ -1835,8 +1837,8 @@ strong, b { font-size: inherit; }
 /* Body no longer scrolls on its own */
 .eco-home-table-body {
   width: 100%;
-  min-width: 860px;         /* same width as header so columns align */
-  display: block;           /* flex centering would misplace rows */
+  min-width: 860px; /* same width as header so columns align */
+  display: block; /* flex centering would misplace rows */
   overflow: visible;
   height: auto;
 }
@@ -1854,6 +1856,18 @@ strong, b { font-size: inherit; }
 */
 
 /* Scroller becomes a column so the body can fill the leftover height */
+
+
+.status.processed{
+  background:#087f5b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1.1rem;
+  color: #4ade80;
+}
+
+
 .eco-home-table-scroll {
   display: flex;
   flex-direction: column;
@@ -1878,17 +1892,16 @@ strong, b { font-size: inherit; }
 
 /* Empty state */
 
-.empty-state{
+.empty-state {
   display: none !important;
 }
 
-
 .eco-home-empty {
   position: sticky;
-  left: 0;                 /* stays put while scrolling sideways */
-  flex: 1 1 auto;          /* fills the body height */
+  left: 0; /* stays put while scrolling sideways */
+  flex: 1 1 auto; /* fills the body height */
   align-self: flex-start;
-  width: 100cqw;           /* = visible width of the scroller */
+  width: 100cqw; /* = visible width of the scroller */
   min-height: 260px;
   padding: 24px 20px;
   display: flex;
@@ -1930,23 +1943,6 @@ strong, b { font-size: inherit; }
   line-height: 1.5;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #ordersPagination {
   display: flex;
   align-items: center;
@@ -1969,10 +1965,14 @@ strong, b { font-size: inherit; }
   border-color: #111;
 }
 #ordersPagination button:disabled {
-  opacity: .4;
+  opacity: 0.4;
   cursor: not-allowed;
 }
-.page-info { font-size: 13px; color: #777; margin-left: 6px; }
+.page-info {
+  font-size: 13px;
+  color: #777;
+  margin-left: 6px;
+}
 /* ======================================================
    DARK THEME
 ====================================================== */
@@ -2147,7 +2147,7 @@ strong, b { font-size: inherit; }
     font-size: 10px;
     background: var(--eco-mtn-yellow-soft);
     border-radius: 1rem;
-    padding: .2rem .4rem;
+    padding: 0.2rem 0.4rem;
     box-shadow: var(--box-sh-card);
   }
 
@@ -2157,7 +2157,7 @@ strong, b { font-size: inherit; }
   }
 
   /* VALUE */
-  .eco-home-total-value{
+  .eco-home-total-value {
     font-size: 1.02rem !important;
   }
 
@@ -2165,32 +2165,25 @@ strong, b { font-size: inherit; }
     font-size: 9px;
     display: flex;
     align-items: center;
-    gap: .2rem;
+    gap: 0.2rem;
     white-space: nowrap !important;
   }
 
   /*  BADGE */
 
-
-
-    /** TOTAL ORDERS PERFORMANCE **/
+  /** TOTAL ORDERS PERFORMANCE **/
   #ordersPerformance,
   #dataPerformance,
   #pendingPerformance,
-  #completedPerformance{
+  #completedPerformance {
     display: flex;
     max-width: max-content;
     font-size: 9px;
-    gap: .4rem;
+    gap: 0.4rem;
     align-items: center;
     font-weight: 600;
   }
 
-
-  
-
-
- 
   .eco-home-total-bottom-label {
     font-size: 9px;
     line-height: 1.5;
@@ -2227,13 +2220,53 @@ strong, b { font-size: inherit; }
 
 
 
-
-
-
-
-
-
-
+/* pagination buttons */
+.orders-pager {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 14px 0;
+}
+.orders-pager[hidden] {
+  display: none;
+}
+.pager-info {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+.pager-nav {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.pager-btn {
+  min-width: 38px;
+  height: 38px;
+  padding: 0 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(128, 128, 128, 0.35);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.pager-btn.active {
+  background: #159570;
+  border-color: #159570;
+  color: #fff;
+}
+.pager-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.pager-dots {
+  align-self: center;
+  padding: 0 4px;
+  opacity: 0.6;
+}
 
 /* ======================================================
    EXTRA SMALL PHONES
@@ -2284,20 +2317,9 @@ strong, b { font-size: inherit; }
   }
 }
 
-
-
-
-
-
-
-
 /* =====================================================
    ECODATA OFFER SELECTOR — NEW CLASS SYSTEM
 ===================================================== */
-
-
-
-
 
 .eco-offer-section {
   position: relative;
@@ -2390,7 +2412,6 @@ strong, b { font-size: inherit; }
   align-items: center;
   gap: 14px;
   border-radius: var(--eco-offer-radius);
-
 }
 
 .eco-offer-heading-icon {
@@ -2504,7 +2525,7 @@ strong, b { font-size: inherit; }
   width: 44px;
   height: 44px;
   color: var(--eco-offer-green);
-  opacity: .9;
+  opacity: 0.9;
   background: var(--eco-offer-yellow-soft);
   border-radius: 13px;
   font-size: 22px;
@@ -2522,7 +2543,7 @@ strong, b { font-size: inherit; }
   font-size: 9px;
   font-weight: 800;
   letter-spacing: 1.1px;
-  padding: .2rem .4rem;
+  padding: 0.2rem 0.4rem;
   width: max-content;
   background: var(--eco-mtn-border);
   border-radius: 1rem;
@@ -2550,11 +2571,6 @@ strong, b { font-size: inherit; }
 
 /* Dropdown options */
 
-
-
-
-
-
 .eco-bundle-picker {
   position: relative;
 }
@@ -2580,20 +2596,13 @@ strong, b { font-size: inherit; }
   transition: transform 0.25s;
 }
 
-
-
-
-
-
-
 .eco-offer-selector {
   position: relative;
-
 }
 
 .eco-offer-dropdown {
   position: absolute;
-  top:  -180px;
+  top: -180px;
   left: 0;
   right: 0;
   z-index: 50;
@@ -2606,7 +2615,10 @@ strong, b { font-size: inherit; }
   align-items: center;
   pointer-events: none;
   transform: translateY(-6px);
-  transition: opacity 0.2s, transform 0.2s, visibility 0s linear 0.2s;
+  transition:
+    opacity 0.2s,
+    transform 0.2s,
+    visibility 0s linear 0.2s;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.53);
 }
 
@@ -2629,8 +2641,6 @@ strong, b { font-size: inherit; }
   transform: rotate(180deg);
 }
 
-
-
 .eco-offer-dropdown {
   display: none;
   position: absolute;
@@ -2644,17 +2654,12 @@ strong, b { font-size: inherit; }
   background: var(--eco-offer-surface);
   border: 1px solid var(--eco-offer-border);
   border-radius: 16px;
-
 }
 
-
-.eco-offer-dropdown.show{
+.eco-offer-dropdown.show {
   display: flex;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.53);
 }
-
-
-
 
 .eco-offer-option {
   display: flex;
@@ -2663,12 +2668,14 @@ strong, b { font-size: inherit; }
   width: 98%;
   height: 3.2rem;
 
-  margin: .4rem 0;
+  margin: 0.4rem 0;
   padding: 13px;
-  
+
   border-radius: 10px;
   cursor: pointer;
-  transition: background 160ms ease, border-color 160ms ease;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease;
 }
 
 .eco-offer-option:hover {
@@ -2745,13 +2752,11 @@ strong, b { font-size: inherit; }
   border-radius: 16px;
 }
 
-
 .eco-offer-view-button {
   cursor: pointer;
   color: #8fa39d;
   background: transparent;
   border: 0;
- 
 }
 
 .eco-offer-view-button.active {
@@ -2798,7 +2803,6 @@ strong, b { font-size: inherit; }
   font-size: 12px;
   font-weight: 800;
   cursor: pointer;
-  
 }
 
 .eco-offer-view-button i {
@@ -2835,7 +2839,9 @@ strong, b { font-size: inherit; }
   border: 1px solid var(--eco-offer-border);
   border-radius: 12px;
   cursor: pointer;
-  transition: border-color 160ms ease, background 160ms ease;
+  transition:
+    border-color 160ms ease,
+    background 160ms ease;
 }
 
 .eco-offer-category-tab:hover {
@@ -2896,24 +2902,6 @@ strong, b { font-size: inherit; }
   color: var(--eco-offer-muted);
   font-size: 18px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* =====================================================
    DARK MODE
@@ -3088,20 +3076,6 @@ strong, b { font-size: inherit; }
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .eco-bundle-order,
 .eco-bundle-order * {
   box-sizing: border-box;
@@ -3209,7 +3183,6 @@ strong, b { font-size: inherit; }
   border: 1px solid var(--afa-border);
   border-radius: 16px;
   cursor: pointer;
-  
 }
 
 .eco-bundle-picker-button:hover,
@@ -3263,8 +3236,7 @@ strong, b { font-size: inherit; }
   transition: transform 0.2s ease;
 }
 
-.eco-bundle-picker-button[aria-expanded="true"]
-.eco-bundle-picker-chevron {
+.eco-bundle-picker-button[aria-expanded="true"] .eco-bundle-picker-chevron {
   transform: rotate(180deg);
 }
 
@@ -3293,7 +3265,6 @@ strong, b { font-size: inherit; }
   box-shadow: 0 10px 20px rgba(39, 39, 39, 0.9);
   border-top: 9px solid var(--eco-mtn-border);
   border-bottom: 9px solid var(--eco-mtn-border);
-
 }
 
 .eco-bundle-dropdown.eco-bundle-dropdown--open {
@@ -3339,7 +3310,6 @@ strong, b { font-size: inherit; }
   border: 1px solid var(--afa-border);
   border-radius: 12px;
   cursor: pointer;
-  
 }
 
 .eco-bundle-option:hover {
@@ -3363,7 +3333,7 @@ strong, b { font-size: inherit; }
   place-items: center;
   color: var(--eco-bundle-ink);
   background: var(--eco-mtn-border);
-  
+
   border-radius: 9px;
   font-size: 12px;
   font-weight: 850;
@@ -3558,7 +3528,9 @@ strong, b { font-size: inherit; }
   font-size: 14px;
   font-weight: 850;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease,
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
     box-shadow 0.2s ease;
 }
 
@@ -3675,29 +3647,6 @@ strong, b { font-size: inherit; }
     transition-duration: 0.01ms !important;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* ==========================================
    ECODATA ADMIN WHATSAPP CHAT
@@ -3895,7 +3844,9 @@ strong, b { font-size: inherit; }
   font-size: 25px;
   line-height: 1;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .admin-chat-close:hover {
@@ -3987,7 +3938,9 @@ strong, b { font-size: inherit; }
   font: inherit;
   font-size: 13px;
   line-height: 1.6;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .admin-chat-message-input::placeholder {
@@ -4122,18 +4075,6 @@ strong, b { font-size: inherit; }
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 /* ==============================
    SUCCESSFUL ORDER POPUP
 ============================== */
@@ -4185,8 +4126,7 @@ strong, b { font-size: inherit; }
 }
 
 .success-order-overlay.is-visible .success-order-card {
-  animation: successOrderPop 1.3s
-    cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: successOrderPop 1.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .success-order-image {
@@ -4264,4 +4204,3 @@ strong, b { font-size: inherit; }
     opacity: 1;
   }
 }
-
