@@ -542,7 +542,7 @@ b {
 }
 
 .current-order-id {
-  color: var(--afa-muted, #222);
+  color: var(--afa-muted, blue);
   font-weight: 700;
   overflow-wrap: anywhere;
 }
@@ -557,7 +557,32 @@ b {
 
 
 
+.no-current-orders {
+  display: none;
+  text-align: center;
+  padding: 24px 16px;
+  color: #777;
+}
 
+.no-current-orders.show {
+  display: block;
+}
+
+.no-current-orders i {
+  display: block;
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.no-current-orders p {
+  margin: 0 0 5px;
+  font-weight: 600;
+  color: var(--afa-ink, #333);
+}
+
+.no-current-orders small {
+  font-size: 12px;
+}
 
 
 

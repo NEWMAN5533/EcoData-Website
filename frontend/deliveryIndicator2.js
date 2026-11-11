@@ -199,14 +199,6 @@ function renderPortal(key, order) {
 
 
 
-
-
-
-
-
-
-
-
   // Reset the state while preserving the compact card class.
   function resetCard() {
     card.className = "dp-item";
@@ -320,6 +312,8 @@ function renderCurrentOrder(key, order) {
     container.classList.remove("is-tracking");
     container.classList.add("is-empty");
     orderIdEl.textContent = "No current order";
+
+    updatePortalVisibility();
     return;
   }
 
@@ -329,12 +323,18 @@ function renderCurrentOrder(key, order) {
     container.classList.remove("is-tracking");
     container.classList.add("is-empty");
     orderIdEl.textContent = "ID unavailable";
+
+    updatePortalVisibility();
     return;
   }
 
   container.classList.remove("is-empty");
   container.classList.add("is-tracking");
   orderIdEl.textContent = orderId;
+
+
+
+  updatePortalVisibility();
 }
 
 
@@ -462,6 +462,36 @@ function listenToPortal(key, portal) {
   );
 }
 
+
+
+
+
+//UPDATED TRACKERS WHEN NO ORDERS
+
+function updatePortalVisibility() {
+  const activePortals = Object.keys(PORTALS).filter(key => {
+    const prefix = PORTALS[key].prefix;
+    const container = document.getElementById(`${prefix}CurrentOrder`);
+
+    return container?.classList.contains("is-tracking");
+  });
+
+  // Show only portals that have a current order
+  Object.entries(PORTALS).forEach(([key, portal]) => {
+    const card = document.getElementById(`${portal.prefix}Tracker`);
+
+    if (!card) return;
+
+    card.style.display = activePortals.includes(key) ? "" : "none";
+  });
+
+  // Show the message only when no portal has an active order
+  const message = document.getElementById("noCurrentOrdersMessage");
+
+  if (message) {
+    message.classList.toggle("show", activePortals.length === 0);
+  }
+}
 
 // =========================
 // START ALL PORTAL LISTENERS
