@@ -1976,6 +1976,8 @@ function saveGuestOrder(orderData) {
 function handleNewOrder(returnedOrder) {
   if (!returnedOrder) return;
 
+ 
+
   const orderId = String(
     returnedOrder.orderId || returnedOrder.publicId || returnedOrder.clientReference ||
     returnedOrder.id || returnedOrder.order_id || returnedOrder.reference || ""
@@ -2000,7 +2002,7 @@ function handleNewOrder(returnedOrder) {
     profit: Number(selectedBundle?.price || 0) - Number(returnedOrder.price || 0),
     network: selectedBundle?.network || returnedOrder.network || "-",
     volume: selectedBundle?.size || returnedOrder.volume || 0,
-    packageName: order.packageName || returnedOrder.packageName || "",
+
     source: "web",
     createdAt: returnedOrder.createdAt || Date.now(),
     updatedAt: Date.now()
@@ -2147,7 +2149,7 @@ function handleNewDataMartOrder(returnedOrder) {
     costPrice,
 
     profit: Number(order.profit ?? amount - costPrice),
-    packageName: order.packageName || returnedOrder.packageName || "",
+   
 
     source: "web",
     provider: "datamart",
