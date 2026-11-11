@@ -313,7 +313,7 @@ function renderCurrentOrder(key, order) {
     container.classList.add("is-empty");
     orderIdEl.textContent = "No current order";
 
-    updatePortalVisibility();
+    
     return;
   }
 
@@ -324,7 +324,7 @@ function renderCurrentOrder(key, order) {
     container.classList.add("is-empty");
     orderIdEl.textContent = "ID unavailable";
 
-    updatePortalVisibility();
+    
     return;
   }
 
@@ -334,10 +334,17 @@ function renderCurrentOrder(key, order) {
 
 
 
-  updatePortalVisibility();
+  
 }
 
-
+function getEmptyState(label = "Awaiting data") {
+  return `
+    <span class="dp-empty-state">
+      <i class="ri-radar-line" aria-hidden="true"></i>
+      <span>${label}</span>
+    </span>
+  `;
+}
 
 function listenToCurrentOrder(key, portal) {
   const activeStatuses = ["processing", "pending"];
@@ -457,7 +464,9 @@ function listenToPortal(key, portal) {
 
       if (card) card.className = "dp-item";
       if (statusEl) statusEl.textContent = "Unable to load";
-      if (timeEl) timeEl.textContent = "--";
+      if (timeEl) {
+        timeEl.innerHTML = getEmptyState("Awaiting");
+      }
     }
   );
 }
@@ -468,30 +477,6 @@ function listenToPortal(key, portal) {
 
 //UPDATED TRACKERS WHEN NO ORDERS
 
-function updatePortalVisibility() {
-  const activePortals = Object.keys(PORTALS).filter(key => {
-    const prefix = PORTALS[key].prefix;
-    const container = document.getElementById(`${prefix}CurrentOrder`);
-
-    return container?.classList.contains("is-tracking");
-  });
-
-  // Show only portals that have a current order
-  Object.entries(PORTALS).forEach(([key, portal]) => {
-    const card = document.getElementById(`${portal.prefix}Tracker`);
-
-    if (!card) return;
-
-    card.style.display = activePortals.includes(key) ? "" : "none";
-  });
-
-  // Show the message only when no portal has an active order
-  const message = document.getElementById("noCurrentOrdersMessage");
-
-  if (message) {
-    message.classList.toggle("show", activePortals.length === 0);
-  }
-}
 
 // =========================
 // START ALL PORTAL LISTENERS

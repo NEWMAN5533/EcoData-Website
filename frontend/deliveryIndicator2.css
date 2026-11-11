@@ -699,6 +699,46 @@ b {
   font-variant-numeric: tabular-nums;
 }
 
+
+/* Animated empty delivery state */
+.dp-empty-state {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--text-muted, #888);
+  font-size: 13px;
+}
+
+.dp-empty-state i {
+  font-size: 16px;
+  animation: dp-empty-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes dp-empty-pulse {
+  0%, 100% {
+    opacity: 0.45;
+    transform: scale(0.9);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dp-empty-state i {
+    animation: none;
+  }
+}
+
+
+
+
+
+
+
 /* Footer note */
 
 .delivery-performance .dp-footer {
