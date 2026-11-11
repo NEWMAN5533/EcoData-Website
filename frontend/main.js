@@ -1122,7 +1122,7 @@ function activateTrackers() {
 
   const secondTracker = (document.getElementById(
     "deliveryTracker2",
-  ).style.display = "flex");
+  ).style.display = "none");
 }
 
 // un activate trackers when no orders

@@ -61,15 +61,6 @@
 
 
 
-  const orderRows = document.getElementById('liveOrderRows');
-const orderEmpty = document.getElementById('liveOrderEmpty');
-
-const syncEmptyState = () => {
-  orderEmpty.hidden = orderRows.children.length > 0;
-};
-
-new MutationObserver(syncEmptyState).observe(orderRows, { childList: true });
-syncEmptyState();
 </script>
 
 <link rel="stylesheet" href="new-ui-style.css">
@@ -1917,6 +1908,16 @@ ECODATA PRODUCTS ENDS
       <div class="dp-info">
         <strong>MTN Express</strong>
         <span>Express delivery</span>
+
+        <!--current Id-->
+        <div class="portal-current-order" id="expressCurrentOrder">
+          <span class="current-order-label">
+            <i class="ri-radar-line"></i>
+            Tracking:
+          </span>
+          <span class="current-order-id" id="expressCurrentOrderId">--
+          </span>
+        </div>
       </div>
 
       <div class="dp-result">
@@ -1936,6 +1937,16 @@ ECODATA PRODUCTS ENDS
       <div class="dp-info">
         <strong>MTN Normal</strong>
         <span>Standard delivery</span>
+
+          <!--current Id-->
+        <div class="portal-current-order" id="normalCurrentOrder">
+          <span class="current-order-label">
+            <i class="ri-radar-line"></i>
+            Tracking:
+          </span>
+          <span class="current-order-id" id="normalCurrentOrderId">--
+          </span>
+        </div>
       </div>
 
       <div class="dp-result">
@@ -1955,6 +1966,16 @@ ECODATA PRODUCTS ENDS
       <div class="dp-info">
         <strong>MTN Verified</strong>
         <span>All verified portal</span>
+
+          <!--current Id-->
+        <div class="portal-current-order" id="verifiedCurrentOrder">
+          <span class="current-order-label">
+            <i class="ri-radar-line"></i>
+            Tracking:
+          </span>
+          <span class="current-order-id" id="verifiedCurrentOrderId">--
+          </span>
+        </div>
       </div>
 
       <div class="dp-result">

@@ -4,6 +4,7 @@ import {
   collection,
   where,
   onSnapshot,
+  doc,
   query,
   orderBy,
   limit
@@ -32,6 +33,40 @@ const PORTALS = {
     prefix: "verified"
   }
 };
+
+
+
+function normalizePackageName(value) {
+  return String(value || "")
+    .trim()
+    .toLowerCase()
+    .replace(/[\s-]+/g, "_");
+}
+
+function getPortalKey(packageName) {
+  const value = normalizePackageName(packageName);
+
+  if (value.includes("mtn_data_express_delivery")) {
+    return "express";
+  }
+
+  if (value.includes("mtn_data_normal_delivery")) {
+    return "normal";
+  }
+
+  if (
+    value.includes("mtn_verified_numbers") ||
+    value.includes("mtn_all_verified_portal") ||
+    value.includes("all_verified")
+  ) {
+    return "verified";
+  }
+
+  return null;
+}
+
+
+
 
 
 // =========================
@@ -158,6 +193,20 @@ function renderPortal(key, order) {
     return;
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   // Reset the state while preserving the compact card class.
   function resetCard() {
     card.className = "dp-item";
@@ -254,65 +303,161 @@ function renderPortal(key, order) {
 }
 
 
+function renderCurrentOrder(key, order) {
+  const prefix = PORTALS[key].prefix;
+
+  const container = document.getElementById(
+    `${prefix}CurrentOrder`
+  );
+
+  const orderIdEl = document.getElementById(
+    `${prefix}CurrentOrderId`
+  );
+
+  if (!container || !orderIdEl) return;
+
+  if (!order) {
+    container.classList.remove("is-tracking");
+    container.classList.add("is-empty");
+    orderIdEl.textContent = "No current order";
+    return;
+  }
+
+  const orderId = String(order.orderId || "").trim();
+
+  if (!orderId) {
+    container.classList.remove("is-tracking");
+    container.classList.add("is-empty");
+    orderIdEl.textContent = "ID unavailable";
+    return;
+  }
+
+  container.classList.remove("is-empty");
+  container.classList.add("is-tracking");
+  orderIdEl.textContent = orderId;
+}
+
+
+
+function listenToCurrentOrder(key, portal) {
+  const activeStatuses = ["processing", "pending"];
+
+  const latestByStatus = {};
+  const unsubscribers = [];
+
+  function updateCurrentOrder() {
+    const orders = Object.values(latestByStatus)
+      .flat()
+      .filter(Boolean)
+      .filter(order => {
+        const orderPortal = normalizePackageName(
+          order.packageName
+        );
+
+        return getPortalKey(orderPortal) === key;
+      })
+      .sort((a, b) =>
+        getTimestamp(b.createdAt) -
+        getTimestamp(a.createdAt)
+      );
+
+    renderCurrentOrder(key, orders[0] || null);
+  }
+
+  activeStatuses.forEach(status => {
+    // Only filter by status in Firestore.
+    // Portal filtering happens in JavaScript.
+    const activeQuery = query(
+      collection(db, "orders"),
+      where("status", "==", status),
+      orderBy("updatedAt", "desc"),
+      limit(10)
+    );
+
+    const unsubscribe = onSnapshot(
+      activeQuery,
+      snapshot => {
+        latestByStatus[status] = snapshot.docs.map(
+          docSnapshot => docSnapshot.data()
+        );
+
+        updateCurrentOrder();
+      },
+      error => {
+        console.error(
+          `Current-order tracking failed for ${portal.name}:`,
+          error
+        );
+      }
+    );
+
+    unsubscribers.push(unsubscribe);
+  });
+
+  return () => {
+    unsubscribers.forEach(unsubscribe => unsubscribe());
+  };
+}
+
+
+
 // =========================
 // LISTEN TO ONE PORTAL
 // =========================
 function listenToPortal(key, portal) {
-  const portalQuery = query(
+  //  status + updatedAt index.
+  const deliveredQuery = query(
     collection(db, "orders"),
     where("status", "==", "delivered"),
-    where("packageName", "==", portal.packageName),
     orderBy("updatedAt", "desc"),
-    limit(1)
+    limit(10)
   );
 
   return onSnapshot(
-    portalQuery,
-
+    deliveredQuery,
     (snapshot) => {
-      console.log(
-        `${portal.name}:`,
-        snapshot.size ? "Delivery data updated." : "No matching delivery yet."
-      );
+      const matchingOrders = snapshot.docs
+        .map((docSnapshot) => docSnapshot.data())
+        .filter((order) => {
+          return getPortalKey(order.packageName) === key;
+        })
+        .filter((order) => {
+          const createdAt = getTimestamp(order.createdAt);
+          const updatedAt = getTimestamp(order.updatedAt);
 
-      if (snapshot.empty) {
-        renderPortal(key, null);
-        return;
-      }
+          return (
+            Number.isFinite(createdAt) &&
+            Number.isFinite(updatedAt) &&
+            createdAt > 0 &&
+            updatedAt >= createdAt
+          );
+        });
 
-      const latestOrder = snapshot.docs[0].data();
-
-      renderPortal(key, latestOrder);
+      // The query is already ordered by updatedAt descending.
+      // The first matching order is the latest for this portal.
+      renderPortal(key, matchingOrders[0] || null);
     },
-
     (error) => {
       console.error(
         `Error loading ${portal.name}:`,
         error
       );
 
-      const prefix = portal.prefix;
-      const card = document.getElementById(`${prefix}Tracker`);
-      const statusEl = document.getElementById(`${prefix}Status`);
-      const timeEl = document.getElementById(`${prefix}Time`);
-      const messageEl = document.getElementById(`${prefix}Message`);
+      const card = document.getElementById(
+        `${portal.prefix}Tracker`
+      );
 
-      if (card) {
-        card.className = "dp-item";
-      }
+      const statusEl = document.getElementById(
+        `${portal.prefix}Status`
+      );
 
-      if (statusEl) {
-        statusEl.textContent = "Unable to load";
-      }
+      const timeEl = document.getElementById(
+        `${portal.prefix}Time`
+      );
 
-      if (timeEl) {
-        timeEl.textContent = "--";
-      }
-
-      if (messageEl) {
-        messageEl.textContent =
-          "Delivery performance could not be loaded. Please try again later.";
-      }
+      if (card) card.className = "dp-item";
+      if (statusEl) statusEl.textContent = "Unable to load";
+      if (timeEl) timeEl.textContent = "--";
     }
   );
 }
@@ -323,4 +468,5 @@ function listenToPortal(key, portal) {
 // =========================
 Object.entries(PORTALS).forEach(([key, portal]) => {
   listenToPortal(key, portal);
+  listenToCurrentOrder(key, portal);
 });

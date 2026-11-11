@@ -518,6 +518,50 @@ b {
 
 
 
+/* CURRENT ORDER TRACKING */
+.portal-current-order {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 12px 2px;
+  white-space: nowrap;
+  font-size: 8px;
+  color: var(--afa-muted, #777);
+}
+
+.current-order-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+}
+
+.current-order-label i{
+  font-size: 9px;
+  color: var(--afa-yellow);
+}
+
+.current-order-id {
+  color: var(--afa-muted, #222);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.portal-current-order.is-tracking .current-order-id {
+  color: #16a34a;
+}
+
+.portal-current-order.is-empty {
+  opacity: 0.7;
+}
+
+
+
+
+
+
+
+
 
 /* Portal icons */
 
