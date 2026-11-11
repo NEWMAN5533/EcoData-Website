@@ -209,7 +209,7 @@ function renderPortal(key, order) {
     resetCard();
 
     statusEl.textContent = "Awaiting delivery";
-    timeEl.textContent = "--";
+    timeEl.innerHTML = getEmptyState("");
 
     if (messageEl) {
       messageEl.textContent =
@@ -217,7 +217,7 @@ function renderPortal(key, order) {
     }
 
     if (lastDeliveredEl) {
-      lastDeliveredEl.textContent = "--";
+      lastDeliveredEl.innerHTML = getEmptyState("");
     }
 
     return;
@@ -239,7 +239,7 @@ function renderPortal(key, order) {
     resetCard();
 
     statusEl.textContent = "Data unavailable";
-    timeEl.textContent = "--";
+    timeEl.innerHTML = getEmptyState("");
 
     if (messageEl) {
       messageEl.textContent =
@@ -247,7 +247,7 @@ function renderPortal(key, order) {
     }
 
     if (lastDeliveredEl) {
-      lastDeliveredEl.textContent = "--";
+      lastDeliveredEl.innerHTML = getEmptyState("");
     }
 
     console.warn(
@@ -332,12 +332,9 @@ function renderCurrentOrder(key, order) {
   container.classList.add("is-tracking");
   orderIdEl.textContent = orderId;
 
-
-
-  
 }
 
-function getEmptyState(label = "Awaiting data") {
+function getEmptyState(label = "Awaiting") {
   return `
     <span class="dp-empty-state">
       <i class="ri-radar-line" aria-hidden="true"></i>
