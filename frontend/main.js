@@ -668,7 +668,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================================
 
   const savedMode = localStorage.getItem(STORAGE_KEY);
-  const saveMode = PACKAGE_MAP[savedMode] ? savedMode : "express";
+  const saveMode = PACKAGE_MAP[savedMode] ? savedMode : "normal";
 
   const activeOption = document.querySelector(
     `.eco-offer-option[data-mode="${saveMode}"]`,
@@ -1448,6 +1448,9 @@ async function orderBundle(network, recipient, packageName, size, reference) {
 
       network: bundle.network,
 
+        // Portal identification
+      packageName: currentPackageName,
+
       volume: Number(bundle.size || size || 0),
 
       dataValue: `${bundle.dataValue || selectedBundle.dataValue || 0}`,
@@ -1680,6 +1683,8 @@ async function orderDataMartBundle(
       paymentReference,
 
       recipient: orderRecipient,
+      // Portal identification
+      packageName: currentPackageName,
 
       network: order.network || bundle?.network || network,
 

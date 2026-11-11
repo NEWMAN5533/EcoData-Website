@@ -73,6 +73,7 @@ syncEmptyState();
 </script>
 
 <link rel="stylesheet" href="new-ui-style.css">
+<link rel="stylesheet" href="deliveryIndicator2.css">
 
   <link rel="stylesheet" href="app.css">
   <link rel="stylesheet" href="store.css">
@@ -1879,115 +1880,99 @@ ECODATA PRODUCTS ENDS
 </section>
 
 
-<!-- ==========================================
-     ECODATA IMPORTANT NOTICE BOARD
-========================================== -->
-<section class="eco-notice-panel">
 
-  <div class="eco-notice-decoration" aria-hidden="true">
-    <span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span>
+<!---======================================
+    DELIVERY INDICATOR 2
+=========================================--->
+
+<!-- ECO DATA DELIVERY PERFORMANCE -->
+<section class="delivery-performance" id="deliveryPerformance">
+
+  <div class="dp-header">
+    <div class="dp-heading">
+      <div class="dp-heading-icon">
+        <i class="ri-bar-chart-grouped-line"></i>
+      </div>
+
+      <div class="dp-heading-text">
+        <h3>Delivery performance</h3>
+        <p>Portal turnaround overview</p>
+      </div>
+    </div>
+
+    <div class="dp-live">
+      <span class="dp-live-dot"></span>
+      <span>LIVE</span>
+    </div>
   </div>
 
-  <div class="eco-notice-grid-decoration" style="display: none;"></div>
+  <div class="dp-list">
 
-  <div id="sk-Notice" class="eco-notice-skeleton">
-    <span class="eco-notice-shimmer eco-notice-shimmer-title"></span>
-    <span class="eco-notice-shimmer"></span>
-    <span class="eco-notice-shimmer"></span>
-    <span class="eco-notice-shimmer"></span>
-    <span class="eco-notice-shimmer"></span>
-    <span class="eco-notice-shimmer"></span>
-    <span class="eco-notice-shimmer"></span>
-  </div>
+    <!-- EXPRESS -->
+    <div class="dp-item" id="expressTracker">
+      <div class="dp-icon express-icon">
+        <i class="ri-flashlight-line"></i>
+      </div>
 
-  <header class="eco-notice-heading">
-    <div class="eco-notice-heading-symbol">
-      <i class="ri-notification-3-line" aria-hidden="true"></i>
+      <div class="dp-info">
+        <strong>MTN Express</strong>
+        <span>Express delivery</span>
+      </div>
+
+      <div class="dp-result">
+        <strong class="dp-status" id="expressStatus">
+          Checking...
+        </strong>
+        <span class="dp-time" id="expressTime">--</span>
+      </div>
     </div>
 
-    <div class="eco-notice-heading-copy">
-      <span class="eco-notice-eyebrow">PLEASE READ</span>
-      <h4>Important Notes</h4>
+    <!-- NORMAL -->
+    <div class="dp-item" id="normalTracker">
+      <div class="dp-icon normal-icon">
+        <i class="ri-time-line"></i>
+      </div>
+
+      <div class="dp-info">
+        <strong>MTN Normal</strong>
+        <span>Standard delivery</span>
+      </div>
+
+      <div class="dp-result">
+        <strong class="dp-status" id="normalStatus">
+          Checking...
+        </strong>
+        <span class="dp-time" id="normalTime">--</span>
+      </div>
     </div>
 
-    <span class="eco-notice-live-label" style="display: none;">
-      <span></span>
-      Updates
-    </span>
-  </header>
+    <!-- VERIFIED -->
+    <div class="dp-item" id="verifiedTracker">
+      <div class="dp-icon verified-icon">
+        <i class="ri-shield-check-line"></i>
+      </div>
 
-  <div class="eco-notice-list">
+      <div class="dp-info">
+        <strong>MTN Verified</strong>
+        <span>All verified portal</span>
+      </div>
 
-    <!-- Retained hidden notice -->
-    <div class="eco-notice-item" style="display: none;">
-      <small>
-        <span>1</span>
-        You Can buy Special Mashup at lower cost
-        <strong>AnyTime!</strong>
-        The first <small>10 packages are Mash-Data packages.</small>
-        The dashboard will read both bundle and mashup orders attached with
-        <strong>( GB or MINS )</strong>, note that its just a tag.
-      </small>
+      <div class="dp-result">
+        <strong class="dp-status" id="verifiedStatus">
+          Checking...
+        </strong>
+        <span class="dp-time" id="verifiedTime">--</span>
+      </div>
     </div>
-
-    <article class="eco-notice-item">
-      <span class="eco-notice-number">01</span>
-      <div class="eco-notice-message">
-        <strong>We're active 24/7</strong>
-        <p>Buy data bundles anytime. There is no daily closing time.</p>
-      </div>
-      <i class="ri-time-line eco-notice-item-symbol" aria-hidden="true"></i>
-    </article>
-
-    <!-- Retained hidden fee notice -->
-    <div class="eco-notice-item" style="display: none;">
-      <small>
-        <span>2</span>
-        Bundle finalPrice is calculated with <strong>(1.95%)</strong>
-        of <strong>Paystack Fee.</strong>
-      </small>
-    </div>
-
-    <article class="eco-notice-item">
-      <span class="eco-notice-number">02</span>
-      <div class="eco-notice-message">
-        <strong>Website loading</strong>
-        <p>
-          Our services run on Render. If the website displays
-          “Application Loading”, please wait a few seconds and try again.
-        </p>
-      </div>
-      <i class="ri-global-line eco-notice-item-symbol" aria-hidden="true"></i>
-    </article>
-
-    <article class="eco-notice-item eco-notice-mobile-item" style="display: none;">
-      <span class="eco-notice-number">03</span>
-      <div class="eco-notice-message">
-        <strong>Install EcoData on your device</strong>
-        <p>Follow the steps to add the website to your home screen for easier access.</p>
-      </div>
-      <i class="ri-smartphone-line eco-notice-item-symbol" aria-hidden="true"></i>
-    </article>
-
-    <article class="eco-notice-item eco-notice-mobile-item">
-      <span class="eco-notice-number">03</span>
-      <div class="eco-notice-message">
-        <strong>Confirm your MoMo payment</strong>
-        <p>
-          After a successful MoMo payment, click
-          <strong>“I have completed the payment”</strong> when prompted.
-        </p>
-      </div>
-      <i class="ri-secure-payment-line eco-notice-item-symbol" aria-hidden="true"></i>
-    </article>
 
   </div>
 
-  <footer class="eco-notice-footer">
-    <i class="ri-message-line" aria-hidden="true"></i>
-    <span>Chat Admin for any assistance.</span>
-  </footer>
+  <div class="dp-footer">
+    <i class="ri-information-line"></i>
+    <p id="deliveryPerformanceNote">
+      Performance is based on the latest completed order.
+    </p>
+  </div>
 
 </section>
 
