@@ -327,7 +327,7 @@ b {
 
   width: 100%;
   max-width: 99%;
-  padding: 17px;
+  padding: 7px;
   background: var(--afa-surface);
   border: 1px solid var(--afa-border);
   border-radius: 16px;
@@ -433,7 +433,15 @@ b {
 .delivery-performance .dp-list {
   display: flex;
   flex-direction: column;
+  background: rgb(250, 249, 248);
+  border-radius: 8px;
+  border: 1px solid var(--afa-border);
+  padding: 8px;
   gap: 8px;
+}
+
+.dark-mode .delivery-performance .dp-list {
+  background: var(--afa-page);
 }
 
 .delivery-performance .dp-item {
@@ -442,11 +450,8 @@ b {
   display: flex;
   align-items: center;
   gap: 11px;
-  border-radius: 12px;
-  background: var(--afa-surface-soft);
-  transition:
-    border-color 0.2s ease,
-    background 0.2s ease;
+  border-radius: 6px;
+
 }
 
 .delivery-performance .dp-item:hover {
@@ -454,17 +459,46 @@ b {
 }
 
 
+#verifiedTracker{
+  background: rgb(230, 247, 241) !important;
+  border: 1px solid rgb(189, 247, 215);
+}
 
+#expressTracker{
+  background: rgb(247, 240, 230) !important;
+  border: 1px solid rgb(247, 227, 189);
+}
+#normalTracker{
+  background: rgba(230, 230, 247, 0.911) !important;
+  border: 1px solid rgb(189, 189, 247);
+}
+
+
+
+
+
+/* DARK MODE SETTING */
+.dark-mode #expressTracker{
+  border-color: rgba(247, 227, 189, 0.473);
+}
+
+.dark-mode #verifiedTracker{
+  border-color: rgba(234, 247, 194, 0.473)
+}
+
+.dark-mode #normalTracker{
+  border-color: rgba(189, 189, 247, 0.466);
+}
+.dark-mode #expressTracker,
+.dark-mode #verifiedTracker,
+.dark-mode #normalTracker{
+  background: var(--afa-surface) !important;
+}
 /* =========================
    PORTAL DELIVERY STATES
 ========================= */
 
-.dp-item {
-  transition:
-    background 0.25s ease,
-    border-color 0.25s ease,
-    box-shadow 0.25s ease;
-}
+
 
 /* INSTANT: 0–10 minutes */
 .dp-item.instant {
