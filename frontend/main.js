@@ -1449,7 +1449,8 @@ async function orderBundle(network, recipient, packageName, size, reference) {
       network: bundle.network,
 
         // Portal identification
-      packageName: currentPackageName,
+      packageName: packageName ||
+      bundle.packageName || "",
 
       volume: Number(bundle.size || size || 0),
 
@@ -1578,7 +1579,7 @@ async function orderDataMartBundle(
 
     if (!response.ok || (!result.success && !isAcceptedResponse)) {
       showSnackBar(
-        result.message || "Unable to confirm the DataMart order.",
+        result.message || "Unable to confirm the order.",
         "error",
         5000,
       );
@@ -1683,8 +1684,11 @@ async function orderDataMartBundle(
       paymentReference,
 
       recipient: orderRecipient,
-      // Portal identification
-      packageName: currentPackageName,
+     
+
+        // Portal identification
+      packageName: packageName ||
+      bundle.packageName || "",
 
       network: order.network || bundle?.network || network,
 
@@ -1850,6 +1854,7 @@ function buildFirestoreOrder(o) {
     providerOrderReference: o.providerOrderReference || null,
 
     recipient: o.recipient || "-",
+    packageName: o.packageName || null,
     network: o.network || "-",
     volume: Number(o.volume || 0),
     dataValue: String(o.dataValue ?? ""),
@@ -1884,8 +1889,12 @@ async function saveOrderToFirestore(orderData) {
   }
 
   const provider = String(orderData.provider || "swiftdata").toLowerCase();
+
+
   const key =
-    provider === "datamart" ? orderData.paymentReference : orderData.orderId;
+    provider === "datamart" ? 
+      (orderData.paymentReference || orderData.orderId) :
+      orderData.orderId;
 
   if (!key) {
     console.error("saveOrderToFirestore: missing payment reference", orderData);
@@ -1991,6 +2000,7 @@ function handleNewOrder(returnedOrder) {
     profit: Number(selectedBundle?.price || 0) - Number(returnedOrder.price || 0),
     network: selectedBundle?.network || returnedOrder.network || "-",
     volume: selectedBundle?.size || returnedOrder.volume || 0,
+    packageName: order.packageName || returnedOrder.packageName || "",
     source: "web",
     createdAt: returnedOrder.createdAt || Date.now(),
     updatedAt: Date.now()
@@ -2099,7 +2109,7 @@ function handleNewDataMartOrder(returnedOrder) {
     status: statusMap[rawStatus] || rawStatus,
 
     recipient:
-      returnedOrder.items?.[0].recipient ||
+      returnedOrder.items?.[0]?.recipient ||
       returnedOrder.recipient ||
       returnedOrder.phoneNumber ||
       order.recipient ||
@@ -2137,6 +2147,7 @@ function handleNewDataMartOrder(returnedOrder) {
     costPrice,
 
     profit: Number(order.profit ?? amount - costPrice),
+    packageName: order.packageName || returnedOrder.packageName || "",
 
     source: "web",
     provider: "datamart",
