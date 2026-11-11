@@ -326,15 +326,14 @@ b {
 
 
   width: 100%;
-  max-width: 99%;
+  max-width: 100%;
   padding: 7px;
   background: var(--afa-surface);
-  border: 1px solid var(--afa-border);
   border-radius: 16px;
   color: var(--afa-text);
   font-family: inherit;
   box-sizing: border-box;
-  margin: 24px 0;
+  margin: 4px 0;
   box-shadow: 0 4px 18px rgb(20 25 35 / 3%);
 }
 
@@ -368,7 +367,7 @@ b {
   display: grid;
   place-items: center;
   border-radius: 12px;
-  background: var(--dp-surface-soft);
+  background: var(--afa-yellow-soft);
   color: var(--afa-yellow);
   font-size: 17px;
 }
