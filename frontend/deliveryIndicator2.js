@@ -258,6 +258,11 @@ function renderPortal(key, order) {
     return;
   }
 
+
+  if(card){
+    card.dataset.lastDeliveredAt = String(getTimestamp(order.updatedAt),);
+  }
+
   // =========================
   // CALCULATE DELIVERY TIME
   // =========================
@@ -313,7 +318,7 @@ function renderCurrentOrder(key, order) {
     container.classList.add("is-empty");
     orderIdEl.textContent = "No current order";
 
-    
+    updatePortalVisibility();
     return;
   }
 
@@ -324,13 +329,17 @@ function renderCurrentOrder(key, order) {
     container.classList.add("is-empty");
     orderIdEl.textContent = "ID unavailable";
 
-    
+    updatePortalVisibility();
     return;
   }
 
   container.classList.remove("is-empty");
   container.classList.add("is-tracking");
   orderIdEl.textContent = orderId;
+
+
+
+  updatePortalVisibility();
 
 }
 
@@ -473,7 +482,49 @@ function listenToPortal(key, portal) {
 
 
 //UPDATED TRACKERS WHEN NO ORDERS
+function updatePortalVisibility(){
+  const now = Date.now();
+  const TWENTY_FOUR_HOURS = 24 * 60 * 60 * 1000;
 
+  let visiblePortal = 0;
+
+  Object.entries(PORTALS).forEach(([key, portal]) => {
+    const prefix = portal.prefix;
+    const card = document.getElementById(`${prefix}Tracker`);
+    const currentOrder = document.getElementById(`${prefix}CurrentOrder`,);
+
+    if (!card) return;
+
+    // Is portal currently processing and order?
+    const hasActiveOrder = currentOrder?.classList.contains("is-tracking") ?? false;
+
+    // Timestamp of the most recent delivered order
+    const lastDeliveredAt = Number(card.dataset.lastDeliveredAt || 0);
+
+    // Was an order delivered within the past 24 hours?
+    const hasRecentDelivery = lastDeliveredAt > 0 &&
+      lastDeliveredAt <= now &&
+      now - lastDeliveredAt <= TWENTY_FOUR_HOURS;
+    
+    // Show active portal and portals with recent deliveries
+    const shouldShow = hasActiveOrder || hasRecentDelivery;
+
+    card.style.display = shouldShow ? "" : "none";
+
+    if (shouldShow) {
+      visiblePortal++;
+    }
+  });
+  // Show the empty-state message only when every portal is hidden
+  const message = document.getElementById("noCurrentOrderMessage");
+
+  if (message) {
+    message.classList.toggle("show",
+      visiblePortal === 0
+    );
+  }
+  
+}
 
 // =========================
 // START ALL PORTAL LISTENERS
