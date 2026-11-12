@@ -2678,9 +2678,11 @@ b {
 
   border-radius: 10px;
   cursor: pointer;
-  transition:
-    background 160ms ease,
-    border-color 160ms ease;
+}
+
+.eco-offer-option.active{
+  background: var(--eco-offer-yellow-soft);
+  border-color: rgba(255, 204, 0, 0.5);
 }
 
 .eco-offer-option:hover {
