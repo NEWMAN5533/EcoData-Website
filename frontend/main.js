@@ -668,7 +668,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================================
 
   const savedMode = localStorage.removeItem(STORAGE_KEY);
-  const saveMode = PACKAGE_MAP[savedMode] ? savedMode : "normal";
+  const saveMode = PACKAGE_MAP[savedMode] ? savedMode : "express";
 
   const activeOption = document.querySelector(
     `.eco-offer-option[data-mode="${saveMode}"]`,
@@ -680,6 +680,9 @@ document.addEventListener("DOMContentLoaded", () => {
     setActiveOffer(activeOption);
     setOfferButton(activeOption);
     setOfferDropdown(false);
+
+    // show active offer
+    activeOption.classList.add("active");
   }
 
   // =========================================
