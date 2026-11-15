@@ -1129,8 +1129,8 @@ function hasActiveOrder(recipient) {
 
   if(!target) return null;
 
-  return orders.find((o) => {
-    const status = String(o.status || "").trim().toLowerCase();
+  return orders.find((order) => {
+    const status = String(order.status || "").trim().toLowerCase();
 
     const orderRecipient = 
       order.recipient || 
