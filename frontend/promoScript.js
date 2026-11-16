@@ -11,7 +11,7 @@
 
 
 
-    return (day === 1 );
+    return (day === 4 );
     
   }
 
@@ -20,7 +20,7 @@
     const day = now.getDay();
     let end = new Date(now);
 
-    if(day === 1 ) {
+    if(day === 4 ) {
       end.setDate(now.getDate());
       end.setHours(23, 59, 59, 999);
 
