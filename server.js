@@ -1384,8 +1384,8 @@ if (
     // Find the signed-in user's email.
     const users = await sql`
       SELECT email
-      FROM ecodata_users
-      WHERE clerk_user_id = ${userId}
+      FROM public_users
+      WHERE clerk_id = ${userId}
       LIMIT 1
     `;
 
