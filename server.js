@@ -1266,7 +1266,6 @@ function mobileCheckoutPrice(basePrice) {
 
 
 
-
 app.post("/api/mobile/checkout", async (req, res) => {
   try {
     const { userId } = getAuth(req);
@@ -1278,17 +1277,24 @@ app.post("/api/mobile/checkout", async (req, res) => {
       });
     }
 
-    const { network, package: packageName, size, phone } = req.body ?? {};
+    const { callbackUrl, lines } = req.body ?? {};
 
+    // Validate the batch sent by cartContext.tsx.
     if (
-      typeof network !== "string" ||
-      typeof packageName !== "string" ||
-      typeof size !== "string" ||
-      typeof phone !== "string" ||
-      !network.trim() ||
-      !packageName.trim() ||
-      !size.trim() ||
-      !phone.trim()
+      !Array.isArray(lines) ||
+      lines.length === 0 ||
+      lines.some(
+        (line) =>
+          !line ||
+          typeof line.network !== "string" ||
+          typeof line.package !== "string" ||
+          typeof line.size !== "string" ||
+          typeof line.phone !== "string" ||
+          !line.network.trim() ||
+          !line.package.trim() ||
+          !line.size.trim() ||
+          !line.phone.trim()
+      )
     ) {
       return res.status(400).json({
         success: false,
@@ -1296,29 +1302,75 @@ app.post("/api/mobile/checkout", async (req, res) => {
       });
     }
 
-    /*
-      IMPORTANT:
-      Replace this placeholder with your existing server-side
-      authoritative selling-price lookup before enabling payments.
-
-      Never accept the price supplied by the mobile app.
-    */
-    const basePrice = getMobileSellingPrice(
-      line.network,
-      line.size,
-      line.package,
-    )
-
-    if (!Number.isFinite(Number(basePrice)) || Number(basePrice) <= 0) {
+    // Normal/DataMart orders must use separate checkouts.
+    if (
+      lines.length > 1 &&
+      lines.some(
+        (line) => line.package.trim().toLowerCase() === "normal"
+      )
+    ) {
       return res.status(400).json({
         success: false,
-        message: "This bundle is unavailable. Please refresh and try again.",
+        message:
+          "Normal bundle orders must be checked out separately.",
       });
     }
 
-    const total = mobileCheckoutPrice(basePrice);
+    // Validate the callback URL against the app's known deep link.
+    const expectedCallbackUrl = Linking.createURL("paystack");
 
-    // Find the signed-in user's email using the existing account records.
+    if (
+      typeof callbackUrl !== "string" ||
+      callbackUrl !== expectedCallbackUrl
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid payment callback URL.",
+      });
+    }
+
+    // Calculate all prices on the server.
+    const pricedLines = lines.map((line) => {
+      const packageName = line.package.trim();
+      const network = line.network.trim();
+      const size = line.size.trim();
+      const phone = line.phone.trim();
+
+      const basePrice = Number(
+        getMobileSellingPrice(network, size, packageName)
+      );
+
+      if (!Number.isFinite(basePrice) || basePrice <= 0) {
+        throw new Error(
+          `Invalid selling price for ${network} ${size}GB.`
+        );
+      }
+
+      return {
+        package: packageName,
+        network,
+        size,
+        phone,
+        price: basePrice,
+      };
+    });
+
+    // Apply the checkout fee once to the combined base amount.
+    const baseTotal = pricedLines.reduce(
+      (sum, line) => sum + line.price,
+      0
+    );
+
+    const total = mobileCheckoutPrice(baseTotal);
+
+    if (!Number.isFinite(total) || total <= 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Unable to calculate the checkout amount.",
+      });
+    }
+
+    // Find the signed-in user's email.
     const users = await sql`
       SELECT email
       FROM ecodata_users
@@ -1336,60 +1388,35 @@ app.post("/api/mobile/checkout", async (req, res) => {
       });
     }
 
-    // Stop a second active order for this recipient.
-    const activeOrders = await sql`
-      SELECT id
-      FROM orders
-      WHERE phone = ${phone.trim()}
-        AND status IN ('processing', 'pending', 'unknown')
-        AND created_at > NOW() - INTERVAL '30 minutes'
-      LIMIT 1
-    `;
+    // Check every recipient for an active order.
+    for (const line of pricedLines) {
+      const activeOrders = await sql`
+        SELECT id
+        FROM orders
+        WHERE phone = ${line.phone}
+          AND status IN ('processing', 'pending', 'unknown')
+          AND created_at > NOW() - INTERVAL '30 minutes'
+        LIMIT 1
+      `;
 
-    if (activeOrders.length) {
-      return res.status(409).json({
-        success: false,
-        message: "This number already has an active order.",
-      });
+      if (activeOrders.length) {
+        return res.status(409).json({
+          success: false,
+          message:
+            `The number ${line.phone} already has an active order.`,
+        });
+      }
     }
 
     const reference =
-      "ECM" + crypto.randomUUID().replace(/-/g, "").slice(0, 20).toUpperCase();
+      "ECM" +
+      crypto.randomUUID()
+        .replace(/-/g, "")
+        .slice(0, 20)
+        .toUpperCase();
 
-    // Initialize Paystack from the backend, never from the mobile app.
-    const paymentResponse = await axios.post(
-      "https://api.paystack.co/transaction/initialize",
-      {
-        email,
-        amount: Math.round(total * 100),
-        currency: "GHS",
-        reference,
-        metadata: {
-          source: "ecodata_mobile",
-          clerk_user_id: userId,
-          network: network.trim(),
-          package: packageName.trim(),
-          size: size.trim(),
-          phone: phone.trim(),
-        },
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
-          "Content-Type": "application/json",
-        },
-        timeout: 15000,
-      },
-    );
-
-    if (
-      paymentResponse.data?.status !== true ||
-      !paymentResponse.data?.data?.authorization_url
-    ) {
-      throw new Error("Paystack did not return an authorization URL.");
-    }
-
-    // Persist the checkout before returning the payment URL.
+    // Create the checkout record before initializing payment.
+    // If Paystack initialization fails, the record is marked failed.
     await sql`
       INSERT INTO checkouts (
         reference,
@@ -1404,15 +1431,7 @@ app.post("/api/mobile/checkout", async (req, res) => {
       VALUES (
         ${reference},
         ${userId},
-        ${JSON.stringify([
-          {
-            package: packageName.trim(),
-            network: network.trim(),
-            size: size.trim(),
-            phone: phone.trim(),
-            price: Number(basePrice),
-          },
-        ])}::jsonb,
+        ${JSON.stringify(pricedLines)}::jsonb,
         ${total},
         'pending',
         0,
@@ -1421,21 +1440,65 @@ app.post("/api/mobile/checkout", async (req, res) => {
       )
     `;
 
-    return res.json({
-      success: true,
-      reference,
-      amount: total,
-      authorizationUrl: paymentResponse.data.data.authorization_url,
-    });
+    try {
+      const paymentResponse = await axios.post(
+        "https://api.paystack.co/transaction/initialize",
+        {
+          email,
+          amount: Math.round(total * 100),
+          currency: "GHS",
+          reference,
+          callback_url: callbackUrl,
+          metadata: {
+            source: "ecodata_mobile",
+            clerk_user_id: userId,
+            checkout_reference: reference,
+            line_count: pricedLines.length,
+          },
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
+            "Content-Type": "application/json",
+          },
+          timeout: 15000,
+        }
+      );
+
+      if (
+        paymentResponse.data?.status !== true ||
+        !paymentResponse.data?.data?.authorization_url
+      ) {
+        throw new Error("Paystack did not return an authorization URL.");
+      }
+
+      return res.json({
+        success: true,
+        reference,
+        amount: total,
+        authorizationUrl:
+          paymentResponse.data.data.authorization_url,
+      });
+    } catch (paymentError) {
+      await sql`
+        UPDATE checkouts
+        SET status = 'failed', updated_at = NOW()
+        WHERE reference = ${reference}
+          AND status = 'pending'
+      `;
+
+      throw paymentError;
+    }
   } catch (error) {
     console.error(
       "Mobile checkout initialization failed:",
-      error.response?.data || error.message,
+      error.response?.data || error.message
     );
 
     return res.status(500).json({
       success: false,
-      message: "Unable to start checkout. Please try again.",
+      message:
+        "Unable to start checkout. Please try again.",
     });
   }
 });
