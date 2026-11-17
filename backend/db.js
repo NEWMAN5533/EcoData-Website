@@ -14,7 +14,7 @@ if(!process.env.DATABASE_URL) {
 
 
 // neon HTTP client -existing controllers continue using:
-export const sql = neon(process.env.DATABASE_URL);
+ const sql = neon(process.env.DATABASE_URL);
 
 // Websocket transport for interactive PostgreSQL transactions.
 neonConfig.webSocketConstructor = ws;
@@ -22,3 +22,4 @@ export const pool = new Pool({
   connectionString: process.env.DATABASE_URL
 });
 
+export default sql;
