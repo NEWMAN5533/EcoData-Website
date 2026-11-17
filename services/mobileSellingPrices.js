@@ -11,7 +11,13 @@ export function getMobileSellingPrice(network, size, packageName) {
     .trim()
     .toLowerCase();
 
-  const prices = getSellingPrices(network, size);
+
+  const normalizedSize = String(size)
+  .trim()
+  .toUpperCase()
+  .replace(/\s*GB$/, "");
+
+  const prices = getSellingPrices(network, normalizedSize);
 
   if (!prices) {
     throw new Error(`No selling price configured for ${network} ${size}GB.`);
