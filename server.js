@@ -1266,6 +1266,14 @@ function mobileCheckoutPrice(basePrice) {
 
 
 
+
+
+
+
+
+
+
+
 app.post("/api/mobile/checkout", async (req, res) => {
   try {
     const { userId } = getAuth(req);
@@ -1317,17 +1325,19 @@ app.post("/api/mobile/checkout", async (req, res) => {
     }
 
     // Validate the callback URL against the app's known deep link.
-    const expectedCallbackUrl = Linking.createURL("paystack");
+  const allowedCallbackUrls = new Set([
+  "ecodatamobile://paystack",
+]);
 
-    if (
-      typeof callbackUrl !== "string" ||
-      callbackUrl !== expectedCallbackUrl
-    ) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid payment callback URL.",
-      });
-    }
+if (
+  typeof callbackUrl !== "string" ||
+  !allowedCallbackUrls.has(callbackUrl)
+) {
+  return res.status(400).json({
+    success: false,
+    message: "Invalid payment callback URL.",
+  });
+}
 
     // Calculate all prices on the server.
     const pricedLines = lines.map((line) => {
@@ -1490,10 +1500,12 @@ app.post("/api/mobile/checkout", async (req, res) => {
       throw paymentError;
     }
   } catch (error) {
-    console.error(
-      "Mobile checkout initialization failed:",
-      error.response?.data || error.message
-    );
+    console.error("[EcoData mobile checkout] Error:", {
+      message: error.message,
+      response: error.response?.data,
+      status: error.response?.status,
+      stack: error.stack,
+    });
 
     return res.status(500).json({
       success: false,
@@ -1502,7 +1514,6 @@ app.post("/api/mobile/checkout", async (req, res) => {
     });
   }
 });
-
 
 
 
