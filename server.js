@@ -95,7 +95,7 @@ import adminSellersRouter from "./routes/adminSellersMap.js";
 
 //MOBILE APP IMPORTS
 import { getMobileSellingPrice } from "./services/mobileSellingPrices.js";
-import { sql, pool } from "./backend/db.js";
+import { sql} from "../backend/db.js";
 
 
 
