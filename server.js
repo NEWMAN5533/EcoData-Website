@@ -94,6 +94,7 @@ import adminSellersRouter from "./routes/adminSellersMap.js";
 
 
 //MOBILE APP IMPORTS
+import { mobileRouter } from "./routes/mobileMe.js";
 import { getMobileSellingPrice } from "./services/mobileSellingPrices.js";
 import  sql, { pool } from "./backend/db.js";
 
@@ -195,6 +196,11 @@ app.use("/api/creator/withdrawals", createProductRouter);
 app.use("/api/creator/sales", createProductRouter);
 
 
+
+
+
+
+
 // CLERK AUTHENTICATION TEST
 app.use("/api/account", accountRouter);
 
@@ -211,6 +217,8 @@ app.get("/api/auth/me", requireAuth, (req, res) => {
 });
 
 
+// MOBILE APP USE
+app.use("/api/me", mobileRouter);
 
 
 
