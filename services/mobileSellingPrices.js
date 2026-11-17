@@ -20,7 +20,7 @@ export function getMobileSellingPrice(network, size, packageName) {
   const prices = getSellingPrices(network, normalizedSize);
 
   if (!prices) {
-    throw new Error(`No selling price configured for ${network} ${size}GB.`);
+    throw new Error(`No selling price configured for ${network} ${size}`);
   }
 
   // Keep the product's existing price category, but don't
