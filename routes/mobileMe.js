@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { requireAuth } from "../middleware/clerkAuth.js";
-import { sql } from "../backend/db.js";
+import sql from "../backend/db.js";
 
 const mobileRouter = Router();
 
