@@ -1384,7 +1384,7 @@ if (
     // Find the signed-in user's email.
     const users = await sql`
       SELECT email
-      FROM public_users
+      FROM public.users
       WHERE clerk_id = ${userId}
       LIMIT 1
     `;
