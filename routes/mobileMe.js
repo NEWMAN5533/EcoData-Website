@@ -1,18 +1,25 @@
 import { Router } from "express";
+import { getAuth, clerkClient } from "@clerk/express";
 import { requireAuth } from "../middleware/clerkAuth.js";
 import sql from "../backend/db.js";
 
 const mobileRouter = Router();
 
+async function getClerkUser(userId) {
+  const client =
+    typeof clerkClient === "function"
+      ? await clerkClient()
+      : clerkClient;
+
+  return client.users.getUser(userId);
+}
+
 // GET /api/me — retrieve the signed-in user's EcoData profile
 mobileRouter.get("/", requireAuth, async (req, res) => {
   try {
-    const clerkUserId =
-      req.auth?.userId ||
-      req.auth?.user?.id ||
-      req.auth?.claims?.sub;
+    const { userId } = getAuth(req);
 
-    if (!clerkUserId) {
+    if (!userId) {
       return res.status(401).json({
         success: false,
         message: "Authentication required.",
@@ -35,7 +42,7 @@ mobileRouter.get("/", requireAuth, async (req, res) => {
         created_at,
         updated_at
       FROM public.ecodata_users
-      WHERE clerk_user_id = ${clerkUserId}
+      WHERE clerk_user_id = ${userId}
       LIMIT 1
     `;
 
@@ -60,31 +67,36 @@ mobileRouter.get("/", requireAuth, async (req, res) => {
   }
 });
 
-// POST /api/me — create the profile after Clerk registration
+// POST /api/me — create or update the profile after registration
 mobileRouter.post("/", requireAuth, async (req, res) => {
   try {
-    const clerkUserId =
-      req.auth?.userId ||
-      req.auth?.user?.id ||
-      req.auth?.claims?.sub;
+    const { userId } = getAuth(req);
 
-    if (!clerkUserId) {
+    if (!userId) {
       return res.status(401).json({
         success: false,
         message: "Authentication required.",
       });
     }
 
-    const { fullName, phone } = req.body ?? {};
+    const fullName =
+      typeof req.body?.fullName === "string"
+        ? req.body.fullName.trim()
+        : "";
 
-    if (typeof fullName !== "string" || !fullName.trim()) {
+    const phone =
+      typeof req.body?.phone === "string"
+        ? req.body.phone.trim()
+        : "";
+
+    if (!fullName) {
       return res.status(400).json({
         success: false,
         message: "Full name is required.",
       });
     }
 
-    const nameParts = fullName.trim().split(/\s+/);
+    const nameParts = fullName.split(/\s+/);
     const firstName = nameParts[0];
     const lastName = nameParts.slice(1).join(" ");
 
@@ -95,26 +107,30 @@ mobileRouter.post("/", requireAuth, async (req, res) => {
       });
     }
 
-    if (typeof phone !== "string" || !/^0\d{9}$/.test(phone)) {
+    if (!/^0\d{9}$/.test(phone)) {
       return res.status(400).json({
         success: false,
         message: "Enter a valid 10-digit phone number.",
       });
     }
 
-    // Obtain the email from Clerk, not from untrusted client input.
-    const clerkUser = await req.auth.getUser?.();
+    // Retrieve the authenticated user's details directly from Clerk.
+    const clerkUser = await getClerkUser(userId);
 
-    if (!clerkUser?.emailAddresses?.length) {
+    const emailAddress =
+      clerkUser.emailAddresses?.find(
+        (address) =>
+          address.id === clerkUser.primaryEmailAddressId
+      ) || clerkUser.emailAddresses?.[0];
+
+    const email = emailAddress?.emailAddress?.trim().toLowerCase();
+
+    if (!email) {
       return res.status(400).json({
         success: false,
         message: "No email address is available for this account.",
       });
     }
-
-    const email =
-      clerkUser.primaryEmailAddress?.emailAddress ||
-      clerkUser.emailAddresses[0].emailAddress;
 
     const rows = await sql`
       INSERT INTO public.ecodata_users (
@@ -126,10 +142,10 @@ mobileRouter.post("/", requireAuth, async (req, res) => {
         phone
       )
       VALUES (
-        ${clerkUserId},
+        ${userId},
         ${firstName},
         ${lastName},
-        ${fullName.trim()},
+        ${fullName},
         ${email},
         ${phone}
       )
