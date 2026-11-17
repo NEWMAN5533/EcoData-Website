@@ -93,6 +93,8 @@ import adminSellersRouter from "./routes/adminSellersMap.js";
 
 
 
+//MOBILE APP IMPORTS
+import { getMobileSellingPrice } from "./services/mobileSellingPrices.js";
 
 
 
@@ -1262,6 +1264,9 @@ function mobileCheckoutPrice(basePrice) {
   );
 }
 
+
+
+
 app.post("/api/mobile/checkout", async (req, res) => {
   try {
     const { userId } = getAuth(req);
@@ -1298,11 +1303,11 @@ app.post("/api/mobile/checkout", async (req, res) => {
 
       Never accept the price supplied by the mobile app.
     */
-    const basePrice = await getMobileBundleSellingPrice({
-      network: network.trim(),
-      packageName: packageName.trim(),
-      size: size.trim(),
-    });
+    const basePrice = getMobileSellingPrice(
+      line.network,
+      line.size,
+      line.package,
+    )
 
     if (!Number.isFinite(Number(basePrice)) || Number(basePrice) <= 0) {
       return res.status(400).json({
@@ -1434,6 +1439,7 @@ app.post("/api/mobile/checkout", async (req, res) => {
     });
   }
 });
+
 
 
 
