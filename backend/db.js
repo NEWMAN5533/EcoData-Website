@@ -6,7 +6,7 @@ import {
   Pool
  } from "@neondatabase/serverless";
 
- import ws from "ws";
+import ws from "ws";
 
 if(!process.env.DATABASE_URL) {
   throw new Error ("DATABASE_URL is missing from your env file");
@@ -21,5 +21,6 @@ neonConfig.webSocketConstructor = ws;
 export const pool = new Pool({
   connectionString: process.env.DATABASE_URL
 });
+
 
 export default sql;
