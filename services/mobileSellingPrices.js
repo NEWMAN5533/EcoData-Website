@@ -1,46 +1,63 @@
 import { getSellingPrices } from "../frontend/sellingPrice.js";
+import { getDataMartSellingPrice } from "../services/dataMartSellingPrices.js";
 
 /**
- * One authoritative selling-price source for the mobile app.
+ * Authoritative mobile selling prices.
  *
- * Vendor selection (DataMart vs SwiftData) must never
- * change the selling price.
+ * Normal   -> DataMart
+ * Express  -> SwiftData userPrice
+ * Verified -> SwiftData userPrice
+ *
+ * Prices exclude the additional Paystack fee.
  */
 export function getMobileSellingPrice(network, size, packageName) {
   const normalizedPackage = String(packageName || "")
     .trim()
     .toLowerCase();
 
+  const normalizedNetwork = String(network || "")
+    .trim()
+    .toLowerCase()
+    .replace("airteltigo", "at")
+    .replace("airtel-tigo", "at");
 
-  const normalizedSize = String(size)
-  .trim()
-  .toUpperCase()
-  .replace(/\s*GB$/, "");
+  const volume = Number(String(size).replace(/gb/i, "").trim());
 
-  const prices = getSellingPrices(network, normalizedSize);
-
-  if (!prices) {
-    throw new Error(`No selling price configured for ${network} ${size}`);
+  if (!Number.isFinite(volume) || volume <= 0) {
+    throw new Error(`Invalid bundle size: ${size}`);
   }
 
-  // Keep the product's existing price category, but don't
-  // choose a different price based on the fulfillment vendor.
-  if (normalizedPackage === "express") {
-    if (prices.userPrice != null) return Number(prices.userPrice);
-    if (prices.standardPrice != null) return Number(prices.standardPrice);
+  // Normal Delivery: DataMart prices.
+  if (normalizedPackage === "normal") {
+    return getDataMartSellingPrice(normalizedNetwork, volume);
   }
 
+  // Express and All Verified: SwiftData prices.
   if (
+    normalizedPackage === "express" ||
     normalizedPackage === "verified" ||
     normalizedPackage === "all verified"
   ) {
-    if (prices.userPrice != null) return Number(prices.userPrice);
-    if (prices.standardPrice != null) return Number(prices.standardPrice);
-  }
+    const prices = getSellingPrices(normalizedNetwork, volume);
 
-  if (normalizedPackage === "normal") {
-    if (prices.userPrice != null) return Number(prices.userPrice);
-    if (prices.standardPrice != null) return Number(prices.standardPrice);
+    if (!prices) {
+      throw new Error(
+        `No SwiftData selling price configured for ${normalizedNetwork} ${volume}GB.`,
+      );
+    }
+
+    const price =
+      normalizedNetwork === "mtn"
+        ? prices.userPrice
+        : prices.standardPrice;
+
+    if (!Number.isFinite(Number(price)) || Number(price) <= 0) {
+      throw new Error(
+        `No valid SwiftData selling price configured for ${normalizedNetwork} ${volume}GB.`,
+      );
+    }
+
+    return Number(price);
   }
 
   throw new Error(`Unsupported mobile package "${packageName}".`);
