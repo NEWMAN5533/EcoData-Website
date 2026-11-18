@@ -1,7 +1,8 @@
 import cron from "node-cron";
 import axios from "axios";
 import { db } from "../firebaseAdmin.js";
-
+import { createMobileOrderPolling } from "../services/mobileOrderPolling.js";
+import { createMobileDataMartReconciliation } from "../services/mobileDataMartReconciliation.js";
 
 // ---------- config ----------
 const SWIFT_BASE = (
@@ -210,6 +211,11 @@ async function syncSwift(docs) {
 
 // ---------- the job ----------
 let running = false;
+const mobileDataMart =
+  createMobileDataMartReconciliation({
+    sql,
+    updateMobileNeonOrder,
+  });
 
 async function syncOrders() {
   if (running) {
@@ -248,6 +254,9 @@ async function syncOrders() {
 
     await syncDataMart(dm);
     await syncSwift(sw);
+    await mobileDataMart.pollMobileDataMartOrders({
+      limit: 100
+    });
   } catch (err) {
     console.error("🔥 Order sync failed:", err.message);
   } finally {
@@ -256,9 +265,37 @@ async function syncOrders() {
   }
 }
 
-export function startOrderSyncJob() {
-  cron.schedule("*/9 * * * *", syncOrders); // every 9 minutes
+export function startOrderSyncJob(mobilePolling) {
+  cron.schedule("*/9 * * * *", async () => {
+    await syncOrders();
 
-  setTimeout(syncOrders, 20000); // one run shortly after every boot or wake-up
-  console.log("⏰ Order sync scheduled");
+    if (mobilePolling) {
+      try {
+        const result = await mobilePolling.pollMobileOrders({
+          limit: 100,
+        });
+
+        console.log("📱 Mobile Neon order sync completed:", {
+          checked: result.checked,
+          results: result.results.length,
+        });
+      } catch (error) {
+        console.error("📱 Mobile Neon order sync failed:", error.message);
+      }
+    }
+  });
+
+  setTimeout(async () => {
+    await syncOrders();
+
+    if (mobilePolling) {
+      try {
+        await mobilePolling.pollMobileOrders({ limit: 100 });
+      } catch (error) {
+        console.error("📱 Initial mobile order sync failed:", error.message);
+      }
+    }
+  }, 20000);
+
+  console.log("⏰ Firestore and mobile Neon order sync scheduled");
 }
