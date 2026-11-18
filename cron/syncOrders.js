@@ -1,7 +1,6 @@
 import cron from "node-cron";
 import axios from "axios";
 import { db } from "../firebaseAdmin.js";
-import { createMobileOrderPolling } from "../services/mobileOrderPolling.js";
 import { createMobileDataMartReconciliation } from "../services/mobileDataMartReconciliation.js";
 
 // ---------- config ----------
