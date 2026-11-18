@@ -1304,7 +1304,7 @@ app.post("/api/mobile/checkout/reconcile", async (req, res) => {
     const rows = await sql`
       SELECT reference, amount
       FROM public.checkouts
-      WHERE clerk_id = ${userId}
+      WHERE clerk_user_id = ${userId}
         AND status = 'pending'
         AND created_at > NOW() - INTERVAL '24 hours'
       ORDER BY created_at DESC
