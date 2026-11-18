@@ -1,4 +1,4 @@
-import sql from "../backend/db";
+import sql from "../backend/db.js";
 
 // ========================================
 // UPDATA DATABASE ORDER (REF)
