@@ -1989,20 +1989,6 @@ app.post(
 
 
 
-const mobileOrderPolling =
-  createMobileOrderPolling({
-    sql,
-    fetchSwiftDataBulkStatus,
-    getDataMartOrderStatus,
-    updateMobileNeonOrder,
-  });
-
-
-startOrderSyncJob(mobileOrderPolling);
-
-  
-
-
 
 // Frontend fallback
 app.use((req, res) => {
