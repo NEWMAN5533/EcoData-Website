@@ -163,6 +163,8 @@ accountRouter.get(
           firstName: user.first_name,
           lastName: user.last_name,
           email: user.email,
+          phone: user.phone ?? "",
+          loyalty: user.loyalty_points ?? "",
           role: user.role
         },
 
