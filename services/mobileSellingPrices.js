@@ -1,5 +1,5 @@
 import { getSellingPrices } from "../frontend/sellingPrice.js";
-import { getDataMartSellingPrice } from "../services/dataMartSellingPrices.js";
+import { getDataMartSellingPrice } from "../services/datamartSellingPrices.js";
 
 /**
  * Authoritative mobile selling prices.
