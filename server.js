@@ -89,6 +89,7 @@ import mobileRouter from "./routes/mobileMe.js";
 import { getMobileSellingPrice } from "./services/mobileSellingPrices.js";
 import { submitMobileDataMartOrder } from "./services/mobileProviderFulfillment.js";
 import { createMobileOrderPolling } from "./services/mobileOrderPolling.js";
+import { updateMobileNeonOrder } from "./services/updateMobileNeonOrders.js";
 
 dotenv.config();
 
