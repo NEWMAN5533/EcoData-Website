@@ -96,7 +96,9 @@ import adminSellersRouter from "./routes/adminSellersMap.js";
 //MOBILE APP IMPORTS
 import mobileRouter from "./routes/mobileMe.js";
 import { getMobileSellingPrice } from "./services/mobileSellingPrices.js";
-import  sql, { pool } from "./backend/db.js";
+import { submitMobileDataMartOrder } from "./services/mobileProviderFulfillment.js";
+import { createMobileOrderPolling } from "./services/mobileOrderPolling.js";
+import { startOrderSyncJob } from "./cron/syncOrders.js";
 
 
 
@@ -1039,6 +1041,244 @@ return res.status(502).json({
    Separate from the existing website flow
 ========================================= */
 
+
+
+
+// Use the existing backend/db.js import.
+// If server.js already imports sql from this file,
+// DO NOT add a duplicate import.
+// ========================================
+// MOBILE CHECKOUT
+//=========================================
+
+app.post("/api/mobile/checkout", async (req, res) => {
+  try {
+    const { userId } = getAuth(req);
+
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: "Please sign in to continue.",
+      });
+    }
+
+    const { callbackUrl, lines } = req.body ?? {};
+
+    // Validate the batch sent by cartContext.tsx.
+    if (
+      !Array.isArray(lines) ||
+      lines.length === 0 ||
+      lines.some(
+        (line) =>
+          !line ||
+          typeof line.network !== "string" ||
+          typeof line.package !== "string" ||
+          typeof line.size !== "string" ||
+          typeof line.phone !== "string" ||
+          !line.network.trim() ||
+          !line.package.trim() ||
+          !line.size.trim() ||
+          !line.phone.trim(),
+      )
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Please provide valid bundle details.",
+      });
+    }
+
+    // Normal/DataMart orders must use separate checkouts.
+    if (
+      lines.length > 1 &&
+      lines.some((line) => line.package.trim().toLowerCase() === "normal")
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Normal bundle orders must be checked out separately.",
+      });
+    }
+
+    // Validate the callback URL against the app's known deep link.
+    const allowedCallbackUrls = new Set(["ecodatamobile://paystack"]);
+
+    if (
+      typeof callbackUrl !== "string" ||
+      !allowedCallbackUrls.has(callbackUrl)
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid payment callback URL.",
+      });
+    }
+
+    // Calculate all prices on the server.
+    const pricedLines = lines.map((line) => {
+      const packageName = line.package.trim();
+      const network = line.network.trim();
+      const size = line.size.trim();
+      const phone = line.phone.trim();
+
+      const basePrice = Number(
+        getMobileSellingPrice(network, size, packageName),
+      );
+
+      if (!Number.isFinite(basePrice) || basePrice <= 0) {
+        throw new Error(`Invalid selling price for ${network} ${size}GB.`);
+      }
+
+      return {
+        package: packageName,
+        network,
+        size,
+        phone,
+        price: basePrice,
+      };
+    });
+
+    // Apply the checkout fee once to the combined base amount.
+    const baseTotal = pricedLines.reduce((sum, line) => sum + line.price, 0);
+
+    const total = Number(baseTotal.toFixed(2));
+
+    if (!Number.isFinite(total) || total <= 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Unable to calculate the checkout amount.",
+      });
+    }
+
+    // Find the signed-in user's email.
+    const users = await sql`
+      SELECT email
+      FROM public.users
+      WHERE clerk_id = ${userId}
+      LIMIT 1
+    `;
+
+    const email = String(users[0]?.email || "").trim();
+
+    if (!email) {
+      return res.status(409).json({
+        success: false,
+        message:
+          "Your account email is unavailable. Please update your account.",
+      });
+    }
+
+    // Check every recipient for an active order.
+    for (const line of pricedLines) {
+      const activeOrders = await sql`
+        SELECT id
+        FROM orders
+        WHERE phone = ${line.phone}
+          AND status IN ('processing', 'pending', 'unknown')
+          AND created_at > NOW() - INTERVAL '30 minutes'
+        LIMIT 1
+      `;
+
+      if (activeOrders.length) {
+        return res.status(409).json({
+          success: false,
+          message: `The number ${line.phone} already has an active order.`,
+        });
+      }
+    }
+
+    const reference =
+      "ECM" + crypto.randomUUID().replace(/-/g, "").slice(0, 20).toUpperCase();
+
+    // Create the checkout record before initializing payment.
+    // If Paystack initialization fails, the record is marked failed.
+    await sql`
+      INSERT INTO checkouts (
+        reference,
+        clerk_id,
+        lines,
+        amount,
+        status,
+        refund_due,
+        created_at,
+        updated_at
+      )
+      VALUES (
+        ${reference},
+        ${userId},
+        ${JSON.stringify(pricedLines)}::jsonb,
+        ${total},
+        'pending',
+        0,
+        NOW(),
+        NOW()
+      )
+    `;
+
+    try {
+      const paymentResponse = await axios.post(
+        "https://api.paystack.co/transaction/initialize",
+        {
+          email,
+          amount: Math.round(total * 100),
+          currency: "GHS",
+          reference,
+          callback_url: callbackUrl,
+          metadata: {
+            source: "ecodata_mobile",
+            clerk_user_id: userId,
+            checkout_reference: reference,
+            line_count: pricedLines.length,
+          },
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
+            "Content-Type": "application/json",
+          },
+          timeout: 15000,
+        },
+      );
+
+      if (
+        paymentResponse.data?.status !== true ||
+        !paymentResponse.data?.data?.authorization_url
+      ) {
+        throw new Error("Paystack did not return an authorization URL.");
+      }
+
+      return res.json({
+        success: true,
+        reference,
+        amount: total,
+        authorizationUrl: paymentResponse.data.data.authorization_url,
+      });
+    } catch (paymentError) {
+      await sql`
+        UPDATE checkouts
+        SET status = 'failed', updated_at = NOW()
+        WHERE reference = ${reference}
+          AND status = 'pending'
+      `;
+
+      throw paymentError;
+    }
+  } catch (error) {
+    console.error("[EcoData mobile checkout] Error:", {
+      message: error.message,
+      response: error.response?.data,
+      status: error.response?.status,
+      stack: error.stack,
+    });
+
+    return res.status(500).json({
+      success: false,
+      message: "Unable to start checkout. Please try again.",
+    });
+  }
+});
+
+
+//===================================
+// CHECKOUT CONFIRMATION
+//===================================
 app.post("/api/mobile/checkout/confirm", async (req, res) => {
   try {
     const { userId } = getAuth(req);
@@ -1095,14 +1335,27 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
     const verification = await verifyPaystack(reference);
     const transaction = verification?.data?.data;
 
-    if (
-      verification?.data?.status !== true ||
-      transaction?.status !== "success" ||
-      transaction?.reference !== reference ||
-      transaction?.currency !== "GHS" ||
-      Math.round(Number(transaction?.amount)) !==
-        Math.round(Number(checkout.amount) * 100)
-    ) {
+  const expectedAmountPesewas = Math.round(Number(checkout.amount) * 100);
+const metadata = transaction?.metadata;
+
+if (
+  verification?.data?.status !== true ||
+  transaction?.status !== "success" ||
+  transaction?.reference !== reference ||
+  transaction?.currency !== "GHS" ||
+  !Number.isSafeInteger(Number(transaction?.amount)) ||
+  Number(transaction.amount) !== expectedAmountPesewas ||
+  !metadata ||
+  metadata.source !== "ecodata_mobile" ||
+  metadata.checkout_reference !== reference ||
+  metadata.clerk_user_id !== userId
+) {
+  return res.status(402).json({
+    success: false,
+    status: "pending",
+    message: "Payment has not been confirmed. Please try again shortly.",
+  });
+} {
       return res.status(402).json({
         success: false,
         status: "pending",
@@ -1144,6 +1397,10 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
   }
 });
 
+
+//================================
+// FULFILL CHECKOUT
+//================================
 async function fulfillMobileCheckout(reference, userId, paidAmountPesewas) {
   // Atomically claim this checkout. Only one request can claim it.
   const claimed = await sql`
@@ -1179,7 +1436,7 @@ async function fulfillMobileCheckout(reference, userId, paidAmountPesewas) {
       throw new Error("Checkout contains no order lines.");
     }
 
-    // Current mobile rule: DataMart/Normal orders are paid one at a time.
+    // Normal/DataMart orders must be checked out individually.
     if (
       lines.length > 1 &&
       lines.some((line) => String(line.package).toLowerCase() === "normal")
@@ -1187,11 +1444,15 @@ async function fulfillMobileCheckout(reference, userId, paidAmountPesewas) {
       throw new Error("Normal delivery orders must be processed individually.");
     }
 
+    // Persist every order before attempting provider fulfillment.
     for (let index = 0; index < lines.length; index++) {
       const line = lines[index];
+      const lineNo = index + 1;
+      const vendor =
+        String(line.package).toLowerCase() === "normal"
+          ? "datamart"
+          : "swiftdata";
 
-      // Save the intended order before calling the vendor.
-      // The unique (checkout_ref, line_no) constraint prevents duplicate rows.
       await sql`
         INSERT INTO orders (
           id,
@@ -1211,13 +1472,9 @@ async function fulfillMobileCheckout(reference, userId, paidAmountPesewas) {
           ${crypto.randomUUID()},
           ${userId},
           ${reference},
-          ${index},
+          ${lineNo},
           ${String(line.package)},
-          ${
-            String(line.package).toLowerCase() === "normal"
-              ? "datamart"
-              : "swiftdata"
-          },
+          ${vendor},
           ${String(line.network)},
           ${String(line.size)},
           ${Number(line.price)},
@@ -1229,19 +1486,107 @@ async function fulfillMobileCheckout(reference, userId, paidAmountPesewas) {
       `;
     }
 
-    /*
-      IMPORTANT:
-      Vendor handlers can make real purchases. Before enabling this section,
-      connect it to the exact handler signatures and ensure retries cannot
-      resubmit an order when the provider response is uncertain.
+    const results = [];
 
-      Never retry a provider purchase merely because the app timed out.
-    */
+    for (let index = 0; index < lines.length; index++) {
+      const line = lines[index];
+      const lineNo = index + 1;
+      const vendor =
+        String(line.package).toLowerCase() === "normal"
+          ? "datamart"
+          : "swiftdata";
+
+      try {
+        if (vendor === "datamart") {
+          const savedOrder = await fulfillMobileDataMartLine({
+            checkoutReference: reference,
+            lineNo,
+            line,
+          });
+
+          results.push({
+            lineNo,
+            vendor,
+            status: savedOrder.status,
+            vendorReference: savedOrder.vendor_ref,
+          });
+        } else {
+          const providerOrder = await submitMobileSwiftDataOrder({
+            network: line.network,
+            recipient: line.phone,
+            pkg: line.package,
+            size: line.size,
+
+            // Stable per checkout line. Reuse this exact reference when
+            // reconciling the same order; never generate a new one on retry.
+            paymentReference: `${reference}-${lineNo}`,
+          });
+
+          const savedOrder = await updateMobileNeonOrder({
+            checkoutReference: reference,
+            lineNo,
+            vendor: "swiftdata",
+            vendorReference: providerOrder.vendorReference,
+            status: providerOrder.status,
+          });
+
+          results.push({
+            lineNo,
+            vendor: "swiftdata",
+            status: savedOrder.status,
+            vendorReference: savedOrder.vendor_ref,
+          });
+        }
+      } catch (error) {
+        console.error(
+          `Mobile provider error for ${reference}, line ${lineNo}:`,
+          error.message,
+        );
+
+        // A timeout does not prove the provider rejected the purchase.
+        // Never automatically resubmit an uncertain purchase.
+        try {
+          await updateMobileNeonOrder({
+            checkoutReference: reference,
+            lineNo,
+            vendor,
+            status: "review",
+          });
+        } catch (dbError) {
+          console.error("Could not update Neon order status:", dbError.message);
+        }
+
+        results.push({
+          lineNo,
+          vendor,
+          status: "review",
+          message: "Provider outcome requires reconciliation.",
+        });
+      }
+    }
+
+    const allAccepted = results.every((result) =>
+      ["processing", "pending", "delivered"].includes(result.status),
+    );
+
+    const checkoutStatus = allAccepted ? "fulfilled" : "review";
+
+    await sql`
+      UPDATE checkouts
+      SET status = ${checkoutStatus},
+          updated_at = NOW()
+      WHERE reference = ${reference}
+        AND clerk_id = ${userId}
+        AND status = 'processing'
+    `;
 
     return {
-      status: "review",
-      message:
-        "Payment received. Order fulfillment needs provider confirmation.",
+      status: checkoutStatus,
+      success: allAccepted,
+      message: allAccepted
+        ? "Payment confirmed and all orders submitted to their providers."
+        : "Payment confirmed. Some orders need provider reconciliation.",
+      orders: results,
     };
   } catch (error) {
     console.error("Mobile fulfillment error:", error);
@@ -1261,282 +1606,401 @@ async function fulfillMobileCheckout(reference, userId, paidAmountPesewas) {
   }
 }
 
-// Use the existing backend/db.js import.
-// If server.js already imports sql from this file,
-// DO NOT add a duplicate import.
 
-const MOBILE_PAYSTACK_FEE_RATE = 0.0195;
+//===================================
+// SUBMIT MOBILE ORDER
+//===================================
+async function submitMobileSwiftDataOrder({
+  network,
+  recipient,
+  pkg,
+  size,
+  paymentReference,
+}) {
+  const phone = String(recipient ?? "").trim();
+  const packageName = String(pkg ?? "")
+    .trim()
+    .toLowerCase();
+  const reference = String(paymentReference ?? "").trim();
 
-function mobileCheckoutPrice(basePrice) {
-  return Number(
-    (Number(basePrice) * (1 + MOBILE_PAYSTACK_FEE_RATE)).toFixed(2),
+  if (!network || !phone || !packageName || !reference || !size) {
+    throw new Error("Invalid mobile SwiftData order details.");
+  }
+
+  const swiftBase = (
+    process.env.SWIFT_BASE_URL || "https://api.swiftdata-link.com/v2"
+  ).replace(/\/+$/, "");
+
+  if (!process.env.SWIFT_API_KEY) {
+    throw new Error("SwiftData API key is not configured.");
+  }
+
+  const selectedPackage = await findSwiftDataPackage(
+    network,
+    size,
+    packageName,
   );
+
+  if (!selectedPackage) {
+    throw new Error("The selected SwiftData package is unavailable.");
+  }
+
+  const payload = {
+    msisdn: phone,
+    data: String(selectedPackage.sizeLabel),
+    reference,
+  };
+
+  if (selectedPackage.offerSlug) {
+    payload.offerSlug = selectedPackage.offerSlug;
+  } else if (selectedPackage.offerId) {
+    payload.offerId = selectedPackage.offerId;
+  } else {
+    throw new Error("The selected SwiftData package has no offer identifier.");
+  }
+
+  // Do not automatically retry this purchase after a timeout.
+  // A timeout may happen after SwiftData has accepted the order.
+  const response = await axios.post(`${swiftBase}/orders`, payload, {
+    headers: {
+      "X-API-Key": process.env.SWIFT_API_KEY,
+      "Content-Type": "application/json",
+    },
+    timeout: 20000,
+  });
+
+  const body = response.data;
+  const data = body?.data ?? body;
+
+  if (body?.success === false || data?.success === false) {
+    throw new Error(
+      data?.message || body?.message || "SwiftData rejected the order.",
+    );
+  }
+
+  const vendorReference =
+    data?.orderReference ??
+    data?.reference ??
+    data?.orderId ??
+    data?.id ??
+    null;
+
+  if (!vendorReference) {
+    // The request may have been accepted even if the response shape
+    // did not contain a recognizable reference.
+    throw new Error(
+      "SwiftData response did not contain an order reference; reconciliation is required.",
+    );
+  }
+
+  const rawStatus = String(
+    data?.status ?? data?.orderStatus ?? "processing",
+  ).toLowerCase();
+
+  const status = [
+    "failed",
+    "failure",
+    "cancelled",
+    "canceled",
+    "rejected",
+  ].includes(rawStatus)
+    ? "failed"
+    : ["delivered", "completed", "success", "successful"].includes(rawStatus)
+      ? "delivered"
+      : ["pending", "processing", "accepted", "queued"].includes(rawStatus)
+        ? "processing"
+        : "review";
+
+  return {
+    vendorReference: String(vendorReference),
+    status,
+  };
 }
 
 
+//======================================
+// PROVIDER FULFILLMENT
+//======================================
+async function fulfillMobileDataMartLine({ checkoutReference, lineNo, line }) {
+  // Mark the existing Neon record before submitting to the provider.
+  await updateMobileNeonOrder({
+    checkoutReference,
+    lineNo,
+    vendor: "datamart",
+    status: "processing",
+  });
 
+  const providerOrder = await submitMobileDataMartOrder({
+    network: line.network,
+    recipient: line.phone,
+    size: line.size,
+    paymentReference: `${checkoutReference}-${lineNo}`,
+  });
 
+  const providerStatus = String(providerOrder.orderStatus ?? "unknown")
+    .trim()
+    .toLowerCase();
 
+  const status = ["completed", "success", "successful", "delivered"].includes(
+    providerStatus,
+  )
+    ? "delivered"
+    : ["failed", "cancelled", "canceled", "rejected"].includes(providerStatus)
+      ? "failed"
+      : "processing";
 
-
-
-
-
-
-app.post("/api/mobile/checkout", async (req, res) => {
-  try {
-    const { userId } = getAuth(req);
-
-    if (!userId) {
-      return res.status(401).json({
-        success: false,
-        message: "Please sign in to continue.",
-      });
-    }
-
-    const { callbackUrl, lines } = req.body ?? {};
-
-    // Validate the batch sent by cartContext.tsx.
-    if (
-      !Array.isArray(lines) ||
-      lines.length === 0 ||
-      lines.some(
-        (line) =>
-          !line ||
-          typeof line.network !== "string" ||
-          typeof line.package !== "string" ||
-          typeof line.size !== "string" ||
-          typeof line.phone !== "string" ||
-          !line.network.trim() ||
-          !line.package.trim() ||
-          !line.size.trim() ||
-          !line.phone.trim()
-      )
-    ) {
-      return res.status(400).json({
-        success: false,
-        message: "Please provide valid bundle details.",
-      });
-    }
-
-    // Normal/DataMart orders must use separate checkouts.
-    if (
-      lines.length > 1 &&
-      lines.some(
-        (line) => line.package.trim().toLowerCase() === "normal"
-      )
-    ) {
-      return res.status(400).json({
-        success: false,
-        message:
-          "Normal bundle orders must be checked out separately.",
-      });
-    }
-
-    // Validate the callback URL against the app's known deep link.
-  const allowedCallbackUrls = new Set([
-  "ecodatamobile://paystack",
-]);
-
-if (
-  typeof callbackUrl !== "string" ||
-  !allowedCallbackUrls.has(callbackUrl)
-) {
-  return res.status(400).json({
-    success: false,
-    message: "Invalid payment callback URL.",
+  return updateMobileNeonOrder({
+    checkoutReference,
+    lineNo,
+    vendor: "datamart",
+    vendorReference:
+      providerOrder.providerOrderReference ||
+      providerOrder.transactionReference ||
+      providerOrder.purchaseId ||
+      null,
+    status,
   });
 }
 
-    // Calculate all prices on the server.
-    const pricedLines = lines.map((line) => {
-      const packageName = line.package.trim();
-      const network = line.network.trim();
-      const size = line.size.trim();
-      const phone = line.phone.trim();
 
-      const basePrice = Number(
-        getMobileSellingPrice(network, size, packageName)
+/**
+ * Update an existing mobile order using its checkout reference
+ * and line number. Never creates a second order row.
+ */
+
+// ========================================
+// UPDATA DATABASE ORDER (REF)
+//=========================================
+async function updateMobileNeonOrder({
+  checkoutReference,
+  lineNo,
+  vendor,
+  vendorReference = null,
+  status,
+}) {
+  const allowedStatuses = [
+    "processing",
+    "pending",
+    "unknown",
+    "delivered",
+    "failed",
+    "refunded",
+    "review",
+  ];
+
+  if (!allowedStatuses.includes(status)) {
+    throw new Error(`Invalid mobile order status: ${status}`);
+  }
+
+  const rows = await sql`
+    UPDATE orders
+    SET
+      vendor = ${vendor},
+      vendor_ref = COALESCE(${vendorReference}, vendor_ref),
+      status = ${status},
+      delivered_at = CASE
+        WHEN ${status} = 'delivered' THEN COALESCE(delivered_at, NOW())
+        ELSE delivered_at
+      END
+    WHERE checkout_ref = ${checkoutReference}
+      AND line_no = ${lineNo}
+    RETURNING id, checkout_ref, line_no, vendor, vendor_ref, status
+  `;
+
+  if (!rows.length) {
+    throw new Error(
+      `Mobile order not found for checkout ${checkoutReference}, line ${lineNo}.`,
+    );
+  }
+
+  return rows[0];
+}
+
+// ========================================
+// NORMALIZE PROVIDER RAW STATUS
+//=========================================
+function normalizeMobileProviderStatus(rawStatus) {
+  const status = String(rawStatus ?? "").trim().toLowerCase();
+
+  if (["delivered", "completed", "successful", "success"].includes(status)) {
+    return "delivered";
+  }
+
+  if (["failed", "failure", "rejected", "cancelled", "canceled"].includes(status)) {
+    return "failed";
+  }
+
+  if (["pending", "queued", "accepted"].includes(status)) {
+    return "pending";
+  }
+
+  if (["processing", "in_progress", "in progress"].includes(status)) {
+    return "processing";
+  }
+
+  return "review";
+}
+
+
+// ========================================
+// MOBILE RECONCILE
+//=========================================
+async function reconcileMobileSwiftDataOrder(order) {
+  const vendorReference = String(order.vendor_ref ?? "").trim();
+
+  if (!vendorReference) {
+    return {
+      lineNo: order.line_no,
+      status: "review",
+      message: "No saved SwiftData reference; manual investigation required.",
+    };
+  }
+
+  // Status lookup only. This does not purchase or resubmit anything.
+  const response = await fetchSwiftDataBulkStatus([vendorReference]);
+
+  if (response?.success === false) {
+    throw new Error(
+      response.message || "SwiftData status lookup failed.",
+    );
+  }
+
+  const result = response?.data ?? response;
+  const providerOrders = result?.orders ?? [];
+
+  // Do not treat "missing" as failed: it may be an identifier mismatch.
+  const providerOrder = providerOrders.find((item) => {
+    const identifiers = [
+      item?.orderReference,
+      item?.reference,
+      item?.orderId,
+      item?.id,
+    ]
+      .filter(Boolean)
+      .map(String);
+
+    return identifiers.includes(vendorReference);
+  });
+
+  if (!providerOrder) {
+    return {
+      lineNo: order.line_no,
+      status: "review",
+      message: "SwiftData did not return a matching order; no resubmission made.",
+    };
+  }
+
+  const nextStatus = normalizeMobileProviderStatus(
+    providerOrder.status ??
+      providerOrder.orderStatus ??
+      providerOrder.order_status,
+  );
+
+  const saved = await updateMobileNeonOrder({
+    checkoutReference: order.checkout_ref,
+    lineNo: order.line_no,
+    vendor: "swiftdata",
+    vendorReference,
+    status: nextStatus,
+  });
+
+  return {
+    lineNo: saved.line_no,
+    vendor: saved.vendor,
+    vendorReference: saved.vendor_ref,
+    status: saved.status,
+  };
+}
+
+// ========================================
+// ADMIN RECONCILE
+//=========================================
+app.post(
+  "/api/admin/mobile-orders/reconcile",
+  requiredAdmin,
+  async (req, res) => {
+    try {
+      const limit = Math.min(
+        Math.max(Number.parseInt(req.body?.limit, 10) || 50, 1),
+        200,
       );
 
-      if (!Number.isFinite(basePrice) || basePrice <= 0) {
-        throw new Error(
-          `Invalid selling price for ${network} ${size}GB.`
-        );
-      }
-
-      return {
-        package: packageName,
-        network,
-        size,
-        phone,
-        price: basePrice,
-      };
-    });
-
-    // Apply the checkout fee once to the combined base amount.
-    const baseTotal = pricedLines.reduce(
-      (sum, line) => sum + line.price,
-      0
-    );
-
-    const total = mobileCheckoutPrice(baseTotal);
-
-    if (!Number.isFinite(total) || total <= 0) {
-      return res.status(400).json({
-        success: false,
-        message: "Unable to calculate the checkout amount.",
-      });
-    }
-
-    // Find the signed-in user's email.
-    const users = await sql`
-      SELECT email
-      FROM public.users
-      WHERE clerk_id = ${userId}
-      LIMIT 1
-    `;
-
-    const email = String(users[0]?.email || "").trim();
-
-    if (!email) {
-      return res.status(409).json({
-        success: false,
-        message:
-          "Your account email is unavailable. Please update your account.",
-      });
-    }
-
-    // Check every recipient for an active order.
-    for (const line of pricedLines) {
-      const activeOrders = await sql`
-        SELECT id
+      const orders = await sql`
+        SELECT
+          id,
+          checkout_ref,
+          line_no,
+          vendor,
+          vendor_ref,
+          status
         FROM orders
-        WHERE phone = ${line.phone}
-          AND status IN ('processing', 'pending', 'unknown')
-          AND created_at > NOW() - INTERVAL '30 minutes'
-        LIMIT 1
+        WHERE checkout_ref LIKE 'ECM%'
+          AND vendor = 'swiftdata'
+          AND status IN ('review', 'processing', 'pending', 'unknown')
+          AND vendor_ref IS NOT NULL
+        ORDER BY created_at ASC
+        LIMIT ${limit}
       `;
 
-      if (activeOrders.length) {
-        return res.status(409).json({
-          success: false,
-          message:
-            `The number ${line.phone} already has an active order.`,
-        });
-      }
-    }
+      const results = [];
 
-    const reference =
-      "ECM" +
-      crypto.randomUUID()
-        .replace(/-/g, "")
-        .slice(0, 20)
-        .toUpperCase();
+      for (const order of orders) {
+        try {
+          const result = await reconcileMobileSwiftDataOrder(order);
+          results.push({
+            checkoutReference: order.checkout_ref,
+            ...result,
+          });
+        } catch (error) {
+          console.error(
+            "Mobile SwiftData reconciliation failed:",
+            order.checkout_ref,
+            order.line_no,
+            error.message,
+          );
 
-    // Create the checkout record before initializing payment.
-    // If Paystack initialization fails, the record is marked failed.
-    await sql`
-      INSERT INTO checkouts (
-        reference,
-        clerk_id,
-        lines,
-        amount,
-        status,
-        refund_due,
-        created_at,
-        updated_at
-      )
-      VALUES (
-        ${reference},
-        ${userId},
-        ${JSON.stringify(pricedLines)}::jsonb,
-        ${total},
-        'pending',
-        0,
-        NOW(),
-        NOW()
-      )
-    `;
-
-    try {
-      const paymentResponse = await axios.post(
-        "https://api.paystack.co/transaction/initialize",
-        {
-          email,
-          amount: Math.round(total * 100),
-          currency: "GHS",
-          reference,
-          callback_url: callbackUrl,
-          metadata: {
-            source: "ecodata_mobile",
-            clerk_user_id: userId,
-            checkout_reference: reference,
-            line_count: pricedLines.length,
-          },
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
-            "Content-Type": "application/json",
-          },
-          timeout: 15000,
+          results.push({
+            checkoutReference: order.checkout_ref,
+            lineNo: order.line_no,
+            status: "review",
+            message: "Status lookup failed; order was not resubmitted.",
+          });
         }
-      );
-
-      if (
-        paymentResponse.data?.status !== true ||
-        !paymentResponse.data?.data?.authorization_url
-      ) {
-        throw new Error("Paystack did not return an authorization URL.");
       }
 
       return res.json({
         success: true,
-        reference,
-        amount: total,
-        authorizationUrl:
-          paymentResponse.data.data.authorization_url,
+        checked: results.length,
+        results,
       });
-    } catch (paymentError) {
-      await sql`
-        UPDATE checkouts
-        SET status = 'failed', updated_at = NOW()
-        WHERE reference = ${reference}
-          AND status = 'pending'
-      `;
+    } catch (error) {
+      console.error("Mobile reconciliation endpoint error:", error);
 
-      throw paymentError;
+      return res.status(500).json({
+        success: false,
+        message: "Unable to reconcile mobile orders.",
+      });
     }
-  } catch (error) {
-    console.error("[EcoData mobile checkout] Error:", {
-      message: error.message,
-      response: error.response?.data,
-      status: error.response?.status,
-      stack: error.stack,
-    });
-
-    return res.status(500).json({
-      success: false,
-      message:
-        "Unable to start checkout. Please try again.",
-    });
-  }
-});
+  },
+);
 
 
 
 
 
 
+const mobileOrderPolling =
+  createMobileOrderPolling({
+    sql,
+    fetchSwiftDataBulkStatus,
+    getDataMartOrderStatus,
+    updateMobileNeonOrder,
+  });
 
 
+startOrderSyncJob(mobileOrderPolling);
 
-
-
-
-
-
+  
 
 
 
