@@ -49,6 +49,8 @@ accountRouter.get(
           first_name,
           last_name,
           email,
+          phone,
+          loyalty_Points,
           role,
           active
         FROM ecodata_users
