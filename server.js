@@ -86,6 +86,7 @@ import sellerSettingsRouter from "./routes/sellerSettingsRoute.js";
 // AUTH.ADMIN
 import { admin, db } from "./firebaseAdmin.js";
 import { startOrderSyncJob } from "./cron/syncOrders.js";
+import { requiredAdmin } from "./middleware/clerkAuth.js";
 import adminTestRouter from "./routes/adminTestRoute.js";
 import adminAccessDashboardRouter from "./routes/adminDashboardRoute.js";
 import adminSellersRouter from "./routes/adminSellersMap.js";
