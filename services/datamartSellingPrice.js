@@ -7,11 +7,10 @@ const MINIMUM_PROFIT = 0.20;
 export const DATAMART_SELLING_PRICES = {
   mtn: {
     // Example format:
-    // 1: 6.00,
-    // 2: 12.00,
+  
     1: 4.95,
     2: 9.99,
-    3: 15.7,
+    3: 15.70,
     4: 19.89,
     5: 23.90,
     6: 27.40,
@@ -27,7 +26,7 @@ export const DATAMART_SELLING_PRICES = {
 
   telecel: {
     // Example format:
-    // 10: 49.00,
+
     10: 40.50,
     15: 56.90,
     20: 76.80,
@@ -98,5 +97,38 @@ export function checkDataMartProfit({
     grossProfit,
     minimumProfit: MINIMUM_PROFIT,
     profitable: grossProfit >= MINIMUM_PROFIT,
+  };
+}
+
+
+
+
+
+
+
+
+//==============================
+// AGENTS MARGING
+//==============================
+export function calculateAgentEarnings({
+  basePrice,
+  agentSellingPrice,
+}) {
+  const base = Number(basePrice);
+  const selling = Number(agentSellingPrice);
+
+  if (
+    !Number.isFinite(base) ||
+    !Number.isFinite(selling) ||
+    base <= 0 ||
+    selling < base
+  ) {
+    throw new Error("Invalid agent pricing.");
+  }
+
+  return {
+    basePrice: Number(base.toFixed(2)),
+    sellingPrice: Number(selling.toFixed(2)),
+    grossEarnings: Number((selling - base).toFixed(2)),
   };
 }

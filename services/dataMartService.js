@@ -22,6 +22,7 @@ function getApiKey() {
   return apiKey;
 }
 
+
 /* =========================================
    NETWORK MAPPING
    Frontend -> DataMart
@@ -341,6 +342,7 @@ export async function getDataMartOrderStatus(reference) {
 
 
 
+
 /* =========================================
    DATAMART MTN MASHUP
 ========================================= */
@@ -603,3 +605,6 @@ export async function purchaseDataMartMashup({
     throw error;
   }
 }
+
+
+
