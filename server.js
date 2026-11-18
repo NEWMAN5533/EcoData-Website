@@ -91,6 +91,9 @@ import { submitMobileDataMartOrder } from "./services/mobileProviderFulfillment.
 import { createMobileOrderPolling } from "./services/mobileOrderPolling.js";
 import { updateMobileNeonOrder } from "./services/updateMobileNeonOrders.js";
 
+const MOBILE_RETURN_URL =
+  process.env.MOBILE_RETURN_URL || "https://ecodata-app.onrender.com/api/mobile/paystack-return";
+
 dotenv.config();
 
 startOrderSyncJob();
@@ -989,7 +992,7 @@ app.post("/api/mobile/checkout", async (req, res) => {
       });
     }
 
-    const { callbackUrl, lines } = req.body ?? {};
+    const { lines } = req.body ?? {};
 
     // Validate the batch sent by cartContext.tsx.
     if (
@@ -1147,7 +1150,7 @@ app.post("/api/mobile/checkout", async (req, res) => {
           amount: Math.round(total * 100),
           currency: "GHS",
           reference,
-          callback_url: callbackUrl,
+          callback_url: MOBILE_RETURN_URL,
           metadata: {
             source: "ecodata_mobile",
             clerk_user_id: userId,
@@ -1200,6 +1203,21 @@ app.post("/api/mobile/checkout", async (req, res) => {
       message: "Unable to start checkout. Please try again.",
     });
   }
+});
+
+
+
+app.get("/api/mobile/paystack-return", (req, res) => {
+  const ref = String(req.query.reference || req.query.trxref || "").replace(/[^A-Za-z0-9]/g, "");
+  const link = `ecodatamobile://paystack${ref ? `?reference=${ref}` : ""}`;
+  res.type("html").send(
+    `<!doctype html><meta name="viewport" content="width=device-width,initial-scale=1">
+     <body style="font-family:sans-serif;text-align:center;padding:48px 24px">
+       <h2>Payment received</h2><p>You can return to the EcoData app.</p>
+       <a href="${link}" style="display:inline-block;margin-top:16px;padding:14px 28px;background:#15803D;color:#fff;border-radius:12px;text-decoration:none;font-weight:bold">Open EcoData</a>
+       <script>setTimeout(function(){location.href=${JSON.stringify(link)}},300)</script>
+     </body>`
+  );
 });
 
 //===================================
