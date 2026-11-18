@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const SWIFT_V2_BASE_URL = (
-  process.env.SWIFT_BASE_URL ||
-  "https://api.swiftdata-link.com/v2"
+  process.env.SWIFT_BASE_URL || "https://api.swiftdata-link.com/v2"
 ).replace(/\/+$/, "");
 
 function getSwiftDataApiKey() {
@@ -38,13 +37,9 @@ export async function getSwiftDataCatalog() {
 
   const body = response.data;
 
-  if (
-    body?.success !== true ||
-    !Array.isArray(body?.data?.offers)
-  ) {
+  if (body?.success !== true || !Array.isArray(body?.data?.offers)) {
     const error = new Error(
-      body?.error?.message ||
-        "SwiftData returned an invalid catalogue."
+      body?.error?.message || "SwiftData returned an invalid catalogue.",
     );
 
     error.providerHttpStatus = response.status;
@@ -81,33 +76,47 @@ export async function findSwiftDataPackage(network, size, pkg) {
   }
 
   const capacity = Number(
-    String(size)
-      .trim()
-      .replace(/gb$/i, "")
-      .replace(/g$/i, "")
+    String(size).trim().replace(/gb$/i, "").replace(/g$/i, ""),
   );
 
   if (!Number.isFinite(capacity) || capacity <= 0) {
     throw new Error("Invalid data bundle size.");
   }
 
-  // Match EcoData's package identifier to the SwiftData offer.
   const packageName = String(pkg || "")
     .trim()
-    .toLowerCase();
+    .toLowerCase()
+    .replace(/[\s-]+/g, "_");
 
   const offerMap = {
-    mtn_data_express_delivery: "mtn_data_express_delivery",
-    mtn_verified_numbers: "mtn_verified_numbers",
-    telecel_expiry_bundle: "telecel_expiry_bundle",
-    ishare_data_bundle: "ishare_data_bundle",
+    mtn: {
+      express: "mtn_data_express_delivery",
+      verified: "mtn_verified_numbers",
+      mtn_data_express_delivery: "mtn_data_express_delivery",
+      mtn_verified_numbers: "mtn_verified_numbers",
+    },
+    yello: {
+      express: "mtn_data_express_delivery",
+      verified: "mtn_verified_numbers",
+      mtn_data_express_delivery: "mtn_data_express_delivery",
+      mtn_verified_numbers: "mtn_verified_numbers",
+    },
+    telecel: {
+      telecel_expiry_bundle: "telecel_expiry_bundle",
+    },
+    airteltigo: {
+      ishare_data_bundle: "ishare_data_bundle",
+    },
+    at: {
+      ishare_data_bundle: "ishare_data_bundle",
+    },
   };
 
-  const expectedOfferSlug = offerMap[packageName];
+  const expectedOfferSlug = offerMap[normalizedNetwork]?.[packageName];
 
   if (!expectedOfferSlug) {
     throw new Error(
-      `No SwiftData offer mapping exists for EcoData package: ${pkg}`
+      `No SwiftData offer mapping exists for network "${network}" and EcoData package "${pkg}".`,
     );
   }
 
@@ -124,9 +133,7 @@ export async function findSwiftDataPackage(network, size, pkg) {
       .trim()
       .toLowerCase();
 
-    const actualOfferSlug = String(
-      offer.offerSlug || offer.slug || ""
-    )
+    const actualOfferSlug = String(offer.offerSlug || offer.slug || "")
       .trim()
       .toLowerCase();
 
@@ -167,13 +174,13 @@ export async function findSwiftDataPackage(network, size, pkg) {
 
   if (matches.length === 0) {
     throw new Error(
-      `SwiftData has no matching ${capacity}GB ${network} package for offer ${expectedOfferSlug}.`
+      `SwiftData has no matching ${capacity}GB ${network} package for offer ${expectedOfferSlug}.`,
     );
   }
 
   if (matches.length > 1) {
     throw new Error(
-      `Multiple SwiftData offers match ${capacity}GB ${network} for ${expectedOfferSlug}.`
+      `Multiple SwiftData offers match ${capacity}GB ${network} for ${expectedOfferSlug}.`,
     );
   }
 
