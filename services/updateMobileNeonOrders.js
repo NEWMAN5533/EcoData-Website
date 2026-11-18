@@ -3,7 +3,7 @@ import sql from "../backend/db.js";
 // ========================================
 // UPDATA DATABASE ORDER (REF)
 //=========================================
-async function updateMobileNeonOrder({
+export async function updateMobileNeonOrder({
   checkoutReference,
   lineNo,
   vendor,
