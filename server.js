@@ -1064,7 +1064,7 @@ app.post("/api/mobile/checkout", async (req, res) => {
     // Apply the checkout fee once to the combined base amount.
     const baseTotal = pricedLines.reduce((sum, line) => sum + line.price, 0);
 
-    const total = Number(baseTotal.toFixed(2));
+    const total = Number((baseTotal * 1.0195).toFixed(2));
 
     if (!Number.isFinite(total) || total <= 0) {
       return res.status(400).json({
@@ -1092,22 +1092,22 @@ app.post("/api/mobile/checkout", async (req, res) => {
     }
 
     // Check every recipient for an active order.
-    for (const line of pricedLines) {
-      const activeOrders = await sql`
-        SELECT id
-        FROM orders
-        WHERE phone = ${line.phone}
-          AND status IN ('processing', 'pending', 'unknown')
-          AND created_at > NOW() - INTERVAL '30 minutes'
-        LIMIT 1
-      `;
+    const phones = [...new Set(pricedLines.map((l) => l.phone))];
 
-      if (activeOrders.length) {
-        return res.status(409).json({
-          success: false,
-          message: `The number ${line.phone} already has an active order.`,
-        });
-      }
+    const active = await sql`
+  SELECT phone
+  FROM public.orders
+  WHERE phone = ANY(${phones})
+    AND status IN ('processing', 'pending', 'unknown')
+    AND created_at > NOW() - INTERVAL '30 minutes'
+  LIMIT 1
+`;
+
+    if (active.length) {
+      return res.status(409).json({
+        success: false,
+        message: `The number ${active[0].phone} already has an active order.`,
+      });
     }
 
     const reference =
@@ -1204,107 +1204,71 @@ app.post("/api/mobile/checkout", async (req, res) => {
 //===================================
 // CHECKOUT CONFIRMATION
 //===================================
+function paymentMatches(checkout, tx, userId) {
+  const m = tx?.metadata;
+  return (
+    tx?.status === "success" &&
+    tx?.reference === checkout.reference &&
+    tx?.currency === "GHS" &&
+    Number(tx?.amount) === Math.round(Number(checkout.amount) * 100) &&
+    m?.source === "ecodata_mobile" &&
+    m?.checkout_reference === checkout.reference &&
+    m?.clerk_user_id === userId
+  );
+}
+
 app.post("/api/mobile/checkout/confirm", async (req, res) => {
   try {
     const { userId } = getAuth(req);
-
-    if (!userId) {
-      return res.status(401).json({
-        success: false,
-        message: "Please sign in to continue.",
-      });
-    }
+    if (!userId)
+      return res
+        .status(401)
+        .json({ success: false, message: "Please sign in to continue." });
 
     const reference = String(req.body?.reference || "").trim();
-
     if (!/^ECM[A-F0-9]{20}$/.test(reference)) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid payment reference.",
-      });
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid payment reference." });
     }
 
-    const checkouts = await sql`
-      SELECT reference, clerk_user_id, lines, amount, status
-      FROM checkouts
-      WHERE reference = ${reference}
-        AND clerk_user_id = ${userId}
-      LIMIT 1
-    `;
+    const [checkout] = await sql`
+      SELECT reference, amount, status FROM checkouts
+      WHERE reference = ${reference} AND clerk_user_id = ${userId} LIMIT 1`;
+    if (!checkout)
+      return res
+        .status(404)
+        .json({ success: false, message: "Checkout not found." });
 
-    if (!checkouts.length) {
-      return res.status(404).json({
-        success: false,
-        message: "Checkout not found.",
-      });
-    }
-
-    const checkout = checkouts[0];
-
-    if (checkout.status === "fulfilled") {
-      return res.json({
-        success: true,
-        status: "fulfilled",
-        message: "Your order has already been processed.",
-      });
-    }
-
+    // Already finished or in progress: report it, so the app can stop asking
     if (checkout.status !== "pending") {
-      return res.status(409).json({
-        success: false,
+      return res.json({
+        success: checkout.status === "fulfilled",
         status: checkout.status,
-        message: "This checkout is already being processed or needs review.",
+        reference,
       });
     }
 
     const verification = await verifyPaystack(reference);
-    const transaction = verification?.data?.data;
-
-    const expectedAmountPesewas = Math.round(Number(checkout.amount) * 100);
-    const metadata = transaction?.metadata;
-
+    const tx = verification?.data?.data;
     if (
       verification?.data?.status !== true ||
-      transaction?.status !== "success" ||
-      transaction?.reference !== reference ||
-      transaction?.currency !== "GHS" ||
-      !Number.isSafeInteger(Number(transaction?.amount)) ||
-      Number(transaction.amount) !== expectedAmountPesewas ||
-      !metadata ||
-      metadata.source !== "ecodata_mobile" ||
-      metadata.checkout_reference !== reference ||
-      metadata.clerk_user_id !== userId
+      !paymentMatches(checkout, tx, userId)
     ) {
-      return res.status(402).json({
+      return res.json({
         success: false,
         status: "pending",
-        message: "Payment has not been confirmed. Please try again shortly.",
+        reference,
+        message: "Payment has not been confirmed yet.",
       });
     }
-    {
-      return res.status(402).json({
-        success: false,
-        status: "pending",
-        message: "Payment has not been confirmed. Please try again shortly.",
-      });
-    }
-
-    /*
-      Do not call the vendor directly here yet.
-
-      The next step must atomically claim this checkout in Neon,
-      create orders using the actual orders table columns, and call
-      the correct existing vendor handler with a duplicate-purchase
-      safeguard.
-    */
 
     const result = await fulfillMobileCheckout(
       reference,
       userId,
-      Math.round(Number(transaction.amount)),
+      Math.round(Number(tx.amount)),
     );
-
-    return res.status(result.status === "not_found" ? 404 : 200).json({
+    return res.json({
       success: result.status === "fulfilled",
       status: result.status,
       reference,
@@ -1315,7 +1279,6 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
       "Mobile checkout confirmation failed:",
       error.response?.data || error.message,
     );
-
     return res.status(500).json({
       success: false,
       message: "Unable to confirm payment right now.",
@@ -1323,6 +1286,87 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
   }
 });
 
+
+// ================================
+// AUTO RECONCILIATION ON SIGN-IN
+//=================================
+app.post("/api/mobile/checkout/reconcile", async (req, res) => {
+  try {
+    const { userId } = getAuth(req);
+
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: "Please sign in to continue.",
+      });
+    }
+
+    const rows = await sql`
+      SELECT reference, amount
+      FROM public.checkouts
+      WHERE clerk_id = ${userId}
+        AND status = 'pending'
+        AND created_at > NOW() - INTERVAL '24 hours'
+      ORDER BY created_at DESC
+      LIMIT 5
+    `;
+
+    const results = [];
+
+    for (const row of rows) {
+      try {
+        const verification = await verifyPaystack(row.reference);
+        const tx = verification?.data?.data;
+
+        if (
+          verification?.data?.status !== true ||
+          !paymentMatches(row, tx, userId)
+        ) {
+          results.push({
+            reference: row.reference,
+            status: "pending",
+          });
+          continue;
+        }
+
+        const result = await fulfillMobileCheckout(
+          row.reference,
+          userId,
+          Math.round(Number(tx.amount)),
+        );
+
+        results.push({
+          reference: row.reference,
+          status: result.status,
+          message: result.message,
+        });
+      } catch (error) {
+        console.error(
+          `Reconciliation failed for ${row.reference}:`,
+          error.response?.data || error.message,
+        );
+
+        results.push({
+          reference: row.reference,
+          status: "review",
+        });
+      }
+    }
+
+    return res.json({
+      success: true,
+      checked: rows.length,
+      results,
+    });
+  } catch (error) {
+    console.error("Mobile reconcile failed:", error.message);
+
+    return res.status(500).json({
+      success: false,
+      message: "Unable to reconcile right now.",
+    });
+  }
+});
 //================================
 // FULFILL CHECKOUT
 //================================
@@ -1335,7 +1379,7 @@ async function fulfillMobileCheckout(reference, userId, paidAmountPesewas) {
       AND clerk_user_id = ${userId}
       AND status = 'pending'
       AND ROUND(amount * 100) = ${paidAmountPesewas}
-    RETURNING reference, clerk_id, lines, amount
+    RETURNING reference, clerk_user_id, lines, amount
   `;
 
   if (!claimed.length) {
@@ -1411,10 +1455,8 @@ async function fulfillMobileCheckout(reference, userId, paidAmountPesewas) {
       `;
     }
 
-    const results = [];
-
-    for (let index = 0; index < lines.length; index++) {
-      const line = lines[index];
+    // Process up to 5 vendor orders concurrently.
+    const runLine = async (line, index) => {
       const lineNo = index + 1;
       const vendor =
         String(line.package).toLowerCase() === "normal"
@@ -1429,47 +1471,46 @@ async function fulfillMobileCheckout(reference, userId, paidAmountPesewas) {
             line,
           });
 
-          results.push({
+          return {
             lineNo,
             vendor,
             status: savedOrder.status,
             vendorReference: savedOrder.vendor_ref,
-          });
-        } else {
-          const providerOrder = await submitMobileSwiftDataOrder({
-            network: line.network,
-            recipient: line.phone,
-            pkg: line.package,
-            size: line.size,
-
-            // Stable per checkout line. Reuse this exact reference when
-            // reconciling the same order; never generate a new one on retry.
-            paymentReference: `${reference}-${lineNo}`,
-          });
-
-          const savedOrder = await updateMobileNeonOrder({
-            checkoutReference: reference,
-            lineNo,
-            vendor: "swiftdata",
-            vendorReference: providerOrder.vendorReference,
-            status: providerOrder.status,
-          });
-
-          results.push({
-            lineNo,
-            vendor: "swiftdata",
-            status: savedOrder.status,
-            vendorReference: savedOrder.vendor_ref,
-          });
+          };
         }
+
+        const providerOrder = await submitMobileSwiftDataOrder({
+          network: line.network,
+          recipient: line.phone,
+          pkg: line.package,
+          size: line.size,
+
+          // Keep this reference stable for this checkout line.
+          paymentReference: `${reference}-${lineNo}`,
+        });
+
+        const savedOrder = await updateMobileNeonOrder({
+          checkoutReference: reference,
+          lineNo,
+          vendor: "swiftdata",
+          vendorReference: providerOrder.vendorReference,
+          status: providerOrder.status,
+        });
+
+        return {
+          lineNo,
+          vendor,
+          status: savedOrder.status,
+          vendorReference: savedOrder.vendor_ref,
+        };
       } catch (error) {
         console.error(
           `Mobile provider error for ${reference}, line ${lineNo}:`,
           error.message,
         );
 
-        // A timeout does not prove the provider rejected the purchase.
-        // Never automatically resubmit an uncertain purchase.
+        // A timeout does not prove that the provider rejected the order.
+        // Do not automatically resubmit an uncertain purchase.
         try {
           await updateMobileNeonOrder({
             checkoutReference: reference,
@@ -1481,13 +1522,25 @@ async function fulfillMobileCheckout(reference, userId, paidAmountPesewas) {
           console.error("Could not update Neon order status:", dbError.message);
         }
 
-        results.push({
+        return {
           lineNo,
           vendor,
           status: "review",
           message: "Provider outcome requires reconciliation.",
-        });
+        };
       }
+    };
+
+    const results = [];
+
+    for (let i = 0; i < lines.length; i += 5) {
+      const batch = lines.slice(i, i + 5);
+
+      const batchResults = await Promise.all(
+        batch.map((line, k) => runLine(line, i + k)),
+      );
+
+      results.push(...batchResults);
     }
 
     const allAccepted = results.every((result) =>
