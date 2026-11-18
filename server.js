@@ -17,16 +17,17 @@ import adminRoute from "./routes/adminOrderUpdate.js";
 import syncOrderRoute from "./routes/syncOrderStatus.js";
 import validateRecipientRoute from "./routes/validateRecipient.js";
 import restrictionsRoute from "./routes/restrictions.js";
-import { getSwiftDataCatalog, findSwiftDataPackage } from "./services/swiftDataCatalog.js";
+import {
+  getSwiftDataCatalog,
+  findSwiftDataPackage,
+} from "./services/swiftDataCatalog.js";
 import exclusiveAgentRoute from "./routes/exclusivePage.js";
 import afaRegisterRouter from "./routes/afaRegisterRoute.js";
 import afaStatusRouter from "./routes/afaStatusRouter.js";
 import getVoucherRouter from "./routes/getVouchersRoute.js";
 import postVoucherRouter from "./routes/postVoucherRouter.js";
-// Status polling 
+// Status polling
 import swiftDataOrderStatusPolling from "./routes/swiftDataOrderStatusRoute.js";
-
-
 
 import { getDataMartMashupPackages } from "./services/dataMartService.js";
 
@@ -36,30 +37,23 @@ import { getDataMartMashupPackages } from "./services/dataMartService.js";
 import vendorManagementRouter from "./routes/vendorManagementRoute.js";
 import { handleDataMartBuyDataRequest } from "./services/dataMartBundler.js";
 
-
-
 /* =========================================
    DATAMART SERVICE
 ========================================= */
 import { getDataMartOrderStatus } from "./services/dataMartService.js";
 import {
   getDataMartOrderByProviderReference,
-  updateDataMartOrder
+  updateDataMartOrder,
 } from "./services/dataMartOrderRepository.js";
 
 import webhookRouter from "./routes/dataMartWebhookRoute.js";
 
-
 /* =========================================
    DATAMART RECIPIENT VERIFICATION
 ========================================= */
-import dataMartRecipientVerificationRoute
-  from "./routes/dataMartRecipientVerificationRoute.js";
+import dataMartRecipientVerificationRoute from "./routes/dataMartRecipientVerificationRoute.js";
 import vendorSettingsRouter from "./routes/vendorSettingsRoute.js";
 import vendorStatusRouter from "./routes/vendorStatus.js";
-
-
-
 
 //=============================
 // ECODATA STORE ROUTES
@@ -73,15 +67,12 @@ import { getAuth } from "@clerk/express";
 import accountRouter from "./routes/accountRoute.js";
 import profileRouter from "./routes/profileRoute.js";
 
-
 // AUTH.SELLER (PROFILE & LOGICS)
 import sellerProfileRouter from "./routes/sellerProfileRoute.js";
 import sellerLogoRouter from "./routes/sellerLogoRoute.js";
 import sellerProductsRouter from "./routes/sellerProducts.js";
 import createProductRouter from "./routes/product.js";
 import sellerSettingsRouter from "./routes/sellerSettingsRoute.js";
-
-
 
 // AUTH.ADMIN
 import { admin, db } from "./firebaseAdmin.js";
@@ -91,18 +82,11 @@ import adminTestRouter from "./routes/adminTestRoute.js";
 import adminAccessDashboardRouter from "./routes/adminDashboardRoute.js";
 import adminSellersRouter from "./routes/adminSellersMap.js";
 
-
-
-
 //MOBILE APP IMPORTS
 import mobileRouter from "./routes/mobileMe.js";
 import { getMobileSellingPrice } from "./services/mobileSellingPrices.js";
 import { submitMobileDataMartOrder } from "./services/mobileProviderFulfillment.js";
 import { createMobileOrderPolling } from "./services/mobileOrderPolling.js";
-
-
-
-
 
 dotenv.config();
 
@@ -112,7 +96,6 @@ startOrderSyncJob();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-
 // Initialize Express
 const app = express();
 
@@ -120,10 +103,15 @@ const app = express();
 app.use(cors());
 
 // capture raw body
-app.use(bodyParser.json({ verify: (req, res, buf) => { req.rawBody = buf; } }));
+app.use(
+  bodyParser.json({
+    verify: (req, res, buf) => {
+      req.rawBody = buf;
+    },
+  }),
+);
 
-
-app.set("trust proxy", 1);                     // Render sits behind a proxy
+app.set("trust proxy", 1); // Render sits behind a proxy
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "frontend")));
@@ -132,8 +120,6 @@ app.use(express.static(path.join(__dirname, "frontend")));
 app.use("/api/validate-recipient", validateRecipientRoute);
 app.use("/api/restrictions/validate", restrictionsRoute);
 app.use("/api/paystack/webhook", paystackWebhookRouter);
-
-
 
 //================================
 // SWIFTDATA CATALOG CHECK
@@ -144,22 +130,24 @@ app.get("/api/swiftdata/v2/catalog", async (req, res) => {
 
     return res.json({
       success: true,
-      offers
+      offers,
     });
   } catch (error) {
     console.error("SwiftData v2 catalogue error:", {
       status: error.providerHttpStatus ?? error.response?.status,
       code: error.providerResponse?.error?.code,
-      message: error.message
+      message: error.message,
     });
 
-    return res.status(error.providerHttpStatus || error.response?.status || 502).json({
-      success: false,
-      code: error.providerResponse?.error?.code || null,
-      message:
-        error.providerResponse?.error?.message ||
-        "Unable to retrieve SwiftData packages."
-    });
+    return res
+      .status(error.providerHttpStatus || error.response?.status || 502)
+      .json({
+        success: false,
+        code: error.providerResponse?.error?.code || null,
+        message:
+          error.providerResponse?.error?.message ||
+          "Unable to retrieve SwiftData packages.",
+      });
   }
 });
 
@@ -168,13 +156,12 @@ app.use("/api/admin", syncOrderRoute);
 app.use("/api/verify-payment", exclusiveAgentRoute);
 app.use("/api/afa", afaRegisterRouter(verifyPaystack));
 app.use("/api/afa/status", afaStatusRouter);
- // GET  /:id
-app.use("/api/live-order-status", swiftDataOrderStatusPolling); 
- // POST /  (the poller)
-app.use("/api/v2/orders/status", swiftDataOrderStatusPolling); 
+// GET  /:id
+app.use("/api/live-order-status", swiftDataOrderStatusPolling);
+// POST /  (the poller)
+app.use("/api/v2/orders/status", swiftDataOrderStatusPolling);
 app.use("/api/vouchers", getVoucherRouter);
 app.use("/api/vouchers", postVoucherRouter);
-
 
 // ecodata store upp.use()
 app.use(initializeClerk);
@@ -191,39 +178,28 @@ app.use("/webhook", webhookRouter);
 app.use("/api/initiate-subscription", subscriptionRouter);
 app.use("/api/create-store", storeRouter);
 
-
-
 app.use("/api/creator/products", createProductRouter);
-app.use("/api/creator/dashboard", createProductRouter );
+app.use("/api/creator/dashboard", createProductRouter);
 app.use("/api/creator/withdrawals", createProductRouter);
 app.use("/api/creator/sales", createProductRouter);
-
-
-
-
-
-
 
 // CLERK AUTHENTICATION TEST
 app.use("/api/account", accountRouter);
 
 app.get("/api/auth/me", requireAuth, (req, res) => {
-  const {userId} = getAuth(req);
+  const { userId } = getAuth(req);
 
   return res.status(200).json({
     success: true,
     message: "Authentication successful,",
     user: {
-      clerkUserId: userId
-    }
+      clerkUserId: userId,
+    },
   });
 });
 
-
 // MOBILE APP USE
 app.use("/api/me", mobileRouter);
-
-
 
 // Adjust the import path to match your actual file.
 
@@ -233,21 +209,22 @@ app.get("/api/datamart/mashup/packages", async (req, res) => {
 
     return res.json({
       success: true,
-      ...catalogue
+      ...catalogue,
     });
   } catch (error) {
-    const status = error.providerHttpStatus === 403
-      ? 403
-      : error.providerHttpStatus === 429
-        ? 429
-        : 502;
+    const status =
+      error.providerHttpStatus === 403
+        ? 403
+        : error.providerHttpStatus === 429
+          ? 429
+          : 502;
 
     return res.status(status).json({
       success: false,
       code: error.providerResponse?.code || "MASHUP_CATALOGUE_ERROR",
       message:
         error.providerResponse?.message ||
-        "Unable to load MashUp packages right now."
+        "Unable to load MashUp packages right now.",
     });
   }
 });
@@ -258,7 +235,7 @@ app.get("/api/datamart/mashup/packages", async (req, res) => {
 app.use("/api/profile", profileRouter);
 // SELLER PROFILE ROUTE
 app.use("/api/seller", sellerProfileRouter);
-app.use("/api/seller/logo", sellerLogoRouter)
+app.use("/api/seller/logo", sellerLogoRouter);
 app.use("/api/seller/products", sellerProductsRouter);
 app.use("/api/seller-settings", sellerSettingsRouter);
 
@@ -267,11 +244,8 @@ app.use("/api/admin", adminTestRouter);
 app.use("/api/admin", adminAccessDashboardRouter);
 app.use("/api/admin/sellers", adminSellersRouter);
 
-
-
 // 🚨 Prevent duplicate orders (Memory Cache)
 const processedOrders = new Map();
-
 
 /*
   Structure:
@@ -282,11 +256,8 @@ const processedOrders = new Map();
 */
 
 async function verifyPaystack(paymentReference, retries = 3) {
-
   for (let attempt = 1; attempt <= retries; attempt++) {
-
     try {
-
       const verification = await axios.get(
         `https://api.paystack.co/transaction/verify/${paymentReference}`,
         {
@@ -294,34 +265,23 @@ async function verifyPaystack(paymentReference, retries = 3) {
             Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
           },
           timeout: 15000,
-        }
+        },
       );
 
-      console.log(
-        `✅ Paystack verified on attempt ${attempt}`
-      );
+      console.log(`✅ Paystack verified on attempt ${attempt}`);
 
       return verification;
-
     } catch (err) {
-
-      console.log(
-        `⚠️ Paystack verify attempt ${attempt}/${retries} failed`
-      );
+      console.log(`⚠️ Paystack verify attempt ${attempt}/${retries} failed`);
 
       if (attempt === retries) {
         throw err;
       }
 
-      await new Promise(resolve =>
-        setTimeout(resolve, 2000)
-      );
+      await new Promise((resolve) => setTimeout(resolve, 2000));
     }
   }
 }
-
-
-
 
 /* =========================================
    SWIFTDATA V2 — BUY DATA
@@ -522,113 +482,99 @@ export async function handleSwiftDataBuyDataRequest({
       };
     }
 
- 
     // 6. Find the correct package in the SwiftData v2 catalogue.
-    const selectedPackage = await
-      findSwiftDataPackage (
-  network,
-  size,
-  pkg
-);
+    const selectedPackage = await findSwiftDataPackage(network, size, pkg);
 
-const orderData = {
-  msisdn: phone,
-  data: selectedPackage.sizeLabel,
-  reference,
-};
+    const orderData = {
+      msisdn: phone,
+      data: selectedPackage.sizeLabel,
+      reference,
+    };
 
-if (selectedPackage.offerSlug) {
-  orderData.offerSlug = selectedPackage.offerSlug;
-} else if (selectedPackage.offerId) {
-  orderData.offerId = selectedPackage.offerId;
-} else {
-  throw new Error("No valid SwiftData offer identifier was found.");
-}
+    if (selectedPackage.offerSlug) {
+      orderData.offerSlug = selectedPackage.offerSlug;
+    } else if (selectedPackage.offerId) {
+      orderData.offerId = selectedPackage.offerId;
+    } else {
+      throw new Error("No valid SwiftData offer identifier was found.");
+    }
 
-console.log("Submitting SwiftData v2 order:", {
-  paymentReference: reference,
-  network,
-  data: selectedPackage.sizeLabel,
-  offerSlug: selectedPackage.offerSlug,
-  offerId: selectedPackage.offerId,
-});
-
-// 7. Submit the order to SwiftData v2.
-const swiftRes = await axios.post(
-  `${swiftBase}/orders`,
-  orderData,
-  {
-    headers: {
-      "X-API-Key": apiKey,
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    timeout: 20000,
-  }
-);
-
-const providerBody = swiftRes.data;
-const providerOrder = providerBody?.data;
-
-if (providerBody?.success !== true || !providerOrder) {
-  processedOrders.set(reference, {
-    status: "unknown",
-    response: {
+    console.log("Submitting SwiftData v2 order:", {
       paymentReference: reference,
-      providerResponse: providerBody || null,
-    },
-  });
+      network,
+      data: selectedPackage.sizeLabel,
+      offerSlug: selectedPackage.offerSlug,
+      offerId: selectedPackage.offerId,
+    });
 
-  return {
-    ok: false,
-    status: 502,
-    body: {
-      success: false,
-      pendingReconciliation: true,
-      message:
-        "The provider response could not be confirmed. Please do not retry this payment.",
-    },
-  };
-}
+    // 7. Submit the order to SwiftData v2.
+    const swiftRes = await axios.post(`${swiftBase}/orders`, orderData, {
+      headers: {
+        "X-API-Key": apiKey,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      timeout: 20000,
+    });
 
-// SwiftData accepting an order does not necessarily mean
-// the bundle has already been delivered.
-const order = {
-  ...providerOrder,
-  paymentReference: reference,
-  network,
-  recipient: phone,
-  size: capacity,
-  offerSlug: selectedPackage.offerSlug || null,
-  offerId: selectedPackage.offerId || null,
-};
+    const providerBody = swiftRes.data;
+    const providerOrder = providerBody?.data;
 
-processedOrders.set(reference, {
-  status: "processing",
-  response: order,
-});
+    if (providerBody?.success !== true || !providerOrder) {
+      processedOrders.set(reference, {
+        status: "unknown",
+        response: {
+          paymentReference: reference,
+          providerResponse: providerBody || null,
+        },
+      });
 
-console.log("SwiftData v2 order accepted:", {
-  paymentReference: reference,
-  providerReference:
-    providerOrder.reference ||
-    providerOrder.clientReference ||
-    null,
-  providerStatus:
-    providerOrder.status ||
-    providerOrder.orderStatus ||
-    "processing",
-});
+      return {
+        ok: false,
+        status: 502,
+        body: {
+          success: false,
+          pendingReconciliation: true,
+          message:
+            "The provider response could not be confirmed. Please do not retry this payment.",
+        },
+      };
+    }
 
-return {
-  ok: true,
-  status: 201,
-  body: {
-    success: true,
-    message: "Bundle order submitted successfully.",
-    order,
-  },
-};
+    // SwiftData accepting an order does not necessarily mean
+    // the bundle has already been delivered.
+    const order = {
+      ...providerOrder,
+      paymentReference: reference,
+      network,
+      recipient: phone,
+      size: capacity,
+      offerSlug: selectedPackage.offerSlug || null,
+      offerId: selectedPackage.offerId || null,
+    };
+
+    processedOrders.set(reference, {
+      status: "processing",
+      response: order,
+    });
+
+    console.log("SwiftData v2 order accepted:", {
+      paymentReference: reference,
+      providerReference:
+        providerOrder.reference || providerOrder.clientReference || null,
+      providerStatus:
+        providerOrder.status || providerOrder.orderStatus || "processing",
+    });
+
+    return {
+      ok: true,
+      status: 201,
+      body: {
+        success: true,
+        message: "Bundle order submitted successfully.",
+        order,
+      },
+    };
   } catch (err) {
     const providerStatus = err.response?.status ?? null;
     const providerBody = err.response?.data ?? null;
@@ -703,26 +649,38 @@ return {
 
 // POST route
 app.post("/api/buy-data", async (req, res) => {
-  const { network, recipient, package: pkg, size, paymentReference,
-    
-   } = req.body;
-  const result = await handleSwiftDataBuyDataRequest({ network, recipient, pkg, size, paymentReference });
+  const { network, recipient, package: pkg, size, paymentReference } = req.body;
+  const result = await handleSwiftDataBuyDataRequest({
+    network,
+    recipient,
+    pkg,
+    size,
+    paymentReference,
+  });
 
   console.log("🔥 handleSwiftDataBuyDataRequest result:", result);
 
   return res.status(result.status).json(result.body);
 });
 
-
-
 // GET route
 app.get("/api/buy-data", async (req, res) => {
-  const { network, recipient, package: pkg, size, paymentReference } = req.query;
-  const result = await handleSwiftDataBuyDataRequest({ network, recipient, pkg, size, paymentReference });
+  const {
+    network,
+    recipient,
+    package: pkg,
+    size,
+    paymentReference,
+  } = req.query;
+  const result = await handleSwiftDataBuyDataRequest({
+    network,
+    recipient,
+    pkg,
+    size,
+    paymentReference,
+  });
   return res.status(result.status).json(result.body);
 });
-
-
 
 /**
  * SwiftData bulk status helper
@@ -747,12 +705,11 @@ async function fetchSwiftDataBulkStatus(identifiers) {
         Accept: "application/json",
       },
       timeout: 15000,
-    }
+    },
   );
 
   return response.data;
 }
-
 
 // New bulk status route
 app.post("/api/v2/orders/status", async (req, res) => {
@@ -762,9 +719,7 @@ app.post("/api/v2/orders/status", async (req, res) => {
     if (
       !Array.isArray(identifiers) ||
       identifiers.length === 0 ||
-      identifiers.some(
-        (id) => typeof id !== "string" || !id.trim()
-      )
+      identifiers.some((id) => typeof id !== "string" || !id.trim())
     ) {
       return res.status(400).json({
         success: false,
@@ -780,9 +735,7 @@ app.post("/api/v2/orders/status", async (req, res) => {
     }
 
     // Remove duplicate references and trim whitespace.
-    const uniqueIdentifiers = [
-      ...new Set(identifiers.map((id) => id.trim())),
-    ];
+    const uniqueIdentifiers = [...new Set(identifiers.map((id) => id.trim()))];
 
     const data = await fetchSwiftDataBulkStatus(uniqueIdentifiers);
 
@@ -806,7 +759,7 @@ app.post("/api/v2/orders/status", async (req, res) => {
   } catch (error) {
     console.error(
       "SwiftData bulk status error:",
-      error.response?.data || error.message
+      error.response?.data || error.message,
     );
 
     return res.status(error.response?.status || 502).json({
@@ -816,7 +769,6 @@ app.post("/api/v2/orders/status", async (req, res) => {
     });
   }
 });
-
 
 // Backward-compatible single-order route.
 // Existing frontend calls can continue using this URL.
@@ -870,7 +822,7 @@ app.get("/api/v2/orders/status/:orderIdOrRef", async (req, res) => {
   } catch (error) {
     console.error(
       "SwiftData single status error:",
-      error.response?.data || error.message
+      error.response?.data || error.message,
     );
 
     return res.status(error.response?.status || 502).json({
@@ -881,21 +833,13 @@ app.get("/api/v2/orders/status/:orderIdOrRef", async (req, res) => {
   }
 });
 
-
-
 /* =========================================
    DATAMART PURCHASE ROUTE
    POST /api/datamart/buy-data
 ========================================= */
 
 app.post("/api/datamart/buy-data", async (req, res) => {
-  const {
-    network,
-    recipient,
-    package: pkg,
-    size,
-    paymentReference,
-  } = req.body;
+  const { network, recipient, package: pkg, size, paymentReference } = req.body;
 
   try {
     const result = await handleDataMartBuyDataRequest(
@@ -909,13 +853,13 @@ app.post("/api/datamart/buy-data", async (req, res) => {
       {
         verifyPaystack,
         processedOrders,
-      }
+      },
     );
 
     console.log(
       "DataMart purchase result:",
       result.status,
-      result.body?.message
+      result.body?.message,
     );
 
     return res.status(result.status).json(result.body);
@@ -929,121 +873,100 @@ app.post("/api/datamart/buy-data", async (req, res) => {
   }
 });
 
-
-
-
-
-
-
-
 app.get("/api/datamart/order-status/:reference", async (req, res) => {
-const reference = String(req.params.reference || "").trim();
+  const reference = String(req.params.reference || "").trim();
 
-if (!reference) {
-return res.status(400).json({
-success: false,
-message: "DataMart order reference is required."
-});
-}
+  if (!reference) {
+    return res.status(400).json({
+      success: false,
+      message: "DataMart order reference is required.",
+    });
+  }
 
-try {
-// Fetch the latest status directly from DataMart.
-const result = await getDataMartOrderStatus(reference);
+  try {
+    // Fetch the latest status directly from DataMart.
+    const result = await getDataMartOrderStatus(reference);
 
-if (result?.status !== "success" || !result?.data) {
-  return res.status(502).json({
-    success: false,
-    provider: "datamart",
-    message: "DataMart returned an invalid status response."
-  });
-}
-
-const providerOrder = result.data;
-
-// DataMart returns orderStatus inside result.data.
-const rawStatus = String(
-  providerOrder.orderStatus || ""
-).trim().toLowerCase();
-
-const statusMap = {
-  completed: "completed",
-  delivered: "completed",
-  success: "completed",
-  successful: "completed",
-  failed: "failed",
-  cancelled: "failed",
-  canceled: "failed",
-  rejected: "failed",
-  refunded: "refunded",
-  pending: "processing",
-  waiting: "processing",
-  processing: "processing",
-  in_progress: "processing",
-  "in progress": "processing"
-};
-
-const normalizedStatus = statusMap[rawStatus];
-
-if (!normalizedStatus) {
-  console.warn("Unknown DataMart order status:", rawStatus);
-
-  return res.json({
-    success: true,
-    provider: "datamart",
-    source: "provider",
-    order: {
-      orderReference: providerOrder.reference || reference,
-      status: "processing",
-      providerStatus: rawStatus || null
+    if (result?.status !== "success" || !result?.data) {
+      return res.status(502).json({
+        success: false,
+        provider: "datamart",
+        message: "DataMart returned an invalid status response.",
+      });
     }
-  });
-}
 
-return res.json({
-  success: true,
-  provider: "datamart",
-  source: "provider",
-  order: {
-    orderReference: providerOrder.reference || reference,
-    status: normalizedStatus,
-    providerStatus: rawStatus,
-    updatedAt: providerOrder.updatedAt || null
+    const providerOrder = result.data;
+
+    // DataMart returns orderStatus inside result.data.
+    const rawStatus = String(providerOrder.orderStatus || "")
+      .trim()
+      .toLowerCase();
+
+    const statusMap = {
+      completed: "completed",
+      delivered: "completed",
+      success: "completed",
+      successful: "completed",
+      failed: "failed",
+      cancelled: "failed",
+      canceled: "failed",
+      rejected: "failed",
+      refunded: "refunded",
+      pending: "processing",
+      waiting: "processing",
+      processing: "processing",
+      in_progress: "processing",
+      "in progress": "processing",
+    };
+
+    const normalizedStatus = statusMap[rawStatus];
+
+    if (!normalizedStatus) {
+      console.warn("Unknown DataMart order status:", rawStatus);
+
+      return res.json({
+        success: true,
+        provider: "datamart",
+        source: "provider",
+        order: {
+          orderReference: providerOrder.reference || reference,
+          status: "processing",
+          providerStatus: rawStatus || null,
+        },
+      });
+    }
+
+    return res.json({
+      success: true,
+      provider: "datamart",
+      source: "provider",
+      order: {
+        orderReference: providerOrder.reference || reference,
+        status: normalizedStatus,
+        providerStatus: rawStatus,
+        updatedAt: providerOrder.updatedAt || null,
+      },
+    });
+  } catch (error) {
+    console.error("DataMart status route failed:", {
+      reference,
+      httpStatus: error.providerHttpStatus,
+      providerResponse: error.providerResponse,
+      message: error.message,
+    });
+
+    return res.status(502).json({
+      success: false,
+      provider: "datamart",
+      message: "Unable to retrieve the latest DataMart order status.",
+    });
   }
 });
-
-} catch (error) {
-console.error("DataMart status route failed:", {
-reference,
-httpStatus: error.providerHttpStatus,
-providerResponse: error.providerResponse,
-message: error.message
-});
-
-return res.status(502).json({
-  success: false,
-  provider: "datamart",
-  message: "Unable to retrieve the latest DataMart order status."
-});
-
-}
-});
-
-
-
-
-
-
-
-
-
 
 /* =========================================
    ECODATA MOBILE CHECKOUT
    Separate from the existing website flow
 ========================================= */
-
-
-
 
 // Use the existing backend/db.js import.
 // If server.js already imports sql from this file,
@@ -1151,8 +1074,8 @@ app.post("/api/mobile/checkout", async (req, res) => {
     // Find the signed-in user's email.
     const users = await sql`
       SELECT email
-      FROM public.users
-      WHERE clerk_id = ${userId}
+      FROM public.ecodata_users
+      WHERE clerk_user_id = ${userId}
       LIMIT 1
     `;
 
@@ -1193,7 +1116,7 @@ app.post("/api/mobile/checkout", async (req, res) => {
     await sql`
       INSERT INTO checkouts (
         reference,
-        clerk_id,
+        clerk_user_id,
         lines,
         amount,
         status,
@@ -1276,7 +1199,6 @@ app.post("/api/mobile/checkout", async (req, res) => {
   }
 });
 
-
 //===================================
 // CHECKOUT CONFIRMATION
 //===================================
@@ -1301,10 +1223,10 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
     }
 
     const checkouts = await sql`
-      SELECT reference, clerk_id, lines, amount, status
+      SELECT reference, clerk_user_id, lines, amount, status
       FROM checkouts
       WHERE reference = ${reference}
-        AND clerk_id = ${userId}
+        AND clerk_user_id = ${userId}
       LIMIT 1
     `;
 
@@ -1336,27 +1258,28 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
     const verification = await verifyPaystack(reference);
     const transaction = verification?.data?.data;
 
-  const expectedAmountPesewas = Math.round(Number(checkout.amount) * 100);
-const metadata = transaction?.metadata;
+    const expectedAmountPesewas = Math.round(Number(checkout.amount) * 100);
+    const metadata = transaction?.metadata;
 
-if (
-  verification?.data?.status !== true ||
-  transaction?.status !== "success" ||
-  transaction?.reference !== reference ||
-  transaction?.currency !== "GHS" ||
-  !Number.isSafeInteger(Number(transaction?.amount)) ||
-  Number(transaction.amount) !== expectedAmountPesewas ||
-  !metadata ||
-  metadata.source !== "ecodata_mobile" ||
-  metadata.checkout_reference !== reference ||
-  metadata.clerk_user_id !== userId
-) {
-  return res.status(402).json({
-    success: false,
-    status: "pending",
-    message: "Payment has not been confirmed. Please try again shortly.",
-  });
-} {
+    if (
+      verification?.data?.status !== true ||
+      transaction?.status !== "success" ||
+      transaction?.reference !== reference ||
+      transaction?.currency !== "GHS" ||
+      !Number.isSafeInteger(Number(transaction?.amount)) ||
+      Number(transaction.amount) !== expectedAmountPesewas ||
+      !metadata ||
+      metadata.source !== "ecodata_mobile" ||
+      metadata.checkout_reference !== reference ||
+      metadata.clerk_user_id !== userId
+    ) {
+      return res.status(402).json({
+        success: false,
+        status: "pending",
+        message: "Payment has not been confirmed. Please try again shortly.",
+      });
+    }
+    {
       return res.status(402).json({
         success: false,
         status: "pending",
@@ -1398,7 +1321,6 @@ if (
   }
 });
 
-
 //================================
 // FULFILL CHECKOUT
 //================================
@@ -1408,7 +1330,7 @@ async function fulfillMobileCheckout(reference, userId, paidAmountPesewas) {
     UPDATE checkouts
     SET status = 'processing', updated_at = NOW()
     WHERE reference = ${reference}
-      AND clerk_id = ${userId}
+      AND clerk_user_id = ${userId}
       AND status = 'pending'
       AND ROUND(amount * 100) = ${paidAmountPesewas}
     RETURNING reference, clerk_id, lines, amount
@@ -1419,7 +1341,7 @@ async function fulfillMobileCheckout(reference, userId, paidAmountPesewas) {
       SELECT status
       FROM checkouts
       WHERE reference = ${reference}
-        AND clerk_id = ${userId}
+        AND clerk_user_id = ${userId}
       LIMIT 1
     `;
 
@@ -1457,7 +1379,7 @@ async function fulfillMobileCheckout(reference, userId, paidAmountPesewas) {
       await sql`
         INSERT INTO orders (
           id,
-          clerk_id,
+          clerk_user_id,
           checkout_ref,
           line_no,
           package,
@@ -1577,7 +1499,7 @@ async function fulfillMobileCheckout(reference, userId, paidAmountPesewas) {
       SET status = ${checkoutStatus},
           updated_at = NOW()
       WHERE reference = ${reference}
-        AND clerk_id = ${userId}
+        AND clerk_user_id = ${userId}
         AND status = 'processing'
     `;
 
@@ -1596,7 +1518,7 @@ async function fulfillMobileCheckout(reference, userId, paidAmountPesewas) {
       UPDATE checkouts
       SET status = 'review', updated_at = NOW()
       WHERE reference = ${reference}
-        AND clerk_id = ${userId}
+        AND clerk_user_id = ${userId}
         AND status = 'processing'
     `;
 
@@ -1606,7 +1528,6 @@ async function fulfillMobileCheckout(reference, userId, paidAmountPesewas) {
     };
   }
 }
-
 
 //===================================
 // SUBMIT MOBILE ORDER
@@ -1718,7 +1639,6 @@ async function submitMobileSwiftDataOrder({
   };
 }
 
-
 //======================================
 // PROVIDER FULFILLMENT
 //======================================
@@ -1763,25 +1683,26 @@ async function fulfillMobileDataMartLine({ checkoutReference, lineNo, line }) {
   });
 }
 
-
 /**
  * Update an existing mobile order using its checkout reference
  * and line number. Never creates a second order row.
  */
 
-
-
 // ========================================
 // NORMALIZE PROVIDER RAW STATUS
 //=========================================
 function normalizeMobileProviderStatus(rawStatus) {
-  const status = String(rawStatus ?? "").trim().toLowerCase();
+  const status = String(rawStatus ?? "")
+    .trim()
+    .toLowerCase();
 
   if (["delivered", "completed", "successful", "success"].includes(status)) {
     return "delivered";
   }
 
-  if (["failed", "failure", "rejected", "cancelled", "canceled"].includes(status)) {
+  if (
+    ["failed", "failure", "rejected", "cancelled", "canceled"].includes(status)
+  ) {
     return "failed";
   }
 
@@ -1795,7 +1716,6 @@ function normalizeMobileProviderStatus(rawStatus) {
 
   return "review";
 }
-
 
 // ========================================
 // MOBILE RECONCILE
@@ -1815,9 +1735,7 @@ async function reconcileMobileSwiftDataOrder(order) {
   const response = await fetchSwiftDataBulkStatus([vendorReference]);
 
   if (response?.success === false) {
-    throw new Error(
-      response.message || "SwiftData status lookup failed.",
-    );
+    throw new Error(response.message || "SwiftData status lookup failed.");
   }
 
   const result = response?.data ?? response;
@@ -1841,7 +1759,8 @@ async function reconcileMobileSwiftDataOrder(order) {
     return {
       lineNo: order.line_no,
       status: "review",
-      message: "SwiftData did not return a matching order; no resubmission made.",
+      message:
+        "SwiftData did not return a matching order; no resubmission made.",
     };
   }
 
@@ -1938,12 +1857,6 @@ app.post(
     }
   },
 );
-
-
-
-
-
-
 
 // Frontend fallback
 app.use((req, res) => {
