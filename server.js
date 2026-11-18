@@ -6,6 +6,8 @@ import axios from "axios";
 import path from "path";
 import { fileURLToPath } from "url";
 import bodyParser from "body-parser";
+import { neon } from "@neondatabase/serverless";
+const sql = neon(process.env.DATABASE_URL);
 
 // Routes
 import storeRouter from "./routes/storesRoute.js";
