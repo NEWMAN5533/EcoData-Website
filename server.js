@@ -3,7 +3,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import axios from "axios";
-import path from "path";
+import path, { normalize } from "path";
 import { fileURLToPath } from "url";
 import bodyParser from "body-parser";
 import { neon } from "@neondatabase/serverless";
@@ -90,7 +90,7 @@ import { getMobileSellingPrice } from "./services/mobileSellingPrices.js";
 import { submitMobileDataMartOrder } from "./services/mobileProviderFulfillment.js";
 import { createMobileOrderPolling } from "./services/mobileOrderPolling.js";
 import { updateMobileNeonOrder } from "./services/updateMobileNeonOrders.js";
-import { type } from "os";
+
 
 const MOBILE_RETURN_URL =
   process.env.MOBILE_RETURN_URL ||
@@ -1203,6 +1203,9 @@ if (
   }
 });
 
+
+
+
 app.post("/api/mobile/confirm-payment", async (req, res) => {
   try {
     const { userId } = getAuth(req);
@@ -1378,6 +1381,9 @@ app.post("/api/mobile/confirm-payment", async (req, res) => {
   }
 });
 
+
+
+
 //================================
 // FULFILL CHECKOUT
 //================================
@@ -1535,6 +1541,20 @@ async function fulfillMobileCheckout(reference, userId, paidAmountPesewas) {
           status: providerOrder.status,
         });
 
+        console.info(
+          "[EcoData App][CHECKOUT][ORDER_SAVED]",
+          JSON.stringify({
+            timeStamp: new Date().toISOString(),
+            checkoutReference,
+            orderId: order.id,
+            lineNo: order.line_no,
+            vendor: 'swiftdata',
+            vendorReference: normalize.reference,
+            providerStatus: normalize.providerStatus,
+            orderStatus: normalize.status,
+          }),
+        );
+
         return {
           lineNo,
           vendor: "swiftdata",
@@ -1634,6 +1654,94 @@ async function fulfillMobileCheckout(reference, userId, paidAmountPesewas) {
 //===================================
 // SUBMIT MOBILE ORDER
 //===================================
+function normalizeSwiftDataResponse(response) {
+  const root = response?.data ?? response ?? {};
+  const data = root?.data ?? root;
+
+  const rawStatus = String(
+    data?.status ??
+    data?.orderStatus ??
+    data?.order_status ??
+    data?.state ??
+    root?.status ??
+    "",
+  )
+    .trim()
+    .toLowerCase()
+    .replace(/[\s-]+/g, "_");
+  
+  let status = "pending";
+
+  if ([
+    "delivered",
+    "completed",
+    "complete",
+    "successful",
+    "success",
+    "processed",
+  ].includes(rawStatus,)
+  ) {
+
+    status = "delivered";
+  } else if (
+    [
+      "processing",
+      "in_progress",
+      "inprogress",
+      "on-hold",
+      "verifying",
+    ].includes(rawStatus,)
+  ) {
+    status = "processing";
+  } else if(
+    [
+      "failed",
+      "cancelled",
+      "canceled",
+      "rejected",
+      "failure",
+    ].includes(rawStatus,)
+  ) {
+    status = "failed";
+  } else if (
+    [
+      "pending",
+      "queued",
+      "waiting",
+      "accepted",
+      "submitted",
+      "initiated",
+    ].includes(rawStatus)
+  ) {
+    status = "pending";
+  }
+
+  const reference =
+    data?.orderReference ??
+    data?.order_reference ??
+    data?.reference ??
+    data?.orderId ??
+    data?.order_id ??
+    data?.id ??
+    null;
+
+  return {
+    success: root?.success === true ||
+      response?.status === 200 ||
+      response?.status === 201,
+    status,
+    providerStatus: rawStatus ||
+      "unknown",
+    reference: reference === null ? null : String(reference),
+    data,
+  };
+}
+
+
+
+
+
+
 async function submitMobileSwiftDataOrder({
   network,
   recipient,
@@ -1693,6 +1801,8 @@ async function submitMobileSwiftDataOrder({
     timeout: 20000,
   });
 
+ 
+
   const body = response.data;
   const data = body?.data ?? body;
 
@@ -1702,50 +1812,73 @@ async function submitMobileSwiftDataOrder({
     );
   }
 
-  const vendorReference =
-    data?.orderReference ??
-    data?.reference ??
-    data?.orderId ??
-    data?.id ??
-    null;
-
-  if (!vendorReference) {
-    // The request may have been accepted even if the response shape
-    // did not contain a recognizable reference.
-    throw new Error(
-      "SwiftData response did not contain an order reference; reconciliation is required.",
-    );
-  }
-
-  const rawStatus = String(
-    data?.status ?? data?.orderStatus ?? "processing",
-  ).toLowerCase();
-
-  const status = [
-    "failed",
-    "failure",
-    "cancelled",
-    "canceled",
-    "rejected",
-  ].includes(rawStatus)
-    ? "failed"
-    : ["delivered", "completed", "success", "successful"].includes(rawStatus)
-      ? "delivered"
-      : ["pending", "processing", "accepted", "queued"].includes(rawStatus)
-        ? "processing"
-        : "review";
-
-  return {
-    vendorReference: String(vendorReference),
-    status,
-  };
+   const normalized =
+    normalizeSwiftDataResponse(response);
+  
+  console.info(
+    "[EcoData App][SwiftData][PURCHASE_RESPONSE]",
+    JSON.stringify({
+      timeStamp: new Date().toISOString(),
+      httpStatus: response.status,
+      success: normalized.success,
+      status: normalized.status,
+      providerStatus: normalized.providerStatus,
+      vendorReference: normalized.reference,
+    }),
+  );
+  return normalize;
 }
+
+
 
 //======================================
 // PROVIDER FULFILLMENT
 //======================================
-async function fulfillMobileDataMartLine({ checkoutReference, lineNo, line }) {
-  // Mark the existing Neon record before submitting to the provider.
+async function fulfillMobileDataMartLine({
+  checkoutReference,
+  lineNo,
+  line,
+}) {
+  const network = String(line?.network ?? "").trim();
+  const recipient = String(line?.phone ?? "").trim();
+  const rawSize = String(line?.size ?? "").trim();
+
+  // Accept sizes such as 1, "1GB", or "1 GB".
+  const size = Number(rawSize.replace(/\s*gb\s*$/i, ""));
+
+  const paymentReference = `${checkoutReference}-${lineNo}`;
+
+  const invalidFields = [];
+
+  if (!network) invalidFields.push("network");
+  if (!recipient) invalidFields.push("phone");
+  if (!Number.isFinite(size) || size <= 0) {
+    invalidFields.push("size");
+  }
+  if (!String(checkoutReference ?? "").trim()) {
+    invalidFields.push("checkoutReference");
+  }
+
+  if (invalidFields.length > 0) {
+    console.error(
+      "[EcoData][DataMart][INVALID_ORDER_DETAILS]",
+      JSON.stringify({
+        checkoutReference: checkoutReference || null,
+        lineNo,
+        invalidFields,
+        network: network || null,
+        sizeReceived: rawSize || null,
+        parsedSize: Number.isFinite(size) ? size : null,
+        hasPhone: Boolean(recipient),
+      }),
+    );
+
+    throw new Error(
+      `Invalid DataMart order details: ${invalidFields.join(", ")}.`,
+    );
+  }
+
+  // Mark the existing Neon record only after validating the input.
   await updateMobileNeonOrder({
     checkoutReference,
     lineNo,
@@ -1753,34 +1886,61 @@ async function fulfillMobileDataMartLine({ checkoutReference, lineNo, line }) {
     status: "processing",
   });
 
+  console.log("[EcoData][DataMart][ORDER_SUBMIT]", JSON.stringify({
+    checkoutReference,
+    lineNo,
+    network,
+    size,
+  }));
+
   const providerOrder = await submitMobileDataMartOrder({
-    network: line.network,
-    recipient: line.phone,
-    size: line.size,
-    paymentReference: `${checkoutReference}-${lineNo}`,
+    network,
+    recipient,
+    size,
+    paymentReference,
   });
 
-  const providerStatus = String(providerOrder.orderStatus ?? "unknown")
+  const providerStatus = String(
+    providerOrder?.orderStatus ?? "unknown",
+  )
     .trim()
     .toLowerCase();
 
-  const status = ["completed", "success", "successful", "delivered"].includes(
-    providerStatus,
-  )
+  const status = [
+    "completed",
+    "success",
+    "successful",
+    "delivered",
+  ].includes(providerStatus)
     ? "delivered"
-    : ["failed", "cancelled", "canceled", "rejected"].includes(providerStatus)
+    : [
+        "failed",
+        "cancelled",
+        "canceled",
+        "rejected",
+      ].includes(providerStatus)
       ? "failed"
       : "processing";
+
+  const vendorReference =
+    providerOrder?.providerOrderReference ||
+    providerOrder?.transactionReference ||
+    providerOrder?.purchaseId ||
+    null;
+
+  console.log("[EcoData][DataMart][ORDER_RESULT]", JSON.stringify({
+    checkoutReference,
+    lineNo,
+    status,
+    providerStatus,
+    vendorReference,
+  }));
 
   return updateMobileNeonOrder({
     checkoutReference,
     lineNo,
     vendor: "datamart",
-    vendorReference:
-      providerOrder.providerOrderReference ||
-      providerOrder.transactionReference ||
-      providerOrder.purchaseId ||
-      null,
+    vendorReference,
     status,
   });
 }
