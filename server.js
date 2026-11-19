@@ -1087,37 +1087,6 @@ console.log("=============================================");
       });
     }
 
-    // Store the server-calculated amount.
-    // The UNIQUE constraint on reference should prevent duplicates.
-    const inserted = await sql`
-      INSERT INTO public.checkouts (
-        reference,
-        clerk_user_id,
-        lines,
-        amount,
-        status,
-        created_at,
-        updated_at
-      )
-      VALUES (
-        ${reference},
-        ${userId},
-        ${JSON.stringify(pricedLines)}::jsonb,
-        ${total},
-        'pending',
-        NOW(),
-        NOW()
-      )
-      ON CONFLICT (reference) DO NOTHING
-      RETURNING reference, amount
-    `;
-
-    if (!inserted.length) {
-      return res.status(409).json({
-        success: false,
-        message: "This checkout reference already exists.",
-      });
-    }
 
     return res.json({
       success: true,
