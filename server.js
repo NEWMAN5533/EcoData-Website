@@ -1295,6 +1295,192 @@ console.log("=============================================");
     });
   }
 });
+
+
+
+
+
+
+
+
+app.post("/api/mobile/confirm-payment", async (req, res) => {
+  try {
+    const { userId } = getAuth(req);
+
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: "Please sign in again.",
+      });
+    }
+
+    const { reference, lines } = req.body ?? {};
+
+    if (
+      typeof reference !== "string" ||
+      !reference.trim() ||
+      !Array.isArray(lines) ||
+      lines.length === 0
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Payment reference and checkout items are required.",
+      });
+    }
+
+    // 1. Verify the actual Paystack transaction.
+    const transaction = await verifyMobilePayment(reference.trim());
+
+    if (!transaction) {
+      return res.status(202).json({
+        success: false,
+        pending: true,
+        message: "Payment is not confirmed yet. Please check again shortly.",
+      });
+    }
+
+    if (
+      transaction.status !== "success" ||
+      transaction.reference !== reference.trim() ||
+      String(transaction.currency).toUpperCase() !== "GHS"
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Payment could not be verified.",
+      });
+    }
+
+    // 2. Recalculate prices on the server; never trust app-submitted prices.
+    const pricedLines = lines.map((line) => {
+      const price = getMobileSellingPrice(
+        line.network,
+        line.size,
+        line.package,
+      );
+
+      if (!Number.isFinite(price) || price <= 0) {
+        throw new Error("Invalid bundle or price.");
+      }
+
+      if (!line.phone || !line.network || !line.size || !line.package) {
+        throw new Error("A checkout item is missing required details.");
+      }
+
+      return {
+        network: String(line.network),
+        size: String(line.size),
+        package: String(line.package),
+        phone: String(line.phone),
+        price,
+      };
+    });
+
+    const total = Number(
+      pricedLines
+        .reduce((sum, line) => sum + line.price, 0)
+        .toFixed(2),
+    );
+
+    // Paystack reports amounts in pesewas; Neon stores the total in GHS.
+    const paidAmountPesewas = Number(transaction.amount);
+    const expectedPesewas = Math.round(total * 100);
+
+    if (
+      !Number.isSafeInteger(paidAmountPesewas) ||
+      paidAmountPesewas !== expectedPesewas
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "The verified payment amount does not match the order total.",
+      });
+    }
+
+    // 3. Save the checkout only after successful payment verification.
+    // The reference here is the actual Paystack reference.
+    const inserted = await sql`
+      INSERT INTO public.checkouts (
+        reference,
+        clerk_user_id,
+        lines,
+        amount,
+        status,
+        created_at,
+        updated_at
+      )
+      VALUES (
+        ${reference.trim()},
+        ${userId},
+        ${JSON.stringify(pricedLines)}::jsonb,
+        ${total},
+        'pending',
+        NOW(),
+        NOW()
+      )
+      ON CONFLICT (reference) DO NOTHING
+      RETURNING reference, amount, status
+    `;
+
+    if (!inserted.length) {
+      // A retry may arrive after the first request already saved the checkout.
+      const existing = await sql`
+        SELECT reference, amount, status
+        FROM public.checkouts
+        WHERE reference = ${reference.trim()}
+          AND clerk_user_id = ${userId}
+        LIMIT 1
+      `;
+
+      if (!existing.length) {
+        return res.status(409).json({
+          success: false,
+          message: "This payment reference is already associated with another checkout.",
+        });
+      }
+
+      if (
+        Math.round(Number(existing[0].amount) * 100) !== paidAmountPesewas
+      ) {
+        return res.status(409).json({
+          success: false,
+          message: "The saved checkout amount does not match the payment.",
+        });
+      }
+
+      if (existing[0].status !== "pending") {
+        return res.json({
+          success: true,
+          reference: existing[0].reference,
+          status: existing[0].status,
+          message: "This payment has already been processed.",
+        });
+      }
+    }
+
+    // 4. Claim the pending checkout and submit its orders.
+    const result = await fulfillMobileCheckout(
+      reference.trim(),
+      userId,
+      paidAmountPesewas,
+    );
+
+    return res.status(result.status === "not_found" ? 404 : 200).json({
+      success: Boolean(result.success),
+      reference: reference.trim(),
+      status: result.status,
+      message: result.message,
+      orders: result.orders ?? [],
+    });
+  } catch (error) {
+    console.error("[Mobile confirm payment]", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Unable to confirm payment and process your order. Please retry.",
+    });
+  }
+});
+
+
 //================================
 // FULFILL CHECKOUT
 //================================
