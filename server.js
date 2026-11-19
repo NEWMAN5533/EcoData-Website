@@ -999,8 +999,6 @@ app.get("/api/datamart/order-status/:reference", async (req, res) => {
    Separate from the existing website flow
 ========================================= */
 
-
-
 app.post("/api/mobile/checkout/confirm", async (req, res) => {
   try {
     const { userId } = getAuth(req);
@@ -1072,18 +1070,13 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
     });
 
     const totalGhs = Number(
-      pricedLines
-        .reduce((sum, line) => sum + line.price, 0)
-        .toFixed(2),
+      pricedLines.reduce((sum, line) => sum + line.price, 0).toFixed(2),
     );
 
     const expectedPesewas = Math.round(totalGhs * 100);
     const paidPesewas = Number(tx.amount);
 
-    if (
-      !Number.isFinite(paidPesewas) ||
-      paidPesewas !== expectedPesewas
-    ) {
+    if (!Number.isFinite(paidPesewas) || paidPesewas !== expectedPesewas) {
       return res.status(400).json({
         success: false,
         message: "Payment amount does not match the checkout total.",
@@ -1121,9 +1114,7 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
     );
 
     return res.json({
-      success:
-        result.status === "fulfilled" ||
-        result.status === "processing",
+      success: result.status === "fulfilled" || result.status === "processing",
       status: result.status,
       reference: checkoutReference,
       message: result.message,
@@ -1140,13 +1131,6 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
     });
   }
 });
-
-
-
-
-
-
-
 
 app.post("/api/mobile/confirm-payment", async (req, res) => {
   try {
@@ -1221,9 +1205,7 @@ app.post("/api/mobile/confirm-payment", async (req, res) => {
     });
 
     const total = Number(
-      pricedLines
-        .reduce((sum, line) => sum + line.price, 0)
-        .toFixed(2),
+      pricedLines.reduce((sum, line) => sum + line.price, 0).toFixed(2),
     );
 
     // Paystack reports amounts in pesewas; Neon stores the total in GHS.
@@ -1278,13 +1260,12 @@ app.post("/api/mobile/confirm-payment", async (req, res) => {
       if (!existing.length) {
         return res.status(409).json({
           success: false,
-          message: "This payment reference is already associated with another checkout.",
+          message:
+            "This payment reference is already associated with another checkout.",
         });
       }
 
-      if (
-        Math.round(Number(existing[0].amount) * 100) !== paidAmountPesewas
-      ) {
+      if (Math.round(Number(existing[0].amount) * 100) !== paidAmountPesewas) {
         return res.status(409).json({
           success: false,
           message: "The saved checkout amount does not match the payment.",
@@ -1320,11 +1301,11 @@ app.post("/api/mobile/confirm-payment", async (req, res) => {
 
     return res.status(500).json({
       success: false,
-      message: "Unable to confirm payment and process your order. Please retry.",
+      message:
+        "Unable to confirm payment and process your order. Please retry.",
     });
   }
 });
-
 
 //================================
 // FULFILL CHECKOUT
@@ -1372,18 +1353,18 @@ async function fulfillMobileCheckout(reference, userId, paidAmountPesewas) {
       throw new Error("Normal delivery orders must be processed individually.");
     }
 
-    // Persist every order before attempting provider fulfillment, in one statement
+    // Persist every order before attempting provider fulfillment.
     const rows = lines.map((line, i) => {
       const lineNo = i + 1;
+
       const vendor =
         String(line.package).toLowerCase() === "normal"
           ? "datamart"
           : "swiftdata";
+
       return {
         lineNo,
         vendor,
-        paymentRef:
-          vendor === "datamart" ? reference : `${reference}-${lineNo}`,
         package: String(line.package),
         network: String(line.network),
         size: String(line.size),
@@ -1393,13 +1374,35 @@ async function fulfillMobileCheckout(reference, userId, paidAmountPesewas) {
     });
 
     await sql`
-      INSERT INTO orders (
-        id, clerk_user_id, checkout_ref, line_no, package, vendor,
-        network, size, price, phone, payment_ref, status, created_at
+      INSERT INTO public.orders (
+        id,
+        clerk_user_id,
+        checkout_ref,
+        line_no,
+        package,
+        vendor,
+        network,
+        size,
+        price,
+        phone,
+        vendor_ref,
+        status,
+        created_at
       )
       SELECT
-        gen_random_uuid(), ${userId}::text, ${reference}::text, t.line_no, t.package, t.vendor,
-        t.network, t.size, t.price, t.phone, t.payment_ref, 'processing', NOW()
+        gen_random_uuid(),
+        ${userId}::text,
+        ${reference}::text,
+        t.line_no,
+        t.package,
+        t.vendor,
+        t.network,
+        t.size,
+        t.price,
+        t.phone,
+        NULL,
+        'processing',
+        NOW()
       FROM unnest(
         ${rows.map((r) => r.lineNo)}::int[],
         ${rows.map((r) => r.package)}::text[],
@@ -1407,9 +1410,16 @@ async function fulfillMobileCheckout(reference, userId, paidAmountPesewas) {
         ${rows.map((r) => r.network)}::text[],
         ${rows.map((r) => r.size)}::text[],
         ${rows.map((r) => r.price)}::numeric[],
-        ${rows.map((r) => r.phone)}::text[],
-        ${rows.map((r) => r.paymentRef)}::text[]
-      ) AS t(line_no, package, vendor, network, size, price, phone, payment_ref)
+        ${rows.map((r) => r.phone)}::text[]
+      ) AS t(
+        line_no,
+        package,
+        vendor,
+        network,
+        size,
+        price,
+        phone
+      )
       ON CONFLICT (checkout_ref, line_no) DO NOTHING
     `;
     // Process up to 5 vendor orders concurrently.
