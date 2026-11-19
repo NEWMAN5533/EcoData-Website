@@ -24,26 +24,47 @@ export async function submitMobileDataMartOrder({
   size,
   paymentReference,
 }) {
-  const capacity = Number(size);
+  const capacity = Number(
+    String(size ?? "")
+      .trim()
+      .replace(/\s*gb\s*/i, ""),
+  );
+
   const phoneNumber = String(recipient ?? "").trim();
   const reference = String(paymentReference ?? "").trim();
+  const normalizedNetwork = String(network ?? "")
+    .trim()
+    .toLowerCase();
 
-  if (
-    !network ||
-    !phoneNumber ||
-    !reference ||
-    !Number.isFinite(capacity) ||
-    capacity <= 0
-  ) {
+  const invalidFields = [];
+
+  if (!normalizedNetwork) invalidFields.push("network");
+  if (!phoneNumber) invalidFields.push("recipient");
+  if (!reference) invalidFields.push("paymentReference");
+
+  if (!Number.isFinite(capacity) || capacity <= 0) {
+    invalidFields.push("size");
+  }
+
+  if (invalidFields.length > 0) {
+    console.error(
+      "[EcoData][DataMart][INVALID_ORDER_DETAILS]",
+      JSON.stringify({
+        timestamp: new Date().toISOString(),
+        invalidFields,
+        network: normalizedNetwork || null,
+        sizeReceived: String(size ?? ""),
+        capacityParsed: Number.isFinite(capacity) ? capacity : null,
+        hasRecipient: Boolean(phoneNumber),
+        hasPaymentReference: Boolean(reference),
+      }),
+    );
+
     throw new Error("Invalid mobile DataMart order details.");
   }
 
-  const sellingPrice = Number(getDataMartSellingPrice(network, capacity));
 
-  if (!Number.isFinite(sellingPrice) || sellingPrice <= 0) {
-    throw new Error("Invalid DataMart selling price.");
-  }
-
+  
   const packages = await getDataMartPackages(network);
 
   const matchedPackage = matchDataMartPackage(
