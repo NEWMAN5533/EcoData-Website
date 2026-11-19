@@ -1043,48 +1043,70 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
       });
     }
 
-    // Recalculate all prices on the server.
-    const pricedLines = lines.map((line) => {
-      if (
-        !line ||
-        typeof line.network !== "string" ||
-        typeof line.package !== "string" ||
-        !String(line.size ?? "").trim() ||
-        typeof line.phone !== "string" ||
-        !/^\d{10}$/.test(line.phone)
-      ) {
-        throw new Error("One or more checkout items are invalid.");
-      }
+ // Use the prices supplied by the mobile app.
+// Validate every price before calculating the checkout total.
+const pricedLines = lines.map((line) => {
+  if (
+    !line ||
+    typeof line.network !== "string" ||
+    typeof line.package !== "string" ||
+    !String(line.size ?? "").trim() ||
+    typeof line.phone !== "string" ||
+    !/^\d{10}$/.test(line.phone)
+  ) {
+    throw new Error("One or more checkout items are invalid.");
+  }
 
-      const price = getMobileSellingPrice(
-        line.network,
-        line.size,
-        line.package,
-      );
+  const price = Number(line.price);
 
-      if (!Number.isFinite(price) || price <= 0) {
-        throw new Error("Invalid bundle or price.");
-      }
+  if (!Number.isFinite(price) || price <= 0) {
+    throw new Error("One or more checkout prices are invalid.");
+  }
 
-      return { ...line, price };
-    });
-    const subtotalGhs = Number(
-      pricedLines.reduce((sum, line) => sum + Number(line.price), 0).toFixed(2),
-    );
+  return {
+    package: line.package,
+    network: line.network,
+    size: String(line.size),
+    phone: line.phone,
+    price: Number(price.toFixed(2)),
+  };
+});
 
-    const paymentFeeGhs = Number((subtotalGhs * 0.0195).toFixed(2));
+const subtotalGhs = Number(
+  pricedLines
+    .reduce((sum, line) => sum + line.price, 0)
+    .toFixed(2),
+);
 
-    const totalGhs = Number((subtotalGhs + paymentFeeGhs).toFixed(2));
+const paymentFeeGhs = Number(
+  (subtotalGhs * 0.0195).toFixed(2),
+);
 
-    const expectedPesewas = Math.round(totalGhs * 100);
-    const paidPesewas = Number(tx.amount);
+const totalGhs = Number(
+  (subtotalGhs + paymentFeeGhs).toFixed(2),
+);
 
-    if (!Number.isFinite(paidPesewas) || paidPesewas !== expectedPesewas) {
-      return res.status(400).json({
-        success: false,
-        message: "Payment amount does not match the checkout total.",
-      });
-    }
+const expectedPesewas = Math.round(totalGhs * 100);
+const paidPesewas = Number(tx.amount);
+
+if (
+  !Number.isFinite(paidPesewas) ||
+  paidPesewas !== expectedPesewas
+) {
+  console.error("[EcoData mobile checkout] Amount mismatch", {
+    reference: checkoutReference,
+    subtotalGhs,
+    paymentFeeGhs,
+    totalGhs,
+    expectedPesewas,
+    paidPesewas,
+  });
+
+  return res.status(400).json({
+    success: false,
+    message: "Payment amount does not match the checkout total.",
+  });
+}
     // Save the verified transaction using its real Paystack reference.
     await sql`
       INSERT INTO public.checkouts (
