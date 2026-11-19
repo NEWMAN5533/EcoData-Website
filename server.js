@@ -1103,36 +1103,27 @@ function paymentMatches(checkout, tx) {
   return (
     tx?.status === "success" &&
     tx?.reference === checkout.reference &&
-    String(tx?.currency || "").toUpperCase() === "GHS" &&
+    tx?.currency === "GHS" &&
     Number(tx?.amount) === Math.round(Number(checkout.amount) * 100)
   );
 }
 
 app.post("/api/mobile/checkout/confirm", async (req, res) => {
   try {
-    console.log("[Mobile checkout confirm]", {
-      hasAuthorization: Boolean(req.headers.authorization),
-      authorizationType: req.headers.authorization?.split(" ")[0],
-    });
-
     const { userId } = getAuth(req);
 
-    console.log("[Mobile checkout confirm] Authenticated:", Boolean(userId));
-
     if (!userId) {
-      return res.status(401).json({
-        success: false,
-        message: "Please sign in to continue.",
-      });
+      return res
+        .status(401)
+        .json({ success: false, message: "Please sign in to continue." });
     }
 
-    const { reference, lines } = req.body ?? {};
+    const reference = String(req.body?.reference || "").trim();
 
-    if (!reference) {
-      return res.status(400).json({
-        success: false,
-        message: "Checkout reference is required.",
-      });
+    if (!/^ECM[A-F0-9]{20}$/.test(reference)) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid payment reference." });
     }
 
     const [checkout] = await sql`
@@ -1144,10 +1135,9 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
     `;
 
     if (!checkout) {
-      return res.status(404).json({
-        success: false,
-        message: "Checkout not found.",
-      });
+      return res
+        .status(404)
+        .json({ success: false, message: "Checkout not found." });
     }
 
     // Do not process a checkout twice.
@@ -1164,12 +1154,18 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
       });
     }
 
-    // Verify directly with Paystack using the server-side secret key.
-    const verification = await verifyPaystack(reference);
-    const tx = verification?.data?.data;
+    // Verify with Paystack. A reference the buyer never paid is "not found", which means pending.
+    let tx = null;
+    try {
+      const verification = await verifyPaystack(reference);
+      tx = verification?.data?.data ?? null;
+    } catch (e) {
+      const code = e.response?.status;
+      if (code !== 400 && code !== 404) throw e;
+    }
 
-    if (verification?.data?.status !== true || !paymentMatches(checkout, tx)) {
-      return res.status(402).json({
+    if (!paymentMatches(checkout, tx)) {
+      return res.json({
         success: false,
         status: "pending",
         reference,
@@ -1177,7 +1173,6 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
       });
     }
 
-    // Pass the verified amount in pesewas to existing fulfillment.
     const result = await fulfillMobileCheckout(
       reference,
       userId,
@@ -1195,14 +1190,12 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
       "[EcoData mobile checkout confirmation]",
       error.response?.data || error.message,
     );
-
     return res.status(500).json({
       success: false,
       message: "Unable to confirm payment right now.",
     });
   }
 });
-
 //================================
 // FULFILL CHECKOUT
 //================================
@@ -1249,48 +1242,46 @@ async function fulfillMobileCheckout(reference, userId, paidAmountPesewas) {
       throw new Error("Normal delivery orders must be processed individually.");
     }
 
-    // Persist every order before attempting provider fulfillment.
-    for (let index = 0; index < lines.length; index++) {
-      const line = lines[index];
-      const lineNo = index + 1;
+    // Persist every order before attempting provider fulfillment, in one statement
+    const rows = lines.map((line, i) => {
+      const lineNo = i + 1;
       const vendor =
         String(line.package).toLowerCase() === "normal"
           ? "datamart"
           : "swiftdata";
+      return {
+        lineNo,
+        vendor,
+        paymentRef:
+          vendor === "datamart" ? reference : `${reference}-${lineNo}`,
+        package: String(line.package),
+        network: String(line.network),
+        size: String(line.size),
+        price: Number(line.price),
+        phone: String(line.phone),
+      };
+    });
 
-      await sql`
-        INSERT INTO orders (
-          id,
-          clerk_user_id,
-          checkout_ref,
-          line_no,
-          package,
-          vendor,
-          network,
-          size,
-          price,
-          phone,
-          status,
-          created_at
-        )
-        VALUES (
-          ${crypto.randomUUID()},
-          ${userId},
-          ${reference},
-          ${lineNo},
-          ${String(line.package)},
-          ${vendor},
-          ${String(line.network)},
-          ${String(line.size)},
-          ${Number(line.price)},
-          ${String(line.phone)},
-          'processing',
-          NOW()
-        )
-        ON CONFLICT (checkout_ref, line_no) DO NOTHING
-      `;
-    }
-
+    await sql`
+      INSERT INTO orders (
+        id, clerk_user_id, checkout_ref, line_no, package, vendor,
+        network, size, price, phone, payment_ref, status, created_at
+      )
+      SELECT
+        gen_random_uuid(), ${userId}::text, ${reference}::text, t.line_no, t.package, t.vendor,
+        t.network, t.size, t.price, t.phone, t.payment_ref, 'processing', NOW()
+      FROM unnest(
+        ${rows.map((r) => r.lineNo)}::int[],
+        ${rows.map((r) => r.package)}::text[],
+        ${rows.map((r) => r.vendor)}::text[],
+        ${rows.map((r) => r.network)}::text[],
+        ${rows.map((r) => r.size)}::text[],
+        ${rows.map((r) => r.price)}::numeric[],
+        ${rows.map((r) => r.phone)}::text[],
+        ${rows.map((r) => r.paymentRef)}::text[]
+      ) AS t(line_no, package, vendor, network, size, price, phone, payment_ref)
+      ON CONFLICT (checkout_ref, line_no) DO NOTHING
+    `;
     // Process up to 5 vendor orders concurrently.
     const runLine = async (line, index) => {
       const lineNo = index + 1;
@@ -1382,12 +1373,21 @@ async function fulfillMobileCheckout(reference, userId, paidAmountPesewas) {
     const allAccepted = results.every((result) =>
       ["processing", "pending", "delivered"].includes(result.status),
     );
-
     const checkoutStatus = allAccepted ? "fulfilled" : "review";
+
+    // Each refused line's share of what was paid
+    const subtotal = lines.reduce((s, l) => s + Number(l.price), 0);
+    const refundDue = results
+      .filter((r) => r.status === "failed" || r.status === "refunded")
+      .reduce((sum, r) => {
+        const l = lines[r.lineNo - 1];
+        return sum + Number(checkout.amount) * (Number(l.price) / subtotal);
+      }, 0);
 
     await sql`
       UPDATE checkouts
       SET status = ${checkoutStatus},
+          refund_due = ${Math.round(refundDue * 100) / 100},
           updated_at = NOW()
       WHERE reference = ${reference}
         AND clerk_user_id = ${userId}
