@@ -999,13 +999,9 @@ app.get("/api/datamart/order-status/:reference", async (req, res) => {
    Separate from the existing website flow
 ========================================= */
 
-// Use the existing backend/db.js import.
-// If server.js already imports sql from this file,
-// DO NOT add a duplicate import.
-// ========================================
-// MOBILE CHECKOUT
-//=========================================
-app.post("/api/mobile/checkout", async (req, res) => {
+
+
+app.post("/api/mobile/checkout/confirm", async (req, res) => {
   try {
     const { userId } = getAuth(req);
 
@@ -1016,125 +1012,41 @@ app.post("/api/mobile/checkout", async (req, res) => {
       });
     }
 
-
-
-   /**
- * Validate the checkout reference received from the mobile app.
- * Preserve the original reference; do not transform it.
- */
-
-  const { reference, lines } = req.body ?? {};
-
-   console.log("[Mobile checkout] Route reached");
-console.log("[Mobile checkout] Method:", req.method);
-console.log("[Mobile checkout] Content-Type:", req.headers["content-type"]);
-console.log("[Mobile checkout] Body received:", req.body);
-console.log(
-  "[Mobile checkout] Reference received:",
-  req.body?.reference
-);
-
-console.log("========== ECODATA MOBILE CHECKOUT ==========");
-console.log("[Checkout] Received reference:", reference);
-console.log("[Checkout] Reference type:", typeof reference);
-console.log("[Checkout] Matches expected format:",
-  typeof reference === "string" &&
-  /^ECM[A-Z0-9]{10,40}$/.test(reference)
-);
-console.log("=============================================");
-    
-
-    if (!Array.isArray(lines) || lines.length === 0) {
-      return res.status(400).json({
-        success: false,
-        message: "No checkout items provided.",
-      });
-    }
-
-    // Do not trust prices submitted by the app.
-    const pricedLines = lines.map((line) => {
-      const price = getMobileSellingPrice(
-        line.network,
-        line.size,
-        line.package,
-      );
-
-      if (!Number.isFinite(price) || price <= 0) {
-        throw new Error("Invalid package or price.");
-      }
-
-      return {
-        ...line,
-        price,
-      };
-    });
-
-    const total = Number(
-      pricedLines.reduce((sum, line) => sum + line.price, 0).toFixed(2),
-    );
-
-
-    return res.json({
-      success: true,
-      reference: inserted[0].reference,
-      amount: Math.round(Number(inserted[0].amount) * 100),
-      email: users[0].email,
-      currency: "GHS",
-    });
-  } catch (error) {
-    console.error("[Mobile checkout]", error);
-
-    return res.status(400).json({
-      success: false,
-      message: error.message || "Unable to create checkout.",
-    });
-  }
-});
-
-
-//===================================
-// CHECKOUT CONFIRMATION
-//===================================
-function paymentMatches(checkout, tx) {
-  return (
-    tx?.status === "success" &&
-    tx?.reference === checkout.reference &&
-    tx?.currency === "GHS" &&
-    Number(tx?.amount) === Math.round(Number(checkout.amount) * 100)
-  );
-}
-
-
-app.post("/api/mobile/checkout/confirm", async (req, res) => {
-  try {
-    const { userId } = getAuth(req);
-
-    if (!userId) {
-      return res.status(401).json({
-        success: false,
-        message: "Please sign in to continue.",
-      });
-    }
-
     const { reference, lines } = req.body ?? {};
 
-    if (typeof reference !== "string" || !reference.trim()) {
+    if (
+      typeof reference !== "string" ||
+      !reference.trim() ||
+      !Array.isArray(lines) ||
+      lines.length === 0 ||
+      lines.length > 50
+    ) {
       return res.status(400).json({
         success: false,
-        message: "Paystack payment reference is required.",
+        message: "Invalid payment reference or checkout items.",
       });
     }
 
-    const paymentReference = reference.trim();
+    const checkoutReference = reference.trim();
 
-    if (!Array.isArray(lines) || lines.length === 0 || lines.length > 50) {
-      return res.status(400).json({
+    // Verify payment with Paystack first.
+    const tx = await verifyMobilePayment(checkoutReference);
+
+    if (
+      !tx ||
+      tx.status !== "success" ||
+      tx.reference !== checkoutReference ||
+      String(tx.currency).toUpperCase() !== "GHS"
+    ) {
+      return res.status(402).json({
         success: false,
-        message: "Valid checkout lines are required.",
+        status: "pending",
+        message: "Successful payment has not been verified yet.",
       });
     }
 
-    for (const line of lines) {
+    // Recalculate all prices on the server.
+    const pricedLines = lines.map((line) => {
       if (
         !line ||
         typeof line.network !== "string" ||
@@ -1143,15 +1055,9 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
         typeof line.phone !== "string" ||
         !/^\d{10}$/.test(line.phone)
       ) {
-        return res.status(400).json({
-          success: false,
-          message: "One or more checkout lines are invalid.",
-        });
+        throw new Error("One or more checkout items are invalid.");
       }
-    }
 
-    // Calculate trusted prices on the server.
-    const pricedLines = lines.map((line) => {
       const price = getMobileSellingPrice(
         line.network,
         line.size,
@@ -1159,49 +1065,33 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
       );
 
       if (!Number.isFinite(price) || price <= 0) {
-        throw new Error("Invalid package or price.");
+        throw new Error("Invalid bundle or price.");
       }
 
-      return {
-        package: line.package,
-        network: line.network,
-        size: line.size,
-        phone: line.phone,
-        price,
-      };
+      return { ...line, price };
     });
 
-    const total = Number(
-      pricedLines.reduce((sum, line) => sum + line.price, 0).toFixed(2),
+    const totalGhs = Number(
+      pricedLines
+        .reduce((sum, line) => sum + line.price, 0)
+        .toFixed(2),
     );
 
-    // Verify the transaction with Paystack before saving anything.
-    const tx = await verifyMobilePayment(paymentReference);
-
-    if (!tx) {
-      return res.status(402).json({
-        success: false,
-        status: "pending",
-        reference: paymentReference,
-        message: "Payment has not been confirmed yet.",
-      });
-    }
+    const expectedPesewas = Math.round(totalGhs * 100);
+    const paidPesewas = Number(tx.amount);
 
     if (
-      tx.status !== "success" ||
-      tx.reference !== paymentReference ||
-      String(tx.currency).toUpperCase() !== "GHS" ||
-      !Number.isSafeInteger(Number(tx.amount)) ||
-      Number(tx.amount) !== Math.round(total * 100)
+      !Number.isFinite(paidPesewas) ||
+      paidPesewas !== expectedPesewas
     ) {
       return res.status(400).json({
         success: false,
-        message: "Verified payment details do not match this order.",
+        message: "Payment amount does not match the checkout total.",
       });
     }
 
-    // Ensure the reference cannot be reused by a different user or checkout.
-    const inserted = await sql`
+    // Save the verified transaction using its real Paystack reference.
+    await sql`
       INSERT INTO public.checkouts (
         reference,
         clerk_user_id,
@@ -1212,32 +1102,31 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
         updated_at
       )
       VALUES (
-        ${paymentReference},
+        ${checkoutReference},
         ${userId},
         ${JSON.stringify(pricedLines)}::jsonb,
-        ${total},
+        ${totalGhs},
         'pending',
         NOW(),
         NOW()
       )
       ON CONFLICT (reference) DO NOTHING
-      RETURNING reference, amount, status
     `;
 
-
-    // Atomically claim and fulfill the saved checkout.
+    // Existing function claims the pending checkout and fulfills it.
     const result = await fulfillMobileCheckout(
-      paymentReference,
+      checkoutReference,
       userId,
-      Number(tx.amount),
+      paidPesewas,
     );
 
     return res.json({
-      success: ["fulfilled", "processing"].includes(result.status),
+      success:
+        result.status === "fulfilled" ||
+        result.status === "processing",
       status: result.status,
-      reference: paymentReference,
+      reference: checkoutReference,
       message: result.message,
-      orders: result.orders ?? [],
     });
   } catch (error) {
     console.error(
@@ -1247,7 +1136,7 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
 
     return res.status(500).json({
       success: false,
-      message: "Unable to confirm payment right now. If you were charged, do not pay again.",
+      message: "Unable to confirm payment right now.",
     });
   }
 });
