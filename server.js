@@ -1104,6 +1104,8 @@ console.log("=============================================");
     });
   }
 });
+
+
 //===================================
 // CHECKOUT CONFIRMATION
 //===================================
@@ -1115,6 +1117,8 @@ function paymentMatches(checkout, tx) {
     Number(tx?.amount) === Math.round(Number(checkout.amount) * 100)
   );
 }
+
+
 app.post("/api/mobile/checkout/confirm", async (req, res) => {
   try {
     const { userId } = getAuth(req);
@@ -1234,38 +1238,6 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
       RETURNING reference, amount, status
     `;
 
-    if (!inserted.length) {
-      const [existing] = await sql`
-        SELECT reference, clerk_user_id, amount, status
-        FROM public.checkouts
-        WHERE reference = ${paymentReference}
-        LIMIT 1
-      `;
-
-      if (
-        !existing ||
-        existing.clerk_user_id !== userId ||
-        Math.round(Number(existing.amount) * 100) !== Number(tx.amount)
-      ) {
-        return res.status(409).json({
-          success: false,
-          message: "This payment reference is already associated with another checkout.",
-        });
-      }
-
-      // Idempotent retry: don't submit an already handled checkout again.
-      if (existing.status !== "pending") {
-        return res.json({
-          success: ["fulfilled", "processing"].includes(existing.status),
-          status: existing.status,
-          reference: paymentReference,
-          message:
-            existing.status === "review"
-              ? "Payment received, but delivery needs review. Do not pay again."
-              : "This checkout has already been handled.",
-        });
-      }
-    }
 
     // Atomically claim and fulfill the saved checkout.
     const result = await fulfillMobileCheckout(
