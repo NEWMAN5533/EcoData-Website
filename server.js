@@ -1068,10 +1068,13 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
 
       return { ...line, price };
     });
-
-    const totalGhs = Number(
-      pricedLines.reduce((sum, line) => sum + line.price, 0).toFixed(2),
+    const subtotalGhs = Number(
+      pricedLines.reduce((sum, line) => sum + Number(line.price), 0).toFixed(2),
     );
+
+    const paymentFeeGhs = Number((subtotalGhs * 0.0195).toFixed(2));
+
+    const totalGhs = Number((subtotalGhs + paymentFeeGhs).toFixed(2));
 
     const expectedPesewas = Math.round(totalGhs * 100);
     const paidPesewas = Number(tx.amount);
@@ -1082,7 +1085,6 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
         message: "Payment amount does not match the checkout total.",
       });
     }
-
     // Save the verified transaction using its real Paystack reference.
     await sql`
       INSERT INTO public.checkouts (
@@ -1113,12 +1115,59 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
       paidPesewas,
     );
 
+
+// Fetch persisted order results, including SwiftData responses.
+    const orderRows = await sql`
+      SELECT
+        id,
+        checkout_ref,
+        line_no,
+        package,
+        vendor,
+        network,
+        size,
+        phone,
+        vendor_ref,
+        status,
+        created_at,
+        delivered_at
+      FROM public.orders
+      WHERE checkout_ref = ${checkoutReference}
+        AND clerk_user_id = ${userId}
+      ORDER BY line_no ASC
+    `;
+
+    const [checkoutRow] = await sql`
+      SELECT status
+      FROM public.checkouts
+      WHERE reference = ${checkoutReference}
+        AND clerk_user_id = ${userId}
+      LIMIT 1
+    `;
+
+    const finalStatus = checkoutRow?.status || result.status;
+
     return res.json({
-      success: result.status === "fulfilled" || result.status === "processing",
-      status: result.status,
+      success: ["fulfilled", "processing"].includes(finalStatus),
+      status: finalStatus,
       reference: checkoutReference,
       message: result.message,
+      orders: orderRows.map((order) => ({
+        id: order.id,
+        lineNo: order.line_no,
+        package: order.package,
+        vendor: order.vendor,
+        network: order.network,
+        size: order.size,
+        phone: order.phone,
+        vendorReference: order.vendor_ref,
+        status: order.status,
+        createdAt: order.created_at,
+        deliveredAt: order.delivered_at,
+      })),
     });
+
+
   } catch (error) {
     console.error(
       "[EcoData mobile checkout confirmation]",
@@ -1466,7 +1515,7 @@ async function fulfillMobileCheckout(reference, userId, paidAmountPesewas) {
 
         return {
           lineNo,
-          vendor,
+          vendor: "swiftdata",
           status: savedOrder.status,
           vendorReference: savedOrder.vendor_ref,
         };
