@@ -980,7 +980,6 @@ app.get("/api/datamart/order-status/:reference", async (req, res) => {
 // ========================================
 // MOBILE CHECKOUT
 //=========================================
-
 app.post("/api/mobile/checkout", async (req, res) => {
   try {
     const { userId } = getAuth(req);
@@ -992,9 +991,17 @@ app.post("/api/mobile/checkout", async (req, res) => {
       });
     }
 
-    const { lines } = req.body ?? {};
+    const { lines, callbackUrl } = req.body ?? {};
 
-    // Validate the batch sent by cartContext.tsx.
+    if (
+      callbackUrl !== "ecodatamobile://paystack"
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid payment callback URL.",
+      });
+    }
+
     if (
       !Array.isArray(lines) ||
       lines.length === 0 ||
@@ -1008,7 +1015,7 @@ app.post("/api/mobile/checkout", async (req, res) => {
           !line.network.trim() ||
           !line.package.trim() ||
           !line.size.trim() ||
-          !line.phone.trim(),
+          !line.phone.trim()
       )
     ) {
       return res.status(400).json({
@@ -1017,31 +1024,20 @@ app.post("/api/mobile/checkout", async (req, res) => {
       });
     }
 
-    // Normal/DataMart orders must use separate checkouts.
     if (
       lines.length > 1 &&
-      lines.some((line) => line.package.trim().toLowerCase() === "normal")
+      lines.some(
+        (line) =>
+          line.package.trim().toLowerCase() === "normal"
+      )
     ) {
       return res.status(400).json({
         success: false,
-        message: "Normal bundle orders must be checked out separately.",
+        message:
+          "Normal bundle orders must be checked out separately.",
       });
     }
 
-    // Validate the callback URL against the app's known deep link.
-    const allowedCallbackUrls = new Set(["ecodatamobile://paystack"]);
-
-    if (
-      typeof callbackUrl !== "string" ||
-      !allowedCallbackUrls.has(callbackUrl)
-    ) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid payment callback URL.",
-      });
-    }
-
-    // Calculate all prices on the server.
     const pricedLines = lines.map((line) => {
       const packageName = line.package.trim();
       const network = line.network.trim();
@@ -1049,11 +1045,13 @@ app.post("/api/mobile/checkout", async (req, res) => {
       const phone = line.phone.trim();
 
       const basePrice = Number(
-        getMobileSellingPrice(network, size, packageName),
+        getMobileSellingPrice(network, size, packageName)
       );
 
       if (!Number.isFinite(basePrice) || basePrice <= 0) {
-        throw new Error(`Invalid selling price for ${network} ${size}GB.`);
+        throw new Error(
+          `Invalid selling price for ${network} ${size}GB.`
+        );
       }
 
       return {
@@ -1065,8 +1063,10 @@ app.post("/api/mobile/checkout", async (req, res) => {
       };
     });
 
-    // Apply the checkout fee once to the combined base amount.
-    const baseTotal = pricedLines.reduce((sum, line) => sum + line.price, 0);
+    const baseTotal = pricedLines.reduce(
+      (sum, line) => sum + line.price,
+      0
+    );
 
     const total = Number((baseTotal * 1.0195).toFixed(2));
 
@@ -1077,7 +1077,6 @@ app.post("/api/mobile/checkout", async (req, res) => {
       });
     }
 
-    // Find the signed-in user's email.
     const users = await sql`
       SELECT email
       FROM public.ecodata_users
@@ -1095,30 +1094,33 @@ app.post("/api/mobile/checkout", async (req, res) => {
       });
     }
 
-    // Check every recipient for an active order.
-    const phones = [...new Set(pricedLines.map((l) => l.phone))];
+    const phones = [...new Set(pricedLines.map((line) => line.phone))];
 
     const active = await sql`
-  SELECT phone
-  FROM public.orders
-  WHERE phone = ANY(${phones})
-    AND status IN ('processing', 'pending', 'unknown')
-    AND created_at > NOW() - INTERVAL '30 minutes'
-  LIMIT 1
-`;
+      SELECT phone
+      FROM public.orders
+      WHERE phone = ANY(${phones})
+        AND status IN ('processing', 'pending', 'unknown')
+        AND created_at > NOW() - INTERVAL '30 minutes'
+      LIMIT 1
+    `;
 
     if (active.length) {
       return res.status(409).json({
         success: false,
-        message: `The number ${active[0].phone} already has an active order.`,
+        message:
+          `The number ${active[0].phone} already has an active order.`,
       });
     }
 
     const reference =
-      "ECM" + crypto.randomUUID().replace(/-/g, "").slice(0, 20).toUpperCase();
+      "ECM" +
+      crypto
+        .randomUUID()
+        .replace(/-/g, "")
+        .slice(0, 20)
+        .toUpperCase();
 
-    // Create the checkout record before initializing payment.
-    // If Paystack initialization fails, the record is marked failed.
     await sql`
       INSERT INTO checkouts (
         reference,
@@ -1142,54 +1144,16 @@ app.post("/api/mobile/checkout", async (req, res) => {
       )
     `;
 
-    try {
-      const paymentResponse = await axios.post(
-        "https://api.paystack.co/transaction/initialize",
-        {
-          email,
-          amount: Math.round(total * 100),
-          currency: "GHS",
-          reference,
-          callback_url: MOBILE_RETURN_URL,
-          metadata: {
-            source: "ecodata_mobile",
-            clerk_user_id: userId,
-            checkout_reference: reference,
-            line_count: pricedLines.length,
-          },
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
-            "Content-Type": "application/json",
-          },
-          timeout: 15000,
-        },
-      );
-
-      if (
-        paymentResponse.data?.status !== true ||
-        !paymentResponse.data?.data?.authorization_url
-      ) {
-        throw new Error("Paystack did not return an authorization URL.");
-      }
-
-      return res.json({
-        success: true,
-        reference,
-        amount: total,
-        authorizationUrl: paymentResponse.data.data.authorization_url,
-      });
-    } catch (paymentError) {
-      await sql`
-        UPDATE checkouts
-        SET status = 'failed', updated_at = NOW()
-        WHERE reference = ${reference}
-          AND status = 'pending'
-      `;
-
-      throw paymentError;
-    }
+    // Paystack initialization now happens in the mobile app.
+    // The backend retains the expected amount, user, reference,
+    // and bundle lines for secure server-side verification.
+    return res.json({
+      success: true,
+      reference,
+      amount: Math.round(total * 100),
+      email,
+      currency: "GHS",
+    });
   } catch (error) {
     console.error("[EcoData mobile checkout] Error:", {
       message: error.message,
@@ -1200,81 +1164,88 @@ app.post("/api/mobile/checkout", async (req, res) => {
 
     return res.status(500).json({
       success: false,
-      message: "Unable to start checkout. Please try again.",
+      message: "Unable to prepare checkout. Please try again.",
     });
   }
 });
 
 
 
-app.get("/api/mobile/paystack-return", (req, res) => {
-  const ref = String(req.query.reference || req.query.trxref || "").replace(/[^A-Za-z0-9]/g, "");
-  const link = `ecodatamobile://paystack${ref ? `?reference=${ref}` : ""}`;
-  res.type("html").send(
-    `<!doctype html><meta name="viewport" content="width=device-width,initial-scale=1">
-     <body style="font-family:sans-serif;text-align:center;padding:48px 24px">
-       <h2>Payment received</h2><p>You can return to the EcoData app.</p>
-       <a href="${link}" style="display:inline-block;margin-top:16px;padding:14px 28px;background:#15803D;color:#fff;border-radius:12px;text-decoration:none;font-weight:bold">Open EcoData</a>
-       <script>setTimeout(function(){location.href=${JSON.stringify(link)}},300)</script>
-     </body>`
-  );
-});
+
 
 //===================================
 // CHECKOUT CONFIRMATION
 //===================================
-function paymentMatches(checkout, tx, userId) {
-  const m = tx?.metadata;
+function paymentMatches(checkout, tx) {
   return (
     tx?.status === "success" &&
     tx?.reference === checkout.reference &&
-    tx?.currency === "GHS" &&
-    Number(tx?.amount) === Math.round(Number(checkout.amount) * 100) &&
-    m?.source === "ecodata_mobile" &&
-    m?.checkout_reference === checkout.reference &&
-    m?.clerk_user_id === userId
+    String(tx?.currency || "").toUpperCase() === "GHS" &&
+    Number(tx?.amount) ===
+      Math.round(Number(checkout.amount) * 100)
   );
 }
+
 
 app.post("/api/mobile/checkout/confirm", async (req, res) => {
   try {
     const { userId } = getAuth(req);
-    if (!userId)
-      return res
-        .status(401)
-        .json({ success: false, message: "Please sign in to continue." });
 
-    const reference = String(req.body?.reference || "").trim();
-    if (!/^ECM[A-F0-9]{20}$/.test(reference)) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Invalid payment reference." });
-    }
-
-    const [checkout] = await sql`
-      SELECT reference, amount, status FROM checkouts
-      WHERE reference = ${reference} AND clerk_user_id = ${userId} LIMIT 1`;
-    if (!checkout)
-      return res
-        .status(404)
-        .json({ success: false, message: "Checkout not found." });
-
-    // Already finished or in progress: report it, so the app can stop asking
-    if (checkout.status !== "pending") {
-      return res.json({
-        success: checkout.status === "fulfilled",
-        status: checkout.status,
-        reference,
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: "Please sign in to continue.",
       });
     }
 
+    const reference = String(req.body?.reference || "").trim();
+
+    if (!/^ECM[A-F0-9]{20}$/.test(reference)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid payment reference.",
+      });
+    }
+
+    const [checkout] = await sql`
+      SELECT reference, amount, status
+      FROM public.checkouts
+      WHERE reference = ${reference}
+        AND clerk_user_id = ${userId}
+      LIMIT 1
+    `;
+
+    if (!checkout) {
+      return res.status(404).json({
+        success: false,
+        message: "Checkout not found.",
+      });
+    }
+
+    // Do not process a checkout twice.
+    if (checkout.status !== "pending") {
+      return res.json({
+        success:
+          checkout.status === "fulfilled" ||
+          checkout.status === "processing",
+        status: checkout.status,
+        reference,
+        message:
+          checkout.status === "review"
+            ? "Payment may need manual review. Do not pay again."
+            : "This checkout has already been handled.",
+      });
+    }
+
+    // Verify directly with Paystack using the server-side secret key.
     const verification = await verifyPaystack(reference);
     const tx = verification?.data?.data;
+
     if (
       verification?.data?.status !== true ||
-      !paymentMatches(checkout, tx, userId)
+      !paymentMatches(checkout, tx)
     ) {
-      return res.json({
+      return res.status(402).json({
         success: false,
         status: "pending",
         reference,
@@ -1282,22 +1253,27 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
       });
     }
 
+    // Pass the verified amount in pesewas to existing fulfillment.
     const result = await fulfillMobileCheckout(
       reference,
       userId,
-      Math.round(Number(tx.amount)),
+      Math.round(Number(tx.amount))
     );
+
     return res.json({
-      success: result.status === "fulfilled",
+      success:
+        result.status === "fulfilled" ||
+        result.status === "processing",
       status: result.status,
       reference,
       message: result.message,
     });
   } catch (error) {
     console.error(
-      "Mobile checkout confirmation failed:",
-      error.response?.data || error.message,
+      "[EcoData mobile checkout confirmation]",
+      error.response?.data || error.message
     );
+
     return res.status(500).json({
       success: false,
       message: "Unable to confirm payment right now.",
