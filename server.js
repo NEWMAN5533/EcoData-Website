@@ -988,100 +988,53 @@ app.post("/api/mobile/checkout", async (req, res) => {
     if (!userId) {
       return res.status(401).json({
         success: false,
-        message: "Please sign in to continue.",
+        message: "Please sign in again.",
       });
     }
 
-    const { lines, callbackUrl } = req.body ?? {};
+    const { reference, lines } = req.body ?? {};
 
-    const allowedCallbackUrls = new Set(["ecodatamobile://paystack"]);
-
+    // Validate the app-generated reference.
     if (
-      typeof callbackUrl !== "string" ||
-      !allowedCallbackUrls.has(callbackUrl.trim())
-    ) {
-      console.error("[EcoData checkout] Invalid callback URL:", {
-        received: callbackUrl,
-      });
-
-      return res.status(400).json({
-        success: false,
-        message: "Invalid payment callback URL.",
-      });
-    }
-
-    if (callbackUrl !== "ecodatamobile://paystack") {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid payment callback URL.",
-      });
-    }
-
-    if (
-      !Array.isArray(lines) ||
-      lines.length === 0 ||
-      lines.some(
-        (line) =>
-          !line ||
-          typeof line.network !== "string" ||
-          typeof line.package !== "string" ||
-          typeof line.size !== "string" ||
-          typeof line.phone !== "string" ||
-          !line.network.trim() ||
-          !line.package.trim() ||
-          !line.size.trim() ||
-          !line.phone.trim(),
-      )
+      typeof reference !== "string" ||
+      !/^ECM[A-Z0-9]{10,40}$/.test(reference)
     ) {
       return res.status(400).json({
         success: false,
-        message: "Please provide valid bundle details.",
+        message: "Invalid checkout reference.",
       });
     }
 
-    if (
-      lines.length > 1 &&
-      lines.some((line) => line.package.trim().toLowerCase() === "normal")
-    ) {
+    if (!Array.isArray(lines) || lines.length === 0) {
       return res.status(400).json({
         success: false,
-        message: "Normal bundle orders must be checked out separately.",
+        message: "No checkout items provided.",
       });
     }
 
+    // Do not trust prices submitted by the app.
     const pricedLines = lines.map((line) => {
-      const packageName = line.package.trim();
-      const network = line.network.trim();
-      const size = line.size.trim();
-      const phone = line.phone.trim();
-
-      const basePrice = Number(
-        getMobileSellingPrice(network, size, packageName),
+      const price = getMobileSellingPrice(
+        line.network,
+        line.size,
+        line.package,
       );
 
-      if (!Number.isFinite(basePrice) || basePrice <= 0) {
-        throw new Error(`Invalid selling price for ${network} ${size}GB.`);
+      if (!Number.isFinite(price) || price <= 0) {
+        throw new Error("Invalid package or price.");
       }
 
       return {
-        package: packageName,
-        network,
-        size,
-        phone,
-        price: basePrice,
+        ...line,
+        price,
       };
     });
 
-    const baseTotal = pricedLines.reduce((sum, line) => sum + line.price, 0);
-
-    const total = Number((baseTotal * 1.0195).toFixed(2));
-
-    if (!Number.isFinite(total) || total <= 0) {
-      return res.status(400).json({
-        success: false,
-        message: "Unable to calculate the checkout amount.",
-      });
-    }
+    const total = Number(
+      pricedLines
+        .reduce((sum, line) => sum + line.price, 0)
+        .toFixed(2),
+    );
 
     const users = await sql`
       SELECT email
@@ -1090,45 +1043,22 @@ app.post("/api/mobile/checkout", async (req, res) => {
       LIMIT 1
     `;
 
-    const email = String(users[0]?.email || "").trim();
-
-    if (!email) {
-      return res.status(409).json({
+    if (!users.length || !users[0].email) {
+      return res.status(400).json({
         success: false,
-        message:
-          "Your account email is unavailable. Please update your account.",
+        message: "Your account email could not be found.",
       });
     }
 
-    const phones = [...new Set(pricedLines.map((line) => line.phone))];
-
-    const active = await sql`
-      SELECT phone
-      FROM public.orders
-      WHERE phone = ANY(${phones})
-        AND status IN ('processing', 'pending', 'unknown')
-        AND created_at > NOW() - INTERVAL '30 minutes'
-      LIMIT 1
-    `;
-
-    if (active.length) {
-      return res.status(409).json({
-        success: false,
-        message: `The number ${active[0].phone} already has an active order.`,
-      });
-    }
-
-    const reference =
-      "ECM" + crypto.randomUUID().replace(/-/g, "").slice(0, 20).toUpperCase();
-
-    await sql`
-      INSERT INTO checkouts (
+    // Store the server-calculated amount.
+    // The UNIQUE constraint on reference should prevent duplicates.
+    const inserted = await sql`
+      INSERT INTO public.checkouts (
         reference,
         clerk_user_id,
         lines,
         amount,
         status,
-        refund_due,
         created_at,
         updated_at
       )
@@ -1138,37 +1068,36 @@ app.post("/api/mobile/checkout", async (req, res) => {
         ${JSON.stringify(pricedLines)}::jsonb,
         ${total},
         'pending',
-        0,
         NOW(),
         NOW()
       )
+      ON CONFLICT (reference) DO NOTHING
+      RETURNING reference, amount
     `;
 
-    // Paystack initialization now happens in the mobile app.
-    // The backend retains the expected amount, user, reference,
-    // and bundle lines for secure server-side verification.
+    if (!inserted.length) {
+      return res.status(409).json({
+        success: false,
+        message: "This checkout reference already exists.",
+      });
+    }
+
     return res.json({
       success: true,
-      reference,
-      amount: Math.round(total * 100),
-      email,
+      reference: inserted[0].reference,
+      amount: Math.round(Number(inserted[0].amount) * 100),
+      email: users[0].email,
       currency: "GHS",
     });
   } catch (error) {
-    console.error("[EcoData mobile checkout] Error:", {
-      message: error.message,
-      response: error.response?.data,
-      status: error.response?.status,
-      stack: error.stack,
-    });
+    console.error("[Mobile checkout]", error);
 
-    return res.status(500).json({
+    return res.status(400).json({
       success: false,
-      message: "Unable to prepare checkout. Please try again.",
+      message: error.message || "Unable to create checkout.",
     });
   }
 });
-
 //===================================
 // CHECKOUT CONFIRMATION
 //===================================
