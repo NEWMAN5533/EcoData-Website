@@ -92,7 +92,8 @@ import { createMobileOrderPolling } from "./services/mobileOrderPolling.js";
 import { updateMobileNeonOrder } from "./services/updateMobileNeonOrders.js";
 
 const MOBILE_RETURN_URL =
-  process.env.MOBILE_RETURN_URL || "https://ecodata-app.onrender.com/api/mobile/paystack-return";
+  process.env.MOBILE_RETURN_URL ||
+  "https://ecodata-app.onrender.com/api/mobile/paystack-return";
 
 dotenv.config();
 
@@ -993,9 +994,23 @@ app.post("/api/mobile/checkout", async (req, res) => {
 
     const { lines, callbackUrl } = req.body ?? {};
 
+    const allowedCallbackUrls = new Set(["ecodatamobile://paystack"]);
+
     if (
-      callbackUrl !== "ecodatamobile://paystack"
+      typeof callbackUrl !== "string" ||
+      !allowedCallbackUrls.has(callbackUrl.trim())
     ) {
+      console.error("[EcoData checkout] Invalid callback URL:", {
+        received: callbackUrl,
+      });
+
+      return res.status(400).json({
+        success: false,
+        message: "Invalid payment callback URL.",
+      });
+    }
+
+    if (callbackUrl !== "ecodatamobile://paystack") {
       return res.status(400).json({
         success: false,
         message: "Invalid payment callback URL.",
@@ -1015,7 +1030,7 @@ app.post("/api/mobile/checkout", async (req, res) => {
           !line.network.trim() ||
           !line.package.trim() ||
           !line.size.trim() ||
-          !line.phone.trim()
+          !line.phone.trim(),
       )
     ) {
       return res.status(400).json({
@@ -1026,15 +1041,11 @@ app.post("/api/mobile/checkout", async (req, res) => {
 
     if (
       lines.length > 1 &&
-      lines.some(
-        (line) =>
-          line.package.trim().toLowerCase() === "normal"
-      )
+      lines.some((line) => line.package.trim().toLowerCase() === "normal")
     ) {
       return res.status(400).json({
         success: false,
-        message:
-          "Normal bundle orders must be checked out separately.",
+        message: "Normal bundle orders must be checked out separately.",
       });
     }
 
@@ -1045,13 +1056,11 @@ app.post("/api/mobile/checkout", async (req, res) => {
       const phone = line.phone.trim();
 
       const basePrice = Number(
-        getMobileSellingPrice(network, size, packageName)
+        getMobileSellingPrice(network, size, packageName),
       );
 
       if (!Number.isFinite(basePrice) || basePrice <= 0) {
-        throw new Error(
-          `Invalid selling price for ${network} ${size}GB.`
-        );
+        throw new Error(`Invalid selling price for ${network} ${size}GB.`);
       }
 
       return {
@@ -1063,10 +1072,7 @@ app.post("/api/mobile/checkout", async (req, res) => {
       };
     });
 
-    const baseTotal = pricedLines.reduce(
-      (sum, line) => sum + line.price,
-      0
-    );
+    const baseTotal = pricedLines.reduce((sum, line) => sum + line.price, 0);
 
     const total = Number((baseTotal * 1.0195).toFixed(2));
 
@@ -1108,18 +1114,12 @@ app.post("/api/mobile/checkout", async (req, res) => {
     if (active.length) {
       return res.status(409).json({
         success: false,
-        message:
-          `The number ${active[0].phone} already has an active order.`,
+        message: `The number ${active[0].phone} already has an active order.`,
       });
     }
 
     const reference =
-      "ECM" +
-      crypto
-        .randomUUID()
-        .replace(/-/g, "")
-        .slice(0, 20)
-        .toUpperCase();
+      "ECM" + crypto.randomUUID().replace(/-/g, "").slice(0, 20).toUpperCase();
 
     await sql`
       INSERT INTO checkouts (
@@ -1169,10 +1169,6 @@ app.post("/api/mobile/checkout", async (req, res) => {
   }
 });
 
-
-
-
-
 //===================================
 // CHECKOUT CONFIRMATION
 //===================================
@@ -1181,11 +1177,9 @@ function paymentMatches(checkout, tx) {
     tx?.status === "success" &&
     tx?.reference === checkout.reference &&
     String(tx?.currency || "").toUpperCase() === "GHS" &&
-    Number(tx?.amount) ===
-      Math.round(Number(checkout.amount) * 100)
+    Number(tx?.amount) === Math.round(Number(checkout.amount) * 100)
   );
 }
-
 
 app.post("/api/mobile/checkout/confirm", async (req, res) => {
   try {
@@ -1226,8 +1220,7 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
     if (checkout.status !== "pending") {
       return res.json({
         success:
-          checkout.status === "fulfilled" ||
-          checkout.status === "processing",
+          checkout.status === "fulfilled" || checkout.status === "processing",
         status: checkout.status,
         reference,
         message:
@@ -1241,10 +1234,7 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
     const verification = await verifyPaystack(reference);
     const tx = verification?.data?.data;
 
-    if (
-      verification?.data?.status !== true ||
-      !paymentMatches(checkout, tx)
-    ) {
+    if (verification?.data?.status !== true || !paymentMatches(checkout, tx)) {
       return res.status(402).json({
         success: false,
         status: "pending",
@@ -1257,13 +1247,11 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
     const result = await fulfillMobileCheckout(
       reference,
       userId,
-      Math.round(Number(tx.amount))
+      Math.round(Number(tx.amount)),
     );
 
     return res.json({
-      success:
-        result.status === "fulfilled" ||
-        result.status === "processing",
+      success: result.status === "fulfilled" || result.status === "processing",
       status: result.status,
       reference,
       message: result.message,
@@ -1271,7 +1259,7 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
   } catch (error) {
     console.error(
       "[EcoData mobile checkout confirmation]",
-      error.response?.data || error.message
+      error.response?.data || error.message,
     );
 
     return res.status(500).json({
@@ -1280,7 +1268,6 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
     });
   }
 });
-
 
 //================================
 // FULFILL CHECKOUT
@@ -1499,21 +1486,6 @@ async function fulfillMobileCheckout(reference, userId, paidAmountPesewas) {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // ================================
 // AUTO RECONCILIATION ON SIGN-IN
 //=================================
@@ -1594,7 +1566,6 @@ app.post("/api/mobile/checkout/reconcile", async (req, res) => {
     });
   }
 });
-
 
 //===================================
 // SUBMIT MOBILE ORDER
