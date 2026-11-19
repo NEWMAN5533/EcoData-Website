@@ -1126,12 +1126,12 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
       });
     }
 
-    const reference = String(req.body?.reference || "").trim();
+    const { reference, lines } = req.body ?? {};
 
-    if (!/^ECM[A-F0-9]{20}$/.test(reference)) {
+    if (!reference) {
       return res.status(400).json({
         success: false,
-        message: "Invalid payment reference.",
+        message: "Checkout reference is required.",
       });
     }
 
@@ -1419,7 +1419,6 @@ async function fulfillMobileCheckout(reference, userId, paidAmountPesewas) {
     };
   }
 }
-
 
 //===================================
 // SUBMIT MOBILE ORDER
