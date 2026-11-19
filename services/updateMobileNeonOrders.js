@@ -49,5 +49,3 @@ export async function updateMobileNeonOrder({
 }
 
 
-
-export default updateMobileNeonOrder;

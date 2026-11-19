@@ -47,9 +47,7 @@ export function getMobileSellingPrice(network, size, packageName) {
     }
 
     const price =
-      normalizedNetwork === "mtn"
-        ? prices.userPrice
-        : prices.standardPrice;
+      normalizedNetwork === "mtn" ? prices.userPrice : prices.standardPrice;
 
     if (!Number.isFinite(Number(price)) || Number(price) <= 0) {
       throw new Error(
