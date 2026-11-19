@@ -47,25 +47,33 @@ export async function submitMobileDataMartOrder({
   }
 
   if (invalidFields.length > 0) {
-    console.error(
-      "[EcoData][DataMart][INVALID_ORDER_DETAILS]",
-      JSON.stringify({
-        timestamp: new Date().toISOString(),
-        invalidFields,
-        network: normalizedNetwork || null,
-        sizeReceived: String(size ?? ""),
-        capacityParsed: Number.isFinite(capacity) ? capacity : null,
-        hasRecipient: Boolean(phoneNumber),
-        hasPaymentReference: Boolean(reference),
-      }),
-    );
+  console.error(
+    "[EcoData][DataMart][INVALID_ORDER_DETAILS]",
+    JSON.stringify({
+      timestamp: new Date().toISOString(),
+      invalidFields,
+      network: normalizedNetwork || null,
+      sizeReceived: String(size ?? ""),
+      capacityParsed: Number.isFinite(capacity) ? capacity : null,
+      hasRecipient: Boolean(phoneNumber),
+      hasPaymentReference: Boolean(reference),
+    }),
+  );
 
-    throw new Error("Invalid mobile DataMart order details.");
-  }
+  throw new Error("Invalid mobile DataMart order details.");
+}
 
+// ADD THIS DECLARATION
+const sellingPrice = Number(
+  getDataMartSellingPrice(normalizedNetwork, capacity),
+);
 
+if (!Number.isFinite(sellingPrice) || sellingPrice <= 0) {
+  throw new Error("Invalid DataMart selling price.");
+}
+
+const packages = await getDataMartPackages(network);
   
-  const packages = await getDataMartPackages(network);
 
   const matchedPackage = matchDataMartPackage(
     {
