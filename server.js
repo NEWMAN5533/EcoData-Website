@@ -1018,16 +1018,19 @@ app.post("/api/mobile/checkout", async (req, res) => {
 
     const { reference, lines } = req.body ?? {};
 
-    // Validate the app-generated reference.
-    if (
-      typeof reference !== "string" ||
-      !/^ECM[A-Z0-9]{10,40}$/.test(reference)
-    ) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid checkout reference.",
-      });
-    }
+   /**
+ * Validate the checkout reference received from the mobile app.
+ * Preserve the original reference; do not transform it.
+ */
+if (
+  typeof reference !== "string" ||
+  reference.trim().length === 0
+) {
+  return res.status(400).json({
+    success: false,
+    message: "Invalid checkout reference.",
+  });
+}
 
     if (!Array.isArray(lines) || lines.length === 0) {
       return res.status(400).json({
