@@ -1034,7 +1034,14 @@ if (
   });
 }
 
-   
+   console.log("[Mobile checkout] Route reached");
+console.log("[Mobile checkout] Method:", req.method);
+console.log("[Mobile checkout] Content-Type:", req.headers["content-type"]);
+console.log("[Mobile checkout] Body received:", req.body);
+console.log(
+  "[Mobile checkout] Reference received:",
+  req.body?.reference
+);
 
 console.log("========== ECODATA MOBILE CHECKOUT ==========");
 console.log("[Checkout] Received reference:", reference);
@@ -1168,6 +1175,27 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
         message: "Checkout reference is required.",
       });
     }
+
+
+
+       console.log("[Mobile checkout] Route reached");
+console.log("[Mobile checkout] Method:", req.method);
+console.log("[Mobile checkout] Content-Type:", req.headers["content-type"]);
+console.log("[Mobile checkout] Body received:", req.body);
+console.log(
+  "[Mobile checkout] Reference received:",
+  req.body?.reference
+);
+
+console.log("========== ECODATA MOBILE CHECKOUT ==========");
+console.log("[Checkout] Received reference:", reference);
+console.log("[Checkout] Reference type:", typeof reference);
+console.log("[Checkout] Matches expected format:",
+  typeof reference === "string" &&
+  /^ECM[A-Z0-9]{10,40}$/.test(reference)
+);
+console.log("=============================================");
+    
 
     const checkoutReference = reference.trim();
 
