@@ -1023,7 +1023,7 @@ app.post("/api/mobile/checkout", async (req, res) => {
  * Preserve the original reference; do not transform it.
  */
 
-  const { reference } = req.body ?? {};
+  const { reference, lines } = req.body ?? {};
 
    console.log("[Mobile checkout] Route reached");
 console.log("[Mobile checkout] Method:", req.method);
