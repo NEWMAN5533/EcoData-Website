@@ -1016,7 +1016,7 @@ app.post("/api/mobile/checkout", async (req, res) => {
       });
     }
 
-    const { reference, lines } = req.body ?? {};
+
 
    /**
  * Validate the checkout reference received from the mobile app.
@@ -1031,6 +1031,18 @@ if (
     message: "Invalid checkout reference.",
   });
 }
+
+    const { reference } = req.body ?? {};
+
+console.log("========== ECODATA MOBILE CHECKOUT ==========");
+console.log("[Checkout] Received reference:", reference);
+console.log("[Checkout] Reference type:", typeof reference);
+console.log("[Checkout] Matches expected format:",
+  typeof reference === "string" &&
+  /^ECM[A-Z0-9]{10,40}$/.test(reference)
+);
+console.log("=============================================");
+    
 
     if (!Array.isArray(lines) || lines.length === 0) {
       return res.status(400).json({
