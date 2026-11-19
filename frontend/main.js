@@ -352,21 +352,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Offer:", bundle.packageName);
     console.log("Selected vendor:", vendor);
 
-    const activeOrder = hasActiveOrder(phone);
-    if(activeOrder){
-      const activeProvider = String(activeOrder.provider || activeOrder.vendor || "" ).toLowerCase();
-
-      if(
-        activeProvider === "swiftdata" || 
-        activeProvider === "swift"
-      ) {
-        showSnackBar("This number already has an active order, please wait for it to be delivered before placing another or use diferent number instead", "warning", 8000);
-        return false;
-      }
-      
-    }
     try {
-      
       // =========================================
       // DATAMART RECIPIENT VERIFICATION
       // =========================================
@@ -681,7 +667,7 @@ document.addEventListener("DOMContentLoaded", () => {
   //  RESTORE SAVED DELIVERY MODE
   // =========================================
 
-  const savedMode = localStorage.removeItem(STORAGE_KEY);
+  const savedMode = localStorage.getItem(STORAGE_KEY);
   const saveMode = PACKAGE_MAP[savedMode] ? savedMode : "normal";
 
   const activeOption = document.querySelector(
@@ -1105,18 +1091,7 @@ function playSuccessSound() {
 // CHECK IF THE RECIPIENT HAS ACTIVE ORDER (ALREADY)
 // =================================================
 
-const activeStatus = [
-  "queued",
-  "processing", 
-  "pending", 
-  "waiting", 
-  "in-queue", 
-  "verifying",
-  "accepted",
-  "submitted",
-  "in-progress",
-  "in_progress",
-];
+const activeStatus = [ "queued"];
 
 function normalizeNumber(num = "") {
   return String(num).replace(/\D/g, "").slice(-9);
@@ -1127,20 +1102,11 @@ function hasActiveOrder(recipient) {
 
   const target = normalizeNumber(recipient);
 
-  if(!target) return null;
+  return orders.some((o) => {
+    const status = (o.status || "").toLowerCase();
 
-  return orders.find((order) => {
-    const status = String(order.status || "").trim().toLowerCase();
-
-    const orderRecipient = 
-      order.recipient || 
-      order.phoneNumber ||
-      order.phone ||
-      order.recipientNumber ||
-      order.beneficiaryMsisdn || 
-      "";
     return (
-      normalizeNumber(orderRecipient) === target && activeStatus.includes(status)
+      normalizeNumber(o.recipient) === target && activeStatus.includes(status)
     );
   });
 }
@@ -1308,7 +1274,7 @@ async function payWithPaystack(bundle, recipient) {
   }
 
   if (hasActiveOrder(recipient)) {
-    showSnackBar("❌ This number has an undelivered order, please wait for it to be delivered before placing another or use diferent number instead.", "warning", 8000);
+    showSnackBar("❌ Number already has an active order", "warning", 4000);
     return; // STOP PAYMENT
   }
 
