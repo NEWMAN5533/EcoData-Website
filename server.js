@@ -290,6 +290,29 @@ async function verifyPaystack(paymentReference, retries = 3) {
   }
 }
 
+// Mobile: one quick look. "Not found" only means the buyer has not paid (yet), and the app asks again.
+async function verifyMobilePayment(reference) {
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    try {
+      const r = await axios.get(
+        `https://api.paystack.co/transaction/verify/${encodeURIComponent(reference)}`,
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
+          },
+          timeout: 8000,
+        },
+      );
+      return r?.data?.status === true ? r.data.data : null; // the transaction, or null
+    } catch (err) {
+      const code = err.response?.status;
+      if (code === 400 || code === 404) return null; // not paid yet, or not created yet
+      if (attempt === 2) throw err; // network error, timeout, 429 or 5xx: the route answers 500
+      await new Promise((resolve) => setTimeout(resolve, 700));
+    }
+  }
+}
+
 /* =========================================
    SWIFTDATA V2 — BUY DATA
    POST /orders
@@ -1155,15 +1178,8 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
     }
 
     // Verify with Paystack. A reference the buyer never paid is "not found", which means pending.
-    let tx = null;
-    try {
-      const verification = await verifyPaystack(reference);
-      tx = verification?.data?.data ?? null;
-    } catch (e) {
-      const code = e.response?.status;
-      if (code !== 400 && code !== 404) throw e;
-    }
-
+    const tx = await verifyMobilePayment(reference);
+    
     if (!paymentMatches(checkout, tx)) {
       return res.json({
         success: false,
