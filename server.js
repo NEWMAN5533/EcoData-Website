@@ -90,6 +90,7 @@ import { getMobileSellingPrice } from "./services/mobileSellingPrices.js";
 import { submitMobileDataMartOrder } from "./services/mobileProviderFulfillment.js";
 import { createMobileOrderPolling } from "./services/mobileOrderPolling.js";
 import { updateMobileNeonOrder } from "./services/updateMobileNeonOrders.js";
+import { type } from "os";
 
 const MOBILE_RETURN_URL =
   process.env.MOBILE_RETURN_URL ||
@@ -1141,18 +1142,74 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
         .json({ success: false, message: "Please sign in to continue." });
     }
 
-    const reference = String(req.body?.reference || "").trim();
+    const { reference, lines } = req.body ?? {};
 
-    if (!/^ECM[A-F0-9]{20}$/.test(reference)) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Invalid payment reference." });
+    // Accept the app-provided reference without format validation.
+    if (typeof reference !== "string" || !reference.trim()) {
+      return res.status(400).json({
+        success: false,
+        message: "Checkout reference is required.",
+      });
     }
+
+    const checkoutReference = reference.trim();
+
+    // Validate checkout lines.
+    if (!Array.isArray(lines) || lines.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Checkout lines are required.",
+      });
+    }
+
+    if (lines.length > 50) {
+      return res.status(400).json({
+        success: false,
+        message: "Too many items in one checkout.",
+      });
+    }
+
+    for (const line of lines) {
+      if (
+        !line ||
+        typeof line.network !== "string" ||
+        typeof line.package !== "string" ||
+        !String(line.size ?? "").trim() ||
+        typeof line.phone !== "string" ||
+        !/^\d{10}$/.test(line.phone)
+      ) {
+        return res.status(400).json({
+          success: false,
+          message: "One or more checkout lines are invalid.",
+        });
+      }
+    }
+
+    const pricedLines = lines.map((line) => {
+      const price = getMobileSellingPrice(
+        line.network,
+        line.size,
+        line.package,
+      );
+
+      if (!Number.isFinite(price) || price <= 0) {
+        throw new Error("Invalid package or price.");
+      }
+
+      return {
+        package: line.package,
+        network: line.network,
+        size: line.size,
+        phone: line.phone,
+        price,
+      };
+    });
+
 
     const [checkout] = await sql`
       SELECT reference, amount, status
       FROM public.checkouts
-      WHERE reference = ${reference}
+      WHERE reference = ${checkoutReference}
         AND clerk_user_id = ${userId}
       LIMIT 1
     `;
@@ -1179,7 +1236,7 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
 
     // Verify with Paystack. A reference the buyer never paid is "not found", which means pending.
     const tx = await verifyMobilePayment(reference);
-    
+
     if (!paymentMatches(checkout, tx)) {
       return res.json({
         success: false,
