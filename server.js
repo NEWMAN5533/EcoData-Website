@@ -1024,15 +1024,6 @@ app.post("/api/mobile/checkout", async (req, res) => {
  */
 
   const { reference } = req.body ?? {};
-if (
-  typeof reference !== "string" ||
-  reference.trim().length === 0
-) {
-  return res.status(400).json({
-    success: false,
-    message: "Invalid checkout reference.",
-  });
-}
 
    console.log("[Mobile checkout] Route reached");
 console.log("[Mobile checkout] Method:", req.method);
@@ -1167,16 +1158,6 @@ app.post("/api/mobile/checkout/confirm", async (req, res) => {
     }
 
     const { reference, lines } = req.body ?? {};
-
-    // Accept the app-provided reference without format validation.
-    if (typeof reference !== "string" || !reference.trim()) {
-      return res.status(400).json({
-        success: false,
-        message: "Checkout reference is required.",
-      });
-    }
-
-
 
        console.log("[Mobile checkout] Route reached");
 console.log("[Mobile checkout] Method:", req.method);
