@@ -1022,6 +1022,8 @@ app.post("/api/mobile/checkout", async (req, res) => {
  * Validate the checkout reference received from the mobile app.
  * Preserve the original reference; do not transform it.
  */
+
+  const { reference } = req.body ?? {};
 if (
   typeof reference !== "string" ||
   reference.trim().length === 0
@@ -1032,7 +1034,7 @@ if (
   });
 }
 
-    const { reference } = req.body ?? {};
+   
 
 console.log("========== ECODATA MOBILE CHECKOUT ==========");
 console.log("[Checkout] Received reference:", reference);
