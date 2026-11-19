@@ -1073,20 +1073,6 @@ console.log("=============================================");
       pricedLines.reduce((sum, line) => sum + line.price, 0).toFixed(2),
     );
 
-    const users = await sql`
-      SELECT email
-      FROM public.ecodata_users
-      WHERE clerk_user_id = ${userId}
-      LIMIT 1
-    `;
-
-    if (!users.length || !users[0].email) {
-      return res.status(400).json({
-        success: false,
-        message: "Your account email could not be found.",
-      });
-    }
-
 
     return res.json({
       success: true,
