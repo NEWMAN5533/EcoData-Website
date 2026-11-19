@@ -1031,9 +1031,7 @@ app.post("/api/mobile/checkout", async (req, res) => {
     });
 
     const total = Number(
-      pricedLines
-        .reduce((sum, line) => sum + line.price, 0)
-        .toFixed(2),
+      pricedLines.reduce((sum, line) => sum + line.price, 0).toFixed(2),
     );
 
     const users = await sql`
@@ -1112,7 +1110,14 @@ function paymentMatches(checkout, tx) {
 
 app.post("/api/mobile/checkout/confirm", async (req, res) => {
   try {
+    console.log("[Mobile checkout confirm]", {
+      hasAuthorization: Boolean(req.headers.authorization),
+      authorizationType: req.headers.authorization?.split(" ")[0],
+    });
+
     const { userId } = getAuth(req);
+
+    console.log("[Mobile checkout confirm] Authenticated:", Boolean(userId));
 
     if (!userId) {
       return res.status(401).json({
