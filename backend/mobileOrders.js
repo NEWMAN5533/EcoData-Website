@@ -37,20 +37,36 @@ const normalizeStatus = (raw) =>
       .toLowerCase()
   ] ?? "processing";
 
-// The real time of the last delivered order for each package
+
+
+
+
+
+
+const MIN_REF_MS = 20_000; // a delivery faster than this is treated as a timing glitch
+const MAX_REF_MS = 2 * 3_600_000; // one stuck order must not make every ring crawl
+
+// How long the latest delivered order of each package really took
 export async function turnarounds() {
   const rows = await sql`
     SELECT DISTINCT ON (package) package,
            EXTRACT(EPOCH FROM (delivered_at - created_at)) * 1000 AS ms
     FROM orders
-    WHERE status = 'delivered' AND delivered_at IS NOT NULL
+    WHERE status = 'delivered' AND delivered_at IS NOT NULL AND delivered_at > created_at
     ORDER BY package, delivered_at DESC`;
 
-  const out = { ...DEFAULT_MS };
-  for (const r of rows)
-    if (Number(r.ms) > 30_000) out[r.package] = Number(r.ms);
+  const out = { ...DEFAULT_MS }; // used until the first delivery of a package
+  for (const r of rows) {
+    const ms = Number(r.ms);
+    if (ms >= MIN_REF_MS) out[r.package] = Math.min(ms, MAX_REF_MS);
+  }
   return out;
 }
+
+
+
+
+
 
 // delivered_at uses the vendor's own update time when it gives one
 async function applyStatus(id, raw, vendorTime) {
@@ -175,37 +191,44 @@ export const syncSoon = () =>
     new Promise((r) => setTimeout(r, 3000)),
   ]);
 
-// Turns a database row into what the app shows. Progress comes from the last delivered order's time.
-export function toTracked(r, ta, mask) {
+
+
+
+
+
+  // 95% at the reference time. A late order creeps towards 99%, and only a delivery reaches 100%.
+export const progressAt = (ageMs, refMs) =>
+  ageMs <= refMs
+    ? Math.max((ageMs / refMs) * 0.95, 0.03)
+    : Math.min(0.95 + 0.04 * (1 - refMs / ageMs), 0.99);
+
+
+  export function toTracked(r, ta, mask) {
   const at = new Date(r.created_at).getTime();
-  const status =
-    r.status === "delivered"
-      ? "delivered"
-      : r.status === "failed" || r.status === "refunded"
-        ? "failed"
-        : "processing";
-  const total = ta[r.package] ?? DEFAULT_MS.normal;
-  const elapsed = Date.now() - at;
+  const refMs = ta[r.package] ?? DEFAULT_MS.normal; // the latest delivered order's time in this package
+  const ageMs = Math.max(Date.now() - at, 0);
+
+  const done = r.status === "delivered";
+  const failed = r.status === "failed" || r.status === "refunded";
+  const open = !done && !failed;
+  const late = open && ageMs > refMs;
+  const etaSec = open ? (late ? 0 : Math.max(Math.ceil((refMs - ageMs) / 1000), 1)) : null;
 
   return {
-    id: mask
-      ? "EC" + String(r.id).slice(-5).toUpperCase()
-      : String(r.order_id || r.id),
+    id: mask ? "EC" + String(r.id).slice(-5).toUpperCase() : String(r.order_id || r.id),
     network: r.network,
     networkName: NAMES[r.network] ?? r.network,
     size: r.size,
     price: Number(r.price ?? 0),
     phone: mask ? `${r.phone.slice(0, 3)}•••${r.phone.slice(-4)}` : r.phone, // the full number never leaves the server
     delivery: r.package,
-    status,
-    progress:
-      status === "delivered"
-        ? 1
-        : Math.min(Math.max(elapsed / total, 0.05), 0.95),
-    etaMin:
-      status === "processing"
-        ? Math.max(Math.ceil((total - elapsed) / 60_000), 1)
-        : null,
+    status: done ? "delivered" : failed ? "failed" : "processing",
+    progress: done ? 1 : failed ? Math.min(ageMs / refMs, 0.95) : progressAt(ageMs, refMs),
+    refMs,
+    ageMs, // age when sent: the app counts on from here, not from its own clock
+    etaSec,
+    etaMin: etaSec != null && !late ? Math.ceil(etaSec / 60) : null,
+    late,
     at,
     doneAt: r.delivered_at ? new Date(r.delivered_at).getTime() : undefined,
   };
