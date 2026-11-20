@@ -2177,7 +2177,8 @@ app.get("/api/mobile/orders/live", async (req, res) => {
     const orders = open.map((r) => toTracked(r, ta, true));
     const stats = ["normal", "express", "verified"].map((option) => ({
       option,
-      avgMin: Math.max(Math.round(ta[option] / 60000), 1), // the last delivered order's real time
+      avgMin: Math.max(Math.round(ta[option] / 60000), 1),
+      lastMs: Math.round(ta[option]), // the latest delivered order's real time
       active: orders.filter((o) => o.delivery === option).length,
     }));
 
