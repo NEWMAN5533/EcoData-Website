@@ -2122,6 +2122,78 @@ app.post(
   },
 );
 
+
+
+
+
+
+
+// ========================================
+// MOBILE ORDERS: the signed-in user's own orders
+//=========================================
+app.get("/api/mobile/orders", async (req, res) => {
+  try {
+    const { userId } = getAuth(req);
+    if (!userId) {
+      return res.status(401).json({ success: false, message: "Please sign in to continue." });
+    }
+
+    await syncOpenOrders_safe(); // asks the vendors about open orders, never waits more than 3 seconds
+
+    const [rows, ta] = await Promise.all([
+      sql`
+        SELECT * FROM orders
+        WHERE clerk_user_id = ${userId}
+        ORDER BY created_at DESC
+        LIMIT 200`,
+      turnarounds(),
+    ]);
+
+    return res.json({ success: true, orders: rows.map((r) => toTracked(r, ta, false)) });
+  } catch (error) {
+    console.error("[EcoData mobile orders]", error.message);
+    return res.status(500).json({ success: false, message: "Unable to load your orders right now." });
+  }
+});
+
+// ========================================
+// MOBILE LIVE FEED: public, phone numbers masked on the server
+//=========================================
+app.get("/api/mobile/orders/live", async (req, res) => {
+  try {
+    await syncOpenOrders_safe();
+
+    const [open, ta] = await Promise.all([
+      sql`
+        SELECT id, package, network, size, phone, status, created_at, delivered_at
+        FROM orders
+        WHERE status IN ('processing', 'pending')
+        ORDER BY created_at DESC
+        LIMIT 20`,
+      turnarounds(),
+    ]);
+
+    const orders = open.map((r) => toTracked(r, ta, true));
+    const stats = ["normal", "express", "verified"].map((option) => ({
+      option,
+      avgMin: Math.max(Math.round(ta[option] / 60000), 1), // the last delivered order's real time
+      active: orders.filter((o) => o.delivery === option).length,
+    }));
+
+    res.set("Cache-Control", "public, max-age=3");
+    return res.json({ success: true, orders, stats, updatedAt: Date.now() });
+  } catch (error) {
+    console.error("[EcoData mobile live feed]", error.message);
+    return res.status(500).json({ success: false, message: "Unable to load live orders right now." });
+  }
+});
+
+
+
+
+
+
+
 // Frontend fallback
 app.use((req, res) => {
   res.sendFile(path.join(__dirname, "frontend", "index.html"));
