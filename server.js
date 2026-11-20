@@ -2192,7 +2192,55 @@ app.get("/api/mobile/orders/live", async (req, res) => {
 
 
 
+// ========================================
+// MOBILE STATS: this user's totals and monthly spending
+//=========================================
+app.get("/api/mobile/stats", async (req, res) => {
+  try {
+    const { userId } = getAuth(req);
+    if (!userId) {
+      return res.status(401).json({ success: false, message: "Please sign in to continue." });
+    }
 
+    const [totalRows, monthRows] = await Promise.all([
+      sql`
+        SELECT COUNT(*)::int AS orders,
+               COALESCE(SUM(NULLIF(regexp_replace(size, '[^0-9.]', '', 'g'), '')::numeric), 0) AS gb,
+               COALESCE(SUM(COALESCE(amount, price)), 0) AS spent
+        FROM orders
+        WHERE clerk_user_id = ${userId}
+          AND status NOT IN ('failed', 'refunded')`,
+      sql`
+        SELECT to_char(m, 'Mon') AS month,
+               COALESCE(SUM(COALESCE(o.amount, o.price)), 0) AS amount
+        FROM generate_series(
+               date_trunc('month', NOW()) - INTERVAL '5 months',
+               date_trunc('month', NOW()),
+               INTERVAL '1 month') AS m
+        LEFT JOIN orders o
+          ON o.clerk_user_id = ${userId}
+         AND o.status NOT IN ('failed', 'refunded')
+         AND date_trunc('month', o.created_at) = m
+        GROUP BY m
+        ORDER BY m`,
+    ]);
+
+    const t = totalRows[0] || {};
+    return res.json({
+      success: true,
+      totals: {
+        orders: Number(t.orders || 0),
+        dataGb: Number(t.gb || 0),
+        spent: Number(t.spent || 0),
+        vouchers: 0, // vouchers are not saved to the database yet
+      },
+      months: monthRows.map((r) => ({ month: r.month, amount: Number(r.amount) })),
+    });
+  } catch (error) {
+    console.error("[EcoData mobile stats]", error.message);
+    return res.status(500).json({ success: false, message: "Unable to load your stats right now." });
+  }
+});
 
 
 
