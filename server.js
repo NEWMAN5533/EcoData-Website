@@ -91,6 +91,7 @@ import { submitMobileDataMartOrder } from "./services/mobileProviderFulfillment.
 import { createMobileOrderPolling } from "./services/mobileOrderPolling.js";
 import { updateMobileNeonOrder } from "./services/updateMobileNeonOrders.js";
 import mobileOrdersRouter from "./routes/mobileMe.js";
+import { syncSoon } from "./backend/mobileOrders.js";
 
 
 const MOBILE_RETURN_URL =
@@ -2138,7 +2139,7 @@ app.get("/api/mobile/orders", async (req, res) => {
       return res.status(401).json({ success: false, message: "Please sign in to continue." });
     }
 
-    await syncOpenOrders_safe(); // asks the vendors about open orders, never waits more than 3 seconds
+    await syncSoon(); // asks the vendors about open orders, never waits more than 3 seconds
 
     const [rows, ta] = await Promise.all([
       sql`
@@ -2161,7 +2162,7 @@ app.get("/api/mobile/orders", async (req, res) => {
 //=========================================
 app.get("/api/mobile/orders/live", async (req, res) => {
   try {
-    await syncOpenOrders_safe();
+    await syncSoon();
 
     const [open, ta] = await Promise.all([
       sql`
