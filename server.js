@@ -90,6 +90,7 @@ import { getMobileSellingPrice } from "./services/mobileSellingPrices.js";
 import { submitMobileDataMartOrder } from "./services/mobileProviderFulfillment.js";
 import { createMobileOrderPolling } from "./services/mobileOrderPolling.js";
 import { updateMobileNeonOrder } from "./services/updateMobileNeonOrders.js";
+import mobileOrdersRouter from "./routes/mobileMe.js";
 
 
 const MOBILE_RETURN_URL =
@@ -208,6 +209,7 @@ app.get("/api/auth/me", requireAuth, (req, res) => {
 
 // MOBILE APP USE
 app.use("/api/me", mobileRouter);
+app.use("/api/orders", mobileOrdersRouter);
 
 // Adjust the import path to match your actual file.
 
