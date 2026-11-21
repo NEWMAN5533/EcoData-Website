@@ -1,20 +1,20 @@
 export const VENDOR_BUNDLES = [
-  { volume: 1, vendorPrice: 4.65 },
-  { volume: 2, vendorPrice: 9.50 },
-  { volume: 3, vendorPrice: 14.50 },
-  { volume: 4, vendorPrice: 18.50 },
-  { volume: 5, vendorPrice: 22.50 },
-  { volume: 6, vendorPrice: 26.50 },
+  { volume: 1, vendorPrice: 4 },
+  { volume: 2, vendorPrice: 8.50 },
+  { volume: 3, vendorPrice: 12.50 },
+  { volume: 4, vendorPrice: 16 },
+  { volume: 5, vendorPrice: 20 },
+  { volume: 6, vendorPrice: 23.50 },
   { volume: 7, vendorPrice: 33.50 },
-  { volume: 8, vendorPrice: 37.00 },
-  { volume: 10, vendorPrice: 42.50 },
-  { volume: 12, vendorPrice: 52.00 },
-  { volume: 15, vendorPrice: 63.50 },
-  { volume: 20, vendorPrice: 83.50 },
-  { volume: 25, vendorPrice: 106.00 },
-  { volume: 30, vendorPrice: 123.50 },
-  { volume: 40, vendorPrice: 162.50 },
-  { volume: 50, vendorPrice: 203.00 }
+  { volume: 8, vendorPrice: 32.00 },
+  { volume: 10, vendorPrice: 39.50 },
+  { volume: 12, vendorPrice: 79.50 },
+  { volume: 15, vendorPrice: 59.50 },
+  { volume: 20, vendorPrice: 79.50 },
+  { volume: 25, vendorPrice: 96.00 },
+  { volume: 30, vendorPrice: 118.50 },
+  { volume: 40, vendorPrice: 158.50 },
+  { volume: 50, vendorPrice: 197.00 }
 ];
 
 //==================
