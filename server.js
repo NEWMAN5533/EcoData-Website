@@ -92,6 +92,7 @@ import { createMobileOrderPolling } from "./services/mobileOrderPolling.js";
 import { updateMobileNeonOrder } from "./services/updateMobileNeonOrders.js";
 import mobileOrdersRouter from "./routes/mobileMe.js";
 import { syncSoon, toTracked, turnarounds } from "./backend/mobileOrders.js";
+import { registerMobileAirtimeRoutes } from "./backend/mobileAirtime.js";
 
 
 const MOBILE_RETURN_URL =
@@ -317,6 +318,11 @@ async function verifyMobilePayment(reference) {
   }
 }
 
+
+
+
+
+registerMobileAirtimeRoutes(app, { verifyMobilePayment, paymentMatches });
 /* =========================================
    SWIFTDATA V2 — BUY DATA
    POST /orders
