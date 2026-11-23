@@ -36,9 +36,9 @@ const mapStatus = (raw) =>
   ] ?? "processing";
 
 const swiftHeaders = () => ({
+  "X-API-Key": process.env.SWIFT_API_KEY, // use the same header your website's SwiftData calls use
   "Content-Type": "application/json",
   Accept: "application/json",
-  Authorization: `Bearer ${process.env.SWIFT_API_KEY}`, // calls use
 });
 
 // POST /v2/airtime. The request has no reference, so this is never retried.
@@ -492,6 +492,3 @@ export function registerMobileAirtimeRoutes(
     }
   });
 }
-
-
-
