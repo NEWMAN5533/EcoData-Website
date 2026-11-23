@@ -331,26 +331,6 @@ function paymentMatches(checkout, tx) {
   );
 }
 
-// Mobile: one quick look at Paystack. Returns the transaction, or null if it is not paid (yet).
-async function verifyMobilePayment(reference) {
-  for (let attempt = 1; attempt <= 2; attempt++) {
-    try {
-      const r = await axios.get(
-        `https://api.paystack.co/transaction/verify/${encodeURIComponent(reference)}`,
-        {
-          headers: { Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}` },
-          timeout: 8000,
-        },
-      );
-      return r?.data?.status === true ? r.data.data : null;
-    } catch (err) {
-      const code = err.response?.status;
-      if (code === 400 || code === 404) return null; // not paid yet, or not created yet
-      if (attempt === 2) throw err; // network error, timeout, 429 or 5xx
-      await new Promise((resolve) => setTimeout(resolve, 700));
-    }
-  }
-}
 
 
 registerMobileAirtimeRoutes(app, { verifyMobilePayment, paymentMatches });
