@@ -325,6 +325,7 @@ async function verifyMobilePayment(reference) {
 function paymentMatches(checkout, tx) {
   return (
     tx?.status === "success" &&
+    tx?.reference === checkout.reference &&
     tx?.currency === "GHS" &&
     Number(tx?.amount) === Math.round(Number(checkout.amount) * 100)
   );
@@ -334,9 +335,9 @@ function paymentMatches(checkout, tx) {
 
 registerMobileAirtimeRoutes(app, { verifyMobilePayment, paymentMatches });
 /* =========================================
-   SWIFTDATA V2 — BUY DATA
-   POST /orders
-========================================= */
+    SWIFTDATA V2 — BUY DATA
+    POST /orders
+============================================*/
 
 export async function handleSwiftDataBuyDataRequest({
   network,
