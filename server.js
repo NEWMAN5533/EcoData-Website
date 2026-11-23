@@ -93,6 +93,7 @@ import { updateMobileNeonOrder } from "./services/updateMobileNeonOrders.js";
 import mobileOrdersRouter from "./routes/mobileMe.js";
 import { syncSoon, toTracked, turnarounds } from "./backend/mobileOrders.js";
 import { registerMobileAirtimeRoutes } from "./backend/mobileAirtime.js";
+import { registerMobileAfaRoutes } from "./backend/mobileAfa.js";
 
 
 const MOBILE_RETURN_URL =
@@ -332,8 +333,11 @@ function paymentMatches(checkout, tx) {
 }
 
 
-
+// ==========================
+// AIRTIME & AFA route mount
+//===========================
 registerMobileAirtimeRoutes(app, { verifyMobilePayment, paymentMatches });
+registerMobileAfaRoutes(app, { verifyMobilePayment, paymentMatches });
 /* =========================================
     SWIFTDATA V2 — BUY DATA
     POST /orders
