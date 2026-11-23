@@ -325,7 +325,6 @@ async function verifyMobilePayment(reference) {
 function paymentMatches(checkout, tx) {
   return (
     tx?.status === "success" &&
-    tx?.reference === checkout.reference &&
     tx?.currency === "GHS" &&
     Number(tx?.amount) === Math.round(Number(checkout.amount) * 100)
   );
