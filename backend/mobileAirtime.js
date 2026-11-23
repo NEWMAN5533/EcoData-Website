@@ -3,7 +3,7 @@ import crypto from "node:crypto";
 import sql from "./db.js";
 
 const SWIFT = "https://api.swiftdata-link.com";
-const AIRTIME_RATE = 1.0195; // customer pays face value plus the 1.95% Paystack fee. Keep equal to the app
+const AIRTIME_RATE = 3.0; // customer pays face value plus the 1.95% Paystack fee. Keep equal to the app
 const MIN_AIRTIME = 1;
 const MAX_AIRTIME = 500;
 const VENDOR_NET = { mtn: "mtn", telecel: "telecel", airteltigo: "at" };
@@ -38,12 +38,12 @@ const mapStatus = (raw) =>
 const swiftHeaders = () => ({
   "Content-Type": "application/json",
   Accept: "application/json",
-  Authorization: `Bearer ${process.env.SWIFTDATA_API_KEY}`, // use the same header your website's SwiftData calls use
+  Authorization: `Bearer ${process.env.SWIFT_API_KEY}`, // calls use
 });
 
 // POST /v2/airtime. The request has no reference, so this is never retried.
 async function callSwiftAirtime(line) {
-  if (!process.env.SWIFTDATA_API_KEY)
+  if (!process.env.SWIFT_API_KEY)
     return { kind: "rejected", reason: "SwiftData airtime is not configured" };
 
   let res, json;
@@ -492,3 +492,4 @@ export function registerMobileAirtimeRoutes(
     }
   });
 }
+
