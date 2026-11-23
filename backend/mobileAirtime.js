@@ -3,7 +3,7 @@ import crypto from "node:crypto";
 import sql from "./db.js";
 
 const SWIFT = "https://api.swiftdata-link.com";
-const AIRTIME_RATE = 0.0195; // customer pays face value plus the 1.95% Paystack fee. Keep equal to the app
+const AIRTIME_RATE = 1.0195; // customer pays face value plus the 1.95% Paystack fee. Keep equal to the app
 const MIN_AIRTIME = 1;
 const MAX_AIRTIME = 500;
 const VENDOR_NET = { mtn: "mtn", telecel: "telecel", airteltigo: "at" };
@@ -492,5 +492,6 @@ export function registerMobileAirtimeRoutes(
     }
   });
 }
+
 
 
