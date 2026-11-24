@@ -668,7 +668,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================================
 
   const savedMode = localStorage.getItem(STORAGE_KEY);
-  const saveMode = PACKAGE_MAP[savedMode] ? savedMode : "normal";
+  const saveMode = PACKAGE_MAP[savedMode] ? savedMode : "express";
 
   const activeOption = document.querySelector(
     `.eco-offer-option[data-mode="${saveMode}"]`,
@@ -1136,7 +1136,7 @@ function unActivateTrackers() {
 
   const secondTracker = (document.getElementById(
     "deliveryTracker2",
-  ).style.display = "none");
+  ).style.display = "flex");
 }
 
 //=================================
