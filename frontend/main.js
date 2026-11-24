@@ -1136,7 +1136,7 @@ function unActivateTrackers() {
 
   const secondTracker = (document.getElementById(
     "deliveryTracker2",
-  ).style.display = "flex");
+  ).style.display = "none");
 }
 
 //=================================
