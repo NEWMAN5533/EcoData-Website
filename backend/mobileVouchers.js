@@ -32,7 +32,7 @@ function decryptPins(text) {
 const swiftHeaders = () => ({
   "Content-Type": "application/json",
   Accept: "application/json",
-  Authorization: `Bearer ${process.env.SWIFTDATA_API_KEY}`, // use the same header your website's SwiftData calls use
+   "X-API-Key": process.env.SWIFT_API_KEY,  // use the same header your website's SwiftData calls use
 });
 
 const STATUS_MAP = {
@@ -90,7 +90,7 @@ async function getCatalog(maxAgeMs = 30_000) {
 
 // POST /v2/vouchers/purchase. The request has no reference, so this is never retried.
 async function callSwiftPurchase(line, contacts) {
-  if (!process.env.SWIFTDATA_API_KEY)
+  if (!process.env.SWIFT_API_KEY)
     return {
       kind: "rejected",
       reason: "SwiftData vouchers are not configured",
