@@ -1242,7 +1242,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // === PAYSTACK PAYMENT (Firebase version) ===
 
 async function payWithPaystack(bundle, recipient) {
-   if(bundle.network?.toLowerCase() === "mtn" || bundle.network?.toLowerCase() === "yello" {
+   if(bundle.network?.toLowerCase() === "mtn" || bundle.network?.toLowerCase() === "yello") {
      showSnackBar("📱 MTN ORDER PAUSED, MTNUP2U GHANA IS UNDER EMERGENCY MAINTENANCE. TRY AGAIN LATER ON 1ST DECEMBER",   "warning", 10000);
   return;
   }
