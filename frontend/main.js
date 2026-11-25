@@ -667,8 +667,8 @@ document.addEventListener("DOMContentLoaded", () => {
   //  RESTORE SAVED DELIVERY MODE
   // =========================================
 
-  const savedMode = localStorage.getItem(STORAGE_KEY);
-  const saveMode = PACKAGE_MAP[savedMode] ? savedMode : "normal";
+  const savedMode = localStorage.removeItem(STORAGE_KEY);
+  const saveMode = PACKAGE_MAP[savedMode] ? savedMode : "express";
 
   const activeOption = document.querySelector(
     `.eco-offer-option[data-mode="${saveMode}"]`,
