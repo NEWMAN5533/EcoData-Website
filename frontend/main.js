@@ -1242,10 +1242,10 @@ document.addEventListener("DOMContentLoaded", () => {
 // === PAYSTACK PAYMENT (Firebase version) ===
 
 async function payWithPaystack(bundle, recipient) {
-  //  if(bundle.network?.toLowerCase() === "mtn") {
-  //   showSnackBar("📱 MTN ORDER PAUSED, WE ARE IMPLEMENTING  PREMIUM SYSTEM TO IMPROVE DELIVERY. PLEASE TRY AGAIN LATER.",   "success", 10000);
-  //  return;
-  // }
+   if(bundle.network?.toLowerCase() === "mtn" || bundle.network?.toLowerCase() === "yello" {
+     showSnackBar("📱 MTN ORDER PAUSED, MTNUP2U GHANA IS UNDER EMERGENCY MAINTENANCE. TRY AGAIN LATER ON 1ST DECEMBER",   "warning", 10000);
+  return;
+  }
 
   const normalizedNetwork = String(bundle.network || "")
     .trim()
