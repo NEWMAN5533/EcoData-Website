@@ -1,4 +1,5 @@
 import sql from "./db.js";
+import { SWIFT_BASE, swiftHeaders } from "./swiftdata.js";
 
 // The mobile routes run inside the website server, so call its own vendor routes on localhost
 const SELF = `http://127.0.0.1:${process.env.PORT || 3000}`;
@@ -9,6 +10,7 @@ const DEFAULT_MS = {
   normal: 12 * 60_000,
   express: 3 * 60_000,
   verified: 6 * 60_000,
+  instant_bundle: 45_000,
 }; // until the first delivery
 
 const STATUS_MAP = {
@@ -58,7 +60,8 @@ export async function turnarounds() {
   const out = { ...DEFAULT_MS }; // used until the first delivery of a package
   for (const r of rows) {
     const ms = Number(r.ms);
-    if (ms >= MIN_REF_MS) out[r.package] = Math.min(ms, MAX_REF_MS);
+    const min = r.package === "instant_bundle" ? 2_000 : MIN_REF_MS;
+    if (ms >= min) out[r.package] = Math.min(ms, MAX_REF_MS);
   }
   return out;
 }
@@ -165,6 +168,39 @@ async function syncMart(rows) {
 }
 
 // Checks open orders at most once every 10 seconds each
+// Instant bundles: one status call each, straight to SwiftData
+async function syncInstant(rows) {
+  await Promise.all(
+    rows.map(async (r) => {
+      if (!r.order_id) return;
+      const res = await fetch(`${SWIFT_BASE}/v2/instant-bundles/${encodeURIComponent(r.order_id)}`, {
+        headers: swiftHeaders(),
+        signal: AbortSignal.timeout(8000),
+      }).catch(() => null);
+      const json = res?.ok ? await res.json().catch(() => null) : null;
+      const d = json?.success ? json.data : null;
+      if (!d) return;
+
+      const raw = String(d.status ?? "").trim().toLowerCase();
+      const status = normalizeStatus(raw);
+      if (status === "processing") return;
+
+      await applyStatus(r.id, raw, d.updatedAt);
+
+      // The status payload carries what the order cost and earned
+      if (d.costMinor != null) {
+        const cost = Number(d.costMinor) / 100;
+        const profit = d.profitMinor != null ? Number(d.profitMinor) / 100 : null;
+        await sql`UPDATE orders SET cost_price = ${cost}, profit = COALESCE(${profit}, profit) WHERE id = ${r.id}`;
+      }
+      if (status === "failed" || status === "refunded") {
+        await sql`UPDATE checkouts SET refund_due = amount, updated_at = NOW() WHERE reference = ${r.checkout_ref} AND refund_due = 0`;
+      }
+    }),
+  );
+}
+
+// Checks open orders at most once every 10 seconds each
 async function syncOpenOrders() {
   const claimed = await sql`
     UPDATE orders SET synced_at = NOW()
@@ -173,14 +209,20 @@ async function syncOpenOrders() {
       WHERE status = 'processing' AND created_at > NOW() - INTERVAL '3 days'
         AND (synced_at IS NULL OR synced_at < NOW() - INTERVAL '10 seconds')
       ORDER BY created_at LIMIT 60)
-    RETURNING id, vendor, order_id, provider_ref, payment_ref`;
+    RETURNING id, vendor, package, order_id, provider_ref, payment_ref, checkout_ref`;
   if (!claimed.length) return;
 
+  const instant = claimed.filter((r) => r.package === "instant_bundle");
+  const rest = claimed.filter((r) => r.package !== "instant_bundle");
+
   await Promise.all([
-    syncSwift(claimed.filter((r) => r.vendor === "swiftdata")),
-    syncMart(claimed.filter((r) => r.vendor === "datamart")),
+    syncSwift(rest.filter((r) => r.vendor === "swiftdata")),
+    syncMart(rest.filter((r) => r.vendor === "datamart")),
+    syncInstant(instant),
   ]);
 }
+
+
 
 // Never throws, and never holds up a request for more than 3 seconds
 export const syncSoon = () =>
