@@ -95,6 +95,8 @@ import { syncSoon, toTracked, turnarounds } from "./backend/mobileOrders.js";
 import { registerMobileAirtimeRoutes } from "./backend/mobileAirtime.js";
 import { registerMobileAfaRoutes } from "./backend/mobileAfa.js";
 import { registerMobileVoucherRoutes } from "./backend/mobileVouchers.js";
+import { registerMobileInstantRoutes } from "./backend/mobileInstantBundle.js";
+
 
 
 const MOBILE_RETURN_URL =
@@ -340,6 +342,7 @@ function paymentMatches(checkout, tx) {
 registerMobileAirtimeRoutes(app, { verifyMobilePayment, paymentMatches });
 registerMobileAfaRoutes(app, { verifyMobilePayment, paymentMatches });
 registerMobileVoucherRoutes(app, { verifyMobilePayment, paymentMatches });
+registerMobileInstantRoutes(app, { verifyMobilePayment, paymentMatches });
 /* =========================================
     SWIFTDATA V2 — BUY DATA
     POST /orders
