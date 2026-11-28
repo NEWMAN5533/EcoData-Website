@@ -96,6 +96,7 @@ import { registerMobileAirtimeRoutes } from "./backend/mobileAirtime.js";
 import { registerMobileAfaRoutes } from "./backend/mobileAfa.js";
 import { registerMobileVoucherRoutes } from "./backend/mobileVouchers.js";
 import { registerMobileInstantRoutes } from "./backend/mobileInstantBundle.js";
+import { registerMobileRewardRoutes, startMonthlyRewards } from "./backend/mobileRewards.js";
 
 
 
@@ -343,6 +344,8 @@ registerMobileAirtimeRoutes(app, { verifyMobilePayment, paymentMatches });
 registerMobileAfaRoutes(app, { verifyMobilePayment, paymentMatches });
 registerMobileVoucherRoutes(app, { verifyMobilePayment, paymentMatches });
 registerMobileInstantRoutes(app, { verifyMobilePayment, paymentMatches });
+registerMobileRewardRoutes(app, { placeLine: fulfillMobileDataMartLine });
+startMonthlyRewards(fulfillMobileDataMartLine);
 /* =========================================
     SWIFTDATA V2 — BUY DATA
     POST /orders
